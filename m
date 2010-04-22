@@ -1,44 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O4xLo-0006Zb-I8 for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 16:25:57 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O4xIJ-0003eV-Ca for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 16:22:19 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Apr 2010 16:22:19 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <khimov@altell.ru>) id 1O4xOd-0006hS-JI
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Apr 2010 16:28:53 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 1F07C6839D
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Apr 2010 16:22:19 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 22 Apr 2010 18:25:08 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 22 Apr 2010 16:22:05 +0200
-Message-ID: <hqpm2d$d7p$1@dough.gmane.org>
-References: <20100422134322.f79d1365.ospite@studenti.unina.it>	<1271937343.24079.176.camel@mill.internal.reciva.com>
-	<20100422144638.7c78d45c.ospite@studenti.unina.it>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
-In-Reply-To: <20100422144638.7c78d45c.ospite@studenti.unina.it>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 22 Apr 2010 18:05:21 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201004221805.21986.khimov@altell.ru>
+X-Altell-MailScanner-ID: 1F07C6839D.26EB9
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: About having a static /dev
+Subject: Re: [oe-commits] Sergey Lapin : busybox: prevent postinst script from failing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Apr 2010 14:25:57 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Apr 2010 14:28:53 -0000
+Content-Type: Text/Plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+> recent addition in rootfs_ipk.bbclass which runs postinst scripts with
+> -e option, while very useful, prevents busybox from configuring at image
+> build time. It will be configured at first image boot if your file
+> system is writable, but in case of e.g. squashfs, that will be fatal
+> error. This commit prevents postinst to fail, so busybox will create
+> all needed links at image build time.
 
-On 22-04-10 14:46, Antonio Ospite wrote:
-> On Thu, 22 Apr 2010 12:55:43 +0100
-> Phil Blundell <philb@gnu.org> wrote:
-> 
->> On Thu, 2010-04-22 at 13:43 +0200, Antonio Ospite wrote:
->>>  2. If I install any package which depends on udev then udev is brought
->>>     in and the static layout is gone at the next boot.
->>
->> I think your best option is probably to make udev be a DISTRO_FEATURE
->> and not set it for your own distribution.
->>
->> If you genuinely want udev to be selected (for your particular DISTRO)
->> on a per-MACHINE basis then you'll have to invent some way to nobble its
->> startup script so that it just doesn't do anything on machines where it
->> isn't wanted.
->>
-> 
-> A per-MACHINE way would be better IMHO
+I don't think this is the way to solve it, because alternatives setup should 
+work on build machine when everything is correct in packages. Most probably it 
+fails because there is some other package installed which provides some 
+program that is present in busybox, but that package doesn't use alternatives 
+for (some of) its binaries.
 
-That would break the case where you want static devs for one image (e.g.
-initramfs, rescue fs), but other options (e.g. udev, devtempfs, mdev,
-something else) for other images on the same machine.
+Essentially, this is a bug in a package providing "full" version of the 
+binary. You can easily debug those if you add "-x" switch to sh invocation in  
+rootfs_ipk.bbclass, you'll see then where it fails in image do_rootfs log.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL0FuNMkyGM64RGpERAs2oAJ9bxwZhqGcesRA3EpEoMJ6vR9rwCACgjEcq
-as1zs5zE8iuE806tNVdekBU=
-=85tD
------END PGP SIGNATURE-----
-
+I've catched some of those in util-linux-ng and will push some patches later 
+today.
 
 
