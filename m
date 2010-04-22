@@ -1,30 +1,35 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1O4vym-000432-Us
+	(envelope-from <philb@gnu.org>) id 1O4wPx-0006oO-KK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 14:58:05 +0200
-Received: from [192.168.1.11] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id B1961584121
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Apr 2010 14:58:49 +0200 (CEST)
-Mime-Version: 1.0 (Apple Message framework v1078)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+	Thu, 22 Apr 2010 15:26:37 +0200
+Received: from host86-167-66-27.range86-167.btcentralplus.com ([86.167.66.27]
+	helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS-1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1O4wMV-0002zi-CU
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Apr 2010 14:22:35 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1O4wMU-0001bt-Sv
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Apr 2010 14:22:34 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
 In-Reply-To: <20100422144638.7c78d45c.ospite@studenti.unina.it>
-Date: Thu, 22 Apr 2010 14:54:31 +0200
-Message-Id: <2B53CDC7-2375-440B-9B57-31A6067D4B54@vanille-media.de>
 References: <20100422134322.f79d1365.ospite@studenti.unina.it>
 	<1271937343.24079.176.camel@mill.internal.reciva.com>
 	<20100422144638.7c78d45c.ospite@studenti.unina.it>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1078)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Date: Thu, 22 Apr 2010 14:22:34 +0100
+Message-ID: <1271942554.24079.195.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: About having a static /dev
@@ -41,29 +46,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Apr 2010 12:58:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 22 Apr 2010 13:26:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-
-Am 22.04.2010 um 14:46 schrieb Antonio Ospite:
-
-> On Thu, 22 Apr 2010 12:55:43 +0100
-> Phil Blundell <philb@gnu.org> wrote:
-> 
->> On Thu, 2010-04-22 at 13:43 +0200, Antonio Ospite wrote:
->>> 2. If I install any package which depends on udev then udev is brought
->>>    in and the static layout is gone at the next boot.
->> 
->> I think your best option is probably to make udev be a DISTRO_FEATURE
->> and not set it for your own distribution.
->> 
->> If you genuinely want udev to be selected (for your particular DISTRO)
->> on a per-MACHINE basis then you'll have to invent some way to nobble its
->> startup script so that it just doesn't do anything on machines where it
->> isn't wanted.
->> 
-> 
+On Thu, 2010-04-22 at 14:46 +0200, Antonio Ospite wrote:
 > A per-MACHINE way would be better IMHO, I am thinking about
 > adding a check on something like /dev/.staticdev (suggested in [1]) to
 > both udev init script and to the 'device' script from initscripts, and
@@ -72,10 +59,15 @@ Am 22.04.2010 um 14:46 schrieb Antonio Ospite:
 > 
 > Does this sound reasonable?
 
-Please also handle the case where we neither want an IMAGE_DEV_MANAGER
-nor static device population, since we use devtmpfs.
+Yes, that sounds reasonable enough.  Or you could check for /dev being
+mounted on tmpfs rather than persistent storage; you'd probably need
+some check along those lines anyway to catch the devtmpfs case.
 
-:M:
+It would still be nice to have udev be a DISTRO_FEATURE as well, since
+it'd suck a bit to have all that stuff installed in flash if it's never
+going to be used.  But your proposal sounds basically fine to me.
+
+p.
 
 
 
