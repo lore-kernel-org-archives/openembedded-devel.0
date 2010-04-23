@@ -1,46 +1,34 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from server.road.de ([85.10.209.111] helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1O50wB-0006wt-MA
+	(envelope-from <j.erdmann@road.de>) id 1O5Fwt-0003QV-9p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Apr 2010 20:15:45 +0200
-Received: by vws6 with SMTP id 6so962643vws.6
+	Fri, 23 Apr 2010 12:17:40 +0200
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id 3BC8139000B
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Apr 2010 11:12:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=2ehS7apH4uMyn2/nUC6BcVACIuY83VW4/aWsHB1DEns=;
-	b=CUMUCuE1mwEmSV9x4yQcF7zEFM+aMz2hCOLesyd3UphFJLCXF1a8Aj5via3xjOJGUY
-	2jHr3+Wkz4aGsLIoS710qsmN4MU72q6+KWVS+84gAsYaZEJxEfU9G+hsuXGCcR3A14hf
-	zSaucktVMeX8TBjGtAGnSYvqQ3wVXx9U8fVFc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=kH5LsMStZnlRDEOnac0ZIAooSrxvM+cKd0+XdPMJ3ChCf/7v3lcKmxqAl/YKTwYPHb
-	O+yVoKX9K/mJzwriac0vQpYo8vqdz+9gEwDoogIdne5hjYBI72An56llEkMO3Tdb7WTy
-	C9Bt43FQ64dPMNx47g0lyQcMCvEN4EvmsLuwM=
-Received: by 10.220.128.16 with SMTP id i16mr7086280vcs.120.1271959926085;
-	Thu, 22 Apr 2010 11:12:06 -0700 (PDT)
-Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
-	[24.251.170.95])
-	by mx.google.com with ESMTPS id z13sm888536vco.6.2010.04.22.11.12.04
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 22 Apr 2010 11:12:05 -0700 (PDT)
-Sender: Chris Larson <kergoth@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
+	Fri, 23 Apr 2010 12:04:45 +0200 (CEST)
+Received: from [192.168.116.53] (bienemaja.handy-pc.constin.de
+	[192.168.116.53])
+	by slimfast.dyndns.org (Postfix) with ESMTP id 0DCD6454315
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Apr 2010 12:04:45 +0200 (CEST)
+Message-ID: <4BD170BC.8020103@road.de>
+Date: Fri, 23 Apr 2010 12:04:44 +0200
+From: Jens Erdmann <j.erdmann@road.de>
+Organization: Road GmbH
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100411 Icedove/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 22 Apr 2010 11:11:18 -0700
-Message-Id: <1271959878-6178-1-git-send-email-clarson@kergoth.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 85.10.209.111
+X-SA-Exim-Mail-From: j.erdmann@road.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: [PATCH] bitbake.conf: Don't remove nonexisting paths from FILESPATH
+Subject: [Patch] locking in do_package_tar
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,37 +42,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Apr 2010 18:15:45 -0000
+X-List-Received-Date: Fri, 23 Apr 2010 10:17:46 -0000
+X-Groupsio-MsgNum: 18744
+Content-Type: multipart/mixed; boundary="------------000203040104030804080707"
 
-From: clarson <clarson@6a149ff2-cb3c-0410-b4c8-c88968701766>
+--------------000203040104030804080707
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Doing so coupled with amend.bbclass results in caching an __depends which
-doesn't include all possible amend.inc files, only all the possible
-amend.inc files *within already existing directories*.  Leaving all the
-possible dirs in FILESPATH resolves this.
+Hey folks,
 
-Signed-off-by: Chris Larson <chris_larson@mentor.com>
+I would like to introduce locking in do_package_tar. I had a case here 
+were do_package_tar and do_package_ipk where running parallel. Because 
+of this "tar: .: file changed as we read it" occurs. I fixed it by 
+introduce locking in do_package_tar. What do you think about it?
 
-git-svn-id: http://svr-alm-svn-01.alm.mentorg.com:8080/svn/ea/easi_oe/system-builder/release-2010.1@2828 6a149ff2-cb3c-0410-b4c8-c88968701766
----
- sb-core/conf/bitbake.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/sb-core/conf/bitbake.conf b/sb-core/conf/bitbake.conf
-index 9a04292..bd57581 100644
---- a/sb-core/conf/bitbake.conf
-+++ b/sb-core/conf/bitbake.conf
-@@ -272,7 +272,7 @@ export MANIFEST = "${FILESDIR}/manifest"
- FILE_DIRNAME = "${@os.path.dirname(bb.data.getVar('FILE', d))}"
- FILESPATHBASE = "${FILE_DIRNAME}"
- FILESPATHPKG = "${PF}:${P}:${PN}:${BP}:${BPN}:files:."
--FILESPATH = "${@':'.join([os.path.normpath(os.path.join(fp, p, o)) for fp in d.getVar('FILESPATHBASE', 1).split(':') for p in d.getVar('FILESPATHPKG', 1).split(':') for o in (d.getVar('OVERRIDES', 1) + ':').split(':') if os.path.exists(os.path.join(fp, p, o))])}"
-+FILESPATH = "${@':'.join([os.path.join(fp, p, o) for fp in d.getVar('FILESPATHBASE', 1).split(':') for p in d.getVar('FILESPATHPKG', 1).split(':') for o in (d.getVar('OVERRIDES', 1) + ':').split(':')])}"
- FILESDIR = "${@bb.which(d.getVar('FILESPATH', 1), '.')}"
- 
- ##################################################################
+
 -- 
-1.6.3.3
+------- ROAD ...the handyPC Company - - -  ) ) )
+
+Jens Erdmann
+Software Development
+
+ROAD GmbH
+Bennigsenstr. 14 | 12159 Berlin | Germany
+fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
+url: www.road.de
+
+Amtsgericht Charlottenburg: HRB 96688 B
+Managing director: Hans-Peter Constien
 
 
+--------------000203040104030804080707
+Content-Type: text/x-diff;
+ name="oe_tar_lock.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename="oe_tar_lock.patch"
 
+diff --git a/classes/package_tar.bbclass b/classes/package_tar.bbclass
+index b905e17..47bf2cc 100644
+--- a/classes/package_tar.bbclass
++++ b/classes/package_tar.bbclass
+@@ -58,6 +58,7 @@ python do_package_tar () {
+ 		localdata = bb.data.createCopy(d)
+ 		pkgdest = bb.data.getVar('PKGDEST', d, 1)
+ 		root = "%s/%s" % (pkgdest, pkg)
++		lf = bb.utils.lockfile(root + ".lock")
+ 
+ 		bb.data.setVar('ROOT', '', localdata)
+ 		bb.data.setVar('ROOT_%s' % pkg, root, localdata)
+@@ -65,6 +66,7 @@ python do_package_tar () {
+ 
+ 		overrides = bb.data.getVar('OVERRIDES', localdata)
+ 		if not overrides:
++			bb.utils.unlockfile(lf)
+ 			raise bb.build.FuncFailed('OVERRIDES not defined')
+ 		overrides = bb.data.expand(overrides, localdata)
+ 		bb.data.setVar('OVERRIDES', '%s:%s' % (overrides, pkg), localdata)
+@@ -82,10 +84,12 @@ python do_package_tar () {
+ 		from glob import glob
+ 		if not glob('*') + glob('.[!.]*'):
+ 			bb.note("Not creating empty archive for %s-%s" % (pkg, bb.data.expand('${PV}-${PR}${DISTRO_PR}', d, True)))
++			bb.utils.unlockfile(lf)
+ 			continue
+ 		ret = os.system("tar -czf %s %s" % (tarfn, '.'))
+ 		if ret != 0:
+ 			bb.error("Creation of tar %s failed." % tarfn)
++		bb.utils.unlockfile(lf)
+ }
+ 
+ python () {
+
+--------------000203040104030804080707--
