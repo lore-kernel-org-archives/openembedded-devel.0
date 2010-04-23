@@ -1,30 +1,48 @@
-Received: from bay0-omc4-s21.bay0.hotmail.com ([65.54.190.223])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1O5Ljo-0005Np-5t
+	(envelope-from <raj.khem@gmail.com>) id 1O5M3W-0004bv-FW
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 18:28:21 +0200
-Received: from BAY127-W18 ([65.54.190.199]) by bay0-omc4-s21.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 23 Apr 2010 09:23:39 -0700
-Message-ID: <BAY127-W18C49E409BA1BBC8422B11D8070@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Fri, 23 Apr 2010 22:23:39 +0600
-Importance: Normal
+	Fri, 23 Apr 2010 18:48:44 +0200
+Received: by pvd12 with SMTP id 12so275626pvd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Apr 2010 09:45:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=LzrAr8nfg+DRWm6OXsd9Rg7ik8N0RJNiI/gCyk8P6a4=;
+	b=XZam3+cJeuclFBoDWqt4BNYDRENAd/hUT7GtQ53aphH4l6LSoEa8Rppc/ftDfWJcpt
+	ruVzhSmsVv//f21svVWLbJvvzLtFxKbGMDymJlJhZN/u7Gn1q7Bn5/QMzR/OfVSEyzhg
+	I0C0LxX2rfDIGORo67vROiLxDg4Mo7Qrpr4wo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=NohyUDPANoAvPb3rFM1++FtJs/WJUELidCZdFbuzf84gqN2A+Z/ANGXXyiexXsbAH5
+	Aiw6zNIcWK2NjR5ISiP8lVNFCjlM0Nbmwlldumcs9J9XHKpMAiK9hvZvbR6ENLGD1xO5
+	0XXlHSV+UutDSCB+rp3xUUHeVx+NfO6gLfQg8=
 MIME-Version: 1.0
-X-OriginalArrivalTime: 23 Apr 2010 16:23:39.0489 (UTC)
-	FILETIME=[550D5510:01CAE301]
-X-SA-Exim-Connect-IP: 65.54.190.223
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+Received: by 10.140.56.18 with SMTP id e18mr382311rva.167.1272041104169; Fri, 
+	23 Apr 2010 09:45:04 -0700 (PDT)
+Received: by 10.231.34.72 with HTTP; Fri, 23 Apr 2010 09:45:04 -0700 (PDT)
+In-Reply-To: <20100423142839.0ea82f89.ospite@studenti.unina.it>
+References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
+	<20100325203900.GB17837@gmail.com>
+	<20100326161724.0dd4dfda.ospite@studenti.unina.it>
+	<20100423142839.0ea82f89.ospite@studenti.unina.it>
+Date: Fri, 23 Apr 2010 09:45:04 -0700
+Message-ID: <u2y19c1b8a91004230945z4879e2cbsbc4350aad85f7268@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+To: Antonio Ospite <ospite@studenti.unina.it>
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_SORBS_WEB,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Problem while booting from OE generated kernel
+Cc: openezx-devel@lists.openezx.org, openembedded-devel@lists.openembedded.org
+Subject: Re: gen-blob size with gcc-4.4.2 SOLVED? (was: [PATCH 0/5] Misc updates for EZX bits in OE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,85 +56,217 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 16:28:21 -0000
-Content-Type: text/plain; charset="Windows-1252"
+X-List-Received-Date: Fri, 23 Apr 2010 16:48:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
+On Fri, Apr 23, 2010 at 5:28 AM, Antonio Ospite
+<ospite@studenti.unina.it> wrote:
+> WARNING:
+> This was going to be a
+> =A0"I didn't know what I was doing but it worked"
+> kind of post, but then I did some homework and now I think I know a bit
+> more about what I did :)
+>
+> The post below is quite lengthy as it contains all the steps I went
+> through in order to come to some conclusions.
+>
+> On Fri, 26 Mar 2010 16:17:24 +0100
+> Antonio Ospite <ospite@studenti.unina.it> wrote:
+>
+>> On Thu, 25 Mar 2010 13:39:00 -0700
+>> Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>> > On (25/03/10 18:19), Antonio Ospite wrote:
+> [...]
+>> > > Note that although ezx-gen-blob builds fine now, it seems to have is=
+sues with
+>> > > GCC 4.4: the binary size is about 300KiB instead of the expected 64K=
+iB, if
+>> > > anyone has a clue please let me know.
+>> >
+>
+> Comparing the section sizes for the two binaries:
+> =A0 text =A0 =A0data =A0 =A0 bss =A0 =A0 dec =A0 =A0 hex filename
+> =A040212 =A0 20764 =A0244356 =A0305332 =A0 4a8b4 blob-rest-elf32-with-gcc=
+-4.1.2
+> =A039595 =A0265124 =A0 =A0 =A0 4 =A0304723 =A0 4a653 blob-rest-elf32-with=
+-gcc-4.4.2
+>
+> So something fishing about the data and bss sections. After reading
+> a bit about what ELF sections are[0,1] I'd guess gcc-4.4.2 might be
+> forcing initializations for uninitialized data putting it in the
+> binary image and that makes the object file size grow.
+>
+> This explanation would also help me to understand more the warning
+> message:
+> .../arm-oe-linux-gnueabi/bin/ld:
+> warning: section `.bss' type changed to PROGBITS
+>
+>> > I can help you here. If you can give me the two images with symbols an=
+d
+>> > your linking script it uses. Secondly are you using same binutils/ld i=
+n
+>> > both cases ?
+>> >
+>>
+>
+> I also had to learn what a linker script[2] is, it can be used to
+> define sections properties and object files layout, right?
+> The one used by blob/gen-blob is here:
+> http://svn.openezx.org/trunk/src/blob/gen-blob/src/blob/rest-ld-script.in
+>
+> Now, looking at the bss section, I noted that there is a "nested"
+> "stack" section, this is different from the other sections, so as a
+> first naive/blind try I changed that from:
+> =A0 =A0 =A0 =A0. =3D ALIGN(4);
+> =A0 =A0 =A0 =A0.bss : {
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_start =3D .;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* first the real BSS data */
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.bss)
+>
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* and next the stack */
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0. =3D ALIGN(4);
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_start =3D .;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.stack)
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_end =3D .;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_end =3D .;
+> =A0 =A0 =A0 =A0}
+> to
+> =A0 =A0 =A0 =A0/* the BSS section should *always* be the last section */
+> =A0 =A0 =A0 =A0. =3D ALIGN(4);
+> =A0 =A0 =A0 =A0.bss : {
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_start =3D .;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* first the real BSS data */
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.bss)
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_end =3D .;
+> =A0 =A0 =A0 =A0}
+>
+> =A0 =A0 =A0 =A0/* and next the stack */
+> =A0 =A0 =A0 =A0. =3D ALIGN(4);
+> =A0 =A0 =A0 =A0.stack : {
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_start =3D .;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.stack)
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_end =3D .;
+> =A0 =A0 =A0 =A0}
+>
+> And the binary sizes is now:
+> =A0 text =A0 =A0data =A0 =A0 bss =A0 =A0 dec =A0 =A0 hex filename
+> =A040212 =A0 20764 =A0244356 =A0305332 =A0 4a8b4 blob-rest-elf32-with-gcc=
+-4.1.2
+> =A039595 =A0 20772 =A0227972 =A0288339 =A0 46653 blob-rest-elf32-with-gcc=
+-4.4.2
+>
+> The "strange thing" is that after this blind change from a very rough
+> guess-work the binary even seemed to work... so I did some more research
+> to figure out a more "correct" solution.
+>
+> I found out somewhere on the interwebs that the "nesting" shouldn't be a
+> problem, and that stack size can be defined directly inside the
+> linker script, like in [3], so I tried with this change (getting the
+> actual stack size from src/blob/stack.S):
+>
+> Index: gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> --- gen-blob-with-gcc-4.4.2.orig/src/blob/rest-ld-script.in
+> +++ gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
+> @@ -97,7 +97,8 @@
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* and next the stack */
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0. =3D ALIGN(4);
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_start =3D .;
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 *(.stack)
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* allocate a 16kB stack */
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 . =3D . + 16 * 1024;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_end =3D .;
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_end =3D .;
+>
 
- Hi
-I've built console-image for dm6446 and now I am having problem while booti=
-ng kernel
-image after writint it to NAND flash.When I enter boot command in
-U-BOOT linux kernel stuck at uncompressing linux.Terminal log is show below
-=20
-I want to  enable  serial port to print debug messages=2CI've checked for K=
-Config file  in=20
-/recipes/linux/linux-davinci directory but that's not there .Where I may fi=
-nd this ?
 
-By setting
-this feature I've to build console-image again?
+you already have this in stack.S so its not needed. The correct fix would b=
+e to
+classify the output segment as NOLOAD explicitly like this
 
-Also I am using already present U-boot in my board and that's not OE genera=
-ted.can this create some problem?
+	.bss(NOLOAD) : {
+		__bss_start =3D .;
+		/* first the real BSS data */
+		*(.bss)
 
-One=20
-thing more  that  in OE generated  output i.e.
-/deploy/glibc/images/dm6446-evm there are three file system images and
-one kernel image but there is no U-boot.Are all three file systems same
-and where should be u-boot?
+		/* and next the stack */
+		. =3D ALIGN(4);
+		__stack_start =3D .;
+		*(.stack)
+		__stack_end =3D .;
+		__bss_end =3D .;
+	}
 
-Terminal log is here
-U-Boot > boot                                                              =
-    =20
-                                                                           =
-    =20
-Loading from NAND 256MiB 1=2C8V 8-bit=2C offset 0x120000                   =
-        =20
-   Image Name:   Linux-2.6.32-rc2-davinci1                                 =
-    =20
-   Created:      2010-03-15   9:44:32 UTC                                  =
-    =20
-   Image Type:   ARM Linux Kernel Image (uncompressed)                     =
-    =20
-   Data Size:    1080360 Bytes =3D  1 MB                                   =
-      =20
-   Load Address: 80008000                                                  =
-    =20
-   Entry Point:  80008000                                                  =
-    =20
-## Booting kernel from Legacy Image at 80700000 ...                        =
-    =20
-   Image Name:   Linux-2.6.32-rc2-davinci1                                 =
-    =20
-   Created:      2010-03-15   9:44:32 UTC                                  =
-    =20
-   Image Type:   ARM Linux Kernel Image (uncompressed)                     =
-    =20
-   Data Size:    1080360 Bytes =3D  1 MB                                   =
-      =20
-   Load Address: 80008000                                                  =
-    =20
-   Entry Point:  80008000                                                  =
-    =20
-   Verifying Checksum ... OK                                               =
-    =20
-   Loading Kernel Image ... OK                                             =
-    =20
-OK                                                                         =
-    =20
-                                                                           =
-    =20
-Starting kernel ...                                                        =
-    =20
-                                                                           =
-    =20
-Uncompressing Linux........................................................=
-.....
+you should not need any other changes.
+
+>
+> Sizes are now:
+> =A0 text =A0 =A0data =A0 =A0 bss =A0 =A0 dec =A0 =A0 hex filename
+> =A040212 =A0 20764 =A0244356 =A0305332 =A0 4a8b4 blob-rest-elf32-with-gcc=
+-4.1.2
+> =A039595 =A0 20772 =A0244356 =A0304723 =A0 4a653 blob-rest-elf32-with-gcc=
+-4.4.2
+>
+> bss size matches, this a good sign, not a coincidence, isnt'it? And
+> the binary still works. Is that really ok?
+>
+> [...]
+>> I am using the very ld the toolchain provides, so I they are
+>> different, and I noted than the 4.4.2 one gives this warning:
+>> .../arm-oe-linux-gnueabi/bin/ld:
+>> warning: section `.bss' type changed to PROGBITS
+>>
+
+The problem is the .stack is
+not a special nobits section like .bss is so when you club is together
+in .bss then
+there is a mismatch and hence the warning.
 
 
-Saleh 		 	   		 =20
-_________________________________________________________________
-Hotmail: Trusted email with Microsoft=92s powerful SPAM protection.
-https://signup.live.com/signup.aspx?id=3D60969=
+>
+> This warning goes away with either the changes above.
+>
+> So the last patch above would look ok to me, I think I figured out WHAT
+> was happening, but I don't understand WHY this change is necessary.
+> Is that the section name ".stack" defined in stack.S is not recognized?
+> If so, why?
+>
+> Khem I am now only asking you if you can help me understand why newer
+> GCCs don't behave in the same way as older ones wrt. this aspect.
+> Thanks.
+>
+>> The problem seems to rise during linking indeed, the size difference
+>> of .o files produced by the two toolchains is ~ 3 KiB overall, it does
+>> not seem to justify the bump I have after linking to more than 200KiB.
+>>
+>
+> After several hours spent on this, but with at least some XP gained :)
+> Yours truly,
+> =A0 Antonio
+>
+> [0]
+> http://infocenter.arm.com/help/topic/com.arm.doc.dui0101a/DUI0101A_Elf.pd=
+f
+> [1]
+> http://www.tortall.net/projects/yasm/manual/html/objfmt-elf-section.html
+> [2] http://www.math.utah.edu/docs/info/ld_toc.html#SEC4
+> [3] http://sourceware.org/ml/binutils/2007-11/msg00016.html
+>
+> --
+> Antonio Ospite
+> http://ao2.it
+>
+> PGP public key ID: 0x4553B001
+>
+> A: Because it messes up the order in which people normally read text.
+> =A0 See http://en.wikipedia.org/wiki/Posting_style
+> Q: Why is top-posting such a bad thing?
+> A: Top-posting.
+> Q: What is the most annoying thing in e-mail?
+>
+
 
