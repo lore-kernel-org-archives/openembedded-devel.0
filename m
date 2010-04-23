@@ -1,48 +1,42 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1O5M3W-0004bv-FW
+	(envelope-from <Tom_Rini@mentor.com>) id 1O5NLQ-0003Gi-2N
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 18:48:44 +0200
-Received: by pvd12 with SMTP id 12so275626pvd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 09:45:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=LzrAr8nfg+DRWm6OXsd9Rg7ik8N0RJNiI/gCyk8P6a4=;
-	b=XZam3+cJeuclFBoDWqt4BNYDRENAd/hUT7GtQ53aphH4l6LSoEa8Rppc/ftDfWJcpt
-	ruVzhSmsVv//f21svVWLbJvvzLtFxKbGMDymJlJhZN/u7Gn1q7Bn5/QMzR/OfVSEyzhg
-	I0C0LxX2rfDIGORo67vROiLxDg4Mo7Qrpr4wo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=NohyUDPANoAvPb3rFM1++FtJs/WJUELidCZdFbuzf84gqN2A+Z/ANGXXyiexXsbAH5
-	Aiw6zNIcWK2NjR5ISiP8lVNFCjlM0Nbmwlldumcs9J9XHKpMAiK9hvZvbR6ENLGD1xO5
-	0XXlHSV+UutDSCB+rp3xUUHeVx+NfO6gLfQg8=
-MIME-Version: 1.0
-Received: by 10.140.56.18 with SMTP id e18mr382311rva.167.1272041104169; Fri, 
-	23 Apr 2010 09:45:04 -0700 (PDT)
-Received: by 10.231.34.72 with HTTP; Fri, 23 Apr 2010 09:45:04 -0700 (PDT)
-In-Reply-To: <20100423142839.0ea82f89.ospite@studenti.unina.it>
-References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
-	<20100325203900.GB17837@gmail.com>
-	<20100326161724.0dd4dfda.ospite@studenti.unina.it>
-	<20100423142839.0ea82f89.ospite@studenti.unina.it>
-Date: Fri, 23 Apr 2010 09:45:04 -0700
-Message-ID: <u2y19c1b8a91004230945z4879e2cbsbc4350aad85f7268@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-To: Antonio Ospite <ospite@studenti.unina.it>
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	Fri, 23 Apr 2010 20:11:23 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O5NHu-0000pJ-3V from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Apr 2010 11:07:38 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 23 Apr 2010 11:07:37 -0700
+Received: from 172.30.80.244 ([172.30.80.244]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Fri, 23 Apr 2010 18:07:37 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	23 Apr 2010 11:07:33 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <hqrv2b$a7u$1@dough.gmane.org>
+References: <1271852471-16659-1-git-send-email-koen.kooi@gmail.com>
+	<hqrv2b$a7u$1@dough.gmane.org>
+Organization: Mentor Graphics Corporation
+Date: Fri, 23 Apr 2010 11:07:33 -0700
+Message-ID: <1272046053.3865.425.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 23 Apr 2010 18:07:37.0876 (UTC)
+	FILETIME=[DB6BA540:01CAE30F]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openezx-devel@lists.openezx.org, openembedded-devel@lists.openembedded.org
-Subject: Re: gen-blob size with gcc-4.4.2 SOLVED? (was: [PATCH 0/5] Misc updates for EZX bits in OE)
+Subject: Re: [RFC][PATCH] meta-toolchain: use MULTIMACH_TARGET_SYS instead of TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,217 +50,224 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 16:48:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 23 Apr 2010 18:11:41 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Apr 23, 2010 at 5:28 AM, Antonio Ospite
-<ospite@studenti.unina.it> wrote:
-> WARNING:
-> This was going to be a
-> =A0"I didn't know what I was doing but it worked"
-> kind of post, but then I did some homework and now I think I know a bit
-> more about what I did :)
->
-> The post below is quite lengthy as it contains all the steps I went
-> through in order to come to some conclusions.
->
-> On Fri, 26 Mar 2010 16:17:24 +0100
-> Antonio Ospite <ospite@studenti.unina.it> wrote:
->
->> On Thu, 25 Mar 2010 13:39:00 -0700
->> Khem Raj <raj.khem@gmail.com> wrote:
->>
->> > On (25/03/10 18:19), Antonio Ospite wrote:
-> [...]
->> > > Note that although ezx-gen-blob builds fine now, it seems to have is=
-sues with
->> > > GCC 4.4: the binary size is about 300KiB instead of the expected 64K=
-iB, if
->> > > anyone has a clue please let me know.
->> >
->
-> Comparing the section sizes for the two binaries:
-> =A0 text =A0 =A0data =A0 =A0 bss =A0 =A0 dec =A0 =A0 hex filename
-> =A040212 =A0 20764 =A0244356 =A0305332 =A0 4a8b4 blob-rest-elf32-with-gcc=
--4.1.2
-> =A039595 =A0265124 =A0 =A0 =A0 4 =A0304723 =A0 4a653 blob-rest-elf32-with=
--gcc-4.4.2
->
-> So something fishing about the data and bss sections. After reading
-> a bit about what ELF sections are[0,1] I'd guess gcc-4.4.2 might be
-> forcing initializations for uninitialized data putting it in the
-> binary image and that makes the object file size grow.
->
-> This explanation would also help me to understand more the warning
-> message:
-> .../arm-oe-linux-gnueabi/bin/ld:
-> warning: section `.bss' type changed to PROGBITS
->
->> > I can help you here. If you can give me the two images with symbols an=
-d
->> > your linking script it uses. Secondly are you using same binutils/ld i=
-n
->> > both cases ?
->> >
->>
->
-> I also had to learn what a linker script[2] is, it can be used to
-> define sections properties and object files layout, right?
-> The one used by blob/gen-blob is here:
-> http://svn.openezx.org/trunk/src/blob/gen-blob/src/blob/rest-ld-script.in
->
-> Now, looking at the bss section, I noted that there is a "nested"
-> "stack" section, this is different from the other sections, so as a
-> first naive/blind try I changed that from:
-> =A0 =A0 =A0 =A0. =3D ALIGN(4);
-> =A0 =A0 =A0 =A0.bss : {
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_start =3D .;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* first the real BSS data */
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.bss)
->
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* and next the stack */
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0. =3D ALIGN(4);
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_start =3D .;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.stack)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_end =3D .;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_end =3D .;
-> =A0 =A0 =A0 =A0}
-> to
-> =A0 =A0 =A0 =A0/* the BSS section should *always* be the last section */
-> =A0 =A0 =A0 =A0. =3D ALIGN(4);
-> =A0 =A0 =A0 =A0.bss : {
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_start =3D .;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* first the real BSS data */
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.bss)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_end =3D .;
-> =A0 =A0 =A0 =A0}
->
-> =A0 =A0 =A0 =A0/* and next the stack */
-> =A0 =A0 =A0 =A0. =3D ALIGN(4);
-> =A0 =A0 =A0 =A0.stack : {
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_start =3D .;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0*(.stack)
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_end =3D .;
-> =A0 =A0 =A0 =A0}
->
-> And the binary sizes is now:
-> =A0 text =A0 =A0data =A0 =A0 bss =A0 =A0 dec =A0 =A0 hex filename
-> =A040212 =A0 20764 =A0244356 =A0305332 =A0 4a8b4 blob-rest-elf32-with-gcc=
--4.1.2
-> =A039595 =A0 20772 =A0227972 =A0288339 =A0 46653 blob-rest-elf32-with-gcc=
--4.4.2
->
-> The "strange thing" is that after this blind change from a very rough
-> guess-work the binary even seemed to work... so I did some more research
-> to figure out a more "correct" solution.
->
-> I found out somewhere on the interwebs that the "nesting" shouldn't be a
-> problem, and that stack size can be defined directly inside the
-> linker script, like in [3], so I tried with this change (getting the
-> actual stack size from src/blob/stack.S):
->
-> Index: gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> --- gen-blob-with-gcc-4.4.2.orig/src/blob/rest-ld-script.in
-> +++ gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
-> @@ -97,7 +97,8 @@
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0/* and next the stack */
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0. =3D ALIGN(4);
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_start =3D .;
-> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 *(.stack)
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 /* allocate a 16kB stack */
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 . =3D . + 16 * 1024;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__stack_end =3D .;
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0__bss_end =3D .;
->
+On Fri, 2010-04-23 at 13:07 +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Ping
+
+It's better than what we have today, true.  And SDKPATH already contains
+DISTRO, which is the likely changer of TOOLCHAIN_*_TASK.  So...
+
+Acked-by: Tom Rini <tom_rini@mentor.com>
+
+>=20
+> On 21-04-10 14:21, Koen Kooi wrote:
+> > From: Koen Kooi <koen@openembedded.org>
+> >=20
+> > This is the first step to be able to mix multiple arm archs (and ABIs) =
+when installing multiple SDKs on one buildhost (e.g. armv4 and armv7a).
+> >=20
+> > ---
+> >  recipes/meta/meta-toolchain.bb |   50 ++++++++++++++++++++------------=
+--------
+> >  1 files changed, 25 insertions(+), 25 deletions(-)
+> >=20
+> > diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolcha=
+in.bb
+> > index adc057a..2e2196a 100644
+> > --- a/recipes/meta/meta-toolchain.bb
+> > +++ b/recipes/meta/meta-toolchain.bb
+> > @@ -10,7 +10,7 @@ SDK_OUTPUT2 =3D "${SDK_DIR}/image-extras"
+> >  SDK_DEPLOY =3D "${DEPLOY_DIR}/sdk"
+> > =20
+> >  IPKG_HOST =3D "opkg-cl -f ${IPKGCONF_SDK} -o ${SDK_OUTPUT}"
+> > -IPKG_TARGET =3D "opkg-cl -f ${IPKGCONF_TARGET} -o ${SDK_OUTPUT}/${SDKP=
+ATH}/${TARGET_SYS}"
+> > +IPKG_TARGET =3D "opkg-cl -f ${IPKGCONF_TARGET} -o ${SDK_OUTPUT}/${SDKP=
+ATH}/${MULTIMACH_TARGET_SYS}"
+> > =20
+> >  TOOLCHAIN_HOST_TASK ?=3D "task-sdk-host"
+> >  TOOLCHAIN_TARGET_TASK ?=3D "task-sdk-bare"
+> > @@ -26,14 +26,14 @@ RDEPENDS =3D "${DISTRO_FEED_CONFIGS} ${TOOLCHAIN_TA=
+RGET_TASK} ${TOOLCHAIN_HOST_TAS
+> >  TOOLCHAIN_FEED_URI ?=3D "${DISTRO_FEED_URI}"
+> > =20
+> >  modify_opkg_conf () {
+> > -        OUTPUT_OPKGCONF_TARGET=3D"${SDK_OUTPUT}/${SDKPATH}/${TARGET_SY=
+S}/${sysconfdir}/opkg.conf"
+> > -        OUTPUT_OPKGCONF_HOST=3D"${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}=
+/${sysconfdir}/opkg-sdk.conf"
+> > +        OUTPUT_OPKGCONF_TARGET=3D"${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH=
+_TARGET_SYS}/${sysconfdir}/opkg.conf"
+> > +        OUTPUT_OPKGCONF_HOST=3D"${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_T=
+ARGET_SYS}/${sysconfdir}/opkg-sdk.conf"
+> >          OUTPUT_OPKGCONF_SDK=3D"${SDK_OUTPUT}/${sysconfdir}/opkg-sdk.co=
+nf"
+> >          rm -f ${OUTPUT_OPKGCONF_TARGET}
+> >          rm -f ${OUTPUT_OPKGCONF_HOST}
+> >          rm -f ${OUTPUT_OPKGCONF_SDK}
+> > =20
+> > -        if [ -e ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/o=
+pkg/arch.conf ] ; then
+> > +        if [ -e ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sys=
+confdir}/opkg/arch.conf ] ; then
+> >              echo "Creating empty opkg.conf since arch.conf is already =
+present"
+> >              echo > ${OUTPUT_OPKGCONF_TARGET}=20
+> >          else
+> > @@ -53,7 +53,7 @@ do_populate_sdk() {
+> >  	rm -rf ${SDK_OUTPUT}
+> >  	mkdir -p ${SDK_OUTPUT}
+> >  	mkdir -p ${SDK_OUTPUT}${libdir}/opkg/
+> > -	mkdir -p ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}${libdir}/opkg/
+> > +	mkdir -p ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}${libdir}/op=
+kg/
+> > =20
+> >  	package_generate_ipkg_conf
+> > =20
+> > @@ -79,17 +79,17 @@ do_populate_sdk() {
+> >  	# Clean up empty directories from excluded packages
+> >  	find ${SDK_OUTPUT} -depth -type d -empty -print0 | xargs -r0 /bin/rmd=
+ir
+> > =20
+> > -	install -d ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}
+> > -	install -m 0644 ${IPKGCONF_TARGET} ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SD=
+KPATH}/${TARGET_SYS}/${sysconfdir}/
+> > +	install -d ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sysconf=
+dir}
+> > +	install -m 0644 ${IPKGCONF_TARGET} ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SD=
+KPATH}/${MULTIMACH_TARGET_SYS}/${sysconfdir}/
+> > =20
+> >  	install -d ${SDK_OUTPUT}/${SDKPATH}/${sysconfdir}
+> >  	install -m 0644 ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SDKPATH}/${sysconfdir=
+}/
+> > =20
+> >  	# extract and store ipks, pkgdata and shlibs data
+> > -	target_pkgs=3D`cat ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/usr/lib/opk=
+g/status | grep Package: | cut -f 2 -d ' '`
+> > +	target_pkgs=3D`cat ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/u=
+sr/lib/opkg/status | grep Package: | cut -f 2 -d ' '`
+> >  	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/ipk/
+> >  	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/pkgdata/runtime/
+> > -	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/${TARGET_SYS}/shlibs/
+> > +	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/shlibs/
+> >  	for pkg in $target_pkgs ; do
+> >  		for arch in $revipkgarchs; do
+> >  			pkgnames=3D${DEPLOY_DIR_IPK}/$arch/${pkg}_*_$arch.ipk
+> > @@ -107,7 +107,7 @@ do_populate_sdk() {
+> >  						cp ${TMPDIR}/pkgdata/$pkg_subdir/runtime/$subpkg.packaged ${SDK_=
+OUTPUT2}/${SDKPATH}/pkgdata/$pkg_subdir/runtime/
+> >  					fi
+> >  					if [ -e ${STAGING_DIR_TARGET}/shlibs/$subpkg.list ]; then
+> > -						cp ${STAGING_DIR_TARGET}/shlibs/$subpkg.* ${SDK_OUTPUT2}/${SDKPA=
+TH}/${TARGET_SYS}/shlibs/
+> > +						cp ${STAGING_DIR_TARGET}/shlibs/$subpkg.* ${SDK_OUTPUT2}/${SDKPA=
+TH}/${MULTIMACH_TARGET_SYS}/shlibs/
+> >  					fi
+> >  				done
+> >  				break
+> > @@ -119,20 +119,20 @@ do_populate_sdk() {
+> >  	# libgcc-dev should be responsible for that, but it's not getting bui=
+lt
+> >  	# RP: it gets smashed up depending on the order that gcc, gcc-cross a=
+nd=20
+> >  	# gcc-cross-sdk get built :( (30/11/07)
+> > -	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/lib/libgc=
+c_s.so
+> > +	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}=
+/lib/libgcc_s.so
+> > =20
+> >  	# With sysroot support, gcc expects the default C++ headers to be
+> >  	# in a specific place.
+> > -	install -d ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/include
+> > -	mv ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/usr/include/c++ \
+> > -		${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/include/
+> > +	install -d ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/include
+> > +	mv ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/usr/include/c++ \
+> > +		${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/include/
+> > =20
+> >  	# Fix or remove broken .la files
+> > -	for i in `find ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS} -name \*.la`; d=
+o
+> > -		sed -i 	-e "/^dependency_libs=3D/s,\([[:space:]']\)${base_libdir},\1=
+\$SDK_PATH/\$TARGET_SYS${base_libdir},g" \
+> > -			-e "/^dependency_libs=3D/s,\([[:space:]']\)${libdir},\1\$SDK_PATH/\=
+$TARGET_SYS${libdir},g" \
+> > -			-e "/^dependency_libs=3D/s,\-\([LR]\)${base_libdir},-\1\$SDK_PATH/\=
+$TARGET_SYS${base_libdir},g" \
+> > -			-e "/^dependency_libs=3D/s,\-\([LR]\)${libdir},-\1\$SDK_PATH/\$TARG=
+ET_SYS${libdir},g" \
+> > +	for i in `find ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS} -name=
+ \*.la`; do
+> > +		sed -i 	-e "/^dependency_libs=3D/s,\([[:space:]']\)${base_libdir},\1=
+\$SDK_PATH/\$MULTIMACH_TARGET_SYS${base_libdir},g" \
+> > +			-e "/^dependency_libs=3D/s,\([[:space:]']\)${libdir},\1\$SDK_PATH/\=
+$MULTIMACH_TARGET_SYS${libdir},g" \
+> > +			-e "/^dependency_libs=3D/s,\-\([LR]\)${base_libdir},-\1\$SDK_PATH/\=
+$MULTIMACH_TARGET_SYS${base_libdir},g" \
+> > +			-e "/^dependency_libs=3D/s,\-\([LR]\)${libdir},-\1\$SDK_PATH/\$MULT=
+IMACH_TARGET_SYS${libdir},g" \
+> >  			-e 's/^installed=3Dyes$/installed=3Dno/' $i
+> >  	done
+> >  	rm -f ${SDK_OUTPUT}/${SDKPATH}/lib/*.la
+> > @@ -148,15 +148,15 @@ do_populate_sdk() {
+> >  	script=3D${SDK_OUTPUT}/${SDKPATH}/environment-setup
+> >  	touch $script
+> >  	echo 'export SDK_PATH=3D${SDKPATH}' >> $script
+> > -	echo 'export TARGET_SYS=3D${TARGET_SYS}' >> $script
+> > +	echo 'export MULTIMACH_TARGET_SYS=3D${MULTIMACH_TARGET_SYS}' >> $scri=
+pt
+> >  	echo 'export PATH=3D$SDK_PATH/bin:$PATH' >> $script
+> > -	echo 'export CPATH=3D$SDK_PATH/$TARGET_SYS/usr/include:$CPATH' >> $sc=
+ript
+> > -	echo 'export LIBTOOL_SYSROOT_PATH=3D$SDK_PATH/$TARGET_SYS' >> $script
+> > -	echo 'export PKG_CONFIG_SYSROOT_DIR=3D$SDK_PATH/$TARGET_SYS' >> $scri=
+pt
+> > -	echo 'export PKG_CONFIG_PATH=3D$SDK_PATH/$TARGET_SYS${libdir}/pkgconf=
+ig' >> $script
+> > +	echo 'export CPATH=3D$SDK_PATH/$MULTIMACH_TARGET_SYS/usr/include:$CPA=
+TH' >> $script
+> > +	echo 'export LIBTOOL_SYSROOT_PATH=3D$SDK_PATH/$MULTIMACH_TARGET_SYS' =
+>> $script
+> > +	echo 'export PKG_CONFIG_SYSROOT_DIR=3D$SDK_PATH/$MULTIMACH_TARGET_SYS=
+' >> $script
+> > +	echo 'export PKG_CONFIG_PATH=3D$SDK_PATH/$MULTIMACH_TARGET_SYS${libdi=
+r}/pkgconfig' >> $script
+> >  	echo 'export CONFIG_SITE=3D$SDK_PATH/site-config' >> $script
+> >  	echo 'alias opkg=3D"LD_LIBRARY_PATH=3D$SDK_PATH/lib $SDK_PATH/bin/opk=
+g-cl -f $SDK_PATH/${sysconfdir}/opkg-sdk.conf -o $SDK_PATH"' >> $script
+> > -	echo 'alias opkg-target=3D"LD_LIBRARY_PATH=3D$SDK_PATH/lib $SDK_PATH/=
+bin/opkg-cl -f $SDK_PATH/$TARGET_SYS${sysconfdir}/opkg.conf -o $SDK_PATH/$T=
+ARGET_SYS"' >> $script
+> > +	echo 'alias opkg-target=3D"LD_LIBRARY_PATH=3D$SDK_PATH/lib $SDK_PATH/=
+bin/opkg-cl -f $SDK_PATH/$MULTIMACH_TARGET_SYS${sysconfdir}/opkg.conf -o $S=
+DK_PATH/$MULTIMACH_TARGET_SYS"' >> $script
+> > =20
+> >  	# Add version information
+> >  	versionfile=3D${SDK_OUTPUT}/${SDKPATH}/version
+>=20
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>=20
+> iD8DBQFL0X+LMkyGM64RGpERAjk7AJ44eTjMVw7SD+Qapa1LdwJO5tiEXQCcCw2S
+> EHftzrdtZOChyR9eIKhJ0aw=3D
+> =3DAHEQ
+> -----END PGP SIGNATURE-----
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-you already have this in stack.S so its not needed. The correct fix would b=
-e to
-classify the output segment as NOLOAD explicitly like this
-
-	.bss(NOLOAD) : {
-		__bss_start =3D .;
-		/* first the real BSS data */
-		*(.bss)
-
-		/* and next the stack */
-		. =3D ALIGN(4);
-		__stack_start =3D .;
-		*(.stack)
-		__stack_end =3D .;
-		__bss_end =3D .;
-	}
-
-you should not need any other changes.
-
->
-> Sizes are now:
-> =A0 text =A0 =A0data =A0 =A0 bss =A0 =A0 dec =A0 =A0 hex filename
-> =A040212 =A0 20764 =A0244356 =A0305332 =A0 4a8b4 blob-rest-elf32-with-gcc=
--4.1.2
-> =A039595 =A0 20772 =A0244356 =A0304723 =A0 4a653 blob-rest-elf32-with-gcc=
--4.4.2
->
-> bss size matches, this a good sign, not a coincidence, isnt'it? And
-> the binary still works. Is that really ok?
->
-> [...]
->> I am using the very ld the toolchain provides, so I they are
->> different, and I noted than the 4.4.2 one gives this warning:
->> .../arm-oe-linux-gnueabi/bin/ld:
->> warning: section `.bss' type changed to PROGBITS
->>
-
-The problem is the .stack is
-not a special nobits section like .bss is so when you club is together
-in .bss then
-there is a mismatch and hence the warning.
-
-
->
-> This warning goes away with either the changes above.
->
-> So the last patch above would look ok to me, I think I figured out WHAT
-> was happening, but I don't understand WHY this change is necessary.
-> Is that the section name ".stack" defined in stack.S is not recognized?
-> If so, why?
->
-> Khem I am now only asking you if you can help me understand why newer
-> GCCs don't behave in the same way as older ones wrt. this aspect.
-> Thanks.
->
->> The problem seems to rise during linking indeed, the size difference
->> of .o files produced by the two toolchains is ~ 3 KiB overall, it does
->> not seem to justify the bump I have after linking to more than 200KiB.
->>
->
-> After several hours spent on this, but with at least some XP gained :)
-> Yours truly,
-> =A0 Antonio
->
-> [0]
-> http://infocenter.arm.com/help/topic/com.arm.doc.dui0101a/DUI0101A_Elf.pd=
-f
-> [1]
-> http://www.tortall.net/projects/yasm/manual/html/objfmt-elf-section.html
-> [2] http://www.math.utah.edu/docs/info/ld_toc.html#SEC4
-> [3] http://sourceware.org/ml/binutils/2007-11/msg00016.html
->
-> --
-> Antonio Ospite
-> http://ao2.it
->
-> PGP public key ID: 0x4553B001
->
-> A: Because it messes up the order in which people normally read text.
-> =A0 See http://en.wikipedia.org/wiki/Posting_style
-> Q: Why is top-posting such a bad thing?
-> A: Top-posting.
-> Q: What is the most annoying thing in e-mail?
->
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
