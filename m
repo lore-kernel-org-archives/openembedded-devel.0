@@ -1,44 +1,46 @@
-Received: from smtp-out04.alice.it ([85.37.17.100])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1O5OkD-0004zN-E6
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 21:40:59 +0200
-Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out04.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 23 Apr 2010 21:37:19 +0200
-Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 23 Apr 2010 21:37:19 +0200
-Received: from jcn ([87.1.17.95]) by FBCMCL01B09.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Fri, 23 Apr 2010 21:37:18 +0200
-Date: Fri, 23 Apr 2010 21:37:12 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
-To: Khem Raj <raj.khem@gmail.com>
-Message-Id: <20100423213712.f7792bb8.ospite@studenti.unina.it>
-In-Reply-To: <u2y19c1b8a91004230945z4879e2cbsbc4350aad85f7268@mail.gmail.com>
-References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
-	<20100325203900.GB17837@gmail.com>
-	<20100326161724.0dd4dfda.ospite@studenti.unina.it>
-	<20100423142839.0ea82f89.ospite@studenti.unina.it>
-	<u2y19c1b8a91004230945z4879e2cbsbc4350aad85f7268@mail.gmail.com>
-X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O5PZG-0007Zx-LS for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Apr 2010 22:33:47 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O5PVl-0007LC-Rs for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Apr 2010 22:30:05 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Apr 2010 22:30:05 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Apr 2010 22:30:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Apr 2010 22:29:54 +0200
+Message-ID: <hqt003$fvd$1@dough.gmane.org>
+References: <1271852471-16659-1-git-send-email-koen.kooi@gmail.com>	<hqrv2b$a7u$1@dough.gmane.org>
+	<1272046053.3865.425.camel@trini-m4400>	<20100423182217.GB27322@denix.org>
+	<hqsprc$no6$1@dough.gmane.org>
+	<1272048959.3865.478.camel@trini-m4400>
 Mime-Version: 1.0
-X-OriginalArrivalTime: 23 Apr 2010 19:37:18.0505 (UTC)
-	FILETIME=[62867990:01CAE31C]
-X-SA-Exim-Connect-IP: 85.37.17.100
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
+In-Reply-To: <1272048959.3865.478.camel@trini-m4400>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openezx-devel@lists.openezx.org, openembedded-devel@lists.openembedded.org
-Subject: Re: gen-blob size with gcc-4.4.2 SOLVED? (was: [PATCH 0/5] Misc updates for EZX bits in OE)
+Subject: Re: [RFC][PATCH] meta-toolchain: use MULTIMACH_TARGET_SYS instead of TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,141 +54,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 19:40:59 -0000
-X-Groupsio-MsgNum: 18759
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Fri__23_Apr_2010_21_37_12_+0200_E6ka+.kdWSGnzFb+"
-
---Signature=_Fri__23_Apr_2010_21_37_12_+0200_E6ka+.kdWSGnzFb+
+X-List-Received-Date: Fri, 23 Apr 2010 20:33:55 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Fri, 23 Apr 2010 09:45:04 -0700
-Khem Raj <raj.khem@gmail.com> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> On Fri, Apr 23, 2010 at 5:28 AM, Antonio Ospite
-> <ospite@studenti.unina.it> wrote:
-[...]
-> > On Fri, 26 Mar 2010 16:17:24 +0100
-> > Antonio Ospite <ospite@studenti.unina.it> wrote:
-> >
-> >> On Thu, 25 Mar 2010 13:39:00 -0700
-> >> Khem Raj <raj.khem@gmail.com> wrote:
-> >>
-> >> > On (25/03/10 18:19), Antonio Ospite wrote:
-> > [...]
-> >> > > Note that although ezx-gen-blob builds fine now, it seems to have =
-issues with
-> >> > > GCC 4.4: the binary size is about 300KiB instead of the expected 6=
-4KiB, if
-> >> > > anyone has a clue please let me know.
-> >> >
-> >
-> > Comparing the section sizes for the two binaries:
-> > =C2=A0 text =C2=A0 =C2=A0data =C2=A0 =C2=A0 bss =C2=A0 =C2=A0 dec =C2=
-=A0 =C2=A0 hex filename
-> > =C2=A040212 =C2=A0 20764 =C2=A0244356 =C2=A0305332 =C2=A0 4a8b4 blob-re=
-st-elf32-with-gcc-4.1.2
-> > =C2=A039595 =C2=A0265124 =C2=A0 =C2=A0 =C2=A0 4 =C2=A0304723 =C2=A0 4a6=
-53 blob-rest-elf32-with-gcc-4.4.2
-> >
-> > So something fishing about the data and bss sections. After reading
-> > a bit about what ELF sections are[0,1] I'd guess gcc-4.4.2 might be
-> > forcing initializations for uninitialized data putting it in the
-> > binary image and that makes the object file size grow.
-> >
-[...]
-> >
-> > Index: gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
-> > =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> > --- gen-blob-with-gcc-4.4.2.orig/src/blob/rest-ld-script.in
-> > +++ gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
-> > @@ -97,7 +97,8 @@
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0/* and next the =
-stack */
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0. =3D ALIGN(4);
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0__stack_start =
-=3D .;
-> > - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 *(.stack)
-> > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 /* allocate a 16kB s=
-tack */
-> > + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 . =3D . + 16 * 1024;
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0__stack_end =3D =
-.;
-> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0__bss_end =3D .;
-> >
->=20
->=20
-> you already have this in stack.S so its not needed. The correct fix would=
- be to
-> classify the output segment as NOLOAD explicitly like this
->=20
-> 	.bss(NOLOAD) : {
-> 		__bss_start =3D .;
-> 		/* first the real BSS data */
-> 		*(.bss)
->=20
-> 		/* and next the stack */
-> 		. =3D ALIGN(4);
-> 		__stack_start =3D .;
-> 		*(.stack)
-> 		__stack_end =3D .;
-> 		__bss_end =3D .;
-> 	}
->=20
-> you should not need any other changes.
->=20
+On 23-04-10 20:55, Tom Rini wrote:
+> On Fri, 2010-04-23 at 20:45 +0200, Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 23-04-10 20:22, Denys Dmytriyenko wrote:
+>>> On Fri, Apr 23, 2010 at 11:07:33AM -0700, Tom Rini wrote:
+>>>> On Fri, 2010-04-23 at 13:07 +0200, Koen Kooi wrote:
+>>> Ping
+>>>>>
+>>>>> It's better than what we have today, true.  And SDKPATH already contains
+>>>>> DISTRO, which is the likely changer of TOOLCHAIN_*_TASK.  So...
+>>>>>
+>>>>> Acked-by: Tom Rini <tom_rini@mentor.com>
+>>>
+>>>> In general:
+>>>
+>>>> Acked-by: Denys Dmytriyenko <denis@denix.org>
+>>>
+>>>> But, should we then create an arch-specific environment-setup scripts (e.g. 
+>>>> one for armv4 and another for armv7a, as per your example below)?
+>>
+>> Yes, that needs to be done, as well as seperating the cross tools in
+>> case different archs need different versions (as is the case with
+>> angstrom, v5te and v7a need different binutils). This change largely to
+>> to cosmetically highlight that the toolchain is not really "universal"
+>> (yet).
+> 
+> And we can talk about if "universal" is really a good goal either.
 
-This works in fact. Thanks a lot.
+I don't think we can make it "universal" without sacrificing key benefits.
 
-> >> I am using the very ld the toolchain provides, so I they are
-> >> different, and I noted than the 4.4.2 one gives this warning:
-> >> .../arm-oe-linux-gnueabi/bin/ld:
-> >> warning: section `.bss' type changed to PROGBITS
-> >>
->=20
-> The problem is the .stack is
-> not a special nobits section like .bss is so when you club is together
-> in .bss then
-> there is a mismatch and hence the warning.
->=20
+> Taking a bit of a guess in the dark, an SDK with support for all the fun
+> stuff found on Beagleboard might not be done easily with also having
+> support for all the fun stuff found on some other ref board too.
 
-I see, so when using a recent binutils: being .stack considered progbits
-by default, .bss =E2=80=94containing it=E2=80=94 is changed to progbits as =
-well if we
-don't specify otherwise. While with older binutils .bss was kept nobits
-in any case?
+The immediate problem I'm trying to address now is that having both an
+armv5te and armv7a toolchain installed is breaking horribly. Ideally
+they would coexist peacefully, but I don't know if we can manage that,
+without impacting the ease of use.
 
-Thanks again.
+> I tend to think of these exports as being very board specific, but that
+> doesn't quite flow with how others think of this stuff, today.
 
-Best wishes,
-   Antonio
+The current output is highly machine specific, since it will include
+MACHINE_ARCH in the opkg configuration. For gcc/libc/binutils that is
+usually OK (except when using an ep93xx sdk to target e.g. om-gta01),
+but for things like clutter or mesa where the machine directly impacts
+the shared lib it gets ugly real fast.
+Luckily at work I currently have a fairly nice situation: all arm9
+targets are arm926 without any form of VFP/FPA and no 3d accell and all
+cortex-a8 targets have the same VFP and NEON blocks and the 3D accel is
+the same. Of course with my angstrom hat on, the situation is different...
 
---=20
-Antonio Ospite
-http://ao2.it
+I'm eagerly awaiting Richards branch to get merged so I can work on the
+nicer areas of meta-toolchain-qte :)
 
-PGP public key ID: 0x4553B001
+regards,
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Fri__23_Apr_2010_21_37_12_+0200_E6ka+.kdWSGnzFb+
-Content-Type: application/pgp-signature
+Koen
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAkvR9ugACgkQ5xr2akVTsAEzcACcCltw23Got3EkYMxRzSDtJ6jF
-5UUAmgKV/2SPc4hfqPJkANrLNcV/00V2
-=qGoo
+iD8DBQFL0gNCMkyGM64RGpERAiVuAJ4jIidQWTLhphBZl1sK5gxdZ6gM1gCguxNG
+kEfwpxZtU3TJg6cC/XCSSeI=
+=HXKJ
 -----END PGP SIGNATURE-----
 
---Signature=_Fri__23_Apr_2010_21_37_12_+0200_E6ka+.kdWSGnzFb+--
+
+
