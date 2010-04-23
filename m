@@ -1,33 +1,30 @@
-Received: from vms173003pub.verizon.net ([206.46.173.3])
+Received: from bay0-omc4-s21.bay0.hotmail.com ([65.54.190.223])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1O5LHk-0003E9-5x
+	(envelope-from <salehusman@hotmail.com>) id 1O5Ljo-0005Np-5t
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 17:59:52 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.58.177])
-	by vms173003.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L1C00DZ46W4GQ10@vms173003.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	23 Apr 2010 10:55:16 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EAC3314AF60; Fri,
-	23 Apr 2010 11:55:15 -0400 (EDT)
-Date: Fri, 23 Apr 2010 11:55:15 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20100423155515.GA27322@denix.org>
-References: <4BD170BC.8020103@road.de>
-MIME-version: 1.0
-In-reply-to: <4BD170BC.8020103@road.de>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.3
-X-SA-Exim-Mail-From: denis@denix.org
+	Fri, 23 Apr 2010 18:28:21 +0200
+Received: from BAY127-W18 ([65.54.190.199]) by bay0-omc4-s21.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 23 Apr 2010 09:23:39 -0700
+Message-ID: <BAY127-W18C49E409BA1BBC8422B11D8070@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Fri, 23 Apr 2010 22:23:39 +0600
+Importance: Normal
+MIME-Version: 1.0
+X-OriginalArrivalTime: 23 Apr 2010 16:23:39.0489 (UTC)
+	FILETIME=[550D5510:01CAE301]
+X-SA-Exim-Connect-IP: 65.54.190.223
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RCVD_IN_SORBS_WEB,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Patch] locking in do_package_tar
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Problem while booting from OE generated kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,82 +38,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 15:59:57 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
-
-On Fri, Apr 23, 2010 at 12:04:44PM +0200, Jens Erdmann wrote:
-> Hey folks,
->
-> I would like to introduce locking in do_package_tar. I had a case here were 
-> do_package_tar and do_package_ipk where running parallel. Because of this 
-> "tar: .: file changed as we read it" occurs. I fixed it by introduce 
-> locking in do_package_tar. What do you think about it?
-
-Ah, I've been suffering from this problem for quite some time now, when making 
-parallel builds with BB_NUMBER_THREADS. I was trying to debug it and noticed 
-it would fail when kernel recipe would try to do_deploy at the same time 
-another package would try to do_package_stage, so I was digging in the 
-packaged staging direction. Tom Rini even made a patch to add an extra lock in 
-there, which didn't help with my issue...
-So, let me try your patch and see if this problem is gone for good! Thanks.
-
--- 
-Denys
-
-> -- 
-> ------- ROAD ...the handyPC Company - - -  ) ) )
->
-> Jens Erdmann
-> Software Development
->
-> ROAD GmbH
-> Bennigsenstr. 14 | 12159 Berlin | Germany
-> fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
-> url: www.road.de
->
-> Amtsgericht Charlottenburg: HRB 96688 B
-> Managing director: Hans-Peter Constien
->
-
-> diff --git a/classes/package_tar.bbclass b/classes/package_tar.bbclass
-> index b905e17..47bf2cc 100644
-> --- a/classes/package_tar.bbclass
-> +++ b/classes/package_tar.bbclass
-> @@ -58,6 +58,7 @@ python do_package_tar () {
->  		localdata = bb.data.createCopy(d)
->  		pkgdest = bb.data.getVar('PKGDEST', d, 1)
->  		root = "%s/%s" % (pkgdest, pkg)
-> +		lf = bb.utils.lockfile(root + ".lock")
->  
->  		bb.data.setVar('ROOT', '', localdata)
->  		bb.data.setVar('ROOT_%s' % pkg, root, localdata)
-> @@ -65,6 +66,7 @@ python do_package_tar () {
->  
->  		overrides = bb.data.getVar('OVERRIDES', localdata)
->  		if not overrides:
-> +			bb.utils.unlockfile(lf)
->  			raise bb.build.FuncFailed('OVERRIDES not defined')
->  		overrides = bb.data.expand(overrides, localdata)
->  		bb.data.setVar('OVERRIDES', '%s:%s' % (overrides, pkg), localdata)
-> @@ -82,10 +84,12 @@ python do_package_tar () {
->  		from glob import glob
->  		if not glob('*') + glob('.[!.]*'):
->  			bb.note("Not creating empty archive for %s-%s" % (pkg, bb.data.expand('${PV}-${PR}${DISTRO_PR}', d, True)))
-> +			bb.utils.unlockfile(lf)
->  			continue
->  		ret = os.system("tar -czf %s %s" % (tarfn, '.'))
->  		if ret != 0:
->  			bb.error("Creation of tar %s failed." % tarfn)
-> +		bb.utils.unlockfile(lf)
->  }
->  
->  python () {
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+X-List-Received-Date: Fri, 23 Apr 2010 16:28:21 -0000
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
 
+ Hi
+I've built console-image for dm6446 and now I am having problem while booti=
+ng kernel
+image after writint it to NAND flash.When I enter boot command in
+U-BOOT linux kernel stuck at uncompressing linux.Terminal log is show below
+=20
+I want to  enable  serial port to print debug messages=2CI've checked for K=
+Config file  in=20
+/recipes/linux/linux-davinci directory but that's not there .Where I may fi=
+nd this ?
+
+By setting
+this feature I've to build console-image again?
+
+Also I am using already present U-boot in my board and that's not OE genera=
+ted.can this create some problem?
+
+One=20
+thing more  that  in OE generated  output i.e.
+/deploy/glibc/images/dm6446-evm there are three file system images and
+one kernel image but there is no U-boot.Are all three file systems same
+and where should be u-boot?
+
+Terminal log is here
+U-Boot > boot                                                              =
+    =20
+                                                                           =
+    =20
+Loading from NAND 256MiB 1=2C8V 8-bit=2C offset 0x120000                   =
+        =20
+   Image Name:   Linux-2.6.32-rc2-davinci1                                 =
+    =20
+   Created:      2010-03-15   9:44:32 UTC                                  =
+    =20
+   Image Type:   ARM Linux Kernel Image (uncompressed)                     =
+    =20
+   Data Size:    1080360 Bytes =3D  1 MB                                   =
+      =20
+   Load Address: 80008000                                                  =
+    =20
+   Entry Point:  80008000                                                  =
+    =20
+## Booting kernel from Legacy Image at 80700000 ...                        =
+    =20
+   Image Name:   Linux-2.6.32-rc2-davinci1                                 =
+    =20
+   Created:      2010-03-15   9:44:32 UTC                                  =
+    =20
+   Image Type:   ARM Linux Kernel Image (uncompressed)                     =
+    =20
+   Data Size:    1080360 Bytes =3D  1 MB                                   =
+      =20
+   Load Address: 80008000                                                  =
+    =20
+   Entry Point:  80008000                                                  =
+    =20
+   Verifying Checksum ... OK                                               =
+    =20
+   Loading Kernel Image ... OK                                             =
+    =20
+OK                                                                         =
+    =20
+                                                                           =
+    =20
+Starting kernel ...                                                        =
+    =20
+                                                                           =
+    =20
+Uncompressing Linux........................................................=
+.....
+
+
+Saleh 		 	   		 =20
+_________________________________________________________________
+Hotmail: Trusted email with Microsoft=92s powerful SPAM protection.
+https://signup.live.com/signup.aspx?id=3D60969=
 
