@@ -1,43 +1,33 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O5L0b-00041L-Eu for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 17:41:38 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O5Kx2-0000ra-FJ for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 17:37:56 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 17:37:56 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 17:37:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <denis@denix.org>) id 1O5LHk-0003E9-5x
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Apr 2010 17:59:52 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.58.177])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L1C00DZ46W4GQ10@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	23 Apr 2010 10:55:16 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id EAC3314AF60; Fri,
+	23 Apr 2010 11:55:15 -0400 (EDT)
+Date: Fri, 23 Apr 2010 11:55:15 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Apr 2010 17:37:46 +0200
-Message-ID: <hqsesa$bc4$1@dough.gmane.org>
-References: <4BD1B1AD.9050505@road.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
-In-Reply-To: <4BD1B1AD.9050505@road.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-id: <20100423155515.GA27322@denix.org>
+References: <4BD170BC.8020103@road.de>
+MIME-version: 1.0
+In-reply-to: <4BD170BC.8020103@road.de>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: package installed_size field
+Subject: Re: [Patch] locking in do_package_tar
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,42 +41,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 15:41:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Apr 2010 15:59:57 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Apr 23, 2010 at 12:04:44PM +0200, Jens Erdmann wrote:
+> Hey folks,
+>
+> I would like to introduce locking in do_package_tar. I had a case here were 
+> do_package_tar and do_package_ipk where running parallel. Because of this 
+> "tar: .: file changed as we read it" occurs. I fixed it by introduce 
+> locking in do_package_tar. What do you think about it?
 
-On 23-04-10 16:41, Jens Erdmann wrote:
-> Hi folks,
-> 
-> I have a question in package creation. In my build process i create ipkg
-> packages and i don't understand, how the installed_size has to be
-> detected and where it will be set. My first idea were the
-> package_ipkg.bbclass but it's missing there. How do you manage this?
+Ah, I've been suffering from this problem for quite some time now, when making 
+parallel builds with BB_NUMBER_THREADS. I was trying to debug it and noticed 
+it would fail when kernel recipe would try to do_deploy at the same time 
+another package would try to do_package_stage, so I was digging in the 
+packaged staging direction. Tom Rini even made a patch to add an extra lock in 
+there, which didn't help with my issue...
+So, let me try your patch and see if this problem is gone for good! Thanks.
 
-Historically we don't handle this, because in opkg "installed_size" is
-not tightly defined, so when installing it on e.g. compressed ubifs the
-*actual* installed size is usually less than the size on e.g. ext2. The
-fear was that package managers would refuse to install e.g. a 30MB text
-file when ubifs reports 29MB free, even if that file would only occupy
-3MB of actual space.
+-- 
+Denys
 
-That's the background, I personally would like to include that (the
-"uncompressed image size") info in the package, but I am unsure what the
-implications are of that when using a recent opkg.
+> -- 
+> ------- ROAD ...the handyPC Company - - -  ) ) )
+>
+> Jens Erdmann
+> Software Development
+>
+> ROAD GmbH
+> Bennigsenstr. 14 | 12159 Berlin | Germany
+> fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
+> url: www.road.de
+>
+> Amtsgericht Charlottenburg: HRB 96688 B
+> Managing director: Hans-Peter Constien
+>
 
-regards,
+> diff --git a/classes/package_tar.bbclass b/classes/package_tar.bbclass
+> index b905e17..47bf2cc 100644
+> --- a/classes/package_tar.bbclass
+> +++ b/classes/package_tar.bbclass
+> @@ -58,6 +58,7 @@ python do_package_tar () {
+>  		localdata = bb.data.createCopy(d)
+>  		pkgdest = bb.data.getVar('PKGDEST', d, 1)
+>  		root = "%s/%s" % (pkgdest, pkg)
+> +		lf = bb.utils.lockfile(root + ".lock")
+>  
+>  		bb.data.setVar('ROOT', '', localdata)
+>  		bb.data.setVar('ROOT_%s' % pkg, root, localdata)
+> @@ -65,6 +66,7 @@ python do_package_tar () {
+>  
+>  		overrides = bb.data.getVar('OVERRIDES', localdata)
+>  		if not overrides:
+> +			bb.utils.unlockfile(lf)
+>  			raise bb.build.FuncFailed('OVERRIDES not defined')
+>  		overrides = bb.data.expand(overrides, localdata)
+>  		bb.data.setVar('OVERRIDES', '%s:%s' % (overrides, pkg), localdata)
+> @@ -82,10 +84,12 @@ python do_package_tar () {
+>  		from glob import glob
+>  		if not glob('*') + glob('.[!.]*'):
+>  			bb.note("Not creating empty archive for %s-%s" % (pkg, bb.data.expand('${PV}-${PR}${DISTRO_PR}', d, True)))
+> +			bb.utils.unlockfile(lf)
+>  			continue
+>  		ret = os.system("tar -czf %s %s" % (tarfn, '.'))
+>  		if ret != 0:
+>  			bb.error("Creation of tar %s failed." % tarfn)
+> +		bb.utils.unlockfile(lf)
+>  }
+>  
+>  python () {
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL0b7JMkyGM64RGpERAte3AJ4l7aa8lcrl5GqjNgAYwLJTFLo06ACgnuxZ
-ivi3OMdwFFDpAzQcPZNH054=
-=qSJ6
------END PGP SIGNATURE-----
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
