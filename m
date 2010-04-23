@@ -1,31 +1,34 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from server.road.de ([85.10.209.111] helo=mail.road.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1O5Ij5-0003dw-D6
+	(envelope-from <j.erdmann@road.de>) id 1O5K8C-00017y-E2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 15:15:24 +0200
-Received: from [192.168.1.9] (dialbs-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 8EC835846E9
+	Fri, 23 Apr 2010 16:45:25 +0200
+Received: from slimfast.dyndns.org (unknown [192.168.254.1])
+	by mail.road.de (Postfix) with ESMTP id 0368239000B
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 15:16:10 +0200 (CEST)
-Mime-Version: 1.0 (Apple Message framework v1078)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <1272026558-6493-1-git-send-email-mchazaux@adeneo-embedded.com>
-Date: Fri, 23 Apr 2010 15:11:46 +0200
-Message-Id: <EEA73A5C-2112-472C-A4C0-6F12B4D7E198@vanille-media.de>
-References: <1272026558-6493-1-git-send-email-mchazaux@adeneo-embedded.com>
+	Fri, 23 Apr 2010 16:41:50 +0200 (CEST)
+Received: from [192.168.116.53] (bienemaja.handy-pc.constin.de
+	[192.168.116.53])
+	by slimfast.dyndns.org (Postfix) with ESMTP id A73E045416D
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Apr 2010 16:41:49 +0200 (CEST)
+Message-ID: <4BD1B1AD.9050505@road.de>
+Date: Fri, 23 Apr 2010 16:41:49 +0200
+From: Jens Erdmann <j.erdmann@road.de>
+Organization: Road GmbH
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100411 Icedove/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1078)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-SA-Exim-Connect-IP: 85.10.209.111
+X-SA-Exim-Mail-From: j.erdmann@road.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add error handling to stage-manager
+Subject: package installed_size field
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,55 +42,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 13:15:24 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 23 Apr 2010 14:45:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
+
+Hi folks,
+
+I have a question in package creation. In my build process i create ipkg 
+packages and i don't understand, how the installed_size has to be 
+detected and where it will be set. My first idea were the 
+package_ipkg.bbclass but it's missing there. How do you manage this?
 
 
-Am 23.04.2010 um 14:42 schrieb Micka=EBl Chazaux:
+-- 
+------- ROAD ...the handyPC Company - - -  ) ) )
 
-> 	Add an error message telling the cause of the crash to the user.
-> ---
-> recipes/stage-manager/files/stage-manager |   14 +++++++++-----
-> 1 files changed, 9 insertions(+), 5 deletions(-)
->=20
-> diff --git a/recipes/stage-manager/files/stage-manager =
-b/recipes/stage-manager/files/stage-manager
-> index 536d1af..a2ecebe 100755
-> --- a/recipes/stage-manager/files/stage-manager
-> +++ b/recipes/stage-manager/files/stage-manager
-> @@ -29,11 +29,15 @@ def read_cache(cachefile):
->     lines =3D f.readlines()
->     f.close()
->     for l in lines:
-> -        data =3D l.split('|')
-> -        cache[data[0]] =3D {}
-> -        cache[data[0]]['ts'] =3D int(data[1])
-> -        cache[data[0]]['size'] =3D int(data[2])
-> -        cache[data[0]]['seen'] =3D False
-> +	try:
-> +            data =3D l.split('|')
-> +            cache[data[0]] =3D {}
-> +            cache[data[0]]['ts'] =3D int(data[1])
-> +            cache[data[0]]['size'] =3D int(data[2])
-> +            cache[data[0]]['seen'] =3D False
-> +	except IndexError, e:
-> +            print("Corrupted line in cachefile " + cachefile + " : " =
-+ l)
-> +	    raise e
->     return cache
->=20
+Jens Erdmann
+Software Development
 
-Completely unrelated, but this code is slow. The recurring
-evaluation of cache[data[0]] is not being cached or optimized,
-I suggest something along:
+ROAD GmbH
+Bennigsenstr. 14 | 12159 Berlin | Germany
+fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
+url: www.road.de
 
-d =3D cache[data[0]] =3D {}
-d["ts"] =3D int(data[1])
-d["size"] =3D int(data[2])
-...
-
-:M:
+Amtsgericht Charlottenburg: HRB 96688 B
+Managing director: Hans-Peter Constien
 
 
 
