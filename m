@@ -1,43 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-out05a.alice.it ([85.33.3.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O5GnN-00036P-43 for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 13:11:43 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O5Gjt-0008GZ-6s for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 13:08:05 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 13:08:05 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 13:08:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <ospite@studenti.unina.it>) id 1O5I3U-0007t1-OY
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Apr 2010 14:32:26 +0200
+Received: from FBCMMO05.fbc.local ([7.168.68.254]) by smtp-OUT05A.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 23 Apr 2010 14:28:48 +0200
+Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 23 Apr 2010 14:28:46 +0200
+Received: from jcn ([87.1.17.95]) by FBCMCL01B05.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Fri, 23 Apr 2010 14:28:45 +0200
+Date: Fri, 23 Apr 2010 14:28:39 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Apr 2010 13:07:55 +0200
-Message-ID: <hqrv2b$a7u$1@dough.gmane.org>
-References: <1271852471-16659-1-git-send-email-koen.kooi@gmail.com>
+Message-Id: <20100423142839.0ea82f89.ospite@studenti.unina.it>
+In-Reply-To: <20100326161724.0dd4dfda.ospite@studenti.unina.it>
+References: <1269537597-26456-1-git-send-email-ospite@studenti.unina.it>
+	<20100325203900.GB17837@gmail.com>
+	<20100326161724.0dd4dfda.ospite@studenti.unina.it>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
-In-Reply-To: <1271852471-16659-1-git-send-email-koen.kooi@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-OriginalArrivalTime: 23 Apr 2010 12:28:45.0950 (UTC)
+	FILETIME=[84A5F1E0:01CAE2E0]
+X-SA-Exim-Connect-IP: 85.33.3.5
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL, BAYES_00, RCVD_ILLEGAL_IP
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] meta-toolchain: use MULTIMACH_TARGET_SYS instead of TARGET_SYS
+Cc: openezx-devel@lists.openezx.org
+Subject: Re: gen-blob size with gcc-4.4.2 SOLVED? (was: [PATCH 0/5] Misc updates for EZX bits in OE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,155 +50,195 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 11:11:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Apr 2010 12:32:26 -0000
+X-Groupsio-MsgNum: 18746
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Fri__23_Apr_2010_14_28_39_+0200_lvVyfKJvgu.vpZHl"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Signature=_Fri__23_Apr_2010_14_28_39_+0200_lvVyfKJvgu.vpZHl
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Ping
+WARNING:
+This was going to be a
+  "I didn't know what I was doing but it worked"
+kind of post, but then I did some homework and now I think I know a bit
+more about what I did :)
 
-On 21-04-10 14:21, Koen Kooi wrote:
-> From: Koen Kooi <koen@openembedded.org>
-> 
-> This is the first step to be able to mix multiple arm archs (and ABIs) when installing multiple SDKs on one buildhost (e.g. armv4 and armv7a).
-> 
-> ---
->  recipes/meta/meta-toolchain.bb |   50 ++++++++++++++++++++--------------------
->  1 files changed, 25 insertions(+), 25 deletions(-)
-> 
-> diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-> index adc057a..2e2196a 100644
-> --- a/recipes/meta/meta-toolchain.bb
-> +++ b/recipes/meta/meta-toolchain.bb
-> @@ -10,7 +10,7 @@ SDK_OUTPUT2 = "${SDK_DIR}/image-extras"
->  SDK_DEPLOY = "${DEPLOY_DIR}/sdk"
->  
->  IPKG_HOST = "opkg-cl -f ${IPKGCONF_SDK} -o ${SDK_OUTPUT}"
-> -IPKG_TARGET = "opkg-cl -f ${IPKGCONF_TARGET} -o ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}"
-> +IPKG_TARGET = "opkg-cl -f ${IPKGCONF_TARGET} -o ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}"
->  
->  TOOLCHAIN_HOST_TASK ?= "task-sdk-host"
->  TOOLCHAIN_TARGET_TASK ?= "task-sdk-bare"
-> @@ -26,14 +26,14 @@ RDEPENDS = "${DISTRO_FEED_CONFIGS} ${TOOLCHAIN_TARGET_TASK} ${TOOLCHAIN_HOST_TAS
->  TOOLCHAIN_FEED_URI ?= "${DISTRO_FEED_URI}"
->  
->  modify_opkg_conf () {
-> -        OUTPUT_OPKGCONF_TARGET="${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/opkg.conf"
-> -        OUTPUT_OPKGCONF_HOST="${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/opkg-sdk.conf"
-> +        OUTPUT_OPKGCONF_TARGET="${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sysconfdir}/opkg.conf"
-> +        OUTPUT_OPKGCONF_HOST="${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sysconfdir}/opkg-sdk.conf"
->          OUTPUT_OPKGCONF_SDK="${SDK_OUTPUT}/${sysconfdir}/opkg-sdk.conf"
->          rm -f ${OUTPUT_OPKGCONF_TARGET}
->          rm -f ${OUTPUT_OPKGCONF_HOST}
->          rm -f ${OUTPUT_OPKGCONF_SDK}
->  
-> -        if [ -e ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/opkg/arch.conf ] ; then
-> +        if [ -e ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sysconfdir}/opkg/arch.conf ] ; then
->              echo "Creating empty opkg.conf since arch.conf is already present"
->              echo > ${OUTPUT_OPKGCONF_TARGET} 
->          else
-> @@ -53,7 +53,7 @@ do_populate_sdk() {
->  	rm -rf ${SDK_OUTPUT}
->  	mkdir -p ${SDK_OUTPUT}
->  	mkdir -p ${SDK_OUTPUT}${libdir}/opkg/
-> -	mkdir -p ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}${libdir}/opkg/
-> +	mkdir -p ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}${libdir}/opkg/
->  
->  	package_generate_ipkg_conf
->  
-> @@ -79,17 +79,17 @@ do_populate_sdk() {
->  	# Clean up empty directories from excluded packages
->  	find ${SDK_OUTPUT} -depth -type d -empty -print0 | xargs -r0 /bin/rmdir
->  
-> -	install -d ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}
-> -	install -m 0644 ${IPKGCONF_TARGET} ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/${sysconfdir}/
-> +	install -d ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sysconfdir}
-> +	install -m 0644 ${IPKGCONF_TARGET} ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/${sysconfdir}/
->  
->  	install -d ${SDK_OUTPUT}/${SDKPATH}/${sysconfdir}
->  	install -m 0644 ${IPKGCONF_SDK} ${SDK_OUTPUT}/${SDKPATH}/${sysconfdir}/
->  
->  	# extract and store ipks, pkgdata and shlibs data
-> -	target_pkgs=`cat ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/usr/lib/opkg/status | grep Package: | cut -f 2 -d ' '`
-> +	target_pkgs=`cat ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/usr/lib/opkg/status | grep Package: | cut -f 2 -d ' '`
->  	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/ipk/
->  	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/pkgdata/runtime/
-> -	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/${TARGET_SYS}/shlibs/
-> +	mkdir -p ${SDK_OUTPUT2}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/shlibs/
->  	for pkg in $target_pkgs ; do
->  		for arch in $revipkgarchs; do
->  			pkgnames=${DEPLOY_DIR_IPK}/$arch/${pkg}_*_$arch.ipk
-> @@ -107,7 +107,7 @@ do_populate_sdk() {
->  						cp ${TMPDIR}/pkgdata/$pkg_subdir/runtime/$subpkg.packaged ${SDK_OUTPUT2}/${SDKPATH}/pkgdata/$pkg_subdir/runtime/
->  					fi
->  					if [ -e ${STAGING_DIR_TARGET}/shlibs/$subpkg.list ]; then
-> -						cp ${STAGING_DIR_TARGET}/shlibs/$subpkg.* ${SDK_OUTPUT2}/${SDKPATH}/${TARGET_SYS}/shlibs/
-> +						cp ${STAGING_DIR_TARGET}/shlibs/$subpkg.* ${SDK_OUTPUT2}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/shlibs/
->  					fi
->  				done
->  				break
-> @@ -119,20 +119,20 @@ do_populate_sdk() {
->  	# libgcc-dev should be responsible for that, but it's not getting built
->  	# RP: it gets smashed up depending on the order that gcc, gcc-cross and 
->  	# gcc-cross-sdk get built :( (30/11/07)
-> -	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/lib/libgcc_s.so
-> +	ln -sf libgcc_s.so.1 ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/lib/libgcc_s.so
->  
->  	# With sysroot support, gcc expects the default C++ headers to be
->  	# in a specific place.
-> -	install -d ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/include
-> -	mv ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/usr/include/c++ \
-> -		${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS}/include/
-> +	install -d ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/include
-> +	mv ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/usr/include/c++ \
-> +		${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS}/include/
->  
->  	# Fix or remove broken .la files
-> -	for i in `find ${SDK_OUTPUT}/${SDKPATH}/${TARGET_SYS} -name \*.la`; do
-> -		sed -i 	-e "/^dependency_libs=/s,\([[:space:]']\)${base_libdir},\1\$SDK_PATH/\$TARGET_SYS${base_libdir},g" \
-> -			-e "/^dependency_libs=/s,\([[:space:]']\)${libdir},\1\$SDK_PATH/\$TARGET_SYS${libdir},g" \
-> -			-e "/^dependency_libs=/s,\-\([LR]\)${base_libdir},-\1\$SDK_PATH/\$TARGET_SYS${base_libdir},g" \
-> -			-e "/^dependency_libs=/s,\-\([LR]\)${libdir},-\1\$SDK_PATH/\$TARGET_SYS${libdir},g" \
-> +	for i in `find ${SDK_OUTPUT}/${SDKPATH}/${MULTIMACH_TARGET_SYS} -name \*.la`; do
-> +		sed -i 	-e "/^dependency_libs=/s,\([[:space:]']\)${base_libdir},\1\$SDK_PATH/\$MULTIMACH_TARGET_SYS${base_libdir},g" \
-> +			-e "/^dependency_libs=/s,\([[:space:]']\)${libdir},\1\$SDK_PATH/\$MULTIMACH_TARGET_SYS${libdir},g" \
-> +			-e "/^dependency_libs=/s,\-\([LR]\)${base_libdir},-\1\$SDK_PATH/\$MULTIMACH_TARGET_SYS${base_libdir},g" \
-> +			-e "/^dependency_libs=/s,\-\([LR]\)${libdir},-\1\$SDK_PATH/\$MULTIMACH_TARGET_SYS${libdir},g" \
->  			-e 's/^installed=yes$/installed=no/' $i
->  	done
->  	rm -f ${SDK_OUTPUT}/${SDKPATH}/lib/*.la
-> @@ -148,15 +148,15 @@ do_populate_sdk() {
->  	script=${SDK_OUTPUT}/${SDKPATH}/environment-setup
->  	touch $script
->  	echo 'export SDK_PATH=${SDKPATH}' >> $script
-> -	echo 'export TARGET_SYS=${TARGET_SYS}' >> $script
-> +	echo 'export MULTIMACH_TARGET_SYS=${MULTIMACH_TARGET_SYS}' >> $script
->  	echo 'export PATH=$SDK_PATH/bin:$PATH' >> $script
-> -	echo 'export CPATH=$SDK_PATH/$TARGET_SYS/usr/include:$CPATH' >> $script
-> -	echo 'export LIBTOOL_SYSROOT_PATH=$SDK_PATH/$TARGET_SYS' >> $script
-> -	echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$TARGET_SYS' >> $script
-> -	echo 'export PKG_CONFIG_PATH=$SDK_PATH/$TARGET_SYS${libdir}/pkgconfig' >> $script
-> +	echo 'export CPATH=$SDK_PATH/$MULTIMACH_TARGET_SYS/usr/include:$CPATH' >> $script
-> +	echo 'export LIBTOOL_SYSROOT_PATH=$SDK_PATH/$MULTIMACH_TARGET_SYS' >> $script
-> +	echo 'export PKG_CONFIG_SYSROOT_DIR=$SDK_PATH/$MULTIMACH_TARGET_SYS' >> $script
-> +	echo 'export PKG_CONFIG_PATH=$SDK_PATH/$MULTIMACH_TARGET_SYS${libdir}/pkgconfig' >> $script
->  	echo 'export CONFIG_SITE=$SDK_PATH/site-config' >> $script
->  	echo 'alias opkg="LD_LIBRARY_PATH=$SDK_PATH/lib $SDK_PATH/bin/opkg-cl -f $SDK_PATH/${sysconfdir}/opkg-sdk.conf -o $SDK_PATH"' >> $script
-> -	echo 'alias opkg-target="LD_LIBRARY_PATH=$SDK_PATH/lib $SDK_PATH/bin/opkg-cl -f $SDK_PATH/$TARGET_SYS${sysconfdir}/opkg.conf -o $SDK_PATH/$TARGET_SYS"' >> $script
-> +	echo 'alias opkg-target="LD_LIBRARY_PATH=$SDK_PATH/lib $SDK_PATH/bin/opkg-cl -f $SDK_PATH/$MULTIMACH_TARGET_SYS${sysconfdir}/opkg.conf -o $SDK_PATH/$MULTIMACH_TARGET_SYS"' >> $script
->  
->  	# Add version information
->  	versionfile=${SDK_OUTPUT}/${SDKPATH}/version
+The post below is quite lengthy as it contains all the steps I went
+through in order to come to some conclusions.
+
+On Fri, 26 Mar 2010 16:17:24 +0100
+Antonio Ospite <ospite@studenti.unina.it> wrote:
+
+> On Thu, 25 Mar 2010 13:39:00 -0700
+> Khem Raj <raj.khem@gmail.com> wrote:
+>=20
+> > On (25/03/10 18:19), Antonio Ospite wrote:
+[...]
+> > > Note that although ezx-gen-blob builds fine now, it seems to have iss=
+ues with
+> > > GCC 4.4: the binary size is about 300KiB instead of the expected 64Ki=
+B, if
+> > > anyone has a clue please let me know.
+> >
+
+Comparing the section sizes for the two binaries:
+   text    data     bss     dec     hex filename
+  40212   20764  244356  305332   4a8b4 blob-rest-elf32-with-gcc-4.1.2
+  39595  265124       4  304723   4a653 blob-rest-elf32-with-gcc-4.4.2
+
+So something fishing about the data and bss sections. After reading
+a bit about what ELF sections are[0,1] I'd guess gcc-4.4.2 might be
+forcing initializations for uninitialized data putting it in the
+binary image and that makes the object file size grow.
+
+This explanation would also help me to understand more the warning
+message:
+.../arm-oe-linux-gnueabi/bin/ld:
+warning: section `.bss' type changed to PROGBITS
+
+> > I can help you here. If you can give me the two images with symbols and
+> > your linking script it uses. Secondly are you using same binutils/ld in
+> > both cases ?
+> >
+>
+
+I also had to learn what a linker script[2] is, it can be used to
+define sections properties and object files layout, right?
+The one used by blob/gen-blob is here:
+http://svn.openezx.org/trunk/src/blob/gen-blob/src/blob/rest-ld-script.in
+
+Now, looking at the bss section, I noted that there is a "nested"
+"stack" section, this is different from the other sections, so as a
+first naive/blind try I changed that from:
+	. =3D ALIGN(4);
+	.bss : {
+		__bss_start =3D .;
+		/* first the real BSS data */
+		*(.bss)=20
+
+		/* and next the stack */
+		. =3D ALIGN(4);
+		__stack_start =3D .;
+		*(.stack)
+		__stack_end =3D .;
+		__bss_end =3D .;
+	}
+to
+	/* the BSS section should *always* be the last section */
+	. =3D ALIGN(4);
+	.bss : {
+		__bss_start =3D .;
+		/* first the real BSS data */
+		*(.bss)=20
+		__bss_end =3D .;
+	}
+
+	/* and next the stack */
+	. =3D ALIGN(4);
+	.stack : {
+		__stack_start =3D .;
+		*(.stack)
+		__stack_end =3D .;
+	}
+
+And the binary sizes is now:
+   text    data     bss     dec     hex filename
+  40212   20764  244356  305332   4a8b4 blob-rest-elf32-with-gcc-4.1.2
+  39595   20772  227972  288339   46653 blob-rest-elf32-with-gcc-4.4.2
+
+The "strange thing" is that after this blind change from a very rough
+guess-work the binary even seemed to work... so I did some more research
+to figure out a more "correct" solution.
+
+I found out somewhere on the interwebs that the "nesting" shouldn't be a
+problem, and that stack size can be defined directly inside the
+linker script, like in [3], so I tried with this change (getting the
+actual stack size from src/blob/stack.S):
+
+Index: gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--- gen-blob-with-gcc-4.4.2.orig/src/blob/rest-ld-script.in
++++ gen-blob-with-gcc-4.4.2/src/blob/rest-ld-script.in
+@@ -97,7 +97,8 @@
+                /* and next the stack */
+                . =3D ALIGN(4);
+                __stack_start =3D .;
+-               *(.stack)
++               /* allocate a 16kB stack */
++               . =3D . + 16 * 1024;
+                __stack_end =3D .;
+                __bss_end =3D .;
+
+
+Sizes are now:
+   text    data     bss     dec     hex filename
+  40212   20764  244356  305332   4a8b4 blob-rest-elf32-with-gcc-4.1.2
+  39595   20772  244356  304723   4a653 blob-rest-elf32-with-gcc-4.4.2
+
+bss size matches, this a good sign, not a coincidence, isnt'it? And
+the binary still works. Is that really ok?
+
+[...]
+> I am using the very ld the toolchain provides, so I they are
+> different, and I noted than the 4.4.2 one gives this warning:
+> .../arm-oe-linux-gnueabi/bin/ld:
+> warning: section `.bss' type changed to PROGBITS
+>
+
+This warning goes away with either the changes above.
+
+So the last patch above would look ok to me, I think I figured out WHAT
+was happening, but I don't understand WHY this change is necessary.
+Is that the section name ".stack" defined in stack.S is not recognized?
+If so, why?
+
+Khem I am now only asking you if you can help me understand why newer
+GCCs don't behave in the same way as older ones wrt. this aspect.
+Thanks.
+
+> The problem seems to rise during linking indeed, the size difference
+> of .o files produced by the two toolchains is ~ 3 KiB overall, it does
+> not seem to justify the bump I have after linking to more than 200KiB.
+>
+
+After several hours spent on this, but with at least some XP gained :)
+Yours truly,
+   Antonio
+
+[0]
+http://infocenter.arm.com/help/topic/com.arm.doc.dui0101a/DUI0101A_Elf.pdf
+[1]
+http://www.tortall.net/projects/yasm/manual/html/objfmt-elf-section.html
+[2] http://www.math.utah.edu/docs/info/ld_toc.html#SEC4
+[3] http://sourceware.org/ml/binutils/2007-11/msg00016.html
+
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Fri__23_Apr_2010_14_28_39_+0200_lvVyfKJvgu.vpZHl
+Content-Type: application/pgp-signature
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFL0X+LMkyGM64RGpERAjk7AJ44eTjMVw7SD+Qapa1LdwJO5tiEXQCcCw2S
-EHftzrdtZOChyR9eIKhJ0aw=
-=AHEQ
+iEYEARECAAYFAkvRkncACgkQ5xr2akVTsAE2BgCeNn3Dhv04wDSOfzEu5PrY/EjU
+NJUAn3ejPaRmjqKFe7vsX+sELyHXEOne
+=NvXR
 -----END PGP SIGNATURE-----
 
-
-
+--Signature=_Fri__23_Apr_2010_14_28_39_+0200_lvVyfKJvgu.vpZHl--
