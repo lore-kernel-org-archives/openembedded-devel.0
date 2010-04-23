@@ -1,45 +1,31 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1O5II1-0002rn-GO
+	(envelope-from <mickey@vanille-media.de>) id 1O5Ij5-0003dw-D6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Apr 2010 14:47:25 +0200
-Received: by wwb18 with SMTP id 18so5382039wwb.6
+	Fri, 23 Apr 2010 15:15:24 +0200
+Received: from [192.168.1.9] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 8EC835846E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Apr 2010 05:43:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=RKX7pNnR2N9arQMOJ/wYoR8xw1JBTzs/7oo1gAT2GWY=;
-	b=eB2NEcZQ86Avk5TgK8c6iZh2BM+NzraWF3JUj+/KP8pZv0sJgKARZ/yev+3KcSB2Z8
-	KLWQyhWX4DneKZjV23h7gFTmLUppK0JirmPpnKDaHR6g9gc/VZD0Oj2udnqjWV4a5VqP
-	8EnzyswEAx99ZHuIpDY9KdqdpyA0VH/mJc+38=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=OVhG8v4ccXRF3UIIINUSg7tSHojqE7KkJZ+tW4La5g6c5VTxjm6D1PQ91JK2df/cwc
-	hgpdQLPt6gbOT0uvbPZTpPnAtn13NFjbuwcXU8O+MrGJuQyiSGAo4z8awyTyEZ17nGNy
-	KJkQfH5GGZt4il0YaC/tkrvcueu6slRZ9/9gc=
-Received: by 10.216.88.20 with SMTP id z20mr1922740wee.222.1272026627446;
-	Fri, 23 Apr 2010 05:43:47 -0700 (PDT)
-Received: from localhost.localdomain (delta360.server4you.de [85.25.136.130])
-	by mx.google.com with ESMTPS id l46sm450084wed.10.2010.04.23.05.43.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 23 Apr 2010 05:43:46 -0700 (PDT)
-Sender: Mickael Chazaux <mickael.chazaux@gmail.com>
-From: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
+	Fri, 23 Apr 2010 15:16:10 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1078)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <1272026558-6493-1-git-send-email-mchazaux@adeneo-embedded.com>
+Date: Fri, 23 Apr 2010 15:11:46 +0200
+Message-Id: <EEA73A5C-2112-472C-A4C0-6F12B4D7E198@vanille-media.de>
+References: <1272026558-6493-1-git-send-email-mchazaux@adeneo-embedded.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 23 Apr 2010 14:42:38 +0200
-Message-Id: <1272026558-6493-1-git-send-email-mchazaux@adeneo-embedded.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
-Subject: [PATCH] Add error handling to stage-manager
+Subject: Re: [PATCH] Add error handling to stage-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,40 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Apr 2010 12:47:26 -0000
+X-List-Received-Date: Fri, 23 Apr 2010 13:15:24 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-	Add an error message telling the cause of the crash to the user.
----
- recipes/stage-manager/files/stage-manager |   14 +++++++++-----
- 1 files changed, 9 insertions(+), 5 deletions(-)
 
-diff --git a/recipes/stage-manager/files/stage-manager b/recipes/stage-manager/files/stage-manager
-index 536d1af..a2ecebe 100755
---- a/recipes/stage-manager/files/stage-manager
-+++ b/recipes/stage-manager/files/stage-manager
-@@ -29,11 +29,15 @@ def read_cache(cachefile):
-     lines = f.readlines()
-     f.close()
-     for l in lines:
--        data = l.split('|')
--        cache[data[0]] = {}
--        cache[data[0]]['ts'] = int(data[1])
--        cache[data[0]]['size'] = int(data[2])
--        cache[data[0]]['seen'] = False
-+	try:
-+            data = l.split('|')
-+            cache[data[0]] = {}
-+            cache[data[0]]['ts'] = int(data[1])
-+            cache[data[0]]['size'] = int(data[2])
-+            cache[data[0]]['seen'] = False
-+	except IndexError, e:
-+            print("Corrupted line in cachefile " + cachefile + " : " + l)
-+	    raise e
-     return cache
- 
- def mkdirhier(dir):
--- 
-1.6.3.3
+Am 23.04.2010 um 14:42 schrieb Micka=EBl Chazaux:
+
+> 	Add an error message telling the cause of the crash to the user.
+> ---
+> recipes/stage-manager/files/stage-manager |   14 +++++++++-----
+> 1 files changed, 9 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/recipes/stage-manager/files/stage-manager =
+b/recipes/stage-manager/files/stage-manager
+> index 536d1af..a2ecebe 100755
+> --- a/recipes/stage-manager/files/stage-manager
+> +++ b/recipes/stage-manager/files/stage-manager
+> @@ -29,11 +29,15 @@ def read_cache(cachefile):
+>     lines =3D f.readlines()
+>     f.close()
+>     for l in lines:
+> -        data =3D l.split('|')
+> -        cache[data[0]] =3D {}
+> -        cache[data[0]]['ts'] =3D int(data[1])
+> -        cache[data[0]]['size'] =3D int(data[2])
+> -        cache[data[0]]['seen'] =3D False
+> +	try:
+> +            data =3D l.split('|')
+> +            cache[data[0]] =3D {}
+> +            cache[data[0]]['ts'] =3D int(data[1])
+> +            cache[data[0]]['size'] =3D int(data[2])
+> +            cache[data[0]]['seen'] =3D False
+> +	except IndexError, e:
+> +            print("Corrupted line in cachefile " + cachefile + " : " =
++ l)
+> +	    raise e
+>     return cache
+>=20
+
+Completely unrelated, but this code is slow. The recurring
+evaluation of cache[data[0]] is not being cached or optimized,
+I suggest something along:
+
+d =3D cache[data[0]] =3D {}
+d["ts"] =3D int(data[1])
+d["size"] =3D int(data[2])
+...
+
+:M:
 
 
 
