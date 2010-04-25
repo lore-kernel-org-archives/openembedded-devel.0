@@ -1,31 +1,31 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1O66zK-0001rm-W4
+	(envelope-from <eric@eukrea.com>) id 1O67Ph-0006ew-5O
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Apr 2010 20:55:31 +0200
-Received: from 88-108-80-109.dynamic.dsl.as9105.com ([88.108.80.109]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.63) (envelope-from <philb@gnu.org>) id 1O66vk-0008Dw-PK
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Apr 2010 19:51:48 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sun, 25 Apr 2010 21:22:46 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 4CA4C4B00B3;
+	Sun, 25 Apr 2010 21:19:04 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 4F96C4B0076;
+	Sun, 25 Apr 2010 21:19:02 +0200 (CEST)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1272217739.3865.546.camel@trini-m4400>
-References: <1272217739.3865.546.camel@trini-m4400>
-Date: Sun, 25 Apr 2010 19:51:47 +0100
-Message-ID: <1272221507.4544.13.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Sun, 25 Apr 2010 21:20:14 +0200
+Message-Id: <1272223214-23542-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1272114888-16964-4-git-send-email-eric@eukrea.com>
+References: <1272114888-16964-4-git-send-email-eric@eukrea.com>
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The coreutils-native race...
+Subject: [PATCH v2] kernel.class : fix for recent kernel on x86
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,32 +39,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Apr 2010 18:55:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 25 Apr 2010 19:22:46 -0000
 
-On Sun, 2010-04-25 at 10:48 -0700, Tom Rini wrote:
-> Hey all.  I thought I would try and explain what Chris has been up to
-> There's a few ways out of this:
-> 1) Don't rely on 'cp' and 'md5sum' anymore but use python for it.
-> 2) Make an oe_cp and oe_md5sum to go with oe_sha256sum
-> 3) IIRC, the big part of coreutils-native was a fully functional,
-> always, 'install'.  We could just copy the install we build or provide
-> an install wrapper (oe_install) or so
-> 4) ???
+- bitbake linux for a x86 machine fails with the following message :
+cp: target `.../image/kernel//include/asm-x86/' is not a directory
 
-How about making the coreutils-native staging process be atomic, i.e.
-install binaries as cp.new (or whatever) and then do "mv cp.new cp"?
-Or, more generally I guess, arrange for new-style staging to do that for
-all binaries it installs.
+so create $kerneldir/include/asm-x86 before trying to copy something in
+this directory.
 
-If (3) is sufficient then it seems like we might just as well exhume the
-old install-native package and ditch coreutils-native altogether.  That
-would avoid the race since it doesn't install anything other than
-install.
+- make headers_install fails because of missing directories in include
+(tested with linux 2.6.32 and 2.6.33 on x86) and missing Kbuild
 
-p.
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+change since v1 : also install include/Kbuild as it's necessary for make headers_install
 
+ classes/kernel.bbclass |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
+
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 7504c11..f27b24e 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -142,6 +142,7 @@ kernel_do_install() {
+ 
+ 	# Check for arch/x86 on i386
+ 	elif [ -d arch/x86/include/asm/ ]; then
++		mkdir -p $kerneldir/include/asm-x86/
+ 		cp -fR arch/x86/include/asm/* $kerneldir/include/asm-x86/
+ 		install -d $kerneldir/arch/x86/include
+ 		cp -fR arch/x86/* $kerneldir/arch/x86/
+@@ -155,12 +156,15 @@ kernel_do_install() {
+ 	mkdir -p $kerneldir/include/asm-generic
+ 	cp -fR include/asm-generic/* $kerneldir/include/asm-generic/
+ 
+-	for entry in drivers/crypto drivers/media include/generated include/linux include/net include/pcmcia include/media include/acpi include/sound include/video include/scsi include/trace; do
++	for entry in drivers/crypto drivers/media include/generated include/linux include/net include/pcmcia include/media include/acpi include/sound include/video include/scsi include/trace include/mtd include/rdma include/drm include/xen; do
+ 		if [ -d $entry ]; then
+ 			mkdir -p $kerneldir/$entry
+ 			cp -fR $entry/* $kerneldir/$entry/
+ 		fi
+ 	done
++	if [ -f include/Kbuild ]; then
++		cp -fR include/Kbuild $kerneldir/include
++	fi
+ 
+ 	if [ -d drivers/sound ]; then
+ 		# 2.4 alsa needs some headers from this directory
+-- 
+1.6.3.3
 
 
 
