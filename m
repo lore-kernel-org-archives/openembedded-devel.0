@@ -1,36 +1,31 @@
-Received: from mail-bw0-f220.google.com ([209.85.218.220])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay@jay-tech.ru>) id 1O69Fq-0003YU-4D
+	(envelope-from <mickey@vanille-media.de>) id 1O6ATr-0005fG-QB
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Apr 2010 23:20:42 +0200
-Received: by bwz20 with SMTP id 20so1414669bwz.12
+	Mon, 26 Apr 2010 00:39:16 +0200
+Received: from [192.168.1.2] (e180149118.adsl.alicedsl.de [85.180.149.118])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 820A1584A04
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Apr 2010 14:17:03 -0700 (PDT)
-Received: by 10.204.150.77 with SMTP id x13mr1990607bkv.19.1272230222927;
-	Sun, 25 Apr 2010 14:17:02 -0700 (PDT)
-Received: from is.home (95-29-187-208.broadband.corbina.ru [95.29.187.208])
-	by mx.google.com with ESMTPS id 13sm1222676bwz.3.2010.04.25.14.17.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 25 Apr 2010 14:17:02 -0700 (PDT)
-Sender: Yuri Bushmelev <jay@jay-tech.ru>
-From: Yuri Bushmelev <jay4mail@gmail.com>
+	Mon, 26 Apr 2010 00:40:09 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Apr 2010 01:16:56 +0400
-User-Agent: KMail/1.13.1 (Linux/2.6.32-std-def-alt9; KDE/4.4.1; i686; ; )
-References: <1272217739.3865.546.camel@trini-m4400>
-	<201004260042.14155.roman@khimov.ru>
-In-Reply-To: <201004260042.14155.roman@khimov.ru>
-MIME-Version: 1.0
-Message-Id: <201004260116.56374.jay4mail@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.218.220
-X-SA-Exim-Mail-From: jay@jay-tech.ru
+In-Reply-To: <hr25nh$nft$1@dough.gmane.org>
+References: <hr25nh$nft$1@dough.gmane.org>
+Organization: Vanille-Media
+Date: Mon, 26 Apr 2010 00:35:50 +0200
+Message-ID: <1272234950.19634.30.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The coreutils-native race...
+Subject: Re: a38e7ff2810e55455c7ff7b01d4882344b420e18 breaks build and packaged-staging, among other things
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,20 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Apr 2010 21:20:42 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Sun, 25 Apr 2010 22:39:16 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAyNiDQsNC/
-0YDQtdC70Y8gMjAxMCBSb21hbiBJIEtoaW1vdiDQvdCw0L/QuNGB0LDQuyhhKToKPiDQkiDRgdC+
-0L7QsdGJ0LXQvdC40Lgg0L7RgiDQktC+0YHQutGA0LXRgdC10L3RjNC1IDI1INCw0L/RgNC10LvR
-jyAyMDEwIDIxOjQ4OjU5INCw0LLRgtC+0YAgVG9tIFJpbmkg0L3QsNC/0LjRgdCw0Ls6Cgo+IEkg
-Z3Vlc3MsIGlmIHdlIGNhbiBzb2x2ZSBpdCB3aXRoIHB5dGhvbiwgaXQncyB0aGUgYmVzdCBvcHRp
-b24uIElmIG5vdCwKPiB0aGVuIHdlIGNhbiB0cnkgdG8gcmVtb3ZlIGNvcmV1dGlscy1uYXRpdmUg
-ZnJvbSBiYXNlIGRlcGVuZGVuY2llcyBhbmQKPiBzZWUgaG93IG11Y2ggYnJlYWthZ2UgaXQgaW50
-cm9kdWNlcy4gU2hvdWxkbid0IGJlIGEgcHJvYmxlbSBmb3IgbW9zdCBvZgo+IExpbnV4IGRpc3Ry
-b3MsIGJ1dCBmb3Igb3RoZXIgcGxhdGZvcm1zIGl0IG1heSBiZS4KCkZyZWVCU0Qgd2lsbCBiZSBh
-IGZpcnN0IGNhbmRpZGF0ZSA6KQoKLS0gCll1cmkgQnVzaG1lbGV2Cg==
+Am Sonntag, den 25.04.2010, 21:38 +0200 schrieb Koen Kooi:
+> bitbake something-depending-on-vala-stuf
+> 
+> is now broken because bitbake will run
+> something-depending-on-vala-stuf.do_configure and compile after
+> vala-stuff.do_populate_staging and the vapi files will NOT be there.
+
+Can you give a concrete example that breaks? I'm using quite a
+substantial amount of Vala e.g. in task-fso2-compliance and it builds
+from scratch without any problems.
+
+> The other problem is that the packaged-staging packages won't contain
+> the vapi files, so rebuilding staging it broken as well.
+
+Ok, since the patch was made to get rid of all the 'legacy staging'
+warnings, would do_install_append() instead of do_stage_vapi() fix that?
+
+-- 
+:M:
+
 
 
