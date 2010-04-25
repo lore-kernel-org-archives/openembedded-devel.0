@@ -1,39 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O681H-0003TY-KB
+	(envelope-from <roman@khimov.ru>) id 1O68i9-000435-WE
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Apr 2010 22:01:38 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O67xf-0003Fb-5Q from Tom_Rini@mentor.com 
+	Sun, 25 Apr 2010 22:45:54 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O68ec-0001Tg-SX
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Apr 2010 12:57:51 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Sun, 25 Apr 2010 12:57:50 -0700
-Received: from 172.30.80.244 ([172.30.80.244]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Sun, 25 Apr 2010 19:57:50 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	25 Apr 2010 12:57:44 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Mon, 26 Apr 2010 00:42:15 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hr254d$kkn$1@dough.gmane.org>
+Date: Mon, 26 Apr 2010 00:42:11 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
 References: <1272217739.3865.546.camel@trini-m4400>
-	<hr254d$kkn$1@dough.gmane.org>
-Organization: Mentor Graphics Corporation
-Date: Sun, 25 Apr 2010 12:57:44 -0700
-Message-ID: <1272225464.3865.549.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 25 Apr 2010 19:57:50.0729 (UTC)
-	FILETIME=[95D06F90:01CAE4B1]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <1272217739.3865.546.camel@trini-m4400>
+MIME-Version: 1.0
+Message-Id: <201004260042.14155.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: The coreutils-native race...
@@ -50,49 +38,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Apr 2010 20:01:38 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 25 Apr 2010 20:45:55 -0000
+X-Groupsio-MsgNum: 18796
+Content-Type: multipart/signed; boundary="nextPart17677882.eL4l529qyG";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart17677882.eL4l529qyG
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, 2010-04-25 at 21:28 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D0=BE=D1=81=D0=BA=D1=80=D0=B5=D1=81=D0=B5=D0=BD=D1=8C=D0=B5 25 =D0=
+=B0=D0=BF=D1=80=D0=B5=D0=BB=D1=8F 2010 21:48:59 =D0=B0=D0=B2=D1=82=D0=BE=D1=
+=80 Tom Rini =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> Right now, with a big enough BB_NUM_THREADS we can get into a race where
+> coreutils-native is installing programs and elsewhere we are in a
+> do_fetch and either trying to use 'cp' or 'md5sum', and blam, we try and
+> invoke the program while it's being installed (and see things like
+> sh: /path/to/staging/i686-linux/usr/bin/cp: Textfile is busy).
 >=20
-> On 25-04-10 19:48, Tom Rini wrote:
-> > Hey all.  I thought I would try and explain what Chris has been up to
-> > with at least some of the base.bbclass changes (the ones related to
-> > md5sum and cp).
-> >=20
-> > Right now, with a big enough BB_NUM_THREADS we can get into a race wher=
-e
-> > coreutils-native is installing programs and elsewhere we are in a
-> > do_fetch and either trying to use 'cp' or 'md5sum', and blam, we try an=
-d
-> > invoke the program while it's being installed (and see things like
-> > sh: /path/to/staging/i686-linux/usr/bin/cp: Textfile is busy).
-> >=20
-> > There's a few ways out of this:
-> > 1) Don't rely on 'cp' and 'md5sum' anymore but use python for it.
-> > 2) Make an oe_cp and oe_md5sum to go with oe_sha256sum
-> > 3) IIRC, the big part of coreutils-native was a fully functional,
-> > always, 'install'.  We could just copy the install we build or provide
-> > an install wrapper (oe_install) or so
-> > 4) ???
->=20
-> Even thought I loathe python, option 1 sounds like a nice way to go
-> since it doesn't involve butchering recipes.
+> There's a few ways out of this:
+> 1) Don't rely on 'cp' and 'md5sum' anymore but use python for it.
 
-I think we're OK, except in the case of when we can't rely on a built-in
-md5sum (and then the race comes back) and just need to figure out if the
-libpam-base-files recipe does things (a) optimally and (b) if that's a
-common thing.
+I guess it couldn't really be done, since those could be invoked from any=20
+shell script, right? Although it only is a concern for things before=20
+do_configure, so there shouldn't be many scripts there.
 
-Currently, with a quick glance at the recipe, I don't see any
-distro-specific overrides, so I'd be inclined to call it lazy recipe
-writing, until someone points out history of why that's a good thing..
+> 2) Make an oe_cp and oe_md5sum to go with oe_sha256sum
+> 3) IIRC, the big part of coreutils-native was a fully functional,
+> always, 'install'.  We could just copy the install we build or provide
+> an install wrapper (oe_install) or so
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+We've had install-native, but that was some broken dusty script that act li=
+ke=20
+a detonator - you build some package having it in DEPENDS (not many had, bu=
+t I=20
+was lucky enough) and boom! random packages brake randomly in do_install=20
+because of disfunctional install.
 
+I've proposed back then to just drop it. But there've been a concern that f=
+or=20
+reliable builds it's better to be sure that we have known proper install an=
+d=20
+that is provided by coreutils along with many other things, which are also=
+=20
+good to have in some known good state for an OS-independent build system.
 
+This is the way we've got to the point of having coreutils-native in all of=
+=20
+our builds.
+
+Although, as I'm personally building my things on sane GNU hosts with sane=
+=20
+coreutils with known nice install, I've always had coreutils-native in=20
+ASSUME_PROVIDED. Thus, not seeing any failures with usual 4 bb threads.
+
+I guess, if we can solve it with python, it's the best option. If not, then=
+ we=20
+can try to remove coreutils-native from base dependencies and see how much=
+=20
+breakage it introduces. Shouldn't be a problem for most of Linux distros, b=
+ut=20
+for other platforms it may be.
+
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart17677882.eL4l529qyG
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkvUqSYACgkQXJ70z+XgVcNcQwCgz2TAjdjAN3c4ynGeJ3IOTh3o
+eCUAnjhPxd3cgfylSWR7yJrTsAJlueU2
+=t5Nh
+-----END PGP SIGNATURE-----
+
+--nextPart17677882.eL4l529qyG--
