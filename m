@@ -1,43 +1,48 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O6MRt-0002X6-SI for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Apr 2010 13:26:03 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O6MOI-00006w-JP for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Apr 2010 13:22:18 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Apr 2010 13:22:18 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <kergoth@gmail.com>) id 1O6PfJ-00066u-8k
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Apr 2010 16:52:06 +0200
+Received: by vws5 with SMTP id 5so363345vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Apr 2010 13:22:18 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 26 Apr 2010 07:48:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=7GbPX5pU65Igm6s9+KCROGQ/ADRaRBSYETRtiZ5vw7Y=;
+	b=Yaywzyfbp04mc8qHCkZlJfMpkOzUu5tDSsTc6cpV6RIE8pk6b8A2IrTuiL1w+gMbL3
+	hZaGaxvZZ831vcn3PCxt/Gc2uSMonw45N1O/fuPj0KuXFa9brsdFoaYNwjWTu/nbK3M+
+	QzOZJ+RpP4NgMK9SdDUMeGRLZe9/qki8UXoUE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=eyFuLME2H+ri+bElnOEP6PRJKYGLEyiC9U/pk/9lTSfT7G81Plo2tV7u+pzsi/OOrs
+	APBibpYDUiYuZX48SWAwj6+gqoyYwdMBADJx63/0y3beNrw1+km4Mk+7bZVcHXmjUbeV
+	yjgXnynWukn9XH5xTZnmE3y+eWTb1apQsaBh0=
+Received: by 10.229.97.147 with SMTP id l19mr887797qcn.24.1272293305211; Mon, 
+	26 Apr 2010 07:48:25 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.188.213 with HTTP; Mon, 26 Apr 2010 07:48:05 -0700 (PDT)
+In-Reply-To: <hr3pd4$akp$1@dough.gmane.org>
+References: <1272274382-1983-1-git-send-email-mchazaux@adeneo-embedded.com> 
+	<hr3pd4$akp$1@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 26 Apr 2010 07:48:05 -0700
+X-Google-Sender-Auth: 8134a85988e99e83
+Message-ID: <q2ib6ebd0a51004260748pff3b8e25n8b6d145436adacff@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 26 Apr 2010 13:22:11 +0200
-Message-ID: <hr3t13$o2c$1@dough.gmane.org>
-References: <q2vade1bdc1004260340j4881a020t22a79b4e1279ade3@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
-In-Reply-To: <q2vade1bdc1004260340j4881a020t22a79b4e1279ade3@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: dm365 and OE
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] Add error handling to read_cache in stage-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,37 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2010 11:26:03 -0000
+X-List-Received-Date: Mon, 26 Apr 2010 14:52:06 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Apr 26, 2010 at 3:20 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
-On 26-04-10 12:40, Raffaele Recalcati wrote:
-> I'm a little bit confused about the good direction for developing for dm365.
-> Arago overlay seems nice, it works, but uses also arago-oe-dev, that is a
-> git tree separated from OE (kept merged sometimes), and Code Sourcery
-> toolchain.
-> In OE instead I see many codecs inside recipes/ti directory, but I don't
-> know their status.
-> Anyone can point me to the right direction?
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Looks good to me,
+>
+> Acked-By: Koen Kooi <koen@openembedded.org>
+>
+>
+Same here.
 
+Acked-By: Chris Larson <chris_larson@mentor.com>
 
-> OE + its builtin toolchain
-
-That's the one.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL1XdiMkyGM64RGpERArs0AJ4piO7RqQ8rhoCwvsXrg4tds914UACdEnmv
-mLOWU0Pf03C4aTXB+D5qNn8=
-=tAbW
------END PGP SIGNATURE-----
-
-
+Might also be worth catching ValueError there, to be safe (int("foo") raises
+that :).
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
