@@ -1,44 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O6HzJ-000379-M9 for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Apr 2010 08:40:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O6Hvo-0000WF-Rk for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Apr 2010 08:36:36 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Apr 2010 08:36:36 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Apr 2010 08:36:36 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 26 Apr 2010 08:36:28 +0200
-Message-ID: <hr3c9d$rg6$1@dough.gmane.org>
-References: <hr25nh$nft$1@dough.gmane.org>
-	<1272234950.19634.30.camel@andromeda>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
-In-Reply-To: <1272234950.19634.30.camel@andromeda>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <spyzer.abhishek0@gmail.com>)
+	id 1O6J5V-0003Bj-8d; Mon, 26 Apr 2010 09:50:50 +0200
+Received: by gwb11 with SMTP id 11so355093gwb.6
+	for <multiple recipients>; Mon, 26 Apr 2010 00:47:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=L4K7qFlxR5ji+LpEZ7s7CSoM8uAp+/nPudr1pzhs6w0=;
+	b=xhG2wp2Rvup9xr514Ex64lKBIDFYx8x7KuQPYhlhHWvRGg3CNiAPAqjxe2JdeCxXXY
+	ImZGXNt9I+NtkfgFohDOv8vn4h9Vuw7o3Hxhd3OoJteecyyNZCy6wx/cE8Kvri6u6Rer
+	wBLUOnZWlSMkqBEwySCAMwdWP0uovA9LFOGPo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=Q+9KyncWAkpFCrnBT6d+6o+unlanHQkJ0teqPDV9S78XQl06lCljBLfSpMzh1DJTR6
+	uAyrFibngwnLjjpG+rQiOGMRp+WNn+7Nj1mTq9XHxtWQQEWZUvVPwLxRYtLNyWS6UGDG
+	iOxloucdNZtzEcM45tgpGJo7DrzHHgiu3K400=
+Received: by 10.150.7.9 with SMTP id 9mr3683298ybg.285.1272268020166; Mon, 26 
+	Apr 2010 00:47:00 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.150.144.11 with HTTP; Mon, 26 Apr 2010 00:46:40 -0700 (PDT)
+In-Reply-To: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>
+References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>
+From: Abhishek Sharma <spyzer.abhishek0@gmail.com>
+Date: Mon, 26 Apr 2010 13:16:40 +0530
+Message-ID: <v2hfc0861611004260046za2daa3a4ve91f93ab88e72d8e@mail.gmail.com>
+To: openembedded-users@lists.openembedded.org, 
+	openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: spyzer.abhishek0@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: a38e7ff2810e55455c7ff7b01d4882344b420e18 breaks build and packaged-staging, among other things
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Regarding customized image with Qt embedded support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,49 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2010 06:40:15 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Apr 2010 07:50:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello all,
 
-On 26-04-10 00:35, Michael 'Mickey' Lauer wrote:
-> Am Sonntag, den 25.04.2010, 21:38 +0200 schrieb Koen Kooi:
->> bitbake something-depending-on-vala-stuf
->>
->> is now broken because bitbake will run
->> something-depending-on-vala-stuf.do_configure and compile after
->> vala-stuff.do_populate_staging and the vapi files will NOT be there.
-> 
-> Can you give a concrete example that breaks? I'm using quite a
-> substantial amount of Vala e.g. in task-fso2-compliance and it builds
-> from scratch without any problems.
-> 
->> The other problem is that the packaged-staging packages won't contain
->> the vapi files, so rebuilding staging it broken as well.
-> 
-> Ok, since the patch was made to get rid of all the 'legacy staging'
-> warnings, would do_install_append() instead of do_stage_vapi() fix that?
+I am building an image for mini2440 which should support Qt embedded
+applications. I even made a test recipe of a simple Qt embedded app(namely
+"qtehelloworld") and then I wrote the image(namely qtehelloworld-image) as
+such:
 
-No, since you can't poke outside ${D} in do_install. I think the best
-solution is to have the vala compiler look in the arch dir it's
-compiling *for* instead of the host one (STAGING_DIR instead of
-STAGING_DIR_NATIVE).
-Think of vapi files as m4 macros and you'll see why the current and
-previous situation are completely wrong.
+IMAGE_INSTALL = "qtehelloworld"
+IMAGE_BASENAME = "qtehelloworld"
+IMAGE_LINGUAS = ""
+IMAGE_LOGIN_MANAGER = ""
+IMAGE_INIT_MANAGER = ""
+IMAGE_INITSCRIPTS = ""
+IMAGE_DEV_MANAGER = ""
+RDEPENDS = "qte"
+DEPENDS = "task-base"
+require base-image.bb
+inherit image
 
-regards,
+here qtehelloworld as I mentioned earlier is a simple/sample qte app. Before
+deploying to mini2440 I am testing the image for qemu by setting the conf to
+MACHINE="qemuarm". But when I run the image, I am unable to find the
+"qtehelloworld" app inside the image(to run the app). Kindly tell me, why is
+such a thing happening.
 
-Koen
+Thank You.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL1TRsMkyGM64RGpERAu55AJ4x6nIQFKdpxG3eTlDj/TPkJXGQ3gCfXA4p
-Cte/6tg05/eQ+k7cBVyOCyg=
-=J875
------END PGP SIGNATURE-----
-
-
+-- 
+Abhishek Sharma
 
