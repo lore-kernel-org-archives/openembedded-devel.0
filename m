@@ -1,37 +1,45 @@
-Received: from server.road.de ([85.10.209.111] helo=mail.road.de)
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <j.erdmann@road.de>) id 1O6KBV-0000k3-Le
+	(envelope-from <mickael.chazaux@gmail.com>) id 1O6KkK-0002sr-9s
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Apr 2010 11:00:59 +0200
-Received: from slimfast.dyndns.org (unknown [192.168.254.1])
-	by mail.road.de (Postfix) with ESMTP id 2D1BC390003
+	Mon, 26 Apr 2010 11:36:58 +0200
+Received: by wyf22 with SMTP id 22so1012629wyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Apr 2010 10:57:15 +0200 (CEST)
-Received: from [192.168.116.53] (bienemaja.handy-pc.constin.de
-	[192.168.116.53])
-	by slimfast.dyndns.org (Postfix) with ESMTP id A512E4542B1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Apr 2010 10:57:14 +0200 (CEST)
-Message-ID: <4BD5556A.9080909@road.de>
-Date: Mon, 26 Apr 2010 10:57:14 +0200
-From: Jens Erdmann <j.erdmann@road.de>
-Organization: Road GmbH
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100411 Icedove/3.0.4
-MIME-Version: 1.0
+	Mon, 26 Apr 2010 02:33:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=5thCfqxHuBIFuUAKvI1Xf7T7nmKxf1rcr47yT0V86zo=;
+	b=OXEFciaohJWZjdaIjtOzSy6LBphQKibMjQhFS+n0funNfuThXALx4B+e2PPJ5NUjLc
+	cQYWWXHWS8UcF5V0TUfrnSfxfdnh/sxNDA7Kt9Mw/kXwbB8hKpbEAuYe8KlDz/myMim+
+	5Yu01I5BE1cYAZsZldHpEHjS4Fc8+WtHv0pjg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=b4V1TsOyc6U7RiOFAGvjw1GkmG1FBa7Ux9/LyxrJ78CHpUIT9FiKc2vSaDa2w/iyMf
+	ekZ5kHxPnDQnUCvUSSYWGOsXPL9Hb9S9jbpjL1QeIqqsSvSLWYsq6MmgMyv4ekF3yLJZ
+	uqYFOSbZ5CSErLIcetu9wlMR04ZeeHaY0vZcs=
+Received: by 10.216.90.130 with SMTP id e2mr4855921wef.210.1272274389607;
+	Mon, 26 Apr 2010 02:33:09 -0700 (PDT)
+Received: from localhost.localdomain (delta360.server4you.de [85.25.136.130])
+	by mx.google.com with ESMTPS id v59sm358414wec.15.2010.04.26.02.33.08
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 26 Apr 2010 02:33:08 -0700 (PDT)
+Sender: Mickael Chazaux <mickael.chazaux@gmail.com>
+From: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4BD170BC.8020103@road.de> <20100423155515.GA27322@denix.org>
-	<20100424165610.GA10320@denix.org>
-In-Reply-To: <20100424165610.GA10320@denix.org>
-X-SA-Exim-Connect-IP: 85.10.209.111
-X-SA-Exim-Mail-From: j.erdmann@road.de
+Date: Mon, 26 Apr 2010 11:33:02 +0200
+Message-Id: <1272274382-1983-1-git-send-email-mchazaux@adeneo-embedded.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Patch] locking in do_package_tar
+Cc: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
+Subject: [PATCH] Add error handling to read_cache in stage-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,72 +53,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2010 09:00:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Apr 2010 09:36:58 -0000
 
-On 04/24/2010 06:56 PM, Denys Dmytriyenko wrote:
-> On Fri, Apr 23, 2010 at 11:55:15AM -0400, Denys Dmytriyenko wrote:
->> On Fri, Apr 23, 2010 at 12:04:44PM +0200, Jens Erdmann wrote:
->>> Hey folks,
->>>
->>> I would like to introduce locking in do_package_tar. I had a case here were
->>> do_package_tar and do_package_ipk where running parallel. Because of this
->>> "tar: .: file changed as we read it" occurs. I fixed it by introduce
->>> locking in do_package_tar. What do you think about it?
->>
->> Ah, I've been suffering from this problem for quite some time now, when making
->> parallel builds with BB_NUMBER_THREADS. I was trying to debug it and noticed
->> it would fail when kernel recipe would try to do_deploy at the same time
->> another package would try to do_package_stage, so I was digging in the
->> packaged staging direction. Tom Rini even made a patch to add an extra lock in
->> there, which didn't help with my issue...
->> So, let me try your patch and see if this problem is gone for good! Thanks.
->
-> It may solve some other similar issue, but unfortunately, it didn't seem to
-> work for me, as it failed again the same way with the patch applied:
->
-> NOTE: Running task 2011 of 2173 (ID: 953, /OE/arago-oe-dev/recipes/freetype/freetype_2.3.9.bb, do_package_stage)
-> /OE/arago-tmp/work/armv7a-none-linux-gnueabi/freetype-2.3.9-r1/staging-pkg/deploy/ipk/armv7a/
-> /OE/arago-tmp/work/armv7a-none-linux-gnueabi/freetype-2.3.9-r1/staging-pkg/deploy/ipk/armv7a/
-> /OE/arago-tmp/work/armv7a-none-linux-gnueabi/freetype-2.3.9-r1/staging-pkg/deploy/ipk/armv7a/
-> /OE/arago-tmp/work/armv7a-none-linux-gnueabi/freetype-2.3.9-r1/staging-pkg/deploy/ipk/armv7a/
-> ERROR: function staging_packager failed
-> ERROR: log data follows (/OE/arago-tmp/work/dm3730-am3715-evm-none-linux-gnueabi/linux-omap-psp-2.6.32-r60+gitr7b8926aa626991fa087b00f6bbc1fb6b0e8269b0/temp/log.staging_packager.19650)
-> | tar: .: file changed as we read it
-> NOTE: Task failed: /OE/arago-tmp/work/dm3730-am3715-evm-none-linux-gnueabi/linux-omap-psp-2.6.32-r60+gitr7b8926aa626991fa087b00f6bbc1fb6b0e8269b0/temp/log.staging_packager.19650
-> NOTE: oestats: task failed, see http://tinderbox.openembedded.net/packages/556734/
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of /OE/arago-oe-dev/recipes/linux/linux-omap-psp_2.6.32.bb do_package_stage failed
-> ERROR: Task 1009 (/OE/arago-oe-dev/recipes/linux/linux-omap-psp_2.6.32.bb, do_package_stage) failed
-> NOTE: Waiting for 3 active tasks to finish
-> NOTE: 1: /OE/arago-oe-dev/recipes/freetype/freetype_2.3.9.bb, do_package_stage (21747)
->
-> So, it looks like my problem is actually still packaged staging related, as is
-> fails when 2 recipes run do_package_stage task at the same time (in the
-> example above, it's freetype and linux-omap-psp)...
->
+Sometimes stage-manager crashes with this message :
+Traceback (most recent call last):
+ File "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-manager",
+line 79, in <module>
+   cache = read_cache(options.cachefile)
+ File "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-manager",
+line 34, in read_cache
+   cache[data[0]]['ts'] = int(data[1])
+IndexError: list index out of range
 
-This looks more packaged-staging.bbclass related. Maybe you could try to 
-make the lock in line 444 two lines earlier so that staging_packager and 
-staging_helper will be locked. too.
+This is due to a corrupted cache file. This patch adds an error message
+telling the cause of the crash to the user.
+---
+ recipes/stage-manager/files/stage-manager          |   14 +++++++++-----
+ recipes/stage-manager/stagemanager-native_0.0.1.bb |    2 +-
+ 2 files changed, 10 insertions(+), 6 deletions(-)
 
-To my patch: Is locking in tar a good idea?
-
-
+diff --git a/recipes/stage-manager/files/stage-manager b/recipes/stage-manager/files/stage-manager
+index 536d1af..93196ff 100755
+--- a/recipes/stage-manager/files/stage-manager
++++ b/recipes/stage-manager/files/stage-manager
+@@ -29,11 +29,15 @@ def read_cache(cachefile):
+     lines = f.readlines()
+     f.close()
+     for l in lines:
+-        data = l.split('|')
+-        cache[data[0]] = {}
+-        cache[data[0]]['ts'] = int(data[1])
+-        cache[data[0]]['size'] = int(data[2])
+-        cache[data[0]]['seen'] = False
++	try:
++            data = l.split('|')
++            d = cache[data[0]] = {}
++            d['ts'] = int(data[1])
++            d['size'] = int(data[2])
++            d['seen'] = False
++	except IndexError, e:
++            print("Corrupted line in cachefile " + cachefile + " : " + l)
++	    raise e
+     return cache
+ 
+ def mkdirhier(dir):
+diff --git a/recipes/stage-manager/stagemanager-native_0.0.1.bb b/recipes/stage-manager/stagemanager-native_0.0.1.bb
+index 5708045..4357517 100644
+--- a/recipes/stage-manager/stagemanager-native_0.0.1.bb
++++ b/recipes/stage-manager/stagemanager-native_0.0.1.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Helper script for packaged-staging.bbclass"
+-PR = "r11"
++PR = "r13"
+ 
+ SRC_URI = "file://stage-manager \
+            file://stage-manager-ipkg \
 -- 
-------- ROAD ...the handyPC Company - - -  ) ) )
-
-Jens Erdmann
-Software Development
-
-ROAD GmbH
-Bennigsenstr. 14 | 12159 Berlin | Germany
-fon: +49 (30) 230069 - 64 | fax: +49 (30) 230069 - 69
-url: www.road.de
-
-Amtsgericht Charlottenburg: HRB 96688 B
-Managing director: Hans-Peter Constien
+1.6.3.3
 
 
 
