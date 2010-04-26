@@ -1,43 +1,32 @@
-Received: from mail-gx0-f228.google.com ([209.85.217.228])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <spyzer.abhishek0@gmail.com>)
-	id 1O6JIq-00071C-ES; Mon, 26 Apr 2010 10:04:28 +0200
-Received: by gxk28 with SMTP id 28so7310395gxk.7
-	for <multiple recipients>; Mon, 26 Apr 2010 01:00:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=hMSt7Af4S+CW0R82Vwq9TIXOoWAVmkSR+gjQ96tV47Q=;
-	b=IXqkQi4yHZJh+FLL5iryPAsMtS0fFbseI6U5Kw23TAQSc/op1nAuWrug63vZuiJmku
-	eVANUcQfRKkDSF3EQamn/kMazRvFpEcb8xJr4cLW6gH2XVhJqDoCZJBZJj93o6ykNnK1
-	6yppoqxHZqlzUScFgKDqcH5hLR+x4rVEJJEHM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=ndh/HUCFB+rwWUkDubXux6XnEbpbCdY+1tvXR0yEBOPY2EPwU3pSOWRZWCfXSyVpjV
-	Pz6D0glfOHrdTyXPHxAW2w1y01Tu0zTjx0M7xvWTc8e9FoXmg16zqnMOn3G5ZkSsBit1
-	OInYKBOJBXW8YKfI2yqI05pb8V+0P+NiO7N04=
-Received: by 10.151.124.1 with SMTP id b1mr3838520ybn.106.1272268843592; Mon, 
-	26 Apr 2010 01:00:43 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.150.144.11 with HTTP; Mon, 26 Apr 2010 01:00:23 -0700 (PDT)
-In-Reply-To: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>
-References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>
-From: Abhishek Sharma <spyzer.abhishek0@gmail.com>
-Date: Mon, 26 Apr 2010 13:30:23 +0530
-Message-ID: <r2mfc0861611004260100m6cdbd5ecudd4598fa9e8a7a9c@mail.gmail.com>
-To: openembedded-users@lists.openembedded.org, 
-	openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.228
-X-SA-Exim-Mail-From: spyzer.abhishek0@gmail.com
+	(envelope-from <mickey@vanille-media.de>) id 1O6JSz-00087g-Ro
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Apr 2010 10:14:58 +0200
+Received: from [192.168.1.2] (e180137063.adsl.alicedsl.de [85.180.137.63])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 74D6C584185
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Apr 2010 10:15:54 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <hr3c9d$rg6$1@dough.gmane.org>
+References: <hr25nh$nft$1@dough.gmane.org>
+	<1272234950.19634.30.camel@andromeda>  <hr3c9d$rg6$1@dough.gmane.org>
+Organization: Vanille-Media
+Date: Mon, 26 Apr 2010 10:11:38 +0200
+Message-ID: <1272269498.19634.35.camel@andromeda>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Regarding customized image with Qt embedded support.
+Subject: Re: a38e7ff2810e55455c7ff7b01d4882344b420e18 breaks build and packaged-staging, among other things
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +40,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Apr 2010 08:04:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Apr 2010 08:14:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Apr 26, 2010 at 1:05 PM, Abhishek Sharma <spyzer.abhishek0@gmail.com
-> wrote:
+Am Montag, den 26.04.2010, 08:36 +0200 schrieb Koen Kooi:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 26-04-10 00:35, Michael 'Mickey' Lauer wrote:
+> > Am Sonntag, den 25.04.2010, 21:38 +0200 schrieb Koen Kooi:
+> >> bitbake something-depending-on-vala-stuf
+> >>
+> >> is now broken because bitbake will run
+> >> something-depending-on-vala-stuf.do_configure and compile after
+> >> vala-stuff.do_populate_staging and the vapi files will NOT be there.
+> > 
+> > Can you give a concrete example that breaks? I'm using quite a
+> > substantial amount of Vala e.g. in task-fso2-compliance and it builds
+> > from scratch without any problems.
+> > 
+> >> The other problem is that the packaged-staging packages won't contain
+> >> the vapi files, so rebuilding staging it broken as well.
+> > 
+> > Ok, since the patch was made to get rid of all the 'legacy staging'
+> > warnings, would do_install_append() instead of do_stage_vapi() fix that?
+> 
+> No, since you can't poke outside ${D} in do_install. I think the best
+> solution is to have the vala compiler look in the arch dir it's
+> compiling *for* instead of the host one (STAGING_DIR instead of
+> STAGING_DIR_NATIVE).
 
-> Hello all,
->
-> I am building an image for mini2440 which should support Qt embedded
-> applications. I even made a test recipe of a simple Qt embedded app(namely
-> "qtehelloworld") and then I wrote the image(namely qtehelloworld-image) as
-> such:
->
-> IMAGE_INSTALL = "qtehelloworld"
-> IMAGE_BASENAME = "qtehelloworld"
-> IMAGE_LINGUAS = ""
-> IMAGE_LOGIN_MANAGER = ""
-> IMAGE_INIT_MANAGER = ""
-> IMAGE_INITSCRIPTS = ""
-> IMAGE_DEV_MANAGER = ""
-> RDEPENDS = "qte"
-> DEPENDS = "task-base"
-> require base-image.bb
-> inherit image
->
-> here qtehelloworld as I mentioned earlier is a simple/sample qte app.
-> Before deploying to mini2440 I am testing the image for qemu by setting the
-> conf to MACHINE="qemuarm". But when I run the image, I am unable to find the
-> "qtehelloworld" app inside the image(to run the app). Kindly tell me, why is
-> such a thing happening.
->
-> Thank You.
->
-> --
-> Abhishek Sharma
->
->
-Also even if I cannot "make" the qte application to be directly into the
-image, then i could atleast do this, that I can create a minimalistic kind
-of image(base-image) which has qte libraries but i don't know as to how
-should i do it. Kindly help..
+I agree that would be the best way, but it's not an option for now.
+
+> Think of vapi files as m4 macros and you'll see why the current and
+> previous situation are completely wrong.
+
+True, but sometimes we have to work around upstream things in the build
+utilitiy. Oh well, I don't mind the legacy staging warnings - so if no
+one has any other idea, I'll revert it back to the legacy staging later
+today.
+
+-- 
+:M:
+
+
 
