@@ -1,33 +1,49 @@
-Received: from smtp3.mundo-r.com ([212.51.32.191])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjaquez@igalia.com>) id 1O6oz4-0005Rx-FK
+	(envelope-from <Tom_Rini@mentor.com>) id 1O6pQ5-0006Oh-9a
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Apr 2010 19:54:11 +0200
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AjsGAKfA1ktbdWOb/2dsb2JhbACDF40njQGwB5E0gSWCfG0E
-X-IronPort-AV: E=Sophos;i="4.52,282,1270418400"; d="scan'208";a="627241310"
-Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
-	([91.117.99.155])
-	by smtp3.mundo-r.com with ESMTP; 27 Apr 2010 19:50:32 +0200
-Received: from [192.168.12.135] (helo=localhost)
-	by fanzine.igalia.com with esmtpsa 
-	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim)
-	id 1O6ovX-0001jh-VO; Tue, 27 Apr 2010 19:50:31 +0200
-From: =?UTF-8?q?V=C3=ADctor=20M=2E=20J=C3=A1quez=20L=2E?= <vjaquez@igalia.com>
+	Tue, 27 Apr 2010 20:22:20 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O6pMV-0006Zo-R0 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Apr 2010 11:18:23 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 27 Apr 2010 11:18:23 -0700
+Received: from 172.30.80.244 ([172.30.80.244]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue, 27 Apr 2010 18:18:23 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	27 Apr 2010 11:18:15 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Apr 2010 19:50:03 +0200
-Message-Id: <1272390603-4982-1-git-send-email-vjaquez@igalia.com>
-X-Mailer: git-send-email 1.7.0.2
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.51.32.191
-X-SA-Exim-Mail-From: vjaquez@igalia.com
+In-Reply-To: <20100426180357.GB22763@denix.org>
+References: <hqrv2b$a7u$1@dough.gmane.org>
+	<1272046053.3865.425.camel@trini-m4400>
+	<20100423182217.GB27322@denix.org>
+	<hqsprc$no6$1@dough.gmane.org> <1272048959.3865.478.camel@trini-m4400>
+	<hqt003$fvd$1@dough.gmane.org> <20100423205439.GC27322@denix.org>
+	<1272058993.3865.531.camel@trini-m4400>
+	<20100424170705.GB10320@denix.org>
+	<1272135069.3865.539.camel@trini-m4400>
+	<20100426180357.GB22763@denix.org>
+Organization: Mentor Graphics Corporation
+Date: Tue, 27 Apr 2010 11:18:14 -0700
+Message-ID: <1272392294.3865.571.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 27 Apr 2010 18:18:23.0242 (UTC)
+	FILETIME=[05BDAEA0:01CAE636]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,
+	MIME_QP_LONG_LINE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] ti-dofftools: doff converter tool
+Subject: Re: [RFC][PATCH] meta-toolchain: use MULTIMACH_TARGET_SYS instead of TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,80 +57,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2010 17:54:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Apr 2010 18:22:21 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-From: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
+On Mon, 2010-04-26 at 14:03 -0400, Denys Dmytriyenko wrote:
+> On Sat, Apr 24, 2010 at 11:51:09AM -0700, Tom Rini wrote:
+[snip]=20
+> > Right.  I'm saying that SDKPATH should be more than /usr/local/${DISTRO=
+}
+> > but /usr/local/${DISTRO}/${MACHINE} by default, toss a comment above
+> > about why (output is very MACHINE specific in certain cases) and maybe
+> > update the default TOOLCHAIN_OUTPUTNAME too.
+>=20
+> Ok, you asked for a comment, I'll give you two :)
+>=20
+> 1. In Arago I have a way to overwrite SDKPATH from the command line when=20
+> building a specific SDK/toolchain. So, I can do what you suggest, but...
+>=20
+> 2. My SDKs are currently not machine-specific, moreover, they don't have =
+the=20
+> cross-compile tools in them (i.e. no toolchain part), as Arago uses exter=
+nal=20
+> CodeSourcery toolchain for that. The only cross-tools I have in my SDKs a=
+re=20
+> those, which are missing from CS - i.e. libtool, pkgconfig, opkg, qt4e-to=
+ols=20
+> etc. But I still build 2 versions of SDK - armv5te and armv7a.
 
-Add the recipie for the doff converter tool.
+I'd make a very small wager that you're unknowningly wrong about #2 or a
+someone adding an RRECOMMENDS/RDEPENDS_mach somewhere (or using another
+machine you haven't tried yet) from machine specific stuff leaking in
+and being wrong :)
 
-Changelog since v1:
-* Add a newline at the end of the file
+It's not the gcc & co that you get from CodeSourcery or our -sdk recipes
+or whatever that makes this machine-specific but the conditional
+inclusion of some userland bits (be it "small" "regular" Linux stuff or
+"small" stuff for FPGAs or whatever on a particular ref board).  Or even
+PACKAGE_ARCH=3DMACHINE stuff already being in there, again without you
+knowning (some of which can be rather easily pulled out with that
+removal hook you added).
 
-Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
----
- recipes/ti/ti-dofftools_git.bb |   28 ++++++++++++++++++++++++++++
- recipes/ti/ti-paths.inc        |    2 ++
- 2 files changed, 30 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ti/ti-dofftools_git.bb
-
-diff --git a/recipes/ti/ti-dofftools_git.bb b/recipes/ti/ti-dofftools_git.bb
-new file mode 100644
-index 0000000..f9a541e
---- /dev/null
-+++ b/recipes/ti/ti-dofftools_git.bb
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "TI DSP/BIOS DOFF tools"
-+HOMEPAGE = "http://dev.omapzoom.org/?p=tidspbridge/userspace-dspbridge.git;a=summary"
-+SECTION = "devel"
-+LICENSE = "TI"
-+
-+require ti-paths.inc
-+require ti-staging.inc
-+
-+PR = "r1"
-+
-+SRCREV = "31c7e2c9"
-+SRC_URI = "git://dev.omapzoom.org/pub/scm/tidspbridge/userspace-dspbridge.git;protocol=git"
-+
-+S = "${WORKDIR}/git"
-+
-+do_unpack2() {
-+    cd ${S}
-+    tar -xvf source/dsp/bdsptools/bridge-tools.tar
-+}
-+
-+do_install() {
-+    install -d ${D}${DOFFTOOLS_INSTALL_DIR_RECIPE}/bin
-+    for i in DLLcreate DLLdump; do
-+        cp -a ${S}/ti/dspbridge/dsp/doffbuild/bin/$i ${D}${DOFFTOOLS_INSTALL_DIR_RECIPE}/bin
-+    done;
-+}
-+
-+addtask unpack2 after do_unpack before do_patch
-diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
-index d3d1b98..40de3bd 100644
---- a/recipes/ti/ti-paths.inc
-+++ b/recipes/ti/ti-paths.inc
-@@ -17,6 +17,7 @@ export LPM_INSTALL_DIR_RECIPE        = "${installdir}/ti-local-power-manager-tre
- export DMAI_INSTALL_DIR_RECIPE       = "${installdir}/ti-dmai-tree"
- export CODEC_INSTALL_DIR_RECIPE      = "${installdir}/ti-codecs-tree"
- export DSPLIB_INSTALL_DIR_RECIPE     = "${installdir}/ti-dsplib-tree"
-+export DOFFTOOLS_INSTALL_DIR_RECIPE  = "${installdir}/ti-dofftools-tree"
- 
- # This is where the tools will end up in staging provided PACKAGE_ARCH = ${MACHINE_ARCH} is set
- export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
-@@ -35,6 +36,7 @@ export LPM_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LPM_INS
- export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
- export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
- export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
-+export DOFFTOOLS_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DOFFTOOLS_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
--- 
-1.7.0.2
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
