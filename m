@@ -1,22 +1,22 @@
 Received: from smtp3.mundo-r.com ([212.51.32.191])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjaquez@igalia.com>) id 1O6out-0003A5-6O
+	(envelope-from <vjaquez@igalia.com>) id 1O6oz4-0005Rx-FK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Apr 2010 19:49:52 +0200
+	Tue, 27 Apr 2010 19:54:11 +0200
 X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AjsGAHq/1ktbdWOb/2dsb2JhbACDF40njQGwApE0gSWCfG0E
-X-IronPort-AV: E=Sophos;i="4.52,282,1270418400"; d="scan'208";a="624921361"
+X-IronPort-Anti-Spam-Result: AjsGAKfA1ktbdWOb/2dsb2JhbACDF40njQGwB5E0gSWCfG0E
+X-IronPort-AV: E=Sophos;i="4.52,282,1270418400"; d="scan'208";a="627241310"
 Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
 	([91.117.99.155])
-	by smtp3.mundo-r.com with ESMTP; 27 Apr 2010 19:45:10 +0200
+	by smtp3.mundo-r.com with ESMTP; 27 Apr 2010 19:50:32 +0200
 Received: from [192.168.12.135] (helo=localhost)
 	by fanzine.igalia.com with esmtpsa 
 	(Cipher TLS1.0:DHE_RSA_AES_128_CBC_SHA1:16) (Exim)
-	id 1O6oqM-0001hS-Gr; Tue, 27 Apr 2010 19:45:10 +0200
+	id 1O6ovX-0001jh-VO; Tue, 27 Apr 2010 19:50:31 +0200
 From: =?UTF-8?q?V=C3=ADctor=20M=2E=20J=C3=A1quez=20L=2E?= <vjaquez@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 27 Apr 2010 19:45:01 +0200
-Message-Id: <1272390301-4631-1-git-send-email-vjaquez@igalia.com>
+Date: Tue, 27 Apr 2010 19:50:03 +0200
+Message-Id: <1272390603-4982-1-git-send-email-vjaquez@igalia.com>
 X-Mailer: git-send-email 1.7.0.2
 MIME-Version: 1.0
 X-SA-Exim-Connect-IP: 212.51.32.191
@@ -27,7 +27,7 @@ X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
 	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] ti-dofftools: doff converter tool
+Subject: [PATCH v2] ti-dofftools: doff converter tool
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,13 +41,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2010 17:49:52 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Tue, 27 Apr 2010 17:54:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 From: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
 
 Add the recipie for the doff converter tool.
+
+Changelog since v1:
+* Add a newline at the end of the file
 
 Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
 ---
@@ -58,7 +61,7 @@ Signed-off-by: Víctor Manuel Jáquez Leal <vjaquez@igalia.com>
 
 diff --git a/recipes/ti/ti-dofftools_git.bb b/recipes/ti/ti-dofftools_git.bb
 new file mode 100644
-index 0000000..0450ec9
+index 0000000..f9a541e
 --- /dev/null
 +++ b/recipes/ti/ti-dofftools_git.bb
 @@ -0,0 +1,28 @@
@@ -90,7 +93,6 @@ index 0000000..0450ec9
 +}
 +
 +addtask unpack2 after do_unpack before do_patch
-\ No newline at end of file
 diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
 index d3d1b98..40de3bd 100644
 --- a/recipes/ti/ti-paths.inc
@@ -112,7 +114,7 @@ index d3d1b98..40de3bd 100644
  DSPSUFFIX_omapl137 = "x674"
  DSPSUFFIX_omapl138 = "x674"
 -- 
-1.6.0.4
+1.7.0.2
 
 
 
