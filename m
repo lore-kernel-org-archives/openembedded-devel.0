@@ -1,35 +1,43 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1O6byo-000881-6O
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Apr 2010 06:01:03 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.58.177])
-	by vms173017.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L1I00BWSLJ3I566@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	26 Apr 2010 21:57:04 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0B6E814AF60; Mon,
-	26 Apr 2010 22:57:03 -0400 (EDT)
-Date: Mon, 26 Apr 2010 22:57:03 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O6eYX-0007O5-FE for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Apr 2010 08:46:06 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O6eUx-0004lZ-7g for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Apr 2010 08:42:23 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Apr 2010 08:42:23 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Apr 2010 08:42:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100427025702.GC10320@denix.org>
-References: <q2vade1bdc1004260340j4881a020t22a79b4e1279ade3@mail.gmail.com>
-	<20100426174411.GA22763@denix.org>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 27 Apr 2010 08:42:11 +0200
+Message-ID: <hr6103$h0$1@dough.gmane.org>
+References: <q2vade1bdc1004260340j4881a020t22a79b4e1279ade3@mail.gmail.com>	<20100426174411.GA22763@denix.org>
 	<x2rade1bdc1004261848k1f9cfc01yc64057689a22fbb1@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <x2rade1bdc1004261848k1f9cfc01yc64057689a22fbb1@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.17
-X-SA-Exim-Mail-From: denis@denix.org
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100412 Shredder/3.0.5pre
+In-Reply-To: <x2rade1bdc1004261848k1f9cfc01yc64057689a22fbb1@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: arago-devel@gforge.ti.com
 Subject: Re: [arago-devel] dm365 and OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,31 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2010 04:01:03 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 27 Apr 2010 06:46:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Apr 27, 2010 at 03:48:17AM +0200, Raffaele Recalcati wrote:
-> I'll try to go on with both for some weeks.
-> But, first of all, I need a dvsdk running on dm365 with Arago.
-> By now, I can't build any ti recipe for dm365 in Arago (arago-next).
-> I could build dvsdk externally following the readme, but I think it is
-> better to re-use you work.
-> Which are the recipes that I can build for dm365?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-arago-next was merged back to the master branch recently, but it shouldn't 
-matter, as DVSDK was buildable before the merge. If you are referring to the 
-fact that some components are not fetchable and need to be downloaded 
-manually, it's still the case for a few of them, as explained in the README.
-AFAIK, codecs for some platforms were not public at the time, I believe dm365 
-being one of them. I'll ping some people internally and see if/when this will 
-be fixed.
+On 27-04-10 03:48, Raffaele Recalcati wrote:
 
-> In case of problem I, and my team, will contribute to the work.
+> For Koen:
+> Instead, for OE environment, I have some problems creating the setup.
+> I supposed to use dev branch (openembedded.org setup instructions) and I'd
+> like a local.conf file in order to know which angstrom version is better to
+> choose.
 
-Thanks. Please keep us posted.
+Give http://gitorious.org/angstrom/angstrom-setup-scripts a try.
 
--- 
-Denys
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL1odDMkyGM64RGpERAiSSAJ4/KI0eXJR6R53h4IsThXf+xjFuvACfe+rG
+igAsSzG5PGsjiOZs42/xckU=
+=IYBQ
+-----END PGP SIGNATURE-----
+
 
 
