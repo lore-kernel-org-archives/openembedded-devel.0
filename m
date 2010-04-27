@@ -1,43 +1,48 @@
-Received: from mail-ew0-f211.google.com ([209.85.219.211])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicola.mfb@gmail.com>) id 1O6lEo-000730-EZ
+	(envelope-from <kergoth@gmail.com>) id 1O6lYL-0002H5-6l
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Apr 2010 15:54:11 +0200
-Received: by ewy3 with SMTP id 3so219851ewy.26
+	Tue, 27 Apr 2010 16:14:34 +0200
+Received: by vws1 with SMTP id 1so35398vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Apr 2010 06:50:30 -0700 (PDT)
+	Tue, 27 Apr 2010 07:10:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=NXC2eKm95tqmzjeZdUffYH9CbMQyORH3riDPAg5efkU=;
-	b=NqdJGlAaWLxE0G3Gk6Tpv+ZVYAEJOY4VB5VhaFDgdE5cP3CEyxD1HFlA8eda5AIyk4
-	YtyuNG+23ykGDPxMk5VGT8HZiQOjMy57x9ogUyavq1iJREMjd3AvjVutj+fPNe0w7U2F
-	0tNhCVYeAY6E8W7dpyCOaiZ+RWNgGjbdH8RYs=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:cc:content-type;
+	bh=EfKFi/4W0Tqj9HUFI/LEjTYkxhgifTC1JzdQcz+0AhA=;
+	b=ojY7vGQBWREo14Bc/yD1a6/whRvbESrjzN+118meaKx9JWHo96lJQDla47l6sKM9PE
+	oDqdfJn2IFEBbHmynVAylrzJOsJkqp0OQy0oqIL+Z3pdQYhYs6LZvFzn15qVqZWlQlM+
+	Ls8XMMXx4kxsWNMoVGmRT89APbl9jSB2ZMhw0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=iJRv0vbdQ4xEK9O5C1kwI08kvlrt0xySyk4aTSA3Vm3i12jFSQ/bR9e1h+6Xm2Rbx2
-	pkmH7v2eRT22+Lc4p8Kt2mB2pJq96xdrhlcqvUGgIOwCBVBNFmWuqaf3M8JJFMHhoGfR
-	K7bZobTUtIM5FIM86A0t+AoFtnzQgVghA1uFI=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:cc:content-type;
+	b=ecQYRF69XUmecZrRPg4qqm/mzHrDpwrnFJhlSholGKGvTt4dtvMsWOJdItk3x2+Sg0
+	5qeCRx2Mp+0js99RGEVdSQlREqY9m0XzUdo2ThYbILDxG7sQzmEZTT0uZRVdGTOZwv+X
+	CYh9+qZs+dKNzbQiCyDMN76S/wP0eCdvd1nCY=
+Received: by 10.229.224.133 with SMTP id io5mr2192557qcb.37.1272377440156; 
+	Tue, 27 Apr 2010 07:10:40 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.213.56.75 with SMTP id x11mr2232347ebg.74.1272376227751; Tue, 
-	27 Apr 2010 06:50:27 -0700 (PDT)
-Received: by 10.213.13.137 with HTTP; Tue, 27 Apr 2010 06:50:26 -0700 (PDT)
-In-Reply-To: <201004192032.30713.ml@vdm-design.de>
-References: <201004192032.30713.ml@vdm-design.de>
-Date: Tue, 27 Apr 2010 15:50:26 +0200
-Message-ID: <w2s359c5481004270650p47d68c07r721a0ddfde21faa2@mail.gmail.com>
-From: Nicola Mfb <nicola.mfb@gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.229.188.213 with HTTP; Tue, 27 Apr 2010 07:10:20 -0700 (PDT)
+In-Reply-To: <1272354815-21542-1-git-send-email-mchazaux@adeneo-embedded.com>
+References: <1272354815-21542-1-git-send-email-mchazaux@adeneo-embedded.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 27 Apr 2010 07:10:20 -0700
+X-Google-Sender-Auth: a4bcc79d5fb71aa4
+Message-ID: <w2wb6ebd0a51004270710udf58d331s57b35563f38b09de@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.211
-X-SA-Exim-Mail-From: nicola.mfb@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: dbus-c++
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: =?UTF-8?Q?Micka=C3=ABl_Chazaux?= <mchazaux@adeneo-embedded.com>
+Subject: Re: [PATCH] Add error handling to read_cache in stage-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +56,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2010 13:54:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Apr 2010 14:14:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Apr 19, 2010 at 8:32 PM, Thomas Zimmermann <ml@vdm-design.de> wrote:
-> Hi,
-> i need dbus-c++-native, but dev.openwengo.org is gone.
-> I want to change the host to the unofficial git i found on
-> http://www.freedesktop.org/wiki/Software/dbus-c%2B%2B because the official tells
-> me that there is no such repo.
-> Also i defined a PV for this package.
+2010/4/27 Micka=C3=ABl Chazaux <mchazaux@adeneo-embedded.com>
+
+> Sometimes stage-manager crashes with this message :
+> Traceback (most recent call last):
+>  File
+> "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-=
+manager",
+> line 79, in <module>
+>   cache =3D read_cache(options.cachefile)
+>  File
+> "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-=
+manager",
+> line 34, in read_cache
+>   cache[data[0]]['ts'] =3D int(data[1])
+> IndexError: list index out of range
 >
-> Is this patch ok for everyone?
+> This is due to a corrupted cache file. This patch adds an error message
+> and continues parsing ignoring the wrong line. The file is then properly
+> regenerated.
+>
+>
+You forgot a Signed-off-by, best off doing a commit -s in the future.  Look=
+s
+okay to me.
 
-Some progress on that? would be possible to add dbusxx-introspect too?
-
-Regards
-
-     Niko
-
+Acked-By: Chris Larson <chris_larson@mentor.com>
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
