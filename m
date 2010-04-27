@@ -1,48 +1,44 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-bw0-f220.google.com ([209.85.218.220])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1O6lYL-0002H5-6l
+	(envelope-from <aalonso00@gmail.com>) id 1O6lqi-0002FW-OI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Apr 2010 16:14:34 +0200
-Received: by vws1 with SMTP id 1so35398vws.6
+	Tue, 27 Apr 2010 16:33:21 +0200
+Received: by bwz20 with SMTP id 20so2940304bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Apr 2010 07:10:40 -0700 (PDT)
+	Tue, 27 Apr 2010 07:29:40 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=EfKFi/4W0Tqj9HUFI/LEjTYkxhgifTC1JzdQcz+0AhA=;
-	b=ojY7vGQBWREo14Bc/yD1a6/whRvbESrjzN+118meaKx9JWHo96lJQDla47l6sKM9PE
-	oDqdfJn2IFEBbHmynVAylrzJOsJkqp0OQy0oqIL+Z3pdQYhYs6LZvFzn15qVqZWlQlM+
-	Ls8XMMXx4kxsWNMoVGmRT89APbl9jSB2ZMhw0=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=gLkCnmXfKGZ6NcKS8C/IjuBhYn8neAIKzUETYqgg6FQ=;
+	b=MtQPzWc2KR2mGxMFw4nCCX4fISeqZhfcRc3C1awtbFodiY1sw1MgV8UkcA7+lo0JQK
+	bNmSR8xp6rTDGdcNBaCoBXUn2lg9pHHQFgvLGEW64DuDWuRLCxk4aFBzlAKNB233kFSO
+	8fFyShqUd2ODu1hOQnOVtbdzpFyV6tX9d9nAo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=ecQYRF69XUmecZrRPg4qqm/mzHrDpwrnFJhlSholGKGvTt4dtvMsWOJdItk3x2+Sg0
-	5qeCRx2Mp+0js99RGEVdSQlREqY9m0XzUdo2ThYbILDxG7sQzmEZTT0uZRVdGTOZwv+X
-	CYh9+qZs+dKNzbQiCyDMN76S/wP0eCdvd1nCY=
-Received: by 10.229.224.133 with SMTP id io5mr2192557qcb.37.1272377440156; 
-	Tue, 27 Apr 2010 07:10:40 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.188.213 with HTTP; Tue, 27 Apr 2010 07:10:20 -0700 (PDT)
-In-Reply-To: <1272354815-21542-1-git-send-email-mchazaux@adeneo-embedded.com>
-References: <1272354815-21542-1-git-send-email-mchazaux@adeneo-embedded.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 27 Apr 2010 07:10:20 -0700
-X-Google-Sender-Auth: a4bcc79d5fb71aa4
-Message-ID: <w2wb6ebd0a51004270710udf58d331s57b35563f38b09de@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=Rm8G2FhNIZvKMOO/HknKAIk3LHVmVDHGkA7rqBSSr91/6IVpiFFT8ZmBpeVbw22i5w
+	PXSXGKnidcVfaRHXFmJ/O4/+Xi271kqC61ohqCZtGiS7q0Ofp5W8Y+pK22e1v3PKswsF
+	fmFtBd0AXAMdGonvA7rfsqf1hc2LeBQSIbbUE=
+Received: by 10.204.4.153 with SMTP id 25mr3815355bkr.77.1272378580430;
+	Tue, 27 Apr 2010 07:29:40 -0700 (PDT)
+Received: from localhost.localdomain ([201.153.217.127])
+	by mx.google.com with ESMTPS id a11sm171739bkc.21.2010.04.27.07.29.38
+	(version=SSLv3 cipher=RC4-MD5); Tue, 27 Apr 2010 07:29:40 -0700 (PDT)
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Tue, 27 Apr 2010 09:29:12 -0500
+Message-Id: <1272378556-21914-1-git-send-email-aalonso00@gmail.com>
+X-Mailer: git-send-email 1.6.6.1
+In-Reply-To: <openembedded-devel@lists.openembedded.org>
+References: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.218.220
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: =?UTF-8?Q?Micka=C3=ABl_Chazaux?= <mchazaux@adeneo-embedded.com>
-Subject: Re: [PATCH] Add error handling to read_cache in stage-manager
+Subject: [PATCH 1/5] xilinx-ml507.conf: add screen options
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,40 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Apr 2010 14:14:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Apr 2010 14:33:21 -0000
 
-2010/4/27 Micka=C3=ABl Chazaux <mchazaux@adeneo-embedded.com>
+Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+---
+ conf/machine/xilinx-ml507.conf |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-> Sometimes stage-manager crashes with this message :
-> Traceback (most recent call last):
->  File
-> "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-=
-manager",
-> line 79, in <module>
->   cache =3D read_cache(options.cachefile)
->  File
-> "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-=
-manager",
-> line 34, in read_cache
->   cache[data[0]]['ts'] =3D int(data[1])
-> IndexError: list index out of range
->
-> This is due to a corrupted cache file. This patch adds an error message
-> and continues parsing ignoring the wrong line. The file is then properly
-> regenerated.
->
->
-You forgot a Signed-off-by, best off doing a commit -s in the future.  Look=
-s
-okay to me.
+diff --git a/conf/machine/xilinx-ml507.conf b/conf/machine/xilinx-ml507.conf
+index 693f904..8c888b2 100644
+--- a/conf/machine/xilinx-ml507.conf
++++ b/conf/machine/xilinx-ml507.conf
+@@ -15,7 +15,7 @@ PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx-ml507"
+ 
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet"
++MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet screen"
+ MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
+ 
+ UBOOT_ARCH = "ppc"
+@@ -30,7 +30,7 @@ PREFERRED_VERSION_u-boot_xilinx-ml507 = "git"
+ # XILINX_BOARD = "ml507"
+ 
+ # Don't use tty1
+-USE_VT = "0"
++# USE_VT = "0"
+ SERIAL_CONSOLE = "9600 ttyS0"
+ 
+ # Device nodes add xsa for (system ace)
+-- 
+1.6.6.1
 
-Acked-By: Chris Larson <chris_larson@mentor.com>
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
 
