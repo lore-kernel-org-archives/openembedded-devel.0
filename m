@@ -1,42 +1,42 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O79ky-0002AD-HN
+	(envelope-from <ospite@studenti.unina.it>) id 1O79xm-0005xG-Mp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 18:05:02 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O79hO-0007cv-DR from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 09:01:18 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 28 Apr 2010 09:01:18 -0700
-Received: from 172.30.80.19 ([172.30.80.19]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Wed, 28 Apr 2010 16:01:17 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	28 Apr 2010 09:01:08 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Wed, 28 Apr 2010 18:18:15 +0200
+Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 28 Apr 2010 18:14:32 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by fbcmmo06.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 28 Apr 2010 18:14:27 +0200
+Received: from jcn ([87.3.13.157]) by FBCMCL01B07.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Wed, 28 Apr 2010 18:14:26 +0200
+Date: Wed, 28 Apr 2010 18:14:20 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1272402270.3865.734.camel@trini-m4400>
-References: <1272401386.3865.719.camel@trini-m4400>
-	<1272402270.3865.734.camel@trini-m4400>
-Organization: Mentor Graphics Corporation
-Date: Wed, 28 Apr 2010 09:01:08 -0700
-Message-ID: <1272470468.3865.774.camel@trini-m4400>
+Message-Id: <20100428181420.38065efb.ospite@studenti.unina.it>
+In-Reply-To: <hr4f9u$48g$1@dough.gmane.org>
+References: <hqpfou$igp$1@dough.gmane.org>
+	<1272296194-17980-1-git-send-email-ospite@studenti.unina.it>
+	<hr4f9u$48g$1@dough.gmane.org>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.0; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 28 Apr 2010 16:01:18.0166 (UTC)
-	FILETIME=[09A06F60:01CAE6EC]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-OriginalArrivalTime: 28 Apr 2010 16:14:26.0602 (UTC)
+	FILETIME=[DF9238A0:01CAE6ED]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCHv3] Remove scsi/scsi.h header from linux-libc-headers
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [PATCH] image.bbclass: create /etc/device_table from IMAGE_DEVICE_TABLES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,210 +50,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Apr 2010 16:05:02 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 28 Apr 2010 16:18:16 -0000
+X-Groupsio-MsgNum: 18864
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Wed__28_Apr_2010_18_14_20_+0200_RZCaQDNcN1K/jR_B"
+
+--Signature=_Wed__28_Apr_2010_18_14_20_+0200_RZCaQDNcN1K/jR_B
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-linux-libc-headers: Delete include/scsi/scsi.h
+On Mon, 26 Apr 2010 18:34:06 +0200
+Koen Kooi <k.kooi@student.utwente.nl> wrote:
 
-With 2.6.31, the kernel started exporting certain SCSI headers again and
-in particular scsi/scsi.h.  After talking with Christoph Hellwig and
-James Bottemley (scsi maintainer) the kernel shouldn't export
-scsi/scsi.h.  Removing this from the kernel, rather than trying to clean
-it up to be userland parseable is the right way to go.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 26-04-10 17:36, Antonio Ospite wrote:
+> > Right now when the 'devices' script from initscripts is called the
+> > layout specified in IMAGE_DEVICES_TABLES is lost.
+> >=20
+> > With this change the default behaviour when no IMAGE_DEVICE_TABLES is
+> > specified is to always use files/device_table-minimal.txt
+> >=20
+> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+>=20
+> Acked-By: Koen Kooi <koen@openembedded.org>
 
-We bump the libc INC_PRs to make sure the end user has a sane
-<scsi/scsi.h> again.
+Koen, would you push this if there are no objections?
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
-
-diff --git a/recipes/eglibc/eglibc.inc b/recipes/eglibc/eglibc.inc
-index 5c06ae6..10a4a23 100644
---- a/recipes/eglibc/eglibc.inc
-+++ b/recipes/eglibc/eglibc.inc
-@@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.eglibc.org/home"
- SECTION =3D "libs"
- PRIORITY =3D "required"
- LICENSE =3D "LGPL"
--INC_PR =3D "r9"
-+INC_PR =3D "r10"
- # nptl needs unwind support in gcc, which can't be built without glibc.
- DEPENDS =3D "virtual/${TARGET_PREFIX}gcc-intermediate linux-libc-headers"
- #this leads to circular deps, so lets not add it yet
-diff --git a/recipes/glibc/glibc.inc b/recipes/glibc/glibc.inc
-index 6741b21..19b5524 100644
---- a/recipes/glibc/glibc.inc
-+++ b/recipes/glibc/glibc.inc
-@@ -11,7 +11,7 @@ PROVIDES =3D "virtual/libc
-virtual/${TARGET_PREFIX}libc-for-gcc"
- PROVIDES +=3D "virtual/libintl virtual/libiconv"
-=20
- # INC_PR for glibc.inc, glibc-initial.inc and glibc-stage.inc
--INC_PR =3D "r35"
-+INC_PR =3D "r36"
-=20
- inherit autotools
-=20
-diff --git
-a/recipes/linux-libc-headers/linux-libc-headers-2.6.31/scsi-use-__u8.patch =
-b/recipes/linux-libc-headers/linux-libc-headers-2.6.31/scsi-use-__u8.patch
-deleted file mode 100644
-index b754879..0000000
----
-a/recipes/linux-libc-headers/linux-libc-headers-2.6.31/scsi-use-__u8.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--This patch is from=20
--http://patchwork.kernel.org/patch/38102/
--It seems its still under discussion and it will involve glibc to get it
-fixed correctly.
--for now OE uses scsi headers from kernel and not from glibc.
--
---Khem
--
--Index: linux-2.6.31/include/scsi/scsi.h
--=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
----- linux-2.6.31.orig/include/scsi/scsi.h	2010-03-11 19:44:49.134590561
--0800
--+++ linux-2.6.31/include/scsi/scsi.h	2010-03-11 19:45:12.744466326
--0800
--@@ -142,10 +142,10 @@ struct scsi_cmnd;
--=20
-- /* defined in T10 SCSI Primary Commands-2 (SPC2) */
-- struct scsi_varlen_cdb_hdr {
---	u8 opcode;        /* opcode always =3D=3D VARIABLE_LENGTH_CMD */
---	u8 control;
---	u8 misc[5];
---	u8 additional_cdb_length;         /* total cdb length - 8 */
--+	__u8 opcode;        /* opcode always =3D=3D VARIABLE_LENGTH_CMD */
--+	__u8 control;
--+	__u8 misc[5];
--+	__u8 additional_cdb_length;         /* total cdb length - 8 */
-- 	__be16 service_action;
-- 	/* service specific data follows */
-- };
-diff --git
-a/recipes/linux-libc-headers/linux-libc-headers-2.6.32/scsi-use-__u8.patch =
-b/recipes/linux-libc-headers/linux-libc-headers-2.6.32/scsi-use-__u8.patch
-deleted file mode 100644
-index b754879..0000000
----
-a/recipes/linux-libc-headers/linux-libc-headers-2.6.32/scsi-use-__u8.patch
-+++ /dev/null
-@@ -1,26 +0,0 @@
--This patch is from=20
--http://patchwork.kernel.org/patch/38102/
--It seems its still under discussion and it will involve glibc to get it
-fixed correctly.
--for now OE uses scsi headers from kernel and not from glibc.
--
---Khem
--
--Index: linux-2.6.31/include/scsi/scsi.h
--=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
----- linux-2.6.31.orig/include/scsi/scsi.h	2010-03-11 19:44:49.134590561
--0800
--+++ linux-2.6.31/include/scsi/scsi.h	2010-03-11 19:45:12.744466326
--0800
--@@ -142,10 +142,10 @@ struct scsi_cmnd;
--=20
-- /* defined in T10 SCSI Primary Commands-2 (SPC2) */
-- struct scsi_varlen_cdb_hdr {
---	u8 opcode;        /* opcode always =3D=3D VARIABLE_LENGTH_CMD */
---	u8 control;
---	u8 misc[5];
---	u8 additional_cdb_length;         /* total cdb length - 8 */
--+	__u8 opcode;        /* opcode always =3D=3D VARIABLE_LENGTH_CMD */
--+	__u8 control;
--+	__u8 misc[5];
--+	__u8 additional_cdb_length;         /* total cdb length - 8 */
-- 	__be16 service_action;
-- 	/* service specific data follows */
-- };
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.31.bb
-b/recipes/linux-libc-headers/linux-libc-headers_2.6.31.bb
-index 2e4041f..953b065 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.31.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.31.bb
-@@ -2,13 +2,12 @@ require linux-libc-headers.inc
-=20
- INHIBIT_DEFAULT_DEPS =3D "1"
- DEPENDS +=3D "unifdef-native"
--PR =3D "r3"
-+PR =3D "r4"
-=20
- DEFAULT_PREFERENCE =3D "-1"
-=20
- SRC_URI =3D
-"${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-
-file://0001-implement-TIF_RESTORE_SIGMASK-support-and-enable-the.patch;patc=
-h=3D1 \
--           file://scsi-use-__u8.patch;patch=3D1 \
- 	  "
- S =3D "${WORKDIR}/linux-${PV}"
-=20
-@@ -44,6 +43,7 @@ do_compile () {
- do_install() {
- 	set_arch
- 	oe_runmake headers_install INSTALL_HDR_PATH=3D${D}${exec_prefix} ARCH=3D
-$ARCH
-+	rm -f ${D}${exec_prefix}/include/scsi/scsi.h
- }
-=20
- SRC_URI[md5sum] =3D "84c077a37684e4cbfa67b18154390d8a"
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.32.bb
-b/recipes/linux-libc-headers/linux-libc-headers_2.6.32.bb
-index d82a749..f1c371d 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.32.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.32.bb
-@@ -2,13 +2,12 @@ require linux-libc-headers.inc
-=20
- INHIBIT_DEFAULT_DEPS =3D "1"
- DEPENDS +=3D "unifdef-native"
--PR =3D "r3"
-+PR =3D "r4"
-=20
- DEFAULT_PREFERENCE =3D "-1"
-=20
- SRC_URI =3D
-"${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
- 	   file://export_sa_family_t.patch;patch=3D1 \
--           file://scsi-use-__u8.patch;patch=3D1 \
- 	  "
- S =3D "${WORKDIR}/linux-${PV}"
-=20
-@@ -44,6 +43,7 @@ do_compile () {
- do_install() {
- 	set_arch
- 	oe_runmake headers_install INSTALL_HDR_PATH=3D${D}${exec_prefix} ARCH=3D
-$ARCH
-+	rm -f ${D}${exec_prefix}/include/scsi/scsi.h
- }
-=20
- SRC_URI[md5sum] =3D "260551284ac224c3a43c4adac7df4879"
-diff --git a/recipes/uclibc/uclibc.inc b/recipes/uclibc/uclibc.inc
-index f39a5e8..4686d34 100644
---- a/recipes/uclibc/uclibc.inc
-+++ b/recipes/uclibc/uclibc.inc
-@@ -2,7 +2,7 @@ DESCRIPTION =3D "C library for embedded systems"
- LICENSE =3D "LGPL"
- SECTION =3D "libs"
- PRIORITY =3D "required"
--INC_PR =3D "r33"
-+INC_PR =3D "r34"
- #
- # For now, we will skip building of a gcc package if it is a uclibc one
- # and our build is not a uclibc one, and we skip a glibc one if our
-build
-
+Thanks,
+   Antonio
 
 --=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Wed__28_Apr_2010_18_14_20_+0200_RZCaQDNcN1K/jR_B
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkvYXtwACgkQ5xr2akVTsAGFhwCfV+B4wW7xEGmhArgde8b/yjmK
+/lcAoJqDnwN95s3aYw1TU1kppfYIYwUm
+=/IeE
+-----END PGP SIGNATURE-----
+
+--Signature=_Wed__28_Apr_2010_18_14_20_+0200_RZCaQDNcN1K/jR_B--
