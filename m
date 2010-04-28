@@ -1,34 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7A5y-0006Gt-Nw for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 18:26:43 +0200
+	id 1O7ACr-0006Zr-MN for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Apr 2010 18:33:51 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7A2Q-00056T-Aw for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 18:23:02 +0200
+	id 1O7A9E-0000rj-J3 for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Apr 2010 18:30:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Apr 2010 18:23:02 +0200
+	Wed, 28 Apr 2010 18:30:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Apr 2010 18:23:02 +0200
+	Wed, 28 Apr 2010 18:30:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 28 Apr 2010 18:22:50 +0200
-Message-ID: <hr9ncq$alr$1@dough.gmane.org>
-References: <1272401386.3865.719.camel@trini-m4400>	<1272402270.3865.734.camel@trini-m4400>
-	<1272470468.3865.774.camel@trini-m4400>
+Date: Wed, 28 Apr 2010 18:25:08 +0200
+Message-ID: <hr9nh4$alr$2@dough.gmane.org>
+References: <hqpfou$igp$1@dough.gmane.org>	<1272296194-17980-1-git-send-email-ospite@studenti.unina.it>	<hr4f9u$48g$1@dough.gmane.org>
+	<20100428181420.38065efb.ospite@studenti.unina.it>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <1272470468.3865.774.camel@trini-m4400>
+In-Reply-To: <20100428181420.38065efb.ospite@studenti.unina.it>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3] Remove scsi/scsi.h header from linux-libc-headers
+Subject: Re: [PATCH] image.bbclass: create /etc/device_table from IMAGE_DEVICE_TABLES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Apr 2010 16:26:43 -0000
+X-List-Received-Date: Wed, 28 Apr 2010 16:33:51 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 28-04-10 18:01, Tom Rini wrote:
-> linux-libc-headers: Delete include/scsi/scsi.h
-> 
-> With 2.6.31, the kernel started exporting certain SCSI headers again and
-> in particular scsi/scsi.h.  After talking with Christoph Hellwig and
-> James Bottemley (scsi maintainer) the kernel shouldn't export
-> scsi/scsi.h.  Removing this from the kernel, rather than trying to clean
-> it up to be userland parseable is the right way to go.
-> 
-> We bump the libc INC_PRs to make sure the end user has a sane
-> <scsi/scsi.h> again.
-> 
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+Done, thanks for the patch!
 
-Acked-By: Koen Kooi <k-kooi@ti.com>
+On 28-04-10 18:14, Antonio Ospite wrote:
+> On Mon, 26 Apr 2010 18:34:06 +0200
+> Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> 
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 26-04-10 17:36, Antonio Ospite wrote:
+>>> Right now when the 'devices' script from initscripts is called the
+>>> layout specified in IMAGE_DEVICES_TABLES is lost.
+>>>
+>>> With this change the default behaviour when no IMAGE_DEVICE_TABLES is
+>>> specified is to always use files/device_table-minimal.txt
+>>>
+>>> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+>>
+>> Acked-By: Koen Kooi <koen@openembedded.org>
+> 
+> Koen, would you push this if there are no objections?
+> 
+> Thanks,
+>    Antonio
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL2GDaMkyGM64RGpERAljVAJ4/fRKFn5ygDZoqdFMBFh3aWxQwYwCgqree
-vh/O7agUqeF0RE9LGPz7Wq4=
-=yE6h
+iD8DBQFL2GFjMkyGM64RGpERAjdBAJ9Y24F2iqPUNBTL96xErdnX8Y1T/QCdEE+8
+EZ1fuzMzbZVU/OrMFvhvGRE=
+=uXiV
 -----END PGP SIGNATURE-----
 
 
