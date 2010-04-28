@@ -1,38 +1,25 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O78di-0007q3-Qt
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 16:53:27 +0200
-Received: (qmail 22643 invoked by uid 503); 28 Apr 2010 14:55:47 -0000
-Received: from b6.ovh.net (HELO mail606.ha.ovh.net) (213.186.33.56)
-	by 63.mail-out.ovh.net with SMTP; 28 Apr 2010 14:55:47 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 28 Apr 2010 14:49:47 -0000
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.7?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 28 Apr 2010 14:49:45 -0000
-Message-ID: <4BD84B08.4000300@eukrea.com>
-Date: Wed, 28 Apr 2010 16:49:44 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
+	id 1O79NE-000606-Fd for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Apr 2010 17:40:29 +0200
+Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
+	by mzh.zlo.nu (Postfix) with ESMTP id ECBF914087
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Apr 2010 17:36:46 +0200 (CEST)
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>	<v2hfc0861611004260046za2daa3a4ve91f93ab88e72d8e@mail.gmail.com>	<hr3im2$gf6$1@dough.gmane.org>	<x2rfc0861611004261141u68a0ad71icfc12c12c3053c23@mail.gmail.com>	<hr4t3j$tds$1@dough.gmane.org>
-	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>
-In-Reply-To: <k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>
-X-Ovh-Tracer-Id: 5406852828968693065
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Wed, 28 Apr 2010 17:36:46 +0200
+Message-Id: <1272469006-26272-1-git-send-email-zlo@zlo.nu>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: zlo@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Regarding customized image with Qt embedded support.
+Subject: [PATCH] Apply remove-bashisms patch for runtime and compile time bashisms in "configure".
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,21 +33,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Apr 2010 14:53:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 28 Apr 2010 15:40:29 -0000
 
-Hi,
+From: Marc Olzheim <marc@iphion.nl>
 
-Le 28/04/2010 16:42, Abhishek Sharma a écrit :
-> It was silly of me to put INIT_SCRIPTS = "" without actually knowing about them.
-> Now I have changed the image file and it looks like:
-> require base-image.bb
-> IMAGE_INSTALL = "qtehelloworld"
+---
+ .../remove-configure-bashisms.patch                |   47 ++++++++++++++++++++
+ recipes/iproute2/iproute2_2.6.31.bb                |    4 +-
+ 2 files changed, 50 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/iproute2/iproute2-2.6.31/remove-configure-bashisms.patch
 
-you need += here, else you replace the content of IMAGE_INSTALL 
-inherited from base-image by only your app !
+diff --git a/recipes/iproute2/iproute2-2.6.31/remove-configure-bashisms.patch b/recipes/iproute2/iproute2-2.6.31/remove-configure-bashisms.patch
+new file mode 100644
+index 0000000..941c26a
+--- /dev/null
++++ b/recipes/iproute2/iproute2-2.6.31/remove-configure-bashisms.patch
+@@ -0,0 +1,47 @@
++--- iproute2-2.6.31/configure	2009-12-26 19:26:44.000000000 +0100
+++++ iproute2-2.6.31/configure	2010-04-28 17:29:12.000000000 +0200
++@@ -3,7 +3,7 @@
++ #
++ INCLUDE=${1:-"$PWD/include"}
++ 
++-function check_atm
+++check_atm()
++ {
++ cat >/tmp/atmtest.c <<EOF
++ #include <atm.h>
++@@ -24,7 +24,7 @@
++ rm -f /tmp/atmtest.c /tmp/atmtest
++ }
++ 
++-function check_xt
+++check_xt()
++ {
++ #check if we have xtables from iptables >= 1.4.5.
++ cat >/tmp/ipttest.c <<EOF
++@@ -55,7 +55,7 @@
++ rm -f /tmp/ipttest.c /tmp/ipttest
++ }
++ 
++-function check_xt_old
+++check_xt_old()
++ {
++ # bail if previous XT checks has already succeded.
++ if grep TC_CONFIG_XT Config > /dev/null
++@@ -94,7 +94,7 @@
++ rm -f /tmp/ipttest.c /tmp/ipttest
++ }
++ 
++-function check_xt_old_internal_h
+++check_xt_old_internal_h()
++ {
++ # bail if previous XT checks has already succeded.
++ if grep TC_CONFIG_XT Config > /dev/null
++@@ -134,7 +134,7 @@
++ rm -f /tmp/ipttest.c /tmp/ipttest
++ }
++ 
++-function check_ipt
+++check_ipt()
++ {
++ 	if ! grep TC_CONFIG_XT Config > /dev/null
++ 	then
+diff --git a/recipes/iproute2/iproute2_2.6.31.bb b/recipes/iproute2/iproute2_2.6.31.bb
+index 543e1b1..2baed56 100644
+--- a/recipes/iproute2/iproute2_2.6.31.bb
++++ b/recipes/iproute2/iproute2_2.6.31.bb
+@@ -1,9 +1,11 @@
+ require iproute2.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI = "http://developer.osdl.org/dev/iproute2/download/${P}.tar.bz2 \
+ 	   file://new-flex-fix.patch;patch=1 \
++	   file://remove-configure-bashisms.patch;patch=1 \
++	   file://remove-bashisms.patch;patch=1 \
+ 	  "
+ 
+ S = "${WORKDIR}/iproute2-${PV}"
+-- 
+1.6.3.3
 
-Eric
 
 
