@@ -1,44 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7ACr-0006Zr-MN for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 18:33:51 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7A9E-0000rj-J3 for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Apr 2010 18:30:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Apr 2010 18:30:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Apr 2010 18:30:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1O7FBe-00052u-Na
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Apr 2010 23:52:56 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O7F84-00025L-1A from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Apr 2010 14:49:12 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 28 Apr 2010 14:49:11 -0700
+Received: from 172.30.80.19 ([172.30.80.19]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Wed, 28 Apr 2010 21:49:10 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	28 Apr 2010 14:49:01 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 28 Apr 2010 18:25:08 +0200
-Message-ID: <hr9nh4$alr$2@dough.gmane.org>
-References: <hqpfou$igp$1@dough.gmane.org>	<1272296194-17980-1-git-send-email-ospite@studenti.unina.it>	<hr4f9u$48g$1@dough.gmane.org>
-	<20100428181420.38065efb.ospite@studenti.unina.it>
+In-Reply-To: <4BD5BE2F.7030407@mwester.net>
+References: <4BD5BE2F.7030407@mwester.net>
+Organization: Mentor Graphics Corporation
+Date: Wed, 28 Apr 2010 14:49:00 -0700
+Message-ID: <1272491340.3865.806.camel@trini-m4400>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <20100428181420.38065efb.ospite@studenti.unina.it>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 28 Apr 2010 21:49:11.0491 (UTC)
+	FILETIME=[A3191130:01CAE71C]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] image.bbclass: create /etc/device_table from IMAGE_DEVICE_TABLES
+Subject: Re: Fix: stage hidden files as well
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,53 +49,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Apr 2010 16:33:51 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Apr 2010 21:52:56 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, 2010-04-26 at 11:24 -0500, Mike Westerhof wrote:
+> The following patch is a proposed patch to fix the problem where hidden
+> files are sometimes missed during staging.  A specific example is that
+> the symbolic link ".config" is not copied to the kernel staging area,
+> which causes madwifi-ng to fail to build.
+>=20
+> diff --git a/classes/staging.bbclass b/classes/staging.bbclass
+> index 32038a5..cb19cb9 100644
+> --- a/classes/staging.bbclass
+> +++ b/classes/staging.bbclass
+> @@ -35,6 +35,13 @@ sysroot_stage_dir() {
+>         if [ -d "$src" ]; then
+>                 mkdir -p "$dest"
+>                 cp -fpPR "$src"/* "$dest"
+> +               # Get hidden files as well, but carefully
+> +               for i in "$src"/.*
+> +               do
+> +                       if [ "$i" !=3D "$src"/. -a "$i" !=3D "$src"/.. ];=
+ then
+> +                              cp -fpPR "$i" "$dest"
+> +                       fi
+> +               done
+>         fi
+>  }
+>=20
+> If anyone has a better way to address the copy operations above, that
+> would be great.
 
-Done, thanks for the patch!
+So, I said this on IRC, but more formally, how about just for i in
+"$src"/.??* do as this lets us know we don't have '.' or '..', and if we
+skip out on '.a' or something being installed, that reeks of a bug in
+the program in question that should be fixed anyways (and would
+catch .config and others).
 
-On 28-04-10 18:14, Antonio Ospite wrote:
-> On Mon, 26 Apr 2010 18:34:06 +0200
-> Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 26-04-10 17:36, Antonio Ospite wrote:
->>> Right now when the 'devices' script from initscripts is called the
->>> layout specified in IMAGE_DEVICES_TABLES is lost.
->>>
->>> With this change the default behaviour when no IMAGE_DEVICE_TABLES is
->>> specified is to always use files/device_table-minimal.txt
->>>
->>> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
->>
->> Acked-By: Koen Kooi <koen@openembedded.org>
-> 
-> Koen, would you push this if there are no objections?
-> 
-> Thanks,
->    Antonio
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL2GFjMkyGM64RGpERAjdBAJ9Y24F2iqPUNBTL96xErdnX8Y1T/QCdEE+8
-EZ1fuzMzbZVU/OrMFvhvGRE=
-=uXiV
------END PGP SIGNATURE-----
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
