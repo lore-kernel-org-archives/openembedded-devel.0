@@ -1,36 +1,34 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1O7TyT-0002O3-Kh
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1O7U2L-00085R-02
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 15:40:22 +0200
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Apr 2010 15:36:34 +0200
-Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Apr 2010 15:36:34 +0200
-Received: from [192.168.1.116] ([80.117.39.139]) by FBCMCL01B01.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 29 Apr 2010 15:36:33 +0200
-From: gnutoo <GNUtoo@no-log.org>
+	Thu, 29 Apr 2010 15:44:22 +0200
+Received: (qmail 19575 invoked by uid 503); 29 Apr 2010 13:46:44 -0000
+Received: from b7.ovh.net (HELO mail606.ha.ovh.net) (213.186.33.57)
+	by 63.mail-out.ovh.net with SMTP; 29 Apr 2010 13:46:43 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 29 Apr 2010 13:40:36 -0000
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 29 Apr 2010 13:40:35 -0000
+Message-ID: <4BD98C53.1070000@eukrea.com>
+Date: Thu, 29 Apr 2010 15:40:35 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1272206485.2387.3.camel@gnutoo-desktop>
-References: <1272114888-16964-1-git-send-email-eric@eukrea.com>
-	<1272114888-16964-2-git-send-email-eric@eukrea.com>
-	<1272114888-16964-3-git-send-email-eric@eukrea.com>
-	<1272202763.2387.1.camel@gnutoo-desktop>
-	<1272205477.2387.2.camel@gnutoo-desktop>
-	<1272206485.2387.3.camel@gnutoo-desktop>
-Date: Thu, 29 Apr 2010 15:36:31 +0200
-Message-ID: <1272548191.2313.0.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 29 Apr 2010 13:36:34.0086 (UTC)
-	FILETIME=[FBECBC60:01CAE7A0]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+References: <1272114888-16964-1-git-send-email-eric@eukrea.com>	<1272114888-16964-2-git-send-email-eric@eukrea.com>	<1272114888-16964-3-git-send-email-eric@eukrea.com>	<1272202763.2387.1.camel@gnutoo-desktop>	<1272205477.2387.2.camel@gnutoo-desktop>	<1272206485.2387.3.camel@gnutoo-desktop>
+	<1272548191.2313.0.camel@gnutoo-desktop>
+In-Reply-To: <1272548191.2313.0.camel@gnutoo-desktop>
+X-Ovh-Tracer-Id: 10111425589895015753
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -48,20 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 13:40:26 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Apr 2010 13:44:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Sun, 2010-04-25 at 16:41 +0200, GNUtoo wrote:
-> I also had to bitbake and install libxxf86dga_1.1.1.bb.
-> Now it works.
-> 
-> Thanks
-Could you re-send a patch with all the fixes and the PR bump?
-So I could push it(I bet you don't have commit access yet)
+Le 29/04/2010 15:36, gnutoo a écrit :
+> On Sun, 2010-04-25 at 16:41 +0200, GNUtoo wrote:
+>> I also had to bitbake and install libxxf86dga_1.1.1.bb.
+>> Now it works.
+>>
+>> Thanks
+> Could you re-send a patch with all the fixes and the PR bump?
+> So I could push it(I bet you don't have commit access yet)
+>
+do you want that I add dependencies vs libxxf86dga and libxscrnsaver ?
 
-Denis.
-
-
+Eric
 
 
