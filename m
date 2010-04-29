@@ -1,38 +1,35 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
+Received: from smtp3-g21.free.fr ([212.27.42.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1O7XEj-00077u-SR
+	(envelope-from <david.oe@pilsoft.com>) id 1O7XKo-0007LB-KO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 19:09:18 +0200
-Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Apr 2010 19:05:33 +0200
-Received: from FBCMCL01B05.fbc.local ([192.168.69.86]) by FBCMMO04.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Apr 2010 19:04:47 +0200
-Received: from [192.168.1.116] ([80.117.39.139]) by FBCMCL01B05.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 29 Apr 2010 19:04:46 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Thu, 29 Apr 2010 19:15:36 +0200
+Received: from smtp3-g21.free.fr (localhost [127.0.0.1])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 8692881819C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Apr 2010 19:11:51 +0200 (CEST)
+Received: from mail.pilsoft.com (mna75-2-82-67-197-228.fbx.proxad.net
+	[82.67.197.228])
+	by smtp3-g21.free.fr (Postfix) with ESMTP id 9C53881812A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Apr 2010 19:11:49 +0200 (CEST)
+Received: from [192.168.33.16] ([192.168.33.1]) BY mail.pilsoft.com
+	([192.168.33.30])
+	WITH ESMTP (4D WebSTAR V Mail (5.4.1)); Thu, 29 Apr 2010 19:11:46 +0200
+From: David Hemmo <david.oe@pilsoft.com>
+Date: Thu, 29 Apr 2010 19:11:48 +0200
+Message-Id: <957DA1DB-B1DC-43D4-AACC-D647DFBD43D7@pilsoft.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hqicrj$dp9$1@dough.gmane.org>
-References: <alpine.DEB.1.10.1004161912440.13411@vitus.devnet.local>
-	<1271687665-23003-1-git-send-email-vjensen@gmx.de>
-	<1271687665-23003-2-git-send-email-vjensen@gmx.de>
-	<hqicrj$dp9$1@dough.gmane.org>
-Date: Thu, 29 Apr 2010 19:04:46 +0200
-Message-ID: <1272560686.2313.34.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 29 Apr 2010 17:04:46.0681 (UTC)
-	FILETIME=[12177490:01CAE7BE]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+Mime-Version: 1.0 (Apple Message framework v1078)
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 212.27.42.3
+X-SA-Exim-Mail-From: david.oe@pilsoft.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
+	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008: make PREFERRED_VERSION_linux-libc-headers a weak assignment
+Subject: Problem compiling mono
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,26 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 17:09:18 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Apr 2010 17:15:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-> > -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
-> > +PREFERRED_VERSION_linux-libc-headers 	?= "2.6.31"
-> 
-> NACK, there's is a good reason it's not soft assigned. Your hack to make
-> it machine specific is worse, since it means that other machines with
-> the same arch now get a "random" version.
-> 
-> What we can do is globally increase the version, which was planned
-> anyway. Does can need .32 or .33? I tested using llc .32 locally, but
-> hadn't pushed that change yet.
-eee701 require 2.6.33 headers(or libdrm to stage the headers) for the
-latest xf86-video-intel xorg driver
-So I did that locally(I know I can't commit such stuff) and it worked.
-But the correct fix may be to modify libdrm to stage the libs I bet...
+Hello All,
 
-Denis.
+the problem arises when bitbake tries to configure : =
+mono-mcs-intermediate_2.4.2.3.bb
 
+here is the error I get in the log file:
+
+automake (GNU automake) 1.10.3
+Copyright (C) 2009 Free Software Foundation, Inc.
+License GPLv2+: GNU GPL version 2 or later =
+<http://gnu.org/licenses/gpl.html>
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Tom Tromey <tromey@redhat.com>
+       and Alexandre Duret-Lutz <adl@gnu.org>.
+AUTOV is 1.10
+install: cannot change permissions of `/usr/share/aclocal-1.10': No such =
+file or directory
+
+I guess the culprit is the target prefix override in =
+mono-mcs-intermediate.inc, but I don't know how to fix it :-(
+I don't feel comfortable allowing openembedded to access /usr or /etc =
+...
+
+I hope someone will be able to help
+
+Thanks
+
+David Hemmo=20=
 
 
