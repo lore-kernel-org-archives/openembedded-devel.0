@@ -1,45 +1,30 @@
-Received: from mail-bw0-f220.google.com ([209.85.218.220])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1O7R7a-0000JG-L7
+	(envelope-from <mickey@vanille-media.de>) id 1O7RnF-0000Hs-Ir
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 12:38:28 +0200
-Received: by bwz20 with SMTP id 20so4519071bwz.12
+	Thu, 29 Apr 2010 13:20:34 +0200
+Received: from [192.168.1.8] (dialbs-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id C43895849CB
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 03:33:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=oY/teWLzTEppdPWPTWE2r3Y4Tx6VMjSz+OLGTCG2+r8=;
-	b=m3/mQQ8fO3tV+fuUt8ktT8w64wJkErdJfz0ax9+Zxk9i1g5CVMrpNma0xs6wq7hXVK
-	RgWhYQj1tU/hVdQjHax3k2P2NifuwzlMoTfxLrFK8hRxHuLZkCzbXuELE6FhB5fmIlCZ
-	xXLbNO91FFBmiNh/MnaMFcaGx9b61jV1Y9Ibw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=LTKh+oplrSQzCuSIRLDmXbedcvk6jHBcBOqC2e0pSuuIyikysX/G2OmnQpjGQoMU6t
-	pozym4phjGHgzVuvjDwDJH1eV2kf2Ry/69OSpE5enJuZguMaoRWyWnctkxMkaIauJz2r
-	kqTCKVehH6OTY3ZwS9zVQy/h3qdzNANHHhSHE=
-MIME-Version: 1.0
-Received: by 10.204.84.83 with SMTP id i19mr5726716bkl.175.1272537223433; Thu, 
-	29 Apr 2010 03:33:43 -0700 (PDT)
-Received: by 10.204.84.13 with HTTP; Thu, 29 Apr 2010 03:33:42 -0700 (PDT)
-In-Reply-To: <B4E2B620-1CC1-4540-B76E-EC69AB2FC2EC@pilsoft.com>
-References: <h2ub7a795c81004290008z458edaf3wd76e38ed4784cd64@mail.gmail.com>
-	<B4E2B620-1CC1-4540-B76E-EC69AB2FC2EC@pilsoft.com>
-Date: Thu, 29 Apr 2010 12:33:42 +0200
-Message-ID: <n2hade1bdc1004290333sf80add4ao336fdc3a8175cc4a@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	Thu, 29 Apr 2010 13:21:46 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.220
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+Organization: Vanille-Media
+Date: Thu, 29 Apr 2010 13:16:53 +0200
+Message-ID: <1272539813.5855.3.camel@opal>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Apache2 on angstrom
+Subject: [Fwd: package_deb and update-alteernatives-dpkg-native on amd64 fails]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,88 +38,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 10:38:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 29 Apr 2010 11:20:34 -0000
+X-Groupsio-MsgNum: 18875
+Content-Type: multipart/mixed; boundary="=-T/aFB0hz797wPB31zHO+"
 
-It seems that
-
-   1. configure:30880: ccache arm-angstrom-linux-gnueabi-gcc -march=armv5te
-   -mtune=arm926ej-s -mthumb-interwork -mno-thumb -c
-   -I/home/sources/OE/angstrom-dev/staging/armv5te-angstrom-linux-gnueabi/usr/include/openssl
-   -isystem/home/sources/OE/angstrom-dev/staging/armv5te-angstrom-linux-gnueabi/usr/include
-   -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb3
-   -DPATH_MAX=4096
-   -isystem/home/sources/OE/angstrom-dev/staging/armv5te-angstrom-linux-gnueabi/usr/include
-   -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE conftest.c >&5
-   2. conftest.c: In function 'main':
-   3. conftest.c:31: error: 'CRYPTD' undeclared (first use in this function)
-   4. conftest.c:31: error: (Each undeclared identifier is reported only
-   once
-   5. conftest.c:31: error: for each function it appears in.)
-   6. conftest.c:31: error: expected ';' before 'buffer'
-   7. conftest.c:32: error: 'buffer' undeclared (first use in this function)
-   8. configure:30880: $? = 1
-
-
-Thre problem seems the compatibility with old crypt_r call.
-But I don't know where CRYPTD macro is defined and if it is important to
-support it.
-
-This is the test that fails:
-
-#include <crypt.h>
-int
-main ()
-{
-CRYPTD buffer;
-  crypt_r("passwd", "hash", &buffer);
-  ;
-  return 0;
-}
+--=-T/aFB0hz797wPB31zHO+
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
 
 
-2010/4/29 David Hemmo <david.oe@pilsoft.com>
+--=-T/aFB0hz797wPB31zHO+
+Content-Disposition: inline
+Content-Description: Weitergeleitete Nachricht - package_deb and
+ update-alteernatives-dpkg-native on amd64 fails
+Content-Type: message/rfc822
 
-> Hello Fabio,
->
-> I guess it is related to the kernel you are using or the kernel header you
-> included
-> I don't know in what version of Linux CRYPTD has been added, but it must be
-> posterior to the one you are using
->
-> David Hemmo
->
-> On Apr 29, 2010, at 9:08 AM, Fabio Mauri wrote:
->
-> > Hi all,
-> >
-> >   I am trying to build an image with Apache2 and modphp installed.
-> > During the compilation I get this error message:
-> >
-> > http://pastebin.com/uBCr1sYE
-> >
-> > following the error message there is the related config.log
-> > Does someone know what is missing in my setup?
-> >
-> >
-> > --
-> > Fabio Mauri
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Return-Path: <mailman-bounces@lists.linuxtogo.org>
+X-Spam-Checker-Version: SpamAssassin 3.1.7-deb3 (2006-10-05) on 
+ drlauer-research.com
+X-Spam-Level: 
+X-Spam-Status: No, score=-2.6 required=4.0 tests=BAYES_00 autolearn=ham 
+ version=3.1.7-deb3
+X-Original-To: mickey@vanille-media.de
+Delivered-To: mickey@vanille-media.de
+Received: from linuxtogo.org (linuxtogo.org [188.40.83.200]) by
+ phalanx.drlauer-research.com (Postfix) with ESMTP id 7957158415B for
+ <mickey@vanille-media.de>; Thu, 29 Apr 2010 12:48:51 +0200 (CEST)
+Received: from localhost ([127.0.0.1]) by linuxtogo.org with esmtp (Exim
+ 4.69) (envelope-from <mailman-bounces@lists.linuxtogo.org>) id
+ 1O7RHN-0006gu-Ju for mickeyl@linuxtogo.org; Thu, 29 Apr 2010 12:47:37 +0200
+Received: from micropolis.microdata-pos.de ([212.202.104.142]
+ helo=squirrel.microdata-pos.de) by linuxtogo.org with esmtp (Exim 4.69)
+ (envelope-from <michael@awek-microdata.de>) id 1O7RHL-0006fC-6C for
+ openembedded-devel-owner@lists.openembedded.org; Thu, 29 Apr 2010 12:47:35
+ +0200
+Received: by squirrel.microdata-pos.de (Postfix, from userid 2006) id
+ 8600028083; Thu, 29 Apr 2010 12:14:38 +0200 (CEST)
+Date: Thu, 29 Apr 2010 12:14:38 +0200
+To: openembedded-devel-owner@lists.openembedded.org
+Message-ID: <20100429101438.GD15511@squirrel.microdata-pos.de>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+User-Agent: Mutt/1.5.13 (2006-08-11)
+From: michael@awek-microdata.de (Michael Westermann)
+Subject: package_deb and update-alteernatives-dpkg-native on amd64 fails
+Sender: mailman-bounces@lists.linuxtogo.org
+Errors-To: mailman-bounces@lists.linuxtogo.org
+X-SA-Exim-Connect-IP: 127.0.0.1
+X-SA-Exim-Mail-From: mailman-bounces@lists.linuxtogo.org
+X-SA-Exim-Scanned: No (on linuxtogo.org); SAEximRunCond expanded to false
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+I use openembeeded too make a short distro for our embedded boards. We
+use a arm mx27 cpu. The Host system is a amd64 debian sid linux.
+I use the git version from openembedded-dev.
+
+I've the follow mistake/problem, on the rootfs the update-alternatives
+dont work. I get the foolow messages:
+
+Can't locate dpkg-gettext.pl in @INC (@INC contains: /etc/perl
+/usr/local/lib/perl/5.10.1 /usr/local/share/perl/5.10.1 /usr/lib/perl5
+/usr/share/perl5 /usr/lib/perl/5.10 /usr/share/perl/5.10
+/usr/local/lib/site_perl . ../usr/lib/dpkg) at
+/opt/oe/platform/cwmx27-awek-smartstorage-rel1/staging/x86_64-linux/usr/sbin/update-alternatives
+line 7.
+
+/opt/oe/platform/rel1/staging/x86_64-linux/usr/sbin/update-alternatives 
+
+in /usr/sbin/update-alternatives are the
+
+$admindir= "/var/lib/dpkg"; 
+$dpkglibdir= "/usr/lib/dpkg";
+
+but this is are paths from the host-system, the location from
+dpkg-gettext.pl is:
+
+/opt/oe/platform/rel1/staging/x86_64-linux/usr/lib/dpkg/dpkg-gettext.pl
+
+How can I set the correct this paths?
+
+I've test different versions from update-alternatives-dpkg-native e.g.
+
+PREFERRED_VERSION_update-alternatives-native = "1.13.22"
+PREFERRED_VERSION_dpkg-native = "1.13.22"
+
+Michael
 
 
-
--- 
-www.opensurf.it
-
+--=-T/aFB0hz797wPB31zHO+--
