@@ -1,29 +1,41 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O7ULB-0000wR-6X
+	(envelope-from <Tom_Rini@mentor.com>) id 1O7V7I-0002NL-Gr
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 16:03:48 +0200
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 95A6B4B0034;
-	Thu, 29 Apr 2010 16:00:02 +0200 (CEST)
-Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
-	[82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 96B1D4B0088;
-	Thu, 29 Apr 2010 15:59:59 +0200 (CEST)
-From: Eric Benard <eric@eukrea.com>
+	Thu, 29 Apr 2010 16:53:30 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O7V3h-0003V4-Bv from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Apr 2010 07:49:45 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 29 Apr 2010 07:49:44 -0700
+Received: from 172.30.80.19 ([172.30.80.19]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Thu, 29 Apr 2010 14:49:44 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	29 Apr 2010 07:49:34 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Apr 2010 16:01:34 +0200
-Message-Id: <1272549694-23764-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+In-Reply-To: <hrbmd4$mng$1@dough.gmane.org>
+References: <hrbmd4$mng$1@dough.gmane.org>
+Organization: Mentor Graphics Corporation
+Date: Thu, 29 Apr 2010 07:49:34 -0700
+Message-ID: <1272552574.3865.814.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 29 Apr 2010 14:49:44.0921 (UTC)
+	FILETIME=[3510FC90:01CAE7AB]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] nano: Add version 2.2.4.
+Subject: Re: Merging RPs branch, help needed for dealing with possible fall-out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,47 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 14:03:48 -0000
+X-List-Received-Date: Thu, 29 Apr 2010 14:53:30 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* give access to the latest stable release available
-* Tested on x86
+On Thu, 2010-04-29 at 12:18 +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> Hi,
+>=20
+> I've been talking to RP and we both like to merge his branch as soon as
+> the last problem (the cross lamanger) has been addressed. RP estimates
+> that will happen early next week.
+> But after it has been merged there might be some fallout, which we would
+> like to have some help with. If you don't want to help out and and don't
+> want the possible breakage: don't git pull for the time being.
 
-Signed-off-by: Eric Benard <eric@eukrea.com>
----
- recipes/nano/nano_2.2.4.bb |   22 ++++++++++++++++++++++
- 1 files changed, 22 insertions(+), 0 deletions(-)
- create mode 100644 recipes/nano/nano_2.2.4.bb
+Related, do we have people signing up for building ___ targets?  I'll
+assume angstrom + beagleboard + beagleboard-demo will be covered :)
 
-diff --git a/recipes/nano/nano_2.2.4.bb b/recipes/nano/nano_2.2.4.bb
-new file mode 100644
-index 0000000..561b64e
---- /dev/null
-+++ b/recipes/nano/nano_2.2.4.bb
-@@ -0,0 +1,22 @@
-+DESCRIPTION = "GNU nano (Nano's ANOther editor, or \
-+Not ANOther editor) is an enhanced clone of the \
-+Pico text editor."
-+HOMEPAGE = "http://www.nano-editor.org/"
-+LICENSE = "GPLv2"
-+SECTION = "console/utils"
-+DEPENDS = "ncurses"
-+
-+SRC_URI = "http://www.nano-editor.org/dist/v2.2/nano-${PV}.tar.gz \
-+           file://glib.m4"
-+
-+inherit autotools
-+
-+# only 16K more to get everything but the kitchen sink
-+EXTRA_OECONF = "--enable-all"
-+
-+do_configure_prepend () {
-+	install -m 0644 ${WORKDIR}/glib.m4 m4/
-+}
-+
-+SRC_URI[md5sum] = "6304308afb1f7ef4a5e93eb99206632a"
-+SRC_URI[sha256sum] = "971b8547be157de5a814cb26c804dc2515b686d7188f4dc016269312965d4da5"
--- 
-1.6.3.3
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
