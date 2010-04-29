@@ -1,44 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7YPm-0006n9-Em for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 20:24:47 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7YME-0002b8-4x for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 20:21:06 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 20:21:06 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <msundius@sundius.com>) id 1O7Ybs-0003nH-Sp
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Apr 2010 20:37:17 +0200
+Received: by wwg30 with SMTP id 30so967049wwg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 20:21:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 29 Apr 2010 20:20:55 +0200
-Message-ID: <hrcim7$8ge$1@dough.gmane.org>
-References: <hrbmd4$mng$1@dough.gmane.org>
-	<1272552574.3865.814.camel@trini-m4400>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <1272552574.3865.814.camel@trini-m4400>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Thu, 29 Apr 2010 11:33:34 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.216.157.82 with SMTP id n60mr2559591wek.100.1272566013816; 
+	Thu, 29 Apr 2010 11:33:33 -0700 (PDT)
+Received: by 10.216.178.75 with HTTP; Thu, 29 Apr 2010 11:33:33 -0700 (PDT)
+Date: Thu, 29 Apr 2010 11:33:33 -0700
+Message-ID: <g2y18e217241004291133x532abf49k8fb76e81564efbad@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
+To: openembedded-devel@lists.openembedded.org, denis@denix.org
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: msundius@sundius.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Merging RPs branch, help needed for dealing with possible fall-out
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: building an SDK with an externally provided toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +37,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 18:24:47 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Apr 2010 18:37:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Denys,
 
-On 29-04-10 16:49, Tom Rini wrote:
-> On Thu, 2010-04-29 at 12:18 +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Hi,
->>
->> I've been talking to RP and we both like to merge his branch as soon as
->> the last problem (the cross lamanger) has been addressed. RP estimates
->> that will happen early next week.
->> But after it has been merged there might be some fallout, which we would
->> like to have some help with. If you don't want to help out and and don't
->> want the possible breakage: don't git pull for the time being.
-> 
-> Related, do we have people signing up for building ___ targets?  I'll
-> assume angstrom + beagleboard + beagleboard-demo will be covered :)
+in your comment in the thread:
 
-I'm going to do angstrom + beagle/hawkboard +
-console/beagleboard-demo/angstrom-gnome-image
+Re: [oe] [RFC][PATCH] meta-toolchain: use MULTIMACH_TARGET_SYS instead of
+TARGET_SYS
 
-regards,
+>
+> Ok, you asked for a comment, I'll give you two :)
+>
+> 1. In Arago I have a way to overwrite SDKPATH from the command line when
+> building a specific SDK/toolchain. So, I can do what you suggest, but...
+>
+> 2. My SDKs are currently not machine-specific, moreover, they don't have
+> the
+> cross-compile tools in them (i.e. no toolchain part), as Arago uses
+> external
+> CodeSourcery toolchain for that. The only cross-tools I have in my SDKs are
+> those, which are missing from CS - i.e. libtool, pkgconfig, opkg,
+> qt4e-tools
+> etc. But I still build 2 versions of SDK - armv5te and armv7a.
+>
+> --
+> Denys
+>
+>
+> I am in a similar predicament where we have to use a tool-chain provided to
+us prior to the adoption of OE. As a result, we've hacked up our own
+external-toolchain recipe to copy the libs and headers into the staging dir,
+but do not have a real cross-compile. we just add the path for the actual
+tools. We also would like to provide an SDK of our libraries separately from
+the toolchain that we deliver to our SDK customers.
 
-Koen
+my question is, how do you build your sdk. since our SDK_PATH is not where
+our toolchain is the sdk.bbclass points ${prefix} to /usr/local (which does
+not contain our toolchain) thus much of the makery reverts to looking in
+/usr/include for headers which of course casuse the build to break..
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+do you keep your external toolchain from CS in your SDK_PATH or somewhere
+else?
 
-iD8DBQFL2c4HMkyGM64RGpERAuYlAKCejfFnK3vrXTMGjI3iVMe4CFKNNACgs27T
-3hMCl0G2qFrlr6Xs2e6YaeQ=
-=COBt
------END PGP SIGNATURE-----
+you seem to allude to the fact that you did some magic to overrite the
+SDKPATH in certain circumstances.. I didn't see it in your code.
 
+Thanks for your help.
 
+Mike
 
