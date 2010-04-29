@@ -1,30 +1,21 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O7U2L-00085R-02
+Received: from smtp2-g21.free.fr ([212.27.42.2])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1O7ULB-0000wR-6X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 15:44:22 +0200
-Received: (qmail 19575 invoked by uid 503); 29 Apr 2010 13:46:44 -0000
-Received: from b7.ovh.net (HELO mail606.ha.ovh.net) (213.186.33.57)
-	by 63.mail-out.ovh.net with SMTP; 29 Apr 2010 13:46:43 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 29 Apr 2010 13:40:36 -0000
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 29 Apr 2010 13:40:35 -0000
-Message-ID: <4BD98C53.1070000@eukrea.com>
-Date: Thu, 29 Apr 2010 15:40:35 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Thu, 29 Apr 2010 16:03:48 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 95A6B4B0034;
+	Thu, 29 Apr 2010 16:00:02 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 96B1D4B0088;
+	Thu, 29 Apr 2010 15:59:59 +0200 (CEST)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1272114888-16964-1-git-send-email-eric@eukrea.com>	<1272114888-16964-2-git-send-email-eric@eukrea.com>	<1272114888-16964-3-git-send-email-eric@eukrea.com>	<1272202763.2387.1.camel@gnutoo-desktop>	<1272205477.2387.2.camel@gnutoo-desktop>	<1272206485.2387.3.camel@gnutoo-desktop>
-	<1272548191.2313.0.camel@gnutoo-desktop>
-In-Reply-To: <1272548191.2313.0.camel@gnutoo-desktop>
-X-Ovh-Tracer-Id: 10111425589895015753
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
+Date: Thu, 29 Apr 2010 16:01:34 +0200
+Message-Id: <1272549694-23764-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 212.27.42.2
 X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -32,7 +23,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/4] mplayer_svn : fix compilation problem
+Subject: [PATCH] nano: Add version 2.2.4.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,21 +37,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 13:44:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 29 Apr 2010 14:03:48 -0000
 
-Le 29/04/2010 15:36, gnutoo a écrit :
-> On Sun, 2010-04-25 at 16:41 +0200, GNUtoo wrote:
->> I also had to bitbake and install libxxf86dga_1.1.1.bb.
->> Now it works.
->>
->> Thanks
-> Could you re-send a patch with all the fixes and the PR bump?
-> So I could push it(I bet you don't have commit access yet)
->
-do you want that I add dependencies vs libxxf86dga and libxscrnsaver ?
+* give access to the latest stable release available
+* Tested on x86
 
-Eric
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+ recipes/nano/nano_2.2.4.bb |   22 ++++++++++++++++++++++
+ 1 files changed, 22 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/nano/nano_2.2.4.bb
+
+diff --git a/recipes/nano/nano_2.2.4.bb b/recipes/nano/nano_2.2.4.bb
+new file mode 100644
+index 0000000..561b64e
+--- /dev/null
++++ b/recipes/nano/nano_2.2.4.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "GNU nano (Nano's ANOther editor, or \
++Not ANOther editor) is an enhanced clone of the \
++Pico text editor."
++HOMEPAGE = "http://www.nano-editor.org/"
++LICENSE = "GPLv2"
++SECTION = "console/utils"
++DEPENDS = "ncurses"
++
++SRC_URI = "http://www.nano-editor.org/dist/v2.2/nano-${PV}.tar.gz \
++           file://glib.m4"
++
++inherit autotools
++
++# only 16K more to get everything but the kitchen sink
++EXTRA_OECONF = "--enable-all"
++
++do_configure_prepend () {
++	install -m 0644 ${WORKDIR}/glib.m4 m4/
++}
++
++SRC_URI[md5sum] = "6304308afb1f7ef4a5e93eb99206632a"
++SRC_URI[sha256sum] = "971b8547be157de5a814cb26c804dc2515b686d7188f4dc016269312965d4da5"
+-- 
+1.6.3.3
+
 
 
