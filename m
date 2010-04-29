@@ -1,41 +1,41 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.oe@pilsoft.com>) id 1O7Q8v-0007w1-6P
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 11:34:50 +0200
-Received: from smtp3-g21.free.fr (smtp3-g21.free.fr [212.27.42.3])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id 23B837AF9AF
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O7Qsh-0006NZ-0M for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Apr 2010 12:22:08 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O7Qp2-0002gz-QH for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Apr 2010 12:18:20 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Apr 2010 12:18:20 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 11:31:07 +0200 (CEST)
-Received: from smtp3-g21.free.fr (localhost [127.0.0.1])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id E11DE81819B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 11:31:04 +0200 (CEST)
-Received: from mail.pilsoft.com (mna75-2-82-67-197-228.fbx.proxad.net
-	[82.67.197.228])
-	by smtp3-g21.free.fr (Postfix) with ESMTP id 05AE781806A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 11:31:01 +0200 (CEST)
-Received: from [192.168.33.16] ([192.168.33.1]) BY mail.pilsoft.com
-	([192.168.33.30])
-	WITH ESMTP (4D WebSTAR V Mail (5.4.1)); Thu, 29 Apr 2010 11:30:59 +0200
-Mime-Version: 1.0 (Apple Message framework v1078)
-From: David Hemmo <david.oe@pilsoft.com>
-In-Reply-To: <h2ub7a795c81004290008z458edaf3wd76e38ed4784cd64@mail.gmail.com>
-Date: Thu, 29 Apr 2010 11:31:01 +0200
-Message-Id: <B4E2B620-1CC1-4540-B76E-EC69AB2FC2EC@pilsoft.com>
-References: <h2ub7a795c81004290008z458edaf3wd76e38ed4784cd64@mail.gmail.com>
+	Thu, 29 Apr 2010 12:18:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1078)
-X-SA-Exim-Connect-IP: 212.27.42.9
-X-SA-Exim-Mail-From: david.oe@pilsoft.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 29 Apr 2010 12:18:11 +0200
+Message-ID: <hrbmd4$mng$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Apache2 on angstrom
+Subject: Merging RPs branch, help needed for dealing with possible fall-out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,39 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 09:34:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Apr 2010 10:22:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello Fabio,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I guess it is related to the kernel you are using or the kernel header =
-you included
-I don't know in what version of Linux CRYPTD has been added, but it must =
-be posterior to the one you are using
+Hi,
 
-David Hemmo
+I've been talking to RP and we both like to merge his branch as soon as
+the last problem (the cross lamanger) has been addressed. RP estimates
+that will happen early next week.
+But after it has been merged there might be some fallout, which we would
+like to have some help with. If you don't want to help out and and don't
+want the possible breakage: don't git pull for the time being.
 
-On Apr 29, 2010, at 9:08 AM, Fabio Mauri wrote:
+regards,
 
-> Hi all,
->=20
->   I am trying to build an image with Apache2 and modphp installed.
-> During the compilation I get this error message:
->=20
-> http://pastebin.com/uBCr1sYE
->=20
-> following the error message there is the related config.log
-> Does someone know what is missing in my setup?
->=20
->=20
-> --=20
-> Fabio Mauri
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL2VzjMkyGM64RGpERAiaFAJ9OLiiUZXHZg7iQvw1bAVJ92lnwHgCgpaal
+m4FLyMYVzqdEG9SYUS2bNgM=
+=yord
+-----END PGP SIGNATURE-----
 
 
 
