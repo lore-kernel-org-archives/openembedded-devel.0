@@ -1,37 +1,35 @@
-Received: from smtp-out116.alice.it ([85.37.17.116])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1O7VN2-0001kb-FZ
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1O7VPM-0001tt-0A
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 17:09:44 +0200
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out116.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Apr 2010 17:06:01 +0200
-Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 29 Apr 2010 17:05:59 +0200
-Received: from [192.168.1.116] ([80.117.39.139]) by FBCMCL01B03.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 29 Apr 2010 17:05:59 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Thu, 29 Apr 2010 17:12:08 +0200
+Received: (qmail 25619 invoked by uid 503); 29 Apr 2010 15:14:35 -0000
+Received: from b7.ovh.net (HELO mail606.ha.ovh.net) (213.186.33.57)
+	by 63.mail-out.ovh.net with SMTP; 29 Apr 2010 15:14:35 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 29 Apr 2010 15:08:27 -0000
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 29 Apr 2010 15:08:26 -0000
+Message-ID: <4BD9A0EA.1070801@eukrea.com>
+Date: Thu, 29 Apr 2010 17:08:26 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BD98C53.1070000@eukrea.com>
-References: <1272114888-16964-1-git-send-email-eric@eukrea.com>
-	<1272114888-16964-2-git-send-email-eric@eukrea.com>
-	<1272114888-16964-3-git-send-email-eric@eukrea.com>
-	<1272202763.2387.1.camel@gnutoo-desktop>
-	<1272205477.2387.2.camel@gnutoo-desktop>
-	<1272206485.2387.3.camel@gnutoo-desktop>
-	<1272548191.2313.0.camel@gnutoo-desktop> <4BD98C53.1070000@eukrea.com>
-Date: Thu, 29 Apr 2010 17:05:58 +0200
-Message-ID: <1272553558.2313.5.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 29 Apr 2010 15:05:59.0394 (UTC)
-	FILETIME=[79E5C420:01CAE7AD]
-X-SA-Exim-Connect-IP: 85.37.17.116
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+References: <1272114888-16964-1-git-send-email-eric@eukrea.com>	<1272114888-16964-2-git-send-email-eric@eukrea.com>	<1272114888-16964-3-git-send-email-eric@eukrea.com>	<1272202763.2387.1.camel@gnutoo-desktop>	<1272205477.2387.2.camel@gnutoo-desktop>	<1272206485.2387.3.camel@gnutoo-desktop>	<1272548191.2313.0.camel@gnutoo-desktop>
+	<4BD98C53.1070000@eukrea.com>
+	<1272553558.2313.5.camel@gnutoo-desktop>
+In-Reply-To: <1272553558.2313.5.camel@gnutoo-desktop>
+X-Ovh-Tracer-Id: 11595080190661209417
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -49,17 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 15:09:45 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 29 Apr 2010 15:12:08 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, 2010-04-29 at 15:40 +0200, Eric B=C3=A9nard wrote:
-> do you want that I add dependencies vs libxxf86dga and libxscrnsaver ?
-I think that's a good idea,because without it seem that mplayer_svn
-can't even run in my setup(eee701,angstrom)
-Denis.
+Le 29/04/2010 17:05, GNUtoo a écrit :
+> On Thu, 2010-04-29 at 15:40 +0200, Eric Bénard wrote:
+>> do you want that I add dependencies vs libxxf86dga and libxscrnsaver ?
+> I think that's a good idea,because without it seem that mplayer_svn
+> can't even run in my setup(eee701,angstrom)
 
+I assume you meet this problem when trying to run it under X ?
+I'll also try with X and submit an updated recipe.
 
-
+Eric
 
 
