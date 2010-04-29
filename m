@@ -1,40 +1,44 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O7Zsx-00075I-Kc
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 21:59:00 +0200
-Received: (qmail 22569 invoked by uid 503); 29 Apr 2010 19:52:39 -0000
-Received: from b9.ovh.net (HELO mail440.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 29 Apr 2010 19:52:39 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 29 Apr 2010 19:55:19 -0000
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 29 Apr 2010 19:55:17 -0000
-Message-ID: <4BD9E424.6030304@eukrea.com>
-Date: Thu, 29 Apr 2010 21:55:16 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O7afo-0000lt-5c for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Apr 2010 22:49:29 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O7acF-0005Ao-PC for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Apr 2010 22:45:47 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Apr 2010 22:45:47 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Apr 2010 22:45:47 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1272114888-16964-1-git-send-email-eric@eukrea.com>	<1272114888-16964-2-git-send-email-eric@eukrea.com>	<1272114888-16964-3-git-send-email-eric@eukrea.com>	<1272202763.2387.1.camel@gnutoo-desktop>	<1272205477.2387.2.camel@gnutoo-desktop>	<1272206485.2387.3.camel@gnutoo-desktop>	<1272548191.2313.0.camel@gnutoo-desktop>
-	<4BD98C53.1070000@eukrea.com>	<1272553558.2313.5.camel@gnutoo-desktop>
-	<4BD9A0EA.1070801@eukrea.com>
-	<1272557848.2313.14.camel@gnutoo-desktop>
-In-Reply-To: <1272557848.2313.14.camel@gnutoo-desktop>
-X-Ovh-Tracer-Id: 16439546016274951497
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 29 Apr 2010 22:45:38 +0200
+Message-ID: <hrcr5i$8vg$1@dough.gmane.org>
+References: <h2ub7a795c81004290008z458edaf3wd76e38ed4784cd64@mail.gmail.com>
+	<n2h19c1b8a91004291223qe164d1a9uc18d101db2fb839b@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+In-Reply-To: <n2h19c1b8a91004291223qe164d1a9uc18d101db2fb839b@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/4] mplayer_svn : fix compilation problem
+Subject: Re: Apache2 on angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,27 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 19:59:00 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 29 Apr 2010 20:49:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi Denis,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Le 29/04/2010 18:17, GNUtoo a écrit :
-> The problem I had was that it didn't find the libraries(the ones you see
-> with ldd not dlopened libraries) so normally even in console it
-> shouldn't have worked...
-> Strange(unless you removed X build dependencies or maybe I had more
-> packages installed and configure detected them and built support for
-> them)
->
-configure has the following options :
-   --disable-xss            disable screensaver support via xss [autodetect]
-   --enable-dga2            enable DGA 2 support [autodetect]
-   --enable-dga1            enable DGA 1 support [autodetect]
+On 29-04-10 21:23, Khem Raj wrote:
 
-none is forced in the recipe so they are autodetected.
+> if you look at the log then the configure is called with
+> --includedir=/usr/include --oldincludedir=/usr/include
+> this does not seem right. Figure out why it did not use staging dir paths
 
-Eric
+No, that is right for autotools, both set the runtime dirs for the
+resulting package. We want the headers in /usr/include on the target and
+in the sysroot. What *is* wrong is stuffing $includedir into -I like
+e.g. gimp used to do.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL2e/yMkyGM64RGpERAttjAKC18ZwAenhK4Wd51r4v47aslxcgSACgolDE
+EHCxdkq39OyYDMJiG7ZbFls=
+=lRJg
+-----END PGP SIGNATURE-----
+
 
 
