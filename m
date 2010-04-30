@@ -1,32 +1,39 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1O7qQn-0002G1-Ox
+	(envelope-from <stefan@datenfreihafen.org>) id 1O7qsw-0001tw-LE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 15:39:02 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id D5755491278
+	Fri, 30 Apr 2010 16:08:07 +0200
+Received: from p5b036a42.dip.t-dialin.net ([91.3.106.66] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1O7qpL-0005pq-Jc by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Apr 2010 15:35:20 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 30 Apr 2010 15:36:05 +0200
-Message-ID: <4BDADC9F.9000406@dresearch.de>
-Date: Fri, 30 Apr 2010 15:35:27 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
+	Fri, 30 Apr 2010 16:04:26 +0200
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1O7qpK-0005Zh-LV
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Apr 2010 16:04:22 +0200
+Date: Fri, 30 Apr 2010 16:04:22 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100430140422.GA3403@excalibur.local>
+References: <hrbmd4$mng$1@dough.gmane.org>
+	<1272552574.3865.814.camel@trini-m4400>
 MIME-Version: 1.0
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 30 Apr 2010 13:36:05.0480 (UTC)
-	FILETIME=[15498E80:01CAE86A]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+In-Reply-To: <1272552574.3865.814.camel@trini-m4400>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: special post build step for u-boot?
+Subject: Re: Merging RPs branch, help needed for dealing with possible fall-out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +47,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 13:39:02 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Apr 2010 14:08:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-We need to add a special post build step to u-boot for our machine.
+Hello.
 
-This step consists of a concatenation of the built u-boot binary to
-another (fix) binary and after this running a tool on the resulting
-file.
+On Thu, 2010-04-29 at 07:49, Tom Rini wrote:
+> On Thu, 2010-04-29 at 12:18 +0200, Koen Kooi wrote:
+> > 
+> > I've been talking to RP and we both like to merge his branch as soon as
+> > the last problem (the cross lamanger) has been addressed. RP estimates
+> > that will happen early next week.
+> > But after it has been merged there might be some fallout, which we would
+> > like to have some help with. If you don't want to help out and and don't
+> > want the possible breakage: don't git pull for the time being.
+> 
+> Related, do we have people signing up for building ___ targets?  I'll
+> assume angstrom + beagleboard + beagleboard-demo will be covered :)
 
-The fix prefix file and the tool are built using another autotools
-based (native-)recipe and are installed to the related datadir
-resp. bindir.
+I can take care of imote2, the ezx devices and sgh-i900. All armv5.
 
-My idea is to extended the u-boot recipe something like this:
+I bet the SHR guys are taking care about om-gta02 and om-gta01. Which would be
+armv4.
 
-DEPENDS_hipox += " specialtool-native "
-
-do_deploy_append_hipox () {
-	cat FOO/usr/share/specialtool/prefixfile ${DEPLOY_DIR_IMAGE}/BAR > ${DEPLOY_DIR_IMAGE}/BAR.wrapped
-	specialtool ${DEPLOY_DIR_IMAGE}/BAR.wrapped
-}
-
-Is this the right way to do this?
-
-If yes, what is the correct replacement for FOO and BAR?
-
-Steffen
-
+regards
+Stefan Schmidt
 
 
