@@ -1,44 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7afo-0000lt-5c for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 22:49:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7acF-0005Ao-PC for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Apr 2010 22:45:47 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 22:45:47 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <joaohf@gmail.com>) id 1O7ehg-00034i-8w
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Apr 2010 03:07:45 +0200
+Received: by pxi14 with SMTP id 14so3289499pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Apr 2010 22:45:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 29 Apr 2010 18:03:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=3rksOY7/cW9ZY1NfHyO/uuIH3gEshNk4HKkJCK/3axs=;
+	b=pDUIQkZcoE5M/bGOEHTv/1vUHWaWGG2GOR7i9q45E2roxBmC5yNxYl0JxAFQixFpMv
+	yO4sN0jAx4ZrW61fg/u0YA4fdHeC+fy/lmEa4sJWze514OV4v6nsTdMc2eVB0BeLhzBx
+	ALegX8Sqv5d9DNw6QS1JcJHr+N+c+akaFu9Kk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=DHwgFGf5vf5aoQyaGVeNe+yH8fsN0/K6SGPKa9uwCHYTSjnyY6wjtk4mJ+XDgrD0g7
+	ksP36SXrM6nd6lXMVwc0HpfFSEvpb2CLvmGwHbIzHvctPmgEeH7G5GBcqT8WbC13EsXH
+	GpvJSCp9iQppyiZEgMYLLA3E7OvO8M8wQmWnY=
+MIME-Version: 1.0
+Received: by 10.141.107.9 with SMTP id j9mr247116rvm.177.1272589436369; Thu, 
+	29 Apr 2010 18:03:56 -0700 (PDT)
+Received: by 10.140.143.10 with HTTP; Thu, 29 Apr 2010 18:03:56 -0700 (PDT)
+Date: Thu, 29 Apr 2010 22:03:56 -0300
+Message-ID: <k2y88e33d221004291803s3610117bod20cc0a55e2fd917@mail.gmail.com>
+From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 29 Apr 2010 22:45:38 +0200
-Message-ID: <hrcr5i$8vg$1@dough.gmane.org>
-References: <h2ub7a795c81004290008z458edaf3wd76e38ed4784cd64@mail.gmail.com>
-	<n2h19c1b8a91004291223qe164d1a9uc18d101db2fb839b@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <n2h19c1b8a91004291223qe164d1a9uc18d101db2fb839b@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: joaohf@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Apache2 on angstrom
+Subject: status of canadian cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +49,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Apr 2010 20:49:30 -0000
+X-List-Received-Date: Fri, 30 Apr 2010 01:07:48 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 29-04-10 21:23, Khem Raj wrote:
+Is possible to openembedded create a canadian cross?
 
-> if you look at the log then the configure is called with
-> --includedir=/usr/include --oldincludedir=/usr/include
-> this does not seem right. Figure out why it did not use staging dir paths
+My build machine is a x86_64 but I need to create a sdk to run x86
+(i586) and my MACHINE=3Darm.
 
-No, that is right for autotools, both set the runtime dirs for the
-resulting package. We want the headers in /usr/include on the target and
-in the sysroot. What *is* wrong is stuffing $includedir into -I like
-e.g. gimp used to do.
+I created a x86_64-sdk. How can I build a x86-sdk? It's possible?
 
-regards,
+I am using the dev branch. This is not documented in official docs,
+yet. And I can't discovery if this feature is supported.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+In other words, Is possible to build on machine A(x86_64), target to
+C(ARM) and host to B (i586).
 
-iD8DBQFL2e/yMkyGM64RGpERAttjAKC18ZwAenhK4Wd51r4v47aslxcgSACgolDE
-EHCxdkq39OyYDMJiG7ZbFls=
-=lRJg
------END PGP SIGNATURE-----
-
+Thanks
+--=20
+-----------------------------------------------------------
+Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
+Campinas-SP-Brasil
+BSD051283
+LPI 1
+http://www.joaohfreitas.eti.br
 
 
