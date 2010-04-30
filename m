@@ -1,26 +1,31 @@
-Received: from micropolis.microdata-pos.de ([212.202.104.142]
-	helo=squirrel.microdata-pos.de)
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael@awek-microdata.de>) id 1O7kHl-0003Fj-L9
+	(envelope-from <eric@eukrea.com>) id 1O7klL-0004Gp-Lo
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 09:05:35 +0200
-Received: by squirrel.microdata-pos.de (Postfix, from userid 2006)
-	id 8C63E28085; Fri, 30 Apr 2010 09:01:35 +0200 (CEST)
-Date: Fri, 30 Apr 2010 09:01:35 +0200
+	Fri, 30 Apr 2010 09:35:52 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 6BD8D4B0158;
+	Fri, 30 Apr 2010 09:32:07 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 64FF74B011B;
+	Fri, 30 Apr 2010 09:32:05 +0200 (CEST)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100430070135.GH15511@squirrel.microdata-pos.de>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.13 (2006-08-11)
-From: michael@awek-microdata.de (Michael Westermann)
-X-SA-Exim-Connect-IP: 212.202.104.142
-X-SA-Exim-Mail-From: michael@awek-microdata.de
+Date: Fri, 30 Apr 2010 09:33:43 +0200
+Message-Id: <1272612823-16981-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1272548191.2313.0.camel@gnutoo-desktop>
+References: <1272548191.2313.0.camel@gnutoo-desktop>
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: package_deb and update-alteernatives-dpkg-native on amd64 fails
+Subject: [PATCH] mplayer_svn : fix compilation problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,45 +39,108 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 07:05:35 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 30 Apr 2010 07:35:53 -0000
 
-Hi,
+- this patch fix the following error (met for a x86 target) :
 
-I use openembeeded too make a short distro for our embedded boards. We
-use a arm mx27 cpu. The Host system is a amd64 debian sid linux.
-I use the git version from openembedded-dev.
+| loader/module.o: In function `MODULE_GetProcAddress':
+| module.c:(.text+0x125): undefined reference to `report_entry'
+| module.c:(.text+0x12f): undefined reference to `report_ret'
+| module.c:(.text+0x139): undefined reference to `wrapper_target'
+| module.c:(.text+0x13e): undefined reference to `wrapper'
+| loader/module.o: In function `LoadLibraryExA':
+| module.c:(.text+0x10d4): undefined reference to `report_entry'
+| module.c:(.text+0x10de): undefined reference to `report_ret'
+| module.c:(.text+0x10ea): undefined reference to `wrapper_target'
+| module.c:(.text+0x10f0): undefined reference to `wrapper'
+| collect2: ld returned 1 exit status
+| make: *** [mplayer] Error 1
 
-I've the follow mistake/problem, on the rootfs the update-alternatives
-dont work. I get the foolow messages:
+- also add --disable-xss --disable-dga1 --disable-dga2 in order to
+prevent configure to autodetect these options which leads to a
+dependency problem.
 
-Can't locate dpkg-gettext.pl in @INC (@INC contains: /etc/perl
-/usr/local/lib/perl/5.10.1 /usr/local/share/perl/5.10.1 /usr/lib/perl5
-/usr/share/perl5 /usr/lib/perl/5.10 /usr/share/perl/5.10
-/usr/local/lib/site_perl . ../usr/lib/dpkg) at
-/opt/oe/platform/cwmx27-awek-smartstorage-rel1/staging/x86_64-linux/usr/sbin/update-alternatives
-line 7.
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+v2 : increase PR and add 3 options to configure
 
-/opt/oe/platform/rel1/staging/x86_64-linux/usr/sbin/update-alternatives 
+ recipes/mplayer/files/fix-emu_qtx_api.diff |   33 ++++++++++++++++++++++++++++
+ recipes/mplayer/mplayer_svn.bb             |    6 ++++-
+ 2 files changed, 38 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/mplayer/files/fix-emu_qtx_api.diff
 
-in /usr/sbin/update-alternatives are the
+diff --git a/recipes/mplayer/files/fix-emu_qtx_api.diff b/recipes/mplayer/files/fix-emu_qtx_api.diff
+new file mode 100644
+index 0000000..e657475
+--- /dev/null
++++ b/recipes/mplayer/files/fix-emu_qtx_api.diff
+@@ -0,0 +1,33 @@
++http://bugs.gentoo.org/213836
++
++Fix the following error :
++
++| loader/module.o: In function `MODULE_GetProcAddress':
++| module.c:(.text+0x125): undefined reference to `report_entry'
++| module.c:(.text+0x12f): undefined reference to `report_ret'
++| module.c:(.text+0x139): undefined reference to `wrapper_target'
++| module.c:(.text+0x13e): undefined reference to `wrapper'
++| loader/module.o: In function `LoadLibraryExA':
++| module.c:(.text+0x10d4): undefined reference to `report_entry'
++| module.c:(.text+0x10de): undefined reference to `report_ret'
++| module.c:(.text+0x10ea): undefined reference to `wrapper_target'
++| module.c:(.text+0x10f0): undefined reference to `wrapper'
++| collect2: ld returned 1 exit status
++| make: *** [mplayer] Error 1
++
++---
++diff --git a/loader/module.c b/loader/module.c
++index e316cf0..2023acb 100644
++--- a/loader/module.c
+++++ b/loader/module.c
++@@ -9,8 +9,8 @@
++  */
++ 
++ // define for quicktime calls debugging and/or MacOS-level emulation:
++-#ifndef __APPLE__
++-#define EMU_QTX_API
+++#ifdef __APPLE__
+++#undef EMU_QTX_API
++ #endif /* __APPLE__ */
++ 
++ // define for quicktime debugging (verbose logging):
+diff --git a/recipes/mplayer/mplayer_svn.bb b/recipes/mplayer/mplayer_svn.bb
+index dd94767..f26318c 100644
+--- a/recipes/mplayer/mplayer_svn.bb
++++ b/recipes/mplayer/mplayer_svn.bb
+@@ -14,6 +14,7 @@ SRC_URI = "svn://svn.mplayerhq.hu/mplayer;module=trunk \
+        file://fix-exp.diff;patch=1;maxrev=30291 \
+ 	   file://fix-addrinfo.patch;patch=1;maxrev=30302 \
+        file://fix-avconfig.diff;patch=1;maxrev=30376 \
++	   file://fix-emu_qtx_api.diff;patch=1;maxrev=30165 \
+ "
+ 
+ SRCREV = "30165"
+@@ -39,7 +40,7 @@ RCONFLICTS_${PN} = "mplayer-atty"
+ RREPLACES_${PN} = "mplayer-atty"
+ 
+ PV = "0.0+1.0rc3+svnr${SRCPV}"
+-PR = "r19"
++PR = "r20"
+ DEFAULT_PREFERENCE = "-1"
+ DEFAULT_PREFERENCE_angstrom = "1"
+ DEFAULT_PREFERENCE_shr = "1"
+@@ -156,6 +157,9 @@ EXTRA_OECONF = " \
+ 	--disable-tga \
+ 	--disable-pnm \
+ 	--disable-md5sum \
++	--disable-xss \
++	--disable-dga1 \
++	--disable-dga2 \
+ 	\
+ 	--enable-alsa \
+ 	--enable-ossaudio \
+-- 
+1.6.3.3
 
-$admindir= "/var/lib/dpkg"; 
-$dpkglibdir= "/usr/lib/dpkg";
-
-but this is are paths from the host-system, the location from
-dpkg-gettext.pl is:
-
-/opt/oe/platform/rel1/staging/x86_64-linux/usr/lib/dpkg/dpkg-gettext.pl
-
-How can I set the correct this paths?
-
-I've test different versions from update-alternatives-dpkg-native e.g.
-
-PREFERRED_VERSION_update-alternatives-native = "1.13.22"
-PREFERRED_VERSION_dpkg-native = "1.13.22"
-
-Michael
 
 
