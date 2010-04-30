@@ -1,44 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7vlu-00034Q-R8 for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 21:21:11 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O7viL-0007fo-Pq for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 21:17:29 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Apr 2010 21:17:29 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1O7vp0-0001ws-9G
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Apr 2010 21:24:23 +0200
+Received: by gya1 with SMTP id 1so234798gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Apr 2010 21:17:29 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 30 Apr 2010 12:20:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=spAsxMleAD14/uew0pj+C/4j/Dt9+Qg6tH/1N6OMg0M=;
+	b=th5ffBrEbkri90Byv5g3q42ajh8jrXT0cK5FlHGjrZTcPjP714Un79HxeE8e+m9OLo
+	gRcHdHx7UGRofPrEAggY1MnQPVySgw3Qrpz3VasRTJvS9uFNrUy+kvywSsoHE1kXu0Zc
+	v740SwlMOjlc+yIF9UpxEkmMTs1cVdaRYxn0U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=v+LQmo/zFr6RS9dVIQOOMW9IiWlxsxXQ1wQ7MSIEn5Z0XCQvkqwlUttqqjckMjdltx
+	XkqwXxMm53xW7WjIAti5RzaGrPauldQX2uxyrBlmzWGFja0wSVuW2bGpXRuk8o/uocEc
+	mXRj6LMl5fxegCK0CzWN4Yn8QbtAfJdN2US+I=
+MIME-Version: 1.0
+Received: by 10.231.160.209 with SMTP id o17mr3466206ibx.20.1272655238126; 
+	Fri, 30 Apr 2010 12:20:38 -0700 (PDT)
+Received: by 10.231.16.198 with HTTP; Fri, 30 Apr 2010 12:20:37 -0700 (PDT)
+In-Reply-To: <20100430174108.GA5713@denix.org>
+References: <hrbmd4$mng$1@dough.gmane.org>
+	<1272552574.3865.814.camel@trini-m4400> <hrcim7$8ge$1@dough.gmane.org>
+	<20100430174108.GA5713@denix.org>
+Date: Fri, 30 Apr 2010 12:20:37 -0700
+Message-ID: <h2h19c1b8a91004301220m5bf0571bp73182ad46530f812@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 30 Apr 2010 21:17:21 +0200
-Message-ID: <hrfac1$gid$1@dough.gmane.org>
-References: <q2x8db82dd41004300634g46c42cf7na4871677b8d92cb7@mail.gmail.com>	<1272646386.21120.84.camel@trini-m4400>	<20100430175823.GB5713@denix.org>
-	<t2x8db82dd41004301201mb827e1f6p2eced7b49a5a031f@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <t2x8db82dd41004301201mb827e1f6p2eced7b49a5a031f@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Usage of meta recipe external-toolchain-csl
+Subject: Re: Merging RPs branch, help needed for dealing with possible 	fall-out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,92 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 19:21:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Apr 2010 19:24:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Apr 30, 2010 at 10:41 AM, Denys Dmytriyenko <denis@denix.org> wrote=
+:
+> On Thu, Apr 29, 2010 at 08:20:55PM +0200, Koen Kooi wrote:
+>> On 29-04-10 16:49, Tom Rini wrote:
+>> > On Thu, 2010-04-29 at 12:18 +0200, Koen Kooi wrote:
+>> >> -----BEGIN PGP SIGNED MESSAGE-----
+>> >> Hash: SHA1
+>> >>
+>> >> Hi,
+>> >>
+>> >> I've been talking to RP and we both like to merge his branch as soon =
+as
+>> >> the last problem (the cross lamanger) has been addressed. RP estimate=
+s
+>> >> that will happen early next week.
+>> >> But after it has been merged there might be some fallout, which we wo=
+uld
+>> >> like to have some help with. If you don't want to help out and and do=
+n't
+>> >> want the possible breakage: don't git pull for the time being.
+>> >
+>> > Related, do we have people signing up for building ___ targets? =A0I'l=
+l
+>> > assume angstrom + beagleboard + beagleboard-demo will be covered :)
+>>
+>> I'm going to do angstrom + beagle/hawkboard +
+>> console/beagleboard-demo/angstrom-gnome-image
+>
+> I'm currently quite busy, but hopefully in a week or two will be able to =
+do
+> DaVinci and some OMAP3/L1 EVMs...
 
-On 30-04-10 21:01, Jerry Jacobs wrote:
-> On Fri, Apr 30, 2010 at 7:58 PM, Denys Dmytriyenko <denis@denix.org> wrote:
->>
->> On Fri, Apr 30, 2010 at 09:53:06AM -0700, Tom Rini wrote:
->>> On Fri, 2010-04-30 at 15:34 +0200, Jerry Jacobs wrote:
->>>> Dear all,
->>>>
->>>> I'm very new to openembedded and already have a clear view how it is
->>>> structured. My embedded board mini2440 is already in git and want to create
->>>> my own distro.
->>>> The problem where I bump against is how to use the Codesourcery external
->>>> toolchain for my target. I know there is the file in recipes/meta/
->>>> external-toolchain-csl.bb
->>>> but it not clear how to use it.
->>>
->>> There's 2 ways.  One way is, in local.conf:
->>> ### CSL public ARM does <arch>-none-<os>, so fill in the -none
->>> TARGET_VENDOR = "-none"
->>> ### Bring in external-toolchain-csl.bb
->>> TOOLCHAIN_BRAND = "csl"
->>> ### Where the CSL version is installed.
->>> TOOLCHAIN_PATH = "/full/path/to/arm-2009q3"
->>> ### Where inside the CSL install the target libraries exist.
->>> TOOLCHAIN_SYSPATH = "${TOOLCHAIN_PATH}/arm-none-linux-gnueabi"
->>> ### Add tools to the PATH automatically.
->>> PATH_prepend = "${TOOLCHAIN_PATH}/bin:"
->>> require conf/distro/include/toolchain-external.inc
->>>
->>> The other way has a few less variables in local.conf but assumes PATH is
->>> already updated.  Denys will reply shortly with that, I imagine.
->>
->> The only difference I have from Tom's setup is I expect the CSL toolchain
->> being already in the PATH variable:
->>
->> export PATH=/full/path/to/arm-2009q1/bin:$PATH
->>
->> And then set the other several BitBake variables accordingly (in local.conf
->> and toolchain-csl.conf):
->>
->> TARGET_VENDOR = "-none"
->> # no need to include/require toolchain-external.inc, as TOOLCHAIN_TYPE does it
->> TOOLCHAIN_TYPE = "external"
->> TOOLCHAIN_BRAND = "csl"
->>
->> [There I also set CPPFLAGS and LDFLAGS to point to CSL directly, but it's not
->> required as necessary files are staged by the recipe these days.]
->>
->> The "black magic" in the local.conf is basically a Python code to set
->> TOOLCHAIN_PATH and TOOLCHAIN_SYSPATH based on the user's PATH:
->>
->> TOOLCHAIN_PATH = "${@code-to-extract-csl-path-from-PATH}"
->> TOOLCHAIN_SYSPATH = ${TOOLCHAIN_PATH}/${TARGET_SYS}
->>
->> So, with my setup, no modifications to local.conf are required, as long as CSL
->> is in your PATH. With Tom's setup, users would need to add the CSL path to
->> local.conf.
->>
->> Hope this helps.
->>
->> --
->> Denys
-> 
-> This clears things up, bit still its not sufficient to get it working.
-> 
-> The DISTRO seems to overwrite the TOOLCHAIN rules. And this while I
-> set the TOOLCHAIN variables in local.conf
+I will do minimal-uclibc and all qemu machines.
 
-DISTRO=micro overwrites the rules, DISTRO=angstrom-2008.1 doesn't.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL2yzBMkyGM64RGpERAvKlAJ4745jP9G7hJDuUQuru8Xav9d4JFACglCKR
-tdktixAjXdjbh9wqGrxgXc8=
-=1vNF
------END PGP SIGNATURE-----
-
+-Khem
 
 
