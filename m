@@ -1,49 +1,41 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickael.chazaux@gmail.com>) id 1O7pLc-0001Sv-2h
+	(envelope-from <xor.gate.engineering@gmail.com>) id 1O7qQJ-0001z6-BY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 14:29:40 +0200
-Received: by wyf22 with SMTP id 22so105573wyf.6
+	Fri, 30 Apr 2010 15:38:31 +0200
+Received: by wwb18 with SMTP id 18so153311wwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Apr 2010 05:25:53 -0700 (PDT)
+	Fri, 30 Apr 2010 06:34:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer:mime-version:content-type
-	:content-transfer-encoding;
-	bh=zn7PHfwYcJ2CFmYJRJbu9s6xU+ximqDbfeUUdk9Z1s8=;
-	b=kHVIgPGGdqeL8HlnnKhaR1G1pq8KC80zX7Gj/29c2xFpmLSR8Z7pmGdyJ8aLGAflXB
-	a/3pd1HS/x9Y2eVPx1MVKUuSqg/I3genab9DuL3sBLHSGzRCKFeRp0GRm0PBWx6FRayf
-	YQDDW47edoWA1OGnfcmaCuigkasuHxMO96MnQ=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=EKzbOxkvyirGHFJ48zmxWdMV5/U+o0mJGgxcoBk3wxQ=;
+	b=KqBZ7LFpXB8QQR7Ij7ASt0/SMgTpYxW7GanZPEILeiznwiLSMjjRD4GU4mkIqa7GnJ
+	ur7NvBA4tp50BDF9Vyrr7DSNqRXdqt3e2RFHP+fQRwzorXytqMORbu/TVyoaWV8gTUIm
+	vvDWS7kk6tKXZd56mQuBEJTFxWEizql4BfBlw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer:mime-version
-	:content-type:content-transfer-encoding;
-	b=TWejfXkuh08e3uMHWISU/QfEWvMoGYjCxBl+9CO/UzbN1QzCit2ObQCqryAOi4cJsG
-	GSeZE3Ed+b8dW/e8QjxIz9d42Evwpy8ctU/rNKMBw5E7aqJADLKvn0BEwskfCO/M6nkD
-	lz3GsXhGa6CxgTXJW0KTnD1rZewB2XDG2KBiQ=
-Received: by 10.216.90.77 with SMTP id d55mr2548020wef.17.1272630353119;
-	Fri, 30 Apr 2010 05:25:53 -0700 (PDT)
-Received: from localhost.localdomain (delta360.server4you.de [85.25.136.130])
-	by mx.google.com with ESMTPS id
-	k13sm1004053wed.23.2010.04.30.05.25.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 30 Apr 2010 05:25:52 -0700 (PDT)
-Sender: Mickael Chazaux <mickael.chazaux@gmail.com>
-From: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Apr 2010 14:25:40 +0200
-Message-Id: <1272630340-30869-1-git-send-email-mchazaux@adeneo-embedded.com>
-X-Mailer: git-send-email 1.6.3.3
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=ir/FZyaCo2/gAOMZKDGzobiXfMrNmfdpkbcLXZxRuykeMyDVfqEld4SQbckHUyCo+8
+	oyQ8isrd9OK03pi8sxJ0qxZje0FKHIl79HwfOcUpQ5o/xlXSA6ZE/GS0BoMmMLjYthfB
+	8xmVY/I7QBmuFIjMpO2XyG7lGaNtNPN9qWlhI=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
+Received: by 10.216.88.134 with SMTP id a6mr4428158wef.66.1272634487863; Fri, 
+	30 Apr 2010 06:34:47 -0700 (PDT)
+Received: by 10.216.139.144 with HTTP; Fri, 30 Apr 2010 06:34:47 -0700 (PDT)
+Date: Fri, 30 Apr 2010 15:34:47 +0200
+Message-ID: <q2x8db82dd41004300634g46c42cf7na4871677b8d92cb7@mail.gmail.com>
+From: Jerry Jacobs <xor.gate.engineering@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: xor.gate.engineering@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
-Subject: [PATCH] Add error handling to read_cache in stage-manager
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Usage of meta recipe external-toolchain-csl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,68 +49,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 12:29:40 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 30 Apr 2010 13:38:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Sometimes stage-manager crashes with this message :
-Traceback (most recent call last):
- File "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-manager",
-line 79, in <module>
-   cache = read_cache(options.cachefile)
- File "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-manager",
-line 34, in read_cache
-   cache[data[0]]['ts'] = int(data[1])
-IndexError: list index out of range
+Dear all,
 
-This is due to a corrupted cache file. This patch adds an error message
-and continues parsing ignoring the wrong line. The file is then properly
-regenerated.
+I'm very new to openembedded and already have a clear view how it is
+structured. My embedded board mini2440 is already in git and want to create
+my own distro.
+The problem where I bump against is how to use the Codesourcery external
+toolchain for my target. I know there is the file in recipes/meta/
+external-toolchain-csl.bb
+but it not clear how to use it.
 
-Signed-off-by: Mickaël Chazaux <mchazaux@adeneo-embedded.com>
----
- recipes/stage-manager/files/stage-manager          |   14 +++++++++-----
- recipes/stage-manager/stagemanager-native_0.0.1.bb |    2 +-
- 2 files changed, 10 insertions(+), 6 deletions(-)
+This is how my tree looks like:
 
-diff --git a/recipes/stage-manager/files/stage-manager b/recipes/stage-manager/files/stage-manager
-index 536d1af..039614f 100755
---- a/recipes/stage-manager/files/stage-manager
-+++ b/recipes/stage-manager/files/stage-manager
-@@ -29,11 +29,15 @@ def read_cache(cachefile):
-     lines = f.readlines()
-     f.close()
-     for l in lines:
--        data = l.split('|')
--        cache[data[0]] = {}
--        cache[data[0]]['ts'] = int(data[1])
--        cache[data[0]]['size'] = int(data[2])
--        cache[data[0]]['seen'] = False
-+	try:
-+            data = l.split('|')
-+            d = {}
-+            d['ts'] = int(data[1])
-+            d['size'] = int(data[2])
-+            d['seen'] = False
-+            cache[data[0]] = d
-+	except (IndexError, ValueError):
-+            print("Corrupted line in cachefile " + cachefile + " : " + l)
-     return cache
- 
- def mkdirhier(dir):
-diff --git a/recipes/stage-manager/stagemanager-native_0.0.1.bb b/recipes/stage-manager/stagemanager-native_0.0.1.bb
-index 5708045..4357517 100644
---- a/recipes/stage-manager/stagemanager-native_0.0.1.bb
-+++ b/recipes/stage-manager/stagemanager-native_0.0.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Helper script for packaged-staging.bbclass"
--PR = "r11"
-+PR = "r13"
- 
- SRC_URI = "file://stage-manager \
-            file://stage-manager-ipkg \
--- 
-1.6.3.3
+/opt/arm-2010q1/bin  ==> codesourcery toolchain
 
+/opt/mini2440/oe/
+   |----- bitbake              ==> bitbake
+   |----- openembedded ==> openembedded overlay
+   |----- tunebox             ==> my distro buildir
+           | ------ conf        ==> configuration dir for local.conf
+           | ------ setenv    ==> script to set the environment
 
+setenv:
+export OEBASE=/opt/mini2440/oe/openembedded
+export PATH=/opt/mini2440/oe/bitbake/bin:/opt/arm-2010q1/bin:$PATH
+export BBPATH=/opt/mini2440/oe/tunebox:$OEBASE
+export BB_ENV_EXTRAWHITE="OEBASE"
+
+local.conf:
+BBFILES = "/opt/mini2440/oe/openembedded/recipes/*/*.bb"
+DISTRO = "micro"
+MACHINE = "mini2440"
+
+I found also the arago distro which has a toolchain-csl.conf and includes it
+in local.conf, but they do black magic to set the variables:
+TOOLCHAIN_SYSPATH
+TOOLCHAIN_PATH
+SDK_PATH
+
+which can be found in the git repository.
+
+I hope somebody can clear some things up, because its very obsecure if you
+start from scratch.
+
+Kind regards,
+Jerry Jacobs
 
