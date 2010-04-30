@@ -1,31 +1,49 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O7klL-0004Gp-Lo
+	(envelope-from <mickael.chazaux@gmail.com>) id 1O7pLc-0001Sv-2h
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 09:35:52 +0200
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 6BD8D4B0158;
-	Fri, 30 Apr 2010 09:32:07 +0200 (CEST)
-Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
-	[82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 64FF74B011B;
-	Fri, 30 Apr 2010 09:32:05 +0200 (CEST)
-From: Eric Benard <eric@eukrea.com>
+	Fri, 30 Apr 2010 14:29:40 +0200
+Received: by wyf22 with SMTP id 22so105573wyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Apr 2010 05:25:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=zn7PHfwYcJ2CFmYJRJbu9s6xU+ximqDbfeUUdk9Z1s8=;
+	b=kHVIgPGGdqeL8HlnnKhaR1G1pq8KC80zX7Gj/29c2xFpmLSR8Z7pmGdyJ8aLGAflXB
+	a/3pd1HS/x9Y2eVPx1MVKUuSqg/I3genab9DuL3sBLHSGzRCKFeRp0GRm0PBWx6FRayf
+	YQDDW47edoWA1OGnfcmaCuigkasuHxMO96MnQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer:mime-version
+	:content-type:content-transfer-encoding;
+	b=TWejfXkuh08e3uMHWISU/QfEWvMoGYjCxBl+9CO/UzbN1QzCit2ObQCqryAOi4cJsG
+	GSeZE3Ed+b8dW/e8QjxIz9d42Evwpy8ctU/rNKMBw5E7aqJADLKvn0BEwskfCO/M6nkD
+	lz3GsXhGa6CxgTXJW0KTnD1rZewB2XDG2KBiQ=
+Received: by 10.216.90.77 with SMTP id d55mr2548020wef.17.1272630353119;
+	Fri, 30 Apr 2010 05:25:53 -0700 (PDT)
+Received: from localhost.localdomain (delta360.server4you.de [85.25.136.130])
+	by mx.google.com with ESMTPS id
+	k13sm1004053wed.23.2010.04.30.05.25.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 30 Apr 2010 05:25:52 -0700 (PDT)
+Sender: Mickael Chazaux <mickael.chazaux@gmail.com>
+From: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Apr 2010 09:33:43 +0200
-Message-Id: <1272612823-16981-1-git-send-email-eric@eukrea.com>
+Date: Fri, 30 Apr 2010 14:25:40 +0200
+Message-Id: <1272630340-30869-1-git-send-email-mchazaux@adeneo-embedded.com>
 X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1272548191.2313.0.camel@gnutoo-desktop>
-References: <1272548191.2313.0.camel@gnutoo-desktop>
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: mickael.chazaux@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] mplayer_svn : fix compilation problem
+Cc: =?utf-8?q?Micka=C3=ABl=20Chazaux?= <mchazaux@adeneo-embedded.com>
+Subject: [PATCH] Add error handling to read_cache in stage-manager
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,106 +57,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 07:35:53 -0000
+X-List-Received-Date: Fri, 30 Apr 2010 12:29:40 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-- this patch fix the following error (met for a x86 target) :
+Sometimes stage-manager crashes with this message :
+Traceback (most recent call last):
+ File "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-manager",
+line 79, in <module>
+   cache = read_cache(options.cachefile)
+ File "/home/mchazaux/projet/OE/openembedded/recipes/stage-manager/files/stage-manager",
+line 34, in read_cache
+   cache[data[0]]['ts'] = int(data[1])
+IndexError: list index out of range
 
-| loader/module.o: In function `MODULE_GetProcAddress':
-| module.c:(.text+0x125): undefined reference to `report_entry'
-| module.c:(.text+0x12f): undefined reference to `report_ret'
-| module.c:(.text+0x139): undefined reference to `wrapper_target'
-| module.c:(.text+0x13e): undefined reference to `wrapper'
-| loader/module.o: In function `LoadLibraryExA':
-| module.c:(.text+0x10d4): undefined reference to `report_entry'
-| module.c:(.text+0x10de): undefined reference to `report_ret'
-| module.c:(.text+0x10ea): undefined reference to `wrapper_target'
-| module.c:(.text+0x10f0): undefined reference to `wrapper'
-| collect2: ld returned 1 exit status
-| make: *** [mplayer] Error 1
+This is due to a corrupted cache file. This patch adds an error message
+and continues parsing ignoring the wrong line. The file is then properly
+regenerated.
 
-- also add --disable-xss --disable-dga1 --disable-dga2 in order to
-prevent configure to autodetect these options which leads to a
-dependency problem.
-
-Signed-off-by: Eric Benard <eric@eukrea.com>
+Signed-off-by: Mickaël Chazaux <mchazaux@adeneo-embedded.com>
 ---
-v2 : increase PR and add 3 options to configure
+ recipes/stage-manager/files/stage-manager          |   14 +++++++++-----
+ recipes/stage-manager/stagemanager-native_0.0.1.bb |    2 +-
+ 2 files changed, 10 insertions(+), 6 deletions(-)
 
- recipes/mplayer/files/fix-emu_qtx_api.diff |   33 ++++++++++++++++++++++++++++
- recipes/mplayer/mplayer_svn.bb             |    6 ++++-
- 2 files changed, 38 insertions(+), 1 deletions(-)
- create mode 100644 recipes/mplayer/files/fix-emu_qtx_api.diff
-
-diff --git a/recipes/mplayer/files/fix-emu_qtx_api.diff b/recipes/mplayer/files/fix-emu_qtx_api.diff
-new file mode 100644
-index 0000000..e657475
---- /dev/null
-+++ b/recipes/mplayer/files/fix-emu_qtx_api.diff
-@@ -0,0 +1,33 @@
-+http://bugs.gentoo.org/213836
-+
-+Fix the following error :
-+
-+| loader/module.o: In function `MODULE_GetProcAddress':
-+| module.c:(.text+0x125): undefined reference to `report_entry'
-+| module.c:(.text+0x12f): undefined reference to `report_ret'
-+| module.c:(.text+0x139): undefined reference to `wrapper_target'
-+| module.c:(.text+0x13e): undefined reference to `wrapper'
-+| loader/module.o: In function `LoadLibraryExA':
-+| module.c:(.text+0x10d4): undefined reference to `report_entry'
-+| module.c:(.text+0x10de): undefined reference to `report_ret'
-+| module.c:(.text+0x10ea): undefined reference to `wrapper_target'
-+| module.c:(.text+0x10f0): undefined reference to `wrapper'
-+| collect2: ld returned 1 exit status
-+| make: *** [mplayer] Error 1
-+
-+---
-+diff --git a/loader/module.c b/loader/module.c
-+index e316cf0..2023acb 100644
-+--- a/loader/module.c
-++++ b/loader/module.c
-+@@ -9,8 +9,8 @@
-+  */
-+ 
-+ // define for quicktime calls debugging and/or MacOS-level emulation:
-+-#ifndef __APPLE__
-+-#define EMU_QTX_API
-++#ifdef __APPLE__
-++#undef EMU_QTX_API
-+ #endif /* __APPLE__ */
-+ 
-+ // define for quicktime debugging (verbose logging):
-diff --git a/recipes/mplayer/mplayer_svn.bb b/recipes/mplayer/mplayer_svn.bb
-index dd94767..f26318c 100644
---- a/recipes/mplayer/mplayer_svn.bb
-+++ b/recipes/mplayer/mplayer_svn.bb
-@@ -14,6 +14,7 @@ SRC_URI = "svn://svn.mplayerhq.hu/mplayer;module=trunk \
-        file://fix-exp.diff;patch=1;maxrev=30291 \
- 	   file://fix-addrinfo.patch;patch=1;maxrev=30302 \
-        file://fix-avconfig.diff;patch=1;maxrev=30376 \
-+	   file://fix-emu_qtx_api.diff;patch=1;maxrev=30165 \
- "
+diff --git a/recipes/stage-manager/files/stage-manager b/recipes/stage-manager/files/stage-manager
+index 536d1af..039614f 100755
+--- a/recipes/stage-manager/files/stage-manager
++++ b/recipes/stage-manager/files/stage-manager
+@@ -29,11 +29,15 @@ def read_cache(cachefile):
+     lines = f.readlines()
+     f.close()
+     for l in lines:
+-        data = l.split('|')
+-        cache[data[0]] = {}
+-        cache[data[0]]['ts'] = int(data[1])
+-        cache[data[0]]['size'] = int(data[2])
+-        cache[data[0]]['seen'] = False
++	try:
++            data = l.split('|')
++            d = {}
++            d['ts'] = int(data[1])
++            d['size'] = int(data[2])
++            d['seen'] = False
++            cache[data[0]] = d
++	except (IndexError, ValueError):
++            print("Corrupted line in cachefile " + cachefile + " : " + l)
+     return cache
  
- SRCREV = "30165"
-@@ -39,7 +40,7 @@ RCONFLICTS_${PN} = "mplayer-atty"
- RREPLACES_${PN} = "mplayer-atty"
+ def mkdirhier(dir):
+diff --git a/recipes/stage-manager/stagemanager-native_0.0.1.bb b/recipes/stage-manager/stagemanager-native_0.0.1.bb
+index 5708045..4357517 100644
+--- a/recipes/stage-manager/stagemanager-native_0.0.1.bb
++++ b/recipes/stage-manager/stagemanager-native_0.0.1.bb
+@@ -1,5 +1,5 @@
+ DESCRIPTION = "Helper script for packaged-staging.bbclass"
+-PR = "r11"
++PR = "r13"
  
- PV = "0.0+1.0rc3+svnr${SRCPV}"
--PR = "r19"
-+PR = "r20"
- DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_angstrom = "1"
- DEFAULT_PREFERENCE_shr = "1"
-@@ -156,6 +157,9 @@ EXTRA_OECONF = " \
- 	--disable-tga \
- 	--disable-pnm \
- 	--disable-md5sum \
-+	--disable-xss \
-+	--disable-dga1 \
-+	--disable-dga2 \
- 	\
- 	--enable-alsa \
- 	--enable-ossaudio \
+ SRC_URI = "file://stage-manager \
+            file://stage-manager-ipkg \
 -- 
 1.6.3.3
 
