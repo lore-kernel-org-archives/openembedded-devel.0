@@ -1,30 +1,46 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1O7uf0-0000tH-TB
+	(envelope-from <xor.gate.engineering@gmail.com>) id 1O7vX4-0008Fp-PE
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 20:09:59 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O7ubN-0003xF-EK
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 22:06:15 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Apr 2010 22:06:08 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <w2tbd4a003f1004301028p5658d66eyb0083748bfaf498@mail.gmail.com>
-In-Reply-To: <w2tbd4a003f1004301028p5658d66eyb0083748bfaf498@mail.gmail.com>
+	Fri, 30 Apr 2010 21:05:51 +0200
+Received: by wwb18 with SMTP id 18so397880wwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Apr 2010 12:02:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ZBlMMclzx0nira6IqxEAPUudZeQQkS9q3CHqfyAiuUs=;
+	b=cvqQ6wyPaosuNa1qPNwvbFAn1W7FG583JaUUb2qfB3168yCUanSzA/c2CVxHLHy2zm
+	V1CbiEU2OD3+bmWTqm/J2KjqtO7mnZoT39W+tht6uM0iEzTLcJbpVOobDijcOKVbflfa
+	VCefAwxImyCXZVDb3tmbxhUb6hphiEjiqJa64=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Wz13P7+OpTNGtjA+N7Jz8t9+JUp+bMdGVJByF9CRFmqlnetlttAP4clehBewcTLJoL
+	rM7yKUq+vexyxF1Y+mjtGhnhzTkMBWQw5cZcbUvmkWzQdgP+ASrwN/0kWgINgLAa8mip
+	XyYWsivYyueR35QJ828DvTJg56nL9MgXK9bGU=
 MIME-Version: 1.0
-Message-Id: <201004302206.12006.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.216.90.135 with SMTP id e7mr2715834wef.82.1272654082853; Fri, 
+	30 Apr 2010 12:01:22 -0700 (PDT)
+Received: by 10.216.139.144 with HTTP; Fri, 30 Apr 2010 12:01:22 -0700 (PDT)
+In-Reply-To: <20100430175823.GB5713@denix.org>
+References: <q2x8db82dd41004300634g46c42cf7na4871677b8d92cb7@mail.gmail.com>
+	<1272646386.21120.84.camel@trini-m4400>
+	<20100430175823.GB5713@denix.org>
+Date: Fri, 30 Apr 2010 21:01:22 +0200
+Message-ID: <t2x8db82dd41004301201mb827e1f6p2eced7b49a5a031f@mail.gmail.com>
+From: Jerry Jacobs <xor.gate.engineering@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: xor.gate.engineering@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Adding a nounpack url parameter to base.bbclass
+Subject: Re: Usage of meta recipe external-toolchain-csl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,103 +54,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 18:10:00 -0000
-X-Groupsio-MsgNum: 18906
-Content-Type: multipart/signed; boundary="nextPart1845590.8DqXl7Gb5k";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart1845590.8DqXl7Gb5k
-Content-Type: Text/Plain;
-  charset="windows-1251"
+X-List-Received-Date: Fri, 30 Apr 2010 19:05:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =CF=FF=F2=ED=E8=F6=E0 30 =E0=EF=F0=
-=E5=EB=FF 2010 21:28:40 =E0=E2=F2=EE=F0 Ash Charles =ED=E0=EF=E8=F1=E0=EB:
-> I added a minor change to base.bbclass to accept a 'nounpack=3D1'
-> parameter to stop bitbake from unpacking a file that has a bz2, tar...
-> extension; this is useful if you actually want to include such an
-> archive file in a package.  I'm not familiar with the policies for
-> submitting patches however I thought other people might find it useful
-> so I've included it below:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index 4d5d73d..387a066 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -171,21 +171,29 @@ def oe_unpack_file(file, data, url =3D None):
->         else:
->                 efile =3D file
->         cmd =3D None
-> -       if file.endswith('.tar'):
-> +
-> +        # allow a 'nounpack=3D1' url parameter to prevent unpacking of
->  archives +        unpack =3D True
-> +        (type, host, path, user, pswd, parm) =3D bb.decodeurl(url)
-> +        if 'nounpack' in parm:
-> +                if parm['nounpack']:
-> +                        unpack =3D False
-> +
-> +       if unpack and file.endswith('.tar'):
->                 cmd =3D 'tar x --no-same-owner -f %s' % file
-> -       elif file.endswith('.tgz') or file.endswith('.tar.gz') or
-> file.endswith('.tar.Z'):
-> +       elif unpack and (file.endswith('.tgz') or
-> file.endswith('.tar.gz') or file.endswith('.tar.Z')):
->                 cmd =3D 'tar xz --no-same-owner -f %s' % file
-> -       elif file.endswith('.tbz') or file.endswith('.tbz2') or
-> file.endswith('.tar.bz2'):
-> +       elif unpack and (file.endswith('.tbz') or
-> file.endswith('.tbz2') or file.endswith('.tar.bz2')):
->                 cmd =3D 'bzip2 -dc %s | tar x --no-same-owner -f -' % file
-> -       elif file.endswith('.gz') or file.endswith('.Z') or
->  file.endswith('.z'): +       elif unpack and (file.endswith('.gz') or
->  file.endswith('.Z') or file.endswith('.z')):
->                 cmd =3D 'gzip -dc %s > %s' % (file, efile)
-> -       elif file.endswith('.bz2'):
-> +       elif unpack and file.endswith('.bz2'):
->                 cmd =3D 'bzip2 -dc %s > %s' % (file, efile)
-> -       elif file.endswith('.tar.xz'):
-> +       elif unpack and file.endswith('.tar.xz'):
->                 cmd =3D 'xz -dc %s | tar x --no-same-owner -f -' % file
-> -       elif file.endswith('.xz'):
-> +       elif unpack and file.endswith('.xz'):
->                 cmd =3D 'xz -dc %s > %s' % (file, efile)
-> -       elif file.endswith('.zip') or file.endswith('.jar'):
-> +       elif unpack and (file.endswith('.zip') or file.endswith('.jar')):
->                 cmd =3D 'unzip -q -o'
->                 (type, host, path, user, pswd, parm) =3D bb.decodeurl(url)
->                 if 'dos' in parm:
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+On Fri, Apr 30, 2010 at 7:58 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+>
+> On Fri, Apr 30, 2010 at 09:53:06AM -0700, Tom Rini wrote:
+> > On Fri, 2010-04-30 at 15:34 +0200, Jerry Jacobs wrote:
+> > > Dear all,
+> > >
+> > > I'm very new to openembedded and already have a clear view how it is
+> > > structured. My embedded board mini2440 is already in git and want to =
+create
+> > > my own distro.
+> > > The problem where I bump against is how to use the Codesourcery exter=
+nal
+> > > toolchain for my target. I know there is the file in recipes/meta/
+> > > external-toolchain-csl.bb
+> > > but it not clear how to use it.
+> >
+> > There's 2 ways. =A0One way is, in local.conf:
+> > ### CSL public ARM does <arch>-none-<os>, so fill in the -none
+> > TARGET_VENDOR =3D "-none"
+> > ### Bring in external-toolchain-csl.bb
+> > TOOLCHAIN_BRAND =3D "csl"
+> > ### Where the CSL version is installed.
+> > TOOLCHAIN_PATH =3D "/full/path/to/arm-2009q3"
+> > ### Where inside the CSL install the target libraries exist.
+> > TOOLCHAIN_SYSPATH =3D "${TOOLCHAIN_PATH}/arm-none-linux-gnueabi"
+> > ### Add tools to the PATH automatically.
+> > PATH_prepend =3D "${TOOLCHAIN_PATH}/bin:"
+> > require conf/distro/include/toolchain-external.inc
+> >
+> > The other way has a few less variables in local.conf but assumes PATH i=
+s
+> > already updated. =A0Denys will reply shortly with that, I imagine.
+>
+> The only difference I have from Tom's setup is I expect the CSL toolchain
+> being already in the PATH variable:
+>
+> export PATH=3D/full/path/to/arm-2009q1/bin:$PATH
+>
+> And then set the other several BitBake variables accordingly (in local.co=
+nf
+> and toolchain-csl.conf):
+>
+> TARGET_VENDOR =3D "-none"
+> # no need to include/require toolchain-external.inc, as TOOLCHAIN_TYPE do=
+es it
+> TOOLCHAIN_TYPE =3D "external"
+> TOOLCHAIN_BRAND =3D "csl"
+>
+> [There I also set CPPFLAGS and LDFLAGS to point to CSL directly, but it's=
+ not
+> required as necessary files are staged by the recipe these days.]
+>
+> The "black magic" in the local.conf is basically a Python code to set
+> TOOLCHAIN_PATH and TOOLCHAIN_SYSPATH based on the user's PATH:
+>
+> TOOLCHAIN_PATH =3D "${@code-to-extract-csl-path-from-PATH}"
+> TOOLCHAIN_SYSPATH =3D ${TOOLCHAIN_PATH}/${TARGET_SYS}
+>
+> So, with my setup, no modifications to local.conf are required, as long a=
+s CSL
+> is in your PATH. With Tom's setup, users would need to add the CSL path t=
+o
+> local.conf.
+>
+> Hope this helps.
+>
+> --
+> Denys
 
-Wouldn't it be easier to do something like:
+This clears things up, bit still its not sufficient to get it working.
 
-+        if 'nounpack' not in parm:
-+            if file.endswith('.tar'):
-=2E...
-+            elif file.endswith('.tgz') or file.endswith('.tar.gz') or file=
-=2Eendswith('.tar.Z'):
-=2E...
+The DISTRO seems to overwrite the TOOLCHAIN rules. And this while I
+set the TOOLCHAIN variables in local.conf
 
-? The diff would be a bit bigger, but the end result is cleaner IMO.
+And why compiles it things like coreutils-native? This are the tools
+needed to compile software, like make, autoconf?
+NOTE: package coreutils-native-7.2-r1: task do_setscene: Started
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+I have experience with compiling software on a linux machine but
+OpenEmbedded is a bit different
+than the other frameworks and tools.
 
---nextPart1845590.8DqXl7Gb5k
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkvbHBMACgkQXJ70z+XgVcP0/QCgjyxvkDoSbMIpMbnpi+mvXkSA
-1fQAnREyw9v90/pWl1x9uaONcSLJ2XPz
-=ZhlI
------END PGP SIGNATURE-----
-
---nextPart1845590.8DqXl7Gb5k--
