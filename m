@@ -1,30 +1,43 @@
-Received: from mail.codelabs.ch ([217.150.249.120] helo=fenrir.codelabs.ch)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ken@codelabs.ch>) id 1O8K2k-0001wp-5e
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1O8MAG-0001vc-64
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 May 2010 23:16:13 +0200
-X-Virus-Scanned: by codelabs.ch
-Received: from localhost.localdomain (244-43-239-77-pool.cable.fcom.ch
-	[77.239.43.244])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by fenrir.codelabs.ch (Postfix) with ESMTPSA id 9F75262C6F;
-	Sat,  1 May 2010 23:05:22 +0200 (CEST)
-From: Adrian-Ken Rueegsegger <ken@codelabs.ch>
+	Sun, 02 May 2010 01:32:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NSKxg027311
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 2 May 2010 00:28:20 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 26990-05 for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 May 2010 00:28:16 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NSDjJ027305
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 2 May 2010 00:28:14 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat,  1 May 2010 23:12:18 +0200
-Message-Id: <1272748338-23051-2-git-send-email-ken@codelabs.ch>
-In-Reply-To: <1272748338-23051-1-git-send-email-ken@codelabs.ch>
-References: <1272748338-23051-1-git-send-email-ken@codelabs.ch>
-X-SA-Exim-Connect-IP: 217.150.249.120
-X-SA-Exim-Mail-From: ken@codelabs.ch
+In-Reply-To: <hq155c$8o8$1@dough.gmane.org>
+References: <1270135981.4993.128.camel@rex> <hpum4g$18m$1@dough.gmane.org>
+	<1271090705.14344.16.camel@localhost.localdomain>
+	<hq06ad$tnf$1@dough.gmane.org> <1271130396.15813.131.camel@rex>
+	<hq155c$8o8$1@dough.gmane.org>
+Date: Sun, 02 May 2010 00:28:09 +0100
+Message-ID: <1272756489.30647.1938.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] tzdata: update to latest version (2010i).
+Subject: Re: Request for branch merge
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,50 +51,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 May 2010 21:16:13 -0000
+X-List-Received-Date: Sat, 01 May 2010 23:32:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Adrian-Ken Rueegsegger <ken@codelabs.ch>
----
- recipes/tzdata/tzdata_2010h.bb |   10 ----------
- recipes/tzdata/tzdata_2010i.bb |   10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 recipes/tzdata/tzdata_2010h.bb
- create mode 100644 recipes/tzdata/tzdata_2010i.bb
+On Tue, 2010-04-13 at 09:06 +0200, Koen Kooi wrote:
+> On 13-04-10 05:46, Richard Purdie wrote:
+> > On Tue, 2010-04-13 at 00:19 +0200, Koen Kooi wrote:
+> >> OK, I reproduced the abiword failure, it's in enchant:
+> >>
+> >> | /bin/sh ../../arm-angstrom-linux-gnueabi-libtool --tag=CC
+> >> - --mode=link ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a
+> >> - -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
+> >> -
+> >> -isystem/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
+> >> - -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+> >> - -ggdb3 -module -avoid-version -no-undefined
+> >> - -L/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+> >> -
+> >> -Wl,-rpath-link,/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+> >> - -Wl,-O1 -Wl,--hash-style=gnu -o libenchant_aspell.la -rpath
+> >> /usr/lib/enchant aspell_provider.lo -Wl,--export-dynamic -pthread
+> >> - -lgmodule-2.0 -lrt -lglib-2.0
+> >> - -L/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
+> >> - -laspell ../../src/libenchant.la
+> >> | /bin/grep:
+> >> /OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la:
+> >> No such file or directory
+> >> | /bin/sed: can't read
+> >> /OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la:
+> >> No such file or directory
+> >> | arm-angstrom-linux-gnueabi-libtool: link:
+> >> `/OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la'
+> >> is not a valid libtool archive
+> >>
+> >> The file referenced
+> >> (/OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la)
+> >> doesn't exist since it is located in
+> >> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la
+> >> instead.
+> >>
+> >> Any clues in which direction I should look to debug this?
+> > 
+> > Sorry I've not been able to spend the time I'd like on this stuff, work
+> > and travel have got in the way and are probably going to tie me up for a
+> > while yet if I'm realistic. Anyone at ELC should say hello btw! :) 
+> 
+> 
+> > Jet lag prevents me thinking too clearly at the moment but whats
+> > happening above is that the sysroot is starting to look more like the
+> > real target filesystem and libstdc++ is moving to what I would say is
+> > the correct place for it. This is good but it seems something, probably
+> > a .la file has the incorrect path? Is this a build from scratch or an
+> > old build? I suspect it would work with a build from scratch but if this
+> > was one, there is some more subtle problem :/.
+> 
+> It's a complete build from scratch (rm tmp -rf ; bitbake abiword).
 
-diff --git a/recipes/tzdata/tzdata_2010h.bb b/recipes/tzdata/tzdata_2010h.bb
-deleted file mode 100644
-index 1e00fd3..0000000
---- a/recipes/tzdata/tzdata_2010h.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require tzdata.inc
--
--# Note that elsie.nci.nih.gov removes old archives when new is being
--# released. So if this doesn't build for you because of missing source file
--# just bump it to the latest available version, removing old one
--
--PR = "${INC_PR}.0"
--
--SRC_URI[tar.md5sum] = "d384ac091e6d56802f9b3e6b3d3f0f2e"
--SRC_URI[tar.sha256sum] = "a4918d60f63440ba9b6050205881e8a98d718dc0c2b7df5955f43e781eab6e7d"
-diff --git a/recipes/tzdata/tzdata_2010i.bb b/recipes/tzdata/tzdata_2010i.bb
-new file mode 100644
-index 0000000..fbd0d7d
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2010i.bb
-@@ -0,0 +1,10 @@
-+require tzdata.inc
-+
-+# Note that elsie.nci.nih.gov removes old archives when new is being
-+# released. So if this doesn't build for you because of missing source file
-+# just bump it to the latest available version, removing old one
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[tar.md5sum] = "4d2a90afd5bffe8df97f3def245e178e"
-+SRC_URI[tar.sha256sum] = "bee0a26cca54db3413416d968c0a6361d83188b112d2512559d0e3602f254dc3"
--- 
-1.7.0.2
+Sorry about the delay, this commit should fix it (reproduced and tested
+locally):
+
+http://git.openembedded.net/cgit.cgi/openembedded/commit/?h=rpurdie/work-in-progress&id=bb53e48f79dab0877c8b8ce487a051d29cae31e3
+
+Cheers,
+
+Richard
 
 
 
