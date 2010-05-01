@@ -1,44 +1,28 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail.codelabs.ch ([217.150.249.120] helo=fenrir.codelabs.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1O8DhJ-00078A-Nd
+	(envelope-from <ken@codelabs.ch>) id 1O8K2k-0001wo-77
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 01 May 2010 16:29:38 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 42E2AEFE5F
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 May 2010 10:17:35 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Sat, 01 May 2010 10:17:35 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=r6FCm4VSRNWtksDkDA549Yd7u7M=;
-	b=Xpr8lfrQpAmin7BWEazTQt5MTufNkDKJRMLQ29FcUEsJSP6KbN7WoU9Pbsxdn+F3az4LLxfAKVFkD0WrfWtNSMstJZKAcQdwSp+pM71bcL8ZIO963xJLBp4OjcbqpJMgumoqbI9+eX1pQYSTyfwKy5pSuQrLb6KNXYQXx5H7EO0=
-X-Sasl-enc: gmayZN+AuBy/r/P5edNWBSl1O4Q2s8g1HUWv1jhTakOK 1272723454
-Received: from [192.168.100.126] (p5B0FD323.dip.t-dialin.net [91.15.211.35])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 9099742696
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  1 May 2010 10:17:34 -0400 (EDT)
-Date: Sat, 1 May 2010 16:17:30 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
+	Sat, 01 May 2010 23:16:12 +0200
+X-Virus-Scanned: by codelabs.ch
+Received: from localhost.localdomain (244-43-239-77-pool.cable.fcom.ch
+	[77.239.43.244])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by fenrir.codelabs.ch (Postfix) with ESMTPSA id DB56E62C6F;
+	Sat,  1 May 2010 23:05:20 +0200 (CEST)
+From: Adrian-Ken Rueegsegger <ken@codelabs.ch>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.DEB.1.10.1004161912440.13411@vitus.devnet.local>
-Message-ID: <alpine.DEB.1.10.1005011614380.15503@vitus.devnet.local>
-References: <alpine.DEB.1.10.1004161912440.13411@vitus.devnet.local>
-User-Agent: Alpine 1.10 (DEB 962 2008-03-14)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Date: Sat,  1 May 2010 23:12:17 +0200
+Message-Id: <1272748338-23051-1-git-send-email-ken@codelabs.ch>
+X-SA-Exim-Connect-IP: 217.150.249.120
+X-SA-Exim-Mail-From: ken@codelabs.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
-	SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: canutils
+Subject: [PATCH 1/2] tzcode: update tzdata to latest version (2010i).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,23 +36,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 May 2010 14:29:38 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Sat, 01 May 2010 21:16:12 -0000
 
-On Fri, 16 Apr 2010, Vitus Jensen wrote:
+Signed-off-by: Adrian-Ken Rueegsegger <ken@codelabs.ch>
+---
+ recipes/tzcode/tzcode-native_2010f.bb |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-> The current CAN stack in linux needs updated userspace code.  The
-> following two patches build canutils from pengutronix.
-
-I've rebuild the patches to no longer require a do_stage method.  The 
-reason for the do_stage() was the inclusion of a local copy of 
-can/netlink.h which should better be supplied by linux-libc-headers.  And 
-is, starting with 2.6.32.
-
-Vitus
-
+diff --git a/recipes/tzcode/tzcode-native_2010f.bb b/recipes/tzcode/tzcode-native_2010f.bb
+index f2fbffd..8585de2 100644
+--- a/recipes/tzcode/tzcode-native_2010f.bb
++++ b/recipes/tzcode/tzcode-native_2010f.bb
+@@ -6,11 +6,11 @@ require tzcode-native.inc
+ # Also, tzdata (and it is needed to build tzcode) version can differ from
+ # tzcode version, thus this variable
+ 
+-TZDATA_PV = "2010h"
++TZDATA_PV = "2010i"
+ 
+ SRC_URI[tzcode-2010f.md5sum] = "e530cc9bbdfd5e8c1eac21a68f4d5656"
+ SRC_URI[tzcode-2010f.sha256sum] = "651d866c91ada925b4ac9491e69ebd5c355c46b2c01dd1741b5e6a609d93eb1e"
+-SRC_URI[tzdata-2010h.md5sum] = "d384ac091e6d56802f9b3e6b3d3f0f2e"
+-SRC_URI[tzdata-2010h.sha256sum] = "a4918d60f63440ba9b6050205881e8a98d718dc0c2b7df5955f43e781eab6e7d"
++SRC_URI[tzdata-2010i.md5sum] = "4d2a90afd5bffe8df97f3def245e178e"
++SRC_URI[tzdata-2010i.sha256sum] = "bee0a26cca54db3413416d968c0a6361d83188b112d2512559d0e3602f254dc3"
+ 
+ PR = "${INC_PR}.2"
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+1.7.0.2
+
 
 
