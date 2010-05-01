@@ -1,31 +1,30 @@
 Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
 	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1O8MAG-0001vc-64
+	(envelope-from <rpurdie@rpsys.net>) id 1O8MBx-0001zZ-E5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 01:32:09 +0200
+	Sun, 02 May 2010 01:33:52 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NSKxg027311
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NU5jc027326
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 2 May 2010 00:28:20 +0100
+	Sun, 2 May 2010 00:30:05 +0100
 Received: from tim.rpsys.net ([127.0.0.1])
 	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
 	port 10024) with LMTP
-	id 26990-05 for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 May 2010 00:28:16 +0100 (BST)
+	id 27236-02 for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 May 2010 00:30:01 +0100 (BST)
 Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NSDjJ027305
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NTwEx027314
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 2 May 2010 00:28:14 +0100
+	Sun, 2 May 2010 00:29:58 +0100
 From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hq155c$8o8$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex> <hpum4g$18m$1@dough.gmane.org>
-	<1271090705.14344.16.camel@localhost.localdomain>
-	<hq06ad$tnf$1@dough.gmane.org> <1271130396.15813.131.camel@rex>
-	<hq155c$8o8$1@dough.gmane.org>
-Date: Sun, 02 May 2010 00:28:09 +0100
-Message-ID: <1272756489.30647.1938.camel@rex>
+In-Reply-To: <1271090799.14344.19.camel@localhost.localdomain>
+References: <1270135981.4993.128.camel@rex>  <hpum4g$18m$1@dough.gmane.org>
+	<1271087957.29304.86.camel@trini-m4400>
+	<1271090799.14344.19.camel@localhost.localdomain>
+Date: Sun, 02 May 2010 00:29:55 +0100
+Message-ID: <1272756595.30647.1942.camel@rex>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.3 
 X-Virus-Scanned: amavisd-new at rpsys.net
@@ -51,71 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 May 2010 23:32:09 -0000
+X-List-Received-Date: Sat, 01 May 2010 23:33:52 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-04-13 at 09:06 +0200, Koen Kooi wrote:
-> On 13-04-10 05:46, Richard Purdie wrote:
-> > On Tue, 2010-04-13 at 00:19 +0200, Koen Kooi wrote:
-> >> OK, I reproduced the abiword failure, it's in enchant:
-> >>
-> >> | /bin/sh ../../arm-angstrom-linux-gnueabi-libtool --tag=CC
-> >> - --mode=link ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a
-> >> - -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
-> >> -
-> >> -isystem/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
-> >> - -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
-> >> - -ggdb3 -module -avoid-version -no-undefined
-> >> - -L/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> >> -
-> >> -Wl,-rpath-link,/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> >> - -Wl,-O1 -Wl,--hash-style=gnu -o libenchant_aspell.la -rpath
-> >> /usr/lib/enchant aspell_provider.lo -Wl,--export-dynamic -pthread
-> >> - -lgmodule-2.0 -lrt -lglib-2.0
-> >> - -L/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
-> >> - -laspell ../../src/libenchant.la
-> >> | /bin/grep:
-> >> /OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la:
-> >> No such file or directory
-> >> | /bin/sed: can't read
-> >> /OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la:
-> >> No such file or directory
-> >> | arm-angstrom-linux-gnueabi-libtool: link:
-> >> `/OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la'
-> >> is not a valid libtool archive
-> >>
-> >> The file referenced
-> >> (/OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la)
-> >> doesn't exist since it is located in
-> >> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la
-> >> instead.
-> >>
-> >> Any clues in which direction I should look to debug this?
+On Mon, 2010-04-12 at 17:46 +0100, Joshua Lock wrote:
+> On Mon, 2010-04-12 at 08:59 -0700, Tom Rini wrote:
+> > On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
+>  > Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
+> > > my issue with chrpath, which only leaves the cross staging lamangler
+> > > stuff to get fixed.
 > > 
-> > Sorry I've not been able to spend the time I'd like on this stuff, work
-> > and travel have got in the way and are probably going to tie me up for a
-> > while yet if I'm realistic. Anyone at ELC should say hello btw! :) 
+> > Actually (and I'm OK with binconfig stuff being broken in the first
+> > merge) the problem with binconfig junk isn't the file contents, but the
+> > file location.  staging-target-pkg will contain
+> > staging/<host>/usr/bin/<target>/foo-config.  Which means using pstaging
+> > for a target pkg built on 32bit Linux fails when used on 64bit Linux.
+> > Not that I wouldn't mind seeing the binconfig stuff die, just saying
+> > it's a problem today :)
 > 
+> Ah, hmm... yes. That is a problem.
 > 
-> > Jet lag prevents me thinking too clearly at the moment but whats
-> > happening above is that the sysroot is starting to look more like the
-> > real target filesystem and libstdc++ is moving to what I would say is
-> > the correct place for it. This is good but it seems something, probably
-> > a .la file has the incorrect path? Is this a build from scratch or an
-> > old build? I suspect it would work with a build from scratch but if this
-> > was one, there is some more subtle problem :/.
-> 
-> It's a complete build from scratch (rm tmp -rf ; bitbake abiword).
+> FWIW I don't think you'll get any arguments from the Poky team where the
+> binconfig stuff to suffer an untimely demise!
 
-Sorry about the delay, this commit should fix it (reproduced and tested
-locally):
-
-http://git.openembedded.net/cgit.cgi/openembedded/commit/?h=rpurdie/work-in-progress&id=bb53e48f79dab0877c8b8ce487a051d29cae31e3
+FWIW, Poky has had some interesting commits recently that address Tom's
+issue above from Josh.
 
 Cheers,
 
 Richard
+
 
 
 
