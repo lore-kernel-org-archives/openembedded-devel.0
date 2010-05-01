@@ -1,34 +1,42 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1O7wXq-0002dp-1W
+	(envelope-from <Tom_Rini@mentor.com>) id 1O80LU-0005dn-TD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Apr 2010 22:10:47 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.58.177])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L1P00IARH7GLLAB@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	30 Apr 2010 15:06:53 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id BE94114AF60; Fri,
-	30 Apr 2010 16:06:52 -0400 (EDT)
-Date: Fri, 30 Apr 2010 16:06:52 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: C Michael Sundius <msundius@sundius.com>
-Message-id: <20100430200652.GE5713@denix.org>
-References: <g2y18e217241004291133x532abf49k8fb76e81564efbad@mail.gmail.com>
-MIME-version: 1.0
-In-reply-to: <g2y18e217241004291133x532abf49k8fb76e81564efbad@mail.gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+	Sat, 01 May 2010 02:14:14 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O80Hs-0001XN-LJ from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Apr 2010 17:10:28 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 30 Apr 2010 17:10:28 -0700
+Received: from 172.30.80.14 ([172.30.80.14]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Sat,  1 May 2010 00:10:27 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	30 Apr 2010 17:10:17 -0700
+From: Tom Rini <tom_rini@mentor.com>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1272552574.3865.814.camel@trini-m4400>
+References: <hrbmd4$mng$1@dough.gmane.org>
+	<1272552574.3865.814.camel@trini-m4400>
+Organization: Mentor Graphics Corporation
+Date: Fri, 30 Apr 2010 17:10:14 -0700
+Message-ID: <1272672614.21120.100.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 01 May 2010 00:10:28.0329 (UTC)
+	FILETIME=[B4836590:01CAE8C2]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: building an SDK with an externally provided toolchain
+Subject: Re: Merging RPs branch, help needed for dealing with possible fall-out
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,74 +50,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Apr 2010 20:10:47 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Sat, 01 May 2010 00:14:15 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Apr 29, 2010 at 11:33:33AM -0700, C Michael Sundius wrote:
-> Denys,
-> 
-> in your comment in the thread:
-> 
-> Re: [oe] [RFC][PATCH] meta-toolchain: use MULTIMACH_TARGET_SYS instead of
-> TARGET_SYS
-> 
-> > Ok, you asked for a comment, I'll give you two :)
-> >
-> > 1. In Arago I have a way to overwrite SDKPATH from the command line when
-> > building a specific SDK/toolchain. So, I can do what you suggest, but...
-> >
-> > 2. My SDKs are currently not machine-specific, moreover, they don't have
-> > the
-> > cross-compile tools in them (i.e. no toolchain part), as Arago uses
-> > external
-> > CodeSourcery toolchain for that. The only cross-tools I have in my SDKs are
-> > those, which are missing from CS - i.e. libtool, pkgconfig, opkg,
-> > qt4e-tools
-> > etc. But I still build 2 versions of SDK - armv5te and armv7a.
-> >
-> I am in a similar predicament where we have to use a tool-chain provided to
-> us prior to the adoption of OE. As a result, we've hacked up our own
-> external-toolchain recipe to copy the libs and headers into the staging dir,
-> but do not have a real cross-compile. we just add the path for the actual
-> tools. We also would like to provide an SDK of our libraries separately from
-> the toolchain that we deliver to our SDK customers.
-> 
-> my question is, how do you build your sdk. since our SDK_PATH is not where
-> our toolchain is the sdk.bbclass points ${prefix} to /usr/local (which does
-> not contain our toolchain) thus much of the makery reverts to looking in
-> /usr/include for headers which of course casuse the build to break..
-> 
-> do you keep your external toolchain from CS in your SDK_PATH or somewhere
-> else?
-> 
-> you seem to allude to the fact that you did some magic to overrite the
-> SDKPATH in certain circumstances.. I didn't see it in your code.
+On Thu, 2010-04-29 at 07:49 -0700, Tom Rini wrote:=20
+> On Thu, 2010-04-29 at 12:18 +0200, Koen Kooi wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >=20
+> > Hi,
+> >=20
+> > I've been talking to RP and we both like to merge his branch as soon as
+> > the last problem (the cross lamanger) has been addressed. RP estimates
+> > that will happen early next week.
+> > But after it has been merged there might be some fallout, which we woul=
+d
+> > like to have some help with. If you don't want to help out and and don'=
+t
+> > want the possible breakage: don't git pull for the time being.
+>=20
+> Related, do we have people signing up for building ___ targets?  I'll
+> assume angstrom + beagleboard + beagleboard-demo will be covered :)
 
-The trick is that meta-toolchain recipe does not build any target packages and 
-expects them to be already available in deploy - it only opkg-installs them. 
-Thus, it's safe to overwrite SDK_PATH when building/assembling the SDK. I have 
-a python code in my local.conf (argh, my local.conf already looks like a 
-distro.conf) where I set SDK_PATH to point to CSL for normal builds; or set it 
-with the directory (provided through a separate variable set on the command 
-line) where I want the SDK installed, when building said SDK:
+OK, now that I've found a building set, I'll make sure minimal +
+{qemux86, qemumips, qemuarm, db1200, calamari, mpc8313e-rdb} +
+minimal-image and minimal + {qemux86, qemumips, qemuarm} + x11-image
+build, and if the qemu targets end up being easy enough to fire up and
+boot, I'll do that too.
 
-SDK_PATH = "${@[bb.data.getVar('TOOLCHAIN_PATH', d, 1), bb.data.getVar('META_SDK_PATH', d, 1)][bool(bb.data.getVar('META_SDK_PATH', d, 1))]}"
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
-I.e. if META_SDK_PATH is set, assume we are building SDK and set SDK_PATH to 
-the root of our SDK, otherwise set it to TOOLCHAIN_PATH, which is CSL. I also 
-set TOOLCHAIN_PATH in addition to SDK_PATH in the environment-setup script, 
-generated by meta-toolchain.bb
-
-Then I make builds like this:
-
-$ MACHINE=omap3evm bitbake arago-image
-$ META_SDK_PATH=/opt/arago-sdk MACHINE=omap3evm bitbake meta-toolchain-arago
-
-Feel free to poke around in the Arago repository:
-http://arago-project.org/git/arago.git
-
--- 
-Denys
 
 
