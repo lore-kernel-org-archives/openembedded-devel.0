@@ -1,29 +1,30 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O8doq-00014r-AV
+	(envelope-from <roman@khimov.ru>) id 1O8eu0-0001Vo-MW
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 20:23:11 +0200
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id C2E364B0134;
-	Sun,  2 May 2010 20:19:21 +0200 (CEST)
-Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
-	[82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id C61434B00A5;
-	Sun,  2 May 2010 20:19:18 +0200 (CEST)
-From: Eric Benard <eric@eukrea.com>
+	Sun, 02 May 2010 21:32:33 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O8eqN-0007Na-RK
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 02 May 2010 23:28:48 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  2 May 2010 20:19:08 +0200
-Message-Id: <1272824348-17407-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Sun, 2 May 2010 23:28:36 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1272824348-17407-1-git-send-email-eric@eukrea.com>
+In-Reply-To: <1272824348-17407-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+Message-Id: <201005022328.40590.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] zlib: convert to BBCLASSEXTAND and add version 1.2.5
+Subject: Re: [PATCH v2] zlib: convert to BBCLASSEXTAND and add version 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,185 +38,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 May 2010 18:23:11 -0000
+X-List-Received-Date: Sun, 02 May 2010 19:32:33 -0000
+X-Groupsio-MsgNum: 18936
+Content-Type: multipart/signed; boundary="nextPart1640574.R1YXkqvjQE";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-- convert to BBCLASSEXTAND
-- unify versions with .inc file
-- add version 1.2.5 with updated autotool patch for this version
+--nextPart1640574.R1YXkqvjQE
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Eric Benard <eric@eukrea.com>
----
- recipes/zlib/files/0001-autotools.patch |   57 +++++++++++++++++++++++++++++++
- recipes/zlib/zlib-native_1.2.3.bb       |    8 ----
- recipes/zlib/zlib-sdk_1.2.3.bb          |    4 --
- recipes/zlib/zlib.inc                   |   14 +++++++
- recipes/zlib/zlib_1.2.3.bb              |   22 ++----------
- recipes/zlib/zlib_1.2.5.bb              |   10 +++++
- 6 files changed, 85 insertions(+), 30 deletions(-)
- create mode 100644 recipes/zlib/files/0001-autotools.patch
- delete mode 100644 recipes/zlib/zlib-native_1.2.3.bb
- delete mode 100644 recipes/zlib/zlib-sdk_1.2.3.bb
- create mode 100644 recipes/zlib/zlib.inc
- create mode 100644 recipes/zlib/zlib_1.2.5.bb
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D0=BE=D1=81=D0=BA=D1=80=D0=B5=D1=81=D0=B5=D0=BD=D1=8C=D0=B5 02 =D0=
+=BC=D0=B0=D1=8F 2010 22:19:08 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Eric Benard =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> - convert to BBCLASSEXTAND
+> - unify versions with .inc file
+> - add version 1.2.5 with updated autotool patch for this version
+>=20
+> Signed-off-by: Eric Benard <eric@eukrea.com>
+> ---
+=2E...
+> diff --git a/recipes/zlib/zlib.inc b/recipes/zlib/zlib.inc
+> new file mode 100644
+> index 0000000..e60f69c
+> --- /dev/null
+> +++ b/recipes/zlib/zlib.inc
+> @@ -0,0 +1,14 @@
+=2E...
+> +inherit autotools autotools_stage
 
-diff --git a/recipes/zlib/files/0001-autotools.patch b/recipes/zlib/files/0001-autotools.patch
-new file mode 100644
-index 0000000..6642860
---- /dev/null
-+++ b/recipes/zlib/files/0001-autotools.patch
-@@ -0,0 +1,57 @@
-+From d6b0c74edb3fc58060d1ab337bcb1f838328ebbf Mon Sep 17 00:00:00 2001
-+From: Eric Benard <eric@eukrea.com>
-+Date: Sun, 2 May 2010 10:49:05 +0200
-+Subject: [PATCH] autotools
-+
-+---
-+ Makefile.am  |   12 ++++++++++++
-+ configure.ac |   17 +++++++++++++++++
-+ 2 files changed, 29 insertions(+), 0 deletions(-)
-+ create mode 100644 Makefile.am
-+ create mode 100644 configure.ac
-+
-+diff --git a/Makefile.am b/Makefile.am
-+new file mode 100644
-+index 0000000..76976fb
-+--- /dev/null
-++++ b/Makefile.am
-+@@ -0,0 +1,12 @@
-++lib_LTLIBRARIES = libz.la
-++
-++libz_la_SOURCES = adler32.c compress.c crc32.c gzclose.c gzlib.c gzread.c gzwrite.c \
-++		uncompr.c deflate.c trees.c zutil.c inflate.c infback.c inftrees.c \
-++		inffast.c
-++
-++libz_la_LDFLAGS = -version-number 1:2:5
-++
-++include_HEADERS = zconf.h zlib.h
-++
-++pkgconfigdir = $(libdir)/pkgconfig
-++pkgconfig_DATA = zlib.pc
-+diff --git a/configure.ac b/configure.ac
-+new file mode 100644
-+index 0000000..177c89a
-+--- /dev/null
-++++ b/configure.ac
-+@@ -0,0 +1,17 @@
-++AC_INIT(zlib,1.2.5)
-++AC_CONFIG_SRCDIR(adler32.c)
-++AM_INIT_AUTOMAKE(zlibs,1.2.5)
-++
-++AC_PREREQ([2.59])
-++
-++AC_PROG_CC([gcc])
-++AC_PROG_LIBTOOL
-++
-++AC_HEADER_STDC
-++
-++AC_CONFIG_FILES([
-++Makefile
-++zlib.pc
-++])
-++
-++AC_OUTPUT
-+\ No newline at end of file
-+-- 
-+1.6.3.3
-+
-diff --git a/recipes/zlib/zlib-native_1.2.3.bb b/recipes/zlib/zlib-native_1.2.3.bb
-deleted file mode 100644
-index 4bb5d28..0000000
---- a/recipes/zlib/zlib-native_1.2.3.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--require zlib_${PV}.bb
--ZLIB_EXTRA = ""
--DEPENDS = "libtool-native"
--
--inherit native
--
--SRC_URI[md5sum] = "dee233bf288ee795ac96a98cc2e369b6"
--SRC_URI[sha256sum] = "e3b9950851a19904d642c4dec518623382cf4d2ac24f70a76510c944330d28ca"
-diff --git a/recipes/zlib/zlib-sdk_1.2.3.bb b/recipes/zlib/zlib-sdk_1.2.3.bb
-deleted file mode 100644
-index 4863395..0000000
---- a/recipes/zlib/zlib-sdk_1.2.3.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--require zlib_${PV}.bb
--LIB_EXTRA = ""
--
--inherit sdk
-diff --git a/recipes/zlib/zlib.inc b/recipes/zlib/zlib.inc
-new file mode 100644
-index 0000000..e60f69c
---- /dev/null
-+++ b/recipes/zlib/zlib.inc
-@@ -0,0 +1,14 @@
-+DESCRIPTION = "Zlib Compression Library"
-+SECTION = "libs"
-+PRIORITY = "required"
-+HOMEPAGE = "http://www.gzip.org/zlib/"
-+LICENSE = "zlib"
-+INC_PR ="r6"
-+
-+BBCLASSEXTEND = "native sdk"
-+
-+SRC_URI = "http://www.zlib.net/zlib-${PV}.tar.bz2"
-+
-+inherit autotools autotools_stage
-+
-+DEPENDS = "libtool-cross"
-diff --git a/recipes/zlib/zlib_1.2.3.bb b/recipes/zlib/zlib_1.2.3.bb
-index 541245b..39a37c4 100644
---- a/recipes/zlib/zlib_1.2.3.bb
-+++ b/recipes/zlib/zlib_1.2.3.bb
-@@ -1,23 +1,9 @@
--DESCRIPTION = "Zlib Compression Library"
--SECTION = "libs"
--PRIORITY = "required"
--HOMEPAGE = "http://www.gzip.org/zlib/"
--LICENSE = "zlib"
--PR ="r5"
-+include zlib.inc
- 
--SRC_URI = "http://www.zlib.net/zlib-1.2.3.tar.bz2 \
--		file://visibility.patch;patch=1 \
--		file://autotools.patch;patch=1 "
--
--S = "${WORKDIR}/zlib-${PV}"
--
--DEPENDS = "libtool-cross"
-+PR = "${INC_PR}.0"
- 
--inherit autotools
--
--do_stage() {
--	autotools_stage_all
--}
-+SRC_URI += "	file://visibility.patch;patch=1 \
-+		file://autotools.patch;patch=1 "
- 
- SRC_URI[md5sum] = "dee233bf288ee795ac96a98cc2e369b6"
- SRC_URI[sha256sum] = "e3b9950851a19904d642c4dec518623382cf4d2ac24f70a76510c944330d28ca"
-diff --git a/recipes/zlib/zlib_1.2.5.bb b/recipes/zlib/zlib_1.2.5.bb
-new file mode 100644
-index 0000000..4c22f3e
---- /dev/null
-+++ b/recipes/zlib/zlib_1.2.5.bb
-@@ -0,0 +1,10 @@
-+include zlib.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI += "file://0001-autotools.patch;patch=1 "
-+
-+SRC_URI[md5sum] = "be1e89810e66150f5b0327984d8625a0"
-+SRC_URI[sha256sum] = "239aead2f22f16bfcfa6a6a5150dcbd6d6f2e4d1eaa8727b5769ea014120b307"
-+
-+DEFAULT_PREFERENCE = "-1"
-\ No newline at end of file
--- 
-1.6.3.3
+Actually, even autotools_stage is not needed, my mistake, I've corrected th=
+at=20
+in a patch along with s/BBCLASSEXTAND/BBCLASSEXTEND/ in commit message.
 
+Acked-by: Roman I Khimov <khimov@altell.ru>
 
+And pushed. Thanks.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart1640574.R1YXkqvjQE
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkvd0mgACgkQXJ70z+XgVcMl4gCeI1Tn1AotX4foS2q5+YAdDvRt
+Sa8AoNToBsy8gYI7tnaeK9iv0cm+3EOo
+=bBG9
+-----END PGP SIGNATURE-----
+
+--nextPart1640574.R1YXkqvjQE--
