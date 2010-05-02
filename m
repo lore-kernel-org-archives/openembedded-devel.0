@@ -1,46 +1,38 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O8Zz7-0002Oo-Uz for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 16:17:30 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O8ZvW-0001oP-ME for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 16:13:46 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 May 2010 16:13:46 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 02 May 2010 16:13:46 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1O8ayV-0006Jq-1u
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 02 May 2010 17:20:56 +0200
+Received: (qmail 29637 invoked by uid 503); 2 May 2010 15:14:15 -0000
+Received: from b6.ovh.net (HELO mail417.ha.ovh.net) (213.186.33.56)
+	by 30.mail-out.ovh.net with SMTP; 2 May 2010 15:14:14 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 May 2010 15:17:12 -0000
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.7?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 2 May 2010 15:17:10 -0000
+Message-ID: <4BDD9776.4040401@eukrea.com>
+Date: Sun, 02 May 2010 17:17:10 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 02 May 2010 16:13:38 +0200
-Message-ID: <hrk1ai$psn$1@dough.gmane.org>
-References: <1270135981.4993.128.camel@rex>
-	<hpum4g$18m$1@dough.gmane.org>	<1271090705.14344.16.camel@localhost.localdomain>	<hq06ad$tnf$1@dough.gmane.org>
-	<1271130396.15813.131.camel@rex>	<hq155c$8o8$1@dough.gmane.org>
-	<1272756489.30647.1938.camel@rex>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <1272756489.30647.1938.camel@rex>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <1272790986-26842-1-git-send-email-eric@eukrea.com>	<1272795698-23606-1-git-send-email-eric@eukrea.com>
+	<201005021657.11572.roman@khimov.ru>
+In-Reply-To: <201005021657.11572.roman@khimov.ru>
+X-Ovh-Tracer-Id: 10913910748596186441
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: [PATCH v2] zlib: Add version 1.2.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,85 +46,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 May 2010 14:17:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 02 May 2010 15:20:56 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Le 02/05/2010 14:57, Roman I Khimov a écrit :
+> Please, the next time you submit updated version of any patch go to
+> patchwork.openembedded.org and update the status of old one to "Superseded".
+> I've done that for this particular patch as I've looked at it anyway, but at
+> quick glance there are other leftovers there, so it'd be nice if you've
+> cleaned that up.
+>
+done, I was not aware of these features in patchwork.
 
-On 02-05-10 01:28, Richard Purdie wrote:
-> On Tue, 2010-04-13 at 09:06 +0200, Koen Kooi wrote:
->> On 13-04-10 05:46, Richard Purdie wrote:
->>> On Tue, 2010-04-13 at 00:19 +0200, Koen Kooi wrote:
->>>> OK, I reproduced the abiword failure, it's in enchant:
->>>>
->>>> | /bin/sh ../../arm-angstrom-linux-gnueabi-libtool --tag=CC
->>>> - --mode=link ccache arm-angstrom-linux-gnueabi-gcc -march=armv7-a
->>>> - -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp
->>>> -
->>>> -isystem/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
->>>> - -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
->>>> - -ggdb3 -module -avoid-version -no-undefined
->>>> - -L/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
->>>> -
->>>> -Wl,-rpath-link,/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
->>>> - -Wl,-O1 -Wl,--hash-style=gnu -o libenchant_aspell.la -rpath
->>>> /usr/lib/enchant aspell_provider.lo -Wl,--export-dynamic -pthread
->>>> - -lgmodule-2.0 -lrt -lglib-2.0
->>>> - -L/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib
->>>> - -laspell ../../src/libenchant.la
->>>> | /bin/grep:
->>>> /OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la:
->>>> No such file or directory
->>>> | /bin/sed: can't read
->>>> /OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la:
->>>> No such file or directory
->>>> | arm-angstrom-linux-gnueabi-libtool: link:
->>>> `/OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la'
->>>> is not a valid libtool archive
->>>>
->>>> The file referenced
->>>> (/OE/angstrom-dev/cross/armv7a/arm-angstrom-linux-gnueabi/lib/libstdc++.la)
->>>> doesn't exist since it is located in
->>>> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la
->>>> instead.
->>>>
->>>> Any clues in which direction I should look to debug this?
->>>
->>> Sorry I've not been able to spend the time I'd like on this stuff, work
->>> and travel have got in the way and are probably going to tie me up for a
->>> while yet if I'm realistic. Anyone at ELC should say hello btw! :) 
->>
->>
->>> Jet lag prevents me thinking too clearly at the moment but whats
->>> happening above is that the sysroot is starting to look more like the
->>> real target filesystem and libstdc++ is moving to what I would say is
->>> the correct place for it. This is good but it seems something, probably
->>> a .la file has the incorrect path? Is this a build from scratch or an
->>> old build? I suspect it would work with a build from scratch but if this
->>> was one, there is some more subtle problem :/.
->>
->> It's a complete build from scratch (rm tmp -rf ; bitbake abiword).
-> 
-> Sorry about the delay, this commit should fix it (reproduced and tested
-> locally):
-> 
-> http://git.openembedded.net/cgit.cgi/openembedded/commit/?h=rpurdie/work-in-progress&id=bb53e48f79dab0877c8b8ce487a051d29cae31e3
+> I think it'd be nice to do BBCLASSEXTEND conversion here (there was an
+> attempt:
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/018132.html
+> ) and add new version with a move to common .inc file.
+>
+OK, I will send an updated patch with this.
 
-Awesome, that removes the last of my concerns, please merge it :) I have
-time next week to deal with possible fallout.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL3YiSMkyGM64RGpERAh93AJ4+VaaUA5ZjK4FTck/X23LiPYPOKQCglzfg
-O4zXrxxiRVfcsJ1ULnrxbZs=
-=K19A
------END PGP SIGNATURE-----
-
+Eric
 
 
