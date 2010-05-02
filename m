@@ -1,42 +1,41 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1O8MBx-0001zZ-E5
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1O8OTH-0004Kj-Hi
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 01:33:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NU5jc027326
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 2 May 2010 00:30:05 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 27236-02 for <openembedded-devel@lists.openembedded.org>;
-	Sun,  2 May 2010 00:30:01 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o41NTwEx027314
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 2 May 2010 00:29:58 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Sun, 02 May 2010 03:59:52 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O8OPd-0003BA-LG from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 01 May 2010 18:56:05 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Sat, 1 May 2010 18:56:05 -0700
+Received: from 172.30.80.14 ([172.30.80.14]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Sun,  2 May 2010 01:56:04 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	01 May 2010 18:55:52 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1271090799.14344.19.camel@localhost.localdomain>
-References: <1270135981.4993.128.camel@rex>  <hpum4g$18m$1@dough.gmane.org>
-	<1271087957.29304.86.camel@trini-m4400>
-	<1271090799.14344.19.camel@localhost.localdomain>
-Date: Sun, 02 May 2010 00:29:55 +0100
-Message-ID: <1272756595.30647.1942.camel@rex>
+In-Reply-To: <1272748338-23051-1-git-send-email-ken@codelabs.ch>
+References: <1272748338-23051-1-git-send-email-ken@codelabs.ch>
+Organization: Mentor Graphics Corporation
+Date: Sat, 01 May 2010 18:55:52 -0700
+Message-ID: <1272765352.21120.118.camel@trini-m4400>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 02 May 2010 01:56:05.0362 (UTC)
+	FILETIME=[A017A520:01CAE99A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: Re: [PATCH 1/2] tzcode: update tzdata to latest version (2010i).
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,37 +49,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 01 May 2010 23:33:52 -0000
+X-List-Received-Date: Sun, 02 May 2010 01:59:52 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2010-04-12 at 17:46 +0100, Joshua Lock wrote:
-> On Mon, 2010-04-12 at 08:59 -0700, Tom Rini wrote:
-> > On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
->  > Joshuas last 3 commits to poky seem to fix Toms issue with binconfig and
-> > > my issue with chrpath, which only leaves the cross staging lamangler
-> > > stuff to get fixed.
-> > 
-> > Actually (and I'm OK with binconfig stuff being broken in the first
-> > merge) the problem with binconfig junk isn't the file contents, but the
-> > file location.  staging-target-pkg will contain
-> > staging/<host>/usr/bin/<target>/foo-config.  Which means using pstaging
-> > for a target pkg built on 32bit Linux fails when used on 64bit Linux.
-> > Not that I wouldn't mind seeing the binconfig stuff die, just saying
-> > it's a problem today :)
-> 
-> Ah, hmm... yes. That is a problem.
-> 
-> FWIW I don't think you'll get any arguments from the Poky team where the
-> binconfig stuff to suffer an untimely demise!
+On Sat, 2010-05-01 at 23:12 +0200, Adrian-Ken Rueegsegger wrote:
+> Signed-off-by: Adrian-Ken Rueegsegger <ken@codelabs.ch>
+> ---
+>  recipes/tzcode/tzcode-native_2010f.bb |    6 +++---
+>  1 files changed, 3 insertions(+), 3 deletions(-)
+>=20
+> diff --git a/recipes/tzcode/tzcode-native_2010f.bb b/recipes/tzcode/tzcod=
+e-native_2010f.bb
+> index f2fbffd..8585de2 100644
+> --- a/recipes/tzcode/tzcode-native_2010f.bb
+> +++ b/recipes/tzcode/tzcode-native_2010f.bb
+> @@ -6,11 +6,11 @@ require tzcode-native.inc
+>  # Also, tzdata (and it is needed to build tzcode) version can differ fro=
+m
+>  # tzcode version, thus this variable
+> =20
+> -TZDATA_PV =3D "2010h"
+> +TZDATA_PV =3D "2010i"
+> =20
+>  SRC_URI[tzcode-2010f.md5sum] =3D "e530cc9bbdfd5e8c1eac21a68f4d5656"
+>  SRC_URI[tzcode-2010f.sha256sum] =3D "651d866c91ada925b4ac9491e69ebd5c355=
+c46b2c01dd1741b5e6a609d93eb1e"
+> -SRC_URI[tzdata-2010h.md5sum] =3D "d384ac091e6d56802f9b3e6b3d3f0f2e"
+> -SRC_URI[tzdata-2010h.sha256sum] =3D "a4918d60f63440ba9b6050205881e8a98d7=
+18dc0c2b7df5955f43e781eab6e7d"
+> +SRC_URI[tzdata-2010i.md5sum] =3D "4d2a90afd5bffe8df97f3def245e178e"
+> +SRC_URI[tzdata-2010i.sha256sum] =3D "bee0a26cca54db3413416d968c0a6361d83=
+188b112d2512559d0e3602f254dc3"
 
-FWIW, Poky has had some interesting commits recently that address Tom's
-issue above from Josh.
+You weren't the first but can you please do the git mv like in your
+tzdata patch instead (and drop the 2010f sums).  Thanks!
 
-Cheers,
-
-Richard
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
