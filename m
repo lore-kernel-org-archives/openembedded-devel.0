@@ -1,34 +1,40 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O8ayV-0006Jq-1u
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1O8bq2-0003eu-4Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 17:20:56 +0200
-Received: (qmail 29637 invoked by uid 503); 2 May 2010 15:14:15 -0000
-Received: from b6.ovh.net (HELO mail417.ha.ovh.net) (213.186.33.56)
-	by 30.mail-out.ovh.net with SMTP; 2 May 2010 15:14:14 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 2 May 2010 15:17:12 -0000
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.7?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 2 May 2010 15:17:10 -0000
-Message-ID: <4BDD9776.4040401@eukrea.com>
-Date: Sun, 02 May 2010 17:17:10 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Sun, 02 May 2010 18:16:14 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3281711000A1
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 May 2010 18:12:31 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 5421A1100085
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 May 2010 18:12:30 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225006195.adsl.alicedsl.de
+	[92.225.6.195]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 May 2010 18:12:30 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 3CBCD3C0F3; Sun,  2 May 2010 18:12:29 +0200 (CEST)
+Date: Sun, 2 May 2010 18:12:29 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1272790986-26842-1-git-send-email-eric@eukrea.com>	<1272795698-23606-1-git-send-email-eric@eukrea.com>
-	<201005021657.11572.roman@khimov.ru>
-In-Reply-To: <201005021657.11572.roman@khimov.ru>
-X-Ovh-Tracer-Id: 10913910748596186441
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+Message-ID: <20100502161228.GA11793@rhein.zuhause.netz>
+References: <1272790986-26842-1-git-send-email-eric@eukrea.com>
+	<1272795698-23606-1-git-send-email-eric@eukrea.com>
+MIME-Version: 1.0
+In-Reply-To: <1272795698-23606-1-git-send-email-eric@eukrea.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -46,26 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 May 2010 15:20:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 02 May 2010 16:16:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Le 02/05/2010 14:57, Roman I Khimov a écrit :
-> Please, the next time you submit updated version of any patch go to
-> patchwork.openembedded.org and update the status of old one to "Superseded".
-> I've done that for this particular patch as I've looked at it anyway, but at
-> quick glance there are other leftovers there, so it'd be nice if you've
-> cleaned that up.
->
-done, I was not aware of these features in patchwork.
+On Sun, May 02, 2010 at 12:21:38PM +0200, Eric Benard wrote:
+> - update autotool patch for this version
+> - tested on x86
+> 
+> Signed-off-by: Eric Benard <eric@eukrea.com>
+> ---
+> +do_stage() {
+> +	autotools_stage_all
+> +}
+> +
 
-> I think it'd be nice to do BBCLASSEXTEND conversion here (there was an
-> attempt:
-> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-March/018132.html
-> ) and add new version with a move to common .inc file.
->
-OK, I will send an updated patch with this.
+do_stage is deprecated and shouldn't be used for new recipes. Furthermore zlib is a Candidate for
+BBCLASSEXTEND to get native and sdk packages with one recipe.
 
-Eric
+Bye Henning
 
 
