@@ -1,30 +1,39 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1O8fjY-0007PJ-W5
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1O8ggp-0002tW-KM
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 22:25:49 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O8ffx-0007Rg-5g
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 00:22:06 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 3 May 2010 00:22:01 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1271240361-8354-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-In-Reply-To: <1271240361-8354-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	Sun, 02 May 2010 23:27:07 +0200
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id 796883020C
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun,  2 May 2010 17:23:13 -0400 (EDT)
+Message-ID: <4BDDED9C.8050201@zenlinux.com>
+Date: Sun, 02 May 2010 14:24:44 -0700
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
 MIME-Version: 1.0
-Message-Id: <201005030022.04359.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+To: openembedded-devel@lists.openembedded.org
+References: <1271481456-9183-1-git-send-email-sgarman@zenlinux.com>
+	<201005021622.35183.roman@khimov.ru>
+In-Reply-To: <201005021622.35183.roman@khimov.ru>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: 796883020C.4A890
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] autotools.bbclass: swapped calls of intltoolize + autoreconf
+Subject: Re: [PATCH] nano: Add version 2.2.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,58 +47,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 May 2010 20:25:49 -0000
-X-Groupsio-MsgNum: 18938
-Content-Type: multipart/signed; boundary="nextPart4096657.zNch4C9FMD";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart4096657.zNch4C9FMD
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 02 May 2010 21:27:08 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 14 =D0=B0=D0=BF=D1=80=D0=B5=D0=BB=D1=8F 2010=
- 14:19:21 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Enrico Scholz =D0=BD=D0=B0=D0=BF=
-=D0=B8=D1=81=D0=B0=D0=BB:
-> Because 'intltoolize' checks whether aclocal.m4 contains a recent copy
-> of 'intltool.m4' and it will fail when the found version is too old,
-> 'aclocal' must be called before 'intltoolize'.
->=20
-> I built projects it with intltool-0.40.6-r3, autoconf-2.65-r9,
-> automake-1.11.1-r3 and gettext-0.17-r6 successfully with this change but
-> it will require probably tests with older versions.
->=20
-> This patch is a requirement for
-> http://patchwork.openembedded.org/patch/1858/ because 'autopoint' from
-> the 'aclocal' call will override 'intltool' files and build will fail
-> then.
->=20
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-> ---
->  classes/autotools.bbclass |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
+On 05/02/2010 05:22 AM, Roman I Khimov wrote:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 17 =D0=B0=D0=BF=D1=80=D0=B5=
+=D0=BB=D1=8F 2010 09:17:36 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Scott Garman =D0=
+=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+>> Signed-off-by: Scott Garman<sgarman@zenlinux.com>
+>> ---
+>>   recipes/nano/nano_2.2.4.bb |   15 +++++++++++++++
+>>   1 files changed, 15 insertions(+), 0 deletions(-)
+>>   create mode 100644 recipes/nano/nano_2.2.4.bb
+>
+> Acked-by: Roman I Khimov<khimov@altell.ru>
+>
+> Builds, pushed, thanks.
+>
+> I've also unified versions with .inc file.
 
-Acked-by: Roman I Khimov <khimov@altell.ru>
+Thanks Roman,
 
-And pushed, thanks.
+I started a new job two weeks ago and have been way too swamped to=20
+follow-up with the .inc unification task.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+Scott
 
---nextPart4096657.zNch4C9FMD
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+--=20
+Scott Garman
+sgarman at zenlinux dot com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkvd3uwACgkQXJ70z+XgVcNKlACfZMwgNZAxoiKcgceQLB6SlFwY
-UIAAoJLRPo3o4+kghBYekFQreGLgMFhd
-=64qb
------END PGP SIGNATURE-----
-
---nextPart4096657.zNch4C9FMD--
