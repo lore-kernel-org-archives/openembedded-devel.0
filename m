@@ -1,23 +1,21 @@
 Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1O8ezt-0002Rb-AN
+	(envelope-from <roman@khimov.ru>) id 1O8fjY-0007PJ-W5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 21:38:38 +0200
+	Sun, 02 May 2010 22:25:49 +0200
 Received: from [93.100.16.104] (helo=mate.localnet)
 	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O8ewH-0007O5-Cd
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O8ffx-0007Rg-5g
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 02 May 2010 23:34:54 +0400
+	Mon, 03 May 2010 00:22:06 +0400
 From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 2 May 2010 23:34:52 +0400
+Date: Mon, 3 May 2010 00:22:01 +0400
 User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1272114888-16964-4-git-send-email-eric@eukrea.com>
-	<1272223214-23542-1-git-send-email-eric@eukrea.com>
-	<201004261440.07280.khimov@altell.ru>
-In-Reply-To: <201004261440.07280.khimov@altell.ru>
+References: <1271240361-8354-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+In-Reply-To: <1271240361-8354-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
 MIME-Version: 1.0
-Message-Id: <201005022334.52638.roman@khimov.ru>
+Message-Id: <201005030022.04359.roman@khimov.ru>
 X-SA-Exim-Connect-IP: 89.223.109.22
 X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -26,7 +24,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] kernel.class : fix for recent kernel on x86
+Subject: Re: [PATCH] autotools.bbclass: swapped calls of intltoolize + autoreconf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,45 +38,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 02 May 2010 19:38:38 -0000
-X-Groupsio-MsgNum: 18937
-Content-Type: multipart/signed; boundary="nextPart1760670.GY09WPkYyW";
+X-List-Received-Date: Sun, 02 May 2010 20:25:49 -0000
+X-Groupsio-MsgNum: 18938
+Content-Type: multipart/signed; boundary="nextPart4096657.zNch4C9FMD";
 	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
---nextPart1760670.GY09WPkYyW
+--nextPart4096657.zNch4C9FMD
 Content-Type: Text/Plain;
   charset="utf-8"
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: quoted-printable
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/QvtC90LXQtNC10LvRjNC90LjQuiAyNiDQsNC/
-0YDQtdC70Y8gMjAxMCAxNDo0MDowNyDQsNCy0YLQvtGAIFJvbWFuIEkgS2hpbW92IArQvdCw0L/Q
-uNGB0LDQuzoKPiDQkiDRgdC+0L7QsdGJ0LXQvdC40Lgg0L7RgiDQktC+0YHQutGA0LXRgdC10L3R
-jNC1IDI1INCw0L/RgNC10LvRjyAyMDEwIDIzOjIwOjE0INCw0LLRgtC+0YAgRXJpYyBCZW5hcmQg
-CtC90LDQv9C40YHQsNC7Ogo+ID4gLSBiaXRiYWtlIGxpbnV4IGZvciBhIHg4NiBtYWNoaW5lIGZh
-aWxzIHdpdGggdGhlIGZvbGxvd2luZyBtZXNzYWdlIDoKPiA+IGNwOiB0YXJnZXQgYC4uLi9pbWFn
-ZS9rZXJuZWwvL2luY2x1ZGUvYXNtLXg4Ni8nIGlzIG5vdCBhIGRpcmVjdG9yeQo+ID4KPiA+IHNv
-IGNyZWF0ZSAka2VybmVsZGlyL2luY2x1ZGUvYXNtLXg4NiBiZWZvcmUgdHJ5aW5nIHRvIGNvcHkg
-c29tZXRoaW5nIGluCj4gPiB0aGlzIGRpcmVjdG9yeS4KPiA+Cj4gPiAtIG1ha2UgaGVhZGVyc19p
-bnN0YWxsIGZhaWxzIGJlY2F1c2Ugb2YgbWlzc2luZyBkaXJlY3RvcmllcyBpbiBpbmNsdWRlCj4g
-PiAodGVzdGVkIHdpdGggbGludXggMi42LjMyIGFuZCAyLjYuMzMgb24geDg2KSBhbmQgbWlzc2lu
-ZyBLYnVpbGQKPiA+Cj4gPiBTaWduZWQtb2ZmLWJ5OiBFcmljIEJlbmFyZCA8ZXJpY0BldWtyZWEu
-Y29tPgo+IAo+IEFja2VkLWJ5OiBSb21hbiBJIEtoaW1vdiA8a2hpbW92QGFsdGVsbC5ydT4KCkFz
-IGl0IHNlZW1zIG5vdCBtYW55IHBlb3BsZSBjYXJlIGFib3V0IHg4NiBhbmQgYXMgSSdtIHVzaW5n
-IGl0IG15c2VsZiBmb3IgYSAKd2hpbGUgbm93LCBJJ3ZlIHB1c2hlZCBpdC4KCi0tIAogaHR0cDov
-L3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlzZXJ2ZXIg
-aGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 14 =D0=B0=D0=BF=D1=80=D0=B5=D0=BB=D1=8F 2010=
+ 14:19:21 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Enrico Scholz =D0=BD=D0=B0=D0=BF=
+=D0=B8=D1=81=D0=B0=D0=BB:
+> Because 'intltoolize' checks whether aclocal.m4 contains a recent copy
+> of 'intltool.m4' and it will fail when the found version is too old,
+> 'aclocal' must be called before 'intltoolize'.
+>=20
+> I built projects it with intltool-0.40.6-r3, autoconf-2.65-r9,
+> automake-1.11.1-r3 and gettext-0.17-r6 successfully with this change but
+> it will require probably tests with older versions.
+>=20
+> This patch is a requirement for
+> http://patchwork.openembedded.org/patch/1858/ because 'autopoint' from
+> the 'aclocal' call will override 'intltool' files and build will fail
+> then.
+>=20
+> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+> ---
+>  classes/autotools.bbclass |    4 ++--
+>  1 files changed, 2 insertions(+), 2 deletions(-)
 
---nextPart1760670.GY09WPkYyW
+Acked-by: Roman I Khimov <khimov@altell.ru>
+
+And pushed, thanks.
+
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart4096657.zNch4C9FMD
 Content-Type: application/pgp-signature; name=signature.asc 
 Content-Description: This is a digitally signed message part.
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkvd09wACgkQXJ70z+XgVcMkvACgptbAoJkjhBxDQi186huGaKUn
-s9gAnRUCZ0eG0X4wxD3N5JWwb1/I47tL
-=MYaC
+iEYEABECAAYFAkvd3uwACgkQXJ70z+XgVcNKlACfZMwgNZAxoiKcgceQLB6SlFwY
+UIAAoJLRPo3o4+kghBYekFQreGLgMFhd
+=64qb
 -----END PGP SIGNATURE-----
 
---nextPart1760670.GY09WPkYyW--
+--nextPart4096657.zNch4C9FMD--
