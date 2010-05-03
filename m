@@ -1,44 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from fg-out-1718.google.com ([72.14.220.154])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O8yqe-0003UT-KY
+	(envelope-from <martin.jansa@gmail.com>) id 1O90XN-0003x3-D9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 18:50:32 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O8ymz-0001im-Lu from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 09:46:37 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 3 May 2010 09:46:37 -0700
-Received: from 172.30.80.22 ([172.30.80.22]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon,  3 May 2010 16:46:35 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	03 May 2010 09:46:36 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Mon, 03 May 2010 20:38:42 +0200
+Received: by fg-out-1718.google.com with SMTP id e12so736550fga.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 May 2010 11:34:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=0M/VZ23NgITL2yZVQ22L4CF+1T5QJJMwbRJQMZA8EyY=;
+	b=X7wxLImESCg2s9GDy1zON8gwCXO/K/eFqV8hYlVNy/CgykQm33lDZYjaxT3HRmftcL
+	KCXdO7jXPVaAsH70Cm8f/hfeE1DFvHLwTVwEhBc9tiA4sUwHZp6KP43ld8WS5K97ANx8
+	PgRg6p5A/sHUBbo3MgiMB6ku+6lRM8FYbdYrY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=aAVzg3D2JRRathwAo1cnOWedJrYxC75g8DnU/Q8GYBT19/+0g+k8zSlU8KXv5kPE6x
+	NCdKFgpaw6l9CTlymPb6tP0IvnbhHF35oNBY1HJ0p/n8f6Kfe5V3x1QAmVCI3WMRhSXl
+	+qYE8l6QS49Yoj24xkg+9U+96IPkmmhC1E67c=
+Received: by 10.87.64.25 with SMTP id r25mr10859979fgk.20.1272911693575;
+	Mon, 03 May 2010 11:34:53 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id p17sm9537148fka.46.2010.05.03.11.34.52
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 03 May 2010 11:34:52 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1272756595.30647.1942.camel@rex>
-References: <1270135981.4993.128.camel@rex>  <hpum4g$18m$1@dough.gmane.org>
-	<1271087957.29304.86.camel@trini-m4400>
-	<1271090799.14344.19.camel@localhost.localdomain>
-	<1272756595.30647.1942.camel@rex>
-Organization: Mentor Graphics Corporation
-Date: Mon, 03 May 2010 09:46:35 -0700
-Message-ID: <1272905195.2931.0.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 03 May 2010 16:46:37.0300 (UTC)
-	FILETIME=[326C1B40:01CAEAE0]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Mon,  3 May 2010 20:35:13 +0200
+Message-Id: <1272911713-981-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 72.14.220.154
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+Subject: [PATCH] kexec-tools: update kexec-tools-2-klibc.patch for latest klibc/kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,45 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2010 16:50:33 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 03 May 2010 18:38:43 -0000
 
-On Sun, 2010-05-02 at 00:29 +0100, Richard Purdie wrote:
-> On Mon, 2010-04-12 at 17:46 +0100, Joshua Lock wrote:
-> > On Mon, 2010-04-12 at 08:59 -0700, Tom Rini wrote:
-> > > On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
-> >  > Joshuas last 3 commits to poky seem to fix Toms issue with binconfig=
- and
-> > > > my issue with chrpath, which only leaves the cross staging lamangle=
-r
-> > > > stuff to get fixed.
-> > >=20
-> > > Actually (and I'm OK with binconfig stuff being broken in the first
-> > > merge) the problem with binconfig junk isn't the file contents, but t=
-he
-> > > file location.  staging-target-pkg will contain
-> > > staging/<host>/usr/bin/<target>/foo-config.  Which means using pstagi=
-ng
-> > > for a target pkg built on 32bit Linux fails when used on 64bit Linux.
-> > > Not that I wouldn't mind seeing the binconfig stuff die, just saying
-> > > it's a problem today :)
-> >=20
-> > Ah, hmm... yes. That is a problem.
-> >=20
-> > FWIW I don't think you'll get any arguments from the Poky team where th=
-e
-> > binconfig stuff to suffer an untimely demise!
->=20
-> FWIW, Poky has had some interesting commits recently that address Tom's
-> issue above from Josh.
+* not sure if it's changed in latest kernel I use (2.6.34-rc6) or newest
+  klibc added today (1.5.18)
+* just in case someone else hit this too (haven't tried if it works with
+  older kernel/klibc)
 
-Interesting.  When you killed CROSS_*, did you rework stuff so that gcc
-& co's sysroot stuff works automatically or no?  Can't tell off-hand.
-Thanks.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../kexec-tools/files/kexec-tools-2-klibc.patch    |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+diff --git a/recipes/kexec-tools/files/kexec-tools-2-klibc.patch b/recipes/kexec-tools/files/kexec-tools-2-klibc.patch
+index 2008829..4f8e678 100644
+--- a/recipes/kexec-tools/files/kexec-tools-2-klibc.patch
++++ b/recipes/kexec-tools/files/kexec-tools-2-klibc.patch
+@@ -16,12 +16,13 @@ Index: kexec-tools-2.0.1/kexec/ifdown.c
+ ===================================================================
+ --- kexec-tools-2.0.1.orig/kexec/ifdown.c	2009-09-24 14:15:34.025828340 +0100
+ +++ kexec-tools-2.0.1/kexec/ifdown.c	2009-09-24 14:15:47.014827381 +0100
+-@@ -14,7 +14,7 @@
++@@ -14,7 +14,8 @@
+  #include <sys/ioctl.h>
+  #include <sys/socket.h>
+  #include <sys/time.h>
+ -#include <sys/errno.h>
+ +#include <errno.h>
+++#include <linux/sockios.h>
+ 
+  #include <net/if.h>
+  #include <netinet/in.h>
+-- 
+1.7.0.4
+
 
 
