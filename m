@@ -1,46 +1,40 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1O8tz9-0006VM-QM
+	(envelope-from <andrea.adami@gmail.com>) id 1O8u3f-0003tl-S3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 13:38:55 +0200
-Received: by fxm11 with SMTP id 11so1918531fxm.6
+	Mon, 03 May 2010 13:43:32 +0200
+Received: by fxm11 with SMTP id 11so1921844fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 03 May 2010 04:35:06 -0700 (PDT)
+	Mon, 03 May 2010 04:39:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=pRSVHrO6Y+FTHt8fsrV4qr1uYQIV4LdzgGmzbG+dpO4=;
-	b=wXZq0CgCJW2gEoMl6dTrWKNzLhKCRPy/mMXFuy2a8e/byMj5NjPfQL8e6z/6xjQV6k
-	i3f9bYZOujLlme+98eXALqNHDlrC6rlZ9MzVtD2GZhu2rxiaFfSy/wgChGg46x115g83
-	VJmTx9zpIPS4MnkV3TcbLtkgSxNELGRUIcCT0=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=wyjmOAIFdJLZo8mhS5mZMRHuSdKBDPYCmqdESmfOfM0=;
+	b=VI/4bY/ocuv1B9/Yl7wF5MSupj6inig4yF8RpFi2mR/U510QybXdMfnEE/TWkgme6x
+	OlURXSKSjMNzi9MkTtOgRFZXRvSrKRJcjnJZwBN3DKNrfvoem9pUNtzUwg4jFY5yp2SU
+	qqDMojzEg2LVuxUWwJmag9yEf9G9iMXyQD8lc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=APeOfAlNdFMWMy+BLk2A/xwLVsigz8wRJj1uXJIaHGgFyUsP+yL1czKN86PTHnwgt3
-	90eoj7wtyBUGdJEdd2UIeoGTPAMY5C5vWXkPB/RJUEdO/Uq0ksjd1YpKJ7Iu8fnXBdgh
-	oxPMRaDtu/OZK9rrXUHPfvZ1uVKh7qeeWpYBA=
-Received: by 10.223.45.200 with SMTP id g8mr3263752faf.67.1272886505809;
-	Mon, 03 May 2010 04:35:05 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id p9sm8623022fkb.33.2010.05.03.04.35.05
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 03 May 2010 04:35:05 -0700 (PDT)
-Date: Mon, 3 May 2010 13:35:25 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100503113525.GO7123@jama>
-References: <1272879651-27000-1-git-send-email-Martin.Jansa@gmail.com>
-	<4BDE9E9D.9020003@eukrea.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=B3FuhqhTxMnao0P1IoT27epr6PT9sThVFf2bqjto8aRjUjD/6gB119gVsgF2Oo/JJ7
+	bTCVqmqaywfq46Ebw5y1vRKZhPxjLvaKiNiRVt/tALRkirxcJLK1swe2QS7zq7cLENsv
+	DpxzdEDs+G/eE3DD9ptdDcKfhJYchp0wOvu78=
 MIME-Version: 1.0
-In-Reply-To: <4BDE9E9D.9020003@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Received: by 10.239.186.67 with SMTP id f3mr248385hbh.161.1272886786104; Mon, 
+	03 May 2010 04:39:46 -0700 (PDT)
+Received: by 10.239.192.77 with HTTP; Mon, 3 May 2010 04:39:46 -0700 (PDT)
+In-Reply-To: <20100503113525.GO7123@jama>
+References: <1272879651-27000-1-git-send-email-Martin.Jansa@gmail.com>
+	<4BDE9E9D.9020003@eukrea.com> <20100503113525.GO7123@jama>
+Date: Mon, 3 May 2010 13:39:46 +0200
+Message-ID: <j2id1b08f941005030439m701d0eejb89a75e2499924f4@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -58,58 +52,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2010 11:38:55 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 03 May 2010 11:43:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, May 03, 2010 at 11:59:57AM +0200, Eric Bénard wrote:
-> Hi Martin,
+Hi,
 
-Hi Erir,
+thx for the cleanings!
 
-> Le 03/05/2010 11:40, Martin Jansa a écrit :
-> >* I've prepared 1.5.18, but needs more love as few patches doesn't apply and I would like to
-> >   convert all to new staging (don't know how to install to cross with native install).
-> >   And please comment about Kbuild/all_headers staging and include/asm link.
+>> * I've prepared 1.5.18, but needs more love as few patches doesn't apply
+Please go ahead and delete all intermediate versions after 1.5.15 (the
+last one working with pre 2.6.28 kernels).
 
-> I sent updated patches for 1.5.17 :
-> http://patchwork.openembedded.org/patch/1968/
+I'd keep 1.5 for historical purposes, 1.5.15 temporarly for older
+kernels and bleeding edge for the others ;)
+BTW the last 'official' release is 1.5, followers are 'testing'  :/
 
-Ah great, sorry that I didn't notice it before, looks good and compiles
-fine here, but do_stage fails, probably because 1.5.17 doesn't use staging.patch,
-can you please check why you removed that?
+Regards
 
-ERROR: Logfile of failure stored in: /OE/tmpdir-dev/work/spitz-angstrom-linux-gnueabi/klibc-1.5.17-r14.0/temp/log.do_stage.17079
-Log data follows:
-| NOTE: make KLIBCARCH=arm CROSS_COMPILE=arm-angstrom-linux-gnueabi- KLIBCKERNELSRC=/OE/tmpdir-dev/staging/spitz-angstrom-linux-gnueabi/kernel install
-|   INSTALL headers + man pages to /usr/lib/klibc
-| mkdir: cannot create directory `/usr/man': Permission denied
-| make[1]: *** [header] Error 1
-| make: *** [install] Error 2
-| FATAL: oe_runmake failed
-| ERROR: Function do_stage failed
-NOTE: package klibc-1.5.17-r14.0: task do_populate_staging: Failed
-
-I've updated it to new "layout" and added klibc-utils-static, I'll send updated patch.
-
-> >* 1.5.15+1.5.16:
-> >   #still needs Kbuild files and all headers (ie include/drm, include/mtd were missing)
-> >   #work-arround by hand (just to show what needs to be solved):
-> 
-> this patch should solve this problem :
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=b2f6d8d0200974b8b98f1bb9b10d46fb06e14b15
-
-This is also great, I've rebuilt my kernel to get this new staging and
-1.5.15+1.5.16 compiles fine without any workarround.
-
-Thanks!
-
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Andrea
 
 
