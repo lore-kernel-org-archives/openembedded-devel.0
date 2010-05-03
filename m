@@ -1,28 +1,43 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O93A5-0006Ft-K1
+	(envelope-from <Tom_Rini@mentor.com>) id 1O95Re-000261-Ha
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 23:26:48 +0200
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 70A574B00D9;
-	Mon,  3 May 2010 23:22:59 +0200 (CEST)
-Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
-	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP;
-	Mon,  3 May 2010 23:22:57 +0200 (CEST)
-From: Eric Benard <eric@eukrea.com>
+	Tue, 04 May 2010 01:53:04 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O95Nz-000482-8a from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 03 May 2010 16:49:15 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 3 May 2010 16:49:14 -0700
+Received: from 172.30.80.22 ([172.30.80.22]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon,  3 May 2010 23:49:14 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	03 May 2010 16:49:13 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  3 May 2010 23:22:35 +0200
-Message-Id: <1272921755-7414-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+In-Reply-To: <1270225589.7652.3.camel@trini-m4400>
+References: <E1NxKhE-0007AO-Bh@melo.openembedded.org>
+	<1270159668.6277.138.camel@trini-m4400> <hp471c$59h$1@dough.gmane.org>
+	<1270225589.7652.3.camel@trini-m4400>
+Organization: Mentor Graphics Corporation
+Date: Mon, 03 May 2010 16:49:13 -0700
+Message-ID: <1272930553.2931.33.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 03 May 2010 23:49:14.0991 (UTC)
+	FILETIME=[3CC8AFF0:01CAEB1B]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] compat-wireless: Add latest Linux wireless drivers
+Subject: Re: [oe-commits] Joshua Lock : relocatable: Class to post-process packages for relocatability
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,141 +51,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2010 21:26:48 -0000
+X-List-Received-Date: Mon, 03 May 2010 23:53:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-- provides latest (linux-next) drivers for older kernels
-- ath driver was tested on x86 (on Asus eeetop with Linux 2.6.33)
-- other drivers were only compile tested for x86
+On Fri, 2010-04-02 at 09:26 -0700, Tom Rini wrote:
+> On Fri, 2010-04-02 at 09:40 +0200, Koen Kooi wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >=20
+> > On 02-04-10 00:07, Tom Rini wrote:
+> > > On Thu, 2010-04-01 at 13:44 +0000, git version control wrote:
+> > >> Module: openembedded.git
+> > >> Branch: rpurdie/work-in-progress
+> > >> Commit: 2365530efff7681fa34b2a466cf5f78acac10274
+> > >> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcom=
+mit;h=3D2365530efff7681fa34b2a466cf5f78acac10274
+> > >>
+> > >> Author: Joshua Lock <josh@linux.intel.com>
+> > >> Date:   Wed Mar 31 11:41:58 2010 +0100
+> > >>
+> > >> relocatable: Class to post-process packages for relocatability
+> > > [snip]
+> > >> +def rpath_replace (path, d):
+> > >> +    bindirs =3D bb.data.expand("${bindir} ${sbindir} ${base_sbindir=
+} ${base_bindir} ${libdir} ${base_libdir} ${PREPROCESS_RELOCATE_DIRS}", d).=
+split()
+> > >=20
+> > > Is that last variable there to let recipes add non-standard locations=
+ to
+> > > the search path?
+> > >=20
+> > > [snip]
+> > >> -       required_utilities =3D "patch help2man diffstat texi2html
+> > > makeinfo cvs svn bzip2 tar gzip gawk md5sum"
+> > >> +       required_utilities =3D "patch help2man diffstat texi2html
+> > > makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
+> > >=20
+> > > How hard would it be to add a chrpath-native recipe and maybe treat t=
+his
+> > > like we used to treat qemu?  Don't see it in yum on my rhel5 box.
+> > > Thanks.
+> >=20
+> > We already have that from our previous chrpath experiments :) See
+> > recipes/chrpath
+>=20
+> Great, lets rework to use that version.
 
-Signed-off-by: Eric Benard <eric@eukrea.com>
----
- recipes/compat-wireless/compat-wireless-ath_0.bb   |    6 ++++
- .../compat-wireless/compat-wireless-atheros_0.bb   |    6 ++++
- recipes/compat-wireless/compat-wireless-intel_0.bb |    6 ++++
- .../compat-wireless/compat-wireless-iwlwifi_0.bb   |    6 ++++
- .../compat-wireless/compat-wireless-rtl818x_0.bb   |    6 ++++
- .../compat-wireless/compat-wireless-wl12xx_0.bb    |    6 ++++
- recipes/compat-wireless/compat-wireless.inc        |   31 ++++++++++++++++++++
- 7 files changed, 67 insertions(+), 0 deletions(-)
- create mode 100644 recipes/compat-wireless/compat-wireless-ath_0.bb
- create mode 100644 recipes/compat-wireless/compat-wireless-atheros_0.bb
- create mode 100644 recipes/compat-wireless/compat-wireless-intel_0.bb
- create mode 100644 recipes/compat-wireless/compat-wireless-iwlwifi_0.bb
- create mode 100644 recipes/compat-wireless/compat-wireless-rtl818x_0.bb
- create mode 100644 recipes/compat-wireless/compat-wireless-wl12xx_0.bb
- create mode 100644 recipes/compat-wireless/compat-wireless.inc
+Did anything happen here?  I don't see it on the test branch and I'm
+asking because things like RHEL don't easily have chrpath available.
 
-diff --git a/recipes/compat-wireless/compat-wireless-ath_0.bb b/recipes/compat-wireless/compat-wireless-ath_0.bb
-new file mode 100644
-index 0000000..dedc9e7
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless-ath_0.bb
-@@ -0,0 +1,6 @@
-+include compat-wireless.inc
-+
-+do_configure() {
-+	cd ${S}
-+        ./scripts/driver-select ath
-+}
-diff --git a/recipes/compat-wireless/compat-wireless-atheros_0.bb b/recipes/compat-wireless/compat-wireless-atheros_0.bb
-new file mode 100644
-index 0000000..33a23ba
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless-atheros_0.bb
-@@ -0,0 +1,6 @@
-+include compat-wireless.inc
-+
-+do_configure() {
-+	cd ${S}
-+        ./scripts/driver-select atheros
-+}
-diff --git a/recipes/compat-wireless/compat-wireless-intel_0.bb b/recipes/compat-wireless/compat-wireless-intel_0.bb
-new file mode 100644
-index 0000000..cfb5473
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless-intel_0.bb
-@@ -0,0 +1,6 @@
-+include compat-wireless.inc
-+
-+do_configure() {
-+	cd ${S}
-+        ./scripts/driver-select intel
-+}
-diff --git a/recipes/compat-wireless/compat-wireless-iwlwifi_0.bb b/recipes/compat-wireless/compat-wireless-iwlwifi_0.bb
-new file mode 100644
-index 0000000..cc9d922
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless-iwlwifi_0.bb
-@@ -0,0 +1,6 @@
-+include compat-wireless.inc
-+
-+do_configure() {
-+	cd ${S}
-+        ./scripts/driver-select iwlwifi
-+}
-diff --git a/recipes/compat-wireless/compat-wireless-rtl818x_0.bb b/recipes/compat-wireless/compat-wireless-rtl818x_0.bb
-new file mode 100644
-index 0000000..1f4c795
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless-rtl818x_0.bb
-@@ -0,0 +1,6 @@
-+include compat-wireless.inc
-+
-+do_configure() {
-+	cd ${S}
-+        ./scripts/driver-select rtl818x
-+}
-diff --git a/recipes/compat-wireless/compat-wireless-wl12xx_0.bb b/recipes/compat-wireless/compat-wireless-wl12xx_0.bb
-new file mode 100644
-index 0000000..01719b7
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless-wl12xx_0.bb
-@@ -0,0 +1,6 @@
-+include compat-wireless.inc
-+
-+do_configure() {
-+	cd ${S}
-+        ./scripts/driver-select wl12xx
-+}
-diff --git a/recipes/compat-wireless/compat-wireless.inc b/recipes/compat-wireless/compat-wireless.inc
-new file mode 100644
-index 0000000..73daeb4
---- /dev/null
-+++ b/recipes/compat-wireless/compat-wireless.inc
-@@ -0,0 +1,31 @@
-+DESCRIPTION = "Latest wireless drivers"
-+HOMEPAGE = "http://wireless.kernel.org/en/users/Download"
-+SECTION = "kernel/modules"
-+LICENSE = "GPL"
-+RDEPENDS = "wireless-tools"
-+PR = "r0"
-+
-+COMPAT_WIRELESS_VERSION = "2010-04-26"
-+
-+SRC_URI = "http://wireless.kernel.org/download/compat-wireless-2.6/compat-wireless-${COMPAT_WIRELESS_VERSION}.tar.bz2 \
-+	"
-+
-+TAG = "${@'${COMPAT_WIRELESS_VERSION}'.replace('-', '')}"
-+PV = "0.${TAG}"
-+
-+S = "${WORKDIR}/compat-wireless-${COMPAT_WIRELESS_VERSION}"
-+
-+inherit module
-+
-+EXTRA_OEMAKE = "KLIB_BUILD=${STAGING_KERNEL_DIR} KLIB=${D}"
-+
-+do_configure_append() {
-+	sed -i "s#@./scripts/update-initramfs## " Makefile
-+}
-+
-+do_install() {
-+	oe_runmake DEPMOD=echo DESTDIR="${D}" INSTALL_MOD_PATH="${D}" install-modules
-+}
-+
-+SRC_URI[md5sum] = "371e6fe12a0a8435e33061158c329a2e"
-+SRC_URI[sha256sum] = "2988eb25a7e7d8bb0f324c5a500eff4445bc8bafc0135b6c05e07544a4f791ed"
--- 
-1.6.3.3
 
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
