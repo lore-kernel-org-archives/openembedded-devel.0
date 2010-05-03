@@ -1,43 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O91IU-0002cj-Vh
+	(envelope-from <roman@khimov.ru>) id 1O91sD-0007B7-I1
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 21:27:20 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O91Ep-0005VN-SW from Tom_Rini@mentor.com 
+	Mon, 03 May 2010 22:04:14 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1O91oY-0000gP-C0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 12:23:31 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 3 May 2010 12:23:31 -0700
-Received: from 172.30.80.22 ([172.30.80.22]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon,  3 May 2010 19:23:27 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	03 May 2010 12:23:27 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 04 May 2010 00:00:28 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1272470468.3865.774.camel@trini-m4400>
-References: <1272401386.3865.719.camel@trini-m4400>
-	<1272402270.3865.734.camel@trini-m4400>
-	<1272470468.3865.774.camel@trini-m4400>
-Organization: Mentor Graphics Corporation
-Date: Mon, 03 May 2010 12:23:27 -0700
-Message-ID: <1272914607.2931.19.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 03 May 2010 19:23:31.0356 (UTC)
-	FILETIME=[1DA30DC0:01CAEAF6]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Mon, 3 May 2010 23:59:30 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <201003301706.14340.khimov@altell.ru>
+	<20100428125342.GA31214@zlo.nu>
+	<201004290930.00901.roman@khimov.ru>
+In-Reply-To: <201004290930.00901.roman@khimov.ru>
+MIME-Version: 1.0
+Message-Id: <201005040000.00002.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv3] Remove scsi/scsi.h header from linux-libc-headers
+Subject: Re: [PATCH] openssl: add version 1.0.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +40,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2010 19:27:21 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 03 May 2010 20:04:14 -0000
+X-Groupsio-MsgNum: 18956
+Content-Type: multipart/signed; boundary="nextPart3075416.F8XvGrsjjK";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart3075416.F8XvGrsjjK
+Content-Type: Text/Plain;
+  charset="windows-1251"
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2010-04-28 at 09:01 -0700, Tom Rini wrote:
-> linux-libc-headers: Delete include/scsi/scsi.h
+=C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =D7=E5=F2=E2=E5=F0=E3 29 =E0=EF=F0=
+=E5=EB=FF 2010 09:29:58 =E0=E2=F2=EE=F0 Roman I Khimov =ED=E0=EF=E8=F1=E0=
+=EB:
+> =C2 =F1=EE=EE=E1=F9=E5=ED=E8=E8 =EE=F2 =D1=F0=E5=E4=E0 28 =E0=EF=F0=E5=EB=
+=FF 2010 16:53:42 =E0=E2=F2=EE=F0 Marc Olzheim =ED=E0=EF=E8=F1=E0=EB:
+> > On Tue, Mar 30, 2010 at 05:06:31PM +0400, Roman I Khimov wrote:
+> > > --- /dev/null
+> > > +++ b/recipes/openssl/openssl-1.0.0/configure-targets.patch
+> > > @@ -0,0 +1,24 @@
+> > > +
+> > > +The number of colons are important :)
+> > > +
+> >
+> > Note the comment. :-)
+> >
+> > [snip]
+> >
+> > The number of fields in the config-string has gone up by 3 from
+> > openssl-0.9.8g to 1.0.0, so the debian.patch is no longer correct,
+> >
+> > resulting in build failures for my non-native mipsel build:
+> > | make[4]: *** No rule to make target `link_a..so.1.0.0'.  Stop.
 >=20
-> With 2.6.31, the kernel started exporting certain SCSI headers again and
-> in particular scsi/scsi.h.  After talking with Christoph Hellwig and
-> James Bottemley (scsi maintainer) the kernel shouldn't export
-> scsi/scsi.h.  Removing this from the kernel, rather than trying to clean
-> it up to be userland parseable is the right way to go.
+> OK, it works fine there (i386 and amd64 uclibc, both via cross), so I
+>  didn't notice that it might be a problem. Care to do a patch? It'll take
+>  me some time to create mipsel build setup and try it out.
 
-So FYI all.  The kernel patch is now queued up for the .35 merge window.
+Just pushed the fix, please try it out.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart3075416.F8XvGrsjjK
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkvfKz8ACgkQXJ70z+XgVcOULgCdHI1hgmbkalQW0enDdoP8zl9n
+mggAnjjssGU9FxYqZF7CGm1ps6NS+8H9
+=Azgr
+-----END PGP SIGNATURE-----
+
+--nextPart3075416.F8XvGrsjjK--
