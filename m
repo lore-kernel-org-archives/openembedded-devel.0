@@ -1,37 +1,44 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O8sbZ-00026E-4O
+Received: from mail-bw0-f220.google.com ([209.85.218.220])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <lazy.gopher@googlemail.com>) id 1O8tUa-0001uK-Ap
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 12:10:26 +0200
-Received: (qmail 20762 invoked by uid 503); 3 May 2010 10:01:51 -0000
-Received: from b6.ovh.net (HELO mail96.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 3 May 2010 10:01:50 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 3 May 2010 10:00:00 -0000
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 3 May 2010 09:59:58 -0000
-Message-ID: <4BDE9E9D.9020003@eukrea.com>
-Date: Mon, 03 May 2010 11:59:57 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+	Mon, 03 May 2010 13:07:18 +0200
+Received: by bwz20 with SMTP id 20so1177735bwz.12
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 May 2010 04:03:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received:date
+	:x-google-sender-auth:message-id:subject:from:to:content-type;
+	bh=wvxNBrgnbEdtuYFL9l7rqrsFAhWqAn4VRhDZTBEHzGo=;
+	b=xQ7vok/FQf70rgc7WrMvI9Udkq/VzoaKHRi4/cPziN8t37sBTjRh4dxi8l2keIV5+5
+	suyfOJeq1wWfNTFSun1yzeffO4KnAxJ5kh4ReEZPzwpHgfSBFCReWT5tJJwWBczHHDI4
+	VQM2KmY/BFO2XqNb6JlJxjt8WceSJk9wEyzWE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=mime-version:sender:date:x-google-sender-auth:message-id:subject
+	:from:to:content-type;
+	b=XdW5Wajrcd9pvOh9wz1o1m6KqYKcGrJ+twLFCA9loacE3LWIwegw/eaCrTvaiHM3vO
+	cgDFOnUuQmFjmNGx1lJJCgcvbRtVv4bUN2oMWTV/6ZDbZCeVZvCWFiQuEZ3YzIac70T/
+	0e8OaJQxctdauITWc8bxyEYPW8ociOpEFCTnw=
 MIME-Version: 1.0
+Received: by 10.204.74.98 with SMTP id t34mr5220558bkj.154.1272884610549; Mon, 
+	03 May 2010 04:03:30 -0700 (PDT)
+Sender: lazy.gopher@googlemail.com
+Received: by 10.204.121.206 with HTTP; Mon, 3 May 2010 04:03:30 -0700 (PDT)
+Date: Mon, 3 May 2010 13:03:30 +0200
+X-Google-Sender-Auth: 30b118c8429e7c0c
+Message-ID: <h2o5df06e1c1005030403v1109fecbp101a20e977e9813d@mail.gmail.com>
+From: Maksym Parkachov <lazy.gopher@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1272879651-27000-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1272879651-27000-1-git-send-email-Martin.Jansa@gmail.com>
-X-Ovh-Tracer-Id: 11429572906346065225
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 87.98.216.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.218.220
+X-SA-Exim-Mail-From: lazy.gopher@googlemail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] klibc: cleanup all version
+Subject: Old bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,27 +52,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2010 10:10:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 03 May 2010 11:07:18 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi Martin,
+Hi everyone,
 
-Le 03/05/2010 11:40, Martin Jansa a écrit :
-> * I've prepared 1.5.18, but needs more love as few patches doesn't apply and I would like to
->    convert all to new staging (don't know how to install to cross with native install).
->    And please comment about Kbuild/all_headers staging and include/asm link.
->
-I sent updated patches for 1.5.17 :
-http://patchwork.openembedded.org/patch/1968/
+I haven't touch openembedded for a while, last time it was still the
+monotone times.
+But I remember, maybe incorrect, that in the dev branch back then,
+there was a bb for ZeroC ice library.
+I assume, that this package was deleted during some cleanup,
+but the strange thing is that I cannot find any commit in git log
+regarding to this.
+Maybe I'm just mixing things up, but I though the old commit history
+was migrated to git.
+Is there a way to check the old monotone tree?
 
-> * 1.5.15+1.5.16:
->    #still needs Kbuild files and all headers (ie include/drm, include/mtd were missing)
->    #work-arround by hand (just to show what needs to be solved):
-
-this patch should solve this problem :
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=b2f6d8d0200974b8b98f1bb9b10d46fb06e14b15
-
-Eric
+Thanks,
+Maksym.
 
 
