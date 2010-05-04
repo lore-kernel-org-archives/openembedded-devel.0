@@ -1,43 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f193.google.com ([209.85.211.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9Jd0-0001HA-2h for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 17:01:43 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9JZM-0007pi-Tg for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 16:57:56 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 16:57:56 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <df6.626@gmail.com>) id 1O9JvD-0004IS-Lm
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 May 2010 17:20:33 +0200
+Received: by ywh31 with SMTP id 31so1505141ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 16:57:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 04 May 2010 08:16:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=decTfUF4wgd399vf9mZLHSRWbAlHu1kmUNs7n8rSLaU=;
+	b=nnNGXYtEY8e3p7viLQ9A6PIUeIaitC4NFMlZusLXawwlFnuRUOmYgPphtcdyqeogS9
+	pa/qTZiCdZ1AWlQ2FCl+vrmGwWNw+0kQikZCbwIFqxBW7f9KYAMfeRxq+e9reWCRC0en
+	5QY5BffQu4bXUZasBzuizPn4i0AUzdRlwKKYg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=xzB4XZFIY3vcKUBj/3JWW9Qu15NVVvOaWb0YyqdSYWKZJgaDnwrsDOeLLza+5FZnEN
+	5voxCYp9Sq/Ahy7I+QkpCak+U1Q5mXgopA2p9QBlkTuq2vBTjok2cZo1/1EbXIAEz4AW
+	60Dj/64xWiJSfITkWNE179Hz8XVwLoRzQM6fY=
+MIME-Version: 1.0
+Received: by 10.150.247.23 with SMTP id u23mr12675287ybh.150.1272986202326; 
+	Tue, 04 May 2010 08:16:42 -0700 (PDT)
+Received: by 10.150.139.5 with HTTP; Tue, 4 May 2010 08:16:42 -0700 (PDT)
+Date: Tue, 4 May 2010 21:16:42 +0600
+Message-ID: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
+From: Dmitry Vinokurov <df6.626@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 04 May 2010 16:57:47 +0200
-Message-ID: <hrpclb$dhp$1@dough.gmane.org>
-References: <108741502.29960271272980979803.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <108741502.29960271272980979803.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.211.193
+X-SA-Exim-Mail-From: df6.626@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Unicap Imaging API
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Build uncompressed kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,58 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 15:01:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 May 2010 15:20:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-On 04-05-10 15:49, John Buckley wrote:
-> 
-> 
-> Hello, 
-> 
-> Does anyone have any experience getting the Unicap imaging API working on OpenEmbedded? 
+Is there any way to cancel compression stage of kernel build and get
+uncompressed uImage using OE? I've measured uncompressing time (using
+stopwatch actually, so it could be +-0.1-0.2 seconds or even more) -- it's
+about 0.8-0.9 seconds, and boot time is much more critical for my system
+than image size, so even 0.5 seconds is really important. Bootloader is
+Uboot, board is ARM9 Phytec lpc3250.
 
-OE has recipes for 'ucview' and 'unicap'. Angstrom should have binaries
-from both in the arm feeds.
+Also I've read http://elinux.org/About_Compression and it states about
+decompress time about 50ms, so looks like either I should measure boot time
+using more precise tools (like from inside of Uboot) or my board is not so
+fast as those which used by authors. Perhaps anybody could share their
+experience in this issue, is it worth at all to try to build uncompressed
+kernel?
 
-regards,
+Thanks in advance.
 
-Koen
-
-> 
-> 
-> 
-> This API that was specifically written for cameras from The Imaging Source.com ( www.theimagingsource.com ) 
-> 
-> 
-> 
-> I just recently found out that the cameras are not UVC compliant and require the Unicap API to communicate with them. 
-> 
-> One of their cameras is listed on the UVC compliant hardware list!!!  The salesman convinced me it was UVC compliant and now the API developer is telling me it is not UVC compliant. 
-> 
-> 
-> 
-> I had developed a large application in GStreamer with a UVC compliant camera and I have made great progress.  I don't want to lose ground by heading down a dead end. 
-> 
-> 
-> 
-> John 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL4DXrMkyGM64RGpERAutUAKCkP4OAnjtNXYssPV64Gj8ycPD32gCeKW3f
-tC6/ly7AhmcWQHrqLF8sOhE=
-=kARb
------END PGP SIGNATURE-----
-
-
+--
+Best Regards,
+Dmitry Vinokurov
+<df6.626@gmail.com>
 
