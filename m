@@ -1,40 +1,37 @@
-Received: from 30.mail-out.ovh.net ([213.186.62.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O9CPZ-0006SM-MN
+Received: from smtp-out04.alice.it ([85.37.17.100])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <GNUtoo@no-log.org>) id 1O9EpR-000702-Aq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 09:19:22 +0200
-Received: (qmail 25207 invoked by uid 503); 4 May 2010 07:12:30 -0000
-Received: from b6.ovh.net (HELO mail639.ha.ovh.net) (213.186.33.56)
-	by 30.mail-out.ovh.net with SMTP; 4 May 2010 07:12:30 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 4 May 2010 07:15:55 -0000
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 4 May 2010 07:15:52 -0000
-Message-ID: <4BDFC996.5060606@eukrea.com>
-Date: Tue, 04 May 2010 09:15:34 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Tue, 04 May 2010 11:54:15 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-out04.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 4 May 2010 11:50:23 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 4 May 2010 11:50:22 +0200
+Received: from [192.168.1.116] ([87.2.136.88]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 4 May 2010 11:50:21 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>
-	<v2hfc0861611004260046za2daa3a4ve91f93ab88e72d8e@mail.gmail.com>
-	<hr3im2$gf6$1@dough.gmane.org>	<x2rfc0861611004261141u68a0ad71icfc12c12c3053c23@mail.gmail.com>	<hr4t3j$tds$1@dough.gmane.org>	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>	<4BD84B08.4000300@eukrea.com>
-	<g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>
-In-Reply-To: <g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>
-X-Ovh-Tracer-Id: 14530864197811219785
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 213.186.62.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+In-Reply-To: <1272655976.2381.0.camel@gnutoo-desktop>
+References: <1272548191.2313.0.camel@gnutoo-desktop>
+	<1272612823-16981-1-git-send-email-eric@eukrea.com>
+	<1272655976.2381.0.camel@gnutoo-desktop>
+Date: Tue, 04 May 2010 11:50:20 +0200
+Message-ID: <1272966620.2486.1.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 04 May 2010 09:50:21.0993 (UTC)
+	FILETIME=[36647190:01CAEB6F]
+X-SA-Exim-Connect-IP: 85.37.17.100
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Regarding customized image with Qt embedded support.
+Subject: Re: [PATCH] mplayer_svn : fix compilation problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +45,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 07:19:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 04 May 2010 09:54:15 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Le 04/05/2010 09:02, Abhishek Sharma a écrit :
-> I am finished making the image which has a qtehelloworld program "installed"
-> in it. But the moment I run<qtehelloworld -qws>  in the qemu machine i get
-> the error
-> QFontDatabase: Cannot find font directory /usr/lib/fonts.
->
-> I googled the error and in most of the cases it was shown that while
-> "configuring" qte the prefix variable was not properly set. What step should
-> i take next?? Do i need to change any recipe of qt embedded or is this some
-> different problem.
->
-add "qt4-embedded-fonts" to your IMAGE_INSTALL
+On Fri, 2010-04-30 at 21:32 +0200, GNUtoo wrote:
+> On Fri, 2010-04-30 at 09:33 +0200, Eric Benard wrote:
+> > - this patch fix the following error (met for a x86 target) :
+> > 
+> > | loader/module.o: In function `MODULE_GetProcAddress':
+> > | module.c:(.text+0x125): undefined reference to `report_entry'
+> > | module.c:(.text+0x12f): undefined reference to `report_ret'
+> > | module.c:(.text+0x139): undefined reference to `wrapper_target'
+> > | module.c:(.text+0x13e): undefined reference to `wrapper'
+> > | loader/module.o: In function `LoadLibraryExA':
+> > | module.c:(.text+0x10d4): undefined reference to `report_entry'
+> > | module.c:(.text+0x10de): undefined reference to `report_ret'
+> > | module.c:(.text+0x10ea): undefined reference to `wrapper_target'
+> > | module.c:(.text+0x10f0): undefined reference to `wrapper'
+> > | collect2: ld returned 1 exit status
+> > | make: *** [mplayer] Error 1
+> > 
+> > - also add --disable-xss --disable-dga1 --disable-dga2 in order to
+> > prevent configure to autodetect these options which leads to a
+> > dependency problem.
+> > 
+> > Signed-off-by: Eric Benard <eric@eukrea.com>
+> > ---
+> > v2 : increase PR and add 3 options to configure
+> > 
+> >  recipes/mplayer/files/fix-emu_qtx_api.diff |   33 ++++++++++++++++++++++++++++
+> >  recipes/mplayer/mplayer_svn.bb             |    6 ++++-
+> >  2 files changed, 38 insertions(+), 1 deletions(-)
+> >  create mode 100644 recipes/mplayer/files/fix-emu_qtx_api.diff
+> > 
+> > diff --git a/recipes/mplayer/files/fix-emu_qtx_api.diff b/recipes/mplayer/files/fix-emu_qtx_api.diff
+> > new file mode 100644
+> > index 0000000..e657475
+> > --- /dev/null
+> > +++ b/recipes/mplayer/files/fix-emu_qtx_api.diff
+> > @@ -0,0 +1,33 @@
+> > +http://bugs.gentoo.org/213836
+> > +
+> > +Fix the following error :
+> > +
+> > +| loader/module.o: In function `MODULE_GetProcAddress':
+> > +| module.c:(.text+0x125): undefined reference to `report_entry'
+> > +| module.c:(.text+0x12f): undefined reference to `report_ret'
+> > +| module.c:(.text+0x139): undefined reference to `wrapper_target'
+> > +| module.c:(.text+0x13e): undefined reference to `wrapper'
+> > +| loader/module.o: In function `LoadLibraryExA':
+> > +| module.c:(.text+0x10d4): undefined reference to `report_entry'
+> > +| module.c:(.text+0x10de): undefined reference to `report_ret'
+> > +| module.c:(.text+0x10ea): undefined reference to `wrapper_target'
+> > +| module.c:(.text+0x10f0): undefined reference to `wrapper'
+> > +| collect2: ld returned 1 exit status
+> > +| make: *** [mplayer] Error 1
+> > +
+> > +---
+> > +diff --git a/loader/module.c b/loader/module.c
+> > +index e316cf0..2023acb 100644
+> > +--- a/loader/module.c
+> > ++++ b/loader/module.c
+> > +@@ -9,8 +9,8 @@
+> > +  */
+> > + 
+> > + // define for quicktime calls debugging and/or MacOS-level emulation:
+> > +-#ifndef __APPLE__
+> > +-#define EMU_QTX_API
+> > ++#ifdef __APPLE__
+> > ++#undef EMU_QTX_API
+> > + #endif /* __APPLE__ */
+> > + 
+> > + // define for quicktime debugging (verbose logging):
+> > diff --git a/recipes/mplayer/mplayer_svn.bb b/recipes/mplayer/mplayer_svn.bb
+> > index dd94767..f26318c 100644
+> > --- a/recipes/mplayer/mplayer_svn.bb
+> > +++ b/recipes/mplayer/mplayer_svn.bb
+> > @@ -14,6 +14,7 @@ SRC_URI = "svn://svn.mplayerhq.hu/mplayer;module=trunk \
+> >         file://fix-exp.diff;patch=1;maxrev=30291 \
+> >  	   file://fix-addrinfo.patch;patch=1;maxrev=30302 \
+> >         file://fix-avconfig.diff;patch=1;maxrev=30376 \
+> > +	   file://fix-emu_qtx_api.diff;patch=1;maxrev=30165 \
+> >  "
+> >  
+> >  SRCREV = "30165"
+> > @@ -39,7 +40,7 @@ RCONFLICTS_${PN} = "mplayer-atty"
+> >  RREPLACES_${PN} = "mplayer-atty"
+> >  
+> >  PV = "0.0+1.0rc3+svnr${SRCPV}"
+> > -PR = "r19"
+> > +PR = "r20"
+> >  DEFAULT_PREFERENCE = "-1"
+> >  DEFAULT_PREFERENCE_angstrom = "1"
+> >  DEFAULT_PREFERENCE_shr = "1"
+> > @@ -156,6 +157,9 @@ EXTRA_OECONF = " \
+> >  	--disable-tga \
+> >  	--disable-pnm \
+> >  	--disable-md5sum \
+> > +	--disable-xss \
+> > +	--disable-dga1 \
+> > +	--disable-dga2 \
+> >  	\
+> >  	--enable-alsa \
+> >  	--enable-ossaudio \
+> Seems ok,I'll test it on 2 machines and if it's ok I'll push.
+> Ping me if I forget to do so.
+Just a coupple of minutes/hours after my testing,someone commited
+changes to mplayer,while I was looking at acked-by/signed off and how to
+commit/push the patch of someone else...too bad...
 
-Eric
+Denis.
+
+
+
 
 
