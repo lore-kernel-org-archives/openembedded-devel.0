@@ -1,29 +1,28 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1O9OXP-0007K6-5X
+	(envelope-from <eric@eukrea.com>) id 1O9Olq-0006Uq-UR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 22:16:18 +0200
-Received: (qmail 25583 invoked by uid 1003); 4 May 2010 20:12:26 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 4 May 2010 20:12:26 -0000
-Message-ID: <4BE07FA7.6060206@balister.org>
-Date: Tue, 04 May 2010 16:12:23 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Tue, 04 May 2010 22:31:12 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 948574B0109;
+	Tue,  4 May 2010 22:27:23 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP;
+	Tue,  4 May 2010 22:27:21 +0200 (CEST)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-References: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
-In-Reply-To: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Date: Tue,  4 May 2010 22:26:48 +0200
+Message-Id: <1273004809-24230-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: GSoC participation
+Subject: [PATCH 1/2] python-m2crypto-native: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,52 +36,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 20:16:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 May 2010 20:31:12 -0000
 
-On 05/04/2010 03:45 PM, Adrian Alonso wrote:
-> Hi All,
->
-> Via the Linux Foundation and Grant L. mentoring help, I will be working on
-> OE to
-> improve xilinx platforms support and adding Microblaze arch support;
+- this package is needed to compile crda
 
-I have an ml403 here I can test stuff on. I don't have access to the EDK 
-though :(
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+ recipes/python/python-m2crypto-native_0.18.2.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/python/python-m2crypto-native_0.18.2.bb
 
-This looks like a really good project! Thanks for doing this work.
+diff --git a/recipes/python/python-m2crypto-native_0.18.2.bb b/recipes/python/python-m2crypto-native_0.18.2.bb
+new file mode 100644
+index 0000000..4a28464
+--- /dev/null
++++ b/recipes/python/python-m2crypto-native_0.18.2.bb
+@@ -0,0 +1,12 @@
++require python-m2crypto_${PV}.bb
++inherit native
++
++FILESPATH = "${FILE_DIRNAME}/python-m2crypto"
++DEPENDS = "python-native"
++
++do_stage() {
++	distutils_stage_all
++}
++
++SRC_URI[md5sum] = "445dce53fcfc7ec8f6fd31f54da8a067"
++SRC_URI[sha256sum] = "62ed44c8b2d392bdc757981ac37f05d808a0d917e4f9d95de2fbf3c2bdad41a7"
+-- 
+1.6.3.3
 
-Philip
-
->
-> Our Gsoc work aims tree areas
-> 1. Support most xilinx target platforms
-> 2. Add microblaze arch support
-> 3. Improve software/hardware co-design work flow
->
-> Over the lasts moths I've been working on xilinx ml507 board support
-> to the point that been able to run xfce46 in this platform, some patches
-> are still queued in oe mailing list,  and we want to extend this
-> improvements
-> to other xilinx boards. Some descriptions of my work can be found at my blog
-> [1].
->
-> I already start with microblaze support [2], an encounter that I will
-> be fighting
-> with autotools hell this summer :); Running `bitbake task-base` it reachs
-> the point
-> to start cross-compiling and it fails due that config scripts don't have
-> target
-> definitions for microblaze, see error log at [3];forgive my autotools lack
-> of expertise
-> but where do I need to look to add target information for microblaze.
->
-> Thanks in advance for your help.
->
-> [1] http://aalonso.wordpress.com
-> [2] http://www.gitorious.org/oe-microblaze
-> [3] http://pastebin.com/DpZFsCgb
->
 
 
