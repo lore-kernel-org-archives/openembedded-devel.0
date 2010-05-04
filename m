@@ -1,45 +1,41 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O9NL3-00026h-8U
+	(envelope-from <aalonso00@gmail.com>) id 1O9O7W-0001Zn-I8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 20:59:34 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O9NHN-0005cI-CN from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 11:55:37 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 4 May 2010 11:55:37 -0700
-Received: from 172.30.80.24 ([172.30.80.24]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue,  4 May 2010 18:55:35 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	04 May 2010 11:55:34 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 04 May 2010 21:49:33 +0200
+Received: by vws14 with SMTP id 14so16719vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 May 2010 12:45:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=ng46FuCIzAZbH17Ut5wDtBhWdKhD+Dphs4tBtmk0+Dk=;
+	b=om4KiqHVqSEiN8bzTR+/zTQgTz2r3nQx2zoLhsHyu04U2LK+B6ccaI+tV6hpnDXuY7
+	QPWgrNMhhLIcnj1P1SgMUaPUZ2wF34esmFTeNIVxFOH7Ytrxd/pY684x+lHOGzURQ3jO
+	FqgqXgFtmVVqCKu9P2TjiMNkhxoKoCvBPy4J0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=xcNTtwiWvFXgxgIhf+xrE/7ttYzPUJ3bPzyWbPxvXh+tKGEsK9tGrXCVu3BViqnLmg
+	/mzjhSdmWiTbM8D7zjMUYoQG0XVOtvlAImrwwPN2EFug7uWVtGEztGiMmAIvXiCfqf8T
+	zCCt6v1mYNSx+RhOGXLUmxe8KdrrSB+ZvDOX4=
+MIME-Version: 1.0
+Received: by 10.229.181.138 with SMTP id by10mr3584059qcb.9.1273002342932; 
+	Tue, 04 May 2010 12:45:42 -0700 (PDT)
+Received: by 10.229.78.225 with HTTP; Tue, 4 May 2010 12:45:42 -0700 (PDT)
+Date: Tue, 4 May 2010 14:45:42 -0500
+Message-ID: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1272996601.1355.5.camel@rex>
-References: <1270135981.4993.128.camel@rex>  <hpum4g$18m$1@dough.gmane.org>
-	<1271087957.29304.86.camel@trini-m4400>
-	<1271090799.14344.19.camel@localhost.localdomain>
-	<1272756595.30647.1942.camel@rex> <1272905195.2931.0.camel@trini-m4400>
-	<1272996601.1355.5.camel@rex>
-Organization: Mentor Graphics Corporation
-Date: Tue, 04 May 2010 11:55:34 -0700
-Message-ID: <1272999334.2533.18.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 04 May 2010 18:55:37.0064 (UTC)
-	FILETIME=[62181E80:01CAEBBB]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Request for branch merge
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: GSoC participation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,59 +49,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 18:59:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 04 May 2010 19:49:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2010-05-04 at 19:10 +0100, Richard Purdie wrote:
-> On Mon, 2010-05-03 at 09:46 -0700, Tom Rini wrote:
-> > On Sun, 2010-05-02 at 00:29 +0100, Richard Purdie wrote:
-> > > On Mon, 2010-04-12 at 17:46 +0100, Joshua Lock wrote:
-> > > > On Mon, 2010-04-12 at 08:59 -0700, Tom Rini wrote:
-> > > > > On Mon, 2010-04-12 at 10:37 +0200, Koen Kooi wrote:
-> > > >  > Joshuas last 3 commits to poky seem to fix Toms issue with binco=
-nfig and
-> > > > > > my issue with chrpath, which only leaves the cross staging lama=
-ngler
-> > > > > > stuff to get fixed.
-> > > > >=20
-> > > > > Actually (and I'm OK with binconfig stuff being broken in the fir=
-st
-> > > > > merge) the problem with binconfig junk isn't the file contents, b=
-ut the
-> > > > > file location.  staging-target-pkg will contain
-> > > > > staging/<host>/usr/bin/<target>/foo-config.  Which means using ps=
-taging
-> > > > > for a target pkg built on 32bit Linux fails when used on 64bit Li=
-nux.
-> > > > > Not that I wouldn't mind seeing the binconfig stuff die, just say=
-ing
-> > > > > it's a problem today :)
-> > > >=20
-> > > > Ah, hmm... yes. That is a problem.
-> > > >=20
-> > > > FWIW I don't think you'll get any arguments from the Poky team wher=
-e the
-> > > > binconfig stuff to suffer an untimely demise!
-> > >=20
-> > > FWIW, Poky has had some interesting commits recently that address Tom=
-'s
-> > > issue above from Josh.
-> >=20
-> > Interesting.  When you killed CROSS_*, did you rework stuff so that gcc
-> > & co's sysroot stuff works automatically or no?  Can't tell off-hand.
->=20
-> What do you mean by "works automatically"?
+Hi All,
 
-gcc & co have certain paths that they look in by default, relative to
-their location (see meta-toolchain.bb, that's not a hard-coded search,
-that's a relocatable one).  The current oe.dev layout of things doesn't
-fit here so we have to pass in --sysroot=3D... at a minimum and often have
--isystem for "legacy" reasons.
+Via the Linux Foundation and Grant L. mentoring help, I will be working on
+OE to
+improve xilinx platforms support and adding Microblaze arch support;
 
+Our Gsoc work aims tree areas
+1. Support most xilinx target platforms
+2. Add microblaze arch support
+3. Improve software/hardware co-design work flow
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Over the lasts moths I've been working on xilinx ml507 board support
+to the point that been able to run xfce46 in this platform, some patches
+are still queued in oe mailing list,  and we want to extend this
+improvements
+to other xilinx boards. Some descriptions of my work can be found at my blog
+[1].
 
+I already start with microblaze support [2], an encounter that I will
+be fighting
+with autotools hell this summer :); Running `bitbake task-base` it reachs
+the point
+to start cross-compiling and it fails due that config scripts don't have
+target
+definitions for microblaze, see error log at [3];forgive my autotools lack
+of expertise
+but where do I need to look to add target information for microblaze.
+
+Thanks in advance for your help.
+
+[1] http://aalonso.wordpress.com
+[2] http://www.gitorious.org/oe-microblaze
+[3] http://pastebin.com/DpZFsCgb
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
