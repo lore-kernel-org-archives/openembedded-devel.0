@@ -1,41 +1,36 @@
-Received: from mail-yw0-f193.google.com ([209.85.211.193])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <df6.626@gmail.com>) id 1O9JvD-0004IS-Lm
+	(envelope-from <GNUtoo@no-log.org>) id 1O9Jxb-00035A-ED
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 17:20:33 +0200
-Received: by ywh31 with SMTP id 31so1505141ywh.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 08:16:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=decTfUF4wgd399vf9mZLHSRWbAlHu1kmUNs7n8rSLaU=;
-	b=nnNGXYtEY8e3p7viLQ9A6PIUeIaitC4NFMlZusLXawwlFnuRUOmYgPphtcdyqeogS9
-	pa/qTZiCdZ1AWlQ2FCl+vrmGwWNw+0kQikZCbwIFqxBW7f9KYAMfeRxq+e9reWCRC0en
-	5QY5BffQu4bXUZasBzuizPn4i0AUzdRlwKKYg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=xzB4XZFIY3vcKUBj/3JWW9Qu15NVVvOaWb0YyqdSYWKZJgaDnwrsDOeLLza+5FZnEN
-	5voxCYp9Sq/Ahy7I+QkpCak+U1Q5mXgopA2p9QBlkTuq2vBTjok2cZo1/1EbXIAEz4AW
-	60Dj/64xWiJSfITkWNE179Hz8XVwLoRzQM6fY=
-MIME-Version: 1.0
-Received: by 10.150.247.23 with SMTP id u23mr12675287ybh.150.1272986202326; 
-	Tue, 04 May 2010 08:16:42 -0700 (PDT)
-Received: by 10.150.139.5 with HTTP; Tue, 4 May 2010 08:16:42 -0700 (PDT)
-Date: Tue, 4 May 2010 21:16:42 +0600
-Message-ID: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
-From: Dmitry Vinokurov <df6.626@gmail.com>
+	Tue, 04 May 2010 17:23:04 +0200
+Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 4 May 2010 17:19:09 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 4 May 2010 17:19:09 +0200
+Received: from localhost.localdomain ([87.2.136.88]) by FBCMCL01B07.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 4 May 2010 17:19:07 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.193
-X-SA-Exim-Mail-From: df6.626@gmail.com
+Date: Tue,  4 May 2010 17:19:01 +0200
+Message-Id: <1272986341-17094-2-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <1272986341-17094-1-git-send-email-GNUtoo@no-log.org>
+References: <1272921755-7414-1-git-send-email-eric@eukrea.com>
+	<1272986341-17094-1-git-send-email-GNUtoo@no-log.org>
+X-OriginalArrivalTime: 04 May 2010 15:19:08.0073 (UTC)
+	FILETIME=[240D6190:01CAEB9D]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Build uncompressed kernel
+Subject: [PATCH] compat-wireless.inc : fix installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +44,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 15:20:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 May 2010 15:23:06 -0000
 
-Hello,
+using oe_runmake export LDFLAGS which makes the installation fail,
+  so we use LDFLAGS="" for the installation
 
-Is there any way to cancel compression stage of kernel build and get
-uncompressed uImage using OE? I've measured uncompressing time (using
-stopwatch actually, so it could be +-0.1-0.2 seconds or even more) -- it's
-about 0.8-0.9 seconds, and boot time is much more critical for my system
-than image size, so even 0.5 seconds is really important. Bootloader is
-Uboot, board is ARM9 Phytec lpc3250.
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ recipes/compat-wireless/compat-wireless.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Also I've read http://elinux.org/About_Compression and it states about
-decompress time about 50ms, so looks like either I should measure boot time
-using more precise tools (like from inside of Uboot) or my board is not so
-fast as those which used by authors. Perhaps anybody could share their
-experience in this issue, is it worth at all to try to build uncompressed
-kernel?
+diff --git a/recipes/compat-wireless/compat-wireless.inc b/recipes/compat-wireless/compat-wireless.inc
+index 73daeb4..1a3daf7 100644
+--- a/recipes/compat-wireless/compat-wireless.inc
++++ b/recipes/compat-wireless/compat-wireless.inc
+@@ -24,7 +24,7 @@ do_configure_append() {
+ }
+ 
+ do_install() {
+-	oe_runmake DEPMOD=echo DESTDIR="${D}" INSTALL_MOD_PATH="${D}" install-modules
++	oe_runmake DEPMOD=echo DESTDIR="${D}" INSTALL_MOD_PATH="${D}" LDFLAGS="" install-modules
+ }
+ 
+ SRC_URI[md5sum] = "371e6fe12a0a8435e33061158c329a2e"
+-- 
+1.6.4.4
 
-Thanks in advance.
 
---
-Best Regards,
-Dmitry Vinokurov
-<df6.626@gmail.com>
 
