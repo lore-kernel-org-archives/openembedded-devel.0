@@ -1,46 +1,43 @@
-Received: from ey-out-1920.google.com ([74.125.78.149])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1O9JKj-0000nG-9O
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 16:42:52 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so187010eyw.4
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O9Jd0-0001HA-2h for openembedded-devel@lists.openembedded.org;
+	Tue, 04 May 2010 17:01:43 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O9JZM-0007pi-Tg for openembedded-devel@lists.openembedded.org;
+	Tue, 04 May 2010 16:57:56 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 May 2010 16:57:56 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 07:39:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type;
-	bh=ixtSKGsJbsCYT8GU1uyNtEjwN3CNxlIg3e9ZryEtfOI=;
-	b=BvOKfqQGyCg6ZUHJHVT2jeYZG2m7xwEB+HSDneTaRngclKa2WUBypnPSEibR9yqH1M
-	nc0gUIyfh+kpoi1QcWaypHyx8ZpnnGaT5R/g+WNx708vX7LT5Ab0qeDXduQaLXFrXaBX
-	BHKNpDoEBYRhwZZq07k7FggKhtMD4QYlnUkNM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type;
-	b=F3z1R+5uS7QkjsxowbjYNwmX5FM2ChlImv8r/W85gMlxFw4HmthoWBsf4hVXGsyt5k
-	N/WC2uQ6hstpl/vxNMeXgN+vURaCpt/AE+bz1nrxayYvnO/cfjsUjUlbXw6CKpK97LBk
-	IXLm5x6vbFddmqmm1ODbFR0b31II607DyQHfc=
-Received: by 10.213.51.212 with SMTP id e20mr6446620ebg.85.1272983944089;
-	Tue, 04 May 2010 07:39:04 -0700 (PDT)
-Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id 14sm3797541ewy.14.2010.05.04.07.39.02
-	(version=SSLv3 cipher=RC4-MD5); Tue, 04 May 2010 07:39:03 -0700 (PDT)
-Message-ID: <4BE031F4.2070706@gmail.com>
-Date: Tue, 04 May 2010 16:40:52 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Shredder/3.0.3pre
-MIME-Version: 1.0
+	Tue, 04 May 2010 16:57:56 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.149
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 04 May 2010 16:57:47 +0200
+Message-ID: <hrpclb$dhp$1@dough.gmane.org>
+References: <108741502.29960271272980979803.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+In-Reply-To: <108741502.29960271272980979803.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: python-pyqt compile error with latest org.openembedded.dev
+Subject: Re: Unicap Imaging API
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,13 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 14:42:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 04 May 2010 15:01:43 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-My compile fails with this output:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-http://pastebin.org/201169
+On 04-05-10 15:49, John Buckley wrote:
+> 
+> 
+> Hello, 
+> 
+> Does anyone have any experience getting the Unicap imaging API working on OpenEmbedded? 
 
-- Tasslehoff
+OE has recipes for 'ucview' and 'unicap'. Angstrom should have binaries
+from both in the arm feeds.
+
+regards,
+
+Koen
+
+> 
+> 
+> 
+> This API that was specifically written for cameras from The Imaging Source.com ( www.theimagingsource.com ) 
+> 
+> 
+> 
+> I just recently found out that the cameras are not UVC compliant and require the Unicap API to communicate with them. 
+> 
+> One of their cameras is listed on the UVC compliant hardware list!!!  The salesman convinced me it was UVC compliant and now the API developer is telling me it is not UVC compliant. 
+> 
+> 
+> 
+> I had developed a large application in GStreamer with a UVC compliant camera and I have made great progress.  I don't want to lose ground by heading down a dead end. 
+> 
+> 
+> 
+> John 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL4DXrMkyGM64RGpERAutUAKCkP4OAnjtNXYssPV64Gj8ycPD32gCeKW3f
+tC6/ly7AhmcWQHrqLF8sOhE=
+=kARb
+-----END PGP SIGNATURE-----
+
+
 
