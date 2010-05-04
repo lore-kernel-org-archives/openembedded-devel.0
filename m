@@ -1,29 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from qmta07.westchester.pa.mail.comcast.net ([76.96.62.64])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <edpgc@nyro.co.uk>) id 1O9I4p-0006Pi-V1
+	(envelope-from <buckleyassoc@comcast.net>) id 1O9IZx-0002ND-7G
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 15:22:22 +0200
-Received: by fxm11 with SMTP id 11so3064352fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 06:18:33 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.239.167.71 with SMTP id f7mr703410hbe.117.1272979112769; Tue, 
-	04 May 2010 06:18:32 -0700 (PDT)
-Received: by 10.239.135.9 with HTTP; Tue, 4 May 2010 06:18:32 -0700 (PDT)
-Date: Tue, 4 May 2010 14:18:32 +0100
-Message-ID: <AANLkTimo0LARF-gAcmjEA9a3tUeJVEMY0Kq136TfBn88@mail.gmail.com>
-From: Edward Cooper <edpgc@nyro.co.uk>
+	Tue, 04 May 2010 15:54:44 +0200
+Received: from omta17.westchester.pa.mail.comcast.net ([76.96.62.89])
+	by qmta07.westchester.pa.mail.comcast.net with comcast
+	id DPTe1e0031vXlb857RpfjE; Tue, 04 May 2010 13:49:39 +0000
+Received: from sz0029.wc.mail.comcast.net ([76.96.58.79])
+	by omta17.westchester.pa.mail.comcast.net with comcast
+	id DRpf1e00A1iZpPQ3dRpfbK; Tue, 04 May 2010 13:49:39 +0000
+Date: Tue, 4 May 2010 13:49:39 +0000 (UTC)
+From: John Buckley <buckleyassoc@comcast.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: edpgc@nyro.co.uk
+Message-ID: <108741502.29960271272980979803.JavaMail.root@sz0029a.westchester.pa.mail.comcast.net>
+MIME-Version: 1.0
+X-Originating-IP: [130.132.225.4]
+X-Mailer: Zimbra 5.0.19_GA_3172.RHEL5_64 (ZimbraWebClient - IE7
+	(Win)/5.0.19_GA_3177.RHEL5_64)
+X-SA-Exim-Connect-IP: 76.96.62.64
+X-SA-Exim-Mail-From: buckleyassoc@comcast.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-0.7 required=5.0 tests=BAYES_20,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Mono on ARMV5TE - AT91SAM9260
+Subject: Unicap Imaging API
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,28 +40,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 13:22:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 May 2010 13:54:53 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Hi all
 
-First post... I have succesfully run through and built Angstrom for my
-AT91SAM9260-EK target.  Really pleased with how it works and that I can
-build .ipk and install them using opkg from a local build.  However I am
-stumped with Mono, I went through the bitbake process "bitbake mono" and got
-the appropriate .ipk's, these appear to install fine on the target.  However
-running even an hello world example (mono hello.exe) results in an immediate
-"Segmentation Fault" error message and no other output.
 
-From my reasearch I believe this might by due to OABI vs EABI and how the
-kernel was compiled does that make sense or am I looking in the wrong place!
+Hello,=20
 
-Also how do I make bitbake build a different version of something (the
-recipe's are there)?
+Does anyone have any experience getting the Unicap imaging API working on O=
+penEmbedded?=20
 
-Thanks for any help, new to embedded linux so sorry for any stupid
-questions.
 
-Regards
-Ed Cooper
+
+This API that was specifically written for cameras from The Imaging Source.=
+com ( www.theimagingsource.com )=20
+
+
+
+I just recently found out that the cameras are not UVC compliant and requir=
+e the Unicap API to communicate with them.=20
+
+One of their cameras is listed on the UVC compliant hardware list!!!=C2=A0 =
+The salesman convinced me it was UVC compliant and now the API developer is=
+ telling me it is not UVC compliant.=20
+
+
+
+I had developed a large application in GStreamer with a UVC compliant camer=
+a and I have made great progress.=C2=A0 I don't want to lose ground by head=
+ing down a dead end.=20
+
+
+
+John=20
+
 
