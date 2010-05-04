@@ -1,37 +1,25 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O9OQH-0003sx-HT
+	(envelope-from <philip@balister.org>) id 1O9OXP-0007K6-5X
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 22:08:55 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O9OMb-0004Kg-Ra from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 13:05:05 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 4 May 2010 13:05:05 -0700
-Received: from 172.30.80.24 ([172.30.80.24]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue,  4 May 2010 20:05:04 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	04 May 2010 13:05:04 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 04 May 2010 22:16:18 +0200
+Received: (qmail 25583 invoked by uid 1003); 4 May 2010 20:12:26 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 4 May 2010 20:12:26 -0000
+Message-ID: <4BE07FA7.6060206@balister.org>
+Date: Tue, 04 May 2010 16:12:23 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
 References: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 04 May 2010 13:05:03 -0700
-Message-ID: <1273003503.2533.32.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 04 May 2010 20:05:05.0504 (UTC)
-	FILETIME=[16AD9600:01CAEBC5]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -49,41 +37,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 20:08:55 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 04 May 2010 20:16:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-05-04 at 14:45 -0500, Adrian Alonso wrote:
+On 05/04/2010 03:45 PM, Adrian Alonso wrote:
 > Hi All,
->=20
-> Via the Linux Foundation and Grant L. mentoring help, I will be working o=
-n
+>
+> Via the Linux Foundation and Grant L. mentoring help, I will be working on
 > OE to
 > improve xilinx platforms support and adding Microblaze arch support;
->=20
+
+I have an ml403 here I can test stuff on. I don't have access to the EDK 
+though :(
+
+This looks like a really good project! Thanks for doing this work.
+
+Philip
+
+>
 > Our Gsoc work aims tree areas
 > 1. Support most xilinx target platforms
 > 2. Add microblaze arch support
 > 3. Improve software/hardware co-design work flow
->=20
+>
 > Over the lasts moths I've been working on xilinx ml507 board support
 > to the point that been able to run xfce46 in this platform, some patches
 > are still queued in oe mailing list,  and we want to extend this
 > improvements
-> to other xilinx boards. Some descriptions of my work can be found at my b=
-log
+> to other xilinx boards. Some descriptions of my work can be found at my blog
 > [1].
-
-Please take a look at
-http://wiki.openembedded.org/index.php/Commit_log_example and rework the
-first 5 patches please.  And you can incorproate Koen's comment (and
-your subsequent patch) to bump PR into one commit.
-
-And it's often helpful to pop into #oe on irc.freenode.net as there's
-often someone around that can help out.
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+>
+> I already start with microblaze support [2], an encounter that I will
+> be fighting
+> with autotools hell this summer :); Running `bitbake task-base` it reachs
+> the point
+> to start cross-compiling and it fails due that config scripts don't have
+> target
+> definitions for microblaze, see error log at [3];forgive my autotools lack
+> of expertise
+> but where do I need to look to add target information for microblaze.
+>
+> Thanks in advance for your help.
+>
+> [1] http://aalonso.wordpress.com
+> [2] http://www.gitorious.org/oe-microblaze
+> [3] http://pastebin.com/DpZFsCgb
+>
 
 
