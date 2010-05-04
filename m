@@ -1,41 +1,41 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1O9O7W-0001Zn-I8
+	(envelope-from <Tom_Rini@mentor.com>) id 1O9OQH-0003sx-HT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 21:49:33 +0200
-Received: by vws14 with SMTP id 14so16719vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 12:45:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=ng46FuCIzAZbH17Ut5wDtBhWdKhD+Dphs4tBtmk0+Dk=;
-	b=om4KiqHVqSEiN8bzTR+/zTQgTz2r3nQx2zoLhsHyu04U2LK+B6ccaI+tV6hpnDXuY7
-	QPWgrNMhhLIcnj1P1SgMUaPUZ2wF34esmFTeNIVxFOH7Ytrxd/pY684x+lHOGzURQ3jO
-	FqgqXgFtmVVqCKu9P2TjiMNkhxoKoCvBPy4J0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=xcNTtwiWvFXgxgIhf+xrE/7ttYzPUJ3bPzyWbPxvXh+tKGEsK9tGrXCVu3BViqnLmg
-	/mzjhSdmWiTbM8D7zjMUYoQG0XVOtvlAImrwwPN2EFug7uWVtGEztGiMmAIvXiCfqf8T
-	zCCt6v1mYNSx+RhOGXLUmxe8KdrrSB+ZvDOX4=
-MIME-Version: 1.0
-Received: by 10.229.181.138 with SMTP id by10mr3584059qcb.9.1273002342932; 
-	Tue, 04 May 2010 12:45:42 -0700 (PDT)
-Received: by 10.229.78.225 with HTTP; Tue, 4 May 2010 12:45:42 -0700 (PDT)
-Date: Tue, 4 May 2010 14:45:42 -0500
-Message-ID: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	Tue, 04 May 2010 22:08:55 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1O9OMb-0004Kg-Ra from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 04 May 2010 13:05:05 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 4 May 2010 13:05:05 -0700
+Received: from 172.30.80.24 ([172.30.80.24]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Tue,  4 May 2010 20:05:04 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	04 May 2010 13:05:04 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+In-Reply-To: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
+References: <z2od1ded4381005041245j8e67e6e9z8790de994abb4e2c@mail.gmail.com>
+Organization: Mentor Graphics Corporation
+Date: Tue, 04 May 2010 13:05:03 -0700
+Message-ID: <1273003503.2533.32.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 04 May 2010 20:05:05.0504 (UTC)
+	FILETIME=[16AD9600:01CAEBC5]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: GSoC participation
+Subject: Re: GSoC participation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,45 +49,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 19:49:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 May 2010 20:08:55 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Hi All,
+On Tue, 2010-05-04 at 14:45 -0500, Adrian Alonso wrote:
+> Hi All,
+>=20
+> Via the Linux Foundation and Grant L. mentoring help, I will be working o=
+n
+> OE to
+> improve xilinx platforms support and adding Microblaze arch support;
+>=20
+> Our Gsoc work aims tree areas
+> 1. Support most xilinx target platforms
+> 2. Add microblaze arch support
+> 3. Improve software/hardware co-design work flow
+>=20
+> Over the lasts moths I've been working on xilinx ml507 board support
+> to the point that been able to run xfce46 in this platform, some patches
+> are still queued in oe mailing list,  and we want to extend this
+> improvements
+> to other xilinx boards. Some descriptions of my work can be found at my b=
+log
+> [1].
 
-Via the Linux Foundation and Grant L. mentoring help, I will be working on
-OE to
-improve xilinx platforms support and adding Microblaze arch support;
+Please take a look at
+http://wiki.openembedded.org/index.php/Commit_log_example and rework the
+first 5 patches please.  And you can incorproate Koen's comment (and
+your subsequent patch) to bump PR into one commit.
 
-Our Gsoc work aims tree areas
-1. Support most xilinx target platforms
-2. Add microblaze arch support
-3. Improve software/hardware co-design work flow
+And it's often helpful to pop into #oe on irc.freenode.net as there's
+often someone around that can help out.
 
-Over the lasts moths I've been working on xilinx ml507 board support
-to the point that been able to run xfce46 in this platform, some patches
-are still queued in oe mailing list,  and we want to extend this
-improvements
-to other xilinx boards. Some descriptions of my work can be found at my blog
-[1].
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
-I already start with microblaze support [2], an encounter that I will
-be fighting
-with autotools hell this summer :); Running `bitbake task-base` it reachs
-the point
-to start cross-compiling and it fails due that config scripts don't have
-target
-definitions for microblaze, see error log at [3];forgive my autotools lack
-of expertise
-but where do I need to look to add target information for microblaze.
-
-Thanks in advance for your help.
-
-[1] http://aalonso.wordpress.com
-[2] http://www.gitorious.org/oe-microblaze
-[3] http://pastebin.com/DpZFsCgb
-
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
 
