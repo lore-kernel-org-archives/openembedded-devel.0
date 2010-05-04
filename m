@@ -1,43 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O95Re-000261-Ha
+	(envelope-from <andrea.adami@gmail.com>) id 1O95hf-0005a6-08
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 01:53:04 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O95Nz-000482-8a from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 03 May 2010 16:49:15 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 3 May 2010 16:49:14 -0700
-Received: from 172.30.80.22 ([172.30.80.22]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon,  3 May 2010 23:49:14 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	03 May 2010 16:49:13 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 04 May 2010 02:09:35 +0200
+Received: by fxm11 with SMTP id 11so2572517fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 03 May 2010 17:05:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=EVaPxBryxl8gfkJZVzeFS+P2Y67ufPJyayIRpDkSfpg=;
+	b=Tz6UmWL8uDuVLx+bL8j2grKaXHqCs1gzNM4bAYFXAm4k8iEFVJF3HHhUUAiChVAUrE
+	XB4hOjZ9N1a59nA22jVluokjb3vQoFQGZopyAc7I3q5HjebD3NwUXIe6FWngyf/3k0If
+	sOKQ5cdmHaqLDhXTWzj7+hUt9ABJQtG8QROvU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=U/4sFR1tUpOK+3Z74I50nV+FsHejJKzeOrC1xwM3NWpooXPArYReyqgQWdf8G9rfyV
+	HPrV1pcdBZKvFROx3mjW4a0+J6FYt/pBrHUjP8eSRybZKgCwuzdZcXJ7o00dx1/lCIoZ
+	KiRuh0+vU0cYna3q/YoA8PTuOIu4WkwXtHA64=
+MIME-Version: 1.0
+Received: by 10.239.167.145 with SMTP id g17mr1501009hbe.123.1272931548794; 
+	Mon, 03 May 2010 17:05:48 -0700 (PDT)
+Received: by 10.239.192.77 with HTTP; Mon, 3 May 2010 17:05:48 -0700 (PDT)
+In-Reply-To: <1272911713-981-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1272911713-981-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 4 May 2010 02:05:48 +0200
+Message-ID: <w2yd1b08f941005031705v52bdf480yb321595b89c33736@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1270225589.7652.3.camel@trini-m4400>
-References: <E1NxKhE-0007AO-Bh@melo.openembedded.org>
-	<1270159668.6277.138.camel@trini-m4400> <hp471c$59h$1@dough.gmane.org>
-	<1270225589.7652.3.camel@trini-m4400>
-Organization: Mentor Graphics Corporation
-Date: Mon, 03 May 2010 16:49:13 -0700
-Message-ID: <1272930553.2931.33.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 03 May 2010 23:49:14.0991 (UTC)
-	FILETIME=[3CC8AFF0:01CAEB1B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Joshua Lock : relocatable: Class to post-process packages for relocatability
+Subject: Re: [PATCH] kexec-tools: update kexec-tools-2-klibc.patch for latest klibc/kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,59 +51,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 03 May 2010 23:53:04 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 04 May 2010 00:09:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2010-04-02 at 09:26 -0700, Tom Rini wrote:
-> On Fri, 2010-04-02 at 09:40 +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >=20
-> > On 02-04-10 00:07, Tom Rini wrote:
-> > > On Thu, 2010-04-01 at 13:44 +0000, git version control wrote:
-> > >> Module: openembedded.git
-> > >> Branch: rpurdie/work-in-progress
-> > >> Commit: 2365530efff7681fa34b2a466cf5f78acac10274
-> > >> URL:    http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcom=
-mit;h=3D2365530efff7681fa34b2a466cf5f78acac10274
-> > >>
-> > >> Author: Joshua Lock <josh@linux.intel.com>
-> > >> Date:   Wed Mar 31 11:41:58 2010 +0100
-> > >>
-> > >> relocatable: Class to post-process packages for relocatability
-> > > [snip]
-> > >> +def rpath_replace (path, d):
-> > >> +    bindirs =3D bb.data.expand("${bindir} ${sbindir} ${base_sbindir=
-} ${base_bindir} ${libdir} ${base_libdir} ${PREPROCESS_RELOCATE_DIRS}", d).=
-split()
-> > >=20
-> > > Is that last variable there to let recipes add non-standard locations=
- to
-> > > the search path?
-> > >=20
-> > > [snip]
-> > >> -       required_utilities =3D "patch help2man diffstat texi2html
-> > > makeinfo cvs svn bzip2 tar gzip gawk md5sum"
-> > >> +       required_utilities =3D "patch help2man diffstat texi2html
-> > > makeinfo cvs svn bzip2 tar gzip gawk md5sum chrpath"
-> > >=20
-> > > How hard would it be to add a chrpath-native recipe and maybe treat t=
-his
-> > > like we used to treat qemu?  Don't see it in yum on my rhel5 box.
-> > > Thanks.
-> >=20
-> > We already have that from our previous chrpath experiments :) See
-> > recipes/chrpath
->=20
-> Great, lets rework to use that version.
+built just fine with linux_2.6.26
 
-Did anything happen here?  I don't see it on the test branch and I'm
-asking because things like RHEL don't easily have chrpath available.
+thx
 
-
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Andrea
 
 
