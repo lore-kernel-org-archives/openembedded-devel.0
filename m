@@ -1,43 +1,28 @@
-Received: from mail-pz0-f191.google.com ([209.85.222.191])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1O9Kdq-0005xo-Kr
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 18:06:54 +0200
-Received: by pzk29 with SMTP id 29so1835837pzk.3
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 09:02:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Bz4G6h452t8ZEhEewkL/RCXMaTObtBPB7NltuQY9ES8=;
-	b=Epv/XrQ8YkxhwqAuT5vtBMRT0w7clx1Dsl1QRXAVCivMtS1+ll0k2dTKHkKgX280zm
-	/ePKhPSptFwC2nlFFDb2VCHNo1YJwMtgCzhw2nDT3bat5C0iN3PZx08RsO19VMjidz3x
-	gP9oODR/gh85W7PTl6cS1+6yUj3Evg88l+8V8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=jA7fhgtj5nVeEnGsEJG3M2F+/lJ3aiZbCQ41F/V0EH5LJ56TIuCAJQrD1Q9cCP1C3u
-	Y7pAoMRKINO6qmC7sBwRoyH/xOj7JblE6fK/ZGPteKHz0928JSNUVX8BiUwPCXNLvWTK
-	c4CrcSkTo8b/O3oVg+biOWiFd3W6j+4Mij5SU=
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1O9KzN-0001ck-An
+	for openembedded-devel@openembedded.org; Tue, 04 May 2010 18:29:46 +0200
+Received: from [192.168.2.149] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1O9L7P-0000u5-Pv
+	for openembedded-devel@openembedded.org; Tue, 04 May 2010 18:37:11 +0200
+Message-ID: <4BE04A63.9010002@kernelconcepts.de>
+Date: Tue, 04 May 2010 18:25:07 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.141.90.20 with SMTP id s20mr4540365rvl.190.1272988953794; Tue, 
-	04 May 2010 09:02:33 -0700 (PDT)
-Received: by 10.141.50.20 with HTTP; Tue, 4 May 2010 09:02:33 -0700 (PDT)
-In-Reply-To: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
-References: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
-Date: Tue, 4 May 2010 18:02:33 +0200
-Message-ID: <s2wc384c5ea1005040902v77808234je982a023baea89f4@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.191
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Build uncompressed kernel
+Subject: OpenEmbedded at Linuxtag 2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +36,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 16:07:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 May 2010 16:31:34 -0000
+X-List-Received-Date: Tue, 04 May 2010 16:31:34 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-Hello (again) Dmitry,
+Hi!
 
-On Tue, May 4, 2010 at 5:16 PM, Dmitry Vinokurov <df6.626@gmail.com> wrote:
-> about 0.8-0.9 seconds, and boot time is much more critical for my system
-> than image size, so even 0.5 seconds is really important. Bootloader is
+I have good news: We have been accepted for a project booth at LinuxTag again
+this year.
+This means that we have a booth at the largest Linux fair in Europe and the
+opportunity to get in touch with users, companies and other projects there.
+In contrast to last year I have asked for more space but I do not have any
+information about what we will get.
 
-Also, consider using execute-in-place (XIP) stuff, this removes the
-loading stage from Flash to RAM.
+LinuxTag takes place in Berlin, Germany from June 9 to 12.
 
-Also, consider using a DMA controller to copy from Flash to RAM,
-although not much around publicly for that.
+I can take care about organising this event for us and about some basic
+equipment and a few devices. It would be great to have some more of us there to
+man the booth. I can order exhibitor passes for us, so if you like to help
+please let me know soon: In contrast to last year we do not get a defined number
+of these but we have to register one by one by submitting the name.
 
-Regards,
+Greetings
+
+Florian
+
 -- 
-Leon
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
+
 
 
