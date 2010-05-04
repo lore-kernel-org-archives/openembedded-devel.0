@@ -1,43 +1,46 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from ey-out-1920.google.com ([74.125.78.149])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jan.paesmans@gmail.com>) id 1O9IaD-0002pv-Es
+	(envelope-from <tasskjapp@gmail.com>) id 1O9JKj-0000nG-9O
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 15:54:52 +0200
-Received: by fxm11 with SMTP id 11so3097894fxm.6
+	Tue, 04 May 2010 16:42:52 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so187010eyw.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 04 May 2010 06:50:59 -0700 (PDT)
+	Tue, 04 May 2010 07:39:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=LfUGTgrQEYWZzxv1GE9f6DirBnMcVE3nXxKoFzuDNe8=;
-	b=BR6dKUA6AjpAEdpul8yDx1vNnPAGLRB2qynmUQKA7cye0xeFmNKH95doU0X/c88U17
-	IybFPuYuTumZvZ90ONPUU90XUlqZ6bi+bq1D9+/kpv8GUQelBxfEXuDxLPBoGuLVNPJt
-	BVGC8u3WeFI7GCUxnOQdGOIyrrcb92tGOo9I0=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type;
+	bh=ixtSKGsJbsCYT8GU1uyNtEjwN3CNxlIg3e9ZryEtfOI=;
+	b=BvOKfqQGyCg6ZUHJHVT2jeYZG2m7xwEB+HSDneTaRngclKa2WUBypnPSEibR9yqH1M
+	nc0gUIyfh+kpoi1QcWaypHyx8ZpnnGaT5R/g+WNx708vX7LT5Ab0qeDXduQaLXFrXaBX
+	BHKNpDoEBYRhwZZq07k7FggKhtMD4QYlnUkNM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=message-id:date:from:user-agent:mime-version:to:subject
 	:content-type;
-	b=XNNvv5xchPh5PCIhDQ0J1petJy9I+63wo+Ygqo7ju2YB1cht0OHpiph6ASg7p3I03b
-	IWy0osXRWI29sLwYUmdHI5DPcJBdV03Qby9yB4oMvCrP9GYxowp23BbzURWQeEkJuA7w
-	YwcCJPGsgYrhYSU69k6GpLHsccRWt+vOTdjps=
+	b=F3z1R+5uS7QkjsxowbjYNwmX5FM2ChlImv8r/W85gMlxFw4HmthoWBsf4hVXGsyt5k
+	N/WC2uQ6hstpl/vxNMeXgN+vURaCpt/AE+bz1nrxayYvnO/cfjsUjUlbXw6CKpK97LBk
+	IXLm5x6vbFddmqmm1ODbFR0b31II607DyQHfc=
+Received: by 10.213.51.212 with SMTP id e20mr6446620ebg.85.1272983944089;
+	Tue, 04 May 2010 07:39:04 -0700 (PDT)
+Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id 14sm3797541ewy.14.2010.05.04.07.39.02
+	(version=SSLv3 cipher=RC4-MD5); Tue, 04 May 2010 07:39:03 -0700 (PDT)
+Message-ID: <4BE031F4.2070706@gmail.com>
+Date: Tue, 04 May 2010 16:40:52 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9pre) Gecko/20100217 Shredder/3.0.3pre
 MIME-Version: 1.0
-Received: by 10.102.170.16 with SMTP id s16mr10130091mue.16.1272981058787; 
-	Tue, 04 May 2010 06:50:58 -0700 (PDT)
-Received: by 10.103.247.13 with HTTP; Tue, 4 May 2010 06:50:58 -0700 (PDT)
-In-Reply-To: <4BE016F8.8030505@balister.org>
-References: <4BE016F8.8030505@balister.org>
-Date: Tue, 4 May 2010 15:50:58 +0200
-Message-ID: <g2i5725a2601005040650j7d76d003z2cd8e17c01c8bcf1@mail.gmail.com>
-From: Jan Paesmans <jan.paesmans@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: jan.paesmans@gmail.com
+X-SA-Exim-Connect-IP: 74.125.78.149
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Error building image
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: python-pyqt compile error with latest org.openembedded.dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +54,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 13:54:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 04 May 2010 14:42:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+My compile fails with this output:
 
-Seems like a python conversion error, python can't convert your string
-into a number.
-On a python command line on the same machine, could you try the following:
+http://pastebin.org/201169
 
-size = int("3016672617")
-print size
-
-Hopefully this should work on your python, if not there is something
-wrong with the python itself.
-
-I assume that the python is reading the size of some package and that
-this string representing the size is either wrongly formatted or too
-large.
-If I look at the log correctly, then the size value is some 3 GB. Is
-this correct?
-
-Hope this helps,
-
-Jan
-
-On Tue, May 4, 2010 at 2:45 PM, Philip Balister <philip@balister.org> wrote:
-> Does anyone know what is going wrong? It looks like so kind of uninitialized
-> variable.
->
-> http://tinderbox.openembedded.net/builds/70529/
->
-> Philip
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
+- Tasslehoff
 
