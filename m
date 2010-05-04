@@ -1,38 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1O9KTG-0003iS-8s
+	(envelope-from <leon.woestenberg@gmail.com>) id 1O9Kbs-00065H-Qq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 17:55:49 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1O9KPa-0000xJ-Fj from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 08:51:54 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 4 May 2010 08:51:54 -0700
-Received: from 172.30.80.24 ([172.30.80.24]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue,  4 May 2010 15:51:53 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	04 May 2010 08:51:52 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
+	Tue, 04 May 2010 18:04:57 +0200
+Received: by pxi14 with SMTP id 14so1754471pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 May 2010 09:00:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=hkgkqo18gCtFqA9FSC/rosTI/zSrGHt4lJtFW3rzWdI=;
+	b=bn6mFK4E3O8p7DENZnObckD/V9tMz5776zX+FaxPyRfYe2S+GhfryqfBrNUxulVh8I
+	KmxjxMw3/fpfeCvmpWNdTwkFo5avGkeXLi0nWO3E/EiU63OolZ+CnEEAxb958nI6K6fA
+	58vrhVkLxIaaSQ7w/uCmhhR6O3o6tqgAk2ntM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LiIReg5IdjcaudhYPilN69G/cbj0y7PSOwSm7uODqTFGKig4GncgX9kGKMTsV7Ezmq
+	Wz1OdlAZEWxg6xHOTdbvIdunFCSLszmtji4Fo1DNhNIvrIVJVA+XM3qJ12wC1fWEeYCM
+	DtcjkMgXwYI9D0SitUnD5hogzFlWSffhx86S0=
+MIME-Version: 1.0
+Received: by 10.140.58.15 with SMTP id g15mr4771521rva.96.1272988848503; Tue, 
+	04 May 2010 09:00:48 -0700 (PDT)
+Received: by 10.141.50.20 with HTTP; Tue, 4 May 2010 09:00:48 -0700 (PDT)
 In-Reply-To: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
 References: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 04 May 2010 08:51:52 -0700
-Message-ID: <1272988312.2533.7.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 04 May 2010 15:51:54.0268 (UTC)
-	FILETIME=[B7FEEDC0:01CAEBA1]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Tue, 4 May 2010 18:00:48 +0200
+Message-ID: <k2xc384c5ea1005040900u404c10fck4a305b1df5fe57ec@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Build uncompressed kernel
@@ -49,37 +51,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 15:55:54 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 04 May 2010 16:05:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, 2010-05-04 at 21:16 +0600, Dmitry Vinokurov wrote:
-> Hello,
->=20
+Hello Dmitry,
+
+On Tue, May 4, 2010 at 5:16 PM, Dmitry Vinokurov <df6.626@gmail.com> wrote:
+
 > Is there any way to cancel compression stage of kernel build and get
 > uncompressed uImage using OE? I've measured uncompressing time (using
-> stopwatch actually, so it could be +-0.1-0.2 seconds or even more) -- it'=
-s
+> stopwatch actually, so it could be +-0.1-0.2 seconds or even more) -- it's
 > about 0.8-0.9 seconds, and boot time is much more critical for my system
-> than image size, so even 0.5 seconds is really important. Bootloader is
-> Uboot, board is ARM9 Phytec lpc3250.
->=20
-> Also I've read http://elinux.org/About_Compression and it states about
-> decompress time about 50ms, so looks like either I should measure boot ti=
-me
-> using more precise tools (like from inside of Uboot) or my board is not s=
-o
-> fast as those which used by authors. Perhaps anybody could share their
-> experience in this issue, is it worth at all to try to build uncompressed
-> kernel?
 
-Since we don't use the kernel's uImage rule, do_uboot_mkimage in
-kernel.bbclass could be extended easily enough to check for a
-NO_KERNEL_COMPRESSION variable or whatever and do or not do the gzip
-(and pass the right arg to mkimage).
+Boot time is a combination of load time and decompression time.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Using a non-compressed kernel can increase boot time, so it's
+interesting to test this properly.
+
+Some public results show that using a fast decompression codec such as
+LZO results in the smallest overall boot time on some platforms.
+
+Your milage may vary, let us know what worked best for you, good luck,
+-- 
+Leon
 
 
