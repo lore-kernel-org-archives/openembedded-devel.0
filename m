@@ -1,27 +1,29 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1O9HZ9-0003QL-QE
+	(envelope-from <edpgc@nyro.co.uk>) id 1O9I4p-0006Pi-V1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 14:49:38 +0200
-Received: (qmail 2639 invoked by uid 1003); 4 May 2010 12:45:45 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 4 May 2010 12:45:45 -0000
-Message-ID: <4BE016F8.8030505@balister.org>
-Date: Tue, 04 May 2010 08:45:44 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+	Tue, 04 May 2010 15:22:22 +0200
+Received: by fxm11 with SMTP id 11so3064352fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 May 2010 06:18:33 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.239.167.71 with SMTP id f7mr703410hbe.117.1272979112769; Tue, 
+	04 May 2010 06:18:32 -0700 (PDT)
+Received: by 10.239.135.9 with HTTP; Tue, 4 May 2010 06:18:32 -0700 (PDT)
+Date: Tue, 4 May 2010 14:18:32 +0100
+Message-ID: <AANLkTimo0LARF-gAcmjEA9a3tUeJVEMY0Kq136TfBn88@mail.gmail.com>
+From: Edward Cooper <edpgc@nyro.co.uk>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: edpgc@nyro.co.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Error building image
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Mono on ARMV5TE - AT91SAM9260
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,15 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 12:49:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 04 May 2010 13:22:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Does anyone know what is going wrong? It looks like so kind of 
-uninitialized variable.
+Hi all
 
-http://tinderbox.openembedded.net/builds/70529/
+First post... I have succesfully run through and built Angstrom for my
+AT91SAM9260-EK target.  Really pleased with how it works and that I can
+build .ipk and install them using opkg from a local build.  However I am
+stumped with Mono, I went through the bitbake process "bitbake mono" and got
+the appropriate .ipk's, these appear to install fine on the target.  However
+running even an hello world example (mono hello.exe) results in an immediate
+"Segmentation Fault" error message and no other output.
 
-Philip
+From my reasearch I believe this might by due to OABI vs EABI and how the
+kernel was compiled does that make sense or am I looking in the wrong place!
 
+Also how do I make bitbake build a different version of something (the
+recipe's are there)?
+
+Thanks for any help, new to embedded linux so sorry for any stupid
+questions.
+
+Regards
+Ed Cooper
 
