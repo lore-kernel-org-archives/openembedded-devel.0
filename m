@@ -1,30 +1,44 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1O9PIN-0001Yu-Kk
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1O9XQs-0007jB-Fo
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 04 May 2010 23:04:49 +0200
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 909E64B015F;
-	Tue,  4 May 2010 23:01:00 +0200 (CEST)
-Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
-	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP;
-	Tue,  4 May 2010 23:00:58 +0200 (CEST)
-From: Eric Benard <eric@eukrea.com>
+	Wed, 05 May 2010 07:46:08 +0200
+Received: by vws14 with SMTP id 14so400099vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 04 May 2010 22:42:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=3C9hZFH9iVbAgnOQS7DZkesmsDaLGbr5v2jyzdNnKao=;
+	b=BZ4ljI3e24YceIkrOXRV0d72nt1hX/q4LtLqvLoU7CsiJ4bxhQa+MpCGKjcc+Xk5el
+	TAXWWn5Q6ypvrWZsbP9gjrd629x+FhxwUHiCqHQk/Y9yqjyiyFm3DoV2GS5EVWmo/tCr
+	esTDT+By95DKW/DcZvGG0G/pJoliAxduEucig=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=AyzKextRqHM+5qMZyV3r9g1bYNoJF6FpjHwNzlzlVd7CQvTgzAIrfvm2k8Sud2FC2n
+	TjvfnQthyUUwiuG3LRyQIcYiq4CAzagcAk+Ttn9qC+4ZuUaAwF/lIFScU7m1zcN+AvIx
+	1grHzktabLogX7hbkqrbEXIjGmNe8Ioi9Q+Rg=
+MIME-Version: 1.0
+Received: by 10.220.121.229 with SMTP id i37mr1469989vcr.237.1273038138666; 
+	Tue, 04 May 2010 22:42:18 -0700 (PDT)
+Received: by 10.220.161.16 with HTTP; Tue, 4 May 2010 22:42:18 -0700 (PDT)
+In-Reply-To: <s2wc384c5ea1005040902v77808234je982a023baea89f4@mail.gmail.com>
+References: <p2rde65d1f11005040816q3d4b1201y9eac356634db14fa@mail.gmail.com>
+	<s2wc384c5ea1005040902v77808234je982a023baea89f4@mail.gmail.com>
+Date: Wed, 5 May 2010 07:42:18 +0200
+Message-ID: <z2pac9c93b11005042242lf7f5b007s6b7abe11ebe2697c@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  4 May 2010 23:00:26 +0200
-Message-Id: <1273006826-7168-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1273004809-24230-2-git-send-email-eric@eukrea.com>
-References: <1273004809-24230-2-git-send-email-eric@eukrea.com>
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] python-m2crypto: add native
+Subject: Re: Build uncompressed kernel
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +52,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 04 May 2010 21:04:50 -0000
+X-List-Received-Date: Wed, 05 May 2010 05:46:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-- this package is needed to compile crda
+2010/5/4 Leon Woestenberg <leon.woestenberg@gmail.com>:
+> Hello (again) Dmitry,
+>
+> On Tue, May 4, 2010 at 5:16 PM, Dmitry Vinokurov <df6.626@gmail.com> wrote:
+>> about 0.8-0.9 seconds, and boot time is much more critical for my system
+>> than image size, so even 0.5 seconds is really important. Bootloader is
+>
+> Also, consider using execute-in-place (XIP) stuff, this removes the
+> loading stage from Flash to RAM.
 
-Signed-off-by: Eric Benard <eric@eukrea.com>
----
- recipes/python/python-m2crypto_0.18.2.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+Note that this assumes that the data is in NOR flash. XIP is not
+possible with NAND.
+NOR is slower than RAM but XIP avoids the decompression and only loads
+what is really needed. so in the end most likely you'll win when it
+comes to boottime.
+There are several pages on elinux.org on boot time improvement.
 
-diff --git a/recipes/python/python-m2crypto_0.18.2.bb b/recipes/python/python-m2crypto_0.18.2.bb
-index 7a2af1e..74a212d 100644
---- a/recipes/python/python-m2crypto_0.18.2.bb
-+++ b/recipes/python/python-m2crypto_0.18.2.bb
-@@ -20,3 +20,6 @@ export STAGING_LIBDIR
- 
- SRC_URI[md5sum] = "445dce53fcfc7ec8f6fd31f54da8a067"
- SRC_URI[sha256sum] = "62ed44c8b2d392bdc757981ac37f05d808a0d917e4f9d95de2fbf3c2bdad41a7"
-+
-+NATIVE_INSTALL_WORKS = "1"
-+BBCLASSEXTEND = "native"
--- 
-1.6.3.3
-
+Frans
 
 
