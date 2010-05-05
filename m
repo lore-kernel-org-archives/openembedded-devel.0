@@ -1,43 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9aDf-0000nC-N1 for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 10:44:43 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9aA0-00041i-Nt for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 10:40:52 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 10:40:52 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sledz@dresearch.de>) id 1O9b5C-0000k3-5Z
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 May 2010 11:39:59 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id E193F491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 10:40:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 05 May 2010 10:40:40 +0200
-Message-ID: <hrrau9$gr$1@dough.gmane.org>
-References: <1273041286-632-1-git-send-email-hvontres@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <1273041286-632-1-git-send-email-hvontres@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Wed,  5 May 2010 11:36:12 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 5 May 2010 11:37:12 +0200
+Message-ID: <4BE13C20.1010902@dresearch.de>
+Date: Wed, 05 May 2010 11:36:32 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 05 May 2010 09:37:12.0152 (UTC)
+	FILETIME=[8A060580:01CAEC36]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libtorrent / rtorrent: add latest upstream versions and fix crash on nslu2
+Subject: linux vs. linux-libc-headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,44 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2010 08:44:43 -0000
+X-List-Received-Date: Wed, 05 May 2010 09:39:59 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+We're using Angstrom distro at hipox machine.
 
-On 05-05-10 08:34, Henry von Tresckow wrote:
-> - added version 0.12.6 of libtorrent and 0.8.6 of rtorrent
-> - added FULL_OPTIMIZATION_nslu2 ="-mcpu=xscale -fexpensive-optimizations -frename-registers -O2 -fpermissive -fno-inline"
+For this machine we need to use kernel version 2.6.24 (selected
+by DEFAULT_PREFERENCE_hipox =3D "1" in linux_2.6.24.bb) because of
+some special machine/driver support.
 
-It would be better to stuff that in your $DISTRO as:
+Angstrom uses linux-libc-headers version 2.6.31.
 
-FULL_OPTIMIZATION_pn-rtorrent = "-mcpu=xscale -fexpensive-optimizations
-- -frename-registers -O2 -fpermissive -fno-inline"
+This results in some dirty problems, e.g. the headers report the
+existence of inotify_init1 (introduced with 2.6.27) but it is not
+available in 2.6.24. :(
 
-or
+It seem's not to be possible to use DEFAULT_PREFERENCE_hipox in the
+linux-libc-headers recipes. So what's the right way to handle this?
+Something like PREFERRED_VERSION_linux-libc-headers_hipox =3D "2.6.24"
+in angstrom-2008.1.conf?
 
-FULL_OPTIMIZATION_pn-rtorrent_nslu2 = "-mcpu=xscale
-- -fexpensive-optimizations -frename-registers -O2 -fpermissive -fno-inline"
+Steffen
 
-See the perl example in
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/distro/include/angstrom-glibc.inc
-
-And "-fexpensive-optimizations" should only be used after manually
-verifying the performance increase, on ARM it usually doesn't work as
-intended.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL4S8IMkyGM64RGpERAsQqAJ48FKOGVu0W2fWNjoj9nqabFo+dnwCeNqsa
-d7h1UrgBA+KqUsQziN40OYY=
-=U5hG
------END PGP SIGNATURE-----
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
 
 
