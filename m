@@ -1,40 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9ieR-0001VU-Kj for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 19:44:52 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9iak-0000qB-FQ for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 19:41:02 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 19:41:02 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <ashcharles@gmail.com>) id 1O9jWr-0000kT-F9
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 05 May 2010 20:41:06 +0200
+Received: by pvg4 with SMTP id 4so365934pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 19:41:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 05 May 2010 19:40:54 +0200
-Message-ID: <hrsaj6$1rt$1@dough.gmane.org>
-References: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+	Wed, 05 May 2010 11:37:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=ZHSWuqQ3SlzwSfboRNT0/VKGYFkfDyHTVPw9AbY9c0Y=;
+	b=OnQvq+fsO2p4s7sXF9sgJIKpm58NXEGvXXRRJF8aF1bCdP5RznDasAycImsXhX73eL
+	v+SB7WO8o/QABBnKJKFbPLBL+DMvHQiv3m3IR+tIHXUxTmPqtq3X+vT3a2FVc80MPOke
+	B6YOhAh7Vax1FK8fuIryCNEMp4gxWF74UC61M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=OiES6fa4v2fLExUkMBfWGSUNKDyTJXTI1Gm+GVWebgQQvxVLD2OWFCjrSYNisUs21H
+	S/Y/iP0Tw66YgC0/ER4znK9AGpc2tcIermgexhM+ryKE688pMdU2OKiSB1sfPSgnziMs
+	whZsu7Zxp4QunB316gf9iM3H7tFed8QgX8fPg=
+Received: by 10.141.214.15 with SMTP id r15mr5921521rvq.189.1273084636744; 
+	Wed, 05 May 2010 11:37:16 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.140.208.6 with HTTP; Wed, 5 May 2010 11:36:56 -0700 (PDT)
 In-Reply-To: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Wed, 5 May 2010 11:36:56 -0700
+Message-ID: <g2ubd4a003f1005051136wc9ca8d59v2a35fa08669f761d@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: ashcharles@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: How to modify omap3-console-image recipe to modify /etc/inittab
@@ -51,31 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2010 17:44:52 -0000
+X-List-Received-Date: Wed, 05 May 2010 18:41:06 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, May 5, 2010 at 9:28 AM, Elvis Dowson <elvis.dowson@mac.com> wrote:
+> =C2=A0How can I modify the omap3-console-image recipe to modify the /etc/=
+inittab file from
+>
+> c1:12345:respawn:/sbin/agetty 38400 tty1 linux
+> to
+>
+> c1:12345:respawn:/sbin/agetty -n -l /usr/sbin/autologin 38400 tty1 linux
+>
+> after the rootfs is fully created?
 
-On 05-05-10 18:28, Elvis Dowson wrote:
-> Hi,
->       How can I modify the omap3-console-image recipe 
+I made an addition to my autologin recipe that does this:
 
-There's no such recipe in OE. Without the recipe I can't really say what
-the best way to do it is. I think patching sysvinit would be the best
-option, otherwise you'll loose the changes on package upgrades
+pkg_postinst_${PN} () {
+  sed 's_S:2345:respawn:/sbin/getty_S:2345:respawn:/sbin/getty -n -l
+/usr/bin/autologin_' /etc/inittab > inittab.tmp
+  mv inittab.tmp /etc/inittab
+  passwd -d root
+  echo 'NOTE: remove the password from the root account'
+}
 
-regards,
+pkg_prerm_${PN} () {
+  sed 's_ -n -l /usr/bin/autologin__' /etc/inittab > inittab.tmp
+  mv inittab.tmp /etc/inittab
+  echo 'NOTE: there is still no password on the root account'
+}
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Does this make sense?  I don't know if this is the ideal way to do it
+but it seems to work for me.
 
-iD8DBQFL4a2mMkyGM64RGpERAlZIAJ9W3acFGhZSLvlayvgLua5a4uePAACfVwCS
-Ke4AUh2NFtscc+IUX8pujHM=
-=z3Nr
------END PGP SIGNATURE-----
-
+-Ash
 
 
