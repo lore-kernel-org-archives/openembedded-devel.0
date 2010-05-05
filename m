@@ -1,33 +1,33 @@
 Received: from mail-qy0-f181.google.com ([209.85.221.181])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1O9ZHM-0003e1-VM
+	(envelope-from <hvontres@gmail.com>) id 1O9ZKR-0003oK-Mv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 09:44:27 +0200
-Received: by qyk11 with SMTP id 11so6597646qyk.13
+	Wed, 05 May 2010 09:47:36 +0200
+Received: by qyk11 with SMTP id 11so6600309qyk.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 00:40:37 -0700 (PDT)
+	Wed, 05 May 2010 00:43:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=OH2vRdu2rZt414KZTJAsXPG587C/WO/NXlJPrPYgV1E=;
-	b=nWANuCoZhQA5CBhEFBWXHymfRAc2ZR4SMCnmLPfEjRYzHvCiI/zV+5UNpjvHYtLa2d
-	mNR77EMJ6iHMNcGESG1EuMZmKeVRlAplM5aVlFFkwJLkXu/Jf49Xp52QGF6aaycKtBBL
-	e4AwBNHpufgyfZbkiGnXBj9kh1CvXKicpYrm0=
+	bh=xz1dTREcVxzP7yzAGQRYhTnTN/X4lJ923uAyX98jxYU=;
+	b=nCIB6zYOlof3RWt61Z/3yhm6pcME8mlwdx+qQvXZjzu6xr8e911pHnWGC1kC12L7vl
+	beQplFVgKiD0qrlaGfVQCSWas6G2f6mXu+VlkDq7vVUvGEeEpVH41nltBt84bKCnXOsB
+	KybmFGGQhVdOhr+9Y73WZSRiKDzDGFE4Snl5s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=tcVGfDm+tTyRSYbzsZ2pKTAIEgox75nqVT+TtmQD9cFov6VVfj6Ffu8CCTz4T1K4F1
-	3BM7dgJlJ1MyyH9X7F/i4lpTc/YrakHRe8pD6Yy/K4RfmKxDmkjgRBmFVlZ3A94dMcTk
-	6hfgtnndpGPgNfFKADiCYpfrgX8sonONGXsCg=
+	b=rg/4eRE1uyxLWQuoO5jYRVv0/a2fvm0iLLyCddjIXjogDe4TIRXlm9u05VyfYz1KF8
+	gciPJxIsrQh7f/b0VO0/VWTkkNtfHGpNYAKJRq6RnwyxnnMYMR04vG4F3EmpxWspQDS6
+	WSh1jlNw1Nw/zpFuo/jFNF7uWulwgWUfA5K8s=
 MIME-Version: 1.0
-Received: by 10.229.235.202 with SMTP id kh10mr3967103qcb.78.1273045237110; 
-	Wed, 05 May 2010 00:40:37 -0700 (PDT)
-Received: by 10.229.24.149 with HTTP; Wed, 5 May 2010 00:40:37 -0700 (PDT)
-In-Reply-To: <r2qfca63bcf1005050029wc4a8e1c9l64d6676ab012bd5c@mail.gmail.com>
+Received: by 10.224.107.65 with SMTP id a1mr6094940qap.185.1273045426685; Wed, 
+	05 May 2010 00:43:46 -0700 (PDT)
+Received: by 10.229.24.149 with HTTP; Wed, 5 May 2010 00:43:46 -0700 (PDT)
+In-Reply-To: <20100505064527.GA2444@xora-desktop.xora.org.uk>
 References: <1273041286-632-1-git-send-email-hvontres@gmail.com>
-	<r2qfca63bcf1005050029wc4a8e1c9l64d6676ab012bd5c@mail.gmail.com>
-Date: Wed, 5 May 2010 00:40:37 -0700
-Message-ID: <y2ka7f8874a1005050040xeb4266a8me6d28110769237b7@mail.gmail.com>
+	<20100505064527.GA2444@xora-desktop.xora.org.uk>
+Date: Wed, 5 May 2010 00:43:46 -0700
+Message-ID: <l2ka7f8874a1005050043i52ed483fl629d6eb71326ba@mail.gmail.com>
 From: Hans Henry von Tresckow <hvontres@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.221.181
@@ -53,67 +53,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2010 07:44:27 -0000
+X-List-Received-Date: Wed, 05 May 2010 07:47:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, May 5, 2010 at 12:29 AM, Michael Lippautz <
-michael.lippautz@gmail.com> wrote:
+On Tue, May 4, 2010 at 11:45 PM, Graeme Gregory <dp@xora.org.uk> wrote:
 
-> > diff --git a/recipes/libtorrent/libtorrent_0.12.6.bbb/recipes/libtorrent/
-> libtorrent_0.12.6.bb
-> > new file mode 100644
-> > index 0000000..075ce40
-> > --- /dev/null
-> > +++ b/recipes/libtorrent/libtorrent_0.12.6.bb
-> > @@ -0,0 +1,22 @@
-> > +DESCRIPTION = "library implementing the bittorrent protocol"
-> > +HOMEPAGE = "http://libtorrent.rakshasa.no"
-> > +SECTION = "libs/network"
-> > +LICENSE = "GPL"
-> > +DEPENDS = "libsigc++-2.0 openssl"
-> > +
-> > +SRC_URI = "
-> http://libtorrent.rakshasa.no/downloads/libtorrent-${PV}.tar.gz<http://libtorrent.rakshasa.no/downloads/libtorrent-$%7BPV%7D.tar.gz>
-> "
-> > +PR = "r0.1"
-> > +
-> > +inherit autotools pkgconfig
-> > +
-> > +EXTRA_OECONF = "--enable-aligned"
-> > +
-> > +FULL_OPTIMIZATION_nslu2 ="-mcpu=xscale -fexpensive-optimizations
-> -frename-registers -O2 -fpermissive -fno-inline"
-> > +
-> > +do_stage() {
-> > +       autotools_stage_all
+> You need to add a PACKAGE_ARCH_nlus2 = "${MACHINE_ARCH}" to this as its
+> now nslu2 specific.
 >
-> 1) No need for further dividing PR into subnumbers, r0 is sufficient.
+> Graeme
 >
-
-Thanks for catching that... left over from testing...
-
 >
-> 2) On .dev your do not need to stage (mostly) anymore. If autotools
-> installs everything correctly you can just dismiss the do_stage()
-> routine. If something is missing, then install it via
-> do_install_append in the appropriate folder and OE will determine that
-> it needs to be staged. depending on the files' paths.
->
+How should I apply the optimization only for nslu2 and other xscale
+machines? To make matters even more complicated, it seems that gcc > 4.3.0
+doesn't need this workaround.
 
-Ok. I just copied the older revisinons. I'll chek on that tomorrow
-
->
-> Regards,
-> Michael
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
+Any pointers would be appreciated. Also, should I fix up the older revisions
+as well or just the newest version?
 -- 
 Henry von Tresckow (hvontres)
 
