@@ -1,33 +1,43 @@
-Received: from asmtpout028.mac.com ([17.148.16.103])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1O9iT2-00062H-Jm
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 19:33:26 +0200
-MIME-version: 1.0
-Received: from [87.201.169.136] by asmtp028.mac.com
-	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
-	32bit)) with ESMTPSA id <0L1Y00LHBGFNCX50@asmtp028.mac.com> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	05 May 2010 09:28:46 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=5.0.0-1004140000 definitions=main-1005050112
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Wed, 05 May 2010 20:28:32 +0400
-Message-id: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
-To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1078)
-X-SA-Exim-Connect-IP: 17.148.16.103
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O9ieR-0001VU-Kj for openembedded-devel@lists.openembedded.org;
+	Wed, 05 May 2010 19:44:52 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1O9iak-0000qB-FQ for openembedded-devel@lists.openembedded.org;
+	Wed, 05 May 2010 19:41:02 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 May 2010 19:41:02 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 05 May 2010 19:41:02 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 05 May 2010 19:40:54 +0200
+Message-ID: <hrsaj6$1rt$1@dough.gmane.org>
+References: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+In-Reply-To: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: How to modify omap3-console-image recipe to modify /etc/inittab
+Subject: Re: How to modify omap3-console-image recipe to modify /etc/inittab
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2010 17:33:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Wed, 05 May 2010 17:44:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
-      How can I modify the omap3-console-image recipe to modify the /etc/inittab file from 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-c1:12345:respawn:/sbin/agetty 38400 tty1 linux
-to
+On 05-05-10 18:28, Elvis Dowson wrote:
+> Hi,
+>       How can I modify the omap3-console-image recipe 
 
-c1:12345:respawn:/sbin/agetty -n -l /usr/sbin/autologin 38400 tty1 linux
+There's no such recipe in OE. Without the recipe I can't really say what
+the best way to do it is. I think patching sysvinit would be the best
+option, otherwise you'll loose the changes on package upgrades
 
-after the rootfs is fully created? 
+regards,
 
-Best regards,
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Elvis
+iD8DBQFL4a2mMkyGM64RGpERAlZIAJ9W3acFGhZSLvlayvgLua5a4uePAACfVwCS
+Ke4AUh2NFtscc+IUX8pujHM=
+=z3Nr
+-----END PGP SIGNATURE-----
 
 
 
