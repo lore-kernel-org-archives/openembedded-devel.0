@@ -1,44 +1,43 @@
-Received: from mail-qy0-f181.google.com ([209.85.221.181])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1O9ZKR-0003oK-Mv
+	(envelope-from <dp@xora.org.uk>) id 1O9ZVR-0004p0-4S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 09:47:36 +0200
-Received: by qyk11 with SMTP id 11so6600309qyk.13
+	Wed, 05 May 2010 09:58:58 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id C1E21A43E4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 00:43:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=xz1dTREcVxzP7yzAGQRYhTnTN/X4lJ923uAyX98jxYU=;
-	b=nCIB6zYOlof3RWt61Z/3yhm6pcME8mlwdx+qQvXZjzu6xr8e911pHnWGC1kC12L7vl
-	beQplFVgKiD0qrlaGfVQCSWas6G2f6mXu+VlkDq7vVUvGEeEpVH41nltBt84bKCnXOsB
-	KybmFGGQhVdOhr+9Y73WZSRiKDzDGFE4Snl5s=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=rg/4eRE1uyxLWQuoO5jYRVv0/a2fvm0iLLyCddjIXjogDe4TIRXlm9u05VyfYz1KF8
-	gciPJxIsrQh7f/b0VO0/VWTkkNtfHGpNYAKJRq6RnwyxnnMYMR04vG4F3EmpxWspQDS6
-	WSh1jlNw1Nw/zpFuo/jFNF7uWulwgWUfA5K8s=
-MIME-Version: 1.0
-Received: by 10.224.107.65 with SMTP id a1mr6094940qap.185.1273045426685; Wed, 
-	05 May 2010 00:43:46 -0700 (PDT)
-Received: by 10.229.24.149 with HTTP; Wed, 5 May 2010 00:43:46 -0700 (PDT)
-In-Reply-To: <20100505064527.GA2444@xora-desktop.xora.org.uk>
+	Wed,  5 May 2010 08:55:10 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id VjPk-flhB+XW
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 May 2010 08:55:10 +0100 (BST)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1997EA43E3
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  5 May 2010 08:55:10 +0100 (BST)
+Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
+	id D6D2A20DB9; Wed,  5 May 2010 08:54:58 +0100 (BST)
+Date: Wed, 5 May 2010 08:54:58 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100505075458.GB2444@xora-desktop.xora.org.uk>
 References: <1273041286-632-1-git-send-email-hvontres@gmail.com>
 	<20100505064527.GA2444@xora-desktop.xora.org.uk>
-Date: Wed, 5 May 2010 00:43:46 -0700
-Message-ID: <l2ka7f8874a1005050043i52ed483fl629d6eb71326ba@mail.gmail.com>
-From: Hans Henry von Tresckow <hvontres@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.181
-X-SA-Exim-Mail-From: hvontres@gmail.com
+	<l2ka7f8874a1005050043i52ed483fl629d6eb71326ba@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <l2ka7f8874a1005050043i52ed483fl629d6eb71326ba@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-08-17)
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] libtorrent / rtorrent: add latest upstream versions and fix crash on nslu2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -53,23 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2010 07:47:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 05 May 2010 07:58:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, May 4, 2010 at 11:45 PM, Graeme Gregory <dp@xora.org.uk> wrote:
+On Wed, May 05, 2010 at 12:43:46AM -0700, Hans Henry von Tresckow wrote:
+> On Tue, May 4, 2010 at 11:45 PM, Graeme Gregory <dp@xora.org.uk> wrote:
+> 
+> > You need to add a PACKAGE_ARCH_nlus2 = "${MACHINE_ARCH}" to this as its
+> > now nslu2 specific.
+> >
+> > Graeme
+> >
+> >
+> How should I apply the optimization only for nslu2 and other xscale
+> machines? To make matters even more complicated, it seems that gcc > 4.3.0
+> doesn't need this workaround.
+> 
+> Any pointers would be appreciated. Also, should I fix up the older revisions
+> as well or just the newest version?
 
-> You need to add a PACKAGE_ARCH_nlus2 = "${MACHINE_ARCH}" to this as its
-> now nslu2 specific.
->
-> Graeme
->
->
-How should I apply the optimization only for nslu2 and other xscale
-machines? To make matters even more complicated, it seems that gcc > 4.3.0
-doesn't need this workaround.
+Is this some recent bug, back in my zaurus days I never had a problem
+running rtorrent without special flags?
 
-Any pointers would be appreciated. Also, should I fix up the older revisions
-as well or just the newest version?
--- 
-Henry von Tresckow (hvontres)
+In the Angstrom distribution we had to add CPU class support for some things
+so we can for example add the same optimisations to all omap3 without
+naming each machine individually. I also added this years ago to openmoko
+distribution. Its something someone needs to get right for inclusion into
+OE wholescale!
+
+Graeme
+
+
 
