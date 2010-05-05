@@ -1,35 +1,33 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from asmtpout028.mac.com ([17.148.16.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1O9fzJ-000661-2l
+	(envelope-from <elvis.dowson@mac.com>) id 1O9iT2-00062H-Jm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 05 May 2010 16:54:31 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 45265491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  5 May 2010 16:50:27 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Wed, 5 May 2010 16:51:27 +0200
-Message-ID: <4BE185C7.50305@dresearch.de>
-Date: Wed, 05 May 2010 16:50:47 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4BE13C20.1010902@dresearch.de>	<20100505094242.GF2444@xora-desktop.xora.org.uk>	<4BE141CA.30904@dresearch.de>
-	<1273053926.18119.331.camel@mill.internal.reciva.com>
-In-Reply-To: <1273053926.18119.331.camel@mill.internal.reciva.com>
-X-OriginalArrivalTime: 05 May 2010 14:51:27.0121 (UTC)
-	FILETIME=[7075F810:01CAEC62]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+	Wed, 05 May 2010 19:33:26 +0200
+MIME-version: 1.0
+Received: from [87.201.169.136] by asmtp028.mac.com
+	(Sun Java(tm) System Messaging Server 6.3-8.01 (built Dec 16 2008;
+	32bit)) with ESMTPSA id <0L1Y00LHBGFNCX50@asmtp028.mac.com> for
+	openembedded-devel@lists.openembedded.org; Wed,
+	05 May 2010 09:28:46 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=5.0.0-1004140000 definitions=main-1005050112
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Wed, 05 May 2010 20:28:32 +0400
+Message-id: <2D3EFC75-3DFC-492D-A230-ED263BB96281@mac.com>
+To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 17.148.16.103
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: linux vs. linux-libc-headers?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: How to modify omap3-console-image recipe to modify /etc/inittab
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,41 +41,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 05 May 2010 14:54:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 05 May 2010 17:33:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7BIT
 
-Am 05.05.2010 12:05, wrote Phil Blundell:
->>> I thought glibc was supposed to gracefully fall back on missing sysca=
-lls?
->>
->> May be, but not satisfactorily.
->>
->> E.g. we've seen that g_file_monitor (from glib) falls back to
->> polling each second instead of using inotify_init.
->=20
-> That sounds like it's just a bug in glibc.  I guess you should fix it
-> there.
+Hi,
+      How can I modify the omap3-console-image recipe to modify the /etc/inittab file from 
 
-As mentioned before that's just one problem and we have some more.
-I do not have time and knowledge to hunt and fix them all.
+c1:12345:respawn:/sbin/agetty 38400 tty1 linux
+to
 
-So for the moment i would prefer to work with linux-libc-headers
-of version 2.6.24.
+c1:12345:respawn:/sbin/agetty -n -l /usr/sbin/autologin 38400 tty1 linux
 
-But what's the recommended way to select them in OE/Angstrom?
+after the rootfs is fully created? 
 
-Steffen
+Best regards,
 
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+Elvis
 
 
 
