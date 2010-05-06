@@ -1,33 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9uMb-0001DK-My for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 08:15:14 +0200
+	id 1O9uQ6-0001Qd-6W for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 08:18:50 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9uIx-0000uN-Lc for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 08:11:27 +0200
+	id 1O9uMR-0001zi-Ss for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 08:15:03 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 08:11:27 +0200
+	Thu, 06 May 2010 08:15:03 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 08:11:27 +0200
+	Thu, 06 May 2010 08:15:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 06 May 2010 08:11:19 +0200
-Message-ID: <hrtmi7$bp1$1@dough.gmane.org>
-References: <1273102999.5743.49.camel@rex>
+Date: Thu, 06 May 2010 08:13:53 +0200
+Message-ID: <hrtmn1$bp1$3@dough.gmane.org>
+References: <4BE25BFD.2090204@dresearch.de>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <1273102999.5743.49.camel@rex>
+In-Reply-To: <4BE25BFD.2090204@dresearch.de>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -37,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The rpurdie/work-in-progress branch has been merged
+Subject: Re: All the syslogs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 06:15:14 -0000
+X-List-Received-Date: Thu, 06 May 2010 06:18:50 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 06-05-10 01:43, Richard Purdie wrote:
+On 06-05-10 08:04, Steffen Sledz wrote:
+> Since i added the recipe for rsyslog we have three different
+> syslog implemenations in OE: (busybox-)syslog, syslog-ng, and
+> rsyslog.
+> 
+> At the moment syslog-ng and rsyslog have pkg_postinst and pkg_postrm
+> stages which use update-rc.d to deinstall/reinstall init.d links
+> for (busybox-)syslog which is default.
+> 
+> This seems to be a bad hack for me. I believe there must be better
+> solutions for this situation. But I'm not sure which is the preferred.
+> Is this a case for alternatives? Or something like
+> DISTRO_SYSLOG_DAEMON? Or something else?
 
-> Obviously these don't appear once gettext has been built as a dependency
-> for any one thing. There are warnings about missing inherits in the QA
-> tests though. Poky has these as errors, I don't think OE is quite ready
-> for that yet but it would be something to start working on.
-
-You do know that only angstrom cares about QA, right? It's the only
-distro in OE that is using insane.bbclass...
-Maybe the TSC can make that class mandatory :)
+DISTRO_* is the wrong namespace for that, it's a per-image choice. You
+could have a look at using u-a to changing initscripts and binaries.
 
 regards,
 
@@ -75,9 +81,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL4l2HMkyGM64RGpERAq9TAKC5T7006+TYFcDJ1K+FmsdaxvHVAACfUhxy
-7vIvsCN1wqzG+ner/9tZmi0=
-=PlqM
+iD8DBQFL4l4hMkyGM64RGpERAmQGAKCnBaQCn4e8UJw7I4M+pbIJKVDUPACfa+fR
+WHGvccUmsPf+1TDjDjiKtJ0=
+=U2rv
 -----END PGP SIGNATURE-----
 
 
