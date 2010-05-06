@@ -1,45 +1,32 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <yenchengwang@gmail.com>) id 1O9rgV-0008M5-Kg
+	(envelope-from <sledz@dresearch.de>) id 1O9uFr-0000zS-1Y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 05:23:40 +0200
-Received: by pxi14 with SMTP id 14so2598505pxi.6
+	Thu, 06 May 2010 08:08:15 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 48194491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 05 May 2010 20:19:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=TD4N13BbY71Z/k8GTc429get/RzQgGznV8w8gkMzV/s=;
-	b=nvo/lKc4N4BqVBtI5vZk8RDalwjtRz/Z9yOgHA3SirSzhtjcvHEy9Io48FzarI71wX
-	KrIGtALZSF2+YjCXq4rubSEWeOwc67GoFYGxiv5JNYx+FbV2yf2HxPulFzD3P3zshM6b
-	lQbVrFtcdrgz4qP5L+srxUkY4wAtp5y370eus=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=iHBKzDwbsKe/fpHTdzaC1OMHxx69eYZxM0Ehug/XSo8F8GLj2pCbrCYuvkPfutrz1o
-	Lc/0qNuJ5wk8K7PO1ZVNP9gxV4o6y4IryCxeUdCpG5grbAn+FWDPsYFyBvtpRmrETzyU
-	33jFrU9Zf5vVFcRYUtSJ5sds+uaefq4JcUc+U=
+	Thu,  6 May 2010 08:04:28 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 6 May 2010 08:05:30 +0200
+Message-ID: <4BE25BFD.2090204@dresearch.de>
+Date: Thu, 06 May 2010 08:04:45 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.140.252.7 with SMTP id z7mr6402849rvh.186.1273115986564; Wed, 
-	05 May 2010 20:19:46 -0700 (PDT)
-Received: by 10.141.22.11 with HTTP; Wed, 5 May 2010 20:19:46 -0700 (PDT)
-In-Reply-To: <p2lad875cab1005052017k622928e3jabfe4ea684e4ef62@mail.gmail.com>
-References: <mailman.6069.1273115899.24517.openembedded-devel@lists.openembedded.org>
-	<p2lad875cab1005052017k622928e3jabfe4ea684e4ef62@mail.gmail.com>
-Date: Thu, 6 May 2010 11:19:46 +0800
-Message-ID: <l2pad875cab1005052019o60a63221ya1727def61751e98@mail.gmail.com>
-From: yenchengwang <yenchengwang@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: yenchengwang@gmail.com
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 06 May 2010 06:05:30.0089 (UTC)
+	FILETIME=[216AC590:01CAECE2]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: create ipk failed...
+Subject: All the syslogs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,85 +40,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 03:23:48 -0000
+X-List-Received-Date: Thu, 06 May 2010 06:08:15 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
->
-> hi all,
->     I have a problem when try to "bitbake -b recipes/minicom/
-> minicom-mypkg_2.4.bb"
->
->     the bellow is the content of my bb file:
->     file name is minicom-mypkg_2.4.bb
-> *********************************************************************************************************
->
->     SECTION = "console/network"
->     DEPENDS = "ncurses"
->     LICENSE = "GPL"
->
->     SRC_URI = "
-> https://alioth.debian.org/frs/download.php/3195/minicom-${PV}.tar.gz<https://alioth.debian.org/frs/download.php/3195/minicom-$%7BPV%7D.tar.gz>
-> "
->     S = "${WORKDIR}/minicom-${PV}"
->     PR = "r0"
->
->     inherit autotools gettext
->
->     do_configure() {
->         ./configure --host = arm
->     }
->
->     do_install() {
->         autotools_do_install
->     }
->
-> *********************************************************************************************************
->
-> then bitbake -b recipes/minicom/minicom-mypkg_2.4.bb, I always get the
-> below messages:
->
->
-> ****************************************************************************************************************************************************************
-> NOTE: the following files were installed but not shipped in any package:
-> NOTE: /usr/local/share/man/man1/ascii-xfr.1
-> NOTE: /usr/local/share/man/man1/minicom.1
-> NOTE: /usr/local/share/man/man1/xminicom.1
-> NOTE: /usr/local/share/man/man1/runscript.1
-> ... ignored
-> NOTE: /usr/local/bin/xminicom
-> NOTE: /usr/local/bin/ascii-xfr
-> NOTE: /usr/local/bin/minicom
-> NOTE: /usr/local/bin/runscript
-> NOTE: /usr/local/bin/.debug/ascii-xfr
-> NOTE: /usr/local/bin/.debug/minicom
-> NOTE: /usr/local/bin/.debug/runscript
-> NOTE: Running task 12 of 17 (ID: 10, /home/rd/oe/build/recipes/minicom/
-> minicom-mypkg_2.4.bb, do_qa_staging)
-> NOTE: Running task 13 of 17 (ID: 16, /home/rd/oe/build/recipes/minicom/
-> minicom-mypkg_2.4.bb, do_package_write_ipk)
-> Packaged contents of minicom-mypkg-dbg into
-> /home/rd/oe/build/tmp/deploy/glibc/ipk/armv5te/minicom-mypkg-dbg_2.4-r0.5_armv5te.ipk
-> NOTE: Not creating empty archive for minicom-mypkg-2.4-r0.5
-> NOTE: Not creating empty archive for minicom-mypkg-doc-2.4-r0.5
-> Packaged contents of minicom-mypkg-dev into
-> /home/rd/oe/build/tmp/deploy/glibc/ipk/armv5te/minicom-mypkg-dev_2.4-r0.5_armv5te.ipk
-> NOTE: Not creating empty archive for minicom-mypkg-static-2.4-r0.5
-> NOTE: Not creating empty archive for minicom-mypkg-locale-2.4-r0.5
-> ...ignored
->
-> ****************************************************************************************************************************************************************
->
-> I have no idea why I always get these messages...
-> NOTE: Not creating empty archive for minicom-mypkg-2.4-r0.5
-> NOTE: Not creating empty archive for minicom-mypkg-doc-2.4-r0.5
-> NOTE: Not creating empty archive for minicom-mypkg-static-2.4-r0.5
-> NOTE: Not creating empty archive for minicom-mypkg-locale-2.4-r0.5
->
-> any information is appreciate !!
->
->
+Since i added the recipe for rsyslog we have three different
+syslog implemenations in OE: (busybox-)syslog, syslog-ng, and
+rsyslog.
 
--- 
-Regards
-Y-C Wang
+At the moment syslog-ng and rsyslog have pkg_postinst and pkg_postrm
+stages which use update-rc.d to deinstall/reinstall init.d links
+for (busybox-)syslog which is default.
+
+This seems to be a bad hack for me. I believe there must be better
+solutions for this situation. But I'm not sure which is the preferred.
+Is this a case for alternatives? Or something like
+DISTRO_SYSLOG_DAEMON? Or something else?
+
+Steffen
+
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=C3=A4ftsf=C3=BChrer: Dr. Michael Weber, Werner M=C3=B6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+
+
 
