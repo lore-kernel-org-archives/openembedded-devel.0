@@ -1,35 +1,38 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1O9yBJ-0007ZX-49
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1O9yHY-0007kU-3i
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 12:19:49 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id DD9B8491278
+	Thu, 06 May 2010 12:26:16 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o46AMS8C019758
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 May 2010 12:16:02 +0200 (CEST)
-Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 6 May 2010 12:17:05 +0200
-Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
-	id 6E49372078; Thu,  6 May 2010 12:16:02 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 May 2010 12:15:49 +0200
-Message-Id: <1273140949-14699-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <4BE185C7.50305@dresearch.de>
-References: <4BE185C7.50305@dresearch.de>
-X-OriginalArrivalTime: 06 May 2010 10:17:05.0261 (UTC)
-	FILETIME=[46D739D0:01CAED05]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+	Thu, 6 May 2010 11:22:28 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 19550-04 for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 May 2010 11:22:24 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o46AMNWq019752
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 May 2010 11:22:24 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 06 May 2010 11:22:19 +0100
+Message-ID: <1273141339.5743.82.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
+Subject: New e.V. members
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 10:19:49 -0000
+X-List-Received-Date: Thu, 06 May 2010 10:26:16 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- conf/distro/angstrom-2008.1.conf |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+Hi,
 
-diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-2008.1.conf
-index 1df0c0b..760166b 100644
---- a/conf/distro/angstrom-2008.1.conf
-+++ b/conf/distro/angstrom-2008.1.conf
-@@ -81,7 +81,8 @@ PREFERRED_VERSION_linux-handhelds-2.6 ?= "2.6.21-hh20"
- #KERNEL_INITRAMFS_PATH = "${KERNEL_INITRAMFS_DIR}/$(readlink ${KERNEL_INITRAMFS_DIR}initramfs-bootmenu-image-${MACHINE}.cpio.gz)"
- 
- #This is unrelated to the kernel version, but userspace apps (e.g. HAL) require a recent version to build against
--PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
-+PREFERRED_VERSION_linux-libc-headers       ?= "2.6.31"
-+PREFERRED_VERSION_linux-libc-headers_hipox ?= "2.6.24"
- 
- #Prefer glibc 2.6 and uclibc 0.9.30, these have had the most testing.
- PREFERRED_VERSION_glibc 		?= "2.9"
--- 
-1.6.4.2
+We're going to have a drive for new e.V. members since there are a lot
+of people using OE who are not part of our official body (the e.V.).
+Membership has advantages like being able to vote on e.V. issues and
+groups like the TSC.
+
+If there is anyone interested in becoming a member please let me know
+within the next week. We'll then go through the procedure for accepting
+new members.
+
+Cheers,
+
+Richard
 
 
 
