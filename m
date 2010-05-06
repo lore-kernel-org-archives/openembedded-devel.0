@@ -1,42 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OA0Yl-0005zO-1h for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 14:52:20 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OA0Uv-0005l7-HB for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 14:48:13 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 14:48:13 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1OA0g8-0006CM-RC
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 15:00:08 +0200
+Received: by fxm11 with SMTP id 11so4922581fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 14:48:13 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 06 May 2010 05:55:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=cwQVEDelmdcWUex8QjXzZcBk/AT8jYHvrdk02Uz+k2I=;
+	b=Ri8HshoS4IbL4oZJKvzndyxsAjK3NBkHr/FndS4+ygfdeFX5lRGJBgxPGBNO2fv0s4
+	ZNk7doJFwzxVNK+z1hDyEN+fyaELJECP8hUZVqmuU25YrjW+PwRjiHRnWoK+2B6WFHK2
+	HmLVhFtOjoegFqVYUcVCVGjmO17s1/WYAicqw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=ieN0FiVpBuqpiIjOqqnA/3FBaPUjbr3BIDOXa6m3GxURiXbxZQUoWrNJiK4Xer9LB5
+	xDnLDS02vIHxcs3gjoLriScaB8lZBR+Nm55EDRY3ZW65xOXfElL06pHG6i2UywZ67vcR
+	MhcBRF56EjnZMItScYTvJfrTz3djZ/zivWqT4=
+Received: by 10.223.10.11 with SMTP id n11mr6655540fan.3.1273150550405;
+	Thu, 06 May 2010 05:55:50 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id z15sm1945344fkz.51.2010.05.06.05.55.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 06 May 2010 05:55:44 -0700 (PDT)
+Date: Thu, 6 May 2010 14:55:38 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 06 May 2010 14:48:05 +0200
-Message-ID: <hrudq5$vms$1@dough.gmane.org>
-References: <1273102999.5743.49.camel@rex>
-	<hrtn8s$e9m$1@dough.gmane.org>	<hrtpja$lag$1@dough.gmane.org>
-	<1273147827.5743.104.camel@rex>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+Message-ID: <20100506125538.GF3312@jama>
+References: <1273102999.5743.49.camel@rex> <hrtn8s$e9m$1@dough.gmane.org>
+	<hrtpja$lag$1@dough.gmane.org> <1273147827.5743.104.camel@rex>
+MIME-Version: 1.0
 In-Reply-To: <1273147827.5743.104.camel@rex>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: The rpurdie/work-in-progress branch has been merged
@@ -53,68 +57,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 12:52:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 May 2010 13:00:16 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 06-05-10 14:10, Richard Purdie wrote:
-> On Thu, 2010-05-06 at 09:03 +0200, Koen Kooi wrote:
->> On 06-05-10 08:23, Koen Kooi wrote:
->>> On 06-05-10 01:43, Richard Purdie wrote:
->>>> I finally felt the time was right so I've merged the work-in-progress
->>>> branch I've been talking about to OE.dev. This contains various
->>>> architecture improvements and legacy staging cleanups that have been
->>>> used in Poky for a while with great benefit.
->>>
->>> With bitbake 1.10 I get:
->>>
->>> NOTE: Preparing runqueue
->>> Traceback (most recent call last):
->>>   File "/OE/bitbake/lib/bb/server/none.py", line 128, in idle_commands
->>>     retval = function(self, data, False)
->>>   File "/OE/bitbake/lib/bb/cooker.py", line 730, in buildTargetsIdle
->>>     retval = rq.execute_runqueue()
->>>   File "/OE/bitbake/lib/bb/runqueue.py", line 830, in execute_runqueue
->>>     self.prepare_runqueue()
->>>   File "/OE/bitbake/lib/bb/runqueue.py", line 513, in prepare_runqueue
->>>     if len(runq_recrdepends[task]) > 0:
->>> IndexError: list index out of range
->>>
->>> when doing MACHINE=beagleboard bitbake console-image
->>
->> Bitbake 1.8, 1.10 and master exhibit the same behaviour. 'bitbake gcc'
->> does work, trying to narrow down which recipe is causing this, it's not
->> the toolchain.
-> 
+On Thu, May 06, 2010 at 01:10:27PM +0100, Richard Purdie wrote:
 > Someone just told me OE was broken as this email hadn't been replied
 > too. For reference, Koen and I talked elsewhere, a fix was pushed and
 > this issue was resolved. 
 
-I have built console-image for hawkboard, smartq5 and beagleboard and
-they all work as well as before. Thanks to the removal of legacy staging
-in gcc, glibc, etc, the build was a bit faster (but still dominated by
-localegen).
+No OE is great and we know it :).
 
 > To further update, Khem pushed updates for eglibc and gcc 4.5 (thanks).
 > Koen also pushed some legacy staging removals which had some issues but
-> these have also all been fixed.
+> these have also all been fixed. There was also an error appearing about
+> "bb" being unknown and that is also fixed.
 
-Note to self: if something doesn't use 'make install', it needs
-'NATIVE_INSTALL_WORKS = 1' when using BBCLASSEXTEND = native.
+I've rebuilt 2 images today and except those smaller issues as you said 
+and which were fixed in minutes everything went OK.
 
-regards,
+> So in summary, we don't have any known problems due to these changes at
+> the moment :).
+>
+> I wasn't clear in my original email but all issues that people raised
+> testing the branch had been addressed before it was pushed. Thanks go to
+> the people who did test it.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I haven't test it before push and from that announcement I expected some
+problems, but the way it was done was great, well prepared, work of
+professionals, thanks to all people involved.
 
-iD8DBQFL4rqFMkyGM64RGpERAotJAJ4+LvJTHsPCfhRPcYCmHRYbzgo/5gCeKBvz
-VKoBx4YqEtsQiONmXlDxBQ8=
-=5V/p
------END PGP SIGNATURE-----
+Cheers,
 
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
