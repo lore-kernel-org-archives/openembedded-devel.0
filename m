@@ -1,40 +1,52 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1O9xnZ-0002Gg-JE
+	(envelope-from <spyzer.abhishek0@gmail.com>) id 1O9xpx-0002Mw-9s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 11:55:18 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 169A7A446A
+	Thu, 06 May 2010 11:57:46 +0200
+Received: by gwj23 with SMTP id 23so2460999gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 May 2010 10:51:30 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id P3DPIx+3MMwB
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 May 2010 10:51:29 +0100 (BST)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 0D9D8A43D1
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 May 2010 10:51:28 +0100 (BST)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id E61AD2C8FB; Thu,  6 May 2010 10:51:24 +0100 (BST)
-Date: Thu, 6 May 2010 10:51:24 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100506095124.GB2900@xora-desktop.xora.org.uk>
+	Thu, 06 May 2010 02:53:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=WAkTEIR0Jf/sVd5pajKutHRjQhZ0iOdBpOfZ71dYw1s=;
+	b=Zn80sy9DJwQA8y3AzdNMFFK9k6oLZQaIlpj8xQ5Q38beCYVQ2dnF+efTAgPbID/YhG
+	2QD1yUYsH2lGHGTd56ACY2QaTMQYwcecB5RwQ3kbK+ZksOkdryF1B4sEZ+qfq9qvMtP0
+	Jt9pA/dq+0111ecz4ZSpe81XXV9t+K+XsVBlo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=BgTNdkWftAdUivX7mcJ6NY1gsD0hlf5vvPverPp1ye02sLQV33Fxc/J5UPZ/2vddvO
+	BCiG1uH68zhesuCLyM0kS6w6HO5XhFy9x/aodQ7kNDO0mA2TZhu74GvAaUUs9fI9+MwF
+	AFoH4BxgzDrRgyW6cAAE3qovHlAFOe5TXkgwc=
+Received: by 10.150.209.2 with SMTP id h2mr1203323ybg.36.1273139635496; Thu, 
+	06 May 2010 02:53:55 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Received: by 10.150.124.11 with HTTP; Thu, 6 May 2010 02:53:35 -0700 (PDT)
+In-Reply-To: <4BDFC996.5060606@eukrea.com>
+References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com> 
+	<v2hfc0861611004260046za2daa3a4ve91f93ab88e72d8e@mail.gmail.com> 
+	<hr3im2$gf6$1@dough.gmane.org>
+	<x2rfc0861611004261141u68a0ad71icfc12c12c3053c23@mail.gmail.com>
+	<hr4t3j$tds$1@dough.gmane.org>
+	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>
+	<4BD84B08.4000300@eukrea.com>
+	<g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>
+	<4BDFC996.5060606@eukrea.com>
+From: Abhishek Sharma <spyzer.abhishek0@gmail.com>
+Date: Thu, 6 May 2010 15:23:35 +0530
+Message-ID: <AANLkTik56w90iywd5ZmzV_geM0ULabHWVCuJIfxzHY7u@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: spyzer.abhishek0@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Result: TSC Election
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Regarding customized image with Qt embedded support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,105 +60,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 09:55:18 -0000
-X-Groupsio-MsgNum: 19031
-Content-Type: multipart/mixed; boundary="2fHTh5uZTiUOsy+g"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 May 2010 09:57:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
---2fHTh5uZTiUOsy+g
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+On Tue, May 4, 2010 at 12:45 PM, Eric B=E9nard <eric@eukrea.com> wrote:
 
-The TSC election results.
+> Le 04/05/2010 09:02, Abhishek Sharma a =E9crit :
+>
+>  I am finished making the image which has a qtehelloworld program
+>> "installed"
+>> in it. But the moment I run<qtehelloworld -qws>  in the qemu machine i g=
+et
+>> the error
+>> QFontDatabase: Cannot find font directory /usr/lib/fonts.
+>>
+>> I googled the error and in most of the cases it was shown that while
+>> "configuring" qte the prefix variable was not properly set. What step
+>> should
+>> i take next?? Do i need to change any recipe of qt embedded or is this
+>> some
+>> different problem.
+>>
+>>  add "qt4-embedded-fonts" to your IMAGE_INSTALL
+>
+>
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
+Thanks for the solution Eric. I was also facing problems regarding tslib,
+which u answered on the irc. I did
+IMAGE_INSTALL +=3D "qt4-embedded-plugin-mousedriver-tslib"
 
---2fHTh5uZTiUOsy+g
-Content-Type: message/rfc822
-Content-Disposition: inline
+but still when I am running the qtehelloworld app on the created image in
+qemu, everything is being "displayed" fine but the mouse pointer is not
+moving when I try it to, in other words the touch screen ain't working with
+the image while it works when i try to run a preconfigured opie-image.
+Please help.
 
-Return-Path: <openembedded-members-bounces@lists.openembedded.org>
-Delivered-To: dp@xora.org.uk
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 16E46A42D8
-	for <dp@xora.org.uk>; Mon, 26 Apr 2010 15:32:53 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id UAmLrNE7Fa4U for <dp@xora.org.uk>;
-	Mon, 26 Apr 2010 15:32:49 +0100 (BST)
-Received: from linuxtogo.org (linuxtogo.org [188.40.83.200])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPS id 38B70A402F
-	for <dp@xora.org.uk>; Mon, 26 Apr 2010 15:32:49 +0100 (BST)
-Received: from localhost ([127.0.0.1])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded-members-bounces@lists.openembedded.org>)
-	id 1O6PQ8-0001Uy-FN; Mon, 26 Apr 2010 16:36:24 +0200
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1O6PQ6-0001SZ-3W
-	for openembedded-members@lists.openembedded.org;
-	Mon, 26 Apr 2010 16:36:22 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 79437A42D9
-	for <openembedded-members@lists.openembedded.org>;
-	Mon, 26 Apr 2010 15:32:43 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id dkRCdfPWGHy0
-	for <openembedded-members@lists.openembedded.org>;
-	Mon, 26 Apr 2010 15:32:34 +0100 (BST)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id A0363A42D8
-	for <openembedded-members@lists.openembedded.org>;
-	Mon, 26 Apr 2010 15:32:30 +0100 (BST)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id 803D924428; Mon, 26 Apr 2010 15:34:26 +0100 (BST)
-Date: Mon, 26 Apr 2010 15:34:26 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-members@lists.openembedded.org
-Message-ID: <20100426143426.GC2362@xora-desktop.xora.org.uk>
-MIME-Version: 1.0
-Content-Disposition: inline
-User-Agent: Mutt/1.5.20 (2009-08-17)
-Subject: Result: TSC Election
-X-BeenThere: openembedded-members@lists.openembedded.org
-X-Mailman-Version: 2.1.11
-Precedence: list
-Reply-To: openembedded-members@lists.openembedded.org
-List-Id: <openembedded-members.lists.openembedded.org>
-List-Unsubscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/options/openembedded-members>,
-	<mailto:openembedded-members-request@lists.openembedded.org?subject=unsubscribe>
-List-Archive: <http://lists.linuxtogo.org/pipermail/openembedded-members>
-List-Post: <mailto:openembedded-members@lists.openembedded.org>
-List-Help: <mailto:openembedded-members-request@lists.openembedded.org?subject=help>
-List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-members>,
-	<mailto:openembedded-members-request@lists.openembedded.org?subject=subscribe>
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Sender: openembedded-members-bounces@lists.openembedded.org
-Errors-To: openembedded-members-bounces@lists.openembedded.org
-X-SA-Exim-Connect-IP: 127.0.0.1
-X-SA-Exim-Mail-From: openembedded-members-bounces@lists.openembedded.org
-X-SA-Exim-Scanned: No (on linuxtogo.org); SAEximRunCond expanded to false
+Thank You.
 
-I have tallied the votes and your new TSC consists of :-
+--=20
+Abhishek Sharma
 
-Chris Larson
-Dr. Michael Lauer
-Holger Freyther
-Phil BLundel
-Richard Purdie
-
-Thankyou for making the election a success.
-
-Graeme
-
-
-_______________________________________________
-Openembedded-members mailing list
-Openembedded-members@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-members
-
---2fHTh5uZTiUOsy+g--
