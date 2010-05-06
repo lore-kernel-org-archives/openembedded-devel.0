@@ -1,46 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9zCj-0004wx-3U for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 13:26:38 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9z8v-000823-Gn for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 13:21:25 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 13:21:25 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1O9zz0-0001an-51
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 14:15:29 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o46CAerH020682
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 13:21:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 6 May 2010 13:10:40 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 20377-05 for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 May 2010 13:10:36 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o46CAUE0020674
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 6 May 2010 13:10:31 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 06 May 2010 13:21:16 +0200
-Message-ID: <hru8nc$d5l$1@dough.gmane.org>
-References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com>
-	<hr3im2$gf6$1@dough.gmane.org>	<x2rfc0861611004261141u68a0ad71icfc12c12c3053c23@mail.gmail.com>	<hr4t3j$tds$1@dough.gmane.org>	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>	<4BD84B08.4000300@eukrea.com>	<g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>	<4BDFC996.5060606@eukrea.com>	<AANLkTik56w90iywd5ZmzV_geM0ULabHWVCuJIfxzHY7u@mail.gmail.com>
-	<4BE29322.7060205@eukrea.com>
-	<AANLkTimCrYrjKuREPyUgYQwxlWdAN_OjF5ECiRBLj6Pp@mail.gmail.com>
+In-Reply-To: <hrtpja$lag$1@dough.gmane.org>
+References: <1273102999.5743.49.camel@rex> <hrtn8s$e9m$1@dough.gmane.org>
+	<hrtpja$lag$1@dough.gmane.org>
+Date: Thu, 06 May 2010 13:10:27 +0100
+Message-ID: <1273147827.5743.104.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <AANLkTimCrYrjKuREPyUgYQwxlWdAN_OjF5ECiRBLj6Pp@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Regarding customized image with Qt embedded support.
+Subject: Re: The rpurdie/work-in-progress branch has been merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,33 +49,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 11:26:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 06 May 2010 12:15:29 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, 2010-05-06 at 09:03 +0200, Koen Kooi wrote:
+> On 06-05-10 08:23, Koen Kooi wrote:
+> > On 06-05-10 01:43, Richard Purdie wrote:
+> >> I finally felt the time was right so I've merged the work-in-progress
+> >> branch I've been talking about to OE.dev. This contains various
+> >> architecture improvements and legacy staging cleanups that have been
+> >> used in Poky for a while with great benefit.
+> > 
+> > With bitbake 1.10 I get:
+> > 
+> > NOTE: Preparing runqueue
+> > Traceback (most recent call last):
+> >   File "/OE/bitbake/lib/bb/server/none.py", line 128, in idle_commands
+> >     retval = function(self, data, False)
+> >   File "/OE/bitbake/lib/bb/cooker.py", line 730, in buildTargetsIdle
+> >     retval = rq.execute_runqueue()
+> >   File "/OE/bitbake/lib/bb/runqueue.py", line 830, in execute_runqueue
+> >     self.prepare_runqueue()
+> >   File "/OE/bitbake/lib/bb/runqueue.py", line 513, in prepare_runqueue
+> >     if len(runq_recrdepends[task]) > 0:
+> > IndexError: list index out of range
+> > 
+> > when doing MACHINE=beagleboard bitbake console-image
+> 
+> Bitbake 1.8, 1.10 and master exhibit the same behaviour. 'bitbake gcc'
+> does work, trying to narrow down which recipe is causing this, it's not
+> the toolchain.
 
-On 06-05-10 12:55, Abhishek Sharma wrote:
+Someone just told me OE was broken as this email hadn't been replied
+too. For reference, Koen and I talked elsewhere, a fix was pushed and
+this issue was resolved. 
 
-> About the /dev node, there is no such device as /dev/input/touchscreen0, is
-> it because i am only doing a base-image kind of install???
-> i set the environment variable which was specified, but no progress.
+To further update, Khem pushed updates for eglibc and gcc 4.5 (thanks).
+Koen also pushed some legacy staging removals which had some issues but
+these have also all been fixed. There was also an error appearing about
+"bb" being unknown and that is also fixed.
 
-If you use udev, it will get created for you.
+So in summary, we don't have any known problems due to these changes at
+the moment :).
 
-regards,
+I wasn't clear in my original email but all issues that people raised
+testing the branch had been addressed before it was pushed. Thanks go to
+the people who did test it.
 
-Koen
+Cheers,
 
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL4qYsMkyGM64RGpERAszCAJ9tRRJelQyLDkozlVtBHdgyobx/HQCgs0NP
-mB316e3HZG2RsEoAcQEwJrI=
-=4Mnu
------END PGP SIGNATURE-----
+Richard
 
 
 
