@@ -1,34 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9uUv-0001eb-Ma for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 08:23:51 +0200
+	id 1O9uZq-00048A-Dg for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 08:29:08 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9uRH-0003gz-JB for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 08:20:03 +0200
+	id 1O9uW8-0005Na-5r for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 08:25:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 08:20:03 +0200
+	Thu, 06 May 2010 08:25:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 08:20:03 +0200
+	Thu, 06 May 2010 08:25:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 06 May 2010 08:12:31 +0200
-Message-ID: <hrtmkf$bp1$2@dough.gmane.org>
-References: <mailman.6069.1273115899.24517.openembedded-devel@lists.openembedded.org>	<p2lad875cab1005052017k622928e3jabfe4ea684e4ef62@mail.gmail.com>
-	<l2pad875cab1005052019o60a63221ya1727def61751e98@mail.gmail.com>
+Date: Thu, 06 May 2010 08:23:24 +0200
+Message-ID: <hrtn8s$e9m$1@dough.gmane.org>
+References: <1273102999.5743.49.camel@rex>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <l2pad875cab1005052019o60a63221ya1727def61751e98@mail.gmail.com>
+In-Reply-To: <1273102999.5743.49.camel@rex>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -38,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: create ipk failed...
+Subject: Re: The rpurdie/work-in-progress branch has been merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,89 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 06:23:51 -0000
+X-List-Received-Date: Thu, 06 May 2010 06:29:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 06-05-10 05:19, yenchengwang wrote:
->>
->> hi all,
->>     I have a problem when try to "bitbake -b recipes/minicom/
->> minicom-mypkg_2.4.bb"
->>
->>     the bellow is the content of my bb file:
->>     file name is minicom-mypkg_2.4.bb
->> *********************************************************************************************************
->>
->>     SECTION = "console/network"
->>     DEPENDS = "ncurses"
->>     LICENSE = "GPL"
->>
->>     SRC_URI = "
->> https://alioth.debian.org/frs/download.php/3195/minicom-${PV}.tar.gz<https://alioth.debian.org/frs/download.php/3195/minicom-$%7BPV%7D.tar.gz>
->> "
->>     S = "${WORKDIR}/minicom-${PV}"
->>     PR = "r0"
->>
->>     inherit autotools gettext
->>
->>     do_configure() {
->>         ./configure --host = arm
->>     }
->>
->>     do_install() {
->>         autotools_do_install
->>     }
->>
->> *********************************************************************************************************
->>
->> then bitbake -b recipes/minicom/minicom-mypkg_2.4.bb, I always get the
->> below messages:
->>
->>
->> ****************************************************************************************************************************************************************
->> NOTE: the following files were installed but not shipped in any package:
->> NOTE: /usr/local/share/man/man1/ascii-xfr.1
->> NOTE: /usr/local/share/man/man1/minicom.1
->> NOTE: /usr/local/share/man/man1/xminicom.1
->> NOTE: /usr/local/share/man/man1/runscript.1
->> ... ignored
->> NOTE: /usr/local/bin/xminicom
->> NOTE: /usr/local/bin/ascii-xfr
->> NOTE: /usr/local/bin/minicom
->> NOTE: /usr/local/bin/runscript
->> NOTE: /usr/local/bin/.debug/ascii-xfr
->> NOTE: /usr/local/bin/.debug/minicom
->> NOTE: /usr/local/bin/.debug/runscript
->> NOTE: Running task 12 of 17 (ID: 10, /home/rd/oe/build/recipes/minicom/
->> minicom-mypkg_2.4.bb, do_qa_staging)
->> NOTE: Running task 13 of 17 (ID: 16, /home/rd/oe/build/recipes/minicom/
->> minicom-mypkg_2.4.bb, do_package_write_ipk)
->> Packaged contents of minicom-mypkg-dbg into
->> /home/rd/oe/build/tmp/deploy/glibc/ipk/armv5te/minicom-mypkg-dbg_2.4-r0.5_armv5te.ipk
->> NOTE: Not creating empty archive for minicom-mypkg-2.4-r0.5
->> NOTE: Not creating empty archive for minicom-mypkg-doc-2.4-r0.5
->> Packaged contents of minicom-mypkg-dev into
->> /home/rd/oe/build/tmp/deploy/glibc/ipk/armv5te/minicom-mypkg-dev_2.4-r0.5_armv5te.ipk
->> NOTE: Not creating empty archive for minicom-mypkg-static-2.4-r0.5
->> NOTE: Not creating empty archive for minicom-mypkg-locale-2.4-r0.5
->> ...ignored
->>
->> ****************************************************************************************************************************************************************
->>
->> I have no idea why I always get these messages...
->> NOTE: Not creating empty archive for minicom-mypkg-2.4-r0.5
->> NOTE: Not creating empty archive for minicom-mypkg-doc-2.4-r0.5
->> NOTE: Not creating empty archive for minicom-mypkg-static-2.4-r0.5
->> NOTE: Not creating empty archive for minicom-mypkg-locale-2.4-r0.5
->>
->> any information is appreciate !!
+On 06-05-10 01:43, Richard Purdie wrote:
+> I finally felt the time was right so I've merged the work-in-progress
+> branch I've been talking about to OE.dev. This contains various
+> architecture improvements and legacy staging cleanups that have been
+> used in Poky for a while with great benefit.
 
-Your do_configure is broken, so it installs to /usr/local, which isn't
-in FILES_${PN} by default.
+With bitbake 1.10 I get:
+
+NOTE: Preparing runqueue
+Traceback (most recent call last):
+  File "/OE/bitbake/lib/bb/server/none.py", line 128, in idle_commands
+    retval = function(self, data, False)
+  File "/OE/bitbake/lib/bb/cooker.py", line 730, in buildTargetsIdle
+    retval = rq.execute_runqueue()
+  File "/OE/bitbake/lib/bb/runqueue.py", line 830, in execute_runqueue
+    self.prepare_runqueue()
+  File "/OE/bitbake/lib/bb/runqueue.py", line 513, in prepare_runqueue
+    if len(runq_recrdepends[task]) > 0:
+IndexError: list index out of range
+
+when doing MACHINE=beagleboard bitbake console-image
 
 regards,
 
@@ -142,9 +86,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL4l3PMkyGM64RGpERAgXFAJ9SB4Y461x3GkXdk+H+Zh23fqezVgCdEENx
-N3D1GipD8aYuXF+jkrNhWQs=
-=O0I2
+iD8DBQFL4mBcMkyGM64RGpERAgqjAJ0aTRFgft4TINZP181N4jBgfOb2wQCfQMZD
+2JHtNB/w4uDZJBkJMCcfyic=
+=60rt
 -----END PGP SIGNATURE-----
 
 
