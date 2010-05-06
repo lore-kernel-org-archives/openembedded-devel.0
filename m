@@ -1,35 +1,45 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OA0Aw-0001mh-O1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 14:27:36 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 2B909491278
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OA0Yl-0005zO-1h for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 14:52:20 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OA0Uv-0005l7-HB for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 14:48:13 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 May 2010 14:48:13 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  6 May 2010 14:03:11 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 6 May 2010 14:04:13 +0200
-Message-ID: <4BE2B014.3010805@dresearch.de>
-Date: Thu, 06 May 2010 14:03:32 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Thu, 06 May 2010 14:48:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4BE185C7.50305@dresearch.de>	<1273140949-14699-1-git-send-email-sledz@dresearch.de>
-	<hru6f7$4qk$1@dough.gmane.org>
-In-Reply-To: <hru6f7$4qk$1@dough.gmane.org>
-X-OriginalArrivalTime: 06 May 2010 12:04:13.0714 (UTC)
-	FILETIME=[3E7F4F20:01CAED14]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 06 May 2010 14:48:05 +0200
+Message-ID: <hrudq5$vms$1@dough.gmane.org>
+References: <1273102999.5743.49.camel@rex>
+	<hrtn8s$e9m$1@dough.gmane.org>	<hrtpja$lag$1@dough.gmane.org>
+	<1273147827.5743.104.camel@rex>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+In-Reply-To: <1273147827.5743.104.camel@rex>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
+Subject: Re: The rpurdie/work-in-progress branch has been merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +53,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 12:27:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 06 May 2010 12:52:21 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Am 06.05.2010 12:42, wrote Koen Kooi:
-> Also, please remove the legacy staging behaviour from the
-> linux-libc-headers recipe you just pushed.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Fixed.
+On 06-05-10 14:10, Richard Purdie wrote:
+> On Thu, 2010-05-06 at 09:03 +0200, Koen Kooi wrote:
+>> On 06-05-10 08:23, Koen Kooi wrote:
+>>> On 06-05-10 01:43, Richard Purdie wrote:
+>>>> I finally felt the time was right so I've merged the work-in-progress
+>>>> branch I've been talking about to OE.dev. This contains various
+>>>> architecture improvements and legacy staging cleanups that have been
+>>>> used in Poky for a while with great benefit.
+>>>
+>>> With bitbake 1.10 I get:
+>>>
+>>> NOTE: Preparing runqueue
+>>> Traceback (most recent call last):
+>>>   File "/OE/bitbake/lib/bb/server/none.py", line 128, in idle_commands
+>>>     retval = function(self, data, False)
+>>>   File "/OE/bitbake/lib/bb/cooker.py", line 730, in buildTargetsIdle
+>>>     retval = rq.execute_runqueue()
+>>>   File "/OE/bitbake/lib/bb/runqueue.py", line 830, in execute_runqueue
+>>>     self.prepare_runqueue()
+>>>   File "/OE/bitbake/lib/bb/runqueue.py", line 513, in prepare_runqueue
+>>>     if len(runq_recrdepends[task]) > 0:
+>>> IndexError: list index out of range
+>>>
+>>> when doing MACHINE=beagleboard bitbake console-image
+>>
+>> Bitbake 1.8, 1.10 and master exhibit the same behaviour. 'bitbake gcc'
+>> does work, trying to narrow down which recipe is causing this, it's not
+>> the toolchain.
+> 
+> Someone just told me OE was broken as this email hadn't been replied
+> too. For reference, Koen and I talked elsewhere, a fix was pushed and
+> this issue was resolved. 
+
+I have built console-image for hawkboard, smartq5 and beagleboard and
+they all work as well as before. Thanks to the removal of legacy staging
+in gcc, glibc, etc, the build was a bit faster (but still dominated by
+localegen).
+
+> To further update, Khem pushed updates for eglibc and gcc 4.5 (thanks).
+> Koen also pushed some legacy staging removals which had some issues but
+> these have also all been fixed.
+
+Note to self: if something doesn't use 'make install', it needs
+'NATIVE_INSTALL_WORKS = 1' when using BBCLASSEXTEND = native.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL4rqFMkyGM64RGpERAotJAJ4+LvJTHsPCfhRPcYCmHRYbzgo/5gCeKBvz
+VKoBx4YqEtsQiONmXlDxBQ8=
+=5V/p
+-----END PGP SIGNATURE-----
 
 
 
