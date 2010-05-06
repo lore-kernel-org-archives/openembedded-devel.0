@@ -1,43 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9uZq-00048A-Dg for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 08:29:08 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1O9uW8-0005Na-5r for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 08:25:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 08:25:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 08:25:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <denis@denix.org>) id 1O9uio-0006Dy-Mv
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 08:38:14 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.58.177])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L1Z00F6MJKIYE80@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	06 May 2010 01:34:00 -0500 (CDT)
+Received: from localhost.localdomain (elrond [192.168.0.7])
+	by gandalf.denix.org (Postfix) with ESMTP id C4E6414AF5C; Thu,
+	06 May 2010 02:33:53 -0400 (EDT)
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 06 May 2010 08:23:24 +0200
-Message-ID: <hrtn8s$e9m$1@dough.gmane.org>
-References: <1273102999.5743.49.camel@rex>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
-In-Reply-To: <1273102999.5743.49.camel@rex>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 06 May 2010 02:33:50 -0400
+Message-id: <1273127630-25388-1-git-send-email-denis@denix.org>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The rpurdie/work-in-progress branch has been merged
+Subject: [RFC, PATCH] qt4-embedded: change the default decoration (window title) styling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +39,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 06:29:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 06 May 2010 06:38:15 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Built all the decoration styles in, otherwsie there is no window title
+in QWS applications...
 
-On 06-05-10 01:43, Richard Purdie wrote:
-> I finally felt the time was right so I've merged the work-in-progress
-> branch I've been talking about to OE.dev. This contains various
-> architecture improvements and legacy staging cleanups that have been
-> used in Poky for a while with great benefit.
+Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+---
+ recipes/qt4/qt4-embedded.inc |    3 +--
+ 1 files changed, 1 insertions(+), 2 deletions(-)
 
-With bitbake 1.10 I get:
-
-NOTE: Preparing runqueue
-Traceback (most recent call last):
-  File "/OE/bitbake/lib/bb/server/none.py", line 128, in idle_commands
-    retval = function(self, data, False)
-  File "/OE/bitbake/lib/bb/cooker.py", line 730, in buildTargetsIdle
-    retval = rq.execute_runqueue()
-  File "/OE/bitbake/lib/bb/runqueue.py", line 830, in execute_runqueue
-    self.prepare_runqueue()
-  File "/OE/bitbake/lib/bb/runqueue.py", line 513, in prepare_runqueue
-    if len(runq_recrdepends[task]) > 0:
-IndexError: list index out of range
-
-when doing MACHINE=beagleboard bitbake console-image
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL4mBcMkyGM64RGpERAgqjAJ0aTRFgft4TINZP181N4jBgfOb2wQCfQMZD
-2JHtNB/w4uDZJBkJMCcfyic=
-=60rt
------END PGP SIGNATURE-----
+diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
+index 7e0be6e..3d78c7a 100644
+--- a/recipes/qt4/qt4-embedded.inc
++++ b/recipes/qt4/qt4-embedded.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPL QPL"
+ PRIORITY = "optional"
+ HOMEPAGE = "http://www.trolltech.com"
+ DEPENDS += "directfb tslib"
+-INC_PR = "r18"
++INC_PR = "r19"
+ 
+ QT_BASE_NAME ?= "qt4-embedded"
+ QT_BASE_LIB  ?= "libqt-embedded"
+@@ -28,7 +28,6 @@ S = "${WORKDIR}/qt-embedded-linux-opensource-src-${PV}"
+ 
+ QT_CONFIG_FLAGS += " \
+     -qtlibinfix ${QT_LIBINFIX} \
+-    -qt-decoration-styled -plugin-decoration-default -plugin-decoration-windows \
+     -plugin-gfx-transformed -plugin-gfx-qvfb -plugin-gfx-vnc -plugin-gfx-directfb \
+     -plugin-mouse-tslib -qt-mouse-pc -qt-mouse-qvfb \
+     -qt-kbd-tty \
+-- 
+1.6.3.3
 
 
 
