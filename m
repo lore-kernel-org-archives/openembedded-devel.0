@@ -1,28 +1,43 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OA3a4-0005Qx-BZ
+	(envelope-from <martin.jansa@gmail.com>) id 1OA4yf-0005W9-Uc
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 18:06:07 +0200
-Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 142354B015C;
-	Thu,  6 May 2010 18:01:49 +0200 (CEST)
-Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
-	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP;
-	Thu,  6 May 2010 18:01:48 +0200 (CEST)
-From: Eric Benard <eric@eukrea.com>
+	Thu, 06 May 2010 19:35:26 +0200
+Received: by fxm11 with SMTP id 11so188892fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 06 May 2010 10:31:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type;
+	bh=OVTnAiszHIDkNGNaB2Dm228OE7NyVXro4ph+Z9FLuvc=;
+	b=PX0Wv4otHTqKepoChFFAp1zva0gfrUywYCC7e9PrdmZfJvxwiWB4EE/f4bIViQ9TnU
+	38CtrtnZGa88kGAiHEu2P6Fcat+yEjKydxpqAUSJNeOecC1cZfmZv38cs28TcFeAOguT
+	XasbvtB0Ry2YFqCbFSD7o1C25IDm9DFZ0tY8E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=GaVwnl8IYKEGeQbeQkpi7mf2cRIa7T89ghBqLQjRxNwtjJxQpdfw6BgycOr5XVH2Gu
+	XV1sBTUU3ypxY8vqP/xO1h76pAn8l5sQcrc51CENSy5SwLE31mCQKKgUMqg3fP+Jm5ar
+	UtX0XLDVCxXXwsHe7K4iu5Lkep3eHyfYdEyF0=
+MIME-Version: 1.0
+Received: by 10.223.5.89 with SMTP id 25mr7010432fau.87.1273167080146; Thu, 06 
+	May 2010 10:31:20 -0700 (PDT)
+Received: by 10.223.106.138 with HTTP; Thu, 6 May 2010 10:31:20 -0700 (PDT)
+In-Reply-To: <m2pac9c93b11005060635j1abeb64er76c391d607e43993@mail.gmail.com>
+References: <m2pac9c93b11005060635j1abeb64er76c391d607e43993@mail.gmail.com>
+Date: Thu, 6 May 2010 19:31:20 +0200
+Message-ID: <v2n141020e31005061031ub521d900vf405fe9c6e682e7f@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  6 May 2010 18:00:58 +0200
-Message-Id: <1273161658-24979-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] kernel.bbclass: fix staging of .config
+Subject: Re: commit 4134f55dc7d99516d750b24a60e5cec400ae5ef3: eglibc: Move away from legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,32 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 16:06:08 -0000
+X-List-Received-Date: Thu, 06 May 2010 17:35:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-- in staging.bb : sysroot_stage_dir does : cp -fpPR "$src"/* "$dest"
-which means it won't copy .config
-- so do the copy of .config in sysroot_stage_all_append after
-sysroot_stage_dir
+On Thu, May 6, 2010 at 3:35 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> I feel the above commit is not sound.
+> If I pull the head eglibc does not build for me because apparently
+> eglibc-initial does not stage limits.h any more.
+> If I revert to the commit before this one, eglibc and eglibc-initial
+> build, so this seems to break things.
+>
+> It might be that this went unnoticed, because there is no PR bump in
+> this commit (which I would have expected, but technically if the new
+> and old staging result is identical is not necessary).
 
-Signed-off-by: Eric Benard <eric@eukrea.com>
----
- classes/kernel.bbclass |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+Hi,
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 989d3e3..a157dfc 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -203,6 +203,7 @@ kernel_do_install() {
- 
- sysroot_stage_all_append() {
- 	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
-+	cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
- }
- 
- kernel_do_configure() {
--- 
-1.6.3.3
+What version are you trying to build?
+Today I've built version 2.11 before this patch as well as after this patch.
+Both during rebuild from scratch and both after RP's WIP branch merge.
 
+So this patch seems OK to me. I was expecting PR bump too, but it's not
+a big issue today, because many people rebuild from scratch,
+
+Regards,
 
 
