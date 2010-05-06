@@ -1,42 +1,41 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from firebug.buglabs.net ([66.80.197.243] helo=looper.buglabs.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OA7BZ-0001zH-NC
+	(envelope-from <ken@buglabs.net>) id 1OA9FN-0001yv-4R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 21:56:52 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OA77f-0006HY-BM from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 12:52:39 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 6 May 2010 12:52:38 -0700
-Received: from 172.30.80.24 ([172.30.80.24]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Thu,  6 May 2010 19:52:38 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	06 May 2010 12:52:36 -0700
-From: Tom Rini <tom_rini@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1273104883.457.56.camel@trini-m4400>
-References: <1273102999.5743.49.camel@rex>
-	<1273104883.457.56.camel@trini-m4400>
-Organization: Mentor Graphics Corporation
-Date: Thu, 06 May 2010 12:52:35 -0700
-Message-ID: <1273175555.457.296.camel@trini-m4400>
+	Fri, 07 May 2010 00:08:46 +0200
+Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
+	by looper.buglabs.net (Postfix) with ESMTP id DFBA134056
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 May 2010 17:55:44 -0400 (EDT)
+Received: from localhost (localhost [127.0.0.1])
+	by aphid.buglabs.net (Postfix) with ESMTP id F3C6528E002
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 May 2010 17:57:48 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at aphid.buglabs.net
+Received: from aphid.buglabs.net ([127.0.0.1])
+	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Rrwdn9b+s52I
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 May 2010 17:57:48 -0400 (EDT)
+Received: from [192.168.0.120] (t61.buglabs.net [192.168.0.120])
+	by aphid.buglabs.net (Postfix) with ESMTP id BB00028E001
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  6 May 2010 17:57:48 -0400 (EDT)
+From: Ken Gilmer <ken@buglabs.net>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Thu, 06 May 2010 17:55:40 -0400
+Message-ID: <1273182940.4942.10.camel@T61>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 06 May 2010 19:52:38.0902 (UTC)
-	FILETIME=[AE7EA960:01CAED55]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 66.80.197.243
+X-SA-Exim-Mail-From: ken@buglabs.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The rpurdie/work-in-progress branch has been merged
+Subject: [PATCH] bug20/xorg.conf: update to use tslib driver for touchscreen input device.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,26 +49,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 19:56:55 -0000
+X-List-Received-Date: Thu, 06 May 2010 22:08:46 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-05-05 at 17:14 -0700, Tom Rini wrote:
-> On Thu, 2010-05-06 at 00:43 +0100, Richard Purdie wrote:
-> > I finally felt the time was right so I've merged the work-in-progress
-> > branch I've been talking about to OE.dev. This contains various
-> > architecture improvements and legacy staging cleanups that have been
-> > used in Poky for a while with great benefit.
->=20
-> I've started testing DISTRO=3Dminimal with the machines and images I said
-> earlier.  Will report eventually (it's a lotta stuff).
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+index 0b976fe..746874f 100644
+--- a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
++++ b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+@@ -26,4 +26,12 @@ EndSection
+ Section "ServerLayout"                                 
+         Identifier      "Builtin Default Layout"                                     
+         Screen  "Builtin Default fbdev Screen 0"        
++		InputDevice "bmi-lcd-ts" "CorePointer"
+ EndSection                                              
++
++Section "InputDevice" 
++		Identifier "bmi-lcd-ts" 
++		Driver "tslib"
++		Option "SwapAxes" "1" 
++    	Option "Device" "/dev/input/touchscreen0" 
++EndSection                                        
 
-For DISTRO=3Dminimal, mpc8315e-rdb and calamari fail, both before and
-after these changes.  For qemux86, qemuarm, qemumips and db1200,
-minimal-image builds and for the QEMU boards, x11-image builds as well.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
 
 
