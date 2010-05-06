@@ -1,49 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OA0g8-0006CM-RC
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 06 May 2010 15:00:08 +0200
-Received: by fxm11 with SMTP id 11so4922581fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 05:55:50 -0700 (PDT)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OA1IV-0004a3-0P
+	for openembedded-devel@openembedded.org; Thu, 06 May 2010 15:39:40 +0200
+Received: by gya1 with SMTP id 1so2521897gya.6
+	for <openembedded-devel@openembedded.org>;
+	Thu, 06 May 2010 06:35:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=cwQVEDelmdcWUex8QjXzZcBk/AT8jYHvrdk02Uz+k2I=;
-	b=Ri8HshoS4IbL4oZJKvzndyxsAjK3NBkHr/FndS4+ygfdeFX5lRGJBgxPGBNO2fv0s4
-	ZNk7doJFwzxVNK+z1hDyEN+fyaELJECP8hUZVqmuU25YrjW+PwRjiHRnWoK+2B6WFHK2
-	HmLVhFtOjoegFqVYUcVCVGjmO17s1/WYAicqw=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=HX99I82cAECsPSlx8PthP7xkxsSFlh13W1rty7wtz/A=;
+	b=F2c2gzLLvqCZjYg5JwK20/8o9rkTfp1KL6oBq15zYnxaFmdkSajmIjkStMtaH3ALbX
+	s+r0QffwDPRXmgN/nNEWSiETv3KgrremohyHsr6tBcwqLAj83sdizf2G9T1zqwoaIAGS
+	q8POFu96flUsPQdYOIqYU/tIYOZtQVyNy4+oo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ieN0FiVpBuqpiIjOqqnA/3FBaPUjbr3BIDOXa6m3GxURiXbxZQUoWrNJiK4Xer9LB5
-	xDnLDS02vIHxcs3gjoLriScaB8lZBR+Nm55EDRY3ZW65xOXfElL06pHG6i2UywZ67vcR
-	MhcBRF56EjnZMItScYTvJfrTz3djZ/zivWqT4=
-Received: by 10.223.10.11 with SMTP id n11mr6655540fan.3.1273150550405;
-	Thu, 06 May 2010 05:55:50 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z15sm1945344fkz.51.2010.05.06.05.55.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 06 May 2010 05:55:44 -0700 (PDT)
-Date: Thu, 6 May 2010 14:55:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100506125538.GF3312@jama>
-References: <1273102999.5743.49.camel@rex> <hrtn8s$e9m$1@dough.gmane.org>
-	<hrtpja$lag$1@dough.gmane.org> <1273147827.5743.104.camel@rex>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=r/PjelsP8NikoZEn6Bs+43nWqL/iOKcguspceghbvCmARFtcacCPzfvra3oDE1QU8m
+	bTDZfH37t2kaBFQG82CgO+EGwKDmZIn5KSZeMcOXDr1sIiHqG1IENeupzmkTveBCEcDB
+	wpdqywdd/BYUxCQaQi7LhrnHgSXZ3A4FNWtyQ=
 MIME-Version: 1.0
-In-Reply-To: <1273147827.5743.104.camel@rex>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.91.119.8 with SMTP id w8mr201725agm.117.1273152929984; Thu, 06 
+	May 2010 06:35:29 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Thu, 6 May 2010 06:35:29 -0700 (PDT)
+Date: Thu, 6 May 2010 15:35:29 +0200
+Message-ID: <m2pac9c93b11005060635j1abeb64er76c391d607e43993@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, 
+	raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The rpurdie/work-in-progress branch has been merged
+Subject: commit 4134f55dc7d99516d750b24a60e5cec400ae5ef3: eglibc: Move away from legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,41 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 13:00:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 06 May 2010 13:39:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, May 06, 2010 at 01:10:27PM +0100, Richard Purdie wrote:
-> Someone just told me OE was broken as this email hadn't been replied
-> too. For reference, Koen and I talked elsewhere, a fix was pushed and
-> this issue was resolved. 
+I feel the above commit is not sound.
+If I pull the head eglibc does not build for me because apparently
+eglibc-initial does not stage limits.h any more.
+If I revert to the commit before this one, eglibc and eglibc-initial
+build, so this seems to break things.
 
-No OE is great and we know it :).
+It might be that this went unnoticed, because there is no PR bump in
+this commit (which I would have expected, but technically if the new
+and old staging result is identical is not necessary).
 
-> To further update, Khem pushed updates for eglibc and gcc 4.5 (thanks).
-> Koen also pushed some legacy staging removals which had some issues but
-> these have also all been fixed. There was also an error appearing about
-> "bb" being unknown and that is also fixed.
-
-I've rebuilt 2 images today and except those smaller issues as you said 
-and which were fixed in minutes everything went OK.
-
-> So in summary, we don't have any known problems due to these changes at
-> the moment :).
->
-> I wasn't clear in my original email but all issues that people raised
-> testing the branch had been addressed before it was pushed. Thanks go to
-> the people who did test it.
-
-I haven't test it before push and from that announcement I expected some
-problems, but the way it was done was great, well prepared, work of
-professionals, thanks to all people involved.
-
-Cheers,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+FM
 
 
