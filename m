@@ -1,40 +1,28 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OA1IV-0004a3-0P
-	for openembedded-devel@openembedded.org; Thu, 06 May 2010 15:39:40 +0200
-Received: by gya1 with SMTP id 1so2521897gya.6
-	for <openembedded-devel@openembedded.org>;
-	Thu, 06 May 2010 06:35:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=HX99I82cAECsPSlx8PthP7xkxsSFlh13W1rty7wtz/A=;
-	b=F2c2gzLLvqCZjYg5JwK20/8o9rkTfp1KL6oBq15zYnxaFmdkSajmIjkStMtaH3ALbX
-	s+r0QffwDPRXmgN/nNEWSiETv3KgrremohyHsr6tBcwqLAj83sdizf2G9T1zqwoaIAGS
-	q8POFu96flUsPQdYOIqYU/tIYOZtQVyNy4+oo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=r/PjelsP8NikoZEn6Bs+43nWqL/iOKcguspceghbvCmARFtcacCPzfvra3oDE1QU8m
-	bTDZfH37t2kaBFQG82CgO+EGwKDmZIn5KSZeMcOXDr1sIiHqG1IENeupzmkTveBCEcDB
-	wpdqywdd/BYUxCQaQi7LhrnHgSXZ3A4FNWtyQ=
-MIME-Version: 1.0
-Received: by 10.91.119.8 with SMTP id w8mr201725agm.117.1273152929984; Thu, 06 
-	May 2010 06:35:29 -0700 (PDT)
-Received: by 10.90.71.4 with HTTP; Thu, 6 May 2010 06:35:29 -0700 (PDT)
-Date: Thu, 6 May 2010 15:35:29 +0200
-Message-ID: <m2pac9c93b11005060635j1abeb64er76c391d607e43993@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	raj.khem@gmail.com
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	(envelope-from <eric@eukrea.com>) id 1OA3a4-0005Qx-BZ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 06 May 2010 18:06:07 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 142354B015C;
+	Thu,  6 May 2010 18:01:49 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP;
+	Thu,  6 May 2010 18:01:48 +0200 (CEST)
+From: Eric Benard <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  6 May 2010 18:00:58 +0200
+Message-Id: <1273161658-24979-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: commit 4134f55dc7d99516d750b24a60e5cec400ae5ef3: eglibc: Move away from legacy staging
+Subject: [PATCH] kernel.bbclass: fix staging of .config
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,19 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 06 May 2010 13:39:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 06 May 2010 16:06:08 -0000
 
-I feel the above commit is not sound.
-If I pull the head eglibc does not build for me because apparently
-eglibc-initial does not stage limits.h any more.
-If I revert to the commit before this one, eglibc and eglibc-initial
-build, so this seems to break things.
+- in staging.bb : sysroot_stage_dir does : cp -fpPR "$src"/* "$dest"
+which means it won't copy .config
+- so do the copy of .config in sysroot_stage_all_append after
+sysroot_stage_dir
 
-It might be that this went unnoticed, because there is no PR bump in
-this commit (which I would have expected, but technically if the new
-and old staging result is identical is not necessary).
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+ classes/kernel.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-FM
+diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+index 989d3e3..a157dfc 100644
+--- a/classes/kernel.bbclass
++++ b/classes/kernel.bbclass
+@@ -203,6 +203,7 @@ kernel_do_install() {
+ 
+ sysroot_stage_all_append() {
+ 	sysroot_stage_dir ${D}/kernel ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
++	cp -fpPR ${D}/kernel/.config ${SYSROOT_DESTDIR}${STAGING_KERNEL_DIR}
+ }
+ 
+ kernel_do_configure() {
+-- 
+1.6.3.3
+
 
 
