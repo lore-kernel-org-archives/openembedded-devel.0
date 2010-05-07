@@ -1,32 +1,46 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OALLE-0001c2-3w
+	(envelope-from <martin.jansa@gmail.com>) id 1OALUC-0001Z3-7B
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 13:03:36 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id E1185491278
+	Fri, 07 May 2010 13:12:52 +0200
+Received: by fxm11 with SMTP id 11so698749fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 12:59:48 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 13:00:54 +0200
-Message-ID: <4BE3F2AE.8060305@dresearch.de>
-Date: Fri, 07 May 2010 12:59:58 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Fri, 07 May 2010 04:09:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=K7QB785G3GV2kDBSuLIqAbgSbol4Fx8kLI4qHTwXrZo=;
+	b=fINCu9RcGdHrtJQNDlf5xNwyCb2Z0by78nnHZ9HR574+59+BBY/aNANa9gvc7GoNh2
+	PTb0iEK0TLvHaVvSqRvI7kcp/bMN98veNHYbdEUmCP2wxd8PZ0SCqrWQlQWj8J7k/mUr
+	Q4o2Iqq5YmjhgmWpIBySldEjNJBEKSjP+DkaM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=isDgC3VzBRX+YYepqlYIxnnFNZlUWP+QDcZ9Xjn2bXSOWiYCNtgE6zEre1tAHphpkR
+	7RpQL1HhiaUb9n/WWJ6UZuP7lW42aBZ+feXe50Qfu5/qIyCted+Vb6MuXCIkSi8Q5CV0
+	gOc1Tsi7ycNPxyXtXyIl/KcsSDyjbucRoHKWI=
+Received: by 10.223.50.68 with SMTP id y4mr1337524faf.51.1273230542862;
+	Fri, 07 May 2010 04:09:02 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 2sm6200976faf.15.2010.05.07.04.09.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 07 May 2010 04:09:02 -0700 (PDT)
+Date: Fri, 7 May 2010 13:09:00 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100507110900.GF3204@jama>
 References: <4BE25BFD.2090204@dresearch.de> <hrtmn1$bp1$3@dough.gmane.org>
-	<4BE3C542.4070603@dresearch.de>
-In-Reply-To: <4BE3C542.4070603@dresearch.de>
-X-OriginalArrivalTime: 07 May 2010 11:00:54.0417 (UTC)
-	FILETIME=[905A5810:01CAEDD4]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+	<4BE3C542.4070603@dresearch.de> <4BE3F2AE.8060305@dresearch.de>
+MIME-Version: 1.0
+In-Reply-To: <4BE3F2AE.8060305@dresearch.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: All the syslogs
@@ -43,66 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 11:03:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 May 2010 11:12:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> OK, than i'll try to create an u-a setting for all the syslogs (btw: we
-> have not three but four different ones, there's sysklogd too).
->=20
-> Has anyone combined update-alternatives and update-rc.d for initscripts
-> before? I'm afraid there are some pitfalls in the naming of the initscr=
-ipt
-> itself and the symlinks.
+On Fri, May 07, 2010 at 12:59:58PM +0200, Steffen Sledz wrote:
+> > OK, than i'll try to create an u-a setting for all the syslogs (btw: we
+> > have not three but four different ones, there's sysklogd too).
+> > 
+> > Has anyone combined update-alternatives and update-rc.d for initscripts
+> > before? I'm afraid there are some pitfalls in the naming of the initscript
+> > itself and the symlinks.
+> 
+> I made some first tests and they confirmed my fears. :(
+> 
+> The recipes look like this:
+> 
+> -------------------->snip<---------------------------
+> inherit autotools update-rc.d
+> 
+> do_install_append() {
+>         ...
+>         install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
+> }
+> 
+> pkg_postinst_${PN} () {
+>     update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 300
+> }
+> 
+> pkg_prerm_${PN} () {
+>     update-alternatives --remove syslog-init syslog.${PN}
+> }
+> 
+> INITSCRIPT_NAME = "syslog"
+> -------------------->snip<---------------------------
+> 
+> When opkg installs the packages it wants to run update-rc.d *before*
+> update-alternatives. This results in an "file does not exist" error. :(
+> 
+>   Installing rsyslog (5.5.4-r1.0.5) to root...
+>   Installing busybox-syslog (1.13.2-r24.1.5) to root...
+>   Configuring rsyslog
+>   update-rc.d: /etc/init.d/syslog: file does not exist
+>   update-alternatives: Linking //etc/init.d/syslog to syslog.rsyslog
+> Any suggestions?
 
-I made some first tests and they confirmed my fears. :(
+If there is only one u-a file in recipe you can try
+inherit update-alternatives to see if it will generate postinst commands
+in right order.
 
-The recipes look like this:
-
--------------------->snip<---------------------------
-inherit autotools update-rc.d
-
-do_install_append() {
-        ...
-        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/sy=
-slog.${PN}
-}
-
-pkg_postinst_${PN} () {
-    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init=
- syslog.${PN} 300
-}
-
-pkg_prerm_${PN} () {
-    update-alternatives --remove syslog-init syslog.${PN}
-}
-
-INITSCRIPT_NAME =3D "syslog"
--------------------->snip<---------------------------
-
-When opkg installs the packages it wants to run update-rc.d *before*
-update-alternatives. This results in an "file does not exist" error. :(
-
-  Installing rsyslog (5.5.4-r1.0.5) to root...
-  Installing busybox-syslog (1.13.2-r24.1.5) to root...
-  Configuring rsyslog
-  update-rc.d: /etc/init.d/syslog: file does not exist
-  update-alternatives: Linking //etc/init.d/syslog to syslog.rsyslog
-
-Any suggestions?
+Or in worse case, move update-rc.d logic to your postinst scripts after
+setting u-a links.
 
 Regards,
-Steffen
 
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
