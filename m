@@ -1,27 +1,25 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OAKhd-0001ng-SF
+	(envelope-from <stefan@datenfreihafen.org>) id 1OAKqo-0005bA-Ee
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 12:22:43 +0200
+	Fri, 07 May 2010 12:32:10 +0200
 Received: from w0968.wlan.rz.tu-bs.de ([134.169.203.206] helo=excalibur)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OAKdw-00043E-1v by authid <stefan@sostec.de> with cram_md5
+	id 1OAKn6-0004GO-Q8 by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 12:18:54 +0200
+	Fri, 07 May 2010 12:28:23 +0200
 Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1OAKdu-0002C5-6D
+	(envelope-from <stefan@excalibur.local>) id 1OAKn5-0007Y3-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 12:18:50 +0200
-Date: Fri, 7 May 2010 12:18:50 +0200
+	Fri, 07 May 2010 12:28:19 +0200
+Date: Fri, 7 May 2010 12:28:19 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100507101850.GD18308@excalibur.local>
-References: <alpine.DEB.1.10.1005011614380.15503@vitus.devnet.local>
-	<1272723767-16871-1-git-send-email-vjensen@gmx.de>
-	<1272723767-16871-2-git-send-email-vjensen@gmx.de>
+Message-ID: <20100507102819.GE18308@excalibur.local>
+References: <1272425953-19544-1-git-send-email-jacob@technosorcery.net>
 MIME-Version: 1.0
-In-Reply-To: <1272723767-16871-2-git-send-email-vjensen@gmx.de>
+In-Reply-To: <1272425953-19544-1-git-send-email-jacob@technosorcery.net>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -34,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] canutils: new recipe
+Subject: Re: [PATCH] Add missing opening <varlistentry> tag in the user manual.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,50 +46,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 10:22:43 -0000
+X-List-Received-Date: Fri, 07 May 2010 10:32:11 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Sat, 2010-05-01 at 16:22, Vitus Jensen wrote:
-> Adds canutils (PTX flavour) 4.0.4 as alternative to socketcan-utils-test.
-> canutils RCONFLICTS with socketcan-utils-test because of identical
-> file names.
+On Tue, 2010-04-27 at 20:39, Jacob Helwig wrote:
+> While we're here, remove the straggling hard-tabs.
 > 
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+> Signed-off-by: Jacob Helwig <jacob@technosorcery.net>
+
+I applied and pushed this. Thanks for your contribution.
 > ---
->  recipes/socketcan/canutils_4.0.4.bb           |   19 +++++++++++++++++++
->  recipes/socketcan/socketcan-utils-test_svn.bb |    1 +
->  2 files changed, 20 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/socketcan/canutils_4.0.4.bb
 > 
-> diff --git a/recipes/socketcan/canutils_4.0.4.bb b/recipes/socketcan/canutils_4.0.4.bb
-> new file mode 100644
-> index 0000000..e769c46
-> --- /dev/null
-> +++ b/recipes/socketcan/canutils_4.0.4.bb
-> @@ -0,0 +1,19 @@
-> +DESCRIPTION = "canutils (PTX flavour)"
-> +AUTHOR = "Luotao Fu"
-> +HOMEPAGE = "http://www.pengutronix.de"
-> +SECTION = "console/network"
-> +PRIORITY = "optional"
-> +LICENSE = "LGPL"
-> +DEPENDS = "libsocketcan"
-> +RDEPENDS = "libsocketcan"
+> I hope this is the right way to submit a documentation fix.  If not, please
+> point me at the FM, since I didn't find it in looking through the Wiki, or the
+> repo.
 
-Why do you need this RDEPENDS on the lib when it is already in DEPENDS?
-
-> +RCONFLICTS = "socketcan-utils-test"
-> +
-> +TAG = "canutils-${PV}"
-> +PR = "r0"
-> +
-> +SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git;tag=${TAG} \
-> +        "
-
-Same about release tarballs and git SRC_URIs as from the other patch.
+Thats the right way. I just added a "usermanual" prefix to your patch subject
+line to make it more clear for people what part of our repo it changes when
+browsing git log.
 
 regards
 Stefan Schmidt
