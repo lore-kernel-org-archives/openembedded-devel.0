@@ -1,49 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from promwad.com ([83.149.69.23])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OALUC-0001Z3-7B
+	(envelope-from <viktar.palstsiuk@promwad.com>) id 1OALVj-0002Xy-JO
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 13:12:52 +0200
-Received: by fxm11 with SMTP id 11so698749fxm.6
+	Fri, 07 May 2010 13:14:28 +0200
+Received: from [195.222.85.229] (helo=intranet.promwad.com)
+	by promwad.com with esmtps (TLSv1:AES256-SHA:256) (Exim 4.63)
+	(envelope-from <viktar.palstsiuk@promwad.com>) id 1OALRo-0008WA-Sd
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 14:10:24 +0300
+Received: from mail-bw0-f220.google.com ([209.85.218.220])
+	by intranet.promwad.com with esmtpsa (TLS1.0:RSA_ARCFOUR_MD5:16)
+	(Exim 4.69) (envelope-from <viktar.palstsiuk@promwad.com>)
+	id 1OALRF-0007i9-2E for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 14:09:49 +0300
+Received: by bwz20 with SMTP id 20so496487bwz.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 04:09:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=K7QB785G3GV2kDBSuLIqAbgSbol4Fx8kLI4qHTwXrZo=;
-	b=fINCu9RcGdHrtJQNDlf5xNwyCb2Z0by78nnHZ9HR574+59+BBY/aNANa9gvc7GoNh2
-	PTb0iEK0TLvHaVvSqRvI7kcp/bMN98veNHYbdEUmCP2wxd8PZ0SCqrWQlQWj8J7k/mUr
-	Q4o2Iqq5YmjhgmWpIBySldEjNJBEKSjP+DkaM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=isDgC3VzBRX+YYepqlYIxnnFNZlUWP+QDcZ9Xjn2bXSOWiYCNtgE6zEre1tAHphpkR
-	7RpQL1HhiaUb9n/WWJ6UZuP7lW42aBZ+feXe50Qfu5/qIyCted+Vb6MuXCIkSi8Q5CV0
-	gOc1Tsi7ycNPxyXtXyIl/KcsSDyjbucRoHKWI=
-Received: by 10.223.50.68 with SMTP id y4mr1337524faf.51.1273230542862;
-	Fri, 07 May 2010 04:09:02 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 2sm6200976faf.15.2010.05.07.04.09.01
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 07 May 2010 04:09:02 -0700 (PDT)
-Date: Fri, 7 May 2010 13:09:00 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100507110900.GF3204@jama>
-References: <4BE25BFD.2090204@dresearch.de> <hrtmn1$bp1$3@dough.gmane.org>
-	<4BE3C542.4070603@dresearch.de> <4BE3F2AE.8060305@dresearch.de>
+	Fri, 07 May 2010 04:09:42 -0700 (PDT)
+Received: by 10.204.48.84 with SMTP id q20mr10979bkf.83.1273230582502; Fri, 07 
+	May 2010 04:09:42 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <4BE3F2AE.8060305@dresearch.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.204.100.84 with HTTP; Fri, 7 May 2010 04:09:21 -0700 (PDT)
+In-Reply-To: <n2kdfcd449c1005070221iaf3a2f3fk56de0b2c2d2f5cd2@mail.gmail.com>
+References: <n2kdfcd449c1005070221iaf3a2f3fk56de0b2c2d2f5cd2@mail.gmail.com>
+From: Viktar Palstsiuk <viktar.palstsiuk@promwad.com>
+Date: Fri, 7 May 2010 14:09:21 +0300
+Message-ID: <g2zdfcd449c1005070409kc479cf1fz688eb1730a900823@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 83.149.69.23
+X-SA-Exim-Mail-From: viktar.palstsiuk@promwad.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: All the syslogs
+Subject: QNeedleIndicator 0.3.1 demo app
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,63 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 11:12:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 May 2010 11:14:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 07, 2010 at 12:59:58PM +0200, Steffen Sledz wrote:
-> > OK, than i'll try to create an u-a setting for all the syslogs (btw: we
-> > have not three but four different ones, there's sysklogd too).
-> > 
-> > Has anyone combined update-alternatives and update-rc.d for initscripts
-> > before? I'm afraid there are some pitfalls in the naming of the initscript
-> > itself and the symlinks.
-> 
-> I made some first tests and they confirmed my fears. :(
-> 
-> The recipes look like this:
-> 
-> -------------------->snip<---------------------------
-> inherit autotools update-rc.d
-> 
-> do_install_append() {
->         ...
->         install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
-> }
-> 
-> pkg_postinst_${PN} () {
->     update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 300
-> }
-> 
-> pkg_prerm_${PN} () {
->     update-alternatives --remove syslog-init syslog.${PN}
-> }
-> 
-> INITSCRIPT_NAME = "syslog"
-> -------------------->snip<---------------------------
-> 
-> When opkg installs the packages it wants to run update-rc.d *before*
-> update-alternatives. This results in an "file does not exist" error. :(
-> 
->   Installing rsyslog (5.5.4-r1.0.5) to root...
->   Installing busybox-syslog (1.13.2-r24.1.5) to root...
->   Configuring rsyslog
->   update-rc.d: /etc/init.d/syslog: file does not exist
->   update-alternatives: Linking //etc/init.d/syslog to syslog.rsyslog
-> Any suggestions?
+Here is a recipe to build QNeedleIndicator 0.3.1 demo app. It uses Qt/Embed=
+ded.
 
-If there is only one u-a file in recipe you can try
-inherit update-alternatives to see if it will generate postinst commands
-in right order.
+$ cat qneedleindicator_0.3.1.bb
 
-Or in worse case, move update-rc.d logic to your postinst scripts after
-setting u-a links.
+DESCRIPTION =3D "Simple needle indicator. Needle is animated and
+smoothly moves until set value is reached. Animation can be disabled."
+HOMEPAGE =3D "http://qt-apps.org/content/show.php/QNeedleIndicator?content=
+=3D118474"
+LICENSE =3D "LGPL"
 
-Regards,
+inherit qt4e
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+PR =3D "r3"
+
+SRC_URI =3D "http://qt-apps.org/CONTENT/content-files/118474-QNeedleIndicat=
+or-${PV}.tar.gz"
+
+SRC_URI[md5sum] =3D "9168627119f13dd6393ba349bb595f60"
+SRC_URI[sha256sum] =3D
+"7d8d059e8006bc351272787e22bb671fc18652da1f114219242d74545492810b"
+
+S =3D "${WORKDIR}/QNeedleIndicator-${PV}"
+
+do_install() {
+=A0 =A0 =A0 =A0${STRIP} ${S}/QNeedleIndicator
+=A0 =A0 =A0 =A0install -d ${D}/${bindir}
+=A0 =A0 =A0 =A0install -m 755 ${S}/QNeedleIndicator ${D}/${bindir}
+}
+
+--
+Viktar Palstsiuk
 
 
