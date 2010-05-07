@@ -1,35 +1,35 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OAPDk-0005EF-HG
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OAPHm-0001l2-Du
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 17:12:09 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 3716649127F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 17:08:21 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 17:09:27 +0200
-Message-ID: <4BE42D03.2070800@dresearch.de>
-Date: Fri, 07 May 2010 17:08:51 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
+	Fri, 07 May 2010 17:16:20 +0200
+Received: (qmail 10425 invoked by uid 503); 7 May 2010 15:09:03 -0000
+Received: from b7.ovh.net (HELO mail640.ha.ovh.net) (213.186.33.57)
+	by 30.mail-out.ovh.net with SMTP; 7 May 2010 15:09:03 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 7 May 2010 15:12:30 -0000
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 7 May 2010 15:12:30 -0000
+Message-ID: <4BE42DDD.6080805@eukrea.com>
+Date: Fri, 07 May 2010 17:12:29 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4BE41DF5.7040805@dresearch.de>	<1273242036-7529-1-git-send-email-sledz@dresearch.de>
-	<20100507145850.GJ3204@jama>
-In-Reply-To: <20100507145850.GJ3204@jama>
-X-OriginalArrivalTime: 07 May 2010 15:09:27.0230 (UTC)
-	FILETIME=[491505E0:01CAEDF7]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+X-Ovh-Tracer-Id: 3305079178658622793
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] busybox/syslogs: use update-alternatives for syslog selection
+Subject: Patchwork down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,22 +43,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 15:12:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 May 2010 15:16:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Am 07.05.2010 16:58, Martin Jansa wrote:
-> One more issue with this part, partialy explaining what went wrong in
-> that log. You're not creating syslog.busybox, so real /etc/init.d/syslog
-> is not packaged and after u-a /etc/init.d/syslog points to non-existing
-> /etc/init.d/syslog.busybox and that's why update-rc.d says it doesn't
-> exist.
+Hi,
 
-Forgot a little modification in do_install. Will be fixed in the
-next patch version.
+patches sent during the last 2 days didn't reach patchwork.
 
-Thanx,
-Steffen
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32405
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32452
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32397
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32410
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32418
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32424
+http://article.gmane.org/gmane.comp.handhelds.openembedded/32454
 
+Eric
 
 
