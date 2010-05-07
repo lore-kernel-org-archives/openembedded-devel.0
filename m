@@ -1,26 +1,26 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OAJw3-0007VB-Kw for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 11:33:33 +0200
+	id 1OAK1D-0007gV-Nd for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 11:38:52 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OAJsN-0007O3-LG for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 11:29:43 +0200
+	id 1OAJxX-0001I8-ID for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 11:35:03 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 11:29:43 +0200
+	Fri, 07 May 2010 11:35:03 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 11:29:43 +0200
+	Fri, 07 May 2010 11:35:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 07 May 2010 11:29:28 +0200
-Message-ID: <hs0mho$rst$1@dough.gmane.org>
+Date: Fri, 07 May 2010 11:30:47 +0200
+Message-ID: <hs0mk7$rst$2@dough.gmane.org>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
@@ -35,7 +35,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: perl build problem in .dev
+Subject: meta-toolchain doesn't build due to gdb-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,7 +49,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 09:33:33 -0000
+X-List-Received-Date: Fri, 07 May 2010 09:38:52 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -58,34 +58,37 @@ Hash: SHA1
 
 Hi,
 
-I'm unable to build perl_5.8.8.bb:
+Currently meta-toolchain is unbuildable:
 
-| ln -s hostperl miniperl
-| ./miniperl -Ilib configpm --heavy=lib/Config_heavy.pl lib/Config.pm
-| ./miniperl: error while loading shared libraries: libperl.so: cannot
-open shared object file: No such file or directory
-| make[1]: *** [lib/Config.pod] Error 127
-| make[1]: Leaving directory
-`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
-| make[1]: Entering directory
-`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
-| ./miniperl -Ilib configpm --heavy=lib/Config_heavy.pl lib/Config.pm
-| ./miniperl: error while loading shared libraries: libperl.so: cannot
-open shared object file: No such file or directory
-| make[1]: *** [lib/Config.pod] Error 127
-| make[1]: Leaving directory
-`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
+Missing or unbuildable dependency chain was: ['gdb-cross-sdk']
+NOTE: Runtime target 'task-sdk-host' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['task-sdk-host',
+'gdb-cross-sdk']
+ERROR: Required build target 'meta-toolchain' has no buildable providers.
+Missing or unbuildable dependency chain was: ['meta-toolchain',
+'task-sdk-host', 'gdb-cross-sdk']
+Command execution failed: Traceback (most recent call last):
+  File "/OE/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+    commandmethod(self.cmds_async, self, options)
+  File "/OE/bitbake/lib/bb/command.py", line 174, in buildTargets
+    command.cooker.buildTargets(pkgs_to_build, task)
+  File "/OE/bitbake/lib/bb/cooker.py", line 757, in buildTargets
+    taskdata.add_unresolved(localdata, self.status)
+  File "/OE/bitbake/lib/bb/taskdata.py", line 562, in add_unresolved
+    self.remove_runtarget(self.getrun_id(target))
+  File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
+    self.fail_fnid(fnid, missing_list)
+  File "/OE/bitbake/lib/bb/taskdata.py", line 495, in fail_fnid
+    self.remove_runtarget(target, missing_list)
+  File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
+    self.fail_fnid(fnid, missing_list)
+  File "/OE/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+    self.remove_buildtarget(target, missing_list)
+  File "/OE/bitbake/lib/bb/taskdata.py", line 519, in remove_buildtarget
+    raise bb.providers.NoProvider
+NoProvider
 
-koen@dominion:/OE/build$ !find
-find /OE/angstrom-dev/sysroots/ -name "libperl.so*"
-/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/perl/5.8.8/CORE/libperl.so
-
-I tried doing
-
-- -export PERLHOSTLIB = "${STAGING_LIBDIR_NATIVE}/perl/${PV}/"
-+export PERLHOSTLIB = "${STAGING_LIBDIR_NATIVE}/perl/${PV}/CORE/"
-
-which didn't help. Any ideas?
+The weird thing is that 'bitbake gdb-cross-sdk' *DOES* work. Any ideas?
 
 
 regards,
@@ -94,9 +97,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL4914MkyGM64RGpERAteUAKCW8Cf+LkADEX+c2dA1YzfdC46Z1QCePo3v
-wVqb3heMrT9O+8HZ5qkAJdc=
-=jVgC
+iD8DBQFL493HMkyGM64RGpERAsfeAJ4+dAGLxl374iYexNPvF7aOl1L9jwCdEvTu
+mKxwdYeXXCsZzQ0H8yocaBw=
+=uhtx
 -----END PGP SIGNATURE-----
 
 
