@@ -1,34 +1,35 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OAIJo-00043t-Bh
+	(envelope-from <philb@gnu.org>) id 1OAJWL-0003bw-78
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 09:50:05 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 606DF491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 09:46:09 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 09:47:14 +0200
-Message-ID: <4BE3C542.4070603@dresearch.de>
-Date: Fri, 07 May 2010 09:46:10 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Fri, 07 May 2010 11:07:05 +0200
+Received: from 88-108-80-109.dynamic.dsl.as9105.com ([88.108.80.109]
+	helo=[192.168.2.154])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OAJSf-0001rN-Mt
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 10:03:09 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <4BE25BFD.2090204@dresearch.de> <hrtmn1$bp1$3@dough.gmane.org>
-In-Reply-To: <hrtmn1$bp1$3@dough.gmane.org>
-X-OriginalArrivalTime: 07 May 2010 07:47:14.0464 (UTC)
-	FILETIME=[82523A00:01CAEDB9]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+In-Reply-To: <4BE185C7.50305@dresearch.de>
+References: <4BE13C20.1010902@dresearch.de>
+	<20100505094242.GF2444@xora-desktop.xora.org.uk>
+	<4BE141CA.30904@dresearch.de>
+	<1273053926.18119.331.camel@mill.internal.reciva.com>
+	<4BE185C7.50305@dresearch.de>
+Date: Fri, 07 May 2010 10:03:06 +0100
+Message-ID: <1273222986.4378.18.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: All the syslogs
+Subject: Re: linux vs. linux-libc-headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +43,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 07:50:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 May 2010 09:07:06 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Am 06.05.2010 08:13, wrote Koen Kooi:
->> Since i added the recipe for rsyslog we have three different
->> syslog implemenations in OE: (busybox-)syslog, syslog-ng, and
->> rsyslog.
-> 
->> At the moment syslog-ng and rsyslog have pkg_postinst and pkg_postrm
->> stages which use update-rc.d to deinstall/reinstall init.d links
->> for (busybox-)syslog which is default.
-> 
->> This seems to be a bad hack for me. I believe there must be better
->> solutions for this situation. But I'm not sure which is the preferred.
->> Is this a case for alternatives? Or something like
->> DISTRO_SYSLOG_DAEMON? Or something else?
-> 
-> DISTRO_* is the wrong namespace for that, it's a per-image choice. You
-> could have a look at using u-a to changing initscripts and binaries.
+On Wed, 2010-05-05 at 16:50 +0200, Steffen Sledz wrote:
+> As mentioned before that's just one problem and we have some more.
+> I do not have time and knowledge to hunt and fix them all.
 
-OK, than i'll try to create an u-a setting for all the syslogs (btw: we
-have not three but four different ones, there's sysklogd too).
+That is unfortunate.
 
-Has anyone combined update-alternatives and update-rc.d for initscripts
-before? I'm afraid there are some pitfalls in the naming of the initscript
-itself and the symlinks.
+> So for the moment i would prefer to work with linux-libc-headers
+> of version 2.6.24.
+> 
+> But what's the recommended way to select them in OE/Angstrom?
 
-Regards,
-Steffen
+As far as OE goes, it's fairly easy: you just set
+PREFERRED_VERSION_linux-libc-headers appropriately.  But, if Angstrom
+has taken a distro decision to use the 2.6.31 headers then you will have
+a problem: if you just make that change for one MACHINE, your binaries
+will now be different to everybody else's and hence what you are
+building is not really Angstrom anymore.
+
+If you are not willing to fix glibc then I think there are only three
+sensible ways to proceed:
+
+a) update your machine to use the 2.6.31 kernel so that the problem goes
+away; or
+
+b) persuade the Angstrom maintainers to adopt 2.6.24 headers as their
+DISTRO standard, though this will presumably cause some fallout in terms
+of other incompatibilities so I suspect it will be a struggle; or
+
+c) create your own DISTRO, which can be a derivative/fork of Angstrom if
+you wish, and in which you can obviously do whatever you like.  This
+probably seems like a bit of a large hammer to crack that particular nut
+but it is more or less the only way in which you can use a different
+version from the other Angstrom folks.
+
+p.
+
 
 
 
