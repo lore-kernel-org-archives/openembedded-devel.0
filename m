@@ -1,47 +1,40 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OAWan-0003OK-Uv
+	(envelope-from <andrea.adami@gmail.com>) id 1OAWrD-0001t2-9b
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 01:04:32 +0200
-Received: by pwj5 with SMTP id 5so698101pwj.6
+	Sat, 08 May 2010 01:21:23 +0200
+Received: by fxm11 with SMTP id 11so1155836fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 16:00:35 -0700 (PDT)
+	Fri, 07 May 2010 16:17:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=YTLyPgWmbvhNYA3NoSO8Wd+rgEx9pIQmhokRsj/dfLI=;
-	b=BYYzjXdBpeqKBdKAGVRFNy+myr3ab2+1kpof7I3JVSJmf0OQMQUuSmwiFV8ZUo3TYJ
-	ip5W9epPqzCbQyv4GIrvVp8Z4LltndDf81Sk8QkeSAdPyGeS1WLqWdBvv0psYNBV0iDF
-	I1wnWc76aKuepGA01cH4hIKHZSRU30cEPGoM4=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=nKUK9B5wCCGOp2FwzKYEn8pal729cYq/ctB4AaTlBIg=;
+	b=fGmnW1VvqKXtcnE9+kJEE1DNI3a1OIwi3x/yXZK/QmVZpBEwc2FgZw7sOn3L3GIsCe
+	QVdikQ2eDe4ZBYp3lGMm23NoEFLBDuKKOwW/ARpVzkZN7t4ei8rzBV6H9fTdga3EZixB
+	7oHtkkv3NKnyjlnfgh10TK4htjgq6fM3Uk8W4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=fwTps5vAwHQ5dxdI8TCcyBzvQbkbRcpsKMtJgGFDxAdHHfBSRwAvQ4qaSUw0iPIvZp
-	aSY/3Kux52sGQ4cFdR2OXiqUS6DXnc9Xf6ju8oGGWmowxLNRrIy0Zw234w8Sr+Buj7FR
-	JledaQKyKOnrQS66Vefx5it9p08yKUqRKK2vc=
-Received: by 10.142.56.8 with SMTP id e8mr463602wfa.117.1273273235130; Fri, 07 
-	May 2010 16:00:35 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=OkoB7+AdIJ5KIFlOvMouNPlyLDdbY8lvZ3XV2+yCORq93BCtlvf6mLlbW8rUXlpMIs
+	O0biBOJFBIS7dlSx3ZXswFN8HX/qzx78Hk07K8qcUrEXGsZeOfkITFZ0BvpVoJ9X4He9
+	6XlmpjnmwGtEVXZ6ACxkNT+SJ4qN75VtMS8z0=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.13.14 with HTTP; Fri, 7 May 2010 16:00:15 -0700 (PDT)
-In-Reply-To: <z2qbd4a003f1005071539wbd18f0e5w531868565b953e2a@mail.gmail.com>
-References: <z2qbd4a003f1005071539wbd18f0e5w531868565b953e2a@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 7 May 2010 16:00:15 -0700
-X-Google-Sender-Auth: a6291a5e7f4a0ad0
-Message-ID: <u2xb6ebd0a51005071600ra9935d46r8fe294c592c7cebf@mail.gmail.com>
+Received: by 10.239.142.73 with SMTP id f9mr67302hba.107.1273274253500; Fri, 
+	07 May 2010 16:17:33 -0700 (PDT)
+Received: by 10.239.192.77 with HTTP; Fri, 7 May 2010 16:17:33 -0700 (PDT)
+Date: Sat, 8 May 2010 01:17:33 +0200
+Message-ID: <v2sd1b08f941005071617u31274631hcddebb5b9eeb888d@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Understanding Bitbake Dependencies
+Subject: gtk+native missing dep ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,56 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 23:04:32 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 07 May 2010 23:21:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, May 7, 2010 at 3:39 PM, Ash Charles <ashcharles@gmail.com> wrote:
+Hello,
 
-> Hi,
->
-> When I change a recipe or configuration in OE, I often end up doing a
-> 'bitbake <package-name> -c clean; bitbake <package-name>' to ensure
-> whatever it is I'm doing it gets rebuilt.  I realize there must be a
-> better way to do this in some cases---sometimes just a bitbake
-> <package-name> -c rebuild is sufficient though not always---other
-> times I can just get away with bitbake <package-name>.
->
-> --- What types of changes causes bitbake to rebuild a recipe?
->
+I repeatdly see console-image failing *from scratch* because
+gtk+native do_compile errors out with:
 
-It never magically detects changes to recipes or configuration and rebuild.
- It goes by the stamp files, whose file names include the PN, PV, PR
-variables. If you change a recipe or config and need something rebuilt, you
-need to either bump its PR (revision) or do the -c clean then bitbake.
+ Cannot load module
+/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la:
+/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/mo
+dules/input/.libs/im-xim.so: undefined symbol: g_realloc_n
+| /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la
+does not export GTK+ IM module API:
+/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0
 
---- Why is '-c clean, then rebuild' different than '-c rebuild'?
->
+It seems this is defined in glib-2.0-native-2.24.0-r4
 
-It's an artifact of how bitbake's runqueue works.  Strongly advise against
-using -c rebuild as it stands today.
+So I suspect the second build is fine because glib-2.24.0 finished in
+the meanwhile.
 
 
-> --- If I make changes to the kernel (e.g. enable a module), what else
-> do I need to bitbake to get an updated root file system|image?
->
+Regards
 
-Image recipes rebuild the image from the packages every time you bitbake
-them (their tasks are flagged with 'nostamp').  If your question is how to
-rebuild the kernel packages that the image recipes can then install, as I
-said above, clean and re-bitbake the kernel or bump the recipe revision if
-it's a recipe change.
+Andrea
 
-Sorry for the simple questions but the dependencies can seem a little
-> magical at times. If anyone could point me to a reference or give me a
-> brief explanation of this, that'd be wonderful!
-
-
-I had thought the behavior of the stamps was documented in the bitbake
-manual.. if not, it should be :)
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
