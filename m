@@ -1,53 +1,41 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <spyzer.abhishek0@gmail.com>) id 1OAOB0-0001pO-LB
+	(envelope-from <Tom_Rini@mentor.com>) id 1OAODU-0003As-OI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 16:05:18 +0200
-Received: by gwj23 with SMTP id 23so564512gwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 07:01:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=beR8ZFjwCExygrTsNl1ThIpuTKChWjcBEv+zYK4PVvs=;
-	b=LTchS+D8BqmW5Ss4HmT9lZMvnhBjxM66d0Xq15CmVC6H4/R7DgZu7XqUnZXydFn4he
-	2D++n0OIh53O7OhxqOKeZLtlUQ/ZleHQaAnS6qQADSyFUnEhORbNPic7CYF/unM7Hz9r
-	dn4qh9u32V24CcAHTTLmCmZKSTk+QUbgUeQ3o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=e/T5DiW6+jxTReSMzFFy9hzLS/oSrsEBBWGBhH3TvTYhbSZX6NU6WPEfVd7xb/otuL
-	GLGROAKACulqCKzUusQMuW2eS/41yI/+4V9uPNffi/kOQpfWNUgxeOlcTiW5ih7g5wcZ
-	ykKMN+H3fNPMfYn1RDON42lsAMEtgz8UzKUBw=
-Received: by 10.151.24.4 with SMTP id b4mr3652327ybj.335.1273240882713; Fri, 
-	07 May 2010 07:01:22 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.150.124.11 with HTTP; Fri, 7 May 2010 07:01:02 -0700 (PDT)
-In-Reply-To: <hru8nc$d5l$1@dough.gmane.org>
-References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com> 
-	<hr4t3j$tds$1@dough.gmane.org>
-	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>
-	<4BD84B08.4000300@eukrea.com>
-	<g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>
-	<4BDFC996.5060606@eukrea.com>
-	<AANLkTik56w90iywd5ZmzV_geM0ULabHWVCuJIfxzHY7u@mail.gmail.com> 
-	<4BE29322.7060205@eukrea.com>
-	<AANLkTimCrYrjKuREPyUgYQwxlWdAN_OjF5ECiRBLj6Pp@mail.gmail.com> 
-	<hru8nc$d5l$1@dough.gmane.org>
-From: Abhishek Sharma <spyzer.abhishek0@gmail.com>
-Date: Fri, 7 May 2010 19:31:02 +0530
-Message-ID: <AANLkTinNs0RXIqA8annkPWKiGKUAD8yWnlKiAZiT-g0A@mail.gmail.com>
+	Fri, 07 May 2010 16:07:50 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OAO9m-0002xH-41 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 07:03:58 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 7 May 2010 07:03:57 -0700
+Received: from 172.30.80.68 ([172.30.80.68]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Fri,  7 May 2010 14:03:57 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	07 May 2010 07:03:53 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: spyzer.abhishek0@gmail.com
+In-Reply-To: <hs0mho$rst$1@dough.gmane.org>
+References: <hs0mho$rst$1@dough.gmane.org>
+Organization: Mentor Graphics Corporation
+Date: Fri, 07 May 2010 07:03:53 -0700
+Message-ID: <1273241033.457.319.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 07 May 2010 14:03:57.0649 (UTC)
+	FILETIME=[22DE8C10:01CAEDEE]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Regarding customized image with Qt embedded support.
+Subject: Re: perl build problem in .dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,48 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 14:05:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 May 2010 14:07:50 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 6, 2010 at 4:51 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-
+On Fri, 2010-05-07 at 11:29 +0200, Koen Kooi wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
->
-> On 06-05-10 12:55, Abhishek Sharma wrote:
->
-> > About the /dev node, there is no such device as /dev/input/touchscreen0,
-> is
-> > it because i am only doing a base-image kind of install???
-> > i set the environment variable which was specified, but no progress.
->
-> If you use udev, it will get created for you.
->
-> regards,
->
-> Koen
->
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFL4qYsMkyGM64RGpERAszCAJ9tRRJelQyLDkozlVtBHdgyobx/HQCgs0NP
-> mB316e3HZG2RsEoAcQEwJrI=
-> =4Mnu
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>=20
+> Hi,
+>=20
+> I'm unable to build perl_5.8.8.bb:
+>=20
+> | ln -s hostperl miniperl
+> | ./miniperl -Ilib configpm --heavy=3Dlib/Config_heavy.pl lib/Config.pm
+> | ./miniperl: error while loading shared libraries: libperl.so: cannot
+> open shared object file: No such file or directory
+> | make[1]: *** [lib/Config.pod] Error 127
+> | make[1]: Leaving directory
+> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-=
+5.8.8'
+> | make[1]: Entering directory
+> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-=
+5.8.8'
+> | ./miniperl -Ilib configpm --heavy=3Dlib/Config_heavy.pl lib/Config.pm
+> | ./miniperl: error while loading shared libraries: libperl.so: cannot
+> open shared object file: No such file or directory
+> | make[1]: *** [lib/Config.pod] Error 127
+> | make[1]: Leaving directory
+> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-=
+5.8.8'
+>=20
+> koen@dominion:/OE/build$ !find
+> find /OE/angstrom-dev/sysroots/ -name "libperl.so*"
+> /OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/perl/5.8.8/CORE/libperl.so
+>=20
+> I tried doing
+>=20
+> - -export PERLHOSTLIB =3D "${STAGING_LIBDIR_NATIVE}/perl/${PV}/"
+> +export PERLHOSTLIB =3D "${STAGING_LIBDIR_NATIVE}/perl/${PV}/CORE/"
+>=20
+> which didn't help. Any ideas?
 
+Yeah, when we mangle it for $ORIGIN, we just broke how target perl works
+since (expanding
+$ORIGIN) /OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33=
+/perl-5.8.8/../lib/perl/5.8.8/CORE/libperl.so
+doesn't exist.  Not sure how to solve this with chrpath, but I know when
+we link vs $ORIGIN we 'fix' this by still having a path based link left
+in (as the more common problem we run into is "build a util that's not
+installed, to build the final util that is installed").
 
-Thanks all, the touchscreen device was /dev/event1 and the moment I did ->
-export QWS_MOUSE_PROTO="Tslib:/dev/event1" and ran the app, it got going.
-I am very grateful to you all for the help.
-:)
--- 
-Abhishek Sharma
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
+
 
