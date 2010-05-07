@@ -1,35 +1,44 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OAPci-0001R9-Up
+	(envelope-from <Tom_Rini@mentor.com>) id 1OAQEb-0007ku-Ch
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 17:38:02 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 8AC7E491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 17:34:09 +0200 (CEST)
-Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 7 May 2010 17:35:15 +0200
-Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
-	id 56F0472078; Fri,  7 May 2010 17:34:09 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch.de>
+	Fri, 07 May 2010 18:17:06 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OAQAs-0003q3-RS from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 09:13:14 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 7 May 2010 09:13:14 -0700
+Received: from 172.30.80.68 ([172.30.80.68]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Fri,  7 May 2010 16:13:11 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	07 May 2010 09:13:08 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  7 May 2010 17:34:04 +0200
-Message-Id: <1273246444-12797-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <1273242036-7529-1-git-send-email-sledz@dresearch.de>
-References: <1273242036-7529-1-git-send-email-sledz@dresearch.de>
-X-OriginalArrivalTime: 07 May 2010 15:35:15.0621 (UTC)
-	FILETIME=[E3FEBD50:01CAEDFA]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+In-Reply-To: <s2g19c1b8a91005061817i5719e011z51260b5361e708e7@mail.gmail.com>
+References: <1273102999.5743.49.camel@rex>
+	<1273104883.457.56.camel@trini-m4400>
+	<1273175555.457.296.camel@trini-m4400>
+	<s2g19c1b8a91005061817i5719e011z51260b5361e708e7@mail.gmail.com>
+Organization: Mentor Graphics Corporation
+Date: Fri, 07 May 2010 09:13:07 -0700
+Message-ID: <1273248787.457.324.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 07 May 2010 16:13:14.0495 (UTC)
+	FILETIME=[324F50F0:01CAEE00]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] busybox/syslogs: use update-alternatives for syslog selection
+Subject: Re: The rpurdie/work-in-progress branch has been merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,192 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 15:38:03 -0000
+X-List-Received-Date: Fri, 07 May 2010 16:17:06 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-* u-a for init scripts of busybox-syslog, sysklogd, and rsyslog
-* syslog-ng needs to be integrated too!
+On Thu, 2010-05-06 at 18:17 -0700, Khem Raj wrote:
+> On Thu, May 6, 2010 at 12:52 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> > On Wed, 2010-05-05 at 17:14 -0700, Tom Rini wrote:
+> >> On Thu, 2010-05-06 at 00:43 +0100, Richard Purdie wrote:
+> >> > I finally felt the time was right so I've merged the work-in-progres=
+s
+> >> > branch I've been talking about to OE.dev. This contains various
+> >> > architecture improvements and legacy staging cleanups that have been
+> >> > used in Poky for a while with great benefit.
+> >>
+> >> I've started testing DISTRO=3Dminimal with the machines and images I s=
+aid
+> >> earlier.  Will report eventually (it's a lotta stuff).
+> >
+> > For DISTRO=3Dminimal, mpc8315e-rdb and calamari fail, both before and
+> > after these changes.
+>=20
+> is it the same error about missing function from libgcc or something else=
+ ?
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- recipes/busybox/busybox.inc        |   20 +++++++++++++++++---
- recipes/rsyslog/rsyslog.inc        |   22 +++++++++++++---------
- recipes/sysklogd/sysklogd.inc      |   19 +++++++++++++++----
- recipes/sysklogd/sysklogd_1.4.1.bb |    2 +-
- recipes/sysklogd/sysklogd_1.5.bb   |    2 +-
- 5 files changed, 47 insertions(+), 18 deletions(-)
+I'll post some new threads with pastebins of what it looks likes.
 
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index 17d8d14..33b3811 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
- SECTION = "base"
- PRIORITY = "required"
- 
--INC_PR = "r27"
-+INC_PR = "r28"
- 
- SRC_URI = "\
-   file://busybox-cron \
-@@ -46,7 +46,7 @@ RDEPENDS_${PN} += "${PN}-mountall"
- RRECOMMENDS_${PN} += "libgcc ${PN}-syslog"
- 
- FILES_${PN}-httpd = "${sysconfdir}/init.d/busybox-httpd /srv/www"
--FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog ${sysconfdir}/syslog.conf"
-+FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} ${sysconfdir}/syslog.conf"
- FILES_${PN}-udhcpd = "${sysconfdir}/init.d/busybox-udhcpd"
- 
- FILES_${PN} += "${datadir}/udhcpc"
-@@ -104,7 +104,7 @@ do_install () {
- 	ln -sf busybox ${D}${base_bindir}/sh
- 
- 	if grep -q "CONFIG_SYSLOGD=y" ${WORKDIR}/defconfig; then
--		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/
-+		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/syslog.${PN}
- 		install -m 644 ${WORKDIR}/syslog.conf ${D}${sysconfdir}/
- 	fi
- 	if grep "CONFIG_CROND=y" ${WORKDIR}/defconfig; then
-@@ -154,6 +154,20 @@ pkg_prerm_${PN}-mountall () {
- 	update-alternatives --remove default_mountall mountall.${PN}
- }
- 
-+pkg_preinst_${PN}-syslog () {
-+    # this is needed to avoid sysmlink errors,
-+    # because update-rc.d runs before pkg_postinst :(
-+    touch ${sysconfdir}/init.d/syslog
-+}
-+
-+pkg_postinst_${PN}-syslog () {
-+    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 50
-+}
-+
-+pkg_prerm_${PN}-syslog () {
-+    update-alternatives --remove syslog-init syslog.${PN}
-+}
-+
- pkg_prerm_${PN} () {
- 	# This is so you can make busybox commit suicide - removing busybox with no other packages
- 	# providing its files, this will make update-alternatives work, but the update-rc.d part
-diff --git a/recipes/rsyslog/rsyslog.inc b/recipes/rsyslog/rsyslog.inc
-index 3e39ba0..d7b81c0 100644
---- a/recipes/rsyslog/rsyslog.inc
-+++ b/recipes/rsyslog/rsyslog.inc
-@@ -2,7 +2,7 @@ DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
- DEPENDS = "zlib"
- HOMEPAGE = "http://www.rsyslog.com/"
- LICENSE = "GPLv3"
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- SRC_URI = "http://download.rsyslog.com/rsyslog/${PN}-${PV}.tar.gz \
-           file://rsyslog.conf \
-@@ -14,19 +14,23 @@ do_install_append() {
-         install -d ${D}/${sysconfdir}/${PN}
-         install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-         install -d ${D}/${sysconfdir}/init.d
--        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/rsyslog
-+        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
- }
- 
--pkg_postinst() {
--        update-rc.d -f syslog remove
-+pkg_preinst_${PN} () {
-+    # this is needed to avoid sysmlink errors,
-+    # because update-rc.d runs before pkg_postinst :(
-+    touch ${sysconfdir}/init.d/syslog
- }
- 
--pkg_postrm() {
--        update-rc.d syslog add 5
-+pkg_postinst_${PN} () {
-+    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 300
-+}
-+
-+pkg_prerm_${PN} () {
-+    update-alternatives --remove syslog-init syslog.${PN}
- }
- 
- CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
- 
--INITSCRIPT_NAME = "rsyslog"
--#INITSCRIPT_PARAMS = "defaults 05"
--INITSCRIPT_PARAMS = "remove"
-+INITSCRIPT_NAME = "syslog"
-diff --git a/recipes/sysklogd/sysklogd.inc b/recipes/sysklogd/sysklogd.inc
-index 65da86d..8720e09 100644
---- a/recipes/sysklogd/sysklogd.inc
-+++ b/recipes/sysklogd/sysklogd.inc
-@@ -1,16 +1,17 @@
- LICENSE = "GPL"
- SECTION = "base"
- DESCRIPTION = "The sysklogd package implements two system log daemons."
-+INC_PR = "r3"
- 
- SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/sysklogd-${PV}.tar.gz \
- 	       file://nonrootinstall.patch;patch=1 \
-            file://sysklogd"
- 
- inherit update-rc.d
--INITSCRIPT_NAME = "sysklogd"
--INITSCRIPT_PARAMS = "start 39 S 1 2 3 . stop 99 0 6 ."
-+
-+INITSCRIPT_NAME = "syslog"
-+
- CFLAGS_append = " -DSYSV"
--RCONFLICTS = "busybox-syslog"
- 
- do_install () {
- 	install -d ${D}${mandir}/man8 \
-@@ -23,14 +24,24 @@ do_install () {
-     install -d ${D}${sysconfdir}
-     install -m 644 ${S}/syslog.conf ${D}${sysconfdir}/syslog.conf
-     install -d ${D}${sysconfdir}/init.d
--    install -m 755 ${WORKDIR}/sysklogd ${D}${sysconfdir}/init.d/sysklogd
-+    install -m 755 ${WORKDIR}/sysklogd ${D}${sysconfdir}/init.d/syslog.${PN}
-+}
-+
-+pkg_preinst_${PN} () {
-+    # this is needed to avoid sysmlink errors,
-+    # because update-rc.d runs before pkg_postinst :(
-+    touch ${sysconfdir}/init.d/syslog
- }
-+
- pkg_postinst_${PN} () {
-     update-alternatives --install ${base_sbindir}/syslogd syslogd syslogd.${PN} 100
-     update-alternatives --install ${base_sbindir}/klogd klogd klogd.${PN} 100
-+    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 100
- }
-+
- pkg_prerm_${PN} () {
-     update-alternatives --remove syslogd syslogd.${PN}
-     update-alternatives --remove klogd klogd.${PN}
-+    update-alternatives --remove syslog-init syslog.${PN}
- }
- 
-diff --git a/recipes/sysklogd/sysklogd_1.4.1.bb b/recipes/sysklogd/sysklogd_1.4.1.bb
-index 3d938f5..e02dd3e 100644
---- a/recipes/sysklogd/sysklogd_1.4.1.bb
-+++ b/recipes/sysklogd/sysklogd_1.4.1.bb
-@@ -1,5 +1,5 @@
- require sysklogd.inc
--PR = "r1"
-+PR = "${INC_PR}.1"
- 
- 
- SRC_URI[md5sum] = "d214aa40beabf7bdb0c9b3c64432c774"
-diff --git a/recipes/sysklogd/sysklogd_1.5.bb b/recipes/sysklogd/sysklogd_1.5.bb
-index 70e55c3..a015768 100644
---- a/recipes/sysklogd/sysklogd_1.5.bb
-+++ b/recipes/sysklogd/sysklogd_1.5.bb
-@@ -1,5 +1,5 @@
- require sysklogd.inc
--PR = "r2"
-+PR = "${INC_PR}.2"
- 
- SRC_URI += "file://no-strip-install.patch;patch=1"
- 
--- 
-1.6.4.2
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
