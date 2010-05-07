@@ -1,43 +1,29 @@
-Received: from mail-yx0-f204.google.com ([209.85.210.204])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OASSE-00032o-P1
+	(envelope-from <philip@balister.org>) id 1OAUlS-0004i2-Jh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 20:39:19 +0200
-Received: by yxe42 with SMTP id 42so1148786yxe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 11:35:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ek1RHQK9Bd9z90kSO5KSrR38H+bpnLGSsIGQoHJMrAU=;
-	b=Rsn9czjGgW6m+fLs4tCIiF17/bP83kbox5IfKo4iWFJUNAMaFvJyKzqgO1yp860NxC
-	SYvpeKFt/0+Y3GDW2NI9KdA7obb62rGYVxNBuNhtGfV6/j/ZrZARh8EAC2hn74zZQbyz
-	HhRgGCQEEHl6PUoGl5F5tkq3+VfV/hwHPyGTo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=QkCBBrkSaqb1v2trEO6B01tlfFZ+EyAgOLGr+CvNRTOfN+YD/bKlF6Dop3gE7YYEAH
-	qEjJap6nIL1z2Hra+vnGoPSdCgzIh+Q9mBPCYi8a/vqKXy1yLGyB6fnO1v77P9JREKVF
-	+k14Gsn/BeQ5lR4PRSCjfLlCb4J+9zg1djzLU=
+	Fri, 07 May 2010 23:07:20 +0200
+Received: (qmail 11006 invoked by uid 1003); 7 May 2010 21:03:26 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 7 May 2010 21:03:26 -0000
+Message-ID: <4BE48017.1000306@balister.org>
+Date: Fri, 07 May 2010 17:03:19 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.231.166.77 with SMTP id l13mr166590iby.63.1273257328197; Fri, 
-	07 May 2010 11:35:28 -0700 (PDT)
-Received: by 10.231.39.73 with HTTP; Fri, 7 May 2010 11:35:27 -0700 (PDT)
-In-Reply-To: <1273249791.457.334.camel@trini-m4400>
-References: <1273249791.457.334.camel@trini-m4400>
-Date: Fri, 7 May 2010 11:35:27 -0700
-Message-ID: <g2j19c1b8a91005071135v23d9be10u641a7cae622ec@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.210.204
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <4BE42DDD.6080805@eukrea.com>
+In-Reply-To: <4BE42DDD.6080805@eukrea.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: mpc8315e-rdb (ppc e300c3) failure
+Subject: Re: Patchwork down
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,42 +37,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 18:39:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 07 May 2010 21:07:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Fri, May 7, 2010 at 9:29 AM, Tom Rini <tom_rini@mentor.com> wrote:
-> Hey all,
+On 05/07/2010 11:12 AM, Eric Bénard wrote:
+> Hi,
 >
-> With DISTRO=minimal and MACHINE=mpc8315e-rdb, I see the following
-> failure in virtual/libc (using fe4ff6940b06c73d5b88224b99750bf65accf13d
-> in oe.dev): http://pastebin.com/44pdUFqt and I confirmed this prior to
-> the RP merge, so this is unrelated.
+> patches sent during the last 2 days didn't reach patchwork.
 
-undefined reference to `_restfpr_14_x'
-this is because we use -Os to compile the C startup code. with Os ppc gcc
-generates these function calls and these functions are in libgcc as well but the
-problem is that in the default link order
-crtend.o appears after -lgcc and its linking with libgcc.a so it does not have
-the undefined reference and it does not pull the object out of libgcc and hence
-linking fails.
+I'm the person who can adjust user accounts on patchwork, but I don;t 
+know how it is installed and how it gets email. Can whoever knows how 
+patchwork is setup let me know so I can try and sort out this problem?
 
-The right solution is to compile crtstuff always with -O2 it does not
-bloat the size
-as its only 2-3 small functions plus it gets us going forward.
+Thanks,
 
-If we used -O2 to compile everything you wont see this error.
-
-I will try to fix it when I have time.
-
-Thanks
--Khem
-
+Philip
 
 >
-> --
-> Tom Rini <tom_rini@mentor.com>
-> Mentor Graphics Corporation
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32405
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32452
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32397
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32410
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32418
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32424
+> http://article.gmane.org/gmane.comp.handhelds.openembedded/32454
 >
+> Eric
 >
 > _______________________________________________
 > Openembedded-devel mailing list
