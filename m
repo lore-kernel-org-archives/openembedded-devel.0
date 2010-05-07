@@ -1,40 +1,44 @@
-Received: from promwad.com ([83.149.69.23])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <viktar.palstsiuk@promwad.com>) id 1OALVj-0002Xy-JO
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 13:14:28 +0200
-Received: from [195.222.85.229] (helo=intranet.promwad.com)
-	by promwad.com with esmtps (TLSv1:AES256-SHA:256) (Exim 4.63)
-	(envelope-from <viktar.palstsiuk@promwad.com>) id 1OALRo-0008WA-Sd
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 14:10:24 +0300
-Received: from mail-bw0-f220.google.com ([209.85.218.220])
-	by intranet.promwad.com with esmtpsa (TLS1.0:RSA_ARCFOUR_MD5:16)
-	(Exim 4.69) (envelope-from <viktar.palstsiuk@promwad.com>)
-	id 1OALRF-0007i9-2E for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 14:09:49 +0300
-Received: by bwz20 with SMTP id 20so496487bwz.12
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OALaB-0004P0-Qs for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 13:19:05 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OALWW-000079-9A for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 13:15:16 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 May 2010 13:15:16 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 04:09:42 -0700 (PDT)
-Received: by 10.204.48.84 with SMTP id q20mr10979bkf.83.1273230582502; Fri, 07 
-	May 2010 04:09:42 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.204.100.84 with HTTP; Fri, 7 May 2010 04:09:21 -0700 (PDT)
-In-Reply-To: <n2kdfcd449c1005070221iaf3a2f3fk56de0b2c2d2f5cd2@mail.gmail.com>
-References: <n2kdfcd449c1005070221iaf3a2f3fk56de0b2c2d2f5cd2@mail.gmail.com>
-From: Viktar Palstsiuk <viktar.palstsiuk@promwad.com>
-Date: Fri, 7 May 2010 14:09:21 +0300
-Message-ID: <g2zdfcd449c1005070409kc479cf1fz688eb1730a900823@mail.gmail.com>
+	Fri, 07 May 2010 13:15:16 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 83.149.69.23
-X-SA-Exim-Mail-From: viktar.palstsiuk@promwad.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 07 May 2010 13:15:02 +0200
+Message-ID: <hs0snm$i4a$1@dough.gmane.org>
+References: <alpine.DEB.1.10.1005011614380.15503@vitus.devnet.local>	<1272723767-16871-1-git-send-email-vjensen@gmx.de>	<1272723767-16871-2-git-send-email-vjensen@gmx.de>
+	<20100507101850.GD18308@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+In-Reply-To: <20100507101850.GD18308@excalibur.local>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: QNeedleIndicator 0.3.1 demo app
+Subject: Re: [PATCH v2] canutils: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,41 +52,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 11:14:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 07 May 2010 11:19:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Here is a recipe to build QNeedleIndicator 0.3.1 demo app. It uses Qt/Embed=
-ded.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-$ cat qneedleindicator_0.3.1.bb
+On 07-05-10 12:18, Stefan Schmidt wrote:
+> Hello.
+> 
+> On Sat, 2010-05-01 at 16:22, Vitus Jensen wrote:
+>> Adds canutils (PTX flavour) 4.0.4 as alternative to socketcan-utils-test.
+>> canutils RCONFLICTS with socketcan-utils-test because of identical
+>> file names.
+>>
+>> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+>> ---
+>>  recipes/socketcan/canutils_4.0.4.bb           |   19 +++++++++++++++++++
+>>  recipes/socketcan/socketcan-utils-test_svn.bb |    1 +
+>>  2 files changed, 20 insertions(+), 0 deletions(-)
+>>  create mode 100644 recipes/socketcan/canutils_4.0.4.bb
+>>
+>> diff --git a/recipes/socketcan/canutils_4.0.4.bb b/recipes/socketcan/canutils_4.0.4.bb
+>> new file mode 100644
+>> index 0000000..e769c46
+>> --- /dev/null
+>> +++ b/recipes/socketcan/canutils_4.0.4.bb
+>> @@ -0,0 +1,19 @@
+>> +DESCRIPTION = "canutils (PTX flavour)"
+>> +AUTHOR = "Luotao Fu"
+>> +HOMEPAGE = "http://www.pengutronix.de"
+>> +SECTION = "console/network"
+>> +PRIORITY = "optional"
+>> +LICENSE = "LGPL"
+>> +DEPENDS = "libsocketcan"
+>> +RDEPENDS = "libsocketcan"
+> 
+> Why do you need this RDEPENDS on the lib when it is already in DEPENDS?
 
-DESCRIPTION =3D "Simple needle indicator. Needle is animated and
-smoothly moves until set value is reached. Animation can be disabled."
-HOMEPAGE =3D "http://qt-apps.org/content/show.php/QNeedleIndicator?content=
-=3D118474"
-LICENSE =3D "LGPL"
+The better question is "Why doesn't OE shlib code pickup that
+dependency?" :)
 
-inherit qt4e
+Regardless of that, RDEPENDS = "foo" is bad, RDEPENDS_${PN} = "foo" is
+better. Chris created the recipe sanity stuff to check for these kinds
+of things.
 
-PR =3D "r3"
+regards,
 
-SRC_URI =3D "http://qt-apps.org/CONTENT/content-files/118474-QNeedleIndicat=
-or-${PV}.tar.gz"
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-SRC_URI[md5sum] =3D "9168627119f13dd6393ba349bb595f60"
-SRC_URI[sha256sum] =3D
-"7d8d059e8006bc351272787e22bb671fc18652da1f114219242d74545492810b"
+iD8DBQFL4/Y2MkyGM64RGpERApiGAKCHkZaERI3RjRMFni0srqrz1bK1zACgh4Oc
+txgZHww4OIZWD+cvr+GWb5w=
+=eDEU
+-----END PGP SIGNATURE-----
 
-S =3D "${WORKDIR}/QNeedleIndicator-${PV}"
-
-do_install() {
-=A0 =A0 =A0 =A0${STRIP} ${S}/QNeedleIndicator
-=A0 =A0 =A0 =A0install -d ${D}/${bindir}
-=A0 =A0 =A0 =A0install -m 755 ${S}/QNeedleIndicator ${D}/${bindir}
-}
-
---
-Viktar Palstsiuk
 
 
