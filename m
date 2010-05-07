@@ -1,32 +1,35 @@
-Received: from szluug.org
-	([85.17.92.45] helo=americium.stoicheia.net ident=postfix)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <soltys@szluug.org>) id 1OAPZR-00030h-5z
+	(envelope-from <sledz@dresearch.de>) id 1OAPci-0001R9-Up
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 17:34:38 +0200
-Received: from [192.168.0.3] (soltys.soad.pl [83.168.118.74])
-	by americium.stoicheia.net (Postfix) with ESMTPA id 945B4680F6
+	Fri, 07 May 2010 17:38:02 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 8AC7E491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 17:26:11 +0200 (CEST)
-Message-ID: <4BE43043.2000605@szluug.org>
-Date: Fri, 07 May 2010 17:22:43 +0200
-From: =?UTF-8?B?S3J6eXN6dG9mICdzb2x0eXMnIEtvcm/Fm2Npaw==?= <soltys@szluug.org>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; pl;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Fri,  7 May 2010 17:34:09 +0200 (CEST)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 7 May 2010 17:35:15 +0200
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
+	id 56F0472078; Fri,  7 May 2010 17:34:09 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.0.1
-OpenPGP: id=C7D30884
-X-AVK-Virus-Check: AVA 21.218;F1206
-X-SA-Exim-Connect-IP: 85.17.92.45
-X-SA-Exim-Mail-From: soltys@szluug.org
+Date: Fri,  7 May 2010 17:34:04 +0200
+Message-Id: <1273246444-12797-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1273242036-7529-1-git-send-email-sledz@dresearch.de>
+References: <1273242036-7529-1-git-send-email-sledz@dresearch.de>
+X-OriginalArrivalTime: 07 May 2010 15:35:15.0621 (UTC)
+	FILETIME=[E3FEBD50:01CAEDFA]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: FreeBSD 8 bitbake errors
+Subject: [PATCH v2] busybox/syslogs: use update-alternatives for syslog selection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,109 +43,192 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 15:34:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 May 2010 15:38:03 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* u-a for init scripts of busybox-syslog, sysklogd, and rsyslog
+* syslog-ng needs to be integrated too!
+
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ recipes/busybox/busybox.inc        |   20 +++++++++++++++++---
+ recipes/rsyslog/rsyslog.inc        |   22 +++++++++++++---------
+ recipes/sysklogd/sysklogd.inc      |   19 +++++++++++++++----
+ recipes/sysklogd/sysklogd_1.4.1.bb |    2 +-
+ recipes/sysklogd/sysklogd_1.5.bb   |    2 +-
+ 5 files changed, 47 insertions(+), 18 deletions(-)
+
+diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+index 17d8d14..33b3811 100644
+--- a/recipes/busybox/busybox.inc
++++ b/recipes/busybox/busybox.inc
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+ SECTION = "base"
+ PRIORITY = "required"
  
-Hi all,
-I'm trying to setup oe environment on fresh FreeBSD 8 install. I'd
-installed everything listed in [1] and [2], but when I try to bitbake
-anything I get this:
-
-[soltys@ ~/oe/ngw100]$ bitbake nano
-NOTE: Handling BitBake files: / (6387/8361) [76 %]ERROR: Information
-not available for target 'i386-freebsd8'
-ERROR: argument of type 'NoneType' is not iterable while parsing
-/home/soltys/oe/ngw100/openembedded/recipes/openssl/openssl-native_0.9.8g.bb
-ERROR: Information not available for target 'i386-freebsd8'
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@siteinfo_get_endianess(d)}
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@base_conditional('SITEINFO_ENDIANESS', 'le', '-DL_ENDIAN',
-'-DB_ENDIAN', d)}         -DTERMIO -Os -fomit-frame-pointer -Wall
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@'${CFLAG}'.replace('-O2', '')}
-ERROR: argument of type 'NoneType' is not iterable while parsing
-/home/soltys/oe/ngw100/openembedded/recipes/openssl/openssl-native_0.9.8g.bb
-NOTE: Handling BitBake files: / (6426/8361) [76 %]ERROR: Information
-not available for target 'i386-freebsd8'
-ERROR: argument of type 'NoneType' is not iterable while parsing
-/home/soltys/oe/ngw100/openembedded/recipes/openssl/openssl-native_0.9.7m.bb
-ERROR: Information not available for target 'i386-freebsd8'
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@siteinfo_get_endianess(d)}
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@base_conditional('SITEINFO_ENDIANESS', 'le', '-DL_ENDIAN',
-'-DB_ENDIAN', d)}         -DTERMIO -Os -fomit-frame-pointer -Wall
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@'${CFLAG}'.replace('-O2', '')}
-ERROR: argument of type 'NoneType' is not iterable while parsing
-/home/soltys/oe/ngw100/openembedded/recipes/openssl/openssl-native_0.9.7m.bb
-NOTE: Handling BitBake files: \ (7268/8361) [86 %]ERROR: Information
-not available for target 'i386-freebsd8'
-ERROR: argument of type 'NoneType' is not iterable while parsing
-/home/soltys/oe/ngw100/openembedded/recipes/openssl/openssl-native_0.9.7g.bb
-ERROR: Information not available for target 'i386-freebsd8'
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@siteinfo_get_endianess(d)}
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@base_conditional('SITEINFO_ENDIANESS', 'le', '-DL_ENDIAN',
-'-DB_ENDIAN', d)}         -DTERMIO -Os -fomit-frame-pointer -Wall
-NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
-iterable while evaluating:
-${@'${CFLAG}'.replace('-O2', '')}
-ERROR: argument of type 'NoneType' is not iterable while parsing
-/home/soltys/oe/ngw100/openembedded/recipes/openssl/openssl-native_0.9.7g.bb
-NOTE: Handling BitBake files: | (8358/8361) [99 %]Command execution
-failed: Traceback (most recent call last):
-  File "/home/soltys/oe/ngw100/bitbake/lib/bb/command.py", line 85, in
-runAsyncCommand
-    self.cooker.updateCache()
-  File "/home/soltys/oe/ngw100/bitbake/lib/bb/cooker.py", line 802, in
-updateCache
-    if not self.parser.parse_next():
-  File "/home/soltys/oe/ngw100/bitbake/lib/bb/cooker.py", line 956, in
-parse_next
-    def parse_next(self):
-  File "/home/soltys/oe/ngw100/bitbake/lib/bb/cooker.py", line 995, in
-parse_next
-    raise ParsingErrorsFound
-ParsingErrorsFound
-
-
-Any idea why I get errors and how to deal with them ?
-
-Regards
-
-
-[1]  http://wiki.openembedded.net/index.php/OEandYourDistro#FreeBSD
-[2]  http://wiki.openembedded.net/index.php/Getting_started
-
-- -- 
-
-Krzysztof 'soltys' Koroscik
-jid: soltys@szluug.org
-e-mail: soltys@szluug.org
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (MingW32)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+-INC_PR = "r27"
++INC_PR = "r28"
  
-iEYEARECAAYFAkvkMEEACgkQNbd+EcfTCITZoACfQllUnz4KIwaYRfzVyeCIGSBQ
-8PkAoLeTft9hzLgrP9gWGOi+TqWJAlc2
-=x5i6
------END PGP SIGNATURE-----
+ SRC_URI = "\
+   file://busybox-cron \
+@@ -46,7 +46,7 @@ RDEPENDS_${PN} += "${PN}-mountall"
+ RRECOMMENDS_${PN} += "libgcc ${PN}-syslog"
+ 
+ FILES_${PN}-httpd = "${sysconfdir}/init.d/busybox-httpd /srv/www"
+-FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog ${sysconfdir}/syslog.conf"
++FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} ${sysconfdir}/syslog.conf"
+ FILES_${PN}-udhcpd = "${sysconfdir}/init.d/busybox-udhcpd"
+ 
+ FILES_${PN} += "${datadir}/udhcpc"
+@@ -104,7 +104,7 @@ do_install () {
+ 	ln -sf busybox ${D}${base_bindir}/sh
+ 
+ 	if grep -q "CONFIG_SYSLOGD=y" ${WORKDIR}/defconfig; then
+-		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/
++		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/syslog.${PN}
+ 		install -m 644 ${WORKDIR}/syslog.conf ${D}${sysconfdir}/
+ 	fi
+ 	if grep "CONFIG_CROND=y" ${WORKDIR}/defconfig; then
+@@ -154,6 +154,20 @@ pkg_prerm_${PN}-mountall () {
+ 	update-alternatives --remove default_mountall mountall.${PN}
+ }
+ 
++pkg_preinst_${PN}-syslog () {
++    # this is needed to avoid sysmlink errors,
++    # because update-rc.d runs before pkg_postinst :(
++    touch ${sysconfdir}/init.d/syslog
++}
++
++pkg_postinst_${PN}-syslog () {
++    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 50
++}
++
++pkg_prerm_${PN}-syslog () {
++    update-alternatives --remove syslog-init syslog.${PN}
++}
++
+ pkg_prerm_${PN} () {
+ 	# This is so you can make busybox commit suicide - removing busybox with no other packages
+ 	# providing its files, this will make update-alternatives work, but the update-rc.d part
+diff --git a/recipes/rsyslog/rsyslog.inc b/recipes/rsyslog/rsyslog.inc
+index 3e39ba0..d7b81c0 100644
+--- a/recipes/rsyslog/rsyslog.inc
++++ b/recipes/rsyslog/rsyslog.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
+ DEPENDS = "zlib"
+ HOMEPAGE = "http://www.rsyslog.com/"
+ LICENSE = "GPLv3"
+-INC_PR = "r0"
++INC_PR = "r1"
+ 
+ SRC_URI = "http://download.rsyslog.com/rsyslog/${PN}-${PV}.tar.gz \
+           file://rsyslog.conf \
+@@ -14,19 +14,23 @@ do_install_append() {
+         install -d ${D}/${sysconfdir}/${PN}
+         install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
+         install -d ${D}/${sysconfdir}/init.d
+-        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/rsyslog
++        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
+ }
+ 
+-pkg_postinst() {
+-        update-rc.d -f syslog remove
++pkg_preinst_${PN} () {
++    # this is needed to avoid sysmlink errors,
++    # because update-rc.d runs before pkg_postinst :(
++    touch ${sysconfdir}/init.d/syslog
+ }
+ 
+-pkg_postrm() {
+-        update-rc.d syslog add 5
++pkg_postinst_${PN} () {
++    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 300
++}
++
++pkg_prerm_${PN} () {
++    update-alternatives --remove syslog-init syslog.${PN}
+ }
+ 
+ CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
+ 
+-INITSCRIPT_NAME = "rsyslog"
+-#INITSCRIPT_PARAMS = "defaults 05"
+-INITSCRIPT_PARAMS = "remove"
++INITSCRIPT_NAME = "syslog"
+diff --git a/recipes/sysklogd/sysklogd.inc b/recipes/sysklogd/sysklogd.inc
+index 65da86d..8720e09 100644
+--- a/recipes/sysklogd/sysklogd.inc
++++ b/recipes/sysklogd/sysklogd.inc
+@@ -1,16 +1,17 @@
+ LICENSE = "GPL"
+ SECTION = "base"
+ DESCRIPTION = "The sysklogd package implements two system log daemons."
++INC_PR = "r3"
+ 
+ SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/sysklogd-${PV}.tar.gz \
+ 	       file://nonrootinstall.patch;patch=1 \
+            file://sysklogd"
+ 
+ inherit update-rc.d
+-INITSCRIPT_NAME = "sysklogd"
+-INITSCRIPT_PARAMS = "start 39 S 1 2 3 . stop 99 0 6 ."
++
++INITSCRIPT_NAME = "syslog"
++
+ CFLAGS_append = " -DSYSV"
+-RCONFLICTS = "busybox-syslog"
+ 
+ do_install () {
+ 	install -d ${D}${mandir}/man8 \
+@@ -23,14 +24,24 @@ do_install () {
+     install -d ${D}${sysconfdir}
+     install -m 644 ${S}/syslog.conf ${D}${sysconfdir}/syslog.conf
+     install -d ${D}${sysconfdir}/init.d
+-    install -m 755 ${WORKDIR}/sysklogd ${D}${sysconfdir}/init.d/sysklogd
++    install -m 755 ${WORKDIR}/sysklogd ${D}${sysconfdir}/init.d/syslog.${PN}
++}
++
++pkg_preinst_${PN} () {
++    # this is needed to avoid sysmlink errors,
++    # because update-rc.d runs before pkg_postinst :(
++    touch ${sysconfdir}/init.d/syslog
+ }
++
+ pkg_postinst_${PN} () {
+     update-alternatives --install ${base_sbindir}/syslogd syslogd syslogd.${PN} 100
+     update-alternatives --install ${base_sbindir}/klogd klogd klogd.${PN} 100
++    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 100
+ }
++
+ pkg_prerm_${PN} () {
+     update-alternatives --remove syslogd syslogd.${PN}
+     update-alternatives --remove klogd klogd.${PN}
++    update-alternatives --remove syslog-init syslog.${PN}
+ }
+ 
+diff --git a/recipes/sysklogd/sysklogd_1.4.1.bb b/recipes/sysklogd/sysklogd_1.4.1.bb
+index 3d938f5..e02dd3e 100644
+--- a/recipes/sysklogd/sysklogd_1.4.1.bb
++++ b/recipes/sysklogd/sysklogd_1.4.1.bb
+@@ -1,5 +1,5 @@
+ require sysklogd.inc
+-PR = "r1"
++PR = "${INC_PR}.1"
+ 
+ 
+ SRC_URI[md5sum] = "d214aa40beabf7bdb0c9b3c64432c774"
+diff --git a/recipes/sysklogd/sysklogd_1.5.bb b/recipes/sysklogd/sysklogd_1.5.bb
+index 70e55c3..a015768 100644
+--- a/recipes/sysklogd/sysklogd_1.5.bb
++++ b/recipes/sysklogd/sysklogd_1.5.bb
+@@ -1,5 +1,5 @@
+ require sysklogd.inc
+-PR = "r2"
++PR = "${INC_PR}.2"
+ 
+ SRC_URI += "file://no-strip-install.patch;patch=1"
+ 
+-- 
+1.6.4.2
 
 
 
