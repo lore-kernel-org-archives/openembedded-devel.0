@@ -1,41 +1,35 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <daniel.xntian@gmail.com>) id 1OAI29-0007pY-6J
+	(envelope-from <sledz@dresearch.de>) id 1OAI9E-0002jr-GB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 09:33:49 +0200
-Received: by vws13 with SMTP id 13so756129vws.6
+	Fri, 07 May 2010 09:39:02 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7CAD2491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 00:27:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=/Kw9u9tSH+FlpPEPLh6KxTmdoIfykons1MW2zwZSz/w=;
-	b=p4PvMMf+JQF9ZJDeJO+RF7K/RvybNu9JCuiIVxsPrL8Dg3u1QC2tPKWz8O9LrnxmjO
-	yg4VVBOUs+u9u9IgxGfxYyPiDukHUASbikUjH8V3LAYTgO9Qau/Qjuu3l6yYNljUbTP0
-	z1FwSkkSd+UxhfG2C9B9ao36ELQvRRUQ0tx/0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	b=Sg67gRjaImey3eN6v2VuZZD4iNlvvpq2S0Y/208fKQVeTHYZ+rU/2NqFLcKdtkFXbg
-	uzldJd9JWWdNUjyblGbACDxlQoC4WXO6aOqh6s7SCK4Eh4nfTwYizR5nHw7rHU5vxCfr
-	IVSZ8jfJDmUJBgwsUnBhSMXrNL5m5W5zC+7Bc=
+	Fri,  7 May 2010 09:35:13 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 09:36:18 +0200
+Message-ID: <4BE3C2B1.5040307@dresearch.de>
+Date: Fri, 07 May 2010 09:35:13 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.220.61.139 with SMTP id t11mr6689509vch.203.1273217271011; 
-	Fri, 07 May 2010 00:27:51 -0700 (PDT)
-Received: by 10.220.100.140 with HTTP; Fri, 7 May 2010 00:27:50 -0700 (PDT)
-Date: Fri, 7 May 2010 15:27:50 +0800
-Message-ID: <q2u121fadb81005070027t9958a5e9m63e3648d364f006a@mail.gmail.com>
-From: daniel tian <daniel.xntian@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: daniel.xntian@gmail.com
+References: <4BE185C7.50305@dresearch.de>	<1273140949-14699-1-git-send-email-sledz@dresearch.de>	<hru6f7$4qk$1@dough.gmane.org>	<4BE29E46.2000600@dresearch.de>	<4BE3BA38.1010102@dresearch.de>
+	<hs0f5k$sl$1@dough.gmane.org>
+In-Reply-To: <hs0f5k$sl$1@dough.gmane.org>
+X-OriginalArrivalTime: 07 May 2010 07:36:18.0542 (UTC)
+	FILETIME=[FB5C78E0:01CAEDB7]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: peng.zheng@mavrixtech.com
-Subject: X/Xorg can not run successfully
+Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 07:33:50 -0000
+X-List-Received-Date: Fri, 07 May 2010 07:39:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello, all:
-        I already built the openembedded code with "bitbake
-e-image-core". but after the rootfs and kernel runs on mips24k board,
-I can login with root in minicom.
-        But after I run the 'X', the LCD screen becomes black.
-        Here is the command I run, and the message shows on minicom:
-        root@db1200:~# X
+Am 07.05.2010 09:23, wrote Koen Kooi:
+>>>>  #This is unrelated to the kernel version, but userspace apps (e.g. HAL) require a recent version to build against
+>>>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
+>>>> +PREFERRED_VERSION_linux-libc-headers       ?= "2.6.31"
+>>>> +PREFERRED_VERSION_linux-libc-headers_hipox ?= "2.6.24"
+>>>
+>>> NACK, that creates undefined behaviour for multimachine builds.
+> 
+>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
+>> +PREFERRED_VERSION_linux-libc-headers       = "2.6.31"
+>> +PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
+> 
+>> Is this better?
+> 
+> No, it still changes the headers for one machine, which leads to
+> undefined behaviour for other machines using the same arch.
+> Any solution that doesn't mark *all* packages as machine specific for
+> hipox is going to cause that behaviour.
 
-X.Org X Server 1.7.4
-Release Date: 2010-01-08
-X Protocol Version 11, Revision 0
-Build Operating System: Linux 2.6.31-20-generic i686
-Current Operating System: Linux db1200 2.6.29.4 #1 PREEMPT Fri May 7
-11:39:13 CST 2010 mips
-Kernel command line: root=/dev/mmcblk0p1 rootdelay=8 rootfstype=ext2
-rw console=ttyS0
-Build Date: 06 May 2010  09:38:21PM
+Hmmmm? So what is the right method to change the header version
+for a machine which needs a specific kernel version? Something like
+PREFERRED_VERSION_linux-libc-headers in machine config?
 
-Current version of pixman: 0.18.0
-       Before reporting problems, check http://wiki.x.org
-       to make sure that you have the latest version.
-Markers: (--) probed, (**) from config file, (==) default setting,
-       (++) from command line, (!!) notice, (II) informational,
-       (WW) warning, (EE) error, (NI) not implemented, (??) unknown.
-(==) Log file: "/var/log/Xorg.0.log", Time: Thu Jan  1 00:00:55 1970
-(==) Using config file: "/etc/X11/xorg.conf"
-(EE) Failed to load module "glx" (module does not exist, 0)
-(EE) Failed to load module "dri" (module does not exist, 0)
-(EE) Failed to load module "dri2" (module does not exist, 0)
-Primary device is not PCI
+Evidently glibc does not fall back gracefully on missing syscalls.
 
-        By the way, the Poky can run on my board normally.
+Regards,
+Steffen
 
-        Does your guys also encounter with this problem?
-        Any suggestion is appreciated.
-        Thanks very much.
-
-
-                                     daniel
 
 
