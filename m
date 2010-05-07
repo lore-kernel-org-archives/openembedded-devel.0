@@ -1,42 +1,36 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1OAMy0-0004HQ-8G
+	(envelope-from <sledz@dresearch.de>) id 1OANFU-0006nH-9G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 14:47:46 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 82D66A446C
+	Fri, 07 May 2010 15:05:48 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 04870491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 13:43:54 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 4q7Ngfkq-Roq
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 13:43:33 +0100 (BST)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id DB86FA43F4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  7 May 2010 13:43:33 +0100 (BST)
-Received: by xora-desktop.xora.org.uk (Postfix, from userid 500)
-	id 1F2C62C905; Fri,  7 May 2010 13:43:28 +0100 (BST)
-Date: Fri, 7 May 2010 13:43:28 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100507124328.GC2900@xora-desktop.xora.org.uk>
-References: <hs0mho$rst$1@dough.gmane.org>
+	Fri,  7 May 2010 15:02:01 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 15:03:06 +0200
+Message-ID: <4BE40F58.2000905@dresearch.de>
+Date: Fri, 07 May 2010 15:02:16 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-In-Reply-To: <hs0mho$rst$1@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-08-17)
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+To: openembedded-devel@lists.openembedded.org
+References: <4BE25BFD.2090204@dresearch.de>
+	<hrtmn1$bp1$3@dough.gmane.org>	<4BE3C542.4070603@dresearch.de>
+	<4BE3F2AE.8060305@dresearch.de> <20100507110900.GF3204@jama>
+In-Reply-To: <20100507110900.GF3204@jama>
+X-OriginalArrivalTime: 07 May 2010 13:03:06.0761 (UTC)
+	FILETIME=[A2C53F90:01CAEDE5]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: perl build problem in .dev
+Subject: Re: All the syslogs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,65 +44,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 12:47:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 May 2010 13:05:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-I see exactly the same issue as below on my build machine!
+Am 07.05.2010 13:09, schrieb Martin Jansa:
+>> When opkg installs the packages it wants to run update-rc.d *before*
+>> update-alternatives. This results in an "file does not exist" error. :(
+>>
+>>   Installing rsyslog (5.5.4-r1.0.5) to root...
+>>   Installing busybox-syslog (1.13.2-r24.1.5) to root...
+>>   Configuring rsyslog
+>>   update-rc.d: /etc/init.d/syslog: file does not exist
+>>   update-alternatives: Linking //etc/init.d/syslog to syslog.rsyslog
+>> Any suggestions?
+> 
+> If there is only one u-a file in recipe you can try
+> inherit update-alternatives to see if it will generate postinst commands
+> in right order.
 
-Graeme
+Sorry, sometimes more than one.
 
-On Fri, May 07, 2010 at 11:29:28AM +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Hi,
-> 
-> I'm unable to build perl_5.8.8.bb:
-> 
-> | ln -s hostperl miniperl
-> | ./miniperl -Ilib configpm --heavy=lib/Config_heavy.pl lib/Config.pm
-> | ./miniperl: error while loading shared libraries: libperl.so: cannot
-> open shared object file: No such file or directory
-> | make[1]: *** [lib/Config.pod] Error 127
-> | make[1]: Leaving directory
-> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
-> | make[1]: Entering directory
-> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
-> | ./miniperl -Ilib configpm --heavy=lib/Config_heavy.pl lib/Config.pm
-> | ./miniperl: error while loading shared libraries: libperl.so: cannot
-> open shared object file: No such file or directory
-> | make[1]: *** [lib/Config.pod] Error 127
-> | make[1]: Leaving directory
-> `/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
-> 
-> koen@dominion:/OE/build$ !find
-> find /OE/angstrom-dev/sysroots/ -name "libperl.so*"
-> /OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/perl/5.8.8/CORE/libperl.so
-> 
-> I tried doing
-> 
-> - -export PERLHOSTLIB = "${STAGING_LIBDIR_NATIVE}/perl/${PV}/"
-> +export PERLHOSTLIB = "${STAGING_LIBDIR_NATIVE}/perl/${PV}/CORE/"
-> 
-> which didn't help. Any ideas?
-> 
-> 
-> regards,
-> 
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFL4914MkyGM64RGpERAteUAKCW8Cf+LkADEX+c2dA1YzfdC46Z1QCePo3v
-> wVqb3heMrT9O+8HZ5qkAJdc=
-> =jVgC
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> Or in worse case, move update-rc.d logic to your postinst scripts after
+> setting u-a links.
+
+Would be a
+
+    touch {sysconfdir}/init.d/syslog
+
+in pkg_preinst_${PN} be acceptable? It worked well in my test.
+
+Regards,
+Steffen
+
 
 
