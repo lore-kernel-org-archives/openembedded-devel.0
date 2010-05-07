@@ -1,46 +1,35 @@
-Received: from mail-iw0-f171.google.com ([209.85.223.171])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OACFj-00011a-Pb
+	(envelope-from <sledz@dresearch.de>) id 1OAHaJ-0006Ik-Lk
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 03:21:33 +0200
-Received: by iwn1 with SMTP id 1so693104iwn.12
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 06 May 2010 18:17:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=YVQ/01gAWNc3IFjUkLtQYp2+bMiVH70RKLqYtEef/+8=;
-	b=wU7qULWUnmwm12bzHVugrZmFFl1c/2/JrrQnZ5Iypw5GaAi8mYdNHicwzsA23zNGU3
-	DjRHgV4mGHepBr9FlrJKXvWxeEe7oIO7aA+jwsVzdGwtF88jfhIiERWWK+o+lCB8WdB9
-	AMzNATVDjYBwkl/Y4fMTiVazwTCLEdDWSBzU4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=mm/2kvmYZmpu2UKtgyu2LSzL8Gfob7l8b0RClvC0ne3Il73bGf0oIVKcDJzN2omsxU
-	MWoD2m+druwdyT0AppWM5kCRMdwSucw1Jig9A/C4CQnc4V3lI52hFtThdXMbfm85eM+d
-	reo4DoTT/H2o3MtzSA1icdcMedksTyLg10hcg=
+	Fri, 07 May 2010 09:02:56 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 80497491282;
+	Fri,  7 May 2010 08:59:08 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 09:00:13 +0200
+Message-ID: <4BE3BA38.1010102@dresearch.de>
+Date: Fri, 07 May 2010 08:59:04 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.231.152.83 with SMTP id f19mr2922709ibw.82.1273195043907; Thu, 
-	06 May 2010 18:17:23 -0700 (PDT)
-Received: by 10.231.39.73 with HTTP; Thu, 6 May 2010 18:17:23 -0700 (PDT)
-In-Reply-To: <1273175555.457.296.camel@trini-m4400>
-References: <1273102999.5743.49.camel@rex>
-	<1273104883.457.56.camel@trini-m4400>
-	<1273175555.457.296.camel@trini-m4400>
-Date: Thu, 6 May 2010 18:17:23 -0700
-Message-ID: <s2g19c1b8a91005061817i5719e011z51260b5361e708e7@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.223.171
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <4BE185C7.50305@dresearch.de>	<1273140949-14699-1-git-send-email-sledz@dresearch.de>	<hru6f7$4qk$1@dough.gmane.org>
+	<4BE29E46.2000600@dresearch.de>
+In-Reply-To: <4BE29E46.2000600@dresearch.de>
+X-OriginalArrivalTime: 07 May 2010 07:00:13.0511 (UTC)
+	FILETIME=[F0E6F570:01CAEDB2]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The rpurdie/work-in-progress branch has been merged
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,39 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 01:21:33 -0000
+X-List-Received-Date: Fri, 07 May 2010 07:02:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, May 6, 2010 at 12:52 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> On Wed, 2010-05-05 at 17:14 -0700, Tom Rini wrote:
->> On Thu, 2010-05-06 at 00:43 +0100, Richard Purdie wrote:
->> > I finally felt the time was right so I've merged the work-in-progress
->> > branch I've been talking about to OE.dev. This contains various
->> > architecture improvements and legacy staging cleanups that have been
->> > used in Poky for a while with great benefit.
->>
->> I've started testing DISTRO=3Dminimal with the machines and images I sai=
-d
->> earlier. =A0Will report eventually (it's a lotta stuff).
+>>  #This is unrelated to the kernel version, but userspace apps (e.g. HA=
+L) require a recent version to build against
+>> -PREFERRED_VERSION_linux-libc-headers 	=3D "2.6.31"
+>> +PREFERRED_VERSION_linux-libc-headers       ?=3D "2.6.31"
+>> +PREFERRED_VERSION_linux-libc-headers_hipox ?=3D "2.6.24"
 >
-> For DISTRO=3Dminimal, mpc8315e-rdb and calamari fail, both before and
-> after these changes.
+> NACK, that creates undefined behaviour for multimachine builds.
 
-is it the same error about missing function from libgcc or something else ?
+-PREFERRED_VERSION_linux-libc-headers 	=3D "2.6.31"
++PREFERRED_VERSION_linux-libc-headers       =3D "2.6.31"
++PREFERRED_VERSION_linux-libc-headers_hipox =3D "2.6.24"
 
+Is this better?
 
- =A0For qemux86, qemuarm, qemumips and db1200,
-> minimal-image builds and for the QEMU boards, x11-image builds as well.
->
-> --
-> Tom Rini <tom_rini@mentor.com>
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+
 
 
