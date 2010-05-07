@@ -1,35 +1,41 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OAJWL-0003bw-78
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 11:07:05 +0200
-Received: from 88-108-80-109.dynamic.dsl.as9105.com ([88.108.80.109]
-	helo=[192.168.2.154])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OAJSf-0001rN-Mt
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 10:03:09 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OAJw3-0007VB-Kw for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 11:33:33 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OAJsN-0007O3-LG for openembedded-devel@lists.openembedded.org;
+	Fri, 07 May 2010 11:29:43 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 May 2010 11:29:43 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 07 May 2010 11:29:43 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BE185C7.50305@dresearch.de>
-References: <4BE13C20.1010902@dresearch.de>
-	<20100505094242.GF2444@xora-desktop.xora.org.uk>
-	<4BE141CA.30904@dresearch.de>
-	<1273053926.18119.331.camel@mill.internal.reciva.com>
-	<4BE185C7.50305@dresearch.de>
-Date: Fri, 07 May 2010 10:03:06 +0100
-Message-ID: <1273222986.4378.18.camel@lenovo.internal.reciva.com>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 07 May 2010 11:29:28 +0200
+Message-ID: <hs0mho$rst$1@dough.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100421 Shredder/3.0.5pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: linux vs. linux-libc-headers?
+Subject: perl build problem in .dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,46 +49,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 09:07:06 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 07 May 2010 09:33:33 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-05-05 at 16:50 +0200, Steffen Sledz wrote:
-> As mentioned before that's just one problem and we have some more.
-> I do not have time and knowledge to hunt and fix them all.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-That is unfortunate.
+Hi,
 
-> So for the moment i would prefer to work with linux-libc-headers
-> of version 2.6.24.
-> 
-> But what's the recommended way to select them in OE/Angstrom?
+I'm unable to build perl_5.8.8.bb:
 
-As far as OE goes, it's fairly easy: you just set
-PREFERRED_VERSION_linux-libc-headers appropriately.  But, if Angstrom
-has taken a distro decision to use the 2.6.31 headers then you will have
-a problem: if you just make that change for one MACHINE, your binaries
-will now be different to everybody else's and hence what you are
-building is not really Angstrom anymore.
+| ln -s hostperl miniperl
+| ./miniperl -Ilib configpm --heavy=lib/Config_heavy.pl lib/Config.pm
+| ./miniperl: error while loading shared libraries: libperl.so: cannot
+open shared object file: No such file or directory
+| make[1]: *** [lib/Config.pod] Error 127
+| make[1]: Leaving directory
+`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
+| make[1]: Entering directory
+`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
+| ./miniperl -Ilib configpm --heavy=lib/Config_heavy.pl lib/Config.pm
+| ./miniperl: error while loading shared libraries: libperl.so: cannot
+open shared object file: No such file or directory
+| make[1]: *** [lib/Config.pod] Error 127
+| make[1]: Leaving directory
+`/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r33/perl-5.8.8'
 
-If you are not willing to fix glibc then I think there are only three
-sensible ways to proceed:
+koen@dominion:/OE/build$ !find
+find /OE/angstrom-dev/sysroots/ -name "libperl.so*"
+/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib/perl/5.8.8/CORE/libperl.so
 
-a) update your machine to use the 2.6.31 kernel so that the problem goes
-away; or
+I tried doing
 
-b) persuade the Angstrom maintainers to adopt 2.6.24 headers as their
-DISTRO standard, though this will presumably cause some fallout in terms
-of other incompatibilities so I suspect it will be a struggle; or
+- -export PERLHOSTLIB = "${STAGING_LIBDIR_NATIVE}/perl/${PV}/"
++export PERLHOSTLIB = "${STAGING_LIBDIR_NATIVE}/perl/${PV}/CORE/"
 
-c) create your own DISTRO, which can be a derivative/fork of Angstrom if
-you wish, and in which you can obviously do whatever you like.  This
-probably seems like a bit of a large hammer to crack that particular nut
-but it is more or less the only way in which you can use a different
-version from the other Angstrom folks.
+which didn't help. Any ideas?
 
-p.
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL4914MkyGM64RGpERAteUAKCW8Cf+LkADEX+c2dA1YzfdC46Z1QCePo3v
+wVqb3heMrT9O+8HZ5qkAJdc=
+=jVgC
+-----END PGP SIGNATURE-----
 
 
 
