@@ -1,49 +1,53 @@
-Received: from mail-ew0-f211.google.com ([209.85.219.211])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1OAO32-0001rg-Ss
+	(envelope-from <spyzer.abhishek0@gmail.com>) id 1OAOB0-0001pO-LB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 15:57:04 +0200
-Received: by ewy3 with SMTP id 3so251266ewy.26
+	Fri, 07 May 2010 16:05:18 +0200
+Received: by gwj23 with SMTP id 23so564512gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 06:53:11 -0700 (PDT)
+	Fri, 07 May 2010 07:01:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type; bh=W4kXkhATwj8YHRZR3VSi75pgLE2oM6owxbZm+JQRCa4=;
-	b=W6AtCAS+bC9CxqHw/KyKA3CWMfwp62ODM1dXdsva1Yx3rm5J/KXTbbZrZdr9pqK71/
-	c4HHAc70txfwVj7OLDeb7Jjz3HDiIZ0S8Q3bM6VACLBiYHrMCTk/uqfEtmSxJ8DGU5e5
-	Bh+ZJMYqLOpbfgsuhXs0Bh7Z0nWTXe4cBWiVE=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=beR8ZFjwCExygrTsNl1ThIpuTKChWjcBEv+zYK4PVvs=;
+	b=LTchS+D8BqmW5Ss4HmT9lZMvnhBjxM66d0Xq15CmVC6H4/R7DgZu7XqUnZXydFn4he
+	2D++n0OIh53O7OhxqOKeZLtlUQ/ZleHQaAnS6qQADSyFUnEhORbNPic7CYF/unM7Hz9r
+	dn4qh9u32V24CcAHTTLmCmZKSTk+QUbgUeQ3o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type;
-	b=GCYTC4+f3PzDqPO7cVIv+h/mlhfeI+9cLnpLjVSqyG+4c0fNxlfY4eOW66POP9HaEA
-	IAVqoTARFR343u3AmgRW8DKN01R0yl51vPMZ45ceugdAi5L+16NNQbN9oKguqoC1v7vv
-	TKz00JKDBnsl8bhTnGhuIsn5qW8+MPDKOSe3I=
-Received: by 10.213.51.208 with SMTP id e16mr4079977ebg.27.1273240391281;
-	Fri, 07 May 2010 06:53:11 -0700 (PDT)
-Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id 13sm1131619ewy.9.2010.05.07.06.53.10
-	(version=SSLv3 cipher=RC4-MD5); Fri, 07 May 2010 06:53:10 -0700 (PDT)
-Message-ID: <4BE41BAE.5000302@gmail.com>
-Date: Fri, 07 May 2010 15:54:54 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Shredder/3.0.3pre
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=e/T5DiW6+jxTReSMzFFy9hzLS/oSrsEBBWGBhH3TvTYhbSZX6NU6WPEfVd7xb/otuL
+	GLGROAKACulqCKzUusQMuW2eS/41yI/+4V9uPNffi/kOQpfWNUgxeOlcTiW5ih7g5wcZ
+	ykKMN+H3fNPMfYn1RDON42lsAMEtgz8UzKUBw=
+Received: by 10.151.24.4 with SMTP id b4mr3652327ybj.335.1273240882713; Fri, 
+	07 May 2010 07:01:22 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.150.124.11 with HTTP; Fri, 7 May 2010 07:01:02 -0700 (PDT)
+In-Reply-To: <hru8nc$d5l$1@dough.gmane.org>
+References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com> 
+	<hr4t3j$tds$1@dough.gmane.org>
+	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com>
+	<4BD84B08.4000300@eukrea.com>
+	<g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>
+	<4BDFC996.5060606@eukrea.com>
+	<AANLkTik56w90iywd5ZmzV_geM0ULabHWVCuJIfxzHY7u@mail.gmail.com> 
+	<4BE29322.7060205@eukrea.com>
+	<AANLkTimCrYrjKuREPyUgYQwxlWdAN_OjF5ECiRBLj6Pp@mail.gmail.com> 
+	<hru8nc$d5l$1@dough.gmane.org>
+From: Abhishek Sharma <spyzer.abhishek0@gmail.com>
+Date: Fri, 7 May 2010 19:31:02 +0530
+Message-ID: <AANLkTinNs0RXIqA8annkPWKiGKUAD8yWnlKiAZiT-g0A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <mailman.5784.1273038368.24517.openembedded-devel@lists.openembedded.org>
-	<4BE11B74.7090901@gmail.com>
-In-Reply-To: <4BE11B74.7090901@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.219.211
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: spyzer.abhishek0@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: python-pyqt compile error with latest org.openembedded.dev
+Subject: Re: Regarding customized image with Qt embedded support.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,135 +61,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 13:57:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 07 May 2010 14:05:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Doesn't seem to be a lot of interest in this, and I stumbled across an 
-old post about "End-of-life for PyQt-Embedded" ( 
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2007-August/002802.html). 
-Was this the end of PyQt in OE? If so, should the recipes be removed?
+On Thu, May 6, 2010 at 4:51 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 
-What about PySide ( http://www.pyside.org/), Nokias own Python bindings 
-for Qt? Is that something it would be interesting to have a recipe for? 
-I've been trying to make one myself, but my OE skills haven't proven 
-good enough.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 06-05-10 12:55, Abhishek Sharma wrote:
+>
+> > About the /dev node, there is no such device as /dev/input/touchscreen0,
+> is
+> > it because i am only doing a base-image kind of install???
+> > i set the environment variable which was specified, but no progress.
+>
+> If you use udev, it will get created for you.
+>
+> regards,
+>
+> Koen
+>
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFL4qYsMkyGM64RGpERAszCAJ9tRRJelQyLDkozlVtBHdgyobx/HQCgs0NP
+> mB316e3HZG2RsEoAcQEwJrI=
+> =4Mnu
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
-
-On 05/05/2010 09:17 AM, Tasslehoff Kjappfot wrote:
-> I was told on #oe that I should have been a bit more verbose in my 
-> previous mail, and I agree :-)
->
-> I'm compiling Angstrom for the Beagleboard with the latest 
-> org.openembedded.dev, and python-pyqt fails. I took a closer look at 
-> the recipes for python-pyqt and python-sip, and they use old versions 
-> that don't match the Qt-version currently in use. I'm attempting to 
-> make it build with updated versions on my machine, but my recipe-fu 
-> isn't very good, so any help is appreciated.
->
-> Compilation output ===>
->
-> NOTE: make MAKEFLAGS=
->
-> cd QtCore/ && make -f Makefile
->
-> make[1]: Entering directory 
-> `/data/src/openembedded/build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pyqt-4.4.3-ml5/PyQt-x11-gpl-4.4.3/QtCore' 
->
->
-> arm-angstrom-linux-gnueabi-g++ -march=armv7-a -mtune=cortex-a8 
-> -mfpu=neon -mfloat-abi=softfp -c -pipe 
-> -isystem/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include 
-> -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 
-> -ggdb3 
-> -isystem/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include 
-> -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 
-> -ggdb3 -fpermissive -fvisibility-inlines-hidden -Wall -W -D_REENTRANT 
-> -fPIC -DQT_NO_DEBUG -DQT_GUI_LIB -DQT_CORE_LIB -DQT_SHARED 
-> -I/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/share/qt4/mkspecs/linux-g++ 
-> -I. 
-> -I/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore 
-> -I/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtGui 
-> -I/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4 
-> -I/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/Qt 
-> -I/data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/python2.6 
-> -I. -o sipQtCoreQResource.o sipQtCoreQResource.cpp
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h: 
-> In copy constructor 'QResource::QResource(const QResource&)':
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:170: 
-> error: 'QScopedPointer<T, Cleanup>::QScopedPointer(const 
-> QScopedPointer<T, Cleanup>&) [with T = QResourcePrivate, Cleanup = 
-> QScopedPointerDeleter<QResourcePrivate>]' is private
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qresource.h:59: 
-> error: within this context
->
-> sipQtCoreQResource.cpp: In constructor 
-> 'sipQResource::sipQResource(const QResource&)':
->
-> sipQtCoreQResource.cpp:84: note: synthesized method 
-> 'QResource::QResource(const QResource&)' first required here
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h: 
-> In member function 'QResource& QResource::operator=(const QResource&)':
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:170: 
-> error: 'QScopedPointer<T, Cleanup>& QScopedPointer<T, 
-> Cleanup>::operator=(const QScopedPointer<T, Cleanup>&) [with T = 
-> QResourcePrivate, Cleanup = QScopedPointerDeleter<QResourcePrivate>]' 
-> is private
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qresource.h:59: 
-> error: within this context
->
-> sipQtCoreQResource.cpp: In function 'void assign_QResource(void*, 
-> const void*)':
->
-> sipQtCoreQResource.cpp:618: note: synthesized method 'QResource& 
-> QResource::operator=(const QResource&)' first required here
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h: 
-> In static member function 'static void 
-> QScopedPointerDeleter<T>::cleanup(T*) [with T = QResourcePrivate]':
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:100:   
-> instantiated from 'QScopedPointer<T, Cleanup>::~QScopedPointer() [with 
-> T = QResourcePrivate, Cleanup = QScopedPointerDeleter<QResourcePrivate>]'
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qresource.h:59:   
-> instantiated from here
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:59: 
-> error: invalid application of 'sizeof' to incomplete type 
-> 'QResourcePrivate'
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:59: 
-> error: creating array with negative size ('-0x00000000000000001')
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:62: 
-> warning: possible problem detected in invocation of delete operator:
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:54: 
-> warning: 'pointer' has incomplete type
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qresource.h:56: 
-> warning: forward declaration of 'struct QResourcePrivate'
->
-> /data/src/openembedded/build/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/include/qt4/QtCore/qscopedpointer.h:62: 
-> note: neither the destructor nor the class-specific operator delete 
-> will be called, even if they are declared when the class is defined.
->
-> make[1]: *** [sipQtCoreQResource.o] Error 1
->
-> make[1]: Leaving directory 
-> `/data/src/openembedded/build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/python-pyqt-4.4.3-ml5/PyQt-x11-gpl-4.4.3/QtCore' 
->
->
-> make: *** [sub-QtCore-make_default] Error 2
->
-> FATAL: oe_runmake failed
-
+Thanks all, the touchscreen device was /dev/event1 and the moment I did ->
+export QWS_MOUSE_PROTO="Tslib:/dev/event1" and ran the app, it got going.
+I am very grateful to you all for the help.
+:)
+-- 
+Abhishek Sharma
 
