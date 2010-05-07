@@ -1,46 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OAP4c-00072Q-BS
+	(envelope-from <sledz@dresearch.de>) id 1OAP9U-0001MN-W3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 17:02:46 +0200
-Received: by fxm11 with SMTP id 11so873537fxm.6
+	Fri, 07 May 2010 17:07:45 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id A349B491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 07:58:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=hYzEy4hOQ6xCvqyXy824XhclvDycMVdX3WtMPth7mJY=;
-	b=KcNVTZLEudtsdK7iy17GjoFAGSI9iqUdvaZE+hjJmVs4TNOROL70348ZLxFqsMnKCf
-	0oo9ReQNwsbWZrsf0gORQm0wshFczVUOJIT7LMrHCsZL27QOCpJkdhC1EOs6ecNM+t5H
-	ZjoxKSLyxqDzZA+F8/EXtYwuV9NDyI1pFo+JY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=s6kLrM+Pn2A4xnEVCUNqkgErAn+5iFmpjb5UIvfcqbA3gt/7vDCbwYpWZXnqQrFdTo
-	qTwzTnnDywCCbKKuHPazfvPzHqeSslFqVnhMqsd045eYd4SbgJf6QWfV5W06TOeLQQYx
-	tD9wvfEldPUgFzH3Kdb70R0xKWyfQeAhjpbXY=
-Received: by 10.223.92.136 with SMTP id r8mr159871fam.40.1273244332805;
-	Fri, 07 May 2010 07:58:52 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id r25sm7008014fai.23.2010.05.07.07.58.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 07 May 2010 07:58:52 -0700 (PDT)
-Date: Fri, 7 May 2010 16:58:50 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100507145850.GJ3204@jama>
-References: <4BE41DF5.7040805@dresearch.de>
-	<1273242036-7529-1-git-send-email-sledz@dresearch.de>
+	Fri,  7 May 2010 17:03:57 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 17:05:03 +0200
+Message-ID: <4BE42BFB.2020806@dresearch.de>
+Date: Fri, 07 May 2010 17:04:27 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-In-Reply-To: <1273242036-7529-1-git-send-email-sledz@dresearch.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4BE41DF5.7040805@dresearch.de>	<1273242036-7529-1-git-send-email-sledz@dresearch.de>
+	<20100507144927.GH3204@jama>
+In-Reply-To: <20100507144927.GH3204@jama>
+X-OriginalArrivalTime: 07 May 2010 15:05:03.0683 (UTC)
+	FILETIME=[ABFEF130:01CAEDF6]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] busybox/syslogs: use update-alternatives for syslog selection
@@ -57,73 +43,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 15:02:47 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 May 2010 15:07:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 07, 2010 at 04:20:36PM +0200, Steffen Sledz wrote:
-> * u-a for init scripts of busybox-syslog, sysklogd, and rsyslog
-> * syslog-ng needs to be integrated too!
+Am 07.05.2010 16:49, Martin Jansa wrote:
+>> +pkg_preinst_${PN}-syslog () {
+>> +    # this is needed to avoid sysmlink errors,
+>> +    # because update-rc.d runs before pkg_postinst :(
+>> +    touch {sysconfdir}/init.d/syslog
 > 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
-> ---
->  recipes/busybox/busybox.inc        |   18 ++++++++++++++++--
->  recipes/rsyslog/rsyslog.inc        |   22 +++++++++++++---------
->  recipes/sysklogd/sysklogd.inc      |   19 +++++++++++++++----
->  recipes/sysklogd/sysklogd_1.4.1.bb |    2 +-
->  recipes/sysklogd/sysklogd_1.5.bb   |    2 +-
->  5 files changed, 46 insertions(+), 17 deletions(-)
-> 
-> diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-> index 17d8d14..31651d6 100644
-> --- a/recipes/busybox/busybox.inc
-> +++ b/recipes/busybox/busybox.inc
-> @@ -11,7 +11,7 @@ LICENSE = "GPLv2"
->  SECTION = "base"
->  PRIORITY = "required"
->  
-> -INC_PR = "r27"
-> +INC_PR = "r28"
->  
->  SRC_URI = "\
->    file://busybox-cron \
-> @@ -46,7 +46,7 @@ RDEPENDS_${PN} += "${PN}-mountall"
->  RRECOMMENDS_${PN} += "libgcc ${PN}-syslog"
->  
->  FILES_${PN}-httpd = "${sysconfdir}/init.d/busybox-httpd /srv/www"
-> -FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog ${sysconfdir}/syslog.conf"
-> +FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} ${sysconfdir}/syslog.conf"
->  FILES_${PN}-udhcpd = "${sysconfdir}/init.d/busybox-udhcpd"
->  
->  FILES_${PN} += "${datadir}/udhcpc"
-> @@ -154,6 +154,20 @@ pkg_prerm_${PN}-mountall () {
->  	update-alternatives --remove default_mountall mountall.${PN}
->  }
->  
-> +pkg_preinst_${PN}-syslog () {
-> +    # this is needed to avoid sysmlink errors,
-> +    # because update-rc.d runs before pkg_postinst :(
-> +    touch {sysconfdir}/init.d/syslog
-> +}
-> +
-> +pkg_postinst_${PN}-syslog () {
-> +    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 50
-> +}
-> +
-> +pkg_prerm_${PN}-syslog () {
-> +    update-alternatives --remove syslog-init syslog.${PN}
-> +}
-> +
->  pkg_prerm_${PN} () {
->  	# This is so you can make busybox commit suicide - removing busybox with no other packages
->  	# providing its files, this will make update-alternatives work, but the update-rc.d part
+> missing $
 
-One more issue with this part, partialy explaining what went wrong in
-that log. You're not creating syslog.busybox, so real /etc/init.d/syslog
-is not packaged and after u-a /etc/init.d/syslog points to non-existing
-/etc/init.d/syslog.busybox and that's why update-rc.d says it doesn't
-exist.
+<Grrrr>
+
+> touch: cannot touch `{sysconfdir}/init.d/syslog': No such file or directory
+> 
+> but even when I add $ here it should fail like
+> update-alternatives: Error: not linking //usr/bin/time to ../../bin/busybox since //usr/bin/time exists and is not a link
+> 
+> but fails a bit different
+> 
+> Configuring busybox-syslog.
+> update-rc.d: /etc/init.d/syslog: file does not exist
+> update-alternatives: Linking //etc/init.d/syslog to syslog.busybox
+
+Are you sure that you run the patched version? It looks like
+running a version without touch in pkg_preinst.
+
+> ...
+>> -INITSCRIPT_NAME = "sysklogd"
+>> -INITSCRIPT_PARAMS = "start 39 S 1 2 3 . stop 99 0 6 ."
+> 
+> params not needed anymore?
+
+Fall back to the defaults like in all the other syslog recipes.
 
 Regards,
+Steffen
+
 
 
