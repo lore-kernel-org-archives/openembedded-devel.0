@@ -1,45 +1,41 @@
-Received: from mail-bw0-f220.google.com ([209.85.218.220])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1OAI13-0003ti-Fl
+	(envelope-from <daniel.xntian@gmail.com>) id 1OAI29-0007pY-6J
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 09:31:11 +0200
-Received: by bwz20 with SMTP id 20so403438bwz.12
+	Fri, 07 May 2010 09:33:49 +0200
+Received: by vws13 with SMTP id 13so756129vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 00:26:44 -0700 (PDT)
+	Fri, 07 May 2010 00:27:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ma+Dt3wSqa4UyvypJwZnHf8hc9raJ8Nt2V658behH+c=;
-	b=UeKLG+RdRhmHfif/DJIpiIyu12smeIlP5EpWId3Dh/qLK9QD0PSu2UOw28VAo8XBcR
-	gY4W0GDg1o1AHAfgtlJoqRluah8bDYoYSRRw+gjqtKKwLi0mutk3i3MYdtQHESHmKPjr
-	IaRZFtofNsOu2B16IIOSpWg8GRTuB0HdjmcNM=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:cc:content-type;
+	bh=/Kw9u9tSH+FlpPEPLh6KxTmdoIfykons1MW2zwZSz/w=;
+	b=p4PvMMf+JQF9ZJDeJO+RF7K/RvybNu9JCuiIVxsPrL8Dg3u1QC2tPKWz8O9LrnxmjO
+	yg4VVBOUs+u9u9IgxGfxYyPiDukHUASbikUjH8V3LAYTgO9Qau/Qjuu3l6yYNljUbTP0
+	z1FwSkkSd+UxhfG2C9B9ao36ELQvRRUQ0tx/0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dHaNUZmUBZAR9FB1wTyMEI0hdPIJ3TAMRQITxu53MndhKLH4IlHZ4Yqb6TE8GdjgUY
-	Cucg1qqRvrgXSHj6kYbF5RAzHTFWwalKJOT1ocjIelI8WadGHHHhyuf8yyFybHQOpCqz
-	xnni9ub0+CLbNWtCDyHroaiF9gp24mRIATZZk=
+	h=mime-version:date:message-id:subject:from:to:cc:content-type;
+	b=Sg67gRjaImey3eN6v2VuZZD4iNlvvpq2S0Y/208fKQVeTHYZ+rU/2NqFLcKdtkFXbg
+	uzldJd9JWWdNUjyblGbACDxlQoC4WXO6aOqh6s7SCK4Eh4nfTwYizR5nHw7rHU5vxCfr
+	IVSZ8jfJDmUJBgwsUnBhSMXrNL5m5W5zC+7Bc=
 MIME-Version: 1.0
-Received: by 10.204.7.201 with SMTP id e9mr6284594bke.122.1273217204132; Fri, 
-	07 May 2010 00:26:44 -0700 (PDT)
-Received: by 10.204.76.76 with HTTP; Fri, 7 May 2010 00:26:44 -0700 (PDT)
-In-Reply-To: <hrudq5$vms$1@dough.gmane.org>
-References: <1273102999.5743.49.camel@rex> <hrtn8s$e9m$1@dough.gmane.org>
-	<hrtpja$lag$1@dough.gmane.org> <1273147827.5743.104.camel@rex>
-	<hrudq5$vms$1@dough.gmane.org>
-Date: Fri, 7 May 2010 09:26:44 +0200
-Message-ID: <p2ofca63bcf1005070026t2e5df9feo7775976b0c44d34d@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
+Received: by 10.220.61.139 with SMTP id t11mr6689509vch.203.1273217271011; 
+	Fri, 07 May 2010 00:27:51 -0700 (PDT)
+Received: by 10.220.100.140 with HTTP; Fri, 7 May 2010 00:27:50 -0700 (PDT)
+Date: Fri, 7 May 2010 15:27:50 +0800
+Message-ID: <q2u121fadb81005070027t9958a5e9m63e3648d364f006a@mail.gmail.com>
+From: daniel tian <daniel.xntian@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.220
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: daniel.xntian@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: The rpurdie/work-in-progress branch has been merged
+Cc: peng.zheng@mavrixtech.com
+Subject: X/Xorg can not run successfully
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,15 +49,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 07:33:11 -0000
+X-List-Received-Date: Fri, 07 May 2010 07:33:50 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-FYI: Console-/minimal/base-Image built fine for IGEPv2 board (build
-from scratch)
+Hello, all:
+        I already built the openembedded code with "bitbake
+e-image-core". but after the rootfs and kernel runs on mips24k board,
+I can login with root in minicom.
+        But after I run the 'X', the LCD screen becomes black.
+        Here is the command I run, and the message shows on minicom:
+        root@db1200:~# X
 
-Packaged-staging: Destination of packages is now defined by PSTAGE_DIR.
+X.Org X Server 1.7.4
+Release Date: 2010-01-08
+X Protocol Version 11, Revision 0
+Build Operating System: Linux 2.6.31-20-generic i686
+Current Operating System: Linux db1200 2.6.29.4 #1 PREEMPT Fri May 7
+11:39:13 CST 2010 mips
+Kernel command line: root=/dev/mmcblk0p1 rootdelay=8 rootfstype=ext2
+rw console=ttyS0
+Build Date: 06 May 2010  09:38:21PM
 
-Regards,
-Michael
+Current version of pixman: 0.18.0
+       Before reporting problems, check http://wiki.x.org
+       to make sure that you have the latest version.
+Markers: (--) probed, (**) from config file, (==) default setting,
+       (++) from command line, (!!) notice, (II) informational,
+       (WW) warning, (EE) error, (NI) not implemented, (??) unknown.
+(==) Log file: "/var/log/Xorg.0.log", Time: Thu Jan  1 00:00:55 1970
+(==) Using config file: "/etc/X11/xorg.conf"
+(EE) Failed to load module "glx" (module does not exist, 0)
+(EE) Failed to load module "dri" (module does not exist, 0)
+(EE) Failed to load module "dri2" (module does not exist, 0)
+Primary device is not PCI
+
+        By the way, the Poky can run on my board normally.
+
+        Does your guys also encounter with this problem?
+        Any suggestion is appreciated.
+        Thanks very much.
+
+
+                                     daniel
 
 
