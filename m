@@ -1,38 +1,35 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OAKqo-0005bA-Ee
+	(envelope-from <sledz@dresearch.de>) id 1OALLE-0001c2-3w
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 12:32:10 +0200
-Received: from w0968.wlan.rz.tu-bs.de ([134.169.203.206] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OAKn6-0004GO-Q8 by authid <stefan@sostec.de> with cram_md5
+	Fri, 07 May 2010 13:03:36 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id E1185491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 12:28:23 +0200
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1OAKn5-0007Y3-Dm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 07 May 2010 12:28:19 +0200
-Date: Fri, 7 May 2010 12:28:19 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100507102819.GE18308@excalibur.local>
-References: <1272425953-19544-1-git-send-email-jacob@technosorcery.net>
+	Fri,  7 May 2010 12:59:48 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 7 May 2010 13:00:54 +0200
+Message-ID: <4BE3F2AE.8060305@dresearch.de>
+Date: Fri, 07 May 2010 12:59:58 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-In-Reply-To: <1272425953-19544-1-git-send-email-jacob@technosorcery.net>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: openembedded-devel@lists.openembedded.org
+References: <4BE25BFD.2090204@dresearch.de> <hrtmn1$bp1$3@dough.gmane.org>
+	<4BE3C542.4070603@dresearch.de>
+In-Reply-To: <4BE3C542.4070603@dresearch.de>
+X-OriginalArrivalTime: 07 May 2010 11:00:54.0417 (UTC)
+	FILETIME=[905A5810:01CAEDD4]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add missing opening <varlistentry> tag in the user manual.
+Subject: Re: All the syslogs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,29 +43,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 10:32:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 07 May 2010 11:03:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+> OK, than i'll try to create an u-a setting for all the syslogs (btw: we
+> have not three but four different ones, there's sysklogd too).
+>=20
+> Has anyone combined update-alternatives and update-rc.d for initscripts
+> before? I'm afraid there are some pitfalls in the naming of the initscr=
+ipt
+> itself and the symlinks.
 
-On Tue, 2010-04-27 at 20:39, Jacob Helwig wrote:
-> While we're here, remove the straggling hard-tabs.
-> 
-> Signed-off-by: Jacob Helwig <jacob@technosorcery.net>
+I made some first tests and they confirmed my fears. :(
 
-I applied and pushed this. Thanks for your contribution.
-> ---
-> 
-> I hope this is the right way to submit a documentation fix.  If not, please
-> point me at the FM, since I didn't find it in looking through the Wiki, or the
-> repo.
+The recipes look like this:
 
-Thats the right way. I just added a "usermanual" prefix to your patch subject
-line to make it more clear for people what part of our repo it changes when
-browsing git log.
+-------------------->snip<---------------------------
+inherit autotools update-rc.d
 
-regards
-Stefan Schmidt
+do_install_append() {
+        ...
+        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/sy=
+slog.${PN}
+}
+
+pkg_postinst_${PN} () {
+    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init=
+ syslog.${PN} 300
+}
+
+pkg_prerm_${PN} () {
+    update-alternatives --remove syslog-init syslog.${PN}
+}
+
+INITSCRIPT_NAME =3D "syslog"
+-------------------->snip<---------------------------
+
+When opkg installs the packages it wants to run update-rc.d *before*
+update-alternatives. This results in an "file does not exist" error. :(
+
+  Installing rsyslog (5.5.4-r1.0.5) to root...
+  Installing busybox-syslog (1.13.2-r24.1.5) to root...
+  Configuring rsyslog
+  update-rc.d: /etc/init.d/syslog: file does not exist
+  update-alternatives: Linking //etc/init.d/syslog to syslog.rsyslog
+
+Any suggestions?
+
+Regards,
+Steffen
+
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+
 
 
