@@ -1,32 +1,43 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OAbYl-0004gc-EN
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OAeBC-0006zs-Ay
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 06:22:39 +0200
-Received: from [123.192.188.67] (123-192-188-67.dynamic.kbronet.com.tw
-	[123.192.188.67])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 123271B10C79
+	Sat, 08 May 2010 09:10:31 +0200
+Received: by gya1 with SMTP id 1so1016268gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 May 2010 04:26:14 +0000 (UTC)
-Message-ID: <4BE4E626.8030800@freyther.de>
-Date: Sat, 08 May 2010 12:18:46 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
-	Thunderbird/3.0.4
+	Sat, 08 May 2010 00:06:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Ub+Gxx2MK9R0pVBBeneAHOe+HpQZ182DK2CDHWevum0=;
+	b=Q4SAWgkSBu0xxOJ2b6RwvETJrMcKGBWD/2iNa8v396SeH/PpmesdaRQuYD4a/0T9vb
+	3b9yQvTm2/OMVBCoLHAXpJdsj+Qfv39agp399FibjfrfF3cd9wbG/QMrzRhp49BZ10dK
+	2FqW9KLZOTim1jMt8YEpgLCDy2OVKjqJ9YRCQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=QTsBR0iDmCAmN6BW3+UEoUmjWVgKcn+kwyGde6gSdYr0WYndmdZDAUQ4u95TehNsJm
+	fB7g8iZLnAyoyRjQnjMhz5lJ2FDjvd/Eu0iSiVIsXZRquuHcBV8yYR6YAjGPKHT/Ibwh
+	y3cb0mH+oAlxF19PoW+UYqbZA4HsRsi231kCk=
 MIME-Version: 1.0
+Received: by 10.91.95.14 with SMTP id x14mr886322agl.1.1273302399542; Sat, 08 
+	May 2010 00:06:39 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Sat, 8 May 2010 00:06:39 -0700 (PDT)
+In-Reply-To: <1273249883.457.336.camel@trini-m4400>
+References: <1273249883.457.336.camel@trini-m4400>
+Date: Sat, 8 May 2010 09:06:39 +0200
+Message-ID: <g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4BE43043.2000605@szluug.org>
-In-Reply-To: <4BE43043.2000605@szluug.org>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: FreeBSD 8 bitbake errors
+Subject: Re: calamari (ppc e500v2) failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,21 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 May 2010 04:22:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 08 May 2010 07:10:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 05/07/2010 11:22 PM, Krzysztof 'soltys' Koro=C5=9Bcik wrote:
-> Hi all,
-> I'm trying to setup oe environment on fresh FreeBSD 8 install. I'd
-> installed everything listed in [1] and [2], but when I try to bitbake
-> anything I get this:
->=20
-> [soltys@ ~/oe/ngw100]$ bitbake nano
-> NOTE: Handling BitBake files: / (6387/8361) [76 %]ERROR: Information
-> not available for target 'i386-freebsd8'
+2010/5/7 Tom Rini <tom_rini@mentor.com>:
+> Hey all,
+>
+> With DISTRO=minimal and MACHINE=calamari, I see the following failure in
+> gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
+> http://pastebin.com/cjAStcLb and I confirmed this prior to the RP merge,
+> so this is unrelated.
 
-we need an entry for freebsd8.x, it should be mostly the same as for
-freebsd7
+Which eglibc is that?
+The issues I had seemed due to some catch22 situation that I cured; I
+started a clean build yesterday before I left work & can tell the
+results on monday.
+My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
+minimal also using 2.10 or is it at 2.11
+
+I can also try to kick off a minimal build on monday
+
+Frans
 
 
