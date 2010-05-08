@@ -1,43 +1,41 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OAeBC-0006zs-Ay
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 09:10:31 +0200
-Received: by gya1 with SMTP id 1so1016268gya.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OAev6-00088k-76 for openembedded-devel@lists.openembedded.org;
+	Sat, 08 May 2010 09:57:57 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OAerP-0003K8-Ih for openembedded-devel@lists.openembedded.org;
+	Sat, 08 May 2010 09:54:07 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 08 May 2010 09:54:07 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 May 2010 00:06:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Ub+Gxx2MK9R0pVBBeneAHOe+HpQZ182DK2CDHWevum0=;
-	b=Q4SAWgkSBu0xxOJ2b6RwvETJrMcKGBWD/2iNa8v396SeH/PpmesdaRQuYD4a/0T9vb
-	3b9yQvTm2/OMVBCoLHAXpJdsj+Qfv39agp399FibjfrfF3cd9wbG/QMrzRhp49BZ10dK
-	2FqW9KLZOTim1jMt8YEpgLCDy2OVKjqJ9YRCQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=QTsBR0iDmCAmN6BW3+UEoUmjWVgKcn+kwyGde6gSdYr0WYndmdZDAUQ4u95TehNsJm
-	fB7g8iZLnAyoyRjQnjMhz5lJ2FDjvd/Eu0iSiVIsXZRquuHcBV8yYR6YAjGPKHT/Ibwh
-	y3cb0mH+oAlxF19PoW+UYqbZA4HsRsi231kCk=
-MIME-Version: 1.0
-Received: by 10.91.95.14 with SMTP id x14mr886322agl.1.1273302399542; Sat, 08 
-	May 2010 00:06:39 -0700 (PDT)
-Received: by 10.90.71.4 with HTTP; Sat, 8 May 2010 00:06:39 -0700 (PDT)
-In-Reply-To: <1273249883.457.336.camel@trini-m4400>
-References: <1273249883.457.336.camel@trini-m4400>
-Date: Sat, 8 May 2010 09:06:39 +0200
-Message-ID: <g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 08 May 2010 09:54:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 08 May 2010 09:53:49 +0200
+Message-ID: <hs35ae$l42$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: calamari (ppc e500v2) failure
+Subject: libstc++ libtool problem, cross lamanger broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,26 +49,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 May 2010 07:10:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 08 May 2010 07:57:57 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/5/7 Tom Rini <tom_rini@mentor.com>:
-> Hey all,
->
-> With DISTRO=minimal and MACHINE=calamari, I see the following failure in
-> gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
-> http://pastebin.com/cjAStcLb and I confirmed this prior to the RP merge,
-> so this is unrelated.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Which eglibc is that?
-The issues I had seemed due to some catch22 situation that I cured; I
-started a clean build yesterday before I left work & can tell the
-results on monday.
-My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
-minimal also using 2.10 or is it at 2.11
+Hi,
 
-I can also try to kick off a minimal build on monday
+I've been getting failures when ARM apps try to link with x86_64
+libxml2, and I started to do some digging:
 
-Frans
+grep L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
+/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/*.la |
+more | awk -F: '{print $1}' | sed
+s:/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/::glibaspell.la
+libatkmm-1.6.la
+libcairomm-1.0.la
+libetpan.la
+libFLAC++.la
+libgdkmm-2.4.la
+libgiomm-2.4.la
+libglibmm-2.4.la
+libglibmm_generate_extra_defs-2.4.la
+libgnutlsxx.la
+libgtkmathview_custom_reader.la
+libgtkmathview_libxml2.la
+libgtkmathview_libxml2_reader.la
+libgtkmm-2.4.la
+libmathview_backend_gtk.la
+libmathview_backend_ps.la
+libmathview_backend_svg.la
+libmathview_frontend_custom_reader.la
+libmathview_frontend_libxml2.la
+libmathview_frontend_libxml2_reader.la
+libmathview.la
+libpangomm-1.4.la
+libpcrecpp.la
+libpoppler-glib.la
+libpoppler.la
+libpspell.la
+libschroedinger-1.0.la
+libsidplay.la
+libsigc-2.0.la
+libstdc++.la
+libsupc++.la
+libtiffxx.la
+libwebkit-1.0.la
+
+So pretty much anything with a c++ dep gets a bogus .la file, so lets
+look at libstdc++.la:
+
+dependency_libs=' -L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
+/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
+
+So it looks like the cross.bbclass lamangler needs some more work.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL5RiNMkyGM64RGpERAj8wAJwI7kS06MsYkJ0F9qPC7zMtAayo3wCgr7dB
+S6dcdHhKvPl0WSxZk+zXpAk=
+=0C1I
+-----END PGP SIGNATURE-----
+
 
 
