@@ -1,34 +1,43 @@
-Received: from szluug.org
-	([85.17.92.45] helo=americium.stoicheia.net ident=postfix)
+Received: from fg-out-1718.google.com ([72.14.220.153])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <soltys@szluug.org>) id 1OAfBS-0006mA-2T
+	(envelope-from <andrea.adami@gmail.com>) id 1OAftP-00039w-V9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 10:14:56 +0200
-Received: from [192.168.0.3] (soltys.soad.pl [83.168.118.74])
-	by americium.stoicheia.net (Postfix) with ESMTPA id D0ADB68160
+	Sat, 08 May 2010 11:00:16 +0200
+Received: by fg-out-1718.google.com with SMTP id e12so106077fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  8 May 2010 10:14:17 +0200 (CEST)
-Message-ID: <4BE51C8B.7050401@szluug.org>
-Date: Sat, 08 May 2010 10:10:51 +0200
-From: =?UTF-8?B?S3J6eXN6dG9mICdzb2x0eXMnIEtvcm/Fm2Npaw==?= <soltys@szluug.org>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; pl;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+	Sat, 08 May 2010 01:56:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=auM200tBIKeErrNXXI1L5jB8xOqgFBNXDR/pG//UIFg=;
+	b=U6ZYT+zvqWDMUv5aZt/mZTBubefeIJrR4Hqb7x95mlfMS1WQYKSeSwhDsrU5pqRmNR
+	AW4xBIW+oFCiwJs6d+xKr6CpPibV9Tt/SVIa3H6hQ8mldLHxCgMH9dwpsabvFUVvQS/q
+	MSyfmb28YZA0SUvYBLvYfo6FPYpY20Pl/KkTY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=a0GPGUeb4L9B2e7j3xUsfVXXQPKzXxy/FBHMOME7iyhYaWIaR6NxhAu0P3OkY+3kNY
+	0AESkOKdeEl7w/H55ecSa7eo45DT2zQINfy22/wtR2JlXzZbpLtFqwtYICSSZ0qXJu5z
+	g/huCEcQ+EMh9wmrHAipPq7CRDxCGeXD5cJbs=
 MIME-Version: 1.0
+Received: by 10.239.181.12 with SMTP id k12mr103778hbg.194.1273308987769; Sat, 
+	08 May 2010 01:56:27 -0700 (PDT)
+Received: by 10.239.192.77 with HTTP; Sat, 8 May 2010 01:56:27 -0700 (PDT)
+In-Reply-To: <v2sd1b08f941005071617u31274631hcddebb5b9eeb888d@mail.gmail.com>
+References: <v2sd1b08f941005071617u31274631hcddebb5b9eeb888d@mail.gmail.com>
+Date: Sat, 8 May 2010 10:56:27 +0200
+Message-ID: <n2zd1b08f941005080156gd17a92cbk9985dc913c13fb0a@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4BE43043.2000605@szluug.org> <4BE4E626.8030800@freyther.de>
-In-Reply-To: <4BE4E626.8030800@freyther.de>
-X-Enigmail-Version: 1.0.1
-OpenPGP: id=C7D30884
-X-AVK-Virus-Check: AVA 21.240;F1206
-X-SA-Exim-Connect-IP: 85.17.92.45
-X-SA-Exim-Mail-From: soltys@szluug.org
+X-SA-Exim-Connect-IP: 72.14.220.153
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: FreeBSD 8 bitbake errors
+Subject: Re: gtk+native missing dep ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,45 +51,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 May 2010 08:14:56 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 08 May 2010 09:00:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-=20
-W dniu 2010-05-08 06:18, Holger Freyther pisze:
-> On 05/07/2010 11:22 PM, Krzysztof 'soltys' Koro=C5=9Bcik wrote:
->> Hi all,
->> I'm trying to setup oe environment on fresh FreeBSD 8 install. I'd
->> installed everything listed in [1] and [2], but when I try to bitbake
->> anything I get this:
->>
->> [soltys@ ~/oe/ngw100]$ bitbake nano
->> NOTE: Handling BitBake files: / (6387/8361) [76 %]ERROR: Information
->> not available for target 'i386-freebsd8'
->
-> we need an entry for freebsd8.x, it should be mostly the same as for
-> freebsd7
->
+For some reasons  "atk-native"  and  "pango-native" builds were not
+finished when gt+-native was building...
 
-Maybe it's true but there is no entry for any version of freebsd,
-coppying entry i386-linux to i386-freebsd8 in siteinfo.bbclass seams
-to work for that errors.
+DEPENDS_virtclass-native = "libpng-native atk-native pango-native
+cairo-native libxrender-native libxext-native"
 
-- --=20
+Investigating
 
-Krzysztof 'soltys' Koroscik
-jid: soltys@szluug.org
-e-mail: soltys@szluug.org
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (MingW32)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-=20
-iEYEARECAAYFAkvlHIoACgkQNbd+EcfTCITzIgCgplmrEO3w/nAN59nPHjJg0Zmc
-d4EAnR6tKj/23CqCI5fu1clm6nSgxeRP
-=3DG1WS
------END PGP SIGNATURE-----
-
+Andrea
 
 
