@@ -1,41 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from szluug.org
+	([85.17.92.45] helo=americium.stoicheia.net ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OAev6-00088k-76 for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 09:57:57 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OAerP-0003K8-Ih for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 09:54:07 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 May 2010 09:54:07 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <soltys@szluug.org>) id 1OAfBS-0006mA-2T
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 May 2010 10:14:56 +0200
+Received: from [192.168.0.3] (soltys.soad.pl [83.168.118.74])
+	by americium.stoicheia.net (Postfix) with ESMTPA id D0ADB68160
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 08 May 2010 09:54:07 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat,  8 May 2010 10:14:17 +0200 (CEST)
+Message-ID: <4BE51C8B.7050401@szluug.org>
+Date: Sat, 08 May 2010 10:10:51 +0200
+From: =?UTF-8?B?S3J6eXN6dG9mICdzb2x0eXMnIEtvcm/Fm2Npaw==?= <soltys@szluug.org>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; pl;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 08 May 2010 09:53:49 +0200
-Message-ID: <hs35ae$l42$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+References: <4BE43043.2000605@szluug.org> <4BE4E626.8030800@freyther.de>
+In-Reply-To: <4BE4E626.8030800@freyther.de>
 X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+OpenPGP: id=C7D30884
+X-AVK-Virus-Check: AVA 21.240;F1206
+X-SA-Exim-Connect-IP: 85.17.92.45
+X-SA-Exim-Mail-From: soltys@szluug.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libstc++ libtool problem, cross lamanger broken
+Subject: Re: FreeBSD 8 bitbake errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,72 +42,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 May 2010 07:57:57 -0000
+X-List-Received-Date: Sat, 08 May 2010 08:14:56 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
+=20
+W dniu 2010-05-08 06:18, Holger Freyther pisze:
+> On 05/07/2010 11:22 PM, Krzysztof 'soltys' Koro=C5=9Bcik wrote:
+>> Hi all,
+>> I'm trying to setup oe environment on fresh FreeBSD 8 install. I'd
+>> installed everything listed in [1] and [2], but when I try to bitbake
+>> anything I get this:
+>>
+>> [soltys@ ~/oe/ngw100]$ bitbake nano
+>> NOTE: Handling BitBake files: / (6387/8361) [76 %]ERROR: Information
+>> not available for target 'i386-freebsd8'
+>
+> we need an entry for freebsd8.x, it should be mostly the same as for
+> freebsd7
+>
 
-Hi,
+Maybe it's true but there is no entry for any version of freebsd,
+coppying entry i386-linux to i386-freebsd8 in siteinfo.bbclass seams
+to work for that errors.
 
-I've been getting failures when ARM apps try to link with x86_64
-libxml2, and I started to do some digging:
+- --=20
 
-grep L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/*.la |
-more | awk -F: '{print $1}' | sed
-s:/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/::glibaspell.la
-libatkmm-1.6.la
-libcairomm-1.0.la
-libetpan.la
-libFLAC++.la
-libgdkmm-2.4.la
-libgiomm-2.4.la
-libglibmm-2.4.la
-libglibmm_generate_extra_defs-2.4.la
-libgnutlsxx.la
-libgtkmathview_custom_reader.la
-libgtkmathview_libxml2.la
-libgtkmathview_libxml2_reader.la
-libgtkmm-2.4.la
-libmathview_backend_gtk.la
-libmathview_backend_ps.la
-libmathview_backend_svg.la
-libmathview_frontend_custom_reader.la
-libmathview_frontend_libxml2.la
-libmathview_frontend_libxml2_reader.la
-libmathview.la
-libpangomm-1.4.la
-libpcrecpp.la
-libpoppler-glib.la
-libpoppler.la
-libpspell.la
-libschroedinger-1.0.la
-libsidplay.la
-libsigc-2.0.la
-libstdc++.la
-libsupc++.la
-libtiffxx.la
-libwebkit-1.0.la
-
-So pretty much anything with a c++ dep gets a bogus .la file, so lets
-look at libstdc++.la:
-
-dependency_libs=' -L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-/OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
-
-So it looks like the cross.bbclass lamangler needs some more work.
-
-regards,
-
-Koen
+Krzysztof 'soltys' Koroscik
+jid: soltys@szluug.org
+e-mail: soltys@szluug.org
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL5RiNMkyGM64RGpERAj8wAJwI7kS06MsYkJ0F9qPC7zMtAayo3wCgr7dB
-S6dcdHhKvPl0WSxZk+zXpAk=
-=0C1I
+Version: GnuPG v1.4.10 (MingW32)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+=20
+iEYEARECAAYFAkvlHIoACgkQNbd+EcfTCITzIgCgplmrEO3w/nAN59nPHjJg0Zmc
+d4EAnR6tKj/23CqCI5fu1clm6nSgxeRP
+=3DG1WS
 -----END PGP SIGNATURE-----
 
 
