@@ -1,42 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OAlkB-00088i-Lf
+	(envelope-from <raj.khem@gmail.com>) id 1OAnps-0000LP-EH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 17:15:08 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OAlgR-0005O1-Br from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 08:11:15 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Sat, 8 May 2010 08:11:15 -0700
-Received: from 172.30.80.76 ([172.30.80.76]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Sat,  8 May 2010 15:11:14 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	08 May 2010 08:11:10 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Sat, 08 May 2010 19:29:09 +0200
+Received: by gya1 with SMTP id 1so1153291gya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 08 May 2010 10:25:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=KbiNRLMCUlhNrm3o7V7+EofcBXjWP+XtFaR+SeTz9Qo=;
+	b=ah8MifgIhrGJXKt2rtBsYF2BpcA5KjNPvWvM5xv64vBMNENsJzX+Hss3ijpe/RAMaE
+	TjNMNNA2QU570g1WgXaX9S7F4y2JNA2jzRdQfWOeduTE+TyW4+p5+t84QcFoVFCChQp+
+	Ghcdh9em6RfIut3+awQcRggvNq8XntF6kRasU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=PU+5hK1jZvcMZUuidjQMUUUrnEWEEI44jh6oJoFJVi5SINUrjT1OPBtiqq+p2Ah99F
+	JXWA7bOMZR2ZFMlNIWHbjvX4hL4aNpr44x4LATujSlWDAfQKoRzZoE7sF58lohnVyd3/
+	RU8cBp03MElhKBkLxFhH6HPfNO4OLpE8wPzmg=
+MIME-Version: 1.0
+Received: by 10.231.148.1 with SMTP id n1mr463419ibv.96.1273339517037; Sat, 08 
+	May 2010 10:25:17 -0700 (PDT)
+Received: by 10.231.39.73 with HTTP; Sat, 8 May 2010 10:25:16 -0700 (PDT)
+In-Reply-To: <1273330086.23460.11.camel@desktop.maison.net>
+References: <hs0mk7$rst$2@dough.gmane.org>
+	<1273330086.23460.11.camel@desktop.maison.net>
+Date: Sat, 8 May 2010 10:25:16 -0700
+Message-ID: <w2v19c1b8a91005081025l9688a5b8wc6eff5bc15496513@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
-References: <1273249883.457.336.camel@trini-m4400>
-	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Sat, 08 May 2010 08:11:08 -0700
-Message-ID: <1273331468.22943.217.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 08 May 2010 15:11:15.0004 (UTC)
-	FILETIME=[B3BBC7C0:01CAEEC0]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: calamari (ppc e500v2) failure
+Subject: Re: meta-toolchain doesn't build due to gdb-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,34 +53,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 May 2010 15:15:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 08 May 2010 17:29:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
-> 2010/5/7 Tom Rini <tom_rini@mentor.com>:
-> > Hey all,
-> >
-> > With DISTRO=3Dminimal and MACHINE=3Dcalamari, I see the following failu=
-re in
-> > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
-> > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP merge=
-,
-> > so this is unrelated.
->=20
-> Which eglibc is that?
-> The issues I had seemed due to some catch22 situation that I cured; I
-> started a clean build yesterday before I left work & can tell the
-> results on monday.
-> My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
-> minimal also using 2.10 or is it at 2.11
->=20
-> I can also try to kick off a minimal build on monday
+On Sat, May 8, 2010 at 7:48 AM, Thomas Jourdan <thomas.jourdan@yaeld.fr> wr=
+ote:
+> Hi
+>
+> The problems seems to come from the conversion to new staging mode in
+> GDB.
 
-minimal is eglibc 2.10.  I'll try an Angstrom build.
+right
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Now, gdb-cross-sdk inherits from sdk and cross whereas before it
+> only inherited from cross.
+>
+> Reverting Khem Raj GDB patches fixes the build for me (meta-toolchain
+> works again).
+
+thats because gdb 7.1 is then not using new staging and hence it builds aga=
+in.
+
+>
+> Regards,
+> Thomas
+>
+> Le vendredi 07 mai 2010 =E0 11:30 +0200, Koen Kooi a =E9crit :
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Hi,
+>>
+>> Currently meta-toolchain is unbuildable:
+>>
+>> Missing or unbuildable dependency chain was: ['gdb-cross-sdk']
+>> NOTE: Runtime target 'task-sdk-host' is unbuildable, removing...
+>> Missing or unbuildable dependency chain was: ['task-sdk-host',
+>> 'gdb-cross-sdk']
+>> ERROR: Required build target 'meta-toolchain' has no buildable providers=
+.
+>> Missing or unbuildable dependency chain was: ['meta-toolchain',
+>> 'task-sdk-host', 'gdb-cross-sdk']
+>> Command execution failed: Traceback (most recent call last):
+>> =A0 File "/OE/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+>> =A0 =A0 commandmethod(self.cmds_async, self, options)
+>> =A0 File "/OE/bitbake/lib/bb/command.py", line 174, in buildTargets
+>> =A0 =A0 command.cooker.buildTargets(pkgs_to_build, task)
+>> =A0 File "/OE/bitbake/lib/bb/cooker.py", line 757, in buildTargets
+>> =A0 =A0 taskdata.add_unresolved(localdata, self.status)
+>> =A0 File "/OE/bitbake/lib/bb/taskdata.py", line 562, in add_unresolved
+>> =A0 =A0 self.remove_runtarget(self.getrun_id(target))
+>> =A0 File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
+>> =A0 =A0 self.fail_fnid(fnid, missing_list)
+>> =A0 File "/OE/bitbake/lib/bb/taskdata.py", line 495, in fail_fnid
+>> =A0 =A0 self.remove_runtarget(target, missing_list)
+>> =A0 File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
+>> =A0 =A0 self.fail_fnid(fnid, missing_list)
+>> =A0 File "/OE/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+>> =A0 =A0 self.remove_buildtarget(target, missing_list)
+>> =A0 File "/OE/bitbake/lib/bb/taskdata.py", line 519, in remove_buildtarg=
+et
+>> =A0 =A0 raise bb.providers.NoProvider
+>> NoProvider
+>>
+>> The weird thing is that 'bitbake gdb-cross-sdk' *DOES* work. Any ideas?
+>>
+>>
+>> regards,
+>>
+>> Koen
+>> -----BEGIN PGP SIGNATURE-----
+>> Version: GnuPG v1.4.5 (Darwin)
+>>
+>> iD8DBQFL493HMkyGM64RGpERAsfeAJ4+dAGLxl374iYexNPvF7aOl1L9jwCdEvTu
+>> mKxwdYeXXCsZzQ0H8yocaBw=3D
+>> =3Duhtx
+>> -----END PGP SIGNATURE-----
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
