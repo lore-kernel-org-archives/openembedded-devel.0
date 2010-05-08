@@ -1,36 +1,42 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <thomas.jourdan@yaeld.fr>) id 1OAlUH-0001Rs-4z
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1OAlkB-00088i-Lf
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 16:58:41 +0200
-Received: (qmail 20776 invoked by uid 503); 8 May 2010 14:55:26 -0000
-Received: from b9.ovh.net (HELO mail182.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 8 May 2010 14:55:26 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 May 2010 14:48:11 -0000
-Received: from unknown (HELO ?192.168.0.132?)
-	(thomas.jourdan@yaeld.fr@78.120.125.167)
-	by ns0.ovh.net with SMTP; 8 May 2010 14:48:10 -0000
-From: Thomas Jourdan <thomas.jourdan@yaeld.fr>
+	Sat, 08 May 2010 17:15:08 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OAlgR-0005O1-Br from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 08 May 2010 08:11:15 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Sat, 8 May 2010 08:11:15 -0700
+Received: from 172.30.80.76 ([172.30.80.76]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Sat,  8 May 2010 15:11:14 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	08 May 2010 08:11:10 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hs0mk7$rst$2@dough.gmane.org>
-References: <hs0mk7$rst$2@dough.gmane.org>
-Date: Sat, 08 May 2010 16:48:06 +0200
-Message-ID: <1273330086.23460.11.camel@desktop.maison.net>
+In-Reply-To: <g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+References: <1273249883.457.336.camel@trini-m4400>
+	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+Organization: Mentor Graphics Corporation
+Date: Sat, 08 May 2010 08:11:08 -0700
+Message-ID: <1273331468.22943.217.camel@trini-m4400>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Ovh-Tracer-Id: 8766819626639237705
-X-Ovh-Remote: 78.120.125.167 ()
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: thomas.jourdan@yaeld.fr
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 08 May 2010 15:11:15.0004 (UTC)
+	FILETIME=[B3BBC7C0:01CAEEC0]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: meta-toolchain doesn't build due to gdb-cross-sdk
+Subject: Re: calamari (ppc e500v2) failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,79 +50,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 08 May 2010 14:58:42 -0000
+X-List-Received-Date: Sat, 08 May 2010 15:15:09 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: quoted-printable
 
-Hi
+On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
+> 2010/5/7 Tom Rini <tom_rini@mentor.com>:
+> > Hey all,
+> >
+> > With DISTRO=3Dminimal and MACHINE=3Dcalamari, I see the following failu=
+re in
+> > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
+> > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP merge=
+,
+> > so this is unrelated.
+>=20
+> Which eglibc is that?
+> The issues I had seemed due to some catch22 situation that I cured; I
+> started a clean build yesterday before I left work & can tell the
+> results on monday.
+> My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
+> minimal also using 2.10 or is it at 2.11
+>=20
+> I can also try to kick off a minimal build on monday
 
-The problems seems to come from the conversion to new staging mode in
-GDB. Now, gdb-cross-sdk inherits from sdk and cross whereas before it
-only inherited from cross.
+minimal is eglibc 2.10.  I'll try an Angstrom build.
 
-Reverting Khem Raj GDB patches fixes the build for me (meta-toolchain
-works again).
-
-Regards,
-Thomas
-
-Le vendredi 07 mai 2010 à 11:30 +0200, Koen Kooi a écrit :
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Hi,
-> 
-> Currently meta-toolchain is unbuildable:
-> 
-> Missing or unbuildable dependency chain was: ['gdb-cross-sdk']
-> NOTE: Runtime target 'task-sdk-host' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['task-sdk-host',
-> 'gdb-cross-sdk']
-> ERROR: Required build target 'meta-toolchain' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['meta-toolchain',
-> 'task-sdk-host', 'gdb-cross-sdk']
-> Command execution failed: Traceback (most recent call last):
->   File "/OE/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
->     commandmethod(self.cmds_async, self, options)
->   File "/OE/bitbake/lib/bb/command.py", line 174, in buildTargets
->     command.cooker.buildTargets(pkgs_to_build, task)
->   File "/OE/bitbake/lib/bb/cooker.py", line 757, in buildTargets
->     taskdata.add_unresolved(localdata, self.status)
->   File "/OE/bitbake/lib/bb/taskdata.py", line 562, in add_unresolved
->     self.remove_runtarget(self.getrun_id(target))
->   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
->     self.fail_fnid(fnid, missing_list)
->   File "/OE/bitbake/lib/bb/taskdata.py", line 495, in fail_fnid
->     self.remove_runtarget(target, missing_list)
->   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
->     self.fail_fnid(fnid, missing_list)
->   File "/OE/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
->     self.remove_buildtarget(target, missing_list)
->   File "/OE/bitbake/lib/bb/taskdata.py", line 519, in remove_buildtarget
->     raise bb.providers.NoProvider
-> NoProvider
-> 
-> The weird thing is that 'bitbake gdb-cross-sdk' *DOES* work. Any ideas?
-> 
-> 
-> regards,
-> 
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFL493HMkyGM64RGpERAsfeAJ4+dAGLxl374iYexNPvF7aOl1L9jwCdEvTu
-> mKxwdYeXXCsZzQ0H8yocaBw=
-> =uhtx
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
-
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
