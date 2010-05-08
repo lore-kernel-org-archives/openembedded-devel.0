@@ -1,40 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OAWrD-0001t2-9b
+	(envelope-from <holger+oe@freyther.de>) id 1OAbYl-0004gc-EN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 08 May 2010 01:21:23 +0200
-Received: by fxm11 with SMTP id 11so1155836fxm.6
+	Sat, 08 May 2010 06:22:39 +0200
+Received: from [123.192.188.67] (123-192-188-67.dynamic.kbronet.com.tw
+	[123.192.188.67])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 123271B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 07 May 2010 16:17:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=nKUK9B5wCCGOp2FwzKYEn8pal729cYq/ctB4AaTlBIg=;
-	b=fGmnW1VvqKXtcnE9+kJEE1DNI3a1OIwi3x/yXZK/QmVZpBEwc2FgZw7sOn3L3GIsCe
-	QVdikQ2eDe4ZBYp3lGMm23NoEFLBDuKKOwW/ARpVzkZN7t4ei8rzBV6H9fTdga3EZixB
-	7oHtkkv3NKnyjlnfgh10TK4htjgq6fM3Uk8W4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=OkoB7+AdIJ5KIFlOvMouNPlyLDdbY8lvZ3XV2+yCORq93BCtlvf6mLlbW8rUXlpMIs
-	O0biBOJFBIS7dlSx3ZXswFN8HX/qzx78Hk07K8qcUrEXGsZeOfkITFZ0BvpVoJ9X4He9
-	6XlmpjnmwGtEVXZ6ACxkNT+SJ4qN75VtMS8z0=
+	Sat,  8 May 2010 04:26:14 +0000 (UTC)
+Message-ID: <4BE4E626.8030800@freyther.de>
+Date: Sat, 08 May 2010 12:18:46 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
+	Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.239.142.73 with SMTP id f9mr67302hba.107.1273274253500; Fri, 
-	07 May 2010 16:17:33 -0700 (PDT)
-Received: by 10.239.192.77 with HTTP; Fri, 7 May 2010 16:17:33 -0700 (PDT)
-Date: Sat, 8 May 2010 01:17:33 +0200
-Message-ID: <v2sd1b08f941005071617u31274631hcddebb5b9eeb888d@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+References: <4BE43043.2000605@szluug.org>
+In-Reply-To: <4BE43043.2000605@szluug.org>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gtk+native missing dep ?
+Subject: Re: FreeBSD 8 bitbake errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,30 +40,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 07 May 2010 23:21:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 08 May 2010 04:22:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+On 05/07/2010 11:22 PM, Krzysztof 'soltys' Koro=C5=9Bcik wrote:
+> Hi all,
+> I'm trying to setup oe environment on fresh FreeBSD 8 install. I'd
+> installed everything listed in [1] and [2], but when I try to bitbake
+> anything I get this:
+>=20
+> [soltys@ ~/oe/ngw100]$ bitbake nano
+> NOTE: Handling BitBake files: / (6387/8361) [76 %]ERROR: Information
+> not available for target 'i386-freebsd8'
 
-I repeatdly see console-image failing *from scratch* because
-gtk+native do_compile errors out with:
-
- Cannot load module
-/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la:
-/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/mo
-dules/input/.libs/im-xim.so: undefined symbol: g_realloc_n
-| /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la
-does not export GTK+ IM module API:
-/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0
-
-It seems this is defined in glib-2.0-native-2.24.0-r4
-
-So I suspect the second build is fine because glib-2.24.0 finished in
-the meanwhile.
-
-
-Regards
-
-Andrea
+we need an entry for freebsd8.x, it should be mostly the same as for
+freebsd7
 
 
