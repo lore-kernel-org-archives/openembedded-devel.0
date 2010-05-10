@@ -1,37 +1,36 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OBWBL-00088R-4g
+	(envelope-from <Tom_Rini@mentor.com>) id 1OBWCK-0000Pp-D8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 18:50:36 +0200
+	Mon, 10 May 2010 18:51:17 +0200
 Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
 	by relay1.mentorg.com with esmtp 
-	id 1OBW7Z-0003kP-Q4 from Tom_Rini@mentor.com 
+	id 1OBW8Z-0003ut-FC from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 09:46:21 -0700
+	Mon, 10 May 2010 09:47:23 -0700
 Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
 	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 10 May 2010 09:46:21 -0700
+	SMTPSVC(6.0.3790.1830); Mon, 10 May 2010 09:47:22 -0700
 Received: from 172.30.80.82 ([172.30.80.82]) by NA1-MAIL.mgc.mentorg.com
 	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon, 10 May 2010 16:46:20 +0000
+	Mon, 10 May 2010 16:47:22 +0000
 Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	10 May 2010 09:46:20 -0700
+	10 May 2010 09:47:21 -0700
 From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hs8gds$jel$1@dough.gmane.org>
-References: <4BE185C7.50305@dresearch.de>
-	<1273140949-14699-1-git-send-email-sledz@dresearch.de>
-	<hru6f7$4qk$1@dough.gmane.org>	<4BE29E46.2000600@dresearch.de>
-	<4BE3BA38.1010102@dresearch.de>	<hs0f5k$sl$1@dough.gmane.org>
-	<4BE3C2B1.5040307@dresearch.de> <4BE7B795.1010607@dresearch.de>
-	<hs8gds$jel$1@dough.gmane.org>
+In-Reply-To: <AANLkTimOAdWye_9cLGryBlVJjsSVSVrlM7Lz9ikQAmQh@mail.gmail.com>
+References: <1273249883.457.336.camel@trini-m4400>
+	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+	<1273331468.22943.217.camel@trini-m4400>
+	<1273429494.22943.225.camel@trini-m4400>
+	<AANLkTimOAdWye_9cLGryBlVJjsSVSVrlM7Lz9ikQAmQh@mail.gmail.com>
 Organization: Mentor Graphics Corporation
-Date: Mon, 10 May 2010 09:46:19 -0700
-Message-ID: <1273509979.22943.294.camel@trini-m4400>
+Date: Mon, 10 May 2010 09:47:21 -0700
+Message-ID: <1273510041.22943.295.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 10 May 2010 16:46:21.0238 (UTC)
-	FILETIME=[51BD7D60:01CAF060]
+X-OriginalArrivalTime: 10 May 2010 16:47:22.0893 (UTC)
+	FILETIME=[767D4BD0:01CAF060]
 X-SA-Exim-Connect-IP: 192.94.38.131
 X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -40,7 +39,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
+Subject: Re: calamari (ppc e500v2) failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,51 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 16:50:36 -0000
+X-List-Received-Date: Mon, 10 May 2010 16:51:18 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2010-05-10 at 10:34 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Mon, 2010-05-10 at 10:40 +0200, Frans Meulenbroeks wrote:
+> 2010/5/9 Tom Rini <tom_rini@mentor.com>:
+> > On Sat, 2010-05-08 at 08:11 -0700, Tom Rini wrote:
+> >> On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
+> >> > 2010/5/7 Tom Rini <tom_rini@mentor.com>:
+> >> > > Hey all,
+> >> > >
+> >> > > With DISTRO=3Dminimal and MACHINE=3Dcalamari, I see the following =
+failure in
+> >> > > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
+> >> > > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP =
+merge,
+> >> > > so this is unrelated.
+> >> >
+> >> > Which eglibc is that?
+> >> > The issues I had seemed due to some catch22 situation that I cured; =
+I
+> >> > started a clean build yesterday before I left work & can tell the
+> >> > results on monday.
+> >> > My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
+> >> > minimal also using 2.10 or is it at 2.11
+> >> >
+> >> > I can also try to kick off a minimal build on monday
+> >>
+> >> minimal is eglibc 2.10.  I'll try an Angstrom build.
+> >
+> > With Angstrom, gcc-cross-initial fails building libgcc, config.log has:
+> > cc1: error: not configured for ABI: 'spe'
+> > configure:2591: $? =3D 1
+> > configure: failed program was:
+> > ... standard empty program ...
+> > configure:2605: error: cannot compute suffix of object files: cannot
+> > compile
+> >
+> > Ubuntu 9.10 x86_64 host
+> >
 >=20
-> On 10-05-10 09:36, Steffen Sledz wrote:
-> >>>>>  #This is unrelated to the kernel version, but userspace apps (e.g.=
- HAL) require a recent version to build against
-> >>>>> -PREFERRED_VERSION_linux-libc-headers 	=3D "2.6.31"
-> >>>>> +PREFERRED_VERSION_linux-libc-headers       ?=3D "2.6.31"
-> >>>>> +PREFERRED_VERSION_linux-libc-headers_hipox ?=3D "2.6.24"
-> >>>>
-> >>>> NACK, that creates undefined behaviour for multimachine builds.
-> >>
-> >>> -PREFERRED_VERSION_linux-libc-headers 	=3D "2.6.31"
-> >>> +PREFERRED_VERSION_linux-libc-headers       =3D "2.6.31"
-> >>> +PREFERRED_VERSION_linux-libc-headers_hipox =3D "2.6.24"
-> >>
-> >>> Is this better?
-> >>
-> >> No, it still changes the headers for one machine, which leads to
-> >> undefined behaviour for other machines using the same arch.
-> >> Any solution that doesn't mark *all* packages as machine specific for
-> >> hipox is going to cause that behaviour.
-> >=20
-> > Would be a
-> >=20
-> > -PREFERRED_VERSION_linux-libc-headers 	=3D "2.6.31"
-> > +PREFERRED_VERSION_linux-libc-headers  ?=3D "2.6.31"
-> >=20
-> > acceptable to allow overwrites in local.conf?
+> I made a mistake when doing the clean build, and kicked it off again.
+> I don't think I saw your error.
+> In  my local.conf I have:
 >=20
-> This comes up about every month (search the archives) and the answer
-> remains the same: no
-> This will introduce the same undefined behaviour that was pointed out
-> earlier.
+> MACHINE =3D "calamari"
+> DISTRO =3D "angstrom-2008.1"
+> ANGSTROMLIBC =3D "eglibc"
 
-Perhaps the fact that this comes up once a month means the Angstrom
-folks may want to think about how to have a very clear to the user not
-compatible with the main feeds and so on custom distribution, but that
-doesn't start out with cp conf/distro/angstrom-2008.1.conf
-conf/distro/mystrom.conf ?
+This should just be LIBC, btw.
+
+> # e500v2 supports the SPE instruction set.
+> TARGET_OS =3D "linux-gnuspe"
+
+This should also be picked out automatically, iirc.
 
 --=20
 Tom Rini <tom_rini@mentor.com>
