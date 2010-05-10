@@ -1,49 +1,41 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OBWFa-0002RX-HD
+	(envelope-from <Tom_Rini@mentor.com>) id 1OBWKY-0008NL-UU
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 18:54:39 +0200
-Received: by pvc30 with SMTP id 30so61964pvc.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 09:50:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=NIH5ZFM6jpuOty+/Sgy966OnDiSiwQK0lmvBSnG0s3w=;
-	b=blNlEUjnNizPlrArL9prEgSgOMsK4y9fSLDP+xfq4HIAxQqxbcD5u14+FYlO6zOHZB
-	DoIKAR19wsz7J+U47KEomVbsXSDAdBZ1Npq0TfWpLI0MYJIDMcJaAGuRkLxKgTd6V2G+
-	PpBc/N5ZbM6jRUweb2p0PyPouK6sEjZtuD89Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Cuj/SwnV9l5+jDdfr0Y/BkQsZbPd19qo04VHlWtg1UWPu1OP4gplhwZFQ59C10+5on
-	CrRBfXr4yf/hf15VWVopL2CvZb3WhTgaHOUklSEMwRGUthZClHWTjm0GN59R/CSA3+wl
-	I1brbQiNNE1AwvVOCgAJDuUp6g8tjGxu/ydSY=
-Received: by 10.140.83.37 with SMTP id g37mr2797627rvb.222.1273510244991;
-	Mon, 10 May 2010 09:50:44 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id o38sm1990819rvp.12.2010.05.10.09.50.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 May 2010 09:50:44 -0700 (PDT)
-Date: Mon, 10 May 2010 09:50:54 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 10 May 2010 19:00:02 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OBWGn-0005Ot-F8 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 May 2010 09:55:53 -0700
+Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 10 May 2010 09:55:52 -0700
+Received: from 172.30.80.82 ([172.30.80.82]) by NA1-MAIL.mgc.mentorg.com
+	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
+	Mon, 10 May 2010 16:55:51 +0000
+Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
+	10 May 2010 09:55:51 -0700
+From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100510165054.GC11797@gmail.com>
-References: <1273507486.2994.189.camel@localhost.localdomain>
-MIME-Version: 1.0
-In-Reply-To: <1273507486.2994.189.camel@localhost.localdomain>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <4BE81DE7.90609@dresearch.de>
+References: <4BE13C20.1010902@dresearch.de>  <4BE81DE7.90609@dresearch.de>
+Organization: Mentor Graphics Corporation
+Date: Mon, 10 May 2010 09:55:50 -0700
+Message-ID: <1273510550.22943.298.camel@trini-m4400>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 10 May 2010 16:55:52.0926 (UTC)
+	FILETIME=[A67E27E0:01CAF061]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Supported Python version for OE?
+Subject: Re: Kernel Headers Quality Issue (was: linux vs. linux-libc-headers?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,43 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 16:54:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 May 2010 17:00:04 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On (10/05/10 17:04), Joshua Lock wrote:
-> Hi,
-> 
-> A question, (perhaps for the TSC?):
-> 
-> 	"What's the minimum Python version we want to support in OE?"
-> 
-> According to the wiki we support Python 2.4 and above but I wonder if
-> people have any thoughts with regards to bumping it?
+On Mon, 2010-05-10 at 16:53 +0200, Thilo Fromm wrote:
+> Hello Guys,
+>=20
+> this is a somewhat cumulated response - I'd like to address some of the=20
+> things mentioned at different points in the discussion in one place.=20
+> Please forgive me should I misquote things.
+>=20
+>=20
+>=20
+> Graeme Gregory in <20100505094242.GF2444@xora-desktop.xora.org.uk>:
+>=20
+> [Steffen Sledz]
+>  > > It seem's not to be possible to use DEFAULT_PREFERENCE_hipox in the
+>  > > linux-libc-headers recipes. So what's the right way to handle this?
+>  > > Something like PREFERRED_VERSION_linux-libc-headers_hipox =3D "2.6.2=
+4"
+>  > > in angstrom-2008.1.conf?
+>  >
+> [Graeme Gregory]
+>  > I thought glibc was supposed to gracefully fall back on missing
+>  > syscalls?
+>=20
+> Glibc is compiled against 2.6.31 headers, which is one of our main=20
+> issues here. It only ever *runs* with a 2.6.24 kernel on the target=20
+> system, though. So it cannot know about missing syscalls until runtime.
 
-I think it was in recent discussions that we now use new 2.5+ features
-so it should be bumped for git master atleast.
+So, I think some of the confusion here stems from confusion about (and I
+don't know the right answer off-hand) how glibc handles the
+--with-kernel=3DVERSION stuff.
 
-> 
-> The reason I ask is because I had a user contact me about using Python
-> 2.5 features (str.partition) in relocatable.bbclass, I hadn't even
-> noticed this and seems like not many others have but it's clearly
-> affecting at least one person.
-> 
-> I have a pretty trivial (if ugly) patch to work around this, but it
-> raised an interesting question so I thought I'd ask that before sending
-> the patch.
-> 
-> Cheers,
-> Joshua
-> -- 
-> Joshua Lock
->         Intel Open Source Technology Centre
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+--=20
+Tom Rini <tom_rini@mentor.com>
+Mentor Graphics Corporation
 
 
