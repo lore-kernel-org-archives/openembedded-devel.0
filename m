@@ -1,41 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OBYUx-0004bP-Bq
+	(envelope-from <raj.khem@gmail.com>) id 1OBcRF-0001kh-Q8
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 21:18:50 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OBYR9-0004vn-I3 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 12:14:43 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 10 May 2010 12:14:43 -0700
-Received: from 172.30.80.82 ([172.30.80.82]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Mon, 10 May 2010 19:14:42 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	10 May 2010 12:14:42 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 11 May 2010 01:31:06 +0200
+Received: by pvh1 with SMTP id 1so88682pvh.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 10 May 2010 16:27:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=G1523xOHhxHOFweX/SZAzcoCqImm3rKt6k1OV9v+KbA=;
+	b=SYZzX0bWlkAfKumIFtfHSdLUc/dpAwF39UVEM6VFVYmPweinDuYeXpnsiFPwsMIzpS
+	uIeLhNgsNHBCYTWIXO7kLYmBVr0TOfGQUwrqjkIIJ/F1z6iapGOwNvGytseW2vg4V5xf
+	7lbSMoSuDI0/wKJ77KfDgx2m4JlUK98Xgh3DM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=J8OYFgzCc2BtqAvDAt+FkpYzHt9avfIO+TxNOnPjPQ36qefKkaROeDXxSc4CpWWX1/
+	Ca4q+gceouBh51RGbOSS842t9UdLWpvAKXEqHvAiyoEY8NtL+IjSHt9DgUQckfFDE21I
+	huFtNE2q8sSySpoZ0nDz6E8Dm1vluW5ZE9hAQ=
+Received: by 10.142.2.2 with SMTP id 2mr3158693wfb.75.1273534032217;
+	Mon, 10 May 2010 16:27:12 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 20sm4944444pzk.3.2010.05.10.16.27.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 10 May 2010 16:27:11 -0700 (PDT)
+Date: Mon, 10 May 2010 16:27:20 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BE81DE7.90609@dresearch.de>
-References: <4BE13C20.1010902@dresearch.de>  <4BE81DE7.90609@dresearch.de>
-Organization: Mentor Graphics Corporation
-Date: Mon, 10 May 2010 12:14:41 -0700
-Message-ID: <1273518881.22943.378.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 10 May 2010 19:14:43.0304 (UTC)
-	FILETIME=[0BC8F680:01CAF075]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-ID: <20100510232720.GA13708@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Kernel Headers Quality Issue (was: linux vs. linux-libc-headers?)
+Subject: [RFC] Move gcc 4.4.3 recipes in favour of 4.4.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +54,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 19:18:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 10 May 2010 23:31:06 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, 2010-05-10 at 16:53 +0200, Thilo Fromm wrote:
-> Hello Guys,
->=20
-> this is a somewhat cumulated response - I'd like to address some of the=20
-> things mentioned at different points in the discussion in one place.=20
-> Please forgive me should I misquote things.
->=20
->=20
->=20
-> Graeme Gregory in <20100505094242.GF2444@xora-desktop.xora.org.uk>:
->=20
-> [Steffen Sledz]
->  > > It seem's not to be possible to use DEFAULT_PREFERENCE_hipox in the
->  > > linux-libc-headers recipes. So what's the right way to handle this?
->  > > Something like PREFERRED_VERSION_linux-libc-headers_hipox =3D "2.6.2=
-4"
->  > > in angstrom-2008.1.conf?
->  >
-> [Graeme Gregory]
->  > I thought glibc was supposed to gracefully fall back on missing
->  > syscalls?
->=20
-> Glibc is compiled against 2.6.31 headers, which is one of our main=20
-> issues here. It only ever *runs* with a 2.6.24 kernel on the target=20
-> system, though. So it cannot know about missing syscalls until runtime.
+Hi
 
-Looking at it again and based on what Khem said (and re-reading your
-failures), the problem is not with glibc, but with other programs (glib,
-udev are both mentioned specifically) and these programs specifically
-not failing gracefully.  For example, it's quoted over in:
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/019626.htm=
-l
-that glib falls way back.  I think Phil was wrong here and without
-checking the code, I imagine glib is trying fancy newer syscall,
-failing, and then falling far back, rather than to just inotify_init as
-you expected.  So the bug here is with glib.
+I would like to propose to move gcc 4.4.3 recipes to gcc 4.4.4, 
+there are no additional patches that we need and 4.4.4 is superset
+of bugfixes. I want to avoid adding additional recipes if we could.
+4.4.3 is not so widely used in distributions unlike 4.4.2
 
-As for the udev issue, I do not know how they will react to making the
-udev version be soft-assign as that too may raise issues.  And iirc,
-udev is or at least can be more tied to min kernel versions.
+I can also just add 4.4.4 and leave 4.4.3 as it is if someone wants
+to keep using 4.4.3
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+Please cast your concerns
+
+Thanks
+-Khem
 
 
