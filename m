@@ -1,52 +1,35 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OBLvT-00047M-ED
+	(envelope-from <sledz@dresearch.de>) id 1OBNbT-0004Wj-KJ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 07:53:12 +0200
-Received: by vws1 with SMTP id 1so62783vws.6
+	Mon, 10 May 2010 09:40:40 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 7989E49127F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 09 May 2010 22:49:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Qjfuu1DoWdk9KVZx8nnzH3tyNnlEiuT1i10qwX5cqaA=;
-	b=SRNyt5y6Xy7ApUKGzv0s1Y5+rcvHnXWI8bIgLLte2aA7B3yhHvPVKWg9XIxmFHMv7/
-	TjkQl1e0xxtoaIkil03K+X1DHVIPf6GjDT9K9x16gFCj5bRDhm0/XKEvuKoKgC7wOuZR
-	j22f7nzrPQBTR6ScI/9omMzzvm7NY8v9wwLvM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=WSarc21cVb1vDnaHTAQCpcpDYCOBN4yvkDmy27/tx6imYQ8bDRlkv2DOjpWUwJyCwc
-	7M36MUUDy9FbKJQ0ZcmLIXUJQYw55HOWnovL4vQ4dnDciejJ9W/5dZt/yB8Fuq9d77HQ
-	jGTX/7VqYGsAcS9yBiEv2le8X1ey2l4WKxwro=
-Received: by 10.220.88.81 with SMTP id z17mr2895117vcl.154.1273470558737;
-	Sun, 09 May 2010 22:49:18 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id s9sm42652998vcr.15.2010.05.09.22.49.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 09 May 2010 22:49:17 -0700 (PDT)
-Date: Sun, 9 May 2010 22:49:21 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100510054921.GA11084@gmail.com>
-References: <1273249883.457.336.camel@trini-m4400>
-	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
-	<1273331468.22943.217.camel@trini-m4400>
-	<1273429494.22943.225.camel@trini-m4400>
+	Mon, 10 May 2010 09:36:49 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 10 May 2010 09:38:03 +0200
+Message-ID: <4BE7B795.1010607@dresearch.de>
+Date: Mon, 10 May 2010 09:36:53 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-In-Reply-To: <1273429494.22943.225.camel@trini-m4400>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4BE185C7.50305@dresearch.de>	<1273140949-14699-1-git-send-email-sledz@dresearch.de>	<hru6f7$4qk$1@dough.gmane.org>	<4BE29E46.2000600@dresearch.de>	<4BE3BA38.1010102@dresearch.de>	<hs0f5k$sl$1@dough.gmane.org>
+	<4BE3C2B1.5040307@dresearch.de>
+In-Reply-To: <4BE3C2B1.5040307@dresearch.de>
+X-OriginalArrivalTime: 10 May 2010 07:38:03.0683 (UTC)
+	FILETIME=[B944F730:01CAF013]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: calamari (ppc e500v2) failure
+Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,120 +43,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 05:53:12 -0000
-X-Groupsio-MsgNum: 19129
-Content-Type: multipart/mixed; boundary="DocE+STaALJfprDB"
-Content-Disposition: inline
+X-List-Received-Date: Mon, 10 May 2010 07:40:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---DocE+STaALJfprDB
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+>>>>  #This is unrelated to the kernel version, but userspace apps (e.g. HAL) require a recent version to build against
+>>>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
+>>>> +PREFERRED_VERSION_linux-libc-headers       ?= "2.6.31"
+>>>> +PREFERRED_VERSION_linux-libc-headers_hipox ?= "2.6.24"
+>>>
+>>> NACK, that creates undefined behaviour for multimachine builds.
+>
+>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
+>> +PREFERRED_VERSION_linux-libc-headers       = "2.6.31"
+>> +PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
+>
+>> Is this better?
+>
+> No, it still changes the headers for one machine, which leads to
+> undefined behaviour for other machines using the same arch.
+> Any solution that doesn't mark *all* packages as machine specific for
+> hipox is going to cause that behaviour.
 
-On (09/05/10 11:24), Tom Rini wrote:
-> On Sat, 2010-05-08 at 08:11 -0700, Tom Rini wrote:
-> > On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
-> > > 2010/5/7 Tom Rini <tom_rini@mentor.com>:
-> > > > Hey all,
-> > > >
-> > > > With DISTRO=minimal and MACHINE=calamari, I see the following failure in
-> > > > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
-> > > > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP merge,
-> > > > so this is unrelated.
-> > > 
-> > > Which eglibc is that?
-> > > The issues I had seemed due to some catch22 situation that I cured; I
-> > > started a clean build yesterday before I left work & can tell the
-> > > results on monday.
-> > > My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
-> > > minimal also using 2.10 or is it at 2.11
-> > > 
-> > > I can also try to kick off a minimal build on monday
-> > 
-> > minimal is eglibc 2.10.  I'll try an Angstrom build.
-> 
-> With Angstrom, gcc-cross-initial fails building libgcc, config.log has:
-> cc1: error: not configured for ABI: 'spe'
-> configure:2591: $? = 1
-> configure: failed program was:
-> ... standard empty program ...
-> configure:2605: error: cannot compute suffix of object files: cannot
-> compile
-> 
-> Ubuntu 9.10 x86_64 host
+Would be a
 
-Could you test with attached gcc patch please. This should fix the
-undefined symbol error. You could use minimal distro for SPE targets
-it should work. Please let me know if it works for you.
+-PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
++PREFERRED_VERSION_linux-libc-headers  ?= "2.6.31"
 
-Thanks
--Khem
+acceptable to allow overwrites in local.conf?
+
+BTW: I did not found any fallback handling for inotify_init1 (added with 2.6.27) in the glibc.
+
+Regards,
+Steffen
 
 
 
-
-> 
-> 
-> -- 
-> Tom Rini <tom_rini@mentor.com>
-> Mentor Graphics Corporation
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
---DocE+STaALJfprDB
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="optspace.diff"
-
-diff --git a/recipes/gcc/gcc-configure-common.inc b/recipes/gcc/gcc-configure-common.inc
-index fe8b486..892d684 100644
---- a/recipes/gcc/gcc-configure-common.inc
-+++ b/recipes/gcc/gcc-configure-common.inc
-@@ -21,10 +21,7 @@ OBJC ?= ",objc"
- # hidden symbols in libgcc.a which linker complains
- # when linking shared libraries further in the build like (gnutls)
- 
--OPTSPACE_linux-gnuspe ?= ""
--OPTSPACE_linux-uclibcspe ?= ""
--OPTSPACE ?= "--enable-target-optspace"
--
-+OPTSPACE = "${@base_contains('TARGET_ARCH', 'powerpc', '', '--enable-target-optspace',d)}"
- # gcc 3.x expects 'f77', 4.0 expects 'f95', 4.1 and 4.2 expect 'fortran'
- FORTRAN ?= ",f77"
- LANGUAGES ?= "c,c++${OBJC}${FORTRAN}${JAVA}"
-diff --git a/recipes/gcc/gcc-cross-initial.inc b/recipes/gcc/gcc-cross-initial.inc
-index 97002f9..25d7ba5 100644
---- a/recipes/gcc/gcc-cross-initial.inc
-+++ b/recipes/gcc/gcc-cross-initial.inc
-@@ -12,11 +12,11 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
- 		--disable-multilib \
- 		--disable-__cxa_atexit \
- 		--enable-languages=c \
--		--enable-target-optspace \
- 		--program-prefix=${TARGET_PREFIX} \
- 		--with-sysroot=${STAGING_DIR_TARGET} \
- 		--with-build-sysroot=${STAGING_DIR_TARGET} \
- 		${EXTRA_OECONF_INITIAL} \
-+		${OPTSPACE} \
- 		${@get_gcc_fpu_setting(bb, d)} \
- 		${@get_gcc_mips_plt_setting(bb, d)}"
- 
-diff --git a/recipes/gcc/gcc-cross-intermediate.inc b/recipes/gcc/gcc-cross-intermediate.inc
-index 0c06d6f..cbc8638 100644
---- a/recipes/gcc/gcc-cross-intermediate.inc
-+++ b/recipes/gcc/gcc-cross-intermediate.inc
-@@ -10,10 +10,10 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
- 		--disable-multilib \
- 		--disable-threads \
- 		--enable-languages=c \
--		--enable-target-optspace \
- 		--program-prefix=${TARGET_PREFIX} \
- 		--with-sysroot=${STAGING_DIR_TARGET} \
- 		--with-build-sysroot=${STAGING_DIR_TARGET} \
-+		${OPTSPACE} \
- 		${EXTRA_OECONF_INTERMEDIATE} \
- 		${@get_gcc_fpu_setting(bb, d)} \
- 		${@get_gcc_mips_plt_setting(bb, d)}"
-
---DocE+STaALJfprDB--
