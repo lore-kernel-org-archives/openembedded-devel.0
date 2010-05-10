@@ -1,53 +1,34 @@
-Received: from mail-qy0-f195.google.com ([209.85.221.195])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <spyzer.abhishek0@gmail.com>) id 1OBTKl-0006Cj-4P
+	(envelope-from <t.fromm@DResearch.de>) id 1OBUmk-0003N0-Lj
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 15:47:48 +0200
-Received: by qyk33 with SMTP id 33so6260128qyk.24
+	Mon, 10 May 2010 17:21:09 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 89106491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 06:43:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=2xccYZSFCPoAKm4cIk0433X4AZXlVXNadEZ46o4swno=;
-	b=Brd2oZlgGHF92j9e0fwZUQEiWIN3qEryieHasM4h1SnfGU1lATpADuejK/nuf7CaQV
-	QpXzE7YaolyE88GQYzcqcOMJtfuA6rxvzEULtX1unAUkyeIL619yzmzydsnn79qyIvbL
-	Go/s+OytrkgvfuxodJUBDPPhh2SN0pB4Tk8Ho=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=SeooVynYdezPF3OOIwqNQCmjdlKcYb1xOD5QCshKSgbz8N+qg2xJloVAB8rRXQ+N0h
-	/yvGU6YNey/ya/wBPR3EwL1U7oOW8ewpuJXQPfExzPpBpPqSTIQJwYEtxMfvJSgOq+TV
-	GSAU+nrZ1So/VXIlz6vYhNH7q8Moevdtn+Vd4=
-Received: by 10.229.222.144 with SMTP id ig16mr3239837qcb.74.1273499028402; 
-	Mon, 10 May 2010 06:43:48 -0700 (PDT)
+	Mon, 10 May 2010 16:52:22 +0200 (CEST)
+Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 10 May 2010 16:53:37 +0200
+Message-ID: <4BE81DE7.90609@dresearch.de>
+Date: Mon, 10 May 2010 16:53:27 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-Received: by 10.150.124.11 with HTTP; Mon, 10 May 2010 06:43:28 -0700 (PDT)
-In-Reply-To: <AANLkTinNs0RXIqA8annkPWKiGKUAD8yWnlKiAZiT-g0A@mail.gmail.com>
-References: <n2kfc0861611004260035m8d19c57ez38a19dbbe360efe8@mail.gmail.com> 
-	<k2jfc0861611004280742x8a9ca2b7jc65a77230be17b42@mail.gmail.com> 
-	<4BD84B08.4000300@eukrea.com>
-	<g2wfc0861611005040002v62c57e0ahf08f8337bbbe9c1d@mail.gmail.com>
-	<4BDFC996.5060606@eukrea.com>
-	<AANLkTik56w90iywd5ZmzV_geM0ULabHWVCuJIfxzHY7u@mail.gmail.com> 
-	<4BE29322.7060205@eukrea.com>
-	<AANLkTimCrYrjKuREPyUgYQwxlWdAN_OjF5ECiRBLj6Pp@mail.gmail.com> 
-	<hru8nc$d5l$1@dough.gmane.org>
-	<AANLkTinNs0RXIqA8annkPWKiGKUAD8yWnlKiAZiT-g0A@mail.gmail.com>
-From: Abhishek Sharma <spyzer.abhishek0@gmail.com>
-Date: Mon, 10 May 2010 19:13:28 +0530
-Message-ID: <AANLkTimd60OIu7Qfs2KXn-3iCM1n8z2upsbnJqit00Y7@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.195
-X-SA-Exim-Mail-From: spyzer.abhishek0@gmail.com
+References: <4BE13C20.1010902@dresearch.de>
+In-Reply-To: <4BE13C20.1010902@dresearch.de>
+X-OriginalArrivalTime: 10 May 2010 14:53:37.0652 (UTC)
+	FILETIME=[92542B40:01CAF050]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Regarding customized image with Qt embedded support.
+Subject: Kernel Headers Quality Issue (was: linux vs. linux-libc-headers?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,75 +42,149 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 13:47:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 10 May 2010 15:21:20 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 7, 2010 at 7:31 PM, Abhishek Sharma
-<spyzer.abhishek0@gmail.com>wrote:
+Hello Guys,
 
->
->
-> On Thu, May 6, 2010 at 4:51 PM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
->
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 06-05-10 12:55, Abhishek Sharma wrote:
->>
->> > About the /dev node, there is no such device as /dev/input/touchscreen0,
->> is
->> > it because i am only doing a base-image kind of install???
->> > i set the environment variable which was specified, but no progress.
->>
->> If you use udev, it will get created for you.
->>
->> regards,
->>
->> Koen
->>
->>
->> -----BEGIN PGP SIGNATURE-----
->> Version: GnuPG v1.4.5 (Darwin)
->>
->> iD8DBQFL4qYsMkyGM64RGpERAszCAJ9tRRJelQyLDkozlVtBHdgyobx/HQCgs0NP
->> mB316e3HZG2RsEoAcQEwJrI=
->> =4Mnu
->> -----END PGP SIGNATURE-----
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
-> Thanks all, the touchscreen device was /dev/event1 and the moment I did ->
-> export QWS_MOUSE_PROTO="Tslib:/dev/event1" and ran the app, it got going.
-> I am very grateful to you all for the help.
-> :)
-> --
-> Abhishek Sharma
->
-
-Hi all.
-This was my_customized_image.bb :
-
-   1. require base-image.bb
-   2. IMAGE_INSTALL += "qtehelloworld"
-   3. IMAGE_INSTALL += "qt4-embedded-fonts"
-   4. IMAGE_INSTALL += "qt4-embedded-plugin-mousedriver-tslib"
-   5. IMAGE_BASENAME = "qtehelloworld"
-   6. RDEPENDS += "qte"
-   7. inherit image
+this is a somewhat cumulated response - I'd like to address some of the 
+things mentioned at different points in the discussion in one place. 
+Please forgive me should I misquote things.
 
 
-Now this one has a size of 64 Mb. I used base-image as a requirement to
-install the basic utilities and since I had to run a qt embedded based app
-on the machine I also had to include the qte runtime dependencies. Is there
-any way so that the image size can be reduced??
 
-Thanks.
+Graeme Gregory in <20100505094242.GF2444@xora-desktop.xora.org.uk>:
+
+[Steffen Sledz]
+ > > It seem's not to be possible to use DEFAULT_PREFERENCE_hipox in the
+ > > linux-libc-headers recipes. So what's the right way to handle this?
+ > > Something like PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
+ > > in angstrom-2008.1.conf?
+ >
+[Graeme Gregory]
+ > I thought glibc was supposed to gracefully fall back on missing
+ > syscalls?
+
+Glibc is compiled against 2.6.31 headers, which is one of our main 
+issues here. It only ever *runs* with a 2.6.24 kernel on the target 
+system, though. So it cannot know about missing syscalls until runtime.
+
+And no, it isn't very gracefully falling anywhere then - it simply 
+cannot, as there is no runtime type checking in C. All you got is 
+compile-time checking. You can happily link together completely 
+incompatible interfaces if the header files are lying to you. And you 
+won't even notice.
+
+Basically, that's what's happening to us: We need to use 2.6.24 but the 
+build system tells everybody (including the C library) that they will 
+run with (at least) 2.6.31. As the kernel/userspace ABI is guaranteed to 
+be stable (let's forget about EABI/OABI for a sec...) this will work the 
+other way around, i.e. it's OK to build libc, say, against 2.6.28 kernel 
+headers, and have it run on a 2.6.32 system (which, by the way, the 
+latest ubuntu does). You're unable to use kernel ABI features which came 
+after 2.6.28 in any userspace application linking to that libc, but the 
+runtime will work.
+
+I think pretending to have a 2.6.31 ABI while only providing a 2.6.24 
+runtime is dangerous at least. And I think it is a massive bug in the 
+build system if it lets you build such a dysfunctional system (because 
+oe *knows* that 2.6.24 will run the system and still provides 2.6.31 
+headers, thereby breaking things).
+
+
+------------
+
+
+Phil Blundell in <1273053926.18119.331.camel@mill.internal.reciva.com>:
+
+ > That sounds like it's just a bug in glibc.  I guess you should fix it
+ > there.
+
+What way are we supposed to fix missing kernel ABI features (mind the 
+2.6.31 / 2.6.24 feature gap) in the C library? By implementing the 
+misssing functionality in the library? Then maybe port these 
+library-added-kernel-features to uClibc, dietlibc, or any other C 
+library if we feel the need to switch libraries? I don't think so.
+
+
+------------
+
+
+Phil Blundell in <1273222986.4378.18.camel@lenovo.internal.reciva.com>:
+
+ > > So for the moment i would prefer to work with linux-libc-headers
+ > > of version 2.6.24.
+ > >
+ > > But what's the recommended way to select them in OE/Angstrom?
+ >
+ > As far as OE goes, it's fairly easy: you just set
+ > PREFERRED_VERSION_linux-libc-headers appropriately.
+
+I think that's the way to go, then.
+
+ >
+ > If you are not willing to fix glibc then I think there are only three
+ > sensible ways to proceed:
+ >
+
+I don't think you can "fix" missing kernel features in the library.
+
+ > a) update your machine to use the 2.6.31 kernel so that the problem
+ > goes away; or
+
+That's my dream option ^_^ It's just that we inherited tons of legacy 
+driver code. That's the sole reason we still use 2.6.24. And that won't 
+change for a while. Meh.
+
+ > b) persuade the Angstrom maintainers to adopt 2.6.24 headers as their
+ > DISTRO standard, though this will presumably cause some fallout in
+ > terms of other incompatibilities so I suspect it will be a struggle;
+ > or
+
+"Hey, we'd like you guys to build your C library against totally 
+outdated kernel header files for your whole distribution, thereby 
+breaking all the user space software which depends on newer features 
+(like udev does), because we're sitting on a legacy kernel version for 
+our architecture (which no one's using except us)."
+
+Let me think.
+
+NO. ^_^
+
+ > c) create your own DISTRO, which can be a derivative/fork of Angstrom
+ > if you wish, and in which you can obviously do whatever you like.
+ > This probably seems like a bit of a large hammer to crack that
+ > particular nut but it is more or less the only way in which you can
+ > use a different version from the other Angstrom folks.
+
+I think this is the way to go here. We need to make sure that everything 
+is built against our build of glibc which in turn is built against 
+kernel 2.6.24 header files, or things might silently break. We basically 
+do have a different distribution already (as we use a *way* older kernel 
+than Angstrom, and lie to the C library about it). We just didn't notice.
+
+
+------------------
+
+
+There's just one issue left: I can make openembedded build my target 
+libraries and applications against a more recent kernel version than the 
+one I'll provide on the target. I think building against a way newer 
+kernel than the one the system will run is bad. And I think openembedded 
+could detect, and warn about, this issue, but it doesn't, which is also 
+bad. What do you guys think?
+
+
+Regards,
+Thilo
+
 -- 
-Abhishek Sharma
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Amtsgericht: Berlin Charlottenburg, HRB:54412
+Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
+Fax: +49 (30) 515 932 77 http://www.dresearch.de
+
 
