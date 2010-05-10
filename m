@@ -1,40 +1,35 @@
-Received: from mail-bw0-f220.google.com ([209.85.218.220])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.moussaud@gmail.com>) id 1OBP87-0004oG-IE
+	(envelope-from <sledz@dresearch.de>) id 1OBP98-0004rj-Uh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 11:18:28 +0200
-Received: by bwz20 with SMTP id 20so1580881bwz.12
+	Mon, 10 May 2010 11:19:31 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 01C1C491284
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 02:14:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=W/GIAZBw0gk78eCCahJrfx1XEnAKyPPSEj2GPZ/+SJ4=;
-	b=u/FqnHsma8HEr3ib5/VOMEhDfHS43zAw9cvk0UJVqujKdaj5yx4vdYp3B0fDpJUSqP
-	Tyh8VkhTC89HJZPiwoNSNupLhwEJNiaRnHlfaCeAnvf7XT7W4WJgQFDL76NZjziPUvGm
-	t+ShtL5GHnBD3V6QS4RliZPU11zv/rhDr9faU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=XnL5RFx1W7X+HFEgvuwCcw0TALf9Cdjk7kaHjD/YswZpBatWYSKSPZkGXjCAZf0aL8
-	ZHIZPzl+zadrQ7vSjlz1J4vZMn0XrplBN4hpEgsI/dpWIYSe82d7PM+OMpsGqql9JC/J
-	UUJTmqWrbANzIgkr9eMDVQcLTVoz6zsogBp0w=
-Received: by 10.204.155.87 with SMTP id r23mr2173544bkw.27.1273482875088; Mon, 
-	10 May 2010 02:14:35 -0700 (PDT)
+	Mon, 10 May 2010 11:15:41 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 10 May 2010 11:16:55 +0200
+Message-ID: <4BE7CEC0.1090300@dresearch.de>
+Date: Mon, 10 May 2010 11:15:44 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.204.65.66 with HTTP; Mon, 10 May 2010 02:14:14 -0700 (PDT)
-From: David MOUSSAUD <d.moussaud@gmail.com>
-Date: Mon, 10 May 2010 11:14:14 +0200
-Message-ID: <AANLkTikMZbhHtXqXqfLBSO0GY6Z6Tt8QuJPUMMBucAS_@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.218.220
-X-SA-Exim-Mail-From: d.moussaud@gmail.com
+References: <4BE13C20.1010902@dresearch.de>	<20100505094242.GF2444@xora-desktop.xora.org.uk>	<4BE141CA.30904@dresearch.de>
+	<1273053926.18119.331.camel@mill.internal.reciva.com>
+In-Reply-To: <1273053926.18119.331.camel@mill.internal.reciva.com>
+X-OriginalArrivalTime: 10 May 2010 09:16:55.0386 (UTC)
+	FILETIME=[88D703A0:01CAF021]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: problem using meta-toolchain.bb and external-toolchain-generic.bb
+Subject: Re: linux vs. linux-libc-headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,36 +43,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 09:18:28 -0000
+X-List-Received-Date: Mon, 10 May 2010 09:19:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi all,
+Am 05.05.2010 12:05, Phil Blundell wrote:
+>>> I thought glibc was supposed to gracefully fall back on missing syscalls?
+>>
+>> May be, but not satisfactorily.
+>>
+>> E.g. we've seen that g_file_monitor (from glib) falls back to
+>> polling each second instead of using inotify_init.
+> 
+> That sounds like it's just a bug in glibc.  I guess you should fix it
+> there.
 
-I'm trying to use an external toolchain with OE.
-So I've build one using the recipe meta-toolchain.bb with an angstrom
-distribution. I'm on the org.openembedded.dev branch (updated
-recently).
-I've extracted the 2 tar.gz provided in my root directory. So I have a
-nice /usr/local/angstrom layout with my pre-built toochain.
+That's all very unsatisfyingly.
 
-Then I have changed my distro.conf file setting that 2 parameter:
+I had a small look into the glibc sources. I could find the
+declarations for inotfiy_init1 and epoll_create1, but i could not
+find any fallback code if they do not exist in the running kernel.
 
-# Set the toolchain type (internal, external) and brand (generic, csl etc.)
-TOOLCHAIN_TYPE ?= "external"
-TOOLCHAIN_BRAND ?= "generic"
+I also could not find something about such fallback code at all.
+FAQ 3.21 describes the problem what we have but for very old
+kernel versions (2.0 vs. 2.1/2.2) and it says nothing about
+glibc internal fallback handling but:
 
-I've cleaned my build/tmp directory.
+"Your program should check at runtime whether the function works,
+and implement a fallback."
 
-Finally I've tried to build a minimalist image. Everything goes fine,
-the toolchain is found by OE but it fails when it tries to create the
-filesystem.
-Here is the following log file : http://pastebin.com/YZmuzmtx
+So where did this assumption come from?
 
-I can not understand what to do to tell OE how it could find the glibc !?
-
-Thanks in advance for your tips and suggestions,
+Do you have examples for such fallbacks inside glibc?
 
 Regards,
-David.
+Steffen
+
 
 
