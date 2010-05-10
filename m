@@ -1,44 +1,47 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OBOV0-0006gd-FA for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 10:38:04 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OBORI-0005Jy-GC for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 10:34:12 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 10:34:12 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OBOat-00078O-4s
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 10 May 2010 10:44:07 +0200
+Received: by gwb15 with SMTP id 15so136514gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 10:34:12 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 10 May 2010 01:40:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Gvy2A8EG+6Cvj5XMtjHZLo1Vkkgm5yTlDIgwx8blQoI=;
+	b=swJMCdvqJEvxM1ozFfdGZLrOjwAhUgBBDSjTh1cVHaIt2UymvioS7e0v4sL20ubmwM
+	wOjFCjjN83GzW0IDGp6hGegv4uFXUqgxZjhlr92DEhYd1oFsyQUz+UGInMhE7pcxRhjU
+	22NsKtJtXtc8dd99Ix2m+1kBDxgeRSeFytjUA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=fA54yEJD2MsSZCF6CevZA6UyuV1qlbvj3nOucONlVCilhQPh2VJLy0maBv8GMUgjrD
+	BAGsTx0Y6hP3w02W3SE19HtMkSRRMR6HTgV6EVS1lb7jKZoJrcDxsUoYVRDCq25Hplcy
+	+lDekpO8P/r+h/KFtuZR7Lk3d8uk/nBal+iDc=
+MIME-Version: 1.0
+Received: by 10.91.72.39 with SMTP id z39mr137131agk.129.1273480814503; Mon, 
+	10 May 2010 01:40:14 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Mon, 10 May 2010 01:40:14 -0700 (PDT)
+In-Reply-To: <1273429494.22943.225.camel@trini-m4400>
+References: <1273249883.457.336.camel@trini-m4400>
+	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+	<1273331468.22943.217.camel@trini-m4400>
+	<1273429494.22943.225.camel@trini-m4400>
+Date: Mon, 10 May 2010 10:40:14 +0200
+Message-ID: <AANLkTimOAdWye_9cLGryBlVJjsSVSVrlM7Lz9ikQAmQh@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 10 May 2010 10:34:04 +0200
-Message-ID: <hs8gds$jel$1@dough.gmane.org>
-References: <4BE185C7.50305@dresearch.de>	<1273140949-14699-1-git-send-email-sledz@dresearch.de>	<hru6f7$4qk$1@dough.gmane.org>	<4BE29E46.2000600@dresearch.de>	<4BE3BA38.1010102@dresearch.de>	<hs0f5k$sl$1@dough.gmane.org>	<4BE3C2B1.5040307@dresearch.de>
-	<4BE7B795.1010607@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <4BE7B795.1010607@dresearch.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
+Subject: Re: calamari (ppc e500v2) failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,50 +55,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 08:38:04 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 10 May 2010 08:44:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 10-05-10 09:36, Steffen Sledz wrote:
->>>>>  #This is unrelated to the kernel version, but userspace apps (e.g. HAL) require a recent version to build against
->>>>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
->>>>> +PREFERRED_VERSION_linux-libc-headers       ?= "2.6.31"
->>>>> +PREFERRED_VERSION_linux-libc-headers_hipox ?= "2.6.24"
->>>>
->>>> NACK, that creates undefined behaviour for multimachine builds.
+2010/5/9 Tom Rini <tom_rini@mentor.com>:
+> On Sat, 2010-05-08 at 08:11 -0700, Tom Rini wrote:
+>> On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
+>> > 2010/5/7 Tom Rini <tom_rini@mentor.com>:
+>> > > Hey all,
+>> > >
+>> > > With DISTRO=3Dminimal and MACHINE=3Dcalamari, I see the following fa=
+ilure in
+>> > > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
+>> > > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP me=
+rge,
+>> > > so this is unrelated.
+>> >
+>> > Which eglibc is that?
+>> > The issues I had seemed due to some catch22 situation that I cured; I
+>> > started a clean build yesterday before I left work & can tell the
+>> > results on monday.
+>> > My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
+>> > minimal also using 2.10 or is it at 2.11
+>> >
+>> > I can also try to kick off a minimal build on monday
 >>
->>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
->>> +PREFERRED_VERSION_linux-libc-headers       = "2.6.31"
->>> +PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
->>
->>> Is this better?
->>
->> No, it still changes the headers for one machine, which leads to
->> undefined behaviour for other machines using the same arch.
->> Any solution that doesn't mark *all* packages as machine specific for
->> hipox is going to cause that behaviour.
-> 
-> Would be a
-> 
-> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
-> +PREFERRED_VERSION_linux-libc-headers  ?= "2.6.31"
-> 
-> acceptable to allow overwrites in local.conf?
+>> minimal is eglibc 2.10. =A0I'll try an Angstrom build.
+>
+> With Angstrom, gcc-cross-initial fails building libgcc, config.log has:
+> cc1: error: not configured for ABI: 'spe'
+> configure:2591: $? =3D 1
+> configure: failed program was:
+> ... standard empty program ...
+> configure:2605: error: cannot compute suffix of object files: cannot
+> compile
+>
+> Ubuntu 9.10 x86_64 host
+>
 
-This comes up about every month (search the archives) and the answer
-remains the same: no
-This will introduce the same undefined behaviour that was pointed out
-earlier.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I made a mistake when doing the clean build, and kicked it off again.
+I don't think I saw your error.
+In  my local.conf I have:
 
-iD8DBQFL58T7MkyGM64RGpERApf+AJ9vJq9lk5TnCW6ykMU/QzFyTZvqtQCfY5SI
-HV39oHD0RIw4Y4sCFY5QpqY=
-=LzFt
------END PGP SIGNATURE-----
+MACHINE =3D "calamari"
+DISTRO =3D "angstrom-2008.1"
+ANGSTROMLIBC =3D "eglibc"
 
+# e500v2 supports the SPE instruction set.
+TARGET_OS =3D "linux-gnuspe"
+
+Perhaps the TARGET_OS line influences how libgcc is build.
+
+Frans
 
 
