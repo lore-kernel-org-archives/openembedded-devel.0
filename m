@@ -1,35 +1,50 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OBNbT-0004Wj-KJ
+	(envelope-from <martin.jansa@gmail.com>) id 1OBORX-0006XU-JX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 10 May 2010 09:40:40 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 7989E49127F
+	Mon, 10 May 2010 10:34:28 +0200
+Received: by fxm11 with SMTP id 11so2178144fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 09:36:49 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Mon, 10 May 2010 09:38:03 +0200
-Message-ID: <4BE7B795.1010607@dresearch.de>
-Date: Mon, 10 May 2010 09:36:53 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Mon, 10 May 2010 01:30:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=86BwGTmYJXuIqipw3hI7XnwFWHpRgpO5VR2KqUf/d3s=;
+	b=rcmYeSF5cMab36ewMm4uPpSpKmcvcy3vOhc8EYmwmuR4nK5m3eKo7k13TCRELW/ELT
+	zpOX/tH3+NkNz665MRm97CCnSbC17bUIID1v98K0e3UD4w7IYNzN9qwoxZ0LdcNLaTl6
+	2c54/czcLFlXxZzJjuvKmShO9fFJeEWgmygig=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=YjuzqNfnPgfmS8mliK9Io6QDKKdQstWakZmM5wUq+Arx2Byj0MPP6UQ/DJku4nyx0w
+	lS+VW4G+B9Y44UTdsCkQsfmtfCcxNnVHeXd0bYWYQlKO0/sOwwbtzbdOqp5+KGtWp2lo
+	rQxC4UrNozQiT2Hc0+rluCvyCRUVhLpZ5bcrs=
+Received: by 10.223.17.150 with SMTP id s22mr3979941faa.14.1273480235401;
+	Mon, 10 May 2010 01:30:35 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 7sm20432139far.18.2010.05.10.01.30.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 10 May 2010 01:30:34 -0700 (PDT)
+Date: Mon, 10 May 2010 10:30:31 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4BE185C7.50305@dresearch.de>	<1273140949-14699-1-git-send-email-sledz@dresearch.de>	<hru6f7$4qk$1@dough.gmane.org>	<4BE29E46.2000600@dresearch.de>	<4BE3BA38.1010102@dresearch.de>	<hs0f5k$sl$1@dough.gmane.org>
-	<4BE3C2B1.5040307@dresearch.de>
-In-Reply-To: <4BE3C2B1.5040307@dresearch.de>
-X-OriginalArrivalTime: 10 May 2010 07:38:03.0683 (UTC)
-	FILETIME=[B944F730:01CAF013]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+Message-ID: <20100510083031.GB3188@jama>
+References: <4BE41DF5.7040805@dresearch.de>
+	<1273242036-7529-1-git-send-email-sledz@dresearch.de>
+	<20100507144927.GH3204@jama> <4BE42BFB.2020806@dresearch.de>
+MIME-Version: 1.0
+In-Reply-To: <4BE42BFB.2020806@dresearch.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] angstrom-2008.1: use linux-libc-headers 2.6.24 for hipox machine
+Subject: Re: [PATCH] busybox/syslogs: use update-alternatives for syslog selection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +58,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 10 May 2010 07:40:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 10 May 2010 08:34:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
->>>>  #This is unrelated to the kernel version, but userspace apps (e.g. HAL) require a recent version to build against
->>>> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
->>>> +PREFERRED_VERSION_linux-libc-headers       ?= "2.6.31"
->>>> +PREFERRED_VERSION_linux-libc-headers_hipox ?= "2.6.24"
->>>
->>> NACK, that creates undefined behaviour for multimachine builds.
->
->> -PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
->> +PREFERRED_VERSION_linux-libc-headers       = "2.6.31"
->> +PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
->
->> Is this better?
->
-> No, it still changes the headers for one machine, which leads to
-> undefined behaviour for other machines using the same arch.
-> Any solution that doesn't mark *all* packages as machine specific for
-> hipox is going to cause that behaviour.
+On Fri, May 07, 2010 at 05:04:27PM +0200, Steffen Sledz wrote:
+> > Configuring busybox-syslog.
+> > update-rc.d: /etc/init.d/syslog: file does not exist
+> > update-alternatives: Linking //etc/init.d/syslog to syslog.busybox
+> 
+> Are you sure that you run the patched version? It looks like
+> running a version without touch in pkg_preinst.
 
-Would be a
+Yes I'm sure.
 
--PREFERRED_VERSION_linux-libc-headers 	= "2.6.31"
-+PREFERRED_VERSION_linux-libc-headers  ?= "2.6.31"
+Both reported problems are the same with PATCHv2.
+Not sure why now I see also Permission denied (but maybe it was the same with PATCHv1).
 
-acceptable to allow overwrites in local.conf?
 
-BTW: I did not found any fallback handling for inotify_init1 (added with 2.6.27) in the glibc.
+SHR root@gojama ~ $ opkg remove busybox-syslog
+Removing package busybox-syslog from root...
+update-alternatives: removing //etc/init.d/syslog as no more alternatives exist for it
+//usr/lib/opkg/info/busybox-syslog.prerm: line 6: /etc/init.d/syslog: Permission denied
+Collected errors:
+ * pkg_run_script: prerm script returned status 126.
+SHR root@gojama ~ $ opkg install busybox-syslog
+Installing busybox-syslog (1.15.3-r28.1.4) to root...
+Downloading http://jama.homelinux.org/org.openembedded.shr/armv4t/busybox-syslog_1.15.3-r28.1.4_armv4t.ipk.
+Configuring busybox-syslog.
+ System startup links for /etc/init.d/syslog already exist.
+/usr/sbin/update-rc.d: line 237: /etc/rc5.d/S20syslog: Permission denied
+update-alternatives: Error: not linking //etc/init.d/syslog to syslog.busybox since //etc/init.d/syslog exists and is not a link
+Collected errors:
+ * pkg_run_script: postinst script returned status 1.
+ * opkg_configure: busybox-syslog.postinst returned 1.
 
-Regards,
-Steffen
+> 
+> > ...
+> >> -INITSCRIPT_NAME = "sysklogd"
+> >> -INITSCRIPT_PARAMS = "start 39 S 1 2 3 . stop 99 0 6 ."
+> > 
+> > params not needed anymore?
+> 
+> Fall back to the defaults like in all the other syslog recipes.
 
+OK.
+
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
