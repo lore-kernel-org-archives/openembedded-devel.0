@@ -1,33 +1,28 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1OBl4F-0000Np-3t
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1OBlB0-0004oM-IX
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 10:43:55 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 99ABE68422
+	Tue, 11 May 2010 10:50:55 +0200
+Received: from [172.16.145.92] (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id 4B004370A3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 12:39:51 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 May 2010 12:39:57 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <20100510232720.GA13708@gmail.com>
-In-Reply-To: <20100510232720.GA13708@gmail.com>
+	Tue, 11 May 2010 10:40:56 +0200 (CEST)
+Message-ID: <4BE9181D.3060307@acn-group.ch>
+Date: Tue, 11 May 2010 10:41:01 +0200
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-Message-Id: <201005111239.57770.khimov@altell.ru>
-X-Altell-MailScanner-ID: 99ABE68422.84D21
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 195.160.190.3
+X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Move gcc 4.4.3 recipes in favour of 4.4.4
+Subject: [Hawkboard] OE u-boot image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +36,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 08:43:55 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Tue, 11 May 2010 08:50:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 11 =D0=BC=D0=B0=D1=8F 2010 03:27=
-:20 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=
-=D0=B0=D0=BB:
-> I would like to propose to move gcc 4.4.3 recipes to gcc 4.4.4,
-> there are no additional patches that we need and 4.4.4 is superset
-> of bugfixes. I want to avoid adding additional recipes if we could.
-> 4.4.3 is not so widely used in distributions unlike 4.4.2
->=20
-> I can also just add 4.4.4 and leave 4.4.3 as it is if someone wants
-> to keep using 4.4.3
+Hi,
 
-Using 4.4.3 here, think it'd be nice to move to 4.4.4.
+(sorry I sent that first to openembedded-users and to hawkboard google=20
+groups but the first one seems to be abandoned and the second needs=20
+users to be registered)
+
+Did someone successfully booted the hawkboard through UART with the=20
+u-boot image built with OpenEmbedded ?
+
+I generated a minimal-image with the following conf :
+
+MACHINE =3D "hawkboard"
+DISTRO =3D "angstrom-2008.1"
+
+This generated the approriate kernel image and jffs2 file system and=20
+also a u-boot image :
+
+u-boot-hawkboard-2009.08+gitr0d291f2f255e6d66a78b3dc2445362a96ae39a57-r49=
+.bin
+
+And I would like to boot the hawkboard through the serial port using the=20
+TI tools (aisgen and UART boot host) and this image.
+
+So I followed what we can see on elinux.org/hawboard as for the AIS=20
+image generation. The hawkboard load the image (I get the BOOTME and the=20
+tool start to upload the code, jump and close the COM port) but then=20
+nothing happens when I open a console. (I should get the U-Boot prompt=20
+like I do when I boot with the AIS file delivered with the hawkboard)
+
+Any clue ?
+
+Regards,
+
+--=20
+Christophe Aeschlimann
+
+Embedded Software Engineer
+
+Advanced Communications Networks S.A.
+
+Rue du Puits-Godet 8a
+2000 Neuch=E2tel, Switzerland
+
+T=E9l. +41 32 724 74 31
+
+c.aeschlimann@acn-group.ch
 
 
