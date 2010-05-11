@@ -1,48 +1,54 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f51.google.com ([74.125.82.51])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OBrFC-0002SY-Kz
+	(envelope-from <raj.khem@gmail.com>) id 1OBrVu-0004DX-EM
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 17:19:39 +0200
-Received: by fxm11 with SMTP id 11so3713025fxm.6
+	Tue, 11 May 2010 17:36:55 +0200
+Received: by wwb24 with SMTP id 24so3250850wwb.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 08:15:45 -0700 (PDT)
+	Tue, 11 May 2010 08:33:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=HZt+Tsl1bGOPNBgwqNsRUjh3PG1gkGHOpidsq0xzzZw=;
-	b=aGFjbtRST84pJKNNQCNTPSW0bhfnrRUK+WehOwO7y9/5kNxlEIruAS+U28HiNAgFpl
-	O8sY8n8KA51AU6ECzFZA5OiRS0Nq2EsKMD+cbCtArOhcbYzxEhYNB9QBDscJhskMImTP
-	ifmquEW0nG5cFFaAas87SgRPgwIvdh7P1b10w=
+	bh=FFIgZJiGF/woelVwGqcHSoy1S4awBn4bE6kyzkNjRNI=;
+	b=LjkaSy5mKOh0PK1Ns/hs+gRhmHPr9NARX9DgfvRrq/v2l2uyMEx/AkUFZ4alDUNtkX
+	lOy2UM72Vrl3pgWSL345gQsc2dXS3ik2vF7/zWrtAkbOJI5cWb9dmbwtMlkfbI2C5g+E
+	1K5G6rvb/9A0wUVoK9+Pc6pdGwzDE9o6JsVuY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=g7xns+Vafkm4xKTUrBgYvIh5K3jSR8kh5P+c5yrYCnFFXowcX7LQLq77hvKnmyQMqm
-	/kBR894hO6+1pymKYdWceEEmWponlbUOE1wmIKoPyzaYqm6oZgODO6Esps3mGb5nBqFF
-	h/8bSMSun/w94/CZoCNOstBQu4ki8/wQ2UMAA=
-Received: by 10.223.21.17 with SMTP id h17mr6473927fab.45.1273590945428;
-	Tue, 11 May 2010 08:15:45 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z12sm27048850fah.21.2010.05.11.08.15.44
+	b=ZbKuTS1/1076bipkCUOnFGpLvvKdu5vyDbcZFpzIJciE1z+htoZmL4gZYff3Q87hAr
+	RDYflpD6CVnbvAYjwVG/Fb+HBRfRrwyzgEZ80YFp2ZomClABk6Sg7D9DfDkO7JZXw7mI
+	Dky4CdFTgILQJkWELkYx2rAOS24XVqRlFekaw=
+Received: by 10.227.134.84 with SMTP id i20mr5425028wbt.52.1273591981012;
+	Tue, 11 May 2010 08:33:01 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id p10sm22415699gvf.7.2010.05.11.08.32.57
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 11 May 2010 08:15:44 -0700 (PDT)
-Date: Tue, 11 May 2010 17:15:49 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 11 May 2010 08:32:58 -0700 (PDT)
+Date: Tue, 11 May 2010 08:33:08 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100511151549.GB30963@jama>
-References: <201005111904.06230.khimov@altell.ru>
+Message-ID: <20100511153308.GB15186@gmail.com>
+References: <1273249883.457.336.camel@trini-m4400>
+	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+	<1273331468.22943.217.camel@trini-m4400>
+	<1273429494.22943.225.camel@trini-m4400>
+	<20100510054921.GA11084@gmail.com>
+	<1273588323.22943.397.camel@trini-m4400>
 MIME-Version: 1.0
-In-Reply-To: <201005111904.06230.khimov@altell.ru>
+In-Reply-To: <1273588323.22943.397.camel@trini-m4400>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.51
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] logrotate scripts policy
+Subject: Re: calamari (ppc e500v2) failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,73 +62,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 15:19:39 -0000
+X-List-Received-Date: Tue, 11 May 2010 15:36:56 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, May 11, 2010 at 07:04:05PM +0400, Roman I Khimov wrote:
-> Hello all.
+On (11/05/10 07:32), Tom Rini wrote:
+> On Sun, 2010-05-09 at 22:49 -0700, Khem Raj wrote:
+> > On (09/05/10 11:24), Tom Rini wrote:
+> > > On Sat, 2010-05-08 at 08:11 -0700, Tom Rini wrote:
+> > > > On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
+> > > > > 2010/5/7 Tom Rini <tom_rini@mentor.com>:
+> > > > > > Hey all,
+> > > > > >
+> > > > > > With DISTRO=minimal and MACHINE=calamari, I see the following failure in
+> > > > > > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev):
+> > > > > > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP merge,
+> > > > > > so this is unrelated.
+> > > > > 
+> > > > > Which eglibc is that?
+> > > > > The issues I had seemed due to some catch22 situation that I cured; I
+> > > > > started a clean build yesterday before I left work & can tell the
+> > > > > results on monday.
+> > > > > My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
+> > > > > minimal also using 2.10 or is it at 2.11
+> > > > > 
+> > > > > I can also try to kick off a minimal build on monday
+> > > > 
+> > > > minimal is eglibc 2.10.  I'll try an Angstrom build.
+> > > 
+> > > With Angstrom, gcc-cross-initial fails building libgcc, config.log has:
+> > > cc1: error: not configured for ABI: 'spe'
+> > > configure:2591: $? = 1
+> > > configure: failed program was:
+> > > ... standard empty program ...
+> > > configure:2605: error: cannot compute suffix of object files: cannot
+> > > compile
+> > > 
+> > > Ubuntu 9.10 x86_64 host
+> > 
+> > Could you test with attached gcc patch please. This should fix the
+> > undefined symbol error. You could use minimal distro for SPE targets
+> > it should work. Please let me know if it works for you.
 > 
-> Seems like most OE users are fine with /var/log being on tmpfs and thus not 
-> care about logs and their rotation. We actually care about logs and thus need 
-> to rotate them. I have several patches adding logrotate scripts to recipes but 
-> I'd like to discuss the way they should be packaged in order to satisfy both 
-> camps (caring about logs and don't) and hopefully develop some policy for 
-> that.
-> 
-> As of now, my patches package logrotate scripts like this:
-> 
-> +PACKAGES =+ "${PN}-logrotate"
-> +FILES_${PN}-logrotate = "${sysconfdir}/logrotate.d/squid"
-> +RRECOMMENDS_${PN} += "${PN}-logrotate"
-> +RDEPENDS_${PN}-logrotate += "logrotate"
-> 
-> It works fine here, but I guess that people not caring about logs don't want 
-> to have logrotate installed and probably don't want /etc/logrotate.d cruft 
-> either. So, an opposite approach could be:
-> 
-> +RSUGGESTS_${PN} += "${PN}-logrotate"
-> +RSUGGESTS_${PN}-logrotate += "logrotate"
-> 
-> But then if you need logrotate scripts, you have to add all those *-logrotate 
-> packages to the respective image along with logrotate program itself. As the 
-> number of *-logrotate packages can be quite big it might be easier to add some 
-> IMAGE_LINGUAS-alike hook to image class with "IMAGE_LOGROTATE=y" parameter 
-> activating it.
-> 
-> So, probably a better approach and what I'm proposing is:
-> 
-> +RRECOMMENDS_${PN} += "${PN}-logrotate"
-> +RSUGGESTS_${PN}-logrotate += "logrotate"
-> 
-> This way all *-logrotate packages will get installed by default, but not the 
-> logrotate program. So, it will eat some little space in /etc/logrotate.d for 
-> everyone by default (but you can get rid of those packages if you really don't 
-> want them), but would allow to switch rotation on/off easily with just one 
-> package included or not in the image.
-> 
-> Also, in org.oe.dev there is already callweaver, asterisk and cluster-
-> resource-agents that have logrotate scripts installed in /etc/logrotate.d 
-> (that legitimizes RRECOMMENDS for *-logrotate a bit) and callweaver 
-> RRECOMMENDS logrotate (asterisk has that commented out, so it supports 
-> RSUGGESTS approach to logrotate itself a bit).
-> 
-> Suggestions, recommendations, comments?
+> This fixes the e300c3 / ppc603e issue, but not the gnutls issue (which
+> is now seen on those platforms).  So the general problem of -Os + ppc
+> not being right with GNU.org toolchains is still there, on 4.4.3 at
+> least.
 
-Both proposed aproaches seem good to me. We have /var/log on tmpfs but I
-would still add logrotate to image because realy big log in tmpfs is
-much worse than few more kB in image (nobody wants a unusable phone 
-after 3 days just because of ram full of logs).
-
-But maybe there are different "optimal" logrotate rules for people with
-tmpfs and without, which is IMHO harder to implement. I don't care about
-logs enough to ask for this :).
-
-Regards,
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+out of order epilogue/prologue are added in gcc 4.4 so I expect 4.4+ to
+show this issue. That said, when I tried for calamari from scratch 
+bitbake gnutls it went through fine on Kubuntu 10.04/x86_64 build machine.
+> 
+> -- 
+> Tom Rini <tom_rini@mentor.com>
+> Mentor Graphics Corporation
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
