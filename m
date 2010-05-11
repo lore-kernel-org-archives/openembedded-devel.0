@@ -1,38 +1,34 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OBqNq-0005VI-BU
+	(envelope-from <Tom_Rini@mentor.com>) id 1OBqU8-00072l-TO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 16:25:02 +0200
+	Tue, 11 May 2010 16:31:02 +0200
 Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
 	by relay1.mentorg.com with esmtp 
-	id 1OBqK4-0004TS-1M from Tom_Rini@mentor.com 
+	id 1OBqQM-0005YU-M1 from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 07:20:36 -0700
+	Tue, 11 May 2010 07:27:06 -0700
 Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
 	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 11 May 2010 07:20:27 -0700
+	SMTPSVC(6.0.3790.1830); Tue, 11 May 2010 07:27:06 -0700
 Received: from 172.30.80.82 ([172.30.80.82]) by NA1-MAIL.mgc.mentorg.com
 	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 11 May 2010 14:20:26 +0000
+	Tue, 11 May 2010 14:27:05 +0000
 Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	11 May 2010 07:20:25 -0700
+	11 May 2010 07:27:04 -0700
 From: Tom Rini <tom_rini@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimVI9XVOGxamG2PBswtGO1n2X73751GaGvliTY2@mail.gmail.com>
-References: <1273249883.457.336.camel@trini-m4400>
-	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
-	<1273331468.22943.217.camel@trini-m4400>
-	<1273429494.22943.225.camel@trini-m4400>
-	<AANLkTimOAdWye_9cLGryBlVJjsSVSVrlM7Lz9ikQAmQh@mail.gmail.com>
-	<1273510041.22943.295.camel@trini-m4400>
-	<AANLkTimVI9XVOGxamG2PBswtGO1n2X73751GaGvliTY2@mail.gmail.com>
+In-Reply-To: <4BE90A56.3090605@dresearch.de>
+References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
+	<1273518881.22943.378.camel@trini-m4400>
+	<4BE90A56.3090605@dresearch.de>
 Organization: Mentor Graphics Corporation
-Date: Tue, 11 May 2010 07:20:25 -0700
-Message-ID: <1273587625.22943.381.camel@trini-m4400>
+Date: Tue, 11 May 2010 07:27:04 -0700
+Message-ID: <1273588024.22943.391.camel@trini-m4400>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 11 May 2010 14:20:27.0725 (UTC)
-	FILETIME=[1AA727D0:01CAF115]
+X-OriginalArrivalTime: 11 May 2010 14:27:06.0387 (UTC)
+	FILETIME=[08462630:01CAF116]
 X-SA-Exim-Connect-IP: 192.94.38.131
 X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -41,7 +37,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: calamari (ppc e500v2) failure
+Subject: Re: Kernel Headers Quality Issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,44 +51,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 14:25:22 -0000
+X-List-Received-Date: Tue, 11 May 2010 14:31:02 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 2010-05-11 at 08:53 +0200, Frans Meulenbroeks wrote:
-> 2010/5/10 Tom Rini <tom_rini@mentor.com>:
-> > On Mon, 2010-05-10 at 10:40 +0200, Frans Meulenbroeks wrote:
+On Tue, 2010-05-11 at 09:42 +0200, Steffen Sledz wrote:
+> Am 10.05.2010 21:14, Tom Rini wrote:
+> > Looking at it again and based on what Khem said (and re-reading your
+> > failures), the problem is not with glibc, but with other programs (glib=
+,
+> > udev are both mentioned specifically) and these programs specifically
+> > not failing gracefully.  For example, it's quoted over in:
+> > http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/019626=
+.html
+> > that glib falls way back.  I think Phil was wrong here and without
+> > checking the code, I imagine glib is trying fancy newer syscall,
+> > failing, and then falling far back, rather than to just inotify_init as
+> > you expected.  So the bug here is with glib.
+> >=20
+> > As for the udev issue, I do not know how they will react to making the
+> > udev version be soft-assign as that too may raise issues.  And iirc,
+> > udev is or at least can be more tied to min kernel versions.
 >=20
-> >> MACHINE =3D "calamari"
-> >> DISTRO =3D "angstrom-2008.1"
-> >> ANGSTROMLIBC =3D "eglibc"
-> >
-> > This should just be LIBC, btw
+> No, it seems not to be a problem of glib, rsyslog, or udev.
 >=20
-> Angstrom has ANGSTROMLIBC
->=20
-> From the code (grepping in the conf dir):
-> conf/distro/include/angstrom.inc:ANGSTROMLIBC ?=3D "glibc"
-> conf/distro/include/angstrom.inc:LIBC ?=3D "${ANGSTROMLIBC}"
->=20
-> No idea why we have ANGSTROMLIBC next to LIBC.
+> As i see in the build logs glibc is build using --enable-kernel=3D2.6.16 =
+(i do not know any --with-kernel option).
 
-Because Angstrom initiated the hook and then I made it generic and made
-all of the distros use it.  ANGSTROMLIBC is still there for
-compatibility.
+Yes, my fault, sorry, it's indeed --enable-kernel=3D.
 
-> >> # e500v2 supports the SPE instruction set.
-> >> TARGET_OS =3D "linux-gnuspe"
-> >
-> > This should also be picked out automatically, iirc.
+> After running autotools config.h of e.g. glib-2.0 contains
 >=20
-> Hm, It was there in the conf that I got when I took over this project.
-> I seem to recall having tried to build without it, and that it failed,
-> but it is a while ago, so not 100% sure about that.
+>  /* Define to 1 if you have the `inotify_init1' function. */
+>  #define HAVE_INOTIFY_INIT1 1
+>=20
+> So the glib-2.0 is allowed to use inotify_init1. But this is only availab=
+le for kernel version >=3D 2.6.27.
+>=20
+> Same behaviour for epoll_create1 in e.g. rsyslog
+>=20
+>  /* Define to 1 if you have the `epoll_create' function. */
+>  #define HAVE_EPOLL_CREATE 1
+>=20
+>  /* Define to 1 if you have the `epoll_create1' function. */
+>  #define HAVE_EPOLL_CREATE1 1
+>=20
+> Conclusion: glibc reports functions "available" which are not available f=
+or our kernel 2.6.24 (and not "emulated" inside glibc). :(
 
-Well, more accurately, sane-toolchain.inc has a function to get
-TARGET_OS right and I assume angstrom is either using it or has a
-similar one.
+All of this information is _not_ coming from glibc claiming that a
+syscall exists, but it's coming from the linux-libc-headers having them
+(which is why if you downgrade, they build and run as you expect them
+to).  Then there's the problem, as others have stated, that it's up to
+userland to gracefully handle if a syscall isn't really available.  You
+noted before that glib-2.0 falls back to using something very
+inefficient, rather than a less efficient syscall that does exist, yes?
 
 --=20
 Tom Rini <tom_rini@mentor.com>
