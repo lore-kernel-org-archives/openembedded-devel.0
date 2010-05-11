@@ -1,45 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OBqYx-0001oF-6Q
+	(envelope-from <khimov@altell.ru>) id 1OBr44-0006Un-5A
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 16:36:00 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OBqVA-0006RA-W7 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 07:32:05 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 11 May 2010 07:32:04 -0700
-Received: from 172.30.80.82 ([172.30.80.82]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Tue, 11 May 2010 14:32:04 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	11 May 2010 07:32:03 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Tue, 11 May 2010 17:08:09 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id D369168416
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 11 May 2010 19:03:46 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100510054921.GA11084@gmail.com>
-References: <1273249883.457.336.camel@trini-m4400>
-	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
-	<1273331468.22943.217.camel@trini-m4400>
-	<1273429494.22943.225.camel@trini-m4400>
-	<20100510054921.GA11084@gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Tue, 11 May 2010 07:32:03 -0700
-Message-ID: <1273588323.22943.397.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 11 May 2010 14:32:04.0676 (UTC)
-	FILETIME=[BA117040:01CAF116]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Tue, 11 May 2010 19:04:05 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201005111904.06230.khimov@altell.ru>
+X-Altell-MailScanner-ID: D369168416.E9261
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: calamari (ppc e500v2) failure
+Subject: [RFC] logrotate scripts policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,58 +39,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 14:36:00 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 11 May 2010 15:08:09 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Sun, 2010-05-09 at 22:49 -0700, Khem Raj wrote:
-> On (09/05/10 11:24), Tom Rini wrote:
-> > On Sat, 2010-05-08 at 08:11 -0700, Tom Rini wrote:
-> > > On Sat, 2010-05-08 at 09:06 +0200, Frans Meulenbroeks wrote:
-> > > > 2010/5/7 Tom Rini <tom_rini@mentor.com>:
-> > > > > Hey all,
-> > > > >
-> > > > > With DISTRO=3Dminimal and MACHINE=3Dcalamari, I see the following=
- failure in
-> > > > > gnutls (using fe4ff6940b06c73d5b88224b99750bf65accf13d in oe.dev)=
-:
-> > > > > http://pastebin.com/cjAStcLb and I confirmed this prior to the RP=
- merge,
-> > > > > so this is unrelated.
-> > > >=20
-> > > > Which eglibc is that?
-> > > > The issues I had seemed due to some catch22 situation that I cured;=
- I
-> > > > started a clean build yesterday before I left work & can tell the
-> > > > results on monday.
-> > > > My distro was angstrom, machine calamari, this uses eglibc 2.10. Is
-> > > > minimal also using 2.10 or is it at 2.11
-> > > >=20
-> > > > I can also try to kick off a minimal build on monday
-> > >=20
-> > > minimal is eglibc 2.10.  I'll try an Angstrom build.
-> >=20
-> > With Angstrom, gcc-cross-initial fails building libgcc, config.log has:
-> > cc1: error: not configured for ABI: 'spe'
-> > configure:2591: $? =3D 1
-> > configure: failed program was:
-> > ... standard empty program ...
-> > configure:2605: error: cannot compute suffix of object files: cannot
-> > compile
-> >=20
-> > Ubuntu 9.10 x86_64 host
->=20
-> Could you test with attached gcc patch please. This should fix the
-> undefined symbol error. You could use minimal distro for SPE targets
-> it should work. Please let me know if it works for you.
+Hello all.
 
-This fixes the e300c3 / ppc603e issue, but not the gnutls issue (which
-is now seen on those platforms).  So the general problem of -Os + ppc
-not being right with GNU.org toolchains is still there, on 4.4.3 at
-least.
+Seems like most OE users are fine with /var/log being on tmpfs and thus not 
+care about logs and their rotation. We actually care about logs and thus need 
+to rotate them. I have several patches adding logrotate scripts to recipes but 
+I'd like to discuss the way they should be packaged in order to satisfy both 
+camps (caring about logs and don't) and hopefully develop some policy for 
+that.
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+As of now, my patches package logrotate scripts like this:
+
++PACKAGES =+ "${PN}-logrotate"
++FILES_${PN}-logrotate = "${sysconfdir}/logrotate.d/squid"
++RRECOMMENDS_${PN} += "${PN}-logrotate"
++RDEPENDS_${PN}-logrotate += "logrotate"
+
+It works fine here, but I guess that people not caring about logs don't want 
+to have logrotate installed and probably don't want /etc/logrotate.d cruft 
+either. So, an opposite approach could be:
+
++RSUGGESTS_${PN} += "${PN}-logrotate"
++RSUGGESTS_${PN}-logrotate += "logrotate"
+
+But then if you need logrotate scripts, you have to add all those *-logrotate 
+packages to the respective image along with logrotate program itself. As the 
+number of *-logrotate packages can be quite big it might be easier to add some 
+IMAGE_LINGUAS-alike hook to image class with "IMAGE_LOGROTATE=y" parameter 
+activating it.
+
+So, probably a better approach and what I'm proposing is:
+
++RRECOMMENDS_${PN} += "${PN}-logrotate"
++RSUGGESTS_${PN}-logrotate += "logrotate"
+
+This way all *-logrotate packages will get installed by default, but not the 
+logrotate program. So, it will eat some little space in /etc/logrotate.d for 
+everyone by default (but you can get rid of those packages if you really don't 
+want them), but would allow to switch rotation on/off easily with just one 
+package included or not in the image.
+
+Also, in org.oe.dev there is already callweaver, asterisk and cluster-
+resource-agents that have logrotate scripts installed in /etc/logrotate.d 
+(that legitimizes RRECOMMENDS for *-logrotate a bit) and callweaver 
+RRECOMMENDS logrotate (asterisk has that commented out, so it supports 
+RSUGGESTS approach to logrotate itself a bit).
+
+Suggestions, recommendations, comments?
 
 
