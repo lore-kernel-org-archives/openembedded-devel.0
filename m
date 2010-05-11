@@ -1,50 +1,48 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-yx0-f204.google.com ([209.85.210.204])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OBi4b-00089t-QC
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OBjPX-0007h1-8B
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 07:32:06 +0200
-Received: by pxi14 with SMTP id 14so1858609pxi.6
+	Tue, 11 May 2010 09:01:51 +0200
+Received: by yxe42 with SMTP id 42so2700783yxe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 10 May 2010 22:28:12 -0700 (PDT)
+	Mon, 10 May 2010 23:53:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=kIUnJ7Oz640M4WVpHTvs+RKaBJWKNch3bUXeH6/Jv6g=;
-	b=f67tifKrCkugqShWkaVcvFl1yWcJexT76m/Rv7vVH5tXqGSoEipbQwtlgKtrVsdSfz
-	sOxN/J/YLsi6g2/U/4625NraMp2NT8A7U75UaGJy0NaoG7yWYz4qKAMn13uhROjscWK7
-	mLrdvaGZ5XRr/F3gvqSP/lr9vsCvSukNwc1/k=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=bFQOdgX1yD5ipnGSmrr3XOAZnREHAE12DFluiqlqUHI=;
+	b=B6YG6dAfrQmhPCuV2zkpyUSrWvHB7LPE/qWWUEE+mtZbzBxIBGUHI8EU9Pu78di1iq
+	Q4zbwKPz5B5Ys78L7ywaNzhyX9AOQIN96VwkoZEZnHgZEtaX+EinnWcbP+qXUKVBPvQg
+	w8+EpNcKgzxC6wSrbuZCVVBxJQtPFq6lWR2TY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ba5m85PUL+j3YpCitSziRZMzOikzrvj73kKprrrE2V8BeOxTMLVN3IIg2g2EpYjn1a
-	DaZwYiDz7Lw8fcB1RJQ+whJ00qTcj+fHc+SjY5hBYG7Q4dHSHg3rrq+BO1t8gTDQLq0r
-	zCYB3c2of2QCEgDuua57s1Z3p1ysyfMae0f0k=
-Received: by 10.115.84.8 with SMTP id m8mr4053000wal.9.1273555691611;
-	Mon, 10 May 2010 22:28:11 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id c22sm32018530wam.6.2010.05.10.22.28.09
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 10 May 2010 22:28:10 -0700 (PDT)
-Date: Mon, 10 May 2010 22:28:18 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100511052818.GA14500@gmail.com>
-References: <20100510232720.GA13708@gmail.com>
- <20100511043715.GA3285@jama>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=vlZd4x0DPwBt4oqadmq0QzNol1Fwp93/K/m8Dns79NmDAsJwGkAhyGIjUlWcayxaDM
+	eVVlLtghKVZrJQ3F6qfZtZT06x7CFV+OMoWH3/J/c1YGsSgIkZU0+OonPyPz+tFMop72
+	0/oHRUBaqUVpJXmWDtQ5A+rrrCHvkSrJ4Vuho=
 MIME-Version: 1.0
-In-Reply-To: <20100511043715.GA3285@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Received: by 10.91.172.5 with SMTP id z5mr2487316ago.25.1273560833673; Mon, 10 
+	May 2010 23:53:53 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Mon, 10 May 2010 23:53:53 -0700 (PDT)
+In-Reply-To: <1273510041.22943.295.camel@trini-m4400>
+References: <1273249883.457.336.camel@trini-m4400>
+	<g2zac9c93b11005080006zb474ea8dj506101d1dde2ed42@mail.gmail.com>
+	<1273331468.22943.217.camel@trini-m4400>
+	<1273429494.22943.225.camel@trini-m4400>
+	<AANLkTimOAdWye_9cLGryBlVJjsSVSVrlM7Lz9ikQAmQh@mail.gmail.com>
+	<1273510041.22943.295.camel@trini-m4400>
+Date: Tue, 11 May 2010 08:53:53 +0200
+Message-ID: <AANLkTimVI9XVOGxamG2PBswtGO1n2X73751GaGvliTY2@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.210.204
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Move gcc 4.4.3 recipes in favour of 4.4.4
+Subject: Re: calamari (ppc e500v2) failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,36 +56,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 05:32:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 11 May 2010 07:03:29 -0000
+X-List-Received-Date: Tue, 11 May 2010 07:03:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (11/05/10 06:37), Martin Jansa wrote:
-> On Mon, May 10, 2010 at 04:27:20PM -0700, Khem Raj wrote:
-> > Hi
-> > 
-> > I would like to propose to move gcc 4.4.3 recipes to gcc 4.4.4, 
-> > there are no additional patches that we need and 4.4.4 is superset
-> > of bugfixes. I want to avoid adding additional recipes if we could.
-> > 4.4.3 is not so widely used in distributions unlike 4.4.2
-> > 
-> > I can also just add 4.4.4 and leave 4.4.3 as it is if someone wants
-> > to keep using 4.4.3
-> 
-> SHR is using 4.4.3 and I don't mind moving to 4.4.4. Thanks for adding
-> it.
+2010/5/10 Tom Rini <tom_rini@mentor.com>:
+> On Mon, 2010-05-10 at 10:40 +0200, Frans Meulenbroeks wrote:
 
-OK
+>> MACHINE = "calamari"
+>> DISTRO = "angstrom-2008.1"
+>> ANGSTROMLIBC = "eglibc"
+>
+> This should just be LIBC, btw
 
-> 
-> > Please cast your concerns
-> 
-> Any news about 4.5.0 producing segfaulting binaries on armv[45]t?
+Angstrom has ANGSTROMLIBC
 
-I have been able to reproduce it using 2.6.33 on osk5912 but no time to
-debug so far :(
+From the code (grepping in the conf dir):
+conf/distro/include/angstrom.inc:ANGSTROMLIBC ?= "glibc"
+conf/distro/include/angstrom.inc:LIBC ?= "${ANGSTROMLIBC}"
 
-Thx
--Khem
+No idea why we have ANGSTROMLIBC next to LIBC.
+
+>
+>> # e500v2 supports the SPE instruction set.
+>> TARGET_OS = "linux-gnuspe"
+>
+> This should also be picked out automatically, iirc.
+
+Hm, It was there in the conf that I got when I took over this project.
+I seem to recall having tried to build without it, and that it failed,
+but it is a while ago, so not 100% sure about that.
+
+Frans.
 
 
