@@ -1,28 +1,27 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OBs2r-0000aa-VB
+Received: from p3plsmtpa01-05.prod.phx3.secureserver.net ([72.167.82.85])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1OByZd-0008Dd-Fg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 18:11:04 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OBrz7-0002iu-LV
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 20:07:06 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 11 May 2010 20:07:04 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <201005111904.06230.khimov@altell.ru>
-	<201005111910.21084.khimov@altell.ru>
-In-Reply-To: <201005111910.21084.khimov@altell.ru>
+	Wed, 12 May 2010 01:09:14 +0200
+Received: (qmail 4875 invoked from network); 11 May 2010 23:05:18 -0000
+Received: from unknown (209.242.7.154)
+	by p3plsmtpa01-05.prod.phx3.secureserver.net (72.167.82.85) with ESMTP;
+	11 May 2010 23:05:18 -0000
+Message-ID: <4BE9E2AB.5020106@mwester.net>
+Date: Tue, 11 May 2010 18:05:15 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Message-Id: <201005112007.05008.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+To: openembedded-devel@lists.openembedded.org
+References: <201005111904.06230.khimov@altell.ru>
+In-Reply-To: <201005111904.06230.khimov@altell.ru>
+X-SA-Exim-Connect-IP: 72.167.82.85
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] logrotate scripts policy
@@ -39,55 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 16:11:04 -0000
-X-Groupsio-MsgNum: 19171
-Content-Type: multipart/signed; boundary="nextPart3139255.3Z9XOQQhqA";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
+X-List-Received-Date: Tue, 11 May 2010 23:09:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
---nextPart3139255.3Z9XOQQhqA
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+Roman I Khimov wrote:
+...
+> This way all *-logrotate packages will get installed by default, but not the 
+> logrotate program. So, it will eat some little space in /etc/logrotate.d for 
+> everyone by default (but you can get rid of those packages if you really don't 
+> want them), but would allow to switch rotation on/off easily with just one 
+> package included or not in the image.
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 11 =D0=BC=D0=B0=D1=8F 2010 19:10=
-:21 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=BB:
-> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 11 =D0=BC=D0=B0=D1=8F 2010 1=
-9:04:05 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Roman I Khimov =D0=BD=D0=B0=D0=BF=D0=
-=B8=D1=81=D0=B0=D0=BB:
-> > Also, in org.oe.dev there is already callweaver, asterisk and cluster-
-> > resource-agents that have logrotate scripts installed in /etc/logrotate=
-=2Ed
-> > (that legitimizes RRECOMMENDS for *-logrotate a bit) and callweaver
-> > RRECOMMENDS logrotate (asterisk has that commented out, so it supports
-> > RSUGGESTS approach to logrotate itself a bit).
->=20
-> P.S. There are probably more that have /etc/logrotate.d installed and
->  packaged in ${PN} without specifically mentioning it anywhere.
+The NSLU2 has a grand total of 8MB of flash space for bootloader,
+kernel, and the filesystem.  We don't have even a few KB left right now
+for those extra packages.  Keep in mind that even a 20-byte script will
+have a large footprint in the opkg database that's on the filesystem, so
+that space is in addition.
 
-P.P.S. And because of that (and to simplify things in general) if might be=
-=20
-easier to handle logrotate script packaging with respectful =20
-rsuggests/rrecommends/whatever in bitbake.conf. By default.
+It's really really difficult to build an image without a whole lot of
+extraneous stuff in it, and I suspect that extraneous stuff is all in
+there for the same reasoning, which goes along the lines of "It's only a
+little bit of space..." -- but it all adds up, and when your total
+rootfs can only be 5.5 MB or so...
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+I'm not going to NAK this, but I will ask that if you do this please
+spend some time with the SlugOS image recipes to remove all the packages
+that this adds by default, with whatever mechanism you meant when you
+say "but you can get rid of those packages if you really don't want them".
 
---nextPart3139255.3Z9XOQQhqA
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+-Mike (mwester)
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkvpgKgACgkQXJ70z+XgVcPy3gCgpafJdI1goYBcH6BBKr88rmOc
-cKAAn3lubNvMEltnXgGfTbVkAJGW14wC
-=Jxm8
------END PGP SIGNATURE-----
-
---nextPart3139255.3Z9XOQQhqA--
