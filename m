@@ -1,31 +1,31 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <t.fromm@DResearch.de>) id 1OBjnG-0001Ss-0R
+	(envelope-from <sledz@dresearch.de>) id 1OBkAL-0001Y9-0t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 09:22:21 +0200
+	Tue, 11 May 2010 09:46:09 +0200
 Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 333B9491282
+	by mail.dresearch.de (Postfix) with ESMTP id 2EAD6491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 09:18:27 +0200 (CEST)
-Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 11 May 2010 09:19:44 +0200
-Message-ID: <4BE9050B.6010103@dresearch.de>
-Date: Tue, 11 May 2010 09:19:39 +0200
-From: Thilo Fromm <t.fromm@dresearch.de>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+	Tue, 11 May 2010 09:42:18 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 11 May 2010 09:43:35 +0200
+Message-ID: <4BE90A56.3090605@dresearch.de>
+Date: Tue, 11 May 2010 09:42:14 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
 References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
-	<1273510550.22943.298.camel@trini-m4400>
-In-Reply-To: <1273510550.22943.298.camel@trini-m4400>
-X-OriginalArrivalTime: 11 May 2010 07:19:44.0402 (UTC)
-	FILETIME=[5475BF20:01CAF0DA]
+	<1273518881.22943.378.camel@trini-m4400>
+In-Reply-To: <1273518881.22943.378.camel@trini-m4400>
+X-OriginalArrivalTime: 11 May 2010 07:43:35.0433 (UTC)
+	FILETIME=[A96BBF90:01CAF0DD]
 X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: t.fromm@DResearch.de
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -43,62 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 07:22:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 11 May 2010 07:46:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Hello, Tom,
-
->> this is a somewhat cumulated response - I'd like to address some of the 
->> things mentioned at different points in the discussion in one place. 
->> Please forgive me should I misquote things.
- >>
->> Graeme Gregory in <20100505094242.GF2444@xora-desktop.xora.org.uk>:
->>
->> [Steffen Sledz]
->>  > > It seem's not to be possible to use DEFAULT_PREFERENCE_hipox in the
->>  > > linux-libc-headers recipes. So what's the right way to handle this?
->>  > > Something like PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
->>  > > in angstrom-2008.1.conf?
->>  >
->> [Graeme Gregory]
->>  > I thought glibc was supposed to gracefully fall back on missing
->>  > syscalls?
->>
->> Glibc is compiled against 2.6.31 headers, which is one of our main 
->> issues here. It only ever *runs* with a 2.6.24 kernel on the target 
->> system, though. So it cannot know about missing syscalls until runtime.
+Am 10.05.2010 21:14, Tom Rini wrote:
+> Looking at it again and based on what Khem said (and re-reading your
+> failures), the problem is not with glibc, but with other programs (glib,
+> udev are both mentioned specifically) and these programs specifically
+> not failing gracefully.  For example, it's quoted over in:
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/019626.html
+> that glib falls way back.  I think Phil was wrong here and without
+> checking the code, I imagine glib is trying fancy newer syscall,
+> failing, and then falling far back, rather than to just inotify_init as
+> you expected.  So the bug here is with glib.
 > 
-> So, I think some of the confusion here stems from confusion about (and I
-> don't know the right answer off-hand) how glibc handles the
-> --with-kernel=VERSION stuff.
+> As for the udev issue, I do not know how they will react to making the
+> udev version be soft-assign as that too may raise issues.  And iirc,
+> udev is or at least can be more tied to min kernel versions.
 
-What is "--with-kernel"? Glibc offers a compile time configuration 
-parameter "--enable-kernel", which enables/disables *backwards support* 
-library compatibility support for *legacy kernel interfaces*. E.g. if 
-you --enable-kernel=2.2.14, you should be able to compile ancient user 
-space applications which make use of obsolete kernel 2.2.14 
-functionality against the resulting glibc. This makes systems running 
-*very recent kernels* provide legacy interfaces of much older kernels 
-via the C library. Which is the exact opposite of our situation.
+No, it seems not to be a problem of glib, rsyslog, or udev.
 
-The release notes on glibc 2.2.4, which introduced this option, are 
-quite educating (it's Ulrich Drepper writing, so be prepared): 
-<http://sourceware.org/ml/libc-announce/2001/msg00000.html> (about 
-halfway through the page).
+As i see in the build logs glibc is build using --enable-kernel=2.6.16 (i do not know any --with-kernel option).
 
-But maybe there is a "--with-kernel" around which does the opposite to 
-"--enable-kernel"?
+After running autotools config.h of e.g. glib-2.0 contains
 
-Regards,
-Thilo
+ /* Define to 1 if you have the `inotify_init1' function. */
+ #define HAVE_INOTIFY_INIT1 1
 
--- 
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Amtsgericht: Berlin Charlottenburg, HRB:54412
-Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
-Fax: +49 (30) 515 932 77 http://www.dresearch.de
+So the glib-2.0 is allowed to use inotify_init1. But this is only available for kernel version >= 2.6.27.
+
+Same behaviour for epoll_create1 in e.g. rsyslog
+
+ /* Define to 1 if you have the `epoll_create' function. */
+ #define HAVE_EPOLL_CREATE 1
+
+ /* Define to 1 if you have the `epoll_create1' function. */
+ #define HAVE_EPOLL_CREATE1 1
+
+Conclusion: glibc reports functions "available" which are not available for our kernel 2.6.24 (and not "emulated" inside glibc). :(
+
+Regards, Steffen
+
 
 
