@@ -1,40 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OBlpO-0004By-LF for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 11:32:39 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OBllf-0002Da-2q for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 11:28:47 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 11:28:47 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1OBnUE-0000nE-1V
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 May 2010 13:18:56 +0200
+Received: from [172.16.145.92] (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id 1AF0E37089
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 11:28:47 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 11 May 2010 13:15:01 +0200 (CEST)
+Message-ID: <4BE93C34.2010503@acn-group.ch>
+Date: Tue, 11 May 2010 13:15:00 +0200
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 11 May 2010 11:28:39 +0200
-Message-ID: <hsb807$365$1@dough.gmane.org>
-References: <4BE9181D.3060307@acn-group.ch>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <4BE9181D.3060307@acn-group.ch>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4BE9181D.3060307@acn-group.ch> <hsb807$365$1@dough.gmane.org>
+In-Reply-To: <hsb807$365$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 195.160.190.3
+X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [Hawkboard] OE u-boot image
@@ -51,36 +38,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 09:32:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 11 May 2010 11:18:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Le 11.05.2010 11:28, Koen Kooi a =E9crit :
 
-On 11-05-10 10:41, Christophe Aeschlimann wrote:
-> Hi,
-> 
-> (sorry I sent that first to openembedded-users and to hawkboard google
-> groups but the first one seems to be abandoned and the second needs
-> users to be registered)
-> 
-> Did someone successfully booted the hawkboard through UART with the
-> u-boot image built with OpenEmbedded ?
+> On 11-05-10 10:41, Christophe Aeschlimann wrote:
+>> Hi,
+>>
+[...]
+>> Did someone successfully booted the hawkboard through UART with the
+>> u-boot image built with OpenEmbedded ?
+>
+> I use tftp to load such stuff. I'm too lazy to use that overcomplicated=
+,
+> windows-only AISgen.
 
-I use tftp to load such stuff. I'm too lazy to use that overcomplicated,
-windows-only AISgen.
+Thanks for the comment.
 
-regards,
+I can use tftp on a board that would already have u-boot on it but what=20
+if my NAND is clean ?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Regards,
 
-iD8DBQFL6SNGMkyGM64RGpERAsXkAJ96wJQHsBjKgmQXOr354Etlb7c5EgCfZxbs
-nypRBj6Z6m6EDI1JfZKpQ8c=
-=pXL4
------END PGP SIGNATURE-----
+Christophe
 
+
+>
+> regards,
+>
+> Koen
 
 
