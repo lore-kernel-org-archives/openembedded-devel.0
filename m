@@ -1,31 +1,30 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OBrYI-0007O0-7w
+	(envelope-from <roman@khimov.ru>) id 1OBrx9-00052s-SA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 17:39:22 +0200
-Received: from [172.16.252.132] (siminn-int-gw.on-waves.com [157.157.59.158])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 7AB261B10C79
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 15:43:12 +0000 (UTC)
-Message-ID: <4BE97940.7030404@freyther.de>
-Date: Tue, 11 May 2010 23:35:28 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
-	Thunderbird/3.0.4
-MIME-Version: 1.0
+	Tue, 11 May 2010 18:05:05 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OBrtP-0002iF-5U
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 11 May 2010 20:01:12 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <6E4816EA-E232-4559-BA26-E62F885B0644@bolloretelecom.eu>
-In-Reply-To: <6E4816EA-E232-4559-BA26-E62F885B0644@bolloretelecom.eu>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Tue, 11 May 2010 20:01:06 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <201005111904.06230.khimov@altell.ru> <20100511151549.GB30963@jama>
+In-Reply-To: <20100511151549.GB30963@jama>
+MIME-Version: 1.0
+Message-Id: <201005112001.09771.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Trolltech FTP -> Nokia HTTP
+Subject: Re: [RFC] logrotate scripts policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,16 +38,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 15:39:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 11 May 2010 16:05:05 -0000
+X-Groupsio-MsgNum: 19170
+Content-Type: multipart/signed; boundary="nextPart2284749.CkGJAqalyQ";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-On 05/11/2010 09:28 PM, Adrien Demarez wrote:
-> Hi all,
-> 
-> Most products from Trolltech still have their SRC_URI pointing to ftp://ftp.trolltech.com.
-> Since Trolltech was bought by Nokia, everything now hosted on http://get.qt.nokia.com/, with the same directory structure. Although the legacy Trolltech FTP is still working, the downloads on http://get.qt.nokia.com/* are much faster, and also probably more reliable in the long term. Thus I propose to change the SRC_URI of all Trolltech softwares (e.g. QT...) as described in the attached patch (of course, the checksums do not change).
+--nextPart2284749.CkGJAqalyQ
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-You missed the patch? But the proposal sounds sane.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 11 =D0=BC=D0=B0=D1=8F 2010 19:15=
+:49 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Martin Jansa =D0=BD=D0=B0=D0=BF=D0=B8=D1=
+=81=D0=B0=D0=BB:
+> But maybe there are different "optimal" logrotate rules for people with
+> tmpfs and without, which is IMHO harder to implement. I don't care about
+> logs enough to ask for this :).
 
+I think this cases should be handled at distro level, for most of packages=
+=20
+logrotate scripts will be added as separate source files for the package an=
+d=20
+luckily that are very easy to override for distros (or even machines if the=
+re=20
+is a need to) in OE implementing any policy needed.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart2284749.CkGJAqalyQ
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkvpf0UACgkQXJ70z+XgVcNuXwCfYilyT+UZCaz7c/sFJwC/nfh1
+jdQAn0VCg3ahRseu32EbEPrKFL6panik
+=+RQ5
+-----END PGP SIGNATURE-----
+
+--nextPart2284749.CkGJAqalyQ--
