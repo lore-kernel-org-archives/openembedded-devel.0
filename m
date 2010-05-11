@@ -1,30 +1,39 @@
-Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
+Received: from server211.wifirst.net ([213.91.4.211] helo=bart.wifirst.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <c.aeschlimann@acn-group.ch>) id 1OBnUE-0000nE-1V
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 11 May 2010 13:18:56 +0200
-Received: from [172.16.145.92] (unknown [212.98.42.40])
-	by 111.com (Postfix) with ESMTPA id 1AF0E37089
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 11 May 2010 13:15:01 +0200 (CEST)
-Message-ID: <4BE93C34.2010503@acn-group.ch>
-Date: Tue, 11 May 2010 13:15:00 +0200
-From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4BE9181D.3060307@acn-group.ch> <hsb807$365$1@dough.gmane.org>
-In-Reply-To: <hsb807$365$1@dough.gmane.org>
-X-SA-Exim-Connect-IP: 195.160.190.3
-X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
+	(envelope-from <adrien.demarez@bolloretelecom.eu>)
+	id 1OBpfi-0006F4-St for openembedded-devel@lists.openembedded.org;
+	Tue, 11 May 2010 15:38:55 +0200
+Received: from bart.wifirst.net (localhost [127.0.0.1])
+	by bart.wifirst.net (Postfix) with ESMTP id 9D21B5FFA6;
+	Tue, 11 May 2010 15:28:21 +0200 (CEST)
+Received: from bart.wifirst.net (localhost [127.0.0.1])
+	by bart.wifirst.net (Postfix) with ESMTP id 2FA485FFD9;
+	Tue, 11 May 2010 15:28:21 +0200 (CEST)
+Received: from blini.bolloretelecom.eu
+	(LMontsouris-156-26-24-166.w80-14.abo.wanadoo.fr [80.14.183.166])
+	by bart.wifirst.net (Postfix) with ESMTP id 6FAA55FFA8;
+	Tue, 11 May 2010 15:28:19 +0200 (CEST)
+Received: from [192.168.95.152] (unknown [192.168.95.152])
+	by blini.bolloretelecom.eu (Postfix) with ESMTPSA id 12B2F23EB7;
+	Tue, 11 May 2010 15:28:19 +0200 (CEST)
+From: Adrien Demarez <adrien.demarez@bolloretelecom.eu>
+Date: Tue, 11 May 2010 15:28:18 +0200
+Message-Id: <6E4816EA-E232-4559-BA26-E62F885B0644@bolloretelecom.eu>
+To: Koen Kooi <k.kooi@student.utwente.nl>
+Mime-Version: 1.0 (Apple Message framework v1078)
+X-Mailer: Apple Mail (2.1078)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 213.91.4.211
+X-SA-Exim-Mail-From: adrien.demarez@bolloretelecom.eu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Hawkboard] OE u-boot image
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Trolltech FTP -> Nokia HTTP
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,36 +47,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 11 May 2010 11:18:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 11 May 2010 13:38:55 -0000
+Content-Type: text/plain;
+	charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Le 11.05.2010 11:28, Koen Kooi a =E9crit :
+Hi all,
 
-> On 11-05-10 10:41, Christophe Aeschlimann wrote:
->> Hi,
->>
-[...]
->> Did someone successfully booted the hawkboard through UART with the
->> u-boot image built with OpenEmbedded ?
->
-> I use tftp to load such stuff. I'm too lazy to use that overcomplicated=
-,
-> windows-only AISgen.
+Most products from Trolltech still have their SRC_URI pointing to =
+ftp://ftp.trolltech.com.
+Since Trolltech was bought by Nokia, everything now hosted on =
+http://get.qt.nokia.com/, with the same directory structure. Although =
+the legacy Trolltech FTP is still working, the downloads on =
+http://get.qt.nokia.com/* are much faster, and also probably more =
+reliable in the long term. Thus I propose to change the SRC_URI of all =
+Trolltech softwares (e.g. QT...) as described in the attached patch (of =
+course, the checksums do not change).
 
-Thanks for the comment.
-
-I can use tftp on a board that would already have u-boot on it but what=20
-if my NAND is clean ?
-
-Regards,
-
-Christophe
+Best regards,
 
 
->
-> regards,
->
-> Koen
+--
+Adrien Demarez
+Bollor=E9 telecom
+Bureaux/Office : 11bis, rue Scribe | F-75009 Paris
+Tel : +33 1 78 14 04 08 / +33 6 49 46 96 03
+www.bolloretelecom.eu
+>> Mobile broadband is here and across Europe! See us @ =
+http://www.wimaxoperators.org/regional/europe
 
 
