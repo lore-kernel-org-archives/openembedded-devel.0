@@ -1,36 +1,43 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OC9FK-00051u-CL
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 12:32:58 +0200
-Received: from host86-156-69-106.range86-156.btcentralplus.com
-	([86.156.69.106] helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OC9BZ-0008KX-IY
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 11:29:05 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OC9BZ-0007qo-2c
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 11:29:05 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OC9dL-0007kr-Uz for openembedded-devel@lists.openembedded.org;
+	Wed, 12 May 2010 12:57:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OC9ZZ-0000GB-Pa for openembedded-devel@lists.openembedded.org;
+	Wed, 12 May 2010 12:53:53 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 May 2010 12:53:53 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 May 2010 12:53:53 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BEA80C1.9030703@dresearch.de>
-References: <4BEA80C1.9030703@dresearch.de>
-Date: Wed, 12 May 2010 11:29:04 +0100
-Message-ID: <1273660144.18119.364.camel@mill.internal.reciva.com>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 12 May 2010 12:53:46 +0200
+Message-ID: <hse1bq$k70$1@dough.gmane.org>
+References: <1273182940.4942.10.camel@T61>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <1273182940.4942.10.camel@T61>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: pkg_postinst order
+Subject: Re: [PATCH] bug20/xorg.conf: update to use tslib driver for touchscreen input device.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +51,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 10:32:58 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 12 May 2010 10:57:48 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-05-12 at 12:19 +0200, Steffen Sledz wrote:
-> Is there any chance to sort own pkg_postinst *before* pkg_postint inherited from update-rc.d?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Not easily, no.  
+You forgot to bump PR in that patch
 
-Obviously you could patch update-rc.d.bblcass to allow this, but that
-class is only really there as a convenience to save typing: if its
-behaviour isn't quite what you want then you are probably better off not
-using the class at all and implementing the bits that you do want by
-hand.
+On 06-05-10 23:55, Ken Gilmer wrote:
+> diff --git a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+> index 0b976fe..746874f 100644
+> --- a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+> +++ b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+> @@ -26,4 +26,12 @@ EndSection
+>  Section "ServerLayout"                                 
+>          Identifier      "Builtin Default Layout"                                     
+>          Screen  "Builtin Default fbdev Screen 0"        
+> +		InputDevice "bmi-lcd-ts" "CorePointer"
+>  EndSection                                              
+> +
+> +Section "InputDevice" 
+> +		Identifier "bmi-lcd-ts" 
+> +		Driver "tslib"
+> +		Option "SwapAxes" "1" 
+> +    	Option "Device" "/dev/input/touchscreen0" 
+> +EndSection                                        
 
-p.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD4DBQFL6oi6MkyGM64RGpERAiG0AJinrG6uBlJOydvk/o6igCcmqfghAJ0bWxfK
+Fe1TjxbxgsbYLNmp+yN5UA==
+=xQHl
+-----END PGP SIGNATURE-----
 
 
 
