@@ -1,38 +1,40 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
+Received: from web57908.mail.re3.yahoo.com ([68.142.236.101])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OCE73-0002v3-TY
+	(envelope-from <henryzhang62@yahoo.com>) id 1OCEhh-0002Ye-Id
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 17:44:46 +0200
-Received: (qmail 19492 invoked by uid 503); 12 May 2010 15:41:15 -0000
-Received: from b6.ovh.net (HELO mail612.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 12 May 2010 15:41:15 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 12 May 2010 15:34:13 -0000
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 12 May 2010 15:34:11 -0000
-Message-ID: <4BEACA72.5050905@eukrea.com>
-Date: Wed, 12 May 2010 17:34:10 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Wed, 12 May 2010 18:22:39 +0200
+Received: (qmail 96265 invoked by uid 60001); 12 May 2010 16:12:02 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1273680722; bh=P6r4EacEV6o7tjFAb16XXBY9Bff9FbCxxoMA7wYl2m0=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+	b=3HW7LAZNq0O25v8793JpoNRQ16KL+eDD3zgeYVKlo6853LXzsxKmCcBQXg4q5bYmnR5OW12tODk2YtKuJgzCBbR50Q4HJP5CAJQ0uxy/l/hq6EoPB+itWJkd/Qo7uZuXOzf7TAICgeSl/vjChjtHfxhIFXWmCe+jE14Lz3gHXCE=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type;
+	b=GnJcBhSWUbNWHtYSpNd1nSmb2u4wUDRUQ/ChJd4dGzhFpHGmzboe4kToAmr86pzs2LJZ0+/z5bIYrdnCm7KyC4hriAlWicMN8iK8AX/07X5pT/6oxmfASARK0H0AZ8v9oFRjL/vM5zyuYERsX2iGSL/5rfpWSKzZhzEnlVhLUGk=;
+Message-ID: <693555.95636.qm@web57908.mail.re3.yahoo.com>
+X-YMail-OSG: u6oSfm0VM1kXGd5HdWRBnh32IGr_H4sJUbbwhy_5jDXFoT_
+	CKlFIjSkldVIAMiIltrQvBRH0nL94eCxHkirAqy1QghGL7VDRoZn22e8KReK
+	X1TTNDlulAPTTEv_8N2ELliXuhcqxr3YzTYsuJRmgeLZPs0MNiy.navpemZ5
+	9cOm3MSHIxvhQHpRO7olIxbN2vuYoNhfijQef3ltiGT65WILo4kunvLIDgDt
+	qwxJ4nPycuetsE.gDghPLlrmzUSEzEG3q333PSmGW7F1lq4p_XFFEXFC8uf9
+	bvwnmkFr7IzP9DUUA4grstKR0tQ6IPjMgwOLwQmUi6uH52q18JR2g2uN3KQG
+	eOqXSRhkIcm43UfY-
+Received: from [70.134.44.229] by web57908.mail.re3.yahoo.com via HTTP;
+	Wed, 12 May 2010 09:12:02 PDT
+X-Mailer: YahooMailClassic/10.1.11 YahooMailWebService/0.8.103.269680
+Date: Wed, 12 May 2010 09:12:02 -0700 (PDT)
+From: hong zhang <henryzhang62@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1272921691-6963-1-git-send-email-eric@eukrea.com>
-In-Reply-To: <1272921691-6963-1-git-send-email-eric@eukrea.com>
-X-Ovh-Tracer-Id: 14588003618750180681
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.27.225
-X-SA-Exim-Mail-From: eric@eukrea.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 68.142.236.101
+X-SA-Exim-Mail-From: henryzhang62@yahoo.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: k.kooi@student.utwente.nl
-Subject: Re: [PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
+Subject: ERROR: '/stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb' failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +48,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 15:44:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 12 May 2010 16:22:39 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Le 03/05/2010 23:21, Eric Benard a écrit :
-> Signed-off-by: Eric Benard<eric@eukrea.com>
-> ---
->   classes/module-base.bbclass |    7 ++++++-
->   1 files changed, 6 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/module-base.bbclass b/classes/module-base.bbclass
-> index bc53e1b..9aaaa4e 100644
-> --- a/classes/module-base.bbclass
-> +++ b/classes/module-base.bbclass
-> @@ -7,7 +7,12 @@ export CROSS_COMPILE = "${TARGET_PREFIX}"
->
->   # A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
->   # rebuilds for kernel and external modules
-> -PR = "${MACHINE_KERNEL_PR}"
-> +python __anonymous () {
-> +    machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
-> +
-> +    if machine_kernel_pr:
-> +       bb.data.setVar('PR', machine_kernel_pr, d)
-> +}
->
->   export KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
->   export KERNEL_SOURCE = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-source')}"
+List,
 
-Actually, we loose PR if MACHINE_KERNEL_PR is not set.
+I am using bitbake version 1.8.18 and the latest openembedded. DISTRO=angstrom and MACHINE=overo. When I run "bitbake opie-image", stuck on gnutls_2.8.5.db. See following message. Where should I look into for this error? Thanks.
 
-Is this patch fine to solve this problem or is there another prefered way ?
+NOTE: Running task 1543 of 5784 (ID: 2573, /stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb, do_fetch)
+NOTE: The checksums for '/stuff/sources/gnutls-2.8.5.tar.bz2' did not match.
+Expected MD5: 'e3b2788b79bfc82acbe717e3c54d4e92' and Got: '2a0ceb110d2cc5c4e6c7f747f907d4e0'
+Expected SHA256: '9249c29df71551e302e0186f4e1876dd6cc4c6cf2974b432c22525dde815cae8' and Got: 'eb84d6b7e45d29b77bee1c36d75f73aa4dbf89f83913c8c66ad40266cf2b137a'
+NOTE: Your checksums:
+SRC_URI[md5sum] = "2a0ceb110d2cc5c4e6c7f747f907d4e0"
+SRC_URI[sha256sum] = "eb84d6b7e45d29b77bee1c36d75f73aa4dbf89f83913c8c66ad40266cf2b137a"
 
-Thanks,
-Eric
+ERROR: gnutls-2.8.5: ftp://ftp.gnutls.org/pub/gnutls/gnutls-2.8.5.tar.bz2 cannot check archive integrity
+ERROR: Error in executing: /stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in executing: /stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Build of /stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb do_fetch failed
+ERROR: Task 2573 (/stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb, do_fetch) failed
+NOTE: Tasks Summary: Attempted 1542 tasks of which 1518 didn't need to be rerun and 1 failed.
+ERROR: '/stuff/openembedded/recipes/gnutls/gnutls_2.8.5.bb' failed
+
+---henry
+
+
+
+      
 
 
