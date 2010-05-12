@@ -1,44 +1,41 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vonami@gmail.com>) id 1OCGrZ-00076x-W6
+Received: from web57907.mail.re3.yahoo.com ([68.142.236.100])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <henryzhang62@yahoo.com>) id 1OCGrp-0007Fe-4T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 20:40:59 +0200
-Received: by fxm11 with SMTP id 11so394909fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 11:37:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=8L8NyaIAZ3oMTg8spoUQZzSwcjSuksLVSTse635lKgQ=;
-	b=XddoHQRzT2xUiBEO7shOdGcMygCgJD1wGO+UsJHnZk7fa5mX6sYzxub+cy1nRfoPm4
-	VeAT3qbRAIOXoxzpLFhSUSrnxFz2+RXr6p53x1WS+8P3DtGAkEiiuPS7fLtVvlCPreeQ
-	YswsX38Ea+5WnneIFDDBvrOell783arMl3BVQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=J20BXiANPHHAGEJrhV4AmonHnYgnUibHReEqjRblNAupsDAOZase2ntqzrahV6vZu/
-	V7YeZnVBxt9tTe8a1HmC5vWGHuVUrHxcHQcYDvMs388rq/B3o5YhgvrAdeZyH9lN/LvU
-	nxcjcn4eh/XyRfbP/KdJSFU9LwTBliCrOlL/o=
-MIME-Version: 1.0
-Received: by 10.239.135.16 with SMTP id b16mr772163hbb.98.1273689422316; Wed, 
-	12 May 2010 11:37:02 -0700 (PDT)
-Received: by 10.239.157.131 with HTTP; Wed, 12 May 2010 11:37:02 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.00.1005121257070.3272@lynx>
-References: <alpine.DEB.2.00.1005121257070.3272@lynx>
-Date: Wed, 12 May 2010 22:37:02 +0400
-Message-ID: <AANLkTim-W-aHcVYlUh4-t5gedUfoPvTgrywYOVIHU46T@mail.gmail.com>
-From: Dmitry Ivanov <vonami@gmail.com>
+	Wed, 12 May 2010 20:41:14 +0200
+Received: (qmail 34590 invoked by uid 60001); 12 May 2010 18:30:37 -0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
+	t=1273689037; bh=JwfV4kSkSNcQrnUqIkfdAKRdRKzsJ0oh9f2gzlvBEhA=;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=o3CCnpKA2iQ2fvl9hDeAJbWURgAm894loztsJP+kGEZaSsjxAjKK39KOPrAu7gHmU8QiMpA21AV4vzv8TWUagvgoMqn3Inuh/enuyII0+rBOGCyFdoexTR1k8mhOG2P2YBK8+on9Thnk0F608N8J9y8IhnZMCmoGAjrBB/TLHpI=
+DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
+	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:In-Reply-To:MIME-Version:Content-Type:Content-Transfer-Encoding;
+	b=UO7mDRgxoZfhp4FfIFIzg4FqMPxb4gJqKQZifxkRiz6RKEBaz0Qai3PiwAQT7DXXm5AafcVhglTeBMBBR5HIpl19lPpIMKfxbrEDEkS837CIQJeZePpIdXo9g4UExsocyI8MbMkX0YIbDmvDeVboibTSL2xtU8g8wv3C8OT94q0=;
+Message-ID: <740455.28529.qm@web57907.mail.re3.yahoo.com>
+X-YMail-OSG: 37lKifoVM1nS4LFf3RFFetm.psrbkULj_Ypu6xejdRvzCD0
+	HbAUh_nD7m1e0TJmzzEjwDL3w5A_n8ZaWgE.wDvyVmpIueaI8lzAHkr6zv6K
+	1XDvM2.KLPCx_0xyXS1l30CRPbpkjEdGCIbYZSjD1QfGxykM5Qe2KZip8ayJ
+	Ry_TemMxtwaoe1Vg6M.crVWAkjgwurXb8aRFTKJOcENOy2hb5Ki7iFmKgcs1
+	mv5xzpmadfavVWUufkWyK1ZlVzkVi6WJ.w8mH_.tIPIUuVj1qOcRDH.PHZ_.
+	n1kqBosa_BX7NDOzKz77IGzkbZsiwCqL5iulCfxT4ReXxcJvdkmr4dT4bUwM
+	QG37fFR5iRSQZTmn7T3hNiSdfJf7Iaz8-
+Received: from [70.134.44.229] by web57907.mail.re3.yahoo.com via HTTP;
+	Wed, 12 May 2010 11:30:37 PDT
+X-Mailer: YahooMailClassic/10.1.11 YahooMailWebService/0.8.103.269680
+Date: Wed, 12 May 2010 11:30:37 -0700 (PDT)
+From: hong zhang <henryzhang62@yahoo.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: vonami@gmail.com
+In-Reply-To: <AANLkTikIvUUA9BtBryyx1WPNamzk7LHmng2T-xTY7WSv@mail.gmail.com>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 68.142.236.100
+X-SA-Exim-Mail-From: henryzhang62@yahoo.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: on ubuntu 10.04, how to reset /bin/sh to refer to bash?
+Subject: Re: eet: CROSS COMPILE Badness on x86_64 build machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,25 +49,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 18:40:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 12 May 2010 18:41:15 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, May 12, 2010 at 8:58 PM, Robert P. J. Day <rpjday@crashcourse.ca> w=
-rote:
->
-> =A0my first time setting up to build OE on ubuntu 10.04, and trying to
-> "bitbake fetch" complains that it's a bad idea for /bin/sh to refer to
-> dash. =A0fair enough, so since /bin/sh -> dash, do i just reset the
-> symlink manually? =A0or is there something more elegant? =A0thanks.
->
-
-See http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu.
-
-its as simple as sudo dpkg-reconfigure dash
---=20
-Dmitry Ivanov
-KDE PIM developer (pim.kde.org)
-partimage-ng developer (partimage-ng.net)
+Steve,=0A=0AI am trying to build toolchain for my overo board. Shoudl I get=
+ tree from=0Agit clone git://gitorious.org/gumstix-oe/mainline.git ?=0A=0AI=
+ have build problem with openembedded tree.=0A=0A---henry=0A=0A--- On Wed, =
+5/12/10, Steve Sakoman <sakoman@gmail.com> wrote:=0A=0A> From: Steve Sakoma=
+n <sakoman@gmail.com>=0A> Subject: [oe] eet: CROSS COMPILE Badness on x86_6=
+4 build machine=0A> To: "openembedded-devel" <openembedded-devel@lists.open=
+embedded.org>=0A> Date: Wednesday, May 12, 2010, 1:08 PM=0A> Building from =
+recent pull of oe.dev=0A> (yesterday)=0A> =0A> Anyone else seeing this?=0A>=
+ =0A> Steve=0A> =0A> =0A> ERROR: function do_compile failed=0A> ERROR: log =
+data follows=0A> (/home/steve/overo-oe/tmp/work/armv7a-angstrom-linux-gnuea=
+bi/eet-2_1.1.0+svnr48617-r1/temp/log.do_compile.29091)=0A> | NOTE: make -j =
+4=0A> | make=A0 all-recursive=0A> | make[1]: Entering directory=0A> `/home/=
+steve/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/eet-2_1.1.0+svnr48617=
+-r1/eet'=0A> | Making all in src=0A> | make[2]: Entering directory=0A> `/ho=
+me/steve/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/eet-2_1.1.0+svnr48=
+617-r1/eet/src'=0A> | Making all in lib=0A> | make[3]: Entering directory=
+=0A> `/home/steve/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/eet-2_1.1=
+.0+svnr48617-r1/eet/src/lib'=0A> |=A0=A0=A0CC=A0=0A> =A0=A0=A0libeet_la-eet=
+_lib.lo=0A> |=A0=A0=A0CC=A0=0A> =A0=A0=A0libeet_la-eet_data.lo=0A> |=A0=A0=
+=A0CC=A0=0A> =A0=A0=A0libeet_la-eet_image.lo=0A> |=A0=A0=A0CC=A0=0A> =A0=A0=
+=A0libeet_la-eet_cipher.lo=0A> | CROSS COMPILE Badness: /usr/include in INC=
+LUDEPATH:=0A> /usr/include/eina-0=0A> | cc1: internal compiler error: in ad=
+d_path, at=0A> c-incpath.c:425=0A> | Please submit a full bug report,=0A> |=
+ with preprocessed source if appropriate.=0A> | See <http://gcc.gnu.org/bug=
+s.html> for=0A> instructions.=0A> | CROSS COMPILE Badness: /usr/include in =
+INCLUDEPATH:=0A> /usr/include/eina-0=0A> | cc1: internal compiler error: in=
+ add_path, at=0A> c-incpath.c:425=0A> | Please submit a full bug report,=0A=
+> | with preprocessed source if appropriate.=0A> | See <http://gcc.gnu.org/=
+bugs.html> for=0A> instructions.=0A> | make[3]: *** [libeet_la-eet_image.lo=
+] Error 1=0A> | make[3]: *** Waiting for unfinished jobs....=0A> | make[3]:=
+ *** [libeet_la-eet_data.lo] Error 1=0A> | CROSS COMPILE Badness: /usr/incl=
+ude in INCLUDEPATH:=0A> /usr/include/eina-0=0A> | cc1: internal compiler er=
+ror: in add_path, at=0A> c-incpath.c:425=0A> | Please submit a full bug rep=
+ort,=0A> | with preprocessed source if appropriate.=0A> | See <http://gcc.g=
+nu.org/bugs.html> for=0A> instructions.=0A> | make[3]: *** [libeet_la-eet_l=
+ib.lo] Error 1=0A> | CROSS COMPILE Badness: /usr/include in INCLUDEPATH:=0A=
+> /usr/include/eina-0=0A> | cc1: internal compiler error: in add_path, at=
+=0A> c-incpath.c:425=0A> | Please submit a full bug report,=0A> | with prep=
+rocessed source if appropriate.=0A> | See <http://gcc.gnu.org/bugs.html> fo=
+r=0A> instructions.=0A> | make[3]: *** [libeet_la-eet_cipher.lo] Error 1=0A=
+> | make[3]: Leaving directory=0A> `/home/steve/overo-oe/tmp/work/armv7a-an=
+gstrom-linux-gnueabi/eet-2_1.1.0+svnr48617-r1/eet/src/lib'=0A> | make[2]: *=
+** [all-recursive] Error 1=0A> | make[2]: Leaving directory=0A> `/home/stev=
+e/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/eet-2_1.1.0+svnr48617-r1/=
+eet/src'=0A> | make[1]: *** [all-recursive] Error 1=0A> | make[1]: Leaving =
+directory=0A> `/home/steve/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/=
+eet-2_1.1.0+svnr48617-r1/eet'=0A> | make: *** [all] Error 2=0A> | FATAL: oe=
+_runmake failed=0A> =0A> _______________________________________________=0A=
+> Openembedded-devel mailing list=0A> Openembedded-devel@lists.openembedded=
+.org=0A> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-d=
+evel=0A> =0A=0A=0A      
 
 
