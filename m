@@ -1,44 +1,38 @@
-Received: from firebug.buglabs.net ([66.80.197.243] helo=looper.buglabs.net)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <john@buglabs.net>) id 1OCDsV-0003dC-Pb
+Received: from 26.mail-out.ovh.net ([91.121.27.225])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OCE73-0002v3-TY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 17:29:44 +0200
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by looper.buglabs.net (Postfix) with ESMTP id D382B34049
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 11:18:59 -0400 (EDT)
-Received: from localhost (localhost [127.0.0.1])
-	by aphid.buglabs.net (Postfix) with ESMTP id EF2D428E002
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 11:19:04 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at aphid.buglabs.net
-Received: from aphid.buglabs.net ([127.0.0.1])
-	by localhost (aphid.buglabs.net [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id GyDZviBHLSpZ
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 11:19:04 -0400 (EDT)
-Received: from aphid.buglabs.net (aphid.buglabs.net [192.168.20.30])
-	by aphid.buglabs.net (Postfix) with ESMTP id 466A628E001
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 11:19:04 -0400 (EDT)
-Date: Wed, 12 May 2010 10:19:04 -0500 (GMT-05:00)
-From: John Connolly <john@buglabs.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <1497291088.961273677544100.JavaMail.root@aphid.buglabs.net>
-In-Reply-To: <12736765713704-git-send-email-john@buglabs.net>
+	Wed, 12 May 2010 17:44:46 +0200
+Received: (qmail 19492 invoked by uid 503); 12 May 2010 15:41:15 -0000
+Received: from b6.ovh.net (HELO mail612.ha.ovh.net) (213.186.33.56)
+	by 26.mail-out.ovh.net with SMTP; 12 May 2010 15:41:15 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 12 May 2010 15:34:13 -0000
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 12 May 2010 15:34:11 -0000
+Message-ID: <4BEACA72.5050905@eukrea.com>
+Date: Wed, 12 May 2010 17:34:10 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-X-Originating-IP: [192.168.0.104]
-X-Mailer: Zimbra 5.0.18_GA_3011.UBUNTU8_64 (ZimbraWebClient - SAF3
-	(Linux)/5.0.18_GA_3011.UBUNTU8_64)
-X-SA-Exim-Connect-IP: 66.80.197.243
-X-SA-Exim-Mail-From: john@buglabs.net
+To: openembedded-devel@lists.openembedded.org
+References: <1272921691-6963-1-git-send-email-eric@eukrea.com>
+In-Reply-To: <1272921691-6963-1-git-send-email-eric@eukrea.com>
+X-Ovh-Tracer-Id: 14588003618750180681
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.27.225
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] conf/machine/bug20.conf, add xf86-input-tslib for BUG2.0 touchscreen
+Cc: k.kooi@student.utwente.nl
+Subject: Re: [PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,39 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 15:29:44 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 May 2010 15:44:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-*BUG20 is using tslib for xorg touchscreen.
-*would like this to get into stable
-*tested on BUG2.0
----
- conf/machine/bug20.conf |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+Le 03/05/2010 23:21, Eric Benard a écrit :
+> Signed-off-by: Eric Benard<eric@eukrea.com>
+> ---
+>   classes/module-base.bbclass |    7 ++++++-
+>   1 files changed, 6 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/module-base.bbclass b/classes/module-base.bbclass
+> index bc53e1b..9aaaa4e 100644
+> --- a/classes/module-base.bbclass
+> +++ b/classes/module-base.bbclass
+> @@ -7,7 +7,12 @@ export CROSS_COMPILE = "${TARGET_PREFIX}"
+>
+>   # A machine.conf or local.conf can increase MACHINE_KERNEL_PR to force
+>   # rebuilds for kernel and external modules
+> -PR = "${MACHINE_KERNEL_PR}"
+> +python __anonymous () {
+> +    machine_kernel_pr = bb.data.getVar('MACHINE_KERNEL_PR', d, True)
+> +
+> +    if machine_kernel_pr:
+> +       bb.data.setVar('PR', machine_kernel_pr, d)
+> +}
+>
+>   export KERNEL_VERSION = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-abiversion')}"
+>   export KERNEL_SOURCE = "${@base_read_file('${STAGING_KERNEL_DIR}/kernel-source')}"
 
-diff --git a/conf/machine/bug20.conf b/conf/machine/bug20.conf
-index dbc1faf..42c2c12 100644
---- a/conf/machine/bug20.conf
-+++ b/conf/machine/bug20.conf
-@@ -9,6 +9,7 @@ XSERVER = "xserver-xorg \
-            xserver-xorg-extension-glx \
-            xf86-input-evdev \
-            xf86-input-mouse \
-+           xf86-input-tslib \
-            xf86-video-omapfb \
-            xf86-input-keyboard"
- 
--- 
-1.7.0.4
+Actually, we loose PR if MACHINE_KERNEL_PR is not set.
 
-John Connolly
-Software Developer
-Bug Labs
-598 Broadway, 4th Floor
-New York, NY 10012-3206
-646.723.9258
-jconnolly @ irc.freenode.net/#buglabs
+Is this patch fine to solve this problem or is there another prefered way ?
 
+Thanks,
+Eric
 
 
