@@ -1,40 +1,44 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCGoK-0005EF-0A
+	(envelope-from <vonami@gmail.com>) id 1OCGrZ-00076x-W6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 20:37:37 +0200
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCFGm-0006yh-Hf for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 12:58:52 -0400
-Date: Wed, 12 May 2010 12:58:48 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1005121257070.3272@lynx>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Wed, 12 May 2010 20:40:59 +0200
+Received: by fxm11 with SMTP id 11so394909fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 May 2010 11:37:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=8L8NyaIAZ3oMTg8spoUQZzSwcjSuksLVSTse635lKgQ=;
+	b=XddoHQRzT2xUiBEO7shOdGcMygCgJD1wGO+UsJHnZk7fa5mX6sYzxub+cy1nRfoPm4
+	VeAT3qbRAIOXoxzpLFhSUSrnxFz2+RXr6p53x1WS+8P3DtGAkEiiuPS7fLtVvlCPreeQ
+	YswsX38Ea+5WnneIFDDBvrOell783arMl3BVQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=J20BXiANPHHAGEJrhV4AmonHnYgnUibHReEqjRblNAupsDAOZase2ntqzrahV6vZu/
+	V7YeZnVBxt9tTe8a1HmC5vWGHuVUrHxcHQcYDvMs388rq/B3o5YhgvrAdeZyH9lN/LvU
+	nxcjcn4eh/XyRfbP/KdJSFU9LwTBliCrOlL/o=
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.239.135.16 with SMTP id b16mr772163hbb.98.1273689422316; Wed, 
+	12 May 2010 11:37:02 -0700 (PDT)
+Received: by 10.239.157.131 with HTTP; Wed, 12 May 2010 11:37:02 -0700 (PDT)
+In-Reply-To: <alpine.DEB.2.00.1005121257070.3272@lynx>
+References: <alpine.DEB.2.00.1005121257070.3272@lynx>
+Date: Wed, 12 May 2010 22:37:02 +0400
+Message-ID: <AANLkTim-W-aHcVYlUh4-t5gedUfoPvTgrywYOVIHU46T@mail.gmail.com>
+From: Dmitry Ivanov <vonami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: vonami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: on ubuntu 10.04, how to reset /bin/sh to refer to bash?
+Subject: Re: on ubuntu 10.04, how to reset /bin/sh to refer to bash?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,26 +52,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 18:37:37 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 12 May 2010 18:40:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+On Wed, May 12, 2010 at 8:58 PM, Robert P. J. Day <rpjday@crashcourse.ca> w=
+rote:
+>
+> =A0my first time setting up to build OE on ubuntu 10.04, and trying to
+> "bitbake fetch" complains that it's a bad idea for /bin/sh to refer to
+> dash. =A0fair enough, so since /bin/sh -> dash, do i just reset the
+> symlink manually? =A0or is there something more elegant? =A0thanks.
+>
 
-  my first time setting up to build OE on ubuntu 10.04, and trying to
-"bitbake fetch" complains that it's a bad idea for /bin/sh to refer to
-dash.  fair enough, so since /bin/sh -> dash, do i just reset the
-symlink manually?  or is there something more elegant?  thanks.
+See http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu.
 
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+its as simple as sudo dpkg-reconfigure dash
+--=20
+Dmitry Ivanov
+KDE PIM developer (pim.kde.org)
+partimage-ng developer (partimage-ng.net)
 
 
