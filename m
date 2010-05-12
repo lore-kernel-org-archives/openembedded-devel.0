@@ -1,35 +1,31 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from exprod5og108.obsmtp.com ([64.18.0.186])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OCBRq-0007e3-2i
+	(envelope-from <martyn.welch@ge.com>) id 1OCDHs-0000i6-NG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 14:54:03 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 14350491278
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 14:50:10 +0200 (CEST)
-Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 12 May 2010 14:51:30 +0200
-Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
-	id B0A3172078; Wed, 12 May 2010 14:50:09 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch.de>
+	Wed, 12 May 2010 16:51:55 +0200
+Received: from source ([12.43.191.1]) (using TLSv1) by
+	exprod5ob108.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKS+q/ni4XfSJZr8euHMYM29aII1sziseP@postini.com;
+	Wed, 12 May 2010 07:48:00 PDT
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Alpmlip06.e2k.ad.ge.com with ESMTP; 12 May 2010 10:47:59 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com ([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 12 May 2010 10:47:57 -0400
+From: Martyn Welch <martyn.welch@ge.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 May 2010 14:50:04 +0200
-Message-Id: <1273668604-9810-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <20100512122138.GJ30963@jama>
-References: <20100512122138.GJ30963@jama>
-X-OriginalArrivalTime: 12 May 2010 12:51:30.0964 (UTC)
-	FILETIME=[D81BCD40:01CAF1D1]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+Date: Wed, 12 May 2010 15:47:56 +0100
+Message-ID: <20100512144754.31594.99048.stgit@ES-J7S4D2J.amer.consind.ge.com>
+User-Agent: StGIT/0.13
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 64.18.0.186
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v4] busybox/syslogs: use update-alternatives for syslog selection
+Subject: [PATCH] gpm: Patch gpm.c to get struct ucred definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,286 +39,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 12:54:03 -0000
+X-List-Received-Date: Wed, 12 May 2010 14:51:55 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
 
-* u-a for init scripts of busybox-syslog, sysklogd, and rsyslog
-* syslog-ng needs to be integrated too!
+Gpm is currently failing to build because struct ucred is only defined with
+"#define __USE_GNU".
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+Signed-off-by: Martyn Welch <martyn.welch@ge.com>
 ---
- recipes/busybox/busybox.inc        |   44 ++++++++++++++++++++++++++--
- recipes/rsyslog/rsyslog.inc        |   50 ++++++++++++++++++++++++++------
- recipes/sysklogd/sysklogd.inc      |   55 ++++++++++++++++++++++++++++++++---
- recipes/sysklogd/sysklogd_1.4.1.bb |    2 +-
- recipes/sysklogd/sysklogd_1.5.bb   |    2 +-
- 5 files changed, 132 insertions(+), 21 deletions(-)
 
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index 17d8d14..7c170fb 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
- SECTION = "base"
- PRIORITY = "required"
- 
--INC_PR = "r27"
-+INC_PR = "r28"
- 
- SRC_URI = "\
-   file://busybox-cron \
-@@ -46,12 +46,14 @@ RDEPENDS_${PN} += "${PN}-mountall"
- RRECOMMENDS_${PN} += "libgcc ${PN}-syslog"
- 
- FILES_${PN}-httpd = "${sysconfdir}/init.d/busybox-httpd /srv/www"
--FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog ${sysconfdir}/syslog.conf"
-+FILES_${PN}-syslog = "${sysconfdir}/init.d/syslog.${PN} ${sysconfdir}/syslog.conf"
- FILES_${PN}-udhcpd = "${sysconfdir}/init.d/busybox-udhcpd"
- 
- FILES_${PN} += "${datadir}/udhcpc"
- 
--INITSCRIPT_PACKAGES = "${PN}-httpd ${PN}-syslog ${PN}-udhcpd"
-+# syslog initscript is handled explicitly because order of
-+# update-rc.d and update-alternatives is important (see below)
-+INITSCRIPT_PACKAGES = "${PN}-httpd ${PN}-udhcpd"
- INITSCRIPT_NAME_${PN}-httpd = "busybox-httpd"
- INITSCRIPT_NAME_${PN}-syslog = "syslog"
- INITSCRIPT_NAME_${PN}-udhcpd = "busybox-udhcpd"
-@@ -104,7 +106,7 @@ do_install () {
- 	ln -sf busybox ${D}${base_bindir}/sh
- 
- 	if grep -q "CONFIG_SYSLOGD=y" ${WORKDIR}/defconfig; then
--		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/
-+		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/syslog.${PN}
- 		install -m 644 ${WORKDIR}/syslog.conf ${D}${sysconfdir}/
- 	fi
- 	if grep "CONFIG_CROND=y" ${WORKDIR}/defconfig; then
-@@ -154,6 +156,40 @@ pkg_prerm_${PN}-mountall () {
- 	update-alternatives --remove default_mountall mountall.${PN}
- }
- 
-+pkg_postinst_${PN}-syslog () {
-+	update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 50
-+
-+	if test "x$D" != "x"; then
-+		OPT="-r $D"
-+	else
-+		OPT="-s"
-+	fi
-+	update-rc.d $OPT syslog defaults
-+}
-+
-+pkg_prerm_${PN}-syslog () {
-+	if test "x$D" = "x"; then
-+		if test "$1" = "upgrade" -o "$1" = "remove"; then
-+			/etc/init.d/syslog stop
-+		fi
-+	fi
-+
-+	update-alternatives --remove syslog-init syslog.${PN}
-+}
-+
-+pkg_postrm_${PN}-syslog () {
-+	if test "x$D" != "x"; then
-+		OPT="-r $D"
-+	else
-+		OPT=""
-+	fi
-+	if test "$1" = "remove" -o "$1" = "purge"; then
-+		if ! test -e "/etc/init.d/syslog"; then
-+			update-rc.d $OPT syslog remove
-+		fi
-+	fi
-+}
-+
- pkg_prerm_${PN} () {
- 	# This is so you can make busybox commit suicide - removing busybox with no other packages
- 	# providing its files, this will make update-alternatives work, but the update-rc.d part
-diff --git a/recipes/rsyslog/rsyslog.inc b/recipes/rsyslog/rsyslog.inc
-index 3e39ba0..d94ab34 100644
---- a/recipes/rsyslog/rsyslog.inc
-+++ b/recipes/rsyslog/rsyslog.inc
-@@ -2,31 +2,61 @@ DESCRIPTION = "Rsyslog is an enhanced multi-threaded syslogd"
- DEPENDS = "zlib"
- HOMEPAGE = "http://www.rsyslog.com/"
- LICENSE = "GPLv3"
--INC_PR = "r0"
-+INC_PR = "r1"
- 
- SRC_URI = "http://download.rsyslog.com/rsyslog/${PN}-${PV}.tar.gz \
-           file://rsyslog.conf \
-           file://initscript"
- 
--inherit autotools update-rc.d
-+
-+inherit autotools
- 
- do_install_append() {
-         install -d ${D}/${sysconfdir}/${PN}
-         install ${WORKDIR}/rsyslog.conf ${D}${sysconfdir}/rsyslog.conf
-         install -d ${D}/${sysconfdir}/init.d
--        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/rsyslog
-+        install -m 755 ${WORKDIR}/initscript ${D}/${sysconfdir}/init.d/syslog.${PN}
-+}
-+
-+# syslog initscript is handled explicitly because order of
-+# update-rc.d and update-alternatives is important
-+DEPENDS_append = " update-rc.d update-rc.d-native"
-+RDEPENDS_${PN}_append = " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
-+
-+pkg_postinst_${PN} () {
-+	update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 300
-+
-+	if test "x$D" != "x"; then
-+		OPT="-r $D"
-+	else
-+		OPT="-s"
-+	fi
-+	update-rc.d $OPT syslog defaults
- }
- 
--pkg_postinst() {
--        update-rc.d -f syslog remove
-+pkg_prerm_${PN} () {
-+	if test "x$D" = "x"; then
-+		if test "$1" = "upgrade" -o "$1" = "remove"; then
-+			/etc/init.d/syslog stop
-+		fi
-+	fi
-+
-+	update-alternatives --remove syslog-init syslog.${PN}
- }
- 
--pkg_postrm() {
--        update-rc.d syslog add 5
-+pkg_postrm_${PN} () {
-+	if test "x$D" != "x"; then
-+		OPT="-r $D"
-+	else
-+		OPT=""
-+	fi
-+	if test "$1" = "remove" -o "$1" = "purge"; then
-+		if ! test -e "/etc/init.d/syslog"; then
-+			update-rc.d $OPT syslog remove
-+		fi
-+	fi
- }
- 
- CONFFILES_${PN} = "${sysconfdir}/rsyslog.conf"
- 
--INITSCRIPT_NAME = "rsyslog"
--#INITSCRIPT_PARAMS = "defaults 05"
--INITSCRIPT_PARAMS = "remove"
-+INITSCRIPT_NAME = "syslog"
-diff --git a/recipes/sysklogd/sysklogd.inc b/recipes/sysklogd/sysklogd.inc
-index 65da86d..4017736 100644
---- a/recipes/sysklogd/sysklogd.inc
-+++ b/recipes/sysklogd/sysklogd.inc
-@@ -1,16 +1,20 @@
+ recipes/gpm/gpm-1.20.1/ucred-include.patch |   11 +++++++++++
+ recipes/gpm/gpm_1.20.1.bb                  |    3 ++-
+ 2 files changed, 13 insertions(+), 1 deletions(-)
+
+diff --git a/recipes/gpm/gpm-1.20.1/ucred-include.patch b/recipes/gpm/gpm-1.20.1/ucred-include.patch
+new file mode 100644
+index 0000000..0c79b85
+--- /dev/null
++++ b/recipes/gpm/gpm-1.20.1/ucred-include.patch
+@@ -0,0 +1,11 @@
++diff -urN gpm-1.20.1/src/gpm.c gpm-1.20.1.new/src/gpm.c
++--- gpm-1.20.1/src/gpm.c	2010-05-12 14:42:01.000000000 +0100
+++++ gpm-1.20.1.new/src/gpm.c	2010-05-12 15:31:06.000000000 +0100
++@@ -34,6 +34,7 @@
++ #include <sys/stat.h>      /* mkdir()  */
++ #include <sys/time.h>      /* timeval */
++ #include <sys/types.h>     /* socket() */
+++#define __USE_GNU          /* needed for struct ucred in sys/socket.h */
++ #include <sys/socket.h>    /* socket() */
++ #include <sys/un.h>        /* struct sockaddr_un */
++ 
+diff --git a/recipes/gpm/gpm_1.20.1.bb b/recipes/gpm/gpm_1.20.1.bb
+index 6506c4d..a1a11b3 100644
+--- a/recipes/gpm/gpm_1.20.1.bb
++++ b/recipes/gpm/gpm_1.20.1.bb
+@@ -5,13 +5,14 @@ SECTION = "console/utils"
  LICENSE = "GPL"
- SECTION = "base"
- DESCRIPTION = "The sysklogd package implements two system log daemons."
-+INC_PR = "r3"
+ DEPENDS = "ncurses"
  
- SRC_URI = "http://www.ibiblio.org/pub/Linux/system/daemons/sysklogd-${PV}.tar.gz \
- 	       file://nonrootinstall.patch;patch=1 \
-            file://sysklogd"
+-PR = "r3"
++PR = "r4"
+ PARALLEL_MAKE = ""
  
--inherit update-rc.d
--INITSCRIPT_NAME = "sysklogd"
--INITSCRIPT_PARAMS = "start 39 S 1 2 3 . stop 99 0 6 ."
-+# syslog initscript is handled explicitly because order of
-+# update-rc.d and update-alternatives is important (see below)
-+DEPENDS_append = " update-rc.d update-rc.d-native"
-+RDEPENDS_${PN}_append = " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "update-rc.d", d)}"
-+
-+INITSCRIPT_NAME = "syslog"
-+
- CFLAGS_append = " -DSYSV"
--RCONFLICTS = "busybox-syslog"
+ SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
+ 	   file://configure.patch;patch=1 \
+ 	   file://no-docs.patch;patch=1 \
+ 	   file://gpm-OPEN_MAX.patch;patch=1 \
++	   file://ucred-include.patch;patch=1 \
+ 	   file://init"
  
- do_install () {
- 	install -d ${D}${mandir}/man8 \
-@@ -23,14 +27,55 @@ do_install () {
-     install -d ${D}${sysconfdir}
-     install -m 644 ${S}/syslog.conf ${D}${sysconfdir}/syslog.conf
-     install -d ${D}${sysconfdir}/init.d
--    install -m 755 ${WORKDIR}/sysklogd ${D}${sysconfdir}/init.d/sysklogd
-+    install -m 755 ${WORKDIR}/sysklogd ${D}${sysconfdir}/init.d/syslog.${PN}
- }
-+
-+pkg_preinst_${PN} () {
-+    # all this is needed to avoid sysmlink errors,
-+    # because update-rc.d runs before pkg_postinst :(
-+    if [ -e ${sysconfdir}/init.d/syslog -a ! -L ${sysconfdir}/init.d/syslog ]; then
-+        echo "WARNING:" "non symlink ${sysconfdir}/init.d/syslog exist -> backup to ${sysconfdir}/init.d/syslog.old"
-+        mv ${sysconfdir}/init.d/syslog ${sysconfdir}/init.d/syslog.old
-+    fi
-+    if [ ! -e ${sysconfdir}/init.d/syslog ]; then
-+        ln -s dummy ${sysconfdir}/init.d/syslog
-+    fi
-+}
-+
- pkg_postinst_${PN} () {
-     update-alternatives --install ${base_sbindir}/syslogd syslogd syslogd.${PN} 100
-     update-alternatives --install ${base_sbindir}/klogd klogd klogd.${PN} 100
-+    update-alternatives --install ${sysconfdir}/init.d/syslog syslog-init syslog.${PN} 100
-+
-+    if test "x$D" != "x"; then
-+	OPT="-r $D"
-+    else
-+	OPT="-s"
-+    fi
-+    update-rc.d $OPT syslog defaults
- }
-+
- pkg_prerm_${PN} () {
-     update-alternatives --remove syslogd syslogd.${PN}
-     update-alternatives --remove klogd klogd.${PN}
-+
-+    if test "x$D" = "x"; then
-+	if test "$1" = "upgrade" -o "$1" = "remove"; then
-+	    /etc/init.d/syslog stop
-+	fi
-+    fi
-+    update-alternatives --remove syslog-init syslog.${PN}
- }
- 
-+pkg_postrm_${PN} () {
-+    if test "x$D" != "x"; then
-+	OPT="-r $D"
-+    else
-+	OPT=""
-+    fi
-+    if test "$1" = "remove" -o "$1" = "purge"; then
-+	if ! test -e "/etc/init.d/syslog"; then
-+	    update-rc.d $OPT syslog remove
-+	fi
-+    fi
-+}
-diff --git a/recipes/sysklogd/sysklogd_1.4.1.bb b/recipes/sysklogd/sysklogd_1.4.1.bb
-index 3d938f5..e02dd3e 100644
---- a/recipes/sysklogd/sysklogd_1.4.1.bb
-+++ b/recipes/sysklogd/sysklogd_1.4.1.bb
-@@ -1,5 +1,5 @@
- require sysklogd.inc
--PR = "r1"
-+PR = "${INC_PR}.1"
- 
- 
- SRC_URI[md5sum] = "d214aa40beabf7bdb0c9b3c64432c774"
-diff --git a/recipes/sysklogd/sysklogd_1.5.bb b/recipes/sysklogd/sysklogd_1.5.bb
-index 70e55c3..a015768 100644
---- a/recipes/sysklogd/sysklogd_1.5.bb
-+++ b/recipes/sysklogd/sysklogd_1.5.bb
-@@ -1,5 +1,5 @@
- require sysklogd.inc
--PR = "r2"
-+PR = "${INC_PR}.2"
- 
- SRC_URI += "file://no-strip-install.patch;patch=1"
- 
--- 
-1.6.4.2
+ inherit autotools update-rc.d
 
+
+--
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
 
