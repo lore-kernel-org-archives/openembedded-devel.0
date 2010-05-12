@@ -1,33 +1,40 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OC8Xu-0003fe-9I
+	(envelope-from <philb@gnu.org>) id 1OC8xA-00084Y-HM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 11:48:06 +0200
-Received: from [192.168.1.2] (e180154083.adsl.alicedsl.de [85.180.154.83])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 4A662584111
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 11:50:12 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Wed, 12 May 2010 12:14:13 +0200
+Received: from host86-156-69-106.range86-156.btcentralplus.com
+	([86.156.69.106] helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OC8tP-00085A-TP
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 May 2010 11:10:20 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OC8tN-0007gM-W3
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 12 May 2010 11:10:18 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinrTuitVH__A-t7tjdit9HLCf7AYFyl1w4vFLIo@mail.gmail.com>
-References: <20100510232720.GA13708@gmail.com>
-	<201005111239.57770.khimov@altell.ru>
-	<AANLkTinrTuitVH__A-t7tjdit9HLCf7AYFyl1w4vFLIo@mail.gmail.com>
-Organization: Vanille-Media
-Date: Wed, 12 May 2010 11:44:10 +0200
-Message-ID: <1273657450.1773.43.camel@saphir>
+In-Reply-To: <4BE7CEC0.1090300@dresearch.de>
+References: <4BE13C20.1010902@dresearch.de>
+	<20100505094242.GF2444@xora-desktop.xora.org.uk>
+	<4BE141CA.30904@dresearch.de>
+	<1273053926.18119.331.camel@mill.internal.reciva.com>
+	<4BE7CEC0.1090300@dresearch.de>
+Date: Wed, 12 May 2010 11:10:17 +0100
+Message-ID: <1273659017.18119.354.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Move gcc 4.4.3 recipes in favour of 4.4.4
+Subject: Re: linux vs. linux-libc-headers?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,36 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 09:48:06 -0000
+X-List-Received-Date: Wed, 12 May 2010 10:14:13 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 12.05.2010, 11:39 +0200 schrieb Martin Jansa:
-> On Tue, May 11, 2010 at 10:39 AM, Roman I Khimov <khimov@altell.ru> wro=
-te:
-> > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 11 =D0=BC=D0=B0=D1=8F 2010=
- 03:27:20 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=BB:
-> >> 4.4.3 is not so widely used in distributions unlike 4.4.2
->=20
-> Hi,
->=20
-> My guess: just because it's not preferred by sane-toolchain.inc?
->=20
-> >> I can also just add 4.4.4 and leave 4.4.3 as it is if someone wants
-> >> to keep using 4.4.3
-> >
-> > Using 4.4.3 here, think it'd be nice to move to 4.4.4.
->=20
-> what about updating
-> conf/distro/include/sane-toolchain.inc
-> to 4.4.4 if we don't find any new issue with it?
+On Mon, 2010-05-10 at 11:15 +0200, Steffen Sledz wrote:
+> Do you have examples for such fallbacks inside glibc?
 
-Sounds good.
+See do_pread64() in sysdeps/unix/sysv/linux/pread64.c for example.
 
---=20
-:M:
+p.
+
 
 
 
