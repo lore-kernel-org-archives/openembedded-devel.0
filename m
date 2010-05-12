@@ -1,34 +1,32 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1OC95y-0004KH-St
+	(envelope-from <sledz@dresearch.de>) id 1OC96F-0004WG-1l
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 12:23:19 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id A03CC68416
+	Wed, 12 May 2010 12:23:35 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 2A927491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 12 May 2010 14:19:12 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 12 May 2010 14:19:19 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <201005111904.06230.khimov@altell.ru>
-	<4BE9E2AB.5020106@mwester.net>
-In-Reply-To: <4BE9E2AB.5020106@mwester.net>
+	Wed, 12 May 2010 12:19:43 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 12 May 2010 12:21:03 +0200
+Message-ID: <4BEA80C1.9030703@dresearch.de>
+Date: Wed, 12 May 2010 12:19:45 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Message-Id: <201005121419.19307.khimov@altell.ru>
-X-Altell-MailScanner-ID: A03CC68416.C88E2
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 12 May 2010 10:21:03.0761 (UTC)
+	FILETIME=[D379F010:01CAF1BC]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] logrotate scripts policy
+Subject: pkg_postinst order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +40,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 10:23:19 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 12 May 2010 10:23:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 12 =D0=BC=D0=B0=D1=8F 2010 03:05:15 =D0=B0=
-=D0=B2=D1=82=D0=BE=D1=80 Mike Westerhof =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
-=B0=D0=BB:
-> Roman I Khimov wrote:
-> > This way all *-logrotate packages will get installed by default, but not
-> > the logrotate program. So, it will eat some little space in
-> > /etc/logrotate.d for everyone by default (but you can get rid of those
-> > packages if you really don't want them), but would allow to switch
-> > rotation on/off easily with just one package included or not in the
-> > image.
->=20
-> The NSLU2 has a grand total of 8MB of flash space for bootloader,
-> kernel, and the filesystem.  We don't have even a few KB left right now
-> for those extra packages.  Keep in mind that even a 20-byte script will
-> have a large footprint in the opkg database that's on the filesystem, so
-> that space is in addition.
->=20
-> It's really really difficult to build an image without a whole lot of
-> extraneous stuff in it, and I suspect that extraneous stuff is all in
-> there for the same reasoning, which goes along the lines of "It's only a
-> little bit of space..." -- but it all adds up, and when your total
-> rootfs can only be 5.5 MB or so...
+Is there any chance to sort own pkg_postinst *before* pkg_postint inherited from update-rc.d?
 
-OK, that's exactly the kind of feedback I've wanted to get. But as such=20
-constraints are not common (or they are?), I still think that this should b=
-e=20
-(and easier to) implemented in opt-out fashion. So, I'll try to cook up a=20
-patch today that does=20
+Steffen
 
-RRECOMMENDS_${PN} +=3D "${PN}-logrotate"
-RSUGGESTS_${PN}-logrotate +=3D "logrotate"
-
-and then add some "PURGE_LOGROTATE" variable that will trigger *-logrotate=
-=20
-packages removal from image if there is a need to.
 
 
