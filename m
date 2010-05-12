@@ -1,40 +1,34 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OC8xA-00084Y-HM
+	(envelope-from <khimov@altell.ru>) id 1OC95y-0004KH-St
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 12:14:13 +0200
-Received: from host86-156-69-106.range86-156.btcentralplus.com
-	([86.156.69.106] helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OC8tP-00085A-TP
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 11:10:20 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OC8tN-0007gM-W3
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 11:10:18 +0100
-From: Phil Blundell <philb@gnu.org>
+	Wed, 12 May 2010 12:23:19 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id A03CC68416
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 12 May 2010 14:19:12 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BE7CEC0.1090300@dresearch.de>
-References: <4BE13C20.1010902@dresearch.de>
-	<20100505094242.GF2444@xora-desktop.xora.org.uk>
-	<4BE141CA.30904@dresearch.de>
-	<1273053926.18119.331.camel@mill.internal.reciva.com>
-	<4BE7CEC0.1090300@dresearch.de>
-Date: Wed, 12 May 2010 11:10:17 +0100
-Message-ID: <1273659017.18119.354.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Wed, 12 May 2010 14:19:19 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <201005111904.06230.khimov@altell.ru>
+	<4BE9E2AB.5020106@mwester.net>
+In-Reply-To: <4BE9E2AB.5020106@mwester.net>
+MIME-Version: 1.0
+Message-Id: <201005121419.19307.khimov@altell.ru>
+X-Altell-MailScanner-ID: A03CC68416.C88E2
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: linux vs. linux-libc-headers?
+Subject: Re: [RFC] logrotate scripts policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,17 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 10:14:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 12 May 2010 10:23:19 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2010-05-10 at 11:15 +0200, Steffen Sledz wrote:
-> Do you have examples for such fallbacks inside glibc?
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 12 =D0=BC=D0=B0=D1=8F 2010 03:05:15 =D0=B0=
+=D0=B2=D1=82=D0=BE=D1=80 Mike Westerhof =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
+=B0=D0=BB:
+> Roman I Khimov wrote:
+> > This way all *-logrotate packages will get installed by default, but not
+> > the logrotate program. So, it will eat some little space in
+> > /etc/logrotate.d for everyone by default (but you can get rid of those
+> > packages if you really don't want them), but would allow to switch
+> > rotation on/off easily with just one package included or not in the
+> > image.
+>=20
+> The NSLU2 has a grand total of 8MB of flash space for bootloader,
+> kernel, and the filesystem.  We don't have even a few KB left right now
+> for those extra packages.  Keep in mind that even a 20-byte script will
+> have a large footprint in the opkg database that's on the filesystem, so
+> that space is in addition.
+>=20
+> It's really really difficult to build an image without a whole lot of
+> extraneous stuff in it, and I suspect that extraneous stuff is all in
+> there for the same reasoning, which goes along the lines of "It's only a
+> little bit of space..." -- but it all adds up, and when your total
+> rootfs can only be 5.5 MB or so...
 
-See do_pread64() in sysdeps/unix/sysv/linux/pread64.c for example.
+OK, that's exactly the kind of feedback I've wanted to get. But as such=20
+constraints are not common (or they are?), I still think that this should b=
+e=20
+(and easier to) implemented in opt-out fashion. So, I'll try to cook up a=20
+patch today that does=20
 
-p.
+RRECOMMENDS_${PN} +=3D "${PN}-logrotate"
+RSUGGESTS_${PN}-logrotate +=3D "logrotate"
 
-
+and then add some "PURGE_LOGROTATE" variable that will trigger *-logrotate=
+=20
+packages removal from image if there is a need to.
 
 
