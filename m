@@ -1,44 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCTYL-0007EH-BW for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 10:13:58 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCTUa-0001Jt-4f for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 10:10:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 10:10:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <khimov@altell.ru>) id 1OCTlL-0002kC-GT
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 10:27:25 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 933F768416
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 10:10:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 13 May 2010 12:23:19 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 May 2010 09:58:22 +0200
-Message-ID: <hsgbeu$a9i$4@dough.gmane.org>
-References: <1273182940.4942.10.camel@T61> <hse1bq$k70$1@dough.gmane.org>
-	<20100512183815.GA27784@excalibur.local>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <20100512183815.GA27784@excalibur.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 13 May 2010 12:23:22 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <alpine.DEB.2.00.1005121722300.14972@lynx>
+	<201005130953.59314.roman@khimov.ru> <20100513064037.GB3370@jama>
+In-Reply-To: <20100513064037.GB3370@jama>
+MIME-Version: 1.0
+Message-Id: <201005131223.22252.khimov@altell.ru>
+X-Altell-MailScanner-ID: 933F768416.18973
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bug20/xorg.conf: update to use tslib driver for touchscreen input device.
+Subject: Re: some possible fixes in the OE web pages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +42,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 08:13:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 May 2010 08:27:25 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 10:40=
+:37 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Martin Jansa =D0=BD=D0=B0=D0=BF=D0=B8=D1=
+=81=D0=B0=D0=BB:
+> On Thu, May 13, 2010 at 09:53:54AM +0400, Roman I Khimov wrote:
+> > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 0=
+1:30:53 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Robert P. J. Day=20
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > > * on http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu,
+> > > there's a reference to configuring for qemu-arm:
+> > >
+> > >   echo 128 > /proc/sys/vm/mmap_min_addr
+> > >
+> > > from memory, i always simply set that to zero on fedora.  is there
+> > > something magic about the value 128?  at the moment, it's at the
+> > > default value of 65536 on this ubuntu system.
+> >
+> > With current qemu in OE mmap_min_addr tricks are not needed at all.
+>=20
+> On some systems (I have report from fedora and kubuntu) it still needs 0
+> in mmap_min_addr :/.
+>=20
+> Investigating why, but it's slow because it doesn't fail on my box.
+>=20
+> My guess is that this chunk from
+> http://git.qemu.org/qemu.git/tree/linux-user/main.c
+> cannot work on systems where normal user is not allowed to read
+> /proc/sys/vm/mmap_min_addr and mmap_min_addr is not initialized with
+> sane value.
 
-On 12-05-10 20:38, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Wed, 2010-05-12 at 12:53, Koen Kooi wrote:
->>
->> You forgot to bump PR in that patch
-> 
-> Yeah, and I forgot to bump it when testing and pushing it. Done now, thanks.
+Just checked with Ubuntu and Fedora, it really isn't possible to read=20
+/proc/sys/vm/mmap_min_addr as regular user, although it has 644 permissions=
+ on=20
+it. "Security"? Damn.
 
-And you slipped in an imote2 change :)
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+[after 15 minutes]
 
-iD8DBQFL67EeMkyGM64RGpERAiD5AKCr1mspUIg3BcPRo4BVcHWVlwyCKACgpBM+
-Nq8FovLy7/GkCoQHdvGWXQg=
-=UnZ9
------END PGP SIGNATURE-----
+OK, actually there is a useful entry on Launchpad:
+https://bugs.launchpad.net/ubuntu/+source/linux/+bug/568844
 
+The real solution is in the kernel, it should be fixed for latest Ubuntu an=
+d=20
+hopefully Fedora will catch up on this issue too.
+
+http://git.kernel.org/?p=3Dlinux/kernel/git/jmorris/security-
+testing-2.6.git;a=3Dcommitdiff;h=3D822cceec7248013821d655545ea45d1c6a9d15b3
+
+Interesting that openSUSE with 2.6.31 kernel doesn't have such problems... =
+And=20
+our main build machine with Debian stable + 2.6.30 kernel works fine too.=20
+Probably this check got introduced in 2.6.32.
+
+Well, as the problem is in the kernel really, I think everyone having this=
+=20
+problem should push distro maintainers to update kernels with the tiny fix=
+=20
+mentioned above. But as a workaround, yep, "0" setting might work (beware t=
+hat=20
+it might also not work as in here:
+https://bugs.launchpad.net/ubuntu/+source/linux/+bug/423513
+).
 
 
