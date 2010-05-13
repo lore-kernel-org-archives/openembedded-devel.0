@@ -1,41 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1OCVKK-0003zR-4Q
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:07:36 +0200
-Received: by fxm11 with SMTP id 11so1031214fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCVQy-0006ia-Rv for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 12:14:31 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCVND-00028D-Qz for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 12:10:35 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 12:10:35 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 03:03:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=rm80DQiEJyEezCXsheFKWeMmV67vJ5o24Q9LgoA7r4c=;
-	b=LSiqpwvc42DpVvhHBKQ9VHwfUVVHelumv2dUJ3Ae3iabOzOv1Pqs0mq2QlntHXY5jl
-	kRtNxYv6QyiLfQ8NIeSFS5rt0/O7hh7BvgJqJ7hmREfWPuntazUUhinqsRl+HyhuPkUd
-	2236JeSZA06g853wybkXKMB2H3GXbruBHe26E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Es5LlMCZNYePknNpMlz/m8es1Irri9Ce8blrW77gbbiuQ9a5slYsBV3hmYfR4w1Xhj
-	eDitA1INP/Jx+8l9e8UO0PlDDZgUpFMtHpgJdkv4Ke09Wsiom2fkBf5lFuUDeiWsxYXg
-	CxITDw73bLujGrW6NDiJpc0Dy48I8EXCqVC5A=
-MIME-Version: 1.0
-Received: by 10.239.131.78 with SMTP id 14mr882475hbm.7.1273745020423; Thu, 13 
-	May 2010 03:03:40 -0700 (PDT)
-Received: by 10.239.169.17 with HTTP; Thu, 13 May 2010 03:03:40 -0700 (PDT)
-Date: Thu, 13 May 2010 12:03:40 +0200
-Message-ID: <AANLkTinbdSQqop_YbzlaGsWGQllBIrq5w-l4WPqUReW6@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	Thu, 13 May 2010 12:10:35 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 13 May 2010 12:10:18 +0200
+Message-ID: <hsgj6b$4s5$1@dough.gmane.org>
+References: <20100513084311.GH1136@hindley.org.uk>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <20100513084311.GH1136@hindley.org.uk>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: udev static
+Subject: Re: h3900: Kernel 2.4/2.6 selector or build for Famliar
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,31 +51,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 10:07:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 13 May 2010 10:14:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Using udev 141 in nfs I had frequently a very long delay after the message
-"Starting udev".
-If I do a ctrl-c the system goes on.
-But sometimes there are some devices lacking, obviously.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-So I look inside udev and I saw many udev rules in /etc/udev/rules.d
-directory.
+On 13-05-10 10:43, Mark Hindley wrote:
+> Hi,
+> 
+> I have been trying to build some more recent GPE packages for my h3900
+> which is running Familiar. I have managed it successfully by fixing and
+> adding .bb files to the Familiar build tree, but as Familiar dev seems
+> to have finished, I was wondering whether it was more sensible to use
+> current OE.
+> 
+> Hardware support for 2.6 in Angstrom is not really complete enough for
+> everyday use. 
+> 
+> I was thinking of adding a 2.4/2.6 kernel selector for h3900 (in the
+> same way as collie etc) and then using distro/angstrom (with the
+> necessary PREFERRED_VERSION overrides in local.conf) or recreating
+> distro/familiar.
+> 
+> Does anybody have any thoughts/comments/suggestions/caveats on this approach?
 
-I know that Angstrom is focused for a general purpose usage, but in my
-embedded case I don't need it and I prefer a quick boot with fix devices
-create.
-What I'll need is to trigger automount of usb serial, SD card, usb pen, and
-similar things.
-So I have modified udev to populate, similarly to udev-static-devices.bb,
-the /dev directory mounted.
-I also notice the DEVCACHE functionality, that it seems a little bit
-dangerouse in my case.
-My idea is to create a new recipe, named udev-static, in which I'll use
-udev-static-device and than I'll put only some rule as example using RUN
-udev function.
+http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/distro/angstrom-2008.1-legacy.conf
+was created just for a situation like this :)
 
-It is a good idea?
-Thanks.
-Raffaele
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD4DBQFL69AKMkyGM64RGpERApU/AJitrZV3MNfMkLQF2vXH2j5IbaCWAJsG4cjI
+xhiqy+KxaSqRnT/dXn+kZA==
+=Kdlz
+-----END PGP SIGNATURE-----
+
+
 
