@@ -1,39 +1,42 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OCWq2-0000kQ-NN
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCXHn-0003GY-6c
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 13:44:28 +0200
-Received: from host86-156-69-106.range86-156.btcentralplus.com
-	([86.156.69.106] helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OCWmG-0003xJ-NE
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:40:32 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OCWmG-0006A2-Bk
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:40:32 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BEA448D.5060008@dresearch.de>
-References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
-	<1273518881.22943.378.camel@trini-m4400>	<4BE90A56.3090605@dresearch.de>
-	<1273588024.22943.391.camel@trini-m4400>
-	<4BEA448D.5060008@dresearch.de>
-Date: Thu, 13 May 2010 12:40:31 +0100
-Message-ID: <1273750831.18119.498.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+	Thu, 13 May 2010 14:13:08 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OCXDy-0002Ir-MG for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 08:09:10 -0400
+Date: Thu, 13 May 2010 08:09:03 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+In-Reply-To: <alpine.DEB.2.00.1005122030010.2471@lynx>
+Message-ID: <alpine.DEB.2.00.1005130808100.8347@lynx>
+References: <alpine.DEB.2.00.1005122030010.2471@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Kernel Headers Quality Issue
+Subject: Re: current error: fetching enlightenment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,50 +50,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 11:44:29 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-
-On Wed, 2010-05-12 at 08:02 +0200, Steffen Sledz wrote:
-> linux-libc-headers may be newer than kernel version
-> -> autotools report availability of some syscalls (e.g. inotify_init1 or epoll_create1)
-> -> apps can use them
-> -> if called on older kernels glibc will handle this "gracefully"
-> -> fine
-> 
-> But tests showed that glibc did not handle syscalls this way.
-
-It sounds like we have, perhaps, been talking at slight cross purposes.
-
-It is true that you can build glibc against a different version of
-linux-libc-headers than the version of the kernel that will be used at
-runtime.  So long as the runtime kernel version is newer than the
-minimum kernel version that glibc was configured for (either via
---enable-kernel=XXX, or via an architecture-specific static definition)
-then everything should still work fine, and glibc will use internal
-fallbacks if it discovers that certain system calls are not available at
-runtime.
-
-Similarly, glibc will make some efforts to provide a backwards
-compatible emulation for user-visible interfaces which might not be
-available in all kernel versions.  However, what it doesn't attempt to
-do is provide a completely virtualised ABI which would insulate the
-application entirely from the details of the running kernel.  There are
-some kernel features which simply aren't feasible to emulate in user
-space.
-
-In the specific case of epoll_create1() and inotify_init1(), it would be
-reasonable for glibc to do something similar to the way that, say,
-mmap64() is handled.  That is, if the kernel doesn't have
-epoll_create1() but does have epoll_create(), and the behaviour that the
-user has requested is something that epoll_create() can do (i.e. none of
-the flag bits are set) then use epoll_create().  But if the user has
-asked for EPOLL_CLOEXEC then epoll_create() is not a suitable
-replacement and you are going to get ENOSYS: it's then up to the
-application to take some suitable recovery action.
-
-p.
+X-List-Received-Date: Thu, 13 May 2010 12:13:08 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
+  not to sound naggy but any proposed fix for this?
+
+On Wed, 12 May 2010, Robert P. J. Day wrote:
+
+>
+>   just did a "git pull" followed by a bitbake fetchall and ...
+>
+> ...
+> NOTE: Update
+> svn://svn.enlightenment.org/svn/e/trunk;module=e;proto=http
+> svn: Failed to add directory 'src': an unversioned directory of the
+> same name already exists
+> NOTE: Task failed: Fetch failed: Fetch command export
+> HOME=/home/rpjday; export SSH_AUTH_SOCK=/tmp/keyring-Ll3M8v/ssh;
+> export
+> PATH=/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/sbin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin:/home/rpjday/oe/angstrom-dev/cross/armv7a//bin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/sbin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
+> /usr/bin/env svn update -r 48775 failed with signal 1, output:
+> svn: Failed to add directory 'src': an unversioned directory of the
+> same name already exists
+>
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of /home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb
+> do_fetch failed
+> ERROR: Task 439 (/home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb,
+> do_fetch) failed
+> NOTE: Tasks Summary: Attempted 1331 tasks of which 1331 didn't need to
+> be rerun and 1 failed.
+> ERROR: '/home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb' failed
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
