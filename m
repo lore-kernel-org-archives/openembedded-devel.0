@@ -1,43 +1,51 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCVQy-0006ia-Rv for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:14:31 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCVND-00028D-Qz for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:10:35 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 12:10:35 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1OCVSC-0002le-6C
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 12:15:44 +0200
+Received: by fxm11 with SMTP id 11so1038989fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 12:10:35 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 13 May 2010 03:11:49 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=M1yKwGWRSoxavGP2R9S9JvupeaqzVRDGUlKBvKbAosU=;
+	b=vvtzxxaP1Zfa8I24t88daetXgvKuYNmwA+at47L3k2ar1Z0Hg0iozVqGQ1AAid4tyM
+	sDlAYh3wJWjeGld88ANoQ5fKCpciVg0//w4tVqTXCL3kxLlvmWZjxRQTqoJ04pQIsupk
+	6mZWqmHSpohwnIqHqzYXxdkUbUmt5O2nP3gDY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=hManK7ahmc6gOEAPjmC6C4sWJZOLwiqj7DfU8IWScWLHVIb7Mnrb570KdFDSc0CwtU
+	GLzpsA8VenbBa1GXYyGsO0u9F64+tDmCMDY9Az/TmEtn/L+MgsHer1VTuCtDn7OkQTjN
+	SJfeIOom+Pd3urEpvpflm2J6Q8Q0v+1xVIOKg=
+Received: by 10.223.29.156 with SMTP id q28mr2886086fac.77.1273745509215;
+	Thu, 13 May 2010 03:11:49 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y12sm5165778faj.5.2010.05.13.03.11.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 13 May 2010 03:11:48 -0700 (PDT)
+Date: Thu, 13 May 2010 12:11:49 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 May 2010 12:10:18 +0200
-Message-ID: <hsgj6b$4s5$1@dough.gmane.org>
-References: <20100513084311.GH1136@hindley.org.uk>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <20100513084311.GH1136@hindley.org.uk>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100513101149.GI3370@jama>
+References: <alpine.DEB.2.00.1005121722300.14972@lynx>
+	<201005131223.22252.khimov@altell.ru> <20100513084633.GC3370@jama>
+	<201005131259.13508.khimov@altell.ru> <20100513092320.GE3370@jama>
+	<20100513093814.GG3370@jama>
+MIME-Version: 1.0
+In-Reply-To: <20100513093814.GG3370@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: h3900: Kernel 2.4/2.6 selector or build for Famliar
+Subject: Re: QEMU mmap_min_addr issue Was: some possible fixes in the OE web pages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +59,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 10:14:31 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 May 2010 10:15:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, May 13, 2010 at 11:38:14AM +0200, Martin Jansa wrote:
+> > Can we compare this simple test between working and non-working systems?
 
-On 13-05-10 10:43, Mark Hindley wrote:
-> Hi,
-> 
-> I have been trying to build some more recent GPE packages for my h3900
-> which is running Familiar. I have managed it successfully by fixing and
-> adding .bb files to the Familiar build tree, but as Familiar dev seems
-> to have finished, I was wondering whether it was more sensible to use
-> current OE.
-> 
-> Hardware support for 2.6 in Angstrom is not really complete enough for
-> everyday use. 
-> 
-> I was thinking of adding a 2.4/2.6 kernel selector for h3900 (in the
-> same way as collie etc) and then using distro/angstrom (with the
-> necessary PREFERRED_VERSION overrides in local.conf) or recreating
-> distro/familiar.
-> 
-> Does anybody have any thoughts/comments/suggestions/caveats on this approach?
+You can ignore both tests.. the difference is value of mmap_min_addr
+4096 work OK
+65536 fails for me too
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/distro/angstrom-2008.1-legacy.conf
-was created just for a situation like this :)
+I'll patch qemu-native to assume 65536 when it cannot read
+mmap_min_addr.
 
-regards,
+Cheers,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD4DBQFL69AKMkyGM64RGpERApU/AJitrZV3MNfMkLQF2vXH2j5IbaCWAJsG4cjI
-xhiqy+KxaSqRnT/dXn+kZA==
-=Kdlz
------END PGP SIGNATURE-----
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
