@@ -1,36 +1,30 @@
-Received: from li38-254.members.linode.com ([207.192.74.254]
-	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sgarman@zenlinux.com>) id 1OCQ1Y-00011t-Ps
+Received: from sencha.khimov.ru ([89.223.109.22])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <roman@khimov.ru>) id 1OCRQi-0002gf-CO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 06:27:53 +0200
-Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
-	[76.115.42.183])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by masterfoo.zenlinux.com (Postfix) with ESMTP id 4793330F06
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 00:23:55 -0400 (EDT)
-Message-ID: <4BEB7EEB.7080708@zenlinux.com>
-Date: Wed, 12 May 2010 21:24:11 -0700
-From: Scott Garman <sgarman@zenlinux.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
-MIME-Version: 1.0
+	Thu, 13 May 2010 07:57:57 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OCRMv-0005da-A8
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 09:54:02 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-MasterFoo-MailScanner-Information: Please contact the ISP for more
-	information
-X-MailScanner-ID: 4793330F06.A798C
-X-MasterFoo-MailScanner: Found to be clean
-X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
-X-SA-Exim-Connect-IP: 207.192.74.254
-X-SA-Exim-Mail-From: sgarman@zenlinux.com
+Date: Thu, 13 May 2010 09:53:54 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <alpine.DEB.2.00.1005121722300.14972@lynx>
+In-Reply-To: <alpine.DEB.2.00.1005121722300.14972@lynx>
+MIME-Version: 1.0
+Message-Id: <201005130953.59314.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: chrpath for RHEL 5
+Subject: Re: some possible fixes in the OE web pages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,31 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 04:27:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 13 May 2010 05:57:58 -0000
+X-Groupsio-MsgNum: 19218
+Content-Type: multipart/signed; boundary="nextPart9437361.HpaZjMkkmh";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hello,
+--nextPart9437361.HpaZjMkkmh
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-There was some recent discussion here about how the adoption of chrpath 
-would make it especially difficult for RHEL 5 users to build OE.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 01:30=
+:53 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Robert P. J. Day =D0=BD=D0=B0=D0=BF=D0=
+=B8=D1=81=D0=B0=D0=BB:
+> * on http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu,
+> there's a reference to configuring for qemu-arm:
+>=20
+>   echo 128 > /proc/sys/vm/mmap_min_addr
+>=20
+> from memory, i always simply set that to zero on fedora.  is there
+> something magic about the value 128?  at the moment, it's at the
+> default value of 65536 on this ubuntu system.
 
-I happened to be browsing the packages of the EPEL repository (which I 
-use on one of my servers as it offers clamav packages), and noticed that 
-chrpath v0.13 is available in this repo.
+With current qemu in OE mmap_min_addr tricks are not needed at all.
 
-http://download.fedora.redhat.com/pub/epel/5/i386/
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-For more info:
+--nextPart9437361.HpaZjMkkmh
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-http://fedoraproject.org/wiki/EPEL/FAQ
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-Just thought I'd pass this info along...
+iEYEABECAAYFAkvrk/cACgkQXJ70z+XgVcPNWwCeKA88h4EHEgXfOHvNVK5kWa9g
+4PIAoIK9S0xP/KSGx5UkxpPXZkyip2M/
+=Z5BK
+-----END PGP SIGNATURE-----
 
-Scott
-
--- 
-Scott Garman
-sgarman at zenlinux dot com
-
-
+--nextPart9437361.HpaZjMkkmh--
