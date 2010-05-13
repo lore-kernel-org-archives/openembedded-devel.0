@@ -1,41 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCZPU-0008U9-OW for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 16:29:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCZLZ-0006YF-OC for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 16:25:09 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 16:25:09 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 16:25:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 May 2010 16:25:01 +0200
-Message-ID: <hsh23u$v6m$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCame-0000to-1S
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 17:57:13 +0200
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OCair-0001EP-BM for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 11:53:17 -0400
+Date: Thu, 13 May 2010 11:53:11 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1005131147350.2007@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: TSC meeting minutes?
+Subject: chance to document entire OE setup on ubuntu 10.04
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 14:30:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 May 2010 15:57:13 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Hi,
+  while this sounds decidedly unsexy, given that i'm just getting into
+ubuntu 10.04, i have the chance to document every step it takes to
+setup OE on a fresh, default 10.04 install, including what packages
+are *actually* required since i suspect some of the ones currently
+listed aren't technically necessary.
 
-I know there has been a TSC meeting last week, and I already know some
-of the outcome because I prodded Richard, but it would be nice if the
-TSC would publish the minutes of the meeting somewhere.
+  i've already documented what i've had to do so far and that's how i
+tripped across that mmap_min_addr inconsistency.  right now, i'm
+curious as to how many publishing packages are really needed, since i
+note that there are references to the docbook and docbook-utils
+packages, but those generally refer back to the older SGML-based
+rendering, while the newer docbook-xml package sort of supersedes
+that.
 
-For the next meeting could the TSC please aim for sending out the
-minutes within the next 2 business days? If the schedule is still the
-same, you'd get 2 days for free due to the weekend.
+  in any event, if there's anything you want me to check while i'm
+working on this, let me know; otherwise, i'll just document it for my
+benefit and submit any noticeable changes i find that differ from the
+current web pages.
 
-regards,
+rday
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+-- 
 
-iD8DBQFL7Au9MkyGM64RGpERAhgtAJwLUn9kMXtAR69rFgSu60tP68IujACffSQC
-YvEPtIsjWt3Gu7KmUrzTqmw=
-=hcqF
------END PGP SIGNATURE-----
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
