@@ -1,45 +1,42 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OCVEJ-0001El-Bn
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCVEn-0001lM-V8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:01:26 +0200
-Received: by fxm12 with SMTP id 12so159660fxm.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 02:57:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=MYZFbybRCh/LtbRDrsfvvxXAbOo/stmHwN3XwQlVCC4=;
-	b=aGOfMynzoBaEVdGznk4VT6mPmek33LTbDKygUpKu6nE6eb4Pjw3qN1kqNT3Wm69rnG
-	jQLyIU36zKLr19yBrHli3VPHw/s5cIX9KeTPBq1VLGchO4ag+vaUOQbQr3eZk1c/KhcG
-	oWgKofJUr8vRuwZnEgaG98n3RZXZ2k3C5UASc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=EZR0EVaWr7YM1PHU9O+//qt1H+mN4Kx7Fsfmbs0jzEa+MUlBPZB2Ub9q5qseIdTVPG
-	Uua0rl7l6cRfO/cHftz7iLKbMNKJpCw5w0uxPUgYzR5/Xswf7sSDweZoVhM4jkCT2kRV
-	fMw3KupYQdK4+qHAyp9Dn5JBXMhRg5cOYrA6U=
-Received: by 10.223.97.149 with SMTP id l21mr9754071fan.91.1273744644560;
-	Thu, 13 May 2010 02:57:24 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 2sm5100236fav.13.2010.05.13.02.57.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 13 May 2010 02:57:24 -0700 (PDT)
-Date: Thu, 13 May 2010 11:57:25 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 13 May 2010 12:01:56 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OCVB1-0008Kj-Rv for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 05:58:00 -0400
+Date: Thu, 13 May 2010 05:57:50 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100513095725.GH3370@jama>
+In-Reply-To: <201005130953.59314.roman@khimov.ru>
+Message-ID: <alpine.DEB.2.00.1005130551490.7319@lynx>
+References: <alpine.DEB.2.00.1005121722300.14972@lynx>
+	<201005130953.59314.roman@khimov.ru>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.51
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: install_linguas using public feed for locale package install?
+Subject: Re: some possible fixes in the OE web pages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,29 +50,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 10:01:26 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 May 2010 10:01:56 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1175840061-1273744680=:7319"
 
-Today I noticed that with every do_rootfs I see few downloads from my
-webserver (where is DISTRO_FEED_URI pointing).
+--8323329-1175840061-1273744680=:7319
+Content-Type: TEXT/PLAIN; charset=utf-8
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
-I guess it's because install_linguas from image.bbclass.
+On Thu, 13 May 2010, Roman I Khimov wrote:
 
-Is there some special reason why it's not used from deploy/ipk directly?
-it's not problem here, but if public feed is not in sync with deploy/ipk
-it can be IMHO pretty bad (locale .ipk cannot be found or different version).
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 0=
+1:30:53 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Robert P. J. Day =D0=BD=D0=B0=D0=BF=
+=D0=B8=D1=81=D0=B0=D0=BB:
+> > * on http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu,
+> > there's a reference to configuring for qemu-arm:
+> >
+> >   echo 128 > /proc/sys/vm/mmap_min_addr
+> >
+> > from memory, i always simply set that to zero on fedora.  is there
+> > something magic about the value 128?  at the moment, it's at the
+> > default value of 65536 on this ubuntu system.
+>
+> With current qemu in OE mmap_min_addr tricks are not needed at all.
 
-BTW: that's probably the reason I didn't get any locales available
-with last rebuild from scratch on shr buildhost (rsync to public feed
-started manually after image build) resulting in:
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=e38c2c1286f25518770d6c668dc43939476f312d
+  really?  that's probably worth mentioning, then, both at the above
+link at the OE wiki, and i saw a similar page over at the angstrom
+wiki but can't recall where the page was.  dang.
 
-Regards,
+rday
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+--=20
 
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+--8323329-1175840061-1273744680=:7319--
