@@ -1,36 +1,37 @@
 Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OCYnl-0001Yp-Lr
+	(envelope-from <aalonso00@gmail.com>) id 1OCYnn-0001am-5L
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 15:50:14 +0200
-Received: by pwj5 with SMTP id 5so639908pwj.6
+	Thu, 13 May 2010 15:50:15 +0200
+Received: by pwj5 with SMTP id 5so639931pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 06:46:17 -0700 (PDT)
+	Thu, 13 May 2010 06:46:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=cYbuC4UCYgO4yBr2+SwvSRxlNDlwJUw5l8bY86F19Jw=;
-	b=cZfHA5P/D4Bq525lNz42FrqC5bJ6OJgVSJCLWYZTOAVAbHLFSmhy5fal7usyvj3xXw
-	yLd/Ab8LZXEjEv18Z2YXAuZfnfiETGIW5V0XC6hRylWlKMAklAtt6mTjT09aGCpLOi4z
-	0pszVqn8SFcYeDsBIuTWa40eHMFlZFSSpWUQk=
+	bh=KPw0OZhfqH48GpkzhbxmL6q47gpQoruGvcrQCOWuv3c=;
+	b=Met+pZJI2vIKB9KgzB9oJJ14/SZEDhVUC3X6taR5YQ1Vby2HyeRfyO92rgBgsj4V2r
+	CH20fMisDcKoRCoosVKVkoHjDwgXc4Xyb686q7AgIZjbfKCeZGAN2Mb9ZZ6qcPM5s2wx
+	xTNAemT8mkE4HAGx6RZXnj8H4SKXaRXZaDkKs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=r+lyPcICG7j3oxwwhuZWvPqNmwAYMGlLPHEZkumzVi9zG6mRmBeEPYjtj3WpgeAhw3
-	Wjh5Hkrit19zGgECtdKakWnKyqYTG/71i0X0iDQldtUPwuAaL6BJbGTvNcuXaljSHSU1
-	N6w212Ai9XQMnpklukBA+8olZFqt/rtHxTBzc=
-Received: by 10.141.213.24 with SMTP id p24mr6171302rvq.291.1273758377494;
-	Thu, 13 May 2010 06:46:17 -0700 (PDT)
+	b=uQvwdbKPddVrLvn3KPJRpE4PogxgbvAsefFMQfFkFOP6Q8zMNRk86BtE+Gq0uwdzMr
+	sB2zPylBNl3PdPVZ8o2fo22KKPOfQSzo9qn5IPmByqFnpHsmQYQ0K4hLWNYqsXvp+Bqu
+	ZEg1wM53xRCHVB0JFvBV6EyTQPY8vdTWdJ1CY=
+Received: by 10.141.105.17 with SMTP id h17mr6152789rvm.293.1273758379299;
+	Thu, 13 May 2010 06:46:19 -0700 (PDT)
 Received: from localhost.localdomain ([201.153.77.51])
-	by mx.google.com with ESMTPS id d14sm1098627rva.18.2010.05.13.06.46.15
-	(version=SSLv3 cipher=RC4-MD5); Thu, 13 May 2010 06:46:16 -0700 (PDT)
+	by mx.google.com with ESMTPS id d14sm1098627rva.18.2010.05.13.06.46.17
+	(version=SSLv3 cipher=RC4-MD5); Thu, 13 May 2010 06:46:18 -0700 (PDT)
 From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 May 2010 08:46:37 -0500
-Message-Id: <1273758399-23601-3-git-send-email-aalonso00@gmail.com>
+Date: Thu, 13 May 2010 08:46:38 -0500
+Message-Id: <1273758399-23601-4-git-send-email-aalonso00@gmail.com>
 X-Mailer: git-send-email 1.6.6.1
-In-Reply-To: <1273758399-23601-2-git-send-email-aalonso00@gmail.com>
+In-Reply-To: <1273758399-23601-3-git-send-email-aalonso00@gmail.com>
 References: <1273758399-23601-1-git-send-email-aalonso00@gmail.com>
 	<1273758399-23601-2-git-send-email-aalonso00@gmail.com>
+	<1273758399-23601-3-git-send-email-aalonso00@gmail.com>
 X-SA-Exim-Connect-IP: 209.85.160.47
 X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -39,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 3/5 v2] linux-xilinx-ml507: update kernel version
+Subject: [PATCH 4/5 v2] xilinxfb: new patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,42 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 13:50:14 -0000
+X-List-Received-Date: Thu, 13 May 2010 13:50:16 -0000
 
-* Update kernel version 2.6.33
-* Include xilinx framebuffer patch
+* Update hardware TFT video compatibility modules
 
 Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 ---
- recipes/linux/linux-xilinx-ml507_git.bb |    7 ++++---
- 1 files changed, 4 insertions(+), 3 deletions(-)
+ recipes/linux/linux-xilinx-ml507/xilinxfb.patch |   26 +++++++++++++++++++++++
+ 1 files changed, 26 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/linux/linux-xilinx-ml507/xilinxfb.patch
 
-diff --git a/recipes/linux/linux-xilinx-ml507_git.bb b/recipes/linux/linux-xilinx-ml507_git.bb
-index ec9de1c..fd3e33e 100644
---- a/recipes/linux/linux-xilinx-ml507_git.bb
-+++ b/recipes/linux/linux-xilinx-ml507_git.bb
-@@ -1,17 +1,18 @@
- require linux.inc
- 
- DESCRIPTION = "Linux kernel for Xilinx ml507 platform"
--KERNEL_RELEASE = "2.6.32+git"
-+KERNEL_RELEASE = "2.6.33+git"
- 
- COMPATIBLE_MACHINE = "xilinx-ml507"
- DEFAULT_PREFERENCE = "-1"
- DEFAULT_PREFERENCE_xilinx-ml507 = "1"
- 
- PV = "${KERNEL_RELEASE}"
--PR = "r0"
-+PR = "r1"
- 
--SRCREV = "dc53725d22405e384b984d222542f526eaa9b829"
-+SRCREV = "17431547113100a3ae0a622b9f76ad17fb76eb56"
- SRC_URI = "git://git.xilinx.com/linux-2.6-xlnx.git;protocol=git \
-+           file://xilinxfb.patch;patch=1 \
-            file://defconfig"
- 
- inherit kernel xilinx-bsp
+diff --git a/recipes/linux/linux-xilinx-ml507/xilinxfb.patch b/recipes/linux/linux-xilinx-ml507/xilinxfb.patch
+new file mode 100644
+index 0000000..ec33361
+--- /dev/null
++++ b/recipes/linux/linux-xilinx-ml507/xilinxfb.patch
+@@ -0,0 +1,26 @@
++From 54dc9b9e9cced3204b9d9a8a27319d9de662af3b Mon Sep 17 00:00:00 2001
++From: Adrian Alonso <aalonso00@gmail.com>
++Date: Wed, 31 Mar 2010 22:14:55 -0600
++Subject: [PATCH] xilinxfb.c: add tft compatibility versions
++
++Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
++---
++ drivers/video/xilinxfb.c |    2 ++
++ 1 files changed, 2 insertions(+), 0 deletions(-)
++
++diff --git a/drivers/video/xilinxfb.c b/drivers/video/xilinxfb.c
++index ed7c8d0..829efaa 100644
++--- a/drivers/video/xilinxfb.c
+++++ b/drivers/video/xilinxfb.c
++@@ -484,6 +484,8 @@ static int __devexit xilinxfb_of_remove(struct of_device *op)
++ /* Match table for of_platform binding */
++ static struct of_device_id xilinxfb_of_match[] __devinitdata = {
++ 	{ .compatible = "xlnx,xps-tft-1.00.a", },
+++	{ .compatible = "xlnx,xps-tft-2.00.a", },
+++	{ .compatible = "xlnx,xps-tft-2.01.a", },
++ 	{ .compatible = "xlnx,plb-tft-cntlr-ref-1.00.a", },
++ 	{ .compatible = "xlnx,plb-dvi-cntlr-ref-1.00.c", },
++ 	{},
++-- 
++1.6.6.1
++
 -- 
 1.6.6.1
 
