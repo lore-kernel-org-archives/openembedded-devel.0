@@ -1,20 +1,20 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCJZr-0003E3-Ma
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCMOz-0000YF-4U
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 23:34:53 +0200
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
+	Thu, 13 May 2010 02:35:50 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCJW6-00037e-0Q for openembedded-devel@lists.openembedded.org;
-	Wed, 12 May 2010 17:30:58 -0400
-Date: Wed, 12 May 2010 17:30:53 -0400 (EDT)
+	id 1OCMLD-00087f-9J for openembedded-devel@lists.openembedded.org;
+	Wed, 12 May 2010 20:31:55 -0400
+Date: Wed, 12 May 2010 20:31:49 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@lynx
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1005121722300.14972@lynx>
+Message-ID: <alpine.DEB.2.00.1005122030010.2471@lynx>
 User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -34,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: some possible fixes in the OE web pages
+Subject: current error: fetching enlightenment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +48,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 12 May 2010 21:34:53 -0000
+X-List-Received-Date: Thu, 13 May 2010 00:35:50 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-  getting into ubuntu for the first time and working my way thru the
-OE web pages, setting it up under ubuntu 10.04 so a few observations
--- do with them what you will
+  just did a "git pull" followed by a bitbake fetchall and ...
 
-* on http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu,
-there's a reference to configuring for qemu-arm:
+...
+NOTE: Update
+svn://svn.enlightenment.org/svn/e/trunk;module=e;proto=http
+svn: Failed to add directory 'src': an unversioned directory of the
+same name already exists
+NOTE: Task failed: Fetch failed: Fetch command export
+HOME=/home/rpjday; export SSH_AUTH_SOCK=/tmp/keyring-Ll3M8v/ssh;
+export
+PATH=/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/sbin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin:/home/rpjday/oe/angstrom-dev/cross/armv7a//bin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/sbin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
+/usr/bin/env svn update -r 48775 failed with signal 1, output:
+svn: Failed to add directory 'src': an unversioned directory of the
+same name already exists
 
-  echo 128 > /proc/sys/vm/mmap_min_addr
-
-from memory, i always simply set that to zero on fedora.  is there
-something magic about the value 128?  at the moment, it's at the
-default value of 65536 on this ubuntu system.
-
-* there's also (under debian, so might hold true under ubuntu as well)
-a requirement to install "xmlto".  however, if you do a regular
-install, you drag in a *massive* amount of tex-related packages.
-instead, one can theoretically use "fop" for PDF generation, and omit
-all that tex stuff.  is it feasible to use fop instead and
-
-  $ apt-get install --no-install-recommends xmlto
-
-  i think there was something else but it escapes me at the moment.
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb
+do_fetch failed
+ERROR: Task 439 (/home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb,
+do_fetch) failed
+NOTE: Tasks Summary: Attempted 1331 tasks of which 1331 didn't need to
+be rerun and 1 failed.
+ERROR: '/home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb' failed
 
 rday
 
