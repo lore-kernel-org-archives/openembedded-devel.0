@@ -1,43 +1,49 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCXT2-0002MQ-3Q
+	(envelope-from <martin.jansa@gmail.com>) id 1OCXVW-00041k-Mg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 14:24:45 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCXPF-0003tk-SE for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 08:20:49 -0400
-Date: Thu, 13 May 2010 08:20:46 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
+	Thu, 13 May 2010 14:27:19 +0200
+Received: by fxm11 with SMTP id 11so1168339fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 05:23:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=I88Qhk2nKs2lrwNei+AhbjsA7cHYjdTXLjTUCHXugkg=;
+	b=qiOjbCHyVPaiIPeBmul9sk8w4LBK2WnCR9V69pqUc0umNEHbEIX3AIchCBOLiS7ZEm
+	EKYzEMu+LTtOQYqFZFyYS1N0ytbOjrx1r1g2NfSZQZJWL9oma0/EsLYicaUBmzlc8oGF
+	2FMhYNQyW7tGS0Xy926BJV6MX4qIAhxyjwHEI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=c9zogbv57TBE4IA37FnYuQ6z02WMX+5S8BzwyBEjQjid4Rloz9vSQ/yH6yAf625Hft
+	8NrK3SFvoDlVnu/hV0hBljOY3QFiUoK6Xpv+v6XPTkTjhC6VG+6MpcWEvr8LcU03ozym
+	HDcnkwl3Fa4veLqM6o8A6v+WXWF2tSMtSky9w=
+Received: by 10.223.56.206 with SMTP id z14mr9985060fag.97.1273753403653;
+	Thu, 13 May 2010 05:23:23 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 15sm5619358fad.10.2010.05.13.05.23.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 13 May 2010 05:23:22 -0700 (PDT)
+Date: Thu, 13 May 2010 14:23:24 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201005131223.22252.khimov@altell.ru>
-Message-ID: <alpine.DEB.2.00.1005130815410.8372@lynx>
-References: <alpine.DEB.2.00.1005121722300.14972@lynx>
-	<201005130953.59314.roman@khimov.ru> <20100513064037.GB3370@jama>
-	<201005131223.22252.khimov@altell.ru>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+Message-ID: <20100513122324.GL3370@jama>
+References: <alpine.DEB.2.00.1005122030010.2471@lynx>
+	<alpine.DEB.2.00.1005130808100.8347@lynx>
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+In-Reply-To: <alpine.DEB.2.00.1005130808100.8347@lynx>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: some possible fixes in the OE web pages
+Subject: Re: current error: fetching enlightenment
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,77 +57,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 12:24:45 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 13 May 2010 12:27:19 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, 13 May 2010, Roman I Khimov wrote:
+On Thu, May 13, 2010 at 08:09:03AM -0400, Robert P. J. Day wrote:
+> 
+>   not to sound naggy but any proposed fix for this?
+> 
+> On Wed, 12 May 2010, Robert P. J. Day wrote:
+> 
+> >
+> >   just did a "git pull" followed by a bitbake fetchall and ...
+> >
+> > ...
+> > NOTE: Update
+> > svn://svn.enlightenment.org/svn/e/trunk;module=e;proto=http
+> > svn: Failed to add directory 'src': an unversioned directory of the
+> > same name already exists
+> > NOTE: Task failed: Fetch failed: Fetch command export
+> > HOME=/home/rpjday; export SSH_AUTH_SOCK=/tmp/keyring-Ll3M8v/ssh;
+> > export
+> > PATH=/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin/armv7a-angstrom-linux-gnueabi:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/sbin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/bin:/home/rpjday/oe/angstrom-dev/cross/armv7a//bin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/sbin:/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games;
+> > /usr/bin/env svn update -r 48775 failed with signal 1, output:
+> > svn: Failed to add directory 'src': an unversioned directory of the
+> > same name already exists
 
-... mmap_min_addr stuff snipped ...
+cd /OE/downloads/svn/svn.enlightenment.org/
+svn stat to check why do you have unversioned src dir here
+or just remove this dir and download again
 
-> The real solution is in the kernel, it should be fixed for latest
-> Ubuntu and hopefully Fedora will catch up on this issue too.
->
-> http://git.kernel.org/?p=linux/kernel/git/jmorris/security-
-> testing-2.6.git;a=commitdiff;h=822cceec7248013821d655545ea45d1c6a9d15b3
->
-> Interesting that openSUSE with 2.6.31 kernel doesn't have such
-> problems... And our main build machine with Debian stable + 2.6.30
-> kernel works fine too. Probably this check got introduced in 2.6.32.
-
-  not sure which kernel *version* it showed up in, but it appears to
-be a result of this commit from nov of last year (which you can see
-ended up being unnecessarily restrictive -- d'oh!):
-
-commit 0e1a6ef2dea88101b056b6d9984f3325c5efced3
-Author: Kees Cook <kees.cook@canonical.com>
-Date:   Sun Nov 8 09:37:00 2009 -0800
-
-    sysctl: require CAP_SYS_RAWIO to set mmap_min_addr
-
-    Currently the mmap_min_addr value can only be bypassed during mmap when
-    the task has CAP_SYS_RAWIO.  However, the mmap_min_addr sysctl value itself
-    can be adjusted to 0 if euid == 0, allowing a bypass without CAP_SYS_RAWIO.
-    This patch adds a check for the capability before allowing mmap_min_addr to
-    be changed.
-
-    Signed-off-by: Kees Cook <kees.cook@canonical.com>
-    Acked-by: Serge Hallyn <serue@us.ibm.com>
-    Signed-off-by: James Morris <jmorris@namei.org>
-
-diff --git a/security/min_addr.c b/security/min_addr.c
-index c844eed..fc43c9d 100644
---- a/security/min_addr.c
-+++ b/security/min_addr.c
-@@ -33,6 +33,9 @@ int mmap_min_addr_handler(struct ctl_table *table,
-int write,
- {
-        int ret;
-
-+       if (!capable(CAP_SYS_RAWIO))
-+               return -EPERM;
-+
-        ret = proc_doulongvec_minmax(table, write, buffer, lenp, ppos);
-
-        update_mmap_min_addr();
-
-
-whereupon the security-related fix is, as was mentioned previously,
-submitted here:
-
-http://git.kernel.org/?p=linux/kernel/git/jmorris/security-testing-2.6.git;a=commitdiff;h=822cceec7248013821d655545ea45d1c6a9d15b3
-
-
-rday
+> >
+> > ERROR: TaskFailed event exception, aborting
+> > ERROR: Build of /home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb
+> > do_fetch failed
+> > ERROR: Task 439 (/home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb,
+> > do_fetch) failed
+> > NOTE: Tasks Summary: Attempted 1331 tasks of which 1331 didn't need to
+> > be rerun and 1 failed.
+> > ERROR: '/home/rpjday/oe/openembedded/recipes/e17/e-wm_svn.bb' failed
+> 
+> rday
+> 
+> -- 
+> 
+> ========================================================================
+> Robert P. J. Day                               Waterloo, Ontario, CANADA
+> 
+>             Linux Consulting, Training and Kernel Pedantry.
+> 
+> Web page:                                          http://crashcourse.ca
+> Twitter:                                       http://twitter.com/rpjday
+> ========================================================================
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 -- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
