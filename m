@@ -1,38 +1,44 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OCcwB-00080Q-Un
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 20:15:22 +0200
-Received: (qmail 25513 invoked by uid 503); 13 May 2010 18:18:14 -0000
-Received: from b6.ovh.net (HELO mail406.ha.ovh.net) (213.186.33.56)
-	by 26.mail-out.ovh.net with SMTP; 13 May 2010 18:18:14 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 May 2010 18:11:13 -0000
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.7?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 13 May 2010 18:11:12 -0000
-Message-ID: <4BEC40BF.7070207@eukrea.com>
-Date: Thu, 13 May 2010 20:11:11 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCczS-0002GE-9U for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 20:18:35 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCcvf-0001Y3-1O for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 20:14:39 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 20:14:39 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 20:14:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <alpine.DEB.2.00.1005131147350.2007@lynx>	<4BEC241A.2090802@eukrea.com>	<alpine.DEB.2.00.1005131212200.11789@lynx>
-	<AANLkTikmU6fbniORwgp86_hFk9khRLDsG5BllWGVtYm8@mail.gmail.com>
-In-Reply-To: <AANLkTikmU6fbniORwgp86_hFk9khRLDsG5BllWGVtYm8@mail.gmail.com>
-X-Ovh-Tracer-Id: 4665729215287504201
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.27.225
-X-SA-Exim-Mail-From: eric@eukrea.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 13 May 2010 20:14:29 +0200
+Message-ID: <hshfi6$kql$1@dough.gmane.org>
+References: <hsh23u$v6m$1@dough.gmane.org>
+	<AANLkTiknrPD6HtwgsP8m7XEp7s_7Iop1wiRPwQ78peqp@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <AANLkTiknrPD6HtwgsP8m7XEp7s_7Iop1wiRPwQ78peqp@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: chance to document entire OE setup on ubuntu 10.04
+Subject: Re: TSC meeting minutes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 18:15:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 13 May 2010 18:18:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Le 13/05/2010 19:57, Khem Raj a écrit :
-> On Thu, May 13, 2010 at 9:13 AM, Robert P. J. Day<rpjday@crashcourse.ca>  wrote:
->> On Thu, 13 May 2010, Eric Bénard wrote:
->>
->>> Le 13/05/2010 17:53, Robert P. J. Day a écrit :
->>>>
->>>>     while this sounds decidedly unsexy, given that i'm just getting
->>>> into ubuntu 10.04, i have the chance to document every step it
->>>> takes to setup OE on a fresh, default 10.04 install, including
->>>> what packages are *actually* required since i suspect some of the
->>>> ones currently listed aren't technically necessary.
->>>>
->>> I tested yesterday on a 10.04 and vs the actual wiki, I think chrpath is
->>> missing from the list of what is required.
->
-> this is a newly created dependency probably hasn't made into documents yet
-> but sanity should complain about it if its missing.
->
-yes that's the case, it's only missing from the wiki.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Eric
+On 13-05-10 18:26, Frans Meulenbroeks wrote:
+> 2010/5/13 Koen Kooi <k.kooi@student.utwente.nl>:
+> 
+>> I know there has been a TSC meeting last week, and I already know some
+>> of the outcome because I prodded Richard, but it would be nice if the
+>> TSC would publish the minutes of the meeting somewhere.
+> 
+> I also would like to see minutes.
+> Actually I don't recall having seen the minutes for the april meeting
+> either (and google or a search on the mailing list archive did not
+> expose them to me).
+
+I looked thru the log and 2 things got decided on the april fools meeting:
+
+1) we should merge RPs branch (done)
+2) branch bitbake 1.10 (done) and do a release "soon" (not done yet)
+
+The person that should have done the minutes will hopefully send them
+soon :)
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL7EGFMkyGM64RGpERAn5EAJ0bo2r840IedR+44W7OIUko+jVt3wCgiQkI
+fDFlCcMvIeDrF22bWBPOPX8=
+=u2oz
+-----END PGP SIGNATURE-----
+
 
 
