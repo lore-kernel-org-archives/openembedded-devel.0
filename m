@@ -1,51 +1,42 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OCVSC-0002le-6C
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCVXV-0000HU-4B
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:15:44 +0200
-Received: by fxm11 with SMTP id 11so1038989fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 03:11:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=M1yKwGWRSoxavGP2R9S9JvupeaqzVRDGUlKBvKbAosU=;
-	b=vvtzxxaP1Zfa8I24t88daetXgvKuYNmwA+at47L3k2ar1Z0Hg0iozVqGQ1AAid4tyM
-	sDlAYh3wJWjeGld88ANoQ5fKCpciVg0//w4tVqTXCL3kxLlvmWZjxRQTqoJ04pQIsupk
-	6mZWqmHSpohwnIqHqzYXxdkUbUmt5O2nP3gDY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=hManK7ahmc6gOEAPjmC6C4sWJZOLwiqj7DfU8IWScWLHVIb7Mnrb570KdFDSc0CwtU
-	GLzpsA8VenbBa1GXYyGsO0u9F64+tDmCMDY9Az/TmEtn/L+MgsHer1VTuCtDn7OkQTjN
-	SJfeIOom+Pd3urEpvpflm2J6Q8Q0v+1xVIOKg=
-Received: by 10.223.29.156 with SMTP id q28mr2886086fac.77.1273745509215;
-	Thu, 13 May 2010 03:11:49 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id y12sm5165778faj.5.2010.05.13.03.11.48
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 13 May 2010 03:11:48 -0700 (PDT)
-Date: Thu, 13 May 2010 12:11:49 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 13 May 2010 12:21:15 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OCVTj-0001Pj-2M for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 06:17:19 -0400
+Date: Thu, 13 May 2010 06:17:14 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100513101149.GI3370@jama>
+In-Reply-To: <20100513064037.GB3370@jama>
+Message-ID: <alpine.DEB.2.00.1005130614210.7555@lynx>
 References: <alpine.DEB.2.00.1005121722300.14972@lynx>
-	<201005131223.22252.khimov@altell.ru> <20100513084633.GC3370@jama>
-	<201005131259.13508.khimov@altell.ru> <20100513092320.GE3370@jama>
-	<20100513093814.GG3370@jama>
+	<201005130953.59314.roman@khimov.ru> <20100513064037.GB3370@jama>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
-In-Reply-To: <20100513093814.GG3370@jama>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: QEMU mmap_min_addr issue Was: some possible fixes in the OE web pages
+Subject: Re: some possible fixes in the OE web pages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,25 +50,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 10:15:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 13 May 2010 10:21:16 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Thu, May 13, 2010 at 11:38:14AM +0200, Martin Jansa wrote:
-> > Can we compare this simple test between working and non-working systems?
+On Thu, 13 May 2010, Martin Jansa wrote:
 
-You can ignore both tests.. the difference is value of mmap_min_addr
-4096 work OK
-65536 fails for me too
+... my initially innocuous observation snipped ...
 
-I'll patch qemu-native to assume 65536 when it cannot read
-mmap_min_addr.
+> On some systems (I have report from fedora and kubuntu) it still
+> needs 0 in mmap_min_addr :/.
+>
+> Investigating why, but it's slow because it doesn't fail on my box.
+>
+> My guess is that this chunk from
+> http://git.qemu.org/qemu.git/tree/linux-user/main.c cannot work on
+> systems where normal user is not allowed to read
+> /proc/sys/vm/mmap_min_addr and mmap_min_addr is not initialized with
+> sane value.
+>
+>     /*
+>      * Read in mmap_min_addr kernel parameter.  This value is used
+>      * When loading the ELF image to determine whether guest_base
+>      * is needed.  It is also used in mmap_find_vma.
+>      */
+>     {
+>         FILE *fp;
+>
+>         if ((fp = fopen("/proc/sys/vm/mmap_min_addr", "r")) != NULL) {
+>             unsigned long tmp;
+>             if (fscanf(fp, "%lu", &tmp) == 1) {
+>                 mmap_min_addr = tmp;
+>                 qemu_log("host mmap_min_addr=0x%lx\n", mmap_min_addr);
+>             }
+>             fclose(fp);
+>         }
+>     }
+>
 
-Cheers,
+  i'm confused ... unless my memory is failing, i've always been able
+to at least *read* that file as a normal user since it was
+world-readable, but this baffles me:
+
+$ ls -l /proc/sys/vm/mmap_min_addr
+-rw-r--r-- 1 root root 0 2010-05-12 20:42 /proc/sys/vm/mmap_min_addr
+$ cat $_
+cat: /proc/sys/vm/mmap_min_addr: Operation not permitted
+$
+
+  what am i misunderstanding?  the file perms state world-readable so
+i'm assuming something in the actual kernel code is checking the
+caller ID and rejecting the read request?
+
+rday
 
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
