@@ -1,43 +1,33 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from smtp-out116.alice.it ([85.37.17.116])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OCbIg-0002tZ-9O
+	(envelope-from <GNUtoo@no-log.org>) id 1OCc5x-0006gy-DU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 18:30:19 +0200
-Received: by gya1 with SMTP id 1so622485gya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 09:26:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ROdsX/QJaBdi6RAmrrG1z8DJSZdztYPf92aoo++brnQ=;
-	b=JVzNY1GxTw0fuF+/ybNvdDeNt6/6bc7qCnq3Ce9zdhFcBTT3Ku0nDX9bYu0Hjd+GPO
-	rvPtwcd58cJvPxJjI53Nr++KGCgZH2NPq1C2UQzOwizL3OX3wTQIUomaTfb6y+0rmLnl
-	M9DMJJps9G0aH6v/E+r2MDadbud39cuf77eUQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sDMg0rbiCKBexqgqPe8UPU4FMqXKuwjRHxGh2kslqYUyHovgvWaYdneh/EO3WxGNGs
-	0dJ4prWQcOtK+gwug6BAsWabUM+MbsNY0yhGNVPCXIVQ0WNm1qEXEACnqxs49Cnh1muL
-	aTrzIgtHlwOa1ZyGoLO0/WWlcA6i9qs8DK4bM=
-MIME-Version: 1.0
-Received: by 10.91.73.17 with SMTP id a17mr364305agl.176.1273767980198; Thu, 
-	13 May 2010 09:26:20 -0700 (PDT)
-Received: by 10.90.71.4 with HTTP; Thu, 13 May 2010 09:26:20 -0700 (PDT)
-In-Reply-To: <hsh23u$v6m$1@dough.gmane.org>
-References: <hsh23u$v6m$1@dough.gmane.org>
-Date: Thu, 13 May 2010 18:26:20 +0200
-Message-ID: <AANLkTiknrPD6HtwgsP8m7XEp7s_7Iop1wiRPwQ78peqp@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 13 May 2010 19:21:56 +0200
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out116.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 13 May 2010 19:17:16 +0200
+Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 13 May 2010 19:17:16 +0200
+Received: from [192.168.1.116] ([79.21.48.109]) by FBCMCL01B09.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Thu, 13 May 2010 19:17:15 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Thu, 13 May 2010 19:17:07 +0200
+Message-ID: <1273771027.8785.26.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 13 May 2010 17:17:15.0738 (UTC)
+	FILETIME=[2258FBA0:01CAF2C0]
+X-SA-Exim-Connect-IP: 85.37.17.116
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC meeting minutes?
+Subject: Handling different touchscreen calibration systems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,21 +41,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 16:30:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 13 May 2010 17:22:27 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/5/13 Koen Kooi <k.kooi@student.utwente.nl>:
+hi,
+There are several way to calibrate a touchscreen:
+*ts_calibrate : it uses the framebuffer and so it must be started before
+xorg(an init script can do that). works only for tslib.
+*xtscal : works only for kdrive and tslib(if I understood well)
+*xinput-calibrator: works with xorg and can calibrate many things,but I
+had huge issues with it with tslib,with /etc/pointercal from
+ts_calibrate it works fine but without it can't calibrate...
+Note that it also supports other protocols like evdev,evtouch etc...
+*other specific uttilities for evtouch etc...
 
-> I know there has been a TSC meeting last week, and I already know some
-> of the outcome because I prodded Richard, but it would be nice if the
-> TSC would publish the minutes of the meeting somewhere.
+How should someone handle this.
+*in machine config?
+*in the distro?
+*in the image?
 
-I also would like to see minutes.
-Actually I don't recall having seen the minutes for the april meeting
-either (and google or a search on the mailing list archive did not
-expose them to me).
-What about archiving the minutes on openembedded.org ?
+Also to add the complexity:
+*ts_calibrate should be an init script
+*xinput-calibrator and xtscal are Xsession.d scripts
 
-Best regards, Frans.
+Moreover theses scripts could be machine specific:
+
+*For instance I've 2 touch screens on the bug device,and so I need a
+specific init script for calibrating:
+#!/bin/sh
+if [ ! -e /etc/pointercal ]
+then
+	TSLIB_CONSOLEDEVICE=none TSLIB_FBDEVICE=/dev/fb1
+TSLIB_TSDEVICE=/dev/input/bmi_lcd_ts4 ts_calibrate & 
+	TSLIB_CONSOLEDEVICE=none TSLIB_FBDEVICE=/dev/fb2
+TSLIB_TSDEVICE=/dev/input/bmi_lcd_ts5 ts_calibrate &
+	until [ -f /etc/pointercal ]
+		do
+			sleep 1
+		done
+	killall ts_calibrate
+fi
+
+That script is shipped with a recipe named tslib-init,which I didn't
+commit yet because of this mail.
+
+*htcdream has the same issue with xinput-calibrator (require having a
+calibrated /etc/pointercal so it makes it useless )
+
+*bug 2.x seem to need ts_calibrate too but only for one screen
+
+*om-gta02 has an evdev driver which requires to feed /sys nodes with
+some calibration data,the script used is an Xsession.d script that uses
+xinput-calibrator
+
+
+
+I had the idea of making recipes for handling int scripts or Xsession.d
+scripts,and including them in XSERVER in the machine configuration but
+I'm not shure it's a good idea.
+
+Denis.
+
 
 
