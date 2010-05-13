@@ -1,42 +1,36 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCdF5-0007Te-75
+	(envelope-from <sledz@dresearch.de>) id 1OCdcu-0003Ts-4o
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 20:34:44 +0200
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCdBG-0003bQ-P1 for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 14:30:46 -0400
-Date: Thu, 13 May 2010 14:30:42 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimgnFG24NWlGZu4hmXBwpCnJRtX1t1jsNqwhGdc@mail.gmail.com>
-Message-ID: <alpine.DEB.2.00.1005131429190.6696@lynx>
-References: <alpine.DEB.2.00.1005131412550.6436@lynx>
-	<AANLkTimgnFG24NWlGZu4hmXBwpCnJRtX1t1jsNqwhGdc@mail.gmail.com>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Thu, 13 May 2010 20:59:34 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 0843A491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 20:55:21 +0200 (CEST)
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Date: Thu, 13 May 2010 20:55:55 +0200
+Message-ID: <DB561678F08F554EB0D9F21B70E268A505AEB7@exchange.intern.dresearch.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [PATCH v4] busybox/syslogs: use update-alternatives for syslog
+	selection
+Thread-Index: Acrx0dguymd1RXqGSLWrFHUimZxWGAA/BLDD
+References: <20100512122138.GJ30963@jama>
+	<1273668604-9810-1-git-send-email-sledz@dresearch.de>
+From: "Sledz, Steffen" <sledz@dresearch.de>
+To: "Steffen Sledz" <sledz@dresearch.de>,
+	<openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake fetch vs fetchall?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v4] busybox/syslogs: use update-alternatives for syslog selection
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +44,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 18:34:44 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 13 May 2010 18:59:37 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 13 May 2010, Chris Larson wrote:
+Some ACKs for this patch?
 
-> 'fetch' fetches for the one recipe you're requesting.  If you
-> bitbake -c fetch busybox, it fetches busybox.  If you bitbake -c
-> fetchall busybox, it fetches busybox and all of busybox's
-> dependencies.  This is the case for all the tasks which end in
-> 'all'.
-
-  i suspected as much, which is why i was suggesting that this
-distinction be made clear in the user manual, since i know others have
-been bitten by this.
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
-
+Regards,
+Steffen
 
