@@ -1,43 +1,43 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCVZ4-0000W1-6b
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:22:52 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCVVE-0001Yq-9K for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 06:18:52 -0400
-Date: Thu, 13 May 2010 06:18:50 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCVZB-0000WQ-Qn for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 12:22:58 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCVVO-0006Nj-KW for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 12:19:02 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 12:19:02 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 12:19:02 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.DEB.2.00.1005130614210.7555@lynx>
-Message-ID: <alpine.DEB.2.00.1005130618150.7555@lynx>
-References: <alpine.DEB.2.00.1005121722300.14972@lynx>
-	<201005130953.59314.roman@khimov.ru> <20100513064037.GB3370@jama>
-	<alpine.DEB.2.00.1005130614210.7555@lynx>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 13 May 2010 12:18:51 +0200
+Message-ID: <hsgjmb$6q5$1@dough.gmane.org>
+References: <AANLkTinbdSQqop_YbzlaGsWGQllBIrq5w-l4WPqUReW6@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <AANLkTinbdSQqop_YbzlaGsWGQllBIrq5w-l4WPqUReW6@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: some possible fixes in the OE web pages
+Subject: Re: udev static
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,28 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 10:22:52 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Thu, 13 May 2010 10:22:58 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, 13 May 2010, Robert P. J. Day wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->   i'm confused ... unless my memory is failing, i've always been able
-> to at least *read* that file as a normal user since it was
-> world-readable, ...
+On 13-05-10 12:03, Raffaele Recalcati wrote:
+> Using udev 141 in nfs I had frequently a very long delay after the message
+> "Starting udev".
+> If I do a ctrl-c the system goes on.
+> But sometimes there are some devices lacking, obviously.
+> 
+> So I look inside udev and I saw many udev rules in /etc/udev/rules.d
+> directory.
+> 
+> I know that Angstrom is focused for a general purpose usage, but in my
+> embedded case I don't need it and I prefer a quick boot with fix devices
+> create.
 
-  never mind, i should have kept reading email.
+It boots a lot quicker when not using NFS :)
 
-rday
+> What I'll need is to trigger automount of usb serial, SD card, usb pen, and
+> similar things.
+> So I have modified udev to populate, similarly to udev-static-devices.bb,
+> the /dev directory mounted.
+> I also notice the DEVCACHE functionality, that it seems a little bit
+> dangerouse in my case.
+> My idea is to create a new recipe, named udev-static, in which I'll use
+> udev-static-device and than I'll put only some rule as example using RUN
+> udev function.
+> 
+> It is a good idea?
 
--- 
+I think it would be better to move all the udev rules to subpackages and
+RRECOMMEND then for the main udev package. That way you use
+BAD_RECOMMENDATIONS to exclude them at image time.
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+regards,
 
-            Linux Consulting, Training and Kernel Pedantry.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+iD8DBQFL69ILMkyGM64RGpERAhrbAJ924Rtf+5KzZ4Q26x9nVfC7BGqnwQCfdvEo
+SQLyPqeELJtaijaPhV/eteA=
+=Q8W1
+-----END PGP SIGNATURE-----
+
 
 
