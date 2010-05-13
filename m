@@ -1,42 +1,41 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCVEn-0001lM-V8
+	(envelope-from <lamiaposta71@gmail.com>) id 1OCVKK-0003zR-4Q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 12:01:56 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCVB1-0008Kj-Rv for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 05:58:00 -0400
-Date: Thu, 13 May 2010 05:57:50 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201005130953.59314.roman@khimov.ru>
-Message-ID: <alpine.DEB.2.00.1005130551490.7319@lynx>
-References: <alpine.DEB.2.00.1005121722300.14972@lynx>
-	<201005130953.59314.roman@khimov.ru>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Thu, 13 May 2010 12:07:36 +0200
+Received: by fxm11 with SMTP id 11so1031214fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 03:03:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=rm80DQiEJyEezCXsheFKWeMmV67vJ5o24Q9LgoA7r4c=;
+	b=LSiqpwvc42DpVvhHBKQ9VHwfUVVHelumv2dUJ3Ae3iabOzOv1Pqs0mq2QlntHXY5jl
+	kRtNxYv6QyiLfQ8NIeSFS5rt0/O7hh7BvgJqJ7hmREfWPuntazUUhinqsRl+HyhuPkUd
+	2236JeSZA06g853wybkXKMB2H3GXbruBHe26E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Es5LlMCZNYePknNpMlz/m8es1Irri9Ce8blrW77gbbiuQ9a5slYsBV3hmYfR4w1Xhj
+	eDitA1INP/Jx+8l9e8UO0PlDDZgUpFMtHpgJdkv4Ke09Wsiom2fkBf5lFuUDeiWsxYXg
+	CxITDw73bLujGrW6NDiJpc0Dy48I8EXCqVC5A=
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.239.131.78 with SMTP id 14mr882475hbm.7.1273745020423; Thu, 13 
+	May 2010 03:03:40 -0700 (PDT)
+Received: by 10.239.169.17 with HTTP; Thu, 13 May 2010 03:03:40 -0700 (PDT)
+Date: Thu, 13 May 2010 12:03:40 +0200
+Message-ID: <AANLkTinbdSQqop_YbzlaGsWGQllBIrq5w-l4WPqUReW6@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: lamiaposta71@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: some possible fixes in the OE web pages
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: udev static
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +49,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 10:01:56 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-1175840061-1273744680=:7319"
+X-List-Received-Date: Thu, 13 May 2010 10:07:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---8323329-1175840061-1273744680=:7319
-Content-Type: TEXT/PLAIN; charset=utf-8
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+Using udev 141 in nfs I had frequently a very long delay after the message
+"Starting udev".
+If I do a ctrl-c the system goes on.
+But sometimes there are some devices lacking, obviously.
 
-On Thu, 13 May 2010, Roman I Khimov wrote:
+So I look inside udev and I saw many udev rules in /etc/udev/rules.d
+directory.
 
-> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 0=
-1:30:53 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Robert P. J. Day =D0=BD=D0=B0=D0=BF=
-=D0=B8=D1=81=D0=B0=D0=BB:
-> > * on http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu,
-> > there's a reference to configuring for qemu-arm:
-> >
-> >   echo 128 > /proc/sys/vm/mmap_min_addr
-> >
-> > from memory, i always simply set that to zero on fedora.  is there
-> > something magic about the value 128?  at the moment, it's at the
-> > default value of 65536 on this ubuntu system.
->
-> With current qemu in OE mmap_min_addr tricks are not needed at all.
+I know that Angstrom is focused for a general purpose usage, but in my
+embedded case I don't need it and I prefer a quick boot with fix devices
+create.
+What I'll need is to trigger automount of usb serial, SD card, usb pen, and
+similar things.
+So I have modified udev to populate, similarly to udev-static-devices.bb,
+the /dev directory mounted.
+I also notice the DEVCACHE functionality, that it seems a little bit
+dangerouse in my case.
+My idea is to create a new recipe, named udev-static, in which I'll use
+udev-static-device and than I'll put only some rule as example using RUN
+udev function.
 
-  really?  that's probably worth mentioning, then, both at the above
-link at the OE wiki, and i saw a similar page over at the angstrom
-wiki but can't recall where the page was.  dang.
+It is a good idea?
+Thanks.
+Raffaele
 
-rday
-
---=20
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
---8323329-1175840061-1273744680=:7319--
