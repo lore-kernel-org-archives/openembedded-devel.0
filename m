@@ -1,44 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCczS-0002GE-9U for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 20:18:35 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCcvf-0001Y3-1O for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 20:14:39 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 20:14:39 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 20:14:39 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 13 May 2010 20:14:29 +0200
-Message-ID: <hshfi6$kql$1@dough.gmane.org>
-References: <hsh23u$v6m$1@dough.gmane.org>
-	<AANLkTiknrPD6HtwgsP8m7XEp7s_7Iop1wiRPwQ78peqp@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <AANLkTiknrPD6HtwgsP8m7XEp7s_7Iop1wiRPwQ78peqp@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCd2n-00066V-KJ
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 20:22:02 +0200
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OCcz1-0002Hc-HS for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 14:18:07 -0400
+Date: Thu, 13 May 2010 14:18:02 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1005131412550.6436@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC meeting minutes?
+Subject: bitbake fetch vs fetchall?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,43 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 18:18:35 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 13 May 2010 18:22:02 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 13-05-10 18:26, Frans Meulenbroeks wrote:
-> 2010/5/13 Koen Kooi <k.kooi@student.utwente.nl>:
-> 
->> I know there has been a TSC meeting last week, and I already know some
->> of the outcome because I prodded Richard, but it would be nice if the
->> TSC would publish the minutes of the meeting somewhere.
-> 
-> I also would like to see minutes.
-> Actually I don't recall having seen the minutes for the april meeting
-> either (and google or a search on the mailing list archive did not
-> expose them to me).
+   based on a quick google, i realize i'm not the only person who's
+once been burned by not knowing about the bitbake "fetchall" command
+versus the "fetch" command.  and i'm aware that, if one wants to fetch
+absolutely *all* software required for a given target, one must use
+"fetchall".
 
-I looked thru the log and 2 things got decided on the april fools meeting:
+  so, first, what's the difference between these two commands?  and,
+second, there's precious little explanation in the current OE user
+manual about "fetchall".  in fact, in the user manual, there is the
+explanation:
 
-1) we should merge RPs branch (done)
-2) branch bitbake 1.10 (done) and do a release "soon" (not done yet)
+fetch
 
-The person that should have done the minutes will hopefully send them
-soon :)
+    Try to download all of the required source files, but don't do
+anything else with them.
 
-regards,
+which would seem to be slightly misleading and is bound to trip
+someone up.  should not the user manual be extended to describe
+"fetchall"?
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+rday
 
-iD8DBQFL7EGFMkyGM64RGpERAn5EAJ0bo2r840IedR+44W7OIUko+jVt3wCgiQkI
-fDFlCcMvIeDrF22bWBPOPX8=
-=u2oz
------END PGP SIGNATURE-----
+-- 
 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
