@@ -1,47 +1,41 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OCYnp-0001dW-6L
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 15:50:21 +0200
-Received: by pwj5 with SMTP id 5so639947pwj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCZPU-0008U9-OW for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 16:29:16 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCZLZ-0006YF-OC for openembedded-devel@lists.openembedded.org;
+	Thu, 13 May 2010 16:25:09 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 16:25:09 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 06:46:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=d4FbcyYcHygonhQQ8+RG9Dn3FPsvySNuAf6uZ5qx4ew=;
-	b=OfgYl+ppJYVbZwWXQ1i3kjYhYsraMB0J63+z23WALMWA69CYr6aqrp4+LFWu++zSDZ
-	fAKED7UaITpWVVxKQUKadb1EoNgVe4+Av8D7bRw6nSmqitxyPUDxzimcAxaDtsK1wDl2
-	1Snpwm5tjD3SP9BBxqaNrAMF+74HCobQ0q6yw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=kTxWwS9yfQwK/yBofLqtPlyrAAPtHtd5TVViV56WViLr50g9aMBGCXTF5uFtxaHbZv
-	s9Dg5KpzyvJm8X6/5AiiD1/vKmvRQLvT2FoXecEjdzeOb+S13IoXh8oIrnD7eMdjGVP8
-	MHacZ/y7rxWskixivyvvd0NpBoIcuK8/MnMbU=
-Received: by 10.141.88.21 with SMTP id q21mr6100448rvl.299.1273758381325;
-	Thu, 13 May 2010 06:46:21 -0700 (PDT)
-Received: from localhost.localdomain ([201.153.77.51])
-	by mx.google.com with ESMTPS id d14sm1098627rva.18.2010.05.13.06.46.19
-	(version=SSLv3 cipher=RC4-MD5); Thu, 13 May 2010 06:46:20 -0700 (PDT)
-From: Adrian Alonso <aalonso00@gmail.com>
+	Thu, 13 May 2010 16:25:09 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 May 2010 08:46:39 -0500
-Message-Id: <1273758399-23601-5-git-send-email-aalonso00@gmail.com>
-X-Mailer: git-send-email 1.6.6.1
-In-Reply-To: <1273758399-23601-4-git-send-email-aalonso00@gmail.com>
-References: <1273758399-23601-1-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-2-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-3-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-4-git-send-email-aalonso00@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 13 May 2010 16:25:01 +0200
+Message-ID: <hsh23u$v6m$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 5/5 v2] xserver-xorg-conf: add xilinx-ml507 config
+Subject: TSC meeting minutes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,75 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 13:50:21 -0000
+X-List-Received-Date: Thu, 13 May 2010 14:30:34 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-* xorg config file for xilinx-ml507 target platform
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
----
- .../xserver-xorg-conf/xilinx-ml507/xorg.conf       |   39 ++++++++++++++++++++
- recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
- 2 files changed, 40 insertions(+), 1 deletions(-)
- create mode 100644 recipes/xorg-xserver/xserver-xorg-conf/xilinx-ml507/xorg.conf
+Hi,
 
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf/xilinx-ml507/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/xilinx-ml507/xorg.conf
-new file mode 100644
-index 0000000..aca5eed
---- /dev/null
-+++ b/recipes/xorg-xserver/xserver-xorg-conf/xilinx-ml507/xorg.conf
-@@ -0,0 +1,39 @@
-+Section "Monitor"
-+	Identifier "LCD Panel"
-+EndSection
-+
-+Section "Device"
-+    Identifier  "Xilinx frame buffer"
-+    Driver      "fbdev"
-+EndSection
-+
-+Section "Screen"
-+    Identifier  "Default Screen"
-+    Device      "Xilinx frame buffer"
-+    Monitor     "LCD Panel"
-+	SubSection "Display"
-+		Depth   24
-+        Modes   "640x480"
-+	EndSubSection
-+EndSection                             
-+
-+Section "InputDevice"
-+    Identifier  "Keyboard"
-+    Driver      "kbd"
-+#    Option      "XkbLayout" "es"
-+#    Option      "XkbModel"  "pc105"
-+EndSection
-+
-+Section "InputDevice"
-+    Identifier  "Mouse"
-+    Driver      "mouse"
-+    Option      "protocol" "auto"
-+    Option      "device" "/dev/input/mice"
-+EndSection
-+
-+Section "ServerLayout"
-+    Identifier  "Default Layout"
-+    Screen      "Default Screen"
-+    InputDevice "Keyboard"
-+    InputDevice "Mouse"
-+EndSection
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-index 283bc58..c56aafc 100644
---- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-+++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Machine specific xorg.conf files"
--PR = "r25"
-+PR = "r26"
- 
- SRC_URI = "file://xorg.conf"
- 
--- 
-1.6.6.1
+I know there has been a TSC meeting last week, and I already know some
+of the outcome because I prodded Richard, but it would be nice if the
+TSC would publish the minutes of the meeting somewhere.
+
+For the next meeting could the TSC please aim for sending out the
+minutes within the next 2 business days? If the schedule is still the
+same, you'd get 2 days for free due to the weekend.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL7Au9MkyGM64RGpERAhgtAJwLUn9kMXtAR69rFgSu60tP68IujACffSQC
+YvEPtIsjWt3Gu7KmUrzTqmw=
+=hcqF
+-----END PGP SIGNATURE-----
 
 
 
