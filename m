@@ -1,34 +1,42 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from smtp-out110.alice.it ([85.37.17.110])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1OCTlL-0002kC-GT
+	(envelope-from <ospite@studenti.unina.it>) id 1OCTtQ-0001OG-EJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 10:27:25 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 933F768416
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 12:23:19 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Thu, 13 May 2010 10:35:52 +0200
+Received: from FBCMMO01.fbc.local ([192.168.68.195]) by smtp-out110.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 13 May 2010 10:31:48 +0200
+Received: from FBCMCL01B09.fbc.local ([192.168.171.26]) by FBCMMO01.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 13 May 2010 10:31:48 +0200
+Received: from jcn ([87.1.17.227]) by FBCMCL01B09.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Thu, 13 May 2010 10:31:46 +0200
+Date: Thu, 13 May 2010 10:31:39 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 13 May 2010 12:23:22 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <alpine.DEB.2.00.1005121722300.14972@lynx>
-	<201005130953.59314.roman@khimov.ru> <20100513064037.GB3370@jama>
-In-Reply-To: <20100513064037.GB3370@jama>
-MIME-Version: 1.0
-Message-Id: <201005131223.22252.khimov@altell.ru>
-X-Altell-MailScanner-ID: 933F768416.18973
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+Message-Id: <20100513103139.07200c76.ospite@studenti.unina.it>
+In-Reply-To: <AANLkTimJm8aWxNlkEK0eYJhbjtGwt6ZHWtKhdJ_mipbF@mail.gmail.com>
+References: <hs0mk7$rst$2@dough.gmane.org>
+	<1273330086.23460.11.camel@desktop.maison.net>
+	<w2v19c1b8a91005081025l9688a5b8wc6eff5bc15496513@mail.gmail.com>
+	<AANLkTimJm8aWxNlkEK0eYJhbjtGwt6ZHWtKhdJ_mipbF@mail.gmail.com>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-OriginalArrivalTime: 13 May 2010 08:31:46.0925 (UTC)
+	FILETIME=[B9B5E9D0:01CAF276]
+X-SA-Exim-Connect-IP: 85.37.17.110
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: some possible fixes in the OE web pages
+Subject: Re: meta-toolchain doesn't build due to gdb-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,72 +50,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 08:27:25 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Thu, 13 May 2010 08:35:56 -0000
+X-Groupsio-MsgNum: 19224
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Thu__13_May_2010_10_31_40_+0200_ZHFkuWxfCKqz.zVh"
+
+--Signature=_Thu__13_May_2010_10_31_40_+0200_ZHFkuWxfCKqz.zVh
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 10:40=
-:37 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Martin Jansa =D0=BD=D0=B0=D0=BF=D0=B8=D1=
-=81=D0=B0=D0=BB:
-> On Thu, May 13, 2010 at 09:53:54AM +0400, Roman I Khimov wrote:
-> > =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 13 =D0=BC=D0=B0=D1=8F 2010 0=
-1:30:53 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Robert P. J. Day=20
-=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> > > * on http://wiki.openembedded.net/index.php/OEandYourDistro#Ubuntu,
-> > > there's a reference to configuring for qemu-arm:
+On Tue, 11 May 2010 23:39:29 +1000
+Angus Lees <alees@google.com> wrote:
+
+> It looks like the do_stage() removal was good, but the "inherit cross"
+> refactor broke task-sdk-host and all the SDKs that depend on it.  I sugge=
+st
+> reverting most of 4cf6a6bf83ccb13e7238927d72e77c4612fe6543 (but I'm hardly
+> an expert).
+>=20
+>  - Gus
+>
+
+Ping.
+
+meta-toolchain still does not build in org.oe.dev, but Angus' workaround
+worked for me too, thanks.
+
+Regards,
+   Antonio
+
+> On Sun, May 9, 2010 at 03:25, Khem Raj <raj.khem@gmail.com> wrote:
+>=20
+> > On Sat, May 8, 2010 at 7:48 AM, Thomas Jourdan <thomas.jourdan@yaeld.fr>
+> > wrote:
+> > > Hi
 > > >
-> > >   echo 128 > /proc/sys/vm/mmap_min_addr
-> > >
-> > > from memory, i always simply set that to zero on fedora.  is there
-> > > something magic about the value 128?  at the moment, it's at the
-> > > default value of 65536 on this ubuntu system.
+> > > The problems seems to come from the conversion to new staging mode in
+> > > GDB.
 > >
-> > With current qemu in OE mmap_min_addr tricks are not needed at all.
->=20
-> On some systems (I have report from fedora and kubuntu) it still needs 0
-> in mmap_min_addr :/.
->=20
-> Investigating why, but it's slow because it doesn't fail on my box.
->=20
-> My guess is that this chunk from
-> http://git.qemu.org/qemu.git/tree/linux-user/main.c
-> cannot work on systems where normal user is not allowed to read
-> /proc/sys/vm/mmap_min_addr and mmap_min_addr is not initialized with
-> sane value.
+> > right
+> >
+> > Now, gdb-cross-sdk inherits from sdk and cross whereas before it
+> > > only inherited from cross.
+> > >
+> > > Reverting Khem Raj GDB patches fixes the build for me (meta-toolchain
+> > > works again).
+> >
+> > thats because gdb 7.1 is then not using new staging and hence it builds
+> > again.
+> >
+> > >
+> > > Regards,
+> > > Thomas
+> > >
+> > > Le vendredi 07 mai 2010 =E0 11:30 +0200, Koen Kooi a =E9crit :
+> > >> -----BEGIN PGP SIGNED MESSAGE-----
+> > >> Hash: SHA1
+> > >>
+> > >> Hi,
+> > >>
+> > >> Currently meta-toolchain is unbuildable:
+> > >>
+> > >> Missing or unbuildable dependency chain was: ['gdb-cross-sdk']
+> > >> NOTE: Runtime target 'task-sdk-host' is unbuildable, removing...
+> > >> Missing or unbuildable dependency chain was: ['task-sdk-host',
+> > >> 'gdb-cross-sdk']
+> > >> ERROR: Required build target 'meta-toolchain' has no buildable
+> > providers.
+> > >> Missing or unbuildable dependency chain was: ['meta-toolchain',
+> > >> 'task-sdk-host', 'gdb-cross-sdk']
+> > >> Command execution failed: Traceback (most recent call last):
+> > >>   File "/OE/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+> > >>     commandmethod(self.cmds_async, self, options)
+> > >>   File "/OE/bitbake/lib/bb/command.py", line 174, in buildTargets
+> > >>     command.cooker.buildTargets(pkgs_to_build, task)
+> > >>   File "/OE/bitbake/lib/bb/cooker.py", line 757, in buildTargets
+> > >>     taskdata.add_unresolved(localdata, self.status)
+> > >>   File "/OE/bitbake/lib/bb/taskdata.py", line 562, in add_unresolved
+> > >>     self.remove_runtarget(self.getrun_id(target))
+> > >>   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarg=
+et
+> > >>     self.fail_fnid(fnid, missing_list)
+> > >>   File "/OE/bitbake/lib/bb/taskdata.py", line 495, in fail_fnid
+> > >>     self.remove_runtarget(target, missing_list)
+> > >>   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarg=
+et
+> > >>     self.fail_fnid(fnid, missing_list)
+> > >>   File "/OE/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+> > >>     self.remove_buildtarget(target, missing_list)
+> > >>   File "/OE/bitbake/lib/bb/taskdata.py", line 519, in remove_buildta=
+rget
+> > >>     raise bb.providers.NoProvider
+> > >> NoProvider
+> > >>
+> > >> The weird thing is that 'bitbake gdb-cross-sdk' *DOES* work. Any ide=
+as?
+> > >>
+> > >>
+> > >> regards,
+> > >>
+> > >> Koen
 
-Just checked with Ubuntu and Fedora, it really isn't possible to read=20
-/proc/sys/vm/mmap_min_addr as regular user, although it has 644 permissions=
- on=20
-it. "Security"? Damn.
 
-[after 15 minutes]
+--=20
+Antonio Ospite
+http://ao2.it
 
-OK, actually there is a useful entry on Launchpad:
-https://bugs.launchpad.net/ubuntu/+source/linux/+bug/568844
+PGP public key ID: 0x4553B001
 
-The real solution is in the kernel, it should be fixed for latest Ubuntu an=
-d=20
-hopefully Fedora will catch up on this issue too.
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
 
-http://git.kernel.org/?p=3Dlinux/kernel/git/jmorris/security-
-testing-2.6.git;a=3Dcommitdiff;h=3D822cceec7248013821d655545ea45d1c6a9d15b3
+--Signature=_Thu__13_May_2010_10_31_40_+0200_ZHFkuWxfCKqz.zVh
+Content-Type: application/pgp-signature
 
-Interesting that openSUSE with 2.6.31 kernel doesn't have such problems... =
-And=20
-our main build machine with Debian stable + 2.6.30 kernel works fine too.=20
-Probably this check got introduced in 2.6.32.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-Well, as the problem is in the kernel really, I think everyone having this=
-=20
-problem should push distro maintainers to update kernels with the tiny fix=
-=20
-mentioned above. But as a workaround, yep, "0" setting might work (beware t=
-hat=20
-it might also not work as in here:
-https://bugs.launchpad.net/ubuntu/+source/linux/+bug/423513
-).
+iEYEARECAAYFAkvruOwACgkQ5xr2akVTsAHexQCgsDhhlRHhuU8UfkrehIP2K/qc
+wtEAn3gk69yyIX+Ue1g/n6c/skT+9y0y
+=3GW9
+-----END PGP SIGNATURE-----
 
-
+--Signature=_Thu__13_May_2010_10_31_40_+0200_ZHFkuWxfCKqz.zVh--
