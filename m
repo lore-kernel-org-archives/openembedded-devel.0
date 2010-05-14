@@ -1,33 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCyox-0005AM-PD for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 19:37:13 +0200
+	id 1OCyqf-000814-JZ for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 19:39:00 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCylB-0002ZX-66 for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 19:33:17 +0200
+	id 1OCymt-0003k0-Bm for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 19:35:03 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 19:33:17 +0200
+	Fri, 14 May 2010 19:35:03 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 19:33:17 +0200
+	Fri, 14 May 2010 19:35:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 14 May 2010 19:33:02 +0200
-Message-ID: <hsk1gf$v4j$1@dough.gmane.org>
-References: <hs35ae$l42$1@dough.gmane.org>
+Date: Fri, 14 May 2010 19:34:13 +0200
+Message-ID: <hsk1il$v4j$2@dough.gmane.org>
+References: <1272921691-6963-1-git-send-email-eric@eukrea.com>	<4BED67FB.1060900@eukrea.com>	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
+	<4BED85C7.8000909@eukrea.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <hs35ae$l42$1@dough.gmane.org>
+In-Reply-To: <4BED85C7.8000909@eukrea.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -37,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libstc++ libtool problem, cross lamanger broken
+Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,80 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 17:37:14 -0000
+X-List-Received-Date: Fri, 14 May 2010 17:39:10 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Almost a week later, any fixes people can try[1]?
+On 14-05-10 19:17, Eric Bénard wrote:
+> Le 14/05/2010 17:52, Koen Kooi a écrit :
+>> Op 14 mei 2010, om 17:10 heeft Eric Bénard het volgende geschreven:
+>>> I was told you are the person to contact about MACHINE_KERNEL_PR so
+>>> may you please have a look to the patch below - also available here :
+>>> http://patchwork.openembedded.org/patch/2012/
+>>>
+>>> Actually, when compiling modules (out of tree), we loose PR if
+>>> MACHINE_KERNEL_PR is not set.
+>>
+>> I don't believe that when MACHINE_KERNEL_PR isn't set people care
+>> about PR.
+>>
+> Does that mean that policy is that MACHINE_KERNEL_PR should be set for
+> every machine ?
+> If yes, maybe this should be added in the doc.
 
-[1] apart from sed -i -e
-'s:-L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib::g'
-sysroots/*/usr/lib/*.la
+IMO yes, but some people were against it. Either their kernel never
+changes or they don't care about out-of-tree modules breaking on kernel
+changes.
 
+regards,
 
-On 08-05-10 09:53, Koen Kooi wrote:
-> Hi,
-> 
-> I've been getting failures when ARM apps try to link with x86_64
-> libxml2, and I started to do some digging:
-> 
-> grep L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-> /OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/*.la |
-> more | awk -F: '{print $1}' | sed
-> s:/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/::glibaspell.la
-> libatkmm-1.6.la
-> libcairomm-1.0.la
-> libetpan.la
-> libFLAC++.la
-> libgdkmm-2.4.la
-> libgiomm-2.4.la
-> libglibmm-2.4.la
-> libglibmm_generate_extra_defs-2.4.la
-> libgnutlsxx.la
-> libgtkmathview_custom_reader.la
-> libgtkmathview_libxml2.la
-> libgtkmathview_libxml2_reader.la
-> libgtkmm-2.4.la
-> libmathview_backend_gtk.la
-> libmathview_backend_ps.la
-> libmathview_backend_svg.la
-> libmathview_frontend_custom_reader.la
-> libmathview_frontend_libxml2.la
-> libmathview_frontend_libxml2_reader.la
-> libmathview.la
-> libpangomm-1.4.la
-> libpcrecpp.la
-> libpoppler-glib.la
-> libpoppler.la
-> libpspell.la
-> libschroedinger-1.0.la
-> libsidplay.la
-> libsigc-2.0.la
-> libstdc++.la
-> libsupc++.la
-> libtiffxx.la
-> libwebkit-1.0.la
-> 
-> So pretty much anything with a c++ dep gets a bogus .la file, so lets
-> look at libstdc++.la:
-> 
-> dependency_libs=' -L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
-> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
-> 
-> So it looks like the cross.bbclass lamangler needs some more work.
-> 
-> regards,
-> 
-> Koen
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL7YlOMkyGM64RGpERAjBZAKCK/+SSGgnqz7J8KVL31hI7zC1qRgCgsJGX
-O/dkdGg7FraOdiQFEhxL8MQ=
-=FKfz
+iD8DBQFL7YmVMkyGM64RGpERAsf2AJ45yUaAIVL0HCm7jCfxwkmq9C5gnACfcV8w
+vGcI7BJka3fCXJJ+RL3Y+Yc=
+=RLGB
 -----END PGP SIGNATURE-----
 
 
