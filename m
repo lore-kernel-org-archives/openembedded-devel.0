@@ -1,44 +1,36 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCreC-0007Ua-9c for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 11:57:38 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCraO-0001A1-VQ for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 11:53:40 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 11:53:40 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <t.fromm@DResearch.de>) id 1OCri0-0000yb-RM
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 12:01:35 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 9092A491282
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 11:53:40 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 14 May 2010 11:57:37 +0200 (CEST)
+Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 14 May 2010 11:59:04 +0200
+Message-ID: <4BED1EFC.7010905@dresearch.de>
+Date: Fri, 14 May 2010 11:59:24 +0200
+From: Thilo Fromm <t.fromm@dresearch.de>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 14 May 2010 11:53:30 +0200
-Message-ID: <hsj6iq$n0r$1@dough.gmane.org>
-References: <hs0mk7$rst$2@dough.gmane.org>	<1273330086.23460.11.camel@desktop.maison.net>	<w2v19c1b8a91005081025l9688a5b8wc6eff5bc15496513@mail.gmail.com>	<AANLkTimJm8aWxNlkEK0eYJhbjtGwt6ZHWtKhdJ_mipbF@mail.gmail.com>
-	<20100513103139.07200c76.ospite@studenti.unina.it>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <20100513103139.07200c76.ospite@studenti.unina.it>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4BE13C20.1010902@dresearch.de>
+	<4BE81DE7.90609@dresearch.de>	<1273518881.22943.378.camel@trini-m4400>	<4BE90A56.3090605@dresearch.de>	<1273588024.22943.391.camel@trini-m4400>	<4BEA448D.5060008@dresearch.de>
+	<1273750831.18119.498.camel@mill.internal.reciva.com>
+In-Reply-To: <1273750831.18119.498.camel@mill.internal.reciva.com>
+X-OriginalArrivalTime: 14 May 2010 09:59:04.0167 (UTC)
+	FILETIME=[15C35F70:01CAF34C]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: t.fromm@DResearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: meta-toolchain doesn't build due to gdb-cross-sdk
+Subject: Re: Kernel Headers Quality Issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,118 +44,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 09:57:40 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 14 May 2010 10:01:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello *.*,
 
-Another ping :)
+> It sounds like we have, perhaps, been talking at slight cross purposes.
+> 
+> It is true that you can build glibc against a different version of
+> linux-libc-headers than the version of the kernel that will be used at
+> runtime.  So long as the runtime kernel version is newer than the
+> minimum kernel version that glibc was configured for (either via
+> --enable-kernel=XXX, or via an architecture-specific static definition)
+> then everything should still work fine, and glibc will use internal
+> fallbacks if it discovers that certain system calls are not available at
+> runtime.
+> 
+> Similarly, glibc will make some efforts to provide a backwards
+> compatible emulation for user-visible interfaces which might not be
+> available in all kernel versions.  However, what it doesn't attempt to
+> do is provide a completely virtualised ABI which would insulate the
+> application entirely from the details of the running kernel.  There are
+> some kernel features which simply aren't feasible to emulate in user
+> space.
 
-On 13-05-10 10:31, Antonio Ospite wrote:
-> On Tue, 11 May 2010 23:39:29 +1000
-> Angus Lees <alees@google.com> wrote:
-> 
->> It looks like the do_stage() removal was good, but the "inherit cross"
->> refactor broke task-sdk-host and all the SDKs that depend on it.  I suggest
->> reverting most of 4cf6a6bf83ccb13e7238927d72e77c4612fe6543 (but I'm hardly
->> an expert).
->>
->>  - Gus
->>
-> 
-> Ping.
-> 
-> meta-toolchain still does not build in org.oe.dev, but Angus' workaround
-> worked for me too, thanks.
-> 
-> Regards,
->    Antonio
-> 
->> On Sun, May 9, 2010 at 03:25, Khem Raj <raj.khem@gmail.com> wrote:
->>
->>> On Sat, May 8, 2010 at 7:48 AM, Thomas Jourdan <thomas.jourdan@yaeld.fr>
->>> wrote:
->>>> Hi
->>>>
->>>> The problems seems to come from the conversion to new staging mode in
->>>> GDB.
->>>
->>> right
->>>
->>> Now, gdb-cross-sdk inherits from sdk and cross whereas before it
->>>> only inherited from cross.
->>>>
->>>> Reverting Khem Raj GDB patches fixes the build for me (meta-toolchain
->>>> works again).
->>>
->>> thats because gdb 7.1 is then not using new staging and hence it builds
->>> again.
->>>
->>>>
->>>> Regards,
->>>> Thomas
->>>>
->>>> Le vendredi 07 mai 2010 à 11:30 +0200, Koen Kooi a écrit :
->>>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>>> Hash: SHA1
->>>>>
->>>>> Hi,
->>>>>
->>>>> Currently meta-toolchain is unbuildable:
->>>>>
->>>>> Missing or unbuildable dependency chain was: ['gdb-cross-sdk']
->>>>> NOTE: Runtime target 'task-sdk-host' is unbuildable, removing...
->>>>> Missing or unbuildable dependency chain was: ['task-sdk-host',
->>>>> 'gdb-cross-sdk']
->>>>> ERROR: Required build target 'meta-toolchain' has no buildable
->>> providers.
->>>>> Missing or unbuildable dependency chain was: ['meta-toolchain',
->>>>> 'task-sdk-host', 'gdb-cross-sdk']
->>>>> Command execution failed: Traceback (most recent call last):
->>>>>   File "/OE/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
->>>>>     commandmethod(self.cmds_async, self, options)
->>>>>   File "/OE/bitbake/lib/bb/command.py", line 174, in buildTargets
->>>>>     command.cooker.buildTargets(pkgs_to_build, task)
->>>>>   File "/OE/bitbake/lib/bb/cooker.py", line 757, in buildTargets
->>>>>     taskdata.add_unresolved(localdata, self.status)
->>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 562, in add_unresolved
->>>>>     self.remove_runtarget(self.getrun_id(target))
->>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
->>>>>     self.fail_fnid(fnid, missing_list)
->>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 495, in fail_fnid
->>>>>     self.remove_runtarget(target, missing_list)
->>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
->>>>>     self.fail_fnid(fnid, missing_list)
->>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
->>>>>     self.remove_buildtarget(target, missing_list)
->>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 519, in remove_buildtarget
->>>>>     raise bb.providers.NoProvider
->>>>> NoProvider
->>>>>
->>>>> The weird thing is that 'bitbake gdb-cross-sdk' *DOES* work. Any ideas?
->>>>>
->>>>>
->>>>> regards,
->>>>>
->>>>> Koen
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+In the openembedded world glibc will present the kernel headers provided 
+to it at compile time to any application being compiled. So every 
+application on our system thinks it's running on 2.6.31 (version of 
+linux-libc-headers) while it runs on 2.6.24.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+> 
+> In the specific case of epoll_create1() and inotify_init1(), it would be
+> reasonable for glibc to do something similar to the way that, say,
+> mmap64() is handled.  That is, if the kernel doesn't have
+> epoll_create1() but does have epoll_create(), and the behaviour that the
+> user has requested is something that epoll_create() can do (i.e. none of
+> the flag bits are set) then use epoll_create().  But if the user has
+> asked for EPOLL_CLOEXEC then epoll_create() is not a suitable
+> replacement and you are going to get ENOSYS: it's then up to the
+> application to take some suitable recovery action.
 
-iD8DBQFL7R2aMkyGM64RGpERAn+nAKCTIwCY+L56utAGCSdmSLGT4qpNCACgpZq5
-SknHmREBe1MPGDNCrxCMH1A=
-=vUQQ
------END PGP SIGNATURE-----
+It is a compile time matter: when an application is configured for 
+compilation, then glibc system headers (2.6.31) will claim that certain 
+interfaces (like e.g. inotify_init1) are there while they really are not 
+at runtime (2.6.24).
 
+Let's see how an application could handle this situation:
+
+If my application includes <sys/inotify.h> and it is using 
+inotify_init1() I expect the compilation to fail if the interface will 
+not be available at runtime. I can, however, provide compatibility to 
+older kernels at application level by providing different 
+implementations based on configure.h and HAVE_INOTIFY_INIT1 (or 
+similar). Configure figures out runtime availability of all non-portable 
+interfaces, so based on the results of a configure run I can decide 
+about which interfaces to use. Trying this at runtime is next to impossible.
+
+I have no means of detecting a level of compatibility at runtime. How 
+could that work, anyway? I get ENOSYS when calling inotify_init1(), so, 
+well I *think* this interface is missing (although configure reported it 
+being available). Then I would have to dynamically fall back to 
+inotify_init() + fcntl(). What if that returns ENOSYS? Fall back to 
+dnotify? And repeat this dance every time I need to call 
+inotify_init1()? Basically, I'm blind at runtime concerning kernel 
+feature availability when my system header files lied to me at compile 
+time. Compatibility code would have to fumble for the interfaces 
+*really* available at runtime by using trial-and-error. I would not 
+expect anyone to provide this kind of compatibility.
+
+Regards,
+Thilo
+
+-- 
+Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
+Amtsgericht: Berlin Charlottenburg, HRB:54412
+Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
+Fax: +49 (30) 515 932 77 http://www.dresearch.de
 
 
