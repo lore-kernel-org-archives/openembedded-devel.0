@@ -1,40 +1,39 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from smtp-out116.alice.it ([85.37.17.116])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OCs9R-00059E-Mb
+	(envelope-from <ospite@studenti.unina.it>) id 1OCt0D-0007kV-4G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 12:29:58 +0200
-Received: from host86-156-69-106.range86-156.btcentralplus.com
-	([86.156.69.106] helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OCs5d-00058Y-Cz
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 11:25:58 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OCs5b-0002qr-74
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 11:25:55 +0100
-From: Phil Blundell <philb@gnu.org>
+	Fri, 14 May 2010 13:24:25 +0200
+Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out116.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 14 May 2010 13:20:28 +0200
+Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO03.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 14 May 2010 13:20:29 +0200
+Received: from jcn ([87.1.14.62]) by FBCMCL01B01.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Fri, 14 May 2010 13:20:27 +0200
+Received: from ao2 by jcn with local (Exim 4.71)
+	(envelope-from <ospite@studenti.unina.it>)
+	id 1OCswL-0000qF-Uk; Fri, 14 May 2010 13:20:25 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BED1EFC.7010905@dresearch.de>
-References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
-	<1273518881.22943.378.camel@trini-m4400>	<4BE90A56.3090605@dresearch.de>
-	<1273588024.22943.391.camel@trini-m4400>	<4BEA448D.5060008@dresearch.de>
-	<1273750831.18119.498.camel@mill.internal.reciva.com>
-	<4BED1EFC.7010905@dresearch.de>
-Date: Fri, 14 May 2010 11:25:54 +0100
-Message-ID: <1273832754.18119.691.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Fri, 14 May 2010 13:20:15 +0200
+Message-Id: <1273836017-3206-1-git-send-email-ospite@studenti.unina.it>
+X-Mailer: git-send-email 1.7.1
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+X-OriginalArrivalTime: 14 May 2010 11:20:27.0802 (UTC)
+	FILETIME=[74A2EFA0:01CAF357]
+X-SA-Exim-Connect-IP: 85.37.17.116
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Kernel Headers Quality Issue
+Subject: [PATCH 0/2] tzcode/tzdata updates
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,91 +47,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 10:29:58 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 May 2010 11:24:25 -0000
 
-On Fri, 2010-05-14 at 11:59 +0200, Thilo Fromm wrote:
-> I have no means of detecting a level of compatibility at runtime. How 
-> could that work, anyway? I get ENOSYS when calling inotify_init1(), so, 
-> well I *think* this interface is missing (although configure reported it 
-> being available). Then I would have to dynamically fall back to 
-> inotify_init() + fcntl().
+And a question for future updates: when renaming recipes it is not needed to
+change PR, is it?
 
-Yes, precisely.  ENOSYS is indeed diagnostic of an unimplemented system
-call, and what you have described is exactly what glibc does internally
-for this kind of situation.  See for example the backwards compatibility
-code for mmap2 vs mmap:
+Would it be even better to reset it to some zero value? I mean, like in
+tzcode-native_2010j.bb, should one set PR to "${INC_PR}.0" after a rename?
 
-	DO_CALL (mmap2, 0)
-	cmn	r0, $4096
-# ifdef __ASSUME_MMAP2_SYSCALL
-	ldr	r4, [sp], #4
-	ldr	r5, [sp], #4
-	RETINSTR(cc, lr)	
-	b	PLTJMP(syscall_error)
-# else
-	ldrcc	r4, [sp], #4
-	ldrcc	r5, [sp], #4
-	RETINSTR(cc, lr)
-	cmn	r0, $ENOSYS
-	bne	.Lerror
-	/* The current kernel does not support mmap2.  Fall back to plain
-	   mmap if the offset is small enough.  */
-	ldr	r5, [sp, $16]
-	mov	r0, ip			@ first arg was clobbered
-	teq	r5, $0
-	ldreq	r4, [sp], #4
-	ldreq	r5, [sp], #4
-	beq	PLTJMP(__mmap)
-#endif
+Thanks,
+   Antonio
 
-> What if that returns ENOSYS? Fall back to dnotify?
+Antonio Ospite (2):
+  tzcode-native: update to 2010j
+  tzdata: update to 2010j
 
-If you wish to support kernels that don't have inotify at all, yes.
-Obviously it's up to you how far back you want to go in terms of
-compatibility, and I suspect most people would just give up at this
-point.
-
-> And repeat this dance every time I need to call inotify_init1()?
-
-Yes.  Or, if this is performance critical code, you can cache the result
-(since the kernel is unlikely to suddenly gain support for a syscall
-that it didn't have last time) and go directly to the implementation
-that works.
-
-> Compatibility code would have to fumble for the interfaces 
-> *really* available at runtime by using trial-and-error. I would not 
-> expect anyone to provide this kind of compatibility.
-
-Clearly you don't like the idea very much but yes, this is basically how
-backwards compatibility code is done, and it is more or less an
-inescapable consequence of the rather fluid nature of the Linux syscall
-ABI.
-
-Of course, you always have the option of simply writing to the lowest
-common denominator and using inotify_init() directly rather than
-inotify_init1().  Or, in the case of inotify, you have the option of
-using a library which will hide this complexity for you and provide an
-abstract userspace API which remains the same no matter what the
-underlying implementation is doing.
-
-This is not the only situation in which robust applications will adapt
-themselves to the runtime environment in which they find themselves.  In
-socket-based programs, a fairly common paradigm is something along the
-lines of:
-
-	fd = socket (PF_INET6, ...);
-	if (fd < 0 && errno == EPFNOSUPPORT) {
-		// IPv6 support is missing.  Use IPv4 instead.
-		fd = socket (PF_INET, ...);
-	}
-
-in order that the application doesn't cease to work altogether for
-people who have forgotten to load the ipv6 module.
-
-p.
+ recipes/tzcode/tzcode-native_2010f.bb |   16 ----------------
+ recipes/tzcode/tzcode-native_2010j.bb |   16 ++++++++++++++++
+ recipes/tzdata/tzdata_2010i.bb        |   10 ----------
+ recipes/tzdata/tzdata_2010j.bb        |   10 ++++++++++
+ 4 files changed, 26 insertions(+), 26 deletions(-)
+ delete mode 100644 recipes/tzcode/tzcode-native_2010f.bb
+ create mode 100644 recipes/tzcode/tzcode-native_2010j.bb
+ delete mode 100644 recipes/tzdata/tzdata_2010i.bb
+ create mode 100644 recipes/tzdata/tzdata_2010j.bb
 
 
+-- 
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
 
 
