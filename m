@@ -1,36 +1,40 @@
-Received: from ey-out-1920.google.com ([74.125.78.150])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen@dominion.thruhere.net>) id 1OCxF1-0002Qy-PR
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCxJq-0002xN-8t
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 17:56:00 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so243470eyw.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 08:52:05 -0700 (PDT)
-Received: by 10.213.68.193 with SMTP id w1mr449772ebi.92.1273852325339;
-	Fri, 14 May 2010 08:52:05 -0700 (PDT)
-Received: from [172.20.1.5] (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 16sm1337854ewy.7.2010.05.14.08.52.04
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 14 May 2010 08:52:04 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1078)
-From: Koen Kooi <koen@dominion.thruhere.net>
-In-Reply-To: <4BED67FB.1060900@eukrea.com>
-Date: Fri, 14 May 2010 17:52:01 +0200
-Message-Id: <3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
-References: <1272921691-6963-1-git-send-email-eric@eukrea.com>
-	<4BED67FB.1060900@eukrea.com>
-To: =?iso-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-X-Mailer: Apple Mail (2.1078)
-X-SA-Exim-Connect-IP: 74.125.78.150
-X-SA-Exim-Mail-From: koen@dominion.thruhere.net
+	Fri, 14 May 2010 18:00:59 +0200
+Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
+	([174.113.191.234] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OCxG3-00036D-13 for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 11:57:03 -0400
+Date: Fri, 14 May 2010 11:56:47 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1005141154440.30572@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
+Subject: current angstrom/beagle breakage: firefox and abiword
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,27 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 15:56:00 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 May 2010 16:00:59 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-Op 14 mei 2010, om 17:10 heeft Eric B=E9nard het volgende geschreven:
+  long story short:
 
-> Hi Koen,
->=20
-> I was told you are the person to contact about MACHINE_KERNEL_PR so =
-may you please have a look to the patch below - also available here : =
-http://patchwork.openembedded.org/patch/2012/
->=20
-> Actually, when compiling modules (out of tree), we loose PR if =
-MACHINE_KERNEL_PR is not set.
+... snip ...
+ERROR: Task 3295 (/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb, do_install) failed
+ERROR: Task 3457 (/home/rpjday/oe/openembedded/recipes/abiword/abiword_2.8.3.bb, do_install) failed
+NOTE: Tasks Summary: Attempted 11085 tasks of which 11085 didn't need to be rerun and 2 failed.
+ERROR: '/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb' failed
+ERROR: '/home/rpjday/oe/openembedded/recipes/abiword/abiword_2.8.3.bb' failed
 
-I don't believe that when MACHINE_KERNEL_PR isn't set people care about =
-PR.
+  i can post log file contents but, if experience is any guide, by the
+time i notice build breakage, someone else is already testing a fix.
 
-regards,
+rday
 
-Koen=
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
