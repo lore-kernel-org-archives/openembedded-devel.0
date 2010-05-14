@@ -1,41 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OCzBA-0001EJ-Ft
+	(envelope-from <roman@khimov.ru>) id 1OCzqh-00085Q-RX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 20:00:10 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OCz7K-0007MY-T6 from Tom_Rini@mentor.com 
+	Fri, 14 May 2010 20:43:05 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OCzmt-00009b-2c
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 10:56:10 -0700
-Received: from NA1-MAIL.mgc.mentorg.com ([147.34.98.181]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 14 May 2010 10:56:10 -0700
-Received: from 172.30.80.61 ([172.30.80.61]) by NA1-MAIL.mgc.mentorg.com
-	([147.34.98.181]) with Microsoft Exchange Server HTTP-DAV ; 
-	Fri, 14 May 2010 17:56:08 +0000
-Received: from trini-m4400 by na1-mail.mgc.mentorg.com;
-	14 May 2010 10:56:04 -0700
-From: Tom Rini <tom_rini@mentor.com>
+	Fri, 14 May 2010 22:39:08 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
-References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
-Organization: Mentor Graphics Corporation
-Date: Fri, 14 May 2010 10:55:46 -0700
-Message-ID: <1273859746.22943.454.camel@trini-m4400>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 14 May 2010 17:56:10.0344 (UTC)
-	FILETIME=[BC4B5680:01CAF38E]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Fri, 14 May 2010 22:38:56 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <201005141534.04818.khimov@altell.ru>
+	<1273850912-4808-1-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1273850912-4808-1-git-send-email-ospite@studenti.unina.it>
+MIME-Version: 1.0
+Message-Id: <201005142239.03665.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
+Subject: Re: [PATCH 1/2 v2] tzcode-native: update to 2010j
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,33 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 18:00:10 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 May 2010 18:43:05 -0000
+X-Groupsio-MsgNum: 19308
+Content-Type: multipart/signed; boundary="nextPart1685947.hhtQQB78Yc";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-05-14 at 19:47 +0200, Andrea Adami wrote:
-> On Sat, May 8, 2010 at 1:12 PM, Andrea Adami <andrea.adami@gmail.com> wro=
-te:
-> > PARALLEL_MAKE =3D "-j5"
-> > #BB_NUMBER_THREADS =3D "4"
-> > BB_NUMBER_THREADS =3D "2"
-> >
-> > fixed the things. This time the dependencies were (correctly) built bef=
-ore...
-> >
-> > Andrea
-> >
->=20
-> I repeated the build of console-image and gtk+-native always fails
-> using 4 threads.
-> Anyone can confirm?
+--nextPart1685947.hhtQQB78Yc
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-With DISTRO=3D ?  I do most of my builds with 4 and haven't seen this.
-But with a failure log on gtk+-native, figuring out the missing dep
-shouldn't be too bad.
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/Rj9GC0L3QuNGG0LAgMTQg0LzQsNGPIDIwMTAg
+MTk6Mjg6MzIg0LDQstGC0L7RgCBBbnRvbmlvIE9zcGl0ZSDQvdCw0L/QuNGB0LDQuzoKPiBVcGRh
+dGUgY2hlY2tzdW1zOyB0emRhdGEgdmVyc2lvbiBidW1wcyB0byAyMDEwaiBhcyB3ZWxsLgo+IAo+
+IFNpZ25lZC1vZmYtYnk6IEFudG9uaW8gT3NwaXRlIDxvc3BpdGVAc3R1ZGVudGkudW5pbmEuaXQ+
+Cj4gLS0tCj4gQ2hhbmdlcyBzaW5jZSB2MToKPiAgU2V0IFBSIHRvICIke0lOQ19QUn0uMCIgYXMg
+Y29uZmlybWVkIGJ5IFJvbWFuLgoKVGhhbmtzLCBwdXNoZWQgYm90aC4KCi0tIAogaHR0cDovL3Jv
+bWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlzZXJ2ZXIgaGtw
+Oi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
 
---=20
-Tom Rini <tom_rini@mentor.com>
-Mentor Graphics Corporation
+--nextPart1685947.hhtQQB78Yc
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
+iEYEABECAAYFAkvtmMcACgkQXJ70z+XgVcMoTQCgnm4VHm1D3eCWJmgo9HRxgmxh
+lsoAn0TyoTKhZVq2SHiRJZpf/o5hsevY
+=cw0A
+-----END PGP SIGNATURE-----
+
+--nextPart1685947.hhtQQB78Yc--
