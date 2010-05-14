@@ -1,31 +1,27 @@
 Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OCuDY-0002i7-53
+	(envelope-from <philb@gnu.org>) id 1OCudX-0004kf-94
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 14:42:17 +0200
+	Fri, 14 May 2010 15:09:07 +0200
 Received: from host86-156-69-106.range86-156.btcentralplus.com
 	([86.156.69.106] helo=lurch.internal.reciva.com)
 	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OCu9l-0006PN-MO
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OCuZj-0006bF-Ek
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 13:38:21 +0100
+	Fri, 14 May 2010 14:05:12 +0100
 Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
 	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OCu9l-0003wT-Bb
+	(envelope-from <philb@gnu.org>) id 1OCuZj-00049a-5R
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 13:38:21 +0100
+	Fri, 14 May 2010 14:05:11 +0100
 From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BED36A8.6070602@dresearch.de>
+In-Reply-To: <4BED170A.1070907@dresearch.de>
 References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
-	<1273518881.22943.378.camel@trini-m4400>	<4BE90A56.3090605@dresearch.de>
-	<1273588024.22943.391.camel@trini-m4400>	<4BEA448D.5060008@dresearch.de>
-	<1273750831.18119.498.camel@mill.internal.reciva.com>
-	<4BED1EFC.7010905@dresearch.de>
-	<1273832754.18119.691.camel@mill.internal.reciva.com>
-	<4BED36A8.6070602@dresearch.de>
-Date: Fri, 14 May 2010 13:38:20 +0100
-Message-ID: <1273840700.18119.750.camel@mill.internal.reciva.com>
+	<1273510550.22943.298.camel@trini-m4400>
+	<20100510190024.GA12534@gmail.com> <4BED170A.1070907@dresearch.de>
+Date: Fri, 14 May 2010 14:05:10 +0100
+Message-ID: <1273842310.18119.770.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.2 
 X-SA-Exim-Connect-IP: 109.169.29.93
@@ -50,81 +46,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 12:42:17 -0000
+X-List-Received-Date: Fri, 14 May 2010 13:09:08 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-05-14 at 13:40 +0200, Thilo Fromm wrote:
-> This would mean that checking for kernel features (e.g. inotify_init1()) 
-> at compile time via an application's configure.ac is pointless, right?
+On Fri, 2010-05-14 at 11:25 +0200, Thilo Fromm wrote:
+> No it isn't. --enable-kernel=VERSION provides kernel ABI backwards 
+> compatibility to applications. *At least* the kernel ABI described in 
+> the headers provided to glibc during compile time must be present at 
+> runtime.
 
-Not entirely pointless: the feature set that you determine at configure
-time is the maximum set that you can expect to be available.  That is,
-if you determine at configure time that __NR_inotify_init1 is not
-defined, you clearly should not even attempt to use this syscall.
+This is incorrect.  The glibc policy for a long time has been that it
+should be compiled against the most recent available headers, and that
+it will adapt at run time to older kernels.  See for example the FAQ:
 
-> Code like this
-> 
-> #ifdef HAVE_INOTIFY_INIT1
-> 	fd = inotify_init1(O_NONBLOCK);
-> #else
-> 	fd = inotify_init();
-> 	flags = fcntl(fd, F_GETFL, 0);
-> 	fcntl(ret, F_SETFL, flags | O_NONBLOCK);
-> #endif
-> 
-> will break at runtime even though everything was OK at compile time, and 
-> you are proposing that I should expect it to break.
+-- 8< --
 
-Correct.  In this particular case you would probably be better off just
-using the "else" block at all times.
+1.8.	What version of the Linux kernel headers should be used?
 
-> Well, what to do _if_ a feature is not present is a whole different 
-> story. But for figuring out _whether_ it is present or not you propose 
-> (blind) runtime probing while I would like to rely on configure output, 
+{AJ,UD} The headers from the most recent Linux kernel should be used.  The
+headers used while compiling the GNU C library and the kernel binary used
+when using the library do not need to match.  The GNU C library runs without
+problems on kernels that are older than the kernel headers used.  The other
+way round (compiling the GNU C library with old kernel headers and running
+on a recent kernel) does not necessarily work.  For example you can't use
+new kernel features if you used old kernel headers to compile the GNU C
+library.
 
-I'm not quite sure why you describe this as "blind" probing.  There is
-nothing blind about it; the semantics of unimplemented syscalls are
-quite well-defined.
+{ZW} Even if you are using a 2.0 kernel on your machine, we recommend you
+compile GNU libc with 2.2 kernel headers.  That way you won't have to
+recompile libc if you ever upgrade to kernel 2.2.  To tell libc which
+headers to use, give configure the --with-headers switch
+(e.g. --with-headers=/usr/src/linux-2.2.0/include).
 
-In the general case, there simply isn't any way to determine statically
-at compile time what features will be available at run time.  Some
-features might require modules that aren't loaded, or might be disabled
-by kernel commandline options, or might not be supported on the
-particular CPU that the kernel finds itself running on, or any number of
-other things.  As I have mentioned before, this is exactly what glibc
-itself does internally in order to cope with multiple different kernel
-versions.
+Note that you must configure the 2.2 kernel if you do this, otherwise libc
+will be unable to find <linux/version.h>.  Just change the current directory
+to the root of the 2.2 tree and do `make include/linux/version.h'.
 
-If you are going to rely on nonstandard and volatile Linux-specific
-programming interfaces then the onus is definitely on you as the
-application developer to ensure that your application behaves sensibly
-under all conditions that it is likely to encounter.  You simply have to
-decide which features are mandatory for your program and which are
-optional.  If a mandatory feature is not available then the program will
-simply not run: you might choose to produce a "kernel too old" kind of
-diagnostic, like glibc does if you configure it with --enable-kernel=X
-and then try to run on an older version, or you might just let it crash
-with ENOSYS or some such.  If an optional feature is unavailable then
-you have to provide some suitable fallback action.
+-- >8 --
 
-> As at least some of the 
-> applications integrated by openembedded do not share your views, so 
-> they'll do weird things at runtime. This is a severe quality issue. And 
-> we have only a small chance of noticing any application runtime 
-> misbehaviour. The syscall in question might only rarely be used, it 
-> might be some corner-case of an application that is executed e.g. only 
-> once in a month.
-
-If you can't tolerate the risk of applications breaking in this way
-then, as a distro maintainer, you can simply set and document an
-appropriate policy that avoids the situation arising (e.g. compile all
-applications against the lowest common denominator headers, or lock the
-versions together so that the runtime kernel version always precisely
-matches the compile time header version).  That would be a perfectly
-acceptable way to proceed.  
+The function of the --enable-kernel option is to eliminate backwards
+compatibility code for older versions: this gives you a slightly smaller
+and faster library.  For example, the mmap2 syscall was introduced on
+ARM at some point around kernel 2.3.35: so, if you configure glibc with
+--enable-kernel=2.3.36, it knows that mmap2 must always be available and
+there is no need to build the backwards compatibility logic that I
+mentioned in my last email.
 
 p.
+
 
 
 
