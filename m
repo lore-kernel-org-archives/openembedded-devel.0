@@ -1,47 +1,30 @@
-Received: from mail-yw0-f193.google.com ([209.85.211.193])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OCwOS-000837-N9
+	(envelope-from <eric@eukrea.com>) id 1OCwSA-000825-DI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 17:01:42 +0200
-Received: by ywh31 with SMTP id 31so1224731ywh.3
+	Fri, 14 May 2010 17:05:31 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 5C0B94B00BB
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 07:57:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=t1ivE+QjazNS33ZoSvj7Grk/NSCoh3UkNf1r1WdOBLE=;
-	b=Mi/lAzDNto/S0yRUHR7mz4JTVZAN25Y2yGOFH12Sz0JqYPJAcoqKhGVmmPUXjdWr3m
-	QdNLnydVNMTsyTnzisipn3/JdRXKuTicfYQ5aJkpyeVh/tfS64VyIX7+dtep5V0HZYe+
-	LYXUhf83A/IygqC8ADME4rL7epCw91xCjQuH0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=B+4rx/zYnEaOMFxDD3IQrk22mWpEzqT0JvaHfaJnRkOjhDoaPYCOM5LWB/hSrvPSzP
-	xxG/psxtlF38SRn3gSGOd22XZe6OaXRWXcBQn/4+3UzkJBxz+YOch48LglrIDqzXgs8l
-	sSFn8ZtuDgcPq2Q+/s6Dc6gowh/TD1fb72aaQ=
-MIME-Version: 1.0
-Received: by 10.229.213.136 with SMTP id gw8mr354725qcb.193.1273849063888; 
-	Fri, 14 May 2010 07:57:43 -0700 (PDT)
-Received: by 10.229.230.77 with HTTP; Fri, 14 May 2010 07:57:43 -0700 (PDT)
-In-Reply-To: <20100514122113.GH3507@excalibur.local>
-References: <1273758399-23601-1-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-2-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-3-git-send-email-aalonso00@gmail.com>
-	<20100514122113.GH3507@excalibur.local>
-Date: Fri, 14 May 2010 09:57:43 -0500
-Message-ID: <AANLkTikEcvXMhSbq1ZxiCibA33s_O5tfce9vqFNzXEMb@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	Fri, 14 May 2010 17:01:33 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 May 2010 17:01:32 +0200 (CEST)
+From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.193
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+Date: Fri, 14 May 2010 16:59:21 +0200
+Message-Id: <1273849161-32171-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 3/5 v2] linux-xilinx-ml507: update kernel version
+Subject: [PATCH] module_strip.bbclass: set KERNEL_MAJOR_VERSION
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,44 +38,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 15:01:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 14 May 2010 15:05:31 -0000
 
-Thanks,
+KERNEL_MAJOR_VERSION may not be set (for example when building a module)
+, this was preventing modules from being stripped.
 
-I will rework patchs and resend them asap.
+Signed-off-by: Eric Benard <eric@eukrea.com>
+---
+v2: moved to module_strip.bbclass following an advice from Tom Rini
 
-Regards
+ classes/module_strip.bbclass |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-On Fri, May 14, 2010 at 7:21 AM, Stefan Schmidt
-<stefan@datenfreihafen.org>wrote:
-
-> Hello.
->
-> On Thu, 2010-05-13 at 08:46, Adrian Alonso wrote:
-> > * Update kernel version 2.6.33
-> > * Include xilinx framebuffer patch
->
-> You need to reorder your patchset to have the fb patch prior to this
-> change.
-> Without this git bisect will break.
->
-> Looking over the patch I think it would be fine to have it merged into this
-> patch as well. Small enough.
->
-> regards
-> Stefan Schmidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
+diff --git a/classes/module_strip.bbclass b/classes/module_strip.bbclass
+index 2650f71..998fb86 100644
+--- a/classes/module_strip.bbclass
++++ b/classes/module_strip.bbclass
+@@ -1,5 +1,8 @@
+ PACKAGESTRIPFUNCS += "do_strip_modules"
+ 
++# may be inherited by kernel.bbclass which sets KERNEL_MAJOR_VERSION
++KERNEL_MAJOR_VERSION ?= "${@get_kernelmajorversion('${KERNEL_VERSION}')}"
++
+ do_strip_modules () {
+ 	if test -e ${PKGD}/lib/modules; then
+ 		if [ "${KERNEL_MAJOR_VERSION}" == "2.6" ]; then
 -- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+1.6.3.3
+
+
 
