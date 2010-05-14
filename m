@@ -1,42 +1,39 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCyP5-0002oy-NA
+Received: from 27.mail-out.ovh.net ([91.121.30.210])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OCyaD-00047Y-D3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 19:10:29 +0200
-Received: from localhost ([127.0.0.1])
-	by astoria.ccjclearline.com with esmtpa (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCyLI-0002Df-Fm
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 13:06:32 -0400
-Received: from 174.113.191.234 ([174.113.191.234]) by crashcourse.ca (Horde
-	MIME library) with HTTP; Fri, 14 May 2010 13:06:32 -0400
-Message-ID: <20100514130632.b78odmevsc4k4o4s@crashcourse.ca>
-Date: Fri, 14 May 2010 13:06:32 -0400
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-To: openembedded-devel@lists.openembedded.org
-References: <alpine.DEB.2.00.1005141154440.30572@lynx>
-	<hsjvm5$m40$1@dough.gmane.org>
-In-Reply-To: <hsjvm5$m40$1@dough.gmane.org>
+	Fri, 14 May 2010 19:21:59 +0200
+Received: (qmail 3071 invoked by uid 503); 14 May 2010 17:22:09 -0000
+Received: from b6.ovh.net (HELO mail624.ha.ovh.net) (213.186.33.56)
+	by 27.mail-out.ovh.net with SMTP; 14 May 2010 17:22:08 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 14 May 2010 17:18:01 -0000
+Received: from cug31-2-82-228-86-110.fbx.proxad.net (HELO ?192.168.0.7?)
+	(ebenard%eukrea.com@82.228.86.110)
+	by ns0.ovh.net with SMTP; 14 May 2010 17:18:00 -0000
+Message-ID: <4BED85C7.8000909@eukrea.com>
+Date: Fri, 14 May 2010 19:17:59 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-User-Agent: Internet Messaging Program (IMP) H3 (4.1.6)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: k.kooi@student.utwente.nl
+References: <1272921691-6963-1-git-send-email-eric@eukrea.com>	<4BED67FB.1060900@eukrea.com>
+	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
+In-Reply-To: <3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
+X-Ovh-Tracer-Id: 9639955004377837013
+X-Ovh-Remote: 82.228.86.110 (cug31-2-82-228-86-110.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.30.210
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: current angstrom/beagle breakage: firefox and abiword
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 17:10:29 -0000
-Content-Type: text/plain;
-	charset=ISO-8859-1;
-	DelSp="Yes";
-	format="flowed"
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 May 2010 17:21:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Quoting Koen Kooi <k.kooi@student.utwente.nl>:
-
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Le 14/05/2010 17:52, Koen Kooi a écrit :
+> Op 14 mei 2010, om 17:10 heeft Eric Bénard het volgende geschreven:
+>> I was told you are the person to contact about MACHINE_KERNEL_PR so may you please have a look to the patch below - also available here : http://patchwork.openembedded.org/patch/2012/
+>>
+>> Actually, when compiling modules (out of tree), we loose PR if MACHINE_KERNEL_PR is not set.
 >
-> On 14-05-10 17:56, Robert P. J. Day wrote:
->>
->>   long story short:
->>
->> ... snip ...
->> ERROR: Task 3295  =20
->> (/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb,  =20
->> do_install) failed
->> ERROR: Task 3457  =20
->> (/home/rpjday/oe/openembedded/recipes/abiword/abiword_2.8.3.bb,  =20
->> do_install) failed
->> NOTE: Tasks Summary: Attempted 11085 tasks of which 11085 didn't  =20
->> need to be rerun and 2 failed.
->> ERROR:  =20
->> '/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb'  =20
->> failed
->> ERROR:  =20
->> '/home/rpjday/oe/openembedded/recipes/abiword/abiword_2.8.3.bb'  =20
->> failed
->>
->>   i can post log file contents but, if experience is any guide, by the
->> time i notice build breakage, someone else is already testing a fix.
+> I don't believe that when MACHINE_KERNEL_PR isn't set people care about PR.
 >
-> Reading and applying http://catb.org/~esr/faqs/smart-questions.html
-> would help you a lot. My crystal ball is still in repairs.
+Does that mean that policy is that MACHINE_KERNEL_PR should be set for 
+every machine ?
+If yes, maybe this should be added in the doc.
 
-   point taken.  soon as i get a chance, i'll make sure my working copy
-is up to date, do another build and post results.
+Actually only 7 files (4 machines + 3 include) in conf/machine have this 
+set and conf/bitbake set it to "" as a default so what aboutdoing ?= 
+"r0" in bitbake.conf in order to have a default value as for PR ?
 
-rday
-
+Eric
 
 
