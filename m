@@ -1,44 +1,44 @@
-Received: from mail-gx0-f228.google.com ([209.85.217.228])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OCigj-00030W-QY
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 02:23:38 +0200
-Received: by gxk28 with SMTP id 28so1165151gxk.7
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCpOI-0003cG-Me for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 09:33:03 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCpKW-0002pY-U0 for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 09:29:08 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 May 2010 09:29:08 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 13 May 2010 17:19:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=WUbvkqR+joIGSYbS4RoJuRf1w56lxgibJV9Z3EUnjCM=;
-	b=R092fHIwEelSW2g5Wa+/QzQy8++6dPX1PisvO2v29Ylx3P3R4oJnNvGXD3FmZDxsOw
-	A0D+3bQwU7HcKnd5qvg1//lk7453yTSQCy+AdnTw/aElTRMqmB2cYeK0uIsf+ZC9kw85
-	n3ua1/Uy46mQHTO9b7VXt12N5FKvlCW67QIHI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=l6QZ4XQcF63Bek6Tq94rDl8gELpOb7jsW6UAcjsZPa947n7aB8LCPwo21Rq3PRrWVb
-	Pw6qhNaqGnPTB47sQA9TlQpLTAcABFh+NImEwisM2pljcnqGhta8INHrbF2Hkhm8NwR0
-	IXh8Hokec+oh2KFIwgern/FUDlQxg6c198wAM=
-MIME-Version: 1.0
-Received: by 10.101.134.6 with SMTP id l6mr325515ann.50.1273796376391; Thu, 13 
-	May 2010 17:19:36 -0700 (PDT)
-Received: by 10.231.39.73 with HTTP; Thu, 13 May 2010 17:19:36 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.00.1005131412550.6436@lynx>
-References: <alpine.DEB.2.00.1005131412550.6436@lynx>
-Date: Thu, 13 May 2010 17:19:36 -0700
-Message-ID: <AANLkTinqyTnfMhBuyQFIntIcPSdyD8loK0iwJreBkBIr@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 14 May 2010 09:29:08 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.228
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 14 May 2010 09:29:01 +0200
+Message-ID: <hsiu3t$qdb$1@dough.gmane.org>
+References: <hshkde$7bv$1@dough.gmane.org>
+	<1273781039.8785.32.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <1273781039.8785.32.camel@gnutoo-desktop>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake fetch vs fetchall?
+Subject: Re: please revert 0e617baf2916269bbe02cb7b2d4eb20161c86547 - change it to MACHINE_ARCH and bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,63 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 00:23:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 May 2010 07:33:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 13, 2010 at 11:18 AM, Robert P. J. Day
-<rpjday@crashcourse.ca> wrote:
->
-> =A0 based on a quick google, i realize i'm not the only person who's
-> once been burned by not knowing about the bitbake "fetchall" command
-> versus the "fetch" command. =A0and i'm aware that, if one wants to fetch
-> absolutely *all* software required for a given target, one must use
-> "fetchall".
->
-> =A0so, first, what's the difference between these two commands? =A0and,
-> second, there's precious little explanation in the current OE user
-> manual about "fetchall". =A0in fact, in the user manual, there is the
-> explanation:
->
-> fetch
->
-> =A0 =A0Try to download all of the required source files, but don't do
-> anything else with them.
->
-> which would seem to be slightly misleading and is bound to trip
-> someone up. =A0should not the user manual be extended to describe
-> "fetchall"?
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-yes it could be improved and probably also point distinction between
-fetch and fetchall. Care to make a patch :)
+On 13-05-10 22:03, GNUtoo wrote:
 
+> Should I attach a patch for switching only the machines that overrides
+> some file to MACHINE_ARCH
 
+Like I said, if an override in SRC_URI is used, OE will already mark it
+as MACHINE_ARCH :)
 
-> rday
->
-> --
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Robert P. J. Day =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 Waterloo, Ontario, CANADA
->
-> =A0 =A0 =A0 =A0 =A0 =A0Linux Consulting, Training and Kernel Pedantry.
->
-> Web page: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
- =A0 =A0 =A0 =A0 =A0http://crashcourse.ca
-> Twitter: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 http://twitter.com/rpjday
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL7Pu8MkyGM64RGpERAjWMAJ9ZoseTj4gt9G65pd3j1GFXyd8QTgCeLM+h
+ubZUj4cJePxLPioKUPAfQsY=
+=I7+h
+-----END PGP SIGNATURE-----
+
 
 
