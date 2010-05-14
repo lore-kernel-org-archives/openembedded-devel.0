@@ -1,35 +1,44 @@
-Received: from smtp-out110.alice.it ([85.37.17.110])
+Received: from mail-gx0-f228.google.com ([209.85.217.228])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1OCehI-0001By-D9
+	(envelope-from <raj.khem@gmail.com>) id 1OCigj-00030W-QY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 13 May 2010 22:07:57 +0200
-Received: from FBCMMO03.fbc.local ([192.168.68.197]) by smtp-out110.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 13 May 2010 22:03:59 +0200
-Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO03.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 13 May 2010 22:03:59 +0200
-Received: from [192.168.1.116] ([79.21.48.109]) by FBCMCL01B07.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Thu, 13 May 2010 22:04:00 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Fri, 14 May 2010 02:23:38 +0200
+Received: by gxk28 with SMTP id 28so1165151gxk.7
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 13 May 2010 17:19:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=WUbvkqR+joIGSYbS4RoJuRf1w56lxgibJV9Z3EUnjCM=;
+	b=R092fHIwEelSW2g5Wa+/QzQy8++6dPX1PisvO2v29Ylx3P3R4oJnNvGXD3FmZDxsOw
+	A0D+3bQwU7HcKnd5qvg1//lk7453yTSQCy+AdnTw/aElTRMqmB2cYeK0uIsf+ZC9kw85
+	n3ua1/Uy46mQHTO9b7VXt12N5FKvlCW67QIHI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=l6QZ4XQcF63Bek6Tq94rDl8gELpOb7jsW6UAcjsZPa947n7aB8LCPwo21Rq3PRrWVb
+	Pw6qhNaqGnPTB47sQA9TlQpLTAcABFh+NImEwisM2pljcnqGhta8INHrbF2Hkhm8NwR0
+	IXh8Hokec+oh2KFIwgern/FUDlQxg6c198wAM=
+MIME-Version: 1.0
+Received: by 10.101.134.6 with SMTP id l6mr325515ann.50.1273796376391; Thu, 13 
+	May 2010 17:19:36 -0700 (PDT)
+Received: by 10.231.39.73 with HTTP; Thu, 13 May 2010 17:19:36 -0700 (PDT)
+In-Reply-To: <alpine.DEB.2.00.1005131412550.6436@lynx>
+References: <alpine.DEB.2.00.1005131412550.6436@lynx>
+Date: Thu, 13 May 2010 17:19:36 -0700
+Message-ID: <AANLkTinqyTnfMhBuyQFIntIcPSdyD8loK0iwJreBkBIr@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hshkde$7bv$1@dough.gmane.org>
-References: <hshkde$7bv$1@dough.gmane.org>
-Date: Thu, 13 May 2010 22:03:59 +0200
-Message-ID: <1273781039.8785.32.camel@gnutoo-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-OriginalArrivalTime: 13 May 2010 20:04:00.0696 (UTC)
-	FILETIME=[6DC46B80:01CAF2D7]
-X-SA-Exim-Connect-IP: 85.37.17.110
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-SA-Exim-Connect-IP: 209.85.217.228
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: please revert 0e617baf2916269bbe02cb7b2d4eb20161c86547 - change it to MACHINE_ARCH and bump PR
+Subject: Re: bitbake fetch vs fetchall?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,47 +52,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 13 May 2010 20:07:57 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 May 2010 00:23:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-05-13 at 21:37 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> Hi,
-> 
-> The person who committed
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=0e617baf2916269bbe02cb7b2d4eb20161c86547
-> apparently didn't realize that when using machine overrides in SRC_URI
-> the package automatically gets built as MACHINE_ARCH.
-> 
-> However there is a need for a non machine specific initscript package
-> for things like rescue filesystems. Currenly for 90% of our machines
-> it's already a generic package.
-> 
-> In the future please RFC changes on this mailinglist to core recipes
-> like initscripts as you're supposed to.
-> 
-> regards,
-> 
-> Koen
-Reverted.
-Sorry not to have realized that it was core stuff(I reviewed all stuff I
-pushed(and tested it too) but I forgot that)
-Here's the issue:
-<koen> it doesn't break, but it means that we have a spurious machine
-specific package
-<koen> so if a bug fix goes in, I need to rebuilt it for 100 machines or
-so, instead of 15
+On Thu, May 13, 2010 at 11:18 AM, Robert P. J. Day
+<rpjday@crashcourse.ca> wrote:
+>
+> =A0 based on a quick google, i realize i'm not the only person who's
+> once been burned by not knowing about the bitbake "fetchall" command
+> versus the "fetch" command. =A0and i'm aware that, if one wants to fetch
+> absolutely *all* software required for a given target, one must use
+> "fetchall".
+>
+> =A0so, first, what's the difference between these two commands? =A0and,
+> second, there's precious little explanation in the current OE user
+> manual about "fetchall". =A0in fact, in the user manual, there is the
+> explanation:
+>
+> fetch
+>
+> =A0 =A0Try to download all of the required source files, but don't do
+> anything else with them.
+>
+> which would seem to be slightly misleading and is bound to trip
+> someone up. =A0should not the user manual be extended to describe
+> "fetchall"?
+>
 
-Should I attach a patch for switching only the machines that overrides
-some file to MACHINE_ARCH,or should we make the init scripts more
-generic: 
-<GNUtoo> so what should be done,there are machine specific stuff in it 
-<koen> I suspect most of those entries are bogus
+yes it could be improved and probably also point distinction between
+fetch and fetchall. Care to make a patch :)
 
-Denis.
 
+
+> rday
+>
+> --
+>
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> Robert P. J. Day =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 Waterloo, Ontario, CANADA
+>
+> =A0 =A0 =A0 =A0 =A0 =A0Linux Consulting, Training and Kernel Pedantry.
+>
+> Web page: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0http://crashcourse.ca
+> Twitter: =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 http://twitter.com/rpjday
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
