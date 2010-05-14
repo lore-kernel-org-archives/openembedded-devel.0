@@ -1,20 +1,22 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCrkm-0001BG-7c
+	(envelope-from <rpjday@crashcourse.ca>) id 1OCrlf-0001GS-7u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 12:04:25 +0200
+	Fri, 14 May 2010 12:05:20 +0200
 Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
 	([174.113.191.234] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCrgz-0007wP-90 for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 06:00:29 -0400
-Date: Fri, 14 May 2010 06:00:23 -0400 (EDT)
+	id 1OCrhr-000839-Vt for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 06:01:24 -0400
+Date: Fri, 14 May 2010 06:01:22 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@lynx
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1005140557420.29014@lynx>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTinqyTnfMhBuyQFIntIcPSdyD8loK0iwJreBkBIr@mail.gmail.com>
+Message-ID: <alpine.DEB.2.00.1005140601060.29014@lynx>
+References: <alpine.DEB.2.00.1005131412550.6436@lynx>
+	<AANLkTinqyTnfMhBuyQFIntIcPSdyD8loK0iwJreBkBIr@mail.gmail.com>
 User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -34,7 +36,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: numerous "strip command failed" ERRORs in building beagle image
+Subject: Re: bitbake fetch vs fetchall?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +50,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 10:04:25 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Fri, 14 May 2010 10:05:21 -0000
+Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-750760615-1273831285=:29014"
 
+--8323329-750760615-1273831285=:29014
+Content-Type: TEXT/PLAIN; charset=iso-8859-1
+Content-Transfer-Encoding: QUOTED-PRINTABLE
 
-  obviously not fatal since the build kept chugging along, but there
-were a number of "ERROR"s of the following form:
+On Thu, 13 May 2010, Khem Raj wrote:
 
+> On Thu, May 13, 2010 at 11:18 AM, Robert P. J. Day
+> <rpjday@crashcourse.ca> wrote:
+> >
+> > =A0 based on a quick google, i realize i'm not the only person who's
+> > once been burned by not knowing about the bitbake "fetchall" command
+> > versus the "fetch" command. =A0and i'm aware that, if one wants to fetc=
+h
+> > absolutely *all* software required for a given target, one must use
+> > "fetchall".
+> >
+> > =A0so, first, what's the difference between these two commands? =A0and,
+> > second, there's precious little explanation in the current OE user
+> > manual about "fetchall". =A0in fact, in the user manual, there is the
+> > explanation:
+> >
+> > fetch
+> >
+> > =A0 =A0Try to download all of the required source files, but don't do
+> > anything else with them.
+> >
+> > which would seem to be slightly misleading and is bound to trip
+> > someone up. =A0should not the user manual be extended to describe
+> > "fetchall"?
+> >
+>
+> yes it could be improved and probably also point distinction between
+> fetch and fetchall. Care to make a patch :)
 
-NOTE: Running task 3873 of 11130 (ID: 4231,
-/home/rpjday/oe/openembedded/recipes/xcb/libpthread-stubs_0.2.bb,
-do_patch)
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/rpjday/oe/angstrom-dev/work/beagleboard-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r75+gitr627293ad28604b22612f9a4a318f64cfab241e22/package/kernel/scripts/pnmtologo''
-strip command failed
-ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/rpjday/oe/angstrom-dev/work/beagleboard-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r75+gitr627293ad28604b22612f9a4a318f64cfab241e22/package/kernel/scripts/bin2c''
-strip command failed
-... etc etc ...
-
-  normally, i don't care but i typically take anything labelled as an
-"ERROR" seriously so if it's genuinely not an error, perhaps it should
-be relabelled.  (suggested from a position of complete ignorance.)
+  i'll give it a shot later today.
 
 rday
 
--- 
+--=20
 
-========================================================================
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 Robert P. J. Day                               Waterloo, Ontario, CANADA
 
             Linux Consulting, Training and Kernel Pedantry.
 
 Web page:                                          http://crashcourse.ca
 Twitter:                                       http://twitter.com/rpjday
-========================================================================
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
 
-
+--8323329-750760615-1273831285=:29014--
