@@ -1,44 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f193.google.com ([209.85.211.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCyqf-000814-JZ for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 19:39:00 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OCymt-0003k0-Bm for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 19:35:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 19:35:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <andrea.adami@gmail.com>) id 1OCyyu-0006mz-JH
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 19:47:30 +0200
+Received: by ywh31 with SMTP id 31so1318810ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 19:35:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 14 May 2010 10:43:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=JBzgeEvFXKwsQK/DUHuUWCXgSjY7EakyhQgmRsBpcOU=;
+	b=W60bpA5P7X3LHAFBZfd4u2RKchuW2mXMNuBJIyQeQ01TvDlxAqA1oJo3xOI+xamMIr
+	ezZEEKMfIlccqBY597pifgrAZlStJUIHiniSg1DL7xJ41BK4pZuH1TlvRrA1xhb6zhJP
+	wV3gWkSpjwiHVwgeT6QQHn3DsT4XkAKQN8ISw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=sj2ihBbA6nuVj8yK735YiDQCZNA8iwwIl1gbolFVkOPS6uPT8Vd1mOvMG8CvVOvR7i
+	W77LRHB7Q+1PJCLOLZlVrZJsXB9dRVHuj6GI8J+VPEqZphf4GM9zUqtmh0W9A9C5UQd7
+	crHqTrlXJQyRsGtCHwR+KmlZzj6fNdly0JoCs=
+MIME-Version: 1.0
+Received: by 10.101.4.26 with SMTP id g26mr1709558ani.157.1273859011625; Fri, 
+	14 May 2010 10:43:31 -0700 (PDT)
+Received: by 10.100.108.2 with HTTP; Fri, 14 May 2010 10:43:31 -0700 (PDT)
+In-Reply-To: <t2ld1b08f941005080507ue8b8d7e1jfe61e941de10db29@mail.gmail.com>
+References: <t2ld1b08f941005080507ue8b8d7e1jfe61e941de10db29@mail.gmail.com>
+Date: Fri, 14 May 2010 19:43:31 +0200
+Message-ID: <AANLkTilgh99CZ7IsYLxpr1GMnbbAqAtavQHYd5e8l1Ts@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 14 May 2010 19:34:13 +0200
-Message-ID: <hsk1il$v4j$2@dough.gmane.org>
-References: <1272921691-6963-1-git-send-email-eric@eukrea.com>	<4BED67FB.1060900@eukrea.com>	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
-	<4BED85C7.8000909@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <4BED85C7.8000909@eukrea.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.211.193
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
+Subject: Re: [bitbake] tasks repeated
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 17:39:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 14 May 2010 17:47:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sat, May 8, 2010 at 2:07 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> I'm using bitbake 1.10.0 I've noticed some tasks appears twice in /tmp
+> of each package:
+>
+> run.base_do_fetch
+> run.do_fetch
+>
+> run.read_subpackage_metadata
+> run.staging_helper
+>
+>
+> I don't think this is normal...
+>
+> Regards
+>
+> Andrea
+>
 
-On 14-05-10 19:17, Eric Bénard wrote:
-> Le 14/05/2010 17:52, Koen Kooi a écrit :
->> Op 14 mei 2010, om 17:10 heeft Eric Bénard het volgende geschreven:
->>> I was told you are the person to contact about MACHINE_KERNEL_PR so
->>> may you please have a look to the patch below - also available here :
->>> http://patchwork.openembedded.org/patch/2012/
->>>
->>> Actually, when compiling modules (out of tree), we loose PR if
->>> MACHINE_KERNEL_PR is not set.
->>
->> I don't believe that when MACHINE_KERNEL_PR isn't set people care
->> about PR.
->>
-> Does that mean that policy is that MACHINE_KERNEL_PR should be set for
-> every machine ?
-> If yes, maybe this should be added in the doc.
-
-IMO yes, but some people were against it. Either their kernel never
-changes or they don't care about out-of-tree modules breaking on kernel
-changes.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL7YmVMkyGM64RGpERAsf2AJ45yUaAIVL0HCm7jCfxwkmq9C5gnACfcV8w
-vGcI7BJka3fCXJJ+RL3Y+Yc=
-=RLGB
------END PGP SIGNATURE-----
-
+Anybody can confirm?
 
 
