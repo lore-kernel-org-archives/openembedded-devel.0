@@ -1,42 +1,40 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OCrlf-0001GS-7u
+	(envelope-from <philb@gnu.org>) id 1OCs9R-00059E-Mb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 12:05:20 +0200
-Received: from cpe00142a336e11-cm001ac318e826.cpe.net.cable.rogers.com
-	([174.113.191.234] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OCrhr-000839-Vt for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 06:01:24 -0400
-Date: Fri, 14 May 2010 06:01:22 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
+	Fri, 14 May 2010 12:29:58 +0200
+Received: from host86-156-69-106.range86-156.btcentralplus.com
+	([86.156.69.106] helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OCs5d-00058Y-Cz
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 11:25:58 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OCs5b-0002qr-74
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 11:25:55 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinqyTnfMhBuyQFIntIcPSdyD8loK0iwJreBkBIr@mail.gmail.com>
-Message-ID: <alpine.DEB.2.00.1005140601060.29014@lynx>
-References: <alpine.DEB.2.00.1005131412550.6436@lynx>
-	<AANLkTinqyTnfMhBuyQFIntIcPSdyD8loK0iwJreBkBIr@mail.gmail.com>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+In-Reply-To: <4BED1EFC.7010905@dresearch.de>
+References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
+	<1273518881.22943.378.camel@trini-m4400>	<4BE90A56.3090605@dresearch.de>
+	<1273588024.22943.391.camel@trini-m4400>	<4BEA448D.5060008@dresearch.de>
+	<1273750831.18119.498.camel@mill.internal.reciva.com>
+	<4BED1EFC.7010905@dresearch.de>
+Date: Fri, 14 May 2010 11:25:54 +0100
+Message-ID: <1273832754.18119.691.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake fetch vs fetchall?
+Subject: Re: Kernel Headers Quality Issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,60 +48,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 10:05:21 -0000
-Content-Type: MULTIPART/MIXED; BOUNDARY="8323329-750760615-1273831285=:29014"
+X-List-Received-Date: Fri, 14 May 2010 10:29:58 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
---8323329-750760615-1273831285=:29014
-Content-Type: TEXT/PLAIN; charset=iso-8859-1
-Content-Transfer-Encoding: QUOTED-PRINTABLE
+On Fri, 2010-05-14 at 11:59 +0200, Thilo Fromm wrote:
+> I have no means of detecting a level of compatibility at runtime. How 
+> could that work, anyway? I get ENOSYS when calling inotify_init1(), so, 
+> well I *think* this interface is missing (although configure reported it 
+> being available). Then I would have to dynamically fall back to 
+> inotify_init() + fcntl().
 
-On Thu, 13 May 2010, Khem Raj wrote:
+Yes, precisely.  ENOSYS is indeed diagnostic of an unimplemented system
+call, and what you have described is exactly what glibc does internally
+for this kind of situation.  See for example the backwards compatibility
+code for mmap2 vs mmap:
 
-> On Thu, May 13, 2010 at 11:18 AM, Robert P. J. Day
-> <rpjday@crashcourse.ca> wrote:
-> >
-> > =A0 based on a quick google, i realize i'm not the only person who's
-> > once been burned by not knowing about the bitbake "fetchall" command
-> > versus the "fetch" command. =A0and i'm aware that, if one wants to fetc=
-h
-> > absolutely *all* software required for a given target, one must use
-> > "fetchall".
-> >
-> > =A0so, first, what's the difference between these two commands? =A0and,
-> > second, there's precious little explanation in the current OE user
-> > manual about "fetchall". =A0in fact, in the user manual, there is the
-> > explanation:
-> >
-> > fetch
-> >
-> > =A0 =A0Try to download all of the required source files, but don't do
-> > anything else with them.
-> >
-> > which would seem to be slightly misleading and is bound to trip
-> > someone up. =A0should not the user manual be extended to describe
-> > "fetchall"?
-> >
->
-> yes it could be improved and probably also point distinction between
-> fetch and fetchall. Care to make a patch :)
+	DO_CALL (mmap2, 0)
+	cmn	r0, $4096
+# ifdef __ASSUME_MMAP2_SYSCALL
+	ldr	r4, [sp], #4
+	ldr	r5, [sp], #4
+	RETINSTR(cc, lr)	
+	b	PLTJMP(syscall_error)
+# else
+	ldrcc	r4, [sp], #4
+	ldrcc	r5, [sp], #4
+	RETINSTR(cc, lr)
+	cmn	r0, $ENOSYS
+	bne	.Lerror
+	/* The current kernel does not support mmap2.  Fall back to plain
+	   mmap if the offset is small enough.  */
+	ldr	r5, [sp, $16]
+	mov	r0, ip			@ first arg was clobbered
+	teq	r5, $0
+	ldreq	r4, [sp], #4
+	ldreq	r5, [sp], #4
+	beq	PLTJMP(__mmap)
+#endif
 
-  i'll give it a shot later today.
+> What if that returns ENOSYS? Fall back to dnotify?
 
-rday
+If you wish to support kernels that don't have inotify at all, yes.
+Obviously it's up to you how far back you want to go in terms of
+compatibility, and I suspect most people would just give up at this
+point.
 
---=20
+> And repeat this dance every time I need to call inotify_init1()?
 
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Yes.  Or, if this is performance critical code, you can cache the result
+(since the kernel is unlikely to suddenly gain support for a syscall
+that it didn't have last time) and go directly to the implementation
+that works.
 
-            Linux Consulting, Training and Kernel Pedantry.
+> Compatibility code would have to fumble for the interfaces 
+> *really* available at runtime by using trial-and-error. I would not 
+> expect anyone to provide this kind of compatibility.
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Clearly you don't like the idea very much but yes, this is basically how
+backwards compatibility code is done, and it is more or less an
+inescapable consequence of the rather fluid nature of the Linux syscall
+ABI.
 
---8323329-750760615-1273831285=:29014--
+Of course, you always have the option of simply writing to the lowest
+common denominator and using inotify_init() directly rather than
+inotify_init1().  Or, in the case of inotify, you have the option of
+using a library which will hide this complexity for you and provide an
+abstract userspace API which remains the same no matter what the
+underlying implementation is doing.
+
+This is not the only situation in which robust applications will adapt
+themselves to the runtime environment in which they find themselves.  In
+socket-based programs, a fairly common paradigm is something along the
+lines of:
+
+	fd = socket (PF_INET6, ...);
+	if (fd < 0 && errno == EPFNOSUPPORT) {
+		// IPv6 support is missing.  Use IPv4 instead.
+		fd = socket (PF_INET, ...);
+	}
+
+in order that the application doesn't cease to work altogether for
+people who have forgotten to load the ipv6 module.
+
+p.
+
+
+
+
