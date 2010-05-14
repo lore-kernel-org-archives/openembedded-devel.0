@@ -1,37 +1,44 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OD25q-0004Qu-AY
+	(envelope-from <andrea.adami@gmail.com>) id 1OD2Ny-0007wp-Jx
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 23:06:51 +0200
-Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OD223-0001LQ-0X
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 22:02:55 +0100
-From: Phil Blundell <philb@gnu.org>
+	Fri, 14 May 2010 23:25:35 +0200
+Received: by gwb17 with SMTP id 17so877690gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 May 2010 14:21:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=QH5cJaP/HeUrSMrgiBaqhIEhjZTZ4xZIlO6GDdHgC5Y=;
+	b=Sfkk4dffGbwfGsxmTSUiks+yv9lyKHT4NmpccZyMLnDdzqo62liN4HNMfdi1m1Nd55
+	gut3boLupbnXMuUrdUwbFEw8lhElpmLTWRCJA+MyJCgUHvl8sEDbiSWqCJG1RaWr+cSg
+	GTFINvDuwchRC3hA1GkpsIkayxUxf/lix9fCs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=i0iJ3ADWx0Vqo3G1GiJ8LLefDrDeDy6uPkURP162LdTcz2rYsagZIeeyMXmiNfz7Ep
+	8jeyfgWb4CQ0+IC6PYv1kztQ35eP5xL7ldOsFAf3GDE4yFD4HbbgAVSLxsjWk+MtjJHd
+	2W9JG8QY4kLHF+kFdlqYyYg6dBE02qnSawbws=
+MIME-Version: 1.0
+Received: by 10.100.246.9 with SMTP id t9mr1883656anh.3.1273872097509; Fri, 14 
+	May 2010 14:21:37 -0700 (PDT)
+Received: by 10.100.108.2 with HTTP; Fri, 14 May 2010 14:21:37 -0700 (PDT)
+In-Reply-To: <1273859746.22943.454.camel@trini-m4400>
+References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
+	<1273859746.22943.454.camel@trini-m4400>
+Date: Fri, 14 May 2010 23:21:37 +0200
+Message-ID: <AANLkTimDt7fVT14jNofov1ESwO2M_CvBAe6RsdvzZicE@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BEDAF6D.5010704@eukrea.com>
-References: <1272921691-6963-1-git-send-email-eric@eukrea.com>
-	<4BED67FB.1060900@eukrea.com>
-	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
-	<4BED85C7.8000909@eukrea.com> <hsk1il$v4j$2@dough.gmane.org>
-	<4BED8C2F.1080500@eukrea.com>
-	<1273866959.4465.5.camel@lenovo.internal.reciva.com>
-	<4BEDAF6D.5010704@eukrea.com>
-Date: Fri, 14 May 2010 22:02:56 +0100
-Message-ID: <1273870976.4465.6.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
+Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,19 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 21:06:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 14 May 2010 21:25:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2010-05-14 at 22:15 +0200, Eric B=C3=A9nard wrote:
-> So actually the fix I propose is needed as while MACHINE_KERNEL_PR is=20
-> not required by policy, module-base.bbclass is broken for machines=20
-> without MACHINE_KERNEL_PR.
+> With DISTRO= ?  I do most of my builds with 4 and haven't seen this.
+> But with a failure log on gtk+-native, figuring out the missing dep
+> shouldn't be too bad.
 
-Yes, agreed.  I think your fix is the right thing.
+FWIW distro is Angstrom, devel branch.
 
-p.
+DEPENDS_virtclass-native = "libpng-native atk-native pango-native
+cairo-native libxrender-native libxext-native"
 
+It's not a problem of missing deps, I suppose, because
 
+PARALLEL_MAKE = "-j5"
+#BB_NUMBER_THREADS = "4"
+BB_NUMBER_THREADS = "2"
+fixed the things. This time the dependencies were (correctly) built before.
+
+Short resume:
+
+i repeatdly see (Angstrom) console-image failing *from scratch*
+because gtk+native do_compile errors out with:
+
+ Cannot load module
+/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la:
+/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/mo
+dules/input/.libs/im-xim.so: undefined symbol: g_realloc_n
+| /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la
+does not export GTK+ IM module API:
+/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0
+
+g_realloc_n is defined in glib-2.0
+
+I've inspected the workdir and I've noticed  "atk-native"  and
+"pango-native" builds were not finished when gt+-native broke.
+Both atk-native and pango-native (and cairo-native, which was built)
+have glib-2 as explicit dependency, so something seems wrong...
+
+Regards
+Andrea
 
 
