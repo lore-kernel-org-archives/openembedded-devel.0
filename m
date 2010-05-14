@@ -1,36 +1,44 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <t.fromm@DResearch.de>) id 1OCrBB-0000Mn-Ko
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 11:27:39 +0200
-Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 90D27491278
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCreC-0007Ua-9c for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 11:57:38 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OCraO-0001A1-VQ for openembedded-devel@lists.openembedded.org;
+	Fri, 14 May 2010 11:53:40 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 May 2010 11:53:40 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 11:23:43 +0200 (CEST)
-Received: from bfg9000.intern.dresearch.de ([10.32.10.1]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 14 May 2010 11:25:09 +0200
-Message-ID: <4BED170A.1070907@dresearch.de>
-Date: Fri, 14 May 2010 11:25:30 +0200
-From: Thilo Fromm <t.fromm@dresearch.de>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Fri, 14 May 2010 11:53:40 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4BE13C20.1010902@dresearch.de>
-	<4BE81DE7.90609@dresearch.de>	<1273510550.22943.298.camel@trini-m4400>
-	<20100510190024.GA12534@gmail.com>
-In-Reply-To: <20100510190024.GA12534@gmail.com>
-X-OriginalArrivalTime: 14 May 2010 09:25:09.0964 (UTC)
-	FILETIME=[5948A0C0:01CAF347]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: t.fromm@DResearch.de
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 14 May 2010 11:53:30 +0200
+Message-ID: <hsj6iq$n0r$1@dough.gmane.org>
+References: <hs0mk7$rst$2@dough.gmane.org>	<1273330086.23460.11.camel@desktop.maison.net>	<w2v19c1b8a91005081025l9688a5b8wc6eff5bc15496513@mail.gmail.com>	<AANLkTimJm8aWxNlkEK0eYJhbjtGwt6ZHWtKhdJ_mipbF@mail.gmail.com>
+	<20100513103139.07200c76.ospite@studenti.unina.it>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <20100513103139.07200c76.ospite@studenti.unina.it>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Kernel Headers Quality Issue
+Subject: Re: meta-toolchain doesn't build due to gdb-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,96 +52,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 09:27:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 May 2010 09:57:40 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello *.*,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->>> Graeme Gregory in <20100505094242.GF2444@xora-desktop.xora.org.uk>:
->>>
->>> [Steffen Sledz]
->>>  > > It seem's not to be possible to use DEFAULT_PREFERENCE_hipox in the
->>>  > > linux-libc-headers recipes. So what's the right way to handle this?
->>>  > > Something like PREFERRED_VERSION_linux-libc-headers_hipox = "2.6.24"
->>>  > > in angstrom-2008.1.conf?
->>>  >
->>> [Graeme Gregory]
->>>  > I thought glibc was supposed to gracefully fall back on missing
->>>  > syscalls?
->>>
->>> Glibc is compiled against 2.6.31 headers, which is one of our main 
->>> issues here. It only ever *runs* with a 2.6.24 kernel on the target 
->>> system, though. So it cannot know about missing syscalls until runtime.
->> So, I think some of the confusion here stems from confusion about (and I
->> don't know the right answer off-hand) how glibc handles the
->> --with-kernel=VERSION stuff.
+Another ping :)
+
+On 13-05-10 10:31, Antonio Ospite wrote:
+> On Tue, 11 May 2010 23:39:29 +1000
+> Angus Lees <alees@google.com> wrote:
 > 
-> Well based on --with-kernel supplied to it during build time it 
-> configures syscalls that are available in that version of kernel.
+>> It looks like the do_stage() removal was good, but the "inherit cross"
+>> refactor broke task-sdk-host and all the SDKs that depend on it.  I suggest
+>> reverting most of 4cf6a6bf83ccb13e7238927d72e77c4612fe6543 (but I'm hardly
+>> an expert).
+>>
+>>  - Gus
+>>
+> 
+> Ping.
+> 
+> meta-toolchain still does not build in org.oe.dev, but Angus' workaround
+> worked for me too, thanks.
+> 
+> Regards,
+>    Antonio
+> 
+>> On Sun, May 9, 2010 at 03:25, Khem Raj <raj.khem@gmail.com> wrote:
+>>
+>>> On Sat, May 8, 2010 at 7:48 AM, Thomas Jourdan <thomas.jourdan@yaeld.fr>
+>>> wrote:
+>>>> Hi
+>>>>
+>>>> The problems seems to come from the conversion to new staging mode in
+>>>> GDB.
+>>>
+>>> right
+>>>
+>>> Now, gdb-cross-sdk inherits from sdk and cross whereas before it
+>>>> only inherited from cross.
+>>>>
+>>>> Reverting Khem Raj GDB patches fixes the build for me (meta-toolchain
+>>>> works again).
+>>>
+>>> thats because gdb 7.1 is then not using new staging and hence it builds
+>>> again.
+>>>
+>>>>
+>>>> Regards,
+>>>> Thomas
+>>>>
+>>>> Le vendredi 07 mai 2010 à 11:30 +0200, Koen Kooi a écrit :
+>>>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>>>> Hash: SHA1
+>>>>>
+>>>>> Hi,
+>>>>>
+>>>>> Currently meta-toolchain is unbuildable:
+>>>>>
+>>>>> Missing or unbuildable dependency chain was: ['gdb-cross-sdk']
+>>>>> NOTE: Runtime target 'task-sdk-host' is unbuildable, removing...
+>>>>> Missing or unbuildable dependency chain was: ['task-sdk-host',
+>>>>> 'gdb-cross-sdk']
+>>>>> ERROR: Required build target 'meta-toolchain' has no buildable
+>>> providers.
+>>>>> Missing or unbuildable dependency chain was: ['meta-toolchain',
+>>>>> 'task-sdk-host', 'gdb-cross-sdk']
+>>>>> Command execution failed: Traceback (most recent call last):
+>>>>>   File "/OE/bitbake/lib/bb/command.py", line 88, in runAsyncCommand
+>>>>>     commandmethod(self.cmds_async, self, options)
+>>>>>   File "/OE/bitbake/lib/bb/command.py", line 174, in buildTargets
+>>>>>     command.cooker.buildTargets(pkgs_to_build, task)
+>>>>>   File "/OE/bitbake/lib/bb/cooker.py", line 757, in buildTargets
+>>>>>     taskdata.add_unresolved(localdata, self.status)
+>>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 562, in add_unresolved
+>>>>>     self.remove_runtarget(self.getrun_id(target))
+>>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
+>>>>>     self.fail_fnid(fnid, missing_list)
+>>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 495, in fail_fnid
+>>>>>     self.remove_runtarget(target, missing_list)
+>>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 535, in remove_runtarget
+>>>>>     self.fail_fnid(fnid, missing_list)
+>>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 490, in fail_fnid
+>>>>>     self.remove_buildtarget(target, missing_list)
+>>>>>   File "/OE/bitbake/lib/bb/taskdata.py", line 519, in remove_buildtarget
+>>>>>     raise bb.providers.NoProvider
+>>>>> NoProvider
+>>>>>
+>>>>> The weird thing is that 'bitbake gdb-cross-sdk' *DOES* work. Any ideas?
+>>>>>
+>>>>>
+>>>>> regards,
+>>>>>
+>>>>> Koen
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-No it doesn't. Quoting the documentation of "--enable-kernel=VERSION" 
-from <http://sourceware.org/ml/libc-announce/2001/msg00000.html>:
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--------------
-One Linux systems the configure script has a new option
-`--enable-kernel' (find the documentation in the INSTALL file).  This
-option allows one to strip out compatibility code for older kernel
-versions.  This is of interest since configuring for a 2.4.x kernel
-reduces the libc size by about 1%.  This is no high percentage but all
-the code gone is in the by far most often used functions.  The
-compatibility code is needed because of poor design decisions of the
-kernel developers who constantly have to adjust the interface to new
-requirements.  If you never expect to run kernel versions older than
-the one used at compile time of the library it is a good idea to pass
-`--enable-kernel=current' to configure.  But be careful since with an
-older kernel the program won't even start and the whole system might
-be rendered useless (unless backup kernels are available).
--------------
+iD8DBQFL7R2aMkyGM64RGpERAn+nAKCTIwCY+L56utAGCSdmSLGT4qpNCACgpZq5
+SknHmREBe1MPGDNCrxCMH1A=
+=vUQQ
+-----END PGP SIGNATURE-----
 
-What it really does is providing deprecated (very, very old) kernel 
-interfaces to deprecated applications running on a very recent kernel 
-(which does not provide these interfaces anymore).
-
-> unlike uclibc which configures based on the kernel headers supplied
-> to it at buildtime glibc does not assume the version to be the 
-> one supplied during build but with --with-kernel you can make it
-> know that it will not be run on kernel versions less than one specified
-> to --with-kernel
-
-This way Glibc can decide which legacy interfaces to provide. It will be 
-slightly less bloated e.g. when providing only 2.6 series compatibility 
-(so applications which use 2.4 kernel interfaces deprecated by 2.6 won't 
-compile or run).
-
-> so it should be ok to compile glibc using newer version of kernel and run
-> it on an older version of kernel.
-
-No it isn't. --enable-kernel=VERSION provides kernel ABI backwards 
-compatibility to applications. *At least* the kernel ABI described in 
-the headers provided to glibc during compile time must be present at 
-runtime.
-
-Glibc simply has no other means than the kernel headers to figure out 
-which kernel ABI functions will really be there at runtime. Glibc cannot 
-figure out at runtime that it runs on an older kernel which lacks *some* 
-of the ABI glibc relies on. It can only rely on the information in the 
-kernel headers provided at compile time.
-
-Even worse: At runtime glibc cannot detect that some of the kernel 
-interfaces are different or not present at all. It will blindly use the 
-interfaces it knows from its header files, resulting in strange 
-application behaviour in these corner cases.
-
-Regards,
-Thilo
-
--- 
-Dipl.-Ing (FH) Thilo Fromm, MSc., Embedded Systems Developer
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str. 3, D-10319 Berlin, Germany
-Amtsgericht: Berlin Charlottenburg, HRB:54412
-Tel: +49 (30) 515 932 228   mailto:t.fromm@dresearch.de
-Fax: +49 (30) 515 932 77 http://www.dresearch.de
 
 
