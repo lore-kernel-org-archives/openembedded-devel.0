@@ -1,38 +1,40 @@
-Received: from 27.mail-out.ovh.net ([91.121.30.210])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OCz0d-0004GA-Mn
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1OCz32-0007dh-Jq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 19:49:24 +0200
-Received: (qmail 17314 invoked by uid 503); 14 May 2010 17:49:28 -0000
-Received: from b6.ovh.net (HELO mail624.ha.ovh.net) (213.186.33.56)
-	by 27.mail-out.ovh.net with SMTP; 14 May 2010 17:49:27 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 14 May 2010 17:45:21 -0000
-Received: from cug31-2-82-228-86-110.fbx.proxad.net (HELO ?192.168.0.7?)
-	(ebenard%eukrea.com@82.228.86.110)
-	by ns0.ovh.net with SMTP; 14 May 2010 17:45:20 -0000
-Message-ID: <4BED8C2F.1080500@eukrea.com>
-Date: Fri, 14 May 2010 19:45:19 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+	Fri, 14 May 2010 19:51:47 +0200
+Received: by gwb17 with SMTP id 17so747300gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 May 2010 10:47:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=RVwycn3bw6Ksxadr2qaJD1jUn71DBEJnwG4OsmVbT6Y=;
+	b=DZso7Sr9GiFLqWu5lqNzznwqD58PI0IuUQnk8Vc6Gh9CaArSplyo7mQXhxRs0sXWpG
+	iSoP0EEi3VGL7nx8MzbxAeAFzz9uGcTg/ms8UZwHVGorvbM1KnVQMB5xSs9aLI1KISQj
+	ZinIcc1sAJbrOgGGgw7sIy6D/2mfyuTu7o9XQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=raBAkv7WkfM3HIF1tnb5bjQ4zMXRv8Bfck/qcJVHOykPaD6yGXsTHA4dopuyx6C2P0
+	ncIHHFuVdeJQfl2oIFm+elZfDiYOeJtx+cYXjJoeN7C9EcWlRhqu/JvXyBPksUyIaiyD
+	c4E/TmLsauG+t4daep7BV4g2wZ7aWDuqn2nfI=
 MIME-Version: 1.0
+Received: by 10.101.173.28 with SMTP id a28mr1873518anp.229.1273859264931; 
+	Fri, 14 May 2010 10:47:44 -0700 (PDT)
+Received: by 10.100.108.2 with HTTP; Fri, 14 May 2010 10:47:42 -0700 (PDT)
+Date: Fri, 14 May 2010 19:47:42 +0200
+Message-ID: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1272921691-6963-1-git-send-email-eric@eukrea.com>	<4BED67FB.1060900@eukrea.com>	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>	<4BED85C7.8000909@eukrea.com>
-	<hsk1il$v4j$2@dough.gmane.org>
-In-Reply-To: <hsk1il$v4j$2@dough.gmane.org>
-X-Ovh-Tracer-Id: 10101573965955116361
-X-Ovh-Remote: 82.228.86.110 (cug31-2-82-228-86-110.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.30.210
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
+Subject: Issues with parallel build? (Was: gtk+native missing dep ?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +48,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 17:49:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 14 May 2010 17:51:48 -0000
+X-List-Received-Date: Fri, 14 May 2010 17:51:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Le 14/05/2010 19:34, Koen Kooi a écrit :
-> On 14-05-10 19:17, Eric Bénard wrote:
->> Le 14/05/2010 17:52, Koen Kooi a écrit :
->>> Op 14 mei 2010, om 17:10 heeft Eric Bénard het volgende geschreven:
->>>> I was told you are the person to contact about MACHINE_KERNEL_PR so
->>>> may you please have a look to the patch below - also available here :
->>>> http://patchwork.openembedded.org/patch/2012/
->>>>
->>>> Actually, when compiling modules (out of tree), we loose PR if
->>>> MACHINE_KERNEL_PR is not set.
->>>
->>> I don't believe that when MACHINE_KERNEL_PR isn't set people care
->>> about PR.
->>>
->> Does that mean that policy is that MACHINE_KERNEL_PR should be set for
->> every machine ?
->> If yes, maybe this should be added in the doc.
+On Sat, May 8, 2010 at 1:12 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
+> PARALLEL_MAKE = "-j5"
+> #BB_NUMBER_THREADS = "4"
+> BB_NUMBER_THREADS = "2"
 >
-> IMO yes, but some people were against it. Either their kernel never
-> changes or they don't care about out-of-tree modules breaking on kernel
-> changes.
+> fixed the things. This time the dependencies were (correctly) built before...
 >
-so why not setting r0 as a default in bitbake.conf as a compromise ?
+> Andrea
+>
 
-Eric
+I repeated the build of console-image and gtk+-native always fails
+using 4 threads.
+Anyone can confirm?
+
+Regards
+
+Andrea
 
 
