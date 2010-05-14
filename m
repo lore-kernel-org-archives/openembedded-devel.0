@@ -1,31 +1,35 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OCzqh-00085Q-RX
+	(envelope-from <philb@gnu.org>) id 1OD134-0002U0-T6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 20:43:05 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OCzmt-00009b-2c
+	Fri, 14 May 2010 22:00:00 +0200
+Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OD0zH-0000sw-K4
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 22:39:08 +0400
-From: Roman I Khimov <roman@khimov.ru>
+	Fri, 14 May 2010 20:55:59 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 May 2010 22:38:56 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <201005141534.04818.khimov@altell.ru>
-	<1273850912-4808-1-git-send-email-ospite@studenti.unina.it>
-In-Reply-To: <1273850912-4808-1-git-send-email-ospite@studenti.unina.it>
-MIME-Version: 1.0
-Message-Id: <201005142239.03665.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <4BED8C2F.1080500@eukrea.com>
+References: <1272921691-6963-1-git-send-email-eric@eukrea.com>
+	<4BED67FB.1060900@eukrea.com>
+	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
+	<4BED85C7.8000909@eukrea.com> <hsk1il$v4j$2@dough.gmane.org>
+	<4BED8C2F.1080500@eukrea.com>
+Date: Fri, 14 May 2010 20:55:59 +0100
+Message-ID: <1273866959.4465.5.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2 v2] tzcode-native: update to 2010j
+Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,36 +43,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 18:43:05 -0000
-X-Groupsio-MsgNum: 19308
-Content-Type: multipart/signed; boundary="nextPart1685947.hhtQQB78Yc";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 14 May 2010 20:00:00 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
---nextPart1685947.hhtQQB78Yc
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: base64
+On Fri, 2010-05-14 at 19:45 +0200, Eric B=C3=A9nard wrote:
+> so why not setting r0 as a default in bitbake.conf as a compromise ?
 
-0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0J/Rj9GC0L3QuNGG0LAgMTQg0LzQsNGPIDIwMTAg
-MTk6Mjg6MzIg0LDQstGC0L7RgCBBbnRvbmlvIE9zcGl0ZSDQvdCw0L/QuNGB0LDQuzoKPiBVcGRh
-dGUgY2hlY2tzdW1zOyB0emRhdGEgdmVyc2lvbiBidW1wcyB0byAyMDEwaiBhcyB3ZWxsLgo+IAo+
-IFNpZ25lZC1vZmYtYnk6IEFudG9uaW8gT3NwaXRlIDxvc3BpdGVAc3R1ZGVudGkudW5pbmEuaXQ+
-Cj4gLS0tCj4gQ2hhbmdlcyBzaW5jZSB2MToKPiAgU2V0IFBSIHRvICIke0lOQ19QUn0uMCIgYXMg
-Y29uZmlybWVkIGJ5IFJvbWFuLgoKVGhhbmtzLCBwdXNoZWQgYm90aC4KCi0tIAogaHR0cDovL3Jv
-bWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1vdi5ydQpncGcgLS1rZXlzZXJ2ZXIgaGtw
-Oi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4RTVFMDU1QzMK
+A default MACHINE_KERNEL_PR, you mean?  That would cause PR to suddenly
+go backwards for a whole bunch of machines, which would definitely not
+be a good thing.  See the mailing list archive; there was quite a lot of
+discussion of these kinds of issues at the time that the M_K_PR change
+was originally landed.
 
---nextPart1685947.hhtQQB78Yc
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+p.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkvtmMcACgkQXJ70z+XgVcMoTQCgnm4VHm1D3eCWJmgo9HRxgmxh
-lsoAn0TyoTKhZVq2SHiRJZpf/o5hsevY
-=cw0A
------END PGP SIGNATURE-----
 
---nextPart1685947.hhtQQB78Yc--
+
