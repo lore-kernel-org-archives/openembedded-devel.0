@@ -1,41 +1,38 @@
-Received: from smtp-out110.alice.it ([85.37.17.110])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1OCwsM-0001Sq-N9
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1OCxAN-0002Fw-CA
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 14 May 2010 17:32:35 +0200
-Received: from fbcmmo06.fbc.local ([192.168.184.137]) by smtp-out110.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 14 May 2010 17:28:38 +0200
-Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by fbcmmo06.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 14 May 2010 17:28:37 +0200
-Received: from jcn ([87.1.14.62]) by FBCMCL01B03.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Fri, 14 May 2010 17:28:36 +0200
-Received: from ao2 by jcn with local (Exim 4.71)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1OCwoV-0001G3-1F; Fri, 14 May 2010 17:28:35 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Fri, 14 May 2010 17:51:11 +0200
+Received: from [192.168.1.12] (c-76-115-42-183.hsd1.or.comcast.net
+	[76.115.42.183])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id A1F6A308C9
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 14 May 2010 11:47:11 -0400 (EDT)
+Message-ID: <4BED7085.9020608@zenlinux.com>
+Date: Fri, 14 May 2010 08:47:17 -0700
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 14 May 2010 17:28:32 +0200
-Message-Id: <1273850912-4808-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <201005141534.04818.khimov@altell.ru>
-References: <201005141534.04818.khimov@altell.ru>
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-OriginalArrivalTime: 14 May 2010 15:28:36.0424 (UTC)
-	FILETIME=[1EF25C80:01CAF37A]
-X-SA-Exim-Connect-IP: 85.37.17.110
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+References: <alpine.DEB.2.00.1005140557420.29014@lynx>
+In-Reply-To: <alpine.DEB.2.00.1005140557420.29014@lynx>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: A1F6A308C9.7C98C
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2 v2] tzcode-native: update to 2010j
+Subject: Re: numerous "strip command failed" ERRORs in building beagle image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,70 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 14 May 2010 15:32:35 -0000
+X-List-Received-Date: Fri, 14 May 2010 15:51:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Update checksums; tzdata version bumps to 2010j as well.
+On 05/14/2010 03:00 AM, Robert P. J. Day wrote:
+>
+>    obviously not fatal since the build kept chugging along, but there
+> were a number of "ERROR"s of the following form:
+>
+>
+> NOTE: Running task 3873 of 11130 (ID: 4231,
+> /home/rpjday/oe/openembedded/recipes/xcb/libpthread-stubs_0.2.bb,
+> do_patch)
+> ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+> --remove-section=.comment --remove-section=.note
+> '/home/rpjday/oe/angstrom-dev/work/beagleboard-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r75+gitr627293ad28604b22612f9a4a318f64cfab241e22/package/kernel/scripts/pnmtologo''
+> strip command failed
+> ERROR: runstrip: ''arm-angstrom-linux-gnueabi-strip'
+> --remove-section=.comment --remove-section=.note
+> '/home/rpjday/oe/angstrom-dev/work/beagleboard-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r75+gitr627293ad28604b22612f9a4a318f64cfab241e22/package/kernel/scripts/bin2c''
+> strip command failed
+> ... etc etc ...
+>
+>    normally, i don't care but i typically take anything labelled as an
+> "ERROR" seriously so if it's genuinely not an error, perhaps it should
+> be relabelled.  (suggested from a position of complete ignorance.)
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
----
-Changes since v1:
- Set PR to "${INC_PR}.0" as confirmed by Roman.
+This happens in the do_package task of many of the kernel builds. I was 
+looking into it just the other night as it triggers BuildBot to think 
+that the build failed (because it sees a non-zero exit status from this 
+section).
 
-Thanks,
-   Antonio
+Is it even necessary to stage the kernel scripts/ directory? That's the 
+final thing happening in the do_install task in kernel.bbclass. Removing 
+that line would be a one-liner patch fix to this issue.
 
- recipes/tzcode/tzcode-native_2010f.bb |   16 ----------------
- recipes/tzcode/tzcode-native_2010j.bb |   16 ++++++++++++++++
- 2 files changed, 16 insertions(+), 16 deletions(-)
- delete mode 100644 recipes/tzcode/tzcode-native_2010f.bb
- create mode 100644 recipes/tzcode/tzcode-native_2010j.bb
+Scott
 
-diff --git a/recipes/tzcode/tzcode-native_2010f.bb b/recipes/tzcode/tzcode-native_2010f.bb
-deleted file mode 100644
-index 8585de2..0000000
---- a/recipes/tzcode/tzcode-native_2010f.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require tzcode-native.inc
--
--# Note that elsie.nci.nih.gov removes old versions when new is coming out
--# So if this doesn't build for you because of missing source file, just
--# bump it to the latest available version, removing old one
--# Also, tzdata (and it is needed to build tzcode) version can differ from
--# tzcode version, thus this variable
--
--TZDATA_PV = "2010i"
--
--SRC_URI[tzcode-2010f.md5sum] = "e530cc9bbdfd5e8c1eac21a68f4d5656"
--SRC_URI[tzcode-2010f.sha256sum] = "651d866c91ada925b4ac9491e69ebd5c355c46b2c01dd1741b5e6a609d93eb1e"
--SRC_URI[tzdata-2010i.md5sum] = "4d2a90afd5bffe8df97f3def245e178e"
--SRC_URI[tzdata-2010i.sha256sum] = "bee0a26cca54db3413416d968c0a6361d83188b112d2512559d0e3602f254dc3"
--
--PR = "${INC_PR}.2"
-diff --git a/recipes/tzcode/tzcode-native_2010j.bb b/recipes/tzcode/tzcode-native_2010j.bb
-new file mode 100644
-index 0000000..7e1ae77
---- /dev/null
-+++ b/recipes/tzcode/tzcode-native_2010j.bb
-@@ -0,0 +1,16 @@
-+require tzcode-native.inc
-+
-+# Note that elsie.nci.nih.gov removes old versions when new is coming out
-+# So if this doesn't build for you because of missing source file, just
-+# bump it to the latest available version, removing old one
-+# Also, tzdata (and it is needed to build tzcode) version can differ from
-+# tzcode version, thus this variable
-+
-+TZDATA_PV = "2010j"
-+
-+SRC_URI[tzcode-2010j.md5sum] = "5ba8345720296d3a659b349b2052d139"
-+SRC_URI[tzcode-2010j.sha256sum] = "f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
-+SRC_URI[tzdata-2010j.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
-+SRC_URI[tzdata-2010j.sha256sum] = "dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
-+
-+PR = "${INC_PR}.0"
 -- 
-1.7.1
-
+Scott Garman
+sgarman at zenlinux dot com
 
 
