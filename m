@@ -1,45 +1,36 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from smtp-out108.alice.it ([85.37.17.108])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1ODJjO-0008Da-Qo
+	(envelope-from <GNUtoo@no-log.org>) id 1ODNkx-0002vX-FC
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 May 2010 17:56:53 +0200
-Received: by gwb17 with SMTP id 17so1127174gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 May 2010 08:52:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=JcC9ShSKSlb5cO61NQBLECeARjGBWtenUaFXSU94Bbs=;
-	b=FXoS3hYM6vJkk8Qpf6fZ5Aa2I9RJ7tKwz108xusQkrDCKFDVBSvn5P0jPo1BMo6rI6
-	R5O9rHYsBSYuKEOLpD/TMQ5x+n1X6lgP7TOczyshdDJ4F/Xk2kQ5rDtizNPVQ87A4G7k
-	DfAYyRUYljtZpCgocuBM629Q6P31iAOfccvgo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=gxj4DVzoDGiD3xLUW8TmcrL0+ik0E0FbxlkJaB3uVtJnTX0/5Y94TQ7OwVUUqVNIgv
-	u+EVkGIQw1YLCIdKDqEasFY9c3fztYQMyrw55m6m4wU5fQ3YQMd6JiWn3fawPAORY4wU
-	h85z9LscJcpG9GXA3g4mJDTK894s1pJqrVMQE=
-MIME-Version: 1.0
-Received: by 10.100.243.18 with SMTP id q18mr3508864anh.166.1273938772881; 
-	Sat, 15 May 2010 08:52:52 -0700 (PDT)
-Received: by 10.100.108.2 with HTTP; Sat, 15 May 2010 08:52:52 -0700 (PDT)
-In-Reply-To: <1273912548.4196.2.camel@becca>
-References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
-	<1273859746.22943.454.camel@trini-m4400>
-	<1273912548.4196.2.camel@becca>
-Date: Sat, 15 May 2010 17:52:52 +0200
-Message-ID: <AANLkTilZ_vbijWf3ZpC-_nK2NRANXcBJPpHZK_6_CoLj@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 15 May 2010 22:14:44 +0200
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out108.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 15 May 2010 22:10:45 +0200
+Received: from FBCMCL01B01.fbc.local ([192.168.69.82]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 15 May 2010 22:10:44 +0200
+Received: from [192.168.1.116] ([79.21.48.109]) by FBCMCL01B01.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 15 May 2010 22:10:44 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <1273870775.8005.178.camel@trini-m4400>
+References: <1273870775.8005.178.camel@trini-m4400>
+Date: Sat, 15 May 2010 22:10:43 +0200
+Message-ID: <1273954243.2286.0.camel@gnutoo-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-OriginalArrivalTime: 15 May 2010 20:10:44.0924 (UTC)
+	FILETIME=[B38837C0:01CAF46A]
+X-SA-Exim-Connect-IP: 85.37.17.108
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
+Cc: Eric Benard <eric@eukrea.com>
+Subject: Re: Write access for Eric Benard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,24 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 May 2010 15:56:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 15 May 2010 20:14:44 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I'm using bitbake 1.10
+On Fri, 2010-05-14 at 13:59 -0700, Tom Rini wrote:
+> Hey all,
+> 
+> Eric has been posting a number of useful fixes, and has responded
+> promptly to feedback on patches (and requests to get feedback from
+> specific people as needed).  I'd like to recommend him for write access.
+> 
+> Thanks!
+> 
+great idea!
 
-commit bef07c6dc7e3b7b8c995d70ea429d141278b6eb6
-Author: Chris Larson <chris_larson@mentor.com>
-Date:   Thu Apr 15 08:04:35 2010 -0700
-
-    Bump version from 1.9.0 to 1.10.0
-
-I'd like to add that it seems a bit strange to see all that stuff in
-the deps of console-image...but this was already discussed and in this
-thread is OT ;)
+Denis.
 
 
-Regards
-
-Andrea
 
 
