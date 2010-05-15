@@ -1,44 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODJXt-0002OK-SN for openembedded-devel@lists.openembedded.org;
-	Sat, 15 May 2010 17:44:58 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODJU3-0008MZ-Vj for openembedded-devel@lists.openembedded.org;
-	Sat, 15 May 2010 17:40:59 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 May 2010 17:40:59 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <andrea.adami@gmail.com>) id 1ODJjO-0008Da-Qo
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 15 May 2010 17:56:53 +0200
+Received: by gwb17 with SMTP id 17so1127174gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 15 May 2010 17:40:59 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 15 May 2010 08:52:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=JcC9ShSKSlb5cO61NQBLECeARjGBWtenUaFXSU94Bbs=;
+	b=FXoS3hYM6vJkk8Qpf6fZ5Aa2I9RJ7tKwz108xusQkrDCKFDVBSvn5P0jPo1BMo6rI6
+	R5O9rHYsBSYuKEOLpD/TMQ5x+n1X6lgP7TOczyshdDJ4F/Xk2kQ5rDtizNPVQ87A4G7k
+	DfAYyRUYljtZpCgocuBM629Q6P31iAOfccvgo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=gxj4DVzoDGiD3xLUW8TmcrL0+ik0E0FbxlkJaB3uVtJnTX0/5Y94TQ7OwVUUqVNIgv
+	u+EVkGIQw1YLCIdKDqEasFY9c3fztYQMyrw55m6m4wU5fQ3YQMd6JiWn3fawPAORY4wU
+	h85z9LscJcpG9GXA3g4mJDTK894s1pJqrVMQE=
+MIME-Version: 1.0
+Received: by 10.100.243.18 with SMTP id q18mr3508864anh.166.1273938772881; 
+	Sat, 15 May 2010 08:52:52 -0700 (PDT)
+Received: by 10.100.108.2 with HTTP; Sat, 15 May 2010 08:52:52 -0700 (PDT)
+In-Reply-To: <1273912548.4196.2.camel@becca>
+References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
+	<1273859746.22943.454.camel@trini-m4400>
+	<1273912548.4196.2.camel@becca>
+Date: Sat, 15 May 2010 17:52:52 +0200
+Message-ID: <AANLkTilZ_vbijWf3ZpC-_nK2NRANXcBJPpHZK_6_CoLj@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 15 May 2010 17:40:47 +0200
-Message-ID: <hsmf9v$mug$1@dough.gmane.org>
-References: <AANLkTil2qHZfmWTZXunj5iWnMZg0vFDDFEtzFSR9t7Ok@mail.gmail.com>	<AANLkTinuZ0-7oI-cEQVr7YkFtZm8GLZ2_IIkIizB3wjA@mail.gmail.com>	<AANLkTilk2Zb_F5psNZJNC8t9bfp7OOnMnAK5nyYIz96y@mail.gmail.com>	<hsmbkb$btq$1@dough.gmane.org>
-	<AANLkTinydII_uSb0INtCwN6oo4nBu3oYkhKG4ZCr71Uj@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <AANLkTinydII_uSb0INtCwN6oo4nBu3oYkhKG4ZCr71Uj@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: failure building opkg-native on 64 bit Ubuntu
+Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,45 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 May 2010 15:44:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 15 May 2010 15:56:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I'm using bitbake 1.10
 
-On 15-05-10 17:09, Steve Sakoman wrote:
-> On Sat, May 15, 2010 at 7:38 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> 
->> On 15-05-10 15:41, Steve Sakoman wrote:
->>
->>>>> x86_64-linux-libtool: link: cannot find the library `' or unhandled
->>>>> argument `/..//lib'
->>>>> make[2]: *** [libopkg.la] Error 1
->>
->> Could you have a look at libcurl.la in your x86_64 sysroots dir? I
->> suspect that has the offending '/..//lib' in it.
-> 
-> Yes, libcurl.la did contain the offending '/..//lib'
-> 
->> After removing that things build again for me. I suspect the curl-native
->> recipe installs a broken .la file.
-> 
-> That worked for me too.  Seems that we are plagued by broken .la files!
+commit bef07c6dc7e3b7b8c995d70ea429d141278b6eb6
+Author: Chris Larson <chris_larson@mentor.com>
+Date:   Thu Apr 15 08:04:35 2010 -0700
 
-Indeed, luckily it was lib*c*url.la instead of libzurl.la, it happened
-to be the 3rd one I checked :)
+    Bump version from 1.9.0 to 1.10.0
 
-regards,
+I'd like to add that it seems a bit strange to see all that stuff in
+the deps of console-image...but this was already discussed and in this
+thread is OT ;)
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL7sB/MkyGM64RGpERAjtgAKChAzQs1dJvcRbIhmuAVzl7kjGKYwCfSJcE
-7PwgjTs238QFouPpw2Y1A3w=
-=Xjrl
------END PGP SIGNATURE-----
+Regards
 
+Andrea
 
 
