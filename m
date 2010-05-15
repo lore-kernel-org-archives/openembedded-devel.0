@@ -1,44 +1,43 @@
-Received: from mail-gx0-f228.google.com ([209.85.217.228])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ODAkT-0002Fn-Av
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 15 May 2010 08:21:22 +0200
-Received: by gxk28 with SMTP id 28so2062328gxk.7
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ODBxA-0000q7-N3 for openembedded-devel@lists.openembedded.org;
+	Sat, 15 May 2010 09:38:33 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ODBtN-0001Cg-Cv for openembedded-devel@lists.openembedded.org;
+	Sat, 15 May 2010 09:34:37 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 15 May 2010 09:34:37 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 14 May 2010 23:17:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=r2F95jipgFzEylqlsKPSILZ0LmJM1CeLcXQIrVreqSo=;
-	b=pu5qNMUD4ZNu7Jf+ixmbG9TeMcwaYmTlMiK6Dq7P5Y+2cEo6PEitxqWP/BA2Cc1jrF
-	sqpq/buNGxES+CZJzMxHsswyeaNQ4xmpgdAthRM+fvobL+LO/NrLHLOivrX86ywW905u
-	/yu2Rhw2fSs/12a5lDzSJv7lShvrveY4AJvpU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=yHnS7xH/ALUeU5kiKYrBz1idvNsNmO77mugwZErbl2BqGA9YF0NYjVNn5W8Fi1do9g
-	/4MAZavWJY++hZ6iaIp4o6oK+H+Loj1rWy0z+x/1bK6/uMeWju4OadNHboRTySNaaNNu
-	sKn/wFx2gjsxiFZKBx3h/H56R0ACUj3LvYGNc=
-MIME-Version: 1.0
-Received: by 10.101.174.20 with SMTP id b20mr2738980anp.243.1273904243607; 
-	Fri, 14 May 2010 23:17:23 -0700 (PDT)
-Received: by 10.100.96.12 with HTTP; Fri, 14 May 2010 23:17:23 -0700 (PDT)
-In-Reply-To: <AANLkTil2qHZfmWTZXunj5iWnMZg0vFDDFEtzFSR9t7Ok@mail.gmail.com>
-References: <AANLkTil2qHZfmWTZXunj5iWnMZg0vFDDFEtzFSR9t7Ok@mail.gmail.com>
-Date: Fri, 14 May 2010 23:17:23 -0700
-Message-ID: <AANLkTinuZ0-7oI-cEQVr7YkFtZm8GLZ2_IIkIizB3wjA@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Sat, 15 May 2010 09:34:37 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.228
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 15 May 2010 09:34:23 +0200
+Message-ID: <hslipv$3q0$1@dough.gmane.org>
+References: <1273870775.8005.178.camel@trini-m4400>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <1273870775.8005.178.camel@trini-m4400>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: failure building opkg-native on 64 bit Ubuntu
+Subject: Re: Write access for Eric Benard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,101 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 15 May 2010 06:21:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 15 May 2010 07:38:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 14, 2010 at 8:43 PM, Steve Sakoman <sakoman@gmail.com> wrote:
-> Building with oe.dev. =A0Works on 32 bit Ubuntu, but fails on the 64 bit =
-version.
->
-> Any ideas? =A0Below is log.do_compile:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-hmmm I have 10.04 running on 64bit I dont see this error. Can you also
-post your local.conf
-and anything you have in ASSUME_PROVIDED list.
+On 14-05-10 22:59, Tom Rini wrote:
+> Hey all,
+> 
+> Eric has been posting a number of useful fixes, and has responded
+> promptly to feedback on patches (and requests to get feedback from
+> specific people as needed).  I'd like to recommend him for write access.
 
->
-> NOTE: make -j 4
-> Making all in libbb
-> =A0CC =A0 =A0gz_open.o
-> =A0CC =A0 =A0unarchive.o
-> =A0CC =A0 =A0unzip.o
-> =A0CC =A0 =A0wfopen.o
-> unarchive.c: In function 'extract_archive':
-> unarchive.c:139: warning: ignoring return value of 'fread', declared
-> with attribute warn_unused_result
-> unarchive.c:246: warning: ignoring return value of 'chown', declared
-> with attribute warn_unused_result
-> unarchive.c: In function 'get_header_ar':
-> unarchive.c:387: warning: ignoring return value of 'fread', declared
-> with attribute warn_unused_result
-> unarchive.c: In function 'deb_extract':
-> unarchive.c:664: warning: ignoring return value of 'fread', declared
-> with attribute warn_unused_result
-> unzip.c: In function 'unzip':
-> unzip.c:1002: warning: ignoring return value of 'fread', declared with
-> attribute warn_unused_result
-> =A0CC =A0 =A0copy_file_chunk.o
-> =A0CC =A0 =A0copy_file.o
-> =A0CC =A0 =A0xreadlink.o
-> =A0CC =A0 =A0concat_path_file.o
-> =A0CC =A0 =A0xfuncs.o
-> =A0CC =A0 =A0last_char_is.o
-> =A0CC =A0 =A0make_directory.o
-> =A0CC =A0 =A0safe_strncpy.o
-> =A0CC =A0 =A0parse_mode.o
-> =A0CC =A0 =A0all_read.o
-> =A0CC =A0 =A0time_string.o
-> =A0CC =A0 =A0mode_string.o
-> =A0LINK =A0libbb.la
-> Making all in libopkg
-> =A0CC =A0 =A0opkg.o
-> =A0CC =A0 =A0opkg_configure.o
-> =A0CC =A0 =A0opkg_download.o
-> =A0CC =A0 =A0opkg_cmd.o
-> =A0CC =A0 =A0opkg_install.o
-> =A0CC =A0 =A0opkg_upgrade.o
-> =A0CC =A0 =A0opkg_remove.o
-> =A0CC =A0 =A0opkg_conf.o
-> =A0CC =A0 =A0opkg_utils.o
-> =A0CC =A0 =A0pkg.o
-> =A0CC =A0 =A0pkg_depends.o
-> =A0CC =A0 =A0pkg_extract.o
-> =A0CC =A0 =A0hash_table.o
-> =A0CC =A0 =A0pkg_hash.o
-> =A0CC =A0 =A0pkg_parse.o
-> =A0CC =A0 =A0pkg_vec.o
-> =A0CC =A0 =A0file_util.o
-> =A0CC =A0 =A0md5.o
-> =A0CC =A0 =A0opkg_message.o
-> =A0CC =A0 =A0xsystem.o
-> =A0CC =A0 =A0xregex.o
-> =A0CC =A0 =A0sprintf_alloc.o
-> =A0CC =A0 =A0conffile.o
-> =A0CC =A0 =A0conffile_list.o
-> =A0CC =A0 =A0nv_pair.o
-> =A0CC =A0 =A0sha256.o
-> =A0CC =A0 =A0nv_pair_list.o
-> =A0CC =A0 =A0pkg_dest.o
-> =A0CC =A0 =A0pkg_dest_list.o
-> =A0CC =A0 =A0pkg_src.o
-> =A0CC =A0 =A0pkg_src_list.o
-> =A0CC =A0 =A0void_list.o
-> =A0CC =A0 =A0str_list.o
-> =A0CC =A0 =A0active_list.o
-> =A0LINK =A0libopkg.la
-> x86_64-linux-libtool: link: cannot find the library `' or unhandled
-> argument `/..//lib'
-> make[2]: *** [libopkg.la] Error 1
-> make[1]: *** [all] Error 2
-> make: *** [all-recursive] Error 1
-> FATAL: oe_runmake failed
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Makes sense to me, he gets my vote.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL7k5/MkyGM64RGpERAkxbAKCiysAcZ0jofBwgOskuteoVWu3ytgCgprtW
+CV4vL4bjVAsjqn0OusJ+ztk=
+=iYWe
+-----END PGP SIGNATURE-----
+
 
 
