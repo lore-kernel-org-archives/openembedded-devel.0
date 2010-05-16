@@ -1,48 +1,44 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1ODkS9-00064c-Bu
+	(envelope-from <joaohf@gmail.com>) id 1ODl5q-0008Fa-Gk
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 22:28:54 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id D4BECF6737
+	Sun, 16 May 2010 23:09:54 +0200
+Received: by pwj5 with SMTP id 5so2019922pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 16:24:51 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Sun, 16 May 2010 16:24:51 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=n75oL6CHyt6Mg5WCsYpdKlrkQXI=;
-	b=EqZS+N1Mk9fqgS7WiWg5KcZzByYhZg0ACxILAHQnIKbzoH0MdfO+5b+7Axkffi8lkrjCRVT4I9dwxXFPQifetTgQAHmganPUxK0YgVPRM6T2wAzIB7BRP2Tf0ZCfWUj3ZZCUKoxrLn72dZMpbK8qedu4siQmtDyYr40QhWhReTE=
-X-Sasl-enc: QqbCodZvFpgvtQLDPYR1aEzRT6zDlzUcBjnuO2A/vGJo 1274041491
-Received: from [192.168.1.34] (hnvr-4d078ae5.pool.mediaWays.net [77.7.138.229])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 2DAEA4CBFA7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 16:24:51 -0400 (EDT)
-Date: Sun, 16 May 2010 22:26:17 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hs0snm$i4a$1@dough.gmane.org>
-Message-ID: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.DEB.1.10.1005011614380.15503@vitus.devnet.local>
-	<1272723767-16871-1-git-send-email-vjensen@gmx.de>
-	<1272723767-16871-2-git-send-email-vjensen@gmx.de>
-	<20100507101850.GD18308@excalibur.local>
-	<hs0snm$i4a$1@dough.gmane.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Sun, 16 May 2010 14:05:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=7aFGm99gKuXgSUl1QYyCF8ooCMczaAH/5sRWMn6EwLs=;
+	b=R+GiZ+1aLOmxzPBe24RRlQaEdi6gewhNU1S82B/Tq2J0/TUZhe96B90qMO8F+cCE39
+	c0OpPlGoUCXp/nDy4adB+SfV00mjuDKx+5FY/jTXTd0AoKbMXXjAMqvkFdo3dBts9tT3
+	6GrY7x/5iqyiJimQZwzokKDdMp9VZ9/8V78GI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ImRn5tpM6Zb8Ttj3fVWIIm751PXT5gRmTQyTddYdCglCwbSnNSFvmszuwovJYx1q2Z
+	ob/SRgFNgqUEXUtYp5HokwS0e/gxkCK3d3TEeb0/C9aa7OG5nyi/386BbsoMUEm8maxD
+	M1KXesvCEL1dijIvXZGA2qaUcnGVVKb+lp18k=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Received: by 10.141.90.7 with SMTP id s7mr2973191rvl.38.1274043939196; Sun, 16 
+	May 2010 14:05:39 -0700 (PDT)
+Received: by 10.141.51.17 with HTTP; Sun, 16 May 2010 14:05:39 -0700 (PDT)
+In-Reply-To: <hso7fa$2lh$2@dough.gmane.org>
+References: <AANLkTikfszFRLw6Ct-aEAUcu1xs8hRLdQRROW8OswCb7@mail.gmail.com>
+	<hso7fa$2lh$2@dough.gmane.org>
+Date: Sun, 16 May 2010 18:05:39 -0300
+Message-ID: <AANLkTilux_HTutdHJZKh7hipzViaahkx7OtLOI6RFaVj@mail.gmail.com>
+From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: joaohf@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] canutils: new recipe
+Subject: Re: [PATCH] Add cgreen. Library to do unit test for C language
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,64 +52,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 May 2010 20:28:54 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Sun, 16 May 2010 21:09:55 -0000
+X-Groupsio-MsgNum: 19356
+Content-Type: multipart/mixed; boundary=000e0cd111a26c909d0486bc784a
 
-On Fri, 7 May 2010, Koen Kooi wrote:
+--000e0cd111a26c909d0486bc784a
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-> On 07-05-10 12:18, Stefan Schmidt wrote:
->> Hello.
->>
->> On Sat, 2010-05-01 at 16:22, Vitus Jensen wrote:
->>> Adds canutils (PTX flavour) 4.0.4 as alternative to socketcan-utils-test.
->>> canutils RCONFLICTS with socketcan-utils-test because of identical
->>> file names.
->>>
->>> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
->>> ---
->>>  recipes/socketcan/canutils_4.0.4.bb           |   19 +++++++++++++++++++
->>>  recipes/socketcan/socketcan-utils-test_svn.bb |    1 +
->>>  2 files changed, 20 insertions(+), 0 deletions(-)
->>>  create mode 100644 recipes/socketcan/canutils_4.0.4.bb
->>>
->>> diff --git a/recipes/socketcan/canutils_4.0.4.bb b/recipes/socketcan/canutils_4.0.4.bb
->>> new file mode 100644
->>> index 0000000..e769c46
->>> --- /dev/null
->>> +++ b/recipes/socketcan/canutils_4.0.4.bb
->>> @@ -0,0 +1,19 @@
->>> +DESCRIPTION = "canutils (PTX flavour)"
->>> +AUTHOR = "Luotao Fu"
->>> +HOMEPAGE = "http://www.pengutronix.de"
->>> +SECTION = "console/network"
->>> +PRIORITY = "optional"
->>> +LICENSE = "LGPL"
->>> +DEPENDS = "libsocketcan"
->>> +RDEPENDS = "libsocketcan"
->>
->> Why do you need this RDEPENDS on the lib when it is already in DEPENDS?
->
-> The better question is "Why doesn't OE shlib code pickup that
-> dependency?" :)
-...
+Nothing special. This was a mistake.
 
-I thought that both settings worked independly and added RDEPENDS because 
-of the shared library.  But the dependency was indeed detected 
-automatically.
+---
+ recipes/cgreen/cgreen.inc    |    2 --
+ recipes/cgreen/cgreen_svn.bb |    6 ------
+ 2 files changed, 0 insertions(+), 8 deletions(-)
 
-As for the git access: it's our policy here to fetch if possibly directly 
-from a sourcecode repository.  Providing readonly access via git or svn is 
-really getting common and I guess those tarballs will go away sometime.
+diff --git a/recipes/cgreen/cgreen.inc b/recipes/cgreen/cgreen.inc
+index 9c71db5..eb3307e 100644
+--- a/recipes/cgreen/cgreen.inc
++++ b/recipes/cgreen/cgreen.inc
+@@ -11,5 +11,3 @@ BBCLASSEXTEND =3D "native sdk"
 
-BTW: there is already a new canutils/libsocketcan release which ships with 
-a new linux/can/netlink.h header (can_netlink.h).  I will provide recipes 
-for both versions and ship can_netlink.h again.  Otherwise it could 
-create a race between libsocketcan and linux-libc-headers versions.
+ inherit cmake
 
-Vitus
+-#FILES_${PN}-dev +=3D "${bindir}/*-config"
+-#FILES_${PN}-utils =3D ""
+diff --git a/recipes/cgreen/cgreen_svn.bb b/recipes/cgreen/cgreen_svn.bb
+index 88dad6d..65f2f34 100644
+--- a/recipes/cgreen/cgreen_svn.bb
++++ b/recipes/cgreen/cgreen_svn.bb
+@@ -13,9 +13,3 @@ EXTRA_OEMAKE =3D "INSTALL_PREFIX=3D${D}"
+ EXTRA_OECMAKE =3D ""
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+ OECMAKE_SOURCEPATH =3D "../cgreen"
+-
+-PARALLEL_MAKE =3D ""
+-CCACHE =3D ""
+-
+-
+-
+--=20
+1.7.0.4
 
 
+--=20
+-----------------------------------------------------------
+Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
+Campinas-SP-Brasil
+BSD051283
+LPI 1
+http://www.joaohfreitas.eti.br
+
+--000e0cd111a26c909d0486bc784a
+Content-Type: text/x-diff; charset=US-ASCII; name="0008-Remove-mistake-configs.patch"
+Content-Disposition: attachment; 
+	filename="0008-Remove-mistake-configs.patch"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_g9acsmh00
+
+RnJvbSBlYzVmODM1Zjc4YmQ0Y2ZlZTdkYTMyMDJjZTA3NWIyYzZkYjNmNWMyIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBKb2FvIEguIEZyZWl0YXMgPGpvYW9oZkBnbWFpbC5jb20+CkRh
+dGU6IFN1biwgMTYgTWF5IDIwMTAgMTg6MDA6MzQgLTAzMDAKU3ViamVjdDogW1BBVENIIHYyIDgv
+OV0gUmVtb3ZlIG1pc3Rha2UgY29uZmlncwoKLS0tCiByZWNpcGVzL2NncmVlbi9jZ3JlZW4uaW5j
+ICAgIHwgICAgMiAtLQogcmVjaXBlcy9jZ3JlZW4vY2dyZWVuX3N2bi5iYiB8ICAgIDYgLS0tLS0t
+CiAyIGZpbGVzIGNoYW5nZWQsIDAgaW5zZXJ0aW9ucygrKSwgOCBkZWxldGlvbnMoLSkKCmRpZmYg
+LS1naXQgYS9yZWNpcGVzL2NncmVlbi9jZ3JlZW4uaW5jIGIvcmVjaXBlcy9jZ3JlZW4vY2dyZWVu
+LmluYwppbmRleCA5YzcxZGI1Li5lYjMzMDdlIDEwMDY0NAotLS0gYS9yZWNpcGVzL2NncmVlbi9j
+Z3JlZW4uaW5jCisrKyBiL3JlY2lwZXMvY2dyZWVuL2NncmVlbi5pbmMKQEAgLTExLDUgKzExLDMg
+QEAgQkJDTEFTU0VYVEVORCA9ICJuYXRpdmUgc2RrIgogCiBpbmhlcml0IGNtYWtlCiAKLSNGSUxF
+U18ke1BOfS1kZXYgKz0gIiR7YmluZGlyfS8qLWNvbmZpZyIKLSNGSUxFU18ke1BOfS11dGlscyA9
+ICIiCmRpZmYgLS1naXQgYS9yZWNpcGVzL2NncmVlbi9jZ3JlZW5fc3ZuLmJiIGIvcmVjaXBlcy9j
+Z3JlZW4vY2dyZWVuX3N2bi5iYgppbmRleCA4OGRhZDZkLi42NWYyZjM0IDEwMDY0NAotLS0gYS9y
+ZWNpcGVzL2NncmVlbi9jZ3JlZW5fc3ZuLmJiCisrKyBiL3JlY2lwZXMvY2dyZWVuL2NncmVlbl9z
+dm4uYmIKQEAgLTEzLDkgKzEzLDMgQEAgRVhUUkFfT0VNQUtFID0gIklOU1RBTExfUFJFRklYPSR7
+RH0iCiBFWFRSQV9PRUNNQUtFID0gIiIKIAogT0VDTUFLRV9TT1VSQ0VQQVRIID0gIi4uL2NncmVl
+biIKLQotUEFSQUxMRUxfTUFLRSA9ICIiCi1DQ0FDSEUgPSAiIgotCi0KLQotLSAKMS43LjAuNAoK
+
+--000e0cd111a26c909d0486bc784a--
