@@ -1,33 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODYUn-0004lY-Lg for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 09:42:46 +0200
+	id 1ODYW1-0004oe-A1 for openembedded-devel@lists.openembedded.org;
+	Sun, 16 May 2010 09:44:02 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODYQx-0005WM-Gv for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 09:38:47 +0200
+	id 1ODYSC-00069v-C3 for openembedded-devel@lists.openembedded.org;
+	Sun, 16 May 2010 09:40:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 09:38:47 +0200
+	Sun, 16 May 2010 09:40:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 09:38:47 +0200
+	Sun, 16 May 2010 09:40:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 16 May 2010 09:38:39 +0200
-Message-ID: <hso7dv$2lh$1@dough.gmane.org>
-References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>
+Date: Sun, 16 May 2010 09:39:22 +0200
+Message-ID: <hso7fa$2lh$2@dough.gmane.org>
+References: <AANLkTikfszFRLw6Ct-aEAUcu1xs8hRLdQRROW8OswCb7@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>
+In-Reply-To: <AANLkTikfszFRLw6Ct-aEAUcu1xs8hRLdQRROW8OswCb7@mail.gmail.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -37,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add lksctp tools
+Subject: Re: [PATCH] Add cgreen. Library to do unit test for C language
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,19 +51,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 May 2010 07:42:46 -0000
+X-List-Received-Date: Sun, 16 May 2010 07:44:02 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 16-05-10 05:40, João Henrique Freitas wrote:
+On 16-05-10 05:41, João Henrique Freitas wrote:
 
 > +PARALLEL_MAKE = ""
 > +CCACHE = ""
 
-I can guess why parallel make would fail, but ccache?
+Same comment as before, what is so special about cgreen that ccache
+doesn't work?
 
 regards,
 
@@ -71,9 +72,9 @@ Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFL76D/MkyGM64RGpERAqh3AJ0Zo82pyhnTHJvwuq76RNkovvq1ZwCePT9d
-BeBgJaW9Uk0wKHcvu2+XldM=
-=yVfS
+iD8DBQFL76EqMkyGM64RGpERAs3AAKCw0zPrgwqxKcq6zrUK7aPZHOXf+QCgrNBH
+PyFYNadtwTs34m7vEIHUi8E=
+=rKZT
 -----END PGP SIGNATURE-----
 
 
