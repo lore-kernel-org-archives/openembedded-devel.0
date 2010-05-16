@@ -1,43 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODgiD-0006OQ-7Z for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 18:29:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODgeF-00043b-V0 for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 18:25:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 18:25:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1ODh0z-000731-3D
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 16 May 2010 18:48:36 +0200
+Received: by gya1 with SMTP id 1so1685553gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 18:25:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 16 May 2010 09:44:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=ingQ6iO9DArYWUCLblpDg5eQbzFUg9KAm2S9heXbEmg=;
+	b=mjjWFi6YbUDNSr2Xy50WlTh7WZhTLvLH5F3JoVjayVVxgmt05r9YgtotrYWRy4zI+f
+	4vKDYZ/vEOZce+ftz0K3AAImvL35Bje1yVJqHZRc7xL63rOMP+DSTc/PaK0+hZ3fh2xN
+	o0DkOGeJnM34YyiP68Y/gzSQSyqUw85vYIojA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=sYIyaXSRJINrY3/eSE9cCwJY/vGyn2aC1wjIx/GfCVhcxe4Tokdw5Q/2IrKdul5NhL
+	jK29JcnM7AA254DjRbhcUmAwQ7+Q+GaTnxAS7yMd1v1aZhOfwMa/EgbnSby33cyLjkAw
+	i1Zzjp/s+ApGDktllKFQiPyGYbdJGe2g7BhVA=
+MIME-Version: 1.0
+Received: by 10.101.213.29 with SMTP id p29mr4587657anq.266.1274028274115; 
+	Sun, 16 May 2010 09:44:34 -0700 (PDT)
+Received: by 10.100.96.12 with HTTP; Sun, 16 May 2010 09:44:34 -0700 (PDT)
+In-Reply-To: <hsk1gf$v4j$1@dough.gmane.org>
+References: <hs35ae$l42$1@dough.gmane.org> <hsk1gf$v4j$1@dough.gmane.org>
+Date: Sun, 16 May 2010 09:44:34 -0700
+Message-ID: <AANLkTilxRS624wPR3D2zTT3GjyIE6owKY7OUC2DQ8O0f@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 16 May 2010 18:22:42 +0200
-Message-ID: <hsp64i$r3s$2@dough.gmane.org>
-References: <1273877583-31604-1-git-send-email-eric@eukrea.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <1273877583-31604-1-git-send-email-eric@eukrea.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cross.bbclass: fix build of meta-toolchain
+Subject: Re: libstc++ libtool problem, cross lamanger broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,53 +51,100 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 May 2010 16:29:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 16 May 2010 16:48:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-I can confirm that 'meta-toolchain' builds against with this
-(angstrom/beagleboard), but I don't know what the effect of this is on
-cross recipes.
-
-regards,
+On Fri, May 14, 2010 at 10:33 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Almost a week later, any fixes people can try[1]?
 
 Koen
 
-On 15-05-10 00:53, Eric Benard wrote:
-> - without this bitbake meta-toolchain fails because it doesn't find who
->  provides gdb-cross-sdk
-> - found thanks to a hint from Phil Blundell on IRC
-> - tested with Angstrom/ARMv5te
-> 
-> Signed-off-by: Eric Benard <eric@eukrea.com>
-> ---
->  classes/cross.bbclass |    2 --
->  1 files changed, 0 insertions(+), 2 deletions(-)
-> 
-> diff --git a/classes/cross.bbclass b/classes/cross.bbclass
-> index 69f6511..5c2d5be 100644
-> --- a/classes/cross.bbclass
-> +++ b/classes/cross.bbclass
-> @@ -17,8 +17,6 @@ PACKAGE_ARCH = "${OLD_PACKAGE_ARCH}"
->  OLD_BASE_PACKAGE_ARCH := "${BASE_PACKAGE_ARCH}"
->  BASE_PACKAGE_ARCH = "${OLD_BASE_PACKAGE_ARCH}"
->  
-> -PACKAGES = ""
-> -
->  HOST_ARCH = "${BUILD_ARCH}"
->  HOST_VENDOR = "${BUILD_VENDOR}"
->  HOST_OS = "${BUILD_OS}"
+my sysroots/armv5te-oe-linux-gnueabi/usr/lib/libstdc++.la file has
+dependency_libs=' -lm'
+I am not able to reproduce the problem on my end
+What am I missing ?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Thx
+-Khem
 
-iD8DBQFL8BvSMkyGM64RGpERApFQAJ40WH4OOiFb0PZVfy/8gbQG4tFn4ACdFiHQ
-9sEaKXsbeiDyzv/P/7+fQ4A=
-=14NR
------END PGP SIGNATURE-----
 
+
+>
+> [1] apart from sed -i -e
+> 's:-L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib::g'
+> sysroots/*/usr/lib/*.la
+>
+>
+> On 08-05-10 09:53, Koen Kooi wrote:
+>> Hi,
+>>
+>> I've been getting failures when ARM apps try to link with x86_64
+>> libxml2, and I started to do some digging:
+>>
+>> grep L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
+>> /OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/*.la |
+>> more | awk -F: '{print $1}' | sed
+>> s:/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/::glibaspell.la
+>> libatkmm-1.6.la
+>> libcairomm-1.0.la
+>> libetpan.la
+>> libFLAC++.la
+>> libgdkmm-2.4.la
+>> libgiomm-2.4.la
+>> libglibmm-2.4.la
+>> libglibmm_generate_extra_defs-2.4.la
+>> libgnutlsxx.la
+>> libgtkmathview_custom_reader.la
+>> libgtkmathview_libxml2.la
+>> libgtkmathview_libxml2_reader.la
+>> libgtkmm-2.4.la
+>> libmathview_backend_gtk.la
+>> libmathview_backend_ps.la
+>> libmathview_backend_svg.la
+>> libmathview_frontend_custom_reader.la
+>> libmathview_frontend_libxml2.la
+>> libmathview_frontend_libxml2_reader.la
+>> libmathview.la
+>> libpangomm-1.4.la
+>> libpcrecpp.la
+>> libpoppler-glib.la
+>> libpoppler.la
+>> libpspell.la
+>> libschroedinger-1.0.la
+>> libsidplay.la
+>> libsigc-2.0.la
+>> libstdc++.la
+>> libsupc++.la
+>> libtiffxx.la
+>> libwebkit-1.0.la
+>>
+>> So pretty much anything with a c++ dep gets a bogus .la file, so lets
+>> look at libstdc++.la:
+>>
+>> dependency_libs=' -L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
+>> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
+>>
+>> So it looks like the cross.bbclass lamangler needs some more work.
+>>
+>> regards,
+>>
+>> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFL7YlOMkyGM64RGpERAjBZAKCK/+SSGgnqz7J8KVL31hI7zC1qRgCgsJGX
+> O/dkdGg7FraOdiQFEhxL8MQ=
+> =FKfz
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
