@@ -1,44 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODhzd-0000QU-Ta for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 19:51:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODhvp-0001C8-BS for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 19:47:17 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 19:47:17 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 19:47:17 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 16 May 2010 19:47:01 +0200
-Message-ID: <hspb2l$aqo$1@dough.gmane.org>
-References: <hs35ae$l42$1@dough.gmane.org> <hsk1gf$v4j$1@dough.gmane.org>
-	<AANLkTilxRS624wPR3D2zTT3GjyIE6owKY7OUC2DQ8O0f@mail.gmail.com>
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1ODj0Y-0001ag-KU
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 16 May 2010 20:56:15 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o4GIqGCx001323;
+	Sun, 16 May 2010 19:52:16 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01129-03; Sun, 16 May 2010 19:52:12 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o4GIq35L001317
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 16 May 2010 19:52:06 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Tom Rini <tom_rini@mentor.com>
+In-Reply-To: <1273881865.8005.205.camel@trini-m4400>
+References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
+	<1273859746.22943.454.camel@trini-m4400>
+	<AANLkTimDt7fVT14jNofov1ESwO2M_CvBAe6RsdvzZicE@mail.gmail.com>
+	<1273881865.8005.205.camel@trini-m4400>
+Date: Sun, 16 May 2010 11:52:01 -0700
+Message-ID: <1274035921.24454.68.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <AANLkTilxRS624wPR3D2zTT3GjyIE6owKY7OUC2DQ8O0f@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libstc++ libtool problem, cross lamanger broken
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,107 +49,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 May 2010 17:51:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 16 May 2010 18:56:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, 2010-05-14 at 17:04 -0700, Tom Rini wrote:
+> On Fri, 2010-05-14 at 23:21 +0200, Andrea Adami wrote: 
+> > Short resume:
+> > 
+> > i repeatdly see (Angstrom) console-image failing *from scratch*
+> > because gtk+native do_compile errors out with:
+> > 
+> >  Cannot load module
+> > /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la:
+> > /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/mo
+> > dules/input/.libs/im-xim.so: undefined symbol: g_realloc_n
+> > | /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la
+> > does not export GTK+ IM module API:
+> > /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0
+> > 
+> > g_realloc_n is defined in glib-2.0
+> > 
+> > I've inspected the workdir and I've noticed  "atk-native"  and
+> > "pango-native" builds were not finished when gtk+-native broke.
+> > Both atk-native and pango-native (and cairo-native, which was built)
+> > have glib-2 as explicit dependency, so something seems wrong...
+> 
+> So, it really sounds like a bitbake bug.  Doing a bitbake -e on gtk
+> +-native gives:
+> DEPENDS_virtclass-native="autoconf-native automake-native libtool-native
+> gnu-config-native coreutils-native libpng-native atk-native pango-native
+> cairo-native libxrender-native libxext-native"
+> DEPENDS="autoconf-native automake-native libtool-native
+> gnu-config-native coreutils-native libpng-native atk-native pango-native
+> cairo-native libxrender-native libxext-native"
+> 
+> So it's supposed to be waiting on all of that stuff, but it's not.  And
+> I'm sure RP will need to know what version of bitbake you're using.
 
-On 16-05-10 18:44, Khem Raj wrote:
-> On Fri, May 14, 2010 at 10:33 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> Almost a week later, any fixes people can try[1]?
-> 
->> Koen
-> 
->> my sysroots/armv5te-oe-linux-gnueabi/usr/lib/libstdc++.la file has
->> dependency_libs=' -lm'
->> I am not able to reproduce the problem on my end
->> What am I missing ?
+There is insufficient evidence here to point at any one thing. I will
+say that the threading dependency code has been around for a while and
+most bugs like this turn out to be issues in the metadata, not bitbake.
 
-Try angstrom/beagleboard
+When you say they were "not finished", what do you mean exactly?
 
-> 
->> Thx
->> -Khem
-> 
-> 
-> 
-> 
-> [1] apart from sed -i -e
-> 's:-L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib::g'
-> sysroots/*/usr/lib/*.la
-> 
-> 
-> On 08-05-10 09:53, Koen Kooi wrote:
->>>> Hi,
->>>>
->>>> I've been getting failures when ARM apps try to link with x86_64
->>>> libxml2, and I started to do some digging:
->>>>
->>>> grep L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
->>>> /OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/*.la |
->>>> more | awk -F: '{print $1}' | sed
->>>> s:/OE/angstrom-dev/staging/armv7a-angstrom-linux-gnueabi/usr/lib/::glibaspell.la
->>>> libatkmm-1.6.la
->>>> libcairomm-1.0.la
->>>> libetpan.la
->>>> libFLAC++.la
->>>> libgdkmm-2.4.la
->>>> libgiomm-2.4.la
->>>> libglibmm-2.4.la
->>>> libglibmm_generate_extra_defs-2.4.la
->>>> libgnutlsxx.la
->>>> libgtkmathview_custom_reader.la
->>>> libgtkmathview_libxml2.la
->>>> libgtkmathview_libxml2_reader.la
->>>> libgtkmm-2.4.la
->>>> libmathview_backend_gtk.la
->>>> libmathview_backend_ps.la
->>>> libmathview_backend_svg.la
->>>> libmathview_frontend_custom_reader.la
->>>> libmathview_frontend_libxml2.la
->>>> libmathview_frontend_libxml2_reader.la
->>>> libmathview.la
->>>> libpangomm-1.4.la
->>>> libpcrecpp.la
->>>> libpoppler-glib.la
->>>> libpoppler.la
->>>> libpspell.la
->>>> libschroedinger-1.0.la
->>>> libsidplay.la
->>>> libsigc-2.0.la
->>>> libstdc++.la
->>>> libsupc++.la
->>>> libtiffxx.la
->>>> libwebkit-1.0.la
->>>>
->>>> So pretty much anything with a c++ dep gets a bogus .la file, so lets
->>>> look at libstdc++.la:
->>>>
->>>> dependency_libs=' -L/OE/angstrom-dev/sysroots/x86_64-linux/usr/lib
->>>> /OE/angstrom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
->>>>
->>>> So it looks like the cross.bbclass lamangler needs some more work.
->>>>
->>>> regards,
->>>>
->>>> Koen
->>
->>
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+Its normal they would still be packaging for example whilst gtk+ builds
+since any dependency is on the populate_sysroot task of
+pango-native/atk-native.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Cheers,
 
-iD8DBQFL8C+VMkyGM64RGpERAlr8AJ949cFdp1x8FPvU+0VJ3zcbvYFLgwCgkcPU
-QJHKTqHXB8YLAj8x/Zt1itE=
-=xlTC
------END PGP SIGNATURE-----
+Richard
+
+
 
 
 
