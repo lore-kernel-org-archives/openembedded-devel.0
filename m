@@ -1,26 +1,26 @@
 Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1ODfpe-0007LH-4b
+	(envelope-from <eric@eukrea.com>) id 1ODg0Q-0003EK-6d
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 16 May 2010 17:32:48 +0200
+	Sun, 16 May 2010 17:44:29 +0200
 Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 447734B015E
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 67A564B01AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 17:28:24 +0200 (CEST)
+	Sun, 16 May 2010 17:39:33 +0200 (CEST)
 Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
 	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 16 May 2010 17:28:23 +0200 (CEST)
+	Sun, 16 May 2010 17:39:31 +0200 (CEST)
 From: Eric Benard <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 16 May 2010 17:25:52 +0200
-Message-Id: <1274023552-2051-1-git-send-email-eric@eukrea.com>
+Date: Sun, 16 May 2010 17:37:00 +0200
+Message-Id: <1274024220-15149-1-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
 X-SA-Exim-Connect-IP: 212.27.42.2
 X-SA-Exim-Mail-From: eric@eukrea.com
 X-SA-Exim-Scanned: No (on linuxtogo.org);
 	Message bigger than SAmaxbody (256000)
-Subject: [PATCH] psplash: unbreak recipe
+Subject: [PATCH v2] psplash: unbreak recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,7 +34,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 16 May 2010 15:32:50 -0000
+X-List-Received-Date: Sun, 16 May 2010 15:44:32 -0000
 
 psplash was broken by my previous patch for several machines / distro
 http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=31402cd6f9d1e7887926bfde465bb25b07f6dbea
@@ -44,7 +44,8 @@ and for boc01 and omap3pandora machines
 
 Signed-off-by: Eric Benard <eric@eukrea.com>
 ---
- recipes/psplash/files/angstrom/psplash-poky-img.h  |   10 +-
+v2: rebased after Koen's fix for Angstrom
+
  recipes/psplash/files/boc01/psplash-poky-img.h     |   10 +-
  recipes/psplash/files/configurability.patch        |   16 +-
  recipes/psplash/files/kaeilos/psplash-poky-img.h   |   10 +-
@@ -55,30 +56,11 @@ Signed-off-by: Eric Benard <eric@eukrea.com>
  .../psplash/psplash-omap3pandora/logo-math.patch   |   26 +-
  .../psplash-omap3pandora/psplash-hand-img.h        |15422 --------------------
  .../psplash-omap3pandora/psplash-poky-img.h        |15422 ++++++++++++++++++++
- 11 files changed, 15511 insertions(+), 15503 deletions(-)
+ recipes/psplash/psplash.inc                        |    2 +-
+ 11 files changed, 15507 insertions(+), 15499 deletions(-)
  delete mode 100644 recipes/psplash/psplash-omap3pandora/psplash-hand-img.h
  create mode 100644 recipes/psplash/psplash-omap3pandora/psplash-poky-img.h
 
-diff --git a/recipes/psplash/files/angstrom/psplash-poky-img.h b/recipes/psplash/files/angstrom/psplash-poky-img.h
-index 263befa..3782872 100644
---- a/recipes/psplash/files/angstrom/psplash-poky-img.h
-+++ b/recipes/psplash/files/angstrom/psplash-poky-img.h
-@@ -1,10 +1,10 @@
- /* GdkPixbuf RGBA C-Source image dump 1-byte-run-length-encoded */
- 
--#define HAND_IMG_ROWSTRIDE (920)
--#define HAND_IMG_WIDTH (230)
--#define HAND_IMG_HEIGHT (231)
--#define HAND_IMG_BYTES_PER_PIXEL (4) /* 3:RGB, 4:RGBA */
--#define HAND_IMG_RLE_PIXEL_DATA ((uint8*) \
-+#define POKY_IMG_ROWSTRIDE (920)
-+#define POKY_IMG_WIDTH (230)
-+#define POKY_IMG_HEIGHT (231)
-+#define POKY_IMG_BYTES_PER_PIXEL (4) /* 3:RGB, 4:RGBA */
-+#define POKY_IMG_RLE_PIXEL_DATA ((uint8*) \
-   "\307\354\354\341\377\2\342\345\333\377\344\346\334\377\377\354\354\341" \
-   "\377\221\354\354\341\377\3\242\256\246\377t\210\201\377\222\241\231\377" \
-   "\315\354\354\341\377\4\325\333\322\377\264\304\275\377\245\271\263\377" \
 diff --git a/recipes/psplash/files/boc01/psplash-poky-img.h b/recipes/psplash/files/boc01/psplash-poky-img.h
 index 8c23e48..7cb17fa 100644
 --- a/recipes/psplash/files/boc01/psplash-poky-img.h
@@ -31201,6 +31183,19 @@ index 0000000..c07ae86
 +  "\24\377\0\14\24\266\0\14\24")
 +
 +
+diff --git a/recipes/psplash/psplash.inc b/recipes/psplash/psplash.inc
+index d7b59ae..d16ae3e 100644
+--- a/recipes/psplash/psplash.inc
++++ b/recipes/psplash/psplash.inc
+@@ -9,7 +9,7 @@ RCONFLICTS_${PN} = "exquisite"
+ 
+ SRCREV = "422"
+ PV = "0.0+svnr${SRCPV}"
+-PR = "r26"
++PR = "r27"
+ 
+ # You can create your own pslash-poky-img.h by doing
+ # ./make-image-header.sh <file>.png POKY
 -- 
 1.6.3.3
 
