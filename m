@@ -1,45 +1,38 @@
-Received: from mail-qy0-f172.google.com ([209.85.221.172])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OE5pp-0000CM-KM
+Received: from 64.mail-out.ovh.net ([91.121.185.65])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OE5tt-0001ZZ-81
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 21:18:45 +0200
-Received: by qyk2 with SMTP id 2so7196715qyk.20
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 12:14:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ZETgSyqyEWM0xg0MnZgvNT4Tj9fuFG6BS3m7XXoqx+A=;
-	b=nIQqQeHxi+kV1BtErvU2ftxPYktLsnmX/C0/+gsyjSjBNRTloJhYIiXNn503qfKIBU
-	Cd+3lWYZ1FotkSauJrKDOG6ozLZXL43hRio1lCnufV2/GW8ld8pihCpPRyOBn5XdTRW7
-	h75Pyxt4ZpyJOTFvS8L6BDxszGXU3h4BkUnLI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bkebsb6cozJ++mDBRy0E3stIT2dXxV7w2VDw8qPoC4Fj6CVwwvVMbp1Pol5H1DZLBQ
-	y+FHPg1/1qZErPKJ1FNNE/tz5yd2cCj3Uq0OobZMcvJ7o18NXmAwaDjQz4xn6Qqj2cy8
-	sm1Di9QdOeXFz2adKTyKzbbLESdSEEgeK5rVc=
+	Mon, 17 May 2010 21:22:54 +0200
+Received: (qmail 6751 invoked by uid 503); 17 May 2010 19:23:22 -0000
+Received: from b6.ovh.net (HELO mail27.ha.ovh.net) (213.186.33.56)
+	by 64.mail-out.ovh.net with SMTP; 17 May 2010 19:23:22 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 17 May 2010 19:18:55 -0000
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 17 May 2010 19:18:54 -0000
+Message-ID: <4BF1969E.3020408@eukrea.com>
+Date: Mon, 17 May 2010 21:18:54 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.224.78.131 with SMTP id l3mr3072744qak.277.1274123677963; Mon, 
-	17 May 2010 12:14:37 -0700 (PDT)
-Received: by 10.229.230.77 with HTTP; Mon, 17 May 2010 12:14:37 -0700 (PDT)
-In-Reply-To: <20100517190152.GB7868@gmail.com>
-References: <AANLkTinM-N-vAT4yP0ptz0UcMBNsLHpQZ1er2VwnsDDv@mail.gmail.com>
-	<20100517190152.GB7868@gmail.com>
-Date: Mon, 17 May 2010 14:14:37 -0500
-Message-ID: <AANLkTinsmKk2J576bTB0-Wkk48G5He9koqeQiU4MHhL_@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.172
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+References: <1273877583-31604-1-git-send-email-eric@eukrea.com>
+	<hsp64i$r3s$2@dough.gmane.org>
+In-Reply-To: <hsp64i$r3s$2@dough.gmane.org>
+X-Ovh-Tracer-Id: 10853112153666792777
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.65
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Microblaze gcc 4.5.0 support
+Subject: Re: [PATCH] cross.bbclass: fix build of meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,58 +46,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 19:18:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 17 May 2010 19:22:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi Khem,
+Hi,
 
-log.do_configure at http://pastebin.com/AjAtfnpu
-log.do_compile at http://pastebin.com/bqAmHvuu
-
-Regards
-
-On Mon, May 17, 2010 at 2:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On (17/05/10 13:38), Adrian Alonso wrote:
-> > Hi, I been working on adding OE support for microblaze arch
-> > I have a repo in gitorious [1] holding the changes I made so far;
-> > trying to build console-image fails on gcc-cross-initial compilation
-> > with the error shown on log [2]
-> > "configure: error: cannot compute suffix of object files: cannot compile"
-> >
+Le 16/05/2010 18:22, Koen Kooi a écrit :
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> Care to provide config.log ?
+> I can confirm that 'meta-toolchain' builds against with this
+> (angstrom/beagleboard), but I don't know what the effect of this is on
+> cross recipes.
+
+Who could confirm that this change may not introduce any unwanted 
+behaviour ?
+
+Thanks,
+Eric
 >
-> > I also update gcc-svn.inc recipe to use gcc-microblaze branch
-> > SRC_URI_xlnx-mb-gen = "svn://
-> gcc.gnu.org/svn/gcc/branches;module=microblaze
-> > And I get the same error shown in gcc-4.5.0
-> >
-> > From log error I see that OE is generates the suffix info but fails for
-> > microblaze arch
-> >
-> >    1.  set -e; for ml in `cat fixinc_list`; do \
-> >    2. |         sysroot_headers_suffix=`echo ${ml} | sed -e 's/;.*$//'`;
-> \
-> >    3. |         multi_dir=`echo ${ml} | sed -e 's/^[^;]*;//'`; \
-> >    4. |         fix_dir=include-fixed${multi_dir}; \
-> >
-> >
-> > Can some one help me out figuring what is missing??
-> >
-> >
-> > [1] http://gitorious.org/oe-microblaze/oe-microblaze
-> > <http://gitorious.org/oe-microblaze/oe-microblaze>[2]
-> > http://pastebin.com/kqC8AP1s
-> >
-> > --
-> > Saludos
-> > Adrian Alonso
-> > http://aalonso.wordpress.com
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> On 15-05-10 00:53, Eric Benard wrote:
+>> - without this bitbake meta-toolchain fails because it doesn't find who
+>>   provides gdb-cross-sdk
+>> - found thanks to a hint from Phil Blundell on IRC
+>> - tested with Angstrom/ARMv5te
+>>
+>> Signed-off-by: Eric Benard<eric@eukrea.com>
+>> ---
+>>   classes/cross.bbclass |    2 --
+>>   1 files changed, 0 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/classes/cross.bbclass b/classes/cross.bbclass
+>> index 69f6511..5c2d5be 100644
+>> --- a/classes/cross.bbclass
+>> +++ b/classes/cross.bbclass
+>> @@ -17,8 +17,6 @@ PACKAGE_ARCH = "${OLD_PACKAGE_ARCH}"
+>>   OLD_BASE_PACKAGE_ARCH := "${BASE_PACKAGE_ARCH}"
+>>   BASE_PACKAGE_ARCH = "${OLD_BASE_PACKAGE_ARCH}"
+>>
+>> -PACKAGES = ""
+>> -
+>>   HOST_ARCH = "${BUILD_ARCH}"
+>>   HOST_VENDOR = "${BUILD_VENDOR}"
+>>   HOST_OS = "${BUILD_OS}"
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFL8BvSMkyGM64RGpERApFQAJ40WH4OOiFb0PZVfy/8gbQG4tFn4ACdFiHQ
+> 9sEaKXsbeiDyzv/P/7+fQ4A=
+> =14NR
+> -----END PGP SIGNATURE-----
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -113,9 +107,4 @@ On Mon, May 17, 2010 at 2:01 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >
 
 
-
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
 
