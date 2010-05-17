@@ -1,45 +1,49 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f191.google.com ([209.85.222.191])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODtHu-0007Fu-2W for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 07:54:52 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ODtE4-0002yZ-Gj for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 07:50:52 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 07:50:52 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1ODtMP-0007Vz-2R
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 17 May 2010 07:59:29 +0200
+Received: by pzk29 with SMTP id 29so2344803pzk.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 07:50:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 16 May 2010 22:55:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=npqDzL6d+2kaLfAXWurFiPk/HSgEcA2X7kPUe4t78Bs=;
+	b=k5tvRp/KmKyxt0G7hgevgp5OrCt/cIUfeYJMiAOyKR+4SXrsrytaQrNnolRtSrN61K
+	PeyUrdPbv2HmE5RoqVs5kEqB3hd4qorl5+/M3upry61FpG5GViPyMe9EC10o9Jv0EMjI
+	SghWcwPTHpVKQZF7cRcp4rxPgKFC2hT4mJVTs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=VboAS34rY0+DzLKfBioFjn8i965/xFfN3N4gU7/v4H2lA6VhaOQ+rr55atTX97PCyG
+	kDJ7cqPA4RV2cBFPurizxsvEFvY0wvFVETPlaXGlKcaV5zGJY641YhSS2/LBZo4SPLTD
+	hd+p1+qgd/SfEn71RbYfiSu71raXZrnfotJNg=
+Received: by 10.115.134.32 with SMTP id l32mr3953552wan.44.1274075729313;
+	Sun, 16 May 2010 22:55:29 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 23sm3735125pzk.10.2010.05.16.22.55.27
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 16 May 2010 22:55:28 -0700 (PDT)
+Date: Sun, 16 May 2010 22:55:50 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 17 May 2010 07:50:42 +0200
-Message-ID: <hsqlfi$p43$1@dough.gmane.org>
-References: <hs35ae$l42$1@dough.gmane.org>
-	<hsk1gf$v4j$1@dough.gmane.org>	<AANLkTilxRS624wPR3D2zTT3GjyIE6owKY7OUC2DQ8O0f@mail.gmail.com>	<AANLkTilyVGAczJbdPU_1Ra1HB7BnL0igar0BtGdj-GXg@mail.gmail.com>
-	<AANLkTim9vyHfHb2K6SteJBOohyHpwY_tBzwIHTvBJVj0@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <AANLkTim9vyHfHb2K6SteJBOohyHpwY_tBzwIHTvBJVj0@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100517055550.GA6686@gmail.com>
+References: <hsql3t$o5c$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <hsql3t$o5c$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.222.191
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libstc++ libtool problem, cross lamanger broken
+Subject: Re: Question: is 'gcc' supposed to replace the libstdc++.la installed by 'gcc-cross'?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,88 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 05:54:52 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 17 May 2010 05:59:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 17-05-10 00:10, Khem Raj wrote:
-> this -L only gets in with gcc 4.3 and not with gcc 4.4
-
-Using gcc 4.4.x isn't an option for angstrom, it generates way too slow
-code for arm. Those regressions are fixed in gcc 4.5.x, though, which
-incidentally is what the angstrom-next branch is using.
-
-regards,
-
-Koen
-
-
+On (17/05/10 07:44), Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> On 5/16/10, Andrea Adami <andrea.adami@gmail.com> wrote:
->> Same on angstrom/c7x0 here (a bit old, though, built on May, 8th):
->>
->> libstdc++.la       [----]  0 L:[  1+ 0   1/ 42] *(0   /1053b)   35 0x023
->> # libstdc++.la - a libtool library file
->> # Generated by ltmain.sh (GNU libtool 1.2435 2007/03/18 18:44:42) 2.1a
->> #
->> # Please DO NOT delete this file!
->> # It is necessary for linking the library.
->>
->> # The name that we can dlopen(3).
->> dlname='libstdc++.so.6'
->>
->> # Names of this library.
->> library_names='libstdc++.so.6.0.10 libstdc++.so.6 libstdc++.so'
->>
->> # The name of the static archive.
->> old_library='libstdc++.a'
->>
->> # Linker flags that can not go in dependency_libs.
->> inherited_linker_flags=''
->>
->> # Libraries that this one depends upon.
->> dependency_libs=' -L/oe/build/tmp/sysroots/i686-linux/usr/lib -lm'
->>
->> # Names of additional weak libraries provided by this library
->> weak_library_names=''
->>
->> # Version information for libstdc++.
->> current=6
->> age=0
->> revision=10
->>
->> # Is this an already installed library?
->> installed=no
->>
->> # Should we warn about portability when linking against -modules?
->> shouldnotlink=no
->>
->> # Files to dlopen/dlpreopen
->> dlopen=''
->> dlpreopen=''
->>
->> # Directory that this library needs to be installed in:
->> libdir=/oe/build/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib
->>
->>
->> Andrea
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+> Hi,
+> 
+> I just noticed that after doing 'bitbake gcc' the old libstdc++ gets
+> replaced and the new one has:
+> 
+> dependency_libs='
+> /OE/angstrom-dev/sysroots/armv6-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
+> 
+> instead of the expected '-lm'. It now refers to itself :(
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+hmmm target gcc should not have staged libstdc++ if it was already staged
+by gcc-cross but the problem is casued by
+gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch it passed the native libdir which
+is build_libdir even for target library builds using -rpath. I am currently
+looking into the reason. If possible we can get rid of that patch.
 
-iD8DBQFL8NkyMkyGM64RGpERAh+KAJ42pWFGiACvUSN04RFQEV9NYBQ4nACfQRbu
-Wr7tq2eQTTdXIjG/vtJHcWs=
-=sB2b
------END PGP SIGNATURE-----
+The patch you committed to cross.bbclass will not be necessary
 
+Thanks
+-Khem
 
 
