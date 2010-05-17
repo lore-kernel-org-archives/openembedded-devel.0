@@ -1,49 +1,31 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OE6Vq-00054z-8E
+	(envelope-from <holger+oe@freyther.de>) id 1OE6cW-0000LQ-2E
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 22:02:12 +0200
-Received: by vws20 with SMTP id 20so1362074vws.6
+	Mon, 17 May 2010 22:09:17 +0200
+Received: from [10.134.193.175] (unknown [188.46.193.175])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 395F01B10C79
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 12:57:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Gne0NlG38cUL4wxhoBkxBzv4Cb+SCRPLL57CpCR1aSY=;
-	b=VtfJCDrkYOjMMArd0unUO78PZFyOtXazjq80VqiWat2McRmpoziYzipzpLHO7XCsD7
-	eBRNaeI+Wohz7ysh4dc+tv8pORamEzgo135Th7x5inZMChgy3eOyYyV1QdpSIzgLrjPI
-	yxv1rAABtrETmzDK0IVsCaXz+IinLpQPNEHMg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=iiqLumkqUo4hDfghiDSRx5ltYHYjHzqtU2z2TWqeUxVV6Q9EVHbS2fzoEVqTspw5x/
-	xhXpqeSkk1VL3uIT2PLtJjPSwutfCnRoPuJcd5XktdPh4O505pgz5YxOmqzi52W+kBcQ
-	/MhKbRlC+3eTp/VqX3PNlywbV/VWsMgg4r/tU=
+	Mon, 17 May 2010 20:13:13 +0000 (UTC)
+Message-ID: <4BF1A169.4080305@freyther.de>
+Date: Tue, 18 May 2010 04:04:57 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
+	Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.229.187.82 with SMTP id cv18mr1238032qcb.83.1274126279525; 
-	Mon, 17 May 2010 12:57:59 -0700 (PDT)
-Received: by 10.229.230.77 with HTTP; Mon, 17 May 2010 12:57:59 -0700 (PDT)
-In-Reply-To: <20100517194116.GD7932@gmail.com>
-References: <AANLkTinM-N-vAT4yP0ptz0UcMBNsLHpQZ1er2VwnsDDv@mail.gmail.com>
-	<20100517190152.GB7868@gmail.com>
-	<AANLkTinsmKk2J576bTB0-Wkk48G5He9koqeQiU4MHhL_@mail.gmail.com>
-	<20100517191837.GB7932@gmail.com>
-	<AANLkTikLN9HgYy5Q6ICrDYuOBB47JdPy8vZiaf-Hv5uu@mail.gmail.com>
-	<20100517194116.GD7932@gmail.com>
-Date: Mon, 17 May 2010 14:57:59 -0500
-Message-ID: <AANLkTimIyO_fMaHX_tsssDwFNTLBBl3aFSaMmeBQHk_C@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+References: <hsh23u$v6m$1@dough.gmane.org>
+In-Reply-To: <hsh23u$v6m$1@dough.gmane.org>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Microblaze gcc 4.5.0 support
+Subject: Re: TSC meeting minutes?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,63 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 20:02:27 -0000
-X-List-Received-Date: Mon, 17 May 2010 20:02:27 -0000
+X-List-Received-Date: Mon, 17 May 2010 20:09:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-libgcc config.log http://pastebin.com/3mLhBMNP
+On 05/13/2010 10:25 PM, Koen Kooi wrote:
 
-<http://pastebin.com/3mLhBMNP>I see the error
-conftest.c:1:0: error: 'microblaze' is an invalid argument to -mcpu=
+> For the next meeting could the TSC please aim for sending out the
+> minutes within the next 2 business days? If the schedule is still the
+> same, you'd get 2 days for free due to the weekend.
 
-I guess that this is causing the compile failure...
+We are trying that. Right now there was a delay because I got stuck in
+Glasgow, somewhere in Iceland, had a insane bus ride to Reykjavik and
+had to use my energy to try to do paid work, on the other hand we are
+still waiting for a TSC member to ack the minutes.
 
-On Mon, May 17, 2010 at 2:41 PM, Khem Raj <raj.khem@gmail.com> wrote:
+regards
+	holger
 
-> On (17/05/10 14:29), Adrian Alonso wrote:
-> > config.log http://pastebin.com/HjkNWXJP
->
-> ok one more time post config.log from libgcc build directory
->
-> >
-> > On Mon, May 17, 2010 at 2:18 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >
-> > > On (17/05/10 14:14), Adrian Alonso wrote:
-> > > > Hi Khem,
-> > > >
-> > > > log.do_configure at http://pastebin.com/AjAtfnpu
-> > > > log.do_compile at http://pastebin.com/bqAmHvuu
-> > >
-> > > post config.log from inside the gcc build tree.
-> > >
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > >
-> >
-> >
-> >
-> > --
-> > Saludos
-> > Adrian Alonso
-> > http://aalonso.wordpress.com
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+PS: The FreeBSD project has the position of a secretary, maybe we should
+consider one too...
 
-
-
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
 
