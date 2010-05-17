@@ -1,49 +1,28 @@
-Received: from mail-fx0-f51.google.com ([209.85.161.51])
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1ODyI2-0007Df-FD
+	(envelope-from <marcolz@zlo.nu>) id 1ODzRo-0004r4-GL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 13:15:19 +0200
-Received: by fxm18 with SMTP id 18so1073272fxm.10
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 04:11:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=7ajzcIqd8iygYeYJv06rpURAESKIvvY4r8ykkn1eBSI=;
-	b=JmbWk8gBox7VhT8WdluQ3BTgXBNzXbCrccc7GwGG9XOhA/T/8F9WBPxqH+YxrVWK39
-	iglm3+HZCf6eHRqnXL19AQNDFXhgMBPgdo++3qK1VT2+zzPoq6NJpmp2EAGay4vm9ATb
-	5qhp3JZvV9rXBtmMZXxrtpFszKi5ERyNpPKvI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ZuuonexGeua73KLakHlhIP79AQ1N1y2unza71nTzdSRX8IPq+Xd5UpBsVE1J2tXXvn
-	wjIRQ1YuSMIJTHHlyVQnsS28W7M9HYKlOD2ujOhMlr71LFG+zsCr/Jl/4ZmAftnub7mj
-	RxA8gP38ig+rc6UVA24AE1LpI2YbGV2vaybV0=
-Received: by 10.223.63.17 with SMTP id z17mr6091190fah.66.1274094679192;
-	Mon, 17 May 2010 04:11:19 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 7sm25364046far.6.2010.05.17.04.11.18
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 May 2010 04:11:18 -0700 (PDT)
-Date: Mon, 17 May 2010 13:11:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 17 May 2010 14:29:29 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 6934B140DB; Mon, 17 May 2010 14:25:29 +0200 (CEST)
+Date: Mon, 17 May 2010 14:25:29 +0200
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100517111138.GR3370@jama>
-References: <20100512122138.GJ30963@jama>
-	<1273668604-9810-1-git-send-email-sledz@dresearch.de>
+Message-ID: <20100517122529.GA30953@zlo.nu>
+References: <alpine.DEB.2.00.1005121257070.3272@lynx>
+	<hsgbec$a9i$3@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <1273668604-9810-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <hsgbec$a9i$3@dough.gmane.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.51
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v4] busybox/syslogs: use update-alternatives for syslog selection
+Subject: Re: on ubuntu 10.04, how to reset /bin/sh to refer to bash?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,24 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 11:15:19 -0000
+X-List-Received-Date: Mon, 17 May 2010 12:29:29 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Wed, May 12, 2010 at 02:50:04PM +0200, Steffen Sledz wrote:
-> * u-a for init scripts of busybox-syslog, sysklogd, and rsyslog
-> * syslog-ng needs to be integrated too!
+On Thu, May 13, 2010 at 09:58:04AM +0200, Koen Kooi wrote:
+> On 12-05-10 18:58, Robert P. J. Day wrote:
+> >   my first time setting up to build OE on ubuntu 10.04, and trying to
+> > "bitbake fetch" complains that it's a bad idea for /bin/sh to refer to
+> > dash.  fair enough, so since /bin/sh -> dash, do i just reset the
+> > symlink manually?  or is there something more elegant?  thanks.
 > 
-> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> And for the record: It's not OE (anymore) that requires bash, it's the
+> software we build. E.g. GTK+'s libtool has bashisms. And there are a lot
+> more.
 
-This version seems OK to me, tested with busybox-syslog. (Needs INC_PR
-increase in busybox.inc to rebase on HEAD).
+Exactly. So depending on what you want to build, you can get away with
+dash as /bin/sh fine. We've been using the patch in
+http://patchwork.openembedded.org/patch/914/ successfully for some time
+now, but we do not need any GTK+ stuff on our images.
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Marc
 
 
