@@ -1,51 +1,47 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from mail-qy0-f172.google.com ([209.85.221.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OE60s-0007Pe-FH
+	(envelope-from <aalonso00@gmail.com>) id 1OE64B-0000Hk-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 21:30:09 +0200
-Received: by wwb28 with SMTP id 28so306591wwb.6
+	Mon, 17 May 2010 21:33:32 +0200
+Received: by qyk2 with SMTP id 2so7217650qyk.20
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 12:26:05 -0700 (PDT)
+	Mon, 17 May 2010 12:29:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=nBdBKwTga3pgN5ZXt7sUhD+Clrg87F5hu9LsSyff3gA=;
-	b=Z/2vWqG3mCbQZ7TU/iTaMfEc1mZh86kg/MNRRzm3CQWnr/Kl4+CgBnd2VVtF9BaHKl
-	1h7q+yeV1LNlxrwzdkEEtdHEKHpc/Bweac7MnlcUfiSZKDdMIkszTUAJTi/9otlykGbG
-	A0teRN17sS9Cy9fuEUDu3F7rzr4bbeANRTMwY=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=0oXFE7Xwy/y3gus6vggcwLrHYvG2F9Du4twblOBJu5M=;
+	b=vw+jA+CV7Ljp/YK3gZdmHj06qqYy9xz7zBS0psCo5E2RcaeyMhcEehrwFuidULUjdb
+	gIFND9RLM9/YmVjoi4xZCnsN0/xZsLq0EGLt2o0FXAAVC/jj/3/adyvhvyWbQPtTTWgC
+	bkMdNPfijPA4IkF4rFdhA6bIpROo0zhT0HvcQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=uQqfAGB84qIYA1hIsZkdXke+J/JF/ZfhPglrVcFpGW2sqmHKx9sHP1owwGoim5s0Sz
-	gE0hZCNwv06bUYuHnHpYx+fpg8TJdWBe4C1w7+jZmEPpVwQ5H2JxPN9ochotIgpx/k39
-	jbMIWSq4EHCfFbsVNmJPxd6fqjEnBkAPVkuzI=
-Received: by 10.216.161.14 with SMTP id v14mr3269789wek.179.1274124365481;
-	Mon, 17 May 2010 12:26:05 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id p37sm16265000gvf.13.2010.05.17.12.26.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 17 May 2010 12:26:03 -0700 (PDT)
-Date: Mon, 17 May 2010 12:26:31 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100517192631.GC7932@gmail.com>
-References: <1273877583-31604-1-git-send-email-eric@eukrea.com>
-	<hsp64i$r3s$2@dough.gmane.org> <4BF1969E.3020408@eukrea.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=JnU5e8Iw9rkIts6mcyqfl2VrsCZCVAQy6Xwc+ibc5+WMmnCDPrdzhzrBX2wzy4Am6K
+	Bh6+oRQ19K4hKvY4gX9rFJ4Vq/NlMIjAxyIVtkL/UEpe2peNndETEPIKRx3vr9VHwZLk
+	dr3gfW10uoymtUJaYLSs8Z7pwJT0wgkANCeE4=
 MIME-Version: 1.0
-In-Reply-To: <4BF1969E.3020408@eukrea.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Received: by 10.229.251.79 with SMTP id mr15mr1243375qcb.37.1274124571377; 
+	Mon, 17 May 2010 12:29:31 -0700 (PDT)
+Received: by 10.229.230.77 with HTTP; Mon, 17 May 2010 12:29:31 -0700 (PDT)
+In-Reply-To: <20100517191837.GB7932@gmail.com>
+References: <AANLkTinM-N-vAT4yP0ptz0UcMBNsLHpQZ1er2VwnsDDv@mail.gmail.com>
+	<20100517190152.GB7868@gmail.com>
+	<AANLkTinsmKk2J576bTB0-Wkk48G5He9koqeQiU4MHhL_@mail.gmail.com>
+	<20100517191837.GB7932@gmail.com>
+Date: Mon, 17 May 2010 14:29:31 -0500
+Message-ID: <AANLkTikLN9HgYy5Q6ICrDYuOBB47JdPy8vZiaf-Hv5uu@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.221.172
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cross.bbclass: fix build of meta-toolchain
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Microblaze gcc 4.5.0 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,79 +55,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 19:30:10 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 17 May 2010 19:33:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (17/05/10 21:18), Eric Bénard wrote:
-> Hi,
-> 
-> Le 16/05/2010 18:22, Koen Kooi a écrit :
-> >-----BEGIN PGP SIGNED MESSAGE-----
-> >Hash: SHA1
-> >
-> >I can confirm that 'meta-toolchain' builds against with this
-> >(angstrom/beagleboard), but I don't know what the effect of this is on
-> >cross recipes.
-> 
-> Who could confirm that this change may not introduce any unwanted
-> behaviour ?
+config.log http://pastebin.com/HjkNWXJP
 
-I have build a console-image so far ok with this change in. I did 
-not notice any difference.
-So you have my ack
+On Mon, May 17, 2010 at 2:18 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
-> 
-> Thanks,
-> Eric
+> On (17/05/10 14:14), Adrian Alonso wrote:
+> > Hi Khem,
 > >
-> >On 15-05-10 00:53, Eric Benard wrote:
-> >>- without this bitbake meta-toolchain fails because it doesn't find who
-> >>  provides gdb-cross-sdk
-> >>- found thanks to a hint from Phil Blundell on IRC
-> >>- tested with Angstrom/ARMv5te
-> >>
-> >>Signed-off-by: Eric Benard<eric@eukrea.com>
-> >>---
-> >>  classes/cross.bbclass |    2 --
-> >>  1 files changed, 0 insertions(+), 2 deletions(-)
-> >>
-> >>diff --git a/classes/cross.bbclass b/classes/cross.bbclass
-> >>index 69f6511..5c2d5be 100644
-> >>--- a/classes/cross.bbclass
-> >>+++ b/classes/cross.bbclass
-> >>@@ -17,8 +17,6 @@ PACKAGE_ARCH = "${OLD_PACKAGE_ARCH}"
-> >>  OLD_BASE_PACKAGE_ARCH := "${BASE_PACKAGE_ARCH}"
-> >>  BASE_PACKAGE_ARCH = "${OLD_BASE_PACKAGE_ARCH}"
-> >>
-> >>-PACKAGES = ""
-> >>-
-> >>  HOST_ARCH = "${BUILD_ARCH}"
-> >>  HOST_VENDOR = "${BUILD_VENDOR}"
-> >>  HOST_OS = "${BUILD_OS}"
-> >
-> >-----BEGIN PGP SIGNATURE-----
-> >Version: GnuPG v1.4.5 (Darwin)
-> >
-> >iD8DBQFL8BvSMkyGM64RGpERApFQAJ40WH4OOiFb0PZVfy/8gbQG4tFn4ACdFiHQ
-> >9sEaKXsbeiDyzv/P/7+fQ4A=
-> >=14NR
-> >-----END PGP SIGNATURE-----
-> >
-> >
-> >_______________________________________________
-> >Openembedded-devel mailing list
-> >Openembedded-devel@lists.openembedded.org
-> >http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> 
-> 
+> > log.do_configure at http://pastebin.com/AjAtfnpu
+> > log.do_compile at http://pastebin.com/bqAmHvuu
+>
+> post config.log from inside the gcc build tree.
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
+
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
