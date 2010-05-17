@@ -1,44 +1,54 @@
-Received: from mail-ww0-f51.google.com ([74.125.82.51])
+Received: from mail-ew0-f225.google.com ([209.85.219.225])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OE5KX-0007D9-IB
+	(envelope-from <raj.khem@gmail.com>) id 1OE5U3-0005Ay-CM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 20:46:52 +0200
-Received: by wwb28 with SMTP id 28so269830wwb.10
+	Mon, 17 May 2010 20:56:12 +0200
+Received: by ewy25 with SMTP id 25so1381934ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 11:42:22 -0700 (PDT)
+	Mon, 17 May 2010 11:52:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=KSDBkOvt5HfjMaRTK7jzTAJfo5wVFf00xlaJv+MTvDE=;
-	b=c8Gweju4DtTh5WzC7oHWMu/oPBAqEr2wTfikpUgWtzbPOAuJ8ebnpoBBMxjo9m0WgI
-	w/f0v40tup0hBcs9OHXS3fQC7vFVwD6y5FsvDPzpRP2y6hRA2yFU+LJx4jQlrkwGOcpR
-	IdmpMpgeqt5QTHw11T7mTiZl7jySTiPMgvtUg=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=HONEMMdbdB0ELbFh1vi45KaMkS4/VPJvx7UuKjbmWQ4=;
+	b=PYPrMhf65l6gU764Z+9BkRmGQYgr7HuAImvfeb8Mkby2RqRnRKAZvtzGrOteKGEJOY
+	cPTRdYoi1khn9dUOl1FSqMEsf6rNwfwq1Rp6urBUU38orhxvXRwSalWKx+HAsVvB+AwZ
+	zRJOjzAfMnluh1RNGqgG8mCZQM9zBFK5CJIis=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=cBYpFA9tQBZcztsrLOcEjFkpbfvOz0smUj0Bk722oMj7yAGidjcbscEYD13SMRKiH/
-	HAaXVe4lK8+ufkobPqpwLA/3SaAcdy0xlGAeLN4oMEX0NlAM1nWVJa5+M4IzfQUinPpc
-	CLHYttDbpp05aYreUK+Xm6ve3+3QOns8S/pIE=
-MIME-Version: 1.0
-Received: by 10.227.137.20 with SMTP id u20mr5333807wbt.134.1274121742345; 
-	Mon, 17 May 2010 11:42:22 -0700 (PDT)
-Received: by 10.216.49.206 with HTTP; Mon, 17 May 2010 11:42:22 -0700 (PDT)
-In-Reply-To: <1273877583-31604-1-git-send-email-eric@eukrea.com>
-References: <1273877583-31604-1-git-send-email-eric@eukrea.com>
-Date: Mon, 17 May 2010 14:42:22 -0400
-Message-ID: <AANLkTin_5G8442pqEHh8IBQ5CRGyyYxQ5eKSLJwkCMNx@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=vFWjDehS+RO/KOOIcGJwzxtTTmdxAxpPifl26Y61N3m3jct/mT8Ql/lQTwKdCts9qb
+	MqqYf6vDKGQIFNBxN+MjckUrvUIOU/K1rws580XCP5u4/nhjeAhYdyAFwwWkie329LEV
+	bWIImmmizzS88Okc/4/mXHgTXB5F+Lmm74edA=
+Received: by 10.213.66.5 with SMTP id l5mr2791092ebi.71.1274122331755;
+	Mon, 17 May 2010 11:52:11 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 14sm2987274ewy.6.2010.05.17.11.52.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 17 May 2010 11:52:10 -0700 (PDT)
+Date: Mon, 17 May 2010 11:52:35 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.51
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Message-ID: <20100517185235.GA7868@gmail.com>
+References: <hsql3t$o5c$1@dough.gmane.org> <20100517055550.GA6686@gmail.com>
+	<hsr2pr$4vp$1@dough.gmane.org>
+	<AANLkTin6PIr6ZgeYS6rB9IGK83vQH9Tn9xreVOwOAt0M@mail.gmail.com>
+	<hsrsq8$d0r$1@dough.gmane.org>
+	<AANLkTimXPVpXkm-vJbKvsYim3zM_ckn6XEH_XtS_pDot@mail.gmail.com>
+	<1274119962.25944.147.camel@trini-m4400>
+MIME-Version: 1.0
+In-Reply-To: <1274119962.25944.147.camel@trini-m4400>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.219.225
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cross.bbclass: fix build of meta-toolchain
+Subject: Re: Question: is 'gcc' supposed to replace the libstdc++.la installed by 'gcc-cross'?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +62,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 18:46:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 May 2010 18:56:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, May 14, 2010 at 6:53 PM, Eric Benard <eric@eukrea.com> wrote:
-> - without this bitbake meta-toolchain fails because it doesn't find who
-> =A0provides gdb-cross-sdk
-> - found thanks to a hint from Phil Blundell on IRC
-> - tested with Angstrom/ARMv5te
->
-> Signed-off-by: Eric Benard <eric@eukrea.com>
-> ---
-> =A0classes/cross.bbclass | =A0 =A02 --
-> =A01 files changed, 0 insertions(+), 2 deletions(-)
->
-> diff --git a/classes/cross.bbclass b/classes/cross.bbclass
-> index 69f6511..5c2d5be 100644
-> --- a/classes/cross.bbclass
-> +++ b/classes/cross.bbclass
-> @@ -17,8 +17,6 @@ PACKAGE_ARCH =3D "${OLD_PACKAGE_ARCH}"
-> =A0OLD_BASE_PACKAGE_ARCH :=3D "${BASE_PACKAGE_ARCH}"
-> =A0BASE_PACKAGE_ARCH =3D "${OLD_BASE_PACKAGE_ARCH}"
->
-> -PACKAGES =3D ""
-> -
-> =A0HOST_ARCH =3D "${BUILD_ARCH}"
-> =A0HOST_VENDOR =3D "${BUILD_VENDOR}"
-> =A0HOST_OS =3D "${BUILD_OS}"
-> --
-> 1.6.3.3
+On (17/05/10 11:12), Tom Rini wrote:
+> On Mon, 2010-05-17 at 10:45 -0700, Khem Raj wrote: 
+> > On Mon, May 17, 2010 at 10:02 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> > > -----BEGIN PGP SIGNED MESSAGE-----
+> > > Hash: SHA1
+> > >
+> > > On 17-05-10 18:49, Khem Raj wrote:
+> > >> On Mon, May 17, 2010 at 2:38 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> > >
+> > >> I could not build a console-image as I ran out of disk space. Have you
+> > >> considered removing
+> > >> -g3 from default angstrom builds.
+> > 
+> > what is -g3 offering over -g at -O2 and how good the additional debug info is ?
+> 
+> -g3 offers lots of stuff, spelled out in some doc or another is macro
+> expansion, for example.  I don't know if it offers enough stuff that you
+> say don't need the sources themselves around still too tho.  Koen?
 
+If -g3 is intended, some options to reduce debug info size should be
+considered like
+-feliminate-dwarf2-dups -femit-struct-debug-baseonly
+-femit-struct-debug-reduced
+etc.
 
-This fixes meta-toolchain builds for me.
-
-Thanks,
-Cliff
+-Khem
 
 
