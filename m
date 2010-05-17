@@ -1,45 +1,45 @@
-Received: from mail-yw0-f188.google.com ([209.85.211.188])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OE3bR-0002yj-Sm
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 18:55:43 +0200
-Received: by ywh26 with SMTP id 26so2397926ywh.12
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OE3lb-0000pH-31 for openembedded-devel@lists.openembedded.org;
+	Mon, 17 May 2010 19:06:12 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OE3hh-0004rs-5U for openembedded-devel@lists.openembedded.org;
+	Mon, 17 May 2010 19:02:09 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 May 2010 19:02:09 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 09:51:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=GTnducRNjGXJUhVrvyp4fJl8ZoqwJkR5l8eOGy37das=;
-	b=s83W9EE2v2QilrRujERzwINYr3dM7rO1JrEC6J+yGtVTjcHQUlqndoB+rXL6XyMelu
-	aYCl206tIIP4XjETHei7V817OzyFld5fa5KofBFsP1005SEzdmIHDDfRiKp/WmzTmOyu
-	AFfKBhD8Hor9yl+XrOWptlONkrEPgW/YFVLes=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=XHFRUlI9d/IdOzKfPMGEYYo3v3sDc97msbhxiRhVMBl/PuZRZ/KAVA+Cvhgpb+J1sS
-	GHMOM11iwqpD1i2lazuzPpGDRM2/8WhYAEODmQr5c3qTXdrNuq8vMj/DIc2GVLfrWoxr
-	+/v0aK8DeIZmEkvOXsrNl0pKfD6L5PDNa2wb4=
-MIME-Version: 1.0
-Received: by 10.101.156.18 with SMTP id i18mr5862442ano.180.1274115101863; 
-	Mon, 17 May 2010 09:51:41 -0700 (PDT)
-Received: by 10.100.96.12 with HTTP; Mon, 17 May 2010 09:51:41 -0700 (PDT)
-In-Reply-To: <hsgbec$a9i$3@dough.gmane.org>
-References: <alpine.DEB.2.00.1005121257070.3272@lynx>
-	<hsgbec$a9i$3@dough.gmane.org>
-Date: Mon, 17 May 2010 09:51:41 -0700
-Message-ID: <AANLkTinjVnI2vk6VeF8q_n31Wt2ZFpqMme-8vq6yPH_C@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 17 May 2010 19:02:09 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.188
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 17 May 2010 19:02:00 +0200
+Message-ID: <hsrsq8$d0r$1@dough.gmane.org>
+References: <hsql3t$o5c$1@dough.gmane.org>
+	<20100517055550.GA6686@gmail.com>	<hsr2pr$4vp$1@dough.gmane.org>
+	<AANLkTin6PIr6ZgeYS6rB9IGK83vQH9Tn9xreVOwOAt0M@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <AANLkTin6PIr6ZgeYS6rB9IGK83vQH9Tn9xreVOwOAt0M@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: on ubuntu 10.04, how to reset /bin/sh to refer to bash?
+Subject: Re: Question: is 'gcc' supposed to replace the libstdc++.la installed by 'gcc-cross'?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,28 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 16:55:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 May 2010 17:06:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 13, 2010 at 12:58 AM, Koen Kooi <k.kooi@student.utwente.nl> wro=
-te:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 12-05-10 18:58, Robert P. J. Day wrote:
->>
->> =A0 my first time setting up to build OE on ubuntu 10.04, and trying to
->> "bitbake fetch" complains that it's a bad idea for /bin/sh to refer to
->> dash. =A0fair enough, so since /bin/sh -> dash, do i just reset the
->> symlink manually? =A0or is there something more elegant? =A0thanks.
->
-> And for the record: It's not OE (anymore) that requires bash, it's the
-> software we build. E.g. GTK+'s libtool has bashisms. And there are a lot
-> more.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I wonder how debian/ubuntu build them. I assume they should be using
-dash as default
-shell as well.
+On 17-05-10 18:49, Khem Raj wrote:
+> On Mon, May 17, 2010 at 2:38 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+
+> I could not build a console-image as I ran out of disk space. Have you
+> considered removing
+> -g3 from default angstrom builds.
+
+No, that would make -dbg packages useless.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL8XaIMkyGM64RGpERAkfFAKCsBlf/O9fnSkUxV+pOSiV2uXiBNwCfSjuu
+iZwbcen+H0YuBVf7fTPXZ9Q=
+=Cuo2
+-----END PGP SIGNATURE-----
+
 
 
