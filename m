@@ -1,39 +1,43 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1ODvL5-0003Xg-Nt
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 10:06:16 +0200
-Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1ODvHF-0000Kf-55
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 17 May 2010 09:02:17 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ODwpv-0003pT-Dw for openembedded-devel@lists.openembedded.org;
+	Mon, 17 May 2010 11:42:12 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ODwm2-0008FZ-Hk for openembedded-devel@lists.openembedded.org;
+	Mon, 17 May 2010 11:38:10 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 May 2010 11:38:10 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 May 2010 11:38:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BF0EC57.2030603@eukrea.com>
-References: <1272921691-6963-1-git-send-email-eric@eukrea.com>
-	<4BED67FB.1060900@eukrea.com>
-	<3D406A77-A498-47BB-A8DD-6BEC7E55D5B6@student.utwente.nl>
-	<4BED85C7.8000909@eukrea.com> <hsk1il$v4j$2@dough.gmane.org>
-	<4BED8C2F.1080500@eukrea.com>
-	<1273866959.4465.5.camel@lenovo.internal.reciva.com>
-	<4BEDAF6D.5010704@eukrea.com>
-	<1273870976.4465.6.camel@lenovo.internal.reciva.com>
-	<4BF0EC57.2030603@eukrea.com>
-Date: Mon, 17 May 2010 09:02:19 +0100
-Message-ID: <1274083339.4620.82.camel@lenovo.internal.reciva.com>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 17 May 2010 11:38:03 +0200
+Message-ID: <hsr2pr$4vp$1@dough.gmane.org>
+References: <hsql3t$o5c$1@dough.gmane.org> <20100517055550.GA6686@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <20100517055550.GA6686@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] module-base.bbclass: keep PR if MACHINE_KERNEL_PR is not set
+Subject: Re: Question: is 'gcc' supposed to replace the libstdc++.la installed by 'gcc-cross'?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,25 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 17 May 2010 08:06:16 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 17 May 2010 09:42:13 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, 2010-05-17 at 09:12 +0200, Eric B=C3=A9nard wrote:
-> Le 14/05/2010 23:02, Phil Blundell a =C3=A9crit :
-> > On Fri, 2010-05-14 at 22:15 +0200, Eric B=C3=A9nard wrote:
-> >> So actually the fix I propose is needed as while MACHINE_KERNEL_PR is
-> >> not required by policy, module-base.bbclass is broken for machines
-> >> without MACHINE_KERNEL_PR.
-> >
-> > Yes, agreed.  I think your fix is the right thing.
-> >
-> Is this an ack so can I push it ?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Yes, please go ahead.
+On 17-05-10 07:55, Khem Raj wrote:
+> On (17/05/10 07:44), Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Hi,
+>>
+>> I just noticed that after doing 'bitbake gcc' the old libstdc++ gets
+>> replaced and the new one has:
+>>
+>> dependency_libs='
+>> /OE/angstrom-dev/sysroots/armv6-angstrom-linux-gnueabi/usr/lib/libstdc++.la'
+>>
+>> instead of the expected '-lm'. It now refers to itself :(
+> 
+> hmmm target gcc should not have staged libstdc++ if it was already staged
+> by gcc-cross but the problem is casued by
+> gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch it passed the native libdir which
+> is build_libdir even for target library builds using -rpath. I am currently
+> looking into the reason. If possible we can get rid of that patch.
 
-p.
+I'm getting a build failure with 'gcc' now failing to find libstc++.la.
+I'm trying a build from scratch now to rule out any packaged-staging
+problems (>1 recipes installing the same file, pstage removing it prior
+to build).
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL8Q57MkyGM64RGpERAvvpAJ4vR4wtskIhV6BBUN/LcOzxXYPSEwCeNNtm
+FWhLXTLoZUXa+yIDjlEiNbo=
+=EvPm
+-----END PGP SIGNATURE-----
 
 
 
