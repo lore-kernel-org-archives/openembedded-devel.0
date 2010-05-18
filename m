@@ -1,43 +1,33 @@
-Received: from mail-qy0-f172.google.com ([209.85.221.172])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OEB2K-0006sw-Ja
+	(envelope-from <top.grzechu@gmail.com>) id 1OEGtY-0000md-3n
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 02:51:59 +0200
-Received: by qyk2 with SMTP id 2so7647307qyk.20
+	Tue, 18 May 2010 09:07:16 +0200
+Received: by fxm8 with SMTP id 8so448950fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 17 May 2010 17:47:51 -0700 (PDT)
+	Tue, 18 May 2010 00:03:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=7myXejC6mpK+z3s7DKEhXfth7QYZmP2jvRqB8DSB9G0=;
-	b=Df3vvSCblIKdxL6ECqpocJ3qZEZ65uo2dLCgPzy7mKNzO3Ii66H0BMteMy/04tWg4v
-	laJQMRtEfpZWMaQXw7OOMXPpTVUYAT7EMrn9CerndBn7uuThiEEGeRhjQmoZSqv/0W6K
-	MliJEvrS5HJm3RiEjLDB06XmdBn/wl419UeRs=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=n6gACkJOLhYovKrIlRn43bwBEUJCPtC70ByVyjjKKv8=;
+	b=trUsH8dvHsD8HRmpjFGqZmgyQZcQkQNYy0HDWRUSxmR/OkCjVDjAqrw9S2o7Ji115c
+	bQSECfswbVW+9br29wjutyWmJ+fRLx/pYKSkxtwf83DuSuGxtUdHFcIR/u1mgjFuRRMs
+	9BCkMOMJmc+04/HAP9y1ABDyZSXkfF5Y+6C1g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=vOYqtNpI6IUk1r8iYPQApzmhfIXVyDFUpYs6fjID3GY7qfSUPst1tuGP4JJADIPh1A
-	EeQHAv2sVNA8FgOk11q9Ct+N4KqAqbBbsLz6IjI8TzWZnc/0YL1QKVTvOuwelpdac8m3
-	iRqXSeBGmiCnlZu6OechrZRGXLd/FahTgOxr4=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=huFlnaryanYfsyanGSD77ad2bUCQc7Y2w5dEKi6EtMsCDV+VQHE5yJbEK4dNL9bNoe
+	F1X4Z5UAKafofkOXxIzkvUlqn1Z0JKEVrJXdSq/6/YBURHd/MVWNkKPHBCwQXujKiLRf
+	qCh26K168UNef1y1iS8cYkSzS5qC9ax+v0HJY=
 MIME-Version: 1.0
-Received: by 10.224.79.102 with SMTP id o38mr3282200qak.358.1274143671732; 
-	Mon, 17 May 2010 17:47:51 -0700 (PDT)
-Received: by 10.229.230.77 with HTTP; Mon, 17 May 2010 17:47:51 -0700 (PDT)
-In-Reply-To: <20100517204934.GE7932@gmail.com>
-References: <AANLkTinM-N-vAT4yP0ptz0UcMBNsLHpQZ1er2VwnsDDv@mail.gmail.com>
-	<20100517190152.GB7868@gmail.com>
-	<AANLkTinsmKk2J576bTB0-Wkk48G5He9koqeQiU4MHhL_@mail.gmail.com>
-	<20100517191837.GB7932@gmail.com>
-	<AANLkTikLN9HgYy5Q6ICrDYuOBB47JdPy8vZiaf-Hv5uu@mail.gmail.com>
-	<20100517194116.GD7932@gmail.com>
-	<AANLkTimIyO_fMaHX_tsssDwFNTLBBl3aFSaMmeBQHk_C@mail.gmail.com>
-	<20100517204934.GE7932@gmail.com>
-Date: Mon, 17 May 2010 19:47:51 -0500
-Message-ID: <AANLkTilkYQk773mFO9JsPmRQzEMSN3NRsGvUsYerwqU4@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+Received: by 10.204.155.68 with SMTP id r4mr78378bkw.208.1274166195686; Tue, 
+	18 May 2010 00:03:15 -0700 (PDT)
+Received: by 10.204.76.131 with HTTP; Tue, 18 May 2010 00:03:15 -0700 (PDT)
+Date: Tue, 18 May 2010 09:03:15 +0200
+Message-ID: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
+From: Grzegorz Toporek <top.grzechu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.172
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: top.grzechu@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
@@ -45,7 +35,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Microblaze gcc 4.5.0 support
+Subject: Problem at the very beginning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,52 +49,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 00:52:01 -0000
+X-List-Received-Date: Tue, 18 May 2010 07:07:17 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, May 17, 2010 at 3:49 PM, Khem Raj <raj.khem@gmail.com> wrote:
+Hi all,
 
-> On (17/05/10 14:57), Adrian Alonso wrote:
-> > libgcc config.log http://pastebin.com/3mLhBMNP
-> >
-> > <http://pastebin.com/3mLhBMNP>I see the error
-> > conftest.c:1:0: error: 'microblaze' is an invalid argument to -mcpu=
->
-> yeah :). So you know what to do next time you have a gcc configure error.
->
-Yep thanks for your help :)
+I'm new to the mailing list so I would like to say hello to everyone. I'm
+new to OE/bitbake as well so please be patient...
 
-> I think microblaze support is still on a branch in gcc. You
-> will be better off using the branch or get the diff of the
-> branch over gcc 4.5.0
->
-Yes that's what I'm doing I include in gcc-svn.inc the src_uri for
-gcc-microblaze branch,
-and have a set patchs for gcc-4.5.0. Changes are in my oe repo [1]
+I was trying to build busybox package but unfortunately I got this error. Is
+it a type conversion problem?  I got this with "Simple Helloworld" either...
 
-Adding the correct option for mcpu fix the previous error but I'm getting a
-new diefferent
-error, I going to search on petalogix mailing list for answers since they
-are the ones working
-actively in microblaze linux support..
+What should be mentioned, there was no a problem to build this for
+angstrom-2008.1 distribution (machine om-gta01). Now I have changed it to
+colibri, which is my boar, and the problem occurred.
 
-[1] http://gitorious.org/oe-microblaze
+I have attached all my .conf files to this e-mail.
 
-Regards
+Please help me with this problem. Looking forward to your reply.
 
+ERROR:
 
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+NOTE: Handling BitBake files: \ (7927/8366) [94 %]NOTE: <type
+'exceptions.TypeError'>:unsupported operand type(s) for +: 'NoneType' and
+'str' while evaluating:
+  task-x11-illume   task-fonts-truetype-core   e-wm-menu-shr   shr-wizard
+shr-theme-gry   xcursor-transparent-theme   xinput-calibrator
+libx11-locale   ${@get_rdepends(bb, d)}   e-wm-config-illume2-shr
+ERROR: unsupported operand type(s) for +: 'NoneType' and 'str' while parsing
+/home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
+NOTE: Handling BitBake files: / (8366/8366) [100 %]
+NOTE: Parsing finished. 7584 cached, 453 parsed, 328 skipped, 0 masked.
+ERROR: Parsing errors found, exiting...
 
+MY FILES:
 
+${OEBASE}/openembedded/conf/distro/colibri.conf
 
--- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+DISTRO                = "colibri"
+DISTRO_NAME            = "Colibri"
+DISTRO_VERSION            = "0.2"
+DISTRO_REVISION            = "1"
+DISTRO_FEATURES            = "nfs smbfs ppp alsa bluetooth ext2 irda pcmcia
+usbgadget usbhost screen"
+DISTRO_TYPE            = "release"
+
+IMAGE_NAME            =
+"${DISTRO_NAME}-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
+IMAGE_LINGUAS            = ""
+DEPLOY_DIR_IMAGE        = "${DEPLOY_DIR}/images/${MACHINE}"
+
+TARGET_OS            = "linux-gnueabi"
+TARGET_VENDOR            = "-colibri"
+INHERIT                += "package_ipk package_tar debian sanity insane"
+
+PREFERRED_PROVIDER_qemu-native    = "qemu-native"
+ENABLE_BINARY_LOCALE_GENERATION    = "0"
+
+FEED_ARCH            = "${TARGET_ARCH}"
+
+KERNEL                = "kernel26"
+MACHINE_KERNEL_VERSION        = "2.6"
+PCMCIA_MANAGER            = "pcmciautils"
+
+PREFERRED_PROVIDER_virtual/libiconv    = "glibc"
+PREFERRED_PROVIDER_virtual/libintl    = "glibc"
+PREFERRED_PROVIDER_virtual/libc        = "glibc"
+
+USE_NLS                    = "no"
+USE_NLS_glib-2.0            = "yes"
+
+FULL_OPTIMIZATION            = "-pipe -fexpensive-optimizations
+-fomit-frame-pointer -frename-registers -Os"
+BUILD_OPTIMIZATION            = "-pipe -Os"
+CXXFLAGS                += "-fvisibility-inlines-hidden"
+
+PREFERRED_VERSION_gcc            = "4.2.2"
+PREFERRED_VERSION_gcc-cross        = "4.2.2"
+PREFERRED_VERSION_gcc-cross-sdk        = "4.2.2"
+PREFERRED_VERSION_gcc-cross-initial    = "4.2.2"
+
+PREFERRED_VERSION_binutils        = "2.18"
+PREFERRED_VERSION_binutils-cross    = "2.18"
+PREFERRED_VERSION_binutils-cross-sdk    = "2.18"
+
+PREFERRED_VERSION_linux-libc-headers    = "2.6.22"
+
+PREFERRED_VERSION_glibc            = "2.6.1"
+PREFERRED_VERSION_glibc-initial        = "2.6.1"
+PREFERRED_VERSION_glibc-intermediate    = "2.6.1"
+
+PREFERRED_VERSION_busybox        = "1.7.4"
+
+PREFERRED_PROVIDER_virtual/arm-colibri-linux-gnueabi-binutils            =
+"binutils-cross"
+
+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial                =
+"gcc-cross-initial"
+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc                    =
+"gcc-cross"
+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++                    =
+"gcc-cross"
+
+PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc                =
+"glibc-intermediate"
+PREFERRED_PROVIDER_virtual/arm-colibri-linux-gnueabi-libc-for-gcc        =
+"glibc-intermediate"
+PREFERRED_PROVIDER_virtual/arm-colibri-linux-libc-for-gcc            =
+"glibc-intermediate"
+
+PREFERRED_PROVIDER_virtual/db                            = "db"
+PREFERRED_PROVIDER_virtual/db-native                        = "db-native"
+
+PREFERRED_PROVIDER_gconf                            = "gconf"
+PREFERRED_PROVIDER_libgsmd                            = "libgsmd"
+PREFERRED_PROVIDER_linux-libc-headers                        =
+"linux-libc-headers"
+PREFERRED_PROVIDER_task-bootstrap                        = "task-bootstrap"
+
+SRCREV_pn-gsm0710muxd                                = "76"
+
+require conf/distro/include/sane-srcdates.inc
+require conf/distro/include/sane-srcrevs.inc
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%${OEBASE}/openembedded/conf/machine/colibri.conf
+
+TARGET_ARCH        = "arm"
+TARGET_FPU        = "soft"
+PACKAGE_EXTRA_ARCHS    = "armv4t armv5te"
+
+require conf/machine/include/tune-iwmmxt.inc
+
+GUI_MACHINE_CLASS    = "bigscreen"
+MACHINE_FEATURES    = "kernel26 apm alsa ext2 uboot irda usbgadget usbhost
+keyboard touchscreen screen bluetooth pcmcia"
+
+MACHINE_TASK_PROVIDER    = "task-boot dropbear"
+
+PREFERRED_PROVIDER_virtual/kernel    = "linux-colibri"
 
