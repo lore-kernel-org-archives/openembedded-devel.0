@@ -1,44 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OEPNA-0007sG-Vf
+	(envelope-from <philb@gnu.org>) id 1OEUa9-0003lb-9d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 18:10:25 +0200
-Received: by iwn2 with SMTP id 2so1659948iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 09:06:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=8lR+SvDZTKu/QxosHRk32hPRIEpkDKqb7UPIem3IsIY=;
-	b=hITzJE1Dsbu/nagw76ZL06Cv7lQvODYb7u0OSLpK/L1a8g8RdlGn61vWdNdn0nheZH
-	YZ1OLR3EXoQ6gfVSyJzM84Oj93Gy+tCFzqI2tJCplKlI+bdtYt01Q+RlkLD+fS2Iqy+R
-	LtmbmrDFSsrt2JN86tV05WOWzRdxcMQv0zU+0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=rV2z22Eu1fAcUiKzIjGVUNKfoGQQZ7hmC1u23OLdiJ49/dTCNX1g9GQC580IPVDTIs
-	hT01y7+LqtwDX0Vi3S4g5tWvxU1BW1qHATTe98KgUu2C22Twq9YxJRo5G7C4916ryxlo
-	PHDuLISy661/BGeM8UeixCqR+IBoBT3YnrkYw=
-MIME-Version: 1.0
-Received: by 10.231.174.201 with SMTP id u9mr2219770ibz.17.1274198785370; Tue, 
-	18 May 2010 09:06:25 -0700 (PDT)
-Received: by 10.231.37.139 with HTTP; Tue, 18 May 2010 09:06:25 -0700 (PDT)
-In-Reply-To: <4BF2B3C7.7060700@matrix-vision.de>
-References: <4BF2B3C7.7060700@matrix-vision.de>
-Date: Tue, 18 May 2010 12:06:25 -0400
-Message-ID: <AANLkTimH7otrK2goIN2xZ0Jkp69tntDYY30qXzfDnZ1M@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Tue, 18 May 2010 23:44:10 +0200
+Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OEUWI-0000Z9-4G
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 May 2010 22:40:10 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <4BF1969E.3020408@eukrea.com>
+References: <1273877583-31604-1-git-send-email-eric@eukrea.com>
+	<hsp64i$r3s$2@dough.gmane.org>  <4BF1969E.3020408@eukrea.com>
+Date: Tue, 18 May 2010 22:40:12 +0100
+Message-ID: <1274218812.4620.189.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] docs/ spelling fixes
+Subject: Re: [PATCH] cross.bbclass: fix build of meta-toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,19 +40,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 16:10:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 May 2010 21:44:10 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-n Tue, May 18, 2010 at 11:35 AM, Michael Jones
-<michael.jones@matrix-vision.de> wrote:
-> Just a few things in the documentation I noticed while reading up on OE. =
-I don't understand why 'git diff' included "\ No newline at end of file" fo=
-r some of these, or how I could instruct it not to, but I also didn't want =
-to pick apart my patch outside of git.
+On Mon, 2010-05-17 at 21:18 +0200, Eric B=C3=A9nard wrote:
+> Hi,
+>=20
+> Le 16/05/2010 18:22, Koen Kooi a =C3=A9crit :
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >
+> > I can confirm that 'meta-toolchain' builds against with this
+> > (angstrom/beagleboard), but I don't know what the effect of this is on
+> > cross recipes.
+>=20
+> Who could confirm that this change may not introduce any unwanted=20
+> behaviour ?
 
-Thanks, applied.
+In the long term I think this patch is a good idea, and I think we
+already have a similar change on the toolchain-desuck branch.=20
 
-Cliff
+In the short term, this patch is probably harmless since I think the
+other bits in cross.bbclass will prevent any packages from actually
+being generated (since the install paths won't match against any FILES).
+If you did get packages out then they would be somewhat misleadingly
+named and this would probably be a bad thing.
+
+I think you might as well go ahead and check this in, if you haven't
+already, and if any issues do crop up we can deal with them at that
+time.  I would like to try to get the other toolchain-packaging changes
+merged as well at some point soonish.
+
+p.
+
+
 
 
