@@ -1,49 +1,41 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OEHZD-0007Y5-5z
+	(envelope-from <foolshperson@gmail.com>) id 1OEHZO-0007YR-R5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 09:50:22 +0200
-Received: by pxi14 with SMTP id 14so2695096pxi.6
+	Tue, 18 May 2010 09:50:31 +0200
+Received: by gya1 with SMTP id 1so2429520gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 00:46:15 -0700 (PDT)
+	Tue, 18 May 2010 00:46:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=mEAS36F5i07ktjj+rN8bqDoYiee1deJt0fCm84tewn4=;
-	b=TudYKc5Igzpi8UAtBuK435ZZPclwnumx/etNgiNKSBZ28M/nybWcbFlXgiw52nkTR8
-	C5Ua7CFoX48J3tige0MervRKkhZHaR7G4RjdGTjjbupo0j33ZVpdNHwoS/+LMqEwamKY
-	CMwEBj7gnQ4ObS5LJjb6RPHAgWaFsAWuDPU3s=
+	h=domainkey-signature:mime-version:received:received:reply-to:date
+	:message-id:subject:from:to:content-type;
+	bh=2krQlD7IGv+EKX3yB/Nm0hkYjfQ6lKMe4b0kUB5hyIc=;
+	b=v/NLbSKoBcsGuPsLiZPN/0cT2dB0I6fsdDIsWFtakVdmerRWo0YFy4Iuam2VA/TDhe
+	8Sy1N6gIqjU2GRoj0lhczMtOuLo8seRqD+NDanwvxi74hoUHAKBbOnDq+1A3DhzoKFwz
+	pGHlrozMFdo0Dq3FIhI4swltiLyr+yS5mmXvI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=dVmAKRMwLn+NFoRBV9G6fyo0z12FoQMrQ3eiNynva1bzXNWairb2c3yOvNKAUbrdWj
-	YxxlFs3dqdRv3cVrG57G/obW8k2sABfQIFWkhtfF0OO2sRGh53Dg19EHbsf9YKOMZqo/
-	NqUkBumzjAz3XKt2oOZwHymHGUGkx2OEs/M7w=
-Received: by 10.115.64.20 with SMTP id r20mr5472784wak.205.1274168775067;
-	Tue, 18 May 2010 00:46:15 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id c22sm56460044wam.18.2010.05.18.00.46.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 18 May 2010 00:46:13 -0700 (PDT)
-Date: Tue, 18 May 2010 00:46:06 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100518074606.GA19476@gmail.com>
-References: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
+	h=mime-version:reply-to:date:message-id:subject:from:to:content-type;
+	b=RJfQobM+ucclZQ2ogrHUkVNhMSJeRYyo5AojJqps2pWJrG+nUny3DCo5UXVk7c7TNs
+	ORTjsY8F4cLTQrNBjmyVy0pqOC/T9uWelBeu9ohirYH2sH9yJim8JIt+HnGU2wBySqcb
+	9hpFFOOP75P8YYFEYylegY+Z7U0FUo2FseHUY=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Received: by 10.91.8.20 with SMTP id l20mr2611821agi.52.1274168789689; Tue, 18 
+	May 2010 00:46:29 -0700 (PDT)
+Received: by 10.90.27.20 with HTTP; Tue, 18 May 2010 00:46:29 -0700 (PDT)
+Date: Tue, 18 May 2010 02:46:29 -0500
+Message-ID: <AANLkTilMTQc7waguDtvxQ9oUx0rmXBwtJ0LwtQ5RwHna@mail.gmail.com>
+From: benjamin brown <foolshperson@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: foolshperson@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Problem at the very beginning
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: many devices to test your code
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,52 +49,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 07:50:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 May 2010 07:50:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (18/05/10 09:03), Grzegorz Toporek wrote:
-> Hi all,
-> 
-> I'm new to the mailing list so I would like to say hello to everyone. I'm
-> new to OE/bitbake as well so please be patient...
-> 
-> I was trying to build busybox package but unfortunately I got this error. Is
-> it a type conversion problem?  I got this with "Simple Helloworld" either...
-> 
-> What should be mentioned, there was no a problem to build this for
-> angstrom-2008.1 distribution (machine om-gta01). Now I have changed it to
-> colibri, which is my boar, and the problem occurred.
-> 
-> I have attached all my .conf files to this e-mail.
-> 
-> Please help me with this problem. Looking forward to your reply.
-> 
-> ERROR:
-> 
-> NOTE: Handling BitBake files: \ (7927/8366) [94 %]NOTE: <type
-> 'exceptions.TypeError'>:unsupported operand type(s) for +: 'NoneType' and
-> 'str' while evaluating:
->   task-x11-illume   task-fonts-truetype-core   e-wm-menu-shr   shr-wizard
-> shr-theme-gry   xcursor-transparent-theme   xinput-calibrator
-> libx11-locale   ${@get_rdepends(bb, d)}   e-wm-config-illume2-shr
-> ERROR: unsupported operand type(s) for +: 'NoneType' and 'str' while parsing
-> /home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
-> NOTE: Handling BitBake files: / (8366/8366) [100 %]
-> NOTE: Parsing finished. 7584 cached, 453 parsed, 328 skipped, 0 masked.
-> ERROR: Parsing errors found, exiting...
+Hello Open Embedded,
+     I just wanted to introduce myself and tell you what I bring to OE. My
+name is Ben, my handle is foolsh, I am 32, a big Linux fan and have had at
+least one computer in my bedroom since I was 8 but mostly two or three at a
+time. As far as programing goes I haven't really done any thing top to
+bottom since I was 17 and wrote a 3d engine in BASIC from scratch. I count
+myself lucky to work at an electronics recycling outfit as the "IT" guy
+repairing and refurbishing everything under the sun, more or less, for
+resale. I  see various different types of hardware only your imagination
+could adequately describe to you.  I haven't had time to jump in and learn
+as much as I would like too about programing C. I do however dabble and
+learn as I go. I was cutting my teeth on Rockbox and loved the simple layout
+of the code there,  but after my mp3 player bit the dust, it lost its appeal
+to me. I'm not completely new to linux running on hand helds I have
+installed some of the various distributions like jlime and familiar on more
+than one or two devices.
 
-the python code in
-/home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb 
+ So as far as the nitty gritty goes, I have for some time been collecting
+hand helds of various models and condition from where I work.  Since I can't
+really help code any thing for now,  I want to offer my time building,
+testing and reporting. If anyone knows of good place to get some good info
+for testers please drop a link or two. That being said I guess I should seek
+out some one to gain an account so I can help at the OE wiki.
 
-depends upon a metadata variable called LIBC and this is not set in your
-distro file. This could be one of 'glibc|eglibc|uclibc" depending upon
-what system library you want. In your case it seems to be glibc
+I love the idea of this centralized method to building linux for hand helds.
+A problem I ran into when building is all about choice, the lack of a
+defacto standard issue distro for hand helds has kind of thrown me a curve
+ball, not knowing where to start to sort of say. On the PC platform I feel
+debain has achieved this status or at-least to me it has. I see the need for
+a similar thing on the hand held  scene.
 
-So if you set 
+I have not put together a OE build box yet and I'm looking for some
+suggestions for which operating system to use. I'm leaning toward ubuntu but
+want to know what you all think first.
 
-LIBC = "glibc" in your distro file then it should work.
+Working devices I can test your code on. At work I get at least one hand
+held device a month sent in my direction.
+HP 660LX jordania
+HP RX3115
+Ipaq H3630
+Ipaq H3650
+Ipaq H3765
+Ipaq H3850 times two, along with one cf sleeve and one pcmcia sleeve with
+many various 16 bit cards.
+Axim X5 times three
+Axim X50
+Axim X50v times two
+Axim x51
 
--Khem
+Devices I hope to add to the working list but need parts.
+T-mobile branded Wallaby PW10B1 - needs power connector.
+HP HX4700 - need power connector but might be the same as the Wallaby.
+HP H2200 - needs battery comes on briefly for a second without one when plug
+in.
+CASIO E-125 - I should be able to dig up a 3v power adapter from work its a
+standard power connection - post and sleeve type.
 
+Devices with broken screens I just can't throw them to the e-waste scrapers
+at work they could be part donors one day.
+HP H5550 and a HX2750
+
+It seems when people toss these in the recycling bin they always forget the
+cords and adapters ugh.
+
+I would be happy to build and test anyone's code on these devices, I know
+there exist some code that runs specific devices like jlime for the jordania
+and familiar for the ipaqs. But if your working on a unified xorg based
+distro that runs on a wide range of devices I would be happy to work
+exclusively with you. If no one is working on such an animal may I suggest
+someone rally the troops in that direction, to do so seems only logical to
+me. The devices I have more than one of, because the fear of bricking them,
+I would be glad to test ways of permanently flashing linux to them if any
+one is working on that sort of thing anymore.
+
+For those who would like to contact me off the mailing list my email is
+foolsh(dot)person@gmail(dot)
+com, cheers
 
