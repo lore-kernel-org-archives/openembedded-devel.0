@@ -1,43 +1,49 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OEHOL-0004Mn-AT for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 09:39:07 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OEHKR-0000fQ-Vu for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 09:35:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 09:35:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1OEHZD-0007Y5-5z
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 May 2010 09:50:22 +0200
+Received: by pxi14 with SMTP id 14so2695096pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 09:35:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 18 May 2010 00:46:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=mEAS36F5i07ktjj+rN8bqDoYiee1deJt0fCm84tewn4=;
+	b=TudYKc5Igzpi8UAtBuK435ZZPclwnumx/etNgiNKSBZ28M/nybWcbFlXgiw52nkTR8
+	C5Ua7CFoX48J3tige0MervRKkhZHaR7G4RjdGTjjbupo0j33ZVpdNHwoS/+LMqEwamKY
+	CMwEBj7gnQ4ObS5LJjb6RPHAgWaFsAWuDPU3s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=dVmAKRMwLn+NFoRBV9G6fyo0z12FoQMrQ3eiNynva1bzXNWairb2c3yOvNKAUbrdWj
+	YxxlFs3dqdRv3cVrG57G/obW8k2sABfQIFWkhtfF0OO2sRGh53Dg19EHbsf9YKOMZqo/
+	NqUkBumzjAz3XKt2oOZwHymHGUGkx2OEs/M7w=
+Received: by 10.115.64.20 with SMTP id r20mr5472784wak.205.1274168775067;
+	Tue, 18 May 2010 00:46:15 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id c22sm56460044wam.18.2010.05.18.00.46.13
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 18 May 2010 00:46:13 -0700 (PDT)
+Date: Tue, 18 May 2010 00:46:06 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 18 May 2010 09:30:17 +0200
-Message-ID: <hstfm9$fv2$2@dough.gmane.org>
-References: <4BF2417A.6000302@acn-group.ch>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <4BF2417A.6000302@acn-group.ch>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100518074606.GA19476@gmail.com>
+References: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [hawkboard] OE Kernel Not Booting
+Subject: Re: Problem at the very beginning
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +57,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 07:39:07 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 18 May 2010 07:50:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On (18/05/10 09:03), Grzegorz Toporek wrote:
+> Hi all,
+> 
+> I'm new to the mailing list so I would like to say hello to everyone. I'm
+> new to OE/bitbake as well so please be patient...
+> 
+> I was trying to build busybox package but unfortunately I got this error. Is
+> it a type conversion problem?  I got this with "Simple Helloworld" either...
+> 
+> What should be mentioned, there was no a problem to build this for
+> angstrom-2008.1 distribution (machine om-gta01). Now I have changed it to
+> colibri, which is my boar, and the problem occurred.
+> 
+> I have attached all my .conf files to this e-mail.
+> 
+> Please help me with this problem. Looking forward to your reply.
+> 
+> ERROR:
+> 
+> NOTE: Handling BitBake files: \ (7927/8366) [94 %]NOTE: <type
+> 'exceptions.TypeError'>:unsupported operand type(s) for +: 'NoneType' and
+> 'str' while evaluating:
+>   task-x11-illume   task-fonts-truetype-core   e-wm-menu-shr   shr-wizard
+> shr-theme-gry   xcursor-transparent-theme   xinput-calibrator
+> libx11-locale   ${@get_rdepends(bb, d)}   e-wm-config-illume2-shr
+> ERROR: unsupported operand type(s) for +: 'NoneType' and 'str' while parsing
+> /home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
+> NOTE: Handling BitBake files: / (8366/8366) [100 %]
+> NOTE: Parsing finished. 7584 cached, 453 parsed, 328 skipped, 0 masked.
+> ERROR: Parsing errors found, exiting...
 
-On 18-05-10 09:27, Christophe Aeschlimann wrote:
-> Hi,
-> 
-> We are at least three hawkboard owners that have the same issue.
-> 
-> Building org.openembedded.dev HEAD with
-> 
-> MACHINE= "hawkboard"
-> DISTRO = "angstrom-2008.1"
-> 
-> produces a Kernel Image that cannot be booted on our hawkboards.
-> 
-> The behaviour is the following with the following kernel bootargs :
-> 
-> console=ttyS2,115200n8 root=/dev/nfs
-> nfsroot=172.16.147.10:/srv/nfs/hawkboard ip=172.16.100.100
-> eth=0a:c1:a8:12:fa:c0
-> 
->> U-Boot 2009.01-dirty (Nov 26 2009 - 02:15:00)
+the python code in
+/home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb 
 
-Try the OE built u-boot.
+depends upon a metadata variable called LIBC and this is not set in your
+distro file. This could be one of 'glibc|eglibc|uclibc" depending upon
+what system library you want. In your case it seems to be glibc
 
-regards,
+So if you set 
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+LIBC = "glibc" in your distro file then it should work.
 
-iD8DBQFL8kIIMkyGM64RGpERAnzbAKCkVvmZmPSiGQTeCUsxhLbA2MMYJQCfcRaN
-4B0R8tT1NCn/YMK9Cc09wvo=
-=R3vZ
------END PGP SIGNATURE-----
-
+-Khem
 
 
