@@ -1,38 +1,51 @@
-Received: from cassiel.sirena.org.uk ([80.68.93.111] ident=Debian-exim)
+Received: from mail-qy0-f172.google.com ([209.85.221.172])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1OEAVX-0004O0-I0
+	(envelope-from <aalonso00@gmail.com>) id 1OEB2K-0006sw-Ja
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 02:18:05 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1OEARh-0003qd-NX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 01:14:05 +0100
-Date: Tue, 18 May 2010 01:14:05 +0100
-From: Mark Brown <broonie@sirena.org.uk>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100518001404.GB9592@sirena.org.uk>
-References: <4BE13C20.1010902@dresearch.de> <4BE81DE7.90609@dresearch.de>
-	<1273518881.22943.378.camel@trini-m4400>
-	<4BE90A56.3090605@dresearch.de>
-	<1273588024.22943.391.camel@trini-m4400>
-	<4BEA448D.5060008@dresearch.de>
-	<1273750831.18119.498.camel@mill.internal.reciva.com>
-	<4BED1EFC.7010905@dresearch.de>
-	<1273832754.18119.691.camel@mill.internal.reciva.com>
-	<4BED36A8.6070602@dresearch.de>
+	Tue, 18 May 2010 02:51:59 +0200
+Received: by qyk2 with SMTP id 2so7647307qyk.20
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 17 May 2010 17:47:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=7myXejC6mpK+z3s7DKEhXfth7QYZmP2jvRqB8DSB9G0=;
+	b=Df3vvSCblIKdxL6ECqpocJ3qZEZ65uo2dLCgPzy7mKNzO3Ii66H0BMteMy/04tWg4v
+	laJQMRtEfpZWMaQXw7OOMXPpTVUYAT7EMrn9CerndBn7uuThiEEGeRhjQmoZSqv/0W6K
+	MliJEvrS5HJm3RiEjLDB06XmdBn/wl419UeRs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=vOYqtNpI6IUk1r8iYPQApzmhfIXVyDFUpYs6fjID3GY7qfSUPst1tuGP4JJADIPh1A
+	EeQHAv2sVNA8FgOk11q9Ct+N4KqAqbBbsLz6IjI8TzWZnc/0YL1QKVTvOuwelpdac8m3
+	iRqXSeBGmiCnlZu6OechrZRGXLd/FahTgOxr4=
 MIME-Version: 1.0
-In-Reply-To: <4BED36A8.6070602@dresearch.de>
-X-Cookie: Put your trust in those who are worthy.
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 80.68.93.111
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
+Received: by 10.224.79.102 with SMTP id o38mr3282200qak.358.1274143671732; 
+	Mon, 17 May 2010 17:47:51 -0700 (PDT)
+Received: by 10.229.230.77 with HTTP; Mon, 17 May 2010 17:47:51 -0700 (PDT)
+In-Reply-To: <20100517204934.GE7932@gmail.com>
+References: <AANLkTinM-N-vAT4yP0ptz0UcMBNsLHpQZ1er2VwnsDDv@mail.gmail.com>
+	<20100517190152.GB7868@gmail.com>
+	<AANLkTinsmKk2J576bTB0-Wkk48G5He9koqeQiU4MHhL_@mail.gmail.com>
+	<20100517191837.GB7932@gmail.com>
+	<AANLkTikLN9HgYy5Q6ICrDYuOBB47JdPy8vZiaf-Hv5uu@mail.gmail.com>
+	<20100517194116.GD7932@gmail.com>
+	<AANLkTimIyO_fMaHX_tsssDwFNTLBBl3aFSaMmeBQHk_C@mail.gmail.com>
+	<20100517204934.GE7932@gmail.com>
+Date: Mon, 17 May 2010 19:47:51 -0500
+Message-ID: <AANLkTilkYQk773mFO9JsPmRQzEMSN3NRsGvUsYerwqU4@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.221.172
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Kernel Headers Quality Issue
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Microblaze gcc 4.5.0 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,45 +59,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 00:18:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 18 May 2010 00:52:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, May 14, 2010 at 01:40:24PM +0200, Thilo Fromm wrote:
+On Mon, May 17, 2010 at 3:49 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
->> Yes.  Or, if this is performance critical code, you can cache the result
->> (since the kernel is unlikely to suddenly gain support for a syscall
->> that it didn't have last time) and go directly to the implementation
->> that works.
+> On (17/05/10 14:57), Adrian Alonso wrote:
+> > libgcc config.log http://pastebin.com/3mLhBMNP
+> >
+> > <http://pastebin.com/3mLhBMNP>I see the error
+> > conftest.c:1:0: error: 'microblaze' is an invalid argument to -mcpu=
+>
+> yeah :). So you know what to do next time you have a gcc configure error.
+>
+Yep thanks for your help :)
 
-> This would mean that checking for kernel features (e.g. inotify_init1())  
-> at compile time via an application's configure.ac is pointless, right?  
-> Because configure will report availability of this interface even though  
-> it won't be there when the application runs. In other words, everything  
-> configure is telling me about kernel features (native kernel thread  
-> availability, inotify, sysfs, ...) might be false anyway. Code like this
+> I think microblaze support is still on a branch in gcc. You
+> will be better off using the branch or get the diff of the
+> branch over gcc 4.5.0
+>
+Yes that's what I'm doing I include in gcc-svn.inc the src_uri for
+gcc-microblaze branch,
+and have a set patchs for gcc-4.5.0. Changes are in my oe repo [1]
 
-If you know that you are running on the same system as you are using for
-the build you *can* write a configure check which actually tries to call
-the syscall (and will therefore check for -ENOSYS) but obviously this
-can't be relied upon if someone runs the binary on another system or
-changes the configuration of the current system.
+Adding the correct option for mcpu fix the previous error but I'm getting a
+new diefferent
+error, I going to search on petalogix mailing list for answers since they
+are the ones working
+actively in microblaze linux support..
 
->> Clearly you don't like the idea very much but yes, this is basically how
->> backwards compatibility code is done, and it is more or less an
->> inescapable consequence of the rather fluid nature of the Linux syscall
->> ABI.
+[1] http://gitorious.org/oe-microblaze
 
-> I don't like your proposal... but not from an application programmer's  
-> POV, but from the perspective of a system integrator (i.e. a  
-> distribution maintainer). I think just assuming that your proposal is  
-> true for every application I need to integrate would be a mistake and  
-> devastating to a distribution's overall quality.
+Regards
 
-This is something that Linux distributions (and any other system
-integrator working over multiple OS releases) have always had to deal
-with.  If you're shipping a binary which may run in a different
-environment to the one it was built in this has always been a
-possibility.
 
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
