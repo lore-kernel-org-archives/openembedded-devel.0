@@ -1,41 +1,28 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <top.grzechu@gmail.com>) id 1OEGtY-0000md-3n
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1OEHHG-0001ru-QA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 09:07:16 +0200
-Received: by fxm8 with SMTP id 8so448950fxm.6
+	Tue, 18 May 2010 09:32:00 +0200
+Received: from [172.16.145.92] (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id 24208370DE
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 00:03:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=n6gACkJOLhYovKrIlRn43bwBEUJCPtC70ByVyjjKKv8=;
-	b=trUsH8dvHsD8HRmpjFGqZmgyQZcQkQNYy0HDWRUSxmR/OkCjVDjAqrw9S2o7Ji115c
-	bQSECfswbVW+9br29wjutyWmJ+fRLx/pYKSkxtwf83DuSuGxtUdHFcIR/u1mgjFuRRMs
-	9BCkMOMJmc+04/HAP9y1ABDyZSXkfF5Y+6C1g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=huFlnaryanYfsyanGSD77ad2bUCQc7Y2w5dEKi6EtMsCDV+VQHE5yJbEK4dNL9bNoe
-	F1X4Z5UAKafofkOXxIzkvUlqn1Z0JKEVrJXdSq/6/YBURHd/MVWNkKPHBCwQXujKiLRf
-	qCh26K168UNef1y1iS8cYkSzS5qC9ax+v0HJY=
+	Tue, 18 May 2010 09:27:48 +0200 (CEST)
+Message-ID: <4BF2417A.6000302@acn-group.ch>
+Date: Tue, 18 May 2010 09:27:54 +0200
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.204.155.68 with SMTP id r4mr78378bkw.208.1274166195686; Tue, 
-	18 May 2010 00:03:15 -0700 (PDT)
-Received: by 10.204.76.131 with HTTP; Tue, 18 May 2010 00:03:15 -0700 (PDT)
-Date: Tue, 18 May 2010 09:03:15 +0200
-Message-ID: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
-From: Grzegorz Toporek <top.grzechu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: top.grzechu@gmail.com
+X-SA-Exim-Connect-IP: 195.160.190.3
+X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Problem at the very beginning
+Subject: [hawkboard] OE Kernel Not Booting
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,143 +36,165 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 07:07:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 18 May 2010 07:32:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Hi all,
+Hi,
 
-I'm new to the mailing list so I would like to say hello to everyone. I'm
-new to OE/bitbake as well so please be patient...
+We are at least three hawkboard owners that have the same issue.
 
-I was trying to build busybox package but unfortunately I got this error. Is
-it a type conversion problem?  I got this with "Simple Helloworld" either...
+Building org.openembedded.dev HEAD with
 
-What should be mentioned, there was no a problem to build this for
-angstrom-2008.1 distribution (machine om-gta01). Now I have changed it to
-colibri, which is my boar, and the problem occurred.
+MACHINE=3D "hawkboard"
+DISTRO =3D "angstrom-2008.1"
 
-I have attached all my .conf files to this e-mail.
+produces a Kernel Image that cannot be booted on our hawkboards.
 
-Please help me with this problem. Looking forward to your reply.
+The behaviour is the following with the following kernel bootargs :
 
-ERROR:
+console=3DttyS2,115200n8 root=3D/dev/nfs=20
+nfsroot=3D172.16.147.10:/srv/nfs/hawkboard ip=3D172.16.100.100=20
+eth=3D0a:c1:a8:12:fa:c0
 
-NOTE: Handling BitBake files: \ (7927/8366) [94 %]NOTE: <type
-'exceptions.TypeError'>:unsupported operand type(s) for +: 'NoneType' and
-'str' while evaluating:
-  task-x11-illume   task-fonts-truetype-core   e-wm-menu-shr   shr-wizard
-shr-theme-gry   xcursor-transparent-theme   xinput-calibrator
-libx11-locale   ${@get_rdepends(bb, d)}   e-wm-config-illume2-shr
-ERROR: unsupported operand type(s) for +: 'NoneType' and 'str' while parsing
-/home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
-NOTE: Handling BitBake files: / (8366/8366) [100 %]
-NOTE: Parsing finished. 7584 cached, 453 parsed, 328 skipped, 0 masked.
-ERROR: Parsing errors found, exiting...
+> U-Boot 2009.01-dirty (Nov 26 2009 - 02:15:00)
+>
+> DRAM:  128 MB
+> NAND:  NAND device: Manufacturer ID: 0x2c, Chip ID: 0xa1 (Micron NAND 1=
+28MiB 1,8V 8-bit)
+> Bad block table found at page 65472, version 0x01
+> Bad block table found at page 65408, version 0x01
+> 128 MiB
+> In:    serial
+> Out:   serial
+> Err:   serial
+> ARM Clock : 300000000 Hz
+> DDR Clock : 150000000 Hz
+> Ethernet PHY: GENERIC @ 0x07
+> Hit any key to stop autoboot:  0
+>
+> NAND read: device 0 offset 0x200000, size 0x400000
+>  4194304 bytes read: OK
+> ## Booting kernel from Legacy Image at c0700000 ...
+>    Image Name:   Angstrom/2.6.32+2.6.33-rc4-r44+g
+>    Image Type:   ARM Linux Kernel Image (uncompressed)
+>    Data Size:    2452896 Bytes =3D  2.3 MB
+>    Load Address: c0008000
+>    Entry Point:  c0008000
+>    Verifying Checksum ... OK
+>    Loading Kernel Image ... OK
+> OK
+>
+> Starting kernel ...
 
-MY FILES:
+And it hangs there forever...
 
-${OEBASE}/openembedded/conf/distro/colibri.conf
+If I add earlyprintk to the bootargs :
 
-DISTRO                = "colibri"
-DISTRO_NAME            = "Colibri"
-DISTRO_VERSION            = "0.2"
-DISTRO_REVISION            = "1"
-DISTRO_FEATURES            = "nfs smbfs ppp alsa bluetooth ext2 irda pcmcia
-usbgadget usbhost screen"
-DISTRO_TYPE            = "release"
+console=3DttyS2,115200n8 root=3D/dev/nfs=20
+nfsroot=3D172.16.147.10:/srv/nfs/hawkboard ip=3D172.16.100.100=20
+eth=3D0a:c1:a8:12:fa:c0 earlyprintk=3Dserial,ttyS2,115200n8
 
-IMAGE_NAME            =
-"${DISTRO_NAME}-${IMAGE_BASENAME}-${DISTRO_VERSION}-${MACHINE}"
-IMAGE_LINGUAS            = ""
-DEPLOY_DIR_IMAGE        = "${DEPLOY_DIR}/images/${MACHINE}"
+then I get the following :
 
-TARGET_OS            = "linux-gnueabi"
-TARGET_VENDOR            = "-colibri"
-INHERIT                += "package_ipk package_tar debian sanity insane"
+> U-Boot 2009.01-dirty (Nov 26 2009 - 02:15:00)
+>
+> DRAM:  128 MB
+> NAND:  NAND device: Manufacturer ID: 0x2c, Chip ID: 0xa1 (Micron NAND 1=
+28MiB 1,8V 8-bit)
+> Bad block table found at page 65472, version 0x01
+> Bad block table found at page 65408, version 0x01
+> 128 MiB
+> In:    serial
+> Out:   serial
+> Err:   serial
+> ARM Clock : 300000000 Hz
+> DDR Clock : 150000000 Hz
+> Ethernet PHY: GENERIC @ 0x07
+> Hit any key to stop autoboot:  0
+>
+> NAND read: device 0 offset 0x200000, size 0x400000
+>  4194304 bytes read: OK
+> ## Booting kernel from Legacy Image at c0700000 ...
+>    Image Name:   Angstrom/2.6.32+2.6.33-rc4-r44+g
+>    Image Type:   ARM Linux Kernel Image (uncompressed)
+>    Data Size:    2452896 Bytes =3D  2.3 MB
+>    Load Address: c0008000
+>    Entry Point:  c0008000
+>    Verifying Checksum ... OK
+>    Loading Kernel Image ... OK
+> OK
+>
+> Starting kernel ...
+>
+> [    0.000000] Linux version 2.6.33-rc4 (vicos@vicos) (gcc version 4.3.=
+3 (GCC) ) #1 PREEMPT Fri May 7 21:11:02 CEST 2010
+> [    0.000000] CPU: ARM926EJ-S [41069265] revision 5 (ARMv5TEJ), cr=3D0=
+0053177
+> [    0.000000] CPU: VIVT data cache, VIVT instruction cache
+> [    0.000000] Machine: DaVinci DA850/OMAP-L138/AM18xx Hawkboard(.org)
+> [    0.000000] Memory policy: ECC disabled, Data cache writeback
+> [    0.000000] DaVinci da850/omap-l138 variant 0x0
+> [    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  =
+Total pages: 32512
+> [    0.000000] Kernel command line: console=3DttyS2,115200n8 root=3D/de=
+v/nfs nfsroot=3D172.16.147.10:/srv/nfs/hawkboard ip=3D172.16.100.100 eth=3D=
+0a:c1:a8:12:fa:c0 earlyprintk=3Dserial,ttyS2,115200n8
+> [    0.000000] bootconsole [earlycon0] enabled
+> [    0.000000] PID hash table entries: 512 (order: -1, 2048 bytes)
+> [    0.000000] Dentry cache hash table entries: 16384 (order: 4, 65536 =
+bytes)
+> [    0.000000] Inode-cache hash table entries: 8192 (order: 3, 32768 by=
+tes)
+> [    0.000000] Memory: 128MB =3D 128MB total
+> [    0.000000] Memory: 124372KB available (4496K code, 426K data, 468K =
+init, 0K highmem)
+> [    0.000000] SLUB: Genslabs=3D11, HWalign=3D32, Order=3D0-3, MinObjec=
+ts=3D0, CPUs=3D1, Nodes=3D1
+> [    0.000000] Hierarchical RCU implementation.
+> [    0.000000] NR_IRQS:245
+> [    0.000000] Console: colour dummy device 80x30
+> [    0.000000] Calibrating delay loop... 149.50 BogoMIPS (lpj=3D747520)
+> [    0.210000] Mount-cache hash table entries: 512
+> [    0.210000] CPU: Testing write buffer coherency: ok
+> [    0.220000] devtmpfs: initialized
+> [    0.230000] DaVinci: 144 gpio irqs
+> [    0.240000] NET: Registered protocol family 16
+> [    0.270000] WARNING: both McASP and McBSP are enabled, but they shar=
+e pins.
+> [    0.270000]  Disable one of them.
+> [    0.310000] bio: create slab <bio-0> at 0
+> [    0.310000] SCSI subsystem initialized
+> [    0.320000] usbcore: registered new interface driver usbfs
+> [    0.330000] usbcore: registered new interface driver hub
+> [    0.330000] usbcore: registered new device driver usb
+> [    0.340000] i2c-gpio i2c-gpio.1: using pins 20 (SDA) and 21 (SCL)
+> [    0.350000] vpif vpif: vpif probe success
+> [    0.350000] Switching to clocksource timer0_1
 
-PREFERRED_PROVIDER_qemu-native    = "qemu-native"
-ENABLE_BINARY_LOCALE_GENERATION    = "0"
+And it hangs there forever.
 
-FEED_ARCH            = "${TARGET_ARCH}"
+Could someone who has an hawkboard working with OE please detail his=20
+configuration ? (u-boot, kernel config)
 
-KERNEL                = "kernel26"
-MACHINE_KERNEL_VERSION        = "2.6"
-PCMCIA_MANAGER            = "pcmciautils"
+If you have any idea of things I might try to get it working is also=20
+welcome. Like how to start debugging that ?
 
-PREFERRED_PROVIDER_virtual/libiconv    = "glibc"
-PREFERRED_PROVIDER_virtual/libintl    = "glibc"
-PREFERRED_PROVIDER_virtual/libc        = "glibc"
+Best regards,
 
-USE_NLS                    = "no"
-USE_NLS_glib-2.0            = "yes"
 
-FULL_OPTIMIZATION            = "-pipe -fexpensive-optimizations
--fomit-frame-pointer -frename-registers -Os"
-BUILD_OPTIMIZATION            = "-pipe -Os"
-CXXFLAGS                += "-fvisibility-inlines-hidden"
+--=20
+Christophe Aeschlimann
 
-PREFERRED_VERSION_gcc            = "4.2.2"
-PREFERRED_VERSION_gcc-cross        = "4.2.2"
-PREFERRED_VERSION_gcc-cross-sdk        = "4.2.2"
-PREFERRED_VERSION_gcc-cross-initial    = "4.2.2"
+Embedded Software Engineer
 
-PREFERRED_VERSION_binutils        = "2.18"
-PREFERRED_VERSION_binutils-cross    = "2.18"
-PREFERRED_VERSION_binutils-cross-sdk    = "2.18"
+Advanced Communications Networks S.A.
 
-PREFERRED_VERSION_linux-libc-headers    = "2.6.22"
+Rue du Puits-Godet 8a
+2000 Neuch=E2tel, Switzerland
 
-PREFERRED_VERSION_glibc            = "2.6.1"
-PREFERRED_VERSION_glibc-initial        = "2.6.1"
-PREFERRED_VERSION_glibc-intermediate    = "2.6.1"
+T=E9l. +41 32 724 74 31
 
-PREFERRED_VERSION_busybox        = "1.7.4"
+c.aeschlimann@acn-group.ch
 
-PREFERRED_PROVIDER_virtual/arm-colibri-linux-gnueabi-binutils            =
-"binutils-cross"
-
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc-initial                =
-"gcc-cross-initial"
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}gcc                    =
-"gcc-cross"
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}g++                    =
-"gcc-cross"
-
-PREFERRED_PROVIDER_virtual/${TARGET_PREFIX}libc-for-gcc                =
-"glibc-intermediate"
-PREFERRED_PROVIDER_virtual/arm-colibri-linux-gnueabi-libc-for-gcc        =
-"glibc-intermediate"
-PREFERRED_PROVIDER_virtual/arm-colibri-linux-libc-for-gcc            =
-"glibc-intermediate"
-
-PREFERRED_PROVIDER_virtual/db                            = "db"
-PREFERRED_PROVIDER_virtual/db-native                        = "db-native"
-
-PREFERRED_PROVIDER_gconf                            = "gconf"
-PREFERRED_PROVIDER_libgsmd                            = "libgsmd"
-PREFERRED_PROVIDER_linux-libc-headers                        =
-"linux-libc-headers"
-PREFERRED_PROVIDER_task-bootstrap                        = "task-bootstrap"
-
-SRCREV_pn-gsm0710muxd                                = "76"
-
-require conf/distro/include/sane-srcdates.inc
-require conf/distro/include/sane-srcrevs.inc
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%${OEBASE}/openembedded/conf/machine/colibri.conf
-
-TARGET_ARCH        = "arm"
-TARGET_FPU        = "soft"
-PACKAGE_EXTRA_ARCHS    = "armv4t armv5te"
-
-require conf/machine/include/tune-iwmmxt.inc
-
-GUI_MACHINE_CLASS    = "bigscreen"
-MACHINE_FEATURES    = "kernel26 apm alsa ext2 uboot irda usbgadget usbhost
-keyboard touchscreen screen bluetooth pcmcia"
-
-MACHINE_TASK_PROVIDER    = "task-boot dropbear"
-
-PREFERRED_PROVIDER_virtual/kernel    = "linux-colibri"
 
