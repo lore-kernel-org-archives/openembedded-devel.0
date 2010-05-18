@@ -1,41 +1,39 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OEWW8-0006k3-HG
+	(envelope-from <Tom_Rini@mentor.com>) id 1OEWi1-0004W7-OM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 May 2010 01:48:09 +0200
-Received: by gwj19 with SMTP id 19so595118gwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 16:44:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=gwdyX0w8HZepgF80vVOL7UtmtG1ahGK4+iR2JSP5GvI=;
-	b=Mi3ZuP3lAI7lhSgBTy+1xugUqyDIDoXmZT2cMW872mIdanPe4XKaeRsICiPDrvjw80
-	v40Y1K3qbRUNMSbEl66cWo/ZUeJh390809fKCkxhcP1ODAhpDO1iFcUBOxCK6Fq1gYLU
-	OPvFBh/7X11on4kRZiAUNqF0J7ri49VfhEufo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=mSYpE76GR/w8RbopOHsg8lNmAOYe7nURorqGk9Wtn9rk7eCeSIWyGx0JB+I5U+Nov9
-	zJ08uJXO5LB/z9f9PJTiJ50vtRzaE+fW2hQnerC1R3awxfyicvr6UTyyEiA79vS06+3B
-	NNoBTHUQgk30DjX7Nn02XXEp2RwA+OJNeC0Ro=
+	Wed, 19 May 2010 02:00:28 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OEWe6-0002wA-DJ from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 18 May 2010 16:56:22 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 18 May 2010 16:56:21 -0700
+Received: from [172.30.80.86] ([172.30.80.86]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 18 May 2010 17:56:21 -0600
+Message-ID: <4BF32920.2030904@mentor.com>
+Date: Tue, 18 May 2010 16:56:16 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.101.28.39 with SMTP id f39mr7721830anj.69.1274226247325; Tue, 
-	18 May 2010 16:44:07 -0700 (PDT)
-Received: by 10.100.108.2 with HTTP; Tue, 18 May 2010 16:44:07 -0700 (PDT)
-Date: Wed, 19 May 2010 01:44:07 +0200
-Message-ID: <AANLkTimqvGPoCByYUUUSaFSYLcbA_e7CrZKg-GtIyVzG@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+References: <AANLkTimqvGPoCByYUUUSaFSYLcbA_e7CrZKg-GtIyVzG@mail.gmail.com>
+In-Reply-To: <AANLkTimqvGPoCByYUUUSaFSYLcbA_e7CrZKg-GtIyVzG@mail.gmail.com>
+X-OriginalArrivalTime: 18 May 2010 23:56:21.0185 (UTC)
+	FILETIME=[B702FB10:01CAF6E5]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [oe-commits]: linux-kexecboot: sed out conflicting getline in scripts/ unifdef.c
+Subject: Re: [oe-commits]: linux-kexecboot: sed out conflicting getline in scripts/ unifdef.c
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,69 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 23:48:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 19 May 2010 00:00:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-We are discussing about moving this sed to linux.inc in order to fix
-the issue once for all.
-Opinions?
+Andrea Adami wrote:
+> We are discussing about moving this sed to linux.inc in order to fix
+> the issue once for all.
+> Opinions?
 
-Andrea
+Please do it, thanks.
 
-
----------- Forwarded message ----------
-From: git version control <git@git.openembedded.org>
-Date: Wed, May 19, 2010 at 12:47 AM
-Subject: [oe-commits] Andrea Adami : linux-kexecboot: sed out
-conflicting getline in scripts/ unifdef.c
-To: openembedded-commits@openembedded.org
-
-
-Module: openembedded.git
-Branch: org.openembedded.dev
-Commit: 06fff17991cf5105cb29d3cec2640995ace329b5
-URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit=
-;h=3D06fff17991cf5105cb29d3cec2640995ace329b5
-
-Author: Andrea Adami <andrea.adami@gmail.com>
-Date: =A0 Wed May 19 00:40:47 2010 +0200
-
-linux-kexecboot: sed out conflicting getline in scripts/unifdef.c
-
-* mainline since 2.6.29-rc8
-
----
-
-=A0recipes/kexecboot/linux-kexecboot.inc | =A0 =A09 +++++++++
-=A01 files changed, 9 insertions(+), 0 deletions(-)
-
-diff --git a/recipes/kexecboot/linux-kexecboot.inc
-b/recipes/kexecboot/linux-kexecboot.inc
-index 5621e69..2751126 100644
---- a/recipes/kexecboot/linux-kexecboot.inc
-+++ b/recipes/kexecboot/linux-kexecboot.inc
-@@ -71,6 +71,15 @@ sed -i -e /CONFIG_BLK_DEV_INITRD/d \
-=A0sed -i -e /CONFIG_CMDLINE/s/quiet/loglevel=3D3/1 ${S}/.config
-=A0sed -i -e /CONFIG_CMDLINE/s/debug/loglevel=3D3/1 ${S}/.config
-
-+# Rename getline in ./scripts/unifdef.c
-+# with 2.6.2x builds are currently failing to build unifdef.c,
-+# clashing with exposed getline() from <stdio.h>
-+# see https://patchwork.kernel.org/patch/11166/
-+# committed in 2.6.29 (harmless for newer kernels)
-+
-+sed -i -e 's/getline/parseline/g' ${S}/scripts/unifdef.c
-+
-+
-=A0echo 'CONFIG_BLK_DEV_INITRD=3Dy
-=A0CONFIG_KEXEC=3Dy
-=A0${KERNEL_COMPRESSION}
-
-
-_______________________________________________
-Openembedded-commits mailing list
-Openembedded-commits@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
