@@ -1,36 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <top.grzechu@gmail.com>) id 1OEHbc-00025W-MR
+	(envelope-from <top.grzechu@gmail.com>) id 1OEHng-0002jE-Sa
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 18 May 2010 09:52:49 +0200
-Received: by fxm8 with SMTP id 8so488012fxm.6
+	Tue, 18 May 2010 10:05:18 +0200
+Received: by fxm18 with SMTP id 18so722261fxm.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 00:48:49 -0700 (PDT)
+	Tue, 18 May 2010 01:01:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=T77pa/PFEfXurHlaPoEJNt6npkkN9MP3sPOzuj0Qhpc=;
-	b=SEuYOBxPLtEQhubnzNgMHkf+GrCYBAu/2Lrk8J81xC52ImD0BUb4JU0UiTsWsXXgwg
-	YDQ3mZFsuqw38miieqXyHeehNmABDfRbeXIYN9bP10irvKQnd3qjeI/FKr+Pf9xfrx43
-	47kyf8PNvk9HIFXy8BtVwp5aQOAJrZK5Cvxg4=
+	bh=zbZf/8jq5izKUMhA+jLTmSYP0Bez4fDAYddRKEiM5A4=;
+	b=Q+a7M+eYwlTj7ln1T2KFWkWfHXezmjq8U70Dqrv6/huQsQru9VK2dfpmDKh9BY3ktn
+	CerKG0+jPPaAX3I8KLfIcEBXhaq+dMDPeMAm+xO7FzSfvJ/GzOBxOjE5fgBzRcGQI4Nx
+	0ig5tXZbpnF0uTbP5KnA4YYBifDIwuCPjmqgs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=a9jjAGHb7oLRd2P26/KiH9VJj3l8lQy3F2OmCnA0Ta0CBrINT53cI+P+dTxRUMqJ9+
-	u/3sEZRU92Ha4Rai6C5EKxba7tj9ZQQvZKlP/R+JDITrqKG708XDnD9168XvKzTgva+l
-	etDwwvFmUKsnXX3p8ZeLfxsEL+NrEEHKfFWNc=
+	b=ahjB1QCpEidQSrPtwuWuHdnI7wug5NyEAYpe1901WeKo5ES/s4bkgMOeuaH0pe0q/C
+	iw7gRwdJhj6I8FzsLA8ctsgqLNb03EeDwzz8xS80w0NZnPziIazfxhd+i9558MuwqGWt
+	uhrDqTBOoEA9MUcj6gG0pViiiXz9BngRQQJH8=
 MIME-Version: 1.0
-Received: by 10.204.48.212 with SMTP id s20mr99491bkf.205.1274168928774; Tue, 
-	18 May 2010 00:48:48 -0700 (PDT)
-Received: by 10.204.76.131 with HTTP; Tue, 18 May 2010 00:48:48 -0700 (PDT)
-In-Reply-To: <hstfkm$fv2$1@dough.gmane.org>
+Received: by 10.204.48.212 with SMTP id s20mr101688bkf.205.1274169676754; Tue, 
+	18 May 2010 01:01:16 -0700 (PDT)
+Received: by 10.204.76.131 with HTTP; Tue, 18 May 2010 01:01:16 -0700 (PDT)
+In-Reply-To: <20100518074606.GA19476@gmail.com>
 References: <AANLkTinL4kGrM6P5Di1N4KI-95sFuEwDn-RM_SZ32cjS@mail.gmail.com>
-	<hstfkm$fv2$1@dough.gmane.org>
-Date: Tue, 18 May 2010 09:48:48 +0200
-Message-ID: <AANLkTilat0DSBMKTzt4iYbHwUwJsn1XFWBmlNKbcgXqE@mail.gmail.com>
+	<20100518074606.GA19476@gmail.com>
+Date: Tue, 18 May 2010 10:01:16 +0200
+Message-ID: <AANLkTiklA399rZKCKrzwJyt3i9DcKDrTF51uIF5WAXlm@mail.gmail.com>
 From: Grzegorz Toporek <top.grzechu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Connect-IP: 209.85.161.51
 X-SA-Exim-Mail-From: top.grzechu@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -53,42 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 18 May 2010 07:52:49 -0000
+X-List-Received-Date: Tue, 18 May 2010 08:05:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 >
-> > What should be mentioned, there was no a problem to build this for
-> > angstrom-2008.1 distribution (machine om-gta01). Now I have changed it to
-> > colibri, which is my boar, and the problem occurred.
+> the python code in
+> /home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
 >
-> Do you *really* need your own distro?
+> depends upon a metadata variable called LIBC and this is not set in your
+> distro file. This could be one of 'glibc|eglibc|uclibc" depending upon
+> what system library you want. In your case it seems to be glibc
 >
-> regards,
+> So if you set
+>
+> LIBC = "glibc" in your distro file then it should work.
 >
 
-Hi, thank you for your answer.
+Many thanks! It works like a charm!
 
-I don't know if I need this. My project is a continuation of a former one,
-and the guys before have been using disto configuration files.
+I have one question. How can I update an old system on my board? Should I
+delete it or just build new packages and upload them to my board?
 
-So, do you suggest that I don't need those files to build system on Colibri
-PXA270 (ARM)?
+Ones again many thanks.
 
-Maybe there is a good way to update an old system? I have backup images
-(img.gz) of it...
-
-Best Regards,
+Best Regads,
 Grzegorz
 
+2010/5/18 Khem Raj <raj.khem@gmail.com>
 
-
-
-2010/5/18 Koen Kooi <k.kooi@student.utwente.nl>
-
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 18-05-10 09:03, Grzegorz Toporek wrote:
+> On (18/05/10 09:03), Grzegorz Toporek wrote:
 > > Hi all,
 > >
 > > I'm new to the mailing list so I would like to say hello to everyone. I'm
@@ -102,20 +95,38 @@ Grzegorz
 > > What should be mentioned, there was no a problem to build this for
 > > angstrom-2008.1 distribution (machine om-gta01). Now I have changed it to
 > > colibri, which is my boar, and the problem occurred.
+> >
+> > I have attached all my .conf files to this e-mail.
+> >
+> > Please help me with this problem. Looking forward to your reply.
+> >
+> > ERROR:
+> >
+> > NOTE: Handling BitBake files: \ (7927/8366) [94 %]NOTE: <type
+> > 'exceptions.TypeError'>:unsupported operand type(s) for +: 'NoneType' and
+> > 'str' while evaluating:
+> >   task-x11-illume   task-fonts-truetype-core   e-wm-menu-shr   shr-wizard
+> > shr-theme-gry   xcursor-transparent-theme   xinput-calibrator
+> > libx11-locale   ${@get_rdepends(bb, d)}   e-wm-config-illume2-shr
+> > ERROR: unsupported operand type(s) for +: 'NoneType' and 'str' while
+> parsing
+> > /home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
+> > NOTE: Handling BitBake files: / (8366/8366) [100 %]
+> > NOTE: Parsing finished. 7584 cached, 453 parsed, 328 skipped, 0 masked.
+> > ERROR: Parsing errors found, exiting...
 >
-> Do you *really* need your own distro?
+> the python code in
+> /home/grzesiek/tele/openembedded/recipes/tasks/task-shr-minimal.bb
 >
-> regards,
+> depends upon a metadata variable called LIBC and this is not set in your
+> distro file. This could be one of 'glibc|eglibc|uclibc" depending upon
+> what system library you want. In your case it seems to be glibc
 >
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
+> So if you set
 >
-> iD8DBQFL8kHWMkyGM64RGpERAmsqAJ99Uyl/UCFy0Op0WoOMi1dpa9vTkQCfVc9R
-> aj0rnrBbJRFwMlXF7e15BaA=
-> =h/5L
-> -----END PGP SIGNATURE-----
+> LIBC = "glibc" in your distro file then it should work.
 >
+> -Khem
 >
 > _______________________________________________
 > Openembedded-devel mailing list
