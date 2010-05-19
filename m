@@ -1,47 +1,46 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from out3.smtp.messagingengine.com ([66.111.4.27])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OEkhr-0004DS-Ta
+	(envelope-from <vjensen@gmx.de>) id 1OElWP-0006na-7t
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 May 2010 16:59:15 +0200
-Received: by vws20 with SMTP id 20so2947614vws.6
+	Wed, 19 May 2010 17:49:26 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 815DDF4C31
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 May 2010 07:53:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=mDSdFVS/dWk1FP2igB/1JeYna31PZ9tVZsanngRqh1E=;
-	b=sLdmF0CdEjA7b/p7qkKuxIdQpU6htselvgYKBhzIvqXfrLms5csXVpwa+p5h9lq3V0
-	ZKAshCTYUw3tgtahwPR4TIBUoz2Ko/FnfCp3FJ6KIfXFz93mhjl1kFqAaVdUeE5mmUVL
-	vS8+zJl9uKKyK0lkO+iY2ZNoSO+S5LsJGICxU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=E2rsl1ASCZoBKuWrrkxUOGuI3LLtbz0X581XCQMkw1GeViW0KDsWQbodXshXnPuZvj
-	IPOkQrH19hxUA201xY6L2E3mWn4vo/6VOgXTcmwXJeWNmurBDeQAKRnBGaQutbPGngJG
-	bFYrim2SvMt1hUSk6JHg4oUVwZjwSVte807ok=
-MIME-Version: 1.0
-Received: by 10.229.248.211 with SMTP id mh19mr1838910qcb.104.1274280789932; 
-	Wed, 19 May 2010 07:53:09 -0700 (PDT)
-Received: by 10.229.230.77 with HTTP; Wed, 19 May 2010 07:53:09 -0700 (PDT)
-In-Reply-To: <20100514122113.GH3507@excalibur.local>
-References: <1273758399-23601-1-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-2-git-send-email-aalonso00@gmail.com>
-	<1273758399-23601-3-git-send-email-aalonso00@gmail.com>
-	<20100514122113.GH3507@excalibur.local>
-Date: Wed, 19 May 2010 09:53:09 -0500
-Message-ID: <AANLkTikMtgHDODuAzt-efsFrMyEOUsv6mnrK-14x5LxA@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+	Wed, 19 May 2010 11:45:25 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Wed, 19 May 2010 11:45:25 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=XLijtvBN951JxJesJDRmTFfmgmc=;
+	b=uN17M7epdzc12kz43ZU3hb6H0WK6w38/3980R1OxNd8S7YUbUOm7mwfLszE7gr4I9/nO3WgAhTXxHS52CId+p3MCgeSz7TPKZutZK/Jj7PVWTZo20k8JWGbN1yDIWzMJzARnjtshbLSGLeW+RLsXWnjbLcrgO1aLlyNQsszTilk=
+X-Sasl-enc: GLiXHC4J/pebalLf4xhHrbAg8H8P3Dbjvdf2JFdJoYkL 1274283925
+Received: from [192.168.1.34] (hnvr-4d078ae5.pool.mediaWays.net [77.7.138.229])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id D64385746D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 May 2010 11:45:24 -0400 (EDT)
+Date: Wed, 19 May 2010 17:46:50 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+In-Reply-To: <alpine.LNX.2.00.1005191335020.21508@asterix.crazy-teaparty.dyndns.org>
+Message-ID: <alpine.LNX.2.00.1005191726560.21508@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
+	<4BF3C9B8.8080501@mlbassoc.com>
+	<alpine.LNX.2.00.1005191335020.21508@asterix.crazy-teaparty.dyndns.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.27
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 3/5 v2] linux-xilinx-ml507: update kernel version
+Subject: Re: powerpc-g++ 4.2.4 problem casting long long to double
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,117 +54,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 May 2010 15:00:14 -0000
-X-List-Received-Date: Wed, 19 May 2010 15:00:14 -0000
-X-Groupsio-MsgNum: 19419
-Content-Type: multipart/mixed; boundary=0016e6465166d3f9d40486f39d77
+X-List-Received-Date: Wed, 19 May 2010 15:49:26 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
---0016e6465166d3f9d40486f39d77
-Content-Type: text/plain; charset=ISO-8859-1
-
-Hi Stefan,
-
-I have been looking on how to reorder the patch,
-but I'm still a git newbie :( and I don't quite well
-understand how to regenerate my patch sets with
-modifying the git log history, what I'm been doing
-is to create a new branch fix my patchs and resend
-them, thats clearly wrong.
-
-Can you remove the patchs send on 2010-04-27 and
-from the second patch set remove patch 3 and 4;
-and use the path attached to make git bisec happy.
-
-I will do my homework to avoid further integrations.
-
-Thanks.
-
-On Fri, May 14, 2010 at 7:21 AM, Stefan Schmidt
-<stefan@datenfreihafen.org>wrote:
-
-> Hello.
+On Wed, 19 May 2010, Vitus Jensen wrote:
+> On Wed, 19 May 2010, Gary Thomas wrote:
+>>  On 05/19/2010 03:38 AM, Vitus Jensen wrote:
+>> > 
+>> >   We noticed a strange problem with C++ code casting long long variables
+>> >   to double, as a lot of qt-embedded code is doing.
+>> > 
+>> >   =================
+>> >   double
+>> >   convert(long long l)
+>> >   {
+>> >   return (double)l; // or double(l)
+>> >   }
+>> > 
+>> >   int
+>> >   main(int argc, char * argv[])
+>> >   {
+>> >   long long l = 10;
+>> >   double f;
+>> > 
+>> >   f = convert(l);
+>> >   printf("convert: %lld => %f\n", l, f);
+>> >   return 0;
+>> >   }
+>> >   ====================
+>> > 
+>> >   output:
+>> >   convert: 10 => 0.000000
+>> > 
+>> >   C++ compiled via powerpc-angstrom-linux-g++ gives the above result.
+>> >   Compiling the same code as C using powerpc-angstrom-linux-gcc works
+>> >   fine. But when looking at the assembler code both compiler produce
+>> >   virtually identical output and both call __floatdidf to do the actual
+>> >   conversion. Very strange, has anyone ever seen similar effects?
+>>
+>>  Is this from a recent tree (i.e. post Richard Purdie's restructuring)?
+>>
+>>  I've seen similar problems with C++ code on Poky which uses the same
+>>  changes.
 >
-> On Thu, 2010-05-13 at 08:46, Adrian Alonso wrote:
-> > * Update kernel version 2.6.33
-> > * Include xilinx framebuffer patch
+> No, I'm building everything from the stable branch.  There were some commits 
+> cherry-picked from .dev but those only add Qt 4.5.2.
 >
-> You need to reorder your patchset to have the fb patch prior to this
-> change.
-> Without this git bisect will break.
->
-> Looking over the patch I think it would be fine to have it merged into this
-> patch as well. Small enough.
->
-> regards
-> Stefan Schmidt
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Poky is ARM only, right?  Perhaps it would be helpfull to build a compiler 
+> from .dev and for a widely used powerpc-platform?  How does n1200 sound? It 
+> uses the same ppc603e.
 
+Unfortunately .dev switched to gcc-4.3.3 in the meantime which fails for 
+ppc603e platforms because of undefined references to __nldbl_fprintf and 
+__nldbl_sprintf during compile.
 
+Platform tqm8540 (ppce500, just to try some other ppc cpu) fails in 
+gcc-4.3.3 compile, too.  Possible related to this:
+
+endian.h:34:4: warning: #warning Cannot determine current byte order, 
+assuming big-endian.
+
+So currently .dev should be unbuildable for ppc users?  Without selecting 
+a non-default compiler that is.
+
+Vitus
 
 -- 
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
---0016e6465166d3f9d40486f39d77
-Content-Type: text/x-patch; charset=US-ASCII; 
-	name="0001-linux-xilinx-ml507-update-kernel-version.patch"
-Content-Disposition: attachment; 
-	filename="0001-linux-xilinx-ml507-update-kernel-version.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_g9e9se3e0
 
-RnJvbSBkZDRlZWUwZmNkZGY1ZGI1MmU0OWVlMGRmMjhmNTY1MDAyNzJjY2FhIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBBZHJpYW4gQWxvbnNvIDxhYWxvbnNvMDBAZ21haWwuY29tPgpE
-YXRlOiBXZWQsIDE5IE1heSAyMDEwIDA5OjIzOjU4IC0wNTAwClN1YmplY3Q6IFtQQVRDSF0gbGlu
-dXgteGlsaW54LW1sNTA3OiB1cGRhdGUga2VybmVsIHZlcnNpb24KCioga2VybmVsIHZlcnNpb24g
-Mi42LjMzCiogZnJhbWUgYnVmZmVyIGZpeCBwYXRjaCBhZGQgc3VwcG9ydCBmb3IgbmV3IHhwc190
-ZnQKICBkaXNwbGF5IG1vZHVsZXMKClNpZ25lZC1vZmYtYnk6IEFkcmlhbiBBbG9uc28gPGFhbG9u
-c28wMEBnbWFpbC5jb20+Ci0tLQogcmVjaXBlcy9saW51eC9saW51eC14aWxpbngtbWw1MDcveGls
-aW54ZmIucGF0Y2ggfCAgIDI2ICsrKysrKysrKysrKysrKysrKysrKysrCiByZWNpcGVzL2xpbnV4
-L2xpbnV4LXhpbGlueC1tbDUwN19naXQuYmIgICAgICAgICB8ICAgIDcgKysrLS0KIDIgZmlsZXMg
-Y2hhbmdlZCwgMzAgaW5zZXJ0aW9ucygrKSwgMyBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEw
-MDY0NCByZWNpcGVzL2xpbnV4L2xpbnV4LXhpbGlueC1tbDUwNy94aWxpbnhmYi5wYXRjaAoKZGlm
-ZiAtLWdpdCBhL3JlY2lwZXMvbGludXgvbGludXgteGlsaW54LW1sNTA3L3hpbGlueGZiLnBhdGNo
-IGIvcmVjaXBlcy9saW51eC9saW51eC14aWxpbngtbWw1MDcveGlsaW54ZmIucGF0Y2gKbmV3IGZp
-bGUgbW9kZSAxMDA2NDQKaW5kZXggMDAwMDAwMC4uZWMzMzM2MQotLS0gL2Rldi9udWxsCisrKyBi
-L3JlY2lwZXMvbGludXgvbGludXgteGlsaW54LW1sNTA3L3hpbGlueGZiLnBhdGNoCkBAIC0wLDAg
-KzEsMjYgQEAKK0Zyb20gNTRkYzliOWU5Y2NlZDMyMDRiOWQ5YThhMjczMTlkOWRlNjYyYWYzYiBN
-b24gU2VwIDE3IDAwOjAwOjAwIDIwMDEKK0Zyb206IEFkcmlhbiBBbG9uc28gPGFhbG9uc28wMEBn
-bWFpbC5jb20+CitEYXRlOiBXZWQsIDMxIE1hciAyMDEwIDIyOjE0OjU1IC0wNjAwCitTdWJqZWN0
-OiBbUEFUQ0hdIHhpbGlueGZiLmM6IGFkZCB0ZnQgY29tcGF0aWJpbGl0eSB2ZXJzaW9ucworCitT
-aWduZWQtb2ZmLWJ5OiBBZHJpYW4gQWxvbnNvIDxhYWxvbnNvMDBAZ21haWwuY29tPgorLS0tCisg
-ZHJpdmVycy92aWRlby94aWxpbnhmYi5jIHwgICAgMiArKworIDEgZmlsZXMgY2hhbmdlZCwgMiBp
-bnNlcnRpb25zKCspLCAwIGRlbGV0aW9ucygtKQorCitkaWZmIC0tZ2l0IGEvZHJpdmVycy92aWRl
-by94aWxpbnhmYi5jIGIvZHJpdmVycy92aWRlby94aWxpbnhmYi5jCitpbmRleCBlZDdjOGQwLi44
-MjllZmFhIDEwMDY0NAorLS0tIGEvZHJpdmVycy92aWRlby94aWxpbnhmYi5jCisrKysgYi9kcml2
-ZXJzL3ZpZGVvL3hpbGlueGZiLmMKK0BAIC00ODQsNiArNDg0LDggQEAgc3RhdGljIGludCBfX2Rl
-dmV4aXQgeGlsaW54ZmJfb2ZfcmVtb3ZlKHN0cnVjdCBvZl9kZXZpY2UgKm9wKQorIC8qIE1hdGNo
-IHRhYmxlIGZvciBvZl9wbGF0Zm9ybSBiaW5kaW5nICovCisgc3RhdGljIHN0cnVjdCBvZl9kZXZp
-Y2VfaWQgeGlsaW54ZmJfb2ZfbWF0Y2hbXSBfX2RldmluaXRkYXRhID0geworIAl7IC5jb21wYXRp
-YmxlID0gInhsbngseHBzLXRmdC0xLjAwLmEiLCB9LAorKwl7IC5jb21wYXRpYmxlID0gInhsbngs
-eHBzLXRmdC0yLjAwLmEiLCB9LAorKwl7IC5jb21wYXRpYmxlID0gInhsbngseHBzLXRmdC0yLjAx
-LmEiLCB9LAorIAl7IC5jb21wYXRpYmxlID0gInhsbngscGxiLXRmdC1jbnRsci1yZWYtMS4wMC5h
-IiwgfSwKKyAJeyAuY29tcGF0aWJsZSA9ICJ4bG54LHBsYi1kdmktY250bHItcmVmLTEuMDAuYyIs
-IH0sCisgCXt9LAorLS0gCisxLjYuNi4xCisKZGlmZiAtLWdpdCBhL3JlY2lwZXMvbGludXgvbGlu
-dXgteGlsaW54LW1sNTA3X2dpdC5iYiBiL3JlY2lwZXMvbGludXgvbGludXgteGlsaW54LW1sNTA3
-X2dpdC5iYgppbmRleCBlYzlkZTFjLi5mZDNlMzNlIDEwMDY0NAotLS0gYS9yZWNpcGVzL2xpbnV4
-L2xpbnV4LXhpbGlueC1tbDUwN19naXQuYmIKKysrIGIvcmVjaXBlcy9saW51eC9saW51eC14aWxp
-bngtbWw1MDdfZ2l0LmJiCkBAIC0xLDE3ICsxLDE4IEBACiByZXF1aXJlIGxpbnV4LmluYwogCiBE
-RVNDUklQVElPTiA9ICJMaW51eCBrZXJuZWwgZm9yIFhpbGlueCBtbDUwNyBwbGF0Zm9ybSIKLUtF
-Uk5FTF9SRUxFQVNFID0gIjIuNi4zMitnaXQiCitLRVJORUxfUkVMRUFTRSA9ICIyLjYuMzMrZ2l0
-IgogCiBDT01QQVRJQkxFX01BQ0hJTkUgPSAieGlsaW54LW1sNTA3IgogREVGQVVMVF9QUkVGRVJF
-TkNFID0gIi0xIgogREVGQVVMVF9QUkVGRVJFTkNFX3hpbGlueC1tbDUwNyA9ICIxIgogCiBQViA9
-ICIke0tFUk5FTF9SRUxFQVNFfSIKLVBSID0gInIwIgorUFIgPSAicjEiCiAKLVNSQ1JFViA9ICJk
-YzUzNzI1ZDIyNDA1ZTM4NGI5ODRkMjIyNTQyZjUyNmVhYTliODI5IgorU1JDUkVWID0gIjE3NDMx
-NTQ3MTEzMTAwYTNhZTBhNjIyYjlmNzZhZDE3ZmI3NmViNTYiCiBTUkNfVVJJID0gImdpdDovL2dp
-dC54aWxpbnguY29tL2xpbnV4LTIuNi14bG54LmdpdDtwcm90b2NvbD1naXQgXAorICAgICAgICAg
-ICBmaWxlOi8veGlsaW54ZmIucGF0Y2g7cGF0Y2g9MSBcCiAgICAgICAgICAgIGZpbGU6Ly9kZWZj
-b25maWciCiAKIGluaGVyaXQga2VybmVsIHhpbGlueC1ic3AKLS0gCjEuNi42LjEKCg==
-
---0016e6465166d3f9d40486f39d77--
