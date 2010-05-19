@@ -1,33 +1,29 @@
-Received: from ip-70-38-54-39.static.privatedns.com
-	([70.38.54.39] helo=ginevra.hungrycats.org ident=postfix)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <postmaster@ginevra.hungrycats.org>)
-	id 1OEq1U-0003U2-Lp for openembedded-devel@lists.openembedded.org;
-	Wed, 19 May 2010 22:37:50 +0200
-X-Envelope-Mail-From: oe-dev-esightcorp@mailtoo.hungrycats.org
-X-Envelope-Mail-From: oe-dev-esightcorp@mailtoo.hungrycats.org
-Received: from gibbs.hungrycats.org (gibbs.vpn7.hungrycats.org [10.132.226.42])
-	by ginevra.hungrycats.org (Postfix) with ESMTP id 92CBF2C01A;
-	Wed, 19 May 2010 16:24:57 -0400 (EDT)
-Received: from zblaxell by gibbs.hungrycats.org with local (Exim 4.69)
-	(envelope-from <oe-dev-esightcorp@mailtoo.hungrycats.org>)
-	id 1OEpox-0007My-Dx; Wed, 19 May 2010 16:24:51 -0400
-From: Zygo Blaxell <oe-dev-esightcorp@mailtoo.hungrycats.org>
+	(envelope-from <holger+oe@freyther.de>) id 1OEqhl-000704-Gk
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 19 May 2010 23:21:31 +0200
+Received: from [10.134.70.180] (unknown [188.46.70.180])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 03E051B10C79
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 19 May 2010 21:25:47 +0000 (UTC)
+Message-ID: <4BF45542.2000406@freyther.de>
+Date: Thu, 20 May 2010 05:16:50 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
+	Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 19 May 2010 16:24:23 -0400
-Message-Id: <1274300664-27902-2-git-send-email-oe-dev-esightcorp@mailtoo.hungrycats.org>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1274300664-27902-1-git-send-email-oe-dev-esightcorp@mailtoo.hungrycats.org>
-References: <1274300664-27902-1-git-send-email-oe-dev-esightcorp@mailtoo.hungrycats.org>
-X-SA-Exim-Connect-IP: 70.38.54.39
-X-SA-Exim-Mail-From: postmaster@ginevra.hungrycats.org
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] libsdl-directfb: move sdl.m4 to common files/
+Subject: TSC Meetings for the meeting of may
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,20 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 May 2010 20:37:50 -0000
+X-List-Received-Date: Wed, 19 May 2010 21:21:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-This prepares for a new recipe which also uses sdl.m4.
----
- recipes/libsdl/{libsdl-x11-1.2.14 => files}/sdl.m4 |    0
- 1 files changed, 0 insertions(+), 0 deletions(-)
- rename recipes/libsdl/{libsdl-x11-1.2.14 => files}/sdl.m4 (100%)
+Hi,
 
-diff --git a/recipes/libsdl/libsdl-x11-1.2.14/sdl.m4 b/recipes/libsdl/files/sdl.m4
-similarity index 100%
-rename from recipes/libsdl/libsdl-x11-1.2.14/sdl.m4
-rename to recipes/libsdl/files/sdl.m4
--- 
-1.7.1
+sorry for the delay of finishing up the minutes, it is late at night so
+I am sure I have messed up something in one way or another... take care.
 
+
+TSC Meeting 2010/05/06
+
+Where to hold meetings
+======================
+The TSC decided to hold future meetings on IRC as every member
+of the TSC already have irc clients installed and the same was
+not true for jabber clients.
+
+Make packaged-staging mandatory
+===============================
+The TSC decided to make packaged-staging mandatory as this will
+allow further simplification of the classes, gives additional
+features. The TSC is aware that there are still recipes left to
+migrate away from the legacy staging and that building these will
+increase the build time right now.
+
+Make insane mandatory
+=====================
+The TSC believes that the insane.bbclass contributes to making
+builds more reliable and point out errors early on. On the other
+hand the TSC is aware that these checks might get into the way
+during rapid prototyping. The TSC believes the right balance is
+to enable the insane.bbclass by default but to change the default
+to warn instead of failing the build and existing users will be
+able to opt for fatal errors instead of warnings.
+
+
+Removing old versions
+=====================
+The TSC looked into the topic of when to remove versions.
+
+
+The TSC thinks there can not be a general rule of when to delete
+a package. The TSC believes that in some cases a package should
+never be deleted, e.g. with GCC/GLIBC to target a specific device
+or distribution. For a series of major releases it seems plausible
+to only keep the latest minor release of each release series around
+given that the quality should increase with each minor release but
+a removal of a minor release should not be done if there is a
+PREFERRED_VERSION set. The TSC believes that 24 months can be a good
+time to remove old major releases but it is certainly not the only
+criteria for a removal.
 
 
