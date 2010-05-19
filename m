@@ -1,44 +1,48 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OEYg7-0003qd-Te
+	(envelope-from <martin.jansa@gmail.com>) id 1OEcDx-00052D-8M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 May 2010 04:06:40 +0200
-Received: by pxi14 with SMTP id 14so3072523pxi.6
+	Wed, 19 May 2010 07:53:46 +0200
+Received: by fxm8 with SMTP id 8so1610647fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 19:02:34 -0700 (PDT)
+	Tue, 18 May 2010 22:49:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=mLgknFCIwzLnJnSzAk7wo0r3Betm+F+llF8Q+eg4WyY=;
-	b=GR2o1PffhiCCpjrjfhaqacb+1RY5oS9P2ghsI46pPEmuecqDbaDXM1heqHmen/pk2C
-	4f7EuitgaeYFD2p0Cl8zmaeDEz7GFCEsWtcFv2/maiywx4dxrV1ALBYRnbdTQHDGxHeV
-	9xAm+ddup1d5e7acRjyUTx+Ccj3UvrqIusQKA=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=/8xp8usqzaec4SD4rVZV7/ksT15awm703G4zS5Dx9bA=;
+	b=XtRXmhWKnT3AC+QO9aH8k28oWpK0L3fVk6PEoUTWVPWwVBRcDcmOazMTcfw2USrl6y
+	hknUKj2LsCCuqq6kCC2yxESdTIa6eTehG0AyEzAlihuZDtROOrEwtfIk+XHk+HEpzu5G
+	Z/nyFJztUdQiI6rTYiGA5yE6+eV68UzliYtFY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=f2UYThbhrBBlrjt9lqTEtLUZRJ/QJbKHtCH3lsIaLcd7t5eGPCPcbAmDbBR9STNo4v
-	/nHw8IBDfaUKlcXXIoclMZodZxOMSH0tBB1SrxDWNYtljCpYSqTCqFBtGoBADPSVWrgZ
-	m1h2Hn0IEWx8SqVmmFKqo+SUFYHeEP5vrmZP8=
-Received: by 10.141.22.19 with SMTP id z19mr5728969rvi.250.1274234554296;
-	Tue, 18 May 2010 19:02:34 -0700 (PDT)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id k17sm5700393rvh.5.2010.05.18.19.02.32
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=o4M+goEiIxvjJC4TnuifJFCVgJLxSy7Ixds12F4P5kjXfOgd0lB4tYlEl4L+y6uNGc
+	Zl/qIKW23EbFk/YNKJiPnRYuNFrs3f3WN2F6wlsAB+5SIjPcphm5Kjqzd2weOIjcVe+y
+	IzUQueb/A+BpMqCw8dJzqMbdtjgJIUVMX0bcE=
+Received: by 10.223.29.156 with SMTP id q28mr3077996fac.77.1274248184486;
+	Tue, 18 May 2010 22:49:44 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j23sm34437648faa.2.2010.05.18.22.49.43
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 18 May 2010 19:02:33 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 18 May 2010 22:49:43 -0700 (PDT)
+Date: Wed, 19 May 2010 07:49:39 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 18 May 2010 19:02:18 -0700
-Message-Id: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100519054939.GA3302@jama>
+References: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFA][PATCH] automake_1.11.1.bb: Remove DEFAULT_PREFERENCE = "-1"
+Subject: Re: [RFA][PATCH] automake_1.11.1.bb: Remove DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,43 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 May 2010 02:06:40 -0000
+X-List-Received-Date: Wed, 19 May 2010 05:53:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi,
+On Tue, May 18, 2010 at 07:02:18PM -0700, Khem Raj wrote:
+> Hi,
+> 
+> I was working on upgrading gettext and some other packages to latest
+> versions but they use features from automake 1.11. We have this recipe
+> but it not enabled. I ask for approval to make it default. I have
+> build few images thus far without any problems and SHR already uses
+> it as preferred automake. Some distributions ask for specific versions
+> they wont be affected. 
 
-I was working on upgrading gettext and some other packages to latest
-versions but they use features from automake 1.11. We have this recipe
-but it not enabled. I ask for approval to make it default. I have
-build few images thus far without any problems and SHR already uses
-it as preferred automake. Some distributions ask for specific versions
-they wont be affected. 
+Few recipes needed small patch when make install refused to install same
+file twice, but those patches were rather trivial. Those used in SHR are
+already fixed, so ACK.
 
-Thanks
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
--Khem
-
-* This would enable it by default for distributions
-  who do not stick to a particular version of automake.
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/automake/automake_1.11.1.bb |    2 --
- 1 files changed, 0 insertions(+), 2 deletions(-)
-
-diff --git a/recipes/automake/automake_1.11.1.bb b/recipes/automake/automake_1.11.1.bb
-index 4b46787..74477e7 100644
---- a/recipes/automake/automake_1.11.1.bb
-+++ b/recipes/automake/automake_1.11.1.bb
-@@ -1,7 +1,5 @@
- require automake.inc
- PR = "${INC_PR}.0"
- 
--DEFAULT_PREFERENCE = "-1"
--
- SRC_URI[automake.md5sum] = "c2972c4d9b3e29c03d5f2af86249876f"
- SRC_URI[automake.sha256sum] = "5b159d3c0e0a1f87de71b68bcb9f1a1c49e9e71749c9b723f17e2e1e0295c7ae"
 -- 
-1.7.0.4
-
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
