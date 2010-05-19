@@ -1,48 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OEcDx-00052D-8M
+	(envelope-from <daniel.xntian@gmail.com>) id 1OEfgR-0002Dh-5o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 19 May 2010 07:53:46 +0200
-Received: by fxm8 with SMTP id 8so1610647fxm.6
+	Wed, 19 May 2010 11:35:25 +0200
+Received: by vws20 with SMTP id 20so2723974vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 18 May 2010 22:49:44 -0700 (PDT)
+	Wed, 19 May 2010 02:31:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=/8xp8usqzaec4SD4rVZV7/ksT15awm703G4zS5Dx9bA=;
-	b=XtRXmhWKnT3AC+QO9aH8k28oWpK0L3fVk6PEoUTWVPWwVBRcDcmOazMTcfw2USrl6y
-	hknUKj2LsCCuqq6kCC2yxESdTIa6eTehG0AyEzAlihuZDtROOrEwtfIk+XHk+HEpzu5G
-	Z/nyFJztUdQiI6rTYiGA5yE6+eV68UzliYtFY=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=MDDfSPpyj6Nt5HUx7+cYNJdgvtGJnukqjLzcNgnLRvc=;
+	b=DbFi4HPaWc4dNcrbp26tD9E3aRAOzm47l6tmfAO0ssYf5MENDzr6zvC7sDktPtxl2U
+	UQ4xDTWjA24fpPwi1d+/aTVMxTmkkGKlQN5bjwgI9GhcVLkhg7YMyp+oK3piFk5sut9d
+	hET7gy48N0fL77Q8UMUnl2scEStQTxmiDRUAs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=o4M+goEiIxvjJC4TnuifJFCVgJLxSy7Ixds12F4P5kjXfOgd0lB4tYlEl4L+y6uNGc
-	Zl/qIKW23EbFk/YNKJiPnRYuNFrs3f3WN2F6wlsAB+5SIjPcphm5Kjqzd2weOIjcVe+y
-	IzUQueb/A+BpMqCw8dJzqMbdtjgJIUVMX0bcE=
-Received: by 10.223.29.156 with SMTP id q28mr3077996fac.77.1274248184486;
-	Tue, 18 May 2010 22:49:44 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id j23sm34437648faa.2.2010.05.18.22.49.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 18 May 2010 22:49:43 -0700 (PDT)
-Date: Wed, 19 May 2010 07:49:39 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100519054939.GA3302@jama>
-References: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=rbRf01W+zzaI1wkqxR4/NmgYcmyitT4fdBdiMhSEx0RV+ckzcAb3Nw3EcIurFdMUI4
+	M4Juo0njUlZitBwsSfZDY65gQR8kFh0ZCBmgyUqOREYc/i3OaMBwhbmaSNAecfJpvPXu
+	1AMQa1x/LqUUP92YOWBlSQqNw+6rdo7gzKpSg=
 MIME-Version: 1.0
-In-Reply-To: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.220.88.81 with SMTP id z17mr4209629vcl.174.1274261481383; Wed, 
+	19 May 2010 02:31:21 -0700 (PDT)
+Received: by 10.220.100.140 with HTTP; Wed, 19 May 2010 02:31:21 -0700 (PDT)
+Date: Wed, 19 May 2010 17:31:21 +0800
+Message-ID: <AANLkTimeUg2WhglfZE-N2rdYNZ4yehKmR6YSvBL5NIPX@mail.gmail.com>
+From: daniel tian <daniel.xntian@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: daniel.xntian@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFA][PATCH] automake_1.11.1.bb: Remove DEFAULT_PREFERENCE = "-1"
+Subject: Does anybody try the e-image-core
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,29 +48,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 May 2010 05:53:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 19 May 2010 09:35:33 -0000
+X-List-Received-Date: Wed, 19 May 2010 09:35:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, May 18, 2010 at 07:02:18PM -0700, Khem Raj wrote:
-> Hi,
-> 
-> I was working on upgrading gettext and some other packages to latest
-> versions but they use features from automake 1.11. We have this recipe
-> but it not enabled. I ask for approval to make it default. I have
-> build few images thus far without any problems and SHR already uses
-> it as preferred automake. Some distributions ask for specific versions
-> they wont be affected. 
+Hi, guys:
+    Now I am working on a project: porting the enlighenment on mips machine.
+    The local.conf is configure as db1200 machine which is a mips32
+little endian arch.
+    I have already built a rootfs and kernel from previous
+openembedded source code.
+    But the startx command is not found, so I don't know how to
+startup the enlightenment desktop, and maybe there have any others
+packages missing in this rootfs.
+    So I just wander whethere somebody has already try the
+e-image-core succeeded(ARM platform is Ok.)
 
-Few recipes needed small patch when make install refused to install same
-file twice, but those patches were rather trivial. Those used in SHR are
-already fixed, so ACK.
+     And there is another problem. Now I update the OE code, and try
+to build the e-image-core again. But there is package not being
+downloaded:
+    /home/daniel/OE/openembedded/recipes/e17/illume-keyboard-default_svn.bb,
+Here is the error message:
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+NOTE: fetch http://mirrors.openembedded.org//e.src.modules.illume.keyboards_svn.enlightenment.org_.svn.e.trunk_48935_.tar.gz
+--2010-05-19 17:05:16--
+http://mirrors.openembedded.org//e.src.modules.illume.keyboards_svn.enlightenment.org_.svn.e.trunk_48935_.tar.gz
+Resolving mirrors.openembedded.org... 82.197.159.157
+Connecting to mirrors.openembedded.org|82.197.159.157|:80... NOTE:
+Running task 2440 of 6114 (ID: 3728,
+/home/daniel/OE/openembedded/recipes/glibc/glibc-initial_2.9.bb,
+do_qa_staging)
+connected.
+HTTP request sent, awaiting response... 404 Not Found
+2010-05-19 17:05:17 ERROR 404: Not Found.
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+NOTE: fetch http://sources.openembedded.org//e.src.modules.illume.keyboards_svn.enlightenment.org_.svn.e.trunk_48935_.tar.gz
+--2010-05-19 17:05:17--
+http://sources.openembedded.org//e.src.modules.illume.keyboards_svn.enlightenment.org_.svn.e.trunk_48935_.tar.gz
+Resolving sources.openembedded.org... 140.211.169.165
+Connecting to sources.openembedded.org|140.211.169.165|:80... connected.
+HTTP request sent, awaiting response... 404 Not Found
+2010-05-19 17:05:17 ERROR 404: Not Found.
+
+Does anybody also meet this problem?
+
+and can anyone give some advise? thanks very much.
+Any suggestion is appreciated.
+
+
+          daniel
 
 
