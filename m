@@ -1,41 +1,32 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OF61u-0007JY-Om
+	(envelope-from <gary@mlbassoc.com>) id 1OF6Fd-00043S-Fe
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 15:43:19 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OF5xy-0001Pe-SX
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 14:39:14 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OF5xy-0003pg-K0
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 14:39:14 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 20 May 2010 15:57:35 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 9975C16604C4; Thu, 20 May 2010 07:53:26 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id C251516603BA;
+	Thu, 20 May 2010 07:53:23 -0600 (MDT)
+Message-ID: <4BF53ED3.2000806@mlbassoc.com>
+Date: Thu, 20 May 2010 07:53:23 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1274119962.25944.147.camel@trini-m4400>
-References: <hsql3t$o5c$1@dough.gmane.org> <20100517055550.GA6686@gmail.com>
-	<hsr2pr$4vp$1@dough.gmane.org>
-	<AANLkTin6PIr6ZgeYS6rB9IGK83vQH9Tn9xreVOwOAt0M@mail.gmail.com>
-	<hsrsq8$d0r$1@dough.gmane.org>
-	<AANLkTimXPVpXkm-vJbKvsYim3zM_ckn6XEH_XtS_pDot@mail.gmail.com>
-	<1274119962.25944.147.camel@trini-m4400>
-Date: Thu, 20 May 2010 14:39:14 +0100
-Message-ID: <1274362754.18597.125.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <4BF532DA.4080601@mlbassoc.com>
+	<AANLkTimYRrV82uHzco2jxLhEXw-7YTBx7fBOJb5YV4ZY@mail.gmail.com>
+In-Reply-To: <AANLkTimYRrV82uHzco2jxLhEXw-7YTBx7fBOJb5YV4ZY@mail.gmail.com>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Question: is 'gcc' supposed to replace the libstdc++.la installed by 'gcc-cross'?
+Subject: Re: Why is OE so slow?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,48 +40,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 13:43:19 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 20 May 2010 13:57:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2010-05-17 at 11:12 -0700, Tom Rini wrote:
-> On Mon, 2010-05-17 at 10:45 -0700, Khem Raj wrote: 
-> > what is -g3 offering over -g at -O2 and how good the additional debug info is ?
-> 
-> -g3 offers lots of stuff, spelled out in some doc or another is macro
-> expansion, for example.  I don't know if it offers enough stuff that you
-> say don't need the sources themselves around still too tho.  Koen?
+On 05/20/2010 07:28 AM, Andrea Adami wrote:
+> I guess you're using bitbake_1.8.18.
+> Use bitbake_1.10.0.
 
-The gcc manual is not terribly illuminating on this subject:
+Where do I get it?  It's not at http://download.berlios.de/bitbake/
 
-http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html#Debugging-Options
+Thanks
 
-just says that it "... includes extra information, such as all the macro
-definitions present in the program. Some debuggers support macro
-expansion when you use -g3."
+> On Thu, May 20, 2010 at 3:02 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
+>> I'm using OpenEmbedded to build Angstrom.  Recent trees
+>> in the org.openembedded.dev branch have some 8370 recipes.
+>> When I initiate a build, it takes *forever* just to get started.
 
-The definitions in flags.h suggest that, in fact, -g3 doesn't really add
-much apart from macros:
-
-enum debug_info_level
-{
-  DINFO_LEVEL_NONE,     /* Write no debugging info.  */
-  DINFO_LEVEL_TERSE,    /* Write minimal info to support tracebacks only.  */
-  DINFO_LEVEL_NORMAL,   /* Write info for all declarations (and line table).  */
-  DINFO_LEVEL_VERBOSE   /* Write normal info plus #define/#undef info.  */
-};
-
-... and, from a quick inspection of dwarf2out.c, I didn't see anything
-else very obvious that is added by DINFO_LEVEL_VERBOSE.
-
-So, all in all, I can't find a great deal of evidence to suggest that
-compiling at -g3 really does enhance the debugging experience all that
-much.  I've certainly never used that option myself and haven't really
-felt the poorer for it.  I'd be interested to hear what exactly the
-feature is that the Angstrom folks feel the lack of renders the -dbg
-packages unusable with -g2.
-
-p.
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
