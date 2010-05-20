@@ -1,37 +1,38 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OF3mu-0003HC-D4
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OF40x-0003r6-BE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 13:19:41 +0200
-Received: by gwj19 with SMTP id 19so1566821gwj.6
+	Thu, 20 May 2010 13:34:13 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E67EB11000A8
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 May 2010 04:15:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=cNH7TFHvguc+k9xU35MLqnnek+06OUC0ioRqAVmAFXc=;
-	b=r0c6sA1fS2R2r3S9Sd00akKj4POv8g1MmyrJuU24t2hOKgFU3s/uF3u66uNevoW2HF
-	bXVKIRvcgafcP1u1i6sWtbaOWQrl+jQ2sj3PRgDB6WA2CgoSoH5+ExkEQ/RLbfhPL/cm
-	WSVlTFpEc1E4YoamPkhJe6xYoH/BF3DhMHqhc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=WwDguFqwOIK24/SG5wUTEwwhyPgiEHouu4nGJDLUrmD2MB2dapky2fuxDgASi3vyBm
-	AugYeiPRLZ8rPBSOJguLBKL9D6DHLgzXWZdkmvkIE2DEYWP0Vi/JLvcaB0xxp5I9jCvO
-	Y7eRYd1Q3eWTP8NMjGRZkFjSiCetnKvNdkSRw=
-MIME-Version: 1.0
-Received: by 10.101.149.28 with SMTP id b28mr12682157ano.228.1274354137457; 
-	Thu, 20 May 2010 04:15:37 -0700 (PDT)
-Received: by 10.100.108.2 with HTTP; Thu, 20 May 2010 04:15:37 -0700 (PDT)
-In-Reply-To: <4BF32920.2030904@mentor.com>
+	Thu, 20 May 2010 13:30:09 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id ABE2C11000A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 May 2010 13:30:08 +0200 (CEST)
+Received: from rhein.familie-heinold.de (f052224017.adsl.alicedsl.de
+	[78.52.224.17]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 May 2010 13:30:08 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 9BA163C119; Thu, 20 May 2010 13:30:07 +0200 (CEST)
+Date: Thu, 20 May 2010 13:30:07 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100520113007.GA23223@rhein.zuhause.netz>
 References: <AANLkTimqvGPoCByYUUUSaFSYLcbA_e7CrZKg-GtIyVzG@mail.gmail.com>
 	<4BF32920.2030904@mentor.com>
-Date: Thu, 20 May 2010 13:15:37 +0200
-Message-ID: <AANLkTinZKloXYbtAZm037g6TJhTQimtzINfVYiXg7jSP@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+	<AANLkTinZKloXYbtAZm037g6TJhTQimtzINfVYiXg7jSP@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinZKloXYbtAZm037g6TJhTQimtzINfVYiXg7jSP@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -52,15 +53,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 11:19:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 20 May 2010 11:34:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Bump
+On Thu, May 20, 2010 at 01:15:37PM +0200, Andrea Adami wrote:
+> Bump
+> 
+> Pls, a second ack is needed.
+> 
+> Thx
+> 
+> Andrea
 
-Pls, a second ack is needed.
+Acked-by: Henning Heinold <heinold@inf.fu-berlin.de>
 
-Thx
-
-Andrea
+Bye Henning
 
 
