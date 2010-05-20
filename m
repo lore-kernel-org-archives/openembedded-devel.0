@@ -1,29 +1,44 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OF5SA-0003c7-RE
+	(envelope-from <andrea.adami@gmail.com>) id 1OF5rY-0002YB-12
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 15:06:23 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id CB33216603B5; Thu, 20 May 2010 07:02:18 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 2954B166038B;
-	Thu, 20 May 2010 07:02:18 -0600 (MDT)
-Message-ID: <4BF532DA.4080601@mlbassoc.com>
-Date: Thu, 20 May 2010 07:02:18 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+	Thu, 20 May 2010 15:32:36 +0200
+Received: by gya1 with SMTP id 1so73805gya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 May 2010 06:28:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=PFofe0xz8ve+4JmoM0JloZ1a0bpYa64n+zhvCg/D5ss=;
+	b=Gvqmt/5ex7pwhU+ZPQ5MG9IM+wRi/O9zSXMFVOCWvpJhCmTRMH2tDNUlWE6Pg55Imf
+	Z/UFvkdqW23b9fd6IZSxdEzd9nl+Wq6/xzZSWTVegBy2BYB3v7bX+ZZc5V5+N+eXWCN+
+	6UqneXTcP5x8jwK7VbRERl8NEH0clKJ0q7kd8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=yEVO3B7X1d60jhTuYK5iBqPZYLO8XWql55T+CgkdWmbwvH6tm3OXUT/TXUFpn7D6EG
+	mEoQ0+ON88bVqNkp21ZvUds1CfByEJ4XYb9slAUsxcm9zxcy79oRZOOKfQnPcK8DzTQZ
+	SOKrcWBtEKKBGW31mncT8qGopkDRsb+v5IEf0=
 MIME-Version: 1.0
+Received: by 10.101.28.39 with SMTP id f39mr71389anj.69.1274362113207; Thu, 20 
+	May 2010 06:28:33 -0700 (PDT)
+Received: by 10.100.108.2 with HTTP; Thu, 20 May 2010 06:28:33 -0700 (PDT)
+In-Reply-To: <4BF532DA.4080601@mlbassoc.com>
+References: <4BF532DA.4080601@mlbassoc.com>
+Date: Thu, 20 May 2010 15:28:33 +0200
+Message-ID: <AANLkTimYRrV82uHzco2jxLhEXw-7YTBx7fBOJb5YV4ZY@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Why is OE so slow?
+Subject: Re: Why is OE so slow?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,43 +52,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 13:06:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 May 2010 13:32:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I'm using OpenEmbedded to build Angstrom.  Recent trees
-in the org.openembedded.dev branch have some 8370 recipes.
-When I initiate a build, it takes *forever* just to get started.
+I guess you're using bitbake_1.8.18.
+Use bitbake_1.10.0.
 
-I have [reasonably] powerful build machines (4 way 3GHz Zeon) and
-it takes over 10 minutes CPU time just to reach 'Preparing runqueue'.
-It then takes an additional 10 minutes before it starts to
-execute the run queue.  Of course, I have the Psyco JIT installed.
+Regards
 
-* What takes so long?  Obviously, there are some processes in
-   these steps which are non-linear.  I also build Poky which
-   has about 10% of the recipes (~850) and these steps are *much*
-   more than 10 times as fast.  In fact, building Poky, the first
-   task in the run queue is usually started within 30 seconds...
+Andrea
 
-   Also, the "cache" (whatever it holds) does not affect these times
-   very much.  The times above are for a first run (rebuild the cache).
-   If the cache does not have to be rebuilt, the first phase only takes
-   5.5 minutes (still very long), while the second phase (preparing
-   the run queue) still takes 10+ minutes (maybe longer now that it
-   has to consider partial results from the working build tree)
-
-* Is there any way to tune/improve this?  Is there something I've
-   missed?  Why don't the online builders, e.g. narcissus, suffer
-   such delays?
-
-I'd really like to use OE more, but having to wait 25 minutes
-just to get it going is [at least] off-putting.
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+On Thu, May 20, 2010 at 3:02 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> I'm using OpenEmbedded to build Angstrom. =A0Recent trees
+> in the org.openembedded.dev branch have some 8370 recipes.
+> When I initiate a build, it takes *forever* just to get started.
 
 
