@@ -1,40 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OFD4R-0003WN-Ai
+	(envelope-from <leon.woestenberg@gmail.com>) id 1OFDXt-0007ya-F6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 23:14:24 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OFD0W-0004zd-0l from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 14:10:20 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 20 May 2010 14:10:19 -0700
-Received: from [172.30.80.86] ([172.30.80.86]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 20 May 2010 15:10:18 -0600
-Message-ID: <4BF5A533.2020908@mentor.com>
-Date: Thu, 20 May 2010 14:10:11 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Thu, 20 May 2010 23:44:54 +0200
+Received: by gwj19 with SMTP id 19so157816gwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 May 2010 14:40:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=RUbFJsJ6lmkKCp1DbF0oF/h3mE3qN6FtpbKD4lP0adM=;
+	b=T7iooNXc5KM+QGCzyQkUNFHuRjWyQxX/oXw+w7vXRnkpjFFZuCsLB9IIdCmJX8UVQo
+	F4GuQG7tWxswQpvVgRTsaAPMxT/LxM4Hjg4Nh4n8QloRoa89V46PQDINc5nymQwCD/xg
+	Bykh6z3SvMtv76Esh22m0CJxPyEdnqMmhFPrA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=s+l2g6Wg567xCU8cO8q5+oJ/2UCZvA0txSi1OUU+JHndxveBPvB2N6C/5kNmFBLyB6
+	K/c7u28Z3V+pFar4Q1gDZQRUTVJ8J1M61f9AB5czYo5smGLFsEPpoF2Aldu0EimAE2ba
+	EvyO5nftE11n4JylAGUei972jSc6P1SlWsNVw=
 MIME-Version: 1.0
+Received: by 10.151.52.4 with SMTP id e4mr2305418ybk.252.1274391645914; Thu, 
+	20 May 2010 14:40:45 -0700 (PDT)
+Received: by 10.150.12.14 with HTTP; Thu, 20 May 2010 14:40:45 -0700 (PDT)
+In-Reply-To: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
+References: <1274234538-26516-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 20 May 2010 23:40:45 +0200
+Message-ID: <AANLkTin6CI2jKSdaSPFpNn38yap_DDwwStmVSipH3Q1-@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <bug-5437-13@http.bugs.openembedded.org/>	<AANLkTilUYA_uexLXydVxyFGHnKol23h1LYOBfOkU7Wzt@mail.gmail.com>
-	<4BF55079.6030905@mentor.com>
-In-Reply-To: <4BF55079.6030905@mentor.com>
-X-OriginalArrivalTime: 20 May 2010 21:10:18.0678 (UTC)
-	FILETIME=[D9B88D60:01CAF860]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] [Bug 5437] New: packaged-staging freezes
+Subject: Re: [RFA][PATCH] automake_1.11.1.bb: Remove DEFAULT_PREFERENCE = "-1"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,41 +51,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 21:14:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 May 2010 21:44:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Tom Rini wrote:
-> Andrea Adami wrote:
->> I had same stall on:
->>
->> NOTE: package stagemanager-native-0.0.1-r12: task do_package_write: 
->> Succeeded
->>
->> There is one patch is shr repo removing one lockfile in
->> packaged-staging.bbclass which helped my rebuild.
->>
->> http://gitorious.org/~jama/angstrom/jama-shr-experimental/commit/1ae868c5f4029f1862555e97a1aba37a8935221c 
->>
->>
->> I think RP could say something about this lock.
-> 
-> iirc, that's mine or Chris'.  We want to have a lock on installing 
-> pstaging otherwise gcc-cross{,-initial,-intermediate} and 
-> libc{,-initial} can get done in the wrong order.
+Hello Khem,
 
-OK, reproducing the problem locally and digging again, I can say quite 
-confidently that when 3440328ac1ccbd5ca6aeea4a4b6084ecafd6fdda put the 
-lock in that the above link takes back out, that was a merge error 
-between Poky and oe.dev since Poky is/was missing 
-394d321684eec271bc55438e3c01f74825d80988 where that lock got moved for 
-the reasons I stated above.  You can add:
-Acked-by: Tom Rini <tom_rini@mentor.com>
-and merge that gitorious commit into mainline, asap please :)
+On Wed, May 19, 2010 at 4:02 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> versions but they use features from automake 1.11. We have this recipe
+> but it not enabled. I ask for approval to make it default. I have
+> build few images thus far without any problems and SHR already uses
+> it as preferred automake. Some distributions ask for specific versions
 
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
+
+Regards,
 -- 
-Tom Rini
-Mentor Graphics Corporation
-
+Leon
 
 
