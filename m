@@ -1,36 +1,43 @@
-Received: from smtp-out09a.alice.it ([85.33.3.9])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1OFEIp-0007Bm-Nl
-	for openembedded-devel@openembedded.org; Fri, 21 May 2010 00:33:20 +0200
-Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-OUT09A.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 21 May 2010 00:28:15 +0200
-Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO02.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 21 May 2010 00:28:15 +0200
-Received: from jcn ([82.55.137.199]) by FBCMCL01B06.fbc.local with Microsoft
-	SMTPSVC(6.0.3790.3959); Fri, 21 May 2010 00:28:14 +0200
-Date: Fri, 21 May 2010 00:28:08 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OFEXV-0000x3-Kw for openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 00:48:30 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OFETZ-0004d2-OE for openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 00:44:25 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 May 2010 00:44:25 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 May 2010 00:44:25 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100521002808.946c76aa.ospite@studenti.unina.it>
-X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 21 May 2010 00:44:12 +0200
+Message-ID: <ht4dvt$kdi$1@dough.gmane.org>
+References: <AANLkTilUZ3dToBwFw4QzKZkyrDUxT2Y2rO7T3CvYNjQ-@mail.gmail.com>
 Mime-Version: 1.0
-X-OriginalArrivalTime: 20 May 2010 22:28:14.0243 (UTC)
-	FILETIME=[BC932730:01CAF86B]
-X-SA-Exim-Connect-IP: 85.33.3.9
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <AANLkTilUZ3dToBwFw4QzKZkyrDUxT2Y2rO7T3CvYNjQ-@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: binutils-cross-sdk_cvs.bb fails in do_install
+Subject: Re: Problem with building glibc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,51 +51,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 22:33:20 -0000
-X-Groupsio-MsgNum: 19453
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Fri__21_May_2010_00_28_08_+0200_dqdVTr8GB1HTLxPn"
+X-List-Received-Date: Thu, 20 May 2010 22:48:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---Signature=_Fri__21_May_2010_00_28_08_+0200_dqdVTr8GB1HTLxPn
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Hi,
+On 20-05-10 23:51, Grzegorz Toporek wrote:
+> Hi all,
+> 
+> many thanks for the earlier help. I have change my /conf/distro/colibri.conf
+> file and building of busybox package went futher.
+> 
+> However, I have stopped on building glibc. I read lots of treads concerning
+> this problem but nothing helped at all.
+> 
+> I found this but I don't know how to apply it to my problem. I use Ubuntu
+> 9.1, gcc 4.41.
+> 
+> http://sourceware.org/bugzilla/show_bug.cgi?id=5203
+> 
+> Could you please help me with this? I am very new to bitbake...
 
-as per subject binutils-cross-sdk_cvs.bb fails to build for
-DISTRO=3Dminimal this prevents meta-toolchain to be build from scratch as
-well.
+If you're very new I'd recommend starting with a know working distro,
+like angstrom.
 
-http://tinderbox.openembedded.org/builds/71564/
+regards,
 
-Any hints?
-
-Thanks,
-   Antonio
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Fri__21_May_2010_00_28_08_+0200_dqdVTr8GB1HTLxPn
-Content-Type: application/pgp-signature
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEARECAAYFAkv1t3gACgkQ5xr2akVTsAGKAQCffZPtHGn/b2xJBoV1vUU5DiJZ
-DzgAn1lDZGFY8VgpU15IzMMbHQCLiRYI
-=F4FC
+iD8DBQFL9bs8MkyGM64RGpERAnPnAJ4hfYMWaAjJzYb4NekLwRIy/pMZ/ACgvWvl
+g2GTYwQTFwujR9W/3RJZUgg=
+=d7WP
 -----END PGP SIGNATURE-----
 
---Signature=_Fri__21_May_2010_00_28_08_+0200_dqdVTr8GB1HTLxPn--
+
+
