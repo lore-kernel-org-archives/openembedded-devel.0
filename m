@@ -1,47 +1,49 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OEsGT-0007UY-9w
+	(envelope-from <raj.khem@gmail.com>) id 1OEtjz-0006N4-Lf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 01:01:25 +0200
-Received: by gwj19 with SMTP id 19so1287584gwj.6
+	Thu, 20 May 2010 02:36:00 +0200
+Received: by pwj3 with SMTP id 3so326506pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 19 May 2010 15:57:23 -0700 (PDT)
+	Wed, 19 May 2010 17:31:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Xa9lQC+Tm4I4Gjj7/ovGMfUbUc/YCNaWaUREPt3jxpM=;
-	b=ZiJatA1xjDHyaXIZeQ8U1Ry3zk3wKcmQ6HQrdtCR0PF5T8HUelsHj80VDGow1W4Nvf
-	jIYV2mL6Iij05+V9cQ1ivLoBJuDUDzLgtELoLRZ+SZMi/B+WkTJkeMVFmI3dUI9pCeJ8
-	vLy1dBYZ/HiaIqxMIYIPJoRNyH6W522XgJzv8=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=o74LPGPU7OCz833EYQwJVri1N21t3ZZi9syS7sXYjS4=;
+	b=CisRPdrM3sUw27LVz8r04Twk8n6S4tBD7/Z5SWk1SVzVyXbXlU/hsLjPTAR4y6epWB
+	6kh3wzCgrZufkspsNuYN/Z64xkVZveDWwktLZ9uvKLgmcn6B3CgCRtcTKtMDne1N5JLe
+	XMnce1dzRDsVkQThQCdK9TCrpmLn6rev2B2Ik=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=tIhacF2+w7gh23VyZobCe3zICuC0mOV0184HaZquTBhdV7K+UOnAbUEaWn8FudDNLx
-	NUZa7N6GY0f85hkrrMDoyPsRCXPwkYvZmSmqFX2DhKNvtbFccimvSWix4AvlkDuhSn2J
-	3tZJWAznR48ux75CWStn5IdtFmz13gtP8WCOE=
-MIME-Version: 1.0
-Received: by 10.101.160.30 with SMTP id m30mr11498699ano.192.1274309843380; 
-	Wed, 19 May 2010 15:57:23 -0700 (PDT)
-Received: by 10.100.108.2 with HTTP; Wed, 19 May 2010 15:57:23 -0700 (PDT)
-In-Reply-To: <1274035921.24454.68.camel@rex>
-References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
-	<1273859746.22943.454.camel@trini-m4400>
-	<AANLkTimDt7fVT14jNofov1ESwO2M_CvBAe6RsdvzZicE@mail.gmail.com>
-	<1273881865.8005.205.camel@trini-m4400>
-	<1274035921.24454.68.camel@rex>
-Date: Thu, 20 May 2010 00:57:23 +0200
-Message-ID: <AANLkTimze8vRUUloa6gaRBU6jvp8zrcSAKDvqCu3ppaY@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=H4XLljWiJ+hMN2g2E2KAbF2Gmds6Twpd1EvjJsQGudt10SAg9njteeRt4/gntok/W7
+	FGI9a6VaEutT6NcZIb32qMumzS9wF39VfH6SQpeeZzgL0hXoOjSnL5cu6l1wil77Tl76
+	wuGXsHd/wyf9H2MG55Wlyud99DjjhLqu5+8ns=
+Received: by 10.114.164.37 with SMTP id m37mr5463406wae.39.1274315517001;
+	Wed, 19 May 2010 17:31:57 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id b6sm72279694wam.21.2010.05.19.17.31.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 19 May 2010 17:31:55 -0700 (PDT)
+Date: Wed, 19 May 2010 17:31:51 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Message-ID: <20100520003151.GA26630@gmail.com>
+References: <4BF45542.2000406@freyther.de>
+MIME-Version: 1.0
+In-Reply-To: <4BF45542.2000406@freyther.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
+Subject: Re: TSC Meetings for the meeting of may
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,30 +57,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 19 May 2010 23:01:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 20 May 2010 00:36:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Same issue happens during rebuild from packaged staging
+On (20/05/10 05:16), Holger Freyther wrote:
+> Hi,
+> 
+> sorry for the delay of finishing up the minutes, it is late at night so
+> I am sure I have messed up something in one way or another... take care.
+> 
+> 
+> TSC Meeting 2010/05/06
+> 
+> Where to hold meetings
+> ======================
+> The TSC decided to hold future meetings on IRC as every member
+> of the TSC already have irc clients installed and the same was
+> not true for jabber clients.
+> 
+> Make packaged-staging mandatory
+> ===============================
+
+fine
+
+> The TSC decided to make packaged-staging mandatory as this will
+> allow further simplification of the classes, gives additional
+> features. The TSC is aware that there are still recipes left to
+> migrate away from the legacy staging and that building these will
+> increase the build time right now.
+> 
+> Make insane mandatory
+> =====================
+
+fine
+
+> The TSC believes that the insane.bbclass contributes to making
+> builds more reliable and point out errors early on. On the other
+> hand the TSC is aware that these checks might get into the way
+> during rapid prototyping. The TSC believes the right balance is
+> to enable the insane.bbclass by default but to change the default
+> to warn instead of failing the build and existing users will be
+> able to opt for fatal errors instead of warnings.
+> 
+> 
+> Removing old versions
+> =====================
+> The TSC looked into the topic of when to remove versions.
+> 
+> 
+> The TSC thinks there can not be a general rule of when to delete
+> a package. The TSC believes that in some cases a package should
+> never be deleted, e.g. with GCC/GLIBC to target a specific device
+> or distribution. For a series of major releases it seems plausible
+> to only keep the latest minor release of each release series around
+> given that the quality should increase with each minor release but
+> a removal of a minor release should not be done if there is a
+> PREFERRED_VERSION set. The TSC believes that 24 months can be a good
+> time to remove old major releases but it is certainly not the only
+> criteria for a removal.
+
+gcc makes minor releases and in general they are bug fix only releases.
+like kernel.
+
+I would propose that OE count such packages with major release only.
+e.g. gcc 4.4 (indicated 4.4.x) 4.5 and so on. This will simplify the
+maintenance and reduce duplication, with one downside that if some DISTRO does not need a 
+bug fix that was say done in 4.4.4 and is currently using 4.4.3 as
+preferred cross compiler. Although chances of such cases will be low.
 
 
-Cannot load module
-/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la:
-/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/.libs/im-xim.so:
-undefined symbol: g_realloc_n
-| /oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/im-xim.la
-does not export GTK+ IM module API:
-/oe/build/tmp/work/i686-linux/gtk+-native-2.20.0-r8.0/gtk+-2.20.0/modules/input/.libs/im-xim.so:
-undefined symbol: g_realloc_n
-
-...
-
-NOTE: package gtk+-native-2.20.0-r8.0: task do_compile: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-virtual:native:/oe/openembedded/recipes/gtk+/gtk+_2.20.0.bb do_compile
-failed
-...
-
-Andrea
+Thanks
+-Khem
 
 
