@@ -1,29 +1,44 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OF3ab-0000OD-7L
+	(envelope-from <andrea.adami@gmail.com>) id 1OF3mu-0003HC-D4
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 13:06:59 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id A15B0166037D; Thu, 20 May 2010 05:02:55 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 3AA831660311;
-	Thu, 20 May 2010 05:02:55 -0600 (MDT)
-Message-ID: <4BF516DF.7030501@mlbassoc.com>
-Date: Thu, 20 May 2010 05:02:55 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+	Thu, 20 May 2010 13:19:41 +0200
+Received: by gwj19 with SMTP id 19so1566821gwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 20 May 2010 04:15:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=cNH7TFHvguc+k9xU35MLqnnek+06OUC0ioRqAVmAFXc=;
+	b=r0c6sA1fS2R2r3S9Sd00akKj4POv8g1MmyrJuU24t2hOKgFU3s/uF3u66uNevoW2HF
+	bXVKIRvcgafcP1u1i6sWtbaOWQrl+jQ2sj3PRgDB6WA2CgoSoH5+ExkEQ/RLbfhPL/cm
+	WSVlTFpEc1E4YoamPkhJe6xYoH/BF3DhMHqhc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=WwDguFqwOIK24/SG5wUTEwwhyPgiEHouu4nGJDLUrmD2MB2dapky2fuxDgASi3vyBm
+	AugYeiPRLZ8rPBSOJguLBKL9D6DHLgzXWZdkmvkIE2DEYWP0Vi/JLvcaB0xxp5I9jCvO
+	Y7eRYd1Q3eWTP8NMjGRZkFjSiCetnKvNdkSRw=
 MIME-Version: 1.0
+Received: by 10.101.149.28 with SMTP id b28mr12682157ano.228.1274354137457; 
+	Thu, 20 May 2010 04:15:37 -0700 (PDT)
+Received: by 10.100.108.2 with HTTP; Thu, 20 May 2010 04:15:37 -0700 (PDT)
+In-Reply-To: <4BF32920.2030904@mentor.com>
+References: <AANLkTimqvGPoCByYUUUSaFSYLcbA_e7CrZKg-GtIyVzG@mail.gmail.com>
+	<4BF32920.2030904@mentor.com>
+Date: Thu, 20 May 2010 13:15:37 +0200
+Message-ID: <AANLkTinZKloXYbtAZm037g6TJhTQimtzINfVYiXg7jSP@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [Angstrom-devel] Can't build Angstrom
+Subject: Re: [oe-commits]: linux-kexecboot: sed out conflicting getline in scripts/ unifdef.c
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,31 +52,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 11:06:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 May 2010 11:19:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Can't build 'beagleboard-demo-image' in recent tree :-(
+Bump
 
-MACHINE=beagleboard
-DISTRO="angstrom-2008.1"
-OE Branch = org.openembedded.dev
-   commit 81a3db27c33d87401b33362c58f26ad69e2d7b4e
+Pls, a second ack is needed.
 
-ERROR: QA Issue with staging: eet.pc failed sanity test (tmpdir) in path /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig
-ERROR: QA staging was broken by the package built above
-ERROR: Error in executing: /local/Angstrom_BeagleBoard/openembedded/recipes/util-linux-ng/util-linux-ng_2.17.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Build of /local/Angstrom_BeagleBoard/openembedded/recipes/util-linux-ng/util-linux-ng_2.17.bb do_qa_staging failed
-ERROR: Task 592 (/local/Angstrom_BeagleBoard/openembedded/recipes/util-linux-ng/util-linux-ng_2.17.bb, do_qa_staging) failed
+Thx
 
-Any ideas?
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Andrea
 
 
