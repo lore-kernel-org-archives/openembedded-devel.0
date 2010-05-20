@@ -1,40 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OF4KB-0006qE-80 for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 13:54:19 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OF4GJ-0006iq-D5 for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 13:50:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 May 2010 13:50:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1OF4VV-0006Z1-Ro
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 May 2010 14:05:46 +0200
+Received: from [172.16.145.92] (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id D4C5337071
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 May 2010 13:50:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 20 May 2010 14:01:45 +0200 (CEST)
+Message-ID: <4BF524AF.5030700@acn-group.ch>
+Date: Thu, 20 May 2010 14:01:51 +0200
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 20 May 2010 13:41:10 +0200
-Message-ID: <ht374m$lsv$2@dough.gmane.org>
-References: <4BF2417A.6000302@acn-group.ch>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
-In-Reply-To: <4BF2417A.6000302@acn-group.ch>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4BF2417A.6000302@acn-group.ch> <ht374m$lsv$2@dough.gmane.org>
+In-Reply-To: <ht374m$lsv$2@dough.gmane.org>
+X-SA-Exim-Connect-IP: 195.160.190.3
+X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [hawkboard] OE Kernel Not Booting
@@ -51,45 +38,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 11:54:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 20 May 2010 12:05:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Le 20.05.2010 13:41, Koen Kooi a =E9crit :
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 18-05-10 09:27, Christophe Aeschlimann wrote:
+>> Hi,
+>>
+>> We are at least three hawkboard owners that have the same issue.
+>>
+>> Building org.openembedded.dev HEAD with
+>>
+>> MACHINE=3D "hawkboard"
+>> DISTRO =3D "angstrom-2008.1"
+>>
+>> produces a Kernel Image that cannot be booted on our hawkboards.
+>>
+>> The behaviour is the following with the following kernel bootargs :
+>
+>>> [    0.350000] vpif vpif: vpif probe success
+>>> [    0.350000] Switching to clocksource timer0_1
+>>
+>> And it hangs there forever.
+>
+> That should be fixed now with:
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D49a1f4b=
+db309969f2c40b5dbfefdb56c83c0b264
+>
+> regards,
 
-On 18-05-10 09:27, Christophe Aeschlimann wrote:
-> Hi,
-> 
-> We are at least three hawkboard owners that have the same issue.
-> 
-> Building org.openembedded.dev HEAD with
-> 
-> MACHINE= "hawkboard"
-> DISTRO = "angstrom-2008.1"
-> 
-> produces a Kernel Image that cannot be booted on our hawkboards.
-> 
-> The behaviour is the following with the following kernel bootargs :
+Yes I confirm it is.
 
->> [    0.350000] vpif vpif: vpif probe success
->> [    0.350000] Switching to clocksource timer0_1
-> 
-> And it hangs there forever.
+Thanks,
 
-That should be fixed now with:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=49a1f4bdb309969f2c40b5dbfefdb56c83c0b264
+Christophe
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL9R/WMkyGM64RGpERAj0qAJ4kmzsizEWt/bxA/GmfqK9wVIAjbQCePKC1
-6bz6gYhGO+l/4TFhk9TNhcI=
-=PHmx
------END PGP SIGNATURE-----
-
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFL9R/WMkyGM64RGpERAj0qAJ4kmzsizEWt/bxA/GmfqK9wVIAjbQCePKC1
+> 6bz6gYhGO+l/4TFhk9TNhcI=3D
+> =3DPHmx
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
