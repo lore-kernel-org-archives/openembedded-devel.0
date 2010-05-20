@@ -1,44 +1,41 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OF5rY-0002YB-12
+	(envelope-from <philb@gnu.org>) id 1OF61u-0007JY-Om
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 20 May 2010 15:32:36 +0200
-Received: by gya1 with SMTP id 1so73805gya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 May 2010 06:28:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=PFofe0xz8ve+4JmoM0JloZ1a0bpYa64n+zhvCg/D5ss=;
-	b=Gvqmt/5ex7pwhU+ZPQ5MG9IM+wRi/O9zSXMFVOCWvpJhCmTRMH2tDNUlWE6Pg55Imf
-	Z/UFvkdqW23b9fd6IZSxdEzd9nl+Wq6/xzZSWTVegBy2BYB3v7bX+ZZc5V5+N+eXWCN+
-	6UqneXTcP5x8jwK7VbRERl8NEH0clKJ0q7kd8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=yEVO3B7X1d60jhTuYK5iBqPZYLO8XWql55T+CgkdWmbwvH6tm3OXUT/TXUFpn7D6EG
-	mEoQ0+ON88bVqNkp21ZvUds1CfByEJ4XYb9slAUsxcm9zxcy79oRZOOKfQnPcK8DzTQZ
-	SOKrcWBtEKKBGW31mncT8qGopkDRsb+v5IEf0=
-MIME-Version: 1.0
-Received: by 10.101.28.39 with SMTP id f39mr71389anj.69.1274362113207; Thu, 20 
-	May 2010 06:28:33 -0700 (PDT)
-Received: by 10.100.108.2 with HTTP; Thu, 20 May 2010 06:28:33 -0700 (PDT)
-In-Reply-To: <4BF532DA.4080601@mlbassoc.com>
-References: <4BF532DA.4080601@mlbassoc.com>
-Date: Thu, 20 May 2010 15:28:33 +0200
-Message-ID: <AANLkTimYRrV82uHzco2jxLhEXw-7YTBx7fBOJb5YV4ZY@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 20 May 2010 15:43:19 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OF5xy-0001Pe-SX
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 May 2010 14:39:14 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OF5xy-0003pg-K0
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 20 May 2010 14:39:14 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <1274119962.25944.147.camel@trini-m4400>
+References: <hsql3t$o5c$1@dough.gmane.org> <20100517055550.GA6686@gmail.com>
+	<hsr2pr$4vp$1@dough.gmane.org>
+	<AANLkTin6PIr6ZgeYS6rB9IGK83vQH9Tn9xreVOwOAt0M@mail.gmail.com>
+	<hsrsq8$d0r$1@dough.gmane.org>
+	<AANLkTimXPVpXkm-vJbKvsYim3zM_ckn6XEH_XtS_pDot@mail.gmail.com>
+	<1274119962.25944.147.camel@trini-m4400>
+Date: Thu, 20 May 2010 14:39:14 +0100
+Message-ID: <1274362754.18597.125.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Why is OE so slow?
+Subject: Re: Question: is 'gcc' supposed to replace the libstdc++.la installed by 'gcc-cross'?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,20 +49,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 13:32:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 20 May 2010 13:43:19 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-I guess you're using bitbake_1.8.18.
-Use bitbake_1.10.0.
+On Mon, 2010-05-17 at 11:12 -0700, Tom Rini wrote:
+> On Mon, 2010-05-17 at 10:45 -0700, Khem Raj wrote: 
+> > what is -g3 offering over -g at -O2 and how good the additional debug info is ?
+> 
+> -g3 offers lots of stuff, spelled out in some doc or another is macro
+> expansion, for example.  I don't know if it offers enough stuff that you
+> say don't need the sources themselves around still too tho.  Koen?
 
-Regards
+The gcc manual is not terribly illuminating on this subject:
 
-Andrea
+http://gcc.gnu.org/onlinedocs/gcc/Debugging-Options.html#Debugging-Options
 
-On Thu, May 20, 2010 at 3:02 PM, Gary Thomas <gary@mlbassoc.com> wrote:
-> I'm using OpenEmbedded to build Angstrom. =A0Recent trees
-> in the org.openembedded.dev branch have some 8370 recipes.
-> When I initiate a build, it takes *forever* just to get started.
+just says that it "... includes extra information, such as all the macro
+definitions present in the program. Some debuggers support macro
+expansion when you use -g3."
+
+The definitions in flags.h suggest that, in fact, -g3 doesn't really add
+much apart from macros:
+
+enum debug_info_level
+{
+  DINFO_LEVEL_NONE,     /* Write no debugging info.  */
+  DINFO_LEVEL_TERSE,    /* Write minimal info to support tracebacks only.  */
+  DINFO_LEVEL_NORMAL,   /* Write info for all declarations (and line table).  */
+  DINFO_LEVEL_VERBOSE   /* Write normal info plus #define/#undef info.  */
+};
+
+... and, from a quick inspection of dwarf2out.c, I didn't see anything
+else very obvious that is added by DINFO_LEVEL_VERBOSE.
+
+So, all in all, I can't find a great deal of evidence to suggest that
+compiling at -g3 really does enhance the debugging experience all that
+much.  I've certainly never used that option myself and haven't really
+felt the poorer for it.  I'd be interested to hear what exactly the
+feature is that the Angstrom folks feel the lack of renders the -dbg
+packages unusable with -g2.
+
+p.
+
 
 
