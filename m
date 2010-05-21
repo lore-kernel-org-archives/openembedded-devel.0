@@ -1,47 +1,40 @@
-Received: from fg-out-1718.google.com ([72.14.220.153])
+Received: from mail-yw0-f188.google.com ([209.85.211.188])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <top.grzechu@gmail.com>) id 1OFPEN-0005DL-FK
+	(envelope-from <andrea.adami@gmail.com>) id 1OFPO4-0007KF-Hq
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 12:13:28 +0200
-Received: by fg-out-1718.google.com with SMTP id 16so280638fgg.6
+	Fri, 21 May 2010 12:23:29 +0200
+Received: by ywh26 with SMTP id 26so413019ywh.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 03:09:26 -0700 (PDT)
+	Fri, 21 May 2010 03:19:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=0VugEOU0Hh13o9UcVXT0JgvarPlzjMhHn7jV0DtVwJY=;
-	b=HCqCvlpG9BAJZ2x1u1klxlUplpyh89Y35d+i+u7G4cpUAwdqD/pX6M4hq+cKOIYpGi
-	Jdw2HdEklm1mlkaIX+Xt8UEbW23aPrDwmhIf5pT5/hVUs/Ah87to7/8k1LpHHM0z67o/
-	jz9gJH+fT7hwuOaR7QUYRMgyjyL7xv8zCrIPY=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=bxPHQX4Nw3ygFzgJY7owRji3lxHvIK3Jc9JEJeLqF3A=;
+	b=iBMD+9083Yoa5YGGQhmv8V0wHX8rIalRQPkLQu7eol1IAydpracmqUhgfVrE2Fhhdl
+	OVYvsbMvxO3qnr1x0c6D9e81WAu55gnvKvE/CDZ7qw09MQisArLs64QUclcr9vdC0lTn
+	Hy3spub8jlf2LUYr1FSPZ4C79l6O6EH5X6Bc0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=NVx8ObmHErAxSlGGRkFdxAG6leXFq9NYz6Y6M/Ku9Rq9s+FAg0JQ27b6IOBSG+Gdq6
-	1h/4rqQhFUsCE04A968ayQEH/K/rdlv+7VIO0ShpNQDeyICwLzq5FWYCEsrnV/xKbCYo
-	3CO7+ut2xpItPGCZxmYcmIr6i1qqGTHYcoFwk=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=f6ZviV1oIIBmlNo7IUm5z8QSQF6s1yEJQObWisBhFN/dDgiPG7p/vX0Nvddz5Dmkkb
+	yf8QFrYuVxfKvf9Q/ZlSNpJfxMOS3AZNTfPcTWXa6ZXqk6ZNSx0HwFv7kO16UdrXwA+Z
+	W80nBirrUKhwgfzASvsSggKMoSNH2xuETnbBg=
 MIME-Version: 1.0
-Received: by 10.204.137.89 with SMTP id v25mr40577bkt.13.1274436566554; Fri, 
-	21 May 2010 03:09:26 -0700 (PDT)
-Received: by 10.204.76.131 with HTTP; Fri, 21 May 2010 03:08:56 -0700 (PDT)
-In-Reply-To: <201005211158.42460.marcin@juszkiewicz.com.pl>
-References: <AANLkTilUZ3dToBwFw4QzKZkyrDUxT2Y2rO7T3CvYNjQ-@mail.gmail.com>
-	<AANLkTinAOE1YAoEEqHuOQoIWuXDJ_SZZL4wcWe2D9tri@mail.gmail.com>
-	<AANLkTilad9w4Dh67o_qqPaTHJRTvLBKrI7YbkUNl4A6G@mail.gmail.com>
-	<201005211158.42460.marcin@juszkiewicz.com.pl>
-Date: Fri, 21 May 2010 12:08:56 +0200
-Message-ID: <AANLkTinOiz46Ft8MqY6nFlyzPM-VqYvHrBj43xJVneJO@mail.gmail.com>
-From: Grzegorz Toporek <top.grzechu@gmail.com>
+Received: by 10.100.246.26 with SMTP id t26mr1907570anh.112.1274437164895; 
+	Fri, 21 May 2010 03:19:24 -0700 (PDT)
+Received: by 10.100.132.11 with HTTP; Fri, 21 May 2010 03:19:24 -0700 (PDT)
+Date: Fri, 21 May 2010 12:19:24 +0200
+Message-ID: <AANLkTilSGknB7dURJ4q_WCu1dVwP88KtkQ-lORJNPNua@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 72.14.220.153
-X-SA-Exim-Mail-From: top.grzechu@gmail.com
+X-SA-Exim-Connect-IP: 209.85.211.188
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Problem with building glibc
+Subject: [RFC] linux-kexecboot: remove unused versions asap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,61 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 10:13:28 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 May 2010 10:23:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Thanks, I'll do as you recommend.
+Hello,
 
-And do not get flooded by Wis=B3a :D
->
+I'd like to merge the linux-kexecboot recipes in /linux soon.
+Kernel 2.6.34 has been released, so before I propose to add this last
+one and remove older unused versions.
 
-Luckily I am far away from it...
+For Zaurus unfortunately we'll have to keep around 2.6.24 and 2.6.26
+for a while.
+I ignore the status for omap and linux-hh machines: do these work with
+2.6.34? Can we remove older kernels?
+About qemu in COMPATIBLE_MACHINE: does qemu survive to kexec?
 
+Please help cleaning COMPATIBLE_MACHINE and DEFAULT_PREFERENCE for your machine.
 
-2010/5/21 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+Thanks
 
-> Dnia pi=B1tek, 21 maja 2010 o 11:48:24 Grzegorz Toporek napisa=B3(a):
->
-> > I would love to work with angstrom, however I'm using Colibri evaluatio=
-n
-> > board with Intel(R) PXA270 Processor (this is a students project and I
-> can't
-> > change it). Is it possible to run system built for angstrom on my board
-> or
-> > I just miss something?!
->
-> Angstrom supports nearly every board which OpenEmbedded supports. Colibri
-> is
-> just another device. Build Angstrom for it, use it and you will soon find
-> out
-> how much work you do not have to do due to feeds with already built
-> software.
->
-> Making own distribution and then properly maintain it is lot of work and =
-I
-> would never suggest that for someone who just started with OpenEmbedded.
->
-> Also one thing: do not use tune-iwmmxt for Colibri. This does not give an=
-y
-> special improvements for system. Add "iwmmxt" to MACHINE_FEATURES like it
-> is
-> in few machines already - this will give you optimized versions of those
-> packages where it is really worth to enable that.
->
-> And do not get flooded by Wis=B3a :D
->
-> Regards,
-> --
-> JID:      hrw@jabber.org
-> Website:  http://marcin.juszkiewicz.com.pl/
-> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Andrea
+
 
