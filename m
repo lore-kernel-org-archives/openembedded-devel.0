@@ -1,41 +1,48 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from out3.smtp.messagingengine.com ([66.111.4.27])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <top.grzechu@gmail.com>) id 1OFPfz-00044z-UJ
+	(envelope-from <vjensen@gmx.de>) id 1OFQBz-0005PG-BY
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 12:42:00 +0200
-Received: by fxm8 with SMTP id 8so705353fxm.6
+	Fri, 21 May 2010 13:15:05 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id C4D0BF6241
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 03:37:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=UZOXdXfzyxKS38RLKWF3kITP7ciGo+ZtmO4Gfa0ujMM=;
-	b=nwe/K2ffniK4rkk5SzCnkO6mMz3Av6JbKsUP2sZroaQrWvqtkgqVyolZ5nW6+OHoHE
-	ZZtih6yoz3bGXmPf+hip6NHVr83v2aiOogSzSsEJBqdJpOSIp/kKlYK38bHciYT74bsG
-	4KjMurIZtsuVA0j2lGtwZyAeKUhIk18v7MHRY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=VthAjX3gNFVC6m/xxXfujFyIun3ZFyq5UVC2lXsduIsd4i/b7joR1MfT/owh2y6MYk
-	nQpcQ8Jun1hqmO5ADY5y1EoT2LlulMbKJvYm22zRPuR7BSRuNiz7t7zvseK/HFSlZ4JG
-	KBY1Q3NNB/vpmz1zrk7tGOnRByiOn1atc330I=
-MIME-Version: 1.0
-Received: by 10.204.137.89 with SMTP id v25mr10136bkt.13.1274438277066; Fri, 
-	21 May 2010 03:37:57 -0700 (PDT)
-Received: by 10.204.76.131 with HTTP; Fri, 21 May 2010 03:37:26 -0700 (PDT)
-Date: Fri, 21 May 2010 12:37:26 +0200
-Message-ID: <AANLkTinLm-qzDz71WT2ji8DrZvWNlsAs2q0VqQa9UGVL@mail.gmail.com>
-From: Grzegorz Toporek <top.grzechu@gmail.com>
+	Fri, 21 May 2010 07:11:01 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Fri, 21 May 2010 07:11:01 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=4yCmZk70G5kh8sOPi7l33Nmmz8U=;
+	b=FLTcWLFHyvjmhO7+1JZHm2R/NUkeykN9Co/Ow/xTYs/LMlVL7srMNQ6SZacPeY+h2/kg+/Ff5eMXnZI5Cyms6KG1kDvgW1txqj3MBROtFAAHhaOqgOdtmbZ8ox3S4MR0+4uyFxWZhgfjiV9d8u71ijnmsUDj/KiDq6ZOePVg5YE=
+X-Sasl-enc: uYswypBhi4JqXgCN/grFMNGx10IPRCJ3P21nYSiPMMC3 1274440261
+Received: from [192.168.1.34] (hnvr-4d078ae5.pool.mediaWays.net [77.7.138.229])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 1722047A98
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 May 2010 07:11:00 -0400 (EDT)
+Date: Fri, 21 May 2010 13:12:25 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: top.grzechu@gmail.com
+In-Reply-To: <ht14oq$ok6$1@dough.gmane.org>
+Message-ID: <alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
+	<4BF3C9B8.8080501@mlbassoc.com>
+	<alpine.LNX.2.00.1005191335020.21508@asterix.crazy-teaparty.dyndns.org>
+	<alpine.LNX.2.00.1005191726560.21508@asterix.crazy-teaparty.dyndns.org>
+	<ht14oq$ok6$1@dough.gmane.org>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.27
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Old system on Colibri - new cross-compilers from Angstrom, shall it 	works?
+Subject: Re: powerpc-g++ 4.2.4 problem casting long long to double
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,89 +56,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 10:42:00 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 May 2010 11:15:06 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-I have one important question.
+On Wed, 19 May 2010, Koen Kooi wrote:
 
-On Colibri I have an old system already installed (Linux version 2.6.24.7,
-gcc 4.2.2). When I'll build my own one for angstrom, thus getting
-cross-compilers, can I just simply run programs compiled for angstrom  on
-Colibri board?
-
-Lets say I will cross compile sth using cross-compilers from directory
-/tmp/cross/bin and then upload it on my board. Shall this work for me?
-Should I change gcc version in /conf/distro/angstrom-2008.1.conf to 4.2.2?
-
-Looking forward to your reply.
-
-
-Kind Regards,
-Grzegorz
-
-
-W dniu 21 maja 2010 12:08 u=BFytkownik Grzegorz Toporek <top.grzechu@gmail.=
-com
-> napisa=B3:
-
-> Thanks, I'll do as you recommend.
+> On 19-05-10 17:46, Vitus Jensen wrote:
+>> On Wed, 19 May 2010, Vitus Jensen wrote:
+>>> On Wed, 19 May 2010, Gary Thomas wrote:
+>>>>  On 05/19/2010 03:38 AM, Vitus Jensen wrote:
+>>>>>>   We noticed a strange problem with C++ code casting long long
+>>>> variables
+>>>>>   to double, as a lot of qt-embedded code is doing.
+>>>>>>   =================
+>>>>>   double
+>>>>>   convert(long long l)
+>>>>>   {
+>>>>>   return (double)l; // or double(l)
+>>>>>   }
+>>>>>>   int
+>>>>>   main(int argc, char * argv[])
+>>>>>   {
+>>>>>   long long l = 10;
+>>>>>   double f;
+>>>>>>   f = convert(l);
+>>>>>   printf("convert: %lld => %f\n", l, f);
+>>>>>   return 0;
+>>>>>   }
+>>>>>   ====================
+>>>>>>   output:
+>>>>>   convert: 10 => 0.000000
+>>>>>>   C++ compiled via powerpc-angstrom-linux-g++ gives the above
+>>>> result.
+>>>>>   Compiling the same code as C using powerpc-angstrom-linux-gcc works
+>>>>>   fine. But when looking at the assembler code both compiler produce
+>>>>>   virtually identical output and both call __floatdidf to do the
+>>>> actual
+>>>>>   conversion. Very strange, has anyone ever seen similar effects?
+>>>>
+>>>>  Is this from a recent tree (i.e. post Richard Purdie's restructuring)?
+>>>>
+>>>>  I've seen similar problems with C++ code on Poky which uses the same
+>>>>  changes.
+>>>
+>>> No, I'm building everything from the stable branch.  There were some
+>>> commits cherry-picked from .dev but those only add Qt 4.5.2.
+>>>
+>>> Poky is ARM only, right?  Perhaps it would be helpfull to build a
+>>> compiler from .dev and for a widely used powerpc-platform?  How does
+>>> n1200 sound? It uses the same ppc603e.
+>>
+>> Unfortunately .dev switched to gcc-4.3.3 in the meantime which fails for
+>> ppc603e platforms because of undefined references to __nldbl_fprintf and
+>> __nldbl_sprintf during compile.
+>>
+>> Platform tqm8540 (ppce500, just to try some other ppc cpu) fails in
+>> gcc-4.3.3 compile, too.  Possible related to this:
+>>
+>> endian.h:34:4: warning: #warning Cannot determine current byte order,
+>> assuming big-endian.
+>>
+>> So currently .dev should be unbuildable for ppc users?  Without
+>> selecting a non-default compiler that is.
 >
-> And do not get flooded by Wis=B3a :D
->>
+> I thought I pinned powerpc at 4.1.1, but it turns out that it was only
+> for ppc405:
 >
-> Luckily I am far away from it...
+> ANGSTROM_GCC_VERSION_ppc405         ?= "4.1.1"
 >
->
-> 2010/5/21 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
->
-> Dnia pi=B1tek, 21 maja 2010 o 11:48:24 Grzegorz Toporek napisa=B3(a):
->>
->> > I would love to work with angstrom, however I'm using Colibri evaluati=
-on
->> > board with Intel(R) PXA270 Processor (this is a students project and I
->> can't
->> > change it). Is it possible to run system built for angstrom on my boar=
-d
->> or
->> > I just miss something?!
->>
->> Angstrom supports nearly every board which OpenEmbedded supports. Colibr=
-i
->> is
->> just another device. Build Angstrom for it, use it and you will soon fin=
-d
->> out
->> how much work you do not have to do due to feeds with already built
->> software.
->>
->> Making own distribution and then properly maintain it is lot of work and=
- I
->> would never suggest that for someone who just started with OpenEmbedded.
->>
->> Also one thing: do not use tune-iwmmxt for Colibri. This does not give a=
-ny
->> special improvements for system. Add "iwmmxt" to MACHINE_FEATURES like i=
-t
->> is
->> in few machines already - this will give you optimized versions of those
->> packages where it is really worth to enable that.
->>
->> And do not get flooded by Wis=B3a :D
->>
->> Regards,
->> --
->> JID:      hrw@jabber.org
->> Website:  http://marcin.juszkiewicz.com.pl/
->> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
+> Feel free to send patches to add that for other ppc platforms.
+
+I'd loved to but it should be a usable version for ppc603e.  We have used 
+ELDK gcc 3.3.3 in the past so that version would be a known good one.
+
+[stable/2009]
+4.2.4  wrong result
+4.1.1  wrong result (see first posting)
+3.3.3  doesn't compile, obstack macro problem
+3.3.4  doesn't compile, signal.h stack_t problem
+
+[org.openembedded.dev]
+4.3.3  doesn't compile
+4.1.1  doesn't compile
+4.2.4  doesn't compile, libstdc++ problem
+
+All compilations in the .dev branch used MACHINE=n1200, in stable I used 
+our bluepro.  Always a clean build of meta-toolchain.  I know that there 
+are currently problems in .dev so I will wait/monitor the list and try to 
+get 3.3.3 and something newer than 4.3.3. to compile.
+
+Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
+
 
