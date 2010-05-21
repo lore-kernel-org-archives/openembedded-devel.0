@@ -1,33 +1,34 @@
 Received: from out3.smtp.messagingengine.com ([66.111.4.27])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OFQBz-0005PG-BY
+	(envelope-from <vjensen@gmx.de>) id 1OFSDT-0006ZF-SH
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 13:15:05 +0200
+	Fri, 21 May 2010 15:24:48 +0200
 Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id C4D0BF6241
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 99475F7C0E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 07:11:01 -0400 (EDT)
+	Fri, 21 May 2010 09:19:51 -0400 (EDT)
 Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Fri, 21 May 2010 07:11:01 -0400
+	by compute1.internal (MEProxy); Fri, 21 May 2010 09:19:51 -0400
 DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
 	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=4yCmZk70G5kh8sOPi7l33Nmmz8U=;
-	b=FLTcWLFHyvjmhO7+1JZHm2R/NUkeykN9Co/Ow/xTYs/LMlVL7srMNQ6SZacPeY+h2/kg+/Ff5eMXnZI5Cyms6KG1kDvgW1txqj3MBROtFAAHhaOqgOdtmbZ8ox3S4MR0+4uyFxWZhgfjiV9d8u71ijnmsUDj/KiDq6ZOePVg5YE=
-X-Sasl-enc: uYswypBhi4JqXgCN/grFMNGx10IPRCJ3P21nYSiPMMC3 1274440261
+	s=smtpout; bh=WenDeWUgHNHOx/21eUoc2eRKG5E=;
+	b=jsEsru0zR5r640YJwgDxLrutP9x/jCrewUZjK8ZgyIZkCupWK8G68d6YMqEpagypkONIJp4m5N+qySwTSC4TVlKBtcSo5ZJbH6Vkme5Q2n4ghLjWVTBQ/aRDmKXN1A6aI1bwRJtLt+A5q/Cjy2NOkgCJwymzq3syqDDZyQ5YTcc=
+X-Sasl-enc: ATtMko4DcB4aBCux6/denDDVW5YgFSH+OlAb+BeenBfz 1274447991
 Received: from [192.168.1.34] (hnvr-4d078ae5.pool.mediaWays.net [77.7.138.229])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 1722047A98
+	by mail.messagingengine.com (Postfix) with ESMTPSA id E2B63473AE
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 07:11:00 -0400 (EDT)
-Date: Fri, 21 May 2010 13:12:25 +0200 (CEST)
+	Fri, 21 May 2010 09:19:50 -0400 (EDT)
+Date: Fri, 21 May 2010 15:21:15 +0200 (CEST)
 From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <ht14oq$ok6$1@dough.gmane.org>
-Message-ID: <alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
+In-Reply-To: <alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
+Message-ID: <alpine.LNX.2.00.1005211518470.5274@asterix.crazy-teaparty.dyndns.org>
 References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
 	<4BF3C9B8.8080501@mlbassoc.com>
 	<alpine.LNX.2.00.1005191335020.21508@asterix.crazy-teaparty.dyndns.org>
 	<alpine.LNX.2.00.1005191726560.21508@asterix.crazy-teaparty.dyndns.org>
 	<ht14oq$ok6$1@dough.gmane.org>
+	<alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
 User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
 Jabber-ID: vitus_jensen@gmx.de
 X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
@@ -56,94 +57,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 11:15:06 -0000
+X-List-Received-Date: Fri, 21 May 2010 13:24:48 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Wed, 19 May 2010, Koen Kooi wrote:
+On Fri, 21 May 2010, Vitus Jensen wrote:
 
-> On 19-05-10 17:46, Vitus Jensen wrote:
->> On Wed, 19 May 2010, Vitus Jensen wrote:
->>> On Wed, 19 May 2010, Gary Thomas wrote:
->>>>  On 05/19/2010 03:38 AM, Vitus Jensen wrote:
->>>>>>   We noticed a strange problem with C++ code casting long long
->>>> variables
->>>>>   to double, as a lot of qt-embedded code is doing.
->>>>>>   =================
->>>>>   double
->>>>>   convert(long long l)
->>>>>   {
->>>>>   return (double)l; // or double(l)
->>>>>   }
->>>>>>   int
->>>>>   main(int argc, char * argv[])
->>>>>   {
->>>>>   long long l = 10;
->>>>>   double f;
->>>>>>   f = convert(l);
->>>>>   printf("convert: %lld => %f\n", l, f);
->>>>>   return 0;
->>>>>   }
->>>>>   ====================
->>>>>>   output:
->>>>>   convert: 10 => 0.000000
->>>>>>   C++ compiled via powerpc-angstrom-linux-g++ gives the above
->>>> result.
->>>>>   Compiling the same code as C using powerpc-angstrom-linux-gcc works
->>>>>   fine. But when looking at the assembler code both compiler produce
->>>>>   virtually identical output and both call __floatdidf to do the
->>>> actual
->>>>>   conversion. Very strange, has anyone ever seen similar effects?
->>>>
->>>>  Is this from a recent tree (i.e. post Richard Purdie's restructuring)?
->>>>
->>>>  I've seen similar problems with C++ code on Poky which uses the same
->>>>  changes.
->>>
->>> No, I'm building everything from the stable branch.  There were some
->>> commits cherry-picked from .dev but those only add Qt 4.5.2.
->>>
->>> Poky is ARM only, right?  Perhaps it would be helpfull to build a
->>> compiler from .dev and for a widely used powerpc-platform?  How does
->>> n1200 sound? It uses the same ppc603e.
+> On Wed, 19 May 2010, Koen Kooi wrote:
+>>  On 19-05-10 17:46, Vitus Jensen wrote:
+>> >  On Wed, 19 May 2010, Vitus Jensen wrote:
+>> > >  On Wed, 19 May 2010, Gary Thomas wrote:
+>> > > >   On 05/19/2010 03:38 AM, Vitus Jensen wrote:
+
+...
+>> >  So currently .dev should be unbuildable for ppc users?  Without
+>> >  selecting a non-default compiler that is.
 >>
->> Unfortunately .dev switched to gcc-4.3.3 in the meantime which fails for
->> ppc603e platforms because of undefined references to __nldbl_fprintf and
->> __nldbl_sprintf during compile.
+>>  I thought I pinned powerpc at 4.1.1, but it turns out that it was only
+>>  for ppc405:
 >>
->> Platform tqm8540 (ppce500, just to try some other ppc cpu) fails in
->> gcc-4.3.3 compile, too.  Possible related to this:
+>>  ANGSTROM_GCC_VERSION_ppc405         ?= "4.1.1"
 >>
->> endian.h:34:4: warning: #warning Cannot determine current byte order,
->> assuming big-endian.
->>
->> So currently .dev should be unbuildable for ppc users?  Without
->> selecting a non-default compiler that is.
+>>  Feel free to send patches to add that for other ppc platforms.
 >
-> I thought I pinned powerpc at 4.1.1, but it turns out that it was only
-> for ppc405:
+> I'd loved to but it should be a usable version for ppc603e.  We have used 
+> ELDK gcc 3.3.3 in the past so that version would be a known good one.
 >
-> ANGSTROM_GCC_VERSION_ppc405         ?= "4.1.1"
+> [stable/2009]
+> 4.2.4  wrong result
+> 4.1.1  wrong result (see first posting)
+> 3.3.3  doesn't compile, obstack macro problem
+> 3.3.4  doesn't compile, signal.h stack_t problem
 >
-> Feel free to send patches to add that for other ppc platforms.
+> [org.openembedded.dev]
+> 4.3.3  doesn't compile
+> 4.1.1  doesn't compile
+> 4.2.4  doesn't compile, libstdc++ problem
+>
+> All compilations in the .dev branch used MACHINE=n1200, in stable I used our 
+> bluepro.  Always a clean build of meta-toolchain.  I know that there are 
+> currently problems in .dev so I will wait/monitor the list and try to get 
+> 3.3.3 and something newer than 4.3.3. to compile.
 
-I'd loved to but it should be a usable version for ppc603e.  We have used 
-ELDK gcc 3.3.3 in the past so that version would be a known good one.
+Faster than thought: 4.4.4 compiles for n1200 (ppc603e) on .dev and 
+produces correct output.  (double)(long long)10 equals 10.0.
 
-[stable/2009]
-4.2.4  wrong result
-4.1.1  wrong result (see first posting)
-3.3.3  doesn't compile, obstack macro problem
-3.3.4  doesn't compile, signal.h stack_t problem
-
-[org.openembedded.dev]
-4.3.3  doesn't compile
-4.1.1  doesn't compile
-4.2.4  doesn't compile, libstdc++ problem
-
-All compilations in the .dev branch used MACHINE=n1200, in stable I used 
-our bluepro.  Always a clean build of meta-toolchain.  I know that there 
-are currently problems in .dev so I will wait/monitor the list and try to 
-get 3.3.3 and something newer than 4.3.3. to compile.
+So await my patch.
 
 Vitus
 
