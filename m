@@ -1,40 +1,34 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OFZ1j-0001N2-DK
+	(envelope-from <raj.khem@gmail.com>) id 1OFZ3w-0001Sw-2x
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 22:41:03 +0200
-Received: by iwn2 with SMTP id 2so1448056iwn.6
+	Fri, 21 May 2010 22:43:21 +0200
+Received: by iwn2 with SMTP id 2so1449957iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 13:37:01 -0700 (PDT)
+	Fri, 21 May 2010 13:39:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=AuSMfEdwWktup7IGklv3eef04bT2+Ef7mVd3uh6xmG0=;
-	b=s2R0RXyULoqAyaRxW+JxqHZlKoZWd0cpdO/H56Lv8GL2+9nRDiRLH77KHZsqI1arop
-	J2TFU7gJWxg/PYJU3Q6zR2jTZ9JvpB2Cq/P7gmGncf5rS6dutDCQJymy5PEvSu0zbXHl
-	qUsWXpc8x5zvxwFQkI/csmmEFf8nmIwUqP+IQ=
+	bh=nesmBVJN80rRKkgV73By/nQxRpwz4BKO28/ETqxjcYo=;
+	b=hS1vGmmsuKMdDMoJs/oglre2gMIQWgMXecKJfwNbSwaFrvgOLLI4CQrqryeaF3O+/R
+	ipgdisFYEEaBZfjaN/6o4a2MT3WikA/uPxR84uwuMGAObyt1MEYDjMcGZ0Ys0x3IDuZC
+	y5IxofmSd0UmxGghQZMo1g/qYq8hj3xLfPxKs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=hVP06mvTr9MYjR3MX59XJ+RkhrHpV4BKpwoL8/NNGSFztbNHdjFcy6a5Cck4RsZdNV
-	9PBfREqy3Z38/t13oKEoWaXa9JL3vRgVAViNfFPFjy6snBN+hg25gdZqhaIwcKSQvA0i
-	eAoCqaK808DeInz5wViHIr4N2970umzhKzvcc=
+	b=q/XTy1VTYZTP785t1xtQihpqyE+zXkW7bOonNtR6yX3yqaiVcXTiZqnmVdlXpdAKiD
+	OKNf16V0CgPivvKAqzfVsjl6g0Y9GXs4A5LNUcQAda6/lDZjQxpzFUbkBFJwor6r61c8
+	0m6bjcQ5LSpXV7nr3O7Uh2hl/i7KiZlpA9Wr8=
 MIME-Version: 1.0
-Received: by 10.231.148.130 with SMTP id p2mr2328950ibv.11.1274474221278; Fri, 
-	21 May 2010 13:37:01 -0700 (PDT)
-Received: by 10.231.30.67 with HTTP; Fri, 21 May 2010 13:37:01 -0700 (PDT)
-In-Reply-To: <alpine.LNX.2.00.1005211537200.5274@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
-	<4BF3C9B8.8080501@mlbassoc.com>
-	<alpine.LNX.2.00.1005191335020.21508@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005191726560.21508@asterix.crazy-teaparty.dyndns.org>
-	<ht14oq$ok6$1@dough.gmane.org>
-	<alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005211518470.5274@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005211537200.5274@asterix.crazy-teaparty.dyndns.org>
-Date: Fri, 21 May 2010 13:37:01 -0700
-Message-ID: <AANLkTim5DgTLfF1duohbONBtWCc1ASKfcACiJ2M66rr3@mail.gmail.com>
+Received: by 10.231.178.135 with SMTP id bm7mr1807389ibb.73.1274474357813; 
+	Fri, 21 May 2010 13:39:17 -0700 (PDT)
+Received: by 10.231.30.67 with HTTP; Fri, 21 May 2010 13:39:17 -0700 (PDT)
+In-Reply-To: <1274452686-17891-1-git-send-email-vjensen@gmx.de>
+References: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
+	<1274452686-17891-1-git-send-email-vjensen@gmx.de>
+Date: Fri, 21 May 2010 13:39:17 -0700
+Message-ID: <AANLkTilrTp4aqvXB8ggicStZnp3LYj9474x5KedKNeUd@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -45,7 +39,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: powerpc-g++ 4.2.4 problem casting long long to double
+Subject: Re: [PATCH v3 1/3] libsocketcan: new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,83 +53,118 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 20:41:04 -0000
+X-List-Received-Date: Fri, 21 May 2010 20:43:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, May 21, 2010 at 6:40 AM, Vitus Jensen <vjensen@gmx.de> wrote:
-> On Fri, 21 May 2010, Vitus Jensen wrote:
->
->> On Fri, 21 May 2010, Vitus Jensen wrote:
->>
->>> =A0On Wed, 19 May 2010, Koen Kooi wrote:
->>> > =A0 On 19-05-10 17:46, Vitus Jensen wrote:
->>> > > =A0 On Wed, 19 May 2010, Vitus Jensen wrote:
->>> > > > =A0 On Wed, 19 May 2010, Gary Thomas wrote:
->>> > > > > =A0 =A0On 05/19/2010 03:38 AM, Vitus Jensen wrote:
->>
->> ...
->>>
->>> > > =A0 So currently .dev should be unbuildable for ppc users? =A0Witho=
-ut
->>> > > =A0 selecting a non-default compiler that is.
->>> > > =A0 I thought I pinned powerpc at 4.1.1, but it turns out that it w=
-as
->>> > > only
->>> > =A0 for ppc405:
->>> > > =A0 ANGSTROM_GCC_VERSION_ppc405 =A0 =A0 =A0 =A0 ?=3D "4.1.1"
->>> > > =A0 Feel free to send patches to add that for other ppc platforms.
->>>
->>> =A0I'd loved to but it should be a usable version for ppc603e. =A0We ha=
-ve
->>> used
->>> =A0ELDK gcc 3.3.3 in the past so that version would be a known good one=
-.
->>>
->>> =A0[stable/2009]
->>> =A04.2.4 =A0wrong result
->>> =A04.1.1 =A0wrong result (see first posting)
->>> =A03.3.3 =A0doesn't compile, obstack macro problem
->>> =A03.3.4 =A0doesn't compile, signal.h stack_t problem
->>>
->>> =A0[org.openembedded.dev]
->>> =A04.3.3 =A0doesn't compile
->>> =A04.1.1 =A0doesn't compile
->>> =A04.2.4 =A0doesn't compile, libstdc++ problem
->>>
->>> =A0All compilations in the .dev branch used MACHINE=3Dn1200, in stable =
-I used
->>> =A0our bluepro. =A0Always a clean build of meta-toolchain. =A0I know th=
-at there
->>> =A0are currently problems in .dev so I will wait/monitor the list and t=
-ry
->>> to
->>> =A0get 3.3.3 and something newer than 4.3.3. to compile.
->>
->> Faster than thought: 4.4.4 compiles for n1200 (ppc603e) on .dev and
->> produces correct output. =A0(double)(long long)10 equals 10.0.
->
-> Only at -O2 and -O3, at those levels the internal function __floatdidf is=
-n't
-> called (previously it was only -O3).
+On Fri, May 21, 2010 at 7:38 AM, Vitus Jensen <vjensen@gmx.de> wrote:
+> Build pengutronix' libsocketcan (netlink interface), used
+> by newer versions of canutils. =A0can_netlink.h is really
+> linux/can/netlink.h from linux-libc-headers but installed
+> here to be independ of staged linux-libc-headers versions.
 
-I dont think thats the case. It always generates the call to __floatdidf
+is there any reason to have an encapsulated copy of this header
+besides being independent ?
 
-At -O1 and below it is called and
-> still produces incorrect results :-( Oh well, I give up for now.
+> libsocketcan 0.0.8 automatically installs can_netlink.h,
+> version 0.0.7 is patched to do so.
 >
-
-All I have to test is qemu running OE/ppc603e. So i tried this test on
-qemu/uclibc and it seems to
-work for me at O1/O2/O3 using gcc 4.4.4 and minimal-uclibc distro. I
-would also try with eglibc
-but I need to build it.
-
-> Vitus
+> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+> ---
+> =A0.../socketcan/files/install-can_netlink.h.patch =A0 =A0| =A0 21 ++++++=
+++++++++++++++
+> =A0recipes/socketcan/libsocketcan.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =
+=A0 16 +++++++++++++++
+> =A0recipes/socketcan/libsocketcan_0.0.7.bb =A0 =A0 =A0 =A0 =A0 =A0| =A0 =
+=A07 ++++++
+> =A0recipes/socketcan/libsocketcan_0.0.8.bb =A0 =A0 =A0 =A0 =A0 =A0| =A0 =
+=A04 +++
+> =A04 files changed, 48 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/socketcan/files/install-can_netlink.h.patch
+> =A0create mode 100644 recipes/socketcan/libsocketcan.inc
+> =A0create mode 100644 recipes/socketcan/libsocketcan_0.0.7.bb
+> =A0create mode 100644 recipes/socketcan/libsocketcan_0.0.8.bb
 >
+> diff --git a/recipes/socketcan/files/install-can_netlink.h.patch b/recipe=
+s/socketcan/files/install-can_netlink.h.patch
+> new file mode 100644
+> index 0000000..36f5e10
+> --- /dev/null
+> +++ b/recipes/socketcan/files/install-can_netlink.h.patch
+> @@ -0,0 +1,21 @@
+> +commit 2470d91a6254b062aae8ab6120795a0f28344687
+> +Author: Vitus Jensen <vitus@vitus.devnet.local>
+> +Date: =A0 Tue May 18 16:59:01 2010 +0200
+> +
+> + =A0 =A0install can_netlink.h
+> +
+> +diff --git a/include/GNUmakefile.am b/include/GNUmakefile.am
+> +index 4ba2798..eb35a3a 100644
+> +--- a/include/GNUmakefile.am
+> ++++ b/include/GNUmakefile.am
+> +@@ -1,8 +1,6 @@
+> +-noinst_HEADERS =3D \
+> +- =A0 =A0 =A0can_netlink.h
+> +-
+> + nobase_include_HEADERS =3D \
+> +- =A0 =A0 =A0libsocketcan.h
+> ++ =A0 =A0 =A0libsocketcan.h =A0\
+> ++ =A0 =A0 =A0can_netlink.h
+> +
+> + MAINTAINERCLEANFILES =3D \
+> + =A0 =A0 =A0 libsocketcan_config.h.in \
+> diff --git a/recipes/socketcan/libsocketcan.inc b/recipes/socketcan/libso=
+cketcan.inc
+> new file mode 100644
+> index 0000000..367766c
+> --- /dev/null
+> +++ b/recipes/socketcan/libsocketcan.inc
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION =3D "Control basic functions in socketcan from userspace"
+> +AUTHOR =3D "Luotao Fu"
+> +HOMEPAGE =3D "http://www.pengutronix.de"
+> +SECTION =3D "libs/network"
+> +PRIORITY =3D "optional"
+> +LICENSE =3D "LGPL"
+> +
+> +TAG =3D "v${PV}"
+> +INC_PR =3D "r0"
+> +
+> +SRC_URI =3D "git://git.pengutronix.de/git/tools/libsocketcan.git;protoco=
+l=3Dgit;tag=3D${TAG} \
+> + =A0 =A0 =A0 "
+> +
+> +S =3D "${WORKDIR}/git"
+> +
+> +inherit autotools_stage pkgconfig
+> diff --git a/recipes/socketcan/libsocketcan_0.0.7.bb b/recipes/socketcan/=
+libsocketcan_0.0.7.bb
+> new file mode 100644
+> index 0000000..7dd4fef
+> --- /dev/null
+> +++ b/recipes/socketcan/libsocketcan_0.0.7.bb
+> @@ -0,0 +1,7 @@
+> +TAG =3D "v${PV}"
+> +require libsocketcan.inc
+> +
+> +PR =3D "${INC_PR}.0"
+> +
+> +SRC_URI +=3D "file://install-can_netlink.h.patch;patch=3D1 \
+> + =A0 =A0 =A0 "
+> diff --git a/recipes/socketcan/libsocketcan_0.0.8.bb b/recipes/socketcan/=
+libsocketcan_0.0.8.bb
+> new file mode 100644
+> index 0000000..5598a0f
+> --- /dev/null
+> +++ b/recipes/socketcan/libsocketcan_0.0.8.bb
+> @@ -0,0 +1,4 @@
+> +TAG =3D "v${PV}"
+> +require libsocketcan.inc
+> +
+> +PR =3D "${INC_PR}.0"
 > --
-> Vitus Jensen, Hannover, Germany, Universe (current)
-> pgp public key available from keyservers
+> 1.6.4.4
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
