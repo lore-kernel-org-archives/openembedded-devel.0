@@ -1,40 +1,41 @@
-Received: from mail-yw0-f188.google.com ([209.85.211.188])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OFPO4-0007KF-Hq
+	(envelope-from <top.grzechu@gmail.com>) id 1OFPfz-00044z-UJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 12:23:29 +0200
-Received: by ywh26 with SMTP id 26so413019ywh.12
+	Fri, 21 May 2010 12:42:00 +0200
+Received: by fxm8 with SMTP id 8so705353fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 03:19:25 -0700 (PDT)
+	Fri, 21 May 2010 03:37:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:date:message-id
 	:subject:from:to:content-type;
-	bh=bxPHQX4Nw3ygFzgJY7owRji3lxHvIK3Jc9JEJeLqF3A=;
-	b=iBMD+9083Yoa5YGGQhmv8V0wHX8rIalRQPkLQu7eol1IAydpracmqUhgfVrE2Fhhdl
-	OVYvsbMvxO3qnr1x0c6D9e81WAu55gnvKvE/CDZ7qw09MQisArLs64QUclcr9vdC0lTn
-	Hy3spub8jlf2LUYr1FSPZ4C79l6O6EH5X6Bc0=
+	bh=UZOXdXfzyxKS38RLKWF3kITP7ciGo+ZtmO4Gfa0ujMM=;
+	b=nwe/K2ffniK4rkk5SzCnkO6mMz3Av6JbKsUP2sZroaQrWvqtkgqVyolZ5nW6+OHoHE
+	ZZtih6yoz3bGXmPf+hip6NHVr83v2aiOogSzSsEJBqdJpOSIp/kKlYK38bHciYT74bsG
+	4KjMurIZtsuVA0j2lGtwZyAeKUhIk18v7MHRY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=f6ZviV1oIIBmlNo7IUm5z8QSQF6s1yEJQObWisBhFN/dDgiPG7p/vX0Nvddz5Dmkkb
-	yf8QFrYuVxfKvf9Q/ZlSNpJfxMOS3AZNTfPcTWXa6ZXqk6ZNSx0HwFv7kO16UdrXwA+Z
-	W80nBirrUKhwgfzASvsSggKMoSNH2xuETnbBg=
+	b=VthAjX3gNFVC6m/xxXfujFyIun3ZFyq5UVC2lXsduIsd4i/b7joR1MfT/owh2y6MYk
+	nQpcQ8Jun1hqmO5ADY5y1EoT2LlulMbKJvYm22zRPuR7BSRuNiz7t7zvseK/HFSlZ4JG
+	KBY1Q3NNB/vpmz1zrk7tGOnRByiOn1atc330I=
 MIME-Version: 1.0
-Received: by 10.100.246.26 with SMTP id t26mr1907570anh.112.1274437164895; 
-	Fri, 21 May 2010 03:19:24 -0700 (PDT)
-Received: by 10.100.132.11 with HTTP; Fri, 21 May 2010 03:19:24 -0700 (PDT)
-Date: Fri, 21 May 2010 12:19:24 +0200
-Message-ID: <AANLkTilSGknB7dURJ4q_WCu1dVwP88KtkQ-lORJNPNua@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+Received: by 10.204.137.89 with SMTP id v25mr10136bkt.13.1274438277066; Fri, 
+	21 May 2010 03:37:57 -0700 (PDT)
+Received: by 10.204.76.131 with HTTP; Fri, 21 May 2010 03:37:26 -0700 (PDT)
+Date: Fri, 21 May 2010 12:37:26 +0200
+Message-ID: <AANLkTinLm-qzDz71WT2ji8DrZvWNlsAs2q0VqQa9UGVL@mail.gmail.com>
+From: Grzegorz Toporek <top.grzechu@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.188
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: top.grzechu@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] linux-kexecboot: remove unused versions asap
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Old system on Colibri - new cross-compilers from Angstrom, shall it 	works?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +49,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 10:23:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 21 May 2010 10:42:00 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
+I have one important question.
 
-I'd like to merge the linux-kexecboot recipes in /linux soon.
-Kernel 2.6.34 has been released, so before I propose to add this last
-one and remove older unused versions.
+On Colibri I have an old system already installed (Linux version 2.6.24.7,
+gcc 4.2.2). When I'll build my own one for angstrom, thus getting
+cross-compilers, can I just simply run programs compiled for angstrom  on
+Colibri board?
 
-For Zaurus unfortunately we'll have to keep around 2.6.24 and 2.6.26
-for a while.
-I ignore the status for omap and linux-hh machines: do these work with
-2.6.34? Can we remove older kernels?
-About qemu in COMPATIBLE_MACHINE: does qemu survive to kexec?
+Lets say I will cross compile sth using cross-compilers from directory
+/tmp/cross/bin and then upload it on my board. Shall this work for me?
+Should I change gcc version in /conf/distro/angstrom-2008.1.conf to 4.2.2?
 
-Please help cleaning COMPATIBLE_MACHINE and DEFAULT_PREFERENCE for your machine.
+Looking forward to your reply.
 
-Thanks
 
-Andrea
+Kind Regards,
+Grzegorz
 
+
+W dniu 21 maja 2010 12:08 u=BFytkownik Grzegorz Toporek <top.grzechu@gmail.=
+com
+> napisa=B3:
+
+> Thanks, I'll do as you recommend.
+>
+> And do not get flooded by Wis=B3a :D
+>>
+>
+> Luckily I am far away from it...
+>
+>
+> 2010/5/21 Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+>
+> Dnia pi=B1tek, 21 maja 2010 o 11:48:24 Grzegorz Toporek napisa=B3(a):
+>>
+>> > I would love to work with angstrom, however I'm using Colibri evaluati=
+on
+>> > board with Intel(R) PXA270 Processor (this is a students project and I
+>> can't
+>> > change it). Is it possible to run system built for angstrom on my boar=
+d
+>> or
+>> > I just miss something?!
+>>
+>> Angstrom supports nearly every board which OpenEmbedded supports. Colibr=
+i
+>> is
+>> just another device. Build Angstrom for it, use it and you will soon fin=
+d
+>> out
+>> how much work you do not have to do due to feeds with already built
+>> software.
+>>
+>> Making own distribution and then properly maintain it is lot of work and=
+ I
+>> would never suggest that for someone who just started with OpenEmbedded.
+>>
+>> Also one thing: do not use tune-iwmmxt for Colibri. This does not give a=
+ny
+>> special improvements for system. Add "iwmmxt" to MACHINE_FEATURES like i=
+t
+>> is
+>> in few machines already - this will give you optimized versions of those
+>> packages where it is really worth to enable that.
+>>
+>> And do not get flooded by Wis=B3a :D
+>>
+>> Regards,
+>> --
+>> JID:      hrw@jabber.org
+>> Website:  http://marcin.juszkiewicz.com.pl/
+>> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
