@@ -1,40 +1,29 @@
-Received: from out3.smtp.messagingengine.com ([66.111.4.27])
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OFTQT-0006CI-Az
-	for Openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 16:42:15 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 1A0F9F7E15;
-	Fri, 21 May 2010 10:37:29 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Fri, 21 May 2010 10:37:29 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	s=smtpout; bh=RNtdkUTphj6hJ9xIHxDFu3v0+3o=;
-	b=TrK+COYlvvyG4YGdQHtgb0dTK9jiqo6hUNe5UvMORkWNIJUplCQBG5xXCOamuNHTBPP3MoJkGuVmfsEk83o/aLM+Xsd2+6kSBFp14wDBPEto6cexNmGbBkcxq53uQPD0i0ad0YV1gOEjwO1Zu32E20wYx9wxzBVb36YMBuzGQRY=
-X-Sasl-enc: 9kJedD5i+qGyozxoHKNI330dtQ9whGpV+RBgse9YXgNZ 1274452645
-Received: from localhost.localdomain (hnvr-4d078ae5.pool.mediaWays.net
-	[77.7.138.229])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 53D1E58005;
-	Fri, 21 May 2010 10:37:25 -0400 (EDT)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Date: Fri, 21 May 2010 16:38:05 +0200
-Message-Id: <1274452686-17891-2-git-send-email-vjensen@gmx.de>
-X-Mailer: git-send-email 1.6.4.4
-In-Reply-To: <1274452686-17891-1-git-send-email-vjensen@gmx.de>
-References: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
-	<1274452686-17891-1-git-send-email-vjensen@gmx.de>
-X-SA-Exim-Connect-IP: 66.111.4.27
-X-SA-Exim-Mail-From: vjensen@gmx.de
+	(envelope-from <gary@mlbassoc.com>) id 1OFTZX-0006dK-DN
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 16:51:36 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 979FE1660618; Fri, 21 May 2010 08:47:32 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 3A81F16604F5;
+	Fri, 21 May 2010 08:47:32 -0600 (MDT)
+Message-ID: <4BF69D04.5060506@mlbassoc.com>
+Date: Fri, 21 May 2010 08:47:32 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vitus Jensen <vjensen@gmx.de>
-Subject: [PATCH v3 2/3] canutils: new recipes
+Subject: staging problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,66 +37,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 14:42:16 -0000
+X-List-Received-Date: Fri, 21 May 2010 14:51:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add canutils (PTX flavour) 4.0.4 and 4.0.5 as alternatives
-to socketcan-utils-test.  Version 4.x requires libsocketcan
-and supports kernel 2.6.30 and above.
+Trying a clean build
+   MACHINE="beagleboard"
+   DISTRO="angstrom-2008.1"
+   org.openembedded.dev 2c153f33b8ebb807a622ad9ae92ed5341a356740
 
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- recipes/socketcan/canutils.inc      |   16 ++++++++++++++++
- recipes/socketcan/canutils_4.0.4.bb |    4 ++++
- recipes/socketcan/canutils_4.0.5.bb |    4 ++++
- 3 files changed, 24 insertions(+), 0 deletions(-)
- create mode 100644 recipes/socketcan/canutils.inc
- create mode 100644 recipes/socketcan/canutils_4.0.4.bb
- create mode 100644 recipes/socketcan/canutils_4.0.5.bb
+I get failures like this (in many packages):
+   /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:138: error: expected '=', ',', ';', 'asm' or '__attribute__' before 're_void'
+   /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:298: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+   /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:307: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+   /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:309: error: expected '=', ',', ';', 'asm' or '__attribute__' before 're_void'
+   /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:310: error: expected '=', ',', ';', 'asm' or '__attribute__' before 'size_t'
 
-diff --git a/recipes/socketcan/canutils.inc b/recipes/socketcan/canutils.inc
-new file mode 100644
-index 0000000..596785f
---- /dev/null
-+++ b/recipes/socketcan/canutils.inc
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "canutils (PTX flavour)"
-+AUTHOR = "Luotao Fu"
-+HOMEPAGE = "http://www.pengutronix.de"
-+SECTION = "console/network"
-+PRIORITY = "optional"
-+LICENSE = "LGPL"
-+DEPENDS = "libsocketcan"
-+RCONFLICTS = "socketcan-utils-test"
-+INC_PR = "r0"
-+
-+SRC_URI = "git://git.pengutronix.de/git/tools/canutils.git;protocol=git;tag=${TAG} \
-+        "
-+
-+S = "${WORKDIR}/git"
-+
-+inherit autotools
-diff --git a/recipes/socketcan/canutils_4.0.4.bb b/recipes/socketcan/canutils_4.0.4.bb
-new file mode 100644
-index 0000000..9ddb697
---- /dev/null
-+++ b/recipes/socketcan/canutils_4.0.4.bb
-@@ -0,0 +1,4 @@
-+TAG = "canutils-${PV}"
-+require canutils.inc
-+
-+PR = "${INC_PR}.0"
-diff --git a/recipes/socketcan/canutils_4.0.5.bb b/recipes/socketcan/canutils_4.0.5.bb
-new file mode 100644
-index 0000000..c084bcd
---- /dev/null
-+++ b/recipes/socketcan/canutils_4.0.5.bb
-@@ -0,0 +1,4 @@
-+TAG = "v${PV}"
-+require canutils.inc
-+
-+PR = "${INC_PR}.0"
+The problem is that the compiler include file <regex.h> is
+not the standard/default one, rather the file from tcl!
+I replaced the bogus regex.h file with the correct one and
+my build completes & runs.
+
+* Any ideas how/why this happens?  I'm sure it has to do with
+   the recent RP changes.
+
 -- 
-1.6.4.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
