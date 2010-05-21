@@ -1,46 +1,44 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <daniel.xntian@gmail.com>) id 1OFIdF-0003Yi-PI
+	(envelope-from <raj.khem@gmail.com>) id 1OFMdk-0004Gn-19
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 05:10:43 +0200
-Received: by vws20 with SMTP id 20so494000vws.6
+	Fri, 21 May 2010 09:27:28 +0200
+Received: by iwn2 with SMTP id 2so788304iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 20 May 2010 20:06:38 -0700 (PDT)
+	Fri, 21 May 2010 00:23:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=JvITO8OFcpnnpm8f/SAXZXZ9TcSrgG9EYcSRP1CPl3I=;
-	b=OjsP37RpGSSvsP0+s8HaskaEaCbUz33x+xQkYL/5hG0HO0MrMnhH6W5VsPoWeSHo7O
-	Z0qVuYo3RXCP+MLJbeMYdsJkR+jvn7iofBbuhOjtAxP5Zr1lUZsyhYa4BB2Cb+H6drxK
-	fjOWyXZZAZw6JNrBye3HFwCU+vHbQ9B+T5/lQ=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=HjojESnFnY2FMOgyPDFhKqF+F/9qV5rvqbsL7wWR5Dw=;
+	b=SEqXi/l5plLG7xUkVc6MPgbYq55m2Vn+zEBOgOrhhR4KR9gTmBDjbuaeqxUD8mQkWs
+	YVFQsJQi+0B3kEHv71GL7SAk9RLApqOjAlVgaOwIn8LvQv3N1XP45ZDASfPNjGXkSHZw
+	u228vANxjX/jsL54GhilGL7afNha8egs3oXEc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=T9aKS0cGLoMfupWU//kaMOI6nnDGWzyRJw9OduOhMMOhXPobonsT24RE95gu0MwDlS
-	GT5i1xmZLdKPGeG9D020MjlwN7gjfEJBXiXgmj94qgjbFvqSMXlU0USJAEJXjAdZevnz
-	UjsOYvqMI8iIGzryhsc9dKU3hn0VzEmAMwlK4=
+	:content-type;
+	b=aYhPX88m2UtnJNqIN99CWxQfSvgfDm5OOOPhO8dTUU1U7eevsMvdz8MLTYmomJ/Q66
+	lG1Jd2QYA5XHZiL8Fmlu+/5PdvHRraNcFGI8d7nJU5IKeLd5pBand2T2TlqA3urLi5WL
+	lOtEnKmSZy+3URT5mFxfUnP8sqN843tFXTL54=
 MIME-Version: 1.0
-Received: by 10.220.60.199 with SMTP id q7mr638086vch.204.1274411198608; Thu, 
-	20 May 2010 20:06:38 -0700 (PDT)
-Received: by 10.220.100.140 with HTTP; Thu, 20 May 2010 20:06:38 -0700 (PDT)
-In-Reply-To: <20100519094209.GH3302@jama>
-References: <AANLkTimeUg2WhglfZE-N2rdYNZ4yehKmR6YSvBL5NIPX@mail.gmail.com>
-	<20100519094209.GH3302@jama>
-Date: Fri, 21 May 2010 11:06:38 +0800
-Message-ID: <AANLkTikMWsFhMyvjKX1D8Zhmu5Iuva1Q9ELU1siIF8Vf@mail.gmail.com>
-From: daniel tian <daniel.xntian@gmail.com>
+Received: by 10.231.150.16 with SMTP id w16mr1258456ibv.42.1274426606403; Fri, 
+	21 May 2010 00:23:26 -0700 (PDT)
+Received: by 10.231.30.67 with HTTP; Fri, 21 May 2010 00:23:26 -0700 (PDT)
+In-Reply-To: <20100521002516.GC29183@gmail.com>
+References: <20100521002808.946c76aa.ospite@studenti.unina.it>
+	<20100521002516.GC29183@gmail.com>
+Date: Fri, 21 May 2010 00:23:26 -0700
+Message-ID: <AANLkTimU5JQEFE8fUjjcUyNNONU3LbODV4YI6CH-1UKd@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: daniel.xntian@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: martin.jansa@gmail.com
-Subject: Re: Does anybody try the e-image-core
+Subject: Re: binutils-cross-sdk_cvs.bb fails in do_install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,42 +52,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 03:10:43 -0000
+X-List-Received-Date: Fri, 21 May 2010 07:27:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/5/19 Martin Jansa <martin.jansa@gmail.com>:
-> On Wed, May 19, 2010 at 05:31:21PM +0800, daniel tian wrote:
->> Hi, guys:
->> =A0 =A0 Now I am working on a project: porting the enlighenment on mips =
-machine.
->> =A0 =A0 The local.conf is configure as db1200 machine which is a mips32
->> little endian arch.
->> =A0 =A0 I have already built a rootfs and kernel from previous
->> openembedded source code.
->> =A0 =A0 But the startx command is not found, so I don't know how to
->> startup the enlightenment desktop, and maybe there have any others
->> packages missing in this rootfs.
+On Thu, May 20, 2010 at 5:25 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On (21/05/10 00:28), Antonio Ospite wrote:
+>> Hi,
+>>
+>> as per subject binutils-cross-sdk_cvs.bb fails to build for
+>> DISTRO=minimal this prevents meta-toolchain to be build from scratch as
+>> well.
+>>
+>> http://tinderbox.openembedded.org/builds/71564/
+>>
+>> Any hints?
 >
-> you can try xserver-nodm-init recipe which provides
-> /etc/init.d/xserver-nodm (no idea if it's part of e-image-core).
+> Does it happen with 2.20 as well ?
 >
-I already built the xserver-nodm-init recipe, and the "opkg install
-xserver-nodm-init_1.0-r11.5_all.ipk" runned on my board.
-but errors happen, here is the message:
 
-Installing xserver-nodm-init (1.0-r11.5) to root...
-Configuring xserver-nodm-init.
- Adding system startup for /etc/init.d/xserver-nodm.
-Starting Xserver
-/etc/rc5.d/S05xserver-nodm: line 35: /etc/X11/Xserver: not found
+To answer myself. It does not fail with 2.20. It should be fixed now
+with commit id 9bd07cffd22f65cb9b7b6f3d0c59939de5da8fb3 please retry.
 
-it seems I still miss something else.
 
-Any ideas?
-Sorry, I am  a novice in this OE.
-
-Thank u very much.
-                                                            daniel
+Thx
+-Khem
 
 
