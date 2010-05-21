@@ -1,41 +1,29 @@
 Received: from out3.smtp.messagingengine.com ([66.111.4.27])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OFSV2-0003Ou-9p
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 15:42:53 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 99A20F7A0F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 09:38:49 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Fri, 21 May 2010 09:38:49 -0400
+	(envelope-from <vjensen@gmx.de>) id 1OFTQQ-0006C6-Em
+	for Openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 16:42:11 +0200
+Received: from compute1.internal (compute1.internal [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 33F66F7D64;
+	Fri, 21 May 2010 10:37:25 -0400 (EDT)
+Received: from heartbeat2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Fri, 21 May 2010 10:37:25 -0400
 DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=jcrNHThZM6xbgL6xxoxLCi85Kq4=;
-	b=pcYq/aVABZxgplgKrvtZH0LKNrABCkGHnhWwAjlIU7M2Q/cZnLXZYHv8NMwAfqXVnYGeKZBIL8D9d1vAVybKGkYmflUMTGd6cVh1ZM+ivandU0e1CQQGWRbKc2v3sSgMMSh09Yj/28F2J28myTxT6z7PJuVyXvaWV6ozNU9vlTM=
-X-Sasl-enc: 47KiCzBENjDwqWmH2APFTjtQxLtYq6uS93dIp9mYs+9l 1274449128
-Received: from [192.168.1.34] (hnvr-4d078ae5.pool.mediaWays.net [77.7.138.229])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id D18EF4E0F08
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 09:38:48 -0400 (EDT)
-Date: Fri, 21 May 2010 15:40:14 +0200 (CEST)
+	h=from:to:cc:subject:date:message-id:in-reply-to:references;
+	s=smtpout; bh=+yWQDstFkLW3+I9Xh931YdcSLog=;
+	b=JKtphmclPF7ViYDdwl9ry2u5j7iDVD/++T92Q+VsYVF4bTSCI8jJZU4YrBtGQvuUSU+PU4Hv8WIVmCWkXcHOj/V4CjOMYP9TgJKCn6+y78W1DGAj2ofwN07L1whrJoxFHJihK3Zo5+mwJW/u5pL1KNFDG+EY1SeSujGSMO4I8BE=
+X-Sasl-enc: UIwadDl4f1z0rQt8DWuPJRiQBy6uUgTEZnVpp/Q6Es0V 1274452644
+Received: from localhost.localdomain (hnvr-4d078ae5.pool.mediaWays.net
+	[77.7.138.229])
+	by mail.messagingengine.com (Postfix) with ESMTPA id 5B22158000;
+	Fri, 21 May 2010 10:37:24 -0400 (EDT)
 From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LNX.2.00.1005211518470.5274@asterix.crazy-teaparty.dyndns.org>
-Message-ID: <alpine.LNX.2.00.1005211537200.5274@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
-	<4BF3C9B8.8080501@mlbassoc.com>
-	<alpine.LNX.2.00.1005191335020.21508@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005191726560.21508@asterix.crazy-teaparty.dyndns.org>
-	<ht14oq$ok6$1@dough.gmane.org>
-	<alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005211518470.5274@asterix.crazy-teaparty.dyndns.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
+To: Openembedded-devel@lists.openembedded.org
+Date: Fri, 21 May 2010 16:38:04 +0200
+Message-Id: <1274452686-17891-1-git-send-email-vjensen@gmx.de>
+X-Mailer: git-send-email 1.6.4.4
+In-Reply-To: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
 X-SA-Exim-Connect-IP: 66.111.4.27
 X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -44,7 +32,8 @@ X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: powerpc-g++ 4.2.4 problem casting long long to double
+Cc: Vitus Jensen <vjensen@gmx.de>
+Subject: [PATCH v3 1/3] libsocketcan: new recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,60 +47,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 13:42:53 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 21 May 2010 14:42:11 -0000
 
-On Fri, 21 May 2010, Vitus Jensen wrote:
+Build pengutronix' libsocketcan (netlink interface), used
+by newer versions of canutils.  can_netlink.h is really
+linux/can/netlink.h from linux-libc-headers but installed
+here to be independ of staged linux-libc-headers versions.
+libsocketcan 0.0.8 automatically installs can_netlink.h,
+version 0.0.7 is patched to do so.
 
-> On Fri, 21 May 2010, Vitus Jensen wrote:
->
->>  On Wed, 19 May 2010, Koen Kooi wrote:
->> >   On 19-05-10 17:46, Vitus Jensen wrote:
->> > >   On Wed, 19 May 2010, Vitus Jensen wrote:
->> > > >   On Wed, 19 May 2010, Gary Thomas wrote:
->> > > > >    On 05/19/2010 03:38 AM, Vitus Jensen wrote:
->
-> ...
->> > >   So currently .dev should be unbuildable for ppc users?  Without
->> > >   selecting a non-default compiler that is.
->> > 
->> >   I thought I pinned powerpc at 4.1.1, but it turns out that it was only
->> >   for ppc405:
->> > 
->> >   ANGSTROM_GCC_VERSION_ppc405         ?= "4.1.1"
->> > 
->> >   Feel free to send patches to add that for other ppc platforms.
->>
->>  I'd loved to but it should be a usable version for ppc603e.  We have used
->>  ELDK gcc 3.3.3 in the past so that version would be a known good one.
->>
->>  [stable/2009]
->>  4.2.4  wrong result
->>  4.1.1  wrong result (see first posting)
->>  3.3.3  doesn't compile, obstack macro problem
->>  3.3.4  doesn't compile, signal.h stack_t problem
->>
->>  [org.openembedded.dev]
->>  4.3.3  doesn't compile
->>  4.1.1  doesn't compile
->>  4.2.4  doesn't compile, libstdc++ problem
->>
->>  All compilations in the .dev branch used MACHINE=n1200, in stable I used
->>  our bluepro.  Always a clean build of meta-toolchain.  I know that there
->>  are currently problems in .dev so I will wait/monitor the list and try to
->>  get 3.3.3 and something newer than 4.3.3. to compile.
->
-> Faster than thought: 4.4.4 compiles for n1200 (ppc603e) on .dev and produces 
-> correct output.  (double)(long long)10 equals 10.0.
+Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+---
+ .../socketcan/files/install-can_netlink.h.patch    |   21 ++++++++++++++++++++
+ recipes/socketcan/libsocketcan.inc                 |   16 +++++++++++++++
+ recipes/socketcan/libsocketcan_0.0.7.bb            |    7 ++++++
+ recipes/socketcan/libsocketcan_0.0.8.bb            |    4 +++
+ 4 files changed, 48 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/socketcan/files/install-can_netlink.h.patch
+ create mode 100644 recipes/socketcan/libsocketcan.inc
+ create mode 100644 recipes/socketcan/libsocketcan_0.0.7.bb
+ create mode 100644 recipes/socketcan/libsocketcan_0.0.8.bb
 
-Only at -O2 and -O3, at those levels the internal function __floatdidf 
-isn't called (previously it was only -O3).  At -O1 and below it is called 
-and still produces incorrect results :-( Oh well, I give up for now.
-
-Vitus
-
+diff --git a/recipes/socketcan/files/install-can_netlink.h.patch b/recipes/socketcan/files/install-can_netlink.h.patch
+new file mode 100644
+index 0000000..36f5e10
+--- /dev/null
++++ b/recipes/socketcan/files/install-can_netlink.h.patch
+@@ -0,0 +1,21 @@
++commit 2470d91a6254b062aae8ab6120795a0f28344687
++Author: Vitus Jensen <vitus@vitus.devnet.local>
++Date:   Tue May 18 16:59:01 2010 +0200
++
++    install can_netlink.h
++
++diff --git a/include/GNUmakefile.am b/include/GNUmakefile.am
++index 4ba2798..eb35a3a 100644
++--- a/include/GNUmakefile.am
+++++ b/include/GNUmakefile.am
++@@ -1,8 +1,6 @@
++-noinst_HEADERS = \
++-	can_netlink.h
++-
++ nobase_include_HEADERS = \
++-	libsocketcan.h	
+++	libsocketcan.h	\
+++	can_netlink.h
++ 
++ MAINTAINERCLEANFILES = \
++ 	libsocketcan_config.h.in \
+diff --git a/recipes/socketcan/libsocketcan.inc b/recipes/socketcan/libsocketcan.inc
+new file mode 100644
+index 0000000..367766c
+--- /dev/null
++++ b/recipes/socketcan/libsocketcan.inc
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Control basic functions in socketcan from userspace"
++AUTHOR = "Luotao Fu"
++HOMEPAGE = "http://www.pengutronix.de"
++SECTION = "libs/network"
++PRIORITY = "optional"
++LICENSE = "LGPL"
++
++TAG = "v${PV}"
++INC_PR = "r0"
++
++SRC_URI = "git://git.pengutronix.de/git/tools/libsocketcan.git;protocol=git;tag=${TAG} \
++	"
++
++S = "${WORKDIR}/git"
++
++inherit autotools_stage pkgconfig
+diff --git a/recipes/socketcan/libsocketcan_0.0.7.bb b/recipes/socketcan/libsocketcan_0.0.7.bb
+new file mode 100644
+index 0000000..7dd4fef
+--- /dev/null
++++ b/recipes/socketcan/libsocketcan_0.0.7.bb
+@@ -0,0 +1,7 @@
++TAG = "v${PV}"
++require libsocketcan.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://install-can_netlink.h.patch;patch=1 \
++	"
+diff --git a/recipes/socketcan/libsocketcan_0.0.8.bb b/recipes/socketcan/libsocketcan_0.0.8.bb
+new file mode 100644
+index 0000000..5598a0f
+--- /dev/null
++++ b/recipes/socketcan/libsocketcan_0.0.8.bb
+@@ -0,0 +1,4 @@
++TAG = "v${PV}"
++require libsocketcan.inc
++
++PR = "${INC_PR}.0"
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+1.6.4.4
+
 
 
