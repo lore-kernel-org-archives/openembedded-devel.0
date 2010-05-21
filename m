@@ -1,45 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OFZ3w-0001Sw-2x
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 22:43:21 +0200
-Received: by iwn2 with SMTP id 2so1449957iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OFZ6u-0001Zq-O8 for openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 22:46:29 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OFZ2y-0001Z2-5O for openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 22:42:20 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 21 May 2010 22:42:20 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 13:39:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=nesmBVJN80rRKkgV73By/nQxRpwz4BKO28/ETqxjcYo=;
-	b=hS1vGmmsuKMdDMoJs/oglre2gMIQWgMXecKJfwNbSwaFrvgOLLI4CQrqryeaF3O+/R
-	ipgdisFYEEaBZfjaN/6o4a2MT3WikA/uPxR84uwuMGAObyt1MEYDjMcGZ0Ys0x3IDuZC
-	y5IxofmSd0UmxGghQZMo1g/qYq8hj3xLfPxKs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=q/XTy1VTYZTP785t1xtQihpqyE+zXkW7bOonNtR6yX3yqaiVcXTiZqnmVdlXpdAKiD
-	OKNf16V0CgPivvKAqzfVsjl6g0Y9GXs4A5LNUcQAda6/lDZjQxpzFUbkBFJwor6r61c8
-	0m6bjcQ5LSpXV7nr3O7Uh2hl/i7KiZlpA9Wr8=
-MIME-Version: 1.0
-Received: by 10.231.178.135 with SMTP id bm7mr1807389ibb.73.1274474357813; 
-	Fri, 21 May 2010 13:39:17 -0700 (PDT)
-Received: by 10.231.30.67 with HTTP; Fri, 21 May 2010 13:39:17 -0700 (PDT)
-In-Reply-To: <1274452686-17891-1-git-send-email-vjensen@gmx.de>
-References: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
-	<1274452686-17891-1-git-send-email-vjensen@gmx.de>
-Date: Fri, 21 May 2010 13:39:17 -0700
-Message-ID: <AANLkTilrTp4aqvXB8ggicStZnp3LYj9474x5KedKNeUd@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 21 May 2010 22:42:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 21 May 2010 22:42:05 +0200
+Message-ID: <ht6r6t$niu$1@dough.gmane.org>
+References: <4BF69D04.5060506@mlbassoc.com>
+	<AANLkTik1pMbRIMYx01oR0eA4xwruqMaSI8qoggbgPHwd@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+In-Reply-To: <AANLkTik1pMbRIMYx01oR0eA4xwruqMaSI8qoggbgPHwd@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3 1/3] libsocketcan: new recipes
+Subject: Re: staging problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,123 +52,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 21 May 2010 20:43:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 21 May 2010 20:46:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, May 21, 2010 at 7:38 AM, Vitus Jensen <vjensen@gmx.de> wrote:
-> Build pengutronix' libsocketcan (netlink interface), used
-> by newer versions of canutils. =A0can_netlink.h is really
-> linux/can/netlink.h from linux-libc-headers but installed
-> here to be independ of staged linux-libc-headers versions.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-is there any reason to have an encapsulated copy of this header
-besides being independent ?
+On 21-05-10 22:27, Khem Raj wrote:
+> On Fri, May 21, 2010 at 7:47 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+>> Trying a clean build
+>>  MACHINE="beagleboard"
+>>  DISTRO="angstrom-2008.1"
+>>  org.openembedded.dev 2c153f33b8ebb807a622ad9ae92ed5341a356740
+>>
+>> I get failures like this (in many packages):
+>>  /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:138:
+>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 're_void'
+>>  /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:298:
+>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+>>  /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:307:
+>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+>>  /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:309:
+>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 're_void'
+>>  /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:310:
+>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'size_t'
+>>
+>> The problem is that the compiler include file <regex.h> is
+>> not the standard/default one, rather the file from tcl!
+>> I replaced the bogus regex.h file with the correct one and
+>> my build completes & runs.
+> 
+> its tcl dev package bug it should have installed its version into
+> /usr/include/tcl<ver> instead of overwriting the existing version in sysroot.
+> 
+> I can see the problem in the recipes if you are using 8.5.8 then
+> try this untested patch and let me know if it helps
+> 
+> diff --git a/recipes/tcltk/tcl_8.5.8.bb b/recipes/tcltk/tcl_8.5.8.bb
+> index 220e858..dd5c810 100644
+> --- a/recipes/tcltk/tcl_8.5.8.bb
+> +++ b/recipes/tcltk/tcl_8.5.8.bb
+> @@ -33,7 +33,8 @@ BINCONFIG_GLOB = "*Config.sh"
+>  do_install() {
+>         autotools_do_install
+>         # Stage a few extra headers to make tk happy
+> -       install -m 0644 ../generic/*.h ${D}${includedir}
+> +       install -d ${D}${includedir}/tcl8.5/generic/
+> +       install -m 0644 ../generic/*.h ${D}${includedir}/tcl8.5/generic/
+>         install -m 0644 *.h ${D}${includedir}
+>         ln -sf tclsh8.5 ${D}${bindir}/tclsh
+>  }
 
-> libsocketcan 0.0.8 automatically installs can_netlink.h,
-> version 0.0.7 is patched to do so.
->
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
-> ---
-> =A0.../socketcan/files/install-can_netlink.h.patch =A0 =A0| =A0 21 ++++++=
-++++++++++++++
-> =A0recipes/socketcan/libsocketcan.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =
-=A0 16 +++++++++++++++
-> =A0recipes/socketcan/libsocketcan_0.0.7.bb =A0 =A0 =A0 =A0 =A0 =A0| =A0 =
-=A07 ++++++
-> =A0recipes/socketcan/libsocketcan_0.0.8.bb =A0 =A0 =A0 =A0 =A0 =A0| =A0 =
-=A04 +++
-> =A04 files changed, 48 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/socketcan/files/install-can_netlink.h.patch
-> =A0create mode 100644 recipes/socketcan/libsocketcan.inc
-> =A0create mode 100644 recipes/socketcan/libsocketcan_0.0.7.bb
-> =A0create mode 100644 recipes/socketcan/libsocketcan_0.0.8.bb
->
-> diff --git a/recipes/socketcan/files/install-can_netlink.h.patch b/recipe=
-s/socketcan/files/install-can_netlink.h.patch
-> new file mode 100644
-> index 0000000..36f5e10
-> --- /dev/null
-> +++ b/recipes/socketcan/files/install-can_netlink.h.patch
-> @@ -0,0 +1,21 @@
-> +commit 2470d91a6254b062aae8ab6120795a0f28344687
-> +Author: Vitus Jensen <vitus@vitus.devnet.local>
-> +Date: =A0 Tue May 18 16:59:01 2010 +0200
-> +
-> + =A0 =A0install can_netlink.h
-> +
-> +diff --git a/include/GNUmakefile.am b/include/GNUmakefile.am
-> +index 4ba2798..eb35a3a 100644
-> +--- a/include/GNUmakefile.am
-> ++++ b/include/GNUmakefile.am
-> +@@ -1,8 +1,6 @@
-> +-noinst_HEADERS =3D \
-> +- =A0 =A0 =A0can_netlink.h
-> +-
-> + nobase_include_HEADERS =3D \
-> +- =A0 =A0 =A0libsocketcan.h
-> ++ =A0 =A0 =A0libsocketcan.h =A0\
-> ++ =A0 =A0 =A0can_netlink.h
-> +
-> + MAINTAINERCLEANFILES =3D \
-> + =A0 =A0 =A0 libsocketcan_config.h.in \
-> diff --git a/recipes/socketcan/libsocketcan.inc b/recipes/socketcan/libso=
-cketcan.inc
-> new file mode 100644
-> index 0000000..367766c
-> --- /dev/null
-> +++ b/recipes/socketcan/libsocketcan.inc
-> @@ -0,0 +1,16 @@
-> +DESCRIPTION =3D "Control basic functions in socketcan from userspace"
-> +AUTHOR =3D "Luotao Fu"
-> +HOMEPAGE =3D "http://www.pengutronix.de"
-> +SECTION =3D "libs/network"
-> +PRIORITY =3D "optional"
-> +LICENSE =3D "LGPL"
-> +
-> +TAG =3D "v${PV}"
-> +INC_PR =3D "r0"
-> +
-> +SRC_URI =3D "git://git.pengutronix.de/git/tools/libsocketcan.git;protoco=
-l=3Dgit;tag=3D${TAG} \
-> + =A0 =A0 =A0 "
-> +
-> +S =3D "${WORKDIR}/git"
-> +
-> +inherit autotools_stage pkgconfig
-> diff --git a/recipes/socketcan/libsocketcan_0.0.7.bb b/recipes/socketcan/=
-libsocketcan_0.0.7.bb
-> new file mode 100644
-> index 0000000..7dd4fef
-> --- /dev/null
-> +++ b/recipes/socketcan/libsocketcan_0.0.7.bb
-> @@ -0,0 +1,7 @@
-> +TAG =3D "v${PV}"
-> +require libsocketcan.inc
-> +
-> +PR =3D "${INC_PR}.0"
-> +
-> +SRC_URI +=3D "file://install-can_netlink.h.patch;patch=3D1 \
-> + =A0 =A0 =A0 "
-> diff --git a/recipes/socketcan/libsocketcan_0.0.8.bb b/recipes/socketcan/=
-libsocketcan_0.0.8.bb
-> new file mode 100644
-> index 0000000..5598a0f
-> --- /dev/null
-> +++ b/recipes/socketcan/libsocketcan_0.0.8.bb
-> @@ -0,0 +1,4 @@
-> +TAG =3D "v${PV}"
-> +require libsocketcan.inc
-> +
-> +PR =3D "${INC_PR}.0"
-> --
-> 1.6.4.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I have a different patch, but yours is better. If TK builds after yours,
+feel free to add my ack and push it.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL9vAdMkyGM64RGpERAsNhAKCFHUduJmKs6TYcYIlKkgfiwgOsuwCeLRQS
+VIpCFAdPJnx5451XhNHFW3A=
+=TbNQ
+-----END PGP SIGNATURE-----
+
 
 
