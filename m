@@ -1,40 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f193.google.com ([209.85.222.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OFEXV-0000x3-Kw for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 00:48:30 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OFETZ-0004d2-OE for openembedded-devel@lists.openembedded.org;
-	Fri, 21 May 2010 00:44:25 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 00:44:25 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1OFG3L-0003Yl-Bf
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 21 May 2010 02:25:30 +0200
+Received: by pzk31 with SMTP id 31so227574pzk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 21 May 2010 00:44:25 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 20 May 2010 17:21:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=fIoKNAvg9dF7UXYKrvvDE2NW2HH2kOzK8mD4VWDG/xE=;
+	b=G5Dz4c/WeWvZWg57Arv99b3ElceZXdNkKjcpVryS0D4RtOfAssub0Wc8uM+OOEm9r2
+	cSHtLdr2i/eSPN5gu0t/7lksuiN/LmcChHEpZEWEAtaAKE7yLHhxum+ExjoanHZo1Fkt
+	fXRIaaCyBt0qmHEmtqerxkt8z8DHsOq4EJ6ZA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=p+o91pE1T5rVKg8KfsnahqA2+OP5tJHcLxhGkOOKcJuDRVa7odsgoUT7+K1Ac+9CFb
+	CnQNRotJSFiNRp9i3xsvrgH33kgsvdzz0nm659fBOgdoLeayMKJlRCB9QDxTdfm2HypJ
+	zLoVixS4vQAqMf/RgixW5uUVFt5dvYgskxlcw=
+Received: by 10.141.125.19 with SMTP id c19mr615695rvn.55.1274401283896;
+	Thu, 20 May 2010 17:21:23 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id q10sm381038rvp.8.2010.05.20.17.21.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 20 May 2010 17:21:23 -0700 (PDT)
+Date: Thu, 20 May 2010 17:21:21 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 21 May 2010 00:44:12 +0200
-Message-ID: <ht4dvt$kdi$1@dough.gmane.org>
+Message-ID: <20100521002121.GB29183@gmail.com>
 References: <AANLkTilUZ3dToBwFw4QzKZkyrDUxT2Y2rO7T3CvYNjQ-@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.9) Gecko/20100428 Shredder/3.0.5pre
+MIME-Version: 1.0
 In-Reply-To: <AANLkTilUZ3dToBwFw4QzKZkyrDUxT2Y2rO7T3CvYNjQ-@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.222.193
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Problem with building glibc
@@ -51,14 +57,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 20 May 2010 22:48:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 21 May 2010 00:25:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 20-05-10 23:51, Grzegorz Toporek wrote:
+On (20/05/10 23:51), Grzegorz Toporek wrote:
 > Hi all,
 > 
 > many thanks for the earlier help. I have change my /conf/distro/colibri.conf
@@ -74,19 +77,11 @@ On 20-05-10 23:51, Grzegorz Toporek wrote:
 > 
 > Could you please help me with this? I am very new to bitbake...
 
-If you're very new I'd recommend starting with a know working distro,
-like angstrom.
+As Koen said start with a known distro. If you are really passing down -Os to compile glibc then
+you better you use eglibc because thats known to compile at -Os what are
+optimization flags set to ?
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL9bs8MkyGM64RGpERAnPnAJ4hfYMWaAjJzYb4NekLwRIy/pMZ/ACgvWvl
-g2GTYwQTFwujR9W/3RJZUgg=
-=d7WP
------END PGP SIGNATURE-----
-
+-Khem
 
 
