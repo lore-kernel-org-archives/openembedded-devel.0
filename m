@@ -1,46 +1,44 @@
-Received: from out3.smtp.messagingengine.com ([66.111.4.27])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OFqdy-0000TX-1Y
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 22 May 2010 17:29:43 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 8BDEAF80AB
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OFuOi-0001Le-C1 for openembedded-devel@lists.openembedded.org;
+	Sat, 22 May 2010 21:30:14 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OFuKk-0007dM-Gh for openembedded-devel@lists.openembedded.org;
+	Sat, 22 May 2010 21:26:06 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 22 May 2010 21:26:06 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 May 2010 11:25:32 -0400 (EDT)
-Received: from heartbeat2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Sat, 22 May 2010 11:25:32 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type:content-transfer-encoding;
-	s=smtpout; bh=TBZYvHTRn12QrFtO23xE1ug29ME=;
-	b=nVa6dS+rMbPd08fbWoBnAyZsOMonCvTXmGiadJLQxgRa7J6KYQHmBrlBGRwbQJntkZBick6lwgsTIAQHkiLAoS056SqjFkXlkrc2cRlZxcDr6+pYvDFUTuHa2TaAmCRufNxm8ecUiJvS4uxHglisusZ/egcmj1P2o2lN2+2mjdU=
-X-Sasl-enc: JmuUTFfV6f2KfLLArNB+LoNLGZopO0zOQMe2QVYwwtq6 1274541932
-Received: from [192.168.1.34] (hnvr-4d078a6d.pool.mediaWays.net [77.7.138.109])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id DAF1D57679
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 May 2010 11:25:31 -0400 (EDT)
-Date: Sat, 22 May 2010 17:26:54 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
+	Sat, 22 May 2010 21:26:06 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTilrTp4aqvXB8ggicStZnp3LYj9474x5KedKNeUd@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1005221713170.5274@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1005162211110.21508@asterix.crazy-teaparty.dyndns.org>
-	<1274452686-17891-1-git-send-email-vjensen@gmx.de>
-	<AANLkTilrTp4aqvXB8ggicStZnp3LYj9474x5KedKNeUd@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.27
-X-SA-Exim-Mail-From: vjensen@gmx.de
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 22 May 2010 21:25:55 +0200
+Message-ID: <ht9b43$cbs$1@dough.gmane.org>
+References: <4BF69D04.5060506@mlbassoc.com>	<AANLkTik1pMbRIMYx01oR0eA4xwruqMaSI8qoggbgPHwd@mail.gmail.com>	<4BF70683.3090704@mlbassoc.com>
+	<4BF7C553.2090901@mlbassoc.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <4BF7C553.2090901@mlbassoc.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v3 1/3] libsocketcan: new recipes
+Subject: Re: staging problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,36 +52,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 May 2010 15:29:43 -0000
-Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 22 May 2010 19:30:14 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, 21 May 2010, Khem Raj wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> On Fri, May 21, 2010 at 7:38 AM, Vitus Jensen <vjensen@gmx.de> wrote:
->> Build pengutronix' libsocketcan (netlink interface), used
->> by newer versions of canutils. =C2=A0can_netlink.h is really
->> linux/can/netlink.h from linux-libc-headers but installed
->> here to be independ of staged linux-libc-headers versions.
->
-> is there any reason to have an encapsulated copy of this header
-> besides being independent ?
+On 22-05-10 13:51, Gary Thomas wrote:
+> On 05/21/2010 04:17 PM, Gary Thomas wrote:
+>> On 05/21/2010 02:27 PM, Khem Raj wrote:
+>>> On Fri, May 21, 2010 at 7:47 AM, Gary Thomas<gary@mlbassoc.com> wrote:
+>>>> Trying a clean build
+>>>> MACHINE="beagleboard"
+>>>> DISTRO="angstrom-2008.1"
+>>>> org.openembedded.dev 2c153f33b8ebb807a622ad9ae92ed5341a356740
+>>>>
+>>>> I get failures like this (in many packages):
+>>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:138:
+>>>>
+>>>>
+>>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before
+>>>> 're_void'
+>>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:298:
+>>>>
+>>>>
+>>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+>>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:307:
+>>>>
+>>>>
+>>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
+>>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:309:
+>>>>
+>>>>
+>>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before
+>>>> 're_void'
+>>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:310:
+>>>>
+>>>>
+>>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'size_t'
+>>>>
+>>>> The problem is that the compiler include file<regex.h> is
+>>>> not the standard/default one, rather the file from tcl!
+>>>> I replaced the bogus regex.h file with the correct one and
+>>>> my build completes& runs.
+>>>
+>>> its tcl dev package bug it should have installed its version into
+>>> /usr/include/tcl<ver> instead of overwriting the existing version in
+>>> sysroot.
+>>>
+>>> I can see the problem in the recipes if you are using 8.5.8 then
+>>> try this untested patch and let me know if it helps
+>>>
+>>> diff --git a/recipes/tcltk/tcl_8.5.8.bb b/recipes/tcltk/tcl_8.5.8.bb
+>>> index 220e858..dd5c810 100644
+>>> --- a/recipes/tcltk/tcl_8.5.8.bb
+>>> +++ b/recipes/tcltk/tcl_8.5.8.bb
+>>> @@ -33,7 +33,8 @@ BINCONFIG_GLOB = "*Config.sh"
+>>> do_install() {
+>>> autotools_do_install
+>>> # Stage a few extra headers to make tk happy
+>>> - install -m 0644 ../generic/*.h ${D}${includedir}
+>>> + install -d ${D}${includedir}/tcl8.5/generic/
+>>> + install -m 0644 ../generic/*.h ${D}${includedir}/tcl8.5/generic/
+>>> install -m 0644 *.h ${D}${includedir}
+>>> ln -sf tclsh8.5 ${D}${bindir}/tclsh
+>>> }
+>>>
+>>
+>> Sorry, that patch/file does not line up at all with what's in
+>> my tree. Is it valid for org.openembedded.dev commit
+>> 0609b025f410ed09400404ab6af8775c78685b17?
+>>
+> 
+> I applied the patch manually and while it does fix the /usr/include
+> pollution, it breaks building of 'tk'.  You'll probably need a
+> completely fresh build to see the problem.
 
-It's just that reason.  can is pretty new in linux and the netlink=20
-interface even newer.
+Could you please try the following on top on the patch:
 
-libsocketcan 0.0.8 needs headers from 2.6.34
-libsocketcan 0.0.7 2.6.33, 2.6.32 or 2.6.31
+- --- a/recipes/tcltk/tcl_8.5.8.bb
++++ b/recipes/tcltk/tcl_8.5.8.bb
 
-Combine that with the thread about linux-libc-headers and that selecting=20
-the version of llh is a distro-thing I think it's best to provide=20
-the needed can_netlink.h version.  The canutils source handles version=20
-incompatibilities.
+ tcl_sysroot() {
+- -       sed -i 's:/usr/include/tcl-private:${STAGING_INCDIR}:'
+tclConfig.sh
++       sed -i 's:/usr/include/tcl-private:${STAGING_INCDIR}/tcl-${PV}:'
+tclConfig.sh
+ }
 
-Vitus
+regards,
 
---=20
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL+C/DMkyGM64RGpERAvhLAJwKFZS4eRwZD9uwr/VTdo0Vu6toBwCcDygX
+DtAsEcQ7HXBl4iiIjYmBAgk=
+=70EL
+-----END PGP SIGNATURE-----
+
 
 
