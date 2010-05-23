@@ -1,45 +1,43 @@
-Received: from fg-out-1718.google.com ([72.14.220.158])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vzapolskiy@gmail.com>) id 1OG6B0-0007y5-Pt
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 May 2010 10:04:51 +0200
-Received: by fg-out-1718.google.com with SMTP id 16so726685fgg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OG7Se-0004SS-0P for openembedded-devel@lists.openembedded.org;
+	Sun, 23 May 2010 11:27:08 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OG7Oj-0006ZS-3q for openembedded-devel@lists.openembedded.org;
+	Sun, 23 May 2010 11:23:05 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 May 2010 11:23:05 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 May 2010 01:00:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=8aGGbrzyCG1dnK+9e4dB/NOMYee3gQPDMljL1nzM5qE=;
-	b=R41vsZbtzahpepwHZb1RC9wW22a4AK06Qlf2tCQf9h8prdkseeHpPqjVIjzY/f4+Mg
-	JdeuzhxgSJXyoPQJ7K8+rRwAdC7rcvDqTlbEUHU33IULKHhUHcxQU2TXQPscD9qo0pjr
-	skH3ahM3pea1Fp13qjE+Qa84qnD4yTqtTnZmw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=WN61atoM7CKhIGnhSiFE9edxzoVsyF9MK/axGQLLXymwCVoGH6/tNe2XKyJtYfHGcc
-	HFRbSkBngwJZrpNxCU0tnEEEET9ws/JLB2/89tPDOwJttNupLamLw/hSG+RLAHDrpNJu
-	xjfLoAvcQHFz7gN6/KyKREc/VNhcdzwVGpG2k=
-Received: by 10.87.29.33 with SMTP id g33mr6389347fgj.27.1274601648039;
-	Sun, 23 May 2010 01:00:48 -0700 (PDT)
-Received: from localhost.localdomain ([94.188.57.8])
-	by mx.google.com with ESMTPS id 18sm3971540fks.5.2010.05.23.01.00.46
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 23 May 2010 01:00:47 -0700 (PDT)
-Sender: Vladimir Zapolskiy <animist@gmail.com>
-From: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+	Sun, 23 May 2010 11:23:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 May 2010 11:55:29 +0400
-Message-Id: <1274601329-18458-1-git-send-email-vzapolskiy@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 72.14.220.158
-X-SA-Exim-Mail-From: vzapolskiy@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 23 May 2010 11:22:56 +0200
+Message-ID: <htas5g$q1h$1@dough.gmane.org>
+References: <4BF69D04.5060506@mlbassoc.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <4BF69D04.5060506@mlbassoc.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vladimir Zapolskiy <vzapolskiy@gmail.com>
-Subject: [PATCH] autotools: fix libiconv compilation for uclibc toolchain
+Subject: Re: staging problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,36 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 May 2010 08:04:51 -0000
+X-List-Received-Date: Sun, 23 May 2010 09:27:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Recent commit to autotools.bbclass forces gettext install dependency
-for packets with defined AM_GNU_GETTEXT macro. In uclibc platform
-gettext depends on libiconv, but the macro is present and reliable in
-libiconv configuration script.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Vladimir Zapolskiy <vzapolskiy@gmail.com>
-Cc: Joshua Lock <josh@linux.intel.com>
----
- classes/autotools.bbclass |    4 ----
- 1 files changed, 0 insertions(+), 4 deletions(-)
+On 21-05-10 16:47, Gary Thomas wrote:
+> Trying a clean build
+>   MACHINE="beagleboard"
+>   DISTRO="angstrom-2008.1"
+>   org.openembedded.dev 2c153f33b8ebb807a622ad9ae92ed5341a356740
+> 
+> I get failures like this (in many packages):
 
-diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
-index 9bb4f6c..a97a64a 100644
---- a/classes/autotools.bbclass
-+++ b/classes/autotools.bbclass
-@@ -129,10 +129,6 @@ autotools_do_configure() {
- 			    oenote Executing glib-gettextize --force --copy
- 			    echo "no" | glib-gettextize --force --copy
- 			  fi
--			else if grep "^[[:space:]]*AM_GNU_GETTEXT" $CONFIGURE_AC >/dev/null; then
--			  cp ${STAGING_DATADIR}/gettext/config.rpath ${S}/
--			fi
--
- 			fi
- 			mkdir -p m4
- 			oenote Executing autoreconf --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
--- 
-1.7.1
+I pushed a fix:
+
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=104b91c471125482eb83893425fb031557e892b4
+
+That seems to solve the duplicate header problem for me and tk still
+builds. As the commit says, do a 'bitbake glibc' afterwards to have
+packaged-staging restore the headers.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL+PPwMkyGM64RGpERApRkAJ9Ser46FAnSzOZOuESxKKmN2cxSogCgsNBc
+o5FZLIykJwVkhqkgXoGQLl0=
+=OznZ
+-----END PGP SIGNATURE-----
 
 
 
