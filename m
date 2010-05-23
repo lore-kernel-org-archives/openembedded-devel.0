@@ -1,45 +1,33 @@
-Received: from mail-pz0-f193.google.com ([209.85.222.193])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <joaohf@gmail.com>) id 1OGGJO-0004gR-GY
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OGGn3-00007T-7r
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 May 2010 20:54:14 +0200
-Received: by pzk31 with SMTP id 31so1263517pzk.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 May 2010 11:50:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=E545yBFPDPvwkHhzyelRRSv9AtaQ0/WQYKrtZucLE1w=;
-	b=ayP659ZubA7CrjKY2ZZ6qHDHcZR/af56FPHKqNcs3sqxalvKb4WnUbDSc+sUBus1vF
-	5thGCRf8U3vzkKlgBmt7RFRdzw7jxTnVuNq0CaBuMsVnQYZVz5K8q2iTwpW2OFKJ+oVT
-	vBLf7o5XEUscdAlQ+xTq1LGR6v8L7GA1dTyYM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bULsjzTEyo0l/sgx6vOH/RupUFzli2oB8dXlO6Dhzg68okmm1LmZ+KwCewDKuz2UDD
-	M6GnbZA4gVWHnrl2QuzMWklDguHdJmAn7N0Hdk+s+5LSqf3/q0DcIKhv1Rgpspm3KmP7
-	lFefq+mIgIXDB0zaAXyoH96YaJJ2ViQfTDBpU=
-MIME-Version: 1.0
-Received: by 10.140.248.8 with SMTP id v8mr3294365rvh.9.1274640604189; Sun, 23 
-	May 2010 11:50:04 -0700 (PDT)
-Received: by 10.141.51.17 with HTTP; Sun, 23 May 2010 11:50:04 -0700 (PDT)
-In-Reply-To: <AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>
-References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>
-	<hso7dv$2lh$1@dough.gmane.org>
-	<AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>
-Date: Sun, 23 May 2010 15:50:04 -0300
-Message-ID: <AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
-From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
+	Sun, 23 May 2010 21:24:50 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4NJK53a006943
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 23 May 2010 21:20:05 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OGGiT-0002Tc-Ci; Sun, 23 May 2010 21:20:05 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.193
-X-SA-Exim-Mail-From: joaohf@gmail.com
+Date: Sun, 23 May 2010 21:20:01 +0200
+Message-Id: <a4b71a86a14f591edb468e79e6ed9d13dda96958.1274642314.git.enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.0.1
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add lksctp tools
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH 1/3] freetype: updated to 2.3.12
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,116 +41,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 May 2010 18:54:14 -0000
-X-Groupsio-MsgNum: 19506
-Content-Type: multipart/mixed; boundary=000e0cd116ba6dd6c20487476452
+X-List-Received-Date: Sun, 23 May 2010 19:24:50 -0000
 
---000e0cd116ba6dd6c20487476452
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+That's (nearly) a copy of the old 2.3.11 recipe.
 
-Hi,
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ .../freetype/freetype-2.3.12/fix-configure.patch   |   13 ++++++
+ recipes/freetype/freetype-2.3.12/libtool-tag.patch |   20 ++++++++++
+ recipes/freetype/freetype_2.3.12.bb                |   40 ++++++++++++++++++++
+ 3 files changed, 73 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/freetype/freetype-2.3.12/fix-configure.patch
+ create mode 100644 recipes/freetype/freetype-2.3.12/libtool-tag.patch
+ create mode 100644 recipes/freetype/freetype_2.3.12.bb
 
-Attached a unique patch.
+diff --git a/recipes/freetype/freetype-2.3.12/fix-configure.patch b/recipes/freetype/freetype-2.3.12/fix-configure.patch
+new file mode 100644
+index 0000000..ecd9673
+--- /dev/null
++++ b/recipes/freetype/freetype-2.3.12/fix-configure.patch
+@@ -0,0 +1,13 @@
++Index: freetype-2.3.6/builds/unix/configure.ac
++===================================================================
++--- freetype-2.3.6.orig/builds/unix/configure.ac
+++++ freetype-2.3.6/builds/unix/configure.ac
++@@ -506,8 +506,6 @@ AC_SUBST([FT2_EXTRA_LIBS])
++ AC_SUBST([SYSTEM_ZLIB])
++ 
++ 
++-LT_INIT(win32-dll)
++-
++ AC_SUBST([hardcode_libdir_flag_spec])
++ AC_SUBST([wl])
++ AC_SUBST([build_libtool_libs])
+diff --git a/recipes/freetype/freetype-2.3.12/libtool-tag.patch b/recipes/freetype/freetype-2.3.12/libtool-tag.patch
+new file mode 100644
+index 0000000..2f096cd
+--- /dev/null
++++ b/recipes/freetype/freetype-2.3.12/libtool-tag.patch
+@@ -0,0 +1,20 @@
++--- freetype-2.3.6/builds/unix/unix-cc.in	
+++++ freetype-2.3.6/builds/unix/unix-cc.in	
++@@ -88,7 +88,7 @@ 
++ #
++ #
++ CCraw := $(CC)
++-CC    := $(LIBTOOL) --mode=compile $(CCraw)
+++CC    := $(LIBTOOL) --tag=CC --mode=compile $(CCraw)
++ 
++ # Linker flags.
++ #
++@@ -105,7 +105,7 @@ 
++ 
++ # Library linking
++ #
++-LINK_LIBRARY = $(LIBTOOL) --mode=link $(CCraw) -o $@ $(OBJECTS_LIST) \
+++LINK_LIBRARY = $(LIBTOOL) --tag=CC --mode=link $(CCraw) -o $@ $(OBJECTS_LIST) \
++                           -rpath $(libdir) -version-info $(version_info) \
++                           $(LDFLAGS) -no-undefined \
++                           # -export-symbols $(EXPORTS_LIST)
+diff --git a/recipes/freetype/freetype_2.3.12.bb b/recipes/freetype/freetype_2.3.12.bb
+new file mode 100644
+index 0000000..de9ff29
+--- /dev/null
++++ b/recipes/freetype/freetype_2.3.12.bb
+@@ -0,0 +1,40 @@
++DESCRIPTION = "Freetype font rendering library"
++SECTION = "libs"
++LICENSE = "freetype"
++PR = "r0"
++
++SRC_URI = "\
++  ${SOURCEFORGE_MIRROR}/freetype/freetype-${PV}.tar.bz2 \
++  file://no-hardcode.patch;patch=1 \
++  file://fix-configure.patch;patch=1 \
++  file://libtool-tag.patch;patch=1 \
++"
++S = "${WORKDIR}/freetype-${PV}"
++
++SRC_URI[md5sum] = "e974a82e5939be8e05ee65f07275d7c5"
++SRC_URI[sha256sum] = "3b96438f016a62b676c1d2089c00ca777f710d19f6aefa66ccf068d360db3e92"
++
++inherit autotools pkgconfig binconfig
++
++LIBTOOL = "${HOST_SYS}-libtool"
++EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
++EXTRA_OECONF = "--without-zlib"
++
++do_configure() {
++	cd builds/unix
++	libtoolize --force --copy
++	gnu-configize --force
++	aclocal -I .
++	autoconf
++	cd ${S}
++	oe_runconf
++}
++
++do_compile_prepend() {
++	${BUILD_CC} -o objs/apinames src/tools/apinames.c
++}
++
++BBCLASSEXTEND = "native"
++
++FILES_${PN} = "${libdir}/lib*.so.*"
++FILES_${PN}-dev += "${bindir}"
+-- 
+1.7.0.1
 
-Thanks.
-
-2010/5/16 Jo=C3=A3o Henrique Freitas <joaohf@gmail.com>:
-> The same thing.
->
-> ---
-> =C2=A0recipes/lksctp-tools/lksctp-tools.inc =C2=A0 =C2=A0 =C2=A0| =C2=A0 =
-=C2=A03 +--
-> =C2=A0recipes/lksctp-tools/lksctp-tools_1.0.7.bb | =C2=A0 =C2=A04 ----
-> =C2=A02 files changed, 1 insertions(+), 6 deletions(-)
->
-> diff --git a/recipes/lksctp-tools/lksctp-tools.inc
-> b/recipes/lksctp-tools/lksctp-tools.inc
-> index 678531e..02ec988 100644
-> --- a/recipes/lksctp-tools/lksctp-tools.inc
-> +++ b/recipes/lksctp-tools/lksctp-tools.inc
-> @@ -1,8 +1,7 @@
-> =C2=A0DESCRIPTION =3D "The Linux Kernel Stream Control Transmission Proto=
-col
-> (lksctp) project"
-> =C2=A0SECTION =3D "libs"
-> =C2=A0PRIORITY =3D "optional"
-> -LICENSE =3D "GPLv2"
-> -#DEPENDS_virtclass-native =3D "python-native"
-> +LICENSE =3D "LGPLv2"
->
-> =C2=A0S =3D "${WORKDIR}/${BPN}-${PV}"
->
-> diff --git a/recipes/lksctp-tools/lksctp-tools_1.0.7.bb
-> b/recipes/lksctp-tools/lksctp-tools_1.0.7.bb
-> index 34c2ce5..1d4faa3 100644
-> --- a/recipes/lksctp-tools/lksctp-tools_1.0.7.bb
-> +++ b/recipes/lksctp-tools/lksctp-tools_1.0.7.bb
-> @@ -3,9 +3,5 @@ PR =3D "${INC_PR}.0"
->
-> =C2=A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/lksctp/lksctp-tools-${PV}.tar.gz=
-"
->
-> -PARALLEL_MAKE =3D ""
-> -CCACHE =3D ""
-> -
-> -
-> =C2=A0SRC_URI[md5sum] =3D "047562b40537eb3be5d5ec3ae0a2198b"
-> =C2=A0SRC_URI[sha256sum] =3D
-> "e920e89d110cff9847f1d86a1d7a23a156a8abcc9e65a35655d687fd08377595"
-> --
-> 1.7.0.4
->
->
->
-> --
-> -----------------------------------------------------------
-> Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
-> Campinas-SP-Brasil
-> BSD051283
-> LPI 1
-> http://www.joaohfreitas.eti.br
->
 
 
-
---=20
------------------------------------------------------------
-Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
-Campinas-SP-Brasil
-BSD051283
-LPI 1
-http://www.joaohfreitas.eti.br
-
---000e0cd116ba6dd6c20487476452
-Content-Type: text/x-diff; charset=US-ASCII; name="lksctp-tools.patch"
-Content-Disposition: attachment; filename="lksctp-tools.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_g9k83m021
-
-ZGlmZiAtLWdpdCBhL3JlY2lwZXMvbGtzY3RwLXRvb2xzL2xrc2N0cC10b29scy5pbmMgYi9yZWNp
-cGVzL2xrc2N0cC10b29scy9sa3NjdHAtdG9vbHMuaW5jCm5ldyBmaWxlIG1vZGUgMTAwNjQ0Cmlu
-ZGV4IDAwMDAwMDAuLjAyZWM5ODgKLS0tIC9kZXYvbnVsbAorKysgYi9yZWNpcGVzL2xrc2N0cC10
-b29scy9sa3NjdHAtdG9vbHMuaW5jCkBAIC0wLDAgKzEsMjggQEAKK0RFU0NSSVBUSU9OID0gIlRo
-ZSBMaW51eCBLZXJuZWwgU3RyZWFtIENvbnRyb2wgVHJhbnNtaXNzaW9uIFByb3RvY29sIChsa3Nj
-dHApIHByb2plY3QiCitTRUNUSU9OID0gImxpYnMiCitQUklPUklUWSA9ICJvcHRpb25hbCIKK0xJ
-Q0VOU0UgPSAiTEdQTHYyIgorCitTID0gIiR7V09SS0RJUn0vJHtCUE59LSR7UFZ9IgorCitJTkNf
-UFIgPSAicjAiCisKK0JCQ0xBU1NFWFRFTkQgPSAibmF0aXZlIgorCitpbmhlcml0IGF1dG90b29s
-cyBwa2djb25maWcgYmluY29uZmlnCisKK2V4cG9ydCBMREZMQUdTICs9ICItbGRsIgorCitkb19p
-bnN0YWxsX2FwcGVuZF92aXJ0Y2xhc3MtbmF0aXZlKCkgeworCToKK30KKworREVCSUFOTkFNRV8k
-e1BOfSA9ICJsa3NjdHAiCisKK1BBQ0tBR0VTID0rICIke1BOfS10b29scyIKK0ZJTEVTXyR7UE59
-ID0gIiR7bGliZXhlY2Rpcn0vKiAke2xpYmRpcn0vbGliKiR7U09MSUJTfSBcCisgICAgICAgICAg
-ICAke3N5c2NvbmZkaXJ9ICR7c2hhcmVkc3RhdGVkaXJ9ICR7bG9jYWxzdGF0ZWRpcn0gXAorICAg
-ICAgICAgICAgJHtiYXNlX2xpYmRpcn0vKiR7U09MSUJTfSIKKworRklMRVNfJHtQTn0tZGV2ICs9
-ICIke2JpbmRpcn0vKi1jb25maWciCitGSUxFU18ke1BOfS11dGlscyA9ICIiCmRpZmYgLS1naXQg
-YS9yZWNpcGVzL2xrc2N0cC10b29scy9sa3NjdHAtdG9vbHNfMS4wLjcuYmIgYi9yZWNpcGVzL2xr
-c2N0cC10b29scy9sa3NjdHAtdG9vbHNfMS4wLjcuYmIKbmV3IGZpbGUgbW9kZSAxMDA2NDQKaW5k
-ZXggMDAwMDAwMC4uMWQ0ZmFhMwotLS0gL2Rldi9udWxsCisrKyBiL3JlY2lwZXMvbGtzY3RwLXRv
-b2xzL2xrc2N0cC10b29sc18xLjAuNy5iYgpAQCAtMCwwICsxLDcgQEAKK3JlcXVpcmUgbGtzY3Rw
-LXRvb2xzLmluYworUFIgPSAiJHtJTkNfUFJ9LjAiCisKK1NSQ19VUkkgPSAiJHtTT1VSQ0VGT1JH
-RV9NSVJST1J9L2xrc2N0cC9sa3NjdHAtdG9vbHMtJHtQVn0udGFyLmd6IgorCitTUkNfVVJJW21k
-NXN1bV0gPSAiMDQ3NTYyYjQwNTM3ZWIzYmU1ZDVlYzNhZTBhMjE5OGIiCitTUkNfVVJJW3NoYTI1
-NnN1bV0gPSAiZTkyMGU4OWQxMTBjZmY5ODQ3ZjFkODZhMWQ3YTIzYTE1NmE4YWJjYzllNjVhMzU2
-NTVkNjg3ZmQwODM3NzU5NSIK
-
---000e0cd116ba6dd6c20487476452--
