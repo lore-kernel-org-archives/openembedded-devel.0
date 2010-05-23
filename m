@@ -1,41 +1,49 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OGEN2-0008N0-4F
+	(envelope-from <animist@gmail.com>) id 1OGEgG-0003NA-BH
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 May 2010 18:49:48 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4NGjbBv009890
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sun, 23 May 2010 18:45:37 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OGEIy-00028b-VT; Sun, 23 May 2010 18:45:37 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: Chris Larson <clarson@kergoth.com>
-References: <1268739774-10002-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<1274619132-32390-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<AANLkTimyqUYuSfWUQZdwn1Q2KrojnjvsUqLSCX9H_FMa@mail.gmail.com>
-	<lyhblyk2ox.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<AANLkTim5GfCsCgW9Bnn4auW9fuN-5L7wDC9PI8ISeX59@mail.gmail.com>
-Date: Sun, 23 May 2010 18:45:36 +0200
-In-Reply-To: <AANLkTim5GfCsCgW9Bnn4auW9fuN-5L7wDC9PI8ISeX59@mail.gmail.com>
-	(Chris Larson's message of "Sun, 23 May 2010 09:36:35 -0700")
-Message-ID: <lyd3wmk1n3.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
+	Sun, 23 May 2010 19:09:41 +0200
+Received: by wwa36 with SMTP id 36so222129wwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 23 May 2010 10:05:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:sender:received
+	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
+	:from:to:cc:content-type:content-transfer-encoding;
+	bh=/jhBlsuX4tJKCDh8fSnnTWplYCGsZWp150SDWgypPL0=;
+	b=B+DbD3UZ50YZFHgtPj3uQ54qG7lsnIWGV/I56QO2vgSZO8YpoKb3wIfgOqq0aLZS1V
+	zQGYNEyhxxlr2vCRXj5oPBxI899jtLm8qikUSUVG1QLIVHpkbCLDbTN9p0AxYaM/CBLt
+	Xrx+G3p39GksW6l7C65cQP0i1BkABZt7h8mSU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:date
+	:x-google-sender-auth:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	b=C+qrkBhcyvnqKDwt9QDDCrqEWj4MprUA9MzE5mgE6fsLCt8Dc5ZW5bOlPsLo0FQKHF
+	gHb4Y4pYrXJGzsYdMGv96qkqbo7tbbUvIk9kUoZu3I6Yr3fzyvF2KJz+j2OaqLFZ+m7M
+	eO3Rrj5hGo349rtgLCQ2o1JcFLwm0EC044yJ8=
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+Received: by 10.216.88.65 with SMTP id z43mr2615223wee.167.1274634333987; Sun, 
+	23 May 2010 10:05:33 -0700 (PDT)
+Sender: animist@gmail.com
+Received: by 10.216.155.209 with HTTP; Sun, 23 May 2010 10:05:33 -0700 (PDT)
+In-Reply-To: <20100523142538.GA27824@mi.fu-berlin.de>
+References: <1274536328-31845-1-git-send-email-vzapolskiy@gmail.com>
+	<20100523142538.GA27824@mi.fu-berlin.de>
+Date: Sun, 23 May 2010 21:05:33 +0400
+X-Google-Sender-Auth: S3qF7kj7jF8teFRDcWzrknUpS4A
+Message-ID: <AANLkTilcGN2j7b8vaFjSWT5dj32tRMllyEuBhYQG5NXg@mail.gmail.com>
+From: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+To: Henning Heinold <heinold@inf.fu-berlin.de>
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: animist@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH (updated)] autotools.bbclass: enhanced oe_runconf() to accept quoted arguments
+Subject: Re: [PATCH] e2fsprogs: disable tls build with uclibc toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,39 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 May 2010 16:49:48 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 23 May 2010 17:09:41 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Chris Larson <clarson@kergoth.com> writes:
-
->> >> This patch allows to pass quoted strings in EXTRA_OECONF.
+On Sun, May 23, 2010 at 6:25 PM, Henning Heinold
+<heinold@inf.fu-berlin.de> wrote:
+> On Sat, May 22, 2010 at 05:52:08PM +0400, Vladimir Zapolskiy wrote:
+>> This patch removes dependency on oabi toolchain, because eabi uclibc
+>> toolchain anyway does not have tls support.
 >>
-> I fail to see how this is a problem.  Seems to work fine for every
-> other app, including make.
+>> Signed-off-by: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+>> Cc: woglinde <heinold@inf.fu-berlin.de>
+>> ---
+>> =C2=A0recipes/e2fsprogs/e2fsprogs.inc | =C2=A0 =C2=A03 +--
+>> =C2=A01 files changed, 1 insertions(+), 2 deletions(-)
+>>
+>> diff --git a/recipes/e2fsprogs/e2fsprogs.inc b/recipes/e2fsprogs/e2fspro=
+gs.inc
+>> index 119efb0..0eeedcd 100644
+>> --- a/recipes/e2fsprogs/e2fsprogs.inc
+>> +++ b/recipes/e2fsprogs/e2fsprogs.inc
+>> @@ -14,8 +14,7 @@ INC_PR =3D "r23"
+>> =C2=A0inherit autotools
+>>
+>> =C2=A0#if uclibc ntpl is merged into trunk we can enable tls for armv4 a=
+gain
+>> -EXTRA_OECONF =3D "${@['','--disable-tls'][bb.data.getVar('ARM_ABI', d, =
+1) =3D=3D 'oabi' and \
+>> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bb.data.getVar('TARGET_OS', =
+d, 1).find('uclibc') >=3D 0 ]} \
+>> +EXTRA_OECONF =3D "${@['','--disable-tls'][bb.data.getVar('TARGET_OS', d=
+, 1).find('uclibc') >=3D 0 ]} \
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --enable-elf-shlibs \
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --enable-dynamic-e2fsck=
+ --disable-nls --sbindir=3D${base_sbindir} \
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 --disable-libuuid --dis=
+able-libblkid --disable-fsck"
+>
+> Sorry,
+>
+> but you are wrong here the _git uclibc recipe and the hopefully soon comm=
+ing out
+> new uClibc will have tls support, but not for all archs. We will change t=
+he .inc
+> then.
+>
+Does _git uclibc go with nptl currently? I perform a test with
+armv4t/gcc-4.4.2/uclibc-0.9.30.3
+eabi version, and found the described compilation problem, that shows
+that oabi check is not
+so relevant.
 
-EXTRA_OEMAKE handling is implemented as
+Definitely the compilation problem cause is evaluated by invalid
+configuration from the recipe
+for eabi/uclibc platform.
 
-| ${MAKE} ${EXTRA_OEMAKE} "$@"
-
-but EXTRA_OECONF as
-
-| cfgcmd="... ${EXTRA_OECONF} $@"
-| $cfgcmd
-
-
-'make' arguments are expanded by bitbake which preserve the quoting.
-
-The EXTRA_OECONF content was put into a shell variable and this variable
-be executed.  This does not preserve quoting (and I am not aware of any
-way how this can be with variable assignments).
-
-
-> Is configure's argument passing that stupid, that it can't split by =
-> and use the right side for the value?
-
-It is not a configure issue, but a shell one.
-
-
-Enrico
+With best wishes,
+Vladimir
 
 
