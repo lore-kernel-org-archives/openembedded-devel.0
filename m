@@ -1,48 +1,41 @@
-Received: from mail-qy0-f193.google.com ([209.85.221.193])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OGC8f-0001F1-Tl
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1OGCCl-0003bT-5O
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 23 May 2010 16:27:25 +0200
-Received: by qyk31 with SMTP id 31so4490371qyk.25
+	Sun, 23 May 2010 16:31:04 +0200
+Received: (qmail 26776 invoked from network); 23 May 2010 16:25:56 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 23 May 2010 16:25:56 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id fPzVz9B+G4s3
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 May 2010 07:22:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=AWS8WkiKP3CcHKifmTqWRCUWO4XbOMcq4I5Aw6rFFeo=;
-	b=NevQ0m9soilGI+AKue4rG6cASya6K98l9AGNlNEAFpMkdBvwukLV9r6JhrlxrLPsNA
-	fI98GhPo2XUFsW3XCnqfwuY1QZqpmquE56CLazJlM41ptDqzhad7a0JL1mvKhoBMKBLZ
-	hZQJs97UvKSbaNtFeYOqltmxkxlRqHPcugmgw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=FfoT1NR/qESzS7SodY8PWpKJ2uT9nkdPXeFt3ibZp5HIeMhGz/YDdCNbvIBizXNt8Q
-	iQ1L/fd+hWe5908nYV97jUvoHO1OMSos+XP6spd2ccZQJ+TAE3VMxByQLrwe4IUSUFVy
-	cMAtXDIl1TpQI62mXzI1tL03NWbGkucyI9QGA=
-Received: by 10.229.38.148 with SMTP id b20mr857061qce.139.1274624564152; Sun, 
-	23 May 2010 07:22:44 -0700 (PDT)
+	Sun, 23 May 2010 16:25:39 +0200 (CEST)
+Received: (Qmail 26726 invoked from network); 23 May 2010 16:25:39 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 23 May 2010 14:25:39 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1OGC7W-0007jc-Vr; Sun, 23 May 2010 16:25:39 +0200
+Date: Sun, 23 May 2010 16:25:38 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+Message-ID: <20100523142538.GA27824@mi.fu-berlin.de>
+References: <1274536328-31845-1-git-send-email-vzapolskiy@gmail.com>
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.215.15 with HTTP; Sun, 23 May 2010 07:22:24 -0700 (PDT)
-In-Reply-To: <1274618279-24726-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1274618279-24726-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 23 May 2010 07:22:24 -0700
-X-Google-Sender-Auth: 3InO_VrnDu4hGB5rvt9VFAP57K4
-Message-ID: <AANLkTik5dgNt7_vbdwfrZiikmNNhogAnbyuZn-LZoZjc@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.193
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <1274536328-31845-1-git-send-email-vzapolskiy@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH] packaged-staging.bbclass: added missing space in find call
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] e2fsprogs: disable tls build with uclibc toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,26 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 May 2010 14:28:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 23 May 2010 14:31:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, May 23, 2010 at 5:37 AM, Enrico Scholz <
-enrico.scholz@sigma-chemnitz.de> wrote:
+On Sat, May 22, 2010 at 05:52:08PM +0400, Vladimir Zapolskiy wrote:
+> This patch removes dependency on oabi toolchain, because eabi uclibc
+> toolchain anyway does not have tls support.
+> 
+> Signed-off-by: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+> Cc: woglinde <heinold@inf.fu-berlin.de>
+> ---
+>  recipes/e2fsprogs/e2fsprogs.inc |    3 +--
+>  1 files changed, 1 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/e2fsprogs/e2fsprogs.inc b/recipes/e2fsprogs/e2fsprogs.inc
+> index 119efb0..0eeedcd 100644
+> --- a/recipes/e2fsprogs/e2fsprogs.inc
+> +++ b/recipes/e2fsprogs/e2fsprogs.inc
+> @@ -14,8 +14,7 @@ INC_PR = "r23"
+>  inherit autotools
+>  
+>  #if uclibc ntpl is merged into trunk we can enable tls for armv4 again
+> -EXTRA_OECONF = "${@['','--disable-tls'][bb.data.getVar('ARM_ABI', d, 1) == 'oabi' and \
+> -		bb.data.getVar('TARGET_OS', d, 1).find('uclibc') >= 0 ]} \
+> +EXTRA_OECONF = "${@['','--disable-tls'][bb.data.getVar('TARGET_OS', d, 1).find('uclibc') >= 0 ]} \
+>  		--enable-elf-shlibs \
+>  		--enable-dynamic-e2fsck --disable-nls --sbindir=${base_sbindir} \
+>  		--disable-libuuid --disable-libblkid --disable-fsck"
 
-> Old find statement failed with something like
->
->  $ find . \( -name XXX\)
->  find: invalid expression; I was expecting to find a ')' somewhere but did
-> not see one.
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
+Sorry,
 
-Acked-by: Chris Larson <clarson@kergoth.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+but you are wrong here the _git uclibc recipe and the hopefully soon comming out
+new uClibc will have tls support, but not for all archs. We will change the .inc
+then.
+
+
+Bye Henning
+
 
