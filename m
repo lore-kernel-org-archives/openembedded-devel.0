@@ -1,44 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OGDeI-0008Ik-1F for openembedded-devel@lists.openembedded.org;
-	Sun, 23 May 2010 18:03:34 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OGDaJ-0006fg-9B for openembedded-devel@lists.openembedded.org;
-	Sun, 23 May 2010 17:59:27 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 May 2010 17:59:27 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 May 2010 17:59:27 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 23 May 2010 17:59:14 +0200
-Message-ID: <htbjci$p3q$1@dough.gmane.org>
-References: <4BF69D04.5060506@mlbassoc.com> <htas5g$q1h$1@dough.gmane.org>
-	<AANLkTikD-rYl148gtkJZB859Q-hOdV0AXYxuyBdpodpY@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <AANLkTikD-rYl148gtkJZB859Q-hOdV0AXYxuyBdpodpY@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OGE14-0003zO-Nb
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 23 May 2010 18:27:07 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4NGMtVE006599
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 23 May 2010 18:22:55 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OGDx0-000281-Ro; Sun, 23 May 2010 18:22:54 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: Chris Larson <clarson@kergoth.com>
+References: <1268739774-10002-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<1274619132-32390-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<AANLkTimyqUYuSfWUQZdwn1Q2KrojnjvsUqLSCX9H_FMa@mail.gmail.com>
+Date: Sun, 23 May 2010 18:22:54 +0200
+In-Reply-To: <AANLkTimyqUYuSfWUQZdwn1Q2KrojnjvsUqLSCX9H_FMa@mail.gmail.com>
+	(Chris Larson's message of "Sun, 23 May 2010 07:21:50 -0700")
+Message-ID: <lyhblyk2ox.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: staging problem
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH (updated)] autotools.bbclass: enhanced oe_runconf() to accept quoted arguments
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +47,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 23 May 2010 16:03:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 23 May 2010 16:27:07 -0000
+Content-Type: text/plain; charset=us-ascii
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Chris Larson <clarson@kergoth.com> writes:
 
-On 23-05-10 17:17, Khem Raj wrote:
-> On Sun, May 23, 2010 at 2:22 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 21-05-10 16:47, Gary Thomas wrote:
->>>> Trying a clean build
->>>>   MACHINE="beagleboard"
->>>>   DISTRO="angstrom-2008.1"
->>>>   org.openembedded.dev 2c153f33b8ebb807a622ad9ae92ed5341a356740
->>>>
->>>> I get failures like this (in many packages):
-> 
-> I pushed a fix:
-> 
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=104b91c471125482eb83893425fb031557e892b4
-> 
-> That seems to solve the duplicate header problem for me and tk still
-> builds. As the commit says, do a 'bitbake glibc' afterwards to have
-> packaged-staging restore the headers.
-> 
->> hmm. Its deleting the libc header file isn't it. why cant they co-exist.?
+>> This patch allows to pass quoted strings in EXTRA_OECONF.  E.g. with
+>> this patch, it is possible to do
+>>
+>> | EXTRA_OECONF = "--with-build-cflags='${BUILD_CFLAGS}'"
+>>
+>> where 'BUILD_CFLAGS' contains multiple, whitespace separated arguments.
+>>
+>
+> I don't think that doing EXTRA_OECONF =
+> "'--with-build-cflags=${BUILD_CFLAGS}'"
+>
+> is that much more difficult, and works today, unless I'm missing
+> something?
 
-packaged-staging reaps all files the recipe staged, so if the recipe is
-*overwriting* headers like it was doing you will have missing headers
-till you reinstall them. Your glibc regexp.h was gone already.
+It does not work today... E.g. try the recipe
 
-regards,
+---- xxx.bb -----
+EXTRA_OECONF = "--with-build-cflags='-O2 -g3 --help'"
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+inherit autotools
 
-iD8DBQFL+VDSMkyGM64RGpERAlE+AJ0ZLmcPYIy4SymSufBGwDefYY9HJQCfSfsz
-cCbXntNX8XdT8vxA5cdPUd8=
-=C3cu
------END PGP SIGNATURE-----
+do_unpack() {
+    mkdir -p ${S}
+    echo 'AC_INIT()' > ${S}/configure.ac
+}
+----
 
+
+Without the patch, there will be called
+
+| $ ./bitbake -b /tmp/xxx.bb -c configure -f -D
+| ...
+| + ..../configure ...  '--with-build-cflags='\''-O2' -g3 '--help'\'''
+
+and with the patch
+
+| + ..../configure ...  '--with-build-cflags=-O2 -g3 --help'
+
+
+
+Enrico
 
 
