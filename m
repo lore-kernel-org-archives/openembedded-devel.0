@@ -1,44 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from fg-out-1718.google.com ([72.14.220.158])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OFuOi-0001Le-C1 for openembedded-devel@lists.openembedded.org;
-	Sat, 22 May 2010 21:30:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OFuKk-0007dM-Gh for openembedded-devel@lists.openembedded.org;
-	Sat, 22 May 2010 21:26:06 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 May 2010 21:26:06 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <vzapolskiy@gmail.com>) id 1OG6B0-0007y5-Pt
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 23 May 2010 10:04:51 +0200
+Received: by fg-out-1718.google.com with SMTP id 16so726685fgg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 22 May 2010 21:26:06 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 23 May 2010 01:00:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=8aGGbrzyCG1dnK+9e4dB/NOMYee3gQPDMljL1nzM5qE=;
+	b=R41vsZbtzahpepwHZb1RC9wW22a4AK06Qlf2tCQf9h8prdkseeHpPqjVIjzY/f4+Mg
+	JdeuzhxgSJXyoPQJ7K8+rRwAdC7rcvDqTlbEUHU33IULKHhUHcxQU2TXQPscD9qo0pjr
+	skH3ahM3pea1Fp13qjE+Qa84qnD4yTqtTnZmw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=WN61atoM7CKhIGnhSiFE9edxzoVsyF9MK/axGQLLXymwCVoGH6/tNe2XKyJtYfHGcc
+	HFRbSkBngwJZrpNxCU0tnEEEET9ws/JLB2/89tPDOwJttNupLamLw/hSG+RLAHDrpNJu
+	xjfLoAvcQHFz7gN6/KyKREc/VNhcdzwVGpG2k=
+Received: by 10.87.29.33 with SMTP id g33mr6389347fgj.27.1274601648039;
+	Sun, 23 May 2010 01:00:48 -0700 (PDT)
+Received: from localhost.localdomain ([94.188.57.8])
+	by mx.google.com with ESMTPS id 18sm3971540fks.5.2010.05.23.01.00.46
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 23 May 2010 01:00:47 -0700 (PDT)
+Sender: Vladimir Zapolskiy <animist@gmail.com>
+From: Vladimir Zapolskiy <vzapolskiy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 22 May 2010 21:25:55 +0200
-Message-ID: <ht9b43$cbs$1@dough.gmane.org>
-References: <4BF69D04.5060506@mlbassoc.com>	<AANLkTik1pMbRIMYx01oR0eA4xwruqMaSI8qoggbgPHwd@mail.gmail.com>	<4BF70683.3090704@mlbassoc.com>
-	<4BF7C553.2090901@mlbassoc.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <4BF7C553.2090901@mlbassoc.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sun, 23 May 2010 11:55:29 +0400
+Message-Id: <1274601329-18458-1-git-send-email-vzapolskiy@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 72.14.220.158
+X-SA-Exim-Mail-From: vzapolskiy@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: staging problem
+Cc: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+Subject: [PATCH] autotools: fix libiconv compilation for uclibc toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,105 +53,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 22 May 2010 19:30:14 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 23 May 2010 08:04:51 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Recent commit to autotools.bbclass forces gettext install dependency
+for packets with defined AM_GNU_GETTEXT macro. In uclibc platform
+gettext depends on libiconv, but the macro is present and reliable in
+libiconv configuration script.
 
-On 22-05-10 13:51, Gary Thomas wrote:
-> On 05/21/2010 04:17 PM, Gary Thomas wrote:
->> On 05/21/2010 02:27 PM, Khem Raj wrote:
->>> On Fri, May 21, 2010 at 7:47 AM, Gary Thomas<gary@mlbassoc.com> wrote:
->>>> Trying a clean build
->>>> MACHINE="beagleboard"
->>>> DISTRO="angstrom-2008.1"
->>>> org.openembedded.dev 2c153f33b8ebb807a622ad9ae92ed5341a356740
->>>>
->>>> I get failures like this (in many packages):
->>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:138:
->>>>
->>>>
->>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before
->>>> 're_void'
->>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:298:
->>>>
->>>>
->>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
->>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:307:
->>>>
->>>>
->>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'int'
->>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:309:
->>>>
->>>>
->>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before
->>>> 're_void'
->>>> /local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/regex.h:310:
->>>>
->>>>
->>>> error: expected '=', ',', ';', 'asm' or '__attribute__' before 'size_t'
->>>>
->>>> The problem is that the compiler include file<regex.h> is
->>>> not the standard/default one, rather the file from tcl!
->>>> I replaced the bogus regex.h file with the correct one and
->>>> my build completes& runs.
->>>
->>> its tcl dev package bug it should have installed its version into
->>> /usr/include/tcl<ver> instead of overwriting the existing version in
->>> sysroot.
->>>
->>> I can see the problem in the recipes if you are using 8.5.8 then
->>> try this untested patch and let me know if it helps
->>>
->>> diff --git a/recipes/tcltk/tcl_8.5.8.bb b/recipes/tcltk/tcl_8.5.8.bb
->>> index 220e858..dd5c810 100644
->>> --- a/recipes/tcltk/tcl_8.5.8.bb
->>> +++ b/recipes/tcltk/tcl_8.5.8.bb
->>> @@ -33,7 +33,8 @@ BINCONFIG_GLOB = "*Config.sh"
->>> do_install() {
->>> autotools_do_install
->>> # Stage a few extra headers to make tk happy
->>> - install -m 0644 ../generic/*.h ${D}${includedir}
->>> + install -d ${D}${includedir}/tcl8.5/generic/
->>> + install -m 0644 ../generic/*.h ${D}${includedir}/tcl8.5/generic/
->>> install -m 0644 *.h ${D}${includedir}
->>> ln -sf tclsh8.5 ${D}${bindir}/tclsh
->>> }
->>>
->>
->> Sorry, that patch/file does not line up at all with what's in
->> my tree. Is it valid for org.openembedded.dev commit
->> 0609b025f410ed09400404ab6af8775c78685b17?
->>
-> 
-> I applied the patch manually and while it does fix the /usr/include
-> pollution, it breaks building of 'tk'.  You'll probably need a
-> completely fresh build to see the problem.
+Signed-off-by: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+Cc: Joshua Lock <josh@linux.intel.com>
+---
+ classes/autotools.bbclass |    4 ----
+ 1 files changed, 0 insertions(+), 4 deletions(-)
 
-Could you please try the following on top on the patch:
-
-- --- a/recipes/tcltk/tcl_8.5.8.bb
-+++ b/recipes/tcltk/tcl_8.5.8.bb
-
- tcl_sysroot() {
-- -       sed -i 's:/usr/include/tcl-private:${STAGING_INCDIR}:'
-tclConfig.sh
-+       sed -i 's:/usr/include/tcl-private:${STAGING_INCDIR}/tcl-${PV}:'
-tclConfig.sh
- }
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL+C/DMkyGM64RGpERAvhLAJwKFZS4eRwZD9uwr/VTdo0Vu6toBwCcDygX
-DtAsEcQ7HXBl4iiIjYmBAgk=
-=70EL
------END PGP SIGNATURE-----
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index 9bb4f6c..a97a64a 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -129,10 +129,6 @@ autotools_do_configure() {
+ 			    oenote Executing glib-gettextize --force --copy
+ 			    echo "no" | glib-gettextize --force --copy
+ 			  fi
+-			else if grep "^[[:space:]]*AM_GNU_GETTEXT" $CONFIGURE_AC >/dev/null; then
+-			  cp ${STAGING_DATADIR}/gettext/config.rpath ${S}/
+-			fi
+-
+ 			fi
+ 			mkdir -p m4
+ 			oenote Executing autoreconf --verbose --install --force ${EXTRA_AUTORECONF} $acpaths
+-- 
+1.7.1
 
 
 
