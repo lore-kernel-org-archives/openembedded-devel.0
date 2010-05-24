@@ -1,30 +1,42 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OGSHg-0006nS-OM
+	(envelope-from <stefan@datenfreihafen.org>) id 1OGYCH-0002Gr-ON
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 May 2010 09:41:14 +0200
-Received: (qmail 28725 invoked by uid 813007); 24 May 2010 07:37:08 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 24 May 2010 07:37:08 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	Mon, 24 May 2010 16:00:03 +0200
+Received: from p5b034c45.dip.t-dialin.net ([91.3.76.69] helo=excalibur)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OGY8J-0004U8-Gd by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 24 May 2010 15:55:58 +0200
+Received: from stefan by excalibur with local (Exim 4.71)
+	(envelope-from <stefan@excalibur.local>) id 1OGY8I-0005Vw-DB
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 24 May 2010 15:55:54 +0200
+Date: Mon, 24 May 2010 15:55:54 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 24 May 2010 09:37:17 +0200
-User-Agent: KMail/1.13.3 (Linux/2.6.32-22-generic; KDE/4.4.3; x86_64; ; )
-References: <AANLkTimqsLv69OOmckplXCqoIZbybtIwjTVBAC-Uax4Q@mail.gmail.com>
-In-Reply-To: <AANLkTimqsLv69OOmckplXCqoIZbybtIwjTVBAC-Uax4Q@mail.gmail.com>
+Message-ID: <20100524135551.GB9685@excalibur.local>
+References: <1273758399-23601-1-git-send-email-aalonso00@gmail.com>
+	<1273758399-23601-2-git-send-email-aalonso00@gmail.com>
+	<1273758399-23601-3-git-send-email-aalonso00@gmail.com>
+	<20100514122113.GH3507@excalibur.local>
+	<AANLkTikMtgHDODuAzt-efsFrMyEOUsv6mnrK-14x5LxA@mail.gmail.com>
 MIME-Version: 1.0
-Message-Id: <201005240937.19706.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+In-Reply-To: <AANLkTikMtgHDODuAzt-efsFrMyEOUsv6mnrK-14x5LxA@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Angstrom distro, qemu: uncaught target signal 4 (Illegal instruction) - core dumped on glibc package
+Subject: Re: [PATCH 3/5 v2] linux-xilinx-ml507: update kernel version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,41 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 May 2010 07:41:14 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 24 May 2010 14:00:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Dnia niedziela, 23 maja 2010 o 12:17:43 Grzegorz Toporek napisa=C5=82(a):
-> Unfortunately, I got this error while building glibc package:
-> qemu: uncaught target signal 4 (Illegal instruction) - core dumped
->=20
-> I found this tread which says that gemu doesn't support iwmmxt...but how =
-to
-> deal with this? Is there a patch needed? Where to find it?
-> http://ibot.rikers.org/%23oe/20060827.html.gz
->=20
-> I use tune-iwmmxt.inc file with my machine.
+Hello.
 
-I told you few days ago:
+On Wed, 2010-05-19 at 09:53, Adrian Alonso wrote:
+> 
+> I have been looking on how to reorder the patch,
+> but I'm still a git newbie :( and I don't quite well
+> understand how to regenerate my patch sets with
+> modifying the git log history, what I'm been doing
+> is to create a new branch fix my patchs and resend
+> them, thats clearly wrong.
 
-Also one thing: do not use tune-iwmmxt for Colibri. This does not give any=
-=20
-special improvements for system. Add "iwmmxt" to MACHINE_FEATURES like it i=
-s=20
-in few machines already - this will give you optimized versions of those=20
-packages where it is really worth to enable that.
+No, thats good. What I normally do when I prepare a change that will contain
+more then 2 patches is that I'm creating a branch for this. If I found a bug
+later or people point them out to me in a review I will rework the patches in
+this branch and resend.
 
-And as Qemu does not handle iwmmxt instructions you can't get working binar=
-y=20
-locale build.
+For the rework process you have a lot tools in git's toolbox, but I agree that
+they are are not the easiest ones. Still once I understood them I never want to
+miss them again. :)
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+> Can you remove the patchs send on 2010-04-27 and
+> from the second patch set remove patch 3 and 4;
+> and use the path attached to make git bisec happy.
 
+I'm build testing this combination right now. One question that is still open is
+about the USE_VT in your first patch. Why did you comment it out? Something like
+this should be mentioned in the changelog.
 
+regards
+Stefan Schmidt
 
 
