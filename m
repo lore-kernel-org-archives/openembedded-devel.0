@@ -1,44 +1,30 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OGP40-0008Tq-5s
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OGSHg-0006nS-OM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 24 May 2010 06:14:53 +0200
-Received: by pwi5 with SMTP id 5so52309pwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 23 May 2010 21:10:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=bUpaXtqAq+z9EiJAbQemhrAUd/rNG4xqfLJMcHmZzaE=;
-	b=dK4jr6WQ6o2K4z6KB+l5ska1u8UrAKxLKIE6JEHuU9iNvTh7Q94NLeS9dFYo8Gw21x
-	rKnzxq6mQ0ExjgucPosIIrCLvmuDCUAhVZQN50JWSIWCmStDF2Vtz1YhgxDPxw3oHdS3
-	mtEyEJX+Qp0lSFD2EQa3tdTd1jb9RuRGZTuJ4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Gfj6lNn8X2Jku7RKnm6+wXvBHeDNtTXxuLQeHJWK2mKRSJ6jTEFzsjYwZCxLx/jlay
-	aHfv2ay6Eljz4DVUjQ2gJb7zs4q5LSt1bt8lMW7cLqtgGCgcT7OQIiC2rzQGn5cXnh6c
-	uqXb0rIlmXEcAS86bRMawxNnE1MiY5a8hWbfI=
-Received: by 10.114.18.36 with SMTP id 36mr4356582war.98.1274674245526;
-	Sun, 23 May 2010 21:10:45 -0700 (PDT)
-Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 33sm34807424wad.20.2010.05.23.21.10.44
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 23 May 2010 21:10:44 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 24 May 2010 09:41:14 +0200
+Received: (qmail 28725 invoked by uid 813007); 24 May 2010 07:37:08 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 24 May 2010 07:37:08 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 23 May 2010 21:10:40 -0700
-Message-Id: <1274674240-19973-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Mon, 24 May 2010 09:37:17 +0200
+User-Agent: KMail/1.13.3 (Linux/2.6.32-22-generic; KDE/4.4.3; x86_64; ; )
+References: <AANLkTimqsLv69OOmckplXCqoIZbybtIwjTVBAC-Uax4Q@mail.gmail.com>
+In-Reply-To: <AANLkTimqsLv69OOmckplXCqoIZbybtIwjTVBAC-Uax4Q@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201005240937.19706.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] distro/minimal.conf: Dont keep CACHE as weak assignment.
+Subject: Re: Angstrom distro, qemu: uncaught target signal 4 (Illegal instruction) - core dumped on glibc package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +38,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 24 May 2010 04:14:53 -0000
+X-List-Received-Date: Mon, 24 May 2010 07:41:14 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-* As this is a weak assignment and bitbake.conf has a proper
-  assignment and bitbake.conf is included before distro conf
-  file it leaves this weak assignment as no-op. The problem happens
-  when using minimal but changing libc from eglibc to uclibc then
-  it will use same cache directory and then its infact wrong.
+Dnia niedziela, 23 maja 2010 o 12:17:43 Grzegorz Toporek napisa=C5=82(a):
+> Unfortunately, I got this error while building glibc package:
+> qemu: uncaught target signal 4 (Illegal instruction) - core dumped
+>=20
+> I found this tread which says that gemu doesn't support iwmmxt...but how =
+to
+> deal with this? Is there a patch needed? Where to find it?
+> http://ibot.rikers.org/%23oe/20060827.html.gz
+>=20
+> I use tune-iwmmxt.inc file with my machine.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- conf/distro/minimal.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+I told you few days ago:
 
-diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
-index f42f1b6..1e72efd 100644
---- a/conf/distro/minimal.conf
-+++ b/conf/distro/minimal.conf
-@@ -66,7 +66,7 @@ IPKG_VARIANT = "opkg-nogpg"
- #############################################################################
- # Name the generated images in a sane way
- IMAGE_NAME = "${DISTRO_NAME}-${IMAGE_BASENAME}-${LIBC}-${PREFERRED_PKG_FORMAT}-${DISTRO_VERSION}-${MACHINE}"
--CACHE ?= "${TMPDIR}/cache/${LIBC}/${MACHINE}"
-+CACHE = "${TMPDIR}/cache/${LIBC}/${MACHINE}"
- DEPLOY_DIR ?= "${TMPDIR}/deploy/${LIBC}"
- DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images/${MACHINE}"
- SPLASH ?= '${@base_contains("MACHINE_FEATURES", "screen", "psplash", "",d)}'
--- 
-1.7.0.4
+Also one thing: do not use tune-iwmmxt for Colibri. This does not give any=
+=20
+special improvements for system. Add "iwmmxt" to MACHINE_FEATURES like it i=
+s=20
+in few machines already - this will give you optimized versions of those=20
+packages where it is really worth to enable that.
+
+And as Qemu does not handle iwmmxt instructions you can't get working binar=
+y=20
+locale build.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
