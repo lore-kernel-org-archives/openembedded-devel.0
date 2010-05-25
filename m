@@ -1,50 +1,31 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OGvKh-0006vk-Tb
+	(envelope-from <eric@eukrea.com>) id 1OGvO1-0006aR-9W
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 16:42:18 +0200
-Received: by pxi14 with SMTP id 14so1792861pxi.6
+	Tue, 25 May 2010 16:45:54 +0200
+Received: from smtp2-g21.free.fr (localhost [127.0.0.1])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 9585A4B0512
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 07:38:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Slv0cyL0K9PcWwmX8suzKSPWYxlbauAtqavGDy5Th7k=;
-	b=B7YUT7oh4FcnpMjNTF2ZmcUBCvSjoVAJyk5H9e7eN5V047qjSoUb5wbMLdLTTcNtGE
-	nljdzWdtTeCgEATCPfDYwSHG6VOYcUhcYTmR1B/W1EFIO957Da1KoDyRLPo9WgpvkE2d
-	HtENN02Hv99zIZEvkqfhB5d/MIzmSoO18NKpM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=TSutstEBZkT++Hwdh3KyC4MW2HLQF/dkEP5xyH+5MKZG4uHYU/w02kpvOmJGfpg2Sp
-	eGaRpLLcWQtn4bn623SwDGcDVCBYQTeD1ZRWIZG4Ze5KoBR1QwNLvqzUEMXDtgpR6auI
-	pgEM7y0ERDwIskwLA442QyPVdr1r9dWPBFAAY=
-Received: by 10.141.100.11 with SMTP id c11mr5331019rvm.106.1274798285761;
-	Tue, 25 May 2010 07:38:05 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id l29sm4214973rvb.4.2010.05.25.07.38.04
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 25 May 2010 07:38:04 -0700 (PDT)
-Date: Tue, 25 May 2010 07:37:57 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 25 May 2010 16:41:32 +0200 (CEST)
+Received: from localhost.localdomain (pac33-2-82-240-38-71.fbx.proxad.net
+	[82.240.38.71]) by smtp2-g21.free.fr (Postfix) with ESMTP
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 May 2010 16:41:30 +0200 (CEST)
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100525143757.GC26493@gmail.com>
-References: <1274794225-16222-1-git-send-email-Martin.Jansa@gmail.com>
-	<1274794225-16222-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue, 25 May 2010 16:37:29 +0200
+Message-Id: <1274798249-312-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
 MIME-Version: 1.0
-In-Reply-To: <1274794225-16222-4-git-send-email-Martin.Jansa@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] linux-openmoko: rename recipes to common PN_PV scheme and adjust om-gta* machine configs
+Subject: [PATCH] psplash: update OE logo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,902 +39,4693 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 14:42:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 25 May 2010 14:45:54 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-On (25/05/10 15:30), Martin Jansa wrote:
-> * unify preferred provider and version for om-gta02
-> 
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+* use the shiny new logo
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ recipes/psplash/files/psplash-poky-img.h | 2325 +++++++++++-------------=
+------
+ recipes/psplash/psplash.inc              |    2 +-
+ 2 files changed, 836 insertions(+), 1491 deletions(-)
 
-> ---
->  conf/distro/openmoko.conf                          |    8 -
->  conf/machine/om-3d7k.conf                          |    3 +-
->  conf/machine/om-gta01.conf                         |   12 +--
->  conf/machine/om-gta02.conf                         |   10 +-
->  recipes/linux/linux-openmoko-2.6.24_git.bb         |   28 ----
->  recipes/linux/linux-openmoko-2.6.28_git.bb         |   28 ----
->  .../0007-Enable-UBI-UBIFS.patch                    |  149 ++++++++++++++++++++
->  .../linux/linux-openmoko-2.6.29/fix-install.patch  |   23 +++
->  recipes/linux/linux-openmoko-2.6.32_git.bb         |   46 ------
->  recipes/linux/linux-openmoko-2.6.34_git.bb         |   39 -----
->  .../0007-Enable-UBI-UBIFS.patch                    |  149 --------------------
->  .../linux-openmoko-shr-devel/fix-install.patch     |   23 ---
->  recipes/linux/linux-openmoko-shr-devel_git.bb      |   26 ----
->  recipes/linux/linux-openmoko_2.6.24.bb             |   28 ++++
->  recipes/linux/linux-openmoko_2.6.28.bb             |   28 ++++
->  recipes/linux/linux-openmoko_2.6.29.bb             |   26 ++++
->  recipes/linux/linux-openmoko_2.6.32.bb             |   46 ++++++
->  recipes/linux/linux-openmoko_2.6.34_git            |   39 +++++
->  18 files changed, 347 insertions(+), 364 deletions(-)
->  delete mode 100644 recipes/linux/linux-openmoko-2.6.24_git.bb
->  delete mode 100644 recipes/linux/linux-openmoko-2.6.28_git.bb
->  create mode 100644 recipes/linux/linux-openmoko-2.6.29/0007-Enable-UBI-UBIFS.patch
->  create mode 100644 recipes/linux/linux-openmoko-2.6.29/fix-install.patch
->  delete mode 100644 recipes/linux/linux-openmoko-2.6.32_git.bb
->  delete mode 100644 recipes/linux/linux-openmoko-2.6.34_git.bb
->  delete mode 100644 recipes/linux/linux-openmoko-shr-devel/0007-Enable-UBI-UBIFS.patch
->  delete mode 100644 recipes/linux/linux-openmoko-shr-devel/fix-install.patch
->  delete mode 100644 recipes/linux/linux-openmoko-shr-devel_git.bb
->  create mode 100644 recipes/linux/linux-openmoko_2.6.24.bb
->  create mode 100644 recipes/linux/linux-openmoko_2.6.28.bb
->  create mode 100644 recipes/linux/linux-openmoko_2.6.29.bb
->  create mode 100644 recipes/linux/linux-openmoko_2.6.32.bb
->  create mode 100644 recipes/linux/linux-openmoko_2.6.34_git
-> 
-> diff --git a/conf/distro/openmoko.conf b/conf/distro/openmoko.conf
-> index 81d7075..2b34c40 100644
-> --- a/conf/distro/openmoko.conf
-> +++ b/conf/distro/openmoko.conf
-> @@ -53,14 +53,6 @@ PREFERRED_VERSION_binutils-cross ?= "2.17.50.0.12"
->  # require conf/distro/include/fso-autorev.inc
->  
->  # override the PACKAGE_ARCH of certain packages for openmoko distro
-> -#
-> -# Same kernel used to run on both these machines...
-> -# Currently not used but left here in case someone wants to switch on
-> -# quickly
-> -#PACKAGE_ARCH_pn-linux-openmoko_om-gta01 = "armv4t"
-> -#PACKAGE_ARCH_pn-linux-openmoko_om-gta02 = "armv4t"
-> -#PACKAGE_ARCH_pn-linux-openmoko-devel_om-gta01 = "armv4t"
-> -#PACKAGE_ARCH_pn-linux-openmoko-devel_om-gta02 = "armv4t"
->  
->  # Same kernel so same usb
->  PACKAGE_ARCH_pn-usb-gadget-mode_om-gta01 = "armv4t"
-> diff --git a/conf/machine/om-3d7k.conf b/conf/machine/om-3d7k.conf
-> index 95bfd40..229f34c 100644
-> --- a/conf/machine/om-3d7k.conf
-> +++ b/conf/machine/om-3d7k.conf
-> @@ -6,8 +6,9 @@
->  
->  TARGET_ARCH = "arm"
->  
-> -PREFERRED_PROVIDER_virtual/kernel ?= "linux-openmoko-devel"
-> +PREFERRED_PROVIDER_virtual/kernel ?= "linux-openmoko"
->  PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-> +PREFERRED_VERSION_linux-openmoko ?= "2.6.29"
->  
->  MACHINE_FEATURES = "kernel26 apm alsa bluetooth usbgadget usbhost phone vfat ext2"
->  MACHINE_DISPLAY_WIDTH_PIXELS = "480"
-> diff --git a/conf/machine/om-gta01.conf b/conf/machine/om-gta01.conf
-> index ede2a20..fddb653 100644
-> --- a/conf/machine/om-gta01.conf
-> +++ b/conf/machine/om-gta01.conf
-> @@ -6,16 +6,10 @@
->  
->  TARGET_ARCH = "arm"
->  
-> -PREFERRED_PROVIDER_virtual/kernel ?= "linux-openmoko-2.6.24"
-> +PREFERRED_PROVIDER_virtual/kernel ?= "linux-openmoko"
->  PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-> -
-> -# If you want to have KMS enabled in default kernel, uncomment linux-openmoko-shr-drm-devel
-> -PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-shr-devel"
-> -#PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-shr-drm-devel"
-> -#PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-2.6.31"
-> -#PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-2.6.32"
-> -
-> -PREFERRED_PROVIDER_virtual/libgl_shr = "mesa-dri"
-> +PREFERRED_VERSION_linux-openmoko ?= "2.6.29"
-> +PREFERRED_PROVIDER_virtual/libgl = "mesa-dri"
->  
->  UBOOT_ENTRYPOINT = "30008000"
->  
-> diff --git a/conf/machine/om-gta02.conf b/conf/machine/om-gta02.conf
-> index 9733269..ae1aa93 100644
-> --- a/conf/machine/om-gta02.conf
-> +++ b/conf/machine/om-gta02.conf
-> @@ -6,15 +6,11 @@
->  
->  TARGET_ARCH = "arm"
->  
-> -PREFERRED_PROVIDER_virtual/kernel ?= "linux-openmoko-2.6.28"
-> +PREFERRED_PROVIDER_virtual/kernel ?= "linux-openmoko"
->  PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
-> +PREFERRED_VERSION_linux-openmoko ?= "2.6.29"
->  
-> -# If you want to have KMS enabled in default kernel, uncomment linux-openmoko-shr-drm-devel
-> -PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-shr-devel"
-> -#PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-shr-drm-devel"
-> -#PREFERRED_PROVIDER_virtual/kernel_shr = "linux-openmoko-2.6.31"
-> -
-> -PREFERRED_PROVIDER_virtual/libgl_shr = "mesa-dri"
-> +PREFERRED_PROVIDER_virtual/libgl = "mesa-dri"
->  # Override only for shr as it needs mesa-dri_git and ie angstrom has preferred_version set to 7.6
->  MACHINE_DRI_MODULES_shr = "glamo"
->  
-> diff --git a/recipes/linux/linux-openmoko-2.6.24_git.bb b/recipes/linux/linux-openmoko-2.6.24_git.bb
-> deleted file mode 100644
-> index f7f7e32..0000000
-> --- a/recipes/linux/linux-openmoko-2.6.24_git.bb
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -require linux.inc
-> -require linux-openmoko.inc
-> -
-> -DESCRIPTION = "The Linux kernel for the Openmoko devices GTA01 (Neo1973) and GTA02 (Neo FreeRunner)"
-> -
-> -KERNEL_RELEASE = "2.6.24"
-> -KERNEL_VERSION = "${KERNEL_RELEASE}"
-> -
-> -SRCREV = "fb42ce6724576fc173faf8abfb04aa2c36d213b7"
-> -OEV = "oe5"
-> -PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> -PR = "r1"
-> -
-> -SRC_URI = "\
-> -  git://git.openmoko.org/git/kernel.git;protocol=git;branch=stable \
-> -  \
-> -  file://0001-squashfs-with-lzma.patch;patch=1 \
-> -  file://0002-squashfs-initrd.patch;patch=1 \
-> -  file://0003-squashfs-force-O2.patch;patch=1 \
-> -  file://0004-squashfs-Kconfig.patch;patch=1 \
-> -  file://0005-squashfs-Makefile.patch;patch=1 \
-> -  \
-> -  file://openwrt-ledtrig-netdev.patch;patch=1 \
-> -  file://gta01-fix-battery-class-name.patch;patch=1 \
-> -  \
-> -  file://defconfig-oe \
-> -"
-> -S = "${WORKDIR}/git"
-> diff --git a/recipes/linux/linux-openmoko-2.6.28_git.bb b/recipes/linux/linux-openmoko-2.6.28_git.bb
-> deleted file mode 100644
-> index cc5ab90..0000000
-> --- a/recipes/linux/linux-openmoko-2.6.28_git.bb
-> +++ /dev/null
-> @@ -1,28 +0,0 @@
-> -require linux.inc
-> -require linux-openmoko.inc
-> -
-> -DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-> -
-> -KERNEL_RELEASE = "2.6.28"
-> -KERNEL_VERSION = "${KERNEL_RELEASE}"
-> -
-> -SRCREV = "8c65792a5c83c76d662a617a7c4e1ae8104bb6a5"
-> -OEV = "oe2"
-> -PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> -PR = "r0"
-> -
-> -SRC_URI = "\
-> -  git://git.openmoko.org/git/kernel.git;protocol=git;branch=stable \
-> -  file://defconfig-oe.patch \
-> -"
-> -S = "${WORKDIR}/git"
-> -
-> -CONFIG_NAME_om-gta01 = "gta01_moredrivers_defconfig"
-> -CONFIG_NAME_om-gta02 = "gta02_packaging_defconfig"
-> -
-> -do_configure_prepend() {
-> -	install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> -	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
-> -}
-> -
-> -
-> diff --git a/recipes/linux/linux-openmoko-2.6.29/0007-Enable-UBI-UBIFS.patch b/recipes/linux/linux-openmoko-2.6.29/0007-Enable-UBI-UBIFS.patch
-> new file mode 100644
-> index 0000000..dd40bc8
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko-2.6.29/0007-Enable-UBI-UBIFS.patch
-> @@ -0,0 +1,149 @@
-> +From 8f907c17c068beb94264a4a6d40314658a0c1393 Mon Sep 17 00:00:00 2001
-> +From: Martin Jansa <Martin.Jansa@gmail.com>
-> +Date: Sun, 8 Nov 2009 10:58:28 +0100
-> +Subject: [PATCH 7/7] Enable UBI/UBIFS
-> +
-> +---
-> + arch/arm/configs/gta02_packaging_defconfig |   39 ++++++++++++++++++++++++++++++---
-> + 1 files changed, 35 insertions(+), 4 deletions(-)
-> +
-> +diff --git a/arch/arm/configs/gta02_packaging_defconfig b/arch/arm/configs/gta02_packaging_defconfig
-> +index e17ddc3..7506963 100644
-> +--- a/arch/arm/configs/gta02_packaging_defconfig
-> ++++ b/arch/arm/configs/gta02_packaging_defconfig
-> +@@ -806,7 +806,30 @@ CONFIG_MTD_NAND_S3C2410_HWECC=y
-> + #
-> + # UBI - Unsorted block images
-> + #
-> +-# CONFIG_MTD_UBI is not set
-> ++CONFIG_MTD_UBI=y
-> ++CONFIG_MTD_UBI_WL_THRESHOLD=4096
-> ++CONFIG_MTD_UBI_BEB_RESERVE=1
-> ++CONFIG_MTD_UBI_GLUEBI=y
-> ++
-> ++#
-> ++# UBI debugging options
-> ++#
-> ++CONFIG_MTD_UBI_DEBUG=y
-> ++# CONFIG_MTD_UBI_DEBUG_MSG is not set
-> ++# CONFIG_MTD_UBI_DEBUG_PARANOID is not set
-> ++CONFIG_MTD_UBI_DEBUG_DISABLE_BGT=y
-> ++# CONFIG_MTD_UBI_DEBUG_USERSPACE_IO is not set
-> ++# CONFIG_MTD_UBI_DEBUG_EMULATE_BITFLIPS is not set
-> ++# CONFIG_MTD_UBI_DEBUG_EMULATE_WRITE_FAILURES is not set
-> ++# CONFIG_MTD_UBI_DEBUG_EMULATE_ERASE_FAILURES is not set
-> ++
-> ++#
-> ++# Additional UBI debugging messages
-> ++#
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_BLD is not set
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_EBA is not set
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_WL is not set
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_IO is not set
-> + # CONFIG_PARPORT is not set
-> + CONFIG_BLK_DEV=y
-> + # CONFIG_BLK_DEV_COW_COMMON is not set
-> +@@ -1877,6 +1900,12 @@ CONFIG_JFFS2_ZLIB=y
-> + # CONFIG_JFFS2_LZO is not set
-> + CONFIG_JFFS2_RTIME=y
-> + # CONFIG_JFFS2_RUBIN is not set
-> ++CONFIG_UBIFS_FS=y
-> ++# CONFIG_UBIFS_FS_XATTR is not set
-> ++# CONFIG_UBIFS_FS_ADVANCED_COMPR is not set
-> ++CONFIG_UBIFS_FS_LZO=y
-> ++CONFIG_UBIFS_FS_ZLIB=y
-> ++# CONFIG_UBIFS_FS_DEBUG is not set
-> + CONFIG_CRAMFS=y
-> + CONFIG_SQUASHFS=m
-> + # CONFIG_SQUASHFS_EMBEDDED is not set
-> +@@ -2151,8 +2180,8 @@ CONFIG_CRYPTO_TWOFISH_COMMON=m
-> + #
-> + # Compression
-> + #
-> +-CONFIG_CRYPTO_DEFLATE=m
-> +-# CONFIG_CRYPTO_LZO is not set
-> ++CONFIG_CRYPTO_DEFLATE=y
-> ++CONFIG_CRYPTO_LZO=y
-> + 
-> + #
-> + # Random Number Generation
-> +@@ -2174,6 +2203,8 @@ CONFIG_CRC32=y
-> + CONFIG_LIBCRC32C=m
-> + CONFIG_ZLIB_INFLATE=y
-> + CONFIG_ZLIB_DEFLATE=y
-> ++CONFIG_LZO_COMPRESS=y
-> ++CONFIG_LZO_DECOMPRESS=y
-> + CONFIG_TEXTSEARCH=y
-> + CONFIG_TEXTSEARCH_KMP=m
-> + CONFIG_TEXTSEARCH_BM=m
-> +diff --git a/arch/arm/configs/gta01_moredrivers_defconfig b/arch/arm/configs/gta01_moredrivers_defconfig
-> +index e17ddc3..7506963 100644
-> +--- a/arch/arm/configs/gta01_moredrivers_defconfig
-> ++++ b/arch/arm/configs/gta01_moredrivers_defconfig
-> +@@ -806,7 +806,30 @@ CONFIG_MTD_NAND_S3C2410_HWECC=y
-> + #
-> + # UBI - Unsorted block images
-> + #
-> +-# CONFIG_MTD_UBI is not set
-> ++CONFIG_MTD_UBI=y
-> ++CONFIG_MTD_UBI_WL_THRESHOLD=4096
-> ++CONFIG_MTD_UBI_BEB_RESERVE=1
-> ++CONFIG_MTD_UBI_GLUEBI=y
-> ++
-> ++#
-> ++# UBI debugging options
-> ++#
-> ++CONFIG_MTD_UBI_DEBUG=y
-> ++# CONFIG_MTD_UBI_DEBUG_MSG is not set
-> ++# CONFIG_MTD_UBI_DEBUG_PARANOID is not set
-> ++CONFIG_MTD_UBI_DEBUG_DISABLE_BGT=y
-> ++# CONFIG_MTD_UBI_DEBUG_USERSPACE_IO is not set
-> ++# CONFIG_MTD_UBI_DEBUG_EMULATE_BITFLIPS is not set
-> ++# CONFIG_MTD_UBI_DEBUG_EMULATE_WRITE_FAILURES is not set
-> ++# CONFIG_MTD_UBI_DEBUG_EMULATE_ERASE_FAILURES is not set
-> ++
-> ++#
-> ++# Additional UBI debugging messages
-> ++#
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_BLD is not set
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_EBA is not set
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_WL is not set
-> ++# CONFIG_MTD_UBI_DEBUG_MSG_IO is not set
-> + # CONFIG_PARPORT is not set
-> + CONFIG_BLK_DEV=y
-> + # CONFIG_BLK_DEV_COW_COMMON is not set
-> +@@ -1877,6 +1900,12 @@ CONFIG_JFFS2_ZLIB=y
-> + # CONFIG_JFFS2_LZO is not set
-> + CONFIG_JFFS2_RTIME=y
-> + # CONFIG_JFFS2_RUBIN is not set
-> ++CONFIG_UBIFS_FS=y
-> ++# CONFIG_UBIFS_FS_XATTR is not set
-> ++# CONFIG_UBIFS_FS_ADVANCED_COMPR is not set
-> ++CONFIG_UBIFS_FS_LZO=y
-> ++CONFIG_UBIFS_FS_ZLIB=y
-> ++# CONFIG_UBIFS_FS_DEBUG is not set
-> + CONFIG_CRAMFS=y
-> + CONFIG_SQUASHFS=m
-> + # CONFIG_SQUASHFS_EMBEDDED is not set
-> +@@ -2151,8 +2180,8 @@ CONFIG_CRYPTO_TWOFISH_COMMON=m
-> + #
-> + # Compression
-> + #
-> +-CONFIG_CRYPTO_DEFLATE=m
-> +-# CONFIG_CRYPTO_LZO is not set
-> ++CONFIG_CRYPTO_DEFLATE=y
-> ++CONFIG_CRYPTO_LZO=y
-> + 
-> + #
-> + # Random Number Generation
-> +@@ -2174,6 +2203,8 @@ CONFIG_CRC32=y
-> + CONFIG_LIBCRC32C=m
-> + CONFIG_ZLIB_INFLATE=y
-> + CONFIG_ZLIB_DEFLATE=y
-> ++CONFIG_LZO_COMPRESS=y
-> ++CONFIG_LZO_DECOMPRESS=y
-> + CONFIG_TEXTSEARCH=y
-> + CONFIG_TEXTSEARCH_KMP=m
-> + CONFIG_TEXTSEARCH_BM=m
-> +-- 
-> +1.6.5.2
-> diff --git a/recipes/linux/linux-openmoko-2.6.29/fix-install.patch b/recipes/linux/linux-openmoko-2.6.29/fix-install.patch
-> new file mode 100644
-> index 0000000..b14ca7d
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko-2.6.29/fix-install.patch
-> @@ -0,0 +1,23 @@
-> +From: Steve Sakoman <steve@sakoman.com>
-> +Date: Mon, 18 Aug 2008 16:07:31 +0000 (-0700)
-> +Subject: scripts/Makefile.fwinst: add missing space when setting mode in cmd_install
-> +X-Git-Url: http://www.sakoman.net/cgi-bin/gitweb.cgi?p=linux-omap-2.6.git;a=commitdiff_plain;h=f039944bdd491cde7327133e9976881d3133ae70
-> +
-> +scripts/Makefile.fwinst: add missing space when setting mode in cmd_install
-> +
-> +This was causing build failures on some machines
-> +---
-> +
-> +diff --git a/scripts/Makefile.fwinst b/scripts/Makefile.fwinst
-> +index 6bf8e87..fb20532 100644
-> +--- a/scripts/Makefile.fwinst
-> ++++ b/scripts/Makefile.fwinst
-> +@@ -37,7 +37,7 @@
-> +        @true
-> +
-> + quiet_cmd_install = INSTALL $(subst $(srctree)/,,$@)
-> +-      cmd_install = $(INSTALL) -m0644 $< $@
-> ++      cmd_install = $(INSTALL) -m 0644 $< $@
-> +
-> + $(installed-fw-dirs):
-> +        $(call cmd,mkdir)
-> diff --git a/recipes/linux/linux-openmoko-2.6.32_git.bb b/recipes/linux/linux-openmoko-2.6.32_git.bb
-> deleted file mode 100644
-> index 133e5af..0000000
-> --- a/recipes/linux/linux-openmoko-2.6.32_git.bb
-> +++ /dev/null
-> @@ -1,46 +0,0 @@
-> -require linux.inc
-> -require linux-openmoko.inc
-> -
-> -DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-> -
-> -KERNEL_RELEASE="2.6.32.13"
-> -
-> -SRCREV = "a9254be10ac2294ea20165a87c09ea6afcf66d94"
-> -OEV = "oe2"
-> -PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> -
-> -SRC_URI = "\
-> -  git://git.openmoko.org/git/kernel.git;protocol=git;branch=om-gta02-2.6.32 \
-> -  file://0001-Revert-s3cmci-initialize-default-platform-data-no_wp.patch;patch=1 \
-> -# latest stable patch for ubi fix 943e167cb3e8fb191894bde8a4a75db78531a7c8
-> -  ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_RELEASE}.bz2;patch=1;name=stablepatch \
-> -# build fix
-> -  file://0001-wm8753-fix-build-with-gcc-4.4.2-which-works-ok-with-.patch;patch=1 \
-> -# patches from Radek Polak used in qtmoko
-> -  file://0002-accels.patch.patch;patch=1 \
-> -  file://0003-usbhost.patch.patch;patch=1 \
-> -  file://0004-ar6000_delay.patch.patch;patch=1 \
-> -  file://0005-save_regs.patch.patch;patch=1 \
-> -# defconfig updates
-> -  file://0006-gta02-defconfigs-enable-LEDS_S3C24XX-and-dummy-batte.patch;patch=1 \
-> -# patches from Weiss's gdrm-for-merging branch
-> -  file://0007-DRM-for-platform-devices.patch;patch=1 \
-> -  file://0008-Glamo-DRM-and-KMS-driver.patch;patch=1 \
-> -  file://0009-Work-on-Glamo-core-for-DRM.patch;patch=1 \
-> -  file://0010-JBT6k74-work-for-KMS.patch;patch=1 \
-> -  file://0011-Fix-crash-when-reading-Glamo-registers-via-sysfs.patch;patch=1 \
-> -  file://0012-Fix-dynamic-command-queue-allocation.patch;patch=1 \
-> -  file://0013-Debug-statements-for-testing.patch;patch=1 \
-> -  file://0014-Fix-claim-of-2D-register-resource.patch;patch=1 \
-> -"
-> -
-> -SRC_URI[stablepatch.md5sum] = "ba6abb1ffee513a1d4f831599ddae490"
-> -SRC_URI[stablepatch.sha256sum] = "baf6dff5d1c478e65decf2e8b704c60e546ea37c4de59ee8eb6af9dd3d63f145"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -CONFIG_NAME_om-gta02 = "gta02_drm_defconfig"
-> -
-> -do_configure_prepend() {
-> -        install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> -}
-> diff --git a/recipes/linux/linux-openmoko-2.6.34_git.bb b/recipes/linux/linux-openmoko-2.6.34_git.bb
-> deleted file mode 100644
-> index 6d3b52b..0000000
-> --- a/recipes/linux/linux-openmoko-2.6.34_git.bb
-> +++ /dev/null
-> @@ -1,39 +0,0 @@
-> -require linux.inc
-> -require linux-openmoko.inc
-> -
-> -DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-> -
-> -KERNEL_RELEASE="2.6.34"
-> -
-> -SRCREV = "dd1225cc08c3375bf80289ac1965c724881b149a"
-> -OEV = "oe2"
-> -PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> -
-> -SRC_URI = "\
-> -  git://git.openmoko.org/git/kernel.git;protocol=git;branch=om-gta02-2.6.34 \
-> -# build fix
-> -  file://wm8753-fix-build-with-gcc-4.4.2-which-works-ok-with-.patch;patch=1 \
-> -# patches from Thomas White's gdrm-for-merging branch
-> -  file://0001-DRM-for-platform-devices.patch;patch=1 \
-> -  file://0002-Glamo-DRM-and-KMS-driver.patch;patch=1 \
-> -  file://0003-Work-on-Glamo-core-for-DRM.patch;patch=1 \
-> -  file://0004-JBT6k74-work-for-KMS.patch;patch=1 \
-> -  file://0005-Fix-crash-when-reading-Glamo-registers-via-sysfs.patch;patch=1 \
-> -  file://0006-Fix-dynamic-command-queue-allocation.patch;patch=1 \
-> -  file://0007-Debug-statements-for-testing.patch;patch=1 \
-> -  file://0008-Fix-claim-of-2D-register-resource.patch;patch=1 \
-> -  file://0009-Use-unlocked_ioctl-rather-than-ioctl.patch;patch=1 \
-> -# patches from Radek Polak used in qtmoko
-> -  file://0001-accels.patch.patch;patch=1 \
-> -  file://0002-usbhost.patch.patch;patch=1 \
-> -  file://0003-ar6000_delay.patch.patch;patch=1 \
-> -  file://0004-save_regs.patch.patch;patch=1 \
-> -"
-> -
-> -S = "${WORKDIR}/git"
-> -
-> -CONFIG_NAME_om-gta02 = "gta02_drm_defconfig"
-> -
-> -do_configure_prepend() {
-> -        install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> -}
-> diff --git a/recipes/linux/linux-openmoko-shr-devel/0007-Enable-UBI-UBIFS.patch b/recipes/linux/linux-openmoko-shr-devel/0007-Enable-UBI-UBIFS.patch
-> deleted file mode 100644
-> index dd40bc8..0000000
-> --- a/recipes/linux/linux-openmoko-shr-devel/0007-Enable-UBI-UBIFS.patch
-> +++ /dev/null
-> @@ -1,149 +0,0 @@
-> -From 8f907c17c068beb94264a4a6d40314658a0c1393 Mon Sep 17 00:00:00 2001
-> -From: Martin Jansa <Martin.Jansa@gmail.com>
-> -Date: Sun, 8 Nov 2009 10:58:28 +0100
-> -Subject: [PATCH 7/7] Enable UBI/UBIFS
-> -
-> ----
-> - arch/arm/configs/gta02_packaging_defconfig |   39 ++++++++++++++++++++++++++++++---
-> - 1 files changed, 35 insertions(+), 4 deletions(-)
-> -
-> -diff --git a/arch/arm/configs/gta02_packaging_defconfig b/arch/arm/configs/gta02_packaging_defconfig
-> -index e17ddc3..7506963 100644
-> ---- a/arch/arm/configs/gta02_packaging_defconfig
-> -+++ b/arch/arm/configs/gta02_packaging_defconfig
-> -@@ -806,7 +806,30 @@ CONFIG_MTD_NAND_S3C2410_HWECC=y
-> - #
-> - # UBI - Unsorted block images
-> - #
-> --# CONFIG_MTD_UBI is not set
-> -+CONFIG_MTD_UBI=y
-> -+CONFIG_MTD_UBI_WL_THRESHOLD=4096
-> -+CONFIG_MTD_UBI_BEB_RESERVE=1
-> -+CONFIG_MTD_UBI_GLUEBI=y
-> -+
-> -+#
-> -+# UBI debugging options
-> -+#
-> -+CONFIG_MTD_UBI_DEBUG=y
-> -+# CONFIG_MTD_UBI_DEBUG_MSG is not set
-> -+# CONFIG_MTD_UBI_DEBUG_PARANOID is not set
-> -+CONFIG_MTD_UBI_DEBUG_DISABLE_BGT=y
-> -+# CONFIG_MTD_UBI_DEBUG_USERSPACE_IO is not set
-> -+# CONFIG_MTD_UBI_DEBUG_EMULATE_BITFLIPS is not set
-> -+# CONFIG_MTD_UBI_DEBUG_EMULATE_WRITE_FAILURES is not set
-> -+# CONFIG_MTD_UBI_DEBUG_EMULATE_ERASE_FAILURES is not set
-> -+
-> -+#
-> -+# Additional UBI debugging messages
-> -+#
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_BLD is not set
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_EBA is not set
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_WL is not set
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_IO is not set
-> - # CONFIG_PARPORT is not set
-> - CONFIG_BLK_DEV=y
-> - # CONFIG_BLK_DEV_COW_COMMON is not set
-> -@@ -1877,6 +1900,12 @@ CONFIG_JFFS2_ZLIB=y
-> - # CONFIG_JFFS2_LZO is not set
-> - CONFIG_JFFS2_RTIME=y
-> - # CONFIG_JFFS2_RUBIN is not set
-> -+CONFIG_UBIFS_FS=y
-> -+# CONFIG_UBIFS_FS_XATTR is not set
-> -+# CONFIG_UBIFS_FS_ADVANCED_COMPR is not set
-> -+CONFIG_UBIFS_FS_LZO=y
-> -+CONFIG_UBIFS_FS_ZLIB=y
-> -+# CONFIG_UBIFS_FS_DEBUG is not set
-> - CONFIG_CRAMFS=y
-> - CONFIG_SQUASHFS=m
-> - # CONFIG_SQUASHFS_EMBEDDED is not set
-> -@@ -2151,8 +2180,8 @@ CONFIG_CRYPTO_TWOFISH_COMMON=m
-> - #
-> - # Compression
-> - #
-> --CONFIG_CRYPTO_DEFLATE=m
-> --# CONFIG_CRYPTO_LZO is not set
-> -+CONFIG_CRYPTO_DEFLATE=y
-> -+CONFIG_CRYPTO_LZO=y
-> - 
-> - #
-> - # Random Number Generation
-> -@@ -2174,6 +2203,8 @@ CONFIG_CRC32=y
-> - CONFIG_LIBCRC32C=m
-> - CONFIG_ZLIB_INFLATE=y
-> - CONFIG_ZLIB_DEFLATE=y
-> -+CONFIG_LZO_COMPRESS=y
-> -+CONFIG_LZO_DECOMPRESS=y
-> - CONFIG_TEXTSEARCH=y
-> - CONFIG_TEXTSEARCH_KMP=m
-> - CONFIG_TEXTSEARCH_BM=m
-> -diff --git a/arch/arm/configs/gta01_moredrivers_defconfig b/arch/arm/configs/gta01_moredrivers_defconfig
-> -index e17ddc3..7506963 100644
-> ---- a/arch/arm/configs/gta01_moredrivers_defconfig
-> -+++ b/arch/arm/configs/gta01_moredrivers_defconfig
-> -@@ -806,7 +806,30 @@ CONFIG_MTD_NAND_S3C2410_HWECC=y
-> - #
-> - # UBI - Unsorted block images
-> - #
-> --# CONFIG_MTD_UBI is not set
-> -+CONFIG_MTD_UBI=y
-> -+CONFIG_MTD_UBI_WL_THRESHOLD=4096
-> -+CONFIG_MTD_UBI_BEB_RESERVE=1
-> -+CONFIG_MTD_UBI_GLUEBI=y
-> -+
-> -+#
-> -+# UBI debugging options
-> -+#
-> -+CONFIG_MTD_UBI_DEBUG=y
-> -+# CONFIG_MTD_UBI_DEBUG_MSG is not set
-> -+# CONFIG_MTD_UBI_DEBUG_PARANOID is not set
-> -+CONFIG_MTD_UBI_DEBUG_DISABLE_BGT=y
-> -+# CONFIG_MTD_UBI_DEBUG_USERSPACE_IO is not set
-> -+# CONFIG_MTD_UBI_DEBUG_EMULATE_BITFLIPS is not set
-> -+# CONFIG_MTD_UBI_DEBUG_EMULATE_WRITE_FAILURES is not set
-> -+# CONFIG_MTD_UBI_DEBUG_EMULATE_ERASE_FAILURES is not set
-> -+
-> -+#
-> -+# Additional UBI debugging messages
-> -+#
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_BLD is not set
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_EBA is not set
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_WL is not set
-> -+# CONFIG_MTD_UBI_DEBUG_MSG_IO is not set
-> - # CONFIG_PARPORT is not set
-> - CONFIG_BLK_DEV=y
-> - # CONFIG_BLK_DEV_COW_COMMON is not set
-> -@@ -1877,6 +1900,12 @@ CONFIG_JFFS2_ZLIB=y
-> - # CONFIG_JFFS2_LZO is not set
-> - CONFIG_JFFS2_RTIME=y
-> - # CONFIG_JFFS2_RUBIN is not set
-> -+CONFIG_UBIFS_FS=y
-> -+# CONFIG_UBIFS_FS_XATTR is not set
-> -+# CONFIG_UBIFS_FS_ADVANCED_COMPR is not set
-> -+CONFIG_UBIFS_FS_LZO=y
-> -+CONFIG_UBIFS_FS_ZLIB=y
-> -+# CONFIG_UBIFS_FS_DEBUG is not set
-> - CONFIG_CRAMFS=y
-> - CONFIG_SQUASHFS=m
-> - # CONFIG_SQUASHFS_EMBEDDED is not set
-> -@@ -2151,8 +2180,8 @@ CONFIG_CRYPTO_TWOFISH_COMMON=m
-> - #
-> - # Compression
-> - #
-> --CONFIG_CRYPTO_DEFLATE=m
-> --# CONFIG_CRYPTO_LZO is not set
-> -+CONFIG_CRYPTO_DEFLATE=y
-> -+CONFIG_CRYPTO_LZO=y
-> - 
-> - #
-> - # Random Number Generation
-> -@@ -2174,6 +2203,8 @@ CONFIG_CRC32=y
-> - CONFIG_LIBCRC32C=m
-> - CONFIG_ZLIB_INFLATE=y
-> - CONFIG_ZLIB_DEFLATE=y
-> -+CONFIG_LZO_COMPRESS=y
-> -+CONFIG_LZO_DECOMPRESS=y
-> - CONFIG_TEXTSEARCH=y
-> - CONFIG_TEXTSEARCH_KMP=m
-> - CONFIG_TEXTSEARCH_BM=m
-> --- 
-> -1.6.5.2
-> diff --git a/recipes/linux/linux-openmoko-shr-devel/fix-install.patch b/recipes/linux/linux-openmoko-shr-devel/fix-install.patch
-> deleted file mode 100644
-> index b14ca7d..0000000
-> --- a/recipes/linux/linux-openmoko-shr-devel/fix-install.patch
-> +++ /dev/null
-> @@ -1,23 +0,0 @@
-> -From: Steve Sakoman <steve@sakoman.com>
-> -Date: Mon, 18 Aug 2008 16:07:31 +0000 (-0700)
-> -Subject: scripts/Makefile.fwinst: add missing space when setting mode in cmd_install
-> -X-Git-Url: http://www.sakoman.net/cgi-bin/gitweb.cgi?p=linux-omap-2.6.git;a=commitdiff_plain;h=f039944bdd491cde7327133e9976881d3133ae70
-> -
-> -scripts/Makefile.fwinst: add missing space when setting mode in cmd_install
-> -
-> -This was causing build failures on some machines
-> ----
-> -
-> -diff --git a/scripts/Makefile.fwinst b/scripts/Makefile.fwinst
-> -index 6bf8e87..fb20532 100644
-> ---- a/scripts/Makefile.fwinst
-> -+++ b/scripts/Makefile.fwinst
-> -@@ -37,7 +37,7 @@
-> -        @true
-> -
-> - quiet_cmd_install = INSTALL $(subst $(srctree)/,,$@)
-> --      cmd_install = $(INSTALL) -m0644 $< $@
-> -+      cmd_install = $(INSTALL) -m 0644 $< $@
-> -
-> - $(installed-fw-dirs):
-> -        $(call cmd,mkdir)
-> diff --git a/recipes/linux/linux-openmoko-shr-devel_git.bb b/recipes/linux/linux-openmoko-shr-devel_git.bb
-> deleted file mode 100644
-> index 8753d65..0000000
-> --- a/recipes/linux/linux-openmoko-shr-devel_git.bb
-> +++ /dev/null
-> @@ -1,26 +0,0 @@
-> -require linux.inc
-> -require linux-openmoko.inc
-> -
-> -DESCRIPTION_${PN} = "Linux ${KERNEL_VERSION} kernel for the Openmoko Neo GSM Smartphones"
-> -
-> -KERNEL_RELEASE = "2.6.29"
-> -KERNEL_VERSION = "2.6.29-rc3"
-> -
-> -SRCREV = "973a41fce60e5f6edfcf0eaf94056a57eee65e16"
-> -OMV = "oe11"
-> -PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCPV}"
-> -PR = "r8"
-> -
-> -SRC_URI = "\
-> -  git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
-> -  file://fix-install.patch;patch=1 \
-> -  file://0007-Enable-UBI-UBIFS.patch;patch=1 \
-> -"
-> -S = "${WORKDIR}/git"
-> -
-> -CONFIG_NAME_om-gta01 = "gta01_moredrivers_defconfig"
-> -CONFIG_NAME_om-gta02 = "gta02_packaging_defconfig"
-> -
-> -do_configure_prepend() { 
-> -	install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> -}
-> diff --git a/recipes/linux/linux-openmoko_2.6.24.bb b/recipes/linux/linux-openmoko_2.6.24.bb
-> new file mode 100644
-> index 0000000..f7f7e32
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko_2.6.24.bb
-> @@ -0,0 +1,28 @@
-> +require linux.inc
-> +require linux-openmoko.inc
-> +
-> +DESCRIPTION = "The Linux kernel for the Openmoko devices GTA01 (Neo1973) and GTA02 (Neo FreeRunner)"
-> +
-> +KERNEL_RELEASE = "2.6.24"
-> +KERNEL_VERSION = "${KERNEL_RELEASE}"
-> +
-> +SRCREV = "fb42ce6724576fc173faf8abfb04aa2c36d213b7"
-> +OEV = "oe5"
-> +PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> +PR = "r1"
-> +
-> +SRC_URI = "\
-> +  git://git.openmoko.org/git/kernel.git;protocol=git;branch=stable \
-> +  \
-> +  file://0001-squashfs-with-lzma.patch;patch=1 \
-> +  file://0002-squashfs-initrd.patch;patch=1 \
-> +  file://0003-squashfs-force-O2.patch;patch=1 \
-> +  file://0004-squashfs-Kconfig.patch;patch=1 \
-> +  file://0005-squashfs-Makefile.patch;patch=1 \
-> +  \
-> +  file://openwrt-ledtrig-netdev.patch;patch=1 \
-> +  file://gta01-fix-battery-class-name.patch;patch=1 \
-> +  \
-> +  file://defconfig-oe \
-> +"
-> +S = "${WORKDIR}/git"
-> diff --git a/recipes/linux/linux-openmoko_2.6.28.bb b/recipes/linux/linux-openmoko_2.6.28.bb
-> new file mode 100644
-> index 0000000..cc5ab90
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko_2.6.28.bb
-> @@ -0,0 +1,28 @@
-> +require linux.inc
-> +require linux-openmoko.inc
-> +
-> +DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-> +
-> +KERNEL_RELEASE = "2.6.28"
-> +KERNEL_VERSION = "${KERNEL_RELEASE}"
-> +
-> +SRCREV = "8c65792a5c83c76d662a617a7c4e1ae8104bb6a5"
-> +OEV = "oe2"
-> +PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> +PR = "r0"
-> +
-> +SRC_URI = "\
-> +  git://git.openmoko.org/git/kernel.git;protocol=git;branch=stable \
-> +  file://defconfig-oe.patch \
-> +"
-> +S = "${WORKDIR}/git"
-> +
-> +CONFIG_NAME_om-gta01 = "gta01_moredrivers_defconfig"
-> +CONFIG_NAME_om-gta02 = "gta02_packaging_defconfig"
-> +
-> +do_configure_prepend() {
-> +	install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> +	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
-> +}
-> +
-> +
-> diff --git a/recipes/linux/linux-openmoko_2.6.29.bb b/recipes/linux/linux-openmoko_2.6.29.bb
-> new file mode 100644
-> index 0000000..8753d65
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko_2.6.29.bb
-> @@ -0,0 +1,26 @@
-> +require linux.inc
-> +require linux-openmoko.inc
-> +
-> +DESCRIPTION_${PN} = "Linux ${KERNEL_VERSION} kernel for the Openmoko Neo GSM Smartphones"
-> +
-> +KERNEL_RELEASE = "2.6.29"
-> +KERNEL_VERSION = "2.6.29-rc3"
-> +
-> +SRCREV = "973a41fce60e5f6edfcf0eaf94056a57eee65e16"
-> +OMV = "oe11"
-> +PV = "${KERNEL_RELEASE}-${OMV}+gitr${SRCPV}"
-> +PR = "r8"
-> +
-> +SRC_URI = "\
-> +  git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
-> +  file://fix-install.patch;patch=1 \
-> +  file://0007-Enable-UBI-UBIFS.patch;patch=1 \
-> +"
-> +S = "${WORKDIR}/git"
-> +
-> +CONFIG_NAME_om-gta01 = "gta01_moredrivers_defconfig"
-> +CONFIG_NAME_om-gta02 = "gta02_packaging_defconfig"
-> +
-> +do_configure_prepend() { 
-> +	install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> +}
-> diff --git a/recipes/linux/linux-openmoko_2.6.32.bb b/recipes/linux/linux-openmoko_2.6.32.bb
-> new file mode 100644
-> index 0000000..133e5af
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko_2.6.32.bb
-> @@ -0,0 +1,46 @@
-> +require linux.inc
-> +require linux-openmoko.inc
-> +
-> +DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-> +
-> +KERNEL_RELEASE="2.6.32.13"
-> +
-> +SRCREV = "a9254be10ac2294ea20165a87c09ea6afcf66d94"
-> +OEV = "oe2"
-> +PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> +
-> +SRC_URI = "\
-> +  git://git.openmoko.org/git/kernel.git;protocol=git;branch=om-gta02-2.6.32 \
-> +  file://0001-Revert-s3cmci-initialize-default-platform-data-no_wp.patch;patch=1 \
-> +# latest stable patch for ubi fix 943e167cb3e8fb191894bde8a4a75db78531a7c8
-> +  ${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/patch-${KERNEL_RELEASE}.bz2;patch=1;name=stablepatch \
-> +# build fix
-> +  file://0001-wm8753-fix-build-with-gcc-4.4.2-which-works-ok-with-.patch;patch=1 \
-> +# patches from Radek Polak used in qtmoko
-> +  file://0002-accels.patch.patch;patch=1 \
-> +  file://0003-usbhost.patch.patch;patch=1 \
-> +  file://0004-ar6000_delay.patch.patch;patch=1 \
-> +  file://0005-save_regs.patch.patch;patch=1 \
-> +# defconfig updates
-> +  file://0006-gta02-defconfigs-enable-LEDS_S3C24XX-and-dummy-batte.patch;patch=1 \
-> +# patches from Weiss's gdrm-for-merging branch
-> +  file://0007-DRM-for-platform-devices.patch;patch=1 \
-> +  file://0008-Glamo-DRM-and-KMS-driver.patch;patch=1 \
-> +  file://0009-Work-on-Glamo-core-for-DRM.patch;patch=1 \
-> +  file://0010-JBT6k74-work-for-KMS.patch;patch=1 \
-> +  file://0011-Fix-crash-when-reading-Glamo-registers-via-sysfs.patch;patch=1 \
-> +  file://0012-Fix-dynamic-command-queue-allocation.patch;patch=1 \
-> +  file://0013-Debug-statements-for-testing.patch;patch=1 \
-> +  file://0014-Fix-claim-of-2D-register-resource.patch;patch=1 \
-> +"
-> +
-> +SRC_URI[stablepatch.md5sum] = "ba6abb1ffee513a1d4f831599ddae490"
-> +SRC_URI[stablepatch.sha256sum] = "baf6dff5d1c478e65decf2e8b704c60e546ea37c4de59ee8eb6af9dd3d63f145"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +CONFIG_NAME_om-gta02 = "gta02_drm_defconfig"
-> +
-> +do_configure_prepend() {
-> +        install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> +}
-> diff --git a/recipes/linux/linux-openmoko_2.6.34_git b/recipes/linux/linux-openmoko_2.6.34_git
-> new file mode 100644
-> index 0000000..6d3b52b
-> --- /dev/null
-> +++ b/recipes/linux/linux-openmoko_2.6.34_git
-> @@ -0,0 +1,39 @@
-> +require linux.inc
-> +require linux-openmoko.inc
-> +
-> +DESCRIPTION_${PN} = "Linux ${KERNEL_RELEASE} kernel for the Openmoko Neo GSM Smartphones"
-> +
-> +KERNEL_RELEASE="2.6.34"
-> +
-> +SRCREV = "dd1225cc08c3375bf80289ac1965c724881b149a"
-> +OEV = "oe2"
-> +PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
-> +
-> +SRC_URI = "\
-> +  git://git.openmoko.org/git/kernel.git;protocol=git;branch=om-gta02-2.6.34 \
-> +# build fix
-> +  file://wm8753-fix-build-with-gcc-4.4.2-which-works-ok-with-.patch;patch=1 \
-> +# patches from Thomas White's gdrm-for-merging branch
-> +  file://0001-DRM-for-platform-devices.patch;patch=1 \
-> +  file://0002-Glamo-DRM-and-KMS-driver.patch;patch=1 \
-> +  file://0003-Work-on-Glamo-core-for-DRM.patch;patch=1 \
-> +  file://0004-JBT6k74-work-for-KMS.patch;patch=1 \
-> +  file://0005-Fix-crash-when-reading-Glamo-registers-via-sysfs.patch;patch=1 \
-> +  file://0006-Fix-dynamic-command-queue-allocation.patch;patch=1 \
-> +  file://0007-Debug-statements-for-testing.patch;patch=1 \
-> +  file://0008-Fix-claim-of-2D-register-resource.patch;patch=1 \
-> +  file://0009-Use-unlocked_ioctl-rather-than-ioctl.patch;patch=1 \
-> +# patches from Radek Polak used in qtmoko
-> +  file://0001-accels.patch.patch;patch=1 \
-> +  file://0002-usbhost.patch.patch;patch=1 \
-> +  file://0003-ar6000_delay.patch.patch;patch=1 \
-> +  file://0004-save_regs.patch.patch;patch=1 \
-> +"
-> +
-> +S = "${WORKDIR}/git"
-> +
-> +CONFIG_NAME_om-gta02 = "gta02_drm_defconfig"
-> +
-> +do_configure_prepend() {
-> +        install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
-> +}
-> -- 
-> 1.7.1
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes/psplash/files/psplash-poky-img.h b/recipes/psplash/f=
+iles/psplash-poky-img.h
+index 5278177..f21d0f9 100644
+--- a/recipes/psplash/files/psplash-poky-img.h
++++ b/recipes/psplash/files/psplash-poky-img.h
+@@ -2,1497 +2,842 @@
+=20
+ #define POKY_IMG_ROWSTRIDE (880)
+ #define POKY_IMG_WIDTH (220)
+-#define POKY_IMG_HEIGHT (137)
++#define POKY_IMG_HEIGHT (177)
+ #define POKY_IMG_BYTES_PER_PIXEL (4) /* 3:RGB, 4:RGBA */
+ #define POKY_IMG_RLE_PIXEL_DATA ((uint8*) \
+-  "\310\354\354\341\377\2\342\342\330\377\352\352\337\377\323\354\354\34=
+1" \
+-  "\377\2\346\346\333\377\345\345\332\377\377\354\354\341\377\206\354\35=
+4" \
+-  "\341\377\2\335\335\322\377\350\350\335\377\323\354\354\341\377\2\343"=
+ \
+-  "\343\331\377\342\342\330\377\377\354\354\341\377\206\354\354\341\377"=
+ \
+-  "\2\335\335\322\377\350\350\335\377\323\354\354\341\377\2\343\343\331"=
+ \
+-  "\377\342\342\330\377\377\354\354\341\377\206\354\354\341\377\2\335\33=
+5" \
+-  "\322\377\350\350\335\377\323\354\354\341\377\2\343\343\331\377\342\34=
+2" \
+-  "\330\377\377\354\354\341\377\206\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\323\354\354\341\377\2\343\343\331\377\342\342\330\377\37=
+7" \
+-  "\354\354\341\377\206\354\354\341\377\2\335\335\322\377\350\350\335\37=
+7" \
+-  "\323\354\354\341\377\2\343\343\331\377\342\342\330\377\375\354\354\34=
+1" \
+-  "\377\21\346\346\333\377\305\305\273\377\240\240\230\377xyu\377efd\377=
+" \
+-  "XYY\377LLM\377FGH\377\77@B\377CDF\377GHI\377QQR\377]^]\377kki\377\210=
+" \
+-  "\210\204\377\257\257\247\377\323\323\312\377\303\354\354\341\377\6\33=
+7" \
+-  "\337\325\377\272\272\261\377\216\216\210\377ab`\377JJJ\377>\77@\377\2=
+02" \
+-  "<=3D\77\377\12;<@\37779=3D\37789=3D\377\77@B\377YYY\377~~z\377\242\24=
+2\232" \
+-  "\377\306\306\274\377\342\342\330\377\350\350\335\377\362\354\354\341"=
+ \
+-  "\377\32\337\337\324\377\231\231\222\377OPP\377\77@D\377@BH\377TVb\377=
+" \
+-  "fk~\377}\203\233\377\211\217\253\377\220\227\264\377\230\237\276\377"=
+ \
+-  "\234\243\302\377\222\230\265\377\231\240\276\377\234\243\302\377\225"=
+ \
+-  "\234\272\377\215\224\260\377\205\213\246\377sx\217\377_br\377KNV\377"=
+ \
+-  "=3D>C\377@AC\377iig\377\271\271\260\377\353\353\340\377\271\354\354\3=
+41" \
+-  "\377\34\347\347\334\377\260\260\250\377fge\377>\77A\3778:=3D\377=3D\7=
+7F\377" \
+-  "RTa\377fj\177\377\177\205\237\377\216\225\261\377\230\237\275\377\232=
+" \
+-  "\241\300\377\233\242\301\377\234\243\302\377\226\235\273\377\225\234"=
+ \
+-  "\272\377\233\242\301\377\211\220\253\377rw\215\377\\`q\377HKT\3778:=3D=
+" \
+-  "\377BCD\377\216\216\210\377\322\322\307\377\334\334\322\377\344\344\3=
+31" \
+-  "\377\353\353\340\377\352\354\354\341\377\6\323\323\311\377\206\207\20=
+2" \
+-  "\377EFG\377CEL\377hm\201\377\224\232\270\377\211\234\243\302\377\2\22=
+2" \
+-  "\230\265\377\231\240\276\377\211\234\243\302\377\6\204\212\244\377X["=
+ \
+-  "i\377<=3DA\377XXX\377\247\247\237\377\345\345\332\377\263\354\354\341=
+\377" \
+-  "\10\322\322\310\377\212\213\206\377FFH\37778=3D\377SVc\377w}\225\377\=
+224" \
+-  "\233\270\377\232\241\277\377\211\234\243\302\377\2\226\235\273\377\22=
+5" \
+-  "\234\272\377\206\234\243\302\377\11\224\233\270\377dhz\377<=3DB\377TT=
+T" \
+-  "\377\247\247\240\377\330\330\316\377\332\332\320\377\342\342\330\377"=
+ \
+-  "\352\352\337\377\344\354\354\341\377\6\303\303\272\377stq\377=3D>A\37=
+7" \
+-  "HJS\377qv\214\377\230\237\276\377\214\234\243\302\377\2\222\230\265\3=
+77" \
+-  "\231\240\276\377\214\234\243\302\377\6\214\222\256\377^bs\377;<A\377"=
+ \
+-  "JJK\377\225\225\217\377\335\335\322\377\255\354\354\341\377\10\352\35=
+2" \
+-  "\337\377\244\244\235\377BCD\377\77AI\377bgz\377\210\217\252\377\225\2=
+34" \
+-  "\272\377\232\241\300\377\214\234\243\302\377\2\226\235\273\377\225\23=
+4" \
+-  "\272\377\211\234\243\302\377\11\213\221\255\377Y\\j\3779:=3D\377hhf\3=
+77" \
+-  "\312\312\302\377\332\332\320\377\331\331\317\377\337\337\325\377\351"=
+ \
+-  "\351\336\377\337\354\354\341\377\5\232\232\224\37789;\377PS^\377z\200=
+" \
+-  "\230\377\233\242\301\377\217\234\243\302\377\2\222\230\265\377\231\24=
+0" \
+-  "\276\377\217\234\243\302\377\5\222\230\265\377ej|\377=3D\77F\377MNN\3=
+77" \
+-  "\314\314\303\377\251\354\354\341\377\7\332\332\320\377yyv\377569\377"=
+ \
+-  "TWe\377\207\215\250\377\227\235\273\377\233\242\301\377\217\234\243\3=
+02" \
+-  "\377\2\226\235\273\377\225\234\272\377\214\234\243\302\377\10~\203\23=
+4" \
+-  "\377:<A\377}~z\377\347\347\334\377\344\344\331\377\333\333\321\377\33=
+1" \
+-  "\331\317\377\346\346\333\377\333\354\354\341\377\4\261\261\251\377<=3D=
+" \
+-  "\77\377]ap\377\230\237\276\377\213\234\243\302\377\20\232\241\277\377=
+" \
+-  "\230\237\275\377\226\235\273\377\224\233\270\377\222\231\266\377\220"=
+ \
+-  "\227\264\377\207\215\250\377ko\205\377w}\226\377\215\223\260\377\221"=
+ \
+-  "\230\265\377\223\232\267\377\225\233\271\377\227\235\273\377\230\237"=
+ \
+-  "\276\377\232\241\300\377\213\234\243\302\377\4\206\214\247\377@BI\377=
+" \
+-  "`a_\377\331\331\317\377\245\354\354\341\377\6\340\340\326\377mnk\377"=
+ \
+-  ">>D\377ko\205\377\222\230\265\377\232\241\300\377\213\234\243\302\377=
+" \
+-  "\5\232\241\277\377\230\237\275\377\226\235\273\377\224\233\270\377\22=
+2" \
+-  "\231\266\377\202\220\227\264\377\2\213\221\255\377\212\220\254\377\20=
+2" \
+-  "\220\227\264\377\5\222\231\266\377\224\233\270\377\226\235\273\377\23=
+0" \
+-  "\237\275\377\232\241\277\377\207\234\243\302\377\10jn\202\37789;\377"=
+ \
+-  "\261\261\251\377\354\354\341\377\352\352\337\377\335\335\322\377\332"=
+ \
+-  "\332\320\377\350\350\335\377\327\354\354\341\377\4\306\306\274\377HI"=
+ \
+-  "J\377QTa\377\224\232\270\377\211\234\243\302\377\2\227\236\274\377\22=
+2" \
+-  "\230\265\377\202\220\227\264\377\20\222\231\266\377nt\212\377TXe\377"=
+ \
+-  "CEL\377@AF\377EFH\377VWX\377rsp\377jki\377KLN\377BDG\377>\77E\377JMV"=
+ \
+-  "\377\\`o\377\203\211\244\377\222\230\265\377\202\220\227\264\377\2\22=
+4" \
+-  "\233\270\377\232\241\277\377\211\234\243\302\377\4|\201\232\377:;@\37=
+7" \
+-  "vvs\377\343\343\331\377\241\354\354\341\377\6\351\351\336\377\211\212=
+" \
+-  "\205\37789=3D\377os\211\377\220\227\264\377\231\240\276\377\211\234\2=
+43" \
+-  "\302\377\2\230\237\276\377\223\232\267\377\202\220\227\264\377\5\222"=
+ \
+-  "\231\266\377\224\233\270\377\226\235\273\377\230\237\275\377\232\241"=
+ \
+-  "\277\377\202\234\243\302\377\2\226\235\273\377\225\234\272\377\202\23=
+4" \
+-  "\243\302\377\5\232\241\277\377\230\237\275\377\226\235\273\377\224\23=
+3" \
+-  "\270\377\222\231\266\377\202\220\227\264\377\2\223\232\267\377\230\23=
+7" \
+-  "\276\377\204\234\243\302\377\11\225\233\271\377OQ\\\377RRR\377\325\32=
+5" \
+-  "\313\377\354\354\341\377\351\351\336\377\333\333\321\377\334\334\322"=
+ \
+-  "\377\352\352\337\377\323\354\354\341\377\4\324\324\312\377YYY\377GJS"=
+ \
+-  "\377\215\223\257\377\207\234\243\302\377\14\233\242\301\377\226\235\2=
+73" \
+-  "\377\221\230\265\377\220\227\264\377\225\233\271\377\232\241\300\377"=
+ \
+-  "\231\240\276\377fk}\377:;\77\377}~z\377\277\277\266\377\341\341\327\3=
+77" \
+-  "\203\354\354\341\377\2\335\335\322\377\350\350\335\377\203\354\354\34=
+1" \
+-  "\377\13\324\324\312\377\256\256\246\377TUU\377EGO\377\200\206\237\377=
+" \
+-  "\234\243\302\377\230\237\275\377\222\231\266\377\220\227\264\377\223"=
+ \
+-  "\232\267\377\230\237\276\377\210\234\243\302\377\4pu\213\37789<\377\2=
+16" \
+-  "\216\211\377\352\352\337\377\236\354\354\341\377\5\264\264\255\37789"=
+ \
+-  ";\377afw\377\216\225\261\377\230\237\276\377\210\234\243\302\377\5\22=
+7" \
+-  "\236\274\377\222\230\265\377\220\227\264\377\224\232\270\377\231\240"=
+ \
+-  "\276\377\211\234\243\302\377\20\224\233\271\377\207\215\250\377~\204"=
+ \
+-  "\235\377ot\213\377cfy\377W[h\377RU`\377X[i\377^br\377dh{\377ko\205\37=
+7" \
+-  "qv\214\377\202\207\242\377\220\227\264\377\222\230\265\377\227\236\27=
+4" \
+-  "\377\203\234\243\302\377\3\203\211\243\37767;\377\273\273\262\377\202=
+" \
+-  "\354\354\341\377\4\347\347\334\377\331\331\317\377\337\337\324\377\35=
+3" \
+-  "\353\340\377\317\354\354\341\377\4\342\342\330\377nnl\377@BH\377\203"=
+ \
+-  "\211\243\377\207\234\243\302\377\13\225\234\272\377\220\227\264\377\2=
+21" \
+-  "\230\265\377\226\235\273\377\233\242\301\377\234\243\302\377\224\232"=
+ \
+-  "\270\377Z^l\377<=3D@\377\225\225\220\377\350\350\335\377\206\354\354\=
+341" \
+-  "\377\2\335\335\322\377\350\350\335\377\206\354\354\341\377\4\323\323"=
+ \
+-  "\311\377efe\377>@E\377sx\217\377\202\234\243\302\377\5\231\240\276\37=
+7" \
+-  "\223\232\267\377\220\226\263\377\222\230\265\377\230\237\276\377\206"=
+ \
+-  "\234\243\302\377\4\232\241\300\377ej{\377;;>\377\250\250\241\377\233"=
+ \
+-  "\354\354\341\377\5\350\350\335\377oom\377CFO\377\210\217\252\377\227"=
+ \
+-  "\235\273\377\207\234\243\302\377\5\227\235\273\377\221\230\265\377\22=
+0" \
+-  "\227\264\377\225\233\271\377\232\241\300\377\210\234\243\302\377\33\2=
+22" \
+-  "\231\266\377ot\213\377RU`\377;<A\377@AC\377YYY\377ttq\377\215\215\207=
+" \
+-  "\377\244\244\235\377\271\271\260\377\303\303\272\377\271\271\260\377"=
+ \
+-  "\256\256\246\377\243\243\234\377\230\230\220\377\211\211\204\377aba\3=
+77" \
+-  "CDE\377<=3DB\377GIR\377Z]n\377tz\220\377\226\234\272\377\234\243\302\=
+377" \
+-  "\225\233\271\3779;@\377\264\264\255\377\203\354\354\341\377\3\345\345=
+" \
+-  "\332\377\331\331\317\377\340\340\326\377\315\354\354\341\377\3\321\32=
+1" \
+-  "\307\377<=3D>\377w|\223\377\207\234\243\302\377\3\226\235\273\377\217=
+\226" \
+-  "\262\377\226\235\273\377\204\234\243\302\377\3_cs\377ABD\377\252\252"=
+ \
+-  "\243\377\211\354\354\341\377\2\335\335\322\377\350\350\335\377\210\35=
+4" \
+-  "\354\341\377\4\337\337\324\377{{x\3779;\77\377\206\214\247\377\203\23=
+4" \
+-  "\243\302\377\4\232\241\277\377\223\232\267\377\221\230\265\377\231\24=
+0" \
+-  "\276\377\206\234\243\302\377\4\227\236\274\377RUa\377mnk\377\353\353"=
+ \
+-  "\340\377\230\354\354\341\377\4\313\313\302\377;<>\377ei|\377\225\233"=
+ \
+-  "\271\377\207\234\243\302\377\4\230\237\275\377\220\226\263\377\224\23=
+3" \
+-  "\270\377\233\242\301\377\210\234\243\302\377\11\222\230\265\377^bs\37=
+7" \
+-  "9:>\377MNN\377\207\207\202\377\302\302\271\377\352\352\337\377\343\34=
+3" \
+-  "\331\377\342\342\330\377\215\354\354\341\377\11\323\323\311\377\245\2=
+45" \
+-  "\236\377nnl\37788;\377BEM\377qw\215\377\225\233\271\3779:\77\377\334"=
+ \
+-  "\334\322\377\204\354\354\341\377\3\341\341\327\377\332\332\320\377\35=
+3" \
+-  "\353\340\377\312\354\354\341\377\3\266\266\256\37789>\377\214\223\256=
+" \
+-  "\377\206\234\243\302\377\3\227\236\274\377\217\226\262\377\225\233\27=
+1" \
+-  "\377\204\234\243\302\377\3\227\236\274\377DFP\377}~{\377\213\354\354"=
+ \
+-  "\341\377\2\335\335\322\377\350\350\335\377\212\354\354\341\377\3\330"=
+ \
+-  "\330\316\377ABC\377qv\213\377\204\234\243\302\377\1\232\241\277\377\2=
+02" \
+-  "\222\230\265\377\1\232\241\300\377\206\234\243\302\377\3ko\202\377MM"=
+ \
+-  "M\377\341\341\327\377\226\354\354\341\377\4\234\234\227\3779;A\377\20=
+0" \
+-  "\206\237\377\230\237\275\377\206\234\243\302\377\4\231\240\276\377\22=
+0" \
+-  "\227\264\377\222\231\266\377\233\242\301\377\207\234\243\302\377\6\23=
+2" \
+-  "\241\300\377pu\212\377@BI\377GHI\377\241\241\232\377\347\347\334\377"=
+ \
+-  "\204\354\354\341\377\2\343\343\331\377\342\342\330\377\221\354\354\34=
+1" \
+-  "\377\5\313\313\302\377rrp\37778:\377'(-\377^_^\377\205\354\354\341\37=
+7" \
+-  "\3\346\346\333\377\330\330\316\377\351\351\336\377\310\354\354\341\37=
+7" \
+-  "\3\222\222\215\377BDK\377\227\235\273\377\205\234\243\302\377\4\230\2=
+37" \
+-  "\276\377\220\227\264\377\223\232\267\377\233\242\301\377\204\234\243"=
+ \
+-  "\302\377\3\214\222\256\37778=3D\377\254\254\246\377\214\354\354\341\3=
+77" \
+-  "\2\335\335\322\377\350\350\335\377\213\354\354\341\377\3\350\350\335"=
+ \
+-  "\377aaa\377WZh\377\205\234\243\302\377\4\231\240\276\377\220\227\264"=
+ \
+-  "\377\224\232\270\377\233\242\301\377\205\234\243\302\377\3}\203\233\3=
+77" \
+-  ";<>\377\320\320\306\377\224\354\354\341\377\4\205\205\201\377GIS\377"=
+ \
+-  "\215\223\260\377\232\241\277\377\205\234\243\302\377\4\232\241\300\37=
+7" \
+-  "\222\230\265\377\221\230\265\377\232\241\300\377\210\234\243\302\377"=
+ \
+-  "\4mr\207\37789=3D\377~\177{\377\327\327\315\377\207\354\354\341\377\2=
+\343" \
+-  "\343\331\377\342\342\330\377\223\354\354\341\377\4\352\352\337\377\30=
+3" \
+-  "\303\271\377\257\257\246\377\352\352\337\377\205\354\354\341\377\3\35=
+1" \
+-  "\351\336\377\330\330\316\377\345\345\332\377\305\354\354\341\377\3\35=
+2" \
+-  "\352\337\377hig\377UXe\377\205\234\243\302\377\4\232\241\277\377\221"=
+ \
+-  "\230\265\377\222\230\265\377\232\241\300\377\205\234\243\302\377\3y~"=
+ \
+-  "\225\377:;=3D\377\317\317\305\377\215\354\354\341\377\2\335\335\322\3=
+77" \
+-  "\350\350\335\377\215\354\354\341\377\3\220\221\214\377@BI\377\224\233=
+" \
+-  "\270\377\205\234\243\302\377\3\227\236\274\377\220\226\263\377\225\23=
+3" \
+-  "\271\377\205\234\243\302\377\3\214\223\256\37789>\377\265\265\255\377=
+" \
+-  "\222\354\354\341\377\4llj\377SVb\377\220\226\263\377\233\242\301\377"=
+ \
+-  "\204\234\243\302\377\4\233\242\301\377\223\232\267\377\220\227\264\37=
+7" \
+-  "\231\240\276\377\210\234\243\302\377\4uz\222\3779;\77\377\177\177{\37=
+7" \
+-  "\345\345\332\377\211\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\225\354\354\341\377\4\350\350\335\377\333\333\321\377\337\337\324\37=
+7" \
+-  "\353\353\340\377\204\354\354\341\377\3\353\353\340\377\332\332\320\37=
+7" \
+-  "\341\341\327\377\303\354\354\341\377\3\337\337\325\377IJJ\377lq\204\3=
+77" \
+-  "\205\234\243\302\377\3\230\237\275\377\217\226\262\377\231\240\276\37=
+7" \
+-  "\206\234\243\302\377\3jn\201\377QRQ\377\343\343\331\377\216\354\354\3=
+41" \
+-  "\377\2\335\335\322\377\350\350\335\377\216\354\354\341\377\3\274\274"=
+ \
+-  "\263\37768<\377\221\230\265\377\206\234\243\302\377\3\225\234\272\377=
+" \
+-  "\220\227\264\377\233\242\301\377\204\234\243\302\377\3\227\235\273\37=
+7" \
+-  "BDK\377\221\221\214\377\217\354\354\341\377\4\352\352\337\377WXW\377"=
+ \
+-  "^br\377\222\231\266\377\205\234\243\302\377\3\232\241\277\377\217\226=
+" \
+-  "\262\377\230\237\275\377\210\234\243\302\377\4\215\223\257\377=3D>E\3=
+77" \
+-  "pqo\377\340\340\326\377\213\354\354\341\377\2\343\343\331\377\342\342=
+" \
+-  "\330\377\227\354\354\341\377\3\346\346\333\377\331\331\317\377\351\35=
+1" \
+-  "\336\377\205\354\354\341\377\2\337\337\324\377\335\335\322\377\301\35=
+4" \
+-  "\354\341\377\3\315\315\303\3779:<\377~\203\234\377\205\234\243\302\37=
+7" \
+-  "\3\225\234\272\377\221\230\265\377\233\242\301\377\206\234\243\302\37=
+7" \
+-  "\3z\200\230\377GGH\377\352\352\337\377\217\354\354\341\377\2\335\335"=
+ \
+-  "\322\377\350\350\335\377\217\354\354\341\377\3\304\304\273\377:;A\377=
+" \
+-  "\231\240\276\377\206\234\243\302\377\3\230\237\276\377\217\226\262\37=
+7" \
+-  "\232\241\277\377\205\234\243\302\377\3UXe\377ghf\377\353\353\340\377"=
+ \
+-  "\215\354\354\341\377\3]]\\\377bgx\377\225\234\272\377\205\234\243\302=
+" \
+-  "\377\3\230\237\275\377\220\226\263\377\232\241\300\377\210\234\243\30=
+2" \
+-  "\377\3mr\206\37789;\377\306\306\274\377\215\354\354\341\377\2\343\343=
+" \
+-  "\331\377\342\342\330\377\230\354\354\341\377\3\352\352\337\377\331\33=
+1" \
+-  "\317\377\346\346\333\377\205\354\354\341\377\3\343\343\331\377\331\33=
+1" \
+-  "\317\377\352\352\337\377\276\354\354\341\377\3\331\331\317\377346\377=
+" \
+-  "\215\223\257\377\205\234\243\302\377\2\222\231\266\377\224\232\270\37=
+7" \
+-  "\207\234\243\302\377\3\214\222\256\377569\377\337\337\325\377\220\354=
+" \
+-  "\354\341\377\2\335\335\322\377\350\350\335\377\220\354\354\341\377\2"=
+ \
+-  "\243\243\235\377JLV\377\207\234\243\302\377\3\232\241\300\377\217\226=
+" \
+-  "\262\377\230\237\275\377\205\234\243\302\377\2fj|\377klj\377\214\354"=
+ \
+-  "\354\341\377\3qro\377W[i\377\230\237\275\377\205\234\243\302\377\3\22=
+5" \
+-  "\234\272\377\221\230\265\377\233\242\301\377\207\234\243\302\377\4\22=
+5" \
+-  "\234\272\377FHR\377jjh\377\347\347\334\377\216\354\354\341\377\2\343"=
+ \
+-  "\343\331\377\342\342\330\377\231\354\354\341\377\3\353\353\340\377\33=
+4" \
+-  "\334\322\377\341\341\327\377\205\354\354\341\377\2\346\346\333\377\33=
+1" \
+-  "\331\317\377\275\354\354\341\377\3\347\347\334\377>\77\77\377\202\210=
+" \
+-  "\242\377\204\234\243\302\377\3\233\242\301\377\220\226\263\377\227\23=
+5" \
+-  "\273\377\207\234\243\302\377\3\227\235\273\37756:\377\314\314\303\377=
+" \
+-  "\221\354\354\341\377\2\335\335\322\377\350\350\335\377\221\354\354\34=
+1" \
+-  "\377\2xyv\377adu\377\207\234\243\302\377\3\233\242\301\377\221\230\26=
+5" \
+-  "\377\225\234\272\377\205\234\243\302\377\2QTa\377\225\226\221\377\212=
+" \
+-  "\354\354\341\377\3\207\207\203\377KNZ\377\225\234\272\377\205\234\243=
+" \
+-  "\302\377\2\222\231\266\377\224\232\270\377\210\234\243\302\377\3\211"=
+ \
+-  "\217\252\37778<\377\262\262\253\377\220\354\354\341\377\2\343\343\331=
+" \
+-  "\377\342\342\330\377\233\354\354\341\377\2\337\337\325\377\336\336\32=
+3" \
+-  "\377\205\354\354\341\377\2\343\343\331\377\335\335\322\377\274\354\35=
+4" \
+-  "\341\377\2Z[Z\377pt\211\377\204\234\243\302\377\3\231\240\276\377\217=
+" \
+-  "\226\262\377\230\237\276\377\210\234\243\302\377\2BDL\377\256\256\246=
+" \
+-  "\377\222\354\354\341\377\2\335\335\322\377\350\350\335\377\222\354\35=
+4" \
+-  "\341\377\2RRR\377v{\222\377\210\234\243\302\377\2\224\232\270\377\222=
+" \
+-  "\231\266\377\204\234\243\302\377\3\233\242\301\377>@G\377\272\272\261=
+" \
+-  "\377\210\354\354\341\377\3\260\260\250\377@BJ\377\222\231\266\377\204=
+" \
+-  "\234\243\302\377\3\233\242\301\377\220\227\264\377\227\235\273\377\21=
+0" \
+-  "\234\243\302\377\3\177\205\237\377<=3D\77\377\327\327\315\377\221\354=
+\354" \
+-  "\341\377\2\343\343\331\377\342\342\330\377\234\354\354\341\377\3\344"=
+ \
+-  "\344\331\377\332\332\320\377\353\353\340\377\204\354\354\341\377\2\33=
+7" \
+-  "\337\324\377\341\341\327\377\272\354\354\341\377\2\204\204\200\377X["=
+ \
+-  "i\377\204\234\243\302\377\3\230\237\276\377\217\226\262\377\232\241\3=
+00" \
+-  "\377\210\234\243\302\377\2Y\\j\377\206\206\202\377\223\354\354\341\37=
+7" \
+-  "\2\335\335\322\377\350\350\335\377\222\354\354\341\377\3\344\344\331"=
+ \
+-  "\377;<>\377\207\215\250\377\210\234\243\302\377\2\227\235\273\377\220=
+" \
+-  "\227\264\377\204\234\243\302\377\3\225\233\271\37767;\377\323\323\312=
+" \
+-  "\377\206\354\354\341\377\3\341\341\327\377458\377\212\221\255\377\204=
+" \
+-  "\234\243\302\377\3\232\241\300\377\217\226\262\377\231\240\276\377\21=
+0" \
+-  "\234\243\302\377\3v{\221\377DDE\377\337\337\325\377\222\354\354\341\3=
+77" \
+-  "\2\343\343\331\377\342\342\330\377\235\354\354\341\377\3\350\350\335"=
+ \
+-  "\377\331\331\317\377\352\352\337\377\204\354\354\341\377\2\333\333\32=
+1" \
+-  "\377\346\346\333\377\270\354\354\341\377\2\255\255\246\377BDL\377\204=
+" \
+-  "\234\243\302\377\3\232\241\300\377\217\226\262\377\233\242\301\377\21=
+0" \
+-  "\234\243\302\377\2\205\213\246\377MMM\377\224\354\354\341\377\2\335\3=
+35" \
+-  "\322\377\350\350\335\377\223\354\354\341\377\2\322\322\310\377;=3DC\3=
+77" \
+-  "\211\234\243\302\377\2\226\235\273\377\222\231\266\377\204\234\243\30=
+2" \
+-  "\377\3\211\217\252\377<<>\377\344\344\331\377\205\354\354\341\377\3["=
+ \
+-  "[Z\377os\210\377\233\242\301\377\204\234\243\302\377\2\220\226\263\37=
+7" \
+-  "\231\240\276\377\210\234\243\302\377\3mr\205\377PPP\377\346\346\333\3=
+77" \
+-  "\223\354\354\341\377\2\343\343\331\377\342\342\330\377\236\354\354\34=
+1" \
+-  "\377\2\350\350\335\377\332\332\320\377\204\354\354\341\377\3\353\353"=
+ \
+-  "\340\377\330\330\316\377\351\351\336\377\266\354\354\341\377\3\314\31=
+4" \
+-  "\303\37757;\377\227\236\274\377\204\234\243\302\377\2\217\226\262\377=
+" \
+-  "\231\240\276\377\211\234\243\302\377\2=3D\77E\377\317\317\305\377\216=
+\354" \
+-  "\354\341\377\15\353\353\340\377\350\350\335\377\345\345\332\377\342\3=
+42" \
+-  "\330\377\337\337\325\377\335\335\322\377\314\314\302\377\327\327\315"=
+ \
+-  "\377\336\336\323\377\340\340\326\377\343\343\331\377\346\346\333\377"=
+ \
+-  "\351\351\336\377\217\354\354\341\377\2opn\377rw\215\377\211\234\243\3=
+02" \
+-  "\377\2\223\232\267\377\225\234\272\377\204\234\243\302\377\2w|\223\37=
+7" \
+-  "QRQ\377\204\354\354\341\377\3\253\253\244\377FIS\377\232\241\277\377"=
+ \
+-  "\204\234\243\302\377\2\222\230\265\377\227\235\273\377\210\234\243\30=
+2" \
+-  "\377\3v|\222\377NOO\377\352\352\337\377\217\354\354\341\377\14\351\35=
+1" \
+-  "\336\377\346\346\333\377\343\343\331\377\340\340\326\377\336\336\323"=
+ \
+-  "\377\323\323\311\377\322\322\310\377\336\336\323\377\340\340\326\377"=
+ \
+-  "\343\343\331\377\346\346\333\377\351\351\336\377\232\354\354\341\377"=
+ \
+-  "\2\344\344\331\377\335\335\322\377\204\354\354\341\377\3\351\351\336"=
+ \
+-  "\377\330\330\316\377\353\353\340\377\264\354\354\341\377\3\337\337\32=
+5" \
+-  "\377679\377\214\223\256\377\204\234\243\302\377\2\222\230\265\377\227=
+" \
+-  "\236\274\377\211\234\243\302\377\2tz\221\377iig\377\214\354\354\341\3=
+77" \
+-  "\23\352\352\337\377\341\341\327\377\332\332\320\377\331\331\317\377\3=
+35" \
+-  "\335\322\377\337\337\325\377\342\342\330\377\345\345\332\377\350\350"=
+ \
+-  "\335\377\334\334\321\377\346\346\333\377\347\347\334\377\344\344\331"=
+ \
+-  "\377\341\341\327\377\337\337\324\377\333\333\321\377\330\330\316\377"=
+ \
+-  "\335\335\322\377\345\345\332\377\214\354\354\341\377\3\342\342\330\37=
+7" \
+-  "67;\377\232\241\300\377\211\234\243\302\377\2\220\227\264\377\230\237=
+" \
+-  "\275\377\204\234\243\302\377\2afv\377vvt\377\202\354\354\341\377\3\33=
+7" \
+-  "\337\325\377235\377\223\231\266\377\204\234\243\302\377\2\225\233\271=
+" \
+-  "\377\224\233\270\377\210\234\243\302\377\3\200\206\237\377ABC\377\345=
+" \
+-  "\345\332\377\214\354\354\341\377\24\353\353\340\377\343\343\331\377\3=
+33" \
+-  "\333\321\377\330\330\316\377\334\334\322\377\337\337\324\377\342\342"=
+ \
+-  "\330\377\345\345\332\377\350\350\335\377\342\342\330\377\341\341\327"=
+ \
+-  "\377\350\350\335\377\345\345\332\377\342\342\330\377\337\337\324\377"=
+ \
+-  "\334\334\322\377\330\330\316\377\333\333\321\377\343\343\331\377\353"=
+ \
+-  "\353\340\377\227\354\354\341\377\2\340\340\326\377\341\341\327\377\20=
+4" \
+-  "\354\354\341\377\2\346\346\333\377\333\333\321\377\264\354\354\341\37=
+7" \
+-  "\2TUU\377|\201\232\377\204\234\243\302\377\202\224\233\270\377\211\23=
+4" \
+-  "\243\302\377\3\232\241\300\37756:\377\337\337\325\377\211\354\354\341=
+" \
+-  "\377\6\353\353\340\377\337\337\325\377\331\331\317\377\332\332\320\37=
+7" \
+-  "\342\342\330\377\352\352\337\377\206\354\354\341\377\2\335\335\322\37=
+7" \
+-  "\350\350\335\377\206\354\354\341\377\5\347\347\334\377\337\337\324\37=
+7" \
+-  "\330\330\316\377\333\333\321\377\344\344\331\377\212\354\354\341\377"=
+ \
+-  "\2\221\221\214\377bfw\377\211\234\243\302\377\3\233\242\301\377\217\2=
+26" \
+-  "\262\377\232\241\277\377\204\234\243\302\377\5FIR\377\265\265\255\377=
+" \
+-  "\354\354\341\377TTS\377tz\221\377\204\234\243\302\377\2\230\237\275\3=
+77" \
+-  "\221\230\265\377\210\234\243\302\377\3\211\217\253\3779:<\377\336\336=
+" \
+-  "\323\377\213\354\354\341\377\5\342\342\330\377\332\332\320\377\331\33=
+1" \
+-  "\317\377\340\340\326\377\351\351\336\377\206\354\354\341\377\2\343\34=
+3" \
+-  "\331\377\342\342\330\377\206\354\354\341\377\5\351\351\336\377\340\34=
+0" \
+-  "\326\377\331\331\317\377\332\332\320\377\342\342\330\377\226\354\354"=
+ \
+-  "\341\377\2\334\334\322\377\346\346\333\377\204\354\354\341\377\2\341"=
+ \
+-  "\341\327\377\337\337\325\377\262\354\354\341\377\2\300\300\267\377GJ"=
+ \
+-  "S\377\204\234\243\302\377\2\227\236\274\377\221\230\265\377\212\234\2=
+43" \
+-  "\302\377\2chy\377\211\211\205\377\211\354\354\341\377\4\340\340\326\3=
+77" \
+-  "\330\330\316\377\343\343\331\377\353\353\340\377\211\354\354\341\377"=
+ \
+-  "\2\335\335\322\377\350\350\335\377\211\354\354\341\377\4\351\351\336"=
+ \
+-  "\377\336\336\323\377\331\331\317\377\347\347\334\377\210\354\354\341"=
+ \
+-  "\377\3\353\353\340\377:;>\377\224\233\270\377\211\234\243\302\377\3\2=
+32" \
+-  "\241\277\377\217\226\262\377\233\242\301\377\203\234\243\302\377\4\22=
+1" \
+-  "\230\265\377=3D>@\377\246\246\237\377ILV\377\204\234\243\302\377\2\23=
+2" \
+-  "\241\277\377\217\226\262\377\210\234\243\302\377\3\227\235\273\37789"=
+ \
+-  "<\377\323\323\312\377\212\354\354\341\377\4\344\344\331\377\330\330\3=
+16" \
+-  "\377\340\340\326\377\352\352\337\377\211\354\354\341\377\2\343\343\33=
+1" \
+-  "\377\342\342\330\377\211\354\354\341\377\4\352\352\337\377\340\340\32=
+6" \
+-  "\377\330\330\316\377\344\344\331\377\225\354\354\341\377\2\331\331\31=
+7" \
+-  "\377\351\351\336\377\204\354\354\341\377\2\330\330\316\377\352\352\33=
+7" \
+-  "\377\261\354\354\341\377\2DEF\377\215\223\257\377\203\234\243\302\377=
+" \
+-  "\2\232\241\277\377\217\226\262\377\212\234\243\302\377\3\225\233\271"=
+ \
+-  "\377679\377\351\351\336\377\207\354\354\341\377\3\343\343\331\377\330=
+" \
+-  "\330\316\377\342\342\330\377\214\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\213\354\354\341\377\4\351\351\336\377\334\334\322\377\33=
+3" \
+-  "\333\321\377\351\351\336\377\207\354\354\341\377\2\261\261\251\377QT"=
+ \
+-  "a\377\212\234\243\302\377\2\230\237\275\377\220\227\264\377\204\234\2=
+43" \
+-  "\302\377\3RVd\377)*.\377\223\232\267\377\203\234\243\302\377\3\233\24=
+2" \
+-  "\301\377\217\226\262\377\232\241\300\377\210\234\243\302\377\2KMW\377=
+" \
+-  "\262\262\252\377\211\354\354\341\377\4\346\346\333\377\331\331\317\37=
+7" \
+-  "\337\337\324\377\353\353\340\377\213\354\354\341\377\2\343\343\331\37=
+7" \
+-  "\342\342\330\377\213\354\354\341\377\4\353\353\340\377\337\337\324\37=
+7" \
+-  "\331\331\317\377\346\346\333\377\223\354\354\341\377\3\352\352\337\37=
+7" \
+-  "\331\331\317\377\353\353\340\377\203\354\354\341\377\2\345\345\332\37=
+7" \
+-  "\335\335\322\377\260\354\354\341\377\2\256\256\246\377RTa\377\204\234=
+" \
+-  "\243\302\377\2\220\226\263\377\232\241\300\377\212\234\243\302\377\2"=
+ \
+-  "Y\\k\377\247\247\240\377\206\354\354\341\377\4\350\350\335\377\331\33=
+1" \
+-  "\317\377\337\337\325\377\353\353\340\377\215\354\354\341\377\2\335\33=
+5" \
+-  "\322\377\350\350\335\377\215\354\354\341\377\3\350\350\335\377\332\33=
+2" \
+-  "\320\377\337\337\324\377\207\354\354\341\377\2HIJ\377\220\226\263\377=
+" \
+-  "\212\234\243\302\377\2\224\233\270\377\226\235\273\377\203\234\243\30=
+2" \
+-  "\377\2GJW\377os\211\377\204\234\243\302\377\2\222\231\266\377\230\237=
+" \
+-  "\275\377\210\234\243\302\377\2ot\211\377klj\377\210\354\354\341\377\4=
+" \
+-  "\353\353\340\377\333\333\321\377\334\334\322\377\352\352\337\377\215"=
+ \
+-  "\354\354\341\377\2\343\343\331\377\342\342\330\377\215\354\354\341\37=
+7" \
+-  "\4\352\352\337\377\335\335\322\377\333\333\321\377\353\353\340\377\22=
+2" \
+-  "\354\354\341\377\2\346\346\333\377\336\336\323\377\204\354\354\341\37=
+7" \
+-  "\2\331\331\317\377\351\351\336\377\256\354\354\341\377\3\353\353\340"=
+ \
+-  "\377;<>\377\224\232\270\377\203\234\243\302\377\2\227\235\273\377\224=
+" \
+-  "\232\270\377\213\234\243\302\377\1:;>\377\206\354\354\341\377\3\345\3=
+45" \
+-  "\332\377\330\330\316\377\351\351\336\377\217\354\354\341\377\2\335\33=
+5" \
+-  "\322\377\350\350\335\377\217\354\354\341\377\3\342\342\330\377\332\33=
+2" \
+-  "\320\377\353\353\340\377\205\354\354\341\377\2\251\251\242\377]ap\377=
+" \
+-  "\213\234\243\302\377\1\217\226\262\377\202\234\243\302\377\3\226\235"=
+ \
+-  "\273\377+-7\377\230\237\276\377\203\234\243\302\377\2\232\241\277\377=
+" \
+-  "\220\227\264\377\210\234\243\302\377\3\215\223\257\377;<>\377\350\350=
+" \
+-  "\335\377\207\354\354\341\377\3\341\341\326\377\276\276\265\377\342\34=
+2" \
+-  "\327\377\217\354\354\341\377\2\343\343\331\377\342\342\330\377\217\35=
+4" \
+-  "\354\341\377\3\346\346\333\377\330\330\316\377\350\350\335\377\222\35=
+4" \
+-  "\354\341\377\2\333\333\321\377\351\351\336\377\203\354\354\341\377\2"=
+ \
+-  "\347\347\334\377\333\333\321\377\256\354\354\341\377\2\231\231\223\37=
+7" \
+-  "\\`p\377\204\234\243\302\377\2\217\226\262\377\233\242\301\377\212\23=
+4" \
+-  "\243\302\377\2|\202\233\377oom\377\205\354\354\341\377\3\340\340\326"=
+ \
+-  "\377\333\333\321\377\353\353\340\377\220\354\354\341\377\2\335\335\32=
+2" \
+-  "\377\350\350\335\377\220\354\354\341\377\3\346\346\333\377\330\330\31=
+6" \
+-  "\377\350\350\335\377\204\354\354\341\377\2\352\352\337\377:;\77\377\2=
+13" \
+-  "\234\243\302\377\5\226\235\273\377\224\233\270\377\234\243\302\377Z_"=
+ \
+-  "q\377`ex\377\204\234\243\302\377\2\221\230\265\377\231\240\276\377\21=
+0" \
+-  "\234\243\302\377\2>@G\377\311\311\300\377\207\354\354\341\377\10\345"=
+ \
+-  "\345\332\377\266\266\255\377\14\14\15\377./4\377@BF\377ABE\377iig\377=
+" \
+-  "\307\307\276\377\213\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\220\354\354\341\377\3\351\351\336\377\330\330\316\377\345\345\332\37=
+7" \
+-  "\221\354\354\341\377\2\351\351\336\377\334\334\322\377\204\354\354\34=
+1" \
+-  "\377\2\333\333\321\377\347\347\334\377\254\354\354\341\377\3\347\347"=
+ \
+-  "\334\37767:\377\230\237\276\377\203\234\243\302\377\2\225\234\272\377=
+" \
+-  "\225\233\271\377\213\234\243\302\377\2JLV\377\313\313\302\377\204\354=
+" \
+-  "\354\341\377\2\335\335\322\377\337\337\324\377\222\354\354\341\377\2"=
+ \
+-  "\335\335\322\377\350\350\335\377\221\354\354\341\377\3\351\351\336\37=
+7" \
+-  "\330\330\316\377\345\345\332\377\204\354\354\341\377\2ded\377\202\210=
+" \
+-  "\242\377\213\234\243\302\377\4\217\226\262\377\232\241\300\377')1\377=
+" \
+-  "\230\237\274\377\203\234\243\302\377\2\231\240\276\377\222\230\265\37=
+7" \
+-  "\210\234\243\302\377\2v|\222\377hig\377\207\354\354\341\377\14\340\34=
+0" \
+-  "\326\377\332\332\320\377\353\353\340\377\315\315\303\37799;\377v{\222=
+" \
+-  "\377\234\243\302\377~\204\235\377KNW\377>\77A\377\220\220\213\377\353=
+" \
+-  "\353\340\377\210\354\354\341\377\2\343\343\331\377\342\342\330\377\22=
+1" \
+-  "\354\354\341\377\3\353\353\340\377\332\332\320\377\340\340\326\377\22=
+1" \
+-  "\354\354\341\377\2\335\335\322\377\350\350\335\377\203\354\354\341\37=
+7" \
+-  "\2\351\351\336\377\331\331\317\377\254\354\354\341\377\2\205\205\201"=
+ \
+-  "\377hl\177\377\203\234\243\302\377\2\233\242\301\377\217\226\262\377"=
+ \
+-  "\213\234\243\302\377\2\230\237\276\377>\77A\377\204\354\354\341\377\2=
+" \
+-  "\333\333\321\377\343\343\331\377\223\354\354\341\377\2\335\335\322\37=
+7" \
+-  "\350\350\335\377\222\354\354\341\377\3\353\353\340\377\332\332\320\37=
+7" \
+-  "\346\346\333\377\203\354\354\341\377\2\303\303\272\377NP\\\377\213\23=
+4" \
+-  "\243\302\377\3\227\236\274\377ei}\377OSc\377\204\234\243\302\377\2\22=
+0" \
+-  "\227\264\377\232\241\300\377\207\234\243\302\377\3\233\242\301\37768"=
+ \
+-  "<\377\337\337\325\377\206\354\354\341\377\2\340\340\326\377\336\336\3=
+23" \
+-  "\377\203\354\354\341\377\3\344\344\331\377VWV\377[^l\377\202\234\243"=
+ \
+-  "\302\377\4\230\237\276\377cgx\377@AC\377\313\313\302\377\207\354\354"=
+ \
+-  "\341\377\2\343\343\331\377\342\342\330\377\223\354\354\341\377\2\336"=
+ \
+-  "\336\323\377\340\340\326\377\220\354\354\341\377\2\352\352\337\377\33=
+3" \
+-  "\333\321\377\204\354\354\341\377\2\335\335\322\377\345\345\332\377\25=
+2" \
+-  "\354\354\341\377\3\341\341\327\37767;\377\233\242\301\377\203\234\243=
+" \
+-  "\302\377\2\224\232\270\377\227\235\273\377\213\234\243\302\377\2kp\20=
+5" \
+-  "\377\212\212\205\377\203\354\354\341\377\2\337\337\325\377\340\340\32=
+6" \
+-  "\377\224\354\354\341\377\2\335\335\322\377\350\350\335\377\223\354\35=
+4" \
+-  "\341\377\3\353\353\340\377\330\330\316\377\351\351\336\377\203\354\35=
+4" \
+-  "\341\377\2:;>\377\232\241\277\377\213\234\243\302\377\2)+3\377\216\22=
+5" \
+-  "\262\377\203\234\243\302\377\2\230\237\275\377\223\232\267\377\210\23=
+4" \
+-  "\243\302\377\2ei{\377\210\211\204\377\206\354\354\341\377\2\345\345\3=
+32" \
+-  "\377\333\333\321\377\206\354\354\341\377\2ttq\377]ap\377\203\234\243"=
+ \
+-  "\302\377\4\214\223\256\377@BH\377\202\203\177\377\353\353\340\377\205=
+" \
+-  "\354\354\341\377\2\343\343\331\377\342\342\330\377\224\354\354\341\37=
+7" \
+-  "\2\333\333\321\377\345\345\332\377\220\354\354\341\377\2\337\337\324"=
+ \
+-  "\377\346\346\333\377\203\354\354\341\377\2\352\352\337\377\330\330\31=
+6" \
+-  "\377\252\354\354\341\377\2\232\232\223\377im\201\377\203\234\243\302"=
+ \
+-  "\377\2\232\241\300\377\220\226\263\377\214\234\243\302\377\2>@F\377\3=
+35" \
+-  "\335\322\377\202\354\354\341\377\2\344\344\331\377\334\334\322\377\22=
+5" \
+-  "\354\354\341\377\2\335\335\322\377\350\350\335\377\224\354\354\341\37=
+7" \
+-  "\3\351\351\336\377\330\330\316\377\353\353\340\377\202\354\354\341\37=
+7" \
+-  "\2\177\200|\377pu\213\377\212\234\243\302\377\3~\203\235\377<\77K\377=
+" \
+-  "\222\230\265\377\203\234\243\302\377\2\217\226\262\377\233\242\301\37=
+7" \
+-  "\207\234\243\302\377\3\226\235\273\37789;\377\351\351\336\377\205\354=
+" \
+-  "\354\341\377\3\350\350\335\377\330\330\316\377\353\353\340\377\207\35=
+4" \
+-  "\354\341\377\2XXX\377ot\211\377\204\234\243\302\377\3chx\377]^\\\377"=
+ \
+-  "\353\353\340\377\204\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\224\354\354\341\377\3\353\353\340\377\330\330\316\377\350\350\335\37=
+7" \
+-  "\217\354\354\341\377\2\353\353\340\377\332\332\320\377\204\354\354\34=
+1" \
+-  "\377\2\334\334\322\377\350\350\335\377\251\354\354\341\377\2OPP\377\2=
+24" \
+-  "\232\270\377\203\234\243\302\377\2\222\231\266\377\230\237\275\377\21=
+3" \
+-  "\234\243\302\377\2\217\226\262\377KLL\377\202\354\354\341\377\2\350\3=
+50" \
+-  "\335\377\331\331\317\377\226\354\354\341\377\2\335\335\322\377\350\35=
+0" \
+-  "\335\377\225\354\354\341\377\2\346\346\333\377\332\332\320\377\202\35=
+4" \
+-  "\354\341\377\2\327\327\315\377ACI\377\212\234\243\302\377\7""9<H\377"=
+ \
+-  "\201\207\241\377\221\230\265\377\232\241\277\377\234\243\302\377\227"=
+ \
+-  "\235\273\377\224\233\270\377\210\234\243\302\377\2afw\377\223\223\215=
+" \
+-  "\377\205\354\354\341\377\3\353\353\340\377\330\330\316\377\351\351\33=
+6" \
+-  "\377\210\354\354\341\377\3\350\350\335\377BCC\377~\204\235\377\204\23=
+4" \
+-  "\243\302\377\3hl~\377]^\\\377\353\353\340\377\203\354\354\341\377\2\3=
+43" \
+-  "\343\331\377\342\342\330\377\225\354\354\341\377\3\351\351\336\377\33=
+0" \
+-  "\330\316\377\353\353\340\377\217\354\354\341\377\2\341\341\327\377\34=
+4" \
+-  "\344\331\377\203\354\354\341\377\2\345\345\332\377\337\337\324\377\25=
+0" \
+-  "\354\354\341\377\2\347\347\334\377\77AF\377\204\234\243\302\377\1\220=
+" \
+-  "\227\264\377\214\234\243\302\377\6in\202\377\225\225\220\377\354\354"=
+ \
+-  "\341\377\353\353\340\377\330\330\316\377\352\352\337\377\226\354\354"=
+ \
+-  "\341\377\2\335\335\322\377\350\350\335\377\226\354\354\341\377\2\341"=
+ \
+-  "\341\327\377\337\337\324\377\202\354\354\341\377\1@AC\377\211\234\243=
+" \
+-  "\302\377\10\222\231\266\377.0:\377\234\243\302\377\230\237\276\377\22=
+4" \
+-  "\232\270\377\234\243\302\377\220\227\264\377\233\242\301\377\210\234"=
+ \
+-  "\243\302\377\2""57:\377\346\346\333\377\205\354\354\341\377\2\332\332=
+" \
+-  "\320\377\346\346\333\377\212\354\354\341\377\3\336\336\323\377569\377=
+" \
+-  "\230\237\276\377\204\234\243\302\377\2hl~\377_`^\377\203\354\354\341"=
+ \
+-  "\377\2\343\343\331\377\342\342\330\377\226\354\354\341\377\2\346\346"=
+ \
+-  "\333\377\332\332\320\377\217\354\354\341\377\2\353\353\340\377\333\33=
+3" \
+-  "\321\377\204\354\354\341\377\1\330\330\316\377\250\354\354\341\377\2"=
+ \
+-  "\252\252\242\377_dt\377\203\234\243\302\377\2\230\237\276\377\224\232=
+" \
+-  "\270\377\214\234\243\302\377\5NQ[\377\313\313\302\377\354\354\341\377=
+" \
+-  "\337\337\324\377\344\344\331\377\227\354\354\341\377\2\335\335\322\37=
+7" \
+-  "\350\350\335\377\227\354\354\341\377\5\331\331\317\377\351\351\336\37=
+7" \
+-  "\354\354\341\377bba\377\207\215\250\377\210\234\243\302\377\2kp\204\3=
+77" \
+-  "UZj\377\202\234\243\302\377\3\220\227\264\377\233\242\301\377\220\227=
+" \
+-  "\264\377\210\234\243\302\377\2w|\224\377ppn\377\205\354\354\341\377\2=
+" \
+-  "\345\345\332\377\336\336\323\377\214\354\354\341\377\2\231\231\223\37=
+7" \
+-  "[^m\377\205\234\243\302\377\2[_m\377\226\226\221\377\202\354\354\341"=
+ \
+-  "\377\2\343\343\331\377\342\342\330\377\227\354\354\341\377\2\336\336"=
+ \
+-  "\323\377\344\344\331\377\217\354\354\341\377\2\333\333\321\377\353\35=
+3" \
+-  "\340\377\203\354\354\341\377\2\333\333\321\377\352\352\337\377\247\35=
+4" \
+-  "\354\341\377\2Z[Z\377\214\222\256\377\203\234\243\302\377\2\223\232\2=
+67" \
+-  "\377\231\240\276\377\214\234\243\302\377\4<>B\377\354\354\341\377\352=
+" \
+-  "\352\337\377\331\331\317\377\230\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\227\354\354\341\377\5\347\347\334\377\333\333\321\377\35=
+4" \
+-  "\354\341\377\232\232\223\377hl\177\377\210\234\243\302\377\2ACQ\377\1=
+77" \
+-  "\205\236\377\202\234\243\302\377\3\222\230\265\377\225\233\271\377\22=
+5" \
+-  "\234\272\377\210\234\243\302\377\2ACI\377\326\326\314\377\205\354\354=
+" \
+-  "\341\377\2\330\330\316\377\353\353\340\377\215\354\354\341\377\2\77\7=
+7" \
+-  "A\377\217\225\262\377\204\234\243\302\377\6\233\242\301\3779:\77\377"=
+ \
+-  "\323\323\311\377\354\354\341\377\343\343\331\377\342\342\330\377\227"=
+ \
+-  "\354\354\341\377\2\353\353\340\377\330\330\316\377\217\354\354\341\37=
+7" \
+-  "\2\342\342\330\377\344\344\331\377\203\354\354\341\377\2\342\342\330"=
+ \
+-  "\377\340\340\326\377\246\354\354\341\377\2\353\353\340\377<=3DA\377\2=
+04" \
+-  "\234\243\302\377\1\220\226\263\377\214\234\243\302\377\5\232\241\277"=
+ \
+-  "\377DEG\377\354\354\341\377\335\335\322\377\346\346\333\377\230\354\3=
+54" \
+-  "\341\377\2\335\335\322\377\350\350\335\377\230\354\354\341\377\4\333"=
+ \
+-  "\333\321\377\350\350\335\377\316\316\304\377MPY\377\210\234\243\302\3=
+77" \
+-  "\2)+4\377\233\242\301\377\202\234\243\302\377\3\227\235\273\377\213\2=
+21" \
+-  "\255\377\232\241\300\377\207\234\243\302\377\2\223\232\267\377KLM\377=
+" \
+-  "\205\354\354\341\377\2\342\342\330\377\340\340\326\377\216\354\354\34=
+1" \
+-  "\377\2\277\277\266\377HKT\377\205\234\243\302\377\5\207\215\250\377B"=
+ \
+-  "CD\377\353\353\340\377\343\343\331\377\342\342\330\377\230\354\354\34=
+1" \
+-  "\377\2\340\340\326\377\341\341\327\377\216\354\354\341\377\2\352\352"=
+ \
+-  "\337\377\335\335\322\377\203\354\354\341\377\2\353\353\340\377\331\33=
+1" \
+-  "\317\377\246\354\354\341\377\2\272\272\261\377VYf\377\203\234\243\302=
+" \
+-  "\377\2\232\241\277\377\222\230\265\377\214\234\243\302\377\4\177\204"=
+ \
+-  "\236\377pqo\377\351\351\336\377\333\333\321\377\231\354\354\341\377\2=
+" \
+-  "\335\335\322\377\350\350\335\377\230\354\354\341\377\4\350\350\335\37=
+7" \
+-  "\332\332\320\377\354\354\341\377=3D>B\377\207\234\243\302\377\2\216\2=
+24" \
+-  "\261\37769C\377\204\234\243\302\377\1\205\214\247\377\210\234\243\302=
+" \
+-  "\377\2hm\201\377\227\227\221\377\205\354\354\341\377\1\330\330\316\37=
+7" \
+-  "\220\354\354\341\377\2IJK\377\222\231\266\377\205\234\243\302\377\4^"=
+ \
+-  "br\377\223\223\216\377\343\343\331\377\342\342\330\377\231\354\354\34=
+1" \
+-  "\377\2\327\327\315\377\353\353\340\377\216\354\354\341\377\1\333\333"=
+ \
+-  "\321\377\204\354\354\341\377\2\331\331\317\377\353\353\340\377\245\35=
+4" \
+-  "\354\341\377\2ijh\377\201\206\240\377\203\234\243\302\377\2\224\233\2=
+70" \
+-  "\377\230\237\275\377\214\234\243\302\377\4`du\377\252\252\242\377\333=
+" \
+-  "\333\321\377\350\350\335\377\231\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\231\354\354\341\377\4\335\335\322\377\346\346\333\377FF"=
+ \
+-  "H\377\232\241\277\377\206\234\243\302\377\2dh|\377^bu\377\203\234\243=
+" \
+-  "\302\377\3\230\237\275\377\211\217\253\377\233\242\301\377\207\234\24=
+3" \
+-  "\302\377\2DEM\377\336\336\323\377\204\354\354\341\377\2\340\340\326\3=
+77" \
+-  "\342\342\330\377\220\354\354\341\377\2\246\246\236\377^bq\377\205\234=
+" \
+-  "\243\302\377\2\232\241\277\377<<\77\377\202\342\342\330\377\231\354\3=
+54" \
+-  "\341\377\2\342\342\330\377\340\340\326\377\216\354\354\341\377\2\340"=
+ \
+-  "\340\326\377\346\346\333\377\203\354\354\341\377\2\340\340\326\377\34=
+3" \
+-  "\343\331\377\245\354\354\341\377\1;;>\377\204\234\243\302\377\1\220\2=
+26" \
+-  "\263\377\215\234\243\302\377\3DFN\377\334\334\321\377\331\331\317\377=
+" \
+-  "\232\354\354\341\377\2\335\335\322\377\350\350\335\377\231\354\354\34=
+1" \
+-  "\377\4\350\350\335\377\334\334\322\377rrp\377\177\204\236\377\206\234=
+" \
+-  "\243\302\377\2:=3DI\377\212\220\253\377\203\234\243\302\377\3\222\231=
+\266" \
+-  "\377\223\232\267\377\226\235\273\377\206\234\243\302\377\2\232\241\27=
+7" \
+-  "\377DEG\377\205\354\354\341\377\1\331\331\317\377\221\354\354\341\377=
+" \
+-  "\2\351\351\336\37778<\377\206\234\243\302\377\3]ap\377\237\237\230\37=
+7" \
+-  "\342\342\330\377\232\354\354\341\377\1\331\331\317\377\216\354\354\34=
+1" \
+-  "\377\2\351\351\336\377\336\336\323\377\203\354\354\341\377\2\351\351"=
+ \
+-  "\336\377\333\333\321\377\244\354\354\341\377\2\331\331\317\377FHP\377=
+" \
+-  "\203\234\243\302\377\2\232\241\300\377\221\230\265\377\215\234\243\30=
+2" \
+-  "\377\3>\77B\377\344\344\331\377\340\340\326\377\232\354\354\341\377\2=
+" \
+-  "\335\335\322\377\350\350\335\377\232\354\354\341\377\3\330\330\316\37=
+7" \
+-  "\252\252\242\377aev\377\206\234\243\302\377\1+-6\377\204\234\243\302"=
+ \
+-  "\377\3\220\227\264\377\233\242\301\377\220\227\264\377\206\234\243\30=
+2" \
+-  "\377\2tz\221\377\202\202~\377\204\354\354\341\377\2\352\352\337\377\3=
+33" \
+-  "\333\321\377\222\354\354\341\377\2ggf\377\177\205\237\377\205\234\243=
+" \
+-  "\302\377\3\225\233\271\377<=3D>\377\342\342\330\377\232\354\354\341\3=
+77" \
+-  "\2\333\333\321\377\352\352\337\377\216\354\354\341\377\1\333\333\321"=
+ \
+-  "\377\204\354\354\341\377\1\331\331\317\377\244\354\354\341\377\2\265"=
+ \
+-  "\265\254\377[^l\377\203\234\243\302\377\2\227\236\274\377\225\233\271=
+" \
+-  "\377\214\234\243\302\377\4\231\240\276\377DEF\377\334\334\322\377\351=
+" \
+-  "\351\336\377\232\354\354\341\377\2\335\335\322\377\350\350\335\377\23=
+2" \
+-  "\354\354\341\377\3\335\335\322\377\320\320\307\377KMU\377\205\234\243=
+" \
+-  "\302\377\2\213\221\255\377:=3DI\377\203\234\243\302\377\4\232\241\300=
+\377" \
+-  "\222\230\265\377\234\243\302\377\220\227\264\377\206\234\243\302\377"=
+ \
+-  "\2TWd\377\272\272\261\377\204\354\354\341\377\2\341\341\327\377\343\3=
+43" \
+-  "\331\377\222\354\354\341\377\2\246\246\236\377]aq\377\206\234\243\302=
+" \
+-  "\377\2JLV\377\277\277\266\377\232\354\354\341\377\2\343\343\331\377\3=
+41" \
+-  "\341\327\377\216\354\354\341\377\2\335\335\322\377\352\352\337\377\20=
+3" \
+-  "\354\354\341\377\2\332\332\320\377\353\353\340\377\243\354\354\341\37=
+7" \
+-  "\2\217\220\212\377ns\211\377\203\234\243\302\377\2\225\234\272\377\22=
+7" \
+-  "\236\274\377\214\234\243\302\377\3\217\226\262\377STT\377\330\330\316=
+" \
+-  "\377\233\354\354\341\377\2\335\335\322\377\350\350\335\377\232\354\35=
+4" \
+-  "\341\377\3\345\345\332\377\333\333\320\377@BH\377\205\234\243\302\377=
+" \
+-  "\2sx\217\377TXi\377\203\234\243\302\377\4\230\237\276\377\224\232\270=
+" \
+-  "\377\234\243\302\377\220\227\264\377\206\234\243\302\377\2>\77E\377\3=
+43" \
+-  "\343\331\377\204\354\354\341\377\2\332\332\320\377\353\353\340\377\22=
+2" \
+-  "\354\354\341\377\2\333\333\321\377@BI\377\206\234\243\302\377\2ns\211=
+" \
+-  "\377}~z\377\232\354\354\341\377\2\353\353\340\377\332\332\320\377\216=
+" \
+-  "\354\354\341\377\2\337\337\325\377\347\347\334\377\203\354\354\341\37=
+7" \
+-  "\2\336\336\323\377\347\347\334\377\243\354\354\341\377\2ggf\377\207\2=
+15" \
+-  "\250\377\203\234\243\302\377\2\223\232\267\377\231\240\276\377\214\23=
+4" \
+-  "\243\302\377\3\205\213\245\377bcb\377\336\336\323\377\233\354\354\341=
+" \
+-  "\377\2\335\335\322\377\350\350\335\377\233\354\354\341\377\2\330\330"=
+ \
+-  "\316\377\77@E\377\205\234\243\302\377\2dh|\377ch|\377\203\234\243\302=
+" \
+-  "\377\5\227\235\273\377\225\234\272\377\234\243\302\377\221\230\265\37=
+7" \
+-  "\233\242\301\377\205\234\243\302\377\1=3D>A\377\204\354\354\341\377\2=
+\353" \
+-  "\353\340\377\332\332\320\377\224\354\354\341\377\1""89<\377\206\234\2=
+43" \
+-  "\302\377\2\221\230\265\377CDE\377\233\354\354\341\377\2\332\332\320\3=
+77" \
+-  "\353\353\340\377\215\354\354\341\377\2\342\342\330\377\344\344\331\37=
+7" \
+-  "\203\354\354\341\377\2\341\341\327\377\343\343\331\377\243\354\354\34=
+1" \
+-  "\377\2GGI\377\232\241\300\377\203\234\243\302\377\2\221\230\265\377\2=
+33" \
+-  "\242\301\377\214\234\243\302\377\3z\200\230\377qro\377\345\345\332\37=
+7" \
+-  "\233\354\354\341\377\2\335\335\322\377\350\350\335\377\233\354\354\34=
+1" \
+-  "\377\2\332\332\320\377\77AE\377\205\234\243\302\377\2TWh\377sy\217\37=
+7" \
+-  "\203\234\243\302\377\5\225\233\271\377\227\236\274\377\234\243\302\37=
+7" \
+-  "\223\232\267\377\231\240\276\377\204\234\243\302\377\2\226\235\273\37=
+7" \
+-  "LLM\377\204\354\354\341\377\2\345\345\332\377\337\337\325\377\224\354=
+" \
+-  "\354\341\377\2RSS\377\215\223\257\377\205\234\243\302\377\3\226\235\2=
+73" \
+-  "\3779;@\377\347\347\334\377\232\354\354\341\377\2\337\337\325\377\345=
+" \
+-  "\345\332\377\215\354\354\341\377\2\345\345\332\377\341\341\327\377\20=
+3" \
+-  "\354\354\341\377\2\346\346\333\377\337\337\324\377\243\354\354\341\37=
+7" \
+-  "\1CEG\377\204\234\243\302\377\1\220\227\264\377\215\234\243\302\377\3=
+" \
+-  "pu\213\377\202\203}\377\350\350\335\377\233\354\354\341\377\2\335\335=
+" \
+-  "\322\377\350\350\335\377\233\354\354\341\377\2\335\335\322\377ABE\377=
+" \
+-  "\205\234\243\302\377\2FIW\377\202\210\243\377\203\234\243\302\377\5\2=
+23" \
+-  "\232\267\377\231\240\276\377\234\243\302\377\225\233\271\377\227\236"=
+ \
+-  "\274\377\204\234\243\302\377\2}\203\233\377wwu\377\204\354\354\341\37=
+7" \
+-  "\202\342\342\330\377\224\354\354\341\377\2\215\215\210\377jo\204\377"=
+ \
+-  "\205\234\243\302\377\3\226\235\273\377TXe\377\265\265\254\377\232\354=
+" \
+-  "\354\341\377\202\342\342\330\377\215\354\354\341\377\2\350\350\335\37=
+7" \
+-  "\337\337\324\377\203\354\354\341\377\2\352\352\337\377\334\334\322\37=
+7" \
+-  "\243\354\354\341\377\1BCG\377\204\234\243\302\377\1\220\227\264\377\2=
+15" \
+-  "\234\243\302\377\3fk\177\377\223\223\213\377\353\353\340\377\233\354"=
+ \
+-  "\354\341\377\2\335\335\322\377\350\350\335\377\233\354\354\341\377\2"=
+ \
+-  "\337\337\325\377CDF\377\205\234\243\302\377\2""9<G\377\222\231\266\37=
+7" \
+-  "\203\234\243\302\377\5\221\230\265\377\233\242\301\377\234\243\302\37=
+7" \
+-  "\227\235\273\377\225\234\272\377\204\234\243\302\377\2pu\213\377\217"=
+ \
+-  "\220\212\377\204\354\354\341\377\2\337\337\325\377\345\345\332\377\22=
+4" \
+-  "\354\354\341\377\2\302\302\271\377QT_\377\205\234\243\302\377\3\226\2=
+35" \
+-  "\273\377di}\377\224\224\216\377\232\354\354\341\377\2\345\345\332\377=
+" \
+-  "\337\337\325\377\215\354\354\341\377\2\353\353\340\377\334\334\322\37=
+7" \
+-  "\203\354\354\341\377\2\353\353\340\377\332\332\320\377\243\354\354\34=
+1" \
+-  "\377\1ABF\377\204\234\243\302\377\1\220\227\264\377\215\234\243\302\3=
+77" \
+-  "\2_cs\377\241\241\231\377\234\354\354\341\377\2\335\335\322\377\350\3=
+50" \
+-  "\335\377\233\354\354\341\377\3\342\342\330\377EFG\377\233\242\301\377=
+" \
+-  "\204\234\243\302\377\1""02<\377\204\234\243\302\377\1\220\227\264\377=
+" \
+-  "\202\234\243\302\377\2\231\240\276\377\224\232\270\377\204\234\243\30=
+2" \
+-  "\377\2ej}\377\241\241\232\377\204\354\354\341\377\2\335\335\322\377\3=
+50" \
+-  "\350\335\377\224\354\354\341\377\2\331\331\317\377FHP\377\205\234\243=
+" \
+-  "\302\377\3\226\235\273\377ty\220\377{{x\377\232\354\354\341\377\2\350=
+" \
+-  "\350\335\377\335\335\322\377\216\354\354\341\377\1\333\333\321\377\20=
+4" \
+-  "\354\354\341\377\1\331\331\317\377\243\354\354\341\377\1\77AF\377\204=
+" \
+-  "\234\243\302\377\1\220\227\264\377\215\234\243\302\377\2WZg\377\260\2=
+60" \
+-  "\250\377\234\354\354\341\377\2\335\335\322\377\350\350\335\377\233\35=
+4" \
+-  "\354\341\377\3\345\345\332\377RSS\377\221\230\265\377\204\234\243\302=
+" \
+-  "\377\1""02<\377\204\234\243\302\377\1\220\227\264\377\202\234\243\302=
+" \
+-  "\377\2\233\242\301\377\222\230\265\377\204\234\243\302\377\2X\\m\377"=
+ \
+-  "\261\261\251\377\204\354\354\341\377\2\332\332\320\377\353\353\340\37=
+7" \
+-  "\224\354\354\341\377\2\352\352\337\377=3D\77D\377\205\234\243\302\377=
+\3" \
+-  "\226\235\273\377\203\211\243\377ccc\377\232\354\354\341\377\2\353\353=
+" \
+-  "\340\377\332\332\320\377\216\354\354\341\377\1\333\333\321\377\204\35=
+4" \
+-  "\354\341\377\1\331\331\317\377\231\354\354\341\377\1\352\352\337\377"=
+ \
+-  "\210\351\351\336\377\2\350\350\335\377>\77E\377\203\232\241\277\377\2=
+" \
+-  "\230\237\275\377\220\226\263\377\215\232\241\277\377\2NPY\377\275\275=
+" \
+-  "\263\377\234\351\351\336\377\2\332\332\320\377\345\345\332\377\233\35=
+1" \
+-  "\351\336\377\3\345\345\332\377_`_\377\204\212\245\377\204\232\241\277=
+" \
+-  "\377\1/1;\377\204\232\241\277\377\1\217\225\261\377\203\232\241\277\3=
+77" \
+-  "\1\217\225\261\377\204\232\241\277\377\2KN[\377\277\277\266\377\204\3=
+51" \
+-  "\351\336\377\1\326\326\314\377\226\351\351\336\377\1>@D\377\205\232\2=
+41" \
+-  "\277\377\3\224\233\270\377\217\225\261\377KLM\377\233\351\351\336\377=
+" \
+-  "\1\326\326\314\377\216\351\351\336\377\1\330\330\316\377\204\351\351"=
+ \
+-  "\336\377\1\326\326\314\377\213\351\351\336\377\1\352\352\337\377\215"=
+ \
+-  "\354\354\341\377\1\342\342\330\377\210\334\334\322\377\2\330\330\316"=
+ \
+-  "\377<>D\377\203\221\230\265\377\2\217\226\262\377\210\217\252\377\215=
+" \
+-  "\221\230\265\377\2FGP\377\271\271\260\377\234\334\334\322\377\2\316\3=
+16" \
+-  "\304\377\330\330\316\377\233\334\334\322\377\3\331\331\317\377ab`\377=
+" \
+-  "y~\227\377\204\221\230\265\377\1-/8\377\204\221\230\265\377\1\206\215=
+" \
+-  "\250\377\203\221\230\265\377\1\206\215\250\377\204\221\230\265\377\2"=
+ \
+-  "@CO\377\274\274\264\377\204\334\334\322\377\1\312\312\301\377\226\334=
+" \
+-  "\334\322\377\1<=3DA\377\205\221\230\265\377\3\213\222\256\377\211\220=
+\253" \
+-  "\377DEF\377\233\334\334\322\377\1\312\312\301\377\216\334\334\322\377=
+" \
+-  "\1\314\314\303\377\204\334\334\322\377\1\312\312\301\377\213\334\334"=
+ \
+-  "\322\377\1\341\341\327\377\227\354\354\341\377\1\77@E\377\204\234\243=
+" \
+-  "\302\377\1\221\230\265\377\215\234\243\302\377\2SVa\377\270\270\260\3=
+77" \
+-  "\234\354\354\341\377\2\335\335\322\377\350\350\335\377\233\354\354\34=
+1" \
+-  "\377\3\346\346\333\377YZZ\377\214\223\256\377\204\234\243\302\377\1/"=
+ \
+-  "1;\377\204\234\243\302\377\1\220\227\264\377\203\234\243\302\377\1\22=
+0" \
+-  "\227\264\377\204\234\243\302\377\2QTc\377\272\272\262\377\204\354\354=
+" \
+-  "\341\377\1\331\331\317\377\226\354\354\341\377\1=3D>C\377\205\234\243=
+\302" \
+-  "\377\3\226\235\273\377\212\220\253\377YZZ\377\233\354\354\341\377\1\3=
+31" \
+-  "\331\317\377\216\354\354\341\377\1\333\333\321\377\204\354\354\341\37=
+7" \
+-  "\1\331\331\317\377\243\354\354\341\377\1@AF\377\204\234\243\302\377\1=
+" \
+-  "\220\227\264\377\215\234\243\302\377\2[_m\377\251\251\241\377\234\354=
+" \
+-  "\354\341\377\2\335\335\322\377\350\350\335\377\233\354\354\341\377\3"=
+ \
+-  "\343\343\331\377JKL\377\227\236\274\377\204\234\243\302\377\1/1:\377"=
+ \
+-  "\204\234\243\302\377\1\220\227\264\377\202\234\243\302\377\2\232\241"=
+ \
+-  "\277\377\222\231\266\377\204\234\243\302\377\2]at\377\251\251\241\377=
+" \
+-  "\204\354\354\341\377\2\333\333\321\377\352\352\337\377\224\354\354\34=
+1" \
+-  "\377\2\347\347\334\377=3D\77E\377\205\234\243\302\377\3\226\235\273\3=
+77" \
+-  "~\204\235\377mnl\377\232\354\354\341\377\2\352\352\337\377\333\333\32=
+1" \
+-  "\377\216\354\354\341\377\1\333\333\321\377\204\354\354\341\377\1\331"=
+ \
+-  "\331\317\377\243\354\354\341\377\1ACF\377\204\234\243\302\377\1\220\2=
+27" \
+-  "\264\377\215\234\243\302\377\2cgy\377\231\231\222\377\234\354\354\341=
+" \
+-  "\377\2\335\335\322\377\350\350\335\377\233\354\354\341\377\2\340\340"=
+ \
+-  "\326\377CCE\377\205\234\243\302\377\2""69C\377\224\232\270\377\203\23=
+4" \
+-  "\243\302\377\1\220\227\264\377\202\234\243\302\377\2\230\237\275\377"=
+ \
+-  "\224\233\270\377\204\234\243\302\377\2im\202\377\227\227\220\377\204"=
+ \
+-  "\354\354\341\377\2\336\336\323\377\347\347\334\377\224\354\354\341\37=
+7" \
+-  "\2\327\327\315\377FHP\377\205\234\243\302\377\3\226\235\273\377rx\217=
+" \
+-  "\377\201\202~\377\232\354\354\341\377\2\347\347\334\377\336\336\323\3=
+77" \
+-  "\216\354\354\341\377\1\333\333\321\377\204\354\354\341\377\1\331\331"=
+ \
+-  "\317\377\243\354\354\341\377\1BCF\377\204\234\243\302\377\1\220\227\2=
+64" \
+-  "\377\215\234\243\302\377\3kp\205\377\212\212\204\377\352\352\337\377"=
+ \
+-  "\233\354\354\341\377\2\335\335\322\377\350\350\335\377\233\354\354\34=
+1" \
+-  "\377\2\336\336\323\377BCE\377\205\234\243\302\377\2ADR\377\205\213\24=
+6" \
+-  "\377\203\234\243\302\377\3\222\231\266\377\232\241\277\377\234\243\30=
+2" \
+-  "\377\202\226\235\273\377\204\234\243\302\377\2sx\217\377\203\203\177"=
+ \
+-  "\377\204\354\354\341\377\2\340\340\326\377\344\344\331\377\224\354\35=
+4" \
+-  "\341\377\2\254\254\244\377[_o\377\205\234\243\302\377\3\226\235\273\3=
+77" \
+-  "ej}\377\231\231\222\377\232\354\354\341\377\2\344\344\331\377\340\340=
+" \
+-  "\326\377\215\354\354\341\377\2\351\351\336\377\336\336\323\377\203\35=
+4" \
+-  "\354\341\377\2\352\352\337\377\333\333\321\377\243\354\354\341\377\1"=
+ \
+-  "CDF\377\204\234\243\302\377\1\220\227\264\377\215\234\243\302\377\3v"=
+ \
+-  "{\222\377zzw\377\346\346\333\377\233\354\354\341\377\2\335\335\322\37=
+7" \
+-  "\350\350\335\377\233\354\354\341\377\2\333\333\321\377@BE\377\205\234=
+" \
+-  "\243\302\377\2NRa\377w}\224\377\203\234\243\302\377\5\224\233\270\377=
+" \
+-  "\230\237\275\377\234\243\302\377\224\233\270\377\230\237\275\377\204"=
+ \
+-  "\234\243\302\377\2\204\212\245\377ghg\377\204\354\354\341\377\2\343\3=
+43" \
+-  "\331\377\341\341\327\377\224\354\354\341\377\2ssq\377z\200\230\377\20=
+5" \
+-  "\234\243\302\377\3\226\235\273\377KNW\377\312\312\301\377\232\354\354=
+" \
+-  "\341\377\2\341\341\327\377\343\343\331\377\215\354\354\341\377\2\346"=
+ \
+-  "\346\333\377\340\340\326\377\203\354\354\341\377\2\350\350\335\377\33=
+5" \
+-  "\335\322\377\243\354\354\341\377\2TUU\377\222\230\265\377\203\234\243=
+" \
+-  "\302\377\2\222\231\266\377\232\241\277\377\214\234\243\302\377\3\200"=
+ \
+-  "\206\237\377jjh\377\341\341\327\377\233\354\354\341\377\2\335\335\322=
+" \
+-  "\377\350\350\335\377\233\354\354\341\377\2\330\330\316\377\77AE\377\2=
+05" \
+-  "\234\243\302\377\2\\`r\377hm\201\377\203\234\243\302\377\202\226\235"=
+ \
+-  "\273\377\3\234\243\302\377\222\231\266\377\232\241\277\377\204\234\24=
+3" \
+-  "\302\377\2\232\241\300\377CDE\377\204\354\354\341\377\2\350\350\335\3=
+77" \
+-  "\335\335\322\377\224\354\354\341\377\2BCD\377\230\237\275\377\205\234=
+" \
+-  "\243\302\377\2\226\235\273\3779:>\377\233\354\354\341\377\2\335\335\3=
+22" \
+-  "\377\350\350\335\377\215\354\354\341\377\202\343\343\331\377\203\354"=
+ \
+-  "\354\341\377\2\344\344\331\377\340\340\326\377\243\354\354\341\377\2"=
+ \
+-  "{|x\377z\177\230\377\203\234\243\302\377\2\224\233\270\377\230\237\27=
+5" \
+-  "\377\214\234\243\302\377\3\212\221\254\377[\\[\377\332\332\320\377\23=
+3" \
+-  "\354\354\341\377\2\335\335\322\377\350\350\335\377\232\354\354\341\37=
+7" \
+-  "\3\352\352\337\377\333\333\321\377>@E\377\205\234\243\302\377\2jn\204=
+" \
+-  "\377Y]o\377\203\234\243\302\377\4\230\237\275\377\224\233\270\377\234=
+" \
+-  "\243\302\377\220\227\264\377\206\234\243\302\377\1;=3DA\377\205\354\3=
+54" \
+-  "\341\377\1\331\331\317\377\224\354\354\341\377\1""89=3D\377\206\234\2=
+43" \
+-  "\302\377\2\215\224\260\377JKK\377\233\354\354\341\377\1\331\331\317\3=
+77" \
+-  "\216\354\354\341\377\2\340\340\326\377\346\346\333\377\203\354\354\34=
+1" \
+-  "\377\2\337\337\325\377\345\345\332\377\243\354\354\341\377\2\244\244"=
+ \
+-  "\235\377dh{\377\203\234\243\302\377\202\226\235\273\377\214\234\243\3=
+02" \
+-  "\377\4\225\233\271\377KLL\377\331\331\317\377\353\353\340\377\232\354=
+" \
+-  "\354\341\377\2\335\335\322\377\350\350\335\377\232\354\354\341\377\3"=
+ \
+-  "\340\340\326\377\327\327\315\377FHO\377\205\234\243\302\377\2\205\213=
+" \
+-  "\246\377DGU\377\203\234\243\302\377\4\232\241\277\377\222\231\266\377=
+" \
+-  "\234\243\302\377\220\227\264\377\206\234\243\302\377\2IKT\377\323\323=
+" \
+-  "\311\377\204\354\354\341\377\2\336\336\323\377\347\347\334\377\222\35=
+4" \
+-  "\354\341\377\2\312\312\301\377KMW\377\206\234\243\302\377\2jn\203\377=
+" \
+-  "\205\206\200\377\232\354\354\341\377\2\347\347\334\377\336\336\323\37=
+7" \
+-  "\216\354\354\341\377\2\336\336\323\377\351\351\336\377\203\354\354\34=
+1" \
+-  "\377\2\333\333\321\377\352\352\337\377\243\354\354\341\377\2\310\310"=
+ \
+-  "\277\377QS^\377\203\234\243\302\377\2\230\237\276\377\223\232\267\377=
+" \
+-  "\215\234\243\302\377\3<=3D\77\377\340\340\326\377\344\344\331\377\232=
+\354" \
+-  "\354\341\377\2\335\335\322\377\350\350\335\377\232\354\354\341\377\3"=
+ \
+-  "\331\331\317\377\302\302\271\377UXd\377\206\234\243\302\377\1/1;\377"=
+ \
+-  "\204\234\243\302\377\3\220\227\264\377\234\243\302\377\220\226\263\37=
+7" \
+-  "\206\234\243\302\377\2aex\377\244\244\234\377\204\354\354\341\377\2\3=
+46" \
+-  "\346\333\377\337\337\324\377\222\354\354\341\377\2\223\224\215\377fk"=
+ \
+-  "\177\377\206\234\243\302\377\2=3D\77E\377\320\320\306\377\232\354\354=
+\341" \
+-  "\377\2\337\337\324\377\346\346\333\377\216\354\354\341\377\1\333\333"=
+ \
+-  "\321\377\204\354\354\341\377\1\331\331\317\377\244\354\354\341\377\2"=
+ \
+-  "\350\350\335\377<=3DB\377\204\234\243\302\377\1\220\226\263\377\215\2=
+34" \
+-  "\243\302\377\3:<A\377\345\345\332\377\334\334\322\377\232\354\354\341=
+" \
+-  "\377\2\335\335\322\377\350\350\335\377\231\354\354\341\377\4\353\353"=
+ \
+-  "\340\377\331\331\317\377\216\216\211\377ot\212\377\206\234\243\302\37=
+7" \
+-  "\2""69D\377\224\233\270\377\203\234\243\302\377\3\220\227\264\377\227=
+" \
+-  "\236\275\377\223\232\267\377\206\234\243\302\377\2\210\216\251\377\\"=
+ \
+-  "]\\\377\205\354\354\341\377\1\331\331\317\377\222\354\354\341\377\2E"=
+ \
+-  "FG\377\224\232\270\377\205\234\243\302\377\3\211\217\252\377RRR\377\3=
+42" \
+-  "\342\330\377\232\354\354\341\377\1\331\331\317\377\216\354\354\341\37=
+7" \
+-  "\2\353\353\340\377\333\333\321\377\204\354\354\341\377\1\331\331\317"=
+ \
+-  "\377\245\354\354\341\377\2JKK\377\223\232\267\377\203\234\243\302\377=
+" \
+-  "\2\222\230\265\377\232\241\277\377\214\234\243\302\377\3SUa\377\276\2=
+76" \
+-  "\265\377\331\331\317\377\232\354\354\341\377\2\335\335\322\377\350\35=
+0" \
+-  "\335\377\231\354\354\341\377\4\342\342\330\377\340\340\326\377VWW\377=
+" \
+-  "\220\226\263\377\206\234\243\302\377\2Z^p\377kp\207\377\203\234\243\3=
+02" \
+-  "\377\3\225\234\272\377\215\224\260\377\231\240\276\377\207\234\243\30=
+2" \
+-  "\377\1;<@\377\205\354\354\341\377\2\334\334\322\377\350\350\335\377\2=
+20" \
+-  "\354\354\341\377\2\321\321\307\377FHP\377\206\234\243\302\377\3MPZ\37=
+7" \
+-  "\272\272\261\377\342\342\330\377\231\354\354\341\377\2\350\350\335\37=
+7" \
+-  "\334\334\322\377\216\354\354\341\377\2\344\344\331\377\342\342\330\37=
+7" \
+-  "\203\354\354\341\377\2\345\345\332\377\337\337\324\377\245\354\354\34=
+1" \
+-  "\377\2\225\225\220\377im\201\377\203\234\243\302\377\2\227\236\274\37=
+7" \
+-  "\224\233\270\377\214\234\243\302\377\4ns\211\377\211\211\204\377\342"=
+ \
+-  "\342\330\377\340\340\326\377\231\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\231\354\354\341\377\3\330\330\316\377\353\353\340\377\77=
+" \
+-  "@C\377\207\234\243\302\377\2\204\212\245\377CFS\377\203\234\243\302\3=
+77" \
+-  "\2\232\241\300\377\206\214\247\377\210\234\243\302\377\2SWd\377\277\2=
+77" \
+-  "\266\377\204\354\354\341\377\2\350\350\335\377\333\333\321\377\220\35=
+4" \
+-  "\354\341\377\2opn\377{\201\231\377\205\234\243\302\377\4\222\231\266"=
+ \
+-  "\377ABC\377\343\343\331\377\342\342\330\377\231\354\354\341\377\2\333=
+" \
+-  "\333\321\377\347\347\334\377\216\354\354\341\377\2\334\334\322\377\35=
+2" \
+-  "\352\337\377\203\354\354\341\377\2\335\335\322\377\350\350\335\377\24=
+5" \
+-  "\354\354\341\377\2\335\335\322\377CDK\377\204\234\243\302\377\1\220\2=
+26" \
+-  "\263\377\214\234\243\302\377\5\217\226\262\377RSS\377\354\354\341\377=
+" \
+-  "\330\330\316\377\353\353\340\377\230\354\354\341\377\2\335\335\322\37=
+7" \
+-  "\350\350\335\377\230\354\354\341\377\4\341\341\327\377\340\340\326\37=
+7" \
+-  "\342\342\330\377ACI\377\210\234\243\302\377\1.09\377\203\234\243\302"=
+ \
+-  "\377\2\232\241\277\377\207\216\251\377\210\234\243\302\377\2\200\206"=
+ \
+-  "\237\377oom\377\205\354\354\341\377\2\334\334\322\377\347\347\334\377=
+" \
+-  "\216\354\354\341\377\2\337\337\325\3778:>\377\206\234\243\302\377\4E"=
+ \
+-  "GP\377\273\273\262\377\343\343\331\377\342\342\330\377\230\354\354\34=
+1" \
+-  "\377\2\347\347\334\377\333\333\321\377\217\354\354\341\377\1\333\333"=
+ \
+-  "\321\377\204\354\354\341\377\1\330\330\316\377\247\354\354\341\377\2"=
+ \
+-  "CDF\377\231\240\276\377\203\234\243\302\377\2\220\227\264\377\233\242=
+" \
+-  "\301\377\214\234\243\302\377\4<=3D@\377\354\354\341\377\344\344\331\3=
+77" \
+-  "\337\337\324\377\230\354\354\341\377\2\335\335\322\377\350\350\335\37=
+7" \
+-  "\227\354\354\341\377\5\353\353\340\377\327\327\315\377\354\354\341\37=
+7" \
+-  "\264\264\254\377[_m\377\210\234\243\302\377\2""7:D\377\220\226\263\37=
+7" \
+-  "\202\234\243\302\377\3\224\232\270\377\220\227\264\377\230\237\275\37=
+7" \
+-  "\210\234\243\302\377\2""89<\377\353\353\340\377\204\354\354\341\377\2=
+" \
+-  "\351\351\336\377\332\332\320\377\216\354\354\341\377\2fge\377w|\224\3=
+77" \
+-  "\205\234\243\302\377\5sx\215\377iig\377\354\354\341\377\343\343\331\3=
+77" \
+-  "\342\342\330\377\230\354\354\341\377\2\331\331\317\377\351\351\336\37=
+7" \
+-  "\216\354\354\341\377\2\346\346\333\377\340\340\326\377\203\354\354\34=
+1" \
+-  "\377\2\347\347\334\377\335\335\322\377\247\354\354\341\377\2\204\204"=
+ \
+-  "\177\377sx\217\377\203\234\243\302\377\2\225\234\272\377\226\235\273"=
+ \
+-  "\377\214\234\243\302\377\5@BI\377\337\337\325\377\354\354\341\377\331=
+" \
+-  "\331\317\377\352\352\337\377\227\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\227\354\354\341\377\5\337\337\324\377\343\343\331\377\35=
+4" \
+-  "\354\341\377}}y\377w}\225\377\210\234\243\302\377\2]at\377gl\200\377"=
+ \
+-  "\202\234\243\302\377\3\220\226\263\377\232\241\277\377\222\230\265\37=
+7" \
+-  "\210\234\243\302\377\2Z^l\377\245\245\236\377\205\354\354\341\377\2\3=
+36" \
+-  "\336\323\377\345\345\332\377\214\354\354\341\377\2\311\311\300\377BD"=
+ \
+-  "L\377\205\234\243\302\377\6\224\232\270\37778;\377\345\345\332\377\35=
+4" \
+-  "\354\341\377\343\343\331\377\342\342\330\377\227\354\354\341\377\2\34=
+5" \
+-  "\345\332\377\335\335\322\377\217\354\354\341\377\2\336\336\323\377\35=
+1" \
+-  "\351\336\377\203\354\354\341\377\2\337\337\324\377\345\345\332\377\24=
+7" \
+-  "\354\354\341\377\2\321\321\307\377KMV\377\203\234\243\302\377\2\233\2=
+42" \
+-  "\301\377\220\227\264\377\214\234\243\302\377\5\\`p\377\256\256\246\37=
+7" \
+-  "\354\354\341\377\347\347\334\377\334\334\322\377\227\354\354\341\377"=
+ \
+-  "\2\335\335\322\377\350\350\335\377\226\354\354\341\377\2\352\352\337"=
+ \
+-  "\377\330\330\316\377\202\354\354\341\377\2JKK\377\225\234\272\377\210=
+" \
+-  "\234\243\302\377\7\211\217\252\377<\77K\377\234\243\302\377\232\241\3=
+00" \
+-  "\377\221\230\265\377\234\243\302\377\220\226\263\377\210\234\243\302"=
+ \
+-  "\377\2\222\231\266\377ABC\377\205\354\354\341\377\2\353\353\340\377\3=
+30" \
+-  "\330\316\377\214\354\354\341\377\2EFG\377\212\221\254\377\204\234\243=
+" \
+-  "\302\377\3\230\237\276\377<=3DD\377\270\270\257\377\202\354\354\341\3=
+77" \
+-  "\2\343\343\331\377\342\342\330\377\227\354\354\341\377\2\330\330\316"=
+ \
+-  "\377\352\352\337\377\217\354\354\341\377\1\332\332\320\377\204\354\35=
+4" \
+-  "\341\377\1\330\330\316\377\251\354\354\341\377\1\77AC\377\204\234\243=
+" \
+-  "\302\377\2\220\227\264\377\233\242\301\377\213\234\243\302\377\2|\201=
+" \
+-  "\232\377nol\377\202\354\354\341\377\2\337\337\324\377\341\341\327\377=
+" \
+-  "\226\354\354\341\377\2\335\335\322\377\350\350\335\377\225\354\354\34=
+1" \
+-  "\377\6\353\353\340\377\330\330\316\377\350\350\335\377\354\354\341\37=
+7" \
+-  "\352\352\337\3779:>\377\212\234\243\302\377\7""14=3D\377\221\230\264\=
+377" \
+-  "\225\233\271\377\227\235\273\377\234\243\302\377\223\232\267\377\230"=
+ \
+-  "\237\276\377\210\234\243\302\377\2JLV\377\305\305\273\377\205\354\354=
+" \
+-  "\341\377\2\344\344\331\377\334\334\322\377\212\354\354\341\377\2rrp\3=
+77" \
+-  "ej{\377\204\234\243\302\377\3\231\240\276\377>\77G\377\246\246\237\37=
+7" \
+-  "\203\354\354\341\377\2\343\343\331\377\342\342\330\377\226\354\354\34=
+1" \
+-  "\377\2\334\334\322\377\344\344\331\377\217\354\354\341\377\2\347\347"=
+ \
+-  "\334\377\337\337\324\377\203\354\354\341\377\2\351\351\336\377\333\33=
+3" \
+-  "\321\377\251\354\354\341\377\2ssq\377~\204\235\377\203\234\243\302\37=
+7" \
+-  "\2\227\236\274\377\224\232\270\377\214\234\243\302\377\1""78;\377\203=
+" \
+-  "\354\354\341\377\2\332\332\320\377\345\345\332\377\225\354\354\341\37=
+7" \
+-  "\2\335\335\322\377\350\350\335\377\225\354\354\341\377\2\333\333\321"=
+ \
+-  "\377\344\344\331\377\202\354\354\341\377\2\254\254\244\377Y\\k\377\21=
+2" \
+-  "\234\243\302\377\3mr\207\377QUe\377\217\226\262\377\202\234\243\302\3=
+77" \
+-  "\2\232\241\300\377\220\227\264\377\210\234\243\302\377\2\205\213\246"=
+ \
+-  "\377YZY\377\206\354\354\341\377\2\337\337\325\377\340\340\326\377\210=
+" \
+-  "\354\354\341\377\2\223\224\216\377QT`\377\204\234\243\302\377\3\232\2=
+41" \
+-  "\277\377ACJ\377\243\244\235\377\204\354\354\341\377\2\343\343\331\377=
+" \
+-  "\342\342\330\377\225\354\354\341\377\2\340\340\326\377\337\337\325\37=
+7" \
+-  "\220\354\354\341\377\2\333\333\321\377\352\352\337\377\203\354\354\34=
+1" \
+-  "\377\2\340\340\326\377\343\343\331\377\251\354\354\341\377\2\305\305"=
+ \
+-  "\273\377LNX\377\204\234\243\302\377\2\220\227\264\377\232\241\300\377=
+" \
+-  "\213\234\243\302\377\2TWd\377\265\265\255\377\202\354\354\341\377\3\3=
+53" \
+-  "\353\340\377\330\330\316\377\351\351\336\377\224\354\354\341\377\2\33=
+5" \
+-  "\335\322\377\350\350\335\377\224\354\354\341\377\2\337\337\325\377\34=
+0" \
+-  "\340\326\377\203\354\354\341\377\2QQR\377\215\223\257\377\212\234\243=
+" \
+-  "\302\377\3\232\241\300\377&(1\377\225\233\271\377\203\234\243\302\377=
+" \
+-  "\2\223\232\267\377\230\237\275\377\210\234\243\302\377\2@BJ\377\312\3=
+12" \
+-  "\301\377\206\354\354\341\377\2\333\333\321\377\345\345\332\377\206\35=
+4" \
+-  "\354\341\377\3\260\260\250\377@BI\377\233\242\301\377\203\234\243\302=
+" \
+-  "\377\3\204\212\245\3779:\77\377\243\243\235\377\205\354\354\341\377\2=
+" \
+-  "\343\343\331\377\342\342\330\377\224\354\354\341\377\2\345\345\332\37=
+7" \
+-  "\333\333\321\377\220\354\354\341\377\2\346\346\333\377\337\337\324\37=
+7" \
+-  "\204\354\354\341\377\2\330\330\316\377\353\353\340\377\252\354\354\34=
+1" \
+-  "\377\2KLL\377\211\217\253\377\203\234\243\302\377\2\231\240\276\377\2=
+22" \
+-  "\230\265\377\213\234\243\302\377\2\211\217\252\377XXX\377\203\354\354=
+" \
+-  "\341\377\3\351\351\336\377\327\327\315\377\353\353\340\377\223\354\35=
+4" \
+-  "\341\377\2\335\335\322\377\350\350\335\377\223\354\354\341\377\2\344"=
+ \
+-  "\344\331\377\334\334\322\377\203\354\354\341\377\2\340\340\326\377=3D=
+>" \
+-  "D\377\213\234\243\302\377\3\233\242\301\377ORc\377gk\200\377\203\234"=
+ \
+-  "\243\302\377\2\233\242\301\377\220\226\263\377\210\234\243\302\377\2"=
+ \
+-  "\211\217\253\377GHI\377\206\354\354\341\377\3\353\353\340\377\330\330=
+" \
+-  "\316\377\350\350\335\377\204\354\354\341\377\3\225\225\220\377<=3DC\3=
+77" \
+-  "\227\235\273\377\202\234\243\302\377\4\232\241\277\377X[i\377LLM\377"=
+ \
+-  "\326\326\314\377\206\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\223\354\354\341\377\3\350\350\335\377\330\330\316\377\353\353\340\37=
+7" \
+-  "\220\354\354\341\377\2\332\332\320\377\353\353\340\377\203\354\354\34=
+1" \
+-  "\377\2\344\344\331\377\337\337\324\377\253\354\354\341\377\2\310\310"=
+ \
+-  "\277\377BEM\377\204\234\243\302\377\2\221\230\265\377\231\240\276\377=
+" \
+-  "\213\234\243\302\377\2;<A\377\345\345\332\377\203\354\354\341\377\3\3=
+46" \
+-  "\346\333\377\330\330\316\377\351\351\336\377\222\354\354\341\377\2\33=
+5" \
+-  "\335\322\377\350\350\335\377\222\354\354\341\377\3\342\342\330\377\33=
+2" \
+-  "\332\320\377\353\353\340\377\203\354\354\341\377\2\221\221\214\377hl"=
+ \
+-  "\200\377\213\234\243\302\377\3\222\231\266\377\220\226\263\377,.7\377=
+" \
+-  "\204\234\243\302\377\2\224\233\270\377\227\235\273\377\210\234\243\30=
+2" \
+-  "\377\2RUa\377\252\252\243\377\206\354\354\341\377\15\351\351\336\377"=
+ \
+-  "\330\330\316\377\346\346\333\377\354\354\341\377\346\346\333\377^_]\3=
+77" \
+-  "SVc\377\233\242\301\377\234\243\302\377\211\217\252\377WZh\37778;\377=
+" \
+-  "\233\233\225\377\210\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\222\354\354\341\377\3\346\346\333\377\330\330\316\377\351\351\336\37=
+7" \
+-  "\220\354\354\341\377\2\344\344\331\377\340\340\326\377\204\354\354\34=
+1" \
+-  "\377\2\330\330\316\377\353\353\340\377\254\354\354\341\377\2[[[\377\1=
+77" \
+-  "\205\237\377\203\234\243\302\377\2\232\241\277\377\220\227\264\377\21=
+3" \
+-  "\234\243\302\377\2chy\377\234\234\225\377\204\354\354\341\377\3\350\3=
+50" \
+-  "\335\377\330\330\316\377\346\346\333\377\221\354\354\341\377\2\335\33=
+5" \
+-  "\322\377\350\350\335\377\221\354\354\341\377\2\336\336\323\377\335\33=
+5" \
+-  "\322\377\205\354\354\341\377\2BCE\377\227\235\273\377\212\234\243\302=
+" \
+-  "\377\5\232\241\277\377\220\227\264\377\234\243\302\377CFU\377x~\226\3=
+77" \
+-  "\204\234\243\302\377\1\220\226\263\377\210\234\243\302\377\3\225\234"=
+ \
+-  "\272\37778:\377\350\350\335\377\206\354\354\341\377\12\353\353\340\37=
+7" \
+-  "\331\331\317\377\313\313\302\377--.\377;>I\377\\`p\377QS_\377;<A\377"=
+ \
+-  "[\\[\377\265\265\255\377\212\354\354\341\377\2\343\343\331\377\342\34=
+2" \
+-  "\330\377\221\354\354\341\377\3\342\342\330\377\331\331\317\377\353\35=
+3" \
+-  "\340\377\221\354\354\341\377\1\332\332\320\377\204\354\354\341\377\2"=
+ \
+-  "\341\341\327\377\340\340\326\377\255\354\354\341\377\2\325\325\313\37=
+7" \
+-  ";=3DB\377\204\234\243\302\377\2\222\231\266\377\230\237\275\377\212\2=
+34" \
+-  "\243\302\377\2\224\233\270\377GHI\377\205\354\354\341\377\3\353\353\3=
+40" \
+-  "\377\331\331\317\377\342\342\330\377\220\354\354\341\377\2\335\335\32=
+2" \
+-  "\377\350\350\335\377\217\354\354\341\377\3\353\353\340\377\332\332\32=
+0" \
+-  "\377\342\342\330\377\205\354\354\341\377\2\322\322\310\377GIQ\377\213=
+" \
+-  "\234\243\302\377\6\222\230\265\377\231\240\276\377\234\243\302\377\21=
+1" \
+-  "\217\252\37768C\377\233\242\301\377\203\234\243\302\377\2\226\235\273=
+" \
+-  "\377\225\233\271\377\210\234\243\302\377\2jn\201\377vwt\377\210\354\3=
+54" \
+-  "\341\377\6\303\303\272\377}}y\377\235\235\226\377\261\261\251\377\306=
+" \
+-  "\306\274\377\350\350\335\377\214\354\354\341\377\2\343\343\331\377\34=
+2" \
+-  "\342\330\377\220\354\354\341\377\2\336\336\323\377\335\335\322\377\22=
+2" \
+-  "\354\354\341\377\2\341\341\327\377\343\343\331\377\203\354\354\341\37=
+7" \
+-  "\2\353\353\340\377\327\327\315\377\257\354\354\341\377\2mmk\377ty\220=
+" \
+-  "\377\203\234\243\302\377\2\233\242\301\377\220\226\263\377\213\234\24=
+3" \
+-  "\302\377\2DFM\377\327\327\315\377\206\354\354\341\377\202\335\335\322=
+" \
+-  "\377\1\352\352\337\377\216\354\354\341\377\2\335\335\322\377\350\350"=
+ \
+-  "\335\377\216\354\354\341\377\3\346\346\333\377\330\330\316\377\346\34=
+6" \
+-  "\333\377\206\354\354\341\377\2vvs\377x}\225\377\212\234\243\302\377\2=
+" \
+-  "\231\240\276\377\222\230\265\377\203\234\243\302\377\2""46@\377\205\2=
+13" \
+-  "\246\377\204\234\243\302\377\2\220\226\263\377\233\242\301\377\210\23=
+4" \
+-  "\243\302\377\2BDM\377\270\270\257\377\210\354\354\341\377\3\341\341\3=
+27" \
+-  "\377\331\331\317\377\350\350\335\377\216\354\354\341\377\2\343\343\33=
+1" \
+-  "\377\342\342\330\377\216\354\354\341\377\3\351\351\336\377\331\331\31=
+7" \
+-  "\377\341\341\327\377\222\354\354\341\377\2\353\353\340\377\332\332\32=
+0" \
+-  "\377\204\354\354\341\377\2\337\337\325\377\342\342\330\377\257\354\35=
+4" \
+-  "\341\377\3\337\337\325\37778<\377\233\242\301\377\203\234\243\302\377=
+" \
+-  "\2\225\233\271\377\225\234\272\377\212\234\243\302\377\2{\201\231\377=
+" \
+-  "^^^\377\207\354\354\341\377\4\345\345\332\377\330\330\316\377\337\337=
+" \
+-  "\325\377\353\353\340\377\214\354\354\341\377\2\335\335\322\377\350\35=
+0" \
+-  "\335\377\214\354\354\341\377\4\350\350\335\377\332\332\320\377\334\33=
+4" \
+-  "\322\377\352\352\337\377\206\354\354\341\377\2\336\336\323\3779;\77\3=
+77" \
+-  "\212\234\243\302\377\3\233\242\301\377\217\226\262\377\232\241\300\37=
+7" \
+-  "\203\234\243\302\377\3fj\177\377/19\377\232\241\300\377\203\234\243\3=
+02" \
+-  "\377\2\230\237\275\377\222\230\265\377\210\234\243\302\377\3\224\233"=
+ \
+-  "\270\377569\377\337\337\324\377\210\354\354\341\377\4\350\350\335\377=
+" \
+-  "\332\332\320\377\335\335\322\377\352\352\337\377\214\354\354\341\377"=
+ \
+-  "\2\343\343\331\377\342\342\330\377\214\354\354\341\377\4\352\352\337"=
+ \
+-  "\377\335\335\322\377\332\332\320\377\350\350\335\377\223\354\354\341"=
+ \
+-  "\377\2\335\335\322\377\346\346\333\377\203\354\354\341\377\2\352\352"=
+ \
+-  "\337\377\330\330\316\377\261\354\354\341\377\2\201\202~\377jn\202\377=
+" \
+-  "\204\234\243\302\377\2\221\230\265\377\230\237\275\377\212\234\243\30=
+2" \
+-  "\377\2ACJ\377\307\307\276\377\210\354\354\341\377\3\342\342\330\377\3=
+27" \
+-  "\327\315\377\342\342\330\377\213\354\354\341\377\2\335\335\322\377\35=
+0" \
+-  "\350\335\377\212\354\354\341\377\4\352\352\337\377\334\334\322\377\33=
+2" \
+-  "\332\320\377\350\350\335\377\210\354\354\341\377\2eed\377z\177\230\37=
+7" \
+-  "\212\234\243\302\377\2\221\230\265\377\230\237\275\377\204\234\243\30=
+2" \
+-  "\377\3""9:@\377iig\377ei|\377\204\234\243\302\377\2\224\233\270\377\2=
+25" \
+-  "\233\271\377\210\234\243\302\377\2|\201\232\377QQQ\377\212\354\354\34=
+1" \
+-  "\377\4\345\345\332\377\330\330\316\377\337\337\324\377\353\353\340\37=
+7" \
+-  "\212\354\354\341\377\2\343\343\331\377\342\342\330\377\212\354\354\34=
+1" \
+-  "\377\4\353\353\340\377\337\337\324\377\330\330\316\377\345\345\332\37=
+7" \
+-  "\224\354\354\341\377\2\341\341\327\377\340\340\326\377\204\354\354\34=
+1" \
+-  "\377\2\335\335\322\377\345\345\332\377\261\354\354\341\377\3\347\347"=
+ \
+-  "\334\377669\377\230\237\276\377\203\234\243\302\377\3\233\242\301\377=
+" \
+-  "\220\226\263\377\232\241\277\377\211\234\243\302\377\2\212\220\253\37=
+7" \
+-  "FFG\377\211\354\354\341\377\5\353\353\340\377\337\337\325\377\330\330=
+" \
+-  "\316\377\337\337\324\377\347\347\334\377\210\354\354\341\377\2\335\33=
+5" \
+-  "\322\377\350\350\335\377\207\354\354\341\377\5\353\353\340\377\343\34=
+3" \
+-  "\331\377\333\333\321\377\331\331\317\377\346\346\333\377\211\354\354"=
+ \
+-  "\341\377\2\314\314\303\377ACK\377\212\234\243\302\377\2\224\232\270\3=
+77" \
+-  "\225\233\271\377\204\234\243\302\377\5pu\212\377uur\377\350\350\335\3=
+77" \
+-  "568\377\216\225\261\377\204\234\243\302\377\2\222\230\265\377\227\236=
+" \
+-  "\274\377\210\234\243\302\377\2^bq\377zzw\377\213\354\354\341\377\4\34=
+3" \
+-  "\343\331\377\330\330\316\377\335\335\322\377\345\345\332\377\210\354"=
+ \
+-  "\354\341\377\2\343\343\331\377\342\342\330\377\210\354\354\341\377\4"=
+ \
+-  "\345\345\332\377\335\335\322\377\330\330\316\377\343\343\331\377\225"=
+ \
+-  "\354\354\341\377\2\345\345\332\377\335\335\322\377\204\354\354\341\37=
+7" \
+-  "\2\351\351\336\377\331\331\317\377\263\354\354\341\377\2\251\251\241"=
+ \
+-  "\377FHQ\377\204\234\243\302\377\3\232\241\300\377\217\226\262\377\233=
+" \
+-  "\242\301\377\211\234\243\302\377\2QT`\377\254\254\245\377\213\354\354=
+" \
+-  "\341\377\6\346\346\333\377\335\335\322\377\330\330\316\377\335\335\32=
+2" \
+-  "\377\345\345\332\377\352\352\337\377\204\354\354\341\377\2\335\335\32=
+2" \
+-  "\377\350\350\335\377\204\354\354\341\377\2\351\351\336\377\341\341\32=
+7" \
+-  "\377\202\331\331\317\377\2\340\340\326\377\351\351\336\377\213\354\35=
+4" \
+-  "\341\377\2LMM\377\211\217\252\377\211\234\243\302\377\2\227\235\273\3=
+77" \
+-  "\222\230\265\377\204\234\243\302\377\7\213\221\255\37789;\377\343\343=
+" \
+-  "\331\377\354\354\341\377\274\274\264\377<>E\377\233\242\301\377\204\2=
+34" \
+-  "\243\302\377\2\220\226\263\377\232\241\277\377\210\234\243\302\377\2"=
+ \
+-  "OQ]\377\221\221\214\377\214\354\354\341\377\6\350\350\335\377\337\337=
+" \
+-  "\324\377\331\331\317\377\333\333\321\377\343\343\331\377\352\352\337"=
+ \
+-  "\377\204\354\354\341\377\2\343\343\331\377\342\342\330\377\204\354\35=
+4" \
+-  "\341\377\6\352\352\337\377\343\343\331\377\333\333\321\377\331\331\31=
+7" \
+-  "\377\337\337\324\377\350\350\335\377\226\354\354\341\377\2\351\351\33=
+6" \
+-  "\377\332\332\320\377\204\354\354\341\377\3\353\353\340\377\330\330\31=
+6" \
+-  "\377\350\350\335\377\264\354\354\341\377\2}~z\377]`p\377\204\234\243"=
+ \
+-  "\302\377\2\230\237\276\377\220\227\264\377\211\234\243\302\377\3\224"=
+ \
+-  "\233\270\37789;\377\352\352\337\377\215\354\354\341\377\3\350\350\335=
+" \
+-  "\377\337\337\325\377\333\333\321\377\203\331\331\317\377\3\332\332\32=
+0" \
+-  "\377\317\317\304\377\330\330\316\377\204\331\331\317\377\3\334\334\32=
+2" \
+-  "\377\342\342\330\377\353\353\340\377\215\354\354\341\377\2\262\262\25=
+3" \
+-  "\377NQ\\\377\211\234\243\302\377\2\231\240\276\377\220\226\263\377\20=
+4" \
+-  "\234\243\302\377\3\226\235\273\37767;\377\317\317\305\377\203\354\354=
+" \
+-  "\341\377\2mnk\377fj}\377\204\234\243\302\377\3\232\241\300\377\217\22=
+6" \
+-  "\262\377\233\242\301\377\210\234\243\302\377\2DFO\377\245\246\237\377=
+" \
+-  "\216\354\354\341\377\3\352\352\337\377\340\340\326\377\334\334\322\37=
+7" \
+-  "\203\331\331\317\377\4\332\332\320\377\325\325\312\377\324\324\311\37=
+7" \
+-  "\332\332\320\377\203\331\331\317\377\3\334\334\322\377\340\340\326\37=
+7" \
+-  "\352\352\337\377\230\354\354\341\377\3\353\353\340\377\331\331\317\37=
+7" \
+-  "\352\352\337\377\204\354\354\341\377\2\333\333\321\377\345\345\332\37=
+7" \
+-  "\266\354\354\341\377\2TUT\377sy\216\377\204\234\243\302\377\2\226\235=
+" \
+-  "\273\377\223\232\267\377\211\234\243\302\377\2cgx\377\214\215\210\377=
+" \
+-  "\223\354\354\341\377\3\353\353\340\377\331\331\317\377\346\346\333\37=
+7" \
+-  "\223\354\354\341\377\3\353\353\340\377:;=3D\377\223\232\267\377\210\2=
+34" \
+-  "\243\302\377\3\232\241\300\377\217\226\262\377\232\241\300\377\204\23=
+4" \
+-  "\243\302\377\2ACJ\377\262\262\253\377\204\354\354\341\377\3\347\347\3=
+34" \
+-  "\377679\377\211\217\253\377\204\234\243\302\377\2\230\237\276\377\220=
+" \
+-  "\227\264\377\210\234\243\302\377\3\231\240\276\377<>D\377\264\264\255=
+" \
+-  "\377\224\354\354\341\377\2\340\340\326\377\337\337\325\377\237\354\35=
+4" \
+-  "\341\377\2\333\333\321\377\347\347\334\377\204\354\354\341\377\2\337"=
+ \
+-  "\337\325\377\340\340\326\377\267\354\354\341\377\3\345\345\332\377<<"=
+ \
+-  "=3D\377\205\213\246\377\204\234\243\302\377\2\223\232\267\377\225\234=
+\272" \
+-  "\377\210\234\243\302\377\3\232\241\300\37778<\377\321\321\307\377\223=
+" \
+-  "\354\354\341\377\2\335\335\322\377\350\350\335\377\223\354\354\341\37=
+7" \
+-  "\2\200\200|\377afw\377\210\234\243\302\377\3\233\242\301\377\220\226"=
+ \
+-  "\263\377\231\240\276\377\204\234\243\302\377\2VYf\377\214\215\210\377=
+" \
+-  "\206\354\354\341\377\3\276\276\265\377>@H\377\226\235\273\377\204\234=
+" \
+-  "\243\302\377\2\227\235\273\377\222\231\266\377\210\234\243\302\377\3"=
+ \
+-  "\226\235\273\377<>D\377\241\241\233\377\223\354\354\341\377\2\343\343=
+" \
+-  "\331\377\342\342\330\377\236\354\354\341\377\2\336\336\323\377\344\34=
+4" \
+-  "\331\377\204\354\354\341\377\2\344\344\331\377\334\334\322\377\271\35=
+4" \
+-  "\354\341\377\3\325\325\313\377458\377\222\231\266\377\204\234\243\302=
+" \
+-  "\377\2\222\231\266\377\223\232\267\377\210\234\243\302\377\3\212\220"=
+ \
+-  "\253\3779:;\377\342\342\330\377\222\354\354\341\377\2\335\335\322\377=
+" \
+-  "\350\350\335\377\222\354\354\341\377\2\252\252\244\377DGP\377\210\234=
+" \
+-  "\243\302\377\3\232\241\277\377\217\226\262\377\230\237\275\377\204\23=
+4" \
+-  "\243\302\377\2mr\206\377bca\377\210\354\354\341\377\3nol\377di|\377\2=
+30" \
+-  "\237\276\377\204\234\243\302\377\3\225\234\272\377\221\230\265\377\23=
+3" \
+-  "\242\301\377\207\234\243\302\377\3\232\241\277\377GIS\377\206\207\202=
+" \
+-  "\377\222\354\354\341\377\2\343\343\331\377\342\342\330\377\234\354\35=
+4" \
+-  "\341\377\3\353\353\340\377\334\334\322\377\342\342\330\377\204\354\35=
+4" \
+-  "\341\377\2\350\350\335\377\331\331\317\377\273\354\354\341\377\3\274"=
+ \
+-  "\274\263\377:;B\377\232\241\300\377\204\234\243\302\377\3\225\234\272=
+" \
+-  "\377\220\227\264\377\233\242\301\377\207\234\243\302\377\3x~\225\377"=
+ \
+-  "MMM\377\353\353\340\377\221\354\354\341\377\2\335\335\322\377\350\350=
+" \
+-  "\335\377\221\354\354\341\377\3\311\311\300\37779=3D\377\230\237\275\3=
+77" \
+-  "\207\234\243\302\377\3\230\237\275\377\217\226\262\377\232\241\277\37=
+7" \
+-  "\204\234\243\302\377\3\201\206\240\377EFF\377\351\351\336\377\210\354=
+" \
+-  "\354\341\377\4\347\347\334\377BCD\377sw\216\377\232\241\300\377\204\2=
+34" \
+-  "\243\302\377\3\230\237\275\377\220\226\263\377\232\241\300\377\210\23=
+4" \
+-  "\243\302\377\3VYg\377jjh\377\353\353\340\377\220\354\354\341\377\2\34=
+3" \
+-  "\343\331\377\342\342\330\377\233\354\354\341\377\3\352\352\337\377\33=
+1" \
+-  "\331\317\377\346\346\333\377\204\354\354\341\377\3\352\352\337\377\33=
+0" \
+-  "\330\316\377\352\352\337\377\274\354\354\341\377\2\227\227\222\377LO"=
+ \
+-  "Z\377\205\234\243\302\377\3\230\237\275\377\217\226\262\377\232\241\2=
+77" \
+-  "\377\207\234\243\302\377\2cgx\377pqn\377\221\354\354\341\377\2\335\33=
+5" \
+-  "\322\377\350\350\335\377\220\354\354\341\377\3\336\336\323\37778;\377=
+" \
+-  "\217\225\262\377\207\234\243\302\377\3\225\234\272\377\220\227\264\37=
+7" \
+-  "\233\242\301\377\204\234\243\302\377\3\217\226\262\37778;\377\336\336=
+" \
+-  "\323\377\212\354\354\341\377\3\337\337\325\37789;\377{\201\232\377\20=
+5" \
+-  "\234\243\302\377\3\232\241\277\377\217\226\262\377\230\237\276\377\21=
+0" \
+-  "\234\243\302\377\3gl~\377@AB\377\321\321\307\377\217\354\354\341\377"=
+ \
+-  "\2\343\343\331\377\342\342\330\377\232\354\354\341\377\3\347\347\334"=
+ \
+-  "\377\331\331\317\377\351\351\336\377\205\354\354\341\377\2\331\331\31=
+7" \
+-  "\377\347\347\334\377\276\354\354\341\377\3vvt\377QTa\377\233\242\301"=
+ \
+-  "\377\204\234\243\302\377\3\232\241\277\377\217\226\262\377\230\237\27=
+5" \
+-  "\377\207\234\243\302\377\2JLW\377\233\234\226\377\220\354\354\341\377=
+" \
+-  "\2\335\335\322\377\350\350\335\377\217\354\354\341\377\3\352\352\337"=
+ \
+-  "\377FGG\377\177\205\237\377\207\234\243\302\377\202\223\232\267\377\2=
+05" \
+-  "\234\243\302\377\3\212\221\254\37778<\377\310\310\277\377\214\354\354=
+" \
+-  "\341\377\4\327\327\315\377457\377\202\210\243\377\233\242\301\377\204=
+" \
+-  "\234\243\302\377\3\233\242\301\377\220\227\264\377\226\235\273\377\21=
+0" \
+-  "\234\243\302\377\3\207\215\250\37778=3D\377\224\225\217\377\216\354\3=
+54" \
+-  "\341\377\2\343\343\331\377\342\342\330\377\231\354\354\341\377\3\343"=
+ \
+-  "\343\331\377\333\333\321\377\353\353\340\377\204\354\354\341\377\3\35=
+3" \
+-  "\353\340\377\332\332\320\377\343\343\331\377\300\354\354\341\377\3\22=
+5" \
+-  "\226\221\377\77AH\377\225\234\272\377\204\234\243\302\377\3\233\242\3=
+01" \
+-  "\377\220\227\264\377\225\234\272\377\206\234\243\302\377\3\232\241\27=
+7" \
+-  "\37789\77\377\267\267\256\377\217\354\354\341\377\2\335\335\322\377\3=
+50" \
+-  "\350\335\377\216\354\354\341\377\3\353\353\340\377_`^\377mq\205\377\2=
+06" \
+-  "\234\243\302\377\3\233\242\301\377\220\227\264\377\226\235\273\377\20=
+5" \
+-  "\234\243\302\377\3{\200\230\377;<>\377\323\323\311\377\216\354\354\34=
+1" \
+-  "\377\4\314\314\303\377126\377\201\206\240\377\231\240\276\377\205\234=
+" \
+-  "\243\302\377\202\223\232\267\377\210\234\243\302\377\4\232\241\300\37=
+7" \
+-  "X\\j\377OPP\377\330\330\316\377\214\354\354\341\377\2\343\343\331\377=
+" \
+-  "\342\342\330\377\230\354\354\341\377\202\337\337\324\377\205\354\354"=
+ \
+-  "\341\377\3\351\351\336\377\330\330\316\377\346\346\333\377\302\354\35=
+4" \
+-  "\341\377\3\272\272\261\37779<\377\212\221\254\377\205\234\243\302\377=
+" \
+-  "\3\224\232\270\377\221\230\265\377\232\241\277\377\205\234\243\302\37=
+7" \
+-  "\3\224\232\270\377;=3DD\377\217\217\212\377\216\354\354\341\377\2\335=
+\335" \
+-  "\322\377\350\350\335\377\215\354\354\341\377\3\337\337\324\377HII\377=
+" \
+-  "ei{\377\206\234\243\302\377\3\226\235\273\377\217\226\262\377\230\237=
+" \
+-  "\276\377\205\234\243\302\377\3gl~\377OOO\377\343\343\331\377\220\354"=
+ \
+-  "\354\341\377\4\312\312\301\377347\377z\177\230\377\227\236\274\377\20=
+5" \
+-  "\234\243\302\377\3\226\235\273\377\220\226\263\377\230\237\275\377\21=
+0" \
+-  "\234\243\302\377\4\200\206\237\3779:@\377mnk\377\337\337\324\377\212"=
+ \
+-  "\354\354\341\377\2\343\343\331\377\342\342\330\377\226\354\354\341\37=
+7" \
+-  "\3\346\346\333\377\332\332\320\377\343\343\331\377\205\354\354\341\37=
+7" \
+-  "\3\346\346\333\377\330\330\316\377\351\351\336\377\304\354\354\341\37=
+7" \
+-  "\3\323\323\312\377<=3D\77\377{\200\230\377\205\234\243\302\377\4\232\=
+241" \
+-  "\277\377\221\230\265\377\222\231\266\377\232\241\300\377\204\234\243"=
+ \
+-  "\302\377\4\233\242\301\377SWc\377__^\377\350\350\335\377\214\354\354"=
+ \
+-  "\341\377\2\335\335\322\377\350\350\335\377\214\354\354\341\377\3\306"=
+ \
+-  "\306\275\37777:\377}\203\233\377\205\234\243\302\377\3\230\237\275\37=
+7" \
+-  "\220\226\263\377\225\233\271\377\205\234\243\302\377\4\233\242\301\37=
+7" \
+-  "QS_\377qqo\377\353\353\340\377\222\354\354\341\377\4\327\327\315\377"=
+ \
+-  "99;\377rx\217\377\225\233\271\377\205\234\243\302\377\4\233\242\301\3=
+77" \
+-  "\223\232\267\377\220\227\264\377\231\240\276\377\210\234\243\302\377"=
+ \
+-  "\4tz\220\37789>\377|}y\377\344\344\331\377\210\354\354\341\377\2\343"=
+ \
+-  "\343\331\377\342\342\330\377\224\354\354\341\377\4\350\350\335\377\33=
+2" \
+-  "\332\320\377\337\337\324\377\353\353\340\377\205\354\354\341\377\3\34=
+1" \
+-  "\341\327\377\332\332\320\377\353\353\340\377\306\354\354\341\377\3\34=
+3" \
+-  "\343\331\377PPP\377gl~\377\206\234\243\302\377\4\230\237\276\377\220"=
+ \
+-  "\227\264\377\224\232\270\377\233\242\301\377\204\234\243\302\377\3os"=
+ \
+-  "\210\377>\77@\377\327\327\315\377\213\354\354\341\377\2\335\335\322\3=
+77" \
+-  "\350\350\335\377\213\354\354\341\377\3\241\241\232\3779;@\377\217\226=
+" \
+-  "\262\377\204\234\243\302\377\4\231\240\276\377\220\227\264\377\223\23=
+2" \
+-  "\267\377\233\242\301\377\205\234\243\302\377\3\225\233\271\377>@G\377=
+" \
+-  "\232\232\225\377\225\354\354\341\377\4\340\340\326\377CDE\377gl\200\3=
+77" \
+-  "\222\230\265\377\206\234\243\302\377\1\232\241\277\377\202\222\230\26=
+5" \
+-  "\377\1\232\241\300\377\210\234\243\302\377\4ot\210\377:;\77\377aaa\37=
+7" \
+-  "\301\301\270\377\206\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\222\354\354\341\377\4\333\333\320\377\206\206\202\377789\377EFE\377"=
+ \
+-  "\206\354\354\341\377\2\335\335\322\377\336\336\323\377\312\354\354\34=
+1" \
+-  "\377\3stq\377QT_\377\233\242\301\377\206\234\243\302\377\3\227\236\27=
+4" \
+-  "\377\220\226\263\377\225\234\272\377\204\234\243\302\377\3\204\212\24=
+5" \
+-  "\377459\377\254\254\244\377\212\354\354\341\377\2\335\335\322\377\350=
+" \
+-  "\350\335\377\211\354\354\341\377\4\340\340\326\377lmj\377NP\\\377\232=
+" \
+-  "\241\277\377\203\234\243\302\377\1\232\241\300\377\202\222\230\265\37=
+7" \
+-  "\1\232\241\300\377\206\234\243\302\377\3\211\217\253\37789<\377\275\2=
+75" \
+-  "\264\377\227\354\354\341\377\5\350\350\335\377ijh\377HJS\377\213\221"=
+ \
+-  "\255\377\232\241\300\377\206\234\243\302\377\4\231\240\276\377\220\22=
+7" \
+-  "\264\377\224\232\270\377\233\242\301\377\210\234\243\302\377\5\203\21=
+1" \
+-  "\243\377PS^\377<=3D@\377\200\200|\377\322\322\310\377\203\354\354\341=
+\377" \
+-  "\2\343\343\331\377\342\342\330\377\217\354\354\341\377\7\337\337\325"=
+ \
+-  "\377\225\226\220\377CDE\377;=3DC\377gk\177\377:;B\377\302\302\271\377=
+\204" \
+-  "\354\354\341\377\3\353\353\340\377\331\331\317\377\342\342\330\377\31=
+4" \
+-  "\354\354\341\377\3\233\233\226\37789>\377z\177\230\377\207\234\243\30=
+2" \
+-  "\377\4\225\234\272\377\220\226\263\377\223\232\267\377\231\240\276\37=
+7" \
+-  "\202\234\243\302\377\5\224\233\270\377Y\\j\377<=3D\77\377\227\227\222=
+\377" \
+-  "\351\351\336\377\207\354\354\341\377\2\335\335\322\377\350\350\335\37=
+7" \
+-  "\207\354\354\341\377\4\324\324\312\377hig\377<>C\377uz\217\377\202\23=
+4" \
+-  "\243\302\377\2\233\242\301\377\226\235\273\377\202\221\230\265\377\1"=
+ \
+-  "\231\240\276\377\206\234\243\302\377\4\230\237\275\377\\`o\377AAC\377=
+" \
+-  "\325\325\313\377\232\354\354\341\377\4\255\255\246\37756:\377w}\224\3=
+77" \
+-  "\225\234\272\377\207\234\243\302\377\4\230\237\275\377\220\227\264\37=
+7" \
+-  "\222\230\265\377\230\237\275\377\210\234\243\302\377\10\232\241\300\3=
+77" \
+-  "sx\217\377GIR\377:;\77\377JKL\377\201\202~\377\265\265\255\377\332\33=
+2" \
+-  "\320\377\212\354\354\341\377\13\340\340\326\377\264\264\254\377\177\2=
+00" \
+-  "|\377NNO\377;<\77\377;=3DD\377`dv\377\221\227\264\377\233\242\301\377=
+I" \
+-  "KU\377\214\214\207\377\204\354\354\341\377\3\342\342\330\377\330\330"=
+ \
+-  "\316\377\346\346\333\377\316\354\354\341\377\4\333\333\321\377ddb\377=
+" \
+-  "\77AH\377\205\213\245\377\207\234\243\302\377\13\231\240\276\377\223"=
+ \
+-  "\232\267\377\220\227\264\377\222\230\265\377\227\236\274\377\234\243"=
+ \
+-  "\302\377\230\237\275\377cgx\37778;\377\202\203\177\377\341\341\327\37=
+7" \
+-  "\205\354\354\341\377\2\335\335\322\377\350\350\335\377\205\354\354\34=
+1" \
+-  "\377\7\306\306\274\377UUU\377ACJ\377|\202\233\377\234\243\302\377\232=
+" \
+-  "\241\300\377\225\233\271\377\202\220\227\264\377\2\225\234\272\377\23=
+3" \
+-  "\242\301\377\206\234\243\302\377\4\233\242\301\377hm\177\37767:\377\2=
+33" \
+-  "\234\225\377\235\354\354\341\377\5\332\332\320\377HII\377UXf\377\213"=
+ \
+-  "\221\255\377\227\236\274\377\207\234\243\302\377\6\232\241\277\377\22=
+4" \
+-  "\233\270\377\220\227\264\377\221\230\265\377\227\235\273\377\233\242"=
+ \
+-  "\301\377\210\234\243\302\377\30\224\233\270\377ty\220\377RUb\377;=3DC=
+\377" \
+-  "9:\77\377;<\77\377=3D>A\377@AB\377KLL\377DDE\377ABD\377@BD\377ABE\377=
+@" \
+-  "AE\377BCJ\377X\\j\377nr\210\377\211\217\253\377\224\233\270\377\232\2=
+41" \
+-  "\277\377\234\243\302\377\226\235\273\377CEM\377\217\220\212\377\203\3=
+54" \
+-  "\354\341\377\4\345\345\332\377\330\330\316\377\337\337\325\377\353\35=
+3" \
+-  "\340\377\321\354\354\341\377\4\317\317\305\377RSS\377HJS\377\215\224"=
+ \
+-  "\260\377\210\234\243\302\377\34\232\241\277\377\224\233\270\377\220\2=
+27" \
+-  "\264\377\221\230\265\377\226\235\273\377\230\237\275\377lq\205\377;<"=
+ \
+-  "A\377ABD\377\\]\\\377\204\204\200\377\254\254\244\377\317\317\305\377=
+" \
+-  "\333\333\321\377\336\336\324\377\300\300\267\377\234\234\225\377stq\3=
+77" \
+-  "NOP\377<>@\377HJT\377\205\213\246\377\230\237\276\377\224\232\270\377=
+" \
+-  "\220\226\263\377\221\230\265\377\227\235\273\377\233\242\301\377\210"=
+ \
+-  "\234\243\302\377\4tz\220\37778<\377\205\205\201\377\350\350\335\377\2=
+40" \
+-  "\354\354\341\377\5\232\233\224\377447\377dhz\377\217\226\262\377\230"=
+ \
+-  "\237\276\377\210\234\243\302\377\2\233\242\301\377\225\234\272\377\20=
+2" \
+-  "\220\227\264\377\3\225\233\271\377\231\240\276\377\233\242\301\377\20=
+6" \
+-  "\234\243\302\377\2\226\235\273\377\225\234\272\377\204\234\243\302\37=
+7" \
+-  "\5\225\233\271\377\232\241\300\377\233\242\301\377\231\240\276\377\22=
+5" \
+-  "\233\271\377\202\220\227\264\377\2\225\234\272\377\232\241\300\377\20=
+3" \
+-  "\234\243\302\377\3uz\221\37767:\377\255\255\246\377\202\354\354\341\3=
+77" \
+-  "\4\347\347\334\377\331\331\317\377\336\336\323\377\352\352\337\377\32=
+5" \
+-  "\354\354\341\377\4\277\277\266\377CDE\377RUb\377\224\233\270\377\211"=
+ \
+-  "\234\243\302\377\4\232\241\300\377\225\234\272\377\223\232\267\377\22=
+1" \
+-  "\230\265\377\202\220\227\264\377\12\202\207\241\377lq\207\377[_o\377"=
+ \
+-  "KNW\37789\77\377\77@H\377RUa\377aex\377uz\221\377\211\220\253\377\202=
+" \
+-  "\220\227\264\377\3\222\230\265\377\224\232\270\377\230\237\275\377\21=
+2" \
+-  "\234\243\302\377\4\201\206\240\377=3D\77D\377opm\377\340\340\326\377\=
+243" \
+-  "\354\354\341\377\6\346\346\333\377|}y\37778<\377sw\217\377\220\227\26=
+4" \
+-  "\377\232\241\277\377\211\234\243\302\377\4\233\242\301\377\227\235\27=
+3" \
+-  "\377\223\232\267\377\221\230\265\377\204\220\227\264\377\6\222\230\26=
+5" \
+-  "\377\224\232\270\377\220\226\263\377\217\225\262\377\224\232\270\377"=
+ \
+-  "\222\230\265\377\204\220\227\264\377\4\221\230\265\377\223\232\267\37=
+7" \
+-  "\227\235\273\377\233\242\301\377\204\234\243\302\377\6\222\230\265\37=
+7" \
+-  "FIQ\377efd\377\343\343\331\377\354\354\341\377\351\351\336\377\202\33=
+3" \
+-  "\333\321\377\1\351\351\336\377\331\354\354\341\377\4\254\254\245\377"=
+ \
+-  ":;=3D\377^br\377\223\232\267\377\217\234\243\302\377\6\232\241\300\37=
+7" \
+-  "\230\237\275\377\215\223\257\377\224\233\270\377\231\240\276\377\233"=
+ \
+-  "\242\301\377\217\234\243\302\377\4\177\204\236\377FHP\377\\]\\\377\32=
+6" \
+-  "\326\314\377\247\354\354\341\377\6\332\332\320\377efd\377:<A\377afx\3=
+77" \
+-  "\217\225\262\377\232\241\277\377\217\234\243\302\377\6\232\241\300\37=
+7" \
+-  "\230\237\276\377\221\230\265\377\220\227\264\377\230\237\276\377\232"=
+ \
+-  "\241\300\377\213\234\243\302\377\10lq\205\3779:<\377\274\274\263\377"=
+ \
+-  "\354\354\341\377\351\351\336\377\335\335\322\377\331\331\317\377\347"=
+ \
+-  "\347\334\377\334\354\354\341\377\6\353\353\340\377\240\240\232\377PQ"=
+ \
+-  "Q\377\77AF\377_cs\377\213\221\255\377\216\234\243\302\377\2\222\230\2=
+65" \
+-  "\377\231\240\276\377\215\234\243\302\377\6\232\241\277\377uz\222\377"=
+ \
+-  "KNW\377:;>\377kki\377\312\312\301\377\253\354\354\341\377\7\342\342\3=
+30" \
+-  "\377\212\212\206\37767:\377LO[\377\201\206\240\377\223\232\267\377\23=
+0" \
+-  "\237\276\377\216\234\243\302\377\2\226\235\273\377\225\234\272\377\21=
+2" \
+-  "\234\243\302\377\11\224\232\270\377aew\3779;\77\377wxu\377\343\343\33=
+0" \
+-  "\377\337\337\324\377\331\331\317\377\334\334\322\377\345\345\332\377"=
+ \
+-  "\341\354\354\341\377\6\347\347\334\377\253\253\243\377[[[\377<=3DA\37=
+7" \
+-  "VYf\377\201\206\240\377\213\234\243\302\377\2\222\230\265\377\231\240=
+" \
+-  "\276\377\212\234\243\302\377\6\226\235\273\377lq\206\377EGN\377>\77A"=
+ \
+-  "\377z{w\377\312\312\301\377\261\354\354\341\377\7\262\262\252\377RRS"=
+ \
+-  "\37789>\377MP\\\377ou\213\377\220\226\263\377\227\236\274\377\213\234=
+" \
+-  "\243\302\377\2\226\235\273\377\225\234\272\377\207\234\243\302\377\5"=
+ \
+-  "\233\242\301\377uz\222\377CEL\377EFG\377\231\231\222\377\202\330\330"=
+ \
+-  "\316\377\2\335\335\322\377\346\346\333\377\347\354\354\341\377\10\353=
+" \
+-  "\353\340\377\272\272\262\377ijh\377;;>\377LOX\377gl\177\377~\204\235"=
+ \
+-  "\377\225\234\272\377\206\234\243\302\377\2\222\230\265\377\231\240\27=
+6" \
+-  "\377\206\234\243\302\377\7\214\223\256\377ty\220\377_br\377\77AF\377"=
+ \
+-  "DEF\377\213\214\206\377\326\326\314\377\266\354\354\341\377\12\353\35=
+3" \
+-  "\340\377\275\275\264\377stq\377=3D>\77\377<>D\377RVd\377im\202\377\20=
+4" \
+-  "\211\243\377\227\236\274\377\232\241\300\377\206\234\243\302\377\2\22=
+6" \
+-  "\235\273\377\225\234\272\377\204\234\243\302\377\11\230\237\276\377{"=
+ \
+-  "\201\231\377SVd\377569\377ppn\377\304\304\273\377\331\331\317\377\337=
+" \
+-  "\337\324\377\350\350\335\377\356\354\354\341\377\26\312\312\301\377\2=
+35" \
+-  "\235\226\377stq\377NOP\377ABE\377>\77D\377>@F\377EGO\377LOY\377SVb\37=
+7" \
+-  "SWd\377UYf\377QS_\377JLU\377CDL\377>\77E\377\77AE\377CDE\377\\]\\\377=
+" \
+-  "\205\205\200\377\255\255\245\377\337\337\325\377\275\354\354\341\377"=
+ \
+-  "\30\335\335\322\377\263\263\253\377\207\210\203\377Z[[\377\77\77A\377=
+" \
+-  "9:\77\377<>E\377FHR\377LOZ\377RUc\377X\\l\377^bu\377bfz\377_bv\377Y]"=
+ \
+-  "m\377OS_\377CEO\37779<\377\77@A\377jji\377\250\250\240\377\337\337\32=
+4" \
+-  "\377\343\343\331\377\351\351\336\377\367\354\354\341\377\11\352\352\3=
+37" \
+-  "\377\337\337\324\377\323\323\311\377\307\307\276\377\260\260\250\377"=
+ \
+-  "\274\274\264\377\314\314\303\377\327\327\315\377\343\343\331\377\312"=
+ \
+-  "\354\354\341\377\13\340\340\326\377\315\315\303\377\302\302\271\377\2=
+67" \
+-  "\267\256\377\252\252\243\377\237\237\230\377\214\214\207\377\222\222"=
+ \
+-  "\213\377\254\254\244\377\277\277\266\377\325\325\313\377\377\354\354"=
+ \
+-  "\341\377\203\354\354\341\377\2\335\335\322\377\350\350\335\377\323\35=
+4" \
+-  "\354\341\377\2\343\343\331\377\342\342\330\377\377\354\354\341\377\20=
+6" \
+-  "\354\354\341\377\2\335\335\322\377\350\350\335\377\323\354\354\341\37=
+7" \
+-  "\2\343\343\331\377\342\342\330\377\377\354\354\341\377\206\354\354\34=
+1" \
+-  "\377\2\335\335\322\377\350\350\335\377\323\354\354\341\377\2\343\343"=
+ \
+-  "\331\377\342\342\330\377\377\354\354\341\377\206\354\354\341\377\2\33=
+5" \
+-  "\335\322\377\350\350\335\377\323\354\354\341\377\2\343\343\331\377\34=
+2" \
+-  "\342\330\377\377\354\354\341\377\206\354\354\341\377\2\335\335\322\37=
+7" \
+-  "\350\350\335\377\323\354\354\341\377\2\343\343\331\377\342\342\330\37=
+7" \
+-  "\377\354\354\341\377\206\354\354\341\377\2\352\352\337\377\353\353\34=
+0" \
+-  "\377\323\354\354\341\377\2\353\353\340\377\352\352\337\377\377\354\35=
+4" \
+-  "\341\377\377\354\354\341\377\377\354\354\341\377\377\354\354\341\377"=
+ \
+-  "\377\354\354\341\377\377\354\354\341\377\377\354\354\341\377\377\354"=
+ \
+-  "\354\341\377\377\354\354\341\377\377\354\354\341\377\377\354\354\341"=
+ \
+-  "\377\355\354\354\341\377\2\245\245\242\377\230\230\227\377\233\354\35=
+4" \
+-  "\341\377\3\302\302\274\377\222\222\222\377\327\327\317\377\211\354\35=
+4" \
+-  "\341\377\2\245\245\242\377\232\232\231\377\225\354\354\341\377\2\223"=
+ \
+-  "\223\223\377\254\254\251\377\377\354\354\341\377\233\354\354\341\377"=
+ \
+-  "\2\245\245\242\377\230\230\227\377\233\354\354\341\377\3\302\302\274"=
+ \
+-  "\377\222\222\222\377\327\327\317\377\211\354\354\341\377\2\245\245\24=
+2" \
+-  "\377\232\232\231\377\225\354\354\341\377\2\223\223\223\377\254\254\25=
+1" \
+-  "\377\377\354\354\341\377\233\354\354\341\377\2\245\245\242\377\230\23=
+0" \
+-  "\227\377\233\354\354\341\377\3\302\302\274\377\222\222\222\377\327\32=
+7" \
+-  "\317\377\211\354\354\341\377\2\245\245\242\377\232\232\231\377\225\35=
+4" \
+-  "\354\341\377\2\223\223\223\377\254\254\251\377\317\354\354\341\377\3"=
+ \
+-  "\337\337\325\377\274\274\264\377\324\324\312\377\212\354\354\341\377"=
+ \
+-  "\3\314\314\303\377\306\306\275\377\353\353\340\377\207\354\354\341\37=
+7" \
+-  "\4\347\347\334\377\302\302\271\377\310\310\277\377\350\350\335\377\21=
+0" \
+-  "\354\354\341\377\4\352\352\337\377\306\306\274\377\311\311\300\377\35=
+2" \
+-  "\352\337\377\211\354\354\341\377\4\353\353\340\377\337\337\326\377\33=
+3" \
+-  "\333\322\377\350\350\335\377\211\354\354\341\377\202\340\340\326\377"=
+ \
+-  "\204\354\354\341\377\3\350\350\335\377\332\332\321\377\343\343\331\37=
+7" \
+-  "\205\354\354\341\377\2\245\245\242\377\230\230\227\377\202\354\354\34=
+1" \
+-  "\377\3\343\343\331\377\333\333\322\377\352\352\337\377\207\354\354\34=
+1" \
+-  "\377\4\353\353\340\377\337\337\325\377\333\333\322\377\350\350\336\37=
+7" \
+-  "\207\354\354\341\377\1\352\352\340\377\202\334\334\323\377\4\351\351"=
+ \
+-  "\336\377\302\302\274\377\222\222\222\377\327\327\317\377\205\354\354"=
+ \
+-  "\341\377\6\347\347\335\377\331\331\320\377\340\340\326\377\354\354\34=
+1" \
+-  "\377\245\245\242\377\232\232\231\377\206\354\354\341\377\3\347\347\33=
+4" \
+-  "\377\331\331\320\377\342\342\330\377\210\354\354\341\377\6\344\344\33=
+2" \
+-  "\377\330\330\320\377\342\342\330\377\354\354\341\377\223\223\223\377"=
+ \
+-  "\254\254\251\377\315\354\354\341\377\2\323\323\312\377=3D=3D:\377\203=
+\0\0" \
+-  "\0\377\2\37\37\36\377\264\264\254\377\204\354\354\341\377\4\7\7\7\377=
+" \
+-  "EEB\377\215\215\207\377\24\24\23\377\202\0\0\0\377\2\22\22\21\377\260=
+" \
+-  "\260\250\377\204\354\354\341\377\3\336\336\323\377XXT\377\5\5\5\377\2=
+02" \
+-  "\0\0\0\377\3\11\11\10\377\206\206\177\377\353\353\340\377\202\354\354=
+" \
+-  "\341\377\5\267\267\256\377\6\6\6\377xxr\377||v\377\15\15\15\377\202\0=
+" \
+-  "\0\0\377\2!!\37\377\300\300\267\377\206\354\354\341\377\3\353\353\340=
+" \
+-  "\377\302\302\274\377\226\226\226\377\203\222\222\222\377\2\266\266\26=
+2" \
+-  "\377\350\350\335\377\203\354\354\341\377\4\225\225\224\377\254\254\25=
+1" \
+-  "\377\314\314\305\377\233\233\232\377\202\222\222\222\377\5\236\236\23=
+4" \
+-  "\377\336\336\325\377\343\343\331\377\256\256\252\377\223\223\222\377"=
+ \
+-  "\202\222\222\222\377\2\260\260\254\377\351\351\336\377\203\354\354\34=
+1" \
+-  "\377\4\245\245\242\377\230\230\227\377\324\324\313\377\240\240\236\37=
+7" \
+-  "\202\222\222\222\377\2\224\224\224\377\310\310\301\377\204\354\354\34=
+1" \
+-  "\377\3\352\352\340\377\300\300\272\377\226\226\226\377\203\222\222\22=
+2" \
+-  "\377\2\270\270\263\377\350\350\335\377\203\354\354\341\377\3\353\353"=
+ \
+-  "\340\377\303\303\275\377\225\225\225\377\202\222\222\222\377\4\227\22=
+7" \
+-  "\226\377\241\241\237\377\222\222\222\377\327\327\317\377\203\354\354"=
+ \
+-  "\341\377\2\345\345\333\377\256\256\253\377\203\222\222\222\377\3\237"=
+ \
+-  "\237\235\377\231\231\230\377\232\232\231\377\204\354\354\341\377\2\33=
+3" \
+-  "\333\322\377\244\244\242\377\203\222\222\222\377\2\237\237\235\377\32=
+7" \
+-  "\327\317\377\204\354\354\341\377\2\336\336\325\377\245\245\242\377\20=
+3" \
+-  "\222\222\222\377\3\246\246\243\377\222\222\222\377\254\254\251\377\31=
+4" \
+-  "\354\354\341\377\11\337\337\325\377\30\30\27\377\7\7\7\377vvp\377\253=
+" \
+-  "\253\243\377\216\216\207\377\33\33\32\377\2\2\2\377\264\264\254\377\2=
+03" \
+-  "\354\354\341\377\202\0\0\0\377\7\11\11\10\377YYU\377\206\206\177\377"=
+ \
+-  "cc^\377\3\3\3\377\6\6\6\377\320\320\306\377\202\354\354\341\377\11\34=
+5" \
+-  "\345\332\377$$\"\377\17\17\17\377\202\202|\377\272\272\261\377\255\25=
+5" \
+-  "\245\377HHD\377\0\0\0\377\225\225\216\377\202\354\354\341\377\12\265"=
+ \
+-  "\265\254\377\0\0\0\377\4\4\4\377\21\21\20\377``[\377\210\210\201\377"=
+ \
+-  "SSO\377\0\0\0\377**(\377\352\352\337\377\205\354\354\341\377\10\262\2=
+62" \
+-  "\256\377\223\223\223\377\271\271\264\377\325\325\315\377\327\327\316"=
+ \
+-  "\377\273\273\266\377\222\222\222\377\264\264\260\377\203\354\354\341"=
+ \
+-  "\377\17\222\222\222\377\223\223\223\377\224\224\224\377\263\263\257\3=
+77" \
+-  "\305\305\276\377\265\265\261\377\222\222\222\377\234\234\232\377\230"=
+ \
+-  "\230\227\377\237\237\235\377\274\274\266\377\303\303\275\377\243\243"=
+ \
+-  "\241\377\222\222\222\377\306\306\277\377\203\354\354\341\377\1\245\24=
+5" \
+-  "\242\377\202\222\222\222\377\6\254\254\251\377\302\302\274\377\276\27=
+6" \
+-  "\270\377\231\231\230\377\222\222\222\377\321\321\311\377\203\354\354"=
+ \
+-  "\341\377\3\260\260\254\377\223\223\223\377\272\272\265\377\202\326\32=
+6" \
+-  "\316\377\3\271\271\265\377\222\222\222\377\267\267\263\377\203\354\35=
+4" \
+-  "\341\377\11\274\274\266\377\222\222\222\377\244\244\242\377\305\305\2=
+76" \
+-  "\377\313\313\304\377\275\275\267\377\234\234\233\377\222\222\222\377"=
+ \
+-  "\327\327\317\377\202\354\354\341\377\11\352\352\337\377\240\240\236\3=
+77" \
+-  "\222\222\222\377\262\262\256\377\312\312\303\377\311\311\302\377\263"=
+ \
+-  "\263\257\377\224\224\224\377\232\232\231\377\203\354\354\341\377\11\3=
+30" \
+-  "\330\317\377\224\224\223\377\242\242\240\377\315\315\306\377\332\332"=
+ \
+-  "\321\377\314\314\305\377\236\236\234\377\225\225\225\377\342\342\330"=
+ \
+-  "\377\202\354\354\341\377\11\342\342\330\377\226\226\226\377\224\224\2=
+24" \
+-  "\377\272\272\265\377\314\314\305\377\306\306\300\377\255\255\252\377"=
+ \
+-  "\222\222\222\377\254\254\251\377\314\354\354\341\377\3ppk\377\0\0\0\3=
+77" \
+-  "\234\234\225\377\203\354\354\341\377\4\322\322\310\377\7\7\7\37700-\3=
+77" \
+-  "\353\353\340\377\202\354\354\341\377\3\0\0\0\377$$\"\377\321\321\307"=
+ \
+-  "\377\203\354\354\341\377\3\217\217\210\377\0\0\0\377eea\377\202\354\3=
+54" \
+-  "\341\377\3{{u\377\0\0\0\377\233\233\224\377\203\354\354\341\377\3\344=
+" \
+-  "\344\331\377\12\12\11\377\36\36\35\377\202\354\354\341\377\4\265\265"=
+ \
+-  "\254\377\0\0\0\377@@=3D\377\332\332\320\377\203\354\354\341\377\3@@=3D=
+\377" \
+-  "\0\0\0\377\310\310\277\377\204\354\354\341\377\3\326\326\316\377\222"=
+ \
+-  "\222\222\377\267\267\263\377\204\354\354\341\377\3\250\250\246\377\22=
+2" \
+-  "\222\222\377\341\341\327\377\202\354\354\341\377\3\222\222\222\377\23=
+5" \
+-  "\235\233\377\336\336\324\377\203\354\354\341\377\4\261\261\255\377\22=
+2" \
+-  "\222\222\377\272\272\265\377\352\352\337\377\202\354\354\341\377\3\34=
+4" \
+-  "\344\332\377\222\222\222\377\252\252\247\377\203\354\354\341\377\3\24=
+5" \
+-  "\245\242\377\224\224\224\377\331\331\320\377\203\354\354\341\377\3\33=
+3" \
+-  "\333\322\377\222\222\222\377\246\246\243\377\202\354\354\341\377\3\32=
+4" \
+-  "\324\313\377\222\222\222\377\272\272\265\377\204\354\354\341\377\10\2=
+46" \
+-  "\246\243\377\223\223\222\377\343\343\331\377\354\354\341\377\336\336"=
+ \
+-  "\325\377\223\223\223\377\246\246\243\377\351\351\337\377\203\354\354"=
+ \
+-  "\341\377\3\302\302\274\377\222\222\222\377\327\327\317\377\202\354\35=
+4" \
+-  "\341\377\3\303\303\275\377\222\222\222\377\301\301\273\377\204\354\35=
+4" \
+-  "\341\377\2\245\245\242\377\232\232\231\377\202\354\354\341\377\4\353"=
+ \
+-  "\353\340\377\245\245\242\377\225\225\225\377\346\346\333\377\203\354"=
+ \
+-  "\354\341\377\3\321\321\311\377\222\222\222\377\272\272\265\377\202\35=
+4" \
+-  "\354\341\377\3\261\261\255\377\222\222\222\377\323\323\313\377\204\35=
+4" \
+-  "\354\341\377\2\223\223\223\377\254\254\251\377\314\354\354\341\377\3"=
+ \
+-  "&&%\377\23\23\22\377\352\352\337\377\204\354\354\341\377\3SSO\377\0\0=
+" \
+-  "\0\377\322\322\310\377\202\354\354\341\377\2\0\0\0\377AA>\377\204\354=
+" \
+-  "\354\341\377\3\346\346\333\377\7\7\7\377//-\377\202\354\354\341\377\3=
+" \
+-  "))'\377\34\34\33\377\351\351\336\377\204\354\354\341\377\7LLI\377\0\0=
+" \
+-  "\0\377\340\340\326\377\354\354\341\377\265\265\254\377\0\0\0\377yys\3=
+77" \
+-  "\204\354\354\341\377\3xxr\377\0\0\0\377\254\254\244\377\204\354\354\3=
+41" \
+-  "\377\3\267\267\263\377\222\222\222\377\337\337\325\377\204\354\354\34=
+1" \
+-  "\377\3\305\305\276\377\222\222\222\377\322\322\312\377\202\354\354\34=
+1" \
+-  "\377\2\222\222\222\377\252\252\247\377\204\354\354\341\377\3\300\300"=
+ \
+-  "\273\377\222\222\222\377\322\322\312\377\204\354\354\341\377\2\234\23=
+4" \
+-  "\232\377\236\236\235\377\203\354\354\341\377\2\245\245\242\377\230\23=
+0" \
+-  "\227\377\205\354\354\341\377\7\244\244\242\377\222\222\222\377\352\35=
+2" \
+-  "\337\377\354\354\341\377\264\264\260\377\223\223\223\377\341\341\327"=
+ \
+-  "\377\204\354\354\341\377\7\302\302\274\377\222\222\222\377\325\325\31=
+4" \
+-  "\377\354\354\341\377\303\303\275\377\222\222\222\377\317\317\310\377"=
+ \
+-  "\204\354\354\341\377\3\302\302\274\377\222\222\222\377\327\327\317\37=
+7" \
+-  "\202\354\354\341\377\3\245\245\243\377\226\226\225\377\350\350\336\37=
+7" \
+-  "\204\354\354\341\377\2\245\245\242\377\232\232\231\377\202\354\354\34=
+1" \
+-  "\377\3\340\340\326\377\222\222\222\377\267\267\263\377\204\354\354\34=
+1" \
+-  "\377\7\351\351\336\377\225\225\225\377\252\252\247\377\354\354\341\37=
+7" \
+-  "\353\353\340\377\224\224\224\377\244\244\242\377\205\354\354\341\377"=
+ \
+-  "\2\223\223\223\377\254\254\251\377\313\354\354\341\377\3\353\353\340"=
+ \
+-  "\377\7\7\7\37711/\377\205\354\354\341\377\3ssn\377\0\0\0\377\260\260"=
+ \
+-  "\250\377\202\354\354\341\377\2\0\0\0\377AA>\377\205\354\354\341\377\5=
+" \
+-  "\37\37\36\377\24\24\23\377\354\354\341\377\352\352\337\377\7\7\7\377"=
+ \
+-  "\210\0\0\0\377\5\306\306\274\377\354\354\341\377\265\265\254\377\0\0"=
+ \
+-  "\0\377yys\377\204\354\354\341\377\3\207\207\200\377\0\0\0\377\245\245=
+" \
+-  "\235\377\204\354\354\341\377\1\252\252\247\377\210\222\222\222\377\1"=
+ \
+-  "\310\310\301\377\202\354\354\341\377\2\222\222\222\377\252\252\247\37=
+7" \
+-  "\204\354\354\341\377\3\304\304\276\377\222\222\222\377\322\322\312\37=
+7" \
+-  "\204\354\354\341\377\2\240\240\236\377\234\234\233\377\203\354\354\34=
+1" \
+-  "\377\2\245\245\242\377\230\230\227\377\205\354\354\341\377\5\260\260"=
+ \
+-  "\254\377\222\222\222\377\341\341\327\377\354\354\341\377\247\247\244"=
+ \
+-  "\377\210\222\222\222\377\5\312\312\303\377\354\354\341\377\265\265\26=
+1" \
+-  "\377\222\222\222\377\340\340\326\377\204\354\354\341\377\3\302\302\27=
+4" \
+-  "\377\222\222\222\377\327\327\317\377\202\354\354\341\377\2\230\230\22=
+7" \
+-  "\377\243\243\241\377\205\354\354\341\377\2\245\245\242\377\232\232\23=
+1" \
+-  "\377\202\354\354\341\377\1\322\322\312\377\210\222\222\222\377\5\237"=
+ \
+-  "\237\235\377\354\354\341\377\340\340\327\377\222\222\222\377\265\265"=
+ \
+-  "\260\377\205\354\354\341\377\2\223\223\223\377\254\254\251\377\313\35=
+4" \
+-  "\354\341\377\3\347\347\334\377\1\1\1\377885\377\205\354\354\341\377\3=
+" \
+-  "{{u\377\0\0\0\377\247\247\237\377\202\354\354\341\377\2\0\0\0\377AA>"=
+ \
+-  "\377\205\354\354\341\377\6\40\40\36\377\30\30\26\377\354\354\341\377"=
+ \
+-  "\344\344\331\377\0\0\0\377++)\377\207\241\241\232\377\5\337\337\325\3=
+77" \
+-  "\354\354\341\377\265\265\254\377\0\0\0\377yys\377\204\354\354\341\377=
+" \
+-  "\3\210\210\202\377\0\0\0\377\245\245\235\377\204\354\354\341\377\2\24=
+5" \
+-  "\245\242\377\223\223\223\377\207\317\317\310\377\1\340\340\327\377\20=
+2" \
+-  "\354\354\341\377\2\222\222\222\377\252\252\247\377\204\354\354\341\37=
+7" \
+-  "\3\305\305\276\377\222\222\222\377\322\322\312\377\204\354\354\341\37=
+7" \
+-  "\2\240\240\236\377\234\234\233\377\203\354\354\341\377\2\245\245\242"=
+ \
+-  "\377\230\230\227\377\205\354\354\341\377\6\262\262\256\377\222\222\22=
+2" \
+-  "\377\342\342\330\377\354\354\341\377\242\242\240\377\225\225\225\377"=
+ \
+-  "\207\317\317\310\377\5\341\341\327\377\354\354\341\377\257\257\254\37=
+7" \
+-  "\222\222\222\377\345\345\333\377\204\354\354\341\377\7\302\302\274\37=
+7" \
+-  "\222\222\222\377\327\327\317\377\354\354\341\377\353\353\340\377\223"=
+ \
+-  "\223\222\377\250\250\245\377\205\354\354\341\377\2\245\245\242\377\23=
+2" \
+-  "\232\231\377\202\354\354\341\377\3\315\315\306\377\222\222\222\377\26=
+6" \
+-  "\266\261\377\206\317\317\310\377\5\324\324\313\377\354\354\341\377\33=
+2" \
+-  "\332\321\377\222\222\222\377\272\272\265\377\205\354\354\341\377\2\22=
+3" \
+-  "\223\223\377\254\254\251\377\314\354\354\341\377\202\35\35\34\377\205=
+" \
+-  "\354\354\341\377\3``[\377\0\0\0\377\307\307\276\377\202\354\354\341\3=
+77" \
+-  "\2\0\0\0\377AA>\377\204\354\354\341\377\3\350\350\335\377\6\6\6\377<"=
+ \
+-  "<9\377\202\354\354\341\377\2\34\34\33\377\35\35\34\377\211\354\354\34=
+1" \
+-  "\377\3\265\265\254\377\0\0\0\377yys\377\204\354\354\341\377\3\210\210=
+" \
+-  "\202\377\0\0\0\377\245\245\235\377\204\354\354\341\377\3\262\262\256"=
+ \
+-  "\377\222\222\222\377\341\341\330\377\211\354\354\341\377\2\222\222\22=
+2" \
+-  "\377\252\252\247\377\204\354\354\341\377\3\305\305\276\377\222\222\22=
+2" \
+-  "\377\322\322\312\377\204\354\354\341\377\2\240\240\236\377\234\234\23=
+3" \
+-  "\377\203\354\354\341\377\2\245\245\242\377\230\230\227\377\205\354\35=
+4" \
+-  "\341\377\2\247\247\245\377\226\226\226\377\202\354\354\341\377\3\260"=
+ \
+-  "\260\254\377\222\222\222\377\344\344\332\377\210\354\354\341\377\3\27=
+1" \
+-  "\271\264\377\222\222\222\377\334\334\323\377\204\354\354\341\377\3\30=
+2" \
+-  "\302\274\377\222\222\222\377\327\327\317\377\202\354\354\341\377\2\23=
+3" \
+-  "\233\232\377\237\237\235\377\205\354\354\341\377\2\245\245\242\377\23=
+2" \
+-  "\232\231\377\202\354\354\341\377\3\332\332\321\377\222\222\222\377\27=
+1" \
+-  "\271\264\377\210\354\354\341\377\3\344\344\332\377\222\222\222\377\26=
+1" \
+-  "\261\255\377\205\354\354\341\377\2\223\223\223\377\254\254\251\377\31=
+4" \
+-  "\354\354\341\377\3RRN\377\0\0\0\377\272\272\262\377\203\354\354\341\3=
+77" \
+-  "\1\343\343\331\377\202\25\25\24\377\1\347\347\334\377\202\354\354\341=
+" \
+-  "\377\2\0\0\0\377AA>\377\204\354\354\341\377\3\222\222\213\377\0\0\0\3=
+77" \
+-  "zzt\377\202\354\354\341\377\3RRN\377\0\0\0\377\240\240\230\377\205\35=
+4" \
+-  "\354\341\377\1\332\332\320\377\202\354\354\341\377\3\265\265\254\377"=
+ \
+-  "\0\0\0\377yys\377\204\354\354\341\377\3\210\210\202\377\0\0\0\377\245=
+" \
+-  "\245\235\377\204\354\354\341\377\3\307\307\300\377\222\222\222\377\27=
+1" \
+-  "\271\264\377\205\354\354\341\377\2\351\351\336\377\350\350\335\377\20=
+2" \
+-  "\354\354\341\377\2\222\222\222\377\252\252\247\377\204\354\354\341\37=
+7" \
+-  "\3\305\305\276\377\222\222\222\377\322\322\312\377\204\354\354\341\37=
+7" \
+-  "\2\240\240\236\377\234\234\233\377\203\354\354\341\377\2\245\245\242"=
+ \
+-  "\377\230\230\227\377\204\354\354\341\377\3\337\337\325\377\223\223\22=
+3" \
+-  "\377\254\254\250\377\202\354\354\341\377\3\304\304\276\377\222\222\22=
+2" \
+-  "\377\274\274\266\377\205\354\354\341\377\202\350\350\336\377\4\354\35=
+4" \
+-  "\341\377\310\310\302\377\222\222\222\377\277\277\272\377\204\354\354"=
+ \
+-  "\341\377\3\274\274\267\377\222\222\222\377\327\327\317\377\202\354\35=
+4" \
+-  "\341\377\3\253\253\247\377\222\222\222\377\335\335\323\377\203\354\35=
+4" \
+-  "\341\377\3\352\352\337\377\241\241\237\377\232\232\231\377\202\354\35=
+4" \
+-  "\341\377\4\350\350\336\377\230\230\227\377\231\231\230\377\343\343\33=
+1" \
+-  "\377\205\354\354\341\377\6\345\345\333\377\354\354\341\377\353\353\34=
+0" \
+-  "\377\231\231\230\377\230\230\227\377\350\350\336\377\203\354\354\341"=
+ \
+-  "\377\3\346\346\334\377\223\223\222\377\254\254\251\377\314\354\354\34=
+1" \
+-  "\377\11\312\312\301\377\5\5\5\377\"\"\40\377\271\271\260\377\351\351"=
+ \
+-  "\336\377\321\321\307\377GGC\377\0\0\0\377\216\216\207\377\203\354\354=
+" \
+-  "\341\377\11\0\0\0\377\31\31\30\377\221\221\212\377\306\306\274\377\30=
+5" \
+-  "\305\273\377\203\203}\377\10\10\7\377\35\35\34\377\344\344\331\377\20=
+2" \
+-  "\354\354\341\377\1\321\321\307\377\202\13\13\12\377\6\206\206\177\377=
+" \
+-  "\320\320\306\377\336\336\323\377\257\257\247\377nni\377\26\26\25\377"=
+ \
+-  "\202\354\354\341\377\3\265\265\254\377\0\0\0\377yys\377\204\354\354\3=
+41" \
+-  "\377\3\210\210\202\377\0\0\0\377\245\245\235\377\204\354\354\341\377"=
+ \
+-  "\12\352\352\337\377\242\242\240\377\222\222\222\377\270\270\263\377\3=
+36" \
+-  "\336\324\377\350\350\335\377\331\331\320\377\304\304\275\377\234\234"=
+ \
+-  "\232\377\332\332\321\377\202\354\354\341\377\2\222\222\222\377\252\25=
+2" \
+-  "\247\377\204\354\354\341\377\3\305\305\276\377\222\222\222\377\322\32=
+2" \
+-  "\312\377\204\354\354\341\377\2\240\240\236\377\234\234\233\377\203\35=
+4" \
+-  "\354\341\377\11\245\245\242\377\224\224\224\377\310\310\301\377\341\3=
+41" \
+-  "\327\377\347\347\335\377\325\325\315\377\240\240\237\377\222\222\222"=
+ \
+-  "\377\333\333\322\377\202\354\354\341\377\22\352\352\337\377\240\240\2=
+37" \
+-  "\377\222\222\222\377\271\271\265\377\336\336\325\377\350\350\335\377"=
+ \
+-  "\331\331\320\377\303\303\275\377\233\233\232\377\335\335\324\377\354"=
+ \
+-  "\354\341\377\350\350\336\377\231\231\230\377\224\224\224\377\306\306"=
+ \
+-  "\300\377\336\336\324\377\321\321\312\377\260\260\254\377\202\222\222"=
+ \
+-  "\222\377\1\327\327\317\377\202\354\354\341\377\11\323\323\313\377\222=
+" \
+-  "\222\222\377\237\237\236\377\322\322\313\377\335\335\324\377\312\312"=
+ \
+-  "\303\377\240\240\237\377\222\222\222\377\232\232\231\377\203\354\354"=
+ \
+-  "\341\377\11\311\311\302\377\222\222\222\377\240\240\236\377\322\322\3=
+12" \
+-  "\377\345\345\333\377\342\342\330\377\317\317\307\377\256\256\253\377"=
+ \
+-  "\262\262\256\377\202\354\354\341\377\11\301\301\273\377\222\222\222\3=
+77" \
+-  "\252\252\247\377\327\327\317\377\333\333\322\377\304\304\276\377\232"=
+ \
+-  "\232\231\377\222\222\222\377\254\254\251\377\315\354\354\341\377\10\2=
+44" \
+-  "\244\235\377\20\20\17\377\0\0\0\377\3\3\3\377\0\0\0\377\2\2\2\377uup"=
+ \
+-  "\377\352\352\337\377\203\354\354\341\377\3\0\0\0\377\14\14\13\377\4\4=
+" \
+-  "\4\377\203\0\0\0\377\2))'\377\307\307\276\377\204\354\354\341\377\2\2=
+67" \
+-  "\267\256\377++)\377\205\0\0\0\377\1""996\377\202\354\354\341\377\3\26=
+5" \
+-  "\265\254\377\0\0\0\377yys\377\204\354\354\341\377\3\210\210\202\377\0=
+" \
+-  "\0\0\377\245\245\235\377\205\354\354\341\377\2\341\341\330\377\256\25=
+6" \
+-  "\252\377\205\222\222\222\377\2\235\235\234\377\340\340\327\377\202\35=
+4" \
+-  "\354\341\377\2\222\222\222\377\252\252\247\377\204\354\354\341\377\3"=
+ \
+-  "\305\305\276\377\222\222\222\377\322\322\312\377\204\354\354\341\377"=
+ \
+-  "\2\240\240\236\377\234\234\233\377\203\354\354\341\377\3\245\245\242"=
+ \
+-  "\377\223\223\223\377\225\225\225\377\203\222\222\222\377\2\225\225\22=
+5" \
+-  "\377\314\314\305\377\204\354\354\341\377\2\340\340\327\377\254\254\25=
+1" \
+-  "\377\205\222\222\222\377\2\236\236\234\377\342\342\330\377\202\354\35=
+4" \
+-  "\341\377\2\324\324\314\377\227\227\226\377\203\222\222\222\377\4\241"=
+ \
+-  "\241\237\377\261\261\255\377\222\222\222\377\327\327\317\377\203\354"=
+ \
+-  "\354\341\377\1\274\274\267\377\204\222\222\222\377\3\261\261\255\377"=
+ \
+-  "\240\240\236\377\232\232\231\377\204\354\354\341\377\2\306\306\300\37=
+7" \
+-  "\230\230\227\377\204\222\222\222\377\2\224\224\224\377\301\301\273\37=
+7" \
+-  "\202\354\354\341\377\2\350\350\336\377\256\256\252\377\203\222\222\22=
+2" \
+-  "\377\4\223\223\223\377\275\275\270\377\223\223\222\377\254\254\251\37=
+7" \
+-  "\316\354\354\341\377\5\326\326\314\377\236\236\226\377zzt\377\222\222=
+" \
+-  "\213\377\306\306\275\377\205\354\354\341\377\7\0\0\0\377AA>\377\327\3=
+27" \
+-  "\315\377\236\236\226\377\216\216\207\377\265\265\254\377\346\346\333"=
+ \
+-  "\377\206\354\354\341\377\6\351\351\336\377\267\267\256\377\223\223\21=
+4" \
+-  "\377\177\177y\377\233\233\224\377\312\312\301\377\203\354\354\341\377=
+" \
+-  "\3\337\337\324\377\260\260\250\377\317\317\305\377\204\354\354\341\37=
+7" \
+-  "\3\323\323\312\377\260\260\250\377\332\332\320\377\207\354\354\341\37=
+7" \
+-  "\5\334\334\323\377\315\315\306\377\302\302\274\377\312\312\303\377\33=
+1" \
+-  "\331\320\377\204\354\354\341\377\2\325\325\315\377\333\333\322\377\20=
+4" \
+-  "\354\354\341\377\3\342\342\330\377\325\325\315\377\345\345\333\377\20=
+4" \
+-  "\354\354\341\377\2\331\331\320\377\330\330\317\377\203\354\354\341\37=
+7" \
+-  "\7\332\332\321\377\331\331\320\377\346\346\334\377\314\314\305\377\30=
+0" \
+-  "\300\272\377\312\312\303\377\341\341\327\377\207\354\354\341\377\5\33=
+4" \
+-  "\334\323\377\314\314\305\377\302\302\274\377\312\312\303\377\332\332"=
+ \
+-  "\321\377\205\354\354\341\377\10\342\342\330\377\312\312\303\377\302\3=
+02" \
+-  "\274\377\322\322\313\377\351\351\337\377\341\341\330\377\325\325\315"=
+ \
+-  "\377\347\347\334\377\204\354\354\341\377\7\330\330\320\377\304\304\27=
+5" \
+-  "\377\306\306\300\377\332\332\321\377\354\354\341\377\332\332\321\377"=
+ \
+-  "\327\327\317\377\205\354\354\341\377\6\346\346\333\377\323\323\313\37=
+7" \
+-  "\305\305\277\377\305\305\276\377\321\321\311\377\346\346\334\377\204"=
+ \
+-  "\354\354\341\377\10\353\353\340\377\323\323\313\377\301\301\273\377\3=
+12" \
+-  "\312\303\377\340\340\326\377\354\354\341\377\326\326\315\377\334\334"=
+ \
+-  "\323\377\330\354\354\341\377\2\0\0\0\377AA>\377\377\354\354\341\377\3=
+33" \
+-  "\354\354\341\377\2\0\0\0\377AA>\377\377\354\354\341\377\333\354\354\3=
+41" \
+-  "\377\2\0\0\0\377AA>\377\377\354\354\341\377\240\354\354\341\377")
++  "\342\377\377\377\0\13\\o{\34\\o{B\\o{i\\o{\214\\o{\235\\o{\252\\o{\26=
+7" \
++  "\\o{\304\\o{\321\\o{\337\\o{\354\202\\o{\371\13\\o{\354\\o{\337\\o{\3=
+21" \
++  "\\o{\304\\o{\267\\o{\252\\o{\235\\o{\214\\o{i\\o{B\\o{\34\377\377\377=
+" \
++  "\377\0\277\377\377\377\0\6\\o{\40\\o{Z\\o{\201\\o{\250\\o{\316\\o{\36=
+4" \
++  "\230\\o{\377\6\\o{\364\\o{\316\\o{\250\\o{\201\\o{Z\\o{\40\377\377\37=
+7" \
++  "\377\0\265\377\377\377\0\4\\o{\30\\o{Y\\o{\233\\o{\336\244\\o{\377\4"=
+ \
++  "\\o{\336\\o{\233\\o{Y\\o{\30\377\377\377\377\0\255\377\377\377\0\4\\"=
+ \
++  "o{\10\\o{O\\o{\222\\o{\325\254\\o{\377\4\\o{\325\\o{\222\\o{O\\o{\10"=
+ \
++  "\377\377\377\377\0\246\377\377\377\0\4\\o{\1\\o{=3D\\o{\233\\o{\360\2=
+62" \
++  "\\o{\377\4\\o{\360\\o{\233\\o{=3D\\o{\1\377\377\377\377\0\241\377\377=
+\377" \
++  "\0\3\\o{$\\o{\201\\o{\336\270\\o{\377\3\\o{\336\\o{\201\\o{#\377\377"=
+ \
++  "\377\377\0\234\377\377\377\0\3\\o{\6\\o{b\\o{\305\276\\o{\377\3\\o{\3=
+05" \
++  "\\o{b\\o{\6\377\377\377\377\0\227\377\377\377\0\3\\o{\11\\o{n\\o{\343=
+" \
++  "\302\\o{\377\3\\o{\343\\o{n\\o{\11\377\377\377\377\0\223\377\377\377"=
+ \
++  "\0\3\\o{\16\\o{x\\o{\351\306\\o{\377\3\\o{\351\\o{x\\o{\16\377\377\37=
+7" \
++  "\377\0\217\377\377\377\0\3\\o{\23\\o{\202\\o{\357\312\\o{\377\3\\o{\3=
+57" \
++  "\\o{\202\\o{\23\377\377\377\377\0\213\377\377\377\0\3\\o{\3\\o{p\\o{"=
+ \
++  "\362\316\\o{\377\3\\o{\362\\o{p\\o{\3\377\377\377\377\0\210\377\377\3=
+77" \
++  "\0\2\\o{9\\o{\320\322\\o{\377\2\\o{\320\\o{9\377\377\377\377\0\205\37=
+7" \
++  "\377\377\0\3\\o{\22\\o{\232\\o{\376\324\\o{\377\3\\o{\376\\o{\232\\o"=
+ \
++  "{\22\377\377\377\377\0\4\377\377\377\0\\o{\1\\o{a\\o{\353\330\\o{\377=
+" \
++  "\3\\o{\353\\o{a\\o{\1\375\377\377\377\0\2\\o{\32\\o{\277\334\\o{\377"=
+ \
++  "\2\\o{\277\\o{\33\373\377\377\377\0\2\\o{G\\o{\352\336\\o{\377\2\\o{"=
+ \
++  "\353\\o{H\370\377\377\377\0\3\\o{\3\\o{\205\\o{\376\340\\o{\377\3\\o"=
+ \
++  "{\376\\o{\207\\o{\4\365\377\377\377\0\2\\o{\32\\o{\301\344\\o{\377\2"=
+ \
++  "\\o{\304\\o{\34\363\377\377\377\0\2\\o{F\\o{\352\346\\o{\377\2\\o{\35=
+4" \
++  "\\o{J\361\377\377\377\0\2\\o{m\\o{\375\350\\o{\377\2\\o{\376\\o{t\357=
+" \
++  "\377\377\377\0\1\\o{\205\354\\o{\377\2\\o{\213\\o{\1\353\377\377\377"=
+ \
++  "\0\2\\o{\3\\o{\235\356\\o{\377\2\\o{\241\\o{\4\351\377\377\377\0\2\\"=
+ \
++  "o{\11\\o{\262\256\\o{\377\11\\o{\350\\o{\300\\o{\231\\o{r\\o{^\\o{Q\\=
+" \
++  "o{D\\o{8\\o{+\202\\o{\36\11\\o{+\\o{7\\o{D\\o{Q\\o{^\\o{r\\o{\231\\o"=
+ \
++  "{\300\\o{\350\256\\o{\377\2\\o{\264\\o{\12\347\377\377\377\0\2\\o{\21=
+" \
++  "\\o{\305\252\\o{\377\5\\o{\347\\o{\245\\o{d\\o{6\\o{\17\224\377\377\3=
+77" \
++  "\0\5\\o{\17\\o{6\\o{d\\o{\245\\o{\347\252\\o{\377\2\\o{\306\\o{\22\34=
+5" \
++  "\377\377\377\0\2\\o{\24\\o{\324\247\\o{\377\4\\o{\363\\o{\261\\o{n\\"=
+ \
++  "o{+\236\377\377\377\0\4\\o{+\\o{n\\o{\261\\o{\363\247\\o{\377\2\\o{\3=
+24" \
++  "\\o{\24\343\377\377\377\0\2\\o{\13\\o{\312\245\\o{\377\4\\o{\374\\o{"=
+ \
++  "\271\\o{[\\o{\12\244\377\377\377\0\4\\o{\12\\o{[\\o{\271\\o{\374\245"=
+ \
++  "\\o{\377\2\\o{\312\\o{\13\341\377\377\377\0\2\\o{\5\\o{\270\244\\o{\3=
+77" \
++  "\3\\o{\322\\o{t\\o{\32\252\377\377\377\0\3\\o{\32\\o{t\\o{\322\244\\"=
+ \
++  "o{\377\2\\o{\270\\o{\5\337\377\377\377\0\2\\o{\1\\o{\244\243\\o{\377"=
+ \
++  "\2\\o{\277\\o{D\260\377\377\377\0\2\\o{D\\o{\277\243\\o{\377\2\\o{\24=
+4" \
++  "\\o{\1\336\377\377\377\0\1\\o{\215\242\\o{\377\2\\o{\264\\o{9\264\377=
+" \
++  "\377\377\0\2\\o{9\\o{\264\242\\o{\377\1\\o{\215\335\377\377\377\0\1\\=
+" \
++  "o{u\241\\o{\377\2\\o{\265\\o{0\270\377\377\377\0\2\\o{0\\o{\265\241\\=
+" \
++  "o{\377\1\\o{u\333\377\377\377\0\2\\o{V\\o{\376\237\\o{\377\2\\o{\340"=
+ \
++  "\\o{P\274\377\377\377\0\2\\o{P\\o{\340\237\\o{\377\2\\o{\376\\o{V\331=
+" \
++  "\377\377\377\0\2\\o{$\\o{\362\236\\o{\377\3\\o{\371\\o{\205\\o{\12\27=
+6" \
++  "\377\377\377\0\3\\o{\12\\o{\205\\o{\371\236\\o{\377\2\\o{\362\\o{$\32=
+7" \
++  "\377\377\377\0\2\\o{\7\\o{\316\236\\o{\377\2\\o{\303\\o{'\302\377\377=
+" \
++  "\377\0\2\\o{'\\o{\303\236\\o{\377\2\\o{\316\\o{\7\326\377\377\377\0\1=
+" \
++  "\\o{\225\235\\o{\377\3\\o{\376\\o{\205\\o{\3\230\377\377\377\0\11\0\2=
+74" \
++  "\344\17\0\274\344*\0\274\344B\0\274\344Z\0\274\344r\0\274\344\213\0\2=
+74" \
++  "\344\243\0\274\344\273\0\274\344\323\202\0\274\344\353\11\0\274\344\3=
+23" \
++  "\0\274\344\273\0\274\344\243\0\274\344\213\0\274\344r\0\274\344Z\0\27=
+4" \
++  "\344B\0\274\344*\0\274\344\17\230\377\377\377\0\3\\o{\3\\o{\205\\o{\3=
+76" \
++  "\235\\o{\377\1\\o{\225\325\377\377\377\0\1\\o{T\235\\o{\377\2\\o{\352=
+" \
++  "\\o{F\226\377\377\377\0\5\0\274\344\1\0\274\3442\0\274\344~\0\274\344=
+" \
++  "\312\0\274\344\376\222\0\274\344\377\5\0\274\344\376\0\274\344\312\0"=
+ \
++  "\274\344~\0\274\3442\0\274\344\1\226\377\377\377\0\2\\o{F\\o{\352\235=
+" \
++  "\\o{\377\1\\o{T\323\377\377\377\0\2\\o{\"\\o{\360\234\\o{\377\2\\o{\3=
+00" \
++  "\\o{\32\224\377\377\377\0\4\0\274\344\12\0\274\344M\0\274\344\232\0\2=
+74" \
++  "\344\345\232\0\274\344\377\4\0\274\344\345\0\274\344\232\0\274\344M\0=
+" \
++  "\274\344\12\224\377\377\377\0\2\\o{\32\\o{\300\234\\o{\377\2\\o{\360"=
+ \
++  "\\o{\"\321\377\377\377\0\2\\o{\5\\o{\313\234\\o{\377\2\\o{\232\\o{\3"=
+ \
++  "\222\377\377\377\0\4\0\274\344\16\0\274\344i\0\274\344\265\0\274\344"=
+ \
++  "\367\240\0\274\344\377\4\0\274\344\367\0\274\344\265\0\274\344i\0\274=
+" \
++  "\344\16\222\377\377\377\0\2\\o{\3\\o{\232\234\\o{\377\2\\o{\313\\o{\5=
+" \
++  "\320\377\377\377\0\1\\o{w\234\\o{\377\1\\o{\205\222\377\377\377\0\3\0=
+" \
++  "\274\344\10\0\274\344t\0\274\344\354\246\0\274\344\377\3\0\274\344\35=
+4" \
++  "\0\274\344t\0\274\344\10\222\377\377\377\0\1\\o{\205\234\\o{\377\1\\"=
+ \
++  "o{w\317\377\377\377\0\2\\o{\35\\o{\364\232\\o{\377\2\\o{\376\\o{o\221=
+" \
++  "\377\377\377\0\3\0\274\344\4\0\274\344e\0\274\344\344\252\0\274\344\3=
+77" \
++  "\3\0\274\344\344\0\274\344e\0\274\344\4\221\377\377\377\0\2\\o{o\\o{"=
+ \
++  "\376\232\\o{\377\2\\o{\364\\o{\35\316\377\377\377\0\1\\o{\254\232\\o"=
+ \
++  "{\377\2\\o{\372\\o{Z\220\377\377\377\0\3\0\274\344\1\0\274\344W\0\274=
+" \
++  "\344\332\256\0\274\344\377\3\0\274\344\332\0\274\344W\0\274\344\1\220=
+" \
++  "\377\377\377\0\2\\o{Z\\o{\372\232\\o{\377\1\\o{\254\315\377\377\377\0=
+" \
++  "\1\\o{G\232\\o{\377\2\\o{\375\\o{T\220\377\377\377\0\2\0\274\344H\0\2=
+74" \
++  "\344\316\262\0\274\344\377\2\0\274\344\316\0\274\344H\220\377\377\377=
+" \
++  "\0\2\\o{T\\o{\375\232\\o{\377\1\\o{G\313\377\377\377\0\2\\o{\7\\o{\33=
+2" \
++  "\232\\o{\377\1\\o{j\217\377\377\377\0\2\0\274\344\37\0\274\344\276\26=
+6" \
++  "\0\274\344\377\2\0\274\344\276\0\274\344\37\217\377\377\377\0\1\\o{j"=
+ \
++  "\232\\o{\377\2\\o{\332\\o{\7\312\377\377\377\0\1\\o{}\232\\o{\377\1\\=
+" \
++  "o{\202\217\377\377\377\0\2\0\274\344Q\0\274\344\357\270\0\274\344\377=
+" \
++  "\2\0\274\344\357\0\274\344Q\217\377\377\377\0\1\\o{\202\232\\o{\377\1=
+" \
++  "\\o{}\311\377\377\377\0\2\\o{\37\\o{\366\231\\o{\377\1\\o{\231\216\37=
+7" \
++  "\377\377\0\2\0\274\344\7\0\274\344\224\274\0\274\344\377\2\0\274\344"=
+ \
++  "\224\0\274\344\7\216\377\377\377\0\1\\o{\231\231\\o{\377\2\\o{\366\\"=
+ \
++  "o{\37\310\377\377\377\0\1\\o{\230\231\\o{\377\2\\o{\266\\o{\3\215\377=
+" \
++  "\377\377\0\2\0\274\344\32\0\274\344\316\276\0\274\344\377\2\0\274\344=
+" \
++  "\316\0\274\344\32\215\377\377\377\0\2\\o{\3\\o{\266\231\\o{\377\1\\o"=
+ \
++  "{\230\307\377\377\377\0\2\\o{\33\\o{\370\230\\o{\377\2\\o{\343\\o{\23=
+" \
++  "\215\377\377\377\0\2\0\274\344'\0\274\344\340\300\0\274\344\377\2\0\2=
+74" \
++  "\344\340\0\274\344'\215\377\377\377\0\2\\o{\23\\o{\343\230\\o{\377\2"=
+ \
++  "\\o{\370\\o{\33\306\377\377\377\0\1\\o{\217\230\\o{\377\2\\o{\374\\o"=
+ \
++  "{=3D\215\377\377\377\0\2\0\274\3447\0\274\344\354\302\0\274\344\377\2=
+\0" \
++  "\274\344\354\0\274\3447\215\377\377\377\0\2\\o{=3D\\o{\374\230\\o{\37=
+7" \
++  "\1\\o{\217\305\377\377\377\0\2\\o{\25\\o{\365\230\\o{\377\1\\o{{\215"=
+ \
++  "\377\377\377\0\2\0\274\344I\0\274\344\365\304\0\274\344\377\2\0\274\3=
+44" \
++  "\365\0\274\344I\215\377\377\377\0\1\\o{{\230\\o{\377\2\\o{\365\\o{\25=
+" \
++  "\304\377\377\377\0\1\\o{\206\230\\o{\377\2\\o{\272\\o{\2\214\377\377"=
+ \
++  "\377\0\2\0\274\344>\0\274\344\367\306\0\274\344\377\2\0\274\344\367\0=
+" \
++  "\274\344=3D\214\377\377\377\0\2\\o{\2\\o{\272\230\\o{\377\1\\o{\206\3=
+03" \
++  "\377\377\377\0\2\\o{\20\\o{\361\227\\o{\377\2\\o{\361\\o{\31\214\377"=
+ \
++  "\377\377\0\2\0\274\344-\0\274\344\357\310\0\274\344\377\2\0\274\344\3=
+56" \
++  "\0\274\344+\214\377\377\377\0\2\\o{\31\\o{\361\227\\o{\377\2\\o{\361"=
+ \
++  "\\o{\20\302\377\377\377\0\1\\o{~\230\\o{\377\1\\o{n\214\377\377\377\0=
+" \
++  "\2\0\274\344\36\0\274\344\345\312\0\274\344\377\2\0\274\344\342\0\274=
+" \
++  "\344\34\214\377\377\377\0\1\\o{n\230\\o{\377\1\\o{~\301\377\377\377\0=
+" \
++  "\2\\o{\3\\o{\346\227\\o{\377\2\\o{\317\\o{\3\213\377\377\377\0\2\0\27=
+4" \
++  "\344\20\0\274\344\327\314\0\274\344\377\2\0\274\344\323\0\274\344\20"=
+ \
++  "\213\377\377\377\0\2\\o{\3\\o{\317\227\\o{\377\2\\o{\346\\o{\3\300\37=
+7" \
++  "\377\377\0\1\\o{F\227\\o{\377\2\\o{\376\\o{8\214\377\377\377\0\1\0\27=
+4" \
++  "\344\253\316\0\274\344\377\1\0\274\344\260\214\377\377\377\0\2\\o{8\\=
+" \
++  "o{\376\227\\o{\377\1\\o{F\300\377\377\377\0\1\\o{\243\227\\o{\377\1\\=
+" \
++  "o{\233\214\377\377\377\0\1\0\274\344f\320\0\274\344\377\1\0\274\344g"=
+ \
++  "\214\377\377\377\0\1\\o{\233\227\\o{\377\1\\o{\243\277\377\377\377\0"=
+ \
++  "\2\\o{\13\\o{\364\226\\o{\377\2\\o{\365\\o{\25\213\377\377\377\0\2\0"=
+ \
++  "\274\344+\0\274\344\366\320\0\274\344\377\2\0\274\344\365\0\274\344("=
+ \
++  "\213\377\377\377\0\2\\o{\25\\o{\365\226\\o{\377\2\\o{\364\\o{\13\276"=
+ \
++  "\377\377\377\0\1\\o{]\227\\o{\377\1\\o{\217\213\377\377\377\0\2\0\274=
+" \
++  "\344\6\0\274\344\323\242\0\274\344\377\16\0\274\344\361\0\274\344\262=
+" \
++  "\0\274\344\215\0\274\344o\0\274\344Q\0\274\3446\0\274\3445\0\274\344"=
+ \
++  ";\0\274\344@\0\274\344H\0\274\344j\0\274\344\224\0\274\344\276\0\274"=
+ \
++  "\344\351\242\0\274\344\377\2\0\274\344\316\0\274\344\6\213\377\377\37=
+7" \
++  "\0\1\\o{\217\227\\o{\377\1\\o{]\276\377\377\377\0\1\\o{\272\226\\o{\3=
+77" \
++  "\2\\o{\371\\o{\34\213\377\377\377\0\1\0\274\344m\240\0\274\344\377\4"=
+ \
++  "\0\274\344\323\0\274\344\204\0\274\344<\0\274\344\4\215\377\377\377\0=
+" \
++  "\3\0\274\3444\0\274\344\210\0\274\344\333\240\0\274\344\377\1\0\274\3=
+44" \
++  "F\213\377\377\377\0\2\\o{\34\\o{\371\226\\o{\377\1\\o{\272\275\377\37=
+7" \
++  "\377\0\2\\o{\32\\o{\375\226\\o{\377\1\\o{\233\213\377\377\377\0\2\0\2=
+74" \
++  "\344\13\0\274\344\350\235\0\274\344\377\3\0\274\344\374\0\274\344\255=
+" \
++  "\0\274\344\77\223\377\377\377\0\2\0\274\344\4\0\274\344\303\236\0\274=
+" \
++  "\344\377\1\0\274\344p\215\377\377\377\0\1\\o{\233\226\\o{\377\2\\o{\3=
+75" \
++  "\\o{\32\274\377\377\377\0\1\\o{r\226\\o{\377\2\\o{\374\\o{$\213\377\3=
+77" \
++  "\377\0\1\0\274\344{\234\0\274\344\377\3\0\274\344\376\0\274\344\235\0=
+" \
++  "\274\344\36\224\377\377\377\0\2\0\274\344\4\0\274\344\252\236\0\274\3=
+44" \
++  "\377\1\0\274\344q\216\377\377\377\0\2\\o{$\\o{\374\226\\o{\377\1\\o{"=
+ \
++  "r\274\377\377\377\0\1\\o{\271\226\\o{\377\1\\o{\252\213\377\377\377\0=
+" \
++  "\2\0\274\344\21\0\274\344\360\233\0\274\344\377\2\0\274\344\330\0\274=
+" \
++  "\344\77\225\377\377\377\0\2\0\274\344\3\0\274\344\251\236\0\274\344\3=
+77" \
++  "\1\0\274\344q\220\377\377\377\0\1\\o{\252\226\\o{\377\1\\o{\271\273\3=
+77" \
++  "\377\377\0\2\\o{\6\\o{\365\226\\o{\377\1\\o{G\213\377\377\377\0\1\0\2=
+74" \
++  "\344\210\232\0\274\344\377\3\0\274\344\376\0\274\344\204\0\274\344\7"=
+ \
++  "\225\377\377\377\0\2\0\274\344\3\0\274\344\250\236\0\274\344\377\1\0"=
+ \
++  "\274\344r\221\377\377\377\0\1\\o{H\226\\o{\377\2\\o{\365\\o{\6\272\37=
+7" \
++  "\377\377\0\1\\o{=3D\226\\o{\377\2\\o{\346\\o{\3\212\377\377\377\0\2\0=
+\274" \
++  "\344\31\0\274\344\366\231\0\274\344\377\2\0\274\344\366\0\274\344T\22=
+6" \
++  "\377\377\377\0\2\0\274\344\3\0\274\344\247\236\0\274\344\377\1\0\274"=
+ \
++  "\344r\222\377\377\377\0\2\\o{\3\\o{\346\226\\o{\377\1\\o{=3D\272\377\=
+377" \
++  "\377\0\1\\o{\177\226\\o{\377\1\\o{\214\213\377\377\377\0\1\0\274\344"=
+ \
++  "\226\231\0\274\344\377\2\0\274\344\350\0\274\3447\226\377\377\377\0\2=
+" \
++  "\0\274\344\3\0\274\344\245\236\0\274\344\377\1\0\274\344s\224\377\377=
+" \
++  "\377\0\1\\o{\214\226\\o{\377\1\\o{\177\272\377\377\377\0\1\\o{\301\22=
+6" \
++  "\\o{\377\1\\o{.\212\377\377\377\0\2\0\274\344\"\0\274\344\372\230\0\2=
+74" \
++  "\344\377\2\0\274\344\343\0\274\344\40\226\377\377\377\0\2\0\274\344\3=
+" \
++  "\0\274\344\244\236\0\274\344\377\1\0\274\344s\225\377\377\377\0\1\\o"=
+ \
++  "{.\226\\o{\377\1\\o{\301\271\377\377\377\0\2\\o{\12\\o{\371\225\\o{\3=
+77" \
++  "\1\\o{\320\213\377\377\377\0\1\0\274\344\233\230\0\274\344\377\2\0\27=
+4" \
++  "\344\367\0\274\3444\226\377\377\377\0\2\0\274\344\2\0\274\344\243\236=
+" \
++  "\0\274\344\377\1\0\274\344s\227\377\377\377\0\1\\o{\320\225\\o{\377\2=
+" \
++  "\\o{\371\\o{\12\270\377\377\377\0\1\\o{E\226\\o{\377\1\\o{|\212\377\3=
+77" \
++  "\377\0\2\0\274\344\2\0\274\344\353\230\0\274\344\377\1\0\274\344\\\22=
+6" \
++  "\377\377\377\0\2\0\274\344\2\0\274\344\242\236\0\274\344\377\1\0\274"=
+ \
++  "\344t\230\377\377\377\0\1\\o{|\226\\o{\377\1\\o{E\270\377\377\377\0\1=
+" \
++  "\\o{\205\226\\o{\377\1\\o{:\212\377\377\377\0\1\0\274\3449\230\0\274"=
+ \
++  "\344\377\1\0\274\344\215\226\377\377\377\0\2\0\274\344\2\0\274\344\24=
+1" \
++  "\236\0\274\344\377\1\0\274\344t\216\377\377\377\0\1\0\274\344\5\212\3=
+77" \
++  "\377\377\0\1\\o{:\226\\o{\377\1\\o{\205\270\377\377\377\0\1\\o{\261\2=
+25" \
++  "\\o{\377\2\\o{\363\\o{\4\212\377\377\377\0\1\0\274\344\204\227\0\274"=
+ \
++  "\344\377\2\0\274\344\272\0\274\344\3\225\377\377\377\0\2\0\274\344\2"=
+ \
++  "\0\274\344\240\236\0\274\344\377\1\0\274\344u\216\377\377\377\0\2\0\2=
+74" \
++  "\344<\0\274\344\243\212\377\377\377\0\2\\o{\4\\o{\363\225\\o{\377\1\\=
+" \
++  "o{\261\270\377\377\377\0\1\\o{\330\225\\o{\377\1\\o{\267\213\377\377"=
+ \
++  "\377\0\1\0\274\344\317\226\0\274\344\377\2\0\274\344\372\0\274\344!\2=
+25" \
++  "\377\377\377\0\2\0\274\344\2\0\274\344\237\236\0\274\344\377\1\0\274"=
+ \
++  "\344u\216\377\377\377\0\4\0\274\344;\0\274\344\363\0\274\344\361\0\27=
+4" \
++  "\344\4\212\377\377\377\0\1\\o{\267\225\\o{\377\1\\o{\330\267\377\377"=
+ \
++  "\377\0\2\\o{\4\\o{\372\225\\o{\377\1\\o{v\212\377\377\377\0\1\0\274\3=
+44" \
++  "\33\227\0\274\344\377\1\0\274\344\224\225\377\377\377\0\2\0\274\344\1=
+" \
++  "\0\274\344\236\236\0\274\344\377\1\0\274\344v\216\377\377\377\0\2\0\2=
+74" \
++  "\344:\0\274\344\362\202\0\274\344\377\1\0\274\344;\212\377\377\377\0"=
+ \
++  "\1\\o{v\225\\o{\377\2\\o{\372\\o{\4\266\377\377\377\0\1\\o{%\226\\o{"=
+ \
++  "\377\1\\o{4\212\377\377\377\0\1\0\274\344f\226\0\274\344\377\2\0\274"=
+ \
++  "\344\364\0\274\344\27\224\377\377\377\0\2\0\274\344\1\0\274\344\234\2=
+36" \
++  "\0\274\344\377\1\0\274\344v\216\377\377\377\0\2\0\274\344:\0\274\344"=
+ \
++  "\362\203\0\274\344\377\1\0\274\344\201\212\377\377\377\0\1\\o{4\226\\=
+" \
++  "o{\377\1\\o{%\266\377\377\377\0\1\\o{L\225\\o{\377\2\\o{\372\\o{\4\21=
+2" \
++  "\377\377\377\0\1\0\274\344\261\226\0\274\344\377\1\0\274\344\205\224"=
+ \
++  "\377\377\377\0\2\0\274\344\1\0\274\344\233\236\0\274\344\377\1\0\274"=
+ \
++  "\344w\216\377\377\377\0\2\0\274\3449\0\274\344\362\204\0\274\344\377"=
+ \
++  "\1\0\274\344\307\212\377\377\377\0\2\\o{\4\\o{\372\225\\o{\377\1\\o{"=
+ \
++  "L\266\377\377\377\0\1\\o{s\225\\o{\377\1\\o{\327\212\377\377\377\0\2"=
+ \
++  "\0\274\344\10\0\274\344\365\225\0\274\344\377\2\0\274\344\357\0\274\3=
+44" \
++  "\17\223\377\377\377\0\2\0\274\344\1\0\274\344\232\236\0\274\344\377\1=
+" \
++  "\0\274\344w\216\377\377\377\0\2\0\274\3449\0\274\344\362\205\0\274\34=
+4" \
++  "\377\2\0\274\344\374\0\274\344\20\212\377\377\377\0\1\\o{\327\225\\o"=
+ \
++  "{\377\1\\o{s\266\377\377\377\0\1\\o{\231\225\\o{\377\1\\o{\257\212\37=
+7" \
++  "\377\377\0\1\0\274\344G\226\0\274\344\377\1\0\274\344\241\223\377\377=
+" \
++  "\377\0\2\0\274\344\1\0\274\344\231\236\0\274\344\377\1\0\274\344w\216=
+" \
++  "\377\377\377\0\2\0\274\3448\0\274\344\361\207\0\274\344\377\1\0\274\3=
+44" \
++  "P\212\377\377\377\0\1\\o{\257\225\\o{\377\1\\o{\231\266\377\377\377\0=
+" \
++  "\1\\o{\300\225\\o{\377\1\\o{\210\212\377\377\377\0\1\0\274\344p\226\0=
+" \
++  "\274\344\377\1\0\274\344U\222\377\377\377\0\2\0\274\344\1\0\274\344\2=
+30" \
++  "\236\0\274\344\377\1\0\274\344x\216\377\377\377\0\2\0\274\3448\0\274"=
+ \
++  "\344\361\210\0\274\344\377\1\0\274\344v\212\377\377\377\0\1\\o{\210\2=
+25" \
++  "\\o{\377\1\\o{\300\266\377\377\377\0\1\\o{\327\225\\o{\377\1\\o{a\212=
+" \
++  "\377\377\377\0\1\0\274\344\210\225\0\274\344\377\2\0\274\344\372\0\27=
+4" \
++  "\344\16\222\377\377\377\0\1\0\274\344\223\236\0\274\344\377\1\0\274\3=
+44" \
++  "x\216\377\377\377\0\2\0\274\3447\0\274\344\361\211\0\274\344\377\1\0"=
+ \
++  "\274\344\226\212\377\377\377\0\1\\o{a\225\\o{\377\1\\o{\327\266\377\3=
+77" \
++  "\377\0\1\\o{\344\225\\o{\377\1\\o{9\212\377\377\377\0\1\0\274\344\240=
+" \
++  "\225\0\274\344\377\1\0\274\344\274\222\377\377\377\0\1\0\274\344R\236=
+" \
++  "\0\274\344\377\1\0\274\344y\216\377\377\377\0\2\0\274\3447\0\274\344"=
+ \
++  "\360\212\0\274\344\377\1\0\274\344\267\212\377\377\377\0\1\\o{9\225\\=
+" \
++  "o{\377\1\\o{\344\266\377\377\377\0\1\\o{\362\225\\o{\377\1\\o{\33\212=
+" \
++  "\377\377\377\0\1\0\274\344\270\225\0\274\344\377\1\0\274\344p\221\377=
+" \
++  "\377\377\0\2\0\274\344\25\0\274\344\352\235\0\274\344\377\1\0\274\344=
+" \
++  "y\216\377\377\377\0\2\0\274\3446\0\274\344\360\213\0\274\344\377\1\0"=
+ \
++  "\274\344\327\212\377\377\377\0\1\\o{\33\225\\o{\377\1\\o{\362\265\377=
+" \
++  "\377\377\0\2\\o{\1\\o{\375\225\\o{\377\1\\o{\16\212\377\377\377\0\1\0=
+" \
++  "\274\344\320\225\0\274\344\377\1\0\274\344<\221\377\377\377\0\1\0\274=
+" \
++  "\344\255\235\0\274\344\377\1\0\274\344z\216\377\377\377\0\2\0\274\344=
+" \
++  "5\0\274\344\360\214\0\274\344\377\2\0\274\344\367\0\274\344\1\211\377=
+" \
++  "\377\377\0\1\\o{\16\225\\o{\377\2\\o{\375\\o{\1\264\377\377\377\0\1\\=
+" \
++  "o{\14\226\\o{\377\1\\o{\2\212\377\377\377\0\1\0\274\344\351\225\0\274=
+" \
++  "\344\377\1\0\274\344%\220\377\377\377\0\1\0\274\344/\235\0\274\344\37=
+7" \
++  "\1\0\274\344z\216\377\377\377\0\2\0\274\3445\0\274\344\360\216\0\274"=
+ \
++  "\344\377\1\0\274\344\30\211\377\377\377\0\1\\o{\2\226\\o{\377\1\\o{\1=
+4" \
++  "\264\377\377\377\0\1\\o{\31\225\\o{\377\1\\o{\365\212\377\377\377\0\2=
+" \
++  "\0\274\344\3\0\274\344\375\225\0\274\344\377\1\0\274\344\15\220\377\3=
+77" \
++  "\377\0\1\0\274\344c\234\0\274\344\377\1\0\274\344{\216\377\377\377\0"=
+ \
++  "\2\0\274\3444\0\274\344\357\217\0\274\344\377\1\0\274\3444\212\377\37=
+7" \
++  "\377\0\1\\o{\365\225\\o{\377\1\\o{\31\264\377\377\377\0\1\\o{&\225\\"=
+ \
++  "o{\377\1\\o{\350\212\377\377\377\0\1\0\274\344\31\225\0\274\344\377\1=
+" \
++  "\0\274\344\365\221\377\377\377\0\1\0\274\344\226\233\0\274\344\377\1"=
+ \
++  "\0\274\344{\216\377\377\377\0\2\0\274\3444\0\274\344\357\220\0\274\34=
+4" \
++  "\377\1\0\274\3445\212\377\377\377\0\1\\o{\350\225\\o{\377\1\\o{&\264"=
+ \
++  "\377\377\377\0\1\\o{3\225\\o{\377\1\\o{\333\212\377\377\377\0\1\0\274=
+" \
++  "\3441\225\0\274\344\377\1\0\274\344\336\221\377\377\377\0\1\0\274\344=
+" \
++  "\310\232\0\274\344\377\1\0\274\344|\216\377\377\377\0\2\0\274\3443\0"=
+ \
++  "\274\344\357\221\0\274\344\377\1\0\274\3443\212\377\377\377\0\1\\o{\3=
+33" \
++  "\225\\o{\377\1\\o{3\264\377\377\377\0\1\\o{;\225\\o{\377\1\\o{\323\21=
+2" \
++  "\377\377\377\0\1\0\274\344A\225\0\274\344\377\1\0\274\344\316\221\377=
+" \
++  "\377\377\0\1\0\274\344\353\231\0\274\344\377\1\0\274\344|\216\377\377=
+" \
++  "\377\0\2\0\274\3443\0\274\344\356\222\0\274\344\377\1\0\274\3441\212"=
+ \
++  "\377\377\377\0\1\\o{\323\225\\o{\377\1\\o{;\264\377\377\377\0\1\\o{,"=
+ \
++  "\225\\o{\377\1\\o{\335\212\377\377\377\0\1\0\274\344.\225\0\274\344\3=
+77" \
++  "\1\0\274\344\341\221\377\377\377\0\1\0\274\344\302\230\0\274\344\377"=
+ \
++  "\1\0\274\344|\216\377\377\377\0\2\0\274\3442\0\274\344\356\223\0\274"=
+ \
++  "\344\377\1\0\274\344.\212\377\377\377\0\1\\o{\335\225\\o{\377\1\\o{,"=
+ \
++  "\264\377\377\377\0\1\\o{\32\225\\o{\377\1\\o{\352\212\377\377\377\0\1=
+" \
++  "\0\274\344\26\225\0\274\344\377\1\0\274\344\370\221\377\377\377\0\1\0=
+" \
++  "\274\344\217\227\0\274\344\377\1\0\274\344}\216\377\377\377\0\2\0\274=
+" \
++  "\3442\0\274\344\356\224\0\274\344\377\1\0\274\344,\212\377\377\377\0"=
+ \
++  "\1\\o{\352\225\\o{\377\1\\o{\32\264\377\377\377\0\1\\o{\11\225\\o{\37=
+7" \
++  "\1\\o{\367\212\377\377\377\0\2\0\274\344\2\0\274\344\374\225\0\274\34=
+4" \
++  "\377\1\0\274\344\20\220\377\377\377\0\1\0\274\344]\226\0\274\344\377"=
+ \
++  "\1\0\274\344}\216\377\377\377\0\2\0\274\344\1\0\274\344\351\225\0\274=
+" \
++  "\344\377\1\0\274\344*\212\377\377\377\0\1\\o{\367\225\\o{\377\1\\o{\1=
+1" \
++  "\265\377\377\377\0\1\\o{\367\225\\o{\377\1\\o{\4\212\377\377\377\0\1"=
+ \
++  "\0\274\344\346\225\0\274\344\377\1\0\274\344(\220\377\377\377\0\1\0\2=
+74" \
++  "\344&\225\0\274\344\377\1\0\274\344~\217\377\377\377\0\1\0\274\344\""=
+ \
++  "\226\0\274\344\377\1\0\274\344!\211\377\377\377\0\1\\o{\4\225\\o{\377=
+" \
++  "\1\\o{\367\266\377\377\377\0\1\\o{\345\225\\o{\377\1\\o{\21\212\377\3=
+77" \
++  "\377\0\1\0\274\344\315\225\0\274\344\377\1\0\274\344@\221\377\377\377=
+" \
++  "\0\1\0\274\344\230\223\0\274\344\377\1\0\274\344~\220\377\377\377\0\1=
+" \
++  "\0\274\344R\225\0\274\344\377\2\0\274\344\372\0\274\344\3\211\377\377=
+" \
++  "\377\0\1\\o{\21\225\\o{\377\1\\o{\345\266\377\377\377\0\1\\o{\323\225=
+" \
++  "\\o{\377\1\\o{\37\212\377\377\377\0\1\0\274\344\265\225\0\274\344\377=
+" \
++  "\1\0\274\344z\221\377\377\377\0\2\0\274\344\14\0\274\344\336\221\0\27=
+4" \
++  "\344\377\1\0\274\344\177\221\377\377\377\0\1\0\274\344\202\225\0\274"=
+ \
++  "\344\377\1\0\274\344\327\212\377\377\377\0\1\\o{\37\225\\o{\377\1\\o"=
+ \
++  "{\323\266\377\377\377\0\1\\o{\301\225\\o{\377\1\\o{@\212\377\377\377"=
+ \
++  "\0\1\0\274\344\235\225\0\274\344\377\1\0\274\344\306\222\377\377\377"=
+ \
++  "\0\2\0\274\344>\0\274\344\376\217\0\274\344\377\1\0\274\344\177\222\3=
+77" \
++  "\377\377\0\1\0\274\344\263\225\0\274\344\377\1\0\274\344\261\212\377"=
+ \
++  "\377\377\0\1\\o{@\225\\o{\377\1\\o{\301\266\377\377\377\0\1\\o{\257\2=
+25" \
++  "\\o{\377\1\\o{f\212\377\377\377\0\1\0\274\344\205\225\0\274\344\377\2=
+" \
++  "\0\274\344\375\0\274\344\25\222\377\377\377\0\2\0\274\344^\0\274\344"=
+ \
++  "\361\214\0\274\344\377\2\0\274\344\363\0\274\344f\222\377\377\377\0\2=
+" \
++  "\0\274\344\12\0\274\344\362\225\0\274\344\377\1\0\274\344\212\212\377=
+" \
++  "\377\377\0\1\\o{f\225\\o{\377\1\\o{\257\266\377\377\377\0\1\\o{\235\2=
+25" \
++  "\\o{\377\1\\o{\215\212\377\377\377\0\1\0\274\344m\226\0\274\344\377\1=
+" \
++  "\0\274\344`\223\377\377\377\0\2\0\274\344\36\0\274\344\274\212\0\274"=
+ \
++  "\344\377\2\0\274\344\275\0\274\344\40\223\377\377\377\0\1\0\274\344\\=
+" \
++  "\226\0\274\344\377\1\0\274\344d\212\377\377\377\0\1\\o{\215\225\\o{\3=
+77" \
++  "\1\\o{\235\266\377\377\377\0\1\\o{\213\225\\o{\377\1\\o{\263\212\377"=
+ \
++  "\377\377\0\1\0\274\344>\226\0\274\344\377\1\0\274\344\254\224\377\377=
+" \
++  "\377\0\4\0\274\344\1\0\274\344e\0\274\344\270\0\274\344\354\204\0\274=
+" \
++  "\344\377\4\0\274\344\354\0\274\344\270\0\274\344e\0\274\344\1\224\377=
+" \
++  "\377\377\0\1\0\274\344\273\226\0\274\344\377\1\0\274\344>\212\377\377=
+" \
++  "\377\0\1\\o{\263\225\\o{\377\1\\o{\213\266\377\377\377\0\1\\o{y\225\\=
+" \
++  "o{\377\1\\o{\332\212\377\377\377\0\2\0\274\344\4\0\274\344\357\225\0"=
+ \
++  "\274\344\377\2\0\274\344\367\0\274\344\33\227\377\377\377\0\1\0\274\3=
+44" \
++  "!\202\0\274\344U\1\0\274\344!\227\377\377\377\0\2\0\274\344\34\0\274"=
+ \
++  "\344\375\225\0\274\344\377\2\0\274\344\374\0\274\344\21\212\377\377\3=
+77" \
++  "\0\1\\o{\332\225\\o{\377\1\\o{y\266\377\377\377\0\1\\o{W\225\\o{\377"=
+ \
++  "\2\\o{\373\\o{\6\212\377\377\377\0\1\0\274\344\250\226\0\274\344\377"=
+ \
++  "\1\0\274\344\231\262\377\377\377\0\1\0\274\344\201\226\0\274\344\377"=
+ \
++  "\1\0\274\344\304\212\377\377\377\0\2\\o{\6\\o{\373\225\\o{\377\1\\o{"=
+ \
++  "W\266\377\377\377\0\1\\o{!\226\\o{\377\1\\o{<\212\377\377\377\0\1\0\2=
+74" \
++  "\344]\226\0\274\344\377\2\0\274\344\373\0\274\344$\260\377\377\377\0"=
+ \
++  "\2\0\274\344\32\0\274\344\364\226\0\274\344\377\1\0\274\344y\212\377"=
+ \
++  "\377\377\0\1\\o{<\226\\o{\377\1\\o{!\267\377\377\377\0\1\\o{\354\225"=
+ \
++  "\\o{\377\1\\o{}\212\377\377\377\0\2\0\274\344\24\0\274\344\375\226\0"=
+ \
++  "\274\344\377\1\0\274\344\246\260\377\377\377\0\1\0\274\344\241\227\0"=
+ \
++  "\274\344\377\1\0\274\344.\212\377\377\377\0\1\\o{}\225\\o{\377\1\\o{"=
+ \
++  "\354\270\377\377\377\0\1\\o{\267\225\\o{\377\1\\o{\275\213\377\377\37=
+7" \
++  "\0\1\0\274\344\306\226\0\274\344\377\2\0\274\344\376\0\274\344.\256\3=
+77" \
++  "\377\377\0\2\0\274\3445\0\274\344\376\226\0\274\344\377\1\0\274\344\3=
+42" \
++  "\213\377\377\377\0\1\\o{\275\225\\o{\377\1\\o{\267\270\377\377\377\0"=
+ \
++  "\1\\o{\202\225\\o{\377\2\\o{\367\\o{\7\212\377\377\377\0\1\0\274\344"=
+ \
++  "z\227\0\274\344\377\2\0\274\344\315\0\274\344\11\254\377\377\377\0\2"=
+ \
++  "\0\274\344\3\0\274\344\306\227\0\274\344\377\1\0\274\344\230\212\377"=
+ \
++  "\377\377\0\2\\o{\7\\o{\367\225\\o{\377\1\\o{\202\270\377\377\377\0\1"=
+ \
++  "\\o{L\226\\o{\377\1\\o{\77\212\377\377\377\0\1\0\274\344/\230\0\274\3=
+44" \
++  "\377\1\0\274\344\246\254\377\377\377\0\1\0\274\344\223\230\0\274\344"=
+ \
++  "\377\1\0\274\344M\212\377\377\377\0\1\\o{\77\226\\o{\377\1\\o{L\270\3=
+77" \
++  "\377\377\0\1\\o{\27\226\\o{\377\1\\o{\203\213\377\377\377\0\1\0\274\3=
+44" \
++  "\343\230\0\274\344\377\1\0\274\344v\252\377\377\377\0\1\0\274\344i\23=
+0" \
++  "\0\274\344\377\2\0\274\344\347\0\274\344\6\212\377\377\377\0\1\\o{\20=
+3" \
++  "\226\\o{\377\1\\o{\27\271\377\377\377\0\1\\o{\342\225\\o{\377\1\\o{\3=
+34" \
++  "\213\377\377\377\0\1\0\274\344\216\230\0\274\344\377\2\0\274\344\375"=
+ \
++  "\0\274\344H\250\377\377\377\0\2\0\274\344C\0\274\344\373\230\0\274\34=
+4" \
++  "\377\1\0\274\344z\213\377\377\377\0\1\\o{\334\225\\o{\377\1\\o{\342\2=
+72" \
++  "\377\377\377\0\1\\o{\255\226\\o{\377\1\\o{9\212\377\377\377\0\2\0\274=
+" \
++  "\344\27\0\274\344\364\230\0\274\344\377\2\0\274\344\357\0\274\3446\24=
+6" \
++  "\377\377\377\0\2\0\274\3446\0\274\344\356\230\0\274\344\377\2\0\274\3=
+44" \
++  "\364\0\274\344\22\212\377\377\377\0\1\\o{9\226\\o{\377\1\\o{\255\272"=
+ \
++  "\377\377\377\0\1\\o{x\226\\o{\377\1\\o{\226\213\377\377\377\0\1\0\274=
+" \
++  "\344\204\231\0\274\344\377\2\0\274\344\367\0\274\344]\244\377\377\377=
+" \
++  "\0\2\0\274\344]\0\274\344\367\231\0\274\344\377\1\0\274\344\223\213\3=
+77" \
++  "\377\377\0\1\\o{\226\226\\o{\377\1\\o{x\272\377\377\377\0\1\\o{B\226"=
+ \
++  "\\o{\377\2\\o{\355\\o{\6\212\377\377\377\0\2\0\274\344\17\0\274\344\3=
+55" \
++  "\232\0\274\344\377\2\0\274\344\213\0\274\344\2\240\377\377\377\0\2\0"=
+ \
++  "\274\344\2\0\274\344\213\232\0\274\344\377\2\0\274\344\375\0\274\344"=
+ \
++  "\"\212\377\377\377\0\2\\o{\6\\o{\355\226\\o{\377\1\\o{B\272\377\377\3=
+77" \
++  "\0\2\\o{\13\\o{\364\226\\o{\377\1\\o{P\213\377\377\377\0\1\0\274\344"=
+ \
++  "v\233\0\274\344\377\2\0\274\344\267\0\274\344\20\236\377\377\377\0\2"=
+ \
++  "\0\274\344\20\0\274\344\267\233\0\274\344\377\1\0\274\344\254\213\377=
+" \
++  "\377\377\0\1\\o{P\226\\o{\377\2\\o{\364\\o{\13\273\377\377\377\0\1\\"=
+ \
++  "o{\245\226\\o{\377\1\\o{\271\213\377\377\377\0\2\0\274\344\11\0\274\3=
+44" \
++  "\345\233\0\274\344\377\3\0\274\344\343\0\274\344d\0\274\344\3\232\377=
+" \
++  "\377\377\0\3\0\274\344\3\0\274\344d\0\274\344\343\233\0\274\344\377\2=
+" \
++  "\0\274\344\375\0\274\3443\213\377\377\377\0\1\\o{\271\226\\o{\377\1\\=
+" \
++  "o{\245\274\377\377\377\0\1\\o{I\227\\o{\377\1\\o{3\213\377\377\377\0"=
+ \
++  "\1\0\274\344g\235\0\274\344\377\3\0\274\344\331\0\274\344U\0\274\344"=
+ \
++  "\1\226\377\377\377\0\3\0\274\344\1\0\274\344U\0\274\344\331\235\0\274=
+" \
++  "\344\377\1\0\274\344\222\213\377\377\377\0\1\\o{3\227\\o{\377\1\\o{I"=
+ \
++  "\274\377\377\377\0\2\\o{\4\\o{\351\226\\o{\377\1\\o{\255\213\377\377"=
+ \
++  "\377\0\2\0\274\344\4\0\274\344\333\236\0\274\344\377\3\0\274\344\315"=
+ \
++  "\0\274\344R\0\274\344\12\222\377\377\377\0\3\0\274\344\12\0\274\344R"=
+ \
++  "\0\274\344\315\236\0\274\344\377\2\0\274\344\341\0\274\344\14\213\377=
+" \
++  "\377\377\0\1\\o{\255\226\\o{\377\2\\o{\351\\o{\4\275\377\377\377\0\1"=
+ \
++  "\\o{\222\226\\o{\377\2\\o{\376\\o{)\213\377\377\377\0\1\0\274\344X\24=
+0" \
++  "\0\274\344\377\4\0\274\344\367\0\274\344\266\0\274\344i\0\274\344\36"=
+ \
++  "\214\377\377\377\0\4\0\274\344\34\0\274\344h\0\274\344\265\0\274\344"=
+ \
++  "\367\240\0\274\344\377\1\0\274\344K\213\377\377\377\0\2\\o{)\\o{\376"=
+ \
++  "\226\\o{\377\1\\o{\222\276\377\377\377\0\1\\o{7\227\\o{\377\1\\o{\241=
+" \
++  "\213\377\377\377\0\2\0\274\344\1\0\274\344\275\243\0\274\344\377\5\0"=
+ \
++  "\274\344\325\0\274\344\263\0\274\344\233\0\274\344\203\0\274\344k\202=
+" \
++  "\0\274\344S\5\0\274\344k\0\274\344\203\0\274\344\232\0\274\344\262\0"=
+ \
++  "\274\344\323\243\0\274\344\377\1\0\274\344\247\214\377\377\377\0\1\\"=
+ \
++  "o{\241\227\\o{\377\1\\o{7\277\377\377\377\0\1\\o{\333\226\\o{\377\2\\=
+" \
++  "o{\373\\o{%\213\377\377\377\0\2\0\274\344\32\0\274\344\353\320\0\274"=
+ \
++  "\344\377\2\0\274\344\355\0\274\344\26\213\377\377\377\0\2\\o{%\\o{\37=
+3" \
++  "\226\\o{\377\1\\o{\333\300\377\377\377\0\1\\o{\200\227\\o{\377\1\\o{"=
+ \
++  "\266\214\377\377\377\0\1\0\274\344M\320\0\274\344\377\1\0\274\344Y\21=
+4" \
++  "\377\377\377\0\1\\o{\266\227\\o{\377\1\\o{\200\300\377\377\377\0\1\\"=
+ \
++  "o{%\230\\o{\377\1\\o{O\214\377\377\377\0\1\0\274\344\223\316\0\274\34=
+4" \
++  "\377\1\0\274\344\203\214\377\377\377\0\1\\o{O\230\\o{\377\1\\o{%\301"=
+ \
++  "\377\377\377\0\1\\o{\311\227\\o{\377\2\\o{\337\\o{\11\213\377\377\377=
+" \
++  "\0\2\0\274\344\7\0\274\344\304\314\0\274\344\377\2\0\274\344\246\0\27=
+4" \
++  "\344\1\213\377\377\377\0\2\\o{\11\\o{\337\227\\o{\377\1\\o{\311\302\3=
+77" \
++  "\377\377\0\1\\o{k\230\\o{\377\1\\o{\200\214\377\377\377\0\2\0\274\344=
+" \
++  "\21\0\274\344\325\312\0\274\344\377\2\0\274\344\303\0\274\344\7\214\3=
+77" \
++  "\377\377\0\1\\o{\200\230\\o{\377\1\\o{k\302\377\377\377\0\2\\o{\11\\"=
+ \
++  "o{\347\227\\o{\377\2\\o{\367\\o{'\214\377\377\377\0\2\0\274\344\34\0"=
+ \
++  "\274\344\343\310\0\274\344\377\2\0\274\344\333\0\274\344\23\214\377\3=
+77" \
++  "\377\0\2\\o{'\\o{\367\227\\o{\377\2\\o{\347\\o{\11\303\377\377\377\0"=
+ \
++  "\1\\o{m\230\\o{\377\2\\o{\320\\o{\7\214\377\377\377\0\2\0\274\344*\0"=
+ \
++  "\274\344\356\306\0\274\344\377\2\0\274\344\355\0\274\344%\214\377\377=
+" \
++  "\377\0\2\\o{\7\\o{\320\230\\o{\377\1\\o{m\304\377\377\377\0\2\\o{\7\\=
+" \
++  "o{\342\230\\o{\377\1\\o{\224\215\377\377\377\0\2\0\274\3443\0\274\344=
+" \
++  "\351\304\0\274\344\377\2\0\274\344\351\0\274\3442\215\377\377\377\0\1=
+" \
++  "\\o{\224\230\\o{\377\2\\o{\342\\o{\7\305\377\377\377\0\1\\o{e\231\\o"=
+ \
++  "{\377\1\\o{P\215\377\377\377\0\2\0\274\344#\0\274\344\334\302\0\274\3=
+44" \
++  "\377\2\0\274\344\334\0\274\344#\215\377\377\377\0\1\\o{P\231\\o{\377"=
+ \
++  "\1\\o{e\306\377\377\377\0\2\\o{\4\\o{\335\230\\o{\377\2\\o{\356\\o{\3=
+6" \
++  "\215\377\377\377\0\2\0\274\344\27\0\274\344\315\300\0\274\344\377\2\0=
+" \
++  "\274\344\315\0\274\344\27\215\377\377\377\0\2\\o{\36\\o{\356\230\\o{"=
+ \
++  "\377\2\\o{\335\\o{\4\307\377\377\377\0\1\\o{^\231\\o{\377\2\\o{\313\\=
+" \
++  "o{\13\215\377\377\377\0\2\0\274\344\15\0\274\344\264\276\0\274\344\37=
+7" \
++  "\2\0\274\344\264\0\274\344\15\215\377\377\377\0\2\\o{\13\\o{\313\231"=
+ \
++  "\\o{\377\1\\o{^\310\377\377\377\0\2\\o{\3\\o{\327\231\\o{\377\2\\o{\2=
+66" \
++  "\\o{\4\215\377\377\377\0\3\0\274\344\1\0\274\344t\0\274\344\372\272\0=
+" \
++  "\274\344\377\3\0\274\344\372\0\274\344t\0\274\344\1\215\377\377\377\0=
+" \
++  "\2\\o{\4\\o{\266\231\\o{\377\2\\o{\327\\o{\3\311\377\377\377\0\1\\o{"=
+ \
++  "W\232\\o{\377\1\\o{\236\217\377\377\377\0\2\0\274\3446\0\274\344\336"=
+ \
++  "\270\0\274\344\377\2\0\274\344\336\0\274\3446\217\377\377\377\0\1\\o"=
+ \
++  "{\236\232\\o{\377\1\\o{W\312\377\377\377\0\2\\o{\1\\o{\321\232\\o{\37=
+7" \
++  "\1\\o{\203\217\377\377\377\0\3\0\274\344\17\0\274\344\236\0\274\344\3=
+75" \
++  "\264\0\274\344\377\3\0\274\344\375\0\274\344\236\0\274\344\17\217\377=
+" \
++  "\377\377\0\1\\o{\203\232\\o{\377\2\\o{\321\\o{\1\313\377\377\377\0\1"=
+ \
++  "\\o{8\232\\o{\200\2\\o{\177\\o{\27\220\377\377\377\0\2\0\274\344+\0\2=
+74" \
++  "\344\257\262\0\274\344\377\2\0\274\344\257\0\274\344+\220\377\377\377=
+" \
++  "\0\2\\o{\27\\o{\177\232\\o{\200\1\\o{8\373\377\377\377\0\2\0\274\344"=
+ \
++  "7\0\274\344\276\256\0\274\344\377\2\0\274\344\276\0\274\3447\377\377"=
+ \
++  "\377\377\0\255\377\377\377\0\2\0\274\344E\0\274\344\314\252\0\274\344=
+" \
++  "\377\2\0\274\344\314\0\274\344E\377\377\377\377\0\260\377\377\377\0\3=
+" \
++  "\0\274\344\1\0\274\344T\0\274\344\330\246\0\274\344\377\3\0\274\344\3=
+30" \
++  "\0\274\344T\0\274\344\1\377\377\377\377\0\263\377\377\377\0\4\0\274\3=
+44" \
++  "\3\0\274\344H\0\274\344\224\0\274\344\337\240\0\274\344\377\4\0\274\3=
+44" \
++  "\337\0\274\344\224\0\274\344H\0\274\344\3\377\377\377\377\0\271\377\3=
+77" \
++  "\377\0\4\0\274\344*\0\274\344v\0\274\344\301\0\274\344\373\230\0\274"=
+ \
++  "\344\377\4\0\274\344\373\0\274\344\301\0\274\344v\0\274\344*\377\377"=
+ \
++  "\377\377\0\300\377\377\377\0\5\0\274\344\21\0\274\344X\0\274\344\243"=
+ \
++  "\0\274\344\346\0\274\344\376\220\0\274\344\377\5\0\274\344\376\0\274"=
+ \
++  "\344\346\0\274\344\243\0\274\344X\0\274\344\21\377\377\377\377\0\307"=
+ \
++  "\377\377\377\0\10\0\274\344\5\0\274\344\34\0\274\3445\0\274\344N\0\27=
+4" \
++  "\344g\0\274\344\200\0\274\344\231\0\274\344\262\202\0\274\344\313\10"=
+ \
++  "\0\274\344\262\0\274\344\231\0\274\344\200\0\274\344g\0\274\344N\0\27=
+4" \
++  "\3445\0\274\344\34\0\274\344\5\377\377\377\377\0\377\377\377\377\0\37=
+7" \
++  "\377\377\377\0\377\377\377\377\0\377\377\377\377\0\377\377\377\377\0"=
+ \
++  "\377\377\377\377\0\377\377\377\377\0\377\377\377\377\0\377\377\377\37=
+7" \
++  "\0\377\377\377\377\0\377\377\377\377\0\214\377\377\377\0\4\0\274\344"=
+ \
++  "8\0\274\344\222\0\274\344h\0\274\344\20\252\377\377\377\0\4\0\274\344=
+" \
++  "\14\0\274\344b\0\274\344\224\0\274\344\77\216\377\377\377\0\5\0\274\3=
+44" \
++  "\7\0\274\344W\0\274\344\227\0\274\344K\0\274\344\2\240\377\377\377\0"=
+ \
++  "\4\0\274\344\77\0\274\344\224\0\274\344b\0\274\344\14\362\377\377\377=
+" \
++  "\0\1\0\274\344#\203\0\274\344\377\1\0\274\344\245\252\377\377\377\0\1=
+" \
++  "\0\274\344\225\203\0\274\344\377\1\0\274\3445\215\377\377\377\0\1\0\2=
+74" \
++  "\344u\203\0\274\344\377\1\0\274\344U\237\377\377\377\0\1\0\274\3445\2=
+03" \
++  "\0\274\344\377\1\0\274\344\225\362\377\377\377\0\1\0\274\344v\203\0\2=
+74" \
++  "\344\377\2\0\274\344\366\0\274\344\7\251\377\377\377\0\1\0\274\344\35=
+5" \
++  "\203\0\274\344\377\1\0\274\344\215\215\377\377\377\0\1\0\274\344\315"=
+ \
++  "\203\0\274\344\377\1\0\274\344\255\237\377\377\377\0\1\0\274\344\215"=
+ \
++  "\203\0\274\344\377\1\0\274\344\355\362\377\377\377\0\1\0\274\344\210"=
+ \
++  "\204\0\274\344\377\1\0\274\344\20\251\377\377\377\0\204\0\274\344\377=
+" \
++  "\1\0\274\344\240\215\377\377\377\0\1\0\274\344\340\203\0\274\344\377"=
+ \
++  "\1\0\274\344\300\237\377\377\377\0\1\0\274\344\240\204\0\274\344\377"=
+ \
++  "\362\377\377\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\2=
+51" \
++  "\377\377\377\0\204\0\274\344\377\1\0\274\344\240\215\377\377\377\0\1"=
+ \
++  "\0\274\344\340\203\0\274\344\377\1\0\274\344\300\237\377\377\377\0\1"=
+ \
++  "\0\274\344\240\204\0\274\344\377\362\377\377\377\0\1\0\274\344\210\20=
+4" \
++  "\0\274\344\377\1\0\274\344\20\251\377\377\377\0\204\0\274\344\377\1\0=
+" \
++  "\274\344\240\215\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1\0"=
+ \
++  "\274\344\300\237\377\377\377\0\1\0\274\344\240\204\0\274\344\377\362"=
+ \
++  "\377\377\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\251\3=
+77" \
++  "\377\377\0\204\0\274\344\377\1\0\274\344\240\215\377\377\377\0\1\0\27=
+4" \
++  "\344\340\203\0\274\344\377\1\0\274\344\300\237\377\377\377\0\1\0\274"=
+ \
++  "\344\240\204\0\274\344\377\362\377\377\377\0\1\0\274\344\210\204\0\27=
+4" \
++  "\344\377\1\0\274\344\20\251\377\377\377\0\204\0\274\344\377\1\0\274\3=
+44" \
++  "\240\215\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1\0\274\344"=
+ \
++  "\300\237\377\377\377\0\1\0\274\344\240\204\0\274\344\377\204\377\377"=
+ \
++  "\377\0\7\\o{\11\\o{=3D\\o{s\\o{\242\\o{\205\\o{U\\o{\36\207\377\377\3=
+77" \
++  "\0\3\\o{\7\\o{W\\o{\246\206\\o{\260\3\\o{\233\\o{j\\o{-\212\377\377\3=
+77" \
++  "\0\7\\o{\2\\o{/\\o{d\\o{\231\\o{\222\\o{a\\o{/\210\377\377\377\0\2\\"=
+ \
++  "o{\77\\o{\231\206\\o{\260\3\\o{\245\\o{w\\o{B\213\377\377\377\0\7\0\2=
+74" \
++  "\344!\0\274\344W\0\274\344\214\0\274\344\235\0\274\344n\0\274\344=3D\=
+0" \
++  "\274\344\6\207\377\377\377\0\2\0\274\344&\0\274\344\206\213\0\274\344=
+" \
++  "\260\4\0\274\344\257\0\274\344\224\0\274\344c\0\274\344!\206\377\377"=
+ \
++  "\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\265\203\0\274\34=
+4" \
++  "\260\4\0\274\344\247\0\274\344y\0\274\344F\0\274\344\4\211\377\377\37=
+7" \
++  "\0\7\0\274\344\3\0\274\3441\0\274\344g\0\274\344\234\0\274\344\220\0"=
+ \
++  "\274\344_\0\274\344,\213\377\377\377\0\3\0\274\344$\0\274\344e\0\274"=
+ \
++  "\344\242\204\0\274\344\260\204\0\274\344\377\1\0\274\344\240\206\377"=
+ \
++  "\377\377\0\3\0\274\344\33\0\274\344\\\0\274\344\234\204\0\274\344\260=
+" \
++  "\1\0\274\344\366\203\0\274\344\377\1\0\274\344\300\207\377\377\377\0"=
+ \
++  "\7\0\274\344\33\0\274\344S\0\274\344\211\0\274\344\237\0\274\344q\0\2=
+74" \
++  "\344A\0\274\344\11\212\377\377\377\0\4\0\274\344\16\0\274\344L\0\274"=
+ \
++  "\344\215\0\274\344\257\203\0\274\344\260\1\0\274\344\342\204\0\274\34=
+4" \
++  "\377\203\377\377\377\0\2\\o{K\\o{\345\205\\o{\377\3\\o{\373\\o{\201\\=
+" \
++  "o{\5\205\377\377\377\0\1\\o{u\212\\o{\377\3\\o{\376\\o{\220\\o{\11\20=
+7" \
++  "\377\377\377\0\2\\o{(\\o{\307\206\\o{\377\2\\o{\255\\o{\24\205\377\37=
+7" \
++  "\377\0\1\\o{5\213\\o{\377\2\\o{\272\\o{\35\207\377\377\377\0\2\0\274"=
+ \
++  "\344\20\0\274\344\240\206\0\274\344\377\2\0\274\344\322\0\274\344/\20=
+5" \
++  "\377\377\377\0\2\0\274\344\7\0\274\344\356\217\0\274\344\377\3\0\274"=
+ \
++  "\344\370\0\274\344u\0\274\344\2\204\377\377\377\0\1\0\274\344\210\213=
+" \
++  "\0\274\344\377\2\0\274\344\313\0\274\344*\207\377\377\377\0\2\0\274\3=
+44" \
++  ",\0\274\344\313\206\0\274\344\377\2\0\274\344\247\0\274\344\22\207\37=
+7" \
++  "\377\377\0\2\0\274\344\25\0\274\344\320\213\0\274\344\377\1\0\274\344=
+" \
++  "\240\204\377\377\377\0\2\0\274\344\10\0\274\344\267\213\0\274\344\377=
+" \
++  "\1\0\274\344\300\205\377\377\377\0\3\0\274\344\12\0\274\344\220\0\274=
+" \
++  "\344\375\205\0\274\344\377\2\0\274\344\335\0\274\344<\210\377\377\377=
+" \
++  "\0\2\0\274\344\203\0\274\344\374\213\0\274\344\377\3\377\377\377\0\\"=
+ \
++  "o{\1\\o{\232\211\\o{\377\2\\o{\315\\o{\27\204\377\377\377\0\1\\o{\315=
+" \
++  "\214\\o{\377\2\\o{\305\\o{\3\205\377\377\377\0\2\\o{c\\o{\367\210\\o"=
+ \
++  "{\377\2\\o{\351\\o{;\204\377\377\377\0\1\\o{\215\214\\o{\377\2\\o{\35=
+5" \
++  "\\o{\33\205\377\377\377\0\2\0\274\3446\0\274\344\345\210\0\274\344\37=
+7" \
++  "\2\0\274\344\372\0\274\344k\204\377\377\377\0\1\0\274\344M\222\0\274"=
+ \
++  "\344\377\1\0\274\344\240\204\377\377\377\0\1\0\274\344\210\214\0\274"=
+ \
++  "\344\377\2\0\274\344\370\0\274\344.\205\377\377\377\0\2\0\274\344j\0"=
+ \
++  "\274\344\371\210\0\274\344\377\2\0\274\344\346\0\274\3446\205\377\377=
+" \
++  "\377\0\2\0\274\344\21\0\274\344\320\214\0\274\344\377\1\0\274\344\240=
+" \
++  "\203\377\377\377\0\2\0\274\344\7\0\274\344\267\214\0\274\344\377\1\0"=
+ \
++  "\274\344\300\204\377\377\377\0\2\0\274\344(\0\274\344\333\210\0\274\3=
+44" \
++  "\377\2\0\274\344\375\0\274\344\177\206\377\377\377\0\1\0\274\344~\215=
+" \
++  "\0\274\344\377\2\377\377\377\0\\o{h\213\\o{\377\1\\o{\260\204\377\377=
+" \
++  "\377\0\1\\o{\340\215\\o{\377\1\\o{u\204\377\377\377\0\2\\o{.\\o{\371"=
+ \
++  "\212\\o{\377\2\\o{\342\\o{\16\203\377\377\377\0\1\\o{\240\215\\o{\377=
+" \
++  "\1\\o{\265\204\377\377\377\0\2\0\274\344\13\0\274\344\334\212\0\274\3=
+44" \
++  "\377\2\0\274\344\374\0\274\3444\203\377\377\377\0\1\0\274\344`\223\0"=
+ \
++  "\274\344\377\1\0\274\344M\203\377\377\377\0\1\0\274\344\210\215\0\274=
+" \
++  "\344\377\2\0\274\344\312\0\274\344\3\203\377\377\377\0\2\0\274\3444\0=
+" \
++  "\274\344\373\212\0\274\344\377\2\0\274\344\335\0\274\344\13\204\377\3=
+77" \
++  "\377\0\1\0\274\344\276\215\0\274\344\377\1\0\274\344\240\203\377\377"=
+ \
++  "\377\0\1\0\274\344\236\215\0\274\344\377\1\0\274\344\300\203\377\377"=
+ \
++  "\377\0\2\0\274\344\4\0\274\344\313\213\0\274\344\377\1\0\274\344I\204=
+" \
++  "\377\377\377\0\1\0\274\344^\216\0\274\344\377\2\\o{\37\\o{\362\214\\"=
+ \
++  "o{\377\1\\o{\\\203\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\376\204"=
+ \
++  "\\o{\370\1\\o{\376\204\\o{\377\2\\o{\365\\o{\5\202\377\377\377\0\2\\"=
+ \
++  "o{\4\\o{\315\214\\o{\377\1\\o{\234\203\377\377\377\0\1\\o{\240\204\\"=
+ \
++  "o{\377\204\\o{\370\1\\o{\374\205\\o{\377\1\\o{:\203\377\377\377\0\1\0=
+" \
++  "\274\344\222\214\0\274\344\377\2\0\274\344\325\0\274\344\7\202\377\37=
+7" \
++  "\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344\372\202\0\274\344\3=
+70" \
++  "\1\0\274\344\373\204\0\274\344\377\2\0\274\344\372\0\274\344\370\205"=
+ \
++  "\0\274\344\377\1\0\274\344\322\203\377\377\377\0\1\0\274\344\210\204"=
+ \
++  "\0\274\344\377\204\0\274\344\370\1\0\274\344\374\205\0\274\344\377\1"=
+ \
++  "\0\274\344M\202\377\377\377\0\2\0\274\344\6\0\274\344\323\214\0\274\3=
+44" \
++  "\377\1\0\274\344\224\203\377\377\377\0\2\0\274\344\26\0\274\344\376\2=
+04" \
++  "\0\274\344\377\1\0\274\344\374\204\0\274\344\370\204\0\274\344\377\1"=
+ \
++  "\0\274\344\240\202\377\377\377\0\2\0\274\344\4\0\274\344\361\204\0\27=
+4" \
++  "\344\377\1\0\274\344\375\204\0\274\344\370\204\0\274\344\377\1\0\274"=
+ \
++  "\344\300\203\377\377\377\0\1\0\274\344z\214\0\274\344\377\2\0\274\344=
+" \
++  "\344\0\274\344\20\203\377\377\377\0\1\0\274\344\265\205\0\274\344\377=
+" \
++  "\204\0\274\344\370\1\0\274\344\375\204\0\274\344\377\1\\o{\201\204\\"=
+ \
++  "o{\377\5\\o{\335\\o{n\\o{\24\\o{R\\o{\277\204\\o{\377\1\\o{\316\203\3=
+77" \
++  "\377\377\0\1\\o{\340\203\\o{\377\1\\o{\300\204\377\377\377\0\2\\o{!\\=
+" \
++  "o{\276\204\\o{\377\1\\o{/\202\377\377\377\0\1\\o{A\204\\o{\377\6\\o{"=
+ \
++  "\361\\o{\212\\o{#\\o{6\\o{\237\\o{\375\204\\o{\377\1\\o{\17\202\377\3=
+77" \
++  "\377\0\1\\o{\240\204\\o{\377\204\377\377\377\0\2\\o{\20\\o{\217\204\\=
+" \
++  "o{\377\1\\o{o\202\377\377\377\0\2\0\274\344\7\0\274\344\372\203\0\274=
+" \
++  "\344\377\6\0\274\344\376\0\274\344\244\0\274\344<\0\274\344\37\0\274"=
+ \
++  "\344\205\0\274\344\357\204\0\274\344\377\1\0\274\344N\202\377\377\377=
+" \
++  "\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0"=
+ \
++  "\274\344`\204\0\274\344\377\4\0\274\344@\377\377\377\0\0\274\344/\0\2=
+74" \
++  "\344\330\203\0\274\344\377\2\0\274\344\374\0\274\344\12\202\377\377\3=
+77" \
++  "\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\203\377\377\377\0=
+" \
++  "\2\0\274\344\13\0\274\344\201\204\0\274\344\377\1\0\274\344\177\202\3=
+77" \
++  "\377\377\0\1\0\274\344I\204\0\274\344\377\6\0\274\344\357\0\274\344\2=
+05" \
++  "\0\274\344\37\0\274\344<\0\274\344\244\0\274\344\376\203\0\274\344\37=
+7" \
++  "\2\0\274\344\374\0\274\344\12\202\377\377\377\0\1\0\274\344Y\204\0\27=
+4" \
++  "\344\377\2\0\274\344\224\0\274\344\21\204\377\377\377\0\204\0\274\344=
+" \
++  "\377\1\0\274\344\240\202\377\377\377\0\1\0\274\3449\204\0\274\344\377=
+" \
++  "\2\0\274\344\254\0\274\344\32\204\377\377\377\0\1\0\274\344\340\203\0=
+" \
++  "\274\344\377\1\0\274\344\300\203\377\377\377\0\1\0\274\344\351\204\0"=
+ \
++  "\274\344\377\5\0\274\344\257\0\274\344C\0\274\344\32\0\274\344}\0\274=
+" \
++  "\344\350\204\0\274\344\377\1\0\274\344f\202\377\377\377\0\2\0\274\344=
+" \
++  "\5\0\274\344\364\203\0\274\344\377\2\0\274\344\326\0\274\344/\204\377=
+" \
++  "\377\377\0\1\0\274\344\240\204\0\274\344\377\1\\o{\264\204\\o{\377\1"=
+ \
++  "\\o{;\203\377\377\377\0\2\\o{\7\\o{\354\203\\o{\377\2\\o{\371\\o{\6\2=
+02" \
++  "\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\300\205\377\377\377\0\1\\"=
+ \
++  "o{M\204\\o{\377\1\\o{]\202\377\377\377\0\1\\o{t\204\\o{\377\1\\o{z\20=
+4" \
++  "\377\377\377\0\1\\o{\262\204\\o{\377\1\\o{\77\202\377\377\377\0\1\\o"=
+ \
++  "{\240\204\\o{\377\205\377\377\377\0\2\\o{\20\\o{\374\203\\o{\377\1\\"=
+ \
++  "o{\235\202\377\377\377\0\1\0\274\3444\204\0\274\344\377\1\0\274\344\2=
+72" \
++  "\204\377\377\377\0\1\0\274\344r\204\0\274\344\377\1\0\274\344\200\202=
+" \
++  "\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\37=
+7" \
++  "\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0"=
+ \
++  "\1\0\274\344u\204\0\274\344\377\1\0\274\3445\202\377\377\377\0\1\0\27=
+4" \
++  "\344\210\204\0\274\344\377\1\0\274\344\20\204\377\377\377\0\2\0\274\3=
+44" \
++  "\6\0\274\344\360\203\0\274\344\377\1\0\274\344\255\202\377\377\377\0"=
+ \
++  "\1\0\274\344|\204\0\274\344\377\1\0\274\344r\204\377\377\377\0\1\0\27=
+4" \
++  "\344\272\204\0\274\344\377\1\0\274\3447\202\377\377\377\0\1\0\274\344=
+" \
++  "\231\203\0\274\344\377\2\0\274\344\374\0\274\344\20\205\377\377\377\0=
+" \
++  "\204\0\274\344\377\1\0\274\344\240\202\377\377\377\0\1\0\274\344y\204=
+" \
++  "\0\274\344\377\1\0\274\344-\205\377\377\377\0\1\0\274\344\340\203\0\2=
+74" \
++  "\344\377\1\0\274\344\300\202\377\377\377\0\1\0\274\344\34\204\0\274\3=
+44" \
++  "\377\1\0\274\344\322\204\377\377\377\0\1\0\274\344Z\204\0\274\344\377=
+" \
++  "\1\0\274\344\227\202\377\377\377\0\1\0\274\3449\204\0\274\344\377\1\0=
+" \
++  "\274\344m\205\377\377\377\0\1\0\274\344\240\204\0\274\344\377\1\\o{\3=
+46" \
++  "\203\\o{\377\1\\o{\323\205\377\377\377\0\1\\o{\213\204\\o{\377\1\\o{"=
+ \
++  "0\202\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\300\205\377\377\377\0=
+" \
++  "\1\\o{8\204\\o{\377\1\\o{h\202\377\377\377\0\1\\o{\247\203\\o{\377\2"=
+ \
++  "\\o{\372\\o{\27\204\377\377\377\0\1\\o{I\204\\o{\377\1\\o{p\202\377\3=
+77" \
++  "\377\0\1\\o{\240\204\\o{\377\206\377\377\377\0\1\\o{\370\203\\o{\377"=
+ \
++  "\1\\o{\250\202\377\377\377\0\1\0\274\344g\204\0\274\344\377\1\0\274\3=
+44" \
++  "Q\204\377\377\377\0\2\0\274\344\22\0\274\344\367\203\0\274\344\377\1"=
+ \
++  "\0\274\344\260\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\2=
+74" \
++  "\344@\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\2=
+02" \
++  "\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\37=
+7" \
++  "\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\205\377\377\3=
+77" \
++  "\0\1\0\274\344\340\203\0\274\344\377\1\0\274\344\270\202\377\377\377"=
+ \
++  "\0\1\0\274\344\257\203\0\274\344\377\2\0\274\344\367\0\274\344\22\204=
+" \
++  "\377\377\377\0\1\0\274\344Q\204\0\274\344\377\1\0\274\344h\202\377\37=
+7" \
++  "\377\0\1\0\274\344\250\203\0\274\344\377\1\0\274\344\370\206\377\377"=
+ \
++  "\377\0\204\0\274\344\377\1\0\274\344\240\202\377\377\377\0\1\0\274\34=
+4" \
++  "\210\204\0\274\344\377\1\0\274\344\30\205\377\377\377\0\1\0\274\344\3=
+40" \
++  "\203\0\274\344\377\1\0\274\344\300\202\377\377\377\0\1\0\274\344O\204=
+" \
++  "\0\274\344\377\1\0\274\344i\204\377\377\377\0\2\0\274\344\6\0\274\344=
+" \
++  "\352\203\0\274\344\377\1\0\274\344\310\202\377\377\377\0\1\0\274\344"=
+ \
++  "H\204\0\274\344\377\1\0\274\344X\205\377\377\377\0\1\0\274\344\240\20=
+4" \
++  "\0\274\344\377\204\\o{\377\1\\o{\240\205\377\377\377\0\1\\o{X\204\\o"=
+ \
++  "{\377\1\\o{H\202\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\300\205\37=
+7" \
++  "\377\377\0\1\\o{8\204\\o{\377\1\\o{h\202\377\377\377\0\1\\o{\300\203"=
+ \
++  "\\o{\377\1\\o{\365\205\\o{\250\1\\o{\260\204\\o{\377\1\\o{\210\202\37=
+7" \
++  "\377\377\0\1\\o{\240\204\\o{\377\206\377\377\377\0\1\\o{\370\203\\o{"=
+ \
++  "\377\1\\o{\250\202\377\377\377\0\1\0\274\344\200\204\0\274\344\377\1"=
+ \
++  "\0\274\344\263\205\0\274\344\250\1\0\274\344\362\203\0\274\344\377\1"=
+ \
++  "\0\274\344\310\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\2=
+74" \
++  "\344@\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\2=
+02" \
++  "\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\37=
+7" \
++  "\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\205\377\377\3=
+77" \
++  "\0\1\0\274\344\340\203\0\274\344\377\1\0\274\344\270\202\377\377\377"=
+ \
++  "\0\1\0\274\344\310\203\0\274\344\377\1\0\274\344\362\205\0\274\344\25=
+0" \
++  "\1\0\274\344\263\204\0\274\344\377\1\0\274\344\200\202\377\377\377\0"=
+ \
++  "\1\0\274\344\250\203\0\274\344\377\1\0\274\344\370\206\377\377\377\0"=
+ \
++  "\204\0\274\344\377\1\0\274\344\240\202\377\377\377\0\1\0\274\344\210"=
+ \
++  "\204\0\274\344\377\1\0\274\344\30\205\377\377\377\0\1\0\274\344\340\2=
+03" \
++  "\0\274\344\377\1\0\274\344\300\202\377\377\377\0\1\0\274\344h\204\0\2=
+74" \
++  "\344\377\1\0\274\344\273\205\0\274\344\250\1\0\274\344\352\203\0\274"=
+ \
++  "\344\377\1\0\274\344\340\202\377\377\377\0\1\0\274\344H\204\0\274\344=
+" \
++  "\377\1\0\274\344X\205\377\377\377\0\1\0\274\344\240\204\0\274\344\377=
+" \
++  "\204\\o{\377\1\\o{\240\205\377\377\377\0\1\\o{X\204\\o{\377\1\\o{H\20=
+2" \
++  "\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\300\205\377\377\377\0\1\\"=
+ \
++  "o{8\204\\o{\377\1\\o{h\202\377\377\377\0\1\\o{\300\216\\o{\377\1\\o{"=
+ \
++  "\210\202\377\377\377\0\1\\o{\240\204\\o{\377\206\377\377\377\0\1\\o{"=
+ \
++  "\370\203\\o{\377\1\\o{\250\202\377\377\377\0\1\0\274\344\200\216\0\27=
+4" \
++  "\344\377\1\0\274\344\310\202\377\377\377\0\1\0\274\344`\204\0\274\344=
+" \
++  "\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1"=
+ \
++  "\0\274\344@\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274"=
+ \
++  "\344@\202\377\377\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344=
+" \
++  "\20\205\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1\0\274\344\2=
+70" \
++  "\202\377\377\377\0\1\0\274\344\310\216\0\274\344\377\1\0\274\344\200"=
+ \
++  "\202\377\377\377\0\1\0\274\344\250\203\0\274\344\377\1\0\274\344\370"=
+ \
++  "\206\377\377\377\0\204\0\274\344\377\1\0\274\344\240\202\377\377\377"=
+ \
++  "\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\30\205\377\377\377\0=
+" \
++  "\1\0\274\344\340\203\0\274\344\377\1\0\274\344\300\202\377\377\377\0"=
+ \
++  "\1\0\274\344h\216\0\274\344\377\1\0\274\344\340\202\377\377\377\0\1\0=
+" \
++  "\274\344H\204\0\274\344\377\1\0\274\344X\205\377\377\377\0\1\0\274\34=
+4" \
++  "\240\204\0\274\344\377\204\\o{\377\1\\o{\240\205\377\377\377\0\1\\o{"=
+ \
++  "X\204\\o{\377\1\\o{H\202\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\30=
+0" \
++  "\205\377\377\377\0\1\\o{8\204\\o{\377\1\\o{h\202\377\377\377\0\1\\o{"=
+ \
++  "\300\216\\o{\377\1\\o{\210\202\377\377\377\0\1\\o{\240\204\\o{\377\20=
+6" \
++  "\377\377\377\0\1\\o{\370\203\\o{\377\1\\o{\250\202\377\377\377\0\1\0"=
+ \
++  "\274\344\200\216\0\274\344\377\1\0\274\344\310\202\377\377\377\0\1\0"=
+ \
++  "\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\34=
+4" \
++  "`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\204\0=
+" \
++  "\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344\210\204\0\274=
+" \
++  "\344\377\1\0\274\344\20\205\377\377\377\0\1\0\274\344\340\203\0\274\3=
+44" \
++  "\377\1\0\274\344\270\202\377\377\377\0\1\0\274\344\310\216\0\274\344"=
+ \
++  "\377\1\0\274\344\200\202\377\377\377\0\1\0\274\344\250\203\0\274\344"=
+ \
++  "\377\1\0\274\344\370\206\377\377\377\0\204\0\274\344\377\1\0\274\344"=
+ \
++  "\240\202\377\377\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344"=
+ \
++  "\30\205\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1\0\274\344\3=
+00" \
++  "\202\377\377\377\0\1\0\274\344h\216\0\274\344\377\1\0\274\344\340\202=
+" \
++  "\377\377\377\0\1\0\274\344H\204\0\274\344\377\1\0\274\344X\205\377\37=
+7" \
++  "\377\0\1\0\274\344\240\204\0\274\344\377\204\\o{\377\1\\o{\240\205\37=
+7" \
++  "\377\377\0\1\\o{X\204\\o{\377\1\\o{H\202\377\377\377\0\1\\o{\340\203"=
+ \
++  "\\o{\377\1\\o{\300\205\377\377\377\0\1\\o{8\204\\o{\377\1\\o{h\202\37=
+7" \
++  "\377\377\0\1\\o{\300\216\\o{\377\1\\o{\210\202\377\377\377\0\1\\o{\24=
+0" \
++  "\204\\o{\377\206\377\377\377\0\1\\o{\370\203\\o{\377\1\\o{\250\202\37=
+7" \
++  "\377\377\0\1\0\274\344\200\216\0\274\344\377\1\0\274\344\310\202\377"=
+ \
++  "\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\37=
+7" \
++  "\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0"=
+ \
++  "\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\34=
+4" \
++  "\210\204\0\274\344\377\1\0\274\344\20\205\377\377\377\0\1\0\274\344\3=
+40" \
++  "\203\0\274\344\377\1\0\274\344\270\202\377\377\377\0\1\0\274\344\310"=
+ \
++  "\216\0\274\344\377\1\0\274\344\200\202\377\377\377\0\1\0\274\344\250"=
+ \
++  "\203\0\274\344\377\1\0\274\344\370\206\377\377\377\0\204\0\274\344\37=
+7" \
++  "\1\0\274\344\240\202\377\377\377\0\1\0\274\344\210\204\0\274\344\377"=
+ \
++  "\1\0\274\344\30\205\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1=
+" \
++  "\0\274\344\300\202\377\377\377\0\1\0\274\344h\216\0\274\344\377\1\0\2=
+74" \
++  "\344\340\202\377\377\377\0\1\0\274\344H\204\0\274\344\377\1\0\274\344=
+" \
++  "X\205\377\377\377\0\1\0\274\344\240\204\0\274\344\377\204\\o{\377\1\\=
+" \
++  "o{\240\205\377\377\377\0\1\\o{X\204\\o{\377\1\\o{H\202\377\377\377\0"=
+ \
++  "\1\\o{\340\203\\o{\377\1\\o{\300\205\377\377\377\0\1\\o{8\204\\o{\377=
+" \
++  "\1\\o{h\202\377\377\377\0\1\\o{\300\204\\o{\377\212\\o{\370\1\\o{\203=
+" \
++  "\202\377\377\377\0\1\\o{\240\204\\o{\377\206\377\377\377\0\1\\o{\370"=
+ \
++  "\203\\o{\377\1\\o{\250\202\377\377\377\0\1\0\274\344\200\204\0\274\34=
+4" \
++  "\377\1\0\274\344\371\211\0\274\344\370\1\0\274\344\301\202\377\377\37=
+7" \
++  "\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0"=
+ \
++  "\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\34=
+4" \
++  "`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344\210\20=
+4" \
++  "\0\274\344\377\1\0\274\344\20\205\377\377\377\0\1\0\274\344\340\203\0=
+" \
++  "\274\344\377\1\0\274\344\270\202\377\377\377\0\1\0\274\344\310\203\0"=
+ \
++  "\274\344\377\1\0\274\344\376\212\0\274\344\370\1\0\274\344|\202\377\3=
+77" \
++  "\377\0\1\0\274\344\250\203\0\274\344\377\1\0\274\344\370\206\377\377"=
+ \
++  "\377\0\204\0\274\344\377\1\0\274\344\240\202\377\377\377\0\1\0\274\34=
+4" \
++  "\210\204\0\274\344\377\1\0\274\344\30\205\377\377\377\0\1\0\274\344\3=
+40" \
++  "\203\0\274\344\377\1\0\274\344\300\202\377\377\377\0\1\0\274\344h\204=
+" \
++  "\0\274\344\377\1\0\274\344\371\211\0\274\344\370\1\0\274\344\331\202"=
+ \
++  "\377\377\377\0\1\0\274\344H\204\0\274\344\377\1\0\274\344X\205\377\37=
+7" \
++  "\377\0\1\0\274\344\240\204\0\274\344\377\1\\o{\364\203\\o{\377\1\\o{"=
+ \
++  "\267\205\377\377\377\0\1\\o{p\204\\o{\377\1\\o{<\202\377\377\377\0\1"=
+ \
++  "\\o{\340\203\\o{\377\1\\o{\300\205\377\377\377\0\1\\o{8\204\\o{\377\1=
+" \
++  "\\o{h\202\377\377\377\0\1\\o{\300\203\\o{\377\1\\o{\340\215\377\377\3=
+77" \
++  "\0\1\\o{\240\204\\o{\377\206\377\377\377\0\1\\o{\370\203\\o{\377\1\\"=
+ \
++  "o{\250\202\377\377\377\0\1\0\274\344\200\204\0\274\344\377\1\0\274\34=
+4" \
++  "\40\214\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202=
+" \
++  "\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\37=
+7" \
++  "\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0"=
+ \
++  "\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\205\377\377\377\0\1=
+" \
++  "\0\274\344\340\203\0\274\344\377\1\0\274\344\270\202\377\377\377\0\1"=
+ \
++  "\0\274\344\310\203\0\274\344\377\1\0\274\344\330\215\377\377\377\0\1"=
+ \
++  "\0\274\344\250\203\0\274\344\377\1\0\274\344\370\206\377\377\377\0\20=
+4" \
++  "\0\274\344\377\1\0\274\344\240\202\377\377\377\0\1\0\274\344\210\204"=
+ \
++  "\0\274\344\377\1\0\274\344\30\205\377\377\377\0\1\0\274\344\340\203\0=
+" \
++  "\274\344\377\1\0\274\344\300\202\377\377\377\0\1\0\274\344h\204\0\274=
+" \
++  "\344\377\1\0\274\3448\214\377\377\377\0\1\0\274\344H\204\0\274\344\37=
+7" \
++  "\1\0\274\344X\205\377\377\377\0\1\0\274\344\240\204\0\274\344\377\1\\=
+" \
++  "o{\306\203\\o{\377\2\\o{\373\\o{\31\204\377\377\377\0\1\\o{\323\203\\=
+" \
++  "o{\377\2\\o{\376\\o{\15\202\377\377\377\0\1\\o{\340\203\\o{\377\1\\o"=
+ \
++  "{\300\205\377\377\377\0\1\\o{=3D\204\\o{\377\1\\o{e\202\377\377\377\0=
+\1" \
++  "\\o{\275\203\\o{\377\1\\o{\346\215\377\377\377\0\1\\o{\240\204\\o{\37=
+7" \
++  "\206\377\377\377\0\1\\o{\370\203\\o{\377\1\\o{\250\202\377\377\377\0"=
+ \
++  "\1\0\274\344}\204\0\274\344\377\1\0\274\344&\214\377\377\377\0\1\0\27=
+4" \
++  "\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\2=
+04" \
++  "\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\204\0\274"=
+ \
++  "\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344\210\204\0\274\344=
+" \
++  "\377\1\0\274\344\20\205\377\377\377\0\1\0\274\344\346\203\0\274\344\3=
+77" \
++  "\1\0\274\344\265\202\377\377\377\0\1\0\274\344\305\203\0\274\344\377"=
+ \
++  "\1\0\274\344\336\215\377\377\377\0\1\0\274\344\245\203\0\274\344\377"=
+ \
++  "\2\0\274\344\372\0\274\344\3\205\377\377\377\0\204\0\274\344\377\1\0"=
+ \
++  "\274\344\240\202\377\377\377\0\1\0\274\344\205\204\0\274\344\377\1\0"=
+ \
++  "\274\344\36\205\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1\0\2=
+74" \
++  "\344\300\202\377\377\377\0\1\0\274\344e\204\0\274\344\377\1\0\274\344=
+" \
++  ">\214\377\377\377\0\1\0\274\344E\204\0\274\344\377\1\0\274\344^\205\3=
+77" \
++  "\377\377\0\1\0\274\344\240\204\0\274\344\377\1\\o{\225\204\\o{\377\5"=
+ \
++  "\\o{\241\\o{\33\377\377\377\0\\o{\16\\o{w\204\\o{\377\1\\o{\331\203\3=
+77" \
++  "\377\377\0\1\\o{\340\203\\o{\377\1\\o{\300\205\377\377\377\0\1\\o{\21=
+7" \
++  "\204\\o{\377\1\\o{>\202\377\377\377\0\1\\o{\226\204\\o{\377\1\\o{A\21=
+4" \
++  "\377\377\377\0\1\\o{\240\204\\o{\377\206\377\377\377\0\1\\o{\370\203"=
+ \
++  "\\o{\377\1\\o{\250\202\377\377\377\0\1\0\274\344V\204\0\274\344\377\1=
+" \
++  "\0\274\344\201\214\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\2=
+74" \
++  "\344@\202\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\2=
+02" \
++  "\377\377\377\0\1\0\274\344`\204\0\274\344\377\1\0\274\344@\202\377\37=
+7" \
++  "\377\0\1\0\274\344\210\204\0\274\344\377\1\0\274\344\20\204\377\377\3=
+77" \
++  "\0\1\0\274\344<\204\0\274\344\377\1\0\274\344\217\202\377\377\377\0\1=
+" \
++  "\0\274\344\241\204\0\274\344\377\1\0\274\3449\214\377\377\377\0\1\0\2=
+74" \
++  "\344\201\204\0\274\344\377\1\0\274\344Y\205\377\377\377\0\204\0\274\3=
+44" \
++  "\377\1\0\274\344\240\202\377\377\377\0\1\0\274\344^\204\0\274\344\377=
+" \
++  "\1\0\274\344y\205\377\377\377\0\1\0\274\344\340\203\0\274\344\377\1\0=
+" \
++  "\274\344\300\202\377\377\377\0\1\0\274\344>\204\0\274\344\377\1\0\274=
+" \
++  "\344\230\214\377\377\377\0\1\0\274\344\36\204\0\274\344\377\2\0\274\3=
+44" \
++  "\266\0\274\344\2\204\377\377\377\0\1\0\274\344\240\204\0\274\344\377"=
+ \
++  "\1\\o{E\205\\o{\377\3\\o{\374\\o{\302\\o{\364\205\\o{\377\1\\o{\212\2=
+03" \
++  "\377\377\377\0\1\\o{\340\203\\o{\377\1\\o{\352\204\\o{\250\1\\o{\320"=
+ \
++  "\204\\o{\377\2\\o{\376\\o{\16\202\377\377\377\0\1\\o{e\204\\o{\377\2"=
+ \
++  "\\o{\374\\o{\271\206\\o{\250\2\\o{\213\\o{.\203\377\377\377\0\1\\o{\2=
+40" \
++  "\204\\o{\377\206\377\377\377\0\1\\o{\370\203\\o{\377\1\\o{\250\202\37=
+7" \
++  "\377\377\0\1\0\274\344%\205\0\274\344\377\1\0\274\344\313\206\0\274\3=
+44" \
++  "\250\3\0\274\344\232\0\274\344F\0\274\344\2\202\377\377\377\0\1\0\274=
+" \
++  "\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\2=
+04" \
++  "\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\204\0\274"=
+ \
++  "\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344\210\204\0\274\344=
+" \
++  "\377\1\0\274\344\255\203\0\274\344\250\2\0\274\344\267\0\274\344\373"=
+ \
++  "\204\0\274\344\377\1\0\274\344_\202\377\377\377\0\1\0\274\344s\204\0"=
+ \
++  "\274\344\377\2\0\274\344\373\0\274\344\267\206\0\274\344\250\2\0\274"=
+ \
++  "\344\210\0\274\344+\203\377\377\377\0\1\0\274\344S\204\0\274\344\377"=
+ \
++  "\2\0\274\344\376\0\274\344\277\204\0\274\344\250\204\0\274\344\377\1"=
+ \
++  "\0\274\344\240\202\377\377\377\0\1\0\274\344-\205\0\274\344\377\1\0\2=
+74" \
++  "\344\310\204\0\274\344\250\1\0\274\344\365\203\0\274\344\377\1\0\274"=
+ \
++  "\344\300\202\377\377\377\0\2\0\274\344\16\0\274\344\376\204\0\274\344=
+" \
++  "\377\1\0\274\344\323\206\0\274\344\250\3\0\274\344\236\0\274\344O\0\2=
+74" \
++  "\344\5\203\377\377\377\0\1\0\274\344\354\204\0\274\344\377\1\0\274\34=
+4" \
++  "\336\204\0\274\344\250\1\0\274\344\337\204\0\274\344\377\2\377\377\37=
+7" \
++  "\0\\o{\236\213\\o{\377\2\\o{\333\\o{\12\203\377\377\377\0\1\\o{\340\2=
+15" \
++  "\\o{\377\1\\o{\251\203\377\377\377\0\2\\o{\26\\o{\355\214\\o{\377\2\\=
+" \
++  "o{\375\\o{\34\202\377\377\377\0\1\\o{\240\204\\o{\377\206\377\377\377=
+" \
++  "\0\1\\o{\370\203\\o{\377\1\\o{\250\202\377\377\377\0\2\0\274\344\1\0"=
+ \
++  "\274\344\302\215\0\274\344\377\1\0\274\344Z\202\377\377\377\0\1\0\274=
+" \
++  "\344`\204\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\2=
+04" \
++  "\0\274\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344`\204\0\274"=
+ \
++  "\344\377\1\0\274\344@\202\377\377\377\0\1\0\274\344\210\215\0\274\344=
+" \
++  "\377\2\0\274\344\354\0\274\344\26\202\377\377\377\0\2\0\274\344\37\0"=
+ \
++  "\274\344\362\214\0\274\344\377\2\0\274\344\373\0\274\344\26\202\377\3=
+77" \
++  "\377\0\2\0\274\344\16\0\274\344\343\215\0\274\344\377\1\0\274\344\240=
+" \
++  "\202\377\377\377\0\2\0\274\344\2\0\274\344\311\215\0\274\344\377\1\0"=
+ \
++  "\274\344\300\203\377\377\377\0\1\0\274\344\253\215\0\274\344\377\1\0"=
+ \
++  "\274\344r\203\377\377\377\0\1\0\274\344\213\216\0\274\344\377\3\377\3=
+77" \
++  "\377\0\\o{\17\\o{\335\211\\o{\377\2\\o{\367\\o{<\204\377\377\377\0\1"=
+ \
++  "\\o{\340\214\\o{\377\2\\o{\350\\o{\23\204\377\377\377\0\1\\o{]\215\\"=
+ \
++  "o{\377\1\\o{n\202\377\377\377\0\1\\o{\232\203\\o{\377\1\\o{\372\206\3=
+77" \
++  "\377\377\0\1\\o{\362\203\\o{\377\1\\o{\242\203\377\377\377\0\2\0\274"=
+ \
++  "\344&\0\274\344\367\214\0\274\344\377\1\0\274\344\256\202\377\377\377=
+" \
++  "\0\1\0\274\344Z\204\0\274\344\377\1\0\274\344:\202\377\377\377\0\1\0"=
+ \
++  "\274\344Z\204\0\274\344\377\1\0\274\344:\202\377\377\377\0\1\0\274\34=
+4" \
++  "Z\204\0\274\344\377\1\0\274\344:\202\377\377\377\0\1\0\274\344\202\21=
+5" \
++  "\0\274\344\377\1\0\274\344X\204\377\377\377\0\1\0\274\344g\215\0\274"=
+ \
++  "\344\377\1\0\274\344f\203\377\377\377\0\1\0\274\344H\215\0\274\344\37=
+7" \
++  "\1\0\274\344\232\203\377\377\377\0\2\0\274\344+\0\274\344\371\214\0\2=
+74" \
++  "\344\377\1\0\274\344\272\203\377\377\377\0\2\0\274\344\27\0\274\344\3=
+55" \
++  "\214\0\274\344\377\1\0\274\344\306\203\377\377\377\0\2\0\274\344\11\0=
+" \
++  "\274\344\333\214\0\274\344\377\1\0\274\344\372\202\377\377\377\0\2\\"=
+ \
++  "o{\16\\o{\235\207\\o{\377\2\\o{\307\\o{(\205\377\377\377\0\1\\o{\340"=
+ \
++  "\213\\o{\377\2\\o{\324\\o{/\206\377\377\377\0\2\\o{r\\o{\366\213\\o{"=
+ \
++  "\377\1\\o{9\202\377\377\377\0\1\\o{Q\203\\o{\377\1\\o{\261\206\377\37=
+7" \
++  "\377\0\1\\o{\251\203\\o{\377\1\\o{Y\204\377\377\377\0\2\0\274\344E\0"=
+ \
++  "\274\344\343\213\0\274\344\377\1\0\274\344y\202\377\377\377\0\2\0\274=
+" \
++  "\344\26\0\274\344\373\202\0\274\344\377\2\0\274\344\353\0\274\344\5\2=
+02" \
++  "\377\377\377\0\2\0\274\344\26\0\274\344\373\202\0\274\344\377\2\0\274=
+" \
++  "\344\353\0\274\344\5\202\377\377\377\0\2\0\274\344\26\0\274\344\373\2=
+02" \
++  "\0\274\344\377\2\0\274\344\353\0\274\344\5\202\377\377\377\0\1\0\274"=
+ \
++  "\344=3D\213\0\274\344\377\2\0\274\344\365\0\274\344l\205\377\377\377\=
+0" \
++  "\3\0\274\344\1\0\274\344w\0\274\344\370\213\0\274\344\377\1\0\274\344=
+" \
++  "1\204\377\377\377\0\2\0\274\344`\0\274\344\360\213\0\274\344\377\1\0"=
+ \
++  "\274\344Q\204\377\377\377\0\2\0\274\344J\0\274\344\346\213\0\274\344"=
+ \
++  "\377\1\0\274\344q\204\377\377\377\0\2\0\274\3447\0\274\344\331\213\0"=
+ \
++  "\274\344\377\1\0\274\344\221\204\377\377\377\0\2\0\274\344'\0\274\344=
+" \
++  "\311\213\0\274\344\377\1\0\274\344\261\204\377\377\377\0\10\\o{E\\o{"=
+ \
++  "\224\\o{\303\\o{\353\\o{\313\\o{\231\\o{]\\o{\2\206\377\377\377\0\1\\=
+" \
++  "o{\340\210\\o{\377\4\\o{\353\\o{\272\\o{{\\o{\7\210\377\377\377\0\4\\=
+" \
++  "o{&\\o{\230\\o{\307\\o{\360\206\\o{\370\2\\o{\334\\o{\201\203\377\377=
+" \
++  "\377\0\5\\o{\6\\o{\217\\o{\344\\o{\262\\o{1\206\377\377\377\0\5\\o{,"=
+ \
++  "\\o{\253\\o{\337\\o{\217\\o{\11\205\377\377\377\0\4\0\274\344\17\0\27=
+4" \
++  "\344\204\0\274\344\273\0\274\344\350\206\0\274\344\370\3\0\274\344\35=
+3" \
++  "\0\274\344\233\0\274\344\26\203\377\377\377\0\4\0\274\344i\0\274\344"=
+ \
++  "\326\0\274\344\312\0\274\344U\204\377\377\377\0\4\0\274\344i\0\274\34=
+4" \
++  "\326\0\274\344\312\0\274\344U\204\377\377\377\0\4\0\274\344g\0\274\34=
+4" \
++  "\320\0\274\344\305\0\274\344T\203\377\377\377\0\3\0\274\344\1\0\274\3=
+44" \
++  "\210\0\274\344\345\206\0\274\344\377\4\0\274\344\367\0\274\344\310\0"=
+ \
++  "\274\344\224\0\274\344$\210\377\377\377\0\4\0\274\344*\0\274\344\232"=
+ \
++  "\0\274\344\310\0\274\344\361\206\0\274\344\370\2\0\274\344\332\0\274"=
+ \
++  "\344|\206\377\377\377\0\4\0\274\344\34\0\274\344\222\0\274\344\307\0"=
+ \
++  "\274\344\365\206\0\274\344\377\3\0\274\344\351\0\274\344\217\0\274\34=
+4" \
++  "\6\205\377\377\377\0\4\0\274\344\21\0\274\344\210\0\274\344\300\0\274=
+" \
++  "\344\360\206\0\274\344\377\3\0\274\344\361\0\274\344\233\0\274\344\23=
+" \
++  "\205\377\377\377\0\4\0\274\344\11\0\274\344{\0\274\344\267\0\274\344"=
+ \
++  "\345\206\0\274\344\370\3\0\274\344\357\0\274\344\243\0\274\344!\205\3=
+77" \
++  "\377\377\0\4\0\274\344\3\0\274\344m\0\274\344\264\0\274\344\345\206\0=
+" \
++  "\274\344\377\3\0\274\344\373\0\274\344\262\0\274\3441\222\377\377\377=
+" \
++  "\0\1\\o{\340\203\\o{\377\1\\o{\300\377\377\377\377\0\330\377\377\377"=
+ \
++  "\0\1\\o{\340\203\\o{\377\1\\o{\300\377\377\377\377\0\330\377\377\377"=
+ \
++  "\0\1\\o{\340\203\\o{\377\1\\o{\300\377\377\377\377\0\330\377\377\377"=
+ \
++  "\0\1\\o{\340\203\\o{\377\1\\o{\300\377\377\377\377\0\330\377\377\377"=
+ \
++  "\0\1\\o{\340\203\\o{\377\1\\o{\300\377\377\377\377\0\330\377\377\377"=
+ \
++  "\0\1\\o{\333\203\\o{\377\1\\o{\273\377\377\377\377\0\330\377\377\377"=
+ \
++  "\0\1\\o{\222\203\\o{\377\1\\o{r\377\377\377\377\0\330\377\377\377\0\5=
+" \
++  "\\o{!\\o{\247\\o{\347\\o{\233\\o{\23\377\377\377\377\0\306\377\377\37=
+7" \
++  "\0")
+=20
+=20
+diff --git a/recipes/psplash/psplash.inc b/recipes/psplash/psplash.inc
+index 86174a3..b7dd6e8 100644
+--- a/recipes/psplash/psplash.inc
++++ b/recipes/psplash/psplash.inc
+@@ -9,7 +9,7 @@ RCONFLICTS_${PN} =3D "exquisite"
+=20
+ SRCREV =3D "422"
+ PV =3D "0.0+svnr${SRCPV}"
+-PR =3D "r28"
++PR =3D "r29"
+=20
+ # You can create your own pslash-poky-img.h by doing
+ # ./make-image-header.sh <file>.png POKY
+--=20
+1.6.3.3
+
 
 
