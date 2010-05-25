@@ -1,46 +1,45 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <d.moussaud@gmail.com>) id 1OGtQl-0002tA-Tg
+	(envelope-from <martin.jansa@gmail.com>) id 1OGuII-0000cG-Vf
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 14:40:25 +0200
-Received: by fxm9 with SMTP id 9so1039242fxm.6
+	Tue, 25 May 2010 15:35:44 +0200
+Received: by fxm9 with SMTP id 9so1099622fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 05:36:17 -0700 (PDT)
+	Tue, 25 May 2010 06:31:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=NE1a0CTaISDSl8O+/qwaxJL1VbDDxytZXVDORgAxEMM=;
-	b=Kj9fdHDrIV0JCKbn1OzQeRLswtmtjxIMNrwZZHKSY4FH+lcEkumG8sQ67fbjp0ec5v
-	qysk4FFOmx6/N1o9eoVdZRLbSsXfS8MfJFa7tbCgEy/+UpnmT1YLruvfwSinbdGS8Oo5
-	KRxhZubcs/zyqdoNVJGnfaPtjftMTeg0Cm8Fg=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=Lf6pFf9FCKe/uwgJEw/YDges3OvHFiei9gZ7RiYATT8=;
+	b=FHoZnE51phng6hv1x1eEmxCqsUEP5pPu3gCoJ4o301uYA+O0RwrFCjbeyAz/xfhjPW
+	MCHSoLmOxJ7Y3OyYidJ0zyF7n5X5s0BV1RgcH1B6bDVK2wC1ZMINaPhbazJxJ6DnWkaD
+	NcMWc+BlCZWnB/qg/t8deiDyA+Pra4kS96c6M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=bJt9HUpHx3upylgfY0jsPa/70Qxn6trLErmMV6Q4q3zu+4Rj7G1r+9OqFRHM9lzdCi
-	fw3FlpiNucXHDSPF1QxRoadSsaFTNOuQa4H+FqrXToohT9nK6nDKsOhmye0Srk9vAMEG
-	kf3vC+aFeeHfOFvhCGoKO4CCu2qUYCKCYVPeA=
-Received: by 10.204.141.133 with SMTP id m5mr2719195bku.91.1274790977124; Tue, 
-	25 May 2010 05:36:17 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.204.115.212 with HTTP; Tue, 25 May 2010 05:35:57 -0700 (PDT)
-In-Reply-To: <AANLkTik6gpgWgU6ETC-aEYyyuRnAhu1fRlLU-zDA9dDU@mail.gmail.com>
-References: <mailman.1729.1265722552.14961.openembedded-devel@lists.openembedded.org>
-	<4B718115.1010104@tycoelectronics.com>
-	<AANLkTik6gpgWgU6ETC-aEYyyuRnAhu1fRlLU-zDA9dDU@mail.gmail.com>
-From: David MOUSSAUD <d.moussaud@gmail.com>
-Date: Tue, 25 May 2010 14:35:57 +0200
-Message-ID: <AANLkTindjfaFPaMSq05FM4ZDocJrxw2eLNMyWY0rYhPk@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=BHwmaaWRAI9MUnnVCELJ6/X9m1keBDBxeB2L/oR6CohHTyzroP28znLusksJBsk9cE
+	dysKkUre43Y+jlBlyIzWPgJueQsYY0s6ZhsRlg58KaePGIxme11xfQj+FDDA3u7OcPgj
+	lc/iFmlaMzQy3WOF4Ygwbt4JKP1TsAFhXkC/U=
+Received: by 10.223.92.152 with SMTP id r24mr6225751fam.74.1274794296070;
+	Tue, 25 May 2010 06:31:36 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u12sm24844525fah.4.2010.05.25.06.31.35
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 25 May 2010 06:31:35 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Date: Tue, 25 May 2010 15:30:24 +0200
+Message-Id: <1274794225-16222-3-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1274794225-16222-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1274794225-16222-1-git-send-email-Martin.Jansa@gmail.com>
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: d.moussaud@gmail.com
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] error trying to build parted 1.8.8 : configure.ac:173: error: AC_REQUIRE: circular dependency of AC_GNU_SOURCE
+Subject: [PATCH 2/3] linux-openmoko: remove linux-openmoko-devel as it will be merged with linux-openmoko-shr-devel to linux-openmoko_2.6.29
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,185 +53,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 12:40:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 May 2010 13:35:44 -0000
 
-On Wed, May 19, 2010 at 6:24 PM, David MOUSSAUD <d.moussaud@gmail.com> wrot=
-e:
-> Hi,
->
-> that patch works for me.
->
->
-> diff --git a/recipes/parted/files/extensions-m4.patch
-> b/recipes/parted/files/extensions-m4.patch
-> new file mode 100644
-> index 0000000..1ec53f7
-> --- /dev/null
-> +++ b/recipes/parted/files/extensions-m4.patch
-> @@ -0,0 +1,26 @@
-> +diff -Nru parted-1.8.8/m4/extensions.m4 parted-1.8.8.patched/m4/extensio=
-ns.m4
-> +--- parted-1.8.8/m4/extensions.m4 =A0 =A0 =A02006-10-12 10:01:18.0000000=
-00 +0200
-> ++++ parted-1.8.8.patched/m4/extensions.m4 =A0 =A0 =A02010-05-19 18:14:35=
-.000000000 +0200
-> +@@ -1,4 +1,4 @@
-> +-# serial 4 =A0-*- Autoconf -*-
-> ++# serial 5 =A0-*- Autoconf -*-
-> + # Enable extensions on systems that normally disable them.
-> +
-> + # Copyright (C) 2003, 2006 Free Software Foundation, Inc.
-> +@@ -16,6 +16,7 @@
-> + # ------------------------
-> + # Enable extensions on systems that normally disable them,
-> + # typically due to standards-conformance issues.
-> ++m4_ifdef([AC_USE_SYSTEM_EXTENSIONS], [], [
-> + AC_DEFUN([AC_USE_SYSTEM_EXTENSIONS],
-> + [
-> + =A0 AC_BEFORE([$0], [AC_COMPILE_IFELSE])
-> +@@ -48,7 +49,7 @@
-> + =A0 =A0 AC_DEFINE([__EXTENSIONS__])
-> + =A0 AC_DEFINE([_POSIX_PTHREAD_SEMANTICS])
-> + =A0 AC_DEFINE([_TANDEM_SOURCE])
-> +-])
-> ++])])
-> +
-> + # gl_USE_SYSTEM_EXTENSIONS
-> + # ------------------------
-> diff --git a/recipes/parted/parted_1.8.8.bb b/recipes/parted/parted_1.8.8=
-.bb
-> index 2890e23..82369f1 100644
-> --- a/recipes/parted/parted_1.8.8.bb
-> +++ b/recipes/parted/parted_1.8.8.bb
-> @@ -3,11 +3,12 @@ HOMEPAGE =3D "http://www.gnu.org/software/parted/parted=
-.html"
-> =A0LICENSE =3D "GPLv3"
-> =A0SECTION =3D "console/tools"
-> =A0DEPENDS =3D "readline util-linux-ng"
-> -PR =3D "r3"
-> +PR =3D "r4"
->
-> =A0SRC_URI =3D "${GNU_MIRROR}/parted/parted-${PV}.tar.gz \
-> =A0 =A0 =A0 =A0 =A0 file://use_llseek_syscall.patch;patch=3D1 \
-> =A0 =A0 =A0 =A0 =A0 file://parted-1.8.x.patch;patch=3D1 \
-> + =A0 =A0 =A0 =A0 =A0file://extensions-m4.patch;patch=3D1 \
-> =A0"
->
-> =A0EXTRA_OECONF =3D "--disable-Werror ac_cv_func_calloc_0_nonnull=3Dyes"
->
->
-> regards,
-> David
->
-> On Tue, Feb 9, 2010 at 5:36 PM, Jay Snyder
-> <jay.snyder@tycoelectronics.com> wrote:
->> I'm trying to build parted 1.8.8 on OE:
->>
->>
->> NOTE: Running task 551 of 565 (ID: 3,
->> /home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, do_unpa=
-ck)
->> NOTE: Running task 552 of 565 (ID: 13,
->> /home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb,
->> do_distribute_sources)
->> NOTE: Unpacking ../downloads/parted-1.8.8.tar.gz to
->> tmp/work/i686-angstrom-linux/parted-1.8.8-r2/
->> =A0NOTE: Running task 553 of 565 (ID: 4,
->> /home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb, do_patc=
-h)
->> =A0 =A0 =A0 =A0 =A0 NOTE: Applying patch 'use_llseek_syscall.patch'
->> (../2009-12-04/openembedded/recipes/parted/files/use_llseek_syscall.patc=
-h)
->>
->> NOTE: Applying patch 'parted-1.8.x.patch'
->> (../2009-12-04/openembedded/recipes/parted/files/parted-1.8.x.patch)
->>
->> NOTE: Running task 554 of 565 (ID: 5,
->> /home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb,
->> do_configure) =A0 =A0 =A0 =A0 ERROR: function do_configure failed
->>
->> ERROR: log data follows
->> (/home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/temp/log.do=
-_configure.24731)
->>
->> | automake (GNU automake) 1.10.2
->>
->> | Copyright (C) 2008 Free Software Foundation, Inc.
->>
->> | License GPLv2+: GNU GPL version 2 or later
->> <http://gnu.org/licenses/gpl.html>
->>
->> | This is free software: you are free to change and redistribute it.
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0 =A0 =A0 | There is NO WARRANTY, to
->> the extent permitted by law.
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|
->>
->> | Written by Tom Tromey <tromey@redhat.com>
->>
->> | =A0 =A0 =A0 =A0and Alexandre Duret-Lutz <adl@gnu.org>.
->>
->> | AUTOV is 1.10
->>
->> | NOTE: Executing autoreconf --verbose --install --force --exclude=3Daut=
-opoint
->> -I
->> /home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8=
-/m4/
->> -I/home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal-1.10 =
--I
->> /home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal
->> | autoreconf: Entering directory `.'
->> | autoreconf: running: aclocal -I
->> /home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8=
-/m4/
->> -I /home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal-1.10=
- -I
->> /home/oe/build/tmp/staging/i686-angstrom-linux/usr/share/aclocal --force=
- -I
->> m4
->> | configure.ac:173: error: AC_REQUIRE: circular dependency of AC_GNU_SOU=
-RCE
->> |
->> /home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8=
-/m4/extensions.m4:19:
->> AC_USE_SYSTEM_EXTENSIONS is expanded from...
->> | ../../lib/autoconf/specific.m4:332: AC_GNU_SOURCE is expanded from...
->> |
->> /home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/parted-1.8.8=
-/m4/gnulib-comp.m4:23:
->> gl_EARLY is expanded from...
->> | configure.ac:173: the top level
->> | autom4te: /home/oe/build/tmp/staging/x86_64-linux/usr/bin/m4 failed wi=
-th
->> exit status: 1
->> | aclocal: autom4te failed with exit status: 1
->> | autoreconf: aclocal failed with exit status: 1
->> | FATAL: autoreconf execution failed.
->> NOTE: Task failed:
->> /home/oe/build/tmp/work/i686-angstrom-linux/parted-1.8.8-r2/temp/log.do_=
-configure.24731
->> ERROR: TaskFailed event exception, aborting
->> ERROR: Build of
->> /home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb do_confi=
-gure
->> failed
->> ERROR: Task 5
->> (/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb,
->> do_configure) failed
->> NOTE: Tasks Summary: Attempted 553 tasks of which 548 didn't need to be
->> rerun and 1 failed.
->> ERROR: '/home/oe/2009-12-04/openembedded/recipes/parted/parted_1.8.8.bb'
->> failed
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ .../linux/linux-openmoko-devel/defconfig-oe.patch  |   12 -------
+ recipes/linux/linux-openmoko-devel_git.bb          |   34 --------------------
+ 2 files changed, 0 insertions(+), 46 deletions(-)
+ delete mode 100644 recipes/linux/linux-openmoko-devel/defconfig-oe.patch
+ delete mode 100644 recipes/linux/linux-openmoko-devel_git.bb
+
+diff --git a/recipes/linux/linux-openmoko-devel/defconfig-oe.patch b/recipes/linux/linux-openmoko-devel/defconfig-oe.patch
+deleted file mode 100644
+index 3f65387..0000000
+--- a/recipes/linux/linux-openmoko-devel/defconfig-oe.patch
++++ /dev/null
+@@ -1,12 +0,0 @@
+---- gta02-packaging-defconfig	2009-01-12 13:09:33.000000000 +0000
+-+++ defconfig-oe	2009-01-12 13:18:23.000000000 +0000
+-@@ -337,9 +337,6 @@
+- #
+- # At least one emulation must be selected
+- #
+--CONFIG_FPE_NWFPE=y
+--# CONFIG_FPE_NWFPE_XP is not set
+--# CONFIG_FPE_FASTFPE is not set
+- 
+- #
+- # Userspace binary formats
+diff --git a/recipes/linux/linux-openmoko-devel_git.bb b/recipes/linux/linux-openmoko-devel_git.bb
+deleted file mode 100644
+index 9d4aa22..0000000
+--- a/recipes/linux/linux-openmoko-devel_git.bb
++++ /dev/null
+@@ -1,34 +0,0 @@
+-require linux.inc
+-require linux-openmoko.inc
+-
+-DEFAULT_PREFERENCE = "-1"
+-
+-KERNEL_RELEASE = "2.6.29"
+-KERNEL_VERSION = "${KERNEL_RELEASE}"
+-
+-SRCREV = "a15608f241a40b41fed5bffe511355c2067c4e88"
+-OEV = "oe1"
+-PV = "${KERNEL_RELEASE}-${OEV}+gitr${SRCPV}"
+-PR = "r2"
+-
+-SRC_URI = "\
+-  git://git.openmoko.org/git/kernel.git;protocol=git;branch=andy-tracking \
+-"
+-S = "${WORKDIR}/git"
+-
+-CONFIG_NAME_om-gta01 = "gta01_moredrivers_defconfig"
+-CONFIG_NAME_om-gta02 = "gta02_packaging_defconfig"
+-
+-do_configure_prepend() {
+-
+-        # Rename getline in ./scripts/unifdef.c
+-        # Kernels up to 2.6.29 are currently failing to build unifdef.c,
+-        # clashing with exposed getline() from <stdio.h>
+-        # see https://patchwork.kernel.org/patch/11166/
+-        # committed in 2.6.29 (commit d15bd1067b1fcb2b7250d22bc0c7c7fea0b759f7)
+-
+-        sed -i -e 's/getline/parseline/g' ${S}/scripts/unifdef.c
+-
+-	install -m 644 ./arch/arm/configs/${CONFIG_NAME} ${WORKDIR}/defconfig-oe
+-	cat ${WORKDIR}/defconfig-oe.patch | patch -p0 -d ${WORKDIR}
+-}
+-- 
+1.7.1
+
 
 
