@@ -1,44 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <daniel.xntian@gmail.com>) id 1OGrXu-0007mD-1y
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OGrhk-0002XF-00
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 12:39:38 +0200
-Received: by vws20 with SMTP id 20so2986133vws.6
+	Tue, 25 May 2010 12:49:49 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o4PAjfZg022189
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 03:35:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=tYnYljEN5qVZ+0T6IhVNPC/C0VG1bJljg1tRFsF/EN4=;
-	b=emeUWHdTlmqk6k3mnrlx3+UlGT5j5qGFumwm8nqTUQ4aMEp/ZQPDrAQcUY6j60kASA
-	eGMOo2+IZCeeBsTNv3+I2K8NY1S9MYHN67zsUt2UJwNKmLjGFIg/1d8uMHQd4M1+Hlls
-	M+gZShm7tK9siO3llR/jUliaLa5HV4NyWS3fA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=gnh3Ew+2i37uSo/qzGBE3480+mu6u4uqpZ5Kc5i1jqM/56+L2/f+s8Vl9dJj7TH4ZC
-	fHQiLpq+LT+hld57ybHkbhUlViQreBdEV6Xie9lvdHYLlPjDv2A6wRY6aHheMFgjznfR
-	vLNk0//5EceMUJ79ZkTnHNR+euUj4bjp7wL+s=
-MIME-Version: 1.0
-Received: by 10.220.60.136 with SMTP id p8mr4819231vch.270.1274783730531; Tue, 
-	25 May 2010 03:35:30 -0700 (PDT)
-Received: by 10.220.100.140 with HTTP; Tue, 25 May 2010 03:35:30 -0700 (PDT)
-In-Reply-To: <AANLkTin63ATwjRTZm8tEbFXlhCxuUVGCN58hNhoHTKLD@mail.gmail.com>
-References: <AANLkTin63ATwjRTZm8tEbFXlhCxuUVGCN58hNhoHTKLD@mail.gmail.com>
-Date: Tue, 25 May 2010 18:35:30 +0800
-Message-ID: <AANLkTilAmc5ep8oz5DElMuUJXkeclTzGetGmWeaZ5e4n@mail.gmail.com>
-From: daniel tian <daniel.xntian@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: daniel.xntian@gmail.com
+	Tue, 25 May 2010 11:45:41 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 21921-05 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 May 2010 11:45:37 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o4PAjauU022183
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 25 May 2010 11:45:36 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1273141339.5743.82.camel@rex>
+References: <1273141339.5743.82.camel@rex>
+Date: Tue, 25 May 2010 11:45:35 +0100
+Message-ID: <1274784335.1272.8758.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_05,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libglib conflict with other lib packages
+Subject: New e.V. members - Last Call
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 10:39:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 May 2010 10:49:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-hi, guys:
-=A0 =A0I wanna port ebook reader "fbreader" from OpenEmbedded to poky,
-but when installing fbreader package(in my board), several packages
-missed. So I copy the libgio-2.0-0, libgobject, libgthread ipk files
-to my board. But there are some files has already installed by
-libglib. The install processing is not allowed. When i write
---force-overwrite, the rootfs can not be bring up again.
-=A0 Here is the error message when install libgthread:
+On Thu, 2010-05-06 at 11:22 +0100, Richard Purdie wrote:
+> Hi,
+> 
+> We're going to have a drive for new e.V. members since there are a lot
+> of people using OE who are not part of our official body (the e.V.).
+> Membership has advantages like being able to vote on e.V. issues and
+> groups like the TSC.
+> 
+> If there is anyone interested in becoming a member please let me know
+> within the next week. We'll then go through the procedure for accepting
+> new members.
 
-Installing libgthread-2.0-0 (2.24.0-r4.5) to root...
-Collected errors:
-=A0* check_data_file_clashes: Package libgthread-2.0-0 wants to install
-file /usr/lib/libgthread-2.0.so.0
-=A0 =A0 =A0 =A0But that file is already provided by package =A0*
-check_data_file_clashes: libglib-2.0-0
-=A0* opkg_install_cmd: Cannot install package libgthread-2.0-0.
+I've been travelling so I'm a little adrift with this. Are there any
+other people who'd like to become members?
 
-I just wonder whether somebody has already ported the fbreader to
-poky, or it is conflicted with other packages, so it's forbidding
-area.
+I expect we'll be starting the process for accepting new members within
+the next few days so speak now! :)
 
-Please give some advice, anything is appreciated.
-thank you very much.
-=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
- =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0daniel
+Cheers,
+
+Richard
+
 
 
