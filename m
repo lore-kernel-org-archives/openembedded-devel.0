@@ -1,41 +1,27 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-68.nebula.fi ([83.145.220.68])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OGqS7-0004CP-Dk for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 11:29:36 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OGqO8-00006Z-Ow for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 11:25:28 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 11:25:28 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <henri.bragge@dcombus.com>) id 1OGqvZ-0005SB-ED
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 25 May 2010 12:00:03 +0200
+Received: from [100.100.100.68] (unknown [83.150.95.26])
+	by smtp-68.nebula.fi (Postfix) with ESMTP id 2224832B08DD
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 11:25:28 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 25 May 2010 12:54:00 +0300 (EEST)
+Message-ID: <4BFB9E89.30206@dcombus.com>
+Date: Tue, 25 May 2010 12:55:21 +0300
+From: Henri Bragge <henri.bragge@dcombus.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 25 May 2010 11:25:19 +0200
-Message-ID: <htg51v$c96$1@dough.gmane.org>
 References: <1274770197-13394-1-git-send-email-raj.khem@gmail.com>	<htftsf$ilt$1@dough.gmane.org>
 	<AANLkTin5VBoB7K2n6JakiKoN2kfIF9JFgB4_3Ut3-z5n@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
 In-Reply-To: <AANLkTin5VBoB7K2n6JakiKoN2kfIF9JFgB4_3Ut3-z5n@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 83.145.220.68
+X-SA-Exim-Mail-From: henri.bragge@dcombus.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] udev: Use udev.inc and add udevadm to udev pacakge instead of udev-utils
@@ -52,29 +38,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 09:29:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 25 May 2010 10:00:07 -0000
+Content-Type: text/plain; charset=us-ascii; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Grzegorz Toporek wrote:
+> Could you upload this patch to the git respiratory? Or this is just
+> non-official change?
+>
+> I'm trying now to compile base-image on angstrom distro and I got error from
+> udev_151.bb recipe. May be your patch will help with this...
+>
+> This is what I got:
+>
+> Does anyone met with this error? Sorry if it's not a right place to post.
+>
+>   
+I've another issue concerning acl and attr that udev-151 requires, and 
+I'm hoping that this patch would help me too. Btw I didn't have this 
+problem with bitbake 1.8.18, but 1.10 with newest oe fails with output:
 
-On 25-05-10 11:11, Grzegorz Toporek wrote:
-> '/home/grzesiek/tele/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/pkgconfig/glib-2.0.pc'
-> appears to be empty
+| make[4]: Entering directory 
+`.../tmp/work/armv5te-angstrom-linux-gnueabi/attr-2.4.44-r3/attr-2.4.44/attr'
+| ../include/install-sh -o hbragge -g 1002 -m 755 -d /usr/bin
+| chmod: changing permissions of `//usr/bin': Operation not permitted
+| make[4]: *** [install] Error 1
+| make[4]: Leaving directory 
+`.../tmp/work/armv5te-angstrom-linux-gnueabi/attr-2.4.44-r3/attr-2.4.44/attr'
+| make[3]: *** [attr-install] Error 2
+| make[3]: Leaving directory 
+`.../tmp/work/armv5te-angstrom-linux-gnueabi/attr-2.4.44-r3/attr-2.4.44'
+| FATAL: oe_runmake failed
+NOTE: package attr-2.4.44-r3: task do_install: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of .../openembedded/recipes/udev/attr_2.4.44.bb do_install 
+failed
+ERROR: Task 1641 (.../openembedded/recipes/udev/attr_2.4.44.bb, 
+do_install) failed with 256
 
-That seems to be the problem, does rebuilding glib-2.0 help?
+Building acl does the same thing. Something is wrong with environment 
+variables exported by acl/attr recipes, which should point in ${D} but 
+are now pointing into root. I'm executing bitbake from a makefile, which 
+also seems to have and effect on this (starting bitbake directly 
+preserves those variables).
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL+5d/MkyGM64RGpERAmBSAJ9bJhUwVftZY/vN8jPmyCVE3TSYUQCfeHcl
-rCpt16O0fh4CGOv2b50lja8=
-=A8Vo
------END PGP SIGNATURE-----
-
+- Henri
 
 
