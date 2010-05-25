@@ -1,47 +1,44 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <top.grzechu@gmail.com>) id 1OGr41-0000f3-KY
+	(envelope-from <daniel.xntian@gmail.com>) id 1OGrXu-0007mD-1y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 12:08:46 +0200
-Received: by fxm9 with SMTP id 9so882743fxm.6
+	Tue, 25 May 2010 12:39:38 +0200
+Received: by vws20 with SMTP id 20so2986133vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 03:04:39 -0700 (PDT)
+	Tue, 25 May 2010 03:35:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=xw0Ij+wxRRsiGFOoEO/93TSfmI9GbWB7CYt9syMNS+Y=;
-	b=fFdmQw1D3jHjIbpFGP6fZgmm+tWlIjsZHZacrbCBgywWtAmCc0P3hb66JAU8HFskcL
-	vcJ2auE2+6VzHr0WqYq3IpqrP95plYPF78RylZ3yQMYMt8/9w1n0iWBjROhwBPm4hB4t
-	uLBX1w5htX7+JnS8YcpsYDAA7XQ3TtuE48cB4=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=tYnYljEN5qVZ+0T6IhVNPC/C0VG1bJljg1tRFsF/EN4=;
+	b=emeUWHdTlmqk6k3mnrlx3+UlGT5j5qGFumwm8nqTUQ4aMEp/ZQPDrAQcUY6j60kASA
+	eGMOo2+IZCeeBsTNv3+I2K8NY1S9MYHN67zsUt2UJwNKmLjGFIg/1d8uMHQd4M1+Hlls
+	M+gZShm7tK9siO3llR/jUliaLa5HV4NyWS3fA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pnpnTYzc064NVOKMRVPSVxGeqWZHt/SnFdo4U5bkz7ltda7nsXtzFzjoCwDdXyZoBG
-	NUiHdLguVrGcvZjKErqTMxZz7cjgD8X4t9HNHldKHoGd3p6hIK98g/V6fZzpFJrNWsAp
-	qzkINDYg1DgmdWWpVZrBZb94rfydRu4eaSJlg=
+	:content-type:content-transfer-encoding;
+	b=gnh3Ew+2i37uSo/qzGBE3480+mu6u4uqpZ5Kc5i1jqM/56+L2/f+s8Vl9dJj7TH4ZC
+	fHQiLpq+LT+hld57ybHkbhUlViQreBdEV6Xie9lvdHYLlPjDv2A6wRY6aHheMFgjznfR
+	vLNk0//5EceMUJ79ZkTnHNR+euUj4bjp7wL+s=
 MIME-Version: 1.0
-Received: by 10.204.126.84 with SMTP id b20mr2419248bks.61.1274781878816; Tue, 
-	25 May 2010 03:04:38 -0700 (PDT)
-Received: by 10.204.76.131 with HTTP; Tue, 25 May 2010 03:04:38 -0700 (PDT)
-In-Reply-To: <htg51v$c96$1@dough.gmane.org>
-References: <1274770197-13394-1-git-send-email-raj.khem@gmail.com>
-	<htftsf$ilt$1@dough.gmane.org>
-	<AANLkTin5VBoB7K2n6JakiKoN2kfIF9JFgB4_3Ut3-z5n@mail.gmail.com>
-	<htg51v$c96$1@dough.gmane.org>
-Date: Tue, 25 May 2010 12:04:38 +0200
-Message-ID: <AANLkTilswAm96y9pDx-xlEMKbi1-arvsTJgL0pk7kVMK@mail.gmail.com>
-From: Grzegorz Toporek <top.grzechu@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: top.grzechu@gmail.com
+Received: by 10.220.60.136 with SMTP id p8mr4819231vch.270.1274783730531; Tue, 
+	25 May 2010 03:35:30 -0700 (PDT)
+Received: by 10.220.100.140 with HTTP; Tue, 25 May 2010 03:35:30 -0700 (PDT)
+In-Reply-To: <AANLkTin63ATwjRTZm8tEbFXlhCxuUVGCN58hNhoHTKLD@mail.gmail.com>
+References: <AANLkTin63ATwjRTZm8tEbFXlhCxuUVGCN58hNhoHTKLD@mail.gmail.com>
+Date: Tue, 25 May 2010 18:35:30 +0800
+Message-ID: <AANLkTilAmc5ep8oz5DElMuUJXkeclTzGetGmWeaZ5e4n@mail.gmail.com>
+From: daniel tian <daniel.xntian@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: daniel.xntian@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] udev: Use udev.inc and add udevadm to udev pacakge instead of udev-utils
+Subject: libglib conflict with other lib packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,24 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 10:08:46 -0000
+X-List-Received-Date: Tue, 25 May 2010 10:39:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
->
->
-> >
-> '/home/grzesiek/tele/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/pkgconfig/glib-2.0.pc'
-> > appears to be empty
->
-> That seems to be the problem, does rebuilding glib-2.0 help?
->
-> regards,
->
-> Koen
->
+hi, guys:
+=A0 =A0I wanna port ebook reader "fbreader" from OpenEmbedded to poky,
+but when installing fbreader package(in my board), several packages
+missed. So I copy the libgio-2.0-0, libgobject, libgthread ipk files
+to my board. But there are some files has already installed by
+libglib. The install processing is not allowed. When i write
+--force-overwrite, the rootfs can not be bring up again.
+=A0 Here is the error message when install libgthread:
 
-No, it doesn't. Still the same error.
+Installing libgthread-2.0-0 (2.24.0-r4.5) to root...
+Collected errors:
+=A0* check_data_file_clashes: Package libgthread-2.0-0 wants to install
+file /usr/lib/libgthread-2.0.so.0
+=A0 =A0 =A0 =A0But that file is already provided by package =A0*
+check_data_file_clashes: libglib-2.0-0
+=A0* opkg_install_cmd: Cannot install package libgthread-2.0-0.
 
-Kind Regards,
-Grzegorz
+I just wonder whether somebody has already ported the fbreader to
+poky, or it is conflicted with other packages, so it's forbidding
+area.
+
+Please give some advice, anything is appreciated.
+thank you very much.
+=A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0daniel
+
 
