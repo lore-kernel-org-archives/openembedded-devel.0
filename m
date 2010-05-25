@@ -1,46 +1,51 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OGlla-0007Jn-Dg
+	(envelope-from <raj.khem@gmail.com>) id 1OGm20-00038I-2M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 06:29:23 +0200
-Received: by iwn2 with SMTP id 2so3865199iwn.6
+	Tue, 25 May 2010 06:46:20 +0200
+Received: by pxi14 with SMTP id 14so1609221pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 24 May 2010 21:25:17 -0700 (PDT)
+	Mon, 24 May 2010 21:42:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=zSrQVFUfpS8o4wIsiwLrLJMSy7A/nmz5TQmk47FOheQ=;
-	b=EiqmkZp1o3D9sYq5qYynUGjIHfiIBHkNMvWPssFbRP+9H0DGPD8bdnh/qNVmEFGqwf
-	cmB7gSeON+q71G8VfIh7ONLgFtFPkvcCcVNXcfGLxAoi2VOpiDlSAs4TMTrq+Kj7CmMa
-	wNm4iQcJrmakIyEYnRBNGm21U6CkoQ/je2qOg=
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=mRlTli74LIumV/EIriuKWjK9KhF5GzlLujkKmGm30jg=;
+	b=ibFK0UeK79urD2GkiePbxTLYbxSfKxnPpxxGoVcq9a3ZqNlzSHpKqbuBAjjFTyQ48Q
+	IiYskjbxR36XHtwTvAH4plXE8KpePkEtJ4dlSr6IdAxTxowPswPxJwgpbtRzZomgetBv
+	9OV2rq3zTFY9dYganX2S7rXT7TKC3LGy/Vp/o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Ma8g4YwPRtRvOGTzeFC+r9zaTi+75H1biaNMkj5+0eOyznHoobA2AXdoW4K4cEpDDj
-	FiEehuH47DVCZj2GgaM76+1xwwjUmkBp4nSCaE9+NsmoAOb7Iw3Fddbc5HLkzZiqwa06
-	RZWd0Khp7HPFjqdzWMnrPRBeQbZ9X6J/a3aIk=
-MIME-Version: 1.0
-Received: by 10.231.170.1 with SMTP id b1mr5736069ibz.13.1274761517061; Mon, 
-	24 May 2010 21:25:17 -0700 (PDT)
-Received: by 10.231.30.67 with HTTP; Mon, 24 May 2010 21:25:16 -0700 (PDT)
-In-Reply-To: <20100524234235.GN25484@denix.org>
-References: <1274618279-24726-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<20100524234235.GN25484@denix.org>
-Date: Mon, 24 May 2010 21:25:16 -0700
-Message-ID: <AANLkTimAy0OrwqpBYg7zXdj8PjwU_AgVas5kSJqmQah0@mail.gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Ial+v0DDo+5GYq0bE6q4vjGN+MWw3AX21H3og4roSc9iHEplgdTRGkNwuF7rutZlpw
+	/JCBrmYBvQBASymRgiK6DbQtdGY6S6Vs7OgnxA9CkqI7NpBNh2qrHOtLAyWG/nEp7lUS
+	tWCY9hmQs4rCZIEclgvo8JudVn2Mp+H5slBqk=
+Received: by 10.142.152.39 with SMTP id z39mr462651wfd.336.1274762532612;
+	Mon, 24 May 2010 21:42:12 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 20sm4091825pzk.7.2010.05.24.21.42.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 24 May 2010 21:42:11 -0700 (PDT)
+Date: Mon, 24 May 2010 21:42:02 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+Message-ID: <20100525044202.GA25134@gmail.com>
+References: <1274733028-13432-1-git-send-email-clarson@kergoth.com>
+	<20100524233325.GJ25484@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20100524233325.GJ25484@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH] packaged-staging.bbclass: added missing space in find call
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: Re: [PATCH 1/2] Rename url params patch=<ignored>/pnum=<n> to apply={yes, no}/striplevel=<n>
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,66 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 04:29:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 25 May 2010 04:46:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, May 24, 2010 at 4:42 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Sun, May 23, 2010 at 02:37:59PM +0200, Enrico Scholz wrote:
->> Old find statement failed with something like
->>
->> =A0 $ find . \( -name XXX\)
->> =A0 find: invalid expression; I was expecting to find a ')' somewhere bu=
-t did not see one.
->
-> Ah, that's where I was getting it from! :) It then triggered the same/sim=
-ilar
-> issue with tar complaining about the modified archive...
->
->> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
+On (24/05/10 19:33), Denys Dmytriyenko wrote:
+> On Mon, May 24, 2010 at 01:30:27PM -0700, Chris Larson wrote:
+> > From: Chris Larson <chris_larson@mentor.com>
+> > 
+> > I think this makes the behavior rather more clear.
+> 
+> Ironically, just earlier today I was trying to explain to somebody, that 
+> patch=3 does not mean or do anything...
+> 
+> It maybe more clear for new users, but once you use it couple times, it 
+> doesn't matter if it's patch/pnum or apply/striplevel. But I see where you 
+> going with the second patch.
+> 
+> > Signed-off-by: Chris Larson <chris_larson@mentor.com>
+> 
 > Acked-by: Denys Dmytriyenko <denis@denix.org>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
->
->
->> ---
->> =A0classes/packaged-staging.bbclass | =A0 =A02 +-
->> =A01 files changed, 1 insertions(+), 1 deletions(-)
->>
->> diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging=
-.bbclass
->> index 62a78e4..83f3578 100644
->> --- a/classes/packaged-staging.bbclass
->> +++ b/classes/packaged-staging.bbclass
->> @@ -19,7 +19,7 @@ PSTAGE_PKGPN =A0 =A0 =A0=3D "${@bb.data.expand('stagin=
-g-${PN}-${MULTIMACH_ARCH}${TARGET_
->> =A0PSTAGE_PKGNAME =A0 =A0=3D "${PSTAGE_PKGPN}_${PSTAGE_PKGVERSION}_${PST=
-AGE_PKGARCH}.ipk"
->> =A0PSTAGE_PKG =A0 =A0 =A0 =A0=3D "${PSTAGE_DIR}/${PSTAGE_PKGPATH}/${PSTA=
-GE_PKGNAME}"
->> =A0PSTAGE_WORKDIR =A0 =3D "${TMPDIR}/pstage"
->> -PSTAGE_SCAN_CMD ?=3D "find ${PSTAGE_TMPDIR_STAGE} \( -name "*.la" -o -n=
-ame "*-config"\) -type f"
->> +PSTAGE_SCAN_CMD ?=3D "find ${PSTAGE_TMPDIR_STAGE} \( -name "*.la" -o -n=
-ame "*-config" \) -type f"
->>
->> =A0PSTAGE_NATIVEDEPENDS =3D "\
->> =A0 =A0 =A0shasum-native \
->> --
->> 1.7.0.1
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> 
+> > diff --git a/classes/patch.bbclass b/classes/patch.bbclass
+> > index a739b20..6ef408f 100644
+> > --- a/classes/patch.bbclass
+> > +++ b/classes/patch.bbclass
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
