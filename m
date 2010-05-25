@@ -1,29 +1,46 @@
-Received: from smtp-68.nebula.fi ([83.145.220.68])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <henri.bragge@dcombus.com>) id 1OGqvZ-0005SB-ED
+	(envelope-from <top.grzechu@gmail.com>) id 1OGr41-0000f3-KY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 25 May 2010 12:00:03 +0200
-Received: from [100.100.100.68] (unknown [83.150.95.26])
-	by smtp-68.nebula.fi (Postfix) with ESMTP id 2224832B08DD
+	Tue, 25 May 2010 12:08:46 +0200
+Received: by fxm9 with SMTP id 9so882743fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 12:54:00 +0300 (EEST)
-Message-ID: <4BFB9E89.30206@dcombus.com>
-Date: Tue, 25 May 2010 12:55:21 +0300
-From: Henri Bragge <henri.bragge@dcombus.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+	Tue, 25 May 2010 03:04:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=xw0Ij+wxRRsiGFOoEO/93TSfmI9GbWB7CYt9syMNS+Y=;
+	b=fFdmQw1D3jHjIbpFGP6fZgmm+tWlIjsZHZacrbCBgywWtAmCc0P3hb66JAU8HFskcL
+	vcJ2auE2+6VzHr0WqYq3IpqrP95plYPF78RylZ3yQMYMt8/9w1n0iWBjROhwBPm4hB4t
+	uLBX1w5htX7+JnS8YcpsYDAA7XQ3TtuE48cB4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=pnpnTYzc064NVOKMRVPSVxGeqWZHt/SnFdo4U5bkz7ltda7nsXtzFzjoCwDdXyZoBG
+	NUiHdLguVrGcvZjKErqTMxZz7cjgD8X4t9HNHldKHoGd3p6hIK98g/V6fZzpFJrNWsAp
+	qzkINDYg1DgmdWWpVZrBZb94rfydRu4eaSJlg=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1274770197-13394-1-git-send-email-raj.khem@gmail.com>	<htftsf$ilt$1@dough.gmane.org>
+Received: by 10.204.126.84 with SMTP id b20mr2419248bks.61.1274781878816; Tue, 
+	25 May 2010 03:04:38 -0700 (PDT)
+Received: by 10.204.76.131 with HTTP; Tue, 25 May 2010 03:04:38 -0700 (PDT)
+In-Reply-To: <htg51v$c96$1@dough.gmane.org>
+References: <1274770197-13394-1-git-send-email-raj.khem@gmail.com>
+	<htftsf$ilt$1@dough.gmane.org>
 	<AANLkTin5VBoB7K2n6JakiKoN2kfIF9JFgB4_3Ut3-z5n@mail.gmail.com>
-In-Reply-To: <AANLkTin5VBoB7K2n6JakiKoN2kfIF9JFgB4_3Ut3-z5n@mail.gmail.com>
-X-SA-Exim-Connect-IP: 83.145.220.68
-X-SA-Exim-Mail-From: henri.bragge@dcombus.com
+	<htg51v$c96$1@dough.gmane.org>
+Date: Tue, 25 May 2010 12:04:38 +0200
+Message-ID: <AANLkTilswAm96y9pDx-xlEMKbi1-arvsTJgL0pk7kVMK@mail.gmail.com>
+From: Grzegorz Toporek <top.grzechu@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: top.grzechu@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] udev: Use udev.inc and add udevadm to udev pacakge instead of udev-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -38,50 +55,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 25 May 2010 10:00:07 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 25 May 2010 10:08:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Grzegorz Toporek wrote:
-> Could you upload this patch to the git respiratory? Or this is just
-> non-official change?
 >
-> I'm trying now to compile base-image on angstrom distro and I got error from
-> udev_151.bb recipe. May be your patch will help with this...
 >
-> This is what I got:
+> >
+> '/home/grzesiek/tele/tmp/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/pkgconfig/glib-2.0.pc'
+> > appears to be empty
 >
-> Does anyone met with this error? Sorry if it's not a right place to post.
+> That seems to be the problem, does rebuilding glib-2.0 help?
 >
->   
-I've another issue concerning acl and attr that udev-151 requires, and 
-I'm hoping that this patch would help me too. Btw I didn't have this 
-problem with bitbake 1.8.18, but 1.10 with newest oe fails with output:
+> regards,
+>
+> Koen
+>
 
-| make[4]: Entering directory 
-`.../tmp/work/armv5te-angstrom-linux-gnueabi/attr-2.4.44-r3/attr-2.4.44/attr'
-| ../include/install-sh -o hbragge -g 1002 -m 755 -d /usr/bin
-| chmod: changing permissions of `//usr/bin': Operation not permitted
-| make[4]: *** [install] Error 1
-| make[4]: Leaving directory 
-`.../tmp/work/armv5te-angstrom-linux-gnueabi/attr-2.4.44-r3/attr-2.4.44/attr'
-| make[3]: *** [attr-install] Error 2
-| make[3]: Leaving directory 
-`.../tmp/work/armv5te-angstrom-linux-gnueabi/attr-2.4.44-r3/attr-2.4.44'
-| FATAL: oe_runmake failed
-NOTE: package attr-2.4.44-r3: task do_install: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of .../openembedded/recipes/udev/attr_2.4.44.bb do_install 
-failed
-ERROR: Task 1641 (.../openembedded/recipes/udev/attr_2.4.44.bb, 
-do_install) failed with 256
+No, it doesn't. Still the same error.
 
-Building acl does the same thing. Something is wrong with environment 
-variables exported by acl/attr recipes, which should point in ${D} but 
-are now pointing into root. I'm executing bitbake from a makefile, which 
-also seems to have and effect on this (starting bitbake directly 
-preserves those variables).
-
-- Henri
-
+Kind Regards,
+Grzegorz
 
