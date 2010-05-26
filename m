@@ -1,44 +1,54 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OHBSm-0004SS-US
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OHBVr-0004bB-8f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 09:55:41 +0200
-Received: by gwb15 with SMTP id 15so1825663gwb.6
+	Wed, 26 May 2010 09:58:51 +0200
+Received: by fxm9 with SMTP id 9so1817255fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 00:51:32 -0700 (PDT)
+	Wed, 26 May 2010 00:54:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=rSUR3wOP9IhIT/c5cZ4DbbYmyOjPe/fRUaAoyS8IVdA=;
-	b=EUklHJK/AGXl7uCFZ+LCDwjiaDtgMn6bKiSNv5xn7PngmDP5F8rgjdgmhpt0Mx9YSK
-	3h0TguvLnsvJCX4uah4BqN8ccb6b7w+7n+LkRCbLalk1pZUgDAAzj7QSqyz2zwbuq/yP
-	EX3B9ceu0tnzqI57DkQAp9eF6Xcm+ukvOCqh4=
+	h=domainkey-signature:received:received:received:date:from:to:cc
+	:subject:message-id:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=sKf0y8Jl8hUWz0vC5w6ISnDiy7s2469k4YiBesX7Qx0=;
+	b=s8htI8ikqO5fY1KpchRydObwr24xPhUUAy6t6PtKfB6eoQtL53YdRjCG9gRfG1upD1
+	9qE54ghl/U1fG5txcijdRAv5WNx+Ap47e4JZW7Opro/fy+QN/PX8JSPxnVp2+L+5B5Oh
+	RgeieQf1NNrFyqlleTdAGsIlWub1lOz5rF+rk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=uIJh2A0VZFew824O2KDesn6lKT9o7U9cQxxS8mhN1FvJVVajP4pwjcbVwVri9lrC4a
-	Vg2RU+5nFhrBf/uKJ8E2GQ+M2aOYhG7GL/uM3VQIpjjR9TYHvx9u+xLwPz9j1eqvyDaK
-	vt93LpsGM0GnBt7Vin8kBKeHF0ZB9N6YWU0n0=
-MIME-Version: 1.0
-Received: by 10.91.100.18 with SMTP id c18mr4026151agm.151.1274860290621; Wed, 
-	26 May 2010 00:51:30 -0700 (PDT)
-Received: by 10.90.71.4 with HTTP; Wed, 26 May 2010 00:51:30 -0700 (PDT)
-In-Reply-To: <1274859584-8442-1-git-send-email-raj.khem@gmail.com>
-References: <1274859584-8442-1-git-send-email-raj.khem@gmail.com>
-Date: Wed, 26 May 2010 09:51:30 +0200
-Message-ID: <AANLkTikJgMLy1es5sHK8p07GTrKoe9ZYNJ9wiAQjmJVZ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Nne9eLXp9ZtxRUFJn+SZrj3URSkoPEMRvH5FBq30L+O5Yd9xRjuznuRxooCq+ITZ+C
+	yks/vugshJFGUfqZa6Xq/if3xj4bdSGBkNvF5PUY2DqQA7Wk1r9tFH3pEtuVobIm3AmP
+	KHlVLaH7QYNImCWxxQ49cDobohANWlMJLRfH4=
+Received: by 10.204.6.193 with SMTP id a1mr3362908bka.104.1274860482751;
+	Wed, 26 May 2010 00:54:42 -0700 (PDT)
+Received: from s42.loc (85-127-94-237.dynamic.xdsl-line.inode.at
+	[85.127.94.237])
+	by mx.google.com with ESMTPS id h21sm4342983bkh.5.2010.05.26.00.54.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 May 2010 00:54:42 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OHBdI-0001qT-JH; Wed, 26 May 2010 10:06:32 +0200
+Date: Wed, 26 May 2010 10:06:32 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100526080632.GD31532@mx.loc>
+References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
+	<1274854676-5931-5-git-send-email-koen@openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <1274854676-5931-5-git-send-email-koen@openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sanity.bbclass: Barf if TMPDIR has trailing forward slash
+Cc: Chase Maupin <chase.maupin@ti.com>, Koen Kooi <k-kooi@ti.com>
+Subject: Re: [PATCH 5/7] Usermanual/metadata: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,59 +62,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 07:55:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 May 2010 07:58:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/5/26 Khem Raj <raj.khem@gmail.com>:
-> * Unknowingly many developers run into this issue and
-> =A0painful part it that the problems start happening almost
-> =A0when build it complete and the errors are unrelated to cause
-> =A0see http://www.mail-archive.com/angstrom-distro-devel@linuxtogo.org/ms=
-g02922.html
+On Wed, May 26, 2010 at 08:17:54AM +0200, Koen Kooi wrote:
+>From: Chase Maupin <chase.maupin@ti.com>
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
-> =A0classes/sanity.bbclass | =A0 11 +++++++++--
-> =A01 files changed, 9 insertions(+), 2 deletions(-)
+>* Fixed up typos and other errors in the documentation.
 >
-> diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
-> index dfb3010..88672ba 100644
-> --- a/classes/sanity.bbclass
-> +++ b/classes/sanity.bbclass
-> @@ -112,11 +112,18 @@ def check_sanity(e):
-> =A0 =A0 =A0 =A0oes_bb_conf =3D data.getVar( 'OES_BITBAKE_CONF', e.data, T=
-rue )
-> =A0 =A0 =A0 =A0if not oes_bb_conf:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0messages =3D messages + 'You do not includ=
-e OpenEmbeddeds version of conf/bitbake.conf. This means your environment i=
-s misconfigured, in particular check BBPATH.\n'
-> -
-> =A0 =A0 =A0 =A0#
-> - =A0 =A0 =A0 # Check that TMPDIR hasn't changed location since the last =
-time we were run
-> + =A0 =A0 =A0 # get TMPDIR and use it in following two checks
-> =A0 =A0 =A0 =A0#
-> =A0 =A0 =A0 =A0tmpdir =3D data.getVar('TMPDIR', e.data, True)
-> + =A0 =A0 =A0 #
-> + =A0 =A0 =A0 # check if tmpdir has traling '/'
-> + =A0 =A0 =A0 #
-> + =A0 =A0 =A0 if tmpdir[-1] =3D=3D "/":
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 messages =3D messages + "Your TMPDIR has tr=
-ailing '/' (forward slash), this can cause autotools lamangler fail regexp =
-matches when munging .la files. Please remove it.\n\t"
-> + =A0 =A0 =A0 #
-> + =A0 =A0 =A0 # Check that TMPDIR hasn't changed location since the last =
-time we were run
-> + =A0 =A0 =A0 #
-> =A0 =A0 =A0 =A0checkfile =3D os.path.join(tmpdir, "saved_tmpdir")
-> =A0 =A0 =A0 =A0if os.path.exists(checkfile):
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0f =3D file(checkfile, "r")
-> --
-> 1.7.0.4
+>Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+>Signed-off-by: Koen Kooi <k-kooi@ti.com>
+>---
+> docs/usermanual/chapters/metadata.xml |   18 +++++++++---------
+> 1 files changed, 9 insertions(+), 9 deletions(-)
 >
+>diff --git a/docs/usermanual/chapters/metadata.xml b/docs/usermanual/chapters/metadata.xml
+>index bbf6f73..2b65454 100644
+>--- a/docs/usermanual/chapters/metadata.xml
+>+++ b/docs/usermanual/chapters/metadata.xml
 
-Tested. works great for me so:
-Acked-By: fransmeulenbroeks@gmail.com
+
+Shouldn't the whole block below be updated to take SRC_URI[md5sum] and
+SRC_URI[sha256sum] into account?
+
+Alternatively just provide a link to
+docs/usermanual/reference/var_src_uri.xml which covers that in detail
+and should be more up-to-date
+
+>@@ -128,23 +128,23 @@ DEPENDS = "gtk+"
+> RDEPENDS = "cool-ttf-fonts"
+>                 </screen> The package needs gtk+ to build ('DEPENDS') and
+>     requires the 'cool-ttf-fonts' package to run ('RDEPENDS'). OE will add
+>-    run-time dependencies on libraries on its own via the so called
+>-    <emphasis>shlibs</emphasis>-code, but you need to specify everything other
+>+        run-time dependencies on libraries on its own via the so called
+>+    <emphasis>shlibs</emphasis>-code, but you need to specify everything else
+>     by yourself, which in this case is the 'cool-ttf-fonts' package.</para>
+> 
+>     <para>After entering all this OE will know what to build before trying to
+>     build your application, but it doesn't know where to get it yet. So let's
+>     add the source location: <screen>
+> SRC_URI = "http://www.host.com/foo/files/${P}.tar.bz2;md5sum=yoursum"
+>-                </screen> This will tell the fetcher to where to download the
+>+                </screen> This will tell the fetcher where to download the
+>     sources from and it will check the integrity using md5sum if you provided
+>     the appropriate <emphasis>yoursum</emphasis>. You can make one by doing
+>     <screen>md5sum foo-1.9.tar.bz2</screen> and replacing
+>     <emphasis>yoursum</emphasis> with the md5sum on your screen. A typical
+>-    md5sum will look like this: <screen>a6434b0fc8a54c3dec3d6875bf3be8mtn </screen>Notice
+>-    the <emphasis>${P}</emphasis> variable, that one holds the package name,
+>-    <emphasis>${PN}</emphasis> in BitBake speak and the package version,
+>-    <emphasis>${PV}</emphasis> in BitBake speak. It's a short way of writing
+>+    md5sum will look like this: <screen>a6434b0fc8a54c3dec3d6875bf3be868 </screen>Notice
+>+    the <emphasis>${P}</emphasis> variable holds the package name 
+>+    (<emphasis>${PN}</emphasis> in BitBake speak) and the package version 
+>+    (<emphasis>${PV}</emphasis> in BitBake speak). It's a short way of writing
+>     <emphasis>${PN}-${PV}</emphasis>. Using this notation means you can copy
+>     the recipe when a new version is released without having to alter the
+>     contents. You do need to check if everything is still correct, because new
 
 
