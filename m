@@ -1,34 +1,36 @@
 Received: from ey-out-1920.google.com ([74.125.78.144])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1OHA0N-0006xx-Ny
+	(envelope-from <koen.kooi@gmail.com>) id 1OHA0Q-0006xx-65
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 08:22:17 +0200
+	Wed, 26 May 2010 08:22:19 +0200
 Received: by ey-out-1920.google.com with SMTP id 26so197024eyw.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 23:18:10 -0700 (PDT)
+	Tue, 25 May 2010 23:18:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=p/ZeilCyPzzI8ddTB8eB6JFyse/nhRiNeOR++rXBQrs=;
-	b=VPIfOHs/QJqPDQwtqJ4os4i/hKgLzWHa5+bTuwYzAn5JFBzSDO+Ys+ZxmBnahP9fie
-	hpm6fXxq0cN1403IO1XGOcoPOjWfTCz4UYHUIrxQ5wroRABe47TRkq0swMpx6BDCExeo
-	809nPI+jaBT+4djn3iTNwKrdE6F3zTmAHJrrM=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=UAZ8cr5ia5aic1z4eLFTykgC7Qhm63Y7NpTsNNgkN6g=;
+	b=Q1z6KUV/J/oImfSUcY6V8WJWuGMo3HftYB/PPlGYyNoXwl2aBgQp0V6guQvNSej83p
+	vYgArIwHjhCjNTxAxpxHPKziig5Sdb/bddrE5yNg6UmTZi2W36aJJPOtrdaGY/zW2DD7
+	EGpcOkc3keT9CBIAtbUj9xMy9NEh/8KmjF+2Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=HiFaNlf6RJwkyUEYVYrKDUcHDv1aqpAVrvmNSVLawJjv1yRdG8821qpwL2QU1NNkL5
-	95zxMNwebMpBH1XIFS2WaBCAKyrmQBD+DDS9IMQmQXO2w/hCYtd3og7Ep8sPEQmaUEYO
-	tCLKywIynEmjNwEIzYXWoaMnuKqg/Lh2le0WA=
-Received: by 10.213.15.75 with SMTP id j11mr1000554eba.34.1274854690252;
-	Tue, 25 May 2010 23:18:10 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=AhMV+Je1WjX3soEWEOBGmYtVz2AnXaInRT5j6QYkxNJSqw50YD2WqHfN0HTShDCmwq
+	IaLZt91FGSllmSkUcvxhbcw91S+uEq3/n1tFZvCaICmAvyu8wACAN2zQCdh8RO8G1Hh9
+	1p/+KfD0TCTgQdkbPRCzGk9hXJz0/otwx9iao=
+Received: by 10.213.3.4 with SMTP id 4mr1016219ebl.24.1274854692519;
+	Tue, 25 May 2010 23:18:12 -0700 (PDT)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 13sm2808197ewy.9.2010.05.25.23.18.07
+	by mx.google.com with ESMTPS id 14sm2857006ewy.14.2010.05.25.23.18.11
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 25 May 2010 23:18:08 -0700 (PDT)
+	Tue, 25 May 2010 23:18:12 -0700 (PDT)
 From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 May 2010 08:17:50 +0200
-Message-Id: <1274854676-5931-1-git-send-email-koen@openembedded.org>
+Date: Wed, 26 May 2010 08:17:51 +0200
+Message-Id: <1274854676-5931-2-git-send-email-koen@openembedded.org>
 X-Mailer: git-send-email 1.7.0
+In-Reply-To: <1274854676-5931-1-git-send-email-koen@openembedded.org>
+References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
 X-SA-Exim-Connect-IP: 74.125.78.144
 X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -38,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Koen Kooi <k-kooi@ti.com>, Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCH 1/7] Usermanual/common_use_cases: Fix documentation errors
+Subject: [PATCH 2/7] Usermanual/comparing: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 06:22:17 -0000
+X-List-Received-Date: Wed, 26 May 2010 06:22:19 -0000
 
 From: Chase Maupin <chase.maupin@ti.com>
 
@@ -61,144 +63,62 @@ From: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Koen Kooi <k-kooi@ti.com>
 ---
- docs/usermanual/chapters/common_use_cases.xml |   45 +++++++++++++-----------
- 1 files changed, 24 insertions(+), 21 deletions(-)
+ docs/usermanual/chapters/comparing.xml |   18 +++++++++---------
+ 1 files changed, 9 insertions(+), 9 deletions(-)
 
-diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs/usermanual/chapters/common_use_cases.xml
-index 7ae3ee5..9adb66a 100644
---- a/docs/usermanual/chapters/common_use_cases.xml
-+++ b/docs/usermanual/chapters/common_use_cases.xml
-@@ -7,11 +7,12 @@
+diff --git a/docs/usermanual/chapters/comparing.xml b/docs/usermanual/chapters/comparing.xml
+index 1347010..cfdaa95 100644
+--- a/docs/usermanual/chapters/comparing.xml
++++ b/docs/usermanual/chapters/comparing.xml
+@@ -5,13 +5,13 @@
+   <section id="comparing_buildroot">
+     <title>buildroot</title>
  
-     <para>Creating a new distribution is not complicated, however we urge you
-     to try existing distributions first, because it's also very easy to do
--    wrong. The config need to be created in /conf/distro directory. So what
--    has to be inside? <itemizedlist>
-+    wrong. The config needs to be created in $OEBASE/openembedded/conf/distro 
-+    directory. So what has to be inside? 
-+      <itemizedlist>
-         <listitem>
-           <para><command>DISTRO_VERSION</command> so users will know which
--          version of distribution they use.</para>
-+          version of the distribution they are using.</para>
-         </listitem>
+-    <para>Writing of <application>BitBake</application> recipes is more easy
++    <para>Writing of <application>BitBake</application> recipes is easier
+     and more intuitive than writing Makefiles while providing higher
+     flexibility. This allows you to tweak specific recipes for your very
+-    special needs and to add new recipes very fast. You can build toolchains,
++    special needs and to add new recipes quickly. You can build toolchains,
+     Software Distribution Kits (SDKs), complete Distributions or just single
+-    packages. The flexibility of OpenEmbedded allows you to reuse the once
+-    written recipes for many different purposes. OpenEmbedded provides
++    packages. The flexibility of OpenEmbedded allows you to reuse recipes
++    for many different purposes. OpenEmbedded provides 
+     everything buildroot will be able to provide. But in contrast to buildroot
+     OpenEmbedded will allow you to achieve what you really want to achieve.
+     You can add new package formats, new filesystems, new output formats
+@@ -21,11 +21,11 @@
+   <section id="comparing_crosstool">
+     <title>crosstool</title>
  
-         <listitem>
-@@ -71,29 +72,30 @@ SRCDATE = "20061014"
-   <section id="commonuse_new_machine">
-     <title>Adding a new Machine</title>
- 
--    <para>To be able to build for device OpenEmbedded have to know it, so
--    machine config file need to be written. All those configs are stored in
--    /conf/machine/ directory.</para>
-+    <para>To be able to build for a device OpenEmbedded has to know about it, 
-+    so a machine config file needs to be written. All of the machine 
-+    configs are stored in $OEBASE/openembedded/conf/machine/ directory.</para>
- 
-     <para>As usual some variables are required: <itemizedlist>
-         <listitem>
--          <para><command>TARGET_ARCH</command> which describe which CPU
--          architecture does machine use.</para>
-+          <para><command>TARGET_ARCH</command> describes which CPU
-+          architecture the machine uses.</para>
-         </listitem>
- 
-         <listitem>
--          <para><command>MACHINE_FEATURES</command> which describe which
--          features device has. More about it in <link
-+          <para><command>MACHINE_FEATURES</command> which describes which
-+          features the device has. More about it in <link
-           linkend="task-base">task-base</link> section.</para>
-         </listitem>
- 
-         <listitem>
-           <para><command>PREFERRED_PROVIDER_virtual/kernel</command> has to
--          point into proper kernel recipe for this machine.</para>
-+          point to the proper kernel recipe for this machine.</para>
-         </listitem>
-       </itemizedlist></para>
- 
--    <para>Next kernel recipe needs to be added.</para>
-+    <para>Next the kernel recipe needs to be added if it doesn't already exist.
-+    </para>
+-    <para>Crosstool allows to create toolchains for you. It can only create
++    <para>Crosstool allows the creation of toolchains. It can only create
+     the initial toolchain for you. It will not compile other needed libraries
+-    or applications for you, it will not be able to track dependencies or to
++    or applications for you, it will not be able to track dependencies or
+     package them properly. OpenEmbedded supports all configurations crosstool
+-    supports. You can start to create toolchains with OpenEmbedded, then as
++    supports. You can start by creating toolchains with OpenEmbedded, then as
+     your needs grow create a more complete SDK from already present base
+     libraries and applications and if you recognize you need to have packages
+     for the target you have them almost built already.</para>
+@@ -38,7 +38,7 @@
+     cross-compiling is hard itself but many people misuse the buildsystem they
+     use to build their software. This will lead to a variety of issues you can
+     run into. This can be failing tests on configuration because of executing
+-    cross compiled binaries or crashes at run-time due wrong sizes of basic
++    cross compiled binaries or crashes at run-time due to wrong sizes of basic
+     types. When utilizing OpenEmbedded you avoid searching for patches at many
+     different places and will be able to get things done more quickly.
+     <application>OpenEmbedded</application> allows you to choose from a pool
+@@ -48,4 +48,4 @@
+     output formats and filesystems. This allows you to create complete and
+     specialized distributions easily.</para>
    </section>
- 
-   <section id="commonuse_new_package">
-@@ -105,7 +107,7 @@ SRCDATE = "20061014"
-     <section>
-         <title>building from unstable source code</title>
-         <para>Building against the latest, bleeding-edge source has some intricacies of its own.
--        For one, it is desirable to pin down a 1 code revision that is known to build to
-+        For one, it is desirable to pin down a code revision that is known to build to
-         prevent random breakage in OE at the most inopportune time for all OE users.  Here is
-         how to do that properly.
-           <itemizedlist>
-@@ -113,7 +115,8 @@ SRCDATE = "20061014"
-             <listitem><para>for cvs: add 'PV = "1.1+cvs${SRCREV}"' to your bb file.</para></listitem>
-           </itemizedlist>
-         Accompany either with an entry to conf/distro/include/sane-srcrevs.inc for a revision that you know
--        builds successfully.
-+        builds successfully.  It is also common to define the stable SRCREV 
-+        for your package directly in the package recipe.
-         </para>
-         <para>
-         If you really absolutely have to follow the latest commits, you can do that by adding
-@@ -126,7 +129,7 @@ SRCDATE = "20061014"
-   <section id="commonuse_new_image">
-     <title>Creating your own image</title>
- 
--    <para>Creating own image is easy - only few variables needs to be set:
-+    <para>Creating own image is easy - only few variables need to be set:
-     <itemizedlist>
-         <listitem>
-           <para><command>IMAGE_BASENAME</command> to give a name for your own
-@@ -147,7 +150,7 @@ SRCDATE = "20061014"
-           <para><command>IMAGE_LINGUAS</command> is an optional list of
-           languages which has to be installed into the image</para>
-         </listitem>
--      </itemizedlist> Then adding of the <emphasis>image</emphasis> class use:
-+      </itemizedlist> Then add the <emphasis>image</emphasis> class using:
-     <screen>
- inherit image
- </screen> And the image recipe is ready for usage.</para>
-@@ -240,7 +243,7 @@ export LOCALDIR=$PWD/secret-isv
-                     </screen>
- 
-         <para>Use <command>source build_source</command> to source the script,
--        use <command>env</command> to check that the variable where
-+        use <command>env</command> to check that the variables were
-         exported.</para>
-       </section>
- 
-@@ -484,8 +487,8 @@ RDEPENDS_${PN} += "\
-             <title>Putting it together</title>
-             <para>In the previous two sections we have prepared the host and
-             target side. One thing that is missing is combining the two newly
--            created tasks and actually create the SDK. This is what we are going
--            to do now.</para>
-+            created tasks and actually creating the SDK. This is what we are 
-+            going to do now.</para>
- 
-             <para>Create <filename>meta-toolchain-YOU.bb</filename> in the
-             <filename>recipes/meta</filename> directory and place the following
-@@ -529,7 +532,7 @@ SDK_SUFFIX = "toolchain-YOUR"
-             optional dependencies like directFB, glib-2.0, gstreamer-0.10, tslib
-             and more esoteric dependencies like mysql and postgres. This allows
-             developers to simply start developing using Qt and enables system
--            integrator to easily recompile Qt and base libraries without tracking
-+            integrators to easily recompile Qt and base libraries without tracking
-             down extra dependencies.
-             </para>
- 
-@@ -575,7 +578,7 @@ $ <command>bitbake</command> meta-toolchain-qte
-             should start by downloading the SDK and untar it to the root folder
-             (<filename>/</filename>). Once this operation is finished you will
-             find a new directory <filename>/usr/local/angstrom/arm/</filename> and
--            it contains the <filename>environment-setup</filename> to setup the
-+            it contains the <filename>environment-setup</filename>file to setup the
-             <emphasis>QMAKESPEC</emphasis> and various other paths.
-             </para>
- 
+-</chapter>
+\ No newline at end of file
++</chapter>
 -- 
 1.7.0
 
