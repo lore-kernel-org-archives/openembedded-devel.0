@@ -1,33 +1,33 @@
 Received: from mail-ew0-f221.google.com ([209.85.219.221])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1OHA0W-0006yM-P9
+	(envelope-from <koen.kooi@gmail.com>) id 1OHA0W-0006yb-K2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 08:22:25 +0200
-Received: by mail-ew0-f221.google.com with SMTP id 21so599647ewy.27
+	Wed, 26 May 2010 08:22:27 +0200
+Received: by ewy21 with SMTP id 21so599657ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 23:18:19 -0700 (PDT)
+	Tue, 25 May 2010 23:18:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=Hp6GhNpuvxhmiDCKDBz9kDTvO677cgr2vkrfEObf3HY=;
-	b=P/+gSqrRkuwv3qr+iOIcO1R9NncI/kIVTn+TOT9fcRKQThV63saVSBhdx3a3Mq/cxQ
-	BgpMBAepY7Pxpxv4KdvZxMBoviz7E32M5jrhDTj+C4jlMnwuD1NnLFd/EMJ8ovlPNVHX
-	8NAQS36oJ7XlNE99zoZ50dxuyiydq2Hm6dUG0=
+	bh=qmHSu0S55RSdgL7XHk0T3+EqHkJUZd5/l1qU4osWJ8w=;
+	b=rpyV7Cc/+iiVL/ygnigyMBlPEmGj16c4rT/ldt3Km8TwTGheHebuRhAy3LS/JqcFLU
+	d2xQz6BZd4/QkoTdEvqTHfzOU/Y8rEljuboeC50aFaeHDKHZeTNOBe0se4YqUBfUhiNc
+	IHjudvFUUPUp8pDAR8DkvtKDkilI69dpZyPRQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=n6vs0MZs3mxxv7FIc31L1QSx/ULvZqZ3HZ12M2WlZvT2kOWwbiNQhn/C4fkfuL0xDd
-	pW2EcT/TQ6j114OZriRbDZTnOqobW5AECw82jCUcx3O0UgrBoSFuo6am4KMfeCRnxJiy
-	SyFgQne6uwdGDIn8tyqQcWO+9hpAyvPRnuXfc=
-Received: by 10.213.31.203 with SMTP id z11mr1048599ebc.88.1274854699062;
-	Tue, 25 May 2010 23:18:19 -0700 (PDT)
+	b=DNOENeRA2JBwYKid1xcF46/JySfYF+x73tnMJZfN2H7GbJwQag91SI2sqGyWdPAxyS
+	R0AaRoRv83Hh4cCd5Q1J5LpQUfC53I5/qr6JiuGeEBsTk4DIYKkI3bbxdUf+f7TMQyVE
+	elpck/U+20lox9MwCMM85X+L6ROAU6TztpvDs=
+Received: by 10.213.8.206 with SMTP id i14mr1047383ebi.72.1274854697149;
+	Tue, 25 May 2010 23:18:17 -0700 (PDT)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 14sm2871424ewy.6.2010.05.25.23.18.18
+	by mx.google.com with ESMTPS id 13sm2810853ewy.1.2010.05.25.23.18.15
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 25 May 2010 23:18:18 -0700 (PDT)
+	Tue, 25 May 2010 23:18:16 -0700 (PDT)
 From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 May 2010 08:17:54 +0200
-Message-Id: <1274854676-5931-5-git-send-email-koen@openembedded.org>
+Date: Wed, 26 May 2010 08:17:53 +0200
+Message-Id: <1274854676-5931-4-git-send-email-koen@openembedded.org>
 X-Mailer: git-send-email 1.7.0
 In-Reply-To: <1274854676-5931-1-git-send-email-koen@openembedded.org>
 References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Koen Kooi <k-kooi@ti.com>, Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCH 5/7] Usermanual/metadata: Fix documentation errors
+Subject: [PATCH 4/7] Usermanual/getting_oe: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 06:22:26 -0000
+X-List-Received-Date: Wed, 26 May 2010 06:22:28 -0000
 
 From: Chase Maupin <chase.maupin@ti.com>
 
@@ -63,62 +63,75 @@ From: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Koen Kooi <k-kooi@ti.com>
 ---
- docs/usermanual/chapters/metadata.xml |   18 +++++++++---------
- 1 files changed, 9 insertions(+), 9 deletions(-)
+ docs/usermanual/chapters/getting_oe.xml |   26 ++++++++++++++++++++++----
+ 1 files changed, 22 insertions(+), 4 deletions(-)
 
-diff --git a/docs/usermanual/chapters/metadata.xml b/docs/usermanual/chapters/metadata.xml
-index bbf6f73..2b65454 100644
---- a/docs/usermanual/chapters/metadata.xml
-+++ b/docs/usermanual/chapters/metadata.xml
-@@ -95,7 +95,7 @@
+diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+index d18c955..cb82220 100644
+--- a/docs/usermanual/chapters/getting_oe.xml
++++ b/docs/usermanual/chapters/getting_oe.xml
+@@ -98,7 +98,7 @@ $ <command>git</command> clone git://git.openembedded.org/openembedded</screen>
+         seems good practice to update your OpenEmbedded tree at least
+         daily. To do this, run:
+         <screen>
+-$ <command>cd</command> $OEBASE
++$ <command>cd</command> $OEBASE/openembedded
+ $ <command>git</command> pull</screen>
+       </para>
+     </section>
+@@ -142,7 +142,7 @@ $ <command>git</command> pull</screen>
  
-     <para>OpenEmbedded has files ending with <emphasis>.conf</emphasis>,
-     <emphasis>.inc</emphasis>, <emphasis>.bb</emphasis>
--    and<emphasis>.bbclass</emphasis>. The syntax and semantics of these files
-+    and <emphasis>.bbclass</emphasis>. The syntax and semantic of these files
-     are best described in the <ulink
-     url="http://bitbake.berlios.de/manual"><application>BitBake</application>
-     manual</ulink>.</para>
-@@ -111,7 +111,7 @@
-   <section id="metadata_writing_data">
-     <title>Writing Meta Data (Adding packages)</title>
+       <para>Since the path to your OpenEmbedded installation will be used in
+         many places, setting it in your environment will allow you to use
+-        the <varname>$OEBASE</varname> variable in all pathes and make it
++        the <varname>$OEBASE</varname> variable in all paths and make it
+         easier to change in the future should the need arise. To
+         set <varname>$OEBASE</varname> if you use a Bourne like shell
+         <footnote>
+@@ -342,6 +342,16 @@ MACHINE = "om-gta01"</screen>
+             </varlistentry>
  
--    <para>This page will guide you trough the effort of writing a .bb file or
-+    <para>This page will guide you through the effort of writing a .bb file or
-     <emphasis>recipe</emphasis> in BitBake speak.</para>
+             <varlistentry>
++              <term><literal>base-image</literal></term>
++              <listitem>
++                <para>Build and image that is the smallest possible image
++                  which allows for ssh access and the ability to install
++                  additional packages using ipkg.
++                </para>
++              </listitem>
++            </varlistentry>
++
++            <varlistentry>
+               <term><literal>console-image</literal></term>
+               <listitem>
+                 <para>Build an image without the X11, gtk+, or qt windowing
+@@ -463,9 +473,10 @@ MACHINE = "om-gta01"</screen>
+             </varlistentry>
  
-     <para>Let's start with the easy stuff, like the package description,
-@@ -128,23 +128,23 @@ DEPENDS = "gtk+"
- RDEPENDS = "cool-ttf-fonts"
-                 </screen> The package needs gtk+ to build ('DEPENDS') and
-     requires the 'cool-ttf-fonts' package to run ('RDEPENDS'). OE will add
--    run-time dependencies on libraries on its own via the so called
--    <emphasis>shlibs</emphasis>-code, but you need to specify everything other
-+        run-time dependencies on libraries on its own via the so called
-+    <emphasis>shlibs</emphasis>-code, but you need to specify everything else
-     by yourself, which in this case is the 'cool-ttf-fonts' package.</para>
- 
-     <para>After entering all this OE will know what to build before trying to
-     build your application, but it doesn't know where to get it yet. So let's
-     add the source location: <screen>
- SRC_URI = "http://www.host.com/foo/files/${P}.tar.bz2;md5sum=yoursum"
--                </screen> This will tell the fetcher to where to download the
-+                </screen> This will tell the fetcher where to download the
-     sources from and it will check the integrity using md5sum if you provided
-     the appropriate <emphasis>yoursum</emphasis>. You can make one by doing
-     <screen>md5sum foo-1.9.tar.bz2</screen> and replacing
-     <emphasis>yoursum</emphasis> with the md5sum on your screen. A typical
--    md5sum will look like this: <screen>a6434b0fc8a54c3dec3d6875bf3be8mtn </screen>Notice
--    the <emphasis>${P}</emphasis> variable, that one holds the package name,
--    <emphasis>${PN}</emphasis> in BitBake speak and the package version,
--    <emphasis>${PV}</emphasis> in BitBake speak. It's a short way of writing
-+    md5sum will look like this: <screen>a6434b0fc8a54c3dec3d6875bf3be868 </screen>Notice
-+    the <emphasis>${P}</emphasis> variable holds the package name 
-+    (<emphasis>${PN}</emphasis> in BitBake speak) and the package version 
-+    (<emphasis>${PV}</emphasis> in BitBake speak). It's a short way of writing
-     <emphasis>${PN}-${PV}</emphasis>. Using this notation means you can copy
-     the recipe when a new version is released without having to alter the
-     contents. You do need to check if everything is still correct, because new
+             <varlistentry>
+-              <term><literal>task-native-sdk</literal></term>
++              <term><literal>task-sdk-native</literal></term>
+               <listitem>
+-                <para>Mata-package for native (on-device) SDK.
++                <para>Meta-package for native (on-device) SDK.  i.e. libc, gcc,
++                  make, etc.
+                 </para>
+               </listitem>
+             </varlistentry>
+@@ -536,6 +547,13 @@ MACHINE = "om-gta01"</screen>
+                 <para>Builds the appropriate kernel for your device.</para>
+               </listitem>
+             </varlistentry>
++
++            <varlistentry>
++              <term><literal>virtual/bootloader</literal></term>
++              <listitem>
++                <para>Builds the appropriate bootloader for your device.</para>
++              </listitem>
++            </varlistentry>
+           </variablelist>
+         </para>
+       </section>
 -- 
 1.7.0
 
