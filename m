@@ -1,46 +1,45 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pz0-f178.google.com ([209.85.222.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OHMuJ-0000s8-Ob
+	(envelope-from <raj.khem@gmail.com>) id 1OHMyf-0006kO-HL
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 22:09:03 +0200
-Received: by pvc30 with SMTP id 30so1230003pvc.6
+	Wed, 26 May 2010 22:13:22 +0200
+Received: by pzk8 with SMTP id 8so367935pzk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 13:04:42 -0700 (PDT)
+	Wed, 26 May 2010 13:09:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=6g/pRI4uXx1tI7GxPoRQ9dZHapkMb/xz/TsOZnMRO0c=;
-	b=JnJ5UeLNeJg3GUsgU/ykmL1BfQel3qtQCPpg4dECNTcknbwb4Rm9w2tB9uRi0zIm0Y
-	I1pBsf8y2h31I07+vNTAPAggysz5L0JCvHFsrgX+DOhqnrjKM/XfZ0bkU1NIbkfYMdXK
-	hfQeaeHN8FYDAscbcICIgnpv4ohxClhSDVbCY=
+	bh=sREc3TO9MeJmKgiENs6UMOPXdHkIJnYVj+JyKqIzzig=;
+	b=rub6I38UUsoBylKiOGig3c2tFeUvC5c5o85XWXkFJg6hE/pgZt7XKkAc7ka/0F7kGm
+	FDYtdmnNnj7YQWnx9yX1s/GEzOEjiCFN+nbwQ3AM60ADyEtu8tb1iwEWQ1t8BJbIaVJ2
+	k5I+AUY/HvYTUMYuXPyiqhlxrOOy914FEMzO0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	b=aa9OW7kw79LdjiI+B6hSf4rSXgYF77Cnn9Z3FA5pE4rda2fVh5+a5ycndmcARh5+Wb
-	s+/lzl6vJF6wfr7Op7do6xzYFNpSTAQDqalT0fsBJNKvZF2/u+g4tFjj/aLlD9nBif6S
-	eEra1HWOFsIhAY1EzY5h5IZQs79d0TF4Of/4s=
-Received: by 10.140.56.1 with SMTP id e1mr7075881rva.136.1274904282709;
-	Wed, 26 May 2010 13:04:42 -0700 (PDT)
+	b=QzcnKGnzPbcN7SoTAQhDeIWWRHLSF7VANi6ldlGEUESqLYu8DSsEVdmX+pWXDFDETW
+	jQ3oNPADQPJ8/pN57ZYCZD/vppmbzP6e0G5vpY5BolNoQy079OWyuIYYN5czBhpog51s
+	bscNOBcL4WMxLELat9sXKJvdffXJWnuzTseew=
+Received: by 10.115.117.38 with SMTP id u38mr8033802wam.168.1274904552136;
+	Wed, 26 May 2010 13:09:12 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id h11sm361710rvm.9.2010.05.26.13.04.39
+	by mx.google.com with ESMTPS id c14sm3320681waa.13.2010.05.26.13.09.10
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 May 2010 13:04:40 -0700 (PDT)
-Date: Wed, 26 May 2010 13:04:27 -0700
+	Wed, 26 May 2010 13:09:10 -0700 (PDT)
+Date: Wed, 26 May 2010 13:09:01 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100526200427.GA10091@gmail.com>
-References: <AANLkTikfszFRLw6Ct-aEAUcu1xs8hRLdQRROW8OswCb7@mail.gmail.com>
-	<hso7fa$2lh$2@dough.gmane.org>
-	<AANLkTilux_HTutdHJZKh7hipzViaahkx7OtLOI6RFaVj@mail.gmail.com>
-	<20100517214019.GA8515@gmail.com>
-	<AANLkTimBQd3eDm165D0SEIE8HVyQ-QI_RD3KLpMBhGCR@mail.gmail.com>
+Message-ID: <20100526200901.GB10091@gmail.com>
+References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>
+	<hso7dv$2lh$1@dough.gmane.org>
+	<AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>
+	<AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimBQd3eDm165D0SEIE8HVyQ-QI_RD3KLpMBhGCR@mail.gmail.com>
+In-Reply-To: <AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.222.178
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -48,7 +47,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add cgreen. Library to do unit test for C language
+Subject: Re: [PATCH] Add lksctp tools
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,48 +61,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 20:09:03 -0000
+X-List-Received-Date: Wed, 26 May 2010 20:13:22 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
 
-On (23/05/10 15:49), João Henrique Freitas wrote:
+On (23/05/10 15:50), João Henrique Freitas wrote:
 > Hi,
 > 
 > Attached a unique patch.
 
-You could have used git send-email to send your patches. I could not pull
-them from patchwork or mbox verbatim. Anyway after applying bitbake cgreen
-and it ends up like below
+same as cgreen. but it builds. I get these warnings. Are they ok ?
 
-RROR: Function do_configure failed
-NOTE: Task failed: ('function do_configure failed',
-'/scratch/oe/work/armv5te-oe-linux-gnueabi/cgreen-svn-r0.0/temp/log.do_configure.29618')
-ERROR: Logfile of failure stored in:
-/scratch/oe/work/armv5te-oe-linux-gnueabi/cgreen-svn-r0.0/temp/log.do_configure.29618
-Log data follows:
-| -- The C compiler identification is GNU
-| -- Check for working C compiler:
-/scratch/oe/cross/armv5te/bin/arm-oe-linux-gnueabi-gcc
-| -- Check for working C compiler:
-/scratch/oe/cross/armv5te/bin/arm-oe-linux-gnueabi-gcc -- works
-| -- Detecting C compiler ABI info
-| -- Detecting C compiler ABI info - done
-| -- Performing Test WITH_FPIC
-| -- Performing Test WITH_FPIC - Success
-| -- Performing Test WITH_STACK_PROTECTOR
-| -- Performing Test WITH_STACK_PROTECTOR - Success
-| -- Performing Test WITH_FORTIFY_SOURCE
-| -- Performing Test WITH_FORTIFY_SOURCE - Success
-| -- FLEX was not found.
-| -- Configuring done
-| CMake Error in src/CMakeLists.txt:
-|   Cannot find source file "collector.c".  Tried extensions .c .C .c++ .cc
-|   .cpp .cxx .m .M .mm .h .hh .h++ .hm .hpp .hxx .in .txx
-| 
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1
+NOTE:   /usr/lib/lksctp-tools/libwithsctp.so
+NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1.0.7
+NOTE:   /usr/lib/lksctp-tools/libwithsctp.a
+NOTE:   /usr/lib/lksctp-tools/libwithsctp.la
+NOTE:   /usr/share/lksctp-tools/checksctp.c
+NOTE:   /usr/share/lksctp-tools/sctp_socket.c
+NOTE:   /usr/share/lksctp-tools/sctp_bind.c
+NOTE:   /usr/share/lksctp-tools/sctp_darn.c
+NOTE:   /usr/share/lksctp-tools/sctp_load_libs.c
+NOTE:   /usr/share/lksctp-tools/sctp_sockopt.c
+NOTE:   /usr/share/lksctp-tools/sctp_socket.h
+NOTE:   /usr/share/lksctp-tools/sctp_test.c
+NOTE:   /usr/share/lksctp-tools/sctp_darn.h
+NOTE:   /usr/bin/sctp_test
+NOTE:   /usr/bin/sctp_darn
+NOTE:   /usr/bin/checksctp
+NOTE:   /usr/bin/withsctp
 
-
-it could not find FLEX.
 
 Thx
 -Khem
