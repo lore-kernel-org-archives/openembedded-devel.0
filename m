@@ -1,54 +1,44 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-pz0-f178.google.com ([209.85.222.178])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OHB8s-0003vy-92
+	(envelope-from <raj.khem@gmail.com>) id 1OHBHV-0004Dl-Q3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 09:35:06 +0200
-Received: by fxm9 with SMTP id 9so1798032fxm.6
+	Wed, 26 May 2010 09:44:02 +0200
+Received: by pzk8 with SMTP id 8so3855pzk.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 00:30:58 -0700 (PDT)
+	Wed, 26 May 2010 00:39:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=Biv+/kjU75zKSuhk3LSAfQEutoriutcZhyE0qhgIjl0=;
-	b=hKscQh7upDmsVU9yqloOy3D/RkSPhzflO4OR6XC8C8rroQtYOfsg9sh3ao7inBcySE
-	+l8XSgJCF2y6sXEI97FRQzYOJVhvD4W9rAhl/Up9dMFAawVCr2BGYiqRBDXidAYK8UwQ
-	QjyWaJdPkN7BHP+cXpLZTJqTHErVEQdkcEN1g=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=qUrFn4DMJgfhT7evtB7Fu0Wd6w4GQmYE4OnOC5eu4kg=;
+	b=PeO5tF7tIpGHuXf9jWX15kX2SXQ3OtiofiP1eI9NMvTUrgdUB4a59ILjToS12Cv3Cu
+	eL8xIacGAM+Q5d6JjRp9ynCePZSQ0tXovhwXqGYkxf1SDkQbdUMwUj+rTtk1ewxRI6F9
+	icBF0RfpZrKX9KATlXpoO1d2V3nOxdy61rpNw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=aJTLeYHqV861g+PtbiLBOXaGcXZUbt+U2S19GEGSy2S5OWhCaKutkdbtvasbFQkFSk
-	RPEvGoUDe5DfM8XzxsAxWvzIvHUjASKjQj2ugALzg/WYy3+OW56Xg+oSkFZHJHJLvRyk
-	S9Xv+5kfPONv2RiSeidpGx8GBujgnXtTaIxh0=
-Received: by 10.223.50.68 with SMTP id y4mr7375227faf.51.1274859058746;
-	Wed, 26 May 2010 00:30:58 -0700 (PDT)
-Received: from s42.loc (85-127-94-237.dynamic.xdsl-line.inode.at
-	[85.127.94.237])
-	by mx.google.com with ESMTPS id r25sm28719769fai.11.2010.05.26.00.30.57
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=etT5VO1RHfIlWBZ7kZMlKtqljM0vEIWxoFKhIbR1A2OtkxuSbcZfPslHmlnMFLvXVX
+	UCzmwsZtCNBRCJC7ueMeOKtlntftQe7GnpO5ly1dZiHrZIsx2/PgI83hxg2MO3bHo58/
+	oXUo7fir2/sCWToErRnjj1/gMUKLvpQG4hqWA=
+Received: by 10.142.208.14 with SMTP id f14mr5709243wfg.298.1274859593224;
+	Wed, 26 May 2010 00:39:53 -0700 (PDT)
+Received: from localhost (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 22sm5089827pzk.9.2010.05.26.00.39.52
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 May 2010 00:30:58 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OHBGK-0000zq-8G; Wed, 26 May 2010 09:42:48 +0200
-Date: Wed, 26 May 2010 09:42:48 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Wed, 26 May 2010 00:39:52 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100526074248.GC31532@mx.loc>
-References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
-	<1274854676-5931-4-git-send-email-koen@openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <1274854676-5931-4-git-send-email-koen@openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Date: Wed, 26 May 2010 00:39:44 -0700
+Message-Id: <1274859584-8442-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.222.178
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chase Maupin <chase.maupin@ti.com>, Koen Kooi <k-kooi@ti.com>
-Subject: Re: [PATCH 4/7] Usermanual/getting_oe: Fix documentation errors
+Subject: [PATCH] sanity.bbclass: Barf if TMPDIR has trailing forward slash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,34 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 07:35:06 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 26 May 2010 07:44:03 -0000
 
-On Wed, May 26, 2010 at 08:17:53AM +0200, Koen Kooi wrote:
->From: Chase Maupin <chase.maupin@ti.com>
->
->* Fixed up typos and other errors in the documentation.
->
->Signed-off-by: Chase Maupin <chase.maupin@ti.com>
->Signed-off-by: Koen Kooi <k-kooi@ti.com>
->---
-> docs/usermanual/chapters/getting_oe.xml |   26 ++++++++++++++++++++++----
-> 1 files changed, 22 insertions(+), 4 deletions(-)
->
->diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
->index d18c955..cb82220 100644
->--- a/docs/usermanual/chapters/getting_oe.xml
->+++ b/docs/usermanual/chapters/getting_oe.xml
+* Unknowingly many developers run into this issue and
+  painful part it that the problems start happening almost
+  when build it complete and the errors are unrelated to cause
+  see http://www.mail-archive.com/angstrom-distro-devel@linuxtogo.org/msg02922.html
 
->@@ -342,6 +342,16 @@ MACHINE = "om-gta01"</screen>
->             </varlistentry>
-> 
->             <varlistentry>
->+              <term><literal>base-image</literal></term>
->+              <listitem>
->+                <para>Build and image that is the smallest possible image
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/sanity.bbclass |   11 +++++++++--
+ 1 files changed, 9 insertions(+), 2 deletions(-)
 
-s/and image/an image/
+diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
+index dfb3010..88672ba 100644
+--- a/classes/sanity.bbclass
++++ b/classes/sanity.bbclass
+@@ -112,11 +112,18 @@ def check_sanity(e):
+ 	oes_bb_conf = data.getVar( 'OES_BITBAKE_CONF', e.data, True )
+ 	if not oes_bb_conf:
+ 		messages = messages + 'You do not include OpenEmbeddeds version of conf/bitbake.conf. This means your environment is misconfigured, in particular check BBPATH.\n'
+-
+ 	#
+-	# Check that TMPDIR hasn't changed location since the last time we were run
++	# get TMPDIR and use it in following two checks
+ 	#
+ 	tmpdir = data.getVar('TMPDIR', e.data, True)
++	#
++	# check if tmpdir has traling '/'
++	#
++	if tmpdir[-1] == "/":
++		messages = messages + "Your TMPDIR has trailing '/' (forward slash), this can cause autotools lamangler fail regexp matches when munging .la files. Please remove it.\n\t"
++	#
++	# Check that TMPDIR hasn't changed location since the last time we were run
++	#
+ 	checkfile = os.path.join(tmpdir, "saved_tmpdir")
+ 	if os.path.exists(checkfile):
+ 		f = file(checkfile, "r")
+-- 
+1.7.0.4
+
 
 
