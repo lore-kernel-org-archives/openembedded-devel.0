@@ -1,54 +1,44 @@
-Received: from out3.smtp.messagingengine.com ([66.111.4.27])
+Received: from ey-out-1920.google.com ([74.125.78.144])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OH9Iq-0007mL-Pr
+	(envelope-from <koen.kooi@gmail.com>) id 1OHA0N-0006xx-Ny
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 07:37:18 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 06E62F8875
+	Wed, 26 May 2010 08:22:17 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so197024eyw.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 01:33:00 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Wed, 26 May 2010 01:33:00 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type:content-transfer-encoding;
-	s=smtpout; bh=/ddIuLDnfthrKO0DQjwzJhHJsTU=;
-	b=RPs7x4yj8jr+N82cerMJfVuVtA0kBCnwbou2kSB1PlD2YlNgwZTXaFZMJUHYUnC8ExlwJ2D2qWu96vUZqMSuNQI+Szwvztu6BizMh1oKmSZtiZ/ZV/rEztn1ngcQBU4w9lyR57RLbP/xs+Aiwh1wIniYDoo80j23XfAM20KFL7A=
-X-Sasl-enc: fIAqVMiSAu9t4BnWFzTvG776vmcxV2yLJVqCi5vieN3o 1274851979
-Received: from [192.168.1.35] (hnvr-4d07b6da.pool.mediaWays.net [77.7.182.218])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 4A4C24C531B
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 01:32:59 -0400 (EDT)
-Date: Wed, 26 May 2010 07:34:26 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
+	Tue, 25 May 2010 23:18:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=p/ZeilCyPzzI8ddTB8eB6JFyse/nhRiNeOR++rXBQrs=;
+	b=VPIfOHs/QJqPDQwtqJ4os4i/hKgLzWHa5+bTuwYzAn5JFBzSDO+Ys+ZxmBnahP9fie
+	hpm6fXxq0cN1403IO1XGOcoPOjWfTCz4UYHUIrxQ5wroRABe47TRkq0swMpx6BDCExeo
+	809nPI+jaBT+4djn3iTNwKrdE6F3zTmAHJrrM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=HiFaNlf6RJwkyUEYVYrKDUcHDv1aqpAVrvmNSVLawJjv1yRdG8821qpwL2QU1NNkL5
+	95zxMNwebMpBH1XIFS2WaBCAKyrmQBD+DDS9IMQmQXO2w/hCYtd3og7Ep8sPEQmaUEYO
+	tCLKywIynEmjNwEIzYXWoaMnuKqg/Lh2le0WA=
+Received: by 10.213.15.75 with SMTP id j11mr1000554eba.34.1274854690252;
+	Tue, 25 May 2010 23:18:10 -0700 (PDT)
+Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
+	by mx.google.com with ESMTPS id 13sm2808197ewy.9.2010.05.25.23.18.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 25 May 2010 23:18:08 -0700 (PDT)
+From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimGQw84uTAjKDVjJLZKbsATtDZqrFeDfSGnfrQw@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1005260730500.5274@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005191726560.21508@asterix.crazy-teaparty.dyndns.org>
-	<ht14oq$ok6$1@dough.gmane.org>
-	<alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005211518470.5274@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1005211537200.5274@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTim5DgTLfF1duohbONBtWCc1ASKfcACiJ2M66rr3@mail.gmail.com>
-	<alpine.LNX.2.00.1005241813190.5274@asterix.crazy-teaparty.dyndns.org>
-	<20100524182529.GA28464@gmail.com>
-	<alpine.LNX.2.00.1005251636150.5274@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTimGQw84uTAjKDVjJLZKbsATtDZqrFeDfSGnfrQw@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.27
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Date: Wed, 26 May 2010 08:17:50 +0200
+Message-Id: <1274854676-5931-1-git-send-email-koen@openembedded.org>
+X-Mailer: git-send-email 1.7.0
+X-SA-Exim-Connect-IP: 74.125.78.144
+X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: powerpc-g++ 4.2.4 problem casting long long to double
+Cc: Koen Kooi <k-kooi@ti.com>, Chase Maupin <chase.maupin@ti.com>
+Subject: [PATCH 1/7] Usermanual/common_use_cases: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,124 +52,155 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 05:37:18 -0000
-Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 May 2010 06:22:17 -0000
 
-On Tue, 25 May 2010, Khem Raj wrote:
-> On Tue, May 25, 2010 at 8:15 AM, Vitus Jensen <vjensen@gmx.de> wrote:
->> On Mon, 24 May 2010, Khem Raj wrote:
->>> On (24/05/10 18:36), Vitus Jensen wrote:
->>
->>
->>>> Hmm, I'm using angstrom with glibc. =C2=A0And I'm testing on the rea=
-l
->>>> device and saw that -mhard-float is implied by mcpu=3D603e. =C2=A0Us=
-ing the
->>>> FPU would certainly explain differences between qemu and the real
->>>> thing. =C2=A0But __floatdidf is hard to understand, all macro. =C2=A0=
-Is it
->>>> really using the FPU?
->>>
->>> Yeah that could be something to look at. In general if gcc is using
->>> fp instruction to schedule then it might be using them.
->>>
->>> You should try to find which libgcc is it linking to when using g++
->>> and gcc. It could be that its linking in two different libgcc version=
-s
->>>
->>> secondly try to compile program statically and then run it.
->>
->>
->> Using -static-libgcc and -shared-libgcc was interesting, it just affec=
-ts the
->> gcc support code. =C2=A0static is default for C, shared for C++ and fo=
-rcing
->> static for C++ produced correct output. =C2=A0When comparing implement=
-ations:
->>
->> * static uses inline fpu code, source
->> work/i686-ppc603e-sdk-angstrom-linux/gcc-cross-sdk-4.4.4-r2.1/gcc-4.4.=
-4/gcc/libgcc2.c
->>
->> * shared calls into libgcc_s.so.1 which uses software, excerpt:
->> Dump of assembler code for function __floatdidf:
->> =3D> 0x0fe12878 <+0>: =C2=A0 =C2=A0 stwu =C2=A0 =C2=A0r1,-32(r1)
->> =C2=A0 0x0fe1287c <+4>: =C2=A0 =C2=A0 mflr =C2=A0 =C2=A0r0
->> =C2=A0 0x0fe12880 <+8>: =C2=A0 =C2=A0 stmw =C2=A0 =C2=A0r26,8(r1)
->> =C2=A0 0x0fe12884 <+12>: =C2=A0 =C2=A0mr =C2=A0 =C2=A0 =C2=A0r27,r4
->> =C2=A0 0x0fe12888 <+16>: =C2=A0 =C2=A0mr =C2=A0 =C2=A0 =C2=A0r26,r3
->> =C2=A0 0x0fe1288c <+20>: =C2=A0 =C2=A0srawi =C2=A0 r9,r26,31
->> =C2=A0 0x0fe12890 <+24>: =C2=A0 =C2=A0srawi =C2=A0 r10,r26,0
->> =C2=A0 0x0fe12894 <+28>: =C2=A0 =C2=A0stw =C2=A0 =C2=A0 r0,36(r1)
->> =C2=A0 0x0fe12898 <+32>: =C2=A0 =C2=A0mr =C2=A0 =C2=A0 =C2=A0r3,r10
->> =C2=A0 0x0fe1289c <+36>: =C2=A0 =C2=A0bl =C2=A0 =C2=A0 =C2=A00xfe31244=
- <__floatsidf@plt>
->> =C2=A0 0x0fe128a0 <+40>: =C2=A0 =C2=A0lis =C2=A0 =C2=A0 r5,16880
->>
->>
->> [STABLE/2009] There are 2 libgcc_s.so.1 versions in TMPDIR/cross, the =
-bigger
->> ./ppc603e/powerpc-angstrom-linux/lib/nof/libgcc_s.so.1 matches the ins=
-talled
->> version,
->
-> thats the problem
->
-> if one copies the smaller version (uses fpu code) to target:/lib/
->> the results of -shared-libgcc applications are OK.
->>
->> So, hard-fpu and soft-fpu are incompatible? =C2=A0The incorrect versio=
-n matches
->> (strip; cmp -l) several paths in TMPDIR/work:
->
-> its more the calling convention.
->
->>
->> ./ppc603e-angstrom-linux/gcc-4.2.4-r3/image/lib/libgcc_s.so.1
->> ./ppc603e-angstrom-linux/gcc-4.2.4-r3/gcc-4.2.4/build.powerpc-angstrom=
--linux.powerpc-angstrom-linux/gcc/nof/libgcc_s.so.1
->> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/install/libgcc/lib/libgcc_=
-s.so.1
->> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/image/lib/libgcc_s.so.1
->> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/staging-pkg/cross/powerpc-=
-angstrom-linux/lib/nof/libgcc_s.so.1
->> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/gcc-4.2.4/build.i686-linux=
-.powerpc-angstrom-linux/gcc/nof/libgcc_s.so.1
->>
->> But there are 4 other smaller versions of that library, the good one c=
-oming
->> from gcc-4.2.4. or gcc-cross-4.2.4. =C2=A0Which recipes decides which =
-version to
->> copy into the image? =C2=A0For now it seems enough to copy a fpu-versi=
-on by hand
->> into the image but this is hardly an universal solution.
->
-> actually it should have packaged the fpu version into /lib on target
-> but its a bug that it instead copied
-> nof version.
->
-> I think I touched this area and saw this problem in past. Can you try=20
-> gcc 4.4.4 and see if the problem still happens there.
+From: Chase Maupin <chase.maupin@ti.com>
 
-I really would like to but there is no gcc 4.4.4 in stable/2009.  And .de=
-v=20
-currently fails to build in virtual/kernel.
+* Fixed up typos and other errors in the documentation.
 
-cp: cannot stat=20
-`/home/oe/build/out.dev/work/n1200-angstrom-linux/linux-n1200-2.6.27-rc9+=
-git-r3/linux-2.6.27-foonas-git//home/oe/build/out.dev/work/n1200-angstrom=
--linux/linux-n1200-2.6.27-rc9+git-r3/linux-2.6.27-foonas-git/arch/powerpc=
-/boot/cuImage.thecus_n1200':=20
-No such file or directory
-ERROR: Function do_deploy failed
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+Signed-off-by: Koen Kooi <k-kooi@ti.com>
+---
+ docs/usermanual/chapters/common_use_cases.xml |   45 +++++++++++++-----------
+ 1 files changed, 24 insertions(+), 21 deletions(-)
 
-I think I have a buildable .dev state at work and will retry there.
+diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs/usermanual/chapters/common_use_cases.xml
+index 7ae3ee5..9adb66a 100644
+--- a/docs/usermanual/chapters/common_use_cases.xml
++++ b/docs/usermanual/chapters/common_use_cases.xml
+@@ -7,11 +7,12 @@
+ 
+     <para>Creating a new distribution is not complicated, however we urge you
+     to try existing distributions first, because it's also very easy to do
+-    wrong. The config need to be created in /conf/distro directory. So what
+-    has to be inside? <itemizedlist>
++    wrong. The config needs to be created in $OEBASE/openembedded/conf/distro 
++    directory. So what has to be inside? 
++      <itemizedlist>
+         <listitem>
+           <para><command>DISTRO_VERSION</command> so users will know which
+-          version of distribution they use.</para>
++          version of the distribution they are using.</para>
+         </listitem>
+ 
+         <listitem>
+@@ -71,29 +72,30 @@ SRCDATE = "20061014"
+   <section id="commonuse_new_machine">
+     <title>Adding a new Machine</title>
+ 
+-    <para>To be able to build for device OpenEmbedded have to know it, so
+-    machine config file need to be written. All those configs are stored in
+-    /conf/machine/ directory.</para>
++    <para>To be able to build for a device OpenEmbedded has to know about it, 
++    so a machine config file needs to be written. All of the machine 
++    configs are stored in $OEBASE/openembedded/conf/machine/ directory.</para>
+ 
+     <para>As usual some variables are required: <itemizedlist>
+         <listitem>
+-          <para><command>TARGET_ARCH</command> which describe which CPU
+-          architecture does machine use.</para>
++          <para><command>TARGET_ARCH</command> describes which CPU
++          architecture the machine uses.</para>
+         </listitem>
+ 
+         <listitem>
+-          <para><command>MACHINE_FEATURES</command> which describe which
+-          features device has. More about it in <link
++          <para><command>MACHINE_FEATURES</command> which describes which
++          features the device has. More about it in <link
+           linkend="task-base">task-base</link> section.</para>
+         </listitem>
+ 
+         <listitem>
+           <para><command>PREFERRED_PROVIDER_virtual/kernel</command> has to
+-          point into proper kernel recipe for this machine.</para>
++          point to the proper kernel recipe for this machine.</para>
+         </listitem>
+       </itemizedlist></para>
+ 
+-    <para>Next kernel recipe needs to be added.</para>
++    <para>Next the kernel recipe needs to be added if it doesn't already exist.
++    </para>
+   </section>
+ 
+   <section id="commonuse_new_package">
+@@ -105,7 +107,7 @@ SRCDATE = "20061014"
+     <section>
+         <title>building from unstable source code</title>
+         <para>Building against the latest, bleeding-edge source has some intricacies of its own.
+-        For one, it is desirable to pin down a 1 code revision that is known to build to
++        For one, it is desirable to pin down a code revision that is known to build to
+         prevent random breakage in OE at the most inopportune time for all OE users.  Here is
+         how to do that properly.
+           <itemizedlist>
+@@ -113,7 +115,8 @@ SRCDATE = "20061014"
+             <listitem><para>for cvs: add 'PV = "1.1+cvs${SRCREV}"' to your bb file.</para></listitem>
+           </itemizedlist>
+         Accompany either with an entry to conf/distro/include/sane-srcrevs.inc for a revision that you know
+-        builds successfully.
++        builds successfully.  It is also common to define the stable SRCREV 
++        for your package directly in the package recipe.
+         </para>
+         <para>
+         If you really absolutely have to follow the latest commits, you can do that by adding
+@@ -126,7 +129,7 @@ SRCDATE = "20061014"
+   <section id="commonuse_new_image">
+     <title>Creating your own image</title>
+ 
+-    <para>Creating own image is easy - only few variables needs to be set:
++    <para>Creating own image is easy - only few variables need to be set:
+     <itemizedlist>
+         <listitem>
+           <para><command>IMAGE_BASENAME</command> to give a name for your own
+@@ -147,7 +150,7 @@ SRCDATE = "20061014"
+           <para><command>IMAGE_LINGUAS</command> is an optional list of
+           languages which has to be installed into the image</para>
+         </listitem>
+-      </itemizedlist> Then adding of the <emphasis>image</emphasis> class use:
++      </itemizedlist> Then add the <emphasis>image</emphasis> class using:
+     <screen>
+ inherit image
+ </screen> And the image recipe is ready for usage.</para>
+@@ -240,7 +243,7 @@ export LOCALDIR=$PWD/secret-isv
+                     </screen>
+ 
+         <para>Use <command>source build_source</command> to source the script,
+-        use <command>env</command> to check that the variable where
++        use <command>env</command> to check that the variables were
+         exported.</para>
+       </section>
+ 
+@@ -484,8 +487,8 @@ RDEPENDS_${PN} += "\
+             <title>Putting it together</title>
+             <para>In the previous two sections we have prepared the host and
+             target side. One thing that is missing is combining the two newly
+-            created tasks and actually create the SDK. This is what we are going
+-            to do now.</para>
++            created tasks and actually creating the SDK. This is what we are 
++            going to do now.</para>
+ 
+             <para>Create <filename>meta-toolchain-YOU.bb</filename> in the
+             <filename>recipes/meta</filename> directory and place the following
+@@ -529,7 +532,7 @@ SDK_SUFFIX = "toolchain-YOUR"
+             optional dependencies like directFB, glib-2.0, gstreamer-0.10, tslib
+             and more esoteric dependencies like mysql and postgres. This allows
+             developers to simply start developing using Qt and enables system
+-            integrator to easily recompile Qt and base libraries without tracking
++            integrators to easily recompile Qt and base libraries without tracking
+             down extra dependencies.
+             </para>
+ 
+@@ -575,7 +578,7 @@ $ <command>bitbake</command> meta-toolchain-qte
+             should start by downloading the SDK and untar it to the root folder
+             (<filename>/</filename>). Once this operation is finished you will
+             find a new directory <filename>/usr/local/angstrom/arm/</filename> and
+-            it contains the <filename>environment-setup</filename> to setup the
++            it contains the <filename>environment-setup</filename>file to setup the
+             <emphasis>QMAKESPEC</emphasis> and various other paths.
+             </para>
+ 
+-- 
+1.7.0
 
-Vitus
-
---=20
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
 
 
