@@ -1,37 +1,37 @@
-Received: from ey-out-1920.google.com ([74.125.78.144])
+Received: from mail-ew0-f221.google.com ([209.85.219.221])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1OHA0Y-0006xx-E3
+	(envelope-from <koen.kooi@gmail.com>) id 1OHA0a-0006yM-Hv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 08:22:30 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so197024eyw.4
+	Wed, 26 May 2010 08:22:31 +0200
+Received: by mail-ew0-f221.google.com with SMTP id 21so599647ewy.27
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 23:18:21 -0700 (PDT)
+	Tue, 25 May 2010 23:18:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=snE17Lc+fF783zhwd0ZTmfkdH4d+Gtb6VE7Zb8nc2cg=;
-	b=jfXIKKeAdtoo3zs6faS+fjSiISdttlFcxwFjlptM/IKraZcl+QgY7NrN2djMrYOj/8
-	v8HUoEFJQTwIg2xYfwYTI1R/lr7sPyYeOmoDsp0Ur9oykIAC7SeD5NfOHtpqJ4dR+LUj
-	IvEZ2rcAMMbHUQ3F3yGv/lPDOCkGKceJxWSVg=
+	bh=jyBXUZ9IfEdxFVc3ZDbeEkB0LtgbWPrYrJHhMEw9ObI=;
+	b=wvWpVormJ+WsRSX2At/za08Zym0mm+3UBOAu1/KWyurttv7Tup+yrHEWyvjLTZPGdU
+	wYQByr3CJCDVSg0pxO6AioIXDaM1yuks46BEbsc9sNQAkhOuP5nsQV/pI/IgpyAo/2IT
+	M71v16tIvM8FWjqKIFoYNfKM+XoC3ZHq+SBb8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=rnGxZx7SAk3uOjV0X02FF4LkO67HIoSdKXOJ9nRio3mNQJ3oCcDHzDCqDDD7jCBl84
-	FdqETAnCfFPhujCrIpEunBk+Mlg8OZupboNosu01vqLtYcEcuDnaTosW3iiC7z7sAzTb
-	08yETnSiG61kDmOMcGw9saWvf3VnbXI41UJMM=
-Received: by 10.213.35.18 with SMTP id n18mr1074480ebd.64.1274854701142;
-	Tue, 25 May 2010 23:18:21 -0700 (PDT)
+	b=Cj48VQNYYQXh5goEH/yhM8F82BkDsWxnIbynYUFpWQR+EXVaiA+IEyO+JkvxLdO81S
+	uq1QLU+ccIr58cLYRCrC3kHzzvIE5Kmw2ytDH/Gdmp7BsrqpSLTIvCzywJN37o+dC2ww
+	KRiI0MoFVhE7Km9pWiSeYd4zytwUCneVDtWEw=
+Received: by 10.213.33.199 with SMTP id i7mr1055870ebd.65.1274854703269;
+	Tue, 25 May 2010 23:18:23 -0700 (PDT)
 Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 16sm2838642ewy.7.2010.05.25.23.18.20
+	by mx.google.com with ESMTPS id 15sm2809756ewy.8.2010.05.25.23.18.22
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 25 May 2010 23:18:20 -0700 (PDT)
+	Tue, 25 May 2010 23:18:22 -0700 (PDT)
 From: Koen Kooi <koen.kooi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 May 2010 08:17:55 +0200
-Message-Id: <1274854676-5931-6-git-send-email-koen@openembedded.org>
+Date: Wed, 26 May 2010 08:17:56 +0200
+Message-Id: <1274854676-5931-7-git-send-email-koen@openembedded.org>
 X-Mailer: git-send-email 1.7.0
 In-Reply-To: <1274854676-5931-1-git-send-email-koen@openembedded.org>
 References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.78.144
+X-SA-Exim-Connect-IP: 209.85.219.221
 X-SA-Exim-Mail-From: koen.kooi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Koen Kooi <k-kooi@ti.com>, Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCH 6/7] Usermanual/recipes: Fix documentation errors
+Subject: [PATCH 7/7] Usermanual/usage: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,7 +54,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 06:22:30 -0000
+X-List-Received-Date: Wed, 26 May 2010 06:22:31 -0000
 
 From: Chase Maupin <chase.maupin@ti.com>
 
@@ -63,302 +63,253 @@ From: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 Signed-off-by: Koen Kooi <k-kooi@ti.com>
 ---
- docs/usermanual/chapters/recipes.xml |   66 +++++++++++++++++-----------------
- 1 files changed, 33 insertions(+), 33 deletions(-)
+ docs/usermanual/chapters/usage.xml |   64 ++++++++++++++++++------------------
+ 1 files changed, 32 insertions(+), 32 deletions(-)
 
-diff --git a/docs/usermanual/chapters/recipes.xml b/docs/usermanual/chapters/recipes.xml
-index 6a574d8..9c1ec5d 100644
---- a/docs/usermanual/chapters/recipes.xml
-+++ b/docs/usermanual/chapters/recipes.xml
-@@ -154,7 +154,7 @@ VAR2 = "The version is ${PV}"</screen></para>
+diff --git a/docs/usermanual/chapters/usage.xml b/docs/usermanual/chapters/usage.xml
+index 1563dc3..9197ffa 100644
+--- a/docs/usermanual/chapters/usage.xml
++++ b/docs/usermanual/chapters/usage.xml
+@@ -5,15 +5,15 @@
+   <section id="usage_introduction" xreflabel="introduction">
+     <title>Introduction</title>
  
-           <para>The following example:<screen>VAR1 ?= "New value"</screen>will
-           set <emphasis role="bold">VAR1</emphasis> to <emphasis>"New
--          value"</emphasis> if its currently empty. However if it was already
-+          value"</emphasis> if it is currently empty. However if it was already
-           set it would be unchanged. In the following <emphasis
-           role="bold">VAR1</emphasis> is left with the value
-           <emphasis>"Original value"</emphasis>:<screen>VAR1 = "Original value"
-@@ -290,7 +290,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
+-    <para>If you're reading this manual you probably already have some idea of
++    <para>If you are reading this manual you probably already have some idea of
+     what OpenEmbedded is all about, which is taking a lot of software and
+     creating something that you can run on another device. This involves
+     downloading some source code, compiling it, creating packages (like .deb
+-    or .rpm) and/or creating boot images that can written to flash on the
++    or .rpm) and/or creating boot images that can be written to flash on the
+     device. The difficulties of cross-compiling and the variety of devices
+     which can be supported lead to a lot more complexity in an OpenEmbedded
+     based distribution than you'd find in a typical desktop distribution
+-    (for which cross-compiling isn't needed).</para>
++    (where cross-compiling isn't needed).</para>
+ 
+     <para>A major part of OpenEmbedded deals with compiling source code for
+     various projects. For each project this generally requires the same basic
+@@ -67,7 +67,7 @@
+       <listitem>
+         <para>Tool chains (compiler, linker etc) are often difficult to
+         compile. Cross tool chains are even more difficult. Typically you'd go
+-        out and download a tool chain made by someone else - but not when your
++        out and download a tool chain made by someone else - but not when you're
+         using OE. In OE the entire toolchain is built as part of the process.
+         This may make things take longer initially and may make it more
+         difficult to get started but makes it easier to apply patches and test
+@@ -123,7 +123,7 @@
+     helping you understand how to debug and develop within
+     OpenEmbedded.</para>
+ 
+-    <para>You'll also not a lot of reference to variables that define specific
++    <para>You'll also note a lot of references to variables that define specific
+     directories or change the behaviour of some part of the build process. You
+     should refer to <xref linkend="chapter_recipes" /> for full details on
+     these variables.</para>
+@@ -160,7 +160,7 @@
+         <listitem>
+           <para>This directory contains distribution related files. A
+           distribution decides how various activities are handled in the final
+-          image, such as how networking configured, if usb devices will be
++          image, such as how networking is configured, if usb devices will be
+           supported, what packaging system is used, which libc is used
+           etc.</para>
+         </listitem>
+@@ -194,7 +194,7 @@
+     <title>Work space</title>
+ 
+     <para>Let's start out by taking a look at a typically working area. Note
+-    that this may not be exactly what see - there are a lot of options that
++    that this may not be exactly what you see - there are a lot of options that
+     can effect exactly how things are done, but it gives us a pretty good idea
+     of whats going on. What we are looking at here is the tmp directory (as
+     specified by TMPDIR in your local.conf):<screen>$ <command>find</command> tmp -maxdepth 2 -type d 
+@@ -303,10 +303,10 @@ tmp/deploy/images</screen></para>
+       </varlistentry>
+ 
+       <varlistentry>
+-        <term>staging</term>
++        <term>sysroots</term>
+ 
+         <listitem>
+-          <para>Contains the staging area, which is used to stored natively
++          <para>Contains the staging area, which is used to store natively
+           compiled tools and and libraries and headers for the target that are
+           required for building other software.</para>
+         </listitem>
+@@ -324,9 +324,9 @@ tmp/deploy/images</screen></para>
      </variablelist>
  
-     <para>For a detailed description of the syntax for the bitbake recipe
--    files you should refer to the bitbake use manual.</para>
-+    files you should refer to the bitbake user manual.</para>
-   </section>
+     <para>When people refer to the <emphasis>"tmp directory"</emphasis> this
+-    is the directory them are talking about.</para>
++    is the directory they are talking about.</para>
  
-   <section id="recipes_versioning" xreflabel="versioning">
-@@ -418,7 +418,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-   <section id="recipes_variables" xreflabel="variables">
-     <title>Variables</title>
+-    <para>To perform a complete rebuild from script you would usually rename
++    <para>To perform a complete rebuild from scratch you would usually rename
+     or delete tmp and then restart your build. I recommend keeping one old
+     version of tmp around to use for comparison if something goes wrong with
+     your new build. For example:<screen>$ <command>rm</command> -fr tmp.OLD
+@@ -339,7 +339,7 @@ $ <command>bitbake</command> bootstrap-image</screen></para>
+       <para>The work directory is where all source code is unpacked into,
+       where source is configured, compiled and packaged. In other words this
+       is where all the action happens. Each bitbake recipe will produce a
+-      corresponding sub directory in the work directory. The sub directory
++      corresponding subdirectory in the work directory. The subdirectory
+       name will contain the recipe name, version and the release number (as
+       defined by the PR variable within the recipe).</para>
  
--    <para>One of the most confusing part of bitbake recipes for new users is
-+    <para>One of the most confusing parts of bitbake recipes for new users is
-     the large amount of variables that appear to be available to change and/or
-     control the behaviour of some aspect of the recipe. Some variables, such
-     as those derived from the file name are reasonably obvious, others are not
-@@ -503,7 +503,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-     <para>Practically all recipes start with a header section which describes
-     various aspects of the package that is being built. This information is
-     typically used directly by the package format (such as ipkg or deb) as
--    its meta data used to describe the package.</para>
-+    it is meta data used to describe the package.</para>
+@@ -348,9 +348,9 @@ $ <command>bitbake</command> bootstrap-image</screen></para>
+ tmp/work
+ tmp/work/busybox-1.2.1-r13
+ tmp/work/libice-1_1.0.3-r0
+-tmp/work/arpwatch-2.1a15-r2</screen>You can see that the first three (of
++tmp/work/arpwatch-2.1a15-r2</screen>You can see the first three (of
+       several hundred) recipes here and they are for release 13 of busybox
+-      1.2.1, release 0 or libice 1.1.0.3 and release 2 of arpwatch 2.1a15.
++      1.2.1, release 0 of libice 1.1.0.3 and release 2 of arpwatch 2.1a15.
+       It's also possible that you may just have a sub directory for your
+       targets architecture and operating system in which case these
+       directories will be in that additional subdirectory, as shown
+@@ -446,7 +446,7 @@ tmp/work/lzo-1.08-r14/image</screen></para>
+             install into <emphasis role="bold">${D}/usr/bin</emphasis> and
+             <emphasis role="bold">${D}/usr/lib</emphasis> instead. When
+             installed on the target the ${D} will be not be included so
+-            they'll end up in the correct place. You definitely don't wont
++            they'll end up in the correct place. You definitely don't want
+             files on your host system being replaced by cross-compiled
+             binaries for your target!</para>
+           </listitem>
+@@ -544,14 +544,14 @@ tmp/work/lzo-1.08-r14/install/lzo/usr/lib/liblzo.so.1.0.0</screen></para>
+     packages. You probably need to start out by downloading the source code,
+     then unpacking the source code. Maybe you need to apply some patches for
+     some reason. Then you might run the configure script of the package,
+-    perhaps passing it some options to configure it to your liking. The you
+-    might run "make install" to install the software. If your actually going
++    perhaps passing it some options to configure it to your liking. Then you
++    might run "make install" to install the software. If you're actually going
+     to make some packages, such as .deb or .rpm, then you'd have additional
+     tasks you'd perform to make them.</para>
  
-     <para>Variables used in the header include:</para>
- 
-@@ -536,7 +536,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-         <term>SECTION</term>
- 
-         <listitem>
--          <para>The section is used to categorise the application into a
-+          <para>The section is used to categorize the application into a
-           specific group. Often used by GUI based installers to help users
-           when searching for software.</para>
- 
-@@ -625,7 +625,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-     file or a compressed archive file, such as .tar.gz or .zip, then the files
-     will be uncompressed and extracted from the archive automatically.</para>
- 
--    <para>Archive files will be extracted from with the working directory,
-+    <para>Archive files will be extracted from within the working directory,
-     <emphasis role="bold">${WORKDIR}</emphasis> and plain files will be copied
-     into the same directory. Patches will be applied from within the unpacked
-     source directory, <emphasis role="bold">${S}</emphasis>. (Details on these
-@@ -722,7 +722,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
- 
-         <listitem>
-           <para>This is where patches are applied and where the program is
--          expected to be compiled in.</para>
-+          expected to be compiled.</para>
+     <para>You find that building things in OpenEmbedded works in a similar way
+     - there are a number of tasks that are executed in a predefined order for
+-    each recipe. Any many of the tasks correspond to those listed above like
++    each recipe. Many of the tasks correspond to those listed above like
+     <emphasis>"download the source"</emphasis>. In fact you've probably
+     already seen some of the names of these tasks - bitbake displays them as
+     they are processed:<screen>$ <command>bitbake</command> lzo
+@@ -718,7 +718,7 @@ NOTE: build 200705041709: completed</screen><note>
+           <para>The <emphasis>configure</emphasis> task takes care of the
+           configuration of the package. Running a configure script
+           (<emphasis>"./configure &lt;options&gt;"</emphasis>) is probably the
+-          form of configuration that is most recognised but it's not the only
++          form of configuration that is most recognized but it's not the only
+           configuration system that exists.</para>
          </listitem>
        </varlistentry>
- 
-@@ -790,7 +790,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-            file://watchquagga.default"</screen>The recipe has two init files
-       and two configuration files, which are not patches, but are actually
-       files that it wants to include in the generated packages. Bitbake will
--      copy these files into the work directory. So to access them during the
-+      copy these files into the working directory. So to access them during the
-       install task we refer to them via the <emphasis
-       role="bold">WORKDIR</emphasis> variable:<screen>do_install () {
-     # Install init script and default settings
-@@ -809,7 +809,7 @@ mv fixed.recipe.bb myrecipe.bb</screen></para>
-       directory called <emphasis
-       role="bold">&lt;packagename&gt;-&lt;version&gt;</emphasis> in the
-       <emphasis role="bold">WORKDIR</emphasis> directory. This is the
--      directory in which it will change into before patching, compiling and
-+      directory it will change into before patching, compiling and
-       installing the package.</para>
- 
-       <para>For example, we have a package called <emphasis
-@@ -875,7 +875,7 @@ S = "${WORKDIR}/widgets"</screen></para>
-       <title>Staging directories</title>
- 
-       <para>Staging is used to make libraries, headers and binaries available
--      for the build of one recipe for use by another recipe. Building a
-+      from the build of one recipe for use by another recipe. Building a
-       library for example requires that packages be created containing the
-       libraries and headers for development on the target as well as making
-       them available on the host for building other packages that need the
-@@ -1339,7 +1339,7 @@ $</screen>This shows us that the helloworld program is for an SH
-       programs that you need to run a configure script for, passing various
-       parameters, and then make. To make these work when cross-compiling you
-       need to provides a lot of variables to the configure script. But all the
--      hard work as already been done for you. There's an <xref
-+      hard work has already been done for you. There's an <xref
-       linkend="autotools_class" /> which takes care of most of the complexity
-       of building an autotools based package.</para>
- 
-@@ -1387,7 +1387,7 @@ inherit autotools</screen></para>
-         </listitem>
+@@ -748,7 +748,7 @@ NOTE: build 200705041709: completed</screen><note>
+             <para>This is different from the <emphasis>install</emphasis> task
+             in that this is responsible for making available libraries and
+             headers for use during build on the development host. Therefore
+-            it's libraries which normal have to stage things while
++            it is libraries which normally have to stage things while
+             applications normally don't need to. The
+             <emphasis>install</emphasis> task on the other hand is making
+             files available for packaging and ultimately installation on the
+@@ -762,7 +762,7 @@ NOTE: build 200705041709: completed</screen><note>
  
          <listitem>
--          <para>Make modifications to prevent the configure script from tying
-+          <para>Make modifications to prevent the configure script from trying
-           to compile and run programs - any programs it compiles will be for
-           the target and not the host and so cannot be run.</para>
-         </listitem>
-@@ -1519,7 +1519,7 @@ inherit autotools</screen></para>
-           role="bold">.so</emphasis>, <emphasis role="bold">.a</emphasis> and
-           associated libtool <emphasis role="bold">.la</emphasis> libraries.
-           It will determine the appropriate libraries to install and take care
--          of any modifications that may be require for <emphasis
-+          of any modifications that may be required for <emphasis
-           role="bold">.la</emphasis> files.</para>
- 
-           <para>This function supports the following options:</para>
-@@ -1839,7 +1839,7 @@ NOTE: package helloworld-0.1-r0: task do_package_write: completed</screen>We
-     <section>
-       <title>Default packages and files</title>
- 
--      <para>The defaults package settings are defined in <emphasis
-+      <para>The default package settings are defined in <emphasis
-       role="bold">conf/bitbake.conf</emphasis> and are suitable for a lot of
-       recipes without any changes. The following list shows the default values
-       for the packaging related variables:</para>
-@@ -2363,7 +2363,7 @@ addtask unpack_extra after do_unpack before do_patch</screen></para>
-     <para>Often a certain pattern is followed in more than one recipe, or
-     maybe some complex python based functionality is required to achieve the
-     desired end result. This is achieved through the use of classes, which can
--    be found in the classes subdirectory at the top-level of on OE
-+    be found in the classes subdirectory at the top-level of an OE
-     checkout.</para>
- 
-     <para>Being aware of the available classes and understanding their
-@@ -2390,7 +2390,7 @@ addtask unpack_extra after do_unpack before do_patch</screen></para>
-     <para>A class is used via the inherit method. The following is an example
-     for the <emphasis>curl</emphasis> recipe showing that it uses three
-     classes:<screen>inherit autotools pkgconfig binconfig</screen>In this case
--    it is utilising the services of three separate classes:</para>
-+    it is utilizing the services of three separate classes:</para>
- 
-     <variablelist>
-       <varlistentry>
-@@ -2443,7 +2443,7 @@ addtask unpack_extra after do_unpack before do_patch</screen></para>
-     libraries, available for use by other recipes. This is different to
-     installing because installing is about making things available for
-     packaging and then eventually for use on the target device. Staging on the
--    other hand is about making things available on the host system for use by
-+    other hand is about making things available on the host system for use in
-     building later applications.</para>
- 
-     <para>Taking bzip2 as an example you can see that it stages a header file
-@@ -2463,7 +2463,7 @@ addtask unpack_extra after do_unpack before do_patch</screen></para>
-         <term>STAGING_INCDIR</term>
- 
-         <listitem>
--          <para>The directory into which staged headers files should be
-+          <para>The directory into which staged header files should be
-           installed. This is the equivalent of the standard <emphasis
-           role="bold">/usr/include</emphasis> directory.</para>
-         </listitem>
-@@ -2531,7 +2531,7 @@ EXTRA_OECONF = "--disable-ldap \
-           script of the package. In the gnupg case it needs to be told where
-           the bzip2 headers and libraries are, and this is done via the
-           <emphasis>--with-bzip2</emphasis> option. In this case it points to
--          the directory which include the lib and include subdirectories.
-+          the directory which includes the lib and include subdirectories.
-           Since OE doesn't define a variable for one level above the include
-           and lib directories <emphasis role="bold">..</emphasis> is used to
-           indicate one directory up. Without this, gnupg would search the host
-@@ -2717,9 +2717,9 @@ pkg_postinst_${PN}-rdisc6 () {
- 
-         <listitem>
-           <para>This class is used when installing and/or removing qpf fonts.
--          It register scripts to update the font paths and font cache
-+          It registers scripts to update the font paths and font cache
-           information to ensure that the font information is kept up to date
--          as fonts and installed and removed.</para>
-+          as fonts are installed and removed.</para>
+           <para>The <emphasis>install</emphasis> task is responsible for
+-          actually installing everything. Now this needs to install the
++          actually installing everything. This needs to install the
+           software into the destination directory, <emphasis
+           role="bold">D</emphasis>. This directory won't actually be a part of
+           the final package though. In other words if you install something
+@@ -782,7 +782,7 @@ NOTE: build 200705041709: completed</screen><note>
+           package. It moves the files for the destination directory, <emphasis
+           role="bold">${D}</emphasis>, that they were installed in into the
+           appropriate packages subdirectory. Usually there will be a main
+-          package a separate documentation (-doc), development (-dev) and
++          package, a separate documentation (-doc), development (-dev) and
+           debugging packages (-dbg) for example.</para>
          </listitem>
        </varlistentry>
+@@ -808,11 +808,11 @@ NOTE: build 200705041709: completed</screen><note>
+       <emphasis>install</emphasis>. This is slightly confusing but any task
+       <emphasis>x</emphasis> is implemented via a function called
+       <emphasis>do_x</emphasis> in the class or recipe where it is defined.
+-      See places refer to the tasks via their name only and some with the
++      Some places refer to the tasks via their name only and some with the
+       <emphasis>do</emphasis> prefix.</para>
+     </note>
  
-@@ -2972,7 +2972,7 @@ fi</screen></para>
-       </listitem>
+-    <para>You will almost certainly notice tasks beyond these ones - there are
++    <para>You will almost certainly notice tasks beyond the ones above - there are
+     various methods available to insert additional tasks into the tasks
+     sequence. As an example the <emphasis
+     role="bold">insane.bbclass</emphasis>, which performs various QA checks,
+@@ -822,7 +822,7 @@ NOTE: build 200705041709: completed</screen><note>
+     another new task called <emphasis>qa_staging</emphasis> between
+     <emphasis>populate_sysroot</emphasis> and <emphasis>build</emphasis>
+     tasks. The former validates the result of the
+-    <emphasis>configure</emphasis> task and the late the results of the
++    <emphasis>configure</emphasis> task and the later the results of the
+     <emphasis>populate_sysroot</emphasis> task.</para>
  
-       <listitem>
--        <para>How do handle incrementally creating patches</para>
-+        <para>How to handle incrementally creating patches</para>
-       </listitem>
- 
-       <listitem>
-@@ -3025,7 +3025,7 @@ fi</screen></para>
-     </orderedlist>
- 
-     <para>This results in the packaging system, such as ipkg, considering
--    the released version to be older then the rc version.</para>
-+    the released version to be older than the rc version.</para>
- 
-     <para>In OpenEmbedded the correct naming of pre and rc versions is to use
-     the previous version number followed by a + followed by the new version
-@@ -3138,7 +3138,7 @@ do_configure() {
-     role="bold">0_9_0</emphasis>.</para>
- 
-     <para>Some of the more common python code in use in existing recipes is
--    shown in the following table:</para>
-+    shown in the following list:</para>
- 
-     <variablelist>
-       <varlistentry>
-@@ -3389,7 +3389,7 @@ $</screen>then we would expect it to select version
-     (since all of the existing versions have a preference of 0). Note that you
-     can still call bitbake directly on the recipe:<screen>bitbake -b recipes/procps/procps_4.0.0.bb</screen>This
-     enables you to test, and fix the package manually without having bitbake
--    automatically select normally.</para>
-+    automatically select it normally.</para>
- 
-     <para>By using this feature in conjunction with overrides you can also
-     disable (or select) specific versions based on the override. The following
-@@ -3418,7 +3418,7 @@ $</screen>then we would expect it to select version
-       </listitem>
- 
-       <listitem>
--        <para>samlpe/standard script?</para>
-+        <para>sample/standard script?</para>
-       </listitem>
- 
-       <listitem>
-@@ -3445,13 +3445,13 @@ $</screen>then we would expect it to select version
-     from other packages.</para>
- 
-     <para>The most common reason for alternatives is to reduce the size of the
--    binaries. But cutting down on features, built in help and error messages
-+    binaries. By cutting down on features, built in help, error messages
-     and combining multiple binaries into one large binary it's possible to
-     save considerable space. Often users are not expected to use the commands
-     interactively in embedded appliances and therefore these changes have no
-     visible effect to the user. In some situations users may have interactive
-     access, or they may be more advanced users who want shell access on
--    appliances that normal don't provide it, and in these cases they should be
-+    appliances that normally don't provide it, and in these cases they should be
-     able to install the full functional version if they desire.</para>
- 
-     <section>
-@@ -3478,7 +3478,7 @@ update-alternatives: Linking //usr/bin/find to find.findutils
- update-alternatives: Linking //usr/bin/xargs to xargs.findutils</screen></para>
- 
-       <para>Then we see that the standard version of find changes to the full
--      featured implement ion:<screen>root@titan:~$ find --version
-+      featured implementation:<screen>root@titan:~$ find --version
- find --version
- GNU find version 4.2.29
- Features enabled: D_TYPE O_NOFOLLOW(enabled) LEAF_OPTIMISATION
-@@ -3576,7 +3576,7 @@ which find
+     <para>To determine the full list of tasks available for a specific recipe
+@@ -943,8 +943,8 @@ $ <command>bitbake</command> -b &lt;bb-file&gt; -D</screen></para>
+         <listitem>
+           <para>Unpack the source file but don't apply the patches yet.
+           Sometimes you may want to look at the extracted, but not patched
+-          source code and that's what just unpacking will give you (some
+-          time's handy to get diffs generated against the original
++          source code and that's what just unpacking will give you 
++          (sometimes handy to get diffs generated against the original
+           source).</para>
          </listitem>
+       </varlistentry>
+@@ -961,7 +961,7 @@ $ <command>bitbake</command> -b &lt;bb-file&gt; -D</screen></para>
+         <term>configure</term>
  
          <listitem>
--          <para>even if your distro don't use /var in tmpfs, others do</para>
-+          <para>even if your distro doesn't use /var in tmpfs, others do</para>
+-          <para>Performs and configuration that is required for the
++          <para>Performs any configuration that is required for the
+           software.</para>
          </listitem>
+       </varlistentry>
+@@ -1013,12 +1013,12 @@ $ <command>bitbake</command> -b &lt;bb-file&gt; -D</screen></para>
+       </varlistentry>
+     </variablelist>
  
-         <listitem>
-@@ -3588,7 +3588,7 @@ which find
-     <section>
-       <title>Logging and log files</title>
+-    <para>Note that each of the actions that corresponds to task's will run
++    <para>Note that each of the actions that corresponds to a task will run
+     any preceding tasks that have not yet been performed. So starting with
+     compile will also perform the fetch, unpack, patch and configure
+     actions.</para>
  
--      <para>As a consequence of the non-volatile and/or small capacity of the
-+      <para>As a consequence of the volatile and/or small capacity of the
-       <emphasis role="bold">/var</emphasis> file system some distributions
-       choose methods of logging other than writing to a file. The most typical
-       is the use of an in-memory circular log buffer which can be read using
-@@ -3616,7 +3616,7 @@ which find
-         </listitem>
+-    <para>A typically development session might involve editing files in the
++    <para>A typical development session might involve editing files in the
+     working directory and then recompiling until it all works:<screen>[<emphasis>... test ...</emphasis>]
+ $ <command>bitbake</command> -b recipes/testapp/testapp_4.3.bb -c compile -D
  
-         <listitem>
--          <para>Don't include any <command>/var</command> directories, file or
-+          <para>Don't include any <command>/var</command> directories, files or
-           symlinks in packages. They would be lost on a reboot and so should
-           not be included in packages.</para>
-         </listitem>
-@@ -3643,7 +3643,7 @@ which find
+@@ -1072,7 +1072,7 @@ $ <command>vi</command> recipes/testapp/testapp_4.3.bb</screen>At this stage you
+     build a specific recipe:<screen>BB&gt;&gt; build net-snmp</screen>If it
+     fails you may want to clean the build before trying again:<screen>BB&gt;&gt; clean net-snmp</screen>If
+     you update the recipe by editing the .bb file (to fix some issues) then
+-    you will want to clean the package, reparse the modified recipe, and the
++    you will want to clean the package, reparse the modified recipe, and then
+     build again:<screen>BB&gt;&gt; clean net-snmp
+ BB&gt;&gt; reparse net-snmp
+ BB&gt;&gt; build net-snmp</screen>Note that you can use wildcards in the
+@@ -1088,7 +1088,7 @@ BB&gt;&gt; build net-snmp</screen>Note that you can use wildcards in the
+     various environment variables, such as <emphasis role="bold">CC</emphasis>
+     and <emphasis role="bold">PATH</emphasis> etc, to values suitable for
+     cross-compiling. If you wish to manually run configure scripts and compile
+-    file during development it would be nice to have all those values set for
++    files during development it would be nice to have all those values set for
+     you. This is what devshell does - it provides you with an interactive
+     shell with all the appropriate variables set for cross-compiling.</para>
  
-     <itemizedlist>
-       <listitem>
--        <para>about optimisation</para>
-+        <para>about optimization</para>
-       </listitem>
- 
-       <listitem>
 -- 
 1.7.0
 
