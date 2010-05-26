@@ -1,43 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OHF6V-0005RC-Pq for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 13:50:15 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OHEe5-0004aV-9J for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 13:19:33 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 13:19:33 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OHF6B-0003Wp-Fb
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 26 May 2010 13:51:44 +0200
+Received: by gya1 with SMTP id 1so2150095gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 13:19:33 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 26 May 2010 04:44:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=XA8+HyQx9qB8nsWBFkD4DlDXC4gg1rTZG8wDvRfEIys=;
+	b=uTo9Fg+Hy4ZOjQRUq474EMEul5eC9kL8TUxA9XU6G8FdFCfIpAtyrgnt5tXGE58DII
+	bomSMr3tqFefHjQA0uOQPzqYyRkhI3M460OeUFEhXABDbW7M+/i3gqA/G39N58To3Lm8
+	UMRuau2CbsTEAxWOs+ipE7hlUdNj6o11/BD3s=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=RasMZv55e405vcqPhUCVLck8Ao8OtKvN/LYvdReKqTxZjI1n8RT53TQ+RvTUHa50aU
+	uRW3+BAvlhKvb2ks+yZIEHDoL8WAO5ROl100/ZP2SVEK/7ZkNuoqECbzTlRCc1YEI7Lv
+	OvS8AMs7PGgxfLC+evHX2eWBBhIEEf3tLamIg=
+MIME-Version: 1.0
+Received: by 10.91.54.35 with SMTP id g35mr3798331agk.158.1274874265355; Wed, 
+	26 May 2010 04:44:25 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Wed, 26 May 2010 04:44:25 -0700 (PDT)
+In-Reply-To: <1274869581.6382.27.camel@mill.internal.reciva.com>
+References: <1274859584-8442-1-git-send-email-raj.khem@gmail.com>
+	<1274863471.6452.54.camel@lenovo.internal.reciva.com>
+	<AANLkTilPhweXZYpmrBRRlW5uHJazro_WcZ5k1C10KqXN@mail.gmail.com>
+	<1274869581.6382.27.camel@mill.internal.reciva.com>
+Date: Wed, 26 May 2010 13:44:25 +0200
+Message-ID: <AANLkTilBV_FYvAjP8C9xGnbR3UE-uJoYeLNdHN5J0zg_@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 26 May 2010 13:19:20 +0200
-Message-ID: <htj03o$u5k$1@dough.gmane.org>
-References: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: developmet setup
+Subject: Re: [PATCH] sanity.bbclass: Barf if TMPDIR has trailing forward slash
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,38 +55,17 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 26 May 2010 11:55:53 -0000
-X-List-Received-Date: Wed, 26 May 2010 11:55:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I agree that fixing this is better than a warning, but a warning is
+better than nothing, so I suggest at least taking this patch.
+No idea how to fix it structurally.
+A workaround (read; dirty patch) would be to nuke off trailing slashes
+when TMPDIR is retrieved.
 
-On 26-05-10 08:34, Raffaele Recalcati wrote:
-> Hi all,
-> I was searching a clean way to develop in OE my new kernel and my new
-> applications.
-> 
-> I saw this nice article about kernel development:
-> http://bec-systems.com/site/521/best-practices-for-kernel-development-with-openembedded
-> 
-> I would like a way to develop inside Openembedded, but not in work
-> directory.
-> I mean to develop a project in a git tree, allowing me to use 'git diff'
-> ..... and finally 'git push' to my internal git servers.
+BTW: the problem seems to be around quite a while and regularly seems
+to bite people.
 
-I do 'git diff' and 'git commit' in the work directory, what's stopping you?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL/QO4MkyGM64RGpERAnCnAKCvx1253vNihBK/qkrQ8LuEheF7wACfWmeL
-vWNSX5W9ifFiMP7bA6r+5IE=
-=3boW
------END PGP SIGNATURE-----
-
+Frans
 
 
