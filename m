@@ -1,41 +1,53 @@
-Received: from mail-gx0-f228.google.com ([209.85.217.228])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lamiaposta71@gmail.com>) id 1OHAFr-0001AX-NE
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OHB4b-0003h6-8g
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 08:38:16 +0200
-Received: by gxk28 with SMTP id 28so2196163gxk.7
+	Wed, 26 May 2010 09:30:41 +0200
+Received: by fxm9 with SMTP id 9so1794672fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 23:34:07 -0700 (PDT)
+	Wed, 26 May 2010 00:26:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=ybMDhIVBSeaAx2SGyfjASXzbY3dM91hG2xOQFzkS300=;
-	b=VrSrgtPoXcyEfS01W78AVIPIT4Ek/KbSrhDUfBelZO8NTaPZ7FuLx0mrc5NXVNAz8k
-	5Vn7BsJvRLAtG04Hn+LE9lLcvn5zst1oUTkTzQPqSWWvwMTsp7rt5831iLO6PnYpbKwb
-	42xzJEZmhO0lemUPrlvZSnRfnh3dwFtv6D61c=
+	h=domainkey-signature:received:received:received:date:from:to:cc
+	:subject:message-id:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=RrB8E1t+bqaMWTn5mGORe2W4awSEgpBp0m7iCxNBPvU=;
+	b=HyBdmpPp2vWu81v1u/pwOtCeKuPPfCQjAPra36EidVmGy6iUYk1zVz0F/O4u5vNNAa
+	2PpXpFGWcYK4d1a9Y1YqVSHKqb1MkGb3DpintypFcB7pe5NT+Aj0tufdEYGRxeHd6wDs
+	M3ZtkROiTjbc7nTsieIZMwbzCpOkXfGQe3E/c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Mk3hbxD5h/qgZBPplhYFq7OPtnP3WuIFLaXKBVIBTQssGHWSFaYCOJzoujn9QctBk0
-	Kl49dJMLKqobQSSdm3391nVAY4Y2O7wjKuPBqX29khOV/IKrImTYx6SwRMRtgPlT2EPM
-	8+f2Wd2nq+KxRHOzmZ2MGRtmD6gZFviWZZJ54=
-MIME-Version: 1.0
-Received: by 10.231.194.196 with SMTP id dz4mr6143941ibb.66.1274855647492; 
-	Tue, 25 May 2010 23:34:07 -0700 (PDT)
-Received: by 10.231.171.85 with HTTP; Tue, 25 May 2010 23:34:07 -0700 (PDT)
-Date: Wed, 26 May 2010 08:34:07 +0200
-Message-ID: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
-From: Raffaele Recalcati <lamiaposta71@gmail.com>
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=mzOR0u/MJE29q/BXr5EcuRvK5e4rHeB9Rut1d09QKSVKAVe32Ix2D6iFAWlVqXJikG
+	tKFVQ6I11O87CWEny+RjIrZf4gmrE6H+eeEUp3r6IUwUgTkC08VuGYuIPGyo9JBa1IIT
+	s1HTBZjqWWeawfVFRFy5fsr5KPYxGbU/PeRE4=
+Received: by 10.223.46.135 with SMTP id j7mr7369334faf.105.1274858793452;
+	Wed, 26 May 2010 00:26:33 -0700 (PDT)
+Received: from s42.loc (85-127-94-237.dynamic.xdsl-line.inode.at
+	[85.127.94.237])
+	by mx.google.com with ESMTPS id u12sm28706150fah.16.2010.05.26.00.26.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 May 2010 00:26:32 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OHBC2-0000pc-M4; Wed, 26 May 2010 09:38:22 +0200
+Date: Wed, 26 May 2010 09:38:22 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.217.228
-X-SA-Exim-Mail-From: lamiaposta71@gmail.com
+Message-ID: <20100526073822.GA31532@mx.loc>
+References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <1274854676-5931-1-git-send-email-koen@openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: developmet setup
+Cc: Chase Maupin <chase.maupin@ti.com>, Koen Kooi <k-kooi@ti.com>
+Subject: Re: [PATCH 1/7] Usermanual/common_use_cases: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,25 +61,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 06:38:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 26 May 2010 07:30:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi all,
-I was searching a clean way to develop in OE my new kernel and my new
-applications.
+On Wed, May 26, 2010 at 08:17:50AM +0200, Koen Kooi wrote:
+>From: Chase Maupin <chase.maupin@ti.com>
+>
+>* Fixed up typos and other errors in the documentation.
+>
+>Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+>Signed-off-by: Koen Kooi <k-kooi@ti.com>
+>---
+> docs/usermanual/chapters/common_use_cases.xml |   45 +++++++++++++-----------
+> 1 files changed, 24 insertions(+), 21 deletions(-)
+>
+>diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs/usermanual/chapters/common_use_cases.xml
+>index 7ae3ee5..9adb66a 100644
+>--- a/docs/usermanual/chapters/common_use_cases.xml
+>+++ b/docs/usermanual/chapters/common_use_cases.xml
 
-I saw this nice article about kernel development:
-http://bec-systems.com/site/521/best-practices-for-kernel-development-with-openembedded
+>@@ -575,7 +578,7 @@ $ <command>bitbake</command> meta-toolchain-qte
+>             should start by downloading the SDK and untar it to the root folder
+>             (<filename>/</filename>). Once this operation is finished you will
+>             find a new directory <filename>/usr/local/angstrom/arm/</filename> and
+>-            it contains the <filename>environment-setup</filename> to setup the
+>+            it contains the <filename>environment-setup</filename>file to setup the
 
-I would like a way to develop inside Openembedded, but not in work
-directory.
-I mean to develop a project in a git tree, allowing me to use 'git diff'
-..... and finally 'git push' to my internal git servers.
-This is an idea:
-bitbake -c devshell-path /home/myapplication myapplicationrecipe
+missing space before "file" ?
 
-Perhaps srctree is a good tool already done for it?
+>             <emphasis>QMAKESPEC</emphasis> and various other paths.
+>             </para>
 
-Thanks,
-Raffaele
 
