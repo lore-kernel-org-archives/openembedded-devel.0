@@ -1,47 +1,43 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OHEjC-0008Fc-Jz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 13:30:25 +0200
-Received: by gya1 with SMTP id 1so2133596gya.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHF6V-0005RC-Pq for openembedded-devel@lists.openembedded.org;
+	Wed, 26 May 2010 13:50:15 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHEe5-0004aV-9J for openembedded-devel@lists.openembedded.org;
+	Wed, 26 May 2010 13:19:33 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 May 2010 13:19:33 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 04:20:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=Nrvt5V53yGUcmiEwjc4q73YnWZapgy0slzxljZEj/tA=;
-	b=xMXNBmGb2PMcQ97oPSBIBShV1DYJWW4GvjPx3wEvVw7zKORgjJNPViH7LFYq2dhVJN
-	ZdkF7Poig1eJUT4mBB3yEsb3imV9F+E3nV1/X1qjUDyLczBfRC7zuMyNjSuiVjyEb1mo
-	oC+oikGscNSNZhFIaxW0dsY/rc00c5eKdm9qM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=nJn2ehGavGEG9qNRKC7LeeGtSTpH0kS6T1l2MPrR1Xh57j8oRDcoXcFGvDeQgFQT0Y
-	XUx9q2OUuB6v+O34XhCpC+LHRgp/szHlK0xmVD1QBmA/ZGVyRLb5l15GaGONx5LY1PDe
-	8RPn3XjykA/tVGQ5nemvgkMVx7Rny8XVkROeM=
-Received: by 10.231.149.12 with SMTP id r12mr2449927ibv.57.1274872841178; Wed, 
-	26 May 2010 04:20:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.30.67 with HTTP; Wed, 26 May 2010 04:20:21 -0700 (PDT)
-In-Reply-To: <1274869581.6382.27.camel@mill.internal.reciva.com>
-References: <1274859584-8442-1-git-send-email-raj.khem@gmail.com> 
-	<1274863471.6452.54.camel@lenovo.internal.reciva.com>
-	<AANLkTilPhweXZYpmrBRRlW5uHJazro_WcZ5k1C10KqXN@mail.gmail.com> 
-	<1274869581.6382.27.camel@mill.internal.reciva.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 26 May 2010 04:20:21 -0700
-Message-ID: <AANLkTimvCkUCUWKoYhjOvNF79wZbwYphZYvOmX6KMCsl@mail.gmail.com>
+	Wed, 26 May 2010 13:19:33 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 26 May 2010 13:19:20 +0200
+Message-ID: <htj03o$u5k$1@dough.gmane.org>
+References: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sanity.bbclass: Barf if TMPDIR has trailing forward slash
+Subject: Re: developmet setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,33 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 11:36:47 -0000
-X-List-Received-Date: Wed, 26 May 2010 11:36:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 26 May 2010 11:55:53 -0000
+X-List-Received-Date: Wed, 26 May 2010 11:55:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, May 26, 2010 at 3:26 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Wed, 2010-05-26 at 02:12 -0700, Khem Raj wrote:
->> Yes I thought about it but did not know where to start.
->> I guess that would be bitbake which has to quickly remove the trailing
->> space just after parsing
->> in TMPDIR before it gets expanded into other parts of metadata. would
->> it be OK for bitbake to treat TMPDIR special ? or may be bitbake
->> should just get rid of more than one slashes in dir paths as a whole.
->> when concatenating two paths it should merge the slashes may be.
->
-> I'm not sure that bitbake itself ought to be taking any special action.
-> Which piece of code is it that chokes on the extra slashes, exactly?
-> Can that not be fixed? =A0POSIX is fairly clear that multiple slashes are
-> allowed in pathnames so anything that doesn't work with them seems like
-> it must be broken.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-autotools_prepackage_lamangler () in classes/autotools.bbclass.
-see http://www.mail-archive.com/angstrom-distro-devel@linuxtogo.org/msg0292=
-2.html
-for more details. Thats one known case so far.
+On 26-05-10 08:34, Raffaele Recalcati wrote:
+> Hi all,
+> I was searching a clean way to develop in OE my new kernel and my new
+> applications.
+> 
+> I saw this nice article about kernel development:
+> http://bec-systems.com/site/521/best-practices-for-kernel-development-with-openembedded
+> 
+> I would like a way to develop inside Openembedded, but not in work
+> directory.
+> I mean to develop a project in a git tree, allowing me to use 'git diff'
+> ..... and finally 'git push' to my internal git servers.
 
-Thx
--Khem
+I do 'git diff' and 'git commit' in the work directory, what's stopping you?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL/QO4MkyGM64RGpERAnCnAKCvx1253vNihBK/qkrQ8LuEheF7wACfWmeL
+vWNSX5W9ifFiMP7bA6r+5IE=
+=3boW
+-----END PGP SIGNATURE-----
+
 
 
