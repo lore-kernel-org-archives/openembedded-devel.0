@@ -1,34 +1,48 @@
-Received: from ppsw-30.csi.cam.ac.uk ([131.111.8.130])
+Received: from mail-gw0-f65.google.com ([74.125.83.65])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jic23@cam.ac.uk>) id 1OHGRH-000329-EJ
+	(envelope-from <chasemaupin03@gmail.com>) id 1OHGVi-0006xu-JW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 15:15:59 +0200
-X-Cam-AntiVirus: no malware found
-X-Cam-SpamDetails: not scanned
-X-Cam-ScannerInfo: http://www.cam.ac.uk/cs/email/scanner/
-Received: from arcturus.eng.cam.ac.uk ([129.169.154.73]:39750)
-	by ppsw-30.csi.cam.ac.uk (smtp.hermes.cam.ac.uk [131.111.8.156]:25)
-	with esmtpsa (PLAIN:jic23) (TLSv1:DHE-RSA-AES256-SHA:256)
-	id 1OHG7k-00006M-BF (Exim 4.70)
-	(return-path <jic23@cam.ac.uk>); Wed, 26 May 2010 13:54:16 +0100
-Message-ID: <4BFD1A6C.3000406@cam.ac.uk>
-Date: Wed, 26 May 2010 13:56:12 +0100
-From: Jonathan Cameron <jic23@cam.ac.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100426 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Wed, 26 May 2010 15:19:07 +0200
+Received: by gwj23 with SMTP id 23so25561gwj.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 26 May 2010 06:14:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=36wj12R5EbXxNPMdR0AcXxZQ8TIBODG1FI8iwpRBEmM=;
+	b=AYvySHDFPtcN3TIG1Gm8jbCft9GqnftMkjuvAuRnSb2PsOsjB1RHhL7dS7QFxPVK5c
+	hWJ+SRcI8Wj3vvvLpLr0qYruQEP+K+89zrjG7pW/YRcwuqTRk2LASojqdYsTFUGtY/tF
+	T5obrXgGPetRnXiA62CaYPdzTf7fwnsN5/Jps=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=HrWYqdIT+sS2G1JX5eavzoefzf4ehczx8tDt6SNW1nyJjVZHiH5m5kpV5LRxJryj4b
+	MLtt2X1+Rbkr55gFDjivHYddCnsP205lELT3u917rOYEnAXTYC8vO7bV998xBvVDaSJh
+	TeXkOBlGO82f1twitesk2y/ZwMtn8FxCIDZDU=
+Received: by 10.100.243.18 with SMTP id q18mr10202351anh.166.1274879693919;
+	Wed, 26 May 2010 06:14:53 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id n18sm433983anl.12.2010.05.26.06.14.52
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 26 May 2010 06:14:52 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Enigmail-Version: 1.0
-X-SA-Exim-Connect-IP: 131.111.8.130
-X-SA-Exim-Mail-From: jic23@cam.ac.uk
+Date: Wed, 26 May 2010 08:09:32 -0500
+Message-Id: <1274879375-19626-4-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.6.0.4
+In-Reply-To: <1274879375-19626-3-git-send-email-chase.maupin@ti.com>
+References: <1274879375-19626-1-git-send-email-chase.maupin@ti.com>
+	<1274879375-19626-2-git-send-email-chase.maupin@ti.com>
+	<1274879375-19626-3-git-send-email-chase.maupin@ti.com>
+X-SA-Exim-Connect-IP: 74.125.83.65
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Chris Larson <chris_larson@mentor.com>
-Subject: ibrdtn recipes broken
+Cc: Chase Maupin <chase.maupin@ti.com>
+Subject: [PATCHv2 4/7] getting_oe: Fix documentation errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,26 +56,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 13:16:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 26 May 2010 13:19:12 -0000
 
-Just a quick heads up, I may get round to a patch later.
+* Fixed up typos and other errors in the documentation.
 
-A build of imote2-image today is failing as the location for the
-files needed for these recipes no longer contains versions
-as old as we have recipes for.
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ docs/usermanual/chapters/getting_oe.xml |   26 ++++++++++++++++++++++----
+ 1 files changed, 22 insertions(+), 4 deletions(-)
 
-Simply adding new versions of the recipe looks fine so far.
-
-I have
-ibrcommon_0.3.28.bb
-ibrdtn_0.3.31.bb
-ibrdtnd_0.3.35.bb
-
-Jonathan
-
-p.s. Stefan, thanks for doing the zigbee recipes!
+diff --git a/docs/usermanual/chapters/getting_oe.xml b/docs/usermanual/chapters/getting_oe.xml
+index d18c955..c82df3a 100644
+--- a/docs/usermanual/chapters/getting_oe.xml
++++ b/docs/usermanual/chapters/getting_oe.xml
+@@ -98,7 +98,7 @@ $ <command>git</command> clone git://git.openembedded.org/openembedded</screen>
+         seems good practice to update your OpenEmbedded tree at least
+         daily. To do this, run:
+         <screen>
+-$ <command>cd</command> $OEBASE
++$ <command>cd</command> $OEBASE/openembedded
+ $ <command>git</command> pull</screen>
+       </para>
+     </section>
+@@ -142,7 +142,7 @@ $ <command>git</command> pull</screen>
+ 
+       <para>Since the path to your OpenEmbedded installation will be used in
+         many places, setting it in your environment will allow you to use
+-        the <varname>$OEBASE</varname> variable in all pathes and make it
++        the <varname>$OEBASE</varname> variable in all paths and make it
+         easier to change in the future should the need arise. To
+         set <varname>$OEBASE</varname> if you use a Bourne like shell
+         <footnote>
+@@ -342,6 +342,16 @@ MACHINE = "om-gta01"</screen>
+             </varlistentry>
+ 
+             <varlistentry>
++              <term><literal>base-image</literal></term>
++              <listitem>
++                <para>Build an image that is the smallest possible image
++                  which allows for ssh access and the ability to install
++                  additional packages using ipkg.
++                </para>
++              </listitem>
++            </varlistentry>
++
++            <varlistentry>
+               <term><literal>console-image</literal></term>
+               <listitem>
+                 <para>Build an image without the X11, gtk+, or qt windowing
+@@ -463,9 +473,10 @@ MACHINE = "om-gta01"</screen>
+             </varlistentry>
+ 
+             <varlistentry>
+-              <term><literal>task-native-sdk</literal></term>
++              <term><literal>task-sdk-native</literal></term>
+               <listitem>
+-                <para>Mata-package for native (on-device) SDK.
++                <para>Meta-package for native (on-device) SDK.  i.e. libc, gcc,
++                  make, etc.
+                 </para>
+               </listitem>
+             </varlistentry>
+@@ -536,6 +547,13 @@ MACHINE = "om-gta01"</screen>
+                 <para>Builds the appropriate kernel for your device.</para>
+               </listitem>
+             </varlistentry>
++
++            <varlistentry>
++              <term><literal>virtual/bootloader</literal></term>
++              <listitem>
++                <para>Builds the appropriate bootloader for your device.</para>
++              </listitem>
++            </varlistentry>
+           </variablelist>
+         </para>
+       </section>
+-- 
+1.6.0.4
 
 
 
