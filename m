@@ -1,46 +1,53 @@
-Received: from mail-ew0-f221.google.com ([209.85.219.221])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koen.kooi@gmail.com>) id 1OHA0a-0006yM-Hv
+	(envelope-from <raj.khem@gmail.com>) id 1OHA44-00079g-RP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 08:22:31 +0200
-Received: by mail-ew0-f221.google.com with SMTP id 21so599647ewy.27
+	Wed, 26 May 2010 08:26:12 +0200
+Received: by gya1 with SMTP id 1so1982053gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 25 May 2010 23:18:23 -0700 (PDT)
+	Tue, 25 May 2010 23:21:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=jyBXUZ9IfEdxFVc3ZDbeEkB0LtgbWPrYrJHhMEw9ObI=;
-	b=wvWpVormJ+WsRSX2At/za08Zym0mm+3UBOAu1/KWyurttv7Tup+yrHEWyvjLTZPGdU
-	wYQByr3CJCDVSg0pxO6AioIXDaM1yuks46BEbsc9sNQAkhOuP5nsQV/pI/IgpyAo/2IT
-	M71v16tIvM8FWjqKIFoYNfKM+XoC3ZHq+SBb8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=43/0MoUMZcgVfd1tMCXu8LehvSgY13AI9uu0kcJ7gIY=;
+	b=lvt/+WnWPA9Cjf6IwOrR6pD0licwO8Ij0Ih+4sOd2wUEMl4kfsBoZqeLKTtwZNbgaD
+	MLo2o7TIH44+tZLGS6KE3/XuzAXxWgwIbnyZauxZ2L2aYKMG/D+e5kqYNigtkK7NIO6E
+	PpHbEP2uooMXXGoFoP15o8fjZH5IikAkFCf1I=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=Cj48VQNYYQXh5goEH/yhM8F82BkDsWxnIbynYUFpWQR+EXVaiA+IEyO+JkvxLdO81S
-	uq1QLU+ccIr58cLYRCrC3kHzzvIE5Kmw2ytDH/Gdmp7BsrqpSLTIvCzywJN37o+dC2ww
-	KRiI0MoFVhE7Km9pWiSeYd4zytwUCneVDtWEw=
-Received: by 10.213.33.199 with SMTP id i7mr1055870ebd.65.1274854703269;
-	Tue, 25 May 2010 23:18:23 -0700 (PDT)
-Received: from localhost (s55917625.adsl.wanadoo.nl [85.145.118.37])
-	by mx.google.com with ESMTPS id 15sm2809756ewy.8.2010.05.25.23.18.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 25 May 2010 23:18:22 -0700 (PDT)
-From: Koen Kooi <koen.kooi@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=gZ8t7kNqNuoLVSGiWgDo7Az5GZRnEuusnNr836we2Uun0b8w5i6RIdq0HDLsAuFd2e
+	z8Qad2OyRRwl5JRhBmM+fxRbfj+1zQnGoDFnKtgrJPr+1TPu9Ov8H33Rxc90F8hiKEOH
+	0Y768CGHMuuA6qvQnCCuru18uhRqR/2r1BWRk=
+Received: by 10.231.148.131 with SMTP id p3mr7355163ibv.18.1274854916469; Tue, 
+	25 May 2010 23:21:56 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.30.67 with HTTP; Tue, 25 May 2010 23:21:36 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1005260730500.5274@asterix.crazy-teaparty.dyndns.org>
+References: <alpine.LNX.2.00.1005181720550.21508@asterix.crazy-teaparty.dyndns.org>
+	<alpine.LNX.2.00.1005211250480.5274@asterix.crazy-teaparty.dyndns.org> 
+	<alpine.LNX.2.00.1005211518470.5274@asterix.crazy-teaparty.dyndns.org> 
+	<alpine.LNX.2.00.1005211537200.5274@asterix.crazy-teaparty.dyndns.org> 
+	<AANLkTim5DgTLfF1duohbONBtWCc1ASKfcACiJ2M66rr3@mail.gmail.com> 
+	<alpine.LNX.2.00.1005241813190.5274@asterix.crazy-teaparty.dyndns.org> 
+	<20100524182529.GA28464@gmail.com>
+	<alpine.LNX.2.00.1005251636150.5274@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTimGQw84uTAjKDVjJLZKbsATtDZqrFeDfSGnfrQw@mail.gmail.com> 
+	<alpine.LNX.2.00.1005260730500.5274@asterix.crazy-teaparty.dyndns.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 25 May 2010 23:21:36 -0700
+Message-ID: <AANLkTinh3moH04QQ_HvrikAgvY-9mrh-o7U4Vq7ubKg1@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 26 May 2010 08:17:56 +0200
-Message-Id: <1274854676-5931-7-git-send-email-koen@openembedded.org>
-X-Mailer: git-send-email 1.7.0
-In-Reply-To: <1274854676-5931-1-git-send-email-koen@openembedded.org>
-References: <1274854676-5931-1-git-send-email-koen@openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.219.221
-X-SA-Exim-Mail-From: koen.kooi@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <k-kooi@ti.com>, Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCH 7/7] Usermanual/usage: Fix documentation errors
+Subject: Re: powerpc-g++ 4.2.4 problem casting long long to double
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,264 +61,143 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 06:22:31 -0000
+X-List-Received-Date: Wed, 26 May 2010 06:26:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-From: Chase Maupin <chase.maupin@ti.com>
+On Tue, May 25, 2010 at 10:34 PM, Vitus Jensen <vjensen@gmx.de> wrote:
+> On Tue, 25 May 2010, Khem Raj wrote:
+>>
+>> On Tue, May 25, 2010 at 8:15 AM, Vitus Jensen <vjensen@gmx.de> wrote:
+>>>
+>>> On Mon, 24 May 2010, Khem Raj wrote:
+>>>>
+>>>> On (24/05/10 18:36), Vitus Jensen wrote:
+>>>
+>>>
+>>>>> Hmm, I'm using angstrom with glibc. =A0And I'm testing on the real
+>>>>> device and saw that -mhard-float is implied by mcpu=3D603e. =A0Using =
+the
+>>>>> FPU would certainly explain differences between qemu and the real
+>>>>> thing. =A0But __floatdidf is hard to understand, all macro. =A0Is it
+>>>>> really using the FPU?
+>>>>
+>>>> Yeah that could be something to look at. In general if gcc is using
+>>>> fp instruction to schedule then it might be using them.
+>>>>
+>>>> You should try to find which libgcc is it linking to when using g++
+>>>> and gcc. It could be that its linking in two different libgcc versions
+>>>>
+>>>> secondly try to compile program statically and then run it.
+>>>
+>>>
+>>> Using -static-libgcc and -shared-libgcc was interesting, it just affect=
+s
+>>> the
+>>> gcc support code. =A0static is default for C, shared for C++ and forcin=
+g
+>>> static for C++ produced correct output. =A0When comparing implementatio=
+ns:
+>>>
+>>> * static uses inline fpu code, source
+>>>
+>>> work/i686-ppc603e-sdk-angstrom-linux/gcc-cross-sdk-4.4.4-r2.1/gcc-4.4.4=
+/gcc/libgcc2.c
+>>>
+>>> * shared calls into libgcc_s.so.1 which uses software, excerpt:
+>>> Dump of assembler code for function __floatdidf:
+>>> =3D> 0x0fe12878 <+0>: =A0 =A0 stwu =A0 =A0r1,-32(r1)
+>>> =A0 0x0fe1287c <+4>: =A0 =A0 mflr =A0 =A0r0
+>>> =A0 0x0fe12880 <+8>: =A0 =A0 stmw =A0 =A0r26,8(r1)
+>>> =A0 0x0fe12884 <+12>: =A0 =A0mr =A0 =A0 =A0r27,r4
+>>> =A0 0x0fe12888 <+16>: =A0 =A0mr =A0 =A0 =A0r26,r3
+>>> =A0 0x0fe1288c <+20>: =A0 =A0srawi =A0 r9,r26,31
+>>> =A0 0x0fe12890 <+24>: =A0 =A0srawi =A0 r10,r26,0
+>>> =A0 0x0fe12894 <+28>: =A0 =A0stw =A0 =A0 r0,36(r1)
+>>> =A0 0x0fe12898 <+32>: =A0 =A0mr =A0 =A0 =A0r3,r10
+>>> =A0 0x0fe1289c <+36>: =A0 =A0bl =A0 =A0 =A00xfe31244 <__floatsidf@plt>
+>>> =A0 0x0fe128a0 <+40>: =A0 =A0lis =A0 =A0 r5,16880
+>>>
+>>>
+>>> [STABLE/2009] There are 2 libgcc_s.so.1 versions in TMPDIR/cross, the
+>>> bigger
+>>> ./ppc603e/powerpc-angstrom-linux/lib/nof/libgcc_s.so.1 matches the
+>>> installed
+>>> version,
+>>
+>> thats the problem
+>>
+>> if one copies the smaller version (uses fpu code) to target:/lib/
+>>>
+>>> the results of -shared-libgcc applications are OK.
+>>>
+>>> So, hard-fpu and soft-fpu are incompatible? =A0The incorrect version
+>>> matches
+>>> (strip; cmp -l) several paths in TMPDIR/work:
+>>
+>> its more the calling convention.
+>>
+>>>
+>>> ./ppc603e-angstrom-linux/gcc-4.2.4-r3/image/lib/libgcc_s.so.1
+>>>
+>>> ./ppc603e-angstrom-linux/gcc-4.2.4-r3/gcc-4.2.4/build.powerpc-angstrom-=
+linux.powerpc-angstrom-linux/gcc/nof/libgcc_s.so.1
+>>>
+>>> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/install/libgcc/lib/libgcc_s=
+.so.1
+>>> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/image/lib/libgcc_s.so.1
+>>>
+>>> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/staging-pkg/cross/powerpc-a=
+ngstrom-linux/lib/nof/libgcc_s.so.1
+>>>
+>>> ./ppc603e-angstrom-linux/gcc-cross-4.2.4-r5/gcc-4.2.4/build.i686-linux.=
+powerpc-angstrom-linux/gcc/nof/libgcc_s.so.1
+>>>
+>>> But there are 4 other smaller versions of that library, the good one
+>>> coming
+>>> from gcc-4.2.4. or gcc-cross-4.2.4. =A0Which recipes decides which vers=
+ion
+>>> to
+>>> copy into the image? =A0For now it seems enough to copy a fpu-version b=
+y
+>>> hand
+>>> into the image but this is hardly an universal solution.
+>>
+>> actually it should have packaged the fpu version into /lib on target
+>> but its a bug that it instead copied
+>> nof version.
+>>
+>> I think I touched this area and saw this problem in past. Can you try gc=
+c
+>> 4.4.4 and see if the problem still happens there.
+>
+> I really would like to but there is no gcc 4.4.4 in stable/2009. =A0And .=
+dev
+> currently fails to build in virtual/kernel.
+>
+> cp: cannot stat
+> `/home/oe/build/out.dev/work/n1200-angstrom-linux/linux-n1200-2.6.27-rc9+=
+git-r3/linux-2.6.27-foonas-git//home/oe/build/out.dev/work/n1200-angstrom-l=
+inux/linux-n1200-2.6.27-rc9+git-r3/linux-2.6.27-foonas-git/arch/powerpc/boo=
+t/cuImage.thecus_n1200':
+> No such file or directory
+> ERROR: Function do_deploy failed
+>
+> I think I have a buildable .dev state at work and will retry there.
 
-* Fixed up typos and other errors in the documentation.
+OK. If I find time I will fix gcc 4.2.4 today
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-Signed-off-by: Koen Kooi <k-kooi@ti.com>
----
- docs/usermanual/chapters/usage.xml |   64 ++++++++++++++++++------------------
- 1 files changed, 32 insertions(+), 32 deletions(-)
-
-diff --git a/docs/usermanual/chapters/usage.xml b/docs/usermanual/chapters/usage.xml
-index 1563dc3..9197ffa 100644
---- a/docs/usermanual/chapters/usage.xml
-+++ b/docs/usermanual/chapters/usage.xml
-@@ -5,15 +5,15 @@
-   <section id="usage_introduction" xreflabel="introduction">
-     <title>Introduction</title>
- 
--    <para>If you're reading this manual you probably already have some idea of
-+    <para>If you are reading this manual you probably already have some idea of
-     what OpenEmbedded is all about, which is taking a lot of software and
-     creating something that you can run on another device. This involves
-     downloading some source code, compiling it, creating packages (like .deb
--    or .rpm) and/or creating boot images that can written to flash on the
-+    or .rpm) and/or creating boot images that can be written to flash on the
-     device. The difficulties of cross-compiling and the variety of devices
-     which can be supported lead to a lot more complexity in an OpenEmbedded
-     based distribution than you'd find in a typical desktop distribution
--    (for which cross-compiling isn't needed).</para>
-+    (where cross-compiling isn't needed).</para>
- 
-     <para>A major part of OpenEmbedded deals with compiling source code for
-     various projects. For each project this generally requires the same basic
-@@ -67,7 +67,7 @@
-       <listitem>
-         <para>Tool chains (compiler, linker etc) are often difficult to
-         compile. Cross tool chains are even more difficult. Typically you'd go
--        out and download a tool chain made by someone else - but not when your
-+        out and download a tool chain made by someone else - but not when you're
-         using OE. In OE the entire toolchain is built as part of the process.
-         This may make things take longer initially and may make it more
-         difficult to get started but makes it easier to apply patches and test
-@@ -123,7 +123,7 @@
-     helping you understand how to debug and develop within
-     OpenEmbedded.</para>
- 
--    <para>You'll also not a lot of reference to variables that define specific
-+    <para>You'll also note a lot of references to variables that define specific
-     directories or change the behaviour of some part of the build process. You
-     should refer to <xref linkend="chapter_recipes" /> for full details on
-     these variables.</para>
-@@ -160,7 +160,7 @@
-         <listitem>
-           <para>This directory contains distribution related files. A
-           distribution decides how various activities are handled in the final
--          image, such as how networking configured, if usb devices will be
-+          image, such as how networking is configured, if usb devices will be
-           supported, what packaging system is used, which libc is used
-           etc.</para>
-         </listitem>
-@@ -194,7 +194,7 @@
-     <title>Work space</title>
- 
-     <para>Let's start out by taking a look at a typically working area. Note
--    that this may not be exactly what see - there are a lot of options that
-+    that this may not be exactly what you see - there are a lot of options that
-     can effect exactly how things are done, but it gives us a pretty good idea
-     of whats going on. What we are looking at here is the tmp directory (as
-     specified by TMPDIR in your local.conf):<screen>$ <command>find</command> tmp -maxdepth 2 -type d 
-@@ -303,10 +303,10 @@ tmp/deploy/images</screen></para>
-       </varlistentry>
- 
-       <varlistentry>
--        <term>staging</term>
-+        <term>sysroots</term>
- 
-         <listitem>
--          <para>Contains the staging area, which is used to stored natively
-+          <para>Contains the staging area, which is used to store natively
-           compiled tools and and libraries and headers for the target that are
-           required for building other software.</para>
-         </listitem>
-@@ -324,9 +324,9 @@ tmp/deploy/images</screen></para>
-     </variablelist>
- 
-     <para>When people refer to the <emphasis>"tmp directory"</emphasis> this
--    is the directory them are talking about.</para>
-+    is the directory they are talking about.</para>
- 
--    <para>To perform a complete rebuild from script you would usually rename
-+    <para>To perform a complete rebuild from scratch you would usually rename
-     or delete tmp and then restart your build. I recommend keeping one old
-     version of tmp around to use for comparison if something goes wrong with
-     your new build. For example:<screen>$ <command>rm</command> -fr tmp.OLD
-@@ -339,7 +339,7 @@ $ <command>bitbake</command> bootstrap-image</screen></para>
-       <para>The work directory is where all source code is unpacked into,
-       where source is configured, compiled and packaged. In other words this
-       is where all the action happens. Each bitbake recipe will produce a
--      corresponding sub directory in the work directory. The sub directory
-+      corresponding subdirectory in the work directory. The subdirectory
-       name will contain the recipe name, version and the release number (as
-       defined by the PR variable within the recipe).</para>
- 
-@@ -348,9 +348,9 @@ $ <command>bitbake</command> bootstrap-image</screen></para>
- tmp/work
- tmp/work/busybox-1.2.1-r13
- tmp/work/libice-1_1.0.3-r0
--tmp/work/arpwatch-2.1a15-r2</screen>You can see that the first three (of
-+tmp/work/arpwatch-2.1a15-r2</screen>You can see the first three (of
-       several hundred) recipes here and they are for release 13 of busybox
--      1.2.1, release 0 or libice 1.1.0.3 and release 2 of arpwatch 2.1a15.
-+      1.2.1, release 0 of libice 1.1.0.3 and release 2 of arpwatch 2.1a15.
-       It's also possible that you may just have a sub directory for your
-       targets architecture and operating system in which case these
-       directories will be in that additional subdirectory, as shown
-@@ -446,7 +446,7 @@ tmp/work/lzo-1.08-r14/image</screen></para>
-             install into <emphasis role="bold">${D}/usr/bin</emphasis> and
-             <emphasis role="bold">${D}/usr/lib</emphasis> instead. When
-             installed on the target the ${D} will be not be included so
--            they'll end up in the correct place. You definitely don't wont
-+            they'll end up in the correct place. You definitely don't want
-             files on your host system being replaced by cross-compiled
-             binaries for your target!</para>
-           </listitem>
-@@ -544,14 +544,14 @@ tmp/work/lzo-1.08-r14/install/lzo/usr/lib/liblzo.so.1.0.0</screen></para>
-     packages. You probably need to start out by downloading the source code,
-     then unpacking the source code. Maybe you need to apply some patches for
-     some reason. Then you might run the configure script of the package,
--    perhaps passing it some options to configure it to your liking. The you
--    might run "make install" to install the software. If your actually going
-+    perhaps passing it some options to configure it to your liking. Then you
-+    might run "make install" to install the software. If you're actually going
-     to make some packages, such as .deb or .rpm, then you'd have additional
-     tasks you'd perform to make them.</para>
- 
-     <para>You find that building things in OpenEmbedded works in a similar way
-     - there are a number of tasks that are executed in a predefined order for
--    each recipe. Any many of the tasks correspond to those listed above like
-+    each recipe. Many of the tasks correspond to those listed above like
-     <emphasis>"download the source"</emphasis>. In fact you've probably
-     already seen some of the names of these tasks - bitbake displays them as
-     they are processed:<screen>$ <command>bitbake</command> lzo
-@@ -718,7 +718,7 @@ NOTE: build 200705041709: completed</screen><note>
-           <para>The <emphasis>configure</emphasis> task takes care of the
-           configuration of the package. Running a configure script
-           (<emphasis>"./configure &lt;options&gt;"</emphasis>) is probably the
--          form of configuration that is most recognised but it's not the only
-+          form of configuration that is most recognized but it's not the only
-           configuration system that exists.</para>
-         </listitem>
-       </varlistentry>
-@@ -748,7 +748,7 @@ NOTE: build 200705041709: completed</screen><note>
-             <para>This is different from the <emphasis>install</emphasis> task
-             in that this is responsible for making available libraries and
-             headers for use during build on the development host. Therefore
--            it's libraries which normal have to stage things while
-+            it is libraries which normally have to stage things while
-             applications normally don't need to. The
-             <emphasis>install</emphasis> task on the other hand is making
-             files available for packaging and ultimately installation on the
-@@ -762,7 +762,7 @@ NOTE: build 200705041709: completed</screen><note>
- 
-         <listitem>
-           <para>The <emphasis>install</emphasis> task is responsible for
--          actually installing everything. Now this needs to install the
-+          actually installing everything. This needs to install the
-           software into the destination directory, <emphasis
-           role="bold">D</emphasis>. This directory won't actually be a part of
-           the final package though. In other words if you install something
-@@ -782,7 +782,7 @@ NOTE: build 200705041709: completed</screen><note>
-           package. It moves the files for the destination directory, <emphasis
-           role="bold">${D}</emphasis>, that they were installed in into the
-           appropriate packages subdirectory. Usually there will be a main
--          package a separate documentation (-doc), development (-dev) and
-+          package, a separate documentation (-doc), development (-dev) and
-           debugging packages (-dbg) for example.</para>
-         </listitem>
-       </varlistentry>
-@@ -808,11 +808,11 @@ NOTE: build 200705041709: completed</screen><note>
-       <emphasis>install</emphasis>. This is slightly confusing but any task
-       <emphasis>x</emphasis> is implemented via a function called
-       <emphasis>do_x</emphasis> in the class or recipe where it is defined.
--      See places refer to the tasks via their name only and some with the
-+      Some places refer to the tasks via their name only and some with the
-       <emphasis>do</emphasis> prefix.</para>
-     </note>
- 
--    <para>You will almost certainly notice tasks beyond these ones - there are
-+    <para>You will almost certainly notice tasks beyond the ones above - there are
-     various methods available to insert additional tasks into the tasks
-     sequence. As an example the <emphasis
-     role="bold">insane.bbclass</emphasis>, which performs various QA checks,
-@@ -822,7 +822,7 @@ NOTE: build 200705041709: completed</screen><note>
-     another new task called <emphasis>qa_staging</emphasis> between
-     <emphasis>populate_sysroot</emphasis> and <emphasis>build</emphasis>
-     tasks. The former validates the result of the
--    <emphasis>configure</emphasis> task and the late the results of the
-+    <emphasis>configure</emphasis> task and the later the results of the
-     <emphasis>populate_sysroot</emphasis> task.</para>
- 
-     <para>To determine the full list of tasks available for a specific recipe
-@@ -943,8 +943,8 @@ $ <command>bitbake</command> -b &lt;bb-file&gt; -D</screen></para>
-         <listitem>
-           <para>Unpack the source file but don't apply the patches yet.
-           Sometimes you may want to look at the extracted, but not patched
--          source code and that's what just unpacking will give you (some
--          time's handy to get diffs generated against the original
-+          source code and that's what just unpacking will give you 
-+          (sometimes handy to get diffs generated against the original
-           source).</para>
-         </listitem>
-       </varlistentry>
-@@ -961,7 +961,7 @@ $ <command>bitbake</command> -b &lt;bb-file&gt; -D</screen></para>
-         <term>configure</term>
- 
-         <listitem>
--          <para>Performs and configuration that is required for the
-+          <para>Performs any configuration that is required for the
-           software.</para>
-         </listitem>
-       </varlistentry>
-@@ -1013,12 +1013,12 @@ $ <command>bitbake</command> -b &lt;bb-file&gt; -D</screen></para>
-       </varlistentry>
-     </variablelist>
- 
--    <para>Note that each of the actions that corresponds to task's will run
-+    <para>Note that each of the actions that corresponds to a task will run
-     any preceding tasks that have not yet been performed. So starting with
-     compile will also perform the fetch, unpack, patch and configure
-     actions.</para>
- 
--    <para>A typically development session might involve editing files in the
-+    <para>A typical development session might involve editing files in the
-     working directory and then recompiling until it all works:<screen>[<emphasis>... test ...</emphasis>]
- $ <command>bitbake</command> -b recipes/testapp/testapp_4.3.bb -c compile -D
- 
-@@ -1072,7 +1072,7 @@ $ <command>vi</command> recipes/testapp/testapp_4.3.bb</screen>At this stage you
-     build a specific recipe:<screen>BB&gt;&gt; build net-snmp</screen>If it
-     fails you may want to clean the build before trying again:<screen>BB&gt;&gt; clean net-snmp</screen>If
-     you update the recipe by editing the .bb file (to fix some issues) then
--    you will want to clean the package, reparse the modified recipe, and the
-+    you will want to clean the package, reparse the modified recipe, and then
-     build again:<screen>BB&gt;&gt; clean net-snmp
- BB&gt;&gt; reparse net-snmp
- BB&gt;&gt; build net-snmp</screen>Note that you can use wildcards in the
-@@ -1088,7 +1088,7 @@ BB&gt;&gt; build net-snmp</screen>Note that you can use wildcards in the
-     various environment variables, such as <emphasis role="bold">CC</emphasis>
-     and <emphasis role="bold">PATH</emphasis> etc, to values suitable for
-     cross-compiling. If you wish to manually run configure scripts and compile
--    file during development it would be nice to have all those values set for
-+    files during development it would be nice to have all those values set for
-     you. This is what devshell does - it provides you with an interactive
-     shell with all the appropriate variables set for cross-compiling.</para>
- 
--- 
-1.7.0
-
+>
+> Vitus
+>
+> --
+> Vitus Jensen, Hannover, Germany, Universe (current)
+> pgp public key available from keyservers
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
