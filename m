@@ -1,44 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from ey-out-1920.google.com ([74.125.78.145])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OHX8U-00035O-7p for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 09:04:11 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OHX4T-0003NQ-E9 for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 09:00:01 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 09:00:01 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <philipp.zabel@gmail.com>) id 1OHaZq-0007Rq-QY
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 May 2010 12:44:39 +0200
+Received: by ey-out-1920.google.com with SMTP id 26so273870eyw.4
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 09:00:01 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 27 May 2010 03:40:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=CmREHKjY/UumBqpNsXu9NqB9Em9jsH4wuRL9b8y1zzw=;
+	b=TjzHv/R+2hNlOTyS7ES+tyVvUwda2vHiImfodnLY4HwShfEVM9RAxxnHh+15IhBKYY
+	W27xtoAa0fZd6kqkjiNMFTwVQLLUvX9t8k/Ppi+PXWF8BJCWRaoI0P4tP8SBDMAlsM/G
+	hJZR3PEvBl7MkR0hWkl2m9toRaOmbBMCEPCaI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=CUdIuKq2k3d6GU4XlBKLrlO0W8AM2g8xs5+ytvNuWwC7iKxCbVoIZi+2v16pRtYM9O
+	bJI9bKElJZdRvkC/f1F61TPoI5OsmNl3ID3WOonatHiojRpXI9ciAjONnofcjXmrL2Qf
+	m2eOenHYWJ9Y84SCS3i3Wl5MEJlizxbHWPEFI=
+MIME-Version: 1.0
+Received: by 10.213.31.203 with SMTP id z11mr2064756ebc.88.1274956831960; Thu, 
+	27 May 2010 03:40:31 -0700 (PDT)
+Received: by 10.213.15.199 with HTTP; Thu, 27 May 2010 03:40:31 -0700 (PDT)
+In-Reply-To: <4BE04A63.9010002@kernelconcepts.de>
+References: <4BE04A63.9010002@kernelconcepts.de>
+Date: Thu, 27 May 2010 12:40:31 +0200
+Message-ID: <AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
+From: pHilipp Zabel <philipp.zabel@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 27 May 2010 08:59:48 +0200
-Message-ID: <htl594$4mn$1@dough.gmane.org>
-References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>	<hso7dv$2lh$1@dough.gmane.org>	<AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>	<AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
-	<20100526200901.GB10091@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <20100526200901.GB10091@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 74.125.78.145
+X-SA-Exim-Mail-From: philipp.zabel@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_40,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add lksctp tools
+Subject: Re: OpenEmbedded at Linuxtag 2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 07:04:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 May 2010 10:44:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hallo Florian,
 
-On 26-05-10 22:09, Khem Raj wrote:
-> On (23/05/10 15:50), João Henrique Freitas wrote:
->> Hi,
->>
->> Attached a unique patch.
-> 
-> same as cgreen. but it builds. I get these warnings. Are they ok ?
+On Tue, May 4, 2010 at 6:25 PM, Florian Boor
+<florian.boor@kernelconcepts.de> wrote:
+> Hi!
+>
+> I have good news: We have been accepted for a project booth at LinuxTag a=
+gain
+> this year.
+> This means that we have a booth at the largest Linux fair in Europe and t=
+he
+> opportunity to get in touch with users, companies and other projects ther=
+e.
+> In contrast to last year I have asked for more space but I do not have an=
+y
+> information about what we will get.
+>
+> LinuxTag takes place in Berlin, Germany from June 9 to 12.
+>
+> I can take care about organising this event for us and about some basic
+> equipment and a few devices. It would be great to have some more of us th=
+ere to
+> man the booth. I can order exhibitor passes for us, so if you like to hel=
+p
+> please let me know soon: In contrast to last year we do not get a defined=
+ number
+> of these but we have to register one by one by submitting the name.
 
-Unpackaged file are almost never OK, so please update PACKAGES and FILES
-to package these:
+Wenn ich noch nicht zu sp=E4t dran bin, w=E4re ich auch dabei. Wie jedes
+mal kann ich nur am Samstag sicher und evtl. am Freitag (nachmittag)
+beistehen.
 
-> 
-> NOTE: the following files were installed but not shipped in any package:
-> NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1
-> NOTE:   /usr/lib/lksctp-tools/libwithsctp.so
-> NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1.0.7
-> NOTE:   /usr/lib/lksctp-tools/libwithsctp.a
-> NOTE:   /usr/lib/lksctp-tools/libwithsctp.la
-> NOTE:   /usr/share/lksctp-tools/checksctp.c
-> NOTE:   /usr/share/lksctp-tools/sctp_socket.c
-> NOTE:   /usr/share/lksctp-tools/sctp_bind.c
-> NOTE:   /usr/share/lksctp-tools/sctp_darn.c
-> NOTE:   /usr/share/lksctp-tools/sctp_load_libs.c
-> NOTE:   /usr/share/lksctp-tools/sctp_sockopt.c
-> NOTE:   /usr/share/lksctp-tools/sctp_socket.h
-> NOTE:   /usr/share/lksctp-tools/sctp_test.c
-> NOTE:   /usr/share/lksctp-tools/sctp_darn.h
-> NOTE:   /usr/bin/sctp_test
-> NOTE:   /usr/bin/sctp_darn
-> NOTE:   /usr/bin/checksctp
-> NOTE:   /usr/bin/withsctp
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL/hhkMkyGM64RGpERAqd2AJ9oe2hjZg9OCf0jsJt6gllNSZMMrACgjhvC
-wDJUhKoyPLc0g8PxH5Rfzks=
-=Oojb
------END PGP SIGNATURE-----
-
+gruesze
+Philipp
 
 
