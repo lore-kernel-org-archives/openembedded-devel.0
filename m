@@ -1,46 +1,37 @@
-Received: from mail-ew0-f221.google.com ([209.85.219.221])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1OHbcm-0002pe-5L
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OHcSx-0004kl-7h
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 13:51:47 +0200
-Received: by ewy21 with SMTP id 21so1013481ewy.27
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 04:47:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=6gGUEm03ZcjJs//ZpO4d/4p6WpVjjIQxC++cuttfmHU=;
-	b=KrF/nEdXdjL6nn/8gRdiNNf9gOw7UweHUZ4SYvmw67Y9manLb89MnGHyqyb2ODHLjK
-	OviU6m2ONnY1OuJ679Y5ZaRJ92VFY/zjqwv5gCM7T474e6ixuMUM7NPsRD+v3t/N0TWs
-	RqdpAuvqzFbOWGKhb70mUQ8mSUUSXWbw4mKuM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tentIkUpXyK74UOCkHzfmYz4dFuCUSoGotK66YMkP3gArR4tdFcLSHcrEYFFduyr6m
-	EwE4T2xm5uuxzzBxWjStkcv3w0mG/J9CqqCKdVVjCuk4PWPRS0dPLoa+xCY/cep0O/kv
-	v9iMeZjkOUK9v+1zTQM1U5qg72XilyQiQyouQ=
-MIME-Version: 1.0
-Received: by 10.213.108.65 with SMTP id e1mr1566782ebp.73.1274960845884; Thu, 
-	27 May 2010 04:47:25 -0700 (PDT)
-Received: by 10.213.15.199 with HTTP; Thu, 27 May 2010 04:47:25 -0700 (PDT)
-In-Reply-To: <201005271243.57336.marcin@juszkiewicz.com.pl>
-References: <4BE04A63.9010002@kernelconcepts.de>
-	<AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
-	<201005271243.57336.marcin@juszkiewicz.com.pl>
-Date: Thu, 27 May 2010 13:47:25 +0200
-Message-ID: <AANLkTikz5IaVTZBlZVSlChOxgIwZta3fyHVqjrccDXMF@mail.gmail.com>
-From: pHilipp Zabel <philipp.zabel@gmail.com>
+	Thu, 27 May 2010 14:45:40 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4RCfLA9024386
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 27 May 2010 14:41:21 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OHcOn-0000ou-AU; Thu, 27 May 2010 14:41:21 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.219.221
-X-SA-Exim-Mail-From: philipp.zabel@gmail.com
+Date: Thu, 27 May 2010 14:41:10 +0200
+Message-Id: <5632cd85522c89e5cf788422f28191cbc04bfe96.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.0.1
+In-Reply-To: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+References: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+In-Reply-To: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+References: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded at Linuxtag 2010
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH 2/3] base.bbclass: fixed 'apply=no' behavior
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,29 +45,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 11:51:54 -0000
-Content-Type: text/plain; charset=ISO-8859-2
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 May 2010 12:45:40 -0000
 
-On Thu, May 27, 2010 at 12:43 PM, Marcin Juszkiewicz
-<marcin@juszkiewicz.com.pl> wrote:
-> Dnia czwartek, 27 maja 2010 o 12:40:31 pHilipp Zabel napisa=B3(a):
->> Wenn ich noch nicht zu sp=E4t dran bin, w=E4re ich auch dabei. Wie jedes
->> mal kann ich nur am Samstag sicher und evtl. am Freitag (nachmittag)
->> beistehen.
+After the recent change to autodetect patchfiles in SRC_URI's, files
+with 'apply=no' were not copied to workdir anymore.  This broke e.g.
+dropbear which marks a patch as 'apply=no' and applies it manually.
 
-That was me expecting Florian to interpret the answer, forgetting to
-change the recipient, you name it.
+This patch evaluates content of 'apply' parameter and copies files to
+workdir when it is not a patch or the parameter is false.
 
-> Ja, naturlich (my default answer when someone writes/tells something in
-> German).
->
-> Can you write in English? I only understood day names from your post.
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ classes/base.bbclass |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-"If it's not too late, count me in. As before, I can only assist on
-Saturday and perhaps Friday (in the afternoon)."
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 21b5646..f21d8ad 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -217,7 +217,8 @@ def oe_unpack_file(file, data, url = None):
+ 		cmd = 'cp -pPR %s %s/%s/' % (file, os.getcwd(), destdir)
+ 	else:
+ 		(type, host, path, user, pswd, parm) = bb.decodeurl(url)
+-		if not 'apply' in parm and not 'patch' in parm:
++		is_patch = path.endswith('.diff') or path.endswith('.patch')
++		if not oe_param_bool(parm, 'apply', is_patch) and not oe_param_bool(parm, 'patch', False):
+ 			# The "destdir" handling was specifically done for FILESPATH
+ 			# items.  So, only do so for file:// entries.
+ 			if type == "file":
+-- 
+1.7.0.1
 
-regards
-Philipp
 
 
