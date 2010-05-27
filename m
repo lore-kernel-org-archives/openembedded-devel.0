@@ -1,40 +1,27 @@
-Received: from ey-out-1920.google.com ([74.125.78.145])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philipp.zabel@gmail.com>) id 1OHaZq-0007Rq-QY
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OHact-0007Yc-90
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 12:44:39 +0200
-Received: by ey-out-1920.google.com with SMTP id 26so273870eyw.4
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 03:40:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=CmREHKjY/UumBqpNsXu9NqB9Em9jsH4wuRL9b8y1zzw=;
-	b=TjzHv/R+2hNlOTyS7ES+tyVvUwda2vHiImfodnLY4HwShfEVM9RAxxnHh+15IhBKYY
-	W27xtoAa0fZd6kqkjiNMFTwVQLLUvX9t8k/Ppi+PXWF8BJCWRaoI0P4tP8SBDMAlsM/G
-	hJZR3PEvBl7MkR0hWkl2m9toRaOmbBMCEPCaI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=CUdIuKq2k3d6GU4XlBKLrlO0W8AM2g8xs5+ytvNuWwC7iKxCbVoIZi+2v16pRtYM9O
-	bJI9bKElJZdRvkC/f1F61TPoI5OsmNl3ID3WOonatHiojRpXI9ciAjONnofcjXmrL2Qf
-	m2eOenHYWJ9Y84SCS3i3Wl5MEJlizxbHWPEFI=
-MIME-Version: 1.0
-Received: by 10.213.31.203 with SMTP id z11mr2064756ebc.88.1274956831960; Thu, 
-	27 May 2010 03:40:31 -0700 (PDT)
-Received: by 10.213.15.199 with HTTP; Thu, 27 May 2010 03:40:31 -0700 (PDT)
-In-Reply-To: <4BE04A63.9010002@kernelconcepts.de>
-References: <4BE04A63.9010002@kernelconcepts.de>
-Date: Thu, 27 May 2010 12:40:31 +0200
-Message-ID: <AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
-From: pHilipp Zabel <philipp.zabel@gmail.com>
+	Thu, 27 May 2010 12:47:48 +0200
+Received: (qmail 12143 invoked by uid 813007); 27 May 2010 10:43:40 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 27 May 2010 10:43:40 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.78.145
-X-SA-Exim-Mail-From: philipp.zabel@gmail.com
+Date: Thu, 27 May 2010 12:43:56 +0200
+User-Agent: KMail/1.13.3 (Linux/2.6.34-3-preempt; KDE/4.4.3; x86_64; ; )
+References: <4BE04A63.9010002@kernelconcepts.de>
+	<AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
+In-Reply-To: <AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201005271243.57336.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_40,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -52,43 +39,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 10:44:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 27 May 2010 10:47:48 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hallo Florian,
+Dnia czwartek, 27 maja 2010 o 12:40:31 pHilipp Zabel napisa=C5=82(a):
+> Wenn ich noch nicht zu sp=C3=A4t dran bin, w=C3=A4re ich auch dabei. Wie =
+jedes
+> mal kann ich nur am Samstag sicher und evtl. am Freitag (nachmittag)
+> beistehen.
 
-On Tue, May 4, 2010 at 6:25 PM, Florian Boor
-<florian.boor@kernelconcepts.de> wrote:
-> Hi!
->
-> I have good news: We have been accepted for a project booth at LinuxTag a=
-gain
-> this year.
-> This means that we have a booth at the largest Linux fair in Europe and t=
-he
-> opportunity to get in touch with users, companies and other projects ther=
-e.
-> In contrast to last year I have asked for more space but I do not have an=
-y
-> information about what we will get.
->
-> LinuxTag takes place in Berlin, Germany from June 9 to 12.
->
-> I can take care about organising this event for us and about some basic
-> equipment and a few devices. It would be great to have some more of us th=
-ere to
-> man the booth. I can order exhibitor passes for us, so if you like to hel=
-p
-> please let me know soon: In contrast to last year we do not get a defined=
- number
-> of these but we have to register one by one by submitting the name.
+Ja, naturlich (my default answer when someone writes/tells something in=20
+German).
 
-Wenn ich noch nicht zu sp=E4t dran bin, w=E4re ich auch dabei. Wie jedes
-mal kann ich nur am Samstag sicher und evtl. am Freitag (nachmittag)
-beistehen.
+Can you write in English? I only understood day names from your post.
 
-gruesze
-Philipp
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
