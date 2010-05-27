@@ -1,36 +1,36 @@
 Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OHkVZ-0006nr-Mz
+	(envelope-from <kergoth@gmail.com>) id 1OHkVa-0006o0-Ac
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 23:20:56 +0200
-Received: by vws20 with SMTP id 20so453503vws.6
+	Thu, 27 May 2010 23:20:57 +0200
+Received: by vws20 with SMTP id 20so453522vws.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu, 27 May 2010 14:16:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:sender:from:to:cc:subject
 	:date:message-id:x-mailer:in-reply-to:references;
-	bh=R37g21xXxjNsbZpFn5BW3sTnKumM2YbnMvx6ZYE/FzQ=;
-	b=WORMd0cKZZTUFqSsZayjCX7RFXm+9WxzL4Tl09x/E5VZ8DZuqyTvSPPM87TvHWGdqS
-	GYNzo7DxoHMdKr3PaCa875RllDXB3i8mlSqFkIegGDIuNkHGEkBDlCLbIgxrqnzLMNZO
-	OAXXtw1CudgLaae4HZ+FAlmKnZqfMVhAqmnao=
+	bh=ug1EXvbvZ0arU76RxrL8bUQl1E0IgskR4xPskCKqYA0=;
+	b=NnY+pwyYnz0eYrJIXQDo0O+tj9J3DZvPKmd5mEawKmOu9j9ZSzHL7GDxei5ZHS5FvY
+	X00Ks6EkcO/e2vsJIHYblvHW2yt/MNJDu/eLzRXyzRiJlCoL6kuTJgZp8StBQjnGqtGP
+	/7ZRaJcC9ZyDmrlimRfPnbefNVvM9XrLSl9wg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=sender:from:to:cc:subject:date:message-id:x-mailer:in-reply-to
 	:references;
-	b=nFUSIpLFonFVd5BMi09FXFKzXvbLs3W0ZUE5f7UkiiG9jWi551jBEQY5TSu179jw0B
-	PlrHuNoAFJKX1FjZI51WlUp8ixVGqy+xCUSpc0gBqLHZAV7tF5HJgtt0grF5MGP49iDx
-	GnSZNyyLYXGP6oroWn4t7IhnV7iZd/jSF8/+0=
-Received: by 10.220.127.75 with SMTP id f11mr7934277vcs.238.1274995003219;
-	Thu, 27 May 2010 14:16:43 -0700 (PDT)
+	b=q0tNmTjWa/euJr0A+pNABnhP7YVrisBJQbYRzHEx661C0/2s6iNM6bkKVP2hH6EmWJ
+	l1Bv563SN88cRrSIOmNXLaNr1aBb4OqNRGaPVl0Gn+Bl2F358b1FGThkjsBswfVt7dVL
+	Oh8m0e+fF/bo84g/luQWFU5zcYsd0tZdR8CEo=
+Received: by 10.220.107.28 with SMTP id z28mr7929864vco.240.1274995004533;
+	Thu, 27 May 2010 14:16:44 -0700 (PDT)
 Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
 	[24.251.170.95])
-	by mx.google.com with ESMTPS id z22sm6593023vco.10.2010.05.27.14.16.41
+	by mx.google.com with ESMTPS id z22sm6593023vco.10.2010.05.27.14.16.43
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 27 May 2010 14:16:42 -0700 (PDT)
+	Thu, 27 May 2010 14:16:44 -0700 (PDT)
 Sender: Chris Larson <kergoth@gmail.com>
 From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 May 2010 14:16:26 -0700
-Message-Id: <1274994988-5750-2-git-send-email-clarson@kergoth.com>
+Date: Thu, 27 May 2010 14:16:27 -0700
+Message-Id: <1274994988-5750-3-git-send-email-clarson@kergoth.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1274994988-5750-1-git-send-email-clarson@kergoth.com>
 References: <1274994988-5750-1-git-send-email-clarson@kergoth.com>
@@ -43,7 +43,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chris Larson <chris_larson@mentor.com>
-Subject: [PATCH 2/4] bitbake.conf: don't filter out nonexisting paths from FILESPATH
+Subject: [PATCH 3/4] bitbake.conf: make the EXTENDPE bits slightly less disturbing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,23 +61,24 @@ X-List-Received-Date: Thu, 27 May 2010 21:20:57 -0000
 
 From: Chris Larson <chris_larson@mentor.com>
 
-It's unnecessary, and can cause problems with amend.bbclass.
-
 Signed-off-by: Chris Larson <chris_larson@mentor.com>
 
 diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index ee93cd4..5dc6772 100644
+index 5dc6772..1980f43 100644
 --- a/conf/bitbake.conf
 +++ b/conf/bitbake.conf
-@@ -272,7 +272,7 @@ export MANIFEST = "${FILESDIR}/manifest"
- FILE_DIRNAME = "${@os.path.dirname(bb.data.getVar('FILE', d))}"
- FILESPATHBASE = "${FILE_DIRNAME}"
- FILESPATHPKG = "${PF}:${P}:${PN}:${BP}:${BPN}:files:."
--FILESPATH = "${@':'.join([os.path.normpath(os.path.join(fp, p, o)) for fp in d.getVar('FILESPATHBASE', 1).split(':') for p in d.getVar('FILESPATHPKG', 1).split(':') for o in (d.getVar('OVERRIDES', 1) + ':').split(':') if os.path.exists(os.path.join(fp, p, o))])}"
-+FILESPATH = "${@':'.join([os.path.normpath(os.path.join(fp, p, o)) for fp in d.getVar('FILESPATHBASE', 1).split(':') for p in d.getVar('FILESPATHPKG', 1).split(':') for o in (d.getVar('OVERRIDES', 1) + ':').split(':')])}"
- FILESDIR = "${@bb.which(d.getVar('FILESPATH', 1), '.')}"
+@@ -178,8 +178,9 @@ PN = "${@bb.parse.BBHandler.vars_from_file(bb.data.getVar('FILE',d),d)[0] or 'de
+ PV = "${@bb.parse.BBHandler.vars_from_file(bb.data.getVar('FILE',d),d)[1] or '1.0'}"
+ PR = "${@bb.parse.BBHandler.vars_from_file(bb.data.getVar('FILE',d),d)[2] or 'r0'}"
+ PF = "${PN}-${EXTENDPE}${PV}-${PR}"
+-EXTENDPE = "${@['','${PE\x7d_'][bb.data.getVar('PE',d,1) > 0]}"
+-EXTENDPEVER = "${@['','${PE\x7d:'][bb.data.getVar('PE',d,1) > 0]}"
++PE ?= "0"
++EXTENDPE = "${@int('${PE}') and '${PE}_' or ''}"
++EXTENDPEVER = "${@int('${PE}') and '${PE}:' or ''}"
+ EXTENDPV = "${EXTENDPEVER}${PV}-${PR}${DISTRO_PR}"
+ P = "${PN}-${PV}"
  
- ##################################################################
 -- 
 1.7.0.4
 
