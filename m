@@ -1,31 +1,29 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OHact-0007Yc-90
+	(envelope-from <gary@mlbassoc.com>) id 1OHb6Q-0000nW-P6
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 12:47:48 +0200
-Received: (qmail 12143 invoked by uid 813007); 27 May 2010 10:43:40 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 27 May 2010 10:43:40 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 May 2010 12:43:56 +0200
-User-Agent: KMail/1.13.3 (Linux/2.6.34-3-preempt; KDE/4.4.3; x86_64; ; )
-References: <4BE04A63.9010002@kernelconcepts.de>
-	<AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
-In-Reply-To: <AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>
+	Thu, 27 May 2010 13:18:39 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 99FB516606C6; Thu, 27 May 2010 05:14:10 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 299461660593;
+	Thu, 27 May 2010 05:14:10 -0600 (MDT)
+Message-ID: <4BFE5402.8030607@mlbassoc.com>
+Date: Thu, 27 May 2010 05:14:10 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-Message-Id: <201005271243.57336.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded at Linuxtag 2010
+Subject: Problems building Angstrom images
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,28 +37,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 10:47:48 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 27 May 2010 11:18:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia czwartek, 27 maja 2010 o 12:40:31 pHilipp Zabel napisa=C5=82(a):
-> Wenn ich noch nicht zu sp=C3=A4t dran bin, w=C3=A4re ich auch dabei. Wie =
-jedes
-> mal kann ich nur am Samstag sicher und evtl. am Freitag (nachmittag)
-> beistehen.
+A number of images in the current tree (8bb53d3f261c59353652f0328bfd887d6aa1c112)
+won't build, yielding errors like these:
 
-Ja, naturlich (my default answer when someone writes/tells something in=20
-German).
+| log_check: Matched keyword: [Cannot satisfy the following dependencies]
+| Collected errors:
+|  * resolve_conffiles: Existing conffile /local/Angstrom_BeagleBoard/tmp/rootfs/beagleboard-linuxtag2010-demo-image/etc/device_table is different from the conffile in the new 
+package. The new conffile will be placed at /local/Angstrom_BeagleBoard/tmp/rootfs/b * satisfy_dependencies_for: Cannot satisfy the following dependencies for angstrom-task-gnome:
+|  *    encodings *     encodings *     encodings *
+|
+NOTE: package beagleboard-linuxtag2010-demo-image-1.0-r0: task do_rootfs: Failed
 
-Can you write in English? I only understood day names from your post.
+To be clear, I'm building
+   MACHINE="beagleboard"
+   DISTRO="angstrom-2008.1"
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+I got these errors when I tried to build:
+   beagleboard-linuxtag2010-demo-image
+   angstrom-gnome-image
 
+I have success with
+   beagleboard-demo-image
 
+Any ideas how to fix this?
+
+Thanks
+
+n.b. yes, this is a cross post from the Angstrom list, but my
+query sat there for a day with no reply and I'm hoping for some
+help from the larger OE crew
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
