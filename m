@@ -1,48 +1,34 @@
-Received: from mail-qy0-f195.google.com ([209.85.221.195])
+Received: from promwad.com ([83.149.69.23])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OHe9Z-00073y-5n
+	(envelope-from <vladimir.davydov@promwad.com>) id 1OHeMb-00021T-WF
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 16:33:46 +0200
-Received: by qyk33 with SMTP id 33so49171qyk.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 07:29:35 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=0a6W4cTgN1wBapY76OIkP8CFxgo1GzosGlZdy76UrC8=;
-	b=gztqwEIvW8r3PmDX1jUQ3FS3ZP1+L+KCAjYPw1PhWMlOEH83ZefI9NRZuJZnEHoIov
-	3II/egzODjsuPqeGvb27jogblhSjZlb2ZfH2/9quvUE5xualr1K9eelC8pyLwjhBCV1H
-	Ph84ceYkpCJyCVR/1B9DZLipGqRjCslHQyXCw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=AvI+EHGVlTWry2ALA5Es85SkiWYbY7qLoidJRSAQ+haSoVqa/XTs9J1mFHeW3V6E1X
-	ibSAPG0zQHDKQqUvjCYvdB3t3+p+r7LLIQwGDIKr/IEuqPB7ZpvRPTiaFat822fYXnNd
-	X3qX7encdMTBtMTj2qIe3aH2lvIQHmwYrczmE=
-Received: by 10.224.126.194 with SMTP id d2mr5899973qas.265.1274970575557; 
-	Thu, 27 May 2010 07:29:35 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.217.136 with HTTP; Thu, 27 May 2010 07:29:04 -0700 (PDT)
-In-Reply-To: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
-References: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 27 May 2010 07:29:04 -0700
-X-Google-Sender-Auth: YcL7tcLwE8SXWYx3dSEaeD9jfK8
-Message-ID: <AANLkTim9kB_DPbT5GotgpbwfaUyGqUeL53DPsL826N60@mail.gmail.com>
+	Thu, 27 May 2010 16:47:14 +0200
+Received: from [195.222.85.229] (helo=intranet.promwad.com)
+	by promwad.com with esmtps (TLSv1:AES256-SHA:256) (Exim 4.63)
+	(envelope-from <vladimir.davydov@promwad.com>) id 1OHeIO-0004CO-4w
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 May 2010 17:42:52 +0300
+Received: from linux-x8hi.promwad.com ([192.168.10.129]
+	helo=linux-x8hi.localnet) by intranet.promwad.com with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <vladimir.davydov@promwad.com>) id 1OHeHo-0007hl-Eb
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 27 May 2010 17:42:16 +0300
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.221.195
-X-SA-Exim-Mail-From: kergoth@gmail.com
+From: Vladimir Davydov <vladimir.davydov@promwad.com>
+Organization: Promwad
+Date: Thu, 27 May 2010 17:42:21 +0300
+MIME-Version: 1.0
+Message-Id: <201005271742.21771.vladimir.davydov@promwad.com>
+X-SA-Exim-Connect-IP: 83.149.69.23
+X-SA-Exim-Mail-From: vladimir.davydov@promwad.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH 1/3] base.bbclass: added oe_param_bool() method
+Subject: Re: developmet setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,27 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 14:33:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 27 May 2010 14:47:15 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Thu, May 27, 2010 at 5:41 AM, Enrico Scholz <
-enrico.scholz@sigma-chemnitz.de> wrote:
+Hi,
 
-> This new function works like dict's get() method but converts the
-> returned value to a boolean.
->
-> It is to be used to interpret e.g. 'apply=yes' parameters in SRC_URI.
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
->
+Maybe following way will not usefull for you, but it is working for me.
 
-This certainly looks useful, but utility functions like that were moved from
-base.bbclass into utils.bbclass, and many of those in turn were moved into
-the lib/oe/ python package :)
+I have overrided do_fetch() method in the kernel recipe to make symlink to my 
+kernel source tree, which is under git control.
+
+S = "${WORKDIR}/linux-2.6"
+
+do_fetch () {                                                                                                                                          
+  cd ${WORKDIR}                                                                                                                                      
+  if [ ! -L ${S} ]; then                                                                                                                             
+    ln -sf ${MY_KERNEL_PATH} ${S}                                                                                                             
+  fi                                                                                                                                                 
+}                                                                                                                                                      
+
+MY_KERNEL_PATH is the local path to my kernel source tree. It is passed from  
+environment variables.
+I'm using this way only for kernel development.
+
+
+> Hi all,
+> I was searching a clean way to develop in OE my new kernel and my new
+> applications.
+> 
+> I saw this nice article about kernel development:
+> http://bec-systems.com/site/521/best-practices-for-kernel-development-with-
+> openembedded
+> 
+> I would like a way to develop inside Openembedded, but not in work
+> directory.
+> I mean to develop a project in a git tree, allowing me to use 'git diff'
+> ..... and finally 'git push' to my internal git servers.
+> This is an idea:
+> bitbake -c devshell-path /home/myapplication myapplicationrecipe
+> 
+> Perhaps srctree is a good tool already done for it?
+> 
+> Thanks,
+> Raffaele
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Vladimir Davydov
+
 
