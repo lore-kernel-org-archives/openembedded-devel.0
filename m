@@ -1,37 +1,36 @@
 Received: from mail-qy0-f195.google.com ([209.85.221.195])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OHe6x-0006wk-5o
+	(envelope-from <kergoth@gmail.com>) id 1OHe9Z-00073y-5n
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 16:31:04 +0200
-Received: by qyk33 with SMTP id 33so45239qyk.24
+	Thu, 27 May 2010 16:33:46 +0200
+Received: by qyk33 with SMTP id 33so49171qyk.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 07:26:53 -0700 (PDT)
+	Thu, 27 May 2010 07:29:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:sender:received
 	:in-reply-to:references:from:date:x-google-sender-auth:message-id
 	:subject:to:cc:content-type;
-	bh=0FyDiiVekEpIXzryOIJ49Rrb1b9TMasMEZs4ZMg6CAU=;
-	b=i4FBoiAIsHDPwSUpU2QBVxdhq+6KULBy0JuOiAF1AKkelazSB6RnFg/qTGVy0Afwuy
-	bR5aC1tyExDoXRP2s+fIVKZ3O3yfyUMLokhE/SObMF5umCXYxc6sCYPABdDFYZ0zvYjB
-	UF2/XQdf6YxNNOhBZpG8x5ypg6fhYC0rmBnTc=
+	bh=0a6W4cTgN1wBapY76OIkP8CFxgo1GzosGlZdy76UrC8=;
+	b=gztqwEIvW8r3PmDX1jUQ3FS3ZP1+L+KCAjYPw1PhWMlOEH83ZefI9NRZuJZnEHoIov
+	3II/egzODjsuPqeGvb27jogblhSjZlb2ZfH2/9quvUE5xualr1K9eelC8pyLwjhBCV1H
+	Ph84ceYkpCJyCVR/1B9DZLipGqRjCslHQyXCw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:from:date
 	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=oenqt+GVJkmDxokfh3jCXgg923IClSOe8gBMBuXgK3q00EWOuB4pGpcYlqd4BU8H65
-	04jraVJfFfk0ojWiJU8Yv/5t4/JhUV69qJQ7DdgdFjy4HeOJQRDc6lW8vidv+MY1JKqk
-	oaK0RRhTsiJH/O+R2euPOuY5acjqtVWPSjcCQ=
-Received: by 10.224.101.75 with SMTP id b11mr5658486qao.38.1274970408898; Thu, 
-	27 May 2010 07:26:48 -0700 (PDT)
+	b=AvI+EHGVlTWry2ALA5Es85SkiWYbY7qLoidJRSAQ+haSoVqa/XTs9J1mFHeW3V6E1X
+	ibSAPG0zQHDKQqUvjCYvdB3t3+p+r7LLIQwGDIKr/IEuqPB7ZpvRPTiaFat822fYXnNd
+	X3qX7encdMTBtMTj2qIe3aH2lvIQHmwYrczmE=
+Received: by 10.224.126.194 with SMTP id d2mr5899973qas.265.1274970575557; 
+	Thu, 27 May 2010 07:29:35 -0700 (PDT)
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.229.217.136 with HTTP; Thu, 27 May 2010 07:26:27 -0700 (PDT)
-In-Reply-To: <5632cd85522c89e5cf788422f28191cbc04bfe96.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+Received: by 10.229.217.136 with HTTP; Thu, 27 May 2010 07:29:04 -0700 (PDT)
+In-Reply-To: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
 References: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
-	<5632cd85522c89e5cf788422f28191cbc04bfe96.1274963939.git.enrico.scholz@sigma-chemnitz.de>
 From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 27 May 2010 07:26:27 -0700
-X-Google-Sender-Auth: 22QBPxfwIXImaWuuM1rACdv3bEE
-Message-ID: <AANLkTimqPdtn4bL4j8ToqL-DlK4sD8CH24scoBOP7T6L@mail.gmail.com>
+Date: Thu, 27 May 2010 07:29:04 -0700
+X-Google-Sender-Auth: YcL7tcLwE8SXWYx3dSEaeD9jfK8
+Message-ID: <AANLkTim9kB_DPbT5GotgpbwfaUyGqUeL53DPsL826N60@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.221.195
 X-SA-Exim-Mail-From: kergoth@gmail.com
@@ -43,7 +42,7 @@ X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: Re: [PATCH 2/3] base.bbclass: fixed 'apply=no' behavior
+Subject: Re: [PATCH 1/3] base.bbclass: added oe_param_bool() method
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,25 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 14:31:04 -0000
+X-List-Received-Date: Thu, 27 May 2010 14:33:46 -0000
 Content-Type: text/plain; charset=UTF-8
 
 On Thu, May 27, 2010 at 5:41 AM, Enrico Scholz <
 enrico.scholz@sigma-chemnitz.de> wrote:
 
-> After the recent change to autodetect patchfiles in SRC_URI's, files
-> with 'apply=no' were not copied to workdir anymore.  This broke e.g.
-> dropbear which marks a patch as 'apply=no' and applies it manually.
+> This new function works like dict's get() method but converts the
+> returned value to a boolean.
 >
-> This patch evaluates content of 'apply' parameter and copies files to
-> workdir when it is not a patch or the parameter is false.
+> It is to be used to interpret e.g. 'apply=yes' parameters in SRC_URI.
 >
 > Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 >
 
-Acked-by: Chris Larson <clarson@kergoth.com>
-
-Thanks for the fix, and sorry about that :)
+This certainly looks useful, but utility functions like that were moved from
+base.bbclass into utils.bbclass, and many of those in turn were moved into
+the lib/oe/ python package :)
 -- 
 Christopher Larson
 clarson at kergoth dot com
