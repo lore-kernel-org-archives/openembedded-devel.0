@@ -1,25 +1,25 @@
 Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OHear-0001Yq-H9
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OHfQI-000226-BL
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 17:01:58 +0200
+	Thu, 27 May 2010 17:55:06 +0200
 Received: from ensc-virt.intern.sigma-chemnitz.de
 	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4REveqL026876
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4RFooXB008670
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 27 May 2010 16:57:40 +0200
+	Thu, 27 May 2010 17:50:50 +0200
 Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
 	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OHeWi-0005Ax-8X; Thu, 27 May 2010 16:57:40 +0200
+	id 1OHfM9-0000xc-KS; Thu, 27 May 2010 17:50:49 +0200
 From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 May 2010 16:57:22 +0200
-Message-Id: <03de886667347afcc8921203ce7b5e6d41377de4.1274971894.git.enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.0.1
-In-Reply-To: <921f797080989dbf4ebe79bbfeb5f1ef3c608748.1274971894.git.enrico.scholz@sigma-chemnitz.de>
-References: <921f797080989dbf4ebe79bbfeb5f1ef3c608748.1274971894.git.enrico.scholz@sigma-chemnitz.de>
-In-Reply-To: <a4b71a86a14f591edb468e79e6ed9d13dda96958.1274642314.git.enrico.scholz@sigma-chemnitz.de>
-References: <a4b71a86a14f591edb468e79e6ed9d13dda96958.1274642314.git.enrico.scholz@sigma-chemnitz.de>
+References: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
+Date: Thu, 27 May 2010 17:50:49 +0200
+In-Reply-To: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
+	(Raffaele Recalcati's message of "Wed, 26 May 2010 08:34:07 +0200")
+Message-ID: <lyvda9gx7q.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.1 (gnu/linux)
+MIME-Version: 1.0
 Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
 X-SA-Exim-Connect-IP: 62.153.82.30
@@ -30,9 +30,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
 	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>,
-	Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
-Subject: [PATCH (rebase) 3/3] freetype: enable bytecode interpreter
+Subject: Re: developmet setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,62 +44,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 15:01:58 -0000
+X-List-Received-Date: Thu, 27 May 2010 15:55:07 -0000
+Content-Type: text/plain; charset=us-ascii
 
-From: Enrico Scholz <enrico.scholz@informatik.tu-chemnitz.de>
+Raffaele Recalcati <lamiaposta71@gmail.com> writes:
 
-Bytecode stuff is patent encumbered so it can be enabled for
-non-enterprise distributions only.
+> I was searching a clean way to develop in OE my new kernel and my new
+> applications.
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- .../freetype-2.3.12/bytecode-interpreter.patch     |   22 ++++++++++++++++++++
- recipes/freetype/freetype_2.3.12.bb                |    1 +
- 2 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 recipes/freetype/freetype-2.3.12/bytecode-interpreter.patch
+I wrote a recipe[1] which generates a special 'Makefile'[2].  It can be
+used for developing an application in a way like
 
-diff --git a/recipes/freetype/freetype-2.3.12/bytecode-interpreter.patch b/recipes/freetype/freetype-2.3.12/bytecode-interpreter.patch
-new file mode 100644
-index 0000000..599e67d
---- /dev/null
-+++ b/recipes/freetype/freetype-2.3.12/bytecode-interpreter.patch
-@@ -0,0 +1,22 @@
-+Index: freetype-2.3.12/include/freetype/config/ftoption.h
-+===================================================================
-+--- freetype-2.3.12.orig/include/freetype/config/ftoption.h
-++++ freetype-2.3.12/include/freetype/config/ftoption.h
-+@@ -93,7 +93,7 @@ FT_BEGIN_HEADER
-+   /* This is done to allow FreeType clients to run unmodified, forcing     */
-+   /* them to display normal gray-level anti-aliased glyphs.                */
-+   /*                                                                       */
-+-/* #define FT_CONFIG_OPTION_SUBPIXEL_RENDERING */
-++#define FT_CONFIG_OPTION_SUBPIXEL_RENDERING
-+ 
-+ 
-+   /*************************************************************************/
-+@@ -497,7 +497,7 @@ FT_BEGIN_HEADER
-+   /*   Do not #undef this macro here, since the build system might         */
-+   /*   define it for certain configurations only.                          */
-+   /*                                                                       */
-+-/* #define TT_CONFIG_OPTION_BYTECODE_INTERPRETER */
-++#define TT_CONFIG_OPTION_BYTECODE_INTERPRETER
-+ 
-+ 
-+   /*************************************************************************/
-diff --git a/recipes/freetype/freetype_2.3.12.bb b/recipes/freetype/freetype_2.3.12.bb
-index 6e0641e..04e445c 100644
---- a/recipes/freetype/freetype_2.3.12.bb
-+++ b/recipes/freetype/freetype_2.3.12.bb
-@@ -9,6 +9,7 @@ SRC_URI = "\
-   file://no-hardcode.patch \
-   file://fix-configure.patch \
-   file://libtool-tag.patch \
-+  ${@base_conditional('ENTERPRISE_DISTRO','1','','file://bytecode-interpreter.patch',d)} \
- "
- S = "${WORKDIR}/freetype-${PV}"
- 
--- 
-1.7.0.1
+| $ make -C ~/src/my-app -f <workspace>/Makefile.ipan7 all
+| $ make -f <workspace>/Makefile.ipan7 shell
 
+and sets all the crosscompiler information.  There exist some extensions
+for U-Boot[3] or common tasks like pkg-installation in NFS
+rootfilesystems[4]. Sample commands are
+
+| $ make -C ~/src/u-boot -f <workspace>/Makefile.ipan7 CFG=u-boot
+
+or 
+
+| $ make -f <workspace>/Makefile.ipan7 CFG=pkg pkg-install P=busybox
+| $ make -f <workspace>/Makefile.ipan7 CFG=pkg pkg-upgrade
+
+
+We started with a variation for the kernel which was placed into a
+kernel recipe[5] and generates a more simple makefile[6]. It should be
+probably ported to the previous, more modern method but it works and
+I do not have time for it :(
+
+
+Our development model is to work on NFS rootfs where applications are
+installed on by the methods above. There are OE recipes for these apps
+which fetch either from git repositories or fetch normal tarballs of
+these apps.
+
+
+
+Enrico
+
+Footnotes: 
+[1]  https://www.cvg.de/people/ensc/oe/elito-develcomp.bb
+[2]  https://www.cvg.de/people/ensc/oe/Makefile.ipan7
+[3]  https://www.cvg.de/people/ensc/oe/u-boot.mk
+[4]  https://www.cvg.de/people/ensc/oe/pkg.mk
+[5]  https://www.cvg.de/people/ensc/oe/elito-kernel.inc
+[6]  https://www.cvg.de/people/ensc/oe/Makefile.kernel.ipan7
 
 
