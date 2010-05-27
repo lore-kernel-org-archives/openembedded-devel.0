@@ -1,45 +1,41 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <joaohf@gmail.com>) id 1OHQrM-0007DS-5G
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 02:22:05 +0200
-Received: by pwi5 with SMTP id 5so1434065pwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHX8U-00035O-7p for openembedded-devel@lists.openembedded.org;
+	Thu, 27 May 2010 09:04:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHX4T-0003NQ-E9 for openembedded-devel@lists.openembedded.org;
+	Thu, 27 May 2010 09:00:01 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 May 2010 09:00:01 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 17:17:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=GiGcepF/M7A3cb52znpgJ/bLhAM+NTis1X8aSmVlFq0=;
-	b=BqWBwvCwX7u3XLckk4Ws3RYIxG5BVlc5g0KT6WrsfbcI41yMdiliv7Mf+z5zzcs8Np
-	rBNWO1cnJJNa6NUxVbLB/GPU7+8UzZAJ/yz/Dc0L3pxyRS6kDJH8xYv8TqtbTaEnkb6M
-	z0W0WVyTSPNUgU5v7pZowahESwwoAiV+9WyW0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=CMNarRAAtRzQXarCw12tG1S1AIoUh0RwyIxpvOVYsRm23gtiTAJ+68QwvivRwnyoID
-	s24EQL146G5wTgXSg1lEuCDioK/KAsU1JEjznNON9rVcGrfIvgyrRb1l+RotXjOCZ63I
-	wEp0OFRoAvlubUyC2Ggtfz1l675HWqcFi0IU0=
-MIME-Version: 1.0
-Received: by 10.140.87.40 with SMTP id k40mr7238104rvb.251.1274919474479; Wed, 
-	26 May 2010 17:17:54 -0700 (PDT)
-Received: by 10.141.51.17 with HTTP; Wed, 26 May 2010 17:17:54 -0700 (PDT)
-In-Reply-To: <20100526200901.GB10091@gmail.com>
-References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>
-	<hso7dv$2lh$1@dough.gmane.org>
-	<AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>
-	<AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
-	<20100526200901.GB10091@gmail.com>
-Date: Wed, 26 May 2010 21:17:54 -0300
-Message-ID: <AANLkTilpT2VyDEtNwqqNvvbJTWGw3EPCJAB0wsBXafuG@mail.gmail.com>
-From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
+	Thu, 27 May 2010 09:00:01 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: joaohf@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 27 May 2010 08:59:48 +0200
+Message-ID: <htl594$4mn$1@dough.gmane.org>
+References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>	<hso7dv$2lh$1@dough.gmane.org>	<AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>	<AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
+	<20100526200901.GB10091@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <20100526200901.GB10091@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] Add lksctp tools
@@ -56,23 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 00:22:06 -0000
+X-List-Received-Date: Thu, 27 May 2010 07:04:11 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->
+On 26-05-10 22:09, Khem Raj wrote:
+> On (23/05/10 15:50), João Henrique Freitas wrote:
+>> Hi,
+>>
+>> Attached a unique patch.
+> 
 > same as cgreen. but it builds. I get these warnings. Are they ok ?
 
-Yes, they are. Thanks.
+Unpackaged file are almost never OK, so please update PACKAGES and FILES
+to package these:
 
---=20
------------------------------------------------------------
-Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
-Campinas-SP-Brasil
-BSD051283
-LPI 1
-http://www.joaohfreitas.eti.br
+> 
+> NOTE: the following files were installed but not shipped in any package:
+> NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1
+> NOTE:   /usr/lib/lksctp-tools/libwithsctp.so
+> NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1.0.7
+> NOTE:   /usr/lib/lksctp-tools/libwithsctp.a
+> NOTE:   /usr/lib/lksctp-tools/libwithsctp.la
+> NOTE:   /usr/share/lksctp-tools/checksctp.c
+> NOTE:   /usr/share/lksctp-tools/sctp_socket.c
+> NOTE:   /usr/share/lksctp-tools/sctp_bind.c
+> NOTE:   /usr/share/lksctp-tools/sctp_darn.c
+> NOTE:   /usr/share/lksctp-tools/sctp_load_libs.c
+> NOTE:   /usr/share/lksctp-tools/sctp_sockopt.c
+> NOTE:   /usr/share/lksctp-tools/sctp_socket.h
+> NOTE:   /usr/share/lksctp-tools/sctp_test.c
+> NOTE:   /usr/share/lksctp-tools/sctp_darn.h
+> NOTE:   /usr/bin/sctp_test
+> NOTE:   /usr/bin/sctp_darn
+> NOTE:   /usr/bin/checksctp
+> NOTE:   /usr/bin/withsctp
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFL/hhkMkyGM64RGpERAqd2AJ9oe2hjZg9OCf0jsJt6gllNSZMMrACgjhvC
+wDJUhKoyPLc0g8PxH5Rfzks=
+=Oojb
+-----END PGP SIGNATURE-----
+
 
 
