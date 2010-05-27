@@ -1,46 +1,41 @@
-Received: from mail-pz0-f178.google.com ([209.85.222.178])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OHMyf-0006kO-HL
+	(envelope-from <joaohf@gmail.com>) id 1OHQrM-0007DS-5G
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 26 May 2010 22:13:22 +0200
-Received: by pzk8 with SMTP id 8so367935pzk.12
+	Thu, 27 May 2010 02:22:05 +0200
+Received: by pwi5 with SMTP id 5so1434065pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 26 May 2010 13:09:12 -0700 (PDT)
+	Wed, 26 May 2010 17:17:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=sREc3TO9MeJmKgiENs6UMOPXdHkIJnYVj+JyKqIzzig=;
-	b=rub6I38UUsoBylKiOGig3c2tFeUvC5c5o85XWXkFJg6hE/pgZt7XKkAc7ka/0F7kGm
-	FDYtdmnNnj7YQWnx9yX1s/GEzOEjiCFN+nbwQ3AM60ADyEtu8tb1iwEWQ1t8BJbIaVJ2
-	k5I+AUY/HvYTUMYuXPyiqhlxrOOy914FEMzO0=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=GiGcepF/M7A3cb52znpgJ/bLhAM+NTis1X8aSmVlFq0=;
+	b=BqWBwvCwX7u3XLckk4Ws3RYIxG5BVlc5g0KT6WrsfbcI41yMdiliv7Mf+z5zzcs8Np
+	rBNWO1cnJJNa6NUxVbLB/GPU7+8UzZAJ/yz/Dc0L3pxyRS6kDJH8xYv8TqtbTaEnkb6M
+	z0W0WVyTSPNUgU5v7pZowahESwwoAiV+9WyW0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=QzcnKGnzPbcN7SoTAQhDeIWWRHLSF7VANi6ldlGEUESqLYu8DSsEVdmX+pWXDFDETW
-	jQ3oNPADQPJ8/pN57ZYCZD/vppmbzP6e0G5vpY5BolNoQy079OWyuIYYN5czBhpog51s
-	bscNOBcL4WMxLELat9sXKJvdffXJWnuzTseew=
-Received: by 10.115.117.38 with SMTP id u38mr8033802wam.168.1274904552136;
-	Wed, 26 May 2010 13:09:12 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id c14sm3320681waa.13.2010.05.26.13.09.10
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 26 May 2010 13:09:10 -0700 (PDT)
-Date: Wed, 26 May 2010 13:09:01 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100526200901.GB10091@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=CMNarRAAtRzQXarCw12tG1S1AIoUh0RwyIxpvOVYsRm23gtiTAJ+68QwvivRwnyoID
+	s24EQL146G5wTgXSg1lEuCDioK/KAsU1JEjznNON9rVcGrfIvgyrRb1l+RotXjOCZ63I
+	wEp0OFRoAvlubUyC2Ggtfz1l675HWqcFi0IU0=
+MIME-Version: 1.0
+Received: by 10.140.87.40 with SMTP id k40mr7238104rvb.251.1274919474479; Wed, 
+	26 May 2010 17:17:54 -0700 (PDT)
+Received: by 10.141.51.17 with HTTP; Wed, 26 May 2010 17:17:54 -0700 (PDT)
+In-Reply-To: <20100526200901.GB10091@gmail.com>
 References: <AANLkTikuptIZDURk9aJb5xqB22op3_cnR1OU7iQ0JfY0@mail.gmail.com>
 	<hso7dv$2lh$1@dough.gmane.org>
 	<AANLkTinzfd9OTFGIFxcCCdaxgXZ3lJm1OorWVxg0njNG@mail.gmail.com>
 	<AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTimLcmTnl-zjJR9SVHRaX7GlKjhYT_IMiOy-eQtJ@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.222.178
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	<20100526200901.GB10091@gmail.com>
+Date: Wed, 26 May 2010 21:17:54 -0300
+Message-ID: <AANLkTilpT2VyDEtNwqqNvvbJTWGw3EPCJAB0wsBXafuG@mail.gmail.com>
+From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: joaohf@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -61,40 +56,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 26 May 2010 20:13:22 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 27 May 2010 00:22:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On (23/05/10 15:50), João Henrique Freitas wrote:
-> Hi,
-> 
-> Attached a unique patch.
+Hi,
 
-same as cgreen. but it builds. I get these warnings. Are they ok ?
+>
+> same as cgreen. but it builds. I get these warnings. Are they ok ?
 
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1
-NOTE:   /usr/lib/lksctp-tools/libwithsctp.so
-NOTE:   /usr/lib/lksctp-tools/libwithsctp.so.1.0.7
-NOTE:   /usr/lib/lksctp-tools/libwithsctp.a
-NOTE:   /usr/lib/lksctp-tools/libwithsctp.la
-NOTE:   /usr/share/lksctp-tools/checksctp.c
-NOTE:   /usr/share/lksctp-tools/sctp_socket.c
-NOTE:   /usr/share/lksctp-tools/sctp_bind.c
-NOTE:   /usr/share/lksctp-tools/sctp_darn.c
-NOTE:   /usr/share/lksctp-tools/sctp_load_libs.c
-NOTE:   /usr/share/lksctp-tools/sctp_sockopt.c
-NOTE:   /usr/share/lksctp-tools/sctp_socket.h
-NOTE:   /usr/share/lksctp-tools/sctp_test.c
-NOTE:   /usr/share/lksctp-tools/sctp_darn.h
-NOTE:   /usr/bin/sctp_test
-NOTE:   /usr/bin/sctp_darn
-NOTE:   /usr/bin/checksctp
-NOTE:   /usr/bin/withsctp
+Yes, they are. Thanks.
 
-
-Thx
--Khem
+--=20
+-----------------------------------------------------------
+Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
+Campinas-SP-Brasil
+BSD051283
+LPI 1
+http://www.joaohfreitas.eti.br
 
 
