@@ -1,33 +1,45 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OHcSv-0004ki-O2
+	(envelope-from <lamiaposta71@gmail.com>) id 1OHcXW-000585-PY
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 14:45:45 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4RCfDCt024361
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 27 May 2010 14:41:14 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OHcOf-0000oo-Fk; Thu, 27 May 2010 14:41:13 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Thu, 27 May 2010 14:50:35 +0200
+Received: by gwb15 with SMTP id 15so3121789gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 May 2010 05:46:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=uMEiYTav/PfzegRySGKb+BSpp97UYXCwSFhJsAVvODk=;
+	b=SXwSqHRoEyQHBB6lB9pUDW+Z0OGVpBSNe8Txm3pC9pMBLeOPHEvsQRfVftSHIaRD28
+	3lmwrtARNScgP0YXrlwSWj4M8chyuBSufiwAIIsPptFunb3ufmQaki/U2oIkFJNGbmWi
+	9jpeJxLO9xwbPlrPyMhvRgP6ZR/wJxvzJl9rM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=J8N/sMlxIk9Yh68B7DiCtROzUb2nqpsIkp4F/ubp6yODsCjv20owplB05O1pirYMaH
+	ouJkqdoiA+tMnvng4xOU/7cFqa5h/5A8D2A1v8+qDJsunPFZ7VjzhDdrqAwNPTmS4xnT
+	7iNTSA+Fl9WFdd5ilXwzBNwbYE4Qtevf4KuLk=
+MIME-Version: 1.0
+Received: by 10.42.3.197 with SMTP id 5mr837934icp.24.1274964373451; Thu, 27 
+	May 2010 05:46:13 -0700 (PDT)
+Received: by 10.231.171.85 with HTTP; Thu, 27 May 2010 05:46:13 -0700 (PDT)
+In-Reply-To: <htj03o$u5k$1@dough.gmane.org>
+References: <AANLkTin5ULxoMD23AleqaBLBxR8zinSd8OfO8NgpKvTn@mail.gmail.com>
+	<htj03o$u5k$1@dough.gmane.org>
+Date: Thu, 27 May 2010 14:46:13 +0200
+Message-ID: <AANLkTinD7QYTCSSBMn7ZngKKo2BAyG5NUAi_kbzqKSA1@mail.gmail.com>
+From: Raffaele Recalcati <lamiaposta71@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 May 2010 14:41:09 +0200
-Message-Id: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.0.1
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: lamiaposta71@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH 1/3] base.bbclass: added oe_param_bool() method
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: developmet setup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,41 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 12:45:49 -0000
+X-List-Received-Date: Thu, 27 May 2010 12:50:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-This new function works like dict's get() method but converts the
-returned value to a boolean.
+I do 'git diff' and 'git commit' in the work directory, what's stopping you?
+>
 
-It is to be used to interpret e.g. 'apply=yes' parameters in SRC_URI.
+Hi Koen,
+in my work dir of
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- classes/base.bbclass |   10 ++++++++++
- 1 files changed, 10 insertions(+), 0 deletions(-)
+commit d9264a5e565906ccf75f695dbecd251e21407fdf
+Author: Khem Raj <raj.khem@gmail.com>
+Date:   Tue May 11 21:26:31 2010 -0700
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 8bac509..21b5646 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -161,6 +161,16 @@ python base_do_fetch() {
- 			raise bb.build.FuncFailed("Checksum of '%s' failed" % uri)
- }
- 
-+def oe_param_bool(cfg, field, dflt):
-+	"""Lookup <field> in <cfg> map and convert it to a boolean; take 
-+        <dflt> when this <field> does not exist"""
-+	v = ("%s" % cfg.get(field, dflt)).lower()
-+	if v in ['yes', 'y', 'true', 't', '1']:
-+		return True
-+	if v in ['no', 'n', 'false', 'f', '0']:
-+		return False
-+	raise bb.build.FuncFailed("Can not convert '%s' to boolean" % v)
-+
- def oe_unpack_file(file, data, url = None):
- 	import subprocess
- 	if not url:
--- 
-1.7.0.1
+the command:
+  find . -name .git
+doens't report any git tree.
 
+So I try the same command in the download dir and I find:
+downloads/git/arago-project.org.git.projects.u-boot-davinci.git/.git/
 
+So I guess that git clone is done from the remote server to download dir.
+But you are saying you can do git diff in your working directory.
+How is you typical bb file?
+Which bb file can be look as an example?
+
+The other problem about having a git tree inside the work directory is that
+sometimes a git pull requires to rebuild all the working directory, but
+normally my development is done in an overlay and I hope that is possible to
+have the overlay working directory different from the openembedded working
+directory.
+
+Regards,
+Raffaele
 
