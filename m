@@ -1,34 +1,31 @@
-Received: from qmta01.westchester.pa.hmc1.comcast.net ([76.96.53.8])
+Received: from vms173003pub.verizon.net ([206.46.173.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jfaith@soundmetrics.com>) id 1OHh0T-0001fM-Oy
+	(envelope-from <denis@denix.org>) id 1OHjpZ-0003KW-Jn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 19:36:36 +0200
-Received: from omta02.westchester.pa.hmc1.comcast.net ([76.96.53.7])
-	by qmta01.westchester.pa.hmc1.comcast.net with comcast
-	id Nc8N1e00609Ku2s01hYJzU; Thu, 27 May 2010 17:32:18 +0000
-Received: from [192.168.10.133] ([75.147.191.205])
-	by omta02.westchester.pa.hmc1.comcast.net with bizsmtp
-	id NhYH1e0064SLwm302hYHQE; Thu, 27 May 2010 17:32:18 +0000
-Message-ID: <4BFEAC3C.3060809@soundmetrics.com>
-Date: Thu, 27 May 2010 10:30:36 -0700
-From: John Faith <jfaith@soundmetrics.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.22) Gecko/20090605 SeaMonkey/1.1.17
-	(Ubuntu-1.1.17+nobinonly-0ubuntu1)
-MIME-Version: 1.0
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-References: <4BFE9AD1.6030003@soundmetrics.com>
-In-Reply-To: <4BFE9AD1.6030003@soundmetrics.com>
-X-SA-Exim-Connect-IP: 76.96.53.8
-X-SA-Exim-Mail-From: jfaith@soundmetrics.com
+	Thu, 27 May 2010 22:37:30 +0200
+Received: from gandalf.denix.org ([unknown] [71.255.238.44])
+	by vms173003.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L3300C4JIEKQN16@vms173003.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	27 May 2010 15:32:46 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 429D114AF60; Thu,
+	27 May 2010 16:32:44 -0400 (EDT)
+Date: Thu, 27 May 2010 16:32:44 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20100527203244.GL23464@denix.org>
+MIME-version: 1.0
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.3
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Showing build dependencies, boost needs libxt?
+Subject: Commit access for Enrico Scholz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,18 +39,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 17:36:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 27 May 2010 20:37:30 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-John Faith wrote:
-> ...  When I use 'bitbake -g 
-> boost' I see no libxt or X11 stuff in the generated .dot files,...
->
->   
-Never mind.  I found that updated oe source gives expected dependencies.
+Hi,
 
-,
-John
+I'd like to recommend to give commit access to Enrico Scholz - he has 
+submitted number of useful patches, fixing issues in core areas, some of which 
+were hard to find. He has demonstrated a good level of understanding and 
+knowledge in system, Python and bitbake areas. He is also open to feedback.
+
+-- 
+Denys
 
 
