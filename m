@@ -1,20 +1,20 @@
 Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OHcSx-0004kl-7h
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OHcSy-0004kt-Tv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 14:45:40 +0200
+	Thu, 27 May 2010 14:45:42 +0200
 Received: from ensc-virt.intern.sigma-chemnitz.de
 	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4RCfLA9024386
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o4RCfOtv024406
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 27 May 2010 14:41:21 +0200
+	Thu, 27 May 2010 14:41:25 +0200
 Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
 	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OHcOn-0000ou-AU; Thu, 27 May 2010 14:41:21 +0200
+	id 1OHcOp-0000p0-VS; Thu, 27 May 2010 14:41:24 +0200
 From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 May 2010 14:41:10 +0200
-Message-Id: <5632cd85522c89e5cf788422f28191cbc04bfe96.1274963939.git.enrico.scholz@sigma-chemnitz.de>
+Date: Thu, 27 May 2010 14:41:11 +0200
+Message-Id: <0e0cdcf922c4d5d97f306388e606d90a6b18da67.1274963939.git.enrico.scholz@sigma-chemnitz.de>
 X-Mailer: git-send-email 1.7.0.1
 In-Reply-To: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
 References: <251e7c878dc4a683988be506f6285ba6ac53b47c.1274963939.git.enrico.scholz@sigma-chemnitz.de>
@@ -31,7 +31,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH 2/3] base.bbclass: fixed 'apply=no' behavior
+Subject: [PATCH 3/3] patch.bbclass: use oe_param_bool()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,34 +45,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 12:45:40 -0000
+X-List-Received-Date: Thu, 27 May 2010 12:45:46 -0000
+X-List-Received-Date: Thu, 27 May 2010 12:45:46 -0000
+X-List-Received-Date: Thu, 27 May 2010 12:45:46 -0000
 
-After the recent change to autodetect patchfiles in SRC_URI's, files
-with 'apply=no' were not copied to workdir anymore.  This broke e.g.
-dropbear which marks a patch as 'apply=no' and applies it manually.
-
-This patch evaluates content of 'apply' parameter and copies files to
-workdir when it is not a patch or the parameter is false.
+This patch replaces a complicated if statement with a more simple
+code.
 
 Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 ---
- classes/base.bbclass |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+ classes/patch.bbclass |   12 +++++-------
+ 1 files changed, 5 insertions(+), 7 deletions(-)
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 21b5646..f21d8ad 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -217,7 +217,8 @@ def oe_unpack_file(file, data, url = None):
- 		cmd = 'cp -pPR %s %s/%s/' % (file, os.getcwd(), destdir)
- 	else:
- 		(type, host, path, user, pswd, parm) = bb.decodeurl(url)
--		if not 'apply' in parm and not 'patch' in parm:
-+		is_patch = path.endswith('.diff') or path.endswith('.patch')
-+		if not oe_param_bool(parm, 'apply', is_patch) and not oe_param_bool(parm, 'patch', False):
- 			# The "destdir" handling was specifically done for FILESPATH
- 			# items.  So, only do so for file:// entries.
- 			if type == "file":
+diff --git a/classes/patch.bbclass b/classes/patch.bbclass
+index 7b0c444..8fe8c00 100644
+--- a/classes/patch.bbclass
++++ b/classes/patch.bbclass
+@@ -46,15 +46,13 @@ python patch_do_patch() {
+ 			local = os.path.join(workdir, base)
+ 			ext = os.path.splitext(base)[1]
+ 
+-		if "apply" in parm:
+-			apply = parm["apply"]
+-			if apply != "yes":
+-				if apply != "no":
+-					bb.msg.warn(None, "Unsupported value '%s' for 'apply' url param in '%s', please use 'yes' or 'no'" % (apply, url))
+-				continue
++		is_patch = ext in (".diff", ".patch")
++
++		if not oe_param_bool(parm, 'apply', is_patch):
++			continue
+ 		elif "patch" in parm:
+ 			bb.msg.warn(None, "Deprecated usage of 'patch' url param in '%s', please use 'apply={yes,no}'" % url)
+-		elif ext not in (".diff", ".patch"):
++		elif not is_patch:
+ 			continue
+ 
+ 		if not local:
 -- 
 1.7.0.1
 
