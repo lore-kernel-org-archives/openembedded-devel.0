@@ -1,40 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OHt6c-0006cA-3f
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 08:31:45 +0200
-Received: by gya1 with SMTP id 1so521923gya.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHt92-0007Ef-Cu for openembedded-devel@lists.openembedded.org;
+	Fri, 28 May 2010 08:34:16 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHt52-0003fT-9B for openembedded-devel@lists.openembedded.org;
+	Fri, 28 May 2010 08:30:04 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 May 2010 08:30:04 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 23:27:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=aFsRJudnruFlTTl0+pCUcfW3DGN50ZSwBE03BZNSvog=;
-	b=YNFVvAU0z4loQhkb4fmhU1aS4QwwudBaZ0Ar4E7mMSuxCw4w0RV/BWemoTo36Lh3Xb
-	D5uWX/cghZS/Ev0N9lQpXG5TvW8jv8O20f/fZFq/DVV0f99Eca4rWNglHL3ysU5x3L9P
-	AFz1Ppx/YEZCv/HRMkO3MlPOLg/XnOT7Evw6A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Qm3NuJcEj2pVO+81jYmvWyxcMEX+RFJFpVKoBy79V/PkxFiO5G0HiKjAHprgSerb0Z
-	HENF/7JrfZ82zBaL4JXQLjISEuSJYkLlfyQbbYx4FY/Bz1ghDgxElX2QRgsyYdtIzu/K
-	qnJjmIyBBfmxxiv/YJdO/1Pef5Q2skvPom1ks=
-MIME-Version: 1.0
-Received: by 10.90.225.16 with SMTP id x16mr430743agg.71.1275028046493; Thu, 
-	27 May 2010 23:27:26 -0700 (PDT)
-Received: by 10.90.71.4 with HTTP; Thu, 27 May 2010 23:27:26 -0700 (PDT)
-In-Reply-To: <20100528052720.GA15949@gmail.com>
-References: <20100528052720.GA15949@gmail.com>
-Date: Fri, 28 May 2010 08:27:26 +0200
-Message-ID: <AANLkTimtQkUN5yex9NJLyyFikTHxlAGLUZhK2oRo5lQh@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 28 May 2010 08:30:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 28 May 2010 08:28:16 +0200
+Message-ID: <htnnq0$75p$1@dough.gmane.org>
+References: <20100528052720.GA15949@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <20100528052720.GA15949@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
-	URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS,URI_HEX autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: <package>-static name conflict with some recipes
@@ -51,16 +51,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 06:31:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 May 2010 06:34:16 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/5/28 Khem Raj <raj.khem@gmail.com>:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 28-05-10 07:27, Khem Raj wrote:
 > Hi
->
+> 
 > I have seen that we have parallel recipes for some applications for static
 > build
 > called package-static.bb like below
->
+> 
 > ./dialog/dialog-static_1.1-20080819.bb
 > ./busybox/busybox-static_1.2.1.bb
 > ./busybox/busybox-static_1.11.3.bb
@@ -75,29 +79,30 @@ Content-Type: text/plain; charset=ISO-8859-1
 > ./skype/skype-static_2.0.0.72.bb
 > ./udev/udev-static-devices.bb
 > ./udev/udev-static_124.bb
->
+> 
 > Now they conflict with the automatic package that we generate to bundle
 > static libraries. Since the the packages which bundle static libraries
 > are essentially development packages may be they should be called
->
+> 
 > <package>-dev-static instead of <package>-static
->
+> 
 > IMO that will avoid the conflict and also clarify the package content
 > a bit
->
+> 
 > Thoughts?
 
-I have no problems with the rename but wouldn't it be nice to have a
-conf flag to specify if you want to build static or dynamic  (not that
-I know how to implement it).
-Alternately we could cook up something like BBCLASSEXTEND = "static".
-(not sure how to do that either).
+Fine by me, as long as the usermanual gets updated as well.
 
-The idea is to give the user a choice whether to get a static or
-dynamic linked package.
+regards,
 
-Frans.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-PS: helloworld is also a static package (despite the name not having -static)
+iD8DBQFL/2KAMkyGM64RGpERAggiAJ42dgqQTw1Lvkn9falV7gHh6Oxa4QCgovkL
++wtAjJHnqEXObVlm7nAW77Y=
+=dbFD
+-----END PGP SIGNATURE-----
+
 
 
