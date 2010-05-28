@@ -1,32 +1,43 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OHl40-0007gO-NM for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 23:56:30 +0200
-Received: from f053041173.adsl.alicedsl.de ([78.53.41.173]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OHkzu-0004ZM-BM for openembedded-devel@lists.openembedded.org;
-	Thu, 27 May 2010 21:52:14 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <joaohf@gmail.com>) id 1OHnhZ-000355-AE
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 May 2010 02:45:40 +0200
+Received: by gya1 with SMTP id 1so396459gya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 27 May 2010 17:40:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=fPafjj+Mv5gMs6aQlS651v45+E8SltCZY83ti2y6R6o=;
+	b=jX87bC/SJ1Neinz6IMtn0y/2knccuTT87iaXpd9eML9Oo1bD+QZCaxVc0smkuYgYGv
+	7JCJQOBEfJVeBkxYcsHKivdycJkuL5VezOc7Y72E4jaauz4TF/YF+czEbDrwa1+9ljUj
+	agFUlePY72SJqDxc+LfLtp0TuOoJCbpej0+zk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=GgC3vEmJRrhszH++DWiX5fZ2DioR13yd/AcUVNG5k3X3/LFjzCupDtIZOBPFGH0fxg
+	nWubS0yw+bSxFutMaxQUuSiDBzPv75atOpcbAx/IULhsQNrOZTZ9JvpHa1VxEDij+WE8
+	pFiYq3XV4cZEvRUX6UwhKEqRwsbd07pHE+tLs=
+Received: by 10.151.73.41 with SMTP id a41mr1095143ybl.117.1275007239162;
+	Thu, 27 May 2010 17:40:39 -0700 (PDT)
+Received: from localhost.localdomain ([201.53.192.211])
+	by mx.google.com with ESMTPS id u2sm14509542ybh.15.2010.05.27.17.40.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 27 May 2010 17:40:38 -0700 (PDT)
+From: "Joao H. Freitas" <joaohf@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4BF68B97.4090701@kernelconcepts.de>
-References: <4BE04A63.9010002@kernelconcepts.de>
-	<4BF68B97.4090701@kernelconcepts.de>
-Date: Thu, 27 May 2010 23:52:11 +0200
-Message-ID: <1274997131.28526.18.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Thu, 27 May 2010 21:40:12 -0300
+Message-Id: <1275007212-4095-1-git-send-email-joaohf@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: joaohf@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Linuxtag 2010
+Subject: [PATCH 1/1] fix missing packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +51,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 27 May 2010 21:56:30 -0000
-X-Groupsio-MsgNum: 19634
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-/lBWQiCP7IhN1EG4GByY"
+X-List-Received-Date: Fri, 28 May 2010 00:45:41 -0000
 
---=-/lBWQiCP7IhN1EG4GByY
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+---
+ recipes/lksctp-tools/lksctp-tools.inc |   24 +++++++++++++++++++++---
+ 1 files changed, 21 insertions(+), 3 deletions(-)
 
-Dear Florian,
+diff --git a/recipes/lksctp-tools/lksctp-tools.inc b/recipes/lksctp-tools/lksctp-tools.inc
+index 02ec988..9832dc9 100644
+--- a/recipes/lksctp-tools/lksctp-tools.inc
++++ b/recipes/lksctp-tools/lksctp-tools.inc
+@@ -19,10 +19,28 @@ do_install_append_virtclass-native() {
+ 
+ DEBIANNAME_${PN} = "lksctp"
+ 
+-PACKAGES =+ "${PN}-tools"
++PACKAGES =+ "${PN}-withsctp ${PN}-utils"
++
+ FILES_${PN} = "${libexecdir}/* ${libdir}/lib*${SOLIBS} \
+             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
+             ${base_libdir}/*${SOLIBS}"
+ 
+-FILES_${PN}-dev += "${bindir}/*-config"
+-FILES_${PN}-utils = ""
++FILES_${PN}-withsctp = " \
++  ${libdir}/lksctp-tools/lib*"
++
++FILES_${PN}-dev += " \
++  ${datadir}/lksctp-tools/checksctp.c \
++  ${datadir}/lksctp-tools/sctp_socket.c \
++  ${datadir}/lksctp-tools/sctp_bind.c \
++  ${datadir}/lksctp-tools/sctp_darn.c \
++  ${datadir}/lksctp-tools/sctp_load_libs.c \
++  ${datadir}/lksctp-tools/sctp_sockopt.c \
++  ${datadir}/lksctp-tools/sctp_socket.h \
++  ${datadir}/lksctp-tools/sctp_test.c \
++  ${datadir}/lksctp-tools/sctp_darn.h"
++
++FILES_${PN}-utils = " \
++  ${bindir}/sctp_test \
++  ${bindir}/sctp_darn \
++  ${bindir}/checksctp \
++  ${bindir}/withsctp"
+-- 
+1.7.0.4
 
 
-Am Freitag, den 21.05.2010, 15:33 +0200 schrieb Florian Boor:
 
-> who will be able to attend LinuxTag? It would be nice to have some people=
- who
-> are able to man the booth and who have some interesting things to show.
-> Of course we have a couple of free tickets.
-
-I could definitely help out on Saturday. Maybe on Thursday late
-afternoon.
-
-I only have a BeagleBoard C3.
-
-
-Thanks,
-
-Paul
-
---=-/lBWQiCP7IhN1EG4GByY
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkv+6YsACgkQPX1aK2wOHVgaLQCfUkD4GwaHicjFwpQ/RDflw/fG
-eyQAn1YAerL3J3XvbCyG9jZxGICQ5oyJ
-=Aee+
------END PGP SIGNATURE-----
-
---=-/lBWQiCP7IhN1EG4GByY--
