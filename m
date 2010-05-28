@@ -1,43 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f187.google.com ([209.85.211.187])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OHt92-0007Ef-Cu for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 08:34:16 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OHt52-0003fT-9B for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 08:30:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 May 2010 08:30:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OHtF6-00067G-DY
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 28 May 2010 08:40:29 +0200
+Received: by ywh17 with SMTP id 17so294337ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 May 2010 08:30:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 27 May 2010 23:36:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=l9Cm6tTy4+XNuP550Dgc8fcZCRqk1uW6hgvS6d3lJmk=;
+	b=JFB7MARksTo3dr9Ivm2+FYbn1TQ0vlyUjXGINzXGvKPTl23B6Er0KnzCacDejNZ8GP
+	EBJy18qAbV+V/nUnPXaPVVe2SnykCA0iMRKqDm1lq/m7S4+N91utY6+sUCBdLjZ7exor
+	CfS5r82hCBTVIz3vPKniEIhTUWchIqOUjfFRs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=TPMdje4Ujtw2ChD+xhoi737M6XyKnwzRSr9ji1qMRQbUo5WgpbLjxm6ZO/5URV5AD+
+	5UawkMyg729KT99eAGZnJ8O0+dZ9rh2IhOoWLkk7RTuWNnyRKlzgQnkOTImuFU1kQrgp
+	EPBtp3OlkiTg8ZT+okpykjc8QAvYrtHXlui34=
+MIME-Version: 1.0
+Received: by 10.91.18.28 with SMTP id v28mr518461agi.94.1275028578198; Thu, 27 
+	May 2010 23:36:18 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Thu, 27 May 2010 23:36:18 -0700 (PDT)
+Date: Fri, 28 May 2010 08:36:18 +0200
+Message-ID: <AANLkTinA_A7Ja4Go6H7MlOxFM4uLsfiQCyJnRodHHCpo@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 28 May 2010 08:28:16 +0200
-Message-ID: <htnnq0$75p$1@dough.gmane.org>
-References: <20100528052720.GA15949@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <20100528052720.GA15949@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.211.187
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS,URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: <package>-static name conflict with some recipes
+Subject: additional bitbake test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,58 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 06:34:16 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 28 May 2010 06:40:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 28-05-10 07:27, Khem Raj wrote:
-> Hi
-> 
-> I have seen that we have parallel recipes for some applications for static
-> build
-> called package-static.bb like below
-> 
-> ./dialog/dialog-static_1.1-20080819.bb
-> ./busybox/busybox-static_1.2.1.bb
-> ./busybox/busybox-static_1.11.3.bb
-> ./kexec-tools/kexec-tools-klibc-static_1.101.bb
-> ./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
-> ./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
-> ./klibc/klibc-utils-static_1.5.15+1.5.16.bb
-> ./klibc/klibc-utils-static_1.5.18.bb
-> ./klibc/klibc-utils-static_1.5.15.bb
-> ./klibc/klibc-utils-static_1.5.bb
-> ./klibc/klibc-utils-static_1.5.17.bb
-> ./skype/skype-static_2.0.0.72.bb
-> ./udev/udev-static-devices.bb
-> ./udev/udev-static_124.bb
-> 
-> Now they conflict with the automatic package that we generate to bundle
-> static libraries. Since the the packages which bundle static libraries
-> are essentially development packages may be they should be called
-> 
-> <package>-dev-static instead of <package>-static
-> 
-> IMO that will avoid the conflict and also clarify the package content
-> a bit
-> 
-> Thoughts?
+I'd like to propose to add a test in bitbake to see if an overlay dir
+exists when specifying overlays.
 
-Fine by me, as long as the usermanual gets updated as well.
+In the past I bumped into a problem where BBFILE_PATTERN_local =
+"^${OE_TOPDIR}/myoverlay/recipes" was not processed properly because
+OE_TOPDIR was not passed using BB_ENV_EXTRAWHITE, resulting in the
+regexp match with the dir always returning false due to OE_TOPDIR not
+being expanded.
+A simple test could warn users against errors like this one.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFL/2KAMkyGM64RGpERAggiAJ42dgqQTw1Lvkn9falV7gHh6Oxa4QCgovkL
-+wtAjJHnqEXObVlm7nAW77Y=
-=dbFD
------END PGP SIGNATURE-----
-
+Frans
 
 
