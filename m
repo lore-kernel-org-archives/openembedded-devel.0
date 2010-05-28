@@ -1,43 +1,46 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <joaohf@gmail.com>) id 1OHnhZ-000355-AE
+	(envelope-from <raj.khem@gmail.com>) id 1OHsAd-0000Ob-3r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 02:45:40 +0200
-Received: by gya1 with SMTP id 1so396459gya.6
+	Fri, 28 May 2010 07:31:50 +0200
+Received: by pwi5 with SMTP id 5so372640pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 17:40:51 -0700 (PDT)
+	Thu, 27 May 2010 22:27:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=fPafjj+Mv5gMs6aQlS651v45+E8SltCZY83ti2y6R6o=;
-	b=jX87bC/SJ1Neinz6IMtn0y/2knccuTT87iaXpd9eML9Oo1bD+QZCaxVc0smkuYgYGv
-	7JCJQOBEfJVeBkxYcsHKivdycJkuL5VezOc7Y72E4jaauz4TF/YF+czEbDrwa1+9ljUj
-	agFUlePY72SJqDxc+LfLtp0TuOoJCbpej0+zk=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=GmrZEMqXtgg6vgUw3ZHE16HU9ZhbBgMaa92vxxF6ilQ=;
+	b=EtnQBowb1ZUX/5dFXXT6T2C/gFp5BzaTABJ0zjD46nv+7tjdavfZ8jAAzqJW6oFm8J
+	ptiA5sFOQZuWOp6wuIh1LpC+N9Dxn9VG5TQI5Sda/RLrORYAiC40KGPS2uXX7cGyTpR0
+	qpRCWJRfySMk1rabh7+2f6wExqhy7pWbuCgIo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=GgC3vEmJRrhszH++DWiX5fZ2DioR13yd/AcUVNG5k3X3/LFjzCupDtIZOBPFGH0fxg
-	nWubS0yw+bSxFutMaxQUuSiDBzPv75atOpcbAx/IULhsQNrOZTZ9JvpHa1VxEDij+WE8
-	pFiYq3XV4cZEvRUX6UwhKEqRwsbd07pHE+tLs=
-Received: by 10.151.73.41 with SMTP id a41mr1095143ybl.117.1275007239162;
-	Thu, 27 May 2010 17:40:39 -0700 (PDT)
-Received: from localhost.localdomain ([201.53.192.211])
-	by mx.google.com with ESMTPS id u2sm14509542ybh.15.2010.05.27.17.40.37
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=OLqp0q2pHCsjzwTYc/i9Yw/ScY8flKe/kMGqf/VoxIWMWDbIhKMIRiFX720dsc/j7T
+	1YgJw1GyoR2qi4OE7QG3wfo5q7Tp/Xp4rKjkc4CIeFVaHXjpe/dfo2h3wdxDsVciVBii
+	xEixTEvhffBVE8bOVwxkUM0YIo9aniWNY0dZ8=
+Received: by 10.114.237.21 with SMTP id k21mr9986742wah.141.1275024456584;
+	Thu, 27 May 2010 22:27:36 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 33sm16398667wad.20.2010.05.27.22.27.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 27 May 2010 17:40:38 -0700 (PDT)
-From: "Joao H. Freitas" <joaohf@gmail.com>
+	Thu, 27 May 2010 22:27:35 -0700 (PDT)
+Date: Thu, 27 May 2010 22:27:20 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 27 May 2010 21:40:12 -0300
-Message-Id: <1275007212-4095-1-git-send-email-joaohf@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: joaohf@gmail.com
+Message-ID: <20100528052720.GA15949@gmail.com>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
+	URI_HEX autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/1] fix missing packages
+Subject: <package>-static name conflict with some recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,50 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 00:45:41 -0000
+X-List-Received-Date: Fri, 28 May 2010 05:31:50 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
----
- recipes/lksctp-tools/lksctp-tools.inc |   24 +++++++++++++++++++++---
- 1 files changed, 21 insertions(+), 3 deletions(-)
+Hi
 
-diff --git a/recipes/lksctp-tools/lksctp-tools.inc b/recipes/lksctp-tools/lksctp-tools.inc
-index 02ec988..9832dc9 100644
---- a/recipes/lksctp-tools/lksctp-tools.inc
-+++ b/recipes/lksctp-tools/lksctp-tools.inc
-@@ -19,10 +19,28 @@ do_install_append_virtclass-native() {
- 
- DEBIANNAME_${PN} = "lksctp"
- 
--PACKAGES =+ "${PN}-tools"
-+PACKAGES =+ "${PN}-withsctp ${PN}-utils"
-+
- FILES_${PN} = "${libexecdir}/* ${libdir}/lib*${SOLIBS} \
-             ${sysconfdir} ${sharedstatedir} ${localstatedir} \
-             ${base_libdir}/*${SOLIBS}"
- 
--FILES_${PN}-dev += "${bindir}/*-config"
--FILES_${PN}-utils = ""
-+FILES_${PN}-withsctp = " \
-+  ${libdir}/lksctp-tools/lib*"
-+
-+FILES_${PN}-dev += " \
-+  ${datadir}/lksctp-tools/checksctp.c \
-+  ${datadir}/lksctp-tools/sctp_socket.c \
-+  ${datadir}/lksctp-tools/sctp_bind.c \
-+  ${datadir}/lksctp-tools/sctp_darn.c \
-+  ${datadir}/lksctp-tools/sctp_load_libs.c \
-+  ${datadir}/lksctp-tools/sctp_sockopt.c \
-+  ${datadir}/lksctp-tools/sctp_socket.h \
-+  ${datadir}/lksctp-tools/sctp_test.c \
-+  ${datadir}/lksctp-tools/sctp_darn.h"
-+
-+FILES_${PN}-utils = " \
-+  ${bindir}/sctp_test \
-+  ${bindir}/sctp_darn \
-+  ${bindir}/checksctp \
-+  ${bindir}/withsctp"
--- 
-1.7.0.4
+I have seen that we have parallel recipes for some applications for static
+build
+called package-static.bb like below
 
+./dialog/dialog-static_1.1-20080819.bb
+./busybox/busybox-static_1.2.1.bb
+./busybox/busybox-static_1.11.3.bb
+./kexec-tools/kexec-tools-klibc-static_1.101.bb
+./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
+./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
+./klibc/klibc-utils-static_1.5.15+1.5.16.bb
+./klibc/klibc-utils-static_1.5.18.bb
+./klibc/klibc-utils-static_1.5.15.bb
+./klibc/klibc-utils-static_1.5.bb
+./klibc/klibc-utils-static_1.5.17.bb
+./skype/skype-static_2.0.0.72.bb
+./udev/udev-static-devices.bb
+./udev/udev-static_124.bb
+
+Now they conflict with the automatic package that we generate to bundle
+static libraries. Since the the packages which bundle static libraries
+are essentially development packages may be they should be called
+
+<package>-dev-static instead of <package>-static
+
+IMO that will avoid the conflict and also clarify the package content
+a bit
+
+Thoughts?
+
+-Khem
 
 
