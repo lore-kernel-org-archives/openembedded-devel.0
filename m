@@ -1,46 +1,43 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OHsAd-0000Ob-3r
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 07:31:50 +0200
-Received: by pwi5 with SMTP id 5so372640pwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHt61-0006aD-8n for openembedded-devel@lists.openembedded.org;
+	Fri, 28 May 2010 08:31:05 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OHt1z-0002VN-Mx for openembedded-devel@lists.openembedded.org;
+	Fri, 28 May 2010 08:26:55 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 May 2010 08:26:55 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 27 May 2010 22:27:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=GmrZEMqXtgg6vgUw3ZHE16HU9ZhbBgMaa92vxxF6ilQ=;
-	b=EtnQBowb1ZUX/5dFXXT6T2C/gFp5BzaTABJ0zjD46nv+7tjdavfZ8jAAzqJW6oFm8J
-	ptiA5sFOQZuWOp6wuIh1LpC+N9Dxn9VG5TQI5Sda/RLrORYAiC40KGPS2uXX7cGyTpR0
-	qpRCWJRfySMk1rabh7+2f6wExqhy7pWbuCgIo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=OLqp0q2pHCsjzwTYc/i9Yw/ScY8flKe/kMGqf/VoxIWMWDbIhKMIRiFX720dsc/j7T
-	1YgJw1GyoR2qi4OE7QG3wfo5q7Tp/Xp4rKjkc4CIeFVaHXjpe/dfo2h3wdxDsVciVBii
-	xEixTEvhffBVE8bOVwxkUM0YIo9aniWNY0dZ8=
-Received: by 10.114.237.21 with SMTP id k21mr9986742wah.141.1275024456584;
-	Thu, 27 May 2010 22:27:36 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 33sm16398667wad.20.2010.05.27.22.27.35
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 27 May 2010 22:27:35 -0700 (PDT)
-Date: Thu, 27 May 2010 22:27:20 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 28 May 2010 08:26:55 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100528052720.GA15949@gmail.com>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 28 May 2010 08:26:42 +0200
+Message-ID: <htnnn3$75j$1@dough.gmane.org>
+References: <20100527203244.GL23464@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <20100527203244.GL23464@denix.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
-	URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: <package>-static name conflict with some recipes
+Subject: Re: Commit access for Enrico Scholz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,42 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 05:31:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 28 May 2010 06:31:05 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I have seen that we have parallel recipes for some applications for static
-build
-called package-static.bb like below
+On 27-05-10 22:32, Denys Dmytriyenko wrote:
+> Hi,
+> 
+> I'd like to recommend to give commit access to Enrico Scholz - he has 
+> submitted number of useful patches, fixing issues in core areas, some of which 
+> were hard to find. He has demonstrated a good level of understanding and 
+> knowledge in system, Python and bitbake areas. He is also open to feedback.
 
-./dialog/dialog-static_1.1-20080819.bb
-./busybox/busybox-static_1.2.1.bb
-./busybox/busybox-static_1.11.3.bb
-./kexec-tools/kexec-tools-klibc-static_1.101.bb
-./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
-./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
-./klibc/klibc-utils-static_1.5.15+1.5.16.bb
-./klibc/klibc-utils-static_1.5.18.bb
-./klibc/klibc-utils-static_1.5.15.bb
-./klibc/klibc-utils-static_1.5.bb
-./klibc/klibc-utils-static_1.5.17.bb
-./skype/skype-static_2.0.0.72.bb
-./udev/udev-static-devices.bb
-./udev/udev-static_124.bb
+Sounds good to me.
 
-Now they conflict with the automatic package that we generate to bundle
-static libraries. Since the the packages which bundle static libraries
-are essentially development packages may be they should be called
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-<package>-dev-static instead of <package>-static
+iD8DBQFL/2IiMkyGM64RGpERAt40AKCsK1jQaNGGAviWI8R+k0nU2GkzhgCfVgZC
+pScPsvTTW66zMgA+C63m5dY=
+=rGQI
+-----END PGP SIGNATURE-----
 
-IMO that will avoid the conflict and also clarify the package content
-a bit
-
-Thoughts?
-
--Khem
 
 
