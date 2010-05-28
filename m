@@ -1,33 +1,47 @@
-Received: from vms173007pub.verizon.net ([206.46.173.7])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OI2CH-0000Pz-Kg
+	(envelope-from <kergoth@gmail.com>) id 1OI2Vm-0002Vr-3L
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 18:14:10 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.238.44])
-	by vms173007.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L3500IID0W6W4Z0@vms173007.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	28 May 2010 11:09:48 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 761B314AF60; Fri,
-	28 May 2010 12:09:42 -0400 (EDT)
-Date: Fri, 28 May 2010 12:09:42 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 28 May 2010 18:35:44 +0200
+Received: by yxe42 with SMTP id 42so104008yxe.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 28 May 2010 09:30:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=CWoz8S6bCPyDxV+beEbPIF5W9OaBjFOeIwoem970Ei4=;
+	b=mlWzj4oq86L948r/Qn2kswv3sLCza2eOPMuoKcnS7IEBVujCxU5TNd24boTOF+8IOh
+	kOcC2nXylhg2vgqciX8hTMJu2QFxIm+L80+doFkId/tfFUWzxnT7aJg/BHuFBfh+8fJA
+	jiGuO4z5xpnJoSIh1gbHxxsQu1VqCq0Dqhk98=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=ALekUUdC72T4u1M149zdrueMn+/0MdiwvnwlDQw1WYBMhoCMe4MJ7Bpc0N2X1oYH/S
+	XiqpYL0vwpXwV1O1575qU7rF/fvwWgpdZ+qJv8OtIf7cie2SIT54FIIss+7t5O8lMJcx
+	bUOcxPU8wWLKAgjCqQAlB7AyPotR3CnrIz4SI=
+Received: by 10.224.87.83 with SMTP id v19mr325008qal.392.1275064207138; Fri, 
+	28 May 2010 09:30:07 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.217.136 with HTTP; Fri, 28 May 2010 09:29:47 -0700 (PDT)
+In-Reply-To: <AANLkTinA_A7Ja4Go6H7MlOxFM4uLsfiQCyJnRodHHCpo@mail.gmail.com>
+References: <AANLkTinA_A7Ja4Go6H7MlOxFM4uLsfiQCyJnRodHHCpo@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 28 May 2010 09:29:47 -0700
+X-Google-Sender-Auth: TuvC1WE4Q_VZcRRgS9tD9rDtsWw
+Message-ID: <AANLkTikmIaqai1TRdoU2SlybGF4JmdS57AJnA6sngrSS@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100528160942.GM23464@denix.org>
-References: <20100211094524.GB17089@denix.org> <4BEADBF1.20202@eukrea.com>
-MIME-version: 1.0
-In-reply-to: <4BEADBF1.20202@eukrea.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.7
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Race condition in packaged staging?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: additional bitbake test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,79 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 16:14:11 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 28 May 2010 16:36:15 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Wed, May 12, 2010 at 06:48:49PM +0200, Eric B?nard wrote:
+On Thu, May 27, 2010 at 11:36 PM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
+
 > Hi,
 >
-> Le 11/02/2010 10:45, Denys Dmytriyenko a ?crit :
->> I've been seeing some strange breaks in my builds from time to time since 
->> the
->> introduction of new style staging. It doesn't happen often, but when it 
->> does,
->> I usually see a message from "tar" complaining about the archive being 
->> changed
->> on the fly, which comes from the kernel during it's do_package_stage task,
->> staging_packager function. The simplest workaround was to disable parallel
->> build and parallel bitbake execution (PARALLEL_MAKE and 
->> BB_NUMBER_THREADS).
->> I usually never had time to investigate further.
->>
->> Today I received a slightly different message, which gave me some pointers
->> towards a possible race condition in packaged staging, when multiple 
->> bitbake
->> threads are trying to execute relative tasks and have a conflict:
->>
->> ERROR: log data follows 
->> (/OE/arago-tmp/work/omap3evm-none-linux-gnueabi/ti-dmai-1_1.0+svnr423-r51e/temp/log.staging_packager.13580)
->> | mkdir: cannot create directory 
->> `/OE/arago-deploy/pstage/angstromglibc/IPKG_BUILD.13587': File exists
->> NOTE: Task failed: 
->> /OE/arago-tmp/work/omap3evm-none-linux-gnueabi/ti-dmai-1_1.0+svnr423-r51e/temp/log.staging_packager.13580
->>
->> Hopefully this helps somebody more familiar with the subject (don't want 
->> to
->> bother RP, but it's his creation :)) easily identify the culprit and fix 
->> it,
->> either by adding a lock or something similar... :) I hate to not use the 
->> full
->> power of my 4 cores and run everything in one thread. Thanks.
->>
-> I had a problem which seems to be very close to this problem :
-> while buidling a project from scratch, it failed at linux's 
-> staging_packager with the following log :
+> I'd like to propose to add a test in bitbake to see if an overlay dir
+> exists when specifying overlays.
 >
-> find: invalid expression; I was expecting to find a ')' somewhere but did 
-> not see one.
-> tar: .: file changed as we read it
-
-Yeah, it was also common for me, as I mentioned here:
-
->> I usually see a message from "tar" complaining about the archive being 
->> changed
->> on the fly, which comes from the kernel during it's do_package_stage task,
->> staging_packager function. The simplest workaround was to disable parallel
-
-> Simply relaunching bitbake was enough to finish the build.
+> In the past I bumped into a problem where BBFILE_PATTERN_local =
+> "^${OE_TOPDIR}/myoverlay/recipes" was not processed properly because
+> OE_TOPDIR was not passed using BB_ENV_EXTRAWHITE, resulting in the
+> regexp match with the dir always returning false due to OE_TOPDIR not
+> being expanded.
+> A simple test could warn users against errors like this one.
 >
-> In this case I had
-> BB_NUMBER_THREADS=2
-> PARALLEL_MAKE = "-j 2"
->
-> (I also had the same thing with 8 BB threads and - j 8 on an other build 
-> machine).
 
-Do you still see the issue after the patch from Enrico Scholz[1][2] applied?
+Hmm, I'm not sure how best to implement the warning.  I'd rather not grep,
+and we don't currently have a way to determine what variables a given value
+references.  I guess we could notice if a given pattern didn't match any
+files in BBFILES, and warn on that.  Does that sound reasonable?
 
-[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/32860
-[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=311bed0b40aaa6298029f727d97f50c1d740a3fa
-
-I'm still testing, as I haven't been able to run any large builds from scratch 
-yet... Please let me know your results. Thanks.
-
+Aside: the fact that a nonexistant var is left as is, to be expanded in
+shell, is horrible, imo.  They should expand to the empty string when unset,
+or error, or something.
 -- 
-Denys
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
