@@ -1,43 +1,60 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OHuIx-0004Fn-Ae
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OHv8S-00020v-OV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 09:48:33 +0200
-Received: by gwj15 with SMTP id 15so666984gwj.6
+	Fri, 28 May 2010 10:41:45 +0200
+Received: by fxm9 with SMTP id 9so700068fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 May 2010 00:44:21 -0700 (PDT)
+	Fri, 28 May 2010 01:37:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AG065By97R3sTdAZAUxcKL3AnDZQPzHEsr1j1CZA32g=;
-	b=pRoVr3Or2tZ7tjsTxTZejT0kkc1PvBz1X8DrQrSNQc8a4yoIEsvUv3fqsSEymTtuzC
-	GcfCbYWmLiKPBhTYJJEffsrE22tS5i3PB+xTvEo3rfkiQkERCGkgn/n7cQM3veGgV5Pm
-	oh2XYdH5H9/J2Tl1b70YiW91JpUl2OzFfRDoU=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Dulxt7SOUudQNFhQKWyK2ia4rjgn7AILcX345TEzDM4=;
+	b=LR4lFG4a/XGryvtot44pbSSWYz+4oJzttNjzUeOcS2EcnxUhBjhOc/7TZBDANx6HrV
+	TaWjrqHpNXcNRDzRrEV0V3sGDiW3HhzmfqdiRF2bUl9/xUErnAe+nUEC/aQLvw1EBpjx
+	S+npwpAcVg75wlbArLLLiovpxBCwHm+LkpATw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Of5SpTjKDtnjRL1QgrpXiYM7p7bnNmLsK2X73kOHXIKN5x6sZu+tmlZUcGYr7Zs3yV
-	eSQIzpkguRnr4tC2PImKtiPCWSBrxAefeBwBem/C6m0zg2uTL/4SRC5siBEOWOsn0pTI
-	Z8GfRdcXd0kWUeWQATuaOKGcqV5u4Sy2QTHVc=
-MIME-Version: 1.0
-Received: by 10.101.10.36 with SMTP id n36mr14299424ani.114.1275032661149; 
-	Fri, 28 May 2010 00:44:21 -0700 (PDT)
-Received: by 10.100.132.11 with HTTP; Fri, 28 May 2010 00:44:21 -0700 (PDT)
-In-Reply-To: <htnnq0$75p$1@dough.gmane.org>
-References: <20100528052720.GA15949@gmail.com> <htnnq0$75p$1@dough.gmane.org>
-Date: Fri, 28 May 2010 09:44:21 +0200
-Message-ID: <AANLkTilIn7VbqhAFxA5AX2TsWeBHOBNIY0Xf2LL6Z7EE@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=oSm4F8wjSl6MQH92UtuU4LOKTl/9cEPBjdpVwsy717IKODvXGkdwt31nVI6hyS34c6
+	Hra7lAl3w/djFcAFKcIHyzgBNR/n5qbqBuOBSZeh4Djtd2uzxoCpGJUYD01Mz29betx1
+	fn6BcA/xHy59XyrsVfJC8aCDj5ex2XA1Um9hA=
+Received: by 10.204.5.140 with SMTP id 12mr5302044bkv.34.1275035855214;
+	Fri, 28 May 2010 01:37:35 -0700 (PDT)
+Received: from s42.loc (85-127-94-237.dynamic.xdsl-line.inode.at
+	[85.127.94.237])
+	by mx.google.com with ESMTPS id d5sm9444108bkd.13.2010.05.28.01.37.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 28 May 2010 01:37:33 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OHv4Q-0005dE-4e; Fri, 28 May 2010 10:37:34 +0200
+Date: Fri, 28 May 2010 10:37:34 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Message-ID: <20100528083734.GA20685@mx.loc>
+References: <1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>
+	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>
+	<1265892781.3777.1050.camel@mill.internal.reciva.com>
+	<20100213125146.GJ10632@mx.loc> <20100213161449.GD30265@mx.loc>
+	<1267058975.18176.527.camel@trini-m4400>
+	<1267094388.4243.1.camel@rex>
+	<1267118467.18176.533.camel@trini-m4400>
+	<1267128981.4243.88.camel@rex>
+MIME-Version: 1.0
+In-Reply-To: <1267128981.4243.88.camel@rex>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
-	URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: <package>-static name conflict with some recipes
+Subject: Re: BBCLASSEXTEND canadian?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,48 +68,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 07:48:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 28 May 2010 08:41:45 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
->><package>-dev-static instead of <package>-static
->>IMO that will avoid the conflict and also clarify the package content a bit
+On Thu, Feb 25, 2010 at 08:16:21PM +0000, Richard Purdie wrote:
+>On Thu, 2010-02-25 at 10:21 -0700, Tom Rini wrote:
+>> > BBCLASSEXTEND covers -native and -nativesdk
+>> 
+>> Is the -nativesdk part implicit in the anonfuncs in nativesdk.bbclass or
+>> just not merged yet?
+>
+>It should be implicit in the anonfuncs. If that class differs to Poky,
+>the Poky changes should be merged though.
+>
+>> > The -cross, -crosssdk, -canadian-cross and other combinations usually
+>> > have too many differences to be worth the effort although it would be
+>> > possible to make them work.
+>> 
+>> I'm not so sure about that, but we'll see.  I should have some form of
+>> canadian stuff working again shortly.
+>
+>You're unsure it would be possible to make them work of that its not
+>worth the effort?
 
+Tom?
 
-These at least won't give any build problem (tested, there is no
-$PN-*). Absolutely not -dev, just compiled aganst klibc statically.
+Yesterday evening i was building a pristine master reference again and
+saw that mpfr et al are (still) pretty outdated.
+AFAIR i cannot mix BBCLASSEXTEND vs. old-fashioned recipes for one
+package (didn't try if that's still true) so i'm, again, running into
+the issue of what to do with older toolchains needing that canadian
+stuff. I'm not too jazzed about the idea to touch the old toolchains
+just because i want to have current gmp/mpc/mpfr/gcc (using CLASSEXTEND
+nativesdk). So, how to proceed?
 
-./kexec-tools/kexec-tools-klibc-static_1.101.bb
-./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
-./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
-./klibc/klibc-utils-static_1.5.15+1.5.16.bb
-./klibc/klibc-utils-static_1.5.18.bb
-./klibc/klibc-utils-static_1.5.15.bb
-./klibc/klibc-utils-static_1.5.bb
-./klibc/klibc-utils-static_1.5.17.bb
-
-AFAIK there is no way to understand if e.g. kexec-static is built
-against klibc or *libc...
-Do you mean rename the package e.g. kexec-tools-klibc and only package
-the -static bits?
-
-
-These instead will surely give headhaches...
-
-./dialog/dialog-static_1.1-20080819.bb
-./busybox/busybox-static_1.2.1.bb
-./busybox/busybox-static_1.11.3.bb
-
-./skype/skype-static_2.0.0.72.bb
-./udev/udev-static-devices.bb
-./udev/udev-static_124.bb
-
-I experienced strange tasks commistion building udev-static:
-do_install task was taken from udev!
-Renaming to udev-compat-static fixed the things. WIP.
-
-
-Regards
-
-Andrea
+cheers,
 
 
