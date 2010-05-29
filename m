@@ -1,20 +1,20 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OIInG-00019t-JM
+	(envelope-from <rpjday@crashcourse.ca>) id 1OIIt1-0001wD-OG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 29 May 2010 11:57:41 +0200
+	Sat, 29 May 2010 12:03:24 +0200
 Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.245.115] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OIIjE-0005dq-WC for openembedded-devel@lists.openembedded.org;
-	Sat, 29 May 2010 05:53:17 -0400
-Date: Sat, 29 May 2010 05:53:09 -0400 (EDT)
+	id 1OIIp0-00068k-CT for openembedded-devel@lists.openembedded.org;
+	Sat, 29 May 2010 05:59:14 -0400
+Date: Sat, 29 May 2010 05:59:08 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@lynx
 To: OpenEmbedded Development mailing list
 	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1005290545350.9807@lynx>
+Message-ID: <alpine.DEB.2.00.1005290556230.11858@lynx>
 User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -34,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Firefox build error for beagle/angstrom, sed encounters perm error
+Subject: abiword build error in OE for beagle/angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,58 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 May 2010 09:57:41 -0000
+X-List-Received-Date: Sat, 29 May 2010 10:03:24 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
-  from a fully pulled OE development branch, trying to build firefox:
-...
-NOTE: Parsing finished. 7603 cached, 464 parsed, 311 skipped, 0
-masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 2710 of 2721 (ID: 2,
-/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb,
-do_install)
-ERROR: function do_install failed
-ERROR: see log in
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.3-r0/temp/log.do_install.9638
-NOTE: Task failed:
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.3-r0/temp/log.do_install.9638
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb
-do_install failed
-ERROR: Task 2
-(/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb,
-do_install) failed
-NOTE: Tasks Summary: Attempted 2710 tasks of which 2710 didn't need to
-be rerun and 1 failed.
-ERROR: '/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb'
-failed
-$
-
-  the tail end of the log file:
+  trying to build abiword for angstrom on 64-bit ubuntu 10.04, tail
+end of log file:
 
 ...
-grep:
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.3-r0/image/usr/lib/firefox-devel-3.6.3/include:
-No such file or directory
-sed: couldn't open temporary file
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.3-r0/image/usr/lib/firefox-devel-3.6.3/bin/greprefs/sedkR2qFg:
-Permission denied
-sed: couldn't open temporary file
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.3-r0/image/usr/lib/firefox-devel-3.6.3/bin/components/seddYp3Qg:
-Permission denied
-sed: couldn't open temporary file
-/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/firefox-3.6.3-r0/image/usr/lib/firefox-devel-3.6.3/bin/defaults/syspref/sedvHkELe:
-Permission denied
+/home/rpjday/oe/angstrom-dev/sysroots/x86_64-linux/usr/lib/libxml2.so:
+file not recognized: File format not recognized
+collect2: ld returned 1 exit status
+arm-angstrom-linux-gnueabi-libtool: install: error: relink
+`mathview.la' with the above command before installing it
+make[4]: *** [install-pluginLTLIBRARIES] Error 1
+make[4]: Leaving directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/abiword-2.8.3-r2/abiword-2.8.3/plugins/mathview'
+make[3]: *** [install-am] Error 2
+make[3]: Leaving directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/abiword-2.8.3-r2/abiword-2.8.3/plugins/mathview'
+make[2]: *** [install-recursive] Error 1
+make[2]: Leaving directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/abiword-2.8.3-r2/abiword-2.8.3/plugins/mathview'
+make[1]: *** [install-recursive] Error 1
+make[1]: Leaving directory
+`/home/rpjday/oe/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/abiword-2.8.3-r2/abiword-2.8.3/plugins'
+make: *** [install-recursive] Error 1
+FATAL: oe_runmake failed
 
-  the entire log file has been uploaded to
-http://pastebin.com/xgiRvK8V.
+
+  the full log file can be seen at http://pastebin.com/hM3UmJ8j.
 
 rday
+
+p.s.  i should have mentioned that the previous error note was also on
+a fully-updated 64-bit ubuntu 10.04 system.
 
 -- 
 
