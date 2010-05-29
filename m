@@ -1,30 +1,45 @@
-Received: from mail.asoft.ru ([91.205.86.207])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1OI3Fv-0004iZ-CR
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OIIXR-000541-4v
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 28 May 2010 19:22:03 +0200
-Received: from localhost.localdomain (office.asoft.ru [62.205.175.245])
-	(authenticated bits=0)
-	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o4SGngfX024467
+	Sat, 29 May 2010 11:41:05 +0200
+Received: by gya1 with SMTP id 1so1296627gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 28 May 2010 20:49:43 +0400
-From: Dmitry Artamonow <mad_soft@inbox.ru>
+	Sat, 29 May 2010 02:36:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Ffdq/XEPqToxH3nyy1o80qMQf3Vzc/ENpNYjuWnTbUs=;
+	b=Q6pLXcWeKOaPNHY57RbwfK2lZrCG2A5iGW9QN50+PkQKyDR4eZRQUSIPJNM6+GqZWT
+	dMzGualEYSEnTi7inEqgA5jkVZ2dVPWepEEZhGTOE+aukqYK+VmUVcAw4bmE9eH6x4gy
+	XqiT8msFQgVOdkrEjpZhdMPLf9qRheq1U3Cko=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=fjhPPZvmKiQ3aXCpXiKCTPRgBzgHd/D3edaPyW080UtIDjDgUOiV8Xj4SI3rdvfPMG
+	OCA0JItBZT15EcbKLycJfIWolWq2Jrxf1RWHX8zYmQ9az/61zU9qN8dsf9otvbf/RdBa
+	RIpLvvG8t2wb7HpqO+iE9o8BdSmKE9smKGXf8=
+MIME-Version: 1.0
+Received: by 10.90.225.16 with SMTP id x16mr1149406agg.71.1275125810423; Sat, 
+	29 May 2010 02:36:50 -0700 (PDT)
+Received: by 10.90.71.4 with HTTP; Sat, 29 May 2010 02:36:50 -0700 (PDT)
+In-Reply-To: <AANLkTikmIaqai1TRdoU2SlybGF4JmdS57AJnA6sngrSS@mail.gmail.com>
+References: <AANLkTinA_A7Ja4Go6H7MlOxFM4uLsfiQCyJnRodHHCpo@mail.gmail.com>
+	<AANLkTikmIaqai1TRdoU2SlybGF4JmdS57AJnA6sngrSS@mail.gmail.com>
+Date: Sat, 29 May 2010 11:36:50 +0200
+Message-ID: <AANLkTims9fPo1xmCwBFmiHQJ6nrTgJDKVFJkjeThIvt9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 28 May 2010 20:49:41 +0400
-Message-Id: <1275065381-22201-1-git-send-email-mad_soft@inbox.ru>
-X-Mailer: git-send-email 1.6.4.4
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
-	(mail.asoft.ru [91.205.86.207]);
-	Fri, 28 May 2010 20:49:44 +0400 (MSD)
-X-SA-Exim-Connect-IP: 91.205.86.207
-X-SA-Exim-Mail-From: mad_soft@inbox.ru
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] ttf-droid: new recipe
+Subject: Re: additional bitbake test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,67 +53,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 28 May 2010 17:22:03 -0000
+X-List-Received-Date: Sat, 29 May 2010 09:41:05 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Add recipe for Droid fonts (specifically developed by Ascender for
-Google's Android platform).  Since there's no canonical tarball URL for
-these fonts, we fetch them directly from Android git repo.
+2010/5/28 Chris Larson <clarson@kergoth.com>:
+> On Thu, May 27, 2010 at 11:36 PM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
+>
+>> Hi,
+>>
+>> I'd like to propose to add a test in bitbake to see if an overlay dir
+>> exists when specifying overlays.
+>>
+>> In the past I bumped into a problem where BBFILE_PATTERN_local =3D
+>> "^${OE_TOPDIR}/myoverlay/recipes" was not processed properly because
+>> OE_TOPDIR was not passed using BB_ENV_EXTRAWHITE, resulting in the
+>> regexp match with the dir always returning false due to OE_TOPDIR not
+>> being expanded.
+>> A simple test could warn users against errors like this one.
+>>
+>
+> Hmm, I'm not sure how best to implement the warning. =A0I'd rather not gr=
+ep,
+> and we don't currently have a way to determine what variables a given val=
+ue
+> references. =A0I guess we could notice if a given pattern didn't match an=
+y
+> files in BBFILES, and warn on that. =A0Does that sound reasonable?
 
-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
----
+That sounds quite good to me.
+>
+> Aside: the fact that a nonexistant var is left as is, to be expanded in
+> shell, is horrible, imo. =A0They should expand to the empty string when u=
+nset,
+> or error, or something.
 
-It would be nice to have this in tree - not only these fonts looks good,
-but also they're smaller than DejaVu counterparts due to less symbols
-included  - basically European scripts (but there's also separate fonts
-containing Chinese/Japan). Personally I use them as default fonts in
-x11-based image for about two months without much problems (the only one
-I stumbled upon is missing "direction" characters, used in default
-layout of matchbox-keyboard)
+I'm inclined to say error. If a default it wanted an assignment can be
+done somewhere.
+Better make the problem explicit
 
-Recipe is basically copy of ttf-dejavu.
-Fontconfig bits are omitted as I'm no expert in fonts and not much sure
-if they're needed.
-
- recipes/ttf-fonts/ttf-droid_git.bb |   28 ++++++++++++++++++++++++++++
- 1 files changed, 28 insertions(+), 0 deletions(-)
- create mode 100644 recipes/ttf-fonts/ttf-droid_git.bb
-
-diff --git a/recipes/ttf-fonts/ttf-droid_git.bb b/recipes/ttf-fonts/ttf-droid_git.bb
-new file mode 100644
-index 0000000..f04f51a
---- /dev/null
-+++ b/recipes/ttf-fonts/ttf-droid_git.bb
-@@ -0,0 +1,28 @@
-+require ttf.inc
-+
-+DESCRIPTION = "Droid fonts - TTF Edition"
-+HOMEPAGE = "http://www.droidfonts.com/"
-+LICENSE = "Apache 2.0"
-+PR = "r0"
-+# git magic below - SRCREV is an ID of /data/fonts subtree
-+# (so we don't need to fetch full platform/frameworks/base.git)
-+SRCREV = "31f255e44e618ff3b923f332e8fcb83403fd39f5"
-+PV = "0.0+${PR}+gitr${SRCREV}"
-+
-+SRC_URI = "git://android.git.kernel.org/platform/frameworks/base.git;protocol=git;branch=master"
-+
-+S = "${WORKDIR}/git"
-+
-+do_install_prepend() {
-+	rm ${S}/Ahem.ttf # we're not packaging it
-+}
-+
-+PACKAGES = "${PN}-dbg ttf-droid-sans ttf-droid-sans-mono \
-+            ttf-droid-sans-fallback ttf-droid-sans-japanese ttf-droid-serif"
-+RRECOMMENDS_${PN}-dbg = ""
-+
-+FILES_ttf-droid-sans = "${datadir}/fonts/truetype/DroidSans.ttf ${datadir}/fonts/truetype/DroidSans-Bold.ttf"
-+FILES_ttf-droid-sans-mono = "${datadir}/fonts/truetype/DroidSansMono.ttf"
-+FILES_ttf-droid-sans-fallback = "${datadir}/fonts/truetype/DroidSansFallback.ttf"
-+FILES_ttf-droid-sans-japanese = "${datadir}/fonts/truetype/DroidSansJapanese.ttf"
-+FILES_ttf-droid-serif = "${datadir}/fonts/truetype/DroidSerif*.ttf"
--- 
-1.6.4.4
-
+Frans
 
 
