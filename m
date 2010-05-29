@@ -1,43 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OILUX-00039E-OB for openembedded-devel@lists.openembedded.org;
-	Sat, 29 May 2010 14:50:19 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OILQX-0008Jc-1y for openembedded-devel@lists.openembedded.org;
-	Sat, 29 May 2010 14:46:09 +0200
-Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 May 2010 14:46:09 +0200
-Received: from k.kooi by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <andrea.adami@gmail.com>) id 1OIPgv-000666-Jd
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 29 May 2010 19:19:22 +0200
+Received: by gwj15 with SMTP id 15so1740727gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 29 May 2010 14:46:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 29 May 2010 10:15:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=XQGCJjKfiXL3q7GqN6kk3DR4qjOOvH8Z2WQyzKCxaik=;
+	b=fzaW0FWVikwXF8cQiC8z5GYceZBpK2Lp1liECu2w/Bj+PXUsRYkMOFAyLkEE3RlP+2
+	Vn9T1sGrCDIqKQikw6xKynWLT+PZJD166EZMRZr2DL5Kysu5W1zJuTxv/bW9QJ41NzU7
+	L7M7IO+RKqG4blyjnyNAmVNx2ldd4WZMZe2Kw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=tBBHsYMUN1UEg3LpOr7N5u2GlpD6ptylgS4bXm7pJYT73cVqBZAS4xn+LcB6BQFMOK
+	GRyK8SbjmKubzl+FOaABIpSvjpuql0IsFJ+qnHVOwBScfD2QRtZanVvf2dItrNfPMvT4
+	k7ADu+CDndbmrOrr7wxWy+P+ER59P8EUoSugk=
+MIME-Version: 1.0
+Received: by 10.101.3.14 with SMTP id f14mr2277147ani.38.1275152964173; Sat, 
+	29 May 2010 10:09:24 -0700 (PDT)
+Received: by 10.100.232.16 with HTTP; Sat, 29 May 2010 10:09:24 -0700 (PDT)
+In-Reply-To: <AANLkTinixtnuaFRhM9y4ACoa1s8hbDC4EBu5XlFffuXj@mail.gmail.com>
+References: <htqn9k$gvu$1@dough.gmane.org>
+	<AANLkTinixtnuaFRhM9y4ACoa1s8hbDC4EBu5XlFffuXj@mail.gmail.com>
+Date: Sat, 29 May 2010 19:09:24 +0200
+Message-ID: <AANLkTilvLmREAqmFx0eh8rfg2bWLVUrtfQWX2nmtmbk4@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 29 May 2010 14:46:01 +0200
-Message-ID: <htr2a9$f76$1@dough.gmane.org>
-References: <4C00F3F4.5030801@station51.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <4C00F3F4.5030801@station51.net>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom-gnome-image compilation error
+Subject: Re: Faking sign offs is bad
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 29 May 2010 12:50:19 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 29 May 2010 17:19:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+>> Apart from that, the commit is bogus, it just adds a
+>> 'udev/udev-151/udev-compat-static.patch' file in ${S} (of all places!)
+>> instead of actually patching the udev init file.
+>
+> The hack must be temporarly.
+> I though tit's more clean if we overwrite the file than diffing and patching it.
+> Perhaps I was wrong.
+>
+> Andrea
+>
 
-On 29-05-10 13:01, butters wrote:
-> Hello,
-> 
-> I'm having trouble getting angstrom-gnome-image.bb to completely
-> compile. It stops at firefox_3.6.3.bb with this error..
-> 
-> ./nanojit/NativeARM.cpp:949: warning unused variable 'was'
-> {standard input} Assembler messages:
-> {standard input}: 824: Error: selected processor does not support clz r1,r1
-> jsbuiltins.cpp
-> 
-> I'm compiling for armv4t, for the mini2440 machine. Is this a known
-> issue? Because I've been able to compile this in the past.
+Oh, I see now...yes..my bad:
 
-Looks like nanojit is forcing armv5te instructions even for armv4t,
-which the compiler and binutils have every reason to complain about.
+I had locally some more changes, which got lost importing your
+modified init. 3 magic lines.
 
-Does anyone familiar with the mozilla buildsystem know if we can disable
-things like CLZ for armv4t and below?
+do_configure_prepend() {
+        cp ${S}/patches/udev-compat-static.patch ${S}/init
+}
 
-regards,
+Please forget: I'm preparing a proper v2 patch to be sent on the ML.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Sorry again for the noise
 
-iD8DBQFMAQyJMkyGM64RGpERAiM+AKCKUkS9EmkuzA8ow//U+tu5jfkcqACeK6n5
-ZlKdnPlkE8axIRTN8APRKq0=
-=xuT6
------END PGP SIGNATURE-----
-
+Andrea
 
 
