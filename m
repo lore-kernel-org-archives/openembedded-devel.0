@@ -1,47 +1,46 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from devils.ext.ti.com ([198.47.26.153])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OIm6g-0000TP-6L
+	(envelope-from <martin@ti.com>) id 1OIoGj-000596-Vb
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 May 2010 19:15:27 +0200
-Received: by vws15 with SMTP id 15so629727vws.6
+	Sun, 30 May 2010 21:34:00 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o4UJQiRi030414
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 10:11:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=upLONqSGObZMwFHaFVqEkp93UN8TOkYQwlHMJqH16kw=;
-	b=DA560zjKHjPYg9vqmSETJNWIxvAPJLQYsN+LTa9sG4Eg2uR0BsA7RC4DuxagavaJHE
-	+K/Zl9VgGVvKBoRbEnkmwGWrrJF9GVuYlmOiU3XCAjq36xZWMVHEZajqPnw9+GKdgjHH
-	aOa9wRyIRpa8nX+9uYAzoU7+6WrlFFrS3y3hQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=I0BhhUxNfFxOLBTUwuD80lewF8v4OBz8XDvWsWTBJSjjMOpBf70ScsPWr5atFxU74D
-	+S7Rk21BvS4GEt3ExKNqYgXXCA/sTct2LFPM4nSnxSYiXPBSesF0pQOwnbiSPNvt97Mo
-	frlusw9U3Q/It8qqrvwgRUNr/g1NpAm1S1AI0=
-Received: by 10.224.90.67 with SMTP id h3mr1211432qam.171.1275239473164; Sun, 
-	30 May 2010 10:11:13 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.217.136 with HTTP; Sun, 30 May 2010 10:10:53 -0700 (PDT)
-In-Reply-To: <Pine.LNX.4.64.1005301226590.27172@juice.ott.cti.com>
-References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com> 
+	Sun, 30 May 2010 14:26:44 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4UJQiLS018939
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 May 2010 14:26:44 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4UJQild015864
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 30 May 2010 14:26:44 -0500 (CDT)
+Received: from dlee02.ent.ti.com ([157.170.170.17]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Sun, 30 May 2010 14:26:44 -0500
+From: "Ambrose, Martin" <martin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Sun, 30 May 2010 14:26:43 -0500
+Thread-Topic: [oe] Examples of srctree and gitver
+Thread-Index: AcsAFocph8alxZ8NR4mcavy+nS2NiwAFh/mw
+Message-ID: <A24693684029E5489D1D202277BE894455A0F301@dlee02.ent.ti.com>
+References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com>
 	<Pine.LNX.4.64.1005301226590.27172@juice.ott.cti.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 30 May 2010 10:10:53 -0700
-X-Google-Sender-Auth: on1_CnSXaTRN994UKrf4kh2x3SQ
-Message-ID: <AANLkTilDsK7a3tn2fr9bxSiYYS8JbrLgWQuT3btuzcc9@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <Pine.LNX.4.64.1005301226590.27172@juice.ott.cti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 198.47.26.153
+X-SA-Exim-Mail-From: martin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Examples of srctree and gitver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -56,45 +55,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 May 2010 17:15:27 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 30 May 2010 19:34:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 30, 2010 at 9:27 AM, Michael Smith <msmith@cbnco.com> wrote:
+On Sun, May 30, 2010 at 11:27:45, Michael Smith wrote:
 
 > On Sun, 30 May 2010, Ambrose, Martin wrote:
->
-> > Are there any recipes/examples which use these classes?
->
-> Hi Martin,
->
-> I think you'll find srctree used mostly in out-of-tree stuff. Here's a
-> sample.
->
-> inherit srctree gitver
->
-> # Strip off the leading 'v' from the Linux kernel git tags
-> GITVER_NO_V = "${@'${GITVER}'[1:]}"
-> PV = "${GITVER_NO_V}"
->
-> # Clean up between builds for different architectures
-> do_configure() {
->    oe_runmake clean
-> }
->
-> do_compile() {
->    oe_runmake
-> }
->
-> do_install() {
->    # ...
-> }
->
 
-Thanks, glad someone had an example for him handy :)
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+> > Are there any recipes/examples which use these classes?
+>=20
+
+> # Strip off the leading 'v' from the Linux kernel git tags
+> GITVER_NO_V =3D "${@'${GITVER}'[1:]}"
+> PV =3D "${GITVER_NO_V}"
+>=20
+
+Thanks for the pointer.
+
+Looking at the class I see=20
+    ver =3D popen(["git", "describe", "--tags"], cwd=3Dpath)               =
+                                                                           =
+                                                                           =
+               =20
+    if not ver:                                                            =
+                                                                           =
+                                                                           =
+           =20
+        ver =3D popen(["git", "rev-parse", "--short", "HEAD"], cwd=3Dpath)
+
+Normally I work on a named branch so the PV here becomes the capitalized
+branch name. My preference would be the shortened commit id which is the
+fallback option above. I guess no way to get this functionality unless I
+either don't work a branch or locally modify gitver.bbclass.
+
+Regards,=20
+Martin
+
 
