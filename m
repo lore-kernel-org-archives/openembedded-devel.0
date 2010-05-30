@@ -1,46 +1,48 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1OIoGk-000597-Bk
+	(envelope-from <kergoth@gmail.com>) id 1OIoaD-0005UL-KG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 May 2010 21:34:00 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o4UJQgqN028029
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Sun, 30 May 2010 21:54:06 +0200
+Received: by vws15 with SMTP id 15so741016vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 14:26:42 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o4UJQg6F003894
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 14:26:42 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4UJQg5L015860
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 14:26:42 -0500 (CDT)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Sun, 30 May 2010 14:26:42 -0500
-From: "Ambrose, Martin" <martin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Sun, 30 May 2010 14:26:40 -0500
-Thread-Topic: [oe] Examples of srctree and gitver
-Thread-Index: AcsAE7kAQVP54M+DTBSGZrvajGZxhQAF7gAw
-Message-ID: <A24693684029E5489D1D202277BE894455A0F300@dlee02.ent.ti.com>
-References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com>
-	<AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com>
-In-Reply-To: <AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Sun, 30 May 2010 12:49:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=S0AdRJR4EKc1WNstTd9dPvGGVlY932cTvjyR5KDyK9E=;
+	b=ECuXp93mVli/vPQ/xSrSlFW4MVSXSM0O1psfgoqlfz+IPgQTGmXHoiZ/A2ozcS69K4
+	/v/R1cZdHkQ6JuVMQAS4f4NpJGpzJ6jucWsqpr0hikCPG2DJFh/2yjVVCI9rsY6/QGHZ
+	aESeCyebTx5KzMcZLaQZuxKfDqOw8f6zWefUE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=fq5Uuc6454m/a9sQ1ga/DpDb7waCvkltUrO3nzURDzfdf5cE2rtlGvrx6gxiytfDob
+	NunsaSUScMSV8lzuR0c+HxlaXks6F/wVnXLCNP/F9Eh3TW8NfJqlG+Htk9QBMKLAGHVA
+	liDSGz8mOlDvBCtul4HkJGUVSPnieHmAU81dU=
+Received: by 10.224.78.131 with SMTP id l3mr1243256qak.277.1275248992422; Sun, 
+	30 May 2010 12:49:52 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: martin@ti.com
+Sender: kergoth@gmail.com
+Received: by 10.229.217.136 with HTTP; Sun, 30 May 2010 12:49:32 -0700 (PDT)
+In-Reply-To: <A24693684029E5489D1D202277BE894455A0F300@dlee02.ent.ti.com>
+References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com> 
+	<AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com> 
+	<A24693684029E5489D1D202277BE894455A0F300@dlee02.ent.ti.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sun, 30 May 2010 12:49:32 -0700
+X-Google-Sender-Auth: vHM6Vwfiga1eCcKucfrMLLW6EdQ
+Message-ID: <AANLkTinA1ZTsklvgjWbc87f9a5CgSXpbCth47yVKiPq-@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Examples of srctree and gitver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,43 +57,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 May 2010 19:34:01 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 30 May 2010 19:54:06 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Sun, May 30, 2010 at 11:16:16, Chris Larson wrote:
+On Sun, May 30, 2010 at 12:26 PM, Ambrose, Martin <martin@ti.com> wrote:
 
-> On Sun, May 30, 2010 at 8:07 AM, Ambrose, Martin <martin@ti.com> wrote:
-...
+> On Sun, May 30, 2010 at 11:16:16, Chris Larson wrote:
+>
+> > On Sun, May 30, 2010 at 8:07 AM, Ambrose, Martin <martin@ti.com> wrote:
+> ...
+>
+> > > Are there any recipes/examples which use these classes?
+> >
+> > I expect they'd be most useful in development, so no, I don't know of any
+> > examples in an OE tree today.
+>
+> Makes sense.
+>
+> > It's pretty straightforward.  Add inherit
+> > srctree, point S at your local source tree (or put the recipe inside the
+> > sourcetree, it defaults to the dir the recipe is in), and it'll build
+> from
+> > that local tree rather than doing the fetch+unpack+patch process.
+>
+> Ack. I now think of the class as providing a 'skip' to the
+> fetch+unpack+patch
+> steps but everything afterwards is then vanilla OE.
+>
 
-> > Are there any recipes/examples which use these classes?
->=20
-> I expect they'd be most useful in development, so no, I don't know of any
-> examples in an OE tree today.
+Yeah, that's the idea, and is the only reason the class needs to exist --
+otherwise you could just point S to a local directory in the recipe and not
+need it.  Aside: the way it does so is quite the hack, we need to figure out
+a better way to manipulate the task graph like this.
 
-Makes sense.
+Ideally I could have a single set of recipes which, through some command
+> line switches,
+> would either build in-tree using local sources or out-of-tree using a
+> tarball.
+> But maybe this really requires separate recipes with commonality factored
+> into includes.
 
-> It's pretty straightforward.  Add inherit
-> srctree, point S at your local source tree (or put the recipe inside the
-> sourcetree, it defaults to the dir the recipe is in), and it'll build fro=
-m
-> that local tree rather than doing the fetch+unpack+patch process.
 
-Ack. I now think of the class as providing a 'skip' to the fetch+unpack+pat=
-ch
-steps but everything afterwards is then vanilla OE.
-
-Ideally I could have a single set of recipes which, through some command li=
-ne switches,
-would either build in-tree using local sources or out-of-tree using a tarba=
-ll.
-But maybe this really requires separate recipes with commonality factored i=
-nto includes.
-
-Thanks for the explanation/help.
-
-Regards,=20
-Martin
-
+It would be possible to add a variable to toggle the behavior of the class,
+but it isn't there today.  Note, you *should* be able to use an amend.inc
+(w/ INHERIT += amend) to switch an existing recipe in an existing overlay
+without modifying the recipe itself, which I could being quite useful to
+temporarily switch it over and then back again, but I haven't tested that
+myself.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
