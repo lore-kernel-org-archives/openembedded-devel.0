@@ -1,33 +1,31 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from carmex.station51.net ([109.74.206.142] helo=station51.net)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OIXQ6-00022X-Ju
+	(envelope-from <butters@station51.net>) id 1OIi39-00034o-7K
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 30 May 2010 03:34:31 +0200
-Received: from [123.192.240.117] (123-192-240-117.dynamic.kbronet.com.tw
-	[123.192.240.117])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 099271B10C03
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 01:39:32 +0000 (UTC)
-Message-ID: <4C01BFA7.5040800@freyther.de>
-Date: Sun, 30 May 2010 09:30:15 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
-	Thunderbird/3.0.4
+	Sun, 30 May 2010 14:56:32 +0200
+Received: from [87.241.107.86] (account butters HELO [192.168.1.201])
+	by station51.net (CommuniGate Pro SMTP 5.3.4)
+	with ESMTPSA id 1432738 for openembedded-devel@lists.openembedded.org;
+	Sun, 30 May 2010 14:51:20 +0200
+Message-ID: <4C025F4C.7010305@station51.net>
+Date: Sun, 30 May 2010 14:51:24 +0200
+From: butters <butters@station51.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <htqn9k$gvu$1@dough.gmane.org>
-	<AANLkTinPePxmIwOptgdFv-4CkJWzixbLvB26pxBw1dec@mail.gmail.com>
-In-Reply-To: <AANLkTinPePxmIwOptgdFv-4CkJWzixbLvB26pxBw1dec@mail.gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+References: <htqn9k$gvu$1@dough.gmane.org>	<AANLkTinPePxmIwOptgdFv-4CkJWzixbLvB26pxBw1dec@mail.gmail.com>
+	<4C01BFA7.5040800@freyther.de>
+In-Reply-To: <4C01BFA7.5040800@freyther.de>
+X-SA-Exim-Connect-IP: 109.74.206.142
+X-SA-Exim-Mail-From: butters@station51.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Faking sign offs is bad
+Subject: Broken recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 May 2010 01:34:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 30 May 2010 12:58:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On 05/29/2010 07:14 PM, Andrea Adami wrote:
-> The patch was sitting since long time (I had no time to test it
-> before) and recently udev has been changed. I wanted to give it a bump
-> before 'static' recipe renaming.
-> 
-> I'm sorry if its signature not conform.
+Hi there,
 
-Hi,
+Can someone tell me the reason for keeping broken recipes in the tree? 
+Examples are the maemo task and image, the openmoko task doesn't compile 
+because its missing stuff. Are these things going to eventually be 
+fixed, or are they there for some other reason that I'm not 
+understanding? I'm not trying to be insulting to anyone, but I think 
+having broken things that don't even make it to the compile stage in the 
+tree will confuse a lot of people.
 
-first of all thank you for your contribution. The issue here is that a
-"Signed-off-by:" is not to give credit but at least in the classic sense
-gives the origin (route of the patch to the tree).
-
-In case you want to give credit you can use it in the commit message,
-lile this patch is based on work of... or if it is fully written by
-someone else use the --author on git commit.
-
-happy hacking
-	z
+Thanks,
+Bill
 
 
