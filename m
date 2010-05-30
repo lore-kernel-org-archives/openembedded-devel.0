@@ -1,39 +1,39 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1OIoGj-000596-Vb
+	(envelope-from <martin@ti.com>) id 1OIoGk-000597-Bk
 	for openembedded-devel@lists.openembedded.org;
 	Sun, 30 May 2010 21:34:00 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o4UJQiRi030414
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o4UJQgqN028029
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 14:26:44 -0500
+	Sun, 30 May 2010 14:26:42 -0500
 Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4UJQiLS018939
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o4UJQg6F003894
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 14:26:44 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4UJQild015864
+	Sun, 30 May 2010 14:26:42 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4UJQg5L015860
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 30 May 2010 14:26:44 -0500 (CDT)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Sun, 30 May 2010 14:26:44 -0500
+	Sun, 30 May 2010 14:26:42 -0500 (CDT)
+Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Sun, 30 May 2010 14:26:42 -0500
 From: "Ambrose, Martin" <martin@ti.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Sun, 30 May 2010 14:26:43 -0500
+Date: Sun, 30 May 2010 14:26:40 -0500
 Thread-Topic: [oe] Examples of srctree and gitver
-Thread-Index: AcsAFocph8alxZ8NR4mcavy+nS2NiwAFh/mw
-Message-ID: <A24693684029E5489D1D202277BE894455A0F301@dlee02.ent.ti.com>
+Thread-Index: AcsAE7kAQVP54M+DTBSGZrvajGZxhQAF7gAw
+Message-ID: <A24693684029E5489D1D202277BE894455A0F300@dlee02.ent.ti.com>
 References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com>
-	<Pine.LNX.4.64.1005301226590.27172@juice.ott.cti.com>
-In-Reply-To: <Pine.LNX.4.64.1005301226590.27172@juice.ott.cti.com>
+	<AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com>
+In-Reply-To: <AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 acceptlanguage: en-US
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.153
+X-SA-Exim-Connect-IP: 192.94.94.41
 X-SA-Exim-Mail-From: martin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -55,40 +55,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 30 May 2010 19:34:00 -0000
+X-List-Received-Date: Sun, 30 May 2010 19:34:01 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="Windows-1252"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 30, 2010 at 11:27:45, Michael Smith wrote:
+On Sun, May 30, 2010 at 11:16:16, Chris Larson wrote:
 
-> On Sun, 30 May 2010, Ambrose, Martin wrote:
+> On Sun, May 30, 2010 at 8:07 AM, Ambrose, Martin <martin@ti.com> wrote:
+...
 
 > > Are there any recipes/examples which use these classes?
 >=20
+> I expect they'd be most useful in development, so no, I don't know of any
+> examples in an OE tree today.
 
-> # Strip off the leading 'v' from the Linux kernel git tags
-> GITVER_NO_V =3D "${@'${GITVER}'[1:]}"
-> PV =3D "${GITVER_NO_V}"
->=20
+Makes sense.
 
-Thanks for the pointer.
+> It's pretty straightforward.  Add inherit
+> srctree, point S at your local source tree (or put the recipe inside the
+> sourcetree, it defaults to the dir the recipe is in), and it'll build fro=
+m
+> that local tree rather than doing the fetch+unpack+patch process.
 
-Looking at the class I see=20
-    ver =3D popen(["git", "describe", "--tags"], cwd=3Dpath)               =
-                                                                           =
-                                                                           =
-               =20
-    if not ver:                                                            =
-                                                                           =
-                                                                           =
-           =20
-        ver =3D popen(["git", "rev-parse", "--short", "HEAD"], cwd=3Dpath)
+Ack. I now think of the class as providing a 'skip' to the fetch+unpack+pat=
+ch
+steps but everything afterwards is then vanilla OE.
 
-Normally I work on a named branch so the PV here becomes the capitalized
-branch name. My preference would be the shortened commit id which is the
-fallback option above. I guess no way to get this functionality unless I
-either don't work a branch or locally modify gitver.bbclass.
+Ideally I could have a single set of recipes which, through some command li=
+ne switches,
+would either build in-tree using local sources or out-of-tree using a tarba=
+ll.
+But maybe this really requires separate recipes with commonality factored i=
+nto includes.
+
+Thanks for the explanation/help.
 
 Regards,=20
 Martin
