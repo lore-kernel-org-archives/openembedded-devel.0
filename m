@@ -1,38 +1,44 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OJ2AW-0003Ge-1X
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 May 2010 12:24:28 +0200
-Received: from w1725.wlan.rz.tu-bs.de ([134.169.206.201] helo=excalibur)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OJ26Q-0007qz-Ml by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJ34b-0002ep-Dl for openembedded-devel@lists.openembedded.org;
+	Mon, 31 May 2010 13:22:26 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJ30Y-0004mi-Oe for openembedded-devel@lists.openembedded.org;
+	Mon, 31 May 2010 13:18:14 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 May 2010 13:18:14 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 12:20:17 +0200
-Received: from stefan by excalibur with local (Exim 4.71)
-	(envelope-from <stefan@excalibur.local>) id 1OJ26O-0002ei-C4
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 May 2010 12:20:12 +0200
-Date: Mon, 31 May 2010 12:20:12 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Mon, 31 May 2010 13:18:14 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100531102012.GA12125@excalibur.local>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 31 May 2010 13:18:05 +0200
+Message-ID: <hu05te$c6i$1@dough.gmane.org>
 References: <1275299757-28908-1-git-send-email-ospite@studenti.unina.it>
-MIME-Version: 1.0
-In-Reply-To: <1275299757-28908-1-git-send-email-ospite@studenti.unina.it>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+	<1275299757-28908-8-git-send-email-ospite@studenti.unina.it>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <1275299757-28908-8-git-send-email-ospite@studenti.unina.it>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 00/12] motorola-ezx related changes
+Subject: Re: [PATCH 07/12] motorola-ezx-base.inc: refresh machine definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,27 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 10:24:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 31 May 2010 11:22:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Mon, 2010-05-31 at 11:55, Antonio Ospite wrote:
-> Hi, here's some motorola-ezx related changes, plus a couple of other fixes I
-> am using here.
-> Namely, the non ezx related changes are 01 and 02.
-> 
-> Can anyone review and apply, please?
+On 31-05-10 11:55, Antonio Ospite wrote:
 
-I would prefer if you could push it yourself after the review. Therefor I
-propose write-access for Antonio.
+>  * get rid of udev
 
-Over time he already did a lot patches for EZX, but was also willing to dig into
-related problems and work on them until a solution was found. He also showed
-good reactions on review comments and I think he is ready for write-access now.
+> +# We don't want udev, we rely on CONFIG_DEVTMPFS
+> +IMAGE_DEV_MANAGER = ""
 
-regards
-Stefan Schmidt
+I most strongly disapprove of that. That var, as the name implies, is an
+*image* var, not a machine var. With this change you are forcing an
+image policy onto everyone. I have images that need udev, which
+according to you I am not allowed to use on my a780.
+
+If you don't want udev in your image, set IMAGE_DEV_MANAGER = "" in your
+image, not in the machine.
+
+rgards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMA5rtMkyGM64RGpERApXlAKCD9mwKSMGztqgE4RSUOJJ/Ot0yKQCfZCPd
+N5aXmhtYgT90BM8kEr9FQ1s=
+=QeKp
+-----END PGP SIGNATURE-----
+
 
 
