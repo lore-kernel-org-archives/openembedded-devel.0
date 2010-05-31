@@ -1,39 +1,39 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1OJD8u-00039A-St
+	(envelope-from <cliff.brake@gmail.com>) id 1OJD9g-0003E2-4V
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 00:07:34 +0200
-Received: by gwj15 with SMTP id 15so2976100gwj.6
+	Tue, 01 Jun 2010 00:08:20 +0200
+Received: by wwb34 with SMTP id 34so2346334wwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 15:03:19 -0700 (PDT)
+	Mon, 31 May 2010 15:04:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=fnDdHJe2OYtY4FJk1pf+zDIWyjd9PF+Zf6JXZ9JocQY=;
-	b=T48v9bjxN3fh+gZERJNKi/O53UNFHUnYGc0Wz8SsfJ3dvfFBhwrgZIyNUrFbWxGZp8
-	2B06VVVIvCB6lD3KVWzSD6jQpYFY2IqCnVAEpdh/KFi/mqEPcnUoXDtsIp6ED//tn6Bd
-	vRWxxECHpXDUFs0bTza1hP58z8w6lJVlUomDQ=
+	bh=+locGczUpixd2kLnctT/dGH1GBVSTijlEw3FhbgNeyM=;
+	b=QxYvskHn6DQ9v8iDYI3y/KkPXW8h+qMu2dumsZ8r6J3PtSb3NSpvN+62ZJy7tVRvsv
+	n0ksNdgy1wiF139Up3A4ArptzTis7BqQ6KPvgT69HtwtfWTdpBTvB/VDu1gyPaikHgJr
+	wVUoBNfrpVcpFGCRa+fn+5ihdjnF66k0+v490=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=vjFkD73/6TkuhBylyoQ2YhYtXZBBWELIv1qpKNxKZFiOeN2DD5fsuDi664hK+wtsyW
-	G+u1jE7c7sVp+ZuFis1HWtZoJ2jNVW2wwOOkeqbe5TL93Twt8LPjLR0r9uo9vgIhOwVv
-	WcdJ5mvts11pPmuCrdvZlPZ/+kZjd5FWwi0g8=
+	b=sKgiQtCCJf2Trvg0UWtXVIsCc923IdwvD8Zl3LiHHoASjuu819t45aMrhjSGbYXgvr
+	HlwvePepMAnRtSSUI5aBO50CQyfPA6IGlc7yUmIN/RZcAT54BwWmJF2BVHCj/TG2NJtj
+	ZU6OV8pQ+4KRkAOtuGRCQOdKuq0vo/wU5OQM8=
 MIME-Version: 1.0
-Received: by 10.151.5.14 with SMTP id h14mr5647117ybi.19.1275343398910; Mon, 
-	31 May 2010 15:03:18 -0700 (PDT)
-Received: by 10.150.12.14 with HTTP; Mon, 31 May 2010 15:03:18 -0700 (PDT)
+Received: by 10.227.143.211 with SMTP id w19mr4784964wbu.182.1275343446926; 
+	Mon, 31 May 2010 15:04:06 -0700 (PDT)
+Received: by 10.216.49.206 with HTTP; Mon, 31 May 2010 15:04:06 -0700 (PDT)
 In-Reply-To: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
 References: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
-Date: Tue, 1 Jun 2010 00:03:18 +0200
-Message-ID: <AANLkTikpyyrJwRGwBLEz2Rc7AURqZZkCxOuk88P0GE6B@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+Date: Mon, 31 May 2010 18:04:06 -0400
+Message-ID: <AANLkTilCZJoRhGKzBokT9TuZwbh0mzyzsBQ2J3NsIpwJ@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -51,31 +51,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 22:07:34 -0000
+X-List-Received-Date: Mon, 31 May 2010 22:08:21 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
+-vvvv provides a little more info ...
 
-On Mon, May 31, 2010 at 11:12 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
->
-> I'm trying to put together some examples of using srctree/gitver, and
-> running into a few issues.
->
-> cbrake@happy:/scratch/oe/oe-build/oe$ bitbake autotools-demo
-> NOTE: Handling BitBake files: / (4602/8385) [54 %]ERROR: 'NoneType'
-> object has no attribute 'startswith' while parsing
-> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
-> NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
-> attribute 'startswith' while evaluating:
 
-Would like to add a "me too".  I recently hit this problem with
-overlays only, I wasn't even playing with srctree nor gitver.
+NOTE: Running task 729 of 733 (ID: 8,
+/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb,
+do_package_stage)
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
+do_package_stage failed
+NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage: Started
+ERROR: Task 8 (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb,
+do_package_stage) failed with 256
+ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb'
+failed
+ERROR: Function staging_packager failed
+NOTE: Task failed: ('function staging_packager failed',
+'/scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542')
+ERROR: Logfile of failure stored in:
+/scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542
+Log data follows:
+| *** Error: CONTROL/control is missing field Source
+| The Source field contain the URL's or filenames of the source code
+and any patches
+| used to build this package.  Either gnu-style tarballs or Debian
+source packages
+| are acceptable.  Relative filenames may be used if they are
+distributed in the same
+| directory as the .ipk file.
+|
+| ipkg-build: Please fix the above errors and try again.
+| ERROR: Function staging_packager failed
+NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage: Failed
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
+do_package_stage failed
+ERROR: Task 8 (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb,
+do_package_stage) failed with 256
+ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb'
+failed
+ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb'
+failed
 
-Apart from a non-conclusive IRC discussion, I didn't investigate
-further, expecting a misconfiguration on my side somewhere.
+So we need a way to provide Source URL's for packaging ...
 
-Regards,
--- 
-Leon
+Cliff
 
 
