@@ -1,48 +1,57 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OJDRJ-0003dr-Gb
+	(envelope-from <martin@ti.com>) id 1OJDq0-0007VM-D6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 00:26:34 +0200
-Received: by vws4 with SMTP id 4so1134040vws.6
+	Tue, 01 Jun 2010 00:52:06 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o4VMlqec019042
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 15:22:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=uI98L53Df8zBkrfpaQgLCBgnMkXkF1MxL59a7HYAiYA=;
-	b=Lp6RarR+TwfERIZGWGBX503S82R2siF8WBKkZpFF5V/Rw91hYw2g7uspk0wzkNmY3Q
-	oN7041WcsRmbz8E+SdEgiBNfj2MFU/qLnclZ6hZIS6ItCPuEZQ05jttqm7RXADGAehcd
-	+Y0xu2GhJkdyiSLyyRBNDa+HEFfiuwyJz2YQE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=t0Gr1cH4KmOQqdtZnsBHfUdnUfzAEwZ6ghQRYUXWAUl7VLWLmtR49tfMIYjIJ/KNOT
-	ywwyr7XTcF8q1MmTVwOY8nzT3tWD8ahwj4eIZ3lm+xVtb14t22fM4piO8czIC2frjQCi
-	YtfSvDFxauOgoVehCeaYkpIcEG9MyW289xaXY=
-Received: by 10.224.87.134 with SMTP id w6mr1975700qal.178.1275344538162; Mon, 
-	31 May 2010 15:22:18 -0700 (PDT)
+	Mon, 31 May 2010 17:47:52 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o4VMlpcw009776
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 May 2010 17:47:51 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4VMlpDA011106
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 May 2010 17:47:51 -0500 (CDT)
+Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Mon, 31 May 2010 17:47:51 -0500
+From: "Ambrose, Martin" <martin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 31 May 2010 17:47:39 -0500
+Thread-Topic: [oe] Examples of srctree and gitver
+Thread-Index: AcsAMXJFPAPnj3S+RP+AeADqGdA5eQA3XPjQ
+Message-ID: <A24693684029E5489D1D202277BE894455A0F458@dlee02.ent.ti.com>
+References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com>
+	<AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com>
+	<A24693684029E5489D1D202277BE894455A0F300@dlee02.ent.ti.com>
+	<AANLkTinA1ZTsklvgjWbc87f9a5CgSXpbCth47yVKiPq-@mail.gmail.com>
+In-Reply-To: <AANLkTinA1ZTsklvgjWbc87f9a5CgSXpbCth47yVKiPq-@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-cr-puzzleid: {86DF2BFB-7C29-44FF-A4EC-4F92DEEAB141}
+x-cr-hashedpuzzle: AIv+ AR7o AkSc A4HC Bnri B/7j C4mw Ei9l Fani HQdz I4xk
+	JZ2l J35F J7Mu KF0j KWYZ; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {86DF2BFB-7C29-44FF-A4EC-4F92DEEAB141};
+	bQBhAHIAdABpAG4AQAB0AGkALgBjAG8AbQA=; Mon,
+	31 May 2010 22:47:40 GMT;
+	UgBFADoAIABbAG8AZQBdACAARQB4AGEAbQBwAGwAZQBzACAAbwBmACAAcwByAGMAdAByAGUAZQAgAGEAbgBkACAAZwBpAHQAdgBlAHIA
+acceptlanguage: en-US
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.217.136 with HTTP; Mon, 31 May 2010 15:21:58 -0700 (PDT)
-In-Reply-To: <AANLkTilCZJoRhGKzBokT9TuZwbh0mzyzsBQ2J3NsIpwJ@mail.gmail.com>
-References: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com> 
-	<AANLkTilCZJoRhGKzBokT9TuZwbh0mzyzsBQ2J3NsIpwJ@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 31 May 2010 15:21:58 -0700
-X-Google-Sender-Auth: 2Fb-qsv_YuEWASg7zCox23tDlYk
-Message-ID: <AANLkTinUqQ16GPijhEAJof0uwAfrokQroib56xX2IutT@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 198.47.26.152
+X-SA-Exim-Mail-From: martin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: gitver problems
+Subject: Re: Examples of srctree and gitver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,79 +65,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 22:26:34 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 31 May 2010 22:52:06 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, May 31, 2010 at 3:04 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+On Sun, May 30, 2010 at 14:49:32, Chris Larson wrote:
 
-> -vvvv provides a little more info ...
->
->
-> NOTE: Running task 729 of 733 (ID: 8,
-> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb,
-> do_package_stage)
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb
-> do_package_stage failed
-> NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage:
-> Started
-> ERROR: Task 8
-> (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb,
-> do_package_stage) failed with 256
-> ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb'
-> failed
-> ERROR: Function staging_packager failed
-> NOTE: Task failed: ('function staging_packager failed',
->
-> '/scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542')
-> ERROR: Logfile of failure stored in:
->
-> /scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542
-> Log data follows:
-> | *** Error: CONTROL/control is missing field Source
-> | The Source field contain the URL's or filenames of the source code
-> and any patches
-> | used to build this package.  Either gnu-style tarballs or Debian
-> source packages
-> | are acceptable.  Relative filenames may be used if they are
-> distributed in the same
-> | directory as the .ipk file.
-> |
-> | ipkg-build: Please fix the above errors and try again.
-> | ERROR: Function staging_packager failed
-> NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage:
-> Failed
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb
-> do_package_stage failed
-> ERROR: Task 8
-> (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb,
-> do_package_stage) failed with 256
-> ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb'
-> failed
-> ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
-> autotools-demo.bb'
-> failed
->
-> So we need a way to provide Source URL's for packaging ...
+> On Sun, May 30, 2010 at 12:26 PM, Ambrose, Martin <martin@ti.com> wrote:
+> > On Sun, May 30, 2010 at 11:16:16, Chris Larson wrote:
+> > > On Sun, May 30, 2010 at 8:07 AM, Ambrose, Martin <martin@ti.com> wrot=
+e:
 
+...
 
-Last time I looked at that part of the packaging classes and SRC_URI, they
-fell back to ${FILE} if SRC_URI was unset, which while not particularly
-useful, seems a reasonable way to do it.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+> > Ack. I now think of the class as providing a 'skip' to the
+> > fetch+unpack+patch steps but everything afterwards is then vanilla OE.
+>=20
+> Yeah, that's the idea, and is the only reason the class needs to exist --
+> otherwise you could just point S to a local directory in the recipe and n=
+ot
+> need it.  Aside: the way it does so is quite the hack, we need to figure =
+out
+> a better way to manipulate the task graph like this.
+
+Maybe that explains the problem I'm seeing with the dependency graph when u=
+sing srctree.
+Specifically if my recipe has
+	inherit qt4e
+
+Then it doesn't try to run the do_configure before the qt native tools are =
+present.
+This of course being expected/desired. However if I have
+	inherit srctree qt4e
+
+Then it goes straight to the configure phase without ensuring the dependenc=
+ies are present.
+	bitbake blah
+	...
+	/home/user/oe/arago-tmp/staging/i686-linux/usr/bin/qmake2: No such file or=
+ directory
+
+Is this known behavior? Maybe even a workaround exists?
+
+Regards,=20
+Martin
+
 
