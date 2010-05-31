@@ -1,29 +1,28 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OJ3Gv-0001fS-OU
+	(envelope-from <mickey@vanille-media.de>) id 1OJ3aB-0001rL-6e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 May 2010 13:35:11 +0200
-Received: from [123.192.240.117] (123-192-240-117.dynamic.kbronet.com.tw
-	[123.192.240.117])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 9A23B1B10C79
+	Mon, 31 May 2010 13:55:03 +0200
+Received: from [192.168.1.9] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 8F26058462D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 11:40:12 +0000 (UTC)
-Message-ID: <4C039DE8.8000400@freyther.de>
-Date: Mon, 31 May 2010 19:30:48 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
-	Thunderbird/3.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Mon, 31 May 2010 13:58:16 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1078)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <20100531102012.GA12125@excalibur.local>
+Date: Mon, 31 May 2010 13:50:41 +0200
+Message-Id: <C31D3390-9F49-4B05-907E-853A0A9C9A62@vanille-media.de>
 References: <1275299757-28908-1-git-send-email-ospite@studenti.unina.it>
 	<20100531102012.GA12125@excalibur.local>
-In-Reply-To: <20100531102012.GA12125@excalibur.local>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -41,19 +40,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 11:35:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
-
-On 05/31/2010 06:20 PM, Stefan Schmidt wrote:
+X-List-Received-Date: Mon, 31 May 2010 11:55:04 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
 
-> Over time he already did a lot patches for EZX, but was also willing to dig into
-> related problems and work on them until a solution was found. He also showed
-> good reactions on review comments and I think he is ready for write-access now.
+Am 31.05.2010 um 12:20 schrieb Stefan Schmidt:
+
+> Hello.
+>=20
+> On Mon, 2010-05-31 at 11:55, Antonio Ospite wrote:
+>> Hi, here's some motorola-ezx related changes, plus a couple of other =
+fixes I
+>> am using here.
+>> Namely, the non ezx related changes are 01 and 02.
+>>=20
+>> Can anyone review and apply, please?
+>=20
+> I would prefer if you could push it yourself after the review. =
+Therefor I
+> propose write-access for Antonio.
+
++1.
+
+Antonio, please send Cliff and me your SSH key.
+
+:M:
 
 
-+1 for write review, and a little general reminder that review doesn't
-remove the need for review.
 
 
