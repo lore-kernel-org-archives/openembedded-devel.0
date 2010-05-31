@@ -1,34 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OJ34b-0002ep-Dl for openembedded-devel@lists.openembedded.org;
-	Mon, 31 May 2010 13:22:26 +0200
+	id 1OJ36P-0002kx-4F for openembedded-devel@lists.openembedded.org;
+	Mon, 31 May 2010 13:24:17 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OJ30Y-0004mi-Oe for openembedded-devel@lists.openembedded.org;
-	Mon, 31 May 2010 13:18:14 +0200
+	id 1OJ32K-0005ia-89 for openembedded-devel@lists.openembedded.org;
+	Mon, 31 May 2010 13:20:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 13:18:14 +0200
+	Mon, 31 May 2010 13:20:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 13:18:14 +0200
+	Mon, 31 May 2010 13:20:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 31 May 2010 13:18:05 +0200
-Message-ID: <hu05te$c6i$1@dough.gmane.org>
+Date: Mon, 31 May 2010 13:19:30 +0200
+Message-ID: <hu0602$c6i$2@dough.gmane.org>
 References: <1275299757-28908-1-git-send-email-ospite@studenti.unina.it>
-	<1275299757-28908-8-git-send-email-ospite@studenti.unina.it>
+	<1275299757-28908-2-git-send-email-ospite@studenti.unina.it>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <1275299757-28908-8-git-send-email-ospite@studenti.unina.it>
+In-Reply-To: <1275299757-28908-2-git-send-email-ospite@studenti.unina.it>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -38,7 +38,8 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 07/12] motorola-ezx-base.inc: refresh machine definition
+Cc: openezx-devel@lists.gnumonks.org
+Subject: Re: [PATCH 01/12] fso-image.inc: add an even shorter alias, for ls -l
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,7 +53,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 11:22:26 -0000
+X-List-Received-Date: Mon, 31 May 2010 11:24:17 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -60,29 +61,34 @@ Content-Transfer-Encoding: 7bit
 Hash: SHA1
 
 On 31-05-10 11:55, Antonio Ospite wrote:
+> 'l' is a must have along with 'll'.
+> 
+> Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+> ---
+>  recipes/images/fso-image.inc |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/images/fso-image.inc b/recipes/images/fso-image.inc
+> index cc626f3..704d267 100644
+> --- a/recipes/images/fso-image.inc
+> +++ b/recipes/images/fso-image.inc
+> @@ -110,6 +110,7 @@ fso_rootfs_postprocess() {
+>      echo "alias fso='cd /local/pkg/fso'" >>./etc/profile
+>      echo "alias ipkg='opkg'" >>./etc/profile
+>      echo "alias vim=vi" >>./etc/profile
+> +    echo "alias l='ls -l'" >>./etc/profile
+>      echo "alias ll='ls -al'" >>./etc/profile
+>      # nfs
+>      mkdir -p ./local/pkg
 
->  * get rid of udev
-
-> +# We don't want udev, we rely on CONFIG_DEVTMPFS
-> +IMAGE_DEV_MANAGER = ""
-
-I most strongly disapprove of that. That var, as the name implies, is an
-*image* var, not a machine var. With this change you are forcing an
-image policy onto everyone. I have images that need udev, which
-according to you I am not allowed to use on my a780.
-
-If you don't want udev in your image, set IMAGE_DEV_MANAGER = "" in your
-image, not in the machine.
-
-rgards,
-
-Koen
+And what happens if you opkg upgrade base-files? You suddenly lost all
+your tweaks to /etc/profile.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMA5rtMkyGM64RGpERApXlAKCD9mwKSMGztqgE4RSUOJJ/Ot0yKQCfZCPd
-N5aXmhtYgT90BM8kEr9FQ1s=
-=QeKp
+iD8DBQFMA5tCMkyGM64RGpERAvTLAKCoiQEUoCu0JGj/uOrp7iyRxAMj6ACglhn0
+PHnpQdgGf53SuA5JG1DDIiw=
+=ZVr0
 -----END PGP SIGNATURE-----
 
 
