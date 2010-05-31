@@ -1,40 +1,36 @@
-Received: from mail-ww0-f47.google.com ([74.125.82.47])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OJD9g-0003E2-4V
+	(envelope-from <msmith@cbnco.com>) id 1OJDHa-0003Tu-QU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 00:08:20 +0200
-Received: by wwb34 with SMTP id 34so2346334wwb.6
+	Tue, 01 Jun 2010 00:16:32 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 475016DED19
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 15:04:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=+locGczUpixd2kLnctT/dGH1GBVSTijlEw3FhbgNeyM=;
-	b=QxYvskHn6DQ9v8iDYI3y/KkPXW8h+qMu2dumsZ8r6J3PtSb3NSpvN+62ZJy7tVRvsv
-	n0ksNdgy1wiF139Up3A4ArptzTis7BqQ6KPvgT69HtwtfWTdpBTvB/VDu1gyPaikHgJr
-	wVUoBNfrpVcpFGCRa+fn+5ihdjnF66k0+v490=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sKgiQtCCJf2Trvg0UWtXVIsCc923IdwvD8Zl3LiHHoASjuu819t45aMrhjSGbYXgvr
-	HlwvePepMAnRtSSUI5aBO50CQyfPA6IGlc7yUmIN/RZcAT54BwWmJF2BVHCj/TG2NJtj
-	ZU6OV8pQ+4KRkAOtuGRCQOdKuq0vo/wU5OQM8=
-MIME-Version: 1.0
-Received: by 10.227.143.211 with SMTP id w19mr4784964wbu.182.1275343446926; 
-	Mon, 31 May 2010 15:04:06 -0700 (PDT)
-Received: by 10.216.49.206 with HTTP; Mon, 31 May 2010 15:04:06 -0700 (PDT)
-In-Reply-To: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
-References: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
-Date: Mon, 31 May 2010 18:04:06 -0400
-Message-ID: <AANLkTilCZJoRhGKzBokT9TuZwbh0mzyzsBQ2J3NsIpwJ@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Mon, 31 May 2010 18:12:18 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 22784-08 for <openembedded-devel@lists.openembedded.org>; 
+	Mon, 31 May 2010 18:12:18 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 19C8155C876
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 31 May 2010 18:12:18 -0400 (EDT)
+Date: Mon, 31 May 2010 18:12:18 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.47
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+In-Reply-To: <AANLkTinfdaWq9aYzYEoDAWztRypqhzOlgnEl4CQCnwq4@mail.gmail.com>
+Message-ID: <Pine.LNX.4.64.1005311808060.27172@juice.ott.cti.com>
+References: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
+	<AANLkTinfdaWq9aYzYEoDAWztRypqhzOlgnEl4CQCnwq4@mail.gmail.com>
+MIME-Version: 1.0
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: gitver problems
@@ -51,55 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 22:08:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 31 May 2010 22:16:32 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
--vvvv provides a little more info ...
+On Mon, 31 May 2010, Cliff Brake wrote:
 
+> git submodule mechanism is very exciting in that it gives us a
+> standard way to lock down versions of various submodules without
+> reverting to manually specifying hash values in recipes, etc.
 
-NOTE: Running task 729 of 733 (ID: 8,
-/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb,
-do_package_stage)
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
-do_package_stage failed
-NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage: Started
-ERROR: Task 8 (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb,
-do_package_stage) failed with 256
-ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb'
-failed
-ERROR: Function staging_packager failed
-NOTE: Task failed: ('function staging_packager failed',
-'/scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542')
-ERROR: Logfile of failure stored in:
-/scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542
-Log data follows:
-| *** Error: CONTROL/control is missing field Source
-| The Source field contain the URL's or filenames of the source code
-and any patches
-| used to build this package.  Either gnu-style tarballs or Debian
-source packages
-| are acceptable.  Relative filenames may be used if they are
-distributed in the same
-| directory as the .ipk file.
-|
-| ipkg-build: Please fix the above errors and try again.
-| ERROR: Function staging_packager failed
-NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage: Failed
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
-do_package_stage failed
-ERROR: Task 8 (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb,
-do_package_stage) failed with 256
-ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb'
-failed
-ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb'
-failed
+Before I used OpenEmbedded, I had a custom build system with submodules. 
+It was a usability nightmare - there were a lot of cases where the 
+submodule tree was pushed but the parent wasn't committed and pushed, or 
+vice versa, or somebody reverted to a previous rev of a submodule because 
+they didn't "git submodule update" and ran "git commit -a" without 
+checking.
 
-So we need a way to provide Source URL's for packaging ...
+For our srctree/gitver projects we almost always want to track the latest 
+version, so a shell script that runs "git pull" in every directory works 
+much better for us than submodules did.
 
-Cliff
+Mike
 
 
