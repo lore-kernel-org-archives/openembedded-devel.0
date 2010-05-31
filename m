@@ -1,31 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bengardiner@nanometrics.ca>) id 1OJ7IA-00019p-T4
+	(envelope-from <cliff.brake@gmail.com>) id 1OJCLW-0003Bk-Db
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 31 May 2010 17:52:44 +0200
-Received: by vws4 with SMTP id 4so705428vws.6
+	Mon, 31 May 2010 23:16:32 +0200
+Received: by wyf22 with SMTP id 22so188790wyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 08:48:29 -0700 (PDT)
-Received: by 10.220.63.4 with SMTP id z4mr3514432vch.99.1275320909113;
-	Mon, 31 May 2010 08:48:29 -0700 (PDT)
-Received: from localhost.localdomain (mail.nanometrics.ca [206.191.47.130])
-	by mx.google.com with ESMTPS id x6sm25574441vco.23.2010.05.31.08.48.27
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 31 May 2010 08:48:27 -0700 (PDT)
-From: Ben Gardiner <bengardiner@nanometrics.ca>
+	Mon, 31 May 2010 14:12:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=0qSUvw2hz6BCvtq067mqFKONYHta5ISQ9G3eb7nzUYU=;
+	b=wgmX7yP7UJhxlsYx9sM0R7jLxh0f8Q96lsmJwaU1Z9WH/Tz+wWZlKOVXqEgcIq+h3o
+	S/hPe2+UNReaHq8k+jUl83G9s3Yhsb4/UHK+VgzIM3T4FY0c/EjDbFlLLZQmmKwK32zw
+	qni1YCc6khbYUR4MarTNsbHyGCxKNeQoOHecc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=A5MygdFKdQ1vQpJXpCXtqQtTMXyq8TQd24Nt62r2v1VCeoOpsAzoa28kJhk84B+DZQ
+	G4fIBBOS/ZtkEGvS2hBN985dGj197g+SvR5bOF5vGNuqJ1AxdvjSAjK3DbBEvy5GWsPI
+	HcObOP7NcWCGrVWWEo1BpakKBsDXr2nlxdWMY=
+MIME-Version: 1.0
+Received: by 10.216.87.80 with SMTP id x58mr4710340wee.96.1275340337073; Mon, 
+	31 May 2010 14:12:17 -0700 (PDT)
+Received: by 10.216.49.206 with HTTP; Mon, 31 May 2010 14:12:16 -0700 (PDT)
+Date: Mon, 31 May 2010 17:12:16 -0400
+Message-ID: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 31 May 2010 11:48:24 -0400
-Message-Id: <1275320904-28185-1-git-send-email-bengardiner@nanometrics.ca>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: bengardiner@nanometrics.ca
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] latencytop: add version 0.5
+Subject: gitver problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,133 +48,75 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 15:52:44 -0000
+X-List-Received-Date: Mon, 31 May 2010 21:16:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Add a new recipe to for latencytop.
-* patch the makefile to disable GTK support, use the LDFLAGS and use ncurses
-  instead of the 'w' variant.
+Hello,
 
-Signed-off-by: Ben Gardiner <bengardiner@nanometrics.ca>
----
- recipes/latencytop/latencytop/cc-var.patch   |   15 ++++++++++++++
- recipes/latencytop/latencytop/ldflags.patch  |   11 ++++++++++
- recipes/latencytop/latencytop/ncursesw.patch |   27 ++++++++++++++++++++++++++
- recipes/latencytop/latencytop/no-gtk.patch   |    9 ++++++++
- recipes/latencytop/latencytop_0.5.bb         |   13 ++++++++++++
- 5 files changed, 75 insertions(+), 0 deletions(-)
- create mode 100644 recipes/latencytop/latencytop/cc-var.patch
- create mode 100644 recipes/latencytop/latencytop/ldflags.patch
- create mode 100644 recipes/latencytop/latencytop/ncursesw.patch
- create mode 100644 recipes/latencytop/latencytop/no-gtk.patch
- create mode 100644 recipes/latencytop/latencytop_0.5.bb
+I'm trying to put together some examples of using srctree/gitver, and
+running into a few issues.
 
-diff --git a/recipes/latencytop/latencytop/cc-var.patch b/recipes/latencytop/latencytop/cc-var.patch
-new file mode 100644
-index 0000000..70b9ebb
---- /dev/null
-+++ b/recipes/latencytop/latencytop/cc-var.patch
-@@ -0,0 +1,15 @@
-+--- latencytop-0.5/Makefile.orig	2010-05-27 16:45:23.051146454 -0400
-++++ latencytop-0.5/Makefile	2010-05-27 16:49:14.660573483 -0400
-+@@ -23,10 +23,10 @@ endif
-+ 
-+ # We write explicity this "implicit rule"
-+ %.o : %.c
-+-	gcc -c $(CFLAGS) $(XCFLAGS) $< -o $@
-++	$(CC) -c $(CFLAGS) $(XCFLAGS) $< -o $@
-+ 
-+ latencytop:  $(OBJS) latencytop.h Makefile
-+-	gcc $(CFLAGS) $(OBJS) $(LDF) -o latencytop 
-++	$(CC) $(CFLAGS) $(OBJS) $(LDF) -o latencytop 
-+ 
-+ clean:
-+ 	rm -f *~ latencytop DEADJOE *.o
-diff --git a/recipes/latencytop/latencytop/ldflags.patch b/recipes/latencytop/latencytop/ldflags.patch
-new file mode 100644
-index 0000000..526c9c7
---- /dev/null
-+++ b/recipes/latencytop/latencytop/ldflags.patch
-@@ -0,0 +1,11 @@
-+--- latencytop-0.5/Makefile.orig	2010-05-31 11:05:50.750592910 -0400
-++++ latencytop-0.5/Makefile	2010-05-31 11:06:03.030795137 -0400
-+@@ -26,7 +26,7 @@ endif
-+ 	$(CC) -c $(CFLAGS) $(XCFLAGS) $< -o $@
-+ 
-+ latencytop:  $(OBJS) latencytop.h Makefile
-+-	$(CC) $(CFLAGS) $(OBJS) $(LDF) -o latencytop 
-++	$(CC) $(CFLAGS) $(LDFLAGS) $(OBJS) $(LDF) -o latencytop 
-+ 
-+ clean:
-+ 	rm -f *~ latencytop DEADJOE *.o
-diff --git a/recipes/latencytop/latencytop/ncursesw.patch b/recipes/latencytop/latencytop/ncursesw.patch
-new file mode 100644
-index 0000000..2aa3944
---- /dev/null
-+++ b/recipes/latencytop/latencytop/ncursesw.patch
-@@ -0,0 +1,27 @@
-+--- latencytop-0.5/Makefile.orig	2010-05-31 11:11:51.632940308 -0400
-++++ latencytop-0.5/Makefile	2010-05-31 11:12:48.201571738 -0400
-+@@ -1,7 +1,7 @@
-+ DESTDIR =
-+ SBINDIR = /usr/sbin
-+ XCFLAGS = -W  -g `pkg-config --cflags glib-2.0` -D_FORTIFY_SOURCE=2 -Wno-sign-compare
-+-LDF = -Wl,--as-needed `pkg-config --libs glib-2.0`   -lncursesw 
-++LDF = -Wl,--as-needed `pkg-config --libs glib-2.0`   -lncurses
-+ 
-+ OBJS= latencytop.o text_display.o translate.o fsync.o
-+ 
-+@@ -12,14 +12,7 @@ ifdef HAS_GTK_GUI
-+ endif
-+ 
-+ 
-+-#
-+-# The w in -lncursesw is not a typo; it is the wide-character version
-+-# of the ncurses library, needed for multi-byte character languages
-+-# such as Japanese and Chinese etc.
-+-#
-+-# On Debian/Ubuntu distros, this can be found in the
-+-# libncursesw5-dev package. 
-+-#
-++# we use ncurses instead of ncursesw in embedded environments -- similar to powertop
-+ 
-+ # We write explicity this "implicit rule"
-+ %.o : %.c
-diff --git a/recipes/latencytop/latencytop/no-gtk.patch b/recipes/latencytop/latencytop/no-gtk.patch
-new file mode 100644
-index 0000000..b3500b4
---- /dev/null
-+++ b/recipes/latencytop/latencytop/no-gtk.patch
-@@ -0,0 +1,9 @@
-+--- latencytop-0.5/Makefile.orig	2010-05-27 16:36:41.510515029 -0400
-++++ latencytop-0.5/Makefile	2010-05-27 16:37:03.442467568 -0400
-+@@ -1,6 +1,3 @@
-+-# FIXME: Use autoconf ?
-+-HAS_GTK_GUI = 1
-+-
-+ DESTDIR =
-+ SBINDIR = /usr/sbin
-+ XCFLAGS = -W  -g `pkg-config --cflags glib-2.0` -D_FORTIFY_SOURCE=2 -Wno-sign-compare
-diff --git a/recipes/latencytop/latencytop_0.5.bb b/recipes/latencytop/latencytop_0.5.bb
-new file mode 100644
-index 0000000..032c3f3
---- /dev/null
-+++ b/recipes/latencytop/latencytop_0.5.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "measuring and fixing Linux latency"
-+HOMEPAGE = "http://www.latencytop.org/index.php"
-+LICENSE = "GPL"
-+
-+DEPENDS = "glib-2.0 ncurses"
-+
-+SRC_URI = "\
-+  http://www.latencytop.org/download/latencytop-${PV}.tar.gz\
-+  file://no-gtk.patch;patch=1\
-+  file://cc-var.patch;patch=1\
-+  file://ldflags.patch;patch=1\
-+  file://ncursesw.patch;patch=1\
-+"
--- 
-1.7.0.4
+My example is in a bitbake overlay:
 
+git://git.bec-systems.com/openembedded.custom
+http://cgit.bec-systems.com/cgit.cgi/openembedded.custom/
+
+This overlay includes a submodule for:
+
+git://git.bec-systems.com/openembedded.custom
+http://cgit.bec-systems.com/cgit.cgi/autotools-demo/
+
+and a recipe to build the above submodule:
+
+http://cgit.bec-systems.com/cgit.cgi/openembedded.custom/tree/recipes/autotools-demo/autotools-demo.bb
+
+===================
+# recipe to build the ics-test-app in the working tree
+
+inherit srctree gitver autotools
+
+PV = "${GITVER}"
+S = "${OEDIR}/openembedded.custom/work/autotools-demo"
+==================
+
+
+When I try 'bitbake autotools-demo', I get the following:
+
+cbrake@happy:/scratch/oe/oe-build/oe$ bitbake autotools-demo
+NOTE: Handling BitBake files: / (4602/8385) [54 %]ERROR: 'NoneType'
+object has no attribute 'startswith' while parsing
+/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
+NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
+attribute 'startswith' while evaluating:
+${@get_git_pv('/scratch/oe/oe-build/oe/openembedded.custom/work/autotools-demo',
+d)}
+NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
+attribute 'startswith' while evaluating:
+${GITVER}
+NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
+attribute 'startswith' while evaluating:
+${PN}-${EXTENDPE}${PV}-${PR}
+NOTE: <type 'exceptions.AttributeError'>:'NoneType' object has no
+attribute 'startswith' while evaluating:
+${FILE_DIRNAME}/${PF}/${MACHINE}
+ERROR: 'NoneType' object has no attribute 'startswith' while parsing
+/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/autotools-demo.bb
+NOTE: Handling BitBake files: \ (8384/8385) [99 %]Command execution
+failed: Traceback (most recent call last):
+  File "/scratch/oe/oe-build/oe/bitbake/lib/bb/command.py", line 85,
+in runAsyncCommand
+    self.cooker.updateCache()
+  File "/scratch/oe/oe-build/oe/bitbake/lib/bb/cooker.py", line 802,
+in updateCache
+    if not self.parser.parse_next():
+  File "/scratch/oe/oe-build/oe/bitbake/lib/bb/cooker.py", line 995,
+in parse_next
+    raise ParsingErrorsFound
+ParsingErrorsFound
+
+Any suggestions as to what might be going wrong with gitver?
+
+Thanks,
+Cliff
 
 
