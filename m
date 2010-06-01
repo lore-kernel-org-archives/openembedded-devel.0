@@ -1,57 +1,45 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1OJDq0-0007VM-D6
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 00:52:06 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o4VMlqec019042
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJLIG-0000mD-9N for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Jun 2010 08:49:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJLE0-0002dp-9Z for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Jun 2010 08:45:20 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Jun 2010 08:45:20 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 17:47:52 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o4VMlpcw009776
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 17:47:51 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o4VMlpDA011106
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 31 May 2010 17:47:51 -0500 (CDT)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Mon, 31 May 2010 17:47:51 -0500
-From: "Ambrose, Martin" <martin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 31 May 2010 17:47:39 -0500
-Thread-Topic: [oe] Examples of srctree and gitver
-Thread-Index: AcsAMXJFPAPnj3S+RP+AeADqGdA5eQA3XPjQ
-Message-ID: <A24693684029E5489D1D202277BE894455A0F458@dlee02.ent.ti.com>
-References: <A24693684029E5489D1D202277BE89445316FB3A@dlee02.ent.ti.com>
-	<AANLkTinePogltaKgN7CaqFVzw4PpDXSkE-f7H18PINOB@mail.gmail.com>
-	<A24693684029E5489D1D202277BE894455A0F300@dlee02.ent.ti.com>
-	<AANLkTinA1ZTsklvgjWbc87f9a5CgSXpbCth47yVKiPq-@mail.gmail.com>
-In-Reply-To: <AANLkTinA1ZTsklvgjWbc87f9a5CgSXpbCth47yVKiPq-@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-puzzleid: {86DF2BFB-7C29-44FF-A4EC-4F92DEEAB141}
-x-cr-hashedpuzzle: AIv+ AR7o AkSc A4HC Bnri B/7j C4mw Ei9l Fani HQdz I4xk
-	JZ2l J35F J7Mu KF0j KWYZ; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {86DF2BFB-7C29-44FF-A4EC-4F92DEEAB141};
-	bQBhAHIAdABpAG4AQAB0AGkALgBjAG8AbQA=; Mon,
-	31 May 2010 22:47:40 GMT;
-	UgBFADoAIABbAG8AZQBdACAARQB4AGEAbQBwAGwAZQBzACAAbwBmACAAcwByAGMAdAByAGUAZQAgAGEAbgBkACAAZwBpAHQAdgBlAHIA
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: martin@ti.com
+	Tue, 01 Jun 2010 08:45:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 01 Jun 2010 08:45:11 +0200
+Message-ID: <hu2a9n$bb5$1@dough.gmane.org>
+References: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
+	<AANLkTilCZJoRhGKzBokT9TuZwbh0mzyzsBQ2J3NsIpwJ@mail.gmail.com>
+	<AANLkTinUqQ16GPijhEAJof0uwAfrokQroib56xX2IutT@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <AANLkTinUqQ16GPijhEAJof0uwAfrokQroib56xX2IutT@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Examples of srctree and gitver
+Subject: Re: gitver problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -65,50 +53,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 31 May 2010 22:52:06 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="Windows-1252"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 01 Jun 2010 06:49:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sun, May 30, 2010 at 14:49:32, Chris Larson wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> On Sun, May 30, 2010 at 12:26 PM, Ambrose, Martin <martin@ti.com> wrote:
-> > On Sun, May 30, 2010 at 11:16:16, Chris Larson wrote:
-> > > On Sun, May 30, 2010 at 8:07 AM, Ambrose, Martin <martin@ti.com> wrot=
-e:
+On 01-06-10 00:21, Chris Larson wrote:
+> On Mon, May 31, 2010 at 3:04 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> 
+>> -vvvv provides a little more info ...
+>>
+>>
+>> NOTE: Running task 729 of 733 (ID: 8,
+>> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb,
+>> do_package_stage)
+>> ERROR: TaskFailed event exception, aborting
+>> ERROR: Build of
+>> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb
+>> do_package_stage failed
+>> NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage:
+>> Started
+>> ERROR: Task 8
+>> (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb,
+>> do_package_stage) failed with 256
+>> ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb'
+>> failed
+>> ERROR: Function staging_packager failed
+>> NOTE: Task failed: ('function staging_packager failed',
+>>
+>> '/scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542')
+>> ERROR: Logfile of failure stored in:
+>>
+>> /scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-2-ga58ca94-r0/temp/log.staging_packager.26542
+>> Log data follows:
+>> | *** Error: CONTROL/control is missing field Source
+>> | The Source field contain the URL's or filenames of the source code
+>> and any patches
+>> | used to build this package.  Either gnu-style tarballs or Debian
+>> source packages
+>> | are acceptable.  Relative filenames may be used if they are
+>> distributed in the same
+>> | directory as the .ipk file.
+>> |
+>> | ipkg-build: Please fix the above errors and try again.
+>> | ERROR: Function staging_packager failed
+>> NOTE: package autotools-demo-1.0-2-ga58ca94-r0: task do_package_stage:
+>> Failed
+>> ERROR: TaskFailed event exception, aborting
+>> ERROR: Build of
+>> /scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb
+>> do_package_stage failed
+>> ERROR: Task 8
+>> (/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb,
+>> do_package_stage) failed with 256
+>> ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb'
+>> failed
+>> ERROR: '/scratch/oe/oe-build/oe/openembedded.custom/recipes/autotools-demo/
+>> autotools-demo.bb'
+>> failed
+>>
+>> So we need a way to provide Source URL's for packaging ...
+> 
+> 
+> Last time I looked at that part of the packaging classes and SRC_URI, they
+> fell back to ${FILE} if SRC_URI was unset, which while not particularly
+> useful, seems a reasonable way to do it.
 
-...
+If it's unset yet, not if it's empty. Doing SRC_URI = "" will trigger
+such bugs.
 
-> > Ack. I now think of the class as providing a 'skip' to the
-> > fetch+unpack+patch steps but everything afterwards is then vanilla OE.
->=20
-> Yeah, that's the idea, and is the only reason the class needs to exist --
-> otherwise you could just point S to a local directory in the recipe and n=
-ot
-> need it.  Aside: the way it does so is quite the hack, we need to figure =
-out
-> a better way to manipulate the task graph like this.
+regards,
 
-Maybe that explains the problem I'm seeing with the dependency graph when u=
-sing srctree.
-Specifically if my recipe has
-	inherit qt4e
+Koen
 
-Then it doesn't try to run the do_configure before the qt native tools are =
-present.
-This of course being expected/desired. However if I have
-	inherit srctree qt4e
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Then it goes straight to the configure phase without ensuring the dependenc=
-ies are present.
-	bitbake blah
-	...
-	/home/user/oe/arago-tmp/staging/i686-linux/usr/bin/qmake2: No such file or=
- directory
+iD8DBQFMBKx3MkyGM64RGpERAjWLAKCsM0RCKkRWy1ONqsbaKrqqRFgbqgCcCDt8
+OXAWpfhG1YeKsi7S5fyQwtg=
+=2zoW
+-----END PGP SIGNATURE-----
 
-Is this known behavior? Maybe even a workaround exists?
-
-Regards,=20
-Martin
 
 
