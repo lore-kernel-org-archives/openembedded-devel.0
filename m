@@ -1,31 +1,39 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OJQFg-0006Uo-4U
+	(envelope-from <dp@xora.org.uk>) id 1OJQMB-0007hr-GB
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 14:07:26 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 48E2316606A1; Tue,  1 Jun 2010 06:03:10 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id D27251660615;
-	Tue,  1 Jun 2010 06:03:09 -0600 (MDT)
-Message-ID: <4C04F6FD.4070804@mlbassoc.com>
-Date: Tue, 01 Jun 2010 06:03:09 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+	Tue, 01 Jun 2010 14:14:29 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 7A6D7A4FBA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Jun 2010 13:09:49 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id AgL2nzlFKqIi
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Jun 2010 13:09:47 +0100 (BST)
+Received: from localhost (188-220-38-49.zone11.bethere.co.uk [188.220.38.49])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 59A5AA4DD0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  1 Jun 2010 13:09:46 +0100 (BST)
+Date: Tue, 1 Jun 2010 13:09:39 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100601130939.3ea2ba5d@xora.org.uk>
+In-Reply-To: <4C04F6FD.4070804@mlbassoc.com>
+References: <4C04F6FD.4070804@mlbassoc.com>
+X-Mailer: Claws Mail 3.7.5 (GTK+ 2.18.9; i686-redhat-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Is Angstrom dead?
+Subject: Re: Is Angstrom dead?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,51 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 12:07:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 01 Jun 2010 12:14:30 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-It sure feels like it :-(
+On Tue, 01 Jun 2010 06:03:09 -0600
+Gary Thomas <gary@mlbassoc.com> wrote:
 
-For a week, I've been trying to build various images in Angstrom
-and the problems I've faced have gone totally unanswered on either
-the Angstrom or OE mailing lists.  I'm not the only one facing
-these problems either.
+> It sure feels like it :-(
+> 
+No, we are certainly alive, but as we seem to have decreased to only 2
+or 3 people who actively say they are developing Angstrom it can seem a
+bit quiet at times.
 
-I'm mostly interested in building beagleboard-linuxtag2010-demo-image
-which [at least] implies it should be a great demo to show at
-LinuxTag (which starts in only a few days now).  Surely a show
-piece would be something that a popular project would want to
-support and be available to the masses??
-
-I tried again today, updating to org.openembedded.dev branch,
-commit a2834c64fb3ed535fca51c25547754fa907e4ca5  Sadly, new
-problems (and probably still the old ones) remain:
-
-| checking for CHEESE... configure: error: Package requirements (  glib-2.0 >= 2.16.0   gobject-2.0 >= 2.12.0   gio-2.0 >= 2.16.0   gtk+-2.0 >= 2.19.1   gdk-2.0 >= 2.14.0 
-gnome-desktop-2.0 >= 2.26.0   gconf-2.0 >= 2.16.0   gstreamer-0.10 >= 0.10.23   gstreamer-plugins-base-0.10 >= 0.10.23   cairo >= 1.4.0   dbus-1 >= 1.0   dbus-glib-1 >= 0.7 
-pangocairo >= 1.18.0   librsvg-2.0 >= 2.18.0
-|   libcanberra-gtk gudev-1.0) were not met:
-|
-| No package 'gstreamer-plugins-base-0.10' found
-|
-| Consider adjusting the PKG_CONFIG_PATH environment variable if you
-| installed software in a non-standard prefix.
-|
-| Alternatively, you may set the environment variables CHEESE_CFLAGS
-| and CHEESE_LIBS to avoid the need to call pkg-config.
-| See the pkg-config man page for more details.
-|
-NOTE: package cheese-2.30.1-r0: task do_configure: Failed
-
-Nothing special - out of the box config file with
-   MACHINE="beagleboard"
-   DISTRO="angstrom-2008.1"
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Graeme
 
 
