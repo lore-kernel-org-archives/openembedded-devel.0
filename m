@@ -1,32 +1,41 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1OJUVA-0001ug-9r
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1OJV0U-0001mN-OO
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 18:39:49 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
-	(envelope-from <florian.boor@kernelconcepts.de>)
-	id 1OJUR2-0005PA-29; Tue, 01 Jun 2010 18:35:24 +0200
-Message-ID: <4C0536CE.3080702@kernelconcepts.de>
-Date: Tue, 01 Jun 2010 18:35:26 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 01 Jun 2010 19:12:03 +0200
+Received: by wyf22 with SMTP id 22so833002wyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 01 Jun 2010 10:07:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=U8GidOa7VhUQbtqgo8xzguYoY+/M43JLQV5pd3cjmA4=;
+	b=V9nsjLu03xC6eno507StXizNFqQe2OaiRRx0YUapLNdRxLdkqayI9h9ynabVIM+r9T
+	BPNX2Q1N44gqJ0/jFY38fiMGkK2PxnSIQ4ATbCG4t+v4+eURKPrGo1zUezTbQziSW4QG
+	1GTFSdqs8+Ij2/gQa6hDCR6Z8WjgLNrMaQPbI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=EgS8QljfsxLnfvVFK3Ncf7GsCsNhKFgnNF5i9gXhCa5GuaY3AiRr9nvbsoRu2U2EmJ
+	i7qYUU+r1dQOdVuz4o59+DjFidtLxvu4TYekx9DEbCdJ2qwinxIdmCczcEoy6FmQARrV
+	UEhclLhNPB6q8NOgrwXiEltKwbwIrRhltUaxw=
 MIME-Version: 1.0
+Received: by 10.216.90.8 with SMTP id d8mr5625645wef.52.1275412068326; Tue, 01 
+	Jun 2010 10:07:48 -0700 (PDT)
+Received: by 10.216.154.13 with HTTP; Tue, 1 Jun 2010 10:07:47 -0700 (PDT)
+Date: Tue, 1 Jun 2010 13:07:47 -0400
+Message-ID: <AANLkTinRTX7FdWmz7NLEF1W6wI5DeCL30C68WgT1BiNT@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4BE04A63.9010002@kernelconcepts.de>	<4BF68B97.4090701@kernelconcepts.de>
-	<1274997131.28526.18.camel@mattotaupa>
-In-Reply-To: <1274997131.28526.18.camel@mattotaupa>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: george.huntingtoniii@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: paulepanter@users.sourceforge.net
-Subject: Re: Linuxtag 2010
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: what is the "right" way to add a recipe for building some out of tree kernel modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,34 +49,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 16:39:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Jun 2010 17:12:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Paul,
+I have some custom kernel modules, and i want to make a recipe for building
+them and having a package to include in my custom image.
+what is the "right" way to make my recipe and my Makefile/Kbuild file?
 
-sorry for the late response, I've been travelling and I'm slowly catching up.
-
-Paul Menzel schrieb:
-> I could definitely help out on Saturday. Maybe on Thursday late
-> afternoon.
-
-very nice - this would be great! I will make sure you get a ticket too.
-
-> I only have a BeagleBoard C3.
-
-I will have one of these with me I think but if you have something nice to show
-bring it with you!
-
-Greetings
-
-Florian
-
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
-
+-thanks,
+gchiii
 
