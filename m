@@ -1,41 +1,33 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from [83.223.64.65] (helo=eric-weiss.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OJWSo-0002Vv-U0
+	(envelope-from <eric@eric-weiss.de>) id 1OJX0z-0001TZ-Vy
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 20:45:24 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OJWOh-0002BE-W1 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 11:41:08 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 1 Jun 2010 11:41:07 -0700
-Received: from [172.30.80.90] ([172.30.80.90]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 1 Jun 2010 12:41:04 -0600
-Message-ID: <4C05543E.7010600@mentor.com>
-Date: Tue, 01 Jun 2010 11:41:02 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 01 Jun 2010 21:20:46 +0200
+Received: by eric-weiss.de (Postfix, from userid 1022)
+	id 151A157857; Tue,  1 Jun 2010 21:16:29 +0200 (CEST)
+Received: from [10.128.0.1] (0132900044.0.fullrate.dk [90.185.120.221])
+	by eric-weiss.de (Postfix) with ESMTP id A004F5784E;
+	Tue,  1 Jun 2010 21:16:27 +0200 (CEST)
+Message-ID: <4C055C8B.6090403@eric-weiss.de>
+Date: Tue, 01 Jun 2010 21:16:27 +0200
+From: eric weiss <eric@eric-weiss.de>
+User-Agent: Mozilla-Thunderbird 2.0.0.22 (X11/20090701)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1265832780-19939-7-git-send-email-rep.dot.nop@gmail.com>	<1265832780-19939-8-git-send-email-rep.dot.nop@gmail.com>	<1265832780-19939-9-git-send-email-rep.dot.nop@gmail.com>	<1265892781.3777.1050.camel@mill.internal.reciva.com>	<20100213125146.GJ10632@mx.loc>
-	<20100213161449.GD30265@mx.loc>	<1267058975.18176.527.camel@trini-m4400>	<1267094388.4243.1.camel@rex>	<1267118467.18176.533.camel@trini-m4400>	<1267128981.4243.88.camel@rex>
-	<20100528083734.GA20685@mx.loc>
-In-Reply-To: <20100528083734.GA20685@mx.loc>
-X-OriginalArrivalTime: 01 Jun 2010 18:41:04.0453 (UTC)
-	FILETIME=[FD8B3F50:01CB01B9]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <4BE04A63.9010002@kernelconcepts.de>	<4BF68B97.4090701@kernelconcepts.de>	<1274997131.28526.18.camel@mattotaupa>
+	<4C0536CE.3080702@kernelconcepts.de>
+In-Reply-To: <4C0536CE.3080702@kernelconcepts.de>
+X-SA-Exim-Connect-IP: 83.223.64.65
+X-SA-Exim-Mail-From: eric@eric-weiss.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: BBCLASSEXTEND canadian?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: paulepanter@users.sourceforge.net
+Subject: Re: Linuxtag 2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,47 +41,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 18:45:24 -0000
+X-List-Received-Date: Tue, 01 Jun 2010 19:20:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Bernhard Reutner-Fischer wrote:
-> On Thu, Feb 25, 2010 at 08:16:21PM +0000, Richard Purdie wrote:
->> On Thu, 2010-02-25 at 10:21 -0700, Tom Rini wrote:
->>>> BBCLASSEXTEND covers -native and -nativesdk
->>> Is the -nativesdk part implicit in the anonfuncs in nativesdk.bbclass or
->>> just not merged yet?
->> It should be implicit in the anonfuncs. If that class differs to Poky,
->> the Poky changes should be merged though.
->>
->>>> The -cross, -crosssdk, -canadian-cross and other combinations usually
->>>> have too many differences to be worth the effort although it would be
->>>> possible to make them work.
->>> I'm not so sure about that, but we'll see.  I should have some form of
->>> canadian stuff working again shortly.
->> You're unsure it would be possible to make them work of that its not
->> worth the effort?
-> 
-> Tom?
-> 
-> Yesterday evening i was building a pristine master reference again and
-> saw that mpfr et al are (still) pretty outdated.
-> AFAIR i cannot mix BBCLASSEXTEND vs. old-fashioned recipes for one
-> package (didn't try if that's still true) so i'm, again, running into
-> the issue of what to do with older toolchains needing that canadian
-> stuff. I'm not too jazzed about the idea to touch the old toolchains
-> just because i want to have current gmp/mpc/mpfr/gcc (using CLASSEXTEND
-> nativesdk). So, how to proceed?
+Florian Boor wrote:
+> Hi Paul,
+>
+> sorry for the late response, I've been travelling and I'm slowly catching up.
+>
+> Paul Menzel schrieb:
+>   
+>> I could definitely help out on Saturday. Maybe on Thursday late
+>> afternoon.
+>>     
+>
+> very nice - this would be great! I will make sure you get a ticket too.
+>
+>   
+>> I only have a BeagleBoard C3.
+>>     
+>
+> I will have one of these with me I think but if you have something nice to show
+> bring it with you!
+>
+> Greetings
+>
+> Florian
+>
+>   
+Hi all
+i am not 100%  sure about visiting Berlin and participate on linuxtag2010.
 
-So, where things stand right now (and have stood for a while) is that 
-the existing canadian recipes simply don't work.  We've made them work 
-internally, and then moved them up to using nativesdk/etc.  That's also 
-been finished and the engineer in question is now working on making it 
-work in OE.dev.  But for now, don't let the existing canadian stuff 
-(which is broken) get in the way of fixing up other stuff.
+but i can provide  sharp c3000/1000 and Z1-netwalker running  some OE 
+build  distros
+.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+
+hilsen
+
+pwgen
+
+
 
 
