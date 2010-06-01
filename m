@@ -1,38 +1,34 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OJQpB-0006rj-Go
+	(envelope-from <gary@mlbassoc.com>) id 1OJQpF-0006ro-Db
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 14:44:12 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OJQl7-0004KZ-MZ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 13:39:53 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OJQl7-00037m-Eb
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 13:39:53 +0100
-From: Phil Blundell <philb@gnu.org>
+	Tue, 01 Jun 2010 14:44:35 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 9B5B81660789; Tue,  1 Jun 2010 06:39:56 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 36A6116604EC;
+	Tue,  1 Jun 2010 06:39:56 -0600 (MDT)
+Message-ID: <4C04FF9C.3070407@mlbassoc.com>
+Date: Tue, 01 Jun 2010 06:39:56 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100601123346.GC5446@jama>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CF7C@KCINPUNHJCMS01.kpit.com>
-	<76E258664B189C4CBEF125491CA11ECC9445E0CF7D@KCINPUNHJCMS01.kpit.com>
-	<20100601123346.GC5446@jama>
-Date: Tue, 01 Jun 2010 13:39:52 +0100
-Message-ID: <1275395992.6382.176.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+References: <4C04F6FD.4070804@mlbassoc.com>
+	<alpine.DEB.2.00.1006010835260.8891@lynx>
+In-Reply-To: <alpine.DEB.2.00.1006010835260.8891@lynx>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: glibc_2.9.bb do_package failed
+Cc: Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+Subject: Re: Is Angstrom dead?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,35 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 12:44:36 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 01 Jun 2010 12:45:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-06-01 at 14:33 +0200, Martin Jansa wrote:
-> On Tue, Jun 01, 2010 at 05:35:03PM +0530, Soumya R wrote:
-> > qemu-arm: relocation error: qemu-arm: symbol fcntl, version GLIBC_2.0 not defined in file libpthread.so.0 with link time reference
-> > NOTE: Task failed: localedef returned an error (command was PATH="/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/likewise-open/KPIT/soumyar/oe/build/tmp/cross/armv5te//bin:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/sbin:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/bin:/likewise-open/KPIT/soumyar/oe/bitbake/bin:/likewise-open/KPIT/soumyar/oe/bitbake/bin:/likewise-open/KPIT/soumyar/oe/bitbake/bin:/home/likewise-open/KPIT/soumyar/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games" I18NPATH="/home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree/
-> >  usr/share/i18n" qemu-arm -s 1048576 -r 2.6.24 -L /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree -E LD_LIBRARY_PATH=/home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree/lib  /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree/bin/localedef --force --old-style --no-archive --prefix=/home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree --inputfile=/usr/share/i18n/locales/es_NI --charmap=UTF-8 es_NI).
+On 06/01/2010 06:36 AM, Robert P. J. Day wrote:
+> On Tue, 1 Jun 2010, Gary Thomas wrote:
 >
-> Are you using latest qemu-native from OE? Otherwise you still need 0 in mmap_min_addr.
-> 
-> Try to run that command by hand in console to see if it's the same issue.
+>> It sure feels like it :-(
+>>
+>> For a week, I've been trying to build various images in Angstrom and
+>> the problems I've faced have gone totally unanswered on either the
+>> Angstrom or OE mailing lists.  I'm not the only one facing these
+>> problems either.
+>>
+>> I'm mostly interested in building
+>> beagleboard-linuxtag2010-demo-image which [at least] implies it
+>> should be a great demo to show at LinuxTag (which starts in only a
+>> few days now).  Surely a show piece would be something that a
+>> popular project would want to support and be available to the
+>> masses??
+>
+>    just for fun, i've updated my oe dev branch and started a build of
+> that same target.  we'll see if i get the same result.  and, again,
+> what distro are you using?  that's important to know.
 
-This doesn't look like an mmap_min_addr kind of problem.  It seems like
-there is some mismatch between the version of libpthread that qemu was
-compiled against and the one that it is running against.  The only
-obvious cause that springs to mind would be if you were sharing the
-build tree between multiple hosts, and the host where qemu was compiled
-is not the same as the one where it's trying to run.
+Fedora
 
-> Strange, there is plenty of discussion and possible solutions discussed
-> here in this ML...
-
-I'm not sure that this particular issue has come up here before, or at
-least not frequently.
-
-p.
-
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
