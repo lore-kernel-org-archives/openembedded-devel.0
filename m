@@ -1,32 +1,44 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OJTLl-00063V-JM
+	(envelope-from <rpjday@crashcourse.ca>) id 1OJTXu-0006Lg-BT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 17:25:55 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id A48EE166070C; Tue,  1 Jun 2010 09:21:40 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 2DDD01660615;
-	Tue,  1 Jun 2010 09:21:40 -0600 (MDT)
-Message-ID: <4C052584.2040905@mlbassoc.com>
-Date: Tue, 01 Jun 2010 09:21:40 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
+	Tue, 01 Jun 2010 17:38:29 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OJTTo-0004DN-9k; Tue, 01 Jun 2010 11:34:12 -0400
+Date: Tue, 1 Jun 2010 11:34:00 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+In-Reply-To: <20100601144602.GE5446@jama>
+Message-ID: <alpine.DEB.2.00.1006011129500.17707@lynx>
+References: <4C04F6FD.4070804@mlbassoc.com>
+	<alpine.DEB.2.00.1006011021440.32142@lynx>
+	<20100601144602.GE5446@jama>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C04F6FD.4070804@mlbassoc.com>	<alpine.DEB.2.00.1006011021440.32142@lynx>
-	<201006011647.23770.ml@vdm-design.de>
-In-Reply-To: <201006011647.23770.ml@vdm-design.de>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Is Angstrom dead?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [Angstrom-devel] Is Angstrom dead?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,55 +52,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 15:25:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 01 Jun 2010 15:38:29 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 06/01/2010 08:47 AM, Thomas Zimmermann wrote:
-> Am Dienstag 01 Juni 2010, 16:24:33 schrieb Robert P. J. Day:
->> On Tue, 1 Jun 2010, Gary Thomas wrote:
->>> |   libcanberra-gtk gudev-1.0) were not met:
->>> | No package 'gstreamer-plugins-base-0.10' found
->>> |
->>> | Consider adjusting the PKG_CONFIG_PATH environment variable if you
->>> | installed software in a non-standard prefix.
->>> |
->>> | Alternatively, you may set the environment variables CHEESE_CFLAGS
->>> | and CHEESE_LIBS to avoid the need to call pkg-config.
->>> | See the pkg-config man page for more details.
->>>
->>> NOTE: package cheese-2.30.1-r0: task do_configure: Failed
->>
->>    now i'm slightly confused since neither ubuntu or fedora appear to
->> have any pkgconfig info for the cheese package, so why would there be
->> a test for it that you would need to override?  or is this not
->> pkgconfig-related?
+On Tue, 1 Jun 2010, Martin Jansa wrote:
+
+> On Tue, Jun 01, 2010 at 10:24:33AM -0400, Robert P. J. Day wrote:
+> > On Tue, 1 Jun 2010, Gary Thomas wrote:
+> >
+> > > I tried again today, updating to org.openembedded.dev branch,
+> > > commit a2834c64fb3ed535fca51c25547754fa907e4ca5  Sadly, new
+> > > problems (and probably still the old ones) remain:
+> > >
+> > > | checking for CHEESE... configure: error: Package requirements (  glib-2.0 >=
+> > > 2.16.0   gobject-2.0 >= 2.12.0   gio-2.0 >= 2.16.0   gtk+-2.0 >= 2.19.1
+> > > gdk-2.0 >= 2.14.0 gnome-desktop-2.0 >= 2.26.0   gconf-2.0 >= 2.16.0
+> > > gstreamer-0.10 >= 0.10.23   gstreamer-plugins-base-0.10 >= 0.10.23   cairo >=
+> > > 1.4.0   dbus-1 >= 1.0   dbus-glib-1 >= 0.7 pangocairo >= 1.18.0   librsvg-2.0
+> > > >= 2.18.0
+> > > |   libcanberra-gtk gudev-1.0) were not met:
+> > > |
+> > > | No package 'gstreamer-plugins-base-0.10' found
+> > > |
+> > > | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+> > > | installed software in a non-standard prefix.
+> > > |
+> > > | Alternatively, you may set the environment variables CHEESE_CFLAGS
+> > > | and CHEESE_LIBS to avoid the need to call pkg-config.
+> > > | See the pkg-config man page for more details.
+> > > |
+> > > NOTE: package cheese-2.30.1-r0: task do_configure: Failed
+> >
+> >   now i'm slightly confused since neither ubuntu or fedora appear to
+> > have any pkgconfig info for the cheese package, so why would there be
+> > a test for it that you would need to override?  or is this not
+> > pkgconfig-related?
 >
-> It should never depend on the pkconfig files installed on your buildhost. Are
-> you sure that the gstreamer package is build?
+> It says:
+> > > | No package 'gstreamer-plugins-base-0.10' found
+>
+> was gstreamer-plugins-base built before building cheese? It's only
+> in RRECOMMENDS so if it's now in latest version required dependency
+> then gstreamer should be moved to DEPENDS (to make sure it's built
+> before do_configure of cheese.
+>
+> Or it cannot find pkgconfig from gstreamer-plugins-base, I don't see
+> why it should look from its own pkgconfig file..
 
-I reran my build and it passed through (no repository changes).
-This particular problem seems to be a multi-threaded build (I run
-with BB_NUMBER_THREADS = "4")
+  i can't comment on that and i could be entirely off-base here.  i'm
+simply pointing out that, ironically, i had *exactly* this issue
+yesterday with a different software package -- running the initial
+"configure" step expected to find that package's pkgconfig info and,
+if it wasn't there, the configure failed.  the only way around it was
+(exactly as above) to set the variables *_CFLAGS and *_LIBS manually,
+which would override the configuration's attempt to query pkconfig for
+that info.
 
-Sadly, the final image still does not build:
+  as i said, i could be *completely* wrong.  but this is what i dealt
+with yesterday, and that's how i fixed it.
 
-| log_check: Matched keyword: [Cannot satisfy the following dependencies]
-| Collected errors:
-|  * resolve_conffiles: Existing conffile /local/Angstrom_BeagleBoard/tmp/rootfs/beagleboard-linuxtag2010-demo-image/etc/device_table is different from the conffile in the new 
-package. The new conffile will be placed at /local/Angstrom_BeagleBoard/tmp/rootfs/b * satisfy_dependencies_for: Cannot satisfy the following dependencies for angstrom-task-gnome:
-|  *    encodings *     encodings *     encodings *
-|
-NOTE: package beagleboard-linuxtag2010-demo-image-1.0-r0: task do_rootfs: Failed
-
-I don't understand this error well enough (believe me, I've
-spent hours reading the various recipes and trying things)
-to hazard a guess as to what this error means.
+rday
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
