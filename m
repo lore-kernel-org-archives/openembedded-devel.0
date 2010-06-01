@@ -1,30 +1,44 @@
-Received: from carmex.station51.net ([109.74.206.142] helo=station51.net)
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <butters@station51.net>) id 1OJQqI-0007QL-LV
+	(envelope-from <rpjday@crashcourse.ca>) id 1OJQxG-0002Ak-Ni
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 14:45:34 +0200
-Received: from [87.241.107.86] (account butters HELO [192.168.1.201])
-	by station51.net (CommuniGate Pro SMTP 5.3.4)
-	with ESMTPSA id 1440009 for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 14:40:59 +0200
-Message-ID: <4C04FFE8.40204@station51.net>
-Date: Tue, 01 Jun 2010 14:41:12 +0200
-From: butters <butters@station51.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Tue, 01 Jun 2010 14:52:28 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OJQtB-0006Yd-RE; Tue, 01 Jun 2010 08:48:14 -0400
+Date: Tue, 1 Jun 2010 08:48:08 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: Gary Thomas <gary@mlbassoc.com>
+In-Reply-To: <4C04FF9C.3070407@mlbassoc.com>
+Message-ID: <alpine.DEB.2.00.1006010845530.9102@lynx>
 References: <4C04F6FD.4070804@mlbassoc.com>
-	<20100601130939.3ea2ba5d@xora.org.uk>
-In-Reply-To: <20100601130939.3ea2ba5d@xora.org.uk>
-X-SA-Exim-Connect-IP: 109.74.206.142
-X-SA-Exim-Mail-From: butters@station51.net
+	<alpine.DEB.2.00.1006010835260.8891@lynx>
+	<4C04FF9C.3070407@mlbassoc.com>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
+Cc: openembedded-devel@lists.openembedded.org,
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
 Subject: Re: Is Angstrom dead?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -39,44 +53,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 12:45:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 01 Jun 2010 12:52:28 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Well for me, the Gnome Image is failing. As I wrote previously without 
-anyone coming up with a fix. The full gnome set was available from the 
-Ångström site a couple a months ago via the image builder, now selecting 
-gnome on that fails with a big red X .... It would be nice if the STABLE 
-builds of things, and things that actually work, would be available in 
-the image builder instead of just unstable, and it would be nice if we 
-could have access to stable code instead of always bleeding edge stuff 
-via OpenEmbedded.
+On Tue, 1 Jun 2010, Gary Thomas wrote:
 
-I'm only saying this because you seem to be involved in it, so I just 
-wanted to voice my opinion and get your response lol
-
-Thanks!
-Bill
-
-On 6/1/2010 2:09 PM, Graeme Gregory wrote:
-> On Tue, 01 Jun 2010 06:03:09 -0600
-> Gary Thomas<gary@mlbassoc.com>  wrote:
+> On 06/01/2010 06:36 AM, Robert P. J. Day wrote:
+> > On Tue, 1 Jun 2010, Gary Thomas wrote:
+> >
+> > > It sure feels like it :-(
+> > >
+> > > For a week, I've been trying to build various images in Angstrom and
+> > > the problems I've faced have gone totally unanswered on either the
+> > > Angstrom or OE mailing lists.  I'm not the only one facing these
+> > > problems either.
+> > >
+> > > I'm mostly interested in building
+> > > beagleboard-linuxtag2010-demo-image which [at least] implies it
+> > > should be a great demo to show at LinuxTag (which starts in only a
+> > > few days now).  Surely a show piece would be something that a
+> > > popular project would want to support and be available to the
+> > > masses??
+> >
+> >    just for fun, i've updated my oe dev branch and started a build of
+> > that same target.  we'll see if i get the same result.  and, again,
+> > what distro are you using?  that's important to know.
 >
->    
->> It sure feels like it :-(
->>
->>      
-> No, we are certainly alive, but as we seem to have decreased to only 2
-> or 3 people who actively say they are developing Angstrom it can seem a
-> bit quiet at times.
->
-> Graeme
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->    
+> Fedora
 
+  i just fired up bitbake for the linuxtag image, it'll take a while
+and i'll let you know what happens on my ubuntu system.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
