@@ -1,43 +1,32 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OJUB1-0000gx-4z
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1OJUQS-0002v9-Eq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 18:18:54 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OJU6v-0000R9-Py for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 12:14:38 -0400
-Date: Tue, 1 Jun 2010 12:14:22 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201006011647.23770.ml@vdm-design.de>
-Message-ID: <alpine.DEB.2.00.1006011210330.26192@lynx>
-References: <4C04F6FD.4070804@mlbassoc.com>
-	<alpine.DEB.2.00.1006011021440.32142@lynx>
-	<201006011647.23770.ml@vdm-design.de>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Tue, 01 Jun 2010 18:34:56 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS-1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.63)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1OJUML-0005Lz-C7
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 01 Jun 2010 18:30:33 +0200
+Message-ID: <4C0535AA.50204@kernelconcepts.de>
+Date: Tue, 01 Jun 2010 18:30:34 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <4BE04A63.9010002@kernelconcepts.de>	<AANLkTinG63YFEqfHRs4_fG-vHmEs43ns-FSlESPVlsJ3@mail.gmail.com>	<201005271243.57336.marcin@juszkiewicz.com.pl>
+	<AANLkTikz5IaVTZBlZVSlChOxgIwZta3fyHVqjrccDXMF@mail.gmail.com>
+In-Reply-To: <AANLkTikz5IaVTZBlZVSlChOxgIwZta3fyHVqjrccDXMF@mail.gmail.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Is Angstrom dead?
+Subject: Re: OpenEmbedded at Linuxtag 2010
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,71 +40,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 16:18:54 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 01 Jun 2010 16:34:59 -0000
+Content-Type: text/plain; charset=ISO-8859-2
+Content-Transfer-Encoding: 7bit
 
-On Tue, 1 Jun 2010, Thomas Zimmermann wrote:
+Hi Philipp,
 
-> Am Dienstag 01 Juni 2010, 16:24:33 schrieb Robert P. J. Day:
-> > On Tue, 1 Jun 2010, Gary Thomas wrote:
-> > > |   libcanberra-gtk gudev-1.0) were not met:
-> > > | No package 'gstreamer-plugins-base-0.10' found
-> > > |
-> > > | Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> > > | installed software in a non-standard prefix.
-> > > |
-> > > | Alternatively, you may set the environment variables CHEESE_CFLAGS
-> > > | and CHEESE_LIBS to avoid the need to call pkg-config.
-> > > | See the pkg-config man page for more details.
-> > >
-> > > NOTE: package cheese-2.30.1-r0: task do_configure: Failed
-> >
-> >   now i'm slightly confused since neither ubuntu or fedora appear to
-> > have any pkgconfig info for the cheese package, so why would there be
-> > a test for it that you would need to override?  or is this not
-> > pkgconfig-related?
->
-> It should never depend on the pkconfig files installed on your buildhost. Are
-> you sure that the gstreamer package is build?
+sorry for the late response, I have been travelling and I'm slowly catching up.
 
-  my test build of the beagle linuxtag target just finished,
-culminating in:
+pHilipp Zabel schrieb:
+> "If it's not too late, count me in. As before, I can only assist on
+> Saturday and perhaps Friday (in the afternoon)."
 
-NOTE: Tasks Summary: Attempted 9996 tasks of which 7920 didn't need to be rerun and 7 failed.
-ERROR: '/home/rpjday/oe/openembedded/recipes/webm/libvpx_0.9.0.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/ti/ti-cgt6x_6.1.9.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/mozilla/firefox_3.6.3.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/abiword/abiword_2.8.3.bb' failed
-ERROR: '/home/rpjday/oe/openembedded/recipes/gnome/cheese_2.30.1.bb' failed
+great I guess its not to late in any way. :-) For the exhibitor passes its to
+late officially but we might be lucky. I still have some free tickets anyway so
+it would not do much of harm...
 
-  i have to run off but briefly:
+Greetings
 
-* i expected the firefox and abiword failures since they were failing
-for beagleboard-demo-image for me
-
-* i just did a git pull and noticed some checkins for both cheese and
-gstreamer so i'll restart the build and see the difference when i get
-back.
-
-* if we're going to keep discussing this (and i'm willing to help with
-the debugging), should we change the thread name?
-
-
-  back in a while, when i'll look at the log files more carefully.
-
-rday
+Florian
 
 -- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
