@@ -1,51 +1,42 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from smtp-out09a.alice.it ([85.33.3.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OJSnT-0003TG-V4
+	(envelope-from <ospite@studenti.unina.it>) id 1OJTHQ-0005tx-Bu
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 01 Jun 2010 16:51:01 +0200
-Received: by fxm9 with SMTP id 9so141447fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jun 2010 07:46:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=HleLLOM86H7uFijwPDOWsUk3hRf+hkFrU8hNyq5NM3o=;
-	b=wsoUOGvjlHofxaIfsN5bgFZqlY13Abe3v39NNb6COnwADxeuGvp+HJrflw8sIirraa
-	Q/w8Tvm/UVhsnyziR/iG6EJbg+2qKk2FXxzAd0XjbWWyZlI6c/+gVSYeQYvpSg6t7zHC
-	lAJL63ByeXG+4l5h2/9DWvd8VtfAKH4K4Jc6w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=uEZMGIqaB5RdDJ1JPz1BQnMariZsAiDJPn452WQiRwfcb+4tdimd+Rkqbc6IMWG0SW
-	e91x5ENVoTKdL/pTvpS/SnwChdWfsvWD1VsgJx0farkUsOst+jxKdjhWXpD34HBl4kd3
-	vqoWIdy8NhePK0ciN6Z2/6c71HFQ78CQ6dSPA=
-Received: by 10.223.92.144 with SMTP id r16mr7144945fam.62.1275403569647;
-	Tue, 01 Jun 2010 07:46:09 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 2sm47451618fav.1.2010.06.01.07.46.07
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 01 Jun 2010 07:46:08 -0700 (PDT)
-Date: Tue, 1 Jun 2010 16:46:02 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Message-ID: <20100601144602.GE5446@jama>
-References: <4C04F6FD.4070804@mlbassoc.com>
-	<alpine.DEB.2.00.1006011021440.32142@lynx>
-MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.00.1006011021440.32142@lynx>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	Tue, 01 Jun 2010 17:21:25 +0200
+Received: from FBCMMO02.fbc.local ([192.168.68.196]) by smtp-OUT09A.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 1 Jun 2010 17:17:10 +0200
+Received: from FBCMCL01B06.fbc.local ([192.168.69.87]) by FBCMMO02.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 1 Jun 2010 17:17:09 +0200
+Received: from jcn ([79.3.140.143]) by FBCMCL01B06.fbc.local with Microsoft
+	SMTPSVC(6.0.3790.3959); Tue, 1 Jun 2010 17:17:07 +0200
+Date: Tue, 1 Jun 2010 17:17:00 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
+To: Koen Kooi <k.kooi@student.utwente.nl>
+Message-Id: <20100601171700.19595a1f.ospite@studenti.unina.it>
+In-Reply-To: <hu0ob2$ivu$1@dough.gmane.org>
+References: <hu05te$c6i$1@dough.gmane.org>
+	<1275316120-11406-1-git-send-email-ospite@studenti.unina.it>
+	<hu0ob2$ivu$1@dough.gmane.org>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-OriginalArrivalTime: 01 Jun 2010 15:17:07.0975 (UTC)
+	FILETIME=[8008E170:01CB019D]
+X-SA-Exim-Connect-IP: 85.33.3.9
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] Is Angstrom dead?
+Cc: openezx-devel@lists.gnumonks.org, openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 07/12 v2] motorola-ezx-base.inc: refresh machine definition
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,61 +50,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 01 Jun 2010 14:51:20 -0000
-X-List-Received-Date: Tue, 01 Jun 2010 14:51:20 -0000
-X-List-Received-Date: Tue, 01 Jun 2010 14:51:20 -0000
-X-List-Received-Date: Tue, 01 Jun 2010 14:51:20 -0000
-X-List-Received-Date: Tue, 01 Jun 2010 14:51:20 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 01 Jun 2010 15:21:25 -0000
+X-Groupsio-MsgNum: 19727
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Tue__1_Jun_2010_17_17_00_+0200_lY7v47ISYv0Gxg0E"
+
+--Signature=_Tue__1_Jun_2010_17_17_00_+0200_lY7v47ISYv0Gxg0E
+Content-Type: text/plain; charset=US-ASCII
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jun 01, 2010 at 10:24:33AM -0400, Robert P. J. Day wrote:
-> On Tue, 1 Jun 2010, Gary Thomas wrote:
-> 
-> > I tried again today, updating to org.openembedded.dev branch,
-> > commit a2834c64fb3ed535fca51c25547754fa907e4ca5  Sadly, new
-> > problems (and probably still the old ones) remain:
-> >
-> > | checking for CHEESE... configure: error: Package requirements (  glib-2.0 >=
-> > 2.16.0   gobject-2.0 >= 2.12.0   gio-2.0 >= 2.16.0   gtk+-2.0 >= 2.19.1
-> > gdk-2.0 >= 2.14.0 gnome-desktop-2.0 >= 2.26.0   gconf-2.0 >= 2.16.0
-> > gstreamer-0.10 >= 0.10.23   gstreamer-plugins-base-0.10 >= 0.10.23   cairo >=
-> > 1.4.0   dbus-1 >= 1.0   dbus-glib-1 >= 0.7 pangocairo >= 1.18.0   librsvg-2.0
-> > >= 2.18.0
-> > |   libcanberra-gtk gudev-1.0) were not met:
-> > |
-> > | No package 'gstreamer-plugins-base-0.10' found
-> > |
-> > | Consider adjusting the PKG_CONFIG_PATH environment variable if you
-> > | installed software in a non-standard prefix.
-> > |
-> > | Alternatively, you may set the environment variables CHEESE_CFLAGS
-> > | and CHEESE_LIBS to avoid the need to call pkg-config.
-> > | See the pkg-config man page for more details.
-> > |
-> > NOTE: package cheese-2.30.1-r0: task do_configure: Failed
-> 
->   now i'm slightly confused since neither ubuntu or fedora appear to
-> have any pkgconfig info for the cheese package, so why would there be
-> a test for it that you would need to override?  or is this not
-> pkgconfig-related?
+On Mon, 31 May 2010 18:32:34 +0200
+Koen Kooi <k.kooi@student.utwente.nl> wrote:
 
-It says:
-> > | No package 'gstreamer-plugins-base-0.10' found
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>=20
+> On 31-05-10 16:28, Antonio Ospite wrote:
+> > Reorder sections to a more logic scheme, following magician.conf, other
+> > cleanups:
+> >=20
+> >  * sort MACHINE_FEATURES alphabetically
+> >  * add ezx-gen-blob to EXTRA_IMAGEDEPENDS
+> >  * use MODUTILS=3D26
+> >  * Add needed kernel modules for BP
+> >=20
+> > Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+>=20
+> Acked-by: Koen Kooi <koen@openembedded.org>
+>=20
 
-was gstreamer-plugins-base built before building cheese?
-It's only in RRECOMMENDS so if it's now in latest version required
-dependency then gstreamer should be moved to DEPENDS (to make sure it's
-built before do_configure of cheese.
+Thanks Koen, btw, trying "git am" om my own patches before pushing I've
+found some whitepsace issues, I'll fix these, no semantic changes, but
+I just wanted to point out that the changes I am going to push are not
+_exactly_ the same I sent here for review.
 
-Or it cannot find pkgconfig from gstreamer-plugins-base, I don't see why
-it should look from its own pkgconfig file..
+Is there anything like checkpatch.pl for OE?
 
-Regarads,
+Thanks,
+   Antonio
 
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Tue__1_Jun_2010_17_17_00_+0200_lY7v47ISYv0Gxg0E
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkwFJGwACgkQ5xr2akVTsAH6ywCgj0d0E72b/d7i+ebfQM8A285d
+KQAAoIpC2TNU3HjxO3k1BgN5aj/9eNNW
+=/VSc
+-----END PGP SIGNATURE-----
+
+--Signature=_Tue__1_Jun_2010_17_17_00_+0200_lY7v47ISYv0Gxg0E--
