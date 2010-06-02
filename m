@@ -1,38 +1,38 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pz0-f193.google.com ([209.85.222.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OJujN-00030l-JO
+	(envelope-from <raj.khem@gmail.com>) id 1OJujJ-00031V-Ku
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 22:40:07 +0200
-Received: by mail-pv0-f175.google.com with SMTP id 30so2440067pvc.6
+	Wed, 02 Jun 2010 22:40:09 +0200
+Received: by mail-pz0-f193.google.com with SMTP id 31so3241572pzk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 13:35:52 -0700 (PDT)
+	Wed, 02 Jun 2010 13:35:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=pJIgUw3JBEZgy6TcXmSHPm9uOuks6j/gePMHt8fSwjo=;
-	b=T3ZPx2x9e78tq4Yr9+OlTJlZtv8OceL3RceMj8F3WiXAyS6o0bL2R3tkCrvvPuspJi
-	JeKbKAMTR2Duz9JUSohxvRS3akCP/yufMJDUZAAdts4+8L47bw2FX53RI6v34uCqzNp1
-	ILED7VaJSjK9qchLhN1N1So7RafNeAGbakTYE=
+	bh=9aaT96+cy7nTYy1ohj9v5KOMpj7bT8thH7+PJdTz/k8=;
+	b=vSCW4z3qin7nEM8wUlCZ4zu4C1K93n0VqXpF9jp1jyDFp4HqaTdjFnmX76olUMEeXX
+	sPikY6t+6HpNqIRNXKz5pF/rvraSuPxnKDjWQ1dZ0h4szEWyjJV8Xa45L4LQmMlQ+aza
+	g4qmLXcBtgdLzUpDYmfytyATyKgWKWqJUlY28=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=MZeU+MhmBch2UBg/CFoEZYR5aftX94r58QOQ9Rs6gcelAJdHikLg6FwQGT1VmyHtrC
-	zqFi6P+5NyrA4xTgyFwePy4EmNh0bKhA0DBm7AwQheLZxOsKcBzdYOxuH7uYuYdOiSN5
-	nKghRAKO8MkbuRw0pfcGpvDvEfaxs1IEx3wiM=
-Received: by 10.143.85.10 with SMTP id n10mr5564756wfl.106.1275510952369;
-	Wed, 02 Jun 2010 13:35:52 -0700 (PDT)
+	b=UsD1HH9XNrY/X6aMugZdEyl/FM7MUx3G0K8bg0baZb1WavVFS/fygv9mBoChe8spfL
+	lt3AEDiYiT9nHDkP8RscaWMfuoTt8viMMHViF6hrBM1rAOD4UZ+CYCB5tggHLLvFbd5+
+	LaJBXx7eDcXoGJX4k2qDuqzPWjDeX2zrhNeg4=
+Received: by 10.143.26.28 with SMTP id d28mr5446696wfj.103.1275510948443;
+	Wed, 02 Jun 2010 13:35:48 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 20sm5942447pzk.7.2010.06.02.13.35.50
+	by mx.google.com with ESMTPS id 20sm5942447pzk.7.2010.06.02.13.35.47
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 02 Jun 2010 13:35:51 -0700 (PDT)
+	Wed, 02 Jun 2010 13:35:47 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jun 2010 13:34:56 -0700
-Message-Id: <1275510896-30845-17-git-send-email-raj.khem@gmail.com>
+Date: Wed,  2 Jun 2010 13:34:53 -0700
+Message-Id: <1275510896-30845-14-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
 References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.222.193
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 16/16] shadow_4.1.4.2.bb: add --with-nscd=no when compiling for uclibc
+Subject: [PATCH 13/16] ncurses: Add -fforward-propagate on arm.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,30 +54,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 20:40:07 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 20:40:09 -0000
+
+* Needed on -O1 compile. Generally we use -Os where
+  this option is already enabled. But we enable is anyway
+  so it gets picked at -O1 too which we use with DEBUG builds.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/shadow/shadow_4.1.4.2.bb |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+ recipes/ncurses/ncurses.inc    |   11 ++++++-----
+ recipes/ncurses/ncurses_5.4.bb |    2 +-
+ 2 files changed, 7 insertions(+), 6 deletions(-)
 
-diff --git a/recipes/shadow/shadow_4.1.4.2.bb b/recipes/shadow/shadow_4.1.4.2.bb
-index 05b3279..ebf54a7 100644
---- a/recipes/shadow/shadow_4.1.4.2.bb
-+++ b/recipes/shadow/shadow_4.1.4.2.bb
-@@ -1,8 +1,11 @@
- require shadow.inc
+diff --git a/recipes/ncurses/ncurses.inc b/recipes/ncurses/ncurses.inc
+index bfecfff..337d670 100644
+--- a/recipes/ncurses/ncurses.inc
++++ b/recipes/ncurses/ncurses.inc
+@@ -30,6 +30,12 @@ export BUILD_CCFLAGS = "-I${S}/ncurses -I${S}/include ${BUILD_CFLAGS}"
+ export BUILD_LDFLAGS = ""
+ export EXTRA_OEMAKE = '"BUILD_LDFLAGS=" "BUILD_CCFLAGS=${BUILD_CCFLAGS}"'
  
--SRC_URI += " file://shadow.automake-1.11.patch"
-+SRC_URI += "file://shadow.automake-1.11.patch \
-+	   "
- 
- PR = "${INC_PR}.1"
- 
-+EXTRA_OECONF_libc-uclibc += " --with-nscd=no "
++# Below option is added to overcome the GCC bug on ARM
++# see http://gcc.gnu.org/PR42981 for further details.
++# We could potentially take it off when its fixed in gcc 4.5
 +
- SRC_URI[md5sum] = "d593a9cab93c48ee0a6ba056db8c1997"
- SRC_URI[sha256sum] = "97987f6a7967a85e6aa0dba2a1d52db8bd69af5a717391de5693db768fb78990"
++CFLAGS_append_arm = " -fforward-propagate "
++
+ # This is necessary so that the "tic" command executed during the install can
+ # link with the correct libary in staging.
+ export LD_LIBRARY_PATH = "${STAGING_LIBDIR_NATIVE}"
+@@ -70,16 +76,12 @@ do_install() {
+ 		mv ${D}${bindir}/reset ${D}${bindir}/reset.${PN}
+ 	fi
+ }
+-		
+-		
+ pkg_postinst_ncurses-tools () {
+ 	if [ "${PN}" = "ncurses" ]; then
+ 		update-alternatives --install ${bindir}/clear clear clear.${PN} 100
+ 		update-alternatives --install ${bindir}/reset reset reset.${PN} 100
+ 	fi
+ }
+-				
+-			
+ pkg_prerm_ncurses-tools () {
+ 	if [ "${PN}" = "ncurses" ]; then
+ 		update-alternatives --remove clear clear.${PN}
+@@ -110,7 +112,6 @@ FILES_${PN}-tools = "\
+ FILES_${PN}-terminfo = "\
+   ${datadir}/terminfo \
+ "
+-  
+ RSUGGESTS_${PN} = "ncurses-terminfo"
+ RPROVIDES_${PN} = "libncurses5"
+ RCONFLICTS_${PN} = "libncurses5"
+diff --git a/recipes/ncurses/ncurses_5.4.bb b/recipes/ncurses/ncurses_5.4.bb
+index a6aed6d..8c0f62c 100644
+--- a/recipes/ncurses/ncurses_5.4.bb
++++ b/recipes/ncurses/ncurses_5.4.bb
+@@ -1,4 +1,4 @@
+-PR = "r19"
++PR = "r20"
+ 
+ SRC_URI = "${GNU_MIRROR}/ncurses/ncurses-${PV}.tar.gz \
+            file://makefile_tweak.patch \
 -- 
 1.7.0.4
 
