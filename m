@@ -1,40 +1,43 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OJtg3-0001jW-GP
+	(envelope-from <raj.khem@gmail.com>) id 1OJtpK-0001x6-JS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 21:32:37 +0200
-Received: by wyb32 with SMTP id 32so353555wyb.6
+	Wed, 02 Jun 2010 21:42:11 +0200
+Received: by iwn9 with SMTP id 9so1253030iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 12:28:20 -0700 (PDT)
+	Wed, 02 Jun 2010 12:37:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=6h/rdBetTlTe1ETH9VHE0/jolfMeRDnkHKIgr22afD0=;
-	b=WWENWW+FTld+HjxLExjr1I9zsHRFAQSIXZ8CRRRdcC8nDpbH5mip8OLm/De5TPlRHx
-	xT4Oq8iEyB7IUPn+KbmgqgvbwIIB/okq6yWAXrpLKK5tMv+S3J0+krJ394PeqWRcxhN0
-	5HpUzZqhiPADLwyQnxrOyjDLk7e0hCaAG0jLE=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=AP01rH4BbG5qipd2UDkIv82oN2aG1elpqwiffOD53OE=;
+	b=HNDqXCzWJGlJrEriVgHH+yld2kW83rP4fOaOGy04pRrhGf3LclqCNppGazUtw9NZCd
+	h5smwsndQrohcdSnweHWNjvFq7J9rSidyDHSMskLFE0MW7PBruZmayLp0qGE7zQa8i2Z
+	26hdCTr36tCNoQ7ph13e/FrGWgHU/55cclihE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=P5YipxDF0gbBWqVWpy9bhH5Q5DvaalFu/FFtUiTlpDV2Ftna4W/Q+DOjSE9LAVg3wm
-	w4iNwyHnkzv/nKAy5kNUJMtggSe5Ybem8bLgMhrynh2Wc7OjtHsFUYOIFDjN0/wmeTmO
-	iu7b9pI2UMdrYtzXxUc3v4HHwCoF9J0//56uM=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=tuqtt3GLa+kAAcoBMSzFXREILSN5Phq5+67Jx4bDieGuMPeRnDQKF1xreqqMzJVncz
+	1dRDFqiMkqP5ZYClRe3bq4Hq8dmxN5ENx4PK6a5yPn7UCVbpPkdq2VS94RR7VkLFJbZ8
+	LmZOJDinYpsPuqlDaSSGuDn6pyggQQmYd1EPI=
+Received: by 10.231.148.145 with SMTP id p17mr10436634ibv.28.1275507476326; 
+	Wed, 02 Jun 2010 12:37:56 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.170.83 with SMTP id o61mr414108wel.37.1275506899988; Wed, 
-	02 Jun 2010 12:28:19 -0700 (PDT)
-Received: by 10.216.49.206 with HTTP; Wed, 2 Jun 2010 12:28:19 -0700 (PDT)
-Date: Wed, 2 Jun 2010 15:28:19 -0400
-Message-ID: <AANLkTinnks0kTFkPqkwLR-TvvzzAvOsfTVaO521fgBMs@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.231.10.202 with HTTP; Wed, 2 Jun 2010 12:37:35 -0700 (PDT)
+In-Reply-To: <hu6a00$qd2$1@dough.gmane.org>
+References: <hu6a00$qd2$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 2 Jun 2010 12:37:35 -0700
+Message-ID: <AANLkTinJBGqwz-QKJozTjnbMNH7W4Z85NP4mDizexXi2@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: srctree status
+Subject: Re: Please don't put image vars in machine.conf aka revert 39a7a0152d5d9a38ab202e11eb2eaab163dc35fa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,62 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 19:32:37 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 19:42:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Below is a list of know issues with srctree.  I'm testing with the
-following source/recipe:
+On Wed, Jun 2, 2010 at 12:04 PM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Khem,
+>
+> Could you please remove the ROOTFS_POSTPROCESS_COMMAND from
+> conf/machine/include/qemu.inc? It make using the qemu machine for
+> debugging useless, since all images I would pass it are using
+> zap_root_password.
 
-http://cgit.bec-systems.com/cgit.cgi/autotools-demo/
+I thought qemu images would be more used for dev purposes and it would be handy
+to have it enabled for qemu targets as whole. But yeah I see your
+point. Will revert.
 
-To build:
+Thx
+-Khem
 
-cd <oe>/recipes
-git clone git://git.bec-systems.com/autotools-demo
-cd -
-bitbake autotools-demo
-
-Below are bitbake changes that are needed:
-http://cgit.bec-systems.com/cgit.cgi/bitbake/log/?h=cbrake/1.10-srctree-fixes
-(2 patches)
-
-And the following OE changes are needed:
-http://cgit.bec-systems.com/cgit.cgi/openembedded/log/?h=2010-06-02_srctree-fix
-(1 patch)
-
-There also seems to be an issue in that DEPENDS are not processed
-correctly.  I tried the following srctree based recipe:
-http://cgit.bec-systems.com/cgit.cgi/qt-overo-palo-gpio/tree/qt-overo-palo-gpio.bb
-
-and bitbake was running the configure task for the above recipe before
-the DEPEND's had built (qt-tools, etc).  It seems the DEPENDS variable
-is getting set correctly:
-
-DEPENDS="qt4-tools-native qt4-embedded coreutils-native
-virtual/arm-angstrom-linux-gnueabi-gcc virtual/libc"
-
-But, perhaps not being processed.
-
-Chris offered the following on IRC:
-13:42 < kergoth_> if you aren't using a native or cross version of the
-recipe, then you can confidently say you don't need it to do it
-13:43 < kergoth_> http://dl.dropbox.com/u/112715/Files/inscm-1.tar.bz2
-was what i was experimenting with when i created the class
-13:44 < kergoth_> had shasum-native and m4-native going, so needed that code
-13:44 < kergoth_> take a look at the class, the merge_tasks function
-13:45 < kergoth_> this was also written prior to the new style staging
-stuff, so it may need tweaking
-13:45 < kergoth_> it explicitly runs do_stage, which isn't likely what
-we want it doing
-
-So, thats it :-)
-
-I'd really like to get this going as I think it would make OE a lot
-more usable for people building products, as well as anyone who is
-doing iterative development on a package that needs to be routinely
-compiled for the target system.
-
-Thanks,
-Cliff
+> If you have a need for zap_root_password, please add some images to
+> recipes/images/ that use it, but please, *PLEASE* keep image vars out of
+> machine.confs.
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMBqtAMkyGM64RGpERAkLEAJ4iUw9lPDsLw+M7Aon6eN+sb3hfhgCeKiXD
+> 6xTULmnMcxllnBwLBuBA0ks=
+> =yxcs
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
