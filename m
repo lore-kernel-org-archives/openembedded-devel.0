@@ -1,53 +1,51 @@
-Received: from tx2ehsobe004.messaging.microsoft.com ([65.55.88.14]
-	helo=TX2EHSOBE008.bigfish.com)
+Received: from va3ehsobe004.messaging.microsoft.com ([216.32.180.14]
+	helo=VA3EHSOBE004.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OJkEI-0003Lf-5M
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OJkQU-0005Ta-Uq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 11:27:20 +0200
-Received: from mail136-tx2-R.bigfish.com (10.9.14.251) by
-	TX2EHSOBE008.bigfish.com (10.9.40.28) with Microsoft SMTP Server id
-	8.1.340.0; Wed, 2 Jun 2010 09:07:56 +0000
-Received: from mail136-tx2 (localhost.localdomain [127.0.0.1])	by
-	mail136-tx2-R.bigfish.com (Postfix) with ESMTP id B9D20CD872F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jun 2010 09:07:55 +0000 (UTC)
-X-SpamScore: -40
-X-BigFish: VPS-40(zz14e3M14ffO936eM1447R1443N9371Pzz1202hz4fhzz32i2a8h61h)
-Received: from mail136-tx2 (localhost.localdomain [127.0.0.1]) by mail136-tx2
-	(MessageSwitch) id 127546967522886_3489;
-	Wed,  2 Jun 2010 09:07:55 +0000 (UTC)
-Received: from TX2EHSMHS047.bigfish.com (unknown [10.9.14.248])	by
-	mail136-tx2.bigfish.com (Postfix) with ESMTP id EC6475A804E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jun 2010 09:07:54 +0000 (UTC)
+	Wed, 02 Jun 2010 11:39:55 +0200
+Received: from mail154-va3-R.bigfish.com (10.7.14.235) by
+	VA3EHSOBE004.bigfish.com (10.7.40.24) with Microsoft SMTP Server id
+	8.1.340.0; Wed, 2 Jun 2010 09:20:33 +0000
+Received: from mail154-va3 (localhost.localdomain [127.0.0.1])	by
+	mail154-va3-R.bigfish.com (Postfix) with ESMTP id CDDE14C83BD;
+	Wed,  2 Jun 2010 09:20:32 +0000 (UTC)
+X-SpamScore: -12
+X-BigFish: VPS-12(zz14ffO1443Nzz1202hz4fhzz32i2a8h61h)
+Received: from mail154-va3 (localhost.localdomain [127.0.0.1]) by mail154-va3
+	(MessageSwitch) id 1275470432293246_14958;
+	Wed,  2 Jun 2010 09:20:32 +0000 (UTC)
+Received: from VA3EHSMHS017.bigfish.com (unknown [10.7.14.237])	by
+	mail154-va3.bigfish.com (Postfix) with ESMTP id 369F412E004B;
+	Wed,  2 Jun 2010 09:20:32 +0000 (UTC)
 Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
-	TX2EHSMHS047.bigfish.com (10.9.99.147) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Wed, 2 Jun 2010 09:07:53 +0000
+	VA3EHSMHS017.bigfish.com (10.7.99.27) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Wed, 2 Jun 2010 09:20:27 +0000
 Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
 	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
-	Wed, 2 Jun 2010 14:37:02 +0530
+	Wed, 2 Jun 2010 14:49:43 +0530
 From: Soumya R <Soumya.R@kpitcummins.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Jun 2010 14:37:02 +0530
-Thread-Topic: glibc_2.9.bb do_package failed
-Thread-Index: AQHLAjL2aHcuiLLyvUOqEmCS9QMB8w==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF84@KCINPUNHJCMS01.kpit.com>
+Date: Wed, 2 Jun 2010 14:49:31 +0530
+Thread-Index: AQHLAjS1fiPyD3truU+5SVhNMHrNiQ==
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 acceptlanguage: en-US
 MIME-Version: 1.0
 X-Reverse-DNS: Kcinpunhjhc01.kpit.com
-X-SA-Exim-Connect-IP: 65.55.88.14
+X-SA-Exim-Connect-IP: 216.32.180.14
 X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL, BAYES_00, MISSING_SUBJECT,
+	WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: glibc_2.9.bb do_package failed
+Cc: "angstrom-distro-devel@linuxtogo.org" <angstrom-distro-devel@linuxtogo.org>
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,126 +59,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 09:27:20 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 09:39:56 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-  =20
-Thanks for the reply..
-
- Finally i could fix that..
-
-edit build/conf/local.conf
-
-& add the following
-
-ENABLE_BINARY_LOCALE_GENERATION =3D 0
-
- run the build again
-
-  # make micro-image
-
-Regards,
-Soumya
-________________________________________
-From: Soumya R
-Sent: Tuesday, June 01, 2010 5:35 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: glibc_2.9.bb do_package failed
-
 Hi All,
 
-       I am new to open embedded .. I am configuring micro-image for arm9 p=
-rocessor ..
-when i run bitbake micro-image i get the following error.
+   I am running bibake micro-image i got the following error,
 
-NOTE: Gettext required but not in DEPENDS for file /home/likewise-open/KPIT=
-/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-interme=
-diate-4.3.3-r12.1/gcc-4.3.3/intl/configure.ac.
-Missing inherit gettext?
-NOTE: Running task 685 of 957 (ID: 535, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_compile)
-NOTE: Running task 686 of 957 (ID: 529, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_install)
-NOTE: Running task 687 of 957 (ID: 530, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_populate_sysr=
-oot)
-NOTE: Running task 688 of 957 (ID: 537, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package)
-NOTE: Running task 689 of 957 (ID: 539, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package_write=
-_ipk)
-NOTE: Running task 690 of 957 (ID: 156, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/glibc/glibc_2.9.bb, do_configure)
-NOTE: Running task 691 of 957 (ID: 536, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package_write=
-)
-NOTE: Running task 692 of 957 (ID: 538, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package_stage=
-)
-NOTE: Running task 693 of 957 (ID: 157, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/glibc/glibc_2.9.bb, do_qa_configure)
-NOTE: Running task 694 of 957 (ID: 158, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/glibc/glibc_2.9.bb, do_compile)
-NOTE: Running task 695 of 957 (ID: 152, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/glibc/glibc_2.9.bb, do_install)
-NOTE: Running task 696 of 957 (ID: 153, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/glibc/glibc_2.9.bb, do_populate_sysroot)
-NOTE: Running task 697 of 957 (ID: 160, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
-NOTE: preparing tree for binary locale generation
-NOTE: Running task 698 of 957 (ID: 142, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross_4.3.3.bb, do_configure)
-NOTE: generating locale es_NI (UTF-8)
-NOTE: Running task 699 of 957 (ID: 143, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross_4.3.3.bb, do_qa_configure)
-NOTE: Gettext required but not in DEPENDS for file /home/likewise-open/KPIT=
-/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r=
-12.1/gcc-4.3.3/intl/configure.ac.
-Missing inherit gettext?
-NOTE: Running task 700 of 957 (ID: 144, /home/likewise-open/KPIT/soumyar/oe=
-/openembedded/recipes/gcc/gcc-cross_4.3.3.bb, do_compile)
-qemu-arm: relocation error: qemu-arm: symbol fcntl, version GLIBC_2.0 not d=
-efined in file libpthread.so.0 with link time reference
-NOTE: Task failed: localedef returned an error (command was PATH=3D"/home/l=
-ikewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin/armv5te-=
-angstrom-linux-gnueabi:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroo=
-ts/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/home/likewise-open/KP=
-IT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/likewise-open/KP=
-IT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/likewise-open/KPI=
-T/soumyar/oe/build/tmp/cross/armv5te//bin:/home/likewise-open/KPIT/soumyar/=
-oe/build/tmp/sysroots/i686-linux/sbin:/home/likewise-open/KPIT/soumyar/oe/b=
-uild/tmp/sysroots/i686-linux/bin:/likewise-open/KPIT/soumyar/oe/bitbake/bin=
-:/likewise-open/KPIT/soumyar/oe/bitbake/bin:/likewise-open/KPIT/soumyar/oe/=
-bitbake/bin:/home/likewise-open/KPIT/soumyar/bin:/usr/local/sbin:/usr/local=
-/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games" I18NPATH=3D"/home/likewise-o=
-pen/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9=
--r36.3/locale-tree/usr/share/i18n" qemu-arm -s 1048576 -r 2.6.24 -L /home/l=
-ikewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/=
-glibc-2.9-r36.3/locale-tree -E LD_LIBRARY_PATH=3D/home/likewise-open/KPIT/s=
-oumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/loc=
-ale-tree/lib  /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-an=
-gstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree/bin/localedef --force --ol=
-d-style --no-archive --prefix=3D/home/likewise-open/KPIT/soumyar/oe/build/t=
-mp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree --inputf=
-ile=3D/usr/share/i18n/locales/es_NI --charmap=3DUTF-8 es_NI).
+NOTE: Running task 965 of 970 (ID: 93, /home/likewise-open/KPIT/soumyar/oe/=
+openembedded/recipes/mtd/mtd-utils-native_1.3.1.bb, do_package_write)
+NOTE: Running task 966 of 970 (ID: 18, /home/likewise-open/KPIT/soumyar/oe/=
+openembedded/recipes/images/micro-image.bb, do_package_update_index_ipk)
+ERROR: function do_package_update_index_ipk failed
+ERROR: log data follows (/home/likewise-open/KPIT/soumyar/oe/build/tmp/work=
+/at91sam9263ek-angstrom-linux-gnueabi/micro-image-1.0-r0/temp/log.do_packag=
+e_update_index_ipk.24831)
+| + ipkgarchs=3D'all any noarch arm  armv4 armv4t armv5te at91sam9263ek'
+| + '[' '!' -z '' ']'
+| + mkdir -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk
+| + touch /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/Pa=
+ckages
+| + ipkg-make-index -r /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
+/glibc/ipk/Packages -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
+/glibc/ipk/Packages -l /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
+/glibc/ipk/Packages.filelist -m /home/likewise-open/KPIT/soumyar/oe/build/t=
+mp/deploy/glibc/ipk
+| /home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin=
+/ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
+instead
+|   import md5
+|=20
+| + for arch in '$ipkgarchs'
+| + '[' -e /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/a=
+ll/ ']'
+| + touch /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/al=
+l/Packages
+| + ipkg-make-index -r /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
+/glibc/ipk/all/Packages -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/de=
+ploy/glibc/ipk/all/Packages -l /home/likewise-open/KPIT/soumyar/oe/build/tm=
+p/deploy/glibc/ipk/all/Packages.filelist -m /home/likewise-open/KPIT/soumya=
+r/oe/build/tmp/deploy/glibc/ipk/all/
+| /home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin=
+/ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
+instead
+|   import md5
+| Traceback (most recent call last):
+|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
+/usr/bin/ipkg-make-index", line 114, in <module>
+|     pkg =3D ipkg.Package(filename)
+|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
+/usr/bin/ipkg.py", line 161, in __init__
+|     tarStream =3D ar.open("control.tar.gz")
+|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
+/usr/bin/arfile.py", line 59, in open
+|     f =3D self._scan(fname)
+|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
+/usr/bin/arfile.py", line 79, in _scan
+|     size =3D int(descriptor[5])
+| IndexError: list index out of range
+NOTE: Task failed: /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/at91s=
+am9263ek-angstrom-linux-gnueabi/micro-image-1.0-r0/temp/log.do_package_upda=
+te_index_ipk.24831
 ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/gl=
-ibc/glibc_2.9.bb do_package failed
-ERROR: Task 160 (/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/g=
-libc/glibc_2.9.bb, do_package) failed
+ERROR: Build of /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/im=
+ages/micro-image.bb do_package_update_index_ipk failed
+NOTE: Running task 967 of 970 (ID: 95, /home/likewise-open/KPIT/soumyar/oe/=
+openembedded/recipes/mtd/mtd-utils-native_1.3.1.bb, do_package_stage)
+ERROR: Task 18 (/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/im=
+ages/micro-image.bb, do_package_update_index_ipk) failed
 NOTE: Waiting for 1 active tasks to finish
-NOTE: 1: /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/gcc/gcc-c=
-ross_4.3.3.bb, do_compile (6409)
-NOTE: Tasks Summary: Attempted 698 tasks of which 0 didn't need to be rerun=
- and 1 failed.
-ERROR: '/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/glibc/glib=
-c_2.9.bb' failed
+NOTE: 1: /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/mtd/mtd-u=
+tils-native_1.3.1.bb, do_package_stage (24841)
+NOTE: Tasks Summary: Attempted 965 tasks of which 927 didn't need to be rer=
+un and 1 failed.
+ERROR: '/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/images/mic=
+ro-image.bb' failed
+KPIT\soumyar@d-5289lnx:~/oe/build$=20
 
-          Please help me out to resolve this i goggled but could not find t=
-he solution..
+   Anybody can help me out to resolve this.Any suggestions are welcome:-)
 
 Thanks in advance:-)
 
