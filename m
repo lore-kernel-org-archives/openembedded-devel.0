@@ -1,54 +1,38 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OJhyh-0007Yx-DJ
+Received: from 30.mail-out.ovh.net ([213.186.62.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OJi9H-0002wx-JV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 09:03:08 +0200
-Received: by fxm9 with SMTP id 9so698939fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 01 Jun 2010 23:58:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=KhDhoy3Zq8uttrDLUAtFn9VYOa6NFxm87XwK+EbDMbs=;
-	b=GlueefzxRqJbXTDR8CVvIQJwhrEYO1FZZElhcPmZCHuOwInW9rgqDLim01mfhUQbzS
-	a0jXOW8LJFn9vKD2VQDTDfmkzLQUaXaolru4/nybVakORc90/OlIqAAK/Wd8GUrn5K3f
-	PyhucuYU9pxjMKOidNaWB2c4n+NcLoHO0JU7o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=SElykNNxRbpOpOb6iz+J92OoGhb+/fKwJ9ZQzoVpNTKafNUl83v1qFefMIw9BLkLEB
-	Zx/WdD3W0UqdcM6XzfzMrqn9hMIe0+lphTKNjepKHOhu9pWxmTAPnCPH3rIjXRut0z/u
-	AysOOXjE5yJ8gmVGiBaFX4hR2DQGKrwn2v8I0=
-Received: by 10.223.24.85 with SMTP id u21mr8168439fab.8.1275461928896;
-	Tue, 01 Jun 2010 23:58:48 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u12sm50901745fah.4.2010.06.01.23.58.47
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 01 Jun 2010 23:58:47 -0700 (PDT)
-Date: Wed, 2 Jun 2010 08:58:41 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Gary Thomas <gary@mlbassoc.com>
-Message-ID: <20100602065840.GI5446@jama>
-References: <alpine.DEB.2.00.1006011641480.17094@lynx>
-	<4C057DFC.6010409@mlbassoc.com>
-	<alpine.DEB.2.00.1006011753350.30834@lynx>
-	<20100601220233.GG5446@jama> <4C058898.60202@mlbassoc.com>
+	Wed, 02 Jun 2010 09:14:00 +0200
+Received: (qmail 27643 invoked by uid 503); 2 Jun 2010 07:03:44 -0000
+Received: from b6.ovh.net (HELO mail606.ha.ovh.net) (213.186.33.56)
+	by 30.mail-out.ovh.net with SMTP; 2 Jun 2010 07:03:44 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 2 Jun 2010 09:09:46 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 2 Jun 2010 09:09:46 +0200
+Message-ID: <4C0603B9.8090200@eukrea.com>
+Date: Wed, 02 Jun 2010 09:09:45 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-In-Reply-To: <4C058898.60202@mlbassoc.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: Vitus Jensen <vjensen@gmx.de>
+References: <1275435453-1118-1-git-send-email-vjensen@gmx.de>
+In-Reply-To: <1275435453-1118-1-git-send-email-vjensen@gmx.de>
+X-Ovh-Tracer-Id: 268527129507114269
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org,
-	Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: [Angstrom-devel] current build errors, OE dev branch, beagleboard-linuxtag2010-demo-image
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] linux-n1200_2.6.27-rc9+git: change KERNEL_OUTPUT to a	relative path
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,50 +46,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 07:03:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 02 Jun 2010 07:14:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jun 01, 2010 at 04:24:24PM -0600, Gary Thomas wrote:
-> On 06/01/2010 04:02 PM, Martin Jansa wrote:
-> >Yes easily fixable fetch errors, those archives are download restricted
-> >and if you open those recipes you will see instruction where to download
-> >them.
-> >
-> >For cheese issue I've already replied, but without answer (about
-> >gstreamer-plugins...).
-> 
-> I *did* reply; it seems to be a multi-thread build problem.  When
-> I reran bitbake, it went away.
-
-Yes thanks, the point is that only important part was "Was
-gst-plugins-base built before cheese?" And Robert is still having issue
-with it.
-
-So I guess the answer would be NO and no is more likely with more
-BB_THREADS and in second run it's already built (especially if you're
-building with -k) for some other recipe, so it worked for you later.
-
-I've downloaded cheese, checked configure.ac and yes it depends on
-gst-plugins-base unconditionally. I've pushed an update which adds it to
-DEPENDS (which is ensured to be built _before_ do_configure of recipe,
-RRECOMMENDS is building it too, but it can build it later then
-do_configure.
-
-BTW: cheese_2.30.0.bb also depends on whatever -native recipe provides
-xml2po and cheese_2.30.1.bb depends on scrollkeeper-config to build it's
-help. But probably is using happily scrollkeeper from host (as there is
-no recipe) - and I don't have scrollkeeper in my OE chroot..
-http://tinderbox.openembedded.net/packages/cheese/
-
-Robert: If I remember right, you were asked few times to use tinderbox
-instead sending many e-mails with pastebins, why didn't you follow this
-advise yet?
-
-Regards.
--- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+Le 02/06/2010 01:37, Vitus Jensen a écrit :
+> deploy method in kernel.bbclass automatically adds {S}
+>
+> Signed-off-by: Vitus Jensen<vjensen@gmx.de>
+> ---
+>   recipes/linux/linux-n1200_2.6.27-rc9+git.bb |    2 +-
+>   1 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/linux/linux-n1200_2.6.27-rc9+git.bb b/recipes/linux/linux-n1200_2.6.27-rc9+git.bb
+> index d6751d0..31a07cd 100644
+> --- a/recipes/linux/linux-n1200_2.6.27-rc9+git.bb
+> +++ b/recipes/linux/linux-n1200_2.6.27-rc9+git.bb
+> @@ -13,7 +13,7 @@ S = "${WORKDIR}/linux-2.6.27-foonas-git"
+>   export ARCH="powerpc"
+>
+>   # Bootloader is not device tree aware
+> -KERNEL_OUTPUT = "${S}/arch/powerpc/boot/cuImage.thecus_n1200"
+> +KERNEL_OUTPUT = "arch/powerpc/boot/cuImage.thecus_n1200"
+>
+>   require linux.inc
+>
+applied thanks
+Eric
 
 
