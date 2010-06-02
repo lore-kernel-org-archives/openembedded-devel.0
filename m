@@ -1,46 +1,53 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from tx2ehsobe004.messaging.microsoft.com ([65.55.88.14]
+	helo=TX2EHSOBE008.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OJirC-0002eW-MO
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OJkEI-0003Lf-5M
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 09:59:24 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OJin3-00012n-5J; Wed, 02 Jun 2010 03:55:05 -0400
-Date: Wed, 2 Jun 2010 03:54:57 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-In-Reply-To: <20100602065840.GI5446@jama>
-Message-ID: <alpine.DEB.2.00.1006020354160.3418@lynx>
-References: <alpine.DEB.2.00.1006011641480.17094@lynx>
-	<4C057DFC.6010409@mlbassoc.com>
-	<alpine.DEB.2.00.1006011753350.30834@lynx>
-	<20100601220233.GG5446@jama> <4C058898.60202@mlbassoc.com>
-	<20100602065840.GI5446@jama>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Wed, 02 Jun 2010 11:27:20 +0200
+Received: from mail136-tx2-R.bigfish.com (10.9.14.251) by
+	TX2EHSOBE008.bigfish.com (10.9.40.28) with Microsoft SMTP Server id
+	8.1.340.0; Wed, 2 Jun 2010 09:07:56 +0000
+Received: from mail136-tx2 (localhost.localdomain [127.0.0.1])	by
+	mail136-tx2-R.bigfish.com (Postfix) with ESMTP id B9D20CD872F	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Jun 2010 09:07:55 +0000 (UTC)
+X-SpamScore: -40
+X-BigFish: VPS-40(zz14e3M14ffO936eM1447R1443N9371Pzz1202hz4fhzz32i2a8h61h)
+Received: from mail136-tx2 (localhost.localdomain [127.0.0.1]) by mail136-tx2
+	(MessageSwitch) id 127546967522886_3489;
+	Wed,  2 Jun 2010 09:07:55 +0000 (UTC)
+Received: from TX2EHSMHS047.bigfish.com (unknown [10.9.14.248])	by
+	mail136-tx2.bigfish.com (Postfix) with ESMTP id EC6475A804E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed,  2 Jun 2010 09:07:54 +0000 (UTC)
+Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
+	TX2EHSMHS047.bigfish.com (10.9.99.147) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Wed, 2 Jun 2010 09:07:53 +0000
+Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
+	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
+	Wed, 2 Jun 2010 14:37:02 +0530
+From: Soumya R <Soumya.R@kpitcummins.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 2 Jun 2010 14:37:02 +0530
+Thread-Topic: glibc_2.9.bb do_package failed
+Thread-Index: AQHLAjL2aHcuiLLyvUOqEmCS9QMB8w==
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF84@KCINPUNHJCMS01.kpit.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+X-Reverse-DNS: Kcinpunhjhc01.kpit.com
+X-SA-Exim-Connect-IP: 65.55.88.14
+X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-3.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] current build errors, OE dev branch, beagleboard-linuxtag2010-demo-image
+Subject: glibc_2.9.bb do_package failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,32 +61,131 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 07:59:24 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Wed, 02 Jun 2010 09:27:20 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 2 Jun 2010, Martin Jansa wrote:
+Hi,
+  =20
+Thanks for the reply..
 
-> Robert: If I remember right, you were asked few times to use tinderbox
-> instead sending many e-mails with pastebins, why didn't you follow this
-> advise yet?
+ Finally i could fix that..
 
-  you're right, i'd forgotten about tinderbox.  my apologies, i'll use
-that from now on.
+edit build/conf/local.conf
 
-  and i've just done a pull on the OE dev branch and i'm trying
-another build of the linuxtag target to see what's left to resolve.
+& add the following
 
-rday
+ENABLE_BINARY_LOCALE_GENERATION =3D 0
 
--- 
+ run the build again
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+  # make micro-image
 
-            Linux Consulting, Training and Kernel Pedantry.
+Regards,
+Soumya
+________________________________________
+From: Soumya R
+Sent: Tuesday, June 01, 2010 5:35 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: glibc_2.9.bb do_package failed
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+Hi All,
+
+       I am new to open embedded .. I am configuring micro-image for arm9 p=
+rocessor ..
+when i run bitbake micro-image i get the following error.
+
+NOTE: Gettext required but not in DEPENDS for file /home/likewise-open/KPIT=
+/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-interme=
+diate-4.3.3-r12.1/gcc-4.3.3/intl/configure.ac.
+Missing inherit gettext?
+NOTE: Running task 685 of 957 (ID: 535, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_compile)
+NOTE: Running task 686 of 957 (ID: 529, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_install)
+NOTE: Running task 687 of 957 (ID: 530, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_populate_sysr=
+oot)
+NOTE: Running task 688 of 957 (ID: 537, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package)
+NOTE: Running task 689 of 957 (ID: 539, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package_write=
+_ipk)
+NOTE: Running task 690 of 957 (ID: 156, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/glibc/glibc_2.9.bb, do_configure)
+NOTE: Running task 691 of 957 (ID: 536, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package_write=
+)
+NOTE: Running task 692 of 957 (ID: 538, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross-intermediate_4.3.3.bb, do_package_stage=
+)
+NOTE: Running task 693 of 957 (ID: 157, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/glibc/glibc_2.9.bb, do_qa_configure)
+NOTE: Running task 694 of 957 (ID: 158, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/glibc/glibc_2.9.bb, do_compile)
+NOTE: Running task 695 of 957 (ID: 152, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/glibc/glibc_2.9.bb, do_install)
+NOTE: Running task 696 of 957 (ID: 153, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/glibc/glibc_2.9.bb, do_populate_sysroot)
+NOTE: Running task 697 of 957 (ID: 160, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
+NOTE: preparing tree for binary locale generation
+NOTE: Running task 698 of 957 (ID: 142, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross_4.3.3.bb, do_configure)
+NOTE: generating locale es_NI (UTF-8)
+NOTE: Running task 699 of 957 (ID: 143, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross_4.3.3.bb, do_qa_configure)
+NOTE: Gettext required but not in DEPENDS for file /home/likewise-open/KPIT=
+/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.3.3-r=
+12.1/gcc-4.3.3/intl/configure.ac.
+Missing inherit gettext?
+NOTE: Running task 700 of 957 (ID: 144, /home/likewise-open/KPIT/soumyar/oe=
+/openembedded/recipes/gcc/gcc-cross_4.3.3.bb, do_compile)
+qemu-arm: relocation error: qemu-arm: symbol fcntl, version GLIBC_2.0 not d=
+efined in file libpthread.so.0 with link time reference
+NOTE: Task failed: localedef returned an error (command was PATH=3D"/home/l=
+ikewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin/armv5te-=
+angstrom-linux-gnueabi:/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroo=
+ts/i686-linux/usr/bin/armv5te-angstrom-linux-gnueabi:/home/likewise-open/KP=
+IT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/sbin:/home/likewise-open/KP=
+IT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin:/home/likewise-open/KPI=
+T/soumyar/oe/build/tmp/cross/armv5te//bin:/home/likewise-open/KPIT/soumyar/=
+oe/build/tmp/sysroots/i686-linux/sbin:/home/likewise-open/KPIT/soumyar/oe/b=
+uild/tmp/sysroots/i686-linux/bin:/likewise-open/KPIT/soumyar/oe/bitbake/bin=
+:/likewise-open/KPIT/soumyar/oe/bitbake/bin:/likewise-open/KPIT/soumyar/oe/=
+bitbake/bin:/home/likewise-open/KPIT/soumyar/bin:/usr/local/sbin:/usr/local=
+/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games" I18NPATH=3D"/home/likewise-o=
+pen/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9=
+-r36.3/locale-tree/usr/share/i18n" qemu-arm -s 1048576 -r 2.6.24 -L /home/l=
+ikewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/=
+glibc-2.9-r36.3/locale-tree -E LD_LIBRARY_PATH=3D/home/likewise-open/KPIT/s=
+oumyar/oe/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/loc=
+ale-tree/lib  /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/armv5te-an=
+gstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree/bin/localedef --force --ol=
+d-style --no-archive --prefix=3D/home/likewise-open/KPIT/soumyar/oe/build/t=
+mp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/locale-tree --inputf=
+ile=3D/usr/share/i18n/locales/es_NI --charmap=3DUTF-8 es_NI).
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/gl=
+ibc/glibc_2.9.bb do_package failed
+ERROR: Task 160 (/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/g=
+libc/glibc_2.9.bb, do_package) failed
+NOTE: Waiting for 1 active tasks to finish
+NOTE: 1: /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/gcc/gcc-c=
+ross_4.3.3.bb, do_compile (6409)
+NOTE: Tasks Summary: Attempted 698 tasks of which 0 didn't need to be rerun=
+ and 1 failed.
+ERROR: '/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/glibc/glib=
+c_2.9.bb' failed
+
+          Please help me out to resolve this i goggled but could not find t=
+he solution..
+
+Thanks in advance:-)
+
+Regards,
+Soumya
+
 
 
