@@ -1,44 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp-4.concepts.nl ([213.197.30.111])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OJusI-00077u-LT for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 22:49:19 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OJuoB-0005EQ-Az for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 22:45:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 22:45:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <pieterg@gmx.com>) id 1OJvuw-000471-5V
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 23:56:08 +0200
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>) id 1OJvql-0002HI-Rm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 23:51:47 +0200
+Received: from [10.9.0.12] (unknown [10.9.0.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 3E3096A0EA
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 22:45:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  2 Jun 2010 23:51:43 +0200 (CEST)
+From: pieterg <pieterg@gmx.com>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 02 Jun 2010 22:41:44 +0200
-Message-ID: <hu6fm8$gg4$2@dough.gmane.org>
-References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
-	<1275510896-30845-7-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <1275510896-30845-7-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed, 2 Jun 2010 23:51:37 +0200
+User-Agent: KMail/1.9.9
+MIME-Version: 1.0
+Message-Id: <201006022351.38129.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1OJvql-0002HI-Rm
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+X-SA-Exim-Connect-IP: 213.197.30.111
+X-SA-Exim-Mail-From: pieterg@gmx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 06/16] db_5.0.21: Add recipes for target and native packages.
+Subject: AUTOREV and SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,33 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 20:49:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 02 Jun 2010 21:56:08 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I have only a handful of (git) packages for which I need to use AUTOREV, but 
+when I define
 
-On 02-06-10 22:34, Khem Raj wrote:
-> * Get rid of old style staging.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/db/db-native_4.2.52.bb             |    1 -
->  recipes/db/db-native_5.0.21.bb             |    2 +
+BB_GIT_CLONE_FOR_SRCREV = "1"
+BB_LOCALCOUNT_OVERRIDE = ""
 
-Can these get converted to BBCLASSEXTEND?
+the sideeffect is that hundreds of other packages (which I don't need) are 
+suddenly having their repositories cloned as well, when their bb files are 
+parsed. Even though these packages are not using AUTOREV, they have fixed 
+SRCREV's (either in their bb files, or in my distro).
 
-regards,
+This is obviously taking a long time, consuming a lot of diskspace, 
+generating error messages for invalid git urls, and eventually bitbake will 
+fail because it encountered 'parsing errors' because of those invalid git 
+urls.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+I guess this is because all of these packages are using ${SRCPV} in their 
+PV, instead of ${SRCREV} (probably in order to find the correct LOCALCOUNT 
+for the gitrev).
 
-iD8DBQFMBsIIMkyGM64RGpERAqLBAJ9T1EGUDygy/NfaND/5EO0hSebLqgCfUPHo
-7eD81HjkwQFLTl3APVx7mFg=
-=mMkU
------END PGP SIGNATURE-----
+But argueing that people who don't use BB_GIT_CLONE_FOR_SRCREV will not get 
+these LOCALCOUNT's in their PV anyway, and people that do use 
+BB_GIT_CLONE_FOR_SRCREV will use SRCREV = ${AUTOREV} for the packages which 
+they want to be automatically updated, so SRCREV would equal SRCPV, 
+wouldn't it make sense to just use ${SRCREV} instead of ${SRCPV} in PV?
 
+Rgds, Pieter
 
 
