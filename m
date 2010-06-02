@@ -1,34 +1,34 @@
 Received: from mail-pz0-f193.google.com ([209.85.222.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OJujA-00031V-9X
+	(envelope-from <raj.khem@gmail.com>) id 1OJuj4-00031B-4Q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 22:39:57 +0200
-Received: by pzk31 with SMTP id 31so3241572pzk.16
+	Wed, 02 Jun 2010 22:39:59 +0200
+Received: by pzk31 with SMTP id 31so3241526pzk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 13:35:36 -0700 (PDT)
+	Wed, 02 Jun 2010 13:35:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=FrZW7a/xugttjGzw+dcGfRWnY2qtvMDARBmzBRbKGd8=;
-	b=ihYi9ZH5WPZqLDK3q8y14w1HOEVBIDv8z/beI/n8SBtDhJkj7eTXCHwp5g6z7o5OdJ
-	d9t5vN6wOZKm+I2glLaLVqAr4DAikEI/t2zhnWqtay2rAESeYy1NjIqL9cG3/AvLZf6p
-	1HjMnME/L7P6Y8S601BwNfFAVPOmg1wAq4/F8=
+	bh=yXQrwlyA5GIC9Ns6pqaZI1A39J1O5laKruljnVJK59o=;
+	b=sxslaACENRt/K/fcF1TkgUHmFwEl1JpmXGNiSq6PNKJ9E+82OycgoG4TJ7J7Nuq1EI
+	aIwD9W80tZinS10/nhyUfTAHDqVoeU3vwyQ+KNcPKhGiCux0bPJ3Yish4HYJut1K5mY1
+	Bl1VmNczLBBx3+wg0Lx1dNfILcgp2BelagLU4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=iRIyb5O0gZ/0BoVByzYr875y4Z9FP6H4pEqqGTn4lxpkr/Dl9s5gRLsJ3jExNxIx29
-	7NGNYjW0YwT2nxwZK4PjBLPo2Bnf2Om5J5P4UeURB651PzLKUNNAGi2eVuM9bgL5Xadh
-	nvSQYwdntOK/JUcUtuSZ7yTiTegbXwUYdnNUE=
-Received: by 10.140.82.6 with SMTP id f6mr7055591rvb.74.1275510935810;
-	Wed, 02 Jun 2010 13:35:35 -0700 (PDT)
+	b=WQ4ND0QL0ezvMfY/ce6bkQynb9ySTj9rgTVhQAQbTzHZXvjCDWggBqBEJxU7pda2nW
+	dhCL6MRntIWkr8nHjv0jDW52cGbjWuM3dr07c+pA6oTz4KQdatUafl8pan/LboOer0Pp
+	DNOVkQWmVbRRnYWwomUFI0IZ/g1NhW1lKedBM=
+Received: by 10.142.210.15 with SMTP id i15mr5433337wfg.256.1275510928885;
+	Wed, 02 Jun 2010 13:35:28 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 20sm5942447pzk.7.2010.06.02.13.35.33
+	by mx.google.com with ESMTPS id 20sm5942447pzk.7.2010.06.02.13.35.27
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 02 Jun 2010 13:35:34 -0700 (PDT)
+	Wed, 02 Jun 2010 13:35:27 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jun 2010 13:34:48 -0700
-Message-Id: <1275510896-30845-9-git-send-email-raj.khem@gmail.com>
+Date: Wed,  2 Jun 2010 13:34:44 -0700
+Message-Id: <1275510896-30845-5-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
 References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 08/16] glib-2.0_2.24.0.bb: Remove virtual/libiconv virtual/libintl from DEPENDS
+Subject: [PATCH 04/16] coreutils-8.5: Add recipes for version 8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,29 +54,122 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 20:39:59 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 20:40:00 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/glib-2.0/glib-2.0_2.24.0.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/coreutils/coreutils-8.5.inc         |    7 +++
+ recipes/coreutils/coreutils-8.5/onceonly.m4 |   63 +++++++++++++++++++++++++++
+ recipes/coreutils/coreutils-native_8.5.bb   |    4 ++
+ recipes/coreutils/coreutils_8.5.bb          |    4 ++
+ 4 files changed, 78 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/coreutils/coreutils-8.5.inc
+ create mode 100644 recipes/coreutils/coreutils-8.5/onceonly.m4
+ create mode 100644 recipes/coreutils/coreutils-native_8.5.bb
+ create mode 100644 recipes/coreutils/coreutils_8.5.bb
 
-diff --git a/recipes/glib-2.0/glib-2.0_2.24.0.bb b/recipes/glib-2.0/glib-2.0_2.24.0.bb
-index 56fe567..3a90dc6 100644
---- a/recipes/glib-2.0/glib-2.0_2.24.0.bb
-+++ b/recipes/glib-2.0/glib-2.0_2.24.0.bb
-@@ -6,9 +6,9 @@ UNIX-like platforms, Windows, OS/2 and BeOS."
- LICENSE = "LGPL"
- SECTION = "libs"
- PRIORITY = "optional"
--DEPENDS = "glib-2.0-native gtk-doc virtual/libiconv virtual/libintl zlib"
-+DEPENDS = "glib-2.0-native gtk-doc zlib"
- 
--PR = "r4"
-+PR = "r5"
- 
- SRC_URI = "\
-   http://ftp.gnome.org/pub/GNOME/sources/glib/2.24/glib-${PV}.tar.bz2;name=archive \
+diff --git a/recipes/coreutils/coreutils-8.5.inc b/recipes/coreutils/coreutils-8.5.inc
+new file mode 100644
+index 0000000..da57745
+--- /dev/null
++++ b/recipes/coreutils/coreutils-8.5.inc
+@@ -0,0 +1,7 @@
++require coreutils.inc
++
++SRC_URI = "ftp://ftp.gnu.org/gnu/coreutils/coreutils-${PV}.tar.gz \
++          "
++SRC_URI[md5sum] = "c1ffe586d001e87d66cd80c4536ee823"
++SRC_URI[sha256sum] = "dd243e2ac7d0ed203b170ecfb8299643779e7501fec2b45ae1cea8a450fa8ca0"
++
+diff --git a/recipes/coreutils/coreutils-8.5/onceonly.m4 b/recipes/coreutils/coreutils-8.5/onceonly.m4
+new file mode 100644
+index 0000000..f6fec37
+--- /dev/null
++++ b/recipes/coreutils/coreutils-8.5/onceonly.m4
+@@ -0,0 +1,63 @@
++# onceonly.m4 serial 3
++dnl Copyright (C) 2002, 2003 Free Software Foundation, Inc.
++dnl This file is free software, distributed under the terms of the GNU
++dnl General Public License.  As a special exception to the GNU General
++dnl Public License, this file may be distributed as part of a program
++dnl that contains a configuration script generated by Autoconf, under
++dnl the same distribution terms as the rest of that program.
++
++dnl This file defines some "once only" variants of standard autoconf macros.
++dnl   AC_CHECK_HEADERS_ONCE         like  AC_CHECK_HEADERS
++dnl   AC_CHECK_FUNCS_ONCE           like  AC_CHECK_FUNCS
++dnl   AC_CHECK_DECLS_ONCE           like  AC_CHECK_DECLS
++dnl   AC_REQUIRE([AC_HEADER_STDC])  like  AC_HEADER_STDC
++dnl The advantage is that the check for each of the headers/functions/decls
++dnl will be put only once into the 'configure' file. It keeps the size of
++dnl the 'configure' file down, and avoids redundant output when 'configure'
++dnl is run.
++dnl The drawback is that the checks cannot be conditionalized. If you write
++dnl   if some_condition; then gl_CHECK_HEADERS(stdlib.h); fi
++dnl inside an AC_DEFUNed function, the gl_CHECK_HEADERS macro call expands to
++dnl empty, and the check will be inserted before the body of the AC_DEFUNed
++dnl function.
++
++dnl Autoconf version 2.57 or newer is recommended.
++AC_PREREQ(2.54)
++
++# AC_CHECK_HEADERS_ONCE(HEADER1 HEADER2 ...) is a once-only variant of
++# AC_CHECK_HEADERS(HEADER1 HEADER2 ...).
++AC_DEFUN([AC_CHECK_HEADERS_ONCE], [
++  :
++  AC_FOREACH([gl_HEADER_NAME], [$1], [
++    AC_DEFUN([gl_CHECK_HEADER_]m4_quote(translit(defn([gl_HEADER_NAME]),
++                                                 [-./], [___])), [
++      AC_CHECK_HEADERS(gl_HEADER_NAME)
++    ])
++    AC_REQUIRE([gl_CHECK_HEADER_]m4_quote(translit(gl_HEADER_NAME,
++                                                   [-./], [___])))
++  ])
++])
++
++# AC_CHECK_FUNCS_ONCE(FUNC1 FUNC2 ...) is a once-only variant of
++# AC_CHECK_FUNCS(FUNC1 FUNC2 ...).
++AC_DEFUN([AC_CHECK_FUNCS_ONCE], [
++  :
++  AC_FOREACH([gl_FUNC_NAME], [$1], [
++    AC_DEFUN([gl_CHECK_FUNC_]defn([gl_FUNC_NAME]), [
++      AC_CHECK_FUNCS(defn([gl_FUNC_NAME]))
++    ])
++    AC_REQUIRE([gl_CHECK_FUNC_]defn([gl_FUNC_NAME]))
++  ])
++])
++
++# AC_CHECK_DECLS_ONCE(DECL1 DECL2 ...) is a once-only variant of
++# AC_CHECK_DECLS(DECL1, DECL2, ...).
++AC_DEFUN([AC_CHECK_DECLS_ONCE], [
++  :
++  AC_FOREACH([gl_DECL_NAME], [$1], [
++    AC_DEFUN([gl_CHECK_DECL_]defn([gl_DECL_NAME]), [
++      AC_CHECK_DECLS(defn([gl_DECL_NAME]))
++    ])
++    AC_REQUIRE([gl_CHECK_DECL_]defn([gl_DECL_NAME]))
++  ])
++])
+diff --git a/recipes/coreutils/coreutils-native_8.5.bb b/recipes/coreutils/coreutils-native_8.5.bb
+new file mode 100644
+index 0000000..fbf416e
+--- /dev/null
++++ b/recipes/coreutils/coreutils-native_8.5.bb
+@@ -0,0 +1,4 @@
++require coreutils-${PV}.inc
++require coreutils-native.inc
++
++PR = "r0"
+diff --git a/recipes/coreutils/coreutils_8.5.bb b/recipes/coreutils/coreutils_8.5.bb
+new file mode 100644
+index 0000000..b4025c2
+--- /dev/null
++++ b/recipes/coreutils/coreutils_8.5.bb
+@@ -0,0 +1,4 @@
++require coreutils-${PV}.inc
++require coreutils-target.inc
++
++PR = "r0"
 -- 
 1.7.0.4
 
