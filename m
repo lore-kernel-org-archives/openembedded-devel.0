@@ -1,38 +1,44 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1OJuo2-0006tY-Q5
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 22:44:56 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 80E9A6E100C
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJusI-00077u-LT for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 22:49:19 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJuoB-0005EQ-Az for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 22:45:03 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Jun 2010 22:45:03 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jun 2010 16:40:38 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 00829-02 for <openembedded-devel@lists.openembedded.org>; 
-	Wed,  2 Jun 2010 16:40:38 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 9C8F46D49B6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  2 Jun 2010 16:40:37 -0400 (EDT)
-Message-ID: <4C06C1C5.4030405@cbnco.com>
-Date: Wed, 02 Jun 2010 16:40:37 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
-MIME-Version: 1.0
+	Wed, 02 Jun 2010 22:45:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinnks0kTFkPqkwLR-TvvzzAvOsfTVaO521fgBMs@mail.gmail.com>
-In-Reply-To: <AANLkTinnks0kTFkPqkwLR-TvvzzAvOsfTVaO521fgBMs@mail.gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 02 Jun 2010 22:41:44 +0200
+Message-ID: <hu6fm8$gg4$2@dough.gmane.org>
+References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
+	<1275510896-30845-7-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <1275510896-30845-7-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: srctree status
+Subject: Re: [PATCH 06/16] db_5.0.21: Add recipes for target and native packages.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,28 +52,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 20:44:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 02 Jun 2010 20:49:19 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Cliff Brake wrote:
-> 13:42 < kergoth_> if you aren't using a native or cross version of the
-> recipe, then you can confidently say you don't need it to do it
-> 13:44 < kergoth_> take a look at the class, the merge_tasks function
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Another handy thing about merge_tasks is that it mostly prevents 
-interleaving of configure/compile for builds for different 
-architectures. i.e. it stops this from silently producing broken 
-executables:
+On 02-06-10 22:34, Khem Raj wrote:
+> * Get rid of old style staging.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes/db/db-native_4.2.52.bb             |    1 -
+>  recipes/db/db-native_5.0.21.bb             |    2 +
 
-MACHINE=mach1 bitbake pkg -c configure
-MACHINE=mach2 bitbake pkg
-MACHINE=mach1 bitbake pkg
+Can these get converted to BBCLASSEXTEND?
 
+regards,
 
-... but you'd almost have to be trying to shoot yourself in the foot to 
-do that by accident.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Mike
+iD8DBQFMBsIIMkyGM64RGpERAqLBAJ9T1EGUDygy/NfaND/5EO0hSebLqgCfUPHo
+7eD81HjkwQFLTl3APVx7mFg=
+=mMkU
+-----END PGP SIGNATURE-----
+
 
 
