@@ -1,38 +1,38 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OJuj3-00030e-Nf
+	(envelope-from <raj.khem@gmail.com>) id 1OJuj2-00030i-HF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 22:39:51 +0200
-Received: by mail-pv0-f175.google.com with SMTP id 30so2440042pvc.6
+	Wed, 02 Jun 2010 22:39:54 +0200
+Received: by mail-px0-f175.google.com with SMTP id 14so2440803pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 13:35:32 -0700 (PDT)
+	Wed, 02 Jun 2010 13:35:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=4mC9ipQtBF2VPGvlGLuUqLqb5OQDC8RMfVoCCw40quo=;
-	b=IaJl1os9PU6wQQSLNGGoJrh0p7x8cThFQtMcaJspxNH69iBnD4HHoLHFe9sz1Suq+x
-	LdHRjFfAsbFRd+6y8xnvHJ6gZhXmOquA+VwMEmlfRtfvQ4pStO+Gqlmi2Kk/8+NyJE08
-	eY3icLImIBlV3ZvDx1Cif5MBLLGJfpjYXXEjw=
+	bh=1Jv/WlnIfJyPast+IfsqLIdAcI83PSRlgP9L9dViunI=;
+	b=r71Z2IV8DCDU87vnFNEyDsk8LnlM/dhzjUcj+zB88dsVJIvrWaZCD1mWL/oQz73I4d
+	F74fPuH+JM3xQ7Z5xvD391pKdR0W2w0hxurZOnvUM58C0VQlEmUZUohBeZNTQLTklrxz
+	PxIHnzK5kCobEmyQ47Le5UdRGheLrkIhXb6lY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=x/4zEqHbpDvJ8tT4+hWiERRZ0byAK8QDOt+p0rev7hEa6sffN+VjkxLQdP5y2J7tCa
-	2Qqmx6dHXuit1jtO3zb62CRjExkbRXqWYwn/mJtn7dQa5ykSzXUFwpC3eeYUBeQWhS95
-	CrvxTrZUoKtkSs4cGTSZ7vFifVd2Ru10YbWIQ=
-Received: by 10.142.152.5 with SMTP id z5mr5554044wfd.266.1275510932532;
-	Wed, 02 Jun 2010 13:35:32 -0700 (PDT)
+	b=cXRPoHPWVjGpLuf8t1FWzEWqpmidk+DZGw0w06Y9IkrELwL0UNWwXBnkdeAzi8CyQz
+	IS8NbTbAtijC1Z8b46GqPEt6AYEKCJIppC2hba5n/amEqf0yiiLxt1sgIDt9jogD8twM
+	0W72YP2EA/xmgaBTYrPKRd0B8XvHLETWiyREM=
+Received: by 10.142.250.21 with SMTP id x21mr5393819wfh.263.1275510931277;
+	Wed, 02 Jun 2010 13:35:31 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id 20sm5942447pzk.7.2010.06.02.13.35.31
+	by mx.google.com with ESMTPS id 20sm5942447pzk.7.2010.06.02.13.35.29
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 02 Jun 2010 13:35:31 -0700 (PDT)
+	Wed, 02 Jun 2010 13:35:30 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jun 2010 13:34:46 -0700
-Message-Id: <1275510896-30845-7-git-send-email-raj.khem@gmail.com>
+Date: Wed,  2 Jun 2010 13:34:45 -0700
+Message-Id: <1275510896-30845-6-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
 References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 06/16] db_5.0.21: Add recipes for target and native packages.
+Subject: [PATCH 05/16] libiconv-1.13.1: Add recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,261 +54,938 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 20:39:51 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 20:39:54 -0000
 
 * Get rid of old style staging.
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/db/db-native_4.2.52.bb             |    1 -
- recipes/db/db-native_5.0.21.bb             |    2 +
- recipes/db/db4-native.inc                  |   13 ----
- recipes/db/db4.inc                         |   13 ----
- recipes/db/db5.inc                         |   83 ++++++++++++++++++++++++++++
- recipes/db/db_4.2.52.bb                    |    2 +-
- recipes/db/db_4.3.29.bb                    |    2 +-
- recipes/db/db_5.0.21.bb                    |   15 +++++
- recipes/db/files/db5-arm-thumb-mutex.patch |   38 +++++++++++++
- 9 files changed, 140 insertions(+), 29 deletions(-)
- create mode 100644 recipes/db/db-native_5.0.21.bb
- create mode 100644 recipes/db/db5.inc
- create mode 100644 recipes/db/db_5.0.21.bb
- create mode 100644 recipes/db/files/db5-arm-thumb-mutex.patch
+ recipes/libiconv/libiconv-1.13.1/autoconf.patch |  834 +++++++++++++++++++++++
+ recipes/libiconv/libiconv.inc                   |   15 +-
+ recipes/libiconv/libiconv_1.12.bb               |   10 +
+ recipes/libiconv/libiconv_1.13.1.bb             |   24 +
+ 4 files changed, 870 insertions(+), 13 deletions(-)
+ create mode 100644 recipes/libiconv/libiconv-1.13.1/autoconf.patch
+ create mode 100644 recipes/libiconv/libiconv_1.13.1.bb
 
-diff --git a/recipes/db/db-native_4.2.52.bb b/recipes/db/db-native_4.2.52.bb
-index 9f307d6..4ff80fd 100644
---- a/recipes/db/db-native_4.2.52.bb
-+++ b/recipes/db/db-native_4.2.52.bb
-@@ -1,5 +1,4 @@
- require db_${PV}.bb
- require db4-native.inc
--
- SRC_URI[md5sum] = "8b5cff6eb83972afdd8e0b821703c33c"
- SRC_URI[sha256sum] = "f4bddd8d1b4cde0daf5e13e3493ed62a25b736b0bf258e1d929e47bc6a82a28c"
-diff --git a/recipes/db/db-native_5.0.21.bb b/recipes/db/db-native_5.0.21.bb
+diff --git a/recipes/libiconv/libiconv-1.13.1/autoconf.patch b/recipes/libiconv/libiconv-1.13.1/autoconf.patch
 new file mode 100644
-index 0000000..0e6381b
+index 0000000..1c0efbf
 --- /dev/null
-+++ b/recipes/db/db-native_5.0.21.bb
-@@ -0,0 +1,2 @@
-+require db_${PV}.bb
-+require db4-native.inc
-diff --git a/recipes/db/db4-native.inc b/recipes/db/db4-native.inc
-index cc83d86..7fd753d 100644
---- a/recipes/db/db4-native.inc
-+++ b/recipes/db/db4-native.inc
-@@ -13,16 +13,3 @@ do_package() {
- }
++++ b/recipes/libiconv/libiconv-1.13.1/autoconf.patch
+@@ -0,0 +1,834 @@
++Index: libiconv-1.13.1/configure.ac
++===================================================================
++--- libiconv-1.13.1.orig/configure.ac	2009-06-30 13:48:03.000000000 -0700
+++++ libiconv-1.13.1/configure.ac	2010-06-01 02:57:31.301726190 -0700
++@@ -23,7 +23,7 @@ AC_CONFIG_AUX_DIR([build-aux])
++ AM_INIT_AUTOMAKE([libiconv], [1.13.1])
++ AC_CONFIG_HEADERS([config.h lib/config.h])
++ AC_PROG_MAKE_SET
++-
+++AC_CONFIG_MACRO_DIR([m4])
++ dnl           checks for basic programs
++ 
++ AC_PROG_CC
++Index: libiconv-1.13.1/libcharset/configure.ac
++===================================================================
++--- libiconv-1.13.1.orig/libcharset/configure.ac	2009-06-21 04:17:33.000000000 -0700
+++++ libiconv-1.13.1/libcharset/configure.ac	2010-06-01 02:57:31.301726190 -0700
++@@ -16,17 +16,17 @@ dnl along with the GNU CHARSET Library; 
++ dnl write to the Free Software Foundation, Inc., 51 Franklin Street,
++ dnl Fifth Floor, Boston, MA 02110-1301, USA.
++ 
++-AC_PREREQ([2.13])
+++AC_PREREQ(2.61)
+++AC_INIT([libcharset],[1.4] )
+++AC_CONFIG_SRCDIR([lib/localcharset.c])
++ 
++-PACKAGE=libcharset
++-VERSION=1.4
++-
++-AC_INIT([lib/localcharset.c])
++ AC_CONFIG_AUX_DIR([build-aux])
++ AC_CONFIG_HEADER([config.h])
++ AC_PROG_MAKE_SET
++-AC_SUBST([PACKAGE])
++-AC_SUBST([VERSION])
+++dnl AC_SUBST(PACKAGE)
+++dnl AC_SUBST(VERSION)
+++
+++AC_CONFIG_MACRO_DIR([m4])
++ 
++ dnl           checks for basic programs
++ 
++Index: libiconv-1.13.1/libcharset/m4/libtool.m4
++===================================================================
++--- libiconv-1.13.1.orig/libcharset/m4/libtool.m4	2009-06-21 04:17:33.000000000 -0700
+++++ libiconv-1.13.1/libcharset/m4/libtool.m4	2010-06-01 02:57:31.301726190 -0700
++@@ -89,7 +89,8 @@ _LT_SET_OPTIONS([$0], [$1])
++ LIBTOOL_DEPS="$ltmain"
++ 
++ # Always use our own libtool.
++-LIBTOOL="${CONFIG_SHELL-$SHELL} "'$(top_builddir)/libtool'
+++LIBTOOL='$(SHELL) $(top_builddir)'
+++LIBTOOL="$LIBTOOL/$host_alias-libtool"
++ AC_SUBST(LIBTOOL)dnl
++ 
++ _LT_SETUP
++@@ -211,7 +212,7 @@ delay_single_quote_subst='s/'\''/'\'\\\\
++ no_glob_subst='s/\*/\\\*/g'
++ 
++ # Global variables:
++-ofile=libtool
+++ofile=${host_alias}-libtool
++ can_build_shared=yes
++ 
++ # All known linkers require a `.a' archive for static linking (except MSVC,
++@@ -380,12 +381,12 @@ m4_define([lt_decl_dquote_varnames],
++ # lt_decl_varnames_tagged([SEPARATOR], [VARNAME1...])
++ # ---------------------------------------------------
++ m4_define([lt_decl_varnames_tagged],
++-[m4_assert([$# <= 2])dnl
++-_$0(m4_quote(m4_default([$1], [[, ]])),
++-    m4_ifval([$2], [[$2]], [m4_dquote(lt_decl_tag_varnames)]),
++-    m4_split(m4_normalize(m4_quote(_LT_TAGS)), [ ]))])
++-m4_define([_lt_decl_varnames_tagged],
++-[m4_ifval([$3], [lt_combine([$1], [$2], [_], $3)])])
+++[_$0(m4_quote(m4_default([$1], [[, ]])),
+++     m4_quote(m4_if([$2], [],
+++		     m4_quote(lt_decl_tag_varnames),
+++		  m4_quote(m4_shift($@)))),
+++     m4_split(m4_normalize(m4_quote(_LT_TAGS))))])
+++m4_define([_lt_decl_varnames_tagged], [lt_combine([$1], [$2], [_], $3)])
++ 
++ 
++ # lt_decl_all_varnames([SEPARATOR], [VARNAME1...])
++@@ -990,11 +991,7 @@ m4_defun([_LT_DARWIN_LINKER_FEATURES],
++   _LT_TAGVAR(whole_archive_flag_spec, $1)=''
++   _LT_TAGVAR(link_all_deplibs, $1)=yes
++   _LT_TAGVAR(allow_undefined_flag, $1)="$_lt_dar_allow_undefined"
++-  case $cc_basename in
++-     ifort*) _lt_dar_can_shared=yes ;;
++-     *) _lt_dar_can_shared=$GCC ;;
++-  esac
++-  if test "$_lt_dar_can_shared" = "yes"; then
+++  if test "$GCC" = "yes"; then
++     output_verbose_link_cmd=echo
++     _LT_TAGVAR(archive_cmds, $1)="\$CC -dynamiclib \$allow_undefined_flag -o \$lib \$libobjs \$deplibs \$compiler_flags -install_name \$rpath/\$soname \$verstring $_lt_dar_single_mod${_lt_dsymutil}"
++     _LT_TAGVAR(module_cmds, $1)="\$CC \$allow_undefined_flag -o \$lib -bundle \$libobjs \$deplibs \$compiler_flags${_lt_dsymutil}"
++@@ -1516,7 +1513,7 @@ AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [d
++     lt_cv_sys_max_cmd_len=-1;
++     ;;
++ 
++-  cygwin* | mingw* | cegcc*)
+++  cygwin* | mingw*)
++     # On Win9x/ME, this test blows up -- it succeeds, but takes
++     # about 5 minutes as the teststring grows exponentially.
++     # Worse, since 9x/ME are not pre-emptively multitasking,
++@@ -1684,6 +1681,10 @@ else
++ #  endif
++ #endif
++ 
+++#ifdef __cplusplus
+++extern "C" void exit (int);
+++#endif
+++
++ void fnord() { int i=42;}
++ int main ()
++ {
++@@ -1699,7 +1700,7 @@ int main ()
++   else
++     puts (dlerror ());
++ 
++-  return status;
+++    exit (status);
++ }]
++ _LT_EOF
++   if AC_TRY_EVAL(ac_link) && test -s conftest${ac_exeext} 2>/dev/null; then
++@@ -1738,7 +1739,7 @@ else
++     lt_cv_dlopen_self=yes
++     ;;
++ 
++-  mingw* | pw32* | cegcc*)
+++  mingw* | pw32*)
++     lt_cv_dlopen="LoadLibrary"
++     lt_cv_dlopen_libs=
++     ;;
++@@ -2035,7 +2036,6 @@ m4_defun([_LT_SYS_DYNAMIC_LINKER],
++ [AC_REQUIRE([AC_CANONICAL_HOST])dnl
++ m4_require([_LT_DECL_EGREP])dnl
++ m4_require([_LT_FILEUTILS_DEFAULTS])dnl
++-m4_require([_LT_DECL_OBJDUMP])dnl
++ m4_require([_LT_DECL_SED])dnl
++ AC_MSG_CHECKING([dynamic linker characteristics])
++ m4_if([$1],
++@@ -2200,14 +2200,14 @@ bsdi[[45]]*)
++   # libtool to hard-code these into programs
++   ;;
++ 
++-cygwin* | mingw* | pw32* | cegcc*)
+++cygwin* | mingw* | pw32*)
++   version_type=windows
++   shrext_cmds=".dll"
++   need_version=no
++   need_lib_prefix=no
++ 
++   case $GCC,$host_os in
++-  yes,cygwin* | yes,mingw* | yes,pw32* | yes,cegcc*)
+++  yes,cygwin* | yes,mingw* | yes,pw32*)
++     library_names_spec='$libname.dll.a'
++     # DLL is installed to $(libdir)/../bin by postinstall_cmds
++     postinstall_cmds='base_file=`basename \${file}`~
++@@ -2230,7 +2230,7 @@ cygwin* | mingw* | pw32* | cegcc*)
++       soname_spec='`echo ${libname} | sed -e 's/^lib/cyg/'``echo ${release} | $SED -e 's/[[.]]/-/g'`${versuffix}${shared_ext}'
++       sys_lib_search_path_spec="/usr/lib /lib/w32api /lib /usr/local/lib"
++       ;;
++-    mingw* | cegcc*)
+++    mingw*)
++       # MinGW DLLs use traditional 'lib' prefix
++       soname_spec='${libname}`echo ${release} | $SED -e 's/[[.]]/-/g'`${versuffix}${shared_ext}'
++       sys_lib_search_path_spec=`$CC -print-search-dirs | $GREP "^libraries:" | $SED -e "s/^libraries://" -e "s,=/,/,g"`
++@@ -2656,7 +2656,7 @@ tpf*)
++   version_type=linux
++   need_lib_prefix=no
++   need_version=no
++-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+++  library_name_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
++   shlibpath_var=LD_LIBRARY_PATH
++   shlibpath_overrides_runpath=no
++   hardcode_into_libs=yes
++@@ -2957,7 +2957,6 @@ _LT_DECL([], [reload_cmds], [2])dnl
++ #  -- PORTME fill in with the dynamic library characteristics
++ m4_defun([_LT_CHECK_MAGIC_METHOD],
++ [m4_require([_LT_DECL_EGREP])
++-m4_require([_LT_DECL_OBJDUMP])
++ AC_CACHE_CHECK([how to recognize dependent libraries],
++ lt_cv_deplibs_check_method,
++ [lt_cv_file_magic_cmd='$MAGIC_CMD'
++@@ -3008,12 +3007,6 @@ mingw* | pw32*)
++   fi
++   ;;
++ 
++-cegcc)
++-  # use the weaker test based on 'objdump'. See mingw*.
++-  lt_cv_deplibs_check_method='file_magic file format pe-arm-.*little(.*architecture: arm)?'
++-  lt_cv_file_magic_cmd='$OBJDUMP -f'
++-  ;;
++-
++ darwin* | rhapsody*)
++   lt_cv_deplibs_check_method=pass_all
++   ;;
++@@ -3325,7 +3318,7 @@ case $host_os in
++ aix*)
++   symcode='[[BCDT]]'
++   ;;
++-cygwin* | mingw* | pw32* | cegcc*)
+++cygwin* | mingw* | pw32*)
++   symcode='[[ABCDGISTW]]'
++   ;;
++ hpux*)
++@@ -3571,7 +3564,7 @@ m4_if([$1], [CXX], [
++     beos* | irix5* | irix6* | nonstopux* | osf3* | osf4* | osf5*)
++       # PIC is the default for these OSes.
++       ;;
++-    mingw* | cygwin* | os2* | pw32* | cegcc*)
+++    mingw* | cygwin* | os2* | pw32*)
++       # This hack is so that the source file can tell whether it is being
++       # built for inclusion in a dll (and should export symbols for example).
++       # Although the cygwin gcc ignores -fPIC, still need this for old-style
++@@ -3598,11 +3591,10 @@ m4_if([$1], [CXX], [
++       fi
++       ;;
++     hpux*)
++-      # PIC is the default for 64-bit PA HP-UX, but not for 32-bit
++-      # PA HP-UX.  On IA64 HP-UX, PIC is the default but the pic flag
++-      # sets the default TLS model and affects inlining.
+++      # PIC is the default for IA64 HP-UX and 64-bit HP-UX, but
+++      # not for PA HP-UX.
++       case $host_cpu in
++-      hppa*64*)
+++      hppa*64*|ia64*)
++ 	;;
++       *)
++ 	_LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++@@ -3700,19 +3692,12 @@ m4_if([$1], [CXX], [
++ 	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='--backend -Wl,'
++ 	    _LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++ 	    ;;
++-	  ecpc* )
++-	    # old Intel C++ for x86_64 which still supported -KPIC.
+++	  icpc* | ecpc* )
+++	    # Intel C++
++ 	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++ 	    _LT_TAGVAR(lt_prog_compiler_pic, $1)='-KPIC'
++ 	    _LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++ 	    ;;
++-	  icpc* )
++-	    # Intel C++, used to be incompatible with GCC.
++-	    # ICC 10 doesn't accept -KPIC any more.
++-	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++-	    _LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++-	    _LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++-	    ;;
++ 	  pgCC* | pgcpp*)
++ 	    # Portland Group C++ compiler
++ 	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++@@ -3878,7 +3863,7 @@ m4_if([$1], [CXX], [
++       # PIC is the default for these OSes.
++       ;;
++ 
++-    mingw* | cygwin* | pw32* | os2* | cegcc*)
+++    mingw* | cygwin* | pw32* | os2*)
++       # This hack is so that the source file can tell whether it is being
++       # built for inclusion in a dll (and should export symbols for example).
++       # Although the cygwin gcc ignores -fPIC, still need this for old-style
++@@ -3894,11 +3879,10 @@ m4_if([$1], [CXX], [
++       ;;
++ 
++     hpux*)
++-      # PIC is the default for 64-bit PA HP-UX, but not for 32-bit
++-      # PA HP-UX.  On IA64 HP-UX, PIC is the default but the pic flag
++-      # sets the default TLS model and affects inlining.
+++      # PIC is the default for IA64 HP-UX and 64-bit HP-UX, but
+++      # not for PA HP-UX.
++       case $host_cpu in
++-      hppa*64*)
+++      hppa*64*|ia64*)
++ 	# +Z the default
++ 	;;
++       *)
++@@ -3948,7 +3932,7 @@ m4_if([$1], [CXX], [
++       fi
++       ;;
++ 
++-    mingw* | cygwin* | pw32* | os2* | cegcc*)
+++    mingw* | cygwin* | pw32* | os2*)
++       # This hack is so that the source file can tell whether it is being
++       # built for inclusion in a dll (and should export symbols for example).
++       m4_if([$1], [GCJ], [],
++@@ -3979,25 +3963,11 @@ m4_if([$1], [CXX], [
++ 
++     linux* | k*bsd*-gnu)
++       case $cc_basename in
++-      # old Intel for x86_64 which still supported -KPIC.
++-      ecc*)
+++      icc* | ecc* | ifort*)
++ 	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++ 	_LT_TAGVAR(lt_prog_compiler_pic, $1)='-KPIC'
++ 	_LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++         ;;
++-      # icc used to be incompatible with GCC.
++-      # ICC 10 doesn't accept -KPIC any more.
++-      icc* | ifort*)
++-	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++-	_LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++-	_LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++-        ;;
++-      # Lahey Fortran 8.1.
++-      lf95*)
++-	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++-	_LT_TAGVAR(lt_prog_compiler_pic, $1)='--shared'
++-	_LT_TAGVAR(lt_prog_compiler_static, $1)='--static'
++-	;;
++       pgcc* | pgf77* | pgf90* | pgf95*)
++         # Portland Group compilers (*not* the Pentium gcc compiler,
++ 	# which looks to be a dead project)
++@@ -4179,7 +4149,7 @@ m4_if([$1], [CXX], [
++   pw32*)
++     _LT_TAGVAR(export_symbols_cmds, $1)="$ltdll_cmds"
++   ;;
++-  cygwin* | mingw* | cegcc*)
+++  cygwin* | mingw*)
++     _LT_TAGVAR(export_symbols_cmds, $1)='$NM $libobjs $convenience | $global_symbol_pipe | $SED -e '\''/^[[BCDGRS]][[ ]]/s/.*[[ ]]\([[^ ]]*\)/\1 DATA/;/^.*[[ ]]__nm__/s/^.*[[ ]]__nm__\([[^ ]]*\)[[ ]][[^ ]]*/\1 DATA/;/^I[[ ]]/d;/^[[AITW]][[ ]]/s/.* //'\'' | sort | uniq > $export_symbols'
++   ;;
++   *)
++@@ -4231,7 +4201,7 @@ dnl Note also adjust exclude_expsyms for
++   extract_expsyms_cmds=
++ 
++   case $host_os in
++-  cygwin* | mingw* | pw32* | cegcc*)
+++  cygwin* | mingw* | pw32*)
++     # FIXME: the MSVC++ port hasn't been tested in a loooong time
++     # When not using gcc, we currently assume that we are using
++     # Microsoft Visual C++.
++@@ -4318,7 +4288,7 @@ _LT_EOF
++       fi
++       ;;
++ 
++-    cygwin* | mingw* | pw32* | cegcc*)
+++    cygwin* | mingw* | pw32*)
++       # _LT_TAGVAR(hardcode_libdir_flag_spec, $1) is actually meaningless,
++       # as there is no search path for DLLs.
++       _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='-L$libdir'
++@@ -4384,9 +4354,6 @@ _LT_EOF
++ 	  tmp_addflag=' -i_dynamic -nofor_main' ;;
++ 	ifc* | ifort*)			# Intel Fortran compiler
++ 	  tmp_addflag=' -nofor_main' ;;
++-	lf95*)				# Lahey Fortran 8.1
++-	  _LT_TAGVAR(whole_archive_flag_spec, $1)=
++-	  tmp_sharedflag='--shared' ;;
++ 	xl[[cC]]*)			# IBM XL C 8.0 on PPC (deal with xlf below)
++ 	  tmp_sharedflag='-qmkshrobj'
++ 	  tmp_addflag= ;;
++@@ -4618,7 +4585,6 @@ _LT_EOF
++ 	fi
++       fi
++ 
++-      _LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-bexpall'
++       # It seems that -bexpall does not export symbols beginning with
++       # underscore (_), so it is better to generate a list of symbols to export.
++       _LT_TAGVAR(always_export_symbols, $1)=yes
++@@ -4673,7 +4639,7 @@ _LT_EOF
++       _LT_TAGVAR(export_dynamic_flag_spec, $1)=-rdynamic
++       ;;
++ 
++-    cygwin* | mingw* | pw32* | cegcc*)
+++    cygwin* | mingw* | pw32*)
++       # When not using gcc, we currently assume that we are using
++       # Microsoft Visual C++.
++       # hardcode_libdir_flag_spec is actually meaningless, as there is
++@@ -4777,7 +4743,7 @@ _LT_EOF
++ 	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared ${wl}+h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags'
++ 	  ;;
++ 	ia64*)
++-	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared -fPIC ${wl}+h ${wl}$soname ${wl}+nodefaultrpath -o $lib $libobjs $deplibs $compiler_flags'
+++	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared ${wl}+h ${wl}$soname ${wl}+nodefaultrpath -o $lib $libobjs $deplibs $compiler_flags'
++ 	  ;;
++ 	*)
++ 	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared -fPIC ${wl}+h ${wl}$soname ${wl}+b ${wl}$install_libdir -o $lib $libobjs $deplibs $compiler_flags'
++@@ -5562,7 +5528,6 @@ if test "$_lt_caught_CXX_error" != yes; 
++           fi
++         fi
++ 
++-        _LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-bexpall'
++         # It seems that -bexpall does not export symbols beginning with
++         # underscore (_), so it is better to generate a list of symbols to
++ 	# export.
++@@ -5621,7 +5586,7 @@ if test "$_lt_caught_CXX_error" != yes; 
++         esac
++         ;;
++ 
++-      cygwin* | mingw* | pw32* | cegcc*)
+++      cygwin* | mingw* | pw32*)
++         # _LT_TAGVAR(hardcode_libdir_flag_spec, $1) is actually meaningless,
++         # as there is no search path for DLLs.
++         _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='-L$libdir'
++@@ -7006,18 +6971,6 @@ AC_SUBST([GREP])
++ ])
++ 
++ 
++-# _LT_DECL_OBJDUMP
++-# --------------
++-# If we don't have a new enough Autoconf to choose the best objdump
++-# available, choose the one first in the user's PATH.
++-m4_defun([_LT_DECL_OBJDUMP],
++-[AC_CHECK_TOOL(OBJDUMP, objdump, false)
++-test -z "$OBJDUMP" && OBJDUMP=objdump
++-_LT_DECL([], [OBJDUMP], [1], [An object symbol dumper])
++-AC_SUBST([OBJDUMP])
++-])
++-
++-
++ # _LT_DECL_SED
++ # ------------
++ # Check for a fully-functional sed program, that truncates
++Index: libiconv-1.13.1/m4/libtool.m4
++===================================================================
++--- libiconv-1.13.1.orig/m4/libtool.m4	2009-06-21 04:17:33.000000000 -0700
+++++ libiconv-1.13.1/m4/libtool.m4	2010-06-01 02:57:31.301726190 -0700
++@@ -89,7 +89,8 @@ _LT_SET_OPTIONS([$0], [$1])
++ LIBTOOL_DEPS="$ltmain"
++ 
++ # Always use our own libtool.
++-LIBTOOL="${CONFIG_SHELL-$SHELL} "'$(top_builddir)/libtool'
+++LIBTOOL='$(SHELL) $(top_builddir)'
+++LIBTOOL="$LIBTOOL/$host_alias-libtool"
++ AC_SUBST(LIBTOOL)dnl
++ 
++ _LT_SETUP
++@@ -211,7 +212,7 @@ delay_single_quote_subst='s/'\''/'\'\\\\
++ no_glob_subst='s/\*/\\\*/g'
++ 
++ # Global variables:
++-ofile=libtool
+++ofile=${host_alias}-libtool
++ can_build_shared=yes
++ 
++ # All known linkers require a `.a' archive for static linking (except MSVC,
++@@ -380,12 +381,12 @@ m4_define([lt_decl_dquote_varnames],
++ # lt_decl_varnames_tagged([SEPARATOR], [VARNAME1...])
++ # ---------------------------------------------------
++ m4_define([lt_decl_varnames_tagged],
++-[m4_assert([$# <= 2])dnl
++-_$0(m4_quote(m4_default([$1], [[, ]])),
++-    m4_ifval([$2], [[$2]], [m4_dquote(lt_decl_tag_varnames)]),
++-    m4_split(m4_normalize(m4_quote(_LT_TAGS)), [ ]))])
++-m4_define([_lt_decl_varnames_tagged],
++-[m4_ifval([$3], [lt_combine([$1], [$2], [_], $3)])])
+++[_$0(m4_quote(m4_default([$1], [[, ]])),
+++     m4_quote(m4_if([$2], [],
+++		     m4_quote(lt_decl_tag_varnames),
+++		  m4_quote(m4_shift($@)))),
+++     m4_split(m4_normalize(m4_quote(_LT_TAGS))))])
+++m4_define([_lt_decl_varnames_tagged], [lt_combine([$1], [$2], [_], $3)])
++ 
++ 
++ # lt_decl_all_varnames([SEPARATOR], [VARNAME1...])
++@@ -990,11 +991,7 @@ m4_defun([_LT_DARWIN_LINKER_FEATURES],
++   _LT_TAGVAR(whole_archive_flag_spec, $1)=''
++   _LT_TAGVAR(link_all_deplibs, $1)=yes
++   _LT_TAGVAR(allow_undefined_flag, $1)="$_lt_dar_allow_undefined"
++-  case $cc_basename in
++-     ifort*) _lt_dar_can_shared=yes ;;
++-     *) _lt_dar_can_shared=$GCC ;;
++-  esac
++-  if test "$_lt_dar_can_shared" = "yes"; then
+++  if test "$GCC" = "yes"; then
++     output_verbose_link_cmd=echo
++     _LT_TAGVAR(archive_cmds, $1)="\$CC -dynamiclib \$allow_undefined_flag -o \$lib \$libobjs \$deplibs \$compiler_flags -install_name \$rpath/\$soname \$verstring $_lt_dar_single_mod${_lt_dsymutil}"
++     _LT_TAGVAR(module_cmds, $1)="\$CC \$allow_undefined_flag -o \$lib -bundle \$libobjs \$deplibs \$compiler_flags${_lt_dsymutil}"
++@@ -1516,7 +1513,7 @@ AC_CACHE_VAL([lt_cv_sys_max_cmd_len], [d
++     lt_cv_sys_max_cmd_len=-1;
++     ;;
++ 
++-  cygwin* | mingw* | cegcc*)
+++  cygwin* | mingw*)
++     # On Win9x/ME, this test blows up -- it succeeds, but takes
++     # about 5 minutes as the teststring grows exponentially.
++     # Worse, since 9x/ME are not pre-emptively multitasking,
++@@ -1684,6 +1681,10 @@ else
++ #  endif
++ #endif
++ 
+++#ifdef __cplusplus
+++extern "C" void exit (int);
+++#endif
+++
++ void fnord() { int i=42;}
++ int main ()
++ {
++@@ -1699,7 +1700,7 @@ int main ()
++   else
++     puts (dlerror ());
++ 
++-  return status;
+++    exit (status);
++ }]
++ _LT_EOF
++   if AC_TRY_EVAL(ac_link) && test -s conftest${ac_exeext} 2>/dev/null; then
++@@ -1738,7 +1739,7 @@ else
++     lt_cv_dlopen_self=yes
++     ;;
++ 
++-  mingw* | pw32* | cegcc*)
+++  mingw* | pw32*)
++     lt_cv_dlopen="LoadLibrary"
++     lt_cv_dlopen_libs=
++     ;;
++@@ -2035,7 +2036,6 @@ m4_defun([_LT_SYS_DYNAMIC_LINKER],
++ [AC_REQUIRE([AC_CANONICAL_HOST])dnl
++ m4_require([_LT_DECL_EGREP])dnl
++ m4_require([_LT_FILEUTILS_DEFAULTS])dnl
++-m4_require([_LT_DECL_OBJDUMP])dnl
++ m4_require([_LT_DECL_SED])dnl
++ AC_MSG_CHECKING([dynamic linker characteristics])
++ m4_if([$1],
++@@ -2200,14 +2200,14 @@ bsdi[[45]]*)
++   # libtool to hard-code these into programs
++   ;;
++ 
++-cygwin* | mingw* | pw32* | cegcc*)
+++cygwin* | mingw* | pw32*)
++   version_type=windows
++   shrext_cmds=".dll"
++   need_version=no
++   need_lib_prefix=no
++ 
++   case $GCC,$host_os in
++-  yes,cygwin* | yes,mingw* | yes,pw32* | yes,cegcc*)
+++  yes,cygwin* | yes,mingw* | yes,pw32*)
++     library_names_spec='$libname.dll.a'
++     # DLL is installed to $(libdir)/../bin by postinstall_cmds
++     postinstall_cmds='base_file=`basename \${file}`~
++@@ -2230,7 +2230,7 @@ cygwin* | mingw* | pw32* | cegcc*)
++       soname_spec='`echo ${libname} | sed -e 's/^lib/cyg/'``echo ${release} | $SED -e 's/[[.]]/-/g'`${versuffix}${shared_ext}'
++       sys_lib_search_path_spec="/usr/lib /lib/w32api /lib /usr/local/lib"
++       ;;
++-    mingw* | cegcc*)
+++    mingw*)
++       # MinGW DLLs use traditional 'lib' prefix
++       soname_spec='${libname}`echo ${release} | $SED -e 's/[[.]]/-/g'`${versuffix}${shared_ext}'
++       sys_lib_search_path_spec=`$CC -print-search-dirs | $GREP "^libraries:" | $SED -e "s/^libraries://" -e "s,=/,/,g"`
++@@ -2656,7 +2656,7 @@ tpf*)
++   version_type=linux
++   need_lib_prefix=no
++   need_version=no
++-  library_names_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
+++  library_name_spec='${libname}${release}${shared_ext}$versuffix ${libname}${release}${shared_ext}$major $libname${shared_ext}'
++   shlibpath_var=LD_LIBRARY_PATH
++   shlibpath_overrides_runpath=no
++   hardcode_into_libs=yes
++@@ -2957,7 +2957,6 @@ _LT_DECL([], [reload_cmds], [2])dnl
++ #  -- PORTME fill in with the dynamic library characteristics
++ m4_defun([_LT_CHECK_MAGIC_METHOD],
++ [m4_require([_LT_DECL_EGREP])
++-m4_require([_LT_DECL_OBJDUMP])
++ AC_CACHE_CHECK([how to recognize dependent libraries],
++ lt_cv_deplibs_check_method,
++ [lt_cv_file_magic_cmd='$MAGIC_CMD'
++@@ -3008,12 +3007,6 @@ mingw* | pw32*)
++   fi
++   ;;
++ 
++-cegcc)
++-  # use the weaker test based on 'objdump'. See mingw*.
++-  lt_cv_deplibs_check_method='file_magic file format pe-arm-.*little(.*architecture: arm)?'
++-  lt_cv_file_magic_cmd='$OBJDUMP -f'
++-  ;;
++-
++ darwin* | rhapsody*)
++   lt_cv_deplibs_check_method=pass_all
++   ;;
++@@ -3325,7 +3318,7 @@ case $host_os in
++ aix*)
++   symcode='[[BCDT]]'
++   ;;
++-cygwin* | mingw* | pw32* | cegcc*)
+++cygwin* | mingw* | pw32*)
++   symcode='[[ABCDGISTW]]'
++   ;;
++ hpux*)
++@@ -3571,7 +3564,7 @@ m4_if([$1], [CXX], [
++     beos* | irix5* | irix6* | nonstopux* | osf3* | osf4* | osf5*)
++       # PIC is the default for these OSes.
++       ;;
++-    mingw* | cygwin* | os2* | pw32* | cegcc*)
+++    mingw* | cygwin* | os2* | pw32*)
++       # This hack is so that the source file can tell whether it is being
++       # built for inclusion in a dll (and should export symbols for example).
++       # Although the cygwin gcc ignores -fPIC, still need this for old-style
++@@ -3598,11 +3591,10 @@ m4_if([$1], [CXX], [
++       fi
++       ;;
++     hpux*)
++-      # PIC is the default for 64-bit PA HP-UX, but not for 32-bit
++-      # PA HP-UX.  On IA64 HP-UX, PIC is the default but the pic flag
++-      # sets the default TLS model and affects inlining.
+++      # PIC is the default for IA64 HP-UX and 64-bit HP-UX, but
+++      # not for PA HP-UX.
++       case $host_cpu in
++-      hppa*64*)
+++      hppa*64*|ia64*)
++ 	;;
++       *)
++ 	_LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++@@ -3700,19 +3692,12 @@ m4_if([$1], [CXX], [
++ 	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='--backend -Wl,'
++ 	    _LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++ 	    ;;
++-	  ecpc* )
++-	    # old Intel C++ for x86_64 which still supported -KPIC.
+++	  icpc* | ecpc* )
+++	    # Intel C++
++ 	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++ 	    _LT_TAGVAR(lt_prog_compiler_pic, $1)='-KPIC'
++ 	    _LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++ 	    ;;
++-	  icpc* )
++-	    # Intel C++, used to be incompatible with GCC.
++-	    # ICC 10 doesn't accept -KPIC any more.
++-	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++-	    _LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++-	    _LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++-	    ;;
++ 	  pgCC* | pgcpp*)
++ 	    # Portland Group C++ compiler
++ 	    _LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++@@ -3878,7 +3863,7 @@ m4_if([$1], [CXX], [
++       # PIC is the default for these OSes.
++       ;;
++ 
++-    mingw* | cygwin* | pw32* | os2* | cegcc*)
+++    mingw* | cygwin* | pw32* | os2*)
++       # This hack is so that the source file can tell whether it is being
++       # built for inclusion in a dll (and should export symbols for example).
++       # Although the cygwin gcc ignores -fPIC, still need this for old-style
++@@ -3894,11 +3879,10 @@ m4_if([$1], [CXX], [
++       ;;
++ 
++     hpux*)
++-      # PIC is the default for 64-bit PA HP-UX, but not for 32-bit
++-      # PA HP-UX.  On IA64 HP-UX, PIC is the default but the pic flag
++-      # sets the default TLS model and affects inlining.
+++      # PIC is the default for IA64 HP-UX and 64-bit HP-UX, but
+++      # not for PA HP-UX.
++       case $host_cpu in
++-      hppa*64*)
+++      hppa*64*|ia64*)
++ 	# +Z the default
++ 	;;
++       *)
++@@ -3948,7 +3932,7 @@ m4_if([$1], [CXX], [
++       fi
++       ;;
++ 
++-    mingw* | cygwin* | pw32* | os2* | cegcc*)
+++    mingw* | cygwin* | pw32* | os2*)
++       # This hack is so that the source file can tell whether it is being
++       # built for inclusion in a dll (and should export symbols for example).
++       m4_if([$1], [GCJ], [],
++@@ -3979,25 +3963,11 @@ m4_if([$1], [CXX], [
++ 
++     linux* | k*bsd*-gnu)
++       case $cc_basename in
++-      # old Intel for x86_64 which still supported -KPIC.
++-      ecc*)
+++      icc* | ecc* | ifort*)
++ 	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++ 	_LT_TAGVAR(lt_prog_compiler_pic, $1)='-KPIC'
++ 	_LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++         ;;
++-      # icc used to be incompatible with GCC.
++-      # ICC 10 doesn't accept -KPIC any more.
++-      icc* | ifort*)
++-	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++-	_LT_TAGVAR(lt_prog_compiler_pic, $1)='-fPIC'
++-	_LT_TAGVAR(lt_prog_compiler_static, $1)='-static'
++-        ;;
++-      # Lahey Fortran 8.1.
++-      lf95*)
++-	_LT_TAGVAR(lt_prog_compiler_wl, $1)='-Wl,'
++-	_LT_TAGVAR(lt_prog_compiler_pic, $1)='--shared'
++-	_LT_TAGVAR(lt_prog_compiler_static, $1)='--static'
++-	;;
++       pgcc* | pgf77* | pgf90* | pgf95*)
++         # Portland Group compilers (*not* the Pentium gcc compiler,
++ 	# which looks to be a dead project)
++@@ -4179,7 +4149,7 @@ m4_if([$1], [CXX], [
++   pw32*)
++     _LT_TAGVAR(export_symbols_cmds, $1)="$ltdll_cmds"
++   ;;
++-  cygwin* | mingw* | cegcc*)
+++  cygwin* | mingw*)
++     _LT_TAGVAR(export_symbols_cmds, $1)='$NM $libobjs $convenience | $global_symbol_pipe | $SED -e '\''/^[[BCDGRS]][[ ]]/s/.*[[ ]]\([[^ ]]*\)/\1 DATA/;/^.*[[ ]]__nm__/s/^.*[[ ]]__nm__\([[^ ]]*\)[[ ]][[^ ]]*/\1 DATA/;/^I[[ ]]/d;/^[[AITW]][[ ]]/s/.* //'\'' | sort | uniq > $export_symbols'
++   ;;
++   *)
++@@ -4231,7 +4201,7 @@ dnl Note also adjust exclude_expsyms for
++   extract_expsyms_cmds=
++ 
++   case $host_os in
++-  cygwin* | mingw* | pw32* | cegcc*)
+++  cygwin* | mingw* | pw32*)
++     # FIXME: the MSVC++ port hasn't been tested in a loooong time
++     # When not using gcc, we currently assume that we are using
++     # Microsoft Visual C++.
++@@ -4318,7 +4288,7 @@ _LT_EOF
++       fi
++       ;;
++ 
++-    cygwin* | mingw* | pw32* | cegcc*)
+++    cygwin* | mingw* | pw32*)
++       # _LT_TAGVAR(hardcode_libdir_flag_spec, $1) is actually meaningless,
++       # as there is no search path for DLLs.
++       _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='-L$libdir'
++@@ -4384,9 +4354,6 @@ _LT_EOF
++ 	  tmp_addflag=' -i_dynamic -nofor_main' ;;
++ 	ifc* | ifort*)			# Intel Fortran compiler
++ 	  tmp_addflag=' -nofor_main' ;;
++-	lf95*)				# Lahey Fortran 8.1
++-	  _LT_TAGVAR(whole_archive_flag_spec, $1)=
++-	  tmp_sharedflag='--shared' ;;
++ 	xl[[cC]]*)			# IBM XL C 8.0 on PPC (deal with xlf below)
++ 	  tmp_sharedflag='-qmkshrobj'
++ 	  tmp_addflag= ;;
++@@ -4618,7 +4585,6 @@ _LT_EOF
++ 	fi
++       fi
++ 
++-      _LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-bexpall'
++       # It seems that -bexpall does not export symbols beginning with
++       # underscore (_), so it is better to generate a list of symbols to export.
++       _LT_TAGVAR(always_export_symbols, $1)=yes
++@@ -4673,7 +4639,7 @@ _LT_EOF
++       _LT_TAGVAR(export_dynamic_flag_spec, $1)=-rdynamic
++       ;;
++ 
++-    cygwin* | mingw* | pw32* | cegcc*)
+++    cygwin* | mingw* | pw32*)
++       # When not using gcc, we currently assume that we are using
++       # Microsoft Visual C++.
++       # hardcode_libdir_flag_spec is actually meaningless, as there is
++@@ -4777,7 +4743,7 @@ _LT_EOF
++ 	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared ${wl}+h ${wl}$soname -o $lib $libobjs $deplibs $compiler_flags'
++ 	  ;;
++ 	ia64*)
++-	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared -fPIC ${wl}+h ${wl}$soname ${wl}+nodefaultrpath -o $lib $libobjs $deplibs $compiler_flags'
+++	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared ${wl}+h ${wl}$soname ${wl}+nodefaultrpath -o $lib $libobjs $deplibs $compiler_flags'
++ 	  ;;
++ 	*)
++ 	  _LT_TAGVAR(archive_cmds, $1)='$CC -shared -fPIC ${wl}+h ${wl}$soname ${wl}+b ${wl}$install_libdir -o $lib $libobjs $deplibs $compiler_flags'
++@@ -5562,7 +5528,6 @@ if test "$_lt_caught_CXX_error" != yes; 
++           fi
++         fi
++ 
++-        _LT_TAGVAR(export_dynamic_flag_spec, $1)='${wl}-bexpall'
++         # It seems that -bexpall does not export symbols beginning with
++         # underscore (_), so it is better to generate a list of symbols to
++ 	# export.
++@@ -5621,7 +5586,7 @@ if test "$_lt_caught_CXX_error" != yes; 
++         esac
++         ;;
++ 
++-      cygwin* | mingw* | pw32* | cegcc*)
+++      cygwin* | mingw* | pw32*)
++         # _LT_TAGVAR(hardcode_libdir_flag_spec, $1) is actually meaningless,
++         # as there is no search path for DLLs.
++         _LT_TAGVAR(hardcode_libdir_flag_spec, $1)='-L$libdir'
++@@ -7006,18 +6971,6 @@ AC_SUBST([GREP])
++ ])
++ 
++ 
++-# _LT_DECL_OBJDUMP
++-# --------------
++-# If we don't have a new enough Autoconf to choose the best objdump
++-# available, choose the one first in the user's PATH.
++-m4_defun([_LT_DECL_OBJDUMP],
++-[AC_CHECK_TOOL(OBJDUMP, objdump, false)
++-test -z "$OBJDUMP" && OBJDUMP=objdump
++-_LT_DECL([], [OBJDUMP], [1], [An object symbol dumper])
++-AC_SUBST([OBJDUMP])
++-])
++-
++-
++ # _LT_DECL_SED
++ # ------------
++ # Check for a fully-functional sed program, that truncates
++Index: libiconv-1.13.1/libcharset/m4/ltversion.m4
++===================================================================
++--- libiconv-1.13.1.orig/libcharset/m4/ltversion.m4	2009-06-21 04:17:33.000000000 -0700
+++++ libiconv-1.13.1/libcharset/m4/ltversion.m4	2010-06-01 02:57:31.301726190 -0700
++@@ -9,15 +9,15 @@
++ 
++ # Generated from ltversion.in.
++ 
++-# serial 3012 ltversion.m4
+++# serial 3017 ltversion.m4
++ # This file is part of GNU Libtool
++ 
++-m4_define([LT_PACKAGE_VERSION], [2.2.6])
++-m4_define([LT_PACKAGE_REVISION], [1.3012])
+++m4_define([LT_PACKAGE_VERSION], [2.2.6b])
+++m4_define([LT_PACKAGE_REVISION], [1.3017])
++ 
++ AC_DEFUN([LTVERSION_VERSION],
++-[macro_version='2.2.6'
++-macro_revision='1.3012'
+++[macro_version='2.2.6b'
+++macro_revision='1.3017'
++ _LT_DECL(, macro_version, 0, [Which release of libtool.m4 was used?])
++ _LT_DECL(, macro_revision, 0)
++ ])
++Index: libiconv-1.13.1/m4/ltversion.m4
++===================================================================
++--- libiconv-1.13.1.orig/m4/ltversion.m4	2009-06-21 04:17:33.000000000 -0700
+++++ libiconv-1.13.1/m4/ltversion.m4	2010-06-01 02:57:31.301726190 -0700
++@@ -9,15 +9,15 @@
++ 
++ # Generated from ltversion.in.
++ 
++-# serial 3012 ltversion.m4
+++# serial 3017 ltversion.m4
++ # This file is part of GNU Libtool
++ 
++-m4_define([LT_PACKAGE_VERSION], [2.2.6])
++-m4_define([LT_PACKAGE_REVISION], [1.3012])
+++m4_define([LT_PACKAGE_VERSION], [2.2.6b])
+++m4_define([LT_PACKAGE_REVISION], [1.3017])
++ 
++ AC_DEFUN([LTVERSION_VERSION],
++-[macro_version='2.2.6'
++-macro_revision='1.3012'
+++[macro_version='2.2.6b'
+++macro_revision='1.3017'
++ _LT_DECL(, macro_version, 0, [Which release of libtool.m4 was used?])
++ _LT_DECL(, macro_revision, 0)
++ ])
+diff --git a/recipes/libiconv/libiconv.inc b/recipes/libiconv/libiconv.inc
+index 6bb85ef..11dfaf2 100644
+--- a/recipes/libiconv/libiconv.inc
++++ b/recipes/libiconv/libiconv.inc
+@@ -6,21 +6,10 @@ PRIORITY = "optional"
+ NOTES = "Needs to be stripped down to: ascii iso8859-1 eucjp iso-2022jp gb utf8"
  
- PACKAGES = ""
+ SRC_URI = "ftp://ftp.gnu.org/pub/gnu/libiconv/libiconv-${PV}.tar.gz \
+-	   file://autotools.patch \
+-	   file://preload.patch"
++          "
+ 
+ S = "${WORKDIR}/libiconv-${PV}"
+ 
+ inherit autotools gettext
+ 
+-EXTRA_OECONF += "--enable-shared --enable-static --enable-relocatable --disable-rpath"
 -
--do_stage() {
--         # The .h files get installed read-only, the autostage
--         # function just uses cp -pPR, so do this by hand
--         rm -rf ${STAGE_TEMP}
--         mkdir -p ${STAGE_TEMP}
--         oe_runmake DESTDIR="${STAGE_TEMP}" install_include
--         cp -pPRf ${STAGE_TEMP}/${includedir}/* ${STAGING_INCDIR}/.
--         rm -rf ${STAGE_TEMP}
--         oe_libinstall -so -C .libs libdb-${PVM} ${STAGING_LIBDIR}
--         ln -sf libdb-${PVM}.so ${STAGING_LIBDIR}/libdb.so
--         ln -sf libdb-${PVM}.a ${STAGING_LIBDIR}/libdb.a
+-do_configure_append () {
+-	        # Fix stupid libtool... handling. rpath handling can't be disabled and the Makefile's can't be regenerated..
+-        # (GNU sed required)
+-        sed -i s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ ${S}/*-libtool
 -}
-diff --git a/recipes/db/db4.inc b/recipes/db/db4.inc
-index 12d4ad2..73d339d 100644
---- a/recipes/db/db4.inc
-+++ b/recipes/db/db4.inc
-@@ -81,16 +81,3 @@ do_install_append() {
- 		mv "${D}/${prefix}/docs" "${D}/${docdir}"
- 	fi
- }
 -
--do_stage() {
--	# The .h files get installed read-only, the autostage
--	# function just uses cp -pPR, so do this by hand
--	rm -rf ${STAGE_TEMP}
--	mkdir -p ${STAGE_TEMP}
--	oe_runmake DESTDIR="${STAGE_TEMP}" install_include
--	cp -pPRf ${STAGE_TEMP}/${includedir}/* ${STAGING_INCDIR}/.
--	rm -rf ${STAGE_TEMP}
--	oe_libinstall -so -C .libs libdb-${PVM} ${STAGING_LIBDIR}
--	ln -sf libdb-${PVM}.so ${STAGING_LIBDIR}/libdb.so
--	ln -sf libdb-${PVM}.a ${STAGING_LIBDIR}/libdb.a
+-do_stage () {
+-	autotools_stage_all
 -}
-diff --git a/recipes/db/db5.inc b/recipes/db/db5.inc
-new file mode 100644
-index 0000000..599093e
---- /dev/null
-+++ b/recipes/db/db5.inc
-@@ -0,0 +1,83 @@
-+# Version 5 of the Berkeley DB from Oracle
-+#
-+# At present this package only installs the DB code
-+# itself (shared libraries, .a in the dev package),
-+# documentation and headers.
-+#
-+# The headers have the same names as those as v3
-+# of the DB, only one version can be used *for dev*
-+# at once - DB3 and DB5 both be installed on the
-+# same system at the same time if really necessary.
-+
-+
-+DESCRIPTION = "Berkeley DB v5."
-+HOMEPAGE = "http://www.oracle.com/technology/products/berkeley-db/db/index.html"
-+SECTION = "libs"
-+LICENSE = "BSD"
-+VIRTUAL_NAME ?= "virtual/db"
-+CONFLICTS = "db3 db4"
-+
-+SRC_URI = "http://download.oracle.com/berkeley-db/db-${PV}.tar.gz"
-+
-+inherit autotools
-+
-+# Put virtual/db in any appropriate provider of a
-+# relational database, use it as a dependency in
-+# place of a specific db and use:
-+#
-+# PREFERRED_PROVIDER_virtual/db
-+#
-+# to select the correct db in the build (distro) .conf
-+PROVIDES += "${VIRTUAL_NAME}"
-+
-+# bitbake isn't quite clever enough to deal with db,
-+# the distribution sits in the expected directory, but all
-+# the builds must occur from a sub-directory.  The following
-+# persuades bitbake to go to the right place
-+S = "${WORKDIR}/db-${PV}/dist"
-+B = "${WORKDIR}/db-${PV}/build_unix"
-+
-+# The executables go in a separate package - typically there
-+# is no need to install these unless doing real database
-+# management on the system.
-+PACKAGES += " ${PN}-bin"
-+
-+# Package contents
-+FILES_${PN} = "${libdir}/libdb-5*so*"
-+FILES_${PN}-bin = "${bindir}/*"
-+# The dev package has the .so link (as in db3) and the .a's -
-+# it is therefore incompatible (cannot be installed at the
-+# same time) as the db3 package
-+FILES_${PN}-dev = "${includedir} ${libdir}/*"
-+
-+EXTRA_OECONF = "${DB5_CONFIG}"
-+
-+# Override the MUTEX setting here, the POSIX library is
-+# the default - "POSIX/pthreads/library".
-+# Don't ignore the nice SWP instruction on the ARM:
-+# These enable the ARM assembler mutex code, this won't
-+# work with thumb compilation...
-+ARM_MUTEX = "--with-mutex=ARM/gcc-assembly"
-+MUTEX = ""
-+MUTEX_arm = "${ARM_MUTEX}"
-+MUTEX_armeb = "${ARM_MUTEX}"
-+EXTRA_OECONF += "${MUTEX}"
-+
-+# Cancel the site stuff - it's set for db3 and destroys the
-+# configure.
-+CONFIG_SITE = ""
-+do_configure() {
-+	( cd ${WORKDIR}/db-${PV}/dist ; gnu-configize ) 
-+	oe_runconf
++EXTRA_OECONF += "--enable-shared --enable-static --enable-relocatable"
+diff --git a/recipes/libiconv/libiconv_1.12.bb b/recipes/libiconv/libiconv_1.12.bb
+index a38248e..83774d6 100644
+--- a/recipes/libiconv/libiconv_1.12.bb
++++ b/recipes/libiconv/libiconv_1.12.bb
+@@ -11,5 +11,15 @@ EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS',
+ 
+ LEAD_SONAME = "libiconv.so"
+ 
++SRC_URI += "file://autotools.patch \
++            file://preload.patch \
++           "
++do_configure_append () {
++        # Fix stupid libtool... handling. 
++	# rpath handling can't be disabled and the Makefile's can't be regenerated..
++        # (GNU sed required)
++        sed -i s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ ${S}/*-libtool
 +}
 +
-+
-+do_install_append() {
-+	# The docs end up in /usr/docs - not right.
-+	if test -d "${D}/${prefix}/docs"
-+	then
-+		mkdir -p "${D}/${datadir}"
-+		test ! -d "${D}/${docdir}" || rm -rf "${D}/${docdir}"
-+		mv "${D}/${prefix}/docs" "${D}/${docdir}"
-+	fi
-+}
-diff --git a/recipes/db/db_4.2.52.bb b/recipes/db/db_4.2.52.bb
-index 3b9bab8..5f135ed 100644
---- a/recipes/db/db_4.2.52.bb
-+++ b/recipes/db/db_4.2.52.bb
-@@ -1,4 +1,4 @@
--PR = "r8"
-+PR = "r9"
- 
- #major version number
- PVM = "4.2"
-diff --git a/recipes/db/db_4.3.29.bb b/recipes/db/db_4.3.29.bb
-index c5ecfde..1e54203 100644
---- a/recipes/db/db_4.3.29.bb
-+++ b/recipes/db/db_4.3.29.bb
-@@ -1,4 +1,4 @@
--PR = "r10"
-+PR = "r11"
- 
- # major version number
- PVM = "4.3"
-diff --git a/recipes/db/db_5.0.21.bb b/recipes/db/db_5.0.21.bb
+ SRC_URI[md5sum] = "c2be282595751535a618ae0edeb8f648"
+ SRC_URI[sha256sum] = "a99e244fd78babb95ea3c9a5c88b964994edaa1d15fd8dde5b4067801e23f0cd"
+diff --git a/recipes/libiconv/libiconv_1.13.1.bb b/recipes/libiconv/libiconv_1.13.1.bb
 new file mode 100644
-index 0000000..cfa0154
+index 0000000..3cd836f
 --- /dev/null
-+++ b/recipes/db/db_5.0.21.bb
-@@ -0,0 +1,15 @@
++++ b/recipes/libiconv/libiconv_1.13.1.bb
+@@ -0,0 +1,24 @@
++require libiconv.inc
++LICENSE = "GPLv3 LGPLv2"
++
++PROVIDES = "virtual/libiconv"
 +PR = "r0"
 +
-+# major version number
-+PVM = "5.0"
++#gettext.class cant be inherit here so use this hack
++DEPENDS = "${@['','gettext-native'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
 +
-+#configuration - set in local.conf to override
-+# All the --disable-* options replace --enable-smallbuild, which breaks a bunch of stuff (eg. postfix)
-+DB5_CONFIG ?= "--enable-o_direct --disable-cryptography --disable-queue --disable-replication --disable-statistics --disable-verify --enable-compat185"
++EXTRA_OECONF +=  "${@['--disable-nls','--enable-nls'][bb.data.getVar('USE_NLS', d, 1) == 'yes']}"
 +
-+require db5.inc
++SRC_URI += "file://autoconf.patch"
 +
-+SRC_URI += "file://db5-arm-thumb-mutex.patch"
++do_configure_append () {
++        # Fix stupid libtool... handling. 
++        # rpath handling can't be disabled and the Makefile's can't be regenerated..
++        # (GNU sed required)
++        sed -i s/^hardcode_libdir_flag_spec/#hardcode_libdir_flag_spec/ ${S}/*-libtool
++}
 +
-+SRC_URI[md5sum] = "9a749fd2e98fe15840493ddc34cc66d8"
-+SRC_URI[sha256sum] = "061a31a962e992dd1eae5f1e3193241d497a18968e750707526d104b53ab3cc4"
-diff --git a/recipes/db/files/db5-arm-thumb-mutex.patch b/recipes/db/files/db5-arm-thumb-mutex.patch
-new file mode 100644
-index 0000000..51b8882
---- /dev/null
-+++ b/recipes/db/files/db5-arm-thumb-mutex.patch
-@@ -0,0 +1,38 @@
-+Index: db-5.0.21/../dbinc/mutex_int.h
-+===================================================================
-+--- db-5.0.21.orig/../dbinc/mutex_int.h	2010-03-30 10:36:09.000000000 -0700
-++++ db-5.0.21/../dbinc/mutex_int.h	2010-05-22 12:07:38.281286337 -0700
-+@@ -474,6 +474,25 @@ typedef unsigned char tsl_t;
-+ 
-+ #ifdef LOAD_ACTUAL_MUTEX_CODE
-+ /* gcc/arm: 0 is clear, 1 is set. */
-++#if defined __thumb__
-++#define	MUTEX_SET(tsl) ({						\
-++	int __r, __p;							\
-++	asm volatile(							\
-++		".align	2\n\t"						\
-++		"bx	pc\n\t"						\
-++		"nop\n\t"						\
-++		".arm\n\t"						\
-++		"swpb	%0, %2, [%3]\n\t"				\
-++		"eor	%0, %0, #1\n\t"					\
-++		"orr	%1, pc, #1\n\t"					\
-++		"bx	%1\n\t"						\
-++		".force_thumb"						\
-++	    : "=&r" (__r), "=r" (__p)					\
-++	    : "r" (1), "r" (tsl)					\
-++	    );								\
-++	__r & 1;							\
-++})
-++#else
-+ #define	MUTEX_SET(tsl) ({						\
-+ 	int __r;							\
-+ 	__asm__ volatile(						\
-+@@ -484,6 +503,7 @@ typedef unsigned char tsl_t;
-+ 	    );								\
-+ 	__r & 1;							\
-+ })
-++#endif
-+ 
-+ #define	MUTEX_UNSET(tsl)	(*(volatile tsl_t *)(tsl) = 0)
-+ #define	MUTEX_INIT(tsl)         (MUTEX_UNSET(tsl), 0)
++LEAD_SONAME = "libiconv.so"
++SRC_URI[md5sum] = "7ab33ebd26687c744a37264a330bbe9a"
++SRC_URI[sha256sum] = "55a36168306089009d054ccdd9d013041bfc3ab26be7033d107821f1c4949a49"
++
 -- 
 1.7.0.4
 
