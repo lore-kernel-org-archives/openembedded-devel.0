@@ -1,45 +1,38 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OJlzX-0007hM-9q
+	(envelope-from <gary@mlbassoc.com>) id 1OJmot-00033Z-JR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 13:20:14 +0200
-Received: by fxm9 with SMTP id 9so868796fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 02 Jun 2010 04:15:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=BmHlJS/iFPIGIToyiAycLdaB3+sa5+pwFuJklUKty7U=;
-	b=kWNjM8vryy1IttQePFKgkvWItK3fdaQRn9+Nb0MfY5mY8In+R01xi40p44ECBw7Bxe
-	xIYL47cGKqSoi6EHKKVpcbQTIBuxvm3MqiblFcuHZukP1BZJVivUxMLaUnl8HLDVrU5y
-	kv84avh13apd/DTlBP4YG50McctHnn3JE7q+g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=I2WemYAasgyDCSP2xrh4aU2kxT2NQcTiKncVsH5eCeQVYztm/XodtDwbRzjVOlt25R
-	ra41RDr4ECUycJJGgZ1po7oZuMrOU722JgdXlCMFVRMwJXGBF07ylUYSj0lZam0OCm8t
-	EqEGdtQZoJCcBUOA2dFMpl2twTcdhn9OsPNYY=
-Received: by 10.223.30.130 with SMTP id u2mr8468442fac.70.1275477356516;
-	Wed, 02 Jun 2010 04:15:56 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 7sm51837052far.6.2010.06.02.04.15.55
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 02 Jun 2010 04:15:55 -0700 (PDT)
-Date: Wed, 2 Jun 2010 13:15:48 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100602111548.GD16035@jama>
+	Wed, 02 Jun 2010 14:13:19 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id EDED61660813; Wed,  2 Jun 2010 06:09:01 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 00D4B166080A;
+	Wed,  2 Jun 2010 06:08:58 -0600 (MDT)
+Message-ID: <4C0649D9.3090908@mlbassoc.com>
+Date: Wed, 02 Jun 2010 06:08:57 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: Martin Jansa <martin.jansa@gmail.com>
+References: <alpine.DEB.2.00.1006011641480.17094@lynx>
+	<4C057DFC.6010409@mlbassoc.com>
+	<alpine.DEB.2.00.1006011753350.30834@lynx>
+	<20100601220233.GG5446@jama> <4C058898.60202@mlbassoc.com>
+	<20100602065840.GI5446@jama>
+In-Reply-To: <20100602065840.GI5446@jama>
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Opkg removing not-really-orphaned files during opkg upgrade
+Cc: openembedded-devel@lists.openembedded.org,
+	Discussion of the angstrom distribution development
+	<angstrom-distro-devel@linuxtogo.org>
+Subject: Re: [Angstrom-devel] current build errors, OE dev branch, beagleboard-linuxtag2010-demo-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,52 +46,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 11:20:14 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 02 Jun 2010 12:13:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 06/02/2010 12:58 AM, Martin Jansa wrote:
+> On Tue, Jun 01, 2010 at 04:24:24PM -0600, Gary Thomas wrote:
+>> On 06/01/2010 04:02 PM, Martin Jansa wrote:
+>>> Yes easily fixable fetch errors, those archives are download restricted
+>>> and if you open those recipes you will see instruction where to download
+>>> them.
+>>>
+>>> For cheese issue I've already replied, but without answer (about
+>>> gstreamer-plugins...).
+>>
+>> I *did* reply; it seems to be a multi-thread build problem.  When
+>> I reran bitbake, it went away.
+>
+> Yes thanks, the point is that only important part was "Was
+> gst-plugins-base built before cheese?" And Robert is still having issue
+> with it.
+>
+> So I guess the answer would be NO and no is more likely with more
+> BB_THREADS and in second run it's already built (especially if you're
+> building with -k) for some other recipe, so it worked for you later.
 
-few times I've run to strange issues with missing files after opkg
-upgrade, now I have simple case there I can guess what happened. Please
-comment if I'm doing something wrong or if it's known issue (but not
-fixed because it's to hard without changing lot of opkg internals?).
+Sorry if I wasn't clear.  It did appear that cheese was being built
+before the prerequisites were complete.
 
-/etc/pointercal.xinput is now installed by package pointercal-xinput and
-not xinput-calibrator
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=fb641200b65b3d3c465332efb1febab7001eff47
+> I've downloaded cheese, checked configure.ac and yes it depends on
+> gst-plugins-base unconditionally. I've pushed an update which adds it to
+> DEPENDS (which is ensured to be built _before_ do_configure of recipe,
+> RRECOMMENDS is building it too, but it can build it later then
+> do_configure.
 
-The problem which needs your manual intervention is when you see:
-Upgrading xinput-calibrator on root from 0.6.1-r1.4 to 0.6.1-r7.0.4...
-Downloading
-http://build.shr-project.org/tests/shr-unstable/ipk//armv4t/xinput-calibrator_0.6.1-r7.0.4_armv4t.ipk.
-Installing pointercal-xinput (0.0-r0.4) to root...
-Downloading
-http://build.shr-project.org/tests/shr-unstable/ipk//om-gta02/pointercal-xinput_0.0-r0.4_om-gta02.ipk.
-Not deleting modified conffile /etc/pointercal.xinput.
-Configuring pointercal-xinput.
-Configuring xinput-calibrator.
-Collected errors:
- * file_md5sum_alloc: Failed to open file /etc/pointercal.xinput: No such file or directory.
+I've now tried it again, removing all the gst-* packages and verified
+that they are complete before cheese is built.
 
-Then opkg upgraded xinput-calibrator to version without
-pointercal.xinput and in the same batch installed new pointercal-xinput
-package providing the same file. And in the end removed
-/etc/pointercal.xinput file because it was "orphaned" from
-xinput-calibrator packages :/.
-
-Best way to fix this is to call
-opkg install -force-reinstall pointercal-xinput
-after opkg upgrade.
-
-opkg remove xinput-calibrator; opkg install xinput-calibrator; should
-probably also "upgrade" xinput-calibrator properly.
-
-Reagards,
+>
+> BTW: cheese_2.30.0.bb also depends on whatever -native recipe provides
+> xml2po and cheese_2.30.1.bb depends on scrollkeeper-config to build it's
+> help. But probably is using happily scrollkeeper from host (as there is
+> no recipe) - and I don't have scrollkeeper in my OE chroot..
+> http://tinderbox.openembedded.net/packages/cheese/
+>
+> Robert: If I remember right, you were asked few times to use tinderbox
+> instead sending many e-mails with pastebins, why didn't you follow this
+> advise yet?
+>
+> Regards.
 
 -- 
-uin:136542059                jid:Martin.Jansa@gmail.com
-Jansa Martin                 sip:jamasip@voip.wengo.fr 
-JaMa                         
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
