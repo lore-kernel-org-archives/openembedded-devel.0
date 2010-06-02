@@ -1,51 +1,52 @@
-Received: from va3ehsobe004.messaging.microsoft.com ([216.32.180.14]
-	helo=VA3EHSOBE004.bigfish.com)
+Received: from tx2ehsobe005.messaging.microsoft.com ([65.55.88.15]
+	helo=TX2EHSOBE010.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OJkQU-0005Ta-Uq
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OJkR7-00060w-AG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 11:39:55 +0200
-Received: from mail154-va3-R.bigfish.com (10.7.14.235) by
-	VA3EHSOBE004.bigfish.com (10.7.40.24) with Microsoft SMTP Server id
-	8.1.340.0; Wed, 2 Jun 2010 09:20:33 +0000
-Received: from mail154-va3 (localhost.localdomain [127.0.0.1])	by
-	mail154-va3-R.bigfish.com (Postfix) with ESMTP id CDDE14C83BD;
-	Wed,  2 Jun 2010 09:20:32 +0000 (UTC)
-X-SpamScore: -12
-X-BigFish: VPS-12(zz14ffO1443Nzz1202hz4fhzz32i2a8h61h)
-Received: from mail154-va3 (localhost.localdomain [127.0.0.1]) by mail154-va3
-	(MessageSwitch) id 1275470432293246_14958;
-	Wed,  2 Jun 2010 09:20:32 +0000 (UTC)
-Received: from VA3EHSMHS017.bigfish.com (unknown [10.7.14.237])	by
-	mail154-va3.bigfish.com (Postfix) with ESMTP id 369F412E004B;
-	Wed,  2 Jun 2010 09:20:32 +0000 (UTC)
+	Wed, 02 Jun 2010 11:40:34 +0200
+Received: from mail37-tx2-R.bigfish.com (10.9.14.252) by
+	TX2EHSOBE010.bigfish.com (10.9.40.30) with Microsoft SMTP Server id
+	8.1.340.0; Wed, 2 Jun 2010 09:21:14 +0000
+Received: from mail37-tx2 (localhost.localdomain [127.0.0.1])	by
+	mail37-tx2-R.bigfish.com (Postfix) with ESMTP id BD4D1DA05D7;
+	Wed,  2 Jun 2010 09:21:13 +0000 (UTC)
+X-SpamScore: -2
+X-BigFish: VPS-2(z1857rz14ffO1443Nzz1202hz4fhzz32i2a8h61h)
+Received: from mail37-tx2 (localhost.localdomain [127.0.0.1]) by mail37-tx2
+	(MessageSwitch) id 1275470473247254_19021;
+	Wed,  2 Jun 2010 09:21:13 +0000 (UTC)
+Received: from TX2EHSMHS040.bigfish.com (unknown [10.9.14.241])	by
+	mail37-tx2.bigfish.com (Postfix) with ESMTP id 2C9B2B004C;
+	Wed,  2 Jun 2010 09:21:13 +0000 (UTC)
 Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
-	VA3EHSMHS017.bigfish.com (10.7.99.27) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Wed, 2 Jun 2010 09:20:27 +0000
+	TX2EHSMHS040.bigfish.com (10.9.99.140) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Wed, 2 Jun 2010 09:21:11 +0000
 Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
 	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
-	Wed, 2 Jun 2010 14:49:43 +0530
+	Wed, 2 Jun 2010 14:51:07 +0530
 From: Soumya R <Soumya.R@kpitcummins.com>
 To: "openembedded-devel@lists.openembedded.org"
 	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Jun 2010 14:49:31 +0530
-Thread-Index: AQHLAjS1fiPyD3truU+5SVhNMHrNiQ==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>
+Date: Wed, 2 Jun 2010 14:50:13 +0530
+Thread-Topic: ERROR: function do_package_update_index_ipk failed
+Thread-Index: AQHLAjTqDSqw5cbCMk+vHh45+MHEWw==
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF86@KCINPUNHJCMS01.kpit.com>
 Accept-Language: en-US
 X-MS-Has-Attach: 
 X-MS-TNEF-Correlator: 
 acceptlanguage: en-US
 MIME-Version: 1.0
 X-Reverse-DNS: Kcinpunhjhc01.kpit.com
-X-SA-Exim-Connect-IP: 216.32.180.14
+X-SA-Exim-Connect-IP: 65.55.88.15
 X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL, BAYES_00, MISSING_SUBJECT,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: "angstrom-distro-devel@linuxtogo.org" <angstrom-distro-devel@linuxtogo.org>
-Subject: (No subject)
+Subject: ERROR: function do_package_update_index_ipk failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,7 +60,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 09:39:56 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 09:40:34 -0000
 Content-Language: en-US
 Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
@@ -90,7 +91,7 @@ mp/deploy/glibc/ipk
 /ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
 instead
 |   import md5
-|=20
+|
 | + for arch in '$ipkgarchs'
 | + '[' -e /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/a=
 ll/ ']'
@@ -136,7 +137,7 @@ NOTE: Tasks Summary: Attempted 965 tasks of which 927 didn't need to be rer=
 un and 1 failed.
 ERROR: '/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/images/mic=
 ro-image.bb' failed
-KPIT\soumyar@d-5289lnx:~/oe/build$=20
+KPIT\soumyar@d-5289lnx:~/oe/build$
 
    Anybody can help me out to resolve this.Any suggestions are welcome:-)
 
