@@ -1,34 +1,48 @@
-Received: from srv10.nortechonline.net ([89.151.113.230]
-	helo=mail.nortechonline.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Simon.Hodgson@nortechonline.co.uk>)
-	id 1OJq9a-0000Zx-Mk for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 17:46:55 +0200
-Received: from SRV10.nortechonline.net ([fe80::9484:2eae:c2a4:b737]) by
-	SRV10.nortechonline.net ([fe80::9484:2eae:c2a4:b737%12]) with mapi;
-	Wed, 2 Jun 2010 16:41:36 +0100
-From: "Hodgson, Simon" <Simon.Hodgson@nortechonline.co.uk>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Wed, 2 Jun 2010 16:41:34 +0100
-Thread-Topic: [oe] (no subject)
-Thread-Index: AQHLAjS1fiPyD3truU+5SVhNMHrNiZJuz1jg
-Message-ID: <AEB54AFF070EB34A921BC7E006B711BE11905D1147@SRV10.nortechonline.net>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>
-In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US, en-GB
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US, en-GB
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cliff.brake@gmail.com>) id 1OJqzo-0000Uh-PZ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 18:40:49 +0200
+Received: by wyb32 with SMTP id 32so212349wyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Jun 2010 09:36:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=YSzgrwIP4gDakcr6SF4Ig5i2QIenZMN9hva9lrXhAWI=;
+	b=QHvaHYvFaATa6pkueUS1MAUDzvSpiEW4+N0IeA9ZACqn0dP35uZRi/F8Z1QpQaXNa+
+	NUAxsOgVGwlpHvYQveM+E6jq0Sc97N7impJvX18jtsAHg17SvSU416EuYRYAjoxnNklO
+	dXMUc4a4NlQOk5J9/NNO91Y7+XSTh+75zogVw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=BN/6ycXsTirzqWIdJBB9F3vLUjWjTPLMdq08cgvcbgU8mGlN0Iho0XqWAxEegVfihZ
+	yn5F0vsGcP8kLuJYbfZtGPoIETl+dCILdMbjAFT0qiGBK5uew08oji6+VzvGETjdiwSG
+	UI+gtNet2+WmbeTWdDmk2haOosJyCIlM8yBf0=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 89.151.113.230
-X-SA-Exim-Mail-From: Simon.Hodgson@nortechonline.co.uk
+Received: by 10.216.88.203 with SMTP id a53mr270859wef.25.1275496593480; Wed, 
+	02 Jun 2010 09:36:33 -0700 (PDT)
+Received: by 10.216.49.206 with HTTP; Wed, 2 Jun 2010 09:36:33 -0700 (PDT)
+In-Reply-To: <AANLkTim75oyfx6Gt5W84j5G7x_zXAiEmK5vISeoTQSfZ@mail.gmail.com>
+References: <AANLkTikSWC_FtAqHKBgX0bbiXHC52ClrAnLLg7Z7GYRs@mail.gmail.com>
+	<AANLkTilCZJoRhGKzBokT9TuZwbh0mzyzsBQ2J3NsIpwJ@mail.gmail.com>
+	<AANLkTinUqQ16GPijhEAJof0uwAfrokQroib56xX2IutT@mail.gmail.com>
+	<hu2a9n$bb5$1@dough.gmane.org>
+	<AANLkTim75oyfx6Gt5W84j5G7x_zXAiEmK5vISeoTQSfZ@mail.gmail.com>
+Date: Wed, 2 Jun 2010 12:36:33 -0400
+Message-ID: <AANLkTimPv-7u55qWP5du8HZIbYOGWA1s9yyNO1FSzVnC@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: (No subject)
+Subject: Re: gitver problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,121 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 15:46:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 02 Jun 2010 16:40:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Let me guess, you're using Ubuntu 10.4 to build?
+> NOTE: package autotools-demo-1.0-3-gd30ab94-r0: task do_install: Started
+> NOTE: package autotools-demo-1.0-3-gd30ab94-r0: task do_install: Succeede=
+d
+> FATAL: Unable to start to 'None' UI due to exception: 23868.
 
-Edit the file:
-home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin/ar=
-file.py
+Some bitbake fixes that fix the above error:
 
-Change the line:
-size =3D int(descriptor[5])
+http://cgit.bec-systems.com/cgit.cgi/bitbake/log/?h=3Dcbrake/1.10-srctree-f=
+ixes
 
-To:
-size =3D int(descriptor[3])
+The first patch is just for logging.  The second patch fixes an issue
+where we are deleting an empty dictionary.  I'm not sure if this is a
+valid fix, but perhaps someone who understands bitbake task handling
+can review.
 
-I'm afraid I can't explain why you need to do this, only that it works for =
-me.
+Working on the following error now.
 
-Simon
+> ERROR: Logfile of failure stored in:
+> /scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-l=
+inux-gnueabi/autotools-demo-1.0-3-gd30ab94-r0/temp/log.staging_packager.253=
+37
+> Log data follows:
+> | *** Error: CONTROL/control is missing field Source
+> | The Source field contain the URL's or filenames of the source code
+> and any patches
+> | used to build this package. =A0Either gnu-style tarballs or Debian
+> source packages
+> | are acceptable. =A0Relative filenames may be used if they are
+> distributed in the same
+> | directory as the .ipk file.
+> |
+> | ipkg-build: Please fix the above errors and try again.
+> | ERROR: Function staging_packager failed
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Soumya R
-Sent: 02 June 2010 10:20
-To: openembedded-devel@lists.openembedded.org
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: [oe] (no subject)
-
-Hi All,
-
-   I am running bibake micro-image i got the following error,
-
-NOTE: Running task 965 of 970 (ID: 93, /home/likewise-open/KPIT/soumyar/oe/=
-openembedded/recipes/mtd/mtd-utils-native_1.3.1.bb, do_package_write)
-NOTE: Running task 966 of 970 (ID: 18, /home/likewise-open/KPIT/soumyar/oe/=
-openembedded/recipes/images/micro-image.bb, do_package_update_index_ipk)
-ERROR: function do_package_update_index_ipk failed
-ERROR: log data follows (/home/likewise-open/KPIT/soumyar/oe/build/tmp/work=
-/at91sam9263ek-angstrom-linux-gnueabi/micro-image-1.0-r0/temp/log.do_packag=
-e_update_index_ipk.24831)
-| + ipkgarchs=3D'all any noarch arm  armv4 armv4t armv5te at91sam9263ek'
-| + '[' '!' -z '' ']'
-| + mkdir -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk
-| + touch /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/Pa=
-ckages
-| + ipkg-make-index -r /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/Packages -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/Packages -l /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/Packages.filelist -m /home/likewise-open/KPIT/soumyar/oe/build/t=
-mp/deploy/glibc/ipk
-| /home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin=
-/ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
-instead
-|   import md5
-|=20
-| + for arch in '$ipkgarchs'
-| + '[' -e /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/a=
-ll/ ']'
-| + touch /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/al=
-l/Packages
-| + ipkg-make-index -r /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/all/Packages -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/de=
-ploy/glibc/ipk/all/Packages -l /home/likewise-open/KPIT/soumyar/oe/build/tm=
-p/deploy/glibc/ipk/all/Packages.filelist -m /home/likewise-open/KPIT/soumya=
-r/oe/build/tmp/deploy/glibc/ipk/all/
-| /home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin=
-/ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
-instead
-|   import md5
-| Traceback (most recent call last):
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/ipkg-make-index", line 114, in <module>
-|     pkg =3D ipkg.Package(filename)
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/ipkg.py", line 161, in __init__
-|     tarStream =3D ar.open("control.tar.gz")
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/arfile.py", line 59, in open
-|     f =3D self._scan(fname)
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/arfile.py", line 79, in _scan
-|     size =3D int(descriptor[5])
-| IndexError: list index out of range
-NOTE: Task failed: /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/at91s=
-am9263ek-angstrom-linux-gnueabi/micro-image-1.0-r0/temp/log.do_package_upda=
-te_index_ipk.24831
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/im=
-ages/micro-image.bb do_package_update_index_ipk failed
-NOTE: Running task 967 of 970 (ID: 95, /home/likewise-open/KPIT/soumyar/oe/=
-openembedded/recipes/mtd/mtd-utils-native_1.3.1.bb, do_package_stage)
-ERROR: Task 18 (/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/im=
-ages/micro-image.bb, do_package_update_index_ipk) failed
-NOTE: Waiting for 1 active tasks to finish
-NOTE: 1: /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/mtd/mtd-u=
-tils-native_1.3.1.bb, do_package_stage (24841)
-NOTE: Tasks Summary: Attempted 965 tasks of which 927 didn't need to be rer=
-un and 1 failed.
-ERROR: '/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/images/mic=
-ro-image.bb' failed
-KPIT\soumyar@d-5289lnx:~/oe/build$=20
-
-   Anybody can help me out to resolve this.Any suggestions are welcome:-)
-
-Thanks in advance:-)
-
-Regards,
-Soumya
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Cliff
 
 
