@@ -1,26 +1,41 @@
-Received: from oh-69-34-21-229.sta.embarqhsd.net ([69.34.21.229] helo=happy)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cbrake@hq.bec-systems.com>) id 1OJt1q-0008QP-5A
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 02 Jun 2010 20:51:02 +0200
-Received: from cbrake by happy with local (Exim 4.71)
-	(envelope-from <cbrake@hq.bec-systems.com>)
-	id 1OJsxi-0008Us-9p; Wed, 02 Jun 2010 14:46:46 -0400
-From: Cliff Brake <cliff.brake@gmail.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJtJF-0004ui-8d for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 21:09:01 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OJtF5-0000MN-56 for openembedded-devel@lists.openembedded.org;
+	Wed, 02 Jun 2010 21:04:43 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Jun 2010 21:04:43 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Jun 2010 21:04:43 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  2 Jun 2010 14:46:13 -0400
-Message-Id: <1275504373-32623-1-git-send-email-cliff.brake@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 69.34.21.229
-X-SA-Exim-Mail-From: cbrake@hq.bec-systems.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 02 Jun 2010 21:04:32 +0200
+Message-ID: <hu6a00$qd2$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=BAYES_00,RDNS_DYNAMIC
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Cliff Brake <cbrake@bec-systems.com>
-Subject: [PATCH] packaged-staging.bbclass: fix issue with no SRC_URI
+Subject: Please don't put image vars in machine.conf aka revert 39a7a0152d5d9a38ab202e11eb2eaab163dc35fa
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,50 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 02 Jun 2010 18:51:02 -0000
+X-List-Received-Date: Wed, 02 Jun 2010 19:09:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Cliff Brake <cbrake@bec-systems.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Currently with srctree, we get errors like the following:
-| + srcuri=
-| + '[' '' == '' ']'
-| + srcuri=OpenEmbedded
-| + echo 'Source: '
-| ++ find /scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-28-g3a96627-r0/staging-pkg '(' -name '*.la' -o -name '*-config' ')' -type f
-| + stage-manager-ipkg-build -o 0 -g 0 /scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/work/armv5te-angstrom-linux-gnueabi/autotools-demo-1.0-28-g3a96627-r0/staging-pkg /scratch/oe/oe-build/oe/build/angstrom-2008.1/tmp/pstage/angstromglibc
-| *** Error: CONTROL/control is missing field Source
-| The Source field contain the URL's or filenames of the source code and any patches
-| used to build this package.  Either gnu-style tarballs or Debian source packages
-| are acceptable.  Relative filenames may be used if they are distributed in the same
-| directory as the .ipk file.
-|
-| ipkg-build: Please fix the above errors and try again.
-| ERROR: Function staging_packager failed
-NOTE: package autotools-demo-1.0-28-g3a96627-r0: task do_package_stage: Failed
-ERROR: TaskFailed event exception, aborting
+Khem,
 
-This patch fixes that issue.
+Could you please remove the ROOTFS_POSTPROCESS_COMMAND from
+conf/machine/include/qemu.inc? It make using the qemu machine for
+debugging useless, since all images I would pass it are using
+zap_root_password.
+If you have a need for zap_root_password, please add some images to
+recipes/images/ that use it, but please, *PLEASE* keep image vars out of
+machine.confs.
 
-Signed-off-by: Cliff Brake <cbrake@bec-systems.com>
----
- classes/packaged-staging.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+regards,
 
-diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
-index 83f3578..6413afb 100644
---- a/classes/packaged-staging.bbclass
-+++ b/classes/packaged-staging.bbclass
-@@ -374,7 +374,7 @@ staging_packager () {
- 	if [ "$srcuri" == "" ]; then
- 		srcuri="OpenEmbedded"
- 	fi
--	echo "Source: ${SRC_URI}"               >> ${PSTAGE_TMPDIR_STAGE}/CONTROL/control
-+	echo "Source: ${srcuri}"               >> ${PSTAGE_TMPDIR_STAGE}/CONTROL/control
- 
- 	# Deal with libtool not supporting sysroots
- 	# Need to remove hardcoded paths and fix these when we install the
--- 
-1.7.0.4
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMBqtAMkyGM64RGpERAkLEAJ4iUw9lPDsLw+M7Aon6eN+sb3hfhgCeKiXD
+6xTULmnMcxllnBwLBuBA0ks=
+=yxcs
+-----END PGP SIGNATURE-----
 
 
 
