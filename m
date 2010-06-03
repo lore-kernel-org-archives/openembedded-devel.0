@@ -1,32 +1,40 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from smtp-4.concepts.nl ([213.197.30.111])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OK5zR-0007Uf-Mf
+	(envelope-from <pieterg@gmx.com>) id 1OK66Z-0004Sy-Fx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 10:41:29 +0200
-Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OK5vM-0007Pa-3R
+	Thu, 03 Jun 2010 10:48:49 +0200
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>) id 1OK62R-0005pl-SV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 09:37:12 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 03 Jun 2010 10:44:31 +0200
+Received: from [10.9.0.12] (unknown [10.9.0.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 893F86A11A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  3 Jun 2010 10:44:27 +0200 (CEST)
+From: pieterg <pieterg@gmx.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100603083011.GM16035@jama>
+Date: Thu, 3 Jun 2010 10:44:24 +0200
+User-Agent: KMail/1.9.9
 References: <201006022351.38129.pieterg@gmx.com>
-	<20100603043505.GJ16035@jama> <201006030915.57362.pieterg@gmx.com>
-	<20100603073717.GK16035@jama>
-	<1275552817.4657.32.camel@lenovo.internal.reciva.com>
-	<20100603083011.GM16035@jama>
-Date: Thu, 03 Jun 2010 09:37:17 +0100
-Message-ID: <1275554237.4657.40.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+	<201006031002.31685.pieterg@gmx.com> <20100603082740.GL16035@jama>
+In-Reply-To: <20100603082740.GL16035@jama>
+MIME-Version: 1.0
+Message-Id: <201006031044.24680.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1OK62R-0005pl-SV
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+X-SA-Exim-Connect-IP: 213.197.30.111
+X-SA-Exim-Mail-From: pieterg@gmx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: AUTOREV and SRCPV
@@ -43,31 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 08:41:30 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 03 Jun 2010 08:48:49 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, 2010-06-03 at 10:30 +0200, Martin Jansa wrote:
-> On Thu, Jun 03, 2010 at 09:13:37AM +0100, Phil Blundell wrote:
-> > but I think that's already fixable
-> > with strategic use of PREFERRED_VERSION and/or DEFAULT_PREFERENCE.
-> 
-> How? Can you explain in more detail?
+On Thursday 03 June 2010 10:27:40 Martin Jansa wrote:
+> On Thu, Jun 03, 2010 at 10:02:31AM +0200, pieterg wrote:
+> > On Thursday 03 June 2010 09:37:17 Martin Jansa wrote:
+> > > On Thu, Jun 03, 2010 at 09:15:56AM +0200, pieterg wrote:
 
-If you arrange for the autorev'd recipe to be, say,
-DEFAULT_PREFERENCE=1, then I think bitbake will treat it as the desired
-version to build even if SRCREV - and hence PV - would sort lower than
-some other version (irrespective of whether that other version has
-already been built or not).  Then you just need to engineer PKGV to be
-suitably monotonic in order to get the right things to happen inside
-deploy/ and on the target system.
+<snip>
 
-Obviously you will have a problem if PV is actually identical to some
-previously-built version, but the whole idea of using hashes as SCM keys
-is predicated on the assumption that this isn't going to happen.
+> > So personally, I would never even want to use SRCPV, unless it's for
+> > AUTOREV.
+>
+> So what you say is that you would also never use AUTOREV without
+> BB_GIT_CLONE_FOR_SRCREV, no matter if SRCPV is used.
 
-p.
+Right, same reason. I need reproducable versions at all times, on all build 
+systems, even when the cache is lost.
 
+> > Would it be an idea to be able to only have BB_GIT_CLONE_FOR_SRCREV for
+> > those packages which have SRCREV = ${AUTOREV}?
+>
+> Well then it will be a bit inconsistent, because those AUTOREV recipes
+> will restore their LOCALCOUNT (ie after hdd breakage) but notAUTOREV
+> recipes (which usually could be considered more stable) will "downgrade"
+> to LOCALCOUNT 0 (if you didn't restore cache).
 
+True, and a bit selfish of course, because I don't care about all those 
+SRCPV packages, i cannot even use them because of their inconsistent 
+versions.
+
+> A bit better would be to disable LOCALCOUNT_OVERRIDE only for recipes
+> you want to be AUTOREV (then git clone will stop for recipes you don't
+> care about even with BB_GIT_CLONE_FOR_SRCREV and after removing cache
+> those LOCALCOUNT will stay 0 as it was before).
+
+Yes, that would lead to the same workable situation for me.
+And seems like an easier fix, because BB_LOCALCOUNT_OVERRIDE is checked for 
+each package, where BB_GIT_CLONE_FOR_SRCREV is only checked once, globally.
+
+> Best solution would be to ask git devs to implement "git remote-count
+> HASH" as remote-ls works.
+
+Yes, if we could convince them, that would be ideal...
+
+Rgds, Pieter
 
 
