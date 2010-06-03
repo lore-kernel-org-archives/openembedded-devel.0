@@ -1,35 +1,44 @@
-Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nicolas.ferre@atmel.com>) id 1OKCAK-00048x-9G
+	(envelope-from <chasemaupin03@gmail.com>) id 1OKCIL-0004OX-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 17:17:08 +0200
-Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
-	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id o53CvgJP025241;
-	Thu, 3 Jun 2010 05:57:43 -0700 (PDT)
-Received: from [127.0.0.1] (pc245_112.atmel.fr [10.159.245.112])
-	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o53CxFc22618; 
-	Thu, 3 Jun 2010 14:59:15 +0200 (MEST)
-Message-ID: <4C07A733.1040303@atmel.com>
-Date: Thu, 03 Jun 2010 14:59:31 +0200
-From: Nicolas Ferre <nicolas.ferre@atmel.com>
-Organization: atmel
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
-	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Thu, 03 Jun 2010 17:25:22 +0200
+Received: by gyg10 with SMTP id 10so166911gyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 03 Jun 2010 08:21:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=1DQ1ZToQ8GBnR0lvGHjjIwRTrLHHMlJOqXE3gakc+eg=;
+	b=WWgro90ImxxKErXZ3VYcGX7qFZWMV8HiDOhRrTBhqaJzeAcUoCW4pj3EvPVnZuSblA
+	9H+gReCvKYcH7QCOQBq2fr4CjxKA+Jsfo7D2b9LZSJ6vYnVuvCkIHCgQkRSWHZzKTcik
+	uUNUh/bOg9iAc8lpdRVVvy/87kI8UlFMTOND4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=QgHjIat0CWYCbz/W9kSCUqTYjEk7+54H7MTqjpNnBSZ9JMjPQjDrV8Kn4sq91uMJpO
+	3R2Z0Y4PtbOLOxCag0g0byCKpAMVHIDNFa9L8oXkXJ9gbyLFlvjLwpmmAP2sFf/c4A3U
+	ePYi+VPexfyOvOwBtOLrYuSanfTY+pGsFds2I=
+Received: by 10.101.138.35 with SMTP id q35mr10373630ann.86.1275578463583;
+	Thu, 03 Jun 2010 08:21:03 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id f6sm657253anb.6.2010.06.03.08.21.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 03 Jun 2010 08:21:02 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>	<AEB54AFF070EB34A921BC7E006B711BE11905D1147@SRV10.nortechonline.net>	<76E258664B189C4CBEF125491CA11ECC9445E0CF88@KCINPUNHJCMS01.kpit.com>,
-	<AANLkTinJcbZ3ApaSpSvsrte40TWF8f5Rz3NIIXX8ZhCR@mail.gmail.com>
-	<76E258664B189C4CBEF125491CA11ECC9445E0CF8C@KCINPUNHJCMS01.kpit.com>
-In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CF8C@KCINPUNHJCMS01.kpit.com>
-X-SA-Exim-Connect-IP: 204.2.163.5
-X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
+Date: Thu,  3 Jun 2010 10:15:13 -0500
+Message-Id: <1275578113-17291-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: (No subject)
+Cc: Chase Maupin <chase.maupin@ti.com>
+Subject: [PATCH] qt4-embedded: rename qtdemo file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,42 +52,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 15:17:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Jun 2010 15:25:22 -0000
 
-Le 03/06/2010 14:13, Soumya R :
-> Hi,
->     
-> MACHINE = "at91sam9263ek"
-> DISTRO = "angstrom-2008.1"
->     
->   I am new to this open embedded so you may seem may question is silly..
-> I need to know wat i need to deploy to my target and where the final image is stored..
-> Please help me out.. Thanks in advance :-)
+* Changed the name of the qtdemo exectable installed
+  in the /usr/bin directory to qtdemoE for Qt
+  embedded builds.  This allows the Qt embedded
+  version of the demos package to co-exist with
+  the Qt X11 version.
+* Changed the demos package file list to accept
+  both qtdemo and qtdemoE.
 
-I advice you to go on
-http://www.linux4sam.org
-and follow the documentation there. You will have an example of the
-deployment of such a distribution.
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/qt4/qt-4.6.2.inc     |    3 +++
+ recipes/qt4/qt4-embedded.inc |    2 +-
+ recipes/qt4/qt4.inc          |    4 ++--
+ 3 files changed, 6 insertions(+), 3 deletions(-)
 
-In an OE build, here are the resulting images:
-tmp/deploy/glibc/images/at91sam9263ek/
-
-- Linux kernel (as a uImage suitable for u-boot):
-  uImage-2.6.30-r1-at91sam9263ek.bin
-- Angstrom rootfs:
-
-Angstrom-x11-at91sam9-image-glibc-ipk-2009.X-stable-at91sam9263ek.rootfs.jffs2
-
-For micro-image, you will find a different name but at the same location.
-
-IPK packages are located here:
-tmp/deploy/glibc/ipk/
-
-Hope that it helps,
+diff --git a/recipes/qt4/qt-4.6.2.inc b/recipes/qt4/qt-4.6.2.inc
+index e89cf17..4a9f077 100644
+--- a/recipes/qt4/qt-4.6.2.inc
++++ b/recipes/qt4/qt-4.6.2.inc
+@@ -57,6 +57,9 @@ do_install_append() {
+ 	for i in rcc uic moc ; do
+ 		install -m 0755 ${S}/bin/$i ${D}${bindir}/
+ 	done
++
++	#Append an E to the qtdemo file
++	mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
+ }
+ 
+ LICENSE = "LGPLv2.1 GPLv3"
+diff --git a/recipes/qt4/qt4-embedded.inc b/recipes/qt4/qt4-embedded.inc
+index 9aaca6e..436f64c 100644
+--- a/recipes/qt4/qt4-embedded.inc
++++ b/recipes/qt4/qt4-embedded.inc
+@@ -4,7 +4,7 @@ LICENSE = "GPL QPL"
+ PRIORITY = "optional"
+ HOMEPAGE = "http://www.trolltech.com"
+ DEPENDS += "directfb tslib"
+-INC_PR = "r19"
++INC_PR = "r20"
+ 
+ QT_BASE_NAME ?= "qt4-embedded"
+ QT_BASE_LIB  ?= "libqt-embedded"
+diff --git a/recipes/qt4/qt4.inc b/recipes/qt4/qt4.inc
+index 5a19f65..e246e17 100644
+--- a/recipes/qt4/qt4.inc
++++ b/recipes/qt4/qt4.inc
+@@ -103,8 +103,8 @@ FILES_${QT_BASE_NAME}-common               = "${bindir}/qtconfig"
+ FILES_${QT_BASE_NAME}-common-dbg           = "${bindir}/.debug/qtconfig"
+ FILES_${QT_BASE_NAME}-dbus                 = "${bindir}/qdbus ${bindir}/qdbusxml2cpp ${bindir}/qdbuscpp2xml ${bindir}/qdbusviewer"
+ FILES_${QT_BASE_NAME}-dbus-dbg             = "${bindir}/.debug/qdbus ${bindir}/.debug/qdbusxml2cpp ${bindir}/.debug/qdbuscpp2xml ${bindir}/.debug/qdbusviewer"
+-FILES_${QT_BASE_NAME}-demos                = "${bindir}/qtdemo ${bindir}/${QT_DIR_NAME}/demos/*"
+-FILES_${QT_BASE_NAME}-demos-dbg            = "${bindir}/.debug/qtdemo ${bindir}/${QT_DIR_NAME}/demos/.debug/*  ${bindir}/${QT_DIR_NAME}/demos/*/.debug  ${bindir}/${QT_DIR_NAME}/demos/*/*/.debug  ${bindir}/${QT_DIR_NAME}/demos/*/*/*/.debug"
++FILES_${QT_BASE_NAME}-demos                = "${bindir}/qtdemo* ${bindir}/${QT_DIR_NAME}/demos/*"
++FILES_${QT_BASE_NAME}-demos-dbg            = "${bindir}/.debug/qtdemo* ${bindir}/${QT_DIR_NAME}/demos/.debug/*  ${bindir}/${QT_DIR_NAME}/demos/*/.debug  ${bindir}/${QT_DIR_NAME}/demos/*/*/.debug  ${bindir}/${QT_DIR_NAME}/demos/*/*/*/.debug"
+ FILES_${QT_BASE_NAME}-designer             = "${bindir}/*designer*"
+ FILES_${QT_BASE_NAME}-designer-dbg         = "${bindir}/.debug/*designer*"
+ FILES_${QT_BASE_NAME}-examples             = "${bindir}/${QT_DIR_NAME}/examples/*"
 -- 
-Nicolas Ferre
+1.5.4.3
 
 
 
