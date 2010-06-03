@@ -1,35 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OKDEy-0005I0-Jh
+	(envelope-from <chasemaupin03@gmail.com>) id 1OKDF0-0005I3-Su
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 18:25:58 +0200
-Received: by yxe42 with SMTP id 42so132635yxe.6
+	Thu, 03 Jun 2010 18:26:00 +0200
+Received: by gwb15 with SMTP id 15so205641gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jun 2010 09:21:40 -0700 (PDT)
+	Thu, 03 Jun 2010 09:21:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=hL+vpLuLrCiOo8Sc1UVt/UbWUCNFeTWPORwK4TU+5m0=;
-	b=lFPp66tQ/2iLK3StAduA0IWI+C9JUGIM9jNwca1+Tgk6M4Msqqp3/XFAZx4nuCZdIo
-	zyxEORGHGAQ5I38bpbZ/Ulflr59ZGa2N/LJdhk6/DZ9H971mlDsO7P1isMbSO/c5luou
-	6WEVS+kBJmqbnsrqNrC4pu2oakXKB9nlSWgos=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=p2ATjYg2dJuFbo1TaoeQWBHecjhlHo1OLKWjxrnMvXA=;
+	b=Q+P5mj5mOXNy7Tnbewb0ngS6eh/S9gYlneuZUwLIylkzZfO1HS5iAhlBz94hZEBmfw
+	rnzanUhPLPgFVZD8OkPIk3AI3zf7dicgsY6MSJQ/L2KvqGhdhywqBHGEyrPoFjUL4Nak
+	pZptsb5oGrI15Bie+jUCtp6zqj9KPgTlu6YeM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Z1nqgvhzAq6LVyNY+/58Sb9Ef7lG3djbiY6OYz1c8REtkIvEvtQYYuy4dtEKPF4JkO
-	EyvXdhQhrqfLN1ZvcxraUIJ/EnRSzQ9Gk11fima2vpDJ7NGU5DtCy5BAmwY/hiwu+HTf
-	buq6tDdG2BNJHsn9JszLk4S+SO8Fyh0rJxJ+Q=
-Received: by 10.100.246.37 with SMTP id t37mr11025888anh.17.1275582100010;
-	Thu, 03 Jun 2010 09:21:40 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=G7L24Tj6JG+J4kfwZtc1VtlyEcDSXWcEEgWpOxFvMuQkYSmcGWe3HtD5irtes91mp0
+	ThD+UzYQufvnDyd9z5/kNTvgAa317PLUwXpgITA3/WxRrdbZchfXVGzQ8GFqprfgOef4
+	YSFBMGk5G6Sat9IgMKCLlt4LbubKn+QnKpWMg=
+Received: by 10.100.74.34 with SMTP id w34mr10609770ana.194.1275582102065;
+	Thu, 03 Jun 2010 09:21:42 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id m39sm896610ann.11.2010.06.03.09.21.34
+	by mx.google.com with ESMTPS id m39sm896610ann.11.2010.06.03.09.21.40
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 03 Jun 2010 09:21:39 -0700 (PDT)
+	Thu, 03 Jun 2010 09:21:40 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Jun 2010 11:15:43 -0500
-Message-Id: <1275581747-22223-1-git-send-email-chase.maupin@ti.com>
+Date: Thu,  3 Jun 2010 11:15:44 -0500
+Message-Id: <1275581747-22223-2-git-send-email-chase.maupin@ti.com>
 X-Mailer: git-send-email 1.6.0.4
-X-SA-Exim-Connect-IP: 209.85.213.175
+In-Reply-To: <1275581747-22223-1-git-send-email-chase.maupin@ti.com>
+References: <1275581747-22223-1-git-send-email-chase.maupin@ti.com>
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -38,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCHv2 1/5] alsa-state/dm355-evm: add asound file from arago
+Subject: [PATCHv2 2/5] alsa-state/dm365-evm: add asound file from arago
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,22 +54,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 16:25:58 -0000
+X-List-Received-Date: Thu, 03 Jun 2010 16:26:01 -0000
 
 * Add the asound.state file for the Texas Instruments
-  dm355-evm platform from arago.
+  dm365-evm platform from arago.
 
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 ---
- recipes/alsa/alsa-state/dm355-evm/asound.state |  767 ++++++++++++++++++++++++
+ recipes/alsa/alsa-state/dm365-evm/asound.state |  767 ++++++++++++++++++++++++
  1 files changed, 767 insertions(+), 0 deletions(-)
- create mode 100644 recipes/alsa/alsa-state/dm355-evm/asound.state
+ create mode 100644 recipes/alsa/alsa-state/dm365-evm/asound.state
 
-diff --git a/recipes/alsa/alsa-state/dm355-evm/asound.state b/recipes/alsa/alsa-state/dm355-evm/asound.state
+diff --git a/recipes/alsa/alsa-state/dm365-evm/asound.state b/recipes/alsa/alsa-state/dm365-evm/asound.state
 new file mode 100644
-index 0000000..8a5f84a
+index 0000000..7f369d3
 --- /dev/null
-+++ b/recipes/alsa/alsa-state/dm355-evm/asound.state
++++ b/recipes/alsa/alsa-state/dm365-evm/asound.state
 @@ -0,0 +1,767 @@
 +state.EVM {
 +	control.1 {
@@ -120,7 +122,7 @@ index 0000000..8a5f84a
 +		iface MIXER
 +		name 'LineL DAC Playback Volume'
 +		value.0 118
-+		value.1 118
++		value.1 100
 +	}
 +	control.6 {
 +		comment.access 'read write'
@@ -153,8 +155,8 @@ index 0000000..8a5f84a
 +		comment.dbmax 0
 +		iface MIXER
 +		name 'LineL Line2 Bypass Playback Volume'
-+		value.0 71
-+		value.1 118
++		value.0 100
++		value.1 100
 +	}
 +	control.9 {
 +		comment.access 'read write'
@@ -165,8 +167,8 @@ index 0000000..8a5f84a
 +		comment.dbmax 0
 +		iface MIXER
 +		name 'LineR Line2 Bypass Playback Volume'
-+		value.0 118
-+		value.1 71
++		value.0 100
++		value.1 100
 +	}
 +	control.10 {
 +		comment.access 'read write'
@@ -242,8 +244,8 @@ index 0000000..8a5f84a
 +		comment.dbmax 0
 +		iface MIXER
 +		name 'HP Right PGA Bypass Playback Volume'
-+		value.0 118
-+		value.1 71
++		value.0 100
++		value.1 100
 +	}
 +	control.17 {
 +		comment.access 'read write'
@@ -265,7 +267,7 @@ index 0000000..8a5f84a
 +		comment.dbmax 0
 +		iface MIXER
 +		name 'HPR PGA Bypass Playback Volume'
-+		value 118
++		value 100
 +	}
 +	control.19 {
 +		comment.access 'read write'
@@ -320,7 +322,7 @@ index 0000000..8a5f84a
 +		comment.dbmax 0
 +		iface MIXER
 +		name 'HPRCOM PGA Bypass Playback Volume'
-+		value 118
++		value 100
 +	}
 +	control.24 {
 +		comment.access 'read write'
