@@ -1,56 +1,48 @@
-Received: from tx2ehsobe001.messaging.microsoft.com ([65.55.88.11]
-	helo=TX2EHSOBE001.bigfish.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OK0NP-0004zj-Cl
+	(envelope-from <martin.jansa@gmail.com>) id 1OK2DM-0003WC-Sg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 04:41:51 +0200
-Received: from mail176-tx2-R.bigfish.com (10.9.14.235) by
-	TX2EHSOBE001.bigfish.com (10.9.40.21) with Microsoft SMTP Server id
-	8.1.340.0; Thu, 3 Jun 2010 02:37:30 +0000
-Received: from mail176-tx2 (localhost.localdomain [127.0.0.1])	by
-	mail176-tx2-R.bigfish.com (Postfix) with ESMTP id 849E4A4009F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jun 2010 02:37:30 +0000 (UTC)
-X-SpamScore: -29
-X-BigFish: VPS-29(zz542N14ffO1443Na2dbK9371Pzz1202hz4fhzz32i2a8h43h61h)
-Received: from mail176-tx2 (localhost.localdomain [127.0.0.1]) by mail176-tx2
-	(MessageSwitch) id 1275532649825030_18922;
-	Thu,  3 Jun 2010 02:37:29 +0000 (UTC)
-Received: from TX2EHSMHS043.bigfish.com (unknown [10.9.14.246])	by
-	mail176-tx2.bigfish.com (Postfix) with ESMTP id BD12D62004F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jun 2010 02:37:29 +0000 (UTC)
-Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
-	TX2EHSMHS043.bigfish.com (10.9.99.143) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Thu, 3 Jun 2010 02:37:29 +0000
-Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
-	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
-	Thu, 3 Jun 2010 08:07:17 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 3 Jun 2010 08:07:17 +0530
-Thread-Topic: [oe] (no subject)
-Thread-Index: AQHLAjS1fiPyD3truU+5SVhNMHrNiZJuz1jggAC17lM=
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF88@KCINPUNHJCMS01.kpit.com>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>,
-	<AEB54AFF070EB34A921BC7E006B711BE11905D1147@SRV10.nortechonline.net>
-In-Reply-To: <AEB54AFF070EB34A921BC7E006B711BE11905D1147@SRV10.nortechonline.net>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 03 Jun 2010 06:39:34 +0200
+Received: by fxm9 with SMTP id 9so1536607fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 02 Jun 2010 21:35:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=lJy+/28aMiUzQSqCPZwPV0GpZzOqaJsdspmRPm1jtYE=;
+	b=DR8gE+Fmy+jkvzYp+MUl6fyf8FaBCfgcczOX3wHoJleLsd379qa6eO+9Al9GBJaydX
+	TfTyQn7bQ+YO+JFZMc3bNt+0JFKVTMmf2dgXDo61wHrmA7h8X8+iBw3Zs/ud91GG4lsB
+	AuGPJf38fk2CGEioAZZzx3ZBlccLZajq8FFdA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=vUsZvAY2SOYCjVpf6O14Lxx+ZuxjbpxciZjMEJtLzAvUVTVl9LZ8qaxZq/hyZX8wFg
+	Lrn0bQ0WEuUb04NCJvP2HBEQuiIZfk4tXZSvvDYDgw0Fi3xo6TZDVXVAp6whgoOJ8tzV
+	kokCFHIDSjfFGtLc69Cb0G2iyndJYkfGhkdB4=
+Received: by 10.223.64.205 with SMTP id f13mr9552160fai.98.1275539717134;
+	Wed, 02 Jun 2010 21:35:17 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id r25sm55558272fai.11.2010.06.02.21.35.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 02 Jun 2010 21:35:15 -0700 (PDT)
+Date: Thu, 3 Jun 2010 06:35:05 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100603043505.GJ16035@jama>
+References: <201006022351.38129.pieterg@gmx.com>
 MIME-Version: 1.0
-X-Reverse-DNS: unknown
-X-SA-Exim-Connect-IP: 65.55.88.11
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+In-Reply-To: <201006022351.38129.pieterg@gmx.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: (No subject)
+Subject: Re: AUTOREV and SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -64,143 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 02:41:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 03 Jun 2010 04:39:34 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Ya you are right i am using Ubuntu 10.4..
-Thanks a lot for the reply it worked..
+On Wed, Jun 02, 2010 at 11:51:37PM +0200, pieterg wrote:
+> I have only a handful of (git) packages for which I need to use AUTOREV, but 
+> when I define
+> 
+> BB_GIT_CLONE_FOR_SRCREV = "1"
+> BB_LOCALCOUNT_OVERRIDE = ""
+> 
+> the sideeffect is that hundreds of other packages (which I don't need) are 
+> suddenly having their repositories cloned as well, when their bb files are 
+> parsed. Even though these packages are not using AUTOREV, they have fixed 
+> SRCREV's (either in their bb files, or in my distro).
+> 
+> This is obviously taking a long time, consuming a lot of diskspace, 
+> generating error messages for invalid git urls, and eventually bitbake will 
+> fail because it encountered 'parsing errors' because of those invalid git 
+> urls.
 
-Thank you so much:-)
+If you use bitbake-1.10 it will do it just once for git revision (it
+will cache the result of "git list-rev | wc -l" which is used by
+BB_GIT_CLONE_FOR_SRCREV.
 
-Regards,
-Soumya
-________________________________________
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] On Behalf Of Hodgson, Simon [Simon.Hodgson=
-@nortechonline.co.uk]
-Sent: Wednesday, June 02, 2010 9:11 PM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] (no subject)
+> I guess this is because all of these packages are using ${SRCPV} in their 
+> PV, instead of ${SRCREV} (probably in order to find the correct LOCALCOUNT 
+> for the gitrev).
+> 
+> But argueing that people who don't use BB_GIT_CLONE_FOR_SRCREV will not get 
+> these LOCALCOUNT's in their PV anyway, and people that do use 
+> BB_GIT_CLONE_FOR_SRCREV will use SRCREV = ${AUTOREV} for the packages which 
+> they want to be automatically updated, so SRCREV would equal SRCPV, 
+> wouldn't it make sense to just use ${SRCREV} instead of ${SRCPV} in PV?
 
-Let me guess, you're using Ubuntu 10.4 to build?
+No they won't be the same. They will have the same format
+git${LOCALCOUNT}+${HASH} as when AUTOREV+SRCREV is used.
 
-Edit the file:
-home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin/ar=
-file.py
+Check "[oe] SRCPV migration - How SRCPV works!" thread for more info
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg01607.html
 
-Change the line:
-size =3D int(descriptor[5])
-
-To:
-size =3D int(descriptor[3])
-
-I'm afraid I can't explain why you need to do this, only that it works for =
-me.
-
-Simon
-
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Soumya R
-Sent: 02 June 2010 10:20
-To: openembedded-devel@lists.openembedded.org
-Cc: angstrom-distro-devel@linuxtogo.org
-Subject: [oe] (no subject)
-
-Hi All,
-
-   I am running bibake micro-image i got the following error,
-
-NOTE: Running task 965 of 970 (ID: 93, /home/likewise-open/KPIT/soumyar/oe/=
-openembedded/recipes/mtd/mtd-utils-native_1.3.1.bb, do_package_write)
-NOTE: Running task 966 of 970 (ID: 18, /home/likewise-open/KPIT/soumyar/oe/=
-openembedded/recipes/images/micro-image.bb, do_package_update_index_ipk)
-ERROR: function do_package_update_index_ipk failed
-ERROR: log data follows (/home/likewise-open/KPIT/soumyar/oe/build/tmp/work=
-/at91sam9263ek-angstrom-linux-gnueabi/micro-image-1.0-r0/temp/log.do_packag=
-e_update_index_ipk.24831)
-| + ipkgarchs=3D'all any noarch arm  armv4 armv4t armv5te at91sam9263ek'
-| + '[' '!' -z '' ']'
-| + mkdir -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk
-| + touch /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/Pa=
-ckages
-| + ipkg-make-index -r /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/Packages -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/Packages -l /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/Packages.filelist -m /home/likewise-open/KPIT/soumyar/oe/build/t=
-mp/deploy/glibc/ipk
-| /home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin=
-/ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
-instead
-|   import md5
-|
-| + for arch in '$ipkgarchs'
-| + '[' -e /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/a=
-ll/ ']'
-| + touch /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy/glibc/ipk/al=
-l/Packages
-| + ipkg-make-index -r /home/likewise-open/KPIT/soumyar/oe/build/tmp/deploy=
-/glibc/ipk/all/Packages -p /home/likewise-open/KPIT/soumyar/oe/build/tmp/de=
-ploy/glibc/ipk/all/Packages -l /home/likewise-open/KPIT/soumyar/oe/build/tm=
-p/deploy/glibc/ipk/all/Packages.filelist -m /home/likewise-open/KPIT/soumya=
-r/oe/build/tmp/deploy/glibc/ipk/all/
-| /home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux/usr/bin=
-/ipkg.py:39: DeprecationWarning: the md5 module is deprecated; use hashlib =
-instead
-|   import md5
-| Traceback (most recent call last):
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/ipkg-make-index", line 114, in <module>
-|     pkg =3D ipkg.Package(filename)
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/ipkg.py", line 161, in __init__
-|     tarStream =3D ar.open("control.tar.gz")
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/arfile.py", line 59, in open
-|     f =3D self._scan(fname)
-|   File "/home/likewise-open/KPIT/soumyar/oe/build/tmp/sysroots/i686-linux=
-/usr/bin/arfile.py", line 79, in _scan
-|     size =3D int(descriptor[5])
-| IndexError: list index out of range
-NOTE: Task failed: /home/likewise-open/KPIT/soumyar/oe/build/tmp/work/at91s=
-am9263ek-angstrom-linux-gnueabi/micro-image-1.0-r0/temp/log.do_package_upda=
-te_index_ipk.24831
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/im=
-ages/micro-image.bb do_package_update_index_ipk failed
-NOTE: Running task 967 of 970 (ID: 95, /home/likewise-open/KPIT/soumyar/oe/=
-openembedded/recipes/mtd/mtd-utils-native_1.3.1.bb, do_package_stage)
-ERROR: Task 18 (/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/im=
-ages/micro-image.bb, do_package_update_index_ipk) failed
-NOTE: Waiting for 1 active tasks to finish
-NOTE: 1: /home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/mtd/mtd-u=
-tils-native_1.3.1.bb, do_package_stage (24841)
-NOTE: Tasks Summary: Attempted 965 tasks of which 927 didn't need to be rer=
-un and 1 failed.
-ERROR: '/home/likewise-open/KPIT/soumyar/oe/openembedded/recipes/images/mic=
-ro-image.bb' failed
-KPIT\soumyar@d-5289lnx:~/oe/build$
-
-   Anybody can help me out to resolve this.Any suggestions are welcome:-)
-
-Thanks in advance:-)
+in short: why do you insist on BB_GIT_CLONE_FOR_SRCREV? autoincremented
+LOCALCOUNT works good in most cases (as long as you keep cache dir), only 
+case for which we introduced BB_LOCALCOUNT_OVERRIDE is for multiple builders 
+sharing feed, but not cache directory.
 
 Regards,
-Soumya
 
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
