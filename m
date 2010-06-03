@@ -1,30 +1,43 @@
-Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
+Received: from smtp-1.concepts.nl ([213.197.30.124])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <balakrishnan@e-consystems.com>) id 1OK6sP-00032b-Td
+	(envelope-from <pieterg@gmx.com>) id 1OK6vp-00039s-I3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 11:38:15 +0200
-Received: (qmail 7714 invoked by uid 399); 3 Jun 2010 09:33:53 -0000
-Received: from dsl-tn-dynamic-104.231.164.122.airtelbroadband.in (HELO
-	?192.168.6.196?) (balakrishnan@e-consystems.com@122.164.231.104)
-	by mail9.myhsphere.biz with ESMTPAM; 3 Jun 2010 09:33:53 -0000
-X-Originating-IP: 122.164.231.104
-X-Sender: balakrishnan@e-consystems.com
-From: balakrishnan <balakrishnan@e-consystems.com>
+	Thu, 03 Jun 2010 11:41:46 +0200
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-1.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>) id 1OK6d8-00025C-Bs
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Jun 2010 11:22:26 +0200
+Received: from [10.9.0.12] (unknown [10.9.0.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 5D2756A11A
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  3 Jun 2010 11:22:21 +0200 (CEST)
+From: pieterg <pieterg@gmx.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 03 Jun 2010 15:03:51 +0530
-Message-Id: <1275557631.3916.17.camel@balakrishnan-desktop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.26.1 
-X-SA-Exim-Connect-IP: 204.10.105.69
-X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
+Date: Thu, 3 Jun 2010 11:22:17 +0200
+User-Agent: KMail/1.9.9
+References: <201006022351.38129.pieterg@gmx.com>
+	<201006031002.31685.pieterg@gmx.com> <20100603082740.GL16035@jama>
+In-Reply-To: <20100603082740.GL16035@jama>
+MIME-Version: 1.0
+Message-Id: <201006031122.17227.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1OK6d8-00025C-Bs
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+X-SA-Exim-Connect-IP: 213.197.30.124
+X-SA-Exim-Mail-From: pieterg@gmx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: linux_2.6.34 staging error
+Subject: Re: AUTOREV and SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,99 +51,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 09:38:16 -0000
-Content-Type: text/plain
+X-List-Received-Date: Thu, 03 Jun 2010 09:41:46 -0000
+X-Groupsio-MsgNum: 19811
+Content-Type: Multipart/Mixed;
+  boundary="Boundary-00=_JR3BMdyNP+d3yhL"
+
+--Boundary-00=_JR3BMdyNP+d3yhL
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hi,
-  I am trying to build linux_2.6.34 kernel for my development board on
-stable/2009 branch. So that I have added below recipe to accomplish this
-stuff. During bitbake I got staging error, can I have solution for
-this?.
+On Thursday 03 June 2010 10:27:40 Martin Jansa wrote:
+> A bit better would be to disable LOCALCOUNT_OVERRIDE only for recipes
+> you want to be AUTOREV (then git clone will stop for recipes you don't
+> care about even with BB_GIT_CLONE_FOR_SRCREV and after removing cache
+> those LOCALCOUNT will stay 0 as it was before).
 
-Error:
-/**********************************************************************************************************************/
-NOTE: Psyco JIT Compiler (http://psyco.sf.net) not available. Install it
-to increase performance.
-NOTE: Handling BitBake files: \ (6707/6707) [100 %]
-NOTE: Parsing finished. 6405 cached, 0 parsed, 302 skipped, 0 masked.
-NOTE: Cache is clean, not saving.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 296 of 546 (ID:
-2, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_fetch)
-NOTE: Running task 297 of 546 (ID:
-3, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_unpack)
-NOTE: Unpacking /media/disk/beagle-oe/tmp/downloads/linux-2.6.34.tar.bz2
-to ../tmp/work/alioth-angstrom-linux-gnueabi/linux-2.6.34-r1/
-NOTE: Unpacking recipes/linux/linux-2.6.34/alioth/defconfig
-to ../tmp/work/alioth-angstrom-linux-gnueabi/linux-2.6.34-r1/
-NOTE: Running task 320 of 546 (ID:
-4, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_patch)
-NOTE: Applying patch
-'alioth_linux-2.6.34.patch' (recipes/linux/linux-2.6.34/alioth/alioth_linux-2.6.34.patch)
-NOTE: Running task 321 of 546 (ID:
-5, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_configure)
-NOTE: Running task 339 of 546 (ID:
-6, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_qa_configure)
-NOTE: Running task 340 of 546 (ID:
-7, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_compile)
-NOTE: Running task 362 of 546 (ID:
-11, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_sizecheck)
-NOTE: Running task 363 of 546 (ID:
-10, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_uboot_mkimage)
-NOTE: Running task 364 of 546 (ID:
-8, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_install)
-NOTE: Running task 378 of 546 (ID:
-19, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_deploy)
-NOTE: Running task 390 of 546 (ID:
-18, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_devicetree_image)
-NOTE: Running task 391 of 546 (ID:
-14, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_package)
-sh: arm-angstrom-linux-gnueabi-depmod-: command not found
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /lib/modules/2.6.34/modules.order
-NOTE:   /lib/modules/2.6.34/modules.builtin
-NOTE: Running task 396 of 546 (ID:
-9, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_populate_staging)
-ERROR: function do_stage failed
-ERROR: see log
-in /home/balakrishnan/econsystems/projects/tmp/work/alioth-angstrom-linux-gnueabi/linux-2.6.34-r1/temp/log.do_stage.4058
-NOTE: Task
-failed: /home/balakrishnan/econsystems/projects/tmp/work/alioth-angstrom-linux-gnueabi/linux-2.6.34-r1/temp/log.do_stage.4058
-ERROR: TaskFailed event exception, aborting
-ERROR: Build
-of /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb do_populate_staging failed
-ERROR: Task 9
-(/home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_populate_staging) failed
-NOTE: Tasks Summary: Attempted 395 tasks of which 383 didn't need to be
-rerun and 1 failed.
-ERROR:
-'/home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb' failed
-/*******************************************************************************************************************************************/
+Check, this would be a good workaround for me at the moment.
+Should we propose this patch? (see attachment, patch against bb 1.10)
+Are the bitbake people reading along here?
 
-../openembedded/recipes/linux/linux_2.6.34.bb
-/****************************************************************************************/
-require linux.inc
+Rgds, Pieter
 
-PR="r1"
+--Boundary-00=_JR3BMdyNP+d3yhL
+Content-Type: text/x-diff;
+  charset="us-ascii";
+  name="0001-allow-BB_LOCALCOUNT_OVERRIDE-to-be-defined-per-packa.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+	filename="0001-allow-BB_LOCALCOUNT_OVERRIDE-to-be-defined-per-packa.patch"
 
-# Mark archs/machines that this kernel supports
-DEFAULT_PREFERENCE = "-1"
-DEFAULT_PREFERENCE_alioth = "1"
+From 6265ab521627a38b9b0596149e31119b2073f5ba Mon Sep 17 00:00:00 2001
+From: pieterg <pieterg@gmx.com>
+Date: Thu, 3 Jun 2010 11:13:42 +0200
+Subject: [PATCH] allow BB_LOCALCOUNT_OVERRIDE to be defined per package
 
-SRC_URI =
-"${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/${P}.tar.bz2;name=kernel \
-           file://defconfig"
+---
+ lib/bb/fetch/__init__.py |   10 ++++++----
+ 1 files changed, 6 insertions(+), 4 deletions(-)
 
-SRC_URI_append_alioth = "\
-	file://alioth_linux-2.6.34.patch;patch=1 \
-	"
-/****************************************************************************************/
+diff --git a/lib/bb/fetch/__init__.py b/lib/bb/fetch/__init__.py
+index 085f864..a586fda 100644
+--- a/lib/bb/fetch/__init__.py
++++ b/lib/bb/fetch/__init__.py
+@@ -695,7 +695,8 @@ class Fetch(object):
+=20
+         latest_rev =3D self._build_revision(url, ud, d)
+         last_rev =3D pd.getValue("BB_URI_LOCALCOUNT", key + "_rev")
+-        uselocalcount =3D bb.data.getVar("BB_LOCALCOUNT_OVERRIDE", d, True=
+) or False
++        pn =3D bb.data.getVar("PN", d, True)
++        uselocalcount =3D bb.data.getVar("BB_LOCALCOUNT_OVERRIDE_pn-%s" % =
+pn, d, True) or bb.data.getVar("BB_LOCALCOUNT_OVERRIDE", d, True) or False
+         count =3D None
+         if uselocalcount:
+             count =3D Fetch.localcount_internal_helper(ud, d)
+@@ -705,9 +706,10 @@ class Fetch(object):
+         if last_rev =3D=3D latest_rev:
+             return str(count + "+" + latest_rev)
+=20
+-        buildindex_provided =3D hasattr(self, "_sortable_buildindex")
+-        if buildindex_provided:
+-            count =3D self._sortable_buildindex(url, ud, d, latest_rev)
++        if not uselocalcount:
++            buildindex_provided =3D hasattr(self, "_sortable_buildindex")
++            if buildindex_provided:
++                count =3D self._sortable_buildindex(url, ud, d, latest_rev=
+)
+=20
+         if count is None:
+             count =3D "0"
+--=20
+1.6.5.rc1.44.ga1675
 
 
-With Regards
-J.Balakrishnan    
-
-
+--Boundary-00=_JR3BMdyNP+d3yhL--
