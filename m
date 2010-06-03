@@ -1,40 +1,49 @@
-Received: from smtp-4.concepts.nl ([213.197.30.111])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1OK66Z-0004Sy-Fx
+	(envelope-from <martin.jansa@gmail.com>) id 1OK68g-0004YO-65
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 10:48:49 +0200
-Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
-	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1OK62R-0005pl-SV
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 10:44:31 +0200
-Received: from [10.9.0.12] (unknown [10.9.0.12])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 893F86A11A
+	Thu, 03 Jun 2010 10:50:59 +0200
+Received: by fxm9 with SMTP id 9so1648948fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jun 2010 10:44:27 +0200 (CEST)
-From: pieterg <pieterg@gmx.com>
+	Thu, 03 Jun 2010 01:46:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=mhNneNZgCxTi4rQR/7r6CTEDVwcL5DyxIkZVVlAAJbo=;
+	b=OFMdW4Y1hf4YEjXhXGD0Ez+PO5nhQsrPVKfYgFrQQnbx5i68u/c8nlMaVCoCuYsBff
+	BHxLbdVc13nJomqSIGHJ555AketMz2Exoq9zcP88q5qdteUurDqgne27JHjbxb1n4xsJ
+	x24kfbM90UTJzYCo/UcSuCJRIsxtoW+LmLdvY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=FtzWV5oEQ8gBZKy02liB/KhYX6eMwkpQeZC/SyMi5/eorJXmJk/y4sBhl4twW5DgQ2
+	jRSE1UFRRUpFQu8dt7SAgzZ2YYpqJsjDJf1dCwGbjR4jQcY6fx/nR6da4d64hh8uoCM9
+	Gok7+coOKH9whAbAQqoNLim6rji59waB3yNRU=
+Received: by 10.223.18.67 with SMTP id v3mr9834998faa.93.1275554802690;
+	Thu, 03 Jun 2010 01:46:42 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id j23sm56438102faa.14.2010.06.03.01.46.41
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 03 Jun 2010 01:46:42 -0700 (PDT)
+Date: Thu, 3 Jun 2010 10:46:31 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 3 Jun 2010 10:44:24 +0200
-User-Agent: KMail/1.9.9
-References: <201006022351.38129.pieterg@gmx.com>
-	<201006031002.31685.pieterg@gmx.com> <20100603082740.GL16035@jama>
-In-Reply-To: <20100603082740.GL16035@jama>
+Message-ID: <20100603084631.GN16035@jama>
+References: <201006022351.38129.pieterg@gmx.com> <20100603043505.GJ16035@jama>
+	<201006030915.57362.pieterg@gmx.com> <20100603073717.GK16035@jama>
+	<1275552817.4657.32.camel@lenovo.internal.reciva.com>
+	<20100603083011.GM16035@jama>
+	<1275554237.4657.40.camel@lenovo.internal.reciva.com>
 MIME-Version: 1.0
-Message-Id: <201006031044.24680.pieterg@gmx.com>
-X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
-	information
-X-Concepts-MailScanner-ID: 1OK62R-0005pl-SV
-X-Concepts-MailScanner: Found to be clean
-X-Concepts-MailScanner-SpamCheck: 
-X-Concepts-MailScanner-From: pieterg@gmx.com
-X-SA-Exim-Connect-IP: 213.197.30.111
-X-SA-Exim-Mail-From: pieterg@gmx.com
+In-Reply-To: <1275554237.4657.40.camel@lenovo.internal.reciva.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: AUTOREV and SRCPV
@@ -51,54 +60,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 08:48:49 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 03 Jun 2010 08:50:59 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Thursday 03 June 2010 10:27:40 Martin Jansa wrote:
-> On Thu, Jun 03, 2010 at 10:02:31AM +0200, pieterg wrote:
-> > On Thursday 03 June 2010 09:37:17 Martin Jansa wrote:
-> > > On Thu, Jun 03, 2010 at 09:15:56AM +0200, pieterg wrote:
+On Thu, Jun 03, 2010 at 09:37:17AM +0100, Phil Blundell wrote:
+> On Thu, 2010-06-03 at 10:30 +0200, Martin Jansa wrote:
+> > On Thu, Jun 03, 2010 at 09:13:37AM +0100, Phil Blundell wrote:
+> > > but I think that's already fixable
+> > > with strategic use of PREFERRED_VERSION and/or DEFAULT_PREFERENCE.
+> > 
+> > How? Can you explain in more detail?
+> 
+> If you arrange for the autorev'd recipe to be, say,
+> DEFAULT_PREFERENCE=1, then I think bitbake will treat it as the desired
+> version to build even if SRCREV - and hence PV - would sort lower than
+> some other version (irrespective of whether that other version has
+> already been built or not).  Then you just need to engineer PKGV to be
+> suitably monotonic in order to get the right things to happen inside
+> deploy/ and on the target system.
 
-<snip>
+So will bitbake build again the same recipe (because I've built from the
+same one before) with lower PV, just because it _still_ has the highest
+DEFAULT_PREFERENCE and it's desired version (but still lower PV because
+of hash, then before)?.
 
-> > So personally, I would never even want to use SRCPV, unless it's for
-> > AUTOREV.
->
-> So what you say is that you would also never use AUTOREV without
-> BB_GIT_CLONE_FOR_SRCREV, no matter if SRCPV is used.
+Maybe I had not enough coffee today, but I still don't understand it,
+sorry, maybe someone else can comment?
 
-Right, same reason. I need reproducable versions at all times, on all build 
-systems, even when the cache is lost.
+Regards,
 
-> > Would it be an idea to be able to only have BB_GIT_CLONE_FOR_SRCREV for
-> > those packages which have SRCREV = ${AUTOREV}?
->
-> Well then it will be a bit inconsistent, because those AUTOREV recipes
-> will restore their LOCALCOUNT (ie after hdd breakage) but notAUTOREV
-> recipes (which usually could be considered more stable) will "downgrade"
-> to LOCALCOUNT 0 (if you didn't restore cache).
-
-True, and a bit selfish of course, because I don't care about all those 
-SRCPV packages, i cannot even use them because of their inconsistent 
-versions.
-
-> A bit better would be to disable LOCALCOUNT_OVERRIDE only for recipes
-> you want to be AUTOREV (then git clone will stop for recipes you don't
-> care about even with BB_GIT_CLONE_FOR_SRCREV and after removing cache
-> those LOCALCOUNT will stay 0 as it was before).
-
-Yes, that would lead to the same workable situation for me.
-And seems like an easier fix, because BB_LOCALCOUNT_OVERRIDE is checked for 
-each package, where BB_GIT_CLONE_FOR_SRCREV is only checked once, globally.
-
-> Best solution would be to ask git devs to implement "git remote-count
-> HASH" as remote-ls works.
-
-Yes, if we could convince them, that would be ideal...
-
-Rgds, Pieter
+-- 
+uin:136542059                jid:Martin.Jansa@gmail.com
+Jansa Martin                 sip:jamasip@voip.wengo.fr 
+JaMa                         
 
 
