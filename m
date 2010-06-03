@@ -1,47 +1,35 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from newsmtp5.atmel.com ([204.2.163.5] helo=sjogate2.atmel.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OKBsR-0004Kx-7E
+	(envelope-from <nicolas.ferre@atmel.com>) id 1OKCAK-00048x-9G
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 16:58:37 +0200
-Received: by pwj4 with SMTP id 4so80042pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jun 2010 07:54:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=lWP6ZDp1nZvPhJq+NKKTYJKzRieFZPOAOqVwZNMQVog=;
-	b=vutuKmAQ9hRp5XMEgEYM3iefPCyUR+cVtH4A2YfwSM8IvOpQ0blVBpFHywp9r7C7EX
-	KGAI3UkjMnEiLF9yb2jSvAmMvC+jMDFpTgChXQCiSEb0nWmVZDE7yKV32jOZJD87wyKR
-	WNWkJKera8Z2ajSfN7eOjAoVUhAVO2xzQjpFQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=DAZUyXQVBD4f0Lhp5Ux7Q2MoQyIYNvOJ/9ygzw7VsrJ2NSsH2XW0g/qvHaKn74i0C9
-	8Rm96xlFlV8UOcPArL77xNQXrWgxh23TCHnzG2HQje36YVrxyAEoWdreS3autjEhmkGO
-	7bDD3wG/1AFM3SEps6hy0++Fzr2Fmne8XV840=
-Received: by 10.142.151.38 with SMTP id y38mr6867420wfd.219.1275576858182; 
-	Thu, 03 Jun 2010 07:54:18 -0700 (PDT)
+	Thu, 03 Jun 2010 17:17:08 +0200
+Received: from meyreuil.atmel.fr (meyreuil [10.159.254.132])
+	by sjogate2.atmel.com (8.13.6/8.13.6) with ESMTP id o53CvgJP025241;
+	Thu, 3 Jun 2010 05:57:43 -0700 (PDT)
+Received: from [127.0.0.1] (pc245_112.atmel.fr [10.159.245.112])
+	by meyreuil.atmel.fr (8.11.7p1+Sun/8.11.7) with ESMTP id o53CxFc22618; 
+	Thu, 3 Jun 2010 14:59:15 +0200 (MEST)
+Message-ID: <4C07A733.1040303@atmel.com>
+Date: Thu, 03 Jun 2010 14:59:31 +0200
+From: Nicolas Ferre <nicolas.ferre@atmel.com>
+Organization: atmel
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.211.2 with HTTP; Thu, 3 Jun 2010 07:53:58 -0700 (PDT)
-In-Reply-To: <AANLkTinfALcc7SfhQ04fED06C2EE_WJUCWTmlDB98zYM@mail.gmail.com>
-References: <AANLkTinfALcc7SfhQ04fED06C2EE_WJUCWTmlDB98zYM@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 3 Jun 2010 07:53:58 -0700
-X-Google-Sender-Auth: zhJjnAl0i974LodpqFdeBn1JKE4
-Message-ID: <AANLkTimJBs7SJNhllCgOsnrDAat3p78i2ixW0QtKQT5r@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CF85@KCINPUNHJCMS01.kpit.com>	<AEB54AFF070EB34A921BC7E006B711BE11905D1147@SRV10.nortechonline.net>	<76E258664B189C4CBEF125491CA11ECC9445E0CF88@KCINPUNHJCMS01.kpit.com>,
+	<AANLkTinJcbZ3ApaSpSvsrte40TWF8f5Rz3NIIXX8ZhCR@mail.gmail.com>
+	<76E258664B189C4CBEF125491CA11ECC9445E0CF8C@KCINPUNHJCMS01.kpit.com>
+In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CF8C@KCINPUNHJCMS01.kpit.com>
+X-SA-Exim-Connect-IP: 204.2.163.5
+X-SA-Exim-Mail-From: nicolas.ferre@atmel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Programtically setting TMPDIR in bitbake.conf
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,67 +43,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 03 Jun 2010 14:58:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 03 Jun 2010 15:17:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jun 3, 2010 at 7:08 AM, Alex Bennee <kernel-hacker@bennee.com>wrote:
+Le 03/06/2010 14:13, Soumya R :
+> Hi,
+>     
+> MACHINE = "at91sam9263ek"
+> DISTRO = "angstrom-2008.1"
+>     
+>   I am new to this open embedded so you may seem may question is silly..
+> I need to know wat i need to deploy to my target and where the final image is stored..
+> Please help me out.. Thanks in advance :-)
 
-> I'd like tweak the OpenEmbedded TMPDIR variable so it can optionally
-> build into a sub-directory of ${TOPDIR} based on the current git
-> status of the OE tree. The usage I envisage would be something like:
->
-> bitbake my-image
-> =>
-> builds to /path/to/build/current/[deploy/staging/etc...]
->
-> RELEASE=1 bitbake my-image
-> =>
-> builds to /path/to/build/build-12345ab/[deploy/staging/etc...]
->
-> Which would be based on the GIT commit ID. I'd probably want to
-> support the "dirty" semantics similar to the kernels versioning to
-> indicate the tree had uncommitted changes.
->
-> I know bitbake.conf can use arbitrary python to fill in the variables
-> but I'm unclear where these fragments can be put. A lot of python
-> snippets seem to refer to things like bb.data.getVar() which I assume
-> is part of bitbake itself. Is it possible to define some python in the
-> OE tree I can call from bitbake.conf? Is this functionality that has
-> to be added to bitbake itself?
->
+I advice you to go on
+http://www.linux4sam.org
+and follow the documentation there. You will have an example of the
+deployment of such a distribution.
 
-It supports this just fine today, and I'd bet there are hundreds of examples
-in the conf/ and classes/ directories today, as well as in many recipes.
+In an OE build, here are the resulting images:
+tmp/deploy/glibc/images/at91sam9263ek/
 
+- Linux kernel (as a uImage suitable for u-boot):
+  uImage-2.6.30-r1-at91sam9263ek.bin
+- Angstrom rootfs:
 
-> I assume the change has to be made to bitbake.conf as other variables
-> are derived from TMPDIR at that point?
->
+Angstrom-x11-at91sam9-image-glibc-ipk-2009.X-stable-at91sam9263ek.rootfs.jffs2
 
-That's incorrect.  Bitbake variables are like make variables - they're
-evaluated when they're used, lazily, not immediately, unless you use :=
-(immediately evaluate).  Anything set in bitbake.conf can be set just as
-well in your local.conf.
+For micro-image, you will find a different name but at the same location.
 
+IPK packages are located here:
+tmp/deploy/glibc/ipk/
 
-> Basically I want to avoid writing an overly complex python one-liner
-> directly in bitbake.conf, that would seem to perl-ish ;-)
->
-
-If you don't want the entire thing in the variable, define it in a python
-function in a .inc and include it from a .conf, and use it in the snippet.
-
-I.e. conf/foo.inc:
-def myfunction(d):
-    return d.getVar("foo", True) + "bar"
-
-conf/local.conf:
-require conf/foo.inc
-TMPDIR = "${@myfunction(d)}"
+Hope that it helps,
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Nicolas Ferre
+
+
 
