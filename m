@@ -1,38 +1,39 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OKChl-0002Kh-2F
+	(envelope-from <chasemaupin03@gmail.com>) id 1OKChn-0002Kv-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 03 Jun 2010 17:51:40 +0200
-Received: by gyg10 with SMTP id 10so191927gyg.6
+	Thu, 03 Jun 2010 17:51:41 +0200
+Received: by yxe42 with SMTP id 42so112293yxe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jun 2010 08:47:20 -0700 (PDT)
+	Thu, 03 Jun 2010 08:47:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=p8wAg+3lA/DA8G2yod9nsCEkdC/ymmSzCO+0umXWsRI=;
-	b=ChhcpoiicTVKv816S5McID7KqCRBMTqxmk8R5TV2YXjS0e0Maa4YpnS60Y63P2TmsU
-	6iGQRJD5nohWLTmNvkXN0FsExLRhBigf3XK/lmfA0dLmdDEH7wepMKWm4CVGWZrV4l9d
-	R65TUyTHa+/yEqevNH5wWBdlZ3p8z0BZVScx8=
+	bh=Yxclc4vkpI9UurMuaY1bDTKdw6oV/FoBRXLAczHeB5c=;
+	b=w3G4dorAtk9NUNq8rr7aU2NgsjkJb298fBIqmaXYyKT1NjfluOMbCU1aD3+5A8mz2f
+	X78kSukwKXhVcJohNripRp5oNkQUAsxlEujDyj3K+TU/ZaqKipNBEdzIUXt/yaQFlpGV
+	ytlP8zb0R5Pt/9M97UVO+6cP7WK1NZmJow7Ww=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=KB7sjkEGTS2yEsRFkeSKkxgmBP1ibIb69JGgarmdsqcRS6ikg1GojaqbcuKB0fDtvB
-	2/KsnwVknyJ3BPWT68C/gE02JSp+PESt7qIHnJTYKL9qjZsm6in+FhakzrghW3ucfL02
-	cI2XYTGJ6zMbRXT1HWxd13mAutRXO1ujdXamk=
-Received: by 10.150.250.42 with SMTP id x42mr9027480ybh.193.1275580040484;
-	Thu, 03 Jun 2010 08:47:20 -0700 (PDT)
+	b=DPU+FWQdw+S39GHAGT/bQYJWBeK83R0dXTC5G8FZj40IJbMYsbCiOdaPd8H0JbHymu
+	kF/BAnmwCduvhUcN+RvEcNRS00mXBBnVc3bjhTZy+IvjqflK0pUFZGCdfOv7em5CZJM/
+	aHnOY6FG5+CFGisLfcsJL1A+CWYSer9FvmgVM=
+Received: by 10.150.131.9 with SMTP id e9mr9069365ybd.15.1275580042162;
+	Thu, 03 Jun 2010 08:47:22 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id w3sm8802100ybi.21.2010.06.03.08.47.18
+	by mx.google.com with ESMTPS id w3sm8802100ybi.21.2010.06.03.08.47.20
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 03 Jun 2010 08:47:19 -0700 (PDT)
+	Thu, 03 Jun 2010 08:47:21 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  3 Jun 2010 10:41:27 -0500
-Message-Id: <1275579688-19909-3-git-send-email-chase.maupin@ti.com>
+Date: Thu,  3 Jun 2010 10:41:28 -0500
+Message-Id: <1275579688-19909-4-git-send-email-chase.maupin@ti.com>
 X-Mailer: git-send-email 1.6.0.4
-In-Reply-To: <1275579688-19909-2-git-send-email-chase.maupin@ti.com>
+In-Reply-To: <1275579688-19909-3-git-send-email-chase.maupin@ti.com>
 References: <1275579688-19909-1-git-send-email-chase.maupin@ti.com>
 	<1275579688-19909-2-git-send-email-chase.maupin@ti.com>
-X-SA-Exim-Connect-IP: 209.85.160.175
+	<1275579688-19909-3-git-send-email-chase.maupin@ti.com>
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +42,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCH 3/4] alsa-state/dm6467-evm: add asound file
+Subject: [PATCH 4/4] alsa-state/dm6467t-evm: add asound file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,57 +59,18 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 X-List-Received-Date: Thu, 03 Jun 2010 15:51:42 -0000
 
 * Add the asound.state file for the Texas Instruments
-  dm6467-evm platform.
+  dm6467t-evm platform.
 
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 ---
- .../{dm355-evm => dm6467-evm}/asound.state         |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
- copy recipes/alsa/alsa-state/{dm355-evm => dm6467-evm}/asound.state (100%)
+ .../{dm6467-evm => dm6467t-evm}/asound.state       |    0
+ 1 files changed, 0 insertions(+), 0 deletions(-)
+ copy recipes/alsa/alsa-state/{dm6467-evm => dm6467t-evm}/asound.state (100%)
 
-diff --git a/recipes/alsa/alsa-state/dm355-evm/asound.state b/recipes/alsa/alsa-state/dm6467-evm/asound.state
+diff --git a/recipes/alsa/alsa-state/dm6467-evm/asound.state b/recipes/alsa/alsa-state/dm6467t-evm/asound.state
 similarity index 100%
-copy from recipes/alsa/alsa-state/dm355-evm/asound.state
-copy to recipes/alsa/alsa-state/dm6467-evm/asound.state
-index 8a5f84a..0ddbb54 100644
---- a/recipes/alsa/alsa-state/dm355-evm/asound.state
-+++ b/recipes/alsa/alsa-state/dm6467-evm/asound.state
-@@ -534,7 +534,7 @@ state.EVM {
- 		comment.count 1
- 		iface MIXER
- 		name 'Right PGA Mixer Line1R Switch'
--		value true
-+		value false
- 	}
- 	control.57 {
- 		comment.access 'read write'
-@@ -566,7 +566,7 @@ state.EVM {
- 		comment.count 1
- 		iface MIXER
- 		name 'Right PGA Mixer Mic3R Switch'
--		value false
-+		value true
- 	}
- 	control.61 {
- 		comment.access 'read write'
-@@ -604,7 +604,7 @@ state.EVM {
- 		comment.count 1
- 		iface MIXER
- 		name 'Left PGA Mixer Line1L Switch'
--		value true
-+		value false
- 	}
- 	control.65 {
- 		comment.access 'read write'
-@@ -628,7 +628,7 @@ state.EVM {
- 		comment.count 1
- 		iface MIXER
- 		name 'Left PGA Mixer Mic3L Switch'
--		value false
-+		value true
- 	}
- 	control.68 {
- 		comment.access 'read write'
+copy from recipes/alsa/alsa-state/dm6467-evm/asound.state
+copy to recipes/alsa/alsa-state/dm6467t-evm/asound.state
 -- 
 1.6.0.4
 
