@@ -1,46 +1,43 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OKdOj-0008Ak-T7
+	(envelope-from <leon.woestenberg@gmail.com>) id 1OKdxB-0005H6-Uw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 22:21:46 +0200
-Received: by vws4 with SMTP id 4so1669553vws.6
+	Fri, 04 Jun 2010 22:57:22 +0200
+Received: by wyb32 with SMTP id 32so1248441wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 13:17:28 -0700 (PDT)
+	Fri, 04 Jun 2010 13:53:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=Mdq05ANZpBF0z6ls+NTDQJ7pwHNw7vXnRjXKoDM6qMQ=;
-	b=OguwRPYi61wzJ9t+Kov44mQ8dbR3wU7/oz/90KFMFnVkjnbo5sFhXqO/5JsuT18dT1
-	8gy+ISBiKhxdYxdDWHN0h1taUwpuDDANY51sziK+X4O4kSKToXRwdl/vB1svCwxp3xIB
-	Q92aDJwQlD+NkXf01BTWKHIZ7BGnY4eZU6OeQ=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=amJDtvrGuFGcwWU811j3MOW0e2SCneJaHupVIl3eV/g=;
+	b=DM9YOiNMq0ZAdIKbB5fKtUarVboB+N8qpI8u8OiusIC+csVOXBk0l5matQnRdAqt/7
+	Q6eixQE4Bjp0jM3/177X9+Cr7DinfdaHlaJUdLgCcPBXD/oWjcD1jm2YEaDyb5B097OR
+	T2mEPXz81h70jaeCmRiW7BK5ZhPpToQaTSKHw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=DxtIRGuEvZx5nvTSjz40+zx7lZQIjDwN05dLd07T2DsSQy0jxU+rj4a7N47efU0LyP
-	6bB9G9kELanX1cE8tJmbrKzeuguc+y7TYyGwgGtu4vIn0bdxNRlfWiLuhdKsG7d9YkEs
-	nJlNUNTo8R53BvybGE8WvSrOyhXR0awIj+wLU=
-Received: by 10.224.116.137 with SMTP id m9mr5341456qaq.162.1275682647840; 
-	Fri, 04 Jun 2010 13:17:27 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=dR0xKeUmerIODKAiyzHbrPzUgzhCUIwFPpy/ZwsE9hwojjQzsjMwLTFXg1mxLVWyyU
+	RYYr+HGYe+70rnscXT7E5Kk1glWmTVDm44p+HsQ+IlR8YevEzMAzJ27lLzzI/GPXOkU0
+	kcsn2cPQT3133y7xuIyglkYgc99dikjZ1wKLs=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.3.133 with HTTP; Fri, 4 Jun 2010 13:17:07 -0700 (PDT)
+Received: by 10.216.85.10 with SMTP id t10mr106835wee.12.1275684784696; Fri, 
+	04 Jun 2010 13:53:04 -0700 (PDT)
+Received: by 10.216.21.134 with HTTP; Fri, 4 Jun 2010 13:53:04 -0700 (PDT)
 In-Reply-To: <1275682411-2638-1-git-send-email-denis@denix.org>
 References: <1275682411-2638-1-git-send-email-denis@denix.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 4 Jun 2010 13:17:07 -0700
-X-Google-Sender-Auth: 03PIkJXL31-7PI3R15oNXGhsKWo
-Message-ID: <AANLkTilolWNmEkKTzOks8VjSFapP6Sk1m7SZThCn4MvD@mail.gmail.com>
+Date: Fri, 4 Jun 2010 22:53:04 +0200
+Message-ID: <AANLkTimVWQ9YyaTCJLZOLFpCwL3H9eCNfnBMQpEAm8WQ@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] amend.bbclass: don't parse same amend.inc if FILESPATH references it multiple times
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,19 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 20:21:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Jun 2010 20:57:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jun 4, 2010 at 1:13 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+Hello,
 
+On Fri, Jun 4, 2010 at 10:13 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 > Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+> ---
+> =A0classes/amend.bbclass | =A0 =A08 +++++++-
+> =A01 files changed, 7 insertions(+), 1 deletions(-)
+>
+> diff --git a/classes/amend.bbclass b/classes/amend.bbclass
+> index cddd28c..fb67b4e 100644
+> --- a/classes/amend.bbclass
+> +++ b/classes/amend.bbclass
+> @@ -21,7 +21,13 @@ python () {
+> =A0 =A0 depends =3D d.getVar("__depends", 0) or []
+> =A0 =A0 d.setVar("__depends", depends + [(file, 0) for file in amendfiles=
+ if not os.path.exists(file)])
+>
+> + =A0 =A0# Make sure we don't parse the same amend.inc file more than onc=
+e, if
+> + =A0 =A0# there are duplicates in FILESPATH
+> + =A0 =A0seen =3D set()
+> +
+> =A0 =A0 for file in amendfiles:
+> =A0 =A0 =A0 =A0 if os.path.exists(file):
+> - =A0 =A0 =A0 =A0 =A0 =A0bb.parse.handle(file, d, 1)
+> + =A0 =A0 =A0 =A0 =A0 =A0if file not in seen:
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.parse.handle(file, d, 1)
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0seen.add(file)
+> =A0}
+> --
+> 1.6.3.3
+>
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
 
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+--=20
+Leon
+
 
