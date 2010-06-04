@@ -1,31 +1,47 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OKdLE-00081J-2X
+	(envelope-from <kergoth@gmail.com>) id 1OKdOj-0008Ak-T7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 22:18:09 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.238.44])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L3I007TKAUM4766@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	04 Jun 2010 15:13:40 -0500 (CDT)
-Received: from localhost.localdomain (elrond [192.168.0.7])
-	by gandalf.denix.org (Postfix) with ESMTP id 63B4014AF5C; Fri,
-	04 Jun 2010 16:13:34 -0400 (EDT)
-From: Denys Dmytriyenko <denis@denix.org>
+	Fri, 04 Jun 2010 22:21:46 +0200
+Received: by vws4 with SMTP id 4so1669553vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 13:17:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=Mdq05ANZpBF0z6ls+NTDQJ7pwHNw7vXnRjXKoDM6qMQ=;
+	b=OguwRPYi61wzJ9t+Kov44mQ8dbR3wU7/oz/90KFMFnVkjnbo5sFhXqO/5JsuT18dT1
+	8gy+ISBiKhxdYxdDWHN0h1taUwpuDDANY51sziK+X4O4kSKToXRwdl/vB1svCwxp3xIB
+	Q92aDJwQlD+NkXf01BTWKHIZ7BGnY4eZU6OeQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=DxtIRGuEvZx5nvTSjz40+zx7lZQIjDwN05dLd07T2DsSQy0jxU+rj4a7N47efU0LyP
+	6bB9G9kELanX1cE8tJmbrKzeuguc+y7TYyGwgGtu4vIn0bdxNRlfWiLuhdKsG7d9YkEs
+	nJlNUNTo8R53BvybGE8WvSrOyhXR0awIj+wLU=
+Received: by 10.224.116.137 with SMTP id m9mr5341456qaq.162.1275682647840; 
+	Fri, 04 Jun 2010 13:17:27 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.3.133 with HTTP; Fri, 4 Jun 2010 13:17:07 -0700 (PDT)
+In-Reply-To: <1275682411-2638-1-git-send-email-denis@denix.org>
+References: <1275682411-2638-1-git-send-email-denis@denix.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 4 Jun 2010 13:17:07 -0700
+X-Google-Sender-Auth: 03PIkJXL31-7PI3R15oNXGhsKWo
+Message-ID: <AANLkTilolWNmEkKTzOks8VjSFapP6Sk1m7SZThCn4MvD@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 04 Jun 2010 16:13:31 -0400
-Message-id: <1275682411-2638-1-git-send-email-denis@denix.org>
-X-Mailer: git-send-email 1.6.3.3
-X-SA-Exim-Connect-IP: 206.46.173.19
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] amend.bbclass: don't parse same amend.inc if FILESPATH references it multiple times
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] amend.bbclass: don't parse same amend.inc if FILESPATH references it multiple times
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,34 +55,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 20:18:09 -0000
+X-List-Received-Date: Fri, 04 Jun 2010 20:21:46 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Signed-off-by: Denys Dmytriyenko <denis@denix.org>
----
- classes/amend.bbclass |    8 +++++++-
- 1 files changed, 7 insertions(+), 1 deletions(-)
+On Fri, Jun 4, 2010 at 1:13 PM, Denys Dmytriyenko <denis@denix.org> wrote:
 
-diff --git a/classes/amend.bbclass b/classes/amend.bbclass
-index cddd28c..fb67b4e 100644
---- a/classes/amend.bbclass
-+++ b/classes/amend.bbclass
-@@ -21,7 +21,13 @@ python () {
-     depends = d.getVar("__depends", 0) or []
-     d.setVar("__depends", depends + [(file, 0) for file in amendfiles if not os.path.exists(file)])
- 
-+    # Make sure we don't parse the same amend.inc file more than once, if
-+    # there are duplicates in FILESPATH
-+    seen = set()
-+
-     for file in amendfiles:
-         if os.path.exists(file):
--            bb.parse.handle(file, d, 1)
-+            if file not in seen:
-+                bb.parse.handle(file, d, 1)
-+                seen.add(file)
- }
+> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
+
+
+Acked-by: Chris Larson <chris_larson@mentor.com>
 -- 
-1.6.3.3
-
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
