@@ -1,41 +1,44 @@
-Received: from mail-yw0-f176.google.com ([209.85.211.176])
+Received: from smtp-4.concepts.nl ([213.197.30.111])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aspnair@gmail.com>) id 1OKS2A-0004dS-PO
+	(envelope-from <pieterg@gmx.com>) id 1OKSGx-0006NI-5G
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 10:13:44 +0200
-Received: by ywh6 with SMTP id 6so914390ywh.16
+	Fri, 04 Jun 2010 10:29:00 +0200
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>) id 1OKSCn-0004S6-Rs
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 10:24:41 +0200
+Received: from [10.9.0.12] (unknown [10.9.0.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 7E8706A11A
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 01:09:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=kAjVXA2dxpJg+MpWKBs6nAdKgUI/KAy2xgbJ5d6dreM=;
-	b=sPWAguGbyUZ0HvXcQ+DFunsG3MHmBq7yq7m14fujddbuk2T8SQiH0WqzUNoEf29FY/
-	/gWcL2OgOBquOJJV821hPa8HygIAq4LgAexQduY0Kgz0gRp9TOQvDH6ylAFMgLQFW7Hn
-	GaHh4psMy1pDNpch93mitV7V5I0GvEa5XO35c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=uoRUrkZ6sSGEb5b8A+u+Mna0bUVp3wG1huNHf4QvrZkPKeQHEq7rkdpNTnqeDPGe18
-	y+HVDkPixsQF2lh4XaxrcDZkgZw7b5CqmmPeMP6QEtKH+EbHzK7oiU+574gpYkwrBP3o
-	4xRNNvK0JXHpe1BG1DNbPu8MoDVrca6J8hlrQ=
-MIME-Version: 1.0
-Received: by 10.150.250.2 with SMTP id x2mr10563634ybh.267.1275638965218; Fri, 
-	04 Jun 2010 01:09:25 -0700 (PDT)
-Received: by 10.150.228.21 with HTTP; Fri, 4 Jun 2010 01:09:25 -0700 (PDT)
-Date: Fri, 4 Jun 2010 13:39:25 +0530
-Message-ID: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
-From: Anand Sivaram <aspnair@gmail.com>
+	Fri,  4 Jun 2010 10:24:37 +0200 (CEST)
+From: pieterg <pieterg@gmx.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.176
-X-SA-Exim-Mail-From: aspnair@gmail.com
+Date: Fri, 4 Jun 2010 10:24:31 +0200
+User-Agent: KMail/1.9.9
+References: <201006022351.38129.pieterg@gmx.com>
+	<1275555319.4657.42.camel@lenovo.internal.reciva.com>
+	<1275582929.15559.65.camel@mill.internal.reciva.com>
+In-Reply-To: <1275582929.15559.65.camel@mill.internal.reciva.com>
+MIME-Version: 1.0
+Message-Id: <201006041024.31712.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1OKSCn-0004S6-Rs
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+X-SA-Exim-Connect-IP: 213.197.30.111
+X-SA-Exim-Mail-From: pieterg@gmx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00, HTML_FONT_FACE_BAD, 
-	HTML_MESSAGE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Questions about openembedded stable branch
+Subject: Re: AUTOREV and SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,32 +52,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 08:13:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Jun 2010 08:29:00 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-As I was going through the stable documentation given at
-http://wiki.openembedded.net/index.php/Stable
-I had a couple of questions.
+On Thursday 03 June 2010 18:35:29 Phil Blundell wrote:
+> On Thu, 2010-06-03 at 09:55 +0100, Phil Blundell wrote:
+> > On Thu, 2010-06-03 at 10:46 +0200, Martin Jansa wrote:
+> > > So will bitbake build again the same recipe (because I've built from
+> > > the same one before) with lower PV, just because it _still_ has the
+> > > highest DEFAULT_PREFERENCE and it's desired version (but still lower
+> > > PV because of hash, then before)?.
+> >
+> > Yes, I think so.  PV, and hence P, will be different and that's about
+> > all that matters to bitbake.  The fact that PF is the same should be
+> > irrelevant; I don't think any of its persistent state is keyed on that.
+>
+> I did a quick test on this and it does indeed seem to work as you would
+> expect.  So that seems like the easiest way of solving the problem at
+> hand.
 
-* Seems like there should have been a release "stable/2010" some time around
-  March, but I could not find any mention about that release.
+I probably don't know enough about the bitbake internals to see how to fix 
+my problem with that, could you please point me in the right direction?
+I think in case of AUTOREV I would still need some way to automatically 
+include a sortable revision count in PKGV, so the actual problem would only 
+move from PV to PKGV.
+Or do you mean this would allow SRCPV to be removed from those hundreds of 
+packages which don't use AUTOREV at the moment, so I can keep using AUTOREV 
+for my own packages, without those other packages starting to cause 
+problems?
 
-* OE repository contains very few tags.  Also there is no
-  "year.month" tag as given by the stable branch documentation.
+Note that my problem is not 'getting the package upgraded on the target', 
+but 'getting automatically incrementing package versions which are 
+consistent on several build systems'.
 
-* Is there any testing branch (like in Debian) where relatively "stable"
-  packages are moved and they eventually become stable?
-  Or is it like mainline linux kernel where features are frozen, then
-  do RC releases and finally the stable release?  It looks like
-  origin/org.openembedded.dev is a rolling/floating place where
-  packages/features are constantly getting included.
+So for me a simple workaround would be allowing BB_LOCALCOUNT_OVERRIDE to be 
+defined per package, rather than globally.
+Or something similar, which would allow me to use the sortable revision 
+count only for those packages for which I really need AUTOREV.
 
-* I would like to know how the stable/2010 branch is created.
+Rgds, Pieter
 
-* My main objective is to find a branch/tag/version
-  newer than stable/2009 and more stable than the dev main branch.
-
-Thanks and Regards
-
-Anand
 
