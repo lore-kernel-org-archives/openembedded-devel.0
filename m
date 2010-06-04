@@ -1,44 +1,31 @@
-Received: from out5.smtp.messagingengine.com ([66.111.4.29])
+Received: from smtp7.myhsphere.biz ([204.10.105.69] helo=mail9.myhsphere.biz)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OKNqT-0005kL-1v
+	(envelope-from <balakrishnan@e-consystems.com>) id 1OKOqf-0003Nh-U8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 05:45:22 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 71C1BF8DA2
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jun 2010 23:41:06 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Thu, 03 Jun 2010 23:41:06 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=vFx6ZUf+/zBDcDyrfSYqVdNlmUE=;
-	b=BAAWk/KRkdi4UZHyKOaj5uUgL10k2huukYDedu19eDaBW5LORhqFATsMB7QUF3NQflbSTP8MJ1byemSMzPpPHIMI5WC5XkRB3hhRXZm8ViaKLAZ+klzc/Rue8CtO3/sQEBEHPTyJ0X69KMB6jTOANV7GoAnDd7OB/oXFZggZOpE=
-X-Sasl-enc: Hp0ixrJpyxyg2mj3QDjye/lufnQ4iAWmkiprgKy1P6Nd 1275622865
-Received: from [192.168.1.35] (hnvr-4d07a615.pool.mediaWays.net [77.7.166.21])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id CF9E34CAAC8
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  3 Jun 2010 23:41:05 -0400 (EDT)
-Date: Fri, 4 Jun 2010 05:42:36 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
+	Fri, 04 Jun 2010 06:49:39 +0200
+Received: (qmail 7943 invoked by uid 399); 4 Jun 2010 04:45:16 -0000
+Received: from dsl-tn-dynamic-104.231.164.122.airtelbroadband.in (HELO
+	?192.168.6.196?) (balakrishnan@e-consystems.com@122.164.231.104)
+	by mail9.myhsphere.biz with ESMTPAM; 4 Jun 2010 04:45:16 -0000
+X-Originating-IP: 122.164.231.104
+X-Sender: balakrishnan@e-consystems.com
+From: balakrishnan <balakrishnan@e-consystems.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <alpine.LNX.2.00.1004131528550.17768@asterix.crazy-teaparty.dyndns.org>
-Message-ID: <alpine.LNX.2.00.1006040541390.5274@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1004131528550.17768@asterix.crazy-teaparty.dyndns.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.29
-X-SA-Exim-Mail-From: vjensen@gmx.de
+In-Reply-To: <mailman.11263.1275577117.24517.openembedded-devel@lists.openembedded.org>
+References: <mailman.11263.1275577117.24517.openembedded-devel@lists.openembedded.org>
+Date: Fri, 04 Jun 2010 10:15:16 +0530
+Message-Id: <1275626716.3916.53.camel@balakrishnan-desktop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.26.1 
+X-SA-Exim-Connect-IP: 204.10.105.69
+X-SA-Exim-Mail-From: balakrishnan@e-consystems.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_BL_SPAMCOP_NET autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [STABLE][PATCH] base.bbclass: add support for checksums in .bb files
+Subject: Re: linux_2.6.34 staging error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,127 +39,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 03:45:22 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 04 Jun 2010 04:49:39 -0000
+Content-Type: text/plain
+Content-Transfer-Encoding: 7bit
 
-On Tue, 13 Apr 2010, Vitus Jensen wrote:
+I have used below mentioned linux.inc file, but same staging error came.
+The log file also empty, so I can't able to find out whats the error.
+How can I resolve this?.
 
-> From: Phil Blundell <philb@gnu.org>
->
-> Ported from .dev branch to allow easy sharing of recipes between
-> .dev and stable branches.
->
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+NOTE: Running task 391 of 546 (ID:
+14, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_package)
+sh: arm-angstrom-linux-gnueabi-depmod-: command not found
+NOTE: the following files were installed but not shipped in any package:
+NOTE:   /lib/modules/2.6.34/modules.order
+NOTE:   /lib/modules/2.6.34/modules.builtin
+NOTE: Running task 396 of 546 (ID:
+9, /home/balakrishnan/econsystems/projects/openembedded/recipes/linux/linux_2.6.34.bb, do_populate_staging)
+ERROR: function do_stage failed
+ERROR: see log
+in /home/balakrishnan/econsystems/projects/tmp/work/alioth-angstrom-linux-gnueabi/linux-2.6.34-r1/temp/log.do_stage.30045
 
-May I get comments for this patch?  I think it is really helpfull.
-
-Best regards,
-    Vitus
+With Thanks
+J.Balakrishnan
 
 
-> ---
->  classes/base.bbclass |   56
->  ++++++++++++++++++++++++++++++++++++++++++++-----
->  1 files changed, 50 insertions(+), 6 deletions(-)
->
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index 69d1979..459fbe9 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -56,6 +56,50 @@ def base_chk_load_parser(config_paths):
->
->     return parser
->
-> +def base_chk_file_vars(parser, localpath, params, data):
-> +    try:
-> +        name = params["name"]
-> +    except KeyError:
-> +        return False
-> +    flagName = "%s.md5sum" % name
-> +    want_md5sum = bb.data.getVarFlag("SRC_URI", flagName, data)
-> +    flagName = "%s.sha256sum" % name
-> +    want_sha256sum = bb.data.getVarFlag("SRC_URI", flagName, data)
-> +
-> +    if (want_sha256sum == None and want_md5sum == None):
-> +        # no checksums to check, nothing to do
-> +        return False
-> +
-> +    if not os.path.exists(localpath):
-> +        localpath = base_path_out(localpath, data)
-> +        bb.note("The localpath does not exist '%s'" % localpath)
-> +        raise Exception("The path does not exist '%s'" % localpath)
-> +
-> +    if want_md5sum:
-> +        try:
-> +	    md5pipe = os.popen('PATH=%s md5sum %s' % (bb.data.getVar('PATH', 
-> data, True), localpath))
-> +            md5data = (md5pipe.readline().split() or [ "" ])[0]
-> +            md5pipe.close()
-> +        except OSError, e:
-> +            raise Exception("Executing md5sum failed")
-> +        if want_md5sum != md5data:
-> +            bb.note("The MD5Sums did not match. Wanted: '%s' and Got: '%s'" 
-> % (want_md5sum, md5data))
-> +            raise Exception("MD5 Sums do not match. Wanted: '%s' Got: '%s'" 
-> % (want_md5sum, md5data))
-> +
-> +    if want_sha256sum:
-> +        try:
-> +            shapipe = os.popen('PATH=%s oe_sha256sum %s' % 
-> (bb.data.getVar('PATH', data, True), localpath))
-> +            sha256data = (shapipe.readline().split() or [ "" ])[0]
-> +            shapipe.close()
-> +        except OSError, e:
-> +            raise Exception("Executing shasum failed")
-> +        if want_sha256sum != sha256data:
-> +            bb.note("The SHA256Sums did not match. Wanted: '%s' and Got: 
-> '%s'" % (want_sha256sum, sha256data))
-> +            raise Exception("SHA256 Sums do not match. Wanted: '%s' Got: 
-> '%s'" % (want_sha256sum, sha256data))
-> +
-> +    return True
-> +
-> +
->  def base_chk_file(parser, pn, pv, src_uri, localpath, data):
->      import os, bb
->      no_checksum = False
-> @@ -652,15 +696,15 @@ python base_do_fetch() {
-> 	 # Check each URI
-> 	 for url in src_uri.split():
-> 		localpath = bb.data.expand(bb.fetch.localpath(url, 
-> localdata), localdata)
-> -		(type,host,path,_,_,_) = bb.decodeurl(url)
-> +		(type,host,path,_,_,params) = bb.decodeurl(url)
-> 		 uri = "%s://%s%s" % (type,host,path)
-> 		 try:
-> -			if type == "http" or type == "https" or type == "ftp" 
-> or type == "ftps":
-> -				if not base_chk_file(parser, pn, pv,uri, 
-> localpath, d):
-> -					if not 
-> bb.data.getVar("OE_ALLOW_INSECURE_DOWNLOADS",d, True):
-> -						bb.fatal("%s-%s: %s has no 
-> entry in conf/checksums.ini, not checking URI" % (pn,pv,uri))
-> +			if type in [ "http", "https", "ftp", "ftps" ]:
-> +				if not (base_chk_file_vars(parser, localpath, 
-> params, d) or base_chk_file(parser, pn, pv,uri, localpath, d)):
-> +					if not 
-> bb.data.getVar("OE_ALLOW_INSECURE_DOWNLOADS", d, True):
-> +						bb.fatal("%s-%s: %s has no 
-> checksum defined, cannot check archive integrity" % (pn,pv,uri))
-> 					else:
-> -						bb.note("%s-%s: %s has no 
-> entry in conf/checksums.ini, not checking URI" % (pn,pv,uri))
-> +						bb.note("%s-%s: %s has no 
-> checksum defined, archive integrity not checked" % (pn,pv,uri))
-> 		 except Exception:
->  			raise bb.build.FuncFailed("Checksum of '%s' failed" %
->  uri)
-> }
->
+> Message: 1
+> Date: Thu, 3 Jun 2010 12:13:46 +0200
+> From: Andrea Adami <andrea.adami@gmail.com>
+> Subject: Re: [oe] linux_2.6.34 staging error
+> To: openembedded-devel@lists.openembedded.org
+> Message-ID:
+>         <AANLkTikusbhJ1B3Khq4FeGbyrllm3VLpeLPHgvSuLiVU@mail.gmail.com>
+> Content-Type: text/plain; charset=ISO-8859-1
+> 
+> I fear stable/2009 lacks some magic in linux.inc.
+> 
+> Worst, staging has been revolutioned...
+> Here is the actual:
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tree/recipes/linux/linux.inc
+> 
+> Regards
+> 
+> Andrea
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
 
 
