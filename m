@@ -1,43 +1,41 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OKTTe-0005Lu-SV
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 11:46:12 +0200
-Received: by fxm9 with SMTP id 9so668559fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKTb0-00085A-Jy for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 11:53:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKTWk-0008Vd-1k for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 11:49:22 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 11:49:22 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 02:41:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=qNb2xLflOrRhi11rQOIpBdry/T+M+SOuDD+4RdtA4R8=;
-	b=mfhbTump2KzhUytgLfDHhejsWOFCC224rNX1kYrAw+SAqpdCCRjeoN0CxxdUTtSfu0
-	T1J/fKpVoovsHL8lOGVrfLs1J6ct5RZrEHhROBk9nhR9luu8rMxWrR5AcJfyDxP4xWQn
-	xW1eNC+9+uwWVJ/q8x4H3odN+rYl/m4rnmiX0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=USX02bzzlZTjGjb4IImFrcNac8HtTYMfHnP7MSv7NK5qN7Ta1mZ1NBdsYQ1HecBX8Y
-	+SVTi36AFxRSOvDBoifsmsYbgw7RJ9wrvYtS2C8ZL0bdTB/Ka+BfiZtuuD7A3vRTl3Pv
-	kSyHTK/Y+uRvvGVa00LIE1T6t4JT2Od9MFl+E=
-MIME-Version: 1.0
-Received: by 10.223.19.87 with SMTP id z23mr11547190faa.7.1275644514359; Fri, 
-	04 Jun 2010 02:41:54 -0700 (PDT)
-Received: by 10.223.106.138 with HTTP; Fri, 4 Jun 2010 02:41:54 -0700 (PDT)
-In-Reply-To: <AANLkTimuc2dtfmbduEhLKLAxcjg_tR2Yah1jZxYBZp7y@mail.gmail.com>
-References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
-	<1275510896-30845-4-git-send-email-raj.khem@gmail.com>
-	<AANLkTimuc2dtfmbduEhLKLAxcjg_tR2Yah1jZxYBZp7y@mail.gmail.com>
-Date: Fri, 4 Jun 2010 11:41:54 +0200
-Message-ID: <AANLkTinv1zLuDcj3cFbLOGZC_hKorUmM3Tg04nk7Y6OW@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 04 Jun 2010 11:49:22 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 04 Jun 2010 11:49:13 +0200
+Message-ID: <huai6q$553$1@dough.gmane.org>
+References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>	<1275510896-30845-4-git-send-email-raj.khem@gmail.com>	<AANLkTimuc2dtfmbduEhLKLAxcjg_tR2Yah1jZxYBZp7y@mail.gmail.com>
+	<AANLkTinv1zLuDcj3cFbLOGZC_hKorUmM3Tg04nk7Y6OW@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <AANLkTinv1zLuDcj3cFbLOGZC_hKorUmM3Tg04nk7Y6OW@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 03/16] gettext-0.18: Add recipe for 0.18
@@ -54,24 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 09:46:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Jun 2010 09:53:52 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jun 4, 2010 at 9:37 AM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> On Wed, Jun 2, 2010 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
->> * gl_cv_func_unsetenv_works is not computed correctly in cross
->> =A0environment so cache it.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 04-06-10 11:41, Martin Jansa wrote:
+> On Fri, Jun 4, 2010 at 9:37 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>> On Wed, Jun 2, 2010 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> * gl_cv_func_unsetenv_works is not computed correctly in cross
+>>>  environment so cache it.
+>>>
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->
-> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+>> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+> 
+> I've forgotten to add that it needs automake-1.11 and
+> angstrom-2008-preferred-versions.inc is locking older version
+> PREFERRED_VERSION_automake-native = "1.10.3" - maybe not need anymore?
 
-I've forgotten to add that it needs automake-1.11 and
-angstrom-2008-preferred-versions.inc is locking older version
-PREFERRED_VERSION_automake-native =3D "1.10.3" - maybe not need anymore?
+I'm not a big fan of bumping such basic toolchain bits, but fortunately
+Graeme and I have already tested 1.11 and found it to be safe for the
+important bits we build, so I guess angstrom can move to 1.11 if needed.
 
-Regards,
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMCMwZMkyGM64RGpERAlX/AJ9KGlCl6LCXWVvf2U9QTH8odwgYRgCffApp
+K6tQDNl9VsJFZFZ00GOlA4k=
+=X0X/
+-----END PGP SIGNATURE-----
+
 
 
