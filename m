@@ -1,44 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OKTb0-00085A-Jy for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 11:53:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OKTWk-0008Vd-1k for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 11:49:22 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 11:49:22 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 11:49:22 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1OKUka-0001Fk-Se
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 13:07:45 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OKUgT-0007VZ-Fe
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 12:03:29 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OKUgT-0000Ko-75
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 12:03:29 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 04 Jun 2010 11:49:13 +0200
-Message-ID: <huai6q$553$1@dough.gmane.org>
-References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>	<1275510896-30845-4-git-send-email-raj.khem@gmail.com>	<AANLkTimuc2dtfmbduEhLKLAxcjg_tR2Yah1jZxYBZp7y@mail.gmail.com>
-	<AANLkTinv1zLuDcj3cFbLOGZC_hKorUmM3Tg04nk7Y6OW@mail.gmail.com>
+In-Reply-To: <201006041044.42032.pieterg@gmx.com>
+References: <201006022351.38129.pieterg@gmx.com>
+	<201006041024.31712.pieterg@gmx.com>
+	<1275640257.4657.84.camel@lenovo.internal.reciva.com>
+	<201006041044.42032.pieterg@gmx.com>
+Date: Fri, 04 Jun 2010 12:03:28 +0100
+Message-ID: <1275649408.23726.5.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <AANLkTinv1zLuDcj3cFbLOGZC_hKorUmM3Tg04nk7Y6OW@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 03/16] gettext-0.18: Add recipe for 0.18
+Subject: Re: AUTOREV and SRCPV
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,41 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 09:53:52 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 04 Jun 2010 11:07:45 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, 2010-06-04 at 10:44 +0200, pieterg wrote:
+> I'm starting to see your point. That would really allow a much nicer AUTOREV 
+> implementation.
+> But in that case I'm not getting away with a simple workaround I'm afraid...
 
-On 04-06-10 11:41, Martin Jansa wrote:
-> On Fri, Jun 4, 2010 at 9:37 AM, Martin Jansa <martin.jansa@gmail.com> wrote:
->> On Wed, Jun 2, 2010 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
->>> * gl_cv_func_unsetenv_works is not computed correctly in cross
->>>  environment so cache it.
->>>
->>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>
->> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
-> 
-> I've forgotten to add that it needs automake-1.11 and
-> angstrom-2008-preferred-versions.inc is locking older version
-> PREFERRED_VERSION_automake-native = "1.10.3" - maybe not need anymore?
+I think you're probably right that there is no trivial workaround, but I
+don't think it would be very hard to fix this "properly".  You can do it
+one recipe at a time; there's no need for a single big bang.
 
-I'm not a big fan of bumping such basic toolchain bits, but fortunately
-Graeme and I have already tested 1.11 and found it to be safe for the
-important bits we build, so I guess angstrom can move to 1.11 if needed.
+p.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMCMwZMkyGM64RGpERAlX/AJ9KGlCl6LCXWVvf2U9QTH8odwgYRgCffApp
-K6tQDNl9VsJFZFZ00GOlA4k=
-=X0X/
------END PGP SIGNATURE-----
 
 
 
