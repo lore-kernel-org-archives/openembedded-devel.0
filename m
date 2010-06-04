@@ -1,37 +1,40 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OKWS3-0006QR-9x
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 14:56:57 +0200
-Received: by gwb15 with SMTP id 15so835047gwb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKX5b-000385-QO for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 15:37:45 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKX1N-0001wa-IN for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 15:33:13 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 15:33:13 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 05:52:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=RdDpqUGtmOVwARx+EqcZpzcKG4Qir3bOc9q4G3wmNNM=;
-	b=cNLRXo3u/Iuyy0dx8VEuZP7wXOdVvRoj90moNOB1JSp3PLEPHHgWsupVVEPQki0FL6
-	9S3qH6CYNCeYQ9wd0AJ/pNYoy+GFXTT/xI5y/FSgMzOt5eEWC+8V//Qj54eWyfUTJ/XM
-	iqgh1yREK4/eaIZyMP0xwnu5/VnYwD6hQ4940=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=tjWcIKMmsyzwaoR0qr0EVQikNGUa1ZyNTwwMubIEgYoZlKWxMjRgf/mAoe9sPD3qRP
-	MJr4Hb0arSEfuGexU2ZVfxAo05hi/ENkF97AypHTkAyTOhZBp0HM7sO26N2P4qfTzMQe
-	xYlzEt8SQyq0HVW/IpbTlhkR7f8pWqNzwlbE8=
-MIME-Version: 1.0
-Received: by 10.90.48.19 with SMTP id v19mr4635595agv.132.1275655943218; Fri, 
-	04 Jun 2010 05:52:23 -0700 (PDT)
-Received: by 10.90.88.14 with HTTP; Fri, 4 Jun 2010 05:52:23 -0700 (PDT)
-Date: Fri, 4 Jun 2010 14:52:23 +0200
-Message-ID: <AANLkTikyR0VhEu_Ex4JcaJ1bDHLK2Rh6NyVF801VtlVy@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 04 Jun 2010 15:33:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 04 Jun 2010 15:33:03 +0200
+Message-ID: <huavaf$jdl$1@dough.gmane.org>
+References: <AANLkTikyR0VhEu_Ex4JcaJ1bDHLK2Rh6NyVF801VtlVy@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <AANLkTikyR0VhEu_Ex4JcaJ1bDHLK2Rh6NyVF801VtlVy@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 1/2] Rename url params patch=<ignored>/pnum=<n> to apply={yes, no}/striplevel=<n>
@@ -48,44 +51,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 12:56:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 04 Jun 2010 13:37:45 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Apologies for not replying to the original message, but that one is
-already deleted.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Just bumped into this after doing a pull.
+On 04-06-10 14:52, Frans Meulenbroeks wrote:
+> Apologies for not replying to the original message, but that one is
+> already deleted.
+> 
+> Just bumped into this after doing a pull.
+> 
+> A few comments:
+> 
+> I would suggest if doing something like this that it is announced
+> somewhat more explictly so people are well aware of it. Since it was
+> brought as a patch it escaped my attention, and in fact it is not only
+> a patch but also a change of policy.
+> 
+> Also I'd like to suggest to complete the change by also updating the
+> manual, otherwise this could become confusing.
 
-A few comments:
+I have asked people to update the manual for a handfull of patches now,
+and so for noone has done so. I'm getting a bit tired of having to say
+"Read the manual, but it is likely wrong" to my coworkers.
 
-I would suggest if doing something like this that it is announced
-somewhat more explictly so people are well aware of it. Since it was
-brought as a patch it escaped my attention, and in fact it is not only
-a patch but also a change of policy.
+regards,
 
-Also I'd like to suggest to complete the change by also updating the
-manual, otherwise this could become confusing.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Most recipes are updated, but a few are apparently not.
-This is a grep on a git pull of yesterday (or maybe 1.5 day ago):
+iD8DBQFMCQCPMkyGM64RGpERApbbAKCqHPNJh5Ilh/nsXPlcTIhl9K+KqACcCUsm
+70tD3b1w+yL3oMRZsVb4st8=
+=5hT7
+-----END PGP SIGNATURE-----
 
-frans@frans:~/workspace/nios2/openembedded.git$ grep -r ";patch" recipes
-recipes/m4/m4_1.4.14.bb:SRC_URI += "file://f13-compile.patch;patch=1"
-recipes/udev/udev_092.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-recipes/udev/udev_092.bb:	    file://flags.patch;patch=1 \
-recipes/udev/udev_092.bb:	    file://udevsynthesize.patch;patch=1 \
-recipes/udev/udev_092.bb:            file://arm_inotify_fix.patch;patch=1 \
-recipes/udev/udev_092.bb:	    file://mtd-exclude-persistent.patch;patch=1 \
-recipes/udev/udev_100.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-recipes/udev/udev_100.bb:	    file://flags.patch;patch=1 \
-recipes/udev/udev_100.bb:	    file://mtd-exclude-persistent.patch;patch=1 \
-recipes/udev/udev_097.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-recipes/udev/udev_097.bb:	    file://flags.patch;patch=1 \
-recipes/ti/matrix-gui_svn.bb:
-file://0001-Disable-cursor-override-for-X11.patch;patch=1 \
-recipes/mplayer/mplayer_0.0+1.0rc2.bb:
-file://w100-mplayer.patch;patch= \
-
-Frans.
 
 
