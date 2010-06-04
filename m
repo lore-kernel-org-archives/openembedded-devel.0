@@ -1,51 +1,39 @@
-Received: from mail-pz0-f193.google.com ([209.85.222.193])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OKKrD-0000q1-14
+	(envelope-from <Tom_Rini@mentor.com>) id 1OKLsP-0006Rx-0z
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 02:33:56 +0200
-Received: by pzk31 with SMTP id 31so365279pzk.16
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 03 Jun 2010 17:29:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=XZsCOX09n/jHGvnE91N8nWddBGzBDJWjbiPCmL1KoJI=;
-	b=r+3S7R45ues6WYtiq890x0BLSS0qqDMMKNGf9RX8erJyhiSzcu8K/ZH+R42arxmy3Q
-	R/l1aNHzsVaY3oO5jAudu115Z/unTJwoGo5FE6q9w1ehxEghou918Grl+4rve0JFAhSo
-	geeBeE2F/sqONx9sc9io0UWivr8jAz8Wo6LqI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=hQtthY8iYdBxiR3TspW3eC0IpIaLrITHFu+Ub4hjgxCAd5x+RpTN/JDnOb2nj40ivH
-	2XlQMXW9tBt0YwkQdy+4TJea2wLoK1URtZ42BoH0D3goECZg8SnD1fDL0mInlMkizklF
-	G2I6FOfxkSKhJZ2Zr4Kyt7ZBLeSRS+0dmOcII=
-Received: by 10.141.89.13 with SMTP id r13mr8274842rvl.236.1275611374694;
-	Thu, 03 Jun 2010 17:29:34 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 22sm380817pzk.1.2010.06.03.17.29.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 03 Jun 2010 17:29:33 -0700 (PDT)
-Date: Thu, 3 Jun 2010 17:29:02 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100604002902.GA24343@gmail.com>
-References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
-	<1275510896-30845-7-git-send-email-raj.khem@gmail.com>
-	<hu6fm8$gg4$2@dough.gmane.org>
+	Fri, 04 Jun 2010 03:39:17 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OKLoF-0007N3-II from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 03 Jun 2010 18:34:55 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 3 Jun 2010 18:34:55 -0700
+Received: from [172.30.80.90] ([172.30.80.90]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 3 Jun 2010 19:34:54 -0600
+Message-ID: <4C08583A.3090308@mentor.com>
+Date: Thu, 03 Jun 2010 18:34:50 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <hu6fm8$gg4$2@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.222.193
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTimkddVJqU15C0NqsM5L3zPVvgfX5sZo4hXU6385@mail.gmail.com>
+In-Reply-To: <AANLkTimkddVJqU15C0NqsM5L3zPVvgfX5sZo4hXU6385@mail.gmail.com>
+X-OriginalArrivalTime: 04 Jun 2010 01:34:54.0502 (UTC)
+	FILETIME=[223B8C60:01CB0386]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 06/16] db_5.0.21: Add recipes for target and native packages.
+Subject: Re: psplash vs. psplash-$DISTRO
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,42 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 00:33:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 04 Jun 2010 01:39:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On (02/06/10 22:41), Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+Andrea Adami wrote:
+> Hello,
 > 
-> On 02-06-10 22:34, Khem Raj wrote:
-> > * Get rid of old style staging.
-> > 
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  recipes/db/db-native_4.2.52.bb             |    1 -
-> >  recipes/db/db-native_5.0.21.bb             |    2 +
+> building console-image for minimal distro I receive the following warning:
 > 
-> Can these get converted to BBCLASSEXTEND?
+> IMHO we have an issue with psplash-zap:
+> RRECOMMENDS_${PN} = "psplash-angstrom"
+> should probably be
+> RRECOMMENDS_${PN} = "${SPLASH}"
 
-Yes. I have intended to do that afterwards 
+Yes, that's right.  Or...
 
-> 
-> regards,
-> 
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
-> 
-> iD8DBQFMBsIIMkyGM64RGpERAqLBAJ9T1EGUDygy/NfaND/5EO0hSebLqgCfUPHo
-> 7eD81HjkwQFLTl3APVx7mFg=
-> =mMkU
-> -----END PGP SIGNATURE-----
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> But here we have a new issue: not all distro are defining $SPLASH, in
+> particular look at the images using ZZSPLASH:
+> ( from  http://fr.pastebin.ca/1876829 )
+
+I guess, why is it a problem and isn't there something setting a default 
+now?  I swear I saw that the other day.  But if they don't have SPLASH 
+they probably don't want psplash-zap.
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
