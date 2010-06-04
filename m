@@ -1,44 +1,42 @@
-Received: from smtp-4.concepts.nl ([213.197.30.111])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1OKSGx-0006NI-5G
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 10:29:00 +0200
-Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
-	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1OKSCn-0004S6-Rs
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 10:24:41 +0200
-Received: from [10.9.0.12] (unknown [10.9.0.12])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 7E8706A11A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  4 Jun 2010 10:24:37 +0200 (CEST)
-From: pieterg <pieterg@gmx.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKSMF-00068C-BV for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 10:34:33 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKSI0-0002U6-21 for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 10:30:04 +0200
+Received: from 83.150.95.26 ([83.150.95.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 10:30:04 +0200
+Received: from henri.bragge by 83.150.95.26 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 10:30:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 4 Jun 2010 10:24:31 +0200
-User-Agent: KMail/1.9.9
-References: <201006022351.38129.pieterg@gmx.com>
-	<1275555319.4657.42.camel@lenovo.internal.reciva.com>
-	<1275582929.15559.65.camel@mill.internal.reciva.com>
-In-Reply-To: <1275582929.15559.65.camel@mill.internal.reciva.com>
-MIME-Version: 1.0
-Message-Id: <201006041024.31712.pieterg@gmx.com>
-X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
-	information
-X-Concepts-MailScanner-ID: 1OKSCn-0004S6-Rs
-X-Concepts-MailScanner: Found to be clean
-X-Concepts-MailScanner-SpamCheck: 
-X-Concepts-MailScanner-From: pieterg@gmx.com
-X-SA-Exim-Connect-IP: 213.197.30.111
-X-SA-Exim-Mail-From: pieterg@gmx.com
+connect(): No such file or directory
+From: Henri Bragge <henri.bragge@dcombus.com>
+Date: Fri, 4 Jun 2010 08:27:00 +0000 (UTC)
+Message-ID: <loom.20100604T102513-753@post.gmane.org>
+References: <alpine.DEB.2.00.1005140557420.29014@lynx>
+	<4BED7085.9020608@zenlinux.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 83.150.95.26 (Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.0.19) Gecko/2010040200 Ubuntu/8.04 (hardy) Firefox/3.0.19)
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_NUMERIC_HELO,SPF_HELO_PASS,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: AUTOREV and SRCPV
+Subject: Re: numerous &quot; strip command failed&quot; ERRORs in building beagle image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 08:29:00 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Fri, 04 Jun 2010 08:35:21 -0000
+X-List-Received-Date: Fri, 04 Jun 2010 08:35:21 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Thursday 03 June 2010 18:35:29 Phil Blundell wrote:
-> On Thu, 2010-06-03 at 09:55 +0100, Phil Blundell wrote:
-> > On Thu, 2010-06-03 at 10:46 +0200, Martin Jansa wrote:
-> > > So will bitbake build again the same recipe (because I've built from
-> > > the same one before) with lower PV, just because it _still_ has the
-> > > highest DEFAULT_PREFERENCE and it's desired version (but still lower
-> > > PV because of hash, then before)?.
-> >
-> > Yes, I think so.  PV, and hence P, will be different and that's about
-> > all that matters to bitbake.  The fact that PF is the same should be
-> > irrelevant; I don't think any of its persistent state is keyed on that.
->
-> I did a quick test on this and it does indeed seem to work as you would
-> expect.  So that seems like the easiest way of solving the problem at
-> hand.
+Scott Garman <sgarman <at> zenlinux.com> writes:
 
-I probably don't know enough about the bitbake internals to see how to fix 
-my problem with that, could you please point me in the right direction?
-I think in case of AUTOREV I would still need some way to automatically 
-include a sortable revision count in PKGV, so the actual problem would only 
-move from PV to PKGV.
-Or do you mean this would allow SRCPV to be removed from those hundreds of 
-packages which don't use AUTOREV at the moment, so I can keep using AUTOREV 
-for my own packages, without those other packages starting to cause 
-problems?
+> This happens in the do_package task of many of the kernel builds. I was 
+> looking into it just the other night as it triggers BuildBot to think 
+> that the build failed (because it sees a non-zero exit status from this 
+> section).
+> 
+> Is it even necessary to stage the kernel scripts/ directory? That's the 
+> final thing happening in the do_install task in kernel.bbclass. Removing 
+> that line would be a one-liner patch fix to this issue.
 
-Note that my problem is not 'getting the package upgraded on the target', 
-but 'getting automatically incrementing package versions which are 
-consistent on several build systems'.
+Has there been, or will there ever be any progress on this? Just asking if I
+should work around this on my own build system..
 
-So for me a simple workaround would be allowing BB_LOCALCOUNT_OVERRIDE to be 
-defined per package, rather than globally.
-Or something similar, which would allow me to use the sortable revision 
-count only for those packages for which I really need AUTOREV.
+- Henri
 
-Rgds, Pieter
+
 
 
