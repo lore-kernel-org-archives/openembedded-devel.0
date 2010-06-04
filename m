@@ -1,44 +1,33 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtp-out115.alice.it ([85.37.17.115])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1OKdxB-0005H6-Uw
+	(envelope-from <GNUtoo@no-log.org>) id 1OKefN-0006NE-Nt
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 22:57:22 +0200
-Received: by wyb32 with SMTP id 32so1248441wyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 13:53:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=amJDtvrGuFGcwWU811j3MOW0e2SCneJaHupVIl3eV/g=;
-	b=DM9YOiNMq0ZAdIKbB5fKtUarVboB+N8qpI8u8OiusIC+csVOXBk0l5matQnRdAqt/7
-	Q6eixQE4Bjp0jM3/177X9+Cr7DinfdaHlaJUdLgCcPBXD/oWjcD1jm2YEaDyb5B097OR
-	T2mEPXz81h70jaeCmRiW7BK5ZhPpToQaTSKHw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=dR0xKeUmerIODKAiyzHbrPzUgzhCUIwFPpy/ZwsE9hwojjQzsjMwLTFXg1mxLVWyyU
-	RYYr+HGYe+70rnscXT7E5Kk1glWmTVDm44p+HsQ+IlR8YevEzMAzJ27lLzzI/GPXOkU0
-	kcsn2cPQT3133y7xuIyglkYgc99dikjZ1wKLs=
-MIME-Version: 1.0
-Received: by 10.216.85.10 with SMTP id t10mr106835wee.12.1275684784696; Fri, 
-	04 Jun 2010 13:53:04 -0700 (PDT)
-Received: by 10.216.21.134 with HTTP; Fri, 4 Jun 2010 13:53:04 -0700 (PDT)
-In-Reply-To: <1275682411-2638-1-git-send-email-denis@denix.org>
-References: <1275682411-2638-1-git-send-email-denis@denix.org>
-Date: Fri, 4 Jun 2010 22:53:04 +0200
-Message-ID: <AANLkTimVWQ9YyaTCJLZOLFpCwL3H9eCNfnBMQpEAm8WQ@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Fri, 04 Jun 2010 23:43:06 +0200
+Received: from FBCMMO04.fbc.local ([192.168.184.135]) by smtp-out115.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 4 Jun 2010 23:37:42 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO04.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 4 Jun 2010 23:37:42 +0200
+Received: from [192.168.10.102] ([79.21.49.187]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Fri, 4 Jun 2010 23:37:41 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Date: Fri, 04 Jun 2010 23:37:26 +0200
+Message-ID: <1275687446.32393.23.camel@gnutoo-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-OriginalArrivalTime: 04 Jun 2010 21:37:41.0832 (UTC)
+	FILETIME=[29503480:01CB042E]
+X-SA-Exim-Connect-IP: 85.37.17.115
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] amend.bbclass: don't parse same amend.inc if FILESPATH references it multiple times
+Subject: autoconf-2.65-r9.0 failing to correctly detect M4 (core)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +41,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 20:57:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 04 Jun 2010 21:43:06 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello,
+hi,
+I've the following issue:
+armv6-angstrom-linux-gnueabi/autoconf-2.65-r9.0/autoconf-2.65$ grep m4
+config.log 
+configure:2401: result: /usr/bin/m4
+which results in the following error at compilation:
+| autom4te: need GNU m4 1.4 or later: /usr/bin/m4
+| make[2]: *** [autoconf.in] Error 1
+| make[2]: Leaving directory
+`.../armv6-angstrom-linux-gnueabi/autoconf-2.65-r9.0/autoconf-2.65/bin'
+| make[1]: *** [all-recursive] Error 1
+| make[1]: Leaving directory
+`.../work/armv6-angstrom-linux-gnueabi/autoconf-2.65-r9.0/autoconf-2.65'
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
 
-On Fri, Jun 4, 2010 at 10:13 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> Signed-off-by: Denys Dmytriyenko <denis@denix.org>
-> ---
-> =A0classes/amend.bbclass | =A0 =A08 +++++++-
-> =A01 files changed, 7 insertions(+), 1 deletions(-)
->
-> diff --git a/classes/amend.bbclass b/classes/amend.bbclass
-> index cddd28c..fb67b4e 100644
-> --- a/classes/amend.bbclass
-> +++ b/classes/amend.bbclass
-> @@ -21,7 +21,13 @@ python () {
-> =A0 =A0 depends =3D d.getVar("__depends", 0) or []
-> =A0 =A0 d.setVar("__depends", depends + [(file, 0) for file in amendfiles=
- if not os.path.exists(file)])
->
-> + =A0 =A0# Make sure we don't parse the same amend.inc file more than onc=
-e, if
-> + =A0 =A0# there are duplicates in FILESPATH
-> + =A0 =A0seen =3D set()
-> +
-> =A0 =A0 for file in amendfiles:
-> =A0 =A0 =A0 =A0 if os.path.exists(file):
-> - =A0 =A0 =A0 =A0 =A0 =A0bb.parse.handle(file, d, 1)
-> + =A0 =A0 =A0 =A0 =A0 =A0if file not in seen:
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.parse.handle(file, d, 1)
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0seen.add(file)
-> =A0}
-> --
-> 1.6.3.3
->
-Acked-by: Leon Woestenberg <leon@sidebranch.com>
+./run.do_configure.2044
+results in:
+checking for GNU M4 that supports accurate traces...
+(cached) /usr/bin/m4
 
 
---=20
-Leon
+but removing that line: 
+export ac_cv_path_M4="${ac_cv_path_M4=/usr/bin/m4}"
+in:
+do_configure() {
+  if true
+  then
+    export ac_cv_path_PERL="${ac_cv_path_PERL=/usr/bin/perl}"
+    export ac_cv_path_M4="${ac_cv_path_M4=/usr/bin/m4}"
+    export ac_cv_prog_gnu_m4="${ac_cv_prog_gnu_m4=yes}
+  fi
+  autotools_do_configure
+
+}
+
+make it configure well:
+
+checking for GNU M4 that supports accurate
+traces... /home/gnutoo/embedded/oe/oetmps/bug/sysroots/x86_64-linux/usr/bin/m4
+
+and:
+$ grep m4 config.log 
+configure:2401:
+result: /home/gnutoo/embedded/oe/oetmps/bug/sysroots/x86_64-linux/usr/bin/m4
+
+The issue is that that code in autoconf.inc
+
+do_configure_prepend () {
+  if ${@['true', 'false'][bb.data.inherits_class('native', d)]}
+  then
+    export ac_cv_path_PERL="${ac_cv_path_PERL=${bindir}/perl}"
+    export ac_cv_path_M4="${ac_cv_path_M4=${bindir}/m4}"
+    export ac_cv_prog_gnu_m4="${ac_cv_prog_gnu_m4=yes}"
+  fi
+}
+
+autoconf.inc is definitely core and very important...
+
+I was bitbaking illume-image with bug as machine
+
+I don't know why it pulls a non native/cross autoconf...
+
+but anyway some people may want to compile stuff on the target.
+
+use case:
+*they don't know how to cross-compile or don't want too(-dev packages
+are faster to install) or have issues with cross-compilation
+*they have an arm smartbook like the touchbook and want to program on
+it.
+
+Denis.
+
+
+
 
 
