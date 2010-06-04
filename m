@@ -1,47 +1,38 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OKgKD-0002An-KK
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 01:29:18 +0200
-Received: by pwj4 with SMTP id 4so748582pwj.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 16:24:59 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=n8xZh4JfWtvL8gSA2ma3WnAqeM9Q/BQtUl2lMF0P80s=;
-	b=KpveTgHXEAI0sDfB8F3gwm0g91nDWB4uX/FupLgIW3Qrgoz72YDo57Fy/YDZZq6QyW
-	d/dIF7AFuxuPdCwFNeB1SrMx38iFBGTzf2+gc4PXMx83u7qubPenaXk2PVk9IRevb7MY
-	CSvilegYQ14Ch4MMvDUblmI+5byEDMGZs8X1M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=kUiiEMJQH29NSVtSevoxAah94egi91e7ymKwtixXqmxpX1C684PNhfKlHt3j/b1KqA
-	tNT23Fai/nJoK/KD397Wq8Z/O9zDo/GUdhkJeXC8WqCnNt3lZvTGdMnKrMcII5Yz/JX+
-	iEb2GYC0XzYuQ3/L8jbwvqy8l3f2oK8Cd9r0k=
-Received: by 10.141.2.10 with SMTP id e10mr9511799rvi.240.1275693898483;
-	Fri, 04 Jun 2010 16:24:58 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id b10sm2817551rvn.15.2010.06.04.16.24.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Jun 2010 16:24:57 -0700 (PDT)
-Date: Fri, 4 Jun 2010 16:24:23 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100604232423.GA9174@gmail.com>
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>)
+	id 1OKgTv-0006ql-Vx; Sat, 05 Jun 2010 01:39:26 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o54NY2ef014397
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sat, 5 Jun 2010 01:34:02 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OKgOo-0004vF-0R; Sat, 05 Jun 2010 01:34:02 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: Khem Raj <raj.khem@gmail.com>
+References: <1275673186-16695-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<20100604220855.GA27712@gmail.com>
+Date: Sat, 05 Jun 2010 01:34:01 +0200
+In-Reply-To: <20100604220855.GA27712@gmail.com> (Khem Raj's message of "Fri, 4
+	Jun 2010 15:08:55 -0700")
+Message-ID: <lyy6eu8j9y.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: dbaryshkov@gmail.com
-Subject: pcmciautils: fix build to use flex from sysroots, not from host
+Cc: Koen Kooi <koen@openembedded.org>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH] libvpx: disabled explicitly the generation of docs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,32 +46,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 23:29:18 -0000
+X-List-Received-Date: Fri, 04 Jun 2010 23:39:27 -0000
 Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
 
-Hi
+Khem Raj <raj.khem@gmail.com> writes:
 
-This commit 
+>> When buildsystem has 'doxygen' and 'php' the documentation will be
+>> created and the path in do_install (vpx-vp8-nopost-nodocs) won't be
+>> found anymore:
+>
+> Where do they get put when doxygen and php are found.
 
-commit c65ee13298e8c22274b5bcabe06f2116b8b7ebf2
-Author:     Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-AuthorDate: Fri Jun 4 16:26:17 2010 +0400
-Commit:     Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-CommitDate: Fri Jun 4 16:44:18 2010 +0400
+logic in configure is
 
-    pcmciautils: fix build to use flex from sysroots, not from host
-    
-    Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+| enabled doxygen && php -v >/dev/null 2>&1 && enable install_docs
+| ...
+| enabled debug_libs && DIST_DIR="${DIST_DIR}-debug"
+| enabled codec_srcs && DIST_DIR="${DIST_DIR}-src"
+| ! enabled postproc && DIST_DIR="${DIST_DIR}-nopost"
+| ! enabled multithread && DIST_DIR="${DIST_DIR}-nomt"
+| enabled eval_limit && DIST_DIR="${DIST_DIR}-eval"
+| ! enabled install_docs && DIST_DIR="${DIST_DIR}-nodocs"
 
+and build of documentation depends on 'install_docs'.
 
-breaks the build when I have flex-native in ASSUME_PROVIDED.
-It there any specific reason why one should use flex from hosted sysroot ?
-is the flex package on all distribution broken for some reason ?
-
-Thanks
--Khem
+Current package assumes that DIST_DIR is -nodocs.
 
 
+> You may also put doxygen-native and php-native in DEPENDS and generate
+> the documentation always but that may be overkill if we already have
+> documentation prebuilt which can be installed. is that the case?
+
+There is no prebuilt documentation. doxygen in DEPENDS would be ok, but
+adding a dependency on php seems to be overkill imho.
+
+
+>> +          --disable-install_docs \
+>
+> Does it disable the doc generation completely ?
+
+yes
+
+
+
+Enrico
 
 
