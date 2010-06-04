@@ -1,35 +1,46 @@
-Received: from relay58.tele2.vuurwerk.nl ([62.250.3.58]
-	helo=relay.versatel.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1OKVFd-0006Bf-58
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <cliff.brake@gmail.com>) id 1OKWQD-0005vM-M9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 13:39:53 +0200
-Received: from [87.213.192.94] (helo=hf-electronics.com)
-	by relay.versatel.net with smtp (Exim 4.69)
-	(envelope-from <linux@hf-electronics.com>) id 1OKUls-00022u-PA
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 13:09:05 +0200
-Received: from <linux@hf-electronics.com> with PostMaster 4.3.2 (MPS);
-	Fri, 04 Jun 2010 13:05:42 +200
-From: "Henk Geraads" <linux@hf-electronics.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 4 Jun 2010 13:08:45 +0200
-Message-ID: <NGBBLNEOGLJIIJKLFLPFAEPMFAAA.linux@hf-electronics.com>
+	Fri, 04 Jun 2010 14:54:59 +0200
+Received: by wwb34 with SMTP id 34so899797wwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 05:50:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=WZCXFStKM3zOTmHX98uNl0eUY3MLSUn/hDPDO3ylTlw=;
+	b=oyoY+Nmz6wqWhGNN/kpR8EkYSrB2nhRhpzFKgL6q2yb1FGZiIayhsGgVglxuUwNyf5
+	Qo3MYE38dPU+M3OdNUECXhuQOC1wLpuQEBYwFBbs6ZFXXMvN+pgr2D2WiUePWSHXzjcz
+	5tAhW5dPTKrYf/p1YGmdtVeJiVdo9hmn/6bDo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=unE5oUjVNIQVX+INMbVWrI+6NeFr5aijbkFXupQndx+HTBl4/W9yG17b6ZUKpXaOYr
+	lyUbiOa9g7GMO8wRvtni1cOWxDkh25LZdwPbCX6n0lctIWDW9ROq4zOcTsGyAIADF63D
+	pBCupDBCAryKmu2PY1o3s5VEnNkgn8zcjdjRg=
 MIME-Version: 1.0
-X-Priority: 3 (Normal)
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook IMO, Build 9.0.6604 (9.0.2911.0)
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5931
-Importance: Normal
-X-SA-Exim-Connect-IP: 62.250.3.58
-X-SA-Exim-Mail-From: linux@hf-electronics.com
+Received: by 10.227.142.21 with SMTP id o21mr10541991wbu.187.1275655832725; 
+	Fri, 04 Jun 2010 05:50:32 -0700 (PDT)
+Received: by 10.216.49.206 with HTTP; Fri, 4 Jun 2010 05:50:32 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1006040532220.5274@asterix.crazy-teaparty.dyndns.org>
+References: <1271752342-17886-1-git-send-email-vjensen@gmx.de>
+	<20100420161553.GA12219@denix.org>
+	<alpine.LNX.2.00.1006040532220.5274@asterix.crazy-teaparty.dyndns.org>
+Date: Fri, 4 Jun 2010 08:50:32 -0400
+Message-ID: <AANLkTikC9w3lRbPPKsJTm3X5fKo0jU778xfQ7vOT7Npn@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Openembedded error on building xfce-image
+Subject: Re: [PATCH] base.bbclass: base_do_compile() accepts GNUmakefile as Makefile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,107 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 11:39:53 -0000
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 04 Jun 2010 12:54:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Thu, Jun 3, 2010 at 11:39 PM, Vitus Jensen <vjensen@gmx.de> wrote:
+> On Tue, 20 Apr 2010, Denys Dmytriyenko wrote:
+>
+>> On Tue, Apr 20, 2010 at 10:32:22AM +0200, Vitus Jensen wrote:
+>>>
+>>> GNU make will look for GNUmakefile, makefile and Makefile. =A0GNUmakefi=
+le
+>>> isn't recommended but used by some programs, e.g. canutils.
+>>>
+>>> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+>>
+>> Acked-by: Denys Dmytriyenko <denis@denix.org>
+>
+> Could someone please apply that patch? =A0Now that it's acked by two
+> developers.
 
-We are trying to build a OpenEmbedded xfce-image for the
-compulab CM-T3530 board. Selected distribution is
-Angstrom-2008.1.
-We got following error message:
+Applied, thanks!
 
-Henk $ bitbake xfce-image
-NOTE: Handling BitBake files: - (8393/8393) [100 %]
-NOTE: Parsing finished. 7595 cached, 468 parsed, 330
-skipped, 0 masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-ERROR: Multiple .bb files are due to be built which each
-provide xfce4-panel
-(/home/armcore/oe/openembedded/recipes/xfce-base/xfce4-panel
-_4.6.3.bb
-/home/armcore/oe/openembedded/recipes/xfce-base/xfce4-panel_
-4.4.2.bb).
- This usually means one provides something the other doesn't
-and should.
-ERROR: Multiple .bb files are due to be built which each
-provide xfdesktop
-(/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
-.6.1.bb
-/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
-4.2.bb).
- This usually means one provides something the other doesn't
-and should.
-ERROR: Multiple .bb files are due to be built which each
-provide xfce-utils
-(/home/armcore/oe/openembedded/recipes/xfce-base/xfce-utils_
-4.6.1.bb
-/home/armcore/oe/openembedded/recipes/xfce-base/xfce-utils_4
-.4.2.bb).
- This usually means one provides something the other doesn't
-and should.
-ERROR: Multiple .bb files are due to be built which each
-provide xfwm4
-(/home/armcore/oe/openembedded/recipes/xfce-base/xfwm4_4.6.1
-.bb
-/home/armcore/oe/openembedded/recipes/xfce-base/xfwm4_4.4.2.
-bb).
- This usually means one provides something the other doesn't
-and should.
-NOTE: Executing runqueue
-NOTE: Running task 2975 of 4330 (ID: 339,
-/home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-ion.bb, do_qa_configure)
-NOTE: Running task 2976 of 4330 (ID: 340,
-/home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-ion.bb, do_compile)
-NOTE: Running task 2977 of 4330 (ID: 334,
-/home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-ion.bb, do_install)
-NOTE: Running task 3006 of 4330 (ID: 342,
-/home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-ion.bb, do_package)
-NOTE: Running task 3077 of 4330 (ID: 923,
-/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
-4.2.bb, do_install)
-ERROR: function do_install failed
-ERROR: log data follows
-(/home/armcore/oe/build/distrobuild/angstrom/work/armv7a-ang
-strom-linux-gnueabi/xfdesktop-4.4.2-r2/temp/log.do_install.1
-609)
-| NOTE: make
-DESTDIR=/home/armcore/oe/build/distrobuild/angstrom/work/arm
-v7a-angstrom-linux-gnueabi/xfdesktop-4.4.2-r2/image install
-| make: *** No rule to make target `install'.  Stop.
-| FATAL: oe_runmake failed
-NOTE: Task failed:
-/home/armcore/oe/build/distrobuild/angstrom/work/armv7a-angs
-trom-linux-gnueabi/xfdesktop-4.4.2-r2/temp/log.do_install.16
-09
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
-4.2.bb do_install failed
-ERROR: Task 923
-(/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
-.4.2.bb, do_install) failed
-NOTE: Tasks Summary: Attempted 3076 tasks of which 3072
-didn't need to be rerun and 1 failed.
-ERROR:
-'/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
-.4.2.bb' failed
-
-Where should we, look to fix this?
-
-
-Thanks in advance,
-
-
-Henk
-
-
+Cliff
 
 
