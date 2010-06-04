@@ -1,38 +1,47 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from fg-out-1718.google.com ([72.14.220.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>)
-	id 1OKgTv-0006ql-Vx; Sat, 05 Jun 2010 01:39:26 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.4) with ESMTP id o54NY2ef014397
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Sat, 5 Jun 2010 01:34:02 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.71) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OKgOo-0004vF-0R; Sat, 05 Jun 2010 01:34:02 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: Khem Raj <raj.khem@gmail.com>
-References: <1275673186-16695-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-	<20100604220855.GA27712@gmail.com>
-Date: Sat, 05 Jun 2010 01:34:01 +0200
-In-Reply-To: <20100604220855.GA27712@gmail.com> (Khem Raj's message of "Fri, 4
-	Jun 2010 15:08:55 -0700")
-Message-ID: <lyy6eu8j9y.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	(envelope-from <matgnt@gmail.com>) id 1OKgvJ-0006z3-Fc
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Jun 2010 02:07:37 +0200
+Received: by fg-out-1718.google.com with SMTP id 16so238087fgg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 17:03:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=cWf6Lt4UcHUW5KuxRgjTZ8CgZXCXFeQ5+S5RgTzZFfg=;
+	b=EtoT8oqqnly5MI8gXsYeTV1DbBCrbg+bqb0RVFrgzbfVU0nVdhWqF6+zTAXeExFe+5
+	lCBPgAOvOP3oGr3AmkXx4FPV4K526T4Y66dO74ZkL7Ggpk1h5JFkSa6VzFL+bA0ztzgd
+	E+ysZ0JJ+Q6aPZIeH3JJKYDYtRf9y8ZdGIxHQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=pzsYUxTult+0mO58s33lRIyQr+sp7aSewhKzjE/DQmRFaHRg+cNBcZFKiOtsinxqEz
+	oSIiPI/R0GEdnBx+g+o0tdP1t9senDnv0Bfi9F6BmUEepos4WE9z+wrcEF0tEms0XXfO
+	VUyym7YFBMbSugL7OuG6jEb26al8UhA3W4S7E=
+Received: by 10.87.5.30 with SMTP id h30mr18697893fgi.3.1275695857543;
+	Fri, 04 Jun 2010 16:57:37 -0700 (PDT)
+Received: from [192.168.5.27] (z0701.wist.uni-linz.ac.at [193.171.42.194])
+	by mx.google.com with ESMTPS id e20sm2366808fga.16.2010.06.04.16.57.36
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 04 Jun 2010 16:57:36 -0700 (PDT)
+Message-ID: <4C0992ED.6000102@gmail.com>
+Date: Sat, 05 Jun 2010 01:57:33 +0200
+From: =?ISO-8859-1?Q?Matthias_G=FCnther?= <matgnt@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 72.14.220.152
+X-SA-Exim-Mail-From: matgnt@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>,
-	openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH] libvpx: disabled explicitly the generation of docs
+Subject: qt4 upgrade to 4.7.0-beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,49 +55,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 23:39:27 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 05 Jun 2010 00:07:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Khem Raj <raj.khem@gmail.com> writes:
+Hello.
 
->> When buildsystem has 'doxygen' and 'php' the documentation will be
->> created and the path in do_install (vpx-vp8-nopost-nodocs) won't be
->> found anymore:
->
-> Where do they get put when doxygen and php are found.
+I've been working with QML (Qt Quick) for some time now and therefore
+I've created recipes for Qt 4.7.0-tp and beta1 versions. The patches
+just disable the not cross compiling parts (e.g. some demos/examples).
 
-logic in configure is
+Should I send the beta1-patch to the ML or is it better to wait for the
+final release?
 
-| enabled doxygen && php -v >/dev/null 2>&1 && enable install_docs
-| ...
-| enabled debug_libs && DIST_DIR="${DIST_DIR}-debug"
-| enabled codec_srcs && DIST_DIR="${DIST_DIR}-src"
-| ! enabled postproc && DIST_DIR="${DIST_DIR}-nopost"
-| ! enabled multithread && DIST_DIR="${DIST_DIR}-nomt"
-| enabled eval_limit && DIST_DIR="${DIST_DIR}-eval"
-| ! enabled install_docs && DIST_DIR="${DIST_DIR}-nodocs"
-
-and build of documentation depends on 'install_docs'.
-
-Current package assumes that DIST_DIR is -nodocs.
-
-
-> You may also put doxygen-native and php-native in DEPENDS and generate
-> the documentation always but that may be overkill if we already have
-> documentation prebuilt which can be installed. is that the case?
-
-There is no prebuilt documentation. doxygen in DEPENDS would be ok, but
-adding a dependency on php seems to be overkill imho.
-
-
->> +          --disable-install_docs \
->
-> Does it disable the doc generation completely ?
-
-yes
-
-
-
-Enrico
+Regards
+Matthias
 
 
