@@ -1,34 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OKRX8-0003B0-3E
+	(envelope-from <martin.jansa@gmail.com>) id 1OKRXT-0003B0-II
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 09:41:46 +0200
+	Fri, 04 Jun 2010 09:42:02 +0200
 Received: by mail-fx0-f47.google.com with SMTP id 9so590619fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 00:37:23 -0700 (PDT)
+	Fri, 04 Jun 2010 00:37:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=Nye6Fx1Xi+1m1AMAUAYsAlNrTPeR9euPQRbl565a5sI=;
-	b=xsEjPXdL6u1ATJSWykcmkD0jCCfmVK4BKCH3gOL2GbiAv4Irk8R+yd9TSS1+7Iz7ov
-	dQzzGaTRHiDk9olTcOKkVJoeTbIWWRAceOrpUz3y3pqJBhLhi9t9MmGZ5m4w/pXK1PcR
-	mJNLZ/PWz50/0jRrVNWfouVNIHi9fSP1CDnhk=
+	bh=mUFfbAjErUOn76mbpJoVnqYpPfzDrqOsaCleUiUr4y0=;
+	b=vqB5k3JnVMZC7a7YhCAZDURfCMFiKMuVc0TbWJujNM38QufDGuR0BaUVN+qMJFDLwK
+	jR+CjK4mQeTl8/V2fewU4WXlINR41N/fk8k5Pr/EMGfpbuHH/2QfguLqUJtQ+0Z3/zF3
+	GkOhBfvGYXydziCtungCvxh5NdeOsbtphQ5zM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=GjUtRQ00znUxiTUXAAxdvsf4Ts4hpmxVoZGacO8L2KnqqWJQgXnDtckPU1UTV41UeU
-	LO4S0J84CnmU93BoZvLyz/XYOALL7T9f88rMnz8HPV8YafgC6PX6vgCpI/BK40VcyR1l
-	wbr6RoanplUYSWf0uRQB7kX57nxeZQDjePB1g=
+	b=RAio3xXQwa2BHU8mRGMpnh/Q9KyorycsTyHH9/jP96rCMxK8Rx461bXsg1T2nrZcjz
+	4B0mc4/DMtXW4KOotLnVpFnblXPbd85zWSFtUYm4yDIpNa9WORp2Uy8zlyALQk6NsgS1
+	Verg/EgFXdwugN2vRqZWtxjns0LMgl91vwfdQ=
 MIME-Version: 1.0
-Received: by 10.223.29.28 with SMTP id o28mr64866fac.20.1275637043247; Fri, 04 
-	Jun 2010 00:37:23 -0700 (PDT)
-Received: by 10.223.106.138 with HTTP; Fri, 4 Jun 2010 00:37:23 -0700 (PDT)
-In-Reply-To: <1275510896-30845-4-git-send-email-raj.khem@gmail.com>
+Received: by 10.223.25.74 with SMTP id y10mr11349440fab.81.1275637065311; Fri, 
+	04 Jun 2010 00:37:45 -0700 (PDT)
+Received: by 10.223.106.138 with HTTP; Fri, 4 Jun 2010 00:37:45 -0700 (PDT)
+In-Reply-To: <1275510896-30845-5-git-send-email-raj.khem@gmail.com>
 References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
-	<1275510896-30845-4-git-send-email-raj.khem@gmail.com>
-Date: Fri, 4 Jun 2010 09:37:23 +0200
-Message-ID: <AANLkTimuc2dtfmbduEhLKLAxcjg_tR2Yah1jZxYBZp7y@mail.gmail.com>
+	<1275510896-30845-5-git-send-email-raj.khem@gmail.com>
+Date: Fri, 4 Jun 2010 09:37:45 +0200
+Message-ID: <AANLkTikwvaP5cJg4YX_0T4PZsVHmnW9IgdorMvvsHROC@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
@@ -39,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 03/16] gettext-0.18: Add recipe for 0.18
+Subject: Re: [PATCH 04/16] coreutils-8.5: Add recipes for version 8.5
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,278 +53,144 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 04 Jun 2010 07:41:47 -0000
+X-List-Received-Date: Fri, 04 Jun 2010 07:42:02 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
 On Wed, Jun 2, 2010 at 10:34 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> * gl_cv_func_unsetenv_works is not computed correctly in cross
-> =A0environment so cache it.
->
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
 Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
 > ---
-> =A0recipes/gettext/gettext-0.18/autotools.patch =A0 =A0 =A0 | =A0 28 ++++=
-++++++
-> =A0.../gettext-autoconf-lib-link-no-L.patch =A0 =A0 =A0 =A0 =A0 | =A0 28 =
+> =A0recipes/coreutils/coreutils-8.5.inc =A0 =A0 =A0 =A0 | =A0 =A07 +++
+> =A0recipes/coreutils/coreutils-8.5/onceonly.m4 | =A0 63 +++++++++++++++++=
 ++++++++++
-> =A0.../gettext-error_print_progname.patch =A0 =A0 =A0 =A0 =A0 =A0 | =A0 1=
-3 +++++
-> =A0.../gnulib-uclibc-sched_param-def.patch =A0 =A0 =A0 =A0 =A0 =A0| =A0 1=
-9 +++++++
-> =A0recipes/gettext/gettext_0.18.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0| =A0 57 ++++++++++++++++++++
-> =A0site/common-glibc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 =A0| =A0 =A03 +
-> =A06 files changed, 148 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/gettext/gettext-0.18/autotools.patch
-> =A0create mode 100644 recipes/gettext/gettext-0.18/gettext-autoconf-lib-l=
-ink-no-L.patch
-> =A0create mode 100644 recipes/gettext/gettext-0.18/gettext-error_print_pr=
-ogname.patch
-> =A0create mode 100644 recipes/gettext/gettext-0.18/gnulib-uclibc-sched_pa=
-ram-def.patch
-> =A0create mode 100644 recipes/gettext/gettext_0.18.bb
+> =A0recipes/coreutils/coreutils-native_8.5.bb =A0 | =A0 =A04 ++
+> =A0recipes/coreutils/coreutils_8.5.bb =A0 =A0 =A0 =A0 =A0| =A0 =A04 ++
+> =A04 files changed, 78 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/coreutils/coreutils-8.5.inc
+> =A0create mode 100644 recipes/coreutils/coreutils-8.5/onceonly.m4
+> =A0create mode 100644 recipes/coreutils/coreutils-native_8.5.bb
+> =A0create mode 100644 recipes/coreutils/coreutils_8.5.bb
 >
-> diff --git a/recipes/gettext/gettext-0.18/autotools.patch b/recipes/gette=
-xt/gettext-0.18/autotools.patch
+> diff --git a/recipes/coreutils/coreutils-8.5.inc b/recipes/coreutils/core=
+utils-8.5.inc
 > new file mode 100644
-> index 0000000..8302b34
+> index 0000000..da57745
 > --- /dev/null
-> +++ b/recipes/gettext/gettext-0.18/autotools.patch
-> @@ -0,0 +1,28 @@
-> +Index: gettext-0.18/gettext-runtime/man/Makefile.am
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gettext-0.18.orig/gettext-runtime/man/Makefile.am =A02009-06-28 12:4=
-4:04.000000000 -0700
-> ++++ gettext-0.18/gettext-runtime/man/Makefile.am =A0 =A0 =A0 2010-05-18 =
-16:58:51.130518057 -0700
-> +@@ -159,8 +159,7 @@ bind_textdomain_codeset.3.html: bind_tex
-> + =A0 =A0 =A0 $(MAN2HTML) $(srcdir)/bind_textdomain_codeset.3.in | sed -e=
- '/CreationDate:/d' > t-$@
-> + =A0 =A0 =A0 mv t-$@ $@
+> +++ b/recipes/coreutils/coreutils-8.5.inc
+> @@ -0,0 +1,7 @@
+> +require coreutils.inc
 > +
-> +-install-html-local:
-> +- =A0 =A0 =A0$(mkdir_p) $(DESTDIR)$(htmldir)
-> ++install-html: installdirs-html
-> + =A0 =A0 =A0 for file in $(man_HTML); do \
-> + =A0 =A0 =A0 =A0 if test -f $$file; then dir=3D.; else dir=3D$(srcdir); =
-fi; \
-> + =A0 =A0 =A0 =A0 $(INSTALL_DATA) $$dir/$$file $(DESTDIR)$(htmldir)/$$fil=
-e; \
-> +Index: gettext-0.18/gettext-tools/man/Makefile.am
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gettext-0.18.orig/gettext-tools/man/Makefile.am =A0 =A02009-06-28 12=
-:44:04.000000000 -0700
-> ++++ gettext-0.18/gettext-tools/man/Makefile.am 2010-05-18 16:58:51.13051=
-8057 -0700
-> +@@ -186,8 +186,7 @@ autopoint.1.html: autopoint.1
-> + =A0 =A0 =A0 $(MAN2HTML) `if test -f autopoint.1; then echo .; else echo=
- $(srcdir); fi`/autopoint.1 | sed -e '/CreationDate:/d' > t-$@
-> + =A0 =A0 =A0 mv t-$@ $@
+> +SRC_URI =3D "ftp://ftp.gnu.org/gnu/coreutils/coreutils-${PV}.tar.gz \
+> + =A0 =A0 =A0 =A0 =A0"
+> +SRC_URI[md5sum] =3D "c1ffe586d001e87d66cd80c4536ee823"
+> +SRC_URI[sha256sum] =3D "dd243e2ac7d0ed203b170ecfb8299643779e7501fec2b45a=
+e1cea8a450fa8ca0"
 > +
-> +-install-html-local:
-> +- =A0 =A0 =A0$(mkdir_p) $(DESTDIR)$(htmldir)
-> ++install-html: installdirs-html
-> + =A0 =A0 =A0 for file in $(man_HTML); do \
-> + =A0 =A0 =A0 =A0 if test -f $$file; then dir=3D.; else dir=3D$(srcdir); =
-fi; \
-> + =A0 =A0 =A0 =A0 $(INSTALL_DATA) $$dir/$$file $(DESTDIR)$(htmldir)/$$fil=
-e; \
-> diff --git a/recipes/gettext/gettext-0.18/gettext-autoconf-lib-link-no-L.=
-patch b/recipes/gettext/gettext-0.18/gettext-autoconf-lib-link-no-L.patch
+> diff --git a/recipes/coreutils/coreutils-8.5/onceonly.m4 b/recipes/coreut=
+ils/coreutils-8.5/onceonly.m4
 > new file mode 100644
-> index 0000000..d2063b0
+> index 0000000..f6fec37
 > --- /dev/null
-> +++ b/recipes/gettext/gettext-0.18/gettext-autoconf-lib-link-no-L.patch
-> @@ -0,0 +1,28 @@
-> +Index: gettext-0.18/gettext-runtime/gnulib-m4/lib-link.m4
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gettext-0.18.orig/gettext-runtime/gnulib-m4/lib-link.m4 =A0 =A02010-=
-05-18 17:12:12.593014616 -0700
-> ++++ gettext-0.18/gettext-runtime/gnulib-m4/lib-link.m4 2010-05-18 17:12:=
-58.631176939 -0700
-> +@@ -312,6 +312,9 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 fi
-> + =A0 =A0 =A0 =A0 =A0 =A0 fi
-> + =A0 =A0 =A0 =A0 =A0 fi
-> ++ =A0 =A0 =A0 =A0 =A0dnl Just let the compiler find the library, the com=
-piler and user are smarter then this script
-> ++ =A0 =A0 =A0 =A0 =A0dnl when cross compiling and working with a relocat=
-ed install.
-> ++ =A0 =A0 =A0 =A0 =A0found_dir=3D""
-> + =A0 =A0 =A0 =A0 =A0 if test "X$found_dir" =3D "X"; then
-> + =A0 =A0 =A0 =A0 =A0 =A0 for x in $LDFLAGS $LTLIB[]NAME; do
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 AC_LIB_WITH_FINAL_PREFIX([eval x=3D\"$x\"])
-> +Index: gettext-0.18/gettext-tools/gnulib-m4/lib-link.m4
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gettext-0.18.orig/gettext-tools/gnulib-m4/lib-link.m4 =A0 =A0 =A0201=
-0-05-18 17:12:12.633052946 -0700
-> ++++ gettext-0.18/gettext-tools/gnulib-m4/lib-link.m4 =A0 2010-05-18 17:1=
-3:35.020559106 -0700
-> +@@ -312,6 +312,9 @@ AC_DEFUN([AC_LIB_LINKFLAGS_BODY],
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 fi
-> + =A0 =A0 =A0 =A0 =A0 =A0 fi
-> + =A0 =A0 =A0 =A0 =A0 fi
-> ++ =A0 =A0 =A0 =A0 =A0dnl Just let the compiler find the library, the com=
-piler and user are smarter then this script
-> ++ =A0 =A0 =A0 =A0 =A0dnl when cross compiling and working with a relocat=
-ed install.
-> ++ =A0 =A0 =A0 =A0 =A0found_dir=3D""
-> + =A0 =A0 =A0 =A0 =A0 if test "X$found_dir" =3D "X"; then
-> + =A0 =A0 =A0 =A0 =A0 =A0 for x in $LDFLAGS $LTLIB[]NAME; do
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 AC_LIB_WITH_FINAL_PREFIX([eval x=3D\"$x\"])
-> diff --git a/recipes/gettext/gettext-0.18/gettext-error_print_progname.pa=
-tch b/recipes/gettext/gettext-0.18/gettext-error_print_progname.patch
+> +++ b/recipes/coreutils/coreutils-8.5/onceonly.m4
+> @@ -0,0 +1,63 @@
+> +# onceonly.m4 serial 3
+> +dnl Copyright (C) 2002, 2003 Free Software Foundation, Inc.
+> +dnl This file is free software, distributed under the terms of the GNU
+> +dnl General Public License. =A0As a special exception to the GNU General
+> +dnl Public License, this file may be distributed as part of a program
+> +dnl that contains a configuration script generated by Autoconf, under
+> +dnl the same distribution terms as the rest of that program.
+> +
+> +dnl This file defines some "once only" variants of standard autoconf mac=
+ros.
+> +dnl =A0 AC_CHECK_HEADERS_ONCE =A0 =A0 =A0 =A0 like =A0AC_CHECK_HEADERS
+> +dnl =A0 AC_CHECK_FUNCS_ONCE =A0 =A0 =A0 =A0 =A0 like =A0AC_CHECK_FUNCS
+> +dnl =A0 AC_CHECK_DECLS_ONCE =A0 =A0 =A0 =A0 =A0 like =A0AC_CHECK_DECLS
+> +dnl =A0 AC_REQUIRE([AC_HEADER_STDC]) =A0like =A0AC_HEADER_STDC
+> +dnl The advantage is that the check for each of the headers/functions/de=
+cls
+> +dnl will be put only once into the 'configure' file. It keeps the size o=
+f
+> +dnl the 'configure' file down, and avoids redundant output when 'configu=
+re'
+> +dnl is run.
+> +dnl The drawback is that the checks cannot be conditionalized. If you wr=
+ite
+> +dnl =A0 if some_condition; then gl_CHECK_HEADERS(stdlib.h); fi
+> +dnl inside an AC_DEFUNed function, the gl_CHECK_HEADERS macro call expan=
+ds to
+> +dnl empty, and the check will be inserted before the body of the AC_DEFU=
+Ned
+> +dnl function.
+> +
+> +dnl Autoconf version 2.57 or newer is recommended.
+> +AC_PREREQ(2.54)
+> +
+> +# AC_CHECK_HEADERS_ONCE(HEADER1 HEADER2 ...) is a once-only variant of
+> +# AC_CHECK_HEADERS(HEADER1 HEADER2 ...).
+> +AC_DEFUN([AC_CHECK_HEADERS_ONCE], [
+> + =A0:
+> + =A0AC_FOREACH([gl_HEADER_NAME], [$1], [
+> + =A0 =A0AC_DEFUN([gl_CHECK_HEADER_]m4_quote(translit(defn([gl_HEADER_NAM=
+E]),
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 [-./], [___])), [
+> + =A0 =A0 =A0AC_CHECK_HEADERS(gl_HEADER_NAME)
+> + =A0 =A0])
+> + =A0 =A0AC_REQUIRE([gl_CHECK_HEADER_]m4_quote(translit(gl_HEADER_NAME,
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 =A0 =A0 [-./], [___])))
+> + =A0])
+> +])
+> +
+> +# AC_CHECK_FUNCS_ONCE(FUNC1 FUNC2 ...) is a once-only variant of
+> +# AC_CHECK_FUNCS(FUNC1 FUNC2 ...).
+> +AC_DEFUN([AC_CHECK_FUNCS_ONCE], [
+> + =A0:
+> + =A0AC_FOREACH([gl_FUNC_NAME], [$1], [
+> + =A0 =A0AC_DEFUN([gl_CHECK_FUNC_]defn([gl_FUNC_NAME]), [
+> + =A0 =A0 =A0AC_CHECK_FUNCS(defn([gl_FUNC_NAME]))
+> + =A0 =A0])
+> + =A0 =A0AC_REQUIRE([gl_CHECK_FUNC_]defn([gl_FUNC_NAME]))
+> + =A0])
+> +])
+> +
+> +# AC_CHECK_DECLS_ONCE(DECL1 DECL2 ...) is a once-only variant of
+> +# AC_CHECK_DECLS(DECL1, DECL2, ...).
+> +AC_DEFUN([AC_CHECK_DECLS_ONCE], [
+> + =A0:
+> + =A0AC_FOREACH([gl_DECL_NAME], [$1], [
+> + =A0 =A0AC_DEFUN([gl_CHECK_DECL_]defn([gl_DECL_NAME]), [
+> + =A0 =A0 =A0AC_CHECK_DECLS(defn([gl_DECL_NAME]))
+> + =A0 =A0])
+> + =A0 =A0AC_REQUIRE([gl_CHECK_DECL_]defn([gl_DECL_NAME]))
+> + =A0])
+> +])
+> diff --git a/recipes/coreutils/coreutils-native_8.5.bb b/recipes/coreutil=
+s/coreutils-native_8.5.bb
 > new file mode 100644
-> index 0000000..0f67cd0
+> index 0000000..fbf416e
 > --- /dev/null
-> +++ b/recipes/gettext/gettext-0.18/gettext-error_print_progname.patch
-> @@ -0,0 +1,13 @@
-> +Index: gettext-0.17/gettext-tools/libgettextpo/error.h
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gettext-0.17.orig/gettext-tools/libgettextpo/error.h =A0 =A0 =A0 200=
-8-07-27 21:16:25.561115527 +0200
-> ++++ gettext-0.17/gettext-tools/libgettextpo/error.h =A0 =A02008-07-27 21=
-:16:52.454440505 +0200
-> +@@ -49,7 +49,7 @@
-> + /* If NULL, error will flush stdout, then print on stderr the program
-> + =A0 =A0name, a colon and a space. =A0Otherwise, error will call this
-> + =A0 =A0function without parameters instead. =A0*/
-> +-extern DLL_VARIABLE void (*error_print_progname) (void);
-> ++void (*error_print_progname) (void);
+> +++ b/recipes/coreutils/coreutils-native_8.5.bb
+> @@ -0,0 +1,4 @@
+> +require coreutils-${PV}.inc
+> +require coreutils-native.inc
 > +
-> + /* This variable is incremented each time `error' is called. =A0*/
-> + extern DLL_VARIABLE unsigned int error_message_count;
-> diff --git a/recipes/gettext/gettext-0.18/gnulib-uclibc-sched_param-def.p=
-atch b/recipes/gettext/gettext-0.18/gnulib-uclibc-sched_param-def.patch
-> new file mode 100644
-> index 0000000..074723a
-> --- /dev/null
-> +++ b/recipes/gettext/gettext-0.18/gnulib-uclibc-sched_param-def.patch
-> @@ -0,0 +1,19 @@
-> +uclibc defines __GLIBC__ but it does not expose struct shed_param as muc=
-h as glibc
-> +and is not needed too per standard. gnulib attempts to use it but we hav=
-e to account
-> +for it because in this case uclibc does not behave like glibc.
-> +
-> +-Khem
-> +
-> +Index: gettext-0.18/gettext-tools/gnulib-lib/spawn.in.h
-> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> +--- gettext-0.18.orig/gettext-tools/gnulib-lib/spawn.in.h =A0 =A0 =A0201=
-0-06-01 17:20:09.036427575 -0700
-> ++++ gettext-0.18/gettext-tools/gnulib-lib/spawn.in.h =A0 2010-06-01 17:2=
-0:38.856613943 -0700
-> +@@ -31,7 +31,7 @@
-> +
-> + /* Get definitions of 'struct sched_param' and 'sigset_t'.
-> + =A0 =A0But avoid namespace pollution on glibc systems. =A0*/
-> +-#ifndef __GLIBC__
-> ++#if !defined __GLIBC__ || defined __UCLIBC__
-> + # include <sched.h>
-> + # include <signal.h>
-> + #endif
-> diff --git a/recipes/gettext/gettext_0.18.bb b/recipes/gettext/gettext_0.=
-18.bb
-> new file mode 100644
-> index 0000000..5e22b5a
-> --- /dev/null
-> +++ b/recipes/gettext/gettext_0.18.bb
-> @@ -0,0 +1,57 @@
-> +DESCRIPTION =3D "The GNU internationalization library."
-> +HOMEPAGE =3D "http://www.gnu.org/software/gettext/gettext.html"
-> +SECTION =3D "libs"
-> +LICENSE =3D "GPLv3"
 > +PR =3D "r0"
-> +DEPENDS =3D "gettext-native virtual/libiconv ncurses expat"
-> +DEPENDS_virtclass-native =3D "libxml2-native"
-> +PROVIDES =3D "virtual/libintl"
-> +PROVIDES_virtclass-native =3D ""
-> +RCONFLICTS_gettext-libintl =3D "proxy-libintl"
+> diff --git a/recipes/coreutils/coreutils_8.5.bb b/recipes/coreutils/coreu=
+tils_8.5.bb
+> new file mode 100644
+> index 0000000..b4025c2
+> --- /dev/null
+> +++ b/recipes/coreutils/coreutils_8.5.bb
+> @@ -0,0 +1,4 @@
+> +require coreutils-${PV}.inc
+> +require coreutils-target.inc
 > +
-> +BBCLASSEXTEND =3D "native nativesdk"
-> +
-> +SRC_URI =3D "${GNU_MIRROR}/gettext/gettext-${PV}.tar.gz \
-> + =A0 =A0 =A0 =A0 =A0 file://autotools.patch \
-> + =A0 =A0 =A0 =A0 =A0 file://gettext-autoconf-lib-link-no-L.patch \
-> + =A0 =A0 =A0 =A0 =A0file://gnulib-uclibc-sched_param-def.patch \
-> + =A0 =A0 =A0 =A0 "
-> +
-> +SRC_URI_append_libc-uclibc =3D " file://gettext-error_print_progname.pat=
-ch"
-> +
-> +PARALLEL_MAKE =3D ""
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF +=3D "--without-lispdir \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-csharp \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-libasprintf \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-java \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-native-java \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--disable-openmp \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--with-included-glib \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--without-emacs \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 "
-> +acpaths =3D '-I ${S}/gnulib-local/m4/ \
-> + =A0 =A0 =A0 =A0 =A0-I ${S}/gettext-runtime/m4 \
-> + =A0 =A0 =A0 =A0 =A0-I ${S}/gettext-tools/m4'
-> +
-> +
-> +# these lack the .x behind the .so, but shouldn't be in the -dev package
-> +# Otherwise you get the following results:
-> +# 7.4M =A0 =A0glibc/images/ep93xx/Angstrom-console-image-glibc-ipk-2008.=
-1-test-20080104-ep93xx.rootfs.tar.gz
-> +# 25M =A0 =A0 uclibc/images/ep93xx/Angstrom-console-image-uclibc-ipk-200=
-8.1-test-20080104-ep93xx.rootfs.tar.gz
-> +# because gettext depends on gettext-dev, which pulls in more -dev packa=
-ges:
-> +# 15228 =A0 KiB /ep93xx/libstdc++-dev_4.2.2-r2_ep93xx.ipk
-> +# 1300 =A0 =A0KiB /ep93xx/uclibc-dev_0.9.29-r8_ep93xx.ipk
-> +# 140 =A0 =A0 KiB /armv4t/gettext-dev_0.14.1-r6_armv4t.ipk
-> +# 4 =A0 =A0 =A0 KiB /ep93xx/libgcc-s-dev_4.2.2-r2_ep93xx.ipk
-> +
-> +PACKAGES =3D+ "gettext-libintl libgettextlib libgettextsrc"
-> +
-> +FILES_gettext-libintl =3D "${libdir}/libintl*.so.*"
-> +FILES_libgettextlib =3D "${libdir}/libgettextlib-*.so*"
-> +FILES_libgettextsrc =3D "${libdir}/libgettextsrc-*.so*"
-> +
-> +SRC_URI[md5sum] =3D "d52a3e061032a1ed13856d42fc86f0fd"
-> +SRC_URI[sha256sum] =3D "02342c1de18c03c601f8b91cbd896b70486a4b945bd816f3=
-4541e0d7b5a96fe5"
-> diff --git a/site/common-glibc b/site/common-glibc
-> index b298e46..6dc2363 100644
-> --- a/site/common-glibc
-> +++ b/site/common-glibc
-> @@ -22,6 +22,9 @@ ac_cv_func_vsnprintf_c99=3D${ac_cv_func_vsnprintf_c99=
-=3Dyes}
-> =A0glib_cv_compliant_posix_memalign=3D${glib_cv_compliant_posix_memalign=
-=3D1}
-> =A0glib_cv_long_long_format=3D${glib_cv_long_long_format=3Dll}
->
-> +# gettext
-> +gl_cv_func_unsetenv_works=3D${gl_cv_func_unsetenv_works=3Dyes}
-> +
-> =A0#dbus-glib
-> =A0ac_cv_have_abstract_sockets=3D${ac_cv_have_abstract_sockets=3Dyes}
->
+> +PR =3D "r0"
 > --
 > 1.7.0.4
 >
