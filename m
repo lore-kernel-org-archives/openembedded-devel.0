@@ -1,47 +1,35 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from smtp-out01.alice.it ([85.33.2.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OKgz9-0003ZA-QF
+	(envelope-from <GNUtoo@no-log.org>) id 1OKi0t-0004z5-2E
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 02:11:36 +0200
-Received: by gwb20 with SMTP id 20so293092gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 17:07:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=lEswGfickIozMIC86xmXKWk/kVBJp1v4E8n0qmqUsDQ=;
-	b=lFmvpQIpEmHS4YnFfW3TFiJX4J/Q/VZHb7TluooftHj/5oDCim1HMRjCWaMieesvWV
-	vmmvMKcu4jy39vohBM8EtW3bsQVCI9LH33w3B24xpz2CYGM3shIDVzX/012u+/V36V9o
-	iGH8QTzQwbGghF4uLUhnGuHRWbH/4fNBWcmoA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=uFFbXz7o3kJaamHDumml/hTej+5NRQ+Y/v9JOaHZxzQHE8v1BCbVZRHpfBthFvdUl5
-	x/H0YN0zyFddJ30F1xJMTJSsBcn47nkl7L6e34fZubGiwcX+KofSes/zKseXOZcEJFNf
-	bc+QaJxHT04gsnjjcDbISgaLSfELnUUsg1ogk=
-Received: by 10.229.217.144 with SMTP id hm16mr2964726qcb.113.1275696437970; 
-	Fri, 04 Jun 2010 17:07:17 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.3.133 with HTTP; Fri, 4 Jun 2010 17:06:56 -0700 (PDT)
-In-Reply-To: <4C09946F.9040401@mentor.com>
-References: <4C09946F.9040401@mentor.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 4 Jun 2010 17:06:56 -0700
-X-Google-Sender-Auth: WY9ghUgMtdMCJ2PRj3TsEg5yGyI
-Message-ID: <AANLkTimQs0f5vOz--Xhb-hDMzGbPVrn6K41HUZmqgqzb@mail.gmail.com>
+	Sat, 05 Jun 2010 03:17:31 +0200
+Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 5 Jun 2010 03:13:09 +0200
+Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Sat, 5 Jun 2010 03:13:09 +0200
+Received: from [192.168.10.100] ([79.21.49.187]) by FBCMCL01B07.fbc.local with
+	Microsoft SMTPSVC(6.0.3790.3959); Sat, 5 Jun 2010 03:13:07 +0200
+From: GNUtoo <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+In-Reply-To: <NGBBLNEOGLJIIJKLFLPFAEPMFAAA.linux@hf-electronics.com>
+References: <NGBBLNEOGLJIIJKLFLPFAEPMFAAA.linux@hf-electronics.com>
+Date: Sat, 05 Jun 2010 03:13:07 +0200
+Message-ID: <1275700387.2670.6.camel@gnutoo-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-OriginalArrivalTime: 05 Jun 2010 01:13:08.0872 (UTC)
+	FILETIME=[426DF880:01CB044C]
+X-SA-Exim-Connect-IP: 85.33.2.12
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] Add locking on tasks that add package_update_index_ipk
+Subject: Re: Openembedded error on building xfce-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,23 +43,110 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 00:11:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 05 Jun 2010 01:17:31 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jun 4, 2010 at 5:03 PM, Tom Rini <tom_rini@mentor.com> wrote:
+On Fri, 2010-06-04 at 13:08 +0200, Henk Geraads wrote:
+> Hi,
+> 
+> We are trying to build a OpenEmbedded xfce-image for the
+> compulab CM-T3530 board. Selected distribution is
+> Angstrom-2008.1.
+> We got following error message:
+It seems that xfce-image is old...and that xfce46-image is newer.
+Yesterday I tried xfce46-image with eee701 and everything went fine.
+Altough I didn't test it yet.
+> Henk $ bitbake xfce-image
+> NOTE: Handling BitBake files: - (8393/8393) [100 %]
+> NOTE: Parsing finished. 7595 cached, 468 parsed, 330
+> skipped, 0 masked.
+> NOTE: Resolving any missing task queue dependencies
+> NOTE: Preparing runqueue
+> ERROR: Multiple .bb files are due to be built which each
+> provide xfce4-panel
+> (/home/armcore/oe/openembedded/recipes/xfce-base/xfce4-panel
+> _4.6.3.bb
+> /home/armcore/oe/openembedded/recipes/xfce-base/xfce4-panel_
+> 4.4.2.bb).
+>  This usually means one provides something the other doesn't
+> and should.
+> ERROR: Multiple .bb files are due to be built which each
+> provide xfdesktop
+> (/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
+> .6.1.bb
+> /home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
+> 4.2.bb).
+>  This usually means one provides something the other doesn't
+> and should.
+> ERROR: Multiple .bb files are due to be built which each
+> provide xfce-utils
+> (/home/armcore/oe/openembedded/recipes/xfce-base/xfce-utils_
+> 4.6.1.bb
+> /home/armcore/oe/openembedded/recipes/xfce-base/xfce-utils_4
+> .4.2.bb).
+>  This usually means one provides something the other doesn't
+> and should.
+> ERROR: Multiple .bb files are due to be built which each
+> provide xfwm4
+> (/home/armcore/oe/openembedded/recipes/xfce-base/xfwm4_4.6.1
+> .bb
+> /home/armcore/oe/openembedded/recipes/xfce-base/xfwm4_4.4.2.
+> bb).
+>  This usually means one provides something the other doesn't
+> and should.
+I don't know why it wants to build multiple versions,maybe bad config?
+> NOTE: Executing runqueue
+> NOTE: Running task 2975 of 4330 (ID: 339,
+> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
+> ion.bb, do_qa_configure)
+> NOTE: Running task 2976 of 4330 (ID: 340,
+> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
+> ion.bb, do_compile)
+> NOTE: Running task 2977 of 4330 (ID: 334,
+> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
+> ion.bb, do_install)
+> NOTE: Running task 3006 of 4330 (ID: 342,
+> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
+> ion.bb, do_package)
+> NOTE: Running task 3077 of 4330 (ID: 923,
+> /home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
+> 4.2.bb, do_install)
+> ERROR: function do_install failed
+> ERROR: log data follows
+> (/home/armcore/oe/build/distrobuild/angstrom/work/armv7a-ang
+> strom-linux-gnueabi/xfdesktop-4.4.2-r2/temp/log.do_install.1
+> 609)
+> | NOTE: make
+> DESTDIR=/home/armcore/oe/build/distrobuild/angstrom/work/arm
+> v7a-angstrom-linux-gnueabi/xfdesktop-4.4.2-r2/image install
+> | make: *** No rule to make target `install'.  Stop.
+> | FATAL: oe_runmake failed
+> NOTE: Task failed:
+> /home/armcore/oe/build/distrobuild/angstrom/work/armv7a-angs
+> trom-linux-gnueabi/xfdesktop-4.4.2-r2/temp/log.do_install.16
+> 09
+> ERROR: TaskFailed event exception, aborting
+> ERROR: Build of
+> /home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
+> 4.2.bb do_install failed
+> ERROR: Task 923
+> (/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
+> .4.2.bb, do_install) failed
+> NOTE: Tasks Summary: Attempted 3076 tasks of which 3072
+> didn't need to be rerun and 1 failed.
+> ERROR:
+> '/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
+> .4.2.bb' failed
+> 
+> Where should we, look to fix this?
 
-> We add a lockfile of do_populate_sdk and do_rootfs (in rootfs_ipk) that is
-> also the lockfile that package_update_index_ipk uses.  With enough threads
-> it is possible that one image (or meta-toolchain) is attempting to use the
-> package index while another has only reached the point of generating the
-> index leading to an empty index being seen later on.
+look what happened
+in /home/armcore/oe/build/distrobuild/angstrom/work/armv7a-ang
+strom-linux-gnueabi/xfdesktop-4.4.2-r2/xfdesktop-4.4.2/
+
+Denis.
 
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
 
