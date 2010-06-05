@@ -1,44 +1,50 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OKmXH-0005Dj-7z
+	(envelope-from <martin.jansa@gmail.com>) id 1OKmXf-0005E3-KT
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 08:07:15 +0200
-Received: by pvh1 with SMTP id 1so401100pvh.6
+	Sat, 05 Jun 2010 08:07:36 +0200
+Received: by fxm9 with SMTP id 9so1227896fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 23:02:52 -0700 (PDT)
+	Fri, 04 Jun 2010 23:03:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=56KHruKc/xLxE4dAymr6ZM22LTdTm5LjAb0QpkjDsWc=;
-	b=EGJ581qGR1rJxijzxKPe33dOKF0zo/vOyFRtnYSuB8sOdSaBOtyDPb+ZnaWXXqkyrF
-	7R3CpreaTvuzDritnqN8w/bhKKSPmFu+WMeAbkiST9Fk6NReLWtZss2Ljqs+Vo1q0naF
-	Q2lUcQpJ6UNAhyCB3XLcJFtVugrRAwY1Wqwq4=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=xGJT/gSdj7TgKm2HniJ+eoPvxCT2BgHgvhI3J4pdkOI=;
+	b=YWRozhwK3jPEKBJeqlhQbVCYnWLBVov2kpm6T5Qf5R/++i4IlKcvywwDZ53UwbJZXC
+	GP8cS123bXrZSFIA/+FVsYjmWywWsYLQhVm9jhwlloYISkmsgHuEJU3ySjcd5mZKnRn4
+	QS84xx59SLKuySayx9xrRL6jx11yAyhp1aIPE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=RZBPcTSl+z3I3MsIUWJFAg50CrKiNGEB4Pbn2v22c1E4izsaJnwucyqJlyHdwVtAm7
-	4tPet4uVyHCBTMCXp4gImONyxpAjKahViA0CdbbPPFumvv9Yiul1NGSxWxzeF0aMFDmF
-	Gelb75AvKlllgz36Lhm4HqichzkuRKhs0Nqb4=
-Received: by 10.143.153.42 with SMTP id f42mr8937333wfo.299.1275717772802;
-	Fri, 04 Jun 2010 23:02:52 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id d16sm15495154wam.0.2010.06.04.23.02.51
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=nl2ekMjLTv6TbLxfMmTjKjZuEHJPL65dYg1FbFcGO1uaHrQWk8Brt462yrk/WL91gA
+	CynQyjgzV73/soxU577alKoVITsu9bZsBguEd6AcwF0F+SJgdVFJofKBPoYhNDUY6Thr
+	th8cJ4hSEcP9OxZwy8lJV8R4NKUuban0ly9Ns=
+Received: by 10.223.23.83 with SMTP id q19mr12717172fab.12.1275717798268;
+	Fri, 04 Jun 2010 23:03:18 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u12sm8839936fah.16.2010.06.04.23.03.17
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Jun 2010 23:02:52 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Fri, 04 Jun 2010 23:03:17 -0700 (PDT)
+Date: Sat, 5 Jun 2010 08:03:00 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri,  4 Jun 2010 23:02:47 -0700
-Message-Id: <1275717767-28870-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100605060300.GS16035@jama>
+References: <4C0992ED.6000102@gmail.com>
+ <hucovl$sbi$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <hucovl$sbi$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] angstrom-2008-preferred-versions.inc: Set 1.11 PREFERRED_VERSION for automake-native
+Subject: Re: qt4 upgrade to 4.7.0-beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,32 +58,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 06:07:16 -0000
+X-List-Received-Date: Sat, 05 Jun 2010 06:07:36 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-This patch would be needed for angstrom after the gettext 0.18 patches
-are pushed.
-I have booted a angstrom-2008.1 minimal-image successfully on qemuarm.
+On Sat, Jun 05, 2010 at 07:57:09AM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 05-06-10 01:57, Matthias Günther wrote:
+> > Hello.
+> > 
+> > I've been working with QML (Qt Quick) for some time now and therefore
+> > I've created recipes for Qt 4.7.0-tp and beta1 versions. The patches
+> > just disable the not cross compiling parts (e.g. some demos/examples).
+> > 
+> > Should I send the beta1-patch to the ML or is it better to wait for the
+> > final release?
+> 
+> Please send them to the list so we can work out issues before the
+> release happens.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- .../include/angstrom-2008-preferred-versions.inc   |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Matthias: please confirm if they will be the same as you have in 
+http://gitorious.org/~matgnt/angstrom/matgnts-openembedded/commits/qt-4.7
+or create reabased branch there, it will be easier for some testers to
+try your changes :).
 
-diff --git a/conf/distro/include/angstrom-2008-preferred-versions.inc b/conf/distro/include/angstrom-2008-preferred-versions.inc
-index 94beffb..2779504 100644
---- a/conf/distro/include/angstrom-2008-preferred-versions.inc
-+++ b/conf/distro/include/angstrom-2008-preferred-versions.inc
-@@ -5,7 +5,7 @@ require conf/distro/include/angstrom-codec-engine-${CE_VERSION}-preferred-versio
- 
- PREFERRED_VERSION_autoconf = "2.65"
- PREFERRED_VERSION_autoconf-native = "2.65"
--PREFERRED_VERSION_automake-native = "1.10.3"
-+PREFERRED_VERSION_automake-native = "1.11"
- PREFERRED_VERSION_busybox 	= "1.13.2"
- PREFERRED_VERSION_cairo		= "1.8.10"
- PREFERRED_VERSION_dbus 		= "1.2.24"
+Thanks
+
+Regard,
+
 -- 
-1.7.0.4
-
+Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
 
