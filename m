@@ -1,35 +1,44 @@
-Received: from smtp-out01.alice.it ([85.33.2.12])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1OKi0t-0004z5-2E
+	(envelope-from <martin@ti.com>) id 1OKi6n-0005Bk-Sk
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 03:17:31 +0200
-Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out01.alice.it
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 5 Jun 2010 03:13:09 +0200
-Received: from FBCMCL01B07.fbc.local ([192.168.171.45]) by FBCMMO05.fbc.local
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 5 Jun 2010 03:13:09 +0200
-Received: from [192.168.10.100] ([79.21.49.187]) by FBCMCL01B07.fbc.local with
-	Microsoft SMTPSVC(6.0.3790.3959); Sat, 5 Jun 2010 03:13:07 +0200
-From: GNUtoo <GNUtoo@no-log.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <NGBBLNEOGLJIIJKLFLPFAEPMFAAA.linux@hf-electronics.com>
-References: <NGBBLNEOGLJIIJKLFLPFAEPMFAAA.linux@hf-electronics.com>
-Date: Sat, 05 Jun 2010 03:13:07 +0200
-Message-ID: <1275700387.2670.6.camel@gnutoo-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-OriginalArrivalTime: 05 Jun 2010 01:13:08.0872 (UTC)
-	FILETIME=[426DF880:01CB044C]
-X-SA-Exim-Connect-IP: 85.33.2.12
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+	Sat, 05 Jun 2010 03:23:35 +0200
+Received: from dlep36.itg.ti.com ([157.170.170.91])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o551JFcC006313
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 4 Jun 2010 20:19:15 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o551JFla015773
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 4 Jun 2010 20:19:15 -0500 (CDT)
+Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o551JFQH022509
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 4 Jun 2010 20:19:15 -0500 (CDT)
+Received: from dlee02.ent.ti.com ([157.170.170.17]) by dlee73.ent.ti.com
+	([157.170.170.88]) with mapi; Fri, 4 Jun 2010 20:19:15 -0500
+From: "Ambrose, Martin" <martin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 4 Jun 2010 20:19:13 -0500
+Thread-Topic: Host Environment affect on target builds
+Thread-Index: AQHLBE0c9/h8P3tkgUmMvnUpsJDX6w==
+Message-ID: <A24693684029E5489D1D202277BE89445316FB43@dlee02.ent.ti.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 198.47.26.152
+X-SA-Exim-Mail-From: martin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Openembedded error on building xfce-image
+Subject: Host Environment affect on target builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,110 +52,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 01:17:31 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 05 Jun 2010 01:23:35 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 2010-06-04 at 13:08 +0200, Henk Geraads wrote:
-> Hi,
-> 
-> We are trying to build a OpenEmbedded xfce-image for the
-> compulab CM-T3530 board. Selected distribution is
-> Angstrom-2008.1.
-> We got following error message:
-It seems that xfce-image is old...and that xfce46-image is newer.
-Yesterday I tried xfce46-image with eee701 and everything went fine.
-Altough I didn't test it yet.
-> Henk $ bitbake xfce-image
-> NOTE: Handling BitBake files: - (8393/8393) [100 %]
-> NOTE: Parsing finished. 7595 cached, 468 parsed, 330
-> skipped, 0 masked.
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: Preparing runqueue
-> ERROR: Multiple .bb files are due to be built which each
-> provide xfce4-panel
-> (/home/armcore/oe/openembedded/recipes/xfce-base/xfce4-panel
-> _4.6.3.bb
-> /home/armcore/oe/openembedded/recipes/xfce-base/xfce4-panel_
-> 4.4.2.bb).
->  This usually means one provides something the other doesn't
-> and should.
-> ERROR: Multiple .bb files are due to be built which each
-> provide xfdesktop
-> (/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
-> .6.1.bb
-> /home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
-> 4.2.bb).
->  This usually means one provides something the other doesn't
-> and should.
-> ERROR: Multiple .bb files are due to be built which each
-> provide xfce-utils
-> (/home/armcore/oe/openembedded/recipes/xfce-base/xfce-utils_
-> 4.6.1.bb
-> /home/armcore/oe/openembedded/recipes/xfce-base/xfce-utils_4
-> .4.2.bb).
->  This usually means one provides something the other doesn't
-> and should.
-> ERROR: Multiple .bb files are due to be built which each
-> provide xfwm4
-> (/home/armcore/oe/openembedded/recipes/xfce-base/xfwm4_4.6.1
-> .bb
-> /home/armcore/oe/openembedded/recipes/xfce-base/xfwm4_4.4.2.
-> bb).
->  This usually means one provides something the other doesn't
-> and should.
-I don't know why it wants to build multiple versions,maybe bad config?
-> NOTE: Executing runqueue
-> NOTE: Running task 2975 of 4330 (ID: 339,
-> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-> ion.bb, do_qa_configure)
-> NOTE: Running task 2976 of 4330 (ID: 340,
-> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-> ion.bb, do_compile)
-> NOTE: Running task 2977 of 4330 (ID: 334,
-> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-> ion.bb, do_install)
-> NOTE: Running task 3006 of 4330 (ID: 342,
-> /home/armcore/oe/openembedded/recipes/angstrom/angstrom-vers
-> ion.bb, do_package)
-> NOTE: Running task 3077 of 4330 (ID: 923,
-> /home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
-> 4.2.bb, do_install)
-> ERROR: function do_install failed
-> ERROR: log data follows
-> (/home/armcore/oe/build/distrobuild/angstrom/work/armv7a-ang
-> strom-linux-gnueabi/xfdesktop-4.4.2-r2/temp/log.do_install.1
-> 609)
-> | NOTE: make
-> DESTDIR=/home/armcore/oe/build/distrobuild/angstrom/work/arm
-> v7a-angstrom-linux-gnueabi/xfdesktop-4.4.2-r2/image install
-> | make: *** No rule to make target `install'.  Stop.
-> | FATAL: oe_runmake failed
-> NOTE: Task failed:
-> /home/armcore/oe/build/distrobuild/angstrom/work/armv7a-angs
-> trom-linux-gnueabi/xfdesktop-4.4.2-r2/temp/log.do_install.16
-> 09
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4.
-> 4.2.bb do_install failed
-> ERROR: Task 923
-> (/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
-> .4.2.bb, do_install) failed
-> NOTE: Tasks Summary: Attempted 3076 tasks of which 3072
-> didn't need to be rerun and 1 failed.
-> ERROR:
-> '/home/armcore/oe/openembedded/recipes/xfce-base/xfdesktop_4
-> .4.2.bb' failed
-> 
-> Where should we, look to fix this?
+Hello.
 
-look what happened
-in /home/armcore/oe/build/distrobuild/angstrom/work/armv7a-ang
-strom-linux-gnueabi/xfdesktop-4.4.2-r2/xfdesktop-4.4.2/
+I don't really understand why some recipes depend on the host environment.
 
-Denis.
+For example, on my Fedora 12 machine I have:
+    $ yum info ncurses-devel | grep Release
+    Release    : 3.20090207.fc12
+    $ ncurses5-config --libs
+    -lncurses
 
+And on my Fedora 13 machine this is a bit newer
+    $ yum info ncurses-devel | grep Release
+    Release    : 7.20100130.fc13
+    $ ncurses5-config --libs
+    -lncurses -ltinfo
 
+The newer version lists tinfo library in addition to ncurses. Don't know wh=
+y but OK.
+The problem is the configure (autoconf) portion of recipes (here alsa-utils=
+) uses this executable
+to determine library linkage dependencies. So I get a build error even thou=
+gh this is for the target (here arm).
+    /opt/arm-2009q1/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.3/../../../..=
+/arm-none-linux-gnueabi/bin/ld: cannot find -ltinfo
+
+This seems counter intuitive to me. Is this expected? Or maybe I missed som=
+ething in setting up my OE environ.
+
+Regards,
+Martin=
 
 
