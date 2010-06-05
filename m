@@ -1,43 +1,47 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from fg-out-1718.google.com ([72.14.220.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ashcharles@gmail.com>) id 1OL0ZU-0002uG-1b
+	(envelope-from <matgnt@gmail.com>) id 1OL0c9-00032h-Rn
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 23:06:24 +0200
-Received: by gyg10 with SMTP id 10so1702503gyg.6
+	Sat, 05 Jun 2010 23:09:10 +0200
+Received: by fg-out-1718.google.com with SMTP id d23so812804fga.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Jun 2010 14:02:05 -0700 (PDT)
+	Sat, 05 Jun 2010 14:04:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=M502205DF5mcoQ7E+fHU7iPvmJvspOXHf0laTDWsAiw=;
-	b=aBFYJsIfm3/lj9440UWGD4cVFtBlWjwlkWQNyizshvPfw5plxpJf+YoKXiCMRTslns
-	WR0DTlPpSJm+q+JtVgAIcQ64jhuWNnz9dJrYrUD7IAD9PNupBKJIuMGWWCTbt7pLikhU
-	W00UDmXUGY3h8byBKuAWD4Q5GNDl+Xd93bknQ=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	bh=SgnujjCAgaBhXuJFmrIT6gJ4rjLcTaVAH0UBTdeYuEE=;
+	b=gKU4hG1P6YDU9R6Soj+k8L4mcMyfqiv3BaeoV7/TtWACV1fBlfWC+iOcRCqNPEGHBe
+	SfGL7uem1hKjNt8miDZSiA1i8a4u8jZNl+Pgyyg84fzSVg74fs3pc5/BoBqTasWmaB22
+	F3wG5sj0dHPFbc0/Vfh3383oB3ckHkYvoCYdY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=S1Ay23kreJFbehxVc4/TcszoVvpeFfohK+64Uty1NZNxMtma5RWAkKJ5knZQBvQeJA
-	4IT9DNxxnL6KyFF0ynqGdNtkpCOu8X11GPQI1kdcUb1RfK7xi9LFTAA+gHcXxAae8QQD
-	4YjAS/SF+9388vHbJ9YjdicsgCgv5ifZ2uVGk=
-Received: by 10.90.204.13 with SMTP id b13mr2796772agg.162.1275771725087; Sat, 
-	05 Jun 2010 14:02:05 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.90.81.3 with HTTP; Sat, 5 Jun 2010 14:01:45 -0700 (PDT)
-In-Reply-To: <F7B59210-EE40-4F5D-AE84-3C2040426D89@mac.com>
-References: <F7B59210-EE40-4F5D-AE84-3C2040426D89@mac.com>
-From: Ash Charles <ashcharles@gmail.com>
-Date: Sat, 5 Jun 2010 14:01:45 -0700
-Message-ID: <AANLkTimdoOiHxXo3XU-3tLC2v9o90k8V0omWcjX_8n5w@mail.gmail.com>
+	h=from:to:subject:date:message-id:x-mailer:mime-version:content-type
+	:content-transfer-encoding;
+	b=N94e+inT4yESMkIy6lkwhFK1dAOgwq6Ll1y7yZHm1IrJ4/YJSbjADnCN1YWLG7B26/
+	vFQsAkNQyqPd02+8zjhg1UxdUGV8WjGGkNdgHz14KXuYDaUMh6u0tFezc7D0FgMBRfgA
+	d8tRu7B/kE5qa4bMV6yGagr1TWG9nDtOkRwpA=
+Received: by 10.87.47.17 with SMTP id z17mr19861648fgj.39.1275771893624;
+	Sat, 05 Jun 2010 14:04:53 -0700 (PDT)
+Received: from localhost.localdomain (z0701.wist.uni-linz.ac.at
+	[193.171.42.194])
+	by mx.google.com with ESMTPS id 9sm3782882fks.26.2010.06.05.14.04.53
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 05 Jun 2010 14:04:53 -0700 (PDT)
+From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: ashcharles@gmail.com
+Date: Sat,  5 Jun 2010 23:04:29 +0200
+Message-Id: <1275771871-5163-1-git-send-email-matgnt@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 72.14.220.159
+X-SA-Exim-Mail-From: matgnt@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: autologin recipe for gumstix Overo
+Subject: qt4: Add 4.7.0-beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,18 +55,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 21:06:24 -0000
+X-List-Received-Date: Sat, 05 Jun 2010 21:09:10 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi Elvis,
+Hello.
 
-On Sat, Jun 5, 2010 at 9:11 AM, Elvis Dowson <elvis.dowson@mac.com> wrote:
-> For the autologin.bb recipe that is shown below, the pkg_postinst and the pkg_prerm parts do not run correctly.
+As announced earlier, here are the qt4 patches. The build works well with the latest OE.
 
-Are these steps not being run at all when you install the package?  I
-added in the 'echo' commands somewhat as a debugging tool to see if it
-was being run.
+Regards,
+Matthias
 
--Ash
 
 
