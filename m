@@ -1,37 +1,47 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OKgwC-0007im-Ai
+	(envelope-from <kergoth@gmail.com>) id 1OKgz9-0003ZA-QF
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 02:08:34 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OKgs1-0005FM-MI from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 04 Jun 2010 17:04:13 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 4 Jun 2010 17:04:06 -0700
-Received: from [172.30.80.93] ([172.30.80.93]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 4 Jun 2010 18:04:05 -0600
-Message-ID: <4C09946F.9040401@mentor.com>
-Date: Fri, 04 Jun 2010 17:03:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Sat, 05 Jun 2010 02:11:36 +0200
+Received: by gwb20 with SMTP id 20so293092gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 04 Jun 2010 17:07:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=lEswGfickIozMIC86xmXKWk/kVBJp1v4E8n0qmqUsDQ=;
+	b=lFmvpQIpEmHS4YnFfW3TFiJX4J/Q/VZHb7TluooftHj/5oDCim1HMRjCWaMieesvWV
+	vmmvMKcu4jy39vohBM8EtW3bsQVCI9LH33w3B24xpz2CYGM3shIDVzX/012u+/V36V9o
+	iGH8QTzQwbGghF4uLUhnGuHRWbH/4fNBWcmoA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=uFFbXz7o3kJaamHDumml/hTej+5NRQ+Y/v9JOaHZxzQHE8v1BCbVZRHpfBthFvdUl5
+	x/H0YN0zyFddJ30F1xJMTJSsBcn47nkl7L6e34fZubGiwcX+KofSes/zKseXOZcEJFNf
+	bc+QaJxHT04gsnjjcDbISgaLSfELnUUsg1ogk=
+Received: by 10.229.217.144 with SMTP id hm16mr2964726qcb.113.1275696437970; 
+	Fri, 04 Jun 2010 17:07:17 -0700 (PDT)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.3.133 with HTTP; Fri, 4 Jun 2010 17:06:56 -0700 (PDT)
+In-Reply-To: <4C09946F.9040401@mentor.com>
+References: <4C09946F.9040401@mentor.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 4 Jun 2010 17:06:56 -0700
+X-Google-Sender-Auth: WY9ghUgMtdMCJ2PRj3TsEg5yGyI
+Message-ID: <AANLkTimQs0f5vOz--Xhb-hDMzGbPVrn6K41HUZmqgqzb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 05 Jun 2010 00:04:05.0210 (UTC)
-	FILETIME=[9C9D53A0:01CB0442]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Add locking on tasks that add package_update_index_ipk
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] Add locking on tasks that add package_update_index_ipk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,55 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 00:08:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 05 Jun 2010 00:11:36 -0000
+Content-Type: text/plain; charset=UTF-8
 
-We add a lockfile of do_populate_sdk and do_rootfs (in rootfs_ipk) that 
-is also the lockfile that package_update_index_ipk uses.  With enough 
-threads it is possible that one image (or meta-toolchain) is attempting 
-to use the package index while another has only reached the point of 
-generating the index leading to an empty index being seen later on.
+On Fri, Jun 4, 2010 at 5:03 PM, Tom Rini <tom_rini@mentor.com> wrote:
 
-diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
-index 9fa1d5e..0303c54 100644
---- a/classes/rootfs_ipk.bbclass
-+++ b/classes/rootfs_ipk.bbclass
-@@ -6,6 +6,7 @@
-  #
+> We add a lockfile of do_populate_sdk and do_rootfs (in rootfs_ipk) that is
+> also the lockfile that package_update_index_ipk uses.  With enough threads
+> it is possible that one image (or meta-toolchain) is attempting to use the
+> package index while another has only reached the point of generating the
+> index leading to an empty index being seen later on.
 
-  do_rootfs[depends] += "opkg-native:do_populate_sysroot"
-+do_rootfs[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
 
-  IPKG_TMP_DIR = "${IMAGE_ROOTFS}-tmp"
-  IPKG_ARGS = "-f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} -t 
-${IPKG_TMP_DIR} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", 
-"-nodeps", "", d)}"
-diff --git a/recipes/meta/canadian-sdk.bb b/recipes/meta/canadian-sdk.bb
-index 47529a2..2160441 100644
---- a/recipes/meta/canadian-sdk.bb
-+++ b/recipes/meta/canadian-sdk.bb
-@@ -169,5 +169,6 @@ do_populate_sdk() {
-  }
-
-  do_populate_sdk[nostamp] = "1"
-+do_populate_sdk[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
-  addtask package_update_index_ipk before do_populate_sdk
-  addtask populate_sdk before do_build after do_install
-diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
-index 064fc3b..82918ad 100644
---- a/recipes/meta/meta-toolchain.bb
-+++ b/recipes/meta/meta-toolchain.bb
-@@ -177,5 +177,6 @@ do_populate_sdk() {
-  }
-
-  do_populate_sdk[nostamp] = "1"
-+do_populate_sdk[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
-  addtask package_update_index_ipk before do_populate_sdk
-  addtask populate_sdk before do_build after do_install
-
+Acked-by: Chris Larson <chris_larson@mentor.com>
 -- 
-Tom Rini
-Mentor Graphics Corporation
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
