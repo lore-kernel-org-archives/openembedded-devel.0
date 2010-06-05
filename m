@@ -1,47 +1,37 @@
-Received: from fg-out-1718.google.com ([72.14.220.152])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <matgnt@gmail.com>) id 1OKgvJ-0006z3-Fc
+	(envelope-from <Tom_Rini@mentor.com>) id 1OKgwC-0007im-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 02:07:37 +0200
-Received: by fg-out-1718.google.com with SMTP id 16so238087fgg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 17:03:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=cWf6Lt4UcHUW5KuxRgjTZ8CgZXCXFeQ5+S5RgTzZFfg=;
-	b=EtoT8oqqnly5MI8gXsYeTV1DbBCrbg+bqb0RVFrgzbfVU0nVdhWqF6+zTAXeExFe+5
-	lCBPgAOvOP3oGr3AmkXx4FPV4K526T4Y66dO74ZkL7Ggpk1h5JFkSa6VzFL+bA0ztzgd
-	E+ysZ0JJ+Q6aPZIeH3JJKYDYtRf9y8ZdGIxHQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=pzsYUxTult+0mO58s33lRIyQr+sp7aSewhKzjE/DQmRFaHRg+cNBcZFKiOtsinxqEz
-	oSIiPI/R0GEdnBx+g+o0tdP1t9senDnv0Bfi9F6BmUEepos4WE9z+wrcEF0tEms0XXfO
-	VUyym7YFBMbSugL7OuG6jEb26al8UhA3W4S7E=
-Received: by 10.87.5.30 with SMTP id h30mr18697893fgi.3.1275695857543;
-	Fri, 04 Jun 2010 16:57:37 -0700 (PDT)
-Received: from [192.168.5.27] (z0701.wist.uni-linz.ac.at [193.171.42.194])
-	by mx.google.com with ESMTPS id e20sm2366808fga.16.2010.06.04.16.57.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 04 Jun 2010 16:57:36 -0700 (PDT)
-Message-ID: <4C0992ED.6000102@gmail.com>
-Date: Sat, 05 Jun 2010 01:57:33 +0200
-From: =?ISO-8859-1?Q?Matthias_G=FCnther?= <matgnt@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
+	Sat, 05 Jun 2010 02:08:34 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OKgs1-0005FM-MI from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 04 Jun 2010 17:04:13 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 4 Jun 2010 17:04:06 -0700
+Received: from [172.30.80.93] ([172.30.80.93]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 4 Jun 2010 18:04:05 -0600
+Message-ID: <4C09946F.9040401@mentor.com>
+Date: Fri, 04 Jun 2010 17:03:59 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 72.14.220.152
-X-SA-Exim-Mail-From: matgnt@gmail.com
+X-OriginalArrivalTime: 05 Jun 2010 00:04:05.0210 (UTC)
+	FILETIME=[9C9D53A0:01CB0442]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: qt4 upgrade to 4.7.0-beta1
+Subject: [PATCH] Add locking on tasks that add package_update_index_ipk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,20 +45,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 00:07:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 05 Jun 2010 00:08:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hello.
+We add a lockfile of do_populate_sdk and do_rootfs (in rootfs_ipk) that 
+is also the lockfile that package_update_index_ipk uses.  With enough 
+threads it is possible that one image (or meta-toolchain) is attempting 
+to use the package index while another has only reached the point of 
+generating the index leading to an empty index being seen later on.
 
-I've been working with QML (Qt Quick) for some time now and therefore
-I've created recipes for Qt 4.7.0-tp and beta1 versions. The patches
-just disable the not cross compiling parts (e.g. some demos/examples).
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index 9fa1d5e..0303c54 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -6,6 +6,7 @@
+  #
 
-Should I send the beta1-patch to the ML or is it better to wait for the
-final release?
+  do_rootfs[depends] += "opkg-native:do_populate_sysroot"
++do_rootfs[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
 
-Regards
-Matthias
+  IPKG_TMP_DIR = "${IMAGE_ROOTFS}-tmp"
+  IPKG_ARGS = "-f ${IPKGCONF_TARGET} -o ${IMAGE_ROOTFS} -t 
+${IPKG_TMP_DIR} ${@base_conditional("PACKAGE_INSTALL_NO_DEPS", "1", 
+"-nodeps", "", d)}"
+diff --git a/recipes/meta/canadian-sdk.bb b/recipes/meta/canadian-sdk.bb
+index 47529a2..2160441 100644
+--- a/recipes/meta/canadian-sdk.bb
++++ b/recipes/meta/canadian-sdk.bb
+@@ -169,5 +169,6 @@ do_populate_sdk() {
+  }
+
+  do_populate_sdk[nostamp] = "1"
++do_populate_sdk[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
+  addtask package_update_index_ipk before do_populate_sdk
+  addtask populate_sdk before do_build after do_install
+diff --git a/recipes/meta/meta-toolchain.bb b/recipes/meta/meta-toolchain.bb
+index 064fc3b..82918ad 100644
+--- a/recipes/meta/meta-toolchain.bb
++++ b/recipes/meta/meta-toolchain.bb
+@@ -177,5 +177,6 @@ do_populate_sdk() {
+  }
+
+  do_populate_sdk[nostamp] = "1"
++do_populate_sdk[lockfiles] = "${DEPLOY_DIR_IPK}.lock"
+  addtask package_update_index_ipk before do_populate_sdk
+  addtask populate_sdk before do_build after do_install
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
