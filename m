@@ -1,43 +1,43 @@
-Received: from mail-yw0-f175.google.com ([209.85.211.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aspnair@gmail.com>) id 1OKjjN-0000Bq-3U
+	(envelope-from <raj.khem@gmail.com>) id 1OKk9n-00014F-BX
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 05:07:30 +0200
-Received: by ywh5 with SMTP id 5so1831732ywh.13
+	Sat, 05 Jun 2010 05:34:48 +0200
+Received: by iwn9 with SMTP id 9so1756555iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 20:03:11 -0700 (PDT)
+	Fri, 04 Jun 2010 20:30:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=6ZfG+d9A+tA3vPqpAHQuQ4CArjxbBDtdAocMaHv3AmE=;
-	b=iv5wOtjVDEkMIYDivHE80f2nJCsZJC19GuSYoikFh6O/R+HVnQupiXuC+YWc2I8q3K
-	UJEAtzzFA5m3NRtxywFOBFqUPeZYrcycOq3o8Fjy3YBeRMXo5NpwRH7MRKdaCGfMK2vO
-	C8sCo7ZzZZpBttPKGaj3uYV4YmLlGBx5obUAY=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=FczlrKX2tuPHg5ngXEmvGwAPU8SlW6gG3ygbOuXnGPw=;
+	b=mR5EDOY/TcGezSUMjCArDtwHzyhlrqfNxEKVp9f/nI8nTNgMGa/AUbqTQL3gkjgiue
+	focWeKnMODuHSd+vMXtSvUt0qmogcVI1SclDFuv/SG1mY5uJ/3fqc+uRFjt9HuwX4LU5
+	Y5UbC2FZew5lSGlIwFZTBWcZc+ZwMi6ptZY3g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bhpVbD6gh9KaXrwv7mcKlGLOHHtsZJpGd7ov3/ghxC7LOMyBb0h5n05QbrUpS8BIuX
-	bFrIK6SPcE/0MTW5X8hD4fVof/d/OBKFLMguBRdT76Zgtq2Utc2PHa59E6aXgarbN0I5
-	FnZ2zWp0kWVy7UmWbo2rDebAhslhj1Pp2WOdY=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=f++onKRLt3Jt5qQPITeprnKYCrvK4th0C06NEyt1JmlE+UpPrwXCaynnAEuvPdRpy5
+	0CFFPVY44VZ+ox7fE0/EyAoTGEiMJiApZDJ39d2kLRGWAnT5bJm3uRgJ7LKK1kHENiaS
+	S5sILcxab++8mehOOC43WI7pxVGtja8KX+HrQ=
+Received: by 10.231.213.71 with SMTP id gv7mr1736666ibb.192.1275708631181; 
+	Fri, 04 Jun 2010 20:30:31 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.150.160.12 with SMTP id i12mr9884177ybe.8.1275706991029; Fri, 
-	04 Jun 2010 20:03:11 -0700 (PDT)
-Received: by 10.150.228.21 with HTTP; Fri, 4 Jun 2010 20:03:10 -0700 (PDT)
+Received: by 10.231.15.140 with HTTP; Fri, 4 Jun 2010 20:30:11 -0700 (PDT)
 In-Reply-To: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
 References: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
-Date: Sat, 5 Jun 2010 08:33:10 +0530
-Message-ID: <AANLkTimBKqYl04nQfZ9NIPK0ThPRQn7YTVdGTGEWnk_s@mail.gmail.com>
-From: Anand Sivaram <aspnair@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 4 Jun 2010 20:30:11 -0700
+Message-ID: <AANLkTimq1dViDpqTm-GTFbjaAtkJVeA7Yru3Fkusgbkb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.175
-X-SA-Exim-Mail-From: aspnair@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00, HTML_FONT_FACE_BAD, 
-	HTML_MESSAGE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Questions about openembedded stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,43 +52,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 03:07:30 -0000
+X-List-Received-Date: Sat, 05 Jun 2010 03:34:48 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I asked these questions here because I could not find *any* satisfactory
-answer from google.   But if any of these are already discussed before, I
-would really appreciate if some one could point out those links to me.
-
-
-On Fri, Jun 4, 2010 at 13:39, Anand Sivaram <aspnair@gmail.com> wrote:
-
+On Fri, Jun 4, 2010 at 1:09 AM, Anand Sivaram <aspnair@gmail.com> wrote:
 > As I was going through the stable documentation given at
 > http://wiki.openembedded.net/index.php/Stable
 > I had a couple of questions.
 >
-> * Seems like there should have been a release "stable/2010" some time
-> around
->   March, but I could not find any mention about that release.
+> * Seems like there should have been a release "stable/2010" some time aro=
+und
+> =A0March, but I could not find any mention about that release.
+
+There is no 2010 release yet.
+
 >
-> * OE repository contains very few tags.  Also there is no
->   "year.month" tag as given by the stable branch documentation.
+> * OE repository contains very few tags. =A0Also there is no
+> =A0"year.month" tag as given by the stable branch documentation.
 >
+
+once release is panned out that will be tagged.
+
 > * Is there any testing branch (like in Debian) where relatively "stable"
->   packages are moved and they eventually become stable?
->   Or is it like mainline linux kernel where features are frozen, then
->   do RC releases and finally the stable release?  It looks like
->   origin/org.openembedded.dev is a rolling/floating place where
->   packages/features are constantly getting included.
+> =A0packages are moved and they eventually become stable?
+
+.dev/master is the most active branch but there is no testing branch per sa=
+y.
+
+> =A0Or is it like mainline linux kernel where features are frozen, then
+> =A0do RC releases and finally the stable release? =A0It looks like
+> =A0origin/org.openembedded.dev is a rolling/floating place where
+> =A0packages/features are constantly getting included.
+
+thats right.
+
 >
 > * I would like to know how the stable/2010 branch is created.
+
+Do you want to know how or when ?
+
 >
 > * My main objective is to find a branch/tag/version
->   newer than stable/2009 and more stable than the dev main branch.
+> =A0newer than stable/2009 and more stable than the dev main branch.
 >
+
+you can use .dev of any day.
+
 > Thanks and Regards
 >
 > Anand
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->
->
+
 
