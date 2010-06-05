@@ -1,44 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OKk9n-00014F-BX
+	(envelope-from <martin.jansa@gmail.com>) id 1OKl7d-00070a-8R
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 05:34:48 +0200
-Received: by iwn9 with SMTP id 9so1756555iwn.6
+	Sat, 05 Jun 2010 06:36:38 +0200
+Received: by fxm9 with SMTP id 9so1216722fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 20:30:31 -0700 (PDT)
+	Fri, 04 Jun 2010 21:32:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=FczlrKX2tuPHg5ngXEmvGwAPU8SlW6gG3ygbOuXnGPw=;
-	b=mR5EDOY/TcGezSUMjCArDtwHzyhlrqfNxEKVp9f/nI8nTNgMGa/AUbqTQL3gkjgiue
-	focWeKnMODuHSd+vMXtSvUt0qmogcVI1SclDFuv/SG1mY5uJ/3fqc+uRFjt9HuwX4LU5
-	Y5UbC2FZew5lSGlIwFZTBWcZc+ZwMi6ptZY3g=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=y0Lr6W3BIbARWaMVt4siLMc3UHAZCH+rAAvjdZAgogI=;
+	b=ODzPw+lRXhT6RlpIRQukI2+Ro9N+TXRH2aMTI9hzzBkMfqeovjtptdefYz2VaALFiW
+	xxjs8S6emIF5kNMqlqVUcK0r0j6z7vq4PPZTWaQcBKSOCSs5ErwX5u4rqymDNIZCUixY
+	9vmE4/HscAFLOZzH3aoFG7ToC/v1EC8QknvXA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=f++onKRLt3Jt5qQPITeprnKYCrvK4th0C06NEyt1JmlE+UpPrwXCaynnAEuvPdRpy5
-	0CFFPVY44VZ+ox7fE0/EyAoTGEiMJiApZDJ39d2kLRGWAnT5bJm3uRgJ7LKK1kHENiaS
-	S5sILcxab++8mehOOC43WI7pxVGtja8KX+HrQ=
-Received: by 10.231.213.71 with SMTP id gv7mr1736666ibb.192.1275708631181; 
-	Fri, 04 Jun 2010 20:30:31 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.15.140 with HTTP; Fri, 4 Jun 2010 20:30:11 -0700 (PDT)
-In-Reply-To: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
-References: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 4 Jun 2010 20:30:11 -0700
-Message-ID: <AANLkTimq1dViDpqTm-GTFbjaAtkJVeA7Yru3Fkusgbkb@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=NoASJwn0IKqp5JEd6FM1v+uTMFYmPqA7CbM0l29+WGSkgYeCibt6g54NBvuaE15iAg
+	lghhG5geVwInM0wwIfK3XbwZwlpMMtUE7QXAXhJYdN+nxOeMGmoU64Kr9Z7EW8gvm5zN
+	0HE2f5ZyrGhVDiE5Y7Iu7M385yM7ClLVtd1LE=
+Received: by 10.223.44.86 with SMTP id z22mr12634723fae.13.1275712339879;
+	Fri, 04 Jun 2010 21:32:19 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y12sm8522933faj.17.2010.06.04.21.32.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 04 Jun 2010 21:32:19 -0700 (PDT)
+Date: Sat, 5 Jun 2010 06:32:01 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100605043201.GQ16035@jama>
+References: <E1OKZya-0000Xi-O2@melo.openembedded.org>
+MIME-Version: 1.0
+In-Reply-To: <E1OKZya-0000Xi-O2@melo.openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Questions about openembedded stable branch
+Subject: Re: [oe-commits] Henning Heinold : jikes: change RDEPENDS so that jikes-native don' t depends on target-classpath
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,60 +56,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 03:34:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 05 Jun 2010 04:36:38 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Jun 4, 2010 at 1:09 AM, Anand Sivaram <aspnair@gmail.com> wrote:
-> As I was going through the stable documentation given at
-> http://wiki.openembedded.net/index.php/Stable
-> I had a couple of questions.
->
-> * Seems like there should have been a release "stable/2010" some time aro=
-und
-> =A0March, but I could not find any mention about that release.
+On Fri, Jun 04, 2010 at 04:42:32PM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 793e0d81c9932c9e9b98d9bad8be968eb3d7022c
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=793e0d81c9932c9e9b98d9bad8be968eb3d7022c
+> 
+> Author: Henning Heinold <heinold@inf.fu-berlin.de>
+> Date:   Fri Jun  4 18:35:28 2010 +0200
+> 
+> jikes: change RDEPENDS so that jikes-native don't depends on target-classpath
+> 
+> ---
+> 
+>  recipes/jikes/jikes_1.22.bb |   12 ++++++------
+>  1 files changed, 6 insertions(+), 6 deletions(-)
+> 
+> diff --git a/recipes/jikes/jikes_1.22.bb b/recipes/jikes/jikes_1.22.bb
+> index 8c1a16e..2028d7e 100644
+> --- a/recipes/jikes/jikes_1.22.bb
+> +++ b/recipes/jikes/jikes_1.22.bb
+> @@ -5,16 +5,16 @@ SECTION = "devel"
+>  LICENSE = "IBM"
+>  PR = "r1"
+>  
+> -RDEPENDS_${PN} = "classpath"
+> -PROVIDES_virtclass-native = ""
+> -RDEPENDS_virtclass-native = ""
+> -
+> -BBCLASSEXTEND = "native"
+> -
+>  SRC_URI = "${SOURCEFORGE_MIRROR}/jikes/jikes-${PV}.tar.bz2"
+>  
+>  inherit autotools update-alternatives
+>  
+> +BBCLASSEXTEND = "native"
+> +
+> +RDEPENDS = "classpath"
 
-There is no 2010 release yet.
+Why not RDEPENDS_${PN}?
 
->
-> * OE repository contains very few tags. =A0Also there is no
-> =A0"year.month" tag as given by the stable branch documentation.
->
+Regards,
 
-once release is panned out that will be tagged.
-
-> * Is there any testing branch (like in Debian) where relatively "stable"
-> =A0packages are moved and they eventually become stable?
-
-.dev/master is the most active branch but there is no testing branch per sa=
-y.
-
-> =A0Or is it like mainline linux kernel where features are frozen, then
-> =A0do RC releases and finally the stable release? =A0It looks like
-> =A0origin/org.openembedded.dev is a rolling/floating place where
-> =A0packages/features are constantly getting included.
-
-thats right.
-
->
-> * I would like to know how the stable/2010 branch is created.
-
-Do you want to know how or when ?
-
->
-> * My main objective is to find a branch/tag/version
-> =A0newer than stable/2009 and more stable than the dev main branch.
->
-
-you can use .dev of any day.
-
-> Thanks and Regards
->
-> Anand
+> +PROVIDES_virtclass-native = ""
+> +RDEPENDS_virtclass-native = ""
+> +
+>  EXTRA_OECONF = "--disable-fp-emulation --enable-source15"
+>  
+>  # configure script incorrectly defines these when cross compiling for ARM
+> 
+> 
 > _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> Openembedded-commits mailing list
+> Openembedded-commits@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
+
+-- 
+Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
 
