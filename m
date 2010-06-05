@@ -1,45 +1,40 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aspnair@gmail.com>) id 1OKn8i-0008QB-4x
+	(envelope-from <rpjday@crashcourse.ca>) id 1OKnKJ-0004XY-Ot
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 08:46:08 +0200
-Received: by pxi14 with SMTP id 14so516047pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 04 Jun 2010 23:41:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=jT9Y6ZrP3pRQiLs5Tp2AuWmyXlPAcPge1mgKQgK7vR0=;
-	b=GXgyoxL7nJomIPf+ntb5z6KwnR2E9tbpp6vSVaFk/Y2tvIhimLyZ/Qk3jfJB7hGE0Y
-	Rzt1kjq9r/JGcH5awWHX+rhuiYqEm9Am4ISE64b1kUDlCLsHb09bes04jWgoDX5jiNQg
-	FlbDI3dAYiIV9GlacqEXF6ntsflYA1pV6gK2o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=SGpkCYiUlcpnB5Q2H3yRswDEAVvxSGWJYxex2yfbDdl52A6abgJJo6klbyGAbTAmdK
-	Rc0ikr6233WlZpKHzkIsdtV5U1yG3OsVO1CnfgK2ty/P2Tk5sQmcQ382fTf/DjEkCTCx
-	YjqgQkTuYwP7tRqhf6IoVAGqlr9AHEXFk9Ie0=
+	Sat, 05 Jun 2010 08:58:03 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OKnGA-0008BE-OF for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Jun 2010 02:53:35 -0400
+Date: Sat, 5 Jun 2010 02:53:28 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1006050226160.9902@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
-Received: by 10.142.207.20 with SMTP id e20mr510875wfg.105.1275720093698; Fri, 
-	04 Jun 2010 23:41:33 -0700 (PDT)
-Received: by 10.115.16.18 with HTTP; Fri, 4 Jun 2010 23:41:33 -0700 (PDT)
-In-Reply-To: <AANLkTimq1dViDpqTm-GTFbjaAtkJVeA7Yru3Fkusgbkb@mail.gmail.com>
-References: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
-	<AANLkTimq1dViDpqTm-GTFbjaAtkJVeA7Yru3Fkusgbkb@mail.gmail.com>
-Date: Sat, 5 Jun 2010 12:11:33 +0530
-Message-ID: <AANLkTin8Ey_qQo7QjpXmA_Fxf41_5WGajst3vRDsNY-i@mail.gmail.com>
-From: Anand Sivaram <aspnair@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: aspnair@gmail.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Questions about openembedded stable branch
+Subject: trying to simplify the patch/apply/pnum/striplevel jungle
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,73 +48,129 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 06:46:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-
-On Sat, Jun 5, 2010 at 09:00, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Fri, Jun 4, 2010 at 1:09 AM, Anand Sivaram <aspnair@gmail.com> wrote:
-> > As I was going through the stable documentation given at
-> > http://wiki.openembedded.net/index.php/Stable
-> > I had a couple of questions.
-> >
-> > * Seems like there should have been a release "stable/2010" some time
-> around
-> >  March, but I could not find any mention about that release.
->
-> There is no 2010 release yet.
->
-> >
-> > * OE repository contains very few tags.  Also there is no
-> >  "year.month" tag as given by the stable branch documentation.
-> >
->
-> once release is panned out that will be tagged.
->
-> > * Is there any testing branch (like in Debian) where relatively "stable"
-> >  packages are moved and they eventually become stable?
->
-> .dev/master is the most active branch but there is no testing branch per
-> say.
->
-> >  Or is it like mainline linux kernel where features are frozen, then
-> >  do RC releases and finally the stable release?  It looks like
-> >  origin/org.openembedded.dev is a rolling/floating place where
-> >  packages/features are constantly getting included.
->
-> thats right.
->
-> >
-> > * I would like to know how the stable/2010 branch is created.
->
-> Do you want to know how or when ?
->
-> >
-> > * My main objective is to find a branch/tag/version
-> >  newer than stable/2009 and more stable than the dev main branch.
-> >
->
-> you can use .dev of any day.
->
-> > Thanks and Regards
-> >
-> > Anand
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+X-List-Received-Date: Sat, 05 Jun 2010 06:58:03 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
 
+  just working my way thru the OE manual and source and it's clear
+that there could be some cleanup of superfluous or deprecated patch
+info.  so can someone clarify whether my understanding of the
+following is correct?
 
-Thanks Khem for your inputs.
->> * I would like to know how the stable/2010 branch is created.
-> Do you want to know how or when ?
-I meant, the overall big picture and criteria of creating the stable/2010
-branch.  Is it feature/bug fix/time/stability driven etc.
+pnum/striplevel
+===============
+
+  first, "pnum=" is deprecated and has been replaced by "striplevel="
+and, in any event, given that the default patchlevel is one, it's
+unnecessary for either of those to be there while being set to one.  i
+don't see any cleanup in the source itself, but the manual could be
+updated on that point, as in
+(http://docs.openembedded.org/usermanual/html/src_uri_variable.html):
+
+"pnum
+
+    By default patches are applied with the "-p 1" parameter, which
+strips off the first directory of the pathname in the patches. This
+option is used to explicitly control the value passed to "-p". The
+most typical use is when the patches are relative to the source
+directory already and need to be applied using "-p 0", in which case
+the "pnum=0" option is supplied."
+
+  obviously, the manual could mention that that's deprecated and
+should additionally describe striplevel.
+
+  in fact, given that there's no reference to pnum= in the OE source,
+perhaps support for (and all references to) "pnum" can be dropped
+entirely unless other (non-OE) projects still depend on it.
+
+  in any event, i can submit a patch to update the manual.
+
+patch/apply
+===========
+
+  as i read it, "patch=" has also been deprecated and, once again, the
+manual could stand to be updated (on that same page above):
+
+"patch
+
+    Used as "patch=1" to define this file as a patch file. Patch files
+will be copied to ${S}/patches and then applied to source from within
+the source directory, ${S}."
+
+  there's still some "patch=" content in the OE source, such as:
+
+recipes/udev/udev_100.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
+recipes/udev/udev_100.bb:	    file://flags.patch;patch=1 \
+recipes/udev/udev_100.bb:	    file://mtd-exclude-persistent.patch;patch=1 \
+recipes/udev/udev_092.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
+recipes/udev/udev_092.bb:	    file://flags.patch;patch=1 \
+recipes/udev/udev_092.bb:	    file://udevsynthesize.patch;patch=1 \
+recipes/udev/udev_092.bb:            file://arm_inotify_fix.patch;patch=1 \
+recipes/udev/udev_092.bb:	    file://mtd-exclude-persistent.patch;patch=1 \
+recipes/udev/udev_097.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
+recipes/udev/udev_097.bb:	    file://flags.patch;patch=1 \
+
+  what i need clarified is the possible usage of "apply=" WRT patches.
+as i read classes/patch.bblclass, it seems like:
+
+  * any file whose name ends in either ".diff" or ".patch" is
+    considered a patch and will, by default, be processed that way
+
+  * "apply=no" is only necessary to *prevent* default
+    processing of a ".patch" or ".diff" file
+
+  * "apply=yes" is only necessary to *force* processing of a file
+    that *doesn't* end with one of those suffixes.  in short,
+    something like this is redundant:
+
+    recipes/socketcan/libsocketcan_0.0.7.bb:SRC_URI +=
+      "file://install-can_netlink.h.patch;apply=yes \ ...
+                                          ^^^^^^^^^ redundant
+
+is all that about right?
+
+pname
+=====
+
+  not much reference to that in the source, but there is some:
+
+$ grep -r pname= *
+recipes/linux/ixp4xx-kernel.inc:
+patch_uri.append("${KERNELORG_MIRROR}/pub/linux/kernel/v%s/testing/patch-%s.bz2;apply=yes;pname=%s;name=rcpatch"
+% (major, pname, pname))
+recipes/linux/ixp4xx-kernel.inc:
+patch_uri.append("${KERNELORG_MIRROR}/pub/linux/kernel/v%s/snapshots/patch-%s.bz2;apply=yes;pname=%s;name=gitpatch"
+% (major, pname, pname))
+recipes/linux/ixp4xx-kernel.inc:
+patch_uri.append("${KERNELORG_MIRROR}/pub/linux/kernel/people/akpm/patches/%s/%s/%s/%s.bz2;apply=yes;pname=%s;name=mmpatch"
+% (major, base, pname, pname, pname))
+
+seems pretty self-explanatory -- patch processing for, in these cases,
+a tarball where one needs to define the name of the patch accordingly.
+i'm assuming that, in cases like this where the suffix is not a patch
+suffix, you *must* specify "apply=yes", correct?  in other words, it
+would make no sense to just specify pname= without the accompanying
+apply=, is that right?  there's no mention of that in the OE manual on
+that same page.  should there be?  or is that so specialized and
+unusual that it can be left unexplained?
+
+  i think that's all i'm curious about regarding the source or the
+manual.  i can throw together a few patches to clean up the more
+obvious stuff.
+
+rday
+
+
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
+
 
