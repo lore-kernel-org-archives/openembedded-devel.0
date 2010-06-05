@@ -1,31 +1,43 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OKrZa-0003K0-QB
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 13:29:55 +0200
-Received: from [192.168.1.2] (e180151037.adsl.alicedsl.de [85.180.151.37])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 1A530584622
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKsZm-0002IC-4p for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Jun 2010 14:34:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OKsVe-0002an-69 for openembedded-devel@lists.openembedded.org;
+	Sat, 05 Jun 2010 14:29:54 +0200
+Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 05 Jun 2010 14:29:54 +0200
+Received: from k.kooi by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat,  5 Jun 2010 13:33:38 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sat, 05 Jun 2010 14:29:54 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4C0992ED.6000102@gmail.com>
-References: <4C0992ED.6000102@gmail.com>
-Organization: Vanille-Media
-Date: Sat, 05 Jun 2010 13:25:44 +0200
-Message-ID: <1275737144.1981.0.camel@saphir>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 05 Jun 2010 14:29:44 +0200
+Message-ID: <hudfvo$o1s$1@dough.gmane.org>
+References: <1275717767-28870-1-git-send-email-raj.khem@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <1275717767-28870-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: qt4 upgrade to 4.7.0-beta1
+Subject: Re: [PATCH] angstrom-2008-preferred-versions.inc: Set 1.11 PREFERRED_VERSION for automake-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,25 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 11:29:56 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 05 Jun 2010 12:34:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Am Samstag, den 05.06.2010, 01:57 +0200 schrieb Matthias G=C3=BCnther:
-> Hello.
->=20
-> I've been working with QML (Qt Quick) for some time now and therefore
-> I've created recipes for Qt 4.7.0-tp and beta1 versions. The patches
-> just disable the not cross compiling parts (e.g. some demos/examples).
->=20
-> Should I send the beta1-patch to the ML or is it better to wait for the
-> final release?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Feel free to submit it. QML is an amazing technology and I'd love to do
-something with it on OE-powered devices.
+On 05-06-10 08:02, Khem Raj wrote:
+> This patch would be needed for angstrom after the gettext 0.18 patches
+> are pushed.
+> I have booted a angstrom-2008.1 minimal-image successfully on qemuarm.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
---=20
-:M:
+Acked-by: Koen Kooi <koen@openembedded.org>
+
+> ---
+>  .../include/angstrom-2008-preferred-versions.inc   |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/distro/include/angstrom-2008-preferred-versions.inc b/conf/distro/include/angstrom-2008-preferred-versions.inc
+> index 94beffb..2779504 100644
+> --- a/conf/distro/include/angstrom-2008-preferred-versions.inc
+> +++ b/conf/distro/include/angstrom-2008-preferred-versions.inc
+> @@ -5,7 +5,7 @@ require conf/distro/include/angstrom-codec-engine-${CE_VERSION}-preferred-versio
+>  
+>  PREFERRED_VERSION_autoconf = "2.65"
+>  PREFERRED_VERSION_autoconf-native = "2.65"
+> -PREFERRED_VERSION_automake-native = "1.10.3"
+> +PREFERRED_VERSION_automake-native = "1.11"
+>  PREFERRED_VERSION_busybox 	= "1.13.2"
+>  PREFERRED_VERSION_cairo		= "1.8.10"
+>  PREFERRED_VERSION_dbus 		= "1.2.24"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMCkM4MkyGM64RGpERAjfBAJ9sGVj43V0qHXTPCEb3EctgKrC1JACgoi6G
+eMqlc35iSOS2XbRMcOdFAiM=
+=3L9B
+-----END PGP SIGNATURE-----
 
 
 
