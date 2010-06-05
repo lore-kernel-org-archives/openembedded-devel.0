@@ -1,44 +1,44 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail-yw0-f175.google.com ([209.85.211.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1OKi6n-0005Bk-Sk
+	(envelope-from <aspnair@gmail.com>) id 1OKjjN-0000Bq-3U
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 05 Jun 2010 03:23:35 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o551JFcC006313
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Sat, 05 Jun 2010 05:07:30 +0200
+Received: by ywh5 with SMTP id 5so1831732ywh.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Jun 2010 20:19:15 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o551JFla015773
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Jun 2010 20:19:15 -0500 (CDT)
-Received: from dlee73.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o551JFQH022509
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 4 Jun 2010 20:19:15 -0500 (CDT)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dlee73.ent.ti.com
-	([157.170.170.88]) with mapi; Fri, 4 Jun 2010 20:19:15 -0500
-From: "Ambrose, Martin" <martin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 4 Jun 2010 20:19:13 -0500
-Thread-Topic: Host Environment affect on target builds
-Thread-Index: AQHLBE0c9/h8P3tkgUmMvnUpsJDX6w==
-Message-ID: <A24693684029E5489D1D202277BE89445316FB43@dlee02.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Fri, 04 Jun 2010 20:03:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=6ZfG+d9A+tA3vPqpAHQuQ4CArjxbBDtdAocMaHv3AmE=;
+	b=iv5wOtjVDEkMIYDivHE80f2nJCsZJC19GuSYoikFh6O/R+HVnQupiXuC+YWc2I8q3K
+	UJEAtzzFA5m3NRtxywFOBFqUPeZYrcycOq3o8Fjy3YBeRMXo5NpwRH7MRKdaCGfMK2vO
+	C8sCo7ZzZZpBttPKGaj3uYV4YmLlGBx5obUAY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=bhpVbD6gh9KaXrwv7mcKlGLOHHtsZJpGd7ov3/ghxC7LOMyBb0h5n05QbrUpS8BIuX
+	bFrIK6SPcE/0MTW5X8hD4fVof/d/OBKFLMguBRdT76Zgtq2Utc2PHa59E6aXgarbN0I5
+	FnZ2zWp0kWVy7UmWbo2rDebAhslhj1Pp2WOdY=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: martin@ti.com
+Received: by 10.150.160.12 with SMTP id i12mr9884177ybe.8.1275706991029; Fri, 
+	04 Jun 2010 20:03:11 -0700 (PDT)
+Received: by 10.150.228.21 with HTTP; Fri, 4 Jun 2010 20:03:10 -0700 (PDT)
+In-Reply-To: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
+References: <AANLkTinzFcGTINenNR72-NtuZUijkAY55BVKYL9r0ea8@mail.gmail.com>
+Date: Sat, 5 Jun 2010 08:33:10 +0530
+Message-ID: <AANLkTimBKqYl04nQfZ9NIPK0ThPRQn7YTVdGTGEWnk_s@mail.gmail.com>
+From: Anand Sivaram <aspnair@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.211.175
+X-SA-Exim-Mail-From: aspnair@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00, HTML_FONT_FACE_BAD, 
+	HTML_MESSAGE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Host Environment affect on target builds
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Questions about openembedded stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,40 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 01:23:35 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 05 Jun 2010 03:07:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello.
+I asked these questions here because I could not find *any* satisfactory
+answer from google.   But if any of these are already discussed before, I
+would really appreciate if some one could point out those links to me.
 
-I don't really understand why some recipes depend on the host environment.
 
-For example, on my Fedora 12 machine I have:
-    $ yum info ncurses-devel | grep Release
-    Release    : 3.20090207.fc12
-    $ ncurses5-config --libs
-    -lncurses
+On Fri, Jun 4, 2010 at 13:39, Anand Sivaram <aspnair@gmail.com> wrote:
 
-And on my Fedora 13 machine this is a bit newer
-    $ yum info ncurses-devel | grep Release
-    Release    : 7.20100130.fc13
-    $ ncurses5-config --libs
-    -lncurses -ltinfo
-
-The newer version lists tinfo library in addition to ncurses. Don't know wh=
-y but OK.
-The problem is the configure (autoconf) portion of recipes (here alsa-utils=
-) uses this executable
-to determine library linkage dependencies. So I get a build error even thou=
-gh this is for the target (here arm).
-    /opt/arm-2009q1/bin/../lib/gcc/arm-none-linux-gnueabi/4.3.3/../../../..=
-/arm-none-linux-gnueabi/bin/ld: cannot find -ltinfo
-
-This seems counter intuitive to me. Is this expected? Or maybe I missed som=
-ething in setting up my OE environ.
-
-Regards,
-Martin=
-
+> As I was going through the stable documentation given at
+> http://wiki.openembedded.net/index.php/Stable
+> I had a couple of questions.
+>
+> * Seems like there should have been a release "stable/2010" some time
+> around
+>   March, but I could not find any mention about that release.
+>
+> * OE repository contains very few tags.  Also there is no
+>   "year.month" tag as given by the stable branch documentation.
+>
+> * Is there any testing branch (like in Debian) where relatively "stable"
+>   packages are moved and they eventually become stable?
+>   Or is it like mainline linux kernel where features are frozen, then
+>   do RC releases and finally the stable release?  It looks like
+>   origin/org.openembedded.dev is a rolling/floating place where
+>   packages/features are constantly getting included.
+>
+> * I would like to know how the stable/2010 branch is created.
+>
+> * My main objective is to find a branch/tag/version
+>   newer than stable/2009 and more stable than the dev main branch.
+>
+> Thanks and Regards
+>
+> Anand
+>
+>
+>
 
