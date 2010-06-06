@@ -1,34 +1,47 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OLN1O-0008O9-Al
+	(envelope-from <dbaryshkov@gmail.com>) id 1OLOGn-0003cd-4M
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 23:04:43 +0200
-Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OLMxD-0000YS-Rf
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 22:00:23 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201006051236.07938.pieterg@gmx.com>
-References: <201006022351.38129.pieterg@gmx.com>
-	<201006041044.42032.pieterg@gmx.com>
-	<1275649408.23726.5.camel@mill.internal.reciva.com>
-	<201006051236.07938.pieterg@gmx.com>
-Date: Sun, 06 Jun 2010 22:00:29 +0100
-Message-ID: <1275858029.19175.21.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+	Mon, 07 Jun 2010 00:24:56 +0200
+Received: by gyg10 with SMTP id 10so2016748gyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jun 2010 15:20:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=yyU/Bq5/8n51XJwwh0nLmigyNh6IHd7rcy99xJaAdaY=;
+	b=vXjH4GPlYl6WxH4XW5glta7O9F84C6hDj312R4ECrY63ST73puqH4URjVCd/pb4Atb
+	D6ju4BBCvYkRiguZ2FVAq+j3hre8j/v8SBX5phinL2VuyBuUeB7i1ebzRiRCw9TedGj4
+	k7MWavlFkx/1UDGKbJhUGQRO4tksL3YilLRQg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=Y3bmXeYHApx7V1tH9AoFDMAfSUA7FRxlRpdzXu0B8iTbtwI/VQG4RmI8L7kpkU2BHF
+	m0EDGnJYNKnrn1zobV2KDweYRgCSwfRoGxbYQELBkSVxYqfYDw7xZvHdioZrl6fckax7
+	lI78IZrsiacDX/MbUf0iKzeeyVUH/kinS2UV0=
+MIME-Version: 1.0
+Received: by 10.100.74.4 with SMTP id w4mr15218124ana.117.1275862821076; Sun, 
+	06 Jun 2010 15:20:21 -0700 (PDT)
+Received: by 10.100.5.14 with HTTP; Sun, 6 Jun 2010 15:20:21 -0700 (PDT)
+In-Reply-To: <AANLkTinHDVWr6n5UYt0Il6JMhHhhSZN5c0JIE2D4vbdu@mail.gmail.com>
+References: <20100604232423.GA9174@gmail.com>
+	<AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
+	<AANLkTinHDVWr6n5UYt0Il6JMhHhhSZN5c0JIE2D4vbdu@mail.gmail.com>
+Date: Mon, 7 Jun 2010 02:20:21 +0400
+Message-ID: <AANLkTino-SfdvGfhyzN8WSU837GvBhFMj47_XjCj7mAq@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: dbaryshkov@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: AUTOREV and SRCPV
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: pcmciautils: fix build to use flex from sysroots, not from host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,35 +55,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 21:04:43 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 06 Jun 2010 22:24:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, 2010-06-05 at 12:36 +0200, pieterg wrote:
-> Now I get a nice
-> 1.0+git7348+5276f059461b6e9015e46a01b1cabfc42dfa600f
-> PKGV, which is the same in both stable/unstable situations, assuming 
-> the 'stable' rev is the latest rev.
-> And it is of course the same on all buildservers, and doesn't depend on 
-> what's in the cache.
-> 
-> And best of all, no more need for BB_LOCALCOUNT_OVERRIDE nor 
-> BB_GIT_CLONE_FOR_SRCREV, so no more lengthy bb parse sessions.
+Hello,
 
-Yup, that looks good.
+On Sun, Jun 6, 2010 at 10:37 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sun, Jun 6, 2010 at 4:00 AM, Dmitry Eremin-Solenikov
+> <dbaryshkov@gmail.com> wrote:
+>> Hello,
+>>
+>> On Sat, Jun 5, 2010 at 3:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> Hi
+>>>
+>>> This commit
+>>>
+>>> commit c65ee13298e8c22274b5bcabe06f2116b8b7ebf2
+>>> Author: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>>> AuthorDate: Fri Jun 4 16:26:17 2010 +0400
+>>> Commit: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>>> CommitDate: Fri Jun 4 16:44:18 2010 +0400
+>>>
+>>> =A0 =A0pcmciautils: fix build to use flex from sysroots, not from host
+>>>
+>>> =A0 =A0Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>>>
+>>>
+>>> breaks the build when I have flex-native in ASSUME_PROVIDED.
+>>> It there any specific reason why one should use flex from hosted sysroo=
+t ?
+>>> is the flex package on all distribution broken for some reason ?
+>>
+>> Then we either:
+>> 1) have to put flex in prerequisites, check it in sanity.bbclass (and
+>> drop flex-native)
+>> 2) have to fix pcmciautils to detect path to flex
+>> 3) expand some class to autodetect the flex/bison/etc. programs
+>>
+>> Because currently pcmciautils just failed for me because I was building =
+them on
+>> the box where I had no flex installed, but build (via some other dependa=
+ncy)
+>> in OE sysroot.
+>
+> Well then you only need it in DEPENDS of pcmciautils thats all and not
+> hardcode it
 
-In the longer term I guess it would be nice to make this less
-git-specific.  But, as you observe, that would mean either copying a lot
-of code from bitbake or waiting for a new bitbake release which exposes
-the necessary functionality.  And, in any case, the majority of projects
-use only a single SCM which doesn't change very often, so I guess there
-will not be too much of an issue in practice.
+Fine with me. I'm commiting a patch which will drop the hardcoded path
+and use just
+LEX=3Dflex. That should be fine for both our cases, shan't it?
 
-Thanks for your work, anyway.  I'll go ahead and check this in unless
-somebody has an objection.
+>
+>
+>>
+>> --
+>> With best wishes
+>> Dmitry
+>>
+>
 
-p.
 
 
+--=20
+With best wishes
+Dmitry
 
 
