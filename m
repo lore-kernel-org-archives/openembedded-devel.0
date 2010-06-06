@@ -1,30 +1,48 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OLLK8-0001Yx-5n
+	(envelope-from <kergoth@gmail.com>) id 1OLLRl-00021C-6z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 21:16:02 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OLLFq-0001ep-GX
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 23:11:34 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 6 Jun 2010 23:11:23 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <4C09946F.9040401@mentor.com>
-In-Reply-To: <4C09946F.9040401@mentor.com>
+	Sun, 06 Jun 2010 21:23:50 +0200
+Received: by vws11 with SMTP id 11so1394019vws.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jun 2010 12:19:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=ESynTOo3yoXm31b4E1AQCAMKGNwdl8Uv2m4Mfvw1JWU=;
+	b=nNTDQ9j5YdzT1tBS6tTXFlt9Imd+lKMYV8kz18uz8IobAC2HcgF6vxTUwJFaUboFJg
+	EBoTCf3BMN8gaRfqk8t46qJ/oSiffzUyYUeLxg9u89pNJYpUo1K27QYAOvRZeyvPVakC
+	dYaeif8nF6hiF72enToH7YZ1WmDf3yTYEgjno=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=hXzUQ4KmvGQXSOUmblU4wzpyE6RMdnTxuGc3kppAtI2V0hhaakLn9zpFfJIM2tMRIX
+	mvulcjcx7Fujz2ojQjhGW+WRdFhOYybjaZCMuirW3/REwkzf6ZydPeKz1cQ9TnytV70M
+	Fy4CnxP1f71g3DXh8q0OBXQ0vHFLqssQ/UGHg=
+Received: by 10.229.186.212 with SMTP id ct20mr4069527qcb.39.1275851969215; 
+	Sun, 06 Jun 2010 12:19:29 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <201006062311.28237.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Sender: kergoth@gmail.com
+Received: by 10.229.3.133 with HTTP; Sun, 6 Jun 2010 12:19:09 -0700 (PDT)
+In-Reply-To: <hugq1i$olq$1@dough.gmane.org>
+References: <alpine.DEB.2.00.1006061411390.3532@lynx>
+	<hugq1i$olq$1@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sun, 6 Jun 2010 12:19:09 -0700
+X-Google-Sender-Auth: K9MCBPlrpPSQEUKxH4x8_en0lr0
+Message-ID: <AANLkTimwz1pr4HKVubzUurl_Kqx9MXGbzJKTVQ4WnJjA@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add locking on tasks that add package_update_index_ipk
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] matrix-gui, udev: Remove superfluous "patch=1" 	parameters.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,68 +56,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 19:16:02 -0000
-X-Groupsio-MsgNum: 19942
-Content-Type: multipart/signed; boundary="nextPart7076773.NHoa96TnjU";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 06 Jun 2010 19:23:50 -0000
+Content-Type: text/plain; charset=UTF-8
 
---nextPart7076773.NHoa96TnjU
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On Sun, Jun 6, 2010 at 11:39 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 05 =D0=B8=D1=8E=D0=BD=D1=8F 2010=
- 04:03:59 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Tom Rini =D0=BD=D0=B0=D0=BF=D0=B8=
-=D1=81=D0=B0=D0=BB:
-> We add a lockfile of do_populate_sdk and do_rootfs (in rootfs_ipk) that
-> is also the lockfile that package_update_index_ipk uses.  With enough
-> threads it is possible that one image (or meta-toolchain) is attempting
-> to use the package index while another has only reached the point of
-> generating the index leading to an empty index being seen later on.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 06-06-10 20:13, Robert P. J. Day wrote:
+> >
+> > Any file reference that has a suffix of ".diff" or ".patch" has no
+> > need of a "patch=1" parameter.
+> >
+> > Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+>
+> Acked-by: Koen Kooi <k-kooi@ti.com>
+>
 
-Am I right that effectively it makes rootfs creation sequential? It's bad f=
-or=20
-performance. Probably it's time to fix ipkg-make-index to not touch index=20
-files if no new packages are found as was suggested some time ago:
+Acked-by: Chris Larson <clarson@kergoth.com>
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
-http://patchwork.openembedded.org/patch/744/
-
-But thinking about it a bit more, ipkg-make-index hack won't really fix the=
-=20
-issue in this case, as we can have image A with a set of packages, image B=
-=20
-with a similar set of packages plus additional package P and then A would d=
-o=20
-package_update_index_ipk and enter do_rootfs, then P gets completed,=20
-package_update_index_ipk for B is started and the package index really need=
-s=20
-an update, thus things can break again.
-
-Maybe it's easier to make those indexes per-image for performance.
-
-Well,
-
-Acked-by: Roman I Khimov <khimov@altell.ru>
-
-for now.
-
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart7076773.NHoa96TnjU
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkwL8t8ACgkQXJ70z+XgVcN7cwCfd2YAnIzhAV83EcwLLT00qXpO
-xZMAoJ1BEcXd769Si5X6nvcln2Cp13R6
-=I2xR
------END PGP SIGNATURE-----
-
---nextPart7076773.NHoa96TnjU--
