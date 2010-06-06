@@ -1,42 +1,42 @@
-Received: from asmtpout025.mac.com ([17.148.16.100])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1OL9KK-0004it-6f
+	(envelope-from <rpjday@crashcourse.ca>) id 1OLA7p-0005QP-3A
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 08:28:06 +0200
-MIME-version: 1.0
-Received: from [192.168.1.104] ([87.201.169.38])
-	by asmtp025.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0L3K00J7EXQ8Y330@asmtp025.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	05 Jun 2010 23:23:00 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=6.0.2-1004200000 definitions=main-1006050236
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=1.12.8161:2.4.5,1.2.40,4.0.166
-	definitions=2010-06-06_01:2010-02-06, 2010-06-06,
-	2010-06-05 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-In-reply-to: <AANLkTin1Wa5buxLDTg3w1ZAu609NRR_vCXf3DydPfF8j@mail.gmail.com>
-Date: Sun, 06 Jun 2010 10:22:54 +0400
-Message-id: <96D51530-A1A0-4898-AD8F-4E01EFB496D1@mac.com>
-References: <F7B59210-EE40-4F5D-AE84-3C2040426D89@mac.com>
-	<AANLkTimdoOiHxXo3XU-3tLC2v9o90k8V0omWcjX_8n5w@mail.gmail.com>
-	<CC3AC527-3026-4188-8BF1-F6AEC47A7A6C@mac.com>
-	<AANLkTin1Wa5buxLDTg3w1ZAu609NRR_vCXf3DydPfF8j@mail.gmail.com>
+	Sun, 06 Jun 2010 09:18:30 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OLA3f-0001Xx-AJ for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 03:14:11 -0400
+Date: Sun, 6 Jun 2010 03:14:06 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1078)
-X-SA-Exim-Connect-IP: 17.148.16.100
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+In-Reply-To: <AANLkTik0GDc2e8Rmzi_MiUmnu5RS1Feje3NUb1AIG6Vc@mail.gmail.com>
+Message-ID: <alpine.DEB.2.00.1006060305430.2276@lynx>
+References: <alpine.DEB.2.00.1006050226160.9902@lynx>
+	<AANLkTik0GDc2e8Rmzi_MiUmnu5RS1Feje3NUb1AIG6Vc@mail.gmail.com>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: autologin recipe for gumstix Overo
+Subject: Re: trying to simplify the patch/apply/pnum/striplevel jungle
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +50,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 06:28:07 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Sun, 06 Jun 2010 07:18:30 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hi Ash,
+On Sat, 5 Jun 2010, Chris Larson wrote:
+...
+> pnum works for compatibility reasons, but it will display a warning, with a
+> pointer to the new parameter to use instead.  But yes, that's correct, it
+> was just a rename for clarity.
+...
 
-On Jun 6, 2010, at 9:31 AM, Ash Charles wrote:
+> Yep, that's all correct.  It seemed silly to not optimize for the common
+> case - .diff/.patch & -p 1, so now it does so.  'patch' parameter too, still
+> works for compatibility, and will display a warning.
+...
 
-> Does the image do the autologin the second time you boot it?
+  so while i'm working on the tougher stuff, i can easily submit a
+cleanup patch or three according to the following simplifications
+(some of which might not even occur in the source anywhere, these are
+just general rules):
 
-Yes, it does, no problems there. 
+* any occurrences of pnum=1 or striplevel=1 are superfluous and can be
+  deleted
 
-The post init stuff is supposed to modify the inittab file, but it didn't. 
+* any *other* occurrences of pnum= can be replaced by the equivalent
+  striplevel=
 
-I manually edited the /etc/inittab file after I discovered that the bitbake rootfs process for omap3-console-image with the autologin recipe added, did not modify the inittab file. 
+* any *necessary* occurrences of patch=1 can be replaced by apply=yes
 
-Best regards,
+* any *unnecessary* occurrences of patch=1 or apply=yes can be
+  removed; those would be cases where patching would automatically
+  happen, as in that previous example i gave:
 
-Elvis Dowson
+recipes/udev/udev_100.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
+recipes/udev/udev_100.bb:	    file://flags.patch;patch=1 \
+recipes/udev/udev_100.bb:	    file://mtd-exclude-persistent.patch;patch=1 \
+recipes/udev/udev_092.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
+...
+
+
+  does all that sound reasonable?  not profoundly deep, just a first
+stab at cleanup, and it would eventually be accompanied by updating
+the user manual to emphasize that.
+
+rday
+
+
+
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
