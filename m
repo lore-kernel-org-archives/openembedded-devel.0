@@ -1,46 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLKn8-0007WK-Kv
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 20:41:55 +0200
-Received: by iwn6 with SMTP id 6so630634iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OLKpP-0008FH-O7 for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 20:44:12 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OLKlG-0004NI-Is for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 20:39:54 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jun 2010 20:39:54 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 11:37:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=VJ6jqcQWYNm/F1OIdlCqz9DQaD7COcKj3s5fUwYmYtg=;
-	b=osxYDfkqF/f5EiqK4S1MWlWqjgOu5fDA94z7XYo3Jlo3b7ItOGcbQjaEdmoOc/Ffzr
-	yNsxXLYGGTeUJo9vcZbS3GhqkmfrABziqbFVeAAjvDlHDSQm6Ev5uRLD/zv2Su5pJcaq
-	SWt2shcrHqcw4fINE7oW0zYez3GTtdggcUM98=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=no69tcikltZF/oeL5tlVzei206a66em7kSUmiE+cHgxn+Y/as10MaI6ixKzmYYjiON
-	QAPo+m+ixr1YmSXKVrbVMbmf8X9S9pCuiZksdGyvCB0QQqoSrTG40bCvGTrskQO40LtB
-	b3mEKLc0svoUOKolF3HIXpfLXFtasJXgfvxj8=
-Received: by 10.231.148.145 with SMTP id p17mr4226043ibv.28.1275849452119; 
-	Sun, 06 Jun 2010 11:37:32 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.15.140 with HTTP; Sun, 6 Jun 2010 11:37:12 -0700 (PDT)
-In-Reply-To: <AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
-References: <20100604232423.GA9174@gmail.com>
-	<AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 6 Jun 2010 11:37:12 -0700
-Message-ID: <AANLkTinHDVWr6n5UYt0Il6JMhHhhSZN5c0JIE2D4vbdu@mail.gmail.com>
-To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	Sun, 06 Jun 2010 20:39:54 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 06 Jun 2010 20:39:46 +0200
+Message-ID: <hugq1i$olq$1@dough.gmane.org>
+References: <alpine.DEB.2.00.1006061411390.3532@lynx>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <alpine.DEB.2.00.1006061411390.3532@lynx>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: pcmciautils: fix build to use flex from sysroots, not from host
+Subject: Re: [PATCH] matrix-gui, udev: Remove superfluous "patch=1" parameters.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,55 +51,104 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 18:41:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 06 Jun 2010 18:44:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sun, Jun 6, 2010 at 4:00 AM, Dmitry Eremin-Solenikov
-<dbaryshkov@gmail.com> wrote:
-> Hello,
->
-> On Sat, Jun 5, 2010 at 3:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> Hi
->>
->> This commit
->>
->> commit c65ee13298e8c22274b5bcabe06f2116b8b7ebf2
->> Author: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
->> AuthorDate: Fri Jun 4 16:26:17 2010 +0400
->> Commit: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
->> CommitDate: Fri Jun 4 16:44:18 2010 +0400
->>
->> =A0 =A0pcmciautils: fix build to use flex from sysroots, not from host
->>
->> =A0 =A0Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
->>
->>
->> breaks the build when I have flex-native in ASSUME_PROVIDED.
->> It there any specific reason why one should use flex from hosted sysroot=
- ?
->> is the flex package on all distribution broken for some reason ?
->
-> Then we either:
-> 1) have to put flex in prerequisites, check it in sanity.bbclass (and
-> drop flex-native)
-> 2) have to fix pcmciautils to detect path to flex
-> 3) expand some class to autodetect the flex/bison/etc. programs
->
-> Because currently pcmciautils just failed for me because I was building t=
-hem on
-> the box where I had no flex installed, but build (via some other dependan=
-cy)
-> in OE sysroot.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Well then you only need it in DEPENDS of pcmciautils thats all and not
-hardcode it
+On 06-06-10 20:13, Robert P. J. Day wrote:
+> 
+> Any file reference that has a suffix of ".diff" or ".patch" has no
+> need of a "patch=1" parameter.
+> 
+> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
 
+Acked-by: Koen Kooi <k-kooi@ti.com>
 
->
-> --
-> With best wishes
-> Dmitry
->
+> 
+> ---
+> 
+> diff --git a/recipes/ti/matrix-gui_svn.bb b/recipes/ti/matrix-gui_svn.bb
+> index 4388d28..4bfe7c2 100644
+> --- a/recipes/ti/matrix-gui_svn.bb
+> +++ b/recipes/ti/matrix-gui_svn.bb
+> @@ -9,7 +9,7 @@ PV = "1.0"
+>  PR = "r14+svnr${SRCPV}"
+> 
+>  SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
+> -    file://0001-Disable-cursor-override-for-X11.patch;patch=1 \
+> +    file://0001-Disable-cursor-override-for-X11.patch \
+>  	file://init \
+>      file://matrix-gui.desktop \
+>  "
+> diff --git a/recipes/udev/udev_092.bb b/recipes/udev/udev_092.bb
+> index 3ed05d1..a3c5521 100644
+> --- a/recipes/udev/udev_092.bb
+> +++ b/recipes/udev/udev_092.bb
+> @@ -9,12 +9,12 @@ LD = "${CC}"
+> 
+>  PR = "${INC_PR}.0"
+> 
+> -SRC_URI += "file://noasmlinkage.patch;patch=1 \
+> -	    file://flags.patch;patch=1 \
+> -	    file://udevsynthesize.patch;patch=1 \
+> +SRC_URI += "file://noasmlinkage.patch \
+> +	    file://flags.patch \
+> +	    file://udevsynthesize.patch \
+>  	    file://udevsynthesize.sh \
+> -            file://arm_inotify_fix.patch;patch=1 \
+> -	    file://mtd-exclude-persistent.patch;patch=1 \
+> +            file://arm_inotify_fix.patch \
+> +	    file://mtd-exclude-persistent.patch \
+>  	    file://mount.blacklist \
+>  	   "
+> 
+> diff --git a/recipes/udev/udev_097.bb b/recipes/udev/udev_097.bb
+> index 8757794..84d4b61 100644
+> --- a/recipes/udev/udev_097.bb
+> +++ b/recipes/udev/udev_097.bb
+> @@ -14,8 +14,8 @@ PR = "${INC_PR}.0"
+> 
+>  LD = "${CC}"
+> 
+> -SRC_URI += "file://noasmlinkage.patch;patch=1 \
+> -	    file://flags.patch;patch=1 \
+> +SRC_URI += "file://noasmlinkage.patch \
+> +	    file://flags.patch \
+>  	    file://mount.blacklist \
+>  	   "
+> 
+> diff --git a/recipes/udev/udev_100.bb b/recipes/udev/udev_100.bb
+> index 7261483..a6692cf 100644
+> --- a/recipes/udev/udev_100.bb
+> +++ b/recipes/udev/udev_100.bb
+> @@ -15,9 +15,9 @@ PR = "${INC_PR}.0"
+> 
+>  LD = "${CC}"
+> 
+> -SRC_URI += "file://noasmlinkage.patch;patch=1 \
+> -	    file://flags.patch;patch=1 \
+> -	    file://mtd-exclude-persistent.patch;patch=1 \
+> +SRC_URI += "file://noasmlinkage.patch \
+> +	    file://flags.patch \
+> +	    file://mtd-exclude-persistent.patch \
+>  	    file://mount.blacklist \
+>  	    file://mount.sh \
+>  	   "
+> 
+> 
+> rday
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMC+tyMkyGM64RGpERAlVaAKCC/IHQ8wU9RSKpcJxnH/8Q2CyhOQCfXvWw
+y3sJYxjsGZzcwZdzDIIbAeo=
+=cONN
+-----END PGP SIGNATURE-----
+
 
 
