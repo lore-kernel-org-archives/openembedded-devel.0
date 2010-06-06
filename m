@@ -1,40 +1,46 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OLKQJ-0001lF-4l
+	(envelope-from <raj.khem@gmail.com>) id 1OLKn8-0007WK-Kv
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 20:18:16 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OLKM9-0005Da-4J for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 14:13:57 -0400
-Date: Sun, 6 Jun 2010 14:13:51 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1006061411390.3532@lynx>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Sun, 06 Jun 2010 20:41:55 +0200
+Received: by iwn6 with SMTP id 6so630634iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jun 2010 11:37:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=VJ6jqcQWYNm/F1OIdlCqz9DQaD7COcKj3s5fUwYmYtg=;
+	b=osxYDfkqF/f5EiqK4S1MWlWqjgOu5fDA94z7XYo3Jlo3b7ItOGcbQjaEdmoOc/Ffzr
+	yNsxXLYGGTeUJo9vcZbS3GhqkmfrABziqbFVeAAjvDlHDSQm6Ev5uRLD/zv2Su5pJcaq
+	SWt2shcrHqcw4fINE7oW0zYez3GTtdggcUM98=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=no69tcikltZF/oeL5tlVzei206a66em7kSUmiE+cHgxn+Y/as10MaI6ixKzmYYjiON
+	QAPo+m+ixr1YmSXKVrbVMbmf8X9S9pCuiZksdGyvCB0QQqoSrTG40bCvGTrskQO40LtB
+	b3mEKLc0svoUOKolF3HIXpfLXFtasJXgfvxj8=
+Received: by 10.231.148.145 with SMTP id p17mr4226043ibv.28.1275849452119; 
+	Sun, 06 Jun 2010 11:37:32 -0700 (PDT)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.231.15.140 with HTTP; Sun, 6 Jun 2010 11:37:12 -0700 (PDT)
+In-Reply-To: <AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
+References: <20100604232423.GA9174@gmail.com>
+	<AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 6 Jun 2010 11:37:12 -0700
+Message-ID: <AANLkTinHDVWr6n5UYt0Il6JMhHhhSZN5c0JIE2D4vbdu@mail.gmail.com>
+To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] matrix-gui, udev: Remove superfluous "patch=1" parameters.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: pcmciautils: fix build to use flex from sysroots, not from host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,97 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 18:18:16 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 06 Jun 2010 18:41:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+On Sun, Jun 6, 2010 at 4:00 AM, Dmitry Eremin-Solenikov
+<dbaryshkov@gmail.com> wrote:
+> Hello,
+>
+> On Sat, Jun 5, 2010 at 3:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> Hi
+>>
+>> This commit
+>>
+>> commit c65ee13298e8c22274b5bcabe06f2116b8b7ebf2
+>> Author: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>> AuthorDate: Fri Jun 4 16:26:17 2010 +0400
+>> Commit: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>> CommitDate: Fri Jun 4 16:44:18 2010 +0400
+>>
+>> =A0 =A0pcmciautils: fix build to use flex from sysroots, not from host
+>>
+>> =A0 =A0Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>>
+>>
+>> breaks the build when I have flex-native in ASSUME_PROVIDED.
+>> It there any specific reason why one should use flex from hosted sysroot=
+ ?
+>> is the flex package on all distribution broken for some reason ?
+>
+> Then we either:
+> 1) have to put flex in prerequisites, check it in sanity.bbclass (and
+> drop flex-native)
+> 2) have to fix pcmciautils to detect path to flex
+> 3) expand some class to autodetect the flex/bison/etc. programs
+>
+> Because currently pcmciautils just failed for me because I was building t=
+hem on
+> the box where I had no flex installed, but build (via some other dependan=
+cy)
+> in OE sysroot.
+
+Well then you only need it in DEPENDS of pcmciautils thats all and not
+hardcode it
 
 
-Any file reference that has a suffix of ".diff" or ".patch" has no
-need of a "patch=1" parameter.
-
-Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
-
----
-
-diff --git a/recipes/ti/matrix-gui_svn.bb b/recipes/ti/matrix-gui_svn.bb
-index 4388d28..4bfe7c2 100644
---- a/recipes/ti/matrix-gui_svn.bb
-+++ b/recipes/ti/matrix-gui_svn.bb
-@@ -9,7 +9,7 @@ PV = "1.0"
- PR = "r14+svnr${SRCPV}"
-
- SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
--    file://0001-Disable-cursor-override-for-X11.patch;patch=1 \
-+    file://0001-Disable-cursor-override-for-X11.patch \
- 	file://init \
-     file://matrix-gui.desktop \
- "
-diff --git a/recipes/udev/udev_092.bb b/recipes/udev/udev_092.bb
-index 3ed05d1..a3c5521 100644
---- a/recipes/udev/udev_092.bb
-+++ b/recipes/udev/udev_092.bb
-@@ -9,12 +9,12 @@ LD = "${CC}"
-
- PR = "${INC_PR}.0"
-
--SRC_URI += "file://noasmlinkage.patch;patch=1 \
--	    file://flags.patch;patch=1 \
--	    file://udevsynthesize.patch;patch=1 \
-+SRC_URI += "file://noasmlinkage.patch \
-+	    file://flags.patch \
-+	    file://udevsynthesize.patch \
- 	    file://udevsynthesize.sh \
--            file://arm_inotify_fix.patch;patch=1 \
--	    file://mtd-exclude-persistent.patch;patch=1 \
-+            file://arm_inotify_fix.patch \
-+	    file://mtd-exclude-persistent.patch \
- 	    file://mount.blacklist \
- 	   "
-
-diff --git a/recipes/udev/udev_097.bb b/recipes/udev/udev_097.bb
-index 8757794..84d4b61 100644
---- a/recipes/udev/udev_097.bb
-+++ b/recipes/udev/udev_097.bb
-@@ -14,8 +14,8 @@ PR = "${INC_PR}.0"
-
- LD = "${CC}"
-
--SRC_URI += "file://noasmlinkage.patch;patch=1 \
--	    file://flags.patch;patch=1 \
-+SRC_URI += "file://noasmlinkage.patch \
-+	    file://flags.patch \
- 	    file://mount.blacklist \
- 	   "
-
-diff --git a/recipes/udev/udev_100.bb b/recipes/udev/udev_100.bb
-index 7261483..a6692cf 100644
---- a/recipes/udev/udev_100.bb
-+++ b/recipes/udev/udev_100.bb
-@@ -15,9 +15,9 @@ PR = "${INC_PR}.0"
-
- LD = "${CC}"
-
--SRC_URI += "file://noasmlinkage.patch;patch=1 \
--	    file://flags.patch;patch=1 \
--	    file://mtd-exclude-persistent.patch;patch=1 \
-+SRC_URI += "file://noasmlinkage.patch \
-+	    file://flags.patch \
-+	    file://mtd-exclude-persistent.patch \
- 	    file://mount.blacklist \
- 	    file://mount.sh \
- 	   "
-
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+>
+> --
+> With best wishes
+> Dmitry
+>
 
 
