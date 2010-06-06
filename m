@@ -1,42 +1,45 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OLA7p-0005QP-3A
+	(envelope-from <dbaryshkov@gmail.com>) id 1OLDeP-00051L-9Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 09:18:30 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OLA3f-0001Xx-AJ for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 03:14:11 -0400
-Date: Sun, 6 Jun 2010 03:14:06 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTik0GDc2e8Rmzi_MiUmnu5RS1Feje3NUb1AIG6Vc@mail.gmail.com>
-Message-ID: <alpine.DEB.2.00.1006060305430.2276@lynx>
-References: <alpine.DEB.2.00.1006050226160.9902@lynx>
-	<AANLkTik0GDc2e8Rmzi_MiUmnu5RS1Feje3NUb1AIG6Vc@mail.gmail.com>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Sun, 06 Jun 2010 13:04:22 +0200
+Received: by gwb20 with SMTP id 20so750505gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jun 2010 04:00:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=0JrdDCv660STODTVjxZTxJEVcWtJWXguhY/1EspI714=;
+	b=rvmLsybeVQFT7TdcKAQEYfbarlFLo97BZT0WwuaJCj4DzEYuIBtxZEdxTZCEgMyv/J
+	CGWyM2GZFajwgH4YfZmCQc8PQ7pZ/8n61HN9GbJhSKUK8rV/A+p33eTBdcj5sE9Lj7T2
+	mccJeGWjQs9QLL3fnDb6P6maFnGMGTLL/1W9U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=Z8ml0jUAhrHLR3HhExZ5Xay5xz8xuJ6UTVmEJBgo3RFCXsjdFPWvFHYu0V9hwV7utr
+	xMC2ymWurnvsgM5a69a3bmGZUOm1NbRtiNZTKGnxS1jGnr1AhnQDwcfvSzksFYfNm8SQ
+	gQ3KPRv0W500lhO3A3wohHVTIea5Ctkp6S2ho=
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.100.246.28 with SMTP id t28mr14437418anh.122.1275822001895; 
+	Sun, 06 Jun 2010 04:00:01 -0700 (PDT)
+Received: by 10.100.5.14 with HTTP; Sun, 6 Jun 2010 04:00:01 -0700 (PDT)
+In-Reply-To: <20100604232423.GA9174@gmail.com>
+References: <20100604232423.GA9174@gmail.com>
+Date: Sun, 6 Jun 2010 15:00:01 +0400
+Message-ID: <AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
+From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: dbaryshkov@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: trying to simplify the patch/apply/pnum/striplevel jungle
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: pcmciautils: fix build to use flex from sysroots, not from host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,63 +53,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 07:18:30 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Sun, 06 Jun 2010 11:04:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, 5 Jun 2010, Chris Larson wrote:
-...
-> pnum works for compatibility reasons, but it will display a warning, with a
-> pointer to the new parameter to use instead.  But yes, that's correct, it
-> was just a rename for clarity.
-...
+Hello,
 
-> Yep, that's all correct.  It seemed silly to not optimize for the common
-> case - .diff/.patch & -p 1, so now it does so.  'patch' parameter too, still
-> works for compatibility, and will display a warning.
-...
+On Sat, Jun 5, 2010 at 3:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> Hi
+>
+> This commit
+>
+> commit c65ee13298e8c22274b5bcabe06f2116b8b7ebf2
+> Author: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> AuthorDate: Fri Jun 4 16:26:17 2010 +0400
+> Commit: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> CommitDate: Fri Jun 4 16:44:18 2010 +0400
+>
+> =A0 =A0pcmciautils: fix build to use flex from sysroots, not from host
+>
+> =A0 =A0Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>
+>
+> breaks the build when I have flex-native in ASSUME_PROVIDED.
+> It there any specific reason why one should use flex from hosted sysroot =
+?
+> is the flex package on all distribution broken for some reason ?
 
-  so while i'm working on the tougher stuff, i can easily submit a
-cleanup patch or three according to the following simplifications
-(some of which might not even occur in the source anywhere, these are
-just general rules):
+Then we either:
+1) have to put flex in prerequisites, check it in sanity.bbclass (and
+drop flex-native)
+2) have to fix pcmciautils to detect path to flex
+3) expand some class to autodetect the flex/bison/etc. programs
 
-* any occurrences of pnum=1 or striplevel=1 are superfluous and can be
-  deleted
+Because currently pcmciautils just failed for me because I was building the=
+m on
+the box where I had no flex installed, but build (via some other dependancy=
+)
+in OE sysroot.
 
-* any *other* occurrences of pnum= can be replaced by the equivalent
-  striplevel=
-
-* any *necessary* occurrences of patch=1 can be replaced by apply=yes
-
-* any *unnecessary* occurrences of patch=1 or apply=yes can be
-  removed; those would be cases where patching would automatically
-  happen, as in that previous example i gave:
-
-recipes/udev/udev_100.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-recipes/udev/udev_100.bb:	    file://flags.patch;patch=1 \
-recipes/udev/udev_100.bb:	    file://mtd-exclude-persistent.patch;patch=1 \
-recipes/udev/udev_092.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-...
-
-
-  does all that sound reasonable?  not profoundly deep, just a first
-stab at cleanup, and it would eventually be accompanied by updating
-the user manual to emphasize that.
-
-rday
-
-
-
-
--- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+--=20
+With best wishes
+Dmitry
 
 
