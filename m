@@ -1,47 +1,40 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from asmtpout026.mac.com ([17.148.16.101])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OL1TR-0006oi-CW
+	(envelope-from <elvis.dowson@mac.com>) id 1OL6mp-0000xY-L4
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 00:04:16 +0200
-Received: by vws11 with SMTP id 11so452109vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 05 Jun 2010 14:59:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=dC9rgIffK5RTz5LQXm1M/EUADK7JdyUk6y0a7X5MuH0=;
-	b=f4xZf/w0khO/XkHYNSBRwMlyAYzfiuL+HZCkKo1KHjExX2jzpxY4yDjd0oWr7c/SGT
-	RYNhOVSN8jICJ5D10ZRppcuZAddMn4dh9KBYgWu1VYL+jLSgyXqK9tLHCFoA/NT9Mtst
-	OHGPUnMDmVSiFjfLB5mDgjTYCn4p1SJt3Iv40=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=UxUPaDHuVCZw+EQ3VEk2xC8l2dierlJ5NeIbZehFdrPbHAVsGsUxIvj3/NZPMyU0Ti
-	YEyYBNRknN2dlLQ9Ym6LakJun5B8vFp8gHn4PXH6B0b5ysDJbA9iT78pWi/0oiihB1sf
-	UjOrYHNG3CigCJMxZOMGdLsoRGaiaxNvm2oWY=
-Received: by 10.224.26.83 with SMTP id d19mr7142339qac.321.1275775194134; Sat, 
-	05 Jun 2010 14:59:54 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.3.133 with HTTP; Sat, 5 Jun 2010 14:59:33 -0700 (PDT)
-In-Reply-To: <alpine.DEB.2.00.1006050226160.9902@lynx>
-References: <alpine.DEB.2.00.1006050226160.9902@lynx>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sat, 5 Jun 2010 14:59:33 -0700
-X-Google-Sender-Auth: Qiau7zpZ0HSG3oopTU7XyqAGM54
-Message-ID: <AANLkTik0GDc2e8Rmzi_MiUmnu5RS1Feje3NUb1AIG6Vc@mail.gmail.com>
+	Sun, 06 Jun 2010 05:44:36 +0200
+MIME-version: 1.0
+Received: from [192.168.1.104] ([87.201.169.38])
+	by asmtp026.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
+	(built Dec
+	16 2008; 32bit)) with ESMTPSA id <0L3K00CM5NDN2J70@asmtp026.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	05 Jun 2010 19:39:27 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=6.0.2-1004200000 definitions=main-1006050204
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=1.12.8161:2.4.5,1.2.40,4.0.166
+	definitions=2010-06-05_02:2010-02-06, 2010-06-05,
+	2010-06-05 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <AANLkTimdoOiHxXo3XU-3tLC2v9o90k8V0omWcjX_8n5w@mail.gmail.com>
+Date: Sun, 06 Jun 2010 06:39:21 +0400
+Message-id: <CC3AC527-3026-4188-8BF1-F6AEC47A7A6C@mac.com>
+References: <F7B59210-EE40-4F5D-AE84-3C2040426D89@mac.com>
+	<AANLkTimdoOiHxXo3XU-3tLC2v9o90k8V0omWcjX_8n5w@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 17.148.16.101
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: trying to simplify the patch/apply/pnum/striplevel jungle
+Subject: Re: autologin recipe for gumstix Overo
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,112 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 05 Jun 2010 22:04:16 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 06 Jun 2010 03:44:36 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-On Fri, Jun 4, 2010 at 11:53 PM, Robert P. J. Day <rpjday@crashcourse.ca>wrote:
+Hi Ash,
+                I added autologin to the list of tool, in the omap3-console-image.bb recipe file. So I assumed that when you build the rootfs image, the script would somehow modify the /etc/inittab file. At the moment, I have to manually copy the inittab and autologin.profile files to the microSD card image.
 
->
->  just working my way thru the OE manual and source and it's clear
-> that there could be some cleanup of superfluous or deprecated patch
-> info.  so can someone clarify whether my understanding of the
-> following is correct?
->
-> pnum/striplevel
-> ===============
->
->  first, "pnum=" is deprecated and has been replaced by "striplevel="
-> and, in any event, given that the default patchlevel is one, it's
-> unnecessary for either of those to be there while being set to one.  i
-> don't see any cleanup in the source itself, but the manual could be
-> updated on that point, as in
-> (http://docs.openembedded.org/usermanual/html/src_uri_variable.html):
->
-> "pnum
->
->    By default patches are applied with the "-p 1" parameter, which
-> strips off the first directory of the pathname in the patches. This
-> option is used to explicitly control the value passed to "-p". The
-> most typical use is when the patches are relative to the source
-> directory already and need to be applied using "-p 0", in which case
-> the "pnum=0" option is supplied."
->
->  obviously, the manual could mention that that's deprecated and
-> should additionally describe striplevel.
->
->  in fact, given that there's no reference to pnum= in the OE source,
-> perhaps support for (and all references to) "pnum" can be dropped
-> entirely unless other (non-OE) projects still depend on it.
->
->  in any event, i can submit a patch to update the manual.
->
+It would be nice if the autologin recipe could insert it automatically, as part of the omap3-console-image rootfs build process. 
 
-pnum works for compatibility reasons, but it will display a warning, with a
-pointer to the new parameter to use instead.  But yes, that's correct, it
-was just a rename for clarity.
+Best regards,
 
-patch/apply
-> ===========
->
->  as i read it, "patch=" has also been deprecated and, once again, the
-> manual could stand to be updated (on that same page above):
->
-> "patch
->
->    Used as "patch=1" to define this file as a patch file. Patch files
-> will be copied to ${S}/patches and then applied to source from within
-> the source directory, ${S}."
->
->  there's still some "patch=" content in the OE source, such as:
->
-> recipes/udev/udev_100.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-> recipes/udev/udev_100.bb:           file://flags.patch;patch=1 \
-> recipes/udev/udev_100.bb:
-> file://mtd-exclude-persistent.patch;patch=1 \
-> recipes/udev/udev_092.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-> recipes/udev/udev_092.bb:           file://flags.patch;patch=1 \
-> recipes/udev/udev_092.bb:           file://udevsynthesize.patch;patch=1 \
-> recipes/udev/udev_092.bb:            file://arm_inotify_fix.patch;patch=1
-> \
-> recipes/udev/udev_092.bb:
-> file://mtd-exclude-persistent.patch;patch=1 \
-> recipes/udev/udev_097.bb:SRC_URI += "file://noasmlinkage.patch;patch=1 \
-> recipes/udev/udev_097.bb:           file://flags.patch;patch=1 \
->
->  what i need clarified is the possible usage of "apply=" WRT patches.
-> as i read classes/patch.bblclass, it seems like:
->
->  * any file whose name ends in either ".diff" or ".patch" is
->    considered a patch and will, by default, be processed that way
->
->  * "apply=no" is only necessary to *prevent* default
->    processing of a ".patch" or ".diff" file
->
->  * "apply=yes" is only necessary to *force* processing of a file
->    that *doesn't* end with one of those suffixes.  in short,
->    something like this is redundant:
->
->    recipes/socketcan/libsocketcan_0.0.7.bb:SRC_URI +=
->      "file://install-can_netlink.h.patch;apply=yes \ ...
->                                          ^^^^^^^^^ redundant
->
-> is all that about right?
->
+Elvis
 
-Yep, that's all correct.  It seemed silly to not optimize for the common
-case - .diff/.patch & -p 1, so now it does so.  'patch' parameter too, still
-works for compatibility, and will display a warning.
+On Jun 6, 2010, at 1:01 AM, Ash Charles wrote:
 
-pname
-> =====
->
+> Hi Elvis,
+> 
+> On Sat, Jun 5, 2010 at 9:11 AM, Elvis Dowson <elvis.dowson@mac.com> wrote:
+>> For the autologin.bb recipe that is shown below, the pkg_postinst and the pkg_prerm parts do not run correctly.
+> 
+> Are these steps not being run at all when you install the package?  I
+> added in the 'echo' commands somewhat as a debugging tool to see if it
+> was being run.
+> 
+> -Ash
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-I have no idea on this one, I'm afraid, other than what I've seen in the
-source.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
 
