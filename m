@@ -1,40 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OLK0i-0005uI-Vh for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 19:51:50 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OLJwY-0002bx-2g for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 19:47:30 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 19:47:30 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 19:47:30 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <rpjday@crashcourse.ca>) id 1OLKMR-0001dO-0J
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 20:14:31 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OLKIG-0004y8-7n for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 14:09:56 -0400
+Date: Sun, 6 Jun 2010 14:09:51 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 06 Jun 2010 19:47:18 +0200
-Message-ID: <hugmv6$ej0$1@dough.gmane.org>
+In-Reply-To: <hugmv6$ej0$1@dough.gmane.org>
+Message-ID: <alpine.DEB.2.00.1006061409340.3437@lynx>
 References: <alpine.DEB.2.00.1006061312550.2992@lynx>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <alpine.DEB.2.00.1006061312550.2992@lynx>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	<hugmv6$ej0$1@dough.gmane.org>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] Remove superfluous "patch=1" parameters from some recipes.
@@ -51,110 +50,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 17:51:50 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 06 Jun 2010 18:14:31 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Sun, 6 Jun 2010, Koen Kooi wrote:
 
-On 06-06-10 19:13, Robert P. J. Day wrote:
-> 
-> If a filename has either a ".diff" or ".patch" suffix, then the
-> "patch=1" parameter is unnecessary.
-> 
-> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 06-06-10 19:13, Robert P. J. Day wrote:
+> >
+> > If a filename has either a ".diff" or ".patch" suffix, then the
+> > "patch=1" parameter is unnecessary.
+> >
+> > Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+>
+> For the TI part:
+>
+> Acked-by: Koen Kooi <k-kooi@ti.com>
+>
+> The rest looks fine as well, but please change the commit message to be
+> more inline with OE guidelines, e.g. 'matrix-gui, udev: Remove
+> superfluous "patch=1" parameters'
 
-For the TI part:
+  ok, will resubmit shortly.
 
-Acked-by: Koen Kooi <k-kooi@ti.com>
+rday
 
-The rest looks fine as well, but please change the commit message to be
-more inline with OE guidelines, e.g. 'matrix-gui, udev: Remove
-superfluous "patch=1" parameters'
+-- 
 
-> 
-> ---
-> 
-> diff --git a/recipes/ti/matrix-gui_svn.bb b/recipes/ti/matrix-gui_svn.bb
-> index 4388d28..4bfe7c2 100644
-> --- a/recipes/ti/matrix-gui_svn.bb
-> +++ b/recipes/ti/matrix-gui_svn.bb
-> @@ -9,7 +9,7 @@ PV = "1.0"
->  PR = "r14+svnr${SRCPV}"
-> 
->  SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
-> -    file://0001-Disable-cursor-override-for-X11.patch;patch=1 \
-> +    file://0001-Disable-cursor-override-for-X11.patch \
->  	file://init \
->      file://matrix-gui.desktop \
->  "
-> diff --git a/recipes/udev/udev_092.bb b/recipes/udev/udev_092.bb
-> index 3ed05d1..a3c5521 100644
-> --- a/recipes/udev/udev_092.bb
-> +++ b/recipes/udev/udev_092.bb
-> @@ -9,12 +9,12 @@ LD = "${CC}"
-> 
->  PR = "${INC_PR}.0"
-> 
-> -SRC_URI += "file://noasmlinkage.patch;patch=1 \
-> -	    file://flags.patch;patch=1 \
-> -	    file://udevsynthesize.patch;patch=1 \
-> +SRC_URI += "file://noasmlinkage.patch \
-> +	    file://flags.patch \
-> +	    file://udevsynthesize.patch \
->  	    file://udevsynthesize.sh \
-> -            file://arm_inotify_fix.patch;patch=1 \
-> -	    file://mtd-exclude-persistent.patch;patch=1 \
-> +            file://arm_inotify_fix.patch \
-> +	    file://mtd-exclude-persistent.patch \
->  	    file://mount.blacklist \
->  	   "
-> 
-> diff --git a/recipes/udev/udev_097.bb b/recipes/udev/udev_097.bb
-> index 8757794..84d4b61 100644
-> --- a/recipes/udev/udev_097.bb
-> +++ b/recipes/udev/udev_097.bb
-> @@ -14,8 +14,8 @@ PR = "${INC_PR}.0"
-> 
->  LD = "${CC}"
-> 
-> -SRC_URI += "file://noasmlinkage.patch;patch=1 \
-> -	    file://flags.patch;patch=1 \
-> +SRC_URI += "file://noasmlinkage.patch \
-> +	    file://flags.patch \
->  	    file://mount.blacklist \
->  	   "
-> 
-> diff --git a/recipes/udev/udev_100.bb b/recipes/udev/udev_100.bb
-> index 7261483..a6692cf 100644
-> --- a/recipes/udev/udev_100.bb
-> +++ b/recipes/udev/udev_100.bb
-> @@ -15,9 +15,9 @@ PR = "${INC_PR}.0"
-> 
->  LD = "${CC}"
-> 
-> -SRC_URI += "file://noasmlinkage.patch;patch=1 \
-> -	    file://flags.patch;patch=1 \
-> -	    file://mtd-exclude-persistent.patch;patch=1 \
-> +SRC_URI += "file://noasmlinkage.patch \
-> +	    file://flags.patch \
-> +	    file://mtd-exclude-persistent.patch \
->  	    file://mount.blacklist \
->  	    file://mount.sh \
->  	   "
-> 
-> 
-> rday
-> 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+            Linux Consulting, Training and Kernel Pedantry.
 
-iD8DBQFMC98mMkyGM64RGpERAjuHAJ9/HbYXwRkzRrhDqfV6CErsokIw2wCgtqNs
-MPgsJxz4k/WgRA8+Lwz1mvc=
-=OiWn
------END PGP SIGNATURE-----
-
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
