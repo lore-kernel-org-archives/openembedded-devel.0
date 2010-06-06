@@ -1,22 +1,20 @@
 Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OLKMR-0001dO-0J
+	(envelope-from <rpjday@crashcourse.ca>) id 1OLKQJ-0001lF-4l
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 20:14:31 +0200
+	Sun, 06 Jun 2010 20:18:16 +0200
 Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
 	([99.235.245.115] helo=crashcourse.ca)
 	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
 	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OLKIG-0004y8-7n for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 14:09:56 -0400
-Date: Sun, 6 Jun 2010 14:09:51 -0400 (EDT)
+	id 1OLKM9-0005Da-4J for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 14:13:57 -0400
+Date: Sun, 6 Jun 2010 14:13:51 -0400 (EDT)
 From: "Robert P. J. Day" <rpjday@crashcourse.ca>
 X-X-Sender: rpjday@lynx
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <hugmv6$ej0$1@dough.gmane.org>
-Message-ID: <alpine.DEB.2.00.1006061409340.3437@lynx>
-References: <alpine.DEB.2.00.1006061312550.2992@lynx>
-	<hugmv6$ej0$1@dough.gmane.org>
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1006061411390.3532@lynx>
 User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
 X-AntiAbuse: This header was added to track abuse,
@@ -32,11 +30,11 @@ X-SA-Exim-Connect-IP: 64.235.106.9
 X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Remove superfluous "patch=1" parameters from some recipes.
+Subject: [PATCH] matrix-gui, udev: Remove superfluous "patch=1" parameters.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,30 +48,85 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 18:14:31 -0000
+X-List-Received-Date: Sun, 06 Jun 2010 18:18:16 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On Sun, 6 Jun 2010, Koen Kooi wrote:
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 06-06-10 19:13, Robert P. J. Day wrote:
-> >
-> > If a filename has either a ".diff" or ".patch" suffix, then the
-> > "patch=1" parameter is unnecessary.
-> >
-> > Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
->
-> For the TI part:
->
-> Acked-by: Koen Kooi <k-kooi@ti.com>
->
-> The rest looks fine as well, but please change the commit message to be
-> more inline with OE guidelines, e.g. 'matrix-gui, udev: Remove
-> superfluous "patch=1" parameters'
+Any file reference that has a suffix of ".diff" or ".patch" has no
+need of a "patch=1" parameter.
 
-  ok, will resubmit shortly.
+Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+
+---
+
+diff --git a/recipes/ti/matrix-gui_svn.bb b/recipes/ti/matrix-gui_svn.bb
+index 4388d28..4bfe7c2 100644
+--- a/recipes/ti/matrix-gui_svn.bb
++++ b/recipes/ti/matrix-gui_svn.bb
+@@ -9,7 +9,7 @@ PV = "1.0"
+ PR = "r14+svnr${SRCPV}"
+
+ SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
+-    file://0001-Disable-cursor-override-for-X11.patch;patch=1 \
++    file://0001-Disable-cursor-override-for-X11.patch \
+ 	file://init \
+     file://matrix-gui.desktop \
+ "
+diff --git a/recipes/udev/udev_092.bb b/recipes/udev/udev_092.bb
+index 3ed05d1..a3c5521 100644
+--- a/recipes/udev/udev_092.bb
++++ b/recipes/udev/udev_092.bb
+@@ -9,12 +9,12 @@ LD = "${CC}"
+
+ PR = "${INC_PR}.0"
+
+-SRC_URI += "file://noasmlinkage.patch;patch=1 \
+-	    file://flags.patch;patch=1 \
+-	    file://udevsynthesize.patch;patch=1 \
++SRC_URI += "file://noasmlinkage.patch \
++	    file://flags.patch \
++	    file://udevsynthesize.patch \
+ 	    file://udevsynthesize.sh \
+-            file://arm_inotify_fix.patch;patch=1 \
+-	    file://mtd-exclude-persistent.patch;patch=1 \
++            file://arm_inotify_fix.patch \
++	    file://mtd-exclude-persistent.patch \
+ 	    file://mount.blacklist \
+ 	   "
+
+diff --git a/recipes/udev/udev_097.bb b/recipes/udev/udev_097.bb
+index 8757794..84d4b61 100644
+--- a/recipes/udev/udev_097.bb
++++ b/recipes/udev/udev_097.bb
+@@ -14,8 +14,8 @@ PR = "${INC_PR}.0"
+
+ LD = "${CC}"
+
+-SRC_URI += "file://noasmlinkage.patch;patch=1 \
+-	    file://flags.patch;patch=1 \
++SRC_URI += "file://noasmlinkage.patch \
++	    file://flags.patch \
+ 	    file://mount.blacklist \
+ 	   "
+
+diff --git a/recipes/udev/udev_100.bb b/recipes/udev/udev_100.bb
+index 7261483..a6692cf 100644
+--- a/recipes/udev/udev_100.bb
++++ b/recipes/udev/udev_100.bb
+@@ -15,9 +15,9 @@ PR = "${INC_PR}.0"
+
+ LD = "${CC}"
+
+-SRC_URI += "file://noasmlinkage.patch;patch=1 \
+-	    file://flags.patch;patch=1 \
+-	    file://mtd-exclude-persistent.patch;patch=1 \
++SRC_URI += "file://noasmlinkage.patch \
++	    file://flags.patch \
++	    file://mtd-exclude-persistent.patch \
+ 	    file://mount.blacklist \
+ 	    file://mount.sh \
+ 	   "
+
 
 rday
 
