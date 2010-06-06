@@ -1,45 +1,44 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dbaryshkov@gmail.com>) id 1OLDeP-00051L-9Y
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 06 Jun 2010 13:04:22 +0200
-Received: by gwb20 with SMTP id 20so750505gwb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OLEjN-0004vh-0H for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 14:13:33 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OLEfA-0003du-RD for openembedded-devel@lists.openembedded.org;
+	Sun, 06 Jun 2010 14:09:12 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 06 Jun 2010 14:09:12 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 04:00:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=0JrdDCv660STODTVjxZTxJEVcWtJWXguhY/1EspI714=;
-	b=rvmLsybeVQFT7TdcKAQEYfbarlFLo97BZT0WwuaJCj4DzEYuIBtxZEdxTZCEgMyv/J
-	CGWyM2GZFajwgH4YfZmCQc8PQ7pZ/8n61HN9GbJhSKUK8rV/A+p33eTBdcj5sE9Lj7T2
-	mccJeGWjQs9QLL3fnDb6P6maFnGMGTLL/1W9U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=Z8ml0jUAhrHLR3HhExZ5Xay5xz8xuJ6UTVmEJBgo3RFCXsjdFPWvFHYu0V9hwV7utr
-	xMC2ymWurnvsgM5a69a3bmGZUOm1NbRtiNZTKGnxS1jGnr1AhnQDwcfvSzksFYfNm8SQ
-	gQ3KPRv0W500lhO3A3wohHVTIea5Ctkp6S2ho=
-MIME-Version: 1.0
-Received: by 10.100.246.28 with SMTP id t28mr14437418anh.122.1275822001895; 
-	Sun, 06 Jun 2010 04:00:01 -0700 (PDT)
-Received: by 10.100.5.14 with HTTP; Sun, 6 Jun 2010 04:00:01 -0700 (PDT)
-In-Reply-To: <20100604232423.GA9174@gmail.com>
-References: <20100604232423.GA9174@gmail.com>
-Date: Sun, 6 Jun 2010 15:00:01 +0400
-Message-ID: <AANLkTimwSHpzMzYefLJglvpwptOt9cdpEOWGSmeeK6uM@mail.gmail.com>
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: dbaryshkov@gmail.com
+	Sun, 06 Jun 2010 14:09:12 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 06 Jun 2010 14:09:02 +0200
+Message-ID: <hug34u$hnh$1@dough.gmane.org>
+References: <4C0992ED.6000102@gmail.com> <hue0a5$8e9$1@dough.gmane.org>
+	<4C0ABE75.8000004@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
+In-Reply-To: <4C0ABE75.8000004@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: pcmciautils: fix build to use flex from sysroots, not from host
+Subject: Re: qt4 upgrade to 4.7.0-beta1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,47 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 06 Jun 2010 11:04:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 06 Jun 2010 12:13:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Sat, Jun 5, 2010 at 3:24 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> Hi
->
-> This commit
->
-> commit c65ee13298e8c22274b5bcabe06f2116b8b7ebf2
-> Author: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> AuthorDate: Fri Jun 4 16:26:17 2010 +0400
-> Commit: =A0 =A0 Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> CommitDate: Fri Jun 4 16:44:18 2010 +0400
->
-> =A0 =A0pcmciautils: fix build to use flex from sysroots, not from host
->
-> =A0 =A0Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
->
->
-> breaks the build when I have flex-native in ASSUME_PROVIDED.
-> It there any specific reason why one should use flex from hosted sysroot =
-?
-> is the flex package on all distribution broken for some reason ?
+On 05-06-10 23:15, Matthias Günther wrote:
+> On 05.06.2010 19:08, Koen Kooi wrote:
+>> On 05-06-10 01:57, Matthias Günther wrote:
+>>> Hello.
+>>
+>>> I've been working with QML (Qt Quick) for some time now and therefore
+>>> I've created recipes for Qt 4.7.0-tp and beta1 versions. The patches
+>>> just disable the not cross compiling parts (e.g. some demos/examples).
+>>
+>> At work I need demos/browser to show off some html stuff, do you have an
+>> idea what the effort would be to get it to build again for qt 4.7?
+> 
+> I'm not sure. To make it easy I just disabled the not important parts
+> where compiling errors occured. But I will have a look into it.
 
-Then we either:
-1) have to put flex in prerequisites, check it in sanity.bbclass (and
-drop flex-native)
-2) have to fix pcmciautils to detect path to flex
-3) expand some class to autodetect the flex/bison/etc. programs
+Thanks, I think it's safe to add the recipes as they are and work on
+these things after they are added.
 
-Because currently pcmciautils just failed for me because I was building the=
-m on
-the box where I had no flex installed, but build (via some other dependancy=
-)
-in OE sysroot.
+regards,
 
---=20
-With best wishes
-Dmitry
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMC4/dMkyGM64RGpERAvjuAJ97cgPjRbOp2ltmjCONAerBr74pQACggvfT
+hbnEY6Qi5hWspsY82U8wW1I=
+=Fa23
+-----END PGP SIGNATURE-----
+
 
 
