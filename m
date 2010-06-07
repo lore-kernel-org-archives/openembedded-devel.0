@@ -1,40 +1,31 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OLa1a-0005hN-0L
+	(envelope-from <mickey@vanille-media.de>) id 1OLaE8-0006Ub-8L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 12:58:00 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OLZxO-000514-Vr for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 06:53:27 -0400
-Date: Mon, 7 Jun 2010 06:53:03 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1006070651440.24659@lynx>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
-MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+	Mon, 07 Jun 2010 13:10:44 +0200
+Received: from [192.168.1.10] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 86A12584118
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Jun 2010 13:14:35 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1078)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <alpine.DEB.2.00.1006070651440.24659@lynx>
+Date: Mon, 7 Jun 2010 13:06:25 +0200
+Message-Id: <C1F41AC4-2AD3-4424-B70A-F99AB775A477@vanille-media.de>
+References: <alpine.DEB.2.00.1006070651440.24659@lynx>
+To: openembedded-devel@lists.openembedded.org
+X-Mailer: Apple Mail (2.1078)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: who here has an active twitter account worth following?
+Subject: Re: who here has an active twitter account worth following?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +39,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 10:58:00 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 07 Jun 2010 11:10:44 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
+http://twitter.com/DrMickeyLauer
 
-  sorry for the off-topic content, but who involved with OE uses
-twitter regularly to pump out current info?  be nice to follow those
-folks to stay up to date.  thanks.
+Cheers,
 
-rday
+:M:
 
--- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-            Linux Consulting, Training and Kernel Pedantry.
-
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
 
 
