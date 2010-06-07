@@ -1,37 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from smtp-out04.alice.it ([85.37.17.100])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OLi8w-0002Cz-7X
+	(envelope-from <GNUtoo@no-log.org>) id 1OLiir-00070k-1q
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 21:37:58 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OLi4j-0005T3-8T from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 12:33:33 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 7 Jun 2010 12:33:33 -0700
-Received: from [172.30.80.218] ([172.30.80.218]) by na2-mail.mgc.mentorg.com
+	Mon, 07 Jun 2010 22:15:03 +0200
+Received: from FBCMMO05.fbc.local ([192.168.184.136]) by smtp-out04.alice.it
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 7 Jun 2010 13:33:31 -0600
-Message-ID: <4C0D498A.4030709@mentor.com>
-Date: Mon, 07 Jun 2010 12:33:30 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Mon, 7 Jun 2010 22:10:40 +0200
+Received: from FBCMCL01B03.fbc.local ([192.168.69.84]) by FBCMMO05.fbc.local
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 7 Jun 2010 22:10:40 +0200
+Received: from localhost.localdomain ([95.237.157.170]) by
+	FBCMCL01B03.fbc.local with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 7 Jun 2010 22:10:34 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 07 Jun 2010 19:33:31.0970 (UTC)
-	FILETIME=[5016BA20:01CB0678]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Mon,  7 Jun 2010 22:10:24 +0200
+Message-Id: <1275941424-14837-2-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1275941424-14837-1-git-send-email-GNUtoo@no-log.org>
+References: <1275941424-14837-1-git-send-email-GNUtoo@no-log.org>
+X-OriginalArrivalTime: 07 Jun 2010 20:10:34.0994 (UTC)
+	FILETIME=[7D1D4520:01CB067D]
+X-SA-Exim-Connect-IP: 85.37.17.100
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH, RFC] Add linux-libc-headers-native, make it default dep for native
+Subject: [PATCH] netbase: add support for htcdream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,82 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 19:37:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Jun 2010 20:15:03 -0000
 
-On some host distributions the provided linux kernel headers are too old
-to compile utilities we need[1].  Given that we need these utilities to
-run things on the target the best solution is to provide
-linux-libc-headers-native.  Rather than get things into an inconsistent
-state, we make linux-libc-headers-native be a default dependency.
+If we don't add a custom file containing auto usb0,
+usb0 is not configured at boot and we can't ssh into the phone
 
-[1]: A prime example of this would be mtd-utils-native and UBI
+Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+---
+ recipes/netbase/netbase/htcdream/interfaces |   17 +++++++++++++++++
+ recipes/netbase/netbase_4.21.bb             |    2 +-
+ 2 files changed, 18 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/netbase/netbase/htcdream/interfaces
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index e0f9184..e26a45e 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -75,6 +75,12 @@ def base_dep_prepend(d):
-  		if (bb.data.getVar('HOST_SYS', d, 1) !=
-  	     	    bb.data.getVar('BUILD_SYS', d, 1)):
-  			deps += " virtual/${TARGET_PREFIX}gcc virtual/libc "
-+		elif bb.data.inherits_class('native', d) and \
-+				bb.data.getVar('PN', d, True) not in \
-+				("linux-libc-headers-native", "quilt-native",
-+				 "unifdef-native", "shasum-native",
-+				 "stagemanager-native", "coreutils-native"):
-+			deps += " linux-libc-headers-native"
-  	return deps
-
-  DEPENDS_prepend="${@base_dep_prepend(d)} "
-diff --git a/recipes/linux-libc-headers/linux-libc-headers.inc
-b/recipes/linux-libc-headers/linux-libc-headers.inc
-index 0487e65..0b0d05a 100644
---- a/recipes/linux-libc-headers/linux-libc-headers.inc
-+++ b/recipes/linux-libc-headers/linux-libc-headers.inc
-@@ -1,7 +1,8 @@
-  DESCRIPTION = "Sanitized set of 2.6 kernel headers for the C library's
-use."
-  SECTION = "devel"
-  LICENSE = "GPL"
-+NATIVE_INSTALL_WORKS = "1"
-+BBCLASSEXTEND = "native"
-
-  RDEPENDS_${PN}-dev = ""
-  RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPV})"
--
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-b/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-index b66e768..0a1159a 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-@@ -1,6 +1,7 @@
-  require linux-libc-headers.inc
-
-  INHIBIT_DEFAULT_DEPS = "1"
-+NATIVE_INSTALL_WORKS = "0"
-  PR = "r4"
-  # NOTE: no need to package these headers, since the c library includes
-them.
-  PACKAGES = ""
-diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-b/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-index 4893cab..6cbd8ba 100644
---- a/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-+++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-@@ -1,5 +1,6 @@
-  require linux-libc-headers.inc
-
-+NATIVE_INSTALL_WORKS = "0"
-  HOMEPAGE = "http://ep09.pld-linux.org/~mmazur/linux-libc-headers/"
-  # license note from the package:
-  #   Linux-libc-headers are derived from linux kernel headers. For
-license of a
-
+diff --git a/recipes/netbase/netbase/htcdream/interfaces b/recipes/netbase/netbase/htcdream/interfaces
+new file mode 100644
+index 0000000..a75f259
+--- /dev/null
++++ b/recipes/netbase/netbase/htcdream/interfaces
+@@ -0,0 +1,17 @@
++# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
++ 
++# The loopback interface
++auto lo
++iface lo inet loopback
++
++# Ethernet/RNDIS gadget (g_ether)
++# ... or on host side, usbnet and random hwaddr
++auto usb0
++iface usb0 inet static
++	address 192.168.0.202
++	netmask 255.255.255.0
++	network 192.168.0.0
++	up route add default gw 192.168.0.200 metric 8
++	up echo nameserver 208.67.222.222 > /etc/resolv.conf
++	up echo nameserver 208.67.220.220 >> /etc/resolv.conf
++	down route del default gw 192.168.0.200 metric 8
+diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_4.21.bb
+index 4e1d39f..baec44b 100644
+--- a/recipes/netbase/netbase_4.21.bb
++++ b/recipes/netbase/netbase_4.21.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "This package provides the necessary \
+ infrastructure for basic TCP/IP based networking."
+ SECTION = "base"
+ LICENSE = "GPLv2"
+-PR = "r41"
++PR = "r42"
+ 
+ inherit update-rc.d
+ 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.0.4
 
 
 
