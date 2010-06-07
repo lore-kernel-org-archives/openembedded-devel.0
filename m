@@ -1,43 +1,41 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pz0-f193.google.com ([209.85.222.193])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLQwC-000814-6y
+	(envelope-from <raj.khem@gmail.com>) id 1OLR6Y-0001vz-En
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 03:15:36 +0200
-Received: by pvh1 with SMTP id 1so770538pvh.6
+	Mon, 07 Jun 2010 03:26:33 +0200
+Received: by pzk31 with SMTP id 31so1417900pzk.16
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 18:11:14 -0700 (PDT)
+	Sun, 06 Jun 2010 18:21:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=OEIKbqgrexXPbOiOz4+bXFqplebo/xjudwxRUKfuUVI=;
-	b=s0PrGFWMG1ffdfjCapl1DezUTpd7jNmVOqwKQDLUq6Nbz8MfWXpCzf1TEJqZ31o3Z3
-	Eo5F5dX+Ebms1/DniNFvAijJCrUHVF7KYoa+0s1XQlQELgzYinsEkBhYS8xOuMUm/OnJ
-	Szj05TJJy1HDp8RO837ylRcwlSMs/5ijSHCjI=
+	bh=N1dCY/Yjx54WozL/0oFO6YB2xSX5gT4dI1NhlXa5cto=;
+	b=pGAgNMpQGY4eFndWHPWsUmDPOXeO+CTYDIs5DBarO3D6AjIOJACxHdlONKY2XF+9m4
+	y9SZQI3+fPMi86+B62Ph28S/qA4K9fSqTksVYEgu4k96LJWOlLM4oacoHOF2SybLfiWy
+	TZYlEOaMHaUYFjZDituNUQFFrQe6sk/KGWB7Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pA++hdcDU1xnZPao5XaLPQZGi05TdFE+RTZ8feosQ0vzY9AAWpwZQF6ay7+p/1ueGN
-	53GimQgzozyYAcr/Wh36cxTBGEuIEQ4dqJArQEB01x5J3Xw8xAt8RJ1O7vz38CmUC0IB
-	V0T0m2HFWzQwx1vChcA5dCQHROX7cQv/igJzg=
-Received: by 10.115.99.2 with SMTP id b2mr11030793wam.131.1275873074122;
-	Sun, 06 Jun 2010 18:11:14 -0700 (PDT)
+	b=xdDfncNyYDDbnzwYOkCC13p/Y9JfOs9hwrzpbevG6edswZEwzut5G5WlhxppL/ELzP
+	eUVQqrirDBB1N06fNkwttBhpJLCWYI6mAP1ZXQNGRvWNjJuNnb48MoIOmdz5aGMirpON
+	eoId3Lo4bCIbTqkPQ1W2SxtNM2GqWOogIL3hI=
+Received: by 10.115.133.14 with SMTP id k14mr11029805wan.73.1275873711315;
+	Sun, 06 Jun 2010 18:21:51 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id n29sm33841839wae.16.2010.06.06.18.11.13
+	by mx.google.com with ESMTPS id n32sm33916924wae.22.2010.06.06.18.21.49
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 06 Jun 2010 18:11:13 -0700 (PDT)
-Date: Sun, 6 Jun 2010 18:11:16 -0700
+	Sun, 06 Jun 2010 18:21:50 -0700 (PDT)
+Date: Sun, 6 Jun 2010 18:21:53 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100607011116.GF6723@gmail.com>
-References: <alpine.DEB.2.00.1006061411390.3532@lynx>
-	<hugq1i$olq$1@dough.gmane.org>
-	<AANLkTimwz1pr4HKVubzUurl_Kqx9MXGbzJKTVQ4WnJjA@mail.gmail.com>
+Message-ID: <20100607012153.GG6723@gmail.com>
+References: <1275853110-22560-1-git-send-email-michael.lippautz@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimwz1pr4HKVubzUurl_Kqx9MXGbzJKTVQ4WnJjA@mail.gmail.com>
+In-Reply-To: <1275853110-22560-1-git-send-email-michael.lippautz@gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.222.193
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -45,7 +43,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] matrix-gui, udev: Remove superfluous "patch=1" parameters.
+Subject: Re: [PATCH] zziplib: Convert zu new staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,36 +57,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 01:15:37 -0000
+X-List-Received-Date: Mon, 07 Jun 2010 01:26:33 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (06/06/10 12:19), Chris Larson wrote:
-> On Sun, Jun 6, 2010 at 11:39 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
-> 
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 06-06-10 20:13, Robert P. J. Day wrote:
-> > >
-> > > Any file reference that has a suffix of ".diff" or ".patch" has no
-> > > need of a "patch=1" parameter.
-> > >
-> > > Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
-> >
-> > Acked-by: Koen Kooi <k-kooi@ti.com>
-> >
-> 
-> Acked-by: Chris Larson <clarson@kergoth.com>
+On (06/06/10 21:38), Michael Lippautz wrote:
+> Signed-off-by: Michael Lippautz <michael.lippautz@gmail.com>
 
-applied
+thanks applied after editing commit message a bit.
 
+> ---
+>  recipes/zziplib/zziplib_0.13.49.bb |    8 +-------
+>  1 files changed, 1 insertions(+), 7 deletions(-)
+> 
+> diff --git a/recipes/zziplib/zziplib_0.13.49.bb b/recipes/zziplib/zziplib_0.13.49.bb
+> index 2effd91..3aecb74 100644
+> --- a/recipes/zziplib/zziplib_0.13.49.bb
+> +++ b/recipes/zziplib/zziplib_0.13.49.bb
+> @@ -1,17 +1,11 @@
+>  require zziplib.inc
+>  
+> -PR = "r1"
+> +PR = "r2"
+>  
+>  SRC_URI += "\
+>    file://zip_c.patch \
+>    file://zziplib-autoconf.patch \
+>    "
+>  
+> -#EXTRA_OECONF = "--srcdir=${S} --enable-builddir=${S}/build"
+> -
+> -do_stage() {
+> -  autotools_stage_all
+> -}
+> -
+>  SRC_URI[md5sum] = "5f7b88ebb2bcd7e8044328482d079661"
+>  SRC_URI[sha256sum] = "f57c4e33eb2cdd87a6c2f01bfa4794340fbe61ea1a1cfc7dac3b6671e1dd22af"
 > -- 
-> Christopher Larson
-> clarson at kergoth dot com
-> Founder - BitBake, OpenEmbedded, OpenZaurus
-> Maintainer - Tslib
-> Senior Software Engineer, Mentor Graphics
+> 1.6.4.4
+> 
+> 
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
