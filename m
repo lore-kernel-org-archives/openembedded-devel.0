@@ -1,43 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OLZXH-0007yA-VU for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 12:26:44 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OLZT3-0003qY-9l for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 12:22:05 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 12:22:05 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 12:22:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 07 Jun 2010 12:21:57 +0200
-Message-ID: <huih85$dh2$1@dough.gmane.org>
-References: <alpine.DEB.2.00.1006070501210.14095@lynx>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100512 Shredder/3.0.6pre
-In-Reply-To: <alpine.DEB.2.00.1006070501210.14095@lynx>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <rpjday@crashcourse.ca>) id 1OLa1a-0005hN-0L
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Jun 2010 12:58:00 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OLZxO-000514-Vr for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Jun 2010 06:53:27 -0400
+Date: Mon, 7 Jun 2010 06:53:03 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1006070651440.24659@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE git repo down?
+Subject: who here has an active twitter account worth following?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 10:26:44 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Jun 2010 10:58:00 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 07-06-10 11:06, Robert P. J. Day wrote:
-> 
->   for the last couple hours, i've had persistent errors trying to
-> update my git working copy of OE:
-> 
->   fatal: read error: Connection reset by peer
-> 
-> is this a known issue?  things were working fine yesterday.
+  sorry for the off-topic content, but who involved with OE uses
+twitter regularly to pump out current info?  be nice to follow those
+folks to stay up to date.  thanks.
 
-I can't reach it from here as well, would be nice if the server admins
-dropped us a note about the situation...
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+rday
 
-iD8DBQFMDMhFMkyGM64RGpERAtmBAJ4k4ZN3KJwnPLt0AH+hYfHrWG39GgCfQV+P
-smHQ4xUeVL09dTty9eP/Sag=
-=zVjQ
------END PGP SIGNATURE-----
+-- 
 
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+            Linux Consulting, Training and Kernel Pedantry.
+
+Web page:                                          http://crashcourse.ca
+Twitter:                                       http://twitter.com/rpjday
+========================================================================
 
 
