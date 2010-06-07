@@ -1,34 +1,35 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLjpx-0001iw-H9
+	(envelope-from <raj.khem@gmail.com>) id 1OLjrC-0001pc-7g
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 23:26:36 +0200
-Received: by iwn6 with SMTP id 6so1866451iwn.6
+	Mon, 07 Jun 2010 23:27:44 +0200
+Received: by iwn6 with SMTP id 6so1867796iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 14:22:06 -0700 (PDT)
+	Mon, 07 Jun 2010 14:23:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=AxdY9dVtUSiJSZ0qxsEKG+WBNrqbEaWEe13Gh2G16SY=;
-	b=HO8gFFhXEiLJRbhVptV6WoDMh0QeqIWMGeEhPA9r2gcVnlhanEQUt22LXJZ8XgsO0X
-	IbIqhonabor04Q0uPdvbLxr3WAuoZoWHuDPdsUwKhWOUqCrlSfy8XHRK60c6P/8OJjUj
-	CgEQYfHqQ3Z+XXo0kVeCNVNB1JshOgk+IkIJ8=
+	bh=7VUMIUvpq0Yb6lHshrzQrHT4bjuZjgGCIgk1MrqEANk=;
+	b=L99x6tL1dEBifEvWi1g053jjlCWtFHPmaoUGW8Rwu4fjrGznVZNzF5iHYgBPPYLXEe
+	HggExbRUKXon+jKbymHsFn3lKCD14P/sUXo8U+6CFDitCghccPJsjlNvK4+ZGIROFWLL
+	7i6fN+GIIBWCIG85nL5QIKM2jZGmwDTt+l4Ro=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=uiNKmsLvxEhPPQ+fO0U+TJ9ReXvvniSne+pzzCIMpzdAeIopLyrDQLaJbduBZuOOOt
-	hC1qpX41bjSJ9UiS47B8SM/39FYUPzUx1Z7hVafYxKeySxGIYEBVIr4kEzDuQo/x/p8Z
-	cBnNQv5GYDZkctv5pq5PIecSVWn9xDXCAIADk=
-Received: by 10.231.176.74 with SMTP id bd10mr980349ibb.38.1275945726479; Mon, 
-	07 Jun 2010 14:22:06 -0700 (PDT)
+	b=PWtK+6LCpOofQ+Gg26WXwO3REhglHCdpempE7mNDbIYBIRHiS8nvvUsuhID86RKlRS
+	zk9L1j98G9Bh2edWfiz1pJoCKkx8P1EfkSzmzFnzAOSA8JCxQQ7001fZ1KYY2w5sIWW6
+	w6rrBArKygnn6gDQ7M57npQSPB5628r61nrwo=
+Received: by 10.231.171.13 with SMTP id f13mr5147960ibz.103.1275945803424; 
+	Mon, 07 Jun 2010 14:23:23 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.39.137 with HTTP; Mon, 7 Jun 2010 14:21:46 -0700 (PDT)
-In-Reply-To: <4C0D498A.4030709@mentor.com>
-References: <4C0D498A.4030709@mentor.com>
+Received: by 10.231.39.137 with HTTP; Mon, 7 Jun 2010 14:23:03 -0700 (PDT)
+In-Reply-To: <1275941424-14837-2-git-send-email-GNUtoo@no-log.org>
+References: <1275941424-14837-1-git-send-email-GNUtoo@no-log.org> 
+	<1275941424-14837-2-git-send-email-GNUtoo@no-log.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 Jun 2010 14:21:46 -0700
-Message-ID: <AANLkTil8i1-1ie4msx9B09WeJ5ggquP7WisRIyWKMUpx@mail.gmail.com>
+Date: Mon, 7 Jun 2010 14:23:03 -0700
+Message-ID: <AANLkTinpmVu9ZmOzPwblvkirXsS877bqdcpqnnowoOQ7@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -38,7 +39,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
+Subject: Re: [PATCH] netbase: add support for htcdream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,97 +53,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 21:26:36 -0000
+X-List-Received-Date: Mon, 07 Jun 2010 21:27:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 7, 2010 at 12:33 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> On some host distributions the provided linux kernel headers are too old
-> to compile utilities we need[1]. =A0Given that we need these utilities to
-> run things on the target the best solution is to provide
-> linux-libc-headers-native. =A0Rather than get things into an inconsistent
-> state, we make linux-libc-headers-native be a default dependency.
+On Mon, Jun 7, 2010 at 1:10 PM, Denis 'GNUtoo' Carikli
+<GNUtoo@no-log.org> wrote:
+> If we don't add a custom file containing auto usb0,
+> usb0 is not configured at boot and we can't ssh into the phone
+>
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 
-could it be made optional so people who use distribution where this is not
-needed are not penalized.
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
+> ---
+> =A0recipes/netbase/netbase/htcdream/interfaces | =A0 17 +++++++++++++++++
+> =A0recipes/netbase/netbase_4.21.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A02 +-
+> =A02 files changed, 18 insertions(+), 1 deletions(-)
+> =A0create mode 100644 recipes/netbase/netbase/htcdream/interfaces
 >
-> [1]: A prime example of this would be mtd-utils-native and UBI
+> diff --git a/recipes/netbase/netbase/htcdream/interfaces b/recipes/netbas=
+e/netbase/htcdream/interfaces
+> new file mode 100644
+> index 0000000..a75f259
+> --- /dev/null
+> +++ b/recipes/netbase/netbase/htcdream/interfaces
+> @@ -0,0 +1,17 @@
+> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
+> +
+> +# The loopback interface
+> +auto lo
+> +iface lo inet loopback
+> +
+> +# Ethernet/RNDIS gadget (g_ether)
+> +# ... or on host side, usbnet and random hwaddr
+> +auto usb0
+> +iface usb0 inet static
+> + =A0 =A0 =A0 address 192.168.0.202
+> + =A0 =A0 =A0 netmask 255.255.255.0
+> + =A0 =A0 =A0 network 192.168.0.0
+> + =A0 =A0 =A0 up route add default gw 192.168.0.200 metric 8
+> + =A0 =A0 =A0 up echo nameserver 208.67.222.222 > /etc/resolv.conf
+> + =A0 =A0 =A0 up echo nameserver 208.67.220.220 >> /etc/resolv.conf
+> + =A0 =A0 =A0 down route del default gw 192.168.0.200 metric 8
+> diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_4.=
+21.bb
+> index 4e1d39f..baec44b 100644
+> --- a/recipes/netbase/netbase_4.21.bb
+> +++ b/recipes/netbase/netbase_4.21.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "This package provides the necessary \
+> =A0infrastructure for basic TCP/IP based networking."
+> =A0SECTION =3D "base"
+> =A0LICENSE =3D "GPLv2"
+> -PR =3D "r41"
+> +PR =3D "r42"
 >
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index e0f9184..e26a45e 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -75,6 +75,12 @@ def base_dep_prepend(d):
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (bb.data.getVar('HOST_SYS', d, 1) !=3D
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.data.getVar('BUILD_SYS', d, 1))=
-:
-> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0deps +=3D " virtual/${TARG=
-ET_PREFIX}gcc virtual/libc "
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 elif bb.data.inherits_class('native', d) an=
-d \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 bb.data.get=
-Var('PN', d, True) not in \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 ("linux-lib=
-c-headers-native",
-> "quilt-native",
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0"unifdef=
--native", "shasum-native",
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0"stagema=
-nager-native", "coreutils-native"):
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 deps +=3D " linux-libc-head=
-ers-native"
-> =A0 =A0 =A0 =A0return deps
->
-> =A0DEPENDS_prepend=3D"${@base_dep_prepend(d)} "
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers.inc
-> b/recipes/linux-libc-headers/linux-libc-headers.inc
-> index 0487e65..0b0d05a 100644
-> --- a/recipes/linux-libc-headers/linux-libc-headers.inc
-> +++ b/recipes/linux-libc-headers/linux-libc-headers.inc
-> @@ -1,7 +1,8 @@
-> =A0DESCRIPTION =3D "Sanitized set of 2.6 kernel headers for the C library=
-'s
-> use."
-> =A0SECTION =3D "devel"
-> =A0LICENSE =3D "GPL"
-> +NATIVE_INSTALL_WORKS =3D "1"
-> +BBCLASSEXTEND =3D "native"
->
-> =A0RDEPENDS_${PN}-dev =3D ""
-> =A0RRECOMMENDS_${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPV})"
-> -
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-> b/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-> index b66e768..0a1159a 100644
-> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
-> @@ -1,6 +1,7 @@
-> =A0require linux-libc-headers.inc
->
-> =A0INHIBIT_DEFAULT_DEPS =3D "1"
-> +NATIVE_INSTALL_WORKS =3D "0"
-> =A0PR =3D "r4"
-> =A0# NOTE: no need to package these headers, since the c library includes
-> them.
-> =A0PACKAGES =3D ""
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-> b/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-> index 4893cab..6cbd8ba 100644
-> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
-> @@ -1,5 +1,6 @@
-> =A0require linux-libc-headers.inc
->
-> +NATIVE_INSTALL_WORKS =3D "0"
-> =A0HOMEPAGE =3D "http://ep09.pld-linux.org/~mmazur/linux-libc-headers/"
-> =A0# license note from the package:
-> =A0# =A0 Linux-libc-headers are derived from linux kernel headers. For
-> license of a
+> =A0inherit update-rc.d
 >
 > --
-> Tom Rini
-> Mentor Graphics Corporation
+> 1.7.0.4
 >
 >
 > _______________________________________________
