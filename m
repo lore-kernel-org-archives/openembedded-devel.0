@@ -1,48 +1,43 @@
-Received: from mail-pz0-f183.google.com ([209.85.222.183])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLd7B-0002uR-8N
+	(envelope-from <jan.paesmans@gmail.com>) id 1OLdF7-0005HA-OG
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 16:15:46 +0200
-Received: by pzk13 with SMTP id 13so3800536pzk.13
+	Mon, 07 Jun 2010 16:23:58 +0200
+Received: by gwb20 with SMTP id 20so1266781gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 07:11:24 -0700 (PDT)
+	Mon, 07 Jun 2010 07:19:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=duDASoqBX+Uh31MVxiI7KtlVLhhZGmLu1ZArtc2ndV4=;
-	b=WQz6krXRb27k8qiYg8ZJlFJpcmwM4FfHqjBCUqmS6+Z1XCTaZVLkFXaBGk8+rqLHiE
-	04dHmbuQYho64XfqlY79fi161HQIiKpNRfhF0H7r32X2whIS/gopAFI7exCtOzUw2qkF
-	gHs9HvuHKPG8LmVfcfk9B2OCTk3KsE4hKBDsc=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type;
+	bh=izIQ3DtVu68CKIWJ5RCQCFH5JdHDb5R0+j/YXRU3InQ=;
+	b=jTYxZ1LBxz0b/og7Zb4UdZYAKT+45F8pNchij9tJh4KgdS/p8j2LeHMh6dPtGe7DZq
+	9FJ476e+QhOWJKs/Ut2f2u4MlMEwWOt/3FFU9mNp639GQrSvL9ACZ40VF/C2BxY7JK4M
+	jxXlPjlOpR9CZnXMdsFUdfvTXS6NPo1ucZgQM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=enNfS49WE7fVoBzxhs0MWXkf3+90ag+2/azl5wubG7rnS4yuTPsMGXBlXIWjCNNkJ8
-	f9I8ri3mGihRTYhvSQUiicojVHvDrWXwtpDc2pWGHta1j7KSs4M9f2PTR1KJBwtP5JBU
-	e/Y8bk+A1Z4/Q9eJmNMgn7x1ez0JxcdDCD7E0=
-Received: by 10.142.117.27 with SMTP id p27mr10816690wfc.252.1275919884372;
-	Mon, 07 Jun 2010 07:11:24 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id 20sm3077511pzk.15.2010.06.07.07.11.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Jun 2010 07:11:20 -0700 (PDT)
-Date: Mon, 7 Jun 2010 07:11:24 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: Jan Paesmans <jan.paesmans@gmail.com>
-Message-ID: <20100607141124.GB4570@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type;
+	b=GEnyWjabwIxUCd+/jgP7zcJrP3jU40Q0g+jz6zRR01vwxt6YIaaRIyAx3JtNFbHMvX
+	XmVPZECfVgqCUqXoAfvvb4KhfjHJYA7gaF5wVncDByu3hfxTdXZabbDRI3Av3KpuWHFr
+	jDLjjb0BGKYXSlVieDl3utY41+8bjCOCUrKus=
+MIME-Version: 1.0
+Received: by 10.150.174.9 with SMTP id w9mr13979975ybe.0.1275920377128; Mon, 
+	07 Jun 2010 07:19:37 -0700 (PDT)
+Received: by 10.150.177.7 with HTTP; Mon, 7 Jun 2010 07:19:36 -0700 (PDT)
+In-Reply-To: <20100607141124.GB4570@gmail.com>
 References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
 	<1275510896-30845-8-git-send-email-raj.khem@gmail.com>
 	<AANLkTilJ62g8nmoiOrRbKBMDhUs7RtjMNgxwW3ntzink@mail.gmail.com>
 	<AANLkTilsZ7Qvc77yWK0hCi9W3yhkxo0f6f7olvxILH7X@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTilsZ7Qvc77yWK0hCi9W3yhkxo0f6f7olvxILH7X@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.222.183
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	<20100607141124.GB4570@gmail.com>
+Date: Mon, 7 Jun 2010 16:19:36 +0200
+Message-ID: <AANLkTimqgq8R1SX5GVRZCNRiD_PHEGvSznh6b3WqEVuC@mail.gmail.com>
+From: Jan Paesmans <jan.paesmans@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: jan.paesmans@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -61,18 +56,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 14:15:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 07 Jun 2010 14:23:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On (07/06/10 09:35), Jan Paesmans wrote:
-> Hi,
-> I was having problems with building grep both native and for target on
-> our build system.
-> Seems that there is a dependency missing on gettext. Adding gettext to
-> the inherit directive solves the build failure.
+Hi Khem,
 
-thanks for report. I will test a fix today.
--Khem
+Updated to latest org.openembedded.dev and tried building the latest
+grep-native.
+I added the inherit to gettext but there seems to be something wrong.
+The new grep bb file needs xz-native.
+It is specified in the dependencies but for some reason bitbake
+doesn't take the dependency into account and grep-native fails with a
+missing xz.
+First running 'bitbake xz-native' by hand and then running 'bitbake
+grep-native' succeeds.
+This indicates that xz-native is indeed the correct dependency but for
+some reason it is not taken into account.
+
+Regards, Jan
+
+On Mon, Jun 7, 2010 at 4:11 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On (07/06/10 09:35), Jan Paesmans wrote:
+>> Hi,
+>> I was having problems with building grep both native and for target on
+>> our build system.
+>> Seems that there is a dependency missing on gettext. Adding gettext to
+>> the inherit directive solves the build failure.
+>
+> thanks for report. I will test a fix today.
+> -Khem
+>
 
 
