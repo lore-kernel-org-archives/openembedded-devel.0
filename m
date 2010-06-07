@@ -1,45 +1,41 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLQ1w-0003AR-Ar
+	(envelope-from <raj.khem@gmail.com>) id 1OLQln-0007cP-BP
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 02:17:28 +0200
-Received: by pvh1 with SMTP id 1so758831pvh.6
+	Mon, 07 Jun 2010 03:05:21 +0200
+Received: by pxi14 with SMTP id 14so872669pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 17:13:08 -0700 (PDT)
+	Sun, 06 Jun 2010 18:00:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=20WGscC3QKX8koU7Uto2tfRtJxH8jzW/1RbANjceq6Y=;
-	b=UYC06Uh/U2iEOSJwzFMFYKMmTbRt/N2HZ6Zc6fXzdmmEFmJ3TbK2G9UXEAMdbSIc1n
-	+hTyjzaRNMMPZF/HL42RqhKum+1O6vXx5uz7ELv2AyUz7K44QBwg8csvaOfZbACbJgGq
-	P+TPIPk5V2atdItxZqP60mxlk9wBUCvA8HTbY=
+	bh=nQW1O+bTc9kU4MckvuHwwqz13S/apCCBTI8Rd4CIum0=;
+	b=SH7y1YXZtVTIXnZWagkYio+yGJbbYd4ugQVzZrl9KxDErXCzDLTD5O2PNohCsvn3Ci
+	40A9tG1wHeSZX+FHOtPEKzXuJmPXnO/FyESbl6FUTQJwSqKwT/1wTwCfBY5CnPh/+tQG
+	kCpOsPcDS+HZjUFEHy7urDRPSt3rlyGZ26CB4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=TEEac+pC+ndGsWCG/b/K/0DemYJM8B8wjKh8kqYKNeooM8yVaVJispmyYyuIb4KzF4
-	dPRLoksNDWEi5Bd+6COHHr0CPupZ7tz9gqUUGhT56ygvX7eFjnqJkxMg3Tmtp0cMY4zN
-	ddejvedXx0VFh7SrGHyeiNKiYkK9tRFR7hKwY=
-Received: by 10.114.2.25 with SMTP id 25mr10925900wab.100.1275869588055;
-	Sun, 06 Jun 2010 17:13:08 -0700 (PDT)
+	b=WgRB6sA/WpFVItfn01jTKWMrhbZEn+xlcHoW6lSBClCPa47MnaHcQIg/r3lw8ywbIv
+	psUu6gpZAdWDoVSiIm8LyTbqFn9x0IrisNr7DFT9B4SHoH4SCOhRw1xiEZ4XX9URVvLS
+	2C/u9kZQ294innr8Il71bIzN8TXj9Vifk75oc=
+Received: by 10.140.57.16 with SMTP id f16mr11340073rva.15.1275872427206;
+	Sun, 06 Jun 2010 18:00:27 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id n32sm33452958wae.22.2010.06.06.17.13.06
+	by mx.google.com with ESMTPS id b12sm4146591rvn.22.2010.06.06.18.00.25
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 06 Jun 2010 17:13:07 -0700 (PDT)
-Date: Sun, 6 Jun 2010 17:13:07 -0700
+	Sun, 06 Jun 2010 18:00:26 -0700 (PDT)
+Date: Sun, 6 Jun 2010 18:00:28 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100607001307.GA6723@gmail.com>
-References: <201006022351.38129.pieterg@gmx.com>
-	<201006041044.42032.pieterg@gmx.com>
-	<1275649408.23726.5.camel@mill.internal.reciva.com>
-	<201006051236.07938.pieterg@gmx.com>
-	<1275858029.19175.21.camel@lenovo.internal.reciva.com>
+Message-ID: <20100607010028.GB6723@gmail.com>
+References: <alpine.DEB.2.00.1006050308120.10201@lynx>
 MIME-Version: 1.0
-In-Reply-To: <1275858029.19175.21.camel@lenovo.internal.reciva.com>
+In-Reply-To: <alpine.DEB.2.00.1006050308120.10201@lynx>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -47,7 +43,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: AUTOREV and SRCPV
+Subject: Re: [PATCH] Some simple updates in OE manual, reference chapter.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,43 +57,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 00:17:29 -0000
+X-List-Received-Date: Mon, 07 Jun 2010 01:05:22 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (06/06/10 22:00), Phil Blundell wrote:
-> On Sat, 2010-06-05 at 12:36 +0200, pieterg wrote:
-> > Now I get a nice
-> > 1.0+git7348+5276f059461b6e9015e46a01b1cabfc42dfa600f
-> > PKGV, which is the same in both stable/unstable situations, assuming 
-> > the 'stable' rev is the latest rev.
-> > And it is of course the same on all buildservers, and doesn't depend on 
-> > what's in the cache.
-> > 
-> > And best of all, no more need for BB_LOCALCOUNT_OVERRIDE nor 
-> > BB_GIT_CLONE_FOR_SRCREV, so no more lengthy bb parse sessions.
+On (05/06/10 03:11), Robert P. J. Day wrote:
 > 
-> Yup, that looks good.
+> Obvious fixes:
 > 
-> In the longer term I guess it would be nice to make this less
-> git-specific.  But, as you observe, that would mean either copying a lot
-> of code from bitbake or waiting for a new bitbake release which exposes
-> the necessary functionality.  And, in any case, the majority of projects
-> use only a single SCM which doesn't change very often, so I guess there
-> will not be too much of an issue in practice.
+> "recipies" -> "recipes"
+> Update references to patch= and pnum= to striplevel=
 > 
-> Thanks for your work, anyway.  I'll go ahead and check this in unless
-> somebody has an objection.
+> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+> 
 
-Please go ahead. Seems to work ok here.
-> 
-> p.
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+thanks applied with formatting changes to patch log.
 
 
