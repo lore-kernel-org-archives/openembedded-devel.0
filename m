@@ -1,40 +1,30 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OLYMb-0000KL-O2
+	(envelope-from <c.aeschlimann@acn-group.ch>) id 1OLYi0-00007y-QQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 11:11:37 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OLYIK-0003qt-TM for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 05:06:57 -0400
-Date: Mon, 7 Jun 2010 05:06:51 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1006070501210.14095@lynx>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Mon, 07 Jun 2010 11:33:31 +0200
+Received: from [172.16.145.92] (unknown [212.98.42.40])
+	by 111.com (Postfix) with ESMTPA id DCAE5370BD
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon,  7 Jun 2010 11:28:59 +0200 (CEST)
+Message-ID: <4C0CBBD9.5000909@acn-group.ch>
+Date: Mon, 07 Jun 2010 11:28:57 +0200
+From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <alpine.DEB.2.00.1006070501210.14095@lynx>
+In-Reply-To: <alpine.DEB.2.00.1006070501210.14095@lynx>
+X-SA-Exim-Connect-IP: 195.160.190.3
+X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OE git repo down?
+Subject: Re: OE git repo down?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 09:11:37 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Mon, 07 Jun 2010 09:33:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
+Le 07.06.2010 11:06, Robert P. J. Day a =E9crit :
+>
+>    for the last couple hours, i've had persistent errors trying to
+> update my git working copy of OE:
+>
+>    fatal: read error: Connection reset by peer
+>
+> is this a known issue?  things were working fine yesterday.
+>
+> rday
+>
 
-  for the last couple hours, i've had persistent errors trying to
-update my git working copy of OE:
+You broke it down by submitting too many documentation updates ! :)
 
-  fatal: read error: Connection reset by peer
+It's not responsive here neither.
 
-is this a known issue?  things were working fine yesterday.
+Regards,
 
-rday
+--=20
+Christophe Aeschlimann
 
--- 
+Embedded Software Engineer
 
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
+Advanced Communications Networks S.A.
 
-            Linux Consulting, Training and Kernel Pedantry.
+Rue du Puits-Godet 8a
+2000 Neuch=E2tel, Switzerland
 
-Web page:                                          http://crashcourse.ca
-Twitter:                                       http://twitter.com/rpjday
-========================================================================
+T=E9l. +41 32 724 74 31
+
+c.aeschlimann@acn-group.ch
 
 
