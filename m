@@ -1,45 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLjrC-0001pc-7g
+	(envelope-from <kergoth@gmail.com>) id 1OLjzP-000088-N4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 23:27:44 +0200
-Received: by iwn6 with SMTP id 6so1867796iwn.6
+	Mon, 07 Jun 2010 23:36:13 +0200
+Received: by pxi14 with SMTP id 14so1247278pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 14:23:23 -0700 (PDT)
+	Mon, 07 Jun 2010 14:31:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=7VUMIUvpq0Yb6lHshrzQrHT4bjuZjgGCIgk1MrqEANk=;
-	b=L99x6tL1dEBifEvWi1g053jjlCWtFHPmaoUGW8Rwu4fjrGznVZNzF5iHYgBPPYLXEe
-	HggExbRUKXon+jKbymHsFn3lKCD14P/sUXo8U+6CFDitCghccPJsjlNvK4+ZGIROFWLL
-	7i6fN+GIIBWCIG85nL5QIKM2jZGmwDTt+l4Ro=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=PFFx0HEbcFOMrJsSO8zgy/j2QTJhd8fc0Uy/WLWdoz8=;
+	b=enjgRC8MG1HhWsG1SQb+kVtlw0TUAM7jyZne1gSTnDYWwK+7XNYmsMct2XYTAn9qMf
+	M5/QNkxUu0x/PkqTtQdwfnEnILrAswh+i9hsSnvFdWvYAqypcjAWbNpzNodo1vPqMdfk
+	lMnK/B7H6Rsn3fLkpPxnpgvsu9qb+dYHfIZR4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=PWtK+6LCpOofQ+Gg26WXwO3REhglHCdpempE7mNDbIYBIRHiS8nvvUsuhID86RKlRS
-	zk9L1j98G9Bh2edWfiz1pJoCKkx8P1EfkSzmzFnzAOSA8JCxQQ7001fZ1KYY2w5sIWW6
-	w6rrBArKygnn6gDQ7M57npQSPB5628r61nrwo=
-Received: by 10.231.171.13 with SMTP id f13mr5147960ibz.103.1275945803424; 
-	Mon, 07 Jun 2010 14:23:23 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=Zy8GdFbcQx7C8HUCmobaTpvSyzREznN1hQWx3J7FOrR9ciKEugqBYfLlJ2c/z934X5
+	ZvqNGX0DYuMLkQouNGql8Dli49xuzWYEf3WRk3H/M2wEH4QcwLXO9XLRfH2Lub/+a3gr
+	pExm4ELPl7TFMoiFLR6Eqx3P4sLmr2fS3WB40=
+Received: by 10.142.150.37 with SMTP id x37mr11293715wfd.97.1275946310465; 
+	Mon, 07 Jun 2010 14:31:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.39.137 with HTTP; Mon, 7 Jun 2010 14:23:03 -0700 (PDT)
-In-Reply-To: <1275941424-14837-2-git-send-email-GNUtoo@no-log.org>
-References: <1275941424-14837-1-git-send-email-GNUtoo@no-log.org> 
-	<1275941424-14837-2-git-send-email-GNUtoo@no-log.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 7 Jun 2010 14:23:03 -0700
-Message-ID: <AANLkTinpmVu9ZmOzPwblvkirXsS877bqdcpqnnowoOQ7@mail.gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.142.211.2 with HTTP; Mon, 7 Jun 2010 14:31:30 -0700 (PDT)
+In-Reply-To: <AANLkTil8i1-1ie4msx9B09WeJ5ggquP7WisRIyWKMUpx@mail.gmail.com>
+References: <4C0D498A.4030709@mentor.com>
+	<AANLkTil8i1-1ie4msx9B09WeJ5ggquP7WisRIyWKMUpx@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 7 Jun 2010 14:31:30 -0700
+X-Google-Sender-Auth: KZjFovvwqeeuCiVj2nVqmzx6oAg
+Message-ID: <AANLkTil27vjcFzRuEIAZp6rEYY7xq2_ozqdU_QdjtEWI@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] netbase: add support for htcdream
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,71 +56,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 21:27:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 07 Jun 2010 21:36:14 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Jun 7, 2010 at 1:10 PM, Denis 'GNUtoo' Carikli
-<GNUtoo@no-log.org> wrote:
-> If we don't add a custom file containing auto usb0,
-> usb0 is not configured at boot and we can't ssh into the phone
->
-> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+On Mon, Jun 7, 2010 at 2:21 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
-> ---
-> =A0recipes/netbase/netbase/htcdream/interfaces | =A0 17 +++++++++++++++++
-> =A0recipes/netbase/netbase_4.21.bb =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A02 +-
-> =A02 files changed, 18 insertions(+), 1 deletions(-)
-> =A0create mode 100644 recipes/netbase/netbase/htcdream/interfaces
+> On Mon, Jun 7, 2010 at 12:33 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> > On some host distributions the provided linux kernel headers are too old
+> > to compile utilities we need[1].  Given that we need these utilities to
+> > run things on the target the best solution is to provide
+> > linux-libc-headers-native.  Rather than get things into an inconsistent
+> > state, we make linux-libc-headers-native be a default dependency.
 >
-> diff --git a/recipes/netbase/netbase/htcdream/interfaces b/recipes/netbas=
-e/netbase/htcdream/interfaces
-> new file mode 100644
-> index 0000000..a75f259
-> --- /dev/null
-> +++ b/recipes/netbase/netbase/htcdream/interfaces
-> @@ -0,0 +1,17 @@
-> +# /etc/network/interfaces -- configuration file for ifup(8), ifdown(8)
-> +
-> +# The loopback interface
-> +auto lo
-> +iface lo inet loopback
-> +
-> +# Ethernet/RNDIS gadget (g_ether)
-> +# ... or on host side, usbnet and random hwaddr
-> +auto usb0
-> +iface usb0 inet static
-> + =A0 =A0 =A0 address 192.168.0.202
-> + =A0 =A0 =A0 netmask 255.255.255.0
-> + =A0 =A0 =A0 network 192.168.0.0
-> + =A0 =A0 =A0 up route add default gw 192.168.0.200 metric 8
-> + =A0 =A0 =A0 up echo nameserver 208.67.222.222 > /etc/resolv.conf
-> + =A0 =A0 =A0 up echo nameserver 208.67.220.220 >> /etc/resolv.conf
-> + =A0 =A0 =A0 down route del default gw 192.168.0.200 metric 8
-> diff --git a/recipes/netbase/netbase_4.21.bb b/recipes/netbase/netbase_4.=
-21.bb
-> index 4e1d39f..baec44b 100644
-> --- a/recipes/netbase/netbase_4.21.bb
-> +++ b/recipes/netbase/netbase_4.21.bb
-> @@ -2,7 +2,7 @@ DESCRIPTION =3D "This package provides the necessary \
-> =A0infrastructure for basic TCP/IP based networking."
-> =A0SECTION =3D "base"
-> =A0LICENSE =3D "GPLv2"
-> -PR =3D "r41"
-> +PR =3D "r42"
->
-> =A0inherit update-rc.d
->
-> --
-> 1.7.0.4
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> could it be made optional so people who use distribution where this is not
+> needed are not penalized.
 >
 
+You mean like ASSUME_PROVIDED += "linux-libc-headers-native"?
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
