@@ -1,34 +1,44 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OLjim-0001v3-I2
+	(envelope-from <raj.khem@gmail.com>) id 1OLjpx-0001iw-H9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 23:19:07 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.238.44])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L3N001M5XNOSROD@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	07 Jun 2010 16:14:19 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 5BB8014AF60; Mon,
-	07 Jun 2010 17:14:12 -0400 (EDT)
-Date: Mon, 07 Jun 2010 17:14:12 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 07 Jun 2010 23:26:36 +0200
+Received: by iwn6 with SMTP id 6so1866451iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Jun 2010 14:22:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=AxdY9dVtUSiJSZ0qxsEKG+WBNrqbEaWEe13Gh2G16SY=;
+	b=HO8gFFhXEiLJRbhVptV6WoDMh0QeqIWMGeEhPA9r2gcVnlhanEQUt22LXJZ8XgsO0X
+	IbIqhonabor04Q0uPdvbLxr3WAuoZoWHuDPdsUwKhWOUqCrlSfy8XHRK60c6P/8OJjUj
+	CgEQYfHqQ3Z+XXo0kVeCNVNB1JshOgk+IkIJ8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=uiNKmsLvxEhPPQ+fO0U+TJ9ReXvvniSne+pzzCIMpzdAeIopLyrDQLaJbduBZuOOOt
+	hC1qpX41bjSJ9UiS47B8SM/39FYUPzUx1Z7hVafYxKeySxGIYEBVIr4kEzDuQo/x/p8Z
+	cBnNQv5GYDZkctv5pq5PIecSVWn9xDXCAIADk=
+Received: by 10.231.176.74 with SMTP id bd10mr980349ibb.38.1275945726479; Mon, 
+	07 Jun 2010 14:22:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.39.137 with HTTP; Mon, 7 Jun 2010 14:21:46 -0700 (PDT)
+In-Reply-To: <4C0D498A.4030709@mentor.com>
+References: <4C0D498A.4030709@mentor.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 7 Jun 2010 14:21:46 -0700
+Message-ID: <AANLkTil8i1-1ie4msx9B09WeJ5ggquP7WisRIyWKMUpx@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100607211412.GC10985@denix.org>
-References: <1275771871-5163-1-git-send-email-matgnt@gmail.com>
-	<1275771871-5163-3-git-send-email-matgnt@gmail.com>
-MIME-version: 1.0
-In-reply-to: <1275771871-5163-3-git-send-email-matgnt@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] qt4: Add qt4-x11-free_4.7.0-beta1
+Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,454 +52,103 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 21:19:07 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 07 Jun 2010 21:26:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Will there be a Qt Embedded version?
+On Mon, Jun 7, 2010 at 12:33 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> On some host distributions the provided linux kernel headers are too old
+> to compile utilities we need[1]. =A0Given that we need these utilities to
+> run things on the target the best solution is to provide
+> linux-libc-headers-native. =A0Rather than get things into an inconsistent
+> state, we make linux-libc-headers-native be a default dependency.
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+could it be made optional so people who use distribution where this is not
+needed are not penalized.
 
-On Sat, Jun 05, 2010 at 11:04:31PM +0200, Matthias G??nther wrote:
-> Several patches to disable not working parts in the beta version:
-> * tools/assistant
-> * examples/designer
-> * examples/dbus-remotecontrolledcar
-> * examples/help
-> * examples/declarative
-> * demos/browser
-> * demos/qtdemos
-> * demos/affine
-> 
-> * DEFAULT_PREFERENCE = "-1"
-> * New Qt Module / Lib "QtDeclarative" added for packaging.
-> * Qmlviewer named "qml" added to the tools package.
-> ---
->  recipes/qt4/qt-4.7.0-beta1.inc                     |   73 ++++++++++++++++++++
->  .../0001-Added-Openembedded-crossarch-option.patch |   44 ++++++++++++
->  .../0002-Disable-tools-assistant.patch             |   25 +++++++
->  .../0003-Disable-examples-designer.patch           |   24 +++++++
->  ...isable-exaqmples-dbus-remotecontrolledcar.patch |   26 +++++++
->  .../0005-Disable-examples-help.patch               |   25 +++++++
->  .../0006-Disable-demos-browser.patch               |   24 +++++++
->  .../0007-Disable-demos-qtdemos.patch               |   25 +++++++
->  .../0008-Disable-examples-declarative.patch        |   24 +++++++
->  .../qt-4.7.0-beta1/0009-Disable-demos-affine.patch |   24 +++++++
->  recipes/qt4/qt4-x11-free_4.7.0-beta1.bb            |   14 ++++
->  11 files changed, 328 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1.inc
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0001-Added-Openembedded-crossarch-option.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0002-Disable-tools-assistant.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0003-Disable-examples-designer.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0004-Disable-exaqmples-dbus-remotecontrolledcar.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0005-Disable-examples-help.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0006-Disable-demos-browser.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0007-Disable-demos-qtdemos.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0008-Disable-examples-declarative.patch
->  create mode 100644 recipes/qt4/qt-4.7.0-beta1/0009-Disable-demos-affine.patch
->  create mode 100644 recipes/qt4/qt4-x11-free_4.7.0-beta1.bb
-> 
-> diff --git a/recipes/qt4/qt-4.7.0-beta1.inc b/recipes/qt4/qt-4.7.0-beta1.inc
-> new file mode 100644
-> index 0000000..c691981
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1.inc
-> @@ -0,0 +1,73 @@
-> +DEFAULT_PREFERENCE = "-1"
-> +LICENSE = "LGPLv2.1 GPLv3"
-> +
-> +FILESPATHPKG .= ":qt-${PV}"
-> +
-> +SRC_URI = "\
-> +	ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
-> +	file://0004-no-qmake.patch \
-> +	file://hack-out-pg_config.patch \
-> +	file://0006-freetype-host-includes.patch \
-> +	file://0001-Added-Openembedded-crossarch-option.patch \
-> +	file://0002-Disable-tools-assistant.patch \
-> +	file://0003-Disable-examples-designer.patch \
-> +	file://0004-Disable-exaqmples-dbus-remotecontrolledcar.patch \
-> +	file://0005-Disable-examples-help.patch \
-> +	file://0006-Disable-demos-browser.patch \
-> +	file://0007-Disable-demos-qtdemos.patch \
-> +	file://0008-Disable-examples-declarative.patch \
-> +	file://0009-Disable-demos-affine.patch \
-> +	file://g++.conf \
-> +	file://linux.conf \
-> +           "
-> +
-> +S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
-> +
-> +QT_LIB_NAMES += "QtDeclarative"
-> +FILES_${QT_BASE_NAME}-tools                += "${bindir}/qml"
-> +
-> +do_configure_prepend() {
-> +    for pro in $(find ${S} -name "*.pro") ; do
-> +        sed -i 's:$$QT_BUILD_TREE/bin/lrelease:${OE_QMAKE_LRELEASE}:g' $pro
-> +    done
-> +
-> +    sed -i s:SEDME:${S}: ${WORKDIR}/linux.conf
-> +    sed -i \
-> +    -e /QMAKE_MOC\ /d \
-> +    -e /QMAKE_UIC\ /d \
-> +    -e /QMAKE_UIC3\ /d \
-> +    -e /QMAKE_RCC\ /d \
-> +    ${S}/configure
-> +}
-> +
-> +do_configure_append() {
-> +    sed -e '/QMAKE_TARGET /d' -e '/TARGET /d' -i ${S}/translations/Makefile
-> +}
-> +
-> +QT_GLFLAGS ?= ""
-> +QT_CONFIG_FLAGS += " -no-rpath -qt3support -reduce-relocations -silent ${QT_GLFLAGS}"
-> +
-> +do_compile() {
-> +    # Fixup missing wsegl header in some SGX SDKs
-> +    if ! [ -e ${STAGING_INCDIR}/wsegl.h ] ; then
-> +        cp src/3rdparty/powervr/wsegl.h src/plugins/gfxdrivers/powervr/QWSWSEGL/
-> +    fi
-> +
-> +    unset CFLAGS CXXFLAGS
-> +    install -m 0755 ${STAGING_BINDIR_NATIVE}/rcc4 ${S}/bin/rcc
-> +    install -m 0755 ${STAGING_BINDIR_NATIVE}/moc4 ${S}/bin/moc
-> +    install -m 0755 ${STAGING_BINDIR_NATIVE}/uic4 ${S}/bin/uic
-> +    install -m 0755 ${STAGING_BINDIR_NATIVE}/lrelease4 ${S}/bin/lrelease
-> +
-> +    oe_runmake ${EXTRA_ENV}
-> +}
-> +
-> +do_install_append() {
-> +	install -d ${D}${bindir}
-> +	for i in rcc uic moc ; do
-> +		install -m 0755 ${S}/bin/$i ${D}${bindir}/
-> +	done
-> +}
-> +
-> +SRC_URI[md5sum] = "128dae41b23bb427b735548c7864703a"
-> +SRC_URI[sha256sum] = "1107de986e4dda7795d094a2a3b5d85027d780b9b63e9860957cb1d6c56c8929"
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0001-Added-Openembedded-crossarch-option.patch b/recipes/qt4/qt-4.7.0-beta1/0001-Added-Openembedded-crossarch-option.patch
-> new file mode 100644
-> index 0000000..71a04a5
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0001-Added-Openembedded-crossarch-option.patch
-> @@ -0,0 +1,44 @@
-> +From b1ba119f6a824dc01bd42ee00dba4a1653867b72 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Wed, 12 May 2010 16:52:45 +0200
-> +Subject: [PATCH 1/9] Added Openembedded "-crossarch" option
-> +
-> +---
-> + configure |    7 ++++++-
-> + 1 files changed, 6 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/configure b/configure
-> +index facd192..9d15136 100755
-> +--- a/configure
-> ++++ b/configure
-> +@@ -954,7 +954,7 @@ while [ "$#" -gt 0 ]; do
-> +         shift
-> +         VAL=$1
-> +         ;;
-> +-    -prefix|-docdir|-headerdir|-plugindir|-importdir|-datadir|-libdir|-bindir|-translationdir|-sysconfdir|-examplesdir|-demosdir|-depths|-make|-nomake|-platform|-xplatform|-buildkey|-sdk|-arch|-host-arch|-mysql_config)
-> ++    -prefix|-docdir|-headerdir|-plugindir|-importdir|-datadir|-libdir|-bindir|-translationdir|-sysconfdir|-examplesdir|-demosdir|-depths|-make|-nomake|-platform|-xplatform|-buildkey|-sdk|-arch|-host-arch|-mysql_config|-crossarch)
-> +         VAR=`echo $1 | sed "s,^-\(.*\),\1,"`
-> +         shift
-> +         VAL="$1"
-> +@@ -1443,6 +1443,9 @@ while [ "$#" -gt 0 ]; do
-> +     xplatform)
-> +         XPLATFORM="$VAL"
-> +         ;;
-> ++	crossarch)
-> ++		CROSSARCH="$VAL"
-> ++		;;
-> +     debug-and-release)
-> +         if [ "$VAL" = "yes" ] || [ "$VAL" = "no" ]; then
-> +             CFG_DEBUG_RELEASE="$VAL"
-> +@@ -2918,6 +2921,8 @@ elif [ "$PLATFORM_MAC" = "yes" ] || [ -z "$CFG_ARCH" ]; then
-> +     CFG_ARCH=$CFG_HOST_ARCH
-> + fi
-> + 
-> ++CFG_ARCH="$CROSSARCH"
-> ++
-> + if [ -d "$relpath/src/corelib/arch/$CFG_ARCH" ]; then
-> +     if [ "$OPT_VERBOSE" = "yes" ]; then
-> +         echo "    '$CFG_ARCH' is supported"
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0002-Disable-tools-assistant.patch b/recipes/qt4/qt-4.7.0-beta1/0002-Disable-tools-assistant.patch
-> new file mode 100644
-> index 0000000..1a5da67
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0002-Disable-tools-assistant.patch
-> @@ -0,0 +1,25 @@
-> +From f107d9957f8382dfc2c7b28248eee2d628342a93 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Wed, 12 May 2010 19:41:13 +0200
-> +Subject: [PATCH 2/9] Disable tools/assistant
-> +
-> +---
-> + tools/tools.pro |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/tools/tools.pro b/tools/tools.pro
-> +index 7598962..1d35a3f 100644
-> +--- a/tools/tools.pro
-> ++++ b/tools/tools.pro
-> +@@ -9,7 +9,7 @@ TEMPLATE        = subdirs
-> +         } else:wince* {
-> +             SUBDIRS = qtestlib designer
-> +         } else {
-> +-            SUBDIRS = assistant \
-> ++            SUBDIRS = \
-> +                       pixeltool \
-> +                       porting \
-> +                       qtestlib \
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0003-Disable-examples-designer.patch b/recipes/qt4/qt-4.7.0-beta1/0003-Disable-examples-designer.patch
-> new file mode 100644
-> index 0000000..51fa4a6
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0003-Disable-examples-designer.patch
-> @@ -0,0 +1,24 @@
-> +From 82aaf21a465d0d693916c4b82932371a090482a7 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Wed, 12 May 2010 20:33:11 +0200
-> +Subject: [PATCH 3/9] Disable examples/designer
-> +
-> +---
-> + examples/examples.pro |    1 -
-> + 1 files changed, 0 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/examples/examples.pro b/examples/examples.pro
-> +index 43cad55..785c35c 100644
-> +--- a/examples/examples.pro
-> ++++ b/examples/examples.pro
-> +@@ -53,7 +53,6 @@ contains(QT_CONFIG, script): SUBDIRS += script
-> + contains(QT_CONFIG, phonon):!static: SUBDIRS += phonon
-> + embedded:SUBDIRS += qws
-> + !wince*:!symbian: {
-> +-    !contains(QT_EDITION, Console):!contains(QT_CONFIG, no-gui):contains(QT_BUILD_PARTS, tools):SUBDIRS += designer
-> +     contains(QT_BUILD_PARTS, tools):!contains(QT_CONFIG, no-gui):SUBDIRS += qtestlib help
-> + } else {
-> +     contains(QT_BUILD_PARTS, tools):!contains(QT_CONFIG, no-gui):SUBDIRS += qtestlib
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0004-Disable-exaqmples-dbus-remotecontrolledcar.patch b/recipes/qt4/qt-4.7.0-beta1/0004-Disable-exaqmples-dbus-remotecontrolledcar.patch
-> new file mode 100644
-> index 0000000..cef56ef
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0004-Disable-exaqmples-dbus-remotecontrolledcar.patch
-> @@ -0,0 +1,26 @@
-> +From 753cc5766d51c5b7d599fada569d6b262f2a3b1a Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Wed, 12 May 2010 20:49:30 +0200
-> +Subject: [PATCH 4/9] Disable exaqmples/dbus/remotecontrolledcar
-> +
-> +---
-> + examples/dbus/dbus.pro |    3 +--
-> + 1 files changed, 1 insertions(+), 2 deletions(-)
-> +
-> +diff --git a/examples/dbus/dbus.pro b/examples/dbus/dbus.pro
-> +index e599334..daa89b0 100644
-> +--- a/examples/dbus/dbus.pro
-> ++++ b/examples/dbus/dbus.pro
-> +@@ -4,8 +4,7 @@ SUBDIRS = listnames \
-> + 	  complexpingpong
-> + 
-> + !contains(QT_CONFIG, no-gui) {
-> +-    SUBDIRS += dbus-chat \
-> +-               remotecontrolledcar
-> ++    SUBDIRS += dbus-chat
-> + }
-> + 
-> + # install
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0005-Disable-examples-help.patch b/recipes/qt4/qt-4.7.0-beta1/0005-Disable-examples-help.patch
-> new file mode 100644
-> index 0000000..026f2b0
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0005-Disable-examples-help.patch
-> @@ -0,0 +1,25 @@
-> +From c7f749b564b473f0160a201c769153cfcaf3bc0b Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Thu, 13 May 2010 14:27:22 +0200
-> +Subject: [PATCH 5/9] Disable examples/help
-> +
-> +---
-> + examples/examples.pro |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/examples/examples.pro b/examples/examples.pro
-> +index 785c35c..e37f580 100644
-> +--- a/examples/examples.pro
-> ++++ b/examples/examples.pro
-> +@@ -53,7 +53,7 @@ contains(QT_CONFIG, script): SUBDIRS += script
-> + contains(QT_CONFIG, phonon):!static: SUBDIRS += phonon
-> + embedded:SUBDIRS += qws
-> + !wince*:!symbian: {
-> +-    contains(QT_BUILD_PARTS, tools):!contains(QT_CONFIG, no-gui):SUBDIRS += qtestlib help
-> ++    contains(QT_BUILD_PARTS, tools):!contains(QT_CONFIG, no-gui):SUBDIRS += qtestlib
-> + } else {
-> +     contains(QT_BUILD_PARTS, tools):!contains(QT_CONFIG, no-gui):SUBDIRS += qtestlib
-> + }
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0006-Disable-demos-browser.patch b/recipes/qt4/qt-4.7.0-beta1/0006-Disable-demos-browser.patch
-> new file mode 100644
-> index 0000000..e863f12
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0006-Disable-demos-browser.patch
-> @@ -0,0 +1,24 @@
-> +From 11657d8c4b964b7c16b1d216522a92d6280007e1 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Thu, 13 May 2010 15:53:29 +0200
-> +Subject: [PATCH 6/9] Disable /demos/browser
-> +
-> +---
-> + demos/demos.pro |    1 -
-> + 1 files changed, 0 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/demos/demos.pro b/demos/demos.pro
-> +index 5e8a4ea..8008ccb 100644
-> +--- a/demos/demos.pro
-> ++++ b/demos/demos.pro
-> +@@ -56,7 +56,6 @@ wince*:SUBDIRS += demos_sqlbrowser
-> + }
-> + }
-> + contains(QT_CONFIG, phonon):!static:SUBDIRS += demos_mediaplayer
-> +-contains(QT_CONFIG, webkit):contains(QT_CONFIG, svg):!symbian:SUBDIRS += demos_browser
-> + contains(QT_CONFIG, multimedia):SUBDIRS += demos_multimedia
-> + contains(QT_CONFIG, declarative):SUBDIRS += demos_declarative
-> + 
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0007-Disable-demos-qtdemos.patch b/recipes/qt4/qt-4.7.0-beta1/0007-Disable-demos-qtdemos.patch
-> new file mode 100644
-> index 0000000..6bef4c2
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0007-Disable-demos-qtdemos.patch
-> @@ -0,0 +1,25 @@
-> +From 6a4b829736399fef4a6f1d3223cf0d813caf7062 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Thu, 13 May 2010 16:00:06 +0200
-> +Subject: [PATCH 7/9] Disable demos/qtdemos
-> +
-> +---
-> + demos/demos.pro |    2 +-
-> + 1 files changed, 1 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/demos/demos.pro b/demos/demos.pro
-> +index 8008ccb..a0691bc 100644
-> +--- a/demos/demos.pro
-> ++++ b/demos/demos.pro
-> +@@ -51,7 +51,7 @@ wince*|symbian|embedded|x11: SUBDIRS += demos_embedded
-> + 
-> + !cross_compile:{
-> + contains(QT_BUILD_PARTS, tools):{
-> +-!wince*:SUBDIRS += demos_sqlbrowser demos_qtdemo
-> ++!wince*:SUBDIRS += demos_sqlbrowser
-> + wince*:SUBDIRS += demos_sqlbrowser
-> + }
-> + }
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0008-Disable-examples-declarative.patch b/recipes/qt4/qt-4.7.0-beta1/0008-Disable-examples-declarative.patch
-> new file mode 100644
-> index 0000000..06e1562
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0008-Disable-examples-declarative.patch
-> @@ -0,0 +1,24 @@
-> +From 1b855a946a1d060c52ddb04f308fb25f1d391b6a Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Thu, 13 May 2010 19:49:45 +0200
-> +Subject: [PATCH 8/9] Disable examples/declarative
-> +
-> +---
-> + examples/examples.pro |    1 -
-> + 1 files changed, 0 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/examples/examples.pro b/examples/examples.pro
-> +index e37f580..8681a41 100644
-> +--- a/examples/examples.pro
-> ++++ b/examples/examples.pro
-> +@@ -60,7 +60,6 @@ embedded:SUBDIRS += qws
-> + contains(QT_CONFIG, opengl): SUBDIRS += opengl
-> + contains(QT_CONFIG, openvg): SUBDIRS += openvg
-> + contains(QT_CONFIG, dbus): SUBDIRS += dbus
-> +-contains(QT_CONFIG, declarative): SUBDIRS += declarative
-> + win32: SUBDIRS += activeqt
-> + contains(QT_CONFIG, xmlpatterns):!contains(QT_CONFIG, no-gui): SUBDIRS += xmlpatterns
-> + contains(DEFINES, QT_NO_CURSOR): SUBDIRS -= mainwindows
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt-4.7.0-beta1/0009-Disable-demos-affine.patch b/recipes/qt4/qt-4.7.0-beta1/0009-Disable-demos-affine.patch
-> new file mode 100644
-> index 0000000..c4efdda
-> --- /dev/null
-> +++ b/recipes/qt4/qt-4.7.0-beta1/0009-Disable-demos-affine.patch
-> @@ -0,0 +1,24 @@
-> +From ab87c21fab1b2bb3e593a27e4a08ba66e689f724 Mon Sep 17 00:00:00 2001
-> +From: =?UTF-8?q?Matthias=20G=C3=BCnther?= <matgnt@gmail.com>
-> +Date: Thu, 13 May 2010 20:46:18 +0200
-> +Subject: [PATCH 9/9] Disable demos/affine
-> +
-> +---
-> + demos/demos.pro |    1 -
-> + 1 files changed, 0 insertions(+), 1 deletions(-)
-> +
-> +diff --git a/demos/demos.pro b/demos/demos.pro
-> +index a0691bc..082a77d 100644
-> +--- a/demos/demos.pro
-> ++++ b/demos/demos.pro
-> +@@ -6,7 +6,6 @@ SUBDIRS     = \
-> +             demos_deform \
-> +             demos_gradients \
-> +             demos_pathstroke \
-> +-            demos_affine \
-> +             demos_composition \
-> +             demos_books \
-> +             demos_interview \
-> +-- 
-> +1.7.0.4
-> +
-> diff --git a/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb b/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb
-> new file mode 100644
-> index 0000000..250d4cc
-> --- /dev/null
-> +++ b/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb
-> @@ -0,0 +1,14 @@
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +require qt4-x11-free.inc
-> +PR = "${INC_PR}.0"
-> +
-> +QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
-> +
-> +require qt-${PV}.inc
-> +
-> +QT_CONFIG_FLAGS += " \
-> + -no-embedded \
-> + -xrandr \
-> + -x11"
-> +
-> -- 
-> 1.7.0.4
-> 
-> 
+>
+> [1]: A prime example of this would be mtd-utils-native and UBI
+>
+> diff --git a/classes/base.bbclass b/classes/base.bbclass
+> index e0f9184..e26a45e 100644
+> --- a/classes/base.bbclass
+> +++ b/classes/base.bbclass
+> @@ -75,6 +75,12 @@ def base_dep_prepend(d):
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (bb.data.getVar('HOST_SYS', d, 1) !=3D
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.data.getVar('BUILD_SYS', d, 1))=
+:
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0deps +=3D " virtual/${TARG=
+ET_PREFIX}gcc virtual/libc "
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 elif bb.data.inherits_class('native', d) an=
+d \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 bb.data.get=
+Var('PN', d, True) not in \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 ("linux-lib=
+c-headers-native",
+> "quilt-native",
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0"unifdef=
+-native", "shasum-native",
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0"stagema=
+nager-native", "coreutils-native"):
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 deps +=3D " linux-libc-head=
+ers-native"
+> =A0 =A0 =A0 =A0return deps
+>
+> =A0DEPENDS_prepend=3D"${@base_dep_prepend(d)} "
+> diff --git a/recipes/linux-libc-headers/linux-libc-headers.inc
+> b/recipes/linux-libc-headers/linux-libc-headers.inc
+> index 0487e65..0b0d05a 100644
+> --- a/recipes/linux-libc-headers/linux-libc-headers.inc
+> +++ b/recipes/linux-libc-headers/linux-libc-headers.inc
+> @@ -1,7 +1,8 @@
+> =A0DESCRIPTION =3D "Sanitized set of 2.6 kernel headers for the C library=
+'s
+> use."
+> =A0SECTION =3D "devel"
+> =A0LICENSE =3D "GPL"
+> +NATIVE_INSTALL_WORKS =3D "1"
+> +BBCLASSEXTEND =3D "native"
+>
+> =A0RDEPENDS_${PN}-dev =3D ""
+> =A0RRECOMMENDS_${PN}-dbg =3D "${PN}-dev (=3D ${EXTENDPV})"
+> -
+> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
+> b/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
+> index b66e768..0a1159a 100644
+> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
+> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.7.0.bb
+> @@ -1,6 +1,7 @@
+> =A0require linux-libc-headers.inc
+>
+> =A0INHIBIT_DEFAULT_DEPS =3D "1"
+> +NATIVE_INSTALL_WORKS =3D "0"
+> =A0PR =3D "r4"
+> =A0# NOTE: no need to package these headers, since the c library includes
+> them.
+> =A0PACKAGES =3D ""
+> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
+> b/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
+> index 4893cab..6cbd8ba 100644
+> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
+> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.8.1.bb
+> @@ -1,5 +1,6 @@
+> =A0require linux-libc-headers.inc
+>
+> +NATIVE_INSTALL_WORKS =3D "0"
+> =A0HOMEPAGE =3D "http://ep09.pld-linux.org/~mmazur/linux-libc-headers/"
+> =A0# license note from the package:
+> =A0# =A0 Linux-libc-headers are derived from linux kernel headers. For
+> license of a
+>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
