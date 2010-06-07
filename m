@@ -1,34 +1,44 @@
-Received: from vms173001pub.verizon.net ([206.46.173.1])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OLjgj-0006V1-Qd
+	(envelope-from <martin.jansa@gmail.com>) id 1OLjiM-0001Ah-Ns
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 23:16:55 +0200
-Received: from gandalf.denix.org ([unknown] [71.255.238.44])
-	by vms173001.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L3N00JVXXKF2669@vms173001.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Mon,
-	07 Jun 2010 16:12:21 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3569914AF60; Mon,
-	07 Jun 2010 17:12:15 -0400 (EDT)
-Date: Mon, 07 Jun 2010 17:12:15 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Mon, 07 Jun 2010 23:18:35 +0200
+Received: by fxm9 with SMTP id 9so2578927fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 07 Jun 2010 14:14:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=6o319ogU0REbTPBEHct1r2M6T7zAXZk0okUDc9xi+R0=;
+	b=FZ/a9kMhL7wtS4mY5Fkce59R6FY46VdyhMUyxlcwMJ5EWtrcG3o5b4Ipsbu3Q5jB/D
+	qH2qQxQlJ0OVYVi5CCYXrRHegetAYBn8KRLqDnn8OxBR/a3be7UmMwYeSYXGNAJujsB4
+	HhZkF57MnM7a8umX1CHAgaBZg13b6e0c8Ocfk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=IBx1Hq1OXWX/i8OGuhvZ3zrwjBlhQKH4NjOTRMyOsAIXC20PbhOq9ZKDnB8KhhytWa
+	MoGftjrZD4mJn/WgTAd6a3jRQ/N6H2TnaHMsTWIbzxgrEzHlmJ3Wyfj5CvJs0CjaCCbO
+	TPV0dMWJI+GdMLcZYXzfWo1xKErpPwn6uMb+0=
+MIME-Version: 1.0
+Received: by 10.223.20.73 with SMTP id e9mr15627700fab.103.1275945254698; Mon, 
+	07 Jun 2010 14:14:14 -0700 (PDT)
+Received: by 10.223.106.138 with HTTP; Mon, 7 Jun 2010 14:14:14 -0700 (PDT)
+In-Reply-To: <20100605204019.GA1403@jama>
+References: <20100605204019.GA1403@jama>
+Date: Mon, 7 Jun 2010 23:14:14 +0200
+Message-ID: <AANLkTilB6QtJOplQmu00-D7TeVHKiz2fbO5_ZZjN7iRZ@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100607211215.GB10985@denix.org>
-References: <1275771871-5163-1-git-send-email-matgnt@gmail.com>
-	<1275771871-5163-2-git-send-email-matgnt@gmail.com>
-MIME-version: 1.0
-In-reply-to: <1275771871-5163-2-git-send-email-matgnt@gmail.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.1
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] qt4: Add qt4-tools-native_4.7.0-beta1
+Subject: Re: Latest binutils-cross-2.20.1-r10.0 build issue with binutils-2.20.1 on gentoo host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +52,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 21:16:55 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Mon, 07 Jun 2010 21:18:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jun 05, 2010 at 11:04:30PM +0200, Matthias G??nther wrote:
-> ---
+On Sat, Jun 5, 2010 at 10:40 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> FYI:
+>
+> If you run into issue
+> ar: can't set BFD default target to `x86_64-pc-linux-gnu': Invalid bfd ta=
+rget
+>
+> Like I did in:
+> http://tinderbox.openembedded.net/packages/601631/
+>
+> Then here is what I used as workarround/hack:
+> enabled multitarget USE
 
-Please add your own Signed-off-by line...
+This is not needed and results to broken debian.bbclass (SONAME used
+to change package name), because of:
+bitbake@jama ~/build.dev.ang.spitz $ objdump -p
+/OE/tmpdir-dev/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.5-r0+svnr160=
+043/packages-split/libgcc/lib/libgcc_s.so.1
+objdump: /OE/tmpdir-dev/work/armv5te-angstrom-linux-gnueabi/gcc-cross-4.5-r=
+0+svnr160043/packages-split/libgcc/lib/libgcc_s.so.1:
+File format is ambiguous
+objdump: Matching formats: elf32-littlearm elf32-littlearm-symbian
+elf32-littlearm-vxworks
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+instead of expected objdump output.
 
->  recipes/qt4/qt4-tools-native_4.7.0-beta1.bb |   12 ++++++++++++
->  1 files changed, 12 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/qt4/qt4-tools-native_4.7.0-beta1.bb
-> 
-> diff --git a/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb b/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb
-> new file mode 100644
-> index 0000000..5d3f55c
-> --- /dev/null
-> +++ b/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb
-> @@ -0,0 +1,12 @@
-> +DEFAULT_PREFERENCE = "-1"
-> +
-> +require qt4-tools-native.inc
-> +LICENSE = "LGPLv2.1 GPLv3"
-> +PR = "${INC_PR}.0"
-> +
-> +EXTRA_OECONF += " -no-fast -silent -no-rpath"
-> +
-> +TOBUILD := "src/tools/bootstrap ${TOBUILD}"
-> +
-> +SRC_URI[md5sum] = "128dae41b23bb427b735548c7864703a"
-> +SRC_URI[sha256sum] = "1107de986e4dda7795d094a2a3b5d85027d780b9b63e9860957cb1d6c56c8929"
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+I'll send patch for debian.bbclass changing calling objdump from host
+to objdump from binutils-cross (as suggested by khem on IRC).
+
+> Regards,
+> --
+> Jansa 'JaMa' Martin =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
 
 
