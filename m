@@ -1,41 +1,42 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLQmZ-0007cP-4I
+	(envelope-from <raj.khem@gmail.com>) id 1OLQu9-0007w6-LD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 03:06:14 +0200
-Received: by mail-px0-f175.google.com with SMTP id 14so872669pxi.6
+	Mon, 07 Jun 2010 03:13:31 +0200
+Received: by pvh1 with SMTP id 1so770087pvh.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 06 Jun 2010 18:01:21 -0700 (PDT)
+	Sun, 06 Jun 2010 18:09:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=0vd2CNlAZar/VV7Nv7uiAjfm7rszGPUHdBqWAC004cA=;
-	b=MyfsIMItm7lKYAcbUIDsFqBSjzbGevwgW/yNqisVlHtaudZSBFTZCX5QRPWJPE3a/Z
-	+0KRxC2ihaDBV+AaNOxlhuaaGY4Dicjo9IKRheCAS9NP5ZpjzAcY7Izf1QNt1jdjJXaZ
-	m/9Cgw2yphLX41c9QHk7qwQfKLPtRAUHTJoMo=
+	bh=gTofUD63QQFvxT4RniUkF2/evs28kA/y8oA2snWyz0c=;
+	b=SsIZ3LoEA54Cx4gpXr3kNxwe4e6y6s7nVp2HzfP1SC+iUg5Td0Fa+I9cVR7AqCXPFk
+	e3ez302XD2h9BAwSpZf9uDEgGQv4khaEPfo9VdEOiifG3PCFocy3ihuB863kyDVzEAAi
+	OD2MgDl44A9x/TGlyhcix0BMcMp5Wrpy/m0F8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=LRx6iH4nOEK/Dg8PKwomSXQATyW2OqjxB0kXMZ1iU3RUkLeHGKixEK6SmDOF6sm/rP
-	RIZgylJEhBu86TCQZaaU09UfVBYEdgo7ylk8pZIFOshILbpGYvrApPTw47oHhFs8eUdm
-	I4Dpw1UZCIN7yehTwiO1ASJxZWPtM1Lg5mkdU=
-Received: by 10.114.187.40 with SMTP id k40mr11020590waf.30.1275872481687;
-	Sun, 06 Jun 2010 18:01:21 -0700 (PDT)
+	b=nj6JBoCs0aNziU+CgsjZSw4MbB3hNwdf8CD9TyI1rkrwOqRWa77dppMRGoWdplUjWB
+	reBcoWuoLljEv1gRjmLAvnfsHcExvfGzMniJDTprEQi+xyjO0NyUOzg9aB+wv8vUSf/t
+	kh+pW/oZ7n8scM5Pk4c7+hulvU15cxd8kPXPM=
+Received: by 10.114.4.14 with SMTP id 14mr10946396wad.121.1275872949218;
+	Sun, 06 Jun 2010 18:09:09 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id d16sm33777075wam.12.2010.06.06.18.01.20
+	by mx.google.com with ESMTPS id 33sm33830634wad.20.2010.06.06.18.09.07
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 06 Jun 2010 18:01:20 -0700 (PDT)
-Date: Sun, 6 Jun 2010 18:01:23 -0700
+	Sun, 06 Jun 2010 18:09:08 -0700 (PDT)
+Date: Sun, 6 Jun 2010 18:09:10 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100607010123.GD6723@gmail.com>
-References: <alpine.DEB.2.00.1006050351360.10633@lynx>
+Message-ID: <20100607010910.GE6723@gmail.com>
+References: <BAY127-W96D63AA89D16355433704D8D30@phx.gbl>
+	<20100605101418.GA7682@rhein.zuhause.netz>
 MIME-Version: 1.0
-In-Reply-To: <alpine.DEB.2.00.1006050351360.10633@lynx>
+In-Reply-To: <20100605101418.GA7682@rhein.zuhause.netz>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -43,7 +44,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Manual: Add missing unpack file formats to list.
+Subject: Re: glib configuration failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,74 +58,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 01:06:15 -0000
+X-List-Received-Date: Mon, 07 Jun 2010 01:13:31 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (05/06/10 03:53), Robert P. J. Day wrote:
+On (05/06/10 12:14), Henning Heinold wrote:
+> On Sat, Jun 05, 2010 at 03:34:59PM +0600, saleh usman wrote:
+> > 
+> >  Hello
+> > I am bitbaking console-image and  getting an error of failing configuration of glib-2.0. Kindly tell me how to remove it.Terminal log follows.
+> > Saleh
+> > 
+> > | checking for unistd.h... yes
+> > | checking for inflate in -lz... no
+> > | configure: error: *** Working zlib library and headers not found ***
 > 
-> Add entries for .tbz2, .xz, .tar.xz and .jar files.
-> 
-> Signed-off-by: Robert P. J. Day <rpjday@crashcourse.ca>
+> Try bitbake zlib first.
 
+zlib appears to be in DEPENDS list for this recipe. I wonder why it did not
+get built.
 
-applied thanks
-
-> 
-> ---
-> 
-> diff --git a/docs/usermanual/reference/var_src_uri.xml b/docs/usermanual/reference/var_src_uri.xml
-> index b858e8a..a86fdba 100644
-> --- a/docs/usermanual/reference/var_src_uri.xml
-> +++ b/docs/usermanual/reference/var_src_uri.xml
-> @@ -113,7 +113,7 @@ SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31
->      </varlistentry>
-> 
->      <varlistentry>
-> -      <term>.tbz, .tar.bz2</term>
-> +      <term>.tbz, .tbz2, .tar.bz2</term>
-> 
->        <listitem>
->          <para>Bzip2 compressed tar archives which will be extracted with
-> @@ -143,7 +143,25 @@ SRC_URI[sha256sum] = &quot;36bdb85c97b39ac604bc58cb7857ee08295242c78a12848ef8a31
->      </varlistentry>
-> 
->      <varlistentry>
-> -      <term>.zip</term>
-> +      <term>.xz</term>
-> +
-> +      <listitem>
-> +        <para>xz (LZMA2) compressed files which will be decompressed with
-> +        <command>"xz -dc &lt;srcfile&gt; &gt; &lt;srcfile&gt;"</command>.</para>
-> +      </listitem>
-> +    </varlistentry>
-> +
-> +    <varlistentry>
-> +      <term>.tar.xz</term>
-> +
-> +      <listitem>
-> +        <para>xz (LZMA2) compressed tar archives which will be decompressed with
-> +        <command>"xz -dc &lt;srcfile&gt; | tar x --no-same-owner -f -"</command>.</para>
-> +      </listitem>
-> +    </varlistentry>
-> +
-> +    <varlistentry>
-> +      <term>.zip, .jar</term>
-> 
->        <listitem>
->          <para>Zip archives which will be extracted with <command>"unzip -q
 > 
 > 
-> -- 
+> > | FATAL: oe_runconf failed
+> > NOTE: Task failed: /sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi/glib-2.0-2.23.6-r1/temp/log.do_configure.3044
+> > ERROR: TaskFailed event exception, aborting
+> > ERROR: Build of /sdr/openembedded/recipes/glib-2.0/glib-2.0_2.23.6.bb do_configure failed
+> > ERROR: Task 1122 (/sdr/openembedded/recipes/glib-2.0/glib-2.0_2.23.6.bb, do_configure) failed
+> > NOTE: Tasks Summary: Attempted 431 tasks of which 431 didn't need to be rerun and 1 failed.
+> > ERROR: '/sdr/openembedded/recipes/glib-2.0/glib-2.0_2.23.6.bb' failed
 > 
-> ========================================================================
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
-> 
->             Linux Consulting, Training and Kernel Pedantry.
-> 
-> Web page:                                          http://crashcourse.ca
-> Twitter:                                       http://twitter.com/rpjday
-> ========================================================================
+> Bye Henning
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
