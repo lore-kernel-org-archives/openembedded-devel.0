@@ -1,44 +1,53 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pz0-f183.google.com ([209.85.222.183])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OLd6A-0002me-Pc for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 16:14:43 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OLd1z-0000gW-MY for openembedded-devel@lists.openembedded.org;
-	Mon, 07 Jun 2010 16:10:23 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 16:10:23 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1OLd7B-0002uR-8N
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 07 Jun 2010 16:15:46 +0200
+Received: by pzk13 with SMTP id 13so3800536pzk.13
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 16:10:23 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 07 Jun 2010 16:10:10 +0200
-Message-ID: <huiuk3$vrn$1@dough.gmane.org>
-References: <1275504373-32623-1-git-send-email-cliff.brake@gmail.com>	<AANLkTilBs6W1OMqbnKf9AujWBBGTWGyHo3Q3C9mr7URg@mail.gmail.com>	<AANLkTin8ybTRctnuKkR9h6lFHZFQDJTLlI7wB2vrc6AA@mail.gmail.com>
-	<AANLkTinbCpiUj5C33NE1kx07ZLKRljT92ip6-JD5Ftfn@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTinbCpiUj5C33NE1kx07ZLKRljT92ip6-JD5Ftfn@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	Mon, 07 Jun 2010 07:11:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=duDASoqBX+Uh31MVxiI7KtlVLhhZGmLu1ZArtc2ndV4=;
+	b=WQz6krXRb27k8qiYg8ZJlFJpcmwM4FfHqjBCUqmS6+Z1XCTaZVLkFXaBGk8+rqLHiE
+	04dHmbuQYho64XfqlY79fi161HQIiKpNRfhF0H7r32X2whIS/gopAFI7exCtOzUw2qkF
+	gHs9HvuHKPG8LmVfcfk9B2OCTk3KsE4hKBDsc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=enNfS49WE7fVoBzxhs0MWXkf3+90ag+2/azl5wubG7rnS4yuTPsMGXBlXIWjCNNkJ8
+	f9I8ri3mGihRTYhvSQUiicojVHvDrWXwtpDc2pWGHta1j7KSs4M9f2PTR1KJBwtP5JBU
+	e/Y8bk+A1Z4/Q9eJmNMgn7x1ez0JxcdDCD7E0=
+Received: by 10.142.117.27 with SMTP id p27mr10816690wfc.252.1275919884372;
+	Mon, 07 Jun 2010 07:11:24 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id 20sm3077511pzk.15.2010.06.07.07.11.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 07 Jun 2010 07:11:20 -0700 (PDT)
+Date: Mon, 7 Jun 2010 07:11:24 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: Jan Paesmans <jan.paesmans@gmail.com>
+Message-ID: <20100607141124.GB4570@gmail.com>
+References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>
+	<1275510896-30845-8-git-send-email-raj.khem@gmail.com>
+	<AANLkTilJ62g8nmoiOrRbKBMDhUs7RtjMNgxwW3ntzink@mail.gmail.com>
+	<AANLkTilsZ7Qvc77yWK0hCi9W3yhkxo0f6f7olvxILH7X@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTilsZ7Qvc77yWK0hCi9W3yhkxo0f6f7olvxILH7X@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.222.183
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] packaged-staging.bbclass: fix issue with no SRC_URI
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH 07/16] grep-2.6.3: Add recipe.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +61,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 07 Jun 2010 14:14:43 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 07 Jun 2010 14:15:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On (07/06/10 09:35), Jan Paesmans wrote:
+> Hi,
+> I was having problems with building grep both native and for target on
+> our build system.
+> Seems that there is a dependency missing on gettext. Adding gettext to
+> the inherit directive solves the build failure.
 
-On 07-06-10 15:40, Cliff Brake wrote:
-> On Fri, Jun 4, 2010 at 3:47 PM, Chris Larson <clarson@kergoth.com> wrote:
->> Please change ${srcuri} to $srcuri, so its very clear that its expanded in
->> shell, rather than letting bitbake try to expand it and fail since its unset
->> :)
->>
->> After that, Acked-by: Chris Larson <chris_larson@mentor.com>
-> 
-> Thanks!  Updated patch attached.  Can I get one more ack?
-
-Acked-by: Koen Kooi <k-kooi@ti.com>
-
-and don't forget to update patchwork :)
-
-
-> 
-> Thanks,
-> Cliff
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMDP3CMkyGM64RGpERAjAiAJsExfnV7BPzUZPW2KHgBTnJKfBbWgCfaFVr
-O2VPzEIMBtIolbFEEsothJg=
-=aHtc
------END PGP SIGNATURE-----
-
+thanks for report. I will test a fix today.
+-Khem
 
 
