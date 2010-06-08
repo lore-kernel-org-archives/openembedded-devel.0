@@ -1,47 +1,40 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OLzoO-0004iC-Tx
+	(envelope-from <Tom_Rini@mentor.com>) id 1OLzzU-00007m-2S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 16:29:53 +0200
-Received: by gxk19 with SMTP id 19so130383gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jun 2010 07:25:31 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=KHq1FsWIpGznkQZvErB91Hg6DhGwRms67xPViOzpC/0=;
-	b=iC0XqYQvGOsFnkjithmtcfgjznCQtj2U99iiEdAVyJ67buGoMbXrUdQxGIHUU2vQAn
-	+2a1VHPj5h/fbmfnquMPeQEp3rYZkJWbDjcggU6GN3jH/+5vHYIpdnygwMDRoAANw0MX
-	3W1EhxEiyGxwwSi4T52oobVSHFl44ADDisoV4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=sTntRqCPBDukjBWaz/Rg/eblg0Y1TvuYrZrGY5t9p6pSD3GMDRa/x1C0oUQkmACGkU
-	Ju+O8BWwC6HAIaXcTFtROMaC4JEem+TmNe8OMSIIPvPG92LtAyycPUp8MREO57EgGP+g
-	nVPFZodgALXKBYHkq67kmaVvx9YIosPaYH7VU=
-Received: by 10.224.26.154 with SMTP id e26mr1431062qac.247.1276007125873; 
-	Tue, 08 Jun 2010 07:25:25 -0700 (PDT)
+	Tue, 08 Jun 2010 16:41:21 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OLzvF-0001pc-6A from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jun 2010 07:36:57 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 8 Jun 2010 07:36:56 -0700
+Received: from [172.30.80.221] ([172.30.80.221]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 8 Jun 2010 08:36:55 -0600
+Message-ID: <4C0E5585.8010907@mentor.com>
+Date: Tue, 08 Jun 2010 07:36:53 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.3.133 with HTTP; Tue, 8 Jun 2010 07:25:02 -0700 (PDT)
-In-Reply-To: <1275980325-23187-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1275980325-23187-1-git-send-email-Martin.Jansa@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 8 Jun 2010 07:25:02 -0700
-X-Google-Sender-Auth: GpfHJjnD0A-jhlYw8O4-noNkE34
-Message-ID: <AANLkTim5KgqB_x1szeqTpRw4krnWN3J5KbB30sDMfTRz@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+References: <4C0D498A.4030709@mentor.com>
+	<AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
+In-Reply-To: <AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
+X-OriginalArrivalTime: 08 Jun 2010 14:36:56.0135 (UTC)
+	FILETIME=[0B5B8D70:01CB0718]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] debian.bbclass: call objdump from binutils-cross
+Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,31 +48,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 14:29:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Jun 2010 14:41:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jun 7, 2010 at 11:58 PM, Martin Jansa <martin.jansa@gmail.com>wrote:
+Frans Meulenbroeks wrote:
+> 2010/6/7 Tom Rini <tom_rini@mentor.com>:
+>> On some host distributions the provided linux kernel headers are too old
+>> to compile utilities we need[1].  Given that we need these utilities to
+>> run things on the target the best solution is to provide
+>> linux-libc-headers-native.  Rather than get things into an inconsistent
+>> state, we make linux-libc-headers-native be a default dependency.
+>>
+>> [1]: A prime example of this would be mtd-utils-native and UBI
+> 
+> I'd say this is heading in the totally wrong direction.
+> 
+> Target code should not depend on host headers.
+> And if you need the target headers, you should depend on and use
+> linux-libc-headers.
+> 
+> I guess mtd-utils-native is used to make an mtd image for the target
+> and as such I would expect it to use the target headers.
+> 
+> What would be the difference between linux-libc-headers and
+> linux-libc-headers-native in the first place?
+> (and if there is a difference, I think a better package name would be
+> linux-libc-headers-cross).
 
-> * host objdump can support multiple targets and instead of output it shows
-> list of targets to choose from
->  see
-> http://thread.gmane.org/gmane.comp.handhelds.openembedded/33294/focus=33357
-> * for some reason cross/bin doesn't seem to be in PATH, that's why there
->  is full path
->
+As Khem said, you're thinking in the wrong direction here.  Target stuff 
+which needs the headers get the headers via linux-libc-headers.  The 
+problem is runs on the host tools that generate things for the target.
 
-cross/bin is in the PATH *bitbake* variable, but not in the *environment*
-exported to subprocesses.  I'd suggest either setting PATH in cmd, which
-we've done in the past, or use the oe_popen/oe_system convenience functions,
-which pull all exported bitbake vars into the environment used to spawn the
-subprocess.
+> Btw if say mtd-utils-native needs kernel headers to access host
+> functionality using headers for a different kernel version seems to be
+> a no-no either.
 
-Ideally, it wouldn't be necessary -- perhaps we should think about having
-bitbake's finalize() transfer the vars over into os.environ, or something...
+mtd-utils is depending on OK to be exported by the kernel information to 
+know how to make a UBI image.  And again, for the target this just works.
+
+> PS: which distributions/distribution versions/kernel versions do have
+> this problem?
+> Ubuntu 8.04 (which has a 2.6.24 kernel) does not seem to exhibit this problem).
+
+RHEL4.
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Tom Rini
+Mentor Graphics Corporation
+
 
