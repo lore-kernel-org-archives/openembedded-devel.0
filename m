@@ -1,37 +1,36 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OLzUj-0004Sv-V1
+	(envelope-from <raj.khem@gmail.com>) id 1OLzVk-0006pL-GE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 16:09:45 +0200
-Received: by gyg10 with SMTP id 10so3287977gyg.6
+	Tue, 08 Jun 2010 16:10:44 +0200
+Received: by yxf34 with SMTP id 34so51023yxf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jun 2010 07:05:12 -0700 (PDT)
+	Tue, 08 Jun 2010 07:06:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=LAeRj7tfgp3dIQgfHpGdYcWuI4+8tbGFe2/bL3s00Ck=;
-	b=tevHTcFyIT/iz16ELtgIhd7tI5apkaUHtCntvR39/Wfee5M50wfrd4KoE65XiWfBcJ
-	buONGWXj8m0br2wVKtqLcYT5R26ejTdcJ1f2pw3xXu3u6tB15/Df7t5ZP+8P6zTweAZ2
-	CFYOqlzszIHVpELmyMSQegdaH2GR1hkfN14Fg=
+	bh=chSGt7GvUwv+pioWOAvUztsJV6YPmHZ6UdlhP9YVGlo=;
+	b=kzUAeBzmxvW7aRXaFoG1w3BckNhxgjbpDW5OeVW+5iZ+G3nn+jzHqJe/FHsPReo/it
+	k/B+WwhaW69JgPiJn/i+xF9lIpg2Y++6YHHbiPYa82hTrAb7c3MR2GmOCruR4j3p2hcx
+	VzrkY9vX5kWkhUS8oEg9gciPW06TOnDWJt3oQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=CwqWtOD1ltaDu+uwq+3BiybgcjBKF9bw35q4Q8IBLiTNMv3i8PA/FCGvTdncQS1bRH
-	mXaRm1Odh1qQtbUH/wCrIdSBHSdyH+spmGjCUq9ipT0KlQde9G4UWp603LtesilfqS4G
-	piyzEvCZKdFE7TY3NJxE/hBLqZVzWuBk1zIBE=
-Received: by 10.150.117.42 with SMTP id p42mr15571496ybc.77.1276005912641; 
-	Tue, 08 Jun 2010 07:05:12 -0700 (PDT)
+	b=K7uuigi/g044qJxs8HpVxNr4JQPqk04P0nw9g+v6hQzV4aidb0wpsJJ4jIiU3V2HSj
+	FajK/YfjQrwELEZPBuQpBGV2mYIYf051I0gE9ReDtqfGy3LePh+UUdDQd1U1WN0Eh9y+
+	mQ2iqn03qRj9M90lhXKqGKcAkJfQxQSD4ObAc=
+Received: by 10.101.172.6 with SMTP id z6mr17094199ano.252.1276005974303; Tue, 
+	08 Jun 2010 07:06:14 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.19.76 with HTTP; Tue, 8 Jun 2010 07:04:52 -0700 (PDT)
-In-Reply-To: <AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
-References: <4C0D498A.4030709@mentor.com>
-	<AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
+Received: by 10.231.19.76 with HTTP; Tue, 8 Jun 2010 07:05:54 -0700 (PDT)
+In-Reply-To: <1275980325-23187-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1275980325-23187-1-git-send-email-Martin.Jansa@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 8 Jun 2010 07:04:52 -0700
-Message-ID: <AANLkTin7X57KGxU-ukNtonkw1Ks5oTcBGUdPxCHMGoWF@mail.gmail.com>
+Date: Tue, 8 Jun 2010 07:05:54 -0700
+Message-ID: <AANLkTimU9nYPUYhdhaN_14YnXoADHQsnHnRfMwMVnn9P@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
+Subject: Re: [PATCH] debian.bbclass: call objdump from binutils-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,61 +52,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 14:10:27 -0000
+X-List-Received-Date: Tue, 08 Jun 2010 14:11:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 7, 2010 at 11:36 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/6/7 Tom Rini <tom_rini@mentor.com>:
->> On some host distributions the provided linux kernel headers are too old
->> to compile utilities we need[1]. =A0Given that we need these utilities t=
-o
->> run things on the target the best solution is to provide
->> linux-libc-headers-native. =A0Rather than get things into an inconsisten=
-t
->> state, we make linux-libc-headers-native be a default dependency.
->>
->> [1]: A prime example of this would be mtd-utils-native and UBI
+On Mon, Jun 7, 2010 at 11:58 PM, Martin Jansa <martin.jansa@gmail.com> wrot=
+e:
+> * host objdump can support multiple targets and instead of output it show=
+s list of targets to choose from
+> =A0see http://thread.gmane.org/gmane.comp.handhelds.openembedded/33294/fo=
+cus=3D33357
+> * for some reason cross/bin doesn't seem to be in PATH, that's why there
+> =A0is full path
 >
-> I'd say this is heading in the totally wrong direction.
->
-> Target code should not depend on host headers.
-> And if you need the target headers, you should depend on and use
-> linux-libc-headers.
->
-> I guess mtd-utils-native is used to make an mtd image for the target
-> and as such I would expect it to use the target headers.
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-no. mtd-utils-native itself is a host utility so to build it we need tools
-and development files for the host not the target.
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
+> ---
+> =A0classes/debian.bbclass | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
 >
-> What would be the difference between linux-libc-headers and
-> linux-libc-headers-native in the first place?
-
-one is for target (e.g. arm) and another one would be your build system
-(e.g. x86)
-
-> (and if there is a difference, I think a better package name would be
-> linux-libc-headers-cross).
-
-cross is for something which runs on host and generates code for target
-
-
+> diff --git a/classes/debian.bbclass b/classes/debian.bbclass
+> index 8f6e7d8..d41c922 100644
+> --- a/classes/debian.bbclass
+> +++ b/classes/debian.bbclass
+> @@ -54,7 +54,7 @@ python debian_package_name_hook () {
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0for f in f=
+iles:
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0if so_re.match(f):
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0fp =3D os.path.join(root, f)
+> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 cmd =3D (bb.data.getVar('BUILD_PREFIX', d, 1) or "") +=
+ "objdump -p " + fp + " 2>/dev/null"
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 =A0 =A0 =A0 =A0 cmd =3D bb.data.getVar('CROSS_DIR', d, 1) + "/" + bb.d=
+ata.getVar('bindir_cross', d, 1) + "/" + bb.data.getVar('TARGET_PREFIX', d,=
+ 1) + "objdump -p " + fp + " 2>/dev/null"
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0fd =3D os.popen(cmd)
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0lines =3D fd.readlines()
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0 =A0 =A0 =A0 =A0fd.close()
+> --
+> 1.7.1
 >
-> Btw if say mtd-utils-native needs kernel headers to access host
-> functionality using headers for a different kernel version seems to be
-> a no-no either.
->
-> Just my eur 0.02
->
-> Frans.
->
-> PS: which distributions/distribution versions/kernel versions do have
-> this problem?
-> Ubuntu 8.04 (which has a 2.6.24 kernel) does not seem to exhibit this pro=
-blem).
 >
 > _______________________________________________
 > Openembedded-devel mailing list
