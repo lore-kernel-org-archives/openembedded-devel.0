@@ -1,47 +1,48 @@
-Received: from mail-pz0-f178.google.com ([209.85.222.178])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OM0ju-0005Y2-4Z
+	(envelope-from <andrea.adami@gmail.com>) id 1OM0sc-0007a8-Bs
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 17:29:19 +0200
-Received: by pzk8 with SMTP id 8so417501pzk.12
+	Tue, 08 Jun 2010 17:38:19 +0200
+Received: by fxm9 with SMTP id 9so3139992fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jun 2010 08:24:56 -0700 (PDT)
+	Tue, 08 Jun 2010 08:33:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=JsWQZm8CWd3b/LnwT4H7a+TUtgmiChsResYTcpCMYOw=;
-	b=kTXUm7VO17NGBOXButdZyx9ui88svV8/H0mxk03xPv1axw8eVwCl52NC+3vUipSE2O
-	u1y8WO63M661hmH6En4LOaJGoLoLwyFd8K5AEaVJuAy3GN2EPFPhLaY/ny7FmHpHblFG
-	dBlqGBBNHVuTYRYm05volwrz7bTZDfcclXAio=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=/v3Er+j7VmGuDYBpl1ZxK41BtvtUYzet5eoyLuN/V68=;
+	b=wJQ4f5VQXWKZd0CbXQ66HBYBNsCjwZLrHgDxfgFi2SfJQ9PjCfoZC5XMg9C+o1LcBj
+	SGr+rQjvCmvlQO8h4lKFdDgEMGZwqv3/jAXF3gCzxEC6S9mnv2gMCDz1DxT9RUAdPgBk
+	1liGWvMv0HY0Blw7g1hFSCMg6/7gIbsSJulNY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=EGmhJWTaw2pvq6HgEl2OLAmaxPwUfsoMeHLiQzwbe3EmBynumYZGEvEVSvMX/rJahu
-	8/7IdpqKVA45udPfmfDzrU2AdqUfBGoZdqTLlwLspnabmK1+18hB/amfkhtEqWcsHoz8
-	goLBYF+Qc9GsE4s84Ty9Ugofqo1jyGCi69RY4=
-Received: by 10.224.30.135 with SMTP id u7mr9477908qac.197.1276010693788; Tue, 
-	08 Jun 2010 08:24:53 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=UhUo6day96kcz2iy/HLjqAJ+0kPDTUaBwUXWJEwSRM8Kj8r+70gEPOS/othSM2opfR
+	kByishQWRlvXL6M1BlO6wYWkW/m2r3ZjcDxlYocTV9l0d+4X4mDvO9VGgklxZhyAjloS
+	gCYlyXfbQ3LHs8K8I3Plc3akLjUcW88ovxAx0=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.3.133 with HTTP; Tue, 8 Jun 2010 08:24:25 -0700 (PDT)
-In-Reply-To: <BAY127-W2325648E02B2D81BA370B0D8D60@phx.gbl>
-References: <BAY127-W2325648E02B2D81BA370B0D8D60@phx.gbl>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 8 Jun 2010 08:24:25 -0700
-X-Google-Sender-Auth: itrVmrqi2yErK4QQLIqyF4gaEWY
-Message-ID: <AANLkTikPVypcRj0ZCyB6wNveS9CClBQZLiQCSL5uwR9e@mail.gmail.com>
+Received: by 10.204.81.14 with SMTP id v14mr7860124bkk.105.1276011237182; Tue, 
+	08 Jun 2010 08:33:57 -0700 (PDT)
+Received: by 10.204.54.137 with HTTP; Tue, 8 Jun 2010 08:33:57 -0700 (PDT)
+In-Reply-To: <AANLkTimze8vRUUloa6gaRBU6jvp8zrcSAKDvqCu3ppaY@mail.gmail.com>
+References: <AANLkTil89_7H3CIZOSZd9QjKE-Cf6mv5B7xpFCqaM8oM@mail.gmail.com>
+	<1273859746.22943.454.camel@trini-m4400>
+	<AANLkTimDt7fVT14jNofov1ESwO2M_CvBAe6RsdvzZicE@mail.gmail.com>
+	<1273881865.8005.205.camel@trini-m4400>
+	<1274035921.24454.68.camel@rex>
+	<AANLkTimze8vRUUloa6gaRBU6jvp8zrcSAKDvqCu3ppaY@mail.gmail.com>
+Date: Tue, 8 Jun 2010 17:33:57 +0200
+Message-ID: <AANLkTinQkOqz64zpVuPA_OTRJ9O3ujjMv77DIUInHFWa@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.222.178
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: path error in bitbake file
+Subject: Re: Issues with parallel build? (Was: gtk+native missing dep ?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,56 +56,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 15:29:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 08 Jun 2010 15:38:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-As you'd know if you'd read the manuals, local paths are specified with
-file://.  file:///sdr/GPP_node is what you want.
+Bump: issue seems still present :/
 
-On Tue, Jun 8, 2010 at 8:05 AM, saleh usman <salehusman@hotmail.com> wrote:
+Don't know how related/unrelated but on @beagle irc I spotted this bits:
 
->
-> I want to give a path of a directory /sdr/GPP_node in bitbake recipe in
-> which source files are placed. I did this as
->
-> SRC_URI = "/sdr;module=GPP_node"
->
-> But it is showing error as shown below. kindly tell me the exact format for
-> this path.
->
->
-> NOTE: Running task 1783 of 3200 (ID: 1081,
-> /sdr/ossie_collection/packages/ossie-nodes/ossie-gpp-node_svn.bb,
-> do_fetch)
-> NOTE: Task failed: Malformed URL: /sdr;module=GPP_node
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of /sdr/ossie_collection/packages/ossie-nodes/
-> ossie-gpp-node_svn.bb do_fetch failed
-> ERROR: Task 1081 (/sdr/ossie_collection/packages/ossie-nodes/
-> ossie-gpp-node_svn.bb, do_fetch) failed
-> NOTE: Tasks Summary: Attempted 1782 tasks of which 1782 didn't need to be
-> rerun and 1 failed.
-> ERROR: '/sdr/ossie_collection/packages/ossie-nodes/ossie-gpp-node_svn.bb'
-> failed
->
->
-> Saleh
->
-> _________________________________________________________________
-> Hotmail: Trusted email with powerful SPAM protection.
-> https://signup.live.com/signup.aspx?id=60969
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+[17:06]	<gst-kaps1>	On Angstrom, gst-inspect doesnt work
+[17:07]	<gst-kaps1>	it says g_malloc_n symbol not found ?
+
+[17:10]	<ant_work>	gst-kaps1: interesting. Have you had any build-issue?
+[17:11]	<gst-kaps1>	ant_work: no
 
 
+Andrea
 
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
