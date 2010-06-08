@@ -1,40 +1,30 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from bay0-omc4-s3.bay0.hotmail.com ([65.54.190.205])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OLzzU-00007m-2S
+	(envelope-from <salehusman@hotmail.com>) id 1OM0Rs-0006NW-3J
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 16:41:21 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OLzvF-0001pc-6A from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 07:36:57 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 8 Jun 2010 07:36:56 -0700
-Received: from [172.30.80.221] ([172.30.80.221]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 8 Jun 2010 08:36:55 -0600
-Message-ID: <4C0E5585.8010907@mentor.com>
-Date: Tue, 08 Jun 2010 07:36:53 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 08 Jun 2010 17:11:06 +0200
+Received: from BAY127-W23 ([65.54.190.199]) by bay0-omc4-s3.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 8 Jun 2010 08:05:15 -0700
+Message-ID: <BAY127-W2325648E02B2D81BA370B0D8D60@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
+Date: Tue, 8 Jun 2010 21:05:14 +0600
+Importance: Normal
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C0D498A.4030709@mentor.com>
-	<AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
-In-Reply-To: <AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
-X-OriginalArrivalTime: 08 Jun 2010 14:36:56.0135 (UTC)
-	FILETIME=[0B5B8D70:01CB0718]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-OriginalArrivalTime: 08 Jun 2010 15:05:15.0677 (UTC)
+	FILETIME=[005D14D0:01CB071C]
+X-SA-Exim-Connect-IP: 65.54.190.205
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: path error in bitbake file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,53 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 14:41:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jun 2010 15:11:46 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Frans Meulenbroeks wrote:
-> 2010/6/7 Tom Rini <tom_rini@mentor.com>:
->> On some host distributions the provided linux kernel headers are too old
->> to compile utilities we need[1].  Given that we need these utilities to
->> run things on the target the best solution is to provide
->> linux-libc-headers-native.  Rather than get things into an inconsistent
->> state, we make linux-libc-headers-native be a default dependency.
->>
->> [1]: A prime example of this would be mtd-utils-native and UBI
-> 
-> I'd say this is heading in the totally wrong direction.
-> 
-> Target code should not depend on host headers.
-> And if you need the target headers, you should depend on and use
-> linux-libc-headers.
-> 
-> I guess mtd-utils-native is used to make an mtd image for the target
-> and as such I would expect it to use the target headers.
-> 
-> What would be the difference between linux-libc-headers and
-> linux-libc-headers-native in the first place?
-> (and if there is a difference, I think a better package name would be
-> linux-libc-headers-cross).
 
-As Khem said, you're thinking in the wrong direction here.  Target stuff 
-which needs the headers get the headers via linux-libc-headers.  The 
-problem is runs on the host tools that generate things for the target.
+I want to give a path of a directory /sdr/GPP_node in bitbake recipe in whi=
+ch source files are placed. I did this as=20
 
-> Btw if say mtd-utils-native needs kernel headers to access host
-> functionality using headers for a different kernel version seems to be
-> a no-no either.
+SRC_URI =3D "/sdr=3Bmodule=3DGPP_node"
 
-mtd-utils is depending on OK to be exported by the kernel information to 
-know how to make a UBI image.  And again, for the target this just works.
+But it is showing error as shown below. kindly tell me the exact format for=
+ this path.
 
-> PS: which distributions/distribution versions/kernel versions do have
-> this problem?
-> Ubuntu 8.04 (which has a 2.6.24 kernel) does not seem to exhibit this problem).
 
-RHEL4.
+NOTE: Running task 1783 of 3200 (ID: 1081=2C /sdr/ossie_collection/packages=
+/ossie-nodes/ossie-gpp-node_svn.bb=2C do_fetch)
+NOTE: Task failed: Malformed URL: /sdr=3Bmodule=3DGPP_node
+ERROR: TaskFailed event exception=2C aborting
+ERROR: Build of /sdr/ossie_collection/packages/ossie-nodes/ossie-gpp-node_s=
+vn.bb do_fetch failed
+ERROR: Task 1081 (/sdr/ossie_collection/packages/ossie-nodes/ossie-gpp-node=
+_svn.bb=2C do_fetch) failed
+NOTE: Tasks Summary: Attempted 1782 tasks of which 1782 didn't need to be r=
+erun and 1 failed.
+ERROR: '/sdr/ossie_collection/packages/ossie-nodes/ossie-gpp-node_svn.bb' f=
+ailed
 
--- 
-Tom Rini
-Mentor Graphics Corporation
 
+Saleh
+ 		 	   		 =20
+_________________________________________________________________
+Hotmail: Trusted email with powerful SPAM protection.
+https://signup.live.com/signup.aspx?id=3D60969=
 
