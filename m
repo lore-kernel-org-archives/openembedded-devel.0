@@ -1,52 +1,38 @@
-Received: from mail-ew0-f221.google.com ([209.85.219.221])
+Received: from fallback4.mail.ru ([94.100.176.42])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jan.paesmans@gmail.com>) id 1OM4vY-0005HV-74
+	(envelope-from <mad_soft@inbox.ru>) id 1OM5d3-0005mj-El
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 21:57:37 +0200
-Received: by ewy21 with SMTP id 21so39766ewy.27
+	Tue, 08 Jun 2010 22:42:36 +0200
+Received: from mx30.mail.ru (mx30.mail.ru [94.100.176.44])
+	by fallback4.mail.ru (mPOP.Fallback_MX) with ESMTP id 56C8220D7DEA
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jun 2010 12:53:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type; bh=FzuIwyiz3X5FC8SjxBwWXNDLziVsc+4Br6Mzq3/oy90=;
-	b=J6s0btyaul0x7IVYnT7fyUN/hE2UMf7b00sAiGDwcJ6hots1KN0Bc4Urjnb7hAt74d
-	62DJSslgKmKiQquuKG7vo8JQZpOmmt0USfBVHU4Iq63SsDjN4gd4BX8nW+V5YLVvElKF
-	ve+yE3VBEM1A0j5gw+s4TpfisL023QbmFZsuA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type;
-	b=QDj1PuhJOrD2+FgtEJsnGQFFG7SLbd7gdsZnGqHdVanTJxI0wBCoPNbNC2u9lEUHiL
-	x+5FH6adLuMb62IBzFnlq/ie0UQu1zA2UUWJrV5B5HrccxQtEPTe5RTPzqaBSeuqYZDP
-	VzoHgzDVvUK9fgAK/ZpzC8U6BzSdsMF7W0OUg=
-Received: by 10.213.31.143 with SMTP id y15mr222859ebc.14.1276026793993;
-	Tue, 08 Jun 2010 12:53:13 -0700 (PDT)
-Received: from [192.168.1.103] (206.211-240-81.adsl-dyn.isp.belgacom.be
-	[81.240.211.206])
-	by mx.google.com with ESMTPS id 15sm3559542ewy.0.2010.06.08.12.53.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 08 Jun 2010 12:53:12 -0700 (PDT)
-Message-ID: <4C0E9FA6.50804@gmail.com>
-Date: Tue, 08 Jun 2010 21:53:10 +0200
-From: Jan Paesmans <jan.paesmans@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100607 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Wed,  9 Jun 2010 00:05:43 +0400 (MSD)
+Received: from [77.51.33.209] (port=59923 helo=localhost)
+	by mx30.mail.ru with asmtp id 1OM53M-000DW2-00
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Jun 2010 00:05:40 +0400
+Date: Wed, 9 Jun 2010 00:05:39 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-References: <1275510896-30845-1-git-send-email-raj.khem@gmail.com>	<1275510896-30845-7-git-send-email-raj.khem@gmail.com>	<hu6fm8$gg4$2@dough.gmane.org>
-	<20100604002902.GA24343@gmail.com>
-	<AANLkTimLGz3yNOafixBe0Mfkb1f_jLUK44Ubq68W1eUa@mail.gmail.com>
-In-Reply-To: <AANLkTimLGz3yNOafixBe0Mfkb1f_jLUK44Ubq68W1eUa@mail.gmail.com>
-X-SA-Exim-Connect-IP: 209.85.219.221
-X-SA-Exim-Mail-From: jan.paesmans@gmail.com
+Message-ID: <20100608200539.GA2568@rainbow>
+References: <20100605204019.GA1403@jama>
+	<AANLkTilB6QtJOplQmu00-D7TeVHKiz2fbO5_ZZjN7iRZ@mail.gmail.com>
+	<20100608172005.GA28481@rainbow>
+	<AANLkTinx7ElAXde__dWP6Eufdr4XtPl1uzzXE2srNGRP@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinx7ElAXde__dWP6Eufdr4XtPl1uzzXE2srNGRP@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam: Not detected
+X-Mras: Ok
+X-SA-Exim-Connect-IP: 94.100.176.42
+X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 06/16] db_5.0.21: Add recipes for target and native packages.
+Subject: Re: Latest binutils-cross-2.20.1-r10.0 build issue with binutils-2.20.1 on gentoo host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,46 +46,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 19:57:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jun 2010 20:42:36 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 06/04/2010 09:38 AM, Martin Jansa wrote:
-> On Fri, Jun 4, 2010 at 2:29 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> On (02/06/10 22:41), Koen Kooi wrote:
-> On 02-06-10 22:34, Khem Raj wrote:
-> >>>> * Get rid of old style staging.
-> >>>>
-> >>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> >>>> ---
-> >>>>  recipes/db/db-native_4.2.52.bb             |    1 -
-> >>>>  recipes/db/db-native_5.0.21.bb             |    2 +
->
-> Can these get converted to BBCLASSEXTEND?
-> >>
-> >> Yes. I have intended to do that afterwards
->
-> > Then
->
-> > Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
->
-> >>
->
-> regards,
->
-> Koen
-Sorry to be the bearer of bad news, but libpam_1.1.0.bb doesn't like
-this new berkley db.
-Got compile errors on module/pam_userdb.c, anything related to dbm_...
-functions that return and assign a value. As far as I can tell from the
-source of db.h there is a define missing: HAVE_DBM. Adding this to the
-compile line: -DHAVE_DBM=1 makes it compile fine but I haven't found
-where to set it from the configure flags and if indeed this is the
-correct thing to do.
-For now, might I suggest a DEFAULT_PREFERENCE = "-1" to be added to
-db_5.0.21.bb.
+On 11:13 Tue 08 Jun     , Khem Raj wrote:
+> On Tue, Jun 8, 2010 at 10:20 AM, Dmitry Artamonow <mad_soft@inbox.ru> w=
+rote:
+> > On 23:14 Mon 07 Jun =A0 =A0 , Martin Jansa wrote:
+> >> On Sat, Jun 5, 2010 at 10:40 PM, Martin Jansa <martin.jansa@gmail.co=
+m> wrote:
+> >> > FYI:
+> >> >
+> >> > If you run into issue
+> >> > ar: can't set BFD default target to `x86_64-pc-linux-gnu': Invalid=
+ bfd target
+> >> >
+> >> > Like I did in:
+> >> > http://tinderbox.openembedded.net/packages/601631/
+> >> >
+> > Yup. I got this breakage too, only binutils-cross version is 2.18-r10=
+.2
+> > and error is:
+> > ar: can't set BFD default target to `i686-pc-linux-gnu': Invalid bfd =
+target
+> >
+> > see for example http://tinderbox.openembedded.net/packages/602258/
+> >
+> > Though I didn't dig into problem deeply and simply workaround it by
+> > reverting 208ece17f76686e0faa44b2a9223fcadb692a991
+> > But I'll gladly test any patches fixing the issue (whatever it is) in=
+ a
+> > proper way.
+>=20
+> proper way is to fix binutils on your host.
 
-Regards,
+Ahh, sorry - misread original Martin's post. So it's seems to be
+Gentoo-specific problem (yes, my OE is on Gentoo too).
+Still wondering why it worked before and how it's connected with adding
+"--enable-shared" in 208ece17f766. Weird, because it breaks on building
+static library.
 
-Jan
+--=20
+Best regards,
+Dmitry "MAD" Artamonow
+
+
 
