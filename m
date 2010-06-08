@@ -1,33 +1,33 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OLsqC-0004ce-OS
+	(envelope-from <martin.jansa@gmail.com>) id 1OLtGO-0005Dk-2W
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 09:03:17 +0200
-Received: by fxm9 with SMTP id 9so2745367fxm.6
+	Tue, 08 Jun 2010 09:30:20 +0200
+Received: by fxm9 with SMTP id 9so2759843fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 07 Jun 2010 23:58:56 -0700 (PDT)
+	Tue, 08 Jun 2010 00:25:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=6B06Eg9oZ/agyXppf5XjvshmyE5yXp/0VL0H3sDuchE=;
-	b=hxfZfasXpKPdgula1OlSW+Xe1+wceOLy3LDr7zbD1mPo76SGF8jZ+N05pbN9at1JQS
-	PTStsSQbXh5FcVT0Jm5X6sGda/wnWCjzjXownK91CjOviuZD3Ia5a7VJj1CNesUCMa4p
-	6dvzIPXQPQADfuONaIEPvR/f9botXKfUPGy7s=
+	bh=FKdICJYoq1o2lnum3ABSdxVyvSvE7sJPY8vCl2LTyz0=;
+	b=mwAZHIAqzd1lnzi/ZWI6lBQm6+YmsvE2X3AeiZj7I1yAY/rZdaEVC8iyC4yIwopWg7
+	Yj7tlZVigl/sZTsmXAj5jQcc8R+JxSQkqGXAvclBZfPMlOKVPnWleBVd9K8wM5HYkW7I
+	bazegaiapD1fxBGUPNrzyiwv4Zc/EUj0ashLM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=sJsyc1e1w3XvV+2LdnCAuL+Mp+LC1nGsLVXNZZ2tqZRtQN0Pn4wgYFtdqVUpUlzRHg
-	36tODHEgyGZaUBm9YatU31iU9jj3yZ/pTO3NnXiT9asWLB5t+Y90hCRx6OjzIw8NfuXk
-	VQPFcxjaKsxtDWLIm5CpRR1db2ZA8RJP09cYM=
-Received: by 10.86.119.25 with SMTP id r25mr924849fgc.48.1275980336189;
-	Mon, 07 Jun 2010 23:58:56 -0700 (PDT)
+	b=wIErWNxCwZH2+oLZzeLZ2MC42GO97DHbG7vUPCy/F614pWqs7pBJNmGjAUVSFP/s1Y
+	LE1hfLzXRfeDo7O5Zb5RqdzDmSIdN//IedjQ1svFOMyqbIto1E29wVaUwWHs/7Kbr+9p
+	21zwt8NDfvASYamuP4FEFBbpsFc2mP5j5aDAo=
+Received: by 10.223.23.83 with SMTP id q19mr16156127fab.12.1275981959509;
+	Tue, 08 Jun 2010 00:25:59 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z12sm24039125fah.9.2010.06.07.23.58.54
+	by mx.google.com with ESMTPS id u12sm24127930fah.16.2010.06.08.00.25.58
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 07 Jun 2010 23:58:55 -0700 (PDT)
+	Tue, 08 Jun 2010 00:25:59 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  8 Jun 2010 08:58:45 +0200
-Message-Id: <1275980325-23187-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Tue,  8 Jun 2010 09:25:51 +0200
+Message-Id: <1275981951-532-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.1
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
@@ -37,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] debian.bbclass: call objdump from binutils-cross
+Subject: [PATCH] qt-4.6.2+4.7.0-beta1: fix SRC_URI and S after c070de32d40dd561b63de5b4f41baa3cf822ef5b
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +51,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 07:03:17 -0000
-
-* host objdump can support multiple targets and instead of output it shows list of targets to choose from
-  see http://thread.gmane.org/gmane.comp.handhelds.openembedded/33294/focus=33357
-* for some reason cross/bin doesn't seem to be in PATH, that's why there
-  is full path
+X-List-Received-Date: Tue, 08 Jun 2010 07:30:20 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- classes/debian.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/qt4/qt-4.6.2+4.7.0-beta1.inc        |    4 ++--
+ recipes/qt4/qt4-tools-native_4.7.0-beta1.bb |    9 ++++++++-
+ recipes/qt4/qt4-x11-free_4.7.0-beta1.bb     |    3 ++-
+ 3 files changed, 12 insertions(+), 4 deletions(-)
 
-diff --git a/classes/debian.bbclass b/classes/debian.bbclass
-index 8f6e7d8..d41c922 100644
---- a/classes/debian.bbclass
-+++ b/classes/debian.bbclass
-@@ -54,7 +54,7 @@ python debian_package_name_hook () {
- 				for f in files:
- 					if so_re.match(f):
- 						fp = os.path.join(root, f)
--						cmd = (bb.data.getVar('BUILD_PREFIX', d, 1) or "") + "objdump -p " + fp + " 2>/dev/null"
-+						cmd = bb.data.getVar('CROSS_DIR', d, 1) + "/" + bb.data.getVar('bindir_cross', d, 1) + "/" + bb.data.getVar('TARGET_PREFIX', d, 1) + "objdump -p " + fp + " 2>/dev/null"
- 						fd = os.popen(cmd)
- 						lines = fd.readlines()
- 						fd.close()
+diff --git a/recipes/qt4/qt-4.6.2+4.7.0-beta1.inc b/recipes/qt4/qt-4.6.2+4.7.0-beta1.inc
+index eb19285..9de3a5d 100644
+--- a/recipes/qt4/qt-4.6.2+4.7.0-beta1.inc
++++ b/recipes/qt4/qt-4.6.2+4.7.0-beta1.inc
+@@ -4,7 +4,7 @@ LICENSE = "LGPLv2.1 GPLv3"
+ FILESPATHPKG .= ":qt-${PV}"
+ 
+ SRC_URI = "\
+-	ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++	ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${SRCVER}.tar.gz \
+ 	file://0004-no-qmake.patch \
+ 	file://hack-out-pg_config.patch \
+ 	file://0006-freetype-host-includes.patch \
+@@ -19,7 +19,7 @@ SRC_URI = "\
+ 	file://linux.conf \
+            "
+ 
+-S = "${WORKDIR}/qt-everywhere-opensource-src-${PV}"
++S = "${WORKDIR}/qt-everywhere-opensource-src-${SRCVER}"
+ 
+ QT_LIB_NAMES += "QtDeclarative"
+ FILES_${QT_BASE_NAME}-tools                += "${bindir}/qml"
+diff --git a/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb b/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb
+index 0539c04..fb08ded 100644
+--- a/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb
++++ b/recipes/qt4/qt4-tools-native_4.7.0-beta1.bb
+@@ -3,9 +3,16 @@ DEFAULT_PREFERENCE = "-1"
+ require qt4-tools-native.inc
+ LICENSE = "LGPLv2.1 GPLv3"
+ 
+-PV = "4.6.2+4.7.0-beta1"
++SRCVER = "4.7.0-beta1"
++PV = "4.6.2+${SRCVER}"
+ PR = "${INC_PR}.0"
+ 
++SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${SRCVER}.tar.gz \
++           file://qt-config.patch \
++           file://g++.conf \
++           file://linux.conf"
++S = "${WORKDIR}/qt-everywhere-opensource-src-${SRCVER}"
++
+ EXTRA_OECONF += " -no-fast -silent -no-rpath"
+ 
+ TOBUILD := "src/tools/bootstrap ${TOBUILD}"
+diff --git a/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb b/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb
+index beef158..c489a48 100644
+--- a/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb
++++ b/recipes/qt4/qt4-x11-free_4.7.0-beta1.bb
+@@ -2,7 +2,8 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ require qt4-x11-free.inc
+ 
+-PV = "4.6.2+4.7.0-beta1"
++SRCVER = "4.7.0-beta1"
++PV = "4.6.2+${SRCVER}"
+ PR = "${INC_PR}.1"
+ 
+ QT_CONFIG_FLAGS_append_armv6 = " -no-neon "
 -- 
 1.7.1
 
