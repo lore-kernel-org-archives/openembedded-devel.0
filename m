@@ -1,53 +1,49 @@
-Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
-	helo=TX2EHSOBE003.bigfish.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OLuOI-00024F-6o
+	(envelope-from <martin.jansa@gmail.com>) id 1OLvZg-0007dT-Pz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 10:42:38 +0200
-Received: from mail104-tx2-R.bigfish.com (10.9.14.242) by
-	TX2EHSOBE003.bigfish.com (10.9.40.23) with Microsoft SMTP Server id
-	8.1.340.0; Tue, 8 Jun 2010 08:23:05 +0000
-Received: from mail104-tx2 (localhost.localdomain [127.0.0.1])	by
-	mail104-tx2-R.bigfish.com (Postfix) with ESMTP id 8D9A61B70419	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Jun 2010 08:23:05 +0000 (UTC)
-X-SpamScore: -12
-X-BigFish: VPS-12(zz14ffO1443Nzz1202hzzz32i27ah2a8h43h63h)
-Received: from mail104-tx2 (localhost.localdomain [127.0.0.1]) by mail104-tx2
-	(MessageSwitch) id 1275985385425148_15835;
-	Tue,  8 Jun 2010 08:23:05 +0000 (UTC)
-Received: from TX2EHSMHS043.bigfish.com (unknown [10.9.14.254])	by
-	mail104-tx2.bigfish.com (Postfix) with ESMTP id 5A671A3804F	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue,  8 Jun 2010 08:23:05 +0000 (UTC)
-Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
-	TX2EHSMHS043.bigfish.com (10.9.99.143) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Tue, 8 Jun 2010 08:23:04 +0000
-Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
-	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
-	Tue, 8 Jun 2010 13:53:00 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 8 Jun 2010 13:52:58 +0530
-Thread-Index: AQHLBuPN1GgdANJZ4EqkHHwMCWteBQ==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CF95@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue, 08 Jun 2010 11:58:25 +0200
+Received: by fxm9 with SMTP id 9so2863620fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 08 Jun 2010 02:54:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:cc:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=ITR5RiLtZXynL4vcubVohFrjOJj6zrXCxR6o39eXe1k=;
+	b=PSHL62d2cX/YZRlNDd4sTKOwhPLa30TpiGiJlfoVthF9swvGiQUVLyQVGIfFUExyiW
+	C/YeweMU2ZSjpFOxqiPsod4+m2zA3cgXi4l33W1A8xdMHta0qq1qnNqVnm5yDnavJ0B6
+	KxKRFKDJCHcgUdCZWhqcZvfpnbFRWb4GMU3ig=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=hM9jazXw1TVUm6fDqN8E8cRrkDC3Jye271rUuSSx6WlbfirNIjgdkdyE2/SWd9irrb
+	RT+u88UmUitT7GVNSX5eAWK2FQj9d6dDKXW8ZG9xISr8hxFA1rMozmqxmP80BAnacUpz
+	5ZZ6uKEhQ9SDMRCHZaaADuHTM1BtTrUuhXtOM=
+Received: by 10.223.45.83 with SMTP id d19mr16270033faf.65.1275990844222;
+	Tue, 08 Jun 2010 02:54:04 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u12sm24688444fah.4.2010.06.08.02.54.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 08 Jun 2010 02:54:03 -0700 (PDT)
+Date: Tue, 8 Jun 2010 11:53:56 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100608095356.GF1403@jama>
+References: <E1OLvSl-0003gY-9Y@melo.openembedded.org>
 MIME-Version: 1.0
-X-Bypass-Agent: EF-1;
-X-Reverse-DNS: unknown
-X-SA-Exim-Connect-IP: 65.55.88.12
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+In-Reply-To: <E1OLvSl-0003gY-9Y@melo.openembedded.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=AWL, BAYES_00, MISSING_SUBJECT,
-	RCVD_IN_DNSWL_LOW autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: (No subject)
+Cc: openembedded-commits@openembedded.org
+Subject: Re: [oe-commits] Henning Heinold : zziplib: convert to BBCLASSEXTEND and use new patch system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,37 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 08:42:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 08 Jun 2010 09:58:25 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hi All,
-     =20
-     I get the following error when I run bitbake avn-image
+On Tue, Jun 08, 2010 at 09:51:15AM +0000, git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: 8031ee4953f3510d53022ce0e53bc903d3089f30
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=8031ee4953f3510d53022ce0e53bc903d3089f30
+> 
+> Author: Henning Heinold <heinold@inf.fu-berlin.de>
+> Date:   Tue Jun  8 01:34:58 2010 +0200
+> 
+> zziplib: convert to BBCLASSEXTEND and use new patch system
+> 
+> ---
+> 
+> diff --git a/recipes/zziplib/zziplib_0.13.49.bb b/recipes/zziplib/zziplib_0.13.49.bb
+> index 3aecb74..256b13d 100644
+> --- a/recipes/zziplib/zziplib_0.13.49.bb
+> +++ b/recipes/zziplib/zziplib_0.13.49.bb
+> @@ -3,8 +3,9 @@ require zziplib.inc
+>  PR = "r2"
+>  
+>  SRC_URI += "\
+> -  file://zip_c.patch \
+> -  file://zziplib-autoconf.patch \
+> +  file://zip_c.patch;apply=yes \
+> +  file://zziplib-autoconf.patch;apply=yes \
+> +  file://automake.patch;apply=yes \
 
-NOTE: Handling BitBake files: \ (0172/0172) [100 %]
-NOTE: Parsing finished. 163 cached, 7 parsed, 2 skipped, 0 masked.
-NOTE: Resolving any missing task queue dependencies
-ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/glibc/glibc=
-_2.10.1.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity=
- 'linux-libc-headers-dev' but it wasn't found in any PACKAGE or RPROVIDES v=
-ariables
-NOTE: Runtime target 'linux-libc-headers-dev' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['linux-libc-headers-dev']
-ERROR: Required build target 'avn-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['avn-image', 'opkg-native', '=
-gnu-config-native']
+Isn't apply=yes default for .patch, .diff extensions? Why did you need
+to add it?
 
-               How do I resolve this error?? Any suggestions is badly neede=
-d..
-
-Thanks in advance
+Thanks
 
 Regards,
-Soumya
-
-
-
+-- 
+Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
 
