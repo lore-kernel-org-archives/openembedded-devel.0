@@ -1,40 +1,44 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OLvp3-0008Mk-RC
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OLwBS-0006WT-0m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 12:14:18 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OLvks-00050Z-Gc
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 11:09:58 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OLvkr-0003kx-Ia
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 11:09:58 +0100
-From: Phil Blundell <philb@gnu.org>
+	Tue, 08 Jun 2010 12:37:26 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 3AE6711000A0
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Jun 2010 12:33:00 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 96FF1110009C
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Jun 2010 12:32:59 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225144133.adsl.alicedsl.de
+	[92.225.144.133]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  8 Jun 2010 12:32:59 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 2016A3C12F; Tue,  8 Jun 2010 12:32:58 +0200 (CEST)
+Date: Tue, 8 Jun 2010 12:32:57 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1275858029.19175.21.camel@lenovo.internal.reciva.com>
-References: <201006022351.38129.pieterg@gmx.com>
-	<201006041044.42032.pieterg@gmx.com>
-	<1275649408.23726.5.camel@mill.internal.reciva.com>
-	<201006051236.07938.pieterg@gmx.com>
-	<1275858029.19175.21.camel@lenovo.internal.reciva.com>
-Date: Tue, 08 Jun 2010 11:09:57 +0100
-Message-ID: <1275991797.31317.59.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Message-ID: <20100608103257.GA4805@rhein.zuhause.netz>
+References: <E1OLvSl-0003gY-9Y@melo.openembedded.org>
+	<20100608095356.GF1403@jama>
+MIME-Version: 1.0
+In-Reply-To: <20100608095356.GF1403@jama>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: AUTOREV and SRCPV
+Subject: Re: [oe-commits] Henning Heinold : zziplib: convert to BBCLASSEXTEND and use new patch system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,18 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 10:14:18 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 08 Jun 2010 10:37:26 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, 2010-06-06 at 22:00 +0100, Phil Blundell wrote:
-> Thanks for your work, anyway.  I'll go ahead and check this in unless
-> somebody has an objection.
+On Tue, Jun 08, 2010 at 11:53:56AM +0200, Martin Jansa wrote:
+> On Tue, Jun 08, 2010 at 09:51:15AM +0000, git version control wrote:
+> > Module: openembedded.git
+> > Branch: org.openembedded.dev
+> > Commit: 8031ee4953f3510d53022ce0e53bc903d3089f30
+> > URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=8031ee4953f3510d53022ce0e53bc903d3089f30
+> > 
+> > Author: Henning Heinold <heinold@inf.fu-berlin.de>
+> > Date:   Tue Jun  8 01:34:58 2010 +0200
+> > 
+> > zziplib: convert to BBCLASSEXTEND and use new patch system
+> > 
+> > ---
+> > 
+> > diff --git a/recipes/zziplib/zziplib_0.13.49.bb b/recipes/zziplib/zziplib_0.13.49.bb
+> > index 3aecb74..256b13d 100644
+> > --- a/recipes/zziplib/zziplib_0.13.49.bb
+> > +++ b/recipes/zziplib/zziplib_0.13.49.bb
+> > @@ -3,8 +3,9 @@ require zziplib.inc
+> >  PR = "r2"
+> >  
+> >  SRC_URI += "\
+> > -  file://zip_c.patch \
+> > -  file://zziplib-autoconf.patch \
+> > +  file://zip_c.patch;apply=yes \
+> > +  file://zziplib-autoconf.patch;apply=yes \
+> > +  file://automake.patch;apply=yes \
+> 
+> Isn't apply=yes default for .patch, .diff extensions? Why did you need
+> to add it?
+> 
+> Thanks
+> 
+> Regards,
+> -- 
+> Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
-This is in now.
+Hi,
 
-p.
+didn't think about it, but it don't hurts.
 
-
+Bye Henning
 
 
