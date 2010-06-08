@@ -1,47 +1,36 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from fallback1.mail.ru ([94.100.176.18])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OM1IX-00074J-RQ
+	(envelope-from <mad_soft@inbox.ru>) id 1OM2dW-0006Xt-3S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 08 Jun 2010 18:05:28 +0200
-Received: by pwj4 with SMTP id 4so1928885pwj.6
+	Tue, 08 Jun 2010 19:30:51 +0200
+Received: from mx48.mail.ru (mx48.mail.ru [94.100.176.62])
+	by fallback1.mail.ru (mPOP.Fallback_MX) with ESMTP id F0D4691BBC3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jun 2010 09:00:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=VjNc+bxd6w0sAjZJFsYA2ipaHO3t1wmWSJQSpuxNLGM=;
-	b=MdFizUJlHxKc2VqETCnj2GKVy7IaeWw7Bjo6eTyZQ0TpHW/PqsO5bHNMw1hOGi6LA5
-	/xmgr0kVCJ2eI10AFyjX7iF+gnAHSY9M8SaPW4k55Yi49dw6CZc2wKq0G9LAJE4b7qlE
-	/sczeZFPGN3cDVGqoKS1zYsmYxs0nXEL5M0FU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Ums4MWLctpl1tdviglYZ2qGIVOImN3dJAlIISe+n9A9Lc5eqY0uM5HCcfiGmiDXh5u
-	plZkccS2cv9ov4coydkA4GanOL4nRBDmJpjoPSy0zBW5DeGnKN+wY8v5OnkAjqgMk3AP
-	Spl16RXEcODGiCdj2R8LyK84/ULoM/TXEG6Lk=
-Received: by 10.229.214.10 with SMTP id gy10mr6075442qcb.195.1276012843342; 
-	Tue, 08 Jun 2010 09:00:43 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.3.133 with HTTP; Tue, 8 Jun 2010 09:00:23 -0700 (PDT)
-In-Reply-To: <BAY127-W19ADD48625F491474C8E31D8D60@phx.gbl>
-References: <BAY127-W19ADD48625F491474C8E31D8D60@phx.gbl>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 8 Jun 2010 09:00:23 -0700
-X-Google-Sender-Auth: S1qAngKWp9nuim1PnuiWgwu9R3g
-Message-ID: <AANLkTim9ROHW2Xn6vksEXJC7yKttMV0fXaSNTjfxiIhq@mail.gmail.com>
+	Tue,  8 Jun 2010 21:20:17 +0400 (MSD)
+Received: from [77.51.33.209] (port=39589 helo=localhost)
+	by mx48.mail.ru with asmtp id 1OM2TB-00081I-00
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 08 Jun 2010 21:20:09 +0400
+Date: Tue, 8 Jun 2010 21:20:05 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Message-ID: <20100608172005.GA28481@rainbow>
+References: <20100605204019.GA1403@jama>
+	<AANLkTilB6QtJOplQmu00-D7TeVHKiz2fbO5_ZZjN7iRZ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTilB6QtJOplQmu00-D7TeVHKiz2fbO5_ZZjN7iRZ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam: Not detected
+X-Mras: Ok
+X-SA-Exim-Connect-IP: 94.100.176.18
+X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: path error in bitbake file
+Subject: Re: Latest binutils-cross-2.20.1-r10.0 build issue with binutils-2.20.1 on gentoo host
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,76 +44,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 08 Jun 2010 16:05:30 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 08 Jun 2010 17:30:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Did you actually bother trying what I told you to try?  You can specify a
-path to a directory just fine, and the file:///sdr/GPP_node I gave you will
-work just fine.  It'll copy the entire tree into workdir and build there.
-
-On Tue, Jun 8, 2010 at 8:34 AM, saleh usman <salehusman@hotmail.com> wrote:
-
->
->
-> If there are too many files in directory then I have to mention each file
-> one by one? Is there no option to give path of directory?
-> Saleh
-> >Chris Larson <clarson <at> kergoth.com> writes:
->
+On 23:14 Mon 07 Jun     , Martin Jansa wrote:
+> On Sat, Jun 5, 2010 at 10:40 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> > FYI:
 > >
-> > As you'd know if you'd read the manuals, local paths are specified with
-> > file://.  file:///sdr/GPP_node is what you want.
->
->
->
-> > On Tue, Jun 8, 2010 at 8:05 AM, saleh usman <salehusman <at> hotmail.co=
-m>
-> wrote:
+> > If you run into issue
+> > ar: can't set BFD default target to `x86_64-pc-linux-gnu': Invalid bfd target
 > >
-> > >
-> > > I want to give a path of a directory /sdr/GPP_node in bitbake recipe =
-in
-> > > which source files are placed. I did this as
-> > >
-> > > SRC_URI =3D "/sdr;module=3DGPP_node"
-> > >
-> > > But it is showing error as shown below. kindly tell me the exact form=
-at
-> for
-> > > this path.
-> > >
-> > >
-> > > NOTE: Running task 1783 of 3200 (ID: 1081,
-> > > /sdr/ossie_collection/packages/ossie-nodes/ossie-gpp-node_svn.bb,
-> > > do_fetch)
-> > > NOTE: Task failed: Malformed URL: /sdr;module=3DGPP_node
-> > > ERROR: TaskFailed event exception, aborting
-> > > ERROR: Build of /sdr/ossie_collection/packages/ossie-nodes/
-> > > ossie-gpp-node_svn.bb do_fetch failed
-> > > ERROR: Task 1081 (/sdr/ossie_collection/packages/ossie-nodes/
-> > > ossie-gpp-node_svn.bb, do_fetch) failed
-> > > NOTE: Tasks Summary: Attempted 1782 tasks of which 1782 didn't need t=
-o
-> be
-> > > rerun and 1 failed.
-> > > ERROR: '/sdr/ossie_collection/packages/ossie-nodes/
-> ossie-gpp-node_svn.bb'
-> _________________________________________________________________
-> Hotmail: Trusted email with Microsoft=E2=80=99s powerful SPAM protection.
-> https://signup.live.com/signup.aspx?id=3D60969
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> > Like I did in:
+> > http://tinderbox.openembedded.net/packages/601631/
+> >
+Yup. I got this breakage too, only binutils-cross version is 2.18-r10.2
+and error is:
+ar: can't set BFD default target to `i686-pc-linux-gnu': Invalid bfd target
+
+see for example http://tinderbox.openembedded.net/packages/602258/
+
+Though I didn't dig into problem deeply and simply workaround it by
+reverting 208ece17f76686e0faa44b2a9223fcadb692a991
+But I'll gladly test any patches fixing the issue (whatever it is) in a
+proper way.
+
+-- 
+Best regards,
+Dmitry "MAD" Artamonow
 
 
-
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
