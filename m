@@ -1,40 +1,48 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OMMhb-0006CQ-VX
+	(envelope-from <kergoth@gmail.com>) id 1OMMnk-0003b3-SM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 16:56:27 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OMMdM-0001uT-8m from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 07:52:00 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 9 Jun 2010 07:51:59 -0700
-Received: from [172.30.80.221] ([172.30.80.221]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 9 Jun 2010 08:51:58 -0600
-Message-ID: <4C0FAA8B.4@mentor.com>
-Date: Wed, 09 Jun 2010 07:51:55 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 09 Jun 2010 17:02:48 +0200
+Received: by iwn6 with SMTP id 6so3945288iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 09 Jun 2010 07:58:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=ndNFu56o/jsvqzkbTPX6qnfuzWt17ME3Fm3EMKAvulo=;
+	b=dkp712oGyr2CsBkssPhF6yCtAac+1/EBIy4teAs+LppQidO2HRxO2KWz/a4ps3mQJE
+	vhgkJErJhjIEHFoYc+7uLnqq5Zt3dQd82hBs76uzcCvGC4CcqNUq1GQOvOoDPMMBqDR1
+	VKkqS0F/yPHB2g8kzbdKYC+qa+MPTACnJUotI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=OrBJz2z6PagaWYaGnJ4L3gopqGA+8M544bcJZmUJ7OhDOvmF/zxTneAw+Mwt+YPxm0
+	CxpAzWUAlxIDNgrLgHxXbQhmvWn+yqB7rjU/SrhL//Jy1iKN/cE21Ll2TUm6OHwDn5sX
+	yAPdWOr6xcVKL1Igv7TBad+7XgD+1srCKoxwc=
+Received: by 10.229.219.129 with SMTP id hu1mr7003481qcb.111.1276095502479; 
+	Wed, 09 Jun 2010 07:58:22 -0700 (PDT)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.3.133 with HTTP; Wed, 9 Jun 2010 07:57:56 -0700 (PDT)
+In-Reply-To: <AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
+References: <4C0F9119.3000909@freyther.de>
+	<AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 9 Jun 2010 07:57:56 -0700
+X-Google-Sender-Auth: IILFGqk0TlytLjln2IpPGB1OR_E
+Message-ID: <AANLkTinL7xDvSoHdsxgkSumCFQNg8r3YC30gJUBcA-jO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C0D498A.4030709@mentor.com>	<AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>	<4C0E5585.8010907@mentor.com>
-	<AANLkTilQAiax3HXMMKA6yfaM60nQi_0LWzLR-vtW81_4@mail.gmail.com>
-In-Reply-To: <AANLkTilQAiax3HXMMKA6yfaM60nQi_0LWzLR-vtW81_4@mail.gmail.com>
-X-OriginalArrivalTime: 09 Jun 2010 14:51:58.0832 (UTC)
-	FILETIME=[4FD1EF00:01CB07E3]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: TSC Meetings for the meeting of June
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,115 +56,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 14:56:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 09 Jun 2010 15:02:51 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Frans Meulenbroeks wrote:
-> 2010/6/8 Tom Rini <tom_rini@mentor.com>:
->> Frans Meulenbroeks wrote:
->>> 2010/6/7 Tom Rini <tom_rini@mentor.com>:
->>>> On some host distributions the provided linux kernel headers are too old
->>>> to compile utilities we need[1].  Given that we need these utilities to
->>>> run things on the target the best solution is to provide
->>>> linux-libc-headers-native.  Rather than get things into an inconsistent
->>>> state, we make linux-libc-headers-native be a default dependency.
->>>>
->>>> [1]: A prime example of this would be mtd-utils-native and UBI
->>> I'd say this is heading in the totally wrong direction.
->>>
->>> Target code should not depend on host headers.
->>> And if you need the target headers, you should depend on and use
->>> linux-libc-headers.
->>>
->>> I guess mtd-utils-native is used to make an mtd image for the target
->>> and as such I would expect it to use the target headers.
->>>
->>> What would be the difference between linux-libc-headers and
->>> linux-libc-headers-native in the first place?
->>> (and if there is a difference, I think a better package name would be
->>> linux-libc-headers-cross).
->> As Khem said, you're thinking in the wrong direction here.  Target stuff
->> which needs the headers get the headers via linux-libc-headers.  The problem
->> is runs on the host tools that generate things for the target.
-> 
-> I understand what you are saying (I think :-) )
-> For me ubi stuff (and mkfs.jffs2) in mtd-utils-native are tools which
-> generate code (in this case an image) for the target. That is why I
-> assumed them to require target headers (but see below).
-> 
-> (offtopic observation: mtd-utils-native delivers also a lot of stuff
-> that is not really interesting for native (flash-erase, nandwrite,
-> ...)
-> 
-> 
->>> Btw if say mtd-utils-native needs kernel headers to access host
->>> functionality using headers for a different kernel version seems to be
->>> a no-no either.
->> mtd-utils is depending on OK to be exported by the kernel information to
->> know how to make a UBI image.  And again, for the target this just works.
-> 
-> What do you mean with OK?
+On Wed, Jun 9, 2010 at 6:53 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
-As in headers which are clean and allowed to be used by userspace.
+> 2010/6/9 Holger Freyther <holger+oe@freyther.de <holger%2Boe@freyther.de>
+> >:
+> > We were carrying the org.openembedd.dev branch name from the monotone
+> > era into the git era and the TSC was asked to consider renaming it to
+> > 'master' which is the git default for the main development tree. Now the
+> > actual change on the server will be minor what is of a bigger concern
+> > are the existing users and documentation.
+>
+> Technically speaking I think we should have run an RFC for this before
+> it was brought to the table of the TSC.
+>
+> Personally the org.openembedded.dev branch name does not bother me
+> although I know master is the 'standard' git name.
+> Afaik renaming does not really solve a problem.
+>
 
-> Actually I guess it is also unclear to me what version of
-> linux-libc-headers you want to install and I feel if they are from a
-> different version than the native version, the native code should
-> *not* depend on it, as it might give rise to wrong assumptions.
+Personally, I have to type it at least a few times a day, it gets old, and I
+think its time we ditched monotone remnants where we're able to do so.
 
-It is up to the distribution to pick this version, just like it is for 
-the target.
+I am not too sure how much this affects the current users. Actually I
+> doubt if the change is bigger than the packages -> recipes renaming
+> Isse is that if we do that we should make sure all relevant
+> documentation is updated, otherwise we only create confusion (which
+> might still creep up as people use old mailing list articles).
+>
+> Considering this, I am in favour of keeping things as they are.
 
-> And if we are only talking about a missing data structure or define or
-> so, it might be possible to add a patch to mtd-utils-native to fix
-> that. (can't judge that as I am lacking info on what part of
-> linux-libc-headers would be needed).
 
-No, it's a massive headache.  We went that route first.
+If we implement this, I don't really see a problem doing it for the users:
 
-> 
-> If the stuff needed is there to miss
-> 
->>> PS: which distributions/distribution versions/kernel versions do have
->>> this problem?
->>> Ubuntu 8.04 (which has a 2.6.24 kernel) does not seem to exhibit this
->>> problem).
->> RHEL4.
-> 
-> Ouch. That brings up another question.
-> RHEL4 is 2.6.9 iirc. I can imagine ubi tools and 2.6.9 do not go
-> together too well.
 
-Nope, it works great.  We aren't trying to use these UBI images on 
-RHEL4, we're using them on target hardware that's running a kernel with 
-UBI support.
-
-> Do we want to do something as drastic as linux-libc-headers-native to
-> support a fairly outdated kernel/distro.
-> I have some doubts here.(btw RHEL4 is already on minimal support and
-> is EOL feb 29, 2012).(http://www.redhat.com/security/updates/errata/)
-
-Yes, it's not EOL for another year and a half plus which means quite a 
-lot of people are going to be using it for another year and a half plus. 
-  I also really don't see this as drastic.  The only reason it's more 
-than a one-liner is that once you have this, other -native recipes that 
-are in do_compile can get mad about header versions changing under them 
-(or being installed at just the wrong point in a compile, and other fun 
-races).
-
-> I guess this could also be solved locally. E.g. making a RHEL4
-> specific recipe to install the headers, or to have copies of the
-> needed headers in some place and add them to the inc search path
-> Guess this: http://wiki.openembedded.net/index.php/OEandYourDistro#CentOS_4.4_.2F_Red_Hat_Enterprise_Linux_4
-> could be extended with some extra instructions.
-
-IMHO, that seems rather drastic.  If we don't want to cleanly / fully 
-support RHEL4, I can just stop posting these kind of things.  It's not 
-my favorite build host either :)
-
+>  >  c.) To ease this for existing users and to reduce the amount of
+> >      support org.openembedded.dev will track master and remains
+> >      available for a limited but long amount of time.
+>
 -- 
-Tom Rini
-Mentor Graphics Corporation
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
