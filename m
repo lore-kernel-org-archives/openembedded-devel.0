@@ -1,36 +1,34 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1OMLpO-0003GG-TK
+	(envelope-from <philb@gnu.org>) id 1OMM14-0001c7-6n
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 16:00:24 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id 489902C7EB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jun 2010 13:53:03 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 7ViiRYWSJIso
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jun 2010 13:52:58 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 587912C798
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  9 Jun 2010 13:52:58 +0000 (UTC)
-Message-ID: <4C0F9D6B.6000105@gmail.com>
-Date: Wed, 09 Jun 2010 15:55:55 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Wed, 09 Jun 2010 16:12:26 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OMLwr-0001Uf-JY
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Jun 2010 15:08:05 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OMLwr-0003gZ-CD
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Jun 2010 15:08:05 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1275578113-17291-1-git-send-email-chase.maupin@ti.com>	<hu8ivf$250$1@dough.gmane.org>
-	<20100603165055.GA4402@denix.org>
-In-Reply-To: <20100603165055.GA4402@denix.org>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+In-Reply-To: <4C0F9D6B.6000105@gmail.com>
+References: <1275578113-17291-1-git-send-email-chase.maupin@ti.com>
+	<hu8ivf$250$1@dough.gmane.org> <20100603165055.GA4402@denix.org>
+	<4C0F9D6B.6000105@gmail.com>
+Date: Wed, 09 Jun 2010 15:08:04 +0100
+Message-ID: <1276092484.31317.145.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -48,72 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 14:00:24 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 09 Jun 2010 14:12:26 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Denys Dmytriyenko ha scritto, Il 03/06/2010 18:50:
-> On Thu, Jun 03, 2010 at 05:50:06PM +0200, Koen Kooi wrote:
-> On 03-06-10 17:15, Chase Maupin wrote:
->>>> * Changed the name of the qtdemo exectable installed
->>>>   in the /usr/bin directory to qtdemoE for Qt
->>>>   embedded builds.  This allows the Qt embedded
->>>>   version of the demos package to co-exist with
->>>>   the Qt X11 version.
->>>> * Changed the demos package file list to accept
->>>>   both qtdemo and qtdemoE.
->>>>
->>>> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> Acked-by: Koen Kooi <k-kooi@ti.com>
-> 
->> Applied, thanks.
-> 
->>>> ---
->>>>  recipes/qt4/qt-4.6.2.inc     |    3 +++
->>>>  recipes/qt4/qt4-embedded.inc |    2 +-
->>>>  recipes/qt4/qt4.inc          |    4 ++--
->>>>  3 files changed, 6 insertions(+), 3 deletions(-)
->>>>
->>>> diff --git a/recipes/qt4/qt-4.6.2.inc b/recipes/qt4/qt-4.6.2.inc
->>>> index e89cf17..4a9f077 100644
->>>> --- a/recipes/qt4/qt-4.6.2.inc
->>>> +++ b/recipes/qt4/qt-4.6.2.inc
->>>> @@ -57,6 +57,9 @@ do_install_append() {
->>>>  	for i in rcc uic moc ; do
->>>>  		install -m 0755 ${S}/bin/$i ${D}${bindir}/
->>>>  	done
->>>> +
->>>> +	#Append an E to the qtdemo file
->>>> +	mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
->>>>  }
->>>>  
+On Wed, 2010-06-09 at 15:55 +0200, Marco Cavallini wrote:
+> #Append an E to the qtdemo file
+> if [${QT_LIBINFIX} == "E"] ; then
+> 	    mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
+> fi
 
-This patch drive to an error with qt/X11
-ERROR: Build of
-/home/koan/devel/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb
-do_install fail
+I think you need some quotes around ${QT_LIBINFIX} in the argument to [,
+otherwise you are liable to get an error if the variable is empty.  It
+might also make more sense to test something like '-n "${QT_LIBINFIX"',
+rather than testing for it being 'E' specifically.  But yes, clearly the
+current code is not satisfactory in the case of an empty infix.
 
-| mv:
-`/home/koan/devel/build/kaeilos/tmp/work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/bin/qtdemo'
-and
-`/home/koan/devel/build/kaeilos/tmp/work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/bin/qtdemo'
-are the same file
-
-looks like the Append an E to the qtdemo file han not been tested with
-qt/X11, so I'd like to change recipes/qt4/qt-4.6.2.inc in this way
-
-#Append an E to the qtdemo file
-if [${QT_LIBINFIX} == "E"] ; then
-	    mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
-fi
+p.
 
 
---
-Marco Cavallini | KOAN sas | Bergamo - Italia
- embedded and real-time software engineering
-   Atmel third party certified consultant
-Phone:+39-035-255.235 - Fax:+39-178-22.39.748
-      http://www.KoanSoftware.com
-        http://www.KaeilOS.com
 
 
