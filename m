@@ -1,48 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OMRnA-00017g-HB
+	(envelope-from <philb@gnu.org>) id 1OMRrV-0001Kd-Sm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 22:22:32 +0200
-Received: by fxm9 with SMTP id 9so4041318fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jun 2010 13:18:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=56BrofZuYNYh8OB/2kZVAnBryQaO/gwpmBgiVeLmp+4=;
-	b=lrt4363Y5ei1s0YxnrC3+TovKLjTbzhbN9ieSLUJg7o+ek07YFLXkhtZ0QV8t0aGga
-	ArPaXcRccwH4yhOIKrvJ2dIHulEbHOAVKhyo5bIeLOdT+k3A0mpiT/bNE173P8ZNFIT5
-	QdfMQaK7waCwZuHUUCX50C51cFq9ocjjrXej0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=nVmOYItqTerOBkNSJ1iHd0gJ7p3Dl1zrTMt9RkIaye3tP/68O8Hn9EyN0rcEbYe7Xp
-	vD3bf37ka+Zkc+hgkaTqbJyKYacl9YxSoSGv8zWhoOF+Fz+PZtSKQy+ParqMz7kCEvJc
-	i3zGD/WD6eveBznF5vCm+6YwLXNUxItfaalP8=
-Received: by 10.223.19.87 with SMTP id z23mr1431444faa.7.1276114686376;
-	Wed, 09 Jun 2010 13:18:06 -0700 (PDT)
-Received: from s42.loc (85-127-249-17.dynamic.xdsl-line.inode.at
-	[85.127.249.17])
-	by mx.google.com with ESMTPS id 13sm5146722fad.19.2010.06.09.13.18.05
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 09 Jun 2010 13:18:05 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OMRj6-0001jG-Pb; Wed, 09 Jun 2010 22:18:16 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: martin.jansa@gmail.com
-Date: Wed,  9 Jun 2010 22:18:13 +0200
-Message-Id: <1276114693-6539-1-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	Wed, 09 Jun 2010 22:26:58 +0200
+Received: from jost.swaffham-prior.co.uk ([217.154.114.20]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OMRnJ-0005Bq-Eu
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Jun 2010 21:22:37 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20100609193242.GR14941@mx.loc>
+References: <19c1b8a91002212154y766540d9vb091badff1198e0e@mail.gmail.com>
+	<1276103437-2755-4-git-send-email-rep.dot.nop@gmail.com>
+	<1276109098.4424.9.camel@lenovo.internal.reciva.com>
+	<20100609185240.GP14941@mx.loc>
+	<1276111093.4424.21.camel@lenovo.internal.reciva.com>
+	<20100609193242.GR14941@mx.loc>
+Date: Wed, 09 Jun 2010 21:22:43 +0100
+Message-ID: <1276114963.4424.42.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: [PATCH] busybox: drop run-parts.in.usr-bin.patch
+Subject: Re: [PATCH 3/3] busybox: picking IPv6 per default is not up to the package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,87 +44,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 20:22:32 -0000
+X-List-Received-Date: Wed, 09 Jun 2010 20:26:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-revert f1b326c83be0d95571b991d8d2ee239982380b6b
+On Wed, 2010-06-09 at 21:32 +0200, Bernhard Reutner-Fischer wrote:
+> I disagree. Distros should be fixed to ask for or require a feature if
+> they require it.
 
-debianutils has /bin/run-parts as busybox does.
-Busybox handles run-parts as well as other binaries via
-update-alternatives, there is no /usr/bin/run-parts from debianutils
-like suggested in f1b326c83be0d95571b991d8d2ee239982380b6b.
+That's a legitimate and worthy goal, but I can't see that this patch
+really goes any way towards achieving it.  As far as I can tell, busybox
+doesn't currently respect DISTRO_FEATURES anyway, so even if I did add
+ipv6 to that variable for micro (which I'm certainly happy to do) this
+patch would still cause busybox to be built without it.  
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
----
- .../busybox-1.15.3/run-parts.in.usr-bin.patch      |   12 ------------
- .../busybox-1.16.1/run-parts.in.usr-bin.patch      |   12 ------------
- recipes/busybox/busybox_1.15.3.bb                  |    1 -
- recipes/busybox/busybox_1.16.1.bb                  |    1 -
- 4 files changed, 0 insertions(+), 26 deletions(-)
- delete mode 100644 recipes/busybox/busybox-1.15.3/run-parts.in.usr-bin.patch
- delete mode 100644 recipes/busybox/busybox-1.16.1/run-parts.in.usr-bin.patch
+If the file you were patching was a generic one, and the majority of
+distros didn't want ipv6, then I would probably have some sympathy with
+this patch.  But in this particular case the file you are patching is
+entirely micro specific: nobody else will benefit from this change.
 
-diff --git a/recipes/busybox/busybox-1.15.3/run-parts.in.usr-bin.patch b/recipes/busybox/busybox-1.15.3/run-parts.in.usr-bin.patch
-deleted file mode 100644
-index 6f209ce..0000000
---- a/recipes/busybox/busybox-1.15.3/run-parts.in.usr-bin.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--diff -uNr busybox-1.15.3.orig//include/applets.h busybox-1.15.3/include/applets.h
----- busybox-1.15.3.orig//include/applets.h	2009-12-12 22:13:28.000000000 +0100
--+++ busybox-1.15.3/include/applets.h	2010-04-30 15:35:40.000000000 +0200
--@@ -323,7 +323,7 @@
-- IF_RPM(APPLET(rpm, _BB_DIR_BIN, _BB_SUID_DROP))
-- IF_RPM2CPIO(APPLET(rpm2cpio, _BB_DIR_USR_BIN, _BB_SUID_DROP))
-- IF_RTCWAKE(APPLET(rtcwake, _BB_DIR_USR_BIN, _BB_SUID_DROP))
---IF_RUN_PARTS(APPLET_ODDNAME(run-parts, run_parts, _BB_DIR_BIN, _BB_SUID_DROP, run_parts))
--+IF_RUN_PARTS(APPLET_ODDNAME(run-parts, run_parts, _BB_DIR_USR_BIN, _BB_SUID_DROP, run_parts))
-- IF_RUNCON(APPLET(runcon, _BB_DIR_USR_BIN, _BB_SUID_DROP))
-- IF_RUNLEVEL(APPLET(runlevel, _BB_DIR_SBIN, _BB_SUID_DROP))
-- IF_RUNSV(APPLET(runsv, _BB_DIR_USR_BIN, _BB_SUID_DROP))
-diff --git a/recipes/busybox/busybox-1.16.1/run-parts.in.usr-bin.patch b/recipes/busybox/busybox-1.16.1/run-parts.in.usr-bin.patch
-deleted file mode 100644
-index 6f209ce..0000000
---- a/recipes/busybox/busybox-1.16.1/run-parts.in.usr-bin.patch
-+++ /dev/null
-@@ -1,12 +0,0 @@
--diff -uNr busybox-1.15.3.orig//include/applets.h busybox-1.15.3/include/applets.h
----- busybox-1.15.3.orig//include/applets.h	2009-12-12 22:13:28.000000000 +0100
--+++ busybox-1.15.3/include/applets.h	2010-04-30 15:35:40.000000000 +0200
--@@ -323,7 +323,7 @@
-- IF_RPM(APPLET(rpm, _BB_DIR_BIN, _BB_SUID_DROP))
-- IF_RPM2CPIO(APPLET(rpm2cpio, _BB_DIR_USR_BIN, _BB_SUID_DROP))
-- IF_RTCWAKE(APPLET(rtcwake, _BB_DIR_USR_BIN, _BB_SUID_DROP))
---IF_RUN_PARTS(APPLET_ODDNAME(run-parts, run_parts, _BB_DIR_BIN, _BB_SUID_DROP, run_parts))
--+IF_RUN_PARTS(APPLET_ODDNAME(run-parts, run_parts, _BB_DIR_USR_BIN, _BB_SUID_DROP, run_parts))
-- IF_RUNCON(APPLET(runcon, _BB_DIR_USR_BIN, _BB_SUID_DROP))
-- IF_RUNLEVEL(APPLET(runlevel, _BB_DIR_SBIN, _BB_SUID_DROP))
-- IF_RUNSV(APPLET(runsv, _BB_DIR_USR_BIN, _BB_SUID_DROP))
-diff --git a/recipes/busybox/busybox_1.15.3.bb b/recipes/busybox/busybox_1.15.3.bb
-index 07103e8..9698f99 100644
---- a/recipes/busybox/busybox_1.15.3.bb
-+++ b/recipes/busybox/busybox_1.15.3.bb
-@@ -10,7 +10,6 @@ SRC_URI = "\
-   file://get_header_tar.patch \
-   file://busybox-appletlib-dependency.patch \
-   file://0000-wget-no-check-certificate.patch \
--  file://run-parts.in.usr-bin.patch \
-   file://find-touchscreen.sh \
-   file://busybox-cron \
-   file://busybox-httpd \
-diff --git a/recipes/busybox/busybox_1.16.1.bb b/recipes/busybox/busybox_1.16.1.bb
-index 6013afd..28940a2 100644
---- a/recipes/busybox/busybox_1.16.1.bb
-+++ b/recipes/busybox/busybox_1.16.1.bb
-@@ -12,7 +12,6 @@ SRC_URI = "\
-   file://get_header_tar.patch \
-   file://busybox-appletlib-dependency.patch \
- #  file://0000-wget-no-check-certificate.patch \
--  file://run-parts.in.usr-bin.patch \
-   file://find-touchscreen.sh \
-   file://busybox-cron \
-   file://busybox-httpd \
--- 
-1.7.1
+p.
+
 
 
 
