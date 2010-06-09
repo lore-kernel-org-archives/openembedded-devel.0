@@ -1,32 +1,43 @@
-Received: from mail.asoft.ru ([91.205.86.207])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1OMFqr-0002Df-7J
+	(envelope-from <martin.jansa@gmail.com>) id 1OMJML-00024m-Cw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 09:37:33 +0200
-Received: from lighthouse.office.asoft.ru (office.asoft.ru [62.205.175.245])
-	(authenticated bits=0)
-	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o597X3bX007448
+	Wed, 09 Jun 2010 13:22:20 +0200
+Received: by fxm9 with SMTP id 9so3660315fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Jun 2010 11:33:08 +0400
-From: Dmitry Artamonow <mad_soft@inbox.ru>
+	Wed, 09 Jun 2010 04:17:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=LdfF0GgGauemPFm/HbG9srrbznbcN73VGe1XydiTJsI=;
+	b=o2TR5ztAmx8L7rZo3Sl9xg6ykK9gZ+6mGxayzTiEIaA2shL8lq1wEZMnbomkCI+vwd
+	VH2CrCfepwRoquThwcN9XwxZF38dE6Avuvp3ZgmVzVi/5bXZj8fLuQRgMLCAOMMSVMZ3
+	MrrFzjCkTWLtKOCOCaN5IYnb0Ta6sJLfc0rIg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=m2DbKeCv4pS2UV8GrsaCSnbmZtWJrsZ8jWcC5VIjLHLOw8QWq2gsnprY7a/vibLaPx
+	hSNc7E8Zdck5cVsZ4DOIVUHdYcHx8KXoJQ7fyMmfXa+bAqx7Z5/Ml3Ckd6bMO2G60fVp
+	dXgtnRLSq7Nsk1ECkCZxC+sL2lV81JWmXpbXk=
+Received: by 10.223.143.20 with SMTP id s20mr841113fau.38.1276082264239;
+	Wed, 09 Jun 2010 04:17:44 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id y12sm3724727faj.5.2010.06.09.04.17.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 09 Jun 2010 04:17:43 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jun 2010 11:33:02 +0400
-Message-Id: <1276068782-23257-4-git-send-email-mad_soft@inbox.ru>
+Date: Wed,  9 Jun 2010 13:17:33 +0200
+Message-Id: <1276082253-26496-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
-References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
-X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
-	(mail.asoft.ru [91.205.86.207]);
-	Wed, 09 Jun 2010 11:33:08 +0400 (MSD)
-X-SA-Exim-Connect-IP: 91.205.86.207
-X-SA-Exim-Mail-From: mad_soft@inbox.ru
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 3/3] mupdf-0.6: new recipe
+Subject: [PATCH] gcc: target gcc should include all libexec binaries, ie lto-wrapper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,117 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 07:37:33 -0000
+X-List-Received-Date: Wed, 09 Jun 2010 11:22:26 -0000
 
-MuPDF is a slim and fast PDF viewer/toolkit.
-
-Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes/mupdf/mupdf-0.6/Makerules                  |    8 +++
- .../mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch  |   12 ++++
- recipes/mupdf/mupdf_0.6.bb                         |   59 ++++++++++++++++++++
- 3 files changed, 79 insertions(+), 0 deletions(-)
- create mode 100644 recipes/mupdf/mupdf-0.6/Makerules
- create mode 100644 recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
- create mode 100644 recipes/mupdf/mupdf_0.6.bb
+ recipes/gcc/gcc-package-target.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/mupdf/mupdf-0.6/Makerules b/recipes/mupdf/mupdf-0.6/Makerules
-new file mode 100644
-index 0000000..5f3d4e2
---- /dev/null
-+++ b/recipes/mupdf/mupdf-0.6/Makerules
-@@ -0,0 +1,8 @@
-+# Configuration for the Makefile
-+LIBS := -ljbig2dec -lopenjpeg -ljpeg -lz -lm
-+CFLAGS := -Wall --std=gnu99 -Ifitz -Imupdf $(THIRD_INCS)
-+
-+CFLAGS += `pkg-config --cflags freetype2`
-+LDFLAGS += `pkg-config --libs freetype2`
-+X11LIBS = -lX11 -lXext
-+PDFVIEW_EXE = $(X11VIEW_EXE)
-diff --git a/recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch b/recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
-new file mode 100644
-index 0000000..fdc0b74
---- /dev/null
-+++ b/recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
-@@ -0,0 +1,12 @@
-+* upstream: http://bugs.ghostscript.com/show_bug.cgi?id=690932
-+
-+--- mupdf/apps/x11_image.c.orig	2010-06-06 19:42:46.000000000 +0400
-++++ mupdf/apps/x11_image.c	2010-06-06 20:32:35.000000000 +0400
-+@@ -14,6 +14,7 @@
-+ 
-+ #include <X11/Xlib.h>
-+ #include <X11/Xutil.h>
-++#include <X11/Xarch.h>
-+ #include <sys/ipc.h>
-+ #include <sys/shm.h>
-+ #include <X11/extensions/XShm.h>
-diff --git a/recipes/mupdf/mupdf_0.6.bb b/recipes/mupdf/mupdf_0.6.bb
-new file mode 100644
-index 0000000..e9cb0b1
---- /dev/null
-+++ b/recipes/mupdf/mupdf_0.6.bb
-@@ -0,0 +1,59 @@
-+DESCRIPTION = "A lightweight PDF viewer and toolkit written in portable C."
-+HOMEPAGE = "http://www.mupdf.com"
-+SECTION = "x11/applications"
-+LICENSE = "GPLv3"
-+PR = "r0"
-+
-+DEPENDS = "openjpeg jbig2dec jpeg zlib virtual/libx11 libxext freetype"
-+
-+SRC_URI = "http://mupdf.com/download/source/${PN}-${PV}-source.tar.gz \
-+           file://mupdf_fix_16bit_display.patch \
-+           file://Makerules"
-+
-+S = "${WORKDIR}/mupdf"
-+
-+PACKAGES =+ "${PN}-tools ${PN}-tools-doc "
-+FILES_${PN}-tools = "${bindir}/pdfclean ${bindir}/pdfdraw ${bindir}/pdfshow \
-+                     ${bindir}/pdfextract ${bindir}/pdfinfo"
-+FILES_${PN}-tools-doc = "${mandir}/man1/pdfclean.1 ${mandir}/man1/pdfdraw.1 \
-+                         ${mandir}/man1/pdfshow.1"
-+
-+# mupdf crashes (at least on arm) when built with high level of optimization
-+FULL_OPTIMIZATION = "-O2"
-+
-+do_configure() {
-+    cp ${WORKDIR}/Makerules ${S}/Makerules
-+
-+    # we don't include CJK fonts to make binary more slim
-+    # comment out following two lines if you need support for CJK
-+    sed -i 's:^\t\$.GENDIR./font_cjk.c::g' ${S}/Makefile
-+    echo "CFLAGS += -DNOCJK" >> ${S}/Makerules
-+}
-+
-+do_compile() {
-+    # mupdf uses couple of tools for code generation during build process
-+    # so we need to compile them first with host compiler
-+    unset CFLAGS LDFLAGS
-+    oe_runmake build/debug
-+    oe_runmake build/debug/cmapdump LD=${BUILD_CC} CC=${BUILD_CC}
-+    oe_runmake build/debug/fontdump LD=${BUILD_CC} CC=${BUILD_CC}
-+
-+    # ...and then we fire 'make', feeding proper
-+    # cross-compilation flags through Makerules file
-+    echo "CFLAGS += ${CFLAGS}" >> ${S}/Makerules
-+    echo "LDFLAGS += ${LDFLAGS}" >> ${S}/Makerules
-+    oe_runmake LD="${CC}"
-+}
-+
-+do_install() {
-+    oe_runmake install prefix="${D}/usr"
-+    install -d ${D}/${datadir}/applications
-+    install -d ${D}/${datadir}/pixmaps
-+    install -d ${D}/${mandir}/man1
-+    install -m 0644 ${S}/debian/mupdf.xpm ${D}/${datadir}/pixmaps/
-+    install -m 0644 ${S}/debian/mupdf.desktop ${D}/${datadir}/applications/
-+    install -m 0644 ${S}/debian/*.1 ${D}/${mandir}/man1/
-+}
-+
-+SRC_URI[md5sum] = "d1e1a1df8fb3e4d1c601506797b75036"
-+SRC_URI[sha256sum] = "6f87c4f113ee9e0f4bdfd3a316ef44052edc4febc8f7b531c4a3f44ffe149605"
+diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package-target.inc
+index 0676b53..32b0a48 100644
+--- a/recipes/gcc/gcc-package-target.inc
++++ b/recipes/gcc/gcc-package-target.inc
+@@ -17,7 +17,7 @@ PACKAGES = "\
+ FILES_${PN} = "\
+   ${bindir}/${TARGET_PREFIX}gcc \
+   ${bindir}/${TARGET_PREFIX}gccbug \
+-  ${libexecdir}/gcc/${TARGET_SYS}/${BINV}/collect2 \
++  ${libexecdir}/gcc/${TARGET_SYS}/${BINV}/* \
+   ${gcclibdir}/${TARGET_SYS}/${BINV}/*.o \
+   ${gcclibdir}/${TARGET_SYS}/${BINV}/specs \
+   ${gcclibdir}/${TARGET_SYS}/${BINV}/lib* \
 -- 
 1.7.1
 
