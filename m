@@ -1,44 +1,44 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OMLZb-0000Ro-Hh
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OMLmf-0002kl-6o
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 15:44:06 +0200
-Received: by fxm9 with SMTP id 9so3752542fxm.6
+	Wed, 09 Jun 2010 15:57:33 +0200
+Received: by gyg10 with SMTP id 10so4287411gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jun 2010 06:39:39 -0700 (PDT)
+	Wed, 09 Jun 2010 06:53:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=qzQiYohE3RlF31aI9tP7IqdYVtcxh57kViuMsKnpwMM=;
-	b=tpZdQVIjIdLci3ss4gKIqaCjCiFbOHJWOpLXrPBB2hfqFxC9KPAotUPxJwnRdX/Exp
-	MibwAfG7zIjDPZOgeVw4O8wQ60ay0LyX/IFo6RxAk24uIqPrWax8zArRuE1O5E9RJI1l
-	z+sgR6qovCg+cH6XJ7NvTAzmyN9UGj0LWBzc8=
+	bh=u48btUE8xF0A+AYx/50RX6a47KmZIZEdGiHAjFV3f7E=;
+	b=XkSOEO8IR7nuos7jiKoMDHLU8PE/woCn7d5LqPbaS9Yq+ya6HMywa70hWqX0Xo8rWY
+	iE+L5rv8pikRIMlVQ02BlAmW7c82BCJSLhwm5VxLx9s+3Pn8Ba4BQxQxyw70F4VVQAqM
+	v597AkAV/cpXGMMGUroksipcqGsW36Hijh66U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=HHADwjvaoRxjcteT9oXXv44xaVeh5UffkKs56e4v+3jSFwHXOrD5Y00ITg/B3ICVRt
-	FKIQ25eCEUyPpgmR45zKspeU9mQU0A+RBBItbd/xEZlzFB5zRmeEshQanEMzGLhHgUN+
-	aYMaV+jlMIueORZAn3dD/u2PNr9KuDwz/u5Vo=
+	b=ksrSGpouGQDp3dpdQzbFXq2W+mayYahM465N8ycExqk3Apsf74GlHUP3NGJgxxkLZU
+	afGm9rWo37SKufmNEg1juAukwaAeAD3vDZes/JiQSwx5/QWLBLyuyzyS7aMSipPJIDhq
+	3WSdUhQa5pHna+Gsuo8wMKGF/BAwz6tKDZhM8=
 MIME-Version: 1.0
-Received: by 10.223.29.135 with SMTP id q7mr2609582fac.30.1276090779147; Wed, 
-	09 Jun 2010 06:39:39 -0700 (PDT)
-Received: by 10.223.106.138 with HTTP; Wed, 9 Jun 2010 06:39:39 -0700 (PDT)
-In-Reply-To: <1276082253-26496-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1276082253-26496-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Wed, 9 Jun 2010 15:39:39 +0200
-Message-ID: <AANLkTilS9Zi6OOcwKRSxkqTUlKB3WQZVkhwoDezzzNXw@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+Received: by 10.91.161.39 with SMTP id n39mr99389ago.55.1276091590660; Wed, 09 
+	Jun 2010 06:53:10 -0700 (PDT)
+Received: by 10.90.88.14 with HTTP; Wed, 9 Jun 2010 06:53:10 -0700 (PDT)
+In-Reply-To: <4C0F9119.3000909@freyther.de>
+References: <4C0F9119.3000909@freyther.de>
+Date: Wed, 9 Jun 2010 15:53:10 +0200
+Message-ID: <AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gcc: target gcc should include all libexec binaries, ie 	lto-wrapper
+Subject: Re: TSC Meetings for the meeting of June
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,39 +52,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 13:44:06 -0000
+X-List-Received-Date: Wed, 09 Jun 2010 13:57:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 9, 2010 at 1:17 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
-:
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> ---
-> =A0recipes/gcc/gcc-package-target.inc | =A0 =A02 +-
-> =A01 files changed, 1 insertions(+), 1 deletions(-)
+2010/6/9 Holger Freyther <holger+oe@freyther.de>:
+> Hi all,
 >
-> diff --git a/recipes/gcc/gcc-package-target.inc b/recipes/gcc/gcc-package=
--target.inc
-> index 0676b53..32b0a48 100644
-> --- a/recipes/gcc/gcc-package-target.inc
-> +++ b/recipes/gcc/gcc-package-target.inc
-> @@ -17,7 +17,7 @@ PACKAGES =3D "\
-> =A0FILES_${PN} =3D "\
-> =A0 ${bindir}/${TARGET_PREFIX}gcc \
-> =A0 ${bindir}/${TARGET_PREFIX}gccbug \
-> - =A0${libexecdir}/gcc/${TARGET_SYS}/${BINV}/collect2 \
-> + =A0${libexecdir}/gcc/${TARGET_SYS}/${BINV}/* \
+> we didn't really have much to talk....
+>
+>
+>
+> =3D=3D Renaming the org.openmebdded.dev branch =3D=3D
+>
+> We were carrying the org.openembedd.dev branch name from the monotone
+> era into the git era and the TSC was asked to consider renaming it to
+> 'master' which is the git default for the main development tree. Now the
+> actual change on the server will be minor what is of a bigger concern
+> are the existing users and documentation.
 
-I was wrong to include * here, because it steals ie cpp from cpp
-package, but you get the idea.
+Technically speaking I think we should have run an RFC for this before
+it was brought to the table of the TSC.
 
-Please comment if gcc package is right place to put lto binaries
+Personally the org.openembedded.dev branch name does not bother me
+although I know master is the 'standard' git name.
+Afaik renaming does not really solve a problem.
 
-./usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.5.1/lto1
-./usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.5.1/collect2
-./usr/libexec/gcc/arm-angstrom-linux-gnueabi/4.5.1/lto-wrapper
-is probably enough
+I am not too sure how much this affects the current users. Actually I
+doubt if the change is bigger than the packages -> recipes renaming
+Isse is that if we do that we should make sure all relevant
+documentation is updated, otherwise we only create confusion (which
+might still creep up as people use old mailing list articles).
 
-Regards
+Considering this, I am in favour of keeping things as they are.
+
+Frans
+>
+> The TSC would like to make the following proposal:
+>
+> =A0a.) Contributor's will be asked to push to master, a git-hook
+> =A0 =A0 =A0will prevent pushes to the old branch name.
+> =A0b.) The default branch will be changed to 'master' and the
+> =A0 =A0 =A0documentation will be updated.
+> =A0c.) To ease this for existing users and to reduce the amount of
+> =A0 =A0 =A0support org.openembedded.dev will track master and remains
+> =A0 =A0 =A0available for a limited but long amount of time.
+>
+>
+> The TSC is not sure on how to implement c.) and this will determine when
+> we will be able to switch over and the schedule of doing so.
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
