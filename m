@@ -1,28 +1,37 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from fallback4.mail.ru ([94.100.176.42])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1OMRL8-0001Fw-UN
+	(envelope-from <mad_soft@inbox.ru>) id 1OMRS6-0002Tr-HB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 21:53:33 +0200
-Received: from localhost.localdomain (openvpn.altell.local [192.168.1.13])
-	by mail.altell.local (Postfix) with ESMTP id A4A0E681E3;
-	Wed,  9 Jun 2010 23:28:31 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	Wed, 09 Jun 2010 22:00:43 +0200
+Received: from mx75.mail.ru (mx75.mail.ru [94.100.176.90])
+	by fallback4.mail.ru (mPOP.Fallback_MX) with ESMTP id 0DC122107C4B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Jun 2010 23:46:57 +0400 (MSD)
+Received: from [77.51.33.209] (port=40618 helo=localhost)
+	by mx75.mail.ru with asmtp id 1OMREl-000PiQ-00
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 09 Jun 2010 23:46:55 +0400
+Date: Wed, 9 Jun 2010 23:46:54 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jun 2010 23:48:31 +0400
-Message-Id: <1276112911-30633-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.4.2
-X-Altell-MailScanner-ID: A4A0E681E3.2FE43
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+Message-ID: <20100609194654.GB12397@rainbow>
+References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+	<1276068782-23257-3-git-send-email-mad_soft@inbox.ru>
+	<20100609133126.GB29724@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <20100609133126.GB29724@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Spam: Not detected
+X-Mras: Ok
+X-SA-Exim-Connect-IP: 94.100.176.42
+X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] shadow: added new package shadow-group. Fix for build with uclibc.
+Subject: Re: [PATCH 2/3] jbig2dec-0.11: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,87 +45,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 19:53:33 -0000
+X-List-Received-Date: Wed, 09 Jun 2010 20:00:43 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Vladimir Sorokin <sorokin@altell.ru>
+On 06:31 Wed 09 Jun     , Khem Raj wrote:
+> On (09/06/10 11:33), Dmitry Artamonow wrote:
+> > +inherit autotools
+> > +
+> > +do_stage() {
+> > +        autotools_stage_all
+> > +}
+> 
+> do_stage is not needed for new staging.
 
-shadow-group contains utilities (sg, newgrp, gpasswd) for groups manipulating,
-useful when you only need things not provided by busybox.
+So I can drop this "autotools_stage_all" hack entirely and it will do
+the right thing? Nice! Ok, will redo both openjpeg and jbig2dec recipes,
+test them and resubmit.
 
-Signed-off-by: Vladimir Sorokin <sorokin@altell.ru>
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- recipes/shadow/shadow.inc |   32 +++++++++++++++++++++++++++++---
- 1 files changed, 29 insertions(+), 3 deletions(-)
+BTW, it would be nice to have this thing removed from other existing recipes
+tree-wide, so it won't be tempting to "copy-paste" it, as I did :)
 
-diff --git a/recipes/shadow/shadow.inc b/recipes/shadow/shadow.inc
-index 460930b..97a2e19 100644
---- a/recipes/shadow/shadow.inc
-+++ b/recipes/shadow/shadow.inc
-@@ -13,7 +13,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
- 
--INC_PR = "r14"
-+INC_PR = "r15"
- 
- # Additional Policy files for PAM
- PAM_SRC_URI = " \
-@@ -42,8 +42,23 @@ EXTRA_OECONF += "\
-     ${@base_contains('DISTRO_FEATURES', 'pam', '--with-libpam', '--without-libpam', d)} \
- "
- 
-+EXTRA_OECONF_linux-uclibc += "\
-+    --disable-account-tools-setuid \
-+    --disable-shadowgrp \
-+    --without-audit \
-+    --without-selinux \
-+    --without-libcrack \
-+    --without-nscd \
-+    ${@base_contains('DISTRO_FEATURES', 'pam', '--with-libpam', '--without-libpam', d)} \
-+"
-+
- CFLAGS += "-I../include"
- 
-+PACKAGES =+ "${PN}-group"
-+RDEPENDS_${PN} += "${PN}-group"
-+
-+FILES_${PN}-group = "${bindir}/gpasswd ${bindir}/newgrp.shadow ${bindir}/sg"
-+
- do_configure_prepend () {
-     export CONFIG_SITE="${CONFIG_SITE} ${B}/cachedpaths"
-     cat <<END >${B}/cachedpaths
-@@ -107,7 +122,6 @@ pkg_postinst_${PN} () {
-     update-alternatives --install ${bindir}/passwd passwd passwd.${PN} 200
-     update-alternatives --install ${sbindir}/chpasswd chpasswd chpasswd.${PN} 200
-     update-alternatives --install ${bindir}/chfn chfn chfn.${PN} 200
--    update-alternatives --install ${bindir}/newgrp newgrp newgrp.${PN} 200
-     update-alternatives --install ${bindir}/chsh chsh chsh.${PN} 200
-     update-alternatives --install ${base_bindir}/login login login.${PN} 200
-     update-alternatives --install ${base_sbindir}/vipw vipw vipw.${PN} 200
-@@ -120,7 +134,19 @@ pkg_postinst_${PN} () {
- }
- 
- pkg_prerm_${PN} () {
--    for i in passwd chpasswd chfn newgrp chsh login vipw vigr ; do
-+    for i in passwd chpasswd chfn chsh login vipw vigr ; do
-+        update-alternatives --remove $i $i.${PN}
-+    done
-+}
-+
-+pkg_postinst_${PN}-group () {
-+   touch /etc/login.defs
-+   update-alternatives --install ${bindir}/newgrp newgrp newgrp.${PN} 200
-+}
-+
-+pkg_prerm_${PN}-group () {
-+    for i in newgrp ; do
-         update-alternatives --remove $i $i.${PN}
-     done
- }
-+
 -- 
-1.6.4.2
+Best regards,
+Dmitry "MAD" Artamonow
 
 
 
