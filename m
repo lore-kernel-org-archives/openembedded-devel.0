@@ -1,46 +1,30 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail.asoft.ru ([91.205.86.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OMF75-0006al-Uq
+	(envelope-from <mad_soft@inbox.ru>) id 1OMFqo-0002BD-Av
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 08:50:13 +0200
-Received: by yxf34 with SMTP id 34so303125yxf.6
+	Wed, 09 Jun 2010 09:37:27 +0200
+Received: from lighthouse.office.asoft.ru (office.asoft.ru [62.205.175.245])
+	(authenticated bits=0)
+	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o597X3bU007448
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 08 Jun 2010 23:45:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=n9/iLN3CtfWWGf1N51A4u6SXP9ALIet/6l+b4cm7wOs=;
-	b=xtiMaY6TIXH+ZrGaXGvI2dZLxPNKqgCFmwU59P5srVyZk/9eJW+g6AmbtRVNTp+YW/
-	Yf1PyF+lzh/OK9WgiKzwQsGJb2J3iN2w+VZMVrcNPocYf/TjaK//4HpeaAzF7CLsEB7g
-	0mHqJK7Paa0XYGDlf/Aah4dNi22254zG/ypmE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=pnhDTDU+oPrg4LsSzbkCBjPMOCfSHyHmHL7o7L+LBdSozWrTp/e6LLJr1052gqqbpK
-	z+IaO+2EDL0KgyjUDB60Ovhxx7s8+llRyN0XesWXh3E4T4uhP3Fsw4fdJJUKkJBc+5LE
-	1h5lku+Nsjin6PwjWRSvW+jL67/xXHtrujV5U=
-MIME-Version: 1.0
-Received: by 10.91.41.17 with SMTP id t17mr326306agj.6.1276065948245; Tue, 08 
-	Jun 2010 23:45:48 -0700 (PDT)
-Received: by 10.90.88.14 with HTTP; Tue, 8 Jun 2010 23:45:48 -0700 (PDT)
-In-Reply-To: <4C0E5585.8010907@mentor.com>
-References: <4C0D498A.4030709@mentor.com>
-	<AANLkTilJrzCr73GBdsGFgxQl4Gn7FAGj3Aytx1IrzYpS@mail.gmail.com>
-	<4C0E5585.8010907@mentor.com>
-Date: Wed, 9 Jun 2010 08:45:48 +0200
-Message-ID: <AANLkTilQAiax3HXMMKA6yfaM60nQi_0LWzLR-vtW81_4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 9 Jun 2010 11:33:04 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed,  9 Jun 2010 11:32:59 +0400
+Message-Id: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+X-Mailer: git-send-email 1.7.1
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
+	(mail.asoft.ru [91.205.86.207]);
+	Wed, 09 Jun 2010 11:33:04 +0400 (MSD)
+X-SA-Exim-Connect-IP: 91.205.86.207
+X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
+Subject: [PATCH 0/3] Recipe for MuPDF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,112 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 06:50:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Jun 2010 07:37:27 -0000
 
-2010/6/8 Tom Rini <tom_rini@mentor.com>:
-> Frans Meulenbroeks wrote:
->>
->> 2010/6/7 Tom Rini <tom_rini@mentor.com>:
->>>
->>> On some host distributions the provided linux kernel headers are too ol=
-d
->>> to compile utilities we need[1]. =A0Given that we need these utilities =
-to
->>> run things on the target the best solution is to provide
->>> linux-libc-headers-native. =A0Rather than get things into an inconsiste=
-nt
->>> state, we make linux-libc-headers-native be a default dependency.
->>>
->>> [1]: A prime example of this would be mtd-utils-native and UBI
->>
->> I'd say this is heading in the totally wrong direction.
->>
->> Target code should not depend on host headers.
->> And if you need the target headers, you should depend on and use
->> linux-libc-headers.
->>
->> I guess mtd-utils-native is used to make an mtd image for the target
->> and as such I would expect it to use the target headers.
->>
->> What would be the difference between linux-libc-headers and
->> linux-libc-headers-native in the first place?
->> (and if there is a difference, I think a better package name would be
->> linux-libc-headers-cross).
->
-> As Khem said, you're thinking in the wrong direction here. =A0Target stuf=
-f
-> which needs the headers get the headers via linux-libc-headers. =A0The pr=
-oblem
-> is runs on the host tools that generate things for the target.
+Hi!
 
-I understand what you are saying (I think :-) )
-For me ubi stuff (and mkfs.jffs2) in mtd-utils-native are tools which
-generate code (in this case an image) for the target. That is why I
-assumed them to require target headers (but see below).
+Here's recipe for MuPDF (X11 pdf viewer and toolkit) and its dependencies.
+Viewer doesn't have any fancy GUI - just a plain window with rendered PDF,
+but it's a good thing on small screens embedded devices usually have,
+as no screen space is wasted on buttons, etc. Viewer is perfectly
+controllable from keyboard (and keyboardless devices like PDAs usually
+have some joystick which is enough to navigate through pages, and other
+tasks can be performed from on-screen keyboard). Also pdf contents is
+scrollable by finger/stylus/mouse. And last, but not least - viewer is
+VERY fast, much faster than poppler/xpdf-based solutions. I never thought
+I can get such a speed of PDF-rendering on ARM-based machine.
 
-(offtopic observation: mtd-utils-native delivers also a lot of stuff
-that is not really interesting for native (flash-erase, nandwrite,
-...)
+Build tested for armv4(h3600), armv5(hx4700), armv7(beagleboard), x86(qemux86)
+Run tested on armv5 machine (hx4700)
 
+Dmitry Artamonow (3):
+  openjpeg-1.3: new recipe
+  jbig2dec-0.11: new recipe
+  mupdf-0.6: new recipe
 
->
->> Btw if say mtd-utils-native needs kernel headers to access host
->> functionality using headers for a different kernel version seems to be
->> a no-no either.
->
-> mtd-utils is depending on OK to be exported by the kernel information to
-> know how to make a UBI image. =A0And again, for the target this just work=
-s.
+ recipes/jpeg/jbig2dec_0.11.bb                      |   19 ++++++
+ recipes/jpeg/openjpeg-1.3/fix_installdir.patch     |   19 ++++++
+ recipes/jpeg/openjpeg_1.3.bb                       |   24 ++++++++
+ recipes/mupdf/mupdf-0.6/Makerules                  |    8 +++
+ .../mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch  |   12 ++++
+ recipes/mupdf/mupdf_0.6.bb                         |   59 ++++++++++++++++++++
+ 6 files changed, 141 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/jpeg/jbig2dec_0.11.bb
+ create mode 100644 recipes/jpeg/openjpeg-1.3/fix_installdir.patch
+ create mode 100644 recipes/jpeg/openjpeg_1.3.bb
+ create mode 100644 recipes/mupdf/mupdf-0.6/Makerules
+ create mode 100644 recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
+ create mode 100644 recipes/mupdf/mupdf_0.6.bb
 
-What do you mean with OK?
-
-Actually I guess it is also unclear to me what version of
-linux-libc-headers you want to install and I feel if they are from a
-different version than the native version, the native code should
-*not* depend on it, as it might give rise to wrong assumptions.
-
-And if we are only talking about a missing data structure or define or
-so, it might be possible to add a patch to mtd-utils-native to fix
-that. (can't judge that as I am lacking info on what part of
-linux-libc-headers would be needed).
-
-If the stuff needed is there to miss
-
->
->> PS: which distributions/distribution versions/kernel versions do have
->> this problem?
->> Ubuntu 8.04 (which has a 2.6.24 kernel) does not seem to exhibit this
->> problem).
->
-> RHEL4.
-
-Ouch. That brings up another question.
-RHEL4 is 2.6.9 iirc. I can imagine ubi tools and 2.6.9 do not go
-together too well.
-Do we want to do something as drastic as linux-libc-headers-native to
-support a fairly outdated kernel/distro.
-I have some doubts here.(btw RHEL4 is already on minimal support and
-is EOL feb 29, 2012).(http://www.redhat.com/security/updates/errata/)
-
-I guess this could also be solved locally. E.g. making a RHEL4
-specific recipe to install the headers, or to have copies of the
-needed headers in some place and add them to the inc search path
-Guess this: http://wiki.openembedded.net/index.php/OEandYourDistro#CentOS_4=
-.4_.2F_Red_Hat_Enterprise_Linux_4
-could be extended with some extra instructions.
-
-Frans.
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
