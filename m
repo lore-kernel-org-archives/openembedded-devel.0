@@ -1,44 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OMLmf-0002kl-6o
+	(envelope-from <koansoftware@gmail.com>) id 1OMLpO-0003GG-TK
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 15:57:33 +0200
-Received: by gyg10 with SMTP id 10so4287411gyg.6
+	Wed, 09 Jun 2010 16:00:24 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by wiki.koala.it (Postfix) with ESMTP id 489902C7EB
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jun 2010 06:53:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=u48btUE8xF0A+AYx/50RX6a47KmZIZEdGiHAjFV3f7E=;
-	b=XkSOEO8IR7nuos7jiKoMDHLU8PE/woCn7d5LqPbaS9Yq+ya6HMywa70hWqX0Xo8rWY
-	iE+L5rv8pikRIMlVQ02BlAmW7c82BCJSLhwm5VxLx9s+3Pn8Ba4BQxQxyw70F4VVQAqM
-	v597AkAV/cpXGMMGUroksipcqGsW36Hijh66U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ksrSGpouGQDp3dpdQzbFXq2W+mayYahM465N8ycExqk3Apsf74GlHUP3NGJgxxkLZU
-	afGm9rWo37SKufmNEg1juAukwaAeAD3vDZes/JiQSwx5/QWLBLyuyzyS7aMSipPJIDhq
-	3WSdUhQa5pHna+Gsuo8wMKGF/BAwz6tKDZhM8=
+	Wed,  9 Jun 2010 13:53:03 +0000 (UTC)
+Received: from wiki.koala.it ([127.0.0.1])
+	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 7ViiRYWSJIso
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Jun 2010 13:52:58 +0000 (UTC)
+Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
+	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 587912C798
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  9 Jun 2010 13:52:58 +0000 (UTC)
+Message-ID: <4C0F9D6B.6000105@gmail.com>
+Date: Wed, 09 Jun 2010 15:55:55 +0200
+From: Marco Cavallini <koansoftware@gmail.com>
+Organization: Marco Cavallini - Bergamo - Italia
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-Received: by 10.91.161.39 with SMTP id n39mr99389ago.55.1276091590660; Wed, 09 
-	Jun 2010 06:53:10 -0700 (PDT)
-Received: by 10.90.88.14 with HTTP; Wed, 9 Jun 2010 06:53:10 -0700 (PDT)
-In-Reply-To: <4C0F9119.3000909@freyther.de>
-References: <4C0F9119.3000909@freyther.de>
-Date: Wed, 9 Jun 2010 15:53:10 +0200
-Message-ID: <AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1275578113-17291-1-git-send-email-chase.maupin@ti.com>	<hu8ivf$250$1@dough.gmane.org>
+	<20100603165055.GA4402@denix.org>
+In-Reply-To: <20100603165055.GA4402@denix.org>
+X-SA-Exim-Connect-IP: 64.22.125.45
+X-SA-Exim-Mail-From: koansoftware@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC Meetings for the meeting of June
+Subject: Re: [PATCH] qt4-embedded: rename qtdemo file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,61 +48,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 13:57:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 09 Jun 2010 14:00:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/6/9 Holger Freyther <holger+oe@freyther.de>:
-> Hi all,
->
-> we didn't really have much to talk....
->
->
->
-> =3D=3D Renaming the org.openmebdded.dev branch =3D=3D
->
-> We were carrying the org.openembedd.dev branch name from the monotone
-> era into the git era and the TSC was asked to consider renaming it to
-> 'master' which is the git default for the main development tree. Now the
-> actual change on the server will be minor what is of a bigger concern
-> are the existing users and documentation.
+Denys Dmytriyenko ha scritto, Il 03/06/2010 18:50:
+> On Thu, Jun 03, 2010 at 05:50:06PM +0200, Koen Kooi wrote:
+> On 03-06-10 17:15, Chase Maupin wrote:
+>>>> * Changed the name of the qtdemo exectable installed
+>>>>   in the /usr/bin directory to qtdemoE for Qt
+>>>>   embedded builds.  This allows the Qt embedded
+>>>>   version of the demos package to co-exist with
+>>>>   the Qt X11 version.
+>>>> * Changed the demos package file list to accept
+>>>>   both qtdemo and qtdemoE.
+>>>>
+>>>> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> Acked-by: Koen Kooi <k-kooi@ti.com>
+> 
+>> Applied, thanks.
+> 
+>>>> ---
+>>>>  recipes/qt4/qt-4.6.2.inc     |    3 +++
+>>>>  recipes/qt4/qt4-embedded.inc |    2 +-
+>>>>  recipes/qt4/qt4.inc          |    4 ++--
+>>>>  3 files changed, 6 insertions(+), 3 deletions(-)
+>>>>
+>>>> diff --git a/recipes/qt4/qt-4.6.2.inc b/recipes/qt4/qt-4.6.2.inc
+>>>> index e89cf17..4a9f077 100644
+>>>> --- a/recipes/qt4/qt-4.6.2.inc
+>>>> +++ b/recipes/qt4/qt-4.6.2.inc
+>>>> @@ -57,6 +57,9 @@ do_install_append() {
+>>>>  	for i in rcc uic moc ; do
+>>>>  		install -m 0755 ${S}/bin/$i ${D}${bindir}/
+>>>>  	done
+>>>> +
+>>>> +	#Append an E to the qtdemo file
+>>>> +	mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
+>>>>  }
+>>>>  
 
-Technically speaking I think we should have run an RFC for this before
-it was brought to the table of the TSC.
+This patch drive to an error with qt/X11
+ERROR: Build of
+/home/koan/devel/openembedded/recipes/qt4/qt4-x11-free_4.6.2.bb
+do_install fail
 
-Personally the org.openembedded.dev branch name does not bother me
-although I know master is the 'standard' git name.
-Afaik renaming does not really solve a problem.
+| mv:
+`/home/koan/devel/build/kaeilos/tmp/work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/bin/qtdemo'
+and
+`/home/koan/devel/build/kaeilos/tmp/work/armv5te-oe-linux-gnueabi/qt4-x11-free-4.6.2-r17.2/image/usr/bin/qtdemo'
+are the same file
 
-I am not too sure how much this affects the current users. Actually I
-doubt if the change is bigger than the packages -> recipes renaming
-Isse is that if we do that we should make sure all relevant
-documentation is updated, otherwise we only create confusion (which
-might still creep up as people use old mailing list articles).
+looks like the Append an E to the qtdemo file han not been tested with
+qt/X11, so I'd like to change recipes/qt4/qt-4.6.2.inc in this way
 
-Considering this, I am in favour of keeping things as they are.
+#Append an E to the qtdemo file
+if [${QT_LIBINFIX} == "E"] ; then
+	    mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIBINFIX}
+fi
 
-Frans
->
-> The TSC would like to make the following proposal:
->
-> =A0a.) Contributor's will be asked to push to master, a git-hook
-> =A0 =A0 =A0will prevent pushes to the old branch name.
-> =A0b.) The default branch will be changed to 'master' and the
-> =A0 =A0 =A0documentation will be updated.
-> =A0c.) To ease this for existing users and to reduce the amount of
-> =A0 =A0 =A0support org.openembedded.dev will track master and remains
-> =A0 =A0 =A0available for a limited but long amount of time.
->
->
-> The TSC is not sure on how to implement c.) and this will determine when
-> we will be able to switch over and the schedule of doing so.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+--
+Marco Cavallini | KOAN sas | Bergamo - Italia
+ embedded and real-time software engineering
+   Atmel third party certified consultant
+Phone:+39-035-255.235 - Fax:+39-178-22.39.748
+      http://www.KoanSoftware.com
+        http://www.KaeilOS.com
 
 
