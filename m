@@ -1,23 +1,23 @@
 Received: from mail.asoft.ru ([91.205.86.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1OMFqp-0002CN-Kr
+	(envelope-from <mad_soft@inbox.ru>) id 1OMFqr-0002Df-7J
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 09:37:29 +0200
+	Wed, 09 Jun 2010 09:37:33 +0200
 Received: from lighthouse.office.asoft.ru (office.asoft.ru [62.205.175.245])
 	(authenticated bits=0)
-	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o597X3bV007448
+	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o597X3bX007448
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Jun 2010 11:33:06 +0400
+	Wed, 9 Jun 2010 11:33:08 +0400
 From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jun 2010 11:33:00 +0400
-Message-Id: <1276068782-23257-2-git-send-email-mad_soft@inbox.ru>
+Date: Wed,  9 Jun 2010 11:33:02 +0400
+Message-Id: <1276068782-23257-4-git-send-email-mad_soft@inbox.ru>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
 References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
 X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
 	(mail.asoft.ru [91.205.86.207]);
-	Wed, 09 Jun 2010 11:33:06 +0400 (MSD)
+	Wed, 09 Jun 2010 11:33:08 +0400 (MSD)
 X-SA-Exim-Connect-IP: 91.205.86.207
 X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -26,7 +26,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/3] openjpeg-1.3: new recipe
+Subject: [PATCH 3/3] mupdf-0.6: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,74 +40,117 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 07:37:29 -0000
+X-List-Received-Date: Wed, 09 Jun 2010 07:37:33 -0000
 
-The OpenJPEG library is an open-source JPEG 2000 codec written
-in C language.
+MuPDF is a slim and fast PDF viewer/toolkit.
 
 Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
 ---
- recipes/jpeg/openjpeg-1.3/fix_installdir.patch |   19 +++++++++++++++++++
- recipes/jpeg/openjpeg_1.3.bb                   |   24 ++++++++++++++++++++++++
- 2 files changed, 43 insertions(+), 0 deletions(-)
- create mode 100644 recipes/jpeg/openjpeg-1.3/fix_installdir.patch
- create mode 100644 recipes/jpeg/openjpeg_1.3.bb
+ recipes/mupdf/mupdf-0.6/Makerules                  |    8 +++
+ .../mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch  |   12 ++++
+ recipes/mupdf/mupdf_0.6.bb                         |   59 ++++++++++++++++++++
+ 3 files changed, 79 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mupdf/mupdf-0.6/Makerules
+ create mode 100644 recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
+ create mode 100644 recipes/mupdf/mupdf_0.6.bb
 
-diff --git a/recipes/jpeg/openjpeg-1.3/fix_installdir.patch b/recipes/jpeg/openjpeg-1.3/fix_installdir.patch
+diff --git a/recipes/mupdf/mupdf-0.6/Makerules b/recipes/mupdf/mupdf-0.6/Makerules
 new file mode 100644
-index 0000000..f04a81e
+index 0000000..5f3d4e2
 --- /dev/null
-+++ b/recipes/jpeg/openjpeg-1.3/fix_installdir.patch
-@@ -0,0 +1,19 @@
-+* status: pending
-+* origin:
-+  http://groups.google.com/group/openjpeg/browse_thread/thread/4cd7b53fbaab2822
-+* comment: slightly modified patch by Patrick Reynolds, borrowed from
-+  the thread above. Seems that it's not in upstream yet.
-+  Had to modify header location from /usr/include/openjpeg/openjpeg.h to
-+  /usr/include/openjpeg.h , as it's the only one header file anyway and
-+  most of its users expect #include <openjpeg.h> to work.
++++ b/recipes/mupdf/mupdf-0.6/Makerules
+@@ -0,0 +1,8 @@
++# Configuration for the Makefile
++LIBS := -ljbig2dec -lopenjpeg -ljpeg -lz -lm
++CFLAGS := -Wall --std=gnu99 -Ifitz -Imupdf $(THIRD_INCS)
 +
-+Index: libopenjpeg/CMakeLists.txt
-+===================================================================
-+--- a/libopenjpeg/CMakeLists.txt	(revision 541)
-++++ b/libopenjpeg/CMakeLists.txt	(working copy)
-+@@ -41,4 +41,4 @@
-+ 
-+ # Install includes files
-+ INSTALL(FILES openjpeg.h
-+-	DESTINATION ${INCLUDE_INSTALL_DIR}/openjpeg)
-++	DESTINATION include)
-diff --git a/recipes/jpeg/openjpeg_1.3.bb b/recipes/jpeg/openjpeg_1.3.bb
++CFLAGS += `pkg-config --cflags freetype2`
++LDFLAGS += `pkg-config --libs freetype2`
++X11LIBS = -lX11 -lXext
++PDFVIEW_EXE = $(X11VIEW_EXE)
+diff --git a/recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch b/recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
 new file mode 100644
-index 0000000..857c3dd
+index 0000000..fdc0b74
 --- /dev/null
-+++ b/recipes/jpeg/openjpeg_1.3.bb
-@@ -0,0 +1,24 @@
-+DESCRIPTION = "Open-source JPEG 2000 codec written in C language"
-+HOMEPAGE = "http://www.openjpeg.org"
-+SECTION = "libs"
-+LICENSE = "BSD"
++++ b/recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
+@@ -0,0 +1,12 @@
++* upstream: http://bugs.ghostscript.com/show_bug.cgi?id=690932
++
++--- mupdf/apps/x11_image.c.orig	2010-06-06 19:42:46.000000000 +0400
+++++ mupdf/apps/x11_image.c	2010-06-06 20:32:35.000000000 +0400
++@@ -14,6 +14,7 @@
++ 
++ #include <X11/Xlib.h>
++ #include <X11/Xutil.h>
+++#include <X11/Xarch.h>
++ #include <sys/ipc.h>
++ #include <sys/shm.h>
++ #include <X11/extensions/XShm.h>
+diff --git a/recipes/mupdf/mupdf_0.6.bb b/recipes/mupdf/mupdf_0.6.bb
+new file mode 100644
+index 0000000..e9cb0b1
+--- /dev/null
++++ b/recipes/mupdf/mupdf_0.6.bb
+@@ -0,0 +1,59 @@
++DESCRIPTION = "A lightweight PDF viewer and toolkit written in portable C."
++HOMEPAGE = "http://www.mupdf.com"
++SECTION = "x11/applications"
++LICENSE = "GPLv3"
 +PR = "r0"
 +
-+SRC_URI = "http://openjpeg.googlecode.com/files/openjpeg_v1_3.tar.gz \
-+           file://fix_installdir.patch"
++DEPENDS = "openjpeg jbig2dec jpeg zlib virtual/libx11 libxext freetype"
 +
-+S = "${WORKDIR}/OpenJPEG_v1_3"
++SRC_URI = "http://mupdf.com/download/source/${PN}-${PV}-source.tar.gz \
++           file://mupdf_fix_16bit_display.patch \
++           file://Makerules"
 +
-+inherit cmake
++S = "${WORKDIR}/mupdf"
 +
-+EXTRA_OECMAKE="-DBUILD_SHARED_LIBS:BOOL=ON"
++PACKAGES =+ "${PN}-tools ${PN}-tools-doc "
++FILES_${PN}-tools = "${bindir}/pdfclean ${bindir}/pdfdraw ${bindir}/pdfshow \
++                     ${bindir}/pdfextract ${bindir}/pdfinfo"
++FILES_${PN}-tools-doc = "${mandir}/man1/pdfclean.1 ${mandir}/man1/pdfdraw.1 \
++                         ${mandir}/man1/pdfshow.1"
 +
-+do_stage() {
-+        autotools_stage_all
++# mupdf crashes (at least on arm) when built with high level of optimization
++FULL_OPTIMIZATION = "-O2"
++
++do_configure() {
++    cp ${WORKDIR}/Makerules ${S}/Makerules
++
++    # we don't include CJK fonts to make binary more slim
++    # comment out following two lines if you need support for CJK
++    sed -i 's:^\t\$.GENDIR./font_cjk.c::g' ${S}/Makefile
++    echo "CFLAGS += -DNOCJK" >> ${S}/Makerules
 +}
 +
-+PACKAGES =+ "openjpeg-tools "
-+FILES_openjpeg-tools = "${bindir}/*"
++do_compile() {
++    # mupdf uses couple of tools for code generation during build process
++    # so we need to compile them first with host compiler
++    unset CFLAGS LDFLAGS
++    oe_runmake build/debug
++    oe_runmake build/debug/cmapdump LD=${BUILD_CC} CC=${BUILD_CC}
++    oe_runmake build/debug/fontdump LD=${BUILD_CC} CC=${BUILD_CC}
 +
-+SRC_URI[md5sum] = "f9a3ccfa91ac34b589e9bf7577ce8ff9"
-+SRC_URI[sha256sum] = "3bca2e1e040f9dcbbcb1e0627f17a76eeb95e153bf663d082070c044a21202bd"
++    # ...and then we fire 'make', feeding proper
++    # cross-compilation flags through Makerules file
++    echo "CFLAGS += ${CFLAGS}" >> ${S}/Makerules
++    echo "LDFLAGS += ${LDFLAGS}" >> ${S}/Makerules
++    oe_runmake LD="${CC}"
++}
++
++do_install() {
++    oe_runmake install prefix="${D}/usr"
++    install -d ${D}/${datadir}/applications
++    install -d ${D}/${datadir}/pixmaps
++    install -d ${D}/${mandir}/man1
++    install -m 0644 ${S}/debian/mupdf.xpm ${D}/${datadir}/pixmaps/
++    install -m 0644 ${S}/debian/mupdf.desktop ${D}/${datadir}/applications/
++    install -m 0644 ${S}/debian/*.1 ${D}/${mandir}/man1/
++}
++
++SRC_URI[md5sum] = "d1e1a1df8fb3e4d1c601506797b75036"
++SRC_URI[sha256sum] = "6f87c4f113ee9e0f4bdfd3a316ef44052edc4febc8f7b531c4a3f44ffe149605"
 -- 
 1.7.1
 
