@@ -1,21 +1,23 @@
 Received: from mail.asoft.ru ([91.205.86.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1OMFqo-0002BD-Av
+	(envelope-from <mad_soft@inbox.ru>) id 1OMFqq-0002Cg-6H
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 09 Jun 2010 09:37:27 +0200
+	Wed, 09 Jun 2010 09:37:29 +0200
 Received: from lighthouse.office.asoft.ru (office.asoft.ru [62.205.175.245])
 	(authenticated bits=0)
-	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o597X3bU007448
+	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o597X3bW007448
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 9 Jun 2010 11:33:04 +0400
+	Wed, 9 Jun 2010 11:33:07 +0400
 From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jun 2010 11:32:59 +0400
-Message-Id: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+Date: Wed,  9 Jun 2010 11:33:01 +0400
+Message-Id: <1276068782-23257-3-git-send-email-mad_soft@inbox.ru>
 X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
 X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
 	(mail.asoft.ru [91.205.86.207]);
-	Wed, 09 Jun 2010 11:33:04 +0400 (MSD)
+	Wed, 09 Jun 2010 11:33:07 +0400 (MSD)
 X-SA-Exim-Connect-IP: 91.205.86.207
 X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -24,7 +26,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 0/3] Recipe for MuPDF
+Subject: [PATCH 2/3] jbig2dec-0.11: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,42 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 09 Jun 2010 07:37:27 -0000
+X-List-Received-Date: Wed, 09 Jun 2010 07:37:29 -0000
 
-Hi!
+jbig2dec is a decoder implementation of the JBIG2 image compression
+format. JBIG2 is designed for lossy or lossless encoding of monochrome
+images at moderately high resolution, in particular scanned paper documents.
 
-Here's recipe for MuPDF (X11 pdf viewer and toolkit) and its dependencies.
-Viewer doesn't have any fancy GUI - just a plain window with rendered PDF,
-but it's a good thing on small screens embedded devices usually have,
-as no screen space is wasted on buttons, etc. Viewer is perfectly
-controllable from keyboard (and keyboardless devices like PDAs usually
-have some joystick which is enough to navigate through pages, and other
-tasks can be performed from on-screen keyboard). Also pdf contents is
-scrollable by finger/stylus/mouse. And last, but not least - viewer is
-VERY fast, much faster than poppler/xpdf-based solutions. I never thought
-I can get such a speed of PDF-rendering on ARM-based machine.
-
-Build tested for armv4(h3600), armv5(hx4700), armv7(beagleboard), x86(qemux86)
-Run tested on armv5 machine (hx4700)
-
-Dmitry Artamonow (3):
-  openjpeg-1.3: new recipe
-  jbig2dec-0.11: new recipe
-  mupdf-0.6: new recipe
-
- recipes/jpeg/jbig2dec_0.11.bb                      |   19 ++++++
- recipes/jpeg/openjpeg-1.3/fix_installdir.patch     |   19 ++++++
- recipes/jpeg/openjpeg_1.3.bb                       |   24 ++++++++
- recipes/mupdf/mupdf-0.6/Makerules                  |    8 +++
- .../mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch  |   12 ++++
- recipes/mupdf/mupdf_0.6.bb                         |   59 ++++++++++++++++++++
- 6 files changed, 141 insertions(+), 0 deletions(-)
+Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+---
+ recipes/jpeg/jbig2dec_0.11.bb |   19 +++++++++++++++++++
+ 1 files changed, 19 insertions(+), 0 deletions(-)
  create mode 100644 recipes/jpeg/jbig2dec_0.11.bb
- create mode 100644 recipes/jpeg/openjpeg-1.3/fix_installdir.patch
- create mode 100644 recipes/jpeg/openjpeg_1.3.bb
- create mode 100644 recipes/mupdf/mupdf-0.6/Makerules
- create mode 100644 recipes/mupdf/mupdf-0.6/mupdf_fix_16bit_display.patch
- create mode 100644 recipes/mupdf/mupdf_0.6.bb
+
+diff --git a/recipes/jpeg/jbig2dec_0.11.bb b/recipes/jpeg/jbig2dec_0.11.bb
+new file mode 100644
+index 0000000..9bc7433
+--- /dev/null
++++ b/recipes/jpeg/jbig2dec_0.11.bb
+@@ -0,0 +1,19 @@
++DESCRIPTION = "Decoder implementation of the JBIG2 image compression format"
++HOMEPAGE = "http://jbig2dec.sourceforge.net/"
++SECTION = "libs"
++LICENSE = "GPL"
++PR = "r0"
++
++SRC_URI = "${SOURCEFORGE_MIRROR}/jbig2dec/${PN}-${PV}.tar.gz"
++
++inherit autotools
++
++do_stage() {
++        autotools_stage_all
++}
++
++PACKAGES =+ "jbig2dec-tools "
++FILES_jbig2dec-tools = "${bindir}/*"
++
++SRC_URI[md5sum] = "1f61e144852c86563fee6e5ddced63f1"
++SRC_URI[sha256sum] = "7e2d8330b36f2765da22043d174827bee0f30db8d78c330904f363275c7dd0b9"
+-- 
+1.7.1
 
 
 
