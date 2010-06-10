@@ -1,59 +1,32 @@
-Received: from fg-out-1718.google.com ([72.14.220.155])
+Received: from smtp209.alice.it ([82.57.200.105]
+	helo=smtp209-alice.cp.alice.it)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OMpEs-00074y-Qs
+	(envelope-from <GNUtoo@no-log.org>) id 1OMpoO-0004Pv-1X
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 23:24:41 +0200
-Received: by fg-out-1718.google.com with SMTP id d23so44308fga.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jun 2010 14:20:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:in-reply-to:user-agent;
-	bh=m+qY0OWhmN2TKo9PXZR1D583PwE1+3edwXaQo+c44Wg=;
-	b=bX9otl41lb4Iwvpb9HoybJkROhnu4pztbLsxUxQ+YofD3/1NiWmqHhzqQM61A1z0h1
-	GrYT1qIZRRNKN92ZZnktiVFtjTu0YEx/0MxoTrEpS6AvfJE5qrKAbFtnLu5JhQhKnWS+
-	dwqpSa8cULHyyH4s4Y3wifFWlCCVl4SBFaAEw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=GocMq8MLrgJLNXEhNkG4URmK6Qo64gexHXVp2mHRvlspz4FakaR0NU5Q1hRNMUUkON
-	VnX3+kslEfJfraegI8wTedb8X59OxNKGnWI7qTn5EwF9ET2xVkvWTqK/H+JA0Ln9/+hB
-	AkNcOqPRk3fhyURi79fO3lDcbrzTEydlmCMjU=
-Received: by 10.204.130.28 with SMTP id q28mr545677bks.177.1276204817733;
-	Thu, 10 Jun 2010 14:20:17 -0700 (PDT)
-Received: from s42.loc (85-127-249-17.dynamic.xdsl-line.inode.at
-	[85.127.249.17])
-	by mx.google.com with ESMTPS id v2sm1690725bkz.13.2010.06.10.14.20.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 10 Jun 2010 14:20:17 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.71)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OMpAr-0000W2-E7; Thu, 10 Jun 2010 23:20:29 +0200
-Date: Thu, 10 Jun 2010 23:20:29 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Phil Blundell <philb@gnu.org>
-Message-ID: <20100610212029.GX14941@mx.loc>
-References: <1276114963.4424.42.camel@lenovo.internal.reciva.com>
-	<1276199208-31929-2-git-send-email-rep.dot.nop@gmail.com>
-	<AANLkTin367SqiCodgs_CxGiwAihL-SI0nlCJKUWqUZjq@mail.gmail.com>
-	<1276201371.13179.20.camel@lenovo.internal.reciva.com>
-	<AANLkTinAFdiBJ6jN3WwY75KsNwTPmkyoOL0iTgJ8UPFC@mail.gmail.com>
-	<20100610205040.GW14941@mx.loc>
-	<1276203991.13179.33.camel@lenovo.internal.reciva.com>
-MIME-Version: 1.0
-In-Reply-To: <1276203991.13179.33.camel@lenovo.internal.reciva.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 72.14.220.155
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	Fri, 11 Jun 2010 00:01:20 +0200
+Received: from [192.168.10.100] (95.237.157.170) by smtp209-alice.cp.alice.it
+	(8.5.124.05) (authenticated as editempo)
+	id 4C0E61F2001E080C for openembedded-devel@lists.openembedded.org;
+	Thu, 10 Jun 2010 23:51:07 +0200
+From: GNUtoo <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1276094610.1981.7.camel@saphir>
+References: <1275941424-14837-1-git-send-email-GNUtoo@no-log.org>
+	<1275941424-14837-2-git-send-email-GNUtoo@no-log.org>
+	<1276094610.1981.7.camel@saphir>
+Date: Thu, 10 Jun 2010 23:51:05 +0200
+Message-ID: <1276206665.10899.0.camel@gnutoo-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 82.57.200.105
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH 2/2] busybox: configure according to {MACHINE, DISTRO}_FEATURES
+Subject: Re: [PATCH] netbase: add support for htcdream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -67,25 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 21:24:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 10 Jun 2010 22:01:20 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jun 10, 2010 at 10:06:31PM +0100, Phil Blundell wrote:
->On Thu, 2010-06-10 at 22:50 +0200, Bernhard Reutner-Fischer wrote:
->> Both mmu and floatingpoint will need to look at COMBINED_FEATURES.
->> At least for mmu vs. !mmu PACKAGE_ARCH=${MACHINE} is unavoidable, no?
->
->I think both of those are more of a distro than a machine feature,
->really.  I imagine that existing distros which are only interested in
->(i.e. only build for) MMU-equipped targets will not be very thrilled if
->their libc and/or other packages suddenly become MACHINE-specific.
+On Wed, 2010-06-09 at 16:43 +0200, Michael 'Mickey' Lauer wrote:
+> Am Montag, den 07.06.2010, 22:10 +0200 schrieb Denis 'GNUtoo' Carikli:
+> > If we don't add a custom file containing auto usb0,
+> > usb0 is not configured at boot and we can't ssh into the phone
+> > 
+> > Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+> 
+> Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+> 
+> :M:
+Thanks a lot Khem and Mickey for the ack/review,it's pushed now.
 
-If the machine does not provide a choice to use or not use the MMU then
-it makes no sense to take that into account for the package arch (think
-bfin or i586 or certain coldfires/m68k), yes. If, OTOH, a machine
-supports it (let's say ppc) then there must at least be a nice way to
-distinguish ppc<endian><mmu><floatingpoint> i would have hoped.
+Denis.
+
 
 
 
