@@ -1,26 +1,46 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OMm16-0005X9-KM
+	(envelope-from <martin.jansa@gmail.com>) id 1OMmx9-00052s-La
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 19:58:13 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OMlws-0001vP-7p
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 21:53:51 +0400
-From: Roman I Khimov <roman@khimov.ru>
+	Thu, 10 Jun 2010 20:58:12 +0200
+Received: by fxm9 with SMTP id 9so219346fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jun 2010 11:53:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=NwOW7ydBCx+zb4hTqEORQmKDo4g8RyQYnMtpwC6b1D8=;
+	b=GHqDHCiPol8PpWJzbcLWzSf5xXkXLMhkUhhyjYZImE6wSsfs+miO1Q4OOb7VQ/+VYE
+	SdRhr4USL4zqZN6HXdaQfVBbVTNEkRB/WxP0YRNY22WzLIHw/v+zEP1jlyIEoSljGJoV
+	qyQkH6ePBwkDfuJ0EA4I/rR0jvs+n3HQDfcxw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=vL92RMfFLFCQNWQfKA1S3/QJDFqF4DNv/EPymEcvkqMR87iBYfGyFEXBVXvCdsKRky
+	kb//gTEmxiUxhLafzlDSG4UWvZoA+yE1X0HffSUUnF5FOLlbdAmzI9EW70AjUkIv5EaC
+	BsJo3ObLCOsYnYPdufKkEKdPir0c3Ku/zeiwY=
+Received: by 10.223.21.17 with SMTP id h17mr791042fab.45.1276196025524;
+	Thu, 10 Jun 2010 11:53:45 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u12sm1201897fah.16.2010.06.10.11.53.44
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 10 Jun 2010 11:53:44 -0700 (PDT)
+Date: Thu, 10 Jun 2010 20:53:33 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 10 Jun 2010 21:53:49 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+Message-ID: <20100610185333.GO1403@jama>
 References: <1276178833-30841-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1276178833-30841-1-git-send-email-Martin.Jansa@gmail.com>
+	<201006102153.49588.roman@khimov.ru>
 MIME-Version: 1.0
-Message-Id: <201006102153.49588.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+In-Reply-To: <201006102153.49588.roman@khimov.ru>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -38,47 +58,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 17:58:13 -0000
-X-Groupsio-MsgNum: 20075
-Content-Type: multipart/signed; boundary="nextPart1356987.T1GO9geeme";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 10 Jun 2010 18:58:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
---nextPart1356987.T1GO9geeme
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jun 10, 2010 at 09:53:49PM +0400, Roman I Khimov wrote:
+> В сообщении от Четверг 10 июня 2010 18:07:13 автор Martin Jansa написал:
+> > * even worse than last RDEPENDS/RRECOMMENDS change, because now ie:
+> >   opkg info coreutils-doc
+> >   Provides: textutils, shellutils, fileutils
+> >   Replaces: textutils, shellutils, fileutils
+> > 
+> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> 
+> Any chance to automatically bump PR for all packages touched?
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 10 =D0=B8=D1=8E=D0=BD=D1=8F 2010=
- 18:07:13 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Martin Jansa =D0=BD=D0=B0=D0=BF=D0=
-=B8=D1=81=D0=B0=D0=BB:
-> * even worse than last RDEPENDS/RRECOMMENDS change, because now ie:
->   opkg info coreutils-doc
->   Provides: textutils, shellutils, fileutils
->   Replaces: textutils, shellutils, fileutils
->=20
-> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Well PR should be bumped with previous much bigger RDEPENDS/RRECOMMENDS patch already :/.
 
-Any chance to automatically bump PR for all packages touched?
+But my sed foo is not strong enough to replace it quickly (especially
+with INC_PR and changes in .inc files).
 
-Acked-by: Roman I Khimov <khimov@altell.ru>
+I did rebuild from scratch + reflash on my devices and plan to bump
+DISTRO_PR soon for SHR.. so I'm not really motivated to do :/.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+Regards,
 
---nextPart1356987.T1GO9geeme
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+-- 
+Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
 
-iEYEABECAAYFAkwRJq0ACgkQXJ70z+XgVcPCTQCfWPKh6dMfzMCMGjmOerAtlWQd
-JhIAn30h11T4PSP0K9SqMo3kSoGbdvg0
-=3Fzv
------END PGP SIGNATURE-----
-
---nextPart1356987.T1GO9geeme--
