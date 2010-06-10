@@ -1,44 +1,53 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
+	helo=TX2EHSOBE003.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OMVp5-0001gU-6r
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OMaqg-0001WJ-E8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 02:40:47 +0200
-Received: by pxi14 with SMTP id 14so2474208pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 09 Jun 2010 17:36:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=8Yaq6UtzPz1ITnf2qx1mRGTXhIZ1NziuikjESlCRcK0=;
-	b=PhLOxfFaW9AWYvu46TYm8BCBhTp7cqfTlODFjNSejolIY2cY6J/8eExfLZGMzk6J0b
-	2w3pEN78pbd3wdvuSSycW+uW8kKonbLZlIdKBtzuPl2VY3fXLTox5vvJA6IowAczwIiw
-	uYxFMBWX/W9ADqLpXO78dLyBAnfnlXkGfZDTE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=uQAJqXtE+UREljkuOzpAUSobYrQrVeEEz1KJ+TzueueyG91zPnLf3pFX3ISaQycLem
-	+SFLFdLS1yxZLrwXC6coVYNcJpw8KJn4cqiIuTZt/bA/zxDee1esUGkPDCFk1jHQHgfl
-	Xb4BzHz9YWdMkcmxyhv1ICpvYwJV82E7hbeWs=
-Received: by 10.142.151.38 with SMTP id y38mr2114683wfd.219.1276130179821;
-	Wed, 09 Jun 2010 17:36:19 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id a23sm70635820wam.2.2010.06.09.17.36.18
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 09 Jun 2010 17:36:18 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  9 Jun 2010 17:36:15 -0700
-Message-Id: <1276130175-28095-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	Thu, 10 Jun 2010 08:02:54 +0200
+Received: from mail84-tx2-R.bigfish.com (10.9.14.251) by
+	TX2EHSOBE003.bigfish.com (10.9.40.23) with Microsoft SMTP Server id
+	8.1.340.0; Thu, 10 Jun 2010 05:57:59 +0000
+Received: from mail84-tx2 (localhost.localdomain [127.0.0.1])	by
+	mail84-tx2-R.bigfish.com (Postfix) with ESMTP id A9E941630418	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jun 2010 05:57:58 +0000 (UTC)
+X-SpamScore: -17
+X-BigFish: VPS-17(zz14e3M14ffO1443Nzz1202hzzz32i2a8h65h)
+Received: from mail84-tx2 (localhost.localdomain [127.0.0.1]) by mail84-tx2
+	(MessageSwitch) id 1276149478502325_21021;
+	Thu, 10 Jun 2010 05:57:58 +0000 (UTC)
+Received: from TX2EHSMHS027.bigfish.com (unknown [10.9.14.242])	by
+	mail84-tx2.bigfish.com (Postfix) with ESMTP id 78988E40050	for
+	<openembedded-devel@lists.openembedded.org>;
+	Thu, 10 Jun 2010 05:57:58 +0000 (UTC)
+Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
+	TX2EHSMHS027.bigfish.com (10.9.99.127) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Thu, 10 Jun 2010 05:57:58 +0000
+Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
+	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
+	Thu, 10 Jun 2010 11:27:56 +0530
+From: Soumya R <Soumya.R@kpitcummins.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 10 Jun 2010 11:27:18 +0530
+Thread-Topic: python-native_2.6.4.bb do_unpack failed
+Thread-Index: AQHLCGHfVFpAkfQXnU61GKEB+RmCOQ==
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFA0@KCINPUNHJCMS01.kpit.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-Reverse-DNS: Kcinpunhjhc01.kpit.com
+X-SA-Exim-Connect-IP: 65.55.88.12
+X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] lib/oe/patch.py: Dont import patches but symlink them instead
+Subject: python-native_2.6.4.bb do_unpack failed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,50 +61,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 00:40:47 -0000
+X-List-Received-Date: Thu, 10 Jun 2010 06:03:00 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-* This patch removes the usage of quilt import <patch>
-  instead it creasted a symlink to the patch in the patches
-  directory and synthesizes the series file which otherwise
-  would be done automatically by quilt import.
+Hi All,
 
-* This should help a bit in reducing build time as it avoids
-  copying of the patch and also other things that quilt import
-  would otherwise do.
+     I am using ubuntu 10.4 LTS and i am trying to build my own customized =
+image
+for mipsel.. When i run bitbake avn-image i get the following error.
 
-* Tested by doing minimal-image on qemuarm.
+cp: cannot stat `/home/likewise-open/KPIT/soumyar/openembedded/recipes/pyth=
+on/python-native-2.6.4/05-enable-ctypes-cross-build.patch': No such file or=
+ directory
+NOTE: Task failed:
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/likewise-open/KPIT/soumyar/openembedded/recipes/pytho=
+n/python-native_2.6.4.bb do_unpack failed
+ERROR: Task 749 (/home/likewise-open/KPIT/soumyar/openembedded/recipes/pyth=
+on/python-native_2.6.4.bb, do_unpack) failed
+NOTE: Waiting for 3 active tasks to finish
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- lib/oe/patch.py |   13 ++++---------
- 1 files changed, 4 insertions(+), 9 deletions(-)
+  I am unable to tar Python-2.6.4.tar.bz2 by using the command
+tar -zxvf Python-2.6.4.tar.bz2
+gzip: stdin: not in gzip format
+tar: Child returned status 1
+tar: Exiting with failure status due to previous errors
 
-diff --git a/lib/oe/patch.py b/lib/oe/patch.py
-index 7f6b0fe..607ad44 100644
---- a/lib/oe/patch.py
-+++ b/lib/oe/patch.py
-@@ -230,15 +230,10 @@ class QuiltTree(PatchSet):
-         if not self.initialized:
-             self.InitFromDir()
-         PatchSet.Import(self, patch, force)
--
--        args = ["import", "-p", patch["strippath"]]
--        if force:
--            args.append("-f")
--            args.append("-dn")
--        args.append(patch["file"])
--
--        self._runcmd(args)
--
-+        os.symlink(patch["file"], self._quiltpatchpath(patch["file"]))
-+        f = open(os.path.join(self.dir, "patches","series"), "a");
-+        f.write(os.path.basename(patch["file"]) + " -p" + patch["strippath"]+"\n")
-+        f.close()
-         patch["quiltfile"] = self._quiltpatchpath(patch["file"])
-         patch["quiltfilemd5"] = bb.utils.md5_file(patch["quiltfile"])
- 
--- 
-1.7.0.4
+   so i downgraded the gzip but still the same error.. If anybody got the s=
+ame error and resolved it please help me out.. I am stuck here:-(
+
+
+Thanks in advance :-)
+
+Regards,
+Soumya
+
+
+
+
 
 
 
