@@ -1,34 +1,38 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OMqfr-00015t-Fz
+	(envelope-from <raj.khem@gmail.com>) id 1OMqkL-0003Vm-Ek
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 00:56:36 +0200
-Received: by iwn39 with SMTP id 39so496100iwn.6
+	Fri, 11 Jun 2010 01:01:14 +0200
+Received: by iwn39 with SMTP id 39so500399iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jun 2010 15:52:12 -0700 (PDT)
+	Thu, 10 Jun 2010 15:56:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	:references:from:date:message-id:subject:to:cc:content-type
 	:content-transfer-encoding;
-	bh=9TwgLW23S8tMwnJE0XLTZXoWQuhJntJrofvkP0LJaFE=;
-	b=epib6ewofrOkHkAG+4brLtA4Gs0kjP0tY0xTHwcyPkNW/wNZPp9pmRY1Mv7gOy22Qs
-	1nT7OXi4aLRfHqvQZKfzzpyL72BUjd6TohwrccT54Kj3TleT46W2KL6pJKzRVpxpJaqW
-	VXYYJGrVc7HIlH/P2MI+htTy6SbxZ5QTdLxH0=
+	bh=m0/JsqafKaKLGLpI1zJZcjKyBAbEZkAXLcmUONBiXb4=;
+	b=CM/yd5STLeIXRl8WSDnfDFU7bZ7jMYGZ6iNcjMi+CQ1NLzqbp6zAExhSviOwR7Cs4O
+	+kSg1pIO4cdQH9CBcTw1Ouqx+cCRDWtFg+jrwbrrvTleAVhhy+TUYhZFERIKIQ0kYxof
+	35u6ZK9GaQOt58bJ0G8mNppSIKSD/aHcfv8l8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=JbL/6ptSkOdn+4XxXn+K5PZRWBEzmXaJZ2mrLa8R3oJfu5YGE4XINo72KbcZMADrno
-	nIYhuTqHdv9lv3to+Mlr5Fw+qJzYA5kiaI/lWvnQezQOCOIFMzH68NTco49zI6XyR9Aw
-	PQwPRa0P1Kj0wxsdcLlX4LlLtOG6gAojAdkFw=
-Received: by 10.231.168.135 with SMTP id u7mr894715iby.125.1276210332361; Thu, 
-	10 Jun 2010 15:52:12 -0700 (PDT)
+	:cc:content-type:content-transfer-encoding;
+	b=uys2n8lAxFq1Z/81NsbHOmaJW0UO40Aju7CgjTnBMq6H+9tb24xgW5dskgOXneaPsq
+	sYU3hEMmZ8m2jbQjywhcbyGX/4TC3mgMPYIx9/gCrqSBMfUByvnPKsCedU7jFZPr0lSM
+	yP3+NLBJFX3qhBLYibagrnC3Wc4KXGQ2BoRKI=
+Received: by 10.231.194.196 with SMTP id dz4mr836778ibb.66.1276210610906; Thu, 
+	10 Jun 2010 15:56:50 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.19.76 with HTTP; Thu, 10 Jun 2010 15:51:52 -0700 (PDT)
-In-Reply-To: <1276112911-30633-1-git-send-email-khimov@altell.ru>
-References: <1276112911-30633-1-git-send-email-khimov@altell.ru>
+Received: by 10.231.19.76 with HTTP; Thu, 10 Jun 2010 15:56:30 -0700 (PDT)
+In-Reply-To: <AANLkTinAFdiBJ6jN3WwY75KsNwTPmkyoOL0iTgJ8UPFC@mail.gmail.com>
+References: <1276114963.4424.42.camel@lenovo.internal.reciva.com> 
+	<1276199208-31929-2-git-send-email-rep.dot.nop@gmail.com> 
+	<AANLkTin367SqiCodgs_CxGiwAihL-SI0nlCJKUWqUZjq@mail.gmail.com> 
+	<1276201371.13179.20.camel@lenovo.internal.reciva.com>
+	<AANLkTinAFdiBJ6jN3WwY75KsNwTPmkyoOL0iTgJ8UPFC@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 10 Jun 2010 15:51:52 -0700
-Message-ID: <AANLkTinn0XMuK-3ByVHbCdSlSwvz9t_WyZJROC8jbQuL@mail.gmail.com>
+Date: Thu, 10 Jun 2010 15:56:30 -0700
+Message-ID: <AANLkTineM41WJ4f65imRWGkml5-dbdFvHG842UlYkgUQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -38,7 +42,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] shadow: added new package shadow-group. Fix for build with uclibc.
+Subject: Re: [PATCH 2/2] busybox: configure according to {MACHINE, DISTRO}_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,107 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 22:56:36 -0000
+X-List-Received-Date: Thu, 10 Jun 2010 23:01:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 9, 2010 at 12:48 PM, Roman I Khimov <khimov@altell.ru> wrote:
-> From: Vladimir Sorokin <sorokin@altell.ru>
+On Thu, Jun 10, 2010 at 1:27 PM, Chris Larson <clarson@kergoth.com> wrote:
+> On Thu, Jun 10, 2010 at 1:22 PM, Phil Blundell <philb@gnu.org> wrote:
 >
-> shadow-group contains utilities (sg, newgrp, gpasswd) for groups manipula=
-ting,
-> useful when you only need things not provided by busybox.
+>> On Thu, 2010-06-10 at 12:55 -0700, Chris Larson wrote:
+>> > Should this (ipv6 at least) use COMBINED_FEATURES, since it requires
+>> > kernel/machine support for it to be useful, along with distro support?
+>>
+>> I don't think it's machine dependent in any meaningful way; there is, to
+>> my knowledge, no OE-supported hardware which is actually incapable of
+>> supporting ipv6. =A0Any distro that wants to use it just needs to make
+>> sure that the kernel support is present (either built-in or as a module)
+>> on all the supported targets. =A0In any case, most packages will cope
+>> gracefully with ipv6 being selected on in the configuration and then
+>> found to be absent at runtime.
+>>
+>> If you start factoring MACHINE_FEATURES into that kind of decision then,
+>> logically, the package needs to have PACKAGE_ARCH=3D${MACHINE}. =A0I don=
+'t
+>> think it would be a very good thing to start forcing packages down that
+>> path unnecessarily.
 >
-> Signed-off-by: Vladimir Sorokin <sorokin@altell.ru>
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
-> ---
-> =A0recipes/shadow/shadow.inc | =A0 32 +++++++++++++++++++++++++++++---
-> =A01 files changed, 29 insertions(+), 3 deletions(-)
 >
-> diff --git a/recipes/shadow/shadow.inc b/recipes/shadow/shadow.inc
-> index 460930b..97a2e19 100644
-> --- a/recipes/shadow/shadow.inc
-> +++ b/recipes/shadow/shadow.inc
-> @@ -13,7 +13,7 @@ DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'pam'=
-, 'libpam', '', d)}"
->
-> =A0PACKAGE_ARCH_${PN} =3D "${MACHINE_ARCH}"
->
-> -INC_PR =3D "r14"
-> +INC_PR =3D "r15"
->
-> =A0# Additional Policy files for PAM
-> =A0PAM_SRC_URI =3D " \
-> @@ -42,8 +42,23 @@ EXTRA_OECONF +=3D "\
-> =A0 =A0 ${@base_contains('DISTRO_FEATURES', 'pam', '--with-libpam', '--wi=
-thout-libpam', d)} \
-> =A0"
->
-> +EXTRA_OECONF_linux-uclibc +=3D "\
-> + =A0 =A0--disable-account-tools-setuid \
-> + =A0 =A0--disable-shadowgrp \
-> + =A0 =A0--without-audit \
-> + =A0 =A0--without-selinux \
-> + =A0 =A0--without-libcrack \
-> + =A0 =A0--without-nscd \
-> + =A0 =A0${@base_contains('DISTRO_FEATURES', 'pam', '--with-libpam', '--w=
-ithout-libpam', d)} \
-> +"
-> +
+> Fair enough, that seems reasonable for this particular case. =A0Now that =
+you
+> bring it up, we adjust package arch to machine when we use a machine
+> specific file:// file, but maybe we need to teach it to check for referen=
+ces
+> to MACHINE_FEATURES or COMBINED_FEATURES, somehow.
 
-use EXTRA_OECONF_libc-uclibc
-current override linux-uclibc will not work for ARM and SPE machines.
+will it force recompile then if I choose a similar arch but different
+machine say (qemuarm, osk5912 both are armv5te)
 
-> =A0CFLAGS +=3D "-I../include"
->
-> +PACKAGES =3D+ "${PN}-group"
-> +RDEPENDS_${PN} +=3D "${PN}-group"
-> +
-> +FILES_${PN}-group =3D "${bindir}/gpasswd ${bindir}/newgrp.shadow ${bindi=
-r}/sg"
-> +
-> =A0do_configure_prepend () {
-> =A0 =A0 export CONFIG_SITE=3D"${CONFIG_SITE} ${B}/cachedpaths"
-> =A0 =A0 cat <<END >${B}/cachedpaths
-> @@ -107,7 +122,6 @@ pkg_postinst_${PN} () {
-> =A0 =A0 update-alternatives --install ${bindir}/passwd passwd passwd.${PN=
-} 200
-> =A0 =A0 update-alternatives --install ${sbindir}/chpasswd chpasswd chpass=
-wd.${PN} 200
-> =A0 =A0 update-alternatives --install ${bindir}/chfn chfn chfn.${PN} 200
-> - =A0 =A0update-alternatives --install ${bindir}/newgrp newgrp newgrp.${P=
-N} 200
-> =A0 =A0 update-alternatives --install ${bindir}/chsh chsh chsh.${PN} 200
-> =A0 =A0 update-alternatives --install ${base_bindir}/login login login.${=
-PN} 200
-> =A0 =A0 update-alternatives --install ${base_sbindir}/vipw vipw vipw.${PN=
-} 200
-> @@ -120,7 +134,19 @@ pkg_postinst_${PN} () {
-> =A0}
->
-> =A0pkg_prerm_${PN} () {
-> - =A0 =A0for i in passwd chpasswd chfn newgrp chsh login vipw vigr ; do
-> + =A0 =A0for i in passwd chpasswd chfn chsh login vipw vigr ; do
-> + =A0 =A0 =A0 =A0update-alternatives --remove $i $i.${PN}
-> + =A0 =A0done
-> +}
-> +
-> +pkg_postinst_${PN}-group () {
-> + =A0 touch /etc/login.defs
-> + =A0 update-alternatives --install ${bindir}/newgrp newgrp newgrp.${PN} =
-200
-> +}
-> +
-> +pkg_prerm_${PN}-group () {
-> + =A0 =A0for i in newgrp ; do
-> =A0 =A0 =A0 =A0 update-alternatives --remove $i $i.${PN}
-> =A0 =A0 done
-> =A0}
-> +
 > --
-> 1.6.4.2
->
->
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
