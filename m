@@ -1,46 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OMlD6-0008Sx-P3
+	(envelope-from <raj.khem@gmail.com>) id 1OMlKJ-0000FW-Ax
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 19:06:33 +0200
-Received: by pvc30 with SMTP id 30so77713pvc.6
+	Thu, 10 Jun 2010 19:14:00 +0200
+Received: by gwaa12 with SMTP id a12so126339gwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jun 2010 10:02:08 -0700 (PDT)
+	Thu, 10 Jun 2010 10:09:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=jhNHdlMO6B4rIGy0h7zqwPWjzrmUAljencxSMeXOcxQ=;
-	b=ieXxzWNu5XNYFpKnV1lH/b9AB+9qjwSygbUoKYFcESC4FyPRTVIaXWCl2dwsf+86ho
-	CjKp1N4sHYt7wlNeyYWFcBK99gdcXLU3RpwrWIdqyiOarNuuPnEsFOyYouGXeRWiRTID
-	doOxuXERQJ8XTfcN6YLUhL6L2ZTqOwAOqV1ew=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=1NW6IQ5k2Qmscb0tISpcZdXizqTqy+6YTkigUUW9dGY=;
+	b=D6hz8jtiSBLVKtMdySfU0ENIroPKChEg2o4TZjVVgL/X9+U+8pzgxvXWfLit9m16Tr
+	Dyj7UpPlFxLXHaUuNLxjFhJrKE0HuqjlJPlFpRCrzXACmtKf5ha4ZRf6sVgGe+0YrKt9
+	QuHBa1RWtdhKXBxWHODLFm8XCqba6Mh+zaDik=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Q5a1MvlLhEbebwHm2coVUj9qC8heudHV6D4+zt55aYDAwIi4JHi335R5GEaxsn1S/J
-	6t5nEXKzhx7ftm9HFnkZDpOP1XTXLo763brvAsE61LpxYezKQ9XYX6uR+0mLUKGTJuaF
-	of8JaRXcywyLBPrVe+s4ka8tlRVX2bHWVX5ak=
-Received: by 10.142.151.29 with SMTP id y29mr320802wfd.261.1276189328861; Thu, 
-	10 Jun 2010 10:02:08 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=tM4bJEtAjCL+a8SsTrfEtq/5VlpMeZ3nrHr3uImcL4iavZ3CmJSn+e2eWl8zWjkSOs
+	t5s7q1kC1IUNI1AEIrBZMY0DM9Kzd9QD+sLJmULvCOjqdEf00XCkvvrdHVHjimsgi1BE
+	g9CfoN2mpuSMiETJ/r3kSMzL4SmHUpz1uCqkI=
+Received: by 10.151.72.5 with SMTP id z5mr1658321ybk.235.1276189284088; Thu, 
+	10 Jun 2010 10:01:24 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.142.211.2 with HTTP; Thu, 10 Jun 2010 10:01:48 -0700 (PDT)
+Received: by 10.231.19.76 with HTTP; Thu, 10 Jun 2010 10:01:03 -0700 (PDT)
 In-Reply-To: <1276130175-28095-1-git-send-email-raj.khem@gmail.com>
 References: <1276130175-28095-1-git-send-email-raj.khem@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 10 Jun 2010 10:01:48 -0700
-X-Google-Sender-Auth: QVfYB0aD3Z949NvpNyZ2QhONXFU
-Message-ID: <AANLkTikMfI8XuI2BgABlPkjUmQ5H-FTe0NbnDorDMQrj@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 10 Jun 2010 10:01:03 -0700
+Message-ID: <AANLkTinfdN6E8kvYcTFFI2hl1omm_z6s02jP0inuiqve@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] lib/oe/patch.py: Dont import patches but symlink them instead
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,30 +52,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 17:06:33 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 10 Jun 2010 17:14:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
 On Wed, Jun 9, 2010 at 5:36 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
 > * This patch removes the usage of quilt import <patch>
->  instead it creasted a symlink to the patch in the patches
->  directory and synthesizes the series file which otherwise
->  would be done automatically by quilt import.
+> =A0instead it creasted a symlink to the patch in the patches
+> =A0directory and synthesizes the series file which otherwise
+> =A0would be done automatically by quilt import.
 >
 > * This should help a bit in reducing build time as it avoids
->  copying of the patch and also other things that quilt import
->  would otherwise do.
+> =A0copying of the patch and also other things that quilt import
+> =A0would otherwise do.
 >
 > * Tested by doing minimal-image on qemuarm.
 >
 > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =A0lib/oe/patch.py | =A0 13 ++++---------
+> =A01 files changed, 4 insertions(+), 9 deletions(-)
+>
+> diff --git a/lib/oe/patch.py b/lib/oe/patch.py
+> index 7f6b0fe..607ad44 100644
+> --- a/lib/oe/patch.py
+> +++ b/lib/oe/patch.py
+> @@ -230,15 +230,10 @@ class QuiltTree(PatchSet):
+> =A0 =A0 =A0 =A0 if not self.initialized:
+> =A0 =A0 =A0 =A0 =A0 =A0 self.InitFromDir()
+> =A0 =A0 =A0 =A0 PatchSet.Import(self, patch, force)
+> -
+> - =A0 =A0 =A0 =A0args =3D ["import", "-p", patch["strippath"]]
+> - =A0 =A0 =A0 =A0if force:
+> - =A0 =A0 =A0 =A0 =A0 =A0args.append("-f")
+> - =A0 =A0 =A0 =A0 =A0 =A0args.append("-dn")
+> - =A0 =A0 =A0 =A0args.append(patch["file"])
+> -
+> - =A0 =A0 =A0 =A0self._runcmd(args)
+> -
+> + =A0 =A0 =A0 =A0os.symlink(patch["file"], self._quiltpatchpath(patch["fi=
+le"]))
+> + =A0 =A0 =A0 =A0f =3D open(os.path.join(self.dir, "patches","series"), "=
+a");
+> + =A0 =A0 =A0 =A0f.write(os.path.basename(patch["file"]) + " -p" + patch[=
+"strippath"]+"\n")
+> + =A0 =A0 =A0 =A0f.close()
+> =A0 =A0 =A0 =A0 patch["quiltfile"] =3D self._quiltpatchpath(patch["file"]=
+)
+> =A0 =A0 =A0 =A0 patch["quiltfilemd5"] =3D bb.utils.md5_file(patch["quiltf=
+ile"])
+>
+> --
+> 1.7.0.4
+>
+>
 
+a native-sdk-image build fine too and saved me 5mins :)
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
