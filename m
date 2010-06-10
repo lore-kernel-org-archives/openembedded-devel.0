@@ -1,36 +1,36 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OMmx9-00052s-La
+	(envelope-from <martin.jansa@gmail.com>) id 1OMn2a-0005cN-2R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 20:58:12 +0200
-Received: by fxm9 with SMTP id 9so219346fxm.6
+	Thu, 10 Jun 2010 21:03:48 +0200
+Received: by fxm9 with SMTP id 9so222657fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jun 2010 11:53:45 -0700 (PDT)
+	Thu, 10 Jun 2010 11:59:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=NwOW7ydBCx+zb4hTqEORQmKDo4g8RyQYnMtpwC6b1D8=;
-	b=GHqDHCiPol8PpWJzbcLWzSf5xXkXLMhkUhhyjYZImE6wSsfs+miO1Q4OOb7VQ/+VYE
-	SdRhr4USL4zqZN6HXdaQfVBbVTNEkRB/WxP0YRNY22WzLIHw/v+zEP1jlyIEoSljGJoV
-	qyQkH6ePBwkDfuJ0EA4I/rR0jvs+n3HQDfcxw=
+	bh=p53o2O2o04ZExbe5zeDG5Y4X3y3DWJpl3Tmx4wKPIic=;
+	b=ZIErbXlbLRZIUyBS1vqs2LVgmRuQ8oMYZzcOpQ20PeTQU7YsIzaqDbLNloLXjDO7Ej
+	pyAYAnJzwuayjgD3ZiuX7Tf7e6fk7enrwPZvWLIg8YDdl2/CuMmHGqNJCyAhK1F6xIRa
+	G697mc5kv16mAO0O0wcBFsM+E13APpwzmPZfw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:content-transfer-encoding
 	:in-reply-to:user-agent;
-	b=vL92RMfFLFCQNWQfKA1S3/QJDFqF4DNv/EPymEcvkqMR87iBYfGyFEXBVXvCdsKRky
-	kb//gTEmxiUxhLafzlDSG4UWvZoA+yE1X0HffSUUnF5FOLlbdAmzI9EW70AjUkIv5EaC
-	BsJo3ObLCOsYnYPdufKkEKdPir0c3Ku/zeiwY=
-Received: by 10.223.21.17 with SMTP id h17mr791042fab.45.1276196025524;
-	Thu, 10 Jun 2010 11:53:45 -0700 (PDT)
+	b=JVAOCWFqBXShIruEeU5BNg4dBDYRJtUvZ56qIOcZk7QNlELc++VfgluW3bUoRu4R7I
+	pzV8BTPD+1IiUTiW7I2VX1Ihx3BgjWIzwpvzleubzUa3OFkeZH976lICKUvhalzAycFz
+	B1mXb803r07LeNY1s1jiGRghGM7pWpI9TbWpk=
+Received: by 10.223.22.145 with SMTP id n17mr817241fab.23.1276196365108;
+	Thu, 10 Jun 2010 11:59:25 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u12sm1201897fah.16.2010.06.10.11.53.44
+	by mx.google.com with ESMTPS id e16sm1237045fak.8.2010.06.10.11.59.24
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 10 Jun 2010 11:53:44 -0700 (PDT)
-Date: Thu, 10 Jun 2010 20:53:33 +0200
+	Thu, 10 Jun 2010 11:59:24 -0700 (PDT)
+Date: Thu, 10 Jun 2010 20:59:13 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100610185333.GO1403@jama>
+Message-ID: <20100610185913.GP1403@jama>
 References: <1276178833-30841-1-git-send-email-Martin.Jansa@gmail.com>
 	<201006102153.49588.roman@khimov.ru>
 MIME-Version: 1.0
@@ -58,7 +58,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 18:58:12 -0000
+X-List-Received-Date: Thu, 10 Jun 2010 19:03:48 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
@@ -74,15 +74,10 @@ On Thu, Jun 10, 2010 at 09:53:49PM +0400, Roman I Khimov wrote:
 > 
 > Any chance to automatically bump PR for all packages touched?
 
-Well PR should be bumped with previous much bigger RDEPENDS/RRECOMMENDS patch already :/.
+Hmm maybe it wont be so difficult.. I'll send patch bumping it in
+"common" cases.. (hopefully about 95% coverage and remaining recipes can
+be checked manually..)
 
-But my sed foo is not strong enough to replace it quickly (especially
-with INC_PR and changes in .inc files).
-
-I did rebuild from scratch + reflash on my devices and plan to bump
-DISTRO_PR soon for SHR.. so I'm not really motivated to do :/.
-
-Regards,
 
 -- 
 Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
