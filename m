@@ -1,50 +1,50 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OMn2a-0005cN-2R
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OMnmK-0005jy-6w
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 10 Jun 2010 21:03:48 +0200
-Received: by fxm9 with SMTP id 9so222657fxm.6
+	Thu, 10 Jun 2010 21:51:05 +0200
+Received: by fxm9 with SMTP id 9so257530fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 10 Jun 2010 11:59:25 -0700 (PDT)
+	Thu, 10 Jun 2010 12:46:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=p53o2O2o04ZExbe5zeDG5Y4X3y3DWJpl3Tmx4wKPIic=;
-	b=ZIErbXlbLRZIUyBS1vqs2LVgmRuQ8oMYZzcOpQ20PeTQU7YsIzaqDbLNloLXjDO7Ej
-	pyAYAnJzwuayjgD3ZiuX7Tf7e6fk7enrwPZvWLIg8YDdl2/CuMmHGqNJCyAhK1F6xIRa
-	G697mc5kv16mAO0O0wcBFsM+E13APpwzmPZfw=
+	h=domainkey-signature:received:received:received:from:to:cc:subject
+	:date:message-id:x-mailer:in-reply-to:references;
+	bh=DPtsQ26RKfqLZxcjIZ/Vgt6WUKhneIhoX3K9uxFqyqE=;
+	b=ZjNuKZbZ5crmkqtMlKc/XU4/2e0b0lFbgz1c7LlskSRYffG2fmRRAFnrO12sCeajSw
+	hhHgBODorLX3LX2lfI6lvDwlR7o/NKXDQc3lpncb0gKT1NG1HwdGA29vEP64EUpqbddO
+	Dk/i11xtJBZYa36vFPEfIQFM386+Q4J1GCftg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=JVAOCWFqBXShIruEeU5BNg4dBDYRJtUvZ56qIOcZk7QNlELc++VfgluW3bUoRu4R7I
-	pzV8BTPD+1IiUTiW7I2VX1Ihx3BgjWIzwpvzleubzUa3OFkeZH976lICKUvhalzAycFz
-	B1mXb803r07LeNY1s1jiGRghGM7pWpI9TbWpk=
-Received: by 10.223.22.145 with SMTP id n17mr817241fab.23.1276196365108;
-	Thu, 10 Jun 2010 11:59:25 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id e16sm1237045fak.8.2010.06.10.11.59.24
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=o2YzPyCxKQtErIIn7PbE5bFE0D7cZwYf/ewrDwJT/LeSUDSJogwbTMZi0Z9xEGh9jL
+	WTKJ3RAwOYvGTEfo9AdROhopWsIedLuLoFroiUUeAVtMLbd3prdAKEE8EykQCakTzztW
+	iWPPdUvrJZ5j0yY0+ip7t/vZPJbZdDW2CvTTk=
+Received: by 10.223.65.18 with SMTP id g18mr863986fai.32.1276199201274;
+	Thu, 10 Jun 2010 12:46:41 -0700 (PDT)
+Received: from s42.loc (85-127-249-17.dynamic.xdsl-line.inode.at
+	[85.127.249.17])
+	by mx.google.com with ESMTPS id j23sm1401878faa.14.2010.06.10.12.46.39
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 10 Jun 2010 11:59:24 -0700 (PDT)
-Date: Thu, 10 Jun 2010 20:59:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100610185913.GP1403@jama>
-References: <1276178833-30841-1-git-send-email-Martin.Jansa@gmail.com>
-	<201006102153.49588.roman@khimov.ru>
-MIME-Version: 1.0
-In-Reply-To: <201006102153.49588.roman@khimov.ru>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+	Thu, 10 Jun 2010 12:46:40 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OMniE-0008Ko-Bm; Thu, 10 Jun 2010 21:46:50 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: philb@gnu.org
+Date: Thu, 10 Jun 2010 21:46:48 +0200
+Message-Id: <1276199208-31929-2-git-send-email-rep.dot.nop@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1276114963.4424.42.camel@lenovo.internal.reciva.com>
+References: <1276114963.4424.42.camel@lenovo.internal.reciva.com>
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] recipes: conform to OE packaging guidelines with RSUGGESTS/RPROVIDES/RCONFLICTS/RREPLACES
+Cc: openembedded-devel@lists.openembedded.org
+Subject: [PATCH 2/2] busybox: configure according to {MACHINE, DISTRO}_FEATURES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,28 +58,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 10 Jun 2010 19:03:48 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 10 Jun 2010 19:51:05 -0000
 
-On Thu, Jun 10, 2010 at 09:53:49PM +0400, Roman I Khimov wrote:
-> В сообщении от Четверг 10 июня 2010 18:07:13 автор Martin Jansa написал:
-> > * even worse than last RDEPENDS/RRECOMMENDS change, because now ie:
-> >   opkg info coreutils-doc
-> >   Provides: textutils, shellutils, fileutils
-> >   Replaces: textutils, shellutils, fileutils
-> > 
-> > Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> 
-> Any chance to automatically bump PR for all packages touched?
+Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+---
+ recipes/busybox/busybox-config.inc |   28 +++++++++++++++++++++++++
+ recipes/busybox/busybox.inc        |   39 +++++++++++++++++++++++++++++++++++-
+ 2 files changed, 66 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/busybox/busybox-config.inc
 
-Hmm maybe it wont be so difficult.. I'll send patch bumping it in
-"common" cases.. (hopefully about 95% coverage and remaining recipes can
-be checked manually..)
-
-
+diff --git a/recipes/busybox/busybox-config.inc b/recipes/busybox/busybox-config.inc
+new file mode 100644
+index 0000000..26ccec4
+--- /dev/null
++++ b/recipes/busybox/busybox-config.inc
+@@ -0,0 +1,28 @@
++# internal helper
++def busybox_cfg(feature, features, tokens, cnf, rem):
++	if type(tokens) == type(""):
++		tokens = [tokens]
++	rem.extend(['/^[# ]*' + token + '[ =]/d' for token in tokens])
++	if type(features) == type([]) and feature in features:
++		cnf.extend([token + '=y' for token in tokens])
++	else:
++		cnf.extend(['# ' + token + ' is not set' for token in tokens])
++# Map distro and machine features to config settings
++def features_to_busybox_settings(d):
++	cnf, rem = ([], [])
++	distro_features = bb.data.getVar('DISTRO_FEATURES', d).split()
++	machine_features = bb.data.getVar('MACHINE_FEATURES', d).split()
++	busybox_cfg('ipv6', distro_features, 'CONFIG_FEATURE_IPV6', cnf, rem)
++	busybox_cfg('largefile', distro_features, 'CONFIG_LFS', cnf, rem)
++	busybox_cfg('nls',  distro_features, 'CONFIG_LOCALE_SUPPORT', cnf, rem)
++	busybox_cfg('ipv4', distro_features, 'CONFIG_FEATURE_IFUPDOWN_IPV4', cnf, rem)
++	busybox_cfg('ipv6', distro_features, 'CONFIG_FEATURE_IFUPDOWN_IPV6', cnf, rem)
++	return "\n".join(cnf), "\n".join(rem)
++# X, Y = ${@features_to_uclibc_settings(d)}
++# unfortunately doesn't seem to work with bitbake, workaround:
++def features_to_busybox_conf(d):
++	cnf, rem = features_to_busybox_settings(d)
++	return cnf
++def features_to_busybox_del(d):
++	cnf, rem = features_to_busybox_settings(d)
++	return rem
+diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+index f554478..827e917 100644
+--- a/recipes/busybox/busybox.inc
++++ b/recipes/busybox/busybox.inc
+@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
+ SECTION = "base"
+ PRIORITY = "required"
+ 
+-INC_PR = "r29"
++INC_PR = "r30"
+ 
+ SRC_URI = "\
+   file://busybox-cron \
+@@ -70,10 +70,47 @@ RDEPENDS_${PN}-udhcpd += "${PN}"
+ LD = "${CC} -nostdlib"
+ 
+ inherit cml1 update-rc.d
++require busybox-config.inc
++
++configmangle = '/CROSS_COMPILER_PREFIX/d; \
++		/CONFIG_EXTRA_CFLAGS/d; \
++		'
++OE_FEATURES := "${@features_to_busybox_conf(d)}"
++OE_DEL      := "${@features_to_busybox_del(d)}"
++DO_IPv4 := ${@base_contains('DISTRO_FEATURES', 'ipv4', 1, 0, d)}
++DO_IPv6 := ${@base_contains('DISTRO_FEATURES', 'ipv6', 1, 0, d)}
++python () {
++  if "${OE_DEL}":
++    bb.data.setVar('configmangle_append', "${OE_DEL}" + "\n", d)
++  if "${OE_FEATURES}":
++    bb.data.setVar('configmangle_append',
++                   "/^### DISTRO FEATURES$/a\\\n%s\n\n" %
++                   ("\\n".join((bb.data.expand("${OE_FEATURES}", d).split("\n")))),
++                   d)
++  bb.data.setVar('configmangle_append',
++                 "/^### CROSS$/a\\\n%s\n" %
++                  ("\\n".join(["CONFIG_CROSS_COMPILER_PREFIX=\"${TARGET_PREFIX}\"",
++			       "CONFIG_EXTRA_CFLAGS=\"${CFLAGS}\""
++                        ])
++                  ),
++                 d)
++}
+ 
+ do_configure () {
+ 	sed -e 's#@DATADIR@#${datadir}#g' \
+ 		< ${WORKDIR}/defconfig > ${S}/.config
++	for i in 'CROSS' 'DISTRO FEATURES'; do echo "### $i"; done >> \
++		${S}/.config
++	sed -i -e '${configmangle}' ${S}/.config
++	if test ${DO_IPv4} -eq 0 && test ${DO_IPv6} -eq 0; then
++	  # disable networking applets
++	  mv ${S}/.config ${S}/.config.oe-tmp
++	  awk 'BEGIN{net=0}
++	  /^# Networking Utilities/{net=1}
++	  /^#$/{if(net){net=net+1}}
++	  {if(net==2&&$0 !~ /^#/&&$1){print("# "$1" is not set")}else{print}}' \
++		  ${S}/.config.oe-tmp > ${S}/.config
++	fi
+ 	cml1_do_configure
+ }
+ 
 -- 
-Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
+1.7.1
+
 
 
