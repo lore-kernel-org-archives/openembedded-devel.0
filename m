@@ -1,43 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ONAVt-0003ts-03 for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 22:07:37 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ONARb-0002zt-Gm for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 22:03:11 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 22:03:11 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1ONBzn-0006Ty-2S
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jun 2010 23:42:35 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o5BLcBRX004918
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 22:03:11 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 11 Jun 2010 22:38:11 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04861-01 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jun 2010 22:38:07 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o5BLc1dS004911
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jun 2010 22:38:03 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 11 Jun 2010 22:03:01 +0200
-Message-ID: <huu4pl$15q$1@dough.gmane.org>
-References: <AANLkTimkddVJqU15C0NqsM5L3zPVvgfX5sZo4hXU6385@mail.gmail.com>
+In-Reply-To: <hutv9r$ekh$1@dough.gmane.org>
+References: <4C0F9119.3000909@freyther.de>
+	<AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
+	<hutv9r$ekh$1@dough.gmane.org>
+Date: Fri, 11 Jun 2010 22:37:48 +0100
+Message-ID: <1276292268.29314.2660.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTimkddVJqU15C0NqsM5L3zPVvgfX5sZo4hXU6385@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: psplash vs. psplash-$DISTRO
+Subject: Re: TSC Meetings for the meeting of June
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,36 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2010 20:07:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Jun 2010 21:42:36 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 03-06-10 23:54, Andrea Adami wrote:
-> Hello,
+On Fri, 2010-06-11 at 20:29 +0200, Koen Kooi wrote:
+> > Personally the org.openembedded.dev branch name does not bother me
+> > although I know master is the 'standard' git name.
+> > Afaik renaming does not really solve a problem.
 > 
-> building console-image for minimal distro I receive the following warning:
-> 
-> IMHO we have an issue with psplash-zap:
-> RRECOMMENDS_${PN} = "psplash-angstrom"
-> should probably be
-> RRECOMMENDS_${PN} = "${SPLASH}"
+> Ah well, seeing that the TSC completely failed to implement anything of
+> the things they decided on last month I think we can stop worrying about
+> this for the next few months. Does the TSC use FIFO or LIFO for their
+> targets?
 
-No, SPLASH is an image var and has no place in RRECOMMENDS*.
-Furthermore, every image that is using psplash-zap was created by an
-angstrom developer, so what is the actual problem you are trying to address?
+You've always got to be destructive and negative ;-).
 
-In the future if you want to go break basic stuff, please RFC a patch on
-this mailinglist first.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+How about suggesting the TSC improves its process by assigning actions
+to people? That would be a bit more constructive and might address the
+problem.
 
-iD8DBQFMEpZ1MkyGM64RGpERAh3kAJ0Vp6VVb4IllUpzOnrcGTgHZNokmwCfQBql
-v4yWQ0e8PaISWE+8CfXQ/88=
-=eq4h
------END PGP SIGNATURE-----
+We're all volunteers doing this, we all have lots of things we're all
+involved in and we do the best we can.
+
+There is also nothing stopping anyone from helping the TSC, it was asked
+to make a decision, not necessarily implement it although I'd agree it
+would be desirable if someone on the TSC could help.
+
+FWIW, I'm about to take a weeks vacation which is my first proper
+holiday in a long time. I'll pay for it when I get back but until then
+I'm aiming to enjoy it.
+
+See you when I get back ;-).
+
+Cheers,
+
+Richard
+
+
 
 
 
