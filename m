@@ -1,45 +1,47 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vzapolskiy@gmail.com>) id 1ON6De-0001Bm-J2
+	(envelope-from <leon.woestenberg@gmail.com>) id 1ON6jm-0006Y0-Hh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 17:32:31 +0200
-Received: by fxm9 with SMTP id 9so847076fxm.6
+	Fri, 11 Jun 2010 18:05:42 +0200
+Received: by wwb17 with SMTP id 17so920063wwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 08:28:06 -0700 (PDT)
+	Fri, 11 Jun 2010 09:01:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:sender:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=nvRomb6MpiWsTwHAJViI1LpQ89mLERGb8s0q7cJtL9M=;
-	b=P6ukbfqTlPdGZvxVc0tvGUJyqNJpLwgMd2be/ympzMsbE2lkMeQZCEyB/iJmA6E4KK
-	drHQT0WBZgH/JyiqxxRxuHfm7ypq6O9Y3eBEi+CLI19e2HM6RWj9QkEfz39ZQMeo8ccl
-	58kt7Ma+1mRgfDqRtL7JxPVBtP7icuv+BK1DU=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=La6PG4vbe3Kh6NGal6AuFBxaHxYehWC1akgCPHL4au0=;
+	b=BvBDU+MPdzk6lLgI+5cBYKzqdKZFa8LTBEx/z2vG8LAX/VaDflnqOPFJ9pylsZXY/V
+	E85t5qbbkI/eiQ4/TEPU5HtRK9lkPfqTNBN6f3OQlsvIIn9Uy42Dr8yxu84wA6X8YlGI
+	MwBwvFwWx45U/+gn1n9IYkw5NfNzCgmCHqeTk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=sender:from:to:cc:subject:date:message-id:x-mailer;
-	b=xLOjQFscj8QkJ+Q4L89r85YkAQM8lBKciYu94q0BO+LX3s8/NCmZ8buxu2s56Xmd0m
-	TSPtuafJPaB0JIbmX+QQ4PSzWkiKMKx+Je8Vy7wWu0M5r/HryhXj5/PGtNTTMxgRwkqM
-	q3nSLR6PZBlqOKzfe4ZDPMj5DdyBEcVbqUFZk=
-Received: by 10.216.85.73 with SMTP id t51mr1115861wee.3.1276269593392;
-	Fri, 11 Jun 2010 08:19:53 -0700 (PDT)
-Received: from localhost.localdomain ([82.203.205.227])
-	by mx.google.com with ESMTPS id h1sm586994wee.7.2010.06.11.08.19.51
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 11 Jun 2010 08:19:52 -0700 (PDT)
-Sender: Vladimir Zapolskiy <animist@gmail.com>
-From: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=YloS46llsTsOlm7kSJVDneR+/vwbZPvi7mm7CR/PpZ8XvlELM6BxNmfi606M0d3weC
+	kwtu3vSknYROf0HlRH0LcfoweXQIUEJIKY/8/cMrwHx3ldMvl+dZ8FzBAl6UG79gjbGi
+	bWOQNeBW5NtPgYyNA4w/PY6lqj3b+sNN4yAEU=
+MIME-Version: 1.0
+Received: by 10.216.160.19 with SMTP id t19mr434800wek.0.1276272037553; Fri, 
+	11 Jun 2010 09:00:37 -0700 (PDT)
+Received: by 10.216.21.134 with HTTP; Fri, 11 Jun 2010 09:00:36 -0700 (PDT)
+In-Reply-To: <1276092484.31317.145.camel@mill.internal.reciva.com>
+References: <1275578113-17291-1-git-send-email-chase.maupin@ti.com>
+	<hu8ivf$250$1@dough.gmane.org> <20100603165055.GA4402@denix.org>
+	<4C0F9D6B.6000105@gmail.com>
+	<1276092484.31317.145.camel@mill.internal.reciva.com>
+Date: Fri, 11 Jun 2010 18:00:36 +0200
+Message-ID: <AANLkTil3uWNMRgML5HLtBQbduI8OyOKVy7f7W_mg3dAB@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Jun 2010 18:19:44 +0300
-Message-Id: <1276269584-13266-1-git-send-email-vzapolskiy@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: vzapolskiy@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vladimir Zapolskiy <vzapolskiy@gmail.com>
-Subject: [PATCH] libvpx: pass disable docs installation configure option.
+Subject: Re: [PATCH] qt4-embedded: rename qtdemo file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,30 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2010 15:32:31 -0000
+X-List-Received-Date: Fri, 11 Jun 2010 16:05:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-This change fixes an installation problem, when *nodocs* directory is
-not found.
+Hello,
 
-Signed-off-by: Vladimir Zapolskiy <vzapolskiy@gmail.com>
----
- recipes/webm/libvpx_0.9.0.bb |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+On Wed, Jun 9, 2010 at 4:08 PM, Phil Blundell <philb@gnu.org> wrote:
+> On Wed, 2010-06-09 at 15:55 +0200, Marco Cavallini wrote:
+>> #Append an E to the qtdemo file
+>> if [${QT_LIBINFIX} =3D=3D "E"] ; then
+>> =A0 =A0 =A0 =A0 =A0 mv ${D}${bindir}/qtdemo ${D}${bindir}/qtdemo${QT_LIB=
+INFIX}
+>> fi
+>
+> I think you need some quotes around ${QT_LIBINFIX} in the argument to [,
+> otherwise you are liable to get an error if the variable is empty. =A0It
+> might also make more sense to test something like '-n "${QT_LIBINFIX"',
+> rather than testing for it being 'E' specifically. =A0But yes, clearly th=
+e
+> current code is not satisfactory in the case of an empty infix.
+>
 
-diff --git a/recipes/webm/libvpx_0.9.0.bb b/recipes/webm/libvpx_0.9.0.bb
-index a59d94d..9b58727 100644
---- a/recipes/webm/libvpx_0.9.0.bb
-+++ b/recipes/webm/libvpx_0.9.0.bb
-@@ -22,6 +22,7 @@ CONFIGUREOPTS = " \
-           --target=${VPXTARGET} \
-           --enable-vp8 \
-           --enable-libs \
-+          --disable-install-docs \
- "
- 
- do_install() {
--- 
-1.7.1
+while we're at it, isn't "-embedded" a much more friendly distinction
+that using "E" ?
 
+Regards,
+--=20
+Leon
 
 
