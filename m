@@ -1,44 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ON935-00037j-Ss for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 20:33:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ON8yq-0001oy-EK for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 20:29:24 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 20:29:24 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 20:29:24 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1ON99K-0003jI-P2
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jun 2010 20:40:19 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1ON94x-00058g-JF from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 11 Jun 2010 11:35:43 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 11 Jun 2010 11:35:43 -0700
+Received: from [172.30.80.114] ([172.30.80.114]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 11 Jun 2010 12:35:41 -0600
+Message-ID: <4C1281F6.4030505@mentor.com>
+Date: Fri, 11 Jun 2010 11:35:34 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 11 Jun 2010 20:29:15 +0200
-Message-ID: <hutv9r$ekh$1@dough.gmane.org>
-References: <4C0F9119.3000909@freyther.de>
-	<AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <hutusi$dno$1@dough.gmane.org>
+In-Reply-To: <hutusi$dno$1@dough.gmane.org>
+X-OriginalArrivalTime: 11 Jun 2010 18:35:41.0679 (UTC)
+	FILETIME=[E54957F0:01CB0994]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC Meetings for the meeting of June
+Subject: Re: please stop breaking psplash-zap!
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,47 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2010 18:33:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 11 Jun 2010 18:40:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 09-06-10 15:53, Frans Meulenbroeks wrote:
-> 2010/6/9 Holger Freyther <holger+oe@freyther.de>:
->> Hi all,
->>
->> we didn't really have much to talk....
->>
->>
->>
->> == Renaming the org.openmebdded.dev branch ==
->>
->> We were carrying the org.openembedd.dev branch name from the monotone
->> era into the git era and the TSC was asked to consider renaming it to
->> 'master' which is the git default for the main development tree. Now the
->> actual change on the server will be minor what is of a bigger concern
->> are the existing users and documentation.
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Technically speaking I think we should have run an RFC for this before
-> it was brought to the table of the TSC.
+> Hi,
 > 
-> Personally the org.openembedded.dev branch name does not bother me
-> although I know master is the 'standard' git name.
-> Afaik renaming does not really solve a problem.
+> This week 2 patches have been pushed that break psplash-zap for its main
+> user and creator, namely angstrom.
+> 
+> If you are an actual user of that recipe and you want to change it,
+> please RFC it here first, I'm getting tired of doing a daily check to
+> see if someone broke it without asking first *again*
 
-Ah well, seeing that the TSC completely failed to implement anything of
-the things they decided on last month I think we can stop worrying about
-this for the next few months. Does the TSC use FIFO or LIFO for their
-targets?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-June/020460.html
 
-iD8DBQFMEoB7MkyGM64RGpERAhaEAJ4ix66HITFX983gh3axyaXRJkUEYQCgihFu
-aeJb69Aqv3epd/0KxTMWgrQ=
-=BqdY
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
