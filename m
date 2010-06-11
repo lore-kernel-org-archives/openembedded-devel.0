@@ -1,24 +1,25 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1ON04P-0004Dh-TE
+	(envelope-from <sledz@dresearch.de>) id 1ON3Zk-0003U6-KX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 10:58:35 +0200
+	Fri, 11 Jun 2010 14:43:09 +0200
 Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 38261491282
+	by mail.dresearch.de (Postfix) with ESMTP id A6C94491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 10:54:12 +0200 (CEST)
-Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 11 Jun 2010 10:57:03 +0200
-Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
-	id C266872078; Fri, 11 Jun 2010 10:54:11 +0200 (CEST)
+	Fri, 11 Jun 2010 14:38:46 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Fri, 11 Jun 2010 14:41:38 +0200
+Message-ID: <4C122E59.1080609@dresearch.de>
+Date: Fri, 11 Jun 2010 14:38:49 +0200
 From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 11 Jun 2010 10:54:03 +0200
-Message-Id: <1276246443-11931-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.6.4.2
-X-OriginalArrivalTime: 11 Jun 2010 08:57:03.0121 (UTC)
-	FILETIME=[0F69D010:01CB0944]
+References: <1276246443-11931-1-git-send-email-sledz@dresearch.de>
+In-Reply-To: <1276246443-11931-1-git-send-email-sledz@dresearch.de>
+X-OriginalArrivalTime: 11 Jun 2010 12:41:38.0058 (UTC)
+	FILETIME=[6F1A06A0:01CB0963]
 X-SA-Exim-Connect-IP: 87.193.137.100
 X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -27,7 +28,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] busybox-1.11.3/busybox-1.13.2: enable backgrounding for udhcpc
+Subject: Re: [PATCH] busybox-1.11.3/busybox-1.13.2: enable backgrounding for udhcpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,86 +42,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2010 08:58:35 -0000
+X-List-Received-Date: Fri, 11 Jun 2010 12:43:09 -0000
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: 7bit
 
-* The former default behaviour was to exit with failure if lease is not
-  immediately obtained. This results in permanent network disconnect if DHCP
-  server is (accidentally) not available at boot time. :(
+I'd really like some feedback from distro (angstrom, keilos,
+slugos, ???) maintainers because most of the distros use 1.13.2
+as their preferred version.
 
-* Since bb 1.14 this is no longer hardcoded and can be configured.
-
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
----
- .../busybox/busybox-1.11.3/udhcpc-background.patch |   12 ++++++++++++
- .../busybox/busybox-1.13.2/udhcpc-background.patch |   12 ++++++++++++
- recipes/busybox/busybox_1.11.3.bb                  |    1 +
- recipes/busybox/busybox_1.13.2.bb                  |    1 +
- 4 files changed, 26 insertions(+), 0 deletions(-)
- create mode 100644 recipes/busybox/busybox-1.11.3/udhcpc-background.patch
- create mode 100644 recipes/busybox/busybox-1.13.2/udhcpc-background.patch
-
-diff --git a/recipes/busybox/busybox-1.11.3/udhcpc-background.patch b/recipes/busybox/busybox-1.11.3/udhcpc-background.patch
-new file mode 100644
-index 0000000..2cb4ec4
---- /dev/null
-+++ b/recipes/busybox/busybox-1.11.3/udhcpc-background.patch
-@@ -0,0 +1,12 @@
-+diff -Nurd busybox-1.13.2.orig//networking/ifupdown.c busybox-1.13.2/networking/ifupdown.c
-+--- busybox-1.13.2.orig//networking/ifupdown.c	2010-06-11 09:37:55.000000000 +0200
-++++ busybox-1.13.2/networking/ifupdown.c	2010-06-11 09:38:48.000000000 +0200
-+@@ -487,7 +487,7 @@
-+ 		"pump -i %iface% -k",
-+ 	},
-+ 	{ "udhcpc",
-+-		"udhcpc -R -n -p /var/run/udhcpc.%iface%.pid -i %iface%[[ -H %hostname%]][[ -c %clientid%]]"
-++		"udhcpc -R -b -p /var/run/udhcpc.%iface%.pid -i %iface%[[ -H %hostname%]][[ -c %clientid%]]"
-+ 				"[[ -s %script%]][[ %udhcpc_opts%]]",
-+ 		"kill `cat /var/run/udhcpc.%iface%.pid` 2>/dev/null",
-+ 	},
-diff --git a/recipes/busybox/busybox-1.13.2/udhcpc-background.patch b/recipes/busybox/busybox-1.13.2/udhcpc-background.patch
-new file mode 100644
-index 0000000..2cb4ec4
---- /dev/null
-+++ b/recipes/busybox/busybox-1.13.2/udhcpc-background.patch
-@@ -0,0 +1,12 @@
-+diff -Nurd busybox-1.13.2.orig//networking/ifupdown.c busybox-1.13.2/networking/ifupdown.c
-+--- busybox-1.13.2.orig//networking/ifupdown.c	2010-06-11 09:37:55.000000000 +0200
-++++ busybox-1.13.2/networking/ifupdown.c	2010-06-11 09:38:48.000000000 +0200
-+@@ -487,7 +487,7 @@
-+ 		"pump -i %iface% -k",
-+ 	},
-+ 	{ "udhcpc",
-+-		"udhcpc -R -n -p /var/run/udhcpc.%iface%.pid -i %iface%[[ -H %hostname%]][[ -c %clientid%]]"
-++		"udhcpc -R -b -p /var/run/udhcpc.%iface%.pid -i %iface%[[ -H %hostname%]][[ -c %clientid%]]"
-+ 				"[[ -s %script%]][[ %udhcpc_opts%]]",
-+ 		"kill `cat /var/run/udhcpc.%iface%.pid` 2>/dev/null",
-+ 	},
-diff --git a/recipes/busybox/busybox_1.11.3.bb b/recipes/busybox/busybox_1.11.3.bb
-index fa169ef..7ddfd9e 100644
---- a/recipes/busybox/busybox_1.11.3.bb
-+++ b/recipes/busybox/busybox_1.11.3.bb
-@@ -5,6 +5,7 @@ SRC_URI = "\
-   http://www.busybox.net/downloads/busybox-${PV}.tar.bz2;name=tarball \
-   \
-   file://udhcpscript.patch \
-+  file://udhcpc-background.patch \
-   file://B921600.patch \
-   file://fdisk_lineedit_segfault.patch \
-   file://iptunnel.patch \
-diff --git a/recipes/busybox/busybox_1.13.2.bb b/recipes/busybox/busybox_1.13.2.bb
-index 57815f6..2b28c0b 100644
---- a/recipes/busybox/busybox_1.13.2.bb
-+++ b/recipes/busybox/busybox_1.13.2.bb
-@@ -18,6 +18,7 @@ SRC_URI = "\
-   \
-   file://udhcpscript.patch \
-   file://udhcpc-fix-nfsroot.patch \
-+  file://udhcpc-background.patch \
-   file://B921600.patch \
-   file://get_header_tar.patch \
-   file://busybox-appletlib-dependency.patch \
--- 
-1.6.4.2
+Steffen
 
 
 
