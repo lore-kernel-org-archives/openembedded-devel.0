@@ -1,31 +1,45 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1ON5On-0001uw-Ei
+	(envelope-from <vzapolskiy@gmail.com>) id 1ON6De-0001Bm-J2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 11 Jun 2010 16:40:11 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 2E04416602E6; Fri, 11 Jun 2010 08:35:34 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 8139B16602C3;
-	Fri, 11 Jun 2010 08:35:33 -0600 (MDT)
-Message-ID: <4C1249B5.3070304@mlbassoc.com>
-Date: Fri, 11 Jun 2010 08:35:33 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100330 Fedora/3.0.4-1.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Fri, 11 Jun 2010 17:32:31 +0200
+Received: by fxm9 with SMTP id 9so847076fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 11 Jun 2010 08:28:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=nvRomb6MpiWsTwHAJViI1LpQ89mLERGb8s0q7cJtL9M=;
+	b=P6ukbfqTlPdGZvxVc0tvGUJyqNJpLwgMd2be/ympzMsbE2lkMeQZCEyB/iJmA6E4KK
+	drHQT0WBZgH/JyiqxxRxuHfm7ypq6O9Y3eBEi+CLI19e2HM6RWj9QkEfz39ZQMeo8ccl
+	58kt7Ma+1mRgfDqRtL7JxPVBtP7icuv+BK1DU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=xLOjQFscj8QkJ+Q4L89r85YkAQM8lBKciYu94q0BO+LX3s8/NCmZ8buxu2s56Xmd0m
+	TSPtuafJPaB0JIbmX+QQ4PSzWkiKMKx+Je8Vy7wWu0M5r/HryhXj5/PGtNTTMxgRwkqM
+	q3nSLR6PZBlqOKzfe4ZDPMj5DdyBEcVbqUFZk=
+Received: by 10.216.85.73 with SMTP id t51mr1115861wee.3.1276269593392;
+	Fri, 11 Jun 2010 08:19:53 -0700 (PDT)
+Received: from localhost.localdomain ([82.203.205.227])
+	by mx.google.com with ESMTPS id h1sm586994wee.7.2010.06.11.08.19.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 11 Jun 2010 08:19:52 -0700 (PDT)
+Sender: Vladimir Zapolskiy <animist@gmail.com>
+From: Vladimir Zapolskiy <vzapolskiy@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <BAY127-W6E3019E386511CE8FD58FD8D90@phx.gbl>
-In-Reply-To: <BAY127-W6E3019E386511CE8FD58FD8D90@phx.gbl>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+Date: Fri, 11 Jun 2010 18:19:44 +0300
+Message-Id: <1276269584-13266-1-git-send-email-vzapolskiy@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: vzapolskiy@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Error of Rootfs
+Cc: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+Subject: [PATCH] libvpx: pass disable docs installation configure option.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,69 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2010 14:40:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 11 Jun 2010 15:32:31 -0000
 
-On 06/11/2010 08:19 AM, saleh usman wrote:
->
->
->
->
-> OpenEmbedded is giving an error of not building root files system due to missing dependency of gpp_node but the ipk package of gpp node is available in /deploy/glibc/ipk/armv5te. I've attached the log file of rootfs from  /work/dm6446-evm-angstrom-linux-gnueabi/console-image-1.0-r0/temp and packages.stamps  and stamps files from /deploy/glibc/ipk/armv5te to show ipkg packages available.
+This change fixes an installation problem, when *nodocs* directory is
+not found.
 
-There is no 'ossie-gpp-node' package in your set (which is why the build fails):
+Signed-off-by: Vladimir Zapolskiy <vzapolskiy@gmail.com>
+---
+ recipes/webm/libvpx_0.9.0.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-$ grep Package /tmp/Packages | grep ossie
-Package: ossie-cf-dbg
-Package: ossie-cf-dev
-Package: ossie-cf-static
-Package: ossie-cf
-Package: ossie-channeldemo-dbg
-Package: ossie-channeldemo-dev
-Package: ossie-channeldemo
-Package: ossie-demo-dbg
-Package: ossie-demo-dev
-Package: ossie-demo
-Package: ossie-gpp-device-dbg
-Package: ossie-gpp-device-dev
-Package: ossie-gpp-device
-Package: ossie-gpp-node-dbg
-Package: ossie-gpp-node-dev
-Package: ossie-rxdemo-dbg
-Package: ossie-rxdemo-dev
-Package: ossie-rxdemo
-Package: ossie-txdemo-dbg
-Package: ossie-txdemo-dev
-Package: ossie-txdemo
-
-$ grep ossie /tmp/Packages.stamps
-1276186612 ossie-gpp-device-dev_0.0.0+svnr375-r3.5_armv5te.ipk
-1276186841 ossie-cf_0.0.0+svnr380-r2.5_armv5te.ipk
-1276186840 ossie-cf-dbg_0.0.0+svnr380-r2.5_armv5te.ipk
-1276186611 ossie-gpp-device_0.0.0+svnr375-r3.5_armv5te.ipk
-1276187166 ossie-demo-dbg_0.0.0+svnr5515-r1.5_armv5te.ipk
-1276186837 ossie-channeldemo_0.0.0+svnr6161-r1.5_armv5te.ipk
-1276186832 ossie-txdemo_0.0.0+svnr6160-r1.5_armv5te.ipk
-1276186841 ossie-cf-dev_0.0.0+svnr380-r2.5_armv5te.ipk
-1276186611 ossie-gpp-device-dbg_0.0.0+svnr375-r3.5_armv5te.ipk
-1276186845 ossie-cf-static_0.0.0+svnr380-r2.5_armv5te.ipk
-1276186829 ossie-gpp-node-dev_0.0.0+svnr375-r1.5_armv5te.ipk
-1276186834 ossie-rxdemo_0.0.0+svnr6162-r1.5_armv5te.ipk
-1276186832 ossie-txdemo-dev_0.0.0+svnr6160-r1.5_armv5te.ipk
-1276186831 ossie-txdemo-dbg_0.0.0+svnr6160-r1.5_armv5te.ipk
-1276186837 ossie-channeldemo-dev_0.0.0+svnr6161-r1.5_armv5te.ipk
-1276187167 ossie-demo-dev_0.0.0+svnr5515-r1.5_armv5te.ipk
-1276186836 ossie-channeldemo-dbg_0.0.0+svnr6161-r1.5_armv5te.ipk
-1276187166 ossie-demo_0.0.0+svnr5515-r1.5_armv5te.ipk
-1276186834 ossie-rxdemo-dev_0.0.0+svnr6162-r1.5_armv5te.ipk
-1276186834 ossie-rxdemo-dbg_0.0.0+svnr6162-r1.5_armv5te.ipk
-1276186829 ossie-gpp-node-dbg_0.0.0+svnr375-r1.5_armv5te.ipk
-
+diff --git a/recipes/webm/libvpx_0.9.0.bb b/recipes/webm/libvpx_0.9.0.bb
+index a59d94d..9b58727 100644
+--- a/recipes/webm/libvpx_0.9.0.bb
++++ b/recipes/webm/libvpx_0.9.0.bb
+@@ -22,6 +22,7 @@ CONFIGUREOPTS = " \
+           --target=${VPXTARGET} \
+           --enable-vp8 \
+           --enable-libs \
++          --disable-install-docs \
+ "
+ 
+ do_install() {
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.7.1
+
 
 
