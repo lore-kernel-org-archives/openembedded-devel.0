@@ -1,43 +1,33 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1ONPG5-0005LZ-Cr
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Schnitzeltony@gmx.de>) id 1ONPMp-0005Zy-90
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jun 2010 13:52:17 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 59F85A525C
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jun 2010 12:47:53 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 3uzxLGZyl-SD
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jun 2010 12:47:51 +0100 (BST)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id AC3A6A525B
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 12 Jun 2010 12:47:51 +0100 (BST)
-Date: Sat, 12 Jun 2010 12:47:48 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Sat, 12 Jun 2010 13:59:16 +0200
+Received: (qmail 16397 invoked by uid 0); 12 Jun 2010 11:54:50 -0000
+Received: from 80.136.63.125 by www123.gmx.net with HTTP;
+	Sat, 12 Jun 2010 13:54:48 +0200 (CEST)
+Date: Sat, 12 Jun 2010 13:54:48 +0200
+From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
+Message-ID: <20100612115448.24640@gmx.net>
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100612124748.03c3f00e@xora-desktop.xora.org.uk>
-In-Reply-To: <AANLkTile7PE4T0U7yeW73jGm2nlpMrAg4Dn4bqmyClbF@mail.gmail.com>
-References: <4C0F9119.3000909@freyther.de>
-	<AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>
-	<hutv9r$ekh$1@dough.gmane.org> <1276292268.29314.2660.camel@rex>
-	<AANLkTile7PE4T0U7yeW73jGm2nlpMrAg4Dn4bqmyClbF@mail.gmail.com>
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-Authenticated: #62780362
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX19+boIUByF+HuYD1lg6peeuML0lxl+y0/COD6/tJ4
+	0CIdwTb+K4xmdP4e3ngIdktQ7Mpl14hpYiog== 
+X-GMX-UID: 7Bx2Dc59fW47afCpymZoSERudmllcoW2
+X-FuHaFi: 0.70999999999999996
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: Schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_05,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC Meetings for the meeting of June
+Subject: live555_20100529.bb broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,27 +41,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jun 2010 11:52:18 -0000
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 12 Jun 2010 11:59:16 -0000
+X-Groupsio-MsgNum: 20119
+Content-Type: multipart/mixed; boundary="========GMX24641276343688937829"
 
-On Sat, 12 Jun 2010 13:12:18 +0200
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
-> If people pick up actions (like removing old minor versions of
-> recipes, someone will complain that they are touching other peoples'
-> recipes without consent, RFC or whatever.
-> It would be nice if  owners/maintainers of recipes would start to
-> implement the policies as outlined  by the TSC, instead of bashing
-> others. But no, instead of having 8 abiword recies (when I tables this
-> issue) we now have 10.
+--========GMX24641276343688937829
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-This is one of the issues we still have in our way of thinking, you see
-having 10 recipes as a huge issue that has to be fixed. Some of us
-don't see any need to delete recipes that are not broken. I would
-expect (as one of the abiword maintainers) if I went in and do some
-major change to packaging and couldnt be bothered to backport it I
-would delete some of those recipes.
+At http://www.live555.com/liveMedia/public/
 
-G
+live555_20100529.tar.gz seems to have changed to live.2010.06.11.tar.gz.
+
+I helped myself by live555_20100611.bb attached. It downloaded & built with succes / proper function I could not yet test. 
+
+Sorry for empty previous post...
 
 
+-- 
+GRATIS für alle GMX-Mitglieder: Die maxdome Movie-FLAT!
+Jetzt freischalten unter http://portal.gmx.net/de/go/maxdome01
+
+--========GMX24641276343688937829
+Content-Type: application/octet-stream; name="live555_20100611.bb"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="live555_20100611.bb"
+
+cmVxdWlyZSBsaXZlNTU1LmluYwoKUFIgPSAiJHtJTkNfUFJ9LjEiCgpTUkNfVVJJW21kNXN1bV0g
+PSAiOGQ4MmQ0NjEzZDczZTJkNGU2YjFhZTJiYWMyYjczMTQiClNSQ19VUklbc2hhMjU2c3VtXSA9
+ICJlMzhhYTA0NDVjYTVlMzIwYzI3MTIwOTk2MmYzMjMzODg3MTNmYTUzMDY0YTNmODEwZTNkMmY3
+ZTNiZDE2YjU5IgoK
+
+--========GMX24641276343688937829--
