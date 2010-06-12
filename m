@@ -1,44 +1,44 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1ONDpK-0005U7-LT
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jun 2010 01:39:56 +0200
-Received: by gyg10 with SMTP id 10so1294290gyg.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ONLLb-0006Jr-Nt for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Jun 2010 09:41:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ONLHM-0000bi-U6 for openembedded-devel@lists.openembedded.org;
+	Sat, 12 Jun 2010 09:37:20 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 12 Jun 2010 09:37:20 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 11 Jun 2010 16:35:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=wEreIqcL37nEUg3iS0FPKZxVvj1kVXgEy/j4tERgNFA=;
-	b=LP2+COhndxhtVYZgoggD1NRBz0oXrd1PU2avCuLwUjzhKD2+ramsIDGeEOXCVBay/V
-	KYwhZegHU9D0VgDDl3QetFg3cMYS5ssTojkxAdn4OBzluHms0nGsZwjLM8QWJvQKRCWW
-	AuCAX98H8iL8zSBHwJrH1sltUpFfq/uBFro24=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=BhvivMBVAQOadm+oHr24XsxRSEF3AatkU6k4IfY/GlSF9e/8nOQ6dxmT495OohEt6j
-	s+B3U8+S36seIVDjiAqd8Hn8vhKrEiMW1/iLbaAGFfBaaRag5IIYaC/HPiGcAe5UTIO/
-	oA0jqLYMcft7ZR2RPujQPJV8U38bi7g9dLvsU=
-MIME-Version: 1.0
-Received: by 10.100.246.23 with SMTP id t23mr2365040anh.167.1276299325023; 
-	Fri, 11 Jun 2010 16:35:25 -0700 (PDT)
-Received: by 10.100.194.6 with HTTP; Fri, 11 Jun 2010 16:35:24 -0700 (PDT)
-In-Reply-To: <huu42u$upj$1@dough.gmane.org>
-References: <hutusi$dno$1@dough.gmane.org> <4C1281F6.4030505@mentor.com>
-	<huu42u$upj$1@dough.gmane.org>
-Date: Sat, 12 Jun 2010 01:35:24 +0200
-Message-ID: <AANLkTikpMfT2M_B8jKeNOMeEg5-TdSLIk5OClVL7LiZY@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Sat, 12 Jun 2010 09:37:20 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 12 Jun 2010 09:37:11 +0200
+Message-ID: <huvdf7$3as$1@dough.gmane.org>
+References: <4C0F9119.3000909@freyther.de>	<AANLkTikJJyDSd62eVkxlmfpjI7MgxhElzou8Kec2zcqQ@mail.gmail.com>	<hutv9r$ekh$1@dough.gmane.org>
+	<1276292268.29314.2660.camel@rex>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <1276292268.29314.2660.camel@rex>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: please stop breaking psplash-zap!
+Subject: Re: TSC Meetings for the meeting of June
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,23 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 11 Jun 2010 23:39:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 12 Jun 2010 07:41:44 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
->>> This week 2 patches have been pushed that break psplash-zap for its main
->>> user and creator, namely angstrom.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-as it was, minimal distro (not Angstrom) got:
+On 11-06-10 23:37, Richard Purdie wrote:
+> On Fri, 2010-06-11 at 20:29 +0200, Koen Kooi wrote:
+>>> Personally the org.openembedded.dev branch name does not bother me
+>>> although I know master is the 'standard' git name.
+>>> Afaik renaming does not really solve a problem.
+>>
+>> Ah well, seeing that the TSC completely failed to implement anything of
+>> the things they decided on last month I think we can stop worrying about
+>> this for the next few months. Does the TSC use FIFO or LIFO for their
+>> targets?
+> 
+> You've always got to be destructive and negative ;-).
+> 
+> How about suggesting the TSC improves its process by assigning actions
+> to people? That would be a bit more constructive and might address the
+> problem.
+> 
+> We're all volunteers doing this, we all have lots of things we're all
+> involved in and we do the best we can.
+> 
+> There is also nothing stopping anyone from helping the TSC, it was asked
+> to make a decision, not necessarily implement it although I'd agree it
+> would be desirable if someone on the TSC could help.
+> 
+> FWIW, I'm about to take a weeks vacation which is my first proper
+> holiday in a long time. I'll pay for it when I get back but until then
+> I'm aiming to enjoy it.
+> 
+> See you when I get back ;-).
 
-ERROR: Multiple .bb files are due to be built which each provide
-virtual/psplash (/oe/openembedded/recipes/psplash/psplash_svn.bb
-/oe/openembedded/recipes/psplash/psplash-angstrom_svn.bb).
+My 2 weeks holiday starts on monday, although mine will be filled with
+studying for exams :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-So was building psplash-angstrom. Why that?
+iD8DBQFMEzkmMkyGM64RGpERAoytAJ0cInkxyh8EdFw5AIJGyrIbLfH+1ACgqvta
+SOBkogx6f+o6q2aJx1C54n0=
+=sbsa
+-----END PGP SIGNATURE-----
 
-See other post.
-
-Sorry again for the noise.
-Andrea
 
 
