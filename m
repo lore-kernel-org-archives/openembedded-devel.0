@@ -1,33 +1,34 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Schnitzeltony@gmx.de>) id 1ONPMp-0005Zy-90
+Received: from bay0-omc1-s21.bay0.hotmail.com ([65.54.190.32])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <salehusman@hotmail.com>) id 1ONPhX-00049a-8m
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 12 Jun 2010 13:59:16 +0200
-Received: (qmail 16397 invoked by uid 0); 12 Jun 2010 11:54:50 -0000
-Received: from 80.136.63.125 by www123.gmx.net with HTTP;
-	Sat, 12 Jun 2010 13:54:48 +0200 (CEST)
-Date: Sat, 12 Jun 2010 13:54:48 +0200
-From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
-Message-ID: <20100612115448.24640@gmx.net>
+	Sat, 12 Jun 2010 14:20:40 +0200
+Received: from BAY127-W5 ([65.54.190.61]) by bay0-omc1-s21.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Sat, 12 Jun 2010 05:15:09 -0700
+Message-ID: <BAY127-W5627AAFF624E9FC796B9DD8DA0@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: OSSIE Embedded Discussion <ossie-sca@opensdr.com>, OSSIE Discussion
+	<ossie-discuss@listserv.vt.edu>, Openembedded Discussion
+	<openembedded-devel@lists.openembedded.org>
+Date: Sat, 12 Jun 2010 18:15:09 +0600
+Importance: Normal
+In-Reply-To: <BAY127-W6E3019E386511CE8FD58FD8D90@phx.gbl>
+References: <BAY127-W6E3019E386511CE8FD58FD8D90@phx.gbl>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #62780362
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX19+boIUByF+HuYD1lg6peeuML0lxl+y0/COD6/tJ4
-	0CIdwTb+K4xmdP4e3ngIdktQ7Mpl14hpYiog== 
-X-GMX-UID: 7Bx2Dc59fW47afCpymZoSERudmllcoW2
-X-FuHaFi: 0.70999999999999996
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: Schnitzeltony@gmx.de
+X-OriginalArrivalTime: 12 Jun 2010 12:15:09.0996 (UTC)
+	FILETIME=[E6F4BEC0:01CB0A28]
+X-SA-Exim-Connect-IP: 65.54.190.32
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=0.3 required=5.0 tests=AWL,BAYES_05,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: live555_20100529.bb broken
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Error of Rootfs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 12 Jun 2010 11:59:16 -0000
-X-Groupsio-MsgNum: 20119
-Content-Type: multipart/mixed; boundary="========GMX24641276343688937829"
-
---========GMX24641276343688937829
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-
-At http://www.live555.com/liveMedia/public/
-
-live555_20100529.tar.gz seems to have changed to live.2010.06.11.tar.gz.
-
-I helped myself by live555_20100611.bb attached. It downloaded & built with succes / proper function I could not yet test. 
-
-Sorry for empty previous post...
+X-List-Received-Date: Sat, 12 Jun 2010 12:20:40 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
 
--- 
-GRATIS für alle GMX-Mitglieder: Die maxdome Movie-FLAT!
-Jetzt freischalten unter http://portal.gmx.net/de/go/maxdome01
+Actually when I bitbake ossie-demo and ossie-gpp-node seperately these are =
+built successfully. But when I run bitbake console-image this error occurs.
+where might be the problem
+Saleh
 
---========GMX24641276343688937829
-Content-Type: application/octet-stream; name="live555_20100611.bb"
-Content-Transfer-Encoding: base64
-Content-Disposition: attachment; filename="live555_20100611.bb"
 
-cmVxdWlyZSBsaXZlNTU1LmluYwoKUFIgPSAiJHtJTkNfUFJ9LjEiCgpTUkNfVVJJW21kNXN1bV0g
-PSAiOGQ4MmQ0NjEzZDczZTJkNGU2YjFhZTJiYWMyYjczMTQiClNSQ19VUklbc2hhMjU2c3VtXSA9
-ICJlMzhhYTA0NDVjYTVlMzIwYzI3MTIwOTk2MmYzMjMzODg3MTNmYTUzMDY0YTNmODEwZTNkMmY3
-ZTNiZDE2YjU5IgoK
 
---========GMX24641276343688937829--
+
+
+
+
+OpenEmbedded is giving an error of not building root files system due to mi=
+ssing dependency of gpp_node but the ipk package of gpp node is available i=
+n /deploy/glibc/ipk/armv5te. I've attached the log file of rootfs from  /wo=
+rk/dm6446-evm-angstrom-linux-gnueabi/console-image-1.0-r0/temp and packages=
+.stamps  and stamps files from /deploy/glibc/ipk/armv5te to show ipkg packa=
+ges available.
+
+plz help me to diagnose this error.
+
+Saleh
+ 		 	   		 =20
+ 		 	   		 =20
+Your E-mail and More On-the-Go. Get Windows Live Hotmail Free. Sign up now.=
+ 		 	   		 =20
+_________________________________________________________________
+Hotmail: Trusted email with powerful SPAM protection.
+https://signup.live.com/signup.aspx?id=3D60969=
+
