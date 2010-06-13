@@ -1,34 +1,37 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1ONoxM-0005JA-2L
+Received: from 29.mail-out.ovh.net ([87.98.216.213])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1ONsuP-0001Bx-Ea
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jun 2010 17:18:58 +0200
-Received: from [192.168.1.2] (e180143213.adsl.alicedsl.de [85.180.143.213])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 8AB64584139
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 13 Jun 2010 17:22:55 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sun, 13 Jun 2010 21:31:54 +0200
+Received: (qmail 30651 invoked by uid 503); 13 Jun 2010 19:31:49 -0000
+Received: from b6.ovh.net (HELO mail99.ha.ovh.net) (213.186.33.56)
+	by 29.mail-out.ovh.net with SMTP; 13 Jun 2010 19:31:49 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Jun 2010 21:27:28 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 13 Jun 2010 21:27:28 +0200
+Message-ID: <4C153113.5030503@eukrea.com>
+Date: Sun, 13 Jun 2010 21:27:15 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4C0536CE.3080702@kernelconcepts.de>
-References: <4BE04A63.9010002@kernelconcepts.de>
-	<4BF68B97.4090701@kernelconcepts.de>
-	<1274997131.28526.18.camel@mattotaupa>
-	<4C0536CE.3080702@kernelconcepts.de>
-Organization: Vanille-Media
-Date: Sun, 13 Jun 2010 17:15:23 +0200
-Message-ID: <1276442123.1981.13.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+References: <20100612115448.24640@gmx.net>
+In-Reply-To: <20100612115448.24640@gmx.net>
+X-Ovh-Tracer-Id: 3539829308785470793
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 87.98.216.213
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Linuxtag 2010
+Subject: Re: live555_20100529.bb broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jun 2010 15:19:32 -0000
-X-List-Received-Date: Sun, 13 Jun 2010 15:19:32 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 13 Jun 2010 19:31:54 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Three cheers for Florian, who pretty much managed the OE appereance on
-LinuxTag without any further help(!).
+Le 12/06/2010 13:54, "Andreas Müller" a écrit :
+> At http://www.live555.com/liveMedia/public/
+>
+> live555_20100529.tar.gz seems to have changed to live.2010.06.11.tar.gz.
+>
+the problem is that they don't keep the previous release so unless they 
+are mirrored  somewhere this recipes will always be broken after each 
+new release.
 
-Next year we need to organize this better (yes, I'm guilty as well for
-only stopping by a couple of hours...).
+Is there a way to force the mirroring of a source archive to one of the 
+OpenEmbedded mirrors ?
 
-Thanks Florian!
-
--- 
-:M:
-
+Eric
 
 
