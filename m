@@ -1,38 +1,45 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OO63j-0001tp-TZ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jun 2010 11:34:25 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o5E9TfKQ029196
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OO6It-0002J0-Tb for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jun 2010 11:50:04 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OO6Ea-0003By-UN for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jun 2010 11:45:36 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jun 2010 11:45:36 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 14 Jun 2010 11:29:42 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OO5zB-00068w-AQ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 14 Jun 2010 11:29:41 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Mon, 14 Jun 2010 11:45:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <4BFE5402.8030607@mlbassoc.com>
-Date: Mon, 14 Jun 2010 11:29:41 +0200
-In-Reply-To: <4BFE5402.8030607@mlbassoc.com> (Gary Thomas's message of "Thu,
-	27 May 2010 05:14:10 -0600")
-Message-ID: <lyzkyy3qt6.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
-MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 14 Jun 2010 11:45:20 +0200
+Message-ID: <hv4tng$2f4$1@dough.gmane.org>
+References: <20100612115448.24640@gmx.net>
+	<4C153113.5030503@eukrea.com>	<hv4on3$dfm$1@dough.gmane.org>
+	<4C15E739.7030809@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <4C15E739.7030809@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Problems building Angstrom images
+Subject: Re: live555_20100529.bb broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,15 +53,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 14 Jun 2010 09:34:26 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 14 Jun 2010 09:50:04 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Gary Thomas <gary@mlbassoc.com> writes:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> satisfy_dependencies_for: Cannot satisfy the following dependencies
-> for angstrom-task-gnome:
-> |  *    encodings *     encodings *     encodings *
+On 14-06-10 10:24, Eric Bénard wrote:
+> Le 14/06/2010 10:19, Koen Kooi a écrit :
+>> On 13-06-10 21:27, Eric Bénard wrote:
+>>> Is there a way to force the mirroring of a source archive to one of the
+>>> OpenEmbedded mirrors ?
+>>
+>> Dunno about the OE mirrors, but the angstrom mirrors have all the
+>> live555 files.
+>>
+> OK thanks. Does angstrom mirrors source file each time a new recipe is
+> created ?
 
-http://patchwork.openembedded.org/patch/2170/
+Only each time an autobuilder builds it, and mplayer is built almost
+daily. The autobuilder DL_DIR -> mirror is less frequent.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMFfowMkyGM64RGpERAo2oAKC50sZry1CElh5bjwfBTnlozjYYHgCeNd0J
+wtLGlTVxYmLvT60lOQFIz1g=
+=q8t5
+-----END PGP SIGNATURE-----
+
 
 
