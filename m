@@ -1,34 +1,40 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1ONsuP-0001Bx-Ea
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 13 Jun 2010 21:31:54 +0200
-Received: (qmail 30651 invoked by uid 503); 13 Jun 2010 19:31:49 -0000
-Received: from b6.ovh.net (HELO mail99.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 13 Jun 2010 19:31:49 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Jun 2010 21:27:28 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 13 Jun 2010 21:27:28 +0200
-Message-ID: <4C153113.5030503@eukrea.com>
-Date: Sun, 13 Jun 2010 21:27:15 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.9) Gecko/20100317 Thunderbird/3.0.4
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OO4xx-0006w6-ET for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jun 2010 10:24:24 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OO4tf-0003cG-H5 for openembedded-devel@lists.openembedded.org;
+	Mon, 14 Jun 2010 10:19:55 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jun 2010 10:19:55 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 14 Jun 2010 10:19:55 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <20100612115448.24640@gmx.net>
-In-Reply-To: <20100612115448.24640@gmx.net>
-X-Ovh-Tracer-Id: 3539829308785470793
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 87.98.216.213
-X-SA-Exim-Mail-From: eric@eukrea.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 14 Jun 2010 10:19:47 +0200
+Message-ID: <hv4on3$dfm$1@dough.gmane.org>
+References: <20100612115448.24640@gmx.net> <4C153113.5030503@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <4C153113.5030503@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: live555_20100529.bb broken
@@ -45,22 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 13 Jun 2010 19:31:54 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Mon, 14 Jun 2010 08:24:24 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Le 12/06/2010 13:54, "Andreas Müller" a écrit :
-> At http://www.live555.com/liveMedia/public/
->
-> live555_20100529.tar.gz seems to have changed to live.2010.06.11.tar.gz.
->
-the problem is that they don't keep the previous release so unless they 
-are mirrored  somewhere this recipes will always be broken after each 
-new release.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Is there a way to force the mirroring of a source archive to one of the 
-OpenEmbedded mirrors ?
+On 13-06-10 21:27, Eric Bénard wrote:
+> Le 12/06/2010 13:54, "Andreas Müller" a écrit :
+>> At http://www.live555.com/liveMedia/public/
+>>
+>> live555_20100529.tar.gz seems to have changed to live.2010.06.11.tar.gz.
+>>
+> the problem is that they don't keep the previous release so unless they
+> are mirrored  somewhere this recipes will always be broken after each
+> new release.
+> 
+> Is there a way to force the mirroring of a source archive to one of the
+> OpenEmbedded mirrors ?
 
-Eric
+Dunno about the OE mirrors, but the angstrom mirrors have all the
+live555 files.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMFeYiMkyGM64RGpERAmbJAJ41rK0r7RT3bWD3/JKkYn7rFNEQjACfbyaZ
+8EaRU0C/kPL0kqLOu6DbJsM=
+=Mh5h
+-----END PGP SIGNATURE-----
+
 
 
