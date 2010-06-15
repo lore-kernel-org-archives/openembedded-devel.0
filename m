@@ -1,33 +1,33 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OOVs7-0003mV-Vg
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <Schnitzeltony@gmx.de>) id 1OOWP1-0004ca-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 15:08:12 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o5FD38ou002154
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 15 Jun 2010 15:03:09 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OOVnI-0002GX-Is; Tue, 15 Jun 2010 15:03:08 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Tue, 15 Jun 2010 15:42:11 +0200
+Received: (qmail 3333 invoked by uid 0); 15 Jun 2010 13:37:39 -0000
+Received: from 62.225.102.139 by www044.gmx.net with HTTP;
+	Tue, 15 Jun 2010 15:37:36 +0200 (CEST)
+Date: Tue, 15 Jun 2010 15:37:36 +0200
+From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
+Message-ID: <20100615133736.310590@gmx.net>
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jun 2010 15:03:07 +0200
-Message-Id: <1276606987-8681-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.0.1
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+X-Authenticated: #62780362
+X-Flags: 0001
+X-Mailer: WWW-Mail 6100 (Global Message Exchange)
+X-Priority: 3
+X-Provags-ID: V01U2FsdGVkX1/SHIhGf6jSQB4FC1EvBQ0CPH4udOA0wbLwXD0eTG
+	LUVmmT1Nc/cyBydThBVH8zpimXSy2e+h4RNA== 
+X-GMX-UID: Qetif2dMODB6RaCSzmdMQCA9Ji9SWlLU
+X-FuHaFi: 0.47999999999999998
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: Schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH] ipkg-utils: convert mtime to int before comparing it
+Subject: xfwm4-themes-4.6.0 suggested patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,67 +41,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 13:08:23 -0000
-X-List-Received-Date: Tue, 15 Jun 2010 13:08:23 -0000
+X-List-Received-Date: Tue, 15 Jun 2010 13:42:11 -0000
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
 
-The st_mtime attribute (which is a float) is compared against a value
-from the timestamp database, which was stored as an integer there.
+The following patch fixes the typo (maximize-inactive.xpm listed twice) in xfwm4-themes-4.6.0/themes/redmond/Makefile.am. On my machine this bug causes installation of xfwm4-themes to fail. Could someone agree and add this to oe? By the way: What is the correct way to post patches?
 
-When working on a filesystem with precise timestamps the comparision
-will fail nearly everytime hence.
-
-Although it might be possible to enhance the database to store the
-fractional part too, this will complicate things more than we would
-gain by this change.
-
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
----
- .../ipkg-utils-native_1.6+cvs20050404.bb           |    2 +-
- .../ipkg-utils/ipkg-make-index-track-stamps.patch  |    2 +-
- recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb   |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
-index 98cc7f1..11e124b 100644
---- a/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
-+++ b/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
+diff --git a/recipes/xfce-base/xfwm4-themes-4.6.0/remove-double-files.patch b/recipes/xfce-base/xfwm4-themes-4.6.0/remove-double-files.patch
+new file mode 100644
+index 0000000..14dbe4d
+--- /dev/null
++++ b/recipes/xfce-base/xfwm4-themes-4.6.0/remove-double-files.patch
+@@ -0,0 +1,10 @@
++--- xfwm4-themes-4.6.0/themes/redmond/Makefile.am	2009-02-26 00:54:06.000000000 +0100
+++++ xfwm4-themes-4.6.0/themes/redmond/Makefile.am~	2010-06-14 11:10:00.000000000 +0200
++@@ -16,7 +16,6 @@
++ 	left-inactive.xpm \
++ 	maximize-active.xpm \
++ 	maximize-toggled-active.xpm \
++-	maximize-inactive.xpm \
++ 	maximize-toggled-inactive.xpm \
++ 	maximize-inactive.xpm \
++ 	maximize-pressed.xpm \
+diff --git a/recipes/xfce-base/xfwm4-themes_4.6.0.bb b/recipes/xfce-base/xfwm4-themes_4.6.0.bb
+index b37ba1b..82771d9 100644
+--- a/recipes/xfce-base/xfwm4-themes_4.6.0.bb
++++ b/recipes/xfce-base/xfwm4-themes_4.6.0.bb
 @@ -1,7 +1,7 @@
- require ipkg-utils_${PV}.bb
+ # xfwm4-themes OE build file
  
- RDEPENDS_${PN} = ""
--PR = "r22"
-+PR = "r23"
+ SECTION = "x11/wm"
+-PR = "r3"
++PR = "r4"
  
- inherit native
+ DEPENDS = "xfwm4 libglade libxml2"
+ RDEPENDS_${PN} = "xfwm4 libglade libxml2"
+@@ -10,6 +10,10 @@ inherit xfce46
  
-diff --git a/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch b/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch
-index ad6df4f..68758ed 100644
---- a/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch
-+++ b/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch
-@@ -53,7 +53,7 @@ Index: ipkg-utils/ipkg-make-index
- +     fnameStat = os.stat(filename)
-       if old_pkg_hash.has_key(basename):
- -          if (verbose):
--+          if pkgsStamps.has_key(basename) and fnameStat.st_mtime == pkgsStamps[basename]:
-++          if pkgsStamps.has_key(basename) and int(fnameStat.st_mtime) == pkgsStamps[basename]:
- +            if (verbose):
-                 sys.stderr.write("Found %s in Packages\n" % (filename,))
- -          pkg = old_pkg_hash[basename]
-diff --git a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
-index fe1f28b..aa2bfbb 100644
---- a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
-+++ b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
-@@ -5,7 +5,7 @@ LICENSE = "GPL"
- CONFLICTS = "ipkg-link"
- RDEPENDS_${PN} = "python"
- SRCDATE = "20050930"
--PR = "r25"
-+PR = "r26"
+ SRC_URI = "http://mocha.xfce.org/archive/src/art/xfwm4-themes/4.6/xfwm4-themes-${PV}.tar.bz2"
  
- SRC_URI = "${HANDHELDS_CVS};module=ipkg-utils \
-            file://ipkg-utils-fix.patch \
++SRC_URI += " \
++    file://remove-double-files.patch \
++"
++
+ PACKAGES_DYNAMIC = "xfwm4-theme-*"
+ 
+ python populate_packages_prepend () {
 -- 
-1.7.0.1
-
+GRATIS für alle GMX-Mitglieder: Die maxdome Movie-FLAT!
+Jetzt freischalten unter http://portal.gmx.net/de/go/maxdome01
 
 
