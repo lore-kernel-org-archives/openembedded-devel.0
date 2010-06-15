@@ -1,45 +1,31 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fat031c@gmail.com>) id 1OOVCL-0005Wn-9A
+Received: from smtpauth05.prod.mesa1.secureserver.net ([64.202.165.99])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1OOVlG-0003Q7-Vk
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 14:24:58 +0200
-Received: by yxt3 with SMTP id 3so1173566yxt.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jun 2010 05:20:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=vOE/UpkG/i9Ze0tjeQWon0tj6tLDMIsMsv4HAeE0j7g=;
-	b=w8KaYJPQzgoQg55MNe/IjNxKHKsplRycJtqJ21Ge2v0A737uzBDvDDJSCje0HkWGV4
-	SW5FCxfS1O3KD5cQz8sfUTqg/ShVcwbEu5wVz1cTQ3cK3jgvfDhXXGXgjW29WB9QcNLA
-	Oltlu+iNniyLa9LtnYhqdPjW1B6OS9IK11eo8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=o6QEe7BfazDfoNFKptfRHQS5KIINgGNIZPe/MV6Wo3/7qOlP3BhdlSNhs1Te70EL8d
-	S1MVtQ7gcwnmv8KBS9MEMYXMFJ5yNngVFBYv9GgX1VW25oLvdhhEoQy6pInf0OFfULY4
-	UKjirxRKIftp+z0x5ynLTe6rtQ5uZf4YBkb84=
+	Tue, 15 Jun 2010 15:01:04 +0200
+Received: (qmail 7757 invoked from network); 15 Jun 2010 12:49:54 -0000
+Received: from unknown (209.242.7.146)
+	by smtpauth05.prod.mesa1.secureserver.net (64.202.165.99) with ESMTP;
+	15 Jun 2010 12:49:54 -0000
+Message-ID: <4C1776EE.3080206@mwester.net>
+Date: Tue, 15 Jun 2010 07:49:50 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Received: by 10.151.76.11 with SMTP id d11mr3073193ybl.204.1276604124476; Tue, 
-	15 Jun 2010 05:15:24 -0700 (PDT)
-Received: by 10.151.9.14 with HTTP; Tue, 15 Jun 2010 05:15:24 -0700 (PDT)
-In-Reply-To: <hv7cjf$9kc$1@dough.gmane.org>
-References: <AANLkTilHhuvcQFQBwVWkW6_Nf7xQPd6xDQlZzv4kvnel@mail.gmail.com>
-	<hv7cjf$9kc$1@dough.gmane.org>
-Date: Tue, 15 Jun 2010 23:15:24 +1100
-Message-ID: <AANLkTilgy4hXALUWa8mcXKxM_4DEXBOFfoiwjV4VVMqq@mail.gmail.com>
-From: Andrew Tverdohlebov <fat031c@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fat031c@gmail.com
+References: <61003.195.148.62.38.1276533099.squirrel@webmail3.nebula.fi>	<1276584950-22168-1-git-send-email-sledz@dresearch.de>
+	<4C1769D5.4020601@dresearch.de>
+In-Reply-To: <4C1769D5.4020601@dresearch.de>
+X-SA-Exim-Connect-IP: 64.202.165.99
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: STAGING_KERNEL_DIR
+Subject: Re: [PATCH v2] busybox-1.11.3/busybox-1.13.2: enable backgrounding for udhcpc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,90 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 12:24:58 -0000
+X-List-Received-Date: Tue, 15 Jun 2010 13:01:04 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Huge thanks, Koen!
+Steffen Sledz wrote:
+> Am 15.06.2010 08:55, schrieb Steffen Sledz:
+>> * The former default behaviour was to exit with failure if lease is not
+>>   immediately obtained. This results in permanent network disconnect if DHCP
+>>   server is (accidentally) not available at boot time. :(
+>>
+>> * Since bb 1.14 this is no longer hardcoded and can be configured.
+> 
+> Some more ACKs?
+> 
+> Or NAKs (i hope not)?
 
-On Tue, Jun 15, 2010 at 7:11 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 15-06-10 07:36, Andrew Tverdohlebov wrote:
->> Hello,
->>
->> I am developing a recipe for a code that needs to obtain kernel
->> configuration parameters
->> in order to compile correctly.
->
-> If your recipe is really machine specific, add PACKAGE_ARCH =3D
-> "${MACHINE_ARCH}"
->
-> If not, add:
->
-> # We want a kernel header for armv7a, but we don't want to make mplayer
-> machine specific for that
-> STAGING_KERNEL_DIR =3D
-> "${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"
->
-> regards,
->
-> Koen
->
->
->>
->> According to the manual there is a variable STAGING_KERNEL_DIR that is
->> supposed to point to the kernel staging dir.
->> In my case it points to staging/mips-linux where I don't see '.config' f=
-ile.
->> The '.config' file is located in staging/xls4lte-linux (xls4lte - is a
->> name assigned to MACHINE in local.conf)
->>
->> My question: - what is a correct way to refer to a directory where
->> kerenel's config file is located.
->>
->> The second question is - what is a point in several directories in stagi=
-ng dir ?
->>
->> In my case I have:
->> i686-linux
->> i686-linux-sdk
->> mips-linux
->> xls4lte-linux
->>
->> I thought that this might be a property of my distro and checked
->> angstrom for beagleboard and saw the same picture there:
->>
->> while working on my custom linux distro based on openembedded if noticed=
-.
->> armv7a-angstrom-linux-gnueabi
->> armv7a-linux
->> beagleboard-angstrom-linux-gnueabi
->> i686-linux
->>
->> In both cases at least two separate dirs are created in staging. One
->> ${MACHINE}-linux and another ${TARGET-ARCH}-linux. =A0What are they for
->> ?
->> And how to properly refer to staging/${MACHINE}-linux ?
->>
->> Any help will be hugely appreciated.
->> Andrew
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMFzWvMkyGM64RGpERApsQAJ0Wmg02kVDp5rl0jnb8nxEClBW7AACfdwLj
-> JFufKD77LgRZ5pOdT9YXegk=3D
-> =3DoHiS
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I shall test with SlugOS, but that's a huge task -- not because of this
+change, but because since the sysroot change many weeks ago, we still
+have not got SlugOS building in OE again.  With the help of Khem, we're
+a lot closer (gcc 4.2.4 builds again), but I still can't generate a
+working LE image.
+
+I'll see if I can get a BE image to work well enough today to test this.
+
+-Mike
 
 
