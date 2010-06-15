@@ -1,43 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from exprod5og108.obsmtp.com ([64.18.0.186])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OORJT-00077n-87 for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 10:16:04 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OORFB-00046p-D4 for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 10:11:37 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jun 2010 10:11:37 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 15 Jun 2010 10:11:37 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <martyn.welch@ge.com>) id 1OORdw-0007ul-P3
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Jun 2010 10:37:15 +0200
+Received: from source ([4.78.218.129]) (using TLSv1) by
+	exprod5ob108.postini.com ([64.18.4.12]) with SMTP
+	ID DSNKTBc6q2ZZLwmzQvS35KT6bcaq4Ty8/Bgy@postini.com;
+	Tue, 15 Jun 2010 01:32:47 PDT
+Received: from unknown (HELO alpmlip01.e2k.ad.ge.com) ([3.159.17.48])
+	by Cinmlip08.e2k.ad.ge.com with ESMTP; 15 Jun 2010 04:17:23 -0400
+Received: from es-j7s4d2j.amer.consind.ge.com (HELO [3.138.54.92])
+	([3.138.54.92])
+	by alpmlip01.e2k.ad.ge.com with ESMTP; 15 Jun 2010 04:17:23 -0400
+Message-ID: <4C173712.3070405@ge.com>
+Date: Tue, 15 Jun 2010 09:17:22 +0100
+From: Martyn Welch <martyn.welch@ge.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 15 Jun 2010 10:11:27 +0200
-Message-ID: <hv7cjf$9kc$1@dough.gmane.org>
-References: <AANLkTilHhuvcQFQBwVWkW6_Nf7xQPd6xDQlZzv4kvnel@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTilHhuvcQFQBwVWkW6_Nf7xQPd6xDQlZzv4kvnel@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <201006150815.32214.superaorta@gmail.com>
+In-Reply-To: <201006150815.32214.superaorta@gmail.com>
+X-SA-Exim-Connect-IP: 64.18.0.186
+X-SA-Exim-Mail-From: martyn.welch@ge.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: STAGING_KERNEL_DIR
+Subject: Re: comedi / angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,77 +42,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 08:16:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 15 Jun 2010 08:37:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+superaorta@gmail.com wrote:
+> I would like to build comedi (www.comedi.org) for my beagle board. From the 
+> instructions for comedi, "you will need to havea correctly configured Linux 
+> kernel source tree".
+>
+> I have built comedi on many platforms without trouble but I'm completely lost 
+> in Angstrom - I have the kernel source (2.6.29 from kernel.org) but I don't 
+> know where to find the config files. I have done this on and x86 host: 
+> http://www.angstrom-distribution.org/building-angstrom
+>
+> I don't fancy building comedi using bitbake because I have not the slightest 
+> idea how to adapt it to this purpose. The easiest thing seems to me is to 
+> find the correctly configures kernel source and config files and install them 
+> on the beagleboard then build comedi locally.
+>
+> Any advice? overwhelmed and stuck here.
+>
+>   
 
-On 15-06-10 07:36, Andrew Tverdohlebov wrote:
-> Hello,
-> 
-> I am developing a recipe for a code that needs to obtain kernel
-> configuration parameters
-> in order to compile correctly.
+I built comedi into one of our builds for testing a parallel port as
+GPIO. Comedi consists of 2 parts:
 
-If your recipe is really machine specific, add PACKAGE_ARCH =
-"${MACHINE_ARCH}"
+1) Kernel drivers - which seem to be in the staging directory of the
+kernel tree, so can be enabled via a custom defconfig. This would need
+adding to OEs metadata, but is fairly simple. First you need to know
+which kernel is being built for your machine, assuming your machine is
+"foo" and OE is building the stock 2.6.32 kernel (I think you can check
+by running 'opkg list | grep "kernel -" ' on your board), then add your
+edited defconfig as
+"openembedded/recipes/linux/linux-2.6.32/foo/defconfig". The config
+currently used is probably here already, so that just needs to be modified.
 
-If not, add:
+2) Userspace libraries - I have a bitbake file for version 0.8.1 that I
+hadn't got around to pushing yet (didn't think there would be any
+interest either). I'll push that in a minute. You will either need to
+add it to the bitbake image you want to build or you can add it and it's
+dependencies at run time using the package manager (opkg).
 
-# We want a kernel header for armv7a, but we don't want to make mplayer
-machine specific for that
-STAGING_KERNEL_DIR =
-"${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"
+Clean the kernel and (I think) task-base and rebuild your image.
 
-regards,
+Hope that helps,
 
-Koen
+Martyn
 
-
-> 
-> According to the manual there is a variable STAGING_KERNEL_DIR that is
-> supposed to point to the kernel staging dir.
-> In my case it points to staging/mips-linux where I don't see '.config' file.
-> The '.config' file is located in staging/xls4lte-linux (xls4lte - is a
-> name assigned to MACHINE in local.conf)
-> 
-> My question: - what is a correct way to refer to a directory where
-> kerenel's config file is located.
-> 
-> The second question is - what is a point in several directories in staging dir ?
-> 
-> In my case I have:
-> i686-linux
-> i686-linux-sdk
-> mips-linux
-> xls4lte-linux
-> 
-> I thought that this might be a property of my distro and checked
-> angstrom for beagleboard and saw the same picture there:
-> 
-> while working on my custom linux distro based on openembedded if noticed.
-> armv7a-angstrom-linux-gnueabi
-> armv7a-linux
-> beagleboard-angstrom-linux-gnueabi
-> i686-linux
-> 
-> In both cases at least two separate dirs are created in staging. One
-> ${MACHINE}-linux and another ${TARGET-ARCH}-linux.  What are they for
-> ?
-> And how to properly refer to staging/${MACHINE}-linux ?
-> 
-> Any help will be hugely appreciated.
-> Andrew
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMFzWvMkyGM64RGpERApsQAJ0Wmg02kVDp5rl0jnb8nxEClBW7AACfdwLj
-JFufKD77LgRZ5pOdT9YXegk=
-=oHiS
------END PGP SIGNATURE-----
+-- 
+Martyn Welch (Principal Software Engineer)   |   Registered in England and
+GE Intelligent Platforms                     |   Wales (3828642) at 100
+T +44(0)127322748                            |   Barbirolli Square, Manchester,
+E martyn.welch@ge.com                        |   M2 3AB  VAT:GB 927559189
 
 
 
