@@ -1,33 +1,46 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <Schnitzeltony@gmx.de>) id 1OOWP1-0004ca-Ai
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OOXJg-0000JP-9N
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 15:42:11 +0200
-Received: (qmail 3333 invoked by uid 0); 15 Jun 2010 13:37:39 -0000
-Received: from 62.225.102.139 by www044.gmx.net with HTTP;
-	Tue, 15 Jun 2010 15:37:36 +0200 (CEST)
-Date: Tue, 15 Jun 2010 15:37:36 +0200
-From: =?iso-8859-1?Q?=22Andreas_M=FCller=22?= <Schnitzeltony@gmx.de>
-Message-ID: <20100615133736.310590@gmx.net>
+	Tue, 15 Jun 2010 16:40:42 +0200
+Received: by iwn5 with SMTP id 5so1778873iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jun 2010 07:36:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=aV5cFQzUt2/kHRX7/JvRqSiUMxcPgna7MV9rM16t/zE=;
+	b=vITQXv7a0BbEyOtjrmpuMB6c8fJz6CpkXjZzwBXuzKQv4AvIgE/cIzYUdK5z//SecU
+	PEoKRUKVcFb/2PgTezZILZddH8XPmmgwgnwCEWtiTj6hoZJI6sJSfPiXIWlfq6Ic5Zjn
+	n1w38Is8zn2AdY4mJYQmSFoHXAuf8nK5N8LEg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=MKl0gOKCUhjQWTpuCNNRfDCD/0FZxgIdY2PVGB0MZwEL2n2c42YVpHXy3vRNxHvrFF
+	azSYMG/HFZJNDmzBdWHBsrkHHd3TNM2LTAw0FOsQfnpq7zkfKqKqNIGzdiFl3XCCB3TQ
+	4Jzon2zw3LG7FBGphrDRH+kaMbfGXv9+dKx2E=
+Received: by 10.231.187.29 with SMTP id cu29mr7673151ibb.70.1276612573254; 
+	Tue, 15 Jun 2010 07:36:13 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.231.17.130 with HTTP; Tue, 15 Jun 2010 07:35:53 -0700 (PDT)
+In-Reply-To: <AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com>
+References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com> 
+	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 15 Jun 2010 07:35:53 -0700
+Message-ID: <AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-Authenticated: #62780362
-X-Flags: 0001
-X-Mailer: WWW-Mail 6100 (Global Message Exchange)
-X-Priority: 3
-X-Provags-ID: V01U2FsdGVkX1/SHIhGf6jSQB4FC1EvBQ0CPH4udOA0wbLwXD0eTG
-	LUVmmT1Nc/cyBydThBVH8zpimXSy2e+h4RNA== 
-X-GMX-UID: Qetif2dMODB6RaCSzmdMQCA9Ji9SWlLU
-X-FuHaFi: 0.47999999999999998
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: Schnitzeltony@gmx.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: xfwm4-themes-4.6.0 suggested patch
+Cc: angstrom-distro-users <angstrom-distro-users@linuxtogo.org>
+Subject: Re: OSError: [Errno 2] No such file or directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,54 +54,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 13:42:11 -0000
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 15 Jun 2010 14:40:42 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The following patch fixes the typo (maximize-inactive.xpm listed twice) in xfwm4-themes-4.6.0/themes/redmond/Makefile.am. On my machine this bug causes installation of xfwm4-themes to fail. Could someone agree and add this to oe? By the way: What is the correct way to post patches?
+On Mon, Jun 14, 2010 at 7:12 AM, nikunj badjatya
+<nikunjbadjatya@gmail.com> wrote:
+> =A0File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 141, in
+> exec_func_python
+> =A0 =A0utils.better_exec(comp, g, tmp, bbfile)
+> =A0File "/home/nikunj/ope/bitbake/lib/bb/utils.py", line 185, in better_e=
+xec
+> =A0 =A0exec code in context
+> =A0File "relocatable_binaries_preprocess", line 4, in <module>
+> =A0File "relocatable_binaries_preprocess", line 2, in
+> relocatable_binaries_preprocess
+> =A0File "<bb>", line 7, in rpath_replace
+> =A0File "<bb>", line 35, in process_dir
+> =A0File "/opt/python2.6/lib/python2.6/subprocess.py", line 633, in __init=
+__
+> =A0 =A0errread, errwrite)
+> =A0File "/opt/python2.6/lib/python2.6/subprocess.py", line 1139, in
+> _execute_child
+> =A0 =A0raise child_exception
+> OSError: [Errno 2] No such file or directory
+> ERROR: Task 100 (/home/nikunj/ope/openembedded/recipes/coreutils/
+> coreutils-native_8.5.bb, do_populate_sysroot) failed
+> NOTE: Tasks Summary: Attempted 20 tasks of which 0 didn't need to be reru=
+n
+> and 1 failed.
+> ERROR: '/home/nikunj/ope/openembedded/recipes/coreutils/
+> coreutils-native_8.5.bb' failed
+>
 
-diff --git a/recipes/xfce-base/xfwm4-themes-4.6.0/remove-double-files.patch b/recipes/xfce-base/xfwm4-themes-4.6.0/remove-double-files.patch
-new file mode 100644
-index 0000000..14dbe4d
---- /dev/null
-+++ b/recipes/xfce-base/xfwm4-themes-4.6.0/remove-double-files.patch
-@@ -0,0 +1,10 @@
-+--- xfwm4-themes-4.6.0/themes/redmond/Makefile.am	2009-02-26 00:54:06.000000000 +0100
-++++ xfwm4-themes-4.6.0/themes/redmond/Makefile.am~	2010-06-14 11:10:00.000000000 +0200
-+@@ -16,7 +16,6 @@
-+ 	left-inactive.xpm \
-+ 	maximize-active.xpm \
-+ 	maximize-toggled-active.xpm \
-+-	maximize-inactive.xpm \
-+ 	maximize-toggled-inactive.xpm \
-+ 	maximize-inactive.xpm \
-+ 	maximize-pressed.xpm \
-diff --git a/recipes/xfce-base/xfwm4-themes_4.6.0.bb b/recipes/xfce-base/xfwm4-themes_4.6.0.bb
-index b37ba1b..82771d9 100644
---- a/recipes/xfce-base/xfwm4-themes_4.6.0.bb
-+++ b/recipes/xfce-base/xfwm4-themes_4.6.0.bb
-@@ -1,7 +1,7 @@
- # xfwm4-themes OE build file
- 
- SECTION = "x11/wm"
--PR = "r3"
-+PR = "r4"
- 
- DEPENDS = "xfwm4 libglade libxml2"
- RDEPENDS_${PN} = "xfwm4 libglade libxml2"
-@@ -10,6 +10,10 @@ inherit xfce46
- 
- SRC_URI = "http://mocha.xfce.org/archive/src/art/xfwm4-themes/4.6/xfwm4-themes-${PV}.tar.bz2"
- 
-+SRC_URI += " \
-+    file://remove-double-files.patch \
-+"
-+
- PACKAGES_DYNAMIC = "xfwm4-theme-*"
- 
- python populate_packages_prepend () {
--- 
-GRATIS für alle GMX-Mitglieder: Die maxdome Movie-FLAT!
-Jetzt freischalten unter http://portal.gmx.net/de/go/maxdome01
+It dies in process_dir while trying to do os.access I think. my guess
+is that you are
+passing it host paths like /usr/lib /lib etc which are under root
+permissions and can
+not be modified by normal user.
+
+You have to debug it. uncomment the
+
+#bb.note("Testing %s for relocatability" % fpath)
+
+in classes/relocatable.bbclass line 28
+
+and check what paths are passed to it when you do
+
+bitbake -b coreutils-native_8.5.bb
+
+-Khem
 
 
