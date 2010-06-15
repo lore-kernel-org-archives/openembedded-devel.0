@@ -1,31 +1,33 @@
-Received: from smtpauth05.prod.mesa1.secureserver.net ([64.202.165.99])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1OOVlG-0003Q7-Vk
+Received: from mail.cvg.de ([62.153.82.30])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OOVs7-0003mV-Vg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 15:01:04 +0200
-Received: (qmail 7757 invoked from network); 15 Jun 2010 12:49:54 -0000
-Received: from unknown (209.242.7.146)
-	by smtpauth05.prod.mesa1.secureserver.net (64.202.165.99) with ESMTP;
-	15 Jun 2010 12:49:54 -0000
-Message-ID: <4C1776EE.3080206@mwester.net>
-Date: Tue, 15 Jun 2010 07:49:50 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
-MIME-Version: 1.0
+	Tue, 15 Jun 2010 15:08:12 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o5FD38ou002154
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 15 Jun 2010 15:03:09 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OOVnI-0002GX-Is; Tue, 15 Jun 2010 15:03:08 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <61003.195.148.62.38.1276533099.squirrel@webmail3.nebula.fi>	<1276584950-22168-1-git-send-email-sledz@dresearch.de>
-	<4C1769D5.4020601@dresearch.de>
-In-Reply-To: <4C1769D5.4020601@dresearch.de>
-X-SA-Exim-Connect-IP: 64.202.165.99
-X-SA-Exim-Mail-From: mike@mwester.net
+Date: Tue, 15 Jun 2010 15:03:07 +0200
+Message-Id: <1276606987-8681-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.0.1
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] busybox-1.11.3/busybox-1.13.2: enable backgrounding for udhcpc
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH] ipkg-utils: convert mtime to int before comparing it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,30 +41,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 13:01:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Jun 2010 13:08:23 -0000
+X-List-Received-Date: Tue, 15 Jun 2010 13:08:23 -0000
 
-Steffen Sledz wrote:
-> Am 15.06.2010 08:55, schrieb Steffen Sledz:
->> * The former default behaviour was to exit with failure if lease is not
->>   immediately obtained. This results in permanent network disconnect if DHCP
->>   server is (accidentally) not available at boot time. :(
->>
->> * Since bb 1.14 this is no longer hardcoded and can be configured.
-> 
-> Some more ACKs?
-> 
-> Or NAKs (i hope not)?
+The st_mtime attribute (which is a float) is compared against a value
+from the timestamp database, which was stored as an integer there.
 
-I shall test with SlugOS, but that's a huge task -- not because of this
-change, but because since the sysroot change many weeks ago, we still
-have not got SlugOS building in OE again.  With the help of Khem, we're
-a lot closer (gcc 4.2.4 builds again), but I still can't generate a
-working LE image.
+When working on a filesystem with precise timestamps the comparision
+will fail nearly everytime hence.
 
-I'll see if I can get a BE image to work well enough today to test this.
+Although it might be possible to enhance the database to store the
+fractional part too, this will complicate things more than we would
+gain by this change.
 
--Mike
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ .../ipkg-utils-native_1.6+cvs20050404.bb           |    2 +-
+ .../ipkg-utils/ipkg-make-index-track-stamps.patch  |    2 +-
+ recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb   |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
+index 98cc7f1..11e124b 100644
+--- a/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
++++ b/recipes/ipkg-utils/ipkg-utils-native_1.6+cvs20050404.bb
+@@ -1,7 +1,7 @@
+ require ipkg-utils_${PV}.bb
+ 
+ RDEPENDS_${PN} = ""
+-PR = "r22"
++PR = "r23"
+ 
+ inherit native
+ 
+diff --git a/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch b/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch
+index ad6df4f..68758ed 100644
+--- a/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch
++++ b/recipes/ipkg-utils/ipkg-utils/ipkg-make-index-track-stamps.patch
+@@ -53,7 +53,7 @@ Index: ipkg-utils/ipkg-make-index
+ +     fnameStat = os.stat(filename)
+       if old_pkg_hash.has_key(basename):
+ -          if (verbose):
+-+          if pkgsStamps.has_key(basename) and fnameStat.st_mtime == pkgsStamps[basename]:
+++          if pkgsStamps.has_key(basename) and int(fnameStat.st_mtime) == pkgsStamps[basename]:
+ +            if (verbose):
+                 sys.stderr.write("Found %s in Packages\n" % (filename,))
+ -          pkg = old_pkg_hash[basename]
+diff --git a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
+index fe1f28b..aa2bfbb 100644
+--- a/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
++++ b/recipes/ipkg-utils/ipkg-utils_1.6+cvs20050404.bb
+@@ -5,7 +5,7 @@ LICENSE = "GPL"
+ CONFLICTS = "ipkg-link"
+ RDEPENDS_${PN} = "python"
+ SRCDATE = "20050930"
+-PR = "r25"
++PR = "r26"
+ 
+ SRC_URI = "${HANDHELDS_CVS};module=ipkg-utils \
+            file://ipkg-utils-fix.patch \
+-- 
+1.7.0.1
+
 
 
