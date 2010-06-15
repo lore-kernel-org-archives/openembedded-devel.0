@@ -1,36 +1,29 @@
-Received: from mk-filter-3-a-1.mail.uk.tiscali.com ([212.74.100.54])
+Received: from smtp-68.nebula.fi ([83.145.220.68])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <superaorta@gmail.com>) id 1OOQSH-00073i-Do
-	for Openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 09:21:06 +0200
-X-Trace: 418660933/mk-filter-3.mail.uk.tiscali.com/B2C/$b2c-THROTTLED-DYNAMIC/b2c-CUSTOMER-DYNAMIC-IP/79.70.159.171/None/superaorta@gmail.com
-X-SBRS: None
-X-RemoteIP: 79.70.159.171
-X-IP-MAIL-FROM: superaorta@gmail.com
-X-SMTP-AUTH: 
-X-Originating-Country: GB/UNITED KINGDOM
-X-MUA: KMail/1.9.9
-X-IP-BHB: Once
-X-IronPort-Anti-Spam-Filtered: true
-X-IronPort-Anti-Spam-Result: AsEaABfFFkxPRp+r/2dsb2JhbACBOgORGYYMgQCFD3GuKIdsLohUhRoE
-X-IronPort-AV: E=Sophos;i="4.53,419,1272841200"; d="scan'208";a="418660933"
-Received: from 79-70-159-171.dynamic.dsl.as9105.com ([79.70.159.171])
-	by smtp.tiscali.co.uk with ESMTP; 15 Jun 2010 08:15:34 +0100
-From: superaorta@gmail.com
-To: Openembedded-devel@lists.openembedded.org
-Date: Tue, 15 Jun 2010 08:15:32 +0100
-User-Agent: KMail/1.9.9
+	(envelope-from <henri.bragge@dcombus.com>) id 1OOQW9-0001dW-Az
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 15 Jun 2010 09:25:06 +0200
+Received: from [100.100.100.68] (unknown [83.150.95.26])
+	by smtp-68.nebula.fi (Postfix) with ESMTP id 7255E43F0584;
+	Tue, 15 Jun 2010 10:20:37 +0300 (EEST)
+Message-ID: <4C172AE7.3020106@dcombus.com>
+Date: Tue, 15 Jun 2010 10:25:27 +0300
+From: Henri Bragge <henri.bragge@dcombus.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-Message-Id: <201006150815.32214.superaorta@gmail.com>
-X-SA-Exim-Connect-IP: 212.74.100.54
-X-SA-Exim-Mail-From: superaorta@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4c168f9c.02afcc0a.1a9e.7e1c@mx.google.com>
+In-Reply-To: <4c168f9c.02afcc0a.1a9e.7e1c@mx.google.com>
+X-SA-Exim-Connect-IP: 83.145.220.68
+X-SA-Exim-Mail-From: henri.bragge@dcombus.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_NEUTRAL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: comedi / angstrom
+Cc: Leon Woestenberg <leon@sidebranch.com>
+Subject: Re: [PATCH] udev/{acl, attr}: Fix install. Wanted to install to host /usr/bin/.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,32 +37,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 07:21:06 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Tue, 15 Jun 2010 07:25:06 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
+Leon Woestenberg wrote:
+> The subdirectory Makefile includes a file, that overrides the
+> variables inherited from the parent Makefile. Those where provided
+> to the parent make through '-e'.
+>
+> Make sure the subdir makes also use '-e'.
+>   
 
-I would like to build comedi (www.comedi.org) for my beagle board. From the 
-instructions for comedi, "you will need to havea correctly configured Linux 
-kernel source tree".
-
-I have built comedi on many platforms without trouble but I'm completely lost 
-in Angstrom - I have the kernel source (2.6.29 from kernel.org) but I don't 
-know where to find the config files. I have done this on and x86 host: 
-http://www.angstrom-distribution.org/building-angstrom
-
-I don't fancy building comedi using bitbake because I have not the slightest 
-idea how to adapt it to this purpose. The easiest thing seems to me is to 
-find the correctly configures kernel source and config files and install them 
-on the beagleboard then build comedi locally.
-
-Any advice? overwhelmed and stuck here.
-
-Cheers,
-
-SA
-
+Works here!
 
 
