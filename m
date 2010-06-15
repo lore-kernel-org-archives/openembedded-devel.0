@@ -1,37 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ww0-f47.google.com ([74.125.82.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OOeUb-0002Ze-9Y
+	(envelope-from <leon.woestenberg@gmail.com>) id 1OOfek-0006zv-8i
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 00:20:29 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OOeQF-0000Cb-LV from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 15 Jun 2010 15:15:55 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 15 Jun 2010 15:15:55 -0700
-Received: from [172.30.80.129] ([172.30.80.129]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 15 Jun 2010 16:15:54 -0600
-Message-ID: <4C17FB97.1080505@mentor.com>
-Date: Tue, 15 Jun 2010 15:15:51 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 16 Jun 2010 01:34:58 +0200
+Received: by wwf26 with SMTP id 26so73181wwf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 15 Jun 2010 16:30:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=pIASKT21d6+2uSSZ/8l/0OBzh1a8WnI3rr+wKEJnTMY=;
+	b=eHJ/uaSqLkAa42qc3DQ5mzGj3PdGe5mProWd0k/kIEAyNc1FDLGVDhTOxD0/1jVtEj
+	NPxBgVGbLx++Ogjp2/tIPMTODtnbjzge3ihlOjY19lzspRxsKuQiLQtIiXIL1BtyhjNr
+	ttvIR2a3fRIaYSNF+2eoh7PcX0Tnx2kqAczJ8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=DcviicP9X1rMmhm4nY1Nc9Z6Ho7t2neqOUqs360OUn7MaPRCHCzkUhYgbhFkYcK8rf
+	i9ZGAt/kZcZBJoD/q9dNk105LtJzkagW5KeFOTbOktvWKuPm3pKKTdYwLUiQqZPUsnU5
+	zIJmQT8/oZaH2cSVEjAUO8lsnl4JAnuPF++cg=
 MIME-Version: 1.0
+Received: by 10.216.88.21 with SMTP id z21mr4195036wee.100.1276644629506; Tue, 
+	15 Jun 2010 16:30:29 -0700 (PDT)
+Received: by 10.216.21.134 with HTTP; Tue, 15 Jun 2010 16:30:29 -0700 (PDT)
+In-Reply-To: <4C17BCF4.30109@mentor.com>
+References: <4C0D498A.4030709@mentor.com>
+	<4C17BCF4.30109@mentor.com>
+Date: Wed, 16 Jun 2010 01:30:29 +0200
+Message-ID: <AANLkTinZ-EFiDW6IK-bRPh9JElAbnwaET56jGKnwm0cr@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 15 Jun 2010 22:15:54.0517 (UTC)
-	FILETIME=[52676C50:01CB0CD8]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 74.125.82.47
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: perl-native, why again?
+Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,23 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 15 Jun 2010 22:20:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 15 Jun 2010 23:34:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hey all,
+Hello Tom,
 
-I was wondering, is there a reason for perl native aside from cpan?  If 
-no, have we tried setting things up such that system perl uses a local 
-to $TMPDIR cpan install spot?
+On Tue, Jun 15, 2010 at 7:48 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> For the second, yes, ASSUME_PROVIDED still works. =A0For the first, I'd a=
+rgue
+> that doing so is a lot harder (at least without some additional
+> infrastructure and reliance on other external tools) than just adding
+> another early package.
+>
+> So, yay or nay?
+>
+I would say the ASSUME_PROVIDED for the native linux headers should be
+mentioned in the local.conf.sample,
+commented out, so that users can enable it easily (optimize the build
+like Khem says).
 
-I ask since once perl-native exist, stuff can get very unfun (too long 
-#!/path/to/perl isn't fun at all).
+Could you add that to the patch, or as a follow-up patch?
 
-Thanks.
+Acked-by: Leon Woestenberg <leon@sidebranch.com>
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Regards,
+--=20
+Leon
 
 
