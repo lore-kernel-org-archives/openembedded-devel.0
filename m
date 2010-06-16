@@ -1,41 +1,44 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raseelbhagat@gmail.com>) id 1OOsUZ-00070E-Do
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 15:17:20 +0200
-Received: by pwi2 with SMTP id 2so3977581pwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OOsoD-0007Uw-VO for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 15:37:38 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OOsju-0006xl-7Z for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 15:33:10 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 15:33:10 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 06:12:49 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=FPeItPvnwd7YHQFkwrtz5b3oRSkLf5FxRV+Cut0+8lE=;
-	b=LqnX5z2WY6kEWdV9jCkt1vdYyF1YGS8TmPXgQyGIZaC1C3buhQqDmCLgb7fYnMM4xH
-	ZsMHHE9q8P/dqz+8iK3hOb/9z4q3M008dmT1tbOwrIOxcAmEW+ws38RJeroxRcJuUMi6
-	KpA2q9UfWVyZSskAKk8vePGw+NzsIfFsAO2aA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=IZoYOr6hA8VD9FojKTEqlFWtaeTRXtIwgzGlFifw3UpMfJxhKgYMvza1cNtoeyP7h3
-	yfS6PSTeh+L/+w4GF/2HeZ/V/xl1YQj3KBDyiEhF3zM6VOFVTFp+tG43IVyc2IsGbkKH
-	NH8XqqHo4+758ApSA/WMZzWyiO6qP3dDsu1Vg=
-MIME-Version: 1.0
-Received: by 10.142.1.34 with SMTP id 34mr1556984wfa.132.1276693969409; Wed, 
-	16 Jun 2010 06:12:49 -0700 (PDT)
-Received: by 10.142.76.16 with HTTP; Wed, 16 Jun 2010 06:12:49 -0700 (PDT)
-Date: Wed, 16 Jun 2010 18:42:49 +0530
-Message-ID: <AANLkTil99t7nC8GYAqysbXybTApi_2QF9lg7mWTXulHu@mail.gmail.com>
-From: Raseel Bhagat <raseelbhagat@gmail.com>
+	Wed, 16 Jun 2010 15:33:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raseelbhagat@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 16 Jun 2010 15:32:59 +0200
+Message-ID: <hvajqb$i26$1@dough.gmane.org>
+References: <E1OOdAL-0005Tc-Dn@melo.openembedded.org>
+	<hv9seb$ks1$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <hv9seb$ks1$1@dough.gmane.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Building Angstrom for Beagleboard
+Subject: Re: Khem Raj : gnu-config: Add recipe for git version.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,27 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 13:17:20 -0000
+X-List-Received-Date: Wed, 16 Jun 2010 13:37:38 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I'm trying to build Angstrom from scratch for the BeagleBoard.
+On 16-06-10 08:54, Dmitry Eremin-Solenikov wrote:
+> git version control wrote:
+> 
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: 473cd5f616190739550abd8bf71629a87036730b URL:   
+>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=473cd5f616190739550abd8bf71629a87036730b
+>>
+>> Author: Khem Raj <raj.khem@gmail.com>
+>> Date:   Tue Jun 15 13:52:40 2010 -0700
+>>
+>> gnu-config: Add recipe for git version.
+>>
+>> * Rename gnu-config to files folder.
+>>
+>> Signed-off-by: Khem Raj
+>> <raj.khem@gmail.com>
+> 
+> Unless I have git-native in ASSUME-PROVIDED, this breaks builds with:
+> ERROR: Unbuildable tasks were found.
+> These are usually caused by circular dependencies and any circular dependency chains found will be printed below. Increase the debug level to see a list of unbuildable tasks.
 
-Now, I've already faced a lot of issues , local as well as related to the
-build and managed to go past various stages in multiple attempt :-)
+I changed it to fetch a snapshot instead, dep loop gone. Hopefully Khem
+will learn from this and not but tons of stuff in ASSUME_PROVIDED on his
+machine anymore...
 
-Currently, I am bitbaking nano and I see that more than 7 GB space is being
-utilised and its been over an hour and the build  is still going on.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Can someone give me a ballpark figure on how much time and space will it
-take to build a console-image ?
-Also, any particular heads-up for building this, as already mentioned , for
-Beagleboard on Ubuntu 10.04 ?
+iD8DBQFMGNKKMkyGM64RGpERAhdpAKCZ168m2LEhxCKeztxTHfxJij4pqwCfRfnT
+UXL1IuquynfLR31RcQ6i5t8=
+=qmMV
+-----END PGP SIGNATURE-----
 
-My ultimate goal is to cross-compile packages like telepathy-sofiasip,
-empathy with support for SIP/VoIP.
 
---
-Raseel
 
