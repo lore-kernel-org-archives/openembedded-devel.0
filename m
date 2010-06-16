@@ -1,46 +1,40 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OOnEq-0001kY-0x
+	(envelope-from <dp@xora.org.uk>) id 1OOndq-0005qi-DQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 09:40:46 +0200
-Received: by bwz14 with SMTP id 14so3313103bwz.6
+	Wed, 16 Jun 2010 10:06:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 7C26BA5279
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 00:36:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ntdWMpMFa5x6VYFCe2SaK8154c8b4+AZLL3x2fXqMW4=;
-	b=kv1ngjzAXauphSiReeLhspb4hin4aTJbB0gnfKlNfQwb0pjUI6DR6jwJKER7luT6Bk
-	UWyoyh/9JTippJEjm1f2w4N8FUREeiFNq2LI/w9PZXQjuVfIGWmSC4HcfvrtiqPjpZ8C
-	peBdOVn/nxWVR8CabVEOiJ8qWrBmqiybCLcMU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ebE6ywmf7ZaZnxPd110MxVlFoNJ84THbYeHHQuSX29ANz+lTIzp/g9dQhKIqSen5sN
-	5hDFcqPpS8BYqpvPae9kEI0w2LKN4IJo9GWf5Ltp72Wj4tDv9Y1eduFgzr4Akiern/q2
-	nAfTgNgNSiezz2zzgA1fUQ1IFFcSuPI6YULa0=
-MIME-Version: 1.0
-Received: by 10.204.160.74 with SMTP id m10mr6278292bkx.62.1276673777150; Wed, 
-	16 Jun 2010 00:36:17 -0700 (PDT)
-Received: by 10.204.119.12 with HTTP; Wed, 16 Jun 2010 00:36:17 -0700 (PDT)
-In-Reply-To: <4C1831AA.1030005@mentor.com>
-References: <4C0D498A.4030709@mentor.com> <4C17BCF4.30109@mentor.com>
-	<AANLkTinZ-EFiDW6IK-bRPh9JElAbnwaET56jGKnwm0cr@mail.gmail.com>
-	<4C1831AA.1030005@mentor.com>
-Date: Wed, 16 Jun 2010 09:36:17 +0200
-Message-ID: <AANLkTimnOJ6zeJ308XWUAd9Qsw0DQgo8vd1Nz58pMH6N@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 16 Jun 2010 09:02:03 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 30ahZhxOyRUv
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 09:02:02 +0100 (BST)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id F002CA525C
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 09:02:01 +0100 (BST)
+Date: Wed, 16 Jun 2010 09:02:00 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100616090200.5c23b895@xora-desktop.xora.org.uk>
+In-Reply-To: <4C187CF6.5010401@gmx.net>
+References: <4C187CF6.5010401@gmx.net>
+X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Add linux-libc-headers-native, make it default 	dep for native
+Subject: Re: [RFC] add ubuntu patch which adds atomic builtin support to gcc 4.3.[3 but also other microversions]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,63 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 07:40:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Jun 2010 08:06:34 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-2010/6/16 Tom Rini <tom_rini@mentor.com>:
-> Leon Woestenberg wrote:
->>
->> Hello Tom,
->>
->> On Tue, Jun 15, 2010 at 7:48 PM, Tom Rini <tom_rini@mentor.com> wrote:
->>>
->>> For the second, yes, ASSUME_PROVIDED still works. =A0For the first, I'd
->>> argue
->>> that doing so is a lot harder (at least without some additional
->>> infrastructure and reliance on other external tools) than just adding
->>> another early package.
->>>
->>> So, yay or nay?
->>>
->> I would say the ASSUME_PROVIDED for the native linux headers should be
->> mentioned in the local.conf.sample,
->> commented out, so that users can enable it easily (optimize the build
->> like Khem says).
->>
->> Could you add that to the patch, or as a follow-up patch?
->
-> As a follow-up:
-> --- a/conf/local.conf.sample
-> +++ b/conf/local.conf.sample
-> @@ -30,6 +30,11 @@ BBFILES :=3D "${@bb.fatal('Edit your conf/local.conf:
-> BBFILES')}"
-> =A0# This is a regulary expression, so be sure to get your parenthesis
-> balanced.
-> =A0BBMASK =3D ""
->
-> +# Uncomment this if your host distribution has recent enough Linux
-> +# Kernel header files. =A0Utilities we use to generate certain types of
-> +# target filesystems need somewhat recent header files.
-> +# ASSUME_PROVIDED +=3D "linux-libc-headers-native"
-> +
-> =A0# Uncomment this if you want to use a prebuilt toolchain. You will nee=
-d to
-> =A0# provide packages for toolchain and additional libraries yourself. Yo=
-u
-> also
-> =A0# have to set PATH in your environment to make sure BitBake finds
-> additional binaries.
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
+On Wed, 16 Jun 2010 09:27:50 +0200
+Robert Schuster <thebohemian@gmx.net> wrote:
 
-Suggest to write a separate email with a catchy title telling people
-that this change becomes in effect (after the commit is done).
-rationale: after the change is made, people will get the headers by
-default, and not everyone reads this thread.
+> Hi,
+> Angstrom's default GCC is 4.3.3 for ARM. Unfortunately that version
+> lacks atomic intrinsics support for the very same architecture
+> (__sync_synchronize and friends). The support is available from 4.4.x
+> onwards but a patch exists in Ubuntu's GCC that adds the intrinsics to
+> the earlier GCC version. I would like add that patch to our GCC 4.3.x
+> (all of them so there is not suddenly a feature missing when one
+> changes from one microversion to another). This has the potential for
+> drastic effects on other recipes because a lot of programs (e.g.
+> pulseaudio, llvm) check for the availability of the intrinsics and
+> make use of them in that case.
+> 
+> I ask for comments here because I would also like to see this change
+> move into OE stable later on. (The use case is to get OpenJDK with the
+> Shark JIT compiler [llvm-based] to run on the bug20 hardware).
+> 
+> Regards,
+> Robert
 
-Frans
+This sounds like it would require a DISTRO_PR bump on the Angstrom side
+which I am fine with, but we need to synchronize so there are enough
+Angstrom developers to re-fill the feeds on bump day.
+
+Otherwise I think this is a very good idea.
+
+Graeme
 
 
