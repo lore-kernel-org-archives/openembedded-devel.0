@@ -1,40 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OOtOu-00076P-7X
+	(envelope-from <raj.khem@gmail.com>) id 1OOtVC-0003XG-UP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 16:15:37 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OOtKX-00057W-QD from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 07:11:01 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 16 Jun 2010 07:11:01 -0700
-Received: from [172.30.80.129] ([172.30.80.129]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 16 Jun 2010 08:11:00 -0600
-Message-ID: <4C18DB70.2060108@mentor.com>
-Date: Wed, 16 Jun 2010 07:10:56 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 16 Jun 2010 16:22:03 +0200
+Received: by gyg10 with SMTP id 10so4279167gyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 07:17:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=PZuz8w0rKv4fxDSX3YwApbx7doeF8IDH00FPNYCOipo=;
+	b=aFuiWriCVs9x9N/00MUyFRQQH7YTJWB/gRdgRnJ7I+bd+kav8XFVSKTtOwpft7Ouce
+	qNX4PiDQN3/ms61SKqSudWYUa74eR97tOKhNHmKPJ9gQES3GM4tZqDLdeQNxLzfcdX0v
+	+8z+oWPvJ9fPiiAF9j6e5KjZHtQ5bbeYFv3uk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=HQtWpHE6bldOg0rvoO9+/34UHX8/XssVNeoMGAPNhb02+vy1c1e8xY+8LEy6uMuM4t
+	ICIUjGeQew17BlZWLp3AkhMyz7pw6ak4RnbM+KTM63bU+CjKDkKQF48v1OpnHQdD8lG9
+	X6OQHZdFjyWMTJ6V2/d1d5W/1UhYPblLAchEk=
 MIME-Version: 1.0
+Received: by 10.150.47.33 with SMTP id u33mr10345336ybu.49.1276697851664; Wed, 
+	16 Jun 2010 07:17:31 -0700 (PDT)
+Received: by 10.231.17.130 with HTTP; Wed, 16 Jun 2010 07:17:31 -0700 (PDT)
+In-Reply-To: <hvajqb$i26$1@dough.gmane.org>
+References: <E1OOdAL-0005Tc-Dn@melo.openembedded.org>
+	<hv9seb$ks1$1@dough.gmane.org> <hvajqb$i26$1@dough.gmane.org>
+Date: Wed, 16 Jun 2010 07:17:31 -0700
+Message-ID: <AANLkTimhpcqM6rx1oO0jUeoD3s4A8T0Q2pqXT5ln9cLA@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <hva2uj$jco$2@dough.gmane.org>	<20100616095322.180eb9b5@xora-desktop.xora.org.uk>
-	<4C18C342.2010304@balister.org>
-In-Reply-To: <4C18C342.2010304@balister.org>
-X-OriginalArrivalTime: 16 Jun 2010 14:11:00.0886 (UTC)
-	FILETIME=[BFA96360:01CB0D5D]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: virtual/opkg-dev breaks task-sdk-native, please revert
+Subject: Re: Khem Raj : gnu-config: Add recipe for git version.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +52,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 14:15:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Jun 2010 14:22:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Philip Balister wrote:
-> On 06/16/2010 04:53 AM, Graeme Gregory wrote:
->> On Wed, 16 Jun 2010 10:45:07 +0200
->> Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+On 6/16/10, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 16-06-10 08:54, Dmitry Eremin-Solenikov wrote:
+>> git version control wrote:
 >>
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
+>>> Module: openembedded.git
+>>> Branch: org.openembedded.dev
+>>> Commit: 473cd5f616190739550abd8bf71629a87036730b URL:
+>>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=473cd5f616190739550abd8bf71629a87036730b
 >>>
->>> Hi,
+>>> Author: Khem Raj <raj.khem@gmail.com>
+>>> Date:   Tue Jun 15 13:52:40 2010 -0700
 >>>
->>> I noticed that
->>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=eeffe0a6eee97604679cf9a3cf40ed4604ae6493 
+>>> gnu-config: Add recipe for git version.
 >>>
->>> breaks lots of things:
+>>> * Rename gnu-config to files folder.
 >>>
->>> * a dependency loop in 'bitbake task-sdk-native'
->>> * using virtual/ namespace in packages instead of recipes.
->>>
->>> I propose to revert this change and just remove the ?pkg-dev from the
->>> sdk tasks.
->>>
->> virtual/ in package space is always wrong as it blows up on at least
->> one of our supported package types.
+>>> Signed-off-by: Khem Raj
+>>> <raj.khem@gmail.com>
 >>
->> Acked-by: Graeme Gregory<dp@xora.org.uk>
-> 
-> Acked-by: Philip Balister <philip@balister.org>
+>> Unless I have git-native in ASSUME-PROVIDED, this breaks builds with:
+>> ERROR: Unbuildable tasks were found.
+>> These are usually caused by circular dependencies and any circular
+>> dependency chains found will be printed below. Increase the debug level to
+>> see a list of unbuildable tasks.
+>
+> I changed it to fetch a snapshot instead, dep loop gone. Hopefully Khem
+> will learn from this and not but tons of stuff in ASSUME_PROVIDED on his
+> machine anymore...
 
-I'd like to make a different request.  The answer is that it should have 
-been an RPROVIDES virtual-ipkg-dev like we do for other cases where we 
-need virtuals in a rootfs/etc.  So lets not revert, lets fix?
+yes you crystal ball saw it I have git in ASSUME_PROVIDED but I would
+not have hit this
+error even if it was not there untill I did a build from scratch.
+hmm thanks for fixing. But now I am curious how did the cvs recipe
+work. suppose I dont
+have cvs installed on my build machine wont that also end up in same
+circular dep loop
+or it is implicit that cvs should be always installed on your build  box for OE
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMGNKKMkyGM64RGpERAhdpAKCZ168m2LEhxCKeztxTHfxJij4pqwCfRfnT
+> UXL1IuquynfLR31RcQ6i5t8=
+> =qmMV
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
