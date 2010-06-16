@@ -1,47 +1,40 @@
-Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1OOqRh-0001ep-15
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OOrmL-0001mB-Dm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 13:06:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id 439694000824A
+	Wed, 16 Jun 2010 14:31:37 +0200
+Received: by bwz14 with SMTP id 14so3418133bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 12:56:29 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id 3B863400057E9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 12:56:29 +0200 (CEST)
-X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
-Received: from ugs.tarent.de ([127.0.0.1])
-	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id n6skroXO2U6E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 12:56:29 +0200 (CEST)
-Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
-	by ugs.tarent.de (Postfix) with ESMTPSA id 6D0414000824A
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 12:56:26 +0200 (CEST)
-Message-ID: <4C18AE1F.8060000@gmx.net>
-Date: Wed, 16 Jun 2010 12:57:35 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
+	Wed, 16 Jun 2010 05:27:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=F1YzKPapK1amP3bF1iTL3SYjDxf3eaJd3cQ6BGkHpmc=;
+	b=SEk9PnoTDJho1e+Mo2wISdIJFLIe7PIwKp7O8/paHa0LChlxDxK4TgI9jzBf8T5Rj/
+	lAqcRCwv0l35HTaegTUbvkbyOMFixUhKQKW0C4Fwn9Tf1N5J3UqnZhsavm4SFKqxcGvx
+	++6AeC27Ayk2Cf1/CRYNbSebt3GFkvLouXhao=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=ACa5PLIgRQqmEZYWmlKNszyz1+LLE/JnOIulxdMOiKbTWF1iBPMzLE9+sEPqPsJjU5
+	uxB0Qq1cJFdWRdH9yw42YWQMUNO/mCbfhiM6SoyiSrYl8eRbaGQzx3TphNqiciqpCUnk
+	w/ci6df5T1ZtjsQwnovKytjJIS6dSA8dkjiwY=
 MIME-Version: 1.0
+Received: by 10.204.81.7 with SMTP id v7mr6507592bkk.140.1276691230236; Wed, 
+	16 Jun 2010 05:27:10 -0700 (PDT)
+Received: by 10.204.119.12 with HTTP; Wed, 16 Jun 2010 05:27:10 -0700 (PDT)
+Date: Wed, 16 Jun 2010 14:27:10 +0200
+Message-ID: <AANLkTilaBLTN8aWRUS6GRhvn-le5-fjK1nftuj_AQjw8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C187CF6.5010401@gmx.net>
-	<hva2qe$jco$1@dough.gmane.org>	<20100616091709.GA20969@excalibur.local>
-	<hva6mc$vtv$4@dough.gmane.org>
-In-Reply-To: <hva6mc$vtv$4@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 212.79.178.249
-X-SA-Exim-Mail-From: thebohemian@gmx.net
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_FAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] add ubuntu patch which adds atomic builtin support to gcc 4.3.[3 but also other microversions]
+Subject: image.bbclass IMAGE_DEVICE_TABLES issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,111 +48,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 11:06:14 -0000
-X-Groupsio-MsgNum: 20189
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigA7371D243F541ECBC28F0A37"
-
---------------enigA7371D243F541ECBC28F0A37
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 16 Jun 2010 12:31:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
 Hi,
 
-Am 16.06.2010 11:49, schrieb Koen Kooi:
-> On 16-06-10 11:17, Stefan Schmidt wrote:
-> > Hello.
->
-> > On Wed, 2010-06-16 at 10:42, Koen Kooi wrote:
-> >>
-> >> My second question: When is all that openjdk stuff you keep talking
-> >> about ending up in OE? I know Henning keeps handwaving about it not
-> >> being ready, but after after waiting a year, is it ever going to be
-> >> deemed ready by the jalimo crew? Just merge it into OE now :)
->
-> > I can't speak for the jalimo crew but I can tell you that Tarent is
-> currently
-> > hired by BugLabs to bring in openjdk-6 and different other things to
-> OE dev and
-> > stable for our upcoming BugLabs stuff.
->
-> > It seems to me that Robert is right now trying to bring in all the
-> needed deps
-> > for some parts. Talking LLVM, and therefor this patch, for JIT and
-> others. If
-> > nothing problematics happens we should have this stuff in dev (and
-> hopefully
-> > also stable) withing the next weeks.
->
-> That's great news! I did beat nss from the jalimo repo into shape and
-> pushed it into OE,
-Cool, I also saw that nspr is in oe.dev nowadays. So I removed those
-from the Jalimo repo.
+I am having an issue or two with image.bbclass and especially the
+devtable section.
+
+It concers the following part:
+
+# Get a list of files containing tables of devices to be created.
+# * IMAGE_DEVICE_TABLE is the old name to an absolute path to a device
+table file
+# * IMAGE_DEVICE_TABLES is a new name for a file, or list of files, searched
+#   for in the BBPATH
+# If neither are specified then the default name of
+files/device_table-minimal.txt
+# is searched for in the BBPATH (same as the old version.)
+#
+def get_devtable_list(d):
+    import bb
+    devtable = bb.data.getVar('IMAGE_DEVICE_TABLE', d, 1)
+    if devtable != None:
+        return devtable
+    devtables = bb.data.getVar('IMAGE_DEVICE_TABLES', d, 1)
+    if devtables == None:
+        devtables = 'files/device_table-minimal.txt'
+    return " ".join([ bb.which(bb.data.getVar('BBPATH', d, 1), devtable)
+                      for devtable in devtables.split() ])
+
+The issues I have are the following:
+1. if the file is not there an empty list is returned and used without
+any error being given.
+In case of the default name that is probably ok, but if there is an
+explicit IMAGE_DEVICE_TABLE or IMAGE_DEVICE_TABLES given and the file
+is not there I would qualify the situation as an error.
+Guess it would be very convenient to have an error message in that case.
+2. According to the comment for IMAGE_DEVICE_TABLES (and for the
+default name) the file is searched for in BBPATH. For me BBPATH points
+to an overlay dir with below it recipes/myimage/myimage.bb
+The code does join the names but (at least with my limited python
+knowledge) does not look into subdirs. This is experimentally
+verified.
+I feel it is more appropriate to have the device table near the bb
+file (e.g. in recipes/myimage/mydevicetable.txt)
+currently I have to either specify a path in IMAGE_DEVICE_TABLES
+(which I don't like because it makes the recipe dependent of the
+actual place in the tree, so it is not robust to moving it), or have
+the device table on the level of recipes (which I do not like either
+as it is not near the recipe).
+My suggestion would be to look in the dir of the recipe or in ${WORKDIR}
+
+What do people think about this?
+I'm not really a python wiz, so if someone can contribute a patch that
+would be greatly appreciated.
+
+Frans
 
 
-> but I couldn't get any other java bits to work,
-There is only jna and the openjdk recipes left. JNA builds but I have
-not a single application/library
-that makes use of it by now so I cannot tell whether it actually works.
-(It uses libffi, so I do not expect issues).
-
-The biggest flaw of the OpenJDK recipes atm is that there are too many
-of them. I would like to get rid of everything below 6b18 (the very lates=
-t)
-to in turn get rid of many quirks for older versions of the icedtea
-build system. However we are having troubles building 6b18 flawlessly
-right now, so fixing this has precedence.
-
-> sadly. Henning said I was missing the magic java incantations in
-> angstrom and after adding those I could build things like jamvm :)
-I am not sure what the problem is. Most Java stuff is in OE.dev for
-quite some time.
-
->
-> regards,
->
-> Koen
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
---=20
-Besuchen Sie uns vom 09.06. bis zum 12.06. auf dem LinuxTag 2010
-an unserem Stand =E2=80=9EFairtrade Software=E2=80=9C (Halle 7.2a. / Stan=
-d 123)!
-=E2=87=92 Unsere Themen dieses Jahr =E2=87=92 =E2=80=A2 Evolvis =E2=80=A2=
- Freedroidz =E2=80=A2 Portale =E2=80=A2
-=E2=80=A2 Identity and Access Management =E2=80=A2 Mobile Applikationen =E2=
-=80=A2
-
-tarent Gesellschaft f=C3=BCr Softwareentwicklung und IT-Beratung mbH
-Gesch=C3=A4ftsf=C3=BChrer: Boris Esser, Elmar Geese
-HRB AG Bonn 5168 - Ust-ID: DE122264941
-http://www.tarent.com/
-
-Heilsbachstr. 24, 53123 Bonn, fon +49 228 52675-0, fax +49 228 52675-25
-Weigandufer 45, 12059 Berlin, fon +49 30 5682943-30, fax +49 228 52675-25=
-
-
-
-
-
---------------enigA7371D243F541ECBC28F0A37
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAkwYriEACgkQG9cfwmwwEtrZ5gCfc6BqyJKGS2pqbkMAaGeA4yj2
-BO4An19oAscWLhVoFcwSSZf4+PA+1nry
-=Lrr2
------END PGP SIGNATURE-----
-
---------------enigA7371D243F541ECBC28F0A37--
