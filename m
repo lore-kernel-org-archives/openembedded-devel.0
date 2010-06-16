@@ -1,40 +1,44 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OOorV-0005r7-7j
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 11:24:48 +0200
-Received: from guest198.ibr.cs.tu-bs.de ([134.169.35.198] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OOon6-0003C9-SA by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OOpHX-00065r-6U for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 11:51:43 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OOpD9-00035o-BQ for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 11:47:07 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 11:47:07 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 11:20:18 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OOon6-0004fZ-5m
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 11:20:12 +0200
-Date: Wed, 16 Jun 2010 11:20:12 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Wed, 16 Jun 2010 11:47:07 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100616092012.GB20969@excalibur.local>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 16 Jun 2010 11:46:55 +0200
+Message-ID: <hva6if$vtv$1@dough.gmane.org>
 References: <1276625727-22991-1-git-send-email-stefan@datenfreihafen.org>
-	<1276625727-22991-5-git-send-email-stefan@datenfreihafen.org>
-	<20100616082908.GA31860@merkur.sol.de>
-MIME-Version: 1.0
-In-Reply-To: <20100616082908.GA31860@merkur.sol.de>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+	<1276625727-22991-2-git-send-email-stefan@datenfreihafen.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <1276625727-22991-2-git-send-email-stefan@datenfreihafen.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][STABLE 4/4] u-boot_git: Add bug20 support
+Subject: Re: [PATCH][STABLE 1/4] bug20/xorg.conf: update to use tslib driver for touchscreen input device.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,82 +52,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 09:24:49 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 Jun 2010 09:51:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Wed, 2010-06-16 at 10:29, Jens Seidel wrote:
+On 15-06-10 20:15, Stefan Schmidt wrote:
+> From: Ken Gilmer <ken@buglabs.net>
 > 
-> a few useless remarks:
+> 
+> Signed-off-by: Ken Gilmer <ken@buglabs.net>
+> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
 
-Review is never useless. :)
+Acked-by: Koen Kooi <koen@openembedded.org>
 
-> On Tue, Jun 15, 2010 at 08:15:27PM +0200, Stefan Schmidt wrote:
-> > From: Stefan Schmidt <stefan@buglabs.net>
+> 
+> ---
+>  .../xorg-xserver/xserver-xorg-conf/bug20/xorg.conf |    8 ++++++++
+>  recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
+>  2 files changed, 9 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+> index 0b976fe..6301d06 100644
+> --- a/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+> +++ b/recipes/xorg-xserver/xserver-xorg-conf/bug20/xorg.conf
+> @@ -26,4 +26,12 @@ EndSection
+>  Section "ServerLayout"                                 
+>          Identifier      "Builtin Default Layout"                                     
+>          Screen  "Builtin Default fbdev Screen 0"        
+> +		InputDevice "bmi-lcd-ts" "CorePointer"
+>  EndSection                                              
+> +
+> +Section "InputDevice"
+> +		Identifier "bmi-lcd-ts"
+> +		Driver "tslib"
+> +		Option "SwapAxes" "1"
+> +		Option "Device" "/dev/input/touchscreen0"
+> +EndSection
+> diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+> index 0d286b7..43ca6fa 100644
+> --- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+> +++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
+> @@ -1,5 +1,5 @@
+>  DESCRIPTION = "Machine specific xorg.conf files"
+> -PR = "r24"
+> +PR = "r25"
 >  
-> > +diff --git a/board/ti/beagle/beagle.h b/board/ti/beagle/beagle.h
-> > +index 7fe6275..a7e8593 100644
-> > +--- a/board/ti/beagle/beagle.h
-> > ++++ b/board/ti/beagle/beagle.h
-> > +@@ -255,8 +255,8 @@ const omap3_sysinfo sysinfo = {
-> > +	MUX_VAL(CP(HSUSB0_DATA7),	(IEN  | PTD | DIS | M0)) /*HSUSB0_DATA7*/\
-> > +	MUX_VAL(CP(I2C1_SCL),		(IEN  | PTU | EN  | M0)) /*I2C1_SCL*/\
-> > +	MUX_VAL(CP(I2C1_SDA),		(IEN  | PTU | EN  | M0)) /*I2C1_SDA*/\
-> > +-	MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M4)) /*GPIO_168*/\
-> > +-	MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M4)) /*GPIO_183*/\
-> > ++	MUX_VAL(CP(I2C2_SCL),		(IEN  | PTU | EN  | M0)) /*GPIO_168*/\
-> > ++	MUX_VAL(CP(I2C2_SDA),		(IEN  | PTU | EN  | M0)) /*GPIO_183*/\
-> > +	MUX_VAL(CP(I2C3_SCL),		(IEN  | PTU | EN  | M0)) /*I2C3_SCL*/\
-> > +	MUX_VAL(CP(I2C3_SDA),		(IEN  | PTU | EN  | M0)) /*I2C3_SDA*/\
-> > +	MUX_VAL(CP(I2C4_SCL),		(IEN  | PTU | EN  | M0)) /*I2C4_SCL*/\
-> > +@@ -268,6 +268,7 @@ const omap3_sysinfo sysinfo = {
-> > +	MUX_VAL(CP(MCSPI1_CS0),		(IEN  | PTD | EN  | M0)) /*McSPI1_CS0*/\
-> > +	MUX_VAL(CP(MCSPI1_CS1),		(IDIS | PTD | EN  | M0)) /*McSPI1_CS1*/\
-> > +	MUX_VAL(CP(MCSPI1_CS2),		(IDIS | PTD | DIS | M4)) /*GPIO_176*/\
-> > ++>>>>>>> 6ca9da4d42aeb43df5ef29f7d0518009df583b2f
-> 
-> Is this a conflict marker?
+>  SRC_URI = "file://xorg.conf"
+>  
 
-It is. Needs to get removed.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-> > +@@ -507,9 +507,11 @@ unsigned char configure_mmc(mmc_card_data *mmc_card_cur)
-> > + unsigned long mmc_bread(int dev_num, unsigned long blknr, lbaint_t blkcnt,
-> > +			void *dst)
-> > + {
-> > ++  //printf("mmc_bread...\n");
-> > +	omap_mmc_read_sect(blknr, (blkcnt * MMCSD_SECTOR_SIZE), &cur_card_data,
-> > +				(unsigned long *) dst);
-> > +-	return 1;
-> > ++	//return 1;
-> > ++	return blkcnt;
-> 
-> Don't commit such changes (comments), remove them!
+iD8DBQFMGJ2PMkyGM64RGpERAjKFAJ9NYi/+KH6auz08uIcPNG7EjRuDigCeMtLA
+YWQr4pNuwjNXvJmExh6CRdg=
+=389Z
+-----END PGP SIGNATURE-----
 
-Yeah, I need to poke our low level team to also check if this is fixed in
-upstream u-boot.
-
-> > +diff --git a/lib_arm/board.c b/lib_arm/board.c
-> > +index e148739..f3c58ea 100644
-> > +--- a/lib_arm/board.c
-> > ++++ b/lib_arm/board.c
-> > +@@ -291,7 +291,6 @@ void start_armboot (void)
-> > +			hang ();
-> > +		}
-> > +	}
-> > +-
-> 
-> Are you sure about this change :-?
-
-Pretty sure, yes. ;)
-
-Will cleanup the patch a little and will send out it in the next version after
-some more comments.
-
-Thanks for your review.
-
-regards
-Stefan Schmidt
 
 
