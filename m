@@ -1,37 +1,41 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OOuK0-0000Ck-4I
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 17:14:41 +0200
-Received: from p5b0334c5.dip.t-dialin.net ([91.3.52.197] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OOuFb-0001Rh-Fw by authid <stefan@sostec.de> with cram_md5
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OOuOh-0001fA-IT for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 17:19:24 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OOuKO-0005uQ-6y for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 17:14:56 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 17:14:56 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 17:10:05 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OOuFa-0007uf-OB
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 17:09:58 +0200
-Date: Wed, 16 Jun 2010 17:09:58 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Wed, 16 Jun 2010 17:14:56 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100616150958.GC20969@excalibur.local>
-References: <1276625727-22991-1-git-send-email-stefan@datenfreihafen.org>
-	<1276625727-22991-2-git-send-email-stefan@datenfreihafen.org>
-	<hva6if$vtv$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <hva6if$vtv$1@dough.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 16 Jun 2010 17:14:39 +0200
+Message-ID: <hvapp0$9vs$1@dough.gmane.org>
+References: <1276625727-22991-1-git-send-email-stefan@datenfreihafen.org>	<1276625727-22991-2-git-send-email-stefan@datenfreihafen.org>	<hva6if$vtv$1@dough.gmane.org>
+	<20100616150958.GC20969@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <20100616150958.GC20969@excalibur.local>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH][STABLE 1/4] bug20/xorg.conf: update to use tslib driver for touchscreen input device.
@@ -48,28 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 15:14:41 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 Jun 2010 15:19:24 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-On Wed, 2010-06-16 at 11:46, Koen Kooi wrote:
+On 16-06-10 17:09, Stefan Schmidt wrote:
+> Hello.
 > 
-> On 15-06-10 20:15, Stefan Schmidt wrote:
-> > From: Ken Gilmer <ken@buglabs.net>
-> > 
-> > 
-> > Signed-off-by: Ken Gilmer <ken@buglabs.net>
-> > Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+> On Wed, 2010-06-16 at 11:46, Koen Kooi wrote:
+>>
+>> On 15-06-10 20:15, Stefan Schmidt wrote:
+>>> From: Ken Gilmer <ken@buglabs.net>
+>>>
+>>>
+>>> Signed-off-by: Ken Gilmer <ken@buglabs.net>
+>>> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+>>
+>> Acked-by: Koen Kooi <koen@openembedded.org>
 > 
-> Acked-by: Koen Kooi <koen@openembedded.org>
+> Just to make sure I understand the stable process correctly. As this patches
+> don't touch anything in the core system I'm fine apply them to stable myself
+> after fetching them with the ACK form patchwork, right?
 
-Just to make sure I understand the stable process correctly. As this patches
-don't touch anything in the core system I'm fine apply them to stable myself
-after fetching them with the ACK form patchwork, right?
+Not quite, you need 2 acks from maintainers of the stable branch (which
+I think includes Marcin, Denys and me).
+But given the low impact of these patches and the general stagnation of
+stable/2009, I think it's safe to apply these.
 
-regards
-Stefan Schmidt
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMGOpfMkyGM64RGpERApKsAJ9gkmjjGb9ugl/agc3lU78eqgUBpwCbBjFe
+6XU8hNhiXbmfEZyCHxSJvHg=
+=/M81
+-----END PGP SIGNATURE-----
+
 
 
