@@ -1,44 +1,58 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OOsoD-0007Uw-VO for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 15:37:38 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OOsju-0006xl-7Z for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 15:33:10 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 15:33:10 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <tux.jens@googlemail.com>) id 1OOt4r-0006OI-QM
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 15:54:50 +0200
+Received: by fxm18 with SMTP id 18so649984fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 15:33:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 16 Jun 2010 06:50:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=googlemail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:mail-followup-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:sender:user-agent;
+	bh=rkINhylEhLh0ecPH6gy81T+2hn6PlWq68tknERf2UOw=;
+	b=Gan6hZtGCcRLffe5BnejUpdbmYRvyUBc2TxLQQi/hWWZqfi9c7L32gofV+m1Hl40bi
+	L9ZYdOXmh1SFOru34DvER7AONqbM5RLNf6ZIYK4VEDDhQhe6gPqNfflFC5uC4u1ov91M
+	TmMkorXGTvUG2BawRWXwMXT4FN2/+I7v+Nq1Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
+	h=date:from:to:subject:message-id:mail-followup-to:references
+	:mime-version:content-type:content-disposition:in-reply-to:sender
+	:user-agent;
+	b=QCpzgK34bOcJjmp4SCN/RrJrkrqRDs708a6mziZFvTWEFSVowR1qKu56SLFDo4B230
+	aZSJrDlGjw+AIM/nFhOqKiFrjW4xwsSQDn90mR5sPYg02p17XXA39kxICdpoZMQ0PN+P
+	N2VQFLA5kd+CsXSdigo42cgQg6OJ33GvcyKbQ=
+Received: by 10.223.65.73 with SMTP id h9mr9165655fai.75.1276696220758;
+	Wed, 16 Jun 2010 06:50:20 -0700 (PDT)
+Received: from merkur.sol.de (p4FD70B46.dip0.t-ipconnect.de [79.215.11.70])
+	by mx.google.com with ESMTPS id o19sm12371271fal.23.2010.06.16.06.50.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 16 Jun 2010 06:50:19 -0700 (PDT)
+Received: from jens by merkur.sol.de with local (Exim 4.69)
+	(envelope-from <tux-master@web.de>) id 1OOsif-0000Ia-6a
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 15:31:53 +0200
+Date: Wed, 16 Jun 2010 15:31:53 +0200
+From: Jens Seidel <jensseidel@users.sf.net>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 16 Jun 2010 15:32:59 +0200
-Message-ID: <hvajqb$i26$1@dough.gmane.org>
-References: <E1OOdAL-0005Tc-Dn@melo.openembedded.org>
-	<hv9seb$ks1$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <hv9seb$ks1$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100616133150.GA1135@merkur.sol.de>
+Mail-Followup-To: openembedded-devel@lists.openembedded.org
+References: <201006161433.54486.schnitzeltony@gmx.de>
+	<20100616124248.GD31405@jama>
+	<201006161451.26478.schnitzeltony@gmx.de>
+MIME-Version: 1.0
+In-Reply-To: <201006161451.26478.schnitzeltony@gmx.de>
+Sender: Jens Seidel <tux.jens@googlemail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: tux.jens@googlemail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Khem Raj : gnu-config: Add recipe for git version.
+Subject: Re: xfce 4.6.2 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +66,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 13:37:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 16 Jun 2010 13:54:51 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Jun 16, 2010 at 02:51:26PM +0200, Andreas Mueller wrote:
+> diff --git a/recipes/xfce-base/exo-0.3.107/exo-0.3.107-iocharset.patch b/recipes/xfce-base/exo-0.3.107/exo-0.3.107-iocharset.patch
+> new file mode 100644
+> index 0000000..a667f11
+> --- /dev/null
+> +++ b/recipes/xfce-base/exo-0.3.107/exo-0.3.107-iocharset.patch
+> @@ -0,0 +1,79 @@
+> +diff --git a/exo-mount/exo-mount-hal.c b/exo-mount/exo-mount-hal.c
+> +index 791a536..4b130c3 100644
+> +--- a/exo-mount/exo-mount-hal.c
+> ++++ b/exo-mount/exo-mount-hal.c
+> +@@ -616,6 +618,30 @@ oom:  g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOMEM))
+> + 
+> + 
+> + /**
+> ++ * exo_mount_hal_iocharset:
+> ++ *
+> ++ * Determines the preferred iocharset for filesystems
+> ++ * that support it.
+> ++ *
+> ++ * Return value: iocharset string or %NULL if none.
+> ++ **/
+> ++static const gchar*
+> ++exo_mount_hal_iocharset ()
+> ++{
+> ++  const gchar* cs = g_getenv("EXO_MOUNT_IOCHARSET");
+> ++  if (cs != NULL)
+> ++    return cs;
+> ++
+> ++  const char* codeset = nl_langinfo (CODESET);
+> ++  if (codeset && !strcmp (codeset, "UTF-8"))
+> ++    return "utf8";
+> ++
+> ++  return NULL;
 
-On 16-06-10 08:54, Dmitry Eremin-Solenikov wrote:
-> git version control wrote:
-> 
->> Module: openembedded.git
->> Branch: org.openembedded.dev
->> Commit: 473cd5f616190739550abd8bf71629a87036730b URL:   
->> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=473cd5f616190739550abd8bf71629a87036730b
->>
->> Author: Khem Raj <raj.khem@gmail.com>
->> Date:   Tue Jun 15 13:52:40 2010 -0700
->>
->> gnu-config: Add recipe for git version.
->>
->> * Rename gnu-config to files folder.
->>
->> Signed-off-by: Khem Raj
->> <raj.khem@gmail.com>
-> 
-> Unless I have git-native in ASSUME-PROVIDED, this breaks builds with:
-> ERROR: Unbuildable tasks were found.
-> These are usually caused by circular dependencies and any circular dependency chains found will be printed below. Increase the debug level to see a list of unbuildable tasks.
+Should this be
+     return codeset;
+? Otherwise how to specify an encoding such as ISO-8859-1?
 
-I changed it to fetch a snapshot instead, dep loop gone. Hopefully Khem
-will learn from this and not but tons of stuff in ASSUME_PROVIDED on his
-machine anymore...
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce-utils_4.6.2.bb
+> @@ -0,0 +1,30 @@
+> +DESCRIPTION="XFCE4 Utilities"
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+XFCE4 or Xfce4?
 
-iD8DBQFMGNKKMkyGM64RGpERAhdpAKCZ168m2LEhxCKeztxTHfxJij4pqwCfRfnT
-UXL1IuquynfLR31RcQ6i5t8=
-=qmMV
------END PGP SIGNATURE-----
+Compare also other DESCRIPTIONS!
 
+> +++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop  Environment"
+
+two spaces
+
+Jens
 
 
