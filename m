@@ -1,34 +1,34 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OOpKI-0006F0-83 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 11:54:34 +0200
+	id 1OOpPE-0006Nv-FH for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 11:59:36 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OOpFz-0004EH-82 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 11:50:03 +0200
+	id 1OOpKp-0006Ag-Dw for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 11:55:03 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 11:50:03 +0200
+	Wed, 16 Jun 2010 11:55:03 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 11:50:03 +0200
+	Wed, 16 Jun 2010 11:55:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 16 Jun 2010 11:47:27 +0200
-Message-ID: <hva6jf$vtv$3@dough.gmane.org>
-References: <1276625727-22991-1-git-send-email-stefan@datenfreihafen.org>
-	<1276625727-22991-4-git-send-email-stefan@datenfreihafen.org>
+Date: Wed, 16 Jun 2010 11:49:00 +0200
+Message-ID: <hva6mc$vtv$4@dough.gmane.org>
+References: <4C187CF6.5010401@gmx.net> <hva2qe$jco$1@dough.gmane.org>
+	<20100616091709.GA20969@excalibur.local>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <1276625727-22991-4-git-send-email-stefan@datenfreihafen.org>
+In-Reply-To: <20100616091709.GA20969@excalibur.local>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][STABLE 3/4] netcat_0.7.1: Gettext is needed
+Subject: Re: [RFC] add ubuntu patch which adds atomic builtin support to gcc 4.3.[3 but also other microversions]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,50 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 09:54:34 -0000
+X-List-Received-Date: Wed, 16 Jun 2010 09:59:36 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 15-06-10 20:15, Stefan Schmidt wrote:
-> From: Stefan Schmidt <stefan@buglabs.net>
+On 16-06-10 11:17, Stefan Schmidt wrote:
+> Hello.
 > 
+> On Wed, 2010-06-16 at 10:42, Koen Kooi wrote:
+>>
+>> My second question: When is all that openjdk stuff you keep talking
+>> about ending up in OE? I know Henning keeps handwaving about it not
+>> being ready, but after after waiting a year, is it ever going to be
+>> deemed ready by the jalimo crew? Just merge it into OE now :)
 > 
-> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
-
-Acked-by: Koen Kooi <koen@openembedded.org>
-
-> ---
->  recipes/netcat/netcat_0.7.1.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
+> I can't speak for the jalimo crew but I can tell you that Tarent is currently
+> hired by BugLabs to bring in openjdk-6 and different other things to OE dev and
+> stable for our upcoming BugLabs stuff.
 > 
-> diff --git a/recipes/netcat/netcat_0.7.1.bb b/recipes/netcat/netcat_0.7.1.bb
-> index 7c4dfc5..918460b 100644
-> --- a/recipes/netcat/netcat_0.7.1.bb
-> +++ b/recipes/netcat/netcat_0.7.1.bb
-> @@ -2,11 +2,11 @@ DESCRIPTION = "GNU Netcat"
->  HOMEPAGE = "http://netcat.sourceforge.net"
->  SECTION = "console/network"
->  LICENSE = "GPLv2"
-> -PR = "r3"
-> +PR = "r4"
->  
->  SRC_URI = "${SOURCEFORGE_MIRROR}/netcat/netcat-${PV}.tar.bz2"
->  
-> -inherit autotools update-alternatives
-> +inherit autotools update-alternatives gettext
->  
->  do_install_append() {
->  	mv ${D}${bindir}/nc ${D}${bindir}/nc.${PN}
+> It seems to me that Robert is right now trying to bring in all the needed deps
+> for some parts. Talking LLVM, and therefor this patch, for JIT and others. If
+> nothing problematics happens we should have this stuff in dev (and hopefully
+> also stable) withing the next weeks.
 
+That's great news! I did beat nss from the jalimo repo into shape and
+pushed it into OE, but I couldn't get any other java bits to work,
+sadly. Henning said I was missing the magic java incantations in
+angstrom and after adding those I could build things like jamvm :)
+
+regards,
+
+Koen
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMGJ2vMkyGM64RGpERAnWzAKCeJxC2cHpPRhtznVC6eB6qya2K+QCguLPn
-aCmGWQ3K0JJugOU+18UhTso=
-=F7KA
+iD8DBQFMGJ4MMkyGM64RGpERAsk2AJ9fs3AgcT+B2XYy0rIk68fsItoJxwCfc7C1
+LeDL3aiZlMcXcYCPYcMHMw8=
+=3esD
 -----END PGP SIGNATURE-----
 
 
