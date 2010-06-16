@@ -1,40 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OOrmL-0001mB-Dm
+	(envelope-from <philip@balister.org>) id 1OOrn1-0001mw-Ek
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 14:31:37 +0200
-Received: by bwz14 with SMTP id 14so3418133bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 05:27:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=F1YzKPapK1amP3bF1iTL3SYjDxf3eaJd3cQ6BGkHpmc=;
-	b=SEk9PnoTDJho1e+Mo2wISdIJFLIe7PIwKp7O8/paHa0LChlxDxK4TgI9jzBf8T5Rj/
-	lAqcRCwv0l35HTaegTUbvkbyOMFixUhKQKW0C4Fwn9Tf1N5J3UqnZhsavm4SFKqxcGvx
-	++6AeC27Ayk2Cf1/CRYNbSebt3GFkvLouXhao=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=ACa5PLIgRQqmEZYWmlKNszyz1+LLE/JnOIulxdMOiKbTWF1iBPMzLE9+sEPqPsJjU5
-	uxB0Qq1cJFdWRdH9yw42YWQMUNO/mCbfhiM6SoyiSrYl8eRbaGQzx3TphNqiciqpCUnk
-	w/ci6df5T1ZtjsQwnovKytjJIS6dSA8dkjiwY=
+	Wed, 16 Jun 2010 14:32:20 +0200
+Received: (qmail 4623 invoked by uid 1003); 16 Jun 2010 12:27:47 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 16 Jun 2010 12:27:47 -0000
+Message-ID: <4C18C342.2010304@balister.org>
+Date: Wed, 16 Jun 2010 08:27:46 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.204.81.7 with SMTP id v7mr6507592bkk.140.1276691230236; Wed, 
-	16 Jun 2010 05:27:10 -0700 (PDT)
-Received: by 10.204.119.12 with HTTP; Wed, 16 Jun 2010 05:27:10 -0700 (PDT)
-Date: Wed, 16 Jun 2010 14:27:10 +0200
-Message-ID: <AANLkTilaBLTN8aWRUS6GRhvn-le5-fjK1nftuj_AQjw8@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <hva2uj$jco$2@dough.gmane.org>
+	<20100616095322.180eb9b5@xora-desktop.xora.org.uk>
+In-Reply-To: <20100616095322.180eb9b5@xora-desktop.xora.org.uk>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: image.bbclass IMAGE_DEVICE_TABLES issues
+Subject: Re: virtual/opkg-dev breaks task-sdk-native, please revert
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,62 +38,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 12:31:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 16 Jun 2010 12:32:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 06/16/2010 04:53 AM, Graeme Gregory wrote:
+> On Wed, 16 Jun 2010 10:45:07 +0200
+> Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> Hi,
+>>
+>> I noticed that
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=eeffe0a6eee97604679cf9a3cf40ed4604ae6493
+>> breaks lots of things:
+>>
+>> * a dependency loop in 'bitbake task-sdk-native'
+>> * using virtual/ namespace in packages instead of recipes.
+>>
+>> I propose to revert this change and just remove the ?pkg-dev from the
+>> sdk tasks.
+>>
+> virtual/ in package space is always wrong as it blows up on at least
+> one of our supported package types.
+>
+> Acked-by: Graeme Gregory<dp@xora.org.uk>
 
-I am having an issue or two with image.bbclass and especially the
-devtable section.
+Acked-by: Philip Balister <philip@balister.org>
 
-It concers the following part:
-
-# Get a list of files containing tables of devices to be created.
-# * IMAGE_DEVICE_TABLE is the old name to an absolute path to a device
-table file
-# * IMAGE_DEVICE_TABLES is a new name for a file, or list of files, searched
-#   for in the BBPATH
-# If neither are specified then the default name of
-files/device_table-minimal.txt
-# is searched for in the BBPATH (same as the old version.)
-#
-def get_devtable_list(d):
-    import bb
-    devtable = bb.data.getVar('IMAGE_DEVICE_TABLE', d, 1)
-    if devtable != None:
-        return devtable
-    devtables = bb.data.getVar('IMAGE_DEVICE_TABLES', d, 1)
-    if devtables == None:
-        devtables = 'files/device_table-minimal.txt'
-    return " ".join([ bb.which(bb.data.getVar('BBPATH', d, 1), devtable)
-                      for devtable in devtables.split() ])
-
-The issues I have are the following:
-1. if the file is not there an empty list is returned and used without
-any error being given.
-In case of the default name that is probably ok, but if there is an
-explicit IMAGE_DEVICE_TABLE or IMAGE_DEVICE_TABLES given and the file
-is not there I would qualify the situation as an error.
-Guess it would be very convenient to have an error message in that case.
-2. According to the comment for IMAGE_DEVICE_TABLES (and for the
-default name) the file is searched for in BBPATH. For me BBPATH points
-to an overlay dir with below it recipes/myimage/myimage.bb
-The code does join the names but (at least with my limited python
-knowledge) does not look into subdirs. This is experimentally
-verified.
-I feel it is more appropriate to have the device table near the bb
-file (e.g. in recipes/myimage/mydevicetable.txt)
-currently I have to either specify a path in IMAGE_DEVICE_TABLES
-(which I don't like because it makes the recipe dependent of the
-actual place in the tree, so it is not robust to moving it), or have
-the device table on the level of recipes (which I do not like either
-as it is not near the recipe).
-My suggestion would be to look in the dir of the recipe or in ${WORKDIR}
-
-What do people think about this?
-I'm not really a python wiz, so if someone can contribute a patch that
-would be greatly appreciated.
-
-Frans
+>
+> Graeme
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
