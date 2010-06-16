@@ -1,58 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tux.jens@googlemail.com>) id 1OOt4r-0006OI-QM
+	(envelope-from <Tom_Rini@mentor.com>) id 1OOtOu-00076P-7X
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 15:54:50 +0200
-Received: by fxm18 with SMTP id 18so649984fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 06:50:20 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:mail-followup-to:references:mime-version:content-type
-	:content-disposition:in-reply-to:sender:user-agent;
-	bh=rkINhylEhLh0ecPH6gy81T+2hn6PlWq68tknERf2UOw=;
-	b=Gan6hZtGCcRLffe5BnejUpdbmYRvyUBc2TxLQQi/hWWZqfi9c7L32gofV+m1Hl40bi
-	L9ZYdOXmh1SFOru34DvER7AONqbM5RLNf6ZIYK4VEDDhQhe6gPqNfflFC5uC4u1ov91M
-	TmMkorXGTvUG2BawRWXwMXT4FN2/+I7v+Nq1Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=date:from:to:subject:message-id:mail-followup-to:references
-	:mime-version:content-type:content-disposition:in-reply-to:sender
-	:user-agent;
-	b=QCpzgK34bOcJjmp4SCN/RrJrkrqRDs708a6mziZFvTWEFSVowR1qKu56SLFDo4B230
-	aZSJrDlGjw+AIM/nFhOqKiFrjW4xwsSQDn90mR5sPYg02p17XXA39kxICdpoZMQ0PN+P
-	N2VQFLA5kd+CsXSdigo42cgQg6OJ33GvcyKbQ=
-Received: by 10.223.65.73 with SMTP id h9mr9165655fai.75.1276696220758;
-	Wed, 16 Jun 2010 06:50:20 -0700 (PDT)
-Received: from merkur.sol.de (p4FD70B46.dip0.t-ipconnect.de [79.215.11.70])
-	by mx.google.com with ESMTPS id o19sm12371271fal.23.2010.06.16.06.50.19
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 16 Jun 2010 06:50:19 -0700 (PDT)
-Received: from jens by merkur.sol.de with local (Exim 4.69)
-	(envelope-from <tux-master@web.de>) id 1OOsif-0000Ia-6a
+	Wed, 16 Jun 2010 16:15:37 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OOtKX-00057W-QD from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 15:31:53 +0200
-Date: Wed, 16 Jun 2010 15:31:53 +0200
-From: Jens Seidel <jensseidel@users.sf.net>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100616133150.GA1135@merkur.sol.de>
-Mail-Followup-To: openembedded-devel@lists.openembedded.org
-References: <201006161433.54486.schnitzeltony@gmx.de>
-	<20100616124248.GD31405@jama>
-	<201006161451.26478.schnitzeltony@gmx.de>
+	Wed, 16 Jun 2010 07:11:01 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 16 Jun 2010 07:11:01 -0700
+Received: from [172.30.80.129] ([172.30.80.129]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 16 Jun 2010 08:11:00 -0600
+Message-ID: <4C18DB70.2060108@mentor.com>
+Date: Wed, 16 Jun 2010 07:10:56 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <201006161451.26478.schnitzeltony@gmx.de>
-Sender: Jens Seidel <tux.jens@googlemail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: tux.jens@googlemail.com
+To: openembedded-devel@lists.openembedded.org
+References: <hva2uj$jco$2@dough.gmane.org>	<20100616095322.180eb9b5@xora-desktop.xora.org.uk>
+	<4C18C342.2010304@balister.org>
+In-Reply-To: <4C18C342.2010304@balister.org>
+X-OriginalArrivalTime: 16 Jun 2010 14:11:00.0886 (UTC)
+	FILETIME=[BFA96360:01CB0D5D]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: xfce 4.6.2 recipes
+Subject: Re: virtual/opkg-dev breaks task-sdk-native, please revert
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -66,64 +48,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 13:54:51 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 16 Jun 2010 14:15:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 16, 2010 at 02:51:26PM +0200, Andreas Mueller wrote:
-> diff --git a/recipes/xfce-base/exo-0.3.107/exo-0.3.107-iocharset.patch b/recipes/xfce-base/exo-0.3.107/exo-0.3.107-iocharset.patch
-> new file mode 100644
-> index 0000000..a667f11
-> --- /dev/null
-> +++ b/recipes/xfce-base/exo-0.3.107/exo-0.3.107-iocharset.patch
-> @@ -0,0 +1,79 @@
-> +diff --git a/exo-mount/exo-mount-hal.c b/exo-mount/exo-mount-hal.c
-> +index 791a536..4b130c3 100644
-> +--- a/exo-mount/exo-mount-hal.c
-> ++++ b/exo-mount/exo-mount-hal.c
-> +@@ -616,6 +618,30 @@ oom:  g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOMEM))
-> + 
-> + 
-> + /**
-> ++ * exo_mount_hal_iocharset:
-> ++ *
-> ++ * Determines the preferred iocharset for filesystems
-> ++ * that support it.
-> ++ *
-> ++ * Return value: iocharset string or %NULL if none.
-> ++ **/
-> ++static const gchar*
-> ++exo_mount_hal_iocharset ()
-> ++{
-> ++  const gchar* cs = g_getenv("EXO_MOUNT_IOCHARSET");
-> ++  if (cs != NULL)
-> ++    return cs;
-> ++
-> ++  const char* codeset = nl_langinfo (CODESET);
-> ++  if (codeset && !strcmp (codeset, "UTF-8"))
-> ++    return "utf8";
-> ++
-> ++  return NULL;
+Philip Balister wrote:
+> On 06/16/2010 04:53 AM, Graeme Gregory wrote:
+>> On Wed, 16 Jun 2010 10:45:07 +0200
+>> Koen Kooi<k.kooi@student.utwente.nl>  wrote:
+>>
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> Hi,
+>>>
+>>> I noticed that
+>>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=eeffe0a6eee97604679cf9a3cf40ed4604ae6493 
+>>>
+>>> breaks lots of things:
+>>>
+>>> * a dependency loop in 'bitbake task-sdk-native'
+>>> * using virtual/ namespace in packages instead of recipes.
+>>>
+>>> I propose to revert this change and just remove the ?pkg-dev from the
+>>> sdk tasks.
+>>>
+>> virtual/ in package space is always wrong as it blows up on at least
+>> one of our supported package types.
+>>
+>> Acked-by: Graeme Gregory<dp@xora.org.uk>
+> 
+> Acked-by: Philip Balister <philip@balister.org>
 
-Should this be
-     return codeset;
-? Otherwise how to specify an encoding such as ISO-8859-1?
+I'd like to make a different request.  The answer is that it should have 
+been an RPROVIDES virtual-ipkg-dev like we do for other cases where we 
+need virtuals in a rootfs/etc.  So lets not revert, lets fix?
 
-> --- /dev/null
-> +++ b/recipes/xfce-base/xfce-utils_4.6.2.bb
-> @@ -0,0 +1,30 @@
-> +DESCRIPTION="XFCE4 Utilities"
-
-XFCE4 or Xfce4?
-
-Compare also other DESCRIPTIONS!
-
-> +++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
-> @@ -0,0 +1,22 @@
-> +DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop  Environment"
-
-two spaces
-
-Jens
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
