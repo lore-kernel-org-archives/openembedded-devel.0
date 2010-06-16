@@ -1,39 +1,43 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OOma7-00061R-00 for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 08:58:39 +0200
+	id 1OOmsU-0005P9-B9 for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 09:17:39 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OOmVm-0003ML-Kj for openembedded-devel@lists.openembedded.org;
-	Wed, 16 Jun 2010 08:54:10 +0200
-Received: from 91.213.169.4 ([91.213.169.4])
+	id 1OOmoA-0002Oe-Us for openembedded-devel@lists.openembedded.org;
+	Wed, 16 Jun 2010 09:13:10 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 08:54:10 +0200
-Received: from dbaryshkov by 91.213.169.4 with local (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 08:54:10 +0200
+	Wed, 16 Jun 2010 09:13:10 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 09:13:10 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 connect(): No such file or directory
-From: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-Date: Wed, 16 Jun 2010 06:54:03 +0000 (UTC)
-Message-ID: <hv9seb$ks1$1@dough.gmane.org>
-References: <E1OOdAL-0005Tc-Dn@melo.openembedded.org>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 16 Jun 2010 09:13:03 +0200
+Message-ID: <hv9thv$u7$1@dough.gmane.org>
+References: <4C17FB97.1080505@mentor.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: 91.213.169.4
-User-Agent: Pan/0.133 (House of Butterflies)
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <4C17FB97.1080505@mentor.com>
+X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_NUMERIC_HELO,SPF_HELO_PASS,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Khem Raj : gnu-config: Add recipe for git version.
+Subject: Re: perl-native, why again?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +51,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 16 Jun 2010 06:58:39 -0000
+X-List-Received-Date: Wed, 16 Jun 2010 07:17:39 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+Content-Transfer-Encoding: 7bit
 
-git version control wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 473cd5f616190739550abd8bf71629a87036730b URL:   
-> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=473cd5f616190739550abd8bf71629a87036730b
+On 16-06-10 00:15, Tom Rini wrote:
+> Hey all,
 > 
-> Author: Khem Raj <raj.khem@gmail.com>
-> Date:   Tue Jun 15 13:52:40 2010 -0700
+> I was wondering, is there a reason for perl native aside from cpan?  If
+> no, have we tried setting things up such that system perl uses a local
+> to $TMPDIR cpan install spot?
 > 
-> gnu-config: Add recipe for git version.
-> 
-> * Rename gnu-config to files folder.
-> 
-> Signed-off-by: Khem Raj
-> <raj.khem@gmail.com>
+> I ask since once perl-native exist, stuff can get very unfun (too long
+> #!/path/to/perl isn't fun at all).
 
-Unless I have git-native in ASSUME-PROVIDED, this breaks builds with:
-ERROR: Unbuildable tasks were found.
-These are usually caused by circular dependencies and any circular dependency chains found will be printed below. Increase the debug level to see a list of unbuildable tasks.
+You can only crosscompile $version of perl if your host is the same
+$version. You will get very strange bugs otherwise. That was for perl
+5.6 or something, dunno if perl and/or our recipes have improved since.
 
+regards,
 
--- 
-With best wishes
-Dmitry
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFMGHl+MkyGM64RGpERAuHwAJ9Qf5GMehbwV77J6FgzXtcfPJakKQCfXPtq
+RzS3M5uXziEONOj/ctt5QKw=
+=EgK8
+-----END PGP SIGNATURE-----
 
 
 
