@@ -1,29 +1,46 @@
-Received: from smtp209.alice.it ([82.57.200.105])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1OPNWi-00018c-BY
-	for openembedded-devel@openembedded.org; Fri, 18 Jun 2010 00:25:44 +0200
-Received: from jcn (79.2.147.76) by smtp209.alice.it (8.5.124.08)
-	id 4C1A275900089A50 for openembedded-devel@openembedded.org;
-	Fri, 18 Jun 2010 00:15:41 +0200
-Date: Fri, 18 Jun 2010 00:15:36 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	(envelope-from <raj.khem@gmail.com>) id 1OPNon-0006dZ-Fj
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Jun 2010 00:44:19 +0200
+Received: by pxi3 with SMTP id 3so199321pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 15:39:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=qOjGtASjr7umwX3SPPUOsj7/WnUUIAJMU6qdj4a6C34=;
+	b=Dd8/i+9zVyfhEhW1LrPulQWdnER/lqpzZaghXbF/8yf0MsATwMTHfzZeWiKuikNXMa
+	xGiUzj49yVdoQiLb1gw/FexjytAtCYEoz1hVPXcbRZO1BZtREjAqm6n4AF8yqLd796fe
+	5sGWJ+f2Oyn2yqRGFyZ78/bQTdJcq5dhD/lDw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=btDSejrel8S+0lAFB7jLQk1CIXzGAu+/jImjdPCL8ofeB5KXNYJBFuskAz0ITBzYdt
+	KyNNCxLT4A5r0THGh8yDVfSrDaGEULyWDIBGXZvyw/sN9ZSjITlnUvv7g0iejr/ovVkV
+	aULlYIe93qX6qHh4HUMeTjU8mjp7AKpt5DjgA=
+Received: by 10.143.25.30 with SMTP id c30mr117742wfj.240.1276814385929;
+	Thu, 17 Jun 2010 15:39:45 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id c22sm100490110wam.6.2010.06.17.15.39.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 17 Jun 2010 15:39:45 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100618001536.60bbc113.ospite@studenti.unina.it>
-X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 82.57.200.105
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Date: Thu, 17 Jun 2010 15:39:38 -0700
+Message-Id: <1276814379-13161-2-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1276814379-13161-1-git-send-email-raj.khem@gmail.com>
+References: <1276814379-13161-1-git-send-email-raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: meta-toolchain fails in do_populate_sdk
+Subject: [PATCH 2/3] busybox_1.15.3.bb: Work around the gcc 4.5 ICE on thumb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,51 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 22:25:45 -0000
-X-Groupsio-MsgNum: 20249
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra"
+X-List-Received-Date: Thu, 17 Jun 2010 22:44:19 -0000
 
---Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/busybox/busybox_1.15.3.bb |   10 +++++++++-
+ 1 files changed, 9 insertions(+), 1 deletions(-)
 
-Hi,
+diff --git a/recipes/busybox/busybox_1.15.3.bb b/recipes/busybox/busybox_1.15.3.bb
+index 07103e8..6f2e4ec 100644
+--- a/recipes/busybox/busybox_1.15.3.bb
++++ b/recipes/busybox/busybox_1.15.3.bb
+@@ -1,5 +1,5 @@
+ require busybox.inc
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ SRC_URI = "\
+   http://www.busybox.net/downloads/busybox-${PV}.tar.bz2;name=tarball \
+@@ -29,6 +29,14 @@ SRC_URI = "\
+ SRC_URI[tarball.md5sum] = "6059ac9456de6fb18dc8ee4cd0ec9240"
+ SRC_URI[tarball.sha256sum] = "d74020ad2cc5a4dcc5109c44dbd0e22582d6ce42954b0f1ff29763c8c0ff03cb"
+ 
++# gcc 4.5 has this bug on thumb
++# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=44557
++# so add -fomit-frame-pointer
++# this will be removed once the above bug is fixed.
++
++
++CFLAGS_append = " -fomit-frame-pointer"
++
+ EXTRA_OEMAKE += "V=1 ARCH=${TARGET_ARCH} CROSS_COMPILE=${TARGET_PREFIX}"
+ 
+ do_configure_prepend () {
+-- 
+1.7.1
 
-* check_data_file_clashes: Package gdb-cross-sdk wants to install file
-.../build/tmp/work/armv5te-oe-linux-gnueabi/meta-toolchain-1.0-r0/sdk/image=
-/usr/local/minimal/arm/share/info/dir
-But that file is already provided by package  * binutils-cross-sdk
 
-here's the full log:
-http://tinderbox.openembedded.org/builds/74560/
 
-Regards,
-   Antonio
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkwanogACgkQ5xr2akVTsAFnPgCfYZrUuxKakTtjH9YyGeUWjsbi
-30MAn2ZBQ+YUeDNvKDYuZbIYbhXy4jhN
-=UPLB
------END PGP SIGNATURE-----
-
---Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra--
