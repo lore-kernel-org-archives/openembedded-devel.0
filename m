@@ -1,53 +1,43 @@
-Received: from outbound-va3.frontbridge.com ([216.32.180.16]
-	helo=VA3EHSOBE010.bigfish.com)
+Received: from fg-out-1718.google.com ([72.14.220.156])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OP87M-0000VB-EE
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OP8w5-00052y-3x
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 07:58:25 +0200
-Received: from mail104-va3-R.bigfish.com (10.7.14.237) by
-	VA3EHSOBE010.bigfish.com (10.7.40.12) with Microsoft SMTP Server id
-	8.1.340.0; Thu, 17 Jun 2010 05:53:52 +0000
-Received: from mail104-va3 (localhost.localdomain [127.0.0.1])	by
-	mail104-va3-R.bigfish.com (Postfix) with ESMTP id A6399B98517	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 05:53:52 +0000 (UTC)
-X-SpamScore: -41
-X-BigFish: VPS-41(zz1432N98dN14ffO936eM1447R9371Pzz1202hzzz32i2a8h43h61h)
-Received: from mail104-va3 (localhost.localdomain [127.0.0.1]) by mail104-va3
-	(MessageSwitch) id 1276754032365945_5459;
-	Thu, 17 Jun 2010 05:53:52 +0000 (UTC)
-Received: from VA3EHSMHS016.bigfish.com (unknown [10.7.14.250])	by
-	mail104-va3.bigfish.com (Postfix) with ESMTP id 500688F804C	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 05:53:52 +0000 (UTC)
-Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
-	VA3EHSMHS016.bigfish.com (10.7.99.26) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Thu, 17 Jun 2010 05:53:51 +0000
-Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
-	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
-	Thu, 17 Jun 2010 11:23:48 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Jun 2010 11:20:29 +0530
-Thread-Topic: [oe] OpenEmbedded SDK
-Thread-Index: AcsN3/J2m7RDn/TRS7uwo6MezS0iXgAAQuXG
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFB0@KCINPUNHJCMS01.kpit.com>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CFAF@KCINPUNHJCMS01.kpit.com>,
-	<4C19B59F.70008@freyther.de>
-In-Reply-To: <4C19B59F.70008@freyther.de>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 17 Jun 2010 08:51:09 +0200
+Received: by fg-out-1718.google.com with SMTP id d23so1515352fga.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 16 Jun 2010 23:46:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=SmvvAIFCtjJvIAe5Hw3JuaLaFEss6vASCp3WtXwgpi8=;
+	b=qbki26TL1IqiA+41ZLYRwHSj3CWLz9TsIMnp0RNLPU78zlSMeozfVWGahPbBqxmDTw
+	Z7v8e627WVjlzG/Ul4zD9J6sokpzHyMXA776Li0UWF3pHYieYiQCPZm54fCeqYWvgitB
+	Xs5KEQEeuRr8MFKwnjvf3xZBmu2BqQcd2X23A=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=SDVz462XuyyMX4OjlJc/mf8zLsfi1dooBahHJHE0899syFgxRGIzssRHAsyQvOljM9
+	F+p5FNSnqIKeMH0FY7DFVda/5mZtQmDxcVX3SZipMnkPLlcRxIX1BtBlkmnOcMtnUiZq
+	RSl979ADtT3Fs/naM07QTugG9OA9NqVQWfIYw=
 MIME-Version: 1.0
-X-Reverse-DNS: unknown
-X-SA-Exim-Connect-IP: 216.32.180.16
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+Received: by 10.204.73.205 with SMTP id r13mr7394988bkj.35.1276757180972; Wed, 
+	16 Jun 2010 23:46:20 -0700 (PDT)
+Received: by 10.204.119.12 with HTTP; Wed, 16 Jun 2010 23:46:20 -0700 (PDT)
+In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFB0@KCINPUNHJCMS01.kpit.com>
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CFAF@KCINPUNHJCMS01.kpit.com>
+	<4C19B59F.70008@freyther.de>
+	<76E258664B189C4CBEF125491CA11ECC9445E0CFB0@KCINPUNHJCMS01.kpit.com>
+Date: Thu, 17 Jun 2010 08:46:20 +0200
+Message-ID: <AANLkTik6d7QY6uzMDZclGLC2lD8szm1iHmX4BGwwcoGI@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 72.14.220.156
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-4.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: OpenEmbedded SDK
@@ -64,60 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 05:58:25 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Thu, 17 Jun 2010 06:51:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-  =
-
-   Thanks for the reply.. I have created our own image for mipsel in openem=
-bedded..
-I know to write own machine ,distro and kernel compilation..SDK is new to m=
-e so can you =
-
-guide how can i start with that..
-
-Thanks & Regards,
-Soumya
-________________________________________
-From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
--bounces@lists.openembedded.org] On Behalf Of Holger Freyther [holger+oe@fr=
-eyther.de]
-Sent: Thursday, June 17, 2010 11:11 AM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] OpenEmbedded SDK
-
-On 06/17/2010 01:25 PM, Soumya R wrote:
-> Hi All,
+2010/6/17 Soumya R <Soumya.R@kpitcummins.com>:
+> Hi,
 >
->    I am new to this OpenEmbedded SDK.. I am using Ubuntu 10.4 for the hos=
-t machine
-> and mips DB1300 for the target.. Please send me some useful links which I=
- can follow
-> and start with openEmbedded SDK..
+> =A0 Thanks for the reply.. I have created our own image for mipsel in ope=
+nembedded..
+> I know to write own machine ,distro and kernel compilation..SDK is new to=
+ me so can you
+> guide how can i start with that..
 
-Hi,
+What about: http://tinyurl.com/37odza9
 
-what have you done so far? what information have you read so far? Have
-you seen the wiki? Have you seen docs.openembedded.org?
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Cummins Infosystems Ltd. It is intended only =
-for the person to whom it is addressed. If you are not the intended recipie=
-nt, you are not authorized to read, print, retain copy, disseminate, distri=
-bute, or use this message or any part thereof. If you receive this message =
-in error, please notify the sender immediately and delete all copies of thi=
-s message. KPIT Cummins Infosystems Ltd. does not accept any liability for =
-virus infected mails.
-
-
+FM
 
 
