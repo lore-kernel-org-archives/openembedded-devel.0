@@ -1,44 +1,43 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hvontres@gmail.com>) id 1OPIbe-0003a6-HA
+	(envelope-from <stefan@datenfreihafen.org>) id 1OPKJ2-0008CV-IZ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 19:10:34 +0200
-Received: by pwi8 with SMTP id 8so74337pwi.6
+	Thu, 17 Jun 2010 20:59:22 +0200
+Received: from p5b033b22.dip.t-dialin.net ([91.3.59.34] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OPKEf-0006kk-OZ by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 10:05:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=PvG4gUFdjdnSn7M371lnshwSWRN94fGmmz1XZO0K284=;
-	b=vFNQT27zztWpSclyKZ1KzvYCgcRVg/JGkkHGOzwgrBCUFosicFnahTnIt7YztyFogw
-	E39vkEetFHMTya7vtYdduVTyrhbol6l9qOQKimMM8ioj5H6mT+Gf1BYx+CD52VUpctdn
-	AQITLZeyEN1/J+u/uH9Z14J9nQKFLaP/mpI7g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=MfCoEKcAasW3baInxLcIfWrWPz3jlsRTAMPnThmO5QtGcJjix90uXS/bUyuVjDTgBD
-	aTPm+5o2DOFkwzICjwCNh+Y4vDTXEzpzTztLZFMvQkIn7BXGzGripsfbEIFns6ElRpPH
-	st9oPQeg0Dx8kxUOYWxXumUoScjumbo6O8BKU=
-MIME-Version: 1.0
-Received: by 10.229.97.5 with SMTP id j5mr5100519qcn.133.1276794347573; Thu, 
-	17 Jun 2010 10:05:47 -0700 (PDT)
-Received: by 10.229.224.129 with HTTP; Thu, 17 Jun 2010 10:05:47 -0700 (PDT)
-In-Reply-To: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
-References: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
-Date: Thu, 17 Jun 2010 10:05:47 -0700
-Message-ID: <AANLkTikfSbTGXqwIhfRrZgZ-vCd8ds7B_pK9Zn1kqzqz@mail.gmail.com>
-From: Hans Henry von Tresckow <hvontres@gmail.com>
+	Thu, 17 Jun 2010 20:54:48 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OPKEO-0002Qj-Ji
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Jun 2010 20:54:28 +0200
+Date: Thu, 17 Jun 2010 20:54:18 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: hvontres@gmail.com
+Message-ID: <20100617185418.GA8121@excalibur.local>
+References: <4C187CF6.5010401@gmx.net>
+	<20100616090200.5c23b895@xora-desktop.xora.org.uk>
+	<AANLkTilul0-HFnIkW2eJ7lTzZ7EMzq6qBzLYZhUVxyhZ@mail.gmail.com>
+	<20100616175640.4d7795ff@xora-desktop.xora.org.uk>
+	<AANLkTimFM0nCDuT-eMOJRvolhw06Q6uoHwmbnebIIFjL@mail.gmail.com>
+	<4C19CA2D.4@gmx.net>
+MIME-Version: 1.0
+In-Reply-To: <4C19CA2D.4@gmx.net>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC] purge recipes/linux-kexecboot and move to recipes/linux
+Subject: Re: [RFC] add ubuntu patch which adds atomic builtin support to gcc 4.3.[3 but also other microversions]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,36 +51,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 17:10:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Jun 2010 18:59:24 -0000
+X-Groupsio-MsgNum: 20241
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature"; boundary="KsGdsel6WgEHnImy"
+Content-Disposition: inline
 
-On Thu, Jun 17, 2010 at 5:24 AM, Andrea Adami <andrea.adami@gmail.com>wrote:
+--KsGdsel6WgEHnImy
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-> Hello,
->
-> I plan to move soon the kernel recipes of linux-kexecboot in the
-> standard recipes/linux location.
->
-> Being that the kernel directory is already overpopulated I was
-> thinking to remove some obsolete versions before moving the recipes.
-> I know that obsolete != unused, that's why I'm asking:
->
-> Who is using linux-kexecboot kernels?
-> Which machines apart some Zaurus are needing older 2.6.2x kernels?
->
-> If it's only about Zaurus I'd *only* keep an older version (still to
-> decide if 2.6.24 or 2.6.26) for a while and the latest 2.6.34.
->
-> Please make your comments.
->
-> Thanks
->
-> Andrea
->
-> Poodle still only works with 2.6.24. I would vote to keep that one and I'll
-try to get 2.6.34 working... at least it has early_printk :)
+Hello.
 
+On Thu, 2010-06-17 at 09:09, Robert Schuster wrote:
+>
+> first of all. As Stefan pointed out the change was needed while working
+> for Buglabs on OpenJDK support. So it was decided that the introduction
+> of the mentioned GCC change is handled by Stefan Schmidt now.
 
--- 
-Henry von Tresckow (hvontres)
+And this dude is on a vacation starting tomorrow. How perfect. :) I will be back
+at 27th and start to look into this. Testing with angstrom and catchup with
+discussions here.
 
+regards
+Stefan Schmidt
+
+--KsGdsel6WgEHnImy
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: Digital signature
+Content-Disposition: inline
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: http://www.datenfreihafen.org/contact.html
+
+iEYEARECAAYFAkwab1oACgkQbNSsvd31FmWIuQCeIhm40d4Sfv0MKVmJeBqD9NdC
+d2sAn27rKgJVc1UwWB1hciuRWm4aLljn
+=P0Pb
+-----END PGP SIGNATURE-----
+
+--KsGdsel6WgEHnImy--
