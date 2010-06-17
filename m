@@ -1,42 +1,51 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OPKZt-00069o-Ah
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OPKzS-0004sI-90
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 21:17:20 +0200
-Received: by iwn5 with SMTP id 5so197203iwn.6
+	Thu, 17 Jun 2010 21:43:07 +0200
+Received: by fxm18 with SMTP id 18so228639fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 12:12:12 -0700 (PDT)
+	Thu, 17 Jun 2010 12:38:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=SdeJdTrPlMNAfI5FK5/9SKcPg/G3nf1ROI68pkPI45E=;
-	b=AzqVblFA4s44OkQqoIWg+hWBziTOrdTI2Wwm8v60SJuVb969Fx7tzMKk/gVlohyO4D
-	DgBqrAC3je17KRDlZwb6YVxd69XJCl0NYlOR9UvDEQSe1DF3p4qPjswj/Eew36+wl9bL
-	vmCgN2NYwfbHGCoPU8GSChc/TS+/t3IXifgdw=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=ROrVxoJwpX2xVIHfex+RIBofQOAWtDdKxkYgQ6ofZy4=;
+	b=PTZUgbbhBabGcYZ63uxb2nW2XumSVhP+SzepaxXL+46QA3tH6ox2sDWyWk5COy/86F
+	tHDXQwTXfQjcb6l0m3GxTer9gVO66HqcY6rJq2XEKPe3AYk7ECoDdL2+dXMnOg9Dcmwb
+	vvwm+L/mfPKL4TI046k6vTJCkPIIr3Q+ERI8k=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=rse0uY/+2oZQvhsn2w1i2LEluKh17FpyNPq5PL8JYyUvHMZyisPYEiDVnvbJUV5SGC
-	eznwFWMc3+uJ1b62c1nF5U3fPQrOEy0dekfV4D37mReUXoHZvH0O2wD1kkoBhDzEAH6r
-	UTLf6e9bRU57xqHrBHYUBesaqjbFY9OxEsgt8=
-Received: by 10.231.124.5 with SMTP id s5mr11777583ibr.195.1276801932166; Thu, 
-	17 Jun 2010 12:12:12 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.17.130 with HTTP; Thu, 17 Jun 2010 12:11:52 -0700 (PDT)
-In-Reply-To: <AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com>
-References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com> 
-	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com> 
-	<AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com> 
-	<AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 17 Jun 2010 12:11:52 -0700
-Message-ID: <AANLkTikK720KNmNjRKr6x12-kSben4t42KlmgHsSGEpS@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=SABlpwZzKOrBGzBCSdBl9gpQfseNs6zXI45hDXx/SniwKMo10fA1JKf4JnGehofMnO
+	NA3qWeKCwQjRsgS8OXywDm7a5glqldz5OphKUQTbLxt9tuKYxTLFG9r9DpQfnpGegEXl
+	v5jWs5gXx3mOeFjxbkiy12zPBbubImXUl2bPY=
+Received: by 10.204.48.195 with SMTP id s3mr8175601bkf.195.1276803515742;
+	Thu, 17 Jun 2010 12:38:35 -0700 (PDT)
+Received: from s42.loc ([84.119.101.18])
+	by mx.google.com with ESMTPS id jx10sm1148814bkb.9.2010.06.17.12.38.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 17 Jun 2010 12:38:34 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.71)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OPKvG-0000rx-68; Thu, 17 Jun 2010 21:38:46 +0200
+Date: Thu, 17 Jun 2010 21:38:46 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100617193846.GC14941@mx.loc>
+References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com>
+	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com>
+	<AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com>
+	<AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com>
+	<AANLkTikK720KNmNjRKr6x12-kSben4t42KlmgHsSGEpS@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikK720KNmNjRKr6x12-kSben4t42KlmgHsSGEpS@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -54,30 +63,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 19:17:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Jun 2010 19:43:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Thu, Jun 17, 2010 at 5:39 AM, nikunj badjatya
-<nikunjbadjatya@gmail.com> wrote:
-> /home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-> do_populate_sysroot)
-> NOTE: Testing
-> /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
-> for relocatability
-> ERROR: Error in executing: /home/nikunj/ope/openembedded/recipes/coreutils/
-> coreutils-native_8.5.bb
-> ERROR: Exception:exceptions.OSError Message:[Errno 2] No such file or
-> directory
-> ERROR: Printing the environment of the function
-> ERROR: Error in executing: /home/nikunj/ope/openembedded/recipes/coreutils/
-> coreutils-native_8.5.bb
-> ERROR: Exception:exceptions.OSError Message:[Errno 2] No such file or
-> directory
-> ERROR: Printing the environment of the function
-> ERROR: Build of /home/nikunj/ope/openembedded/recipes/coreutils/
-> coreutils-native_8.5.bb do_populate_sysroot failed
+On Thu, Jun 17, 2010 at 12:11:52PM -0700, Khem Raj wrote:
+>On Thu, Jun 17, 2010 at 5:39 AM, nikunj badjatya
+><nikunjbadjatya@gmail.com> wrote:
+>> /home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
+>> do_populate_sysroot)
+>> NOTE: Testing
+>> /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
+>> for relocatability
 
-Does  /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
-exist ?
+>Does  /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
+>exist ?
+
+huh? How would that supposed to be ok?
+Looks like home is leaking into some prefix, no?
+We should have a sanity for that one i suppose..
+
+Feb 14 22:25:04 <me> does anybody else see /home in their staging dir or did i goof up somehow?
+Feb 14 22:26:24 <me> would be nice if sanity would yell at /root and /home in the staging dir..
+
+where /home == something in BBPATH, without looking into details.
 
 
