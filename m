@@ -1,32 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f201.google.com ([209.85.211.201])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OPEDn-0005XD-Hn
+	(envelope-from <andrea.adami@gmail.com>) id 1OPEJ7-0000X5-J0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 14:29:31 +0200
-Received: by gyg10 with SMTP id 10so5159065gyg.6
+	Thu, 17 Jun 2010 14:35:16 +0200
+Received: by ywh39 with SMTP id 39so5456279ywh.12
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 05:24:51 -0700 (PDT)
+	Thu, 17 Jun 2010 05:30:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=GQGuvXZhsVNytqbWqKj00yNoLVfW+dZ6yLOWA4cmrRI=;
-	b=jYTphNt+Fxfsv916AFolL+07AZjI6QhFB3NK9txopk5mDSXVwRgASWEUzsYUvFIDG1
-	2Ya2bJdDFdkseBZjqbrast6RDCNUu8EopEJj+v4SvQ4qzwqQb+ePWjdy1QMC3TfNE3ZA
-	96LwoJrfiz7IAWZ01PhLIeTvBzquTU2Uutpek=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=3zXHa5eSw15pVhrL02OM/uhGguGO6fj1ilOV4mcCD6c=;
+	b=Phh855wxdt07UXlCMpMZZwqvEHo1lOw96sHKaoK6c81ctqVV7RbMdcutDu7MI9sbp8
+	+/0RHqXncmDm6wb6IMXSFVdqa43IISg9XM3wCGvmzBCOZRaRjobrqiV7n5RHXLrc+KNp
+	P4HIh1P5FLsYi0xwsjbj2S0V4Vmt7eRtGhg3c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=SL2BSKjtTVOt6b60930fCkjX9R1eHUk8tBpDIPNFGmUVEyMah8wt40xjfKqqoGhXt1
-	F4vbdbsSgBpY94fRzOnLfuohE1hYJfI4U6BFDE1u4+q1RXOEnHmvvFbDquxQwxWUit/i
-	a8agpHl/7m8RVFAHqrM7XvDzVyrR7tON1mK9I=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=MlCUncrJzQrifuiIYbSt8ExvplV/sSVar6lFXF7g1yejYZFOvTxGnKpu92HuJIslvn
+	Si066xXdGki2AlQbSBFCLnHyEq54o8RBScIJao9o+LAXFzhh63V+Ll3C3w8E80zs+If6
+	LNHMoH8piuogL6o+E3/gJYby57koKE8Gi3BWI=
 MIME-Version: 1.0
-Received: by 10.101.210.31 with SMTP id m31mr8338676anq.205.1276777491171; 
-	Thu, 17 Jun 2010 05:24:51 -0700 (PDT)
-Received: by 10.100.194.6 with HTTP; Thu, 17 Jun 2010 05:24:51 -0700 (PDT)
-Date: Thu, 17 Jun 2010 14:24:51 +0200
-Message-ID: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+Received: by 10.101.132.36 with SMTP id j36mr8525895ann.128.1276777790430; 
+	Thu, 17 Jun 2010 05:29:50 -0700 (PDT)
+Received: by 10.100.194.6 with HTTP; Thu, 17 Jun 2010 05:29:50 -0700 (PDT)
+In-Reply-To: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+References: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+Date: Thu, 17 Jun 2010 14:29:50 +0200
+Message-ID: <AANLkTilVz61aIHqmbyJzeLziznigPLtObD48D-aFRAqm@mail.gmail.com>
 From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.211.201
 X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -34,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] purge recipes/linux-kexecboot and move to recipes/linux
+Subject: Re: [RFC] purge recipes/linux-kexecboot and move to recipes/linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +51,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 12:29:31 -0000
+X-List-Received-Date: Thu, 17 Jun 2010 12:35:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Hello,
+Well,
 
-I plan to move soon the kernel recipes of linux-kexecboot in the
-standard recipes/linux location.
+fwiw actually recipes are in recipes/kexecboot and not recipes/linux-kexecboot
 
-Being that the kernel directory is already overpopulated I was
-thinking to remove some obsolete versions before moving the recipes.
-I know that obsolete != unused, that's why I'm asking:
+if one ever needs to look at those ;)
 
-Who is using linux-kexecboot kernels?
-Which machines apart some Zaurus are needing older 2.6.2x kernels?
 
-If it's only about Zaurus I'd *only* keep an older version (still to
-decide if 2.6.24 or 2.6.26) for a while and the latest 2.6.34.
-
-Please make your comments.
-
-Thanks
-
+Sorry
 Andrea
 
 
