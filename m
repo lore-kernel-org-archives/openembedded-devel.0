@@ -1,36 +1,34 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OPEnr-0002xo-Hv
+	(envelope-from <sledz@dresearch.de>) id 1OPF3f-0002MJ-AV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 15:06:44 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o5HD240Y009598
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 17 Jun 2010 15:02:05 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1OPEjM-0000Qc-Mk; Thu, 17 Jun 2010 15:02:04 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <20100617121913.GA16207@rhein.zuhause.netz>
-Date: Thu, 17 Jun 2010 15:02:04 +0200
-In-Reply-To: <20100617121913.GA16207@rhein.zuhause.netz> (Henning Heinold's
-	message of "Thu, 17 Jun 2010 14:19:13 +0200")
-Message-ID: <lyvd9hhkxf.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Thu, 17 Jun 2010 15:23:14 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id D936449127F
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 15:18:30 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 17 Jun 2010 15:18:30 +0200
+Message-ID: <4C1A20CF.60302@dresearch.de>
+Date: Thu, 17 Jun 2010 15:19:11 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.9) Gecko/20100317 Lightning/1.0b1 Thunderbird/3.0.4
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+In-Reply-To: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+X-OriginalArrivalTime: 17 Jun 2010 13:18:30.0752 (UTC)
+	FILETIME=[9472D600:01CB0E1F]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Proposal to remove libattr recipe
+Subject: Re: [RFC] purge recipes/linux-kexecboot and move to recipes/linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,22 +42,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 13:06:45 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 17 Jun 2010 13:23:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Henning Heinold <heinold@inf.fu-berlin.de> writes:
+Am 17.06.2010 14:24, schrieb Andrea Adami:
+> Which machines apart some Zaurus are needing older 2.6.2x kernels?
+> 
+> If it's only about Zaurus I'd *only* keep an older version (still to
+> decide if 2.6.24 or 2.6.26) for a while and the latest 2.6.34.
 
-> the libattr from xfsprogs clashes with the attr recipe from udev and I
-> can find any recipe which uses libattr, besides libcap2 which could
-> use attr from udev too. So my proposal is to remove the libattr recipe
-> and switch libcap2 to use attr from udev.
+hipox needs 2.6.24. :(
 
-Because 'xfs' is upstream for attr + acl it would be probably better to
-do the opposite thing (remove these general libraries from udev/ and
-update the xfsprogs/ version).  Or, remove both versions and move the
-best one into toplevel /attr + /acl.
-
-
-Enrico
 
 
