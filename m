@@ -1,48 +1,29 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1OPMYB-00056Z-VB
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 23:23:04 +0200
-Received: by fxm18 with SMTP id 18so285555fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 14:18:33 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:subject:from:to:in-reply-to
-	:references:content-type:date:message-id:mime-version:x-mailer
-	:content-transfer-encoding;
-	bh=7/amIquFB9TuFCGBYBXBn16ooT9yQ10gMUbWGx0RKiU=;
-	b=tyJ9cgagLCDJVk+30cBeiUuQnLAp3t7wsRH/3uoRGpolTYh7ZGHnHTjnLdKkUBeRG6
-	Uee0kZ4ZSZKC/hHKTKlc6KTDzwsnlQm+bRnkx9XImVGzkyfOqJ1QxG6BvnGkBsPoEq6V
-	nGMVGJVL/HmQNU+X0fpu1JzP3TwiJ2Mu8ihoA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=subject:from:to:in-reply-to:references:content-type:date:message-id
-	:mime-version:x-mailer:content-transfer-encoding;
-	b=P7B2kQmtd9zP3DLImhzDS8OSnz2EgLyIVHv3zc0cwQxNjb3bT6TZ3+Yze+EXrCtjKO
-	jh0qG797IALxDiMqnzgC7SjouLW+o1w96p6uD4GVnEn1ok8KNH6EV2npcacizBgzQOQG
-	j6rzsxtNIjjbuEm94bEmGeyQetJu9dJxDvZ3w=
-Received: by 10.223.23.83 with SMTP id q19mr115908fab.12.1276809513495;
-	Thu, 17 Jun 2010 14:18:33 -0700 (PDT)
-Received: from [192.168.178.115] (85-127-149-22.dynamic.xdsl-line.inode.at
-	[85.127.149.22])
-	by mx.google.com with ESMTPS id n6sm12186644fam.31.2010.06.17.14.18.32
-	(version=SSLv3 cipher=RC4-MD5); Thu, 17 Jun 2010 14:18:32 -0700 (PDT)
-From: Michael Lippautz <michael.lippautz@gmail.com>
+	(envelope-from <ospite@studenti.unina.it>) id 1OPNWi-00018c-BY
+	for openembedded-devel@openembedded.org; Fri, 18 Jun 2010 00:25:44 +0200
+Received: from jcn (79.2.147.76) by smtp209.alice.it (8.5.124.08)
+	id 4C1A275900089A50 for openembedded-devel@openembedded.org;
+	Fri, 18 Jun 2010 00:15:41 +0200
+Date: Fri, 18 Jun 2010 00:15:36 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <89BAD49D-B779-4C20-BBC0-F220F8C440AA@keylevel.com>
-References: <89BAD49D-B779-4C20-BBC0-F220F8C440AA@keylevel.com>
-Date: Thu, 17 Jun 2010 23:19:27 +0200
-Message-ID: <1276809567.24867.5.camel@becca>
+Message-Id: <20100618001536.60bbc113.ospite@studenti.unina.it>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-SA-Exim-Connect-IP: 82.57.200.105
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: New user would like some help
+Subject: meta-toolchain fails in do_populate_sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,43 +37,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 21:23:04 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Jun 2010 22:25:45 -0000
+X-Groupsio-MsgNum: 20249
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra"
 
-Am Donnerstag, den 17.06.2010, 20:24 +0100 schrieb Chris Tapp:
-> I now want to add some other libraries to the image so that they will  
-> be available by default. I've tried to do this by adding IMAGE_INSTALL  
-> lines in to minimal-image.bb (I'll do this properly by making a copy  
-> soon!). e.g.
-> 
-> IMAGE_INSTALL = "task-boot \
-> 		libsdl-native \
-> <rest of file>
-> 
-> This appears to do something at build time, but libsdl is not in the  
-> image that's produced.
-> 
+--Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-1) libsdl instead of -native (-native packages are used for
-crosscompiling. OE installs some of them itself, while others are
-distro-requirements)
+Hi,
 
-2) To create your own image using the minimal-image:
-Create a new file openembedded/recipes/images/<your-image>.bb:
+* check_data_file_clashes: Package gdb-cross-sdk wants to install file
+.../build/tmp/work/armv5te-oe-linux-gnueabi/meta-toolchain-1.0-r0/sdk/image=
+/usr/local/minimal/arm/share/info/dir
+But that file is already provided by package  * binutils-cross-sdk
 
-require minimal-image.bb
-
-IMAGE_INSTALL += "libsdl \
-                  some-other-lib \
-"
-
-export IMAGE_BASENAME = "<your-image>"
-
-And build `bitbake your-image`
+here's the full log:
+http://tinderbox.openembedded.org/builds/74560/
 
 Regards,
-Michael
+   Antonio
 
+--=20
+Antonio Ospite
+http://ao2.it
 
+PGP public key ID: 0x4553B001
 
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkwanogACgkQ5xr2akVTsAFnPgCfYZrUuxKakTtjH9YyGeUWjsbi
+30MAn2ZBQ+YUeDNvKDYuZbIYbhXy4jhN
+=UPLB
+-----END PGP SIGNATURE-----
+
+--Signature=_Fri__18_Jun_2010_00_15_36_+0200_Pl3kuvgFP5a.p7Ra--
