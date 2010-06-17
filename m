@@ -1,29 +1,38 @@
-Received: from smtp209.alice.it ([82.57.200.105])
+Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1OPMFH-0003jW-KC
+	(envelope-from <dokuwiki@keylevel.com>) id 1OPMVC-0002bT-6a
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 23:03:34 +0200
-Received: from [192.168.10.100] (79.16.133.193) by smtp209.alice.it
-	(8.5.124.08) (authenticated as editempo)
-	id 4C1A27590007D447 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 22:59:01 +0200
-From: GNUtoo <GNUtoo@no-log.org>
+	Thu, 17 Jun 2010 23:19:58 +0200
+Received: from durham.keylevel.com ([109.224.134.115]:64459
+	helo=[192.168.1.98])
+	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
+	(envelope-from <dokuwiki@keylevel.com>) id 1OPMQr-0001VA-Nm
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Jun 2010 22:15:29 +0100
+Message-Id: <4683CECD-A3F3-47B6-B862-AB6D23CEEB48@keylevel.com>
+From: Chris Tapp <dokuwiki@keylevel.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTil99t7nC8GYAqysbXybTApi_2QF9lg7mWTXulHu@mail.gmail.com>
-References: <AANLkTil99t7nC8GYAqysbXybTApi_2QF9lg7mWTXulHu@mail.gmail.com>
-Date: Thu, 17 Jun 2010 22:58:58 +0200
-Message-ID: <1276808338.8592.0.camel@gnutoo-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 82.57.200.105
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+In-Reply-To: <1276807186.8606.1.camel@fred.uchi.de>
+Mime-Version: 1.0 (Apple Message framework v936)
+Date: Thu, 17 Jun 2010 22:15:27 +0100
+References: <89BAD49D-B779-4C20-BBC0-F220F8C440AA@keylevel.com>
+	<1276807186.8606.1.camel@fred.uchi.de>
+X-Mailer: Apple Mail (2.936)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - keylevel.com
+X-SA-Exim-Connect-IP: 80.254.228.43
+X-SA-Exim-Mail-From: dokuwiki@keylevel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00,RCVD_IN_SORBS_DUL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Building Angstrom for Beagleboard
+Subject: Re: New user would like some help
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 21:03:34 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 17 Jun 2010 21:19:58 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 2010-06-16 at 18:42 +0530, Raseel Bhagat wrote:
+On 17 Jun 2010, at 21:39, Joerg Eesmann wrote:
+
 > Hi,
-> 
-> I'm trying to build Angstrom from scratch for the BeagleBoard.
-> 
-> Now, I've already faced a lot of issues , local as well as related to the
-> build and managed to go past various stages in multiple attempt :-)
-> 
-> Currently, I am bitbaking nano and I see that more than 7 GB space is being
-> utilised and its been over an hour and the build  is still going on.
-> 
-> Can someone give me a ballpark figure on how much time and space will it
-> take to build a console-image ?
-The time it will take depends a lot on how fast is your machine.
+> try libsdl, nothing with the suffix -native.
+> The native-recipes are not cross-compiled, they will go to the staging
+> directory, I think.
 
-Denis.
+Thanks - that seems to have done the trick :-)
 
+Chris
 
 
 
