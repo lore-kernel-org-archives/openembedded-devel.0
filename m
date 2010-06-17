@@ -1,53 +1,32 @@
-Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
-	helo=TX2EHSOBE003.bigfish.com)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OP7gA-0000ld-6q
+	(envelope-from <holger+oe@freyther.de>) id 1OP7vk-0006du-CT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 07:30:19 +0200
-Received: from mail164-tx2-R.bigfish.com (10.9.14.250) by
-	TX2EHSOBE003.bigfish.com (10.9.40.23) with Microsoft SMTP Server id
-	8.1.340.0; Thu, 17 Jun 2010 05:25:47 +0000
-Received: from mail164-tx2 (localhost.localdomain [127.0.0.1])	by
-	mail164-tx2-R.bigfish.com (Postfix) with ESMTP id 039C85305F4	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 05:25:47 +0000 (UTC)
-X-SpamScore: -6
-X-BigFish: VPS-6(zz14ffOzz1202hzzz32i2a8h66h)
-Received: from mail164-tx2 (localhost.localdomain [127.0.0.1]) by mail164-tx2
-	(MessageSwitch) id 1276752346863486_2363;
-	Thu, 17 Jun 2010 05:25:46 +0000 (UTC)
-Received: from TX2EHSMHS001.bigfish.com (unknown [10.9.14.238])	by
-	mail164-tx2.bigfish.com (Postfix) with ESMTP id CFDD9182804E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 05:25:46 +0000 (UTC)
-Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
-	TX2EHSMHS001.bigfish.com (10.9.99.101) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Thu, 17 Jun 2010 05:25:44 +0000
-Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
-	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
-	Thu, 17 Jun 2010 10:55:33 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 17 Jun 2010 10:55:33 +0530
-Thread-Topic: OpenEmbedded SDK
-Thread-Index: AQHLDd2CL6QFbYcfyEq76ov2PqOu3Q==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFAF@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 17 Jun 2010 07:46:25 +0200
+Received: from [123.192.240.117] (123-192-240-117.dynamic.kbronet.com.tw
+	[123.192.240.117])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 7C6441B10C79
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 05:42:33 +0000 (UTC)
+Message-ID: <4C19B59F.70008@freyther.de>
+Date: Thu, 17 Jun 2010 13:41:51 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Lightning/1.0b1
+	Thunderbird/3.0.4
 MIME-Version: 1.0
-X-Reverse-DNS: Kcinpunhjhc01.Kpit.com
-X-SA-Exim-Connect-IP: 65.55.88.12
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+To: openembedded-devel@lists.openembedded.org
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CFAF@KCINPUNHJCMS01.kpit.com>
+In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFAF@KCINPUNHJCMS01.kpit.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OpenEmbedded SDK
+Subject: Re: OpenEmbedded SDK
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,34 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 05:30:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 17 Jun 2010 05:46:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hi All,
+On 06/17/2010 01:25 PM, Soumya R wrote:
+> Hi All,
+> 
+>    I am new to this OpenEmbedded SDK.. I am using Ubuntu 10.4 for the host machine
+> and mips DB1300 for the target.. Please send me some useful links which I can follow 
+> and start with openEmbedded SDK.. 
 
-   I am new to this OpenEmbedded SDK.. I am using Ubuntu 10.4 for the host =
-machine
-and mips DB1300 for the target.. Please send me some useful links which I c=
-an follow =
+Hi,
 
-and start with openEmbedded SDK.. =
-
-
-
-
-Thanks & Regards,
-Soumya
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Cummins Infosystems Ltd. It is intended only =
-for the person to whom it is addressed. If you are not the intended recipie=
-nt, you are not authorized to read, print, retain copy, disseminate, distri=
-bute, or use this message or any part thereof. If you receive this message =
-in error, please notify the sender immediately and delete all copies of thi=
-s message. KPIT Cummins Infosystems Ltd. does not accept any liability for =
-virus infected mails.
-
-
+what have you done so far? what information have you read so far? Have
+you seen the wiki? Have you seen docs.openembedded.org?
 
 
