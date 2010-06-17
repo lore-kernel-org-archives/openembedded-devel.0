@@ -1,46 +1,34 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nikunjbadjatya@gmail.com>) id 1OPESS-00051I-77
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OPEmM-0002vn-S0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 14:44:39 +0200
-Received: by gxk19 with SMTP id 19so1742744gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 05:40:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=5M47AP5cJ5WfKgxkX4VPCYMCSFRtWopScZABurrvcxM=;
-	b=NcKBLVG3Sbcd+gz1YA034RKPKzEBIjIv5xLNj8kpWxHdb9DylOmA6oJQxXccRj1XWT
-	Z9qzM5usMn+zidtz59vejteyU8XSs5zxeg6m91O8OXZdpNXDv1IddGszuqegKfZu5jrn
-	Z/ZTzuoo3GiHASjtmHq+1eV+Mm/TQrqYhgYYc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=NN0eS7aM755TQk2VdnttKK+5xVdPG2ZXE/5aAhom5o3vLvIY0f4wpdJ5CJRfPsbfQT
-	i+O8d+ACmMlz7Fa4xA9rmo/a7p7e/n09RBuWRAMlxhSqyxikhR3/7zgElrq60vqOaWpa
-	o+hJZec5D6zJp9IshsPJf8ICgCCurOW8HQkhE=
-Received: by 10.229.181.20 with SMTP id bw20mr4741498qcb.160.1276778405484; 
-	Thu, 17 Jun 2010 05:40:05 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.191.12 with HTTP; Thu, 17 Jun 2010 05:39:45 -0700 (PDT)
-In-Reply-To: <AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com>
-References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com> 
-	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com> 
-	<AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com>
-From: nikunj badjatya <nikunjbadjatya@gmail.com>
-Date: Thu, 17 Jun 2010 18:09:45 +0530
-Message-ID: <AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com>
+	Thu, 17 Jun 2010 15:05:26 +0200
+Received: (qmail invoked by alias); 17 Jun 2010 13:00:40 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp018) with SMTP; 17 Jun 2010 15:00:40 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/6hK4Jt2j6iFltrOxPJnjIzW883MG9uJFbYsx7t2
+	8vU5zdVXQ2DJ+v
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: nikunjbadjatya@gmail.com
+Date: Thu, 17 Jun 2010 14:58:29 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+References: <201006161433.54486.schnitzeltony@gmx.de>
+	<201006161451.26478.schnitzeltony@gmx.de>
+	<20100616133150.GA1135@merkur.sol.de>
+In-Reply-To: <20100616133150.GA1135@merkur.sol.de>
+MIME-Version: 1.0
+Message-Id: <201006171458.29759.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: OSError: [Errno 2] No such file or directory
+Subject: Re: xfce 4.6.2 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,194 +42,520 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 12:44:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 17 Jun 2010 13:05:26 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Khem,
-I have uncommented the required line.
-It gives me the following output.
+On Wednesday 16 June 2010 03:31:53 pm Jens Seidel wrote:
+> Should this be
+>      return codeset;
+> ? Otherwise how to specify an encoding such as ISO-8859-1?
 
-*$ bitbake -b coreutils-native_8.5.bb 2>&1 | tee
-../../daily-work/logs_17.06.10/coreutils-native.bb.log
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 1 of 17 (ID: 6,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_setscene)
-sh: stage-manager-ipkg: command not found
-NOTE: Running task 2 of 17 (ID: 5,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_fetch)
-NOTE: Running task 3 of 17 (ID: 0,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_unpack)
-NOTE: Unpacking ../../sources/coreutils-8.5.tar.gz to
-tmp/work/i686-linux/coreutils-native-8.5-r0/
-NOTE: Running task 4 of 17 (ID: 1,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_patch)
-NOTE: Running task 5 of 17 (ID: 7,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_configure)
-NOTE: Running task 6 of 17 (ID: 8,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_qa_configure)
-NOTE: Gettext required but not in DEPENDS for file
-/home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/coreutils-8.5/
-configure.ac.
-Missing inherit gettext?
-NOTE: Running task 7 of 17 (ID: 9,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_compile)
-NOTE: Running task 8 of 17 (ID: 2,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_install)
-NOTE: Running task 9 of 17 (ID: 12,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_package)
-NOTE: Running task 10 of 17 (ID: 16,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_package_write_ipk)
-NOTE: Running task 11 of 17 (ID: 11,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_package_write)
-NOTE: Running task 12 of 17 (ID: 3,
-/home/nikunj/ope/openembedded/recipes/coreutils/coreutils-native_8.5.bb,
-do_populate_sysroot)
-NOTE: Testing
-/home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
-for relocatability
-ERROR: Error in executing: /home/nikunj/ope/openembedded/recipes/coreutils/
-coreutils-native_8.5.bb
-ERROR: Exception:exceptions.OSError Message:[Errno 2] No such file or
-directory
-ERROR: Printing the environment of the function
-ERROR: Error in executing: /home/nikunj/ope/openembedded/recipes/coreutils/
-coreutils-native_8.5.bb
-ERROR: Exception:exceptions.OSError Message:[Errno 2] No such file or
-directory
-ERROR: Printing the environment of the function
-ERROR: Build of /home/nikunj/ope/openembedded/recipes/coreutils/
-coreutils-native_8.5.bb do_populate_sysroot failed
-Traceback (most recent call last):
-  File "/home/nikunj/ope/bitbake/bin/bitbake", line 143, in ?
-    main()
-  File "/home/nikunj/ope/bitbake/bin/bitbake", line 140, in main
-    cooker.cook()
-  File "/home/nikunj/ope/bitbake/lib/bb/cooker.py", line 608, in cook
-    if not self.buildFile(self.configuration.buildfile):
-  File "/home/nikunj/ope/bitbake/lib/bb/cooker.py", line 510, in buildFile
-    failures = rq.execute_runqueue()
-  File "/home/nikunj/ope/bitbake/lib/bb/runqueue.py", line 841, in
-execute_runqueue
-    self.execute_runqueue_internal()
-  File "/home/nikunj/ope/bitbake/lib/bb/runqueue.py", line 950, in
-execute_runqueue_internal
-    self.cooker.tryBuild(fn)
-  File "/home/nikunj/ope/bitbake/lib/bb/cooker.py", line 136, in tryBuild
-    return self.tryBuildPackage(fn, item, self.configuration.cmd, the_data)
-  File "/home/nikunj/ope/bitbake/lib/bb/cooker.py", line 110, in
-tryBuildPackage
-    bb.build.exec_task('do_%s' % task, the_data)
-  File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 283, in exec_task
-    exec_func(task, localdata)
-  File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 120, in exec_func
-    exec_func_python(func, d)
-  File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 141, in
-exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/home/nikunj/ope/bitbake/lib/bb/utils.py", line 185, in better_exec
-    exec code in context
-  File "do_populate_sysroot", line 49, in ?
-  File "do_populate_sysroot", line 42, in do_populate_sysroot
-  File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 120, in exec_func
-    exec_func_python(func, d)
-  File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 141, in
-exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/home/nikunj/ope/bitbake/lib/bb/utils.py", line 185, in better_exec
-    exec code in context
-  File "relocatable_binaries_preprocess", line 4, in ?
-  File "relocatable_binaries_preprocess", line 2, in
-relocatable_binaries_preprocess
-  File "<bb>", line 7, in rpath_replace
-  File "<bb>", line 35, in process_dir
-  File "/usr/lib/python2.4/subprocess.py", line 550, in __init__
-    errread, errwrite)
-  File "/usr/lib/python2.4/subprocess.py", line 993, in _execute_child
-    raise child_exception
-OSError: [Errno 2] No such file or directory
-ERROR: Task 3 (/home/nikunj/ope/openembedded/recipes/coreutils/
-coreutils-native_8.5.bb, do_populate_sysroot) failed
-NOTE: Tasks Summary: Attempted 11 tasks of which 0 didn't need to be rerun
-and 1 failed.
-ERROR: '/home/nikunj/ope/openembedded/recipes/coreutils/
-coreutils-native_8.5.bb' failed
-*
+As far as I understand http://bugzilla.xfce.org/show_bug.cgi?id=4294 , http://git.xfce.org/xfce/exo/plain/NEWS?h=xfce-4.6 and http://sisyphus.ru/srpm/Sisyphus/exo/patches/4 the related error 
+was already fixed in exo-0.3.103. So I removed this patch (either from 
 
--------------------------------------------------------------
-*$ rpm -qa \*gettext\**
-gettext-0.14.6-4.el5
+> XFCE4 or Xfce4?
+> 
+> Compare also other DESCRIPTIONS!
+> 
+see below
+
+> 
+> two spaces
+> 
+see below
 
 
-Kindly Kindly help.!
+And here we go again:
 
-Thanks,
-Nikunj
+diff --git a/recipes/xfce-base/exo-0.3.105/exo-0.3.105-iocharset.patch b/recipes/xfce-base/exo-0.3.105/exo-0.3.105-iocharset.patch
+deleted file mode 100644
+index a667f11..0000000
+--- a/recipes/xfce-base/exo-0.3.105/exo-0.3.105-iocharset.patch
++++ /dev/null
+@@ -1,79 +0,0 @@
+-diff --git a/exo-mount/exo-mount-hal.c b/exo-mount/exo-mount-hal.c
+-index 791a536..4b130c3 100644
+---- a/exo-mount/exo-mount-hal.c
+-+++ b/exo-mount/exo-mount-hal.c
+-@@ -34,6 +34,8 @@
+- #include <unistd.h>
+- #endif
+- 
+-+#include <langinfo.h>
+-+
+- #include <libhal-storage.h>
+- 
+- #include <exo-hal/exo-hal.h>
+-@@ -616,6 +618,30 @@ oom:  g_set_error (error, G_FILE_ERROR, G_FILE_ERROR_NOMEM, g_strerror (ENOMEM))
+- 
+- 
+- /**
+-+ * exo_mount_hal_iocharset:
+-+ *
+-+ * Determines the preferred iocharset for filesystems
+-+ * that support it.
+-+ *
+-+ * Return value: iocharset string or %NULL if none.
+-+ **/
+-+static const gchar*
+-+exo_mount_hal_iocharset ()
+-+{
+-+  const gchar* cs = g_getenv("EXO_MOUNT_IOCHARSET");
+-+  if (cs != NULL)
+-+    return cs;
+-+
+-+  const char* codeset = nl_langinfo (CODESET);
+-+  if (codeset && !strcmp (codeset, "UTF-8"))
+-+    return "utf8";
+-+
+-+  return NULL;
+-+}
+-+
+-+
+-+
+-+/**
+-  * exo_mount_hal_device_mount:
+-  * @device : an #ExoMountHalDevice.
+-  * @error  : return location for errors or %NULL.
+-@@ -676,6 +702,12 @@ exo_mount_hal_device_mount (ExoMountHalDevice *device,
+-               /* however this one is FreeBSD specific */
+-               options[n++] = g_strdup ("longnames");
+-             }
+-+          else if (strcmp (device->fsoptions[m], "iocharset=") == 0)
+-+            {
+-+              const gchar* iocharset = exo_mount_hal_iocharset();
+-+              if (iocharset != NULL)
+-+                options[n++] = g_strdup_printf ("iocharset=%s", iocharset);
+-+            }
+-         }
+-     }
+- 
+-diff --git a/exo-mount/main.c b/exo-mount/main.c
+-index 80eae1d..f442019 100644
+---- a/exo-mount/main.c
+-+++ b/exo-mount/main.c
+-@@ -39,6 +39,8 @@
+- #include <string.h>
+- #endif
+- 
+-+#include <locale.h>
+-+
+- #include <glib/gstdio.h>
+- 
+- #include <exo-hal/exo-hal.h>
+-@@ -97,6 +99,8 @@ main (int argc, char **argv)
+-   /* initialize the i18n support */
+-   xfce_textdomain (GETTEXT_PACKAGE, PACKAGE_LOCALE_DIR, "UTF-8");
+- 
+-+  setlocale(LC_CTYPE, "");
+-+
+-   /* initialize GTK+ */
+-   if (!gtk_init_with_args (&argc, &argv, "Xfce mount", entries, GETTEXT_PACKAGE, &err))
+-     {
+diff --git a/recipes/xfce-base/exo_0.3.105.bb b/recipes/xfce-base/exo_0.3.105.bb
+index eedbe10..aa3a89a 100644
+--- a/recipes/xfce-base/exo_0.3.105.bb
++++ b/recipes/xfce-base/exo_0.3.105.bb
+@@ -1,14 +1,13 @@
+-DESCRIPTION="XFCE extensions and framework library with session management support"
++DESCRIPTION="Xfce extensions and framework library with session management support"
+ DEPENDS = "libxfce4util hal liburi-perl-native python-native cairo"
+ SECTION = "x11"
+-PR = "r2"
++PR = "r3"
+ 
+ inherit xfce46 python-dir
+ 
+ XFCE_VERSION = "4.6.1"
+ 
+ SRC_URI += " \
+-    file://exo-0.3.105-iocharset.patch \
+     file://exo-no-tests.patch \
+     file://configure.patch \
+ "
+diff --git a/recipes/xfce-base/exo_0.3.107.bb b/recipes/xfce-base/exo_0.3.107.bb
+new file mode 100644
+index 0000000..41c2a58
+--- /dev/null
++++ b/recipes/xfce-base/exo_0.3.107.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION="Xfce extensions and framework library with session management support"
++DEPENDS = "libxfce4util hal liburi-perl-native python-native cairo"
++SECTION = "x11"
++PR = "r1"
++
++inherit xfce46 python-dir
++
++XFCE_VERSION = "4.6.2"
++
++SRC_URI += " \
++    file://exo-no-tests.patch \
++    file://configure.patch \
++"
++
++# Note: Python checking is broken
++do_configure_prepend() {
++	sed -i -e s:'`$PKG_CONFIG --variable=defsdir pygtk-2.0`':\"${STAGING_DATADIR}/pygtk/2.0/defs\":g ${S}/configure.in
++}
++
++FILES_${PN} += "${datadir}/xfce4/ \
++                ${PYTHON_SITEPACKAGES_DIR}/* \
++                ${prefix}/share/pygtk/2.0/defs/exo-0.3/exo.defs \
++"
++
++FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug/*"
++
++SRC_URI[md5sum] = "3a92cca0c99ee940db4410891c9e8498"
++SRC_URI[sha256sum] = "0a12ac124bad67c8de7135f7052641239ed640884a71612930f99c425bede2a3"
+diff --git a/recipes/xfce-base/libxfce4menu_4.6.2.bb b/recipes/xfce-base/libxfce4menu_4.6.2.bb
+new file mode 100644
+index 0000000..663944a
+--- /dev/null
++++ b/recipes/xfce-base/libxfce4menu_4.6.2.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION="a freedesktop.org compliant menu library for Xfce4"
++HOMEPAGE="http://www.xfce.org/projects/libraries"
++DEPENDS = "gettext pkgconfig libxfce4util intltool"
++RDEPENDS_${PN} = "gtk+ libxfce4util"
++
++LICENSE="LGPL-2 FDL-1.1"
++PR = "r0"
++
++inherit xfce46
++
++SRC_URI[md5sum] = "ff10cacb76803ee37159e3a43345f0d1"
++SRC_URI[sha256sum] = "62352be57318d6f241c4f6e4b6f9303d0b80246ea8f6e4753a962360a9965162"
+diff --git a/recipes/xfce-base/libxfce4util_4.6.2.bb b/recipes/xfce-base/libxfce4util_4.6.2.bb
+new file mode 100644
+index 0000000..67aba2e
+--- /dev/null
++++ b/recipes/xfce-base/libxfce4util_4.6.2.bb
+@@ -0,0 +1,18 @@
++# libxfce4util OE build file
++
++DESCRIPTION = "Basic utility library for Xfce4"
++SECTION = "x11/libs"
++LICENSE = "GPL"
++DEPENDS = "glib-2.0 xfce4-dev-tools "
++PR = "r0"
++
++inherit xfce46
++
++EXTRA_OECONF += "--disable-dependency-tracking --disable-static --with-broken-putenv=yes"
++
++MACROS="m4/X11.m4 m4/debug.m4 m4/depends.m4 m4/i18n.m4"
++
++FILES_${PN}-dev += " ${datadir}/xfce4/m4"
++
++SRC_URI[md5sum] = "9c3129d827d480f0906c575e7a13f1e9"
++SRC_URI[sha256sum] = "ae2e7ed1000bb0b3589643a39a65e6ab64c9ee198045e7b272604986f2e18c83"
+diff --git a/recipes/xfce-base/libxfcegui4_4.6.4.bb b/recipes/xfce-base/libxfcegui4_4.6.4.bb
+new file mode 100644
+index 0000000..255f482
+--- /dev/null
++++ b/recipes/xfce-base/libxfcegui4_4.6.4.bb
+@@ -0,0 +1,17 @@
++# libxfcegui4 OE build file
++
++DESCRIPTION = "Xfce4 Widget library and X Window System interaction"
++DEPENDS = "gettext pkgconfig intltool virtual/libx11 libxfce4util xfconf dbh libxml2 gtk+ libglade"
++RDEPENDS_${PN} = "xfconf startup-notification "
++
++SECTION = "x11/libs"
++PR = "r0"
++
++inherit xfce46
++
++LEAD_SONAME = "libxfcegui4.so.4"
++
++FILES_${PN} += "${libdir}/xfce4/modules ${libdir}/libglade/2.0/*.so ${datadir}/xfce4/mime ${datadir}/icons/hicolor"
++
++SRC_URI[md5sum] = "88de59b222cb9977f93a4c61011c1e1f"
++SRC_URI[sha256sum] = "c37e407dc00fb87dc16758d53e69edeac7b32aa76c5fcad2b784cf22f58af421"
+diff --git a/recipes/xfce-base/thunar_1.0.2.bb b/recipes/xfce-base/thunar_1.0.2.bb
+new file mode 100644
+index 0000000..d35c44d
+--- /dev/null
++++ b/recipes/xfce-base/thunar_1.0.2.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "File manager for the Xfce Desktop Environment"
++HOMEPAGE="http://thunar.xfce.org"
++DEPENDS = "exo dbus-glib libexif xfce4-panel libice libsm gamin"
++RDEPENDS_${PN} = "libxfcegui4 exo dbus-glib libexif xfce4-panel libice libsm gamin"
++RRECOMMENDS_${PN} = "shared-mime-info"
++SECTION = "x11"
++PR = "r0"
++
++inherit xfce46
++
++XFCE_VERSION = "4.6.2"
++
++SRC_URI = "http://www.us.xfce.org/archive/xfce-${XFCE_VERSION}/src/Thunar-${PV}.tar.bz2"
++
++S = "${WORKDIR}/Thunar-${PV}/"
++
++EXTRA_OECONF += "--disable-dependency-tracking --enable-dbus"
++
++FILES_${PN} += "${libdir}/thunarx-1/*.so \
++		${libdir}/thunarx-1/*.la \
++                ${datadir}/dbus-1 \
++                ${datadir}/thumbnailers \
++                ${datadir}/Thunar \
++                ${datadir}/xfce4"
++FILES_${PN}-dbg += "${libdir}/thunarx-1/.debug/ ${libexecdir}/xfce4/panel-plugins/.debug/"
++
++SRC_URI[md5sum] = "c91073202d373a1f9951a1240083c36d"
++SRC_URI[sha256sum] = "75829b34a68346b33f66882bedc9794d580c200d11af22541885750459b55c03"
+diff --git a/recipes/xfce-base/xfce-terminal_0.4.5.bb b/recipes/xfce-base/xfce-terminal_0.4.5.bb
+new file mode 100644
+index 0000000..2d5f94e
+--- /dev/null
++++ b/recipes/xfce-base/xfce-terminal_0.4.5.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Terminal emulator for the Xfce desktop environment"
++DEPENDS = "exo vte dbus-glib gtk+"
++RDEPENDS_${PN} += "gnome-pty-helper"
++PR = "r0"
++
++inherit xfce46
++
++SRC_URI = "http://www.xfce.org/archive/src/apps/terminal/0.4/Terminal-${PV}.tar.bz2 \
++"
++
++S = "${WORKDIR}/Terminal-${PV}"
++
++FILES_${PN} += "${datadir}/Terminal"
++
++SRC_URI[md5sum] = "3c707628e2e97c6d9566cd74d400036a"
++SRC_URI[sha256sum] = "92fddcbc1422076672d8ec61832793d4ceea2fc0db7d724a6acde0ec2bac8893"
+diff --git a/recipes/xfce-base/xfce-utils_4.6.2.bb b/recipes/xfce-base/xfce-utils_4.6.2.bb
+new file mode 100644
+index 0000000..08048c4
+--- /dev/null
++++ b/recipes/xfce-base/xfce-utils_4.6.2.bb
+@@ -0,0 +1,30 @@
++DESCRIPTION="Xfce4 Utilities"
++DEPENDS = "virtual/libx11 libxfcegui4"
++SECTION = "x11"
++PR = "r0"
++
++inherit xfce46
++
++FILES_${PN} += " \ 
++        ${bindir}/* \
++        ${datadir}/dbus-1/* \
++        ${datadir}/xfce4/AUTHORS \
++        ${datadir}/xfce4/BSD \
++        ${datadir}/xfce4/COPYING \
++        ${datadir}/xfce4/GPL \
++	${datadir}/xfce4/INFO* \
++        ${datadir}/xfce4/LGPL \
++        ${datadir}/xfce4/AUTHORS.html \
++        ${datadir}/xfce4/BSD.html \
++        ${datadir}/xfce4/COPYING.html \
++        ${datadir}/xfce4/GPL.html \
++	${datadir}/xfce4/INFO.html \
++        ${datadir}/xfce4/LGPL.html \
++        ${datadir}/xsessions/xfce.desktop \
++"
++
++# NOTE:  This package takes a --with-browser for the default browser
++# NOTE:  Works with gdm also gtkhtml
++
++SRC_URI[md5sum] = "5d23407700d7e8c9751e17a5bc955109"
++SRC_URI[sha256sum] = "54efc2038bfbd5acaadfc91ed91fb3dfd6cec64f9402f364accce7bcafe2ba7a"
+diff --git a/recipes/xfce-base/xfce4-appfinder_4.6.2.bb b/recipes/xfce-base/xfce4-appfinder_4.6.2.bb
+new file mode 100644
+index 0000000..a73383d
+--- /dev/null
++++ b/recipes/xfce-base/xfce4-appfinder_4.6.2.bb
+@@ -0,0 +1,11 @@
++# xfce4-appfinder build file
++
++DESCRIPTION="Xfce4 Application Finder"
++DEPENDS="libxfcegui4 libxfce4menu thunar"
++SECTION = "x11"
++PR = "r0"
++
++inherit xfce46
++
++SRC_URI[md5sum] = "7752e43578b821e35010bcd3762da166"
++SRC_URI[sha256sum] = "a1bf35b838922a7f81f588c727a6ef2f56b1bed0c46f7c36b209ac336f7e492a"
+diff --git a/recipes/xfce-base/xfce4-panel_4.6.4.bb b/recipes/xfce-base/xfce4-panel_4.6.4.bb
+new file mode 100644
+index 0000000..fe402b8
+--- /dev/null
++++ b/recipes/xfce-base/xfce4-panel_4.6.4.bb
+@@ -0,0 +1,30 @@
++# xfce4-panel OE build file
++
++DESCRIPTION = "Xfce4 Panel"
++DEPENDS = "virtual/libx11 startup-notification libxfcegui4 libxml2 exo libwnck"
++SECTION = "x11"
++PR = "r0"
++
++inherit xfce46
++
++SRC_URI[md5sum] = "82f10a42aefca4cc26a6633e7478cc65"
++SRC_URI[sha256sum] = "cc9b70bdc73ab80f46655a34cdbaf876a67cd90b50230cbf4d77a3106a5c54e7"
++
++EXTRA_OECONF += " --enable-startup-notification"
++
++do_install() {
++    oe_runmake DESTDIR=${D} install
++}
++
++python populate_packages_prepend() {
++	plugin_dir = bb.data.expand('${libdir}/xfce4/panel-plugins/', d)
++	plugin_name = bb.data.expand('${PN}-plugin-%s', d)
++	do_split_packages(d, plugin_dir, '^lib(.*).so$', plugin_name,
++	                  '${PN} plugin for %s', extra_depends='', prepend=True,
++	                  aux_files_pattern=['${datadir}/xfce4/panel-plugins/%s.desktop',
++	                                     '${sysconfdir}/xdg/xfce/panel/%s-*',
++	                                     '${datadir}/icons/hicolor/48x48/apps/*-%s.png',
++	                                     '${bindir}/*%s*'])
++}
++
++PACKAGES_DYNAMIC = "${PN}-plugin-*"
+diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-base/xfce4-session_4.6.2.bb
+new file mode 100644
+index 0000000..c85bb8c
+--- /dev/null
++++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
+@@ -0,0 +1,22 @@
++DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop Environment"
++DEPENDS = "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
++SECTION = "x11"
++
++PR = "r0"
++
++inherit xfce46
++
++RDEPENDS_${PN} = "iceauth xfce-utils xinit dbus-x11"
++
++FILES_${PN} += "${libdir}/xfce4/splash/engines/*.so"
++FILES_${PN} += "${datadir}/xfce4/tips/*"
++FILES_${PN} += "${datadir}/themes/Default/balou/*"
++
++FILES_${PN}-dbg += "${libdir}/xfce4/splash/engines/.debug/*.so"
++FILES_${PN}-dbg += "${libdir}/xfce4/splash/engines/.debug/*.a"
++
++FILES_${PN}-dev += "${libdir}/xfce4/splash/engines/*.la"
++FILES_${PN}-dev += "${libdir}/xfce4/splash/engines/*.a"
++
++SRC_URI[md5sum] = "9d9890130e45e0e9476591ed9ba2c9d5"
++SRC_URI[sha256sum] = "725e269254c34c530acb670f5ccd0fd69b57cbe9f2176abd8499fc5d6dcd30a8"
+diff --git a/recipes/xfce-base/xfce4-settings_4.6.5.bb b/recipes/xfce-base/xfce4-settings_4.6.5.bb
+new file mode 100644
+index 0000000..65e4869
+--- /dev/null
++++ b/recipes/xfce-base/xfce4-settings_4.6.5.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Xfce4 settings"
++HOMEPAGE = "http://www.xfce.org"
++SECTION = "x11/wm"
++LICENSE = "GPL-2"
++
++DEPENDS = "virtual/libx11 virtual/xserver libxi libwnck xrandr exo libxfce4util libxfcegui4"
++
++PR = "r0"
++
++inherit xfce46
++
++SRC_URI[md5sum] = "f988cb732913b5fbc115ad7105d2231e"
++SRC_URI[sha256sum] = "1601b8d2cac5d931c39bed7e331c5bd91018d0e56663295e7a083a2c78fe168b"
++
++RDEPENDS_${PN} = "xfconf exo"
++
+diff --git a/recipes/xfce-base/xfconf_4.6.2.bb b/recipes/xfce-base/xfconf_4.6.2.bb
+new file mode 100644
+index 0000000..3db4c91
+--- /dev/null
++++ b/recipes/xfce-base/xfconf_4.6.2.bb
+@@ -0,0 +1,16 @@
++DESCRIPTION = "Xfce configuration daemon and utilities"
++HOMEPAGE = "http://www.xfce.org"
++SECTION = "x11/wm"
++LICENSE = "GPL-2"
++
++DEPENDS = "libxfce4util"
++RDEPENDS_${PN} = "libxfce4util"
++
++PR = "r0"
++
++inherit xfce46
++
++FILES_${PN} += "${datadir}/dbus-1/services/org.xfce.Xfconf.service"
++
++SRC_URI[md5sum] = "5ff93c15077c6dbbcd38c437bc1ab2ef"
++SRC_URI[sha256sum] = "7b2635abc33ae6a76145238ed27557bc1ff91b1a5ee0757962f798a66d56f478"
+diff --git a/recipes/xfce-base/xfdesktop_4.6.2.bb b/recipes/xfce-base/xfdesktop_4.6.2.bb
+new file mode 100644
+index 0000000..c3a3bca
+--- /dev/null
++++ b/recipes/xfce-base/xfdesktop_4.6.2.bb
+@@ -0,0 +1,21 @@
++DESCRIPTION = "Xfce4 Desktop Manager"
++SECTION = "x11/base"
++
++DEPENDS = "virtual/libx11 exo libxfcegui4 xfce4-panel thunar gtk+"
++RDEPENDS_${PN} = "libxfcegui4 libxml2 xfce4-panel thunar exo gtk+"
++PR = "r0"
++
++inherit xfce46
++
++do_configure() { 
++   oe_runconf
++}
++
++FILES_xfdesktop-backdrops = "${datadir}/xfce4/backdrops/*"
++FILES_${PN} += "${libdir}/xfce4/panel-plugins/*.so \
++                ${libdir}/xfce4/panel-plugins/xfce4-menu-plugin \
++                ${datadir}/xfce4/panel-plugins/*.desktop"
++FILES_${PN}-dbg += "${libexecdir}/xfce4/panel-plugins/.debug"
++
++SRC_URI[md5sum] = "e800ea9fee7a5c5eaf2ae96e23a83e3a"
++SRC_URI[sha256sum] = "cd760f95486ba3f1c6d0179bb10a4c21c99c1d459dd8265823fed85f7376a3fb"
+diff --git a/recipes/xfce-base/xfwm4_4.6.2.bb b/recipes/xfce-base/xfwm4_4.6.2.bb
+new file mode 100644
+index 0000000..3ea7f52
+--- /dev/null
++++ b/recipes/xfce-base/xfwm4_4.6.2.bb
+@@ -0,0 +1,31 @@
++# xfwm4 OE build file
++
++DESCRIPTION="Xfce4 Window Manager"
++SECTION = "x11/wm"
++PR = "r0"
++
++inherit xfce46 update-alternatives
++
++FILES_${PN} += "${datadir}/xfwm4/defaults ${datadir}/xfwm4/themes/default.keys/*"
++
++DEPENDS = "startup-notification virtual/libx11 libxpm libxfce4util libxfcegui4"
++RDEPENDS_${PN} = "xfwm4-theme-default"
++
++EXTRA_OECONF += " --enable-startup-notification"
++
++PACKAGES_DYNAMIC += "xfwm4-theme-*"
++
++python populate_packages_prepend () {
++	themedir = bb.data.expand('${datadir}/themes', d)
++	do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4 theme %s', allow_dirs=True)
++}
++
++ALTERNATIVE_NAME = "x-window-manager"
++ALTERNATIVE_LINK = "${bindir}/x-window-manager"
++ALTERNATIVE_PATH = "${bindir}/xfce4-session"
++ALTERNATIVE_PRIORITY = "30"
++
++FILES_${PN}-dbg += "${libexecdir}/xfce4/xfwm4/.debug/*"
++
++SRC_URI[md5sum] = "3e6c0c54b028b6ea60e865e55ecdf3f8"
++SRC_URI[sha256sum] = "212819ee03c24635f79d50930284c422469e22489952d0b286e6fe5af2155828"
 
 
-
-On Tue, Jun 15, 2010 at 8:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Mon, Jun 14, 2010 at 7:12 AM, nikunj badjatya
-> <nikunjbadjatya@gmail.com> wrote:
-> >  File "/home/nikunj/ope/bitbake/lib/bb/build.py", line 141, in
-> > exec_func_python
-> >    utils.better_exec(comp, g, tmp, bbfile)
-> >  File "/home/nikunj/ope/bitbake/lib/bb/utils.py", line 185, in
-> better_exec
-> >    exec code in context
-> >  File "relocatable_binaries_preprocess", line 4, in <module>
-> >  File "relocatable_binaries_preprocess", line 2, in
-> > relocatable_binaries_preprocess
-> >  File "<bb>", line 7, in rpath_replace
-> >  File "<bb>", line 35, in process_dir
-> >  File "/opt/python2.6/lib/python2.6/subprocess.py", line 633, in __init__
-> >    errread, errwrite)
-> >  File "/opt/python2.6/lib/python2.6/subprocess.py", line 1139, in
-> > _execute_child
-> >    raise child_exception
-> > OSError: [Errno 2] No such file or directory
-> > ERROR: Task 100 (/home/nikunj/ope/openembedded/recipes/coreutils/
-> > coreutils-native_8.5.bb, do_populate_sysroot) failed
-> > NOTE: Tasks Summary: Attempted 20 tasks of which 0 didn't need to be
-> rerun
-> > and 1 failed.
-> > ERROR: '/home/nikunj/ope/openembedded/recipes/coreutils/
-> > coreutils-native_8.5.bb' failed
-> >
->
-> It dies in process_dir while trying to do os.access I think. my guess
-> is that you are
-> passing it host paths like /usr/lib /lib etc which are under root
-> permissions and can
-> not be modified by normal user.
->
-> You have to debug it. uncomment the
->
-> #bb.note("Testing %s for relocatability" % fpath)
->
-> in classes/relocatable.bbclass line 28
->
-> and check what paths are passed to it when you do
->
-> bitbake -b coreutils-native_8.5.bb
->
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
