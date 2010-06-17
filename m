@@ -1,41 +1,40 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OPE8H-0002iJ-7L
+	(envelope-from <andrea.adami@gmail.com>) id 1OPEDn-0005XD-Hn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 14:23:46 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id E22DD110009E
+	Thu, 17 Jun 2010 14:29:31 +0200
+Received: by gyg10 with SMTP id 10so5159065gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 14:19:16 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 1B3F3110009B
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 14:19:15 +0200 (CEST)
-Received: from rhein.familie-heinold.de (g225005141.adsl.alicedsl.de
-	[92.225.5.141]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 14:19:15 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id EC2A73C134; Thu, 17 Jun 2010 14:19:13 +0200 (CEST)
-Date: Thu, 17 Jun 2010 14:19:13 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100617121913.GA16207@rhein.zuhause.netz>
+	Thu, 17 Jun 2010 05:24:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=GQGuvXZhsVNytqbWqKj00yNoLVfW+dZ6yLOWA4cmrRI=;
+	b=jYTphNt+Fxfsv916AFolL+07AZjI6QhFB3NK9txopk5mDSXVwRgASWEUzsYUvFIDG1
+	2Ya2bJdDFdkseBZjqbrast6RDCNUu8EopEJj+v4SvQ4qzwqQb+ePWjdy1QMC3TfNE3ZA
+	96LwoJrfiz7IAWZ01PhLIeTvBzquTU2Uutpek=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=SL2BSKjtTVOt6b60930fCkjX9R1eHUk8tBpDIPNFGmUVEyMah8wt40xjfKqqoGhXt1
+	F4vbdbsSgBpY94fRzOnLfuohE1hYJfI4U6BFDE1u4+q1RXOEnHmvvFbDquxQwxWUit/i
+	a8agpHl/7m8RVFAHqrM7XvDzVyrR7tON1mK9I=
 MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Received: by 10.101.210.31 with SMTP id m31mr8338676anq.205.1276777491171; 
+	Thu, 17 Jun 2010 05:24:51 -0700 (PDT)
+Received: by 10.100.194.6 with HTTP; Thu, 17 Jun 2010 05:24:51 -0700 (PDT)
+Date: Thu, 17 Jun 2010 14:24:51 +0200
+Message-ID: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Proposal to remove libattr recipe
+Subject: [RFC] purge recipes/linux-kexecboot and move to recipes/linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,121 +48,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 12:23:46 -0000
-X-Groupsio-MsgNum: 20228
-Content-Type: multipart/mixed; boundary="7JfCtLOvnd9MIVvH"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 17 Jun 2010 12:29:31 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---7JfCtLOvnd9MIVvH
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+Hello,
 
-Hi,
+I plan to move soon the kernel recipes of linux-kexecboot in the
+standard recipes/linux location.
 
-the libattr from xfsprogs clashes with the attr recipe from udev and I can
-find any recipe which uses libattr, besides libcap2 which could use attr
-from udev too. So my proposal is to remove the libattr recipe and switch
-libcap2 to use attr from udev. Attached are the two patches, to do it.
+Being that the kernel directory is already overpopulated I was
+thinking to remove some obsolete versions before moving the recipes.
+I know that obsolete != unused, that's why I'm asking:
 
-I would like to see some ack's.
+Who is using linux-kexecboot kernels?
+Which machines apart some Zaurus are needing older 2.6.2x kernels?
 
-Bye Henning
+If it's only about Zaurus I'd *only* keep an older version (still to
+decide if 2.6.24 or 2.6.26) for a while and the latest 2.6.34.
 
---7JfCtLOvnd9MIVvH
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="libattr.patch"
+Please make your comments.
 
-From cd0071c89450f81df538107350065036b00f68a9 Mon Sep 17 00:00:00 2001
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-Date: Thu, 17 Jun 2010 10:24:01 +0200
-Subject: [PATCH 2/2] libattr: remove libattr because it is clashing with attr from udev and not used by anyother recipe
+Thanks
 
----
- recipes/xfsprogs/libattr_2.4.43.bb |   30 ------------------------------
- 1 files changed, 0 insertions(+), 30 deletions(-)
- delete mode 100644 recipes/xfsprogs/libattr_2.4.43.bb
-
-diff --git a/recipes/xfsprogs/libattr_2.4.43.bb b/recipes/xfsprogs/libattr_2.4.43.bb
-deleted file mode 100644
-index cf846cc..0000000
---- a/recipes/xfsprogs/libattr_2.4.43.bb
-+++ /dev/null
-@@ -1,30 +0,0 @@
--DESCRIPTION = "library functions to get attribute bits"
--HOMEPAGE = "http://oss.sgi.com/projects/xfs"
--LICENSE = "GPL"
--SECTION = "base"
--PR = "r0"
--DEPENDS = "gettext"
--
--SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/attr_${PV}-1.tar.gz"
--S = "${WORKDIR}/attr-${PV}"
--
--PARALLEL_MAKE = ""
--inherit autotools
--EXTRA_OECONF = "--enable-gettext=no --enable-shared=yes"
--
--do_configure () {
--	export LIBTOOL="${STAGING_BINDIR_NATIVE}/${HOST_SYS}-libtool"
--	export DEBUG="-DNDEBUG"
--	oe_runconf
--}
--
--do_install () {
--	export DIST_ROOT=${D}
--	oe_runmake install
--	oe_libinstall -a libattr ${D}${libdir}
--	oe_libinstall -a libattr ${STAGING_LIBDIR}
--}
--
--
--SRC_URI[md5sum] = "91583a14bcbd637adaa9b07ea49c5d4b"
--SRC_URI[sha256sum] = "d358b233b3e2ad235e63fd8697e337006fc7506844e424b0d9dd7a24affec5bf"
--- 
-1.7.1
+Andrea
 
 
---7JfCtLOvnd9MIVvH
-Content-Type: text/x-diff; charset=us-ascii
-Content-Disposition: attachment; filename="libcap2.patch"
-
-From cbccc349878874c876958ca65b1cdbcb2176c0db Mon Sep 17 00:00:00 2001
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-Date: Thu, 17 Jun 2010 10:16:56 +0200
-Subject: [PATCH 1/2] libcap2: use attr instead of libattr as dependency, fixes systemd
-
-* convert to new staging system, by removing do_stage
----
- recipes/libcap/libcap2_2.16.bb |    8 +-------
- 1 files changed, 1 insertions(+), 7 deletions(-)
-
-diff --git a/recipes/libcap/libcap2_2.16.bb b/recipes/libcap/libcap2_2.16.bb
-index ebcb981..947811b 100644
---- a/recipes/libcap/libcap2_2.16.bb
-+++ b/recipes/libcap/libcap2_2.16.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Libcap is a library for getting and setting POSIX.1e (formerly PO
- PRIORITY = "optional"
- SECTION = "libs"
- LICENSE = "GPL"
--DEPENDS = "bison-native flex-native libattr"
-+DEPENDS = "bison-native flex-native attr"
- PR = "r0"
- 
- BUILD_CFLAGS += "-I${S}/libcap/include"
-@@ -25,11 +25,5 @@ do_install() {
- 	oe_libinstall -s -C libcap libcap ${D}${libdir}
- }
- 
--do_stage() {
--	install -d ${STAGING_INCDIR}/sys
--	install -m 0644 libcap/include/sys/capability.h ${STAGING_INCDIR}/sys/
--	oe_libinstall -s -C libcap libcap ${STAGING_LIBDIR}
--}
--
- SRC_URI[md5sum] = "6e2c9d0f3c3118e41cd07288ba9577ce"
- SRC_URI[sha256sum] = "9c5a41a5577d6f702fe4d29e92f91f1d586a2ef272f6b7fa137bae3f0e76cc2f"
--- 
-1.7.1
-
-
---7JfCtLOvnd9MIVvH--
