@@ -1,43 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OPBjQ-0003wD-N7 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 11:49:58 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OPBf0-000581-50 for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 11:45:22 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 11:45:22 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OPE8H-0002iJ-7L
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 17 Jun 2010 14:23:46 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E22DD110009E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 17 Jun 2010 11:45:22 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 17 Jun 2010 14:19:16 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 1B3F3110009B
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 14:19:15 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225005141.adsl.alicedsl.de
+	[92.225.5.141]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 14:19:15 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id EC2A73C134; Thu, 17 Jun 2010 14:19:13 +0200 (CEST)
+Date: Thu, 17 Jun 2010 14:19:13 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-connect(): No such file or directory
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 17 Jun 2010 11:45:12 +0200
-Message-ID: <hvcqr8$mfs$1@dough.gmane.org>
-References: <4C19DA49.3020206@gmx.net>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <4C19DA49.3020206@gmx.net>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100617121913.GA16207@rhein.zuhause.netz>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problem with SHLIBs and RDEPENDS
+Subject: Proposal to remove libattr recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,59 +49,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 09:49:59 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 17 Jun 2010 12:23:46 -0000
+X-Groupsio-MsgNum: 20228
+Content-Type: multipart/mixed; boundary="7JfCtLOvnd9MIVvH"
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--7JfCtLOvnd9MIVvH
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 17-06-10 10:18, Robert Schuster wrote:
-> Hi,
-> I am trying to make the OpenJDK recipes 'OE ready'. One hard issue I am
-> facing has to do with the shlibs mechanism in OE.
-> 
-> In order to get OpenJDKs dependencies right its libraries and binaries
-> are checked for library dependencies. That is all fine and I would love
-> to activate that.
-> 
-> Actually we have three kinds of OpenJDK builds atm:
->  - zero (interpreter only; but with enhancements on ARM to make it fly)
->  - shark (zero interpreter plus JIT based on LLVM)
->  - cacao (completely different runtime)
-> 
-> The binary version of those recipes all bring a libjvm.so. Theoretically
-> a user could install all three packages (you can do that in
-> Debian/Ubuntu for example). However when the shlibs mechanism is
-> activated it puts the first built openjdk variant into a registry and
-> all subsequent variants get a hard runtime dependency on that package
-> (e.g. openjdk-shark will depend on openjdk-zero if I built zero first)
-> although there is no technical reason for this.
-> 
-> So my question is: How can I solve this issue without resorting to:
-> 
-> EXCLUDE_FROM_SHLIBS = "1"
-> 
-> which I currently use and which has the bad side-effect of not having
-> openjdk's own dependencies. :(
+Hi,
 
-Try:
+the libattr from xfsprogs clashes with the attr recipe from udev and I can
+find any recipe which uses libattr, besides libcap2 which could use attr
+from udev too. So my proposal is to remove the libattr recipe and switch
+libcap2 to use attr from udev. Attached are the two patches, to do it.
 
-PRIVATE_LIBS = "libjvm.so"
+I would like to see some ack's.
 
-That will mark any libjvm.so in PACKAGES for that recipe as private and
-it won't show up as a shlib provider. We use this in mozilla recipes.
+Bye Henning
 
-regards,
+--7JfCtLOvnd9MIVvH
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="libattr.patch"
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+From cd0071c89450f81df538107350065036b00f68a9 Mon Sep 17 00:00:00 2001
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+Date: Thu, 17 Jun 2010 10:24:01 +0200
+Subject: [PATCH 2/2] libattr: remove libattr because it is clashing with attr from udev and not used by anyother recipe
 
-iD8DBQFMGe6oMkyGM64RGpERAseXAKCZvjVHnmWXiZZki2uUZ5NFtpUeAQCgkxzj
-e+36yRWm1gOSgT1epqOBlbM=
-=Cg4e
------END PGP SIGNATURE-----
+---
+ recipes/xfsprogs/libattr_2.4.43.bb |   30 ------------------------------
+ 1 files changed, 0 insertions(+), 30 deletions(-)
+ delete mode 100644 recipes/xfsprogs/libattr_2.4.43.bb
+
+diff --git a/recipes/xfsprogs/libattr_2.4.43.bb b/recipes/xfsprogs/libattr_2.4.43.bb
+deleted file mode 100644
+index cf846cc..0000000
+--- a/recipes/xfsprogs/libattr_2.4.43.bb
++++ /dev/null
+@@ -1,30 +0,0 @@
+-DESCRIPTION = "library functions to get attribute bits"
+-HOMEPAGE = "http://oss.sgi.com/projects/xfs"
+-LICENSE = "GPL"
+-SECTION = "base"
+-PR = "r0"
+-DEPENDS = "gettext"
+-
+-SRC_URI = "ftp://oss.sgi.com/projects/xfs/cmd_tars/attr_${PV}-1.tar.gz"
+-S = "${WORKDIR}/attr-${PV}"
+-
+-PARALLEL_MAKE = ""
+-inherit autotools
+-EXTRA_OECONF = "--enable-gettext=no --enable-shared=yes"
+-
+-do_configure () {
+-	export LIBTOOL="${STAGING_BINDIR_NATIVE}/${HOST_SYS}-libtool"
+-	export DEBUG="-DNDEBUG"
+-	oe_runconf
+-}
+-
+-do_install () {
+-	export DIST_ROOT=${D}
+-	oe_runmake install
+-	oe_libinstall -a libattr ${D}${libdir}
+-	oe_libinstall -a libattr ${STAGING_LIBDIR}
+-}
+-
+-
+-SRC_URI[md5sum] = "91583a14bcbd637adaa9b07ea49c5d4b"
+-SRC_URI[sha256sum] = "d358b233b3e2ad235e63fd8697e337006fc7506844e424b0d9dd7a24affec5bf"
+-- 
+1.7.1
 
 
+--7JfCtLOvnd9MIVvH
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="libcap2.patch"
 
+From cbccc349878874c876958ca65b1cdbcb2176c0db Mon Sep 17 00:00:00 2001
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+Date: Thu, 17 Jun 2010 10:16:56 +0200
+Subject: [PATCH 1/2] libcap2: use attr instead of libattr as dependency, fixes systemd
+
+* convert to new staging system, by removing do_stage
+---
+ recipes/libcap/libcap2_2.16.bb |    8 +-------
+ 1 files changed, 1 insertions(+), 7 deletions(-)
+
+diff --git a/recipes/libcap/libcap2_2.16.bb b/recipes/libcap/libcap2_2.16.bb
+index ebcb981..947811b 100644
+--- a/recipes/libcap/libcap2_2.16.bb
++++ b/recipes/libcap/libcap2_2.16.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "Libcap is a library for getting and setting POSIX.1e (formerly PO
+ PRIORITY = "optional"
+ SECTION = "libs"
+ LICENSE = "GPL"
+-DEPENDS = "bison-native flex-native libattr"
++DEPENDS = "bison-native flex-native attr"
+ PR = "r0"
+ 
+ BUILD_CFLAGS += "-I${S}/libcap/include"
+@@ -25,11 +25,5 @@ do_install() {
+ 	oe_libinstall -s -C libcap libcap ${D}${libdir}
+ }
+ 
+-do_stage() {
+-	install -d ${STAGING_INCDIR}/sys
+-	install -m 0644 libcap/include/sys/capability.h ${STAGING_INCDIR}/sys/
+-	oe_libinstall -s -C libcap libcap ${STAGING_LIBDIR}
+-}
+-
+ SRC_URI[md5sum] = "6e2c9d0f3c3118e41cd07288ba9577ce"
+ SRC_URI[sha256sum] = "9c5a41a5577d6f702fe4d29e92f91f1d586a2ef272f6b7fa137bae3f0e76cc2f"
+-- 
+1.7.1
+
+
+--7JfCtLOvnd9MIVvH--
