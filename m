@@ -1,46 +1,48 @@
-Received: from fg-out-1718.google.com ([72.14.220.156])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OP8w5-00052y-3x
+	(envelope-from <thebohemian@gmx.net>) id 1OP9HP-00017s-I8
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 17 Jun 2010 08:51:09 +0200
-Received: by fg-out-1718.google.com with SMTP id d23so1515352fga.6
+	Thu, 17 Jun 2010 09:13:00 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 19BEA400057E9
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 16 Jun 2010 23:46:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=SmvvAIFCtjJvIAe5Hw3JuaLaFEss6vASCp3WtXwgpi8=;
-	b=qbki26TL1IqiA+41ZLYRwHSj3CWLz9TsIMnp0RNLPU78zlSMeozfVWGahPbBqxmDTw
-	Z7v8e627WVjlzG/Ul4zD9J6sokpzHyMXA776Li0UWF3pHYieYiQCPZm54fCeqYWvgitB
-	Xs5KEQEeuRr8MFKwnjvf3xZBmu2BqQcd2X23A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=SDVz462XuyyMX4OjlJc/mf8zLsfi1dooBahHJHE0899syFgxRGIzssRHAsyQvOljM9
-	F+p5FNSnqIKeMH0FY7DFVda/5mZtQmDxcVX3SZipMnkPLlcRxIX1BtBlkmnOcMtnUiZq
-	RSl979ADtT3Fs/naM07QTugG9OA9NqVQWfIYw=
+	Thu, 17 Jun 2010 09:08:21 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 119F040019CDE
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 09:08:21 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Bnbd6nhosdDF
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 09:08:20 +0200 (CEST)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTPSA id D0056400057E9
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 17 Jun 2010 09:08:20 +0200 (CEST)
+Message-ID: <4C19CA2D.4@gmx.net>
+Date: Thu, 17 Jun 2010 09:09:33 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.204.73.205 with SMTP id r13mr7394988bkj.35.1276757180972; Wed, 
-	16 Jun 2010 23:46:20 -0700 (PDT)
-Received: by 10.204.119.12 with HTTP; Wed, 16 Jun 2010 23:46:20 -0700 (PDT)
-In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFB0@KCINPUNHJCMS01.kpit.com>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CFAF@KCINPUNHJCMS01.kpit.com>
-	<4C19B59F.70008@freyther.de>
-	<76E258664B189C4CBEF125491CA11ECC9445E0CFB0@KCINPUNHJCMS01.kpit.com>
-Date: Thu, 17 Jun 2010 08:46:20 +0200
-Message-ID: <AANLkTik6d7QY6uzMDZclGLC2lD8szm1iHmX4BGwwcoGI@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 72.14.220.156
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C187CF6.5010401@gmx.net>	<20100616090200.5c23b895@xora-desktop.xora.org.uk>
+	<AANLkTilul0-HFnIkW2eJ7lTzZ7EMzq6qBzLYZhUVxyhZ@mail.gmail.com>
+	<20100616175640.4d7795ff@xora-desktop.xora.org.uk>
+	<AANLkTimFM0nCDuT-eMOJRvolhw06Q6uoHwmbnebIIFjL@mail.gmail.com>
+In-Reply-To: <AANLkTimFM0nCDuT-eMOJRvolhw06Q6uoHwmbnebIIFjL@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_FAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded SDK
+Subject: Re: [RFC] add ubuntu patch which adds atomic builtin support to gcc 4.3.[3 but also other microversions]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,21 +56,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 17 Jun 2010 06:51:15 -0000
+X-List-Received-Date: Thu, 17 Jun 2010 07:13:45 -0000
+X-Groupsio-MsgNum: 20224
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig934A46D75EE532CFA68A52DE"
+
+--------------enig934A46D75EE532CFA68A52DE
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/6/17 Soumya R <Soumya.R@kpitcummins.com>:
-> Hi,
+Hi,
+first of all. As Stefan pointed out the change was needed while working
+for Buglabs on OpenJDK support. So it was decided that the introduction
+of the mentioned GCC change is handled by Stefan Schmidt now.
+
+But I would like to elaborate on the side-effects of the patch.
+
+Am 16.06.2010 19:12, schrieb Khem Raj:
 >
-> =A0 Thanks for the reply.. I have created our own image for mipsel in ope=
-nembedded..
-> I know to write own machine ,distro and kernel compilation..SDK is new to=
- me so can you
-> guide how can i start with that..
+> Those applications are working fine and they will keep working fine as
+> long as you dont recompile them
+> and you make sure that libgcc is updated then whenever you rebuild an
+> application that uses the atomic
+> builtins will start using them until then it should work without using =
+them.
+>  =20
+Yes, already built and shipped applications are not affected at all.
+It is only that when certain packages are built again with the new GCC,
+the package's binary
+will be different although PR (and PV) did not change. The reason is
+that most configure scripts check
+for the availability of the GCC intrinsics. If they are found they make
+use of it, if not they either use a different implementation
+(libatomic-ops for example)
+or bring their own (software running on ARM Linux 2.6 can assume that
+the neccessary kernel helpers exist and make use of them[0]) or silently
+disable
+multithread support (that is the case for llvm 2.7).
 
-What about: http://tinyurl.com/37odza9
+And already compiled software will also not magically pick up the
+implementation found in libgcc because:
+1) it was not there before
+2) I am under the impression that at least some of the builtins are
+actually macros and thus bits of machinecode are copied into each binary
+using them.
 
-FM
+However as said. Stefan is now dealing with the issue. He has gotten two
+patches (one from Ubuntu, another one from the GCC 4.4 stable branch)
+that we needed to get things going and is most likely checking the
+effects they have.
+
+Regards,
+Robert
+
+[0] - code like this can be found in many projects; search for
+__kernel_dmb and __kernel_cmpxchg:
+http://code.google.com/p/nativeclient/source/browse/trunk/src/native_clie=
+nt/src/include/linux/arm/atomic_ops.h?r=3D857
+> Maybe I am missing something it would be helpful if Robert could
+> explain potential scenarios
+> where it would break precompiled binaries. I don't see it.
+>
+>  =20
+>> Graeme
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel=
+
+>>
+>>    =20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>  =20
 
 
+
+--------------enig934A46D75EE532CFA68A52DE
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAkwZyjEACgkQG9cfwmwwEtq30QCcCW1NGRB+qjeiyHBmKyOhAMXx
+kpsAn2rchWYszgZBWsCNvad0FoVe4730
+=pNGi
+-----END PGP SIGNATURE-----
+
+--------------enig934A46D75EE532CFA68A52DE--
