@@ -1,33 +1,41 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from ausxippc101.us.dell.com ([143.166.85.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1OPhR1-0000A7-9O
-	for openembedded-devel@openembedded.org; Fri, 18 Jun 2010 21:41:04 +0200
-Received: from jcn (82.57.106.179) by smtp205.alice.it (8.5.124.08)
-	id 4C1A2645001A0C35; Fri, 18 Jun 2010 21:30:27 +0200
-Received: from ao2 by jcn with local (Exim 4.72)
-	(envelope-from <ospite@studenti.unina.it>)
-	id 1OPhGk-0003JM-01; Fri, 18 Jun 2010 21:30:26 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 18 Jun 2010 21:30:19 +0200
-Message-Id: <1276889420-12696-3-git-send-email-ospite@studenti.unina.it>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
-References: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-X-SA-Exim-Connect-IP: 82.57.200.101
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+	(envelope-from <Sean_Hudson@Dell.com>) id 1OPho7-0006H9-JP
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Jun 2010 22:04:59 +0200
+X-Loopcount0: from 10.166.62.177
+From: <Sean_Hudson@Dell.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Fri, 18 Jun 2010 14:58:54 -0500
+Thread-Topic: [PATCH] Add a waf bitbake class.
+Thread-Index: AcsPIK4CpCdlixutSjGKUk26ftQ03Q==
+Message-ID: <113134CF306E8E4CACC27BE5937261B2092DDD2B99@AUSX7MCPS303.AMER.DELL.COM>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+x-cr-puzzleid: {7D2CD0A9-B7DC-4032-93D9-2408917ED98C}
+x-cr-hashedpuzzle: ByRN DlQ9 Dr1h D+3w IVXD Ik7b JaSG JbX6 J33V KBKU KrkS
+	L5Wb PCX0 PSQv Ph+u SgBb; 2;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnADsAcgB5AGEAbgBAAHQAcgBvAGwAbwBjAHMAaQBzAC4AYwBvAG0A;
+	Sosha1_v1; 7; {7D2CD0A9-B7DC-4032-93D9-2408917ED98C};
+	cwBlAGEAbgBfAGgAdQBkAHMAbwBuAEAAZABlAGwAbAAuAGMAbwBtAA==; Fri,
+	18 Jun 2010 19:58:54 GMT;
+	WwBQAEEAVABDAEgAXQAgAEEAZABkACAAYQAgAHcAYQBmACAAYgBpAHQAYgBhAGsAZQAgAGMAbABhAHMAcwAuAA==
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-OriginalArrivalTime: 18 Jun 2010 19:59:00.0346 (UTC)
+	FILETIME=[B19DA5A0:01CB0F20]
+X-SA-Exim-Connect-IP: 143.166.85.207
+X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_SORBS_DUL autolearn=no version=3.2.5
+X-Spam-Status: No, score=-5.1 required=5.0 tests=BAYES_05,HTML_MESSAGE,
+	MIME_HTML_MOSTLY, RCVD_IN_DNSWL_MED,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openezx-devel@lists.openezx.org
-Subject: [PATCH 2/3] ezx: rename ezx-boot-usb recipe to moto-boot-usb, use git
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: [PATCH] Add a waf bitbake class.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,90 +49,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2010 19:41:04 -0000
+X-List-Received-Date: Fri, 18 Jun 2010 20:04:59 -0000
+X-Groupsio-MsgNum: 20273
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_"
 
-boot_usb is now named moto-boot-usb and is hosted on git.openezx.org, move
-recipes/ezx/ezx-boot-usb-native_svn.bb to
-recipes/ezx/moto-boot-usb-native_git.bb and fix it.
+--_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
----
- recipes/ezx/ezx-boot-usb-native_svn.bb  |   29 -----------------------------
- recipes/ezx/moto-boot-usb-native_git.bb |   27 +++++++++++++++++++++++++++
- 2 files changed, 27 insertions(+), 29 deletions(-)
- delete mode 100644 recipes/ezx/ezx-boot-usb-native_svn.bb
- create mode 100644 recipes/ezx/moto-boot-usb-native_git.bb
+Hi All,
 
-diff --git a/recipes/ezx/ezx-boot-usb-native_svn.bb b/recipes/ezx/ezx-boot-usb-native_svn.bb
-deleted file mode 100644
-index 280de30..0000000
---- a/recipes/ezx/ezx-boot-usb-native_svn.bb
-+++ /dev/null
-@@ -1,29 +0,0 @@
--DESCRIPTION = "Boot a Motorola EZX device with a user supplied kernel"
--DEPENDS = "virtual/libusb0-native virtual/kernel"
--SECTION = "devel"
--AUTHOR = "Team OpenEZX <openezx-devel@lists.openezx.org>"
--LICENSE = "GPL"
--SRCREV = "2522"
--PV = "0.3.0+svnr${SRCPV}"
--
--SRC_URI = "svn://svn.openezx.org/trunk/src/host;module=boot_usb;proto=http" 
--S = "${WORKDIR}/boot_usb"
--
--EXTRA_OECONF := '--with-kernel-dir="${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"'
--
--inherit autotools native
--
--do_deploy() {
--        install -d ${DEPLOY_DIR_TOOLS}
--        install -m 0755 src/boot_usb ${DEPLOY_DIR_TOOLS}/ezx-boot-usb-${PV}
--}
--
--do_stage() {
--	:
--}
--
--do_install() {
--	:
--}
--
--addtask deploy before do_build after do_compile
-diff --git a/recipes/ezx/moto-boot-usb-native_git.bb b/recipes/ezx/moto-boot-usb-native_git.bb
-new file mode 100644
-index 0000000..e6fdaa1
---- /dev/null
-+++ b/recipes/ezx/moto-boot-usb-native_git.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Boot a Motorola EZX device with a user supplied kernel"
-+DEPENDS = "virtual/libusb0-native virtual/kernel"
-+SECTION = "devel"
-+AUTHOR = "Team OpenEZX <openezx-devel@lists.openezx.org>"
-+LICENSE = "GPL"
-+SRCREV = "d7136c6c9fe9d62b8f3defccef5dca47258bef63"
-+PV = "0.3.0+gitr${SRCPV}"
-+PR = "r0"
-+PE = "1"
-+
-+SRC_URI = "git://git.openezx.org/moto-boot-usb.git;protocol=git;branch=master"
-+S = "${WORKDIR}/git"
-+
-+EXTRA_OECONF := '--with-kernel-dir="${STAGING_DIR}/${MACHINE_ARCH}${TARGET_VENDOR}-${TARGET_OS}/kernel"'
-+
-+inherit autotools native
-+
-+do_deploy() {
-+        install -d ${DEPLOY_DIR_TOOLS}
-+        install -m 0755 src/moto-boot-usb ${DEPLOY_DIR_TOOLS}/moto-boot-usb-${PV}
-+}
-+
-+do_install() {
-+  :
-+}
-+
-+addtask deploy before do_build after do_compile
--- 
-1.7.1
+  We are using waf for some of our modules and decided to add a class to ma=
+ke it easier to write recipes.
 
+Regards,
+Sean Hudson
 
+--_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_
+Content-Type: application/octet-stream; name="waf.bbclass"
+Content-Description: waf.bbclass
+Content-Disposition: attachment; filename="waf.bbclass"; size=813;
+	creation-date="Fri, 18 Jun 2010 14:57:22 GMT";
+	modification-date="Fri, 18 Jun 2010 14:51:25 GMT"
+Content-Transfer-Encoding: base64
 
+IyBXQUYgcHJvamVjdCBjbGFzcy4KCkRFUEVORFMgKz0gcHl0aG9uCgpTVEFHRV9URU1QPSIke1dP
+UktESVJ9L3RlbXAtc3RhZ2luZyIKU1RBR0VfVEVNUF9QUkVGSVggPSAiIgoKIyBDb25kaXRpb25h
+bGx5IHNldCB0aGUgdmVyYm9zZSBvcHRpb24uCiMgV0FGX1ZFUkJPU0U9Ii12IgoKd2FmX2RvX2Nv
+bXBpbGUoKSB7CgkuL3dhZiAke1dBRl9WRVJCT1NFfSBidWlsZCAKfQoKd2FmX2RvX2NsZWFuKCkg
+ewoJLi93YWYgJHtXQUZfVkVSQk9TRX0gY2xlYW4KfQoKd2FmX2RvX2NvbmZpZ3VyZSgpIHsKCWlm
+IFsgLXggJHtTfS93YWYgXTsgdGhlbgoJCSR7U30vd2FmICR7V0FGX1ZFUkJPU0V9IGNvbmZpZ3Vy
+ZSAtLXByZWZpeD0ke3ByZWZpeH0gJHtFWFRSQV9PRUNPTkZ9ICIkQCIKCWVsc2UKCQlvZWZhdGFs
+ICJleGVjdXRhYmxlIHdhZiBzY3JpcHQgbm90IGZvdW5kIgoJZmkKfQoKd2FmX2RvX2luc3RhbGwo
+KSB7CgkuL3dhZiAke1dBRl9WRVJCT1NFfSBpbnN0YWxsIC0tZGVzdGRpcj0iJHtEfSIgIiRAIgp9
+Cgp3YWZfc3RhZ2VfYWxsKCkgewoJLi93YWYgJHtXQUZfVkVSQk9TRX0gaW5zdGFsbCAtLWRlc3Rk
+aXI9IiR7U1RBR0VfVEVNUH0iIAoJcm0gLXJmICR7U1RBR0VfVEVNUH0vJHttYW5kaXJ9IHx8IHRy
+dWUKCXJtIC1yZiAke1NUQUdFX1RFTVB9LyR7aW5mb2Rpcn0gfHwgdHJ1ZQoJc3lzcm9vdF9zdGFn
+ZV9kaXJzICR7U1RBR0VfVEVNUH0gJHtTVEFHRV9URU1QX1BSRUZJWH0KCXJtIC1yZiAke1NUQUdF
+X1RFTVB9Cn0KCkVYUE9SVF9GVU5DVElPTlMgZG9fY29tcGlsZSBkb19jbGVhbiBkb19jb25maWd1
+cmUgZG9faW5zdGFsbCAK
+
+--_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_--
