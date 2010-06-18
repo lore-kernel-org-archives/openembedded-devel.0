@@ -1,52 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OPgrp-0008Vg-P8
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jun 2010 21:04:49 +0200
-Received: by iwn5 with SMTP id 5so1394992iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 12:00:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=1XBw2N0s39IXhAZMeE7rE9+PiQcrh9TnHZCNLWPbXBM=;
-	b=YDQxMlUxOXUGVFlCT5UmUSHPSNQrlJhzkxFUpApoVdiZKANgXYiIJrlC8mBhe5P8IS
-	4jo2FCdJxrDK0QN8gY0Z14mDcq9o/QrqOjBlfrXVfbjR+PxDKwpKKWD56b6a5EP7Vsft
-	c4Dfa00CvVf3CQEtOQOYsN5NMmPMn55Lr+TgA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=p8YkWP2FzTsDZIJPc+EgMKGuDrq6RK1RnkLJUF1PeJjwG+BEv4ZNj8N4JqR4Cv3arz
-	+Why6ziHmX6hS3RgDkNy3BXwU56EgUcaIJG06NDPA0KRccCwQlnsN+jTN7JiYtzSgnnZ
-	ElhNeA6JRD4/SlNEi0tKJO37G/Ilr/aHBudK0=
-Received: by 10.231.139.214 with SMTP id f22mr1637356ibu.141.1276887611343; 
-	Fri, 18 Jun 2010 12:00:11 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.17.130 with HTTP; Fri, 18 Jun 2010 11:59:51 -0700 (PDT)
-In-Reply-To: <AANLkTin0_Mk8gzfXnPgePnGGkOaDfzx2up1LkD44norg@mail.gmail.com>
-References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com> 
-	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com> 
-	<AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com> 
-	<AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com> 
-	<AANLkTikK720KNmNjRKr6x12-kSben4t42KlmgHsSGEpS@mail.gmail.com> 
-	<20100617193846.GC14941@mx.loc>
-	<AANLkTikt8uUURjI56tmIEH0dCwtSJtwk0wre9oxNHEwF@mail.gmail.com> 
-	<AANLkTikdhubttOOkUq58_nl5E62jtB7QN7widnkNVT0R@mail.gmail.com> 
-	<AANLkTin0_Mk8gzfXnPgePnGGkOaDfzx2up1LkD44norg@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 Jun 2010 11:59:51 -0700
-Message-ID: <AANLkTilcZp2HZB8cSOdRurRuCfkMf_KpSiMxDmh_LgDY@mail.gmail.com>
+	(envelope-from <ospite@studenti.unina.it>) id 1OPhQL-00005a-Ap
+	for openembedded-devel@openembedded.org; Fri, 18 Jun 2010 21:40:22 +0200
+Received: from jcn (82.57.106.179) by smtp207.alice.it (8.5.124.08)
+	id 4C1A26CF0019F509; Fri, 18 Jun 2010 21:30:27 +0200
+Received: from ao2 by jcn with local (Exim 4.72)
+	(envelope-from <ospite@studenti.unina.it>)
+	id 1OPhGj-0003JK-S2; Fri, 18 Jun 2010 21:30:25 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Fri, 18 Jun 2010 21:30:18 +0200
+Message-Id: <1276889420-12696-2-git-send-email-ospite@studenti.unina.it>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
+References: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+X-SA-Exim-Connect-IP: 82.57.200.103
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_SORBS_DUL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OSError: [Errno 2] No such file or directory
+Cc: openezx-devel@lists.openezx.org
+Subject: [PATCH 1/3] ezx: replace ezx-gen-blob_svn.bb with ezx-gen-blob_git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,160 +41,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2010 19:04:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 18 Jun 2010 19:40:23 -0000
 
-On Fri, Jun 18, 2010 at 5:07 AM, nikunj badjatya
-<nikunjbadjatya@gmail.com> wrote:
-> Hi again,
->
-> The build was running successfully untill It came at this place.. : The l=
-ast
-> few lines where error occured.
->
-> $ bitbake console-image 2>&1 | tee console-image.log
-> ............................................
-> ............................................
-> *NOTE: Running task 959 of 3342 (ID: 134,
-> /home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
-> NOTE: preparing tree for binary locale generation
-> NOTE: generating locale es_NI (UTF-8)
-> NOTE: Task failed: localedef returned an error (command was
-> PATH=3D"/home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/armv5te-an=
-gstrom-linux-gnueabi:/home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin=
-/armv5te-angstrom-linux-gnueabi:/home/nikunj/ope/build/tmp/sysroots/i686-li=
-nux/usr/sbin:/home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin:/home/n=
-ikunj/ope/build/tmp/cross/armv5te//bin:/home/nikunj/ope/build/tmp/sysroots/=
-i686-linux/sbin:/home/nikunj/ope/build/tmp/sysroots/i686-linux/bin:/home/ni=
-kunj/ope/bitbake/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/bin:/usr/local/bin:/=
-usr/bin:/bin:/usr/X11R6/bin:/home/nikunj/bin"
-> I18NPATH=3D"/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueab=
-i/glibc-2.9-r36.3/locale-tree/usr/share/i18n"
-> qemu-arm -s 1048576 -r 2.6.24 -L
-> /home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-=
-r36.3/locale-tree
-> -E
-> LD_LIBRARY_PATH=3D/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-=
-gnueabi/glibc-2.9-r36.3/locale-tree/lib
-> /home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-=
-r36.3/locale-tree/bin/localedef
-> --force --old-style --no-archive
-> --prefix=3D/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi=
-/glibc-2.9-r36.3/locale-tree
-> --inputfile=3D/usr/share/i18n/locales/es_NI --charmap=3DUTF-8 es_NI).
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bbdo_package
-> failed
-> ERROR: Task 134 (/home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bb=
-,
-> do_package) failed
-> NOTE: Tasks Summary: Attempted 958 tasks of which 909 didn't need to be
-> rerun and 1 failed.
-> ERROR: '/home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bb' failed*
->
->
-> What does this tell..?
+gen-blob is now at git.openezx.org, replace the old svn recipe with one
+which fetches the code from the git repository.
 
-it tells nothing other than it seems that qemu is failing when
-generating locales. If you try to parse logs you will help yourself
-quite a bit.
-OE generates logs in builddir/temp then are called log.<task>.xxxx try
-to find errors in them
-if you can not at least post them when asking here.
+Signed-off-by: Antonio Ospite <ospite@studenti.unina.it>
+---
+ recipes/ezx/ezx-gen-blob_git.bb |   41 +++++++++++++++++++++++++++++++++++++++
+ recipes/ezx/ezx-gen-blob_svn.bb |   41 ---------------------------------------
+ 2 files changed, 41 insertions(+), 41 deletions(-)
+ create mode 100644 recipes/ezx/ezx-gen-blob_git.bb
+ delete mode 100644 recipes/ezx/ezx-gen-blob_svn.bb
 
->
-> Nikunj Badjatya
-> BTech
->
->
->
->
-> On Fri, Jun 18, 2010 at 3:09 PM, nikunj badjatya
-> <nikunjbadjatya@gmail.com>wrote:
->
->> Hi All,
->> I have found the cause of the problem.
->> I did a reinstall of Python and YUM few days back.
->> I was thinking that other software requirements ( texi2info, help2man,
->> chrpath etc. ) need not to be installed again.
->> But when I tried reinstalling them also, the error is gone..!!
->>
->> The strange thing is that bitbake was not reporting himself that this ar=
-e
->> the missing modules which it needs prior to running any build..!!
->>
->> Anyways, Thanks Very Much for your time.
->>
->>
->> Nikunj
->> Bangalore, India
->>
->>
->>
->>
->>
->> On Fri, Jun 18, 2010 at 10:02 AM, nikunj badjatya <
->> nikunjbadjatya@gmail.com> wrote:
->>
->>> Hi Bernhard,
->>>
->>> *echo $BBPATH
->>> /home/nikunj/ope/build:/home/nikunj/ope/openembedded*
->>>
->>> Is that wrong.?
->>>
->>>
->>>
->>>
->>>
->>>
->>> On Fri, Jun 18, 2010 at 1:08 AM, Bernhard Reutner-Fischer <
->>> rep.dot.nop@gmail.com> wrote:
->>>
->>>> On Thu, Jun 17, 2010 at 12:11:52PM -0700, Khem Raj wrote:
->>>> >On Thu, Jun 17, 2010 at 5:39 AM, nikunj badjatya
->>>> ><nikunjbadjatya@gmail.com> wrote:
->>>> >> /home/nikunj/ope/openembedded/recipes/coreutils/
->>>> coreutils-native_8.5.bb,
->>>> >> do_populate_sysroot)
->>>> >> NOTE: Testing
->>>> >>
->>>> /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sys=
-root-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
->>>> >> for relocatability
->>>>
->>>> >Does
->>>> =A0/home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/=
-sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sle=
-ep
->>>> >exist ?
->>>>
->>>> huh? How would that supposed to be ok?
->>>> Looks like home is leaking into some prefix, no?
->>>> We should have a sanity for that one i suppose..
->>>>
->>>> Feb 14 22:25:04 <me> does anybody else see /home in their staging dir =
-or
->>>> did i goof up somehow?
->>>> Feb 14 22:26:24 <me> would be nice if sanity would yell at /root and
->>>> /home in the staging dir..
->>>>
->>>> where /home =3D=3D something in BBPATH, without looking into details.
->>>>
->>>> _______________________________________________
->>>> Openembedded-devel mailing list
->>>> Openembedded-devel@lists.openembedded.org
->>>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>>
->>>
->>>
->>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/recipes/ezx/ezx-gen-blob_git.bb b/recipes/ezx/ezx-gen-blob_git.bb
+new file mode 100644
+index 0000000..5ebcad1
+--- /dev/null
++++ b/recipes/ezx/ezx-gen-blob_git.bb
+@@ -0,0 +1,41 @@
++DESCRIPTION = "Generic Blob [Bootloader] for the Motorola EZX platform"
++SECTION = "bootloaders"
++AUTHOR = "OpenEZX Team"
++HOMEPAGE = "http://people.openezx.org/wyrm/gen-blob"
++LICENSE = "GPL"
++PROVIDES = "virtual/bootloader"
++DEPENDS = "virtual/kernel"
++SRCREV = "48d1cf4dbc8228b982ff40c36922769f70347da1"
++PV = "1.0.0+gitr${SRCPV}"
++PR = "r0"
++PE = "1"
++
++SRC_URI = "\
++  git://git.openezx.org/gen-blob.git;protocol=git;branch=master \
++  file://remove-bogus-sed.patch \
++"
++S = "${WORKDIR}/git"
++
++inherit autotools
++
++EXTRA_OECONF = "\
++  --with-board=lubbock \
++  --with-cpu=pxa262 \
++  --with-linux-prefix=${STAGING_KERNEL_DIR} \
++  --enable-usb \
++"
++
++do_configure() {
++	gnu-configize
++	oe_runconf
++}
++
++do_deploy() {
++	install -d ${DEPLOY_DIR_IMAGE}
++	install -m 0644 src/blob/blob-a780  ${DEPLOY_DIR_IMAGE}/gen-blob-for-1stgen.${SRCDATE}
++	install -m 0644 src/blob/blob-a1200 ${DEPLOY_DIR_IMAGE}/gen-blob-for-2ndgen.${SRCDATE}
++}
++
++addtask deploy before do_build after do_compile
++
++PACKAGE_ARCH = "${MACHINE_ARCH}"
+diff --git a/recipes/ezx/ezx-gen-blob_svn.bb b/recipes/ezx/ezx-gen-blob_svn.bb
+deleted file mode 100644
+index 39cec89..0000000
+--- a/recipes/ezx/ezx-gen-blob_svn.bb
++++ /dev/null
+@@ -1,41 +0,0 @@
+-DESCRIPTION = "Generic Blob [Bootloader] for the Motorola EZX platform"
+-SECTION = "bootloaders"
+-AUTHOR = "OpenEZX Team"
+-HOMEPAGE = "http://people.openezx.org/wyrm/gen-blob"
+-LICENSE = "GPL"
+-PROVIDES = "virtual/bootloader"
+-DEPENDS = "virtual/kernel"
+-SRCREV = "2519"
+-PV = "1.0.0+svnr${SRCPV}"
+-PE = "1"
+-PR = "r2"
+-
+-SRC_URI = "\
+-  svn://svn.openezx.org/trunk/src/blob/;module=gen-blob;proto=http \
+-  file://remove-bogus-sed.patch \
+-"
+-S = "${WORKDIR}/gen-blob"
+-
+-inherit autotools
+-
+-EXTRA_OECONF = "\
+-  --with-board=lubbock \
+-  --with-cpu=pxa262 \
+-  --with-linux-prefix=${STAGING_KERNEL_DIR} \
+-  --enable-usb \
+-"
+-
+-do_configure() {
+-	gnu-configize
+-	oe_runconf
+-}
+-
+-do_deploy() {
+-	install -d ${DEPLOY_DIR_IMAGE}
+-	install -m 0644 src/blob/blob-a780  ${DEPLOY_DIR_IMAGE}/gen-blob-for-1stgen.${SRCDATE}
+-	install -m 0644 src/blob/blob-a1200 ${DEPLOY_DIR_IMAGE}/gen-blob-for-2ndgen.${SRCDATE}
+-}
+-
+-addtask deploy before do_build after do_compile
+-
+-PACKAGE_ARCH = "${MACHINE_ARCH}"
+-- 
+1.7.1
+
 
 
