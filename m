@@ -1,45 +1,42 @@
-Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
+Received: from mta6.brinkster.com ([65.182.109.75])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1OPagL-0002YT-0Q
+	(envelope-from <John.Willis@Distant-earth.com>) id 1OPgbi-0005Ry-TR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jun 2010 14:28:27 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id BD98240008249
+	Fri, 18 Jun 2010 20:48:05 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta6.brinkster.com (Postfix) with ESMTP id 7ACD58E80F
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 14:23:53 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id B58E6400083C2
+	Fri, 18 Jun 2010 14:37:27 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at mta6.brinkster.com
+Received: from mta6.brinkster.com ([127.0.0.1])
+	by localhost (mta6.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id fD9Yfi6TNsDq
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 14:23:53 +0200 (CEST)
-X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
-Received: from ugs.tarent.de ([127.0.0.1])
-	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id N9tpvRVsfOt8
+	Fri, 18 Jun 2010 14:37:21 -0400 (EDT)
+Received: from MareImbrium (cpc1-bath2-0-0-cust327.aztw.cable.virginmedia.com
+	[82.46.19.72])
+	by mta6.brinkster.com (Postfix) with ESMTPA id 494D98E85E
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 14:23:53 +0200 (CEST)
-Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
-	by ugs.tarent.de (Postfix) with ESMTPSA id 6F75640008249
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 14:23:53 +0200 (CEST)
-Message-ID: <4C1B65B0.2060307@gmx.net>
-Date: Fri, 18 Jun 2010 14:25:20 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
+	Fri, 18 Jun 2010 14:37:20 -0400 (EDT)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <201006161433.54486.schnitzeltony@gmx.de>	<201006171458.29759.schnitzeltony@gmx.de>	<hvd85i$8ce$1@dough.gmane.org>
+	<201006180055.03306.schnitzeltony@gmx.de>
+In-Reply-To: <201006180055.03306.schnitzeltony@gmx.de>
+Date: Fri, 18 Jun 2010 19:37:06 +0100
+Message-ID: <0e3c01cb0f15$4152daf0$c3f890d0$@Distant-earth.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C19DA49.3020206@gmx.net> <hvcqr8$mfs$1@dough.gmane.org>
-In-Reply-To: <hvcqr8$mfs$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 212.79.178.249
-X-SA-Exim-Mail-From: thebohemian@gmx.net
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQGiktmhcCHu00xbacpAnkaoMwBgIAFF2g7GAQ34VcACiebVr5KyFrZA
+X-SA-Exim-Connect-IP: 65.182.109.75
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_FAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problem with SHLIBs and RDEPENDS
+Subject: Re: xfce 4.6.2 recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,108 +50,506 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2010 12:28:27 -0000
-X-Groupsio-MsgNum: 20265
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigA54E2DCC435A56E733DF0321"
+X-List-Received-Date: Fri, 18 Jun 2010 18:48:05 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
---------------enigA54E2DCC435A56E733DF0321
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+For what it's worth these look fine to me, and it saves me finishing off the
+4.6.2 patch I had in my TODO ;). 
 
-Hey cool, thats it.
+Thanks for this.
 
-Am 17.06.2010 11:45, schrieb Koen Kooi:
-> On 17-06-10 10:18, Robert Schuster wrote:
-> > Hi,
-> > I am trying to make the OpenJDK recipes 'OE ready'. One hard issue I =
-am
-> > facing has to do with the shlibs mechanism in OE.
->
-> > In order to get OpenJDKs dependencies right its libraries and binarie=
-s
-> > are checked for library dependencies. That is all fine and I would lo=
-ve
-> > to activate that.
->
-> > Actually we have three kinds of OpenJDK builds atm:
-> > - zero (interpreter only; but with enhancements on ARM to make it fly=
-)
-> > - shark (zero interpreter plus JIT based on LLVM)
-> > - cacao (completely different runtime)
->
-> > The binary version of those recipes all bring a libjvm.so. Theoretica=
-lly
-> > a user could install all three packages (you can do that in
-> > Debian/Ubuntu for example). However when the shlibs mechanism is
-> > activated it puts the first built openjdk variant into a registry and=
+Acked-by: John Willis <john.willis@distant-earth.com>
 
-> > all subsequent variants get a hard runtime dependency on that package=
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On
+> Behalf Of Andreas Mueller
+> Sent: 17 June 2010 11:55 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] xfce 4.6.2 recipes
+> 
+> From ef9f072f440a245dc6dcd9ab5ca8b82d7b1e243b Mon Sep 17 00:00:00
+> 2001
+> From: Andreas Mueller <schnitzeltony@gmx.de>
+> Date: Fri, 18 Jun 2010 00:26:42 +0200
+> Subject: [PATCH] Bump xfce recipes to version 4.6.2
+> 
+> 
+> Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+> ---
+>  recipes/xfce-base/exo_0.3.107.bb           |   28
+> +++++++++++++++++++++++++
+>  recipes/xfce-base/libxfce4menu_4.6.2.bb    |   12 ++++++++++
+>  recipes/xfce-base/libxfce4util_4.6.2.bb    |   18 ++++++++++++++++
+>  recipes/xfce-base/libxfcegui4_4.6.4.bb     |   17 +++++++++++++++
+>  recipes/xfce-base/thunar_1.0.2.bb          |   28
+> +++++++++++++++++++++++++
+>  recipes/xfce-base/xfce-terminal_0.4.5.bb   |   16 ++++++++++++++
+>  recipes/xfce-base/xfce-utils_4.6.2.bb      |   30
+> +++++++++++++++++++++++++++
+>  recipes/xfce-base/xfce4-appfinder_4.6.2.bb |   11 ++++++++++
+>  recipes/xfce-base/xfce4-panel_4.6.4.bb     |   30
+> +++++++++++++++++++++++++++
+>  recipes/xfce-base/xfce4-session_4.6.2.bb   |   22 +++++++++++++++++++
+>  recipes/xfce-base/xfce4-settings_4.6.5.bb  |   16 ++++++++++++++
+>  recipes/xfce-base/xfconf_4.6.2.bb          |   16 ++++++++++++++
+>  recipes/xfce-base/xfdesktop_4.6.2.bb       |   21 +++++++++++++++++++
+>  recipes/xfce-base/xfwm4_4.6.2.bb           |   31
+> ++++++++++++++++++++++++++++
+>  14 files changed, 296 insertions(+), 0 deletions(-)  create mode 100644
+> recipes/xfce-base/exo_0.3.107.bb  create mode 100644 recipes/xfce-
+> base/libxfce4menu_4.6.2.bb
+>  create mode 100644 recipes/xfce-base/libxfce4util_4.6.2.bb
+>  create mode 100644 recipes/xfce-base/libxfcegui4_4.6.4.bb
+>  create mode 100644 recipes/xfce-base/thunar_1.0.2.bb  create mode
+> 100644 recipes/xfce-base/xfce-terminal_0.4.5.bb
+>  create mode 100644 recipes/xfce-base/xfce-utils_4.6.2.bb
+>  create mode 100644 recipes/xfce-base/xfce4-appfinder_4.6.2.bb
+>  create mode 100644 recipes/xfce-base/xfce4-panel_4.6.4.bb
+>  create mode 100644 recipes/xfce-base/xfce4-session_4.6.2.bb
+>  create mode 100644 recipes/xfce-base/xfce4-settings_4.6.5.bb
+>  create mode 100644 recipes/xfce-base/xfconf_4.6.2.bb  create mode 100644
+> recipes/xfce-base/xfdesktop_4.6.2.bb
+>  create mode 100644 recipes/xfce-base/xfwm4_4.6.2.bb
+> 
+> diff --git a/recipes/xfce-base/exo_0.3.107.bb b/recipes/xfce-
+> base/exo_0.3.107.bb
+> new file mode 100644
+> index 0000000..41c2a58
+> --- /dev/null
+> +++ b/recipes/xfce-base/exo_0.3.107.bb
+> @@ -0,0 +1,28 @@
+> +DESCRIPTION="Xfce extensions and framework library with session
+> management support"
+> +DEPENDS = "libxfce4util hal liburi-perl-native python-native cairo"
+> +SECTION = "x11"
+> +PR = "r1"
+> +
+> +inherit xfce46 python-dir
+> +
+> +XFCE_VERSION = "4.6.2"
+> +
+> +SRC_URI += " \
+> +    file://exo-no-tests.patch \
+> +    file://configure.patch \
+> +"
+> +
+> +# Note: Python checking is broken
+> +do_configure_prepend() {
+> +	sed -i -e s:'`$PKG_CONFIG --variable=defsdir
+> +pygtk-2.0`':\"${STAGING_DATADIR}/pygtk/2.0/defs\":g ${S}/configure.in }
+> +
+> +FILES_${PN} += "${datadir}/xfce4/ \
+> +                ${PYTHON_SITEPACKAGES_DIR}/* \
+> +                ${prefix}/share/pygtk/2.0/defs/exo-0.3/exo.defs \ "
+> +
+> +FILES_${PN}-dbg += "${PYTHON_SITEPACKAGES_DIR}/*/.debug/*"
+> +
+> +SRC_URI[md5sum] = "3a92cca0c99ee940db4410891c9e8498"
+> +SRC_URI[sha256sum] =
+> "0a12ac124bad67c8de7135f7052641239ed640884a71612930f99c425bede2a3"
+> diff --git a/recipes/xfce-base/libxfce4menu_4.6.2.bb b/recipes/xfce-
+> base/libxfce4menu_4.6.2.bb
+> new file mode 100644
+> index 0000000..663944a
+> --- /dev/null
+> +++ b/recipes/xfce-base/libxfce4menu_4.6.2.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION="a freedesktop.org compliant menu library for Xfce4"
+> +HOMEPAGE="http://www.xfce.org/projects/libraries"
+> +DEPENDS = "gettext pkgconfig libxfce4util intltool"
+> +RDEPENDS_${PN} = "gtk+ libxfce4util"
+> +
+> +LICENSE="LGPL-2 FDL-1.1"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +SRC_URI[md5sum] = "ff10cacb76803ee37159e3a43345f0d1"
+> +SRC_URI[sha256sum] =
+> "62352be57318d6f241c4f6e4b6f9303d0b80246ea8f6e4753a962360a9965162"
+> diff --git a/recipes/xfce-base/libxfce4util_4.6.2.bb b/recipes/xfce-
+> base/libxfce4util_4.6.2.bb
+> new file mode 100644
+> index 0000000..67aba2e
+> --- /dev/null
+> +++ b/recipes/xfce-base/libxfce4util_4.6.2.bb
+> @@ -0,0 +1,18 @@
+> +# libxfce4util OE build file
+> +
+> +DESCRIPTION = "Basic utility library for Xfce4"
+> +SECTION = "x11/libs"
+> +LICENSE = "GPL"
+> +DEPENDS = "glib-2.0 xfce4-dev-tools "
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +EXTRA_OECONF += "--disable-dependency-tracking --disable-static --with-
+> broken-putenv=yes"
+> +
+> +MACROS="m4/X11.m4 m4/debug.m4 m4/depends.m4 m4/i18n.m4"
+> +
+> +FILES_${PN}-dev += " ${datadir}/xfce4/m4"
+> +
+> +SRC_URI[md5sum] = "9c3129d827d480f0906c575e7a13f1e9"
+> +SRC_URI[sha256sum] =
+> "ae2e7ed1000bb0b3589643a39a65e6ab64c9ee198045e7b272604986f2e18c83"
+> diff --git a/recipes/xfce-base/libxfcegui4_4.6.4.bb b/recipes/xfce-
+> base/libxfcegui4_4.6.4.bb
+> new file mode 100644
+> index 0000000..255f482
+> --- /dev/null
+> +++ b/recipes/xfce-base/libxfcegui4_4.6.4.bb
+> @@ -0,0 +1,17 @@
+> +# libxfcegui4 OE build file
+> +
+> +DESCRIPTION = "Xfce4 Widget library and X Window System interaction"
+> +DEPENDS = "gettext pkgconfig intltool virtual/libx11 libxfce4util xfconf
+dbh
+> libxml2 gtk+ libglade"
+> +RDEPENDS_${PN} = "xfconf startup-notification "
+> +
+> +SECTION = "x11/libs"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +LEAD_SONAME = "libxfcegui4.so.4"
+> +
+> +FILES_${PN} += "${libdir}/xfce4/modules ${libdir}/libglade/2.0/*.so
+> ${datadir}/xfce4/mime ${datadir}/icons/hicolor"
+> +
+> +SRC_URI[md5sum] = "88de59b222cb9977f93a4c61011c1e1f"
+> +SRC_URI[sha256sum] =
+> "c37e407dc00fb87dc16758d53e69edeac7b32aa76c5fcad2b784cf22f58af421"
+> diff --git a/recipes/xfce-base/thunar_1.0.2.bb b/recipes/xfce-
+> base/thunar_1.0.2.bb
+> new file mode 100644
+> index 0000000..d35c44d
+> --- /dev/null
+> +++ b/recipes/xfce-base/thunar_1.0.2.bb
+> @@ -0,0 +1,28 @@
+> +DESCRIPTION = "File manager for the Xfce Desktop Environment"
+> +HOMEPAGE="http://thunar.xfce.org"
+> +DEPENDS = "exo dbus-glib libexif xfce4-panel libice libsm gamin"
+> +RDEPENDS_${PN} = "libxfcegui4 exo dbus-glib libexif xfce4-panel libice
+libsm
+> gamin"
+> +RRECOMMENDS_${PN} = "shared-mime-info"
+> +SECTION = "x11"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +XFCE_VERSION = "4.6.2"
+> +
+> +SRC_URI = "http://www.us.xfce.org/archive/xfce-
+> ${XFCE_VERSION}/src/Thunar-${PV}.tar.bz2"
+> +
+> +S = "${WORKDIR}/Thunar-${PV}/"
+> +
+> +EXTRA_OECONF += "--disable-dependency-tracking --enable-dbus"
+> +
+> +FILES_${PN} += "${libdir}/thunarx-1/*.so \
+> +		${libdir}/thunarx-1/*.la \
+> +                ${datadir}/dbus-1 \
+> +                ${datadir}/thumbnailers \
+> +                ${datadir}/Thunar \
+> +                ${datadir}/xfce4"
+> +FILES_${PN}-dbg += "${libdir}/thunarx-1/.debug/
+${libexecdir}/xfce4/panel-
+> plugins/.debug/"
+> +
+> +SRC_URI[md5sum] = "c91073202d373a1f9951a1240083c36d"
+> +SRC_URI[sha256sum] =
+> "75829b34a68346b33f66882bedc9794d580c200d11af22541885750459b55c03"
+> diff --git a/recipes/xfce-base/xfce-terminal_0.4.5.bb b/recipes/xfce-
+> base/xfce-terminal_0.4.5.bb
+> new file mode 100644
+> index 0000000..2d5f94e
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce-terminal_0.4.5.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "Terminal emulator for the Xfce desktop environment"
+> +DEPENDS = "exo vte dbus-glib gtk+"
+> +RDEPENDS_${PN} += "gnome-pty-helper"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +SRC_URI =
+> +"http://www.xfce.org/archive/src/apps/terminal/0.4/Terminal-
+> ${PV}.tar.bz2 \ "
+> +
+> +S = "${WORKDIR}/Terminal-${PV}"
+> +
+> +FILES_${PN} += "${datadir}/Terminal"
+> +
+> +SRC_URI[md5sum] = "3c707628e2e97c6d9566cd74d400036a"
+> +SRC_URI[sha256sum] =
+> "92fddcbc1422076672d8ec61832793d4ceea2fc0db7d724a6acde0ec2bac8893"
+> diff --git a/recipes/xfce-base/xfce-utils_4.6.2.bb
+b/recipes/xfce-base/xfce-
+> utils_4.6.2.bb
+> new file mode 100644
+> index 0000000..08048c4
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce-utils_4.6.2.bb
+> @@ -0,0 +1,30 @@
+> +DESCRIPTION="Xfce4 Utilities"
+> +DEPENDS = "virtual/libx11 libxfcegui4"
+> +SECTION = "x11"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +FILES_${PN} += " \
+> +        ${bindir}/* \
+> +        ${datadir}/dbus-1/* \
+> +        ${datadir}/xfce4/AUTHORS \
+> +        ${datadir}/xfce4/BSD \
+> +        ${datadir}/xfce4/COPYING \
+> +        ${datadir}/xfce4/GPL \
+> +	${datadir}/xfce4/INFO* \
+> +        ${datadir}/xfce4/LGPL \
+> +        ${datadir}/xfce4/AUTHORS.html \
+> +        ${datadir}/xfce4/BSD.html \
+> +        ${datadir}/xfce4/COPYING.html \
+> +        ${datadir}/xfce4/GPL.html \
+> +	${datadir}/xfce4/INFO.html \
+> +        ${datadir}/xfce4/LGPL.html \
+> +        ${datadir}/xsessions/xfce.desktop \ "
+> +
+> +# NOTE:  This package takes a --with-browser for the default browser #
+> +NOTE:  Works with gdm also gtkhtml
+> +
+> +SRC_URI[md5sum] = "5d23407700d7e8c9751e17a5bc955109"
+> +SRC_URI[sha256sum] =
+> "54efc2038bfbd5acaadfc91ed91fb3dfd6cec64f9402f364accce7bcafe2ba7a"
+> diff --git a/recipes/xfce-base/xfce4-appfinder_4.6.2.bb b/recipes/xfce-
+> base/xfce4-appfinder_4.6.2.bb
+> new file mode 100644
+> index 0000000..a73383d
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce4-appfinder_4.6.2.bb
+> @@ -0,0 +1,11 @@
+> +# xfce4-appfinder build file
+> +
+> +DESCRIPTION="Xfce4 Application Finder"
+> +DEPENDS="libxfcegui4 libxfce4menu thunar"
+> +SECTION = "x11"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +SRC_URI[md5sum] = "7752e43578b821e35010bcd3762da166"
+> +SRC_URI[sha256sum] =
+> "a1bf35b838922a7f81f588c727a6ef2f56b1bed0c46f7c36b209ac336f7e492a"
+> diff --git a/recipes/xfce-base/xfce4-panel_4.6.4.bb b/recipes/xfce-
+> base/xfce4-panel_4.6.4.bb
+> new file mode 100644
+> index 0000000..fe402b8
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce4-panel_4.6.4.bb
+> @@ -0,0 +1,30 @@
+> +# xfce4-panel OE build file
+> +
+> +DESCRIPTION = "Xfce4 Panel"
+> +DEPENDS = "virtual/libx11 startup-notification libxfcegui4 libxml2 exo
+> libwnck"
+> +SECTION = "x11"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +SRC_URI[md5sum] = "82f10a42aefca4cc26a6633e7478cc65"
+> +SRC_URI[sha256sum] =
+> "cc9b70bdc73ab80f46655a34cdbaf876a67cd90b50230cbf4d77a3106a5c54e7"
+> +
+> +EXTRA_OECONF += " --enable-startup-notification"
+> +
+> +do_install() {
+> +    oe_runmake DESTDIR=${D} install
+> +}
+> +
+> +python populate_packages_prepend() {
+> +	plugin_dir = bb.data.expand('${libdir}/xfce4/panel-plugins/', d)
+> +	plugin_name = bb.data.expand('${PN}-plugin-%s', d)
+> +	do_split_packages(d, plugin_dir, '^lib(.*).so$', plugin_name,
+> +	                  '${PN} plugin for %s', extra_depends='',
+prepend=True,
+> +	                  aux_files_pattern=['${datadir}/xfce4/panel-
+> plugins/%s.desktop',
+> +
+'${sysconfdir}/xdg/xfce/panel/%s-*',
+> +
+'${datadir}/icons/hicolor/48x48/apps/*-%s.png',
+> +	                                     '${bindir}/*%s*']) }
+> +
+> +PACKAGES_DYNAMIC = "${PN}-plugin-*"
+> diff --git a/recipes/xfce-base/xfce4-session_4.6.2.bb b/recipes/xfce-
+> base/xfce4-session_4.6.2.bb
+> new file mode 100644
+> index 0000000..c85bb8c
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce4-session_4.6.2.bb
+> @@ -0,0 +1,22 @@
+> +DESCRIPTION = "xfce4-session is a session manager for Xfce 4 Desktop
+> Environment"
+> +DEPENDS = "libxfcegui4 libxfce4util dbus iceauth xfce-utils"
+> +SECTION = "x11"
+> +
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +RDEPENDS_${PN} = "iceauth xfce-utils xinit dbus-x11"
+> +
+> +FILES_${PN} += "${libdir}/xfce4/splash/engines/*.so"
+> +FILES_${PN} += "${datadir}/xfce4/tips/*"
+> +FILES_${PN} += "${datadir}/themes/Default/balou/*"
+> +
+> +FILES_${PN}-dbg += "${libdir}/xfce4/splash/engines/.debug/*.so"
+> +FILES_${PN}-dbg += "${libdir}/xfce4/splash/engines/.debug/*.a"
+> +
+> +FILES_${PN}-dev += "${libdir}/xfce4/splash/engines/*.la"
+> +FILES_${PN}-dev += "${libdir}/xfce4/splash/engines/*.a"
+> +
+> +SRC_URI[md5sum] = "9d9890130e45e0e9476591ed9ba2c9d5"
+> +SRC_URI[sha256sum] =
+> "725e269254c34c530acb670f5ccd0fd69b57cbe9f2176abd8499fc5d6dcd30a8"
+> diff --git a/recipes/xfce-base/xfce4-settings_4.6.5.bb b/recipes/xfce-
+> base/xfce4-settings_4.6.5.bb
+> new file mode 100644
+> index 0000000..65e4869
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfce4-settings_4.6.5.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "Xfce4 settings"
+> +HOMEPAGE = "http://www.xfce.org"
+> +SECTION = "x11/wm"
+> +LICENSE = "GPL-2"
+> +
+> +DEPENDS = "virtual/libx11 virtual/xserver libxi libwnck xrandr exo
+> libxfce4util libxfcegui4"
+> +
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +SRC_URI[md5sum] = "f988cb732913b5fbc115ad7105d2231e"
+> +SRC_URI[sha256sum] =
+> "1601b8d2cac5d931c39bed7e331c5bd91018d0e56663295e7a083a2c78fe168b"
+> +
+> +RDEPENDS_${PN} = "xfconf exo"
+> +
+> diff --git a/recipes/xfce-base/xfconf_4.6.2.bb b/recipes/xfce-
+> base/xfconf_4.6.2.bb
+> new file mode 100644
+> index 0000000..3db4c91
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfconf_4.6.2.bb
+> @@ -0,0 +1,16 @@
+> +DESCRIPTION = "Xfce configuration daemon and utilities"
+> +HOMEPAGE = "http://www.xfce.org"
+> +SECTION = "x11/wm"
+> +LICENSE = "GPL-2"
+> +
+> +DEPENDS = "libxfce4util"
+> +RDEPENDS_${PN} = "libxfce4util"
+> +
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +FILES_${PN} += "${datadir}/dbus-1/services/org.xfce.Xfconf.service"
+> +
+> +SRC_URI[md5sum] = "5ff93c15077c6dbbcd38c437bc1ab2ef"
+> +SRC_URI[sha256sum] =
+> "7b2635abc33ae6a76145238ed27557bc1ff91b1a5ee0757962f798a66d56f478"
+> diff --git a/recipes/xfce-base/xfdesktop_4.6.2.bb b/recipes/xfce-
+> base/xfdesktop_4.6.2.bb
+> new file mode 100644
+> index 0000000..c3a3bca
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfdesktop_4.6.2.bb
+> @@ -0,0 +1,21 @@
+> +DESCRIPTION = "Xfce4 Desktop Manager"
+> +SECTION = "x11/base"
+> +
+> +DEPENDS = "virtual/libx11 exo libxfcegui4 xfce4-panel thunar gtk+"
+> +RDEPENDS_${PN} = "libxfcegui4 libxml2 xfce4-panel thunar exo gtk+"
+> +PR = "r0"
+> +
+> +inherit xfce46
+> +
+> +do_configure() {
+> +   oe_runconf
+> +}
+> +
+> +FILES_xfdesktop-backdrops = "${datadir}/xfce4/backdrops/*"
+> +FILES_${PN} += "${libdir}/xfce4/panel-plugins/*.so \
+> +                ${libdir}/xfce4/panel-plugins/xfce4-menu-plugin \
+> +                ${datadir}/xfce4/panel-plugins/*.desktop"
+> +FILES_${PN}-dbg += "${libexecdir}/xfce4/panel-plugins/.debug"
+> +
+> +SRC_URI[md5sum] = "e800ea9fee7a5c5eaf2ae96e23a83e3a"
+> +SRC_URI[sha256sum] =
+> "cd760f95486ba3f1c6d0179bb10a4c21c99c1d459dd8265823fed85f7376a3fb"
+> diff --git a/recipes/xfce-base/xfwm4_4.6.2.bb b/recipes/xfce-
+> base/xfwm4_4.6.2.bb
+> new file mode 100644
+> index 0000000..3ea7f52
+> --- /dev/null
+> +++ b/recipes/xfce-base/xfwm4_4.6.2.bb
+> @@ -0,0 +1,31 @@
+> +# xfwm4 OE build file
+> +
+> +DESCRIPTION="Xfce4 Window Manager"
+> +SECTION = "x11/wm"
+> +PR = "r0"
+> +
+> +inherit xfce46 update-alternatives
+> +
+> +FILES_${PN} += "${datadir}/xfwm4/defaults
+> ${datadir}/xfwm4/themes/default.keys/*"
+> +
+> +DEPENDS = "startup-notification virtual/libx11 libxpm libxfce4util
+> libxfcegui4"
+> +RDEPENDS_${PN} = "xfwm4-theme-default"
+> +
+> +EXTRA_OECONF += " --enable-startup-notification"
+> +
+> +PACKAGES_DYNAMIC += "xfwm4-theme-*"
+> +
+> +python populate_packages_prepend () {
+> +	themedir = bb.data.expand('${datadir}/themes', d)
+> +	do_split_packages(d, themedir, '^(.*)', 'xfwm4-theme-%s', 'XFWM4
+> theme
+> +%s', allow_dirs=True) }
+> +
+> +ALTERNATIVE_NAME = "x-window-manager"
+> +ALTERNATIVE_LINK = "${bindir}/x-window-manager"
+> +ALTERNATIVE_PATH = "${bindir}/xfce4-session"
+> +ALTERNATIVE_PRIORITY = "30"
+> +
+> +FILES_${PN}-dbg += "${libexecdir}/xfce4/xfwm4/.debug/*"
+> +
+> +SRC_URI[md5sum] = "3e6c0c54b028b6ea60e865e55ecdf3f8"
+> +SRC_URI[sha256sum] =
+> "212819ee03c24635f79d50930284c422469e22489952d0b286e6fe5af2155828"
+> --
+> 1.5.3.4
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-> > (e.g. openjdk-shark will depend on openjdk-zero if I built zero first=
-)
-> > although there is no technical reason for this.
->
-> > So my question is: How can I solve this issue without resorting to:
->
-> > EXCLUDE_FROM_SHLIBS =3D "1"
->
-> > which I currently use and which has the bad side-effect of not having=
-
-> > openjdk's own dependencies. :(
->
-> Try:
->
-> PRIVATE_LIBS =3D "libjvm.so"
->
-> That will mark any libjvm.so in PACKAGES for that recipe as private and=
-
-> it won't show up as a shlib provider. We use this in mozilla recipes.
->
-> regards,
->
-> Koen
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
---=20
-Besuchen Sie uns vom 09.06. bis zum 12.06. auf dem LinuxTag 2010
-an unserem Stand =E2=80=9EFairtrade Software=E2=80=9C (Halle 7.2a. / Stan=
-d 123)!
-=E2=87=92 Unsere Themen dieses Jahr =E2=87=92 =E2=80=A2 Evolvis =E2=80=A2=
- Freedroidz =E2=80=A2 Portale =E2=80=A2
-=E2=80=A2 Identity and Access Management =E2=80=A2 Mobile Applikationen =E2=
-=80=A2
-
-tarent Gesellschaft f=C3=BCr Softwareentwicklung und IT-Beratung mbH
-Gesch=C3=A4ftsf=C3=BChrer: Boris Esser, Elmar Geese
-HRB AG Bonn 5168 - Ust-ID: DE122264941
-http://www.tarent.com/
-
-Heilsbachstr. 24, 53123 Bonn, fon +49 228 52675-0, fax +49 228 52675-25
-Weigandufer 45, 12059 Berlin, fon +49 30 5682943-30, fax +49 228 52675-25=
 
 
 
-
-
---------------enigA54E2DCC435A56E733DF0321
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAkwbZbAACgkQG9cfwmwwEtoJFACfaD6bntJPRV0rkKKs3mkpKSKi
-sWQAoJUxcCZ/GAFbee7ETTpJAPx72Fu3
-=ir42
------END PGP SIGNATURE-----
-
---------------enigA54E2DCC435A56E733DF0321--
