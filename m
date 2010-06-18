@@ -1,50 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nikunjbadjatya@gmail.com>) id 1OPY7z-0000vy-2U
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jun 2010 11:44:49 +0200
-Received: by gwj19 with SMTP id 19so183266gwj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OPYZP-0005g8-2r for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Jun 2010 12:13:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OPYV3-0005KX-56 for openembedded-devel@lists.openembedded.org;
+	Fri, 18 Jun 2010 12:08:37 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jun 2010 12:08:37 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 02:40:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=GqudLCA+7/p5hK9PFJ4zRlm3vwynRRTQHtAjht83cV0=;
-	b=QRmvYs5tK1e60z4SwGF6kyw+JlQP3IIr67BLFhS+uTwm9gDvHuJHPGUT/+GPXMgCsC
-	vgz0ZaD0ejL03KgAd+cOCZdbYVx4ZAsOr7kTVWaFNAqAG8hVx3DiZ27iwQENOeWYCh9Y
-	Pltd4yR3/8KvaP1vU+wdlD4SIcm4gc/gT0V9k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=O5EXVBmsz6G29bKgP1hFovUreRp2UCdfrHflf1yknyhEeNdBEOXG1Izp5sgTAvfbVu
-	qJoINR2Ldk83tDso/Kslkn+Rw74vXn3fOKXLICXjVl8Rw2ClHwrzMN12UCrSrhT1ULxt
-	/wdF+txRcX8rtcKz+8UzPElnzsbSrhLYdyNgI=
-Received: by 10.229.186.4 with SMTP id cq4mr379452qcb.236.1276854014273; Fri, 
-	18 Jun 2010 02:40:14 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.191.12 with HTTP; Fri, 18 Jun 2010 02:39:54 -0700 (PDT)
-In-Reply-To: <AANLkTikt8uUURjI56tmIEH0dCwtSJtwk0wre9oxNHEwF@mail.gmail.com>
-References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com> 
-	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com> 
-	<AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com> 
-	<AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com> 
-	<AANLkTikK720KNmNjRKr6x12-kSben4t42KlmgHsSGEpS@mail.gmail.com> 
-	<20100617193846.GC14941@mx.loc>
-	<AANLkTikt8uUURjI56tmIEH0dCwtSJtwk0wre9oxNHEwF@mail.gmail.com>
-From: nikunj badjatya <nikunjbadjatya@gmail.com>
-Date: Fri, 18 Jun 2010 15:09:54 +0530
-Message-ID: <AANLkTikdhubttOOkUq58_nl5E62jtB7QN7widnkNVT0R@mail.gmail.com>
+	Fri, 18 Jun 2010 12:08:37 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: nikunjbadjatya@gmail.com
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 18 Jun 2010 12:08:28 +0200
+Message-ID: <hvfgis$jkb$1@dough.gmane.org>
+References: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <AANLkTimG439FroM6HmVePh9WeX2nlxdkn1RVtBqI1y96@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: OSError: [Errno 2] No such file or directory
+Subject: Re: [RFC] purge recipes/linux-kexecboot and move to recipes/linux
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,77 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2010 09:44:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 18 Jun 2010 10:13:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi All,
-I have found the cause of the problem.
-I did a reinstall of Python and YUM few days back.
-I was thinking that other software requirements ( texi2info, help2man,
-chrpath etc. ) need not to be installed again.
-But when I tried reinstalling them also, the error is gone..!!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-The strange thing is that bitbake was not reporting himself that this are
-the missing modules which it needs prior to running any build..!!
+On 17-06-10 14:24, Andrea Adami wrote:
+> Hello,
+> 
+> I plan to move soon the kernel recipes of linux-kexecboot in the
+> standard recipes/linux location.
+> 
+> Being that the kernel directory is already overpopulated I was
+> thinking to remove some obsolete versions before moving the recipes.
+> I know that obsolete != unused, that's why I'm asking:
+> 
+> Who is using linux-kexecboot kernels?
+> Which machines apart some Zaurus are needing older 2.6.2x kernels?
+> 
+> If it's only about Zaurus I'd *only* keep an older version (still to
+> decide if 2.6.24 or 2.6.26) for a while and the latest 2.6.34.
+> 
+> Please make your comments.
 
-Anyways, Thanks Very Much for your time.
+I'm confused if you're RFC'ing one or more things, could you please show
+patches to illustrate what you want?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMG0WcMkyGM64RGpERAq4WAJwPHCB8k4YdIeBbsgdis8KH3a4G9QCdHYxb
+Xf3Pk5E78uPS109SXm3fQWk=
+=lnSK
+-----END PGP SIGNATURE-----
 
 
-Nikunj
-Bangalore, India
-
-
-
-
-On Fri, Jun 18, 2010 at 10:02 AM, nikunj badjatya
-<nikunjbadjatya@gmail.com>wrote:
-
-> Hi Bernhard,
->
-> *echo $BBPATH
-> /home/nikunj/ope/build:/home/nikunj/ope/openembedded*
->
-> Is that wrong.?
->
->
->
->
->
->
-> On Fri, Jun 18, 2010 at 1:08 AM, Bernhard Reutner-Fischer <
-> rep.dot.nop@gmail.com> wrote:
->
->> On Thu, Jun 17, 2010 at 12:11:52PM -0700, Khem Raj wrote:
->> >On Thu, Jun 17, 2010 at 5:39 AM, nikunj badjatya
->> ><nikunjbadjatya@gmail.com> wrote:
->> >> /home/nikunj/ope/openembedded/recipes/coreutils/
->> coreutils-native_8.5.bb,
->> >> do_populate_sysroot)
->> >> NOTE: Testing
->> >>
->> /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
->> >> for relocatability
->>
->> >Does
->>  /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
->> >exist ?
->>
->> huh? How would that supposed to be ok?
->> Looks like home is leaking into some prefix, no?
->> We should have a sanity for that one i suppose..
->>
->> Feb 14 22:25:04 <me> does anybody else see /home in their staging dir or
->> did i goof up somehow?
->> Feb 14 22:26:24 <me> would be nice if sanity would yell at /root and /home
->> in the staging dir..
->>
->> where /home == something in BBPATH, without looking into details.
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
 
