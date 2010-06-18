@@ -1,43 +1,44 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OPjY9-0001ed-Cm
+	(envelope-from <raj.khem@gmail.com>) id 1OPjei-0006Hg-Hw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jun 2010 23:56:39 +0200
-Received: by iwn5 with SMTP id 5so1546384iwn.6
+	Sat, 19 Jun 2010 00:03:35 +0200
+Received: by iwn5 with SMTP id 5so1551516iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 14:52:03 -0700 (PDT)
+	Fri, 18 Jun 2010 14:58:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=vPfvt9eGy2VQ/A2pPoQ/+i1ZMvjbf7tl6LwkyWPkSJ4=;
-	b=osSHNEbff9HzQOVt8STBRRkg0/tIxVr7BDy89MbLCkwnV2Pu/EOuQr6YSZhheB2Sgf
-	ifP5XYl0hxRedLFiJxHNhJPE+qvLodxDZ4KI7bsPsxPHC7kxrA4vQx2OkocsNClIBk2V
-	MQx/YLpZvkjpGOs1z5aRWr5qgVkb2PKSc/M8w=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=m6ND1LJIAcwW3noDBRfCbs1BNLunMGhCMHSMxtMff8E=;
+	b=Jul1ah6MgKVaCgWyu7M02PLEW6HRE/RkqEOG55kdmdZv6pxO0aOG1NjE9SXKFg8pwi
+	yAko2jPu8q7LQHonhBS5a9d+D4apf9fZRSrYhuitorypnX7MKE++e3H295PwYK0UyGzW
+	Sp/zcPqg8FjHlBKdC4KDyH5aJCFJojo6x6T9Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=n9yPiodknL5ju90f44kDk0HNOQPv9EBbsVTrizkBTa2KleYjidseTTI6juBFj9y3OJ
-	vb9o+wHEwBpN2ohhT07MTaULG45t4syE5dQizLj063/XMv0h4D/cO813LrVlKud+fGdd
-	81Ea53EEtZ+7lm7xz9mds9NsNAn/jB3W++sw0=
-Received: by 10.42.6.195 with SMTP id b3mr645384icb.14.1276897923201; Fri, 18 
-	Jun 2010 14:52:03 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=YDYVXubnPFfypNcYGuxcMhc02/eM+xqF3MAN30IeMdMaY6E5nGz5q7NjtwQYCb/Z4N
+	LiyMFJCwv3XAMQFQKV++t0UAb+OXrXsNTKVr1hZBMaGKFBL+jHxUCpsOF5pAECH0OafV
+	kjvcygQeS6vQtMyGFCwMFoublrae3LqG6K9rI=
+Received: by 10.231.191.66 with SMTP id dl2mr1834891ibb.101.1276898321248; 
+	Fri, 18 Jun 2010 14:58:41 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.17.130 with HTTP; Fri, 18 Jun 2010 14:51:43 -0700 (PDT)
-In-Reply-To: <AANLkTim5TDiBGob1RspY3wjtkO9JkWeJiVkqlRz9YQL0@mail.gmail.com>
-References: <AANLkTim5TDiBGob1RspY3wjtkO9JkWeJiVkqlRz9YQL0@mail.gmail.com>
+Received: by 10.231.17.130 with HTTP; Fri, 18 Jun 2010 14:58:21 -0700 (PDT)
+In-Reply-To: <AANLkTil99t7nC8GYAqysbXybTApi_2QF9lg7mWTXulHu@mail.gmail.com>
+References: <AANLkTil99t7nC8GYAqysbXybTApi_2QF9lg7mWTXulHu@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 18 Jun 2010 14:51:43 -0700
-Message-ID: <AANLkTileMuD5Zz8sloB_Jpa2yo3Teoe-G2Iqtx3lo9CM@mail.gmail.com>
+Date: Fri, 18 Jun 2010 14:58:21 -0700
+Message-ID: <AANLkTimvVAj809LPJxo3nLek_kOKGNkt8l1hWlLyWys-@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: -dbg packages
+Subject: Re: Building Angstrom for Beagleboard
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,36 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2010 21:56:39 -0000
+X-List-Received-Date: Fri, 18 Jun 2010 22:03:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 16, 2010 at 3:56 PM, C Michael Sundius <msundius@sundius.com> wrote:
-> How can I prevent all ${PN}-dbg packages from being added to my image?
+On Wed, Jun 16, 2010 at 6:12 AM, Raseel Bhagat <raseelbhagat@gmail.com> wro=
+te:
+> Hi,
 >
-> does DISTRO_TYPE = "debug" force all debug symbols to be added to RDEPENDS?
-> I don't see anywhere where that is done, but I might be missing something.
+> I'm trying to build Angstrom from scratch for the BeagleBoard.
 >
-> our team has the DISTRO_TYPE = "debug" turned on because the release version
-> does not build, but the entire build too big to fit in our flash if all the
+> Now, I've already faced a lot of issues , local as well as related to the
+> build and managed to go past various stages in multiple attempt :-)
+>
+> Currently, I am bitbaking nano and I see that more than 7 GB space is bei=
+ng
+> utilised and its been over an hour and the build =A0is still going on.
 
-what fails for you which block the release build ?
-DISTRO_TYPE debug adds a few extra packages to
-the image which are useful for debugging.
+angstrom uses -ggdb3 option to emit most possible debug information.
+This will increase the
+disk consumption and also time to compile. you could lower the amount
+of debug info level
+in distro/include/angstrom-<libc>.inc
+where you should modify FULL_OPTIMIZATION and BUILD_OPTIMIZATION to
+use -g instead of
+-ggdb3
 
-its DEBUG_BUILD if set to 1 will choose a different set
-of optimizations and options to help debugging code.
-and it will also increase the image size if you package
--dbg together.
-
-> symbols are included.
->
-> thanks
->
-> Mike
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-Khem
 
 
