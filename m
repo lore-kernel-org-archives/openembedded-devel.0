@@ -1,41 +1,43 @@
-Received: from ausxippc101.us.dell.com ([143.166.85.207])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sean_Hudson@Dell.com>) id 1OPho7-0006H9-JP
+	(envelope-from <raj.khem@gmail.com>) id 1OPjY9-0001ed-Cm
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 18 Jun 2010 22:04:59 +0200
-X-Loopcount0: from 10.166.62.177
-From: <Sean_Hudson@Dell.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Fri, 18 Jun 2010 14:58:54 -0500
-Thread-Topic: [PATCH] Add a waf bitbake class.
-Thread-Index: AcsPIK4CpCdlixutSjGKUk26ftQ03Q==
-Message-ID: <113134CF306E8E4CACC27BE5937261B2092DDD2B99@AUSX7MCPS303.AMER.DELL.COM>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-x-cr-puzzleid: {7D2CD0A9-B7DC-4032-93D9-2408917ED98C}
-x-cr-hashedpuzzle: ByRN DlQ9 Dr1h D+3w IVXD Ik7b JaSG JbX6 J33V KBKU KrkS
-	L5Wb PCX0 PSQv Ph+u SgBb; 2;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnADsAcgB5AGEAbgBAAHQAcgBvAGwAbwBjAHMAaQBzAC4AYwBvAG0A;
-	Sosha1_v1; 7; {7D2CD0A9-B7DC-4032-93D9-2408917ED98C};
-	cwBlAGEAbgBfAGgAdQBkAHMAbwBuAEAAZABlAGwAbAAuAGMAbwBtAA==; Fri,
-	18 Jun 2010 19:58:54 GMT;
-	WwBQAEEAVABDAEgAXQAgAEEAZABkACAAYQAgAHcAYQBmACAAYgBpAHQAYgBhAGsAZQAgAGMAbABhAHMAcwAuAA==
-acceptlanguage: en-US
+	Fri, 18 Jun 2010 23:56:39 +0200
+Received: by iwn5 with SMTP id 5so1546384iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 18 Jun 2010 14:52:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=vPfvt9eGy2VQ/A2pPoQ/+i1ZMvjbf7tl6LwkyWPkSJ4=;
+	b=osSHNEbff9HzQOVt8STBRRkg0/tIxVr7BDy89MbLCkwnV2Pu/EOuQr6YSZhheB2Sgf
+	ifP5XYl0hxRedLFiJxHNhJPE+qvLodxDZ4KI7bsPsxPHC7kxrA4vQx2OkocsNClIBk2V
+	MQx/YLpZvkjpGOs1z5aRWr5qgVkb2PKSc/M8w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=n9yPiodknL5ju90f44kDk0HNOQPv9EBbsVTrizkBTa2KleYjidseTTI6juBFj9y3OJ
+	vb9o+wHEwBpN2ohhT07MTaULG45t4syE5dQizLj063/XMv0h4D/cO813LrVlKud+fGdd
+	81Ea53EEtZ+7lm7xz9mds9NsNAn/jB3W++sw0=
+Received: by 10.42.6.195 with SMTP id b3mr645384icb.14.1276897923201; Fri, 18 
+	Jun 2010 14:52:03 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginalArrivalTime: 18 Jun 2010 19:59:00.0346 (UTC)
-	FILETIME=[B19DA5A0:01CB0F20]
-X-SA-Exim-Connect-IP: 143.166.85.207
-X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
+Received: by 10.231.17.130 with HTTP; Fri, 18 Jun 2010 14:51:43 -0700 (PDT)
+In-Reply-To: <AANLkTim5TDiBGob1RspY3wjtkO9JkWeJiVkqlRz9YQL0@mail.gmail.com>
+References: <AANLkTim5TDiBGob1RspY3wjtkO9JkWeJiVkqlRz9YQL0@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 18 Jun 2010 14:51:43 -0700
+Message-ID: <AANLkTileMuD5Zz8sloB_Jpa2yo3Teoe-G2Iqtx3lo9CM@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.1 required=5.0 tests=BAYES_05,HTML_MESSAGE,
-	MIME_HTML_MOSTLY, RCVD_IN_DNSWL_MED,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [PATCH] Add a waf bitbake class.
+Subject: Re: -dbg packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,46 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 18 Jun 2010 20:04:59 -0000
-X-Groupsio-MsgNum: 20273
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_"
+X-List-Received-Date: Fri, 18 Jun 2010 21:56:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+On Wed, Jun 16, 2010 at 3:56 PM, C Michael Sundius <msundius@sundius.com> wrote:
+> How can I prevent all ${PN}-dbg packages from being added to my image?
+>
+> does DISTRO_TYPE = "debug" force all debug symbols to be added to RDEPENDS?
+> I don't see anywhere where that is done, but I might be missing something.
+>
+> our team has the DISTRO_TYPE = "debug" turned on because the release version
+> does not build, but the entire build too big to fit in our flash if all the
 
-Hi All,
+what fails for you which block the release build ?
+DISTRO_TYPE debug adds a few extra packages to
+the image which are useful for debugging.
 
-  We are using waf for some of our modules and decided to add a class to ma=
-ke it easier to write recipes.
+its DEBUG_BUILD if set to 1 will choose a different set
+of optimizations and options to help debugging code.
+and it will also increase the image size if you package
+-dbg together.
 
-Regards,
-Sean Hudson
+> symbols are included.
+>
+> thanks
+>
+> Mike
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_
-Content-Type: application/octet-stream; name="waf.bbclass"
-Content-Description: waf.bbclass
-Content-Disposition: attachment; filename="waf.bbclass"; size=813;
-	creation-date="Fri, 18 Jun 2010 14:57:22 GMT";
-	modification-date="Fri, 18 Jun 2010 14:51:25 GMT"
-Content-Transfer-Encoding: base64
 
-IyBXQUYgcHJvamVjdCBjbGFzcy4KCkRFUEVORFMgKz0gcHl0aG9uCgpTVEFHRV9URU1QPSIke1dP
-UktESVJ9L3RlbXAtc3RhZ2luZyIKU1RBR0VfVEVNUF9QUkVGSVggPSAiIgoKIyBDb25kaXRpb25h
-bGx5IHNldCB0aGUgdmVyYm9zZSBvcHRpb24uCiMgV0FGX1ZFUkJPU0U9Ii12IgoKd2FmX2RvX2Nv
-bXBpbGUoKSB7CgkuL3dhZiAke1dBRl9WRVJCT1NFfSBidWlsZCAKfQoKd2FmX2RvX2NsZWFuKCkg
-ewoJLi93YWYgJHtXQUZfVkVSQk9TRX0gY2xlYW4KfQoKd2FmX2RvX2NvbmZpZ3VyZSgpIHsKCWlm
-IFsgLXggJHtTfS93YWYgXTsgdGhlbgoJCSR7U30vd2FmICR7V0FGX1ZFUkJPU0V9IGNvbmZpZ3Vy
-ZSAtLXByZWZpeD0ke3ByZWZpeH0gJHtFWFRSQV9PRUNPTkZ9ICIkQCIKCWVsc2UKCQlvZWZhdGFs
-ICJleGVjdXRhYmxlIHdhZiBzY3JpcHQgbm90IGZvdW5kIgoJZmkKfQoKd2FmX2RvX2luc3RhbGwo
-KSB7CgkuL3dhZiAke1dBRl9WRVJCT1NFfSBpbnN0YWxsIC0tZGVzdGRpcj0iJHtEfSIgIiRAIgp9
-Cgp3YWZfc3RhZ2VfYWxsKCkgewoJLi93YWYgJHtXQUZfVkVSQk9TRX0gaW5zdGFsbCAtLWRlc3Rk
-aXI9IiR7U1RBR0VfVEVNUH0iIAoJcm0gLXJmICR7U1RBR0VfVEVNUH0vJHttYW5kaXJ9IHx8IHRy
-dWUKCXJtIC1yZiAke1NUQUdFX1RFTVB9LyR7aW5mb2Rpcn0gfHwgdHJ1ZQoJc3lzcm9vdF9zdGFn
-ZV9kaXJzICR7U1RBR0VfVEVNUH0gJHtTVEFHRV9URU1QX1BSRUZJWH0KCXJtIC1yZiAke1NUQUdF
-X1RFTVB9Cn0KCkVYUE9SVF9GVU5DVElPTlMgZG9fY29tcGlsZSBkb19jbGVhbiBkb19jb25maWd1
-cmUgZG9faW5zdGFsbCAK
-
---_004_113134CF306E8E4CACC27BE5937261B2092DDD2B99AUSX7MCPS303A_--
