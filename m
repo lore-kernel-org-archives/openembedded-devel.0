@@ -1,31 +1,43 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OPsr3-0000is-Bp
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Jun 2010 09:52:42 +0200
-Received: from [192.168.1.2] (e180149003.adsl.alicedsl.de [85.180.149.3])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id CD3105841A7;
-	Sat, 19 Jun 2010 09:57:19 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OPubd-0007dQ-0G for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Jun 2010 11:44:54 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OPuXG-0006Ux-Je for openembedded-devel@lists.openembedded.org;
+	Sat, 19 Jun 2010 11:40:22 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Jun 2010 11:40:22 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Jun 2010 11:40:22 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
-References: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
-Organization: Vanille-Media
-Date: Sat, 19 Jun 2010 09:50:07 +0200
-Message-ID: <1276933807.1981.61.camel@saphir>
+connect(): No such file or directory
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 19 Jun 2010 11:40:12 +0200
+Message-ID: <hvi39s$r06$1@dough.gmane.org>
+References: <113134CF306E8E4CACC27BE5937261B2092DDD2B99@AUSX7MCPS303.AMER.DELL.COM>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <113134CF306E8E4CACC27BE5937261B2092DDD2B99@AUSX7MCPS303.AMER.DELL.COM>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openezx-devel@lists.openezx.org
-Subject: Re: [PATCH 0/3] ezx: move some _svn.bb recipes to _git.bb
+Subject: Re: [PATCH] Add a waf bitbake class.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jun 2010 07:52:42 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 19 Jun 2010 09:44:54 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Am Freitag, den 18.06.2010, 21:30 +0200 schrieb Antonio Ospite:
-> gen-blob and boot_usb (now moto-boot-usb) are now managed with git, this
-> series replaces the svn recipes, all future development will be in the git
-> repositories.
-> 
-> 
-> Antonio Ospite (3):
->   ezx: replace ezx-gen-blob_svn.bb with ezx-gen-blob_git.bb
->   ezx: rename ezx-boot-usb recipe to moto-boot-usb, use git
->   ezx: rename references to ezx-boot-usb into moto-boot-usb
-> 
->  conf/distro/include/preferred-om-2008-versions.inc |    2 +-
->  conf/machine/include/motorola-ezx-base.inc         |    2 +-
->  recipes/ezx/ezx-boot-usb-native_svn.bb             |   29 --------------
->  recipes/ezx/ezx-gen-blob_git.bb                    |   41 ++++++++++++++++++++
->  recipes/ezx/ezx-gen-blob_svn.bb                    |   41 --------------------
->  recipes/ezx/moto-boot-usb-native_git.bb            |   27 +++++++++++++
->  6 files changed, 70 insertions(+), 72 deletions(-)
->  delete mode 100644 recipes/ezx/ezx-boot-usb-native_svn.bb
->  create mode 100644 recipes/ezx/ezx-gen-blob_git.bb
->  delete mode 100644 recipes/ezx/ezx-gen-blob_svn.bb
->  create mode 100644 recipes/ezx/moto-boot-usb-native_git.bb
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+On 18-06-10 21:58, Sean_Hudson@Dell.com wrote:
+> Hi All,
+> 
+>   We are using waf for some of our modules and decided to add a class to make it easier to write recipes.
 
--- 
-:M:
+Why is there still a staging method in there? Those have been deprecated
+for months now.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMHJB8MkyGM64RGpERAv/nAKCD2TVNooOtBk86mkkKlPDF3zOJEwCeN4Jz
+2AbPe+YAxIK6iBPnKqX3mfI=
+=hih/
+-----END PGP SIGNATURE-----
 
 
 
