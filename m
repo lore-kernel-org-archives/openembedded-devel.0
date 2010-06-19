@@ -1,35 +1,31 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OPykn-0007hS-9q
+Received: from helsinki.digox.de ([87.106.28.129] helo=digox.de)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <mok@mnet-online.de>) id 1OQ3Ht-0006fj-M9
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Jun 2010 16:10:40 +0200
-Received: (qmail invoked by alias); 19 Jun 2010 14:06:05 -0000
-Received: from p508835E7.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.53.231]
-	by mail.gmx.net (mp043) with SMTP; 19 Jun 2010 16:06:05 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19ZOU9t0OpZGbq+h+hkuWyCIrwjnY/eOtmQIip0lK
-	m+iLZ/yhGr2m5r
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Sat, 19 Jun 2010 21:01:07 +0200
+Received: from gonzales.localnet by digox.de with esmtp (emil_Fk.fnHvuqfpv9);
+	Sat, 19 Jun 2010 20:52:12 +0200
+From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Jun 2010 16:03:43 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <201006161433.54486.schnitzeltony@gmx.de>
-	<201006180055.03306.schnitzeltony@gmx.de>
-	<0e3c01cb0f15$4152daf0$c3f890d0$@Distant-earth.com>
-In-Reply-To: <0e3c01cb0f15$4152daf0$c3f890d0$@Distant-earth.com>
+Date: Sat, 19 Jun 2010 20:52:20 +0200
+User-Agent: KMail/1.13.3 (Linux/2.6.33.5-124.fc13.x86_64; KDE/4.4.4; x86_64; ;
+	)
+References: <A24693684029E5489D1D202277BE89445316FB43@dlee02.ent.ti.com>
+	<20100605055722.GR16035@jama>
+	<lypr058utg.fsf@ensc-virt.intern.sigma-chemnitz.de>
+In-Reply-To: <lypr058utg.fsf@ensc-virt.intern.sigma-chemnitz.de>
 MIME-Version: 1.0
-Message-Id: <201006191603.43915.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Message-Id: <201006192052.21716.mok@mnet-online.de>
+X-SA-Exim-Connect-IP: 87.106.28.129
+X-SA-Exim-Mail-From: mok@mnet-online.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: xfce 4.6.2 recipes
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>, martin.jansa@gmail.com
+Subject: Re: We need newer ncurses Was: Host Environment affect on target builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,18 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jun 2010 14:10:40 -0000
-Content-Type: text/plain;
+X-List-Received-Date: Sat, 19 Jun 2010 19:01:08 -0000
+Content-Type: Text/Plain;
   charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Friday 18 June 2010 08:37:06 pm John Willis wrote:
-> For what it's worth these look fine to me, and it saves me finishing off the
-> 4.6.2 patch I had in my TODO ;). 
+Am Samstag, 5. Juni 2010, 15:36:59 schrieb Enrico Scholz:
+> Martin Jansa <martin.jansa@gmail.com> writes:
+> > BTW: 5.4 is >6years old, 5.7 ~2years old (latest)
+> > 
+> > Is someone already working on newer ncurses recipes?
 > 
-> Thanks for this.
+> https://www.cvg.de/people/ensc/ncurses_5.7.bb
+> 
+> Problem with ncurses is, that it needs a patched autoconf 2.13 to do
+> the full autoconf step.  Recipe above uses shipped ./configure. Newer
+> ncurses need some termcap/tinfo related changes in multiple packages
+> too and I did not had time to clean them all up for submission.
 
-John: Would you like to take look on 'Fixes install error in xfwm4-themes_4.6.0' (xfwm4 causes themes to build and they fail on installation)?
+I had that -ltinfo build problem with alsa-utils on Fedora 13. With your 
+ncurses recipe it build fine. Thanks :)
+
+> 
+> 
+> Enrico
+> 
+
+-- 
+Klaus 'mrmoku' Kurzmann
 
 
