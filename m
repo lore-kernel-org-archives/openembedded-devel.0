@@ -1,43 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OPrZH-0007R2-I8
+	(envelope-from <mickey@vanille-media.de>) id 1OPsr3-0000is-Bp
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Jun 2010 08:30:16 +0200
-Received: by fxm18 with SMTP id 18so978784fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 18 Jun 2010 23:25:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=sxOtXS8Jo5Ij6wEl5E5ZP/tRQb/jHu+YFhZJpcgXZ6s=;
-	b=hpCyka17JLpkN2ZBet0b/mt4zf4V/UDH/7acKw1P6/SmeA3qKvbQA0A1QyvxdNJqh/
-	KvRO2gdTNT37sZMP5PnwIMIdYRBus/LgOu5M4c3tLva0rwKSYkKiZDlYCBiR8bcoYDw2
-	kxV4A2QCEyLUy2xFsbrhdbzCz5SvYjNPTNITQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=bD3E5KLHvRWwaO2I/uJW6sIwbfxSv8AAqMwInieDesJSHTm8xi/JBZAEgQGBFjUaGB
-	B+329K3dlBw4I3mPEl1y0pC+BSBVMqrpM6iPJs9wDkF4nu7pXh4BkzWrh0ZgXt8o9lqa
-	fsBl3A5nXveXSLwLdN6r10l5OAhD20NlZc0VY=
-Received: by 10.223.30.130 with SMTP id u2mr1697697fac.70.1276928743382;
-	Fri, 18 Jun 2010 23:25:43 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id n6sm15892113fam.7.2010.06.18.23.25.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 18 Jun 2010 23:25:42 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 19 Jun 2010 09:52:42 +0200
+Received: from [192.168.1.2] (e180149003.adsl.alicedsl.de [85.180.149.3])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id CD3105841A7;
+	Sat, 19 Jun 2010 09:57:19 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Jun 2010 08:25:39 +0200
-Message-Id: <1276928739-16685-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
+References: <1276889420-12696-1-git-send-email-ospite@studenti.unina.it>
+Organization: Vanille-Media
+Date: Sat, 19 Jun 2010 09:50:07 +0200
+Message-ID: <1276933807.1981.61.camel@saphir>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] testlab: from opkg info grep only +- 7 lines around package with status installed of unpacked
+Cc: openezx-devel@lists.openezx.org
+Subject: Re: [PATCH 0/3] ezx: move some _svn.bb recipes to _git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +39,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jun 2010 06:30:16 -0000
+X-List-Received-Date: Sat, 19 Jun 2010 07:52:42 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-* silly solution to filter multiple versions shown in installed-packages.txt where one is with Status not-installed and the right one with installed
-* someone with better idea?
+Am Freitag, den 18.06.2010, 21:30 +0200 schrieb Antonio Ospite:
+> gen-blob and boot_usb (now moto-boot-usb) are now managed with git, this
+> series replaces the svn recipes, all future development will be in the git
+> repositories.
+> 
+> 
+> Antonio Ospite (3):
+>   ezx: replace ezx-gen-blob_svn.bb with ezx-gen-blob_git.bb
+>   ezx: rename ezx-boot-usb recipe to moto-boot-usb, use git
+>   ezx: rename references to ezx-boot-usb into moto-boot-usb
+> 
+>  conf/distro/include/preferred-om-2008-versions.inc |    2 +-
+>  conf/machine/include/motorola-ezx-base.inc         |    2 +-
+>  recipes/ezx/ezx-boot-usb-native_svn.bb             |   29 --------------
+>  recipes/ezx/ezx-gen-blob_git.bb                    |   41 ++++++++++++++++++++
+>  recipes/ezx/ezx-gen-blob_svn.bb                    |   41 --------------------
+>  recipes/ezx/moto-boot-usb-native_git.bb            |   27 +++++++++++++
+>  6 files changed, 70 insertions(+), 72 deletions(-)
+>  delete mode 100644 recipes/ezx/ezx-boot-usb-native_svn.bb
+>  create mode 100644 recipes/ezx/ezx-gen-blob_git.bb
+>  delete mode 100644 recipes/ezx/ezx-gen-blob_svn.bb
+>  create mode 100644 recipes/ezx/moto-boot-usb-native_git.bb
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- classes/testlab.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 
-diff --git a/classes/testlab.bbclass b/classes/testlab.bbclass
-index bc6b6e5..b8ba9fe 100644
---- a/classes/testlab.bbclass
-+++ b/classes/testlab.bbclass
-@@ -36,7 +36,7 @@ if [ -e  ${IMAGE_ROOTFS}/etc/opkg ] && [ "${ONLINE_PACKAGE_MANAGEMENT}" = "full"
- 	echo -e "digraph depends {\n    node [shape=plaintext]" > ${TESTLAB_DIR}/depends.dot
- 
- 	for pkg in $(opkg-cl ${IPKG_ARGS} list_installed | awk '{print $1}') ; do 
--		opkg-cl ${IPKG_ARGS} info $pkg | awk '/^Package/ {printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
-+		opkg-cl ${IPKG_ARGS} info $pkg | grep -B 7 -A 7 "^Status.* \(\(installed\)\|\(unpacked\)\)" | awk '/^Package/ {printf $2"_"} /^Version/ {printf $2"_"} /^Archi/ {print $2".ipk"}'  >> ${TESTLAB_DIR}/installed-packages.txt
- 
-     		for depends in $(opkg-cl ${IPKG_ARGS} info $pkg | grep ^Depends) ; do 
-         		echo "$pkg OPP $depends;" | grep -v "(" | grep -v ")" | grep -v "$pkg OPP Depends" | sed -e 's:,::g' -e 's:-:_:g' -e 's:\.:_:g' -e 's:+::g' |sed 's:OPP:->:g' >> ${TESTLAB_DIR}/depends.dot
 -- 
-1.7.1
+:M:
 
 
 
