@@ -1,31 +1,41 @@
-Received: from helsinki.digox.de ([87.106.28.129] helo=digox.de)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mok@mnet-online.de>) id 1OQ3Ht-0006fj-M9
+	(envelope-from <a.alalousi@gmail.com>) id 1OQ4vG-0000af-HS
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 19 Jun 2010 21:01:07 +0200
-Received: from gonzales.localnet by digox.de with esmtp (emil_Fk.fnHvuqfpv9);
-	Sat, 19 Jun 2010 20:52:12 +0200
-From: "Klaus 'mrmoku' Kurzmann" <mok@mnet-online.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 19 Jun 2010 20:52:20 +0200
-User-Agent: KMail/1.13.3 (Linux/2.6.33.5-124.fc13.x86_64; KDE/4.4.4; x86_64; ;
-	)
-References: <A24693684029E5489D1D202277BE89445316FB43@dlee02.ent.ti.com>
-	<20100605055722.GR16035@jama>
-	<lypr058utg.fsf@ensc-virt.intern.sigma-chemnitz.de>
-In-Reply-To: <lypr058utg.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	Sat, 19 Jun 2010 22:45:51 +0200
+Received: by fxm18 with SMTP id 18so1250073fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 19 Jun 2010 13:41:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=6icjkrmHfu7LCPEgMWf84y6VIpZeaAa4m8rjsjh4KdQ=;
+	b=PyuPk2P3EKsWfrcw3XS6AMsSuwfxjvIgdfv4cVP2ED5OdVYNRULnhqXBBSm4GQq/e/
+	u8EqjwDmnmWZdE39qxVLMfcMRw/QwWW9DNlnYmvm+J17fjTmkRZB63hA+DX1FMt5Afui
+	daZ8q3EIoPQxsI0A/eruN/o9sCLpAU16pgLo4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Pn7P9cTfODSJQjwkHWDSvaZgXtiKBgE8BVFSHJqp/iDOE2XElB+69LfJSVFJte/toB
+	JZsNN6WPvdd4HQPUYW5ijzRlqu/qqL0uJWUF0Cc2oh0PZdRTghWXOYPesoIzdxhhXPnU
+	Qyu3RebBiVN9Abm2LJxbNPu+HgFO4NoScfLyE=
 MIME-Version: 1.0
-Message-Id: <201006192052.21716.mok@mnet-online.de>
-X-SA-Exim-Connect-IP: 87.106.28.129
-X-SA-Exim-Mail-From: mok@mnet-online.de
+Received: by 10.102.16.36 with SMTP id 36mr921078mup.124.1276980078021; Sat, 
+	19 Jun 2010 13:41:18 -0700 (PDT)
+Received: by 10.204.58.134 with HTTP; Sat, 19 Jun 2010 13:41:17 -0700 (PDT)
+Date: Sat, 19 Jun 2010 21:41:17 +0100
+Message-ID: <AANLkTimWNow6dtCak1br5QSAIbXbu6miIOIoT1XonBcq@mail.gmail.com>
+From: "Dr. Ahmed Al-Alousi" <a.alalousi@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: a.alalousi@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>, martin.jansa@gmail.com
-Subject: Re: We need newer ncurses Was: Host Environment affect on target builds
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: OE Image for Aramadeus .. anyone ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +49,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jun 2010 19:01:08 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 19 Jun 2010 20:45:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Am Samstag, 5. Juni 2010, 15:36:59 schrieb Enrico Scholz:
-> Martin Jansa <martin.jansa@gmail.com> writes:
-> > BTW: 5.4 is >6years old, 5.7 ~2years old (latest)
-> > 
-> > Is someone already working on newer ncurses recipes?
-> 
-> https://www.cvg.de/people/ensc/ncurses_5.7.bb
-> 
-> Problem with ncurses is, that it needs a patched autoconf 2.13 to do
-> the full autoconf step.  Recipe above uses shipped ./configure. Newer
-> ncurses need some termcap/tinfo related changes in multiple packages
-> too and I did not had time to clean them all up for submission.
+Guys,
 
-I had that -ltinfo build problem with alsa-utils on Fedora 13. With your 
-ncurses recipe it build fine. Thanks :)
+I'm trying to get an image built around Armstrong/OE for the Armadeus apf27
+board.
 
-> 
-> 
-> Enrico
-> 
+Anyone been through the motions ?
 
--- 
-Klaus 'mrmoku' Kurzmann
+Any help greatly appreciated.
 
+Regards,
+
+Ahmed.
 
