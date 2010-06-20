@@ -1,44 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OQMgG-0004zR-Py
+	(envelope-from <challinan@gmail.com>) id 1OQMrS-0004Jt-29
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Jun 2010 17:43:34 +0200
-Received: by bwz14 with SMTP id 14so765090bwz.6
+	Sun, 20 Jun 2010 17:55:08 +0200
+Received: by pxi3 with SMTP id 3so1127413pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jun 2010 08:39:00 -0700 (PDT)
+	Sun, 20 Jun 2010 08:50:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=6/2ohchUhp3yeRbm2vABZymjM+m79k/H171rRIj+BtM=;
-	b=M/OMkmyeOVg/CF28k9eSc9Rz3UfOWBmSkAc7JmMoybeSqQDmNN8bhgkx4B/HUO+REU
-	n2w7tI6n/7PsGuzgbDiKsa04pGz4yjqK+lLv8ND3cUhjQotKm+F5e60VZHRdWPgf1d0b
-	paZTpIHfiXdopyOCfXvhefray7YE1JqiiReRk=
+	bh=Gq6Ec+4os2BLc8pVh0USvN7eTB/gYlyh0MXY2FBOT+Y=;
+	b=sxx0y9AOenhhuFCleCqUtLZzci8EgXKjymmBslqHDVhC/4RgPwl9UZIVLpThF60gyf
+	H9bDo11De/aPZR8PczUrfxo/upzvwE1LVwR10utZciEvwu03/C4AmZPkWhEkx0uKagvv
+	0MmhT8FJinrGDzUgfkrZw9aVbSIhxPsvCcZ00=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=YSgOTbO1EUNFq3D/JwwLnof8d+XNhg3RW4qANa29r/zRj2U4zknA3MUlU0MV00D+va
-	tMt/QznQXmN1egXo/mZETZt2ak83u6iwMEPLbvPnOVzsvoKRZIwcUhD4aa+iR0jUQyPL
-	G7X/oyG0WEAmzz5neAUo1eZ0J0A/xx9IpQGr8=
+	b=GqsH8gF8yP9RCLc5fPlw7Vs3gsP7iH1hYP9Css9wguhDtI2rBU2Mv7SMDXu8HI86rP
+	kvUiE6J2/iobZl5hi7mQG+S/E0kQEmi55h45S7eYAkylwoHnPHldPUmzbE3Z3phDw98P
+	t97jOmkFPylulXBShPQmY9RSdkavz5M2YaCLU=
 MIME-Version: 1.0
-Received: by 10.204.81.129 with SMTP id x1mr1946913bkk.95.1277048339506; Sun, 
-	20 Jun 2010 08:38:59 -0700 (PDT)
-Received: by 10.204.77.132 with HTTP; Sun, 20 Jun 2010 08:38:59 -0700 (PDT)
-In-Reply-To: <hvl1uc$bol$1@dough.gmane.org>
-References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
-	<hvl1uc$bol$1@dough.gmane.org>
-Date: Sun, 20 Jun 2010 17:38:59 +0200
-Message-ID: <AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.143.21.32 with SMTP id y32mr2509330wfi.60.1277049031620; Sun, 
+	20 Jun 2010 08:50:31 -0700 (PDT)
+Received: by 10.142.229.18 with HTTP; Sun, 20 Jun 2010 08:50:31 -0700 (PDT)
+In-Reply-To: <3F67CA37-B0AD-45A5-9634-C1CF00E9A6AA@keylevel.com>
+References: <4D3F1A81-1C1A-4A1A-AD8C-C2EB865A7CAD@keylevel.com>
+	<AANLkTikzD0maKiGuE2bK5-I7dWpcm1W-UvC1uV9ei29H@mail.gmail.com>
+	<3F67CA37-B0AD-45A5-9634-C1CF00E9A6AA@keylevel.com>
+Date: Sun, 20 Jun 2010 11:50:31 -0400
+Message-ID: <AANLkTinYHUBPHYghmnKKcRnRuL2RGREVtHi0tsKzx6NY@mail.gmail.com>
+From: Chris Hallinan <challinan@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: challinan@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: introducing a new architecture/machine; policy ? (and a 	question)
+Subject: Re: Network card not detected
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,44 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jun 2010 15:43:34 -0000
+X-List-Received-Date: Sun, 20 Jun 2010 15:55:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/6/20 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On Sun, Jun 20, 2010 at 11:14 AM, Chris Tapp <dokuwiki@keylevel.com> wrote:
 >
-> On 20-06-10 11:58, Frans Meulenbroeks wrote:
->> Hi,
->>
->> I'm about to complete bringing a new architecture (nios2 with mmu) and
->> machine (cyclone III FPGA starter kit, and maybe also the Nios2
->> Embeddeded Evaluation Kit (aka neek)) to oe.
->> Is there a policy on on the process how to do this.
+>> Also, this discussion might be more appropriate on the openembedded-users@
+>> list.
 >
-> Have a look at the nios2 patches Leon sent last december, they were
-> reviewed on this list, but not committed.
+> From looking at the http://wiki.openembedded.net/index.php/Mailing_lists
+> wiki page I thought this list was no longer available as there's no
+> 'subscribe' link. I'll have a go and see if I can register as I agree my
+> questions are really 'user' related at this time.
 
-Koen, thanks for reminding me the look at the review comments.
+Yeah, I noticed that last night.  I am subscribed to both - admittedly
+there is very little traffic on the users list, but I'd sure like to
+encourage more!  Not sure what the intention of the list owners is on
+this...
 
-I'm well aware of the work of Leon and Walter (and they are well aware
-of my work).
-Note that what Leon posted was for a non-mmu nios2 core, whereas the
-changes I have is for an mmu core.
-
-Triggered by Koens reminder I revisited the review comments. Actually
-none but one are applicable for me.
-The one that is applicable is the one about pinning versions in
-machine descriptions.
-I have also done that, as there are simply no other versions of
-binutils and gcc that can be used by this hardware.
-Also I don't feel empowered to make changes in distribution specific files.
-
-The only alternative way that I can think of is doing something like:
-DEFAULT_PREFERENCE_nios2 = "1" in the recipes I need.
-No idea if that overrules the distro settings or not, but I can give
-it a try later today.
-
-Have fun! Frans.
+-Chris
 
 
