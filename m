@@ -1,52 +1,47 @@
-Received: from comal.ext.ti.com ([198.47.26.152])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin@ti.com>) id 1OQ73g-0007Tc-Gb
+	(envelope-from <kergoth@gmail.com>) id 1OQ8bh-0000Qn-Kl
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Jun 2010 01:03:24 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o5JMw6UW030906
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Sun, 20 Jun 2010 02:41:54 +0200
+Received: by gyg10 with SMTP id 10so1818859gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jun 2010 17:58:06 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o5JMw6oR012764
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jun 2010 17:58:06 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o5JMw6fN028993
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 19 Jun 2010 17:58:06 -0500 (CDT)
-Received: from dlee02.ent.ti.com ([157.170.170.17]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Sat, 19 Jun 2010 17:58:05 -0500
-From: "Ambrose, Martin" <martin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 19 Jun 2010 17:58:01 -0500
-Thread-Topic: Amend nullifies cache
-Thread-Index: AcsQAt4iMq5welCRSluRDcqARHPKZg==
-Message-ID: <A24693684029E5489D1D202277BE894456043549@dlee02.ent.ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-puzzleid: {55B1F700-2A8C-48DA-A159-A19000B25309}
-x-cr-hashedpuzzle: gK0= AaZ6 BIdY B7/4 C9ra C/Iw EYGS FxsJ GbRY GnSL GrOm
-	ID+t IMYp Kgqe KrDL K2+G; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {55B1F700-2A8C-48DA-A159-A19000B25309};
-	bQBhAHIAdABpAG4AQAB0AGkALgBjAG8AbQA=; Sat,
-	19 Jun 2010 22:58:01
-	GMT;QQBtAGUAbgBkACAAbgB1AGwAbABpAGYAaQBlAHMAIABjAGEAYwBoAGUA
-acceptlanguage: en-US
+	Sat, 19 Jun 2010 17:37:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=15Cy4rCdLMB/N3OoU5Tw2LhzBR31Eq93YDF3YjB27Oo=;
+	b=A1oHZuNyVgQzqqTyf5Lgthz4xhp13UsUgAZoSayLM9IC0ugWbgxPQbj5fjVEflEY/Z
+	9nVlmnoE38BUnZsyGdyyJod5AuOOFKn5/gy9+la/KE9OcPcV3N/c2TUFsunAgbZ20PeB
+	s1zPNtrE/89hjrJGBhTIFde7t3/dra0CMW6l8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=niq+k7Amu1wQu3W3+LP+U13J91awBv/G8V9PSUVko98Qa+guQij19IaKvQf7vHHURd
+	HPbtWPet5OnOOZHWgYxYKZrPbbaspz84rqc4OPu5Te9rCvmapMpZppg6RvkFd3CvUDWC
+	0wH5oeRr6VoxiyoXsP0Wzny5ECsKv//qUu+0g=
+Received: by 10.229.188.132 with SMTP id da4mr1692624qcb.40.1276994240326; 
+	Sat, 19 Jun 2010 17:37:20 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.152
-X-SA-Exim-Mail-From: martin@ti.com
+Sender: kergoth@gmail.com
+Received: by 10.229.241.204 with HTTP; Sat, 19 Jun 2010 17:37:00 -0700 (PDT)
+In-Reply-To: <A24693684029E5489D1D202277BE894456043549@dlee02.ent.ti.com>
+References: <A24693684029E5489D1D202277BE894456043549@dlee02.ent.ti.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Sat, 19 Jun 2010 17:37:00 -0700
+X-Google-Sender-Auth: mmYTgwI_g50rLR--Icq1d2rx5Cw
+Message-ID: <AANLkTimkxAXIRkqjwUQqpDScvv09fMTqWTDSIrBuOCON@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Amend nullifies cache
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Amend nullifies cache
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,73 +55,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 19 Jun 2010 23:03:28 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 20 Jun 2010 00:41:54 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hi.
+On Sat, Jun 19, 2010 at 3:58 PM, Ambrose, Martin <martin@ti.com> wrote:
 
-I find that by inheriting "amend" in my local.conf effectively negates the =
-cache.
-I added a debug statement to cache.py to see why all my recipes were being =
-removed from the cache every time.
+>    # Adding all amend.incs that can exist to the __depends, to ensure that
+>    # creating one of them invalidates the bitbake cache.  Note that it
+>    # requires a fix in bitbake.  Without the bitbake fix, the cache will be
+>    # completely invalidated on every bitbake execution.
+>
+> Which bitbake fix is that so that I can confirm or deny? Though I expect
+> I have it since this comment was added in an older commit (73bf2289) when
+> the
+> file was named amend-recipes.inc. I couldn't find reference to this patch
+> in the
+> ML maybe because of its age.
+>
 
-	$ bitbake -D -b arago-feed-configs -f -c clean | grep MJA -A 2
-	DEBUG: MJA: removing /home/user/work/oe/arago/recipes/arago/arago-feed-con=
-figs.bb from cache since /home/user/work/oe/arago/recipes/arago/files/amend=
-.inc doesn't exist
-	DEBUG: Removing /home/user/work/oe/arago/recipes/arago/arago-feed-configs.=
-bb from cache
-	DEBUG: Parsing /home/user/work/oe/arago/recipes/arago/arago-feed-configs.b=
-b
-
-This seems undesirable as most recipes don't have amendments. Now retrying =
-with empty amend.inc files.
-Note I need two since (I think) the search is based on FILESPATH. The first=
- call is just to=20
-rebuild the cache (i.e. calling without -b option to bitbake).
-	$ touch ~/work/oe/arago/recipes/arago/files/amend.inc
-	$ touch ~/work/oe/arago/recipes/arago/amend.inc
-	$ bitbake arago-feed-configs -f -c clean
-...
-	$ bitbake -D -b arago-feed-configs -f -c clean | grep MJA -A 2
-
-The last command had no match for grep indicating recipe wasn't removed fro=
-m the cache.
-Is this expected? Maybe I'm missing a config setting somewhere or possibly =
-a patch...
-I do see this comment in amend.bbclass
-
-    # Adding all amend.incs that can exist to the __depends, to ensure that
-    # creating one of them invalidates the bitbake cache.  Note that it
-    # requires a fix in bitbake.  Without the bitbake fix, the cache will b=
-e
-    # completely invalidated on every bitbake execution.
-
-Which bitbake fix is that so that I can confirm or deny? Though I expect
-I have it since this comment was added in an older commit (73bf2289) when t=
-he
-file was named amend-recipes.inc. I couldn't find reference to this patch i=
-n the
-ML maybe because of its age.
-
-Looking further into the amend.bbclass I see that it doesn't add the amend.=
-inc files
-to the dependency list if they aren't present on the filesystem. And I veri=
-fied this by
-further debug prints. This is good but leads to the question of where/when =
-these non-existent
-files are added to the dependency list.
+See 3adb0d1c23f8b0d153859e78899a0694a27aa0af in the bitbake git repository.
+It looks like this may not have been cherry picked to 1.8, I'm not certain
+offhand.  I'd suggest trying out the 1.10 branch and seeing if you encounter
+the same problems.
 
 
-Regards,
-Martin
+> Looking further into the amend.bbclass I see that it doesn't add the
+> amend.inc files
+> to the dependency list if they aren't present on the filesystem. And I
+> verified this by
+> further debug prints. This is good but leads to the question of where/when
+> these non-existent
+> files are added to the dependency list.
+>
 
-P.S.
-No sure if this is the right mailing list but it seems specific to the way =
-amend.bbclass
-works with the cache. Let me know if I should post elsewhere.
-
-
+This is incorrect.  The files that do *not* exist are the ones explicitly
+added to __depends, if you look at the class again.  The files that do exist
+get parsed and therefore are automatically added to it.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
