@@ -1,29 +1,29 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OQRYx-00058p-TR
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OQRk9-0002F7-LP
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Jun 2010 22:56:20 +0200
-Received: by bwz14 with SMTP id 14so846780bwz.6
+	Sun, 20 Jun 2010 23:07:54 +0200
+Received: by bwz14 with SMTP id 14so849902bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 20 Jun 2010 13:51:48 -0700 (PDT)
+	Sun, 20 Jun 2010 14:03:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:date:message-id
 	:subject:from:to:content-type;
-	bh=J7181bWZIeQzfgjAcCQFgjipjZHs/QX8Npz1N36HHY4=;
-	b=m8hfOC/PfjihrY8LXWSwmln02GrhWmDjqDcC9QI+0UBgReRTyw2gGAnb5G5U1Q9bHe
-	oan/p8+AbAJd8mKnuUe6MfoN+ruN1Jr2AVPDF4pw4cZevEJqLaDYlFmMGPPafV+G2Z0b
-	KipGutPA1kLclNHn0jZiCyBe79JQJwR8JZpeE=
+	bh=v02XeO3+2fRdFjUxoTdtk81uAlQoHGtIJ8p9WwOPy/I=;
+	b=bs8qES40CFOiIv76s3Rqt5QEGWCci5tX0EkMElXZpBSzmUByPy0Tmy/bJD3NbnanRP
+	RmL+Gmebn4RX+11zPy+e9zjNPpEaraOzuPeR1T8Imp850cWvNdUbsUX5AJkQjHpz5o7N
+	Ylnr7kq0TSAHcZRH+o2uJrzE7fll0N2DvSiqo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=n5HXCHYmOtu9o4bOVvRSLN98JZ118r5Q39IQgFAycYYn8WZ7LbarKqARyrejgvWcVh
-	Iy4ZieNXr+ZE0F9iW3SHSLBFBnpUl9rkC14eWomw5YBCFKx+gckD8YHlwSP+aAoV3hjO
-	Wjoig2kVE2PUCAbKK32KmP6/gsNEQfVOD/pIw=
+	b=J03lOVnWgkH1Pv4QfVAMNS0ElQr6KcMdn2NDKM72EVin8zG7CEGkPWx83qC4sGccCf
+	AtESRmm3Mn2CULhRUxAsUb97LuEyToWWsiJblp4s+6y5Fs0WmBll1MBZfn9xb/rHW68L
+	KhorsaoGwoOSoqNqBFoFFsBP/nh4Wf7Krx3Oc=
 MIME-Version: 1.0
-Received: by 10.204.140.153 with SMTP id i25mr2157434bku.169.1277067108105; 
-	Sun, 20 Jun 2010 13:51:48 -0700 (PDT)
-Received: by 10.204.77.132 with HTTP; Sun, 20 Jun 2010 13:51:48 -0700 (PDT)
-Date: Sun, 20 Jun 2010 22:51:48 +0200
-Message-ID: <AANLkTinfB8ijBzNHOoUSbkYIE-9Fug4nc-HOP8EICHzA@mail.gmail.com>
+Received: by 10.204.83.18 with SMTP id d18mr697339bkl.131.1277067801964; Sun, 
+	20 Jun 2010 14:03:21 -0700 (PDT)
+Received: by 10.204.77.132 with HTTP; Sun, 20 Jun 2010 14:03:21 -0700 (PDT)
+Date: Sun, 20 Jun 2010 23:03:21 +0200
+Message-ID: <AANLkTikjJzqog2Cla8H_JazzRw6QuSrSdllTOD7XwgBx@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.47
@@ -34,7 +34,7 @@ X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: linux-libc-headers-native, gcc-cross issue
+Subject: linux-libc-headers & kernel-arch.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,35 +48,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jun 2010 20:56:20 -0000
+X-List-Received-Date: Sun, 20 Jun 2010 21:07:54 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Dear all,
+Hi,
 
-After the introduction of linux-libc-headers-native I've bumped into
-the following issue.
-linux-libc-headers-native installs unistd.h in sysroots
-This causes other recipes to pick up the x86 files instead of the target ones.
-I've seen this happen for both unistd.h and sigcontext.h
-
-One of the recipes suffering from this is gcc-cross (for some architectures).
-Reason is that files are compiled with
--I/home/frans/oe/tmp_angstrom/sysroots/i686-linux/usr/include whereas
-the target specific includes are added with -isystem.
-This causes the -I to win.
-
-In the past sysroots/i686-linux/usr/include was empty, but with
-linux-libc-headers-native it gets populated causing the files in there
-to be used instead of the ones in the target ones.
-By setting linux-libc-headers-native to ASSUME-PROVIDED and cleaning
-and rebuilding TMPDIR I was able to avoid the problem.
-
-However, I think this needs a more structural solution.
-Suggestions are appreciated.
+I noticed linux-libc-headers has a function set-arch to set ARCH.
+linux recipes get this from kernel-arch.bbclass.
+Wouldn't it be possible to let the linux-libc-headers recipes also get
+ARCH from kernel-arch.bbclass ?
 
 Frans.
-
-PS: it might also be that other files suffer from this, but until now
-I only had problems with gcc-cross
 
 
