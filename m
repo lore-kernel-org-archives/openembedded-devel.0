@@ -1,32 +1,40 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OQRIW-0007gf-TQ
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OQRYx-00058p-TR
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 20 Jun 2010 22:39:24 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 913EE16603F5; Sun, 20 Jun 2010 14:34:47 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 45AB016602CE;
-	Sun, 20 Jun 2010 14:34:47 -0600 (MDT)
-Message-ID: <4C1E7B67.6040702@mlbassoc.com>
-Date: Sun, 20 Jun 2010 14:34:47 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Sun, 20 Jun 2010 22:56:20 +0200
+Received: by bwz14 with SMTP id 14so846780bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 20 Jun 2010 13:51:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=J7181bWZIeQzfgjAcCQFgjipjZHs/QX8Npz1N36HHY4=;
+	b=m8hfOC/PfjihrY8LXWSwmln02GrhWmDjqDcC9QI+0UBgReRTyw2gGAnb5G5U1Q9bHe
+	oan/p8+AbAJd8mKnuUe6MfoN+ruN1Jr2AVPDF4pw4cZevEJqLaDYlFmMGPPafV+G2Z0b
+	KipGutPA1kLclNHn0jZiCyBe79JQJwR8JZpeE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=n5HXCHYmOtu9o4bOVvRSLN98JZ118r5Q39IQgFAycYYn8WZ7LbarKqARyrejgvWcVh
+	Iy4ZieNXr+ZE0F9iW3SHSLBFBnpUl9rkC14eWomw5YBCFKx+gckD8YHlwSP+aAoV3hjO
+	Wjoig2kVE2PUCAbKK32KmP6/gsNEQfVOD/pIw=
 MIME-Version: 1.0
+Received: by 10.204.140.153 with SMTP id i25mr2157434bku.169.1277067108105; 
+	Sun, 20 Jun 2010 13:51:48 -0700 (PDT)
+Received: by 10.204.77.132 with HTTP; Sun, 20 Jun 2010 13:51:48 -0700 (PDT)
+Date: Sun, 20 Jun 2010 22:51:48 +0200
+Message-ID: <AANLkTinfB8ijBzNHOoUSbkYIE-9Fug4nc-HOP8EICHzA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C04F6FD.4070804@mlbassoc.com>	<alpine.DEB.2.00.1006011021440.32142@lynx>	<201006011647.23770.ml@vdm-design.de>	<4C052584.2040905@mlbassoc.com>
-	<4C1E78C5.1010608@station51.net>
-In-Reply-To: <4C1E78C5.1010608@station51.net>
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Is Angstrom dead?
+Subject: linux-libc-headers-native, gcc-cross issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,48 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 20 Jun 2010 20:39:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 20 Jun 2010 20:56:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 06/20/2010 02:23 PM, butters wrote:
-> Were you ever able to resolve this? I'm quite annoyed because I'm
-> compiling the gnome image and still getting this error.
+Dear all,
 
-Top-posting is evil...
+After the introduction of linux-libc-headers-native I've bumped into
+the following issue.
+linux-libc-headers-native installs unistd.h in sysroots
+This causes other recipes to pick up the x86 files instead of the target ones.
+I've seen this happen for both unistd.h and sigcontext.h
 
-> On 6/1/2010 5:21 PM, Gary Thomas wrote:
->>
->> Sadly, the final image still does not build:
->>
->> | log_check: Matched keyword: [Cannot satisfy the following dependencies]
->> | Collected errors:
->> | * resolve_conffiles: Existing conffile
->> /local/Angstrom_BeagleBoard/tmp/rootfs/beagleboard-linuxtag2010-demo-image/etc/device_table
->> is different from the conffile in the new package. The new conffile
->> will be placed at /local/Angstrom_BeagleBoard/tmp/rootfs/b *
->> satisfy_dependencies_for: Cannot satisfy the following dependencies
->> for angstrom-task-gnome:
->> | * encodings * encodings * encodings *
->> |
->> NOTE: package beagleboard-linuxtag2010-demo-image-1.0-r0: task
->> do_rootfs: Failed
->>
->> I don't understand this error well enough (believe me, I've
->> spent hours reading the various recipes and trying things)
->> to hazard a guess as to what this error means.
+One of the recipes suffering from this is gcc-cross (for some architectures).
+Reason is that files are compiled with
+-I/home/frans/oe/tmp_angstrom/sysroots/i686-linux/usr/include whereas
+the target specific includes are added with -isystem.
+This causes the -I to win.
 
-I only found a work around - the underlying problem remains.
-You can fix it like this:
-   % bitbake encodings -c clean
-   % bitbake beagleboard-linuxtag2010-demo-image
-       -or-
-   % bitbake gnome-image
+In the past sysroots/i686-linux/usr/include was empty, but with
+linux-libc-headers-native it gets populated causing the files in there
+to be used instead of the ones in the target ones.
+By setting linux-libc-headers-native to ASSUME-PROVIDED and cleaning
+and rebuilding TMPDIR I was able to avoid the problem.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+However, I think this needs a more structural solution.
+Suggestions are appreciated.
+
+Frans.
+
+PS: it might also be that other files suffer from this, but until now
+I only had problems with gcc-cross
 
 
