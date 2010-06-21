@@ -1,43 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OQheL-0000Dy-8b for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jun 2010 16:06:58 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OQhZw-0006pI-Bw for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jun 2010 16:02:24 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jun 2010 16:02:24 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jun 2010 16:02:24 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1OQiL1-0004BW-2F
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Jun 2010 16:51:04 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OQiGZ-0003Q6-EU from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Jun 2010 07:46:27 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 21 Jun 2010 07:46:27 -0700
+Received: from [172.30.80.158] ([172.30.80.158]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 21 Jun 2010 08:46:26 -0600
+Message-ID: <4C1F7B40.3060609@mentor.com>
+Date: Mon, 21 Jun 2010 07:46:24 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 21 Jun 2010 16:02:11 +0200
-Message-ID: <hvnrd3$25e$1@dough.gmane.org>
-References: <20100618001536.60bbc113.ospite@studenti.unina.it>	<hvfnha$e9k$1@dough.gmane.org>	<AANLkTild9C_PVbfpBYlTeknKZ4k64bjMqwNvwfMk3rTi@mail.gmail.com>
-	<hvnap4$4d8$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <hvnap4$4d8$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <AANLkTinfB8ijBzNHOoUSbkYIE-9Fug4nc-HOP8EICHzA@mail.gmail.com>
+In-Reply-To: <AANLkTinfB8ijBzNHOoUSbkYIE-9Fug4nc-HOP8EICHzA@mail.gmail.com>
+X-OriginalArrivalTime: 21 Jun 2010 14:46:26.0374 (UTC)
+	FILETIME=[869DDE60:01CB1150]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: meta-toolchain fails in do_populate_sdk
+Subject: Re: linux-libc-headers-native, gcc-cross issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +47,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jun 2010 14:06:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 21 Jun 2010 14:51:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 21-06-10 11:18, Koen Kooi wrote:
-> On 18-06-10 23:59, Khem Raj wrote:
->> On Fri, Jun 18, 2010 at 5:07 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> On 18-06-10 00:15, Antonio Ospite wrote:
->>>>> Hi,
->>>>>
->>>>> * check_data_file_clashes: Package gdb-cross-sdk wants to install file
->>>>> .../build/tmp/work/armv5te-oe-linux-gnueabi/meta-toolchain-1.0-r0/sdk/image/usr/local/minimal/arm/share/info/dir
->>>>> But that file is already provided by package  * binutils-cross-sdk
+Frans Meulenbroeks wrote:
+> Dear all,
 > 
->> I can confirm this bug, any fixes for it available?
-> 
->>> we should force gdb-cross-sdk to not have those files and dirs.
-> 
-> Any patches?
+> After the introduction of linux-libc-headers-native I've bumped into
+> the following issue.
+> linux-libc-headers-native installs unistd.h in sysroots
+> This causes other recipes to pick up the x86 files instead of the target ones.
+> I've seen this happen for both unistd.h and sigcontext.h
 
-This turned out to be a lot simpler than expected:
+What DISTRO/MACHINE are you using?
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=dbf77a6a15ea7926bf8f75dd728ff7bd55c60b11
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMH3DjMkyGM64RGpERAgmZAJ99Z8Y1OWf//tn7YJP+8gIvxlS/8gCgstHL
-v9/Yy75DD00JFM62oViFv9o=
-=X5IH
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
