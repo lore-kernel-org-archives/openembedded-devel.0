@@ -1,53 +1,45 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <nikunjbadjatya@gmail.com>) id 1OQfq1-0007xC-SB
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OQghS-0003fP-KI
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jun 2010 14:10:56 +0200
-Received: by gyg10 with SMTP id 10so2226148gyg.6
+	Mon, 21 Jun 2010 15:06:11 +0200
+Received: by fxm18 with SMTP id 18so1862314fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jun 2010 05:06:17 -0700 (PDT)
+	Mon, 21 Jun 2010 06:01:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=5qNTG3e8MSU9aDWLz9FhbQlQKm2VniloUN0+OInU3YA=;
-	b=TYlHEWoulbOW7y9Xf7/jbKdUJ7btb7AofL1tY99ApqpYYw82EHsjD+oHQxTD1822bz
-	nZf7ys7QZGMz4q1X4lS/zIn1DZ0lKp2XmuXBaHyqN0Y+UUEbOqe78S5rmtBbvORp/7UE
-	q3ZyHZuIbyDRnl6AwA9hGMaJeI07uX4XGN0qE=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=iffLel2VqqnkoayYi4/+vk7hk+ksydzcDNijvWwq0fs=;
+	b=CT2tbsuBLuOI1IC6gNXyKeb9ARzywB9wbGQx5IbVhstkHt1EzUKVk1KC0MBxomnNgS
+	gRdYE6RSoD+jS9Oib4uhoXZxkUxOE02IkTPwDBxffEUx6Wlx/mSsZEkxtUsB42HqExj5
+	D1UC/YsdQOO6dHI8gwq/84AvtTkOgUap++8CQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=hDpDB6K/NOHyOuIFf5mqu7dMIa7nZinxu4fSrZ0wPlot5Btdlk55fkM1W8PfbP6UD0
-	6tt8u7MgK9I0HJtj/8v+UFlqwAgLdGuiSQT5kQXVF2Ei26y13L1scPgc2Uc+nQs+2iAE
-	GknFuoTPkJFUMEItByCekEzX1UYPgfBxF2jEU=
-Received: by 10.229.183.146 with SMTP id cg18mr2344681qcb.17.1277121977378; 
-	Mon, 21 Jun 2010 05:06:17 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Bp9e5gbhGVjiS7tLjHwwMuNz6HCRno6kM7r1RPLoAwfueVwWa/nXpXlMe8g9u4mpxV
+	uA4ygPl5CHTtHKvGf4j5WcfqdCDzHA6+bi3STFD3nWITro3RHZAieRInDNujsEfOvG6U
+	dcjhksbi3DbMxjljfAg1/JG7jMO0Jy5LT5V/A=
 MIME-Version: 1.0
-Received: by 10.229.191.12 with HTTP; Mon, 21 Jun 2010 05:05:57 -0700 (PDT)
-In-Reply-To: <AANLkTilcZp2HZB8cSOdRurRuCfkMf_KpSiMxDmh_LgDY@mail.gmail.com>
-References: <AANLkTilQUwinqS2HGJJzP3t_UTmXtH9daLEiN_fek-6i@mail.gmail.com> 
-	<AANLkTikBqtzPB0rBp1DQ4Ekzo40HeAJcX1q7i1mLFaWy@mail.gmail.com> 
-	<AANLkTim1FUHwT6lBvu2yoUUM8rvYRSaw-9e4VE_olNoa@mail.gmail.com> 
-	<AANLkTilzhsHsHj4f-bd4FcB7Ka7fRspYX0iUsMxxzVuz@mail.gmail.com> 
-	<AANLkTikK720KNmNjRKr6x12-kSben4t42KlmgHsSGEpS@mail.gmail.com> 
-	<20100617193846.GC14941@mx.loc>
-	<AANLkTikt8uUURjI56tmIEH0dCwtSJtwk0wre9oxNHEwF@mail.gmail.com> 
-	<AANLkTikdhubttOOkUq58_nl5E62jtB7QN7widnkNVT0R@mail.gmail.com> 
-	<AANLkTin0_Mk8gzfXnPgePnGGkOaDfzx2up1LkD44norg@mail.gmail.com> 
-	<AANLkTilcZp2HZB8cSOdRurRuCfkMf_KpSiMxDmh_LgDY@mail.gmail.com>
-From: nikunj badjatya <nikunjbadjatya@gmail.com>
-Date: Mon, 21 Jun 2010 17:35:57 +0530
-Message-ID: <AANLkTikBJpnUTeEyvFrToBSHTp0T4LV-SuYL4BAjZvR6@mail.gmail.com>
+Received: by 10.204.162.143 with SMTP id v15mr1439948bkx.15.1277125292287; 
+	Mon, 21 Jun 2010 06:01:32 -0700 (PDT)
+Received: by 10.204.77.132 with HTTP; Mon, 21 Jun 2010 06:01:32 -0700 (PDT)
+In-Reply-To: <AANLkTimOqdguwX_c_wTR3mhBBVfjhSjf245UlWWTHOIA@mail.gmail.com>
+References: <AANLkTinfB8ijBzNHOoUSbkYIE-9Fug4nc-HOP8EICHzA@mail.gmail.com>
+	<AANLkTimOqdguwX_c_wTR3mhBBVfjhSjf245UlWWTHOIA@mail.gmail.com>
+Date: Mon, 21 Jun 2010 15:01:32 +0200
+Message-ID: <AANLkTilEChqx75xF5OTrvvom3aX9-3oLR9oCg7-AO2Yc@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: nikunjbadjatya@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: OSError: [Errno 2] No such file or directory
+Subject: Re: linux-libc-headers-native, gcc-cross issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,218 +53,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jun 2010 12:10:56 -0000
+X-List-Received-Date: Mon, 21 Jun 2010 13:06:11 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I couldnt find errors.
-
-FILE *log.packagedstaging_fastpath* (
-build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r36.3/temp/*  )
-has:
-
-*cp: cannot stat
-`/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-r=
-36.3/sysroot-destdir///home/nikunj/ope/build/tmp/cross/armv5te/*':
-No such file or directory*
-
-FILE *log.do_package_update_index_ipk* (
-build/tmp/work/omap5912osk-angstrom-linux-gnueabi/console-image-1.0-r0/temp=
-/*
-)  has
-
-+ ipkgarchs=3D'all any noarch arm  armv4 armv4t armv5te omap5912osk'
-+ '[' '!' -z '' ']'
-+ mkdir -p /home/nikunj/ope/build/tmp/deploy/glibc/ipk
-+ touch /home/nikunj/ope/build/tmp/deploy/glibc/ipk/Packages
-+ ipkg-make-index -r /home/nikunj/ope/build/tmp/deploy/glibc/ipk/Packages -=
-p
-/home/nikunj/ope/build/tmp/deploy/glibc/ipk/Packages -l
-/home/nikunj/ope/build/tmp/deploy/glibc/ipk/Packages.filelist -m
-/home/nikunj/ope/build/tmp/deploy/glibc/ipk
-/home/nikunj/ope/build/tmp/work/omap5912osk-angstrom-linux-gnueabi/console-=
-image-1.0-r0/temp/run.do_package_update_index_ipk.13546:
-line 222: ipkg-make-index: command not found
-
-The *build/tmp/**deploy/glibc *contains
-* a directory named *ipk/* ( 0 bytes )
-* a lock file *ipk.lock* of 0 bytes.
-
-Any help ?
-
-Thanks,
-Nikunj
-
-
-On Sat, Jun 19, 2010 at 12:29 AM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> On Fri, Jun 18, 2010 at 5:07 AM, nikunj badjatya
-> <nikunjbadjatya@gmail.com> wrote:
-> > Hi again,
-> >
-> > The build was running successfully untill It came at this place.. : The
-> last
-> > few lines where error occured.
-> >
-> > $ bitbake console-image 2>&1 | tee console-image.log
-> > ............................................
-> > ............................................
-> > *NOTE: Running task 959 of 3342 (ID: 134,
-> > /home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bb, do_package)
-> > NOTE: preparing tree for binary locale generation
-> > NOTE: generating locale es_NI (UTF-8)
-> > NOTE: Task failed: localedef returned an error (command was
-> >
-> PATH=3D"/home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/armv5te-an=
-gstrom-linux-gnueabi:/home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin=
-/armv5te-angstrom-linux-gnueabi:/home/nikunj/ope/build/tmp/sysroots/i686-li=
-nux/usr/sbin:/home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin:/home/n=
-ikunj/ope/build/tmp/cross/armv5te//bin:/home/nikunj/ope/build/tmp/sysroots/=
-i686-linux/sbin:/home/nikunj/ope/build/tmp/sysroots/i686-linux/bin:/home/ni=
-kunj/ope/bitbake/bin:/usr/lib/qt-3.3/bin:/usr/kerberos/bin:/usr/local/bin:/=
-usr/bin:/bin:/usr/X11R6/bin:/home/nikunj/bin"
-> >
-> I18NPATH=3D"/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueab=
-i/glibc-2.9-r36.3/locale-tree/usr/share/i18n"
-> > qemu-arm -s 1048576 -r 2.6.24 -L
-> >
-> /home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-=
-r36.3/locale-tree
-> > -E
-> >
-> LD_LIBRARY_PATH=3D/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-=
-gnueabi/glibc-2.9-r36.3/locale-tree/lib
-> >
-> /home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi/glibc-2.9-=
-r36.3/locale-tree/bin/localedef
-> > --force --old-style --no-archive
-> >
-> --prefix=3D/home/nikunj/ope/build/tmp/work/armv5te-angstrom-linux-gnueabi=
-/glibc-2.9-r36.3/locale-tree
-> > --inputfile=3D/usr/share/i18n/locales/es_NI --charmap=3DUTF-8 es_NI).
-> > ERROR: TaskFailed event exception, aborting
-> > ERROR: Build of
-> > /home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bbdo_package
-> > failed
-> > ERROR: Task 134 (/home/nikunj/ope/openembedded/recipes/glibc/
-> glibc_2.9.bb,
-> > do_package) failed
-> > NOTE: Tasks Summary: Attempted 958 tasks of which 909 didn't need to be
-> > rerun and 1 failed.
-> > ERROR: '/home/nikunj/ope/openembedded/recipes/glibc/glibc_2.9.bb'
-> failed*
-> >
-> >
-> > What does this tell..?
+2010/6/21 Khem Raj <raj.khem@gmail.com>:
+> On Sun, Jun 20, 2010 at 1:51 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> Dear all,
+>>
+>> After the introduction of linux-libc-headers-native I've bumped into
+>> the following issue.
+>> linux-libc-headers-native installs unistd.h in sysroots
+>> This causes other recipes to pick up the x86 files instead of the target=
+ ones.
+>> I've seen this happen for both unistd.h and sigcontext.h
+>>
+>> One of the recipes suffering from this is gcc-cross (for some architectu=
+res).
+>> Reason is that files are compiled with
+>> -I/home/frans/oe/tmp_angstrom/sysroots/i686-linux/usr/include whereas
+>> the target specific includes are added with -isystem.
+>> This causes the -I to win.
 >
-> it tells nothing other than it seems that qemu is failing when
-> generating locales. If you try to parse logs you will help yourself
-> quite a bit.
-> OE generates logs in builddir/temp then are called log.<task>.xxxx try
-> to find errors in them
-> if you can not at least post them when asking here.
+> right. gcc-cross is a special case where its not building purely cross
+> binaries but
+> also making libraries and objects that will run on the target. This
+> problem probaly
+> is seen when building startup objects =A0(crt*.o). This path is added by
+> gcc build
+> machinery as a path where it finds gmp headers. I suspect that gcc build =
+should
+> not be passing this in the incudes when building target stuff.
 >
-> >
-> > Nikunj Badjatya
-> > BTech
-> >
-> >
-> >
-> >
-> > On Fri, Jun 18, 2010 at 3:09 PM, nikunj badjatya
-> > <nikunjbadjatya@gmail.com>wrote:
-> >
-> >> Hi All,
-> >> I have found the cause of the problem.
-> >> I did a reinstall of Python and YUM few days back.
-> >> I was thinking that other software requirements ( texi2info, help2man,
-> >> chrpath etc. ) need not to be installed again.
-> >> But when I tried reinstalling them also, the error is gone..!!
-> >>
-> >> The strange thing is that bitbake was not reporting himself that this
-> are
-> >> the missing modules which it needs prior to running any build..!!
-> >>
-> >> Anyways, Thanks Very Much for your time.
-> >>
-> >>
-> >> Nikunj
-> >> Bangalore, India
-> >>
-> >>
-> >>
-> >>
-> >>
-> >> On Fri, Jun 18, 2010 at 10:02 AM, nikunj badjatya <
-> >> nikunjbadjatya@gmail.com> wrote:
-> >>
-> >>> Hi Bernhard,
-> >>>
-> >>> *echo $BBPATH
-> >>> /home/nikunj/ope/build:/home/nikunj/ope/openembedded*
-> >>>
-> >>> Is that wrong.?
-> >>>
-> >>>
-> >>>
-> >>>
-> >>>
-> >>>
-> >>> On Fri, Jun 18, 2010 at 1:08 AM, Bernhard Reutner-Fischer <
-> >>> rep.dot.nop@gmail.com> wrote:
-> >>>
-> >>>> On Thu, Jun 17, 2010 at 12:11:52PM -0700, Khem Raj wrote:
-> >>>> >On Thu, Jun 17, 2010 at 5:39 AM, nikunj badjatya
-> >>>> ><nikunjbadjatya@gmail.com> wrote:
-> >>>> >> /home/nikunj/ope/openembedded/recipes/coreutils/
-> >>>> coreutils-native_8.5.bb,
-> >>>> >> do_populate_sysroot)
-> >>>> >> NOTE: Testing
-> >>>> >>
-> >>>>
-> /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysroo=
-t-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
-> >>>> >> for relocatability
-> >>>>
-> >>>> >Does
-> >>>>
->  /home/nikunj/ope/build/tmp/work/i686-linux/coreutils-native-8.5-r0/sysro=
-ot-destdir///home/nikunj/ope/build/tmp/sysroots/i686-linux/usr/bin/sleep
-> >>>> >exist ?
-> >>>>
-> >>>> huh? How would that supposed to be ok?
-> >>>> Looks like home is leaking into some prefix, no?
-> >>>> We should have a sanity for that one i suppose..
-> >>>>
-> >>>> Feb 14 22:25:04 <me> does anybody else see /home in their staging di=
-r
-> or
-> >>>> did i goof up somehow?
-> >>>> Feb 14 22:26:24 <me> would be nice if sanity would yell at /root and
-> >>>> /home in the staging dir..
-> >>>>
-> >>>> where /home =3D=3D something in BBPATH, without looking into details=
-.
-> >>>>
-> >>>> _______________________________________________
-> >>>> Openembedded-devel mailing list
-> >>>> Openembedded-devel@lists.openembedded.org
-> >>>>
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >>>>
-> >>>
-> >>>
-> >>
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
+> I think with sysroot using -isystem<target_headers> should not be needed.
+
+It is not the -isystem that is the problem. as stated above there is
+an explicit -I to sysroots/i686-linux that is causing the problem.
+This dir used to be unpopulated (or maybe even non-existing), butwith
+linux-libc-headers-native it became populated and as it got precedence
+the dir wins.
+I have no idea how to remove the -I dir (and also no idea if it is ok).
+
+The problem only occurs in .../gcc/config/${ARCH}/
+typical issue where this happens is linux_unwind.h This includes
+<signal.h> to get <sigcontext.h> and eventually the typedef for
+sigcontext.
+However sigcontext is of course archtecture specific so if one picks
+up the wrong signal.h it does not work.
+
+The unistd.h problem is probably specific for the nios2 variant, in
+which an additional system call is defined, which of course is not
+present in the x86 unistd.h
+
+Frans
+
+>
+>
+>>
+>> In the past sysroots/i686-linux/usr/include was empty, but with
+>> linux-libc-headers-native it gets populated causing the files in there
+>> to be used instead of the ones in the target ones.
+>> By setting linux-libc-headers-native to ASSUME-PROVIDED and cleaning
+>> and rebuilding TMPDIR I was able to avoid the problem.
+>
+> yeah this masked the problem as it has been masked till now.
+>
+>>
+>> However, I think this needs a more structural solution.
+>> Suggestions are appreciated.
+>
+> We should explore if passing this isystem in CFLAGS is needed at all.
+> if not then we should remove it.
+>
+>>
+>> Frans.
+>>
+>> PS: it might also be that other files suffer from this, but until now
+>> I only had problems with gcc-cross
+>
+> could be but I doubt.
+>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
+
 
