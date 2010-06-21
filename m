@@ -1,41 +1,37 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <a.alalousi@gmail.com>) id 1OQf4M-00037E-1S
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OQfkm-0004a2-Ow
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jun 2010 13:21:38 +0200
-Received: by fxm18 with SMTP id 18so1797096fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jun 2010 04:17:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=vmNIF9Y8dKEn9zCJkakCbaX9O5nxS7rPb5BKO+U8x4M=;
-	b=ulphLixMuuIj1x1sqT8FSM4nB2Z2gNrwbL/j83NcAr/5aZE8i7cvFStCTpNqpEB9Ah
-	vK1hsoGo83tUM3tlWkzClVj8khdLjCVHTlDWRFLsLD1J6WZ5NaN/3s1va2kI95uM79FX
-	1XJzhELlZtLn9CVtnrQl8CxLiY6jYAyLUmnT8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=bKjEKJHt8LNf9FmJSyjv4pWa5EYaqClGqMZQw21OTgixweacFvzI+5aefjC3WFU/J0
-	tbdLawXYOynO4HKwJiQKBio5Siqvyd3m74W92DrUonE/rUbEgqs+5uTJPt+/c1pJ4pj+
-	reNBXGDXPw7GpiHuCMcQMHrTvU2Fe6GV34Ffs=
+	Mon, 21 Jun 2010 14:05:29 +0200
+Received: (qmail 10102 invoked by uid 503); 21 Jun 2010 12:13:38 -0000
+Received: from b7.ovh.net (HELO mail241.ha.ovh.net) (213.186.33.57)
+	by 63.mail-out.ovh.net with SMTP; 21 Jun 2010 12:13:38 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Jun 2010 14:00:54 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 21 Jun 2010 14:00:53 +0200
+Message-ID: <4C1F5474.6050907@eukrea.com>
+Date: Mon, 21 Jun 2010 14:00:52 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5
 MIME-Version: 1.0
-Received: by 10.204.81.17 with SMTP id v17mr2831664bkk.49.1277119023774; Mon, 
-	21 Jun 2010 04:17:03 -0700 (PDT)
-Received: by 10.204.58.134 with HTTP; Mon, 21 Jun 2010 04:17:03 -0700 (PDT)
-Date: Mon, 21 Jun 2010 12:17:03 +0100
-Message-ID: <AANLkTilowvawMUeG_uqEzSyvsM2HwSFiKYxu5g5izYXt@mail.gmail.com>
-From: "Dr. Ahmed Al-Alousi" <a.alalousi@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: a.alalousi@gmail.com
+References: <AANLkTilowvawMUeG_uqEzSyvsM2HwSFiKYxu5g5izYXt@mail.gmail.com>
+In-Reply-To: <AANLkTilowvawMUeG_uqEzSyvsM2HwSFiKYxu5g5izYXt@mail.gmail.com>
+X-Ovh-Tracer-Id: 6085770472838114633
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Bitbaking for i.MX27
+Subject: Re: Bitbaking for i.MX27
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,18 +45,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jun 2010 11:21:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 21 Jun 2010 12:05:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Guys,
+Hi,
 
-I'm trying to get an image compiled for my Armadeus APF27 board, which is
-i.MX27-based.
+Le 21/06/2010 13:17, Dr. Ahmed Al-Alousi a écrit :
+> I'm trying to get an image compiled for my Armadeus APF27 board, which is
+> i.MX27-based.
+>
+> Can anyone give me any hints along the route ? Has anyone actually done this
+> ?
+>
+you can start from machine tx27 or mx27ads which are also i.MX27 based 
+and then create your own machine with these ones as an example.
 
-Can anyone give me any hints along the route ? Has anyone actually done this
-?
+Eric
 
-Thanks in advance,
-
-Ahmed.
 
