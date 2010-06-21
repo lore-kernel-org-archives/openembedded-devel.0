@@ -1,34 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OQdDh-0005tG-Qy for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jun 2010 11:23:10 +0200
+	id 1OQdJw-0001LX-D7 for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Jun 2010 11:29:38 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OQd9J-0003kB-Fv for openembedded-devel@lists.openembedded.org;
-	Mon, 21 Jun 2010 11:18:37 +0200
+	id 1OQdFY-0006ih-2i for openembedded-devel@lists.openembedded.org;
+	Mon, 21 Jun 2010 11:25:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jun 2010 11:18:37 +0200
+	Mon, 21 Jun 2010 11:25:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 21 Jun 2010 11:18:37 +0200
+	Mon, 21 Jun 2010 11:25:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 21 Jun 2010 11:18:28 +0200
-Message-ID: <hvnap4$4d8$1@dough.gmane.org>
-References: <20100618001536.60bbc113.ospite@studenti.unina.it>
-	<hvfnha$e9k$1@dough.gmane.org>
-	<AANLkTild9C_PVbfpBYlTeknKZ4k64bjMqwNvwfMk3rTi@mail.gmail.com>
+Date: Mon, 21 Jun 2010 11:20:54 +0200
+Message-ID: <hvnatn$4d8$2@dough.gmane.org>
+References: <AANLkTim_ffQAhrfedIEtmDYIZxzt0Vm8SN9qPGGB1zFw@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTild9C_PVbfpBYlTeknKZ4k64bjMqwNvwfMk3rTi@mail.gmail.com>
+In-Reply-To: <AANLkTim_ffQAhrfedIEtmDYIZxzt0Vm8SN9qPGGB1zFw@mail.gmail.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -38,7 +36,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: meta-toolchain fails in do_populate_sdk
+Subject: Re: Error in cross compiling autoconf packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +50,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 21 Jun 2010 09:23:10 -0000
+X-List-Received-Date: Mon, 21 Jun 2010 09:29:38 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 18-06-10 23:59, Khem Raj wrote:
-> On Fri, Jun 18, 2010 at 5:07 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 18-06-10 00:15, Antonio Ospite wrote:
->>>> Hi,
->>>>
->>>> * check_data_file_clashes: Package gdb-cross-sdk wants to install file
->>>> .../build/tmp/work/armv5te-oe-linux-gnueabi/meta-toolchain-1.0-r0/sdk/image/usr/local/minimal/arm/share/info/dir
->>>> But that file is already provided by package  * binutils-cross-sdk
+On 21-06-10 10:31, Raseel Bhagat wrote:
+> Hi all,
+> I need help in cross-compiling a package.
 > 
-> I can confirm this bug, any fixes for it available?
-> 
->> we should force gdb-cross-sdk to not have those files and dirs.
+> I have setup a OE environment and have managed to successfully bitbake
+> console-image and x11-image.
+> Now, I want to cross-compile a simple autotools based package called
+> sofsip-cli, which is a simple cli SIP UA application, to test sofia-aip
+> library.
 
-Any patches?
-
+Why don't you just do 'bitbake sofia-sip'?
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMHy5kMkyGM64RGpERAq3xAJ42/iKqYfHRcamRlQ103u5sEVBAFgCdEdjW
-aICPBz/qmCvm+q+6KQ/It0M=
-=zq8L
+iD8DBQFMHy72MkyGM64RGpERAjN3AJ9lmGjJ4Ii+0oCz3u9doN9fq1vVbACdEScd
++uuKi2K8kETnyhkE/5NThG8=
+=2x94
 -----END PGP SIGNATURE-----
 
 
