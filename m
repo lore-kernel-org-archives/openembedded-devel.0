@@ -1,31 +1,44 @@
-Received: from pasmtpa.tele.dk ([80.160.77.114])
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
-	id 1OR4A6-0008Om-UQ for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 16:09:15 +0200
-Received: from mail.mikrofyn.com (cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk
-	[93.167.193.22])
-	by pasmtpA.tele.dk (Postfix) with ESMTP id C740B8002EC
+Received: from mail-yw0-f202.google.com ([209.85.211.202])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <chasemaupin03@gmail.com>) id 1OR4Hd-0000BM-Fg
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 16:17:03 +0200
+Received: by ywh40 with SMTP id 40so3782148ywh.3
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 15:32:03 +0200 (CEST)
-Received: from koontz.localnet ([10.115.0.128]) by mail.mikrofyn.com with
-	Microsoft SMTPSVC(6.0.3790.3959); Tue, 22 Jun 2010 15:33:47 +0200
-From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
+	Tue, 22 Jun 2010 07:12:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=Rwa5pudVwlZCd5iJDeh272hsw1lgwuUgxkv8Uf52+8Y=;
+	b=cv5rubUKTvoK+5ZPzZEv9999Y4XowtpmyOPaw3vu0a1NcVEy8OmzLSD6qmz2j2TMjz
+	cBBKtxfiwrkg2WJ0bDpZPjBvBFZhuOhAB5SymI+1UBBWaXC1GUgJX2daXbDmJzvtPb53
+	TgL+VjP9qCpgF4nnjafbMvwiatrfY1TZM20/Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=jIFT35YlZHkX2cozd4b1SMxk7ow4wM8RRD4vz2FJlAopko0DItVaYyLMbHC4seq5To
+	TzNiJRb5gmBuwl0FbvP/8VswMavJDNlLxeMvbIgyPPD3hMbZkqliuCFNuKz216lcbbsV
+	TkQuux/WytnHIuyJkYuJhQUoeMlInfcR6OHZ8=
+Received: by 10.150.250.17 with SMTP id x17mr5916276ybh.264.1277215940367;
+	Tue, 22 Jun 2010 07:12:20 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id t1sm6813518ybi.34.2010.06.22.07.12.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 22 Jun 2010 07:12:19 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jun 2010 15:32:02 +0200
-User-Agent: KMail/1.13.3 (Linux/2.6.32-23-generic; KDE/4.4.4; x86_64; ; )
-MIME-Version: 1.0
-Message-Id: <201006221532.02203.sgh@sgh.dk>
-X-OriginalArrivalTime: 22 Jun 2010 13:33:47.0953 (UTC)
-	FILETIME=[8B355A10:01CB120F]
-X-SA-Exim-Connect-IP: 80.160.77.114
-X-SA-Exim-Mail-From: sgh@sgh.dk
+Date: Tue, 22 Jun 2010 09:05:52 -0500
+Message-Id: <1277215552-10039-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 209.85.211.202
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Image creation while >1 package versions build
+Cc: Chase Maupin <chase.maupin@ti.com>
+Subject: [PATCH 1/1] matrix-gui-e: add dependency on common files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,35 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 14:09:15 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Jun 2010 14:17:03 -0000
 
-Hi
+* Added runtime dependency on matrix-gui-common package
+  which contains the runtime scripts that the matrix-gui
+  application requires.
 
-I have trouble getting the correct package-versions in my image when my=20
-application is compiled in several versions.
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/ti/matrix-gui-e_svn.bb |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-The case is that I sepcify that specify PREFERRED_VERSION_myapp =3D "1.0", =
-Myapp=20
-is included in my image and when it builds the image myapp-1.0 get pulled i=
-n.=20
-That is as it should be.
+diff --git a/recipes/ti/matrix-gui-e_svn.bb b/recipes/ti/matrix-gui-e_svn.bb
+index 78ef003..1cda40f 100644
+--- a/recipes/ti/matrix-gui-e_svn.bb
++++ b/recipes/ti/matrix-gui-e_svn.bb
+@@ -6,7 +6,7 @@ PRIORITY = "optional"
+ 
+ SRCREV = "58"
+ PV = "1.0"
+-PR = "r13+svnr${SRCPV}"
++PR = "r14+svnr${SRCPV}"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
+ 	file://init \
+@@ -28,3 +28,5 @@ do_install() {
+ }
+ 
+ RRECOMMENDS_${PN} = "qt4-embedded-plugin-mousedriver-tslib"
++
++RDEPENDS_${PN} += "matrix-gui-common"
+-- 
+1.7.0.4
 
-Now I change to PREFERRED_VERSION_myapp =3D "2.0" and build my image again.=
-=20
-Everything goes well again - myapp-2.0 end up in the image.
-
-If I now change PREFERRED_VERSION_myapp back to "1.0" and rebuild the image=
- it=20
-is always myapp-2,0 that ends up in the image. The only way to get myapp-1.=
-0 in=20
-the image is to delete the generate myapp-2.0.ipk in tmp/deploy/....
-
-I'm using an OE snapshot from around january, so this issue might be fixed.
-
-=2D-=20
-S=F8ren Holm
 
 
