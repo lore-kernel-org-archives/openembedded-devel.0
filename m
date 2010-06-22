@@ -1,40 +1,40 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OR4m3-0003H7-D4
+	(envelope-from <raj.khem@gmail.com>) id 1OR51q-0006Qv-5g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 16:48:31 +0200
-Received: by pvg3 with SMTP id 3so52054pvg.6
+	Tue, 22 Jun 2010 17:04:48 +0200
+Received: by pxi2 with SMTP id 2so22732pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 07:43:51 -0700 (PDT)
+	Tue, 22 Jun 2010 08:00:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=48eI4ASviG0IgMnkM3ry2fuJonrfgNkJac2CZ+4LHnk=;
-	b=WKr9PsimoDDNubtFUbZrLNP43pYDovFEa8EylUl9NspVmk/psdFprkqRK+u0/k+IUp
-	3azfzd7OuB6wG83LIQKl+mw09vvp+PQ5L2bAuVMvr2bcUXS9iwm173VCIYaCSzZCASec
-	75UnGyDhpd2FdzbyhGlAqDfGk0CoGTpbOOJgI=
+	bh=JEhnh/DZmgwdFbXqu56KHZVWtTB1vkOp6fubW4MXEBQ=;
+	b=CpwxdJE2QeK37NFR+oyG9tGExfdUE6VkaqM0ve7YSPHHsW7pGYYKnZOdVN0zJmziHd
+	33jo4n5bk2kqvLIPWaxXlnmjZ2I2hN4FIq6CN1ljfkmnkYcGBGEoS9Pq/Bo7SKYfF89h
+	KPG84Gr8Rk49zM9M0KDWYOTYMxYT/LwRJf+54=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Mh6P5NmSst5/eiLRlO0sFMSJneuupetzmuOnnbufzHTgs/PGw32aecrtRRRnNcl7bc
-	zWcfK5/MFz+uRdupRLbWhRxsas4VCx/Z8h8ysAkP0O4vgFChz7fMyuN0kMxrqT0dHnT6
-	43iDEZst5sqRrf/vgkJJ4LJtWSf0Z+u66XMgs=
-Received: by 10.143.24.11 with SMTP id b11mr5180535wfj.215.1277217830333;
-	Tue, 22 Jun 2010 07:43:50 -0700 (PDT)
+	b=UwC3IuuxocDptxlFCcyCccu7z2GoOOGsYXZ/rKD+0OdLXY1TOgBsKdsSOj7xpBpE1e
+	3ijWLQ9SF1KaaoROQalT3JFsyGEyFamGepkLac/PRbdb8UYrXzCbDEUusVyV5rOcJ/2w
+	bbugo0BuTMy0FFfQaq3oTW62uVOxASpYWzIiI=
+Received: by 10.143.177.5 with SMTP id e5mr5257042wfp.304.1277218475619;
+	Tue, 22 Jun 2010 07:54:35 -0700 (PDT)
 Received: from gmail.com ([99.57.141.118])
-	by mx.google.com with ESMTPS id f20sm3878327rvb.3.2010.06.22.07.43.48
+	by mx.google.com with ESMTPS id h18sm1862950wfg.13.2010.06.22.07.54.34
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 22 Jun 2010 07:43:49 -0700 (PDT)
-Date: Tue, 22 Jun 2010 07:44:49 -0700
+	Tue, 22 Jun 2010 07:54:34 -0700 (PDT)
+Date: Tue, 22 Jun 2010 07:55:37 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100622144449.GA32544@gmail.com>
-References: <4C1FDA55.6050705@mentor.com>
+Message-ID: <20100622145537.GC32544@gmail.com>
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CFB6@KCINPUNHJCMS01.kpit.com>
 MIME-Version: 1.0
-In-Reply-To: <4C1FDA55.6050705@mentor.com>
+In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFB6@KCINPUNHJCMS01.kpit.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -42,7 +42,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Don't pipe ar/tar/gzip in stage-manager-ipkg
+Subject: Re: Qt-4.7.0.beta1 Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,102 +56,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 14:48:31 -0000
+X-List-Received-Date: Tue, 22 Jun 2010 15:04:48 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (21/06/10 14:32), Tom Rini wrote:
-> As we've gone over before, gunzip/tar can have a broken pipe, and
-> this is allowed.  In python code, we have things setup to ignore the
-> problem.  stage-manager-ipkg is written in shell however and we can
-> hit the problem there too.  There's two ways around this, one of
-> which is to stop checking for problems with the extraction (and hide
-> stderr) or we extract the archive, gunzip and then tar.  I've done
-> the latter for this RFC.  Does anyone have a strong preference for
-> the other way?
+On (22/06/10 11:35), Soumya R wrote:
+> Hi All,
+> 
+>       I am trying to build Qt Embedded SDK for Qt-4.7.0.beta1.. when i run
+> bitbake meta-toolchain-avn-qte i got the following error
+> 
+> 
+> NOTE: Handling BitBake files: - (0169/0169) [100 %]
+> NOTE: Parsing finished. 163 cached, 5 parsed, 1 skipped, 0 masked.
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/tasks/task-avn-qte-toolchain-target.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'qt4-embedded-mkspecs' but it wasn't found in any PACKAGE or RPROVIDES variables
+> NOTE: Runtime target 'qt4-embedded-mkspecs' is unbuildable, removing...
+
+I dont see this recipe in oe repo. Is it your own recipe ?
+
+> Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+> NOTE: Runtime target 'task-avn-qte-toolchain-target' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
+> ERROR: Required build target 'meta-toolchain-avn-qte' has no buildable providers.
+> Missing or unbuildable dependency chain was: ['meta-toolchain-avn-qte', 'task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
+> 
+>      It is asking for runtime dependencies  'qt4-embedded-mkspecs' how do I get these packages???
+> 
+> Thanks in advance:-)
+> 
+> 
+> Regards,
+> Soumya
+> 
+> This message contains information that may be privileged or confidential and is the property of the KPIT Cummins Infosystems Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Cummins Infosystems Ltd. does not accept any liability for virus infected mails.
+> 
 > 
 
-sounds good to me.
+Crap. You are talking on public mailing lists and these are archived. These notices dont make sense and in future make
+sure that you strip them off when sending emails to public mailing lists.
 
-
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> 
-> diff --git a/recipes/stage-manager/files/stage-manager-ipkg
-> b/recipes/stage-manager/files/stage-manager-ipkg
-> index 2559fdb..e5ad6f6 100755
-> --- a/recipes/stage-manager/files/stage-manager-ipkg
-> +++ b/recipes/stage-manager/files/stage-manager-ipkg
-> @@ -732,11 +732,11 @@ ipkg_install_file_dest() {
-> 
->  	local pkg=`ipkg_file_part $filename | sed 's/\([a-z0-9.+-]\+\)_.*/\1/'`
->  	local ext=`echo $filename | sed 's/.*\.//'`
-> -	local pkg_extract_stdout
-> +	local pkg_extract
->  	#if [ "$ext" = "ipk" ]; then
->  	#	pkg_extract_stdout="tar -xzOf"
->  	#elif [ "$ext" = "deb" ]; then
-> -		pkg_extract_stdout="ar p"
-> +		pkg_extract="ar x"
->  	#else
->  	#	echo "ipkg_install_file: ERROR: File $filename has unknown
-> extension $ext (not .ipk or .deb)"
->  	#	return 1
-> @@ -768,7 +768,7 @@ ipkg_install_file_dest() {
->  	mkdir -p $IPKG_TMP/$pkg/data
->  	mkdir -p $info_dir
-> 
-> -	if ! $pkg_extract_stdout $filename control.tar.gz | (cd
-> $IPKG_TMP/$pkg/control; tar -xzf - ) ; then
-> +	if ! (cd $IPKG_TMP/$pkg/control ; $pkg_extract $filename
-> control.tar.gz ; gunzip control.tar.gz ; tar xf control.tar ) ; then
->  		echo "ipkg_install_file: ERROR unpacking control.tar.gz from $filename"
->  		return 1
->  	fi
-> @@ -798,10 +798,11 @@ Status: install ok pending" |
-> ipkg_status_update_sd $sd $pkg
->  	set -o noglob
->  	rm -r $IPKG_TMP/$pkg/control
-> 
-> -	if ! $pkg_extract_stdout $filename ./data.tar.gz | (cd
-> $IPKG_TMP/$pkg/data; tar -xzf - ) ; then
-> +	if ! (cd $IPKG_TMP/$pkg/data ; $pkg_extract $filename
-> ./data.tar.gz ; gunzip data.tar.gz ; tar xf data.tar ) ; then
->  		echo "ipkg_install_file: ERROR unpacking data.tar.gz from $filename"
->  		return 1
->  	fi
-> +	rm $IPKG_TMP/$pkg/data/data.tar
->  	echo "Done."
-> 
->  	echo -n "Configuring $pkg..."
-> @@ -869,7 +870,10 @@ diff -u $dest/$conffile $IPKG_TMP/$pkg/data/$conffile"
->  	(cd $IPKG_TMP/$pkg/data/; tar cf - . | (cd $owd; cd $dest; tar xf -))	
->  	rm -rf $IPKG_TMP/$pkg/data
->  	rmdir $IPKG_TMP/$pkg
-> -	$pkg_extract_stdout $filename ./data.tar.gz | tar tzf - | sed -e
-> 's/^\.//' > $info_dir/$pkg.list
-> +	$pkg_extract $filename ./data.tar.gz
-> +	gunzip data.tar
-> +	tar tf data.tar | sed -e 's/^\.//' > $info_dir/$pkg.list
-> +	rm data.tar
-> 
->  	if [ -x "$info_dir/$pkg.postinst" ]; then
->  		$info_dir/$pkg.postinst configure
-> diff --git a/recipes/stage-manager/stagemanager-native_0.0.1.bb
-> b/recipes/stage-manager/stagemanager-native_0.0.1.bb
-> index 733cc83..9eeac4b 100644
-> --- a/recipes/stage-manager/stagemanager-native_0.0.1.bb
-> +++ b/recipes/stage-manager/stagemanager-native_0.0.1.bb
-> @@ -1,5 +1,5 @@
->  DESCRIPTION = "Helper script for packaged-staging.bbclass"
-> -PR = "r12"
-> +PR = "r13"
-> 
->  SRC_URI = "file://stage-manager \
->             file://stage-manager-ipkg \
-> 
-> -- 
-> Tom Rini
-> Mentor Graphics Corporation
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
