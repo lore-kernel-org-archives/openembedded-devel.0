@@ -1,38 +1,31 @@
-Received: from 26.mail-out.ovh.net ([91.121.27.225])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OR2dU-0004hX-Ff
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 14:31:39 +0200
-Received: (qmail 19646 invoked by uid 503); 22 Jun 2010 12:33:21 -0000
-Received: from b9.ovh.net (HELO mail425.ha.ovh.net) (213.186.33.59)
-	by 26.mail-out.ovh.net with SMTP; 22 Jun 2010 12:33:21 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 22 Jun 2010 14:26:51 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 22 Jun 2010 14:26:49 +0200
-Message-ID: <4C20AC08.6050104@eukrea.com>
-Date: Tue, 22 Jun 2010 14:26:48 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5
-MIME-Version: 1.0
+Received: from pasmtpa.tele.dk ([80.160.77.114])
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <sgh@sgh.dk>)
+	id 1OR4A6-0008Om-UQ for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 16:09:15 +0200
+Received: from mail.mikrofyn.com (cpe.ge-0-2-0-951.faaqnqu1.customer.tele.dk
+	[93.167.193.22])
+	by pasmtpA.tele.dk (Postfix) with ESMTP id C740B8002EC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 15:32:03 +0200 (CEST)
+Received: from koontz.localnet ([10.115.0.128]) by mail.mikrofyn.com with
+	Microsoft SMTPSVC(6.0.3790.3959); Tue, 22 Jun 2010 15:33:47 +0200
+From: =?iso-8859-1?q?S=F8ren_Holm?= <sgh@sgh.dk>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTilowvawMUeG_uqEzSyvsM2HwSFiKYxu5g5izYXt@mail.gmail.com>	<4C1F5474.6050907@eukrea.com>
-	<AANLkTilg_f1-6wpQQTCcWgiFdcIxEQApGhHBTx8NuF-1@mail.gmail.com>
-In-Reply-To: <AANLkTilg_f1-6wpQQTCcWgiFdcIxEQApGhHBTx8NuF-1@mail.gmail.com>
-X-Ovh-Tracer-Id: 12396439450405809481
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.27.225
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Tue, 22 Jun 2010 15:32:02 +0200
+User-Agent: KMail/1.13.3 (Linux/2.6.32-23-generic; KDE/4.4.4; x86_64; ; )
+MIME-Version: 1.0
+Message-Id: <201006221532.02203.sgh@sgh.dk>
+X-OriginalArrivalTime: 22 Jun 2010 13:33:47.0953 (UTC)
+	FILETIME=[8B355A10:01CB120F]
+X-SA-Exim-Connect-IP: 80.160.77.114
+X-SA-Exim-Mail-From: sgh@sgh.dk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Bitbaking for i.MX27
+Subject: Image creation while >1 package versions build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,20 +39,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 12:31:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 22 Jun 2010 14:09:15 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+Hi
 
-Le 22/06/2010 14:15, Dr. Ahmed Al-Alousi a écrit :
-> Strangely enough, I could not find niether tx27 nor mx27ads under my
-> conf/machine directory.
->
-they should be there :
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/machine/mx27ads.conf
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/conf/machine/tx27.conf
+I have trouble getting the correct package-versions in my image when my=20
+application is compiled in several versions.
 
-Eric
+The case is that I sepcify that specify PREFERRED_VERSION_myapp =3D "1.0", =
+Myapp=20
+is included in my image and when it builds the image myapp-1.0 get pulled i=
+n.=20
+That is as it should be.
+
+Now I change to PREFERRED_VERSION_myapp =3D "2.0" and build my image again.=
+=20
+Everything goes well again - myapp-2.0 end up in the image.
+
+If I now change PREFERRED_VERSION_myapp back to "1.0" and rebuild the image=
+ it=20
+is always myapp-2,0 that ends up in the image. The only way to get myapp-1.=
+0 in=20
+the image is to delete the generate myapp-2.0.ipk in tmp/deploy/....
+
+I'm using an OE snapshot from around january, so this issue might be fixed.
+
+=2D-=20
+S=F8ren Holm
 
 
