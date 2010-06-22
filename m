@@ -1,39 +1,42 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mta9.brinkster.com ([65.182.109.78])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OR8hy-0004ZD-73
+	(envelope-from <John.Willis@Distant-earth.com>) id 1OR93K-0003tR-5C
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 21:00:32 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OR8dV-0001OM-Gn from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 11:55:53 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 22 Jun 2010 11:55:53 -0700
-Received: from [172.30.80.158] ([172.30.80.158]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 22 Jun 2010 12:55:52 -0600
-Message-ID: <4C210735.5090202@mentor.com>
-Date: Tue, 22 Jun 2010 11:55:49 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 22 Jun 2010 21:22:36 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mta9.brinkster.com (Postfix) with ESMTP id 276CA2480CB
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 15:12:09 -0400 (EDT)
+X-Virus-Scanned: amavisd-new at mta9.brinkster.com
+Received: from mta9.brinkster.com ([127.0.0.1])
+	by localhost (mta9.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id giAmEqgPAuHa
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 15:12:08 -0400 (EDT)
+Received: from MareImbrium (cpc1-bath2-0-0-cust327.aztw.cable.virginmedia.com
+	[82.46.19.72])
+	by mta9.brinkster.com (Postfix) with ESMTPA id 0DF882484EC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 15:12:07 -0400 (EDT)
+From: "John Willis" <John.Willis@Distant-earth.com>
+To: <openembedded-devel@lists.openembedded.org>
+References: <1277201329-1339-1-git-send-email-sledz@dresearch.de>	<hvq586$1jc$1@dough.gmane.org>	<4C20A60D.40102@dresearch.de>
+	<hvqhbh$hqo$2@dough.gmane.org>
+In-Reply-To: <hvqhbh$hqo$2@dough.gmane.org>
+Date: Tue, 22 Jun 2010 20:11:56 +0100
+Message-ID: <111b01cb123e$c90177a0$5b0466e0$@Distant-earth.com>
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C1FDFAE.8040704@mentor.com> <20100622144759.GB32544@gmail.com>
-In-Reply-To: <20100622144759.GB32544@gmail.com>
-X-OriginalArrivalTime: 22 Jun 2010 18:55:52.0487 (UTC)
-	FILETIME=[89873B70:01CB123C]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-Mailer: Microsoft Outlook 14.0
+Thread-Index: AQLaT1/I4uR17kgr7xaT/Y/+HKTECQJ/L8PeAnWeBmsB66oftpA41oug
+X-SA-Exim-Connect-IP: 65.182.109.78
+X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC, PATCH] Make packaged-staging use more correct PSTAGE_PKGARCH
+Subject: Re: [PATCH] udev/mount.sh: try to kill active processes before umount
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,89 +50,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 19:00:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 22 Jun 2010 19:22:36 -0000
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Language: en-us
 
-Khem Raj wrote:
-> On (21/06/10 14:54), Tom Rini wrote:
->> packaged-staging.bbclass: Change PSTAGE_PKGARCH to something dynamic
->>
->> Currently, we make all pstage packages be locked to BUILD_SYS which
->> causes annoying warnings in some cases and doesn't allow for sharing
->> between say 32 and 64bit (which is valid for target bits).
->>
->> This changes to ${PACKAGE_ARCH}-${HOST_SYS} for everything and
->> reworks the opkg.conf we generate to add entries as needed.
->>
->> There is an alternative, suggested by Chris Larson, that we modify
->> PSTAGE_PKGARCH in an anon python function so that we can avoid
->> things like 'x86_64-x86_64-linux' in native packages and similar
->> duplication in sdk packages, or otherwise be more dynamic (use
->> HOST_OS instead of SYS and then catch the cross case, etc).
+> >> Wouldn't a umount -l be a lot better in this case?
+> >
+> > I'm not sure if this would do the right things.
+> >
+> > mount.sh is called with REMOVE action when the device *is
+> > disconnected* i.e. the filesystem is no longer available.
+> > So i believe it is not possible to "cleanup all references to the
+> > filesystem as soon as it is not busy anymore".
+> >
+> > I think killing all the processes is the only way here.
 > 
-> I think this approach sounds better having same arch repeated twice
-> would be confusing
+> I don't like the idea of killing random processes, especially is that
+process is
+> smart enough to "move on" after a timeout.
 
-Here we go.  This also reworks generating opkg.conf a little bit (it had 
-multiple entries before due to a lazy grep).
+I concur, the issue at hand is a little 'rock and a hard place' (what is the
+'correct' way to deal with processes left over when the file system has most
+definitely been pulled with prejudice ;)). Killing processes feels a little
+wrong as a lot of apps can recover from filesystem pulls.
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
+That said, we have been experimenting with umount -l on the OpenPandora with
+some promising initial results. We are also playing with some other changes
+that may also be of wider interest (mountpoints based on SD card labels if
+they exist etc.). I'll keep this thread updated with the results of testing,
+if it works out well I was going to suggest some of the changes for the
+stock mount.sh.
 
-diff --git a/classes/packaged-staging.bbclass 
-b/classes/packaged-staging.bbclass
-index 8a98940..19a6a6d 100644
---- a/classes/packaged-staging.bbclass
-+++ b/classes/packaged-staging.bbclass
-@@ -12,7 +12,7 @@
-  # bitbake.conf set PSTAGING_ACTIVE = "0", this class sets to "1" if 
-we're active
-  #
-  PSTAGE_PKGVERSION = "${PV}-${PR}"
--PSTAGE_PKGARCH    = "${BUILD_SYS}"
-+PSTAGE_PKGARCH    = "${PACKAGE_ARCH}-${HOST_OS}"
-  PSTAGE_EXTRAPATH  ?= "/${OELAYOUT_ABI}/${DISTRO_PR}/"
-  PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
-  PSTAGE_PKGPN      = 
-"${@bb.data.expand('staging-${PN}-${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}', 
-d).replace('_', '-')}"
-@@ -28,6 +28,12 @@ PSTAGE_NATIVEDEPENDS = "\
+There is little harm in a umount -l in the short term.
 
-  BB_STAMP_WHITELIST = "${PSTAGE_NATIVEDEPENDS}"
+Regards,
 
-+python __anonymous() {
-+    # We need PSTAGE_PKGARCH to contain information about the target.
-+    if bb.data.inherits_class('cross', d):
-+        bb.data.setVar('PSTAGE_PKGARCH', 
-"${HOST_SYS}-${PACKAGE_ARCH}-${TARGET_OS}", d)
-+}
-+
-  python () {
-      pstage_allowed = True
+John
 
-@@ -148,14 +154,13 @@ staging_helper () {
-  	# Assemble appropriate opkg.conf
-  	conffile=${PSTAGE_MACHCONFIG}
-  	mkdir -p ${PSTAGE_WORKDIR}/pstaging_lists
-+	arch="${PSTAGE_PKGARCH}"
-  	if [ ! -e $conffile ]; then
--		ipkgarchs="${BUILD_SYS}"
--		priority=1
--		for arch in $ipkgarchs; do
--			echo "arch $arch $priority" >> $conffile
--			priority=$(expr $priority + 5)
--		done
-+		echo "arch $arch 1" > $conffile
-  		echo "dest root /" >> $conffile
-+	elif [ `grep -c " $arch " $conffile` -eq 0 ]; then
-+		priority=$(expr `grep -cE "^arch" $conffile` + 1)
-+		sed -i -e "/dest/iarch $arch $priority" $conffile
-  	fi
-  	if [ ! -e ${TMPDIR}${libdir_native}/opkg/info/ ]; then
-  		mkdir -p ${TMPDIR}${libdir_native}/opkg/info/
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+
 
 
