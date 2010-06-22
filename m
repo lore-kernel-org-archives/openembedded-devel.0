@@ -1,31 +1,49 @@
-Received: from ausc60ps301.us.dell.com ([143.166.148.206])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sean_Hudson@Dell.com>) id 1OR595-0000Lx-S3
+	(envelope-from <raj.khem@gmail.com>) id 1OR5AQ-0000SY-BU
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 17:12:16 +0200
-X-Loopcount0: from 10.166.62.177
-From: <Sean_Hudson@Dell.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Jun 2010 10:06:27 -0500
-Thread-Topic: Re: [oe] [PATCH] Add a waf bitbake class. (Koen Kooi)
-Thread-Index: AcsSHHzVVAdly0SJRVKtQhwD4bcO8Q==
-Message-ID: <113134CF306E8E4CACC27BE5937261B209313293D8@AUSX7MCPS303.AMER.DELL.COM>
-Accept-Language: en-US
-X-MS-Has-Attach: yes
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue, 22 Jun 2010 17:13:39 +0200
+Received: by pxi2 with SMTP id 2so26705pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 08:09:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=PXnMC5RSrRt2mNZKXow3lRzgIO3R3RLr/Ny2In2SnBM=;
+	b=DPM6UcWZZAPCfE7N9tD9430stMMQf/3dOOSfqd5kIdVeVnPe9RtaXlQjHnYFBeSV9Z
+	Q9WVxFhVukZ/DvGnDGtOdyP94VYxA67RmQ/8zshNBMyJi9Mj4eWm90uM052XBENevHnL
+	K/U4FK6H7fR/NFZ417WI3GnAJGG2NMXVi0Sx0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=CHCHbqu11M9hbalt2izyyS6L98ed0nVqKwa1mOWswwPDwAQCKrCmP8x6QBCi3ie95o
+	bS4sGbsYsePNDg3IFvp8YLHq/2/B7bqhEScP5KVpL0Ty3D6DOshqXrVXpi6zUjSRfLZs
+	fTFznXScIiNpZqHPFCtoKi1huioEMA3nxBjGo=
+Received: by 10.143.154.28 with SMTP id g28mr5273586wfo.70.1277218017417;
+	Tue, 22 Jun 2010 07:46:57 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id u34sm517337wfh.20.2010.06.22.07.46.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 22 Jun 2010 07:46:56 -0700 (PDT)
+Date: Tue, 22 Jun 2010 07:47:59 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100622144759.GB32544@gmail.com>
+References: <4C1FDFAE.8040704@mentor.com>
 MIME-Version: 1.0
-X-OriginalArrivalTime: 22 Jun 2010 15:06:29.0124 (UTC)
-	FILETIME=[7DECB440:01CB121C]
-X-SA-Exim-Connect-IP: 143.166.148.206
-X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
+In-Reply-To: <4C1FDFAE.8040704@mentor.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Add a waf bitbake class. (Koen Kooi)
+Subject: Re: [RFC, PATCH] Make packaged-staging use more correct PSTAGE_PKGARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,64 +57,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 15:12:17 -0000
-X-Groupsio-MsgNum: 20358
-Content-Language: en-US
-Content-Type: multipart/mixed;
-	boundary="_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_"
+X-List-Received-Date: Tue, 22 Jun 2010 15:13:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+On (21/06/10 14:54), Tom Rini wrote:
+> packaged-staging.bbclass: Change PSTAGE_PKGARCH to something dynamic
+> 
+> Currently, we make all pstage packages be locked to BUILD_SYS which
+> causes annoying warnings in some cases and doesn't allow for sharing
+> between say 32 and 64bit (which is valid for target bits).
+> 
+> This changes to ${PACKAGE_ARCH}-${HOST_SYS} for everything and
+> reworks the opkg.conf we generate to add entries as needed.
+> 
+> There is an alternative, suggested by Chris Larson, that we modify
+> PSTAGE_PKGARCH in an anon python function so that we can avoid
+> things like 'x86_64-x86_64-linux' in native packages and similar
+> duplication in sdk packages, or otherwise be more dynamic (use
+> HOST_OS instead of SYS and then catch the cross case, etc).
 
-> Tom Rini wrote:
-> > Sean_Hudson at Dell.com wrote:
-> >> On 18-06-10 21:58, Koen Kooi <k.kooi at student.utwente.nl> wrote:
-> >> ------------------------------
-> >>> On 18-06-10 21:58, Sean_Hudson at Dell.com wrote:
-> >>>> Hi All,
-> >>>>
-> >>>>   We are using waf for some of our modules and decided to add a
-> >>>> class to make it easier to write recipes.
-> >>> Why is there still a staging method in there? Those have been depreca=
-ted
-> >>> for months now.
-> >>
-> >> Thanks for taking the time to reply.  To answer your question, the waf
-> >> class was cloned from the autotools.bbclass, so the staging stuff came
-> >> from there.  Is there a better way to handle the staging?
-> >>
-> >> It's a fairly trivial class, but I'm interested to hear if anyone had
-> >> any additional thoughts on ways to improve the class?
-> >
-> > Koen's point is that for a long time now do_stage has been set as legac=
-y
-> > and 'do_install' should instead set things up such that a package can
-> > then be installed into the sysroots/ directory and reused.  Like
-> > autotools.bbclass does today :)
->
-> And to be more clear, see is_legacy_staging in staging.bbclass
+I think this approach sounds better having same arch repeated twice
+would be confusing
 
-Thanks for clearing that up.  I've attached an updated version that drops t=
-he staging function.
+> 
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> 
+> diff --git a/classes/packaged-staging.bbclass
+> b/classes/packaged-staging.bbclass
+> index 8a98940..d6ac67b 100644
+> --- a/classes/packaged-staging.bbclass
+> +++ b/classes/packaged-staging.bbclass
+>  -12,7 +12,7 @@
+>  # bitbake.conf set PSTAGING_ACTIVE = "0", this class sets to "1" if
+> we're active
+>  #
+>  PSTAGE_PKGVERSION = "${PV}-${PR}"
+> -PSTAGE_PKGARCH    = "${BUILD_SYS}"
+> +PSTAGE_PKGARCH    = "${PACKAGE_ARCH}-${HOST_SYS}"
+>  PSTAGE_EXTRAPATH  ?= "/${OELAYOUT_ABI}/${DISTRO_PR}/"
+>  PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
+>  PSTAGE_PKGPN      = "${@bb.data.expand('staging-${PN}-${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}',
+> d).replace('_', '-')}"
+>  -148,15 +148,15 @@ staging_helper () {
+>  	# Assemble appropriate opkg.conf
+>  	conffile=${PSTAGE_MACHCONFIG}
+>  	mkdir -p ${PSTAGE_WORKDIR}/pstaging_lists
+> +	arch="${PSTAGE_PKGARCH}"
+>  	if [ ! -e $conffile ]; then
+> -		ipkgarchs="${BUILD_SYS}"
+> -		priority=1
+> -		for arch in $ipkgarchs; do
+> -			echo "arch $arch $priority" >> $conffile
+> -			priority=$(expr $priority + 5)
+> -		done
+> +		echo "arch $arch 1" > $conffile
+>  		echo "dest root /" >> $conffile
+>  	fi
+> +	if [ -f $conffile -a `grep -q $arch $conffile;echo $?` -ne 0 ]; then
+> +		priority=$(expr `grep -cE "^arch" $conffile` + 1)
+> +		sed -i -e "/dest/iarch $arch $priority" $conffile
+> +	fi
+>  	if [ ! -e ${TMPDIR}${libdir_native}/opkg/info/ ]; then
+>  		mkdir -p ${TMPDIR}${libdir_native}/opkg/info/
+>  	fi
+> 
+> -- 
+> Tom Rini
+> Mentor Graphics Corporation
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
---_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_
-Content-Type: application/octet-stream; name="waf.bbclass"
-Content-Description: waf.bbclass
-Content-Disposition: attachment; filename="waf.bbclass"; size=516;
-	creation-date="Tue, 22 Jun 2010 10:05:12 GMT";
-	modification-date="Mon, 21 Jun 2010 17:37:35 GMT"
-Content-Transfer-Encoding: base64
 
-IyBXQUYgcHJvamVjdCBjbGFzcy4KCkRFUEVORFMgKz0gcHl0aG9uCgojIENvbmRpdGlvbmFsbHkg
-c2V0IHRoZSB2ZXJib3NlIG9wdGlvbi4KIyBXQUZfVkVSQk9TRT0iLXYiCgp3YWZfZG9fY29tcGls
-ZSgpIHsKCS4vd2FmICR7V0FGX1ZFUkJPU0V9IGJ1aWxkIAp9Cgp3YWZfZG9fY2xlYW4oKSB7Cgku
-L3dhZiAke1dBRl9WRVJCT1NFfSBjbGVhbgp9Cgp3YWZfZG9fY29uZmlndXJlKCkgewoJaWYgWyAt
-eCAke1N9L3dhZiBdOyB0aGVuCgkJJHtTfS93YWYgJHtXQUZfVkVSQk9TRX0gY29uZmlndXJlIC0t
-cHJlZml4PSR7cHJlZml4fSAke0VYVFJBX09FQ09ORn0gIiRAIgoJZWxzZQoJCW9lZmF0YWwgImV4
-ZWN1dGFibGUgd2FmIHNjcmlwdCBub3QgZm91bmQiCglmaQp9Cgp3YWZfZG9faW5zdGFsbCgpIHsK
-CS4vd2FmICR7V0FGX1ZFUkJPU0V9IGluc3RhbGwgLS1kZXN0ZGlyPSIke0R9IiAiJEAiCn0KCkVY
-UE9SVF9GVU5DVElPTlMgZG9fY29tcGlsZSBkb19jbGVhbiBkb19jb25maWd1cmUgZG9faW5zdGFs
-bCAK
-
---_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_--
