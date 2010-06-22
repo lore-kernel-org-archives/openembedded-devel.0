@@ -1,31 +1,33 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OQzlq-00051W-OE
+	(envelope-from <sledz@dresearch.de>) id 1OR0U2-0006HV-D2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 11:27:59 +0200
-Received: from fwext.cambridgebroadband.com ([212.44.17.73]
-	helo=[10.10.208.22])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OQzhQ-00078d-KJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 10:23:20 +0100
-From: Phil Blundell <philb@gnu.org>
+	Tue, 22 Jun 2010 12:13:36 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 27122491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 12:09:01 +0200 (CEST)
+Received: from fsc-480-012-88.intern.dresearch.de ([10.32.10.177]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 22 Jun 2010 12:09:01 +0200
+Received: by fsc-480-012-88.intern.dresearch.de (Postfix, from userid 10000)
+	id C9B1072078; Tue, 22 Jun 2010 12:09:00 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
-References: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
-Date: Tue, 22 Jun 2010 10:23:24 +0100
-Message-ID: <1277198604.4745.99.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Tue, 22 Jun 2010 12:08:49 +0200
+Message-Id: <1277201329-1339-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.6.4.2
+X-OriginalArrivalTime: 22 Jun 2010 10:09:01.0176 (UTC)
+	FILETIME=[EFB7F780:01CB11F2]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] patch file location
+Subject: [PATCH] udev/mount.sh: try to kill active processes before umount
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,37 +41,98 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 09:27:59 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jun 2010 10:13:37 -0000
 
-On Tue, 2010-06-22 at 09:03 +0200, Frans Meulenbroeks wrote:
-> Frankly speaking I have no clue at all which version of the patch will
-> be used by the 2.10.1 recipe. The only ways to find out is to study
-> the class code that does the patch or to actually build the package
-> (in the hope it selects the patch in a deterministic way). I don't
-> think it is good that if someone is debugging a problem that they
-> should have such a hard time to find out what version of a file is
-> actually used
+* umount will fail if there are processes accessing files at the
+  device. Therefor try to kill these processes using fuser if
+  available.
 
-See glibc_2.10.1.bb:
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+---
+ recipes/udev/files/mount.sh        |   21 ++++++++++++++++++++-
+ recipes/udev/files/slugos/mount.sh |   21 ++++++++++++++++++++-
+ 2 files changed, 40 insertions(+), 2 deletions(-)
 
-FILESPATHPKG =. "glibc-2.4:"
-
-So, the answer is that it will use the version from the glibc-2.4
-directory.  
-
-I think the semantics of FILESPATHPKG are documented in the manual.  If
-they're not, that is an oversight and should indeed be corrected.
-
-> (optionally we might allow for a mechanism that allows specifying
-> patches for higher level recipes; e.g. glibc_2.10.1 could look in
-> glibc-2.10.1, glibc-2.10, glibc-2, glibc and files).
-
-You can already do this with a suitable FILESPATHPKG setting, I think.
-
-p.
-
+diff --git a/recipes/udev/files/mount.sh b/recipes/udev/files/mount.sh
+index be8b3df..79c6891 100644
+--- a/recipes/udev/files/mount.sh
++++ b/recipes/udev/files/mount.sh
+@@ -8,6 +8,7 @@
+ MOUNT="/bin/mount"
+ PMOUNT="/usr/bin/pmount"
+ UMOUNT="/bin/umount"
++FUSER="/usr/bin/fuser"
+ name="`basename "$DEVNAME"`"
+ 
+ for line in `cat /etc/udev/mount.blacklist | grep -v ^#`
+@@ -64,7 +65,25 @@ fi
+ if [ "$ACTION" = "remove" ] && [ -x "$UMOUNT" ] && [ -n "$DEVNAME" ]; then
+ 	for mnt in `cat /proc/mounts | grep "$DEVNAME" | cut -f 2 -d " " `
+ 	do
+-		$UMOUNT $mnt
++		if [ -x "$FUSER" ]; then
++			$FUSER -k -KILL -m $mnt
++			for try in `seq 10`
++			do
++				$FUSER -m $mnt || break
++				sleep 1
++				logger "mount.sh/automount" "$try secs waited for processes active at $mnt to finish on SIGKILL"
++			done
++
++			if $FUSER -m $mnt 
++			then
++				logger "mount.sh/automount" "Could not kill all processes using files at $mnt, try forced umount"
++				$UMOUNT -f $mnt
++			else
++				$UMOUNT $mnt
++			fi
++		else
++			$UMOUNT $mnt
++		fi
+ 	done
+ 	
+ 	# Remove empty directories from auto-mounter
+diff --git a/recipes/udev/files/slugos/mount.sh b/recipes/udev/files/slugos/mount.sh
+index 0990a7e..f67c3ff 100644
+--- a/recipes/udev/files/slugos/mount.sh
++++ b/recipes/udev/files/slugos/mount.sh
+@@ -8,6 +8,7 @@
+ MOUNT="/bin/mount"
+ PMOUNT="/usr/bin/pmount"
+ UMOUNT="/bin/umount"
++FUSER="/usr/bin/fuser"
+ name="`basename "$DEVNAME"`"
+ 
+ if ( blkid "$DEVNAME" | grep -q 'TYPE="mdraid"' )
+@@ -75,7 +76,25 @@ fi
+ if [ "$ACTION" = "remove" ] && [ -x "$UMOUNT" ] && [ -n "$DEVNAME" ]; then
+ 	for mnt in `cat /proc/mounts | grep "$DEVNAME" | cut -f 2 -d " " `
+ 	do
+-		$UMOUNT $mnt
++		if [ -x "$FUSER" ]; then
++			$FUSER -k -KILL -m $mnt
++			for try in `seq 10`
++			do
++				$FUSER -m $mnt || break
++				sleep 1
++				logger "mount.sh/automount" "$try secs waited for processes active at $mnt to finish on SIGKILL"
++			done
++
++			if $FUSER -m $mnt 
++			then
++				logger "mount.sh/automount" "Could not kill all processes using files at $mnt, try forced umount"
++				$UMOUNT -f $mnt
++			else
++				$UMOUNT $mnt
++			fi
++		else
++			$UMOUNT $mnt
++		fi
+ 	done
+ 	
+ 	# Remove empty directories from auto-mounter
+-- 
+1.6.4.2
 
 
 
