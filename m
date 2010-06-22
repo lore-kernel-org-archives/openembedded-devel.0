@@ -1,47 +1,44 @@
-Received: from mail-yw0-f202.google.com ([209.85.211.202])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OR6Nl-0003TX-Ut
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 18:31:43 +0200
-Received: by ywh40 with SMTP id 40so3918868ywh.3
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OR8hl-0004Ye-LM for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 21:00:21 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OR8dH-0001E9-4j for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 20:55:39 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 20:55:39 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 09:26:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=M6yZ1s1QYCm7DtPihpZ2+GxZIXKYkBgDyjkwo1eZEdE=;
-	b=W8djejTgZTwjMSppfw5q3g4GnxNmv30c6ELtstTS43KjRs9iWt3dX/Ce5d0ToMjULu
-	YnRyANq0VqbCYwgz2KZmNt0Ju5fU2yHotmLVlUJ+FrVj15xAoMqv0QE6n5fGTc/xlDXH
-	xk4xUKkLtnLWBfsjvi63icSsaBgs63cIxCeFI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=o8sTgSrzeZP79a1id0aoRu95z1V9K788i7BGrGIDGMbufgJtGwefboHWXcBtsHHESq
-	SKgjU+CHKlS5Khq9+i7KIxAw0Mh5vPv7cddBMFscVrYq6lIOXj752jwHdL5CNHqOLJyY
-	WYecSc7kOsOvcFai9zxPj7atIk1/qr5qENKKY=
-Received: by 10.229.186.139 with SMTP id cs11mr3461006qcb.19.1277223959785; 
-	Tue, 22 Jun 2010 09:25:59 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.241.204 with HTTP; Tue, 22 Jun 2010 08:56:24 -0700 (PDT)
-In-Reply-To: <BAY127-W5364FE0717D0A6178A2EAD8C40@phx.gbl>
-References: <BAY127-W5364FE0717D0A6178A2EAD8C40@phx.gbl>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 22 Jun 2010 08:56:24 -0700
-X-Google-Sender-Auth: 0LXBouvkg_Fin8NkQfuI1whc5pA
-Message-ID: <AANLkTilQuTcfbY3xhXiG1-E49_ZMo2egSMqvvxovG6Z4@mail.gmail.com>
+	Tue, 22 Jun 2010 20:55:39 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.211.202
-X-SA-Exim-Mail-From: kergoth@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 22 Jun 2010 20:55:29 +0200
+Message-ID: <hvr0v1$j72$1@dough.gmane.org>
+References: <1276814379-13161-1-git-send-email-raj.khem@gmail.com>
+	<1276814379-13161-2-git-send-email-raj.khem@gmail.com>	<AANLkTik6QLxTLQgYZaLpucQaU8etYax-invJna3D5kp_@mail.gmail.com>
+	<AANLkTimOU6R6QDgQ2F2WtFRcYZy30T68TmhglN3OxIKZ@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <AANLkTimOU6R6QDgQ2F2WtFRcYZy30T68TmhglN3OxIKZ@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: setting of ipk pakcages
+Subject: Re: [PATCH 2/3] busybox_1.15.3.bb: Work around the gcc 4.5 ICE on thumb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,27 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 16:31:50 -0000
+X-List-Received-Date: Tue, 22 Jun 2010 19:00:21 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jun 22, 2010 at 8:51 AM, saleh usman <salehusman@hotmail.com> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->
-> Hello
->
-> How and where setting are made for ipkg packages in OpenEmbedded. What does
-> hello-dev.ipk and hello-dbg.ipk contain instead of hello.ipk when hello is
-> name of bitbake recipe.
+On 22-06-10 16:31, Khem Raj wrote:
+> On Mon, Jun 21, 2010 at 10:59 PM, Leon Woestenberg
+> <leon.woestenberg@gmail.com> wrote:
+>> Hello Khem,
+>>
+>> On Fri, Jun 18, 2010 at 12:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>> +# gcc 4.5 has this bug on thumb
+>>> +# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=44557
+>>> +# so add -fomit-frame-pointer
+>>> +# this will be removed once the above bug is fixed.
+>>> +
+>>> +
+>>> +CFLAGS_append = " -fomit-frame-pointer"
+>>> +
+>> Can we make this append conditional for ARM-only or even thumb-only?
+> 
+> Yes it should be better to restrict it to arm only I will do that.
+> I dont think we have instruction set (e.g. thumb) in standard overrides
+> may be it will help if we added such an override.
+
+You do have a thumb override(s) if your machine includes tune-thumb.inc.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMIQchMkyGM64RGpERAqOxAKCDTlHB0FsQfJphVLy4GmrNcCtDiwCeP6ZM
+FhCZjvjyhBJIUhRmc/5zcAg=
+=1x01
+-----END PGP SIGNATURE-----
 
 
-Read bitbake.conf.  See the PACKAGES variable which lists what binary
-packages will be emitted, and the FILES_ variables which control what files
-go into those packages.  All the packaging is based on what the do_install
-task installs into the ${D} directory.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
