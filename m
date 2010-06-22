@@ -1,48 +1,31 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from ausc60ps301.us.dell.com ([143.166.148.206])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OR51q-0006Qv-5g
+	(envelope-from <Sean_Hudson@Dell.com>) id 1OR595-0000Lx-S3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 17:04:48 +0200
-Received: by pxi2 with SMTP id 2so22732pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 08:00:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=JEhnh/DZmgwdFbXqu56KHZVWtTB1vkOp6fubW4MXEBQ=;
-	b=CpwxdJE2QeK37NFR+oyG9tGExfdUE6VkaqM0ve7YSPHHsW7pGYYKnZOdVN0zJmziHd
-	33jo4n5bk2kqvLIPWaxXlnmjZ2I2hN4FIq6CN1ljfkmnkYcGBGEoS9Pq/Bo7SKYfF89h
-	KPG84Gr8Rk49zM9M0KDWYOTYMxYT/LwRJf+54=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=UwC3IuuxocDptxlFCcyCccu7z2GoOOGsYXZ/rKD+0OdLXY1TOgBsKdsSOj7xpBpE1e
-	3ijWLQ9SF1KaaoROQalT3JFsyGEyFamGepkLac/PRbdb8UYrXzCbDEUusVyV5rOcJ/2w
-	bbugo0BuTMy0FFfQaq3oTW62uVOxASpYWzIiI=
-Received: by 10.143.177.5 with SMTP id e5mr5257042wfp.304.1277218475619;
-	Tue, 22 Jun 2010 07:54:35 -0700 (PDT)
-Received: from gmail.com ([99.57.141.118])
-	by mx.google.com with ESMTPS id h18sm1862950wfg.13.2010.06.22.07.54.34
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 22 Jun 2010 07:54:34 -0700 (PDT)
-Date: Tue, 22 Jun 2010 07:55:37 -0700
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100622145537.GC32544@gmail.com>
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CFB6@KCINPUNHJCMS01.kpit.com>
+	Tue, 22 Jun 2010 17:12:16 +0200
+X-Loopcount0: from 10.166.62.177
+From: <Sean_Hudson@Dell.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 Jun 2010 10:06:27 -0500
+Thread-Topic: Re: [oe] [PATCH] Add a waf bitbake class. (Koen Kooi)
+Thread-Index: AcsSHHzVVAdly0SJRVKtQhwD4bcO8Q==
+Message-ID: <113134CF306E8E4CACC27BE5937261B209313293D8@AUSX7MCPS303.AMER.DELL.COM>
+Accept-Language: en-US
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFB6@KCINPUNHJCMS01.kpit.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-OriginalArrivalTime: 22 Jun 2010 15:06:29.0124 (UTC)
+	FILETIME=[7DECB440:01CB121C]
+X-SA-Exim-Connect-IP: 143.166.148.206
+X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.2 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Qt-4.7.0.beta1 Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+Subject: Re: [PATCH] Add a waf bitbake class. (Koen Kooi)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,50 +39,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 15:04:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 22 Jun 2010 15:12:17 -0000
+X-Groupsio-MsgNum: 20358
+Content-Language: en-US
+Content-Type: multipart/mixed;
+	boundary="_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_"
 
-On (22/06/10 11:35), Soumya R wrote:
-> Hi All,
-> 
->       I am trying to build Qt Embedded SDK for Qt-4.7.0.beta1.. when i run
-> bitbake meta-toolchain-avn-qte i got the following error
-> 
-> 
-> NOTE: Handling BitBake files: - (0169/0169) [100 %]
-> NOTE: Parsing finished. 163 cached, 5 parsed, 1 skipped, 0 masked.
-> NOTE: Resolving any missing task queue dependencies
-> ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/tasks/task-avn-qte-toolchain-target.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'qt4-embedded-mkspecs' but it wasn't found in any PACKAGE or RPROVIDES variables
-> NOTE: Runtime target 'qt4-embedded-mkspecs' is unbuildable, removing...
+--_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-I dont see this recipe in oe repo. Is it your own recipe ?
+> Tom Rini wrote:
+> > Sean_Hudson at Dell.com wrote:
+> >> On 18-06-10 21:58, Koen Kooi <k.kooi at student.utwente.nl> wrote:
+> >> ------------------------------
+> >>> On 18-06-10 21:58, Sean_Hudson at Dell.com wrote:
+> >>>> Hi All,
+> >>>>
+> >>>>   We are using waf for some of our modules and decided to add a
+> >>>> class to make it easier to write recipes.
+> >>> Why is there still a staging method in there? Those have been depreca=
+ted
+> >>> for months now.
+> >>
+> >> Thanks for taking the time to reply.  To answer your question, the waf
+> >> class was cloned from the autotools.bbclass, so the staging stuff came
+> >> from there.  Is there a better way to handle the staging?
+> >>
+> >> It's a fairly trivial class, but I'm interested to hear if anyone had
+> >> any additional thoughts on ways to improve the class?
+> >
+> > Koen's point is that for a long time now do_stage has been set as legac=
+y
+> > and 'do_install' should instead set things up such that a package can
+> > then be installed into the sysroots/ directory and reused.  Like
+> > autotools.bbclass does today :)
+>
+> And to be more clear, see is_legacy_staging in staging.bbclass
 
-> Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
-> NOTE: Runtime target 'task-avn-qte-toolchain-target' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
-> ERROR: Required build target 'meta-toolchain-avn-qte' has no buildable providers.
-> Missing or unbuildable dependency chain was: ['meta-toolchain-avn-qte', 'task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
-> 
->      It is asking for runtime dependencies  'qt4-embedded-mkspecs' how do I get these packages???
-> 
-> Thanks in advance:-)
-> 
-> 
-> Regards,
-> Soumya
-> 
-> This message contains information that may be privileged or confidential and is the property of the KPIT Cummins Infosystems Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Cummins Infosystems Ltd. does not accept any liability for virus infected mails.
-> 
-> 
+Thanks for clearing that up.  I've attached an updated version that drops t=
+he staging function.
 
-Crap. You are talking on public mailing lists and these are archived. These notices dont make sense and in future make
-sure that you strip them off when sending emails to public mailing lists.
+--_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_
+Content-Type: application/octet-stream; name="waf.bbclass"
+Content-Description: waf.bbclass
+Content-Disposition: attachment; filename="waf.bbclass"; size=516;
+	creation-date="Tue, 22 Jun 2010 10:05:12 GMT";
+	modification-date="Mon, 21 Jun 2010 17:37:35 GMT"
+Content-Transfer-Encoding: base64
 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+IyBXQUYgcHJvamVjdCBjbGFzcy4KCkRFUEVORFMgKz0gcHl0aG9uCgojIENvbmRpdGlvbmFsbHkg
+c2V0IHRoZSB2ZXJib3NlIG9wdGlvbi4KIyBXQUZfVkVSQk9TRT0iLXYiCgp3YWZfZG9fY29tcGls
+ZSgpIHsKCS4vd2FmICR7V0FGX1ZFUkJPU0V9IGJ1aWxkIAp9Cgp3YWZfZG9fY2xlYW4oKSB7Cgku
+L3dhZiAke1dBRl9WRVJCT1NFfSBjbGVhbgp9Cgp3YWZfZG9fY29uZmlndXJlKCkgewoJaWYgWyAt
+eCAke1N9L3dhZiBdOyB0aGVuCgkJJHtTfS93YWYgJHtXQUZfVkVSQk9TRX0gY29uZmlndXJlIC0t
+cHJlZml4PSR7cHJlZml4fSAke0VYVFJBX09FQ09ORn0gIiRAIgoJZWxzZQoJCW9lZmF0YWwgImV4
+ZWN1dGFibGUgd2FmIHNjcmlwdCBub3QgZm91bmQiCglmaQp9Cgp3YWZfZG9faW5zdGFsbCgpIHsK
+CS4vd2FmICR7V0FGX1ZFUkJPU0V9IGluc3RhbGwgLS1kZXN0ZGlyPSIke0R9IiAiJEAiCn0KCkVY
+UE9SVF9GVU5DVElPTlMgZG9fY29tcGlsZSBkb19jbGVhbiBkb19jb25maWd1cmUgZG9faW5zdGFs
+bCAK
 
-
+--_002_113134CF306E8E4CACC27BE5937261B209313293D8AUSX7MCPS303A_--
