@@ -1,42 +1,54 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
+	helo=TX2EHSOBE004.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OQz4i-0002Nr-3S for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 10:43:22 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OQz0G-0005qt-NB for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 10:38:44 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 10:38:44 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 10:38:44 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 22 Jun 2010 10:38:30 +0200
-Message-ID: <hvpsq6$2kt$1@dough.gmane.org>
-References: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OQz6h-0003Gd-UU
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 10:45:25 +0200
+Received: from mail171-tx2-R.bigfish.com (10.9.14.250) by
+	TX2EHSOBE004.bigfish.com (10.9.40.24) with Microsoft SMTP Server id
+	8.1.340.0; Tue, 22 Jun 2010 08:40:47 +0000
+Received: from mail171-tx2 (localhost.localdomain [127.0.0.1])	by
+	mail171-tx2-R.bigfish.com (Postfix) with ESMTP id 6A886418088	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 08:40:47 +0000 (UTC)
+X-SpamScore: -12
+X-BigFish: VPS-12(zz14ffO1443Nzz1202hzzz32i2a8h43h65h)
+Received: from mail171-tx2 (localhost.localdomain [127.0.0.1]) by mail171-tx2
+	(MessageSwitch) id 1277196046853860_30697;
+	Tue, 22 Jun 2010 08:40:46 +0000 (UTC)
+Received: from TX2EHSMHS007.bigfish.com (unknown [10.9.14.237])	by
+	mail171-tx2.bigfish.com (Postfix) with ESMTP id B850227004E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 08:40:46 +0000 (UTC)
+Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
+	TX2EHSMHS007.bigfish.com (10.9.99.107) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Tue, 22 Jun 2010 08:40:43 +0000
+Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
+	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
+	Tue, 22 Jun 2010 14:10:40 +0530
+From: Soumya R <Soumya.R@kpitcummins.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 22 Jun 2010 14:10:13 +0530
+Thread-Topic: Missing or unbuildable dependency chain was:
+	['qt4-embedded-mkspecs']
+Thread-Index: AQHLEeaYM8jcvh5FcUevJiNBMMc1dA==
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFB7@KCINPUNHJCMS01.kpit.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-Reverse-DNS: unknown
+X-SA-Exim-Connect-IP: 65.55.88.12
+X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] patch file location
+Subject: Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,36 +62,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 08:43:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jun 2010 08:45:25 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 22-06-10 09:03, Frans Meulenbroeks wrote:
-> I'd like to draw the attention to the location of patch files.
-> My original understanding was that these should be in either the files
-> dir (if they apply to all)
+Hi All,
 
-No, 'files' should be avoided. When we start rearranging the directory
-structure every file in 'files' will need to get checked to see to which
-recipe it applies. If a patch or file is for multiple versions of recipe
-foobar, place it in 'foobar/'.
-Pretty much the only valid use of 'files/' is when one file is shared
-between multiple different recipes (foobar_1.bb, qux_5.bb, etc), like
-the gtk-doc.m4 for gnome stuff.
+      I am trying to build Qt Embedded SDK for Qt-4.7.0.beta1.. when i run
+bitbake meta-toolchain-avn-qte i got the following error
 
-regards,
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+NOTE: Handling BitBake files: - (0169/0169) [100 %]
+NOTE: Parsing finished. 163 cached, 5 parsed, 1 skipped, 0 masked.
+NOTE: Resolving any missing task queue dependencies
+ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/tasks/task-=
+avn-qte-toolchain-target.bb']' RDEPENDS/RRECOMMENDS or otherwise requires t=
+he runtime entity 'qt4-embedded-mkspecs' but it wasn't found in any PACKAGE=
+ or RPROVIDES variables
+NOTE: Runtime target 'qt4-embedded-mkspecs' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+NOTE: Runtime target 'task-avn-qte-toolchain-target' is unbuildable, removi=
+ng...
+Missing or unbuildable dependency chain was: ['task-avn-qte-toolchain-targe=
+t', 'qt4-embedded-mkspecs']
+ERROR: Required build target 'meta-toolchain-avn-qte' has no buildable prov=
+iders.
+Missing or unbuildable dependency chain was: ['meta-toolchain-avn-qte', 'ta=
+sk-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
 
-iD8DBQFMIHaGMkyGM64RGpERAi+/AJ4xW0TDYMPM1zMC8tTfurDopDQpsQCaAycX
-cKR3NrAdFT8lhz785DrKyeg=
-=kY64
------END PGP SIGNATURE-----
+     It is asking for runtime dependencies  'qt4-embedded-mkspecs' how do I=
+ get these packages???
+
+Thanks in advance:-)
+
+
+Regards,
+Soumya
+
+This message contains information that may be privileged or confidential an=
+d is the property of the KPIT Cummins Infosystems Ltd. It is intended only =
+for the person to whom it is addressed. If you are not the intended recipie=
+nt, you are not authorized to read, print, retain copy, disseminate, distri=
+bute, or use this message or any part thereof. If you receive this message =
+in error, please notify the sender immediately and delete all copies of thi=
+s message. KPIT Cummins Infosystems Ltd. does not accept any liability for =
+virus infected mails.
+
 
 
 
