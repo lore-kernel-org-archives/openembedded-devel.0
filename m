@@ -1,54 +1,31 @@
-Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
-	helo=TX2EHSOBE004.bigfish.com)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OQz6h-0003Gd-UU
+	(envelope-from <philb@gnu.org>) id 1OQzlq-00051W-OE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 10:45:25 +0200
-Received: from mail171-tx2-R.bigfish.com (10.9.14.250) by
-	TX2EHSOBE004.bigfish.com (10.9.40.24) with Microsoft SMTP Server id
-	8.1.340.0; Tue, 22 Jun 2010 08:40:47 +0000
-Received: from mail171-tx2 (localhost.localdomain [127.0.0.1])	by
-	mail171-tx2-R.bigfish.com (Postfix) with ESMTP id 6A886418088	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 08:40:47 +0000 (UTC)
-X-SpamScore: -12
-X-BigFish: VPS-12(zz14ffO1443Nzz1202hzzz32i2a8h43h65h)
-Received: from mail171-tx2 (localhost.localdomain [127.0.0.1]) by mail171-tx2
-	(MessageSwitch) id 1277196046853860_30697;
-	Tue, 22 Jun 2010 08:40:46 +0000 (UTC)
-Received: from TX2EHSMHS007.bigfish.com (unknown [10.9.14.237])	by
-	mail171-tx2.bigfish.com (Postfix) with ESMTP id B850227004E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 08:40:46 +0000 (UTC)
-Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
-	TX2EHSMHS007.bigfish.com (10.9.99.107) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Tue, 22 Jun 2010 08:40:43 +0000
-Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
-	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
-	Tue, 22 Jun 2010 14:10:40 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 22 Jun 2010 14:10:13 +0530
-Thread-Topic: Missing or unbuildable dependency chain was:
-	['qt4-embedded-mkspecs']
-Thread-Index: AQHLEeaYM8jcvh5FcUevJiNBMMc1dA==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFB7@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-Reverse-DNS: unknown
-X-SA-Exim-Connect-IP: 65.55.88.12
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+	Tue, 22 Jun 2010 11:27:59 +0200
+Received: from fwext.cambridgebroadband.com ([212.44.17.73]
+	helo=[10.10.208.22])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OQzhQ-00078d-KJ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 10:23:20 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
+References: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
+Date: Tue, 22 Jun 2010 10:23:24 +0100
+Message-ID: <1277198604.4745.99.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.7 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+Subject: Re: [RFC] patch file location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,53 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 08:45:25 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 22 Jun 2010 09:27:59 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
+On Tue, 2010-06-22 at 09:03 +0200, Frans Meulenbroeks wrote:
+> Frankly speaking I have no clue at all which version of the patch will
+> be used by the 2.10.1 recipe. The only ways to find out is to study
+> the class code that does the patch or to actually build the package
+> (in the hope it selects the patch in a deterministic way). I don't
+> think it is good that if someone is debugging a problem that they
+> should have such a hard time to find out what version of a file is
+> actually used
 
-Hi All,
+See glibc_2.10.1.bb:
 
-      I am trying to build Qt Embedded SDK for Qt-4.7.0.beta1.. when i run
-bitbake meta-toolchain-avn-qte i got the following error
+FILESPATHPKG =. "glibc-2.4:"
 
+So, the answer is that it will use the version from the glibc-2.4
+directory.  
 
-NOTE: Handling BitBake files: - (0169/0169) [100 %]
-NOTE: Parsing finished. 163 cached, 5 parsed, 1 skipped, 0 masked.
-NOTE: Resolving any missing task queue dependencies
-ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/tasks/task-=
-avn-qte-toolchain-target.bb']' RDEPENDS/RRECOMMENDS or otherwise requires t=
-he runtime entity 'qt4-embedded-mkspecs' but it wasn't found in any PACKAGE=
- or RPROVIDES variables
-NOTE: Runtime target 'qt4-embedded-mkspecs' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
-NOTE: Runtime target 'task-avn-qte-toolchain-target' is unbuildable, removi=
-ng...
-Missing or unbuildable dependency chain was: ['task-avn-qte-toolchain-targe=
-t', 'qt4-embedded-mkspecs']
-ERROR: Required build target 'meta-toolchain-avn-qte' has no buildable prov=
-iders.
-Missing or unbuildable dependency chain was: ['meta-toolchain-avn-qte', 'ta=
-sk-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
+I think the semantics of FILESPATHPKG are documented in the manual.  If
+they're not, that is an oversight and should indeed be corrected.
 
-     It is asking for runtime dependencies  'qt4-embedded-mkspecs' how do I=
- get these packages???
+> (optionally we might allow for a mechanism that allows specifying
+> patches for higher level recipes; e.g. glibc_2.10.1 could look in
+> glibc-2.10.1, glibc-2.10, glibc-2, glibc and files).
 
-Thanks in advance:-)
+You can already do this with a suitable FILESPATHPKG setting, I think.
 
-
-Regards,
-Soumya
-
-This message contains information that may be privileged or confidential an=
-d is the property of the KPIT Cummins Infosystems Ltd. It is intended only =
-for the person to whom it is addressed. If you are not the intended recipie=
-nt, you are not authorized to read, print, retain copy, disseminate, distri=
-bute, or use this message or any part thereof. If you receive this message =
-in error, please notify the sender immediately and delete all copies of thi=
-s message. KPIT Cummins Infosystems Ltd. does not accept any liability for =
-virus infected mails.
+p.
 
 
 
