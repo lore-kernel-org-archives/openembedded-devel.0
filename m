@@ -1,29 +1,35 @@
-Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OR1cd-0001CH-Lw
+	(envelope-from <sledz@dresearch.de>) id 1OR2EZ-0005Z6-Rp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 13:27:13 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id C043B166058E; Tue, 22 Jun 2010 05:21:54 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 8520E1660565;
-	Tue, 22 Jun 2010 05:21:54 -0600 (MDT)
-Message-ID: <4C209CD2.4080208@mlbassoc.com>
-Date: Tue, 22 Jun 2010 05:21:54 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Tue, 22 Jun 2010 14:05:46 +0200
+Received: from exchange.intern.dresearch.de (unknown [192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id C5449491278
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 14:01:10 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 22 Jun 2010 14:01:10 +0200
+Message-ID: <4C20A60D.40102@dresearch.de>
+Date: Tue, 22 Jun 2010 14:01:17 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.1.10) Gecko/20100512 Lightning/1.0b1 Thunderbird/3.0.5
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 76.76.67.137
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+References: <1277201329-1339-1-git-send-email-sledz@dresearch.de>
+	<hvq586$1jc$1@dough.gmane.org>
+In-Reply-To: <hvq586$1jc$1@dough.gmane.org>
+X-OriginalArrivalTime: 22 Jun 2010 12:01:10.0845 (UTC)
+	FILETIME=[9AE9F6D0:01CB1202]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Updated recipe for chrome
+Subject: Re: [PATCH] udev/mount.sh: try to kill active processes before umount
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,27 +43,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 11:27:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jun 2010 12:05:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Does anyone have an updated recipe for Google chrome?  The
-one in org.openembedded.dev is really old - SVN revision
-34027 - mainline is at 50359!
+Am 22.06.2010 13:02, schrieb Koen Kooi:
+> Wouldn't a umount -l be a lot better in this case?
 
-I looked at the recipe and it seems to be full of magic
-(subpackages with specific SVN revisions, etc).  I doubt
-that just updating the main SVN revision number will work.
+I'm not sure if this would do the right things.
 
-Any ideas/pointers?  I'd really like to try some of the
-latest features on my embedded systems :-)
+mount.sh is called with REMOVE action when the device *is
+disconnected* i.e. the filesystem is no longer available.
+So i believe it is not possible to "cleanup all references
+to the filesystem as soon as it is not busy anymore".
 
-Thanks
+I think killing all the processes is the only way here.
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Steffen
+
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
+
 
 
