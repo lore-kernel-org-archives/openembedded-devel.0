@@ -1,43 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OR4Yf-0002nA-Ho for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 16:34:38 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OR4UF-0005tF-Tp for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 16:30:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 16:30:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1OR4aP-0002ra-UQ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 16:36:27 +0200
+Received: by gyg10 with SMTP id 10so3153553gyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 16:30:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 22 Jun 2010 07:31:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=Eueyw5I1XyNjNBWFx1zWTgiqg52YwKtQlk6+9ff7Ieo=;
+	b=Dmzmj0Zw4ofV9zmiZ5ZAsZ+TpN07lEKXvNsaYgaw9T4CAso8AiAGLhA0Ua9gIVss2A
+	PpP/dG2KbOHtvWjT3n+O/X2Qh7oh84xvnl8wj5MbD7hyuovbXdLTJn8m1mfqE5PyMUs5
+	Vbrwg0kqGxEMrdpqwTiX7QU3jgiaiJTE7CYNs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=qqCHsc0QZ/ct1ZJg/fbtKB7mJg/4B/scOApPmy+6jPZIxnPHfeWWj8zfp56peC5+Es
+	U5u1kgGffUmjmEe6Qw2JJ0KURldcMWXe6rambtxXFilh3EHglkJYoFKn19Cej1mJfznA
+	VysPXZzgKVUmPgF2EuvDMY04dh28Hy2ScsbyI=
+Received: by 10.229.99.85 with SMTP id t21mr3386439qcn.260.1277217109817; Tue, 
+	22 Jun 2010 07:31:49 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.17.133 with HTTP; Tue, 22 Jun 2010 07:31:29 -0700 (PDT)
+In-Reply-To: <AANLkTik6QLxTLQgYZaLpucQaU8etYax-invJna3D5kp_@mail.gmail.com>
+References: <1276814379-13161-1-git-send-email-raj.khem@gmail.com> 
+	<1276814379-13161-2-git-send-email-raj.khem@gmail.com>
+	<AANLkTik6QLxTLQgYZaLpucQaU8etYax-invJna3D5kp_@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 22 Jun 2010 07:31:29 -0700
+Message-ID: <AANLkTimOU6R6QDgQ2F2WtFRcYZy30T68TmhglN3OxIKZ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 22 Jun 2010 16:29:04 +0200
-Message-ID: <hvqhbh$hqo$2@dough.gmane.org>
-References: <1277201329-1339-1-git-send-email-sledz@dresearch.de>	<hvq586$1jc$1@dough.gmane.org>
-	<4C20A60D.40102@dresearch.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <4C20A60D.40102@dresearch.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] udev/mount.sh: try to kill active processes before umount
+Subject: Re: [PATCH 2/3] busybox_1.15.3.bb: Work around the gcc 4.5 ICE on thumb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,39 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 14:34:38 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 22 Jun 2010 14:36:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, Jun 21, 2010 at 10:59 PM, Leon Woestenberg
+<leon.woestenberg@gmail.com> wrote:
+> Hello Khem,
+>
+> On Fri, Jun 18, 2010 at 12:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> +# gcc 4.5 has this bug on thumb
+>> +# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=44557
+>> +# so add -fomit-frame-pointer
+>> +# this will be removed once the above bug is fixed.
+>> +
+>> +
+>> +CFLAGS_append = " -fomit-frame-pointer"
+>> +
+> Can we make this append conditional for ARM-only or even thumb-only?
 
-On 22-06-10 14:01, Steffen Sledz wrote:
-> Am 22.06.2010 13:02, schrieb Koen Kooi:
->> Wouldn't a umount -l be a lot better in this case?
-> 
-> I'm not sure if this would do the right things.
-> 
-> mount.sh is called with REMOVE action when the device *is
-> disconnected* i.e. the filesystem is no longer available.
-> So i believe it is not possible to "cleanup all references
-> to the filesystem as soon as it is not busy anymore".
-> 
-> I think killing all the processes is the only way here.
+Yes it should be better to restrict it to arm only I will do that.
+I dont think we have instruction set (e.g. thumb) in standard overrides
+may be it will help if we added such an override.
 
-I don't like the idea of killing random processes, especially is that
-process is smart enough to "move on" after a timeout.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMIMiwMkyGM64RGpERAiFVAKCzGeqyIx8Mh+EHcXz8/w3uK20D0ACfXR++
-x3OaWYcazQ9Wc1/cObARf2E=
-=xOUQ
------END PGP SIGNATURE-----
-
+>
+> In all cases:
+>
+> Acked-by: Leon Woestenberg <leon@sidebranch.com>
+>
+> Regards,
+> --
+> Leon
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
