@@ -1,33 +1,29 @@
-Received: from infosrv.imms.de ([194.95.250.51])
+Received: from hermes.mlbassoc.com ([76.76.67.137] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas.elste@imms.de>) id 1OR1YK-0007Yy-1g
+	(envelope-from <gary@mlbassoc.com>) id 1OR1cd-0001CH-Lw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 13:22:19 +0200
-Received: from infosrv.imms.de (infosrv.imms.de [127.0.0.1])
-	by IMSA (Postfix) with ESMTP id D5CFE260051
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 13:00:05 +0200 (CEST)
-Received: from proxy.imms.de (proxy.imms.de [194.95.250.53])
-	by infosrv.imms.de (Postfix) with ESMTP id DC34126004A
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 13:00:04 +0200 (CEST)
-Received: from pluto.imms.de ([172.16.10.24])
-	by proxy.imms.de (8.13.8+Sun/8.13.8) with ESMTP id o5MB0CbE004363;
-	Tue, 22 Jun 2010 13:00:12 +0200 (CEST)
-From: Thomas Elste <thomas.elste@imms.de>
+	Tue, 22 Jun 2010 13:27:13 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id C043B166058E; Tue, 22 Jun 2010 05:21:54 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 8520E1660565;
+	Tue, 22 Jun 2010 05:21:54 -0600 (MDT)
+Message-ID: <4C209CD2.4080208@mlbassoc.com>
+Date: Tue, 22 Jun 2010 05:21:54 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jun 2010 12:59:56 +0200
-Message-Id: <1277204396-12287-1-git-send-email-thomas.elste@imms.de>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 194.95.250.51
-X-SA-Exim-Mail-From: thomas.elste@imms.de
+X-SA-Exim-Connect-IP: 76.76.67.137
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] qwt: Add version 5.2.1
+Subject: Updated recipe for chrome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,92 +37,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 11:22:42 -0000
+X-List-Received-Date: Tue, 22 Jun 2010 11:27:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Add recipe for current version of Qwt. This new version uses qt4-classes
-instead of palmtop. Different bb-files for Qt and Qt-Embedded
-variant are provided. Qwt examples are also build. They get deployed in
-extra packages.
+Does anyone have an updated recipe for Google chrome?  The
+one in org.openembedded.dev is really old - SVN revision
+34027 - mainline is at 50359!
 
-Signed-off-by: Thomas Elste <thomas.elste@imms.de>
----
- recipes/qwt/qwt-e_5.2.1.bb |    8 ++++++++
- recipes/qwt/qwt.inc        |   33 +++++++++++++++++++++++++++++++++
- recipes/qwt/qwt_5.2.1.bb   |    8 ++++++++
- 3 files changed, 49 insertions(+), 0 deletions(-)
- create mode 100644 recipes/qwt/qwt-e_5.2.1.bb
- create mode 100644 recipes/qwt/qwt.inc
- create mode 100644 recipes/qwt/qwt_5.2.1.bb
+I looked at the recipe and it seems to be full of magic
+(subpackages with specific SVN revisions, etc).  I doubt
+that just updating the main SVN revision number will work.
 
-diff --git a/recipes/qwt/qwt-e_5.2.1.bb b/recipes/qwt/qwt-e_5.2.1.bb
-new file mode 100644
-index 0000000..09b31ed
---- /dev/null
-+++ b/recipes/qwt/qwt-e_5.2.1.bb
-@@ -0,0 +1,8 @@
-+QWT_VARIANT = "e"
-+require qwt.inc
-+
-+PR = "${INC_PR}.1"
-+
-+SRC_URI[md5sum] = "4a595b8db0ec3856b117836c1d60cb27"
-+SRC_URI[sha256sum] = "e2b8bb755404cb3dc99e61f3e2d7262152193488f5fbe88524eb698e11ac569f"
-+
-diff --git a/recipes/qwt/qwt.inc b/recipes/qwt/qwt.inc
-new file mode 100644
-index 0000000..6a9f9e0
---- /dev/null
-+++ b/recipes/qwt/qwt.inc
-@@ -0,0 +1,33 @@
-+DESCRIPTION = "Qt Widget Extension for Technical Applications"
-+HOMEPAGE = "http://qwt.sourceforge.net/"
-+SECTION = "libs"
-+PRIORITY = "optional"
-+LICENSE = "GPL"
-+INC_PR = "r0"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/qwt/qwt-${PV}.tar.bz2"
-+
-+inherit qt4${QWT_VARIANT}
-+
-+EXTRA_OEMAKE = "${PARALLEL_MAKE}"
-+
-+do_configure_prepend() {
-+        # set install path and doc path, enable examples
-+        sed -i \
-+                -e 's/\(INSTALLBASE *= \)\/usr.*/\1\/usr/' \
-+                -e 's/\(doc.path.*\/\).*/\1share\/doc\/qwt-${PV}/' \
-+                -e 's/#CONFIG     += QwtExamples/CONFIG += QwtExamples/' \
-+                qwtconfig.pri
-+}
-+
-+do_install() {
-+        oe_runmake install INSTALL_ROOT=${D}
-+        install -d ${D}${bindir}/qwt-examples
-+        install examples/bin/* ${D}${bindir}/qwt-examples
-+}
-+
-+PACKAGES =+ "${PN}-examples ${PN}-examples-dbg"
-+FILES_${PN} = "${libdir}/*"
-+FILES_${PN}-examples = "${bindir}/qwt-examples/*"
-+FILES_${PN}-examples-dbg = "${bindir}/qwt-examples"
-+
-diff --git a/recipes/qwt/qwt_5.2.1.bb b/recipes/qwt/qwt_5.2.1.bb
-new file mode 100644
-index 0000000..a1142f0
---- /dev/null
-+++ b/recipes/qwt/qwt_5.2.1.bb
-@@ -0,0 +1,8 @@
-+QWT_VARIANT = "x11"
-+require qwt.inc
-+
-+PR = "${INC_PR}.1"
-+
-+SRC_URI[md5sum] = "4a595b8db0ec3856b117836c1d60cb27"
-+SRC_URI[sha256sum] = "e2b8bb755404cb3dc99e61f3e2d7262152193488f5fbe88524eb698e11ac569f"
-+
+Any ideas/pointers?  I'd really like to try some of the
+latest features on my embedded systems :-)
+
+Thanks
+
 -- 
-1.7.1
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
