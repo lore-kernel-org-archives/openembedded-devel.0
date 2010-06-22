@@ -1,44 +1,39 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OR8hl-0004Ye-LM for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 21:00:21 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OR8dH-0001E9-4j for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 20:55:39 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 20:55:39 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 20:55:39 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1OR8hy-0004ZD-73
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 21:00:32 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OR8dV-0001OM-Gn from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 22 Jun 2010 11:55:53 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 22 Jun 2010 11:55:53 -0700
+Received: from [172.30.80.158] ([172.30.80.158]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 22 Jun 2010 12:55:52 -0600
+Message-ID: <4C210735.5090202@mentor.com>
+Date: Tue, 22 Jun 2010 11:55:49 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 22 Jun 2010 20:55:29 +0200
-Message-ID: <hvr0v1$j72$1@dough.gmane.org>
-References: <1276814379-13161-1-git-send-email-raj.khem@gmail.com>
-	<1276814379-13161-2-git-send-email-raj.khem@gmail.com>	<AANLkTik6QLxTLQgYZaLpucQaU8etYax-invJna3D5kp_@mail.gmail.com>
-	<AANLkTimOU6R6QDgQ2F2WtFRcYZy30T68TmhglN3OxIKZ@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <AANLkTimOU6R6QDgQ2F2WtFRcYZy30T68TmhglN3OxIKZ@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4C1FDFAE.8040704@mentor.com> <20100622144759.GB32544@gmail.com>
+In-Reply-To: <20100622144759.GB32544@gmail.com>
+X-OriginalArrivalTime: 22 Jun 2010 18:55:52.0487 (UTC)
+	FILETIME=[89873B70:01CB123C]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] busybox_1.15.3.bb: Work around the gcc 4.5 ICE on thumb
+Subject: Re: [RFC, PATCH] Make packaged-staging use more correct PSTAGE_PKGARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,45 +47,89 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 19:00:21 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 22 Jun 2010 19:00:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 22-06-10 16:31, Khem Raj wrote:
-> On Mon, Jun 21, 2010 at 10:59 PM, Leon Woestenberg
-> <leon.woestenberg@gmail.com> wrote:
->> Hello Khem,
+Khem Raj wrote:
+> On (21/06/10 14:54), Tom Rini wrote:
+>> packaged-staging.bbclass: Change PSTAGE_PKGARCH to something dynamic
 >>
->> On Fri, Jun 18, 2010 at 12:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
->>> +# gcc 4.5 has this bug on thumb
->>> +# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=44557
->>> +# so add -fomit-frame-pointer
->>> +# this will be removed once the above bug is fixed.
->>> +
->>> +
->>> +CFLAGS_append = " -fomit-frame-pointer"
->>> +
->> Can we make this append conditional for ARM-only or even thumb-only?
+>> Currently, we make all pstage packages be locked to BUILD_SYS which
+>> causes annoying warnings in some cases and doesn't allow for sharing
+>> between say 32 and 64bit (which is valid for target bits).
+>>
+>> This changes to ${PACKAGE_ARCH}-${HOST_SYS} for everything and
+>> reworks the opkg.conf we generate to add entries as needed.
+>>
+>> There is an alternative, suggested by Chris Larson, that we modify
+>> PSTAGE_PKGARCH in an anon python function so that we can avoid
+>> things like 'x86_64-x86_64-linux' in native packages and similar
+>> duplication in sdk packages, or otherwise be more dynamic (use
+>> HOST_OS instead of SYS and then catch the cross case, etc).
 > 
-> Yes it should be better to restrict it to arm only I will do that.
-> I dont think we have instruction set (e.g. thumb) in standard overrides
-> may be it will help if we added such an override.
+> I think this approach sounds better having same arch repeated twice
+> would be confusing
 
-You do have a thumb override(s) if your machine includes tune-thumb.inc.
+Here we go.  This also reworks generating opkg.conf a little bit (it had 
+multiple entries before due to a lazy grep).
 
-regards,
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+diff --git a/classes/packaged-staging.bbclass 
+b/classes/packaged-staging.bbclass
+index 8a98940..19a6a6d 100644
+--- a/classes/packaged-staging.bbclass
++++ b/classes/packaged-staging.bbclass
+@@ -12,7 +12,7 @@
+  # bitbake.conf set PSTAGING_ACTIVE = "0", this class sets to "1" if 
+we're active
+  #
+  PSTAGE_PKGVERSION = "${PV}-${PR}"
+-PSTAGE_PKGARCH    = "${BUILD_SYS}"
++PSTAGE_PKGARCH    = "${PACKAGE_ARCH}-${HOST_OS}"
+  PSTAGE_EXTRAPATH  ?= "/${OELAYOUT_ABI}/${DISTRO_PR}/"
+  PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
+  PSTAGE_PKGPN      = 
+"${@bb.data.expand('staging-${PN}-${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}', 
+d).replace('_', '-')}"
+@@ -28,6 +28,12 @@ PSTAGE_NATIVEDEPENDS = "\
 
-iD8DBQFMIQchMkyGM64RGpERAqOxAKCDTlHB0FsQfJphVLy4GmrNcCtDiwCeP6ZM
-FhCZjvjyhBJIUhRmc/5zcAg=
-=1x01
------END PGP SIGNATURE-----
+  BB_STAMP_WHITELIST = "${PSTAGE_NATIVEDEPENDS}"
 
++python __anonymous() {
++    # We need PSTAGE_PKGARCH to contain information about the target.
++    if bb.data.inherits_class('cross', d):
++        bb.data.setVar('PSTAGE_PKGARCH', 
+"${HOST_SYS}-${PACKAGE_ARCH}-${TARGET_OS}", d)
++}
++
+  python () {
+      pstage_allowed = True
+
+@@ -148,14 +154,13 @@ staging_helper () {
+  	# Assemble appropriate opkg.conf
+  	conffile=${PSTAGE_MACHCONFIG}
+  	mkdir -p ${PSTAGE_WORKDIR}/pstaging_lists
++	arch="${PSTAGE_PKGARCH}"
+  	if [ ! -e $conffile ]; then
+-		ipkgarchs="${BUILD_SYS}"
+-		priority=1
+-		for arch in $ipkgarchs; do
+-			echo "arch $arch $priority" >> $conffile
+-			priority=$(expr $priority + 5)
+-		done
++		echo "arch $arch 1" > $conffile
+  		echo "dest root /" >> $conffile
++	elif [ `grep -c " $arch " $conffile` -eq 0 ]; then
++		priority=$(expr `grep -cE "^arch" $conffile` + 1)
++		sed -i -e "/dest/iarch $arch $priority" $conffile
+  	fi
+  	if [ ! -e ${TMPDIR}${libdir_native}/opkg/info/ ]; then
+  		mkdir -p ${TMPDIR}${libdir_native}/opkg/info/
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
