@@ -1,40 +1,30 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OQxak-0008S6-De
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OQy0o-0001rw-UV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 09:08:22 +0200
-Received: by bwz14 with SMTP id 14so1452968bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 00:03:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=M9lLVHsuIg6G07x9BP4hJNPDJBrWcNjhVuxYsAMwT8M=;
-	b=op3HUPZksDpOHcLgQnC16rmUOAbVNL8BHU0eqrBsoxIpqfTBGVtt2Hn0ne4StWxSEB
-	SxOV9WT1jn5k9RvLX31nrQB4duhYt1Vyyu0s994Ovz0YLWjDXCnsjfDmW7lLKla3UHn+
-	GjMKbrYUPgqEQyahxaKfNG4DnCyf1Ytg7CEow=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=cN6YQDoGcL1WySKDIQEjk/SPZ42coWjJ3zQHT1ggfHRjPypMWwHbOpn1HNvlA63KE/
-	d0NlvCg3rbkGcQutiHMoZ4Rqy2sk8yBjvpRktranB2hbBzI3hdNzK2a22GE56PWvynG6
-	Ra/bjZkRSMWD6hKS7wG8k/2nQvHSc82YiaHps=
-MIME-Version: 1.0
-Received: by 10.204.47.34 with SMTP id l34mr3815515bkf.77.1277190223859; Tue, 
-	22 Jun 2010 00:03:43 -0700 (PDT)
-Received: by 10.204.77.132 with HTTP; Tue, 22 Jun 2010 00:03:43 -0700 (PDT)
-Date: Tue, 22 Jun 2010 09:03:43 +0200
-Message-ID: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 22 Jun 2010 09:35:18 +0200
+Received: (qmail 7974 invoked by uid 813007); 22 Jun 2010 07:30:33 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 22 Jun 2010 07:30:33 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Tue, 22 Jun 2010 09:30:28 +0200
+User-Agent: KMail/1.13.3 (Linux/2.6.35-4-generic; KDE/4.4.85; x86_64; ; )
+References: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
+In-Reply-To: <AANLkTim2-Y4qW9Wb-kycxo89vNZgBJkdeVSyERXZYCoJ@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201006220930.31306.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] patch file location
+Subject: Re: [RFC] patch file location
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,70 +38,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 07:08:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 22 Jun 2010 07:35:19 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'd like to draw the attention to the location of patch files.
-My original understanding was that these should be in either the files
-dir (if they apply to all), or in a dir with the name of the recipe
-(replacing the _ with a - ).
-And I kind-a assumed that if a patch is in a recipe dir it would have
-priority above a version in the files dir.
+Dnia wtorek, 22 czerwca 2010 o 09:03:43 Frans Meulenbroeks napisa=C5=82(a):
+> I'd like to draw the attention to the location of patch files.
+> My original understanding was that these should be in either the files
+> dir (if they apply to all), or in a dir with the name of the recipe
+> (replacing the _ with a - ).
+>
+> And I kind-a assumed that if a patch is in a recipe dir it would have
+> priority above a version in the files dir.
 
-However, this does not seem to be enforced.
-I noticed some packages do also not live up to this.
-One example is glibc.
-Take one patch as example: arm-memcpy.patch:
+This is controlled by FILESPATHPKG and OVERRIDES.
 
-This patch occurs in 5 dirs:
+> Frankly speaking I have no clue at all which version of the patch will
+> be used by the 2.10.1 recipe.=20
 
-recipes/glibc$ ls -l */arm-memcpy*
--rw-r--r-- 1 frans frans 17071 2010-06-02 15:57 glibc-2.2.5/arm-memcpy.patch
--rw-r--r-- 1 frans frans 16957 2010-06-02 15:57 glibc-2.3.2/arm-memcpy.patch
--rw-r--r-- 1 frans frans 16960 2010-06-02 15:57 glibc-2.4/arm-memcpy.patch
--rw-r--r-- 1 frans frans 16993 2010-06-02 15:57 glibc-cvs-2.3.5/arm-memcpy.patch
--rw-r--r-- 1 frans frans 16960 2010-06-02 15:57 glibc-cvs/arm-memcpy.patch
+glibc-2.4/ one - check FILESPATHPKG setting in glibc_2.10.1.bb recipe.
 
-Looking at the size these are at least 4 different versions
+> The only ways to find out is to study the class code that does the patch =
+or
+> to actually build the package (in the hope it selects the patch in a
+> deterministic way).=20
 
-This patch is referenced in 14 recipes:
+I did "grep FILES glibc/*" to find out.
 
-recipes/glibc$ grep arm-memcpy *
-glibc_2.10.1.bb:           file://arm-memcpy.patch \
-glibc_2.2.5.bb:	   file://arm-memcpy.patch;striplevel=0 \
-glibc_2.3.2.bb: 	   file://arm-memcpy.patch;striplevel=0 \
-glibc_2.3.2+cvs20040726.bb:	   file://arm-memcpy.patch;striplevel=0 \
-glibc_2.3.3+cvs20041128.bb:	   file://arm-memcpy.patch;striplevel=0 \
-glibc_2.3.3+cvs20050221.bb:	   file://arm-memcpy.patch;striplevel=0 \
-glibc_2.3.3+cvs20050420.bb:	   file://arm-memcpy.patch;striplevel=0 \
-glibc_2.3.5+cvs20050627.bb:	   file://arm-memcpy.patch \
-glibc_2.4.bb:           file://arm-memcpy.patch \
-glibc_2.5.bb:  file://arm-memcpy.patch \
-glibc_2.6.1.bb:  file://arm-memcpy.patch \
-glibc_2.7.bb:           file://arm-memcpy.patch \
-glibc_2.9.bb:           file://arm-memcpy.patch \
-glibc_cvs.bb:#	   file://arm-memcpy.patch;striplevel=0 \
-glibc_cvs.bb:	   file://arm-memcpy.patch \
+> I don't think it is good that if someone is debugging a problem that they
+> should have such a hard time to find out what version of a file is
+> actually used
+=20
+> My proposal:
+> - only apply patches (seek for patches) in the recipe dir (e.g. in the
+> example for glibc_2.10.1.bb this would be glibc-2.10.1) and in the
+> files directory
 
-Frankly speaking I have no clue at all which version of the patch will
-be used by the 2.10.1 recipe. The only ways to find out is to study
-the class code that does the patch or to actually build the package
-(in the hope it selects the patch in a deterministic way). I don't
-think it is good that if someone is debugging a problem that they
-should have such a hard time to find out what version of a file is
-actually used
+It is not only patches. It is everything in SRC_URI. And we have this=20
+mechanism since beginning.
+=20
+> (optionally we might allow for a mechanism that allows specifying
+> patches for higher level recipes; e.g. glibc_2.10.1 could look in
+> glibc-2.10.1, glibc-2.10, glibc-2, glibc and files).
 
-My proposal:
-- only apply patches (seek for patches) in the recipe dir (e.g. in the
-example for glibc_2.10.1.bb this would be glibc-2.10.1) and in the
-files directory
+We have such mechanism already - it is FILESPATHPKG and related vars.
+=20
+> How do people feel about this? Any implementation hints?
 
-(optionally we might allow for a mechanism that allows specifying
-patches for higher level recipes; e.g. glibc_2.10.1 could look in
-glibc-2.10.1, glibc-2.10, glibc-2, glibc and files).
+Why implement when it is already implemented?
 
-How do people feel about this? Any implementation hints?
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
-Frans
+
 
 
