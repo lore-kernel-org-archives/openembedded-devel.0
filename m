@@ -1,46 +1,48 @@
 Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORYIj-0000bb-Ex
+	(envelope-from <raj.khem@gmail.com>) id 1ORYMp-0001Uj-QW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 00:22:18 +0200
-Received: by pwj10 with SMTP id 10so1284325pwj.6
+	Thu, 24 Jun 2010 00:24:38 +0200
+Received: by pwj10 with SMTP id 10so1285506pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 15:15:31 -0700 (PDT)
+	Wed, 23 Jun 2010 15:19:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=wSF/gwVOP7AcW/PgPFZTv0KP3+1N/iD4Kde/7YvL/QA=;
-	b=NK9e4KZHv3kbDLEnLrxJQaaofr1dE6v76/0sUzJ3WraU76SrB7H3CwT2vmznuraaT0
-	82UNsqeQmbccuHN2CC+R6RMpGz/fcA5CXbdvrhqjpYa70zthZvpc1/ljyFjKPsOgtkbt
-	3ZXgzS/gwG8TihswdXyvw8HuHBZk1sdSpVtuM=
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=YwWhAk7K/hMfn/e5kibalmFuPWgrHIEOn+tizsli4tg=;
+	b=qmj8doznaQuVaWWSJU4WhvDypx3deFpznswPN7hRCfPZztm6yR9S+t14h5iZZN3JUn
+	7NubTfsnHopWckBUWFETporhAbxTInpqgq4N7CPaPS+Ob0X1qvbD6llyw8ZmRR+LkB32
+	wSZgXVfyVnVi2NFU73SL/nGJn1VFvt1VgbUR4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=JGXxDKlAGUpqEkywhMxCyrP8TLrOZQR+SkdVDXsuvmwIK2Gae3B4KJSuQAyg8sxQXc
-	SyRgD/JcylHUDL2Xujf5kyVGQCb1HmpzFubVc3HAt5qaO8N6+qDdXeipvtTsBRG6ydju
-	N+1JBkXD4DxqzZFsywRwTW6iuqDpEXvPS0i7A=
-Received: by 10.143.20.19 with SMTP id x19mr7910950wfi.260.1277331331550;
-	Wed, 23 Jun 2010 15:15:31 -0700 (PDT)
-Received: from gmail.com ([99.57.141.118])
-	by mx.google.com with ESMTPS id d14sm5589620rva.6.2010.06.23.15.15.30
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=aZLtIPF1+wTIRvPeBkCkoyZWr8/rYMLEkoErVDlHzOr98eem43YWTXjnIj8tDy9K3v
+	337H8uarskHha5EfuKpeXF48SJhzdy685OdfjTa0yaEdN5if+PI067P2maKJuSY6WdAp
+	ghKJSRviu0K+3QqVq5YsykrFShP97RFBWjDRE=
+Received: by 10.115.39.24 with SMTP id r24mr8315558waj.166.1277331586115;
+	Wed, 23 Jun 2010 15:19:46 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id b6sm62352837wam.21.2010.06.23.15.19.44
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Jun 2010 15:15:30 -0700 (PDT)
-Date: Wed, 23 Jun 2010 15:16:35 -0700
+	Wed, 23 Jun 2010 15:19:45 -0700 (PDT)
+Date: Wed, 23 Jun 2010 15:20:53 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623221635.GB6653@gmail.com>
-References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
-	<hvl1uc$bol$1@dough.gmane.org>
-	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
-	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
+Message-ID: <20100623222053.GC6653@gmail.com>
+References: <AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
 	<hvsjso$8bh$1@dough.gmane.org>
-	<AANLkTiltHfFZiUj-QUPhXP4CI3U2rD4QG5S157TsYeIZ@mail.gmail.com>
-	<20100623172352.GC5535@gmail.com>
-	<AANLkTilDhV8ILaaRvAX_RR-iG_99lMcHYj9iZ-rXCznq@mail.gmail.com>
-	<AANLkTilpGEP-rg2JArFxbRw_dh5ISJYD6IHf9ulzi8kq@mail.gmail.com>
+	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>
+	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
+	<20100623110315.16293a95@xora-desktop.xora.org.uk>
+	<4C21DCD6.4090509@balister.org> <hvsnsn$mvd$2@dough.gmane.org>
+	<AANLkTilv_BG9-Ksq5-fraEY4edmdFhfKTIgM-B2Gojq1@mail.gmail.com>
+	<20100623171933.GB5535@gmail.com>
+	<AANLkTimou2cL3hKrb7Yrqp1h4MH-AkWVVXFN2MKkv5ic@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTilpGEP-rg2JArFxbRw_dh5ISJYD6IHf9ulzi8kq@mail.gmail.com>
+In-Reply-To: <AANLkTimou2cL3hKrb7Yrqp1h4MH-AkWVVXFN2MKkv5ic@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.160.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -64,204 +66,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 22:22:21 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 23 Jun 2010 22:24:39 -0000
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On (23/06/10 16:55), Adrian Alonso wrote:
-> Hi,
+On (23/06/10 21:55), Frans Meulenbroeks wrote:
+> 2010/6/23 Khem Raj <raj.khem@gmail.com>:
+> > On (23/06/10 13:16), Frans Meulenbroeks wrote:
+> >> 2010/6/23 Koen Kooi <k.kooi@student.utwente.nl>:
+> >> > -----BEGIN PGP SIGNED MESSAGE-----
+> >> > Hash: SHA1
+> >> >
+> >> > On 23-06-10 12:07, Philip Balister wrote:
+> >> >> On 06/23/2010 12:03 PM, Graeme Gregory wrote:
+> >> >>> On Wed, 23 Jun 2010 11:54:21 +0200
+> >> >>> Frans Meulenbroeks<fransmeulenbroeks@gmail.com>  wrote:
+> >> >>>
+> >> >>>> 2010/6/23 Graeme Gregory<dp@xora.org.uk>:
+> >> >>>>>>>> Also I don't feel empowered to make changes in distribution
+> >> >>>>>>>> specific files.
+> >> >>>>>
+> >> >>>>> Why not, chances are Angstrom maintainers would be quite happy for
+> >> >>>>> you to patch angstrom*.conf if you ask us.
+> >> >>>>>
+> >> >>>>> Graeme
+> >> >>>>
+> >> >>>> distribution != angstrom
+> >> >>>> There are more distributions out there.
+> >> >>
+> >> >> Right now, toolchain selection is done in distro files not machine
+> >> >> files. I agree this is not the clearest approach, however adding the
+> >> >> toolchain selection to the machine files may have unexpected side effects.
+> >> >
+> >> > Think of multimachine builds. What happens when someone else adds
+> >> > *another* nios2 based machine with different toolchain versions, how do
+> >> > I know which toolchain avahi_1.0_nios2.ipk was compiled with
+> >>
+> >> If toolchain is interesting to know in ipk's it should be part of the name.
+> >> And note that I am really in favour of an architecture specific
+> >> solution, not a machine one.
+> >> That is why I used an include file to contain the pinnings.
+> >>
+> >> And actually the situation with nios2 is much much worse.
+> >> As it is a soft-core people can come up with all kind of variants.
+> >> (e.g. with/without fp).
+> >
+> > not new. Other arches have similar variants already in OE
 > 
-> I'm working on xilinx platforms support (virtex4, virtex5,
-> generic-microblaze) [1]
-> and trying to do it as generic possible, in my case the target boards
-> depending on the
-> family can target a hard core arch (powerpc) or a soft-cpu (microblaze),
-> As far of my work progress I select the supported combinations of
-> gcc/binutils/glibc in
-> distro conf files (angstrom-2008).
+> I know, but at least in those architectures if you have a board the
+> situation is static.
+> In fpga's capable of having a nios2 machine, it is still possible to
+> load different configurations.
 
-fine.
-
-> In config machine files I add u-boot and linux preferred version since this
-> recipes inherits
-> xilinx-bsp.bbclass to able to copy some headers to match the
-> hardware/software model.
-
-uboot and kernel are machine dependent. It would still be nice if you
-pinned the recipes instead.
-
-> Also in xilinx-bsp I handle the possible combinations of configuring u-boot
-> for the final arch.
-> 
-> But I also require a way to override the final target-tune instead of
-> introducing a new variable
-> TARGET_TUNE see [2];
-
-TARGET_TUNE seems to be a convenience var only so its ok even if you did
-not use it.
-
-> 
-> What could be a good approach to handle the final arch configuration
-> options?
-> 
-> Regards
-> 
-> [1] http://www.gitorious.org/oe-microblaze/<http://www.gitorious.org/oe-microblaze/oe-microblaze/blobs/xilinx-support/conf/machine/xilinx-virtex4.conf>
-> [2]
-> http://www.gitorious.org/oe-microblaze/oe-microblaze/blobs/xilinx-support/conf/machine/xilinx-virtex4.conf
-> 
-> On Wed, Jun 23, 2010 at 3:04 PM, Frans Meulenbroeks <
-> fransmeulenbroeks@gmail.com> wrote:
-> 
-> > 2010/6/23 Khem Raj <raj.khem@gmail.com>:
-> > > On (23/06/10 12:09), Frans Meulenbroeks wrote:
-> > >> 2010/6/23 Koen Kooi <k.kooi@student.utwente.nl>:
-> > >> > -----BEGIN PGP SIGNED MESSAGE-----
-> > >> > Hash: SHA1
-> > >> >
-> > >> > On 23-06-10 10:53, Frans Meulenbroeks wrote:
-> > >> >> 2010/6/20 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> > >> >>> 2010/6/20 Koen Kooi <k.kooi@student.utwente.nl>:
-> > >> >>>> -----BEGIN PGP SIGNED MESSAGE-----
-> > >> >>>> Hash: SHA1
-> > >> >>>>
-> > >> >>>> On 20-06-10 11:58, Frans Meulenbroeks wrote:
-> > >> >>>>> Hi,
-> > >> >>>>>
-> > >> >>>>> I'm about to complete bringing a new architecture (nios2 with mmu)
-> > and
-> > >> >>>>> machine (cyclone III FPGA starter kit, and maybe also the Nios2
-> > >> >>>>> Embeddeded Evaluation Kit (aka neek)) to oe.
-> > >> >>>>> Is there a policy on on the process how to do this.
-> > >> >>>>
-> > >> >>>> Have a look at the nios2 patches Leon sent last december, they were
-> > >> >>>> reviewed on this list, but not committed.
-> > >> >>>
-> > >> >>> Koen, thanks for reminding me the look at the review comments.
-> > >> >>>
-> > >> >>> I'm well aware of the work of Leon and Walter (and they are well
-> > aware
-> > >> >>> of my work).
-> > >> >>> Note that what Leon posted was for a non-mmu nios2 core, whereas the
-> > >> >>> changes I have is for an mmu core.
-> > >> >>>
-> > >> >>> Triggered by Koens reminder I revisited the review comments.
-> > Actually
-> > >> >>> none but one are applicable for me.
-> > >> >>> The one that is applicable is the one about pinning versions in
-> > >> >>> machine descriptions.
-> > >> >>> I have also done that, as there are simply no other versions of
-> > >> >>> binutils and gcc that can be used by this hardware.
-> > >> >>> Also I don't feel empowered to make changes in distribution specific
-> > files.
-> > >> >>>
-> > >> >>> The only alternative way that I can think of is doing something
-> > like:
-> > >> >>> DEFAULT_PREFERENCE_nios2 = "1" in the recipes I need.
-> > >> >>> No idea if that overrules the distro settings or not, but I can give
-> > >> >>> it a try later today.
-> > >> >>
-> > >> >> Well, tried it and apparently a distro pin has priority over a
-> > >> >> DEFAULT_PREFERENCE_nios2 in the recipe.
-> > >> >> Guess I'll have to do the pinning the the machine description as
-> > >> >> described above.
-> > >> >
-> > >> > NO! Machines *never* pin versions, that's what distros and to a lesser
-> > >> > extent recipes are for.
-> > >>
-> > >> The issue is that I have no way to specify which versions of a
-> > >> toolchain that are supported (and to enforce that only a supported
-> > >> version works).
-> > >> If the DEFAULT_PREFERENCE in recipes had priority above whatever a
-> > >> distro pins using DEFAULT_PREFERENCE in the recipe could work.
-> > >> (e.g. if  DEFAULT_PREFERENCE = "-1" does mean something like: "does
-> > >> not work" and that is respected by the distro).
-> > >>
-> > >> Actually I do not want the machine to pin the recipe, I want the
-> > >> architecture to pin the recipe (or at least tell which versions are
-> > >> sound, and avoid that non-functional versions are used).
-> > >
-> > > you can use the TARGET_ARCH override to do that
-> >
-> > I'm not fully sure how one would actually do that.Please explain it to
-> > me on irc.
-> >
-> > >>
-> > >> If I cannot pin in a machine file, the only alternative seems to be to
-> > >> make gcc-nios2-* recipes and use a virtual/gcc in the conf file to
-> > >> select gcc-nios2 as the preferred versions (just like a lot of
-> > >> machines do with virtual/kernel). Seems like a waste of effort to me,
-> > >> but oh well
-> > >
-> > > Already suggested a solution in prior reply.
-> >
-> > I can pin in sane-toolchain, but only a few distro's seem to use that.
-> > For now I think it is probably best to have gcc-nios recipes and
-> > define virtual/gcc in the machine configurations. (haven't really seen
-> > objections to that, and for virtual/kernel this seems common practise)
-> > The best solution is indeed to have a sane-toolchain.inc that defines
-> > the available versions for an architecture and that is used by every
-> > distro, but somehow I doubt if that will happen.
-> > >
-> > >>
-> > >> BTW where did the rule come from that machines never pin versions?
-> > >> When was that decided?
-> > >> And as an owner of the machine file, isn't its contents something
-> > >> which is at my discretion ???
-> > >
-> > > Well yes but within bounds of design and common structure. You dont get a
-> > license to
-> > > kill with maintainership if you know what I mean :)
-> >
-> > I know what you mean, but I don't like it if people sell me crap like
-> > "NO! Machines *never* pin versions" while within a few seconds I can
-> > provide evidence that there are not one or two, but 71 machines that
-> > pin something in their conf.
-> >
-> > Frans.
-> >
-> > >
-> > >>
-> > >> And as a final remark:
-> > >> I did a quick grep in conf/machine:
-> > >> $ grep PREFERRED_VERSION * -l | wc
-> > >>      71      71    1065
-> > >> $ grep PREFERRED_VERSION * | wc
-> > >>     104     314    5761
-> > >>
-> > >> So there are 71 machine descriptions that pin at least one package. In
-> > >> total these 71 contain 104 pins.
-> > >> Most of these pin kernel and/or u-boot but there are also two other
-> > >> machines that pin gcc.
-> > >>
-> > >> Frans.
-> > >>
-> > >> _______________________________________________
-> > >> Openembedded-devel mailing list
-> > >> Openembedded-devel@lists.openembedded.org
-> > >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > >
-> > > _______________________________________________
-> > > Openembedded-devel mailing list
-> > > Openembedded-devel@lists.openembedded.org
-> > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> > >
-> >
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
-> 
-> 
-> 
-> -- 
-> Saludos
-> Adrian Alonso
-> http://aalonso.wordpress.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+how many ? if they are managable you can still use the existing relation of
+machine to them but if you really want to make it configurable then you
+might think of writing a class which would define these configurations
+somehow may be you can denote various configs through some bitbake var
+then.
 
 
