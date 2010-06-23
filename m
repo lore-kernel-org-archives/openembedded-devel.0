@@ -1,37 +1,51 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1ORTfl-0005sU-DF
+	(envelope-from <raj.khem@gmail.com>) id 1ORTjR-00063b-0f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:23:40 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1ORTbH-0002b5-Un from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 10:18:59 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 23 Jun 2010 10:18:59 -0700
-Received: from [172.30.80.125] ([172.30.80.125]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 23 Jun 2010 11:18:58 -0600
-Message-ID: <4C2241FE.1040008@mentor.com>
-Date: Wed, 23 Jun 2010 10:18:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Wed, 23 Jun 2010 19:27:27 +0200
+Received: by pxi2 with SMTP id 2so597419pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 10:22:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=KyaqLfkn8ap6a731N1IF8pI2isg6vckxLF8g59/PI+4=;
+	b=SgnVfdhhN2cTNrbAAAcAkAeA79HmikatX8j5kNNF/GXz98rduZa1UIfWq5SH8YJHS8
+	AETp/AGPoGGCpfnWUrUyCRXeEotPHN8QiTgvC22nQkeQDqXUHA7nxwxsYtzo5lvKBnQP
+	iHkD/dbIQKU/Hp+zExBBaPidlS41MAm3J59wU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=JB0lGD1hJbqU/Q0b33GVUhgyymrtY1BubqPad+/hIB5YJUm9EQgCaeBrz+NE6LtRR8
+	WolQiEFAZ1L8X4wuqDOf0VajxngDMMbKq5FFOaoPwAf451bZ4hDWz3YUnF95tm8UtFHb
+	dg4apfbb937tFjUS5pORMjkxxvccvfZV7LoOk=
+Received: by 10.115.80.1 with SMTP id h1mr7935231wal.116.1277313766579;
+	Wed, 23 Jun 2010 10:22:46 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id n29sm50666119wae.16.2010.06.23.10.22.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 23 Jun 2010 10:22:45 -0700 (PDT)
+Date: Wed, 23 Jun 2010 10:23:52 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>	<hvl1uc$bol$1@dough.gmane.org>	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>	<hvsjso$8bh$1@dough.gmane.org>	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
-	<20100623171524.GA5535@gmail.com>
-In-Reply-To: <20100623171524.GA5535@gmail.com>
-X-OriginalArrivalTime: 23 Jun 2010 17:18:58.0697 (UTC)
-	FILETIME=[2AA70790:01CB12F8]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-ID: <20100623172352.GC5535@gmail.com>
+References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
+	<hvl1uc$bol$1@dough.gmane.org>
+	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
+	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
+	<hvsjso$8bh$1@dough.gmane.org>
+	<AANLkTiltHfFZiUj-QUPhXP4CI3U2rD4QG5S157TsYeIZ@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTiltHfFZiUj-QUPhXP4CI3U2rD4QG5S157TsYeIZ@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: introducing a new architecture/machine; policy ? (and a question)
@@ -48,28 +62,109 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 17:23:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Jun 2010 17:27:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Khem Raj wrote:
-
-> some architectures may not support particular version of say gcc but
-> still if that architecture is supported by a given distro then it should
-> define the required version of say gcc in distro.conf with override
+On (23/06/10 12:09), Frans Meulenbroeks wrote:
+> 2010/6/23 Koen Kooi <k.kooi@student.utwente.nl>:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
+> >
+> > On 23-06-10 10:53, Frans Meulenbroeks wrote:
+> >> 2010/6/20 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> >>> 2010/6/20 Koen Kooi <k.kooi@student.utwente.nl>:
+> >>>> -----BEGIN PGP SIGNED MESSAGE-----
+> >>>> Hash: SHA1
+> >>>>
+> >>>> On 20-06-10 11:58, Frans Meulenbroeks wrote:
+> >>>>> Hi,
+> >>>>>
+> >>>>> I'm about to complete bringing a new architecture (nios2 with mmu) and
+> >>>>> machine (cyclone III FPGA starter kit, and maybe also the Nios2
+> >>>>> Embeddeded Evaluation Kit (aka neek)) to oe.
+> >>>>> Is there a policy on on the process how to do this.
+> >>>>
+> >>>> Have a look at the nios2 patches Leon sent last december, they were
+> >>>> reviewed on this list, but not committed.
+> >>>
+> >>> Koen, thanks for reminding me the look at the review comments.
+> >>>
+> >>> I'm well aware of the work of Leon and Walter (and they are well aware
+> >>> of my work).
+> >>> Note that what Leon posted was for a non-mmu nios2 core, whereas the
+> >>> changes I have is for an mmu core.
+> >>>
+> >>> Triggered by Koens reminder I revisited the review comments. Actually
+> >>> none but one are applicable for me.
+> >>> The one that is applicable is the one about pinning versions in
+> >>> machine descriptions.
+> >>> I have also done that, as there are simply no other versions of
+> >>> binutils and gcc that can be used by this hardware.
+> >>> Also I don't feel empowered to make changes in distribution specific files.
+> >>>
+> >>> The only alternative way that I can think of is doing something like:
+> >>> DEFAULT_PREFERENCE_nios2 = "1" in the recipes I need.
+> >>> No idea if that overrules the distro settings or not, but I can give
+> >>> it a try later today.
+> >>
+> >> Well, tried it and apparently a distro pin has priority over a
+> >> DEFAULT_PREFERENCE_nios2 in the recipe.
+> >> Guess I'll have to do the pinning the the machine description as
+> >> described above.
+> >
+> > NO! Machines *never* pin versions, that's what distros and to a lesser
+> > extent recipes are for.
 > 
-> for instance check conf/distro/include/sane-toolchain.inc which is serving
-> a few distributions overrides default compiler versions for AVR32
-> you need to do something same for nios2
+> The issue is that I have no way to specify which versions of a
+> toolchain that are supported (and to enforce that only a supported
+> version works).
+> If the DEFAULT_PREFERENCE in recipes had priority above whatever a
+> distro pins using DEFAULT_PREFERENCE in the recipe could work.
+> (e.g. if  DEFAULT_PREFERENCE = "-1" does mean something like: "does
+> not work" and that is respected by the distro).
+> 
+> Actually I do not want the machine to pin the recipe, I want the
+> architecture to pin the recipe (or at least tell which versions are
+> sound, and avoid that non-functional versions are used).
 
-In short, some of us would love it if we could all rely on either 
-sane-toolchain.inc or at least everyone using the same variables for 
-picking a toolchain so that the "We must use x/y/z tools" could move to 
-tune-ARCH.inc.  But there's probably some issue that doesn't come to 
-mind with moving that override control to the machine level.
+you can use the TARGET_ARCH override to do that
+> 
+> If I cannot pin in a machine file, the only alternative seems to be to
+> make gcc-nios2-* recipes and use a virtual/gcc in the conf file to
+> select gcc-nios2 as the preferred versions (just like a lot of
+> machines do with virtual/kernel). Seems like a waste of effort to me,
+> but oh well
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Already suggested a solution in prior reply.
+
+> 
+> BTW where did the rule come from that machines never pin versions?
+> When was that decided?
+> And as an owner of the machine file, isn't its contents something
+> which is at my discretion ???
+
+Well yes but within bounds of design and common structure. You dont get a license to
+kill with maintainership if you know what I mean :)
+
+> 
+> And as a final remark:
+> I did a quick grep in conf/machine:
+> $ grep PREFERRED_VERSION * -l | wc
+>      71      71    1065
+> $ grep PREFERRED_VERSION * | wc
+>     104     314    5761
+> 
+> So there are 71 machine descriptions that pin at least one package. In
+> total these 71 contain 104 pins.
+> Most of these pin kernel and/or u-boot but there are also two other
+> machines that pin gcc.
+> 
+> Frans.
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
