@@ -1,41 +1,43 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORTkQ-0006AU-9C
+	(envelope-from <raj.khem@gmail.com>) id 1ORTmJ-0006JA-Do
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:28:27 +0200
-Received: by pzk3 with SMTP id 3so189365pzk.6
+	Wed, 23 Jun 2010 19:30:24 +0200
+Received: by pvg3 with SMTP id 3so637833pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 10:23:48 -0700 (PDT)
+	Wed, 23 Jun 2010 10:25:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=BP0LEBvvLpK1Hvy4hisNlkrWENSXN7ZNZGiDfRvENL8=;
-	b=F9xiFbIpNxHeaqnwuJEQdUytBlbF5KsahN//0Y40xJ6YQ52zhEFBmv0WCELXHu+WOF
-	aXhFDRrvlDO8DgYKNCg+58I17gD8AeDwTpMDZScLUkfIvoChrrdTCrBRkUUPVwBtPO2m
-	mZWMpYOw1+GONJT1RmOWtHbJcK2CI0xB29Of8=
+	bh=MkneMzm6j79xjQhR/n8zsdCMdqvLjjONj04mb3uK5tY=;
+	b=E4PBy38R2vNSbj3J1HQJ+vmlYVjaJTlMaoMlRE2eZvvxvG9EpOTFT4NIdQS5waB9pw
+	jW5Kse4/3SiIsQmlGRRpym0btHWabsW4EYVumCr609NDtoioiERSjUgKg9cxKFlRVVPa
+	xdvU0ezIUoMClu/sB9ksCZ7iGyDYukhW/H5XY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=A7N6DCmIq4OlEd627kloi9cRBVUvZSwxGrPbz865EtW/MCgHQaCHFI9gWlOW0QPlH7
-	0R8dUnuSLoFBQ5Ua9xJPGT2GBdSzmCywa5CgXRbG2Dhcl4WAVNz9HYrgtZSDY4UwOhcQ
-	+Xdtmb54ZKrZ9R7dZ9D6PH11/pSx83fNH9iNs=
-Received: by 10.142.10.27 with SMTP id 27mr7440899wfj.265.1277313828813;
-	Wed, 23 Jun 2010 10:23:48 -0700 (PDT)
-Received: from gmail.com ([99.57.141.118])
-	by mx.google.com with ESMTPS id l29sm6091870rvb.16.2010.06.23.10.23.47
+	b=HKfag19GphKuAvE0NxSKIGVPKldbCCN2gUIUZh8JWxF+Ppfe92aE4e86m2NcFG+wLd
+	SOSAwra7eQlLhlX2ciYQlJOFDbdo1Mv6B2KNcVgqZu4wxS7g35jEeU2vU9NaUyxRVWv8
+	T0c5RjezLD8nD3yfLk/EyCbBHCVORew1MX+6Q=
+Received: by 10.114.187.22 with SMTP id k22mr7952428waf.106.1277313945790;
+	Wed, 23 Jun 2010 10:25:45 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id p1sm461620rvq.12.2010.06.23.10.25.43
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Jun 2010 10:23:47 -0700 (PDT)
-Date: Wed, 23 Jun 2010 10:24:53 -0700
+	Wed, 23 Jun 2010 10:25:44 -0700 (PDT)
+Date: Wed, 23 Jun 2010 10:26:51 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623172453.GD5535@gmail.com>
-References: <4C1FDFAE.8040704@mentor.com> <20100622144759.GB32544@gmail.com>
-	<4C210735.5090202@mentor.com>
+Message-ID: <20100623172651.GE5535@gmail.com>
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CFB6@KCINPUNHJCMS01.kpit.com>
+	<20100622145537.GC32544@gmail.com>
+	<76E258664B189C4CBEF125491CA11ECC9445E0CFBC@KCINPUNHJCMS01.kpit.com>
 MIME-Version: 1.0
-In-Reply-To: <4C210735.5090202@mentor.com>
+In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFBC@KCINPUNHJCMS01.kpit.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -43,7 +45,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC, PATCH] Make packaged-staging use more correct PSTAGE_PKGARCH
+Subject: Re: Qt-4.7.0.beta1 Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,95 +59,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 17:28:27 -0000
+X-List-Received-Date: Wed, 23 Jun 2010 17:30:24 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (22/06/10 11:55), Tom Rini wrote:
-> Khem Raj wrote:
-> >On (21/06/10 14:54), Tom Rini wrote:
-> >>packaged-staging.bbclass: Change PSTAGE_PKGARCH to something dynamic
-> >>
-> >>Currently, we make all pstage packages be locked to BUILD_SYS which
-> >>causes annoying warnings in some cases and doesn't allow for sharing
-> >>between say 32 and 64bit (which is valid for target bits).
-> >>
-> >>This changes to ${PACKAGE_ARCH}-${HOST_SYS} for everything and
-> >>reworks the opkg.conf we generate to add entries as needed.
-> >>
-> >>There is an alternative, suggested by Chris Larson, that we modify
-> >>PSTAGE_PKGARCH in an anon python function so that we can avoid
-> >>things like 'x86_64-x86_64-linux' in native packages and similar
-> >>duplication in sdk packages, or otherwise be more dynamic (use
-> >>HOST_OS instead of SYS and then catch the cross case, etc).
+On (23/06/10 09:32), Soumya R wrote:
+>  Khem,
+>    
+>     Thanks for the reply.. Its my own recipe.. How do i resolve it??
+
+heh I do not have a magic wand of crystal ball where I can see what you are
+cooking with your recipe.
+essentially that problem is that its wanting packages for which no recipes
+are there or are not provided by any other names recipe.
+
+> 
+> Regards,
+> Soumya
+> ________________________________________
+> From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj [raj.khem@gmail.com]
+> Sent: Tuesday, June 22, 2010 8:25 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] Qt-4.7.0.beta1 Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+> 
+> On (22/06/10 11:35), Soumya R wrote:
+> > Hi All,
 > >
-> >I think this approach sounds better having same arch repeated twice
-> >would be confusing
+> >       I am trying to build Qt Embedded SDK for Qt-4.7.0.beta1.. when i run
+> > bitbake meta-toolchain-avn-qte i got the following error
+> >
+> >
+> > NOTE: Handling BitBake files: - (0169/0169) [100 %]
+> > NOTE: Parsing finished. 163 cached, 5 parsed, 1 skipped, 0 masked.
+> > NOTE: Resolving any missing task queue dependencies
+> > ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/tasks/task-avn-qte-toolchain-target.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 'qt4-embedded-mkspecs' but it wasn't found in any PACKAGE or RPROVIDES variables
+> > NOTE: Runtime target 'qt4-embedded-mkspecs' is unbuildable, removing...
 > 
-> Here we go.  This also reworks generating opkg.conf a little bit (it
-> had multiple entries before due to a lazy grep).
+> I dont see this recipe in oe repo. Is it your own recipe ?
 > 
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
-
-very nice
-
-Acked-by: Khem Raj <raj.khem@gmail.com>
-
+> > Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+> > NOTE: Runtime target 'task-avn-qte-toolchain-target' is unbuildable, removing...
+> > Missing or unbuildable dependency chain was: ['task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
+> > ERROR: Required build target 'meta-toolchain-avn-qte' has no buildable providers.
+> > Missing or unbuildable dependency chain was: ['meta-toolchain-avn-qte', 'task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
+> >
+> >      It is asking for runtime dependencies  'qt4-embedded-mkspecs' how do I get these packages???
+> >
+> > Thanks in advance:-)
+> >
+> >
+> > Regards,
+> > Soumya
+> >
+> > This message contains information that may be privileged or confidential and is the property of the KPIT Cummins Infosystems Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Cummins Infosystems Ltd. does not accept any liability for virus infected mails.
+> >
+> >
 > 
-> diff --git a/classes/packaged-staging.bbclass
-> b/classes/packaged-staging.bbclass
-> index 8a98940..19a6a6d 100644
-> --- a/classes/packaged-staging.bbclass
-> +++ b/classes/packaged-staging.bbclass
-> @@ -12,7 +12,7 @@
->  # bitbake.conf set PSTAGING_ACTIVE = "0", this class sets to "1" if
-> we're active
->  #
->  PSTAGE_PKGVERSION = "${PV}-${PR}"
-> -PSTAGE_PKGARCH    = "${BUILD_SYS}"
-> +PSTAGE_PKGARCH    = "${PACKAGE_ARCH}-${HOST_OS}"
->  PSTAGE_EXTRAPATH  ?= "/${OELAYOUT_ABI}/${DISTRO_PR}/"
->  PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
->  PSTAGE_PKGPN      = "${@bb.data.expand('staging-${PN}-${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}',
-> d).replace('_', '-')}"
-> @@ -28,6 +28,12 @@ PSTAGE_NATIVEDEPENDS = "\
+> Crap. You are talking on public mailing lists and these are archived. These notices dont make sense and in future make
+> sure that you strip them off when sending emails to public mailing lists.
 > 
->  BB_STAMP_WHITELIST = "${PSTAGE_NATIVEDEPENDS}"
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > 
-> +python __anonymous() {
-> +    # We need PSTAGE_PKGARCH to contain information about the target.
-> +    if bb.data.inherits_class('cross', d):
-> +        bb.data.setVar('PSTAGE_PKGARCH',
-> "${HOST_SYS}-${PACKAGE_ARCH}-${TARGET_OS}", d)
-> +}
-> +
->  python () {
->      pstage_allowed = True
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 > 
-> @@ -148,14 +154,13 @@ staging_helper () {
->  	# Assemble appropriate opkg.conf
->  	conffile=${PSTAGE_MACHCONFIG}
->  	mkdir -p ${PSTAGE_WORKDIR}/pstaging_lists
-> +	arch="${PSTAGE_PKGARCH}"
->  	if [ ! -e $conffile ]; then
-> -		ipkgarchs="${BUILD_SYS}"
-> -		priority=1
-> -		for arch in $ipkgarchs; do
-> -			echo "arch $arch $priority" >> $conffile
-> -			priority=$(expr $priority + 5)
-> -		done
-> +		echo "arch $arch 1" > $conffile
->  		echo "dest root /" >> $conffile
-> +	elif [ `grep -c " $arch " $conffile` -eq 0 ]; then
-> +		priority=$(expr `grep -cE "^arch" $conffile` + 1)
-> +		sed -i -e "/dest/iarch $arch $priority" $conffile
->  	fi
->  	if [ ! -e ${TMPDIR}${libdir_native}/opkg/info/ ]; then
->  		mkdir -p ${TMPDIR}${libdir_native}/opkg/info/
 > 
-> -- 
-> Tom Rini
-> Mentor Graphics Corporation
+> This message contains information that may be privileged or confidential and is the property of the KPIT Cummins Infosystems Ltd. It is intended only for the person to whom it is addressed. If you are not the intended recipient, you are not authorized to read, print, retain copy, disseminate, distribute, or use this message or any part thereof. If you receive this message in error, please notify the sender immediately and delete all copies of this message. KPIT Cummins Infosystems Ltd. does not accept any liability for virus infected mails.
+> 
+> 
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
