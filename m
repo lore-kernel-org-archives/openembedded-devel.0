@@ -1,40 +1,53 @@
-Received: from ausc60ps301.us.dell.com ([143.166.148.206])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sean_Hudson@Dell.com>) id 1ORW2a-0001iN-9N
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 21:55:22 +0200
-X-Loopcount0: from 10.166.72.158
-From: <Sean_Hudson@Dell.com>
-To: <Openembedded-devel@lists.openembedded.org>
-Date: Wed, 23 Jun 2010 14:50:31 -0500
-Thread-Topic: Module development...
-Thread-Index: AcsTDVZRwGdKNc3AS/uw91dIFgNDzg==
-Message-ID: <113134CF306E8E4CACC27BE5937261B209315E0E1B@AUSX7MCPS303.AMER.DELL.COM>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-puzzleid: {966064B3-039D-4DF2-A6EF-6C972EDF574E}
-x-cr-hashedpuzzle: AIJZ AkLx AvvN BhiX BqE6 CIt3 DChx Doi4 EcqL EvfK FQjr
-	Ino/ JUFx JVpJ KAC9 KMiL; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {966064B3-039D-4DF2-A6EF-6C972EDF574E};
-	cwBlAGEAbgBfAGgAdQBkAHMAbwBuAEAAZABlAGwAbAAuAGMAbwBtAA==; Wed,
-	23 Jun 2010 19:50:31
-	GMT;TQBvAGQAdQBsAGUAIABkAGUAdgBlAGwAbwBwAG0AZQBuAHQALgAuAC4A
-acceptlanguage: en-US
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1ORW7H-0007E3-Iq
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Jun 2010 22:00:12 +0200
+Received: by bwz14 with SMTP id 14so2390810bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 12:55:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=99XfNg7Wl9D+WG4r8PX4XmdLMdX/ykve4BCGxSGUAsk=;
+	b=o/svtLFBOMFHXtNWDnWH0Wkni9/bf3fbM+QcsVOBdvI7uqyfALUgNz+RNLTXc/u8hg
+	mPnHKaSPvWn/pgePUPHWSO80SnuENTgvVaDZmI7l8A7N4IUeqqqjxsm7KyfcZVkbvwfH
+	AnfKgxNDqxIcHSV8sNrH2n0psoAlLs84ltNzs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=V0uWhedJBYSfV4K8C5caSZvcLEQEjFoUraSBlIp50eIAcpAmdeIFkAYQ9NMMDcHO7S
+	Qt50HZYMplFnRmO7OGstrBbcb0vUO9Tt7Qie8KuGdAAz3qbiIap7FdMSg81XCSwukeUL
+	TsWiZGwk1BaIJzbKdoXyrHm2bzq0kmFOVU9T8=
 MIME-Version: 1.0
-X-OriginalArrivalTime: 23 Jun 2010 19:50:33.0696 (UTC)
-	FILETIME=[57B1BE00:01CB130D]
-X-SA-Exim-Connect-IP: 143.166.148.206
-X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
+Received: by 10.204.73.213 with SMTP id r21mr4584348bkj.24.1277322935722; Wed, 
+	23 Jun 2010 12:55:35 -0700 (PDT)
+Received: by 10.204.77.132 with HTTP; Wed, 23 Jun 2010 12:55:35 -0700 (PDT)
+In-Reply-To: <20100623171933.GB5535@gmail.com>
+References: <hvl1uc$bol$1@dough.gmane.org>
+	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
+	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
+	<hvsjso$8bh$1@dough.gmane.org>
+	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>
+	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
+	<20100623110315.16293a95@xora-desktop.xora.org.uk>
+	<4C21DCD6.4090509@balister.org> <hvsnsn$mvd$2@dough.gmane.org>
+	<AANLkTilv_BG9-Ksq5-fraEY4edmdFhfKTIgM-B2Gojq1@mail.gmail.com>
+	<20100623171933.GB5535@gmail.com>
+Date: Wed, 23 Jun 2010 21:55:35 +0200
+Message-ID: <AANLkTimou2cL3hKrb7Yrqp1h4MH-AkWVVXFN2MKkv5ic@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Module development...
+Subject: Re: introducing a new architecture/machine; policy ? (and a 	question)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +61,97 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 19:55:22 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Wed, 23 Jun 2010 20:00:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Does anyone have any advice about how to integrate modules that are current=
-ly under development with OE?
+2010/6/23 Khem Raj <raj.khem@gmail.com>:
+> On (23/06/10 13:16), Frans Meulenbroeks wrote:
+>> 2010/6/23 Koen Kooi <k.kooi@student.utwente.nl>:
+>> > -----BEGIN PGP SIGNED MESSAGE-----
+>> > Hash: SHA1
+>> >
+>> > On 23-06-10 12:07, Philip Balister wrote:
+>> >> On 06/23/2010 12:03 PM, Graeme Gregory wrote:
+>> >>> On Wed, 23 Jun 2010 11:54:21 +0200
+>> >>> Frans Meulenbroeks<fransmeulenbroeks@gmail.com> =A0wrote:
+>> >>>
+>> >>>> 2010/6/23 Graeme Gregory<dp@xora.org.uk>:
+>> >>>>>>>> Also I don't feel empowered to make changes in distribution
+>> >>>>>>>> specific files.
+>> >>>>>
+>> >>>>> Why not, chances are Angstrom maintainers would be quite happy for
+>> >>>>> you to patch angstrom*.conf if you ask us.
+>> >>>>>
+>> >>>>> Graeme
+>> >>>>
+>> >>>> distribution !=3D angstrom
+>> >>>> There are more distributions out there.
+>> >>
+>> >> Right now, toolchain selection is done in distro files not machine
+>> >> files. I agree this is not the clearest approach, however adding the
+>> >> toolchain selection to the machine files may have unexpected side eff=
+ects.
+>> >
+>> > Think of multimachine builds. What happens when someone else adds
+>> > *another* nios2 based machine with different toolchain versions, how d=
+o
+>> > I know which toolchain avahi_1.0_nios2.ipk was compiled with
+>>
+>> If toolchain is interesting to know in ipk's it should be part of the na=
+me.
+>> And note that I am really in favour of an architecture specific
+>> solution, not a machine one.
+>> That is why I used an include file to contain the pinnings.
+>>
+>> And actually the situation with nios2 is much much worse.
+>> As it is a soft-core people can come up with all kind of variants.
+>> (e.g. with/without fp).
+>
+> not new. Other arches have similar variants already in OE
 
-To accomplish this, we are trying to write recipes to do one or both of the=
- following:
+I know, but at least in those architectures if you have a board the
+situation is static.
+In fpga's capable of having a nios2 machine, it is still possible to
+load different configurations.
+As such it is different from everything we have (as far as I know we
+have no microblaze boards yet).
+>
+>
+>> Actually nios2 adds pragma's to gcc to select
+>> which instructions are there and which not.
+>
+> Well I would have preferred commandline options that way you could
+> have many variants and we could have overrides like we have arm sub-arche=
+s
 
-1)      Prevent tarball/md5 generation
+You would indeed get many variants and many options.
+Anyway, the code I started with had the pragma's.There were other
+higher priority things to dig into (like getting it to compile on 64
+bit hw).
 
-2)      Pull the latest revision from a VCS every time  the recipe is built
+Frans
+>
+>
+>> Not sure whether the latter is a good idea as it is one of the things
+>> that fail moving to a newer gcc.
+>>
+>> The good news is that most of the variants used have different
+>> peripherals, but seem to stick to just a few cpu cores.
+>> (nios2 is used as a generic name for the SoC as well as the core,
+>> doesn't help to separate things either).
+>>
+>> Frans
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-  Is this the best way to accomplish our goal, or are there better ways?
 
