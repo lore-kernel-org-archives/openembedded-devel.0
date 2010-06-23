@@ -1,35 +1,44 @@
-Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1ORMHC-0003EZ-P9
+	(envelope-from <dp@xora.org.uk>) id 1ORMRZ-0001zb-Lj
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 11:30:00 +0200
-Received: from durham.keylevel.com ([109.224.134.115]:47341
-	helo=[192.168.1.98])
-	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1ORMCm-0004mB-9N
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 10:25:12 +0100
-Message-Id: <98ADC3BE-97D0-4CFA-8DDE-06BCD5323360@keylevel.com>
-From: Chris Tapp <dokuwiki@keylevel.com>
+	Wed, 23 Jun 2010 11:40:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id BC859A54A9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 10:35:40 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 8cY5NCAC+-D4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 10:35:39 +0100 (BST)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1631AA54A4
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 10:35:39 +0100 (BST)
+Date: Wed, 23 Jun 2010 10:36:00 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v936)
-Date: Wed, 23 Jun 2010 10:25:09 +0100
-X-Mailer: Apple Mail (2.936)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - keylevel.com
-X-SA-Exim-Connect-IP: 80.254.228.43
-X-SA-Exim-Mail-From: dokuwiki@keylevel.com
+Message-ID: <20100623103600.77c5a6d9@xora-desktop.xora.org.uk>
+In-Reply-To: <hvsjso$8bh$1@dough.gmane.org>
+References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
+	<hvl1uc$bol$1@dough.gmane.org>
+	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
+	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
+	<hvsjso$8bh$1@dough.gmane.org>
+X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Cross compile badness when building libsdl-directfb
+Subject: Re: introducing a new architecture/machine; policy ? (and a question)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,29 +52,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 09:30:00 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Wed, 23 Jun 2010 09:40:35 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
-I'm trying to use libsdl for x86 using Angstrom.
+> >> Also I don't feel empowered to make changes in distribution
+> >> specific files.
 
-However, when libsdl-directfb is compiled I get a an error that  
-includes:
+Why not, chances are Angstrom maintainers would be quite happy for you
+to patch angstrom*.conf if you ask us.
 
-CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/ 
-directfb
-
-It seems as if this is a known issue with libsdl-directfb_1.2.11.bb  
-and a _1.2.14.bb may have been produced, but this does not appear when  
-I do a git pull.
-
-The x11 versions are at 1.2.14.
-
-Does the 1.2.14 directfb version exist and, if so, where can I get it?
-
-Thanks !
-
-Chris
-
+Graeme
 
 
