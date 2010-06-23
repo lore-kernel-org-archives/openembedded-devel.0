@@ -1,36 +1,30 @@
-Received: from out2.smtp.messagingengine.com ([66.111.4.26])
+Received: from mail.asoft.ru ([91.205.86.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1ORSGP-0003N2-9m
-	for Openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 17:53:23 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id DBEE1107F88;
-	Wed, 23 Jun 2010 11:40:37 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Wed, 23 Jun 2010 11:40:38 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=from:to:cc:subject:date:message-id; s=smtpout;
-	bh=2x3Uq63LJSokfM8TnFOtsjWFKRg=;
-	b=LDmQuqeXqeVvVdJAwmhhJ07JUdY4JUQ8vxfOgT7acEuH33rgqcTTnHG8MCU5dGEHRx0SeuRmc8+vWiOn+OG/DY5QyWlwEcNrK+NpO3urw4EEjGPL876UTuIYiUNWCUCAtkUASQwnXVZ7yj41F3bvzUHrfJ3BCcv4PkEgD3067WQ=
-X-Sasl-enc: YT2pfWVcmWTwkX+zC19T8AbROYspV9cY1EudTibwqhuD 1277307635
-Received: from localhost.localdomain (unknown [212.144.247.210])
-	by mail.messagingengine.com (Postfix) with ESMTPA id C1DE14EAD98;
-	Wed, 23 Jun 2010 11:40:34 -0400 (EDT)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Jun 2010 17:40:26 +0200
-Message-Id: <1277307626-24691-1-git-send-email-vjensen@gmx.de>
-X-Mailer: git-send-email 1.5.6.5
-X-SA-Exim-Connect-IP: 66.111.4.26
-X-SA-Exim-Mail-From: vjensen@gmx.de
+	(envelope-from <mad_soft@inbox.ru>) id 1ORTO4-0006JS-Qr
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Jun 2010 19:05:48 +0200
+Received: from lighthouse.office.asoft.ru (office.asoft.ru [62.205.175.245])
+	(authenticated bits=0)
+	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o5NH0dGF028612
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 21:00:41 +0400
+From: Dmitry Artamonow <mad_soft@inbox.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 23 Jun 2010 21:00:35 +0400
+Message-Id: <1277312438-326-1-git-send-email-mad_soft@inbox.ru>
+X-Mailer: git-send-email 1.7.1
+X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
+	(mail.asoft.ru [91.205.86.207]);
+	Wed, 23 Jun 2010 21:00:41 +0400 (MSD)
+X-SA-Exim-Connect-IP: 91.205.86.207
+X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>, Vitus Jensen <vjensen@gmx.de>
-Subject: [STABLE][PATCH] kernel bbclass: switch to u-boot-mkimage-native
+Subject: [PATCH v2 0/3] Recipe for MuPDF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,33 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 15:53:23 -0000
+X-List-Received-Date: Wed, 23 Jun 2010 17:06:13 -0000
 
-From: Koen Kooi <koen@openembedded.org>
+As there's no more comments on original patch series[1], guess it's time
+to send v2. Do whatever you like with these patches :-)
 
-This is a long demanded change. The u-boot-mkimage is up to date to OE standards, while the openmoko one is not
-(cherry picked from commit 7425e92b1c7918c8c3b609950dbdb44dd488f1fe)
+[1] http://patchwork.openembedded.org/bundle/mad_soft/mupdf-0.6-v1/
 
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- classes/kernel.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Changelog v1 => v2:
 
-diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-index 39a9af5..7279e00 100644
---- a/classes/kernel.bbclass
-+++ b/classes/kernel.bbclass
-@@ -14,7 +14,7 @@ python __anonymous () {
-     kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
-     if kerneltype == 'uImage':
-     	depends = bb.data.getVar("DEPENDS", d, 1)
--    	depends = "%s u-boot-mkimage-openmoko-native" % depends
-+    	depends = "%s u-boot-mkimage-native" % depends
-     	bb.data.setVar("DEPENDS", depends, d)
- 
-     image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
--- 
-1.5.6.5
+* removed autotools_stage_all from openjpeg and jbig2dec recipes,
+  as suggested by Khem Raj
+* used upstream patch fixing endianness issues on 16-bit displays
+  instead of custom hack (upstream has been very kind to fix this
+  bug so quickly)
+* more verbose comment about why we need -O2
+
+Dmitry Artamonow (3):
+  openjpeg-1.3: new recipe
+  jbig2dec-0.11: new recipe
+  mupdf-0.6: new recipe
+
+ recipes/jpeg/jbig2dec_0.11.bb                      |   15 +++
+ recipes/jpeg/openjpeg-1.3/fix_installdir.patch     |   19 ++++
+ recipes/jpeg/openjpeg_1.3.bb                       |   20 +++++
+ recipes/mupdf/mupdf-0.6/Makerules                  |    8 ++
+ recipes/mupdf/mupdf-0.6/mupdf_fix_endianness.patch |   90 ++++++++++++++++++++
+ recipes/mupdf/mupdf_0.6.bb                         |   60 +++++++++++++
+ 6 files changed, 212 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/jpeg/jbig2dec_0.11.bb
+ create mode 100644 recipes/jpeg/openjpeg-1.3/fix_installdir.patch
+ create mode 100644 recipes/jpeg/openjpeg_1.3.bb
+ create mode 100644 recipes/mupdf/mupdf-0.6/Makerules
+ create mode 100644 recipes/mupdf/mupdf-0.6/mupdf_fix_endianness.patch
+ create mode 100644 recipes/mupdf/mupdf_0.6.bb
 
 
 
