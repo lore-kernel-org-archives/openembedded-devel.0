@@ -1,21 +1,23 @@
 Received: from mail.asoft.ru ([91.205.86.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mad_soft@inbox.ru>) id 1ORTO4-0006JS-Qr
+	(envelope-from <mad_soft@inbox.ru>) id 1ORTO6-0006Kg-RP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:05:48 +0200
+	Wed, 23 Jun 2010 19:05:56 +0200
 Received: from lighthouse.office.asoft.ru (office.asoft.ru [62.205.175.245])
 	(authenticated bits=0)
-	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o5NH0dGF028612
+	by mail.asoft.ru (8.14.3/8.14.3) with ESMTP id o5NH0dGG028612
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 21:00:41 +0400
+	Wed, 23 Jun 2010 21:00:45 +0400
 From: Dmitry Artamonow <mad_soft@inbox.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 23 Jun 2010 21:00:35 +0400
-Message-Id: <1277312438-326-1-git-send-email-mad_soft@inbox.ru>
+Date: Wed, 23 Jun 2010 21:00:36 +0400
+Message-Id: <1277312438-326-2-git-send-email-mad_soft@inbox.ru>
 X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1277312438-326-1-git-send-email-mad_soft@inbox.ru>
+References: <1277312438-326-1-git-send-email-mad_soft@inbox.ru>
 X-Greylist: Sender succeeded SMTP AUTH, not delayed by milter-greylist-4.2.3
 	(mail.asoft.ru [91.205.86.207]);
-	Wed, 23 Jun 2010 21:00:41 +0400 (MSD)
+	Wed, 23 Jun 2010 21:00:45 +0400 (MSD)
 X-SA-Exim-Connect-IP: 91.205.86.207
 X-SA-Exim-Mail-From: mad_soft@inbox.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -24,7 +26,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2 0/3] Recipe for MuPDF
+Subject: [PATCH 1/3] openjpeg-1.3: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,38 +42,70 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Wed, 23 Jun 2010 17:06:13 -0000
 
-As there's no more comments on original patch series[1], guess it's time
-to send v2. Do whatever you like with these patches :-)
+The OpenJPEG library is an open-source JPEG 2000 codec written
+in C language.
 
-[1] http://patchwork.openembedded.org/bundle/mad_soft/mupdf-0.6-v1/
-
-Changelog v1 => v2:
-
-* removed autotools_stage_all from openjpeg and jbig2dec recipes,
-  as suggested by Khem Raj
-* used upstream patch fixing endianness issues on 16-bit displays
-  instead of custom hack (upstream has been very kind to fix this
-  bug so quickly)
-* more verbose comment about why we need -O2
-
-Dmitry Artamonow (3):
-  openjpeg-1.3: new recipe
-  jbig2dec-0.11: new recipe
-  mupdf-0.6: new recipe
-
- recipes/jpeg/jbig2dec_0.11.bb                      |   15 +++
- recipes/jpeg/openjpeg-1.3/fix_installdir.patch     |   19 ++++
- recipes/jpeg/openjpeg_1.3.bb                       |   20 +++++
- recipes/mupdf/mupdf-0.6/Makerules                  |    8 ++
- recipes/mupdf/mupdf-0.6/mupdf_fix_endianness.patch |   90 ++++++++++++++++++++
- recipes/mupdf/mupdf_0.6.bb                         |   60 +++++++++++++
- 6 files changed, 212 insertions(+), 0 deletions(-)
- create mode 100644 recipes/jpeg/jbig2dec_0.11.bb
+Signed-off-by: Dmitry Artamonow <mad_soft@inbox.ru>
+---
+ recipes/jpeg/openjpeg-1.3/fix_installdir.patch |   19 +++++++++++++++++++
+ recipes/jpeg/openjpeg_1.3.bb                   |   20 ++++++++++++++++++++
+ 2 files changed, 39 insertions(+), 0 deletions(-)
  create mode 100644 recipes/jpeg/openjpeg-1.3/fix_installdir.patch
  create mode 100644 recipes/jpeg/openjpeg_1.3.bb
- create mode 100644 recipes/mupdf/mupdf-0.6/Makerules
- create mode 100644 recipes/mupdf/mupdf-0.6/mupdf_fix_endianness.patch
- create mode 100644 recipes/mupdf/mupdf_0.6.bb
+
+diff --git a/recipes/jpeg/openjpeg-1.3/fix_installdir.patch b/recipes/jpeg/openjpeg-1.3/fix_installdir.patch
+new file mode 100644
+index 0000000..f04a81e
+--- /dev/null
++++ b/recipes/jpeg/openjpeg-1.3/fix_installdir.patch
+@@ -0,0 +1,19 @@
++* status: pending
++* origin:
++  http://groups.google.com/group/openjpeg/browse_thread/thread/4cd7b53fbaab2822
++* comment: slightly modified patch by Patrick Reynolds, borrowed from
++  the thread above. Seems that it's not in upstream yet.
++  Had to modify header location from /usr/include/openjpeg/openjpeg.h to
++  /usr/include/openjpeg.h , as it's the only one header file anyway and
++  most of its users expect #include <openjpeg.h> to work.
++
++Index: libopenjpeg/CMakeLists.txt
++===================================================================
++--- a/libopenjpeg/CMakeLists.txt	(revision 541)
+++++ b/libopenjpeg/CMakeLists.txt	(working copy)
++@@ -41,4 +41,4 @@
++ 
++ # Install includes files
++ INSTALL(FILES openjpeg.h
++-	DESTINATION ${INCLUDE_INSTALL_DIR}/openjpeg)
+++	DESTINATION include)
+diff --git a/recipes/jpeg/openjpeg_1.3.bb b/recipes/jpeg/openjpeg_1.3.bb
+new file mode 100644
+index 0000000..1ceb95e
+--- /dev/null
++++ b/recipes/jpeg/openjpeg_1.3.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Open-source JPEG 2000 codec written in C language"
++HOMEPAGE = "http://www.openjpeg.org"
++SECTION = "libs"
++LICENSE = "BSD"
++PR = "r0"
++
++SRC_URI = "http://openjpeg.googlecode.com/files/openjpeg_v1_3.tar.gz \
++           file://fix_installdir.patch"
++
++S = "${WORKDIR}/OpenJPEG_v1_3"
++
++inherit cmake
++
++EXTRA_OECMAKE="-DBUILD_SHARED_LIBS:BOOL=ON"
++
++PACKAGES =+ "openjpeg-tools "
++FILES_openjpeg-tools = "${bindir}/*"
++
++SRC_URI[md5sum] = "f9a3ccfa91ac34b589e9bf7577ce8ff9"
++SRC_URI[sha256sum] = "3bca2e1e040f9dcbbcb1e0627f17a76eeb95e153bf663d082070c044a21202bd"
+-- 
+1.7.1
 
 
 
