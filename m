@@ -1,39 +1,53 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1ORCeC-0005fi-Cb
+	(envelope-from <raj.khem@gmail.com>) id 1ORDcO-000758-FB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 01:12:54 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1ORCZj-0001qf-Df from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 22 Jun 2010 16:08:15 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 22 Jun 2010 16:08:15 -0700
-Received: from [172.30.80.158] ([172.30.80.158]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 22 Jun 2010 17:08:14 -0600
-Message-ID: <4C21425B.9090409@mentor.com>
-Date: Tue, 22 Jun 2010 16:08:11 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Wed, 23 Jun 2010 02:15:06 +0200
+Received: by pwj10 with SMTP id 10so858085pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 22 Jun 2010 17:10:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=tyWJmtgKN00Fofg7ZmNMkLxtZjav5/lHFngcVvNsrpQ=;
+	b=w8bsV+87Iq8VSaTQLSjVNt4c/Hk1kMa/1ahMCqQM/Km7ttWh1ENz85c6SxcG+ybowV
+	dVXfOlIc4jtxpjsNLFvr0rnHuEzYwSq0+TmwkFac1NAwiJFJYNU544OzvlMcVRDoFgCG
+	cHytekjGKdGTNDGQsGX7CfU3b/EP4fDdK3zhk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Hq54rMyrSDzsfmSnfUTRQc+QrkZpOwSkndOq+xYiwgmxVB9nUN4f5rDr7EE81oXXlI
+	kMAmR8l+/OzrAWc35UXxOurBxjd43pSbZH4Ll/RuChPQVtR96d9Lo0CfRbUTLnWZbgbc
+	jWsOVRvlPl/KocdfGi5EEDwD71c0XF+XCP95s=
+Received: by 10.115.38.31 with SMTP id q31mr6591436waj.113.1277251827764;
+	Tue, 22 Jun 2010 17:10:27 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id n29sm26851882wae.4.2010.06.22.17.10.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 22 Jun 2010 17:10:26 -0700 (PDT)
+Date: Tue, 22 Jun 2010 17:11:27 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C213A4F.9070705@mentor.com>
-In-Reply-To: <4C213A4F.9070705@mentor.com>
-X-OriginalArrivalTime: 22 Jun 2010 23:08:14.0165 (UTC)
-	FILETIME=[CAABF050:01CB125F]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-ID: <20100623001127.GA1512@gmail.com>
+References: <1276814379-13161-1-git-send-email-raj.khem@gmail.com>
+	<1276814379-13161-2-git-send-email-raj.khem@gmail.com>
+	<AANLkTik6QLxTLQgYZaLpucQaU8etYax-invJna3D5kp_@mail.gmail.com>
+	<AANLkTimOU6R6QDgQ2F2WtFRcYZy30T68TmhglN3OxIKZ@mail.gmail.com>
+	<hvr0v1$j72$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <hvr0v1$j72$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC] Link with $ORIGIN, mangle only when that's too hard, get it all
+Subject: Re: [PATCH 2/3] busybox_1.15.3.bb: Work around the gcc 4.5 ICE on thumb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,34 +61,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 22 Jun 2010 23:12:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Jun 2010 00:15:07 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Tom Rini wrote:
-> The following changes relocatable.bbclass to an always for native (and 
-> disabled for cross) to an opt-in for hard to get right recipes.
+On (22/06/10 20:55), Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> With this, cross / native things like with $ORIGIN directly, for the 
-> common case.  We do this as an in addition to so that programs that run 
-> before install still work fine.  In addition doing this makes sure that 
-> the initial RPATH will be long enough, even in the cross case, that we 
-> can patch in a correct $ORIGIN[1].
+> On 22-06-10 16:31, Khem Raj wrote:
+> > On Mon, Jun 21, 2010 at 10:59 PM, Leon Woestenberg
+> > <leon.woestenberg@gmail.com> wrote:
+> >> Hello Khem,
+> >>
+> >> On Fri, Jun 18, 2010 at 12:39 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> >>> +# gcc 4.5 has this bug on thumb
+> >>> +# http://gcc.gnu.org/bugzilla/show_bug.cgi?id=44557
+> >>> +# so add -fomit-frame-pointer
+> >>> +# this will be removed once the above bug is fixed.
+> >>> +
+> >>> +
+> >>> +CFLAGS_append = " -fomit-frame-pointer"
+> >>> +
+> >> Can we make this append conditional for ARM-only or even thumb-only?
+> > 
+> > Yes it should be better to restrict it to arm only I will do that.
+> > I dont think we have instruction set (e.g. thumb) in standard overrides
+> > may be it will help if we added such an override.
 > 
-> Advantages? Less tasks, one less must have host utility (*cough*3rd 
-> party yum repos*cough*).  Having an exists but not right second known 
-> part of RPATH ensures cross recipes are now chrpath/patchelf patchable 
-> and gets us one step closer to pstaging being relocatable (will have to 
-> run some tests to look at the last corner cases).  Disadvantages? One 
-> "ugly" escape sequence in bitbake.conf.
+> You do have a thumb override(s) if your machine includes tune-thumb.inc.
 
-So for the moment, I need to retract this.  As soon as we hit a legacy 
-do_stage, we go off and mangle everyone.  So more incentive to clear all 
-of those out from -cross / -native :)  And as an aside, relocatable 
-should use the relative function we have.  Will include that next time.
+ah pretty cool thanks. At some point I remembered that :)
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+-Khem
 
 
