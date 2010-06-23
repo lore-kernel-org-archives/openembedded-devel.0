@@ -1,50 +1,50 @@
 Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORTwj-0001Qv-JI
+	(envelope-from <raj.khem@gmail.com>) id 1ORU41-00022Q-Tk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:41:10 +0200
-Received: by mail-pv0-f175.google.com with SMTP id 3so641430pvg.6
+	Wed, 23 Jun 2010 19:48:42 +0200
+Received: by pvg3 with SMTP id 3so644248pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 10:36:35 -0700 (PDT)
+	Wed, 23 Jun 2010 10:44:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
+	h=domainkey-signature:received:received:date:from:to:cc:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=1+nsGFx0FAhgsPuGicWmVsGtJ1w6AjBXFPEZv8dCR4g=;
-	b=EX05wsB7feJMl17mR3AJvDXVOF7g1poh2WNR9heSkUd4svtQL8Wqvkzb3UYi9g3sDn
-	ZMTLYB92HrVltarghGqPwOTNWJWBXm4R+sZa6iDjaVZYVnWVvv+EsKxWMBcVV1xFjvIW
-	7jL3a9cljPmQrDMuL/V76j/TFsp8hjxrEBhO0=
+	bh=Bsk+ZcCMEgtuem77+/qCGAX0xLUa6NjdBoBiRuDmMwI=;
+	b=OZabtIXAg5MAeZ4yv/jrcLDBoedBFovMbmm41UuXtrhX+XC7ycQuyjKLoRuHLDNHg9
+	KeQ4MxXQKL2s9csxNgJk+2JzmYzZnR7nqlcEfHoKVUTIa8ct/FPOOOtskMUPhZcFxZA4
+	QTH7qezALT64edVniDHnKKopyEm/XtUkt47cA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
+	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=FZtQ4gPd6ipPSwCYAecrHe2X4KwdfqPEyXi8WJA5/w35/+aKHejz3vrZRm63pL+6Qm
-	nKb4piacdb5uPsOIrFECoffz3Cr2xG1PCs24N59iy9jxZJhaLkaGOv9ppHxYXAJMsR4X
-	fmcdbXe0SxyUPAnms4ICYj3EuwbephmecmGco=
-Received: by 10.143.26.12 with SMTP id d12mr7632114wfj.242.1277314594579;
-	Wed, 23 Jun 2010 10:36:34 -0700 (PDT)
+	b=rJiNf1gYT3P/9K8RsuHOttHFSCfu8NtLrHbwmXF6bEw4DntBy+jY+5sjP+lh6HVPOX
+	AUb77u9iLZlkirh2slzYfiYg8zOZMPrtnIrHhUlQR1YCmO4T8ui6e5wd8atYeN9mTHbj
+	c9H6VUIT0jQUMYH+AM6J4z4GpRLlCywFn0B5o=
+Received: by 10.142.65.24 with SMTP id n24mr7500635wfa.302.1277314643375;
+	Wed, 23 Jun 2010 10:37:23 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id q10sm4726900rvp.20.2010.06.23.10.36.33
+	by mx.google.com with ESMTPS id b2sm1436492rvn.19.2010.06.23.10.37.21
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Jun 2010 10:36:33 -0700 (PDT)
-Date: Wed, 23 Jun 2010 10:37:38 -0700
+	Wed, 23 Jun 2010 10:37:21 -0700 (PDT)
+Date: Wed, 23 Jun 2010 10:38:28 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623173738.GH5535@gmail.com>
-References: <4C221A64.1020002@jak.nl>
-	<AANLkTikxjC0tXsg2Tz0ilTykFtmhBN7qm5GHMl3HixVK@mail.gmail.com>
+Message-ID: <20100623173828.GI5535@gmail.com>
+References: <1277307626-24691-1-git-send-email-vjensen@gmx.de>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTikxjC0tXsg2Tz0ilTykFtmhBN7qm5GHMl3HixVK@mail.gmail.com>
+In-Reply-To: <1277307626-24691-1-git-send-email-vjensen@gmx.de>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: DISTRO=Angstrom on i686-generic build failure on base-image
+Cc: Koen Kooi <koen@openembedded.org>, Vitus Jensen <vjensen@gmx.de>
+Subject: Re: [STABLE][PATCH] kernel bbclass: switch to u-boot-mkimage-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,31 +58,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 17:41:10 -0000
+X-List-Received-Date: Wed, 23 Jun 2010 17:48:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (23/06/10 07:57), J. L.  wrote:
-> I keep erroring out on the same thing currently.
+On (23/06/10 17:40), Vitus Jensen wrote:
+> From: Koen Kooi <koen@openembedded.org>
 > 
+> This is a long demanded change. The u-boot-mkimage is up to date to OE standards, while the openmoko one is not
+> (cherry picked from commit 7425e92b1c7918c8c3b609950dbdb44dd488f1fe)
 > 
-> 
-> On Wed, Jun 23, 2010 at 7:29 AM, Arjan <arjan@jak.nl> wrote:
-> 
-> > Hello all,
-> >
-> > I'm new here, so maybe this is a known issue. But I couln't find the
-> > solution.
-> >
-> > Building  the 'base-image' using:
-> >
-> > DISTRO   = "angstrom-2008.1"
-> > MACHINE ?= "i686-generic"
-> > this error occurs:
-> >
-> >  | checking for cups-config... /usr/bin/cups-config
+> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
 
-this is the problem. You have install libcups2-dev on your build machine
-and its picking that up I think if you remove it from host it should work.
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+> ---
+>  classes/kernel.bbclass |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
+> index 39a9af5..7279e00 100644
+> --- a/classes/kernel.bbclass
+> +++ b/classes/kernel.bbclass
+> @@ -14,7 +14,7 @@ python __anonymous () {
+>      kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
+>      if kerneltype == 'uImage':
+>      	depends = bb.data.getVar("DEPENDS", d, 1)
+> -    	depends = "%s u-boot-mkimage-openmoko-native" % depends
+> +    	depends = "%s u-boot-mkimage-native" % depends
+>      	bb.data.setVar("DEPENDS", depends, d)
+>  
+>      image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
+> -- 
+> 1.5.6.5
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
