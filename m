@@ -1,39 +1,40 @@
 Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORTwE-0001Qv-4q
+	(envelope-from <raj.khem@gmail.com>) id 1ORTwj-0001Qv-JI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:40:39 +0200
-Received: by pvg3 with SMTP id 3so641430pvg.6
+	Wed, 23 Jun 2010 19:41:10 +0200
+Received: by mail-pv0-f175.google.com with SMTP id 3so641430pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 10:36:01 -0700 (PDT)
+	Wed, 23 Jun 2010 10:36:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=MpozabWJF2u03WgY3QrFWQBsAL91Dr+7bb45C6nRve0=;
-	b=gkXpsMVHg3ZRyk7P0pUtcv4OY4a1Lsz1YK7CCLSyaXX6Pd70Zay8NxNfs+nqMi8Qzp
-	QaqVA2JsPqjkrM2r+lJKaEvkPv0WquQEv8k99f6AQWj0hnnuMZVsHo4ZpnAcMPuv+bRS
-	U5l0xki7g3puflzLiutBgrDqAgxm6pgTOA9yE=
+	bh=1+nsGFx0FAhgsPuGicWmVsGtJ1w6AjBXFPEZv8dCR4g=;
+	b=EX05wsB7feJMl17mR3AJvDXVOF7g1poh2WNR9heSkUd4svtQL8Wqvkzb3UYi9g3sDn
+	ZMTLYB92HrVltarghGqPwOTNWJWBXm4R+sZa6iDjaVZYVnWVvv+EsKxWMBcVV1xFjvIW
+	7jL3a9cljPmQrDMuL/V76j/TFsp8hjxrEBhO0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=qJQ3Vjo+YBrONFGPIBvIIdB8Dv0AXaJpqtSK9PLg8E+s+em5zJ9w/WaGgyg8V8GgNn
-	+uiT3OgArSI1TikgluYq76XhYTNBWZNbakIKbx7T4cwElTKDRq/gwxaKTUEkiveE8Z+Z
-	SKnPbfcF/Wj5zMc8Hq1+34vyG7qJI/s4kBjsE=
-Received: by 10.142.249.2 with SMTP id w2mr7489172wfh.25.1277314169997;
-	Wed, 23 Jun 2010 10:29:29 -0700 (PDT)
+	b=FZtQ4gPd6ipPSwCYAecrHe2X4KwdfqPEyXi8WJA5/w35/+aKHejz3vrZRm63pL+6Qm
+	nKb4piacdb5uPsOIrFECoffz3Cr2xG1PCs24N59iy9jxZJhaLkaGOv9ppHxYXAJMsR4X
+	fmcdbXe0SxyUPAnms4ICYj3EuwbephmecmGco=
+Received: by 10.143.26.12 with SMTP id d12mr7632114wfj.242.1277314594579;
+	Wed, 23 Jun 2010 10:36:34 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id x34sm1894278wfi.16.2010.06.23.10.29.28
+	by mx.google.com with ESMTPS id q10sm4726900rvp.20.2010.06.23.10.36.33
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Jun 2010 10:29:28 -0700 (PDT)
-Date: Wed, 23 Jun 2010 10:30:36 -0700
+	Wed, 23 Jun 2010 10:36:33 -0700 (PDT)
+Date: Wed, 23 Jun 2010 10:37:38 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623173036.GG5535@gmail.com>
-References: <98ADC3BE-97D0-4CFA-8DDE-06BCD5323360@keylevel.com>
+Message-ID: <20100623173738.GH5535@gmail.com>
+References: <4C221A64.1020002@jak.nl>
+	<AANLkTikxjC0tXsg2Tz0ilTykFtmhBN7qm5GHMl3HixVK@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <98ADC3BE-97D0-4CFA-8DDE-06BCD5323360@keylevel.com>
+In-Reply-To: <AANLkTikxjC0tXsg2Tz0ilTykFtmhBN7qm5GHMl3HixVK@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -43,7 +44,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Cross compile badness when building libsdl-directfb
+Subject: Re: DISTRO=Angstrom on i686-generic build failure on base-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,38 +58,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 17:40:40 -0000
+X-List-Received-Date: Wed, 23 Jun 2010 17:41:10 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (23/06/10 10:25), Chris Tapp wrote:
-> I'm trying to use libsdl for x86 using Angstrom.
+On (23/06/10 07:57), J. L.  wrote:
+> I keep erroring out on the same thing currently.
 > 
-> However, when libsdl-directfb is compiled I get a an error that
-> includes:
 > 
-> CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include/
-> directfb
 > 
-> It seems as if this is a known issue with libsdl-directfb_1.2.11.bb
-> and a _1.2.14.bb may have been produced, but this does not appear
-> when I do a git pull.
+> On Wed, Jun 23, 2010 at 7:29 AM, Arjan <arjan@jak.nl> wrote:
 > 
-> The x11 versions are at 1.2.14.
-> 
-> Does the 1.2.14 directfb version exist and, if so, where can I get it?
+> > Hello all,
+> >
+> > I'm new here, so maybe this is a known issue. But I couln't find the
+> > solution.
+> >
+> > Building  the 'base-image' using:
+> >
+> > DISTRO   = "angstrom-2008.1"
+> > MACHINE ?= "i686-generic"
+> > this error occurs:
+> >
+> >  | checking for cups-config... /usr/bin/cups-config
 
-I think no. care to create a recipe ?
-
-> 
-> Thanks !
-> 
-> Chris
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+this is the problem. You have install libcups2-dev on your build machine
+and its picking that up I think if you remove it from host it should work.
 
 
