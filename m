@@ -1,50 +1,38 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORU41-00022Q-Tk
+	(envelope-from <dokuwiki@keylevel.com>) id 1ORV6o-0004Ld-SV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:48:42 +0200
-Received: by pvg3 with SMTP id 3so644248pvg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 10:44:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Bsk+ZcCMEgtuem77+/qCGAX0xLUa6NjdBoBiRuDmMwI=;
-	b=OZabtIXAg5MAeZ4yv/jrcLDBoedBFovMbmm41UuXtrhX+XC7ycQuyjKLoRuHLDNHg9
-	KeQ4MxXQKL2s9csxNgJk+2JzmYzZnR7nqlcEfHoKVUTIa8ct/FPOOOtskMUPhZcFxZA4
-	QTH7qezALT64edVniDHnKKopyEm/XtUkt47cA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=rJiNf1gYT3P/9K8RsuHOttHFSCfu8NtLrHbwmXF6bEw4DntBy+jY+5sjP+lh6HVPOX
-	AUb77u9iLZlkirh2slzYfiYg8zOZMPrtnIrHhUlQR1YCmO4T8ui6e5wd8atYeN9mTHbj
-	c9H6VUIT0jQUMYH+AM6J4z4GpRLlCywFn0B5o=
-Received: by 10.142.65.24 with SMTP id n24mr7500635wfa.302.1277314643375;
-	Wed, 23 Jun 2010 10:37:23 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id b2sm1436492rvn.19.2010.06.23.10.37.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Jun 2010 10:37:21 -0700 (PDT)
-Date: Wed, 23 Jun 2010 10:38:28 -0700
-From: Khem Raj <raj.khem@gmail.com>
+	Wed, 23 Jun 2010 20:55:39 +0200
+Received: from durham.keylevel.com ([109.224.134.115]:32076
+	helo=[192.168.1.98])
+	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
+	(envelope-from <dokuwiki@keylevel.com>) id 1ORV2O-0005GG-95
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Jun 2010 19:51:04 +0100
+Message-Id: <1E5098A0-B9E7-4B98-B9DF-D98DE9EBED70@keylevel.com>
+From: Chris Tapp <dokuwiki@keylevel.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623173828.GI5535@gmail.com>
-References: <1277307626-24691-1-git-send-email-vjensen@gmx.de>
-MIME-Version: 1.0
-In-Reply-To: <1277307626-24691-1-git-send-email-vjensen@gmx.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <20100623173036.GG5535@gmail.com>
+Mime-Version: 1.0 (Apple Message framework v936)
+Date: Wed, 23 Jun 2010 19:51:01 +0100
+References: <98ADC3BE-97D0-4CFA-8DDE-06BCD5323360@keylevel.com>
+	<20100623173036.GG5535@gmail.com>
+X-Mailer: Apple Mail (2.936)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - keylevel.com
+X-SA-Exim-Connect-IP: 80.254.228.43
+X-SA-Exim-Mail-From: dokuwiki@keylevel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Koen Kooi <koen@openembedded.org>, Vitus Jensen <vjensen@gmx.de>
-Subject: Re: [STABLE][PATCH] kernel bbclass: switch to u-boot-mkimage-native
+Subject: Re: Cross compile badness when building libsdl-directfb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,44 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 17:48:43 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 23 Jun 2010 18:55:39 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-On (23/06/10 17:40), Vitus Jensen wrote:
-> From: Koen Kooi <koen@openembedded.org>
-> 
-> This is a long demanded change. The u-boot-mkimage is up to date to OE standards, while the openmoko one is not
-> (cherry picked from commit 7425e92b1c7918c8c3b609950dbdb44dd488f1fe)
-> 
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+>> Does the 1.2.14 directfb version exist and, if so, where can I get  
+>> it?
+>
+> I think no. care to create a recipe ?
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+This is all still very new to me, but I'm happy to give it a go.
 
-> ---
->  classes/kernel.bbclass |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
-> diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
-> index 39a9af5..7279e00 100644
-> --- a/classes/kernel.bbclass
-> +++ b/classes/kernel.bbclass
-> @@ -14,7 +14,7 @@ python __anonymous () {
->      kerneltype = bb.data.getVar('KERNEL_IMAGETYPE', d, 1) or ''
->      if kerneltype == 'uImage':
->      	depends = bb.data.getVar("DEPENDS", d, 1)
-> -    	depends = "%s u-boot-mkimage-openmoko-native" % depends
-> +    	depends = "%s u-boot-mkimage-native" % depends
->      	bb.data.setVar("DEPENDS", depends, d)
->  
->      image = bb.data.getVar('INITRAMFS_IMAGE', d, True)
-> -- 
-> 1.5.6.5
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Are there any guidelines that I should be following? I'll probably  
+start by trying to copy the 1.2.11 one and see where that leads...
+
+Chris
+
 
 
