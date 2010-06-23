@@ -1,44 +1,57 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from tx2ehsobe002.messaging.microsoft.com ([65.55.88.12]
+	helo=TX2EHSOBE004.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORF3n-0000Ih-8q
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1ORHEi-0000vD-Vn
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 03:47:38 +0200
-Received: by pvg3 with SMTP id 3so325880pvg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 22 Jun 2010 18:42:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=QvtaBlUD2I/omGaIOBt1bA9uVEMkMSBGn2mKMVB2X5U=;
-	b=a7Mwz6ASA0z8PF/NAwBBhRlNkm9qiAAONId5jh4L5FDAX8O7aR3PdgI1lBx3mm3QLX
-	RmyE7LlBdxqwbAr6MSitBI1k5rT6VhPKimREuAkhBdGzYiodQRmFLjsDkwzC3TXWxvQm
-	lSGdux8Fcf3OqOZasw/tXAcYLjYSEyoOg3g/Y=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=A2Hje4ryrMve0vIHCtihzKGjX/vqBQIecj0PKgEuH+WRA6DMaP0YRLchqCJ8tydrqA
-	8F3U+VOCMkMX2ez/IfmGmh2ax8D9IIMXADUC1q/FNuUSgkJfTvrrnNcQSU8aM9MxqlpO
-	g+hMPrRnglHuMZLgXh75nTQSt/d0jhswAvSSY=
-Received: by 10.114.187.40 with SMTP id k40mr6710929waf.30.1277257360402;
-	Tue, 22 Jun 2010 18:42:40 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id b6sm50829025wam.21.2010.06.22.18.42.39
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 22 Jun 2010 18:42:39 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 22 Jun 2010 18:42:34 -0700
-Message-Id: <1277257355-29280-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	Wed, 23 Jun 2010 06:06:54 +0200
+Received: from mail37-tx2-R.bigfish.com (10.9.14.241) by
+	TX2EHSOBE004.bigfish.com (10.9.40.24) with Microsoft SMTP Server id
+	8.1.340.0; Wed, 23 Jun 2010 04:02:15 +0000
+Received: from mail37-tx2 (localhost.localdomain [127.0.0.1])	by
+	mail37-tx2-R.bigfish.com (Postfix) with ESMTP id 79B59DA032B	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 04:02:15 +0000 (UTC)
+X-SpamScore: -47
+X-BigFish: VPS-47(zz1432N98dN14ffO936eM1447R1443N9371Pzz1202hzzz32i2a8h43h61h)
+Received: from mail37-tx2 (localhost.localdomain [127.0.0.1]) by mail37-tx2
+	(MessageSwitch) id 1277265734925275_29352;
+	Wed, 23 Jun 2010 04:02:14 +0000 (UTC)
+Received: from TX2EHSMHS015.bigfish.com (unknown [10.9.14.237])	by
+	mail37-tx2.bigfish.com (Postfix) with ESMTP id D50F4B004C	for
+	<openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 04:02:14 +0000 (UTC)
+Received: from kcinpunhjhc02.kpit.com (220.225.38.51) by
+	TX2EHSMHS015.bigfish.com (10.9.99.115) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Wed, 23 Jun 2010 04:02:12 +0000
+Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
+	kcinpunhjhc02.kpit.com ([172.10.16.124]) with mapi;
+	Wed, 23 Jun 2010 09:32:10 +0530
+From: Soumya R <Soumya.R@kpitcummins.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 23 Jun 2010 09:32:09 +0530
+Thread-Topic: [oe] Qt-4.7.0.beta1 Missing or unbuildable dependency chain
+	was: ['qt4-embedded-mkspecs']
+Thread-Index: AcsSG7vSmJc/DSc0QliU9AJvRDKLogAa+fTl
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFBC@KCINPUNHJCMS01.kpit.com>
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CFB6@KCINPUNHJCMS01.kpit.com>,
+	<20100622145537.GC32544@gmail.com>
+In-Reply-To: <20100622145537.GC32544@gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-Reverse-DNS: unknown
+X-SA-Exim-Connect-IP: 65.55.88.12
+X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gpm-1.99.7: Add recipe.
+Subject: Re: Qt-4.7.0.beta1 Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,118 +65,101 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 01:47:39 -0000
+X-List-Received-Date: Wed, 23 Jun 2010 04:06:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/gpm/gpm-1.99.7/init          |   32 ++++++++++++++++++++++++++++++++
- recipes/gpm/gpm-1.99.7/no-docs.patch |   18 ++++++++++++++++++
- recipes/gpm/gpm_1.99.7.bb            |   30 ++++++++++++++++++++++++++++++
- 3 files changed, 80 insertions(+), 0 deletions(-)
- create mode 100644 recipes/gpm/gpm-1.99.7/init
- create mode 100644 recipes/gpm/gpm-1.99.7/no-docs.patch
- create mode 100644 recipes/gpm/gpm_1.99.7.bb
+ Khem,
+   =
 
-diff --git a/recipes/gpm/gpm-1.99.7/init b/recipes/gpm/gpm-1.99.7/init
-new file mode 100644
-index 0000000..f90fce9
---- /dev/null
-+++ b/recipes/gpm/gpm-1.99.7/init
-@@ -0,0 +1,32 @@
-+#! /bin/sh  
-+
-+# Grab the common functions
-+#. /etc/init.d/functions
-+
-+# FIXME: 
-+# Add a configuration file for GPM here
-+
-+test -x /usr/sbin/gpm || exit 0
-+
-+case "$1" in
-+  start)
-+    if [ ! -p /dev/gpmdata ]; then
-+    	mkfifo /dev/gpmdata
-+    fi
-+
-+    echo "Starting GPM:" 
-+    start-stop-daemon -S -x /usr/sbin/gpm -- -R -m /dev/psaux -t ps2
-+    ;;
-+  stop)
-+    echo "Stopping GPM:" 
-+    start-stop-daemon -K -x /usr/sbin/gpm
-+    ;;
-+  restart|force-reload) 
-+    $0 stop
-+    $0 start
-+    ;;
-+  *)
-+    usage /etc/init.d/gpm
-+esac
-+
-+exit 0
-diff --git a/recipes/gpm/gpm-1.99.7/no-docs.patch b/recipes/gpm/gpm-1.99.7/no-docs.patch
-new file mode 100644
-index 0000000..f10217a
---- /dev/null
-+++ b/recipes/gpm/gpm-1.99.7/no-docs.patch
-@@ -0,0 +1,18 @@
-+
-+#
-+# Patch managed by http://www.mn-logistik.de/unsupported/pxa250/patcher
-+#
-+
-+Index: gpm-1.99.7/Makefile.in
-+===================================================================
-+--- gpm-1.99.7.orig/Makefile.in	2008-07-24 03:36:35.000000000 -0700
-++++ gpm-1.99.7/Makefile.in	2010-06-22 18:28:45.269507001 -0700
-+@@ -19,7 +19,7 @@
-+ # user-overridable flags, but it's also all the implicit rule looks at.
-+ # missing ?
-+ 
-+-SUBDIRS = src doc contrib gpm2
-++SUBDIRS = src
-+ 
-+ 
-+ ### simple, but effective rules
-diff --git a/recipes/gpm/gpm_1.99.7.bb b/recipes/gpm/gpm_1.99.7.bb
-new file mode 100644
-index 0000000..bc24472
---- /dev/null
-+++ b/recipes/gpm/gpm_1.99.7.bb
-@@ -0,0 +1,30 @@
-+DESCRIPTION = "GPM (General Purpose Mouse) is a mouse server \
-+for the console and xterm, with sample clients included \
-+(emacs, etc)."
-+SECTION = "console/utils"
-+LICENSE = "GPL"
-+DEPENDS = "ncurses"
-+
-+PR = "r0"
-+
-+SRC_URI = "ftp://arcana.linux.it/pub/gpm/gpm-${PV}.tar.bz2 \
-+	   file://no-docs.patch \
-+	   file://init"
-+
-+inherit autotools update-rc.d
-+
-+INITSCRIPT_NAME = "gpm"
-+INITSCRIPT_PARAMS = "defaults"
-+
-+#export LIBS = "-lm"
-+
-+do_install () {
-+	oe_runmake 'ROOT=${D}' install
-+	install -m 0644 src/headers/gpm.h ${D}${includedir}
-+	install -d ${D}/${sysconfdir}/init.d
-+	install -m 0755 ${WORKDIR}/init ${D}/${sysconfdir}/init.d/gpm
-+	cd ${D}${libdir} && ln -sf libgpm.so.1.19.0 libgpm.so.1
-+}
-+SRC_URI[md5sum] = "9fdddf5f53cb11d40bb2bb671d3ac544"
-+SRC_URI[sha256sum] = "6071378b24494e36ca3ef6377606e7e565040413c86704753a162d2180af32ee"
-+
--- 
-1.7.1
+    Thanks for the reply.. Its my own recipe.. How do i resolve it??
+
+Regards,
+Soumya
+________________________________________
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] On Behalf Of Khem Raj [raj.khem@gmail.com]=
+
+Sent: Tuesday, June 22, 2010 8:25 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] Qt-4.7.0.beta1 Missing or unbuildable dependency chain wa=
+s: ['qt4-embedded-mkspecs']
+
+On (22/06/10 11:35), Soumya R wrote:
+> Hi All,
+>
+>       I am trying to build Qt Embedded SDK for Qt-4.7.0.beta1.. when i ru=
+n
+> bitbake meta-toolchain-avn-qte i got the following error
+>
+>
+> NOTE: Handling BitBake files: - (0169/0169) [100 %]
+> NOTE: Parsing finished. 163 cached, 5 parsed, 1 skipped, 0 masked.
+> NOTE: Resolving any missing task queue dependencies
+> ERROR: '['/home/likewise-open/KPIT/soumyar/openembedded/recipes/tasks/tas=
+k-avn-qte-toolchain-target.bb']' RDEPENDS/RRECOMMENDS or otherwise requires=
+ the runtime entity 'qt4-embedded-mkspecs' but it wasn't found in any PACKA=
+GE or RPROVIDES variables
+> NOTE: Runtime target 'qt4-embedded-mkspecs' is unbuildable, removing...
+
+I dont see this recipe in oe repo. Is it your own recipe ?
+
+> Missing or unbuildable dependency chain was: ['qt4-embedded-mkspecs']
+> NOTE: Runtime target 'task-avn-qte-toolchain-target' is unbuildable, remo=
+ving...
+> Missing or unbuildable dependency chain was: ['task-avn-qte-toolchain-tar=
+get', 'qt4-embedded-mkspecs']
+> ERROR: Required build target 'meta-toolchain-avn-qte' has no buildable pr=
+oviders.
+> Missing or unbuildable dependency chain was: ['meta-toolchain-avn-qte', '=
+task-avn-qte-toolchain-target', 'qt4-embedded-mkspecs']
+>
+>      It is asking for runtime dependencies  'qt4-embedded-mkspecs' how do=
+ I get these packages???
+>
+> Thanks in advance:-)
+>
+>
+> Regards,
+> Soumya
+>
+> This message contains information that may be privileged or confidential =
+and is the property of the KPIT Cummins Infosystems Ltd. It is intended onl=
+y for the person to whom it is addressed. If you are not the intended recip=
+ient, you are not authorized to read, print, retain copy, disseminate, dist=
+ribute, or use this message or any part thereof. If you receive this messag=
+e in error, please notify the sender immediately and delete all copies of t=
+his message. KPIT Cummins Infosystems Ltd. does not accept any liability fo=
+r virus infected mails.
+>
+>
+
+Crap. You are talking on public mailing lists and these are archived. These=
+ notices dont make sense and in future make
+sure that you strip them off when sending emails to public mailing lists.
+
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+
+This message contains information that may be privileged or confidential an=
+d is the property of the KPIT Cummins Infosystems Ltd. It is intended only =
+for the person to whom it is addressed. If you are not the intended recipie=
+nt, you are not authorized to read, print, retain copy, disseminate, distri=
+bute, or use this message or any part thereof. If you receive this message =
+in error, please notify the sender immediately and delete all copies of thi=
+s message. KPIT Cummins Infosystems Ltd. does not accept any liability for =
+virus infected mails.
+
 
 
 
