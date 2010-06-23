@@ -1,46 +1,41 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORTjR-00063b-0f
+	(envelope-from <raj.khem@gmail.com>) id 1ORTkQ-0006AU-9C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 19:27:27 +0200
-Received: by pxi2 with SMTP id 2so597419pxi.6
+	Wed, 23 Jun 2010 19:28:27 +0200
+Received: by pzk3 with SMTP id 3so189365pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 10:22:47 -0700 (PDT)
+	Wed, 23 Jun 2010 10:23:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=KyaqLfkn8ap6a731N1IF8pI2isg6vckxLF8g59/PI+4=;
-	b=SgnVfdhhN2cTNrbAAAcAkAeA79HmikatX8j5kNNF/GXz98rduZa1UIfWq5SH8YJHS8
-	AETp/AGPoGGCpfnWUrUyCRXeEotPHN8QiTgvC22nQkeQDqXUHA7nxwxsYtzo5lvKBnQP
-	iHkD/dbIQKU/Hp+zExBBaPidlS41MAm3J59wU=
+	bh=BP0LEBvvLpK1Hvy4hisNlkrWENSXN7ZNZGiDfRvENL8=;
+	b=F9xiFbIpNxHeaqnwuJEQdUytBlbF5KsahN//0Y40xJ6YQ52zhEFBmv0WCELXHu+WOF
+	aXhFDRrvlDO8DgYKNCg+58I17gD8AeDwTpMDZScLUkfIvoChrrdTCrBRkUUPVwBtPO2m
+	mZWMpYOw1+GONJT1RmOWtHbJcK2CI0xB29Of8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=JB0lGD1hJbqU/Q0b33GVUhgyymrtY1BubqPad+/hIB5YJUm9EQgCaeBrz+NE6LtRR8
-	WolQiEFAZ1L8X4wuqDOf0VajxngDMMbKq5FFOaoPwAf451bZ4hDWz3YUnF95tm8UtFHb
-	dg4apfbb937tFjUS5pORMjkxxvccvfZV7LoOk=
-Received: by 10.115.80.1 with SMTP id h1mr7935231wal.116.1277313766579;
-	Wed, 23 Jun 2010 10:22:46 -0700 (PDT)
-Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
-	[99.57.141.118])
-	by mx.google.com with ESMTPS id n29sm50666119wae.16.2010.06.23.10.22.45
+	b=A7N6DCmIq4OlEd627kloi9cRBVUvZSwxGrPbz865EtW/MCgHQaCHFI9gWlOW0QPlH7
+	0R8dUnuSLoFBQ5Ua9xJPGT2GBdSzmCywa5CgXRbG2Dhcl4WAVNz9HYrgtZSDY4UwOhcQ
+	+Xdtmb54ZKrZ9R7dZ9D6PH11/pSx83fNH9iNs=
+Received: by 10.142.10.27 with SMTP id 27mr7440899wfj.265.1277313828813;
+	Wed, 23 Jun 2010 10:23:48 -0700 (PDT)
+Received: from gmail.com ([99.57.141.118])
+	by mx.google.com with ESMTPS id l29sm6091870rvb.16.2010.06.23.10.23.47
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 23 Jun 2010 10:22:45 -0700 (PDT)
-Date: Wed, 23 Jun 2010 10:23:52 -0700
+	Wed, 23 Jun 2010 10:23:47 -0700 (PDT)
+Date: Wed, 23 Jun 2010 10:24:53 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623172352.GC5535@gmail.com>
-References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
-	<hvl1uc$bol$1@dough.gmane.org>
-	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
-	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
-	<hvsjso$8bh$1@dough.gmane.org>
-	<AANLkTiltHfFZiUj-QUPhXP4CI3U2rD4QG5S157TsYeIZ@mail.gmail.com>
+Message-ID: <20100623172453.GD5535@gmail.com>
+References: <4C1FDFAE.8040704@mentor.com> <20100622144759.GB32544@gmail.com>
+	<4C210735.5090202@mentor.com>
 MIME-Version: 1.0
-In-Reply-To: <AANLkTiltHfFZiUj-QUPhXP4CI3U2rD4QG5S157TsYeIZ@mail.gmail.com>
+In-Reply-To: <4C210735.5090202@mentor.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 209.85.210.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -48,7 +43,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: introducing a new architecture/machine; policy ? (and a question)
+Subject: Re: [RFC, PATCH] Make packaged-staging use more correct PSTAGE_PKGARCH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,105 +57,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 17:27:27 -0000
+X-List-Received-Date: Wed, 23 Jun 2010 17:28:27 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (23/06/10 12:09), Frans Meulenbroeks wrote:
-> 2010/6/23 Koen Kooi <k.kooi@student.utwente.nl>:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 23-06-10 10:53, Frans Meulenbroeks wrote:
-> >> 2010/6/20 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> >>> 2010/6/20 Koen Kooi <k.kooi@student.utwente.nl>:
-> >>>> -----BEGIN PGP SIGNED MESSAGE-----
-> >>>> Hash: SHA1
-> >>>>
-> >>>> On 20-06-10 11:58, Frans Meulenbroeks wrote:
-> >>>>> Hi,
-> >>>>>
-> >>>>> I'm about to complete bringing a new architecture (nios2 with mmu) and
-> >>>>> machine (cyclone III FPGA starter kit, and maybe also the Nios2
-> >>>>> Embeddeded Evaluation Kit (aka neek)) to oe.
-> >>>>> Is there a policy on on the process how to do this.
-> >>>>
-> >>>> Have a look at the nios2 patches Leon sent last december, they were
-> >>>> reviewed on this list, but not committed.
-> >>>
-> >>> Koen, thanks for reminding me the look at the review comments.
-> >>>
-> >>> I'm well aware of the work of Leon and Walter (and they are well aware
-> >>> of my work).
-> >>> Note that what Leon posted was for a non-mmu nios2 core, whereas the
-> >>> changes I have is for an mmu core.
-> >>>
-> >>> Triggered by Koens reminder I revisited the review comments. Actually
-> >>> none but one are applicable for me.
-> >>> The one that is applicable is the one about pinning versions in
-> >>> machine descriptions.
-> >>> I have also done that, as there are simply no other versions of
-> >>> binutils and gcc that can be used by this hardware.
-> >>> Also I don't feel empowered to make changes in distribution specific files.
-> >>>
-> >>> The only alternative way that I can think of is doing something like:
-> >>> DEFAULT_PREFERENCE_nios2 = "1" in the recipes I need.
-> >>> No idea if that overrules the distro settings or not, but I can give
-> >>> it a try later today.
+On (22/06/10 11:55), Tom Rini wrote:
+> Khem Raj wrote:
+> >On (21/06/10 14:54), Tom Rini wrote:
+> >>packaged-staging.bbclass: Change PSTAGE_PKGARCH to something dynamic
 > >>
-> >> Well, tried it and apparently a distro pin has priority over a
-> >> DEFAULT_PREFERENCE_nios2 in the recipe.
-> >> Guess I'll have to do the pinning the the machine description as
-> >> described above.
+> >>Currently, we make all pstage packages be locked to BUILD_SYS which
+> >>causes annoying warnings in some cases and doesn't allow for sharing
+> >>between say 32 and 64bit (which is valid for target bits).
+> >>
+> >>This changes to ${PACKAGE_ARCH}-${HOST_SYS} for everything and
+> >>reworks the opkg.conf we generate to add entries as needed.
+> >>
+> >>There is an alternative, suggested by Chris Larson, that we modify
+> >>PSTAGE_PKGARCH in an anon python function so that we can avoid
+> >>things like 'x86_64-x86_64-linux' in native packages and similar
+> >>duplication in sdk packages, or otherwise be more dynamic (use
+> >>HOST_OS instead of SYS and then catch the cross case, etc).
 > >
-> > NO! Machines *never* pin versions, that's what distros and to a lesser
-> > extent recipes are for.
+> >I think this approach sounds better having same arch repeated twice
+> >would be confusing
 > 
-> The issue is that I have no way to specify which versions of a
-> toolchain that are supported (and to enforce that only a supported
-> version works).
-> If the DEFAULT_PREFERENCE in recipes had priority above whatever a
-> distro pins using DEFAULT_PREFERENCE in the recipe could work.
-> (e.g. if  DEFAULT_PREFERENCE = "-1" does mean something like: "does
-> not work" and that is respected by the distro).
+> Here we go.  This also reworks generating opkg.conf a little bit (it
+> had multiple entries before due to a lazy grep).
 > 
-> Actually I do not want the machine to pin the recipe, I want the
-> architecture to pin the recipe (or at least tell which versions are
-> sound, and avoid that non-functional versions are used).
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-you can use the TARGET_ARCH override to do that
-> 
-> If I cannot pin in a machine file, the only alternative seems to be to
-> make gcc-nios2-* recipes and use a virtual/gcc in the conf file to
-> select gcc-nios2 as the preferred versions (just like a lot of
-> machines do with virtual/kernel). Seems like a waste of effort to me,
-> but oh well
+very nice
 
-Already suggested a solution in prior reply.
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > 
-> BTW where did the rule come from that machines never pin versions?
-> When was that decided?
-> And as an owner of the machine file, isn't its contents something
-> which is at my discretion ???
-
-Well yes but within bounds of design and common structure. You dont get a license to
-kill with maintainership if you know what I mean :)
-
+> diff --git a/classes/packaged-staging.bbclass
+> b/classes/packaged-staging.bbclass
+> index 8a98940..19a6a6d 100644
+> --- a/classes/packaged-staging.bbclass
+> +++ b/classes/packaged-staging.bbclass
+> @@ -12,7 +12,7 @@
+>  # bitbake.conf set PSTAGING_ACTIVE = "0", this class sets to "1" if
+> we're active
+>  #
+>  PSTAGE_PKGVERSION = "${PV}-${PR}"
+> -PSTAGE_PKGARCH    = "${BUILD_SYS}"
+> +PSTAGE_PKGARCH    = "${PACKAGE_ARCH}-${HOST_OS}"
+>  PSTAGE_EXTRAPATH  ?= "/${OELAYOUT_ABI}/${DISTRO_PR}/"
+>  PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
+>  PSTAGE_PKGPN      = "${@bb.data.expand('staging-${PN}-${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}',
+> d).replace('_', '-')}"
+> @@ -28,6 +28,12 @@ PSTAGE_NATIVEDEPENDS = "\
 > 
-> And as a final remark:
-> I did a quick grep in conf/machine:
-> $ grep PREFERRED_VERSION * -l | wc
->      71      71    1065
-> $ grep PREFERRED_VERSION * | wc
->     104     314    5761
+>  BB_STAMP_WHITELIST = "${PSTAGE_NATIVEDEPENDS}"
 > 
-> So there are 71 machine descriptions that pin at least one package. In
-> total these 71 contain 104 pins.
-> Most of these pin kernel and/or u-boot but there are also two other
-> machines that pin gcc.
+> +python __anonymous() {
+> +    # We need PSTAGE_PKGARCH to contain information about the target.
+> +    if bb.data.inherits_class('cross', d):
+> +        bb.data.setVar('PSTAGE_PKGARCH',
+> "${HOST_SYS}-${PACKAGE_ARCH}-${TARGET_OS}", d)
+> +}
+> +
+>  python () {
+>      pstage_allowed = True
 > 
-> Frans.
+> @@ -148,14 +154,13 @@ staging_helper () {
+>  	# Assemble appropriate opkg.conf
+>  	conffile=${PSTAGE_MACHCONFIG}
+>  	mkdir -p ${PSTAGE_WORKDIR}/pstaging_lists
+> +	arch="${PSTAGE_PKGARCH}"
+>  	if [ ! -e $conffile ]; then
+> -		ipkgarchs="${BUILD_SYS}"
+> -		priority=1
+> -		for arch in $ipkgarchs; do
+> -			echo "arch $arch $priority" >> $conffile
+> -			priority=$(expr $priority + 5)
+> -		done
+> +		echo "arch $arch 1" > $conffile
+>  		echo "dest root /" >> $conffile
+> +	elif [ `grep -c " $arch " $conffile` -eq 0 ]; then
+> +		priority=$(expr `grep -cE "^arch" $conffile` + 1)
+> +		sed -i -e "/dest/iarch $arch $priority" $conffile
+>  	fi
+>  	if [ ! -e ${TMPDIR}${libdir_native}/opkg/info/ ]; then
+>  		mkdir -p ${TMPDIR}${libdir_native}/opkg/info/
+> 
+> -- 
+> Tom Rini
+> Mentor Graphics Corporation
 > 
 > _______________________________________________
 > Openembedded-devel mailing list
