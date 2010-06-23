@@ -1,39 +1,23 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1ORMrm-0007At-PE
+	(envelope-from <philip@balister.org>) id 1ORMw8-00058u-5J
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 12:07:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 17C45A54AF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 11:02:56 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id LSeZG5o32XCC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 11:02:54 +0100 (BST)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 52581A54AC
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 11:02:54 +0100 (BST)
-Date: Wed, 23 Jun 2010 11:03:15 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Wed, 23 Jun 2010 12:12:16 +0200
+Received: (qmail 26161 invoked by uid 1003); 23 Jun 2010 10:07:25 -0000
+Received: from localhost (HELO ?172.30.0.245?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 23 Jun 2010 10:07:24 -0000
+Message-ID: <4C21DCD6.4090509@balister.org>
+Date: Wed, 23 Jun 2010 12:07:18 +0200
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-3.fc13 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100623110315.16293a95@xora-desktop.xora.org.uk>
-In-Reply-To: <AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
-References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
-	<hvl1uc$bol$1@dough.gmane.org>
-	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
-	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
-	<hvsjso$8bh$1@dough.gmane.org>
-	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>
-	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>	<hvl1uc$bol$1@dough.gmane.org>	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>	<hvsjso$8bh$1@dough.gmane.org>	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
+	<20100623110315.16293a95@xora-desktop.xora.org.uk>
+In-Reply-To: <20100623110315.16293a95@xora-desktop.xora.org.uk>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -54,29 +38,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 10:07:35 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Wed, 23 Jun 2010 10:12:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Wed, 23 Jun 2010 11:54:21 +0200
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
+On 06/23/2010 12:03 PM, Graeme Gregory wrote:
+> On Wed, 23 Jun 2010 11:54:21 +0200
+> Frans Meulenbroeks<fransmeulenbroeks@gmail.com>  wrote:
+>
+>> 2010/6/23 Graeme Gregory<dp@xora.org.uk>:
+>>>>>> Also I don't feel empowered to make changes in distribution
+>>>>>> specific files.
+>>>
+>>> Why not, chances are Angstrom maintainers would be quite happy for
+>>> you to patch angstrom*.conf if you ask us.
+>>>
+>>> Graeme
+>>
+>> distribution != angstrom
+>> There are more distributions out there.
 
-> 2010/6/23 Graeme Gregory <dp@xora.org.uk>:
-> >> >> Also I don't feel empowered to make changes in distribution
-> >> >> specific files.
-> >
-> > Why not, chances are Angstrom maintainers would be quite happy for
-> > you to patch angstrom*.conf if you ask us.
-> >
-> > Graeme
-> 
-> distribution != angstrom
-> There are more distributions out there.
-> 
-I think the other distros are almost as friendly as us :-)
+Right now, toolchain selection is done in distro files not machine 
+files. I agree this is not the clearest approach, however adding the 
+toolchain selection to the machine files may have unexpected side effects.
 
-Anyway the sane-* files are free for all with Acks.
+I would ask DISTRO maintainers to add the needed overrides, and explore 
+alternative methods as a separate effort.
 
-Graeme
+Philip
+
+
+>>
+> I think the other distros are almost as friendly as us :-)
+>
+> Anyway the sane-* files are free for all with Acks.
+>
+> Graeme
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
