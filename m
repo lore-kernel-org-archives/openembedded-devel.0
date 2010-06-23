@@ -1,43 +1,52 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ORNMo-0000Cj-Gv for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 12:39:53 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ORNIO-0002or-6i for openembedded-devel@lists.openembedded.org;
-	Wed, 23 Jun 2010 12:35:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 12:35:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1ORO17-0007Fj-JJ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 23 Jun 2010 13:21:18 +0200
+Received: by bwz14 with SMTP id 14so2127531bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 23 Jun 2010 12:35:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 23 Jun 2010 04:16:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=+PrC/4BOgpoDGPjRcmj91mSARZPkrQAs3yUUsLKKZQo=;
+	b=BjxZn2Wsv3rewgZWZH+65KV1ZDNm7M8RTPJF94933qefk+IXqWA9XkdEeBSYiuxFWf
+	OfnsvILVRk+k3GGkW/nRc0kLWSnUvOT76QB6Dh4kiYchsr363fRbpZMeSa5RI9xf9uwd
+	fjcfzDqMBOkaWJfJu0SmCFEKSGP2c6RJbUslY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=dTBLd+1OTwp8etMbh1dwT47FABJ44dg5nHOT+6Vztsfw1jCVy4vofrq1ff9+TGEItr
+	TVZljRUaDQXl+T/oIaoK3i3Sm0sDzh/nnvqFAcEshcR5g1Q7hhM7MKfY3zcI8TWOnxLD
+	6OIINQPO4elukp9PECH6JIjaMH0KSEySZiPBE=
+MIME-Version: 1.0
+Received: by 10.204.47.11 with SMTP id l11mr5408830bkf.96.1277291802749; Wed, 
+	23 Jun 2010 04:16:42 -0700 (PDT)
+Received: by 10.204.77.132 with HTTP; Wed, 23 Jun 2010 04:16:42 -0700 (PDT)
+In-Reply-To: <hvsnsn$mvd$2@dough.gmane.org>
+References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>
+	<hvl1uc$bol$1@dough.gmane.org>
+	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>
+	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>
+	<hvsjso$8bh$1@dough.gmane.org>
+	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>
+	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>
+	<20100623110315.16293a95@xora-desktop.xora.org.uk>
+	<4C21DCD6.4090509@balister.org> <hvsnsn$mvd$2@dough.gmane.org>
+Date: Wed, 23 Jun 2010 13:16:42 +0200
+Message-ID: <AANLkTilv_BG9-Ksq5-fraEY4edmdFhfKTIgM-B2Gojq1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 23 Jun 2010 12:32:55 +0200
-Message-ID: <hvsnsn$mvd$2@dough.gmane.org>
-References: <AANLkTimD-uu-SpcUvHIMWE1cQ5wCSyisHRwyFfasdX90@mail.gmail.com>	<hvl1uc$bol$1@dough.gmane.org>	<AANLkTil2-UJTgWzmXJI6eESvqjTowq0y_kZTpm0zNAN8@mail.gmail.com>	<AANLkTikz8wGLZKz6Z-o4YpC8C62P-whW_znpSKlV8yEx@mail.gmail.com>	<hvsjso$8bh$1@dough.gmane.org>	<20100623103600.77c5a6d9@xora-desktop.xora.org.uk>	<AANLkTimwSjUiEgwAU-l66u9Da5ckM4p2yD4naQq3g_ZZ@mail.gmail.com>	<20100623110315.16293a95@xora-desktop.xora.org.uk>
-	<4C21DCD6.4090509@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <4C21DCD6.4090509@balister.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: introducing a new architecture/machine; policy ? (and a question)
+Subject: Re: introducing a new architecture/machine; policy ? (and a 	question)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,44 +60,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 23 Jun 2010 10:39:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 23 Jun 2010 11:21:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 23-06-10 12:07, Philip Balister wrote:
-> On 06/23/2010 12:03 PM, Graeme Gregory wrote:
->> On Wed, 23 Jun 2010 11:54:21 +0200
->> Frans Meulenbroeks<fransmeulenbroeks@gmail.com>  wrote:
->>
->>> 2010/6/23 Graeme Gregory<dp@xora.org.uk>:
->>>>>>> Also I don't feel empowered to make changes in distribution
->>>>>>> specific files.
->>>>
->>>> Why not, chances are Angstrom maintainers would be quite happy for
->>>> you to patch angstrom*.conf if you ask us.
->>>>
->>>> Graeme
+2010/6/23 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 23-06-10 12:07, Philip Balister wrote:
+>> On 06/23/2010 12:03 PM, Graeme Gregory wrote:
+>>> On Wed, 23 Jun 2010 11:54:21 +0200
+>>> Frans Meulenbroeks<fransmeulenbroeks@gmail.com> =A0wrote:
 >>>
->>> distribution != angstrom
->>> There are more distributions out there.
-> 
-> Right now, toolchain selection is done in distro files not machine
-> files. I agree this is not the clearest approach, however adding the
-> toolchain selection to the machine files may have unexpected side effects.
+>>>> 2010/6/23 Graeme Gregory<dp@xora.org.uk>:
+>>>>>>>> Also I don't feel empowered to make changes in distribution
+>>>>>>>> specific files.
+>>>>>
+>>>>> Why not, chances are Angstrom maintainers would be quite happy for
+>>>>> you to patch angstrom*.conf if you ask us.
+>>>>>
+>>>>> Graeme
+>>>>
+>>>> distribution !=3D angstrom
+>>>> There are more distributions out there.
+>>
+>> Right now, toolchain selection is done in distro files not machine
+>> files. I agree this is not the clearest approach, however adding the
+>> toolchain selection to the machine files may have unexpected side effect=
+s.
+>
+> Think of multimachine builds. What happens when someone else adds
+> *another* nios2 based machine with different toolchain versions, how do
+> I know which toolchain avahi_1.0_nios2.ipk was compiled with
 
-Think of multimachine builds. What happens when someone else adds
-*another* nios2 based machine with different toolchain versions, how do
-I know which toolchain avahi_1.0_nios2.ipk was compiled with?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+If toolchain is interesting to know in ipk's it should be part of the name.
+And note that I am really in favour of an architecture specific
+solution, not a machine one.
+That is why I used an include file to contain the pinnings.
 
-iD8DBQFMIeLXMkyGM64RGpERAk0iAKCcXvyrUxGj2ZlsiV52sVhddsqr5wCcDgIS
-Noq5qjHf0Qm7qObCuCRL1bM=
-=VOH+
------END PGP SIGNATURE-----
+And actually the situation with nios2 is much much worse.
+As it is a soft-core people can come up with all kind of variants.
+(e.g. with/without fp). Actually nios2 adds pragma's to gcc to select
+which instructions are there and which not.
+Not sure whether the latter is a good idea as it is one of the things
+that fail moving to a newer gcc.
 
+The good news is that most of the variants used have different
+peripherals, but seem to stick to just a few cpu cores.
+(nios2 is used as a generic name for the SoC as well as the core,
+doesn't help to separate things either).
+
+Frans
 
 
