@@ -1,42 +1,50 @@
-Received: from out2.smtp.messagingengine.com ([66.111.4.26])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OReZs-0006AZ-DD
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 07:02:20 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id EC0CB108B57
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 00:57:40 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Thu, 24 Jun 2010 00:57:40 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:message-id:mime-version:content-type;
-	s=smtpout; bh=/sYa6TCuL5NNK2mx5Y5z+QXi8cs=;
-	b=XDcFaE9m8qK0Xvb+ttlD+zkCQrCndSXC2xOpEZFD/bsYRaH9ag1/9gJ4yKc4xr/zFgn9FcDxycjJWNZ9MG7BsAKnrRY+f5sigjS6th4YKUSBc0enDVL7HK7LR10DjSvhBCe/mz7ZHuPXaC5K6gpnxjeUs6UyvtidWDLV12SciKc=
-X-Sasl-enc: u8GkQIA+o8oJli+8Brw8MMvQ4/BYSoazWqhOC6OwMkAX 1277355460
-Received: from [192.168.1.34] (hnvr-4d07a327.pool.mediaWays.net [77.7.163.39])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 4709A4E2164
-	for <Openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 00:57:40 -0400 (EDT)
-Date: Thu, 24 Jun 2010 06:59:12 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Message-ID: <alpine.LNX.2.00.1006240651040.4844@asterix.crazy-teaparty.dyndns.org>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	(envelope-from <fat031c@gmail.com>) id 1ORfQ0-0005Vj-SB
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Jun 2010 07:56:10 +0200
+Received: by fxm1 with SMTP id 1so1691145fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 23 Jun 2010 22:51:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:from:to:subject
+	:date:mime-version:content-type:x-priority:x-msmail-priority
+	:x-mailer:x-mimeole;
+	bh=6xDg7WtNXdy0cXq55uQ3aPVeFeDtb8mUuRLIQX/1sKc=;
+	b=SVwYJY6ZdeR3IMk12j/1PGwt7sbCoP1qUzHXTqWjU6pi/kyfuFomhgBtCNnew+YtH9
+	RD8V05e4bLejZ2kYdNbJBNuIqLX/mXOwmyThlS+4FRBXHCs97q+fBbMkYomb9wt3K345
+	dbn/ko12KVMg1+kySFizcAqDtnL9wqRVFdyuY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:from:to:subject:date:mime-version:content-type
+	:x-priority:x-msmail-priority:x-mailer:x-mimeole;
+	b=jEsI+GRZWB+i+AdWhoV5GgqoG8BUzV0opfeHrGl8FiJpQs9QphMVvy1DnOtYg67bRM
+	DsCcGlglVMMS2qqRL66s0cdh9svHN/LBOS/aK+nc+N5D0g+4uj6eQPxWjiBi6w0i+9Bz
+	wGk9uQEulCuOE/V4hTakJBAy4KMu2L+tKEFpk=
+Received: by 10.102.240.16 with SMTP id n16mr2946469muh.100.1277358691650;
+	Wed, 23 Jun 2010 22:51:31 -0700 (PDT)
+Received: from atverdohlebov ([94.28.104.114])
+	by mx.google.com with ESMTPS id s11sm11112455mue.41.2010.06.23.22.51.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 23 Jun 2010 22:51:30 -0700 (PDT)
+Message-ID: <3511CCD655164D0DACCECB9DE0506610@rhonda.vtc.ru>
+From: "Andrew Tverdohlebov" <fat031c@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Thu, 24 Jun 2010 16:51:26 +1100
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.26
-X-SA-Exim-Mail-From: vjensen@gmx.de
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5931
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5931
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fat031c@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libusb1 endian problems
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: How to select specific version of dependant component
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,24 +58,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 05:02:20 -0000
-Content-Type: TEXT/PLAIN; format=flowed; charset=US-ASCII
+X-List-Received-Date: Thu, 24 Jun 2010 05:56:10 -0000
+Content-Type: text/plain;
+	charset="koi8-r"
+Content-Transfer-Encoding: quoted-printable
 
-Hej!
+Dear openembedded community,
 
-libusb1 is optimized for little-endian machines *g*, version 1.0.0 (stable 
-branch) fails on ppc machines because of endian problems.  Symptom: lsusb 
-shows no devices, lsusb -t does, debug messages from libusb1 show transfer 
-problems.
+Could you give me a hint how to write a recipe that refers to specific ver=
+sion of a library.
 
-I haven't tested 1.0.4 (dev branch) but the last commit message in libusb1 
-regarding big endian is only included in 1.0.8 and that version works on 
-our bluepro.  So I will add 1.0.8 to dev and stable.
+For example my package depends on libnet 1.0.2
+If I write
+DEPENDS +=3D "libnet"
+it will take libnet with maximum version number 1.1.2
+How can I instruct bitbake to take libnet 1.0.2 ?
 
-Vitus
+In other recipes I saw something like
+DEPENDS +=3D "libnet (=3D 1.0.2)"
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+But it doesn't work in my case for some reason.
 
-
+Huge thanks in advance,
+Andrew
+From philip@balister.org Thu Jun 24 09:49:19 2010
+Received: from mail.geekisp.com ([216.168.135.169] helo
