@@ -1,41 +1,42 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1ORoEF-0000bS-9q
+	(envelope-from <raj.khem@gmail.com>) id 1ORoI3-000515-4p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 17:23:11 +0200
-Received: by pwj2 with SMTP id 2so177281pwj.6
+	Thu, 24 Jun 2010 17:27:56 +0200
+Received: by pzk3 with SMTP id 3so265218pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 08:15:33 -0700 (PDT)
+	Thu, 24 Jun 2010 08:19:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
+	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=6QgmqYW/va1DYeqTOfq+csudrtydpXgGpr/9BPmonBo=;
-	b=SQ7Ja9ZUj1kzWIZIKJudcaGYU2rUt1tACVUuT/IpQhSEC1gko2Wp7+4fnkmOLdP8oi
-	LizNWE5xCM/n32gbwjUPySEBV3m/xrOQA6+UR98y0partMuqNSnhQVn+SwX1XOxrguYJ
-	JE6q552GmrOALgUuxWt3UTkSeBEP4+qHla2Ic=
+	bh=2116E+5kyFbw/HH2OaskZ4Iy7/cjOY6X30Ggq5a+QUw=;
+	b=hm38kf7Y4Q1AWIg6NGW69sQ4LGyDf7LEKQ28tvjgv+/tPUtXAxnWW3RFUYtjlekRGq
+	qT3wbYm8D7HfML2ZoutqQJ7esoGmSdwq2buXKViYXRiixEcyIX3UuftG54rMIV7SdkaZ
+	apkYYhTjtfIdBimFuLAXYaS8v58+n0QkTbsos=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
+	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=MJGKx/FIwqW1G5ge+rIccew6U+qD9R1dSFH9GXlo7egRy5Aip2cXndX45N+AfcuoxI
-	lV4b1roBcwEJvWi6ksFRrKN8avitrI0DPgC5Rry4mkE/2QX5seJEo2LX/getTX8VtBsK
-	bC6MUomTPi/zaSYtdHSvQGgu6qmFbj33vQm88=
-Received: by 10.142.66.11 with SMTP id o11mr9314208wfa.121.1277392531968;
-	Thu, 24 Jun 2010 08:15:31 -0700 (PDT)
-Received: from gmail.com ([99.57.141.118])
-	by mx.google.com with ESMTPS id s21sm4221410wff.12.2010.06.24.08.15.30
+	b=xAZz/4zabm4bWm+MeGOFUVvcWWpC4STq1UfWx8pdVOnIwHa1MgzqjkWZeCQsTz5n3j
+	cN8vcLIbzA71NHSjHXu12YaKaa6JIki2+BX/6MiMbVNpwuTBiQkGOdMrand7QMyzUNjN
+	59X2L051VeCO5WFij5P2EZbr+HV/hHsn/Wav8=
+Received: by 10.142.67.38 with SMTP id p38mr9227947wfa.167.1277392791554;
+	Thu, 24 Jun 2010 08:19:51 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id x34sm2946851wfi.16.2010.06.24.08.19.50
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 24 Jun 2010 08:15:31 -0700 (PDT)
-Date: Thu, 24 Jun 2010 08:16:38 -0700
+	Thu, 24 Jun 2010 08:19:50 -0700 (PDT)
+Date: Thu, 24 Jun 2010 08:21:01 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100624151638.GC28292@gmail.com>
-References: <alpine.LNX.2.00.1006240651040.4844@asterix.crazy-teaparty.dyndns.org>
-	<1277383917-23599-1-git-send-email-vjensen@gmx.de>
+Message-ID: <20100624152101.GF28292@gmail.com>
+References: <1277371081-15867-1-git-send-email-Martin.Jansa@gmail.com>
+	<1277371081-15867-2-git-send-email-Martin.Jansa@gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1277383917-23599-1-git-send-email-vjensen@gmx.de>
+In-Reply-To: <1277371081-15867-2-git-send-email-Martin.Jansa@gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Connect-IP: 209.85.210.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -43,8 +44,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vitus Jensen <vjensen@gmx.de>
-Subject: Re: [PATCH] libusb1_1.0.8: new recipe
+Subject: Re: [PATCH 2/2] pango: drop PACKAGES_DYNAMIC for virtclass-native to hide multiple providers errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,48 +58,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 15:27:59 -0000
-X-List-Received-Date: Thu, 24 Jun 2010 15:27:59 -0000
+X-List-Received-Date: Thu, 24 Jun 2010 15:35:34 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (24/06/10 14:51), Vitus Jensen wrote:
+On (24/06/10 11:18), Martin Jansa wrote:
+> * NOTE: multiple providers are available for runtime pango-module-basic-x (pango, pango-native)
+>   NOTE: consider defining a PREFERRED_PROVIDER entry to match pango-module-basic-x
 > 
-> Signed-off-by: Vitus Jensen <vjensen@gmx.de>
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
-
 > ---
->  recipes/libusb/libusb1_1.0.8.bb |   18 ++++++++++++++++++
->  1 files changed, 18 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/libusb/libusb1_1.0.8.bb
+>  recipes/pango/pango.inc |    1 +
+>  1 files changed, 1 insertions(+), 0 deletions(-)
 > 
-> diff --git a/recipes/libusb/libusb1_1.0.8.bb b/recipes/libusb/libusb1_1.0.8.bb
-> new file mode 100644
-> index 0000000..360dce5
-> --- /dev/null
-> +++ b/recipes/libusb/libusb1_1.0.8.bb
-> @@ -0,0 +1,18 @@
-> +DESCRIPTION = "library to provide userspace access to USB devices"
-> +HOMEPAGE = "http://libusb.sf.net"
-> +SECTION = "libs"
-> +LICENSE = "LGPLv2.1"
-> +
-> +PR = "r0"
-> +
-> +SRC_URI = " \
-> +	${SOURCEFORGE_MIRROR}/libusb/libusb-${PV}.tar.bz2;name=tar \
-> +	"
-> +S = "${WORKDIR}/libusb-${PV}"
-> +
-> +inherit autotools
-> +
-> +EXTRA_OECONF = "--disable-build-docs"
-> +
-> +SRC_URI[tar.md5sum] = "37d34e6eaa69a4b645a19ff4ca63ceef"
-> +SRC_URI[tar.sha256sum] = "21d0d3a5710f7f4211c595102c6b9eccb42435a17a4f5bd2c3f4166ab1badba9"
+> diff --git a/recipes/pango/pango.inc b/recipes/pango/pango.inc
+> index 0a01814..ad66c7d 100644
+> --- a/recipes/pango/pango.inc
+> +++ b/recipes/pango/pango.inc
+> @@ -14,6 +14,7 @@ DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
+>  BBCLASSEXTEND = "native"
+>  
+>  PACKAGES_DYNAMIC = "pango-module-*"
+> +PACKAGES_DYNAMIC_virtclass-native = ""
+>  
+>  RRECOMMENDS_${PN} = "pango-module-basic-x pango-module-basic-fc" 
+>  
 > -- 
-> 1.5.6.5
+> 1.7.1
 > 
 > 
 > _______________________________________________
