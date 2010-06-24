@@ -1,45 +1,33 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1ORj9v-0003kR-8x
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1ORjEZ-0006q3-28
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 11:55:55 +0200
-Received: by gyg10 with SMTP id 10so4544565gyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 02:51:01 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AkGLixexykYHhzT+u31dZ+YDZcVkPzl4+pqfHRdHjCU=;
-	b=IKYqv53rtlrAYmiH0tvYvi/UGsGgPthYbDrrDeULJezW2YiFK/PM0rHROhnscomBy/
-	EYTObVeA7NVsjevMjaxwJbTCeI7+f0/ydmrGoYV/zuZlVaVVI+mqWQOYAkifr45Ge5hY
-	qauNPeiZI9tCnzAk5IHLCD+QUPvUWUfnP3HGg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bdCXjpPEM5sYuyAdhqqy/0iyIi4iBFd4+o7LC1yUuOfMiFQaqMtG063L3JCRPbiy88
-	8ZyoiUW5p6oxEqU0A5tR2jOzCjjNkGqqMkJFs2r6XgdCOBYH6gn/w1f9n+x4rndwYWYH
-	RDsJCIk/DxTxli2g5GxWRPGYaq6kNI2Q8PCaY=
-MIME-Version: 1.0
-Received: by 10.100.173.20 with SMTP id v20mr7731076ane.140.1277373061826; 
-	Thu, 24 Jun 2010 02:51:01 -0700 (PDT)
-Received: by 10.100.243.32 with HTTP; Thu, 24 Jun 2010 02:51:01 -0700 (PDT)
-In-Reply-To: <hvv8hp$skd$3@dough.gmane.org>
-References: <AANLkTilEWkJxX-05BU-UBnOIP9jgP3vtf8K7jA5-A9Q6@mail.gmail.com>
-	<201006241230.18165.jay4mail@gmail.com>
-	<hvv8hp$skd$3@dough.gmane.org>
-Date: Thu, 24 Jun 2010 11:51:01 +0200
-Message-ID: <AANLkTilxOH_7_4pS1BOorWBVQGT1vBMDPEy14F5kCjb1@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 24 Jun 2010 12:00:38 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o5O9tbqb002281
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 24 Jun 2010 11:55:38 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1ORj9k-000600-BQ; Thu, 24 Jun 2010 11:55:36 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Thu, 24 Jun 2010 11:55:34 +0200
+Message-Id: <1277373334-22503-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.0.1
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: makedevs vs. device_table-minimal.txt
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH] binconfig.bbclass: take *-config from ${D}, not from ${S}
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,21 +41,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 09:55:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Jun 2010 10:00:38 -0000
 
-> Since you're on >2.6.31, why not use devtmpfs?
->
-> regards,
->
-> Koen
+It is not always right to take *-config files from source tree;
+e.g. the buildsystem of recent ncurses takes an 'ncurses-config'
+template and installs it as 'ncurses5-config' and 'ncursesw5-config'.
 
-Unfortunately not all machines are yet ready for 2.6.3x
-Neverthless, there is a bug in the device tables having nodes in
-subdirs without creating those.
+This patch uses the installed *-config files which are having the
+expected name and content.
 
-Regards
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ classes/binconfig.bbclass |    5 ++++-
+ 1 files changed, 4 insertions(+), 1 deletions(-)
 
-Andrea
+diff --git a/classes/binconfig.bbclass b/classes/binconfig.bbclass
+index b3b2236..c1116fc 100644
+--- a/classes/binconfig.bbclass
++++ b/classes/binconfig.bbclass
+@@ -49,7 +49,10 @@ binconfig_package_preprocess () {
+ SYSROOT_PREPROCESS_FUNCS += "binconfig_sysroot_preprocess"
+ 
+ binconfig_sysroot_preprocess () {
+-	for config in `find ${S} -name '${BINCONFIG_GLOB}'`; do
++	# take *-config from ${D}; Using ${PKGD} is not possible
++	# because it might not be populated yet and copies there will
++	# be altered by the function above.
++	for config in `find ${D} -name '${BINCONFIG_GLOB}'`; do
+ 		configname=`basename $config`
+ 		install -d ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}
+ 		cat $config | sed ${@get_binconfig_mangle(d)} > ${SYSROOT_DESTDIR}${STAGING_BINDIR_CROSS}/$configname
+-- 
+1.7.0.1
+
 
 
