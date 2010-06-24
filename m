@@ -1,33 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mx1.polytechnique.org ([129.104.30.34])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <david.oe@pilsoft.com>) id 1ORw2U-0006CZ-Hw
+	(envelope-from <gregoire@gentil.com>) id 1ORwNQ-0006lD-Ds
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 01:40:59 +0200
-Received: by bwz14 with SMTP id 14so2745446bwz.6
+	Fri, 25 Jun 2010 02:02:37 +0200
+Received: from [192.168.10.6] (c-69-181-223-70.hsd1.ca.comcast.net
+	[69.181.223.70])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by ssl.polytechnique.org (Postfix) with ESMTP id 4CCDE1400560C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 16:36:22 -0700 (PDT)
-Received: by 10.204.81.196 with SMTP id y4mr7027212bkk.75.1277422582562;
-	Thu, 24 Jun 2010 16:36:22 -0700 (PDT)
-Received: from [192.168.33.16] (mna75-2-82-67-197-228.fbx.proxad.net
-	[82.67.197.228])
-	by mx.google.com with ESMTPS id q2sm1253073bkj.22.2010.06.24.16.36.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 24 Jun 2010 16:36:21 -0700 (PDT)
-From: David Hemmo <david.oe@pilsoft.com>
-Date: Fri, 25 Jun 2010 01:36:19 +0200
-Message-Id: <46D92548-C16C-4F1F-9924-946EDAE2EDAA@pilsoft.com>
+	Fri, 25 Jun 2010 01:28:30 +0200 (CEST)
+From: Gregoire Gentil <gregoire@gentil.com>
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1081)
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: david.oe@pilsoft.com
+In-Reply-To: <mailman.15191.1277421154.24517.openembedded-devel@lists.openembedded.org>
+References: <mailman.15191.1277421154.24517.openembedded-devel@lists.openembedded.org>
+Organization: Gregoire Gentil
+Date: Thu, 24 Jun 2010 16:28:26 -0700
+Message-ID: <1277422106.32627.32.camel@gregoire-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-AV-Checked: ClamAV using ClamSMTP at svoboda.polytechnique.org (Fri Jun 25
+	01:28:30 2010 +0200 (CEST))
+X-Org-Mail: gregoire.gentil.1992@polytechnique.org
+X-SA-Exim-Connect-IP: 129.104.30.34
+X-SA-Exim-Mail-From: gregoire@gentil.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: What is the best way to remove gnome-vfs dependency from gst-plugins-base ?
+Subject: Re: Updated recipe for chrome
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,23 +44,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 23:40:59 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 25 Jun 2010 00:02:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello All,
 
-If the answer is read the documentation and you can give me a pointer, =
-it will be enough :-)
+> Message: 1
+> Date: Thu, 24 Jun 2010 08:12:54 -0700
+> From: Khem Raj <raj.khem@gmail.com>
+> Subject: Re: [oe] Updated recipe for chrome
+> To: openembedded-devel@lists.openembedded.org
+> Cc: Koen Kooi <koen@openembedded.org>
+> Message-ID: <20100624151254.GB28292@gmail.com>
+> Content-Type: text/plain; charset=3Dus-ascii
+>=20
+> On (24/06/10 04:13), Gary Thomas wrote:
+> > On 06/22/2010 05:21 AM, Gary Thomas wrote:
+> > >Does anyone have an updated recipe for Google chrome?  The
+> > >one in org.openembedded.dev is really old - SVN revision
+> > >34027 - mainline is at 50359!
+> > >
+> > >I looked at the recipe and it seems to be full of magic
+> > >(subpackages with specific SVN revisions, etc). I doubt
+> > >that just updating the main SVN revision number will work.
+> > >
+> > >Any ideas/pointers? I'd really like to try some of the
+> > >latest features on my embedded systems :-)
+>=20
+> I would encourage to bump the srcrev and see what happens
+> there might be some patches need rework if any.
+>=20
+> >=20
+> > Can someone please comment on this (maybe the package author)??
+> > I'm will to try/test changes, I'm just not sure what to change.
+I wrote the initial recipe and I have done some work on this front. Read
+the previous email that I sent about AIOS. It would be great indeed to
+upgrade this application,
 
-The standard gst-plugins-base recipe depends on gnome-vfs, but if I add =
---disable-gnome_vfs to configure, that dependency becomes useless.
+Gr=C3=A9goire
 
-Is there a way to add this configuration option and remove the =
-dependency for my specific case without changing the recipe ?
 
-Thanks
-
-David Hemmo=
 
 
