@@ -1,34 +1,45 @@
-Received: from infosrv.imms.de ([194.95.250.51])
+Received: from mail-fx0-f51.google.com ([209.85.161.51])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas.elste@imms.de>) id 1ORiTa-0003dA-TU
+	(envelope-from <martin.jansa@gmail.com>) id 1ORie3-000539-Au
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 11:12:18 +0200
-Received: from infosrv.imms.de (infosrv.imms.de [127.0.0.1])
-	by IMSA (Postfix) with ESMTP id 4065F260053
+	Thu, 24 Jun 2010 11:26:02 +0200
+Received: by fxm13 with SMTP id 13so1877273fxm.10
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 11:07:25 +0200 (CEST)
-Received: from proxy.imms.de (proxy.imms.de [194.95.250.53])
-	by infosrv.imms.de (Postfix) with ESMTP id 1D4D326004A
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 11:07:25 +0200 (CEST)
-Received: from pluto.imms.de ([172.16.10.24])
-	by proxy.imms.de (8.13.8+Sun/8.13.8) with ESMTP id o5O97ZAb013351
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 11:07:35 +0200 (CEST)
-From: Thomas Elste <thomas.elste@imms.de>
+	Thu, 24 Jun 2010 02:18:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=9aEXyxlJ2e4wZLq1ab+hqv4wH+rf7R1CkU8Il53X4UY=;
+	b=IEyvdAjhUEiOuJJ/b8jH3flV/UtXA7/7mTGe4MEnpWYjPtBS6Ki5J/SX0uL6FvwBGW
+	uu2TGMuH1Y3smllZb/wto57V0tNFDzycYVm64ovfFQ7126sPqVq0DznhTJQN82Ac4ey9
+	NUhnT8M6ac2TA335/cwp2fBCErGHqc+2TBUF8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=KcI4xCtDPx8bJyMAmHGulk1+iw9L8tCr9pcA9ylTy85xceKBW6JSqzGOoOtqZyPK08
+	A/zdesAINdD9o5KBPI8lPSp8hc4rUosq9riodKSJl/bDB9ySSbw5uegsXAFmxbr5sUga
+	3p7Gvse2arHUi75O9+adJeGeUyhe3dg3w0e/o=
+Received: by 10.223.46.135 with SMTP id j7mr8958385faf.105.1277371090297;
+	Thu, 24 Jun 2010 02:18:10 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id z12sm40335823fah.9.2010.06.24.02.18.09
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 24 Jun 2010 02:18:09 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Jun 2010 11:06:13 +0200
-Message-Id: <1277370374-4677-1-git-send-email-thomas.elste@imms.de>
+Date: Thu, 24 Jun 2010 11:18:01 +0200
+Message-Id: <1277371081-15867-2-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 194.95.250.51
-X-SA-Exim-Mail-From: thomas.elste@imms.de
+In-Reply-To: <1277371081-15867-1-git-send-email-Martin.Jansa@gmail.com>
+References: <1277371081-15867-1-git-send-email-Martin.Jansa@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.161.51
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Add current Qwt version
+Subject: [PATCH 2/2] pango: drop PACKAGES_DYNAMIC for virtclass-native to hide multiple providers errors
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,29 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 09:13:02 -0000
-X-List-Received-Date: Thu, 24 Jun 2010 09:13:02 -0000
-X-List-Received-Date: Thu, 24 Jun 2010 09:13:02 -0000
-X-List-Received-Date: Thu, 24 Jun 2010 09:13:02 -0000
-X-List-Received-Date: Thu, 24 Jun 2010 09:13:02 -0000
-X-List-Received-Date: Thu, 24 Jun 2010 09:13:02 -0000
+X-List-Received-Date: Thu, 24 Jun 2010 09:35:13 -0000
 
-Hi everyone,
+* NOTE: multiple providers are available for runtime pango-module-basic-x (pango, pango-native)
+  NOTE: consider defining a PREFERRED_PROVIDER entry to match pango-module-basic-x
 
-the following patch adds support for the current version
-of Qwt. Qt and Qt-Embedded variants are supported.
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes/pango/pango.inc |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-On Tue, 22 Jun 2010 16:27:55 +0200, Koen Kooi wrote:
-> Could you make the -e and regular variants parallel installable? The
-> demos could be put in ${D}${bindir}/qwt-examples${QWT_VARIANT} for example.
-The Qwt library for Qt-Embedded now gets the suffix "E" appended
-like all other Qt-Embedded librarys. Examples are installed in
-different directories. So both variants may be installed in parallel.
-Tested on Beagleboard/Angstrom with qt-embedded-4.6.2 and
-qt4-x11-free-gles-4.6.2.
-
-Regards
-Thomas
+diff --git a/recipes/pango/pango.inc b/recipes/pango/pango.inc
+index 0a01814..ad66c7d 100644
+--- a/recipes/pango/pango.inc
++++ b/recipes/pango/pango.inc
+@@ -14,6 +14,7 @@ DEPENDS_virtclass-native = "glib-2.0-native cairo-native"
+ BBCLASSEXTEND = "native"
+ 
+ PACKAGES_DYNAMIC = "pango-module-*"
++PACKAGES_DYNAMIC_virtclass-native = ""
+ 
+ RRECOMMENDS_${PN} = "pango-module-basic-x pango-module-basic-fc" 
+ 
+-- 
+1.7.1
 
 
 
