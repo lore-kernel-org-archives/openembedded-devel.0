@@ -1,40 +1,32 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1ORhKe-00085Z-Ch
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1ORhps-0006ja-Ma
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 09:58:45 +0200
-Received: by gwb19 with SMTP id 19so2326090gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 00:54:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=ov13d/qdHWmWvWKuhzjsvzHzVi0nhrebb52JlbDlUVI=;
-	b=C84M/0bNQnJ0qwZQFu6lt7bLlt9WxFageWNKqULExyOucQQHwjUpE04fgsvUUsearh
-	SZk+viGWUX6wWAIbeKMv7oLPuAkxx0n3VZVCcYcqnfZGuG8Gr5ZWnjNm0BFqasUB8exI
-	9Gb0EMR/iycL3DdhFSq100F+GH+o1QSlNZDDw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=YK1pNLmEEQOTEYAyzhq9JnePifKp6+5aARdEbV0noXpgI9Y1FcL7za3PeItORGDO1V
-	PuRWjH0cDcH5GZ4UoeQCUqgkDUtRBaXBiYGPNKttmdGjGsEeP808aoBn48n84nrY2L9i
-	UKVeLW87qdozfUU9kQzGiFrVvz8Lj5Sdq6D3c=
-MIME-Version: 1.0
-Received: by 10.100.29.19 with SMTP id c19mr7754341anc.191.1277366046631; Thu, 
-	24 Jun 2010 00:54:06 -0700 (PDT)
-Received: by 10.100.243.32 with HTTP; Thu, 24 Jun 2010 00:54:06 -0700 (PDT)
-Date: Thu, 24 Jun 2010 09:54:06 +0200
-Message-ID: <AANLkTilEWkJxX-05BU-UBnOIP9jgP3vtf8K7jA5-A9Q6@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 24 Jun 2010 10:31:01 +0200
+Received: (qmail 19076 invoked by uid 813007); 24 Jun 2010 08:26:24 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 24 Jun 2010 08:26:22 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Thu, 24 Jun 2010 10:26:08 +0200
+User-Agent: KMail/1.13.3 (Linux/2.6.35-4-generic; KDE/4.4.85; x86_64; ; )
+References: <1277307626-24691-1-git-send-email-vjensen@gmx.de>
+	<alpine.LNX.2.00.1006240646500.4844@asterix.crazy-teaparty.dyndns.org>
+	<4C230CE1.1010303@balister.org>
+In-Reply-To: <4C230CE1.1010303@balister.org>
+MIME-Version: 1.0
+Message-Id: <201006241026.15538.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: makedevs vs. device_table-minimal.txt
+Subject: Re: [STABLE][PATCH] kernel bbclass: switch to u-boot-mkimage-native
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 07:58:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 24 Jun 2010 08:31:01 -0000
+X-Groupsio-MsgNum: 20422
+Content-Type: multipart/signed; boundary="nextPart1686009.VuToWiDDKY";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Hello,
+--nextPart1686009.VuToWiDDKY
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-after commit 66aa4ed9410ba1d652e40571f48a985337e56a26
-(device_table-minimal.txt: fix input device nodes path. Input event
-device nodes are usually under /dev/input.) in /dev of my rootfs I
-don't have any event device node.
+Dnia czwartek, 24 czerwca 2010 o 09:44:33 Philip Balister napisa=C5=82(a):
+> On 06/24/2010 06:50 AM, Vitus Jensen wrote:
 
-Any obvious reason why makedevs would fail to create /dev/input/eventX ?
+> > Thank you!  May I get a second ACK from someone (because of stable bran=
+ch
+> > and class change)?
+>=20
+> Acked-by: Philip Balister <philip@balister.org>
 
-Regards
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-Andrea
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
+--nextPart1686009.VuToWiDDKY
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkwjFqEACgkQeQ6MlGH/2qvidQCggJZTaQ2McAx86+5Hy4XohZy+
+ulMAmgIMvHGqkLOnAsfeU1rUHc+DQV6n
+=X7Z9
+-----END PGP SIGNATURE-----
+
+--nextPart1686009.VuToWiDDKY--
