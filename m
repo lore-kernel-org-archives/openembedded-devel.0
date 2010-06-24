@@ -1,38 +1,29 @@
-Received: from out2.smtp.messagingengine.com ([66.111.4.26])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1ORlz6-00048H-2O
-	for Openembedded-devel@lists.openembedded.org;
-	Thu, 24 Jun 2010 14:57:12 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 8689F108216;
-	Thu, 24 Jun 2010 08:52:11 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute1.internal (MEProxy); Thu, 24 Jun 2010 08:52:11 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	s=smtpout; bh=ULdqLbDRbZOEv6dSOT/aDozlDjk=;
-	b=Po5GnxxAZ09KbG7d2G7xC5IXp6XJqRDqM7tCLy6yIwObdE7XL7YbxoE0W6HajN12MViuysvlIgRQu8lhLkuHHCsw3ZJtddHd/BG3g/F7bqoA/tODwP3YjTZKtbZfoqNYbmI93lP3WTKmzzcX9C9snRYDC85d2w9VS35YhNBgdDc=
-X-Sasl-enc: VJH7V96GqeM+DX/IXFgbcY1vPoAcf14woHGLfjHP2L8F 1277383929
-Received: from localhost.localdomain (unknown [212.144.247.210])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 2BC684AF02B;
-	Thu, 24 Jun 2010 08:52:09 -0400 (EDT)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Date: Thu, 24 Jun 2010 14:51:57 +0200
-Message-Id: <1277383917-23599-1-git-send-email-vjensen@gmx.de>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <alpine.LNX.2.00.1006240651040.4844@asterix.crazy-teaparty.dyndns.org>
-References: <alpine.LNX.2.00.1006240651040.4844@asterix.crazy-teaparty.dyndns.org>
-X-SA-Exim-Connect-IP: 66.111.4.26
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Received: from jak.nl ([65.204.18.188]) by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <arjan@jak.nl>) id 1ORmJx-00039l-At
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 24 Jun 2010 15:19:26 +0200
+Received: (qmail 33663 invoked by uid 89); 24 Jun 2010 13:13:44 -0000
+Received: from jak.nl (HELO ?128.79.129.1?) (65.204.18.188)
+	by jak.nl with SMTP; 24 Jun 2010 13:13:44 -0000
+Message-ID: <4C235A05.5070604@jak.nl>
+Date: Thu, 24 Jun 2010 15:13:41 +0200
+From: Arjan <arjan@jak.nl>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5
+MIME-Version: 1.0
+To: openembedded-devel@lists.openembedded.org
+References: <4C221A64.1020002@jak.nl>	<AANLkTikxjC0tXsg2Tz0ilTykFtmhBN7qm5GHMl3HixVK@mail.gmail.com>
+	<20100623173738.GH5535@gmail.com>
+In-Reply-To: <20100623173738.GH5535@gmail.com>
+X-SA-Exim-Connect-IP: 65.204.18.188
+X-SA-Exim-Mail-From: arjan@jak.nl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vitus Jensen <vjensen@gmx.de>
-Subject: [PATCH] libusb1_1.0.8: new recipe
+Subject: Re: DISTRO=Angstrom on i686-generic build failure on base-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,41 +37,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 24 Jun 2010 12:57:20 -0000
+X-List-Received-Date: Thu, 24 Jun 2010 13:20:12 -0000
+X-List-Received-Date: Thu, 24 Jun 2010 13:20:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+On 23-6-2010 19:37, Khem Raj wrote:
+> On (23/06/10 07:57), J. L.  wrote:
+>    
+>> I keep erroring out on the same thing currently.
+>>
+>>
+>>
+>> On Wed, Jun 23, 2010 at 7:29 AM, Arjan<arjan@jak.nl>  wrote:
+>>
+>>      
+>>> Hello all,
+>>>
+>>> I'm new here, so maybe this is a known issue. But I couln't find the
+>>> solution.
+>>>
+>>> Building  the 'base-image' using:
+>>>
+>>> DISTRO   = "angstrom-2008.1"
+>>> MACHINE ?= "i686-generic"
+>>> this error occurs:
+>>>
+>>>   | checking for cups-config... /usr/bin/cups-config
+>>>        
+> this is the problem. You have install libcups2-dev on your build machine
+> and its picking that up I think if you remove it from host it should work.
+>    
+This indeed is the problem. After moving the /usr/bin/cups-config the 
+build continues.
+Makes me wonder, is it possible to execute bitbake in a (more) isolated 
+environment to avoid such clashes?
 
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- recipes/libusb/libusb1_1.0.8.bb |   18 ++++++++++++++++++
- 1 files changed, 18 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libusb/libusb1_1.0.8.bb
-
-diff --git a/recipes/libusb/libusb1_1.0.8.bb b/recipes/libusb/libusb1_1.0.8.bb
-new file mode 100644
-index 0000000..360dce5
---- /dev/null
-+++ b/recipes/libusb/libusb1_1.0.8.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "library to provide userspace access to USB devices"
-+HOMEPAGE = "http://libusb.sf.net"
-+SECTION = "libs"
-+LICENSE = "LGPLv2.1"
-+
-+PR = "r0"
-+
-+SRC_URI = " \
-+	${SOURCEFORGE_MIRROR}/libusb/libusb-${PV}.tar.bz2;name=tar \
-+	"
-+S = "${WORKDIR}/libusb-${PV}"
-+
-+inherit autotools
-+
-+EXTRA_OECONF = "--disable-build-docs"
-+
-+SRC_URI[tar.md5sum] = "37d34e6eaa69a4b645a19ff4ca63ceef"
-+SRC_URI[tar.sha256sum] = "21d0d3a5710f7f4211c595102c6b9eccb42435a17a4f5bd2c3f4166ab1badba9"
--- 
-1.5.6.5
-
+Thanks,
+Arjan
 
 
