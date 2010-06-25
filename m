@@ -1,53 +1,49 @@
-Received: from fg-out-1718.google.com ([72.14.220.159])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fat031c@gmail.com>) id 1ORwz8-00076m-GI
+	(envelope-from <raj.khem@gmail.com>) id 1ORx0z-0007Cx-Ga
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 02:41:35 +0200
-Received: by fg-out-1718.google.com with SMTP id 22so2030040fge.6
+	Fri, 25 Jun 2010 02:43:29 +0200
+Received: by pxi2 with SMTP id 2so1246547pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 24 Jun 2010 17:36:58 -0700 (PDT)
+	Thu, 24 Jun 2010 17:38:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:from:to:references
-	:subject:date:mime-version:content-type:content-transfer-encoding
-	:x-priority:x-msmail-priority:x-mailer:x-mimeole;
-	bh=UeiDrDRRd9niZkUm7qqw7UoZVKJ66GR6IXswE2RCTwo=;
-	b=tXqDV7c49/7coBmZ6y7ozPHiOWqTwQO8tpnW2bI9NgSjf12lPxjk/IhPYctBiCb8Zb
-	loADFrOXutAkZRHuYajXr+07sltAF59m5O4qwqbGKIq7NKq/GGqw/cftu+JhYr2anwj4
-	z7h14tIkE1tCyHAGseOOjgMPqqm8ADvkngAWY=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=CdgH+UxQm+rwQYE3v9iBTOpOwPiFtq3cAZCzwg2nxXE=;
+	b=gjD8Ij/7Y0DIoUqYVLNeg4Ne8XbBvZQ5f2AFdfz75aiZWAaaY6ckKLc3/raL3pFgnL
+	0+hQW/BFvWZxr+818lNyJfViplW3SYbG4pHK19uKfCf5K/Hte9MYCxgXVFm+4X+/RDwn
+	uf4WP0zEvFZvz3H28eNnT+wJ2YJdcks+H0F4g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:from:to:references:subject:date:mime-version
-	:content-type:content-transfer-encoding:x-priority:x-msmail-priority
-	:x-mailer:x-mimeole;
-	b=gmdRVhosKq6XKTBaqnHhNsLR6it4BSfOSS/Fl3syGTAwBnWCq/XKbB9Uh3q2oJT6N+
-	03AZoD5r03uF++JBbGQqJWYNZiAwTo2hRr7WvYcLZBba+GhhPDzMTNHJ7ffoTUumvPZY
-	SKM6gc7uY6c7Gvb6uceC2KgHFTUT340yRvs28=
-Received: by 10.102.226.11 with SMTP id y11mr3386724mug.54.1277426218535;
-	Thu, 24 Jun 2010 17:36:58 -0700 (PDT)
-Received: from atverdohlebov ([94.28.104.114])
-	by mx.google.com with ESMTPS id e10sm12822658muf.38.2010.06.24.17.36.56
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=dzgGfjdF4+jd7L88q7zxpjVm8AF9D9+Vuim2187n5AAbtAYQTVB5snFx0ABzfFYxJU
+	hKI2Nu8/39tSh4C5pkix4RYmArCmM67fnEiABpff5i8nVynKyBbmI4KKnHVLOpGiPWbP
+	B7Atkxc+RDK6pARSguNpZ9pDav2BsTV+suhMQ=
+Received: by 10.143.169.5 with SMTP id w5mr9934835wfo.222.1277426330368;
+	Thu, 24 Jun 2010 17:38:50 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id v41sm4848700wfh.21.2010.06.24.17.38.48
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 24 Jun 2010 17:36:57 -0700 (PDT)
-Message-ID: <B4EAD150EF8844DDB3676A4A9B08C120@rhonda.vtc.ru>
-From: "Andrew Tverdohlebov" <fat031c@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>,
-	<raj.khem@gmail.com>
-References: <3511CCD655164D0DACCECB9DE0506610@rhonda.vtc.ru>
-	<20100624151848.GD28292@gmail.com>
-Date: Fri, 25 Jun 2010 11:36:53 +1100
+	Thu, 24 Jun 2010 17:38:49 -0700 (PDT)
+Date: Thu, 24 Jun 2010 17:39:53 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100625003953.GA27649@gmail.com>
+References: <46D92548-C16C-4F1F-9924-946EDAE2EDAA@pilsoft.com>
 MIME-Version: 1.0
-X-Priority: 3
-X-MSMail-Priority: Normal
-X-Mailer: Microsoft Outlook Express 6.00.2900.5931
-X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5931
-X-SA-Exim-Connect-IP: 72.14.220.159
-X-SA-Exim-Mail-From: fat031c@gmail.com
+In-Reply-To: <46D92548-C16C-4F1F-9924-946EDAE2EDAA@pilsoft.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	STOX_REPLY_TYPE autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: How to select specific version of dependant component
+Subject: Re: What is the best way to remove gnome-vfs dependency from gst-plugins-base ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,54 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jun 2010 00:41:35 -0000
-Content-Type: text/plain; format=flowed; charset="ISO-8859-1";
-	reply-type=original
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Jun 2010 00:43:30 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Great thanks !
-It works.
-one small question : what does the '_local' suffix mean ?
+On (25/06/10 01:36), David Hemmo wrote:
+> Hello All,
+> 
+> If the answer is read the documentation and you can give me a pointer, it will be enough :-)
+> 
+> The standard gst-plugins-base recipe depends on gnome-vfs, but if I add --disable-gnome_vfs to configure, that dependency becomes useless.
+> 
+> Is there a way to add this configuration option and remove the dependency for my specific case without changing the recipe ?
 
------ Original Message ----- 
-From: "Khem Raj" <raj.khem@gmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Sent: Friday, June 25, 2010 2:18 AM
-Subject: Re: [oe] How to select specific version of dependant component
+I dont think so. However you can override the recipe in your own collection.
 
-
-> On (24/06/10 16:51), Andrew Tverdohlebov wrote:
->> Dear openembedded community,
->>
->> Could you give me a hint how to write a recipe that refers to specific 
->> version of a library.
->
-> you can use PREFERRED_VERSION_libnet_local = "1.0.2" in your local.conf
->
->>
->> For example my package depends on libnet 1.0.2
->> If I write
->> DEPENDS += "libnet"
->> it will take libnet with maximum version number 1.1.2
->> How can I instruct bitbake to take libnet 1.0.2 ?
->>
->> In other recipes I saw something like
->> DEPENDS += "libnet (= 1.0.2)"
->>
->> But it doesn't work in my case for some reason.
->>
->> Huge thanks in advance,
->> Andrew
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> 
+> Thanks
+> 
+> David Hemmo
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
-
 
 
