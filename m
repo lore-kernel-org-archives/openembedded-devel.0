@@ -1,42 +1,45 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from fg-out-1718.google.com ([72.14.220.157])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OS6eh-0001rU-9m for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 13:01:08 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OS6aB-0006eU-72 for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 12:56:27 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jun 2010 12:56:27 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1OS7sY-0006Qk-1J
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Jun 2010 14:19:41 +0200
+Received: by fg-out-1718.google.com with SMTP id 22so2263047fge.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jun 2010 12:56:27 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 25 Jun 2010 05:14:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=raZbJDoflOULSoQ76p3rLwy2OUPwV/pxQxbG6VPjh4g=;
+	b=nfXZI5qwJ6qLwG5GEwUmNDZrTu1mP8JJIVqeyp+Hsdtje4m0p2/HF3CJZZ7wf+Wm8S
+	o1zXNdJW3pBbByBKXdtnLJIq2pLzqsyF4aAVt1wA5SMP3q/FSAMKxZvzEuTAsqkuQjhT
+	nUZuIbxe5yWp6/1sq8QO20gCVlDioKVAg12DA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=UA9+CuZOmsRbbwu+oL0cv1j0cVIc/ks6QozKiLwXHGMCcXrdWJkzttcIs6UR2b5QIV
+	e0F9ijkx4CF53K1GaopMFjpeeH+r1lk+BC1PFQof56EpKe0V54FQcCQtNURyjujH4XGP
+	bod3G01+0iKBwVEA7RjzuY9Y0r/e09plBoN2M=
+Received: by 10.223.123.211 with SMTP id q19mr257127far.63.1277468088328;
+	Fri, 25 Jun 2010 05:14:48 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id d1sm14320564faa.22.2010.06.25.05.14.47
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 25 Jun 2010 05:14:48 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 25 Jun 2010 12:56:12 +0200
-Message-ID: <i0220d$htp$1@dough.gmane.org>
-References: <201006250901.38077.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
-In-Reply-To: <201006250901.38077.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Fri, 25 Jun 2010 14:14:31 +0200
+Message-Id: <1277468071-16312-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.0.2
+In-Reply-To: <E1OQm3w-00086b-S9@melo.openembedded.org>
+References: <E1OQm3w-00086b-S9@melo.openembedded.org>
+X-SA-Exim-Connect-IP: 72.14.220.157
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: MeeGo support in OE
+Subject: [PATCH] gcc-package-sdk: skip stripping *.py files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,44 +53,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jun 2010 11:01:08 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Jun 2010 12:19:47 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ recipes/gcc/gcc-package-sdk.inc |   12 +++++++++---
+ 1 files changed, 9 insertions(+), 3 deletions(-)
 
-On 25-06-10 09:01, Andreas Mueller wrote:
-> My investigations for a 'colorful' embedded environment lead me to Meego (http://meego.com/).
-> 
-> On the webpage we learn that this is a platform independent environment but there are only few platforms supported (Nokia N900 / Beaglebord / few Intel netbooks).
-> 
-> To have full platform-independency I would like to have Meego (maybe parts of it only) within OE and started already with easiest part uxlaunch (very tiny dm - see 
-> git://gitorious.org/meego-os-base/uxlaunch.git). This is already tested with xfce environment but before posting a patch here I would like to do some further tests with gnome/enlightenment and 
-> see what happens in case another dm is found in the image. 
-> 
-> Next step planned is mutter. Here I would like to use the original gnome sources and check the diffs to meego branch.
-> 
-> Now my questions:
-> 
-> - Are there any objections including meego parts (licensing / don't like Intel/Nokia..) in OE
-> - Are there already proceedings related to mutter ongoing? Or is there a reason that mutter is not in OE other than nobody has done so far?
-
-I didn't add mutter because at the time it didn't build against
-clutter/gles. It think that has changed now :)
-
-I would very much like to build meego components in OE!
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMJItMMkyGM64RGpERAnz2AJ9eNNYYrHUCh+hityPmuIqzi+zIpACgiMWY
-XUcuvovOv3NF/li1OFvSI38=
-=YUQM
------END PGP SIGNATURE-----
+diff --git a/recipes/gcc/gcc-package-sdk.inc b/recipes/gcc/gcc-package-sdk.inc
+index dd32ec7..014897a 100644
+--- a/recipes/gcc/gcc-package-sdk.inc
++++ b/recipes/gcc/gcc-package-sdk.inc
+@@ -55,8 +55,14 @@ do_install () {
+ 	# Manually run the target stripper since we won't get it run by
+ 	# the packaging.
+ 	if [ "x${OLD_PACKAGE_STRIP}" != "xno" ]; then
+-		${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/libstdc++.so.*
+-		${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/libg2c.so.* || true
+-		${TARGET_PREFIX}strip ${D}${prefix}/${TARGET_SYS}/lib/libgcc_s.so.*
++		for soFile in ${D}${prefix}/${TARGET_SYS}/lib/libstdc++.so.* ${D}${prefix}/${TARGET_SYS}/lib/libg2c.so.* ${D}${prefix}/${TARGET_SYS}/lib/libgcc_s.so.*; do
++			if echo ${soFile} | grep '.py$' ; then 
++				echo "Not stripping .py file ${soFile}"
++			elif echo ${soFile} | grep '*' ; then 
++				echo "Not stripping non-existent mask ${soFile}"
++			else
++				${TARGET_PREFIX}strip ${soFile}
++			fi
++		done
+ 	fi
+ }
+-- 
+1.7.0.2
 
 
 
