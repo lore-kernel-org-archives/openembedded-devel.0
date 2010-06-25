@@ -1,36 +1,53 @@
-Received: from mx1.polytechnique.org ([129.104.30.34])
+Received: from fg-out-1718.google.com ([72.14.220.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gregoire@gentil.com>) id 1ORwNQ-0006lD-Ds
+	(envelope-from <fat031c@gmail.com>) id 1ORwz8-00076m-GI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 02:02:37 +0200
-Received: from [192.168.10.6] (c-69-181-223-70.hsd1.ca.comcast.net
-	[69.181.223.70])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by ssl.polytechnique.org (Postfix) with ESMTP id 4CCDE1400560C
+	Fri, 25 Jun 2010 02:41:35 +0200
+Received: by fg-out-1718.google.com with SMTP id 22so2030040fge.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 25 Jun 2010 01:28:30 +0200 (CEST)
-From: Gregoire Gentil <gregoire@gentil.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <mailman.15191.1277421154.24517.openembedded-devel@lists.openembedded.org>
-References: <mailman.15191.1277421154.24517.openembedded-devel@lists.openembedded.org>
-Organization: Gregoire Gentil
-Date: Thu, 24 Jun 2010 16:28:26 -0700
-Message-ID: <1277422106.32627.32.camel@gregoire-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-AV-Checked: ClamAV using ClamSMTP at svoboda.polytechnique.org (Fri Jun 25
-	01:28:30 2010 +0200 (CEST))
-X-Org-Mail: gregoire.gentil.1992@polytechnique.org
-X-SA-Exim-Connect-IP: 129.104.30.34
-X-SA-Exim-Mail-From: gregoire@gentil.com
+	Thu, 24 Jun 2010 17:36:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:from:to:references
+	:subject:date:mime-version:content-type:content-transfer-encoding
+	:x-priority:x-msmail-priority:x-mailer:x-mimeole;
+	bh=UeiDrDRRd9niZkUm7qqw7UoZVKJ66GR6IXswE2RCTwo=;
+	b=tXqDV7c49/7coBmZ6y7ozPHiOWqTwQO8tpnW2bI9NgSjf12lPxjk/IhPYctBiCb8Zb
+	loADFrOXutAkZRHuYajXr+07sltAF59m5O4qwqbGKIq7NKq/GGqw/cftu+JhYr2anwj4
+	z7h14tIkE1tCyHAGseOOjgMPqqm8ADvkngAWY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:from:to:references:subject:date:mime-version
+	:content-type:content-transfer-encoding:x-priority:x-msmail-priority
+	:x-mailer:x-mimeole;
+	b=gmdRVhosKq6XKTBaqnHhNsLR6it4BSfOSS/Fl3syGTAwBnWCq/XKbB9Uh3q2oJT6N+
+	03AZoD5r03uF++JBbGQqJWYNZiAwTo2hRr7WvYcLZBba+GhhPDzMTNHJ7ffoTUumvPZY
+	SKM6gc7uY6c7Gvb6uceC2KgHFTUT340yRvs28=
+Received: by 10.102.226.11 with SMTP id y11mr3386724mug.54.1277426218535;
+	Thu, 24 Jun 2010 17:36:58 -0700 (PDT)
+Received: from atverdohlebov ([94.28.104.114])
+	by mx.google.com with ESMTPS id e10sm12822658muf.38.2010.06.24.17.36.56
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 24 Jun 2010 17:36:57 -0700 (PDT)
+Message-ID: <B4EAD150EF8844DDB3676A4A9B08C120@rhonda.vtc.ru>
+From: "Andrew Tverdohlebov" <fat031c@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>,
+	<raj.khem@gmail.com>
+References: <3511CCD655164D0DACCECB9DE0506610@rhonda.vtc.ru>
+	<20100624151848.GD28292@gmail.com>
+Date: Fri, 25 Jun 2010 11:36:53 +1100
+MIME-Version: 1.0
+X-Priority: 3
+X-MSMail-Priority: Normal
+X-Mailer: Microsoft Outlook Express 6.00.2900.5931
+X-MimeOLE: Produced By Microsoft MimeOLE V6.00.2900.5931
+X-SA-Exim-Connect-IP: 72.14.220.159
+X-SA-Exim-Mail-From: fat031c@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	STOX_REPLY_TYPE autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Updated recipe for chrome
+Subject: Re: How to select specific version of dependant component
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,45 +61,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jun 2010 00:02:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 25 Jun 2010 00:41:35 -0000
+Content-Type: text/plain; format=flowed; charset="ISO-8859-1";
+	reply-type=original
+Content-Transfer-Encoding: 7bit
+
+Great thanks !
+It works.
+one small question : what does the '_local' suffix mean ?
+
+----- Original Message ----- 
+From: "Khem Raj" <raj.khem@gmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Sent: Friday, June 25, 2010 2:18 AM
+Subject: Re: [oe] How to select specific version of dependant component
 
 
-> Message: 1
-> Date: Thu, 24 Jun 2010 08:12:54 -0700
-> From: Khem Raj <raj.khem@gmail.com>
-> Subject: Re: [oe] Updated recipe for chrome
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Koen Kooi <koen@openembedded.org>
-> Message-ID: <20100624151254.GB28292@gmail.com>
-> Content-Type: text/plain; charset=3Dus-ascii
->=20
-> On (24/06/10 04:13), Gary Thomas wrote:
-> > On 06/22/2010 05:21 AM, Gary Thomas wrote:
-> > >Does anyone have an updated recipe for Google chrome?  The
-> > >one in org.openembedded.dev is really old - SVN revision
-> > >34027 - mainline is at 50359!
-> > >
-> > >I looked at the recipe and it seems to be full of magic
-> > >(subpackages with specific SVN revisions, etc). I doubt
-> > >that just updating the main SVN revision number will work.
-> > >
-> > >Any ideas/pointers? I'd really like to try some of the
-> > >latest features on my embedded systems :-)
->=20
-> I would encourage to bump the srcrev and see what happens
-> there might be some patches need rework if any.
->=20
-> >=20
-> > Can someone please comment on this (maybe the package author)??
-> > I'm will to try/test changes, I'm just not sure what to change.
-I wrote the initial recipe and I have done some work on this front. Read
-the previous email that I sent about AIOS. It would be great indeed to
-upgrade this application,
-
-Gr=C3=A9goire
-
+> On (24/06/10 16:51), Andrew Tverdohlebov wrote:
+>> Dear openembedded community,
+>>
+>> Could you give me a hint how to write a recipe that refers to specific 
+>> version of a library.
+>
+> you can use PREFERRED_VERSION_libnet_local = "1.0.2" in your local.conf
+>
+>>
+>> For example my package depends on libnet 1.0.2
+>> If I write
+>> DEPENDS += "libnet"
+>> it will take libnet with maximum version number 1.1.2
+>> How can I instruct bitbake to take libnet 1.0.2 ?
+>>
+>> In other recipes I saw something like
+>> DEPENDS += "libnet (= 1.0.2)"
+>>
+>> But it doesn't work in my case for some reason.
+>>
+>> Huge thanks in advance,
+>> Andrew
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
 
 
 
