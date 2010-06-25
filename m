@@ -1,37 +1,37 @@
-Received: from fg-out-1718.google.com ([72.14.220.157])
+Received: from fg-out-1718.google.com ([72.14.220.154])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OS7xZ-00067m-CN
+	(envelope-from <martin.jansa@gmail.com>) id 1OS7xZ-00067o-Ga
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 14:26:21 +0200
-Received: by fg-out-1718.google.com with SMTP id 22so2265410fge.6
+	Fri, 25 Jun 2010 14:26:53 +0200
+Received: by fg-out-1718.google.com with SMTP id 22so2265411fge.6
 	for <openembedded-devel@lists.openembedded.org>;
 	Fri, 25 Jun 2010 05:20:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=YUYtR5O7mFE0uUd/9i081mGTKg/yo6VJRMkL3K38Tss=;
-	b=V7gCc/Iz+JTfi+r2KJMFCBtfB2x3D1QKIrPHOOfi5sZX/HDWdYgWW4t9YZLnqLaFaH
-	NcZmuU0QJCcHisq0kMkJHy6iPRso4fod9UNzDykgQRlbVxSt42wblnkaUyPYBWQfJkjZ
-	dSSC4qwk/LINnSp3nshsjPMAsWTK+flvzmrGs=
+	bh=+CJv0Xu840znFmg1XQYC++QMDj47q0khuHdYX6bkqdA=;
+	b=dYJ0HN0853i7eO/WQcgRVoK6xgiw2LX1SFUk1uqwbFhKU0Y1RzSQfIvfvF6dybrD7W
+	31ruOCwvnFQBdq+ERh+nHhXk7r7lGWr6ZzU0bkscV+l3h2Qf7WJLw5zVWEJ3tvBBF7r3
+	BU2opqSin4v0PYWOb3NXUUH51mGc9Z0dqxVyg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=GKpxQzlYGiTKqt8NaFpQTBuf6pv68W1lc1kclQSpyXlx9X3T5qBImKLO1PQdv3KZIg
-	WSjBzJ0bDFyHRp4ZW7/PplUuK+hg7ICCS2b2aVCGafoq0qxHdVMJ2i4f0jChPokNmhsI
-	DGMRhCpdt0q17/fzepIRPazEYyWgMXLaAYq1U=
-Received: by 10.223.103.202 with SMTP id l10mr503981fao.33.1277468404068;
-	Fri, 25 Jun 2010 05:20:04 -0700 (PDT)
+	b=KrT6hiRal3ySkbo7KNqsYuYbFohSNzSv7ov5BTnHYrN1AFKwwt8VerPcCijhmj6l1Z
+	QDFsYOUd3ahRiGbdrJs9sdFI5m6WCcy/dXcF8/xIzMwAMGffwsNv9eSwS1oijrnbsd2L
+	3mATLtU/nZGt9gqA4v7qEj62aTa2JQ2m9MI5Q=
+Received: by 10.223.21.215 with SMTP id k23mr497977fab.54.1277468405146;
+	Fri, 25 Jun 2010 05:20:05 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id e10sm37872229fak.14.2010.06.25.05.20.03
+	by mx.google.com with ESMTPS id p21sm37834096fak.45.2010.06.25.05.20.04
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 25 Jun 2010 05:20:03 -0700 (PDT)
+	Fri, 25 Jun 2010 05:20:04 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jun 2010 14:19:37 +0200
-Message-Id: <1277468383-16679-4-git-send-email-Martin.Jansa@gmail.com>
+Date: Fri, 25 Jun 2010 14:19:38 +0200
+Message-Id: <1277468383-16679-5-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.0.2
 In-Reply-To: <1277468383-16679-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1277468383-16679-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 72.14.220.157
+X-SA-Exim-Connect-IP: 72.14.220.154
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 3/9] mesa: remove old releases 6.5.2, 7.0.2 using mesa-mesa.inc
+Subject: [PATCH 4/9] mesa-dri: remove old 7.0.3 and 6.5.2 relase using mesa-common-old.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,72 +57,133 @@ X-List-Received-Date: Fri, 25 Jun 2010 12:28:46 -0000
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
 ---
- recipes/mesa/mesa-6.5.2/fix-host-compile.patch     |   30 ---------
- recipes/mesa/mesa-6.5.2/mklib-rpath-link.patch     |   23 -------
- recipes/mesa/mesa-7.0.2/fix-host-compile.patch     |   30 ---------
- recipes/mesa/mesa-7.0.2/mklib-rpath-link.patch     |   23 -------
- .../mesa/mesa-full-7.0.2/fix-host-compile.patch    |   30 ---------
- .../mesa/mesa-full-7.0.2/fix-progs-makefile.patch  |   65 --------------------
- .../mesa/mesa-full-7.0.2/mklib-rpath-link.patch    |   23 -------
- recipes/mesa/mesa-full_7.0.2.bb                    |   27 --------
- recipes/mesa/mesa-mesa.inc                         |   41 ------------
- recipes/mesa/mesa_6.5.2.bb                         |    8 ---
- recipes/mesa/mesa_7.0.2.bb                         |    8 ---
- 11 files changed, 0 insertions(+), 308 deletions(-)
- delete mode 100644 recipes/mesa/mesa-6.5.2/fix-host-compile.patch
- delete mode 100644 recipes/mesa/mesa-6.5.2/mklib-rpath-link.patch
- delete mode 100644 recipes/mesa/mesa-7.0.2/fix-host-compile.patch
- delete mode 100644 recipes/mesa/mesa-7.0.2/mklib-rpath-link.patch
- delete mode 100644 recipes/mesa/mesa-full-7.0.2/fix-host-compile.patch
- delete mode 100644 recipes/mesa/mesa-full-7.0.2/fix-progs-makefile.patch
- delete mode 100644 recipes/mesa/mesa-full-7.0.2/mklib-rpath-link.patch
- delete mode 100644 recipes/mesa/mesa-full_7.0.2.bb
- delete mode 100644 recipes/mesa/mesa-mesa.inc
- delete mode 100644 recipes/mesa/mesa_6.5.2.bb
- delete mode 100644 recipes/mesa/mesa_7.0.2.bb
+ recipes/mesa/files/fix-progs-makefile.patch |   81 ---------------------------
+ recipes/mesa/files/mklib-cross.patch        |   14 -----
+ recipes/mesa/files/mklib-rpath-link.patch   |   20 -------
+ recipes/mesa/mesa-common-old.inc            |   15 -----
+ recipes/mesa/mesa-dri_6.5.2.bb              |   44 --------------
+ recipes/mesa/mesa-dri_7.0.3.bb              |   45 ---------------
+ 6 files changed, 0 insertions(+), 219 deletions(-)
+ delete mode 100644 recipes/mesa/files/fix-progs-makefile.patch
+ delete mode 100644 recipes/mesa/files/mklib-cross.patch
+ delete mode 100644 recipes/mesa/files/mklib-rpath-link.patch
+ delete mode 100644 recipes/mesa/mesa-common-old.inc
+ delete mode 100644 recipes/mesa/mesa-dri_6.5.2.bb
+ delete mode 100644 recipes/mesa/mesa-dri_7.0.3.bb
 
-diff --git a/recipes/mesa/mesa-6.5.2/fix-host-compile.patch b/recipes/mesa/mesa-6.5.2/fix-host-compile.patch
+diff --git a/recipes/mesa/files/fix-progs-makefile.patch b/recipes/mesa/files/fix-progs-makefile.patch
 deleted file mode 100644
-index d24d03d..0000000
---- a/recipes/mesa/mesa-6.5.2/fix-host-compile.patch
+index f0a8293..0000000
+--- a/recipes/mesa/files/fix-progs-makefile.patch
 +++ /dev/null
-@@ -1,30 +0,0 @@
----- /src/mesa/x86/orig-Makefile	2005-07-01 04:54:38.000000000 +0300
--+++ /src/mesa/x86/Makefile	2007-06-07 21:52:31.000000000 +0300
--@@ -5,6 +5,7 @@
+@@ -1,81 +0,0 @@
+-From e03daf13a562414f07230c17998edd39564b5f1b Mon Sep 17 00:00:00 2001
+-From: Martin Jansa <Martin.Jansa@gmail.com>
+-Date: Thu, 4 Mar 2010 14:16:27 +0100
+-Subject: [PATCH] fix libs
+-
+----
+- progs/demos/Makefile   |    2 +-
+- progs/glsl/Makefile    |    2 +-
+- progs/redbook/Makefile |    2 +-
+- progs/samples/Makefile |    2 +-
+- progs/xdemos/Makefile  |    2 +-
+- 5 files changed, 5 insertions(+), 5 deletions(-)
+-
+-diff --git a/progs/demos/Makefile b/progs/demos/Makefile
+-index 5b1d2a0..121b862 100644
+---- a/progs/demos/Makefile
+-+++ b/progs/demos/Makefile
+-@@ -8,7 +8,7 @@ INCDIR = $(TOP)/include
+- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) \
+- 	$(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
 - 
+--LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -l$(GL_LIB) \
+-+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lstdc++ \
+- 	$(APP_LIB_DEPS)
 - 
-- INCLUDE_DIRS = \
--+        -I/usr/include \
-- 	-I$(TOP)/include/GL \
-- 	-I$(TOP)/include \
-- 	-I.. \
--@@ -13,6 +14,10 @@
-- 	-I../glapi \
-- 	-I../tnl
+- PROGS = \
+-diff --git a/progs/glsl/Makefile b/progs/glsl/Makefile
+-index 3b5a595..836c4ac 100644
+---- a/progs/glsl/Makefile
+-+++ b/progs/glsl/Makefile
+-@@ -10,7 +10,7 @@ LIB_DEP = \
+- 	$(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) \
+- 	$(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
 - 
--+OPT_FLAGS_host = -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
--+
--+CFLAGS_host = -Wall -Wmissing-prototypes $(OPT_FLAGS_host) $(PIC_FLAGS) $(ARCH_FLAGS) \
--+        $(DEFINES) $(ASM_FLAGS) $(X11_INCLUDES) -std=c99 -ffast-math
+--LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) \
+-+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -lstdc++ \
+- 	-l$(GL_LIB) $(APP_LIB_DEPS)
 - 
-- default: gen_matypes matypes.h
+- # using : to avoid APP_CC pointing to CC loop
+-diff --git a/progs/redbook/Makefile b/progs/redbook/Makefile
+-index b41e488..95ed746 100644
+---- a/progs/redbook/Makefile
+-+++ b/progs/redbook/Makefile
+-@@ -7,7 +7,7 @@ INCDIR = $(TOP)/include
 - 
--@@ -21,7 +26,7 @@
+- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
 - 
+--LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
+-+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lstdc++ $(APP_LIB_DEPS)
 - 
-- gen_matypes: gen_matypes.c
---	$(CC) $(INCLUDE_DIRS) $(CFLAGS) gen_matypes.c -o gen_matypes
--+	$(CC) $(INCLUDE_DIRS) $(CFLAGS_host) gen_matypes.c -o gen_matypes
+- PROGS = aaindex \
+- 	aapoly \
+-diff --git a/progs/samples/Makefile b/progs/samples/Makefile
+-index 64fa47a..9f72c8b 100644
+---- a/progs/samples/Makefile
+-+++ b/progs/samples/Makefile
+-@@ -7,7 +7,7 @@ INCDIR = $(TOP)/include
 - 
-- # need some special rules here, unfortunately
-- matypes.h: ../main/mtypes.h ../tnl/t_context.h gen_matypes
-diff --git a/recipes/mesa/mesa-6.5.2/mklib-rpath-link.patch b/recipes/mesa/mesa-6.5.2/mklib-rpath-link.patch
+- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
+- 
+--LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
+-+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLEW_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lstdc++ $(APP_LIB_DEPS)
+- 
+- PROGS = accum bitmap1 bitmap2 blendeq blendxor copy cursor depth eval fog \
+- 	font line logo nurb olympic overlay point prim rgbtoppm quad select \
+-diff --git a/progs/xdemos/Makefile b/progs/xdemos/Makefile
+-index f866a32..c0f4e06 100644
+---- a/progs/xdemos/Makefile
+-+++ b/progs/xdemos/Makefile
+-@@ -11,7 +11,7 @@ LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME)
+- # Add X11 and pthread libs to satisfy GNU gold.
+- APP_LIB_DEPS += -lX11 -lpthread
+- 
+--LIBS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB) $(APP_LIB_DEPS)
+-+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB) -lstdc++ $(APP_LIB_DEPS)
+- 
+- PROGS = \
+- 	corender \
+--- 
+-1.7.0
+-
+diff --git a/recipes/mesa/files/mklib-cross.patch b/recipes/mesa/files/mklib-cross.patch
 deleted file mode 100644
-index e59513a..0000000
---- a/recipes/mesa/mesa-6.5.2/mklib-rpath-link.patch
+index fbe86e3..0000000
+--- a/recipes/mesa/files/mklib-cross.patch
 +++ /dev/null
-@@ -1,23 +0,0 @@
+@@ -1,14 +0,0 @@
+---- s/bin/mklib~	2008-02-19 15:30:18.000000000 +0000
+-+++ s/bin/mklib	2008-07-27 11:15:25.000000000 +0100
+-@@ -204,9 +204,9 @@
+- 	if [ "x$LINK" = "x" ] ; then
+- 	    # -linker was not specified so set default link command now
+-             if [ $CPLUSPLUS = 1 ] ; then
+--                LINK=g++
+-+                LINK=$CXX
+-             else
+--                LINK=gcc
+-+                LINK=$CC
+-             fi
+- 	fi
+- 
+diff --git a/recipes/mesa/files/mklib-rpath-link.patch b/recipes/mesa/files/mklib-rpath-link.patch
+deleted file mode 100644
+index 07361f5..0000000
+--- a/recipes/mesa/files/mklib-rpath-link.patch
++++ /dev/null
+@@ -1,20 +0,0 @@
 ---- Mesa/bin/mklib.orig	2006-06-04 20:56:22.000000000 -0600
 -+++ Mesa/bin/mklib	2006-06-04 20:57:04.000000000 -0600
 -@@ -98,6 +98,9 @@
@@ -135,273 +196,59 @@ index e59513a..0000000
 - 	'-cplusplus')
 - 	    CPLUSPLUS=1
 - 	    ;;
----- Mesa-6.5.2/configs/default.old	2007-01-26 11:49:32.000000000 +0000
--+++ Mesa-6.5.2/configs/default	2007-01-26 11:49:49.000000000 +0000
--@@ -73,7 +73,7 @@
-- GLU_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB) -lm
-- GLUT_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GLU_LIB) -l$(GL_LIB) $(EXTRA_LIB_PATH) -lX11 -lXmu -lXt -lXi -lm
-- GLW_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB) $(EXTRA_LIB_PATH) -lXt -lX11
---APP_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lm
--+APP_LIB_DEPS = -L$(TOP)/$(LIB_DIR) $(EXTRA_LIB_PATH) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lm
-- 
-- 
-- 
-diff --git a/recipes/mesa/mesa-7.0.2/fix-host-compile.patch b/recipes/mesa/mesa-7.0.2/fix-host-compile.patch
+---- Mesa/configs/default.orig	2006-06-04 21:01:47.000000000 -0600
+-+++ Mesa/configs/default	2006-06-04 21:01:16.000000000 -0600
+-@@ -71,4 +71,4 @@
+- GLU_LIB_DEPS = -L$(LIB_DIR) -l$(GL_LIB) -lm
+- GLUT_LIB_DEPS = -L$(LIB_DIR) -l$(GLU_LIB) -l$(GL_LIB) $(EXTRA_LIB_PATH) -lX11 -lXmu -lXt -lXi -lm
+- GLW_LIB_DEPS = -L$(LIB_DIR) -l$(GL_LIB) $(EXTRA_LIB_PATH) -lXt -lX11
+--APP_LIB_DEPS = -L$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lm
+-+APP_LIB_DEPS = -L$(LIB_DIR) $(EXTRA_LIB_PATH) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) -lm
+diff --git a/recipes/mesa/mesa-common-old.inc b/recipes/mesa/mesa-common-old.inc
 deleted file mode 100644
-index d24d03d..0000000
---- a/recipes/mesa/mesa-7.0.2/fix-host-compile.patch
+index 01f0adc..0000000
+--- a/recipes/mesa/mesa-common-old.inc
 +++ /dev/null
-@@ -1,30 +0,0 @@
----- /src/mesa/x86/orig-Makefile	2005-07-01 04:54:38.000000000 +0300
--+++ /src/mesa/x86/Makefile	2007-06-07 21:52:31.000000000 +0300
--@@ -5,6 +5,7 @@
-- 
-- 
-- INCLUDE_DIRS = \
--+        -I/usr/include \
-- 	-I$(TOP)/include/GL \
-- 	-I$(TOP)/include \
-- 	-I.. \
--@@ -13,6 +14,10 @@
-- 	-I../glapi \
-- 	-I../tnl
-- 
--+OPT_FLAGS_host = -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
--+
--+CFLAGS_host = -Wall -Wmissing-prototypes $(OPT_FLAGS_host) $(PIC_FLAGS) $(ARCH_FLAGS) \
--+        $(DEFINES) $(ASM_FLAGS) $(X11_INCLUDES) -std=c99 -ffast-math
-- 
-- default: gen_matypes matypes.h
-- 
--@@ -21,7 +26,7 @@
-- 
-- 
-- gen_matypes: gen_matypes.c
---	$(CC) $(INCLUDE_DIRS) $(CFLAGS) gen_matypes.c -o gen_matypes
--+	$(CC) $(INCLUDE_DIRS) $(CFLAGS_host) gen_matypes.c -o gen_matypes
-- 
-- # need some special rules here, unfortunately
-- matypes.h: ../main/mtypes.h ../tnl/t_context.h gen_matypes
-diff --git a/recipes/mesa/mesa-7.0.2/mklib-rpath-link.patch b/recipes/mesa/mesa-7.0.2/mklib-rpath-link.patch
-deleted file mode 100644
-index 618f5b5..0000000
---- a/recipes/mesa/mesa-7.0.2/mklib-rpath-link.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
----- /tmp/mklib	2007-12-08 11:03:23.000000000 +0100
--+++ Mesa-7.0.2/bin/mklib	2007-12-08 11:04:02.509863000 +0100
--@@ -106,6 +106,9 @@
-- 	-L*)
-- 	    DEPS="$DEPS $1"
-- 	    ;;
--+        -Wl*)
--+            DEPS="$DEPS $1"
--+            ;;
-- 	-pthread)
-- 	    # this is a special case (see bugzilla 10876)
-- 	    DEPS="$DEPS $1"
----- /tmp/default	2007-12-08 11:04:17.000000000 +0100
--+++ Mesa-7.0.2/configs/default	2007-12-08 11:05:06.279863000 +0100
--@@ -76,7 +76,7 @@
-- GLW_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB) $(EXTRA_LIB_PATH) -lXt -lX11
-- 
-- # Program dependencies - specific GL/glut libraries added in Makefiles
---APP_LIB_DEPS = -lm
--+APP_LIB_DEPS = $(EXTRA_LIB_PATH) -lm
-- 
-- 
-- 
-diff --git a/recipes/mesa/mesa-full-7.0.2/fix-host-compile.patch b/recipes/mesa/mesa-full-7.0.2/fix-host-compile.patch
-deleted file mode 100644
-index d24d03d..0000000
---- a/recipes/mesa/mesa-full-7.0.2/fix-host-compile.patch
-+++ /dev/null
-@@ -1,30 +0,0 @@
----- /src/mesa/x86/orig-Makefile	2005-07-01 04:54:38.000000000 +0300
--+++ /src/mesa/x86/Makefile	2007-06-07 21:52:31.000000000 +0300
--@@ -5,6 +5,7 @@
-- 
-- 
-- INCLUDE_DIRS = \
--+        -I/usr/include \
-- 	-I$(TOP)/include/GL \
-- 	-I$(TOP)/include \
-- 	-I.. \
--@@ -13,6 +14,10 @@
-- 	-I../glapi \
-- 	-I../tnl
-- 
--+OPT_FLAGS_host = -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os
--+
--+CFLAGS_host = -Wall -Wmissing-prototypes $(OPT_FLAGS_host) $(PIC_FLAGS) $(ARCH_FLAGS) \
--+        $(DEFINES) $(ASM_FLAGS) $(X11_INCLUDES) -std=c99 -ffast-math
-- 
-- default: gen_matypes matypes.h
-- 
--@@ -21,7 +26,7 @@
-- 
-- 
-- gen_matypes: gen_matypes.c
---	$(CC) $(INCLUDE_DIRS) $(CFLAGS) gen_matypes.c -o gen_matypes
--+	$(CC) $(INCLUDE_DIRS) $(CFLAGS_host) gen_matypes.c -o gen_matypes
-- 
-- # need some special rules here, unfortunately
-- matypes.h: ../main/mtypes.h ../tnl/t_context.h gen_matypes
-diff --git a/recipes/mesa/mesa-full-7.0.2/fix-progs-makefile.patch b/recipes/mesa/mesa-full-7.0.2/fix-progs-makefile.patch
-deleted file mode 100644
-index 727ede0..0000000
---- a/recipes/mesa/mesa-full-7.0.2/fix-progs-makefile.patch
-+++ /dev/null
-@@ -1,65 +0,0 @@
--Index: Mesa-7.0.2/progs/demos/Makefile
--===================================================================
----- Mesa-7.0.2.orig/progs/demos/Makefile	2008-08-22 15:52:16.000000000 +0800
--+++ Mesa-7.0.2/progs/demos/Makefile	2008-08-22 15:52:33.000000000 +0800
--@@ -13,7 +13,7 @@
-- 
-- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
-- 
---LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
--+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS) -lstdc++
-- 
-- PROGS = \
-- 	arbfplight \
--Index: Mesa-7.0.2/progs/glsl/Makefile
--===================================================================
----- Mesa-7.0.2.orig/progs/glsl/Makefile	2008-08-22 15:56:37.000000000 +0800
--+++ Mesa-7.0.2/progs/glsl/Makefile	2008-08-22 15:56:52.000000000 +0800
--@@ -7,7 +7,7 @@
-- 
-- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
-- 
---LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
--+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS) -lstdc++
-- 
-- PROGS = \
-- 	brick \
--Index: Mesa-7.0.2/progs/redbook/Makefile
--===================================================================
----- Mesa-7.0.2.orig/progs/redbook/Makefile	2008-08-22 15:55:10.000000000 +0800
--+++ Mesa-7.0.2/progs/redbook/Makefile	2008-08-22 15:55:27.000000000 +0800
--@@ -7,7 +7,7 @@
-- 
-- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
-- 
---LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
--+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS) -lstdc++
-- 
-- PROGS = aaindex aapoly aargb accanti accpersp alpha alpha3D anti \
-- 	bezcurve bezmesh checker clip colormat cube depthcue dof \
--Index: Mesa-7.0.2/progs/samples/Makefile
--===================================================================
----- Mesa-7.0.2.orig/progs/samples/Makefile	2008-08-22 15:56:01.000000000 +0800
--+++ Mesa-7.0.2/progs/samples/Makefile	2008-08-22 15:56:13.000000000 +0800
--@@ -7,7 +7,7 @@
-- 
-- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLUT_LIB_NAME)
-- 
---LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
--+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLUT_LIB) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS) -lstdc++
-- 
-- PROGS = accum bitmap1 bitmap2 blendeq blendxor copy cursor depth eval fog \
-- 	font line logo nurb olympic overlay point prim quad select \
--Index: Mesa-7.0.2/progs/xdemos/Makefile
--===================================================================
----- Mesa-7.0.2.orig/progs/xdemos/Makefile	2008-08-22 15:57:11.000000000 +0800
--+++ Mesa-7.0.2/progs/xdemos/Makefile	2008-08-22 15:57:22.000000000 +0800
--@@ -8,7 +8,7 @@
-- 
-- LIB_DEP = $(TOP)/$(LIB_DIR)/$(GL_LIB_NAME) $(TOP)/$(LIB_DIR)/$(GLU_LIB_NAME)
-- 
---LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS)
--+LIBS = -L$(TOP)/$(LIB_DIR) -l$(GLU_LIB) -l$(GL_LIB) $(APP_LIB_DEPS) -lstdc++
-- 
-- PROGS = glthreads \
-- 	glxdemo \
-diff --git a/recipes/mesa/mesa-full-7.0.2/mklib-rpath-link.patch b/recipes/mesa/mesa-full-7.0.2/mklib-rpath-link.patch
-deleted file mode 100644
-index 618f5b5..0000000
---- a/recipes/mesa/mesa-full-7.0.2/mklib-rpath-link.patch
-+++ /dev/null
-@@ -1,23 +0,0 @@
----- /tmp/mklib	2007-12-08 11:03:23.000000000 +0100
--+++ Mesa-7.0.2/bin/mklib	2007-12-08 11:04:02.509863000 +0100
--@@ -106,6 +106,9 @@
-- 	-L*)
-- 	    DEPS="$DEPS $1"
-- 	    ;;
--+        -Wl*)
--+            DEPS="$DEPS $1"
--+            ;;
-- 	-pthread)
-- 	    # this is a special case (see bugzilla 10876)
-- 	    DEPS="$DEPS $1"
----- /tmp/default	2007-12-08 11:04:17.000000000 +0100
--+++ Mesa-7.0.2/configs/default	2007-12-08 11:05:06.279863000 +0100
--@@ -76,7 +76,7 @@
-- GLW_LIB_DEPS = -L$(TOP)/$(LIB_DIR) -l$(GL_LIB) $(EXTRA_LIB_PATH) -lXt -lX11
-- 
-- # Program dependencies - specific GL/glut libraries added in Makefiles
---APP_LIB_DEPS = -lm
--+APP_LIB_DEPS = $(EXTRA_LIB_PATH) -lm
-- 
-- 
-- 
-diff --git a/recipes/mesa/mesa-full_7.0.2.bb b/recipes/mesa/mesa-full_7.0.2.bb
-deleted file mode 100644
-index 2f98eed..0000000
---- a/recipes/mesa/mesa-full_7.0.2.bb
-+++ /dev/null
-@@ -1,27 +0,0 @@
--include mesa-mesa.inc
+@@ -1,15 +0,0 @@
+-SECTION = "x11"
+-PE = "2"
 -
--SRC_URI = "${SOURCEFORGE_MIRROR}/mesa3d/MesaLib-${PV}.tar.bz2;name=archive \
--        ${SOURCEFORGE_MIRROR}/mesa3d/MesaGLUT-${PV}.tar.bz2;name=glut \
--        ${SOURCEFORGE_MIRROR}/mesa3d/MesaDemos-${PV}.tar.bz2;name=demos \
--        file://mklib-rpath-link.patch \
--        file://fix-host-compile.patch \
--        file://fix-progs-makefile.patch \
--        "
+-SRC_URI = "${SOURCEFORGE_MIRROR}/mesa3d/MesaLib-${PV}.tar.bz2 \
+-	file://mklib-rpath-link.patch"
 -
--do_install_append = "install -d ${D}${bindir}; \
--                     for f in glxgears glxheads glxdemo glxinfo; do \
--                     cp progs/xdemos/${f} ${D}${bindir}; \
--                     done"
+-S = "${WORKDIR}/Mesa-${PV}"
 -
--PACKAGES =+ "libglut libglut-dev mesa-utils"
+-PROVIDES = "virtual/libgl"
 -
--FILES_libglut = "${libdir}/libglut.so.*"
--FILES_libglut-dev = "${libdir}/libglut.* ${includedir}/GL/glut*"
--FILES_mesa-utils = "${bindir}/*"
+-LICENSE = "LGPL"
 -
--SRC_URI[archive.md5sum] = "93e6ed7924ff069a4f883b4fce5349dc"
--SRC_URI[archive.sha256sum] = "9d4707b556960f6aef14480f91fcd4f868720f64321947ab1b2fd20e85ce7f9e"
--SRC_URI[glut.md5sum] = "3a33f8efc8c58a592a854cfc7a643286"
--SRC_URI[glut.sha256sum] = "fa31ca39f00ff92c7da59d9993d0eefb8d901eb8a519743942e523fde120eb6c"
--SRC_URI[demos.md5sum] = "11a10410bae7be85cf25bc7119966468"
--SRC_URI[demos.sha256sum] = "ce39b26085acd8e5dffa8233618acac2605cc42203bc4f81c6e4504265f0ffaa"
-diff --git a/recipes/mesa/mesa-mesa.inc b/recipes/mesa/mesa-mesa.inc
+-INC_PR = "r3"
+-
+-DEPENDS = "makedepend-native xf86vidmodeproto glproto virtual/libx11 libxext libxxf86vm libxi libxmu libice"
+diff --git a/recipes/mesa/mesa-dri_6.5.2.bb b/recipes/mesa/mesa-dri_6.5.2.bb
 deleted file mode 100644
-index 48d171d..0000000
---- a/recipes/mesa/mesa-mesa.inc
+index d8f9506..0000000
+--- a/recipes/mesa/mesa-dri_6.5.2.bb
 +++ /dev/null
-@@ -1,41 +0,0 @@
+@@ -1,44 +0,0 @@
 -include mesa-common-old.inc
 -
--PACKAGES =+ "libglu libglu-dev libosmesa libosmesa-dev libgl libgl-dev"
+-SRC_URI += " file://mklib-cross.patch"
 -
--FILES_libgl = "${libdir}/libGL.so.*"
--FILES_libglu = "${libdir}/libGLU.so.*"
--FILES_libosmesa = "${libdir}/libOSMesa.so.*"
+-FILESPATHPKG =. "mesa-${PV}:"
 -
--FILES_libgl-dev = "${libdir}/libGL.* ${includedir}/GL"
--FILES_libglu-dev = "${libdir}/libGLU.* ${includedir}/GL/glu*.h"
--FILES_libosmesa-dev = "${libdir}/libOSMesa.* ${includedir}/osmesa.h"
+-PACKAGES_DYNAMIC = "mesa-dri-driver-*"
+-
+-PR = "${INC_PR}.1"
+-
+-DEPENDS += "libdrm"
+-# DRI is useless without the kernel drivers
+-RRECOMMENDS_${PN} += " kernel-module-drm kernel-module-radeon "
 -
 -do_configure() {
 -	cd configs
 -
--	cp linux current
+-	ln -sf linux-dri current
 -	sed -e "s%CC *= *.*%CC = ${CC}%" -i current
 -	sed -e "s%CXX *= *.*%CXX = ${CXX}%" -i current
 -	sed -e "s%LD *= *.*%LD = ${LD}%" -i current
@@ -409,52 +256,76 @@ index 48d171d..0000000
 -	sed -e "s%X11_INCLUDES *= *.*%X11_INCLUDES = -I${STAGING_INCDIR}/X11%" -i current
 -	sed -e "s%EXTRA_LIB_PATH *= *.*%EXTRA_LIB_PATH = ${LDFLAGS}%" -i current
 -	sed -i s:\$\(CC\):gcc:g  ../src/mesa/x86/Makefile
--	echo "SRC_DIRS = mesa glu glut/glx" >> current
--}
--
--do_compile() {
--	oe_runmake default
+-	echo "SRC_DIRS = mesa" >> current
+-	echo "DRI_DRIVER_INSTALL_DIR = ${D}${libdir}/dri" >> current
 -}
 -
 -do_install() {
--	install -d ${D}${libdir}
--	cp -pP lib/* ${D}${libdir}/
--	install -d ${D}${includedir}
--	cp -R include/GL ${D}${includedir}/
+-	oe_runmake -C src/mesa/drivers/dri install
 -}
 -
--do_stage() {
--        cp -pP lib/* ${STAGING_LIBDIR}/
--        cp -R include/GL ${STAGING_INCDIR}/
+-FILES_${PN}-dbg += "${libdir}/dri/.debug"
+-
+-python populate_packages_prepend () {
+-        import re, os.path
+-
+-        do_split_packages(d, root=bb.data.expand('${libdir}/dri', d), file_regex='(.*)_dri\.so', output_pattern='mesa-dri-driver-%s', description='%s DRI driver', extra_depends='')
 -}
-diff --git a/recipes/mesa/mesa_6.5.2.bb b/recipes/mesa/mesa_6.5.2.bb
-deleted file mode 100644
-index 8573ce3..0000000
---- a/recipes/mesa/mesa_6.5.2.bb
-+++ /dev/null
-@@ -1,8 +0,0 @@
--include mesa-mesa.inc
 -
--PR = "${INC_PR}.0"
--
--SRC_URI_append = " file://fix-host-compile.patch "
 -
 -SRC_URI[md5sum] = "e4d894181f1859651658b3704633e10d"
 -SRC_URI[sha256sum] = "137f50a30461d51eb9af5aac737bc788d536354cf47b26129b97bde6e41fb85f"
-diff --git a/recipes/mesa/mesa_7.0.2.bb b/recipes/mesa/mesa_7.0.2.bb
+diff --git a/recipes/mesa/mesa-dri_7.0.3.bb b/recipes/mesa/mesa-dri_7.0.3.bb
 deleted file mode 100644
-index 96dd966..0000000
---- a/recipes/mesa/mesa_7.0.2.bb
+index dcf6fd3..0000000
+--- a/recipes/mesa/mesa-dri_7.0.3.bb
 +++ /dev/null
-@@ -1,8 +0,0 @@
--include mesa-mesa.inc
+@@ -1,45 +0,0 @@
+-include mesa-common-old.inc
 -
--PR = "${INC_PR}.0"
+-# suppress mklib-rpath-link patch from mesa-common
+-SRC_URI = "${SOURCEFORGE_MIRROR}/mesa3d/MesaLib-${PV}.tar.bz2 file://mklib-cross.patch"
 -
--SRC_URI_append = " file://fix-host-compile.patch "
+-FILESPATHPKG =. "mesa-${PV}:"
 -
--SRC_URI[md5sum] = "93e6ed7924ff069a4f883b4fce5349dc"
--SRC_URI[sha256sum] = "9d4707b556960f6aef14480f91fcd4f868720f64321947ab1b2fd20e85ce7f9e"
+-PACKAGES_DYNAMIC = "mesa-dri-driver-*"
+-
+-PR = "${INC_PR}.1"
+-
+-DEPENDS += "libdrm"
+-# DRI is useless without the kernel drivers
+-RRECOMMENDS_${PN} += " kernel-module-drm kernel-module-radeon "
+-
+-do_configure() {
+-	cd configs
+-
+-	ln -sf linux-dri current
+-	sed -e "s%CC *= *.*%CC = ${CC}%" -i current
+-	sed -e "s%CXX *= *.*%CXX = ${CXX}%" -i current
+-	sed -e "s%LD *= *.*%LD = ${LD}%" -i current
+-	sed -e "s%OPT_FLAGS *= *.*%OPT_FLAGS = ${TARGET_CFLAGS}%" -i current
+-	sed -e "s%X11_INCLUDES *= *.*%X11_INCLUDES = -I${STAGING_INCDIR}/X11%" -i current
+-	sed -e "s%EXTRA_LIB_PATH *= *.*%EXTRA_LIB_PATH = ${LDFLAGS}%" -i current
+-	sed -i s:\$\(CC\):gcc:g  ../src/mesa/x86/Makefile
+-	echo "SRC_DIRS = mesa" >> current
+-	echo "DRI_DRIVER_INSTALL_DIR = ${D}${libdir}/dri" >> current
+-}
+-
+-do_install() {
+-	oe_runmake -C src/mesa/drivers/dri install
+-}
+-
+-FILES_${PN}-dbg += "${libdir}/dri/.debug"
+-
+-python populate_packages_prepend () {
+-        import re, os.path
+-
+-        do_split_packages(d, root=bb.data.expand('${libdir}/dri', d), file_regex='(.*)_dri\.so', output_pattern='mesa-dri-driver-%s', description='%s DRI driver', extra_depends='')
+-}
+-
+-
+-SRC_URI[md5sum] = "e6e6379d7793af40a6bc3ce1bace572e"
+-SRC_URI[sha256sum] = "ebdf3448eac8abb56bbfc0b7c015efce8e5d88f10ee3123dcc62c1ff47b62d22"
 -- 
 1.7.0.2
 
