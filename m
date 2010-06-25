@@ -1,39 +1,49 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OS9Nb-0007Dk-LI
+	(envelope-from <kergoth@gmail.com>) id 1OS9oe-0003TG-AS
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 15:55:41 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OS9J6-00060i-HN from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 06:51:00 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 25 Jun 2010 06:51:00 -0700
-Received: from [134.86.104.18] ([134.86.104.18]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 25 Jun 2010 07:50:59 -0600
-Message-ID: <4C24B443.80303@mentor.com>
-Date: Fri, 25 Jun 2010 08:50:59 -0500
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Fri, 25 Jun 2010 16:23:52 +0200
+Received: by qyk30 with SMTP id 30so34000qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Jun 2010 07:18:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=efQZo1CRzEVCHSEwCGATJl8XCJ1zQdZkvAu3DWZ0EVc=;
+	b=TZA5cNERkBXpOa8MAYEVS8Hbv5xK7fRAZuYQ4W55p4eIBR83ND4KGiM094LkGj0Fq3
+	0d69DVrCuVNESVnAlgdpXkbKLZ9RLYmcOwigjsRrCv05cfh9Cjl880+CuqAWI7mi7fd9
+	K/QeK80aGLngxDSgIfYluktBb9FGpFU3bRYGw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=jcEzY3b/UEVSWCdq2tHkjAeVtD5RnHE4AuIHqgBmWHDbzm5rlDDKBkSUhLGYlLb9/j
+	95DwYM5PkmYd08VQDsokJOPqUFEOVAINzQPBviQPCZb+Ylkv212Xs4um/ou2V/AX/b5I
+	2sV9v0UI1MeSP9QBB16+L3eCf6lP0E2xr4lS8=
+Received: by 10.224.107.138 with SMTP id b10mr596147qap.93.1277475537239; Fri, 
+	25 Jun 2010 07:18:57 -0700 (PDT)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.241.204 with HTTP; Fri, 25 Jun 2010 07:18:37 -0700 (PDT)
+In-Reply-To: <4C24B3C7.2080704@mentor.com>
+References: <AANLkTikjJzqog2Cla8H_JazzRw6QuSrSdllTOD7XwgBx@mail.gmail.com> 
+	<1277152663-12051-1-git-send-email-fransmeulenbroeks@gmail.com> 
+	<4C24B3C7.2080704@mentor.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Fri, 25 Jun 2010 07:18:37 -0700
+X-Google-Sender-Auth: VK3KLqfduIEB41pAp5bejtPRJs8
+Message-ID: <AANLkTilbKMff3QboYW7XeBuf0fOIhO6TYHxWNv2cIb2A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C227543.3050502@zenlinux.com>
-In-Reply-To: <4C227543.3050502@zenlinux.com>
-X-OriginalArrivalTime: 25 Jun 2010 13:50:59.0557 (UTC)
-	FILETIME=[7154E150:01CB146D]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RFC: Should do_runstrip be removed for kernel packages?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] linux-libc-headers: use kernel-arch.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jun 2010 13:55:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 25 Jun 2010 14:23:52 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Scott Garman wrote:
-> Hello,
-> 
-> I've noticed for many kernel builds in OE/Poky that there are non-fatal 
-> runstrip errors being generated during the do_pacakge stage of the build.
-> 
-> This is happening because a handful of utility binaries (in arch/boot/ 
-> and scripts/) are being compiled for the host architecture, and then 
-> strip for the target architecture is being run. When these architectures 
-> don't match, runstrip complains and generates these errors.
-> 
-> Currently in Poky we are maintaining a blacklist of these binaries and 
-> deleting them in do_install:
-> 
-> http://git.pokylinux.org/cgit.cgi/poky/commit/?id=698dab01098816e4894beb4b3dad556f045c074d 
-> 
-> 
-> This is a hack that I'd like to keep as temporary as possible.
-> 
-> I'm curious though if it is even common to perform do_runstrip for 
-> kernel packages? What are the use cases that require this? If there are 
-> none, then I'm inclined to simply disable do_runstrip in kernel.bbclass.
-> 
-> Another option - less elegant, but better than the current hack - might 
-> be to use a variable to disable runstrip and set that within the kernel 
-> recipe files.
+On Fri, Jun 25, 2010 at 6:48 AM, Tom Rini <tom_rini@mentor.com> wrote:
 
-There's already a SKIP for strip, iirc.  Throwing that into 
-kernel.bbclass or the modules bbclass would get the discussion moving 
-more, perhaps (I'm a bit torn here).
-
+> Frans Meulenbroeks wrote:
+>
+>> linux-libc-headers recipes all have their own code to set ARCH.
+>> However this same functionality is in kernel-arch.bbclass
+>> This patch adds an inherit kernel-arch in linux-libc-headers.inc
+>> and removes all arch calculation code from the recipes
+>>
+>> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>>
+>
+> Acked-by: Tom Rini <tom_rini@mentor.com>
+>
+>
+Acked-by: Chris Larson <chris_larson@mentor.com>
 -- 
-Tom Rini
-Mentor Graphics Corporation
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
