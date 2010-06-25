@@ -1,39 +1,42 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OS40V-0000VE-PN
-	for Openembedded-devel@lists.openembedded.org;
-	Fri, 25 Jun 2010 10:11:30 +0200
-Received: from compute2.internal (compute2.internal [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id D73D71073F9;
-	Fri, 25 Jun 2010 04:06:50 -0400 (EDT)
-Received: from heartbeat1.messagingengine.com ([10.202.2.160])
-	by compute2.internal (MEProxy); Fri, 25 Jun 2010 04:06:50 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	s=smtpout; bh=T2x6NOAWTUufSc+Q4CfYUij+h5g=;
-	b=g6ox1/3vcU61XbLGyqY6T9D/JYPrrM/u50suaZGXEmhGwaakMj1d3uWUgGklAMSyFgVkhaCbJLZINwAmQTNNruqc3OGAI+EvfxEXDI7/hfSWYLZqoCIj9pS4u2yZ8isY/7It20FJkzP6pFl5TEGXGukCZ/rR/EaqFrEc1nUgsiU=
-X-Sasl-enc: LIHem4sIVsY7MbePi0wi9Rmqi72YRr51zQv1nOpJsA02 1277453210
-Received: from asterix.crazy-teaparty.dyndns.org
-	(hnvr-4d07afec.pool.mediaWays.net [77.7.175.236])
-	by mail.messagingengine.com (Postfix) with ESMTPA id 15EC44BD57E;
-	Fri, 25 Jun 2010 04:06:49 -0400 (EDT)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Date: Fri, 25 Jun 2010 10:08:09 +0200
-Message-Id: <1277453289-23392-1-git-send-email-vjensen@gmx.de>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <20100416150505.GE7857@excalibur.local>
-References: <20100416150505.GE7857@excalibur.local>
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OS6eh-0001rU-9m for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Jun 2010 13:01:08 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OS6aB-0006eU-72 for openembedded-devel@lists.openembedded.org;
+	Fri, 25 Jun 2010 12:56:27 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Jun 2010 12:56:27 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 25 Jun 2010 12:56:27 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 25 Jun 2010 12:56:12 +0200
+Message-ID: <i0220d$htp$1@dough.gmane.org>
+References: <201006250901.38077.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <201006250901.38077.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vitus Jensen <vjensen@gmx.de>
-Subject: [PATCH][STABLE] dfu-programmer: USB Device Firmware Upgrade utility (special atmel-version).
+Subject: Re: MeeGo support in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,67 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 25 Jun 2010 08:11:30 -0000
+X-List-Received-Date: Fri, 25 Jun 2010 11:01:08 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Add recipes for version 0.5.2 and the current head of the subversion
-repository.  dfu-programmer is DFU utility supporting Atmel chips
-with a USB bootloader (which aren't supported by dfu-util).
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- recipes/dfu-programmer/dfu-programmer_0.5.2.bb |   17 +++++++++++++++++
- recipes/dfu-programmer/dfu-programmer_svn.bb   |   16 ++++++++++++++++
- 2 files changed, 33 insertions(+), 0 deletions(-)
- create mode 100644 recipes/dfu-programmer/dfu-programmer_0.5.2.bb
- create mode 100644 recipes/dfu-programmer/dfu-programmer_svn.bb
+On 25-06-10 09:01, Andreas Mueller wrote:
+> My investigations for a 'colorful' embedded environment lead me to Meego (http://meego.com/).
+> 
+> On the webpage we learn that this is a platform independent environment but there are only few platforms supported (Nokia N900 / Beaglebord / few Intel netbooks).
+> 
+> To have full platform-independency I would like to have Meego (maybe parts of it only) within OE and started already with easiest part uxlaunch (very tiny dm - see 
+> git://gitorious.org/meego-os-base/uxlaunch.git). This is already tested with xfce environment but before posting a patch here I would like to do some further tests with gnome/enlightenment and 
+> see what happens in case another dm is found in the image. 
+> 
+> Next step planned is mutter. Here I would like to use the original gnome sources and check the diffs to meego branch.
+> 
+> Now my questions:
+> 
+> - Are there any objections including meego parts (licensing / don't like Intel/Nokia..) in OE
+> - Are there already proceedings related to mutter ongoing? Or is there a reason that mutter is not in OE other than nobody has done so far?
 
-diff --git a/recipes/dfu-programmer/dfu-programmer_0.5.2.bb b/recipes/dfu-programmer/dfu-programmer_0.5.2.bb
-new file mode 100644
-index 0000000..34404bd
---- /dev/null
-+++ b/recipes/dfu-programmer/dfu-programmer_0.5.2.bb
-@@ -0,0 +1,17 @@
-+DESCRIPTION = "USB Device Firmware Upgrade utility (special atmel-version)"
-+SECTION = "devel"
-+AUTHOR = "Weston Schmidt <weston_schmidt@alumni.purdue.edu>"
-+LICENSE = "GPL"
-+
-+PV = "0.5.2"
-+PR = "r0"
-+
-+DEPENDS = "libusb1"
-+
-+SRC_URI = " \
-+	${SOURCEFORGE_MIRROR}/project/${PN}/${PN}/${PV}/${PN}-${PV}.tar.gz;name=tar \
-+	"
-+SRC_URI[tar.md5sum] = "ce882d37383df698a1c530080724b191"
-+SRC_URI[tar.sha256sum] = "e3c8bc1429fe1681c56ddc14fb05d29a7933aac566d13f894dca6fd916829cb9"
-+
-+inherit autotools
-diff --git a/recipes/dfu-programmer/dfu-programmer_svn.bb b/recipes/dfu-programmer/dfu-programmer_svn.bb
-new file mode 100644
-index 0000000..2f860dc
---- /dev/null
-+++ b/recipes/dfu-programmer/dfu-programmer_svn.bb
-@@ -0,0 +1,16 @@
-+DESCRIPTION = "USB Device Firmware Upgrade utility (special atmel-version)"
-+SECTION = "devel"
-+AUTHOR = "Weston Schmidt <weston_schmidt@alumni.purdue.edu>"
-+LICENSE = "GPL"
-+
-+SRCREV = "95"
-+PV = "0.5.2+svnr${SRCPV}"
-+PR = "r1"
-+DEFAULT_PREFERENCE = "-1"
-+
-+DEPENDS = "libusb1"
-+
-+SRC_URI = "svn://${PN}.svn.sourceforge.net/svnroot/${PN}/;module=trunk;proto=http"
-+S = "${WORKDIR}/trunk/${PN}"
-+
-+inherit autotools
--- 
-1.7.1
+I didn't add mutter because at the time it didn't build against
+clutter/gles. It think that has changed now :)
+
+I would very much like to build meego components in OE!
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMJItMMkyGM64RGpERAnz2AJ9eNNYYrHUCh+hityPmuIqzi+zIpACgiMWY
+XUcuvovOv3NF/li1OFvSI38=
+=YUQM
+-----END PGP SIGNATURE-----
 
 
 
