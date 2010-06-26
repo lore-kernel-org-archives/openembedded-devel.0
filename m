@@ -1,49 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OSUhu-0000dh-EE
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jun 2010 14:42:04 +0200
-Received: by fxm1 with SMTP id 1so2849456fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OSXOC-0007VX-2q for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Jun 2010 17:33:52 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OSXJh-0005tG-4W for openembedded-devel@lists.openembedded.org;
+	Sat, 26 Jun 2010 17:29:13 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Jun 2010 17:29:13 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jun 2010 05:37:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=AduWV0RbS7vNuDp1BHEERDysztVsyB8GtT/F7l0Uhi0=;
-	b=jphAvgVm4/rzxJVv1dn49AB5Y1XeXyA7vVjbS5ZOgBP8XrqxJi+J2CG6kHJ0Gs87RV
-	pPGkZJZnQPcG0gApBH0YCKS3kmDrsOkHyJ55OUr52u7+RRPRJG+3m7y33fCXIJEXW0SK
-	feTYCcHx4TmkhwRb01nYrnMqaQvf/IOd8l8dk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=khk6Iu997QD5xMiZtFrxCElLTE2opNoN3Ama1iyHcWeJnOfwM7rxD0pC34b0MjRmEY
-	0zc77doNsrG4PjvJY1pN79ug7J2wb7Xs7drSmTMyUCy4EvfrVKGKamnFT4tfwCU3w1mh
-	UUJ/LXYh9J+kv70jjd060dLP5BNH7I5w93iY8=
-Received: by 10.223.143.20 with SMTP id s20mr1664991fau.38.1277555843056;
-	Sat, 26 Jun 2010 05:37:23 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id o11sm40345444fal.19.2010.06.26.05.37.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 26 Jun 2010 05:37:22 -0700 (PDT)
-Date: Sat, 26 Jun 2010 14:37:00 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Sat, 26 Jun 2010 17:29:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100626123700.GM17650@jama>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 26 Jun 2010 17:29:05 +0200
+Message-ID: <i056c1$k7t$1@dough.gmane.org>
 References: <E1OSU21-0002Hi-E6@melo.openembedded.org>
-MIME-Version: 1.0
-In-Reply-To: <E1OSU21-0002Hi-E6@melo.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	<20100626123700.GM17650@jama>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100524 Shredder/3.0.6pre
+In-Reply-To: <20100626123700.GM17650@jama>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Koen Kooi : libdrm.inc: fix packaging regression that cause ${PN} to go from libdrm2 to libdrm
+Subject: Re: Koen Kooi : libdrm.inc: fix packaging regression that cause ${PN} to go from libdrm2 to libdrm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,64 +51,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jun 2010 12:42:04 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 26 Jun 2010 15:33:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jun 26, 2010 at 11:58:45AM +0000, git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 5f8da0c97cb5200d83483d4bbe1dc867e133dbbc
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=5f8da0c97cb5200d83483d4bbe1dc867e133dbbc
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 26-06-10 14:37, Martin Jansa wrote:
+
+> Just noticed the problem too and seems like this solution wasn't enough,
+> would you add ${PN}-kms package? Or do you have an idea why it ignored
+> LEAD_SONAME?
+
+It doens't build a libkms for me, so it looks safe to add such a
+package. No idea on the LEAD_SONAME, sorry.
+
+regards,
+
+Koen
+
 > 
-> Author: Koen Kooi <koen@openembedded.org>
-> Date:   Sat Jun 26 13:55:22 2010 +0200
+> NOTE: Multiple libraries (libkms.so.1, libdrm.so.2) found and LEAD_SONAME not defined
 > 
-> libdrm.inc: fix packaging regression that cause ${PN} to go from libdrm2 to libdrm
+> Packaged contents of libdrm-drivers into
+> /home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm-glamo1_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
+> Packaged contents of libdrm-dbg into
+> /home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm-dbg_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
+> Packaged contents of libdrm into
+> /home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
+> Packaged contents of libdrm-dev into
+> /home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm-dev_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
 > 
-> ---
+> Regards,
 > 
->  recipes/dri/libdrm.inc |    7 ++++++-
->  1 files changed, 6 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/dri/libdrm.inc b/recipes/dri/libdrm.inc
-> index eebd6b2..487eae6 100644
-> --- a/recipes/dri/libdrm.inc
-> +++ b/recipes/dri/libdrm.inc
-> @@ -3,6 +3,11 @@ LICENSE = "MIT"
->  SRC_URI = "http://dri.freedesktop.org/libdrm/libdrm-${PV}.tar.bz2"
->  PROVIDES = "drm"
->  
-> -INC_PR = "r3"
-> +INC_PR = "r4"
->  
->  inherit autotools pkgconfig
-> +
-> +PACKAGES =+ "${PN}-drivers"
-> +FILES_${PN}-drivers = "${libdir}/libdrm_*.so.*"
-> +
-> +LEAD_SONAME_${PN} = "libdrm.so"
 
-Hi,
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Just noticed the problem too and seems like this solution wasn't enough,
-would you add ${PN}-kms package? Or do you have an idea why it ignored
-LEAD_SONAME?
+iD8DBQFMJhzBMkyGM64RGpERAoo8AJ9nSuiwuayM+rWgfqQkWUjFW86MFgCggmxF
+YXh6aO1xz7JyI9YajSCohvw=
+=2j1c
+-----END PGP SIGNATURE-----
 
-NOTE: Multiple libraries (libkms.so.1, libdrm.so.2) found and LEAD_SONAME not defined
-
-Packaged contents of libdrm-drivers into
-/home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm-glamo1_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
-Packaged contents of libdrm-dbg into
-/home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm-dbg_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
-Packaged contents of libdrm into
-/home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
-Packaged contents of libdrm-dev into
-/home/shr/shr-unstable/tmp/deploy/ipk/armv4t/libdrm-dev_2.4.20+gitr4566+9411b0ca002b34d2d13a132038170c2e7b08945c-r4.0.5_armv4t.ipk
-
-Regards,
-
--- 
-Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
 
