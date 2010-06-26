@@ -1,34 +1,40 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OSTuv-0003d4-8K
+	(envelope-from <martin.jansa@gmail.com>) id 1OSUBE-0003ja-9R
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jun 2010 13:51:28 +0200
-Received: by fxm1 with SMTP id 1so2837657fxm.6
+	Sat, 26 Jun 2010 14:08:17 +0200
+Received: by fxm1 with SMTP id 1so2841483fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 26 Jun 2010 04:46:45 -0700 (PDT)
+	Sat, 26 Jun 2010 05:03:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=RnhgKIgvmDThb5oNK8BGUvw6w5Ux/SH1o/xiQzOrgis=;
-	b=Nda1rHg5Ap0CHPnguS8DL8S1N+qwCbVbU3KKaUa3yDPKWm2GSk/KA/UINpN+4f0B1G
-	uY1G6v80R54bHZ3GJCkZXvq0zKhCvPnz/YURsDFCaRuEieN3+3Aq4+R5id/VgRLk42ZT
-	a9If736M98L5hIjUsMTJg4xIuit14m3rhIB7U=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=d+E6SVipdpHvwcZ9+IYThAYwHsicbTIvVhzwG+1Y03I=;
+	b=bXdrnxN8ZIRc1UK+/ZqKcb0sg/uEPlpjjIaX2QywyW+7HcPNDUC5gKoI8uWc4Acdb5
+	ojehvXiJ7fDCAjvKHBIC+nm/H0Ad3nqd6lV3AhVQXnvdLorU345sB8XUzvOQ3VDL0pHx
+	TEKDEPNlctsDCHe4nSYMFv4mNBxqWItTAkLwc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=FU+p8cTvcYLl2iHafMkFg6mVPkzzJVb4mzfxhUGghHr5SGhZRaFwFo5ptuMU7Zn3vj
-	ghvTR6Tez84ivkUZQG31bNlfBwNPe18fndDhPTp8ONPSlFPSFIvMGm3Jbw6qTDj3EFam
-	WSA5E34SnwU2ayGEJxUZ4ncaUTd4ANeZbW9N8=
-Received: by 10.223.35.12 with SMTP id n12mr1631826fad.35.1277552805810;
-	Sat, 26 Jun 2010 04:46:45 -0700 (PDT)
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=WdKj0m7gkr+RJi6n9CkzQBliKlZ0Mx8w/p3UHSoNYntzWyQ97kxLr0RVVvn1T+oesR
+	4AhNxNYntot2nZRijLUs05dAS1UWunsgz0OifESZDolV/9HpQDrxzY3jvUbObl3TZK4H
+	n3qX9dRqqhLt4+0GbkBTyFjFMJuSJpAR2JLT4=
+Received: by 10.223.5.81 with SMTP id 17mr1647747fau.42.1277553816930;
+	Sat, 26 Jun 2010 05:03:36 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id d9sm11146415fav.42.2010.06.26.04.46.43
+	by mx.google.com with ESMTPS id d9sm11174027fav.18.2010.06.26.05.03.36
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 26 Jun 2010 04:46:45 -0700 (PDT)
+	Sat, 26 Jun 2010 05:03:36 -0700 (PDT)
+Date: Sat, 26 Jun 2010 14:03:14 +0200
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Jun 2010 13:46:19 +0200
-Message-Id: <1277552779-12490-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.1
+Message-ID: <20100626120314.GL17650@jama>
+References: <20100625171600.GG17650@jama>
+ <i02s5v$j7s$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i02s5v$j7s$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -37,7 +43,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] preferred-xorg-versions: remove include files for old releases
+Subject: Re: What is preferred matchbox-keyboard provider nowadays?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,1544 +57,161 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jun 2010 11:51:28 -0000
+X-List-Received-Date: Sat, 26 Jun 2010 12:08:17 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* git grep shows that all distributions (in OE tree) moved to
-  preferred-xorg-versions-X11R7.5.inc already
-* would be nice to encourage everybody to use most tested X11R7.5 or
-  no preferred-xorg-versions at all (we can keep latest versions working
-  and use D_P -1 for stuff which needs more testing first)
-* replace preferred-xorg-versions.inc with link always adjusted to
-  latest relase (is there any problem with symlink in OE tree?)
-* this would also make easier to remove really old versions when it's
-  hard to test some changes (like converting libx11 staging)
+On Fri, Jun 25, 2010 at 08:22:55PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 25-06-10 19:16, Martin Jansa wrote:
+> > Image build is showing some strange NOTEs when it finds multiple runtime providers (IIRC before it was only about buildtime providers)
+> > 
+> > NOTE: multiple providers are available for runtime matchbox-keyboard (matchbox-keyboard, matchbox-keyboard-inputmethod)
+> > NOTE: consider defining a PREFERRED_PROVIDER entry to match matchbox-keyboard
+> > NOTE: multiple providers are available for runtime matchbox-keyboard-inputmethod (matchbox-keyboard-inputmethod, matchbox-keyboard)
+> > NOTE: consider defining a PREFERRED_PROVIDER entry to match matchbox-keyboard-inputmethod
+> > 
+> > git grep shows it used here:
+> > recipes/angstrom/angstrom-gpe-task-base.bb:    matchbox-keyboard \
+> > recipes/images/x11-sato-image.bb:       matchbox-keyboard matchbox-keyboard-applet matchbox-keyboard-im \
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:RCONFLICTS_${PN} = "matchbox-keyboard"
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:RPROVIDES_${PN} = "matchbox-keyboard"
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:PACKAGES += "matchbox-keyboard-im matchbox-keyboard-im-dbg \
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:             matchbox-keyboard-applet matchbox-keyboard-applet-dbg"
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:FILES_matchbox-keyboard-im = "${libdir}/gtk-2.0/*/immodules/*.so"
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:FILES_matchbox-keyboard-im-dbg += "${libdir}/gtk-2.0/*/immodules/.debug"
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:FILES_matchbox-keyboard-applet = "${libdir}/matchbox-panel/*.so"
+> > recipes/matchbox-keyboard/matchbox-keyboard-inputmethod_svn.bb:FILES_matchbox-keyboard-applet-dbg += "${libdir}/matchbox-panel/.debug"
+> > recipes/matchbox-keyboard/matchbox-keyboard_svn.bb:RCONFLICTS_${PN} = matchbox-keyboard-inputmethod
+> > recipes/matchbox-keyboard/matchbox-keyboard_svn.bb:RPROVIDES_${PN} = matchbox-keyboard-inputmethod
+> > recipes/multitap-pad/multitap-pad_svn.bb:RCONFLICTS_${PN} = matchbox-keyboard-inputmethod
+> > recipes/tasks/task-mamona.bb:    matchbox-keyboard \
+> > recipes/tasks/task-openmoko-base.bb:#  matchbox-keyboard-inputmethod \
+> > recipes/tasks/task-openmoko-base.bb:#  matchbox-keyboard-im \
+> > recipes/tasks/task-openmoko-base.bb:#  matchbox-keyboard-applet \
+> > recipes/tasks/task-shr-minimal.bb:  matchbox-keyboard-im \
+> > 
+> > do we need RPROVIDES_${PN} here or can we replace 
+> > recipes/angstrom/angstrom-gpe-task-base.bb:    matchbox-keyboard \
+> > recipes/tasks/task-mamona.bb:    matchbox-keyboard \
+> > if they are not expecting to pull recipes/matchbox-keyboard/matchbox-keyboard_svn.bb
+> > 
+> > IIRC runtime providers are not handled correctly in this case anyways, right?
+> 
+> It has been some years since I last looked that this, but at that time,
+> angstrom wanted 'matchbox-keyboard'. Dunno what those -om and -applet
+> are about.
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- .../include/preferred-xorg-versions-X11R7.0.inc    |  342 --------------------
- .../include/preferred-xorg-versions-X11R7.1.inc    |  186 -----------
- .../include/preferred-xorg-versions-X11R7.2.inc    |  271 ----------------
- .../include/preferred-xorg-versions-X11R7.3.inc    |  282 ----------------
- .../preferred-xorg-versions-X11R7.4-updates.inc    |    7 -
- .../include/preferred-xorg-versions-X11R7.4.inc    |  257 ---------------
- conf/distro/include/preferred-xorg-versions.inc    |  112 +-------
- 7 files changed, 1 insertions(+), 1456 deletions(-)
- delete mode 100644 conf/distro/include/preferred-xorg-versions-X11R7.0.inc
- delete mode 100644 conf/distro/include/preferred-xorg-versions-X11R7.1.inc
- delete mode 100644 conf/distro/include/preferred-xorg-versions-X11R7.2.inc
- delete mode 100644 conf/distro/include/preferred-xorg-versions-X11R7.3.inc
- delete mode 100644 conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc
- delete mode 100644 conf/distro/include/preferred-xorg-versions-X11R7.4.inc
- mode change 100644 => 120000 conf/distro/include/preferred-xorg-versions.inc
+I tried to compare the output and matchbox-keyboard_svn.bb provides the same 
+as matchbox-keyboard-inputmethod package, but matchbox-keyboard-inputmethod has
+extra Xsession.d script and builds also matchbox-keyboard-im (used in SHR to propagate
+virtual keyboard clicks to gtk apps) and matchbox-keyboard-applet (I guess applet with 
+keybard itself?).
 
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.0.inc b/conf/distro/include/preferred-xorg-versions-X11R7.0.inc
-deleted file mode 100644
-index 158ad0f..0000000
---- a/conf/distro/include/preferred-xorg-versions-X11R7.0.inc
-+++ /dev/null
-@@ -1,342 +0,0 @@
--PREFERRED_PROVIDER_virtual/xserver = "xserver-xorg"
--
--PREFERRED_PROVIDER_libxext = "libxext"
--PREFERRED_PROVIDER_xext = "libxext"
--PREFERRED_PROVIDER_libxi = "libxi"
--PREFERRED_PROVIDER_libxft = "libxft"
--PREFERRED_PROVIDER_virtual/libx11 = "libx11"
--PREFERRED_PROVIDER_virtual/libx11-native = "libx11-native"
--PREFERRED_PROVIDER_libxpm = "libxpm"
--PREFERRED_PROVIDER_xpm = "libxpm"
--PREFERRED_PROVIDER_libxt = "libxt"
--PREFERRED_PROVIDER_libxaw = "libxaw"
--PREFERRED_PROVIDER_libice = "libice"
--PREFERRED_PROVIDER_libxrender = "libxrender"
--PREFERRED_PROVIDER_libxcursor = "libxcursor"
--PREFERRED_PROVIDER_xextensions = "xextensions"
--PREFERRED_PROVIDER_xproto = "xproto"
--PREFERRED_PROVIDER_x11 = "libx11"
--PREFERRED_PROVIDER_libxv = "libxv"
--PREFERRED_PROVIDER_xft = "libxft"
--PREFERRED_PROVIDER_libxrandr = "libxrandr"
--PREFERRED_PROVIDER_libxdamage = "libxdamage"
--PREFERRED_PROVIDER_libxcomposite = "libxcomposite"
--PREFERRED_PROVIDER_libxfixes = "libxfixes"
--PREFERRED_PROVIDER_libxinerama = "libxinerama"
--PREFERRED_PROVIDER_libxxf86vm = "libxxf86vm"
--PREFERRED_PROVIDER_libxmu = "libxmu"
--PREFERRED_PROVIDER_libsm = "libsm"
--PREFERRED_PROVIDER_xrandr = "xrandr"
--PREFERRED_PROVIDER_xserver = "xserver-xorg"
--PREFERRED_PROVIDER_virtual/xorg = "xserver-xorg"
--
--PREFERRED_VERSION_task-xorg = "X11R7.0"
--
--PREFERRED_VERSION_appres = "X11R7.0-1.0.0"
--PREFERRED_VERSION_bdftopcf-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_bdftopcf = "X11R7.0-1.0.0"
--PREFERRED_VERSION_beforelight = "X11R7.0-1.0.1"
--PREFERRED_VERSION_bitmap = "X11R7.0-1.0.1"
--PREFERRED_VERSION_editres = "X11R7.0-1.0.1"
--PREFERRED_VERSION_fonttosfnt = "X11R7.0-1.0.1"
--PREFERRED_VERSION_fslsfonts = "X11R7.0-1.0.1"
--PREFERRED_VERSION_fstobdf = "X11R7.0-1.0.1"
--PREFERRED_VERSION_iceauth = "X11R7.0-1.0.1"
--PREFERRED_VERSION_ico = "X11R7.0-1.0.1"
--PREFERRED_VERSION_lbxproxy = "X11R7.0-1.0.1"
--PREFERRED_VERSION_listres = "X11R7.0-1.0.1"
--PREFERRED_VERSION_luit = "X11R7.0-1.0.1"
--PREFERRED_VERSION_mkcfm = "X11R7.0-1.0.1"
--PREFERRED_VERSION_mkfontdir-native = "X11R7.0-1.0.1"
--PREFERRED_VERSION_mkfontdir = "X11R7.0-1.0.1"
--PREFERRED_VERSION_mkfontscale-native = "X11R7.0-1.0.1"
--PREFERRED_VERSION_mkfontscale = "X11R7.0-1.0.1"
--PREFERRED_VERSION_oclock = "X11R7.0-1.0.1"
--PREFERRED_VERSION_proxymngr = "X11R7.0-1.0.1"
--PREFERRED_VERSION_rgb = "X11R7.0-1.0.0"
--PREFERRED_VERSION_rstart = "X11R7.0-1.0.1"
--PREFERRED_VERSION_scripts = "X11R7.0-1.0.1"
--PREFERRED_VERSION_sessreg = "X11R7.0-1.0.0"
--PREFERRED_VERSION_setxkbmap = "X11R7.0-1.0.1"
--PREFERRED_VERSION_showfont = "X11R7.0-1.0.1"
--PREFERRED_VERSION_smproxy = "X11R7.0-1.0.1"
--PREFERRED_VERSION_twm = "X11R7.0-1.0.1"
--PREFERRED_VERSION_viewres = "X11R7.0-1.0.1"
--PREFERRED_VERSION_x11perf = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xauth = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xbiff = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xcalc = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xclipboard = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xclock = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xcmsdb = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xconsole = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xcursorgen = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xdbedizzy = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xditview = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xdm = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xdpyinfo = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xdriinfo = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xedit = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xev = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xeyes = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xf86dga = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfd = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfindproxy = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfontsel = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfs = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfsinfo = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfwp = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xgamma = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xgc = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xhost = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xinit = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkbcomp = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkbevd = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkbprint = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkbutils = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkill = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xload = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlogo = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlsatoms = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlsclients = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlsfonts = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmag = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xman = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmessage = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmh = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmodmap = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xmore = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xphelloworld = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xplsprinters = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xpr = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xprehashprinterlist = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xprop = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xrandr = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xrdb = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xrefresh = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xrx = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xset = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xsetmode = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xsetpointer = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xsetroot = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xsm = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xstdcmap = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xtrap = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xvidtune = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xvinfo = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xwd = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xwininfo = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xwud = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xbitmaps = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xcursor-themes = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkbdata = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xorg-docs = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xorg-sgml-doctools = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xf86-input-acecad = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-aiptek = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-calcomp = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-citron = "X11R7.0-2.1.1.5"
--PREFERRED_VERSION_xf86-input-digitaledge = "X11R7.0-1.0.1.3"
--PREFERRED_VERSION_xf86-input-dmc = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-dynapro = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-elo2300 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-elographics = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-evdev = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-fpit = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-hyperpen = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-jamstudio = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-joystick = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-keyboard = "X11R7.0-1.0.1.3"
--PREFERRED_VERSION_xf86-input-magellan = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-magictouch = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-microtouch = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-mouse = "X11R7.0-1.0.3.1"
--PREFERRED_VERSION_xf86-input-mutouch = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-palmax = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-penmount = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-spaceorb = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-summa = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-tek4957 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-ur98 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-void = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-apm = "X11R7.0-1.0.1.5"
--PREFERRED_VERSION_xf86-video-ark = "X11R7.0-0.5.0.5"
--PREFERRED_VERSION_xf86-video-ati = "X11R7.0-6.5.7.3"
--PREFERRED_VERSION_xf86-video-chips = "X11R7.0-1.0.1.3"
--PREFERRED_VERSION_xf86-video-cirrus = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-cyrix = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-dummy = "X11R7.0-0.1.0.5"
--PREFERRED_VERSION_xf86-video-fbdev = "X11R7.0-0.1.0.5"
--PREFERRED_VERSION_xf86-video-glint = "X11R7.0-1.0.1.3"
--PREFERRED_VERSION_xf86-video-i128 = "X11R7.0-1.1.0.5"
--PREFERRED_VERSION_xf86-video-i740 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-i810 = "X11R7.0-1.4.1.3"
--PREFERRED_VERSION_xf86-video-imstt = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-mga = "X11R7.0-1.2.1.3"
--PREFERRED_VERSION_xf86-video-neomagic = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-newport = "X11R7.0-0.1.4.1"
--PREFERRED_VERSION_xf86-video-nsc = "X11R7.0-2.7.6.5"
--PREFERRED_VERSION_xf86-video-nv = "X11R7.0-1.0.1.5"
--PREFERRED_VERSION_xf86-video-rendition = "X11R7.0-4.0.1.3"
--PREFERRED_VERSION_xf86-video-s3 = "X11R7.0-0.3.5.5"
--PREFERRED_VERSION_xf86-video-s3virge = "X11R7.0-1.8.6.5"
--PREFERRED_VERSION_xf86-video-savage = "X11R7.0-2.0.2.3"
--PREFERRED_VERSION_xf86-video-siliconmotion = "X11R7.0-1.3.1.5"
--PREFERRED_VERSION_xf86-video-sis = "X11R7.0-0.8.1.3"
--PREFERRED_VERSION_xf86-video-sisusb = "X11R7.0-0.7.1.3"
--PREFERRED_VERSION_xf86-video-sunbw2 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-suncg14 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-suncg3 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-suncg6 = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-sunffb = "X11R7.0-1.0.1.3"
--PREFERRED_VERSION_xf86-video-sunleo = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-suntcx = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-tdfx = "X11R7.0-1.1.1.3"
--PREFERRED_VERSION_xf86-video-tga = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-trident = "X11R7.0-1.0.1.2"
--PREFERRED_VERSION_xf86-video-tseng = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-video-v4l = "X11R7.0-0.0.1.5"
--PREFERRED_VERSION_xf86-video-vesa = "X11R7.0-1.0.1.3"
--PREFERRED_VERSION_xf86-video-vga = "X11R7.0-4.0.0.5"
--PREFERRED_VERSION_xf86-video-via = "X11R7.0-0.1.33.2"
--PREFERRED_VERSION_xf86-video-vmware = "X11R7.0-10.11.1.3"
--PREFERRED_VERSION_xf86-video-voodoo = "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_encodings = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-adobe-100dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-adobe-75dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-adobe-utopia-100dpi = "X11R7.0-1.0.1"
--PREFERRED_VERSION_font-adobe-utopia-75dpi = "X11R7.0-1.0.1"
--PREFERRED_VERSION_font-adobe-utopia-type1 = "X11R7.0-1.0.1"
--PREFERRED_VERSION_font-alias = "X11R7.0-1.0.1"
--PREFERRED_VERSION_font-arabic-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bh-100dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bh-75dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bh-lucidatypewriter-100dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bh-lucidatypewriter-75dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bh-ttf = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bh-type1 = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bitstream-100dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bitstream-75dpi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bitstream-speedo = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-bitstream-type1 = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-cronyx-cyrillic = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-cursor-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-daewoo-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-dec-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-ibm-type1 = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-isas-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-jis-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-micro-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-misc-cyrillic = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-misc-ethiopic = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-misc-meltho = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-misc-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-mutt-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-schumacher-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-screen-cyrillic = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-sony-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-sun-misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-util-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-util = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-winitzki-cyrillic = "X11R7.0-1.0.0"
--PREFERRED_VERSION_font-xfree86-type1 = "X11R7.0-1.0.0"
--PREFERRED_VERSION_diet-x11 = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libapplewm = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libdmx = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libfontenc-native = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libfontenc = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libfs = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libice = "X11R7.0-1.0.0"
--PREFERRED_VERSION_liblbxutil = "X11R7.0-1.0.0"
--PREFERRED_VERSION_liboldx = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libsm = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libwindowswm = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libx11-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libx11 = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxau-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxau = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxaw = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxcomposite = "X11R7.0-0.2.2.2"
--PREFERRED_VERSION_libxcursor = "X11R7.0-1.1.5.2"
--PREFERRED_VERSION_libxdamage = "X11R7.0-1.0.2.2"
--PREFERRED_VERSION_libxdmcp-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxdmcp = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxevie = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxext = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxfixes = "X11R7.0-3.0.1.2"
--PREFERRED_VERSION_libxfont-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxfont = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxfontcache = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxft = "X11R7.0-2.1.8.2"
--PREFERRED_VERSION_libxi = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxinerama = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxkbfile = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxkbui = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxmu = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxp = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxpm = "X11R7.0-3.5.4.2"
--PREFERRED_VERSION_libxprintapputil = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxprintutil = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxrandr = "X11R7.0-1.1.0.2"
--PREFERRED_VERSION_libxrender = "X11R7.0-0.9.0.2"
--PREFERRED_VERSION_libxres = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxscrnsaver = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxt = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxtrap = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxtst = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxv = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxvmc = "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxxf86dga = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxxf86misc = "X11R7.0-1.0.0"
--PREFERRED_VERSION_libxxf86vm = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xtrans-native = "X11R7.0-1.0.0"
--PREFERRED_VERSION_xtrans = "X11R7.0-1.0.0"
--PREFERRED_VERSION_applewmproto = "X11R7.0-1.0.3"
--PREFERRED_VERSION_bigreqsproto-native = "X11R7.0-1.0.2"
--PREFERRED_VERSION_bigreqsproto = "X11R7.0-1.0.2"
--PREFERRED_VERSION_compositeproto = "X11R7.0-0.2.2"
--PREFERRED_VERSION_damageproto = "X11R7.0-1.0.3"
--PREFERRED_VERSION_dmxproto = "X11R7.0-2.2.2"
--PREFERRED_VERSION_evieext = "X11R7.0-1.0.2"
--PREFERRED_VERSION_fixesproto = "X11R7.0-3.0.2"
--PREFERRED_VERSION_fontcacheproto-native = "X11R7.0-0.1.2"
--PREFERRED_VERSION_fontcacheproto = "X11R7.0-0.1.2"
--PREFERRED_VERSION_fontsproto-native = "X11R7.0-2.0.2"
--PREFERRED_VERSION_fontsproto = "X11R7.0-2.0.2"
--PREFERRED_VERSION_glproto = "X11R7.0-1.4.3"
--PREFERRED_VERSION_inputproto-native = "X11R7.0-1.3.2"
--PREFERRED_VERSION_inputproto = "X11R7.0-1.3.2"
--PREFERRED_VERSION_kbproto-native = "X11R7.0-1.0.2"
--PREFERRED_VERSION_kbproto = "X11R7.0-1.0.2"
--PREFERRED_VERSION_printproto = "X11R7.0-1.0.3"
--PREFERRED_VERSION_randrproto = "X11R7.0-1.1.2"
--PREFERRED_VERSION_recordproto = "X11R7.0-1.13.2"
--PREFERRED_VERSION_renderproto = "X11R7.0-0.9.2"
--PREFERRED_VERSION_resourceproto = "X11R7.0-1.0.2"
--PREFERRED_VERSION_scrnsaverproto = "X11R7.0-1.0.2"
--PREFERRED_VERSION_trapproto = "X11R7.0-3.4.3"
--PREFERRED_VERSION_videoproto = "X11R7.0-2.2.2"
--PREFERRED_VERSION_windowswmproto = "X11R7.0-1.0.3"
--PREFERRED_VERSION_xcmiscproto-native = "X11R7.0-1.1.2"
--PREFERRED_VERSION_xcmiscproto = "X11R7.0-1.1.2"
--PREFERRED_VERSION_xextproto-native = "X11R7.0-7.0.2"
--PREFERRED_VERSION_xextproto = "X11R7.0-7.0.2"
--PREFERRED_VERSION_xf86bigfontproto-native = "X11R7.0-1.1.2"
--PREFERRED_VERSION_xf86bigfontproto = "X11R7.0-1.1.2"
--PREFERRED_VERSION_xf86dgaproto = "X11R7.0-2.0.2"
--PREFERRED_VERSION_xf86driproto = "X11R7.0-2.0.3"
--PREFERRED_VERSION_xf86miscproto = "X11R7.0-0.9.2"
--PREFERRED_VERSION_xf86rushproto = "X11R7.0-1.1.2"
--PREFERRED_VERSION_xf86vidmodeproto = "X11R7.0-2.2.2"
--PREFERRED_VERSION_xineramaproto = "X11R7.0-1.1.2"
--PREFERRED_VERSION_xproto-native = "X11R7.0-7.0.4"
--PREFERRED_VERSION_xproto = "X11R7.0-7.0.4"
--PREFERRED_VERSION_xproxymanagementprotocol = "X11R7.0-1.0.2"
--PREFERRED_VERSION_gccmakedep = "X11R7.0-1.0.1"
--PREFERRED_VERSION_imake = "X11R7.0-1.0.1"
--PREFERRED_VERSION_lndir = "X11R7.0-1.0.1"
--PREFERRED_VERSION_makedepend = "X11R7.0-1.0.0"
--PREFERRED_VERSION_util-macros-native = "X11R7.0-1.0.1"
--PREFERRED_VERSION_util-macros = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xorg-cf-files = "X11R7.0-1.0.1"
--PREFERRED_VERSION_xserver-xorg = "X11R7.0-1.0.1"
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.1.inc b/conf/distro/include/preferred-xorg-versions-X11R7.1.inc
-deleted file mode 100644
-index 15c7fdf..0000000
---- a/conf/distro/include/preferred-xorg-versions-X11R7.1.inc
-+++ /dev/null
-@@ -1,186 +0,0 @@
--PREFERRED_PROVIDER_virtual/xserver ?= "xserver-xorg"
--
--PREFERRED_PROVIDER_libxext ?= "libxext"
--PREFERRED_PROVIDER_xext ?= "libxext"
--PREFERRED_PROVIDER_libxi ?= "libxi"
--PREFERRED_PROVIDER_libxft ?= "libxft"
--PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
--PREFERRED_PROVIDER_virtual/libx11-native ?= "libx11-native"
--PREFERRED_PROVIDER_libxpm ?= "libxpm"
--PREFERRED_PROVIDER_xpm ?= "libxpm"
--PREFERRED_PROVIDER_libxt ?= "libxt"
--PREFERRED_PROVIDER_libxaw ?= "libxaw"
--PREFERRED_PROVIDER_libice ?= "libice"
--PREFERRED_PROVIDER_libxrender ?= "libxrender"
--PREFERRED_PROVIDER_libxcursor ?= "libxcursor"
--PREFERRED_PROVIDER_xextensions ?= "xextensions"
--PREFERRED_PROVIDER_xproto ?= "xproto"
--PREFERRED_PROVIDER_x11 ?= "libx11"
--PREFERRED_PROVIDER_libxv ?= "libxv"
--PREFERRED_PROVIDER_xft ?= "libxft"
--PREFERRED_PROVIDER_libxrandr ?= "libxrandr"
--PREFERRED_PROVIDER_libxdamage ?= "libxdamage"
--PREFERRED_PROVIDER_libxcomposite ?= "libxcomposite"
--PREFERRED_PROVIDER_libxfixes ?= "libxfixes"
--PREFERRED_PROVIDER_libxinerama ?= "libxinerama"
--PREFERRED_PROVIDER_libxxf86vm ?= "libxxf86vm"
--PREFERRED_PROVIDER_libxmu ?= "libxmu"
--PREFERRED_PROVIDER_libsm ?= "libsm"
--PREFERRED_PROVIDER_xrandr ?= "xrandr"
--PREFERRED_PROVIDER_xserver ?= "xserver-xorg"
--PREFERRED_PROVIDER_virtual/xorg ?= "xserver-xorg"
--
--PREFERRED_VERSION_task-xorg ?= "X11R7.1"
--
--PREFERRED_VERSION_bitmap ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_fstobdf ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_mkfontdir-native ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_mkfontdir ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_rgb ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_rstart ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_setxkbmap ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_smproxy ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_x11perf ?= "X11R7.1-1.4.1"
--PREFERRED_VERSION_xclock ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xconsole ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xcursorgen ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xdm ?= "X11R7.1-1.0.4"
--PREFERRED_VERSION_xdriinfo ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xedit ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xfs ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xhost ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xinit ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xkbcomp ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xkbevd ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xman ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xmodmap ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xrandr ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xrdb ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xrefresh ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xset ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xtrap ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xwininfo ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xorg-docs ?= "X11R7.1-1.2"
--PREFERRED_VERSION_xorg-sgml-doctools ?= "X11R7.1-1.1"
--PREFERRED_VERSION_xf86-input-acecad ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-aiptek ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xf86-input-calcomp ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-citron ?= "X11R7.1-2.2.0"
--PREFERRED_VERSION_xf86-input-digitaledge ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-dmc ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-dynapro ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-elo2300 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-evdev ?= "X11R7.1-1.1.2"
--PREFERRED_VERSION_xf86-input-fpit ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-hyperpen ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-jamstudio ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-joystick ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-keyboard ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-magellan ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-magictouch ?= "X11R7.1-1.0.0.5"
--PREFERRED_VERSION_xf86-input-microtouch ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-mouse ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-mutouch ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-palmax ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-penmount ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-spaceorb ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-summa ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-tek4957 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-ur98 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-vmmouse ?= "X11R7.1-12.4.0"
--PREFERRED_VERSION_xf86-input-void ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-apm ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-ark ?= "X11R7.1-0.6.0"
--PREFERRED_VERSION_xf86-video-ast ?= "X11R7.1-0.81.0"
--PREFERRED_VERSION_xf86-video-ati ?= "X11R7.1-6.6.0"
--PREFERRED_VERSION_xf86-video-chips ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-cirrus ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-cyrix ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-dummy ?= "X11R7.1-0.2.0"
--PREFERRED_VERSION_xf86-video-fbdev ?= "X11R7.1-0.3.0"
--PREFERRED_VERSION_xf86-video-glint ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-i128 ?= "X11R7.1-1.1.0.5"
--PREFERRED_VERSION_xf86-video-i740 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-i810 ?= "X11R7.1-1.6.0"
--PREFERRED_VERSION_xf86-video-imstt ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-mga ?= "X11R7.1-1.4.1"
--PREFERRED_VERSION_xf86-video-neomagic ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-newport ?= "X11R7.1-0.2.0"
--PREFERRED_VERSION_xf86-video-nsc ?= "X11R7.1-2.8.1"
--PREFERRED_VERSION_xf86-video-nv ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-rendition ?= "X11R7.1-4.1.0"
--PREFERRED_VERSION_xf86-video-s3 ?= "X11R7.1-0.4.1"
--PREFERRED_VERSION_xf86-video-s3virge ?= "X11R7.1-1.9.1"
--PREFERRED_VERSION_xf86-video-savage ?= "X11R7.1-2.1.1"
--PREFERRED_VERSION_xf86-video-siliconmotion ?= "X11R7.1-1.4.1"
--PREFERRED_VERSION_xf86-video-sis ?= "X11R7.1-0.9.1"
--PREFERRED_VERSION_xf86-video-sisusb ?= "X11R7.1-0.8.1"
--PREFERRED_VERSION_xf86-video-sunbw2 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suncg14 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suncg3 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suncg6 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-sunffb ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-sunleo ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suntcx ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-tdfx ?= "X11R7.1-1.2.1"
--PREFERRED_VERSION_xf86-video-tga ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-trident ?= "X11R7.1-1.2.1"
--PREFERRED_VERSION_xf86-video-tseng ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-v4l ?= "X11R7.1-0.1.1"
--PREFERRED_VERSION_xf86-video-vesa ?= "X11R7.1-1.2.0"
--PREFERRED_VERSION_xf86-video-vga ?= "X11R7.1-4.1.0"
--PREFERRED_VERSION_xf86-video-via ?= "X11R7.1-0.2.1"
--PREFERRED_VERSION_xf86-video-vmware ?= "X11R7.1-10.13.0"
--PREFERRED_VERSION_xf86-video-voodoo ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_font-util-native ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_font-util ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_diet-x11 ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libdmx ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libfontenc-native ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libfontenc ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libice ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_liblbxutil ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libsm ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libx11-native ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libx11 ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxau-native ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxau ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxaw ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxcomposite ?= "X11R7.1-0.3"
--PREFERRED_VERSION_libxcursor ?= "X11R7.1-1.1.6"
--PREFERRED_VERSION_libxdamage ?= "X11R7.1-1.0.3"
--PREFERRED_VERSION_libxdmcp-native ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxdmcp ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxevie ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxext ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxfixes ?= "X11R7.1-4.0.1"
--PREFERRED_VERSION_libxfont-native ?= "X11R7.1-1.2.0"
--PREFERRED_VERSION_libxfont ?= "X11R7.1-1.2.0"
--PREFERRED_VERSION_libxfontcache ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxi ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxkbfile ?= "X11R7.1-1.0.3"
--PREFERRED_VERSION_libxkbui ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxmu ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxpm ?= "X11R7.1-3.5.5"
--PREFERRED_VERSION_libxrandr ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_libxrender ?= "X11R7.1-0.9.1"
--PREFERRED_VERSION_libxres ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxscrnsaver ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_libxt ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxvmc ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxxf86dga ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxxf86misc ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxxf86vm ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_compositeproto ?= "X11R7.1-0.3.1"
--PREFERRED_VERSION_fixesproto ?= "X11R7.1-4.0"
--PREFERRED_VERSION_glproto ?= "X11R7.1-1.4.7"
--PREFERRED_VERSION_scrnsaverproto ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xproto-native ?= "X11R7.1-7.0.5"
--PREFERRED_VERSION_xproto ?= "X11R7.1-7.0.5"
--PREFERRED_VERSION_gccmakedep ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_imake ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_util-macros-native ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_util-macros ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xorg-cf-files ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xserver-kdrive ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xserver-xorg ?= "X11R7.1-1.1.0"
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.2.inc b/conf/distro/include/preferred-xorg-versions-X11R7.2.inc
-deleted file mode 100644
-index 9a02d3c..0000000
---- a/conf/distro/include/preferred-xorg-versions-X11R7.2.inc
-+++ /dev/null
-@@ -1,271 +0,0 @@
--PREFERRED_PROVIDER_virtual/xserver ?= "xserver-xorg"
--
--PREFERRED_PROVIDER_libxext ?= "libxext"
--PREFERRED_PROVIDER_xext ?= "libxext"
--PREFERRED_PROVIDER_libxi ?= "libxi"
--PREFERRED_PROVIDER_libxft ?= "libxft"
--PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
--PREFERRED_PROVIDER_virtual/libx11-native ?= "libx11-native"
--PREFERRED_PROVIDER_libxpm ?= "libxpm"
--PREFERRED_PROVIDER_xpm ?= "libxpm"
--PREFERRED_PROVIDER_libxt ?= "libxt"
--PREFERRED_PROVIDER_libxaw ?= "libxaw"
--PREFERRED_PROVIDER_libice ?= "libice"
--PREFERRED_PROVIDER_libxrender ?= "libxrender"
--PREFERRED_PROVIDER_libxcursor ?= "libxcursor"
--PREFERRED_PROVIDER_xextensions ?= "xextensions"
--PREFERRED_PROVIDER_xproto ?= "xproto"
--PREFERRED_PROVIDER_x11 ?= "libx11"
--PREFERRED_PROVIDER_libxv ?= "libxv"
--PREFERRED_PROVIDER_xft ?= "libxft"
--PREFERRED_PROVIDER_libxrandr ?= "libxrandr"
--PREFERRED_PROVIDER_libxdamage ?= "libxdamage"
--PREFERRED_PROVIDER_libxcomposite ?= "libxcomposite"
--PREFERRED_PROVIDER_libxfixes ?= "libxfixes"
--PREFERRED_PROVIDER_libxinerama ?= "libxinerama"
--PREFERRED_PROVIDER_libxxf86vm ?= "libxxf86vm"
--PREFERRED_PROVIDER_libxmu ?= "libxmu"
--PREFERRED_PROVIDER_libsm ?= "libsm"
--PREFERRED_PROVIDER_xrandr ?= "xrandr"
--PREFERRED_PROVIDER_xserver ?= "xserver-xorg"
--PREFERRED_PROVIDER_virtual/xorg ?= "xserver-xorg"
--
--PREFERRED_VERSION_task-xorg ?= "X11R7.2"
--
--# app
--PREFERRED_VERSION_appres ?= "1.0.1"
--PREFERRED_VERSION_bdftopcf ?= "X11R7.0-1.0.0"
--PREFERRED_VERSION_beforelight ?= "1.0.2"
--PREFERRED_VERSION_bitmap ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_editres ?= "1.0.2"
--PREFERRED_VERSION_fontosfnt ?= "1.0.3"
--PREFERRED_VERSION_fslsfonts ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_fstobdf ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_iceauth ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_ico ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_lbxproxy ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_listres ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_luit ?= "1.0.2"
--PREFERRED_VERSION_mkfontdir-native ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_mkfontdir ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_mkfontscale ?= "1.0.3"
--PREFERRED_VERSION_oclock ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_proxymngr ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_rgb ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_rstart ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_scripts ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_sessreg ?= "1.0.2"
--PREFERRED_VERSION_setxkbmap ?= "1.0.3"
--PREFERRED_VERSION_smproxy ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_twm ?= "1.0.3"
--PREFERRED_VERSION_viewres ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_x11perf ?= "X11R7.1-1.4.1"
--PREFERRED_VERSION_xauth ?= "1.0.2"
--PREFERRED_VERSION_xbiff ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xcalc ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xclipboard ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xclock ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xcmsdb ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xconsole ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xcursorgen ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xdbedizzy ?= "1.0.2"
--PREFERRED_VERSION_xditview ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xdm ?= "1.1.3"
--PREFERRED_VERSION_xdpyinfo ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xdriinfo ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xedit ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xev ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xeyes ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xxf86dga ?= "1.0.2"
--PREFERRED_VERSION_xfd ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfindproxy ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfontsel ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfs ?= "1.0.4"
--PREFERRED_VERSION_xfsinfo ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xfwp ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xgamma ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xgc ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xhost ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xinit ?= "1.0.3"
--PREFERRED_VERSION_xkbcomp ?= "1.0.3"
--PREFERRED_VERSION_xkbevd ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xkbprint ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkbutils ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xkill ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xload ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlogo ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlsatoms ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlsclients ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xlsfonts ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmag ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xman ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xmessage ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmh ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xmodmap ?= "1.0.2"
--PREFERRED_VERSION_xmore ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xphelloworld ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xplsprinters ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xpr ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xprehashprinterlist ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xprop ?= "1.0.2"
--PREFERRED_VERSION_xrandr ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xrdb ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xrefresh ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xrx ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xset ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xsetmode ?= "X11R7.0-1.0.0"
--PREFERRED_VERSION_xsetpointer ?= "X11R7.0-1.0.0"
--PREFERRED_VERSION_xsetroot ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xsm ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xstdcmap ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xtrap ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xvidtune ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xvinfo ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xwd ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xwininfo ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_xwud ?= "X11R7.0-1.0.1"
--
--#data
--PREFERRED_VERSION_xbitmaps ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_xcursor-themes ?= "X11R7.0-1.0.1"
--
--# doc
--PREFERRED_VERSION_xorg-docs ?= "X11R7.1-1.2"
--PREFERRED_VERSION_xorg-sgml-doctools ?= "1.1.1"
--
--# driver
--PREFERRED_VERSION_xf86-input-acecad ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-aiptek ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xf86-input-calcomp ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-citron ?= "X11R7.1-2.2.0"
--PREFERRED_VERSION_xf86-input-digitaledge ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-dmc ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-dynapro ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-elo2300 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-elographics ?= "X11R7.0-1.0.0.5"
--PREFERRED_VERSION_xf86-input-evdev ?= "X11R7.1-1.1.2"
--PREFERRED_VERSION_xf86-input-fpit ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-hyperpen ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-jamstudio ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-joystick ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-keyboard ?= "1.1.1"
--PREFERRED_VERSION_xf86-input-magellan ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-magictouch ?= "X11R7.1-1.0.0.5"
--PREFERRED_VERSION_xf86-input-microtouch ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-mouse ?= "1.1.2"
--PREFERRED_VERSION_xf86-input-mutouch ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-palmax ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-penmount ?= "1.2.0"
--PREFERRED_VERSION_xf86-input-spaceorb ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-summa ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-tek4957 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-ur98 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-input-vmmouse ?= "X11R7.1-12.4.0"
--PREFERRED_VERSION_xf86-input-void ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-apm ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-ark ?= "X11R7.1-0.6.0"
--PREFERRED_VERSION_xf86-video-ast ?= "X11R7.1-0.81.0"
--PREFERRED_VERSION_xf86-video-ati ?= "6.6.3"
--PREFERRED_VERSION_xf86-video-chips ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-cirrus ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-cyrix ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-dummy ?= "X11R7.1-0.2.0"
--PREFERRED_VERSION_xf86-video-fbdev ?= "0.3.1"
--PREFERRED_VERSION_xf86-video-glint ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-i128 ?= "1.1.0.6"
--PREFERRED_VERSION_xf86-video-i740 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-i810 ?= "1.6.5"
--PREFERRED_VERSION_xf86-video-imstt ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-mga ?= "1.4.6.1"
--PREFERRED_VERSION_xf86-video-neomagic ?= "X11R7.1-1.1.1"
--PREFERRED_VERSION_xf86-video-newport ?= "0.2.1"
--PREFERRED_VERSION_xf86-video-nsc ?= "2.8.2"
--PREFERRED_VERSION_xf86-video-nv ?= "1.2.2.1"
--PREFERRED_VERSION_xf86-video-rendition ?= "4.1.3"
--PREFERRED_VERSION_xf86-video-s3 ?= "0.5.0"
--PREFERRED_VERSION_xf86-video-s3virge ?= "X11R7.1-1.9.1"
--PREFERRED_VERSION_xf86-video-savage ?= "2.1.2"
--PREFERRED_VERSION_xf86-video-siliconmotion ?= "1.4.2"
--PREFERRED_VERSION_xf86-video-sis ?= "0.9.3"
--PREFERRED_VERSION_xf86-video-sisusb ?= "X11R7.1-0.8.1"
--PREFERRED_VERSION_xf86-video-sunbw2 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suncg14 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suncg3 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suncg6 ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-sunffb ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-sunleo ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-suntcx ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-tdfx ?= "1.3.0"
--PREFERRED_VERSION_xf86-video-tga ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xf86-video-trident ?= "1.2.3"
--PREFERRED_VERSION_xf86-video-tseng ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-v4l ?= "X11R7.1-0.1.1"
--PREFERRED_VERSION_xf86-video-vesa ?= "1.3.0"
--PREFERRED_VERSION_xf86-video-vga ?= "X11R7.1-4.1.0"
--PREFERRED_VERSION_xf86-video-via ?= "0.2.2"
--PREFERRED_VERSION_xf86-video-vmware ?= "10.14.1"
--PREFERRED_VERSION_xf86-video-voodoo ?= "1.1.1"
--
--# font
--PREFERRED_VERSION_encodings ?= "1.0.2"
--PREFERRED_VERSION_font-screen-cyrillic ?= "1.0.1"
--PREFERRED_VERSION_font-util-native ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_font-util ?= "X11R7.1-1.0.1"
--
--# lib
--PREFERRED_VERSION_diet-x11 ?= "1.1.1"
--PREFERRED_VERSION_libdmx ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libfontenc ?= "1.0.4"
--PREFERRED_VERSION_libice ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_liblbxutil ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libsm ?= "1.0.2"
--PREFERRED_VERSION_libx11 ?= "1.1.1"
--PREFERRED_VERSION_libx11-native ?= "1.1.1"
--PREFERRED_VERSION_libxau ?= "1.0.3"
--PREFERRED_VERSION_libxaw ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxcomposite ?= "0.3.1"
--PREFERRED_VERSION_libxcursor ?= "1.1.8"
--PREFERRED_VERSION_libxdamage ?= "1.0.4"
--PREFERRED_VERSION_libxdmcp-native ?= "1.0.2"
--PREFERRED_VERSION_libxdmcp ?= "1.0.2"
--PREFERRED_VERSION_libxevie ?= "1.0.2"
--PREFERRED_VERSION_libxext ?= "1.0.2"
--PREFERRED_VERSION_libxfixes ?= "4.0.3"
--PREFERRED_VERSION_libxfont ?= "1.2.7"
--PREFERRED_VERSION_libxfontcache ?= "1.0.4"
--PREFERRED_VERSION_libxi ?= "1.0.2"
--PREFERRED_VERSION_libxinerama ?= "X11R7.0-1.0.1"
--PREFERRED_VERSION_libxkbfile ?= "1.0.4"
--PREFERRED_VERSION_libxkbui ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_libxmu ?= "1.0.3"
--PREFERRED_VERSION_libxpm ?= "3.5.6"
--PREFERRED_VERSION_libxrandr ?= "1.1.2"
--PREFERRED_VERSION_libxrender ?= "0.9.2"
--PREFERRED_VERSION_libxres ?= "1.0.3"
--PREFERRED_VERSION_libxscrnsaver ?= "1.1.2"
--PREFERRED_VERSION_libxt ?= "1.0.4"
--PREFERRED_VERSION_libxvmc ?= "1.0.4"
--PREFERRED_VERSION_libxxf86dga ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxxf86misc ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_libxxf86vm ?= "X11R7.1-1.0.1"
--PREFERRED_VERSION_xtrans ?= "1.0.3"
--
--# proto
--PREFERRED_VERSION_compositeproto ?= "X11R7.1-0.3.1"
--PREFERRED_VERSION_fixesproto ?= "X11R7.1-4.0"
--PREFERRED_VERSION_glproto ?= "1.4.8"
--PREFERRED_VERSION_kbproto ?= "X11R7.1-1.0.3"
--PREFERRED_VERSION_scrnsaverproto ?= "X11R7.1-1.1.0"
--PREFERRED_VERSION_xproto-native ?= "7.0.10"
--PREFERRED_VERSION_xproto ?= "7.0.10"
--
--# util
--PREFERRED_VERSION_gccmakedep ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_imake ?= "X11R7.1-1.0.2"
--PREFERRED_VERSION_util-macros-native ?= "X11R7.1-1.1.5"
--PREFERRED_VERSION_util-macros ?= "X11R7.1-1.1.5"
--PREFERRED_VERSION_xorg-cf-files ?= "X11R7.1-1.0.2"
--
--# xserver
--PREFERRED_VERSION_xserver-kdrive ?= "1.2.0"
--PREFERRED_VERSION_xserver-xorg ?= "1.2.0"
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.3.inc b/conf/distro/include/preferred-xorg-versions-X11R7.3.inc
-deleted file mode 100644
-index b6aceb0..0000000
---- a/conf/distro/include/preferred-xorg-versions-X11R7.3.inc
-+++ /dev/null
-@@ -1,282 +0,0 @@
--PREFERRED_PROVIDER_virtual/xserver ?= "xserver-xorg"
--
--PREFERRED_PROVIDER_libxext ?= "libxext"
--PREFERRED_PROVIDER_xext ?= "libxext"
--PREFERRED_PROVIDER_libxi ?= "libxi"
--PREFERRED_PROVIDER_libxft ?= "libxft"
--PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
--PREFERRED_PROVIDER_virtual/libx11-native ?= "libx11-native"
--PREFERRED_PROVIDER_libxpm ?= "libxpm"
--PREFERRED_PROVIDER_xpm ?= "libxpm"
--PREFERRED_PROVIDER_libxt ?= "libxt"
--PREFERRED_PROVIDER_libxaw ?= "libxaw"
--PREFERRED_PROVIDER_libice ?= "libice"
--PREFERRED_PROVIDER_libxrender ?= "libxrender"
--PREFERRED_PROVIDER_libxcursor ?= "libxcursor"
--PREFERRED_PROVIDER_xextensions ?= "xextensions"
--PREFERRED_PROVIDER_xproto ?= "xproto"
--PREFERRED_PROVIDER_x11 ?= "libx11"
--PREFERRED_PROVIDER_libxv ?= "libxv"
--PREFERRED_PROVIDER_xft ?= "libxft"
--PREFERRED_PROVIDER_libxrandr ?= "libxrandr"
--PREFERRED_PROVIDER_libxdamage ?= "libxdamage"
--PREFERRED_PROVIDER_libxcomposite ?= "libxcomposite"
--PREFERRED_PROVIDER_libxfixes ?= "libxfixes"
--PREFERRED_PROVIDER_libxinerama ?= "libxinerama"
--PREFERRED_PROVIDER_libxxf86vm ?= "libxxf86vm"
--PREFERRED_PROVIDER_libxmu ?= "libxmu"
--PREFERRED_PROVIDER_libsm ?= "libsm"
--PREFERRED_PROVIDER_xrandr ?= "xrandr"
--PREFERRED_PROVIDER_xserver ?= "xserver-xorg"
--PREFERRED_PROVIDER_virtual/xorg ?= "xserver-xorg"
--
--PREFERRED_VERSION_task-xorg ?= "X11R7.3"
--
--# app
--PREFERRED_VERSION_appres ?= "1.0.1"
--PREFERRED_VERSION_bdftopcf ?= "1.0.1"
--PREFERRED_VERSION_beforelight ?= "1.0.2"
--PREFERRED_VERSION_bitmap ?= "1.0.2"
--PREFERRED_VERSION_editres ?= "1.0.2"
--PREFERRED_VERSION_fontosfnt ?= "1.0.3"
--PREFERRED_VERSION_fslsfonts ?= "1.0.1"
--PREFERRED_VERSION_fstobdf ?= "1.0.2"
--PREFERRED_VERSION_iceauth ?= "1.0.2"
--PREFERRED_VERSION_ico ?= "1.0.2"
--PREFERRED_VERSION_lbxproxy ?= "1.0.1"
--PREFERRED_VERSION_listres ?= "1.0.1"
--PREFERRED_VERSION_luit ?= "1.0.2"
--PREFERRED_VERSION_mkfontdir-native ?= "1.0.3"
--PREFERRED_VERSION_mkfontdir ?= "1.0.3"
--PREFERRED_VERSION_mkfontscale ?= "1.0.3"
--PREFERRED_VERSION_oclock ?= "1.0.1"
--PREFERRED_VERSION_proxymngr ?= "1.0.1"
--PREFERRED_VERSION_rgb ?= "1.0.1"
--PREFERRED_VERSION_rstart ?= "1.0.2"
--PREFERRED_VERSION_scripts ?= "1.0.1"
--PREFERRED_VERSION_sessreg ?= "1.0.3"
--PREFERRED_VERSION_setxkbmap ?= "1.0.4"
--PREFERRED_VERSION_smproxy ?= "1.0.2"
--PREFERRED_VERSION_twm ?= "1.0.3"
--PREFERRED_VERSION_viewres ?= "1.0.1"
--PREFERRED_VERSION_x11perf ?= "1.4.1"
--PREFERRED_VERSION_xauth ?= "1.0.2"
--PREFERRED_VERSION_xbacklight ?= "1.1"
--PREFERRED_VERSION_xbiff ?= "1.0.1"
--PREFERRED_VERSION_xcalc ?= "1.0.2"
--PREFERRED_VERSION_xclipboard ?= "1.0.1"
--PREFERRED_VERSION_xclock ?= "1.0.3"
--PREFERRED_VERSION_xcmsdb ?= "1.0.1"
--PREFERRED_VERSION_xconsole ?= "1.0.3"
--PREFERRED_VERSION_xcursorgen ?= "1.0.2"
--PREFERRED_VERSION_xdbedizzy ?= "1.0.2"
--PREFERRED_VERSION_xditview ?= "1.0.1"
--PREFERRED_VERSION_xdm ?= "1.1.6"
--PREFERRED_VERSION_xdpyinfo ?= "1.0.2"
--PREFERRED_VERSION_xdriinfo ?= "1.0.2"
--PREFERRED_VERSION_xedit ?= "1.0.2"
--PREFERRED_VERSION_xev ?= "1.0.1"
--PREFERRED_VERSION_xeyes ?= "1.0.1"
--PREFERRED_VERSION_xxf86dga ?= "1.0.2"
--PREFERRED_VERSION_xfd ?= "1.0.1"
--PREFERRED_VERSION_xfindproxy ?= "1.0.1"
--PREFERRED_VERSION_xfontsel ?= "1.0.1"
--PREFERRED_VERSION_xfs ?= "1.0.4"
--PREFERRED_VERSION_xfsinfo ?= "1.0.1"
--PREFERRED_VERSION_xfwp ?= "1.0.1"
--PREFERRED_VERSION_xgamma ?= "1.0.2"
--PREFERRED_VERSION_xgc ?= "1.0.1"
--PREFERRED_VERSION_xhost ?= "1.0.2"
--PREFERRED_VERSION_xinit ?= "1.0.5"
--PREFERRED_VERSION_xkbcomp ?= "1.0.3"
--PREFERRED_VERSION_xkbevd ?= "1.0.2"
--PREFERRED_VERSION_xkbprint ?= "1.0.1"
--PREFERRED_VERSION_xkbutils ?= "1.0.1"
--PREFERRED_VERSION_xkill ?= "1.0.1"
--PREFERRED_VERSION_xload ?= "1.0.2"
--PREFERRED_VERSION_xlogo ?= "1.0.1"
--PREFERRED_VERSION_xlsatoms ?= "1.0.1"
--PREFERRED_VERSION_xlsclients ?= "1.0.1"
--PREFERRED_VERSION_xlsfonts ?= "1.0.1"
--PREFERRED_VERSION_xmag ?= "1.0.2"
--PREFERRED_VERSION_xman ?= "1.0.3"
--PREFERRED_VERSION_xmessage ?= "1.0.2"
--PREFERRED_VERSION_xmh ?= "1.0.1"
--PREFERRED_VERSION_xmodmap ?= "1.0.3"
--PREFERRED_VERSION_xmore ?= "1.0.1"
--PREFERRED_VERSION_xphelloworld ?= "1.0.1"
--PREFERRED_VERSION_xplsprinters ?= "1.0.1"
--PREFERRED_VERSION_xpr ?= "1.0.1"
--PREFERRED_VERSION_xprehashprinterlist ?= "1.0.1"
--PREFERRED_VERSION_xprop ?= "1.0.3"
--PREFERRED_VERSION_xrandr ?= "1.2.2"
--PREFERRED_VERSION_xrdb ?= "1.0.4"
--PREFERRED_VERSION_xrefresh ?= "1.0.2"
--PREFERRED_VERSION_xrx ?= "1.0.1"
--PREFERRED_VERSION_xset ?= "1.0.3"
--PREFERRED_VERSION_xsetmode ?= "1.0.0"
--PREFERRED_VERSION_xsetpointer ?= "1.0.0"
--PREFERRED_VERSION_xsetroot ?= "1.0.2"
--PREFERRED_VERSION_xsm ?= "1.0.1"
--PREFERRED_VERSION_xstdcmap ?= "1.0.1"
--PREFERRED_VERSION_xtrap ?= "1.0.2"
--PREFERRED_VERSION_xvidtune ?= "1.0.1"
--PREFERRED_VERSION_xvinfo ?= "1.0.2"
--PREFERRED_VERSION_xwd ?= "1.0.1"
--PREFERRED_VERSION_xwininfo ?= "1.0.3"
--PREFERRED_VERSION_xwud ?= "1.0.1"
--
--#data
--PREFERRED_VERSION_xbitmaps ?= "1.0.1"
--PREFERRED_VERSION_xcursor-themes ?= "1.0.1"
--
--# doc
--PREFERRED_VERSION_xorg-docs ?= "1.4"
--PREFERRED_VERSION_xorg-sgml-doctools ?= "1.2"
--
--# driver
--PREFERRED_VERSION_xf86-input-acecad ?= "1.2.0"
--PREFERRED_VERSION_xf86-input-aiptek ?= "1.0.1"
--PREFERRED_VERSION_xf86-input-calcomp ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-citron ?= "2.2.0"
--PREFERRED_VERSION_xf86-input-digitaledge ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-dmc ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-dynapro ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-elo2300 ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-elographics ?= "1.0.0.5"
--PREFERRED_VERSION_xf86-input-evdev ?= "1.1.2"
--PREFERRED_VERSION_xf86-input-fpit ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-hyperpen ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-jamstudio ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-joystick ?= "1.2.3"
--PREFERRED_VERSION_xf86-input-keyboard ?= "1.2.2"
--PREFERRED_VERSION_xf86-input-magellan ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-magictouch ?= "1.0.0.5"
--PREFERRED_VERSION_xf86-input-microtouch ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-mouse ?= "1.2.2"
--PREFERRED_VERSION_xf86-input-mutouch ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-palmax ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-penmount ?= "1.2.0"
--PREFERRED_VERSION_xf86-input-spaceorb ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-summa ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-tek4957 ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-ur98 ?= "1.1.0"
--PREFERRED_VERSION_xf86-input-vmmouse ?= "12.4.1"
--PREFERRED_VERSION_xf86-input-void ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-apm ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-ark ?= "0.6.0"
--PREFERRED_VERSION_xf86-video-ast ?= "0.81.0"
--PREFERRED_VERSION_xf86-video-ati ?= "6.6.193"
--PREFERRED_VERSION_xf86-video-chips ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-cirrus ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-cyrix ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-dummy ?= "0.2.0"
--PREFERRED_VERSION_xf86-video-fbdev ?= "0.3.1"
--PREFERRED_VERSION_xf86-video-glide ?= "1.0.0"
--PREFERRED_VERSION_xf86-video-glint ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-i128 ?= "1.1.0.6"
--PREFERRED_VERSION_xf86-video-i740 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-i810 ?= "1.6.5"
--PREFERRED_VERSION_xf86-video-imstt ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-intel ?= "2.1.1"
--PREFERRED_VERSION_xf86-video-mga ?= "1.4.6.1"
--PREFERRED_VERSION_xf86-video-neomagic ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-newport ?= "0.2.1"
--PREFERRED_VERSION_xf86-video-nsc ?= "2.8.3"
--PREFERRED_VERSION_xf86-video-nv ?= "2.1.3"
--PREFERRED_VERSION_xf86-video-rendition ?= "4.1.3"
--PREFERRED_VERSION_xf86-video-s3 ?= "0.5.0"
--PREFERRED_VERSION_xf86-video-s3virge ?= "1.9.1"
--PREFERRED_VERSION_xf86-video-savage ?= "2.1.3"
--PREFERRED_VERSION_xf86-video-siliconmotion ?= "1.4.2"
--PREFERRED_VERSION_xf86-video-sis ?= "0.9.3"
--PREFERRED_VERSION_xf86-video-sisusb ?= "0.8.1"
--PREFERRED_VERSION_xf86-video-sunbw2 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suncg14 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suncg3 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suncg6 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-sunffb ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-sunleo ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suntcx ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-tdfx ?= "1.3.0"
--PREFERRED_VERSION_xf86-video-tga ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-trident ?= "1.2.3"
--PREFERRED_VERSION_xf86-video-tseng ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-v4l ?= "0.1.1"
--PREFERRED_VERSION_xf86-video-vermilion ?= "1.0.0"
--PREFERRED_VERSION_xf86-video-vesa ?= "1.3.0"
--PREFERRED_VERSION_xf86-video-vga ?= "4.1.0"
--PREFERRED_VERSION_xf86-video-via ?= "0.2.2"
--PREFERRED_VERSION_xf86-video-vmware ?= "10.14.1"
--PREFERRED_VERSION_xf86-video-voodoo ?= "1.1.1"
--
--# font
--PREFERRED_VERSION_encodings ?= "1.0.2"
--PREFERRED_VERSION_font-screen-cyrillic ?= "1.0.1"
--PREFERRED_VERSION_font-util-native ?= "1.0.1"
--PREFERRED_VERSION_font-util ?= "1.0.1"
--
--# lib
--PREFERRED_VERSION_diet-x11 ?= "1.1.3"
--PREFERRED_VERSION_libdmx ?= "1.0.2"
--PREFERRED_VERSION_libfontenc ?= "1.0.4"
--PREFERRED_VERSION_libice ?= "1.0.4"
--PREFERRED_VERSION_liblbxutil ?= "1.0.1"
--PREFERRED_VERSION_libsm ?= "1.0.3"
--PREFERRED_VERSION_libx11 ?= "1.1.3"
--PREFERRED_VERSION_libx11-native ?= "1.1.1"
--PREFERRED_VERSION_libxau ?= "1.0.3"
--PREFERRED_VERSION_libxaw ?= "1.0.4"
--PREFERRED_VERSION_libxcomposite ?= "0.4.0"
--PREFERRED_VERSION_libxcursor ?= "1.1.9"
--PREFERRED_VERSION_libxdamage ?= "1.0.4"
--PREFERRED_VERSION_libxdmcp-native ?= "1.0.2"
--PREFERRED_VERSION_libxdmcp ?= "1.0.2"
--PREFERRED_VERSION_libxevie ?= "1.0.2"
--PREFERRED_VERSION_libxext ?= "1.0.2"
--PREFERRED_VERSION_libxfixes ?= "4.0.3"
--PREFERRED_VERSION_libxfont ?= "1.3.1"
--PREFERRED_VERSION_libxfontcache ?= "1.0.4"
--PREFERRED_VERSION_libxi ?= "1.1.3"
--PREFERRED_VERSION_libxinerama ?= "1.0.2"
--PREFERRED_VERSION_libxkbfile ?= "1.0.4"
--PREFERRED_VERSION_libxkbui ?= "1.0.2"
--PREFERRED_VERSION_libxmu ?= "1.0.3"
--PREFERRED_VERSION_libxpm ?= "3.5.7"
--PREFERRED_VERSION_libxrandr ?= "1.2.2"
--PREFERRED_VERSION_libxrender ?= "0.9.4"
--PREFERRED_VERSION_libxres ?= "1.0.3"
--PREFERRED_VERSION_libxscrnsaver ?= "1.1.2"
--PREFERRED_VERSION_libxt ?= "1.0.4"
--PREFERRED_VERSION_libxtst ?= "1.0.3"
--PREFERRED_VERSION_libxvmc ?= "1.0.4"
--PREFERRED_VERSION_libxxf86dga ?= "1.0.2"
--PREFERRED_VERSION_libxxf86misc ?= "1.0.1"
--PREFERRED_VERSION_libxxf86vm ?= "1.0.1"
--PREFERRED_VERSION_xtrans ?= "1.0.4"
--
--# proto
--PREFERRED_VERSION_compositeproto ?= "0.4"
--PREFERRED_VERSION_damageproto ?= "1.1.0"
--PREFERRED_VERSION_fixesproto ?= "4.0"
--PREFERRED_VERSION_glproto ?= "1.4.8"
--PREFERRED_VERSION_inputproto ?= "1.4.2.1"
--PREFERRED_VERSION_kbproto ?= "1.0.3"
--PREFERRED_VERSION_randrproto ?= "1.2.1"
--PREFERRED_VERSION_renderproto ?= "0.9.3"
--PREFERRED_VERSION_scrnsaverproto ?= "1.1.0"
--PREFERRED_VERSION_xf86dgaproto ?= "2.0.3"
--PREFERRED_VERSION_xproto-native ?= "7.0.10"
--PREFERRED_VERSION_xproto ?= "7.0.10"
--
--# util
--PREFERRED_VERSION_gccmakedep ?= "1.0.2"
--PREFERRED_VERSION_imake ?= "1.0.2"
--PREFERRED_VERSION_makedepend ?= "1.0.1"
--PREFERRED_VERSION_util-macros-native ?= "1.1.5"
--PREFERRED_VERSION_util-macros ?= "1.1.5"
--PREFERRED_VERSION_xorg-cf-files ?= "1.0.2"
--
--# xserver
--PREFERRED_VERSION_xserver-kdrive ?= "1.4"
--PREFERRED_VERSION_xserver-xorg ?= "1.4"
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc b/conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc
-deleted file mode 100644
-index 4acca00..0000000
---- a/conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc
-+++ /dev/null
-@@ -1,7 +0,0 @@
--# This file is for updates after X11R7.4 was released
--
--PREFERRED_VERSION_xserver-xorg ?= "1.5.3"
--PREFERRED_VERSION_xf86-input-evdev ?= "2.1.0"
--PREFERRED_VERSION_xf86-video-geode ?= "2.11.4.1"
--PREFERRED_VERSION_libxi ?= "1.2.0"
--PREFERRED_VERSION_inputproto ?= "1.5.0"
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc b/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-deleted file mode 100644
-index 39e0eb9..0000000
---- a/conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-+++ /dev/null
-@@ -1,257 +0,0 @@
--# see http://www.x.org/wiki/Releases/7.4
--# WORK IN PROGRESS, 7.4 will be released on 2008-03-01
--
--PREFERRED_PROVIDER_virtual/xserver ?= "xserver-xorg"
--
--PREFERRED_PROVIDER_libxext ?= "libxext"
--PREFERRED_PROVIDER_xext ?= "libxext"
--PREFERRED_PROVIDER_libxi ?= "libxi"
--PREFERRED_PROVIDER_libxft ?= "libxft"
--PREFERRED_PROVIDER_virtual/libx11 ?= "libx11"
--PREFERRED_PROVIDER_virtual/libx11-native ?= "libx11-native"
--PREFERRED_PROVIDER_libxpm ?= "libxpm"
--PREFERRED_PROVIDER_xpm ?= "libxpm"
--PREFERRED_PROVIDER_libxt ?= "libxt"
--PREFERRED_PROVIDER_libxaw ?= "libxaw"
--PREFERRED_PROVIDER_libice ?= "libice"
--PREFERRED_PROVIDER_libxrender ?= "libxrender"
--PREFERRED_PROVIDER_libxcursor ?= "libxcursor"
--PREFERRED_PROVIDER_xextensions ?= "xextensions"
--PREFERRED_PROVIDER_xproto ?= "xproto"
--PREFERRED_PROVIDER_x11 ?= "libx11"
--PREFERRED_PROVIDER_libxv ?= "libxv"
--PREFERRED_PROVIDER_xft ?= "libxft"
--PREFERRED_PROVIDER_libxrandr ?= "libxrandr"
--PREFERRED_PROVIDER_libxdamage ?= "libxdamage"
--PREFERRED_PROVIDER_libxcomposite ?= "libxcomposite"
--PREFERRED_PROVIDER_libxfixes ?= "libxfixes"
--PREFERRED_PROVIDER_libxinerama ?= "libxinerama"
--PREFERRED_PROVIDER_libxxf86vm ?= "libxxf86vm"
--PREFERRED_PROVIDER_libxmu ?= "libxmu"
--PREFERRED_PROVIDER_libsm ?= "libsm"
--PREFERRED_PROVIDER_xrandr ?= "xrandr"
--PREFERRED_PROVIDER_xserver ?= "xserver-xorg"
--PREFERRED_PROVIDER_virtual/xorg ?= "xserver-xorg"
--
--PREFERRED_VERSION_task-xorg ?= "X11R7.4"
--
--# app
--PREFERRED_VERSION_appres ?= "1.0.1"
--PREFERRED_VERSION_bitmap ?= "1.0.3"
--PREFERRED_VERSION_iceauth ?= "1.0.2"
--PREFERRED_VERSION_luit ?= "1.0.3"
--PREFERRED_VERSION_mkfontdir-native ?= "1.0.4"
--PREFERRED_VERSION_mkfontdir ?= "1.0.4"
--PREFERRED_VERSION_mkfontscale ?= "1.0.5"
--PREFERRED_VERSION_sessreg ?= "1.0.4"
--PREFERRED_VERSION_setxkbmap ?= "1.0.4"
--PREFERRED_VERSION_smproxy ?= "1.0.2"
--PREFERRED_VERSION_x11perf ?= "1.5"
--PREFERRED_VERSION_xauth ?= "1.0.3"
--PREFERRED_VERSION_xbacklight ?= "1.1"
--PREFERRED_VERSION_xcmsdb ?= "1.0.1"
--PREFERRED_VERSION_xcursorgen ?= "1.0.2"
--PREFERRED_VERSION_xdpyinfo ?= "1.0.3"
--PREFERRED_VERSION_xdriinfo ?= "1.0.2"
--PREFERRED_VERSION_xev ?= "1.0.3"
--PREFERRED_VERSION_xgamma ?= "1.0.2"
--PREFERRED_VERSION_xhost ?= "1.0.2"
--PREFERRED_VERSION_xinput ?= "1.3.0"
--PREFERRED_VERSION_xkbcomp ?= "1.0.5"
--PREFERRED_VERSION_xkbcomp-native ?= "1.0.5"
--PREFERRED_VERSION_xkbevd ?= "1.0.2"
--PREFERRED_VERSION_xkbutils ?= "1.0.1"
--PREFERRED_VERSION_xkill ?= "1.0.1"
--PREFERRED_VERSION_xlsatoms ?= "1.0.1"
--PREFERRED_VERSION_xlsclients ?= "1.0.1"
--PREFERRED_VERSION_xmodmap ?= "1.0.3"
--PREFERRED_VERSION_xpr ?= "1.0.2"
--PREFERRED_VERSION_xprop ?= "1.0.4"
--PREFERRED_VERSION_xrandr ?= "1.2.3"
--PREFERRED_VERSION_xrdb ?= "1.0.5"
--PREFERRED_VERSION_xrefresh ?= "1.0.2"
--PREFERRED_VERSION_xset ?= "1.0.4"
--PREFERRED_VERSION_xsetmode ?= "1.0.0"
--PREFERRED_VERSION_xsetroot ?= "1.0.2"
--PREFERRED_VERSION_xvinfo ?= "1.0.2"
--PREFERRED_VERSION_xwd ?= "1.0.2"
--PREFERRED_VERSION_xwininfo ?= "1.0.4"
--PREFERRED_VERSION_xwud ?= "1.0.1"
--
--# data
--PREFERRED_VERSION_xbitmaps ?= "1.0.1"
--PREFERRED_VERSION_xcursor-themes ?= "1.0.1"
--
--# doc
--PREFERRED_VERSION_xorg-docs ?= "1.4"
--PREFERRED_VERSION_xorg-sgml-doctools ?= "1.2"
--
--# driver
--PREFERRED_VERSION_xf86-input-acecad ?= "1.2.2"
--PREFERRED_VERSION_xf86-input-aiptek ?= "1.1.1"
--PREFERRED_VERSION_xf86-input-evdev ?= "2.0.4"
--PREFERRED_VERSION_xf86-input-joystick ?= "1.3.2"
--PREFERRED_VERSION_xf86-input-keyboard ?= "1.3.1"
--PREFERRED_VERSION_xf86-input-mouse ?= "1.3.0"
--PREFERRED_VERSION_xf86-input-synaptics ?= "0.15.0"
--PREFERRED_VERSION_xf86-input-vmmouse ?= "12.5.1"
--PREFERRED_VERSION_xf86-input-void ?= "1.1.1"
--PREFERRED_VERSION_xf86-video-apm ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-ark ?= "0.7.0"
--PREFERRED_VERSION_xf86-video-ast ?= "0.85.0"
--PREFERRED_VERSION_xf86-video-ati ?= "6.9.0"
--PREFERRED_VERSION_xf86-video-chips ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-cirrus ?= "1.2.1"
--PREFERRED_VERSION_xf86-video-dummy ?= "0.3.0"
--PREFERRED_VERSION_xf86-video-fbdev ?= "0.4.0"
--PREFERRED_VERSION_xf86-video-geode ?= "2.10.1"
--PREFERRED_VERSION_xf86-video-glide ?= "1.0.1"
--PREFERRED_VERSION_xf86-video-glint ?= "1.2.1"
--PREFERRED_VERSION_xf86-video-i128 ?= "1.3.1"
--PREFERRED_VERSION_xf86-video-i740 ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-impact ?= "0.2.0"
--PREFERRED_VERSION_xf86-video-intel ?= "2.4.2"
--PREFERRED_VERSION_xf86-video-mach64 ?= "6.8.0"
--PREFERRED_VERSION_xf86-video-mga ?= "1.4.9"
--PREFERRED_VERSION_xf86-video-neomagic ?= "1.2.1"
--PREFERRED_VERSION_xf86-video-newport ?= "0.2.1"
--PREFERRED_VERSION_xf86-video-nv ?= "2.1.12"
--PREFERRED_VERSION_xf86-video-openchrome ?= "0.2.903"
--PREFERRED_VERSION_xf86-video-r128 ?= "6.8.0"
--PREFERRED_VERSION_xf86-video-rendition ?= "4.2.0"
--PREFERRED_VERSION_xf86-video-s3 ?= "0.6.0"
--PREFERRED_VERSION_xf86-video-s3virge ?= "1.10.1"
--PREFERRED_VERSION_xf86-video-savage ?= "2.2.1"
--PREFERRED_VERSION_xf86-video-siliconmotion ?= "1.6.0"
--PREFERRED_VERSION_xf86-video-sis ?= "0.10.0"
--PREFERRED_VERSION_xf86-video-sisusb ?= "0.9.0"
--PREFERRED_VERSION_xf86-video-sunbw2 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suncg14 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suncg3 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-suncg6 ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-sunffb ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-sunleo ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-suntcx ?= "1.1.0"
--PREFERRED_VERSION_xf86-video-tdfx ?= "1.4.0"
--PREFERRED_VERSION_xf86-video-tga ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-trident ?= "1.3.0"
--PREFERRED_VERSION_xf86-video-tseng ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-v4l ?= "0.2.0"
--PREFERRED_VERSION_xf86-video-vermilion ?= "1.0.1"
--PREFERRED_VERSION_xf86-video-vesa ?= "2.0.0"
--PREFERRED_VERSION_xf86-video-vmware ?= "10.16.5"
--PREFERRED_VERSION_xf86-video-voodoo ?= "1.2.0"
--PREFERRED_VERSION_xf86-video-wsfb ?= "0.2.1"
--PREFERRED_VERSION_xf86-video-xgi ?= "1.5.0"
--PREFERRED_VERSION_xf86-video-xgixp ?= "1.7.99.3"
--
--# font
--PREFERRED_VERSION_encodings ?= "1.0.2"
--PREFERRED_VERSION_font-screen-cyrillic ?= "1.0.1"
--PREFERRED_VERSION_font-util-native ?= "1.0.1"
--PREFERRED_VERSION_font-util ?= "1.0.1"
--PREFERRED_VERSION_font-xfree86-type1 ?= "1.0.1"
--
--# lib
--PREFERRED_VERSION_diet-x11 ?= "1.1.5"
--PREFERRED_VERSION_libapplewm ?= "1.0.0"
--PREFERRED_VERSION_libdmx ?= "1.0.2"
--PREFERRED_VERSION_libfs ?= "1.0.1"
--PREFERRED_VERSION_libice ?= "1.0.4"
--PREFERRED_VERSION_libfontenc ?= "1.0.4"
--PREFERRED_VERSION_libpciaccess ?= "0.10.3"
--PREFERRED_VERSION_libsm ?= "1.1.0"
--PREFERRED_VERSION_libwindowswm ?= "1.0.0"
--PREFERRED_VERSION_libx11 ?= "1.1.5"
--PREFERRED_VERSION_libx11-native ?= "1.1.1"
--PREFERRED_VERSION_libxau ?= "1.0.4"
--PREFERRED_VERSION_libxau-native ?= "1.0.3"
--PREFERRED_VERSION_libxaw ?= "1.0.4"
--PREFERRED_VERSION_libxcomposite ?= "0.4.0"
--PREFERRED_VERSION_libxcursor ?= "1.1.9"
--PREFERRED_VERSION_libxdamage ?= "1.1.1"
--PREFERRED_VERSION_libxdmcp-native ?= "1.0.2"
--PREFERRED_VERSION_libxdmcp ?= "1.0.2"
--PREFERRED_VERSION_libxevie ?= "1.0.2"
--PREFERRED_VERSION_libxext ?= "1.0.4"
--PREFERRED_VERSION_libxfixes ?= "4.0.3"
--PREFERRED_VERSION_libxfont ?= "1.3.3"
--PREFERRED_VERSION_libxfontcache ?= "1.0.4"
--PREFERRED_VERSION_libxft ?= "2.1.13"
--PREFERRED_VERSION_libxi ?= "1.1.3"
--PREFERRED_VERSION_libxinerama ?= "1.0.3"
--PREFERRED_VERSION_libxkbfile ?= "1.0.5"
--PREFERRED_VERSION_libxkbfile-native ?= "1.0.5"
--PREFERRED_VERSION_liblbxutil ?= "1.0.1"
--PREFERRED_VERSION_libxmu ?= "1.0.4"
--PREFERRED_VERSION_libxpm ?= "3.5.7"
--PREFERRED_VERSION_libxrandr ?= "1.2.3"
--PREFERRED_VERSION_libxrender ?= "0.9.4"
--PREFERRED_VERSION_libxres ?= "1.0.3"
--PREFERRED_VERSION_libxscrnsaver ?= "1.1.3"
--PREFERRED_VERSION_libxt ?= "1.0.5"
--PREFERRED_VERSION_libxtst ?= "1.0.3"
--PREFERRED_VERSION_libxv ?= "1.0.4"
--PREFERRED_VERSION_libxvmc ?= "1.0.4"
--PREFERRED_VERSION_libxxf86dga ?= "1.0.2"
--PREFERRED_VERSION_libxxf86misc ?= "1.0.1"
--PREFERRED_VERSION_libxxf86vm ?= "1.0.2"
--PREFERRED_VERSION_xtrans ?= "1.2.1"
--
--# This should be here but is needed until bitbake can do
--# versioned depends
--PREFERRED_VERSION_mesa ?= "7.2"
--PREFERRED_VERSION_xtrans-native ?= "1.2.1"
--
--# proto
--PREFERRED_VERSION_applewmproto ?= "1.0.3"
--PREFERRED_VERSION_bigreqsproto ?= "1.0.2"
--PREFERRED_VERSION_bigreqsproto-native ?= "1.0.2"
--PREFERRED_VERSION_compositeproto ?= "0.4"
--PREFERRED_VERSION_damageproto ?= "1.1.0"
--PREFERRED_VERSION_dmxproto ?= "2.2.2"
--PREFERRED_VERSION_dri2proto ?= "1.1"
--PREFERRED_VERSION_evieext ?= "1.0.2"
--PREFERRED_VERSION_fixesproto ?= "4.0"
--PREFERRED_VERSION_fontcacheproto ?= "0.1.2"
--PREFERRED_VERSION_fontsproto ?= "2.0.2"
--PREFERRED_VERSION_glproto ?= "1.4.9"
--PREFERRED_VERSION_inputproto ?= "1.4.4"
--PREFERRED_VERSION_inputproto-native ?= "1.4.2"
--PREFERRED_VERSION_kbproto ?= "1.0.3"
--PREFERRED_VERSION_kbproto-native ?= "1.0.3"
--PREFERRED_VERSION_randrproto ?= "1.2.1"
--PREFERRED_VERSION_recordproto ?= "1.13.2"
--PREFERRED_VERSION_renderproto ?= "0.9.3"
--PREFERRED_VERSION_resourceproto ?= "1.0.2"
--PREFERRED_VERSION_scrnsaverproto ?= "1.1.0"
--PREFERRED_VERSION_trapproto ?= "3.4.3"
--PREFERRED_VERSION_videoproto ?= "2.2.2"
--PREFERRED_VERSION_windowswmproto ?= "1.0.3"
--PREFERRED_VERSION_xcmiscproto ?= "1.1.2"
--PREFERRED_VERSION_xcmiscproto-native ?= "1.1.2"
--PREFERRED_VERSION_xextproto ?= "7.0.3"
--PREFERRED_VERSION_xextproto-native ?= "7.0.3"
--PREFERRED_VERSION_xineramaproto ?= "1.1.2"
--PREFERRED_VERSION_xf86bigfontproto ?= "1.1.2"
--PREFERRED_VERSION_xf86bigfontproto-native ?= "1.1.2"
--PREFERRED_VERSION_xf86dgaproto ?= "2.0.3"
--PREFERRED_VERSION_xf86driproto ?= "2.0.4"
--PREFERRED_VERSION_xf86miscproto ?= "0.9.2"
--PREFERRED_VERSION_xf86vidmodeproto ?= "2.2.2"
--PREFERRED_VERSION_xinemaroproto ?= "1.1.2"
--PREFERRED_VERSION_xproto-native ?= "7.0.13"
--PREFERRED_VERSION_xproto ?= "7.0.13"
--
--# util
--PREFERRED_VERSION_gccmakedep ?= "1.0.2"
--PREFERRED_VERSION_imake ?= "1.0.2"
--PREFERRED_VERSION_makedepend ?= "1.0.1"
--PREFERRED_VERSION_makedepend-native ?= "1.0.1"
--PREFERRED_VERSION_util-macros-native ?= "1.1.6"
--PREFERRED_VERSION_util-macros ?= "1.1.6"
--PREFERRED_VERSION_xorg-cf-files ?= "1.0.2"
--
--# xserver
--PREFERRED_VERSION_xserver-kdrive ?= "1.4"
--PREFERRED_VERSION_xserver-xorg ?= "1.5.1"
-diff --git a/conf/distro/include/preferred-xorg-versions.inc b/conf/distro/include/preferred-xorg-versions.inc
-deleted file mode 100644
-index 61a01bc..0000000
---- a/conf/distro/include/preferred-xorg-versions.inc
-+++ /dev/null
-@@ -1,111 +0,0 @@
--PREFERRED_VERSION_applewmproto ?= "1.0.3"
--PREFERRED_VERSION_bigreqsproto ?= "1.0.2"
--PREFERRED_VERSION_bigreqsproto-native ?= "1.0.2"
--PREFERRED_VERSION_compositeproto ?= "0.4"
--PREFERRED_VERSION_damageproto ?= "1.1.0"
--PREFERRED_VERSION_diet-x11 ?= "1.1.2"
--PREFERRED_VERSION_dmxproto ?= "2.2.2"
--PREFERRED_VERSION_evieext ?= "1.0.2"
--PREFERRED_VERSION_fixesproto ?= "4.0"
--PREFERRED_VERSION_fontcacheproto ?= "0.1.2"
--PREFERRED_VERSION_fontcacheproto-native ?= "0.1.2"
--PREFERRED_VERSION_fontsproto ?= "2.0.2"
--PREFERRED_VERSION_fontsproto-native ?= "2.0.2"
--PREFERRED_VERSION_gccmakedep ?= "1.0.2"
--PREFERRED_VERSION_glproto ?= "1.4.8"
--PREFERRED_VERSION_imake ?= "1.0.2"
--PREFERRED_VERSION_inputproto ?= "1.4.2"
--PREFERRED_VERSION_inputproto-native ?= "1.4.2"
--PREFERRED_VERSION_kbproto ?= "1.0.3"
--PREFERRED_VERSION_kbproto-native ?= "1.0.3"
--PREFERRED_VERSION_libapplewm ?= "1.0.0"
--PREFERRED_VERSION_libdmx ?= "1.0.2"
--PREFERRED_VERSION_libfontenc ?= "1.0.4"
--PREFERRED_VERSION_libfontenc-native ?= "1.0.4"
--PREFERRED_VERSION_libfs ?= "1.0.0"
--PREFERRED_VERSION_libice ?= "1.0.3"
--PREFERRED_VERSION_liblbxutil ?= "1.0.1"
--PREFERRED_VERSION_liboldx ?= "1.0.1"
--PREFERRED_VERSION_libsm ?= "1.0.3"
--PREFERRED_VERSION_libwindowswm ?= "1.0.0"
--PREFERRED_VERSION_libx11 ?= "1.1.2"
--PREFERRED_VERSION_libx11-native ?= "1.0.1"
--PREFERRED_VERSION_libxau ?= "1.0.3"
--PREFERRED_VERSION_libxau-native ?= "1.0.3"
--PREFERRED_VERSION_libxaw ?= "1.0.3"
--PREFERRED_VERSION_libxcomposite ?= "0.4.0"
--PREFERRED_VERSION_libxcursor ?= "1.1.8"
--PREFERRED_VERSION_libxdamage ?= "1.1.1"
--PREFERRED_VERSION_libxdmcp ?= "1.0.2"
--PREFERRED_VERSION_libxdmcp-native ?= "1.0.2"
--PREFERRED_VERSION_libxevie ?= "1.0.2"
--PREFERRED_VERSION_libxext ?= "1.0.3"
--PREFERRED_VERSION_libxfixes ?= "4.0.3"
--PREFERRED_VERSION_libxfont ?= "1.3.0"
--PREFERRED_VERSION_libxfont-native ?= "1.3.0"
--PREFERRED_VERSION_libxfontcache ?= "1.0.4"
--PREFERRED_VERSION_libxft ?= "2.1.12"
--PREFERRED_VERSION_libxi ?= "1.1.2"
--PREFERRED_VERSION_libxinerama ?= "1.0.2"
--PREFERRED_VERSION_libxkbfile ?= "1.0.4"
--PREFERRED_VERSION_libxkbui ?= "1.0.2"
--PREFERRED_VERSION_libxmu ?= "1.0.3"
--PREFERRED_VERSION_libxp ?= "1.0.0"
--PREFERRED_VERSION_libxpm ?= "3.5.6"
--PREFERRED_VERSION_libxprintapputil ?= "1.0.1"
--PREFERRED_VERSION_libxprintutil ?= "1.0.1"
--PREFERRED_VERSION_libxrandr ?= "1.2.1"
--PREFERRED_VERSION_libxrender ?= "0.9.2"
--PREFERRED_VERSION_libxres ?= "1.0.3"
--PREFERRED_VERSION_libxscrnsaver ?= "1.1.2"
--PREFERRED_VERSION_libxt ?= "1.0.5"
--PREFERRED_VERSION_libxtrap ?= "1.0.0"
--PREFERRED_VERSION_libxtst ?= "1.0.2"
--PREFERRED_VERSION_libxv ?= "1.0.3"
--PREFERRED_VERSION_libxvmc ?= "1.0.4"
--PREFERRED_VERSION_libxxf86dga ?= "1.0.1"
--PREFERRED_VERSION_libxxf86misc ?= "1.0.1"
--PREFERRED_VERSION_libxxf86vm ?= "1.0.1"
--PREFERRED_VERSION_lndir ?= "1.0.1"
--PREFERRED_VERSION_makedepend ?= "1.0.1"
--PREFERRED_VERSION_makedepend-native ?= "1.0.1"
--PREFERRED_VERSION_printproto ?= "1.0.3"
--PREFERRED_VERSION_randrproto ?= "1.2.1"
--PREFERRED_VERSION_recordproto ?= "1.13.2"
--PREFERRED_VERSION_renderproto ?= "0.9.2"
--PREFERRED_VERSION_resourceproto ?= "1.0.2"
--PREFERRED_VERSION_scrnsaverproto ?= "1.1.0"
--PREFERRED_VERSION_trapproto ?= "3.4.3"
--PREFERRED_VERSION_util-macros ?= "1.1.5"
--PREFERRED_VERSION_util-macros-native ?= "1.1.5"
--PREFERRED_VERSION_videoproto ?= "2.2.2"
--PREFERRED_VERSION_windowswmproto ?= "1.0.3"
--PREFERRED_VERSION_xauth ?= "1.0.2"
--PREFERRED_VERSION_xcmiscproto ?= "1.1.2"
--PREFERRED_VERSION_xcmiscproto-native ?= "1.1.2"
--PREFERRED_VERSION_xdpyinfo ?= "1.0.2"
--PREFERRED_VERSION_xextproto ?= "7.0.2"
--PREFERRED_VERSION_xextproto-native ?= "7.0.2"
--PREFERRED_VERSION_xf86bigfontproto ?= "1.1.2"
--PREFERRED_VERSION_xf86bigfontproto-native ?= "1.1.2"
--PREFERRED_VERSION_xf86dgaproto ?= "2.0.2"
--PREFERRED_VERSION_xf86driproto ?= "2.0.3"
--PREFERRED_VERSION_xf86miscproto ?= "0.9.2"
--PREFERRED_VERSION_xf86rushproto ?= "1.1.2"
--PREFERRED_VERSION_xf86vidmodeproto ?= "2.2.2"
--PREFERRED_VERSION_xhost ?= "1.0.2"
--PREFERRED_VERSION_xineramaproto ?= "1.1.2"
--PREFERRED_VERSION_xmodmap ?= "1.0.2"
--PREFERRED_VERSION_xorg-cf-files ?= "1.0.2"
--PREFERRED_VERSION_xproto ?= "7.0.10"
--PREFERRED_VERSION_xproto-native ?= "7.0.10"
--PREFERRED_VERSION_xproxymanagementprotocol ?= "1.0.2"
--PREFERRED_VERSION_xrandr ?= "1.2.2"
--PREFERRED_VERSION_xrdb ?= "1.0.3"
--PREFERRED_VERSION_xserver-kdrive ?= "1.3.0.0"
--PREFERRED_VERSION_xserver-xorg ?= "1.3.0.0"
--PREFERRED_VERSION_xset ?= "1.0.2"
--PREFERRED_VERSION_xtrans ?= "1.0.3"
--PREFERRED_VERSION_xtrans-native ?= "1.0.3"
--PREFERRED_VERSION_xinit ?= "1.0.4"
--PREFERRED_VERSION_xev ?= "1.0.2"
-diff --git a/conf/distro/include/preferred-xorg-versions.inc b/conf/distro/include/preferred-xorg-versions.inc
-new file mode 120000
-index 0000000..c1c6f2f
---- /dev/null
-+++ b/conf/distro/include/preferred-xorg-versions.inc
-@@ -0,0 +1 @@
-+preferred-xorg-versions-X11R7.5.inc
-\ No newline at end of file
+So I think that RPROVIDES_${PN} removal should be OK and RCONFLICTS between matchbox-keyboard 
+and matchbox-keyboard-inputmethod is enough to block conflicting files on target.
+
+I'll send patch for this.
+
+BTW: I can confirm that those multiple runtime providers are NOTEd 
+only with bitbake master and 1.10 doesn't show them.
+
+bitbake@jama ~/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/matchbox-keyboard-inputmethod-0.0+svnr1910-r11/packages-split $ find
+.
+./matchbox-keyboard-inputmethod-static
+./matchbox-keyboard-inputmethod.shlibdeps
+./matchbox-keyboard-applet-dbg
+./matchbox-keyboard-im
+./matchbox-keyboard-im/usr
+./matchbox-keyboard-im/usr/lib
+./matchbox-keyboard-im/usr/lib/gtk-2.0
+./matchbox-keyboard-im/usr/lib/gtk-2.0/2.10.0
+./matchbox-keyboard-im/usr/lib/gtk-2.0/2.10.0/immodules
+./matchbox-keyboard-im/usr/lib/gtk-2.0/2.10.0/immodules/libmb-im-invoker.so
+./matchbox-keyboard-inputmethod
+./matchbox-keyboard-inputmethod/etc
+./matchbox-keyboard-inputmethod/etc/X11
+./matchbox-keyboard-inputmethod/etc/X11/Xsession.d
+./matchbox-keyboard-inputmethod/etc/X11/Xsession.d/80matchboxkeyboard
+./matchbox-keyboard-inputmethod/usr
+./matchbox-keyboard-inputmethod/usr/bin
+./matchbox-keyboard-inputmethod/usr/bin/matchbox-keyboard
+./matchbox-keyboard-inputmethod/usr/share
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard.xml
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard-ru.xml
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard-numpad.xml
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard-us.xml
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard-extended.xml
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard-dvorak.xml
+./matchbox-keyboard-inputmethod/usr/share/matchbox-keyboard/keyboard-fi.xml
+./matchbox-keyboard-inputmethod/usr/share/applications
+./matchbox-keyboard-inputmethod/usr/share/applications/inputmethods
+./matchbox-keyboard-inputmethod/usr/share/applications/inputmethods/matchbox-keyboard.desktop
+./matchbox-keyboard-inputmethod/usr/share/pixmaps
+./matchbox-keyboard-inputmethod/usr/share/pixmaps/matchbox-keyboard.png
+./matchbox-keyboard-im.shlibdeps
+./matchbox-keyboard-applet.shlibdeps
+./matchbox-keyboard-inputmethod-dbg
+./matchbox-keyboard-inputmethod-dbg/usr
+./matchbox-keyboard-inputmethod-dbg/usr/bin
+./matchbox-keyboard-inputmethod-dbg/usr/bin/.debug
+./matchbox-keyboard-inputmethod-dbg/usr/bin/.debug/matchbox-keyboard
+./matchbox-keyboard-inputmethod-dbg/usr/lib
+./matchbox-keyboard-inputmethod-dbg/usr/lib/matchbox-panel
+./matchbox-keyboard-inputmethod-dbg/usr/lib/matchbox-panel/.debug
+./matchbox-keyboard-inputmethod-dbg/usr/lib/matchbox-panel/.debug/libkeyboard.so
+./matchbox-keyboard-inputmethod-dev
+./matchbox-keyboard-inputmethod-doc
+./matchbox-keyboard-applet
+./matchbox-keyboard-applet/usr
+./matchbox-keyboard-applet/usr/lib
+./matchbox-keyboard-applet/usr/lib/matchbox-panel
+./matchbox-keyboard-applet/usr/lib/matchbox-panel/libkeyboard.so
+./matchbox-keyboard-im-dbg
+./matchbox-keyboard-im-dbg/usr
+./matchbox-keyboard-im-dbg/usr/lib
+./matchbox-keyboard-im-dbg/usr/lib/gtk-2.0
+./matchbox-keyboard-im-dbg/usr/lib/gtk-2.0/2.10.0
+./matchbox-keyboard-im-dbg/usr/lib/gtk-2.0/2.10.0/immodules
+./matchbox-keyboard-im-dbg/usr/lib/gtk-2.0/2.10.0/immodules/.debug
+./matchbox-keyboard-im-dbg/usr/lib/gtk-2.0/2.10.0/immodules/.debug/libmb-im-invoker.so
+./matchbox-keyboard-inputmethod-locale
+
+bitbake@jama ~/tmpdir-dev-shr/work/armv4t-oe-linux-gnueabi/matchbox-keyboard-0.0+svnr1910-r8/packages-split $ find
+.
+./matchbox-keyboard.shlibdeps
+./matchbox-keyboard
+./matchbox-keyboard/usr
+./matchbox-keyboard/usr/bin
+./matchbox-keyboard/usr/bin/matchbox-keyboard
+./matchbox-keyboard/usr/share
+./matchbox-keyboard/usr/share/matchbox-keyboard
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard.xml
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard-ru.xml
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard-numpad.xml
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard-us.xml
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard-extended.xml
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard-dvorak.xml
+./matchbox-keyboard/usr/share/matchbox-keyboard/keyboard-fi.xml
+./matchbox-keyboard/usr/share/applications
+./matchbox-keyboard/usr/share/applications/inputmethods
+./matchbox-keyboard/usr/share/applications/inputmethods/matchbox-keyboard.desktop
+./matchbox-keyboard/usr/share/pixmaps
+./matchbox-keyboard/usr/share/pixmaps/matchbox-keyboard.png
+./matchbox-keyboard-dbg
+./matchbox-keyboard-dbg/usr
+./matchbox-keyboard-dbg/usr/bin
+./matchbox-keyboard-dbg/usr/bin/.debug
+./matchbox-keyboard-dbg/usr/bin/.debug/matchbox-keyboard
+./matchbox-keyboard-dev
+./matchbox-keyboard-doc
+./matchbox-keyboard-locale
+./matchbox-keyboard-static
+
 -- 
-1.7.1
-
+Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
 
