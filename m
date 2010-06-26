@@ -1,31 +1,49 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OSY7i-0001V1-99
+	(envelope-from <martin.jansa@gmail.com>) id 1OSZWt-0006mH-2g
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 26 Jun 2010 18:20:54 +0200
-Received: from p5b03300d.dip.t-dialin.net ([91.3.48.13] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OSY3B-0007yY-EF by authid <stefan@sostec.de> with cram_md5;
-	Sat, 26 Jun 2010 18:16:16 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>)
-	id 1OSY37-00067d-UM; Sat, 26 Jun 2010 18:16:09 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Sat, 26 Jun 2010 19:50:59 +0200
+Received: by fxm7 with SMTP id 7so40710fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 26 Jun 2010 10:46:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=r94u3S8csorbfLjEOi805uixrHCRFyceGNWtbmnbUBc=;
+	b=g4BboWGhlzyxY7IwLGbmZWSfNC5jWjQHrMdhwM92FFxkLx2cXc2kuI0wssS9eVnDEy
+	P/NojxU4NhEQnBNMzVsDFlhRCXtu1AXiaNxHqvx9cjx2snKcsZm+daBULKZ4YArG21so
+	PAg1MyBj5zDAQNB5H8ao3b7a/hCPnUvObEZiw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=G4EwK93sKcAErpqpOrVyDTxiV4ULwe8nT+e+K2Zdi/SJris4wdrcdxJDJspDOK1dcP
+	jWuFF8VkXSgciqQ/tNtzU8TLVbfoZAhG3r8xbi1CKdEUJqHxaXnFrEQstEdbrvqZGP2d
+	89uB82hOijbvivd3EoKbXUj3p964uYoIMRv/w=
+Received: by 10.223.56.212 with SMTP id z20mr1911368fag.1.1277574379526;
+	Sat, 26 Jun 2010 10:46:19 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id o19sm40853996fal.47.2010.06.26.10.46.18
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 26 Jun 2010 10:46:19 -0700 (PDT)
+Date: Sat, 26 Jun 2010 19:45:55 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 26 Jun 2010 18:16:07 +0200
-Message-Id: <1277568967-23506-1-git-send-email-stefan@datenfreihafen.org>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Message-ID: <20100626174555.GN17650@jama>
+References: <E1OSU21-0002Hi-E6@melo.openembedded.org>
+	<20100626123700.GM17650@jama> <i056c1$k7t$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i056c1$k7t$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Stefan Schmidt <stefan@buglabs.net>
-Subject: [PATCH] shadow: Disable email checking completely
+Subject: Re: Koen Kooi : libdrm.inc: fix packaging regression that cause ${PN} to go from libdrm2 to libdrm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,42 +57,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 26 Jun 2010 16:20:55 -0000
+X-List-Received-Date: Sat, 26 Jun 2010 17:50:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-From: Stefan Schmidt <stefan@buglabs.net>
+On Sat, Jun 26, 2010 at 05:29:05PM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 26-06-10 14:37, Martin Jansa wrote:
+> 
+> > Just noticed the problem too and seems like this solution wasn't enough,
+> > would you add ${PN}-kms package? Or do you have an idea why it ignored
+> > LEAD_SONAME?
+> 
+> It doens't build a libkms for me, so it looks safe to add such a
+> package. No idea on the LEAD_SONAME, sorry.
 
-This allows faster login due to not checking for new emails.
+LEAD_SONAME doesn't like _${PV} override, I'll add kms package and
+remove _${PV} in case someone has build even more sonames than libdrm
+and libkms.
 
-Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
----
- recipes/shadow/shadow.inc |    5 ++++-
- 1 files changed, 4 insertions(+), 1 deletions(-)
+regards,
 
-diff --git a/recipes/shadow/shadow.inc b/recipes/shadow/shadow.inc
-index 460930b..d2ac65d 100644
---- a/recipes/shadow/shadow.inc
-+++ b/recipes/shadow/shadow.inc
-@@ -13,7 +13,7 @@ DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
- 
- PACKAGE_ARCH_${PN} = "${MACHINE_ARCH}"
- 
--INC_PR = "r14"
-+INC_PR = "r15"
- 
- # Additional Policy files for PAM
- PAM_SRC_URI = " \
-@@ -81,6 +81,9 @@ do_install_append() {
-   sed -i 's/MAIL_DIR/#MAIL_DIR/g' ${D}${sysconfdir}/login.defs
-   sed -i 's/#MAIL_FILE/MAIL_FILE/g' ${D}${sysconfdir}/login.defs
- 
-+  # disable checking emails at all
-+  sed -i 's/MAIL_CHECK_ENAB/#MAIL_CHECK_ENAB/g' ${D}${sysconfdir}/login.defs
-+
-   install -d ${D}${sbindir} ${D}${base_sbindir} ${D}${base_bindir} 
-   for i in passwd chfn newgrp chsh ; do
-     mv ${D}${bindir}/$i ${D}${bindir}/$i.${PN}
 -- 
-1.7.1
-
+Jansa 'JaMa' Martin     jabber: Martin.Jansa@gmail.com
 
 
