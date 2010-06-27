@@ -1,31 +1,29 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from woodbine.london.02.net ([87.194.255.145])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OSs9q-00080u-5i
+	(envelope-from <bluelightning@bluelightning.org>) id 1OSyEv-0005qa-Kd
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jun 2010 15:44:27 +0200
-Received: from [123.192.240.117] (unknown [123.192.240.117])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id A5B811B10C09
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jun 2010 13:41:14 +0000 (UTC)
-Message-ID: <4C27549E.7040203@freyther.de>
-Date: Sun, 27 Jun 2010 21:39:42 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
-	Thunderbird/3.1
-MIME-Version: 1.0
+	Sun, 27 Jun 2010 22:14:07 +0200
+Received: from shodan.localnet (93.96.131.185) by woodbine.london.02.net
+	(8.5.124.03)
+	id 4C1F9803002350FA for openembedded-devel@lists.openembedded.org;
+	Sun, 27 Jun 2010 21:06:40 +0100
+From: Paul Eggleton <bluelightning@bluelightning.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1277617168-17482-1-git-send-email-Martin.Jansa@gmail.com>
-In-Reply-To: <1277617168-17482-1-git-send-email-Martin.Jansa@gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Date: Sun, 27 Jun 2010 21:06:36 +0100
+User-Agent: KMail/1.13.3 (Linux/2.6.32-22-generic; KDE/4.4.4; i686; ; )
+References: <1275485971-23536-1-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1275485971-23536-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201006272106.36928.bluelightning@bluelightning.org>
+X-SA-Exim-Connect-IP: 87.194.255.145
+X-SA-Exim-Mail-From: bluelightning@bluelightning.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] qt-4.7.0-beta1: upstream tarball was changed, regenerate checksums
+Subject: Re: [PATCH] recipes: conform to OE packaging guidelines with RDEPENDS/RREDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,18 +37,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jun 2010 13:44:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 27 Jun 2010 20:14:07 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-15"
 Content-Transfer-Encoding: 7bit
 
-On 06/27/2010 01:39 PM, Martin Jansa wrote:
-> * already applied (the change is ok, see diff)
-> * sending to list only as heads-up, you can remove old tarball from downloads 
->   (otherwise next rebuild will complain about checksums - but INC_PR was bumped 
->   yesterday so you should seen it soon).
+On Wed, 02 Jun 2010, Martin Jansa wrote:
+> * there is probably very few cases when it's needed without _${PN},
+>   if you find one in attached patch, please enlighten me
 
-Thanks for doing that analysis..
+I've just discovered this change is what has broken the build of opie-taskbar-
+images:
 
-Signed-off-by: Holger Freyther <zecke@selfish.org>
+------------------------------ snip --------------------------------
+paul@linc:~/oe/build-hx4700-dev$ bitbake opie-taskbar-images
+NOTE: Handling BitBake files: / (8377/8377) [100 %]
+NOTE: Parsing finished. 7570 cached, 477 parsed, 330 skipped, 0 masked.
+NOTE: Resolving any missing task queue dependencies
+ERROR: '['/home/paul/oe/org.openembedded.dev/recipes/opie-taskbar/opie-
+taskbar-images_1.2.4.bb']' RDEPENDS/RRECOMMENDS or otherwise requires the 
+runtime entity 'opie-taskbar-images' but it wasn't found in any PACKAGE or 
+RPROVIDES variables
+NOTE: Runtime target 'opie-taskbar-images' is unbuildable, removing...
+Missing or unbuildable dependency chain was: ['opie-taskbar-images']
+ERROR: Required build target 'opie-taskbar-images' has no buildable providers.
+Missing or unbuildable dependency chain was: ['opie-taskbar-images', 'opie-
+taskbar-images']
+paul@linc:~/oe/build-hx4700-dev$
+------------------------------ snip --------------------------------
+
+Can I revert the changes to any opie packages that have been broken? Or is 
+there an alternative solution?
+
+Thanks
+Paul
 
 
