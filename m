@@ -1,30 +1,42 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OSzv8-0007rJ-NR
+	(envelope-from <martin.jansa@gmail.com>) id 1OT0FB-0001B4-49
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jun 2010 00:01:49 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OSzqW-0001hg-T4
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 27 Jun 2010 22:57:01 +0100
-From: Phil Blundell <philb@gnu.org>
+	Mon, 28 Jun 2010 00:22:29 +0200
+Received: by fxm7 with SMTP id 7so362846fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 27 Jun 2010 15:17:48 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=xL2tDlS7q1XM14z4EiwQs0aRvN8CFJaqT01q/Fu6544=;
+	b=D9bbxSPhHNAvtSNhMHuZAI1cpAsGcsTBoJNd7ob4yECA7DmCAz/qEH1nm6hCv6n5Iz
+	4s+VcTZASkShelT/gmDzvNzc/LfT7gAkSzyjFKVOhwchjZH9aU6VINCyCGDhIMdBOlMI
+	apkuHJDIZJ5/t1nNL2bLbLd2RkRtMin10OMnc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=qiZ1wdTl706AKztxh/h82HmSoXWKqawmhCZlxzIg/GzzIfobJbjSisaOaXm3dhHmF+
+	2I/Mt9iJIaboBGqeBgI/k9d/4N9FIuESwlzeoCDo/c2nQ4yHqwmqElnUF/ZTWePo1RfE
+	+aOgEjxdpZnS9aUjLlKydgR94qcbZHzEe9QtE=
+Received: by 10.223.116.134 with SMTP id m6mr1125226faq.61.1277677068145;
+	Sun, 27 Jun 2010 15:17:48 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 2sm43754782fav.25.2010.06.27.15.17.47
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 27 Jun 2010 15:17:47 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100627203243.GR17650@jama>
-References: <1275485971-23536-1-git-send-email-Martin.Jansa@gmail.com>
-	<201006272106.36928.bluelightning@bluelightning.org>
-	<20100627203243.GR17650@jama>
-Date: Sun, 27 Jun 2010 22:57:07 +0100
-Message-ID: <1277675827.4745.311.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Mon, 28 Jun 2010 00:17:11 +0200
+Message-Id: <1277677032-20016-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1277675827.4745.311.camel@lenovo.internal.reciva.com>
+References: <1277675827.4745.311.camel@lenovo.internal.reciva.com>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] recipes: conform to OE packaging guidelines with RDEPENDS/RREDEPENDS
@@ -41,30 +53,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jun 2010 22:01:49 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 27 Jun 2010 22:22:29 -0000
 
-On Sun, 2010-06-27 at 22:32 +0200, Martin Jansa wrote:
-> Andrea Adami already asked me about it.
-> 
-> RPROVIDES_${PN} = "${PN}" looks a bit wrong to me and changing it back
-> to
-> RPROVIDES = "${PN}"
-> doesn't make it much better (more understandable in my eyes).
-
-See the definition of PACKAGES in opie-taskbar-images.inc.  Weird as it
-may seem, I think RPROVIDES = "${PN}" really was the intended thing; a
-slightly more intuitive approach might be to set RPROVIDES =
-"virtual/opie-opie-taskbar-images" and adjust all the dependers to
-match.
-
-That package doesn't look like it ships anything other than images so
-the usual considerations with -dbg/-dev/-doc packages probably don't
-apply in this case.
-
-p.
-
+Ah, I understand it now (thanks pb), feel free to revert my _${PN} addition or apply this 
+patch if you find it better understandable then previous version, also skipping
+${PN}-dbg.
 
 
 
