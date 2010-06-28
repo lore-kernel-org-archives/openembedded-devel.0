@@ -1,45 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from infosrv.imms.de ([194.95.250.51])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OT0FD-0001B5-3e
+	(envelope-from <thomas.elste@imms.de>) id 1OT9ei-00007X-2Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jun 2010 00:22:33 +0200
-Received: by fxm7 with SMTP id 7so362848fxm.6
+	Mon, 28 Jun 2010 10:25:33 +0200
+Received: from infosrv.imms.de (infosrv.imms.de [127.0.0.1])
+	by IMSA (Postfix) with ESMTP id 39CFE260056
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 27 Jun 2010 15:17:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=ZA46BktYjHvKz/FSm7f0IMgNpt2jnVllCraMLinFrc4=;
-	b=MnHpWAJkoBPUJpCbEujvb2FywZc9mj7R2e7Q0EpUiJCmv35PxTUr+TYZVacibAdHFF
-	ln+Hb1peCVhQG1AVETaZiLTsmbEiDN6znyFplCMgthn5M1pUlXn+4UYQrjQq+tJ5Q9sq
-	w0z2exrxUCSsPgMmayO+wMdX6SCw+/EIoEfK4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=dpDR2soeG2JCabO7EuUJxsOO+HKWS1F5wGPfrTuig+HK23Q7mQDn7Qm8fLzJ07PgCP
-	UnSIKAVbpiMIYjb5pFsIUOrIJKK/dHzav0ddnk3OzQleZD9BAo3/M6FHHjsbJYh6xk6N
-	+PWtmq11Csr3DrfJlvFbXq4kJT0AKD6ksdqbs=
-Received: by 10.223.144.79 with SMTP id y15mr3065889fau.22.1277677070347;
-	Sun, 27 Jun 2010 15:17:50 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id z12sm49378279fah.9.2010.06.27.15.17.49
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 27 Jun 2010 15:17:49 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 28 Jun 2010 10:20:31 +0200 (CEST)
+Received: from proxy.imms.de (proxy.imms.de [194.95.250.53])
+	by infosrv.imms.de (Postfix) with ESMTP id 1643B26004A
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jun 2010 10:20:31 +0200 (CEST)
+Received: from pluto ([172.16.10.24])
+	by proxy.imms.de (8.13.8+Sun/8.13.8) with ESMTP id o5S8Kh7D027764
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jun 2010 10:20:43 +0200 (CEST)
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Jun 2010 00:17:12 +0200
-Message-Id: <1277677032-20016-2-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1277675827.4745.311.camel@lenovo.internal.reciva.com>
-References: <1277675827.4745.311.camel@lenovo.internal.reciva.com>
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+References: <1277370374-4677-1-git-send-email-thomas.elste@imms.de>
+	<1277370374-4677-2-git-send-email-thomas.elste@imms.de>
+	<hvv8ko$skd$4@dough.gmane.org>
+Date: Mon, 28 Jun 2010 10:20:25 +0200
+MIME-Version: 1.0
+From: "Thomas Elste" <thomas.elste@imms.de>
+Organization: IMMS gGmbH
+Message-ID: <op.vez34bqsaqzt3c@pluto>
+In-Reply-To: <hvv8ko$skd$4@dough.gmane.org>
+User-Agent: Opera Mail/10.10 (Linux)
+X-SA-Exim-Connect-IP: 194.95.250.51
+X-SA-Exim-Mail-From: thomas.elste@imms.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] opie-taskbar-images: fix RPROVIDES
+Subject: Re: [PATCH] qwt: Add version 5.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,40 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 27 Jun 2010 22:22:34 -0000
+X-List-Received-Date: Mon, 28 Jun 2010 08:25:35 -0000
+Content-Type: text/plain; charset=iso-8859-15; format=flowed; delsp=yes
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
----
- recipes/opie-taskbar/opie-taskbar-images.inc |   10 +++++++++-
- 1 files changed, 9 insertions(+), 1 deletions(-)
+Hi,
 
-diff --git a/recipes/opie-taskbar/opie-taskbar-images.inc b/recipes/opie-taskbar/opie-taskbar-images.inc
-index 9f73d31..3e1a8c8 100644
---- a/recipes/opie-taskbar/opie-taskbar-images.inc
-+++ b/recipes/opie-taskbar/opie-taskbar-images.inc
-@@ -2,7 +2,6 @@ DESCRIPTION = "Opie Launcher and Taskbar"
- SECTION = "opie/base"
- PRIORITY = "optional"
- LICENSE = "GPL"
--RPROVIDES_${PN} = "${PN}"
- APPNAME = "qpe"
- 
- S = "${WORKDIR}/pics"
-@@ -61,3 +60,12 @@ python do_package_prepend () {
- 
- PACKAGE_ARCH = "all"
- PACKAGES = "${PN}-dbg ${PN}-320x480 ${PN}-480x320 ${PN}-480x640 ${PN}-640x480 ${PN}-800x600 ${PN}-600x800 ${PN}-320x240 ${PN}-240x320 ${PN}-320x320"
-+RPROVIDES_${PN}-320x480 = "opie-taskbar-images"
-+RPROVIDES_${PN}-480x320 = "opie-taskbar-images"
-+RPROVIDES_${PN}-480x640 = "opie-taskbar-images"
-+RPROVIDES_${PN}-640x480 = "opie-taskbar-images"
-+RPROVIDES_${PN}-800x600 = "opie-taskbar-images"
-+RPROVIDES_${PN}-600x800 = "opie-taskbar-images"
-+RPROVIDES_${PN}-320x240 = "opie-taskbar-images"
-+RPROVIDES_${PN}-240x320 = "opie-taskbar-images"
-+RPROVIDES_${PN}-320x320 = "opie-taskbar-images"
--- 
-1.7.1
+>> Add recipe for current version of Qwt. This new version uses qt4-class=
+es
+>> instead of palmtop. Different bb-files for Qt and Qt-Embedded
+>> variant are provided. Qwt examples are also build. They get deployed i=
+n
+>> extra packages.
 
+On Thu, 24 Jun 2010 11:31:04 +0200, Koen Kooi <k.kooi@student.utwente.nl>=
+ wrote:
+> Looks good enough to me, we can solve any other issues after it has bee=
+n
+> committed.
+If the patch is ok so far, could you or somebody else commit it? I don't
+have write access to the dev tree.
+
+
+Thanks
+Thomas
 
 
