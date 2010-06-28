@@ -1,31 +1,38 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OTDvY-0001RN-RN
+	(envelope-from <stefan@datenfreihafen.org>) id 1OTH2N-0002Me-4Z
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jun 2010 14:59:09 +0200
-Received: from [123.192.240.117] (unknown [123.192.240.117])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id CE6FC1B10C09
+	Mon, 28 Jun 2010 18:18:28 +0200
+Received: from p5b032e9a.dip.t-dialin.net ([91.3.46.154] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OTGxo-0002YL-Vm by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jun 2010 12:56:00 +0000 (UTC)
-Message-ID: <4C289B7E.90206@freyther.de>
-Date: Mon, 28 Jun 2010 20:54:22 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
-	Thunderbird/3.1
-MIME-Version: 1.0
+	Mon, 28 Jun 2010 18:13:43 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OTGxn-0001Q3-EO
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Jun 2010 18:13:39 +0200
+Date: Mon, 28 Jun 2010 18:13:38 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-References: <76E258664B189C4CBEF125491CA11ECC9445E0CFC9@KCINPUNHJCMS01.kpit.com>
-In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9445E0CFC9@KCINPUNHJCMS01.kpit.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Message-ID: <20100628161338.GA26604@excalibur.local>
+References: <1277568967-23506-1-git-send-email-stefan@datenfreihafen.org>
+MIME-Version: 1.0
+In-Reply-To: <1277568967-23506-1-git-send-email-stefan@datenfreihafen.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cc1plus: error: unrecognized command line option "-mmmx"
+Subject: Re: [PATCH] shadow: Disable email checking completely
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,27 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jun 2010 12:59:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 28 Jun 2010 16:18:29 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 06/28/2010 07:20 PM, Soumya R wrote:
-> Hi All,
+Hello.
+
+On Sat, 2010-06-26 at 18:16, Stefan Schmidt wrote:
+> From: Stefan Schmidt <stefan@buglabs.net>
 > 
->     I am using Ubuntu 10.4 LTS as a host machine and target is mipsel Au1300..
-> I am building my own image.. when i run bitbake  -D avn-image i
-> get the following error..
+> This allows faster login due to not checking for new emails.
 
-Well,
+I just pushed this one by accident while pushing another fix. Does anyone see a
+problem with it? If yes I'm going to revert it.
 
-why do you think that -mmmx is the problem? As the text says it is an
-"auto-detection" and it comes to the conclusion that mmx does not work.
+Will tell me to work in branches even more. :)
 
-If it is not MMX what is missing here? You can find the result at the
-bottom of your log file.
-
-z.
-
-
+regards
+Stefan Schmidt
 
 
