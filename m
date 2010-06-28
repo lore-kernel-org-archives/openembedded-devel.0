@@ -1,44 +1,30 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from woodbine.london.02.net ([87.194.255.145])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OTM06-0008Ov-Qs
+	(envelope-from <bluelightning@bluelightning.org>) id 1OTMNK-0006Hq-Th
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jun 2010 23:36:23 +0200
-Received: by gwaa12 with SMTP id a12so1662452gwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jun 2010 14:31:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=O/pK0m1TsviaxkDUo2rkR5fItNx9k2mr7OqBmOAdCvw=;
-	b=PMQJEmKQTgdE00F1b/7luhIXb8sxY0U/XOcHB3eTMCk167p3b5Yc5o5gr4MghANGAn
-	F8o6SANouJHf3faIz1zzo0q9S0kQTQ0bODg99ON++C1vOJLEaln3OnmFNtE+KYRA5Fi3
-	r41V+ExnPyLXEPk07DAcv9wWGdNot4pnFnndI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=p0l1tWpHfReQKcwIqIx4VuJ+rbEbhKL1GqR9yl5ca8iKZAeKC1s90eQYxJuf3eoYUo
-	Z7jYdGnoym8aFYH0pXEfkcJEt7P/IsFkb64LOdYUzHM/FPQlnEEdCEY4y+AZztKIQwQd
-	27yArzpRPsrXFRBZuBxUVWglR/BPeMpPthxv4=
-MIME-Version: 1.0
-Received: by 10.100.132.1 with SMTP id f1mr6496639and.207.1277760700236; Mon, 
-	28 Jun 2010 14:31:40 -0700 (PDT)
-Received: by 10.100.243.32 with HTTP; Mon, 28 Jun 2010 14:31:40 -0700 (PDT)
-In-Reply-To: <E1OTFzF-0007SF-NU@melo.openembedded.org>
-References: <E1OTFzF-0007SF-NU@melo.openembedded.org>
-Date: Mon, 28 Jun 2010 23:31:40 +0200
-Message-ID: <AANLkTimUustsEbYVCiCZguDbAHQw6iKXJ5BWQUX9mbWM@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Tue, 29 Jun 2010 00:00:27 +0200
+Received: from shodan.localnet (93.96.131.185) by woodbine.london.02.net
+	(8.5.124.03)
+	id 4C1F9803002B0FAF for openembedded-devel@lists.openembedded.org;
+	Mon, 28 Jun 2010 22:55:33 +0100
+From: Paul Eggleton <bluelightning@bluelightning.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Mon, 28 Jun 2010 22:55:32 +0100
+User-Agent: KMail/1.13.3 (Linux/2.6.32-22-generic; KDE/4.4.4; i686; ; )
+References: <1277675827.4745.311.camel@lenovo.internal.reciva.com>
+	<1277677032-20016-2-git-send-email-Martin.Jansa@gmail.com>
+In-Reply-To: <1277677032-20016-2-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201006282255.32860.bluelightning@bluelightning.org>
+X-SA-Exim-Connect-IP: 87.194.255.145
+X-SA-Exim-Mail-From: bluelightning@bluelightning.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Dmitry Eremin-Solenikov : opie-taskbar-images: unbreak for non-default extensions
+Subject: Re: [PATCH] opie-taskbar-images: fix RPROVIDES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,30 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jun 2010 21:36:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Jun 2010 22:00:27 -0000
+Content-Type: Text/Plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jun 28, 2010 at 5:11 PM, git version control
-<git@git.openembedded.org> wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: b409fdad280a5e90bab76c27e43cf92a9b8e78bd
-> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
-it;h=3Db409fdad280a5e90bab76c27e43cf92a9b8e78bd
->
-> Author: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-[cut]
+Acked-by: Paul Eggleton <bluelightning@bluelightning.org>
 
-Dmitry, thanks for your patch.
-I think we have now understood the real issue and a revised patch has
-been produced.
-I've tested it and it works.
+On Sun, 27 Jun 2010, Martin Jansa wrote:
+> Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> ---
+>  recipes/opie-taskbar/opie-taskbar-images.inc |   10 +++++++++-
+>  1 files changed, 9 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/opie-taskbar/opie-taskbar-images.inc
+> b/recipes/opie-taskbar/opie-taskbar-images.inc index 9f73d31..3e1a8c8
+> 100644
+> --- a/recipes/opie-taskbar/opie-taskbar-images.inc
+> +++ b/recipes/opie-taskbar/opie-taskbar-images.inc
+> @@ -2,7 +2,6 @@ DESCRIPTION = "Opie Launcher and Taskbar"
+>  SECTION = "opie/base"
+>  PRIORITY = "optional"
+>  LICENSE = "GPL"
+> -RPROVIDES_${PN} = "${PN}"
+>  APPNAME = "qpe"
+> 
+>  S = "${WORKDIR}/pics"
+> @@ -61,3 +60,12 @@ python do_package_prepend () {
+> 
+>  PACKAGE_ARCH = "all"
+>  PACKAGES = "${PN}-dbg ${PN}-320x480 ${PN}-480x320 ${PN}-480x640
+> ${PN}-640x480 ${PN}-800x600 ${PN}-600x800 ${PN}-320x240 ${PN}-240x320
+> ${PN}-320x320" +RPROVIDES_${PN}-320x480 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-480x320 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-480x640 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-640x480 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-800x600 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-600x800 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-320x240 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-240x320 = "opie-taskbar-images"
+> +RPROVIDES_${PN}-320x320 = "opie-taskbar-images"
 
-Please give a look to it and kindly ack.
-
-Thanks
-
-Andrea
 
 
