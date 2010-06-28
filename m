@@ -1,40 +1,41 @@
-Received: from infosrv.imms.de ([194.95.250.51])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thomas.elste@imms.de>) id 1OT9ei-00007X-2Z
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OT9hM-0000Mz-Eq
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jun 2010 10:25:33 +0200
-Received: from infosrv.imms.de (infosrv.imms.de [127.0.0.1])
-	by IMSA (Postfix) with ESMTP id 39CFE260056
+	Mon, 28 Jun 2010 10:28:13 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o5S8NVjp029018
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jun 2010 10:20:31 +0200 (CEST)
-Received: from proxy.imms.de (proxy.imms.de [194.95.250.53])
-	by infosrv.imms.de (Postfix) with ESMTP id 1643B26004A
+	Mon, 28 Jun 2010 09:23:31 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28775-05 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jun 2010 09:23:27 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o5S8NPlg029012
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jun 2010 10:20:31 +0200 (CEST)
-Received: from pluto ([172.16.10.24])
-	by proxy.imms.de (8.13.8+Sun/8.13.8) with ESMTP id o5S8Kh7D027764
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 28 Jun 2010 10:20:43 +0200 (CEST)
+	Mon, 28 Jun 2010 09:23:26 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1277370374-4677-1-git-send-email-thomas.elste@imms.de>
-	<1277370374-4677-2-git-send-email-thomas.elste@imms.de>
-	<hvv8ko$skd$4@dough.gmane.org>
-Date: Mon, 28 Jun 2010 10:20:25 +0200
-MIME-Version: 1.0
-From: "Thomas Elste" <thomas.elste@imms.de>
-Organization: IMMS gGmbH
-Message-ID: <op.vez34bqsaqzt3c@pluto>
-In-Reply-To: <hvv8ko$skd$4@dough.gmane.org>
-User-Agent: Opera Mail/10.10 (Linux)
-X-SA-Exim-Connect-IP: 194.95.250.51
-X-SA-Exim-Mail-From: thomas.elste@imms.de
+In-Reply-To: <i0220d$htp$1@dough.gmane.org>
+References: <201006250901.38077.schnitzeltony@gmx.de>
+	<i0220d$htp$1@dough.gmane.org>
+Date: Mon, 28 Jun 2010 09:23:24 +0100
+Message-ID: <1277713404.29314.3248.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] qwt: Add version 5.2.1
+Subject: Re: MeeGo support in OE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,29 +49,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jun 2010 08:25:35 -0000
-Content-Type: text/plain; charset=iso-8859-15; format=flowed; delsp=yes
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 28 Jun 2010 08:28:13 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On Fri, 2010-06-25 at 12:56 +0200, Koen Kooi wrote:
+> On 25-06-10 09:01, Andreas Mueller wrote:
+> > My investigations for a 'colorful' embedded environment lead me to Meego (http://meego.com/).
+> > 
+> > On the webpage we learn that this is a platform independent environment but there are only few platforms supported (Nokia N900 / Beaglebord / few Intel netbooks).
+> > 
+> > To have full platform-independency I would like to have Meego (maybe parts of it only) within OE and started already with easiest part uxlaunch (very tiny dm - see 
+> > git://gitorious.org/meego-os-base/uxlaunch.git). This is already tested with xfce environment but before posting a patch here I would like to do some further tests with gnome/enlightenment and 
+> > see what happens in case another dm is found in the image. 
+> > 
+> > Next step planned is mutter. Here I would like to use the original gnome sources and check the diffs to meego branch.
+> > 
+> > Now my questions:
+> > 
+> > - Are there any objections including meego parts (licensing / don't like Intel/Nokia..) in OE
+> > - Are there already proceedings related to mutter ongoing? Or is there a reason that mutter is not in OE other than nobody has done so far?
+> 
+> I didn't add mutter because at the time it didn't build against
+> clutter/gles. It think that has changed now :)
+> 
+> I would very much like to build meego components in OE!
 
->> Add recipe for current version of Qwt. This new version uses qt4-class=
-es
->> instead of palmtop. Different bb-files for Qt and Qt-Embedded
->> variant are provided. Qwt examples are also build. They get deployed i=
-n
->> extra packages.
+You could do worse than look at meta-moblin in Poky which has recipes
+for some components like mutter.
 
-On Thu, 24 Jun 2010 11:31:04 +0200, Koen Kooi <k.kooi@student.utwente.nl>=
- wrote:
-> Looks good enough to me, we can solve any other issues after it has bee=
-n
-> committed.
-If the patch is ok so far, could you or somebody else commit it? I don't
-have write access to the dev tree.
+Cheers,
 
+Richard
 
-Thanks
-Thomas
 
 
