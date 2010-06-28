@@ -1,33 +1,54 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OTCNo-0003cU-Nz
+Received: from db3ehsobe002.messaging.microsoft.com ([213.199.154.140]
+	helo=DB3EHSOBE002.bigfish.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OTCj0-0001Ke-6u
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 28 Jun 2010 13:20:13 +0200
-Received: (qmail invoked by alias); 28 Jun 2010 11:15:30 -0000
-Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
-	by mail.gmx.net (mp050) with SMTP; 28 Jun 2010 13:15:30 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/f3N9v2e3f3Jww3/M7QSOvmNkEQNqklgD8DR0pUV
-	KJ829fGB5wryUq
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 28 Jun 2010 13:12:29 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <201006250901.38077.schnitzeltony@gmx.de>
-	<i0220d$htp$1@dough.gmane.org> <1277713404.29314.3248.camel@rex>
-In-Reply-To: <1277713404.29314.3248.camel@rex>
+	Mon, 28 Jun 2010 13:42:07 +0200
+Received: from mail59-db3-R.bigfish.com (10.3.81.249) by
+	DB3EHSOBE002.bigfish.com (10.3.84.22) with Microsoft SMTP Server id
+	8.1.436.0; Mon, 28 Jun 2010 11:22:20 +0000
+Received: from mail59-db3 (localhost.localdomain [127.0.0.1])	by
+	mail59-db3-R.bigfish.com (Postfix) with ESMTP id 797832082B3	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jun 2010 11:22:20 +0000 (UTC)
+X-SpamScore: -2
+X-BigFish: VPS-2(zcb8kz14ffO936eM1443Na1ffl8b9ck7cf0iace9izz1202hzzz32i2a8h45k)
+X-FB-SS: 13,
+Received: from mail59-db3 (localhost.localdomain [127.0.0.1]) by mail59-db3
+	(MessageSwitch) id 1277724138604568_22790;
+	Mon, 28 Jun 2010 11:22:18 +0000 (UTC)
+Received: from DB3EHSMHS012.bigfish.com (unknown [10.3.81.249])	by
+	mail59-db3.bigfish.com (Postfix) with ESMTP id 56D851180C9	for
+	<openembedded-devel@lists.openembedded.org>;
+	Mon, 28 Jun 2010 11:22:05 +0000 (UTC)
+Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
+	DB3EHSMHS012.bigfish.com (10.3.87.112) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Mon, 28 Jun 2010 11:22:04 +0000
+Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
+	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
+	Mon, 28 Jun 2010 16:52:00 +0530
+From: Soumya R <Soumya.R@kpitcummins.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Mon, 28 Jun 2010 16:50:45 +0530
+Thread-Topic: cc1plus: error: unrecognized command line option "-mmmx" 
+Thread-Index: AQHLFrQgOMvjzOWBZk+SwBtvHmimEg==
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFC9@KCINPUNHJCMS01.kpit.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Message-Id: <201006281312.29871.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+X-Reverse-DNS: Kcinpunhjhc01.kpit.com
+X-SA-Exim-Connect-IP: 213.199.154.140
+X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: MeeGo support in OE
+Subject: cc1plus: error: unrecognized command line option "-mmmx"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,52 +62,113 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 28 Jun 2010 11:20:14 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Mon, 28 Jun 2010 11:42:07 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Monday 28 June 2010 10:23:24 am Richard Purdie wrote:
-> On Fri, 2010-06-25 at 12:56 +0200, Koen Kooi wrote:
-> > On 25-06-10 09:01, Andreas Mueller wrote:
-> > > My investigations for a 'colorful' embedded environment lead me to Meego (http://meego.com/).
-> > > 
-> > > On the webpage we learn that this is a platform independent environment but there are only few platforms supported (Nokia N900 / Beaglebord / few Intel netbooks).
-> > > 
-> > > To have full platform-independency I would like to have Meego (maybe parts of it only) within OE and started already with easiest part uxlaunch (very tiny dm - see 
-> > > git://gitorious.org/meego-os-base/uxlaunch.git). This is already tested with xfce environment but before posting a patch here I would like to do some further tests with 
-gnome/enlightenment and 
-> > > see what happens in case another dm is found in the image. 
-> > > 
-> > > Next step planned is mutter. Here I would like to use the original gnome sources and check the diffs to meego branch.
-> > > 
-> > > Now my questions:
-> > > 
-> > > - Are there any objections including meego parts (licensing / don't like Intel/Nokia..) in OE
-> > > - Are there already proceedings related to mutter ongoing? Or is there a reason that mutter is not in OE other than nobody has done so far?
-> > 
-> > I didn't add mutter because at the time it didn't build against
-> > clutter/gles. It think that has changed now :)
-> > 
-> > I would very much like to build meego components in OE!
-> 
-> You could do worse than look at meta-moblin in Poky which has recipes
-> for some components like mutter.
-> 
-> Cheers,
-> 
-> Richard
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> 
+Hi All,
 
-Thanks for the information - I will take a look on poky but right now I dived into bumping versions of clutter...
+    I am using Ubuntu 10.4 LTS as a host machine and target is mipsel Au130=
+0..
+I am building my own image.. when i run bitbake  -D avn-image i
+get the following error..
 
-Andreas
+This is the Qt for Embedded Linux Open Source Edition.
+
+You are licensed to use this software under the terms of
+the Lesser GNU General Public License (LGPL) versions 2.1.
+You are also licensed to use this software under the terms of
+the GNU General Public License (GPL) versions 3.
+
+Type '3' to view the GNU General Public License version 3.
+Type 'L' to view the Lesser GNU General Public License version 2.1.
+Type 'yes' to accept this license offer.
+Type 'no' to decline this license offer.
+
+Do you accept the terms of either license?
+floatmath auto-detection... ()
+compiling floatmath.cpp
+floatmath.cpp:44: warning: unused parameter 'argc'
+floatmath.cpp:44: warning: unused parameter 'argv'
+linking floatmath
+/home/likewise-open/KPIT/soumyar/avnbuild/openembedded/tmp/cross/mipsel/lib=
+/gcc/mipsel-avn-linux/4.2.2/../../../../mipsel-avn-linux/bin/ld: warning: l=
+ibc.so, needed by /home/likewise-open/KPIT/soumyar/avnbuild/openembedded/tm=
+p/cross/mipsel/lib/gcc/mipsel-avn-linux/4.2.2/../../../../mipsel-avn-linux/=
+lib/libgcc_s.so, not found (try using -rpath or -rpath-link)
+floatmath enabled.
+mmx auto-detection... ()
+compiling mmx.cpp
+cc1plus: error: unrecognized command line option "-mmmx"
+make: *** [mmx.o] Error 1
+mmx disabled.
+3dnow auto-detection... ()
+compiling 3dnow.cpp
+cc1plus: error: unrecognized command line option "-m3dnow"
+make: *** [3dnow.o] Error 1
+3dnow disabled.
+sse auto-detection... ()
+compiling sse.cpp
+cc1plus: error: unrecognized command line option "-msse"
+make: *** [sse.o] Error 1
+sse disabled.
+sse2 auto-detection... ()
+compiling sse2.cpp
+cc1plus: error: unrecognized command line option "-msse2"
+make: *** [sse2.o] Error 1
+sse2 disabled.
+libtiff auto-detection... ()
+compiling libtiff.cpp
+libtiff.cpp:42:20: error: tiffio.h: No such file or directory
+libtiff.cpp:50:6: error: #error "Required libtiff not found"
+libtiff.cpp: In function 'int main(int, char**)':
+libtiff.cpp:57: error: 'tdata_t' was not declared in this scope
+libtiff.cpp:57: error: expected `;' before 'buffer'
+libtiff.cpp:58: error: 'buffer' was not declared in this scope
+libtiff.cpp:58: error: '_TIFFfree' was not declared in this scope
+libtiff.cpp:62: error: 'TIFFReadRGBAImageOriented' was not declared in this=
+ scope
+make: *** [libtiff.o] Error 1
+libtiff disabled.
+libmng auto-detection... ()
+compiling libmng.cpp
+libmng.cpp:42:20: error: libmng.h: No such file or directory
+libmng.cpp:50:2: error: #error System libmng version is less than 1.0.9; us=
+ing built-in version instead.
+libmng.cpp: In function 'int main(int, char**)':
+libmng.cpp:46: error: 'mng_handle' was not declared in this scope
+libmng.cpp:46: error: expected `;' before 'hMNG'
+libmng.cpp:47: error: 'hMNG' was not declared in this scope
+libmng.cpp:47: error: 'mng_cleanup' was not declared in this scope
+make: *** [libmng.o] Error 1
+libmng disabled.
+DB2 auto-detection... ()
+compiling db2.cpp
+db2.cpp:42:20: error: sqlcli.h: No such file or directory
+db2.cpp:43:21: error: sqlcli1.h: No such file or directory
+make: *** [db2.o] Error 1
+DB2 disabled.
+MySQL (thread-safe) auto-detection... ()
+compiling ../mysql/mysql.cpp
+../mysql/mysql.cpp:42:19: error: mysql.h: No such file or directory
+make: *** [mysql.o] Error 1
+MySQL (thread-safe) disabled.
+MySQL (thread-unsafe) auto-detection... ()
+compiling mysql.cpp
+mysql.cpp:42:19: error: mysql.h: No such file or directory
+make: *** [mysql.o] Error 1
+MySQL (thread-unsafe) disabled.
+MySQL support cannot be enabled due to functionality tests!
+ Turn on verbose messaging (-v) to ./configure to see the final report.
+ If you believe this message is in error you may use the continue
+ switch (-continue) to ./configure to continue.
+
+Thanks in advance:-)
+
+Regards,
+Soumya
+
+
 
 
