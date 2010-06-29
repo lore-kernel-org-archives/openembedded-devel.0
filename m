@@ -1,40 +1,31 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OTbYV-0007gg-OM
+	(envelope-from <holger+oe@freyther.de>) id 1OTcBf-0007Mv-Nd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jun 2010 16:12:57 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OTbTy-0005XC-Ax for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jun 2010 10:08:14 -0400
-Date: Tue, 29 Jun 2010 10:08:00 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: OpenEmbedded Development mailing list
-	<openembedded-devel@lists.openembedded.org>
-Message-ID: <alpine.DEB.2.00.1006291005050.10428@lynx>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Tue, 29 Jun 2010 16:53:24 +0200
+Received: from [123.192.240.117] (unknown [123.192.240.117])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id E45991B10C09
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Jun 2010 14:50:19 +0000 (UTC)
+Message-ID: <4C2A07C5.9060909@freyther.de>
+Date: Tue, 29 Jun 2010 22:48:37 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
+	Thunderbird/3.1
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+To: openembedded-devel@lists.openembedded.org
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world>
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: so ... what's the proper way to report a build failure?
+Subject: Re: Creating a Own Tool chain, some referenced packages are not included into the SDK archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,30 +39,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jun 2010 14:12:57 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 29 Jun 2010 14:53:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
+
+On 06/29/2010 10:04 PM, Hauser, Wolfgang (external) wrote:
+> Hello, 
+
+> I use an private overlay, referencing org.openembedded.dev and using
+> DISTRO = "angstrom-2008.1" and MACHINE = "omap3evm" 
+> The meta-toolchain-xxx is derived from meta-toolchain-qte. 
+
+Hi,
+to make it more easy for me. What is the difference between
+meta-toolchain-xxxx and meta-toolchain-qte? Does meta-toolchain-qte work
+properly?
 
 
-  given that i like to keep up with the OE dev branch and test build a
-beagleboard-demo-image as necessary, what is the *encouraged* way to
-report a new build failure?  on the OE list?  on the angstrom list?
-tinderbox?
-
-  after a "git pull" earlier this morning, "realpath-1.15" fails to
-build.  what should i do with the error diagnostics?
-
-rday
-
--- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-        Top-notch, inexpensive online Linux/OSS/kernel courses
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+The general advice I can give is to log at the opkg installation log and
+see if the tasks were installed, and if it picked up the dependencies...
 
 
