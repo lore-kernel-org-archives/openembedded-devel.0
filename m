@@ -1,47 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OTeSq-0003JE-Up
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jun 2010 19:19:17 +0200
-Received: by fxm12 with SMTP id 12so944357fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OTesJ-0002V1-Ke for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Jun 2010 19:45:36 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OTenj-0000ZT-Ka for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Jun 2010 19:40:51 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Jun 2010 19:40:51 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jun 2010 10:14:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Tkw1JFn3S4LjGot/YpsfmhzeVlRyHo9qZPl/tsrqa2w=;
-	b=qqDBCpFTSqOM3dOHF2LJRffWDqpiyf0i40wYlOKqFEo5vAnuey5DINLpEK9bOwyb8B
-	O1xxCXoPUW/Zp+tWvPPSsxpjwwNQlGdzRo8NCkKMaHcPZyt1mcZi1RrNfYFJorlG8kzn
-	9wVYP/I2CFR5xDSON8FQKdUV26YEdShHqe0+k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=VE2w1n/GwQxNs2v+6pBHS1KaoIKgMj7YSm/cC67f80N4AQiYwO59atme/hFH9a+ayl
-	QCE/M9TH/EpvnSiJM7bCBkdwHKUrHPOd72CNP5tnrjP2RA4Y95YwJGOaojhwhh2usMGM
-	1W/jE3yih2qZTeGgGf+/2hXbGZDpeHh7ar3Dw=
-MIME-Version: 1.0
-Received: by 10.239.189.7 with SMTP id r7mr434766hbh.53.1277831673888; Tue, 29 
-	Jun 2010 10:14:33 -0700 (PDT)
-Received: by 10.239.182.83 with HTTP; Tue, 29 Jun 2010 10:14:33 -0700 (PDT)
-In-Reply-To: <022f01cb17ad$d433b290$7c9b17b0$@Distant-earth.com>
-References: <alpine.DEB.2.00.1006291005050.10428@lynx>
-	<01fb01cb179c$580068f0$08013ad0$@Distant-earth.com>
-	<AANLkTilMht97znPOunP0dTBMwE6gPF1EyztWRC21MsXo@mail.gmail.com>
-	<022f01cb17ad$d433b290$7c9b17b0$@Distant-earth.com>
-Date: Tue, 29 Jun 2010 10:14:33 -0700
-Message-ID: <AANLkTikcPhaE4yPHlnjfxVSFYIu4jx4sE1AEa5OaMl2i@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	Tue, 29 Jun 2010 19:40:51 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 29 Jun 2010 19:40:38 +0200
+Message-ID: <i0db6m$i2r$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: so ... what's the proper way to report a build failure?
+Subject: realpath build breakage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,33 +48,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jun 2010 17:19:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 29 Jun 2010 17:45:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Thank you very much for that!
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-any chance there is a good tutorial or something along those lines for
-writing your own recipe for installing a program onto your platform? I have
-tried the helloworld tutorials on your site and the gumstix wiki and I am
-not having any luck in getting it to work for an actual program, I am trying
-to get metasploit to compile for the gumstix overo fire.
+Hi,
 
-On Tue, Jun 29, 2010 at 10:09 AM, John Willis <John.Willis@distant-earth.com
-> wrote:
+ERROR: QA Issue with realpath: No GNU_HASH in the elf binary:
+'/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/realpath-1.15-r0/packages-split/realpath/usr/bin/realpath'
+FATAL: QA run found fatal errors. Please consider fixing them.
 
-> > The wiki link for me had nothing on it, I have been wondering the same
-> > things myself.
->
-> http://tinyurl.com/dl2na8 the link gets line-wrapped by my mailer (or the
-> lists ;)).
->
-> John
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Khem, would you please consider fixing that?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMKjAVMkyGM64RGpERAuuiAKCEK76Tvqt+PdvjZ4arF9KotnFO+QCeNrwa
+8iGic3oqN8cp2GFwoJpLArk=
+=5NE7
+-----END PGP SIGNATURE-----
+
+
 
