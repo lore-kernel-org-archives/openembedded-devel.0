@@ -1,38 +1,40 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OTbW2-0007dq-Q1 for openembedded-devel@lists.openembedded.org;
-	Tue, 29 Jun 2010 16:10:24 +0200
-Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
-	by mail-dotnet1.eads.net with ESMTP; 29 Jun 2010 15:56:57 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Tue, 29 Jun 2010 16:04:18 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 29 Jun 2010 16:04:17 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <rpjday@crashcourse.ca>) id 1OTbYV-0007gg-OM
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Jun 2010 16:12:57 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OTbTy-0005XC-Ax for openembedded-devel@lists.openembedded.org;
+	Tue, 29 Jun 2010 10:08:14 -0400
+Date: Tue, 29 Jun 2010 10:08:00 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
+To: OpenEmbedded Development mailing list
+	<openembedded-devel@lists.openembedded.org>
+Message-ID: <alpine.DEB.2.00.1006291005050.10428@lynx>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
 MIME-Version: 1.0
-Date: Tue, 29 Jun 2010 16:04:07 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Creating a Own Tool chain,
-	some referenced packages are not included into the SDK archive
-Thread-Index: AcsXk/CXXc/IwuivT4i7L/vEgPsxJg==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 29 Jun 2010 14:04:17.0440 (UTC)
-	FILETIME=[F68F2A00:01CB1793]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Creating a Own Tool chain, some referenced packages are not included into the SDK archive
+Subject: so ... what's the proper way to report a build failure?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,115 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 29 Jun 2010 14:10:24 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 29 Jun 2010 14:12:57 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-Hello,=20
 
-I tried to build my own tool chain, using the target task listed below.
+  given that i like to keep up with the OE dev branch and test build a
+beagleboard-demo-image as necessary, what is the *encouraged* way to
+report a new build failure?  on the OE list?  on the angstrom list?
+tinderbox?
 
-The bitbake of the tool chain run w/o errors, but the referenced
-packages will be installed partly only into the SDK archive.
-(e.g. libqt-embeddedcore4-dev and libqt-embeddedphonon4-dev reside in
-the SDK archive, the other packages are missing)
+  after a "git pull" earlier this morning, "realpath-1.15" fails to
+build.  what should i do with the error diagnostics?
 
-I use an private overlay, referencing org.openembedded.dev and using
-DISTRO =3D "angstrom-2008.1" and MACHINE =3D "omap3evm"=20
-The meta-toolchain-xxx is derived from meta-toolchain-qte.=20
+rday
 
-What may going wrong here ?
+-- 
 
-Regards
-Wolfgang Hauser
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
-meta-toolchain-xxx.bb >>>
-# xxx Qt Embedded toolchain
-PR =3D "r3"
-TOOLCHAIN_HOST_TASK =3D "task-xxx-toolchain-host"
-TOOLCHAIN_TARGET_TASK =3D "task-xxx-toolchain-target"
+        Top-notch, inexpensive online Linux/OSS/kernel courses
+                        http://crashcourse.ca
 
-require recipes/meta/meta-toolchain.bb
-SDK_SUFFIX =3D "toolchain-xxx"
-SDK_SUFFIX_angstrom =3D "toolchain-xxx-${ANGSTROM_QT_VERSION}"
-
-QT_DIR_NAME =3D "qtopia"
-
-do_populate_sdk_append() {
-       script =3D "${SDK_OUTPUT}/${SDKPATH}/environment-setup"
-       touch $script
-       echo 'export OE_QMAKE_CC=3D${TARGET_SYS}-gcc' >> $script
-       echo 'export OE_QMAKE_CXX=3D${TARGET_SYS}-g++' >> $script
-       echo 'export OE_QMAKE_LINK=3D${TARGET_SYS}-g++' >> $script
-       echo 'export
-OE_QMAKE_LIBDIR_QT=3D${SDKPATH}/${TARGET_SYS}/${libdir}' >> $script
-       echo 'export
-OE_QMAKE_INCDIR_QT=3D${SDKPATH}/${TARGET_SYS}/${includedir}/${QT_DIR_NAME=
-}
-' >> $script
-       echo 'export OE_QMAKE_MOC=3D${SDKPATH}/bin/moc4' >> $script
-       echo 'export OE_QMAKE_UIC=3D${SDKPATH}/bin/uic4' >> $script
-       echo 'export OE_QMAKE_UIC3=3D${SDKPATH}/bin/uic34' >> $script
-       echo 'export OE_QMAKE_RCC=3D${SDKPATH}/bin/rcc4' >> $script
-       echo 'export =
-OE_QMAKE_QDBUSCPP2XML=3D${SDKPATH}/bin/qdbuscpp2xml4'
->> $script
-       echo 'export =
-OE_QMAKE_QDBUSXML2CPP=3D${SDKPATH}/bin/qdbusxml2cpp4'
->> $script
-       echo 'export
-OE_QMAKE_QT_CONFIG=3D${SDKPATH}/${TARGET_SYS}/${datadir}/${QT_DIR_NAME}/m=
-k
-specs/qconfig.pri' >> $script
-       echo 'export
-QMAKESPEC=3D${SDKPATH}/${TARGET_SYS}/${datadir}/${QT_DIR_NAME}/mkspecs/li=
-n
-ux-g++' >> $script
-
-       # Repack SDK with new environment-setup
-       cd ${SDK_OUTPUT}
-       fakeroot tar cfj ${SDK_DEPLOY}/${TOOLCHAIN_OUTPUTNAME}.tar.bz2 .
-}
-<<<<<
-
-task-xxx-toolchain-target.bb >>>>
-
-DESCRIPTION =3D "Target packages for xxx Qt Embedded SDK"
-LICENSE =3D "MIT"
-ALLOW_EMPTY =3D "1"
-
-PR =3D "r2"
-
-PACKAGES =3D "${PN}"
-
-DEPENDS =3D "task-sdk-bare"
-
-RDEPENDS_${PN} +=3D " \
-        task-sdk-bare \
-        alsa-lib-dev \
-        libpng-dev \
-        net-snmp-dev \
-        ftplib-dev \
-        libgles-omap3-dev \
-        qt4-embedded-mkspecs \
-        libqt-embeddedphonon4-dev \
-        libqt-embedded3support4-dev \
-        libqt-embeddedassistantclient4-dev \
-        libqt-embeddedcore4-dev \
-        libqt-embeddeddbus4-dev \
-        libqt-embeddeddesignercomponents4-dev \
-        libqt-embeddeddesigner4-dev \
-        libqt-embeddeduitools4-dev \
-        libqt-embeddedgui4-dev \
-        libqt-embeddedhelp4-dev \
-        libqt-embeddednetwork4-dev \
-        libqt-embeddedsvg4-dev \
-        libqt-embeddedtest4-dev \
-        libqt-embeddedxml4-dev \
-        libts-dev \
-        "
-<<<<
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
