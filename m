@@ -1,28 +1,45 @@
-Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OTxQL-00032r-Uv
+	(envelope-from <brandhetlampje@gmail.com>) id 1OTxXf-0003GJ-Nt
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 15:33:58 +0200
-Received: from [163.241.71.52] (163.241.71.52) by
-	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
-	Server id 8.1.393.1; Wed, 30 Jun 2010 09:28:03 -0400
-Message-ID: <4C2B4663.6040901@tycoelectronics.com>
-Date: Wed, 30 Jun 2010 09:28:03 -0400
-From: Jay Snyder <jay.snyder@tycoelectronics.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 30 Jun 2010 15:41:32 +0200
+Received: by fxm12 with SMTP id 12so476440fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jun 2010 06:36:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=rWOJURw6Xz4/r6+jpQEhUwcvR57xH5YTowIw8sKxLnA=;
+	b=QVfj0+k2zzkq3yApc9SLE3SOVjkHT+myGYFfzf4UXvmUieWJB/sNxZq+/GRmOmLKY+
+	c29YHJrqx3aSfk+rmPd+zePz35OvTKErugZfwDURzzfFeoIZzt6luCMW167GeGdEAzba
+	bA4PJ2+CNpn2lKYFpUeRI1HNs/jrUj+Ar+5hY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=jSRJUI1lVMiVKz93pQn8YvBpF9wXQg2wFF3YElDLa/yHOvsz5/VAHQwfpzWZO2uipG
+	Djn4WgJ59ii/eP/Lpp1qWwfUf6xGaLZiy+MGRpWVD570BuQSlsJiIt+J38kw446ROGcS
+	VKeR/37MvI8nKe5IME4cPWTwsmWaQIyPPSZ8U=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
+Received: by 10.103.37.24 with SMTP id p24mr2886583muj.47.1277905005436; Wed, 
+	30 Jun 2010 06:36:45 -0700 (PDT)
+Received: by 10.42.9.39 with HTTP; Wed, 30 Jun 2010 06:36:45 -0700 (PDT)
+In-Reply-To: <4C2B4663.6040901@tycoelectronics.com>
 References: <mailman.15797.1277902454.24517.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.15797.1277902454.24517.openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 198.175.154.211
-X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
+	<4C2B4663.6040901@tycoelectronics.com>
+Date: Wed, 30 Jun 2010 15:36:45 +0200
+Message-ID: <AANLkTilwZNeViddUi29oTxOxtFnh_rreI4I0drPbNQC2@mail.gmail.com>
+From: s hakkesteegt <brandhetlampje@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: brandhetlampje@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: angstrom-version.bb broken: lsb_release: No such file or directory
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: angstrom-version.bb broken: lsb_release: No such file or directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,23 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 13:33:58 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Jun 2010 13:41:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-This recipe was committed without a required file.
+On Wed, Jun 30, 2010 at 3:28 PM, Jay Snyder
+<jay.snyder@tycoelectronics.com>wrote:
 
-Sometime the following lines where added to this bb:
+> This recipe was committed without a required file.
+>
+> Sometime the following lines where added to this bb:
+>
+>
+> SRC_URI = "file://lsb_release"
+>
+> install -m 0755 ${WORKDIR}/lsb_release ${D}${bindir}/
+>
+>
+> But the file lsb_release wasn't added to the git repository.
+>
+> This, of course has broken the angstrom build.
+>
 
 
-SRC_URI = "file://lsb_release"
+http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/angstrom/angstrom-version/lsb_release
 
-install -m 0755 ${WORKDIR}/lsb_release ${D}${bindir}/
+It seems to be in the right place?
 
-
-But the file lsb_release wasn't added to the git repository.
-
-This, of course has broken the angstrom build.
-
-
+regards,
+Siebren
 
