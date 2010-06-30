@@ -1,40 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OU3Yh-0005YV-23
+	(envelope-from <dokuwiki@keylevel.com>) id 1OU6Ib-0005QD-CP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 22:07:03 +0200
-Received: by bwz11 with SMTP id 11so646476bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jun 2010 13:02:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=K/WNVAITsMrM9fS3N+yQ9KqxqWeLruYwiWlF7PxotN4=;
-	b=WBQwRpPXEE8oaMypql7FEn1EvGBMJKsZNr8oA9pKPdiXgzzOkF4fQ54kH9iG6bwIp7
-	Zk5mOk8tcyFMqbmr+PRnlSaGzF1yPTeeI12Y8oXGgzabizHKzaeijoIgp9P9zh/cW0ut
-	7lhCrO3to4xg3k002l3UEJonb6rKH6qnt3iek=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=WAqPYNpgRTozAxSyRy3OkNznuGFU8cGEnHirK2a66DOwAMd1BhwW5LeUnsQKFeqNJ1
-	EUQhxYEEG5Qeu5WWeHeTIO0YsE/J3m25HmtunAokFjElWwNoM7izZmymRxmnd0tRtu2G
-	8rbQLuSjM/HshWWlxw1DGI0jRpJcFBbYUQT1c=
-MIME-Version: 1.0
-Received: by 10.204.163.134 with SMTP id a6mr241651bky.43.1277928135793; Wed, 
-	30 Jun 2010 13:02:15 -0700 (PDT)
-Received: by 10.204.73.81 with HTTP; Wed, 30 Jun 2010 13:02:15 -0700 (PDT)
-Date: Wed, 30 Jun 2010 22:02:15 +0200
-Message-ID: <AANLkTimMVcS5I1GcVuqa1eTwZ4YIqb0NaJMqd1nepQYv@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 01 Jul 2010 01:02:35 +0200
+Received: from durham.keylevel.com ([109.224.134.115]:23024
+	helo=[192.168.1.98])
+	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
+	(envelope-from <dokuwiki@keylevel.com>) id 1OU6E2-0004YL-S0
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jun 2010 23:57:51 +0100
+Message-Id: <1F636E49-E311-4487-A341-8CAD71822723@keylevel.com>
+From: Chris Tapp <dokuwiki@keylevel.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Mime-Version: 1.0 (Apple Message framework v936)
+Date: Wed, 30 Jun 2010 23:57:48 +0100
+X-Mailer: Apple Mail (2.936)
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - keylevel.com
+X-SA-Exim-Connect-IP: 80.254.228.43
+X-SA-Exim-Mail-From: dokuwiki@keylevel.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC} cleanup glibc
+Subject: linux-geodelx build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,73 +43,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 20:07:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 30 Jun 2010 23:02:35 -0000
+Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+Content-Transfer-Encoding: 7bit
 
-Triggered by a short discussion on irc with woglinde, I would like to
-suggest the following cleanup actions for glibc.
+Whilst investigating an issue I have with 'swapper' using all the cpu  
+time I decided to try and use the linux-geodelx kernel as my target is  
+an LX800.
 
-1. rewrite the recipes so they do not use patches in the dir of
-another version. Better copy those. That makes clearer who uses what,
-and avoids problems if a recipe is removed.
-(btw if people are against having copies, I suggest to put common
-patches in a dir whose name actually resembles it is for multiple
-versions e.g. glibc-2.4-2.5 or so)
-2. remove some old recipes that are not pinned. Reason for removing
-them is that it reduces the amount of work needed for step 1
+I changed my configuration to use Angstrom for the geodelx machine and  
+ran 'bitbake linux-geodelx'. This failed to build due to:
 
-currently we have:
+ERROR: log data follows (/home/chris/oe-dev/build/tmp/work/geode- 
+angstrom-linux/glibc-2.9-r36.3/temp/log.do_configure.29301)
+| configure.in:2204: warning: AC_CACHE_VAL(pic_default, ...):  
+suspicious cache-id, must contain _cv_ to be cached
+| ../../lib/autoconf/general.m4:1999: AC_CACHE_VAL is expanded from...
+| ../../lib/autoconf/general.m4:2020: AC_CACHE_CHECK is expanded from...
+| configure.in:2204: the top level
+| checking build system type... i686-pc-linux-gnu
+| checking host system type... i486-angstrom-linux-gnu
+| configure: running configure fragment for add-on nptl
+| checking sysdep dirs... configure: error: The geode subspecies of  
+i486 is not supported.
+NOTE: Task failed: /home/chris/oe-dev/build/tmp/work/geode-angstrom- 
+linux/glibc-2.9-r36.3/temp/log.do_configure.29301
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/chris/oe-dev/openembedded/recipes/glibc/ 
+glibc_2.9.bb do_configure failed
+ERROR: Task 170 (/home/chris/oe-dev/openembedded/recipes/glibc/ 
+glibc_2.9.bb, do_configure) failed
 
-glibc-initial_2.10.1.bb
-glibc-initial_2.2.5.bb
-glibc-initial_2.3.2+cvs20040726.bb
-glibc-initial_2.3.2.bb
-glibc-initial_2.3.6.bb
-glibc-initial_2.4.bb
-glibc-initial_2.5.bb
-glibc-initial_2.6.1.bb
-glibc-initial_2.7.bb
-glibc-initial_2.9.bb
-glibc-initial_cvs.bb
-glibc_2.10.1.bb
-glibc_2.2.5.bb
-glibc_2.3.2+cvs20040726.bb
-glibc_2.3.2.bb
-glibc_2.3.3+cvs20041128.bb
-glibc_2.3.3+cvs20050221.bb
-glibc_2.3.3+cvs20050420.bb
-glibc_2.3.3.bb
-glibc_2.3.5+cvs20050627.bb
-glibc_2.3.6.bb
-glibc_2.4.bb
-glibc_2.5.bb
-glibc_2.6.1.bb
-glibc_2.7.bb
-glibc_2.9.bb
-glibc_cvs.bb
+I'm thinking I've done something wrong here as I would expect a geode  
+build to support the 'geode subspecies' :-) Except that it seems as if  
+a patch was proposed in the past to change the geodelx (and gx)  
+machine recipes to use i586. This does not appear to have been applied  
+to the current version. See http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-November/014489.html
 
-suggestion is to remove the following versions because no one uses
-them: (verified by grepping for them in conf/distro (with -r)
+However,  if I make these changes and try to build I get:
 
-glibc-initial_2.3.2+cvs20040726.bb
-glibc-initial_2.3.6.bb
-glibc-initial_2.4.bb
-glibc-initial_2.7.bb
-glibc_2.3.2+cvs20040726.bb
-glibc_2.3.3+cvs20041128.bb
-glibc_2.3.3+cvs20050221.bb
-glibc_2.3.3+cvs20050420.bb
-glibc_2.3.6.bb
-glibc_2.4.bb
-glibc_2.7.bb
+ERROR: function do_compile failed
+ERROR: log data follows (/home/chris/oe-dev/build-2/tmp/work/geodelx- 
+angstrom-linux/linux-geodelx-2.6.11-r0/temp/log.do_compile.2242)
+| NOTE: make -j 4 include/linux/version.h CC=i586-angstrom-linux-gcc   
+LD=i586-angstrom-linux-ld
+|   CHK     include/linux/version.h
+| NOTE: make -j 4 bzImage CC=i586-angstrom-linux-gcc  LD=i586-angstrom- 
+linux-ld
+|   CHK     include/linux/version.h
+| make[1]: `arch/i386/kernel/asm-offsets.s' is up to date.
+|   CHK     include/linux/compile.h
+|   CHK     usr/initramfs_list
+|   CC      arch/i386/kernel/process.o
+|   CC      arch/i386/kernel/semaphore.o
+|   CC      arch/i386/mach-default/setup.o
+|   LD      arch/i386/crypto/built-in.o
+|   CC      kernel/sched.o
+|   CC      arch/i386/kernel/signal.o
+|   CC      arch/i386/mach-default/topology.o
+| arch/i386/kernel/process.c: Assembler messages:
+| arch/i386/kernel/process.c:400: Error: suffix or operands invalid  
+for `mov'
+| arch/i386/kernel/process.c:401: Error: suffix or operands invalid  
+for `mov'
+| arch/i386/kernel/process.c:477: Error: suffix or operands invalid  
+for `mov'
+| arch/i386/kernel/process.c:478: Error: suffix or operands invalid  
+for `mov'
+| include/linux/elfcore.h:92: Error: suffix or operands invalid for  
+`mov'
+| include/linux/elfcore.h:92: Error: suffix or operands invalid for  
+`mov'
+| arch/i386/kernel/process.c:599: Error: suffix or operands invalid  
+for `mov'
+| arch/i386/kernel/process.c:600: Error: suffix or operands invalid  
+for `mov'
+| arch/i386/kernel/process.c:607: Error: suffix or operands invalid  
+for `mov'
+| arch/i386/kernel/process.c:608: Error: suffix or operands invalid  
+for `mov'
+| make[1]: *** [arch/i386/kernel/process.o] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+|   CC      kernel/fork.o
+|   LD      arch/i386/mach-default/built-in.o
+|   CC      mm/bootmem.o
+| arch/i386/kernel/signal.c: Assembler messages:
+| arch/i386/kernel/signal.c:165: Error: suffix or operands invalid for  
+`mov'
+| arch/i386/kernel/signal.c:166: Error: suffix or operands invalid for  
+`mov'
+| make[1]: *** [arch/i386/kernel/signal.o] Error 1
+| make: *** [arch/i386/kernel] Error 2
+| make: *** Waiting for unfinished jobs....
+|   CC      mm/filemap.o
+|   CC      kernel/exec_domain.o
+|   CC      mm/mempool.o
+|   CC      kernel/panic.o
+|   CC      kernel/printk.o
+|   CC      kernel/profile.o
+|   CC      mm/oom_kill.o
+| mm/filemap.c: In function '__generic_file_aio_write_nolock':
+| mm/filemap.c:1799: sorry, unimplemented: inlining failed in call to  
+'generic_write_checks': function body not available
+| mm/filemap.c:2087: sorry, unimplemented: called from here
+| make[1]: *** [mm/filemap.o] Error 1
+| make[1]: *** Waiting for unfinished jobs....
+|   CC      kernel/exit.o
 
-I think the following are also obsolete, but I would like to get
-advise for these
-glibc-initial_cvs.bb
-glibc_cvs.bb
+Chris
 
-What do people think about this?
-
-Frans
 
 
