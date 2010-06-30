@@ -1,35 +1,48 @@
-Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OU6Ib-0005QD-CP
+	(envelope-from <graham.gower@gmail.com>) id 1OU6v7-0008FY-Np
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 01:02:35 +0200
-Received: from durham.keylevel.com ([109.224.134.115]:23024
-	helo=[192.168.1.98])
-	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OU6E2-0004YL-S0
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 23:57:51 +0100
-Message-Id: <1F636E49-E311-4487-A341-8CAD71822723@keylevel.com>
-From: Chris Tapp <dokuwiki@keylevel.com>
+	Thu, 01 Jul 2010 01:42:23 +0200
+Received: by pwi10 with SMTP id 10so534907pwi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jun 2010 16:37:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=jIul4o4wX/XikU7TBCb6DFvYa76q84puQ8Hdst63fo0=;
+	b=KpifcyMZpIm1AIXfhbxnX/9oCq5pZ5X8yPdhVllo83ouO9iHL2LhgGzgqlI+dHphJJ
+	PUzrh8l7Uj9DrLH6ujcj89cjGfWGML+e/lOcDO+cWcjMtihfhvbBT+US48Es2dGKVe+T
+	mfom/7YBqqU3Dhch5uo8YE02hDjIt+MSRu2jE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=dC8AYXcrGcXvmjv1Pv0DCinMF954KDBaZNxfmSEseOmyccsfVfdPciyImWf2UuJUq1
+	Hi9XE/aZ2HnwwJamie38DjQWCAFgD2RY6TUoCnizZrsivzS2q5RB6hRcuoaT5eSTjY3+
+	Srgs0OJPKqyYc6oWe+6FKbn9gU2Ie6epP5pcU=
+Received: by 10.114.189.13 with SMTP id m13mr10382836waf.130.1277941056293;
+	Wed, 30 Jun 2010 16:37:36 -0700 (PDT)
+Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	j18sm71515523wan.13.2010.06.30.16.37.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 30 Jun 2010 16:37:35 -0700 (PDT)
+Message-ID: <4C2BD53A.40507@gmail.com>
+Date: Thu, 01 Jul 2010 09:07:30 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v936)
-Date: Wed, 30 Jun 2010 23:57:48 +0100
-X-Mailer: Apple Mail (2.936)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - keylevel.com
-X-SA-Exim-Connect-IP: 80.254.228.43
-X-SA-Exim-Mail-From: dokuwiki@keylevel.com
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	WEIRD_PORT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: linux-geodelx build failure
+Subject: [PATCH] xserver-kdrive_1.5.3.bb: add openssl to DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,114 +56,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 23:02:35 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
+X-List-Received-Date: Wed, 30 Jun 2010 23:42:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Whilst investigating an issue I have with 'swapper' using all the cpu  
-time I decided to try and use the linux-geodelx kernel as my target is  
-an LX800.
+The build fails without openssl.
 
-I changed my configuration to use Angstrom for the geodelx machine and  
-ran 'bitbake linux-geodelx'. This failed to build due to:
+| mipsel-oe-linux-libtool: compile:  ccache mipsel-oe-linux-gcc -march=mips32 -DHAVE_CONFIG_H -I. -I../include -isystem/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include -DHAVE_DIX_CONFIG_H -Wall -Wpointer-arith -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -fno-strict-aliasing -D_BSD_SOURCE -DHAS_FCHOWN -DHAS_STICKY_DIR_BIT -DDBUS_API_SUBJECT_TO_CHANGE -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/freetype2 -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/pixman-1 -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/hal -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/dbus-1.0 -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/lib/dbus-1.0/include -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/home/grg/oe2/tmp/sysroots/x86_64-linux/usr/include -I../include -I../include -I../Xext -I../composite -I../damageext -I../xfixes -I../Xi -I../mi -I../miext/shadow -I../miext/damage -I../render -I../randr -I../fb -I/home/
+grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/xextproto-70 -isystem/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -MT glyph.lo -MD -MP -MF .deps/glyph.Tpo -c glyph.c  -fPIC -DPIC -o .libs/glyph.o
+| glyph.c:30:25: error: openssl/sha.h: No such file or directory
+| glyph.c: In function 'HashGlyph':
+| glyph.c:205: error: 'SHA_CTX' undeclared (first use in this function)
+| glyph.c:205: error: (Each undeclared identifier is reported only once
+| glyph.c:205: error: for each function it appears in.)
+| glyph.c:205: error: expected ';' before 'ctx'
+| glyph.c:208: warning: implicit declaration of function 'SHA1_Init'
+| glyph.c:208: warning: nested extern declaration of 'SHA1_Init'
+| glyph.c:208: error: 'ctx' undeclared (first use in this function)
+| glyph.c:212: warning: implicit declaration of function 'SHA1_Update'
+| glyph.c:212: warning: nested extern declaration of 'SHA1_Update'
+| glyph.c:220: warning: implicit declaration of function 'SHA1_Final'
+| glyph.c:220: warning: nested extern declaration of 'SHA1_Final'
+| make[1]: *** [glyph.lo] Error 1
 
-ERROR: log data follows (/home/chris/oe-dev/build/tmp/work/geode- 
-angstrom-linux/glibc-2.9-r36.3/temp/log.do_configure.29301)
-| configure.in:2204: warning: AC_CACHE_VAL(pic_default, ...):  
-suspicious cache-id, must contain _cv_ to be cached
-| ../../lib/autoconf/general.m4:1999: AC_CACHE_VAL is expanded from...
-| ../../lib/autoconf/general.m4:2020: AC_CACHE_CHECK is expanded from...
-| configure.in:2204: the top level
-| checking build system type... i686-pc-linux-gnu
-| checking host system type... i486-angstrom-linux-gnu
-| configure: running configure fragment for add-on nptl
-| checking sysdep dirs... configure: error: The geode subspecies of  
-i486 is not supported.
-NOTE: Task failed: /home/chris/oe-dev/build/tmp/work/geode-angstrom- 
-linux/glibc-2.9-r36.3/temp/log.do_configure.29301
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/chris/oe-dev/openembedded/recipes/glibc/ 
-glibc_2.9.bb do_configure failed
-ERROR: Task 170 (/home/chris/oe-dev/openembedded/recipes/glibc/ 
-glibc_2.9.bb, do_configure) failed
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ recipes/xorg-xserver/xserver-kdrive_1.5.3.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-I'm thinking I've done something wrong here as I would expect a geode  
-build to support the 'geode subspecies' :-) Except that it seems as if  
-a patch was proposed in the past to change the geodelx (and gx)  
-machine recipes to use i586. This does not appear to have been applied  
-to the current version. See http://lists.linuxtogo.org/pipermail/openembedded-devel/2009-November/014489.html
-
-However,  if I make these changes and try to build I get:
-
-ERROR: function do_compile failed
-ERROR: log data follows (/home/chris/oe-dev/build-2/tmp/work/geodelx- 
-angstrom-linux/linux-geodelx-2.6.11-r0/temp/log.do_compile.2242)
-| NOTE: make -j 4 include/linux/version.h CC=i586-angstrom-linux-gcc   
-LD=i586-angstrom-linux-ld
-|   CHK     include/linux/version.h
-| NOTE: make -j 4 bzImage CC=i586-angstrom-linux-gcc  LD=i586-angstrom- 
-linux-ld
-|   CHK     include/linux/version.h
-| make[1]: `arch/i386/kernel/asm-offsets.s' is up to date.
-|   CHK     include/linux/compile.h
-|   CHK     usr/initramfs_list
-|   CC      arch/i386/kernel/process.o
-|   CC      arch/i386/kernel/semaphore.o
-|   CC      arch/i386/mach-default/setup.o
-|   LD      arch/i386/crypto/built-in.o
-|   CC      kernel/sched.o
-|   CC      arch/i386/kernel/signal.o
-|   CC      arch/i386/mach-default/topology.o
-| arch/i386/kernel/process.c: Assembler messages:
-| arch/i386/kernel/process.c:400: Error: suffix or operands invalid  
-for `mov'
-| arch/i386/kernel/process.c:401: Error: suffix or operands invalid  
-for `mov'
-| arch/i386/kernel/process.c:477: Error: suffix or operands invalid  
-for `mov'
-| arch/i386/kernel/process.c:478: Error: suffix or operands invalid  
-for `mov'
-| include/linux/elfcore.h:92: Error: suffix or operands invalid for  
-`mov'
-| include/linux/elfcore.h:92: Error: suffix or operands invalid for  
-`mov'
-| arch/i386/kernel/process.c:599: Error: suffix or operands invalid  
-for `mov'
-| arch/i386/kernel/process.c:600: Error: suffix or operands invalid  
-for `mov'
-| arch/i386/kernel/process.c:607: Error: suffix or operands invalid  
-for `mov'
-| arch/i386/kernel/process.c:608: Error: suffix or operands invalid  
-for `mov'
-| make[1]: *** [arch/i386/kernel/process.o] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-|   CC      kernel/fork.o
-|   LD      arch/i386/mach-default/built-in.o
-|   CC      mm/bootmem.o
-| arch/i386/kernel/signal.c: Assembler messages:
-| arch/i386/kernel/signal.c:165: Error: suffix or operands invalid for  
-`mov'
-| arch/i386/kernel/signal.c:166: Error: suffix or operands invalid for  
-`mov'
-| make[1]: *** [arch/i386/kernel/signal.o] Error 1
-| make: *** [arch/i386/kernel] Error 2
-| make: *** Waiting for unfinished jobs....
-|   CC      mm/filemap.o
-|   CC      kernel/exec_domain.o
-|   CC      mm/mempool.o
-|   CC      kernel/panic.o
-|   CC      kernel/printk.o
-|   CC      kernel/profile.o
-|   CC      mm/oom_kill.o
-| mm/filemap.c: In function '__generic_file_aio_write_nolock':
-| mm/filemap.c:1799: sorry, unimplemented: inlining failed in call to  
-'generic_write_checks': function body not available
-| mm/filemap.c:2087: sorry, unimplemented: called from here
-| make[1]: *** [mm/filemap.o] Error 1
-| make[1]: *** Waiting for unfinished jobs....
-|   CC      kernel/exit.o
-
-Chris
+diff --git a/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb b/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
+index 7250a61..7fbdff2 100644
+--- a/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
++++ b/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
+@@ -1,6 +1,6 @@
+ require xserver-kdrive-common.inc
+ 
+-DEPENDS += "hal libxkbfile libxcalibrate pixman"
++DEPENDS += "hal libxkbfile libxcalibrate pixman openssl"
+ RDEPENDS_${PN} += "hal"
+ 
+ DEFAULT_PREFERENCE = "-99" 
+-- 
+1.7.1
 
 
 
