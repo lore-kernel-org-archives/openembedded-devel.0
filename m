@@ -1,50 +1,28 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OTxM1-0002pd-1j
+	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OTxQL-00032r-Uv
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 15:29:29 +0200
-Received: by fxm12 with SMTP id 12so463759fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jun 2010 06:24:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:cc:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=RmEJ23B4pKqjmYRhoKPyy3PwX0stW7lOcgZgtLJPyDU=;
-	b=KgO8p9zw6ePGJs+/aKHzErIH0lSHpW6FSRJOh7oUAzKqCn+NATFlUqjKcruyoEAWIk
-	jVyxuKlKPWzwkITBB0jT5BUIMAGKi+BMmfkOwG6CxZRN/hv/n4dLHk6tteBWD0SRBcec
-	Hwhp27ZsS8VBfGrYb9ojCLt/ix3ajcvGyIcYs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ufdzNj54hXmfOWBrDqAH0rEZH1VRdTbZwGbm6pOH400dPZDFn2FNIHqwvUXMqYiZGd
-	tnQQfwBccjx7QBQPP5MYrm1FD3VuCz5c3Uxnugar0yE0kyyGq7q8HuuDYAv6nx7cC3Dh
-	6ke51/r164CnyjVYPqW0NqjIsa0AZGcO8XpVc=
-Received: by 10.223.105.10 with SMTP id r10mr7468421fao.24.1277904284499;
-	Wed, 30 Jun 2010 06:24:44 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u12sm56085854fah.4.2010.06.30.06.24.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 30 Jun 2010 06:24:43 -0700 (PDT)
-Date: Wed, 30 Jun 2010 15:23:50 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>,
-	openembedded-devel@lists.openembedded.org
-Message-ID: <20100630132349.GA4774@jama>
-References: <E1OTx25-0000G6-Q2@melo.openembedded.org>
+	Wed, 30 Jun 2010 15:33:58 +0200
+Received: from [163.241.71.52] (163.241.71.52) by
+	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
+	Server id 8.1.393.1; Wed, 30 Jun 2010 09:28:03 -0400
+Message-ID: <4C2B4663.6040901@tycoelectronics.com>
+Date: Wed, 30 Jun 2010 09:28:03 -0400
+From: Jay Snyder <jay.snyder@tycoelectronics.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-In-Reply-To: <E1OTx25-0000G6-Q2@melo.openembedded.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: <openembedded-devel@lists.openembedded.org>
+References: <mailman.15797.1277902454.24517.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.15797.1277902454.24517.openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 198.175.154.211
+X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-commits@openembedded.org
-Subject: Re: [oe-commits] Dmitry Eremin-Solenikov : xcb-proto: allow empty xcb-proto
+Subject: angstrom-version.bb broken: lsb_release: No such file or directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,37 +36,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 13:29:29 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 30 Jun 2010 13:33:58 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 30, 2010 at 01:08:53PM +0000, git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: e90cf71fe69917d5716fbf25846ba0e91f0b5bd7
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=e90cf71fe69917d5716fbf25846ba0e91f0b5bd7
-> 
-> Author: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> Date:   Tue Jun 29 16:12:02 2010 +0400
-> 
-> xcb-proto: allow empty xcb-proto
-> 
-> xcb-proto-dev depends on (empty) xcb-proto. Allow building of empty xcb-proto packet
-> 
-> Also bump PR for xcb-proto 1.6 to force rebuilding.
-> 
-> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+This recipe was committed without a required file.
 
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=357763adbae6e4d52be61b84c0fffc9aa11a8044
-deja vu..
+Sometime the following lines where added to this bb:
 
-please don't forget to rebase next time :)
 
-btw: what happen with that git hook proposed here :/
+SRC_URI = "file://lsb_release"
 
-Regards,
+install -m 0755 ${WORKDIR}/lsb_release ${D}${bindir}/
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
+But the file lsb_release wasn't added to the git repository.
+
+This, of course has broken the angstrom build.
+
 
 
