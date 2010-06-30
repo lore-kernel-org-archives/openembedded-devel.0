@@ -1,45 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <brandhetlampje@gmail.com>) id 1OTxXf-0003GJ-Nt
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 15:41:32 +0200
-Received: by fxm12 with SMTP id 12so476440fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OTxnb-0000ti-NV for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jun 2010 15:58:02 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OTxj3-0002VY-VT for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jun 2010 15:53:17 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jun 2010 15:53:17 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jun 2010 06:36:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=rWOJURw6Xz4/r6+jpQEhUwcvR57xH5YTowIw8sKxLnA=;
-	b=QVfj0+k2zzkq3yApc9SLE3SOVjkHT+myGYFfzf4UXvmUieWJB/sNxZq+/GRmOmLKY+
-	c29YHJrqx3aSfk+rmPd+zePz35OvTKErugZfwDURzzfFeoIZzt6luCMW167GeGdEAzba
-	bA4PJ2+CNpn2lKYFpUeRI1HNs/jrUj+Ar+5hY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=jSRJUI1lVMiVKz93pQn8YvBpF9wXQg2wFF3YElDLa/yHOvsz5/VAHQwfpzWZO2uipG
-	Djn4WgJ59ii/eP/Lpp1qWwfUf6xGaLZiy+MGRpWVD570BuQSlsJiIt+J38kw446ROGcS
-	VKeR/37MvI8nKe5IME4cPWTwsmWaQIyPPSZ8U=
-MIME-Version: 1.0
-Received: by 10.103.37.24 with SMTP id p24mr2886583muj.47.1277905005436; Wed, 
-	30 Jun 2010 06:36:45 -0700 (PDT)
-Received: by 10.42.9.39 with HTTP; Wed, 30 Jun 2010 06:36:45 -0700 (PDT)
-In-Reply-To: <4C2B4663.6040901@tycoelectronics.com>
-References: <mailman.15797.1277902454.24517.openembedded-devel@lists.openembedded.org>
-	<4C2B4663.6040901@tycoelectronics.com>
-Date: Wed, 30 Jun 2010 15:36:45 +0200
-Message-ID: <AANLkTilwZNeViddUi29oTxOxtFnh_rreI4I0drPbNQC2@mail.gmail.com>
-From: s hakkesteegt <brandhetlampje@gmail.com>
+	Wed, 30 Jun 2010 15:53:17 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: brandhetlampje@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 30 Jun 2010 15:53:09 +0200
+Message-ID: <i0fi85$g27$1@dough.gmane.org>
+References: <201006291747.12761.schnitzeltony@gmx.de>	<i0dgf8$5bd$2@dough.gmane.org>
+	<201006301446.13623.schnitzeltony@gmx.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <201006301446.13623.schnitzeltony@gmx.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: angstrom-version.bb broken: lsb_release: No such file or directory
+Subject: Re: Problems bumping clutter recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,32 +51,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 13:41:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 30 Jun 2010 13:58:03 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jun 30, 2010 at 3:28 PM, Jay Snyder
-<jay.snyder@tycoelectronics.com>wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> This recipe was committed without a required file.
->
-> Sometime the following lines where added to this bb:
->
->
-> SRC_URI = "file://lsb_release"
->
-> install -m 0755 ${WORKDIR}/lsb_release ${D}${bindir}/
->
->
-> But the file lsb_release wasn't added to the git repository.
->
-> This, of course has broken the angstrom build.
->
+On 30-06-10 14:46, Andreas Mueller wrote:
+> On Tuesday 29 June 2010 09:10:32 pm Koen Kooi wrote:
+>>> 2. In clutter-box2d.inc I removed PACKAGE_ARCH = "${MACHINE_ARCH}" because I had the feeling that this caused OE build an
+>>
+>> You need the PACKAGE_ARCH = "${MACHINE_ARCH}" since configure uses a
+>> different gl setting per machine.
+
+Let me repeat:
+
+Configure uses a different gl setting per machine
+
+So the output is machine specific. And hence PACKAGE_ARCH = MACHINE_ARCH
 
 
-http://cgit.openembedded.net/cgit.cgi/openembedded/tree/recipes/angstrom/angstrom-version/lsb_release
+>>
+>> regards,
+>>
+>> Koen
+> 
+> For better understanding of what's going on, I did clean & build clutter-box2d twice:
+> - with PACKAGE_ARCH = "${MACHINE_ARCH}"
+> - without PACKAGE_ARCH = "${MACHINE_ARCH}"
+> 
+> and diffed the Makefiles created. The (shortened) result is:
+> 
+> -ACLOCAL = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> aclocal-1.11
+> -AMTAR = ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> tar
+> +ACLOCAL = ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> aclocal-1.11
+> +AMTAR = ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> tar
+> ...
+> -AUTOCONF = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run autoconf
+> -AUTOHEADER = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run autoheader
+> -AUTOMAKE = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> automake-1.11
+> +AUTOCONF = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run autoconf
+> +AUTOHEADER = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run autoheader
+> +AUTOMAKE = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> automake-1.11
+> ...
+> -MAKEINFO = 
+> ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run makeinfo
+> +MAKEINFO = ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/missing --run 
+> makeinfo
+> ...
+> -abs_builddir = /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> -abs_srcdir = /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> -abs_top_builddir = /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> -abs_top_srcdir = /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> +abs_builddir = /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> +abs_srcdir = /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> +abs_top_builddir = /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> +abs_top_srcdir = /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git
+> ...
+> -install_sh = ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/armv7a-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/install-sh
+> +install_sh = ${SHELL} /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/clutter-box2d-0.10.0-r0+gitdae84a82efe22b284cba8ca1985ce14bb4e86c99/git/install-sh
+> 
+> As far as I can see, only the pathes have changed. Together with the assumption that Makefile is the only configure output used for building, I think it is no difference to have PACKAGE_ARCH 
+> = "${MACHINE_ARCH} or not. Sorry for insisting but I am not sure to miss some issue on this.
+> 
+> 
+> 
+> Coming to the second issue:
+> 
+> On Tue, Jun 29, 2010 at 8:47 AM, Andreas Mueller <schnitzeltony@gmx.de> wrote:
+>> ..I had success so far but now I am in trouble with clutter-gst.
+> 
+> On Tuesday 29 June 2010 08:57:07 pm Khem Raj wrote:
+>> what it seems to me is that you need
+>> to bump some of dependency versions too
+> 
+> I found some dependency information coming with clutter-gst in the file clutter-gst.pc.in
+>> Requires: clutter-@CLUTTER_API_VERSION@ gstreamer-0.10 gstreamer-base-0.10 gstreamer-plugins-base-0.10
+> 
+> All gstreamer stuff is 0.10.29 - I think this should be OK.
+> 
+> 
+> On Tue, Jun 29, 2010 at 8:47 AM, Andreas Mueller <schnitzeltony@gmx.de> wrote:
+>> | ./clutter-gst-video-sink.c:138: error: expected ')' before 'GLUNIFORM1IPROC'
+>> | ./clutter-gst-video-sink.c:140: error: expected ')' before 'GLGENPROGRAMSPROC'
+>> | ./clutter-gst-video-sink.c:141: error: expected ')' before 'GLBINDPROGRAMPROC'
+>> | ./clutter-gst-video-sink.c:142: error: expected ')' before 'GLPROGRAMSTRINGPROC'
+>> | ./clutter-gst-video-sink.c:147: error: expected specifier-qualifier-list before 'GLGENPROGRAMSPROC'
+>> ...
+>> I seems that APIENTRYP is not defined. APIENTRYP is found in <OEDir>/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GL/gl.h the mesa OpenGL header which is not to be included
+>> here. 
+> 
+> To get further information, I manually added in clutter-gst-video-sink.c:
+> 
+> #include <GL/gl.h>
+> 
+> And - surprisingly - get
+> 
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GLES2/gl2.h: At top level:
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GLES2/gl2.h:35: error: conflicting types for 'GLintptr'
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GL/glext.h:4325: error: previous declaration of 'GLintptr' was here
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GLES2/gl2.h:36: error: conflicting types for 'GLsizeiptr'
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GL/glext.h:4326: error: previous declaration of 'GLsizeiptr' was here
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GLES2/gl2.h:576: error: conflicting types for 'glTexImage2D'
+> | /home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/GL/gl.h:1326: error: previous declaration of 'glTexImage2D' was here
+> 
+> but the previous complains related to APIENTRYP are gone!
+> 
+> Long talk - two questions:
+> 
+> 	1. Is it possible that clutter-gst is not really prepared for gles it and will only build against gl?
+> 	2. What is the role of mesa in systems supporting gles? I think I have read something that mesa gets a 'gl-wrapper' for this. Is that true?
+> 
+> If you read up to here: Thanks for your patience...
 
-It seems to be in the right place?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-regards,
-Siebren
+iD4DBQFMK0xFMkyGM64RGpERAsMvAJ94V+gBSux6N1Y+XEHc7GQiZcmQiACTBTM8
+OK96zhzIVu19YKNYzYfLWA==
+=0ibl
+-----END PGP SIGNATURE-----
+
+
 
