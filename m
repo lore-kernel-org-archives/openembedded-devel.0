@@ -1,45 +1,43 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OTrL6-0007e9-Dj
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 09:04:29 +0200
-Received: by bwz11 with SMTP id 11so215173bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OTrLi-0008J1-Jv for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jun 2010 09:04:50 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OTrH9-00066N-TG for openembedded-devel@lists.openembedded.org;
+	Wed, 30 Jun 2010 09:00:03 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 30 Jun 2010 09:00:03 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 29 Jun 2010 23:59:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Dz+0r+OUQibSAmyfe5lJObm1ODHvk32RrYlOy3y3FTM=;
-	b=gYBmXjYOYEe1B3oZh+F3B09P0hUm3H8CYd7MfaGA1/gGk4CkJRj/UNNvXpNt6DgqzH
-	rQAulfWHZaX6D+iIyZY46mJSwdgE7c/n3ADDnjJXyAxF9rW5iA9hUeVY/YpJfKm5Hju4
-	YXyKKtv6zgYKayolJMkZz6/9cSbMvipI2AcmQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Er5FJNkRueAIBl01PwXRHifTzQlAPi3T4hydmdhyLIpfu5fGgxk/jChP9deb3Iids2
-	Dqql0N5qB0bds4/LSWOV8/sDtkKXtR2t9Q+YoyXHJqFZs+J+kQ2J46agILBrpRefOJZl
-	KMwT3JBNRJzejA1rSu73nrlTJvtv/YYGJOgV0=
-MIME-Version: 1.0
-Received: by 10.204.68.203 with SMTP id w11mr5294807bki.78.1277881158074; Tue, 
-	29 Jun 2010 23:59:18 -0700 (PDT)
-Received: by 10.204.73.81 with HTTP; Tue, 29 Jun 2010 23:59:18 -0700 (PDT)
-In-Reply-To: <1277859158-28315-2-git-send-email-joaohf@gmail.com>
-References: <1277859158-28315-1-git-send-email-joaohf@gmail.com>
-	<1277859158-28315-2-git-send-email-joaohf@gmail.com>
-Date: Wed, 30 Jun 2010 08:59:18 +0200
-Message-ID: <AANLkTimJvXelRbFpB9fmSl0v5oW83K4r5-L2DV37KYtN@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 30 Jun 2010 09:00:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 30 Jun 2010 08:55:27 +0200
+Message-ID: <i0epov$ke6$2@dough.gmane.org>
+References: <1277858599-27400-1-git-send-email-joaohf@gmail.com>
+	<1277858599-27400-2-git-send-email-joaohf@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <1277858599-27400-2-git-send-email-joaohf@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] add unifdef to kernel 2.6.22
+Subject: Re: [PATCH 1/2] add cmake 2.8.1recipes/cmake/cmake-native_2.8.1.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +51,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 07:04:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 30 Jun 2010 07:04:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-subject line (and patch commit message) should read:
-[PATCH] add unifdef to linux-libc-headers 2.6.22
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Frans
+Does 'bitbake cmake' work with this version?
 
-2010/6/30 Joao H. Freitas <joaohf@gmail.com>:
+On 30-06-10 02:43, Joao H. Freitas wrote:
 > ---
-> =A0.../linux-libc-headers_2.6.22.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
- =A0 =A03 ++-
-> =A01 files changed, 2 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.22.bb b/re=
-cipes/linux-libc-headers/linux-libc-headers_2.6.22.bb
-> index 12845e0..d1b6206 100644
-> --- a/recipes/linux-libc-headers/linux-libc-headers_2.6.22.bb
-> +++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.22.bb
-> @@ -5,7 +5,8 @@ DEPENDS +=3D "unifdef-native"
-> =A0PR =3D "r4"
->
-> =A0SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar=
-.bz2 \
-> - =A0 =A0 =A0 =A0 =A0 file://procinfo.h"
-> + =A0 =A0 =A0 =A0 =A0 file://procinfo.h \
-> + =A0 =A0 =A0 =A0 =A0 file://unifdef.patch"
->
-> =A0S =3D "${WORKDIR}/linux-${PV}"
->
-> --
-> 1.7.0.2
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>  recipes/cmake/cmake-sdk_2.8.1.bb |    5 -----
+>  recipes/cmake/cmake.inc          |    2 ++
+>  recipes/cmake/cmake_2.8.1.bb     |   11 +++++++++++
+>  3 files changed, 13 insertions(+), 5 deletions(-)
+>  delete mode 100644 recipes/cmake/cmake-sdk_2.8.1.bb
+>  create mode 100644 recipes/cmake/cmake_2.8.1.bb
+> 
+> diff --git a/recipes/cmake/cmake-sdk_2.8.1.bb b/recipes/cmake/cmake-sdk_2.8.1.bb
+> deleted file mode 100644
+> index 86356f7..0000000
+> --- a/recipes/cmake/cmake-sdk_2.8.1.bb
+> +++ /dev/null
+> @@ -1,5 +0,0 @@
+> -inherit sdk
+> -require cmake.inc
+> -
+> -SRC_URI[md5sum] = "feadc2e5ebbfed0efc90178583503725"
+> -SRC_URI[sha256sum] = "7eae74ab7673974a68e395c211854d318f0af2d320590a670339ee8ee9422242"
+> diff --git a/recipes/cmake/cmake.inc b/recipes/cmake/cmake.inc
+> index 631d846..5601ddb 100644
+> --- a/recipes/cmake/cmake.inc
+> +++ b/recipes/cmake/cmake.inc
+> @@ -10,6 +10,8 @@ PR = "r3"
+>  CMAKE_MAJOR_VERSION = "${@bb.data.getVar('PV',d,1).split('.')[0]}.${@bb.data.getVar('PV',d,1).split('.')[1]}"
+>  SRC_URI = "http://www.cmake.org/files/v${CMAKE_MAJOR_VERSION}/cmake-${PV}.tar.gz"
+>  
+> +BBCLASSEXTEND = "native sdk"
+> +
+>  inherit autotools
+>  
+>  S = "${WORKDIR}/cmake-${PV}"
+> diff --git a/recipes/cmake/cmake_2.8.1.bb b/recipes/cmake/cmake_2.8.1.bb
+> new file mode 100644
+> index 0000000..845ea7c
+> --- /dev/null
+> +++ b/recipes/cmake/cmake_2.8.1.bb
+> @@ -0,0 +1,11 @@
+> +require cmake.inc
+> +
+> +#inherit cmake
+> +
+> +do_configure_append() {
+> +	sed -i -e 's,HAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT-ADVANCED:INTERNAL=1,HAVE_GLIBC_STRERROR_R__TRYRUN_OUTPUT-ADVANCED:INTERNAL=0,' CMakeCache.txt
+> +}
+> +
+> +
+> +SRC_URI[md5sum] = "feadc2e5ebbfed0efc90178583503725"
+> +SRC_URI[sha256sum] = "7eae74ab7673974a68e395c211854d318f0af2d320590a670339ee8ee9422242"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD4DBQFMKupfMkyGM64RGpERAoW2AJih+hEVyZFaQ0aPs9UYbrxarQ6HAJ9tr/Jl
+QtcrDrBnCAUlWTMJJVGpJw==
+=SRkX
+-----END PGP SIGNATURE-----
+
 
 
