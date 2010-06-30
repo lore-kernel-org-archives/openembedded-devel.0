@@ -1,42 +1,43 @@
-Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OTkoT-0006bp-NB
+	(envelope-from <joaohf@gmail.com>) id 1OTlQp-0001MQ-2C
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 02:06:25 +0200
-Received: from durham.keylevel.com ([109.224.134.115]:14525
-	helo=[192.168.1.98])
-	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OTkju-0002aH-T1
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 30 Jun 2010 01:01:18 +0100
-Message-Id: <D1248977-0BA9-49ED-B748-4C131AAB39D9@keylevel.com>
-From: Chris Tapp <dokuwiki@keylevel.com>
+	Wed, 30 Jun 2010 02:45:43 +0200
+Received: by gwj18 with SMTP id 18so143897gwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 29 Jun 2010 17:40:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=+9ZtmUTAMfYPmgzxXDqLYgtkq/AooAfLmVSUkNc56a0=;
+	b=HFiLM4hVkLAWI2km7RNs2quBSKwCd8QtSNdGCj9SF/vVA3WJRawQQmEG+2Vx05n7u3
+	YQ1OuhZwTWfJrfI5CjjTtCIm4sT/Ag4sB4bFiE2ppjmPc34/A9wCpM6coOdsEGVjtrNE
+	fhUEuXGWyIsyV5UETHu0Yctf4VQ9ntcv/kc0I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=m20/2Ag5reTE05M6wUTGV5EbJJEZwCMkHvVbq/7xCAs+NclwtXhrOqbgbk34gwbeYW
+	8YTXVlKDiptPTb714j6ncKrj60Lb5DKCTlG9f4ZeHCZHDOIN9A16OXCAsvbyHW9waVAJ
+	bjS2b9dlgeSW4hxLk2FChG3YtD/SGJtlAMY6M=
+Received: by 10.101.134.23 with SMTP id l23mr9898732ann.129.1277858454075;
+	Tue, 29 Jun 2010 17:40:54 -0700 (PDT)
+Received: from localhost.localdomain ([201.53.204.31])
+	by mx.google.com with ESMTPS id 36sm344282ybr.8.2010.06.29.17.40.52
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 29 Jun 2010 17:40:53 -0700 (PDT)
+From: "Joao H. Freitas" <joaohf@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100629223859.GE12539@jama>
-Mime-Version: 1.0 (Apple Message framework v936)
-Date: Wed, 30 Jun 2010 01:01:16 +0100
-References: <933C8D2B-2A4E-46EE-A342-ED5EB3636F38@keylevel.com>
-	<AANLkTilmoW3cU9hcM1PbN8-yDTM36uzkNB5CwU8obJf1@mail.gmail.com>
-	<92233E3F-2CFC-4F88-A780-1A15D7D94A00@keylevel.com>
-	<AANLkTim3wnL18BjsIrLiKZC5NRc70UG77N1GtOiISghA@mail.gmail.com>
-	<69E07E36-D08B-4CD2-9B79-EF876EE47C52@keylevel.com>
-	<20100629223859.GE12539@jama>
-X-Mailer: Apple Mail (2.936)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - keylevel.com
-X-SA-Exim-Connect-IP: 80.254.228.43
-X-SA-Exim-Mail-From: dokuwiki@keylevel.com
+Date: Tue, 29 Jun 2010 21:40:38 -0300
+Message-Id: <1277858443-27280-1-git-send-email-joaohf@gmail.com>
+X-Mailer: git-send-email 1.7.0.2
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: joaohf@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: 'swapper' process using 100% cpu when system idle
+Subject: Fixes cgreen recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,18 +51,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 00:07:18 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 30 Jun 2010 00:45:43 -0000
 
-Well, I've changed the kernel version from 2.6.35-rc3 to 2.6.25.
+[PATCH 1/5] Add cgreen. Library to do unit test for C language
+[PATCH 2/5] Remove mistake configs
+[PATCH 3/5] add flex to recipe
+[PATCH 4/5] add cgreen beta package
+[PATCH 5/5] fix workdir name
 
-The 'swapper' process is still running at 100% cpu and the cpu never  
-idles when nothing else is active (under Qemu and my hardware).
-
-Any other ideas what can cause this?
-
-Chris
-
+Thanks
 
 
