@@ -1,26 +1,40 @@
-Received: from jak.nl ([65.204.18.188]) by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <arjan@jak.nl>) id 1OUFha-00037V-6E
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 11:04:59 +0200
-Received: (qmail 46682 invoked by uid 89); 1 Jul 2010 09:00:14 -0000
-Received: from jak.nl (HELO ?128.63.129.1?) (65.204.18.188)
-	by jak.nl with SMTP; 1 Jul 2010 09:00:14 -0000
-Message-ID: <4C2C5912.80308@jak.nl>
-Date: Thu, 01 Jul 2010 11:00:02 +0200
-From: Arjan <arjan@jak.nl>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.9.1.10) Gecko/20100512 Thunderbird/3.0.5
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OUGhB-0008On-2a for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 12:08:37 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OUGcc-0001eO-65 for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 12:03:54 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Jul 2010 12:03:54 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Jul 2010 12:03:54 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 65.204.18.188
-X-SA-Exim-Mail-From: arjan@jak.nl
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 01 Jul 2010 12:03:45 +0200
+Message-ID: <i0hp61$n03$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: meta-toolchain-qte produces toolchain with missing Qt include dirs
+Subject: java staging problem
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,22 +48,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 09:04:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 01 Jul 2010 10:08:37 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-I'm trying to build the sdk as described in de OE manual. 
-[http://docs.openembedded.org/usermanual/usermanual.html#id501110]
-I did not modify the qt4-embedded.inc or qt4.inc.
-The final sdk archive misses almost all the includes from de Qt 
-framework (it only has qtopia/QtCore and qtopia/phonon) . But it does 
-include the libs and binaries.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Is this expected behaviour or am I doing something wrong?
+Hi,
 
-Thanks,
-Arjan
+I'm attempting to build openjdk using the jalimo overlay and I found a
+problem with the staging dirs:
 
+/OE/angstrom-dev/sysroots/java <- contains a few jars e.g. xalan2.jar
+/OE/angstrom-dev/sysroot/x86_64-linux/usr/share/java <- contains other
+jars, e.g. serializer.jar
+
+The openjdk configure tells the buildsystem that both xalan2.jar and
+serializer.jar are in /OE/angstrom-dev/sysroots/java when only
+xalan2.jar is.
+
+I vaguely remember the buglabs people talking about that and their
+local.conf mangles some JAVA vars. How should we solve this in OE
+properly? It's a shame that such great work on java suffers from small
+bugs like this.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMLGgBMkyGM64RGpERAiXJAKCmUX9rBgLtY/WVypm1euj+EmoafwCbBMFX
+XnVkSLR7mt3ZO1ZEJ5mzNdQ=
+=vpls
+-----END PGP SIGNATURE-----
 
 
 
