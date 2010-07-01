@@ -1,44 +1,38 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OUMPl-0007J6-Kl for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 18:15:02 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OUMLC-000380-Dk for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 18:10:18 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 18:10:18 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <dp@xora.org.uk>) id 1OUMcs-0007IY-G7
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 18:28:36 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 36315A5672
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 18:10:18 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu,  1 Jul 2010 17:23:50 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id jKctFyvYYXm8
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 17:23:49 +0100 (BST)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 97F13A5670
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 17:23:49 +0100 (BST)
+Date: Thu, 1 Jul 2010 17:24:28 +0100
+From: Graeme Gregory <dp@xora.org.uk>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 01 Jul 2010 18:10:01 +0200
-Message-ID: <i0iekt$aik$1@dough.gmane.org>
-References: <4C2AC77A.70102@gmail.com>
-	<4C2ACDE8.7080801@gmail.com>	<lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>	<i0ian8$pt3$1@dough.gmane.org>
-	<lybpargq0n.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Message-ID: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
+X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <lybpargq0n.fsf@ensc-virt.intern.sigma-chemnitz.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
+Subject: USE flags mumbling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,31 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 16:15:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Jul 2010 16:28:37 -0000
+Content-Type: text/plain; charset=US-ASCII
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+We already have BBCLASSEXTENDS which modifies ${PN} of a package and
+can use overrides to change behaviors of recipes.
 
-On 01-07-10 17:50, Enrico Scholz wrote:
-> Koen Kooi <k.kooi@student.utwente.nl> writes:
-> 
->>> A better way might be to conditionalize your '--disable-*' options
->>> resp. make them depend on some DISTRO_FEATURE.
->>
->> Introducing USE flags would be a step backwards, so NAK on that.
-> 
-> how would you reenable gpg and curl for https support then?
+Maybe USE flags could be implemented in a similar fashing.
 
-By keeping the existing recipes?
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+DISTRO_USE = "nossl nox11"
 
-iD8DBQFMLL3ZMkyGM64RGpERAjgpAJ9sOanQfS347RHHdnadSNP6S+B/sgCfUmFk
-Fg/VKvMJ7AL+RjX6OWgNxMw=
-=8liu
------END PGP SIGNATURE-----
+EXTRA_OECONF_append_use-nossl = "--disable-ssl"
 
+${PN} of the recipe becomes XXXX-nossl
+
+Thoughts?
+
+Graeme
 
 
