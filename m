@@ -1,40 +1,47 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OUS82-0004v0-PP
+	(envelope-from <graham.gower@gmail.com>) id 1OUS8C-0004vh-Gg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 00:21:08 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OUS3Q-0001pS-Au from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 15:16:20 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 1 Jul 2010 15:16:19 -0700
-Received: from [172.30.80.201] ([172.30.80.201]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 1 Jul 2010 16:16:19 -0600
-Message-ID: <4C2D13AE.9030903@mentor.com>
-Date: Thu, 01 Jul 2010 15:16:14 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Fri, 02 Jul 2010 00:21:18 +0200
+Received: by iwn34 with SMTP id 34so2561288iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Jul 2010 15:16:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=ZNY7Wg+Js/YYGSMXUpU6BkaTb0TkgXgjK4qOTjffS2A=;
+	b=n6kGkIiWYjlL1knHfi3IqbVJ3VXMB9Ihu7DJSIJybIRSd7JUkWSjAjMr1dCFpsmD2P
+	+XXCdk3k3Z5vtP+XPkWuBpbsNA6ooDCWqAuQ3rgVvBej3j+XKCNR5cb4lxXrywBkfiAQ
+	KIDs1ldk31iUEcqxx3+52S+BCsvg1BHfa7dkk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=dhmsDWvR60oSgMCGx7MIfuIMDlP0SL6wUFcbv8xQlE3CYPTHW/MYeiiDLrQcOsvVC5
+	mhC16eFs+ttA82EHzD3Go/u/kHxgkXqsEaqVsg4+uWs35Ym6vR9Ey/w79ZBXBA7VL7nW
+	FEeARrx8D3HMUDFbXWf76cnB7VibZOgOiNaLU=
 MIME-Version: 1.0
+Received: by 10.231.167.69 with SMTP id p5mr134767iby.126.1278022589813; Thu, 
+	01 Jul 2010 15:16:29 -0700 (PDT)
+Received: by 10.231.144.21 with HTTP; Thu, 1 Jul 2010 15:16:29 -0700 (PDT)
+In-Reply-To: <i0iekt$aik$1@dough.gmane.org>
+References: <4C2AC77A.70102@gmail.com> <4C2ACDE8.7080801@gmail.com>
+	<lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<i0ian8$pt3$1@dough.gmane.org>
+	<lybpargq0n.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<i0iekt$aik$1@dough.gmane.org>
+Date: Fri, 2 Jul 2010 07:46:29 +0930
+Message-ID: <AANLkTimOoAGoQQZx1FsubNGi-UX8hlgKCGPrDvTcNMAs@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
-	<i0iv84$7qt$1@dough.gmane.org>
-In-Reply-To: <i0iv84$7qt$1@dough.gmane.org>
-X-OriginalArrivalTime: 01 Jul 2010 22:16:19.0195 (UTC)
-	FILETIME=[07B8FCB0:01CB196B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: USE flags mumbling
+Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,46 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 22:21:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Jul 2010 22:21:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Koen Kooi wrote:
+On 2 July 2010 01:40, Koen Kooi <k.kooi@student.utwente.nl> wrote:
 > -----BEGIN PGP SIGNED MESSAGE-----
 > Hash: SHA1
-> 
-> On 01-07-10 18:24, Graeme Gregory wrote:
->> We already have BBCLASSEXTENDS which modifies ${PN} of a package and
->> can use overrides to change behaviors of recipes.
+>
+> On 01-07-10 17:50, Enrico Scholz wrote:
+>> Koen Kooi <k.kooi@student.utwente.nl> writes:
 >>
->> Maybe USE flags could be implemented in a similar fashing.
->>
->> DISTRO_USE = "nossl nox11"
->>
->> EXTRA_OECONF_append_use-nossl = "--disable-ssl"
->>
->> ${PN} of the recipe becomes XXXX-nossl
->>
->> Thoughts?
-> 
-> Just that USE flags shouldn't be used if seperate recipes can solve it
-> as well.
+>>>> A better way might be to conditionalize your '--disable-*' options
+>>>> resp. make them depend on some DISTRO_FEATURE.
+>>>
+>>> Introducing USE flags would be a step backwards, so NAK on that.
 
-If I may, I'd like to articulate what I believe to be the technical 
-argument behind this statement.
+I don't like the idea of USE flags either. Every time you see one you
+would have to grep -r your tree to find out its impact.
 
-One of the issues with some form of USE flags, and I believe this is one 
-of the big ones for Angstrom as well as any other public feed publishing 
-distribution is that having a single recipe that does different things 
-based on variables makes maintaining their feed (and allowing users to 
-publish their own compatible feeds) a nightmare.
+>>
+>> how would you reenable gpg and curl for https support then?
+>
+> By keeping the existing recipes?
 
-This is because there isn't any form of use flag checking (a simple case 
-of 1:1 or the more complex case of flagA needs flagB and flagC doesn't 
-care about flagD -> flagZ).
+Or, by extending the defautl opkg_svn.bb recipe I have left behind.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+e.g. an opkg-fullyloaded.bb containing
+include opkg_svn.bb
+EXTRA_CFLAGS=""
+
+But since there really don't appear to be any in tree users of this, I
+didn't bother to include the recipe in my patch (i assumed it would be
+trivial for anyone to do with an overlay). Opkg-native has no reason
+whatsoever to require gpg or curl.
+
+In the future, I may change opkg to have gpg and curl support be
+disabled by default and require them to be explicitly enabled with
+--enable-foo. Gpg is disabled by most users anyway and curl doesn't
+offer much over simply using wget, so why not make it the default?
+
+-Graham
 
 
