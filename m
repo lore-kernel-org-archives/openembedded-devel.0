@@ -1,41 +1,36 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OUKVf-0003jr-Qt for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 16:13:01 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet2.eads.net with ESMTP; 01 Jul 2010 15:59:17 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Thu, 1 Jul 2010 16:07:51 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 1 Jul 2010 16:07:50 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OULFr-0001s9-NS
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 17:00:44 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o61EtnOq000974
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 1 Jul 2010 16:55:51 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OULB6-0004WG-OH; Thu, 01 Jul 2010 16:55:48 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+To: openembedded-devel@lists.openembedded.org
+References: <4C2AC77A.70102@gmail.com> <4C2ACDE8.7080801@gmail.com>
+Date: Thu, 01 Jul 2010 16:55:48 +0200
+In-Reply-To: <4C2ACDE8.7080801@gmail.com> (Graham Gower's message of "Wed, 30
+	Jun 2010 14:24:00 +0930")
+Message-ID: <lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
 MIME-Version: 1.0
-Date: Thu, 1 Jul 2010 16:07:49 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819920@deimsg40.de.net.world>
-In-Reply-To: <4C2C8F31.2050107@freyther.de>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Creating a Own Tool chain,
-	some referenced packages are not included into the SDK archive
-Thread-Index: AcsZHC+E0DTGfCoYQUmetzsd3F6ypwACpOKA
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world>	<4C2A07C5.9060909@freyther.de><0B51A1E7C61D114DAE6FC10B0FD0ABA50181975A@deimsg40.de.net.world>
-	<4C2C8F31.2050107@freyther.de>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 01 Jul 2010 14:07:50.0983 (UTC)
-	FILETIME=[CAAABD70:01CB1926]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Creating a Own Tool chain, some referenced packages are not included into the SDK archive
+Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,46 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 14:13:26 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Jul 2010 15:00:44 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Hello Holger Freyther,
+Graham Gower <graham.gower@gmail.com> writes:
 
-I think, the working qte toolchain was built from stable_2009 branch.
+> None of the distros in OE 
 
-Regards
-Wolfgang Hauser
-=20
------Urspr=FCngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
-von Holger Freyther
-Gesendet: Donnerstag, 1. Juli 2010 14:51
-An: openembedded-devel@lists.openembedded.org
-Betreff: Re: [oe] Creating a Own Tool chain, some referenced packages =
-are not included into the SDK archive
+At least the openmoko SHR distribution fetches ipkg from network and
+requires curl support hence.
 
-On 06/29/2010 11:20 PM, Hauser, Wolfgang (external) wrote:
-> Hello Holger Freyther,
->=20
-> here are the diffs for my changes:
->=20
-> diff of meta-toolchain-qte.bb <> meta-toolchain-xxx.bb
 
-sorry, this diff is not readable, please use a unified diff for the =
-changes.
+> appear to want/need gpg or curl support in opkg; so have opkg.inc
+> remove them by default.
 
->=20
-> The qte toolchain has created properly, my own do not.
+I do not think that supporting only offline mode (due to removal of
+curl support) is a good idea.  Although the opportunistic signature
+verification is not secure, it would be imo bad to remove gpg support
+completely because updating embedded devices in a secure manner is
+important.
 
-So you say bitbake meta-toolchain-qte is working?
+A better way might be to conditionalize your '--disable-*' options
+resp. make them depend on some DISTRO_FEATURE.
 
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+> +EXTRA_OECONF += " --disable-gpg \ 
+> +                  --disable-openssl \ 
+> +                  --disable-ssl-curl \
+> +                  --disable-curl"
+
+
+Enrico
 
 
