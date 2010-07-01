@@ -1,34 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OUDRT-0000R7-Al
+	(envelope-from <raj.khem@gmail.com>) id 1OUDif-0002Ht-Pw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 08:40:17 +0200
-Received: by iwn34 with SMTP id 34so1735402iwn.6
+	Thu, 01 Jul 2010 08:57:59 +0200
+Received: by iwn34 with SMTP id 34so1747196iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jun 2010 23:35:18 -0700 (PDT)
+	Wed, 30 Jun 2010 23:53:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=olER7cPPL05cr6Bu/0Eo/VKDaly/Duoe08+hQmgRgPw=;
-	b=NnBsylOzkf9sWvEPP/KiIQihcqGHHFtM5dcaMzkIlQ+rbw7nQnJ/XKkC7Iy1qyni5C
-	AJ9lf9kV2wr8xDniLCLbiaztuad2snsA8Po8yzmjhFN9I0W110MUbM2HYP0f1QQOUVsM
-	Gc5MmN/yxUaw3KJmYsvV1mgjeTKjsp074loP4=
+	:references:from:date:message-id:subject:to:content-type;
+	bh=MT3hRI/dq3MiZ+4oxhcfO1CfDj5LOM2d8358YnmB+P4=;
+	b=ZCDPPmhxfpLpGnJMrAn1MzyOEbnLJDb0HwgT+6zKUWd8iT1oR/gzbbneT7R1C4R7M/
+	9b9RuZ1zX4+58N1pl2mcyss7T7DKaRYC6IM+u+4I2NWHt3toFC16hqjwxBr2YzOE3kQS
+	JR30Hk5qd5L28ucn/O3JTiyvBLFzZEWNIXP7Y=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=XWMOcjE7wenRYGhAiJFbg+oBQ7aqyuNDDwEsJ5SE64iFfGCGoS/BILA9B0bSITCTOg
-	GKuVKZ6hON5Z1OsXMyMWff9M9DTN2z8ghoanOl7gk0+HA7fNlsbyS697hoOWbKHz2PkT
-	FHAKyq5V0zvvAmAXMpELFQQg4SRYexPoOH7RQ=
-Received: by 10.231.82.145 with SMTP id b17mr9862367ibl.187.1277966118231; 
-	Wed, 30 Jun 2010 23:35:18 -0700 (PDT)
+	:content-type;
+	b=LhfMq7uD3IjGhgGBn0KzLhFm8Qlf32CALyuC27624YAU5G8woVgTzw9GQGXKXB5tAQ
+	sEJbNolXkqBxnP2UFdcAjTh/FK2Bf9bJiluav3oME7+1Fn2lMUZ/AtDoNmB+RXclBGXh
+	vCKtgOOU/smJC0FkzP8+5So7FIfGOuZ82Arpk=
+Received: by 10.231.125.167 with SMTP id y39mr10012230ibr.93.1277967194727; 
+	Wed, 30 Jun 2010 23:53:14 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.14.131 with HTTP; Wed, 30 Jun 2010 23:34:58 -0700 (PDT)
-In-Reply-To: <1277743053-7488-1-git-send-email-stefan@datenfreihafen.org>
-References: <1277743053-7488-1-git-send-email-stefan@datenfreihafen.org>
+Received: by 10.231.14.131 with HTTP; Wed, 30 Jun 2010 23:52:53 -0700 (PDT)
+In-Reply-To: <i0f0bp$b11$1@dough.gmane.org>
+References: <i0f0bp$b11$1@dough.gmane.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Jun 2010 23:34:58 -0700
-Message-ID: <AANLkTilQfm7FxaeKPPhs6h0RBU7rDq8LG9qM3x121U6p@mail.gmail.com>
+Date: Wed, 30 Jun 2010 23:52:53 -0700
+Message-ID: <AANLkTikXxcGoAOAIefF5cbiDOe7KeeqNPS9Ik_HD-uBh@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -38,8 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH][STABLE] libecj-bootstrap_3.4.bb: Fix SRC_URI for new location
+Subject: Re: CFLAGS_append_arm = " -fforward-propagate " breaks sdk builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,67 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 06:40:17 -0000
+X-List-Received-Date: Thu, 01 Jul 2010 06:57:59 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jun 28, 2010 at 9:37 AM, Stefan Schmidt
-<stefan@datenfreihafen.org> wrote:
-> From: Stefan Schmidt <stefan@buglabs.net>
+On Wed, Jun 30, 2010 at 1:47 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
+> Hi,
 >
-> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
-> ---
+> When using an old compiler (e.g. the one ubuntu 8.04LTS ships with),
+> zlib and ncurses fail to build because " -fforward-propagate" is not
+> recognized as an option.
+>
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+I wonder if there is a way to make OE aware of what gcc/binutils or
+other cross tools versions it is being compiled with and then decide
+on options based on that.
+we could poke cross compiler on the fly
+something like.
+
+check_gcc=$(shell \
+        if $(CC) $(1) -S -o /dev/null -xc /dev/null > /dev/null 2>&1;
+\
+        then echo "$(1)"; else echo "$(2)"; fi)
+> This is due to:
+>
+> CFLAGS_append_arm = " -fforward-propagate "
+>
+> In the .inc files. My question: why does ncursus-sdk get that in cflags?!?!
+
+its using BBLASSEXTEND now for sdk may be it uses TARGET_ARCH in overrides.
 
 >
-> This reminds me that the checksum per file patch for stable from Vitus ne=
-eds
-> some acks make such changes easier.
+> regards,
 >
-> =A0conf/checksums.ini =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A04 ++++
-> =A0recipes/ecj/libecj-bootstrap_3.4.bb | =A0 =A02 +-
-> =A02 files changed, 5 insertions(+), 1 deletions(-)
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
 >
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index ed06efc..909ade7 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -5562,6 +5562,10 @@ sha256=3Ddfe24798ca067c75c84f01bf4ee3734fde3e32e4f=
-270f7222025218d3baffbbb
-> =A0md5=3D4c9fe7b0c4e760e13fa887b85f8db295
-> =A0sha256=3Db5725fa7f8b1f7dc28776e60591e9ef0c171629fe567ef49ab9be28516ff2=
-cd6
->
-> +[http://archive.eclipse.org/eclipse/downloads/drops/R-3.4-200806172000/e=
-cjsrc-3.4.zip]
-> +md5=3Df7b84d912e61dfdd77b7173065845250
-> +sha256=3Da6ce5f0682462e85e5e47229e5b16555f74c60188fa0bb17536beb1138c537b=
-4
-> +
-> =A0[http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/downloads/drop=
-s/R-3.4-200806172000/ecjsrc-3.4.zip]
-> =A0md5=3Df7b84d912e61dfdd77b7173065845250
-> =A0sha256=3Da6ce5f0682462e85e5e47229e5b16555f74c60188fa0bb17536beb1138c53=
-7b4
-> diff --git a/recipes/ecj/libecj-bootstrap_3.4.bb b/recipes/ecj/libecj-boo=
-tstrap_3.4.bb
-> index 381f424..57b0ab8 100644
-> --- a/recipes/ecj/libecj-bootstrap_3.4.bb
-> +++ b/recipes/ecj/libecj-bootstrap_3.4.bb
-> @@ -3,6 +3,6 @@ require libecj-bootstrap.inc
-> =A0PR =3D "r1"
->
-> =A0SRC_URI =3D "\
-> - =A0 =A0 =A0 http://mirrors.ibiblio.org/pub/mirrors/eclipse/eclipse/down=
-loads/drops/R-3.4-200806172000/ecjsrc-3.4.zip \
-> + =A0 =A0 =A0 http://archive.eclipse.org/eclipse/downloads/drops/R-3.4-20=
-0806172000/ecjsrc-3.4.zip \
-> =A0 "
->
-> --
-> 1.7.1
+> iD8DBQFMKwS5MkyGM64RGpERAkrUAJ9/6f9Xwfq31TooCkrx39tuOO+twACfeLGb
+> d7VMZZJgobUiZgNM1rfrLv8=
+> =t8GK
+> -----END PGP SIGNATURE-----
 >
 >
 > _______________________________________________
