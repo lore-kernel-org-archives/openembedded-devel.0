@@ -1,29 +1,37 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OUSOs-0000gb-UJ
+	(envelope-from <Tom_Rini@mentor.com>) id 1OUSUw-0004Lu-3B
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 00:38:31 +0200
-Received: from [192.168.1.2] (e180160232.adsl.alicedsl.de [85.180.160.232])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 9F894584111
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  2 Jul 2010 00:43:59 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Fri, 02 Jul 2010 00:44:47 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OUSQJ-0005l7-W2 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 15:40:00 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 1 Jul 2010 15:39:59 -0700
+Received: from [172.30.80.201] ([172.30.80.201]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 1 Jul 2010 16:39:58 -0600
+Message-ID: <4C2D193A.9060202@mentor.com>
+Date: Thu, 01 Jul 2010 15:39:54 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1278023342.4507.8.camel@lenovo.internal.reciva.com>
-References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
-	<i0iv84$7qt$1@dough.gmane.org>  <4C2D13AE.9030903@mentor.com>
-	<1278023342.4507.8.camel@lenovo.internal.reciva.com>
-Organization: Vanille-Media
-Date: Fri, 02 Jul 2010 00:33:46 +0200
-Message-ID: <1278023626.12473.22.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>	<i0iv84$7qt$1@dough.gmane.org>
+	<4C2D13AE.9030903@mentor.com>	<1278023342.4507.8.camel@lenovo.internal.reciva.com>
+	<1278023626.12473.22.camel@saphir>
+In-Reply-To: <1278023626.12473.22.camel@saphir>
+X-OriginalArrivalTime: 01 Jul 2010 22:39:58.0904 (UTC)
+	FILETIME=[55EF6380:01CB196E]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -41,33 +49,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 22:38:32 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 01 Jul 2010 22:44:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Am Donnerstag, den 01.07.2010, 23:29 +0100 schrieb Phil Blundell:
-> On Thu, 2010-07-01 at 15:16 -0700, Tom Rini wrote:
-> > One of the issues with some form of USE flags, and I believe this is one 
-> > of the big ones for Angstrom as well as any other public feed publishing 
-> > distribution is that having a single recipe that does different things 
-> > based on variables makes maintaining their feed (and allowing users to 
-> > publish their own compatible feeds) a nightmare.
+Michael 'Mickey' Lauer wrote:
+> Am Donnerstag, den 01.07.2010, 23:29 +0100 schrieb Phil Blundell:
+>> On Thu, 2010-07-01 at 15:16 -0700, Tom Rini wrote:
+>>> One of the issues with some form of USE flags, and I believe this is one 
+>>> of the big ones for Angstrom as well as any other public feed publishing 
+>>> distribution is that having a single recipe that does different things 
+>>> based on variables makes maintaining their feed (and allowing users to 
+>>> publish their own compatible feeds) a nightmare.
+>> It's only a nightmare if the flags in question are user-frobbable.  If
+>> they are all nailed down in the DISTRO configuration (which
+>> DISTRO_FEATURES certainly ought to be), and those folks who want to
+>> build compatible binaries just leave them alone, then there oughtn't to
+>> be any real problem.  To that extent it doesn't really seem any
+>> different to the choice of compiler or tuning flags or glibc version or
+>> any of the other ways in which you can already produce incompatible
+>> binaries by flipping the wrong switches.
 > 
-> It's only a nightmare if the flags in question are user-frobbable.  If
-> they are all nailed down in the DISTRO configuration (which
-> DISTRO_FEATURES certainly ought to be), and those folks who want to
-> build compatible binaries just leave them alone, then there oughtn't to
-> be any real problem.  To that extent it doesn't really seem any
-> different to the choice of compiler or tuning flags or glibc version or
-> any of the other ways in which you can already produce incompatible
-> binaries by flipping the wrong switches.
+> Agreed. I think we should be more open to this concept. At least for
+> packages with optional (but "infecting") X11 support -- such as EFL -- I
+> plan to use such a mechanism soon.
 
-Agreed. I think we should be more open to this concept. At least for
-packages with optional (but "infecting") X11 support -- such as EFL -- I
-plan to use such a mechanism soon.
+Putting on my devil's advocate hat again, unless something is really and 
+truly locked down, it's going to get modified.  While most end users 
+won't want to frob gcc versions, frobbing bluetooth or alsa or x11 or 
+... is more common.  For example, Gentoo.  And this is a problem if it's 
+not easily detectable that you're going to have a clash.  All the DANGER 
+DANGER DANGER comments in the world won't stop users from putting up the 
+incompatible feed (with their own warning that someone else will ignore).
 
 -- 
-:M:
-
+Tom Rini
+Mentor Graphics Corporation
 
 
