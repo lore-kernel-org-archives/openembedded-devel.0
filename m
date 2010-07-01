@@ -1,43 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OULMu-0002XD-UY for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 17:08:04 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OULII-0000eK-2u for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 17:03:14 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 17:03:14 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 17:03:14 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OULhX-00059f-Sc
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 17:29:22 +0200
+Received: (qmail invoked by alias); 01 Jul 2010 15:24:35 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp010) with SMTP; 01 Jul 2010 17:24:35 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18fEkkh7k4fVkSAF3ONKolwCyLfpKTQEWXJI1W3fI
+	3cGPcjXwjZjfZY
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 01 Jul 2010 17:03:04 +0200
-Message-ID: <i0ian8$pt3$1@dough.gmane.org>
-References: <4C2AC77A.70102@gmail.com> <4C2ACDE8.7080801@gmail.com>
-	<lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 1 Jul 2010 17:21:13 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+References: <201006291747.12761.schnitzeltony@gmx.de>
+	<201006301446.13623.schnitzeltony@gmx.de>
+	<i0fi85$g27$1@dough.gmane.org>
+In-Reply-To: <i0fi85$g27$1@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201007011721.13575.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
+Subject: Re: Problems bumping clutter recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,47 +42,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 15:08:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 01 Jul 2010 15:29:22 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 01-07-10 16:55, Enrico Scholz wrote:
-> Graham Gower <graham.gower@gmail.com> writes:
+On Wednesday 30 June 2010 03:53:09 pm Koen Kooi wrote:
+> Let me repeat:
 > 
->> None of the distros in OE 
+> Configure uses a different gl setting per machine
 > 
-> At least the openmoko SHR distribution fetches ipkg from network and
-> requires curl support hence.
+> So the output is machine specific. And hence PACKAGE_ARCH = MACHINE_ARCH
 
-That's not true, with curl disabled, it calls (busybox) wget.
+I do not (yet) understand why but I understand that it's not your job to teach me - but due to this situation there is on final question on that issue:
 
->> appear to want/need gpg or curl support in opkg; so have opkg.inc
->> remove them by default.
-> 
-> I do not think that supporting only offline mode (due to removal of
-> curl support) is a good idea.  Although the opportunistic signature
-> verification is not secure, it would be imo bad to remove gpg support
-> completely because updating embedded devices in a secure manner is
-> important.
-> 
-> A better way might be to conditionalize your '--disable-*' options
-> resp. make them depend on some DISTRO_FEATURE.
+What is the rule for making (clutter-)packages machine specific? All recipes depending on clutter?
 
-Introducing USE flags would be a step backwards, so NAK on that.
+By the way: I think I have found the reason why clutter-gst does not build: The constant HAVE_COGL_GLES2 is not configured in clutter-gst.
 
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMLK4oMkyGM64RGpERAi1LAJ92At87I57tSF/kRSlR+JAkGThQTACguKBy
-JqkzXKxs4DLPWSbAtSTxqIc=
-=RGMg
------END PGP SIGNATURE-----
-
+Andreas
 
 
