@@ -1,39 +1,37 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OUSEU-0005Lp-1S
+	(envelope-from <utx@penguin.cz>) id 1OUSIF-0005UT-VP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 00:27:47 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OUS9s-00033a-2g from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 15:23:00 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 1 Jul 2010 15:22:59 -0700
-Received: from [172.30.80.201] ([172.30.80.201]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 1 Jul 2010 16:22:58 -0600
-Message-ID: <4C2D153E.1040608@mentor.com>
-Date: Thu, 01 Jul 2010 15:22:54 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Fri, 02 Jul 2010 00:31:41 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id CBD391416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 00:10:21 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id X23HAukfhVE3
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 00:10:12 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id BD8F51417193
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 00:10:12 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
-In-Reply-To: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
-X-OriginalArrivalTime: 01 Jul 2010 22:22:59.0050 (UTC)
-	FILETIME=[F60E04A0:01CB196B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Fri, 02 Jul 2010 00:05:38 +0200
+Message-ID: <1278021938.8213.7.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: USE flags mumbling
+Subject: invalid removal of rpath from native binaries during installation or staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,43 +45,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 22:27:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 01 Jul 2010 22:31:41 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-Graeme Gregory wrote:
-> We already have BBCLASSEXTENDS which modifies ${PN} of a package and
-> can use overrides to change behaviors of recipes.
-> 
-> Maybe USE flags could be implemented in a similar fashing.
-> 
-> DISTRO_USE = "nossl nox11"
-> 
-> EXTRA_OECONF_append_use-nossl = "--disable-ssl"
-> 
-> ${PN} of the recipe becomes XXXX-nossl
-> 
-> Thoughts?
+Hallo.
 
-First we'd have to have a discussion on what the default should be and 
-get agreement everywhere (ssl? x11? bluetooth (bluez3? bluez4?)? alsa?) 
-on the whole raft of things that it would be nice to globally turn off 
-or on.  Then we have to know which ones a given recipe actually made use 
-of as opkg-nox11 is quite silly but conversely it'd be quite nice to 
-have in autotools.bbclass the magic to always pass --disable-x11 (since 
-it sure feels like everyone uses the same enable/disable switch finally).
+Packages like perl-native and gettext-native compile correctly, but then
+stage broken binaries, that miss rpath from binaries. Such binaries work
+only if the library of the same name exists in the host system, which is
+not correct.
 
-Second, we also need a raft of, and perhaps a much easier way to, add 
-binary package output virtuals.
+Example:
+ERROR: log data follows (/OE/build/tmp/work/x86_64-linux/libxml-parser-perl-native-2.36-r2/temp/log.do_configure.27765)
+| perl: error while loading shared libraries: libperl.so: cannot open shared object file: No such file or directory
 
-I wonder, and I have to admit to having no real gentoo background here, 
-how do they solve this problem?  Did they invent their own package 
-format and add another field that consists of use flags?  That'd make 
-some stuff a lot easier, but making deb/rpm get that mapping somehow 
-seems hard at first.
+Now try:
+ben:/OE/build> /OE/build/tmp/sysroots/x86_64-linux/usr/bin/perl
+/OE/build/tmp/sysroots/x86_64-linux/usr/bin/perl: error while loading shared libraries: libperl.so: cannot open shared object file: No such file or directory
+ben:/OE/build> /OE/build/tmp/work/x86_64-linux/perl-native-5.8.8-r19/perl-5.8.8/perl
+(this instance works)
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Work around: simply copy binaries from work directly to sysroots and compilation continues correctly.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
