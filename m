@@ -1,40 +1,32 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OUIzv-0002zp-Hb for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 14:36:08 +0200
-Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
-	by mail-dotnet2.eads.net with ESMTP; 01 Jul 2010 14:21:30 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Thu, 1 Jul 2010 14:30:20 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 1 Jul 2010 14:30:20 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <holger+oe@freyther.de>) id 1OUJIu-0001if-2R
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 14:55:45 +0200
+Received: from [123.192.240.117] (unknown [123.192.240.117])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id E7D781B10C0D
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 12:52:47 +0000 (UTC)
+Message-ID: <4C2C8F31.2050107@freyther.de>
+Date: Thu, 01 Jul 2010 20:50:57 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
+	Thunderbird/3.1
 MIME-Version: 1.0
-Date: Thu, 1 Jul 2010 14:30:19 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018198FA@deimsg40.de.net.world>
-In-Reply-To: <4C2C5912.80308@jak.nl>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] meta-toolchain-qte produces toolchain with missing Qt
-	includedirs
-Thread-Index: AcsY/AFIT4/AvMv7TBiWuJ54+zxk5QAHM0KQ
-References: <4C2C5912.80308@jak.nl>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 01 Jul 2010 12:30:20.0703 (UTC)
-	FILETIME=[2BA0DAF0:01CB1919]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+To: openembedded-devel@lists.openembedded.org
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world>	<4C2A07C5.9060909@freyther.de>
+	<0B51A1E7C61D114DAE6FC10B0FD0ABA50181975A@deimsg40.de.net.world>
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA50181975A@deimsg40.de.net.world>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: meta-toolchain-qte produces toolchain with missing Qt includedirs
+Subject: Re: Creating a Own Tool chain, some referenced packages are not included into the SDK archive
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,41 +40,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 12:36:08 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 01 Jul 2010 12:55:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-I have the same behavior with an derived qt4 toolchain, but some other =
-referenced packages are missing too.
-=20
------Urspr=FCngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
-von Arjan
-Gesendet: Donnerstag, 1. Juli 2010 11:00
-An: openembedded-devel@lists.openembedded.org
-Betreff: [oe] meta-toolchain-qte produces toolchain with missing Qt =
-includedirs
+On 06/29/2010 11:20 PM, Hauser, Wolfgang (external) wrote:
+> Hello Holger Freyther,
+> 
+> here are the diffs for my changes:
+> 
+> diff of meta-toolchain-qte.bb <> meta-toolchain-xxx.bb
 
-I'm trying to build the sdk as described in de OE manual.=20
-[http://docs.openembedded.org/usermanual/usermanual.html#id501110]
-I did not modify the qt4-embedded.inc or qt4.inc.
-The final sdk archive misses almost all the includes from de Qt=20
-framework (it only has qtopia/QtCore and qtopia/phonon) . But it does=20
-include the libs and binaries.
+sorry, this diff is not readable, please use a unified diff for the changes.
 
-Is this expected behaviour or am I doing something wrong?
+> 
+> The qte toolchain has created properly, my own do not.
 
-Thanks,
-Arjan
-
-
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+So you say bitbake meta-toolchain-qte is working?
 
 
