@@ -1,37 +1,40 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OUI2l-0006bJ-5u
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OUI9X-00014Q-Ou
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 13:35:14 +0200
-Received: from p5b032f87.dip.t-dialin.net ([91.3.47.135] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OUHy5-0004PG-HS by authid <stefan@sostec.de> with cram_md5
+	Thu, 01 Jul 2010 13:42:00 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id BD2C0110009E
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 13:30:12 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OUHy4-0004LZ-Ly
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 13:30:08 +0200
-Date: Thu, 1 Jul 2010 13:30:08 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Thu,  1 Jul 2010 13:37:16 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id E0EFC110009C
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 13:37:15 +0200 (CEST)
+Received: from rhein.familie-heinold.de (f052231110.adsl.alicedsl.de
+	[78.52.231.110]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 13:37:15 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id BAE943C12E; Thu,  1 Jul 2010 13:37:11 +0200 (CEST)
+Date: Thu, 1 Jul 2010 13:37:11 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100701113008.GB12260@excalibur.local>
+Message-ID: <20100701113709.GA8914@rhein.zuhause.netz>
 References: <i0hp61$n03$1@dough.gmane.org>
-	<20100701105500.GA12260@excalibur.local>
-	<i0htq1$7dm$1@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <i0htq1$7dm$1@dough.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
+In-Reply-To: <i0hp61$n03$1@dough.gmane.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: java staging problem
@@ -48,26 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 11:35:19 -0000
+X-List-Received-Date: Thu, 01 Jul 2010 11:42:01 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Hello.
+Hi,
 
-On Thu, 2010-07-01 at 13:22, Koen Kooi wrote:
-> > 
-> > Right now I would be happy to have a reliable build and then work towards
-> > getting it mor sane and bring it into OE. Thats blocking me a bit here from
-> > further upstream work, but we will get behind it.
-> 
-> I pushed all the magic needed to build it for angstrom:
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=90249cc563b916a4d764573156042fd8998f0731
-> 
-> That should make it easier for other people to test.
+the problem is in java-library.bbclass which defines it's own stage.
 
-Good. Lets work on a cleaner solution once build problems have been settled.
+The quickest solution is to add 
 
-regards
-Stefan Schmidt
+do_stage_append() {
+	oe_jarinstall -s serializer-${PV}.jar serializer.jar
+}
+
+to the xalan recipe will do it after the Email.
+
+The best solution is to remove the do_stage from java-library.bbclass
+and teach the new staging system to put the java.jars into the nonearch-java-sysroot.
+
+As Marcin pointed out earlier staging the jar's under arch-sysroot breaks
+building whith multiple-archs in the same tmp-dir.
+
+Bye Henning
+
+PS: Seems I didn't hit this because of all my building machine has xalan installed from os.
 
 
