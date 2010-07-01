@@ -1,43 +1,31 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1OUIc6-00021w-6M
+	(envelope-from <holger+oe@freyther.de>) id 1OUIwI-0002nV-S2
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 14:11:43 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 70F28A5670
+	Thu, 01 Jul 2010 14:32:24 +0200
+Received: from [123.192.240.117] (unknown [123.192.240.117])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 754581B10C09
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jul 2010 13:06:46 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id C2VrPCuYgmMF
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jul 2010 13:06:46 +0100 (BST)
-Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id DAEFFA566E
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  1 Jul 2010 13:06:45 +0100 (BST)
-Date: Thu, 1 Jul 2010 13:07:24 +0100
-From: Graeme Gregory <dp@xora.org.uk>
+	Thu,  1 Jul 2010 12:29:25 +0000 (UTC)
+Message-ID: <4C2C89B7.6040709@freyther.de>
+Date: Thu, 01 Jul 2010 20:27:35 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
+	Thunderbird/3.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100701130724.25b3c926@xora-desktop.xora.org.uk>
-In-Reply-To: <AANLkTimkcS9sUwgwykKcksbWMJvo1jolGpB-oaznT2bg@mail.gmail.com>
-References: <4C0F9119.3000909@freyther.de> <4C2B1BC4.2030808@freyther.de>
-	<i0f8ct$acp$1@dough.gmane.org> <4C2B446A.5040301@freyther.de>
-	<i0hl7b$8uu$1@dough.gmane.org>
-	<AANLkTimkcS9sUwgwykKcksbWMJvo1jolGpB-oaznT2bg@mail.gmail.com>
-X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+References: <4C2C5912.80308@jak.nl>
+In-Reply-To: <4C2C5912.80308@jak.nl>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: TSC Meetings for the meeting of June
+Subject: Re: meta-toolchain-qte produces toolchain with missing Qt include dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,26 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 12:11:45 -0000
-Content-Type: text/plain; charset=US-ASCII
+X-List-Received-Date: Thu, 01 Jul 2010 12:32:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Thu, 1 Jul 2010 13:52:26 +0200
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
-> Net effect: either older versions are not updated, or the versions are
-> updated but not tested. In both cases IMHO quality-wise a less
-> desirable situation.
+On 07/01/2010 05:00 PM, Arjan wrote:
+> I'm trying to build the sdk as described in de OE manual.
+> [http://docs.openembedded.org/usermanual/usermanual.html#id501110]
+> I did not modify the qt4-embedded.inc or qt4.inc.
+> The final sdk archive misses almost all the includes from de Qt
+> framework (it only has qtopia/QtCore and qtopia/phonon) . But it does
+> include the libs and binaries.
 > 
-> Then again, I tried to fight the version diarrhea, and I lost.So be
-> it. But don't come and ask me to improve the quality of recipes that
-> IMHO should have been discarded long time ago.
-> 
-Aaaaargh how many times do I have to say this, removing a recipe just
-because it is old is not acceptable to me. Removing a recipe because
-its discovered old versions are broken and no DISTRO is interested in
-that old version is perfectly acceptable (as long as a strong
-maintainer is kept in the loop if exists).
+> Is this expected behaviour or am I doing something wrong?
 
-Graeme
+Well, if the example in the manual to build an application doesn't work,
+then it is obviously broken...
 
 
