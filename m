@@ -1,48 +1,46 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OU6v7-0008FY-Np
+	(envelope-from <joaohf@gmail.com>) id 1OU7IV-0000kI-4R
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 01:42:23 +0200
-Received: by pwi10 with SMTP id 10so534907pwi.6
+	Thu, 01 Jul 2010 02:06:35 +0200
+Received: by gwj18 with SMTP id 18so864195gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jun 2010 16:37:36 -0700 (PDT)
+	Wed, 30 Jun 2010 17:01:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=jIul4o4wX/XikU7TBCb6DFvYa76q84puQ8Hdst63fo0=;
-	b=KpifcyMZpIm1AIXfhbxnX/9oCq5pZ5X8yPdhVllo83ouO9iHL2LhgGzgqlI+dHphJJ
-	PUzrh8l7Uj9DrLH6ujcj89cjGfWGML+e/lOcDO+cWcjMtihfhvbBT+US48Es2dGKVe+T
-	mfom/7YBqqU3Dhch5uo8YE02hDjIt+MSRu2jE=
+	bh=Lu/mo7XeZ7YkzWhKBQEgn9U6u1Nqb/iXn8qosTfFQUE=;
+	b=xz+24o7LalvIpLL27PRKrl8OA48Y5wGvlqXa79mObdKzoCG412TYJaU7ahtwI6tUQH
+	+azVHIkywSxN7nBSL1kNigV0bHvLOHGE+ErQzuThevboAIgMuvFp4NYtNLz82S4U/+C5
+	j+3iQT6Yo3Wt8cb0DwwPqjCdXhSIVNrFzKQ2o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=dC8AYXcrGcXvmjv1Pv0DCinMF954KDBaZNxfmSEseOmyccsfVfdPciyImWf2UuJUq1
-	Hi9XE/aZ2HnwwJamie38DjQWCAFgD2RY6TUoCnizZrsivzS2q5RB6hRcuoaT5eSTjY3+
-	Srgs0OJPKqyYc6oWe+6FKbn9gU2Ie6epP5pcU=
-Received: by 10.114.189.13 with SMTP id m13mr10382836waf.130.1277941056293;
-	Wed, 30 Jun 2010 16:37:36 -0700 (PDT)
-Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	j18sm71515523wan.13.2010.06.30.16.37.34
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 30 Jun 2010 16:37:35 -0700 (PDT)
-Message-ID: <4C2BD53A.40507@gmail.com>
-Date: Thu, 01 Jul 2010 09:07:30 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
+	b=XtynAqIUmnBcfPTx47Pv6Q8OUYH7UfsIu9ecTgm/y05Jiw+toLvj3tXRj469Eu2om8
+	dWslAMXMy7jTPlm+yqcgpMmmsm5HXVLI8JQITgEJqSv+Pt9abHQfmLwlJe1ILe0oQbdF
+	ZrqEPb0vap1IGF7jQahG+v4cexn5SYq85GNLI=
 MIME-Version: 1.0
+Received: by 10.229.215.138 with SMTP id he10mr5610930qcb.60.1277942505236; 
+	Wed, 30 Jun 2010 17:01:45 -0700 (PDT)
+Received: by 10.229.22.18 with HTTP; Wed, 30 Jun 2010 17:01:45 -0700 (PDT)
+In-Reply-To: <i0epov$ke6$2@dough.gmane.org>
+References: <1277858599-27400-1-git-send-email-joaohf@gmail.com>
+	<1277858599-27400-2-git-send-email-joaohf@gmail.com>
+	<i0epov$ke6$2@dough.gmane.org>
+Date: Wed, 30 Jun 2010 21:01:45 -0300
+Message-ID: <AANLkTilFFfYgxvAGUG3p3XUipVFc19mIB7Xrf1NATWmR@mail.gmail.com>
+From: =?UTF-8?Q?Jo=C3=A3o_Henrique_Freitas?= <joaohf@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: joaohf@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] xserver-kdrive_1.5.3.bb: add openssl to DEPENDS.
+Subject: Re: [PATCH 1/2] add cmake 2.8.1recipes/cmake/cmake-native_2.8.1.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,48 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 30 Jun 2010 23:42:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 01 Jul 2010 00:06:35 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-The build fails without openssl.
+Hi,
 
-| mipsel-oe-linux-libtool: compile:  ccache mipsel-oe-linux-gcc -march=mips32 -DHAVE_CONFIG_H -I. -I../include -isystem/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include -DHAVE_DIX_CONFIG_H -Wall -Wpointer-arith -Wstrict-prototypes -Wmissing-prototypes -Wmissing-declarations -Wnested-externs -fno-strict-aliasing -D_BSD_SOURCE -DHAS_FCHOWN -DHAS_STICKY_DIR_BIT -DDBUS_API_SUBJECT_TO_CHANGE -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/freetype2 -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/pixman-1 -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/hal -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/dbus-1.0 -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/lib/dbus-1.0/include -I/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/home/grg/oe2/tmp/sysroots/x86_64-linux/usr/include -I../include -I../include -I../Xext -I../composite -I../damageext -I../xfixes -I../Xi -I../mi -I../miext/shadow -I../miext/damage -I../render -I../randr -I../fb -I/home/
-grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include/xextproto-70 -isystem/home/grg/oe2/tmp/sysroots/mipsel-oe-linux/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -Os -MT glyph.lo -MD -MP -MF .deps/glyph.Tpo -c glyph.c  -fPIC -DPIC -o .libs/glyph.o
-| glyph.c:30:25: error: openssl/sha.h: No such file or directory
-| glyph.c: In function 'HashGlyph':
-| glyph.c:205: error: 'SHA_CTX' undeclared (first use in this function)
-| glyph.c:205: error: (Each undeclared identifier is reported only once
-| glyph.c:205: error: for each function it appears in.)
-| glyph.c:205: error: expected ';' before 'ctx'
-| glyph.c:208: warning: implicit declaration of function 'SHA1_Init'
-| glyph.c:208: warning: nested extern declaration of 'SHA1_Init'
-| glyph.c:208: error: 'ctx' undeclared (first use in this function)
-| glyph.c:212: warning: implicit declaration of function 'SHA1_Update'
-| glyph.c:212: warning: nested extern declaration of 'SHA1_Update'
-| glyph.c:220: warning: implicit declaration of function 'SHA1_Final'
-| glyph.c:220: warning: nested extern declaration of 'SHA1_Final'
-| make[1]: *** [glyph.lo] Error 1
+I think  'bitbake cmake' will not run if the host can't run the 'cmake' bin=
+ary.
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/xorg-xserver/xserver-kdrive_1.5.3.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+cmake is a tool wich is not to be cross compiled but cmake can be used
+to cross compile programs.
 
-diff --git a/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb b/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
-index 7250a61..7fbdff2 100644
---- a/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
-+++ b/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
-@@ -1,6 +1,6 @@
- require xserver-kdrive-common.inc
- 
--DEPENDS += "hal libxkbfile libxcalibrate pixman"
-+DEPENDS += "hal libxkbfile libxcalibrate pixman openssl"
- RDEPENDS_${PN} += "hal"
- 
- DEFAULT_PREFERENCE = "-99" 
--- 
-1.7.1
 
+--=20
+-----------------------------------------------------------
+Jo=C3=A3o Henrique Freitas - joaohf_at_gmail.com
+Campinas-SP-Brasil
+BSD051283
+LPI 1
+http://www.joaohfreitas.eti.br
 
 
