@@ -1,36 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OUSWJ-0004TH-1m
+	(envelope-from <utx@penguin.cz>) id 1OUT7h-0000Qq-5r
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 00:46:13 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OUSRg-00061q-Tw from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 15:41:24 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 1 Jul 2010 15:41:24 -0700
-Received: from [172.30.80.201] ([172.30.80.201]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 1 Jul 2010 16:41:23 -0600
-Message-ID: <4C2D198E.6010603@mentor.com>
-Date: Thu, 01 Jul 2010 15:41:18 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Fri, 02 Jul 2010 01:24:50 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 4795F1417193
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 01:24:40 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id u2WHBn1cpC5V
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 01:24:31 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 50D731416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 01:24:30 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-References: <1278021938.8213.7.camel@utx.utx.cz>
-In-Reply-To: <1278021938.8213.7.camel@utx.utx.cz>
-X-OriginalArrivalTime: 01 Jul 2010 22:41:23.0837 (UTC)
-	FILETIME=[888F22D0:01CB196E]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <4C2D198E.6010603@mentor.com>
+References: <1278021938.8213.7.camel@utx.utx.cz> <4C2D198E.6010603@mentor.com>
+Date: Fri, 02 Jul 2010 01:19:56 +0200
+Message-ID: <1278026396.8213.51.camel@utx.utx.cz>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.2 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: invalid removal of rpath from native binaries during installation or staging
@@ -47,36 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 22:46:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 01 Jul 2010 23:24:50 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-Stanislav Brabec wrote:
-> Hallo.
-> 
-> Packages like perl-native and gettext-native compile correctly, but then
-> stage broken binaries, that miss rpath from binaries. Such binaries work
-> only if the library of the same name exists in the host system, which is
-> not correct.
-> 
-> Example:
-> ERROR: log data follows (/OE/build/tmp/work/x86_64-linux/libxml-parser-perl-native-2.36-r2/temp/log.do_configure.27765)
-> | perl: error while loading shared libraries: libperl.so: cannot open shared object file: No such file or directory
-> 
-> Now try:
-> ben:/OE/build> /OE/build/tmp/sysroots/x86_64-linux/usr/bin/perl
-> /OE/build/tmp/sysroots/x86_64-linux/usr/bin/perl: error while loading shared libraries: libperl.so: cannot open shared object file: No such file or directory
-> ben:/OE/build> /OE/build/tmp/work/x86_64-linux/perl-native-5.8.8-r19/perl-5.8.8/perl
-> (this instance works)
-> 
-> Work around: simply copy binaries from work directly to sysroots and compilation continues correctly.
+Tom Rini wrote:
 
-Can you use readelf -d on your perl?  The whole point of the relative 
-path calculation that relocatable.bbclass does is to fix the hard cases 
-like perl.   Thanks!
+> Can you use readelf -d on your perl?  The whole point of the relative 
+> path calculation that relocatable.bbclass does is to fix the hard cases 
+> like perl.   Thanks!
+> 
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+I found the problem:
+
+The runtime expansion of $ORIGIN works only if /proc is mounted!
+
+My build environment is a minimal openSUSE 11.2 x86_64 subset inside
+chroot with no /proc, /sys, and /dev with null zero and few other static
+items.
+
+Not having /proc is an advantage in most cases (cross configure cannot
+check host system), but breaks in this case.
+
+Maybe it would be nice to allow to configure to not inherit relocatable
+in native.bbclass for people who don't want to mount /proc.
+
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
