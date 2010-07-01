@@ -1,42 +1,40 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OUIOD-0001NG-CV
+	(envelope-from <dp@xora.org.uk>) id 1OUIc6-00021w-6M
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 13:57:10 +0200
-Received: by bwz10 with SMTP id 10so250602bwz.6
+	Thu, 01 Jul 2010 14:11:43 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 70F28A5670
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 04:52:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AjgoH7wCt/V4Zmvb9K3Jyv2NcEc8FTIKKsNfNvLJI78=;
-	b=KjuMf26bIKwA5iNnOoWpN191DPPj2VGQvpWCmR3wGTv95HA8lYudqJkZH0YI/T83ft
-	zCTDc/SjoBwTXM3+InOpW7deVC5jj/Xfe5xI8ZrtMEZwxfhWT0f3PgBJsokd6GlUUKXr
-	5OkEGOeCDF1Rx+Zo4KVryFl5VXzrcCgwotYdo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=GWiWJceYsc+uWj/ddruEIU21GAf+H0skRhrXdeMdCGuBgzGg8kA4u55+LCVMhs9r21
-	u7Msvsm90g2Scapnij99uTlnj7PS+MFrS5Q1nOjuUL0y2ceMkeCOiwiQOMEZop5k3GQm
-	wRLYSNcmg208kD8HCGhgm+QcuChg2Aeq0eGYM=
-MIME-Version: 1.0
-Received: by 10.204.73.195 with SMTP id r3mr7400148bkj.147.1277985146441; Thu, 
-	01 Jul 2010 04:52:26 -0700 (PDT)
-Received: by 10.204.73.81 with HTTP; Thu, 1 Jul 2010 04:52:26 -0700 (PDT)
-In-Reply-To: <i0hl7b$8uu$1@dough.gmane.org>
+	Thu,  1 Jul 2010 13:06:46 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id C2VrPCuYgmMF
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 13:06:46 +0100 (BST)
+Received: from xora-desktop.xora.org.uk (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id DAEFFA566E
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  1 Jul 2010 13:06:45 +0100 (BST)
+Date: Thu, 1 Jul 2010 13:07:24 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100701130724.25b3c926@xora-desktop.xora.org.uk>
+In-Reply-To: <AANLkTimkcS9sUwgwykKcksbWMJvo1jolGpB-oaznT2bg@mail.gmail.com>
 References: <4C0F9119.3000909@freyther.de> <4C2B1BC4.2030808@freyther.de>
 	<i0f8ct$acp$1@dough.gmane.org> <4C2B446A.5040301@freyther.de>
 	<i0hl7b$8uu$1@dough.gmane.org>
-Date: Thu, 1 Jul 2010 13:52:26 +0200
-Message-ID: <AANLkTimkcS9sUwgwykKcksbWMJvo1jolGpB-oaznT2bg@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	<AANLkTimkcS9sUwgwykKcksbWMJvo1jolGpB-oaznT2bg@mail.gmail.com>
+X-Mailer: Claws Mail 3.7.6 (GTK+ 2.20.1; x86_64-redhat-linux-gnu)
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: TSC Meetings for the meeting of June
@@ -53,91 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 11:57:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 01 Jul 2010 12:11:45 -0000
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
 
-2010/7/1 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 30-06-10 15:19, Holger Freyther wrote:
->
->> In regard to the TSC, what mode of operation do you propose? We freeze
->> the tree until all items are implemented in the order they are proposed?
->> We find people driving a topic?
->
-> In this specific case you (or the TSC) choose to work on a extremely
-> intrusive and controversial *cosmetic* change first instead of tackling
-> the some of the (IMO more important) items agreed on earlier:
->
-> * making QA checks be enabled by default
-> * promoting new style staging and converting existing recipes
-> * promoting bbclassextend and converting existing recipes
-> * fixing nativesdk
+On Thu, 1 Jul 2010 13:52:26 +0200
+Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
+> Net effect: either older versions are not updated, or the versions are
+> updated but not tested. In both cases IMHO quality-wise a less
+> desirable situation.
+> 
+> Then again, I tried to fight the version diarrhea, and I lost.So be
+> it. But don't come and ask me to improve the quality of recipes that
+> IMHO should have been discarded long time ago.
+> 
+Aaaaargh how many times do I have to say this, removing a recipe just
+because it is old is not acceptable to me. Removing a recipe because
+its discovered old versions are broken and no DISTRO is interested in
+that old version is perfectly acceptable (as long as a strong
+maintainer is kept in the loop if exists).
 
-As stated before the TSC is responsible for deciding on the road
-forward, notably on controversial issues, NOT for implementing them.
-The TSC handles issues that are brought up by the community.
-I'd say if the TSC decided e.g. on new style staging as the way
-forward it is up to the people who requested a ruling on this to take
-it forward.
-
->
-> By skipping over those, without saying why and going for the cosmetic
-> change the TSC is sending out a signal that they do NOT care about
-> quality, only appearance. In the past I was proud about how OE handled
-> things by the things you yourself created, like insane.bbclass, the
-> first edition of tinderbox, etc. But recently only 2 groups of OE
-> developers seem to care about quality, the SHR and angstrom folk. Those
-> are the only 2 distros that have the QA checks enabled. Due to the
-> nature of OE other benefit from the awesome work Martin and Khem have
-> been doing, but it feels a bit one sided to me.
-
-I do care about quailty (although not being part of the SHR or
-angstrom folks), but unfortunately your perception on quality and mine
-differ substantially.
-For me a goal would be to have a set of high quality recipes. Others
-seem to mix up quality and quantity and think quality has to do with
-having many versions of a recipe around.
-Of course that does not really help to make high quality recipes.
-Updating many versions is a lot more work (and not too rewarding if
-you just use a single version). Also testing all those versions is a
-PITA.
-Net effect: either older versions are not updated, or the versions are
-updated but not tested. In both cases IMHO quality-wise a less
-desirable situation.
-
-Then again, I tried to fight the version diarrhea, and I lost.So be it.
-But don't come and ask me to improve the quality of recipes that IMHO
-should have been discarded long time ago.
-
-Frans.
->
-> Since nearly all OE developers can't work fulltime on OE, I would
-> propose that the TSC sends out a few "call to action" mails, describing
-> the tasks that need doing and some guidance on how they want to see it
-> done. I will *gladly* help out, but I need to know what needs doing and
-> avoid duplicate work.
->
-> It would help to have a "completed action items", "in progress action
-> items" and "action items that noone is working on" list in the TSC
-> minutes (or wiki) to keep track of stuff.
->
-> And of course a big thank you to all the people working on QA that I
-> didn't mention.
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMLFgrMkyGM64RGpERAtCVAJ4xp7Lxx91AwSUN7DgEwxasSjr4gACgi2/n
-> qbbTDqsfC2RlFjxhRglNtZ4=
-> =zIjM
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Graeme
 
 
