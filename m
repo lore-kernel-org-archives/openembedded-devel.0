@@ -1,33 +1,34 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OUDFn-0007Hb-JA
+	(envelope-from <raj.khem@gmail.com>) id 1OUDGq-00088r-4s
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 08:28:23 +0200
-Received: by iwn34 with SMTP id 34so1727562iwn.6
+	Thu, 01 Jul 2010 08:29:14 +0200
+Received: by iwn34 with SMTP id 34so1728330iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 30 Jun 2010 23:23:24 -0700 (PDT)
+	Wed, 30 Jun 2010 23:24:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=byqmjCGhtdrCdvmeRwAMW1aBg1d0W6APIXVNh19h00Y=;
-	b=phPYzS+HNJ0ubyaJm7curP5TW4iG3gcommsghukBfyZiSRkVtmN+Ah46GuLO8uZPhF
-	kmbBfA1/zj6ujc7uamnMkTAoQ5Ypp2VczYzxKklw3gfE7u8AZj/MBF3jBtuSwNrtiwTJ
-	89+Z54vsOOGa5TqbfTT+dkV/Ev3lyuwKAqjZg=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=N9Nhmmth5EnN2agoCOUODnFl+d8+ziiCuJIWf/Pu2oU=;
+	b=nks4XuXzGO7YqMDh5m/haaGNadwSSRQ3Xx734x/mXIiyrK1ySd7nmxSUca0egNSHyf
+	OEpFVMY+UVj8PeR+FhXKJUacV2P0Eyl2uNMFsGMaEIG9plfpdEANzwiP1Jap3K5hk+hp
+	ZFEsxA3uztkVpmBjUgHDjJ1dHFH0WMsrjcLNk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=Fbom3NLWNNRQ7//6x4JcjSbwyFsACuXQVm/fr1c8Caf0fblzNzOB4FCqvnIqux7JrW
-	Y3SS1yDBnfpcA5csKTBpZXMnnsxYo/R5i00hxuiSFd8q4/djIRrn7qJJuWm00VRV0L9O
-	AmV0KoKaqL2fJm5nw628ROH8fHyt834YCNQus=
-Received: by 10.231.183.19 with SMTP id ce19mr9414772ibb.35.1277965404271; 
-	Wed, 30 Jun 2010 23:23:24 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=F8aOeacxH0UYNVP473ntjik5J0gLQK9WhWHKq/6KZRur9yCuMKfC4l3aoexQ32qJUd
+	TUH9g1wPKimn6vDw72rbTtHN1wuANXkFZuhf14ghclGhi556B0VgcC7yzXa/ucCFeYRh
+	XX242niPJRQ5sDXp3vT4l+enF5mpthE7lizwU=
+Received: by 10.231.161.135 with SMTP id r7mr10243265ibx.47.1277965469187; 
+	Wed, 30 Jun 2010 23:24:29 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.14.131 with HTTP; Wed, 30 Jun 2010 23:23:04 -0700 (PDT)
-In-Reply-To: <AANLkTimMVcS5I1GcVuqa1eTwZ4YIqb0NaJMqd1nepQYv@mail.gmail.com>
-References: <AANLkTimMVcS5I1GcVuqa1eTwZ4YIqb0NaJMqd1nepQYv@mail.gmail.com>
+Received: by 10.231.14.131 with HTTP; Wed, 30 Jun 2010 23:24:09 -0700 (PDT)
+In-Reply-To: <4C2BE886.8000900@gmail.com>
+References: <4C2BE886.8000900@gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 30 Jun 2010 23:23:04 -0700
-Message-ID: <AANLkTilGJjsqfz2zu4m3m5vQ99jCX44CrtFUSiRTpkE9@mail.gmail.com>
+Date: Wed, 30 Jun 2010 23:24:09 -0700
+Message-ID: <AANLkTikyD3zXs5XAWDCCszKvlKHnoIom4GfZr7zmIv7y@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -37,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC} cleanup glibc
+Subject: Re: [PATCH] xserver-kdrive_1.5.3.bb: enable the XCALIBRATE extension.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,84 +52,140 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 06:28:23 -0000
+X-List-Received-Date: Thu, 01 Jul 2010 06:29:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Jun 30, 2010 at 1:02 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> Triggered by a short discussion on irc with woglinde, I would like to
-> suggest the following cleanup actions for glibc.
+On Wed, Jun 30, 2010 at 5:59 PM, Graham Gower <graham.gower@gmail.com> wrot=
+e:
 >
-> 1. rewrite the recipes so they do not use patches in the dir of
-> another version. Better copy those. That makes clearer who uses what,
-> and avoids problems if a recipe is removed.
-> (btw if people are against having copies, I suggest to put common
-> patches in a dir whose name actually resembles it is for multiple
-> versions e.g. glibc-2.4-2.5 or so)
-> 2. remove some old recipes that are not pinned. Reason for removing
-> them is that it reduces the amount of work needed for step 1
->
-> currently we have:
->
-> glibc-initial_2.10.1.bb
-> glibc-initial_2.2.5.bb
-> glibc-initial_2.3.2+cvs20040726.bb
-> glibc-initial_2.3.2.bb
-> glibc-initial_2.3.6.bb
-> glibc-initial_2.4.bb
-> glibc-initial_2.5.bb
-> glibc-initial_2.6.1.bb
-> glibc-initial_2.7.bb
-> glibc-initial_2.9.bb
-> glibc-initial_cvs.bb
-> glibc_2.10.1.bb
-> glibc_2.2.5.bb
-> glibc_2.3.2+cvs20040726.bb
-> glibc_2.3.2.bb
-> glibc_2.3.3+cvs20041128.bb
-> glibc_2.3.3+cvs20050221.bb
-> glibc_2.3.3+cvs20050420.bb
-> glibc_2.3.3.bb
-> glibc_2.3.5+cvs20050627.bb
-> glibc_2.3.6.bb
-> glibc_2.4.bb
-> glibc_2.5.bb
-> glibc_2.6.1.bb
-> glibc_2.7.bb
-> glibc_2.9.bb
-> glibc_cvs.bb
->
-> suggestion is to remove the following versions because no one uses
-> them: (verified by grepping for them in conf/distro (with -r)
->
-> glibc-initial_2.3.2+cvs20040726.bb
-> glibc-initial_2.3.6.bb
-> glibc-initial_2.4.bb
-> glibc-initial_2.7.bb
-> glibc_2.3.2+cvs20040726.bb
-> glibc_2.3.3+cvs20041128.bb
-> glibc_2.3.3+cvs20050221.bb
-> glibc_2.3.3+cvs20050420.bb
-> glibc_2.3.6.bb
-> glibc_2.4.bb
-> glibc_2.7.bb
->
-> I think the following are also obsolete, but I would like to get
-> advise for these
-> glibc-initial_cvs.bb
-> glibc_cvs.bb
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
 
-yes they could be converted into _git
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
+> ---
+> =A0.../xserver-kdrive-1.5.3/enable-xcalibrate.patch =A0 | =A0 58 ++++++++=
+++++++++++++
+> =A0recipes/xorg-xserver/xserver-kdrive_1.5.3.bb =A0 =A0 =A0 | =A0 =A03 +-
+> =A02 files changed, 60 insertions(+), 1 deletions(-)
+> =A0create mode 100644 recipes/xorg-xserver/xserver-kdrive-1.5.3/enable-xc=
+alibrate.patch
 >
-> What do people think about this?
-
-good plan. I think we should work towards reducing
-the recipes for some packages before they become
-unmanagable
-
+> diff --git a/recipes/xorg-xserver/xserver-kdrive-1.5.3/enable-xcalibrate.=
+patch b/recipes/xorg-xserver/xserver-kdrive-1.5.3/enable-xcalibrate.patch
+> new file mode 100644
+> index 0000000..ed6c5dc
+> --- /dev/null
+> +++ b/recipes/xorg-xserver/xserver-kdrive-1.5.3/enable-xcalibrate.patch
+> @@ -0,0 +1,58 @@
+> +diff -ur xorg-server-1.5.3-blah/configure.ac xorg-server-1.5.3/configure=
+.ac
+> +--- xorg-server-1.5.3-blah/configure.ac =A0 =A0 =A0 =A02010-07-01 09:54:=
+18.000000000 +0930
+> ++++ xorg-server-1.5.3/configure.ac =A0 =A0 2010-07-01 09:59:24.000000000=
+ +0930
+> +@@ -544,6 +544,7 @@
+> + AC_ARG_ENABLE(xace, =A0 =A0 =A0 =A0 =A0 AS_HELP_STRING([--disable-xace]=
+, [Build X-ACE extension (default: enabled)]), [XACE=3D$enableval], [XACE=
+=3Dyes])
+> + AC_ARG_ENABLE(xselinux, =A0 =A0 =A0 AS_HELP_STRING([--disable-xselinux]=
+, [Build SELinux extension (default: disabled)]), [XSELINUX=3D$enableval], =
+[XSELINUX=3Dno])
+> + AC_ARG_ENABLE(xcsecurity, =A0 =A0 AS_HELP_STRING([--disable-xcsecurity]=
+, [Build Security extension (default: disabled)]), [XCSECURITY=3D$enableval=
+], [XCSECURITY=3Dno])
+> ++AC_ARG_ENABLE(xcalibrate, =A0 =A0 AS_HELP_STRING([--enable-xcalibrate],=
+ [Build XCalibrate extension (default: disabled)]), [XCALIBRATE=3D$enableva=
+l], [XCALIBRATE=3Dno])
+> + AC_ARG_ENABLE(appgroup, =A0 =A0 =A0 AS_HELP_STRING([--disable-appgroup]=
+, [Build XC-APPGROUP extension (default: disabled)]), [APPGROUP=3D$enableva=
+l], [APPGROUP=3D$XCSECURITY])
+> + AC_ARG_ENABLE(xcalibrate, =A0 =A0 AS_HELP_STRING([--enable-xcalibrate],=
+ [Build XCalibrate extension (default: disabled)]), [XCALIBRATE=3D$enableva=
+l], [XCALIBRATE=3Dno])
+> + AC_ARG_ENABLE(tslib, =A0 =A0 =A0 =A0 =A0AS_HELP_STRING([--enable-tslib]=
+, [Build kdrive tslib touchscreen support (default: disabled)]), [TSLIB=3D$=
+enableval], [TSLIB=3Dno])
+> +@@ -906,6 +907,12 @@
+> + =A0 =A0 =A0 AC_DEFINE(XCSECURITY, 1, [Build Security extension])
+> + fi
+> +
+> ++AM_CONDITIONAL(XCALIBRATE, [test "x$XCALIBRATE" =3D xyes])
+> ++if test "x$XCALIBRATE" =3D xyes; then
+> ++ =A0 =A0 =A0AC_DEFINE(XCALIBRATE, 1, [Build XCalibrate extension])
+> ++ =A0 =A0 =A0REQUIRED_MODULES=3D"$REQUIRED_MODULES xcalibrateproto"
+> ++fi
+> ++
+> + AM_CONDITIONAL(XEVIE, [test "x$XEVIE" =3D xyes])
+> + if test "x$XEVIE" =3D xyes; then
+> + =A0 =A0 =A0 AC_DEFINE(XEVIE, 1, [Build XEvIE extension])
+> +diff -ur xorg-server-1.5.3-blah/include/kdrive-config.h.in xorg-server-1=
+.5.3/include/kdrive-config.h.in
+> +--- xorg-server-1.5.3-blah/include/kdrive-config.h.in =A02010-07-01 09:5=
+4:18.000000000 +0930
+> ++++ xorg-server-1.5.3/include/kdrive-config.h.in =A0 =A0 =A0 2010-07-01 =
+09:55:02.000000000 +0930
+> +@@ -31,4 +31,7 @@
+> + /* Have execinfo.h for backtrace(). */
+> + #undef HAVE_EXECINFO_H
+> +
+> ++/* Enable XCalibrate extension */
+> ++#undef XCALIBRATE
+> ++
+> + #endif /* _KDRIVE_CONFIG_H_ */
+> +diff -ur xorg-server-1.5.3-blah/mi/miinitext.c xorg-server-1.5.3/mi/miin=
+itext.c
+> +--- xorg-server-1.5.3-blah/mi/miinitext.c =A0 =A0 =A02010-07-01 09:54:17=
+.000000000 +0930
+> ++++ xorg-server-1.5.3/mi/miinitext.c =A0 2010-07-01 09:55:02.000000000 +=
+0930
+> +@@ -374,6 +374,9 @@
+> + #ifdef DMXEXT
+> + extern void DMXExtensionInit(INITARGS);
+> + #endif
+> ++#ifdef XCALIBRATE
+> ++extern void XCalibrateExtensionInit(INITARGS);
+> ++#endif
+> + #ifdef XEVIE
+> + extern void XevieExtensionInit(INITARGS);
+> + #endif
+> +@@ -664,6 +667,9 @@
+> + =A0 =A0 GlxPushProvider(&__glXDRISWRastProvider);
+> + =A0 =A0 if (!noGlxExtension) GlxExtensionInit();
+> + #endif
+> ++#ifdef =A0XCALIBRATE
+> ++ =A0 =A0XCalibrateExtensionInit ();
+> ++#endif
+> + }
+> +
+> + void
+> diff --git a/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb b/recipes/xorg-=
+xserver/xserver-kdrive_1.5.3.bb
+> index 7fbdff2..9fa5579 100644
+> --- a/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
+> +++ b/recipes/xorg-xserver/xserver-kdrive_1.5.3.bb
+> @@ -6,7 +6,7 @@ RDEPENDS_${PN} +=3D "hal"
+> =A0DEFAULT_PREFERENCE =3D "-99"
 >
-> Frans
+> =A0PE =3D "1"
+> -PR =3D "${INC_PR}.1"
+> +PR =3D "${INC_PR}.2"
+>
+> =A0SRC_URI =3D "${XORG_MIRROR}/individual/xserver/xorg-server-${PV}.tar.b=
+z2 \
+> =A0 =A0 =A0 =A0${KDRIVE_COMMON_PATCHES} \
+> @@ -21,6 +21,7 @@ SRC_URI =3D "${XORG_MIRROR}/individual/xserver/xorg-ser=
+ver-${PV}.tar.bz2 \
+> =A0 =A0 =A0 =A0file://drmfix.patch \
+> =A0 =A0 =A0 =A0file://no_xkb.patch \
+> =A0 =A0 =A0 =A0file://keyboard_device.patch \
+> + =A0 =A0 =A0 file://enable-xcalibrate.patch \
+> =A0 =A0 =A0 =A0 "
+>
+> =A0S =3D "${WORKDIR}/xorg-server-${PV}"
+> --
+> 1.7.1
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
