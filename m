@@ -1,38 +1,41 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OUM8X-0002u5-4A
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 17:57:14 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OUM3v-00027D-5x from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 08:52:27 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 1 Jul 2010 08:52:26 -0700
-Received: from [172.30.80.201] ([172.30.80.201]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 1 Jul 2010 09:52:25 -0600
-Message-ID: <4C2CB9B6.1010509@mentor.com>
-Date: Thu, 01 Jul 2010 08:52:22 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OUMPl-0007J6-Kl for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 18:15:02 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OUMLC-000380-Dk for openembedded-devel@lists.openembedded.org;
+	Thu, 01 Jul 2010 18:10:18 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Jul 2010 18:10:18 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 01 Jul 2010 18:10:18 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 01 Jul 2010 18:10:01 +0200
+Message-ID: <i0iekt$aik$1@dough.gmane.org>
 References: <4C2AC77A.70102@gmail.com>
-	<4C2ACDE8.7080801@gmail.com>	<lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<i0ian8$pt3$1@dough.gmane.org>
-In-Reply-To: <i0ian8$pt3$1@dough.gmane.org>
-X-OriginalArrivalTime: 01 Jul 2010 15:52:25.0859 (UTC)
-	FILETIME=[66C8D530:01CB1935]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<4C2ACDE8.7080801@gmail.com>	<lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>	<i0ian8$pt3$1@dough.gmane.org>
+	<lybpargq0n.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <lybpargq0n.fsf@ensc-virt.intern.sigma-chemnitz.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
@@ -49,40 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 15:57:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Thu, 01 Jul 2010 16:15:03 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 01-07-10 16:55, Enrico Scholz wrote:
->> Graham Gower <graham.gower@gmail.com> writes:
->>
->>> None of the distros in OE 
->> At least the openmoko SHR distribution fetches ipkg from network and
->> requires curl support hence.
-> 
-> That's not true, with curl disabled, it calls (busybox) wget.
-> 
->>> appear to want/need gpg or curl support in opkg; so have opkg.inc
->>> remove them by default.
->> I do not think that supporting only offline mode (due to removal of
->> curl support) is a good idea.  Although the opportunistic signature
->> verification is not secure, it would be imo bad to remove gpg support
->> completely because updating embedded devices in a secure manner is
->> important.
->>
->> A better way might be to conditionalize your '--disable-*' options
->> resp. make them depend on some DISTRO_FEATURE.
-> 
-> Introducing USE flags would be a step backwards, so NAK on that.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Increasing (or decreasing...) USE flags, now there's a topic for the TSC...
+On 01-07-10 17:50, Enrico Scholz wrote:
+> Koen Kooi <k.kooi@student.utwente.nl> writes:
+> 
+>>> A better way might be to conditionalize your '--disable-*' options
+>>> resp. make them depend on some DISTRO_FEATURE.
+>>
+>> Introducing USE flags would be a step backwards, so NAK on that.
+> 
+> how would you reenable gpg and curl for https support then?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+By keeping the existing recipes?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMLL3ZMkyGM64RGpERAjgpAJ9sOanQfS347RHHdnadSNP6S+B/sgCfUmFk
+Fg/VKvMJ7AL+RjX6OWgNxMw=
+=8liu
+-----END PGP SIGNATURE-----
+
 
 
