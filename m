@@ -1,34 +1,39 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OULhX-00059f-Sc
+Received: from mail.cvg.de ([62.153.82.30])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OUM6k-0002ms-LP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 01 Jul 2010 17:29:22 +0200
-Received: (qmail invoked by alias); 01 Jul 2010 15:24:35 -0000
-Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
-	by mail.gmx.net (mp010) with SMTP; 01 Jul 2010 17:24:35 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18fEkkh7k4fVkSAF3ONKolwCyLfpKTQEWXJI1W3fI
-	3cGPcjXwjZjfZY
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Thu, 01 Jul 2010 17:55:23 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.3/8.14.3) with ESMTP id o61FoXXl010889
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 1 Jul 2010 17:50:33 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OUM24-0006wM-II; Thu, 01 Jul 2010 17:50:32 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 1 Jul 2010 17:21:13 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <201006291747.12761.schnitzeltony@gmx.de>
-	<201006301446.13623.schnitzeltony@gmx.de>
-	<i0fi85$g27$1@dough.gmane.org>
-In-Reply-To: <i0fi85$g27$1@dough.gmane.org>
+References: <4C2AC77A.70102@gmail.com> <4C2ACDE8.7080801@gmail.com>
+	<lyfx03gsjv.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<i0ian8$pt3$1@dough.gmane.org>
+Date: Thu, 01 Jul 2010 17:50:32 +0200
+In-Reply-To: <i0ian8$pt3$1@dough.gmane.org> (Koen Kooi's message of "Thu, 01
+	Jul 2010 17:03:04 +0200")
+Message-ID: <lybpargq0n.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
 MIME-Version: 1.0
-Message-Id: <201007011721.13575.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Problems bumping clutter recipes
+Cc: Koen Kooi <k.kooi@student.utwente.nl>
+Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,25 +47,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 01 Jul 2010 15:29:22 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 01 Jul 2010 15:55:23 -0000
+Content-Type: text/plain; charset=us-ascii
 
-On Wednesday 30 June 2010 03:53:09 pm Koen Kooi wrote:
-> Let me repeat:
-> 
-> Configure uses a different gl setting per machine
-> 
-> So the output is machine specific. And hence PACKAGE_ARCH = MACHINE_ARCH
+Koen Kooi <k.kooi@student.utwente.nl> writes:
 
-I do not (yet) understand why but I understand that it's not your job to teach me - but due to this situation there is on final question on that issue:
+>> A better way might be to conditionalize your '--disable-*' options
+>> resp. make them depend on some DISTRO_FEATURE.
+>
+> Introducing USE flags would be a step backwards, so NAK on that.
 
-What is the rule for making (clutter-)packages machine specific? All recipes depending on clutter?
+how would you reenable gpg and curl for https support then?
 
-By the way: I think I have found the reason why clutter-gst does not build: The constant HAVE_COGL_GLES2 is not configured in clutter-gst.
 
-Andreas
+Enrico
 
 
