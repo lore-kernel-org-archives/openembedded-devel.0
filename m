@@ -1,36 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from pegasus.russound.com ([63.139.215.218])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OUllg-0002YM-H2
+	(envelope-from <jims@RUSSOUND.COM>) id 1OUluB-0002nI-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 21:19:21 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OUlh3-0000OM-Bf from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 12:14:33 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 2 Jul 2010 12:14:32 -0700
-Received: from [172.30.80.212] ([172.30.80.212]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 2 Jul 2010 13:14:31 -0600
-Message-ID: <4C2E3A92.7010504@mentor.com>
-Date: Fri, 02 Jul 2010 12:14:26 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+	Fri, 02 Jul 2010 21:28:09 +0200
+Received: from Powerhog.RUSSOUND.COM (10.0.0.8) by pegasus.RUSSOUND.COM
+	(10.0.0.15) with Microsoft SMTP Server (TLS) id 8.1.436.0;
+	Fri, 2 Jul 2010 15:22:06 -0400
+Received: from Powerhog.RUSSOUND.COM ([127.0.0.1]) by powerhog ([127.0.0.1])
+	with mapi; Fri, 2 Jul 2010 15:22:06 -0400
+From: Jim Sheldon <jims@RUSSOUND.COM>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Jul 2010 15:22:03 -0400
+Thread-Topic: [oe] [PATCH] allow KERNEL_IMAGEDEST to be redefined
+Thread-Index: AcsaGwNmmcBJILrvSLG31yjKL1Gh+AAABBeA
+Message-ID: <7941E07E1E020448937ACA7D4279E6327B86D27E47@powerhog>
 References: <> <1278091939-24947-1-git-send-email-jims@russound.com>
-In-Reply-To: <1278091939-24947-1-git-send-email-jims@russound.com>
-X-OriginalArrivalTime: 02 Jul 2010 19:14:32.0110 (UTC)
-	FILETIME=[CD01A4E0:01CB1A1A]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+	<4C2E3A92.7010504@mentor.com>
+In-Reply-To: <4C2E3A92.7010504@mentor.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 63.139.215.218
+X-SA-Exim-Mail-From: jims@RUSSOUND.COM
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] allow KERNEL_IMAGEDEST to be redefined
@@ -47,35 +45,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jul 2010 19:19:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Jul 2010 19:28:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+
+I was hoping someone would ask :)
+
+I'm working on a product that will need updates in the field, which means p=
+otentially updating u-boot or the kernel.  Right now I'm trying to keep all=
+ of my files in one hierarchy for various reasons, so I would rather not us=
+e /boot.
+
+Thanks!
+
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Tom Rini
+Sent: Friday, July 02, 2010 3:14 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH] allow KERNEL_IMAGEDEST to be redefined
 
 Jim Sheldon wrote:
 > Signed-off-by: Jim Sheldon <jims@russound.com>
 > ---
 >  classes/kernel.bbclass |    2 +-
 >  1 files changed, 1 insertions(+), 1 deletions(-)
-> 
+>=20
 > diff --git a/classes/kernel.bbclass b/classes/kernel.bbclass
 > index b0c6534..d9c9eed 100644
 > --- a/classes/kernel.bbclass
 > +++ b/classes/kernel.bbclass
-> @@ -59,7 +59,7 @@ KERNEL_LD = "${LD}${KERNEL_LDSUFFIX} ${HOST_LD_KERNEL_ARCH}"
->  
+> @@ -59,7 +59,7 @@ KERNEL_LD =3D "${LD}${KERNEL_LDSUFFIX} ${HOST_LD_KERNEL=
+_ARCH}"
+> =20
 >  # Where built kernel lies in the kernel tree
->  KERNEL_OUTPUT ?= "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
-> -KERNEL_IMAGEDEST = "boot"
-> +KERNEL_IMAGEDEST ?= "boot"
->  
+>  KERNEL_OUTPUT ?=3D "arch/${ARCH}/boot/${KERNEL_IMAGETYPE}"
+> -KERNEL_IMAGEDEST =3D "boot"
+> +KERNEL_IMAGEDEST ?=3D "boot"
+> =20
 >  #
 >  # configuration
 
-OK, so there's nothing wrong with how this or the u-boot one are done, 
+OK, so there's nothing wrong with how this or the u-boot one are done,=20
 but why?  Thanks!
 
--- 
+--=20
 Tom Rini
 Mentor Graphics Corporation
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
