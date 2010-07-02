@@ -1,49 +1,56 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from db3ehsobe002.messaging.microsoft.com ([213.199.154.140]
+	helo=DB3EHSOBE002.bigfish.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OUUN1-0002iw-Up
+	(envelope-from <Soumya.R@kpitcummins.com>) id 1OUWRF-0005Ka-8W
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 02:44:45 +0200
-Received: by pxi12 with SMTP id 12so1174222pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 17:39:57 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=wTxzf9cC/2wXclx4rW//OF5Nt8xF/jcPo2F9EG01b2E=;
-	b=eNJTnnN+0gfbNh/vlqSp+zkdkSkPxRYhbJ1c0vOJtfXz3lt9j0qTbzBdShxRBcE5Ak
-	kOARqDr3oKlB5EIr7IPj+V8g60m8y4oZR9Y5B5ORE/Jt1MF2peetT4BMjsW1czEOK5ze
-	bOffaRF2p1FbsxhW7qBBZgkii3YPhVhPk/1Dc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=Gt5KXL8PQc9LL16mEJ1MK/AxKIAJJdTIu3P/gHot8NC6nCUO5eoEhWnNR0W4/RLYk2
-	GgpSRitZP/Zsz2D4UIu7QhhHm6LPHQzxrEs87D2CubV0fuWeNDEP7aG1liIi7cxG5PdB
-	dZSfr+tvI2veyXHYLsGWNP5Q4+k1kyemqc8oQ=
-Received: by 10.142.223.21 with SMTP id v21mr281883wfg.315.1278031197563;
-	Thu, 01 Jul 2010 17:39:57 -0700 (PDT)
-Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id 33sm89697wfg.9.2010.07.01.17.39.55
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 01 Jul 2010 17:39:57 -0700 (PDT)
-Message-ID: <4C2D3557.1040005@gmail.com>
-Date: Fri, 02 Jul 2010 10:09:51 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
+	Fri, 02 Jul 2010 04:57:19 +0200
+Received: from mail7-db3-R.bigfish.com (10.3.81.254) by
+	DB3EHSOBE002.bigfish.com (10.3.84.22) with Microsoft SMTP Server id
+	8.1.436.0; Fri, 2 Jul 2010 02:52:13 +0000
+Received: from mail7-db3 (localhost.localdomain [127.0.0.1])	by
+	mail7-db3-R.bigfish.com (Postfix) with ESMTP id 5A7A51760369	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 02:52:13 +0000 (UTC)
+X-SpamScore: -36
+X-BigFish: VPS-36(zz1432N98dN14ffO1447R9371Pzz1202hzzz32i2a8h)
+Received: from mail7-db3 (localhost.localdomain [127.0.0.1]) by mail7-db3
+	(MessageSwitch) id 1278039133149341_9431;
+	Fri,  2 Jul 2010 02:52:13 +0000 (UTC)
+Received: from DB3EHSMHS009.bigfish.com (unknown [10.3.81.254])	by
+	mail7-db3.bigfish.com (Postfix) with ESMTP id 186651AD004E	for
+	<openembedded-devel@lists.openembedded.org>;
+	Fri,  2 Jul 2010 02:52:13 +0000 (UTC)
+Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
+	DB3EHSMHS009.bigfish.com (10.3.87.109) with Microsoft SMTP Server (TLS)
+	id 14.0.482.44; Fri, 2 Jul 2010 02:52:11 +0000
+Received: from Kcinpunhjcms01.kpit.com ([169.254.1.87]) by
+	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
+	Fri, 2 Jul 2010 08:22:08 +0530
+From: Soumya R <Soumya.R@kpitcummins.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Fri, 2 Jul 2010 08:20:16 +0530
+Thread-Topic: [oe] (no subject)
+Thread-Index: AcsZUGlCfMNCjubER2a60L0tqFgg9AAQOPu3
+Message-ID: <76E258664B189C4CBEF125491CA11ECC9445E0CFE5@KCINPUNHJCMS01.kpit.com>
+References: <76E258664B189C4CBEF125491CA11ECC9445E0CFE2@KCINPUNHJCMS01.kpit.com>,
+	<AANLkTinTVmPf0NBVfHwS-VjuEPn5J-WfJMG0fAlXZvKs@mail.gmail.com>
+In-Reply-To: <AANLkTinTVmPf0NBVfHwS-VjuEPn5J-WfJMG0fAlXZvKs@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C2AC6F3.3090603@gmail.com> <4C2AE659.7040201@gmail.com>
-In-Reply-To: <4C2AE659.7040201@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-Reverse-DNS: Kcinpunhjhc01.kpit.com
+X-SA-Exim-Connect-IP: 213.199.154.140
+X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v3] dbus: fix building on mipsel and clean up PIE/pie fix to work again.
+Subject: (No subject)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,120 +64,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jul 2010 00:44:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 02 Jul 2010 02:57:19 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Subject: [PATCH v3] dbus: fix building on mipsel and clean up PIE/pie fix to work again.
+Thanks for the reply.. Yes ofcourse i forgot it will not repeat again sorry=
+..
 
-D-Bus fails to link with --gc-sections on mipsel.
+Regards,
+Soumya
+________________________________________
+From: openembedded-devel-bounces@lists.openembedded.org [openembedded-devel=
+-bounces@lists.openembedded.org] On Behalf Of Khem Raj [raj.khem@gmail.com]=
 
-|   CCLD   dbus-daemon
-| collect2: ld returned 1 exit status
-| make[2]: *** [dbus-daemon] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| /home/grg/oe2/tmp/cross/mipsel/lib/gcc/mipsel-oe-linux/4.4.4/../../../../mipsel-oe-linux/bin/ld: can not make stub section: File format not recognized
-| /home/grg/oe2/tmp/cross/mipsel/lib/gcc/mipsel-oe-linux/4.4.4/../../../../mipsel-oe-linux/bin/ld: failed to set dynamic section sizes: File format not recognized
+Sent: Friday, July 02, 2010 12:34 AM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] (no subject)
 
-Also, the previous fPIE/pie fix no longer works.
-While here, clean up INC_PR.
+On Thu, Jul 1, 2010 at 3:19 AM, Soumya R <Soumya.R@kpitcummins.com> wrote:
+> Hi All,
+>
+>      I need to include root file system in my uImage how can i
+> do that in OpenEmbedded.
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/dbus/dbus.inc       |   11 ++++++++---
- recipes/dbus/dbus_1.2.20.bb |    2 ++
- recipes/dbus/dbus_1.2.22.bb |    2 ++
- recipes/dbus/dbus_1.2.24.bb |    2 ++
- recipes/dbus/dbus_1.3.0.bb  |    4 ++--
- 5 files changed, 16 insertions(+), 5 deletions(-)
+look into initramfs.
+Dont you think adding subject to email makes sense.?
 
-diff --git a/recipes/dbus/dbus.inc b/recipes/dbus/dbus.inc
-index ec66960..55a156d 100644
---- a/recipes/dbus/dbus.inc
-+++ b/recipes/dbus/dbus.inc
-@@ -4,7 +4,7 @@ SECTION = "base"
- LICENSE = "GPL"
- DEPENDS = "expat glib-2.0 virtual/libintl libsm libice virtual/libx11"
- 
--INC_PR = "r18"
-+INC_PR = "r19"
- 
- SRC_URI = "\
-   http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz;name=dbus \
-@@ -35,8 +35,13 @@ EXTRA_OECONF = "\
-   ${EXTRA_OECONF_X} \
- "
- 
--do_compile_prepend_mipsel() {
--	sed -i -e 's/\-fPIE//' -e 's/\-pie\ \-Wl\,\-z\,relro//' bus/Makefile
-+# On mipsel, D-Bus fails to link with --gc-sections and segfaults before main()
-+# when built with -fPIE/-pie.
-+do_configure_prepend_mipsel() {
-+	sed -i -e 's/\-fPIE//' \
-+		-e 's/\-pie\ \-Wl\,\-z\,relro//' \
-+		-e 's/-Wl,--gc-sections//' \
-+		${S}/configure.in
- }
- 
- do_install_append() {
-diff --git a/recipes/dbus/dbus_1.2.20.bb b/recipes/dbus/dbus_1.2.20.bb
-index 43805a5..25cc5ac 100644
---- a/recipes/dbus/dbus_1.2.20.bb
-+++ b/recipes/dbus/dbus_1.2.20.bb
-@@ -1,5 +1,7 @@
- include dbus.inc
- 
-+PR = "${INC_PR}.0"
-+
- SRC_URI = "\
-   http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz;name=dbus \
-   file://tmpdir.patch \
-diff --git a/recipes/dbus/dbus_1.2.22.bb b/recipes/dbus/dbus_1.2.22.bb
-index 35a5267..74386ed 100644
---- a/recipes/dbus/dbus_1.2.22.bb
-+++ b/recipes/dbus/dbus_1.2.22.bb
-@@ -1,5 +1,7 @@
- include dbus.inc
- 
-+PR = "${INC_PR}.0"
-+
- SRC_URI = "\
-   http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz;name=dbus \
-   file://tmpdir.patch \
-diff --git a/recipes/dbus/dbus_1.2.24.bb b/recipes/dbus/dbus_1.2.24.bb
-index 4e408e7..a2b7eea 100644
---- a/recipes/dbus/dbus_1.2.24.bb
-+++ b/recipes/dbus/dbus_1.2.24.bb
-@@ -1,5 +1,7 @@
- include dbus.inc
- 
-+PR = "${INC_PR}.0"
-+
- SRC_URI = "\
-   http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz;name=dbus \
-   file://tmpdir.patch \
-diff --git a/recipes/dbus/dbus_1.3.0.bb b/recipes/dbus/dbus_1.3.0.bb
-index 830816f..a923166 100644
---- a/recipes/dbus/dbus_1.3.0.bb
-+++ b/recipes/dbus/dbus_1.3.0.bb
-@@ -1,5 +1,7 @@
- include dbus.inc
- 
-+PR = "${INC_PR}.0"
-+
- SRC_URI = "\
-   http://dbus.freedesktop.org/releases/dbus/dbus-${PV}.tar.gz \
-   \
-@@ -20,7 +22,5 @@ SRC_URI = "\
- # This is the development version of dbus that will lead to 1.4.x
- DEFAULT_PREFERENCE = "-1"
- 
--PR = "r2"
--
- SRC_URI[md5sum] = "b3298d5ce0e4ad4731b1e4e1787d56bb"
- SRC_URI[sha256sum] = "fe32b49667894cf91b0a97503163be5c4814ecf67259e8feb26d1ba57cb03dae"
--- 
-1.7.1
+>
+> Regards,
+> Soumya
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
