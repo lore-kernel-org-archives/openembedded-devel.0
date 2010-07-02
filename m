@@ -1,41 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1OUZWq-0005TD-PD
+	(envelope-from <martin.jansa@gmail.com>) id 1OUZjA-0007LX-TQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 08:15:13 +0200
-Received: by bwz10 with SMTP id 10so793825bwz.6
+	Fri, 02 Jul 2010 08:27:57 +0200
+Received: by fxm12 with SMTP id 12so2092995fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 23:10:29 -0700 (PDT)
+	Thu, 01 Jul 2010 23:23:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=9fHlGkc4Uw+Q6gX7Q4RNgw624fm54yEeQtu6vbVgjVM=;
-	b=bl+vOkf7r4edPv8WqjjCexiLDesYnvMLAbHA2WVthxphTMfEwYdHwRWUAPDf/xJXcU
-	CRC+bCndN5f0JZCGnq24rdaLg+1gfdUUjL8vOvq8tKHxHJCPmKSTPLCaI+WFYP5tOHom
-	PnT+9S9rgRYCAJufyuf6w5U0hX31vz64i6BG8=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=PScVLbdsiNJLXdSdo5UnCSnzg3aJJU3x/LOecAJvhvo=;
+	b=B6PkXBvI29aa3DIYEh3egGdM/v62CmghXrRP71+TIfuJZ+lN+mqdBVbUF6cNbETzDh
+	aYj0i/DzHHcS543PTS/oL3n1GMxkZ9+479HXQW28gCn0ImZfqLs+SM9ZchjBTDVQwX9D
+	+oNrd7OSeqnNEX/Evbvg86ARx0Lw2q9YpMjM8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=wpK5J4UqRbBYx1wDgnmGb7kYvsW6X5chG+zh0uNP0g8C32gPyC39PasbIGc5gxgXTC
-	CNpBB0iYzV7fTItKFSQVwCMe1x/80retMbBpoMUfgTJAK9JeSKfp/+LzfVNlBFrZZtaP
-	NAPQseK7Zqs8tzsr4J9O8nFl/GDt1/7pZntGs=
-MIME-Version: 1.0
-Received: by 10.204.66.79 with SMTP id m15mr216610bki.18.1278051029135; Thu, 
-	01 Jul 2010 23:10:29 -0700 (PDT)
-Received: by 10.204.118.203 with HTTP; Thu, 1 Jul 2010 23:10:29 -0700 (PDT)
-In-Reply-To: <4C2D153E.1040608@mentor.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=BA3fD4tAetEZXdFXyX1uvPK1Rypxs0xJAEtcDLsAF2HfTuwcP1/aA3h+S5un9f1xfC
+	cEU2DEWpPqhUwhuqbegk6p4Jj1PGv1ZkypAUmHfO8MplgrNEuQO0FIB7ICnNkE7efTNI
+	gxE3ylgztEwo27WMv0jEvMg3K1y5fD/Sq2+b4=
+Received: by 10.223.120.197 with SMTP id e5mr172993far.103.1278051791383;
+	Thu, 01 Jul 2010 23:23:11 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id i1sm700222faa.5.2010.07.01.23.23.10
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 01 Jul 2010 23:23:10 -0700 (PDT)
+Date: Fri, 2 Jul 2010 08:22:04 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100702062204.GA9760@jama>
 References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
 	<4C2D153E.1040608@mentor.com>
-Date: Fri, 2 Jul 2010 08:10:29 +0200
-Message-ID: <AANLkTilQbdgbNyhS8CGvY4vLjikFet2Mo9LFF9GOlWIK@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+MIME-Version: 1.0
+In-Reply-To: <4C2D153E.1040608@mentor.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -53,28 +57,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jul 2010 06:15:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 02 Jul 2010 06:27:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/7/2 Tom Rini <tom_rini@mentor.com>:
-> ...
-> I wonder, and I have to admit to having no real gentoo background here, h=
-ow
-> do they solve this problem? =A0Did they invent their own package format a=
-nd
-> add another field that consists of use flags? =A0That'd make some stuff a=
- lot
-> easier, but making deb/rpm get that mapping somehow seems hard at first.
+On Thu, Jul 01, 2010 at 03:22:54PM -0700, Tom Rini wrote:
+> I wonder, and I have to admit to having no real gentoo background
+> here, how do they solve this problem?  Did they invent their own
+> package format and add another field that consists of use flags?
+> That'd make some stuff a lot easier, but making deb/rpm get that
+> mapping somehow seems hard at first.
 
-On Gentoo you don't pull any binary packages but you load the ebuild (<=3D>
-recipe) from a feed. Thus you can build what you need AT your machine, whic=
-h
-I don't think is possible here. Dependency management is done through this
-ebuilds. Package A has useflags B? and C? and pulls other packages in
-depending on if these flags are enabled.
+They store all information about built packages in
+/var/db/pkg/category/name/*
+
+So they know which USE flags were ON and OFF when you built it, there is
+also environment.bz2 where you can find which gcc version was used to
+build it.
+
+So it's easy to rebuild all installed packages if current systems
+settings gives different USE flag sets then before (--newuse param) or
+with small script I used to rebuild all remaining packages which weren't
+rebuild after system gcc upgrade.
+
+Lately (imho with new EAPI) they can also narrow dependencies not only
+with requested version, but also with some USE flag ON or OFF.
+
+And they have it much easier as they resolve it on target device, to
+provide --newuse functionality in OE we would probably do PR bump of
+all "changed" recipes.
+
+So in the end it will be far from ideal if we try just to encode "our" USE
+flags to ${PN}. 
 
 Regards,
-Michael
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
