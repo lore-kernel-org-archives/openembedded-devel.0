@@ -1,49 +1,47 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OUZjA-0007LX-TQ
+	(envelope-from <graham.gower@gmail.com>) id 1OUaBK-0001yI-2j
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 08:27:57 +0200
-Received: by fxm12 with SMTP id 12so2092995fxm.6
+	Fri, 02 Jul 2010 08:57:04 +0200
+Received: by pwi10 with SMTP id 10so1175889pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 23:23:11 -0700 (PDT)
+	Thu, 01 Jul 2010 23:52:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=PScVLbdsiNJLXdSdo5UnCSnzg3aJJU3x/LOecAJvhvo=;
-	b=B6PkXBvI29aa3DIYEh3egGdM/v62CmghXrRP71+TIfuJZ+lN+mqdBVbUF6cNbETzDh
-	aYj0i/DzHHcS543PTS/oL3n1GMxkZ9+479HXQW28gCn0ImZfqLs+SM9ZchjBTDVQwX9D
-	+oNrd7OSeqnNEX/Evbvg86ARx0Lw2q9YpMjM8=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=PVAZQ96igR2nBfryi1y3tdlRJJFrSRnvT8sn7n0mjC4=;
+	b=GBDeHcKj82RNA46IJZ0cUnIMUQayVjHpdzc/KiDczYeUjqc5Kskw91cCShllYBGcoD
+	RHdKkduxswEfqfCigiL3kduPV3wzrUjcU4+KwajuelRYxv3MovNGwbyxArmtJDHePcK6
+	6CvPp4SCbowFEIy94pLFDkfEY039rBry6m9xU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=BA3fD4tAetEZXdFXyX1uvPK1Rypxs0xJAEtcDLsAF2HfTuwcP1/aA3h+S5un9f1xfC
-	cEU2DEWpPqhUwhuqbegk6p4Jj1PGv1ZkypAUmHfO8MplgrNEuQO0FIB7ICnNkE7efTNI
-	gxE3ylgztEwo27WMv0jEvMg3K1y5fD/Sq2+b4=
-Received: by 10.223.120.197 with SMTP id e5mr172993far.103.1278051791383;
-	Thu, 01 Jul 2010 23:23:11 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id i1sm700222faa.5.2010.07.01.23.23.10
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=caGYRRpiG7q55in1MrP4eN0q/GQQcly+xtgv935WVceW9e4FMTgTjjP1/5/cVmYNnE
+	EUUdZWYkcY8HhPHU5qzLs0u0jrMbdnlWJqQz6+MWhXtznEYL+V8x+iVWRC7Gvn96S/VT
+	U+R5IYAk3HMHBLS6ilaaHEyDZ2MgSX5Tgejbc=
+Received: by 10.142.233.10 with SMTP id f10mr406134wfh.280.1278053534642;
+	Thu, 01 Jul 2010 23:52:14 -0700 (PDT)
+Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id 21sm424306wfi.5.2010.07.01.23.52.12
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 01 Jul 2010 23:23:10 -0700 (PDT)
-Date: Fri, 2 Jul 2010 08:22:04 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100702062204.GA9760@jama>
-References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
-	<4C2D153E.1040608@mentor.com>
+	Thu, 01 Jul 2010 23:52:14 -0700 (PDT)
+Message-ID: <4C2D8C99.2070508@gmail.com>
+Date: Fri, 02 Jul 2010 16:22:09 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
 MIME-Version: 1.0
-In-Reply-To: <4C2D153E.1040608@mentor.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: USE flags mumbling
+Subject: [PATCH] tcl_8.5.8.bb: fix build for mips/mipsel.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,42 +55,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jul 2010 06:27:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 02 Jul 2010 06:57:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 01, 2010 at 03:22:54PM -0700, Tom Rini wrote:
-> I wonder, and I have to admit to having no real gentoo background
-> here, how do they solve this problem?  Did they invent their own
-> package format and add another field that consists of use flags?
-> That'd make some stuff a lot easier, but making deb/rpm get that
-> mapping somehow seems hard at first.
 
-They store all information about built packages in
-/var/db/pkg/category/name/*
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch |   26 ++++++++++++++++++++++++++
+ recipes/tcltk/tcl_8.5.8.bb                   |    3 ++-
+ 2 files changed, 28 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch
 
-So they know which USE flags were ON and OFF when you built it, there is
-also environment.bz2 where you can find which gcc version was used to
-build it.
-
-So it's easy to rebuild all installed packages if current systems
-settings gives different USE flag sets then before (--newuse param) or
-with small script I used to rebuild all remaining packages which weren't
-rebuild after system gcc upgrade.
-
-Lately (imho with new EAPI) they can also narrow dependencies not only
-with requested version, but also with some USE flag ON or OFF.
-
-And they have it much easier as they resolve it on target device, to
-provide --newuse functionality in OE we would probably do PR bump of
-all "changed" recipes.
-
-So in the end it will be far from ideal if we try just to encode "our" USE
-flags to ${PN}. 
-
-Regards,
-
+diff --git a/recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch b/recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch
+new file mode 100644
+index 0000000..b846d0f
+--- /dev/null
++++ b/recipes/tcltk/tcl-8.5.8/mips-tclstrtod.patch
+@@ -0,0 +1,26 @@
++http://sourceforge.net/tracker/index.php?func=detail&aid=2902010&group_id=10894&atid=110894
++
++--- ../generic/tclStrToD.c.orig
+++++ ../generic/tclStrToD.c
++@@ -71,9 +71,10 @@
++ 
++ /*
++  * MIPS floating-point units need special settings in control registers
++- * to use gradual underflow as we expect.
+++ * to use gradual underflow as we expect.  This fix is for the MIPSpro
+++ * compiler.  
++  */
++-#if defined(__mips)
+++#if defined(__sgi) && defined(_COMPILER_VERSION)
++ #include <sys/fpu.h>
++ #endif
++ /*
++@@ -2166,7 +2167,7 @@
++     } bitwhack;
++ #endif
++ 
++-#if defined(__mips)
+++#if defined(__sgi) && defined(_COMPILER_VERSION)
++     union fpc_csr mipsCR;
++ 
++     mipsCR.fc_word = get_fpc_csr();
+diff --git a/recipes/tcltk/tcl_8.5.8.bb b/recipes/tcltk/tcl_8.5.8.bb
+index 2209ca4..9d030b9 100644
+--- a/recipes/tcltk/tcl_8.5.8.bb
++++ b/recipes/tcltk/tcl_8.5.8.bb
+@@ -3,7 +3,7 @@ LICENSE = "tcl"
+ SECTION = "devel/tcltk"
+ HOMEPAGE = "http://tcl.sourceforge.net"
+ 
+-PR = "r6"
++PR = "r7"
+ 
+ SRC_URI = "\
+   ${SOURCEFORGE_MIRROR}/tcl/tcl${PV}-src.tar.gz \
+@@ -14,6 +14,7 @@ SRC_URI = "\
+   file://tcllibrary.diff;striplevel=2 \
+   file://tclpackagepath.diff;striplevel=2 \
+   file://tclprivate.diff;striplevel=2 \
++  file://mips-tclstrtod.patch;striplevel=0 \
+ "
+ 
+ SRC_URI[md5sum] = "7f123e53b3daaaba2478d3af5a0752e3"
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.1
+
 
 
