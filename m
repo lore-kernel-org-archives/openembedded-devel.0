@@ -1,47 +1,31 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OUZ76-0002k3-OF
+	(envelope-from <roman@khimov.ru>) id 1OUZOM-0005Gc-RP
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 02 Jul 2010 07:48:37 +0200
-Received: by pwi10 with SMTP id 10so1154388pwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 01 Jul 2010 22:43:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=KUotQ9Lx0iDjtnoCb7A6ZXW71Yog5epl2uQBS8ZQXrc=;
-	b=N01yDxLTMIwEOH13K77QBcn9rtbmsHbLipmfJo0JPl3bsIov/TF36uREwoPwNpuXeS
-	O7t8Xxool7Hv1oe1zgJ0Xbmyoph4b4COjlrxIet56E0M3N4bAEllq3MT3rW+6TEYzc2x
-	nzPcXOtjfZpcYvPUNKu10bZ53IaJK8+mzmdeo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=rCWJakuZ+mB6qFUjhvt6hIaF34brTgjsTdFXlDXsO9QSMnOV4WUL+vxqcU+ptB5z8C
-	5/ZECZWCFBcXTOEvht4pMnZbI8G+bDgMlMUWoDQBlodHbSXaslky8ZujiMnv6vtybF7y
-	iqOoZkIrRjnYK7MUbvIp9zKAnm1D5vmM9FYA4=
-Received: by 10.142.134.13 with SMTP id h13mr336117wfd.119.1278049430254;
-	Thu, 01 Jul 2010 22:43:50 -0700 (PDT)
-Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id 23sm358480wfa.22.2010.07.01.22.43.47
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 01 Jul 2010 22:43:49 -0700 (PDT)
-Message-ID: <4C2D7C8E.2010904@gmail.com>
-Date: Fri, 02 Jul 2010 15:13:42 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
-MIME-Version: 1.0
+	Fri, 02 Jul 2010 08:06:28 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OUZJl-0001ku-II
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 02 Jul 2010 10:01:43 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Fri, 2 Jul 2010 10:01:38 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <20100701172428.3b2ac88e@xora-desktop.xora.org.uk>
+	<1278023626.12473.22.camel@saphir> <4C2D193A.9060202@mentor.com>
+In-Reply-To: <4C2D193A.9060202@mentor.com>
+MIME-Version: 1.0
+Message-Id: <201007021001.40829.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] x264_r2245.bb: fix build for mipsel (duplicate the mips fix).
+Subject: Re: USE flags mumbling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,38 +39,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 02 Jul 2010 05:48:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 02 Jul 2010 06:06:28 -0000
+X-Groupsio-MsgNum: 20667
+Content-Type: multipart/signed; boundary="nextPart15224383.aKbtQughqc";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
+--nextPart15224383.aKbtQughqc
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/vlc/x264_r2245.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 02 =D0=B8=D1=8E=D0=BB=D1=8F 2010=
+ 02:39:54 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Tom Rini =D0=BD=D0=B0=D0=BF=D0=B8=
+=D1=81=D0=B0=D0=BB:
+> Michael 'Mickey' Lauer wrote:
+> > Am Donnerstag, den 01.07.2010, 23:29 +0100 schrieb Phil Blundell:
+> >> On Thu, 2010-07-01 at 15:16 -0700, Tom Rini wrote:
+> >>> One of the issues with some form of USE flags, and I believe this is
+> >>> one of the big ones for Angstrom as well as any other public feed
+> >>> publishing distribution is that having a single recipe that does
+> >>> different things based on variables makes maintaining their feed (and
+> >>> allowing users to publish their own compatible feeds) a nightmare.
+> >>
+> >> It's only a nightmare if the flags in question are user-frobbable.  If
+> >> they are all nailed down in the DISTRO configuration (which
+> >> DISTRO_FEATURES certainly ought to be), and those folks who want to
+> >> build compatible binaries just leave them alone, then there oughtn't to
+> >> be any real problem.  To that extent it doesn't really seem any
+> >> different to the choice of compiler or tuning flags or glibc version or
+> >> any of the other ways in which you can already produce incompatible
+> >> binaries by flipping the wrong switches.
+> >
+> > Agreed. I think we should be more open to this concept. At least for
+> > packages with optional (but "infecting") X11 support -- such as EFL -- I
+> > plan to use such a mechanism soon.
+>=20
+> Putting on my devil's advocate hat again, unless something is really and
+> truly locked down, it's going to get modified.  While most end users
+> won't want to frob gcc versions, frobbing bluetooth or alsa or x11 or
+> ... is more common.  For example, Gentoo.=20
 
-diff --git a/recipes/vlc/x264_r2245.bb b/recipes/vlc/x264_r2245.bb
-index 93e4226..f533bfc 100644
---- a/recipes/vlc/x264_r2245.bb
-+++ b/recipes/vlc/x264_r2245.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "H.264 encoder"
- LICENSE = "GPL"
--PR = "r6"
-+PR = "r7"
- 
- X264PV = "snapshot-20100531-2245"
- 
-@@ -15,6 +15,7 @@ inherit autotools lib_package pkgconfig
- # default --extra-cflags
- X264_ECFLAGS = ""
- X264_ECFLAGS_mips = "-fPIC"
-+X264_ECFLAGS_mipsel = "-fPIC"
- 
- # disable use of assembler written functions
- X264_DISABLE_ASM = "--disable-asm"
--- 
-1.7.1
+IMO this is not that much of a problem for a thing like OE. I view OE as a=
+=20
+powerful tool that is used by developers to make products for end-users. As=
+ a=20
+developer I love an idea of USE-flags as that's what you generally do on=20
+embedded device - tune it for specific use-cases, leaving only things you=20
+really need.
 
+And as for an end users, there are already tons of ways to make incompatibl=
+e=20
+package feeds for them: toolchain components versions, gcc flags, etc. Or t=
+ake=20
+a look at shadow recipe, for example, it has dynamic PAM dependency. And kn=
+ow=20
+what? I'd really love to see the same dynamic PAM dep for busybox, for=20
+example, as we're building it with PAM support and with current state of=20
+things there is no sane way I could bring such a change in oe.dev.
 
+Real end users mostly follow one feed, I think. If they don't - they can be=
+ in=20
+trouble already. So there is not that much USE flags change here, IMO. And=
+=20
+with a mechanism to encode used USE flags in package name with proper=20
+RPROVIDES and such I don't see any real problem at all.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart15224383.aKbtQughqc
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkwtgMQACgkQXJ70z+XgVcOnagCeIz+V9MHfAdFtykDnohqivTt9
+D+4AoJz5hkICsEFYcCGQm5R/DjYdSANq
+=MiPK
+-----END PGP SIGNATURE-----
+
+--nextPart15224383.aKbtQughqc--
