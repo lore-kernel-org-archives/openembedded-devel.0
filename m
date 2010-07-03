@@ -1,42 +1,43 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OUumN-0001ps-E3
+	(envelope-from <raj.khem@gmail.com>) id 1OUupS-0001wS-Bx
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 03 Jul 2010 06:56:40 +0200
-Received: by pzk4 with SMTP id 4so646526pzk.6
+	Sat, 03 Jul 2010 06:59:52 +0200
+Received: by pwi10 with SMTP id 10so1596258pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 02 Jul 2010 21:51:52 -0700 (PDT)
+	Fri, 02 Jul 2010 21:55:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=H/XngJ3blAYjTululERE0HA4C4KhE/OFuIo30E67dlM=;
-	b=hYDnT2afgxBS1zw8l3cVszb9mYgRWytcJaR1eM7fDrtUL40rIG6xsc+3m2mO280u0k
-	IpvXTZJpqA4zEqASRNhqIxSddCD8/dQ8iFy7t8zwFHjj+6bV5y9iZo4zxzbRcCeE2PPK
-	kGR5pPaDY+WVfN4wKRzGgr2hc9PNWMRBifIzI=
+	bh=rbV+rSGge/vQfGqLqB6GIuna3BjBXjovUH/gjuaWros=;
+	b=QjviJmGcVyJ3vopM661pFg5ylZWA1yjAjX1eTaAMfM+QZAsjZb4a2SP5UMlVeeinpN
+	F6ji41Iiqu6Ij4HIYwMsOPyxGsIQAnwVxTjCrsU6zuD1r9MHvJ0mIfpT9oT+WgNDbHtR
+	gVZ2m+vEvXR0i5CEVnPhp1waqCSMZgKCZLnYE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=LDiq33QzvRouqg9zCST5g3lL5DIl0pq/vxwslDJh+O4pRFqdAVB51M6fG11hRo+gK0
-	MGPEekEHs4jYs3KBiWtY4jl/IIwKTrhj0usTGwkLNZIL3ONyrxRnKcVzjw+7ZrVUpkKH
-	MsfklFP+cl9fA8NVktcW1DUF70+57hhxN4wvk=
-Received: by 10.142.211.5 with SMTP id j5mr2275553wfg.87.1278132711926;
-	Fri, 02 Jul 2010 21:51:51 -0700 (PDT)
+	b=uAGti9R4crb1SRXJl0Szzc8gjV5Y7XBgAXQQC/HjN8rP/PLLnnB+FQCyl9KwA8+laH
+	ySLhOUKq78YyTI7tTix1/xddGVcY7D6YQIaW1X2f9JFubsrWqmQ+YeA5BDVFDj0/Enqk
+	UVAZ/Pk190X1xveanCWxqtMOJkb3HPuq1pI/8=
+Received: by 10.142.207.9 with SMTP id e9mr2177112wfg.328.1278132902783;
+	Fri, 02 Jul 2010 21:55:02 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id c23sm1618510rvf.0.2010.07.02.21.51.49
+	by mx.google.com with ESMTPS id r27sm1617191rvq.9.2010.07.02.21.55.01
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 02 Jul 2010 21:51:51 -0700 (PDT)
-Date: Fri, 2 Jul 2010 21:51:50 -0700
+	Fri, 02 Jul 2010 21:55:01 -0700 (PDT)
+Date: Fri, 2 Jul 2010 21:55:04 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100703045150.GA17627@gmail.com>
+Message-ID: <20100703045504.GB17627@gmail.com>
 References: <1278082654-10070-1-git-send-email-khimov@altell.ru>
 	<1278082654-10070-2-git-send-email-khimov@altell.ru>
+	<1278082654-10070-3-git-send-email-khimov@altell.ru>
 MIME-Version: 1.0
-In-Reply-To: <1278082654-10070-2-git-send-email-khimov@altell.ru>
+In-Reply-To: <1278082654-10070-3-git-send-email-khimov@altell.ru>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Connect-IP: 209.85.160.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -44,7 +45,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] tzdata-uclibc: add recipe for uclibc timezone database
+Subject: Re: [PATCH] base-files: profile: don't set TZ if /etc/TZ is present
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,49 +59,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 03 Jul 2010 04:56:40 -0000
+X-List-Received-Date: Sat, 03 Jul 2010 04:59:52 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 On (02/07/10 18:57), Roman I Khimov wrote:
-> Recent TZif2 file format contains TZ-like ASCII string at the end that is
-> easily extractable and usable with uclibc setup, so this recipe does exactly
-> that based on standard tzdata.
+> uClibc-based systems can have system-wide TZ in /etc/TZ, thus we shouldn't
+> set TZ variable if it is present.
 > 
 > Signed-off-by: Roman I Khimov <khimov@altell.ru>
+
+Acked-by: Khem Raj <raj.khem@gmail.com>
+
+what all shells did you test it on.
+
 > ---
->  recipes/tzdata/tzdata-uclibc_2010j.bb |   16 ++++++++++++++++
->  1 files changed, 16 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/tzdata/tzdata-uclibc_2010j.bb
+>  recipes/base-files/base-files/jornada6xx/profile   |    2 +-
+>  .../base-files/base-files/omap3-pandora/profile    |    2 +-
+>  .../base-files/base-files/oplinux-uclibc/profile   |    2 +-
+>  recipes/base-files/base-files/oplinux/profile      |    2 +-
+>  recipes/base-files/base-files/profile              |    2 +-
+>  recipes/base-files/base-files/shr/profile          |    2 +-
+>  recipes/base-files/base-files_3.0.14.bb            |    2 +-
+>  7 files changed, 7 insertions(+), 7 deletions(-)
 > 
-> diff --git a/recipes/tzdata/tzdata-uclibc_2010j.bb b/recipes/tzdata/tzdata-uclibc_2010j.bb
-> new file mode 100644
-> index 0000000..9d0de5d
-> --- /dev/null
-> +++ b/recipes/tzdata/tzdata-uclibc_2010j.bb
-> @@ -0,0 +1,16 @@
-> +require tzdata_${PV}.bb
-> +
-> +do_install_append () {
-> +	rm -f ${D}${sysconfdir}/localtime
-> +	rm -f ${D}${sysconfdir}/timezone
-> +	for i in `find ${D}${datadir}/zoneinfo -type f`; do
-> +		tail -n 1 $i > temp-zone
-> +		# Avoid useless NULL files
-> +		if [ "`cat temp-zone`" != "" ]; then
-> +			mv temp-zone $i
-> +		fi
-> +	done
-> +	cp -pPR ${D}${datadir}/zoneinfo/${DEFAULT_TIMEZONE} ${D}${sysconfdir}/TZ
-> +}
-> +
-> +CONFFILES_${PN} = "${sysconfdir}/TZ"
-> \ No newline at end of file
-
-you could have used overrides in the same recipe.
-do_install_append_libc-uclibc () ...
-
-Thx
--Khem
+> diff --git a/recipes/base-files/base-files/jornada6xx/profile b/recipes/base-files/base-files/jornada6xx/profile
+> index bff0f42..bd9e3e6 100755
+> --- a/recipes/base-files/base-files/jornada6xx/profile
+> +++ b/recipes/base-files/base-files/jornada6xx/profile
+> @@ -9,7 +9,7 @@ if [ "`id -u`" -eq 0 ]; then
+>     PATH="$PATH:/sbin:/usr/sbin:/usr/local/sbin"
+>  fi
+>  
+> -if [ ! -e /etc/localtime ]; then
+> +if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
+>  	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html
+>  				# for an explanation of how to set this to your local timezone.
+>  	export TZ
+> diff --git a/recipes/base-files/base-files/omap3-pandora/profile b/recipes/base-files/base-files/omap3-pandora/profile
+> index 5797535..99b6fce 100644
+> --- a/recipes/base-files/base-files/omap3-pandora/profile
+> +++ b/recipes/base-files/base-files/omap3-pandora/profile
+> @@ -5,7 +5,7 @@ PATH="/usr/local/bin:/usr/bin:/bin"
+>  EDITOR="/bin/vi"			# needed for packages like cron
+>  test -z "$TERM" && TERM="vt100"	# Basic terminal capab. For screen etc.
+>  
+> -if [ ! -e /etc/localtime ]; then
+> +if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
+>  	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
+>  				# for an explanation of how to set this to your local timezone.
+>  	export TZ
+> diff --git a/recipes/base-files/base-files/oplinux-uclibc/profile b/recipes/base-files/base-files/oplinux-uclibc/profile
+> index f6ae329..5ad2967 100644
+> --- a/recipes/base-files/base-files/oplinux-uclibc/profile
+> +++ b/recipes/base-files/base-files/oplinux-uclibc/profile
+> @@ -5,7 +5,7 @@ PATH="/usr/local/bin:/usr/bin:/bin"
+>  EDITOR="/usr/bin/nano"	# needed for packages like cron
+>  TERM="linux"		# Basic terminal capab. For screen etc.
+>  
+> -if [ ! -e /etc/localtime ]; then
+> +if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
+>  	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
+>  				# for an explanation of how to set this to your local timezone.
+>  	export TZ
+> diff --git a/recipes/base-files/base-files/oplinux/profile b/recipes/base-files/base-files/oplinux/profile
+> index f6ae329..5ad2967 100644
+> --- a/recipes/base-files/base-files/oplinux/profile
+> +++ b/recipes/base-files/base-files/oplinux/profile
+> @@ -5,7 +5,7 @@ PATH="/usr/local/bin:/usr/bin:/bin"
+>  EDITOR="/usr/bin/nano"	# needed for packages like cron
+>  TERM="linux"		# Basic terminal capab. For screen etc.
+>  
+> -if [ ! -e /etc/localtime ]; then
+> +if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
+>  	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
+>  				# for an explanation of how to set this to your local timezone.
+>  	export TZ
+> diff --git a/recipes/base-files/base-files/profile b/recipes/base-files/base-files/profile
+> index b5ce69d..8f7f6b5 100644
+> --- a/recipes/base-files/base-files/profile
+> +++ b/recipes/base-files/base-files/profile
+> @@ -5,7 +5,7 @@ PATH="/usr/local/bin:/usr/bin:/bin"
+>  EDITOR="/bin/vi"			# needed for packages like cron
+>  test -z "$TERM" && TERM="vt100"	# Basic terminal capab. For screen etc.
+>  
+> -if [ ! -e /etc/localtime ]; then
+> +if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
+>  	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
+>  				# for an explanation of how to set this to your local timezone.
+>  	export TZ
+> diff --git a/recipes/base-files/base-files/shr/profile b/recipes/base-files/base-files/shr/profile
+> index 05e8490..6e11e81 100644
+> --- a/recipes/base-files/base-files/shr/profile
+> +++ b/recipes/base-files/base-files/shr/profile
+> @@ -5,7 +5,7 @@ PATH="/usr/local/bin:/usr/bin:/bin"
+>  EDITOR="/bin/vi"			# needed for packages like cron
+>  test -z "$TERM" && TERM="vt100"	# Basic terminal capab. For screen etc.
+>  
+> -if [ ! -e /etc/localtime ]; then
+> +if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
+>  	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
+>  				# for an explanation of how to set this to your local timezone.
+>  	export TZ
+> diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
+> index 9801f8a..02bd39b 100644
+> --- a/recipes/base-files/base-files_3.0.14.bb
+> +++ b/recipes/base-files/base-files_3.0.14.bb
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION = "Miscellaneous files for the base system."
+>  SECTION = "base"
+>  PRIORITY = "required"
+> -PR = "r94"
+> +PR = "r95"
+>  LICENSE = "GPL"
+>  
+>  SRC_URI = " \
+> -- 
+> 1.5.6.5
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
