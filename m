@@ -1,34 +1,31 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OVW9x-0007cn-Oz
+Received: from carmex.station51.net ([109.74.206.142] helo=station51.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <butters@station51.net>) id 1OVWrc-00057N-AT
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 22:51:30 +0200
-Received: (qmail invoked by alias); 04 Jul 2010 20:46:41 -0000
-Received: from p50886CC2.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.108.194]
-	by mail.gmx.net (mp070) with SMTP; 04 Jul 2010 22:46:41 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18l92Q9hBUltxp2tbYT+r+9WBjavMOxwyu6V8Qtyr
-	MBvGQdTd+lr6pD
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 4 Jul 2010 22:41:28 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <201007041550.26470.schnitzeltony@gmx.de>
-	<AANLkTiks6AKzZhkZSMahSKYTCJoRH-cl2P2yjb3gQCbF@mail.gmail.com>
-In-Reply-To: <AANLkTiks6AKzZhkZSMahSKYTCJoRH-cl2P2yjb3gQCbF@mail.gmail.com>
+	Sun, 04 Jul 2010 23:36:44 +0200
+Received: from [87.241.99.70] (account butters HELO [192.168.1.201])
+	by station51.net (CommuniGate Pro SMTP 5.3.4)
+	with ESMTPSA id 1567114 for openembedded-devel@lists.openembedded.org;
+	Sun, 04 Jul 2010 23:31:43 +0200
+Message-ID: <4C30FDBB.2090900@station51.net>
+Date: Sun, 04 Jul 2010 23:31:39 +0200
+From: Bill Sargent <butters@station51.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.4) Gecko/20100608 Thunderbird/3.1
 MIME-Version: 1.0
-Message-Id: <201007042241.33918.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+To: openembedded-devel@lists.openembedded.org
+References: <4C2CE2E6.3050708@station51.net> <4C3092C5.5060606@station51.net>
+	<AANLkTil9SMIAhB8Z7wEJ8uzgIT0aVpbK8R6CNgKzc6mu@mail.gmail.com>
+In-Reply-To: <AANLkTil9SMIAhB8Z7wEJ8uzgIT0aVpbK8R6CNgKzc6mu@mail.gmail.com>
+X-SA-Exim-Connect-IP: 109.74.206.142
+X-SA-Exim-Mail-From: butters@station51.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libpam-base-files.bb: Change pam.d files location to fix install error.
+Subject: Re: OpenLDAP 2.4.21. doesn't create packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,31 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jul 2010 20:51:30 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sun, 04 Jul 2010 21:36:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Sunday 04 July 2010 07:54:59 pm Khem Raj wrote:
-> You do not need this fix if you take base.bbclass patch
-> I posted earlier.
-> 
-> http://article.gmane.org/gmane.comp.handhelds.openembedded/34074
-> 
-> can you try it out ?
+  On 7/4/2010 7:58 PM, Khem Raj wrote:
+>
+> suppose your image is console-image then you can add something like
+> below to your local.conf
+>
+> IMAGE_INSTALL_append_pn-console-image = " libldap-2.4-slapd libldap-2.4-bin"
+>
+>
+>
 
-For your information:
-1. Before I sent the 'libpam-base-files' I went into trouble during install with with angstrom-version and helped myself by manually copying lsb_release
-2. After sending my patch trouble installing with 'base-files' came up.
+I get this:
 
-So I did
-1. Clean 'angstrom-version', 'libpam-base-files' and 'base-files'
-2. Applied your patch for base.bbclass
-3. Rebuild  'angstrom-version', 'libpam-base-files' and 'base-files'
+ERROR: [/home/bill/oe/openembedded/recipes/images/console-image.bb] 
+RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity 
+'libldap-2.4-slapd' but it wasn't found in any PACKAGE or RPROVIDES 
+variables.
+NOTE: Runtime target libldap-2.4-slapd  is unbuildable, removing ...
+Missing or unbuildable dependency chain was: [libldap-2.4-slapd]
+ERROR: Required build target 'console-imageä has no buildable providers.
+Missing or unbuilding depenency chain was: [console-image, 
+libldap-2.4-slapd]
 
-The recipes baked without error.
+I see the packages. I see this specific package. I even erased the 
+packages, cleared the staging, and rebuilt them and they're back again, 
+but it still will not incorporate them in to my image.
 
-Thanks
+Is the recipe correct? SHouldnt the  Openldap recipe have a PROVIDES 
+variable in it saying that it provides these packages?
+
+
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
 
 
