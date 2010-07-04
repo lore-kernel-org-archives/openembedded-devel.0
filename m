@@ -1,30 +1,31 @@
-Received: from carmex.station51.net ([109.74.206.142] helo=station51.net)
+Received: from mailrelay3.sunrise.ch ([194.158.229.31]
+	helo=smtp-be-01.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <butters@station51.net>) id 1OVPk5-0000gu-81
+	(envelope-from <dv@vollmann.ch>) id 1OVQMZ-0005EL-5I
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 16:00:28 +0200
-Received: from [87.241.99.70] (account butters HELO [192.168.1.201])
-	by station51.net (CommuniGate Pro SMTP 5.3.4)
-	with ESMTPSA id 1566348 for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 15:55:21 +0200
-Message-ID: <4C3092C5.5060606@station51.net>
-Date: Sun, 04 Jul 2010 15:55:17 +0200
-From: Bill Sargent <butters@station51.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
-	rv:1.9.2.4) Gecko/20100608 Thunderbird/3.1
+	Sun, 04 Jul 2010 16:40:09 +0200
+Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140])
+	by smtp-be-01.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
+	o64Dw3q1016554; Sun, 4 Jul 2010 15:58:04 +0200
+Message-ID: <4C3093B0.5090603@vollmann.ch>
+Date: Sun, 04 Jul 2010 15:59:12 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4C2CE2E6.3050708@station51.net>
-In-Reply-To: <4C2CE2E6.3050708@station51.net>
-X-SA-Exim-Connect-IP: 109.74.206.142
-X-SA-Exim-Mail-From: butters@station51.net
+References: <AANLkTilva4t_1fBYfzHthbUInh43adY9VYbU9EjgZL7V@mail.gmail.com>
+	<1278021694.30247.438.camel@rex>
+In-Reply-To: <1278021694.30247.438.camel@rex>
+X-SA-Exim-Connect-IP: 194.158.229.31
+X-SA-Exim-Mail-From: dv@vollmann.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenLDAP 2.4.21. doesn't create packages
+Subject: Re: [RFC} Disable multilib in gcc recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,47 +39,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jul 2010 14:00:34 -0000
+X-List-Received-Date: Sun, 04 Jul 2010 14:40:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
+On 07/02/10 00:01, Richard Purdie wrote:
+> On Thu, 2010-07-01 at 00:14 -0700, Khem Raj wrote:
+>> I would like to propose to remove building multilib with gcc recipes.
+>> It creates problems
+>> and we do not package correct bits on some platforms. As we tend to
+>> build toolchains keeping in mind the machine it is targetting I think
+>> multilib is not that significant
+>>
+>> Concerns ? comments?
+> 
+> I'm backing this. Currently multilib is broken and for a good
+> implementation we really needs a ground up proposal for how to handle it
+> well. I'm starting to look into the problem FWIW so I'd appreciate being
+> in the loop in any discussions.
+I've run into multilib issues as well, but could always solve it on a
+case by case base (e.g. on powerpc).  But I agree it's currently a mess.
+But what you need to keep in mind if you actually drop multilib support
+is that you need to rename the prefix for the SDK toolchains.
+It would be bad if PowerPC 32-bit and 64-bit toolchains were both named
+powerpc-angstrom-linux-
 
-
-On 7/1/2010 8:48 PM, Bill Sargent wrote:
->  Hello,
->
-> I'm trying to add the openldap 2.4.21 recipe to my bootable image, and 
-> it doesn't seem to be creating the packages. It installs only the libs 
-> and no binaries (slapd etc..) ... I looked at the recipe and it seems 
-> it should be creating some bin package as well as base etc... but I 
-> haven't seen any in my packages directories.
->
-> Can someone explain to me what is wrong? Is there a problem with the 
-> openldap recipe?
->
-> Thanks
-> Bill
-
-Well I wrote this the other day and as usual, nobody responded. I 
-finally got it to spit out libldap-2.40*.ipk with the slapd etc... 
-however, adding
-
-libldap-2.4-slapd
-and
-libldap-2.4-bin
-
-to my IMAGE_INSTALL variable doesn't seem to work. Can someone explain 
-to me, the correct way to install a full working openldap server and 
-utilities into an image?
-
-As much documentation as there is for this, apparently we need a list of 
-installable packages as well since the filenames don't exactly always 
-mean that it's a package name thats installable.  If there is one, I've 
-missed it I think :)
-
-Thanks,
-Bill
-
+   Detlef
 
 
 
