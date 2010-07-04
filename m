@@ -1,34 +1,31 @@
-Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OVNaB-0004hs-RJ
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OVPk4-0000gG-Tf
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 13:42:00 +0200
-Received: from durham.keylevel.com ([109.224.134.115]:7872 helo=[192.168.1.98])
-	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OVNVZ-0004yq-S1
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 12:37:13 +0100
-Message-Id: <FE629F29-C087-4DF5-8C22-99EF4853FAF5@keylevel.com>
-From: Chris Tapp <dokuwiki@keylevel.com>
+	Sun, 04 Jul 2010 16:00:24 +0200
+Received: (qmail invoked by alias); 04 Jul 2010 13:55:32 -0000
+Received: from p50886CC2.dip.t-dialin.net (EHLO [192.168.142.128])
+	[80.136.108.194]
+	by mail.gmx.net (mp056) with SMTP; 04 Jul 2010 15:55:32 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+zDjkWw6ez4ieGkL1hrgqOPwYQ24QNSgLtbyhMB7
+	sUkkSe3aTUJmL9
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v936)
-Date: Sun, 4 Jul 2010 12:37:11 +0100
-X-Mailer: Apple Mail (2.936)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - keylevel.com
-X-SA-Exim-Connect-IP: 80.254.228.43
-X-SA-Exim-Mail-From: dokuwiki@keylevel.com
+Date: Sun, 4 Jul 2010 15:50:26 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+MIME-Version: 1.0
+Message-Id: <201007041550.26470.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Cross compile badness - /usr/include in /usr/include
+Subject: [PATCH] libpam-base-files.bb: Change pam.d files location to fix install error.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jul 2010 11:42:00 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 04 Jul 2010 14:00:34 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-I sometimes get "Cross compile badness - /usr/include in /usr/ 
-include", most recently when trying to build libsdl-ttf.
+=46rom 92b22e619df257257d78dc51332a684d4cd377aa Mon Sep 17 00:00:00 2001
+=46rom: Andreas Mueller <schnitzeltony@gmx.de>
+Date: Sun, 4 Jul 2010 15:48:11 +0200
+Subject: [PATCH] libpam-base-files.bb: Change pam.d files location to fix i=
+nstall error.
 
-I finally tracked down that the cause was having part of the SDL  
-development environment installed on the build host, leading to me  
-having a /usr/include/SDL directory.
 
-Uninstalling this package from the host allowed the build to work.
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+=2D--
+ recipes/pam/libpam-base-files.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-1) Is this a 'known issue' with building?
-2) Is there any way I can guard against it? I do now have a clue to  
-what it means, but the cause may not always be so obvious.
-3) Can I modify the .bb files to prevent this?
-
-Is it possible to 'chroot' (or so such) so that the likes of /usr are  
-constrained to the build environment?
-
-Chris
-
+diff --git a/recipes/pam/libpam-base-files.bb b/recipes/pam/libpam-base-fil=
+es.bb
+index ddcfe4c..ad31952 100644
+=2D-- a/recipes/pam/libpam-base-files.bb
++++ b/recipes/pam/libpam-base-files.bb
+@@ -7,10 +7,10 @@ DEPENDS =3D ""
+ RDEPENDS_${PN} =3D "libpam"
+ RRECOMMENDS_${PN} =3D "libpam-meta"
+=20
+=2DPR =3D "r6"
++PR =3D "r7"
+=20
+ SRC_URI =3D " \
+=2D           file://pam.d/* \
++           file://pam.d \
+ "
+=20
+ do_install() {        =20
+=2D-=20
+1.5.3.4
 
 
