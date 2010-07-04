@@ -1,31 +1,30 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OVPk4-0000gG-Tf
+Received: from carmex.station51.net ([109.74.206.142] helo=station51.net)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <butters@station51.net>) id 1OVPk5-0000gu-81
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 16:00:24 +0200
-Received: (qmail invoked by alias); 04 Jul 2010 13:55:32 -0000
-Received: from p50886CC2.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.108.194]
-	by mail.gmx.net (mp056) with SMTP; 04 Jul 2010 15:55:32 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1+zDjkWw6ez4ieGkL1hrgqOPwYQ24QNSgLtbyhMB7
-	sUkkSe3aTUJmL9
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 4 Jul 2010 15:50:26 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+	Sun, 04 Jul 2010 16:00:28 +0200
+Received: from [87.241.99.70] (account butters HELO [192.168.1.201])
+	by station51.net (CommuniGate Pro SMTP 5.3.4)
+	with ESMTPSA id 1566348 for openembedded-devel@lists.openembedded.org;
+	Sun, 04 Jul 2010 15:55:21 +0200
+Message-ID: <4C3092C5.5060606@station51.net>
+Date: Sun, 04 Jul 2010 15:55:17 +0200
+From: Bill Sargent <butters@station51.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US;
+	rv:1.9.2.4) Gecko/20100608 Thunderbird/3.1
 MIME-Version: 1.0
-Message-Id: <201007041550.26470.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+To: openembedded-devel@lists.openembedded.org
+References: <4C2CE2E6.3050708@station51.net>
+In-Reply-To: <4C2CE2E6.3050708@station51.net>
+X-SA-Exim-Connect-IP: 109.74.206.142
+X-SA-Exim-Mail-From: butters@station51.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libpam-base-files.bb: Change pam.d files location to fix install error.
+Subject: Re: OpenLDAP 2.4.21. doesn't create packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +39,46 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Sun, 04 Jul 2010 14:00:34 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
-
-=46rom 92b22e619df257257d78dc51332a684d4cd377aa Mon Sep 17 00:00:00 2001
-=46rom: Andreas Mueller <schnitzeltony@gmx.de>
-Date: Sun, 4 Jul 2010 15:48:11 +0200
-Subject: [PATCH] libpam-base-files.bb: Change pam.d files location to fix i=
-nstall error.
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
 
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-=2D--
- recipes/pam/libpam-base-files.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/pam/libpam-base-files.bb b/recipes/pam/libpam-base-fil=
-es.bb
-index ddcfe4c..ad31952 100644
-=2D-- a/recipes/pam/libpam-base-files.bb
-+++ b/recipes/pam/libpam-base-files.bb
-@@ -7,10 +7,10 @@ DEPENDS =3D ""
- RDEPENDS_${PN} =3D "libpam"
- RRECOMMENDS_${PN} =3D "libpam-meta"
-=20
-=2DPR =3D "r6"
-+PR =3D "r7"
-=20
- SRC_URI =3D " \
-=2D           file://pam.d/* \
-+           file://pam.d \
- "
-=20
- do_install() {        =20
-=2D-=20
-1.5.3.4
+On 7/1/2010 8:48 PM, Bill Sargent wrote:
+>  Hello,
+>
+> I'm trying to add the openldap 2.4.21 recipe to my bootable image, and 
+> it doesn't seem to be creating the packages. It installs only the libs 
+> and no binaries (slapd etc..) ... I looked at the recipe and it seems 
+> it should be creating some bin package as well as base etc... but I 
+> haven't seen any in my packages directories.
+>
+> Can someone explain to me what is wrong? Is there a problem with the 
+> openldap recipe?
+>
+> Thanks
+> Bill
+
+Well I wrote this the other day and as usual, nobody responded. I 
+finally got it to spit out libldap-2.40*.ipk with the slapd etc... 
+however, adding
+
+libldap-2.4-slapd
+and
+libldap-2.4-bin
+
+to my IMAGE_INSTALL variable doesn't seem to work. Can someone explain 
+to me, the correct way to install a full working openldap server and 
+utilities into an image?
+
+As much documentation as there is for this, apparently we need a list of 
+installable packages as well since the filenames don't exactly always 
+mean that it's a package name thats installable.  If there is one, I've 
+missed it I think :)
+
+Thanks,
+Bill
+
+
 
 
