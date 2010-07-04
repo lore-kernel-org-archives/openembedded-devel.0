@@ -1,18 +1,18 @@
 Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OVMbW-00067Y-P1
+	(envelope-from <dokuwiki@keylevel.com>) id 1OVNaB-0004hs-RJ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 12:39:19 +0200
-Received: from durham.keylevel.com ([109.224.134.115]:4541 helo=[192.168.1.98])
+	Sun, 04 Jul 2010 13:42:00 +0200
+Received: from durham.keylevel.com ([109.224.134.115]:7872 helo=[192.168.1.98])
 	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OVMWu-0000hS-OK
+	(envelope-from <dokuwiki@keylevel.com>) id 1OVNVZ-0004yq-S1
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 04 Jul 2010 11:34:32 +0100
-Message-Id: <06442837-6CA2-4468-BD5F-125499888D90@keylevel.com>
+	Sun, 04 Jul 2010 12:37:13 +0100
+Message-Id: <FE629F29-C087-4DF5-8C22-99EF4853FAF5@keylevel.com>
 From: Chris Tapp <dokuwiki@keylevel.com>
 To: openembedded-devel@lists.openembedded.org
 Mime-Version: 1.0 (Apple Message framework v936)
-Date: Sun, 4 Jul 2010 11:34:30 +0100
+Date: Sun, 4 Jul 2010 12:37:11 +0100
 X-Mailer: Apple Mail (2.936)
 X-AntiAbuse: This header was added to track abuse,
 	please include it with any abuse report
@@ -28,7 +28,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Where is my root fs?
+Subject: Cross compile badness - /usr/include in /usr/include
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,23 +42,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 04 Jul 2010 10:39:19 -0000
+X-List-Received-Date: Sun, 04 Jul 2010 11:42:00 -0000
 Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
 Content-Transfer-Encoding: 7bit
 
-I've built an i586-generic/minimal console image and can boot this by  
-passing the following kernel options:
+I sometimes get "Cross compile badness - /usr/include in /usr/ 
+include", most recently when trying to build libsdl-ttf.
 
-bzImage initrd=initrd.gz ramdisk_size=100000 root=/dev/ram1 init=/sbin/ 
-init
+I finally tracked down that the cause was having part of the SDL  
+development environment installed on the build host, leading to me  
+having a /usr/include/SDL directory.
 
-However, if I build an alix/minimal console image and boot using the  
-same options, then I get a kernel panic saying that root couldn't be  
-mounted.
+Uninstalling this package from the host allowed the build to work.
 
-The initrd has a /dev/ram0 device node, so why does the boot fail? I'm  
-assuming it gets loaded under a different device, but I can I find out  
-what it is?
+1) Is this a 'known issue' with building?
+2) Is there any way I can guard against it? I do now have a clue to  
+what it means, but the cause may not always be so obvious.
+3) Can I modify the .bb files to prevent this?
+
+Is it possible to 'chroot' (or so such) so that the likes of /usr are  
+constrained to the build environment?
 
 Chris
 
