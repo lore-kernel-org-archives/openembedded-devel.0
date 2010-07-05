@@ -1,48 +1,44 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OVpIH-0000b3-4w
+	(envelope-from <raj.khem@gmail.com>) id 1OVpnC-0004ES-V0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 05 Jul 2010 19:17:22 +0200
-Received: by gwj18 with SMTP id 18so2780820gwj.6
+	Mon, 05 Jul 2010 19:49:20 +0200
+Received: by iwn34 with SMTP id 34so5694216iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jul 2010 10:12:31 -0700 (PDT)
+	Mon, 05 Jul 2010 10:44:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=VivoZu71PR86FxnQ4B6AWISnckRn/NkoS4r9rZgUmiw=;
-	b=PWdR2kCjqtfn1xoDJYIONY99hWdanOCKlqE6zpGje14sr6fDQqUZT6wJVdfhxPZs/l
-	qjfBVkQjmkHrvrwU6LDVpOaHZ0okFFNtAPcLPRmJnO/dIT3nxdW+8/ePkCwUH36mNPFp
-	8KxxfxOG6mcVPPothV1LL1I6x5DvOTIpw8CE8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=YTNyvo8TZnNNZPA6RXOshG5S/ZG+h0T39xMqkOSgzBg=;
+	b=OluTASViyag+IGI0zRT5OG+5W/jZmr6wAA1Oh8nSwUYwaMBguhkMhVPXnyxQkYNiCJ
+	Qz987dO3G+qRl0PB2wyPtOjv7P+eOU9/XNVRkxCRgtmx3TN5RO4tPeHKrhFwmD6r/R0H
+	cKwmigR2+K6ceUgQa7xuFg9NpKXROu4XRzY4k=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Is2l2Vg9QqAtCyI+hP/mp0JRJIiFmGthjoJ32zVRoCcICq9tFbAycUQ20nv5eNUknJ
-	dLoevPdvv2G53oH+iSuCkTA7mH5VYq+ZmbUPropVmqfxryDJg5R7RM1YRU37fy3JuL9T
-	nG5xQdjjXZlAloucMSjdko38wIP5UPB8Ed6Oc=
-Received: by 10.229.189.143 with SMTP id de15mr1751371qcb.270.1278349951337; 
-	Mon, 05 Jul 2010 10:12:31 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=of6AsZhWspKpm1VkRptcQKX+omgyJ3EAGE452DrC/WqYXyTK0wnDobcsDap0MrKiFI
+	Ebgj/rZ+vPQlTG8HuZnUcQb1MDUV3b2uzOJa4G21h4POEOrXUt9Y4AWYLetefq9NSOKU
+	J7Mcda7aWFd50RxT+F9koAjUO3RKuvalZC+As=
+Received: by 10.42.0.195 with SMTP id 3mr995562icd.83.1278351870269; Mon, 05 
+	Jul 2010 10:44:30 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.233.4 with HTTP; Mon, 5 Jul 2010 10:12:11 -0700 (PDT)
-In-Reply-To: <201007051828.09715.khimov@altell.ru>
-References: <1278264840-24635-1-git-send-email-raj.khem@gmail.com> 
-	<201007051828.09715.khimov@altell.ru>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 5 Jul 2010 10:12:11 -0700
-X-Google-Sender-Auth: UG0PC0m1r3g_HV4Dr0yxHWpGREs
-Message-ID: <AANLkTinlTkrxUB1WY53SJk9MIbk47wCoffJbM6C88_AM@mail.gmail.com>
+Received: by 10.231.14.131 with HTTP; Mon, 5 Jul 2010 10:44:10 -0700 (PDT)
+In-Reply-To: <4C3137CF.8090503@gmail.com>
+References: <4C3137CF.8090503@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 5 Jul 2010 10:44:10 -0700
+Message-ID: <AANLkTikDi2Vkkrn1cQQZHVbyjoObG1lv7-qm0M4eDjei@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH][v2] base.bbclass: Fix oe_unpack_file to unpack files to match new bitbake bb.decodeurl()
+Subject: Re: [PATCH] gpsd_2.94.bb: fix CROSS COMPILE badness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,53 +52,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 05 Jul 2010 17:17:22 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 05 Jul 2010 17:49:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 5, 2010 at 7:28 AM, Roman I Khimov <khimov@altell.ru> wrote:
+On Sun, Jul 4, 2010 at 6:39 PM, Graham Gower <graham.gower@gmail.com> wrote=
+:
+> configure.ac shouldn't check the host system for includes/libraries,
+> disable checking for libusb.
 
-> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=92=D0=BE=D1=81=D0=BA=D1=80=D0=B5=D1=81=D0=B5=D0=BD=D1=8C=D0=B5 04 =
-=D0=B8=D1=8E=D0=BB=D1=8F 2010 21:34:00 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem =
-Raj =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> > * This patch now uses the path which essentially is the path and
-> >   filename relative to recipe dir. It will create the directories
-> >   as expected. Suppose if the is says file://pam.d/login in the
-> >   SRC_URI then it will be copied to $WORKDIR/pam.d/login as it
-> >   was happening before the fix to decodeurl in bitbake.
-> >
-> > * Do not copy the .patch and .diff files into $WORKDIR
-> >   they are already symlinked in patches/ dir which will
-> >   be used by quilt.
-> >
-> >
-> > I have done native-sdk-image build from scratch for arm/x86 using bitba=
-ke
-> >  master and this patch on OE without any problem.
-> >
-> > OK for .dev ?
-> >
-> > Thanks
-> >
-> > -Khem
-> >
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> >  classes/base.bbclass |   20 +++++++++-----------
-> >  1 files changed, 9 insertions(+), 11 deletions(-)
-> >
+while disabling is ok better would be to make this test
+run in cross environment as they are trying to find out
+which libusb is installed may be use libusb-config ?
+
+
+
 >
-> Acked-by: Roman I Khimov <khimov@altell.ru>
+> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+> ---
+> =A0.../gpsd/files/2.94-remove-libusb-badness.patch =A0 =A0| =A0 32 ++++++=
+++++++++++++++
+> =A0recipes/gpsd/gpsd_2.94.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
+=A0 =A0| =A0 =A05 ++-
+> =A02 files changed, 35 insertions(+), 2 deletions(-)
+> =A0create mode 100644 recipes/gpsd/files/2.94-remove-libusb-badness.patch
+>
+> diff --git a/recipes/gpsd/files/2.94-remove-libusb-badness.patch b/recipe=
+s/gpsd/files/2.94-remove-libusb-badness.patch
+> new file mode 100644
+> index 0000000..1517ede
+> --- /dev/null
+> +++ b/recipes/gpsd/files/2.94-remove-libusb-badness.patch
+> @@ -0,0 +1,32 @@
+> +--- gpsd-2.94/configure.ac.orig =A0 =A0 =A0 =A02010-07-05 11:01:08.00000=
+0000 +0930
+> ++++ gpsd-2.94/configure.ac =A0 =A0 2010-07-05 11:01:44.000000000 +0930
+> +@@ -243,18 +243,18 @@
+> + # /usr/include/libusb-*/libusb.h
+> + #
+> + AC_MSG_CHECKING([for libusb version >=3D 1.0.0])
+> +-if test -f /usr/include/libusb-*/libusb.h ;
+> +-then
+> +- =A0 =A0usb=3D$(basename /usr/lib/libusb-*.so | sed -e s/\.so// -e s/^l=
+ib//)
+> +- =A0 =A0AC_DEFINE([HAVE_LIBUSB], [], [will link with -l$usb; ])
+> +- =A0 =A0LIBUSB=3D-l${usb}
+> +- =A0 =A0INCUSB=3D-I/usr/include/lib${usb}
+> +- =A0 =A0ac_libusb=3Dyes
+> +- =A0 =A0AC_MSG_RESULT([found.])
+> +-else
+> +- =A0 =A0ac_libusb=3Dyes
+> ++#if test -f /usr/include/libusb-*/libusb.h ;
+> ++#then
+> ++# =A0 =A0usb=3D$(basename /usr/lib/libusb-*.so | sed -e s/\.so// -e s/^=
+lib//)
+> ++# =A0 =A0AC_DEFINE([HAVE_LIBUSB], [], [will link with -l$usb; ])
+> ++# =A0 =A0LIBUSB=3D-l${usb}
+> ++# =A0 =A0INCUSB=3D-I/usr/include/lib${usb}
+> ++# =A0 =A0ac_libusb=3Dyes
+> ++# =A0 =A0AC_MSG_RESULT([found.])
+> ++#else
+> ++ =A0 =A0ac_libusb=3Dno
+> + =A0 =A0 AC_MSG_RESULT([not found.])
+> +-fi
+> ++#fi
+> + AC_SUBST(LIBUSB)
+> + AC_SUBST(INCUSB)
+> +
+> diff --git a/recipes/gpsd/gpsd_2.94.bb b/recipes/gpsd/gpsd_2.94.bb
+> index 5cf8b2e..2d63b32 100644
+> --- a/recipes/gpsd/gpsd_2.94.bb
+> +++ b/recipes/gpsd/gpsd_2.94.bb
+> @@ -1,9 +1,10 @@
+> =A0require gpsd.inc
+>
+> -SRC_URI +=3D "file://libtool.patch"
+> +SRC_URI +=3D "file://libtool.patch \
+> + =A0 =A0 =A0 =A0 =A0 file://2.94-remove-libusb-badness.patch"
+> =A0SRC_URI[gpsd.md5sum] =3D "ce70bcd707ac1df861d4c72f503c09d1"
+> =A0SRC_URI[gpsd.sha256sum] =3D "1520b87d106d198aa42137db4b230615dbd0d06b0=
+4e6fcc84e010172fba2da41"
+>
+> -PR =3D "${INC_PR}.0"
+> +PR =3D "${INC_PR}.1"
+>
+> =A0PARALLEL_MAKE =3D ""
+> --
+> 1.7.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-Seems reasonable.
-
-Acked-by: Chris Larson <clarson@kergoth.com>
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
