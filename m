@@ -1,39 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OWF4t-0004Ag-TW
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 22:49:35 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OWF07-0000Ml-Ia from Tom_Rini@mentor.com ;
-	Tue, 06 Jul 2010 13:44:19 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 6 Jul 2010 13:44:18 -0700
-Received: from [172.30.80.199] ([172.30.80.199]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 6 Jul 2010 14:44:18 -0600
-Message-ID: <4C3395A0.7060702@mentor.com>
-Date: Tue, 06 Jul 2010 13:44:16 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWGC6-0001Em-7T for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 00:00:47 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWG7R-0001Pz-5d for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Jul 2010 23:55:57 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Jul 2010 23:55:57 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Jul 2010 23:55:57 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1278447438-27251-1-git-send-email-stefan@datenfreihafen.org>
-In-Reply-To: <1278447438-27251-1-git-send-email-stefan@datenfreihafen.org>
-X-OriginalArrivalTime: 06 Jul 2010 20:44:18.0233 (UTC)
-	FILETIME=[0109CA90:01CB1D4C]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 06 Jul 2010 23:55:49 +0200
+Message-ID: <i108p5$hd$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Stefan Schmidt <stefan@buglabs.net>
-Subject: Re: [PATCH][STABLE 1/3] shadow: Disable email checking completely
+Subject: commit 4d6a63850b4dc7ca2f060aedda26ddf4efa0e5cc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,51 +48,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 20:49:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 06 Jul 2010 22:00:47 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Stefan Schmidt wrote:
-> From: Stefan Schmidt <stefan@buglabs.net>
-> 
-> This allows faster login due to not checking for new emails. Adjust PR to 14 as
-> stable is behind .dev here.
-> 
-> Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
+Things like this:
 
-> ---
->  recipes/shadow/shadow.inc |    5 ++++-
->  1 files changed, 4 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/shadow/shadow.inc b/recipes/shadow/shadow.inc
-> index 30bd92f..55487df 100644
-> --- a/recipes/shadow/shadow.inc
-> +++ b/recipes/shadow/shadow.inc
-> @@ -11,7 +11,7 @@ LICENSE = "BSD"
->  SECTION = "base"
->  DEPENDS += "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}"
->  
-> -INC_PR = "r13"
-> +INC_PR = "r14"
->  
->  # Additional Policy files for PAM
->  PAM_SRC_URI = " \
-> @@ -79,6 +79,9 @@ do_install_append() {
->    sed -i 's/MAIL_DIR/#MAIL_DIR/g' ${D}${sysconfdir}/login.defs
->    sed -i 's/#MAIL_FILE/MAIL_FILE/g' ${D}${sysconfdir}/login.defs
->  
-> +  # disable checking emails at all
-> +  sed -i 's/MAIL_CHECK_ENAB/#MAIL_CHECK_ENAB/g' ${D}${sysconfdir}/login.defs
-> +
->    install -d ${D}${sbindir} ${D}${base_sbindir} ${D}${base_bindir} 
->    for i in passwd chfn newgrp chsh ; do
->      mv ${D}${bindir}/$i ${D}${bindir}/$i.${PN}
++LIBC = "glibc"
++ANGSTROMLIBC = "${LIBC}"
 
++PREFERRED_VERSION_gcc-cross = "4.1.2"
++PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
++PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
++PREFERRED_VERSION_binutils = "2.17.50.0.12"
++PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
++PREFERRED_VERSION_glibc = "2.5"
++PREFERRED_VERSION_glibc-initial = "2.5"
 
--- 
-Tom Rini
-Mentor Graphics Corporation
++PREFERRED_VERSION_busybox_nios2 = "1.13.2"
+
++ASSUME_PROVIDED += "linux-libc-headers-native"
+
+do NOT belong in a machine.conf (or machine include). Those belong in
+the distro (or local.conf), not in the machine.
+
+So please, move the offending bits into a distro include (minus the
+assume provided) to stop this kind of bad example from spreading further.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMM6ZlMkyGM64RGpERAh0WAKCCFMbPN9oeqRa89Kfn5LBlhCCFmgCglgkF
+WOZqYLRBYTgof3G9nIgyYUQ=
+=iST9
+-----END PGP SIGNATURE-----
+
 
 
