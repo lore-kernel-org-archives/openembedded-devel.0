@@ -1,43 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OW9m0-0000Ro-Uq for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 17:09:25 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OW9hJ-0008UE-58 for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 17:04:33 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jul 2010 17:04:33 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jul 2010 17:04:33 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <Tom_Rini@mentor.com>) id 1OWB0Z-0007dC-3x
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Jul 2010 18:28:32 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OWAvr-0006El-BR from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Jul 2010 09:23:39 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 6 Jul 2010 09:23:39 -0700
+Received: from [172.30.80.199] ([172.30.80.199]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 6 Jul 2010 10:23:37 -0600
+Message-ID: <4C335887.60306@mentor.com>
+Date: Tue, 06 Jul 2010 09:23:35 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 06 Jul 2010 17:04:25 +0200
-Message-ID: <i0vglp$qb$1@dough.gmane.org>
-References: <1278016225-11067-1-git-send-email-chase.maupin@ti.com>
-	<1278016225-11067-2-git-send-email-chase.maupin@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1278016225-11067-2-git-send-email-chase.maupin@ti.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <AANLkTilva4t_1fBYfzHthbUInh43adY9VYbU9EjgZL7V@mail.gmail.com>	<1278021694.30247.438.camel@rex>
+	<4C3093B0.5090603@vollmann.ch>
+In-Reply-To: <4C3093B0.5090603@vollmann.ch>
+X-OriginalArrivalTime: 06 Jul 2010 16:23:38.0108 (UTC)
+	FILETIME=[96CC1BC0:01CB1D27]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/1] sourceipk: add class to create source ipks
+Subject: Re: [RFC} Disable multilib in gcc recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,178 +48,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 15:09:25 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 06 Jul 2010 16:28:32 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Detlef Vollmann wrote:
+> On 07/02/10 00:01, Richard Purdie wrote:
+>> On Thu, 2010-07-01 at 00:14 -0700, Khem Raj wrote:
+>>> I would like to propose to remove building multilib with gcc recipes.
+>>> It creates problems
+>>> and we do not package correct bits on some platforms. As we tend to
+>>> build toolchains keeping in mind the machine it is targetting I think
+>>> multilib is not that significant
+>>>
+>>> Concerns ? comments?
+>>
+>> I'm backing this. Currently multilib is broken and for a good
+>> implementation we really needs a ground up proposal for how to handle it
+>> well. I'm starting to look into the problem FWIW so I'd appreciate being
+>> in the loop in any discussions.
+> I've run into multilib issues as well, but could always solve it on a
+> case by case base (e.g. on powerpc).  But I agree it's currently a mess.
+> But what you need to keep in mind if you actually drop multilib support
+> is that you need to rename the prefix for the SDK toolchains.
+> It would be bad if PowerPC 32-bit and 64-bit toolchains were both named
+> powerpc-angstrom-linux-
 
-Looks good to me. I'll apply it if there are no objections.
+Keep in mind that what's being suggested isn't dropping multilib support 
+but being clear that it's not something that works right today while we 
+re-evaluate doing it properly.  As you note, yes, the SDK case needs 
+some thought today as the default paths conflict very easily (and can 
+just as easily be worked around, stick FEED_ARCH or similar in there).
 
-On 01-07-10 22:30, Chase Maupin wrote:
-> * Created the sourceipk.bbclass class that can be used to
->   package the patched sources and recipe for an application
->   into an ipk for installation.
-> * Allows specification of the installation directory for the
->   sources using the SRCIPK_INSTALL_DIR variable.
-> * Can be enabled per package and controlled through the
->   CREATE_SRCIPK variable.
-> * Creates a README file in the sources directory that
->   explains the contents of the package.
-> * User can specify the package architecture for the source ipk
->   using the SRCIPK_PACKAGE_ARCH variable.  The default value is
->   "all".
-> * Using the -L flag to the cp command to copy files pointed to by
->   symlinks and not the symlinks themselves.
-> 
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> ---
->  classes/sourceipk.bbclass |  127 +++++++++++++++++++++++++++++++++++++++++++++
->  1 files changed, 127 insertions(+), 0 deletions(-)
->  create mode 100644 classes/sourceipk.bbclass
-> 
-> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
-> new file mode 100644
-> index 0000000..e3f2c41
-> --- /dev/null
-> +++ b/classes/sourceipk.bbclass
-> @@ -0,0 +1,127 @@
-> +# sourceipk.bbclass enables the creation of an ipk file that contains the
-> +# sources used during the build.  The sources contained in the ipk are the
-> +# patched sources before configuration has been done.
-> +#
-> +# This class is used to provide an easy method to ship the corresponding
-> +# sources for a package to end users so that they can install them on their
-> +# host or target systems.
-> +#
-> +# This package uses the following variables to control its operations:
-> +#   - CREATE_SRCIPK         = When set to 1 this variable indicates that 
-> +#                             a source ipk should be generated for the package.
-> +#   - SRCIPK_INSTALL_DIR    = This variable indicates the directory to install
-> +#                             the sources into.
-> +#   - SRCIPK_PACKAGE_ARCH   = This variable allows specific recipies to
-> +#                             specify an architecture for the sourcetree
-> +#                             package is "all" is not appropriate
-> +#
-> +# The default installation directory for the sources is:
-> +#   /usr/src/${PN}-src
-> +#
-> +# By setting the SRCIPK_INSTALL_DIR this default can be changed to any
-> +# location desired.  When combined with the opkg -o option this allows for the
-> +# system building to specify a relative package install location to the
-> +# install root given to opkg.  Each source ipk can have a different directory.
-> +# 
-> +# Creation of the source ipk can be controlled per package by setting
-> +# CREATE_SRCIPK = "1" in the package recipe or by setting
-> +# CREATE_SRCIPK_pn-<package name> = "1" in your local.conf
-> +#
-> +#TODO: 
-> +# Need to figure out how to use ipkg-build in this class.
-> +# I tried adding it as a dependency for the do_create_srcipk
-> +# task using:
-> +#   do_create_srcipk[depends] += "ipkg-utils-native:do_populate_sysroot"
-> +# But then there is a circular dependency between sourcipk.bbclass and
-> +# ipkg-utils-native.  Until I can figure out how to resolve this
-> +# circular dependency I am extracting the needed pieces from ipkg-build
-> +# into this class and building the source ipk myself.
-> +
-> +
-> +# Default is to not create the source ipk
-> +CREATE_SRCIPK ?= "0"
-> +
-> +# Default installation prefix
-> +SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
-> +
-> +# Default PACKAGE_ARCH for sources is "all"
-> +SRCIPK_PACKAGE_ARCH ?= "all"
-> +
-> +# Create a README file that describes the contents of the source ipk
-> +sourceipk_create_readme() {
-> +    readme="$1/README.${PN}-src"
-> +    touch $readme
-> +    echo 'This package contains the patched sources for ${PN} that' >> $readme
-> +    echo 'were used to generate the ${PN} binary ipk package(s).' >> $readme
-> +    echo 'This package does not build or generate the binaries' >> $readme
-> +    echo 'directly.  To build the binaries you must either' >> $readme
-> +    echo 'configure and build the sources yourself or use:' >> $readme
-> +    echo '    bitbake ${PN}' >> $readme
-> +    echo '' >> $readme
-> +    echo 'NOTE: The patches applied to the sources can be found in' >> $readme
-> +    echo "      the \"patches\" directory" >> $readme
-> +}
-> +
-> +# Create the source ipk file.  The ipk is manually created here instead
-> +# of using the normal ipk system because some recipes will over write
-> +# the PACKAGES variable.  Thus if this class added a -src package
-> +# to the list of packages to be created that package would be lost.
-> +# See the linux kernel recipe for an example of this issue.
-> +sourceipk_do_create_srcipk() {
-> +    if [ ${CREATE_SRCIPK} != "0" ]
-> +    then
-> +        tmp_dir="${WORKDIR}/sourceipk-tmp"
-> +        srcipk_dir="${WORKDIR}/sourceipk-data"
-> +        mkdir -p $tmp_dir/CONTROL
-> +        mkdir -p $srcipk_dir
-> +        control_file="$tmp_dir/CONTROL/control"
-> +
-> +        # Write the control file
-> +        echo "Package: ${PN}-src" > $control_file
-> +        echo "Version: ${PV}-${PR}" >> $control_file
-> +        echo "Description: Patched sources for ${PN}" >> $control_file
-> +        echo "Section: ${SECTION}" >> $control_file
-> +        echo "Priority: Optional" >> $control_file
-> +        echo "Maintainer: ${MAINTAINER}" >> $control_file
-> +        echo "Architecture: ${SRCIPK_PACKAGE_ARCH}" >> $control_file
-> +        srcuri="${SRC_URI}"
-> +        if [ "$srcuri" == "" ]
-> +        then
-> +            srcuri="OpenEmbedded"
-> +        fi
-> +        echo "Source: $srcuri" >> $control_file
-> +
-> +        #Write the control tarball
-> +        tar -C $tmp_dir/CONTROL --owner=0 --group=0 -czf $srcipk_dir/control.tar.gz .
-> +
-> +        # Get rid of temporary control file
-> +        rm -rf $tmp_dir/CONTROL
-> +
-> +        # Copy sources for packaging
-> +        mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
-> +        cp -rLf ${S}/* $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> +        sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> +        cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> +
-> +        #Write the data tarball
-> +        tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
-> +
-> +        # Create the debian-binary file
-> +        echo "2.0" > $srcipk_dir/debian-binary
-> +
-> +        #Write the ipk file
-> +        mkdir -p ${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}
-> +        pkg_file=${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}/${PN}-src_${PV}-${PR}_${SRCIPK_PACKAGE_ARCH}.ipk
-> +        rm -f $pkg_file
-> +        tar -C $srcipk_dir -czf $pkg_file .
-> +
-> +        # Remove the temporary directory
-> +        rm -rf $tmp_dir
-> +    fi
-> +}
-> +
-> +EXPORT_FUNCTIONS do_create_srcipk
-> +
-> +do_create_srcipk[deptask] = "do_patch"
-> +
-> +addtask create_srcipk after do_patch before do_configure
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMM0X5MkyGM64RGpERAlLOAJ9zir2YCyl6hlF8+gAJReg+uWwZkwCdHOFp
-m88nsflzdmgtkbIEWkLdtOM=
-=VUiZ
------END PGP SIGNATURE-----
-
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
