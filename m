@@ -1,47 +1,26 @@
-Received: from smtp-out.google.com ([216.239.44.51])
+Received: from smtp202.alice.it ([82.57.200.98])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <alees@google.com>) id 1OVyw2-0001F7-08
+	(envelope-from <GNUtoo@no-log.org>) id 1OW1LL-0007Nx-LK
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 05:35:21 +0200
-Received: from kpbe11.cbf.corp.google.com (kpbe11.cbf.corp.google.com
-	[172.25.105.75]) by smtp-out.google.com with ESMTP id o663U2hb017075
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Jul 2010 20:30:02 -0700
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=google.com; s=beta;
-	t=1278387002; bh=qDTuGo76GCI3HIGONCcpFSrUy40=;
-	h=MIME-Version:From:Date:Message-ID:Subject:To:Content-Type;
-	b=DTX9WYVSpIEHPw8fZSKiifLawNTEFhStxevQmlwL37MsZzbAe8y8TkGzX3V2Qdhel
-	PYP1PUfDh4I5XN/G4w2EQ==
-DomainKey-Signature: a=rsa-sha1; s=beta; d=google.com; c=nofws; q=dns;
-	h=mime-version:from:date:message-id:subject:to:content-type:x-system-of-record;
-	b=GQxgnvFhW5ZU+PjkctVXQsdzEKbRM7Wf8Q2eEixV9z6Hb2SOXGRNXWUt+hfHf0vff
-	hJ7d/CQsmANdQEsoGR+og==
-Received: from vws3 (vws3.prod.google.com [10.241.21.131])
-	by kpbe11.cbf.corp.google.com with ESMTP id o663U0g7014192
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 5 Jul 2010 20:30:01 -0700
-Received: by vws3 with SMTP id 3so4345171vws.34
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 05 Jul 2010 20:30:00 -0700 (PDT)
-Received: by 10.220.168.12 with SMTP id s12mr2036924vcy.240.1278386999364; 
-	Mon, 05 Jul 2010 20:29:59 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.220.83.97 with HTTP; Mon, 5 Jul 2010 20:29:39 -0700 (PDT)
-From: Angus Lees <alees@google.com>
-Date: Tue, 6 Jul 2010 13:29:39 +1000
-Message-ID: <AANLkTinadOzl08k8hENqZJf9fMzcHHCnpUP1DfmatDj7@mail.gmail.com>
+	Tue, 06 Jul 2010 08:09:23 +0200
+Received: from localhost.localdomain (95.244.160.23) by smtp202.alice.it
+	(8.5.124.08) (authenticated as editempo@alice.it)
+	id 4C1A2A7C003988EB for openembedded-devel@lists.openembedded.org;
+	Tue, 6 Jul 2010 08:01:45 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-X-System-Of-Record: true
-X-SA-Exim-Connect-IP: 216.239.44.51
-X-SA-Exim-Mail-From: alees@google.com
+Date: Tue,  6 Jul 2010 08:01:40 +0200
+Message-Id: <1278396101-30522-1-git-send-email-GNUtoo@no-log.org>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 82.57.200.98
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: canadian-cross sdk?
+Subject: [PATCH] htcdream: use xf86-video-fbdev and xf86-input-tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,16 +34,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 03:35:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 06 Jul 2010 06:09:23 -0000
 
-I have an SDK built for my OS using dev-OE - and it works well.  I'd like to
-build an SDK for another host OS (in particular cygwin if that is possible),
-but I'm lost in a twisty maze of canadian-sdk classes that all seem to be
-deprecated and/or unused.
 
-Which of the canadian-cross options is the recommended approach atm?  How do
-I use it?
+hi,
+Just changing the machine config doesn't make it ship xf86-video-fbdev 
+  and xf86-video-tslib when bitbaking shr-image ,because task-x11
+  isn't rebuilt and so it ship the previous task-x11 which contained
+  xf86-video-msm and xf86-input-evtouch.
 
- - Gus
+Since task-x11 is core or will become core, I sent a patch instead
+  of pushing.
+
+Denis.
+
+
 
