@@ -1,40 +1,43 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jan.paesmans@gmail.com>) id 1OW8Ly-0003Od-KH
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 15:38:27 +0200
-Received: by pxi12 with SMTP id 12so2874261pxi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OW9m0-0000Ro-Uq for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Jul 2010 17:09:25 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OW9hJ-0008UE-58 for openembedded-devel@lists.openembedded.org;
+	Tue, 06 Jul 2010 17:04:33 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Jul 2010 17:04:33 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jul 2010 06:33:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=uf2J11sS8hYiGUetPcOkau5zDIh4cd8CSxZSug71Irk=;
-	b=woUyy1GJG1yw8Y3doS9ddmEInsUulNfVyQCpXLXVvlXiNtFqKZJmMVTKzhrPmA02C3
-	1JzfNupnAhFTOq5JyrpJZXcEO2Rf3wwbbT45hCUDGO6rK561cl68p3SlcgoYfSW58oyl
-	FditXgKxK0d8qx0Ult/0IXuU3HnovZT3YHsYc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=mCGIXz14ZU2jDgdlQYDTaUYTTF1klNHpn1usjQ+4oEnJBMrHpuwo9y42t788YVjOZT
-	HBWlZo5LRXtEYMWoGqArWrBzTVG1waa2d3ufM4Su5Ll4zpo4R8E7zYX7VgAZ3km+z1gQ
-	pqwZYhSMQfmyXCw+4YPaVbgp/QJbOEhd1CJcw=
-MIME-Version: 1.0
-Received: by 10.142.172.17 with SMTP id u17mr5587540wfe.78.1278423212254; Tue, 
-	06 Jul 2010 06:33:32 -0700 (PDT)
-Received: by 10.150.216.16 with HTTP; Tue, 6 Jul 2010 06:33:31 -0700 (PDT)
-Date: Tue, 6 Jul 2010 15:33:31 +0200
-Message-ID: <AANLkTik1mhR1trtNfJcNrehMg0gs2lNSXyp51PPpaSPu@mail.gmail.com>
-From: Jan Paesmans <jan.paesmans@gmail.com>
-To: OpenEmbedded Mailing List <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: jan.paesmans@gmail.com
+	Tue, 06 Jul 2010 17:04:33 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 06 Jul 2010 17:04:25 +0200
+Message-ID: <i0vglp$qb$1@dough.gmane.org>
+References: <1278016225-11067-1-git-send-email-chase.maupin@ti.com>
+	<1278016225-11067-2-git-send-email-chase.maupin@ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <1278016225-11067-2-git-send-email-chase.maupin@ti.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: native glibc-initial-2.9 unpack error
+Subject: Re: [PATCH 1/1] sourceipk: add class to create source ipks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,36 +51,178 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 13:38:27 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 06 Jul 2010 15:09:25 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-During the unpack stage of glibc-initial version 2.9, the following
-error occurs:
+Looks good to me. I'll apply it if there are no objections.
 
-cp: cannot create regular file `/ld.so.conf': Permission denied
+On 01-07-10 22:30, Chase Maupin wrote:
+> * Created the sourceipk.bbclass class that can be used to
+>   package the patched sources and recipe for an application
+>   into an ipk for installation.
+> * Allows specification of the installation directory for the
+>   sources using the SRCIPK_INSTALL_DIR variable.
+> * Can be enabled per package and controlled through the
+>   CREATE_SRCIPK variable.
+> * Creates a README file in the sources directory that
+>   explains the contents of the package.
+> * User can specify the package architecture for the source ipk
+>   using the SRCIPK_PACKAGE_ARCH variable.  The default value is
+>   "all".
+> * Using the -L flag to the cp command to copy files pointed to by
+>   symlinks and not the symlinks themselves.
+> 
+> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> ---
+>  classes/sourceipk.bbclass |  127 +++++++++++++++++++++++++++++++++++++++++++++
+>  1 files changed, 127 insertions(+), 0 deletions(-)
+>  create mode 100644 classes/sourceipk.bbclass
+> 
+> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+> new file mode 100644
+> index 0000000..e3f2c41
+> --- /dev/null
+> +++ b/classes/sourceipk.bbclass
+> @@ -0,0 +1,127 @@
+> +# sourceipk.bbclass enables the creation of an ipk file that contains the
+> +# sources used during the build.  The sources contained in the ipk are the
+> +# patched sources before configuration has been done.
+> +#
+> +# This class is used to provide an easy method to ship the corresponding
+> +# sources for a package to end users so that they can install them on their
+> +# host or target systems.
+> +#
+> +# This package uses the following variables to control its operations:
+> +#   - CREATE_SRCIPK         = When set to 1 this variable indicates that 
+> +#                             a source ipk should be generated for the package.
+> +#   - SRCIPK_INSTALL_DIR    = This variable indicates the directory to install
+> +#                             the sources into.
+> +#   - SRCIPK_PACKAGE_ARCH   = This variable allows specific recipies to
+> +#                             specify an architecture for the sourcetree
+> +#                             package is "all" is not appropriate
+> +#
+> +# The default installation directory for the sources is:
+> +#   /usr/src/${PN}-src
+> +#
+> +# By setting the SRCIPK_INSTALL_DIR this default can be changed to any
+> +# location desired.  When combined with the opkg -o option this allows for the
+> +# system building to specify a relative package install location to the
+> +# install root given to opkg.  Each source ipk can have a different directory.
+> +# 
+> +# Creation of the source ipk can be controlled per package by setting
+> +# CREATE_SRCIPK = "1" in the package recipe or by setting
+> +# CREATE_SRCIPK_pn-<package name> = "1" in your local.conf
+> +#
+> +#TODO: 
+> +# Need to figure out how to use ipkg-build in this class.
+> +# I tried adding it as a dependency for the do_create_srcipk
+> +# task using:
+> +#   do_create_srcipk[depends] += "ipkg-utils-native:do_populate_sysroot"
+> +# But then there is a circular dependency between sourcipk.bbclass and
+> +# ipkg-utils-native.  Until I can figure out how to resolve this
+> +# circular dependency I am extracting the needed pieces from ipkg-build
+> +# into this class and building the source ipk myself.
+> +
+> +
+> +# Default is to not create the source ipk
+> +CREATE_SRCIPK ?= "0"
+> +
+> +# Default installation prefix
+> +SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
+> +
+> +# Default PACKAGE_ARCH for sources is "all"
+> +SRCIPK_PACKAGE_ARCH ?= "all"
+> +
+> +# Create a README file that describes the contents of the source ipk
+> +sourceipk_create_readme() {
+> +    readme="$1/README.${PN}-src"
+> +    touch $readme
+> +    echo 'This package contains the patched sources for ${PN} that' >> $readme
+> +    echo 'were used to generate the ${PN} binary ipk package(s).' >> $readme
+> +    echo 'This package does not build or generate the binaries' >> $readme
+> +    echo 'directly.  To build the binaries you must either' >> $readme
+> +    echo 'configure and build the sources yourself or use:' >> $readme
+> +    echo '    bitbake ${PN}' >> $readme
+> +    echo '' >> $readme
+> +    echo 'NOTE: The patches applied to the sources can be found in' >> $readme
+> +    echo "      the \"patches\" directory" >> $readme
+> +}
+> +
+> +# Create the source ipk file.  The ipk is manually created here instead
+> +# of using the normal ipk system because some recipes will over write
+> +# the PACKAGES variable.  Thus if this class added a -src package
+> +# to the list of packages to be created that package would be lost.
+> +# See the linux kernel recipe for an example of this issue.
+> +sourceipk_do_create_srcipk() {
+> +    if [ ${CREATE_SRCIPK} != "0" ]
+> +    then
+> +        tmp_dir="${WORKDIR}/sourceipk-tmp"
+> +        srcipk_dir="${WORKDIR}/sourceipk-data"
+> +        mkdir -p $tmp_dir/CONTROL
+> +        mkdir -p $srcipk_dir
+> +        control_file="$tmp_dir/CONTROL/control"
+> +
+> +        # Write the control file
+> +        echo "Package: ${PN}-src" > $control_file
+> +        echo "Version: ${PV}-${PR}" >> $control_file
+> +        echo "Description: Patched sources for ${PN}" >> $control_file
+> +        echo "Section: ${SECTION}" >> $control_file
+> +        echo "Priority: Optional" >> $control_file
+> +        echo "Maintainer: ${MAINTAINER}" >> $control_file
+> +        echo "Architecture: ${SRCIPK_PACKAGE_ARCH}" >> $control_file
+> +        srcuri="${SRC_URI}"
+> +        if [ "$srcuri" == "" ]
+> +        then
+> +            srcuri="OpenEmbedded"
+> +        fi
+> +        echo "Source: $srcuri" >> $control_file
+> +
+> +        #Write the control tarball
+> +        tar -C $tmp_dir/CONTROL --owner=0 --group=0 -czf $srcipk_dir/control.tar.gz .
+> +
+> +        # Get rid of temporary control file
+> +        rm -rf $tmp_dir/CONTROL
+> +
+> +        # Copy sources for packaging
+> +        mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
+> +        cp -rLf ${S}/* $tmp_dir/${SRCIPK_INSTALL_DIR}/
+> +        sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
+> +        cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
+> +
+> +        #Write the data tarball
+> +        tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
+> +
+> +        # Create the debian-binary file
+> +        echo "2.0" > $srcipk_dir/debian-binary
+> +
+> +        #Write the ipk file
+> +        mkdir -p ${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}
+> +        pkg_file=${DEPLOY_DIR_IPK}/${SRCIPK_PACKAGE_ARCH}/${PN}-src_${PV}-${PR}_${SRCIPK_PACKAGE_ARCH}.ipk
+> +        rm -f $pkg_file
+> +        tar -C $srcipk_dir -czf $pkg_file .
+> +
+> +        # Remove the temporary directory
+> +        rm -rf $tmp_dir
+> +    fi
+> +}
+> +
+> +EXPORT_FUNCTIONS do_create_srcipk
+> +
+> +do_create_srcipk[deptask] = "do_patch"
+> +
+> +addtask create_srcipk after do_patch before do_configure
 
-This seems to be caused by the way the SRC_URI is parsed.
-The SRC_URI for that file is: file://etc/ld.so.conf
-In base.bbclass, the function oe_unpack_file takes care of this file.
-There the uri is parsed with bb.decodeurl
-This has the following result:
-(type, host, path, user, pswd, parm) = ('file', 'etc', '/ld.so.conf',
-'', '', {})
-To install the file, the command is generated by the following line:
-cmd = 'cp %s %s' % (file, os.path.join(os.getcwd(), dest))
-Here, the variable dest is assigned the value of
-os.path.dirname(path), resulting in it's value being '/'
-When applying the os.path.join, the function takes the last absolute
-path and starts building the path from that variable, resulting in the
-target of the cp command being /ld.so.conf
-I tried adding a / to the uri like: file:///etc/ld.so.conf and that
-solved the problem for me.
-Is this a good idea? Or should the function bb.decodeurl take care of this?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards,
+iD8DBQFMM0X5MkyGM64RGpERAlLOAJ9zir2YCyl6hlF8+gAJReg+uWwZkwCdHOFp
+m88nsflzdmgtkbIEWkLdtOM=
+=VUiZ
+-----END PGP SIGNATURE-----
 
-Jan
 
 
