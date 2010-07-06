@@ -1,35 +1,38 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OWBqm-00083k-Ae
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OWCgK-00037A-Ck
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 19:22:28 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.3) with ESMTP id o66HHQJa016372
+	Tue, 06 Jul 2010 20:15:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o66IAtCh000631
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 6 Jul 2010 19:10:55 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 32549-08 for <openembedded-devel@lists.openembedded.org>;
+	Tue,  6 Jul 2010 19:10:51 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o66IAnBG000625
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 6 Jul 2010 19:17:26 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OWBlt-0007C7-NG
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 19:17:25 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Tue, 6 Jul 2010 19:10:50 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <lyeifgcyxm.fsf@ensc-virt.intern.sigma-chemnitz.de>
 References: <AANLkTik1mhR1trtNfJcNrehMg0gs2lNSXyp51PPpaSPu@mail.gmail.com>
-Date: Tue, 06 Jul 2010 19:17:25 +0200
-In-Reply-To: <AANLkTik1mhR1trtNfJcNrehMg0gs2lNSXyp51PPpaSPu@mail.gmail.com>
-	(Jan Paesmans's message of "Tue, 6 Jul 2010 15:33:31 +0200")
-Message-ID: <lyeifgcyxm.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
-MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+	<lyeifgcyxm.fsf@ensc-virt.intern.sigma-chemnitz.de>
+Date: Tue, 06 Jul 2010 19:10:40 +0100
+Message-ID: <1278439840.30247.3632.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: native glibc-initial-2.9 unpack error
@@ -46,25 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 17:22:29 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Tue, 06 Jul 2010 18:15:45 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Jan Paesmans <jan.paesmans@gmail.com> writes:
+On Tue, 2010-07-06 at 19:17 +0200, Enrico Scholz wrote:
+> Jan Paesmans <jan.paesmans@gmail.com> writes:
+> 
+> > cp: cannot create regular file `/ld.so.conf': Permission denied
+> 
+> bb.decodeurl (bitbake 1.10) seems to be buggy:
+> 
+> | >>> import bb
+> | >>> bb.decodeurl("file://ld.so.conf")
+> | ('file', '', 'ld.so.conf', '', '', {})
+> | >>> bb.decodeurl("file://etc/ld.so.conf")
+> | ('file', 'etc', '/ld.so.conf', '', '', {})
+> | >>> bb.decodeurl("file://etc/test/ld.so.conf")
+> | ('file', 'etc', '/test/ld.so.conf', '', '', {})
+> 
 
-> cp: cannot create regular file `/ld.so.conf': Permission denied
+There was a fix recently added to bitbake master for this:
 
-bb.decodeurl (bitbake 1.10) seems to be buggy:
+http://git.openembedded.net/cgit.cgi/bitbake/commit/?id=ca257adc587bb0937ea76d8b32b654fdbf4192b8
 
-| >>> import bb
-| >>> bb.decodeurl("file://ld.so.conf")
-| ('file', '', 'ld.so.conf', '', '', {})
-| >>> bb.decodeurl("file://etc/ld.so.conf")
-| ('file', 'etc', '/ld.so.conf', '', '', {})
-| >>> bb.decodeurl("file://etc/test/ld.so.conf")
-| ('file', 'etc', '/test/ld.so.conf', '', '', {})
+Cheers,
 
+Richard
 
-
-Enrico
 
 
