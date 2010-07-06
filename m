@@ -1,39 +1,38 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OWBCf-0001y8-57
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OWBqm-00083k-Ae
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 18:41:02 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OWB7y-0002Qo-1k from Tom_Rini@mentor.com 
+	Tue, 06 Jul 2010 19:22:28 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.3) with ESMTP id o66HHQJa016372
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 6 Jul 2010 19:17:26 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OWBlt-0007C7-NG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 09:36:10 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 6 Jul 2010 09:36:09 -0700
-Received: from [172.30.80.199] ([172.30.80.199]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 6 Jul 2010 10:36:08 -0600
-Message-ID: <4C335B77.40400@mentor.com>
-Date: Tue, 06 Jul 2010 09:36:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Tue, 06 Jul 2010 19:17:25 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <E1OVb1b-0006yr-EE@melo.openembedded.org>
-In-Reply-To: <E1OVb1b-0006yr-EE@melo.openembedded.org>
-X-OriginalArrivalTime: 06 Jul 2010 16:36:08.0996 (UTC)
-	FILETIME=[565C8640:01CB1D29]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <AANLkTik1mhR1trtNfJcNrehMg0gs2lNSXyp51PPpaSPu@mail.gmail.com>
+Date: Tue, 06 Jul 2010 19:17:25 +0200
+In-Reply-To: <AANLkTik1mhR1trtNfJcNrehMg0gs2lNSXyp51PPpaSPu@mail.gmail.com>
+	(Jan Paesmans's message of "Tue, 6 Jul 2010 15:33:31 +0200")
+Message-ID: <lyeifgcyxm.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Stanislav Brabec : grep: Fixed xz unpack dependency.
+Subject: Re: native glibc-initial-2.9 unpack error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,26 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 16:41:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 06 Jul 2010 17:22:29 -0000
+Content-Type: text/plain; charset=us-ascii
 
-git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: 85b584079faadac00b328fc512fa6cf01102a8a0
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=85b584079faadac00b328fc512fa6cf01102a8a0
-> 
-> Author: Stanislav Brabec <utx@penguin.cz>
-> Date:   Mon Jul  5 01:17:39 2010 +0000
-> 
-> grep: Fixed xz unpack dependency.
+Jan Paesmans <jan.paesmans@gmail.com> writes:
+
+> cp: cannot create regular file `/ld.so.conf': Permission denied
+
+bb.decodeurl (bitbake 1.10) seems to be buggy:
+
+| >>> import bb
+| >>> bb.decodeurl("file://ld.so.conf")
+| ('file', '', 'ld.so.conf', '', '', {})
+| >>> bb.decodeurl("file://etc/ld.so.conf")
+| ('file', 'etc', '/ld.so.conf', '', '', {})
+| >>> bb.decodeurl("file://etc/test/ld.so.conf")
+| ('file', 'etc', '/test/ld.so.conf', '', '', {})
 
 
-What's going on here?  base.bbclass already has .xz tests.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Enrico
 
 
