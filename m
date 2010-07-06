@@ -1,39 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OWH28-0006BZ-7i
+	(envelope-from <raj.khem@gmail.com>) id 1OWHIB-00060k-Lm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 00:54:33 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OWGxQ-0004Kw-J0 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 06 Jul 2010 15:49:40 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 6 Jul 2010 15:49:40 -0700
-Received: from [172.30.80.199] ([172.30.80.199]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 6 Jul 2010 16:49:39 -0600
-Message-ID: <4C33B301.7010006@mentor.com>
-Date: Tue, 06 Jul 2010 15:49:37 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Wed, 07 Jul 2010 01:11:23 +0200
+Received: by pxi12 with SMTP id 12so3190252pxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 06 Jul 2010 16:06:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=8MJe33QVY0N2TI7nUDfYs8VukeoF+yqGgP1CZg24gBw=;
+	b=awtro9Jma296t0m4hlvGrUTggBRgxFQUY72FP6CV+nKNyzbzzK6mfHi6rmYtyCWxit
+	hylKUWeunFKTi2EVn8/P3uuz15mh21f1zGoXmk554MLecQ5kiUl3JrZ4stLPd04gBLTs
+	T5XhRIWTeGG22RNK/wkzzC0XCc8VJErxC5Xi0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=W2cUWzHEQTTK+iQ2JHgTpHgZpCWWCZ9pZ/AW0bjNVuovIracEkjfP4Gwy4OzEEZ/6z
+	Xxlyd8C8G3eEEK3NVv3S3Pewj++7nL83Eqz2wH9+vPM1NhIEpdcDZt39o9+NQO+lNq94
+	dsM08RJWpFki3jQw2y6LxPZKWE3Mgj2mga+iw=
+Received: by 10.114.120.4 with SMTP id s4mr6199754wac.203.1278457574159;
+	Tue, 06 Jul 2010 16:06:14 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id c10sm89462292wam.13.2010.07.06.16.06.13
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 06 Jul 2010 16:06:13 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <i108p5$hd$1@dough.gmane.org>
-In-Reply-To: <i108p5$hd$1@dough.gmane.org>
-X-OriginalArrivalTime: 06 Jul 2010 22:49:39.0426 (UTC)
-	FILETIME=[8404C420:01CB1D5D]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Tue,  6 Jul 2010 16:06:10 -0700
+Message-Id: <1278457570-1713-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: commit 4d6a63850b4dc7ca2f060aedda26ddf4efa0e5cc
+Subject: [PATCH] base.bbclass: re-adding backward compatibility with bitbake w.r.t decodeurl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 06 Jul 2010 22:54:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 06 Jul 2010 23:11:23 -0000
 
-Koen Kooi wrote:
+I am testing this patch to restore the behavior while using unpatched 
+bitbake. Please lend a hand in testing this fix.
 
-> +PREFERRED_VERSION_gcc-cross = "4.1.2"
-> +PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
-> +PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
-> +PREFERRED_VERSION_binutils = "2.17.50.0.12"
-> +PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
-[snip]
-> do NOT belong in a machine.conf (or machine include). Those belong in
-> the distro (or local.conf), not in the machine.
+Thanks
+-Khem
 
-Just putting this out there (and it's indeed _not_ how things are 
-today).  Why would we not want to move towards having this kind of stuff 
-be in the tune-ARCH.inc file, when a specific version is really needed 
-(more avr32 or new'ish core on an existing overall arch) ?  Yes, it 
-should be up to the distro to say "we want 4.4.x + 2.20.x" or whatever, 
-but then we also get the downside of "special case, XXXX only works well 
-with 4.3.4 + 2.19.x" or what have you, and those special cases get 
-introduced in one place and copy/pasted elsewhere.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/base.bbclass |   10 +++++++++-
+ 1 files changed, 9 insertions(+), 1 deletions(-)
 
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 2da0b7a..d6058f0 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -219,7 +219,15 @@ def oe_unpack_file(file, data, url = None):
+ 			# The "destdir" handling was specifically done for FILESPATH
+ 			# items.  So, only do so for file:// entries.
+ 			if type == "file":
+-				dest = os.path.dirname(path) or "."
++				if not host:
++				# this case is for backward compatiblity with older version
++				# of bitbake which do not have the fix
++				# http://cgit.openembedded.org/cgit.cgi/bitbake/commit/?id=ca257adc587bb0937ea76d8b32b654fdbf4192b8
++				# this should not be needed once all releases of bitbake has this fix
++				# applied/backported
++					dest = os.path.join(host, os.path.dirname(path)) or "."
++				else:
++					dest = os.path.dirname(path) or "."
+ 			else:
+ 				dest = "."
+ 			bb.mkdirhier("%s" % os.path.join(os.getcwd(),dest))
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
