@@ -1,43 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OWSGB-00060Q-An for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 12:53:48 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OWSBU-00005Y-1l for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 12:48:56 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 12:48:56 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1OWSLL-0001lH-I0
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 12:59:08 +0200
+Received: (qmail 1651 invoked from network); 7 Jul 2010 12:54:17 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 7 Jul 2010 12:54:17 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id fSaNpOjdnSuX
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 12:48:56 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  7 Jul 2010 12:54:13 +0200 (CEST)
+Received: (Qmail 1643 invoked from network); 7 Jul 2010 12:54:13 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 7 Jul 2010 10:54:13 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1OWSGa-0003ms-Ua
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jul 2010 12:54:12 +0200
+Date: Wed, 7 Jul 2010 12:54:12 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 07 Jul 2010 12:48:47 +0200
-Message-ID: <i11m2f$o0b$1@dough.gmane.org>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world>
-	<1278498389.2345.1744.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1278498389.2345.1744.camel@mill.internal.reciva.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100707105412.GA7030@mi.fu-berlin.de>
+References: <4C187CF6.5010401@gmx.net> <i11kj3$ig7$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i11kj3$ig7$1@dough.gmane.org>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Is there a recipe for building and using busybox with libbusybox out there ?
+Subject: Re: [RFC] add ubuntu patch which adds atomic builtin support	to gcc 4.3.[3 but also other microversions]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,52 +50,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 10:53:48 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 07 Jul 2010 10:59:08 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi,
 
-On 07-07-10 12:26, Phil Blundell wrote:
-> On Wed, 2010-07-07 at 11:45 +0200, Hauser, Wolfgang (external) wrote:
->> I want to use busybox with the applet binaries linked against libbusybox
->> in our system.
->> We need a wide range of applets at the same time, so I suppose it will
->> save overall needed memory space.
-> 
-> What's the advantage of this?  I would have thought it would give you a
-> larger memory footprint rather than a smaller one.  I guess I must be
-> missing something.
-> 
->> Also I want to prevent the system from updating alternatives while the
->> first boot. We have to provide a read only root file system.
-> 
-> Yeah, this is a long-standing piece of OE suckage.  We should fix the
-> alternative selection to work at image construction time.
+I am working on it. I am right now testing if the patches applies to all gcc-4.3 versions.
 
-OE already does that. But what it does after that is flag everything as
-'unpacked' to have opkg rerun all postinsts at boot *again*. If OE
-didn't run u-a at image time we wouldn't be able to use sysvinit for
-example.
-If you only care about u-a, just add a post process command to remove
-the S98configure from the rootfs and opkg won't run.
-
-In the long run a way to control this behaviour and optionally hook into
-qemu or even targets over network to run them at image time. Having to
-run a first boot, remove ssl keys and repackage everything is getting a
-bit tedious.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMNFuPMkyGM64RGpERAmr3AKCNIYUK/AlJZyxB8CSNKGwTC34mywCeNUH4
-yfJydmbOupXEw5hAvomV3sk=
-=t0HL
------END PGP SIGNATURE-----
-
+Bye Henning
 
 
