@@ -1,35 +1,39 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1OWTiC-0003x5-5J
+	(envelope-from <henning@tarent.de>) id 1OWV2i-0002tw-1x
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 14:26:48 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 3709C46E7
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  7 Jul 2010 16:21:53 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Wed, 07 Jul 2010 15:52:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id B535740005564;
+	Wed,  7 Jul 2010 15:41:29 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id ABB044024490B;
+	Wed,  7 Jul 2010 15:41:29 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id WndcwS92Sv6Z; Wed,  7 Jul 2010 15:41:29 +0200 (CEST)
+Received: from entw1 (lui.tarent.buero [192.168.4.41])
+	by ugs.tarent.de (Postfix) with ESMTPSA id A130440005564;
+	Wed,  7 Jul 2010 15:41:28 +0200 (CEST)
+Received: from henning by entw1 with local (Exim 4.71)
+	(envelope-from <henning@tarent.de>)
+	id 1OWUqv-00029c-El; Wed, 07 Jul 2010 15:39:55 +0200
+From: heinold@inf.fu-berlin.de
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 7 Jul 2010 16:21:52 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world>
-	<201007071352.09254.khimov@altell.ru>
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA501819C4D@deimsg40.de.net.world>
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C4D@deimsg40.de.net.world>
-MIME-Version: 1.0
-Message-Id: <201007071621.52694.khimov@altell.ru>
-X-Altell-MailScanner-ID: 3709C46E7.DD132
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+Date: Wed,  7 Jul 2010 15:39:25 +0200
+Message-Id: <1278509965-32664-1-git-send-email-heinold@inf.fu-berlin.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: henning@tarent.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL, BAYES_00,
-	MIME_BASE64_TEXT autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Is there a recipe for building and using busybox with libbusybox out there ?
+Cc: Henning Heinold <h.heinold@tarent.de>
+Subject: [PATCH] gcc: add support for builtin gcc-atomics for gcc-4.3.x versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,15 +47,1820 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 12:26:49 -0000
-Content-Type: Text/Plain;
-  charset="gb2312"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Wed, 07 Jul 2010 13:52:09 -0000
 
-p6Mgp+On4Kfgp9Kn66fWp9+n2qfaIKfgp+Qgp7On4qfWp9Wn0SAwNyCn2qfwp92n8SAyMDEwIDE2
-OjA5OjQ5IKfRp9On5Kfgp+IgSGF1c2VyLCBXb2xmZ2FuZyAoZXh0ZXJuYWwpIAqn36fRp+Gn2qfj
-p9Gn3ToKPiB3aGF0IGFyZSB5b3VyIG5lZWRzIHRvIHVzZSBidXN5Ym94IGxpbmtlZCB0byBsaWJi
-dXN5Ym94LgoKV2UgbmVlZCBwcm9wZXJseSBzZXQgdXAgbWFuZGF0b3J5IGFjY2VzcyBjb250cm9s
-IHN5c3RlbSwgc3ltbGlua3MgYXJlIGV2aWwgZm9yIAp0aGF0Lgo=
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+
+* bump all INC_PR's
+
+Hi,
+
+this are the promised patches for gcc-4.3.x series, which fixes
+the atomic stuff and therefore make it able to build
+llvm multithreaded.
+
+Signed-off-by: Henning Heinold <h.heinold@tarent.de>
+---
+ recipes/gcc/gcc-4.3.1.inc                          |    6 +-
+ .../gcc-4.3.1/debian/armel-atomic-builtins.dpatch  |  350 ++++++++++++++++++++
+ ...90519-arm-eabi-atomic-builtins-unbreak-v2.patch |   52 +++
+ recipes/gcc/gcc-4.3.2.inc                          |    6 +-
+ .../gcc-4.3.2/debian/armel-atomic-builtins.dpatch  |  350 ++++++++++++++++++++
+ ...90519-arm-eabi-atomic-builtins-unbreak-v2.patch |   52 +++
+ recipes/gcc/gcc-4.3.3.inc                          |    4 +-
+ .../gcc-4.3.3/debian/armel-atomic-builtins.dpatch  |  350 ++++++++++++++++++++
+ ...90519-arm-eabi-atomic-builtins-unbreak-v2.patch |   52 +++
+ recipes/gcc/gcc-4.3.4.inc                          |    4 +-
+ .../gcc-4.3.4/debian/armel-atomic-builtins.dpatch  |  350 ++++++++++++++++++++
+ ...90519-arm-eabi-atomic-builtins-unbreak-v2.patch |   52 +++
+ 12 files changed, 1622 insertions(+), 6 deletions(-)
+ create mode 100644 recipes/gcc/gcc-4.3.1/debian/armel-atomic-builtins.dpatch
+ create mode 100644 recipes/gcc/gcc-4.3.1/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+ create mode 100644 recipes/gcc/gcc-4.3.2/debian/armel-atomic-builtins.dpatch
+ create mode 100644 recipes/gcc/gcc-4.3.2/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+ create mode 100644 recipes/gcc/gcc-4.3.3/debian/armel-atomic-builtins.dpatch
+ create mode 100644 recipes/gcc/gcc-4.3.3/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+ create mode 100644 recipes/gcc/gcc-4.3.4/debian/armel-atomic-builtins.dpatch
+ create mode 100644 recipes/gcc/gcc-4.3.4/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+
+diff --git a/recipes/gcc/gcc-4.3.1.inc b/recipes/gcc/gcc-4.3.1.inc
+index c0c7dbe..0f93d37 100644
+--- a/recipes/gcc/gcc-4.3.1.inc
++++ b/recipes/gcc/gcc-4.3.1.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r20"
++INC_PR = "r21"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -25,7 +25,8 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-libgomp-speedup.patch;striplevel=0 \
+ 	file://fedora/gcc43-i386-libgomp.patch;striplevel=0 \
+ 	file://fedora/gcc43-rh251682.patch;striplevel=0 \
+-    file://debian/arm-unbreak-eabi-armv4t.dpatch;apply=yes \
++	file://debian/arm-unbreak-eabi-armv4t.dpatch;apply=yes \
++        file://debian/armel-atomic-builtins.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/libstdc++-pic.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/gcc-ice-hack.dpatch;apply=yes;striplevel=0 \ 
+ 	file://debian/pr30961.dpatch;apply=yes;striplevel=0 \
+@@ -51,6 +52,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://arm-softfloat.patch \
+ 	file://arm-thumb.patch \
+ 	file://arm-thumb-cache.patch \
++        file://gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch \
+ 	file://cache-amnesia.patch \
+ 	file://gfortran-4.3.x.patch \
+ 	file://gcc-4.0.2-e300c2c3.patch \
+diff --git a/recipes/gcc/gcc-4.3.1/debian/armel-atomic-builtins.dpatch b/recipes/gcc/gcc-4.3.1/debian/armel-atomic-builtins.dpatch
+new file mode 100644
+index 0000000..f514375
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.1/debian/armel-atomic-builtins.dpatch
+@@ -0,0 +1,350 @@
++#! /bin/sh -e
++
++# DP: Atomic builtins using kernel helpers for ARM Linux/EABI.
++
++dir=
++if [ $# -eq 3 -a "$2" = '-d' ]; then
++    pdir="-d $3"
++    dir="$3/"
++elif [ $# -ne 1 ]; then
++    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++    exit 1
++fi
++case "$1" in
++    -patch)
++        patch $pdir -f --no-backup-if-mismatch -p0 < $0
++        ;;
++    -unpatch)
++        patch $pdir -f --no-backup-if-mismatch -R -p0 < $0
++        ;;
++    *)
++        echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++        exit 1
++esac
++exit 0
++
++This patch implements the atomic builtins described at:
++
++  http://gcc.gnu.org/onlinedocs/gcc-4.3.0/gcc/Atomic-Builtins.html
++
++for ARM EABI Linux. This implementation uses the kernel helpers
++__kernel_cmpxchg and __kernel_dmb, and so should work on any
++architecture which supports those. (More-efficient versions are possible
++using ldrex/strex on architectures >=v6, but those are not written yet.)
++
++Atomic operations are provided for data sizes of 1, 2 and 4 bytes (but
++not 8 bytes). The implementation uses actual functions
++(__sync_fetch_and_add_2, etc.) rather than expanding code inline.
++
++Tested with cross to arm-none-linux-gnueabi, and with some additional
++hand-written tests which hopefully exercised the atomicity of the
++operations sufficiently.
++
++OK for mainline?
++
++Julian
++
++ChangeLog
++
++    gcc/
++    * config/arm/t-linux-eabi (LIB2FUNCS_STATIC_EXTRA): Add
++    config/arm/linux-atomic.c.
++    * config/arm/linux-atomic.c: New.
++
++Index: gcc/config/arm/linux-atomic.c
++===================================================================
++--- gcc/config/arm/linux-atomic.c	(revision 0)
+++++ gcc/config/arm/linux-atomic.c	(revision 0)
++@@ -0,0 +1,280 @@
+++/* Linux-specific atomic operations for ARM EABI.
+++   Copyright (C) 2008 Free Software Foundation, Inc.
+++   Contributed by CodeSourcery.
+++
+++This file is part of GCC.
+++
+++GCC is free software; you can redistribute it and/or modify it under
+++the terms of the GNU General Public License as published by the Free
+++Software Foundation; either version 2, or (at your option) any later
+++version.
+++
+++In addition to the permissions in the GNU General Public License, the
+++Free Software Foundation gives you unlimited permission to link the
+++compiled version of this file into combinations with other programs,
+++and to distribute those combinations without any restriction coming
+++from the use of this file.  (The General Public License restrictions
+++do apply in other respects; for example, they cover modification of
+++the file, and distribution when not linked into a combine
+++executable.)
+++
+++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
+++WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++for more details.
+++
+++You should have received a copy of the GNU General Public License
+++along with GCC; see the file COPYING.  If not, write to the Free
+++Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
+++02110-1301, USA.  */
+++
+++/* Kernel helper for compare-and-exchange.  */
+++typedef int (__kernel_cmpxchg_t) (int oldval, int newval, int *ptr);
+++#define __kernel_cmpxchg (*(__kernel_cmpxchg_t *) 0xffff0fc0)
+++
+++/* Kernel helper for memory barrier.  */
+++typedef void (__kernel_dmb_t) (void);
+++#define __kernel_dmb (*(__kernel_dmb_t *) 0xffff0fa0)
+++
+++/* Note: we implement byte, short and int versions of atomic operations using
+++   the above kernel helpers, but there is no support for "long long" (64-bit)
+++   operations as yet.  */
+++
+++#define HIDDEN __attribute__ ((visibility ("hidden")))
+++
+++#ifdef __ARMEL__
+++#define INVERT_MASK_1 0
+++#define INVERT_MASK_2 0
+++#else
+++#define INVERT_MASK_1 24
+++#define INVERT_MASK_2 16
+++#endif
+++
+++#define MASK_1 0xffu
+++#define MASK_2 0xffffu
+++
+++#define FETCH_AND_OP_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_fetch_and_##OP##_4 (int *ptr, int val)				\
+++  {									\
+++    int failure, tmp;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return tmp;								\
+++  }
+++
+++FETCH_AND_OP_WORD (add,   , +)
+++FETCH_AND_OP_WORD (sub,   , -)
+++FETCH_AND_OP_WORD (or,    , |)
+++FETCH_AND_OP_WORD (and,   , &)
+++FETCH_AND_OP_WORD (xor,   , ^)
+++FETCH_AND_OP_WORD (nand, ~, &)
+++
+++#define NAME_oldval(OP, WIDTH) __sync_fetch_and_##OP##_##WIDTH
+++#define NAME_newval(OP, WIDTH) __sync_##OP##_and_fetch_##WIDTH
+++
+++/* Implement both __sync_<op>_and_fetch and __sync_fetch_and_<op> for
+++   subword-sized quantities.  */
+++
+++#define SUBWORD_SYNC_OP(OP, PFX_OP, INF_OP, TYPE, WIDTH, RETURN)	\
+++  TYPE HIDDEN								\
+++  NAME##_##RETURN (OP, WIDTH) (TYPE *ptr, TYPE val)			\
+++  {									\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++    unsigned int mask, shift, oldval, newval;				\
+++    int failure;							\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = ((PFX_OP ((oldval & mask) >> shift)			\
+++                 INF_OP (unsigned int) val) << shift) & mask;		\
+++      newval |= oldval & ~mask;						\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (RETURN & mask) >> shift;					\
+++  }
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, oldval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, oldval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, oldval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, oldval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, oldval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, oldval)
+++
+++#define OP_AND_FETCH_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_##OP##_and_fetch_4 (int *ptr, int val)				\
+++  {									\
+++    int tmp, failure;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return PFX_OP tmp INF_OP val;					\
+++  }
+++
+++OP_AND_FETCH_WORD (add,   , +)
+++OP_AND_FETCH_WORD (sub,   , -)
+++OP_AND_FETCH_WORD (or,    , |)
+++OP_AND_FETCH_WORD (and,   , &)
+++OP_AND_FETCH_WORD (xor,   , ^)
+++OP_AND_FETCH_WORD (nand, ~, &)
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, newval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, newval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, newval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, newval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, newval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, newval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, newval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, newval)
+++
+++int HIDDEN
+++__sync_val_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int actual_oldval, fail;
+++    
+++  while (1)
+++    {
+++      actual_oldval = *ptr;
+++
+++      if (oldval != actual_oldval)
+++	return actual_oldval;
+++
+++      fail = __kernel_cmpxchg (actual_oldval, newval, ptr);
+++  
+++      if (!fail)
+++        return oldval;
+++    }
+++}
+++
+++#define SUBWORD_VAL_CAS(TYPE, WIDTH)					\
+++  TYPE HIDDEN								\
+++  __sync_val_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++				       TYPE newval)			\
+++  {									\
+++    int *wordptr = (int *)((unsigned int) ptr & ~3), fail;		\
+++    unsigned int mask, shift, actual_oldval, actual_newval;		\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    while (1)								\
+++      {									\
+++	actual_oldval = *wordptr;					\
+++									\
+++	if (((actual_oldval & mask) >> shift) != (unsigned int) oldval)	\
+++          return (actual_oldval & mask) >> shift;			\
+++									\
+++	actual_newval = (actual_oldval & ~mask)				\
+++			| (((unsigned int) newval << shift) & mask);	\
+++									\
+++	fail = __kernel_cmpxchg (actual_oldval, actual_newval,		\
+++				 wordptr);				\
+++									\
+++	if (!fail)							\
+++          return oldval;						\
+++      }									\
+++  }
+++
+++SUBWORD_VAL_CAS (short, 2)
+++SUBWORD_VAL_CAS (char,  1)
+++
+++typedef unsigned char bool;
+++
+++bool HIDDEN
+++__sync_bool_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int failure = __kernel_cmpxchg (oldval, newval, ptr);
+++  return (failure == 0);
+++}
+++
+++#define SUBWORD_BOOL_CAS(TYPE, WIDTH)					\
+++  bool HIDDEN								\
+++  __sync_bool_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++					TYPE newval)			\
+++  {									\
+++    TYPE actual_oldval							\
+++      = __sync_val_compare_and_swap_##WIDTH (ptr, oldval, newval);	\
+++    return (oldval == actual_oldval);					\
+++  }
+++
+++SUBWORD_BOOL_CAS (short, 2)
+++SUBWORD_BOOL_CAS (char,  1)
+++
+++void HIDDEN
+++__sync_synchronize (void)
+++{
+++  __kernel_dmb ();
+++}
+++
+++int HIDDEN
+++__sync_lock_test_and_set_4 (int *ptr, int val)
+++{
+++  int failure, oldval;
+++
+++  do {
+++    oldval = *ptr;
+++    failure = __kernel_cmpxchg (oldval, val, ptr);
+++  } while (failure != 0);
+++
+++  return oldval;
+++}
+++
+++#define SUBWORD_TEST_AND_SET(TYPE, WIDTH)				\
+++  TYPE HIDDEN								\
+++  __sync_lock_test_and_set_##WIDTH (TYPE *ptr, TYPE val)		\
+++  {									\
+++    int failure;							\
+++    unsigned int oldval, newval, shift, mask;				\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = (oldval & ~mask)						\
+++	       | (((unsigned int) val << shift) & mask);		\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (oldval & mask) >> shift;					\
+++  }
+++
+++SUBWORD_TEST_AND_SET (short, 2)
+++SUBWORD_TEST_AND_SET (char,  1)
+++
+++#define SYNC_LOCK_RELEASE(TYPE, WIDTH)					\
+++  void HIDDEN								\
+++  __sync_lock_release_##WIDTH (TYPE *ptr)				\
+++  {									\
+++    *ptr = 0;								\
+++    __kernel_dmb ();							\
+++  }
+++
+++SYNC_LOCK_RELEASE (int,   4)
+++SYNC_LOCK_RELEASE (short, 2)
+++SYNC_LOCK_RELEASE (char,  1)
++Index: gcc/config/arm/t-linux-eabi
++===================================================================
++--- gcc/config/arm/t-linux-eabi	(revision 136167)
+++++ gcc/config/arm/t-linux-eabi	(working copy)
++@@ -12,3 +12,5 @@ LIB1ASMFUNCS := $(filter-out _dvmd_tls,$
++ # Multilib the standard Linux files.  Don't include crti.o or crtn.o,
++ # which are provided by glibc.
++ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+++
+++LIB2FUNCS_STATIC_EXTRA += $(srcdir)/config/arm/linux-atomic.c
++
++
+diff --git a/recipes/gcc/gcc-4.3.1/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch b/recipes/gcc/gcc-4.3.1/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+new file mode 100644
+index 0000000..6849d46
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.1/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+@@ -0,0 +1,52 @@
++--- gcc-4.4-20090519/gcc/config/arm/linux-eabi.h.~1~	2007-11-08 14:44:09.000000000 +0100
+++++ gcc-4.4-20090519/gcc/config/arm/linux-eabi.h	2009-05-22 20:38:51.000000000 +0200
++@@ -72,6 +72,49 @@
++    do not use -lfloat.  */
++ #undef LIBGCC_SPEC
++ 
+++/* Some symbols are only in the static libgcc. Override REAL_LIBGCC_SPEC
+++   to always pass -lgcc to the linker, even for --shared-libgcc, otherwise
+++   shared libraries break. */
+++#ifdef ENABLE_SHARED_LIBGCC
+++
+++#ifndef USE_LD_AS_NEEDED
+++#define USE_LD_AS_NEEDED 0
+++#endif
+++
+++#if USE_LD_AS_NEEDED
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared-libgcc:-lgcc --as-needed -lgcc_s --no-as-needed} \
+++	%{shared-libgcc:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared: \
+++	  %{!shared-libgcc:-lgcc -lgcc_eh} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"
+++#endif
+++
+++#ifdef LINK_EH_SPEC
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared: \
+++	  %{!shared-libgcc:-lgcc} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"	/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#endif
+++
+++#define REAL_LIBGCC_SPEC " \
+++	%{static|static-libgcc:-lgcc -lgcc_eh} \
+++	%{!static:%{!static-libgcc: \
+++	"REAL_LIBGCC_SPEC_1" \
+++	"REAL_LIBGCC_SPEC_2" \
+++	}}"
+++
+++#else	/* !ENABLE_SHARED_LIBGCC */
+++
+++#define REAL_LIBGCC_SPEC " -lgcc "
+++
+++#endif	/* !ENABLE_SHARED_LIBGCC */
+++
++ /* Clear the instruction cache from `beg' to `end'.  This makes an
++    inline system call to SYS_cacheflush.  */
++ #undef  CLEAR_INSN_CACHE
+diff --git a/recipes/gcc/gcc-4.3.2.inc b/recipes/gcc/gcc-4.3.2.inc
+index a587349..5eebf0b 100644
+--- a/recipes/gcc/gcc-4.3.2.inc
++++ b/recipes/gcc/gcc-4.3.2.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r10"
++INC_PR = "r11"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -25,7 +25,8 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-libgomp-speedup.patch;striplevel=0 \
+ 	file://fedora/gcc43-i386-libgomp.patch;striplevel=0 \
+ 	file://fedora/gcc43-rh251682.patch;striplevel=0 \
+-    file://debian/arm-unbreak-eabi-armv4t.dpatch;apply=yes \
++	file://debian/arm-unbreak-eabi-armv4t.dpatch;apply=yes \
++        file://debian/armel-atomic-builtins.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/libstdc++-pic.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/gcc-ice-hack.dpatch;apply=yes;striplevel=0 \ 
+ 	file://debian/pr30961.dpatch;apply=yes;striplevel=0 \
+@@ -48,6 +49,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://904-flatten-switch-stmt-00.patch \
+ 	file://arm-nolibfloat.patch \
+ 	file://arm-softfloat.patch \
++        file://gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch \
+ 	file://cache-amnesia.patch \
+ 	file://gfortran-4.3.x.patch \
+ 	file://gcc-4.0.2-e300c2c3.patch \
+diff --git a/recipes/gcc/gcc-4.3.2/debian/armel-atomic-builtins.dpatch b/recipes/gcc/gcc-4.3.2/debian/armel-atomic-builtins.dpatch
+new file mode 100644
+index 0000000..f514375
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.2/debian/armel-atomic-builtins.dpatch
+@@ -0,0 +1,350 @@
++#! /bin/sh -e
++
++# DP: Atomic builtins using kernel helpers for ARM Linux/EABI.
++
++dir=
++if [ $# -eq 3 -a "$2" = '-d' ]; then
++    pdir="-d $3"
++    dir="$3/"
++elif [ $# -ne 1 ]; then
++    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++    exit 1
++fi
++case "$1" in
++    -patch)
++        patch $pdir -f --no-backup-if-mismatch -p0 < $0
++        ;;
++    -unpatch)
++        patch $pdir -f --no-backup-if-mismatch -R -p0 < $0
++        ;;
++    *)
++        echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++        exit 1
++esac
++exit 0
++
++This patch implements the atomic builtins described at:
++
++  http://gcc.gnu.org/onlinedocs/gcc-4.3.0/gcc/Atomic-Builtins.html
++
++for ARM EABI Linux. This implementation uses the kernel helpers
++__kernel_cmpxchg and __kernel_dmb, and so should work on any
++architecture which supports those. (More-efficient versions are possible
++using ldrex/strex on architectures >=v6, but those are not written yet.)
++
++Atomic operations are provided for data sizes of 1, 2 and 4 bytes (but
++not 8 bytes). The implementation uses actual functions
++(__sync_fetch_and_add_2, etc.) rather than expanding code inline.
++
++Tested with cross to arm-none-linux-gnueabi, and with some additional
++hand-written tests which hopefully exercised the atomicity of the
++operations sufficiently.
++
++OK for mainline?
++
++Julian
++
++ChangeLog
++
++    gcc/
++    * config/arm/t-linux-eabi (LIB2FUNCS_STATIC_EXTRA): Add
++    config/arm/linux-atomic.c.
++    * config/arm/linux-atomic.c: New.
++
++Index: gcc/config/arm/linux-atomic.c
++===================================================================
++--- gcc/config/arm/linux-atomic.c	(revision 0)
+++++ gcc/config/arm/linux-atomic.c	(revision 0)
++@@ -0,0 +1,280 @@
+++/* Linux-specific atomic operations for ARM EABI.
+++   Copyright (C) 2008 Free Software Foundation, Inc.
+++   Contributed by CodeSourcery.
+++
+++This file is part of GCC.
+++
+++GCC is free software; you can redistribute it and/or modify it under
+++the terms of the GNU General Public License as published by the Free
+++Software Foundation; either version 2, or (at your option) any later
+++version.
+++
+++In addition to the permissions in the GNU General Public License, the
+++Free Software Foundation gives you unlimited permission to link the
+++compiled version of this file into combinations with other programs,
+++and to distribute those combinations without any restriction coming
+++from the use of this file.  (The General Public License restrictions
+++do apply in other respects; for example, they cover modification of
+++the file, and distribution when not linked into a combine
+++executable.)
+++
+++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
+++WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++for more details.
+++
+++You should have received a copy of the GNU General Public License
+++along with GCC; see the file COPYING.  If not, write to the Free
+++Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
+++02110-1301, USA.  */
+++
+++/* Kernel helper for compare-and-exchange.  */
+++typedef int (__kernel_cmpxchg_t) (int oldval, int newval, int *ptr);
+++#define __kernel_cmpxchg (*(__kernel_cmpxchg_t *) 0xffff0fc0)
+++
+++/* Kernel helper for memory barrier.  */
+++typedef void (__kernel_dmb_t) (void);
+++#define __kernel_dmb (*(__kernel_dmb_t *) 0xffff0fa0)
+++
+++/* Note: we implement byte, short and int versions of atomic operations using
+++   the above kernel helpers, but there is no support for "long long" (64-bit)
+++   operations as yet.  */
+++
+++#define HIDDEN __attribute__ ((visibility ("hidden")))
+++
+++#ifdef __ARMEL__
+++#define INVERT_MASK_1 0
+++#define INVERT_MASK_2 0
+++#else
+++#define INVERT_MASK_1 24
+++#define INVERT_MASK_2 16
+++#endif
+++
+++#define MASK_1 0xffu
+++#define MASK_2 0xffffu
+++
+++#define FETCH_AND_OP_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_fetch_and_##OP##_4 (int *ptr, int val)				\
+++  {									\
+++    int failure, tmp;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return tmp;								\
+++  }
+++
+++FETCH_AND_OP_WORD (add,   , +)
+++FETCH_AND_OP_WORD (sub,   , -)
+++FETCH_AND_OP_WORD (or,    , |)
+++FETCH_AND_OP_WORD (and,   , &)
+++FETCH_AND_OP_WORD (xor,   , ^)
+++FETCH_AND_OP_WORD (nand, ~, &)
+++
+++#define NAME_oldval(OP, WIDTH) __sync_fetch_and_##OP##_##WIDTH
+++#define NAME_newval(OP, WIDTH) __sync_##OP##_and_fetch_##WIDTH
+++
+++/* Implement both __sync_<op>_and_fetch and __sync_fetch_and_<op> for
+++   subword-sized quantities.  */
+++
+++#define SUBWORD_SYNC_OP(OP, PFX_OP, INF_OP, TYPE, WIDTH, RETURN)	\
+++  TYPE HIDDEN								\
+++  NAME##_##RETURN (OP, WIDTH) (TYPE *ptr, TYPE val)			\
+++  {									\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++    unsigned int mask, shift, oldval, newval;				\
+++    int failure;							\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = ((PFX_OP ((oldval & mask) >> shift)			\
+++                 INF_OP (unsigned int) val) << shift) & mask;		\
+++      newval |= oldval & ~mask;						\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (RETURN & mask) >> shift;					\
+++  }
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, oldval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, oldval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, oldval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, oldval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, oldval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, oldval)
+++
+++#define OP_AND_FETCH_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_##OP##_and_fetch_4 (int *ptr, int val)				\
+++  {									\
+++    int tmp, failure;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return PFX_OP tmp INF_OP val;					\
+++  }
+++
+++OP_AND_FETCH_WORD (add,   , +)
+++OP_AND_FETCH_WORD (sub,   , -)
+++OP_AND_FETCH_WORD (or,    , |)
+++OP_AND_FETCH_WORD (and,   , &)
+++OP_AND_FETCH_WORD (xor,   , ^)
+++OP_AND_FETCH_WORD (nand, ~, &)
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, newval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, newval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, newval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, newval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, newval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, newval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, newval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, newval)
+++
+++int HIDDEN
+++__sync_val_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int actual_oldval, fail;
+++    
+++  while (1)
+++    {
+++      actual_oldval = *ptr;
+++
+++      if (oldval != actual_oldval)
+++	return actual_oldval;
+++
+++      fail = __kernel_cmpxchg (actual_oldval, newval, ptr);
+++  
+++      if (!fail)
+++        return oldval;
+++    }
+++}
+++
+++#define SUBWORD_VAL_CAS(TYPE, WIDTH)					\
+++  TYPE HIDDEN								\
+++  __sync_val_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++				       TYPE newval)			\
+++  {									\
+++    int *wordptr = (int *)((unsigned int) ptr & ~3), fail;		\
+++    unsigned int mask, shift, actual_oldval, actual_newval;		\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    while (1)								\
+++      {									\
+++	actual_oldval = *wordptr;					\
+++									\
+++	if (((actual_oldval & mask) >> shift) != (unsigned int) oldval)	\
+++          return (actual_oldval & mask) >> shift;			\
+++									\
+++	actual_newval = (actual_oldval & ~mask)				\
+++			| (((unsigned int) newval << shift) & mask);	\
+++									\
+++	fail = __kernel_cmpxchg (actual_oldval, actual_newval,		\
+++				 wordptr);				\
+++									\
+++	if (!fail)							\
+++          return oldval;						\
+++      }									\
+++  }
+++
+++SUBWORD_VAL_CAS (short, 2)
+++SUBWORD_VAL_CAS (char,  1)
+++
+++typedef unsigned char bool;
+++
+++bool HIDDEN
+++__sync_bool_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int failure = __kernel_cmpxchg (oldval, newval, ptr);
+++  return (failure == 0);
+++}
+++
+++#define SUBWORD_BOOL_CAS(TYPE, WIDTH)					\
+++  bool HIDDEN								\
+++  __sync_bool_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++					TYPE newval)			\
+++  {									\
+++    TYPE actual_oldval							\
+++      = __sync_val_compare_and_swap_##WIDTH (ptr, oldval, newval);	\
+++    return (oldval == actual_oldval);					\
+++  }
+++
+++SUBWORD_BOOL_CAS (short, 2)
+++SUBWORD_BOOL_CAS (char,  1)
+++
+++void HIDDEN
+++__sync_synchronize (void)
+++{
+++  __kernel_dmb ();
+++}
+++
+++int HIDDEN
+++__sync_lock_test_and_set_4 (int *ptr, int val)
+++{
+++  int failure, oldval;
+++
+++  do {
+++    oldval = *ptr;
+++    failure = __kernel_cmpxchg (oldval, val, ptr);
+++  } while (failure != 0);
+++
+++  return oldval;
+++}
+++
+++#define SUBWORD_TEST_AND_SET(TYPE, WIDTH)				\
+++  TYPE HIDDEN								\
+++  __sync_lock_test_and_set_##WIDTH (TYPE *ptr, TYPE val)		\
+++  {									\
+++    int failure;							\
+++    unsigned int oldval, newval, shift, mask;				\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = (oldval & ~mask)						\
+++	       | (((unsigned int) val << shift) & mask);		\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (oldval & mask) >> shift;					\
+++  }
+++
+++SUBWORD_TEST_AND_SET (short, 2)
+++SUBWORD_TEST_AND_SET (char,  1)
+++
+++#define SYNC_LOCK_RELEASE(TYPE, WIDTH)					\
+++  void HIDDEN								\
+++  __sync_lock_release_##WIDTH (TYPE *ptr)				\
+++  {									\
+++    *ptr = 0;								\
+++    __kernel_dmb ();							\
+++  }
+++
+++SYNC_LOCK_RELEASE (int,   4)
+++SYNC_LOCK_RELEASE (short, 2)
+++SYNC_LOCK_RELEASE (char,  1)
++Index: gcc/config/arm/t-linux-eabi
++===================================================================
++--- gcc/config/arm/t-linux-eabi	(revision 136167)
+++++ gcc/config/arm/t-linux-eabi	(working copy)
++@@ -12,3 +12,5 @@ LIB1ASMFUNCS := $(filter-out _dvmd_tls,$
++ # Multilib the standard Linux files.  Don't include crti.o or crtn.o,
++ # which are provided by glibc.
++ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+++
+++LIB2FUNCS_STATIC_EXTRA += $(srcdir)/config/arm/linux-atomic.c
++
++
+diff --git a/recipes/gcc/gcc-4.3.2/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch b/recipes/gcc/gcc-4.3.2/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+new file mode 100644
+index 0000000..6849d46
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.2/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+@@ -0,0 +1,52 @@
++--- gcc-4.4-20090519/gcc/config/arm/linux-eabi.h.~1~	2007-11-08 14:44:09.000000000 +0100
+++++ gcc-4.4-20090519/gcc/config/arm/linux-eabi.h	2009-05-22 20:38:51.000000000 +0200
++@@ -72,6 +72,49 @@
++    do not use -lfloat.  */
++ #undef LIBGCC_SPEC
++ 
+++/* Some symbols are only in the static libgcc. Override REAL_LIBGCC_SPEC
+++   to always pass -lgcc to the linker, even for --shared-libgcc, otherwise
+++   shared libraries break. */
+++#ifdef ENABLE_SHARED_LIBGCC
+++
+++#ifndef USE_LD_AS_NEEDED
+++#define USE_LD_AS_NEEDED 0
+++#endif
+++
+++#if USE_LD_AS_NEEDED
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared-libgcc:-lgcc --as-needed -lgcc_s --no-as-needed} \
+++	%{shared-libgcc:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared: \
+++	  %{!shared-libgcc:-lgcc -lgcc_eh} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"
+++#endif
+++
+++#ifdef LINK_EH_SPEC
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared: \
+++	  %{!shared-libgcc:-lgcc} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"	/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#endif
+++
+++#define REAL_LIBGCC_SPEC " \
+++	%{static|static-libgcc:-lgcc -lgcc_eh} \
+++	%{!static:%{!static-libgcc: \
+++	"REAL_LIBGCC_SPEC_1" \
+++	"REAL_LIBGCC_SPEC_2" \
+++	}}"
+++
+++#else	/* !ENABLE_SHARED_LIBGCC */
+++
+++#define REAL_LIBGCC_SPEC " -lgcc "
+++
+++#endif	/* !ENABLE_SHARED_LIBGCC */
+++
++ /* Clear the instruction cache from `beg' to `end'.  This makes an
++    inline system call to SYS_cacheflush.  */
++ #undef  CLEAR_INSN_CACHE
+diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
+index e39b119..aa16643 100644
+--- a/recipes/gcc/gcc-4.3.3.inc
++++ b/recipes/gcc/gcc-4.3.3.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r13"
++INC_PR = "r14"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -26,6 +26,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-i386-libgomp.patch;striplevel=0 \
+ 	file://fedora/gcc43-rh251682.patch;striplevel=0 \
+ 	file://debian/arm-unbreak-eabi-armv4t.dpatch;apply=yes \
++        file://debian/armel-atomic-builtins.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/libstdc++-pic.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/gcc-ice-hack.dpatch;apply=yes;striplevel=0 \ 
+ 	file://debian/pr30961.dpatch;apply=yes;striplevel=0 \
+@@ -48,6 +49,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://904-flatten-switch-stmt-00.patch \
+ 	file://arm-nolibfloat.patch \
+ 	file://arm-softfloat.patch \
++        file://gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch \
+ 	file://cache-amnesia.patch \
+ 	file://gfortran-4.3.x.patch \
+ 	file://gcc-4.0.2-e300c2c3.patch \
+diff --git a/recipes/gcc/gcc-4.3.3/debian/armel-atomic-builtins.dpatch b/recipes/gcc/gcc-4.3.3/debian/armel-atomic-builtins.dpatch
+new file mode 100644
+index 0000000..f514375
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.3/debian/armel-atomic-builtins.dpatch
+@@ -0,0 +1,350 @@
++#! /bin/sh -e
++
++# DP: Atomic builtins using kernel helpers for ARM Linux/EABI.
++
++dir=
++if [ $# -eq 3 -a "$2" = '-d' ]; then
++    pdir="-d $3"
++    dir="$3/"
++elif [ $# -ne 1 ]; then
++    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++    exit 1
++fi
++case "$1" in
++    -patch)
++        patch $pdir -f --no-backup-if-mismatch -p0 < $0
++        ;;
++    -unpatch)
++        patch $pdir -f --no-backup-if-mismatch -R -p0 < $0
++        ;;
++    *)
++        echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++        exit 1
++esac
++exit 0
++
++This patch implements the atomic builtins described at:
++
++  http://gcc.gnu.org/onlinedocs/gcc-4.3.0/gcc/Atomic-Builtins.html
++
++for ARM EABI Linux. This implementation uses the kernel helpers
++__kernel_cmpxchg and __kernel_dmb, and so should work on any
++architecture which supports those. (More-efficient versions are possible
++using ldrex/strex on architectures >=v6, but those are not written yet.)
++
++Atomic operations are provided for data sizes of 1, 2 and 4 bytes (but
++not 8 bytes). The implementation uses actual functions
++(__sync_fetch_and_add_2, etc.) rather than expanding code inline.
++
++Tested with cross to arm-none-linux-gnueabi, and with some additional
++hand-written tests which hopefully exercised the atomicity of the
++operations sufficiently.
++
++OK for mainline?
++
++Julian
++
++ChangeLog
++
++    gcc/
++    * config/arm/t-linux-eabi (LIB2FUNCS_STATIC_EXTRA): Add
++    config/arm/linux-atomic.c.
++    * config/arm/linux-atomic.c: New.
++
++Index: gcc/config/arm/linux-atomic.c
++===================================================================
++--- gcc/config/arm/linux-atomic.c	(revision 0)
+++++ gcc/config/arm/linux-atomic.c	(revision 0)
++@@ -0,0 +1,280 @@
+++/* Linux-specific atomic operations for ARM EABI.
+++   Copyright (C) 2008 Free Software Foundation, Inc.
+++   Contributed by CodeSourcery.
+++
+++This file is part of GCC.
+++
+++GCC is free software; you can redistribute it and/or modify it under
+++the terms of the GNU General Public License as published by the Free
+++Software Foundation; either version 2, or (at your option) any later
+++version.
+++
+++In addition to the permissions in the GNU General Public License, the
+++Free Software Foundation gives you unlimited permission to link the
+++compiled version of this file into combinations with other programs,
+++and to distribute those combinations without any restriction coming
+++from the use of this file.  (The General Public License restrictions
+++do apply in other respects; for example, they cover modification of
+++the file, and distribution when not linked into a combine
+++executable.)
+++
+++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
+++WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++for more details.
+++
+++You should have received a copy of the GNU General Public License
+++along with GCC; see the file COPYING.  If not, write to the Free
+++Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
+++02110-1301, USA.  */
+++
+++/* Kernel helper for compare-and-exchange.  */
+++typedef int (__kernel_cmpxchg_t) (int oldval, int newval, int *ptr);
+++#define __kernel_cmpxchg (*(__kernel_cmpxchg_t *) 0xffff0fc0)
+++
+++/* Kernel helper for memory barrier.  */
+++typedef void (__kernel_dmb_t) (void);
+++#define __kernel_dmb (*(__kernel_dmb_t *) 0xffff0fa0)
+++
+++/* Note: we implement byte, short and int versions of atomic operations using
+++   the above kernel helpers, but there is no support for "long long" (64-bit)
+++   operations as yet.  */
+++
+++#define HIDDEN __attribute__ ((visibility ("hidden")))
+++
+++#ifdef __ARMEL__
+++#define INVERT_MASK_1 0
+++#define INVERT_MASK_2 0
+++#else
+++#define INVERT_MASK_1 24
+++#define INVERT_MASK_2 16
+++#endif
+++
+++#define MASK_1 0xffu
+++#define MASK_2 0xffffu
+++
+++#define FETCH_AND_OP_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_fetch_and_##OP##_4 (int *ptr, int val)				\
+++  {									\
+++    int failure, tmp;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return tmp;								\
+++  }
+++
+++FETCH_AND_OP_WORD (add,   , +)
+++FETCH_AND_OP_WORD (sub,   , -)
+++FETCH_AND_OP_WORD (or,    , |)
+++FETCH_AND_OP_WORD (and,   , &)
+++FETCH_AND_OP_WORD (xor,   , ^)
+++FETCH_AND_OP_WORD (nand, ~, &)
+++
+++#define NAME_oldval(OP, WIDTH) __sync_fetch_and_##OP##_##WIDTH
+++#define NAME_newval(OP, WIDTH) __sync_##OP##_and_fetch_##WIDTH
+++
+++/* Implement both __sync_<op>_and_fetch and __sync_fetch_and_<op> for
+++   subword-sized quantities.  */
+++
+++#define SUBWORD_SYNC_OP(OP, PFX_OP, INF_OP, TYPE, WIDTH, RETURN)	\
+++  TYPE HIDDEN								\
+++  NAME##_##RETURN (OP, WIDTH) (TYPE *ptr, TYPE val)			\
+++  {									\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++    unsigned int mask, shift, oldval, newval;				\
+++    int failure;							\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = ((PFX_OP ((oldval & mask) >> shift)			\
+++                 INF_OP (unsigned int) val) << shift) & mask;		\
+++      newval |= oldval & ~mask;						\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (RETURN & mask) >> shift;					\
+++  }
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, oldval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, oldval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, oldval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, oldval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, oldval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, oldval)
+++
+++#define OP_AND_FETCH_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_##OP##_and_fetch_4 (int *ptr, int val)				\
+++  {									\
+++    int tmp, failure;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return PFX_OP tmp INF_OP val;					\
+++  }
+++
+++OP_AND_FETCH_WORD (add,   , +)
+++OP_AND_FETCH_WORD (sub,   , -)
+++OP_AND_FETCH_WORD (or,    , |)
+++OP_AND_FETCH_WORD (and,   , &)
+++OP_AND_FETCH_WORD (xor,   , ^)
+++OP_AND_FETCH_WORD (nand, ~, &)
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, newval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, newval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, newval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, newval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, newval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, newval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, newval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, newval)
+++
+++int HIDDEN
+++__sync_val_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int actual_oldval, fail;
+++    
+++  while (1)
+++    {
+++      actual_oldval = *ptr;
+++
+++      if (oldval != actual_oldval)
+++	return actual_oldval;
+++
+++      fail = __kernel_cmpxchg (actual_oldval, newval, ptr);
+++  
+++      if (!fail)
+++        return oldval;
+++    }
+++}
+++
+++#define SUBWORD_VAL_CAS(TYPE, WIDTH)					\
+++  TYPE HIDDEN								\
+++  __sync_val_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++				       TYPE newval)			\
+++  {									\
+++    int *wordptr = (int *)((unsigned int) ptr & ~3), fail;		\
+++    unsigned int mask, shift, actual_oldval, actual_newval;		\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    while (1)								\
+++      {									\
+++	actual_oldval = *wordptr;					\
+++									\
+++	if (((actual_oldval & mask) >> shift) != (unsigned int) oldval)	\
+++          return (actual_oldval & mask) >> shift;			\
+++									\
+++	actual_newval = (actual_oldval & ~mask)				\
+++			| (((unsigned int) newval << shift) & mask);	\
+++									\
+++	fail = __kernel_cmpxchg (actual_oldval, actual_newval,		\
+++				 wordptr);				\
+++									\
+++	if (!fail)							\
+++          return oldval;						\
+++      }									\
+++  }
+++
+++SUBWORD_VAL_CAS (short, 2)
+++SUBWORD_VAL_CAS (char,  1)
+++
+++typedef unsigned char bool;
+++
+++bool HIDDEN
+++__sync_bool_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int failure = __kernel_cmpxchg (oldval, newval, ptr);
+++  return (failure == 0);
+++}
+++
+++#define SUBWORD_BOOL_CAS(TYPE, WIDTH)					\
+++  bool HIDDEN								\
+++  __sync_bool_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++					TYPE newval)			\
+++  {									\
+++    TYPE actual_oldval							\
+++      = __sync_val_compare_and_swap_##WIDTH (ptr, oldval, newval);	\
+++    return (oldval == actual_oldval);					\
+++  }
+++
+++SUBWORD_BOOL_CAS (short, 2)
+++SUBWORD_BOOL_CAS (char,  1)
+++
+++void HIDDEN
+++__sync_synchronize (void)
+++{
+++  __kernel_dmb ();
+++}
+++
+++int HIDDEN
+++__sync_lock_test_and_set_4 (int *ptr, int val)
+++{
+++  int failure, oldval;
+++
+++  do {
+++    oldval = *ptr;
+++    failure = __kernel_cmpxchg (oldval, val, ptr);
+++  } while (failure != 0);
+++
+++  return oldval;
+++}
+++
+++#define SUBWORD_TEST_AND_SET(TYPE, WIDTH)				\
+++  TYPE HIDDEN								\
+++  __sync_lock_test_and_set_##WIDTH (TYPE *ptr, TYPE val)		\
+++  {									\
+++    int failure;							\
+++    unsigned int oldval, newval, shift, mask;				\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = (oldval & ~mask)						\
+++	       | (((unsigned int) val << shift) & mask);		\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (oldval & mask) >> shift;					\
+++  }
+++
+++SUBWORD_TEST_AND_SET (short, 2)
+++SUBWORD_TEST_AND_SET (char,  1)
+++
+++#define SYNC_LOCK_RELEASE(TYPE, WIDTH)					\
+++  void HIDDEN								\
+++  __sync_lock_release_##WIDTH (TYPE *ptr)				\
+++  {									\
+++    *ptr = 0;								\
+++    __kernel_dmb ();							\
+++  }
+++
+++SYNC_LOCK_RELEASE (int,   4)
+++SYNC_LOCK_RELEASE (short, 2)
+++SYNC_LOCK_RELEASE (char,  1)
++Index: gcc/config/arm/t-linux-eabi
++===================================================================
++--- gcc/config/arm/t-linux-eabi	(revision 136167)
+++++ gcc/config/arm/t-linux-eabi	(working copy)
++@@ -12,3 +12,5 @@ LIB1ASMFUNCS := $(filter-out _dvmd_tls,$
++ # Multilib the standard Linux files.  Don't include crti.o or crtn.o,
++ # which are provided by glibc.
++ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+++
+++LIB2FUNCS_STATIC_EXTRA += $(srcdir)/config/arm/linux-atomic.c
++
++
+diff --git a/recipes/gcc/gcc-4.3.3/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch b/recipes/gcc/gcc-4.3.3/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+new file mode 100644
+index 0000000..6849d46
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.3/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+@@ -0,0 +1,52 @@
++--- gcc-4.4-20090519/gcc/config/arm/linux-eabi.h.~1~	2007-11-08 14:44:09.000000000 +0100
+++++ gcc-4.4-20090519/gcc/config/arm/linux-eabi.h	2009-05-22 20:38:51.000000000 +0200
++@@ -72,6 +72,49 @@
++    do not use -lfloat.  */
++ #undef LIBGCC_SPEC
++ 
+++/* Some symbols are only in the static libgcc. Override REAL_LIBGCC_SPEC
+++   to always pass -lgcc to the linker, even for --shared-libgcc, otherwise
+++   shared libraries break. */
+++#ifdef ENABLE_SHARED_LIBGCC
+++
+++#ifndef USE_LD_AS_NEEDED
+++#define USE_LD_AS_NEEDED 0
+++#endif
+++
+++#if USE_LD_AS_NEEDED
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared-libgcc:-lgcc --as-needed -lgcc_s --no-as-needed} \
+++	%{shared-libgcc:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared: \
+++	  %{!shared-libgcc:-lgcc -lgcc_eh} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"
+++#endif
+++
+++#ifdef LINK_EH_SPEC
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared: \
+++	  %{!shared-libgcc:-lgcc} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"	/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#endif
+++
+++#define REAL_LIBGCC_SPEC " \
+++	%{static|static-libgcc:-lgcc -lgcc_eh} \
+++	%{!static:%{!static-libgcc: \
+++	"REAL_LIBGCC_SPEC_1" \
+++	"REAL_LIBGCC_SPEC_2" \
+++	}}"
+++
+++#else	/* !ENABLE_SHARED_LIBGCC */
+++
+++#define REAL_LIBGCC_SPEC " -lgcc "
+++
+++#endif	/* !ENABLE_SHARED_LIBGCC */
+++
++ /* Clear the instruction cache from `beg' to `end'.  This makes an
++    inline system call to SYS_cacheflush.  */
++ #undef  CLEAR_INSN_CACHE
+diff --git a/recipes/gcc/gcc-4.3.4.inc b/recipes/gcc/gcc-4.3.4.inc
+index 8947a8d..8fd607a 100644
+--- a/recipes/gcc/gcc-4.3.4.inc
++++ b/recipes/gcc/gcc-4.3.4.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r8"
++INC_PR = "r9"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -26,6 +26,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-i386-libgomp.patch;striplevel=0 \
+ 	file://fedora/gcc43-rh251682.patch;striplevel=0 \
+ 	file://debian/arm-unbreak-eabi-armv4t.dpatch;apply=yes \
++        file://debian/armel-atomic-builtins.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/libstdc++-pic.dpatch;apply=yes;striplevel=0 \
+ 	file://debian/gcc-ice-hack.dpatch;apply=yes;striplevel=0 \ 
+ 	file://debian/pr30961.dpatch;apply=yes;striplevel=0 \
+@@ -48,6 +49,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://904-flatten-switch-stmt-00.patch \
+ 	file://arm-nolibfloat.patch \
+ 	file://arm-softfloat.patch \
++        file://gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch \
+ 	file://cache-amnesia.patch \
+ 	file://gfortran-4.3.x.patch \
+ 	file://gcc-4.0.2-e300c2c3.patch \
+diff --git a/recipes/gcc/gcc-4.3.4/debian/armel-atomic-builtins.dpatch b/recipes/gcc/gcc-4.3.4/debian/armel-atomic-builtins.dpatch
+new file mode 100644
+index 0000000..f514375
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.4/debian/armel-atomic-builtins.dpatch
+@@ -0,0 +1,350 @@
++#! /bin/sh -e
++
++# DP: Atomic builtins using kernel helpers for ARM Linux/EABI.
++
++dir=
++if [ $# -eq 3 -a "$2" = '-d' ]; then
++    pdir="-d $3"
++    dir="$3/"
++elif [ $# -ne 1 ]; then
++    echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++    exit 1
++fi
++case "$1" in
++    -patch)
++        patch $pdir -f --no-backup-if-mismatch -p0 < $0
++        ;;
++    -unpatch)
++        patch $pdir -f --no-backup-if-mismatch -R -p0 < $0
++        ;;
++    *)
++        echo >&2 "`basename $0`: script expects -patch|-unpatch as argument"
++        exit 1
++esac
++exit 0
++
++This patch implements the atomic builtins described at:
++
++  http://gcc.gnu.org/onlinedocs/gcc-4.3.0/gcc/Atomic-Builtins.html
++
++for ARM EABI Linux. This implementation uses the kernel helpers
++__kernel_cmpxchg and __kernel_dmb, and so should work on any
++architecture which supports those. (More-efficient versions are possible
++using ldrex/strex on architectures >=v6, but those are not written yet.)
++
++Atomic operations are provided for data sizes of 1, 2 and 4 bytes (but
++not 8 bytes). The implementation uses actual functions
++(__sync_fetch_and_add_2, etc.) rather than expanding code inline.
++
++Tested with cross to arm-none-linux-gnueabi, and with some additional
++hand-written tests which hopefully exercised the atomicity of the
++operations sufficiently.
++
++OK for mainline?
++
++Julian
++
++ChangeLog
++
++    gcc/
++    * config/arm/t-linux-eabi (LIB2FUNCS_STATIC_EXTRA): Add
++    config/arm/linux-atomic.c.
++    * config/arm/linux-atomic.c: New.
++
++Index: gcc/config/arm/linux-atomic.c
++===================================================================
++--- gcc/config/arm/linux-atomic.c	(revision 0)
+++++ gcc/config/arm/linux-atomic.c	(revision 0)
++@@ -0,0 +1,280 @@
+++/* Linux-specific atomic operations for ARM EABI.
+++   Copyright (C) 2008 Free Software Foundation, Inc.
+++   Contributed by CodeSourcery.
+++
+++This file is part of GCC.
+++
+++GCC is free software; you can redistribute it and/or modify it under
+++the terms of the GNU General Public License as published by the Free
+++Software Foundation; either version 2, or (at your option) any later
+++version.
+++
+++In addition to the permissions in the GNU General Public License, the
+++Free Software Foundation gives you unlimited permission to link the
+++compiled version of this file into combinations with other programs,
+++and to distribute those combinations without any restriction coming
+++from the use of this file.  (The General Public License restrictions
+++do apply in other respects; for example, they cover modification of
+++the file, and distribution when not linked into a combine
+++executable.)
+++
+++GCC is distributed in the hope that it will be useful, but WITHOUT ANY
+++WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++for more details.
+++
+++You should have received a copy of the GNU General Public License
+++along with GCC; see the file COPYING.  If not, write to the Free
+++Software Foundation, 51 Franklin Street, Fifth Floor, Boston, MA
+++02110-1301, USA.  */
+++
+++/* Kernel helper for compare-and-exchange.  */
+++typedef int (__kernel_cmpxchg_t) (int oldval, int newval, int *ptr);
+++#define __kernel_cmpxchg (*(__kernel_cmpxchg_t *) 0xffff0fc0)
+++
+++/* Kernel helper for memory barrier.  */
+++typedef void (__kernel_dmb_t) (void);
+++#define __kernel_dmb (*(__kernel_dmb_t *) 0xffff0fa0)
+++
+++/* Note: we implement byte, short and int versions of atomic operations using
+++   the above kernel helpers, but there is no support for "long long" (64-bit)
+++   operations as yet.  */
+++
+++#define HIDDEN __attribute__ ((visibility ("hidden")))
+++
+++#ifdef __ARMEL__
+++#define INVERT_MASK_1 0
+++#define INVERT_MASK_2 0
+++#else
+++#define INVERT_MASK_1 24
+++#define INVERT_MASK_2 16
+++#endif
+++
+++#define MASK_1 0xffu
+++#define MASK_2 0xffffu
+++
+++#define FETCH_AND_OP_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_fetch_and_##OP##_4 (int *ptr, int val)				\
+++  {									\
+++    int failure, tmp;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return tmp;								\
+++  }
+++
+++FETCH_AND_OP_WORD (add,   , +)
+++FETCH_AND_OP_WORD (sub,   , -)
+++FETCH_AND_OP_WORD (or,    , |)
+++FETCH_AND_OP_WORD (and,   , &)
+++FETCH_AND_OP_WORD (xor,   , ^)
+++FETCH_AND_OP_WORD (nand, ~, &)
+++
+++#define NAME_oldval(OP, WIDTH) __sync_fetch_and_##OP##_##WIDTH
+++#define NAME_newval(OP, WIDTH) __sync_##OP##_and_fetch_##WIDTH
+++
+++/* Implement both __sync_<op>_and_fetch and __sync_fetch_and_<op> for
+++   subword-sized quantities.  */
+++
+++#define SUBWORD_SYNC_OP(OP, PFX_OP, INF_OP, TYPE, WIDTH, RETURN)	\
+++  TYPE HIDDEN								\
+++  NAME##_##RETURN (OP, WIDTH) (TYPE *ptr, TYPE val)			\
+++  {									\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++    unsigned int mask, shift, oldval, newval;				\
+++    int failure;							\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = ((PFX_OP ((oldval & mask) >> shift)			\
+++                 INF_OP (unsigned int) val) << shift) & mask;		\
+++      newval |= oldval & ~mask;						\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (RETURN & mask) >> shift;					\
+++  }
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, oldval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, oldval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, oldval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, oldval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, oldval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, oldval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, oldval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, oldval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, oldval)
+++
+++#define OP_AND_FETCH_WORD(OP, PFX_OP, INF_OP)				\
+++  int HIDDEN								\
+++  __sync_##OP##_and_fetch_4 (int *ptr, int val)				\
+++  {									\
+++    int tmp, failure;							\
+++									\
+++    do {								\
+++      tmp = *ptr;							\
+++      failure = __kernel_cmpxchg (tmp, PFX_OP tmp INF_OP val, ptr);	\
+++    } while (failure != 0);						\
+++									\
+++    return PFX_OP tmp INF_OP val;					\
+++  }
+++
+++OP_AND_FETCH_WORD (add,   , +)
+++OP_AND_FETCH_WORD (sub,   , -)
+++OP_AND_FETCH_WORD (or,    , |)
+++OP_AND_FETCH_WORD (and,   , &)
+++OP_AND_FETCH_WORD (xor,   , ^)
+++OP_AND_FETCH_WORD (nand, ~, &)
+++
+++SUBWORD_SYNC_OP (add,   , +, short, 2, newval)
+++SUBWORD_SYNC_OP (sub,   , -, short, 2, newval)
+++SUBWORD_SYNC_OP (or,    , |, short, 2, newval)
+++SUBWORD_SYNC_OP (and,   , &, short, 2, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, short, 2, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, short, 2, newval)
+++
+++SUBWORD_SYNC_OP (add,   , +, char, 1, newval)
+++SUBWORD_SYNC_OP (sub,   , -, char, 1, newval)
+++SUBWORD_SYNC_OP (or,    , |, char, 1, newval)
+++SUBWORD_SYNC_OP (and,   , &, char, 1, newval)
+++SUBWORD_SYNC_OP (xor,   , ^, char, 1, newval)
+++SUBWORD_SYNC_OP (nand, ~, &, char, 1, newval)
+++
+++int HIDDEN
+++__sync_val_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int actual_oldval, fail;
+++    
+++  while (1)
+++    {
+++      actual_oldval = *ptr;
+++
+++      if (oldval != actual_oldval)
+++	return actual_oldval;
+++
+++      fail = __kernel_cmpxchg (actual_oldval, newval, ptr);
+++  
+++      if (!fail)
+++        return oldval;
+++    }
+++}
+++
+++#define SUBWORD_VAL_CAS(TYPE, WIDTH)					\
+++  TYPE HIDDEN								\
+++  __sync_val_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++				       TYPE newval)			\
+++  {									\
+++    int *wordptr = (int *)((unsigned int) ptr & ~3), fail;		\
+++    unsigned int mask, shift, actual_oldval, actual_newval;		\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    while (1)								\
+++      {									\
+++	actual_oldval = *wordptr;					\
+++									\
+++	if (((actual_oldval & mask) >> shift) != (unsigned int) oldval)	\
+++          return (actual_oldval & mask) >> shift;			\
+++									\
+++	actual_newval = (actual_oldval & ~mask)				\
+++			| (((unsigned int) newval << shift) & mask);	\
+++									\
+++	fail = __kernel_cmpxchg (actual_oldval, actual_newval,		\
+++				 wordptr);				\
+++									\
+++	if (!fail)							\
+++          return oldval;						\
+++      }									\
+++  }
+++
+++SUBWORD_VAL_CAS (short, 2)
+++SUBWORD_VAL_CAS (char,  1)
+++
+++typedef unsigned char bool;
+++
+++bool HIDDEN
+++__sync_bool_compare_and_swap_4 (int *ptr, int oldval, int newval)
+++{
+++  int failure = __kernel_cmpxchg (oldval, newval, ptr);
+++  return (failure == 0);
+++}
+++
+++#define SUBWORD_BOOL_CAS(TYPE, WIDTH)					\
+++  bool HIDDEN								\
+++  __sync_bool_compare_and_swap_##WIDTH (TYPE *ptr, TYPE oldval,		\
+++					TYPE newval)			\
+++  {									\
+++    TYPE actual_oldval							\
+++      = __sync_val_compare_and_swap_##WIDTH (ptr, oldval, newval);	\
+++    return (oldval == actual_oldval);					\
+++  }
+++
+++SUBWORD_BOOL_CAS (short, 2)
+++SUBWORD_BOOL_CAS (char,  1)
+++
+++void HIDDEN
+++__sync_synchronize (void)
+++{
+++  __kernel_dmb ();
+++}
+++
+++int HIDDEN
+++__sync_lock_test_and_set_4 (int *ptr, int val)
+++{
+++  int failure, oldval;
+++
+++  do {
+++    oldval = *ptr;
+++    failure = __kernel_cmpxchg (oldval, val, ptr);
+++  } while (failure != 0);
+++
+++  return oldval;
+++}
+++
+++#define SUBWORD_TEST_AND_SET(TYPE, WIDTH)				\
+++  TYPE HIDDEN								\
+++  __sync_lock_test_and_set_##WIDTH (TYPE *ptr, TYPE val)		\
+++  {									\
+++    int failure;							\
+++    unsigned int oldval, newval, shift, mask;				\
+++    int *wordptr = (int *) ((unsigned int) ptr & ~3);			\
+++									\
+++    shift = (((unsigned int) ptr & 3) << 3) ^ INVERT_MASK_##WIDTH;	\
+++    mask = MASK_##WIDTH << shift;					\
+++									\
+++    do {								\
+++      oldval = *wordptr;						\
+++      newval = (oldval & ~mask)						\
+++	       | (((unsigned int) val << shift) & mask);		\
+++      failure = __kernel_cmpxchg (oldval, newval, wordptr);		\
+++    } while (failure != 0);						\
+++									\
+++    return (oldval & mask) >> shift;					\
+++  }
+++
+++SUBWORD_TEST_AND_SET (short, 2)
+++SUBWORD_TEST_AND_SET (char,  1)
+++
+++#define SYNC_LOCK_RELEASE(TYPE, WIDTH)					\
+++  void HIDDEN								\
+++  __sync_lock_release_##WIDTH (TYPE *ptr)				\
+++  {									\
+++    *ptr = 0;								\
+++    __kernel_dmb ();							\
+++  }
+++
+++SYNC_LOCK_RELEASE (int,   4)
+++SYNC_LOCK_RELEASE (short, 2)
+++SYNC_LOCK_RELEASE (char,  1)
++Index: gcc/config/arm/t-linux-eabi
++===================================================================
++--- gcc/config/arm/t-linux-eabi	(revision 136167)
+++++ gcc/config/arm/t-linux-eabi	(working copy)
++@@ -12,3 +12,5 @@ LIB1ASMFUNCS := $(filter-out _dvmd_tls,$
++ # Multilib the standard Linux files.  Don't include crti.o or crtn.o,
++ # which are provided by glibc.
++ EXTRA_MULTILIB_PARTS=crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o
+++
+++LIB2FUNCS_STATIC_EXTRA += $(srcdir)/config/arm/linux-atomic.c
++
++
+diff --git a/recipes/gcc/gcc-4.3.4/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch b/recipes/gcc/gcc-4.3.4/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+new file mode 100644
+index 0000000..6849d46
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.4/gcc-4.4-20090519-arm-eabi-atomic-builtins-unbreak-v2.patch
+@@ -0,0 +1,52 @@
++--- gcc-4.4-20090519/gcc/config/arm/linux-eabi.h.~1~	2007-11-08 14:44:09.000000000 +0100
+++++ gcc-4.4-20090519/gcc/config/arm/linux-eabi.h	2009-05-22 20:38:51.000000000 +0200
++@@ -72,6 +72,49 @@
++    do not use -lfloat.  */
++ #undef LIBGCC_SPEC
++ 
+++/* Some symbols are only in the static libgcc. Override REAL_LIBGCC_SPEC
+++   to always pass -lgcc to the linker, even for --shared-libgcc, otherwise
+++   shared libraries break. */
+++#ifdef ENABLE_SHARED_LIBGCC
+++
+++#ifndef USE_LD_AS_NEEDED
+++#define USE_LD_AS_NEEDED 0
+++#endif
+++
+++#if USE_LD_AS_NEEDED
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared-libgcc:-lgcc --as-needed -lgcc_s --no-as-needed} \
+++	%{shared-libgcc:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_1 "\
+++	%{!shared: \
+++	  %{!shared-libgcc:-lgcc -lgcc_eh} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"
+++#endif
+++
+++#ifdef LINK_EH_SPEC
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared: \
+++	  %{!shared-libgcc:-lgcc} \
+++	  %{shared-libgcc:-lgcc_s -lgcc}}"	/* always append -lgcc */
+++#else
+++#define REAL_LIBGCC_SPEC_2 "\
+++	%{shared:-lgcc_s -lgcc}"		/* always append -lgcc */
+++#endif
+++
+++#define REAL_LIBGCC_SPEC " \
+++	%{static|static-libgcc:-lgcc -lgcc_eh} \
+++	%{!static:%{!static-libgcc: \
+++	"REAL_LIBGCC_SPEC_1" \
+++	"REAL_LIBGCC_SPEC_2" \
+++	}}"
+++
+++#else	/* !ENABLE_SHARED_LIBGCC */
+++
+++#define REAL_LIBGCC_SPEC " -lgcc "
+++
+++#endif	/* !ENABLE_SHARED_LIBGCC */
+++
++ /* Clear the instruction cache from `beg' to `end'.  This makes an
++    inline system call to SYS_cacheflush.  */
++ #undef  CLEAR_INSN_CACHE
+-- 
+1.7.0.4
+
 
 
