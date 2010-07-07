@@ -1,42 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OWOyH-0004OU-E9 for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 09:23:06 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OWOtZ-0003nI-Or for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 09:18:13 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 09:18:13 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <thebohemian@gmx.net>) id 1OWPrU-0004We-0d
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 10:20:08 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id E16114001DF85
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 09:18:13 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed,  7 Jul 2010 10:15:12 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id D8A2440038F7B
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Jul 2010 10:15:12 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id UYC3Vgrsn85p
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Jul 2010 10:15:12 +0200 (CEST)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTPSA id B1EC44001DF85
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  7 Jul 2010 10:15:12 +0200 (CEST)
+Message-ID: <4C3437D7.8050505@gmx.net>
+Date: Wed, 07 Jul 2010 10:16:23 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100423 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 07 Jul 2010 09:17:59 +0200
-Message-ID: <i119n7$ej7$1@dough.gmane.org>
-References: <i108p5$hd$1@dough.gmane.org> <4C33B301.7010006@mentor.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <4C33B301.7010006@mentor.com>
 X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: commit 4d6a63850b4dc7ca2f060aedda26ddf4efa0e5cc
+Subject: [RFC] GCC 4.3.1 unbuildable due to unapplyable patches - remove it then?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,69 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 07:23:06 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 07 Jul 2010 08:20:08 -0000
+X-Groupsio-MsgNum: 20754
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig1224CDF889BCDE1C74CF914E"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--------------enig1224CDF889BCDE1C74CF914E
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-On 07-07-10 00:49, Tom Rini wrote:
-> Koen Kooi wrote:
-> 
->> +PREFERRED_VERSION_gcc-cross = "4.1.2"
->> +PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
->> +PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
->> +PREFERRED_VERSION_binutils = "2.17.50.0.12"
->> +PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
-> [snip]
->> do NOT belong in a machine.conf (or machine include). Those belong in
->> the distro (or local.conf), not in the machine.
-> 
-> Just putting this out there (and it's indeed _not_ how things are
-> today).  Why would we not want to move towards having this kind of stuff
-> be in the tune-ARCH.inc file, when a specific version is really needed
-> (more avr32 or new'ish core on an existing overall arch) ?
+Hi,
+GCC 4.3.1 does not build for an ARM target because a patch does not fit.
+So I assume that no one is really interested in that version of GCC
+anymore and would remove it then if nobody fixes the patch situation:
 
-Putting it in a tune-arch is not a problem, just put it in
-conf/distro/include.
-Experience has shown that putting it the machine includes is a bad idea,
-It rots and after a while a new machine gets added that doesn't use said
-machine include.
-And not to mention the need to change DISTRO_PR for editing a
-machine.conf, that's just backwards.
+http://tinderbox.openembedded.net/public/logs/task/6443736.txt
 
-> Yes, it
-> should be up to the distro to say "we want 4.4.x + 2.20.x" or whatever,
-> but then we also get the downside of "special case, XXXX only works well
-> with 4.3.4 + 2.19.x" or what have you, and those special cases get
-> introduced in one place and copy/pasted elsewhere.
+Regards,
+Robert
 
-So you have an include file in conf/distro that people can optionally
-use or copy/paste. Not all distros can/want to support all machines in
-OE. Angstrom tries to, but that's because it's the reference implemention :)
 
-It boils down to this:
-
-The distro needs to make a decision to do strange stuff to support a
-platform. Silently forcing it is bad.
-
-In this specific case no distro except angstrom has expressed interest
-in supporting nios2, so we could even but this in an angstrom.inc.
-Seriously, can the distro maintainers that are willing to support nios2
-please raise their hands?
-
-regards,
-
-Koen
+--------------enig1224CDF889BCDE1C74CF914E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
-iD8DBQFMNConMkyGM64RGpERAon3AJ9keLb8YBEVmCsvWzhEqb3qtLCWKgCfcX+4
-kuDgy1Jqhl4qdAIVEWkiTfc=
-=0Lny
+iEYEARECAAYFAkw0N9gACgkQG9cfwmwwEtrbsgCfccFLOgqG5aWKtlI4vownUqvu
+1jMAnRo8ZgKpZDhP1jeKRuJCAPTLbebe
+=LNk+
 -----END PGP SIGNATURE-----
 
-
-
+--------------enig1224CDF889BCDE1C74CF914E--
