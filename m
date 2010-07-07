@@ -1,48 +1,43 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OWKdv-0007jE-IW
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OWOiT-0003N8-BU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 04:45:50 +0200
-Received: by pxi12 with SMTP id 12so3250553pxi.6
+	Wed, 07 Jul 2010 09:06:46 +0200
+Received: by bwz10 with SMTP id 10so3710417bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 06 Jul 2010 19:40:56 -0700 (PDT)
+	Wed, 07 Jul 2010 00:01:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=lfImmDLyL9nmpbdkFWvNWneQ25ETh2iHtXalp5YOxzM=;
-	b=BFpcAYC0mBxNeOy2gdEpBRyFff8fCHIGzkaJuhTVZWi1cDoWuojb7cKUp1czs/pRD/
-	anuXs/gwpo0o5uD7uCcgc6XZ3UIWaR9y7yuRGFC1hZ6oTWMLCmb8m8eI3n81/II52cwQ
-	eLfQoWYK/1YwZks1SPJK+lMu14riAx6EDiaQc=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=SvDp/7ci7nYxPuv2BVoGr6GtxlNf1TAsXNLmHTgMKKM=;
+	b=Kdp4up9goCajD0wZzq1U1Y4PhDvO8uULl+qmAh6TfNwWAjn0Z5goHT2QaNW2TBGBwe
+	VNbnwz2bXmV7yskCEzag1vZHj0HmBNw52mGL4Sc8e/cm9bX8rtape1MI+l8hReai7UDU
+	Ztgabx6qPivivSgIO/pZT3wIFW0WEwFfaJRU0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=riequXzcvTve26a40PRDvtSTED94RHb4Z+ca59unSGeqWmyzFGAznWlmecNNv+TC+s
-	mD/VNMkPQGTDW7MSTXpD76IRghHxBI9j5QL5crEhgbd2gy5Y1aJKYiRpF29w1VdC8K2X
-	7XyCdxAKrXa6rGV+raaMBNjIjczb/Srm0DM6o=
-Received: by 10.114.124.14 with SMTP id w14mr6475804wac.68.1278470455882;
-	Tue, 06 Jul 2010 19:40:55 -0700 (PDT)
-Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	d39sm92178160wam.4.2010.07.06.19.40.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 06 Jul 2010 19:40:54 -0700 (PDT)
-Message-ID: <4C33E931.3050103@gmail.com>
-Date: Wed, 07 Jul 2010 12:10:49 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=B8SdYLn2YqTSzPyZjICgy1FuXWl5dXv22EDpY0VqMccebvokLxIy5yqf0Qd52lEeYl
+	6k74rzsM9X4k6uFc/oBFimDxWx+XoRTu7aKUmTVc5aH2SP5uCULldmc4lxCuNWqiirU0
+	tlUaPTUwdv0M3AXjyquuybpuWPyFIMOqfBMYI=
 MIME-Version: 1.0
+Received: by 10.204.79.204 with SMTP id q12mr4729884bkk.123.1278486116404; 
+	Wed, 07 Jul 2010 00:01:56 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Wed, 7 Jul 2010 00:01:56 -0700 (PDT)
+In-Reply-To: <i108p5$hd$1@dough.gmane.org>
+References: <i108p5$hd$1@dough.gmane.org>
+Date: Wed, 7 Jul 2010 09:01:56 +0200
+Message-ID: <AANLkTikgJStw6b_UmhbV9yIOdsjO7sBsX06dsDVTu-VX@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] imlib2_svn.bb: Don't use host /usr/X11R6/include and /usr/X11R6/lib.
+Subject: Re: commit 4d6a63850b4dc7ca2f060aedda26ddf4efa0e5cc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,45 +51,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 02:45:55 -0000
+X-List-Received-Date: Wed, 07 Jul 2010 07:06:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Fixes the following problem, where host asm cannot build for target.
+2010/7/6 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Things like this:
+>
+> +LIBC = "glibc"
+> +ANGSTROMLIBC = "${LIBC}"
+>
+> +PREFERRED_VERSION_gcc-cross = "4.1.2"
+> +PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
+> +PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
+> +PREFERRED_VERSION_binutils = "2.17.50.0.12"
+> +PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
+> +PREFERRED_VERSION_glibc = "2.5"
+> +PREFERRED_VERSION_glibc-initial = "2.5"
+>
+> +PREFERRED_VERSION_busybox_nios2 = "1.13.2"
+>
+> +ASSUME_PROVIDED += "linux-libc-headers-native"
+>
+> do NOT belong in a machine.conf (or machine include). Those belong in
+> the distro (or local.conf), not in the machine.
+>
+> So please, move the offending bits into a distro include (minus the
+> assume provided) to stop this kind of bad example from spreading further.
 
-ccache mipsel-angstrom-linux-gcc -march=mips32 -DHAVE_CONFIG_H -I. -I../.. -I../lib -I../../src/lib -DPACKAGE_DATA_DIR=\"/usr/share/imlib2\" -I/home/grg/oe2/tmp/sysroots/mipsel-angstrom-linux/usr/include/freetype2 -I/home/grg/oe2/tmp/sysroots/mipsel-angstrom-linux/usr/include -I/usr/X11R6/include   -isystem/home/grg/oe2/tmp/sysroots/mipsel-angstrom-linux/usr/include -std=gnu99  -isystem/home/grg/oe2/tmp/sysroots/mipsel-angstrom-linux/usr/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 -ggdb3 -MT imlib2_view.o -MD -MP -MF .deps/imlib2_view.Tpo -c -o imlib2_view.o imlib2_view.c
-imlib2_view.c: In function 'main':
-imlib2_view.c:296: error: can't find a register in class 'COP3_REGS' while reloading 'asm'
-imlib2_view.c:296: error: 'asm' operand has impossible constraints
+Being the one who made the commit I'd like to make a few remarks.
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/efl1/imlib2_svn.bb |    6 ++++--
- 1 files changed, 4 insertions(+), 2 deletions(-)
+First of all I suggest that if you quote text, you also quote the
+comments that go with the text you quote:
 
-diff --git a/recipes/efl1/imlib2_svn.bb b/recipes/efl1/imlib2_svn.bb
-index 1db9e60..c0616be 100644
---- a/recipes/efl1/imlib2_svn.bb
-+++ b/recipes/efl1/imlib2_svn.bb
-@@ -4,12 +4,14 @@ LICENSE = "BSD"
- DEPENDS = "freetype libpng jpeg virtual/libx11 libxext"
- PROVIDES = "virtual/imlib2"
- PV = "1.4.2.001+svnr${SRCPV}"
--PR = "r1"
-+PR = "r2"
- SRCREV = "${EFL_SRCREV}"
- 
- inherit efl
- 
--EXTRA_OECONF = "--with-x"
-+EXTRA_OECONF = "--with-x \
-+		--x-includes=${STAGING_INCDIR} \
-+		--x-libraries=${STAGING_LIBDIR} "
- 
- # TODO: Use more fine granular version
- #OE_LT_RPATH_ALLOW=":${libdir}/imlib2/loaders:${libdir}/imlib2/filters:"
--- 
-1.7.1
+# for now we pin gcc, glibc and binutils
+# as these are the only versions that have
+# nios2 support.
+PREFERRED_VERSION_gcc-cross = "4.1.2"
+PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
+PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
+PREFERRED_VERSION_binutils = "2.17.50.0.12"
+PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
+PREFERRED_VERSION_glibc = "2.5"
+PREFERRED_VERSION_glibc-initial = "2.5"
 
+# uclibc does not work yet
+# PREFERRED_VERSION_uclibc = "0.9.30.3"
+# PREFERRED_VERSION_uclibc-initial = "0.9.30.3"
+
+# for now busybox 1.13.2 is the only one
+# patched and tested for nios2 so pin this
+# one too, until the other versions are updated
+# for nios2 too.
+PREFERRED_VERSION_busybox_nios2 = "1.13.2"
+
+# there are some issues cross-compiling when
+# using linux-libc-headers-native as we get
+# some native inc dirs when compiling crt stuff
+# ASSUME_PROVIDED fixes this (but breaks compilation
+# on old host systems like red hat 4.
+ASSUME_PROVIDED += "linux-libc-headers-native"
+
+Secondly, pinning LIBC to glibc in a machine conf or include is indeed
+not too desirable but as neither uclibc or eglibc are working for this
+architecture I needed a way to indicate this.
+If there is a better solution for this, please let me know.
+
+Next wrt the busybox pinning: this is just a temporary as indicated by
+the comment. It'll disappear for sure in the near future (after I had
+time to look at later busyboxes and fix those).
+
+Wrt the ASSUME_PROVIDED += "linux-libc-headers-native":
+I'll happily remove it once the include badness introduced by
+linux-libc-headers-native is fixed. (there is a different thread on
+this).
+
+And finally the pinning of gcc/binutils/glibc.
+I feel the machine (and not the distro) is the one who should be able
+to specify which version(s) work for that machine and what the
+preferred version is.
+That is: for gcc and binutils. glibc might be a different case.
+It might be that a distro wants to override this, and I can imagine we
+want to support that. I'd say overriding in such a case is done on an
+architecture or machine base, not in a generic override.
+
+Note also that the current machine description makes things working
+for *all* distros, whereas without it it would probably not be working
+for any distro at all!
+
+And lastly I am unaware of any place in the oe manual which states the
+above is bad behaviour (and why this is bad).
+
+Frans.
+
+PS: as mentioned before there are currently 100+ pinnings in
+conf/machine/* and conf/machine/include/* and at least two other
+machines pin gcc
+
+PPS: adding a new architecture to oe is quite some work. Picking on
+people does not really encourage to contribute that work. I could have
+equally well have kept this local.
 
 
