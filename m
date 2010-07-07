@@ -1,34 +1,37 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OWTLn-0002tq-CG
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 14:03:43 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OWTH7-0004ib-Fv
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 12:58:49 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OWTH7-0004oy-8I
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 12:58:49 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C3E@deimsg40.de.net.world>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world>
-	<1278498389.2345.1744.camel@mill.internal.reciva.com>
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA501819C3E@deimsg40.de.net.world>
-Date: Wed, 07 Jul 2010 12:58:48 +0100
-Message-ID: <1278503928.2345.1780.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OWTOK-0003j4-KA for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 14:06:19 +0200
+Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
+	by mail-dotnet1.eads.net with ESMTP; 07 Jul 2010 13:53:09 +0200
+Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Wed, 7 Jul 2010 14:01:13 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 7 Jul 2010 14:01:13 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Wed, 7 Jul 2010 14:01:15 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C48@deimsg40.de.net.world>
+In-Reply-To: <i11m2f$o0b$1@dough.gmane.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Is there a recipe for building and using busybox with
+	libbusybox out there ?
+Thread-Index: Acsdwh3LZPTlZvUmRwCu2YRuAbLEzAACAoaA
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world><1278498389.2345.1744.camel@mill.internal.reciva.com>
+	<i11m2f$o0b$1@dough.gmane.org>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 07 Jul 2010 12:01:13.0542 (UTC)
+	FILETIME=[18B7BE60:01CB1DCC]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -46,71 +49,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 12:03:43 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 07 Jul 2010 12:06:20 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Both, really.
+As I am a little new in OE, where you suggest to add a post process =
+command to remove
+the S98configure ?
 
-If you have several applets running at the same time then they
-will/should already share the busybox executable.  I would have expected
-making it into a library to increase the memory footprint (as well as
-the startup time and image size) since you will now have a bunch of
-extra relocs to fix up.
+In the image recipe ? In the busybox recipe ?
 
-p.
+Append to which command ?
 
-On Wed, 2010-07-07 at 13:34 +0200, Hauser, Wolfgang (external) wrote:
-> Hello, what memory footprint do you mean, the image or the ram ?
->=20
-> If I have to run several busybox applets at a time, e.g. sh, inetd, ftpd,=
- telnetd, syslogd ... it would probably be better to load the shared librar=
-y once and share it by the applets.
->=20
-> May be I am wrong, but the shared library overhead isn't that big at runt=
-ime. Especially if several applets are running at the same time.
->=20
-> Wolfgang Hauser
->=20
-> -----Urspr=C3=BCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] Im Auftrag von Phil Blundell
-> Gesendet: Mittwoch, 7. Juli 2010 12:26
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] Is there a recipe for building and using busybox with l=
-ibbusybox out there ?
->=20
+Regards=20
+Wolfgang Hauser
+ =20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Koen Kooi
+Gesendet: Mittwoch, 7. Juli 2010 12:49
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] Is there a recipe for building and using busybox with =
+libbusybox out there ?
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 07-07-10 12:26, Phil Blundell wrote:
 > On Wed, 2010-07-07 at 11:45 +0200, Hauser, Wolfgang (external) wrote:
-> > I want to use busybox with the applet binaries linked against libbusybo=
-x
-> > in our system.
-> > We need a wide range of applets at the same time, so I suppose it will
-> > save overall needed memory space.
+>> I want to use busybox with the applet binaries linked against =
+libbusybox
+>> in our system.
+>> We need a wide range of applets at the same time, so I suppose it =
+will
+>> save overall needed memory space.
 >=20
-> What's the advantage of this?  I would have thought it would give you a
+> What's the advantage of this?  I would have thought it would give you =
+a
 > larger memory footprint rather than a smaller one.  I guess I must be
 > missing something.
 >=20
-> > Also I want to prevent the system from updating alternatives while the
-> > first boot. We have to provide a read only root file system.
+>> Also I want to prevent the system from updating alternatives while =
+the
+>> first boot. We have to provide a read only root file system.
 >=20
 > Yeah, this is a long-standing piece of OE suckage.  We should fix the
 > alternative selection to work at image construction time.
->=20
-> p.
->=20
->=20
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+OE already does that. But what it does after that is flag everything as
+'unpacked' to have opkg rerun all postinsts at boot *again*. If OE
+didn't run u-a at image time we wouldn't be able to use sysvinit for
+example.
+If you only care about u-a, just add a post process command to remove
+the S98configure from the rootfs and opkg won't run.
+
+In the long run a way to control this behaviour and optionally hook into
+qemu or even targets over network to run them at image time. Having to
+run a first boot, remove ssl keys and repackage everything is getting a
+bit tedious.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMNFuPMkyGM64RGpERAmr3AKCNIYUK/AlJZyxB8CSNKGwTC34mywCeNUH4
+yfJydmbOupXEw5hAvomV3sk=3D
+=3Dt0HL
+-----END PGP SIGNATURE-----
 
 
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
