@@ -1,33 +1,43 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@build2.altell.local>) id 1OWSAO-0000cm-Kp
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 12:48:43 +0200
-Received: from build2.altell.local (build2.altell.local [192.168.1.26])
-	by mail.altell.local (Postfix) with ESMTPS id 4811346E7;
-	Wed,  7 Jul 2010 14:32:56 +0400 (MSD)
-Received: from rik by build2.altell.local with local (Exim 4.69)
-	(envelope-from <rik@build2.altell.local>)
-	id 1OWS1m-0006R4-LF; Wed, 07 Jul 2010 14:38:54 +0400
-From: Roman I Khimov <khimov@altell.ru>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWSGB-00060Q-An for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 12:53:48 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWSBU-00005Y-1l for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 12:48:56 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jul 2010 12:48:56 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jul 2010 12:48:56 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  7 Jul 2010 14:38:54 +0400
-Message-Id: <1278499134-24718-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <201007071352.09254.khimov@altell.ru>
-References: <201007071352.09254.khimov@altell.ru>
-X-Altell-MailScanner-ID: 4811346E7.10ECD
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: rik@build2.altell.local
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: rik@build2.altell.local
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 07 Jul 2010 12:48:47 +0200
+Message-ID: <i11m2f$o0b$1@dough.gmane.org>
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world>
+	<1278498389.2345.1744.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <1278498389.2345.1744.camel@mill.internal.reciva.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] busybox: add suport for FEATURE_INDIVIDUAL setup
+Subject: Re: Is there a recipe for building and using busybox with libbusybox out there ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,122 +51,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 10:49:47 -0000
-X-List-Received-Date: Wed, 07 Jul 2010 10:49:47 -0000
+X-List-Received-Date: Wed, 07 Jul 2010 10:53:48 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Where each applet is installed as a tiny binary linked against shared
-libbusybox.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- recipes/busybox/busybox.inc |   74 ++++++++++++++++++++++++++++++++++++-------
- 1 files changed, 62 insertions(+), 12 deletions(-)
+On 07-07-10 12:26, Phil Blundell wrote:
+> On Wed, 2010-07-07 at 11:45 +0200, Hauser, Wolfgang (external) wrote:
+>> I want to use busybox with the applet binaries linked against libbusybox
+>> in our system.
+>> We need a wide range of applets at the same time, so I suppose it will
+>> save overall needed memory space.
+> 
+> What's the advantage of this?  I would have thought it would give you a
+> larger memory footprint rather than a smaller one.  I guess I must be
+> missing something.
+> 
+>> Also I want to prevent the system from updating alternatives while the
+>> first boot. We have to provide a read only root file system.
+> 
+> Yeah, this is a long-standing piece of OE suckage.  We should fix the
+> alternative selection to work at image construction time.
 
-diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
-index a5346bd..31e6cdc 100644
---- a/recipes/busybox/busybox.inc
-+++ b/recipes/busybox/busybox.inc
-@@ -11,7 +11,7 @@ LICENSE = "GPLv2"
- SECTION = "base"
- PRIORITY = "required"
- 
--INC_PR = "r30"
-+INC_PR = "r31"
- 
- SRC_URI = "\
-   file://busybox-cron \
-@@ -98,15 +98,35 @@ do_install () {
- 
- 	install -d ${D}${sysconfdir}/init.d
- 
--	# Install /bin/busybox, and the /bin/sh link so the postinst script
--	# can run. Let update-alternatives handle the rest.
--	install -d ${D}${base_bindir}
--	if grep -q "CONFIG_FEATURE_SUID=y" ${WORKDIR}/defconfig; then
--		install -m 4755 ${S}/busybox ${D}${base_bindir}
-+	if ! grep -q "CONFIG_FEATURE_INDIVIDUAL=y" ${WORKDIR}/defconfig; then
-+		# Install /bin/busybox, and the /bin/sh link so the postinst script
-+		# can run. Let update-alternatives handle the rest.
-+		install -d ${D}${base_bindir}
-+		if grep -q "CONFIG_FEATURE_SUID=y" ${WORKDIR}/defconfig; then
-+			install -m 4755 ${S}/busybox ${D}${base_bindir}
-+		else
-+			install -m 0755 ${S}/busybox ${D}${base_bindir}
-+		fi
-+		ln -sf busybox ${D}${base_bindir}/sh
- 	else
--		install -m 0755 ${S}/busybox ${D}${base_bindir}
-+		install -d ${D}${base_bindir} ${D}${base_sbindir}
-+		install -d ${D}${libdir} ${D}${bindir} ${D}${sbindir}
-+		cat busybox.links | while read FILE; do
-+			NAME=`basename "$FILE"`
-+			install -m 0755 "0_lib/$NAME" "${D}$FILE.${PN}"
-+		done
-+		# add suid bit where needed
-+		for i in `grep -E "APPLET.*_BB_SUID_((MAYBE|REQUIRE))" include/applets.h | grep -v _BB_SUID_DROP | cut -f 3 -d '(' | cut -f 1 -d ','`; do
-+			find ${D} -name $i.${PN} -exec chmod a+s {} \;
-+		done
-+		install -m 0755 0_lib/libbusybox.so.${PV} ${D}${libdir}/libbusybox.so.${PV}
-+		ln -sf sh.${PN} ${D}${base_bindir}/sh
-+		ln -sf ln.${PN} ${D}${base_bindir}/ln
-+		ln -sf test.${PN} ${D}${bindir}/test
-+		if [ -f ${D}/linuxrc.${PN} ]; then
-+			mv ${D}/linuxrc.${PN} ${D}/linuxrc
-+		fi
- 	fi
--	ln -sf busybox ${D}${base_bindir}/sh
- 
- 	if grep -q "CONFIG_SYSLOGD=y" ${WORKDIR}/defconfig; then
- 		install -m 0755 ${WORKDIR}/syslog ${D}${sysconfdir}/init.d/syslog.${PN}
-@@ -144,12 +164,42 @@ pkg_postinst_${PN} () {
- 	# so the update-alternatives script will get the utilities it needs
- 	# (update-alternatives have no problem replacing links later anyway)
- 	test -n 2> /dev/null || alias test='busybox test'
--	if test "x$D" = "x"; then while read link; do if test ! -h "$link"; then case "$link" in /*/*/*) to="../../bin/busybox";; /bin/*) to="busybox";; /*/*) to="../bin/busybox";; /*) to="/bin/busybox";; esac; busybox ln -s $to $link; fi; done </etc/busybox.links; fi
-+	ln --help >/dev/null 2>&1 || alias ln='busybox ln'
-+	if test "x$D" = "x"; then
-+		while read link; do
-+			if test ! -h "$link"; then
-+				if test -f "$link.busybox"; then
-+					to="$link.busybox"
-+				else
-+					case "$link" in
-+						/*/*/*) to="../../bin/busybox";;
-+						/bin/*) to="busybox";;
-+						/*/*) to="../bin/busybox";;
-+						/*) to="/bin/busybox";;
-+					esac
-+				fi
-+				ln -s $to $link
-+			fi
-+		done </etc/busybox.links
-+	fi
- 
- 	# This adds the links, remember that this has to work when building an image too, hence the $D
--    set +e
--	while read link; do case "$link" in /*/*/*) to="../../bin/busybox";; /bin/*) to="busybox";; /*/*) to="../bin/busybox";; /*) to="/bin/busybox";; esac; bn=`basename $link`; update-alternatives --install $link $bn $to 50; done <$D/etc/busybox.links
--    set -e
-+	set +e
-+	while read link; do
-+		if test -f "$D$link.${PN}"; then
-+			to="$link.${PN}"
-+		else
-+			case "$link" in
-+				/*/*/*) to="../../bin/busybox";;
-+				/bin/*) to="busybox";;
-+				/*/*) to="../bin/busybox";;
-+				/*) to="/bin/busybox";;
-+			esac
-+		fi
-+		bn=`basename $link`
-+		update-alternatives --install $link $bn $to 50
-+	done <$D/etc/busybox.links
-+	set -e
- }
- 
- pkg_postinst_${PN}-mountall () {
--- 
-1.5.6.5
+OE already does that. But what it does after that is flag everything as
+'unpacked' to have opkg rerun all postinsts at boot *again*. If OE
+didn't run u-a at image time we wouldn't be able to use sysvinit for
+example.
+If you only care about u-a, just add a post process command to remove
+the S98configure from the rootfs and opkg won't run.
+
+In the long run a way to control this behaviour and optionally hook into
+qemu or even targets over network to run them at image time. Having to
+run a first boot, remove ssl keys and repackage everything is getting a
+bit tedious.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMNFuPMkyGM64RGpERAmr3AKCNIYUK/AlJZyxB8CSNKGwTC34mywCeNUH4
+yfJydmbOupXEw5hAvomV3sk=
+=t0HL
+-----END PGP SIGNATURE-----
 
 
 
