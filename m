@@ -1,45 +1,43 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jan.paesmans@gmail.com>) id 1OWQAc-0006Dm-O5
+	(envelope-from <graham.gower@gmail.com>) id 1OWQAr-0006E4-NO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 10:39:55 +0200
-Received: by gxk1 with SMTP id 1so3773376gxk.6
+	Wed, 07 Jul 2010 10:40:10 +0200
+Received: by iwn34 with SMTP id 34so7607393iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 01:35:03 -0700 (PDT)
+	Wed, 07 Jul 2010 01:35:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=D/VKz3xUzjd7FntpMhzHgY370b7b1ymHUqDtsUDdXBs=;
-	b=mh+4ZkEl2fuG033jSnJ2q09+ZyXkdCmUEHDyUfBGvFZaPI/cYo5xYG+6ASeIy0gkus
-	u4qhlnaJX91lOKBQamNdC1KrbgoKIjxHomGbfsvI9c6F+QPdz/u1F3hZUrCuPzCB9w5o
-	iy1RDPQ++ppwiali0+Pcc/BKtH8eHSs2CUsFE=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=wJDaFPdx61Yh7vfK9LCYF6AiATDqZGcqAhq49YoHZDM=;
+	b=Ic8YBRa4cATg8wB5ur4ic/x3X7WZ2mpgAl7l8kqZduxJ0G4eL43VWRPX7W4/hUP1RT
+	1v0inizoZCiX8tv10rFEUiSM27G2vVxt2Tkx/x6Xi+n/SGdznzTVL4yMibi7KxlOxoti
+	+DTvccSPMr8VAhwoQX/rD+5C6iuqeePWh90gg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=svh08/gSH9JpT+pRCLzQNlDagtK/4diodhX/39RFwnDVOynZ+BTe9tfJGj3yzMZVZZ
-	61ZnHei7tbx7b8E6J347gT/k6Snzwo5lPP7yqvR6nYIshsoZx3MScnhvxHUg8AuhtBoV
-	9a3G9ne2JE8nia8LLsM31VViQsfXDhAVSvcpc=
+	:content-type;
+	b=UrCsyC3iFw6bhax0KqbML4vBxKhaZ0fIZYIUF7wgL7t5S/POIhtdP6TeztCf6hGZxH
+	T2ci37L8SW3QTFCUA+oW7x5Mp9wXTAVtyTGZ9A/nwZ5TYMvHxo878s4F+wglqc9NpOOQ
+	uRW6qbeGg3FCB5KlSWnzGeml/HvmvKZVSoucA=
 MIME-Version: 1.0
-Received: by 10.90.50.19 with SMTP id x19mr5869571agx.40.1278491703220; Wed, 
-	07 Jul 2010 01:35:03 -0700 (PDT)
-Received: by 10.150.216.16 with HTTP; Wed, 7 Jul 2010 01:35:03 -0700 (PDT)
-In-Reply-To: <loom.20100707T014705-193@post.gmane.org>
-References: <1278458982-3362-1-git-send-email-raj.khem@gmail.com>
-	<loom.20100707T014705-193@post.gmane.org>
-Date: Wed, 7 Jul 2010 10:35:03 +0200
-Message-ID: <AANLkTikgO3KV1-2kB0RWicLNuEyaAJ_IHY9TPzEl4R2C@mail.gmail.com>
-From: Jan Paesmans <jan.paesmans@gmail.com>
+Received: by 10.42.36.3 with SMTP id s3mr1076159icd.94.1278491719550; Wed, 07 
+	Jul 2010 01:35:19 -0700 (PDT)
+Received: by 10.231.157.196 with HTTP; Wed, 7 Jul 2010 01:35:19 -0700 (PDT)
+In-Reply-To: <4C3437D7.8050505@gmx.net>
+References: <4C3437D7.8050505@gmx.net>
+Date: Wed, 7 Jul 2010 18:05:19 +0930
+Message-ID: <AANLkTil5qoWwuPVyu5cNGg2hS4ErYphXMDbfgD8a0EjZ@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: jan.paesmans@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][v2] base.bbclass: re-add backward compatibility with bitbake w.r.t decodeurl fix in bitbake
+Subject: Re: [RFC] GCC 4.3.1 unbuildable due to unapplyable patches - remove it then?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,35 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 08:39:55 -0000
+X-List-Received-Date: Wed, 07 Jul 2010 08:40:10 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Works for me. I'm also using bitbake 1.8.18
+On 7 July 2010 17:46, Robert Schuster <thebohemian@gmx.net> wrote:
+> Hi,
+> GCC 4.3.1 does not build for an ARM target because a patch does not fit.
+> So I assume that no one is really interested in that version of GCC
+> anymore and would remove it then if nobody fixes the patch situation:
+>
+> http://tinderbox.openembedded.net/public/logs/task/6443736.txt
+>
+> Regards,
+> Robert
+>
 
-Regards and thanks,
+I am in favour of removing anything that has been unbuildable for a
+sufficiently long period of time as to show that no one is using it.
 
-Jan
+However it looks like this breakage was introduced about 3 weeks ago.
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=65e509aeddd26a6829ee10aa21fa20d6fd3def3e
 
-On Wed, Jul 7, 2010 at 1:48 AM, Samuel Sieb <samuel@sieb.net> wrote:
-> Khem Raj <raj.khem <at> gmail.com> writes:
->
->>
->> This patch seems to work with both bitbakes
->>
->> Signed-off-by: Khem Raj <raj.khem <at> gmail.com>
->> ---
->> =A0classes/base.bbclass | =A0 15 +++++++++++++--
->> =A01 files changed, 13 insertions(+), 2 deletions(-)
->>
->
-> This patch works for me using bitbake 1.8.18.
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Is that long enough?
+
+-Graham
 
 
