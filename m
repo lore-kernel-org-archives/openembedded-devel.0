@@ -1,37 +1,39 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OWTWY-0006OA-C0 for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 14:15:10 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet2.eads.net with ESMTP; 07 Jul 2010 14:00:35 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Wed, 7 Jul 2010 14:09:48 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 7 Jul 2010 14:09:48 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Wed, 7 Jul 2010 14:09:49 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C4D@deimsg40.de.net.world>
-In-Reply-To: <201007071352.09254.khimov@altell.ru>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] Is there a recipe for building and using busybox with
-	libbusybox out there ?
-Thread-Index: AcsdulqLLUP+yMRxSsmuCbHN4/U+1AAEkj9Q
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world>
-	<201007071352.09254.khimov@altell.ru>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 07 Jul 2010 12:09:48.0749 (UTC)
-	FILETIME=[4BCE17D0:01CB1DCD]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWThE-0003sH-Cg for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 14:25:49 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWTcW-0005JV-GW for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 14:20:56 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jul 2010 14:20:56 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jul 2010 14:20:56 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 07 Jul 2010 14:20:46 +0200
+Message-ID: <i11reu$af5$1@dough.gmane.org>
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C15@deimsg40.de.net.world><1278498389.2345.1744.camel@mill.internal.reciva.com>	<i11m2f$o0b$1@dough.gmane.org>
+	<0B51A1E7C61D114DAE6FC10B0FD0ABA501819C48@deimsg40.de.net.world>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819C48@deimsg40.de.net.world>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -49,42 +51,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 12:15:11 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="GB2312"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 07 Jul 2010 12:25:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hello Roman I Khimov,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-what are your needs to use busybox linked to libbusybox.
+On 07-07-10 14:01, Hauser, Wolfgang (external) wrote:
+> As I am a little new in OE, where you suggest to add a post process command to remove
+> the S98configure ?
+> 
+> In the image recipe ? In the busybox recipe ?
 
-What are the advantages/disadvantages in your opinion ?
+in the image recipe using something like:
 
-Regards
-Wolfgang Hauser
+ROOTFS_POSTPROCESS_COMMAND += " ; rm file"
 
------Urspr=A8=B9ngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
-von Roman I Khimov
-Gesendet: Mittwoch, 7. Juli 2010 11:52
-An: openembedded-devel@lists.openembedded.org
-Betreff: Re: [oe] Is there a recipe for building and using busybox =
-withlibbusybox out there ?
+regards,
 
-=A7=A3 =A7=E3=A7=E0=A7=E0=A7=D2=A7=EB=A7=D6=A7=DF=A7=DA=A7=DA =
-=A7=E0=A7=E4 =A7=B3=A7=E2=A7=D6=A7=D5=A7=D1 07 =A7=DA=A7=F0=A7=DD=A7=F1 =
-2010 13:45:25 =A7=D1=A7=D3=A7=E4=A7=E0=A7=E2 Hauser, Wolfgang (external) =
+Koen
 
-=A7=DF=A7=D1=A7=E1=A7=DA=A7=E3=A7=D1=A7=DD:
-> So my question, is somebody working on a recipe for using buysbox this
-> way ?
+> 
+> Append to which command ?
+> 
+> Regards 
+> Wolfgang Hauser
+>   
+> -----Ursprüngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag von Koen Kooi
+> Gesendet: Mittwoch, 7. Juli 2010 12:49
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] Is there a recipe for building and using busybox with libbusybox out there ?
+> 
+> On 07-07-10 12:26, Phil Blundell wrote:
+>> On Wed, 2010-07-07 at 11:45 +0200, Hauser, Wolfgang (external) wrote:
+>>> I want to use busybox with the applet binaries linked against libbusybox
+>>> in our system.
+>>> We need a wide range of applets at the same time, so I suppose it will
+>>> save overall needed memory space.
+> 
+>> What's the advantage of this?  I would have thought it would give you a
+>> larger memory footprint rather than a smaller one.  I guess I must be
+>> missing something.
+> 
+>>> Also I want to prevent the system from updating alternatives while the
+>>> first boot. We have to provide a read only root file system.
+> 
+>> Yeah, this is a long-standing piece of OE suckage.  We should fix the
+>> alternative selection to work at image construction time.
+> 
+> OE already does that. But what it does after that is flag everything as
+> 'unpacked' to have opkg rerun all postinsts at boot *again*. If OE
+> didn't run u-a at image time we wouldn't be able to use sysvinit for
+> example.
+> If you only care about u-a, just add a post process command to remove
+> the S98configure from the rootfs and opkg won't run.
+> 
+> In the long run a way to control this behaviour and optionally hook into
+> qemu or even targets over network to run them at image time. Having to
+> run a first boot, remove ssl keys and repackage everything is getting a
+> bit tedious.
+> 
+> regards,
+> 
+> Koen
 
-Using it this way locally, will try to prepare a patch for oe.dev today.
 _______________________________________________
 Openembedded-devel mailing list
 Openembedded-devel@lists.openembedded.org
 http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMNHEeMkyGM64RGpERAlb/AJ94spQyrbNfaJRTFlrNT0UG4h9lfgCfWDcZ
+/NBxZJl6VUWy+XT34c75Mp8=
+=V5gc
+-----END PGP SIGNATURE-----
+
 
 
