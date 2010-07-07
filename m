@@ -1,39 +1,38 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OWOiT-0003N8-BU
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 07 Jul 2010 09:06:46 +0200
-Received: by bwz10 with SMTP id 10so3710417bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWOyH-0004OU-E9 for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 09:23:06 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OWOtZ-0003nI-Or for openembedded-devel@lists.openembedded.org;
+	Wed, 07 Jul 2010 09:18:13 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 07 Jul 2010 09:18:13 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 00:01:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=SvDp/7ci7nYxPuv2BVoGr6GtxlNf1TAsXNLmHTgMKKM=;
-	b=Kdp4up9goCajD0wZzq1U1Y4PhDvO8uULl+qmAh6TfNwWAjn0Z5goHT2QaNW2TBGBwe
-	VNbnwz2bXmV7yskCEzag1vZHj0HmBNw52mGL4Sc8e/cm9bX8rtape1MI+l8hReai7UDU
-	Ztgabx6qPivivSgIO/pZT3wIFW0WEwFfaJRU0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=B8SdYLn2YqTSzPyZjICgy1FuXWl5dXv22EDpY0VqMccebvokLxIy5yqf0Qd52lEeYl
-	6k74rzsM9X4k6uFc/oBFimDxWx+XoRTu7aKUmTVc5aH2SP5uCULldmc4lxCuNWqiirU0
-	tlUaPTUwdv0M3AXjyquuybpuWPyFIMOqfBMYI=
-MIME-Version: 1.0
-Received: by 10.204.79.204 with SMTP id q12mr4729884bkk.123.1278486116404; 
-	Wed, 07 Jul 2010 00:01:56 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Wed, 7 Jul 2010 00:01:56 -0700 (PDT)
-In-Reply-To: <i108p5$hd$1@dough.gmane.org>
-References: <i108p5$hd$1@dough.gmane.org>
-Date: Wed, 7 Jul 2010 09:01:56 +0200
-Message-ID: <AANLkTikgJStw6b_UmhbV9yIOdsjO7sBsX06dsDVTu-VX@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 07 Jul 2010 09:18:13 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 07 Jul 2010 09:17:59 +0200
+Message-ID: <i119n7$ej7$1@dough.gmane.org>
+References: <i108p5$hd$1@dough.gmane.org> <4C33B301.7010006@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <4C33B301.7010006@mentor.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -51,107 +50,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 07 Jul 2010 07:06:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 07 Jul 2010 07:23:06 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/7/6 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Things like this:
->
-> +LIBC = "glibc"
-> +ANGSTROMLIBC = "${LIBC}"
->
-> +PREFERRED_VERSION_gcc-cross = "4.1.2"
-> +PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
-> +PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
-> +PREFERRED_VERSION_binutils = "2.17.50.0.12"
-> +PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
-> +PREFERRED_VERSION_glibc = "2.5"
-> +PREFERRED_VERSION_glibc-initial = "2.5"
->
-> +PREFERRED_VERSION_busybox_nios2 = "1.13.2"
->
-> +ASSUME_PROVIDED += "linux-libc-headers-native"
->
-> do NOT belong in a machine.conf (or machine include). Those belong in
-> the distro (or local.conf), not in the machine.
->
-> So please, move the offending bits into a distro include (minus the
-> assume provided) to stop this kind of bad example from spreading further.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Being the one who made the commit I'd like to make a few remarks.
+On 07-07-10 00:49, Tom Rini wrote:
+> Koen Kooi wrote:
+> 
+>> +PREFERRED_VERSION_gcc-cross = "4.1.2"
+>> +PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
+>> +PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
+>> +PREFERRED_VERSION_binutils = "2.17.50.0.12"
+>> +PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
+> [snip]
+>> do NOT belong in a machine.conf (or machine include). Those belong in
+>> the distro (or local.conf), not in the machine.
+> 
+> Just putting this out there (and it's indeed _not_ how things are
+> today).  Why would we not want to move towards having this kind of stuff
+> be in the tune-ARCH.inc file, when a specific version is really needed
+> (more avr32 or new'ish core on an existing overall arch) ?
 
-First of all I suggest that if you quote text, you also quote the
-comments that go with the text you quote:
+Putting it in a tune-arch is not a problem, just put it in
+conf/distro/include.
+Experience has shown that putting it the machine includes is a bad idea,
+It rots and after a while a new machine gets added that doesn't use said
+machine include.
+And not to mention the need to change DISTRO_PR for editing a
+machine.conf, that's just backwards.
 
-# for now we pin gcc, glibc and binutils
-# as these are the only versions that have
-# nios2 support.
-PREFERRED_VERSION_gcc-cross = "4.1.2"
-PREFERRED_VERSION_gcc-cross-initial = "4.1.2"
-PREFERRED_VERSION_gcc-cross-intermediate = "4.1.2"
-PREFERRED_VERSION_binutils = "2.17.50.0.12"
-PREFERRED_VERSION_binutils-cross = "2.17.50.0.12"
-PREFERRED_VERSION_glibc = "2.5"
-PREFERRED_VERSION_glibc-initial = "2.5"
+> Yes, it
+> should be up to the distro to say "we want 4.4.x + 2.20.x" or whatever,
+> but then we also get the downside of "special case, XXXX only works well
+> with 4.3.4 + 2.19.x" or what have you, and those special cases get
+> introduced in one place and copy/pasted elsewhere.
 
-# uclibc does not work yet
-# PREFERRED_VERSION_uclibc = "0.9.30.3"
-# PREFERRED_VERSION_uclibc-initial = "0.9.30.3"
+So you have an include file in conf/distro that people can optionally
+use or copy/paste. Not all distros can/want to support all machines in
+OE. Angstrom tries to, but that's because it's the reference implemention :)
 
-# for now busybox 1.13.2 is the only one
-# patched and tested for nios2 so pin this
-# one too, until the other versions are updated
-# for nios2 too.
-PREFERRED_VERSION_busybox_nios2 = "1.13.2"
+It boils down to this:
 
-# there are some issues cross-compiling when
-# using linux-libc-headers-native as we get
-# some native inc dirs when compiling crt stuff
-# ASSUME_PROVIDED fixes this (but breaks compilation
-# on old host systems like red hat 4.
-ASSUME_PROVIDED += "linux-libc-headers-native"
+The distro needs to make a decision to do strange stuff to support a
+platform. Silently forcing it is bad.
 
-Secondly, pinning LIBC to glibc in a machine conf or include is indeed
-not too desirable but as neither uclibc or eglibc are working for this
-architecture I needed a way to indicate this.
-If there is a better solution for this, please let me know.
+In this specific case no distro except angstrom has expressed interest
+in supporting nios2, so we could even but this in an angstrom.inc.
+Seriously, can the distro maintainers that are willing to support nios2
+please raise their hands?
 
-Next wrt the busybox pinning: this is just a temporary as indicated by
-the comment. It'll disappear for sure in the near future (after I had
-time to look at later busyboxes and fix those).
+regards,
 
-Wrt the ASSUME_PROVIDED += "linux-libc-headers-native":
-I'll happily remove it once the include badness introduced by
-linux-libc-headers-native is fixed. (there is a different thread on
-this).
+Koen
 
-And finally the pinning of gcc/binutils/glibc.
-I feel the machine (and not the distro) is the one who should be able
-to specify which version(s) work for that machine and what the
-preferred version is.
-That is: for gcc and binutils. glibc might be a different case.
-It might be that a distro wants to override this, and I can imagine we
-want to support that. I'd say overriding in such a case is done on an
-architecture or machine base, not in a generic override.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Note also that the current machine description makes things working
-for *all* distros, whereas without it it would probably not be working
-for any distro at all!
+iD8DBQFMNConMkyGM64RGpERAon3AJ9keLb8YBEVmCsvWzhEqb3qtLCWKgCfcX+4
+kuDgy1Jqhl4qdAIVEWkiTfc=
+=0Lny
+-----END PGP SIGNATURE-----
 
-And lastly I am unaware of any place in the oe manual which states the
-above is bad behaviour (and why this is bad).
-
-Frans.
-
-PS: as mentioned before there are currently 100+ pinnings in
-conf/machine/* and conf/machine/include/* and at least two other
-machines pin gcc
-
-PPS: adding a new architecture to oe is quite some work. Picking on
-people does not really encourage to contribute that work. I could have
-equally well have kept this local.
 
 
