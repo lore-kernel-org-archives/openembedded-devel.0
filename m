@@ -1,43 +1,41 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from smtp4.mundo-r.com ([212.51.32.151])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OWrdx-00069T-1r
+	(envelope-from <xrcalvar@igalia.com>) id 1OWsGE-000453-MT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jul 2010 16:00:17 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A38C711000A7;
-	Thu,  8 Jul 2010 15:54:57 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 49ED211000A0;
-	Thu,  8 Jul 2010 15:54:57 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052067165.adsl.alicedsl.de
-	[78.52.67.165]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Thu,  8 Jul 2010 15:54:57 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id C40DE3C0C3; Thu,  8 Jul 2010 15:54:56 +0200 (CEST)
-Date: Thu, 8 Jul 2010 15:54:56 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Thu, 08 Jul 2010 16:39:36 +0200
+X-IronPort-Anti-Spam-Filtered: true
+X-IronPort-Anti-Spam-Result: AlAQAH1+NUxbdWOb/2dsb2JhbACTbIYdgQSGEcERhSUE
+X-IronPort-AV: E=Sophos;i="4.53,558,1272837600"; 
+	d="asc'?scan'208";a="739830361"
+Received: from 155.99.117.91.static.mundo-r.com (HELO fanzine.igalia.com)
+	([91.117.99.155])
+	by smtp4.mundo-r.com with ESMTP; 08 Jul 2010 16:33:38 +0200
+Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
+	by fanzine.igalia.com with esmtps 
+	(Cipher TLS1.0:RSA_AES_256_CBC_SHA1:32) (Exim) id 1OWsAT-0000EJ-Hz
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Jul 2010 16:33:37 +0200
+Received: from ip128.dynamic.igalia.com ([192.168.10.128])
+	by mail.igalia.com with esmtps 
+	(Cipher SSL3.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim)
+	id 1OWsAT-0006YZ-3C for <openembedded-devel@lists.openembedded.org>;
+	Thu, 08 Jul 2010 16:33:37 +0200
+From: Xabier Rodriguez Calvar <xrcalvar@igalia.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100708135456.GA28916@rhein.zuhause.netz>
-References: <1278509965-32664-1-git-send-email-heinold@inf.fu-berlin.de>
-	<AANLkTilK-hX_hPWqDp04sCTV3WiFTPL3ojHL3Jyc6CXX@mail.gmail.com>
-	<20100708081658.GA27625@rhein.zuhause.netz>
-MIME-Version: 1.0
-In-Reply-To: <20100708081658.GA27625@rhein.zuhause.netz>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Organization: Igalia, S.L.
+Date: Thu, 08 Jul 2010 16:33:09 +0200
+Message-ID: <1278599589.24868.8.camel@localhost.localdomain>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 212.51.32.151
+X-SA-Exim-Mail-From: xrcalvar@igalia.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_LOW,
+	SPF_NEUTRAL autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Henning Heinold <h.heinold@tarent.de>
-Subject: Re: [PATCH] gcc: add support for builtin gcc-atomics for gcc-4.3.x versions
+Subject: u-boot_git sakoman
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,14 +49,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jul 2010 14:00:20 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 08 Jul 2010 14:39:36 -0000
+X-Groupsio-MsgNum: 20812
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-eD97JogX/E/ZfneAV5VD"
 
-Okay,
+--=-eD97JogX/E/ZfneAV5VD
+Content-Type: text/plain; charset="ISO-8859-15"
+Content-Transfer-Encoding: quoted-printable
 
-if nobody complains I will push it this evening.
+Hi everybody,
 
-Bye Henning
+I am trying to build u-boot for omapzoop, but it seems that it cannot
+download the specified git repository, which is
+git://www.sakoman.net/git/u-boot-omap3.git .
 
+Does anybody know why it is down? Do you know what I should use instead?
 
+Br
+
+--=20
+Xabier Rodr=EDguez Calvar
+Enxe=F1eiro en Inform=E1tica
+IGALIA http://www.igalia.com
+
+--=-eD97JogX/E/ZfneAV5VD
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkw14aAACgkQnOMkPTyqZPQjxgCfVMwGbgLS+quXtaMvwLlXlJx0
+pfgAn2c7rPUdzRA7ndTSIw+eD2M4Jr/s
+=TEhG
+-----END PGP SIGNATURE-----
+
+--=-eD97JogX/E/ZfneAV5VD--
