@@ -1,48 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OWl03-00041B-Ah
+	(envelope-from <stefan@datenfreihafen.org>) id 1OWl83-0000G3-6f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jul 2010 08:54:25 +0200
-Received: by bwz10 with SMTP id 10so279639bwz.6
+	Thu, 08 Jul 2010 09:02:39 +0200
+Received: from guest185.ibr.cs.tu-bs.de ([134.169.35.185] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OWl3J-0004Bx-4u by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 07 Jul 2010 23:49:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=wx0fZkzl1yahFM9dNyrAkvpkhEEFN8HYzVa0sAJdIjM=;
-	b=iD7sbZl0U9Rsm7Nzl3R0wKKJC/0zdmbNkWIZ/0ICE5WXpWnLTAyp0RcJGy100IRiXq
-	FPG0xg5g91LIuPKP+PzcdmqmY62+YNICV+ftakJY4DnYuMvexTS/hWAIUrWDfcpG+nZg
-	aYBYdGbldDvFnR8YS+tYkddV2CIwU6DlZFCzU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Xsu6rFyDtbqd0a7pjQCoxvPGlt/9mOwGxZQiN6bcMpeiAq1diQwUXnxHxF0BeuMKz2
-	G92jiicx6Q8yLIntIK95mU1WS5at+V6/rudO6l2eeyPdh7rZHFhKIPXzXzUSCCWsvaQZ
-	RaMuPJibGXLGxowtVNNsTNJBYJIjtPqmrRgrY=
-MIME-Version: 1.0
-Received: by 10.204.71.8 with SMTP id f8mr1513057bkj.81.1278571766942; Wed, 07 
-	Jul 2010 23:49:26 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Wed, 7 Jul 2010 23:49:26 -0700 (PDT)
-In-Reply-To: <1278531880.4413.70.camel@lenovo.internal.reciva.com>
-References: <1278527926-5065-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTikso9BfJHslU0Ss6nQ5SfnOdgy8RIU0WF383jXX@mail.gmail.com>
-	<1278529036.4413.67.camel@lenovo.internal.reciva.com>
-	<AANLkTil6ZzCLdFEKksqKwjzCj_DV2DT7eifCJakP1HhR@mail.gmail.com>
-	<1278531880.4413.70.camel@lenovo.internal.reciva.com>
-Date: Thu, 8 Jul 2010 08:49:26 +0200
-Message-ID: <AANLkTilH4HHsk0ftnGdTN43qWb70aDZvYt1o6557tAH4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 08 Jul 2010 08:57:47 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OWl3B-0003Z3-VU
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Jul 2010 08:57:38 +0200
+Date: Thu, 8 Jul 2010 08:57:37 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100708065736.GA5242@excalibur.local>
+References: <1278509965-32664-1-git-send-email-heinold@inf.fu-berlin.de>
+	<AANLkTilK-hX_hPWqDp04sCTV3WiFTPL3ojHL3Jyc6CXX@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTilK-hX_hPWqDp04sCTV3WiFTPL3ojHL3Jyc6CXX@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] classes/base.bbclass: add INCOMPATIBLE_MACHINE
+Subject: Re: [PATCH] gcc: add support for builtin gcc-atomics for gcc-4.3.x versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,32 +47,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jul 2010 06:54:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 08 Jul 2010 07:02:39 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/7/7 Phil Blundell <philb@gnu.org>:
-> On Wed, 2010-07-07 at 21:11 +0200, Frans Meulenbroeks wrote:
->> COMPATIBLE_ARCH does not exist at the moment.
->> Is there interest in it? (or in other words, do I have a chance I get
->> acks for it, if not I'd rather save myself the effort writing a patch
->
-> Sorry, you're right, I had remembered it wrong. =A0It's ${COMPATIBLE_HOST=
-}
-> that I was thinking of, and I guess that doesn't do what you need in the
-> specific case of cross packages.
->
-> I guess I would be happy enough to see support for ${COMPATIBLE_TARGET}
-> added to cross.bbclass if such a thing doesn't already exist.
+Hello.
 
-I feel this is a good plan. Are there other supporters for this as
-well (before I start working on it)?
+On Wed, 2010-07-07 at 17:40, Khem Raj wrote:
+> On Wed, Jul 7, 2010 at 6:39 AM,  <heinold@inf.fu-berlin.de> wrote:
+> > From: Henning Heinold <heinold@inf.fu-berlin.de>
+> >
+> > * bump all INC_PR's
+> >
+> > this are the promised patches for gcc-4.3.x series, which fixes
+> > the atomic stuff and therefore make it able to build
+> > llvm multithreaded.
+> >
+> > Signed-off-by: Henning Heinold <h.heinold@tarent.de>
+> 
+> Acked-by: Khem Raj <raj.khem@gmail.com>
 
-The only concern I have is the name COMPATIBLE_TARGET
-for me TARGET is the board so COMPATIBLE_TARGET for me more or less
-equates to COMPATIBLE_MACHINE.
-What about COMPATIBLE_ARCH or COMPATIBLE_ARCHITECTURE?
+Acked-by: Stefan Schmidt <stefan@buglabs.net>
 
-Frans
+I did a lot of compile testing with these patches applied. GCC, pulseaudio and
+llvm rebuild as well as building all of them and complete images from scratch.
+No problem found. At buglabs we are using them for our builds as well without
+problems.
+
+regards
+Stefan Schmidt
 
 
