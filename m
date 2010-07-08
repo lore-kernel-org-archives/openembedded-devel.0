@@ -1,37 +1,33 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OX96O-0007Vu-Sk for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 10:38:48 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet2.eads.net with ESMTP; 09 Jul 2010 09:56:41 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Fri, 9 Jul 2010 10:05:58 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 9 Jul 2010 10:05:57 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 9 Jul 2010 10:05:56 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819DAE@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Best practice to resolve dependency loops ?
-Thread-Index: AcsfPY5vRh+XHl52Teiwaw7d9+8hwQ==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 09 Jul 2010 08:05:57.0889 (UTC)
-	FILETIME=[8FF58710:01CB1F3D]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+	(envelope-from <philb@gnu.org>) id 1OX986-0007Z2-Iv
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Jul 2010 10:40:19 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>)
+	id 1OWy08-0001GK-Tr; Thu, 08 Jul 2010 21:47:20 +0100
+From: Phil Blundell <philb@gnu.org>
+To: Khem Raj <raj.khem@gmail.com>
+In-Reply-To: <AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com>
+References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com>
+	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
+	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com>
+Date: Thu, 08 Jul 2010 21:47:30 +0100
+Message-ID: <1278622050.15825.18.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Best practice to resolve dependency loops ?
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][v3 3/4] uClibc: redo configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,22 +41,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 08:38:48 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Jul 2010 08:40:19 -0000
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On Thu, 2010-07-08 at 12:02 -0700, Khem Raj wrote:
+> I would have a feature called 'nobx' because most of the machines
+> we support actively in OE has BX. With current state this needs to
+> be added to MACHINE features for almost all arm machines. We can instead
+> have nobx and keep USE_BX enabled and only disable it if nobx appears
+> in machine_features. Otherwise I have tested the patches myself
+> and they seems to work well.
 
-the current org.openembedded.dev fails while building a image based on
-console-base-image complaining about unresolved dependency loops.
-The debugging output of bitbake list the failing packages, but not the
-dependencies causing the problem.
+I'm not sure that putting bx (or nobx) in MACHINE_FEATURES really
+conveys any information that you can't already get from TARGET_ARCH plus
+THUMB_INTERWORK.  It's also worth noting that the latter is a DISTRO
+variable so, if you did add a competing bx flag to MACHINE_FEATURES, it
+would be difficult to ensure that the two were consistent.
 
-What is the best practice to examine and solve such problems ?
+p.
 
-regards
-Wolfgang Hauser
+
 
 
