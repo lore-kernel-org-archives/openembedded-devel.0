@@ -1,45 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OX9gA-0006Of-9W
+	(envelope-from <holger+oe@freyther.de>) id 1OX9m1-0006eU-E6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 11:15:32 +0200
-Received: by iwn34 with SMTP id 34so1966618iwn.6
+	Fri, 09 Jul 2010 11:21:34 +0200
+Received: from [192.168.1.215] (dsl-62-220-14-162.berlikomm.net
+	[62.220.14.162])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id D40891B10C09
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 02:10:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type;
-	bh=gvcYew/YQ/alkviFu15QJupAB6sPaHmM3xR9Dhy2aMU=;
-	b=LG4nPYha2X6KCTphXw1ABrCslPCEFvJ4A2frI4k0xQeT7LrNZbsyMNjC1/lcHUOtc2
-	raYcEDxADghrDTJojIkLr0FQUMuwukcBwFBeFM488jbuHOSLFSv7LVmbuE3QMfJADh2d
-	2zeLPQ1ZyI5IXuaI8Uc4Elb0ivBno9zhv/Vck=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=kQ43CgE3kqZ7vrapA5UE/YbbkOcJudEfy8XhntMveghiw/WyQM/180Re5mMmCV2aQf
-	FwtXQc6BlAN2qnuZoi/JHLZCOTcOfz0In8q3QLrOemXoJsA1GoX8l2vyE5G4P0J8izCY
-	MU6eOummzAFaK2yh+zYKmmA27FR3RHJL8oehA=
-Received: by 10.231.183.19 with SMTP id ce19mr8708555ibb.35.1278625544206; 
-	Thu, 08 Jul 2010 14:45:44 -0700 (PDT)
+	Thu,  8 Jul 2010 15:39:11 +0000 (UTC)
+Message-ID: <4C35F08F.1040705@freyther.de>
+Date: Thu, 08 Jul 2010 23:36:47 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
+	Thunderbird/3.1
 MIME-Version: 1.0
-Received: by 10.231.14.131 with HTTP; Thu, 8 Jul 2010 14:45:24 -0700 (PDT)
-In-Reply-To: <AANLkTil7o0fTTOKgeENfJ54exQUXvpnDzIicIWfbDG2-@mail.gmail.com>
-References: <AANLkTil7o0fTTOKgeENfJ54exQUXvpnDzIicIWfbDG2-@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 8 Jul 2010 14:45:24 -0700
-Message-ID: <AANLkTilB16RBCmlt-mnOLlk2A5no0jrmm_LWlaywDW-X@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <4C356475.2060208@gmail.com>
+In-Reply-To: <4C356475.2060208@gmail.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: Strangeness with mkdosfs on OMAP3 board
+Subject: Re: [RFC] Badness with -ibad, a replacement for zecke-no-host-includes.patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,21 +40,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 09:15:32 -0000
+X-List-Received-Date: Fri, 09 Jul 2010 09:21:34 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 8, 2010 at 6:54 AM, Sergey Lapin <slapinid@gmail.com> wrote:
-> -D_FILE_OFFSET_BITS=64, where it has gone?
+On 07/08/2010 01:39 PM, Graham Gower wrote:
+> This patch introduces a new command line parameter to gcc (at
+> Zecke's suggestion), -ibad, which may be used to specify
+> blacklisted include prefixes. E.g.
+> 
+> grg@eye7:/tmp$ ~/oe2/tmp/cross/mipsel/bin/mipsel-angstrom-linux-gcc -c test.c -ibad /usr/include -I /usr/include
+> CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
 
-CFLAGS are overwritten, and the makefile is a bit non cross compilation friendly
-you can add this
+nice! The only thing that is worrying is the question how we make sure
+these bad path's are enforced.
 
-CFLAGS += "-D_FILE_OFFSET_BITS=64
-
-to dosfstools_2.11.bb and then rebuild just this recipe.
-
-Does that help ?
-
--Khem
+E.g. a recipe not honoring our CPPFLAGS might silently pass this check
+(while before it was hardcoded into the compiler). My proposal would be
+to extend the sanity check and grep the compile log for gcc and -ibad
+and fail if gcc exists but -ibad does not occur?
 
 
