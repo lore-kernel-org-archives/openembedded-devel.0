@@ -1,43 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OWq2I-0001Qe-DJ for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jul 2010 14:17:17 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OWpxZ-0003o6-Dq for openembedded-devel@lists.openembedded.org;
-	Thu, 08 Jul 2010 14:12:09 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Jul 2010 14:12:09 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <mickey@vanille-media.de>) id 1OWqFd-0004t9-Ar
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 08 Jul 2010 14:30:59 +0200
+Received: from [192.168.1.6] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 00F5E584381
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 08 Jul 2010 14:12:09 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu,  8 Jul 2010 14:26:03 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1081)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <1278396101-30522-2-git-send-email-GNUtoo@no-log.org>
+Date: Thu, 8 Jul 2010 14:25:52 +0200
+Message-Id: <2E582327-C544-47B8-8551-3BC95EE57A49@vanille-media.de>
+References: <1278396101-30522-1-git-send-email-GNUtoo@no-log.org>
+	<1278396101-30522-2-git-send-email-GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 08 Jul 2010 14:12:01 +0200
-Message-ID: <i14fah$hga$1@dough.gmane.org>
-References: <4C356475.2060208@gmail.com>	<i147lg$nh3$1@dough.gmane.org>
-	<AANLkTik3s07aFzoyv-eJ99d9Wdezdn-iWEBRiuHlfnU2@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <AANLkTik3s07aFzoyv-eJ99d9Wdezdn-iWEBRiuHlfnU2@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Badness with -ibad, a replacement for zecke-no-host-includes.patch.
+Subject: Re: [PATCH] htcdream.conf: use xf86-video-fbdev and xf86-video-tslib
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 08 Jul 2010 12:17:20 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 08 Jul 2010 12:30:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Acked-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
 
-On 08-07-10 12:56, Graham Gower wrote:
-> On 8 July 2010 19:31, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 08-07-10 07:39, Graham Gower wrote:
->>> This patch introduces a new command line parameter to gcc (at
->>> Zecke's suggestion), -ibad
->>
->> It gets bonus point for being an obscure Dune reference :)
-> 
-> I think I lose the bonus points, as I don't understand the reference :(
+Am 06.07.2010 um 08:01 schrieb Denis 'GNUtoo' Carikli:
 
-http://dunepedia.wetpaint.com/page/Eyes+of+the+Ibad
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMNcCQMkyGM64RGpERAq+wAJ9epmSlI1cQcj+wWIvTwMlF7324FQCfRoTd
-z30/JoyHoH6KpeKLAt/G3Ek=
-=vyka
------END PGP SIGNATURE-----
+>=20
+> Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+> ---
+> conf/machine/htcdream.conf |   11 +++++++++++
+> recipes/tasks/task-x11.bb  |    2 +-
+> 2 files changed, 12 insertions(+), 1 deletions(-)
+>=20
+> diff --git a/conf/machine/htcdream.conf b/conf/machine/htcdream.conf
+> index a10edb8..3cf1ebf 100644
+> --- a/conf/machine/htcdream.conf
+> +++ b/conf/machine/htcdream.conf
+> @@ -19,3 +19,14 @@ MACHINE_EXTRA_RRECOMMENDS =3D "\
+> "
+>=20
+> PREFERRED_PROVIDER_virtual/kernel =3D "linux-leviathan"
+> +
+> +XSERVER =3D " \
+> +        xserver-xorg \
+> +        xserver-xorg-extension-glx \
+> +        xserver-xorg-extension-dri \
+> +        xf86-input-tslib \
+> +        xf86-input-evdev \
+> +        xf86-input-mouse \
+> +        xf86-input-keyboard \
+> +        xf86-video-fbdev \
+> +"
+> diff --git a/recipes/tasks/task-x11.bb b/recipes/tasks/task-x11.bb
+> index 5eeb8ba..77e281e 100644
+> --- a/recipes/tasks/task-x11.bb
+> +++ b/recipes/tasks/task-x11.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "The X Window System -- install this =
+task to get a client/server b
+> SECTION =3D "x11/server"
+> LICENSE =3D "MIT"
+> PV =3D "1.0"
+> -PR =3D "r4"
+> +PR =3D "r5"
+>=20
+> # WORK IN PROGRESS
+>=20
+> --=20
+> 1.7.0.4
+>=20
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
 
