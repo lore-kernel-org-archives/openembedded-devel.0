@@ -1,55 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OXAfw-0001yw-HA
+	(envelope-from <denis@denix.org>) id 1OXAnf-0005pJ-Te
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 12:19:33 +0200
-Received: by fxm12 with SMTP id 12so990363fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 03:14:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=uEQqRJ2BbKLWc0XhZuOy2PeQzPrm36xU6V2lAaOoJtg=;
-	b=GOxkHHlBHz3RgjlEsqlFQsiBjNcfnC6LE0ibLDumlXbVaznjcXnzwacCkv7JQDirUd
-	dNOZKRSGnNnumurbm2E37WzXyyXeEc4xCNxuZ1QpYAwHB79Gtv/NHT22IJJUr9DYCyKi
-	tabyXwIzC9bbLUcuB5DORNuyJLOn58jCR+1PY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=cv+WeytO3WEuo0P3j6n8K6Ztl7oBBJmY3c73V37WRmsQHAOgeP824vAYBgg+ZLifHH
-	O6vxRQKBcMeJ8hAkvC/7hlwf0RwD8vTeQCsHJ7M4QhSf0XcTCzCk3OKg/PiavPAxFFgq
-	PG4mscRMuI9uLUyym+RYzqfUbTN/li/csu65I=
-Received: by 10.223.109.5 with SMTP id h5mr7543797fap.52.1278620924854;
-	Thu, 08 Jul 2010 13:28:44 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id q8sm114893faa.10.2010.07.08.13.28.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 08 Jul 2010 13:28:43 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OWxhz-0007jw-5R; Thu, 08 Jul 2010 22:28:35 +0200
-Date: Thu, 8 Jul 2010 22:28:35 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20100708202835.GC23169@mx.loc>
-References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com>
-	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
-	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	Fri, 09 Jul 2010 12:27:21 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.56.71])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L59005HU1JD9MG0@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	08 Jul 2010 12:21:19 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 063F114AF60; Thu,
+	08 Jul 2010 13:21:13 -0400 (EDT)
+Date: Thu, 08 Jul 2010 13:21:12 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+To: openembedded-devel@lists.openembedded.org
+Message-id: <20100708172112.GD12383@denix.org>
+References: <4C356475.2060208@gmail.com>
+MIME-version: 1.0
+In-reply-to: <4C356475.2060208@gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][v3 3/4] uClibc: redo configuration
+Subject: Re: [RFC] Badness with -ibad, a replacement for	zecke-no-host-includes.patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,61 +41,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 10:19:34 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 09 Jul 2010 10:27:21 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-On Thu, Jul 08, 2010 at 12:02:51PM -0700, Khem Raj wrote:
->On Tue, Jul 6, 2010 at 12:32 PM, Bernhard Reutner-Fischer
-><rep.dot.nop@gmail.com> wrote:
+On Thu, Jul 08, 2010 at 03:09:01PM +0930, Graham Gower wrote:
+> This patch introduces a new command line parameter to gcc (at
+> Zecke's suggestion), -ibad, which may be used to specify
+> blacklisted include prefixes. E.g.
+> 
+> grg@eye7:/tmp$ ~/oe2/tmp/cross/mipsel/bin/mipsel-angstrom-linux-gcc -c test.c -ibad /usr/include -I /usr/include
+> CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+> 
+> This makes it much easier to add new blacklisted include paths,
+> with a trivial edit to bitbake.conf. No additional paths have
+> been added yet, but my motivation for this was to add
+> /usr/X11R6/include and /usr/X11/include.
+> 
+> Please note that the bitbake.conf change will break builds with
+> versions of gcc that do not accept this -ibad parameter. I have
 
->> +       uclibc_cfg('bx',        machine_features,'USE_BX', cnf, rem)
->
->
->
->I would have a feature called 'nobx' because most of the machines
->we support actively in OE has BX. With current state this needs to
->be added to MACHINE features for almost all arm machines. We can instead
->have nobx and keep USE_BX enabled and only disable it if nobx appears
->in machine_features.
+Does it mean any external toolchain will be broken or require changes to the 
+bitbake.conf?
 
-I'd much prefer to stick bx into some generic arm include instead.
-What do you think?
+-- 
+Denys
 
->                     Otherwise I have tested the patches myself
->and they seems to work well.
->
->I will push them once we have the bx turned into nobx
->
->I think you do not have a function to disable already enabled feature.
-
-the 'rem' below translates into sed /SOMETHING/d
-Can you elaborate?
-Except you mean DISTRO_FEATURES="ipv4"
-and one of the gazillion distro-specific config snippets contain
-CONFIG_IPV6=y
-and that is not disabled.. About all those distro hunks have to go
-anyway for they are redundant.
-
->> +       return "\n".join(cnf), "\n".join(rem)
->> +# X, Y = ${@features_to_uclibc_settings(d)}
->> +# unfortunately doesn't seem to work with bitbake, workaround:
-
-you said you saw an ICE with current uclibc master. Which arch and which
-versions of the toolchain did you use?
-FYI, i tested qemuarm, qemumips, qemuppc, qemux86 and (my local)
-qemux86_64 with
-PREFERRED_BINUTILS = "2.20.1" ¹)
-PREFERRED_GCC_VERSION = "4.5" ²) ³)
-
-and all of built fine for me.
-
-¹) micro.conf incorrectly picks 2.19.51 per default, should be bumped
-²) micro.conf should also default to 4.5
-³) It would be great if we could settle on one scheme for
-   binutils/gcc/libc version shorthands:
-   PREFERRED_BINUTILS_VERSION _or_ PREFERRED_GCC, i'd go for
-   PREFERRED_foo_VERSION, uniformly.
+> tested that the ibad patch applies to each of the gcc versions
+> in this patch, but only done functional tests for gcc-4.3.3 and
+> gcc-.4.1.
+> 
+> The following gcc versions may need attention:
+> 3.3.3
+> 3.3.4
+> svn
+> csl-arm-2007q3
+> csl-arm-2008q1
+> csl-arm-2008q3
+> 
+> 3.3.x will require a completely reworked ibad patch. The others
+> should be compatible with one of the three ibad patches
+> included below.
+> 
+> -Graham
 
 
