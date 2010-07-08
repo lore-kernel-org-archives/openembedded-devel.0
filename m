@@ -1,32 +1,50 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1OX9m1-0006eU-E6
+	(envelope-from <raj.khem@gmail.com>) id 1OX9s6-0006mt-Ub
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 11:21:34 +0200
-Received: from [192.168.1.215] (dsl-62-220-14-162.berlikomm.net
-	[62.220.14.162])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id D40891B10C09
+	Fri, 09 Jul 2010 11:27:51 +0200
+Received: by iwn34 with SMTP id 34so1977305iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  8 Jul 2010 15:39:11 +0000 (UTC)
-Message-ID: <4C35F08F.1040705@freyther.de>
-Date: Thu, 08 Jul 2010 23:36:47 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.4) Gecko/20100624 Fedora/3.1-1.fc13 Lightning/1.0b2
-	Thunderbird/3.1
+	Fri, 09 Jul 2010 02:22:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=yDxKJYREd9d1vzWEVX9LPi9h05x87VXfO0zP8cOwVUA=;
+	b=wCNL6XEIb6lDaWc3S+JqsuY4/ih+MaAlO42WXSOi4Uf0V0HaYwZy0bNyanHFpWaOjN
+	afm6sZ6A3O4YzP2oa/1efVBZxdvGSt1t/eGo6jM9PpkLHyIcHHSjCF0O+rb6D/yvFOjd
+	8DTEnEMc+kwbtoUd7PlX84eORaL6ids3C5ops=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=ZUKGiIljLI0/8YgUzhA5FgPl+e0DoTjrO9Z+AAGWNEr7C1VzRwpCHo+oKIPsEkb0rT
+	k91QCidPgv2DNIykFG7Lf8GkP598X+l3QVh/cLC6ZY0YhQhcCn5bBK+55IyGuNrW0uqS
+	ISdaziOxbxwENZwmIbwtxxOQxu5kUq/tcpwFQ=
+Received: by 10.231.33.76 with SMTP id g12mr8699314ibd.199.1278626505189; Thu, 
+	08 Jul 2010 15:01:45 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C356475.2060208@gmail.com>
-In-Reply-To: <4C356475.2060208@gmail.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+Received: by 10.231.14.131 with HTTP; Thu, 8 Jul 2010 15:01:25 -0700 (PDT)
+In-Reply-To: <1278624724.15825.32.camel@lenovo.internal.reciva.com>
+References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com> 
+	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
+	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com> 
+	<1278622050.15825.18.camel@lenovo.internal.reciva.com>
+	<AANLkTinJLDCgt2ku0lIoHiT0EPlYMH8HDJLI-hAaXMvG@mail.gmail.com> 
+	<1278624724.15825.32.camel@lenovo.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 8 Jul 2010 15:01:25 -0700
+Message-ID: <AANLkTimo1BwySoObG0fcPIR7jWiwtmkE22jucMfafjll@mail.gmail.com>
+To: Phil Blundell <philb@gnu.org>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Badness with -ibad, a replacement for zecke-no-host-includes.patch.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][v3 3/4] uClibc: redo configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,24 +58,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 09:21:34 -0000
+X-List-Received-Date: Fri, 09 Jul 2010 09:27:52 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-On 07/08/2010 01:39 PM, Graham Gower wrote:
-> This patch introduces a new command line parameter to gcc (at
-> Zecke's suggestion), -ibad, which may be used to specify
-> blacklisted include prefixes. E.g.
-> 
-> grg@eye7:/tmp$ ~/oe2/tmp/cross/mipsel/bin/mipsel-angstrom-linux-gcc -c test.c -ibad /usr/include -I /usr/include
-> CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+On Thu, Jul 8, 2010 at 2:32 PM, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2010-07-08 at 14:12 -0700, Khem Raj wrote:
+>> hmm TARGET_ARCH wouldnt be the one but BASE_PACKAGE_ARCH does have sub-a=
+rch
+>> info. Although I would agree with you that we can build this information=
+ from
+>> BASE_PACKAGE_ARCH but its not as bad to have it as a machine feature eit=
+her.
+>
+> I do think it is fairly undesirable to have the same thing configured in
+> two places. =A0If a DISTRO sets THUMB_INTERWORK to off on a v4t platform
+> then I think they would have a reasonable expectation that this would
+> cause bx to not be used. =A0If uclibc is looking at some other place to
+> decide then it will not behave in the expected fashion.
 
-nice! The only thing that is worrying is the question how we make sure
-these bad path's are enforced.
+should we make THUMB_INTERWORK a distro feature ? currently its an independ=
+ent
+variable. This should be set in consent with chosen machine so if a machine
+does not support interworking then distro should remove it from a possible
+set of distro features. Then uclibc can rely on this distro feature to turn
+bx support on|off.
 
-E.g. a recipe not honoring our CPPFLAGS might silently pass this check
-(while before it was hardcoded into the compiler). My proposal would be
-to extend the sanity check and grep the compile log for gcc and -ibad
-and fail if gcc exists but -ibad does not occur?
+>
+> p.
+>
+>
+>
+>
 
 
