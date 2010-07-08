@@ -1,40 +1,48 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OXB9k-0006eT-82
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OXBR1-0005p4-8H
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 12:50:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o69AjGut015114
+	Fri, 09 Jul 2010 13:08:02 +0200
+Received: by iwn34 with SMTP id 34so2062256iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Jul 2010 11:45:16 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 15041-01 for <openembedded-devel@lists.openembedded.org>;
-	Fri,  9 Jul 2010 11:45:12 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o69AjAva015108
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 9 Jul 2010 11:45:11 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4C35F08F.1040705@freyther.de>
-References: <4C356475.2060208@gmail.com>  <4C35F08F.1040705@freyther.de>
-Date: Fri, 09 Jul 2010 11:44:54 +0100
-Message-ID: <1278672294.28835.95.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Fri, 09 Jul 2010 04:03:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=UVHJxpG29SetNjh9q6HfHa4IBxikl1QO3D255HXafSk=;
+	b=kOBLKqsHxL1S2DfDWcVvNmSLZAnvHux0Vj+FJfHbNSZe1dl9aiQ43UMfRkwNJP4l5M
+	rpNq8dCkUXP+OO87X4a4CGOr0LwTWYR0MBGULhyHnReFsZfmCsDPrUTkUp3GiqU2odOe
+	Ipuv7wdrvilMow1wvzYf76kh3UasLsH7UAULs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=edL7mh8qRtC5JuhreTBn2Gowc6Z8NCYpX6635IqJ8/zME9qe3ZBWXjK/aoXp+r4POi
+	qYtyWQOH0IXxrB4zlc/90gyNJGxCd+JxTu+RjbLV2KeREImkgt1bddsxofncxjzmGtkD
+	y7Lq3wkzBxeHvrPdHZuOUQr+hcBjT5d9TFCJs=
+Received: by 10.231.176.215 with SMTP id bf23mr8347429ibb.96.1278623055197; 
+	Thu, 08 Jul 2010 14:04:15 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.14.131 with HTTP; Thu, 8 Jul 2010 14:03:55 -0700 (PDT)
+In-Reply-To: <1278622050.15825.18.camel@lenovo.internal.reciva.com>
+References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com> 
+	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
+	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com> 
+	<1278622050.15825.18.camel@lenovo.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 8 Jul 2010 14:03:55 -0700
+Message-ID: <AANLkTinf_zr9QQdPJyevN-ve62_Pqi3WDNygAgABPt32@mail.gmail.com>
+To: Phil Blundell <philb@gnu.org>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Badness with -ibad, a replacement for zecke-no-host-includes.patch.
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [PATCH][v3 3/4] uClibc: redo configuration
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 10:50:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 09 Jul 2010 11:08:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, 2010-07-08 at 23:36 +0800, Holger Freyther wrote:
-> On 07/08/2010 01:39 PM, Graham Gower wrote:
-> > This patch introduces a new command line parameter to gcc (at
-> > Zecke's suggestion), -ibad, which may be used to specify
-> > blacklisted include prefixes. E.g.
-> > 
-> > grg@eye7:/tmp$ ~/oe2/tmp/cross/mipsel/bin/mipsel-angstrom-linux-gcc -c test.c -ibad /usr/include -I /usr/include
-> > CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
-> 
-> nice! The only thing that is worrying is the question how we make sure
-> these bad path's are enforced.
-> 
-> E.g. a recipe not honoring our CPPFLAGS might silently pass this check
-> (while before it was hardcoded into the compiler). My proposal would be
-> to extend the sanity check and grep the compile log for gcc and -ibad
-> and fail if gcc exists but -ibad does not occur?
+On Thu, Jul 8, 2010 at 1:47 PM, Phil Blundell <philb@gnu.org> wrote:
+> On Thu, 2010-07-08 at 12:02 -0700, Khem Raj wrote:
+>> I would have a feature called 'nobx' because most of the machines
+>> we support actively in OE has BX. With current state this needs to
+>> be added to MACHINE features for almost all arm machines. We can instead
+>> have nobx and keep USE_BX enabled and only disable it if nobx appears
+>> in machine_features. Otherwise I have tested the patches myself
+>> and they seems to work well.
+>
+> I'm not sure that putting bx (or nobx) in MACHINE_FEATURES really
+> conveys any information that you can't already get from TARGET_ARCH plus
+> THUMB_INTERWORK. =A0It's also worth noting that the latter is a DISTRO
+> variable so, if you did add a competing bx flag to MACHINE_FEATURES, it
+> would be difficult to ensure that the two were consistent.
 
-How about making this option an environmental variable rather than a
-flag? I've seen that technique used to great effect for this exact
-reason before...
+If I am not wrong you can still do interworking and not have bx (using
+mov pc,lr)
 
-Cheers,
-
-Richard
-
+>
+> p.
+>
+>
+>
 
 
