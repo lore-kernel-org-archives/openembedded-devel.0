@@ -1,45 +1,52 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OXAvW-0006IW-4M
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OXB5M-0006VU-RM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 12:35:26 +0200
-Received: by iwn34 with SMTP id 34so2033608iwn.6
+	Fri, 09 Jul 2010 12:45:37 +0200
+Received: by fxm12 with SMTP id 12so1010050fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 03:30:34 -0700 (PDT)
+	Fri, 09 Jul 2010 03:40:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=MA6JDzEnLvV6qE3V1sZYd5RGD4UCAm8AEJn4CyE/PC4=;
-	b=M2bqcWc2GV13xaNYc2fs25aIc+IF6DEj4vdfLDA5OIZsIDy38E+IL9lug5q0isV7RH
-	MQsNTIUyckf+/dzbBKPSBEqh5wa0a/CtwoVHLFAQHq1yfmtDq5fKDG8togteTJe6duwV
-	Bnu6Blmn5Qdglh6tsSWHrtTR0sFRJOjR8K1xs=
+	h=domainkey-signature:received:received:received:date:from:to:cc
+	:subject:message-id:references:mime-version:content-type
+	:content-disposition:content-transfer-encoding:in-reply-to
+	:user-agent; bh=y33NyUNp4zGhlAq/FAvvQt9XgwSBXnxVIhCA3azMx68=;
+	b=o5aatdIyDHaZTSiEUxMqj7Cw1ehrO0oqAzSXj92zTS3JNVWPZiWS3jp1Mz5n1rlh0q
+	AWy7fswOZXzw5Wl+4DjP9ku/AxzjrB9tBPBnIXhD+VzpGBGWQw8K8pAMDlKbP26dDqG4
+	mUMYIB54dHrAhDl8BT2EL57uGFiH3RKF2C42U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=wA6HntIJ3RyFvvWlUi+rN+vuemC22UNvKW8h7Axj2q0xfOtgrvt8wSxeZy2X06DaMj
-	D1KGAHMr/6S7o01WMO64Oup42dxkr6TLj25iS5QZ0Yo2dwi1VDLV4mWQpeCVXMRAgAbz
-	iBvhIw4bM0smw5L8hUTsaFoOhl9dheIErTEsE=
-Received: by 10.231.160.17 with SMTP id l17mr3305743ibx.102.1278624689102; 
-	Thu, 08 Jul 2010 14:31:29 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.14.131 with HTTP; Thu, 8 Jul 2010 14:31:09 -0700 (PDT)
-In-Reply-To: <1278624574.15825.30.camel@lenovo.internal.reciva.com>
-References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com> 
+	h=date:from:to:cc:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=e+suW6cUpzJtSS4jaeXHB9r78ipenB6iOE/FztXKZe+EJ0Be0fQmNw29ygSfXVEcb2
+	5w8dCpQIvh07ORkBSc+YxtvvKssGmTQ69bJhd/0DgCgr63FTuhV+04XrXVeW+JRVb2yv
+	LOwOLGB4dykpxP39/bYbqaGAwkGk/djdgM9Ts=
+Received: by 10.86.63.11 with SMTP id l11mr2074901fga.45.1278621904860;
+	Thu, 08 Jul 2010 13:45:04 -0700 (PDT)
+Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
+	by mx.google.com with ESMTPS id 8sm144413fau.4.2010.07.08.13.45.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 08 Jul 2010 13:45:03 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OWxxl-0007r7-QF; Thu, 08 Jul 2010 22:44:53 +0200
+Date: Thu, 8 Jul 2010 22:44:53 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: Khem Raj <raj.khem@gmail.com>
+Message-ID: <20100708204453.GD23169@mx.loc>
+References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com>
 	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
-	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com> 
-	<1278622050.15825.18.camel@lenovo.internal.reciva.com>
-	<AANLkTinf_zr9QQdPJyevN-ve62_Pqi3WDNygAgABPt32@mail.gmail.com> 
-	<1278624574.15825.30.camel@lenovo.internal.reciva.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 8 Jul 2010 14:31:09 -0700
-Message-ID: <AANLkTikn4ygx6v-P4WvZWHvxD9rQAq5kyDuMdolDPbdn@mail.gmail.com>
-To: Phil Blundell <philb@gnu.org>
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com>
+	<20100708202835.GC23169@mx.loc>
+	<AANLkTilRuu8FqF_Bz93wjjdm4047LJFe5N2Egs70Adlj@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTilRuu8FqF_Bz93wjjdm4047LJFe5N2Egs70Adlj@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -58,29 +65,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 10:35:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 09 Jul 2010 10:45:37 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-On Thu, Jul 8, 2010 at 2:29 PM, Phil Blundell <philb@gnu.org> wrote:
-> On Thu, 2010-07-08 at 14:03 -0700, Khem Raj wrote:
->> If I am not wrong you can still do interworking and not have bx (using
->> mov pc,lr)
+On Thu, Jul 08, 2010 at 01:31:51PM -0700, Khem Raj wrote:
+>On Thu, Jul 8, 2010 at 1:28 PM, Bernhard Reutner-Fischer
+><rep.dot.nop@gmail.com> wrote:
+>> On Thu, Jul 08, 2010 at 12:02:51PM -0700, Khem Raj wrote:
+>>>On Tue, Jul 6, 2010 at 12:32 PM, Bernhard Reutner-Fischer
+>>><rep.dot.nop@gmail.com> wrote:
+>>
+>>>> +       uclibc_cfg('bx',        machine_features,'USE_BX', cnf, rem)
+>>>
+>>>
+>>>
+>>>I would have a feature called 'nobx' because most of the machines
+>>>we support actively in OE has BX. With current state this needs to
+>>>be added to MACHINE features for almost all arm machines. We can instead
+>>>have nobx and keep USE_BX enabled and only disable it if nobx appears
+>>>in machine_features.
+>>
+>> I'd much prefer to stick bx into some generic arm include instead.
+>> What do you think?
 >
-> That's not an interworking instruction in ARMv4T, and I don't think it
-> is in ARMv5TE either. =A0You might be thinking of pop {pc}, which is
-> interworking in ARMv5TE, but even this is not interworking in v4t.
+>I have added attached patch and turned bx into nobx and now all seems to be
+>ok
 
-tst lr, #1
-moveq pc, lr
-bx lr
+This is conceptionally backwards but i won't complain if this helps in
+finally getting the improved infrastructure in.
 
-Thats how its done on armv4 for EABI
+Separate issues, but what about the other parts below?
+thanks,
+>>
+>>>                     Otherwise I have tested the patches myself
+>>>and they seems to work well.
+>>>
+>>>I will push them once we have the bx turned into nobx
+>>>
+>>>I think you do not have a function to disable already enabled feature.
+>>
+>> the 'rem' below translates into sed /SOMETHING/d
+>> Can you elaborate?
+>> Except you mean DISTRO_FEATURES="ipv4"
+>> and one of the gazillion distro-specific config snippets contain
+>> CONFIG_IPV6=y
+>> and that is not disabled.. About all those distro hunks have to go
+>> anyway for they are redundant.
+>>
+>>>> +       return "\n".join(cnf), "\n".join(rem)
+>>>> +# X, Y = ${@features_to_uclibc_settings(d)}
+>>>> +# unfortunately doesn't seem to work with bitbake, workaround:
+>>
+>> you said you saw an ICE with current uclibc master. Which arch and which
+>> versions of the toolchain did you use?
+>> FYI, i tested qemuarm, qemumips, qemuppc, qemux86 and (my local)
+>> qemux86_64 with
+>> PREFERRED_BINUTILS = "2.20.1" ¹)
+>> PREFERRED_GCC_VERSION = "4.5" ²) ³)
+>>
+>> and all of built fine for me.
+>>
+>> ¹) micro.conf incorrectly picks 2.19.51 per default, should be bumped
+>> ²) micro.conf should also default to 4.5
+>> ³) It would be great if we could settle on one scheme for
+>>   binutils/gcc/libc version shorthands:
+>>   PREFERRED_BINUTILS_VERSION _or_ PREFERRED_GCC, i'd go for
+>>   PREFERRED_foo_VERSION, uniformly.
+>>
 
->
-> p.
->
->
->
+
 
 
