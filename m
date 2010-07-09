@@ -1,53 +1,39 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OXAsx-00065I-Vz
+	(envelope-from <thebohemian@gmx.net>) id 1OXAtq-00067j-Gv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 12:32:48 +0200
-Received: by iwn34 with SMTP id 34so2031348iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 03:27:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type;
-	bh=VkKNs4xQfWtJawvB8RcZxgO/LvL3ikpxwPub0ioownI=;
-	b=w4mRAZAWJdQ7WBdzAlWo9x9i9yw7gas10HeycxiD8QYYV6sauaMXGQIEou90Z28gsj
-	97JbjtNQ4hDrJmQ8unbhQWxOjVBgktlqhKvcTUHc4xwjVflVWYWt76JvbTHQUW5E/eMx
-	UOQpntfDzfc/nehPPOvWIt5ayv6yOsXZbr1FI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type;
-	b=b7yraNxQ+IgZ2ROi4H0CuSzeisu5AGXKON2VqNu1TS8FcbuHXDqGNDL/8oLD+V/6XX
-	gip8/8v74haaL0hvuOKiwxbsuJKDQgu7qvIZawlyuUp1LHHzcyzmk/9NpqaUjfJ/Thp9
-	OP45HI304huEdoaa1VWYxBL4XAYYI/GJzT+Uk=
-Received: by 10.231.32.132 with SMTP id c4mr8970949ibd.84.1278629748357; Thu, 
-	08 Jul 2010 15:55:48 -0700 (PDT)
+	Fri, 09 Jul 2010 12:33:43 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 1A9474012B8A3;
+	Fri,  9 Jul 2010 12:28:48 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 1173D40227393;
+	Fri,  9 Jul 2010 12:28:48 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id v3VoMA8IwJZl; Fri,  9 Jul 2010 12:28:47 +0200 (CEST)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTPSA id C9E714012B8A3;
+	Fri,  9 Jul 2010 12:28:47 +0200 (CEST)
+Message-ID: <4C36FA2E.6020507@gmx.net>
+Date: Fri, 09 Jul 2010 12:30:06 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.10) Gecko/20100528 Thunderbird/3.0.5
 MIME-Version: 1.0
-Received: by 10.231.14.131 with HTTP; Thu, 8 Jul 2010 15:55:28 -0700 (PDT)
-In-Reply-To: <20100708221633.GE23169@mx.loc>
-References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com> 
-	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
-	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com> 
-	<1278622050.15825.18.camel@lenovo.internal.reciva.com>
-	<AANLkTinf_zr9QQdPJyevN-ve62_Pqi3WDNygAgABPt32@mail.gmail.com> 
-	<1278624574.15825.30.camel@lenovo.internal.reciva.com>
-	<AANLkTikn4ygx6v-P4WvZWHvxD9rQAq5kyDuMdolDPbdn@mail.gmail.com> 
-	<1278624869.15825.35.camel@lenovo.internal.reciva.com>
-	<AANLkTikuNN4qw76uAXxlmIhIlOJVTxjRD8vN7lg7kRyf@mail.gmail.com> 
-	<20100708221633.GE23169@mx.loc>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 8 Jul 2010 15:55:28 -0700
-Message-ID: <AANLkTilg2lk8YMpOSAOZrQ7cqaxvOFRpnuFhSv840yzq@mail.gmail.com>
-To: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_FAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][v3 3/4] uClibc: redo configuration
+Cc: Thomas Haase <t.haase@tarent.de>
+Subject: OpenJDK recipes merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,120 +47,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 10:32:49 -0000
-X-Groupsio-MsgNum: 20839
-Content-Type: multipart/mixed; boundary=0022152d83f5f339cc048ae82f4c
+X-List-Received-Date: Fri, 09 Jul 2010 10:33:43 -0000
+X-Groupsio-MsgNum: 20840
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig38D84162919D82FA692E4FD5"
 
---0022152d83f5f339cc048ae82f4c
-Content-Type: text/plain; charset=ISO-8859-1
+--------------enig38D84162919D82FA692E4FD5
+Content-Type: text/plain; charset=ISO-8859-15
 Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 8, 2010 at 3:16 PM, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> On Thu, Jul 08, 2010 at 03:03:04PM -0700, Khem Raj wrote:
->>On Thu, Jul 8, 2010 at 2:34 PM, Phil Blundell <philb@gnu.org> wrote:
->>> On Thu, 2010-07-08 at 14:31 -0700, Khem Raj wrote:
->>>> On Thu, Jul 8, 2010 at 2:29 PM, Phil Blundell <philb@gnu.org> wrote:
->>>> > On Thu, 2010-07-08 at 14:03 -0700, Khem Raj wrote:
->>>> >> If I am not wrong you can still do interworking and not have bx (us=
-ing
->>>> >> mov pc,lr)
->>>> >
->>>> > That's not an interworking instruction in ARMv4T, and I don't think =
-it
->>>> > is in ARMv5TE either. =A0You might be thinking of pop {pc}, which is
->>>> > interworking in ARMv5TE, but even this is not interworking in v4t.
->>>>
->>>> tst lr, #1
->>>> moveq pc, lr
->>>> bx lr
->>>>
->>>> Thats how its done on armv4 for EABI
->>>
->>> Right, but the MOV in that case is not an interworking instruction; it'=
-s
->>> just a way to avoid executing BX when you don't actually need to switch
->>> mode, so that you can create a library which still works in an ARM-only
->>> environment.
->>>
->>> The final BX in that sequence is mandatory in order for it to actually
->>> function as an interworking return.
->>
->>right you are. yes bx is always needed for thumb interworking. So I guess
->>for uclibc we can rely on THUMB_INTERWORK distro feature if set correctly=
-.
->
-> AFAIR eabi implies thumb, thumb makes interwork possible, interwork
-> imples bx but my memory could fail me on this.
+Behold!
 
-eabi does not imply thumb. EABI is supported on armv4 which does not have
-thumb.
+Henning merged all the OpenJDK-related recipes which means that from now
+on it is not necessary anymore to use the Jalimo overlays for those. I
+know that some people were nearly giving up on whether this happens
+anytime but if you have a look at the actual files you'll see that an
+OpenJDK-build is a complex beast and that is true although there is
+already a fine harness called IcedTea around it, that takes a great
+share of making the build process simpler.
 
->
-> Can you, khem, think of a set of "thumb" and "interwork" (and
-> potentially "bx" for HW that supports it, like IIRC all e.g. cortex
-> onward based designs) in DISTRO_FEATURES and MACHINE_FEATURES that can
-> be used generically?
->
-> A first step would be to just resuse the infrastructure in this thread,
-> later on we could think about some sort of combined_feature mechanism to
-> properly setup arm ontop of this proposed infrastructure.
+I personally thank the cool guys at *BugLabs* who are sponsoring the
+latest improvements! Everyone else: Go buy more Bugs. :-)
 
-I think we need thumb_interwork distro_feature which we could use here
-here is a patch that distros would need.
+I will soon update the 'Java' page in our wiki and describe how the
+build process works. It might also happen that I give a talk at this
+year's frOScon (St. Augustin, Germany) about it. AFAIU Ken Gilmer of
+BugLabs fame will do the same at this years JavaOne.
+
+Caveats: While the recipes are fine and I think the packaging is of very
+high quality, we are experiencing some instability issues with
+jamvm-initial which can make it spontaneously crash and therefore let
+the OpenJDK build fail. We're on it.
+
+Btw: I was once told by Sun people that building the JDK on an ARM
+device takes around 24hrs (!!). A build of the 'openjdk-6' recipe itself
+(no dependencies) is around half an hour. Cool?
+
+Enjoy!
+Robert
 
 
+--------------enig38D84162919D82FA692E4FD5
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
 
->
-> cheers,
->
+iEYEARECAAYFAkw2+i4ACgkQG9cfwmwwEtpmEQCfTflFuNs3LN8RILA3U7Mmp1Dx
+Zs0AnAypgrB7/KMImFXqfHqph197tmqs
+=H9UZ
+-----END PGP SIGNATURE-----
 
---0022152d83f5f339cc048ae82f4c
-Content-Type: application/octet-stream; name=diff
-Content-Disposition: attachment; filename=diff
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gbe73piw1
-
-ZGlmZiAtLWdpdCBhL2NvbmYvZGlzdHJvL2luY2x1ZGUvc2FuZS10b29sY2hhaW4uaW5jIGIvY29u
-Zi9kaXN0cm8vaW5jbHVkZS9zYW5lLXRvb2xjaGFpbi5pbmMKaW5kZXggNmI2YjE3MC4uNzg1OTFl
-MiAxMDA2NDQKLS0tIGEvY29uZi9kaXN0cm8vaW5jbHVkZS9zYW5lLXRvb2xjaGFpbi5pbmMKKysr
-IGIvY29uZi9kaXN0cm8vaW5jbHVkZS9zYW5lLXRvb2xjaGFpbi5pbmMKQEAgLTg2LDcgKzg2LDEz
-IEBAIEFSTV9JTlNUUlVDVElPTl9TRVQgPSAiJHtQUkVGRVJSRURfQVJNX0lOU1RSVUNUSU9OX1NF
-VH0iCiAjICAgIGJ1dCByZXF1aXJlcyBtb3JlIGluc3RydWN0aW9ucyAoMTQwJSBmb3IgNzAlIHNt
-YWxsZXIgY29kZSkgc28gbWF5IGJlCiAjICAgIHNsb3dlci4KIAotVEhVTUJfSU5URVJXT1JLID0g
-InllcyIKKyMgYXJtdjQgZG9lcyBub3QgaGF2ZSB0aHVtYiBpbnN0cnVjdGlvbiBzZXQgdGhlcmVm
-b3JlIG5vIGludGVyd29ya2luZyBpbnN0cnVjdGlvbnMKKyMgc28gaWYgbWFjaGluZSBpcyBiYXNl
-ZCBvbiBhcm12NCB3ZSBkb250IGhhdmUgY2hvaWNlLgorCitUSFVNQl9JTlRFUldPUktfYXJtdjQg
-PSAibm8iCisKK1RIVU1CX0lOVEVSV09SSyA/PSAieWVzIgorCiAjICJ5ZXMiICJubyIKICMgICAg
-V2hldGhlciB0byBjb21waWxlIHdpdGggY29kZSB0byBhbGxvdyBpbnRlcndvcmtpbmcgYmV0d2Vl
-biB0aGUgdHdvCiAjICAgIGluc3RydWN0aW9uIHNldHMuICBUaGlzIGFsbG93cyB0aHVtYiBjb2Rl
-IHRvIGJlIGV4ZWN1dGVkIG9uIGEgcHJpbWFyaWx5CmRpZmYgLS1naXQgYS9jb25mL2Rpc3Ryby9t
-aW5pbWFsLXVjbGliYy5jb25mIGIvY29uZi9kaXN0cm8vbWluaW1hbC11Y2xpYmMuY29uZgppbmRl
-eCA0NDgwNWNmLi4zNWM3N2M4IDEwMDY0NAotLS0gYS9jb25mL2Rpc3Ryby9taW5pbWFsLXVjbGli
-Yy5jb25mCisrKyBiL2NvbmYvZGlzdHJvL21pbmltYWwtdWNsaWJjLmNvbmYKQEAgLTQ0LDMgKzQ0
-LDQgQEAgRElTVFJPX0ZFQVRVUkVTICs9ICJwYW0iCiBESVNUUk9fRkVBVFVSRVMgKz0gImxhcmdl
-ZmlsZSIKICMgZ2xpYi0yLjAgbm5lZHMgaXB2NiBhbmQgdGhlcmUgaXMgbm8ga25vYiB0byBjb250
-cm9sIGl0CiBESVNUUk9fRkVBVFVSRVMgKz0gImlwdjQgaXB2NiIKK0RJU1RST19GRUFUVVJFU19h
-cHBlbmRfYXJtID0gJyAke0BbInRodW1iLWludGVyd29ya2luZyIsIiJdW2JiLmRhdGEuZ2V0VmFy
-KCdUSFVNQl9JTlRFUldPUktJTkcnLCBkLCAxKSA9PSAieWVzIl19JwpkaWZmIC0tZ2l0IGEvY29u
-Zi9kaXN0cm8vbWluaW1hbC5jb25mIGIvY29uZi9kaXN0cm8vbWluaW1hbC5jb25mCmluZGV4IGU0
-MDBjMTQuLmVhOWY0NjcgMTAwNjQ0Ci0tLSBhL2NvbmYvZGlzdHJvL21pbmltYWwuY29uZgorKysg
-Yi9jb25mL2Rpc3Ryby9taW5pbWFsLmNvbmYKQEAgLTE2LDcgKzE2LDcgQEAgRElTVFJPX1ZFUlNJ
-T04gPSAiZGV2LXNuYXBzaG90LSR7U1JDREFURX0iCiBESVNUUk9fVFlQRSA/PSAiZGVidWciCiAK
-ICMgRW5zdXJlIHNvbWUgZm9ybSBvZiByZWxlYXNlIGNvbmZpZywgc28gZXJyb3Igb3V0IGlmIHNv
-bWVvbmUgdGhpbmtzIGhlIGtub3dzIGJldHRlcgotRElTVFJPX0NIRUNLIDo9ICIke0BiYi5kYXRh
-LmdldFZhcignRElTVFJPX1ZFUlNJT04nLGQsMSkgb3IgYmIuZmF0YWwoJ1JlbW92ZSB0aGlzIGxp
-bmUgb3Igc2V0IGEgZHVtbXkgRElTVFJPX1ZFUlNJT04iKQorRElTVFJPX0NIRUNLIDo9ICIke0Bi
-Yi5kYXRhLmdldFZhcignRElTVFJPX1ZFUlNJT04nLGQsMSkgb3IgYmIuZmF0YWwoJ1JlbW92ZSB0
-aGlzIGxpbmUgb3Igc2V0IGEgZHVtbXkgRElTVFJPX1ZFUlNJT04nKX0iCiAKICMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjCiAjIEZFQVRVUkUgU0VMRUNUSU9OCkBAIC0zNCw2ICszNCw4IEBAIERJU1RST19G
-RUFUVVJFUyArPSAiZWFiaSIKIAogRElTVFJPX0ZFQVRVUkVTICs9ICJtcGx0IgogCitESVNUUk9f
-RkVBVFVSRVNfYXBwZW5kX2FybSA9ICcgJHtAWyJ0aHVtYi1pbnRlcndvcmtpbmciLCIiXVtiYi5k
-YXRhLmdldFZhcignVEhVTUJfSU5URVJXT1JLSU5HJywgZCwgMSkgPT0gInllcyJdfScKKwogIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMKICMgTElCUkFSWSBOQU1FUwogIyMjIyMjIyMjIyMjIyMjIyMjIyMj
-IyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMK
-
---0022152d83f5f339cc048ae82f4c--
+--------------enig38D84162919D82FA692E4FD5--
