@@ -1,57 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OXB5M-0006VU-RM
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OXB9k-0006eT-82
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 12:45:37 +0200
-Received: by fxm12 with SMTP id 12so1010050fxm.6
+	Fri, 09 Jul 2010 12:50:08 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o69AjGut015114
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 03:40:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:cc
-	:subject:message-id:references:mime-version:content-type
-	:content-disposition:content-transfer-encoding:in-reply-to
-	:user-agent; bh=y33NyUNp4zGhlAq/FAvvQt9XgwSBXnxVIhCA3azMx68=;
-	b=o5aatdIyDHaZTSiEUxMqj7Cw1ehrO0oqAzSXj92zTS3JNVWPZiWS3jp1Mz5n1rlh0q
-	AWy7fswOZXzw5Wl+4DjP9ku/AxzjrB9tBPBnIXhD+VzpGBGWQw8K8pAMDlKbP26dDqG4
-	mUMYIB54dHrAhDl8BT2EL57uGFiH3RKF2C42U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:cc:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=e+suW6cUpzJtSS4jaeXHB9r78ipenB6iOE/FztXKZe+EJ0Be0fQmNw29ygSfXVEcb2
-	5w8dCpQIvh07ORkBSc+YxtvvKssGmTQ69bJhd/0DgCgr63FTuhV+04XrXVeW+JRVb2yv
-	LOwOLGB4dykpxP39/bYbqaGAwkGk/djdgM9Ts=
-Received: by 10.86.63.11 with SMTP id l11mr2074901fga.45.1278621904860;
-	Thu, 08 Jul 2010 13:45:04 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id 8sm144413fau.4.2010.07.08.13.45.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 08 Jul 2010 13:45:03 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OWxxl-0007r7-QF; Thu, 08 Jul 2010 22:44:53 +0200
-Date: Thu, 8 Jul 2010 22:44:53 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: Khem Raj <raj.khem@gmail.com>
-Message-ID: <20100708204453.GD23169@mx.loc>
-References: <1278444743-4924-1-git-send-email-rep.dot.nop@gmail.com>
-	<1278444743-4924-4-git-send-email-rep.dot.nop@gmail.com>
-	<AANLkTimnWBxCFMLlns8Q8LJ-3BvpWqqTNkqZ8ZlWbQdo@mail.gmail.com>
-	<20100708202835.GC23169@mx.loc>
-	<AANLkTilRuu8FqF_Bz93wjjdm4047LJFe5N2Egs70Adlj@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTilRuu8FqF_Bz93wjjdm4047LJFe5N2Egs70Adlj@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	Fri, 9 Jul 2010 11:45:16 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 15041-01 for <openembedded-devel@lists.openembedded.org>;
+	Fri,  9 Jul 2010 11:45:12 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o69AjAva015108
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 9 Jul 2010 11:45:11 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4C35F08F.1040705@freyther.de>
+References: <4C356475.2060208@gmail.com>  <4C35F08F.1040705@freyther.de>
+Date: Fri, 09 Jul 2010 11:44:54 +0100
+Message-ID: <1278672294.28835.95.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [PATCH][v3 3/4] uClibc: redo configuration
+Subject: Re: [RFC] Badness with -ibad, a replacement for zecke-no-host-includes.patch.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -65,76 +48,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 10:45:37 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 09 Jul 2010 10:50:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Jul 08, 2010 at 01:31:51PM -0700, Khem Raj wrote:
->On Thu, Jul 8, 2010 at 1:28 PM, Bernhard Reutner-Fischer
-><rep.dot.nop@gmail.com> wrote:
->> On Thu, Jul 08, 2010 at 12:02:51PM -0700, Khem Raj wrote:
->>>On Tue, Jul 6, 2010 at 12:32 PM, Bernhard Reutner-Fischer
->>><rep.dot.nop@gmail.com> wrote:
->>
->>>> +       uclibc_cfg('bx',        machine_features,'USE_BX', cnf, rem)
->>>
->>>
->>>
->>>I would have a feature called 'nobx' because most of the machines
->>>we support actively in OE has BX. With current state this needs to
->>>be added to MACHINE features for almost all arm machines. We can instead
->>>have nobx and keep USE_BX enabled and only disable it if nobx appears
->>>in machine_features.
->>
->> I'd much prefer to stick bx into some generic arm include instead.
->> What do you think?
->
->I have added attached patch and turned bx into nobx and now all seems to be
->ok
+On Thu, 2010-07-08 at 23:36 +0800, Holger Freyther wrote:
+> On 07/08/2010 01:39 PM, Graham Gower wrote:
+> > This patch introduces a new command line parameter to gcc (at
+> > Zecke's suggestion), -ibad, which may be used to specify
+> > blacklisted include prefixes. E.g.
+> > 
+> > grg@eye7:/tmp$ ~/oe2/tmp/cross/mipsel/bin/mipsel-angstrom-linux-gcc -c test.c -ibad /usr/include -I /usr/include
+> > CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+> 
+> nice! The only thing that is worrying is the question how we make sure
+> these bad path's are enforced.
+> 
+> E.g. a recipe not honoring our CPPFLAGS might silently pass this check
+> (while before it was hardcoded into the compiler). My proposal would be
+> to extend the sanity check and grep the compile log for gcc and -ibad
+> and fail if gcc exists but -ibad does not occur?
 
-This is conceptionally backwards but i won't complain if this helps in
-finally getting the improved infrastructure in.
+How about making this option an environmental variable rather than a
+flag? I've seen that technique used to great effect for this exact
+reason before...
 
-Separate issues, but what about the other parts below?
-thanks,
->>
->>>                     Otherwise I have tested the patches myself
->>>and they seems to work well.
->>>
->>>I will push them once we have the bx turned into nobx
->>>
->>>I think you do not have a function to disable already enabled feature.
->>
->> the 'rem' below translates into sed /SOMETHING/d
->> Can you elaborate?
->> Except you mean DISTRO_FEATURES="ipv4"
->> and one of the gazillion distro-specific config snippets contain
->> CONFIG_IPV6=y
->> and that is not disabled.. About all those distro hunks have to go
->> anyway for they are redundant.
->>
->>>> +       return "\n".join(cnf), "\n".join(rem)
->>>> +# X, Y = ${@features_to_uclibc_settings(d)}
->>>> +# unfortunately doesn't seem to work with bitbake, workaround:
->>
->> you said you saw an ICE with current uclibc master. Which arch and which
->> versions of the toolchain did you use?
->> FYI, i tested qemuarm, qemumips, qemuppc, qemux86 and (my local)
->> qemux86_64 with
->> PREFERRED_BINUTILS = "2.20.1" ¹)
->> PREFERRED_GCC_VERSION = "4.5" ²) ³)
->>
->> and all of built fine for me.
->>
->> ¹) micro.conf incorrectly picks 2.19.51 per default, should be bumped
->> ²) micro.conf should also default to 4.5
->> ³) It would be great if we could settle on one scheme for
->>   binutils/gcc/libc version shorthands:
->>   PREFERRED_BINUTILS_VERSION _or_ PREFERRED_GCC, i'd go for
->>   PREFERRED_foo_VERSION, uniformly.
->>
+Cheers,
 
+Richard
 
 
 
