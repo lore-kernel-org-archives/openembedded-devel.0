@@ -1,40 +1,42 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OXCHJ-0003um-Sf
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 14:02:14 +0200
-Received: by bwz10 with SMTP id 10so1242091bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OXG3J-0005qf-6c for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Jul 2010 18:04:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OXB4Z-00035y-UI for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Jul 2010 12:44:47 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 09 Jul 2010 12:44:47 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 04:57:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=GiWzqYscWooYvz0gSfOtxCAXfiVXZAOJyQt8ZCvKds0=;
-	b=ZtSqBVRSsEmSUL2xCVtdf1UF3nAvCBTigTdYD61vOW67C4vTRiSBS6UcIURuDRmati
-	tobFwl2/dU2NdNucSYVujmur85Aq4ILAaWn64MkCNGxAtYa14CtceaEQANjinJwxmM9e
-	nvzZUz12Fc0dmUicBs6Aoz6lcDRjYR9ILqgkE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=IpjBGMN8TDDQ6WQt8KH9AU+Q0q1+tFlSz8XryPmHXXVqS3Tn8jXuck/7CX7Mdixp2O
-	PlXa5ox6xeu6guNDSMMr9aeyOVKlpMwgrus+sZey6NSWyUkLryE+o2We2yKBHj/5Ruds
-	+2BlB9TWYQoFwqJel8BETsGnkT5dTcLSsRHP4=
-MIME-Version: 1.0
-Received: by 10.204.34.2 with SMTP id j2mr7245404bkd.21.1278676626567; Fri, 09 
-	Jul 2010 04:57:06 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Fri, 9 Jul 2010 04:57:06 -0700 (PDT)
-Date: Fri, 9 Jul 2010 13:57:06 +0200
-Message-ID: <AANLkTilZLkPIUyR-9VUjtukyfTDo7KzcAPt0p0og_zCD@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 09 Jul 2010 12:44:47 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 09 Jul 2010 12:44:39 +0200
+Message-ID: <i16uin$7ka$1@dough.gmane.org>
+References: <4C36FA2E.6020507@gmx.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <4C36FA2E.6020507@gmx.net>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] gcc patch to avoid host include when compiling gcc-cross
+Subject: Re: OpenJDK recipes merged
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,73 +50,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 12:02:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 09 Jul 2010 16:04:15 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Since the introduction of linux-libc-headers-native my gcc-cross fails
-to build (unless I avoid building linux-libc-headers-native by telling
-that it is ASSUME_PROVIDED).
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Reason is that linux-libc-headers-native installs the host
-asm/unistd.h in sysroots/i686-linux/usr/include/asm/unistd.h
-My architecture (nios2) has a different unistd.h.
+On 09-07-10 12:30, Robert Schuster wrote:
 
-Now gcc-cross compiles libgcc.a and adds among others $(GMPINC) to the
-include path.
-However this is a host path pointing to sysroots/i686-linux/usr/include.
-This causes gcc-cross for nios2 to pick up the wrong unistd.h (causing
-compilation of libgcc to fail).
+> Caveats: While the recipes are fine and I think the packaging is of very
+> high quality, we are experiencing some instability issues with
+> jamvm-initial which can make it spontaneously crash and therefore let
+> the OpenJDK build fail. We're on it.
 
-libgcc does not need GMP (at least not to my knowledge) and having a
-host include when compiling target code does not seem like a good idea
-either.
-In order to fix this I've made a small patch to Makefile.in
-This one creates a new var TARGET_INCLUDES which contains all includes
-minus GMPINC.
-THen INCLUDES is defined to $(TARGET_INCLUDES) $(GMPINC.) (to get the
-original includes back.
-And lastly the build rule for libgcc.a is modified to use
-$(TARGET_INCLUDES) instead of  $(INCLUDES)
+The other caveat is that the patch for gcc 4.3.x isn't merged yet.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Below is the patch I made. This is not yet a formal patch submission.
-Instead this posting is made for a few reasons
-- to create awareness and explain the issue
-- to get some feedback on the patch
-- if there are suggestion for improvements or for better solutions I'd
-like to know
-- and last but not least: assuming the patch is ok, how are we going
-to get it in.
-I've tested this for gcc 4.1.2 (but there are 20 other gcc versions around :-( )
+iD8DBQFMNv2XMkyGM64RGpERAkWdAJ9CYVKotoxiKw2r5uJNsTbkWz4ZwgCdHVpT
+JtR+e7WjAQ5UhQZYiuOaCg4=
+=fFmC
+-----END PGP SIGNATURE-----
 
-Enjoy! Frans.
-
-Index: gcc-4.1.2/gcc/Makefile.in
-===================================================================
---- gcc-4.1.2.orig/gcc/Makefile.in
-+++ gcc-4.1.2/gcc/Makefile.in
-@@ -845,9 +845,13 @@ BUILD_VARRAY = build/varray.o
- # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
- # currently being compiled, in both source trees, to be examined as well.
- # libintl.h will be found in ../intl if we are using the included libintl.
--INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
-+#
-+# TARGET_INCLUDES is added to avoid that GMPINC (which points to the host
-+# include dir) is used for compiling libgcc.a
-+TARGET_INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
- 	   -I$(srcdir)/../include @INCINTL@ \
--	   $(CPPINC) $(GMPINC)
-+	   $(CPPINC)
-+INCLUDES = $(TARGET_INCLUDES) $(GMPINC)
-
- .c.o:
- 	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
-@@ -1379,7 +1383,7 @@ libgcc.a: $(LIBGCC_DEPS)
- 	$(MAKE) \
- 	  CFLAGS="$(CFLAGS) $(WARN_CFLAGS)" \
- 	  CONFIG_H="$(TCONFIG_H)" TM_H="$(TM_H)" \
--	  INCLUDES="$(INCLUDES)" \
-+	  INCLUDES="$(TARGET_INCLUDES)" \
- 	  MAKEOVERRIDES= \
- 	  -f libgcc.mk all
 
 
