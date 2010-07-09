@@ -1,31 +1,37 @@
-Received: from vms173005pub.verizon.net ([206.46.173.5])
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OXAOG-0006kZ-Sw
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 12:01:05 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.56.71])
-	by vms173005.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L5900CZO0CDS67T@vms173005.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Thu,
-	08 Jul 2010 11:55:25 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id EB10F14AF60; Thu,
-	08 Jul 2010 12:55:24 -0400 (EDT)
-Date: Thu, 08 Jul 2010 12:55:24 -0400
-From: Denys Dmytriyenko <denis@denix.org>
-To: openembedded-devel@lists.openembedded.org
-Message-id: <20100708165524.GB12383@denix.org>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world>
-	<4C2C8F31.2050107@freyther.de>
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA501819D67@deimsg40.de.net.world>
-MIME-version: 1.0
-In-reply-to: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819D67@deimsg40.de.net.world>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.5
-X-SA-Exim-Mail-From: denis@denix.org
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OXAa0-00056Y-B8 for openembedded-devel@lists.openembedded.org;
+	Fri, 09 Jul 2010 12:13:27 +0200
+Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
+	by mail-dotnet1.eads.net with ESMTP; 09 Jul 2010 11:59:53 +0200
+Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
+	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Fri, 9 Jul 2010 12:08:16 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 9 Jul 2010 12:08:15 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Fri, 9 Jul 2010 12:08:12 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819DE5@deimsg40.de.net.world>
+In-Reply-To: <20100708165524.GB12383@denix.org>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Creating a Own Tool chain,
+	some referenced packages are	not included into the SDK archive
+Thread-Index: AcsfTdN+oYEnMdCQRaC5aYI1TH5mgAAAC8pA
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819743@deimsg40.de.net.world><4C2C8F31.2050107@freyther.de><0B51A1E7C61D114DAE6FC10B0FD0ABA501819D67@deimsg40.de.net.world>
+	<20100708165524.GB12383@denix.org>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 09 Jul 2010 10:08:15.0732 (UTC)
+	FILETIME=[A5A78340:01CB1F4E]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -43,34 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 10:01:06 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Fri, 09 Jul 2010 10:13:27 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 08, 2010 at 05:22:38PM +0200, Hauser, Wolfgang (external) wrote:
-> Hello, I have found the problems of creating the toolchain 
-> meta-toolchain-qte.bb (and my derived one) !
-> 
-> Second problem:
-> meta-toolchain-qte.bb contains following line in do_populate_sdk_append():
-> 
->   >script = "${SDK_OUTPUT}/${SDKPATH}/environment-setup"<
-> 
-> this have to be changed to:
-> 
->   >script="${SDK_OUTPUT}/${SDKPATH}/environment-setup"<
-> 
-> because the code is used as shell commands and not as python code !
-> 
-> The issue above results in a call of "script" with arguments "=" and 
-> "${SDK_OUTPUT}/${SDKPATH}/environment-setup".
-> "script" opens a "bash -i" and wait for commands. Therefore the processing 
-> blocks until this shell exits.
 
-Worked here for long time and environment-setup gets populated with 
-corresponding lines...
+>Worked here for long time and environment-setup gets populated with=20
+>corresponding lines...
 
--- 
-Denys
+It may work if command "script" wasn't installed on a host system, while
+variable "script" is set in meta-toolchain.bb in the right way, so it
+was found by meta-toolchain-qte.bb too.
+
+Regards
+Wolfgang Hauser
 
 
