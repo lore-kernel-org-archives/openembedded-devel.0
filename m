@@ -1,37 +1,29 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OXe99-0000QS-W5
+	(envelope-from <philb@gnu.org>) id 1OXijs-0007nO-Vs
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Jul 2010 19:47:43 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OXe4O-0006rK-7K from Tom_Rini@mentor.com 
+	Sun, 11 Jul 2010 00:41:41 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OXiez-0007Yj-1A
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 10 Jul 2010 10:42:32 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Sat, 10 Jul 2010 10:42:31 -0700
-Received: from [172.30.80.244] ([172.30.80.244]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Sat, 10 Jul 2010 11:42:30 -0600
-Message-ID: <4C38B104.8050700@mentor.com>
-Date: Sat, 10 Jul 2010 10:42:28 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Sat, 10 Jul 2010 23:36:37 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1278778757-31330-1-git-send-email-fransmeulenbroeks@gmail.com>
 References: <1278577398.15825.1.camel@lenovo.internal.reciva.com>
 	<1278778757-31330-1-git-send-email-fransmeulenbroeks@gmail.com>
-In-Reply-To: <1278778757-31330-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-OriginalArrivalTime: 10 Jul 2010 17:42:30.0909 (UTC)
-	FILETIME=[456B3AD0:01CB2057]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Sat, 10 Jul 2010 23:36:38 +0100
+Message-ID: <1278801398.15825.40.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH] base.bbclass: introduce COMPATIBLE_TARGET_SYS
@@ -48,11 +40,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 10 Jul 2010 17:47:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 10 Jul 2010 22:41:41 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks wrote:
+On Sat, 2010-07-10 at 18:19 +0200, Frans Meulenbroeks wrote:
 > This patch introduces COMPATIBLE_TARGET_SYS
 > It is similar to COMPATIBLE_MACHINE but where COMPATIBLE_MACHINE
 > is used to specify that a certain recipe is for a certain machine
@@ -61,39 +53,11 @@ Frans Meulenbroeks wrote:
 > 
 > Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-Acked-by: Tom Rini <tom_rini@mentor.com>
+I think this should go in cross.bbclass, not base.bbclass.  Other than
+that it looks fine.
 
-> 
-> ---
-> 
-> as also discussed on the oe ML in the thread
-> [PATCH] classes/base.bbclass: add INCOMPATIBLE_MACHINE
-> ---
->  classes/base.bbclass |    7 +++++++
->  1 files changed, 7 insertions(+), 0 deletions(-)
-> 
-> diff --git a/classes/base.bbclass b/classes/base.bbclass
-> index b30310d..f76d03c 100644
-> --- a/classes/base.bbclass
-> +++ b/classes/base.bbclass
-> @@ -391,6 +391,13 @@ python () {
->              if this_machine and not re.match(need_machine, this_machine):
->                  raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
->  
-> +        need_target = bb.data.getVar('COMPATIBLE_TARGET_SYS', d, 1)
-> +        if need_target:
-> +            import re
-> +            this_target = bb.data.getVar('TARGET_SYS', d, 1)
-> +            if this_target and not re.match(need_target, this_target):
-> +                raise bb.parse.SkipPackage("incompatible with target system %s" % this_target)
-> +
->      pn = bb.data.getVar('PN', d, 1)
->  
->      # OBSOLETE in bitbake 1.7.4
+p.
 
 
--- 
-Tom Rini
-Mentor Graphics Corporation
 
 
