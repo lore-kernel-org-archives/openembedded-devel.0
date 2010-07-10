@@ -1,36 +1,45 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OXKSG-0004XA-0W
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OXTv6-0005MN-FD
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 22:45:54 +0200
-Received: from p5b034b21.dip.t-dialin.net ([91.3.75.33] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OXKNV-0002Jm-Qd by authid <stefan@sostec.de> with cram_md5
+	Sat, 10 Jul 2010 08:52:18 +0200
+Received: by bwz10 with SMTP id 10so1852858bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 09 Jul 2010 22:41:00 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OXKNU-0005ug-4q
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 09 Jul 2010 22:40:56 +0200
-Date: Fri, 9 Jul 2010 22:40:55 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100709204055.GA12163@excalibur.local>
+	Fri, 09 Jul 2010 23:47:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=RrXz/U69dBla7njUU4+cslFkarMPK55IfJpjug09CVM=;
+	b=Od0XXHyE7EeEYig2AnXIpxPGDRCKm2w4/MI8CfHlawpRtMdzB3wk9IDF+AIvTsMqU+
+	SZAG7QEbLbo04iQ9qP5xgxlEGyWWslMrw7KJJcQHas2Ft2wOUzDDaSzpOb2NSu5Vsbnu
+	efAfoOLqYfaVf+AHn8aOgjaHzBWvL/DTPDWvU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=EZmX7YFN+fJjlbm3Q6FtT3ok0wuHODTxKRA7udebL8s0b3FKWqrgCwdv7RvOGH9dat
+	t/X4AoFR3WuWK2acQTt7NVRWoAlOkVC5ICHRzs6ATmDAEb69/U7b/dsTkXFJ2wIIjjbz
+	xOl+BB2BEYNsy906BpAvfsdqJwr0fy68RoXow=
 MIME-Version: 1.0
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Received: by 10.204.48.75 with SMTP id q11mr8426284bkf.0.1278744444163; Fri, 
+	09 Jul 2010 23:47:24 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Fri, 9 Jul 2010 23:47:24 -0700 (PDT)
+In-Reply-To: <AANLkTik1KwzaMkn6ZBH9-BkMVPb09p_1SSjJClwJxsMS@mail.gmail.com>
+References: <AANLkTilZLkPIUyR-9VUjtukyfTDo7KzcAPt0p0og_zCD@mail.gmail.com>
+	<AANLkTik1KwzaMkn6ZBH9-BkMVPb09p_1SSjJClwJxsMS@mail.gmail.com>
+Date: Sat, 10 Jul 2010 08:47:24 +0200
+Message-ID: <AANLkTinu9HQ1P7ppw_mBT5lX2zUuZ31QIL-sPQDdkPqM@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [RFC] New stable branch (and maybe a new process?)
+Subject: Re: [RFC] gcc patch to avoid host include when compiling gcc-cross
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,50 +53,163 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 09 Jul 2010 20:45:54 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 10 Jul 2010 06:52:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
+2010/7/9 Khem Raj <raj.khem@gmail.com>:
+> On Fri, Jul 9, 2010 at 4:57 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> Since the introduction of linux-libc-headers-native my gcc-cross fails
+>> to build (unless I avoid building linux-libc-headers-native by telling
+>> that it is ASSUME_PROVIDED).
+>>
+>> Reason is that linux-libc-headers-native installs the host
+>> asm/unistd.h in sysroots/i686-linux/usr/include/asm/unistd.h
+>> My architecture (nios2) has a different unistd.h.
+>>
+>> Now gcc-cross compiles libgcc.a and adds among others $(GMPINC) to the
+>> include path.
+>> However this is a host path pointing to sysroots/i686-linux/usr/include.
+>> This causes gcc-cross for nios2 to pick up the wrong unistd.h (causing
+>> compilation of libgcc to fail).
+>>
+>> libgcc does not need GMP (at least not to my knowledge) and having a
+>> host include when compiling target code does not seem like a good idea
+>> either.
+>> In order to fix this I've made a small patch to Makefile.in
+>> This one creates a new var TARGET_INCLUDES which contains all includes
+>> minus GMPINC.
+>> THen INCLUDES is defined to $(TARGET_INCLUDES) $(GMPINC.) (to get the
+>> original includes back.
+>> And lastly the build rule for libgcc.a is modified to use
+>> $(TARGET_INCLUDES) instead of =A0$(INCLUDES)
+>>
+>> Below is the patch I made. This is not yet a formal patch submission.
+>> Instead this posting is made for a few reasons
+>> - to create awareness and explain the issue
+>
+> The approach is ok. however it has to be applied to other libraries too
+> and also the crt so its not limited to libgcc only.
 
-I want to gather some feedback what people are feeling about a new stable
-branch. It feels like the right time to do it soon. We have so many big changes
-in that are not likely to get into stable/2009 like:
+crtstuff.c also needed this
+libgcc2 has its own set of CFLAGS and does not use $(INCLUDES)
+test-protoize-simple: uses INCLUDES, but that looks to me as host code
+(not fully sure though)
+libgcov does only depend on libgcc but has no rule
 
-- New staging
-- BBCLASSEXTEND
-- Checksums in recipes
-- Faster BitBake
-- Enhanced java support with openjdk/icedtea
-- And many I forgot...
+and there is this line:
+ALL_CPPFLAGS =3D $(INCLUDES) $(CPPFLAGS) $(X_CPPFLAGS) $(T_CPPFLAGS)
+As far as I can see it, this one is for host too (but it is part of
+the rule .c.o)
 
-With the latest fixes for the file:// problem the build feels stable at last for
-me. I have not been involved with the latest stable branch so this is really
-only a RFC from my side. Please let me know if you see big issues for such a
-move.
+I think the following patch suffices:
+Index: gcc-4.1.2/gcc/Makefile.in
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+--- gcc-4.1.2.orig/gcc/Makefile.in
++++ gcc-4.1.2/gcc/Makefile.in
+@@ -548,7 +548,7 @@ LIBGCC2_INCLUDES =3D
+ TARGET_LIBGCC2_CFLAGS =3D
 
-Open questions:
----------------
-- Do we feel comfortable with doing a new branch now?
-- What version of bitbake we would like to have for this?
-- What boards/images/distros will be supported in stable/2010?
+ # Options to use when compiling crtbegin/end.
+-CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -g0 \
++CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CFLAGS=
+) -g0 \
+   -finhibit-size-directive -fno-inline-functions -fno-exceptions \
+   -fno-zero-initialized-in-bss -fno-unit-at-a-time \
+   $(INHIBIT_LIBC_CFLAGS)
+@@ -845,9 +845,13 @@ BUILD_VARRAY =3D build/varray.o
+ # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
+ # currently being compiled, in both source trees, to be examined as well.
+ # libintl.h will be found in ../intl if we are using the included libintl.
+-INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
++#
++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the host
++# include dir) is used for compiling libgcc.a
++TARGET_INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+ 	   -I$(srcdir)/../include @INCINTL@ \
+-	   $(CPPINC) $(GMPINC)
++	   $(CPPINC)
++INCLUDES =3D $(TARGET_INCLUDES) $(GMPINC)
 
-I my be biased here regarding my work for BugLabs, but I feel me diverged that
-much from stable/2009 that it gets problematic to get changes in and syncing
-them with .dev. As well the overall build experience on .dev is pretty good the
-last weeks. The file:// problems aside.
+ .c.o:
+ 	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
+@@ -1379,7 +1383,7 @@ libgcc.a: $(LIBGCC_DEPS)
+ 	$(MAKE) \
+ 	  CFLAGS=3D"$(CFLAGS) $(WARN_CFLAGS)" \
+ 	  CONFIG_H=3D"$(TCONFIG_H)" TM_H=3D"$(TM_H)" \
+-	  INCLUDES=3D"$(INCLUDES)" \
++	  INCLUDES=3D"$(TARGET_INCLUDES)" \
+ 	  MAKEOVERRIDES=3D \
+ 	  -f libgcc.mk all
 
-Another idea we just discussed on IRC was to have a model somehow related to
-what debian is using. An ongoing flow of patches from .dev to a testing branch.
-Perhaps automated with buildbot to move into testing when some certain builds
-have passed with this commit. And also an _ongoing_ stream well tested patches
-from testing into stable which eventually makes a time-based release every X
-months form this ond move on.
 
-That all needs to be filled with more details, but it could be a start. Let me
-know what you think.
+>
+>> - to get some feedback on the patch
+>> - if there are suggestion for improvements or for better solutions I'd
+>> like to know
+>> - and last but not least: assuming the patch is ok, how are we going
+>> to get it in.
+>> I've tested this for gcc 4.1.2 (but there are 20 other gcc versions arou=
+nd :-( )
+>
+> We need to patch all used gcc versions 4.5 and 4.4 and 4.3
 
-regards
-Stefan Schmidt
+Well I can see if the patch applies , but I don't think I'm able to
+test all the versions (let alone for all architectures)
+
+Frans
+>
+>>
+>> Enjoy! Frans.
+>>
+>> Index: gcc-4.1.2/gcc/Makefile.in
+>> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>> --- gcc-4.1.2.orig/gcc/Makefile.in
+>> +++ gcc-4.1.2/gcc/Makefile.in
+>> @@ -845,9 +845,13 @@ BUILD_VARRAY =3D build/varray.o
+>> =A0# -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
+>> =A0# currently being compiled, in both source trees, to be examined as w=
+ell.
+>> =A0# libintl.h will be found in ../intl if we are using the included lib=
+intl.
+>> -INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+>> +#
+>> +# TARGET_INCLUDES is added to avoid that GMPINC (which points to the ho=
+st
+>> +# include dir) is used for compiling libgcc.a
+>> +TARGET_INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+>> =A0 =A0 =A0 =A0 =A0 -I$(srcdir)/../include @INCINTL@ \
+>> - =A0 =A0 =A0 =A0 =A0$(CPPINC) $(GMPINC)
+>> + =A0 =A0 =A0 =A0 =A0$(CPPINC)
+>> +INCLUDES =3D $(TARGET_INCLUDES) $(GMPINC)
+>>
+>> =A0.c.o:
+>> =A0 =A0 =A0 =A0$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION=
+)
+>> @@ -1379,7 +1383,7 @@ libgcc.a: $(LIBGCC_DEPS)
+>> =A0 =A0 =A0 =A0$(MAKE) \
+>> =A0 =A0 =A0 =A0 =A0CFLAGS=3D"$(CFLAGS) $(WARN_CFLAGS)" \
+>> =A0 =A0 =A0 =A0 =A0CONFIG_H=3D"$(TCONFIG_H)" TM_H=3D"$(TM_H)" \
+>> - =A0 =A0 =A0 =A0 INCLUDES=3D"$(INCLUDES)" \
+>> + =A0 =A0 =A0 =A0 INCLUDES=3D"$(TARGET_INCLUDES)" \
+>> =A0 =A0 =A0 =A0 =A0MAKEOVERRIDES=3D \
+>> =A0 =A0 =A0 =A0 =A0-f libgcc.mk all
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
