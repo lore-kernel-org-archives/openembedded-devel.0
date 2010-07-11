@@ -1,18 +1,18 @@
 Received: from edison.awellconnected.net ([83.167.180.132])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1OXx6C-0004ZC-8J
+	(envelope-from <lukas@htc-linux.org>) id 1OXx7T-0004bp-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 16:01:41 +0200
+	Sun, 11 Jul 2010 16:03:02 +0200
 Received: from [127.0.0.1] (helo=localhost)
 	by edison.awellconnected.net with esmtpa (Exim 4.69)
-	(envelope-from <lukas@htc-linux.org>) id 1OXx1P-00018W-9q
+	(envelope-from <lukas@htc-linux.org>) id 1OXx2e-0001Fr-7Y
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 14:56:43 +0100
+	Sun, 11 Jul 2010 14:58:00 +0100
 Received: from ip-80-226-0-1.vodafone-net.de (ip-80-226-0-1.vodafone-net.de
 	[80.226.0.1]) by webmail.htc-linux.org (Horde MIME library) with HTTP;
-	Sun, 11 Jul 2010 14:56:43 +0100
-Message-ID: <20100711145643.q4q6l3lsow8ccogs@webmail.htc-linux.org>
-Date: Sun, 11 Jul 2010 14:56:43 +0100
+	Sun, 11 Jul 2010 14:58:00 +0100
+Message-ID: <20100711145800.264h899h0c8c08o0@webmail.htc-linux.org>
+Date: Sun, 11 Jul 2010 14:58:00 +0100
 From: lukas gorris <lukas@htc-linux.org>
 To: openembedded-devel@lists.openembedded.org
 MIME-Version: 1.0
@@ -30,11 +30,12 @@ X-SA-Exim-Connect-IP: 83.167.180.132
 X-SA-Exim-Mail-From: lukas@htc-linux.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: *
-X-Spam-Status: No, score=1.4 required=5.0 tests=BAYES_00,MIME_QP_LONG_LINE,
-	RCVD_IN_BL_SPAMCOP_NET,RCVD_IN_SORBS_WEB autolearn=no version=3.2.5
+X-Spam-Status: No, score=1.7 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_BL_SPAMCOP_NET, RCVD_IN_SORBS_WEB,
+	TRACKER_ID autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: htcleo: touchscreen driver & configuration
+Subject: glib-2.0: do_compile, angstrom: gcc-cross ver.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,7 +49,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jul 2010 14:01:41 -0000
+X-List-Received-Date: Sun, 11 Jul 2010 14:03:03 -0000
 Content-Type: text/plain;
 	charset=ISO-8859-1;
 	DelSp="Yes";
@@ -58,41 +59,43 @@ Content-Transfer-Encoding: quoted-printable
 
 Hello,
 
-except for the 6 keypad buttons, machine htcleo lacks any working
-input device in its current state in OE.
-The present touchscreen driver is designed for use with the andoid
-user space. I would like to make it work with tslib.
+I have just ran a build in org.openembedded.dev commit
+fd049a8b9904348456b26ffa7ff25d834c477c6b and noticed a bug.
 
-In ts_print_raw a touch event looks like this
+I am using armv7a based htcleo machine configuration and
+angstrom-2008.1 distro. because angstrom still selects obsolete
+gcc-cross versions for armv7a (see
+http://bugs.openembedded.org/show_bug.cgi?id=3D5435#c21 ) I bump it
+manually like this
 
-670.031357:    110    227      0
-2670.071314:    132    266      0
-2670.111229:      0      0      0
-2670.111236: -947150040 -947440328      0
-2670.151243:    285    200      0
-2670.191285:    285    202      0
+PREFERRED_VERSION_gcc-cross =3D "4.4.4"
+PREFERRED_VERSION_gcc-cross-initial =3D "4.4.4"
+PREFERRED_VERSION_gcc-cross-intermediate =3D "4.4.4"
+PREFERRED_VERSION_binutils-cross =3D "2.20.1"
 
-Instead of a real touch event, the pointer will dodge to zero and then
-to a large negative value.
-Am I right the driver will need patching for this to work with tslib?
+compile error from glib-2.0
 
-Driver is here
-http://git.linuxtogo.org/?p=3Dgroups/mobile-linux/kernel.git;a=3Dcommitdiff;=
-h=3D6a2efb17dced8b2989a4359d98d66b0446743fdf
+| gconvert.c:55:2: error: #error GNU libiconv not in use but included
+iconv.h is from libiconv
 
-I know this is not 100% OE related. But since I am trying to get the
-htcleo device supported in OE I should take a try here. On the tslib
-list nobody jumped up so far:
+full log:
 
-https://lists.berlios.de/pipermail/tslib-general/2010-July/000302.html
+http://tinderbox.openembedded.net/public/logs/task/6483371.txt
+
+Khem said it's because my host lacks libiconv. Unfortunately I can't
+test it now. Is this related to following commit?
+
+211fb05d665e95192cf4d4b81dfa89fde04359cf
+
+Maybe it's good to add libiconv in bitbake host sanity checker or
+require it in some other way like installing a libiconv-native ?
+
+Can somebody look into updating gcc-cross in angstrom for armv7 ?
+(Hope this the right list for angstrom topic)
 
 Thanks
 
 Lukas
-
-
------ Ende der weitergeleiteten Nachricht -----
-
 
 
 
