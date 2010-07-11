@@ -1,37 +1,40 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OXvSn-000187-Lf
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 14:18:03 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OXvO2-0003F1-MA
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 13:11:58 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OXvO2-0001Cu-CI
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 13:11:58 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OXwv0-0001V6-4t for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Jul 2010 15:50:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OXwqG-00057v-6s for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Jul 2010 15:45:12 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Jul 2010 15:45:12 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Jul 2010 15:45:12 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1278778757-31330-1-git-send-email-fransmeulenbroeks@gmail.com>
-References: <1278577398.15825.1.camel@lenovo.internal.reciva.com>
-	<1278778757-31330-1-git-send-email-fransmeulenbroeks@gmail.com>
-Date: Sun, 11 Jul 2010 13:11:58 +0100
-Message-ID: <1278850318.2345.1909.camel@mill.internal.reciva.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 11 Jul 2010 15:45:01 +0200
+Message-ID: <i1chst$tq5$1@dough.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: introduce COMPATIBLE_TARGET_SYS
+Subject: 'LIBC' variable clashes with perl variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,35 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jul 2010 12:18:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sun, 11 Jul 2010 13:50:07 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2010-07-10 at 18:19 +0200, Frans Meulenbroeks wrote:
-> This patch introduces COMPATIBLE_TARGET_SYS
-> It is similar to COMPATIBLE_MACHINE but where COMPATIBLE_MACHINE
-> is used to specify that a certain recipe is for a certain machine
-> COMPATIBLE_TARGET_SYS can be used to specify that a certain recipe
-> is for a certain architecture.
-> 
-> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Per our IRC discussion, I am still not totally comfortable with
-introducing this extra overhead to all users of base.bbclass.  In the
-vast majority of cases (i.e. essentially all packages apart from
-toolchain ones), TARGET_SYS == HOST_SYS and hence checking both of them
-is just a waste of time.  But I do take your point about wanting to mop
-up both cross and regular gcc.
+Hi,
 
-I think I would prefer to see the TARGET_SYS check placed in some common
-place which can be included by all toolchain recipes (and, possibly, a
-general ongoing effort to reduce the number of non-cross recipes which
-refer explicitly to TARGET_xx when HOST_xx would do).  But I don't have
-a very strong view on the matter and, if there is a general consensus in
-favour of putting this in base.bbclass, I will go along with that.
+Perl (among others) uses the 'LIBC' variable to point its linker to
+libc.so.6, which fails due to OE redefing LIBC.
 
-p.
+Any objections to renaming LIBC to TARGET_LIBC in OE?
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMOcrcMkyGM64RGpERAgPdAJ9DGZStg8DuhSa2MrYNuLsJVWRjwQCfZEPN
+YIxL9q+S4caNMNmlrYsb3EE=
+=xzeu
+-----END PGP SIGNATURE-----
 
 
 
