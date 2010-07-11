@@ -1,42 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OXyxj-0000Y1-Ji for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 18:01:04 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OXysu-0006cn-T4 for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 17:56:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jul 2010 17:56:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jul 2010 17:56:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1OXzz4-0001Qa-1S
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Jul 2010 19:06:30 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OXzuK-0004ZX-85
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 11 Jul 2010 18:01:36 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 11 Jul 2010 17:55:50 +0200
-Message-ID: <i1cpi6$jpb$1@dough.gmane.org>
-References: <20100711145800.264h899h0c8c08o0@webmail.htc-linux.org>
+In-Reply-To: <i1chst$tq5$1@dough.gmane.org>
+References: <i1chst$tq5$1@dough.gmane.org>
+Date: Sun, 11 Jul 2010 18:01:44 +0100
+Message-ID: <1278867705.15825.94.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <20100711145800.264h899h0c8c08o0@webmail.htc-linux.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: glib-2.0: do_compile, angstrom: gcc-cross ver.
+Subject: Re: 'LIBC' variable clashes with perl variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,40 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jul 2010 16:01:04 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 11 Jul 2010 17:06:30 -0000
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 11-07-10 15:58, lukas gorris wrote:
-> Hello,
+On Sun, 2010-07-11 at 15:45 +0200, Koen Kooi wrote:
+> Perl (among others) uses the 'LIBC' variable to point its linker to
+> libc.so.6, which fails due to OE redefing LIBC.
 > 
-> I have just ran a build in org.openembedded.dev commit
-> fd049a8b9904348456b26ffa7ff25d834c477c6b and noticed a bug.
-> 
-> I am using armv7a based htcleo machine configuration and
-> angstrom-2008.1 distro. because angstrom still selects obsolete
-> gcc-cross versions for armv7a
+> Any objections to renaming LIBC to TARGET_LIBC in OE?
 
-Excuse me!?!?!? Gcc 4.3.x still generates the fastest and best code for
-armv7a, gcc 4.4.x generates slow and buggy code and well, let's not talk
-about gcc 4.5.
+How is perl getting to see that variable?  I don't think it ought to be
+exported.
 
-I'm using binaries built by this 'obsolete' toolchain daily on armv7a
-hardware without problems, using neon, vfp, etc, so I'm wondering what
-this is all about.
+I don't have any problem with renaming it, though I do wonder whether it
+would be better to just abolish it altogether in favour of inspecting
+${HOST_OS}.
 
-This all reeks of broken kernel syndrome, are you using linux.inc? If
-not, please do so, it fixes up a whole lot of bugs.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+p.
 
-iD8DBQFMOemGMkyGM64RGpERAtpVAKCNitZFtUlGpbLtF/glkqhvs5GZQQCgrLx7
-drZkWVNgaleAovXa7efOsVc=
-=yPyi
------END PGP SIGNATURE-----
 
 
 
