@@ -1,30 +1,43 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OY5G3-0006Mi-0T
+	(envelope-from <raj.khem@gmail.com>) id 1OY5JZ-0006Vm-5k
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 00:44:23 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OY5BI-0006Rl-Nh
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 23:39:28 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTilUqapROvKeecH8McrUjMsQaEaI1LASvXztXi-a@mail.gmail.com>
+	Mon, 12 Jul 2010 00:48:01 +0200
+Received: by iwn34 with SMTP id 34so4115555iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Jul 2010 15:43:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=PZd1IOhNxkFXOUQjO7+SOMsmqfkGY3ghY4PM4DO0qFw=;
+	b=xVqZRn5nD8At8+ZrCYSp2qeZdRpIdXt0DYmP77qhDVsNAZZ0ONt19yjSUI7w94egYR
+	jWoSVgdR1naAqfFybLuVFgVze+QorsLgIohP1EirD4PXWmQs2TtDKa6DPyvcx8xrEPw2
+	nGx2rEmXZ56h/caZHMrfZMnP/00iZYpQ3bPMk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=by524o6BAz5bTeoBZsYdH23gJEZlLR3a+WJ0KnTJ9jY3vU3OqddqBxMzaxwAAY49Ue
+	f5cQ+vfeh+8nzoP8rdA9IpshOVoFanukjQiu16s3sRQYWgHpn20gK398blJsffs6/9xQ
+	8kZN3g1249nHHdTyBXcj9cYzXAMCO6aCGNo3s=
+Received: by 10.231.32.129 with SMTP id c1mr13102077ibd.112.1278888186208; 
+	Sun, 11 Jul 2010 15:43:06 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.17.132 with HTTP; Sun, 11 Jul 2010 15:42:46 -0700 (PDT)
+In-Reply-To: <1278887977.15825.280.camel@lenovo.internal.reciva.com>
 References: <i1chst$tq5$1@dough.gmane.org>
-	<1278867705.15825.94.camel@lenovo.internal.reciva.com>
-	<AANLkTilUqapROvKeecH8McrUjMsQaEaI1LASvXztXi-a@mail.gmail.com>
-Date: Sun, 11 Jul 2010 23:39:37 +0100
-Message-ID: <1278887977.15825.280.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+	<1278867705.15825.94.camel@lenovo.internal.reciva.com> 
+	<AANLkTilUqapROvKeecH8McrUjMsQaEaI1LASvXztXi-a@mail.gmail.com> 
+	<1278887977.15825.280.camel@lenovo.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Jul 2010 15:42:46 -0700
+Message-ID: <AANLkTinsIEU8t1YT9eJjVxw1Ijj-KmwsPPWDL78rQcjS@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: 'LIBC' variable clashes with perl variable
@@ -41,19 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jul 2010 22:44:23 -0000
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 11 Jul 2010 22:48:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Sun, 2010-07-11 at 15:17 -0700, Khem Raj wrote:
-> uclibc is ok but glibc and eglibc will have same HOST_OS so it will be
-> hard to differentiate which system C library to choose.
+On Sun, Jul 11, 2010 at 3:39 PM, Phil Blundell <philb@gnu.org> wrote:
+> On Sun, 2010-07-11 at 15:17 -0700, Khem Raj wrote:
+>> uclibc is ok but glibc and eglibc will have same HOST_OS so it will be
+>> hard to differentiate which system C library to choose.
+>
+> Are there any DISTROs which actually want to support both eglibc and
+> glibc in parallel?
 
-Are there any DISTROs which actually want to support both eglibc and
-glibc in parallel?
+angstrom supports all 3 of them IIRC with defaults being glibc
 
-p.
-
-
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
