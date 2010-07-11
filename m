@@ -1,43 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OY0Tk-0001dv-Gd for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 19:38:13 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OY0Ox-0003vs-VB for openembedded-devel@lists.openembedded.org;
-	Sun, 11 Jul 2010 19:33:15 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jul 2010 19:33:15 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <raj.khem@gmail.com>) id 1OY4pM-0005hX-US
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Jul 2010 00:16:50 +0200
+Received: by iwn34 with SMTP id 34so4100957iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jul 2010 19:33:15 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 11 Jul 2010 15:11:54 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=bILXqi+ci2mU/ewkTv5/SCNiRuRPiaPDpQHBQuHAaMw=;
+	b=pJ0a/7p04JzXjMaFpFOmkAKmepnPoStjF9rRqfm25wOtDkdJYtMMby8xh0KeQ3Y9ep
+	mji82ZwMlhZudBbXVrMXLDztTm8igz9tk84Fn8r+pHBIZgh2MHJ3MjY6nKWfeBfXhgxC
+	dOCQOERCO+k7c6U7pjsk7+NvmehpZxTjbObKQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=xAg8FwuZzSjW7EJ/QZXcaDwINQYFrnU3hP3QeeuDZcWtFJfWI5Vbfv6aUKzuyW/j9i
+	HrML211ZIjLVFrl0dw2BPEkgxX75thEublThKcZmhZTrD3cr3+aiJfgfwiUqYWVpw1mA
+	8jiOIRRu5TA8V7IdOm0VAgkE9B4NBYPHj4yp0=
+Received: by 10.231.17.13 with SMTP id q13mr12563153iba.14.1278886314234; Sun, 
+	11 Jul 2010 15:11:54 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.17.132 with HTTP; Sun, 11 Jul 2010 15:11:34 -0700 (PDT)
+In-Reply-To: <i1cpi6$jpb$1@dough.gmane.org>
+References: <20100711145800.264h899h0c8c08o0@webmail.htc-linux.org> 
+	<i1cpi6$jpb$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Jul 2010 15:11:34 -0700
+Message-ID: <AANLkTikrsNxQdImXrYtmhEqmNCsRb9YAdgyGHMoukrn0@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 11 Jul 2010 19:33:07 +0200
-Message-ID: <i1cv8j$446$1@dough.gmane.org>
-References: <i1chst$tq5$1@dough.gmane.org>
-	<1278867705.15825.94.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1278867705.15825.94.camel@lenovo.internal.reciva.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: 'LIBC' variable clashes with perl variable
+Subject: Re: glib-2.0: do_compile, angstrom: gcc-cross ver.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +52,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 11 Jul 2010 17:38:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 11 Jul 2010 22:16:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 11-07-10 19:01, Phil Blundell wrote:
-> On Sun, 2010-07-11 at 15:45 +0200, Koen Kooi wrote:
->> Perl (among others) uses the 'LIBC' variable to point its linker to
->> libc.so.6, which fails due to OE redefing LIBC.
+On Sun, Jul 11, 2010 at 8:55 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 11-07-10 15:58, lukas gorris wrote:
+>> Hello,
 >>
->> Any objections to renaming LIBC to TARGET_LIBC in OE?
-> 
-> How is perl getting to see that variable?  I don't think it ought to be
-> exported.
-> 
-> I don't have any problem with renaming it, though I do wonder whether it
-> would be better to just abolish it altogether in favour of inspecting
-> ${HOST_OS}.
+>> I have just ran a build in org.openembedded.dev commit
+>> fd049a8b9904348456b26ffa7ff25d834c477c6b and noticed a bug.
+>>
+>> I am using armv7a based htcleo machine configuration and
+>> angstrom-2008.1 distro. because angstrom still selects obsolete
+>> gcc-cross versions for armv7a
+>
+> Excuse me!?!?!? Gcc 4.3.x still generates the fastest and best code for
+> armv7a,
 
-LIBC is currently used to set it for bitbake, e.g.:
+agreed.
 
-MACHINE=beagleboard LIBC=eglibc bitbake foo
-MACHINE=beagleboard LIBC=uclibc bitbake foo
+gcc 4.4.x generates slow and buggy code and well,
 
-Which also means we can't use any '_', so it would be TARGETLIBC or HOSTOS.
-I'm not sure what the impact would be when we would unexport it, though.
+may be, I don't have any data to support this claim but if you do have
+something it would be nice if you shared that here.
 
-regards,
+ let's not talk
+> about gcc 4.5.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+gcc 4.5 has many fixes including the direct TLS register access through CP15
+on armv7+ which should be some improvement for TLS access. May be its
+worth to start trying it on armv7a and weed out any issues early in
+its adoption.
+and may be start using thumb2 if not done thus far for armv7+
 
-iD8DBQFMOgBTMkyGM64RGpERAqO9AJ4lSJbHDviQjgkIK5XkTC6/9voHIQCcDSrq
-CK72iQi4N6rTh7x9hXt3jpM=
-=XkZF
------END PGP SIGNATURE-----
+>
+> I'm using binaries built by this 'obsolete' toolchain daily on armv7a
+> hardware without problems, using neon, vfp, etc, so I'm wondering what
+> this is all about.
+>
+> This all reeks of broken kernel syndrome, are you using linux.inc? If
+> not, please do so, it fixes up a whole lot of bugs.
 
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMOemGMkyGM64RGpERAtpVAKCNitZFtUlGpbLtF/glkqhvs5GZQQCgrLx7
+> drZkWVNgaleAovXa7efOsVc=
+> =yPyi
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
