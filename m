@@ -1,46 +1,46 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OYCZK-00036X-If
+	(envelope-from <raj.khem@gmail.com>) id 1OYCdb-0003Eg-Af
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 08:32:48 +0200
-Received: by bwz10 with SMTP id 10so2614676bwz.6
+	Mon, 12 Jul 2010 08:37:15 +0200
+Received: by iwn34 with SMTP id 34so4405612iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jul 2010 23:27:52 -0700 (PDT)
+	Sun, 11 Jul 2010 23:32:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=C0JTsYNC8FQVXFayXcD+C0/UNBKUmotRUbAw/d0BN6E=;
-	b=FvUf2re3ZK7pA9spcz0eq61iR+IJx6dC4U5+45KVeJOAPh4irhtGSw4+yskLnbZNl8
-	gWydvlVgRswyehuLatwT68GYY7ACx0VtPa24zBTeany4PrbiKmhU5pJLzS7wWyE2vI4+
-	kchpmHl4cS6sPNrVh2WwlNdbWP7UPUOYMwWfI=
+	bh=iKFbvmDlvZXPHcn3ltjJIO6zFXlY624mM+u3dPEIiMg=;
+	b=jsNRzotMtDy5FSoCQPTdzZF30YoykmVzcURfjF5oFO4CsR7mRbyFgY5GLYtdpbrmwM
+	1K5uQzA4gTcPTEGg+ANtxKkcwrn3BcxbZsA+jVsLeOcFTszw5YNyfjT2cqNVMNOBwQdx
+	sjBceJ/u1aDCRWG3ACi10OzNKpF2hFKtXYd8k=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=GNUbPZgJ4eCG9YTt3J/l7D1tUQw8p+qUTS8VwXJosM3mNno/yavr1cnb6OFXDljnOY
-	MGV0/49UgTtyaAO9b6wdZGW5KPkCCO/mBUY0PBvp9FcNYu+nBqMpWlSp2D6Z2fmmpRo9
-	owGQux3WEDugsICe4Qlur+06bQ1rUL90/g5xE=
+	b=Mpl4grrjSSBHrIzQVs+uwf1BqVMEFzf4UdVDm+UdUbQAgD0akP6S1+nE92kentMUin
+	5uaO+r1oMnggt1ooNO4InBnYJdwv6sNO6jNXyvTVIi+Aiy1/+Nn6ypyndhHm0/QKTTid
+	pTkhA2WxvEp7RETYSysFml0tII+d6IkSy4TXA=
+Received: by 10.231.32.129 with SMTP id c1mr13515484ibd.112.1278916336379; 
+	Sun, 11 Jul 2010 23:32:16 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.204.47.38 with SMTP id l38mr9815205bkf.154.1278916072546; Sun, 
-	11 Jul 2010 23:27:52 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Sun, 11 Jul 2010 23:27:52 -0700 (PDT)
-In-Reply-To: <AANLkTikZcDFs2duycC7tzPCVdu6-8vqjQKF_etRBGiAR@mail.gmail.com>
-References: <AANLkTinu9HQ1P7ppw_mBT5lX2zUuZ31QIL-sPQDdkPqM@mail.gmail.com>
-	<1278833542-16021-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTikZcDFs2duycC7tzPCVdu6-8vqjQKF_etRBGiAR@mail.gmail.com>
-Date: Mon, 12 Jul 2010 08:27:52 +0200
-Message-ID: <AANLkTikaTTK2ydMB4WuP2X5MpHybcQYCqyRNXQpoMt11@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.17.132 with HTTP; Sun, 11 Jul 2010 23:31:56 -0700 (PDT)
+In-Reply-To: <1278913254-30180-2-git-send-email-khimov@altell.ru>
+References: <201007111103.21110.roman@khimov.ru>
+	<1278913254-30180-1-git-send-email-khimov@altell.ru> 
+	<1278913254-30180-2-git-send-email-khimov@altell.ru>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 11 Jul 2010 23:31:56 -0700
+Message-ID: <AANLkTin5ott-60Mn_j6a7iPGhr30gQ9R1JaeuYOCezM-@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gcc 4.1.x: patch Makefile.in for cross compile badness
+Subject: Re: [PATCH 2/2] perl 5.10.1: fix standard module rdependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,293 +54,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 06:32:48 -0000
+X-List-Received-Date: Mon, 12 Jul 2010 06:37:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/7/12 Khem Raj <raj.khem@gmail.com>:
-> On Sun, Jul 11, 2010 at 12:32 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> When compiling gcc target code make passes -I(GMPINC)
->> but this one points to the host dir (it is set to HOST_GMPINC
->> which in oe points to tmp/sysroots/i686-linux/usr/include)
->> This patch breaks the env var $(INCLUDES) in two
->> and only uses the TARGET specific part for compiling libgcc
->> and the crt stuff.
->>
->> This has been fully tested with gcc 4.1.2. For 4.1.0 and 4.1.0 it is
->> verified that the patch applies properly
->>
->> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->>
+On Sun, Jul 11, 2010 at 10:40 PM, Roman I Khimov <khimov@altell.ru> wrote:
+> Automatic dependency extraction script made some errors thus perl-modules
+> wasn't installable.
 >
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+> =A0* s/perl-module-encode-kr-2022_kr/perl-module-encode-kr-2022-kr/
+> =A0* perl-module-your-module-here came from example in script, dropped it
+> =A0* s/perl-module-cpan-exception-yaml_not_installed/perl-module-cpan-exc=
+eption-yaml-not-installed/
+> =A0* perl-module-dbd-sqlite - not part of standard perl, provided by libd=
+bd-sqlite
+> =A0* perl-module-dbix-simple - same as above, provided by libdbix-simple
 >
-> Please bump PR too.
 
-Will do. Thanks for the Ack.
+now I get this error.
+
+  * satisfy_dependencies_for: Cannot satisfy the following
+dependencies for task-sdk-native:
+|  *    libdbd-sqlite *         libdbix-simple *
+|
+
+
+> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+> ---
+> =A0recipes/perl/perl-rdepends_5.10.1.inc | =A0 23 +++++++++++------------
+> =A0recipes/perl/perl_5.10.1.bb =A0 =A0 =A0 =A0 =A0 | =A0 =A02 +-
+> =A02 files changed, 12 insertions(+), 13 deletions(-)
 >
->> ---
->>
->> see also =A0the thread
->> [RFC] gcc patch to avoid host include when compiling gcc-cross
->> on the oe ML
->>
->> I'll apply if I get two acks. After that I'll try to find time to
->> port it to newer versions too (but if someone else would like to
->> give that a stab, be my guest).
->> ---
->> =A0recipes/gcc/gcc-4.1.0.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A04 ++-
->> =A0recipes/gcc/gcc-4.1.0/Makefile.in.patch | =A0 47 ++++++++++++++++++++=
-+++++++++++
->> =A0recipes/gcc/gcc-4.1.1.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A01 +
->> =A0recipes/gcc/gcc-4.1.1/Makefile.in.patch | =A0 47 ++++++++++++++++++++=
-+++++++++++
->> =A0recipes/gcc/gcc-4.1.2.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A01 +
->> =A0recipes/gcc/gcc-4.1.2/Makefile.in.patch | =A0 47 ++++++++++++++++++++=
-+++++++++++
->> =A06 files changed, 146 insertions(+), 1 deletions(-)
->> =A0create mode 100644 recipes/gcc/gcc-4.1.0/Makefile.in.patch
->> =A0create mode 100644 recipes/gcc/gcc-4.1.1/Makefile.in.patch
->> =A0create mode 100644 recipes/gcc/gcc-4.1.2/Makefile.in.patch
->>
->> diff --git a/recipes/gcc/gcc-4.1.0.inc b/recipes/gcc/gcc-4.1.0.inc
->> index bfaf699..34d3502 100644
->> --- a/recipes/gcc/gcc-4.1.0.inc
->> +++ b/recipes/gcc/gcc-4.1.0.inc
->> @@ -11,7 +11,9 @@ SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar=
-.bz2;name=3Darchive \
->> =A0 =A0 =A0 =A0file://arm-nolibfloat.patch \
->> =A0 =A0 =A0 =A0file://arm-softfloat.patch \
->> =A0 =A0 =A0 =A0file://zecke-xgcc-cpp.patch \
->> - =A0 =A0file://pr34130.patch"
->> + =A0 =A0 =A0 file://pr34130.patch \
->> + =A0 =A0 =A0 file://Makefile.in.patch \
->> + =A0 =A0 =A0 =A0"
->>
->> =A0SRC_URI_append_fail-fast =3D " file://zecke-no-host-includes.patch "
->>
->> diff --git a/recipes/gcc/gcc-4.1.0/Makefile.in.patch b/recipes/gcc/gcc-4=
-.1.0/Makefile.in.patch
->> new file mode 100644
->> index 0000000..140116a
->> --- /dev/null
->> +++ b/recipes/gcc/gcc-4.1.0/Makefile.in.patch
->> @@ -0,0 +1,47 @@
->> +Index: gcc-4.1.2/gcc/Makefile.in
->> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> +--- gcc-4.1.2.orig/gcc/Makefile.in
->> ++++ gcc-4.1.2/gcc/Makefile.in
->> +@@ -405,7 +405,7 @@ LIMITS_H_TEST =3D [ -f $(SYSTEM_HEADER_DIR
->> + TARGET_SYSTEM_ROOT =3D @TARGET_SYSTEM_ROOT@
->> +
->> + xmake_file=3D@xmake_file@
->> +-tmake_file=3D@tmake_file@
->> ++tmake_file=3D@tmake_file@ /home/frans/oe/tmp_angstrom/work/nios2-linux=
-/gcc-cross-4.1.2-r22.1/temp/t-oe
->> + out_file=3D$(srcdir)/config/@out_file@
->> + out_object_file=3D@out_object_file@
->> + md_file=3D$(srcdir)/config/@md_file@
->> +@@ -548,7 +548,7 @@ LIBGCC2_INCLUDES =3D
->> + TARGET_LIBGCC2_CFLAGS =3D
->> +
->> + # Options to use when compiling crtbegin/end.
->> +-CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -=
-g0 \
->> ++CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CF=
-LAGS) -g0 \
->> + =A0 -finhibit-size-directive -fno-inline-functions -fno-exceptions \
->> + =A0 -fno-zero-initialized-in-bss -fno-unit-at-a-time \
->> + =A0 $(INHIBIT_LIBC_CFLAGS)
->> +@@ -845,9 +845,13 @@ BUILD_VARRAY =3D build/varray.o
->> + # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
->> + # currently being compiled, in both source trees, to be examined as we=
-ll.
->> + # libintl.h will be found in ../intl if we are using the included libi=
-ntl.
->> +-INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
->> ++#
->> ++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the h=
-ost
->> ++# include dir) is used for compiling libgcc.a
->> ++TARGET_INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
->> + =A0 =A0 =A0 =A0 =A0-I$(srcdir)/../include @INCINTL@ \
->> +- =A0 =A0 =A0 =A0 $(CPPINC) $(GMPINC)
->> ++ =A0 =A0 =A0 =A0 $(CPPINC)
->> ++INCLUDES =3D $(TARGET_INCLUDES) $(GMPINC)
->> +
->> + .c.o:
->> + =A0 =A0 =A0 $(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
->> +@@ -1379,7 +1383,7 @@ libgcc.a: $(LIBGCC_DEPS)
->> + =A0 =A0 =A0 $(MAKE) \
->> + =A0 =A0 =A0 =A0 CFLAGS=3D"$(CFLAGS) $(WARN_CFLAGS)" \
->> + =A0 =A0 =A0 =A0 CONFIG_H=3D"$(TCONFIG_H)" TM_H=3D"$(TM_H)" \
->> +- =A0 =A0 =A0 =A0INCLUDES=3D"$(INCLUDES)" \
->> ++ =A0 =A0 =A0 =A0INCLUDES=3D"$(TARGET_INCLUDES)" \
->> + =A0 =A0 =A0 =A0 MAKEOVERRIDES=3D \
->> + =A0 =A0 =A0 =A0 -f libgcc.mk all
->> +
->> diff --git a/recipes/gcc/gcc-4.1.1.inc b/recipes/gcc/gcc-4.1.1.inc
->> index 3b813b0..19f2423 100644
->> --- a/recipes/gcc/gcc-4.1.1.inc
->> +++ b/recipes/gcc/gcc-4.1.1.inc
->> @@ -32,6 +32,7 @@ SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar=
-.bz2;name=3Darchive \
->> =A0 =A0 =A0 =A0 file://gcc-4.1.1-e300cx.patch \
->> =A0 =A0 =A0 =A0 file://pr34130.patch \
->> =A0 =A0 =A0 =A0file://sed-fixinc-backslash.patch \
->> + =A0 =A0 =A0 file://Makefile.in.patch \
->> =A0 =A0 =A0 =A0"
->>
->> =A0SRC_URI_append_sh3 =A0=3D " file://sh3-installfix-fixheaders.patch "
->> diff --git a/recipes/gcc/gcc-4.1.1/Makefile.in.patch b/recipes/gcc/gcc-4=
-.1.1/Makefile.in.patch
->> new file mode 100644
->> index 0000000..140116a
->> --- /dev/null
->> +++ b/recipes/gcc/gcc-4.1.1/Makefile.in.patch
->> @@ -0,0 +1,47 @@
->> +Index: gcc-4.1.2/gcc/Makefile.in
->> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> +--- gcc-4.1.2.orig/gcc/Makefile.in
->> ++++ gcc-4.1.2/gcc/Makefile.in
->> +@@ -405,7 +405,7 @@ LIMITS_H_TEST =3D [ -f $(SYSTEM_HEADER_DIR
->> + TARGET_SYSTEM_ROOT =3D @TARGET_SYSTEM_ROOT@
->> +
->> + xmake_file=3D@xmake_file@
->> +-tmake_file=3D@tmake_file@
->> ++tmake_file=3D@tmake_file@ /home/frans/oe/tmp_angstrom/work/nios2-linux=
-/gcc-cross-4.1.2-r22.1/temp/t-oe
->> + out_file=3D$(srcdir)/config/@out_file@
->> + out_object_file=3D@out_object_file@
->> + md_file=3D$(srcdir)/config/@md_file@
->> +@@ -548,7 +548,7 @@ LIBGCC2_INCLUDES =3D
->> + TARGET_LIBGCC2_CFLAGS =3D
->> +
->> + # Options to use when compiling crtbegin/end.
->> +-CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -=
-g0 \
->> ++CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CF=
-LAGS) -g0 \
->> + =A0 -finhibit-size-directive -fno-inline-functions -fno-exceptions \
->> + =A0 -fno-zero-initialized-in-bss -fno-unit-at-a-time \
->> + =A0 $(INHIBIT_LIBC_CFLAGS)
->> +@@ -845,9 +845,13 @@ BUILD_VARRAY =3D build/varray.o
->> + # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
->> + # currently being compiled, in both source trees, to be examined as we=
-ll.
->> + # libintl.h will be found in ../intl if we are using the included libi=
-ntl.
->> +-INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
->> ++#
->> ++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the h=
-ost
->> ++# include dir) is used for compiling libgcc.a
->> ++TARGET_INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
->> + =A0 =A0 =A0 =A0 =A0-I$(srcdir)/../include @INCINTL@ \
->> +- =A0 =A0 =A0 =A0 $(CPPINC) $(GMPINC)
->> ++ =A0 =A0 =A0 =A0 $(CPPINC)
->> ++INCLUDES =3D $(TARGET_INCLUDES) $(GMPINC)
->> +
->> + .c.o:
->> + =A0 =A0 =A0 $(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
->> +@@ -1379,7 +1383,7 @@ libgcc.a: $(LIBGCC_DEPS)
->> + =A0 =A0 =A0 $(MAKE) \
->> + =A0 =A0 =A0 =A0 CFLAGS=3D"$(CFLAGS) $(WARN_CFLAGS)" \
->> + =A0 =A0 =A0 =A0 CONFIG_H=3D"$(TCONFIG_H)" TM_H=3D"$(TM_H)" \
->> +- =A0 =A0 =A0 =A0INCLUDES=3D"$(INCLUDES)" \
->> ++ =A0 =A0 =A0 =A0INCLUDES=3D"$(TARGET_INCLUDES)" \
->> + =A0 =A0 =A0 =A0 MAKEOVERRIDES=3D \
->> + =A0 =A0 =A0 =A0 -f libgcc.mk all
->> +
->> diff --git a/recipes/gcc/gcc-4.1.2.inc b/recipes/gcc/gcc-4.1.2.inc
->> index 3b6cf30..8771e18 100644
->> --- a/recipes/gcc/gcc-4.1.2.inc
->> +++ b/recipes/gcc/gcc-4.1.2.inc
->> @@ -29,6 +29,7 @@ SRC_URI =3D "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar=
-.bz2;name=3Darchive \
->> =A0 =A0 =A0 =A0file://gfortran.patch \
->> =A0 =A0 =A0 =A0 file://gcc-4.0.2-e300c2c3.patch \
->> =A0 =A0 =A0 =A0 file://pr34130.patch \
->> + =A0 =A0 =A0 file://Makefile.in.patch \
->> =A0 =A0 =A0 =A0"
->>
->> =A0SRC_URI_append_sh3 =A0=3D " file://sh3-installfix-fixheaders.patch "
->> diff --git a/recipes/gcc/gcc-4.1.2/Makefile.in.patch b/recipes/gcc/gcc-4=
-.1.2/Makefile.in.patch
->> new file mode 100644
->> index 0000000..140116a
->> --- /dev/null
->> +++ b/recipes/gcc/gcc-4.1.2/Makefile.in.patch
->> @@ -0,0 +1,47 @@
->> +Index: gcc-4.1.2/gcc/Makefile.in
->> +=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->> +--- gcc-4.1.2.orig/gcc/Makefile.in
->> ++++ gcc-4.1.2/gcc/Makefile.in
->> +@@ -405,7 +405,7 @@ LIMITS_H_TEST =3D [ -f $(SYSTEM_HEADER_DIR
->> + TARGET_SYSTEM_ROOT =3D @TARGET_SYSTEM_ROOT@
->> +
->> + xmake_file=3D@xmake_file@
->> +-tmake_file=3D@tmake_file@
->> ++tmake_file=3D@tmake_file@ /home/frans/oe/tmp_angstrom/work/nios2-linux=
-/gcc-cross-4.1.2-r22.1/temp/t-oe
->> + out_file=3D$(srcdir)/config/@out_file@
->> + out_object_file=3D@out_object_file@
->> + md_file=3D$(srcdir)/config/@md_file@
->> +@@ -548,7 +548,7 @@ LIBGCC2_INCLUDES =3D
->> + TARGET_LIBGCC2_CFLAGS =3D
->> +
->> + # Options to use when compiling crtbegin/end.
->> +-CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -=
-g0 \
->> ++CRTSTUFF_CFLAGS =3D -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CF=
-LAGS) -g0 \
->> + =A0 -finhibit-size-directive -fno-inline-functions -fno-exceptions \
->> + =A0 -fno-zero-initialized-in-bss -fno-unit-at-a-time \
->> + =A0 $(INHIBIT_LIBC_CFLAGS)
->> +@@ -845,9 +845,13 @@ BUILD_VARRAY =3D build/varray.o
->> + # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
->> + # currently being compiled, in both source trees, to be examined as we=
-ll.
->> + # libintl.h will be found in ../intl if we are using the included libi=
-ntl.
->> +-INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
->> ++#
->> ++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the h=
-ost
->> ++# include dir) is used for compiling libgcc.a
->> ++TARGET_INCLUDES =3D -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
->> + =A0 =A0 =A0 =A0 =A0-I$(srcdir)/../include @INCINTL@ \
->> +- =A0 =A0 =A0 =A0 $(CPPINC) $(GMPINC)
->> ++ =A0 =A0 =A0 =A0 $(CPPINC)
->> ++INCLUDES =3D $(TARGET_INCLUDES) $(GMPINC)
->> +
->> + .c.o:
->> + =A0 =A0 =A0 $(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
->> +@@ -1379,7 +1383,7 @@ libgcc.a: $(LIBGCC_DEPS)
->> + =A0 =A0 =A0 $(MAKE) \
->> + =A0 =A0 =A0 =A0 CFLAGS=3D"$(CFLAGS) $(WARN_CFLAGS)" \
->> + =A0 =A0 =A0 =A0 CONFIG_H=3D"$(TCONFIG_H)" TM_H=3D"$(TM_H)" \
->> +- =A0 =A0 =A0 =A0INCLUDES=3D"$(INCLUDES)" \
->> ++ =A0 =A0 =A0 =A0INCLUDES=3D"$(TARGET_INCLUDES)" \
->> + =A0 =A0 =A0 =A0 MAKEOVERRIDES=3D \
->> + =A0 =A0 =A0 =A0 -f libgcc.mk all
->> +
->> --
->> 1.6.4.2
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+> diff --git a/recipes/perl/perl-rdepends_5.10.1.inc b/recipes/perl/perl-rd=
+epends_5.10.1.inc
+> index d948417..62e7eed 100644
+> --- a/recipes/perl/perl-rdepends_5.10.1.inc
+> +++ b/recipes/perl/perl-rdepends_5.10.1.inc
+> @@ -216,7 +216,7 @@ RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-defe=
+rredcode "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-distribution "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-distrostatus "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-exception-recursivede=
+pendency "
+> -RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-exception-yaml_not_inst=
+alled "
+> +RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-exception-yaml-not-inst=
+alled "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-ftp "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-handleconfig "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-cpan-infoobj "
+> @@ -250,8 +250,8 @@ RDEPENDS_perl-module-cpan-exception-blocked_urllist +=
+=3D "perl-module-overload"
+> =A0RDEPENDS_perl-module-cpan-exception-blocked_urllist +=3D "perl-module-=
+strict "
+> =A0RDEPENDS_perl-module-cpan-exception-recursivedependency +=3D "perl-mod=
+ule-overload"
+> =A0RDEPENDS_perl-module-cpan-exception-recursivedependency +=3D "perl-mod=
+ule-strict "
+> -RDEPENDS_perl-module-cpan-exception-yaml_not_installed +=3D "perl-module=
+-overload"
+> -RDEPENDS_perl-module-cpan-exception-yaml_not_installed +=3D "perl-module=
+-strict "
+> +RDEPENDS_perl-module-cpan-exception-yaml-not-installed +=3D "perl-module=
+-overload"
+> +RDEPENDS_perl-module-cpan-exception-yaml-not-installed +=3D "perl-module=
+-strict "
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-exporter"
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-fcntl"
+> =A0RDEPENDS_perl-module-cpan +=3D "perl-module-file-basename"
+> @@ -428,7 +428,6 @@ RDEPENDS_perl-module-cpanplus-internals-constants-rep=
+ort +=3D "perl-module-package
+> =A0RDEPENDS_perl-module-cpanplus-internals-constants-report +=3D "perl-mo=
+dule-strict "
+> =A0RDEPENDS_perl-module-cpanplus-internals-constants-report +=3D "perl-mo=
+dule-test "
+> =A0RDEPENDS_perl-module-cpanplus-internals-constants-report +=3D "perl-mo=
+dule-vars"
+> -RDEPENDS_perl-module-cpanplus-internals-constants-report +=3D "perl-modu=
+le-your-module-here "
+> =A0RDEPENDS_perl-module-cpanplus-internals-constants +=3D "perl-module-st=
+rict "
+> =A0RDEPENDS_perl-module-cpanplus-internals-constants +=3D "perl-module-va=
+rs"
+> =A0RDEPENDS_perl-module-cpanplus-internals +=3D "perl-module-cpanplus-err=
+or "
+> @@ -517,8 +516,8 @@ RDEPENDS_perl-module-cpanplus-internals-source-sqlite=
+ +=3D "perl-module-cpanplus-e
+> =A0RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-modul=
+e-cpanplus-internals-constants "
+> =A0RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-modul=
+e-cpanplus-internals-source-sqlite-tie "
+> =A0RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-modul=
+e-data-dumper "
+> -RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-module-=
+dbd-sqlite "
+> -RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-module-=
+dbix-simple "
+> +RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "libdbd-sqlit=
+e "
+> +RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "libdbix-simp=
+le "
+> =A0RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-modul=
+e-locale-maketext-simple"
+> =A0RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-modul=
+e-params-check"
+> =A0RDEPENDS_perl-module-cpanplus-internals-source-sqlite +=3D "perl-modul=
+e-strict "
+> @@ -786,13 +785,13 @@ RDEPENDS_perl-module-encode-jp-jis7 +=3D "perl-modu=
+le-warnings "
+> =A0RDEPENDS_perl-module-encode-jp +=3D "perl-module-strict "
+> =A0RDEPENDS_perl-module-encode-jp +=3D "perl-module-warnings "
+> =A0RDEPENDS_perl-module-encode-jp +=3D "perl-module-xsloader "
+> -RDEPENDS_perl-module-encode-kr-2022_kr +=3D "perl-module-base"
+> -RDEPENDS_perl-module-encode-kr-2022_kr +=3D "perl-module-encode"
+> -RDEPENDS_perl-module-encode-kr-2022_kr +=3D "perl-module-encode-cjkconst=
+ants"
+> -RDEPENDS_perl-module-encode-kr-2022_kr +=3D "perl-module-strict "
+> -RDEPENDS_perl-module-encode-kr-2022_kr +=3D "perl-module-warnings "
+> +RDEPENDS_perl-module-encode-kr-2022-kr +=3D "perl-module-base"
+> +RDEPENDS_perl-module-encode-kr-2022-kr +=3D "perl-module-encode"
+> +RDEPENDS_perl-module-encode-kr-2022-kr +=3D "perl-module-encode-cjkconst=
+ants"
+> +RDEPENDS_perl-module-encode-kr-2022-kr +=3D "perl-module-strict "
+> +RDEPENDS_perl-module-encode-kr-2022-kr +=3D "perl-module-warnings "
+> =A0RDEPENDS_perl-module-encode-kr +=3D "perl-module-encode "
+> -RDEPENDS_perl-module-encode-kr +=3D "perl-module-encode-kr-2022_kr "
+> +RDEPENDS_perl-module-encode-kr +=3D "perl-module-encode-kr-2022-kr "
+> =A0RDEPENDS_perl-module-encode-kr +=3D "perl-module-strict "
+> =A0RDEPENDS_perl-module-encode-kr +=3D "perl-module-warnings "
+> =A0RDEPENDS_perl-module-encode-kr +=3D "perl-module-xsloader "
+> diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
+> index c0f6378..c22ecd7 100644
+> --- a/recipes/perl/perl_5.10.1.bb
+> +++ b/recipes/perl/perl_5.10.1.bb
+> @@ -5,7 +5,7 @@ LICENSE =3D "Artistic|GPL"
+> =A0PRIORITY =3D "optional"
+> =A0# We need gnugrep (for -I)
+> =A0DEPENDS =3D "virtual/db perl-native grep-native"
+> -PR =3D "r6"
+> +PR =3D "r7"
+>
+> =A0# Not tested enough
+> =A0DEFAULT_PREFERENCE =3D "-1"
+> --
+> 1.6.4.2
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
