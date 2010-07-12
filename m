@@ -1,26 +1,39 @@
-Received: from [93.100.16.104] (helo=mate.hex)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@mate.hex>) id 1OYCuT-0007tC-AX
+	(envelope-from <stefan@datenfreihafen.org>) id 1OYCuq-0003xh-Th
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 08:54:48 +0200
-Received: by mate.hex (Postfix, from userid 1000)
-	id 483C021B58; Mon, 12 Jul 2010 10:49:38 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
+	Mon, 12 Jul 2010 08:55:01 +0200
+Received: from guest185.ibr.cs.tu-bs.de ([134.169.35.185] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OYCq4-0007xy-64 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jul 2010 08:50:07 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OYCq3-0007Mh-AJ
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Jul 2010 08:50:03 +0200
+Date: Mon, 12 Jul 2010 08:50:03 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Jul 2010 10:49:35 +0400
-Message-Id: <1278917375-22463-1-git-send-email-khimov@altell.ru>
-X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <AANLkTin5ott-60Mn_j6a7iPGhr30gQ9R1JaeuYOCezM-@mail.gmail.com>
-References: <AANLkTin5ott-60Mn_j6a7iPGhr30gQ9R1JaeuYOCezM-@mail.gmail.com>
-X-SA-Exim-Connect-IP: 93.100.16.104
-X-SA-Exim-Mail-From: rik@mate.hex
+Message-ID: <20100712065003.GA25677@excalibur.local>
+References: <20100709204055.GA12163@excalibur.local>
+	<AANLkTimFoNpQmccMnnwO5lCg2XsByBiNlRp8DyvfjAFf@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimFoNpQmccMnnwO5lCg2XsByBiNlRp8DyvfjAFf@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
-	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] perl 5.10.1: fix standard module rdependencies
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,101 +47,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 06:54:48 -0000
+X-List-Received-Date: Mon, 12 Jul 2010 06:55:01 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Automatic dependency extraction script made some errors thus perl-modules
-wasn't installable.
+Hello.
 
- * s/perl-module-encode-kr-2022_kr/perl-module-encode-kr-2022-kr/
- * perl-module-your-module-here came from example in script, dropped it
- * s/perl-module-cpan-exception-yaml_not_installed/perl-module-cpan-exception-yaml-not-installed/
- * perl-module-dbd-sqlite - not part of standard perl, provided by libdbd-sqlite
- * perl-module-dbix-simple - same as above, provided by libdbix-simple
+On Sat, 2010-07-10 at 08:51, Frans Meulenbroeks wrote:
+> 2010/7/9 Stefan Schmidt <stefan@datenfreihafen.org>:
+> >
+> > Open questions:
+> > ---------------
+> > - Do we feel comfortable with doing a new branch now?
+> 
+> I'd say we should wailt until bitbake 1.10 is officially out (I assume
+> from your previous "Faster bitbake" that you want to move to 1.10)
 
-Signed-off-by: Roman I Khimov <khimov@altell.ru>
----
- recipes/perl/perl-rdepends_5.10.1.inc |   23 +++++++++++------------
- recipes/perl/perl_5.10.1.bb           |    2 +-
- 2 files changed, 12 insertions(+), 13 deletions(-)
+Agreed. The only problem we had recently was about file:// handling. Everything
+else seems to be pretty stable on the 1.10 branch. Could one of the bitbake devs
+comment on the question if there is a 1.10 release planned?
 
-diff --git a/recipes/perl/perl-rdepends_5.10.1.inc b/recipes/perl/perl-rdepends_5.10.1.inc
-index d948417..62e7eed 100644
---- a/recipes/perl/perl-rdepends_5.10.1.inc
-+++ b/recipes/perl/perl-rdepends_5.10.1.inc
-@@ -216,7 +216,7 @@ RDEPENDS_perl-module-cpan += "perl-module-cpan-deferredcode "
- RDEPENDS_perl-module-cpan += "perl-module-cpan-distribution "
- RDEPENDS_perl-module-cpan += "perl-module-cpan-distrostatus "
- RDEPENDS_perl-module-cpan += "perl-module-cpan-exception-recursivedependency "
--RDEPENDS_perl-module-cpan += "perl-module-cpan-exception-yaml_not_installed "
-+RDEPENDS_perl-module-cpan += "perl-module-cpan-exception-yaml-not-installed "
- RDEPENDS_perl-module-cpan += "perl-module-cpan-ftp "
- RDEPENDS_perl-module-cpan += "perl-module-cpan-handleconfig "
- RDEPENDS_perl-module-cpan += "perl-module-cpan-infoobj "
-@@ -250,8 +250,8 @@ RDEPENDS_perl-module-cpan-exception-blocked_urllist += "perl-module-overload"
- RDEPENDS_perl-module-cpan-exception-blocked_urllist += "perl-module-strict "
- RDEPENDS_perl-module-cpan-exception-recursivedependency += "perl-module-overload"
- RDEPENDS_perl-module-cpan-exception-recursivedependency += "perl-module-strict "
--RDEPENDS_perl-module-cpan-exception-yaml_not_installed += "perl-module-overload"
--RDEPENDS_perl-module-cpan-exception-yaml_not_installed += "perl-module-strict "
-+RDEPENDS_perl-module-cpan-exception-yaml-not-installed += "perl-module-overload"
-+RDEPENDS_perl-module-cpan-exception-yaml-not-installed += "perl-module-strict "
- RDEPENDS_perl-module-cpan += "perl-module-exporter"
- RDEPENDS_perl-module-cpan += "perl-module-fcntl"
- RDEPENDS_perl-module-cpan += "perl-module-file-basename"
-@@ -428,7 +428,6 @@ RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-package
- RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-strict "
- RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-test "
- RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-vars"
--RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-your-module-here "
- RDEPENDS_perl-module-cpanplus-internals-constants += "perl-module-strict "
- RDEPENDS_perl-module-cpanplus-internals-constants += "perl-module-vars"
- RDEPENDS_perl-module-cpanplus-internals += "perl-module-cpanplus-error "
-@@ -517,8 +516,8 @@ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-cpanplus-e
- RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-cpanplus-internals-constants "
- RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-cpanplus-internals-source-sqlite-tie "
- RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-data-dumper "
--RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-dbd-sqlite "
--RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-dbix-simple "
-+RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "libdbd-sqlite "
-+RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "libdbix-simple "
- RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-locale-maketext-simple"
- RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-params-check"
- RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-strict "
-@@ -786,13 +785,13 @@ RDEPENDS_perl-module-encode-jp-jis7 += "perl-module-warnings "
- RDEPENDS_perl-module-encode-jp += "perl-module-strict "
- RDEPENDS_perl-module-encode-jp += "perl-module-warnings "
- RDEPENDS_perl-module-encode-jp += "perl-module-xsloader "
--RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-base"
--RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-encode"
--RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-encode-cjkconstants"
--RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-strict "
--RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-warnings "
-+RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-base"
-+RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-encode"
-+RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-encode-cjkconstants"
-+RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-strict "
-+RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-warnings "
- RDEPENDS_perl-module-encode-kr += "perl-module-encode "
--RDEPENDS_perl-module-encode-kr += "perl-module-encode-kr-2022_kr "
-+RDEPENDS_perl-module-encode-kr += "perl-module-encode-kr-2022-kr "
- RDEPENDS_perl-module-encode-kr += "perl-module-strict "
- RDEPENDS_perl-module-encode-kr += "perl-module-warnings "
- RDEPENDS_perl-module-encode-kr += "perl-module-xsloader "
-diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
-index c0f6378..c22ecd7 100644
---- a/recipes/perl/perl_5.10.1.bb
-+++ b/recipes/perl/perl_5.10.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r6"
-+PR = "r7"
- 
- # Not tested enough
- DEFAULT_PREFERENCE = "-1"
--- 
-1.6.4.2
-
+regards
+Stefan Schmidt
 
 
