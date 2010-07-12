@@ -1,47 +1,39 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from ausc60pc101.us.dell.com ([143.166.85.206])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OYP0w-0004Po-53
+	(envelope-from <Sean_Hudson@Dell.com>) id 1OYRbu-0000Fw-Gp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 21:50:13 +0200
-Received: by iwn34 with SMTP id 34so5076494iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jul 2010 12:45:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=L04/DNFFAHo1uCkWqcUFl45s8yNVVAKsDZa+z0SDfQw=;
-	b=r3TeseIO7+igOQs6Lzxd6G7GL2zUf1PTl3PxiyRXlcIgKeFXQJ9yxmBqyjtolS1bJp
-	2z90w6dZdFhzcK6Hrrb+GtFdRufip9cQu8VPyg1TRtTW/yBfFSNxIJfbrsb+oHida3jU
-	IaiWDuOWC3NglzMw6PgEjRs2bGzxkc2+p52Go=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=FqWlktoGxlMtzIekuS11rwmSeG83bHJeg5leJ3aHeaDnPtWzBz1op5i0OfcbVJuxSg
-	Ah1sfsKcgEjQLx1w2ahaRpBUSzOg1OPy8sQBUyibrLFcaYVQyNDVx/utjRWVFLnUP/uG
-	frdAW5B0MSiMUgRbQ/15Tw8pgSV9PVd92+fVs=
-Received: by 10.231.80.213 with SMTP id u21mr13281341ibk.173.1278963713283; 
-	Mon, 12 Jul 2010 12:41:53 -0700 (PDT)
+	Tue, 13 Jul 2010 00:37:08 +0200
+X-Loopcount0: from 10.166.72.158
+From: <Sean_Hudson@Dell.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Mon, 12 Jul 2010 17:31:10 -0500
+Thread-Topic: [PATCH] Correcting APACHE mirror location for APR recipes.
+Thread-Index: AcsiEe3JHQwDByVbTtuXbCTfXM2oUg==
+Message-ID: <113134CF306E8E4CACC27BE5937261B20931BF148F@AUSX7MCPS303.AMER.DELL.COM>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+x-cr-puzzleid: {B177AB65-D5D2-4843-A5CD-C9F5F5541395}
+x-cr-hashedpuzzle: A2d1 A3EW BTUQ CGob Cpc4 EBq5 ELkM EbSf FZ5C Fs05 F60k
+	GSeC GuFW HBOI IbU2 Ibgn; 1;
+	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
+	Sosha1_v1; 7; {B177AB65-D5D2-4843-A5CD-C9F5F5541395};
+	cwBlAGEAbgBfAGgAdQBkAHMAbwBuAEAAZABlAGwAbAAuAGMAbwBtAA==; Mon,
+	12 Jul 2010 22:31:10 GMT;
+	WwBQAEEAVABDAEgAXQAgAEMAbwByAHIAZQBjAHQAaQBuAGcAIABBAFAAQQBDAEgARQAgAG0AaQByAHIAbwByACAAbABvAGMAYQB0AGkAbwBuACAAZgBvAHIAIABBAFAAUgAgAHIAZQBjAGkAcABlAHMALgA=
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.231.10.196 with HTTP; Mon, 12 Jul 2010 12:41:33 -0700 (PDT)
-In-Reply-To: <201007122321.48994.roman@khimov.ru>
-References: <201007071352.09254.khimov@altell.ru>
-	<1278499134-24718-1-git-send-email-khimov@altell.ru> 
-	<AANLkTimzHYI6PCsDfbDM2v0zpj1ovyTZ8H-43tvJIluv@mail.gmail.com> 
-	<201007122321.48994.roman@khimov.ru>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 12 Jul 2010 12:41:33 -0700
-Message-ID: <AANLkTim3XEKPA83SRfFLHDOu0ltIAfDKT8hWZbARxmi4@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-OriginalArrivalTime: 12 Jul 2010 22:31:14.0059 (UTC)
+	FILETIME=[EFA5A5B0:01CB2211]
+X-SA-Exim-Connect-IP: 143.166.85.206
+X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-4.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] busybox: add suport for FEATURE_INDIVIDUAL setup
+Subject: [PATCH] Correcting APACHE mirror location for APR recipes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,58 +47,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 19:50:14 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Mon, 12 Jul 2010 22:37:09 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 12, 2010 at 12:21 PM, Roman I Khimov <roman@khimov.ru> wrote:
-> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
-12 =C9=C0=CC=D1 2010 22:34:48 =C1=D7=D4=CF=D2 Khem Raj =CE=C1=D0=C9=D3=C1=
-=CC:
->> On Wed, Jul 7, 2010 at 3:38 AM, Roman I Khimov <khimov@altell.ru> wrote:
->> > Where each applet is installed as a tiny binary linked against shared
->> > libbusybox.
->>
->> may be it should be a DISTRO_FEATURE in OE
->
-> Well, I don't think so. First, it doesn't change anything functional, onl=
-y the
-> way busybox is linked/installed/packaged and second is that it only affec=
-ts
-> one package, so if distro wants that, I think it should maintain its own
-> defconfig (at least four distros do that already
+Hi all,
 
-ok in that case, it seems ok. This makes it a distro feature.
+  We recently noticed that apr and apr-util recipes were not fetching corre=
+ctly.
+  It appears as though the APACHE_MIRROR variable in the bitbake.conf file.
 
- and IMO busybox is the
-> package you want to tune for your specific needs). Or the distro itself m=
-ay
-> choose not to use busybox at all so such FEATURE would make no sense in t=
-hat
-> case.
->
-> I view FEATUREs as a way to make distro-global configuration, ipv6 is pro=
-bably
-> one of the best examples as it potentially affects many packages.
-> FEATURE_INDIVIDUAL is completely busybox-specific.
+  Below is a trivial patch to update the variable.
 
-if a distro does not support shared libraries then this feature is a proble=
-m.
-but then if we tune it in busybox config then even that can be taken care o=
-f
-so seems fine.
+Regards,
+Sean
 
->
-> --
-> =9Ahttp://roman.khimov.ru
-> mailto: roman@khimov.ru
-> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 12a5522..71c7273 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -533,7 +533,7 @@ export palmqtdir =3D "${palmtopdir}"
+ OE_STRICT_CHECKSUMS ?=3D "1"
+=20
+ ADOBE_MIRROR =3D "http://fpdownload.macromedia.com/get/flashplayer/current=
+/"
+-APACHE_MIRROR =3D "http://www.apache.org/dist"
++APACHE_MIRROR =3D "http://archive.apache.org/dist"
+ DEBIAN_MIRROR =3D "ftp://ftp.debian.org/debian/pool"
+ E_CVS =3D "cvs://anonymous@anoncvs.enlightenment.org/var/cvs/e"=20
+ E_URI =3D "http://enlightenment.freedesktop.org/files"
+
+
+
 
 
