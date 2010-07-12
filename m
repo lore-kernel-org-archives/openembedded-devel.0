@@ -1,40 +1,28 @@
-Received: from mail-dotnet2.eads.net ([80.156.45.105])
+Received: from mailrelay3.sunrise.ch ([194.158.229.31]
+	helo=smtp-be-01.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OYDiM-0007tD-6C for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 09:46:11 +0200
-Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
-	by mail-dotnet2.eads.net with ESMTP; 12 Jul 2010 09:31:29 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Mon, 12 Jul 2010 09:41:04 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 12 Jul 2010 09:41:04 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <dv@vollmann.ch>) id 1OYGLg-0008AQ-Rj
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Jul 2010 12:34:57 +0200
+Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140])
+	by smtp-be-01.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
+	o6CATtNv021588; Mon, 12 Jul 2010 12:29:55 +0200
+Message-ID: <4C3AEED8.5080907@vollmann.ch>
+Date: Mon, 12 Jul 2010 12:30:48 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-Date: Mon, 12 Jul 2010 09:41:02 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501819E6A@deimsg40.de.net.world>
-In-Reply-To: <201007120932.46708.roman@khimov.ru>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH] busybox: add suport for FEATURE_INDIVIDUAL setup
-Thread-Index: Acshg/SyBhyzFdvJRyO/OcjBfAOSPAAEYBoQ
-References: <201007071352.09254.khimov@altell.ru><1278499134-24718-1-git-send-email-khimov@altell.ru>
-	<201007120932.46708.roman@khimov.ru>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 12 Jul 2010 07:41:04.0160 (UTC)
-	FILETIME=[94DDD200:01CB2195]
-X-SA-Exim-Connect-IP: 80.156.45.105
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 194.158.229.31
+X-SA-Exim-Mail-From: dv@vollmann.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] busybox: add suport for FEATURE_INDIVIDUAL setup
+Subject: Patches from VCS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +36,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 07:46:11 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="GB2312"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 12 Jul 2010 10:34:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-For me the patch works.=20
+patch.bbclass contains this line (62):
+url = bb.encodeurl((type, host, path, user, pswd, []))
 
-Wolfgang Hauser
+This line removes the parms from url bevore giving
+it to the fetcher to compute the localpath.
 
------Urspr=A8=B9ngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
-von Roman I Khimov
-Gesendet: Montag, 12. Juli 2010 07:33
-An: openembedded-devel@lists.openembedded.org
-Betreff: Re: [oe] [PATCH] busybox: add suport for FEATURE_INDIVIDUAL =
-setup
+This effectivly disallows getting the patch from a version
+control system (given that supports fetching single files).
 
-=A7=A3 =A7=E3=A7=E0=A7=E0=A7=D2=A7=EB=A7=D6=A7=DF=A7=DA=A7=DA =
-=A7=E0=A7=E4 =A7=B3=A7=E2=A7=D6=A7=D5=A7=D1 07 =A7=DA=A7=F0=A7=DD=A7=F1 =
-2010 14:38:54 =A7=D1=A7=D3=A7=E4=A7=E0=A7=E2 Roman I Khimov =
-=A7=DF=A7=D1=A7=E1=A7=DA=A7=E3=A7=D1=A7=DD:
-> Where each applet is installed as a tiny binary linked against shared
-> libbusybox.
->=20
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
-> ---
->  recipes/busybox/busybox.inc |   74
->  ++++++++++++++++++++++++++++++++++++------- 1 files changed, 62
->  insertions(+), 12 deletions(-)
->=20
+So I'm curious about the reason for the above line.
+The fetcher has to cope with all parms anyway in do_fetch,
+so the only reason I can see is either (false) optimization
+or to explicitely forbid fetching patches from a VCS.
 
-OK for .dev?
+Has anyone a problem with removing that line?
 
---=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+   Detlef
 
 
