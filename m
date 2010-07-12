@@ -1,17 +1,18 @@
 Received: from [93.100.16.104] (helo=mate.hex)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rik@mate.hex>) id 1OYByw-0002qh-GL
+	(envelope-from <rik@mate.hex>) id 1OYByx-0002qi-0i
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 07:55:10 +0200
+	Mon, 12 Jul 2010 07:55:15 +0200
 Received: by mate.hex (Postfix, from userid 1000)
-	id 9DD1721B4C; Mon, 12 Jul 2010 09:41:00 +0400 (MSD)
+	id F3DFC21B4D; Mon, 12 Jul 2010 09:41:02 +0400 (MSD)
 From: Roman I Khimov <khimov@altell.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Jul 2010 09:40:53 +0400
-Message-Id: <1278913254-30180-1-git-send-email-khimov@altell.ru>
+Date: Mon, 12 Jul 2010 09:40:54 +0400
+Message-Id: <1278913254-30180-2-git-send-email-khimov@altell.ru>
 X-Mailer: git-send-email 1.6.4.2
-In-Reply-To: <201007111103.21110.roman@khimov.ru>
+In-Reply-To: <1278913254-30180-1-git-send-email-khimov@altell.ru>
 References: <201007111103.21110.roman@khimov.ru>
+	<1278913254-30180-1-git-send-email-khimov@altell.ru>
 X-SA-Exim-Connect-IP: 93.100.16.104
 X-SA-Exim-Mail-From: rik@mate.hex
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -20,7 +21,7 @@ X-Spam-Status: No, score=-0.1 required=5.0 tests=AWL, BAYES_00, NO_DNS_FOR_FROM,
 	RCVD_IN_PBL,RDNS_NONE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] libdbix-simple-perl: add DBIx::Simple Perl module
+Subject: [PATCH 2/2] perl 5.10.1: fix standard module rdependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -34,39 +35,99 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 05:55:11 -0000
+X-List-Received-Date: Mon, 12 Jul 2010 05:55:15 -0000
+
+Automatic dependency extraction script made some errors thus perl-modules
+wasn't installable.
+
+ * s/perl-module-encode-kr-2022_kr/perl-module-encode-kr-2022-kr/
+ * perl-module-your-module-here came from example in script, dropped it
+ * s/perl-module-cpan-exception-yaml_not_installed/perl-module-cpan-exception-yaml-not-installed/
+ * perl-module-dbd-sqlite - not part of standard perl, provided by libdbd-sqlite
+ * perl-module-dbix-simple - same as above, provided by libdbix-simple
 
 Signed-off-by: Roman I Khimov <khimov@altell.ru>
 ---
- recipes/perl/libdbix-simple-perl_1.32.bb |   19 +++++++++++++++++++
- 1 files changed, 19 insertions(+), 0 deletions(-)
- create mode 100644 recipes/perl/libdbix-simple-perl_1.32.bb
+ recipes/perl/perl-rdepends_5.10.1.inc |   23 +++++++++++------------
+ recipes/perl/perl_5.10.1.bb           |    2 +-
+ 2 files changed, 12 insertions(+), 13 deletions(-)
 
-diff --git a/recipes/perl/libdbix-simple-perl_1.32.bb b/recipes/perl/libdbix-simple-perl_1.32.bb
-new file mode 100644
-index 0000000..0fa1b5f
---- /dev/null
-+++ b/recipes/perl/libdbix-simple-perl_1.32.bb
-@@ -0,0 +1,19 @@
-+DESCRIPTION = "Easy-to-use OO interface to DBI"
-+SECTION = "libs"
-+LICENSE = "Artistic|GPL"
-+DEPENDS_${PN} += "libdbi-perl-native"
-+RDEPENDS_${PN} += "libdbi-perl \
-+         perl-module-file-spec \
-+         perl-module-scalar-util \
-+         perl-module-test-simple \
-+         perl-module-storable \
-+"
-+PR = "r0"
-+
-+SRC_URI = "http://search.cpan.org/CPAN/authors/id/J/JU/JUERD/DBIx-Simple-${PV}.tar.gz"
-+SRC_URI[md5sum] = "c1d7bf0ab453e7e00715d9d4e71102d8"
-+SRC_URI[sha256sum] = "226917bffbe3ad0e88295046ed4d25785bc6175e696fb77f8302226bc947fe36"
-+
-+S = "${WORKDIR}/DBIx-Simple-${PV}"
-+
-+inherit cpan
+diff --git a/recipes/perl/perl-rdepends_5.10.1.inc b/recipes/perl/perl-rdepends_5.10.1.inc
+index d948417..62e7eed 100644
+--- a/recipes/perl/perl-rdepends_5.10.1.inc
++++ b/recipes/perl/perl-rdepends_5.10.1.inc
+@@ -216,7 +216,7 @@ RDEPENDS_perl-module-cpan += "perl-module-cpan-deferredcode "
+ RDEPENDS_perl-module-cpan += "perl-module-cpan-distribution "
+ RDEPENDS_perl-module-cpan += "perl-module-cpan-distrostatus "
+ RDEPENDS_perl-module-cpan += "perl-module-cpan-exception-recursivedependency "
+-RDEPENDS_perl-module-cpan += "perl-module-cpan-exception-yaml_not_installed "
++RDEPENDS_perl-module-cpan += "perl-module-cpan-exception-yaml-not-installed "
+ RDEPENDS_perl-module-cpan += "perl-module-cpan-ftp "
+ RDEPENDS_perl-module-cpan += "perl-module-cpan-handleconfig "
+ RDEPENDS_perl-module-cpan += "perl-module-cpan-infoobj "
+@@ -250,8 +250,8 @@ RDEPENDS_perl-module-cpan-exception-blocked_urllist += "perl-module-overload"
+ RDEPENDS_perl-module-cpan-exception-blocked_urllist += "perl-module-strict "
+ RDEPENDS_perl-module-cpan-exception-recursivedependency += "perl-module-overload"
+ RDEPENDS_perl-module-cpan-exception-recursivedependency += "perl-module-strict "
+-RDEPENDS_perl-module-cpan-exception-yaml_not_installed += "perl-module-overload"
+-RDEPENDS_perl-module-cpan-exception-yaml_not_installed += "perl-module-strict "
++RDEPENDS_perl-module-cpan-exception-yaml-not-installed += "perl-module-overload"
++RDEPENDS_perl-module-cpan-exception-yaml-not-installed += "perl-module-strict "
+ RDEPENDS_perl-module-cpan += "perl-module-exporter"
+ RDEPENDS_perl-module-cpan += "perl-module-fcntl"
+ RDEPENDS_perl-module-cpan += "perl-module-file-basename"
+@@ -428,7 +428,6 @@ RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-package
+ RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-strict "
+ RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-test "
+ RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-vars"
+-RDEPENDS_perl-module-cpanplus-internals-constants-report += "perl-module-your-module-here "
+ RDEPENDS_perl-module-cpanplus-internals-constants += "perl-module-strict "
+ RDEPENDS_perl-module-cpanplus-internals-constants += "perl-module-vars"
+ RDEPENDS_perl-module-cpanplus-internals += "perl-module-cpanplus-error "
+@@ -517,8 +516,8 @@ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-cpanplus-e
+ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-cpanplus-internals-constants "
+ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-cpanplus-internals-source-sqlite-tie "
+ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-data-dumper "
+-RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-dbd-sqlite "
+-RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-dbix-simple "
++RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "libdbd-sqlite "
++RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "libdbix-simple "
+ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-locale-maketext-simple"
+ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-params-check"
+ RDEPENDS_perl-module-cpanplus-internals-source-sqlite += "perl-module-strict "
+@@ -786,13 +785,13 @@ RDEPENDS_perl-module-encode-jp-jis7 += "perl-module-warnings "
+ RDEPENDS_perl-module-encode-jp += "perl-module-strict "
+ RDEPENDS_perl-module-encode-jp += "perl-module-warnings "
+ RDEPENDS_perl-module-encode-jp += "perl-module-xsloader "
+-RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-base"
+-RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-encode"
+-RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-encode-cjkconstants"
+-RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-strict "
+-RDEPENDS_perl-module-encode-kr-2022_kr += "perl-module-warnings "
++RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-base"
++RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-encode"
++RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-encode-cjkconstants"
++RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-strict "
++RDEPENDS_perl-module-encode-kr-2022-kr += "perl-module-warnings "
+ RDEPENDS_perl-module-encode-kr += "perl-module-encode "
+-RDEPENDS_perl-module-encode-kr += "perl-module-encode-kr-2022_kr "
++RDEPENDS_perl-module-encode-kr += "perl-module-encode-kr-2022-kr "
+ RDEPENDS_perl-module-encode-kr += "perl-module-strict "
+ RDEPENDS_perl-module-encode-kr += "perl-module-warnings "
+ RDEPENDS_perl-module-encode-kr += "perl-module-xsloader "
+diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
+index c0f6378..c22ecd7 100644
+--- a/recipes/perl/perl_5.10.1.bb
++++ b/recipes/perl/perl_5.10.1.bb
+@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
+ PRIORITY = "optional"
+ # We need gnugrep (for -I)
+ DEPENDS = "virtual/db perl-native grep-native"
+-PR = "r6"
++PR = "r7"
+ 
+ # Not tested enough
+ DEFAULT_PREFERENCE = "-1"
 -- 
 1.6.4.2
 
