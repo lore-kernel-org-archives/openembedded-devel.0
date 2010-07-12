@@ -1,32 +1,44 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OYOeM-0001pT-Fw
+	(envelope-from <aalonso00@gmail.com>) id 1OYP0O-0004NL-1I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 21:26:48 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OYOZZ-0001bp-TN
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 23:21:51 +0400
-From: Roman I Khimov <roman@khimov.ru>
+	Mon, 12 Jul 2010 21:49:33 +0200
+Received: by pzk2 with SMTP id 2so1332662pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jul 2010 12:44:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=dUk/IP2KQljcbczfzSh9qf0JKVfIYmbSN+neGEEFJ4s=;
+	b=ESpIbQQ0rhsY2PrTwJTrYFVbrtF74BcAoI9xqSZeeggs1iVbMzqmLtgkSSU8pXjpZd
+	A5dbOnTUiZyUcWiZ8OhQ1a51fDCbkE/uQYxjHcwuTddLfZzQ8V6HsAUQsA/XZIe6gWYO
+	YNaqCSTsOQqOGSz8lP4sIPyMHRX1L8LA4/kns=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=epTvstcvqV+nzJ3WEAjz0AQ5sC08Z21oMPzbVzL/3jtTqKrpN29sPdiflAv8B5AnLN
+	TDPVtQ9U9hMJijSwxy+A8YbYk9sscRfApfYd4IVseesdWmZg8eILoZLLJqryqXAMxgyC
+	GRQnEMReHKx8c1FLwCASZZEytApJJajqc7uus=
+Received: by 10.142.158.13 with SMTP id g13mr16399592wfe.235.1278963874466;
+	Mon, 12 Jul 2010 12:44:34 -0700 (PDT)
+Received: from aalonso-pc.lan ([201.153.224.36])
+	by mx.google.com with ESMTPS id 23sm5192380wfa.22.2010.07.12.12.44.31
+	(version=SSLv3 cipher=RC4-MD5); Mon, 12 Jul 2010 12:44:33 -0700 (PDT)
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 12 Jul 2010 23:21:46 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <201007071352.09254.khimov@altell.ru>
-	<1278499134-24718-1-git-send-email-khimov@altell.ru>
-	<AANLkTimzHYI6PCsDfbDM2v0zpj1ovyTZ8H-43tvJIluv@mail.gmail.com>
-In-Reply-To: <AANLkTimzHYI6PCsDfbDM2v0zpj1ovyTZ8H-43tvJIluv@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201007122321.48994.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Date: Mon, 12 Jul 2010 14:45:43 -0500
+Message-Id: <1278963950-2587-2-git-send-email-aalonso00@gmail.com>
+X-Mailer: git-send-email 1.7.1.1
+In-Reply-To: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
+References: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] busybox: add suport for FEATURE_INDIVIDUAL setup
+Subject: [PATCH 2/9] xilinx-virtex5: new file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,59 +52,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 19:26:48 -0000
-X-Groupsio-MsgNum: 20906
-Content-Type: multipart/signed; boundary="nextPart2642866.UAs6OJgJgx";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 12 Jul 2010 19:49:33 -0000
 
---nextPart2642866.UAs6OJgJgx
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+* Config machine for virtex5 platforms ml505, ml507, ml510
+* Hardware reference design at
+  http://github.com/aalonso/xilinx-ml507
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 12 =D0=
-=B8=D1=8E=D0=BB=D1=8F 2010 22:34:48 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj=
- =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On Wed, Jul 7, 2010 at 3:38 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> > Where each applet is installed as a tiny binary linked against shared
-> > libbusybox.
->=20
-> may be it should be a DISTRO_FEATURE in OE
+Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+---
+ conf/machine/xilinx-virtex5.conf |   37 +++++++++++++++++++++++++++++++++++++
+ 1 files changed, 37 insertions(+), 0 deletions(-)
+ create mode 100644 conf/machine/xilinx-virtex5.conf
 
-Well, I don't think so. First, it doesn't change anything functional, only =
-the=20
-way busybox is linked/installed/packaged and second is that it only affects=
-=20
-one package, so if distro wants that, I think it should maintain its own=20
-defconfig (at least four distros do that already and IMO busybox is the=20
-package you want to tune for your specific needs). Or the distro itself may=
-=20
-choose not to use busybox at all so such FEATURE would make no sense in tha=
-t=20
-case.
+diff --git a/conf/machine/xilinx-virtex5.conf b/conf/machine/xilinx-virtex5.conf
+new file mode 100644
+index 0000000..3272f2c
+--- /dev/null
++++ b/conf/machine/xilinx-virtex5.conf
+@@ -0,0 +1,37 @@
++# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
++# Released under the MIT license (see packages/COPYING)
++#@TYPE: Machine
++#@Name: Xilinx ML507 FPGA Development Platform
++#@DESCRIPTION: Machine configuration for Xilinx ML507
++
++TARGET_ARCH ?= "powerpc"
++TARGET_CPU  ?= "440"
++TARGET_FPU  ?= "soft"
++TARGET_TUNE ?= "ppc440"
++#tune for the 440 cpu
++require conf/machine/include/tune-${TARGET_TUNE}.inc
++
++#ASSUME_PROVIDED += "virtual/kernel"
++PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx"
++PREFERRED_VERSION_u-boot_xilinx-virtex5 = "u-boot-xilinx"
++
++KERNEL_IMAGETYPE = "uImage"
++
++MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet screen"
++MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
++
++UBOOT_ENTRYPOINT ?= "0x00000000"
++UBOOT_LOADADDRESS ?= "0x00000000"
++
++# Xilinx EDK override hardware  definitions for xilinx-bsp
++# Include in your local.conf
++# XILINX_BSP_PATH = "complete path for Xilinx XPS project"
++# XILINX_BOARD = "ml507"
++
++# Don't use tty1
++# USE_VT = "0"
++SERIAL_CONSOLE = "9600 ttyS0"
++
++# Device nodes add xsa for (system ace)
++IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
++                       files/device_table_add-xsa.txt"
+-- 
+1.7.1.1
 
-I view FEATUREs as a way to make distro-global configuration, ipv6 is proba=
-bly=20
-one of the best examples as it potentially affects many packages.=20
-=46EATURE_INDIVIDUAL is completely busybox-specific.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart2642866.UAs6OJgJgx
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkw7a0wACgkQXJ70z+XgVcMtcgCg3ThebMXFZtXeWCT1E0TVBQbs
-yrUAoONWjUQHFgky3ksXRWbht8kiANtV
-=Rp35
------END PGP SIGNATURE-----
-
---nextPart2642866.UAs6OJgJgx--
