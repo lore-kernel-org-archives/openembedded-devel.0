@@ -1,28 +1,41 @@
-Received: from mailrelay3.sunrise.ch ([194.158.229.31]
-	helo=smtp-be-01.be08.sunrise.ch)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dv@vollmann.ch>) id 1OYGLg-0008AQ-Rj
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OYKX2-000391-Un
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 12:34:57 +0200
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-01.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	o6CATtNv021588; Mon, 12 Jul 2010 12:29:55 +0200
-Message-ID: <4C3AEED8.5080907@vollmann.ch>
-Date: Mon, 12 Jul 2010 12:30:48 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Mon, 12 Jul 2010 17:03:02 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6CEw0jX029151
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jul 2010 15:58:00 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 28842-05 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jul 2010 15:57:56 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6CEvq33029145
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jul 2010 15:57:53 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 194.158.229.31
-X-SA-Exim-Mail-From: dv@vollmann.ch
+In-Reply-To: <4C3AA282.3030006@gmail.com>
+References: <AANLkTinadOzl08k8hENqZJf9fMzcHHCnpUP1DfmatDj7@mail.gmail.com>
+	<4C3AA282.3030006@gmail.com>
+Date: Mon, 12 Jul 2010 15:57:48 +0100
+Message-ID: <1278946668.28835.769.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Patches from VCS
+Subject: Re: canadian-cross sdk?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,26 +49,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 10:34:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 12 Jul 2010 15:03:02 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-patch.bbclass contains this line (62):
-url = bb.encodeurl((type, host, path, user, pswd, []))
+On Mon, 2010-07-12 at 11:05 +0600, Dmitry Vinokurov wrote:
+> This question is important for me to. I'm running OE on linux-x86_64 
+> machine and want to build ARM toolchain for linux-x86 machine. I've 
+> asked about it on #irc and CruX| gave me config for building mingw32 
+> toolchain, it's in attachment and maybe it'll be helpful for you. 
+> Unfortunately, I couldn't adapt this config for my task, OE tries to 
+> build mingw all the same.
+> 
+> It would be great if someone explain how to build canadian cross SDK. I 
+> haven't found nothing helpful about it neither in documentation nor in 
+> ML archives but it is very important question I think.
 
-This line removes the parms from url bevore giving
-it to the fetcher to compute the localpath.
+The canadian toolchain bits in OE are still in need to some attention to
+fully enable the case where the build machine is not the same as the
+machine you want to run the SDK on.
 
-This effectivly disallows getting the patch from a version
-control system (given that supports fetching single files).
+In Poky this works already, you'd set SDKMACHINE=i586 and then
+"MACHINE=qemuarm bitbake meta-toolchain".
 
-So I'm curious about the reason for the above line.
-The fetcher has to cope with all parms anyway in do_fetch,
-so the only reason I can see is either (false) optimization
-or to explicitely forbid fetching patches from a VCS.
+Cheers,
 
-Has anyone a problem with removing that line?
+Richard
 
-   Detlef
+
 
 
