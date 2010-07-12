@@ -1,40 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OY6VD-0000K8-L8
-	for Openembedded-devel@lists.openembedded.org;
-	Mon, 12 Jul 2010 02:04:08 +0200
-Received: by iwn34 with SMTP id 34so4151874iwn.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Sun, 11 Jul 2010 16:59:13 -0700 (PDT)
+	(envelope-from <df6.626@gmail.com>) id 1OYBHX-0001qm-4Y
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 12 Jul 2010 07:10:33 +0200
+Received: by eyf5 with SMTP id 5so531210eyf.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 11 Jul 2010 22:05:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=blOYWnve0jtks1v7aodGXpFhu1TD9t35dNegb+WtI5g=;
-	b=vUOtc8cS+5YjjYoHfrBb6B0qqMuwOLYaryOsFO+/RH0ehsLm/hhKDdlzUL51/A/nNJ
-	rPcgFLDA1qARHNayLXW5qgCSG7lme28Xc8sTe11mcVvqLAA2+10v7E0JPkOuMMXp7KCK
-	CZkbdvJK6veeulPz1VjTzPDmFSNdTTiVLz6fU=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type; bh=gV07GOY7K80U5hISVNdehdfy9gTXh4wFLOiDxEveblw=;
+	b=FteIfjLivgKT6mrjTtDyaoRKO3Gw8+dQu/UpYMv1PTdNJ1nxqES4WnpeuO4hS8F2sT
+	Icgc+oGlcp2+APHBfmAKZrJGjB4c8SxsCfdncCpa2BLJCa3+m7Sm7CQXVCjvDFGn40S1
+	8eQcUqK+ljagCFGhxaeevTC0FxVTbWINFLKdM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=O7Ns8GtQQC8dC/OP2etamGWMqJK5eok97EC+9/y1o1ZUCD5l7A3Z3ki+VboOf0fVye
-	aNQDDhctK533ze100Lw5amH57LbzI/Mzvjpqv41AGXGqHKO1eQqqX++jva47xjYmuhYy
-	lOFHRnh1UtY2N43pRx2YR5RuW/+QZGANmNdu0=
-Received: by 10.231.17.137 with SMTP id s9mr13262428iba.163.1278892753254; 
-	Sun, 11 Jul 2010 16:59:13 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type;
+	b=Ixm3PHtHaenhShtkJAbtfxirDKi38zCYYYdsfga97q4N075pbwMbJ4QlYTuOZiL7C4
+	LSBywnHpYMBIu7f/btvKjujCgVbMtphR22c0d9qZSDjqywTfZ+BaFtU5vHKPeVtriDX1
+	q0lhIE8vkz9sF9J0khJELO4Ud6b1blYsymglI=
+Received: by 10.213.19.6 with SMTP id y6mr1006452eba.64.1278911111096;
+	Sun, 11 Jul 2010 22:05:11 -0700 (PDT)
+Received: from [192.168.1.142] ([92.255.147.179])
+	by mx.google.com with ESMTPS id x54sm33665675eeh.11.2010.07.11.22.05.08
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 11 Jul 2010 22:05:09 -0700 (PDT)
+Message-ID: <4C3AA282.3030006@gmail.com>
+Date: Mon, 12 Jul 2010 11:05:06 +0600
+From: Dmitry Vinokurov <df6.626@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.10) Gecko/20100528 Thunderbird/3.0.5
 MIME-Version: 1.0
-Received: by 10.231.17.132 with HTTP; Sun, 11 Jul 2010 16:58:53 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 11 Jul 2010 16:58:53 -0700
-Message-ID: <AANLkTilikvT3uoNJKYYT0iBF_Tp_XAsWswSvppB_mkEK@mail.gmail.com>
-To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTinadOzl08k8hENqZJf9fMzcHHCnpUP1DfmatDj7@mail.gmail.com>
+In-Reply-To: <AANLkTinadOzl08k8hENqZJf9fMzcHHCnpUP1DfmatDj7@mail.gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: df6.626@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,RCVD_IN_SORBS_WEB,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: qemu-native with kvm acceleration
+Subject: Re: canadian-cross sdk?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +56,190 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 00:04:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 12 Jul 2010 05:10:33 -0000
+X-Groupsio-MsgNum: 20887
+Content-Type: multipart/mixed; boundary="------------060609080606070303060506"
 
-Hi
+--------------060609080606070303060506
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-My build box has kvm support
+This question is important for me to. I'm running OE on linux-x86_64 
+machine and want to build ARM toolchain for linux-x86 machine. I've 
+asked about it on #irc and CruX| gave me config for building mingw32 
+toolchain, it's in attachment and maybe it'll be helpful for you. 
+Unfortunately, I couldn't adapt this config for my task, OE tries to 
+build mingw all the same.
 
-$ kvm-ok
-INFO: Your CPU supports KVM extensions
-INFO: /dev/kvm exists
-KVM acceleration can be used
+It would be great if someone explain how to build canadian cross SDK. I 
+haven't found nothing helpful about it neither in documentation nor in 
+ML archives but it is very important question I think.
+
+On 06.07.2010 09:29 Angus Lees wrote:
+> I have an SDK built for my OS using dev-OE - and it works well.  I'd like to
+> build an SDK for another host OS (in particular cygwin if that is possible),
+> but I'm lost in a twisty maze of canadian-sdk classes that all seem to be
+> deprecated and/or unused.
+>
+> Which of the canadian-cross options is the recommended approach atm?  How do
+> I use it?
+>
+>   - Gus
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>    
 
 
-but qemu that is cooked by qemu-native recipe still does not use it
-if I use the default qemu that comes with build machine's distro everything
-is blazing fast for qemux86 but not so with qemu-native provided qemu
-and if I pass -enable-kvm forcibly
-qemu dies.
+--------------060609080606070303060506
+Content-Type: text/plain;
+ name="canadianconfexample.txt"
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment;
+ filename="canadianconfexample.txt"
 
-if I look into configure of qemu-native then it has detected KVM
+Iw0KIyBPcGVuRW1iZWRkZWQgbG9jYWwgY29uZmlndXJhdGlvbiBmaWxlIChzYW1wbGUpDQojDQoj
+IFBsZWFzZSB2aXNpdCB0aGUgV2lraSBhdCBodHRwOi8vb3BlbmVtYmVkZGVkLm9yZy8gZm9yIG1v
+cmUgaW5mby4NCiMNCiMNCiMgQmUgU1VSRSB0byByZWFkIHRoaXMgZmlsZSBpbiBpdHMgZW50aXJl
+dHkgYW5kIHRoZSBHZXR0aW5nU3RhcnRlZCBwYWdlIG9uIHRoZQ0KIyB3aWtpIGJlZm9yZSBwcm9j
+ZWVkaW5nLg0KIw0KIyBPbmNlIHlvdSBoYXZlIGRvbmUgdGhhdCwgcmVtb3ZlIHRoZSBsaW5lIGF0
+IHRoZSBlbmQgb2YgdGhpcw0KIyBmaWxlIGFuZCBidWlsZCBhd2F5Lg0KIyANCiMgV0FSTklORzog
+bGluZXMgc3RhcnRpbmcgd2l0aCBhIHNwYWNlICgnICcpIHdpbGwgcmVzdWx0IGluIHBhcnNlIGZh
+aWx1cmVzLg0KIyBSZW1vdmUgJyMgJyBmcm9tIGNvbW1lbnRlZCBsaW5lcyB0byBhY3RpdmF0ZSB0
+aGVtLg0KIw0KIyBOT1RFOiBEbyBOT1QgdXNlICRIT01FIGluIHlvdXIgcGF0aHMsIEJpdEJha2Ug
+ZG9lcyBOT1QgZXhwYW5kIH4gZm9yIHlvdS4gIElmIHlvdQ0KIyBtdXN0IGhhdmUgcGF0aHMgcmVs
+YXRpdmUgdG8geW91ciBob21lZGlyIHVzZSAke0hPTUV9IChub3RlIHRoZSB7fSdzIHRoZXJlDQoj
+IHlvdSBNVVNUIGhhdmUgdGhlbSBmb3IgdGhlIHZhcmlhYmxlIGV4cGFuc2lvbiB0byBiZSBkb25l
+IGJ5IEJpdEJha2UpLiAgWW91cg0KIyBwYXRocyBzaG91bGQgYWxsIGJlIGFic29sdXRlIHBhdGhz
+IChUaGV5IHNob3VsZCBhbGwgc3RhcnQgd2l0aCBhIC8gYWZ0ZXINCiMgZXhwYW5zaW9uLiAgU3R1
+ZmYgbGlrZSBzdGFydGluZyB3aXRoICR7SE9NRX0gb3IgJHtUT1BESVJ9IGlzIG9rKS4NCg0KIyBV
+c2UgdGhpcyB0byBzcGVjaWZ5IHdoZXJlIEJpdEJha2Ugc2hvdWxkIHBsYWNlIHRoZSBkb3dubG9h
+ZGVkIHNvdXJjZXMgaW50bw0KRExfRElSID0gIi9zdHVmZi9zb3VyY2VzIg0KDQojIFVuY29tbWVu
+dCB0aGlzIGlmIHlvdSB3YW50IHRvIHVzZSBhIHByZWJ1aWx0IHRvb2xjaGFpbi4gWW91IHdpbGwg
+bmVlZCB0bw0KIyBwcm92aWRlIHBhY2thZ2VzIGZvciB0b29sY2hhaW4gYW5kIGFkZGl0aW9uYWwg
+bGlicmFyaWVzIHlvdXJzZWxmLiBZb3UgYWxzbw0KIyBoYXZlIHRvIHNldCBQQVRIIGluIHlvdXIg
+ZW52aXJvbm1lbnQgdG8gbWFrZSBzdXJlIEJpdEJha2UgZmluZHMgYWRkaXRpb25hbCBiaW5hcmll
+cy4NCiMgQVNTVU1FX1BST1ZJREVEICs9ICJ2aXJ0dWFsLyR7VEFSR0VUX1BSRUZJWH1nY2Mgdmly
+dHVhbC9saWJjIg0KDQojIFVuY29tbWVudCB0aGlzIGlmIHlvdSdyZSBidWlsZGluZyBmb3IgYW4g
+YXJjaCB0aGF0IHVzZXMgZW11bGF0ZWQgbG9jYWxlIA0KIyBnZW5lcmF0aW9uIHVuZGVyIHFlbXUg
+KG1haW5seSBhcm0gZ2xpYmMpIGFuZCBoYXZlIGFuIGV4dGVybmFsIGdjYyAzLnggY29tcGlsZXIN
+CiMgdGhhdCBPRSByZWNvZ25pc2VzLiBUaGlzIHdpbGwgbWVhbiB0aGUgZ2NjLW5hdGl2ZSBidWls
+ZCBpcyBza2lwcGVkLCBzcGVlZGluZyANCiMgYnVpbGRzIHVwLg0KIyBBU1NVTUVfUFJPVklERUQg
+Kz0gImdjYzMtbmF0aXZlIg0KDQojIFVuY29tbWVudCB0aGlzIGlmIHlvdSBhcmUgYnVpbGRpbmcg
+TGludXggMi40IEVtYmVkaXgga2VybmVscy4NCiMgaS5lLiBvcGVuemF1cnVzLXNhLTIuNC4xOCBh
+bmQgb3BlbnphdXJ1cy1weGEtMi40LjE4IC0gYW5kIGRvbid0IGZvcmdldA0KIyB0byByZW5hbWUg
+dGhlIGJpbmFyaWVzIGFzIGluc3RydWN0ZWQgaW4gdGhlIFdpa2kuDQojIE1vc3QgdXNlcnMgZG8g
+bm90IG5lZWQgdGhpcyBhbnltb3JlIHRoYW5rZnVsbHkhDQojIEFTU1VNRV9QUk9WSURFRCArPSAi
+dmlydHVhbC9hcm0tbGludXgtZ2NjLTIuOTUiDQoNCiMgU2VsZWN0IGJldHdlZW4gbXVsdGlwbGUg
+YWx0ZXJuYXRpdmUgcHJvdmlkZXJzLCBpZiBtb3JlIHRoYW4gb25lIGlzIGVsaWdpYmxlLg0KUFJF
+RkVSUkVEX1BST1ZJREVSUyA9ICJ2aXJ0dWFsL3F0ZTpxdGUgdmlydHVhbC9saWJxcGU6bGlicXBl
+LW9waWUiDQpQUkVGRVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC9saWJzZGw6bGlic2RsLXgx
+MSINClBSRUZFUlJFRF9QUk9WSURFUlMgKz0gIiB2aXJ0dWFsLyR7VEFSR0VUX1BSRUZJWH1nY2Mt
+aW5pdGlhbDpnY2MtY3Jvc3MtaW5pdGlhbCINClBSRUZFUlJFRF9QUk9WSURFUlMgKz0gIiB2aXJ0
+dWFsLyR7VEFSR0VUX1BSRUZJWH1nY2MtaW50ZXJtZWRpYXRlOmdjYy1jcm9zcy1pbnRlcm1lZGlh
+dGUiDQpQUkVGRVJSRURfUFJPVklERVJTICs9ICIgdmlydHVhbC8ke1RBUkdFVF9QUkVGSVh9Z2Nj
+OmdjYy1jcm9zcyINClBSRUZFUlJFRF9QUk9WSURFUlMgKz0gIiB2aXJ0dWFsLyR7VEFSR0VUX1BS
+RUZJWH1nKys6Z2NjLWNyb3NzIg0KDQojIFVuY29tbWVudCB0aGlzIHRvIHNwZWNpZnkgd2hlcmUg
+Qml0QmFrZSBzaG91bGQgY3JlYXRlIGl0cyB0ZW1wb3JhcnkgZmlsZXMuDQojIE5vdGUgdGhhdCBh
+IGZ1bGwgYnVpbGQgb2YgZXZlcnl0aGluZyBpbiBPcGVuRW1iZWRkZWQgd2lsbCB0YWtlIEdpZ2FC
+eXRlcyBvZiBoYXJkDQojIGRpc2sgc3BhY2UsIHNvIG1ha2Ugc3VyZSB0byBmcmVlIGVub3VnaCBz
+cGFjZS4gVGhlIGRlZmF1bHQgVE1QRElSIGlzDQojIDxidWlsZCBkaXJlY3Rvcnk+L3RtcA0KIyBE
+b24ndCB1c2Ugc3ltbGlua3MgaW4gaW4gdGhlIHBhdGggdG8gYXZvaWQgcHJvYmxlbXMNClRNUERJ
+UiA9ICIvc3R1ZmYvdG1wLW9lIg0KDQojIFVzZSB0aGlzIHRvIHNwZWNpZnkgdGhlIHRhcmdldCBh
+cmNoaXRlY3R1cmUuIE5vdGUgdGhhdCB0aGlzIGlzIG9ubHkNCiMgbmVlZGVkIHdoZW4gYnVpbGRp
+bmcgZm9yIGEgbWFjaGluZSBub3Qga25vd24gdG8gT3BlbkVtYmVkZGVkLiBCZXR0ZXIgdXNlDQoj
+IHRoZSBNQUNISU5FIGF0dHJpYnV0ZSAoc2VlIGFib3ZlKQ0KIyBUQVJHRVRfQVJDSCA9ICJhcm0i
+DQoNCiMgVXNlIHRoaXMgdG8gc3BlY2lmeSB0aGUgdGFyZ2V0IG9wZXJhdGluZyBzeXN0ZW0uICBU
+aGUgZGVmYXVsdCBpcyAibGludXgiLA0KIyBmb3IgYSBub3JtYWwgbGludXggc3lzdGVtIHdpdGgg
+Z2xpYmMuIFNldCB0aGlzIHRvICJsaW51eC11Y2xpYmMiIGlmIHlvdSB3YW50DQojIHRvIGJ1aWxk
+IGEgdWNsaWJjIGJhc2VkIHN5c3RlbS4NCiMgTm9ybWFsbHkgdGhlIERJU1RSTyBvZiB5b3VyIGNo
+b29zaW5nIHdpbGwgdGFrZSBjYXJlIG9mIHRoaXMgDQojIFRBUkdFVF9PUyA9ICJsaW51eCINCiMg
+VEFSR0VUX09TID0gImxpbnV4LXVjbGliYyINCg0KIyBVbmNvbW1lbnQgdGhpcyB0byBzZWxlY3Qg
+YSBkaXN0cmlidXRpb24gcG9saWN5LiBTZWUgdGhlIGNvbmYgZGlyZWN0b3J5DQojIGZvciBkaXN0
+cmlidXRpb25zIGN1cnJlbnRseSBrbm93biB0byBPcGVuRW1iZWRkZWQuDQojIEFsdGhvdWdoIGl0
+IG5vIGxvbmdlciBjb250YWluIHZlcnNpb24gbnVtYmVyIGluIHRoZSAoZmlsZS0pbmFtZQ0KIyBv
+cGVuemF1cnVzLXVuc3RhYmxlIGlzIGEgc28gY2FsbGVkICJ2ZXJzaW9uZWQiICBkaXN0cm8sIGku
+ZS4gdGhleSANCiMgZXhwbGljaXRlbHkgc2VsZWN0IHNwZWNpZmljIHZlcnNpb25zIG9mIHZhcmlv
+dXMgcGFja2FnZXMuDQojIFN0YXkgYXdheSBmcm9tIHVudmVyc2lvbmVkIGRpc3Ryb3MgdW5sZXNz
+IHlvdSByZWFsbHkga25vdyB3aGF0IHlvdSBhcmUgZG9pbmcNCiMgRElTVFJPID0gImFuZ3N0cm9t
+LTIwMDguMSINCg0KIyBTbyBmYXIsIGFuZ3N0cm9tLmNvbmYgc2V0cyBFTkFCTEVfQklOQVJZX0xP
+Q0FMRV9HRU5FUkFUSU9ODQojIHRvIGdlbmVyYXRlIGJpbmFyeSBsb2NhbGUgcGFja2FnZXMgYXQg
+YnVpbGQgdGltZSB1c2luZyBxZW11LW5hdGl2ZSBhbmQNCiMgdGhlcmVieSBndWFyYW50ZWUgaTE4
+biBzdXBwb3J0IG9uIGFsbCBkZXZpY2VzLiBJZiB5b3VyIGJ1aWxkIGJyZWFrcyBvbiANCiMgcWVt
+dS1uYXRpdmUgY29uc2lkZXIgZGlzYWJsaW5nIEVOQUJMRV9CSU5BUllfTE9DQUxFX0dFTkVSQVRJ
+T04gKG5vdGUgdGhhdA0KIyB0aGlzIGJyZWFrcyBpMThuIG9uIGRldmljZXMgd2l0aCBsZXNzIHRo
+YW4gMTI4TUIgUkFNKSBvciBpbnN0YWxsaW5nDQojIGEgd29ya2luZyB0aGlyZC1wYXJ0eSBxZW11
+IChlLmcuIHByb3ZpZGVkIGJ5IHlvdXIgZGlzdHJpYnV0aW9uKSBhbmQNCiMgYWRkaW5nIHFlbXUt
+bmF0aXZlIHRvIEFTU1VNRV9QUk9WSURFRC4gQ2F2ZWF0IGVtcHRvciwgc2luY2UgdGhpcmQtcGFy
+dHkNCiMgcWVtdXMgbGFjayBwYXRjaGVzIG5lZWRlZCB0byB3b3JrIHdpdGggdmFyaW91cyBPRSB0
+YXJnZXRzLg0KIyBFTkFCTEVfQklOQVJZX0xPQ0FMRV9HRU5FUkFUSU9OID0gIjAiDQojIEFTU1VN
+RV9QUk9WSURFRCArPSAicWVtdS1uYXRpdmUiDQoNCiMgSWYgRU5BQkxFX0JJTkFSWV9MT0NBTEVf
+R0VORVJBVElPTiBpcyBzZXQgdG8gIjEiLCB5b3UgY2FuIGxpbWl0IGxvY2FsZXMNCiMgZ2VuZXJh
+dGVkIHRvIHRoZSBsaXN0IHByb3ZpZGVkIGJ5IEdMSUJDX0dFTkVSQVRFX0xPQ0FMRVMuIFRoaXMg
+aXMgaHVnZQ0KIyB0aW1lLXNhdmlvciBmb3IgZGV2ZWxvcG1lbnRhbCBidWlsZHMuIEZvcm1hdDog
+bGlzdCBvZiBsb2NhbGUuZW5jb2RpbmcgcGFpcnMNCiMgd2l0aCBzcGFjZXMgYXMgc2VwYXJhdG9y
+cy4NCkdMSUJDX0dFTkVSQVRFX0xPQ0FMRVMgPSAiZW5fR0IuVVRGLTgiDQoNCiMgVW5jb21tZW50
+IHRoaXMgdG8gc2VsZWN0IGEgcGFydGljdWxhciBtYWpvciBrZXJuZWwgdmVyc2lvbiBpZiB0aGUg
+TUFDSElORSBzZXR0aW5nDQojIHN1cHBvcnRzIG1vcmUgdGhhbiBvbmUgbWFqb3Iga2VybmVsIHZl
+cnNpb24uIEN1cnJlbnRseSB0aGlzIGlzIHN1cG9ydGVkIGJ5IHRoZQ0KIyBmb2xsb3dpbmcgTUFD
+SElORSB0eXBlczogcG9vZGxlLCB0b3NhIGFuZCBzaW1wYWQuDQojIE1BQ0hJTkVfS0VSTkVMX1ZF
+UlNJT04gPSAiMi42Ig0KDQojIFVuY29tbWVudCBvbmUgb2YgdGhlc2UgdG8gYnVpbGQgcGFja2Fn
+ZXMgZHVyaW5nIHRoZSBidWlsZCBwcm9jZXNzLg0KIyBUaGlzIGlzIGRvbmUgYXV0b21hdGljYWxs
+eSBpZiB5b3Ugc2V0IERJU1RSTyAoc2VlIGFib3ZlKQ0KIyBJTkhFUklUID0gInBhY2thZ2VfaXBr
+Ig0KIyBJTkhFUklUID0gInBhY2thZ2VfdGFyIg0KDQojIEFkZCB0aGUgcmVxdWlyZWQgaW1hZ2Ug
+ZmlsZSBzeXN0ZW0gdHlwZXMgYmVsb3cuIFZhbGlkIGFyZSANCiMgamZmczIsIHRhciguZ3p8Ynoy
+KSwgY3BpbyguZ3opLCBjcmFtZnMsIGV4dDIoLmd6KSwgZXh0MyguZ3opDQojIHNxdWFzaGZzLCBz
+cXVhc2hmcy1sem1hDQpJTUFHRV9GU1RZUEVTID0gImpmZnMyIHRhciINCg0KIyBVbmNvbW1lbnQg
+dGhpcyB0byBkaXNhYmxlIHRoZSBwYXJzZSBjYWNoZSAobm90IHJlY29tbWVuZGVkKS4NCiMgQ0FD
+SEUgPSAiIg0KDQojIFVuY29tbWVudCB0aGlzIGlmIHlvdSB3YW50IEJpdEJha2UgdG8gZW1pdCBk
+ZWJ1Z2dpbmcgb3V0cHV0DQojIEJCREVCVUcgPSAieWVzIg0KDQojIFVuY29tbWVudCB0aGVzZSB0
+d28gaWYgeW91IHdhbnQgQml0QmFrZSB0byBidWlsZCBpbWFnZXMgdXNlZnVsIGZvciBkZWJ1Z2dp
+bmcuIA0KIyBOb3RlIHRoYXQgSU5ISUJJVF9QQUNLQUdFX1NUUklQIG5lZWRzIGEgcGFja2FnZSBm
+b3JtYXQgdG8gYmUgZGVmaW5lZC4NCiMgQWxzbyBub3RlIHRoYXQgT0Ugbm93IHByb2R1Y2VzIC1k
+YmcgcGFja2FnZXMgd2hpY2ggY29udGFpbiBkZWJ1Z2dpbmcgc3ltYm9scy4NCiMgREVCVUdfQlVJ
+TEQgPSAiMSINCiMgSU5ISUJJVF9QQUNLQUdFX1NUUklQID0gIjEiDQoNCiMgVW5jb21tZW50IHRo
+ZXNlIHRvIGJ1aWxkIGEgcGFja2FnZSBzdWNoIHRoYXQgeW91IGNhbiB1c2UgZ3Byb2YgdG8gcHJv
+ZmlsZSBpdC4NCiMgTk9URTogVGhpcyB3aWxsIG9ubHkgd29yayB3aXRoICdsaW51eCcgdGFyZ2V0
+cywgbm90DQojICdsaW51eC11Y2xpYmMnLCBhcyB1Q2xpYmMgZG9lc24ndCBwcm92aWRlIHRoZSBu
+ZWNlc3NhcnkNCiMgb2JqZWN0IGZpbGVzLiAgQWxzbywgZG9uJ3QgYnVpbGQgZ2xpYmMgaXRzZWxm
+IHdpdGggdGhlc2UNCiMgZmxhZ3MsIG9yIGl0J2xsIGZhaWwgdG8gYnVpbGQuDQojDQojIFBST0ZJ
+TEVfT1BUSU1JWkFUSU9OID0gIi1wZyINCiMgU0VMRUNURURfT1BUSU1JWkFUSU9OID0gIiR7UFJP
+RklMRV9PUFRJTUlaQVRJT059Ig0KIyBMREZMQUdTID0rICItcGciDQoNCiMgVW5jb21tZW50IHRo
+aXMgdG8gZW5hYmxlIHBhcmFsbGVsIG1ha2UuDQojIFRoaXMgYWxsb3dzIG1ha2UgdG8gc3Bhd24g
+bXV0bGlwbGUgcHJvY2Vzc2VzIHRvIHRha2UgYWR2YW50YWdlIG9mIG11bHRpcGxlIA0KIyBwcm9j
+ZXNzb3JzLiBVc2VmdWwgb24gU01QIG1hY2hpbmVzLiBUaGlzIG1heSBicmVhayBzb21lIHBhY2th
+Z2VzIC0gd2UncmUNCiMgaW4gdGhlIHByb2Nlc3Mgb2YgbWFya2luZyB0aGVzZSBzbyBsZXQgdXMg
+a25vdyBpZiB5b3UgZmluZCBhbnkuDQojIFBBUkFMTEVMX01BS0UgPSAiLWogNCINCg0KIyBVbmNv
+bW1lbnQgdGhpcyBpZiB5b3Ugd2FudCBCaXRCYWtlIHRvIGVtaXQgdGhlIGxvZyBpZiBhIGJ1aWxk
+IGZhaWxzLg0KQkJJTkNMVURFTE9HUyA9ICJ5ZXMiDQoNCiMgU3BlY2lmaWVzIGEgbG9jYXRpb24g
+dG8gc2VhcmNoIGZvciBwcmUtZ2VuZXJhdGVkIHRhcmJhbGxzIHdoZW4gZmV0Y2hpbmcNCiMgYSBj
+dnM6Ly8gVVJJLiBPdXRjb21tZW50IHRoaXMsIGlmIHlvdSBhbHdheXMgd2FudCB0byBwdWxsIGRp
+cmVjdGx5IGZyb20gQ1ZTLg0KI0NWU19UQVJCQUxMX1NUQVNIID0gIiINCg0KIyBVbmNvbW1lbnQg
+dGhpcyBpZiB5b3Ugd2FudCB0byBpbnN0YWxsIHNoYXJlZCBsaWJyYXJpZXMgZGlyZWN0bHkgdW5k
+ZXIgdGhlaXIgU09OQU1FLA0KIyByYXRoZXIgdGhhbiBpbnN0YWxsaW5nIGFzIHRoZSBmdWxsIHZl
+cnNpb24gYW5kIHN5bWxpbmtpbmcgdG8gdGhlIFNPTkFNRS4NCiMgUEFDS0FHRV9TTkFQX0xJQl9T
+WU1MSU5LUyA9ICIxIg0KDQojQkJNQVNLID0gIihweXRob24tZ3NtZF9zdm4uYmJ8ZGhjZGJkXzEu
+MTQuYmJ8bWluZ3ctZ2NjKikiDQoNCkdMSUJDX0dFTkVSQVRFX0xPQ0FMRVMgPSAiZW5fR0IuVVRG
+LTgiDQpFTkFCTEVfQklOQVJZX0xPQ0FMRV9HRU5FUkFUSU9OID0gIjEiDQoNCiNBU1NVTUVfUFJP
+VklERUQgKz0gImxpbnV4IHZpcnR1YWwva2VybmVsIg0KDQpCQkZJTEVTID0gIi9zdHVmZi9vcGVu
+ZW1iZWRkZWQvcmVjaXBlcy8qLyouYmIiDQpPRV9BTExPV19JTlNFQ1VSRV9ET1dOTE9BRFMgPSAi
+MSINClBBUkFMTEVMX01BS0UgPSAiLWoyIg0KDQpESVNUUk8gPSAiYW5nc3Ryb20tMjAwOC4xIg0K
+DQpNQUNISU5FID0gImF0OTFzYW05MjYwZWsiDQojTUFDSElORSA9ICJpNjg2LWdlbmVyaWMiDQoj
+TUFDSElORSA9ICJ4ODYtcHJlc2NvdHQiDQojTUFDSElORSA9ICJlZmlrYSINCg0KDQojIyBDYW5h
+ZGlhbiBTREsNClNES19BUkNIICAgICAgICA9ICJpNTg2Ig0KU0RLX09TICAgICAgICAgID0gIm1p
+bmd3MzIiDQpTREtfVkVORE9SICAgICAgPSAiIg0KU0RLX0NDX0FSQ0ggICAgID0gIiINClNES19F
+WEVFWFQgICAgICA9ICIuZXhlIg0KIyBNaW5HVyBjYW5hZGlhbiBwcm92aWRlcnMNClBSRUZFUlJF
+RF9QUk9WSURFUl92aXJ0dWFsLyR7U0RLX1BSRUZJWH1iaW51dGlsc19zZGstbWluZ3czMiA9Im1p
+bmd3LWJpbnV0aWxzLWNhbmFkaWFuLWNyb3NzIg0KUFJFRkVSUkVEX1BST1ZJREVSX3ZpcnR1YWwv
+JHtTREtfUFJFRklYfWdjY19zZGstbWluZ3czMiA9ICJtaW5ndy1nY2MtY2FuYWRpYW4tY3Jvc3Mi
+DQpQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC8ke1NES19QUkVGSVh9Z2NjLWluaXRpYWxfc2Rr
+LW1pbmd3MzIgPSAibWluZ3ctZ2NjLWNhbmFkaWFuLWNyb3NzLWluaXRpYWwiDQpQUkVGRVJSRURf
+UFJPVklERVJfdmlydHVhbC8ke1NES19QUkVGSVh9bGliYy1pbml0aWFsX3Nkay1taW5ndzMyID0g
+Im1pbmd3LXJ1bnRpbWUtaGVhZGVycyINClBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsLyR7U0RL
+X1BSRUZJWH1saWJjLWZvci1nY2Nfc2RrLW1pbmd3MzIgPSAibWluZ3ctcnVudGltZSINCiMgZ2Nj
+DQpQUkVGRVJSRURfUFJPVklERVJfdmlydHVhbC8ke1NES19QUkVGSVh9Z2NjID0gIm1pbmd3LWdj
+Yy1jYW5hZGlhbi1jcm9zcyINClBSRUZFUlJFRF9QUk9WSURFUl92aXJ0dWFsLyR7U0RLX1BSRUZJ
+WH1iaW51dGlsc19zZGstbWluZ3czMiA9ICJtaW5ndy1iaW51dGlscy1jYW5hZGlhbi1jcm9zcyI=
 
-KVM support       yes
-
-from log.do_configure.XXXX
-
-anyone has encountered this or has any fixes ?
-
-Thanks
--Khem
-
-
+--------------060609080606070303060506--
