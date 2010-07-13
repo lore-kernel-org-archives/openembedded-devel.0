@@ -1,51 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OYhqU-0007V0-SG
+	(envelope-from <aalonso00@gmail.com>) id 1OYhuL-0002zw-Ai
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 17:56:54 +0200
-Received: by bwz10 with SMTP id 10so3968704bwz.6
+	Tue, 13 Jul 2010 18:00:39 +0200
+Received: by gwj22 with SMTP id 22so3682107gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jul 2010 08:56:33 -0700 (PDT)
+	Tue, 13 Jul 2010 09:00:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=qdt99p5G6qgXbxKLeudlB++/m+fAqSN9CzGHG1kP/2Y=;
-	b=MQMAHHpnpBiG/YJvofTb2jS05cU34FknrzUpZRSFN7tLN2u8CfYy91yX9QF2ZNqE+1
-	tPHxBkd4AGlR78B1W1ZrFPUheyh7kquJ5HGRhqkcXshUUQdwd1CM5KpxT7l53yEhDOGU
-	SFvNRMtKTj/2xieQnSg6LdpLF+aktbCvhPXK4=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=Ke0xkKKhpHjFfLuoAhc0RVvpch+s3h+i1K1GjxoIdNk=;
+	b=XS95K1htkaSzhZSrmnZEA8f0Vgt8JYpfNXLmFQDWPKAsLEl23Mg4dS8yRGeIw5lAQZ
+	WQGZly2vMsPMpUveDO/IeIWImsffpGPrlDPvL98pyhX7cI1GAmtP1TKGeYopzVamXY2e
+	444qoDn82W03JoO3CcvUNtUVJrsqxTkoB1YqU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=i+JfOWiEDZ0eq7gyJZf6gdXzj20KlYXBFc+beYiyoT2ruC14gRGdXZj3MBL0abrZbL
-	bCJuS62kyAvvOn84coV5Zt1F74bswM1Xz/Ol+aE4z1FdlpCZoIVl0fTuSa98ig8JQ7c4
-	vhuOEtqu43D6b+yGM6xS2AeydgNncpSGcQjQY=
-Received: by 10.204.54.78 with SMTP id p14mr12165205bkg.197.1279036593581;
-	Tue, 13 Jul 2010 08:56:33 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id o20sm24316418bkw.3.2010.07.13.08.56.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 13 Jul 2010 08:56:32 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OYhqM-0006Sa-D6; Tue, 13 Jul 2010 17:56:26 +0200
-Date: Tue, 13 Jul 2010 17:56:26 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100713155626.GB21982@mx.loc>
-References: <1279027764.3935.13.camel@mattotaupa>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=qM9sxaB8+Ys9h+YGSNKvyqQKj5OgV1rgX4YkbFAYZn6Y44aU45XsIrvpBK+5qouyuY
+	YEmjBwSXM4mSXf/71HjLuIaRzUJoJfzKBEIlacz5rYUiGFyMv6cH01N7O6owHRyL6/rb
+	iW6d5eU7+ruT6L9vhPX9sHToShFRy98Q5UI4Y=
 MIME-Version: 1.0
-In-Reply-To: <1279027764.3935.13.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Received: by 10.229.229.202 with SMTP id jj10mr4867232qcb.131.1279036822672; 
+	Tue, 13 Jul 2010 09:00:22 -0700 (PDT)
+Received: by 10.229.220.205 with HTTP; Tue, 13 Jul 2010 09:00:22 -0700 (PDT)
+In-Reply-To: <AANLkTilt38IIysypXu4t6DweZkrLBZJB5dSL2_m_cAF4@mail.gmail.com>
+References: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
+	<AANLkTilt38IIysypXu4t6DweZkrLBZJB5dSL2_m_cAF4@mail.gmail.com>
+Date: Tue, 13 Jul 2010 11:00:22 -0500
+Message-ID: <AANLkTikGJvct_Hz-XtE4YWS3ONL9xUyWadQZUqldbu_7@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom-2008.1, uclibc, perl 5.8.8: error: #error It appears you have defined _FILE_OFFSET_BITS=64.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 1/9] xilinx-virtex4: new file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,40 +53,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 15:56:55 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 13 Jul 2010 16:00:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Jul 13, 2010 at 03:29:24PM +0200, Paul Menzel wrote:
->Dear OE folks,
->
->
->I tried to build angstrom-2008.1 with the OE dev branch using uclibc.
->
->        DISTRO = "angstrom-2008.1"
->        
->        GLIBC_GENERATE_LOCALES = "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8"
->        
->        MACHINE = "beagleboard"
->        BUILD_ARCH = "i686"
->        BUILD_OS = "linux"
->        ANGSTROMLIBC = "uclibc"
->
->Building perl 5.8.8 I get the following error.
->
->        make[1]: Entering directory `/oe/angstrom-dev/work/armv7a-angstrom-linux-uclibceabi/perl-5.8.8-r34/perl-5.8.8'
->        `sh  cflags "optimize='-O2'" miniperlmain.o` -fPIC miniperlmain.c
->        	  CCCMD =  arm-angstrom-linux-uclibceabi-gcc -march=armv7-a -mtune=cortex-a8 -mfpu=neon -mfloat-abi=softfp -DPERL_CORE -c -isystem/oe/angstrom-dev/sysroots/armv7a-angstrom-linux-uclibceabi/usr/include -fexpensive-optimizations -fomit-frame-pointer -frename-registers -O2 -ggdb3 -D_REENTRANT -D_GNU_SOURCE -DTHREADS_HAVE_PIDS -fno-strict-aliasing -pipe -D_LARGEFILE_SOURCE -D_FILE_OFFSET_BITS=64 -O2  -Wall
->        In file included from /oe/angstrom-dev/sysroots/armv7a-angstrom-linux-uclibceabi/usr/include/sys/types.h:27,
->                         from perl.h:420,
->                         from miniperlmain.c:36:
->        /oe/angstrom-dev/sysroots/armv7a-angstrom-linux-uclibceabi/usr/include/features.h:416:4: error: #error It appears you have defined _FILE_OFFSET_BITS=64. Unfortunately, uClibc was built without large file support enabled.
+Hi Frans,
 
-from http://repo.or.cz/w/buildroot.git/tree/HEAD:/package/perl
-perl-5.8.8-020-largefile.patch
-but you might need fixing up the config.sh nevertheless:
-http://repo.or.cz/w/buildroot.git/blob/HEAD:/package/perl/perl.mk#l124
+Some comments in lines...
 
-Just an idea,
+Regards
 
+On Tue, Jul 13, 2010 at 1:01 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
+
+> 2010/7/12 Adrian Alonso <aalonso00@gmail.com>:
+> > * New config machine, generic support for Xilinx
+> >  Virtex4 platforms ml401, ml403, ml405, ml410
+> > * Tested on ml405 target board, powerpc based ref
+> >  design at http://github.com/aalonso/xilinx-ml405
+> > * Target configuration handled in xilinx-bsp.bbclass
+> >
+> > Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+> > ---
+> >  conf/machine/xilinx-virtex4.conf |   40
+> ++++++++++++++++++++++++++++++++++++++
+> >  1 files changed, 40 insertions(+), 0 deletions(-)
+> >  create mode 100644 conf/machine/xilinx-virtex4.conf
+> >
+> > diff --git a/conf/machine/xilinx-virtex4.conf
+> b/conf/machine/xilinx-virtex4.conf
+> > new file mode 100644
+> > index 0000000..942b63f
+> > --- /dev/null
+> > +++ b/conf/machine/xilinx-virtex4.conf
+> > @@ -0,0 +1,40 @@
+> > +# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
+> > +# Released under the MIT license (see packages/COPYING)
+> > +#@TYPE: Machine
+> > +#@Name: Xilinx Virtex4 FPGA Development Platform
+> > +#@DESCRIPTION: Machine configuration for Xilinx Virtex4 family
+> > +# Supported targets
+> > +# ML403, ML405, ML410
+> > +
+> > +# Default arch can be overrided in local.conf
+> > +TARGET_ARCH ?= "powerpc"
+>
+> Do we expect to be this machine to be powerpc only or would there be
+> any chance that someone puts linux on microblaze on it?
+> If so is this going to be in this file?
+> If we think microblaze linux on this board will happen and not in this
+> file perhaps make explicit in the machine name that it is ppc only.
+> If microblaze on this board is unlikely it is afaik ok as it is.
+>
+
+I intent that the config machine can support both powerpc and microblaze
+arch
+thats why TARGET_* assignments are weak so they can be override in
+local.conf
+so I can preserve machine features without the need to add another machine
+conf
+file for microblaze.
+
+Umm I think that kernel config file is an obstacle to achieve this,
+because it would
+pull powerpc settings unless I implement a mechanism to pull the correct
+kernel
+config file depending on the target arch. So for the moment the best option
+is to
+make this machine file powerpc specific.
+
+If you are interested  on OE microblaze support take a look at [1], is just
+matter to
+add gcc support of "-shared" option to complete OE microblaze integration.
+
+[1] http://gitorious.org/oe-microblaze
+
+>
+> > +TARGET_CPU  ?= "405"
+> > +TARGET_FPU  ?= "soft"
+> > +TARGET_TUNE ?= "ppc405"
+> > +#tune for the selected cpu
+> > +require conf/machine/include/tune-${TARGET_TUNE}.inc
+> > +
+> > +#ASSUME_PROVIDED += "virtual/kernel"
+>
+> I'd say remove the line above. It is harmless as it is comment but
+> could lead to confusion.
+> (or if it is useful for people to have this perhaps have a line or two
+> of comment)
+>
+> > +PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx"
+> > +PREFERRED_VERSION_u-boot_xilinx-virtex4 = "u-boot-xilinx"
+> > +
+> > +KERNEL_IMAGETYPE = "uImage"
+> > +
+> > +MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet"
+> > +MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
+> > +
+> > +UBOOT_ENTRYPOINT ?= "0x00000000"
+> > +UBOOT_LOADADDRESS ?= "0x00000000"
+> > +
+> > +# Xilinx EDK override hardware  definitions for xilinx-bsp
+> > +# Include in your local.conf
+> > +# XILINX_BSP_PATH = "complete path for Xilinx XPS project"
+> > +# XILINX_BOARD = "ml410"
+> > +
+> > +# Don't use tty1
+> > +USE_VT = "0"
+> > +SERIAL_CONSOLE = "9600 ttyS0"
+> > +
+> > +# Device nodes add xsa for (system ace)
+> > +IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
+> > +                       files/device_table_add-xsa.txt"
+> > --
+> > 1.7.1.1
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
