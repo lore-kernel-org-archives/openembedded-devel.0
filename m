@@ -1,42 +1,39 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OYnx9-0001oa-1Y
+	(envelope-from <Tom_Rini@mentor.com>) id 1OYoDf-0007wm-G3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 00:28:18 +0200
-Received: by pxi12 with SMTP id 12so1889735pxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jul 2010 15:27:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=hEfZ4IvO47oEGOaUuH98UCq90HcVRQqvUUxnpyqS+uM=;
-	b=mR2zuY7wBn8RL6kjCirk0sRuLDhihyMSkvIFHpqt66AySG8OKGzoTA5oXSBjDyAE9l
-	NcMxh7HdYbvXY/aah3bFi1lkTX5U/CkNQWlZUcvpe7BqSd6nYmTtOxM1SeLQ30PjfMg5
-	K4zOhE2yW5jTjJpEHWpgTQI1JZJokJ/DtM388=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=B1krwz/0L/F3Jo0qYRnJPx1t4DTDGMi/H6QuhtpcX5fODlq9MD0o6a79ZGdW7/sQfq
-	6UPmpHZFj8t7yxCaNlyImeN21WqD0UL1UQHfg9CsRWyLLhut+BemFaQ4zKIT8fXAehp2
-	E8397PNEPX0N5Q2cBtAVtCtGw+z1PNpffWKnc=
-Received: by 10.142.144.2 with SMTP id r2mr4096734wfd.298.1279060067109;
-	Tue, 13 Jul 2010 15:27:47 -0700 (PDT)
-Received: from aalonso-pc.lan ([201.153.224.36])
-	by mx.google.com with ESMTPS id g37sm6348269rvb.17.2010.07.13.15.27.45
-	(version=SSLv3 cipher=RC4-MD5); Tue, 13 Jul 2010 15:27:46 -0700 (PDT)
-From: Adrian Alonso <aalonso00@gmail.com>
+	Wed, 14 Jul 2010 00:45:09 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OYoDb-0001Kw-RM from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jul 2010 15:44:51 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 13 Jul 2010 15:44:51 -0700
+Received: from [172.30.80.29] ([172.30.80.29]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 13 Jul 2010 16:44:50 -0600
+Message-ID: <4C3CEC5C.8080506@mentor.com>
+Date: Tue, 13 Jul 2010 15:44:44 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Jul 2010 17:28:58 -0500
-Message-Id: <1279060140-17856-1-git-send-email-aalonso00@gmail.com>
-X-Mailer: git-send-email 1.7.1.1
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+References: <E1OYmec-0005TF-MX@melo.openembedded.org>
+In-Reply-To: <E1OYmec-0005TF-MX@melo.openembedded.org>
+X-OriginalArrivalTime: 13 Jul 2010 22:44:50.0829 (UTC)
+	FILETIME=[00E49BD0:01CB22DD]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/3 v2] xilinx-virtex4: new file
+Subject: Re: [oe-commits] Dmitry Eremin-Solenikov : u-boot: add a recipe for fresh release of u-boot. Also make it default for tqm8540 board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,65 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 22:28:25 -0000
+X-List-Received-Date: Tue, 13 Jul 2010 22:45:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* New config machine, generic support for Xilinx
-  Virtex4 platforms ml401, ml403, ml405, ml410
-* Tested on ml405 target board, powerpc based ref
-  design at http://github.com/aalonso/xilinx-ml405
-* Target configuration handled in xilinx-bsp.bbclass
+git version control wrote:
+> Module: openembedded.git
+> Branch: org.openembedded.dev
+> Commit: e1a3091c2417994a798b51bc6d6cac1d52799865
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=e1a3091c2417994a798b51bc6d6cac1d52799865
+> 
+> Author: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> Date:   Wed Jul 14 00:01:39 2010 +0400
+> 
+> u-boot: add a recipe for fresh release of u-boot. Also make it default for tqm8540 board
+> 
+> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+> 
+> ---
+> 
+>  recipes/u-boot/u-boot_2010.06.bb |   20 ++++++++++++++++++++
+>  1 files changed, 20 insertions(+), 0 deletions(-)
+> 
+> diff --git a/recipes/u-boot/u-boot_2010.06.bb b/recipes/u-boot/u-boot_2010.06.bb
+> new file mode 100644
+> index 0000000..73dea39
+> --- /dev/null
+> +++ b/recipes/u-boot/u-boot_2010.06.bb
+> @@ -0,0 +1,20 @@
+> +PR = "r1"
+> +require u-boot.inc
+> +
+> +DEFAULT_PREFERENCE = "-1"
+> +DEFAULT_PREFERENCE_tqm8540 = "1"
+> +
+> +SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2 "
+> +
+> +TARGET_LDFLAGS = ""
+> +
+> +inherit base
+> +
+> +do_compile () {
+> +       oe_runmake ${UBOOT_MACHINE}
+> +       oe_runmake all
+> +}
 
-Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
----
- conf/machine/xilinx-virtex4.conf |   37 +++++++++++++++++++++++++++++++++++++
- 1 files changed, 37 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/xilinx-virtex4.conf
+I know this isn't new.  Why is the oe_runmake ${UBOOT_MACHINE}, which is 
+basically "configure u-boot for this machine" in do_compile and not 
+do_configure?
 
-diff --git a/conf/machine/xilinx-virtex4.conf b/conf/machine/xilinx-virtex4.conf
-new file mode 100644
-index 0000000..eeea44e
---- /dev/null
-+++ b/conf/machine/xilinx-virtex4.conf
-@@ -0,0 +1,37 @@
-+# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
-+# Released under the MIT license (see packages/COPYING)
-+#@TYPE: Machine
-+#@Name: Xilinx Virtex4 FPGA Development Platform
-+#@DESCRIPTION: Machine configuration for Xilinx Virtex4 family
-+# Supported targets
-+# ML403, ML405, ML410
-+
-+TARGET_ARCH = "powerpc"
-+TARGET_CPU  = "405"
-+TARGET_FPU  = "soft"
-+#tune for the selected cpu
-+require conf/machine/include/tune-ppc405.inc
-+
-+PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx"
-+PREFERRED_VERSION_u-boot_xilinx-virtex4 = "u-boot-xilinx"
-+
-+KERNEL_IMAGETYPE = "uImage"
-+
-+MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet"
-+MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
-+
-+UBOOT_ENTRYPOINT ?= "0x00000000"
-+UBOOT_LOADADDRESS ?= "0x00000000"
-+
-+# Xilinx EDK override hardware definitions for xilinx-bsp
-+# Include in your local.conf
-+# XILINX_BSP_PATH = "complete path for Xilinx XPS project"
-+# XILINX_BOARD = "ml410"
-+
-+# Don't use tty1
-+USE_VT = "0"
-+SERIAL_CONSOLE = "9600 ttyS0"
-+
-+# Device nodes add xsa for (system ace)
-+IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
-+                       files/device_table_add-xsa.txt"
 -- 
-1.7.1.1
-
+Tom Rini
+Mentor Graphics Corporation
 
 
