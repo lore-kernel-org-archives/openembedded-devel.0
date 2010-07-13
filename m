@@ -1,39 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OYoDf-0007wm-G3
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OYoIq-0003fI-SY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 00:45:09 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OYoDb-0001Kw-RM from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 15:44:51 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 13 Jul 2010 15:44:51 -0700
-Received: from [172.30.80.29] ([172.30.80.29]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 13 Jul 2010 16:44:50 -0600
-Message-ID: <4C3CEC5C.8080506@mentor.com>
-Date: Tue, 13 Jul 2010 15:44:44 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Wed, 14 Jul 2010 00:50:17 +0200
+Received: (qmail invoked by alias); 13 Jul 2010 22:50:13 -0000
+Received: from p50885B0D.dip.t-dialin.net (EHLO [192.168.142.128])
+	[80.136.91.13]
+	by mail.gmx.net (mp008) with SMTP; 14 Jul 2010 00:50:13 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX18u4nAPiFku1oc0/ixyAg9N2Fl8nxl3DxeCfgs/JE
+	dUTP07u06GK62D
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-References: <E1OYmec-0005TF-MX@melo.openembedded.org>
-In-Reply-To: <E1OYmec-0005TF-MX@melo.openembedded.org>
-X-OriginalArrivalTime: 13 Jul 2010 22:44:50.0829 (UTC)
-	FILETIME=[00E49BD0:01CB22DD]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Wed, 14 Jul 2010 00:43:15 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+MIME-Version: 1.0
+Message-Id: <201007140043.18547.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Dmitry Eremin-Solenikov : u-boot: add a recipe for fresh release of u-boot. Also make it default for tqm8540 board
+Subject: Naming/Version conventions for git/svn recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,57 +39,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 22:45:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 13 Jul 2010 22:50:17 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-git version control wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: e1a3091c2417994a798b51bc6d6cac1d52799865
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=e1a3091c2417994a798b51bc6d6cac1d52799865
-> 
-> Author: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> Date:   Wed Jul 14 00:01:39 2010 +0400
-> 
-> u-boot: add a recipe for fresh release of u-boot. Also make it default for tqm8540 board
-> 
-> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
-> 
-> ---
-> 
->  recipes/u-boot/u-boot_2010.06.bb |   20 ++++++++++++++++++++
->  1 files changed, 20 insertions(+), 0 deletions(-)
-> 
-> diff --git a/recipes/u-boot/u-boot_2010.06.bb b/recipes/u-boot/u-boot_2010.06.bb
-> new file mode 100644
-> index 0000000..73dea39
-> --- /dev/null
-> +++ b/recipes/u-boot/u-boot_2010.06.bb
-> @@ -0,0 +1,20 @@
-> +PR = "r1"
-> +require u-boot.inc
-> +
-> +DEFAULT_PREFERENCE = "-1"
-> +DEFAULT_PREFERENCE_tqm8540 = "1"
-> +
-> +SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2 "
-> +
-> +TARGET_LDFLAGS = ""
-> +
-> +inherit base
-> +
-> +do_compile () {
-> +       oe_runmake ${UBOOT_MACHINE}
-> +       oe_runmake all
-> +}
+I did not find this in documentation. What is the preferred convention for PV/PR. Up to now I saw:
 
-I know this isn't new.  Why is the oe_runmake ${UBOOT_MACHINE}, which is 
-basically "configure u-boot for this machine" in do_compile and not 
-do_configure?
+Option 1:
+PV = "1.3.8+git${SRCREV}"
+PR = "r0"
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Option 2:
+PV = "1.1.0"
+PR = "${INC_PR}.0"
+PR_append = "+git${SRCREV}"
+
+Is there a preferred convention?
+
+Andreas
 
 
