@@ -1,44 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OYYdb-0007oQ-CV
+	(envelope-from <raj.khem@gmail.com>) id 1OYYfW-0007w5-Qt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 08:06:43 +0200
-Received: by bwz10 with SMTP id 10so3459028bwz.6
+	Tue, 13 Jul 2010 08:08:39 +0200
+Received: by iwn34 with SMTP id 34so5596441iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jul 2010 23:01:44 -0700 (PDT)
+	Mon, 12 Jul 2010 23:03:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=JKUbuIYnJIxvqnqE/F3zi4WFBZ6dwRhN/Dbd1iDG0Qs=;
-	b=dhiOZ2tDa8Xpt7UVcq7oj5keIllTWIv1jN+jBHCThNNNBHmQ6xh7wZnovb7CQ2YQKN
-	sLX6HZaZDYFWltuvsq5Zqz8SBWUl0ApYqVQ04uKHlYvasEyfnBsLCjdAAbrbKSz703pl
-	VO6k8ALCf31FGMTnzbIFjWR7zqY2lzLJog09c=
+	bh=vqP0wA/cfccyM+Rbrgbo1G24/vIYeXGoRAdQVYY6Z0o=;
+	b=e1YZL3NaLDS0mqKG9WjPrzsp7yAQS5zH2YULUvTD47CfovTmD+BgSY9BySm1abYblO
+	b7fyKY8KEjKuKb+H3F8dVdBnlhF0tSdcJtCjwth2JoEU6BYj1mebJmw9hST6Y1bl57wP
+	3ThHrsHmJsT6wUPc/kIJEx3zOC+u04PkuXkVc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=ef4Tgm+dadKjIcUJsK4MG6fmpEIPP0ZCpT3QfI2wVrFwTHdb6gSAQQkGx2Lx4nW5LU
-	AifX23LBOemjVS+7NCEDANZkBUwGKmUzEgiSRx4dmgXMjsyJxCa/qzjZxP3pbf3v6erZ
-	ZYxA3dnsPqERxh5quXSDL41Sj65+3nzKtYzoU=
+	b=l6rZHSghHc8LD1OcaTC6aTp0u5Rv+3GNi+X0Cz3IT80K81oFqJuC3dC3y/UicVVyS7
+	Q08OAlvs9he1FwP9hR/UTVJ49hq7oTp+j3NOtl9+UDyNM11D04qmEc6NBeDo9s/JmwkB
+	8dF0KtNDQGWGPvJsp7cV1fnWVCQ9hVmfU5sAs=
+Received: by 10.231.119.229 with SMTP id a37mr15126363ibr.169.1279001022173; 
+	Mon, 12 Jul 2010 23:03:42 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.204.70.140 with SMTP id d12mr11660984bkj.37.1279000904207; 
-	Mon, 12 Jul 2010 23:01:44 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Mon, 12 Jul 2010 23:01:44 -0700 (PDT)
-In-Reply-To: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
-References: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
-Date: Tue, 13 Jul 2010 08:01:44 +0200
-Message-ID: <AANLkTilt38IIysypXu4t6DweZkrLBZJB5dSL2_m_cAF4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.11.12 with HTTP; Mon, 12 Jul 2010 23:03:22 -0700 (PDT)
+In-Reply-To: <113134CF306E8E4CACC27BE5937261B20931BF14A7@AUSX7MCPS303.AMER.DELL.COM>
+References: <AcsiE3tIy8VpAAlrQiyyzbOb0c/t7w==>
+	<113134CF306E8E4CACC27BE5937261B20931BF14A7@AUSX7MCPS303.AMER.DELL.COM>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 12 Jul 2010 23:03:22 -0700
+Message-ID: <AANLkTilaDl7gXH2rDTlpJEr52nJz2O9I6rKCzeFWmoLb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/9] xilinx-virtex4: new file
+Subject: Re: SSH configuration question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,87 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 06:06:43 -0000
+X-List-Received-Date: Tue, 13 Jul 2010 06:08:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/7/12 Adrian Alonso <aalonso00@gmail.com>:
-> * New config machine, generic support for Xilinx
-> =A0Virtex4 platforms ml401, ml403, ml405, ml410
-> * Tested on ml405 target board, powerpc based ref
-> =A0design at http://github.com/aalonso/xilinx-ml405
-> * Target configuration handled in xilinx-bsp.bbclass
+On Mon, Jul 12, 2010 at 3:42 PM,  <Sean_Hudson@dell.com> wrote:
+> All,
 >
-> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
-> ---
-> =A0conf/machine/xilinx-virtex4.conf | =A0 40 ++++++++++++++++++++++++++++=
-++++++++++
-> =A01 files changed, 40 insertions(+), 0 deletions(-)
-> =A0create mode 100644 conf/machine/xilinx-virtex4.conf
+> =A0What is the best way to update the configuration used to build SSH?
 >
-> diff --git a/conf/machine/xilinx-virtex4.conf b/conf/machine/xilinx-virte=
-x4.conf
-> new file mode 100644
-> index 0000000..942b63f
-> --- /dev/null
-> +++ b/conf/machine/xilinx-virtex4.conf
-> @@ -0,0 +1,40 @@
-> +# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
-> +# Released under the MIT license (see packages/COPYING)
-> +#@TYPE: Machine
-> +#@Name: Xilinx Virtex4 FPGA Development Platform
-> +#@DESCRIPTION: Machine configuration for Xilinx Virtex4 family
-> +# Supported targets
-> +# ML403, ML405, ML410
-> +
-> +# Default arch can be overrided in local.conf
-> +TARGET_ARCH ?=3D "powerpc"
+> =A0Specifically, I'd like to build SSH with pam enabled, however, the con=
+figuration in the recipes/openssh/openssh.inc specifies "-without-pam".
+>
 
-Do we expect to be this machine to be powerpc only or would there be
-any chance that someone puts linux on microblaze on it?
-If so is this going to be in this file?
-If we think microblaze linux on this board will happen and not in this
-file perhaps make explicit in the machine name that it is ppc only.
-If microblaze on this board is unlikely it is afaik ok as it is.
+in your case you could use DISTRO_FEATURE to check if pam is available
+and set the option accordingly. something like below
 
-> +TARGET_CPU =A0?=3D "405"
-> +TARGET_FPU =A0?=3D "soft"
-> +TARGET_TUNE ?=3D "ppc405"
-> +#tune for the selected cpu
-> +require conf/machine/include/tune-${TARGET_TUNE}.inc
-> +
-> +#ASSUME_PROVIDED +=3D "virtual/kernel"
+EXTRA_OECONF +=3D ${@base_contains('DISTRO_FEATURES', 'pam',
+'--with-pam', '--without-pam', d)
 
-I'd say remove the line above. It is harmless as it is comment but
-could lead to confusion.
-(or if it is useful for people to have this perhaps have a line or two
-of comment)
 
-> +PREFERRED_PROVIDER_virtual/kernel =3D "linux-xilinx"
-> +PREFERRED_VERSION_u-boot_xilinx-virtex4 =3D "u-boot-xilinx"
-> +
-> +KERNEL_IMAGETYPE =3D "uImage"
-> +
-> +MACHINE_FEATURES =3D "kernel26 apm ext2 vfat ethernet"
-> +MACHINE_EXTRA_RECOMMENDS =3D "kernel-modules"
-> +
-> +UBOOT_ENTRYPOINT ?=3D "0x00000000"
-> +UBOOT_LOADADDRESS ?=3D "0x00000000"
-> +
-> +# Xilinx EDK override hardware =A0definitions for xilinx-bsp
-> +# Include in your local.conf
-> +# XILINX_BSP_PATH =3D "complete path for Xilinx XPS project"
-> +# XILINX_BOARD =3D "ml410"
-> +
-> +# Don't use tty1
-> +USE_VT =3D "0"
-> +SERIAL_CONSOLE =3D "9600 ttyS0"
-> +
-> +# Device nodes add xsa for (system ace)
-> +IMAGE_DEVICE_TABLES =3D "files/device_table-minimal.txt \
-> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 files/device_table_add-xsa.=
-txt"
-> --
-> 1.7.1.1
+Thx
+-Khem
+
+> Regards,
+> =A0 =A0 -Sean
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
