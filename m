@@ -1,25 +1,26 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OYkLQ-0007Ls-MG
+	(envelope-from <stefan@datenfreihafen.org>) id 1OYkWT-0006Pb-0q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 20:36:42 +0200
+	Tue, 13 Jul 2010 20:48:05 +0200
 Received: from p5b034ad5.dip.t-dialin.net ([91.3.74.213] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OYkLN-0002Me-U2 by authid <stefan@sostec.de> with cram_md5
+	id 1OYkWQ-0002dB-3m by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jul 2010 20:36:40 +0200
+	Tue, 13 Jul 2010 20:48:04 +0200
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OYkLH-000193-Mr
+	(envelope-from <stefan@excalibur.local>) id 1OYkWP-0001Ad-0S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 20:36:31 +0200
-Date: Tue, 13 Jul 2010 20:36:28 +0200
+	Tue, 13 Jul 2010 20:48:01 +0200
+Date: Tue, 13 Jul 2010 20:48:00 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100713183628.GA1947@excalibur.local>
-References: <20100709204055.GA12163@excalibur.local>
+Message-ID: <20100713184800.GB1947@excalibur.local>
+References: <1278447438-27251-1-git-send-email-stefan@datenfreihafen.org>
+	<4C3395A0.7060702@mentor.com>
 MIME-Version: 1.0
-In-Reply-To: <20100709204055.GA12163@excalibur.local>
+In-Reply-To: <4C3395A0.7060702@mentor.com>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -32,7 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] New stable branch (and maybe a new process?)
+Subject: Re: [PATCH][STABLE 1/3] shadow: Disable email checking completely
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +47,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 18:36:42 -0000
+X-List-Received-Date: Tue, 13 Jul 2010 18:48:05 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Fri, 2010-07-09 at 22:40, Stefan Schmidt wrote:
+On Tue, 2010-07-06 at 13:44, Tom Rini wrote:
+> Stefan Schmidt wrote:
+> >From: Stefan Schmidt <stefan@buglabs.net>
+> >
+> >This allows faster login due to not checking for new emails. Adjust PR to 14 as
+> >stable is behind .dev here.
+> >
+> >Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
 > 
-> That all needs to be filled with more details, but it could be a start. Let me
-> know what you think.
+> Acked-by: Tom Rini <tom_rini@mentor.com>
 
-I have to say I expected more replies. Some blames here and there and maybe a
-discussion. To hot these days? :)
-
-More serious, I think it would be a good time now to discuss this. What
-experience did the stable maintainer made with stable/2009 so far? Is it worth
-doing it again? Maybe change the process?
+Thanks. May I could motivate someone else to review and give an ack here. Also
+the other patches in this set are out for review as well. :)
 
 regards
 Stefan Schmidt
