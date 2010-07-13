@@ -1,27 +1,38 @@
-Received: from smtp205.alice.it ([82.57.200.101])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1OYjfK-00032y-13
+	(envelope-from <stefan@datenfreihafen.org>) id 1OYkLQ-0007Ls-MG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 19:53:10 +0200
-Received: from [192.168.10.100] (95.232.142.62) by smtp205.alice.it
-	(8.5.124.08) (authenticated as editempo)
-	id 4C1A264501BBFA59 for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 19:53:07 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Tue, 13 Jul 2010 20:36:42 +0200
+Received: from p5b034ad5.dip.t-dialin.net ([91.3.74.213] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OYkLN-0002Me-U2 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jul 2010 20:36:40 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OYkLH-000193-Mr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jul 2010 20:36:31 +0200
+Date: Tue, 13 Jul 2010 20:36:28 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Jul 2010 19:26:54 +0200
-Message-ID: <1279042014.6122.8.camel@gnutoo-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 82.57.200.101
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+Message-ID: <20100713183628.GA1947@excalibur.local>
+References: <20100709204055.GA12163@excalibur.local>
+MIME-Version: 1.0
+In-Reply-To: <20100709204055.GA12163@excalibur.local>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,WEIRD_PORT
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gnome introspection.m4
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +46,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 17:53:10 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 13 Jul 2010 18:36:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-hi,
-libgee-native-1_0.5.0+gitr3+3ce13a7b8644263037f39441d3c10a3b00861301-r0
-failed to configure:
+Hello.
 
-| autoreconf: running: automake --foreign --add-missing --copy
---force-missing --warnings=cross
-| automake: unknown warning category `cross'
-| gee/Makefile.am:95: HAVE_INTROSPECTION does not appear in
-AM_CONDITIONAL
-| autoreconf: automake failed with exit status: 1
-| FATAL: autoreconf execution failed.
+On Fri, 2010-07-09 at 22:40, Stefan Schmidt wrote:
+> 
+> That all needs to be filled with more details, but it could be a start. Let me
+> know what you think.
 
-looking at autogen.sh shows:
-REQUIRED_M4MACROS=introspection.m4 gnome-autogen.sh "$@" || exit 1
+I have to say I expected more replies. Some blames here and there and maybe a
+discussion. To hot these days? :)
 
-trying to find the m4 in libgee's workdir or in sysroot failed.
-woglinde helped me a lot and found that:
-http://live.gnome.org/GObjectIntrospection
+More serious, I think it would be a good time now to discuss this. What
+experience did the stable maintainer made with stable/2009 so far? Is it worth
+doing it again? Maybe change the process?
 
-on my side I grepped oe's recipes dir and found:
-./dbus/dbus-glib-0.86/no-introspect.patch
-it's also there for older version of dbug-glib.
-
-woglinde asked me to send a mail because we have no idea on what's the
-best way to handle this correctly.
-
-Denis
-
-
+regards
+Stefan Schmidt
 
 
