@@ -1,43 +1,43 @@
-Received: from ausc60pc101.us.dell.com ([143.166.85.206])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sean_Hudson@Dell.com>) id 1OYhAu-0006Vt-3J
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OYhfZ-0002Ro-9g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 17:13:38 +0200
-X-Loopcount0: from 10.166.62.177
-From: <Sean_Hudson@Dell.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 13 Jul 2010 10:08:28 -0500
-Thread-Topic: [oe] [PATCH] Correcting APACHE mirror location for APR recipes.
-Thread-Index: AcsiUa891Zrl8CsISmiYHZJT0Nu+hgAS0RhQ
-Message-ID: <113134CF306E8E4CACC27BE5937261B20931BF1B28@AUSX7MCPS303.AMER.DELL.COM>
-References: <AcsiEe3JHQwDByVbTtuXbCTfXM2oUg==>
-	<113134CF306E8E4CACC27BE5937261B20931BF148F@AUSX7MCPS303.AMER.DELL.COM>
-	<AANLkTilYsPNfPjreXVd31_k4mzUDHLiyY4XlPNmJh6x-@mail.gmail.com>
-In-Reply-To: <AANLkTilYsPNfPjreXVd31_k4mzUDHLiyY4XlPNmJh6x-@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-puzzleid: {D4ED70B1-0479-439B-84B0-70E4938A88B0}
-x-cr-hashedpuzzle: Al4u B6+R C6DA DMq0 DVii DppR ERJO EcwF E730 FcSU FtC2
-	Hxne IGhJ JtAW KFiQ KcXk; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {D4ED70B1-0479-439B-84B0-70E4938A88B0};
-	cwBlAGEAbgBfAGgAdQBkAHMAbwBuAEAAZABlAGwAbAAuAGMAbwBtAA==; Tue,
-	13 Jul 2010 15:08:28 GMT;
-	UgBFADoAIABbAG8AZQBdACAAWwBQAEEAVABDAEgAXQAgAEMAbwByAHIAZQBjAHQAaQBuAGcAIABBAFAAQQBDAEgARQAgAG0AaQByAHIAbwByACAAbABvAGMAYQB0AGkAbwBuACAAZgBvAHIAIABBAFAAUgAgAHIAZQBjAGkAcABlAHMALgA=
-acceptlanguage: en-US
+	Tue, 13 Jul 2010 17:45:18 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id A06F4110009A
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jul 2010 17:45:12 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 9FCAD1100097
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jul 2010 17:45:11 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225144025.adsl.alicedsl.de
+	[92.225.144.25]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 13 Jul 2010 17:45:11 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 7B0A03C0E9; Tue, 13 Jul 2010 17:44:59 +0200 (CEST)
+Date: Tue, 13 Jul 2010 17:44:59 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100713154458.GA3559@rhein.zuhause.netz>
+References: <1279027764.3935.13.camel@mattotaupa>
 MIME-Version: 1.0
-X-OriginalArrivalTime: 13 Jul 2010 15:08:31.0948 (UTC)
-	FILETIME=[41CEE8C0:01CB229D]
-X-SA-Exim-Connect-IP: 143.166.85.206
-X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
+In-Reply-To: <1279027764.3935.13.camel@mattotaupa>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.8 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Correcting APACHE mirror location for APR recipes.
+Subject: Re: angstrom-2008.1, uclibc, perl 5.8.8: error: #error It appears you have defined _FILE_OFFSET_BITS=64.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,68 +51,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 15:13:38 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 13 Jul 2010 15:45:18 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-It appears as though the only versions visible at the current URL are the l=
-atest version.  To get access to the latest version, the archive URL appear=
-s to be necessary.  It is worth noting that the archive seems to contain th=
-e latest version too.
+Hi,
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
-Sent: Tuesday, July 13, 2010 1:06 AM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [PATCH] Correcting APACHE mirror location for APR recipes=
-.
+Khem and blindvt introduced a new DISTRO feature largefile which now enables stat64 ander serval other largefile
+options. Unfornatly for now only minimal-uclibc-distro is using it. A quick workaround is to add largefile
+in the angstroem.inc file.
 
-On Mon, Jul 12, 2010 at 3:31 PM,  <Sean_Hudson@dell.com> wrote:
-> Hi all,
->
-> =A0We recently noticed that apr and apr-util recipes were not fetching co=
-rrectly.
-> =A0It appears as though the APACHE_MIRROR variable in the bitbake.conf fi=
-le.
->
-> =A0Below is a trivial patch to update the variable.
 
-I am able to see the files in existing URL. What problem did you have
-
->
-> Regards,
-> Sean
->
->
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 12a5522..71c7273 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -533,7 +533,7 @@ export palmqtdir =3D "${palmtopdir}"
-> =A0OE_STRICT_CHECKSUMS ?=3D "1"
->
-> =A0ADOBE_MIRROR =3D "http://fpdownload.macromedia.com/get/flashplayer/cur=
-rent/"
-> -APACHE_MIRROR =3D "http://www.apache.org/dist"
-> +APACHE_MIRROR =3D "http://archive.apache.org/dist"
-> =A0DEBIAN_MIRROR =3D "ftp://ftp.debian.org/debian/pool"
-> =A0E_CVS =3D "cvs://anonymous@anoncvs.enlightenment.org/var/cvs/e"
-> =A0E_URI =3D "http://enlightenment.freedesktop.org/files"
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+Bye Henning
 
 
