@@ -1,31 +1,40 @@
-Received: from mail.gmx.net ([213.165.64.20])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OYSZ9-0000dN-TM
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 01:37:54 +0200
-Received: (qmail invoked by alias); 12 Jul 2010 23:32:42 -0000
-Received: from p5088590D.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.89.13]
-	by mail.gmx.net (mp071) with SMTP; 13 Jul 2010 01:32:42 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/dydpBQbDdde1Q+UTT4TJWzelLvFsTAaN6v8nf6z
-	dn3DGxH08K4XD5
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 13 Jul 2010 01:26:33 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OYTFd-0006kF-LP
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 13 Jul 2010 02:21:34 +0200
+Received: by iwn34 with SMTP id 34so5324477iwn.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Mon, 12 Jul 2010 17:16:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=ASR7PIMmpo7ZKKHR9zHhl2J0BHpu3x6QaouBjCYWK04=;
+	b=e8WqsmUirkGLoYAPj+tlvz8LGbrgcZxjFyJ/owaKYKgHDjwzcKk3FYWYu9K2NsfMp5
+	l+ykq3bcrupjKjtGHEk/874UerFipTBAsnzGY164hZfuL6/bxXDt7Q4OXYz11FCRcMI7
+	bKi8U3iWQsnUDvAwiYcm5uhH5tYGOHrbm4LtY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=vj45J5TlX2kUByGrgbE3W4YOIpa88z6YXDwqF8Wk04nZpXVzdaj98MVU4BC7l5LbCd
+	qzGaGR7NS0W2bNUPcmU3QxFlOvStra8dkaBzZVKU/vMWXAiRnF/NHoqtWgbggGPzXYHH
+	5SpptFGFiXuElDqSzhgi9XWS3NwdssScyU7DY=
+Received: by 10.231.39.134 with SMTP id g6mr15044557ibe.8.1278980198123; Mon, 
+	12 Jul 2010 17:16:38 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <201007130126.34041.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.20
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Received: by 10.231.11.12 with HTTP; Mon, 12 Jul 2010 17:16:18 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 12 Jul 2010 17:16:18 -0700
+Message-ID: <AANLkTikKXHiMfG0M0xe6VsLIrvD4ZaO-jlQ1vqTPrV90@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Distros angstrom/kaeilos: Remove preferred versions for mutter
+Subject: gettext-native dependency and attr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,60 +48,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 12 Jul 2010 23:37:54 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
-Content-Disposition: inline
+X-List-Received-Date: Tue, 13 Jul 2010 00:21:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-While preparing recipes for mutter, this caused me half an hour of headache=
-=2E.
+Hi
 
-=46rom bd77527504ededbe4daed06cddbe1df851c898e3 Mon Sep 17 00:00:00 2001
-=46rom: Andreas Mueller <schnitzeltony@gmx.de>
-Date: Tue, 13 Jul 2010 01:22:35 +0200
-Subject: [PATCH] Distros angstrom/kaeilos: Remove preferred versions for mu=
-tter
-  (we do not yet have mutter in OE)
+While building from scratch I noticed that do_compile of attr failed
+with below error
+
+| make -C man2
+| make[2]: Entering directory
+`/scratch/oe/work/armv5te-oe-linux-uclibceabi/attr-2.4.44-r4/attr-2.4.44/po'
+| /scratch/oe/sysroots/i686-linux/usr/bin/msgfmt -o cs.mo cs.po
+| make[2]: /scratch/oe/sysroots/i686-linux/usr/bin/msgfmt: Command not found
+| make[2]: *** [cs.mo] Error 127
 
 
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
-=2D--
- .../include/angstrom-2008-preferred-versions.inc   |    1 -
- .../include/kaeilos-2009-preferred-versions.inc    |    1 -
- 2 files changed, 0 insertions(+), 2 deletions(-)
+msgfmt should come from gettext-native which is in the DEPENDS list
+and it being compiled at same time.
+and it has not yet been staged as can be seen
 
-diff --git a/conf/distro/include/angstrom-2008-preferred-versions.inc b/con=
-f/distro/include/angstrom-2008-preferred-versions.inc
-index b6ba724..37021c1 100644
-=2D-- a/conf/distro/include/angstrom-2008-preferred-versions.inc
-+++ b/conf/distro/include/angstrom-2008-preferred-versions.inc
-@@ -79,7 +79,6 @@ SRCREV_pn-librest ?=3D "14d35103d9649dc1e10c3e9ac2c690b31=
-65c8184"
- SRCREV_pn-moblin-menus ?=3D "e1d63681739dd16195d005b3cf15752df294bd3c"
- SRCREV_pn-mojito ?=3D "0542c4b0e26c0e3b69c5ad1fa1898dc276fb9f48"
- SRCREV_pn-mozilla-headless-services ?=3D "c7873654894af6c7c6c01194d6185db4=
-6667b81f"
-=2DSRCREV_pn-mutter ?=3D "aff4cf110307e149d3497d20543cde27b9699758"
- SRCREV_pn-twitter-glib ?=3D "849bec29292df88590e0b2898b50b9b8d766817e"
- SRCREV_pn-xf86-video-psb ?=3D "b6b3bba06fe5a3fe0b1bd6e31a7369dd83812bab"
-=20
-diff --git a/conf/distro/include/kaeilos-2009-preferred-versions.inc b/conf=
-/distro/include/kaeilos-2009-preferred-versions.inc
-index a63359d..18597ab 100644
-=2D-- a/conf/distro/include/kaeilos-2009-preferred-versions.inc
-+++ b/conf/distro/include/kaeilos-2009-preferred-versions.inc
-@@ -89,7 +89,6 @@ SRCREV_pn-librest ?=3D "14d35103d9649dc1e10c3e9ac2c690b31=
-65c8184"
- SRCREV_pn-moblin-menus ?=3D "e1d63681739dd16195d005b3cf15752df294bd3c"
- SRCREV_pn-mojito ?=3D "0542c4b0e26c0e3b69c5ad1fa1898dc276fb9f48"
- SRCREV_pn-mozilla-headless-services ?=3D "c7873654894af6c7c6c01194d6185db4=
-6667b81f"
-=2DSRCREV_pn-mutter ?=3D "aff4cf110307e149d3497d20543cde27b9699758"
- SRCREV_pn-twitter-glib ?=3D "849bec29292df88590e0b2898b50b9b8d766817e"
- SRCREV_pn-xf86-video-psb ?=3D "b6b3bba06fe5a3fe0b1bd6e31a7369dd83812bab"
-=20
-=2D-=20
-1.5.3.4
+ERROR: TaskFailed event exception, aborting
+ERROR: Task 1825
+(/home/kraj/work/oe/openembedded/recipes/udev/attr_2.4.44.bb,
+do_compile) failed with 256
+Waiting for 1 active tasks to finish:
+1: gettext-native-0.18-r1 do_populate_sysroot (pid 11943)
+
+Why would do_compile of libattr start executing when a package in its
+DEPENDS is still not staged in sysroot ?
+I think it should wait until all the recipes in DEPENDS list are built
+and staged. Ofcourse now if I restart
+the build then it works fine because do_populate_sysroot finished for
+gettext-native and the binary will be
+found next time.
+
+I am using .dev and bitbake from git master and
+PARALLEL_MAKE="-j2"
+BB_NUMBER_THREADS = "2"
+
+Thanks
+-Khem
 
 
