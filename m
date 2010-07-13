@@ -1,50 +1,44 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OYYaN-0007gy-9b
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OYYdb-0007oQ-CV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 13 Jul 2010 08:03:20 +0200
-Received: by bwz10 with SMTP id 10so3457043bwz.6
+	Tue, 13 Jul 2010 08:06:43 +0200
+Received: by bwz10 with SMTP id 10so3459028bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 12 Jul 2010 22:58:24 -0700 (PDT)
+	Mon, 12 Jul 2010 23:01:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=Crzf6iP9F7sKMATtmc0fbQlhvwtj5ZvBqCGkpuUGnCw=;
-	b=Um2QMCrmtaSbiHvv9LdQTJHHcKbkUxodTjV52pVMHNPLXeOzFZuY6wV34ASTvwoETj
-	9KD4aBdjhKoqzveGcLQIqTlVM3mL3QVj5OfcxCkr3hsjeyxgaWLBFrP9eyo/XznH7tT4
-	0vHc6pziaRb7+iJQB0Op2iNeAMnc9T8TxFJ8w=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=JKUbuIYnJIxvqnqE/F3zi4WFBZ6dwRhN/Dbd1iDG0Qs=;
+	b=dhiOZ2tDa8Xpt7UVcq7oj5keIllTWIv1jN+jBHCThNNNBHmQ6xh7wZnovb7CQ2YQKN
+	sLX6HZaZDYFWltuvsq5Zqz8SBWUl0ApYqVQ04uKHlYvasEyfnBsLCjdAAbrbKSz703pl
+	VO6k8ALCf31FGMTnzbIFjWR7zqY2lzLJog09c=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=Gz+ZQqNqBT8pFFQwa3hqxhtRo+JLV7HKz9gM0YBuSgM5I1e2xl5N8RiTbjkcNF4uC+
-	FTXB8X7+pgLLmZ8VX9zGWwvNH3w+thXmnVSodtSypcXLrrKCPYxXh9BGjRjhJ+5dSLSN
-	1z1vi23TaE+3eHPT7sXeZ4srDTYeE9enk54NM=
-Received: by 10.204.56.84 with SMTP id x20mr1338793bkg.68.1279000704215;
-	Mon, 12 Jul 2010 22:58:24 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id bq20sm22108291bkb.4.2010.07.12.22.58.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 12 Jul 2010 22:58:23 -0700 (PDT)
-Date: Tue, 13 Jul 2010 07:57:51 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100713055751.GE15231@jama>
-References: <4C2AC77A.70102@gmail.com> <4C2ACDE8.7080801@gmail.com>
-	<AANLkTimjZRbz8vPEG4xJzzjuebgHitB3NdbqyCywWNdg@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ef4Tgm+dadKjIcUJsK4MG6fmpEIPP0ZCpT3QfI2wVrFwTHdb6gSAQQkGx2Lx4nW5LU
+	AifX23LBOemjVS+7NCEDANZkBUwGKmUzEgiSRx4dmgXMjsyJxCa/qzjZxP3pbf3v6erZ
+	ZYxA3dnsPqERxh5quXSDL41Sj65+3nzKtYzoU=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimjZRbz8vPEG4xJzzjuebgHitB3NdbqyCywWNdg@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Received: by 10.204.70.140 with SMTP id d12mr11660984bkj.37.1279000904207; 
+	Mon, 12 Jul 2010 23:01:44 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Mon, 12 Jul 2010 23:01:44 -0700 (PDT)
+In-Reply-To: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
+References: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
+Date: Tue, 13 Jul 2010 08:01:44 +0200
+Message-ID: <AANLkTilt38IIysypXu4t6DweZkrLBZJB5dSL2_m_cAF4@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
+Subject: Re: [PATCH 1/9] xilinx-virtex4: new file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,36 +52,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 13 Jul 2010 06:03:20 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 13 Jul 2010 06:06:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 13, 2010 at 02:46:09PM +0930, Graham Gower wrote:
-> Bump.
+2010/7/12 Adrian Alonso <aalonso00@gmail.com>:
+> * New config machine, generic support for Xilinx
+> =A0Virtex4 platforms ml401, ml403, ml405, ml410
+> * Tested on ml405 target board, powerpc based ref
+> =A0design at http://github.com/aalonso/xilinx-ml405
+> * Target configuration handled in xilinx-bsp.bbclass
+>
+> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+> ---
+> =A0conf/machine/xilinx-virtex4.conf | =A0 40 ++++++++++++++++++++++++++++=
+++++++++++
+> =A01 files changed, 40 insertions(+), 0 deletions(-)
+> =A0create mode 100644 conf/machine/xilinx-virtex4.conf
+>
+> diff --git a/conf/machine/xilinx-virtex4.conf b/conf/machine/xilinx-virte=
+x4.conf
+> new file mode 100644
+> index 0000000..942b63f
+> --- /dev/null
+> +++ b/conf/machine/xilinx-virtex4.conf
+> @@ -0,0 +1,40 @@
+> +# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
+> +# Released under the MIT license (see packages/COPYING)
+> +#@TYPE: Machine
+> +#@Name: Xilinx Virtex4 FPGA Development Platform
+> +#@DESCRIPTION: Machine configuration for Xilinx Virtex4 family
+> +# Supported targets
+> +# ML403, ML405, ML410
+> +
+> +# Default arch can be overrided in local.conf
+> +TARGET_ARCH ?=3D "powerpc"
 
-Seems OK for SHR (we don't really need curl or gpg).
+Do we expect to be this machine to be powerpc only or would there be
+any chance that someone puts linux on microblaze on it?
+If so is this going to be in this file?
+If we think microblaze linux on this board will happen and not in this
+file perhaps make explicit in the machine name that it is ppc only.
+If microblaze on this board is unlikely it is afaik ok as it is.
 
-> On 30 June 2010 14:24, Graham Gower <graham.gower@gmail.com> wrote:
-> > None of the distros in OE appear to want/need gpg or curl support in opkg;
-> > so have opkg.inc remove them by default. This diff makes things more consistent
-> > across all distros/tasks/images.
-> >
-> > The slugos recipe is kept intact and further divided from the more modern
-> > recipes. The opkg-native recipe is the sane-srcrev version even when building
-> > slugos, which should allow for changes to opkg related bbclasses without
-> > breaking the slugos build.
-> >
-> > Build tested for qemumipsel/minimal-image and nslu2/slugos-image.
-> > minimal-image builds 10% quicker in my setup and is 1mb smaller.
-> > ---
-> >
-> > v2:
-> >  A stray missing double quote makes the last patch a no go.
+> +TARGET_CPU =A0?=3D "405"
+> +TARGET_FPU =A0?=3D "soft"
+> +TARGET_TUNE ?=3D "ppc405"
+> +#tune for the selected cpu
+> +require conf/machine/include/tune-${TARGET_TUNE}.inc
+> +
+> +#ASSUME_PROVIDED +=3D "virtual/kernel"
 
-Regards,
+I'd say remove the line above. It is harmless as it is comment but
+could lead to confusion.
+(or if it is useful for people to have this perhaps have a line or two
+of comment)
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+> +PREFERRED_PROVIDER_virtual/kernel =3D "linux-xilinx"
+> +PREFERRED_VERSION_u-boot_xilinx-virtex4 =3D "u-boot-xilinx"
+> +
+> +KERNEL_IMAGETYPE =3D "uImage"
+> +
+> +MACHINE_FEATURES =3D "kernel26 apm ext2 vfat ethernet"
+> +MACHINE_EXTRA_RECOMMENDS =3D "kernel-modules"
+> +
+> +UBOOT_ENTRYPOINT ?=3D "0x00000000"
+> +UBOOT_LOADADDRESS ?=3D "0x00000000"
+> +
+> +# Xilinx EDK override hardware =A0definitions for xilinx-bsp
+> +# Include in your local.conf
+> +# XILINX_BSP_PATH =3D "complete path for Xilinx XPS project"
+> +# XILINX_BOARD =3D "ml410"
+> +
+> +# Don't use tty1
+> +USE_VT =3D "0"
+> +SERIAL_CONSOLE =3D "9600 ttyS0"
+> +
+> +# Device nodes add xsa for (system ace)
+> +IMAGE_DEVICE_TABLES =3D "files/device_table-minimal.txt \
+> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 files/device_table_add-xsa.=
+txt"
+> --
+> 1.7.1.1
 
 
