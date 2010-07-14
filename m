@@ -1,46 +1,45 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OYvho-0002aM-Vp
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OYw04-0000En-Pr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 08:44:46 +0200
-Received: by iwn34 with SMTP id 34so6807495iwn.6
+	Wed, 14 Jul 2010 09:03:25 +0200
+Received: by bwz10 with SMTP id 10so4396256bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jul 2010 23:44:31 -0700 (PDT)
+	Wed, 14 Jul 2010 00:03:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=BelzFzDg2Q6yeQFEUNDQhV3iN0b6XMQRR2c/1wIxnww=;
-	b=Pvqyjp4zGIcEMO9ewN1InC0jzgFRz1c42ZRRBRDIV2uPLvogHLobgFLpLCTzEHevFZ
-	2aD1YKA4m7075ffAZDO7hLgeA+Gsz598CHL02XFshiPqajdIq997rvvVlgiteReuWw5E
-	SL2wzjKta7gW8+5IMaMbQKA0XarBez+qB7gq4=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=w22xwElwHjY4CO2wF+JCNWEKPd2aXsf0Eot5yHBwPE8=;
+	b=KEb5LJWc9i+/HxN3MoHKQ1WFFyQAIfh0BXCDkcdy+WYDHH/r7kVrd6X2ljKotY9sII
+	+wjKq1mUBTdNVcxNeaxG4IgA92cdKbjjPlPXajV12Su/U5n2RmCjjW4T4FQ50FbC1BG9
+	nKw37s5zJdxVGbRCnKcIOcf0QwBfqlrbeyU1w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=JQq7elYZfu4fw0tE86LIEA90WWN7SJm+xpVrn5npqnR4fAYQvcfzzi0eF2K0HGBiyB
-	0RiVdOMT/Q3nw2u/OrVyoDx5F4tTeXa7RvOzPaLLy3ZflVvhhpskTK1wSUzJZPrMrznK
-	m4byCwOVqkbPoYBzOKlhZKpbrrrbym2wruQhU=
-Received: by 10.42.36.3 with SMTP id s3mr5467748icd.95.1279089870296; Tue, 13 
-	Jul 2010 23:44:30 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=u/Z5Y4Hd99PrUrsiHrmcLzhutmI1sIy+Qyy0HXcNVUCsIN83Tp2UUHLivSVvIVge/o
+	V6IUN9PVz2+mIJyrVw6m4SXPkNbZQ6F8GluNWb7n9BOSY4aboAgF/9b3C7mx0ktqxbqe
+	/JyV88OJ4OFj7/I3GJXQ/7q+kc/m6SgdAAFi0=
 MIME-Version: 1.0
-Received: by 10.231.11.12 with HTTP; Tue, 13 Jul 2010 23:44:10 -0700 (PDT)
-In-Reply-To: <113134CF306E8E4CACC27BE5937261B20931BF1B28@AUSX7MCPS303.AMER.DELL.COM>
-References: <113134CF306E8E4CACC27BE5937261B20931BF148F@AUSX7MCPS303.AMER.DELL.COM>
-	<AANLkTilYsPNfPjreXVd31_k4mzUDHLiyY4XlPNmJh6x-@mail.gmail.com> 
-	<113134CF306E8E4CACC27BE5937261B20931BF1B28@AUSX7MCPS303.AMER.DELL.COM>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 13 Jul 2010 23:44:10 -0700
-Message-ID: <AANLkTildsmw9qsK89yM-ta6Lj0BBJj3clWCyD8z6p1V3@mail.gmail.com>
+Received: by 10.204.47.36 with SMTP id l36mr12795262bkf.32.1279090995752; Wed, 
+	14 Jul 2010 00:03:15 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Wed, 14 Jul 2010 00:03:15 -0700 (PDT)
+In-Reply-To: <4C3CEC5C.8080506@mentor.com>
+References: <E1OYmec-0005TF-MX@melo.openembedded.org>
+	<4C3CEC5C.8080506@mentor.com>
+Date: Wed, 14 Jul 2010 09:03:15 +0200
+Message-ID: <AANLkTin00ehMzluJxB7_PIBze8OM-gxZBiC9qBpfc5ub@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Correcting APACHE mirror location for APR recipes.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [oe-commits] Dmitry Eremin-Solenikov : u-boot: add a recipe for fresh release of u-boot. Also make it default for tqm8540 board
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,78 +53,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 06:44:47 -0000
+X-List-Received-Date: Wed, 14 Jul 2010 07:03:30 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Tue, Jul 13, 2010 at 8:08 AM,  <Sean_Hudson@dell.com> wrote:
-> It appears as though the only versions visible at the current URL are the=
- latest version. =A0To get access to the latest version, the archive URL ap=
-pears to be necessary. =A0It is worth noting that the archive seems to cont=
-ain the latest version too.
+2010/7/14 Tom Rini <tom_rini@mentor.com>
 
-OK. Does this require any updates to checksums ?
+> git version control wrote:
+>
+>> Module: openembedded.git
+>> Branch: org.openembedded.dev
+>> Commit: e1a3091c2417994a798b51bc6d6cac1d52799865
+>> URL:
+>> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=e1a3091c2417994a798b51bc6d6cac1d52799865
+>>
+>> Author: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>> Date:   Wed Jul 14 00:01:39 2010 +0400
+>>
+>> u-boot: add a recipe for fresh release of u-boot. Also make it default for
+>> tqm8540 board
+>>
+>> Signed-off-by: Dmitry Eremin-Solenikov <dbaryshkov@gmail.com>
+>>
+>> ---
+>>
+>>  recipes/u-boot/u-boot_2010.06.bb |   20 ++++++++++++++++++++
+>>  1 files changed, 20 insertions(+), 0 deletions(-)
+>>
+>> diff --git a/recipes/u-boot/u-boot_2010.06.bb b/recipes/u-boot/
+>> u-boot_2010.06.bb
+>> new file mode 100644
+>> index 0000000..73dea39
+>> --- /dev/null
+>> +++ b/recipes/u-boot/u-boot_2010.06.bb
+>> @@ -0,0 +1,20 @@
+>> +PR = "r1"
+>> +require u-boot.inc
+>> +
+>> +DEFAULT_PREFERENCE = "-1"
+>> +DEFAULT_PREFERENCE_tqm8540 = "1"
+>> +
+>> +SRC_URI = "ftp://ftp.denx.de/pub/u-boot/u-boot-${PV}.tar.bz2<ftp://ftp.denx.de/pub/u-boot/u-boot-$%7BPV%7D.tar.bz2>"
+>> +
+>> +TARGET_LDFLAGS = ""
+>> +
+>> +inherit base
+>> +
+>> +do_compile () {
+>> +       oe_runmake ${UBOOT_MACHINE}
+>> +       oe_runmake all
+>> +}
+>>
+>
+> I know this isn't new.  Why is the oe_runmake ${UBOOT_MACHINE}, which is
+> basically "configure u-boot for this machine" in do_compile and not
+> do_configure?
+>
+
+I suspect this is because it happens in some other recipes.
+
+There is an issue if you want to generate multiple u-boot binaries in one
+recipe (like the gta guys do, and like I had to do for mpc8536 which has
+different u-boots for sd, spi flash and nand).
+Typically what you then get is multiple lines like given above in
+do_compile.
 
 
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
-> Sent: Tuesday, July 13, 2010 1:06 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH] Correcting APACHE mirror location for APR recip=
-es.
->
-> On Mon, Jul 12, 2010 at 3:31 PM, =A0<Sean_Hudson@dell.com> wrote:
->> Hi all,
->>
->> =A0We recently noticed that apr and apr-util recipes were not fetching c=
-orrectly.
->> =A0It appears as though the APACHE_MIRROR variable in the bitbake.conf f=
-ile.
->>
->> =A0Below is a trivial patch to update the variable.
->
-> I am able to see the files in existing URL. What problem did you have
->
->>
->> Regards,
->> Sean
->>
->>
->> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
->> index 12a5522..71c7273 100644
->> --- a/conf/bitbake.conf
->> +++ b/conf/bitbake.conf
->> @@ -533,7 +533,7 @@ export palmqtdir =3D "${palmtopdir}"
->> =A0OE_STRICT_CHECKSUMS ?=3D "1"
->>
->> =A0ADOBE_MIRROR =3D "http://fpdownload.macromedia.com/get/flashplayer/cu=
-rrent/"
->> -APACHE_MIRROR =3D "http://www.apache.org/dist"
->> +APACHE_MIRROR =3D "http://archive.apache.org/dist"
->> =A0DEBIAN_MIRROR =3D "ftp://ftp.debian.org/debian/pool"
->> =A0E_CVS =3D "cvs://anonymous@anoncvs.enlightenment.org/var/cvs/e"
->> =A0E_URI =3D "http://enlightenment.freedesktop.org/files"
->>
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+> --
+> Tom Rini
+> Mentor Graphics Corporation
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
 
