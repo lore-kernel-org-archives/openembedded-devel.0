@@ -1,31 +1,46 @@
-Received: from smtp207.alice.it ([82.57.200.103])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1OZ83d-0001YR-I8
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OZ88A-0003qT-Dx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 21:55:57 +0200
-Received: from jcn (79.2.139.100) by smtp207.alice.it (8.5.124.08)
-	id 4C1A26CF01CF0FA9; Wed, 14 Jul 2010 21:50:18 +0200
-Date: Wed, 14 Jul 2010 21:50:11 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	Wed, 14 Jul 2010 22:00:34 +0200
+Received: by bwz10 with SMTP id 10so209837bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jul 2010 13:00:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=cDYe60lcr5O2ZNEiM68a8J2ms5qBjwfUPQRg5Ov/Br8=;
+	b=xwtnjc46OF+sOtKndkT0FdGsg1CXXUP2d+GDzSifPSWd6E1nubEV6t8SMQ4UB6cc+C
+	jyCEcd90N7H9rvTpEE7owPphiytPs9UzU9iZwbQRFDF2FbDualsdYG5fQG35kfoKxfwa
+	smrx0Bj/BHrldB6GoCFHK40ImFbsu/9hwTX9M=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=icTNFvoGGuRDAdMX42gixF9tzGqr3sTB+Sk3VYaBnb1VhoJA/uEZyk4Aav7jqHk1Ue
+	o4VXnQbxwHwgV4AIyEjqFCPd/skhPoLhLyid9Rak7lwx4qOK9M4zXafyPhpqppX8T1eH
+	vR0xxSUUpXwpZl0n2jPpNvP4WKKX0Cy4MX6l4=
+Received: by 10.204.179.19 with SMTP id bo19mr13446714bkb.209.1279137632710;
+	Wed, 14 Jul 2010 13:00:32 -0700 (PDT)
+Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
+	by mx.google.com with ESMTPS id a9sm1543119bky.23.2010.07.14.13.00.31
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 14 Jul 2010 13:00:32 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OZ87z-0008VX-SR; Wed, 14 Jul 2010 22:00:23 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100714215011.7db929c1.ospite@studenti.unina.it>
-In-Reply-To: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
-References: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
-X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
-Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 82.57.200.103
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+Date: Wed, 14 Jul 2010 22:00:21 +0200
+Message-Id: <1279137621-32592-1-git-send-email-rep.dot.nop@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] libgpsbt_0.1: adding dbus-glib to DEPENDS
+Subject: [PATCH] minimal: commentary typo fix
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,62 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 19:55:57 -0000
-X-Groupsio-MsgNum: 20977
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC"
+X-List-Received-Date: Wed, 14 Jul 2010 20:00:34 -0000
 
---Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+---
+ conf/distro/minimal-uclibc.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-On Tue, 13 Jul 2010 16:08:56 +0200
-Nicola Ranaldo <nicola.ranaldo@gmail.com> wrote:
+diff --git a/conf/distro/minimal-uclibc.conf b/conf/distro/minimal-uclibc.conf
+index 44805cf..3347811 100644
+--- a/conf/distro/minimal-uclibc.conf
++++ b/conf/distro/minimal-uclibc.conf
+@@ -42,5 +42,5 @@ DISTRO_FEATURES += "eabi"
+ DISTRO_FEATURES += "pam"
+ # large file support is needed for libsndfile
+ DISTRO_FEATURES += "largefile"
+-# glib-2.0 nneds ipv6 and there is no knob to control it
++# glib-2.0 needs ipv6 and there is no knob to control it
+ DISTRO_FEATURES += "ipv4 ipv6"
+-- 
+1.7.1
 
-> ---
->  recipes/maemo4/libgpsbt_0.1.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->
 
-Hi Nicola, would you mind telling something more about these patches?
-Why are they needed: are they urgent fixes for non building recipes, are
-they "only" improvements?
 
-If you are the same Nicola Ranaldo from unina.it I might consider
-pushing them for you in OE "upon trust" (if others confirm me that it
-is ok to do so), but that's just because I know you from fame;
-generally a more verbose commit message would help people in picking up
-patches about areas of a project they are not directly interested in.
-
-Ah, and you should increase PR when changing a recipe like you are
-doing.
-
-Ciao ciao,
-   Antonio
-
---=20
-Antonio Ospite
-http://ao2.it
-
-PGP public key ID: 0x4553B001
-
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
-
---Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC
-Content-Type: application/pgp-signature
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkw+FPMACgkQ5xr2akVTsAGZpACbBTLarzjAOZnynGUo41DXrjrz
-CpIAmwSNpFuIyDGeskL6O5uGA1toiP1x
-=U65b
------END PGP SIGNATURE-----
-
---Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC--
