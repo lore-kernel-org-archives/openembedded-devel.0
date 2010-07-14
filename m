@@ -1,46 +1,45 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1OYwNU-00086t-8j
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OYxxg-0003kq-Gk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 09:27:36 +0200
-Received: by fxm12 with SMTP id 12so3068773fxm.6
+	Wed, 14 Jul 2010 11:09:22 +0200
+Received: by bwz10 with SMTP id 10so4468211bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 00:27:33 -0700 (PDT)
+	Wed, 14 Jul 2010 02:09:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=esUP2Mt198Bwk+IS9RFdRpQ8vEsZnzaQUg4kOnNulp0=;
-	b=U1yd8S4xGVIAOgqg+CoRGwvo9n3RwmIN1N0U9L64XdcGQsF3cYMyJyXeqqdTIU63f+
-	XQyZL44gz4txmYxc7J6kpV4mGvIugfKfXMxas15tsnInDZz4vfssbhquP2pOi6di4kw7
-	EY5ecniNwrTg1Hq2Gie/DuDvwfMZU8722+Pok=
+	bh=mSma1u17tTm3ubdCT1XDpquI/xkmp35oaZ2Qyh2ZokI=;
+	b=jRHoxqCjmkY41zFltqVyj+Chf9puvXs2EUl9Ew4BETjqDwFPuDGCsYk243VVPF4gu/
+	dhcwCi+NqIjr7UImEuZnntII0bTYrwVJt+TkkywS5iWtu8+E4RHfj9wfs59gGHt6KD45
+	62EUlwsFDDBuKMNrEPFv6qPxJo9bFA7f5gIDk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=og6XVC66qveX8kbmugDvcnxeI1/wXKOrOQDr/9FjoZeYNs4lBGdpLEt2YoPfQJWfTn
-	dCFd1yB3r+H4ionGciMACjt5T58cboTPPyE+EiRZ/hdXxNe9Z7TDjcZR1Z7PfegyhTfS
-	2T8tMEyYyKCPWiQx3lcGnCA2KpLwvOJkp5Hj4=
+	b=F9yPyN9+bOZbicDrcpdMoL3YEhuqs8dNUHEvMqtxG4xy20Sc1gm2rfFbaz3ILy6CO4
+	IUYo04O9x7JlnRE44NH/0Faw8wpPiXj0kIZvMFdMXI5NUIVH76oszPYuRrGKIkbV4+vL
+	jBmzkKGSzv536S+XmA3+4KV18Me77iFihA+EY=
 MIME-Version: 1.0
-Received: by 10.239.190.78 with SMTP id w14mr281472hbh.197.1279092453179; Wed, 
-	14 Jul 2010 00:27:33 -0700 (PDT)
-Received: by 10.239.181.207 with HTTP; Wed, 14 Jul 2010 00:27:32 -0700 (PDT)
-In-Reply-To: <AANLkTimXB5CusyFxI_DF8g51O2wQed1i-RljaGY2OCOy@mail.gmail.com>
-References: <1278577398.15825.1.camel@lenovo.internal.reciva.com>
-	<1278778757-31330-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1278850318.2345.1909.camel@mill.internal.reciva.com>
-	<AANLkTimXB5CusyFxI_DF8g51O2wQed1i-RljaGY2OCOy@mail.gmail.com>
-Date: Wed, 14 Jul 2010 09:27:32 +0200
-Message-ID: <AANLkTildISo587mMgQUPyNcgHNOShJODCIu0HccsvCpN@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+Received: by 10.204.47.214 with SMTP id o22mr8580972bkf.17.1279098542883; Wed, 
+	14 Jul 2010 02:09:02 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Wed, 14 Jul 2010 02:09:02 -0700 (PDT)
+In-Reply-To: <1278849179-17002-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <AANLkTilGJjsqfz2zu4m3m5vQ99jCX44CrtFUSiRTpkE9@mail.gmail.com>
+	<1278849179-17002-1-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Wed, 14 Jul 2010 11:09:02 +0200
+Message-ID: <AANLkTimCeTdGIDznDv6NPf-q7dSUSYIEjQIZwrkdhkAT@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: introduce COMPATIBLE_TARGET_SYS
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] glibc 2;5: cleaned up; patches only in local dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,16 +53,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 07:27:36 -0000
+X-List-Received-Date: Wed, 14 Jul 2010 09:09:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Jul 12, 2010 at 8:24 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> BTW: there are other ways to reduce parsing time, but people do not
-> like it if I mention them :-)
+2010/7/11 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-I for one, would like if you cared to mention them, please :-)
+> mved all patches to glibc-2.5
+> removed references to other dirs.
+>
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> ---
+>
+> This is as discussed in the ML
+>
+> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg07545.html
+> If I get two acks for this I'll also create and submit patches for the
+> other versions
+> followed by a patch to remove the unused versions (as listed in the above
+> thread).
+> That is: barring  objections ofc.
+>
+> Have fun, Frans.
+>
+> Hi,
 
-/Esben
+I didn't see any reply on this. Don't know how I should interpret that.
+Is there just no interest in this ? That would be :-(
+Do people agree and are there no comments (in that case could I have an
+ack?)
+Or do people disagree (then please speak up).
 
+Frans
 
