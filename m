@@ -1,29 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from ausxippc101.us.dell.com ([143.166.85.207])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OZ6wM-0004l9-80 for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 20:44:29 +0200
-Received: from f053035167.adsl.alicedsl.de ([78.53.35.167]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OZ6wK-0007sj-OH for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 18:44:16 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Jul 2010 20:44:14 +0200
-Message-ID: <1279133054.4939.16.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <Sean_Hudson@Dell.com>) id 1OZ7VB-0007O2-Lm
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Jul 2010 21:20:18 +0200
+X-Loopcount0: from 10.166.72.158
+From: <Sean_Hudson@Dell.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Wed, 14 Jul 2010 14:20:06 -0500
+Thread-Topic: [oe] SSH configuration question.
+Thread-Index: AcsiUUguss2Y8HSsSh+3oZ+ZjUNHbABOCf2Q
+Message-ID: <113134CF306E8E4CACC27BE5937261B20931CA5EBA@AUSX7MCPS303.AMER.DELL.COM>
+References: <AcsiE3tIy8VpAAlrQiyyzbOb0c/t7w==>
+	<113134CF306E8E4CACC27BE5937261B20931BF14A7@AUSX7MCPS303.AMER.DELL.COM>
+	<AANLkTilaDl7gXH2rDTlpJEr52nJz2O9I6rKCzeFWmoLb@mail.gmail.com>
+In-Reply-To: <AANLkTilaDl7gXH2rDTlpJEr52nJz2O9I6rKCzeFWmoLb@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-OriginalArrivalTime: 14 Jul 2010 19:20:08.0005 (UTC)
+	FILETIME=[922C2750:01CB2389]
+X-SA-Exim-Connect-IP: 143.166.85.207
+X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.0 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: angstrom 2008.1, uclibc: libc.so not found, i. e. not in staging directory
+Subject: Re: SSH configuration question.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,59 +43,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 18:44:29 -0000
-X-Groupsio-MsgNum: 20973
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1kxBdc5Ei54mG+BrNoHW"
-
---=-1kxBdc5Ei54mG+BrNoHW
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 14 Jul 2010 19:20:19 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Dear OE folks,
+Thanks for the tip.  The patch included below seems to do the trick.
+
+diff --git a/recipes/openssh/openssh.inc b/recipes/openssh/openssh.inc
+index 9e4ca14..f20f27c 100644
+--- a/recipes/openssh/openssh.inc
++++ b/recipes/openssh/openssh.inc
+@@ -1,4 +1,5 @@
+ DEPENDS =3D "zlib openssl"
++DEPENDS +=3D "${@base_contains('DISTRO_FEATURES', 'pam', 'libpam', '', d)}=
+"
+=20
+ RCONFLICTS_${PN} =3D "dropbear"
+ RCONFLICTS_${PN}-sshd =3D "dropbear"
+@@ -26,7 +27,8 @@ CFLAGS_prepend =3D "-I${S} "
+ CFLAGS_append =3D " -D__FILE_OFFSET_BITS=3D64"
+ LDFLAGS_prepend =3D "-L${S} -L${S}/openbsd-compat "
+ EXTRA_OECONF =3D "--disable-suid-ssh --with-ssl=3D${STAGING_LIBDIR}/ssl \
+-               --with-rand-helper=3Dno --without-pam \
++               --with-rand-helper=3Dno \
++                ${@base_contains('DISTRO_FEATURES', 'pam', '--with-pam', '=
+--without-pam', d)} \
+                --without-zlib-version-check \
+                --with-privsep-path=3D/var/run/sshd \
+                --sysconfdir=3D${sysconfdir}/ssh \
 
 
-I am trying to compile vdr with uclibc. I got the following error.
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
+d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
+Sent: Tuesday, July 13, 2010 1:03 AM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] SSH configuration question.
 
-    /oe/angstrom-dev/cross/armv7a/lib/gcc/arm-angstrom-linux-uclibceabi/4.3=
-.3/../../../../arm-angstrom-linux-uclibceabi/bin/ld: warning: libc.so, need=
-ed by /oe/angstrom-dev/cross/armv7a/lib/gcc/arm-angstrom-linux-uclibceabi/4=
-.3.3/../../../../arm-angstrom-linux-uclibceabi/lib/libgcc_s.so, not found (=
-try using -rpath or -rpath-link)
+On Mon, Jul 12, 2010 at 3:42 PM,  <Sean_Hudson@dell.com> wrote:
+> All,
+>
+> =A0What is the best way to update the configuration used to build SSH?
+>
+> =A0Specifically, I'd like to build SSH with pam enabled, however, the con=
+figuration in the recipes/openssh/openssh.inc specifies "-without-pam".
+>
 
-Creating a symlink seems to be a workaround.
+in your case you could use DISTRO_FEATURE to check if pam is available
+and set the option accordingly. something like below
 
-        $ ls
-        ld-uClibc-0.9.30.2.so  libgcc_s.so.1           libresolv.so.0
-        ld-uClibc.so.0         libm-0.9.30.2.so        librt-0.9.30.2.so
-        libcrypt-0.9.30.2.so   libm.so.0               librt.so.0
-        libcrypt.so.0          libnsl-0.9.30.2.so      libthread_db-0.9.30.=
-2.so
-        libc.so.0              libnsl.so.0             libthread_db.so.1
-        libdl-0.9.30.2.so      libpthread-0.9.30.2.so  libuClibc-0.9.30.2.s=
-o
-        libdl.so.0             libpthread.so.0         libutil-0.9.30.2.so
-        libgcc_s.so            libresolv-0.9.30.2.so   libutil.so.0
-        $ ln -s libc.so.0 libc.so
-
-Any ideas how to fix this properly?
+EXTRA_OECONF +=3D ${@base_contains('DISTRO_FEATURES', 'pam',
+'--with-pam', '--without-pam', d)
 
 
-Thanks,
+Thx
+-Khem
 
-Paul
+> Regards,
+> =A0 =A0 -Sean
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---=-1kxBdc5Ei54mG+BrNoHW
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkw+BX4ACgkQPX1aK2wOHVjoVwCcCkfPGgKysSmL64dGwGWu2x+I
-1WkAn1NvpUnpZ9l05ZZb8vylJqqmBAjO
-=1dR+
------END PGP SIGNATURE-----
-
---=-1kxBdc5Ei54mG+BrNoHW--
