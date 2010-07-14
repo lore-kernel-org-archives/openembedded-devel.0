@@ -1,44 +1,30 @@
-Received: from ausc60pc101.us.dell.com ([143.166.85.206])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Sean_Hudson@Dell.com>) id 1OZ6in-0002h7-TK
+	(envelope-from <roman@khimov.ru>) id 1OZ6kN-0001NU-Do
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 20:30:30 +0200
-X-Loopcount0: from 10.166.62.177
-From: <Sean_Hudson@Dell.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Wed, 14 Jul 2010 13:29:53 -0500
-Thread-Topic: [oe] [PATCH] Correcting APACHE mirror location for APR recipes.
-Thread-Index: AcsjIFGzuLeGSbRVSeGVx4aaS4aunwAYigRA
-Message-ID: <113134CF306E8E4CACC27BE5937261B20931C514D9@AUSX7MCPS303.AMER.DELL.COM>
-References: <113134CF306E8E4CACC27BE5937261B20931BF148F@AUSX7MCPS303.AMER.DELL.COM>
-	<AANLkTilYsPNfPjreXVd31_k4mzUDHLiyY4XlPNmJh6x-@mail.gmail.com>
-	<113134CF306E8E4CACC27BE5937261B20931BF1B28@AUSX7MCPS303.AMER.DELL.COM>
-	<AANLkTildsmw9qsK89yM-ta6Lj0BBJj3clWCyD8z6p1V3@mail.gmail.com>
-In-Reply-To: <AANLkTildsmw9qsK89yM-ta6Lj0BBJj3clWCyD8z6p1V3@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-x-cr-puzzleid: {BAB75B46-010C-46EF-8E41-9D0117453C54}
-x-cr-hashedpuzzle: AW6E A7db BIou EJ72 FkYD GVDc Gdev HWZg Hrpt H6a2 IlPG
-	IlUz Iwln JQkV JvZB KBkR; 1;
-	bwBwAGUAbgBlAG0AYgBlAGQAZABlAGQALQBkAGUAdgBlAGwAQABsAGkAcwB0AHMALgBvAHAAZQBuAGUAbQBiAGUAZABkAGUAZAAuAG8AcgBnAA==;
-	Sosha1_v1; 7; {BAB75B46-010C-46EF-8E41-9D0117453C54};
-	cwBlAGEAbgBfAGgAdQBkAHMAbwBuAEAAZABlAGwAbAAuAGMAbwBtAA==; Wed,
-	14 Jul 2010 18:29:53 GMT;
-	UgBFADoAIABbAG8AZQBdACAAWwBQAEEAVABDAEgAXQAgAEMAbwByAHIAZQBjAHQAaQBuAGcAIABBAFAAQQBDAEgARQAgAG0AaQByAHIAbwByACAAbABvAGMAYQB0AGkAbwBuACAAZgBvAHIAIABBAFAAUgAgAHIAZQBjAGkAcABlAHMALgA=
-acceptlanguage: en-US
+	Wed, 14 Jul 2010 20:31:58 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OZ6kC-0007Mn-0n
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 14 Jul 2010 22:31:48 +0400
+From: Roman I Khimov <roman@khimov.ru>
+To: openembedded-devel@lists.openembedded.org
+Date: Wed, 14 Jul 2010 22:31:39 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1279130162-5731-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1279130162-5731-1-git-send-email-raj.khem@gmail.com>
 MIME-Version: 1.0
-X-OriginalArrivalTime: 14 Jul 2010 18:29:56.0138 (UTC)
-	FILETIME=[8EF5B8A0:01CB2382]
-X-SA-Exim-Connect-IP: 143.166.85.206
-X-SA-Exim-Mail-From: Sean_Hudson@Dell.com
+Message-Id: <201007142231.43112.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Correcting APACHE mirror location for APR recipes.
+Subject: Re: [PATCH] gcc-configure-common.inc: Disable multilib generation.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,95 +38,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 18:31:10 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 14 Jul 2010 18:32:00 -0000
+X-Groupsio-MsgNum: 20969
+Content-Type: multipart/signed; boundary="nextPart6480091.OY1jeKGrl8";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-I have not had to update checksums.  Simply updated the server location and=
- the fetches started working again.
+--nextPart6480091.OY1jeKGrl8
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
------Original Message-----
-From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedde=
-d-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
-Sent: Wednesday, July 14, 2010 1:44 AM
-To: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe] [PATCH] Correcting APACHE mirror location for APR recipes=
-.
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KHRgNC10LTQsCAxNCDQuNGO0LvRjyAyMDEwIDIx
+OjU2OjAyINCw0LLRgtC+0YAgS2hlbSBSYWog0L3QsNC/0LjRgdCw0Ls6Cj4gU2lnbmVkLW9mZi1i
+eTogS2hlbSBSYWogPHJhai5raGVtQGdtYWlsLmNvbT4KPiAtLS0KPiAgcmVjaXBlcy9nY2MvZ2Nj
+LTQuNS5pbmMgICAgICAgICAgICAgIHwgICAgMyArKysKPiAgcmVjaXBlcy9nY2MvZ2NjLWNvbmZp
+Z3VyZS1jb21tb24uaW5jIHwgICAgMiArLQo+ICAyIGZpbGVzIGNoYW5nZWQsIDQgaW5zZXJ0aW9u
+cygrKSwgMSBkZWxldGlvbnMoLSkKCkFja2VkLWJ5OiBSb21hbiBJIEtoaW1vdiA8a2hpbW92QGFs
+dGVsbC5ydT4KCi0tIAogaHR0cDovL3JvbWFuLmtoaW1vdi5ydQptYWlsdG86IHJvbWFuQGtoaW1v
+di5ydQpncGcgLS1rZXlzZXJ2ZXIgaGtwOi8vc3Via2V5cy5wZ3AubmV0IC0tcmVjdi1rZXlzIDB4
+RTVFMDU1QzMK
 
-On Tue, Jul 13, 2010 at 8:08 AM,  <Sean_Hudson@dell.com> wrote:
-> It appears as though the only versions visible at the current URL are the=
- latest version. =A0To get access to the latest version, the archive URL ap=
-pears to be necessary. =A0It is worth noting that the archive seems to cont=
-ain the latest version too.
+--nextPart6480091.OY1jeKGrl8
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-OK. Does this require any updates to checksums ?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
+iEYEABECAAYFAkw+Ao8ACgkQXJ70z+XgVcPjGwCfexgW7x7GUHcPCLZSPr5tocic
+g6IAoNSBhJrgN1mJzpWqtXMnrt7dgzA3
+=BFoQ
+-----END PGP SIGNATURE-----
 
->
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
-ded-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
-> Sent: Tuesday, July 13, 2010 1:06 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH] Correcting APACHE mirror location for APR recip=
-es.
->
-> On Mon, Jul 12, 2010 at 3:31 PM, =A0<Sean_Hudson@dell.com> wrote:
->> Hi all,
->>
->> =A0We recently noticed that apr and apr-util recipes were not fetching c=
-orrectly.
->> =A0It appears as though the APACHE_MIRROR variable in the bitbake.conf f=
-ile.
->>
->> =A0Below is a trivial patch to update the variable.
->
-> I am able to see the files in existing URL. What problem did you have
->
->>
->> Regards,
->> Sean
->>
->>
->> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
->> index 12a5522..71c7273 100644
->> --- a/conf/bitbake.conf
->> +++ b/conf/bitbake.conf
->> @@ -533,7 +533,7 @@ export palmqtdir =3D "${palmtopdir}"
->> =A0OE_STRICT_CHECKSUMS ?=3D "1"
->>
->> =A0ADOBE_MIRROR =3D "http://fpdownload.macromedia.com/get/flashplayer/cu=
-rrent/"
->> -APACHE_MIRROR =3D "http://www.apache.org/dist"
->> +APACHE_MIRROR =3D "http://archive.apache.org/dist"
->> =A0DEBIAN_MIRROR =3D "ftp://ftp.debian.org/debian/pool"
->> =A0E_CVS =3D "cvs://anonymous@anoncvs.enlightenment.org/var/cvs/e"
->> =A0E_URI =3D "http://enlightenment.freedesktop.org/files"
->>
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+--nextPart6480091.OY1jeKGrl8--
