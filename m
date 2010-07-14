@@ -1,43 +1,47 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OYt27-0007nY-E1
+	(envelope-from <graham.gower@gmail.com>) id 1OYttq-0005P4-7c
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 05:53:20 +0200
-Received: by iwn34 with SMTP id 34so6688038iwn.6
+	Wed, 14 Jul 2010 06:48:51 +0200
+Received: by pvg13 with SMTP id 13so3018226pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jul 2010 20:53:17 -0700 (PDT)
+	Tue, 13 Jul 2010 21:48:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=631DXFEdaRB0Qb/ZcpaY/nZgLQjlyYPy7kQzwR/VRRg=;
-	b=I5R7x9UlBdzll+3e5IYsjc8y0E5Xnwmofe4qrdzU+9n6+Mo+BvH3h7iFwPUSizl+6i
-	sHmzngPwkVhuDeZGQllDKD+Hg0nThSV2Cwd3qyvUHxQLYpAhDftTqCz98jZP3AVoOxPq
-	4tWWIswFE4aq2B+MSE31c19EEfVuj/JZdkZgg=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=vNAR4C2Qh/ZxJPAorZ2sPrd7skgOuuMyOwD+0ZwaIO0=;
+	b=xjyz3pauRz9YEp/V6cxwvBI3B7LkznIpRrxCYe0qwwSoemR0A4W/88XECUcecY718s
+	neijLbAtN8znlUW5/6+OyyidlFPgsB+oTWPH/RhzV6EzV6xBpOF8odfahPHAhRi7iJ9v
+	5bz9k83Oum0U2/x5eRkD00KVp6UTjtjvvPjNo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=elNvtr5qrS9J06BAFAU2+ZcTTxGIdGQsiGq48EJQKsQawv6Kn4YT85fEiLLWOnIGXg
-	U28vfTZ3OFGAi1dFbJKL49fsa7t0PQNqU8M5NtikG+LAN33rStqCv3Lhtp1uhWL0ZiiA
-	HzBmXRH06/eBiFUan7/sRM6FconCKBgZcPS7U=
-Received: by 10.231.146.136 with SMTP id h8mr17115960ibv.0.1279079590200; Tue, 
-	13 Jul 2010 20:53:10 -0700 (PDT)
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=eFN5KZsrJDwQ0tgY/Vzrrk+YCBguNebKJc5v8f1zId3KqunzSEzkiqsJKIrzv6XvwG
+	1C8ZI4J0TlfNUxPR/slBPagExGbe8yDKpR++bm5gC4VjEEeplmFoNbSUo4zmXpnwPZ5A
+	i2etLYCQzxnbB/F9d2f7Y+lDfMvqqM6FY3dXg=
+Received: by 10.142.185.13 with SMTP id i13mr5698498wff.234.1279082926010;
+	Tue, 13 Jul 2010 21:48:46 -0700 (PDT)
+Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id 23sm7007625wfa.10.2010.07.13.21.48.43
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 13 Jul 2010 21:48:44 -0700 (PDT)
+Message-ID: <4C3D41A7.3080808@gmail.com>
+Date: Wed, 14 Jul 2010 14:18:39 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.231.11.12 with HTTP; Tue, 13 Jul 2010 20:52:50 -0700 (PDT)
-In-Reply-To: <201007140043.18547.schnitzeltony@gmx.de>
-References: <201007140043.18547.schnitzeltony@gmx.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 13 Jul 2010 20:52:50 -0700
-Message-ID: <AANLkTinpg0fPP-Tw0-pu5hil413KHsOCMJtmyvCVCIvp@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Naming/Version conventions for git/svn recipes
+Subject: [PATCH] usermanual/chapters/recipes.xml: Executables should be executable.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 03:53:20 -0000
+X-List-Received-Date: Wed, 14 Jul 2010 04:48:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 13, 2010 at 3:43 PM, Andreas Mueller <schnitzeltony@gmx.de> wrote:
-> I did not find this in documentation. What is the preferred convention for PV/PR. Up to now I saw:
->
-> Option 1:
-> PV = "1.3.8+git${SRCREV}"
-> PR = "r0"
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ docs/usermanual/chapters/recipes.xml |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-if you have select this recipe you have to specify the SRCREV which is git SHA
-in the PREFERRED_VERSION which is kind of long and annoying.
+diff --git a/docs/usermanual/chapters/recipes.xml b/docs/usermanual/chapters/recipes.xml
+index fdee72c..5b0ff14 100644
+--- a/docs/usermanual/chapters/recipes.xml
++++ b/docs/usermanual/chapters/recipes.xml
+@@ -1138,7 +1138,7 @@ PR = "r0"</screen></para>
+       is done via the install task, so we need to define a do_install function
+       in the recipe to describe how to install the package:<screen>do_install() {
+         install -m 0755 -d ${D}${bindir} ${D}${docdir}/myhelloworld
+-        install -m 0644 ${S}/myhelloworld ${D}${bindir}
++        install -m 0755 ${S}/myhelloworld ${D}${bindir}
+         install -m 0644 ${WORKDIR}/README.txt ${D}${docdir}/myhelloworld
+ }</screen></para>
+ 
+-- 
+1.7.1
 
->
-> Option 2:
-> PV = "1.1.0"
-> PR = "${INC_PR}.0"
-> PR_append = "+git${SRCREV}"
->
-
-which this one you PV is 1.1.0 you can set PV to git also which means
-then you can say PREFERRED_VERSION_xxx = "git"
-
-Recipe still gets rebuilt if you bump SRCREV because of
-PR_append = "+gitr${SRCPV}"
-
-
-
-
-> Is there a preferred convention?
->
-> Andreas
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
