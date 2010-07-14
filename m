@@ -1,46 +1,51 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mailgw1.fjfi.cvut.cz ([147.32.9.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OZ88A-0003qT-Dx
+	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1OZ8KA-0004yL-03
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 22:00:34 +0200
-Received: by bwz10 with SMTP id 10so209837bwz.6
+	Wed, 14 Jul 2010 22:12:58 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 8DA3543D65
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 13:00:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:from:to:cc:subject
-	:date:message-id:x-mailer;
-	bh=cDYe60lcr5O2ZNEiM68a8J2ms5qBjwfUPQRg5Ov/Br8=;
-	b=xwtnjc46OF+sOtKndkT0FdGsg1CXXUP2d+GDzSifPSWd6E1nubEV6t8SMQ4UB6cc+C
-	jyCEcd90N7H9rvTpEE7owPphiytPs9UzU9iZwbQRFDF2FbDualsdYG5fQG35kfoKxfwa
-	smrx0Bj/BHrldB6GoCFHK40ImFbsu/9hwTX9M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=icTNFvoGGuRDAdMX42gixF9tzGqr3sTB+Sk3VYaBnb1VhoJA/uEZyk4Aav7jqHk1Ue
-	o4VXnQbxwHwgV4AIyEjqFCPd/skhPoLhLyid9Rak7lwx4qOK9M4zXafyPhpqppX8T1eH
-	vR0xxSUUpXwpZl0n2jPpNvP4WKKX0Cy4MX6l4=
-Received: by 10.204.179.19 with SMTP id bo19mr13446714bkb.209.1279137632710;
-	Wed, 14 Jul 2010 13:00:32 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id a9sm1543119bky.23.2010.07.14.13.00.31
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 14 Jul 2010 13:00:32 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OZ87z-0008VX-SR; Wed, 14 Jul 2010 22:00:23 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Wed, 14 Jul 2010 22:06:45 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 8DA3543D65
+DKIM-Signature: v=1; a=rsa-sha1; c=simple/simple; d=fjfi.cvut.cz; s=beta512;
+	t=1279138005; i=@fjfi.cvut.cz; bh=XQDyYT8v8Xz8AtuHG9U997OdsbQ=;
+	h=From:Date:Subject:To:Message-Id;
+	b=P2c19wJ+T4kZJKbd+HuG5plqqn0j7LEodxttzA8sZXfl6Nu8SJuzWpdVvFANPxuee
+	ZA8x/Bo9Dn54uxWV59UDA==
+X-CTU-FNSPE-Virus-Scanned: amavisd-new at fjfi.cvut.cz
+X-CTU-FNSPE: this_is_mailgw_for_ctu_fnspe_header
+X-CTU-FNSPE-Helo: linux.fjfi.cvut.cz
+X-CTU-FNSPE-Client-Address: 147.32.5.111
+X-CTU-FNSPE-Client-Name: linux.fjfi.cvut.cz
+X-CTU-FNSPE-Sender: zub@linux.fjfi.cvut.cz
+X-CTU-FNSPE-Recip: openembedded-devel@lists.openembedded.org
+Received: from mailgw1.fjfi.cvut.cz ([127.0.0.1])
+	by localhost (mailgw1.fjfi.cvut.cz [127.0.0.1]) (amavisd-new,
+	port 10026) with ESMTP id qmmtFCk6Au-9
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jul 2010 22:06:45 +0200 (CEST)
+Received: from linux.fjfi.cvut.cz (linux.fjfi.cvut.cz [147.32.5.111])
+	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 2760243D6E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 14 Jul 2010 22:06:45 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 2760243D6E
+X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz 2760243D6E
+Received: by linux.fjfi.cvut.cz (Postfix, from userid 1001)
+	id D636A46774; Wed, 14 Jul 2010 22:06:44 +0200 (CEST)
+From: David Kozub <zub@linux.fjfi.cvut.cz>
+Date: Wed, 14 Jul 2010 21:51:56 +0200
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 14 Jul 2010 22:00:21 +0200
-Message-Id: <1279137621-32592-1-git-send-email-rep.dot.nop@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Message-Id: <20100714200644.D636A46774@linux.fjfi.cvut.cz>
+X-SA-Exim-Connect-IP: 147.32.9.3
+X-SA-Exim-Mail-From: zub@linux.fjfi.cvut.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] minimal: commentary typo fix
+Subject: [PATCH] gdb-common: Fix breakage of gdbserver.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,24 +59,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 20:00:34 -0000
+X-List-Received-Date: Wed, 14 Jul 2010 20:12:59 -0000
 
-Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+Signed-off-by: David Kozub <zub@linux.fjfi.cvut.cz>
 ---
- conf/distro/minimal-uclibc.conf |    2 +-
+ recipes/gdb/gdb-common.inc |    2 +-
  1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/conf/distro/minimal-uclibc.conf b/conf/distro/minimal-uclibc.conf
-index 44805cf..3347811 100644
---- a/conf/distro/minimal-uclibc.conf
-+++ b/conf/distro/minimal-uclibc.conf
-@@ -42,5 +42,5 @@ DISTRO_FEATURES += "eabi"
- DISTRO_FEATURES += "pam"
- # large file support is needed for libsndfile
- DISTRO_FEATURES += "largefile"
--# glib-2.0 nneds ipv6 and there is no knob to control it
-+# glib-2.0 needs ipv6 and there is no knob to control it
- DISTRO_FEATURES += "ipv4 ipv6"
+diff --git a/recipes/gdb/gdb-common.inc b/recipes/gdb/gdb-common.inc
+index 1e0d7c2..c3eef69 100644
+--- a/recipes/gdb/gdb-common.inc
++++ b/recipes/gdb/gdb-common.inc
+@@ -23,7 +23,7 @@ B = "${WORKDIR}/build-${TARGET_SYS}"
+ do_install_append() {
+ 	# these mo files from gdb-cross-sdk clash with files from binutils-cross-sdk
+ 	# when building sdk archives. Drop them for now as a way to restore toolchains.
+-	rm ${D}/${datadir}/locale/*/LC_MESSAGES/{bfd,opcodes}.mo
++	rm -f ${D}/${datadir}/locale/*/LC_MESSAGES/{bfd,opcodes}.mo
+ 
+ 	# we don't care about these infos, installed from binutils
+ 	rm -f ${D}/${infodir}/{configure,standards,bfd}.info
 -- 
 1.7.1
 
