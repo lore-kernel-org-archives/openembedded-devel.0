@@ -1,43 +1,31 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OZ7wb-00082V-Ab
+	(envelope-from <ospite@studenti.unina.it>) id 1OZ83d-0001YR-I8
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 21:48:38 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id AC8B3110009F
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 21:48:34 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id BE8F81100097
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 21:48:33 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052065205.adsl.alicedsl.de
-	[78.52.65.205]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 21:48:33 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 40A873C0ED; Wed, 14 Jul 2010 21:48:23 +0200 (CEST)
-Date: Wed, 14 Jul 2010 21:48:23 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Wed, 14 Jul 2010 21:55:57 +0200
+Received: from jcn (79.2.139.100) by smtp207.alice.it (8.5.124.08)
+	id 4C1A26CF01CF0FA9; Wed, 14 Jul 2010 21:50:18 +0200
+Date: Wed, 14 Jul 2010 21:50:11 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100714194822.GB9771@rhein.zuhause.netz>
-References: <1279133054.4939.16.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1279133054.4939.16.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Message-Id: <20100714215011.7db929c1.ospite@studenti.unina.it>
+In-Reply-To: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
+References: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+Mime-Version: 1.0
+X-SA-Exim-Connect-IP: 82.57.200.103
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom 2008.1, uclibc: libc.so not found, i. e. not in staging directory
+Subject: Re: [PATCH 1/2] libgpsbt_0.1: adding dbus-glib to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,14 +39,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 19:48:38 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 14 Jul 2010 19:55:57 -0000
+X-Groupsio-MsgNum: 20977
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC"
+
+--Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC
+Content-Type: text/plain; charset=US-ASCII
 Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Tue, 13 Jul 2010 16:08:56 +0200
+Nicola Ranaldo <nicola.ranaldo@gmail.com> wrote:
 
-hm you want proably uclibc-git anyway because it has nptl-thread support.
+> ---
+>  recipes/maemo4/libgpsbt_0.1.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>
 
-Bye Henning
+Hi Nicola, would you mind telling something more about these patches?
+Why are they needed: are they urgent fixes for non building recipes, are
+they "only" improvements?
 
+If you are the same Nicola Ranaldo from unina.it I might consider
+pushing them for you in OE "upon trust" (if others confirm me that it
+is ok to do so), but that's just because I know you from fame;
+generally a more verbose commit message would help people in picking up
+patches about areas of a project they are not directly interested in.
 
+Ah, and you should increase PR when changing a recipe like you are
+doing.
+
+Ciao ciao,
+   Antonio
+
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC
+Content-Type: application/pgp-signature
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEARECAAYFAkw+FPMACgkQ5xr2akVTsAGZpACbBTLarzjAOZnynGUo41DXrjrz
+CpIAmwSNpFuIyDGeskL6O5uGA1toiP1x
+=U65b
+-----END PGP SIGNATURE-----
+
+--Signature=_Wed__14_Jul_2010_21_50_11_+0200_xJ.9OS_ZXf0OvcKC--
