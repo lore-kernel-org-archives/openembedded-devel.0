@@ -1,29 +1,30 @@
-Received: from smtp206.alice.it ([82.57.200.102])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1OYzes-0002J5-Vy
+	(envelope-from <philip@balister.org>) id 1OZ1yy-0001bS-4f
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 12:57:49 +0200
-Received: from [192.168.10.100] (95.232.142.62) by smtp206.alice.it
-	(8.5.124.08) (authenticated as editempo)
-	id 4C1A268C01C5F5E9 for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 12:51:41 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Wed, 14 Jul 2010 15:26:42 +0200
+Received: (qmail 20169 invoked by uid 1003); 14 Jul 2010 13:26:36 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 14 Jul 2010 13:26:36 -0000
+Message-ID: <4C3DBB0A.6070907@balister.org>
+Date: Wed, 14 Jul 2010 09:26:34 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.10) Gecko/20100621 Fedora/3.0.5-1.fc13 Thunderbird/3.0.5
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100711145643.q4q6l3lsow8ccogs@webmail.htc-linux.org>
-References: <20100711145643.q4q6l3lsow8ccogs@webmail.htc-linux.org>
-Date: Wed, 14 Jul 2010 07:19:51 +0200
-Message-ID: <1279084791.2869.4.camel@gnutoo-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 82.57.200.102
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+References: <1279060140-17856-1-git-send-email-aalonso00@gmail.com>
+	<AANLkTikVmldXgiiXObLbE5sPWAvFsfEqCuQZZzzmazBw@mail.gmail.com>
+In-Reply-To: <AANLkTikVmldXgiiXObLbE5sPWAvFsfEqCuQZZzzmazBw@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
-	DATE_IN_PAST_03_06 autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: htcleo: touchscreen driver & configuration
+Subject: Re: [PATCH 1/3 v2] xilinx-virtex4: new file
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,56 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 10:57:49 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 14 Jul 2010 13:26:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Sun, 2010-07-11 at 14:56 +0100, lukas gorris wrote:
-> Hello,
-> 
-> except for the 6 keypad buttons, machine htcleo lacks any working
-> input device in its current state in OE.
-> The present touchscreen driver is designed for use with the andoid
-> user space. I would like to make it work with tslib.
-> 
-> In ts_print_raw a touch event looks like this
-> 
-> 670.031357:    110    227      0
-> 2670.071314:    132    266      0
-> 2670.111229:      0      0      0
-> 2670.111236: -947150040 -947440328      0
-> 2670.151243:    285    200      0
-> 2670.191285:    285    202      0
-> 
-> Instead of a real touch event, the pointer will dodge to zero and then
-> to a large negative value.
-> Am I right the driver will need patching for this to work with tslib?
-> 
-> Driver is here
-> http://git.linuxtogo.org/?p=groups/mobile-linux/kernel.git;a=commitdiff;h=6a2efb17dced8b2989a4359d98d66b0446743fdf
-> 
-> I know this is not 100% OE related. But since I am trying to get the
-> htcleo device supported in OE I should take a try here. On the tslib
-> list nobody jumped up so far:
-> 
-> https://lists.berlios.de/pipermail/tslib-general/2010-July/000302.html
-> 
-> Thanks
-> 
-> Lukas
-hi,
-I think your driver needs patching,I patched mine.
+On 07/14/2010 03:15 AM, Frans Meulenbroeks wrote:
 
-By the way I'm currently offline so I can't see the link.
-Also:
-*there is an xf86-input-tslib plugin which works fine except when you
-apply some static rotation to xf86-video-fbdev
-*I locally switched to evdev for htcdream,as advised by #xorg-devel and
-will push soon
-*if you plan to use xf86-video-fbdev rotated look at the thread I
-started in the xorg devel mailing list.
+....
 
-Denis.
+> 2010/7/14 Adrian Alonso<aalonso00@gmail.com>
+>> +# Device nodes add xsa for (system ace)
+>> +IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
+>> +                       files/device_table_add-xsa.txt"
+>>
+>
+> I think these are normally not put in machine files.
+> (at least I normally put them in my image recipe's not in the machine file).
 
+Just out of curiousity, what are these files for?
+
+Philip
 
 
