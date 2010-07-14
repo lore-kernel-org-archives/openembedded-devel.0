@@ -1,47 +1,46 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OYttq-0005P4-7c
+	(envelope-from <raj.khem@gmail.com>) id 1OYvho-0002aM-Vp
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 06:48:51 +0200
-Received: by pvg13 with SMTP id 13so3018226pvg.6
+	Wed, 14 Jul 2010 08:44:46 +0200
+Received: by iwn34 with SMTP id 34so6807495iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 13 Jul 2010 21:48:46 -0700 (PDT)
+	Tue, 13 Jul 2010 23:44:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=vNAR4C2Qh/ZxJPAorZ2sPrd7skgOuuMyOwD+0ZwaIO0=;
-	b=xjyz3pauRz9YEp/V6cxwvBI3B7LkznIpRrxCYe0qwwSoemR0A4W/88XECUcecY718s
-	neijLbAtN8znlUW5/6+OyyidlFPgsB+oTWPH/RhzV6EzV6xBpOF8odfahPHAhRi7iJ9v
-	5bz9k83Oum0U2/x5eRkD00KVp6UTjtjvvPjNo=
+	bh=BelzFzDg2Q6yeQFEUNDQhV3iN0b6XMQRR2c/1wIxnww=;
+	b=Pvqyjp4zGIcEMO9ewN1InC0jzgFRz1c42ZRRBRDIV2uPLvogHLobgFLpLCTzEHevFZ
+	2aD1YKA4m7075ffAZDO7hLgeA+Gsz598CHL02XFshiPqajdIq997rvvVlgiteReuWw5E
+	SL2wzjKta7gW8+5IMaMbQKA0XarBez+qB7gq4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=eFN5KZsrJDwQ0tgY/Vzrrk+YCBguNebKJc5v8f1zId3KqunzSEzkiqsJKIrzv6XvwG
-	1C8ZI4J0TlfNUxPR/slBPagExGbe8yDKpR++bm5gC4VjEEeplmFoNbSUo4zmXpnwPZ5A
-	i2etLYCQzxnbB/F9d2f7Y+lDfMvqqM6FY3dXg=
-Received: by 10.142.185.13 with SMTP id i13mr5698498wff.234.1279082926010;
-	Tue, 13 Jul 2010 21:48:46 -0700 (PDT)
-Received: from [10.0.0.4] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id 23sm7007625wfa.10.2010.07.13.21.48.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 13 Jul 2010 21:48:44 -0700 (PDT)
-Message-ID: <4C3D41A7.3080808@gmail.com>
-Date: Wed, 14 Jul 2010 14:18:39 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.9) Gecko/20100401 Thunderbird/3.0.4
+	b=JQq7elYZfu4fw0tE86LIEA90WWN7SJm+xpVrn5npqnR4fAYQvcfzzi0eF2K0HGBiyB
+	0RiVdOMT/Q3nw2u/OrVyoDx5F4tTeXa7RvOzPaLLy3ZflVvhhpskTK1wSUzJZPrMrznK
+	m4byCwOVqkbPoYBzOKlhZKpbrrrbym2wruQhU=
+Received: by 10.42.36.3 with SMTP id s3mr5467748icd.95.1279089870296; Tue, 13 
+	Jul 2010 23:44:30 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.231.11.12 with HTTP; Tue, 13 Jul 2010 23:44:10 -0700 (PDT)
+In-Reply-To: <113134CF306E8E4CACC27BE5937261B20931BF1B28@AUSX7MCPS303.AMER.DELL.COM>
+References: <113134CF306E8E4CACC27BE5937261B20931BF148F@AUSX7MCPS303.AMER.DELL.COM>
+	<AANLkTilYsPNfPjreXVd31_k4mzUDHLiyY4XlPNmJh6x-@mail.gmail.com> 
+	<113134CF306E8E4CACC27BE5937261B20931BF1B28@AUSX7MCPS303.AMER.DELL.COM>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 13 Jul 2010 23:44:10 -0700
+Message-ID: <AANLkTildsmw9qsK89yM-ta6Lj0BBJj3clWCyD8z6p1V3@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] usermanual/chapters/recipes.xml: Executables should be executable.
+Subject: Re: [PATCH] Correcting APACHE mirror location for APR recipes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,30 +54,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 04:48:51 -0000
+X-List-Received-Date: Wed, 14 Jul 2010 06:44:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- docs/usermanual/chapters/recipes.xml |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Tue, Jul 13, 2010 at 8:08 AM,  <Sean_Hudson@dell.com> wrote:
+> It appears as though the only versions visible at the current URL are the=
+ latest version. =A0To get access to the latest version, the archive URL ap=
+pears to be necessary. =A0It is worth noting that the archive seems to cont=
+ain the latest version too.
 
-diff --git a/docs/usermanual/chapters/recipes.xml b/docs/usermanual/chapters/recipes.xml
-index fdee72c..5b0ff14 100644
---- a/docs/usermanual/chapters/recipes.xml
-+++ b/docs/usermanual/chapters/recipes.xml
-@@ -1138,7 +1138,7 @@ PR = "r0"</screen></para>
-       is done via the install task, so we need to define a do_install function
-       in the recipe to describe how to install the package:<screen>do_install() {
-         install -m 0755 -d ${D}${bindir} ${D}${docdir}/myhelloworld
--        install -m 0644 ${S}/myhelloworld ${D}${bindir}
-+        install -m 0755 ${S}/myhelloworld ${D}${bindir}
-         install -m 0644 ${WORKDIR}/README.txt ${D}${docdir}/myhelloworld
- }</screen></para>
- 
--- 
-1.7.1
+OK. Does this require any updates to checksums ?
 
+
+>
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org [mailto:openembed=
+ded-devel-bounces@lists.openembedded.org] On Behalf Of Khem Raj
+> Sent: Tuesday, July 13, 2010 1:06 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH] Correcting APACHE mirror location for APR recip=
+es.
+>
+> On Mon, Jul 12, 2010 at 3:31 PM, =A0<Sean_Hudson@dell.com> wrote:
+>> Hi all,
+>>
+>> =A0We recently noticed that apr and apr-util recipes were not fetching c=
+orrectly.
+>> =A0It appears as though the APACHE_MIRROR variable in the bitbake.conf f=
+ile.
+>>
+>> =A0Below is a trivial patch to update the variable.
+>
+> I am able to see the files in existing URL. What problem did you have
+>
+>>
+>> Regards,
+>> Sean
+>>
+>>
+>> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+>> index 12a5522..71c7273 100644
+>> --- a/conf/bitbake.conf
+>> +++ b/conf/bitbake.conf
+>> @@ -533,7 +533,7 @@ export palmqtdir =3D "${palmtopdir}"
+>> =A0OE_STRICT_CHECKSUMS ?=3D "1"
+>>
+>> =A0ADOBE_MIRROR =3D "http://fpdownload.macromedia.com/get/flashplayer/cu=
+rrent/"
+>> -APACHE_MIRROR =3D "http://www.apache.org/dist"
+>> +APACHE_MIRROR =3D "http://archive.apache.org/dist"
+>> =A0DEBIAN_MIRROR =3D "ftp://ftp.debian.org/debian/pool"
+>> =A0E_CVS =3D "cvs://anonymous@anoncvs.enlightenment.org/var/cvs/e"
+>> =A0E_URI =3D "http://enlightenment.freedesktop.org/files"
+>>
+>>
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
