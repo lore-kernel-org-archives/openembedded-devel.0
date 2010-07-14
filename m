@@ -1,18 +1,18 @@
 Received: from mailgw1.fjfi.cvut.cz ([147.32.9.3])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1OZ9eO-0003xn-7t
+	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1OZ9eO-0003xv-SG
 	for openembedded-devel@lists.openembedded.org;
 	Wed, 14 Jul 2010 23:37:58 +0200
 Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 9700543CF3
+	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 4EEB043D5C
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 23:37:54 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 9700543CF3
+	Wed, 14 Jul 2010 23:37:55 +0200 (CEST)
+X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 4EEB043D5C
 DKIM-Signature: v=1; a=rsa-sha1; c=simple/simple; d=fjfi.cvut.cz; s=beta512;
-	t=1279143474; i=@fjfi.cvut.cz; bh=XDxnJOIgIPnLcklZdqSNorQK0Mo=;
+	t=1279143475; i=@fjfi.cvut.cz; bh=QSIGEfrd/2+KYHLFkzgO8TA9Cqc=;
 	h=From:Date:Subject:To:Message-Id;
-	b=OAWzOHvunbgHt4+dbfWk/MiYFwQlw23kk6I61i1/G5apC7eGN1mJPSQ2XmWQ3+pLd
-	VPc0AweoC7aS1BxrziZ9g==
+	b=Mvq/1dHedgTF7UOlfh29HlFEnybec4GEj4+/lAbRz4Jgd81XCQADHUAPpKYNOa7rU
+	CHGfBXPFleiOelUnwCucQ==
 X-CTU-FNSPE-Virus-Scanned: amavisd-new at fjfi.cvut.cz
 X-CTU-FNSPE: this_is_mailgw_for_ctu_fnspe_header
 X-CTU-FNSPE-Helo: linux.fjfi.cvut.cz
@@ -22,30 +22,30 @@ X-CTU-FNSPE-Sender: zub@linux.fjfi.cvut.cz
 X-CTU-FNSPE-Recip: openembedded-devel@lists.openembedded.org
 Received: from mailgw1.fjfi.cvut.cz ([127.0.0.1])
 	by localhost (mailgw1.fjfi.cvut.cz [127.0.0.1]) (amavisd-new,
-	port 10026) with ESMTP id iwnsEHuXRi4X
+	port 10026) with ESMTP id VIoLKeiysoQO
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 14 Jul 2010 23:37:50 +0200 (CEST)
 Received: from linux.fjfi.cvut.cz (linux.fjfi.cvut.cz [147.32.5.111])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id AD74543D5C
+	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 8B1C343D50
 	for <openembedded-devel@lists.openembedded.org>;
 	Wed, 14 Jul 2010 23:37:50 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz AD74543D5C
-X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz AD74543D5C
+X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 8B1C343D50
+X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz 8B1C343D50
 Received: by linux.fjfi.cvut.cz (Postfix, from userid 1001)
-	id 8A36F46774; Wed, 14 Jul 2010 23:37:50 +0200 (CEST)
+	id 7A5BE46777; Wed, 14 Jul 2010 23:37:50 +0200 (CEST)
 From: David Kozub <zub@linux.fjfi.cvut.cz>
-Date: Wed, 14 Jul 2010 23:16:08 +0200
+Date: Wed, 14 Jul 2010 22:42:22 +0200
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100714213750.8A36F46774@linux.fjfi.cvut.cz>
+Message-Id: <20100714213750.7A5BE46777@linux.fjfi.cvut.cz>
 X-SA-Exim-Connect-IP: 147.32.9.3
 X-SA-Exim-Mail-From: zub@linux.fjfi.cvut.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 3/4] cluttermm_0.9: Add recipe for cluttermm.
+Subject: [PATCH 2/4] clutter-1.0: Add recipe for clutter-1.0.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,29 +63,26 @@ X-List-Received-Date: Wed, 14 Jul 2010 21:38:00 -0000
 
 Signed-off-by: David Kozub <zub@linux.fjfi.cvut.cz>
 ---
- recipes/clutter/cluttermm_0.9.bb |   13 +++++++++++++
- 1 files changed, 13 insertions(+), 0 deletions(-)
- create mode 100644 recipes/clutter/cluttermm_0.9.bb
+ recipes/clutter/clutter-1.0_git.bb |   10 ++++++++++
+ 1 files changed, 10 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/clutter/clutter-1.0_git.bb
 
-diff --git a/recipes/clutter/cluttermm_0.9.bb b/recipes/clutter/cluttermm_0.9.bb
+diff --git a/recipes/clutter/clutter-1.0_git.bb b/recipes/clutter/clutter-1.0_git.bb
 new file mode 100644
-index 0000000..80e367d
+index 0000000..b2e721c
 --- /dev/null
-+++ b/recipes/clutter/cluttermm_0.9.bb
-@@ -0,0 +1,13 @@
-+DESCRIPTION = "C++ bindings for Clutter"
-+HOMEPAGE = "http://git.gnome.org/browse/cluttermm/"
-+SECTION = "libs"
-+LICENSE = "LGPL"
-+DEPENDS = "clutter-1.0 pangomm"
++++ b/recipes/clutter/clutter-1.0_git.bb
+@@ -0,0 +1,10 @@
++require clutter.inc
 +
-+inherit autotools pkgconfig flow-lossage
++SRCREV = "839ebef44f49405ac13d8b8c5c62bfea2973dc3d"
 +
-+PV = "0.9.6"
++PV = "1.2.8"
++PR = "${INC_PR}.0"
++PR_append = "+git${SRCREV}"
 +
-+SRC_URI = "http://ftp.gnome.org/pub/GNOME/sources/${PN}/0.9/${P}.tar.bz2"
-+SRC_URI[md5sum] = "43989722e0c86ef246e95f8a0fa842c3"
-+SRC_URI[sha256sum] = "cae313e83d40c5b92b598ac19b3b6fc57b5f237b505b71a34588fb76618f1e1e"
++SRC_URI = "git://git.clutter-project.org/clutter.git;protocol=git"
++S = "${WORKDIR}/git"
 -- 
 1.7.1
 
