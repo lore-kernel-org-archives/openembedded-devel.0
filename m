@@ -1,51 +1,30 @@
-Received: from mailgw1.fjfi.cvut.cz ([147.32.9.3])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1OZ8KA-0004yL-03
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OZ8ng-0005jj-Qx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 14 Jul 2010 22:12:58 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 8DA3543D65
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 22:06:45 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 8DA3543D65
-DKIM-Signature: v=1; a=rsa-sha1; c=simple/simple; d=fjfi.cvut.cz; s=beta512;
-	t=1279138005; i=@fjfi.cvut.cz; bh=XQDyYT8v8Xz8AtuHG9U997OdsbQ=;
-	h=From:Date:Subject:To:Message-Id;
-	b=P2c19wJ+T4kZJKbd+HuG5plqqn0j7LEodxttzA8sZXfl6Nu8SJuzWpdVvFANPxuee
-	ZA8x/Bo9Dn54uxWV59UDA==
-X-CTU-FNSPE-Virus-Scanned: amavisd-new at fjfi.cvut.cz
-X-CTU-FNSPE: this_is_mailgw_for_ctu_fnspe_header
-X-CTU-FNSPE-Helo: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Client-Address: 147.32.5.111
-X-CTU-FNSPE-Client-Name: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Sender: zub@linux.fjfi.cvut.cz
-X-CTU-FNSPE-Recip: openembedded-devel@lists.openembedded.org
-Received: from mailgw1.fjfi.cvut.cz ([127.0.0.1])
-	by localhost (mailgw1.fjfi.cvut.cz [127.0.0.1]) (amavisd-new,
-	port 10026) with ESMTP id qmmtFCk6Au-9
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 22:06:45 +0200 (CEST)
-Received: from linux.fjfi.cvut.cz (linux.fjfi.cvut.cz [147.32.5.111])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 2760243D6E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 22:06:45 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 2760243D6E
-X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz 2760243D6E
-Received: by linux.fjfi.cvut.cz (Postfix, from userid 1001)
-	id D636A46774; Wed, 14 Jul 2010 22:06:44 +0200 (CEST)
-From: David Kozub <zub@linux.fjfi.cvut.cz>
-Date: Wed, 14 Jul 2010 21:51:56 +0200
+	Wed, 14 Jul 2010 22:43:29 +0200
+Received: (qmail 30918 invoked by uid 813007); 14 Jul 2010 20:43:26 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 14 Jul 2010 20:43:26 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100714200644.D636A46774@linux.fjfi.cvut.cz>
-X-SA-Exim-Connect-IP: 147.32.9.3
-X-SA-Exim-Mail-From: zub@linux.fjfi.cvut.cz
+Date: Wed, 14 Jul 2010 22:43:34 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-6-generic; KDE/4.4.92; x86_64; ; )
+References: <4C3DF5BF.9040103@zafena.se>
+In-Reply-To: <4C3DF5BF.9040103@zafena.se>
+MIME-Version: 1.0
+Message-Id: <201007142243.36837.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=BAYES_00,RCVD_IN_DNSWL_MED,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gdb-common: Fix breakage of gdbserver.
+Subject: Re: OpenJDK-6 ARM Shark LLVM JIT testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,28 +38,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 14 Jul 2010 20:12:59 -0000
+X-List-Received-Date: Wed, 14 Jul 2010 20:43:29 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: David Kozub <zub@linux.fjfi.cvut.cz>
----
- recipes/gdb/gdb-common.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Dnia =C5=9Broda, 14 lipca 2010 o 19:37:03 Xerxes R=C3=A5nby napisa=C5=82(a):
+> Hi all!
+>=20
+> I have committed some ARM Shark CPU features auto-detection code into
+> oe.dev.
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1ea15a2cd=
+7317
+> 8c3fbab36b544a6601b1d1c32bf This patch will make OpenJDK use the best ARM
+> CPU features available when generating code using the Shark JIT.
 
-diff --git a/recipes/gdb/gdb-common.inc b/recipes/gdb/gdb-common.inc
-index 1e0d7c2..c3eef69 100644
---- a/recipes/gdb/gdb-common.inc
-+++ b/recipes/gdb/gdb-common.inc
-@@ -23,7 +23,7 @@ B = "${WORKDIR}/build-${TARGET_SYS}"
- do_install_append() {
- 	# these mo files from gdb-cross-sdk clash with files from binutils-cross-sdk
- 	# when building sdk archives. Drop them for now as a way to restore toolchains.
--	rm ${D}/${datadir}/locale/*/LC_MESSAGES/{bfd,opcodes}.mo
-+	rm -f ${D}/${datadir}/locale/*/LC_MESSAGES/{bfd,opcodes}.mo
- 
- 	# we don't care about these infos, installed from binutils
- 	rm -f ${D}/${infodir}/{configure,standards,bfd}.info
--- 
-1.7.1
+> I need your help in order to find and catch the LLVM JIT bugs by testing
+> running Shark and report if
+> LLVM asserts during code generation.
+
+LLVM does not supports Thumb - thats hurt. Ubuntu had to disable Shark to g=
+et=20
+openjdk-6 built for armel.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
 
 
 
