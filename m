@@ -1,45 +1,49 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OZIlL-00030q-VG
+	(envelope-from <martin.jansa@gmail.com>) id 1OZIw3-0003DY-Qj
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 09:21:45 +0200
-Received: by iwn34 with SMTP id 34so717745iwn.6
+	Thu, 15 Jul 2010 09:32:48 +0200
+Received: by bwz10 with SMTP id 10so443623bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jul 2010 00:21:41 -0700 (PDT)
+	Thu, 15 Jul 2010 00:32:45 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=+C0W1+HBgaAmOYZYl1hAgp9b912tcHMc+SxHmlkWcgs=;
-	b=SPOirP1deBKVykxZBYb3n7VZ+GAU/aVwwoHT3/arsim5PYpOfS9zrWHieEG6goH2oa
-	ymZod2CIzl+kxUrLtnYc6Vd8YQhT3IKesIY0/sjauapVyM+H89+e+VjlCqzDbQncAInC
-	WVdzJ6CF8bD5+QLVOlpjqdaK4d0cGsveKK9fM=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=vYVspHQiW4/AM1b/d4KimEtS1ol/Pka/rY7vHjCCCWo=;
+	b=xizoK10bcTKUxRJim+CvG5aOt0JyD2l2i161tKCXxj79brdguejxARZg0PBd9ImJ1E
+	CR34WSpykWTVYCP+oyyz3inJ7gtvXkl7Dyhp4IfX6sACG7yjK+OXGUBSwEB36DWJDB2d
+	KtKwW4f6xHlY6OhU5NKorI4pmA9ULSdY7Qg9w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=sX3OzxqreX4UJTPvTuCVaAU1ZutQgeR7Zb299yNjeNgtTUXfYZEZWJqbkUzYR5NuxJ
-	CsgENLAUUV06On61Qi4XsF/PDJHWinOWrb3BKpWQI7eg/ACuZ6loZ26MwFX0ZHqcVDMe
-	jMjBOgeSZOek3ZglGLZ7uNnOAtrZEMzvqZnnI=
-MIME-Version: 1.0
-Received: by 10.231.13.65 with SMTP id b1mr18726579iba.185.1279178501076; Thu, 
-	15 Jul 2010 00:21:41 -0700 (PDT)
-Received: by 10.231.157.196 with HTTP; Thu, 15 Jul 2010 00:21:41 -0700 (PDT)
-In-Reply-To: <AANLkTikLt386MmRbOllffnFTi6DKPDU4lFep9FQ0_jCc@mail.gmail.com>
-References: <1278458982-3362-1-git-send-email-raj.khem@gmail.com>
-	<AANLkTikLt386MmRbOllffnFTi6DKPDU4lFep9FQ0_jCc@mail.gmail.com>
-Date: Thu, 15 Jul 2010 16:51:41 +0930
-Message-ID: <AANLkTikIjf68vywG3iF0HEMn8RNQpO2syCLdR5dzXxmx@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=KRW8K1eBPdFzzvIwuMYD7iXEGjN3bxxUsVBGopMZdcK9jpMq6p9OUdfmcQee/XxA9g
+	41th/0IbuaVTa7cscMKS24D3Q43lMVSXcQGkvCDAZxrV4zCZ37CwF9KijaqyzI2zg0KX
+	nbmF2gqY/NRlqtG4iYmZMxkY1KXN7lUn+JHm8=
+Received: by 10.204.126.196 with SMTP id d4mr2485129bks.100.1279179165279;
+	Thu, 15 Jul 2010 00:32:45 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 24sm4681167bkr.19.2010.07.15.00.32.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 15 Jul 2010 00:32:43 -0700 (PDT)
+Date: Thu, 15 Jul 2010 09:32:47 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Message-ID: <20100715073247.GB5745@jama>
+References: <4C2AC77A.70102@gmail.com>
+ <4C2ACDE8.7080801@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <4C2ACDE8.7080801@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][v2] base.bbclass: re-add backward compatibility with bitbake w.r.t decodeurl fix in bitbake
+Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,83 +57,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 07:21:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 15 Jul 2010 07:32:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 7 July 2010 19:08, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrot=
-e:
-> 2010/7/7 Khem Raj <raj.khem@gmail.com>:
->> This patch seems to work with both bitbakes
->>
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =A0classes/base.bbclass | =A0 15 +++++++++++++--
->> =A01 files changed, 13 insertions(+), 2 deletions(-)
->>
->> diff --git a/classes/base.bbclass b/classes/base.bbclass
->> index 2da0b7a..b30310d 100644
->> --- a/classes/base.bbclass
->> +++ b/classes/base.bbclass
->> @@ -219,14 +219,25 @@ def oe_unpack_file(file, data, url =3D None):
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0# The "destdir" handling =
-was specifically done for FILESPATH
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0# items. =A0So, only do s=
-o for file:// entries.
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if type =3D=3D "file":
->> - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 dest =3D o=
-s.path.dirname(path) or "."
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 if not hos=
-t:
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 dest =3D os.path.dirname(path) or "."
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 else:
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 # this cas=
-e is for backward compatiblity with older version
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 # of bitba=
-ke which do not have the fix
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 # http://c=
-git.openembedded.org/cgit.cgi/bitbake/commit/?id=3Dca257adc587bb0937ea76d8b=
-32b654fdbf4192b8
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 # this sho=
-uld not be needed once all releases of bitbake has this fix
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 # applied/=
-backported
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 dest =3D host + os.path.dirname(path) or "."
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0else:
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0dest =3D =
-"."
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0bb.mkdirhier("%s" % os.pa=
-th.join(os.getcwd(),dest))
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0cmd =3D 'cp %s %s' % (fil=
-e, os.path.join(os.getcwd(), dest))
->> =A0 =A0 =A0 =A0if not cmd:
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0return True
->> - =A0 =A0 =A0 dest =3D os.path.join(os.getcwd(), path)
->> + =A0 =A0 =A0 if not host:
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 dest =3D os.path.join(os.getcwd(), path)
->> + =A0 =A0 =A0 else:
->> + =A0 =A0 =A0 =A0 =A0 =A0 =A0 dest =3D os.path.join(os.getcwd(), os.path=
-.join(host, path))
->> =A0 =A0 =A0 =A0if os.path.exists(dest):
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if os.path.samefile(file, dest):
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0return True
->> --
->> 1.7.1
->>
->
-> This fixes things for me so:
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
+On Wed, Jun 30, 2010 at 02:24:00PM +0930, Graham Gower wrote:
+> None of the distros in OE appear to want/need gpg or curl support in opkg;
+> so have opkg.inc remove them by default. This diff makes things more consistent
+> across all distros/tasks/images.
+> 
+> The slugos recipe is kept intact and further divided from the more modern
+> recipes. The opkg-native recipe is the sane-srcrev version even when building
+> slugos, which should allow for changes to opkg related bbclasses without
+> breaking the slugos build.
+> 
+> Build tested for qemumipsel/minimal-image and nslu2/slugos-image.
+> minimal-image builds 10% quicker in my setup and is 1mb smaller.
 
-This change appears to have broken lsof_4.83.bb.
+Tested on SHR/om-gta02
 
-lsof has a weird tar within a tar, and thus a custom do_unpack(). The
-result is that the inner tar is not extracted, and do_configure fails
-to find a configure script.
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
--Graham
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
