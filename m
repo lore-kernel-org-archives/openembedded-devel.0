@@ -1,51 +1,30 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.borenet.se ([213.134.106.117] helo=mail-storage.borenet.se)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OZKaY-0004u5-Cv
+	(envelope-from <xerxes@zafena.se>) id 1OZOic-00071C-6N
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 11:18:43 +0200
-Received: by fxm12 with SMTP id 12so263372fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jul 2010 02:18:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=4SlzBGjHW5rv1h5iP9+TAV9ikGdiI6ufcJsXEWmaHRw=;
-	b=PP8MaqDsvCY9kCfNxs5B2RVUd1GwnVRbmD7j3FZ82LfPls2hFu2qi+C9gktl419vBF
-	NrmDsV50ZF+zAPztx0pFWmwrSd4zzbyg/B9Tz/nNOEy8SKzJ1Z4jOKvVTkxwbibm4zEE
-	Fec6ASlJpE0PTEayeqHXMX6tqrUTVdhiBMX0c=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=nj0QlSOUe4TH6IeSsyAbz+VBRPcHEefTqqCTmJ5OsulR2A/l/Bd/rFohWL6gEX3Wty
-	B0KwxsJAPMRJuSlkfzaV9PKIaF+Wf6jbqx+99WkoA8m2iPSwI+k7Xl9SfJrS0xBtw7UX
-	e1ODZD0LyIsU2QlALFLFdOZ81o3lHAxJIsxyY=
-Received: by 10.223.115.73 with SMTP id h9mr283272faq.46.1279185517145;
-	Thu, 15 Jul 2010 02:18:37 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id a26sm240696fak.43.2010.07.15.02.18.36
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 15 Jul 2010 02:18:36 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OZKaP-0007tT-CU; Thu, 15 Jul 2010 11:18:33 +0200
-Date: Thu, 15 Jul 2010 11:18:33 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100715091833.GB27956@mx.loc>
-References: <1279178275.5049.28.camel@mattotaupa>
+	Thu, 15 Jul 2010 15:43:45 +0200
+Received: from [192.168.1.106] (labb.zafena.se [213.134.106.61])
+	by mail-storage.borenet.se (Postfix) with ESMTP id 820C130CF41;
+	Thu, 15 Jul 2010 15:43:12 +0200 (CEST)
+Message-ID: <4C3F10BD.8040603@zafena.se>
+Date: Thu, 15 Jul 2010 15:44:29 +0200
+From: =?UTF-8?B?WGVyeGVzIFLDpW5ieQ==?= <xerxes@zafena.se>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10) Gecko/20100527 Thunderbird/3.0.5
 MIME-Version: 1.0
-In-Reply-To: <1279178275.5049.28.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4C3DF5BF.9040103@zafena.se>
+	<201007142243.36837.marcin@juszkiewicz.com.pl>
+In-Reply-To: <201007142243.36837.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 213.134.106.117
+X-SA-Exim-Mail-From: xerxes@zafena.se
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: uclibc: PREFERRED_UCLIBC_VERSION = "git" not respected
+Subject: Re: OpenJDK-6 ARM Shark LLVM JIT testing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,52 +38,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 09:18:44 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 15 Jul 2010 13:43:46 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Jul 15, 2010 at 09:17:55AM +0200, Paul Menzel wrote:
->Dear OE folks,
+On 2010-07-14 22:43, Marcin Juszkiewicz wrote:
+> Dnia =C5=9Broda, 14 lipca 2010 o 19:37:03 Xerxes R=C3=A5nby napisa=C5=82=
+(a):
+>  =20
+>> Hi all!
+>>
+>> I have committed some ARM Shark CPU features auto-detection code into
+>> oe.dev.
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1ea15a=
+2cd7317
+>> 8c3fbab36b544a6601b1d1c32bf This patch will make OpenJDK use the best =
+ARM
+>> CPU features available when generating code using the Shark JIT.
+>>    =20
+>  =20
+>> I need your help in order to find and catch the LLVM JIT bugs by testi=
+ng
+>> running Shark and report if
+>> LLVM asserts during code generation.
+>>    =20
+> LLVM does not supports Thumb - thats hurt. Ubuntu had to disable Shark =
+to get=20
+> openjdk-6 built for armel.
 >
->
->the commit message of 070e46f2932b254a617d7ce88af9b078c2a2849f [1] says
->
->        With this change, you can put PREFERRED_UCLIBC_VERSION="git"
->        into your conf/local.conf once or set
->        PREFERRED_VERSION_uclibc{*}="git" and need not adjust local.conf
->        if the git revision was changed.
->
->I have the following line in my `local.conf`.
->
->    PREFERRED_UCLIBC_VERSION               = "git"
->
->Doing `bitbake uclibc` with
->
->        DISTRO = "angstrom-2008.1"
->        
->        GLIBC_GENERATE_LOCALES = "en_US.UTF-8 en_GB.UTF-8 de_DE.UTF-8"
->        
->        MACHINE = "beagleboard"
->        BUILD_ARCH = "i686"
->        BUILD_OS = "linux"
->        ANGSTROMLIBC = "uclibc"
->
->chooses uclibc-0.9.30.2-r34.0 nevertheless.
->
->Doing `git grep "PREFERRED_UCLIBC"` does not list anything distribution
->specific as far as I can see.
+> Regards,=20
+>  =20
 
-conf/distro/angstrom-2008.1.conf:PREFERRED_VERSION_uclibc ?= "0.9.30.2"
-conf/distro/angstrom-2008.1.conf:PREFERRED_VERSION_uclibc-initial ?= "0.9.30.2"
-conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_uclibc                    ?= "${PREFERRED_UCLIBC_VERSION}"
-conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_uclibc-initial            ?= "${PREFERRED_UCLIBC_VERSION}"
-conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_uclibc-cross              ?= "${PREFERRED_UCLIBC_VERSION}"
-conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_uclibc-cross-sdk          ?= "${PREFERRED_UCLIBC_VERSION}"
-conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_uclibc-cross-initial      ?= "${PREFERRED_UCLIBC_VERSION}"
-conf/distro/include/sane-toolchain-uclibc.inc:PREFERRED_VERSION_uclibc-cross-intermediate ?= "${PREFERRED_UCLIBC_VERSION}"
+Hi!
+My own testing indicates that it are possible to run a Shark build
+compiled on a arm Ubuntu Jaunty system on a thumb2 system such as Ubuntu
+Maverick or Lucid.
 
-so my guess is that you don't use sane-toolchain
+Have you tested to run the Debian squeeze llvm and openjdk-6-jre-zero
+packages on Maverick? It might work.
 
-HTH,
+If you want to build LLVM using the Maverick thumb toolchain then you
+have to make sure to compile the LLVM libraries for -marm and possibly
+compile the shark libjvm.so as -marm as well and double check that LLVM
+actually uses the ARM JIT backend instead of the Thumb backend. LLVM
+switches on the Thumb JIT backend by default (at compile time) if it
+have autodetected the host system to be a Host: thumb-unknown-linux-gnuea=
+bi.
+
+Upstream Ubuntu bugreport:
+https://bugs.launchpad.net/llvm/+bug/513735
+
+Upstream LLVM bugreports to implement Thumb JIT support  are:
+http://llvm.org/bugs/show_bug.cgi?id=3D6065  fix so that llvm can be
+compiled with a thumb toolchain.
+http://llvm.org/bugs/show_bug.cgi?id=3D6223  - ARM thumb target fails to
+JIT tPUSH
+
+A sidenote, LLVM currently supports generating thumb code during static
+compilation using llc.
+
+The LLVM Thumb JIT are on a good way to get finished, it currently nows
+what instructions it needs to JIT but it dont know how the machinecodes
+should look like in memory.
+By implementing how the different thumb instructions look in memory
+would makes it possible to complete the thumb JIT.
+
+Cheers
+Xerxes
 
 
