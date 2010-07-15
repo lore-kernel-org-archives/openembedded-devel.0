@@ -1,47 +1,41 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <df6.626@gmail.com>) id 1OZHho-0005wW-BH
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZI85-0003Cn-Lo
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 08:14:01 +0200
-Received: by ewy7 with SMTP id 7so130461ewy.6
+	Thu, 15 Jul 2010 08:41:12 +0200
+Received: by bwz10 with SMTP id 10so420252bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 14 Jul 2010 23:13:58 -0700 (PDT)
+	Wed, 14 Jul 2010 23:41:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=tsRZMNTKF7zJIWPbdrHh/ui0BEuQ3tVGOf0W6jtGnrs=;
-	b=PBUZVBzMIOuAtSht+7oMM/7AfeIIfTY4XsH7xkiMnBgCSLViSwYIiHiY1Shx65vRSz
-	Sr+n3+IJ6X4XSrvxg7/GUi4g/VKGP+VZMTajGVVrTnN4luXrgYiHLd2EbMYSKbdVrjDP
-	kgDAGciT4vfWEesAmbojOyMU0gsPxWiqZr5pQ=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=XZmF2PdeyywtZOjV900mXBjXzdP4D/PMKGNiBjlwOTs=;
+	b=QHOeX3eRCcEOVS5vnbY604Xy7E3P4kBzuoeMfiLfUQWRu3C1L0rqvu6kmLtpcl5BRT
+	+qZDcy4JxTBqYw1FSm9ydoRjz6t1k3mjmD0Ph8h/3lw+9KtKeoRRrUzTKKJlEdmF8Ho1
+	mqHiTzkGo/vAiSFlUPJiCDqi7gPFHjtogPHfw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=VbAkVvaHGAWxOg5l04tJVIT96xEwf/AlVaczKOVGlZsF+quNYYpPygpBV/s4KtCjdT
-	AgJm/PGmziKGFVH9ZAD+ghxGOM8+fR7urFpb6W7mEHqfnIbhOok4vDWy9UINH9fjMdTZ
-	wgg1zZNRQATeMM0oiK32ywAzcWxoT0HYTakMc=
-Received: by 10.213.22.201 with SMTP id o9mr2402748ebb.6.1279174438086;
-	Wed, 14 Jul 2010 23:13:58 -0700 (PDT)
-Received: from [192.168.1.142] ([94.180.19.127])
-	by mx.google.com with ESMTPS id v8sm5151815eeh.14.2010.07.14.23.13.56
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 14 Jul 2010 23:13:57 -0700 (PDT)
-Message-ID: <4C3EA720.1080804@gmail.com>
-Date: Thu, 15 Jul 2010 12:13:52 +0600
-From: Dmitry Vinokurov <df6.626@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.10) Gecko/20100528 Thunderbird/3.0.5
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=eGsjOSkt3CjV6J15RmIp8Oko7548yWtxNE73L4pg4lTD1H/dDrBH4Nvl1eElQhUtjE
+	YANRFhAknBgXrpqFNll+hsdkhFMRxWlyfF6avAE0P+OoL74A+iIRm1iSkxk5z0OXzSsJ
+	sKKXQxe4bmcF+m2rHYxLs1vHd/OW7TMlWKi8g=
 MIME-Version: 1.0
+Received: by 10.204.163.74 with SMTP id z10mr5190401bkx.34.1279176067255; Wed, 
+	14 Jul 2010 23:41:07 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Wed, 14 Jul 2010 23:41:07 -0700 (PDT)
+Date: Thu, 15 Jul 2010 08:41:07 +0200
+Message-ID: <AANLkTikabrLWPM53wvdCKrDSKRJdFQTdNsA2MnfwzrI0@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: df6.626@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Specific distro defconfig for all busybox versions
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: u-boot-utils badness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,22 +49,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 06:14:01 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 15 Jul 2010 06:41:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi!
+Incidentally I stumbled upon u-boot-utils.
+This recipe did not seem too good.
 
-Is there a way to set defconfig for specific distribution that will 
-apply to all versions of busybox? Now when new busybox version appear, I 
-should move <distro_name> directory from one busybox-${PV} to another 
-and it's not very convenient. Or maybe I missed something.
+We only have a version for 1.2.
+Guess u-boot tools do not change that much, but still it seems somewhat odd.
 
--- 
-Best Regards,
-Dmitry Vinokurov
-+7 905 862 17 11
-<df6.626@gmail.com>
+It's do_compile reads:
 
+do_compile () {
+        oe_runmake Sandpoint8240_config
+        oe_runmake tools
+}
 
+Which is also somewhat odd. Probably the u-boot env is fairlly standard, but
+still it seems odd to have Sandpoint8240 there (especially since I could not
+even relate it to a machine in oe).
+
+Furthermore the recipe seems mostly useless anyway as u-boot itself also
+generates the tools.
+From u-boot.inc:
+
+do_compile () {
+        unset LDFLAGS
+        unset CFLAGS
+        unset CPPFLAGS
+        oe_runmake ${UBOOT_MACHINE}
+        oe_runmake all
+        oe_runmake tools env
+}
+
+So there seems to be enough reason to nuke this recipe, but ...
+
+A quick grep learned that there are several machines that recommend or
+depend on this.
+
+frans@frans-desktop:~/workspace/gtd/openembedded.git$ grep u-boot-utils -r
+conf
+conf/machine/lsmipsel.conf:MACHINE_EXTRA_RRECOMMENDS    = "u-boot-utils"
+conf/machine/include/lsppc.inc:MACHINE_EXTRA_RRECOMMENDS = "u-boot-utils"
+conf/machine/n1200.conf:MACHINE_EXTRA_RRECOMMENDS       = "temper
+u-boot-utils"
+conf/machine/kuropro.conf:MACHINE_EXTRA_RDEPENDS          = "micro-evtd
+u-boot-utils"
+conf/machine/openrd-base.conf:MACHINE_EXTRA_RDEPENDS          =
+"u-boot-utils"
+conf/machine/sheevaplug.conf:MACHINE_EXTRA_RDEPENDS          =
+"u-boot-utils"
+conf/machine/storcenter.conf:MACHINE_EXTRA_RDEPENDS = "u-boot-utils xfsprogs
+sccd"
+conf/machine/lspro.conf:MACHINE_EXTRA_RDEPENDS          = "micro-evtd
+u-boot-utils"
+conf/machine/mv2120.conf:MACHINE_EXTRA_RDEPENDS          = "u-boot-utils"
+conf/machine/tsx09.conf:MACHINE_EXTRA_RDEPENDS                          =
+"u-boot-utils piccontrol"
+conf/machine/dns323.conf:MACHINE_EXTRA_RDEPENDS          = "u-boot-utils"
+conf/machine/openrd-client.conf:MACHINE_EXTRA_RDEPENDS          =
+"u-boot-utils"
+conf/distro/include/preferred-om-2008-versions.inc:PREFERRED_VERSION_u-boot-utils
+?= "1.2.0"
+
+and in recipes:
+frans@frans-desktop:~/workspace/gtd/openembedded.git$ grep -r u-boot-utils
+recipes
+recipes/tasks/task-openprotium.bb:DISTRO_EXTRA_RDEPENDS += "u-boot-utils"
+recipes/linux/linux-gumstix_2.6.15.bb:DEPENDS = "u-boot-utils-native"
+recipes/linux/linux-turbostation_2.6.20.2.bb:DEPENDS = "u-boot-utils-native"
+recipes/linux/linux-bd-neon-2.6_2.6.22.bb:DEPENDS += "u-boot-utils-native
+
+How to deal with this???
+
+Frans
 
