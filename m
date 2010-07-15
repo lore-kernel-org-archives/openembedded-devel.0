@@ -1,40 +1,45 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OZTvd-00024t-GZ
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OZUPk-0002IL-B0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 21:17:06 +0200
-Received: by gya6 with SMTP id 6so893062gya.6
+	Thu, 15 Jul 2010 21:48:12 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 9855C110009F
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jul 2010 12:17:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=CyZI6YbNbTiWeaR15sD98vpBVU4X+rzvFFGTja5AvUs=;
-	b=xhFGYUfV5Z4tqKI5W0tM/5601Nvej2mG4RPnbhiclfbbIS4FJFKlUQ+3RVWUI/tCqw
-	zOZltej9mnX4gjG1KbOdKqnhlVc7JE8WyzcKiUT+kMun9lpTKPR//cozoVXzvOi+sDlL
-	uSRYkqai0hflOG/QPSsKWD7QxbZu9Cjo0gWx4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=BGbAKzfV76Cy7WzO4hcVbBNLLc4zs161mO5pUUlL4V1LvjvagKWbW5wdHoU8940966
-	m+l55CNhJFjyW/9vtVM7m96v2v4nKb/p2uVuzzbnqf3pKxRDjDr27618iWRAUyIg3kSx
-	gYhPd8VHYvH5aqqArNXKuzMspAfzJbnBM+Nds=
-MIME-Version: 1.0
-Received: by 10.101.135.25 with SMTP id m25mr138575ann.58.1279221418210; Thu, 
-	15 Jul 2010 12:16:58 -0700 (PDT)
-Received: by 10.100.127.11 with HTTP; Thu, 15 Jul 2010 12:16:58 -0700 (PDT)
-Date: Thu, 15 Jul 2010 12:16:58 -0700
-Message-ID: <AANLkTim0UZEz6vWG0QNTJitmM94QMyXbGHdsDdeM7xhh@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	Thu, 15 Jul 2010 21:48:08 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id C1F471100097
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Jul 2010 21:48:07 +0200 (CEST)
+Received: from rhein.familie-heinold.de (f052233245.adsl.alicedsl.de
+	[78.52.233.245]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 15 Jul 2010 21:48:07 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 8B33C3C0ED; Thu, 15 Jul 2010 21:48:06 +0200 (CEST)
+Date: Thu, 15 Jul 2010 21:48:06 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+Message-ID: <20100715194805.GA8103@rhein.zuhause.netz>
+References: <1279133054.4939.16.camel@mattotaupa>
+	<20100714194822.GB9771@rhein.zuhause.netz>
+	<1279216348.3741.24.camel@mattotaupa>
+MIME-Version: 1.0
+In-Reply-To: <1279216348.3741.24.camel@mattotaupa>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Does anyone have current recepies for some of these programs:
+Subject: Re: uclibc-git: oe_runmake failed: error: '__a1' undeclared (first use in this function) (was: angstrom 2008.1, uclibc: libc.so not found, i. e. not in staging directory)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,30 +53,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 19:17:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Jul 2010 19:48:13 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I have not had much luck figuring out how to write my own recipies as
-of yet I keep getting different errors for each one that I have yet to
-understand. So I am hoping someone might have these already writen.
-The platform I am using is a gumstix overo if that makes any
-difference.
+Hi,
 
-I am looking for the following:
+seems that this revision fixes ppc and brakes arm. Not good, I will revert the commit.
 
-Ruby 1.9.1
-nmap 5.21
-kismet from the development source
-aircrack-ng preferably from dev source or 1.0 or higher
-metasploit 3.4
-openssl 1.0+
-wireshark from dev source
-blueprint
-snort 2.8.6
-
-Thanks for anyone sharing any of these recipies if you have them.
-
- Hopefully soon I can sort out what I am not getting in making a bb
-file correctly
+Bye Henning
 
 
