@@ -1,26 +1,26 @@
 Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1OZXXB-00064W-1a
+	(envelope-from <utx@penguin.cz>) id 1OZXgU-0001VU-D2
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 01:10:18 +0200
+	Fri, 16 Jul 2010 01:17:44 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 28BC81416BAC
+	by ns.penguin.cz (Postfix) with ESMTP id 923561416BAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 01:13:07 +0200 (CEST)
+	Fri, 16 Jul 2010 01:22:44 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
 Received: from ns.penguin.cz ([127.0.0.1])
 	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id h0Vd3tTMaAd2
+	with ESMTP id We86FEmmsA8a
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 01:12:58 +0200 (CEST)
+	Fri, 16 Jul 2010 01:22:35 +0200 (CEST)
 Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 319C21416BA5
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 954121416BA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 01:12:57 +0200 (CEST)
+	Fri, 16 Jul 2010 01:22:35 +0200 (CEST)
 From: Stanislav Brabec <utx@penguin.cz>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jul 2010 01:08:00 +0200
-Message-ID: <1279235280.6792.7.camel@utx.lan>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Fri, 16 Jul 2010 01:17:38 +0200
+Message-ID: <1279235858.6792.16.camel@utx.lan>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.1.2 
 X-SA-Exim-Connect-IP: 84.21.108.25
@@ -31,7 +31,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/3] udev: add compatibility package for old kernels
+Subject: [PATCH 2/3] udev: add udev-compat support to udev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,133 +45,174 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 23:11:07 -0000
+X-List-Received-Date: Thu, 15 Jul 2010 23:17:44 -0000
 Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-Attached patch creates udev compatibility package that allows to run
-udev on old kernels.
+This patch adds support for udev-compat to selected platforms (just now
+spitz and akita). It is possible to implement the wrapper directly to
+udev init files on all patforms. It would be more straightforward, but
+it would check for udev-compat everywhere.
 
-Changes in udev recipes should have no effect for udev itself, just
-simplifying the udev-compat recipe.
+    udev: Added support for udev-compat.
 
-People that need even older udev can reuse the recipe, copy it with a
-different name and add it to the image.
-
-The idea was suggested in past by Koen Kooi:
-Subject: [RFC][PATCH] udev 151: fall back to old, static udev if present when running an old kernel
-Date: Sat, 17 Apr 2010 16:03:27 +0200
-
-This recipe does not create static binary, but a dynamic binary
-statically linked just with udev. Binary names don't contain version, so
-arbitrary compat version can be used without modifying of the wrapper.
-
-    udev-compat141: Added compatibility udev package for old kernels.
-
-diff --git a/recipes/udev/udev-compat141_141.bb b/recipes/udev/udev-compat141_141.bb
+diff --git a/recipes/udev/files/udev-compat-wrapper-patch b/recipes/udev/files/udev-compat-wrapper-patch
 new file mode 100644
-index 0000000..3eb99e8
+index 0000000..a3e312d
 --- /dev/null
-+++ b/recipes/udev/udev-compat141_141.bb
-@@ -0,0 +1,32 @@
-+# To use this package, you need:
-+# - udev main package with init scrit that supports udev-compat-wrapper (enable per-platform in the udev.inc and udev*.bb files)
-+# - this package must be embedded into the image (otherwise system will refuse to boot)
-+# - only one compat package is supported (pick the newest udev that supports your oldest kernel)
-+#
-+FILESPATHPKG =. "udev-${PV}:udev:"
-+require udev_141.bb
-+S = "${WORKDIR}/udev-${PV}"
-+DESCRIPTION = "udev compatibility helper package for systems that run old kernels"
-+PACKAGES = "${PN} ${PN}-dbg"
++++ b/recipes/udev/files/udev-compat-wrapper-patch
+@@ -0,0 +1,37 @@
++This patch should be applied on platforms which support kernels < 2.6.27 and need udev-compat package.
 +
-+# Need udev with udev-compat-wrapper support.
-+RDEPENDS_${PN} += "udev-compat-wrapper"
-+# Remove hotplug RPROVIDES
-+RPROVIDES_${PN} = ""
++It should be applied after:
++sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
 +
-+# We cannot use newer library: udev_monitor_new_from_netlink_compat() will fail.
-+# We cannot use older udev_monitor_new_from_netlink_compat(): Structures are incompatible.
-+# That is why we link udev statically with the old library.
-+export enable_shared = "no"
-+EXTRA_OECONF += "--enable-static"
++It has not .patch suffix, because such files would not be copied to
++WORKDIR and cannot be selectively applied on another source file.
 +
-+# Remove everything except udevd and udevadm and rename these two.
-+do_install_append () {
-+	mv ${D}${base_sbindir}/udevd ${D}${base_sbindir}/udevd-compat
-+	mv ${D}${base_sbindir}/udevadm ${D}${base_sbindir}/udevadm-compat
-+	rm -r ${D}${datadir} ${D}${base_libdir} ${D}${libdir} ${D}${includedir} ${D}${sysconfdir}
-+	rmdir ${D}${prefix} 2>/dev/null || true
-+}
-+
-+# Remove udev init script installation
-+INITSCRIPT_PACKAGES = ""
++--- init
+++++ init
++@@ -11,6 +11,17 @@
++ 
++ export TZ=/etc/localtime
++ 
+++UDEVD="/sbin/udevd"
+++UDEVADM="/sbin/udevadm"
+++# If we are running an old kernel and have a static udev present use that instead
+++if [ -e /sbin/udevd-compat ] ; then
+++	KERNELMICROVER="$(uname -r | awk -F. '{print $3}')"
+++	if [ $KERNELMICROVER -lt 27 ] ; then
+++		UDEVD="/sbin/udevd-compat"
+++		UDEVADM="/sbin/udevadm-compat"
+++	fi
+++fi
+++
++ [ -d /sys/class ] || exit 1
++ [ -r /proc/mounts ] || exit 1
++ [ -x $UDEVD ] || exit 1
++@@ -21,6 +32,8 @@
++         if [ -x /sbin/pidof ]; then
++                 pid=`/sbin/pidof -x udevd`
++                 [ -n "$pid" ] && kill $pid
+++                pid=`/sbin/pidof -x udevd-compat`
+++                [ -n "$pid" ] && kill $pid
++         fi
++ }
++ 
 diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
-index 1fb75fe..c79da97 100644
+index c79da97..f4f1c40 100644
 --- a/recipes/udev/udev.inc
 +++ b/recipes/udev/udev.inc
-@@ -63,7 +63,7 @@ do_install () {
- 	install -m 0755 ${WORKDIR}/mount.sh ${D}${sysconfdir}/udev/scripts/mount.sh
- 	install -m 0755 ${WORKDIR}/network.sh ${D}${sysconfdir}/udev/scripts
-         install -m 0644 ${S}/extras/volume_id/lib/libvolume_id.h ${D}${includedir}
--        oe_libinstall -C extras/volume_id/lib -so libvolume_id ${D}${libdir}
-+        oe_libinstall -C extras/volume_id/lib libvolume_id ${D}${libdir}
- }
+@@ -11,7 +11,8 @@ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+ 	   file://mount.sh \
+ 	   file://network.sh \
+ 	   file://local.rules \
+-           file://init"
++           file://init \
++	   file://udev-compat-wrapper-patch"
  
- PACKAGES =+ "udev-utils libvolume-id libvolume-id-dev"
-diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
-index 27055be..3ef9f7d 100644
---- a/recipes/udev/udev_141.bb
-+++ b/recipes/udev/udev_141.bb
-@@ -79,7 +79,7 @@ do_install () {
+ INC_PR = "r27"
  
- 	install -m 0755 ${WORKDIR}/mount.sh ${D}${sysconfdir}/udev/scripts/mount.sh
- 	install -m 0755 ${WORKDIR}/network.sh ${D}${sysconfdir}/udev/scripts
--        oe_libinstall -C udev/lib -so libudev ${D}${libdir}
-+        oe_libinstall -C udev/lib libudev ${D}${libdir}
-         install ${S}/udev/lib/libudev.h ${D}${includedir}
- }
+@@ -42,6 +43,22 @@ EXTRA_OEMAKE = "-e \
+ 		'EXTRAS=${UDEV_EXTRAS}' \
+ 		'STRIP=echo'"
  
-@@ -99,7 +99,7 @@ do_install_append_hipox() {
- }
- 
- # Create the cache after checkroot has run
--pkg_postinst_${PN}_append() {
-+pkg_postinst_udev_append() {
- update-rc.d $OPT udev-cache start 12 S .
- 
- if [ -d $D/lib/udev/rules.d ] ; then
++RPROVIDES_udev_spitz = "udev-compat-wrapper"
++do_unpack_append_spitz() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
++RPROVIDES_udev_akita = "udev-compat-wrapper"
++do_unpack_append_akita() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
++# Modify init script on platforms that need to boot old kernels:
++do_apply_compat_wrapper() {
++	cd ${WORKDIR}
++	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
++	patch <udev-compat-wrapper-patch
++	cd -
++}
++
+ do_install () {
+ 	install -d ${D}${usrsbindir} \
+ 		   ${D}${sbindir}
 diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
-index 13f3a02..7be56d2 100644
+index 7be56d2..ce97a7b 100644
 --- a/recipes/udev/udev_151.bb
 +++ b/recipes/udev/udev_151.bb
-@@ -119,7 +119,7 @@ do_install_append_bug() {
- }
+@@ -29,6 +29,7 @@ SRC_URI += " \
+        file://default \
+        file://init \
+        file://cache \
++       file://udev-compat-wrapper-patch \
+ "
  
- # Create the cache after checkroot has run
--pkg_postinst_${PN}_append() {
-+pkg_postinst_udev_append() {
- 	update-rc.d $OPT udev-cache start 12 S .
- }
+ SRC_URI_append_h2200 = " file://50-hostap_cs.rules "
+@@ -74,6 +75,22 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
+ FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+ FILES_${PN}-dbg += "/lib/udev/.debug"
  
++RPROVIDES_udev_spitz = "udev-compat-wrapper"
++do_unpack_append_spitz() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
++RPROVIDES_udev_akita = "udev-compat-wrapper"
++do_unpack_append_akita() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
++# Modify init script on platforms that need to boot old kernels:
++do_apply_compat_wrapper() {
++	cd ${WORKDIR}
++	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
++	patch <udev-compat-wrapper-patch
++	cd -
++}
++
+ do_install () {
+ 	install -d ${D}${usrsbindir} \
+ 		   ${D}${sbindir}
 diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
-index cd370e8..5e90e88 100644
+index 5e90e88..6032215 100644
 --- a/recipes/udev/udev_154.bb
 +++ b/recipes/udev/udev_154.bb
-@@ -120,6 +120,6 @@ do_install_append_bug() {
- }
+@@ -30,6 +30,7 @@ SRC_URI += " \
+        file://default \
+        file://init \
+        file://cache \
++       file://udev-compat-wrapper-patch \
+ "
  
- # Create the cache after checkroot has run
--pkg_postinst_${PN}_append() {
-+pkg_postinst_udev_append() {
- 	update-rc.d $OPT udev-cache start 12 S .
- }
+ SRC_URI_append_h2200 = " file://50-hostap_cs.rules "
+@@ -75,6 +76,22 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
+ FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
+ FILES_${PN}-dbg += "/lib/udev/.debug"
+ 
++RPROVIDES_udev_spitz = "udev-compat-wrapper"
++do_unpack_append_spitz() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
++RPROVIDES_udev_akita = "udev-compat-wrapper"
++do_unpack_append_akita() {
++	bb.build.exec_func('do_apply_compat_wrapper', d)
++}
++# Modify init script on platforms that need to boot old kernels:
++do_apply_compat_wrapper() {
++	cd ${WORKDIR}
++	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
++	patch <udev-compat-wrapper-patch
++	cd -
++}
++
+ do_install () {
+ 	install -d ${D}${usrsbindir} \
+ 		   ${D}${sbindir}
 
 -- 
 
 ________________________________________________________________________
 Stanislav Brabec
 http://www.penguin.cz/~utx/zaurus
+
 
 
 
