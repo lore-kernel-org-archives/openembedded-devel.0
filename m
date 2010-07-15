@@ -1,40 +1,37 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OZWf8-0003Ym-KD
+	(envelope-from <utx@penguin.cz>) id 1OZXXB-00064W-1a
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 00:12:19 +0200
-Received: by gya6 with SMTP id 6so1012808gya.6
+	Fri, 16 Jul 2010 01:10:18 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 28BC81416BAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jul 2010 15:12:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=rUcsHfm68X29BkR+fQ1veXYFIdYX36SIEp1uo1O4zgY=;
-	b=c7VW0zbXewNCrB0uJWorsLyyx3MuA4ruCvTPg5GpL4Bu9daDe22pudJPIgnV0VicEL
-	x9VGx4GG4DTYQUb0nRqUa7TKqOcWS/vuiJ7rQKbVp2YOb5vzOX3lH6wC/H0pWzX8Ftnb
-	0OGQSnmFLBV0+Z5GFQTwKQfX6/vPehFKlSj28=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=PDP0H5VnSiKiJMdprkPZCVoupmI2AFERmL2qc4eYsaS0wK6TfeA0eIO+MNpHT3PbVz
-	QZ8aUbR6TxDZt8cBxrvtwGW5oB7k5LkdteMwCtghoUguIIrmW7W2UlrfDJZP1DgNaj6t
-	r7z0BiDWY+OT0KNItlj+a5Ie78amWSecuRFnc=
-MIME-Version: 1.0
-Received: by 10.100.163.5 with SMTP id l5mr343655ane.144.1279231926846; Thu, 
-	15 Jul 2010 15:12:06 -0700 (PDT)
-Received: by 10.100.127.11 with HTTP; Thu, 15 Jul 2010 15:12:06 -0700 (PDT)
-Date: Thu, 15 Jul 2010 15:12:06 -0700
-Message-ID: <AANLkTilIK0a0CNBJ20rOV-k7iawQ5GtF3epMb77SjMrJ@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	Fri, 16 Jul 2010 01:13:07 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id h0Vd3tTMaAd2
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jul 2010 01:12:58 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 319C21416BA5
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jul 2010 01:12:57 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+Date: Fri, 16 Jul 2010 01:08:00 +0200
+Message-ID: <1279235280.6792.7.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: hping2 recipe failed to build fixed for gumstix overo
+Subject: [PATCH 1/3] udev: add compatibility package for old kernels
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,67 +45,133 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 22:12:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 15 Jul 2010 23:11:07 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 7bit
 
-Not sure if this is the correct way but I was able to sort out a
-recipe that was failing to build for my gumstix overo. It was hping2
-the fixed recipe is as follows. It seems to build now though have not
-tested it works properly yet. Though this is not the most current
-version of the program. Would be nice if someone knowledgable could
-fix the recipe to pull and from the svn source so it would build the
-most current version when the recipe runs.  thanks
+Attached patch creates udev compatibility package that allows to run
+udev on old kernels.
 
+Changes in udev recipes should have no effect for udev itself, just
+simplifying the udev-compat recipe.
 
-DESCRIPTION = "hping is a command-line oriented TCP/IP packet \
-assembler/analyzer. The interface is inspired to the ping(8) \
-unix command, but hping isn't only able to send ICMP echo requests. \
-It supports TCP, UDP, ICMP and RAW-IP protocols, has a traceroute \
-mode, the ability to send files between a covered channel, and many \
-other features."
-HOMEPAGE = "http://www.hping.org/"
-SECTION = "console/network"
-LICENSE = "GPL"
-PR = "r1"
+People that need even older udev can reuse the recipe, copy it with a
+different name and add it to the image.
 
-SRC_URI = "http://www.hping.org/hping2.0.0-rc3.tar.gz \
-           file://hping2_debian.patch \
-           file://hping2_configure.patch"
-S = "${WORKDIR}/hping2-rc3"
+The idea was suggested in past by Koen Kooi:
+Subject: [RFC][PATCH] udev 151: fall back to old, static udev if present when running an old kernel
+Date: Sat, 17 Apr 2010 16:03:27 +0200
 
-inherit siteinfo
+This recipe does not create static binary, but a dynamic binary
+statically linked just with udev. Binary names don't contain version, so
+arbitrary compat version can be used without modifying of the wrapper.
 
+    udev-compat141: Added compatibility udev package for old kernels.
 
-TARGET_CC_ARCH += "${LDFLAGS}"
+diff --git a/recipes/udev/udev-compat141_141.bb b/recipes/udev/udev-compat141_141.bb
+new file mode 100644
+index 0000000..3eb99e8
+--- /dev/null
++++ b/recipes/udev/udev-compat141_141.bb
+@@ -0,0 +1,32 @@
++# To use this package, you need:
++# - udev main package with init scrit that supports udev-compat-wrapper (enable per-platform in the udev.inc and udev*.bb files)
++# - this package must be embedded into the image (otherwise system will refuse to boot)
++# - only one compat package is supported (pick the newest udev that supports your oldest kernel)
++#
++FILESPATHPKG =. "udev-${PV}:udev:"
++require udev_141.bb
++S = "${WORKDIR}/udev-${PV}"
++DESCRIPTION = "udev compatibility helper package for systems that run old kernels"
++PACKAGES = "${PN} ${PN}-dbg"
++
++# Need udev with udev-compat-wrapper support.
++RDEPENDS_${PN} += "udev-compat-wrapper"
++# Remove hotplug RPROVIDES
++RPROVIDES_${PN} = ""
++
++# We cannot use newer library: udev_monitor_new_from_netlink_compat() will fail.
++# We cannot use older udev_monitor_new_from_netlink_compat(): Structures are incompatible.
++# That is why we link udev statically with the old library.
++export enable_shared = "no"
++EXTRA_OECONF += "--enable-static"
++
++# Remove everything except udevd and udevadm and rename these two.
++do_install_append () {
++	mv ${D}${base_sbindir}/udevd ${D}${base_sbindir}/udevd-compat
++	mv ${D}${base_sbindir}/udevadm ${D}${base_sbindir}/udevadm-compat
++	rm -r ${D}${datadir} ${D}${base_libdir} ${D}${libdir} ${D}${includedir} ${D}${sysconfdir}
++	rmdir ${D}${prefix} 2>/dev/null || true
++}
++
++# Remove udev init script installation
++INITSCRIPT_PACKAGES = ""
+diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
+index 1fb75fe..c79da97 100644
+--- a/recipes/udev/udev.inc
++++ b/recipes/udev/udev.inc
+@@ -63,7 +63,7 @@ do_install () {
+ 	install -m 0755 ${WORKDIR}/mount.sh ${D}${sysconfdir}/udev/scripts/mount.sh
+ 	install -m 0755 ${WORKDIR}/network.sh ${D}${sysconfdir}/udev/scripts
+         install -m 0644 ${S}/extras/volume_id/lib/libvolume_id.h ${D}${includedir}
+-        oe_libinstall -C extras/volume_id/lib -so libvolume_id ${D}${libdir}
++        oe_libinstall -C extras/volume_id/lib libvolume_id ${D}${libdir}
+ }
+ 
+ PACKAGES =+ "udev-utils libvolume-id libvolume-id-dev"
+diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+index 27055be..3ef9f7d 100644
+--- a/recipes/udev/udev_141.bb
++++ b/recipes/udev/udev_141.bb
+@@ -79,7 +79,7 @@ do_install () {
+ 
+ 	install -m 0755 ${WORKDIR}/mount.sh ${D}${sysconfdir}/udev/scripts/mount.sh
+ 	install -m 0755 ${WORKDIR}/network.sh ${D}${sysconfdir}/udev/scripts
+-        oe_libinstall -C udev/lib -so libudev ${D}${libdir}
++        oe_libinstall -C udev/lib libudev ${D}${libdir}
+         install ${S}/udev/lib/libudev.h ${D}${includedir}
+ }
+ 
+@@ -99,7 +99,7 @@ do_install_append_hipox() {
+ }
+ 
+ # Create the cache after checkroot has run
+-pkg_postinst_${PN}_append() {
++pkg_postinst_udev_append() {
+ update-rc.d $OPT udev-cache start 12 S .
+ 
+ if [ -d $D/lib/udev/rules.d ] ; then
+diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
+index 13f3a02..7be56d2 100644
+--- a/recipes/udev/udev_151.bb
++++ b/recipes/udev/udev_151.bb
+@@ -119,7 +119,7 @@ do_install_append_bug() {
+ }
+ 
+ # Create the cache after checkroot has run
+-pkg_postinst_${PN}_append() {
++pkg_postinst_udev_append() {
+ 	update-rc.d $OPT udev-cache start 12 S .
+ }
+ 
+diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
+index cd370e8..5e90e88 100644
+--- a/recipes/udev/udev_154.bb
++++ b/recipes/udev/udev_154.bb
+@@ -120,6 +120,6 @@ do_install_append_bug() {
+ }
+ 
+ # Create the cache after checkroot has run
+-pkg_postinst_${PN}_append() {
++pkg_postinst_udev_append() {
+ 	update-rc.d $OPT udev-cache start 12 S .
+ }
 
-#
-# We've patched configure to accept byte order and ostype as env
-# variables Pass those values in to stop it trying to figure it out
-# by itself.
-# NOTE: The configure script is not an autoconf script.
-#
-do_configure() {
-        # Additional flag based on target endiness (see siteinfo.bbclass)
-        BYTEORDER="${@base_conditional('SITEINFO_ENDIANESS', 'le',
-'__LITTLE_ENDIAN_BITFIELD', '__BIG_ENDIAN_BITFIELD', d)}"
-        oenote Determined byteorder as: $BYTEORDER
-        BYTEORDER="${BYTEORDER}" CONFIGOSTYPE="LINUX" ./configure
-}
+-- 
 
-#
-# Instead of patching the install we do things manually here
-#
-do_install() {
-        install -m 0755 -d ${D}${sbindir} ${D}/${mandir} ${D}${docdir}/hping2
-        install -m 0755 hping2 ${D}/${sbindir}
-        install -m 0644 docs/hping2.8 ${D}/${mandir}
-        install -m 0644 docs/HPING2-HOWTO.txt docs/HPING2-IS-OPEN \
-                docs/MORE-FUN-WITH-IPID docs/SPOOFED_SCAN.txt \
-                docs/AS-BACKDOOR docs/APD.txt ${D}${docdir}/hping2
-}
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
 
-SRC_URI[md5sum] = "029bf240f2e0545b664b2f8b9118d9e8"
-SRC_URI[sha256sum] =
-"f59292de39b9a4010414bd120a494226399767148efa37278bd53d9613167964"
 
 
