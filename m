@@ -1,35 +1,37 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZVKE-0007gh-Ai
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZVKG-0007lU-Ea
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 22:46:37 +0200
-Received: by ewy7 with SMTP id 7so417598ewy.6
+	Thu, 15 Jul 2010 22:46:41 +0200
+Received: by eyf5 with SMTP id 5so314810eyf.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jul 2010 13:46:29 -0700 (PDT)
+	Thu, 15 Jul 2010 13:46:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=XPyisCRi0aib8RrKcblfUf2bsiHtfFrZak2f9guMJSU=;
-	b=ew1lxPlsDMulli+DkHLgB/41nZ3gIbr4B28jFKLJLVmQoybngpp9HOiLj7/FW8IoUP
-	lsaZaEYpHSD4g0HyeOM/V2rjuL4CgkCjTtxPhjcwkdLDMVhhZ9YjFEPl/QaZKQ5JazIu
-	sxnqpnRd49SU+tS7WGrr56S2J/xemIhT53ulw=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=yF72Ct0/8oJYrWrHuIGUA/u6CEr2Aawf1h59Zf7rK3Q=;
+	b=cVeyIymcbUPaCXEWnkGUsTriED6hYXsOGVDsXgtlpdscjjqi4cFCLkhVr6Hf4rdODg
+	g8q79WQpgizRQoLXbgZqnOX0GD3WnugI1Sd5sO1r7cJDiwqpuTldOdMFgkmOTzGhETKC
+	WUT6p9ZRYk2Us+24XsBn7Quwy/BAcaB1LGU10=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=f3C6nF1EC7SGiU0WwiWWS4Ct/XSb8Vb64qb6e2Ut+xPnFd2FP13v2W4JUDfvs88BuW
-	eh9/1BVaEqkQVCnoujjJAxtYe5jlFwbvW0f53YxKtGNAvMsuNyN/XzJ66VO4mZHnpqzU
-	0/CrGQISmAQ5omWWY7zaDTve5s+QwC3GA+lQM=
-Received: by 10.213.33.4 with SMTP id f4mr216234ebd.58.1279226788947;
-	Thu, 15 Jul 2010 13:46:28 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=LZpVfxDm8bFDsG0ZZ+FI6tpKUnMhTzQV0dKXWS2BHOh0LwwaSXm1UhZYwxq3RP97rO
+	lv4NjqH+M+qnP0ywFUAIL7+2PG4jOPaIAZGkQabdtou4/+9l7rm/ffsQas+LseVXl0xM
+	w1dI7PNdd+efjpKg7wRLCtUe3WUP4P36NLsmk=
+Received: by 10.213.17.7 with SMTP id q7mr3476498eba.2.1279226792790;
+	Thu, 15 Jul 2010 13:46:32 -0700 (PDT)
 Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id a48sm11234548eei.12.2010.07.15.13.46.27
+	by mx.google.com with ESMTPS id a48sm11234548eei.12.2010.07.15.13.46.31
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 15 Jul 2010 13:46:28 -0700 (PDT)
+	Thu, 15 Jul 2010 13:46:32 -0700 (PDT)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Jul 2010 22:46:20 +0200
-Message-Id: <1279226782-6124-1-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Thu, 15 Jul 2010 22:46:21 +0200
+Message-Id: <1279226782-6124-2-git-send-email-fransmeulenbroeks@gmail.com>
 X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.47
+In-Reply-To: <1279226782-6124-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1279226782-6124-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -37,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/3] glibc 2.9: cleaned up; patches only in local dir
+Subject: [PATCH 2/3] glibc 2.10.1: cleaned up; patches only in local dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +53,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 20:46:37 -0000
+X-List-Received-Date: Thu, 15 Jul 2010 20:46:41 -0000
 
-moved all patches to glibc-2.9
+moved all patches to glibc-2.10.1
 removed references to other dirs.
 
 Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 ---
- recipes/glibc/glibc-2.9/arm-longlong.patch         |   58 ++
- .../glibc-2.9/arm-lowlevellock-include-tls.patch   |   12 +
- recipes/glibc/glibc-2.9/arm-memcpy.patch           |  758 ++++++++++++++++++++
- recipes/glibc/glibc-2.9/dl-cache-libcmp.patch      |   10 +
- recipes/glibc/glibc-2.9/fhs-linux-paths.patch      |   11 +
- recipes/glibc/glibc-2.9/generate-supported.mk      |   11 +
- recipes/glibc/glibc-2.9/generic-bits_select.h      |   35 +
- recipes/glibc/glibc-2.9/generic-bits_time.h        |   75 ++
- recipes/glibc/glibc-2.9/generic-bits_types.h       |  200 +++++
- recipes/glibc/glibc-2.9/generic-bits_typesizes.h   |   66 ++
- .../glibc-2.9/glibc-arm-IO-acquire-lock-fix.diff   |   13 +
- recipes/glibc/glibc-2.9/glibc-check_pf.patch       |  343 +++++++++
- recipes/glibc/glibc-2.9/ldd-unbash.patch           |   11 +
- recipes/glibc/glibc-2.9/ldsocache-varrun.patch     |   18 +
- recipes/glibc/glibc-2.9/march-i686.patch           |   38 +
- recipes/glibc/glibc-2.9/no-z-defs.patch            |    9 +
- recipes/glibc/glibc-2.9/nptl-crosscompile.patch    |   26 +
- recipes/glibc/glibc-2.9/nscd-init.patch            |   39 +
- recipes/glibc/glibc-2.9/powerpc-sqrt-hack.diff     |   25 +
- recipes/glibc/glibc-2.9/tls_i486.patch             |   14 +
- recipes/glibc/glibc_2.9.bb                         |    3 -
- 21 files changed, 1772 insertions(+), 3 deletions(-)
- create mode 100644 recipes/glibc/glibc-2.9/arm-longlong.patch
- create mode 100644 recipes/glibc/glibc-2.9/arm-lowlevellock-include-tls.patch
- create mode 100644 recipes/glibc/glibc-2.9/arm-memcpy.patch
- create mode 100644 recipes/glibc/glibc-2.9/dl-cache-libcmp.patch
- create mode 100644 recipes/glibc/glibc-2.9/fhs-linux-paths.patch
- create mode 100644 recipes/glibc/glibc-2.9/generate-supported.mk
- create mode 100644 recipes/glibc/glibc-2.9/generic-bits_select.h
- create mode 100644 recipes/glibc/glibc-2.9/generic-bits_time.h
- create mode 100644 recipes/glibc/glibc-2.9/generic-bits_types.h
- create mode 100644 recipes/glibc/glibc-2.9/generic-bits_typesizes.h
- create mode 100644 recipes/glibc/glibc-2.9/glibc-arm-IO-acquire-lock-fix.diff
- create mode 100644 recipes/glibc/glibc-2.9/glibc-check_pf.patch
- create mode 100644 recipes/glibc/glibc-2.9/ldd-unbash.patch
- create mode 100644 recipes/glibc/glibc-2.9/ldsocache-varrun.patch
- create mode 100644 recipes/glibc/glibc-2.9/march-i686.patch
- create mode 100644 recipes/glibc/glibc-2.9/no-z-defs.patch
- create mode 100644 recipes/glibc/glibc-2.9/nptl-crosscompile.patch
- create mode 100644 recipes/glibc/glibc-2.9/nscd-init.patch
- create mode 100644 recipes/glibc/glibc-2.9/powerpc-sqrt-hack.diff
- create mode 100644 recipes/glibc/glibc-2.9/tls_i486.patch
+ recipes/glibc/glibc-2.10.1/arm-longlong.patch      |   58 ++
+ .../arm-lowlevellock-include-tls.patch             |   12 +
+ recipes/glibc/glibc-2.10.1/arm-memcpy.patch        |  758 ++++++++++++++++++++
+ .../glibc/glibc-2.10.1/armv4t-interworking.patch   |   47 ++
+ recipes/glibc/glibc-2.10.1/dl-cache-libcmp.patch   |   10 +
+ recipes/glibc/glibc-2.10.1/etc/ld.so.conf          |    2 +
+ recipes/glibc/glibc-2.10.1/fhs-linux-paths.patch   |   11 +
+ recipes/glibc/glibc-2.10.1/generate-supported.mk   |   11 +
+ recipes/glibc/glibc-2.10.1/generic-bits_select.h   |   35 +
+ recipes/glibc/glibc-2.10.1/generic-bits_time.h     |   75 ++
+ recipes/glibc/glibc-2.10.1/generic-bits_types.h    |  200 +++++
+ .../glibc/glibc-2.10.1/generic-bits_typesizes.h    |   66 ++
+ .../glibc-arm-IO-acquire-lock-fix.diff             |   13 +
+ recipes/glibc/glibc-2.10.1/glibc-check_pf.patch    |  343 +++++++++
+ recipes/glibc/glibc-2.10.1/ldd-unbash.patch        |   11 +
+ recipes/glibc/glibc-2.10.1/ldsocache-varrun.patch  |   18 +
+ recipes/glibc/glibc-2.10.1/march-i686.patch        |   38 +
+ recipes/glibc/glibc-2.10.1/no-z-defs.patch         |    9 +
+ recipes/glibc/glibc-2.10.1/nptl-crosscompile.patch |   26 +
+ recipes/glibc/glibc-2.10.1/nscd-init.patch         |   39 +
+ recipes/glibc/glibc-2.10.1/powerpc-sqrt-hack.diff  |   25 +
+ recipes/glibc/glibc_2.10.1.bb                      |    3 -
+ 22 files changed, 1807 insertions(+), 3 deletions(-)
+ create mode 100644 recipes/glibc/glibc-2.10.1/arm-longlong.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/arm-lowlevellock-include-tls.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/arm-memcpy.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/armv4t-interworking.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/dl-cache-libcmp.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/etc/ld.so.conf
+ create mode 100644 recipes/glibc/glibc-2.10.1/fhs-linux-paths.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/generate-supported.mk
+ create mode 100644 recipes/glibc/glibc-2.10.1/generic-bits_select.h
+ create mode 100644 recipes/glibc/glibc-2.10.1/generic-bits_time.h
+ create mode 100644 recipes/glibc/glibc-2.10.1/generic-bits_types.h
+ create mode 100644 recipes/glibc/glibc-2.10.1/generic-bits_typesizes.h
+ create mode 100644 recipes/glibc/glibc-2.10.1/glibc-arm-IO-acquire-lock-fix.diff
+ create mode 100644 recipes/glibc/glibc-2.10.1/glibc-check_pf.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/ldd-unbash.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/ldsocache-varrun.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/march-i686.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/no-z-defs.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/nptl-crosscompile.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/nscd-init.patch
+ create mode 100644 recipes/glibc/glibc-2.10.1/powerpc-sqrt-hack.diff
 
-diff --git a/recipes/glibc/glibc-2.9/arm-longlong.patch b/recipes/glibc/glibc-2.9/arm-longlong.patch
+diff --git a/recipes/glibc/glibc-2.10.1/arm-longlong.patch b/recipes/glibc/glibc-2.10.1/arm-longlong.patch
 new file mode 100644
 index 0000000..28aca83
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/arm-longlong.patch
++++ b/recipes/glibc/glibc-2.10.1/arm-longlong.patch
 @@ -0,0 +1,58 @@
 +--- glibc-2.4/stdlib/longlong.h.ark	2006-03-11 22:49:27.000000000 +0100
 ++++ glibc-2.4/stdlib/longlong.h	2006-03-11 22:55:12.000000000 +0100
@@ -165,11 +169,11 @@ index 0000000..28aca83
 ++#else
 ++#include <stdlib/mp_clz_tab.c>
 ++#endif
-diff --git a/recipes/glibc/glibc-2.9/arm-lowlevellock-include-tls.patch b/recipes/glibc/glibc-2.9/arm-lowlevellock-include-tls.patch
+diff --git a/recipes/glibc/glibc-2.10.1/arm-lowlevellock-include-tls.patch b/recipes/glibc/glibc-2.10.1/arm-lowlevellock-include-tls.patch
 new file mode 100644
 index 0000000..5c8062e
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/arm-lowlevellock-include-tls.patch
++++ b/recipes/glibc/glibc-2.10.1/arm-lowlevellock-include-tls.patch
 @@ -0,0 +1,12 @@
 +Index: glibc-2.9/ports/sysdeps/unix/sysv/linux/arm/nptl/lowlevellock.h
 +===================================================================
@@ -183,11 +187,11 @@ index 0000000..5c8062e
 + 
 + #define FUTEX_WAIT		0
 + #define FUTEX_WAKE		1
-diff --git a/recipes/glibc/glibc-2.9/arm-memcpy.patch b/recipes/glibc/glibc-2.9/arm-memcpy.patch
+diff --git a/recipes/glibc/glibc-2.10.1/arm-memcpy.patch b/recipes/glibc/glibc-2.10.1/arm-memcpy.patch
 new file mode 100644
 index 0000000..bc2b3da
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/arm-memcpy.patch
++++ b/recipes/glibc/glibc-2.10.1/arm-memcpy.patch
 @@ -0,0 +1,758 @@
 +--- /dev/null	2004-02-02 20:32:13.000000000 +0000
 ++++ sysdeps/arm/memmove.S	2004-03-20 18:37:23.000000000 +0000
@@ -947,11 +951,64 @@ index 0000000..bc2b3da
 ++END(memcpy)
 ++libc_hidden_builtin_def (memcpy)
 ++
-diff --git a/recipes/glibc/glibc-2.9/dl-cache-libcmp.patch b/recipes/glibc/glibc-2.9/dl-cache-libcmp.patch
+diff --git a/recipes/glibc/glibc-2.10.1/armv4t-interworking.patch b/recipes/glibc/glibc-2.10.1/armv4t-interworking.patch
+new file mode 100644
+index 0000000..ce91ad6
+--- /dev/null
++++ b/recipes/glibc/glibc-2.10.1/armv4t-interworking.patch
+@@ -0,0 +1,47 @@
++--- libc/ports/sysdeps/arm/memcpy.S~	2006-10-31 17:07:54.000000000 +0000
+++++ libc/ports/sysdeps/arm/memcpy.S	2008-10-24 11:09:34.000000000 +0100
++@@ -130,7 +130,12 @@
++ 		strcsb	r4, [r0], #1
++ 		strcsb	ip, [r0]
++ 
+++#if defined (__ARM_ARCH_4T__) && defined(__THUMB_INTERWORK__)
+++		ldmfd	sp!, {r0, r4, lr}
+++                bx      lr
+++#else
++ 		ldmfd	sp!, {r0, r4, pc}
+++#endif
++ 
++ 9:		rsb	ip, ip, #4
++ 		cmp	ip, #2
++--- libc/ports/sysdeps/arm/memmove.S~	2006-10-31 17:07:54.000000000 +0000
+++++ libc/ports/sysdeps/arm/memmove.S	2008-10-24 11:09:44.000000000 +0100
++@@ -140,7 +140,12 @@
++ 		strneb	r3, [r0, #-1]!
++ 		strcsb	r4, [r0, #-1]!
++ 		strcsb	ip, [r0, #-1]
+++#if defined (__ARM_ARCH_4T__) && defined (__THUMB_INTERWORK__)
+++		ldmfd	sp!, {r0, r4, lr}
+++                bx      lr
+++#else
++ 		ldmfd	sp!, {r0, r4, pc}
+++#endif
++ 
++ 9:		cmp	ip, #2
++ 		ldrgtb	r3, [r1, #-1]!
++--- libc/ports/sysdeps/unix/sysv/linux/arm/clone.S~	2005-11-16 19:03:42.000000000 +0000
+++++ libc/ports/sysdeps/unix/sysv/linux/arm/clone.S	2008-10-24 11:11:05.000000000 +0100
++@@ -96,8 +96,14 @@
++ #endif
++ 	@ pick the function arg and call address off the stack and execute
++ 	ldr	r0, [sp, #4]
+++#if defined(__ARM_ARCH_V4T__) && defined(__THUMB_INTERWORK__)
+++	ldr 	ip, [sp], #8
+++	mov	lr, pc
+++        bx      ip
+++#else
++ 	mov	lr, pc
++ 	ldr 	pc, [sp], #8
+++#endif
++ 
++ 	@ and we are done, passing the return value through r0
++ 	b	PLTJMP(_exit)
+diff --git a/recipes/glibc/glibc-2.10.1/dl-cache-libcmp.patch b/recipes/glibc/glibc-2.10.1/dl-cache-libcmp.patch
 new file mode 100644
 index 0000000..2fedfa6
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/dl-cache-libcmp.patch
++++ b/recipes/glibc/glibc-2.10.1/dl-cache-libcmp.patch
 @@ -0,0 +1,10 @@
 +--- glibc-2.4/elf/Versions.ark	2006-03-11 23:30:09.000000000 +0100
 ++++ glibc-2.4/elf/Versions	2006-03-11 23:31:44.000000000 +0100
@@ -963,11 +1020,19 @@ index 0000000..2fedfa6
 ++    _dl_cache_libcmp;
 +   }
 + }
-diff --git a/recipes/glibc/glibc-2.9/fhs-linux-paths.patch b/recipes/glibc/glibc-2.9/fhs-linux-paths.patch
+diff --git a/recipes/glibc/glibc-2.10.1/etc/ld.so.conf b/recipes/glibc/glibc-2.10.1/etc/ld.so.conf
+new file mode 100644
+index 0000000..46e06d3
+--- /dev/null
++++ b/recipes/glibc/glibc-2.10.1/etc/ld.so.conf
+@@ -0,0 +1,2 @@
++/usr/local/lib
++
+diff --git a/recipes/glibc/glibc-2.10.1/fhs-linux-paths.patch b/recipes/glibc/glibc-2.10.1/fhs-linux-paths.patch
 new file mode 100644
 index 0000000..1f32f6d
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/fhs-linux-paths.patch
++++ b/recipes/glibc/glibc-2.10.1/fhs-linux-paths.patch
 @@ -0,0 +1,11 @@
 +--- glibc-2.1.1/sysdeps/unix/sysv/linux/paths.h~	Thu May 27 13:16:33 1999
 ++++ glibc-2.1.1/sysdeps/unix/sysv/linux/paths.h	Thu May 27 13:17:55 1999
@@ -980,11 +1045,11 @@ index 0000000..1f32f6d
 + #define	_PATH_VARRUN	"/var/run/"
 + #define	_PATH_VARTMP	"/var/tmp/"
 + 
-diff --git a/recipes/glibc/glibc-2.9/generate-supported.mk b/recipes/glibc/glibc-2.9/generate-supported.mk
+diff --git a/recipes/glibc/glibc-2.10.1/generate-supported.mk b/recipes/glibc/glibc-2.10.1/generate-supported.mk
 new file mode 100644
 index 0000000..d2a28c2
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/generate-supported.mk
++++ b/recipes/glibc/glibc-2.10.1/generate-supported.mk
 @@ -0,0 +1,11 @@
 +#!/usr/bin/make
 +
@@ -997,11 +1062,11 @@ index 0000000..d2a28c2
 +		[ $$locale = true ] && continue; \
 +		echo $$locale | sed 's,/, ,' >> $(OUT); \
 +	done
-diff --git a/recipes/glibc/glibc-2.9/generic-bits_select.h b/recipes/glibc/glibc-2.9/generic-bits_select.h
+diff --git a/recipes/glibc/glibc-2.10.1/generic-bits_select.h b/recipes/glibc/glibc-2.10.1/generic-bits_select.h
 new file mode 100644
 index 0000000..47e7ded
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/generic-bits_select.h
++++ b/recipes/glibc/glibc-2.10.1/generic-bits_select.h
 @@ -0,0 +1,35 @@
 +/* Copyright (C) 1997, 1998, 2001 Free Software Foundation, Inc.
 +   This file is part of the GNU C Library.
@@ -1038,11 +1103,11 @@ index 0000000..47e7ded
 +#define __FD_SET(d, s)     (__FDS_BITS (s)[__FDELT(d)] |= __FDMASK(d))
 +#define __FD_CLR(d, s)     (__FDS_BITS (s)[__FDELT(d)] &= ~__FDMASK(d))
 +#define __FD_ISSET(d, s)   ((__FDS_BITS (s)[__FDELT(d)] & __FDMASK(d)) != 0)
-diff --git a/recipes/glibc/glibc-2.9/generic-bits_time.h b/recipes/glibc/glibc-2.9/generic-bits_time.h
+diff --git a/recipes/glibc/glibc-2.10.1/generic-bits_time.h b/recipes/glibc/glibc-2.10.1/generic-bits_time.h
 new file mode 100644
 index 0000000..b3184d1
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/generic-bits_time.h
++++ b/recipes/glibc/glibc-2.10.1/generic-bits_time.h
 @@ -0,0 +1,75 @@
 +/* System-dependent timing definitions.  Generic version.
 +   Copyright (C) 1996,1997,1999-2002,2003 Free Software Foundation, Inc.
@@ -1119,11 +1184,11 @@ index 0000000..b3184d1
 +  };
 +# endif	/* struct timeval */
 +#endif	/* need timeval */
-diff --git a/recipes/glibc/glibc-2.9/generic-bits_types.h b/recipes/glibc/glibc-2.9/generic-bits_types.h
+diff --git a/recipes/glibc/glibc-2.10.1/generic-bits_types.h b/recipes/glibc/glibc-2.10.1/generic-bits_types.h
 new file mode 100644
 index 0000000..65c8a9f
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/generic-bits_types.h
++++ b/recipes/glibc/glibc-2.10.1/generic-bits_types.h
 @@ -0,0 +1,200 @@
 +/* bits/types.h -- definitions of __*_t types underlying *_t types.
 +   Copyright (C) 2002, 2003, 2004, 2005 Free Software Foundation, Inc.
@@ -1325,11 +1390,11 @@ index 0000000..65c8a9f
 +#undef __STD_TYPE
 +
 +#endif /* bits/types.h */
-diff --git a/recipes/glibc/glibc-2.9/generic-bits_typesizes.h b/recipes/glibc/glibc-2.9/generic-bits_typesizes.h
+diff --git a/recipes/glibc/glibc-2.10.1/generic-bits_typesizes.h b/recipes/glibc/glibc-2.10.1/generic-bits_typesizes.h
 new file mode 100644
 index 0000000..e9226c4
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/generic-bits_typesizes.h
++++ b/recipes/glibc/glibc-2.10.1/generic-bits_typesizes.h
 @@ -0,0 +1,66 @@
 +/* bits/typesizes.h -- underlying types for *_t.  Generic version.
 +   Copyright (C) 2002, 2003 Free Software Foundation, Inc.
@@ -1397,11 +1462,11 @@ index 0000000..e9226c4
 +
 +
 +#endif /* bits/typesizes.h */
-diff --git a/recipes/glibc/glibc-2.9/glibc-arm-IO-acquire-lock-fix.diff b/recipes/glibc/glibc-2.9/glibc-arm-IO-acquire-lock-fix.diff
+diff --git a/recipes/glibc/glibc-2.10.1/glibc-arm-IO-acquire-lock-fix.diff b/recipes/glibc/glibc-2.10.1/glibc-arm-IO-acquire-lock-fix.diff
 new file mode 100644
 index 0000000..a552cf0
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/glibc-arm-IO-acquire-lock-fix.diff
++++ b/recipes/glibc/glibc-2.10.1/glibc-arm-IO-acquire-lock-fix.diff
 @@ -0,0 +1,13 @@
 +Arm needs a similar fix as http://sourceware.org/ml/libc-ports/2007-12/msg00000.html
 +
@@ -1416,11 +1481,11 @@ index 0000000..a552cf0
 + # define _IO_release_lock(_fp) \
 +   _IO_funlockfile (_fp);						      \
 +   _IO_cleanup_region_end (0)
-diff --git a/recipes/glibc/glibc-2.9/glibc-check_pf.patch b/recipes/glibc/glibc-2.9/glibc-check_pf.patch
+diff --git a/recipes/glibc/glibc-2.10.1/glibc-check_pf.patch b/recipes/glibc/glibc-2.10.1/glibc-check_pf.patch
 new file mode 100644
 index 0000000..3cff6bb
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/glibc-check_pf.patch
++++ b/recipes/glibc/glibc-2.10.1/glibc-check_pf.patch
 @@ -0,0 +1,343 @@
 +From libc-ports-return-550-listarch-libc-ports=sources dot redhat dot com at sourceware dot org Tue Oct 31 17:37:21 2006
 +Return-Path: <libc-ports-return-550-listarch-libc-ports=sources dot redhat dot com at sourceware dot org>
@@ -1765,11 +1830,11 @@ index 0000000..3cff6bb
 +@@ -0,0 +1 @@
 ++#include <sysdeps/unix/sysv/linux/check_pf.c>
 +
-diff --git a/recipes/glibc/glibc-2.9/ldd-unbash.patch b/recipes/glibc/glibc-2.9/ldd-unbash.patch
+diff --git a/recipes/glibc/glibc-2.10.1/ldd-unbash.patch b/recipes/glibc/glibc-2.10.1/ldd-unbash.patch
 new file mode 100644
 index 0000000..2fb8854
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/ldd-unbash.patch
++++ b/recipes/glibc/glibc-2.10.1/ldd-unbash.patch
 @@ -0,0 +1,11 @@
 +--- glibc-2.5/elf/ldd.bash.in.org	2006-04-30 16:06:20.000000000 +0000
 ++++ glibc-2.5/elf/ldd.bash.in	2007-03-30 19:18:57.000000000 +0000
@@ -1782,11 +1847,11 @@ index 0000000..2fb8854
 +   try_trace() {
 +     eval $add_env '"$@"' | cat
 +   }
-diff --git a/recipes/glibc/glibc-2.9/ldsocache-varrun.patch b/recipes/glibc/glibc-2.9/ldsocache-varrun.patch
+diff --git a/recipes/glibc/glibc-2.10.1/ldsocache-varrun.patch b/recipes/glibc/glibc-2.10.1/ldsocache-varrun.patch
 new file mode 100644
 index 0000000..9994d4f
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/ldsocache-varrun.patch
++++ b/recipes/glibc/glibc-2.10.1/ldsocache-varrun.patch
 @@ -0,0 +1,18 @@
 +This patch moves ld.so.cache from /etc to /var/run. This is for devices
 +where /etc is JFFS2 or CRAMFS but /var is a ramdisk.
@@ -1806,11 +1871,11 @@ index 0000000..9994d4f
 + #endif
 + 
 + #ifndef add_system_dir
-diff --git a/recipes/glibc/glibc-2.9/march-i686.patch b/recipes/glibc/glibc-2.9/march-i686.patch
+diff --git a/recipes/glibc/glibc-2.10.1/march-i686.patch b/recipes/glibc/glibc-2.10.1/march-i686.patch
 new file mode 100644
 index 0000000..0461603
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/march-i686.patch
++++ b/recipes/glibc/glibc-2.10.1/march-i686.patch
 @@ -0,0 +1,38 @@
 +2007-02-15  Khem Raj  <kraj@xxxxxxxxxx>
 +
@@ -1850,11 +1915,11 @@ index 0000000..0461603
 + /* The initial common code ends here. */
 + asm ("\n/*@HEADER_ENDS*/");
 + 
-diff --git a/recipes/glibc/glibc-2.9/no-z-defs.patch b/recipes/glibc/glibc-2.9/no-z-defs.patch
+diff --git a/recipes/glibc/glibc-2.10.1/no-z-defs.patch b/recipes/glibc/glibc-2.10.1/no-z-defs.patch
 new file mode 100644
 index 0000000..48c6a41
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/no-z-defs.patch
++++ b/recipes/glibc/glibc-2.10.1/no-z-defs.patch
 @@ -0,0 +1,9 @@
 +Create a configparms file which disabled no-z-defs.
 +This is required to build a working glibs for sh4,
@@ -1865,11 +1930,11 @@ index 0000000..48c6a41
 ++++ libc/configparms	2006-02-23 14:08:18.000000000 +1100
 +@@ -0,0 +1 @@
 ++no-z-defs=yes
-diff --git a/recipes/glibc/glibc-2.9/nptl-crosscompile.patch b/recipes/glibc/glibc-2.9/nptl-crosscompile.patch
+diff --git a/recipes/glibc/glibc-2.10.1/nptl-crosscompile.patch b/recipes/glibc/glibc-2.10.1/nptl-crosscompile.patch
 new file mode 100644
 index 0000000..18a46ad
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/nptl-crosscompile.patch
++++ b/recipes/glibc/glibc-2.10.1/nptl-crosscompile.patch
 @@ -0,0 +1,26 @@
 +--- glibc-2.4/nptl/sysdeps/pthread/configure.in.ark	2006-03-12 00:41:40.000000000 +0100
 ++++ glibc-2.4/nptl/sysdeps/pthread/configure.in	2006-03-12 00:44:08.000000000 +0100
@@ -1897,11 +1962,11 @@ index 0000000..18a46ad
 ++_ACEOF
 ++
 + fi
-diff --git a/recipes/glibc/glibc-2.9/nscd-init.patch b/recipes/glibc/glibc-2.9/nscd-init.patch
+diff --git a/recipes/glibc/glibc-2.10.1/nscd-init.patch b/recipes/glibc/glibc-2.10.1/nscd-init.patch
 new file mode 100644
 index 0000000..884609a
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/nscd-init.patch
++++ b/recipes/glibc/glibc-2.10.1/nscd-init.patch
 @@ -0,0 +1,39 @@
 +--- nscd/nscd.init
 ++++ nscd/nscd.init
@@ -1942,11 +2007,11 @@ index 0000000..884609a
 + 	RETVAL=$?
 + 	echo
 + 	;;
-diff --git a/recipes/glibc/glibc-2.9/powerpc-sqrt-hack.diff b/recipes/glibc/glibc-2.9/powerpc-sqrt-hack.diff
+diff --git a/recipes/glibc/glibc-2.10.1/powerpc-sqrt-hack.diff b/recipes/glibc/glibc-2.10.1/powerpc-sqrt-hack.diff
 new file mode 100644
 index 0000000..1046efb
 --- /dev/null
-+++ b/recipes/glibc/glibc-2.9/powerpc-sqrt-hack.diff
++++ b/recipes/glibc/glibc-2.10.1/powerpc-sqrt-hack.diff
 @@ -0,0 +1,25 @@
 +diff -Nurd ../glibc-initial-2.5-r4/glibc-2.5/sysdeps/powerpc/fpu/e_sqrt.c glibc-2.5/sysdeps/powerpc/fpu/e_sqrt.c
 +--- ../glibc-initial-2.5-r4/glibc-2.5/sysdeps/powerpc/fpu/e_sqrt.c	2006-04-14 07:44:30.000000000 +0200
@@ -1973,31 +2038,11 @@ index 0000000..1046efb
 + static const float almost_half = 0.50000006;	/* 0.5 + 2^-24 */
 + static const ieee_float_shape_type a_nan = {.word = 0x7fc00000 };
 + static const ieee_float_shape_type a_inf = {.word = 0x7f800000 };
-diff --git a/recipes/glibc/glibc-2.9/tls_i486.patch b/recipes/glibc/glibc-2.9/tls_i486.patch
-new file mode 100644
-index 0000000..69a1fdf
---- /dev/null
-+++ b/recipes/glibc/glibc-2.9/tls_i486.patch
-@@ -0,0 +1,14 @@
-+Index: glibc-2.9/sysdeps/i386/dl-tlsdesc.S
-+===================================================================
-+--- glibc-2.9.orig/sysdeps/i386/dl-tlsdesc.S	2009-07-07 23:21:11.647664128 +0200
-++++ glibc-2.9/sysdeps/i386/dl-tlsdesc.S	2009-07-07 23:21:32.802555992 +0200
-+@@ -128,8 +128,7 @@
-+ .Lslow:
-+ 	cfi_adjust_cfa_offset (28)
-+ 	movl	%ebx, 16(%esp)
-+-	call	__i686.get_pc_thunk.bx
-+-	addl	$_GLOBAL_OFFSET_TABLE_, %ebx
-++	LOAD_PIC_REG (bx)
-+ 	call	___tls_get_addr@PLT
-+ 	movl	16(%esp), %ebx
-+ 	jmp	.Lret
-diff --git a/recipes/glibc/glibc_2.9.bb b/recipes/glibc/glibc_2.9.bb
-index e7ab63d..33326f3 100644
---- a/recipes/glibc/glibc_2.9.bb
-+++ b/recipes/glibc/glibc_2.9.bb
-@@ -11,9 +11,6 @@ PR = "${INC_PR}.3"
+diff --git a/recipes/glibc/glibc_2.10.1.bb b/recipes/glibc/glibc_2.10.1.bb
+index 3c2fce8..b29e36a 100644
+--- a/recipes/glibc/glibc_2.10.1.bb
++++ b/recipes/glibc/glibc_2.10.1.bb
+@@ -11,9 +11,6 @@ RPROVIDES_${PN}-dev = "libc6-dev virtual-libc-dev"
  BUILD_CPPFLAGS = "-I${STAGING_INCDIR_NATIVE}"
  TARGET_CPPFLAGS = "-I${STAGING_DIR_TARGET}${layout_includedir}"
  
