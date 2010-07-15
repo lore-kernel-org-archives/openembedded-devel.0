@@ -1,26 +1,26 @@
 Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1OZXgU-0001VU-D2
+	(envelope-from <utx@penguin.cz>) id 1OZXhN-0001aB-Qz
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 01:17:44 +0200
+	Fri, 16 Jul 2010 01:18:39 +0200
 Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id 923561416BAC
+	by ns.penguin.cz (Postfix) with ESMTP id 14EAB1416BA5
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 01:22:44 +0200 (CEST)
+	Fri, 16 Jul 2010 01:23:40 +0200 (CEST)
 X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
 Received: from ns.penguin.cz ([127.0.0.1])
 	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id We86FEmmsA8a
+	with ESMTP id R4+i72Bqd139
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 01:22:35 +0200 (CEST)
+	Fri, 16 Jul 2010 01:23:31 +0200 (CEST)
 Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 954121416BA5
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id 0297C1416BAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 01:22:35 +0200 (CEST)
+	Fri, 16 Jul 2010 01:23:30 +0200 (CEST)
 From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Fri, 16 Jul 2010 01:17:38 +0200
-Message-ID: <1279235858.6792.16.camel@utx.lan>
+Date: Fri, 16 Jul 2010 01:18:33 +0200
+Message-ID: <1279235913.6792.17.camel@utx.lan>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.1.2 
 X-SA-Exim-Connect-IP: 84.21.108.25
@@ -31,7 +31,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/3] udev: add udev-compat support to udev
+Subject: [PATCH 3/3] udev: fix multiple mounting of /dev, increment PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,167 +45,136 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 23:17:44 -0000
+X-List-Received-Date: Thu, 15 Jul 2010 23:18:39 -0000
 Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-This patch adds support for udev-compat to selected platforms (just now
-spitz and akita). It is possible to implement the wrapper directly to
-udev init files on all patforms. It would be more straightforward, but
-it would check for udev-compat everywhere.
+Attached patch fixes multiple mounting of udev if udev init script is
+started more than once.
 
-    udev: Added support for udev-compat.
+And finally, it increments PR where appropriate.
 
-diff --git a/recipes/udev/files/udev-compat-wrapper-patch b/recipes/udev/files/udev-compat-wrapper-patch
-new file mode 100644
-index 0000000..a3e312d
---- /dev/null
-+++ b/recipes/udev/files/udev-compat-wrapper-patch
-@@ -0,0 +1,37 @@
-+This patch should be applied on platforms which support kernels < 2.6.27 and need udev-compat package.
-+
-+It should be applied after:
-+sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
-+
-+It has not .patch suffix, because such files would not be copied to
-+WORKDIR and cannot be selectively applied on another source file.
-+
-+--- init
-++++ init
-+@@ -11,6 +11,17 @@
-+ 
-+ export TZ=/etc/localtime
-+ 
-++UDEVD="/sbin/udevd"
-++UDEVADM="/sbin/udevadm"
-++# If we are running an old kernel and have a static udev present use that instead
-++if [ -e /sbin/udevd-compat ] ; then
-++	KERNELMICROVER="$(uname -r | awk -F. '{print $3}')"
-++	if [ $KERNELMICROVER -lt 27 ] ; then
-++		UDEVD="/sbin/udevd-compat"
-++		UDEVADM="/sbin/udevadm-compat"
-++	fi
-++fi
-++
-+ [ -d /sys/class ] || exit 1
-+ [ -r /proc/mounts ] || exit 1
-+ [ -x $UDEVD ] || exit 1
-+@@ -21,6 +32,8 @@
-+         if [ -x /sbin/pidof ]; then
-+                 pid=`/sbin/pidof -x udevd`
-+                 [ -n "$pid" ] && kill $pid
-++                pid=`/sbin/pidof -x udevd-compat`
-++                [ -n "$pid" ] && kill $pid
-+         fi
-+ }
-+ 
+Well, and now, after installation of udev-compat141 my spitz boots again.
+
+    udev: Fix possible multiple mounting of /dev, increment PR.
+
+diff --git a/recipes/udev/udev-124/init b/recipes/udev/udev-124/init
+index efe4470..1009381 100644
+--- a/recipes/udev/udev-124/init
++++ b/recipes/udev/udev-124/init
+@@ -29,7 +29,7 @@ export ACTION=add
+ echo -n "Starting udev"
+ 
+ # mount the tmpfs on /dev, if not already done
+-LANG=C awk "\$2 == \"/dev\" && \$4 == \"tmpfs\" { exit 1 }" /proc/mounts && {
++LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
+         mount -n -o mode=0755 -t tmpfs none "/dev"
+         mkdir -m 0755 /dev/pts
+         mkdir -m 0755 /dev/shm
+diff --git a/recipes/udev/udev-141/init b/recipes/udev/udev-141/init
+index 66705e6..efd9c23 100644
+--- a/recipes/udev/udev-141/init
++++ b/recipes/udev/udev-141/init
+@@ -29,7 +29,7 @@ export ACTION=add
+ echo "Starting udev"
+ 
+ # mount the tmpfs on /dev, if not already done
+-LANG=C awk "\$2 == \"/dev\" && \$4 == \"tmpfs\" { exit 1 }" /proc/mounts && {
++LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
+         mount -n -o mode=0755 -t tmpfs none "/dev"
+         mkdir -m 0755 /dev/pts
+         mkdir -m 1777 /dev/shm
+diff --git a/recipes/udev/udev-151/init b/recipes/udev/udev-151/init
+index f4dc5de..fea2ca6 100644
+--- a/recipes/udev/udev-151/init
++++ b/recipes/udev/udev-151/init
+@@ -29,7 +29,7 @@ export ACTION=add
+ echo "Starting udev"
+ 
+ # mount the tmpfs on /dev, if not already done
+-LANG=C awk "\$2 == \"/dev\" && \$4 == \"tmpfs\" { exit 1 }" /proc/mounts && {
++LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
+         mount -n -o mode=0755 -t tmpfs none "/dev"
+         mkdir -m 0755 /dev/pts
+         mkdir -m 1777 /dev/shm
+diff --git a/recipes/udev/udev-154/init b/recipes/udev/udev-154/init
+index f4dc5de..fea2ca6 100644
+--- a/recipes/udev/udev-154/init
++++ b/recipes/udev/udev-154/init
+@@ -29,7 +29,7 @@ export ACTION=add
+ echo "Starting udev"
+ 
+ # mount the tmpfs on /dev, if not already done
+-LANG=C awk "\$2 == \"/dev\" && \$4 == \"tmpfs\" { exit 1 }" /proc/mounts && {
++LANG=C awk "\$2 == \"/dev\" && \$3 == \"tmpfs\" { exit 1 }" /proc/mounts && {
+         mount -n -o mode=0755 -t tmpfs none "/dev"
+         mkdir -m 0755 /dev/pts
+         mkdir -m 1777 /dev/shm
 diff --git a/recipes/udev/udev.inc b/recipes/udev/udev.inc
-index c79da97..f4f1c40 100644
+index f4f1c40..2edc10b 100644
 --- a/recipes/udev/udev.inc
 +++ b/recipes/udev/udev.inc
-@@ -11,7 +11,8 @@ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
- 	   file://mount.sh \
- 	   file://network.sh \
- 	   file://local.rules \
--           file://init"
-+           file://init \
-+	   file://udev-compat-wrapper-patch"
+@@ -14,7 +14,7 @@ SRC_URI = "http://kernel.org/pub/linux/utils/kernel/hotplug/udev-${PV}.tar.gz \
+            file://init \
+ 	   file://udev-compat-wrapper-patch"
  
- INC_PR = "r27"
+-INC_PR = "r27"
++INC_PR = "r28"
  
-@@ -42,6 +43,22 @@ EXTRA_OEMAKE = "-e \
- 		'EXTRAS=${UDEV_EXTRAS}' \
- 		'STRIP=echo'"
+ inherit update-rc.d autotools pkgconfig
  
-+RPROVIDES_udev_spitz = "udev-compat-wrapper"
-+do_unpack_append_spitz() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
-+RPROVIDES_udev_akita = "udev-compat-wrapper"
-+do_unpack_append_akita() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
-+# Modify init script on platforms that need to boot old kernels:
-+do_apply_compat_wrapper() {
-+	cd ${WORKDIR}
-+	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
-+	patch <udev-compat-wrapper-patch
-+	cd -
-+}
-+
- do_install () {
- 	install -d ${D}${usrsbindir} \
- 		   ${D}${sbindir}
+diff --git a/recipes/udev/udev_124.bb b/recipes/udev/udev_124.bb
+index 30b0499..d0d5420 100644
+--- a/recipes/udev/udev_124.bb
++++ b/recipes/udev/udev_124.bb
+@@ -5,7 +5,7 @@ RPROVIDES_${PN} = "hotplug"
+ 
+ require udev.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ LD = "${CC}"
+ 
+diff --git a/recipes/udev/udev_141.bb b/recipes/udev/udev_141.bb
+index 3ef9f7d..798590c 100644
+--- a/recipes/udev/udev_141.bb
++++ b/recipes/udev/udev_141.bb
+@@ -7,7 +7,7 @@ DEFAULT_PREFERENCE = "-1"
+ 
+ require udev.inc
+ 
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ 
+ SRC_URI += "file://mount.blacklist \
+ 	    file://run.rules \
 diff --git a/recipes/udev/udev_151.bb b/recipes/udev/udev_151.bb
-index 7be56d2..ce97a7b 100644
+index ce97a7b..eb0d6a9 100644
 --- a/recipes/udev/udev_151.bb
 +++ b/recipes/udev/udev_151.bb
-@@ -29,6 +29,7 @@ SRC_URI += " \
-        file://default \
-        file://init \
-        file://cache \
-+       file://udev-compat-wrapper-patch \
- "
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
  
- SRC_URI_append_h2200 = " file://50-hostap_cs.rules "
-@@ -74,6 +75,22 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
- FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
- FILES_${PN}-dbg += "/lib/udev/.debug"
+-PR = "r12"
++PR = "r13"
  
-+RPROVIDES_udev_spitz = "udev-compat-wrapper"
-+do_unpack_append_spitz() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
-+RPROVIDES_udev_akita = "udev-compat-wrapper"
-+do_unpack_append_akita() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
-+# Modify init script on platforms that need to boot old kernels:
-+do_apply_compat_wrapper() {
-+	cd ${WORKDIR}
-+	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
-+	patch <udev-compat-wrapper-patch
-+	cd -
-+}
-+
- do_install () {
- 	install -d ${D}${usrsbindir} \
- 		   ${D}${sbindir}
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
 diff --git a/recipes/udev/udev_154.bb b/recipes/udev/udev_154.bb
-index 5e90e88..6032215 100644
+index 6032215..3cf6358 100644
 --- a/recipes/udev/udev_154.bb
 +++ b/recipes/udev/udev_154.bb
-@@ -30,6 +30,7 @@ SRC_URI += " \
-        file://default \
-        file://init \
-        file://cache \
-+       file://udev-compat-wrapper-patch \
- "
+@@ -3,7 +3,7 @@ DESCRIPTION = "udev is a daemon which dynamically creates and removes device nod
+ the hotplug package and requires a kernel not older than 2.6.12."
+ LICENSE = "GPLv2+"
  
- SRC_URI_append_h2200 = " file://50-hostap_cs.rules "
-@@ -75,6 +76,22 @@ FILES_${PN}-dbg += "${usrbindir}/.debug ${usrsbindir}/.debug"
- FILES_${PN} += "/lib/udev* ${libdir}/ConsoleKit"
- FILES_${PN}-dbg += "/lib/udev/.debug"
+-PR = "r0"
++PR = "r1"
  
-+RPROVIDES_udev_spitz = "udev-compat-wrapper"
-+do_unpack_append_spitz() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
-+RPROVIDES_udev_akita = "udev-compat-wrapper"
-+do_unpack_append_akita() {
-+	bb.build.exec_func('do_apply_compat_wrapper', d)
-+}
-+# Modify init script on platforms that need to boot old kernels:
-+do_apply_compat_wrapper() {
-+	cd ${WORKDIR}
-+	sed -i "s:/sbin/udevd:\$UDEVD:g;s:/sbin/udevadm:\$UDEVADM:g" init
-+	patch <udev-compat-wrapper-patch
-+	cd -
-+}
-+
- do_install () {
- 	install -d ${D}${usrsbindir} \
- 		   ${D}${sbindir}
+ # Untested
+ DEFAULT_PREFERENCE = "-1"
 
 -- 
 
