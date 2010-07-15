@@ -1,29 +1,34 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OZSer-0005t2-Ga for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 19:55:41 +0200
-Received: from f053040153.adsl.alicedsl.de ([78.53.40.153]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OZSep-000767-36 for openembedded-devel@lists.openembedded.org;
-	Thu, 15 Jul 2010 17:55:39 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <denis@denix.org>) id 1OZSfM-0005uD-Q5
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 15 Jul 2010 19:56:13 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.56.71])
+	by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L5M00GYO1SJWQ73@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Thu,
+	15 Jul 2010 12:55:32 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 4801714AF60; Thu,
+	15 Jul 2010 13:55:31 -0400 (EDT)
+Date: Thu, 15 Jul 2010 13:55:31 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 15 Jul 2010 19:55:36 +0200
-Message-ID: <1279216536.3741.27.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-id: <20100715175531.GH12383@denix.org>
+References: <4C3EA720.1080804@gmail.com>
+	<201007150906.32710.marcin@juszkiewicz.com.pl>
+MIME-version: 1.0
+In-reply-to: <201007150906.32710.marcin@juszkiewicz.com.pl>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
+Subject: Re: Specific distro defconfig for all busybox versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,56 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 15 Jul 2010 17:55:42 -0000
-X-Groupsio-MsgNum: 21011
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-JbOW0x2kqySxWgMsqgC5"
+X-List-Received-Date: Thu, 15 Jul 2010 17:56:13 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
---=-JbOW0x2kqySxWgMsqgC5
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Thu, Jul 15, 2010 at 09:06:30AM +0200, Marcin Juszkiewicz wrote:
+> Dnia czwartek, 15 lipca 2010 o 08:13:52 Dmitry Vinokurov napisa??(a):
+> > Hi!
+> > 
+> > Is there a way to set defconfig for specific distribution that will
+> > apply to all versions of busybox? Now when new busybox version appear, I
+> > should move <distro_name> directory from one busybox-${PV} to another
+> > and it's not very convenient. Or maybe I missed something.
+> 
+> place defconfig in recipes/busybox/busybox/DISTRONAME/defconfig
 
-Dear OE folks,
+Or recipes/busybox/files/DISTRONAME/defconfig :)
 
+> and learn about OVERRIDES D:
 
-I ran out of space and noticed
++1 :)
 
-    /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
-
-is 8,1G big.
-
-Some of the executable files in
-
-    /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroot-destdir/ang=
-strom-dev/sysroots/i686-linux/usr/libexec/git-core/
-
-are 101 MB big.
-
-This regression must have been introduced between this morning 6 a.m.
-UTC and now.
-
-I could not reproduce this using the distributions minimal-uclibc or
-angstrom-2008.1 with glibc.
-
-If you need more information I could try to downgrade the uclibc
-revision.
+-- 
+Denys
 
 
-Thanks,
-
-Paul=20
-
---=-JbOW0x2kqySxWgMsqgC5
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkw/S5gACgkQPX1aK2wOHVijzgCfQupd2j0TsyI5YuYrqy3PVUvu
-xqwAoIBF2HDVQ8Kc7kX/GVyJLeNnc+MA
-=oflE
------END PGP SIGNATURE-----
-
---=-JbOW0x2kqySxWgMsqgC5--
