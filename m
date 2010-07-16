@@ -1,46 +1,45 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OZmsF-00004y-CD
+	(envelope-from <simonsonc@gmail.com>) id 1OZmyn-0006Un-UB
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 17:31:12 +0200
-Received: by pxi12 with SMTP id 12so1124468pxi.6
+	Fri, 16 Jul 2010 17:37:53 +0200
+Received: by vws3 with SMTP id 3so2739471vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 08:30:29 -0700 (PDT)
+	Fri, 16 Jul 2010 08:37:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=3LsAUnj5SFOX09zzGn5KzvzCGBVAuHxcak6We+WZT1M=;
-	b=jsVsZRueFUvJH0/lL5JcvfmYhrYK+bA5OFoodbYJwYStCVQqYJDwyU/D/WkXFHa0CG
-	5YHkxkbdE82wnUfUbo/dpMkb+mrc3+wRmBdPMuGIDrjWONQ2itjnIGEMUShzkebts8AL
-	FCEK8uClZ39MDUw5G9fwLgeCS5r82ZbE30PtI=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=9F2IFRbR65fzYLIG/K9d/KWgsj196HihQinLL0Zq76I=;
+	b=VbuSDgEL5urPB4s4nQBgyOuiJWS9qNGbj52cVLZIFbC5Qu03jdQpEBnhXRZeQ2v769
+	z9r66/iLYmJyq9CpERUVDIYLCRY0GYqBBQPB7eL679kKCBHejQsTKeJpQQFCiXNh26tO
+	h+6gXqHP5xj75rM6f14sUJIuxl6JtqQN01hCA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Ai8MDlxjKIr1pQCuE1bi9PRFwjHobyfcoF6EQZ5E2QT3Y0oOzIyhir56m3y7GjGC9i
-	zlQPtk+dFja43UpFtOEG8uSsdaIKOg0rmEv8cmhyzGcmabeU1nytKk3C00a41kPItSjy
-	Lyi/QBcJknTc0oqTdeosBZBOODk+ZyC+oktFg=
+	:content-type:content-transfer-encoding;
+	b=aXUvK7aDpYmjNvIGlaw2I5wzNguyBsjNOqupZQsI+ecy3Gmi4XYGEcMARiQ14tpJK6
+	iUBfsRFc8uS6ygrodj5d0Z6ocm7o/wCR9RkU3fLZyg7nHySnvevQNkFRw7g5kJLhvtOC
+	+1+8EQjFxqouFQ1oVu1Ir0vzj+duLWjgctNlU=
 MIME-Version: 1.0
-Received: by 10.142.180.1 with SMTP id c1mr1640804wff.265.1279294228722; Fri, 
-	16 Jul 2010 08:30:28 -0700 (PDT)
-Received: by 10.229.220.205 with HTTP; Fri, 16 Jul 2010 08:30:28 -0700 (PDT)
-In-Reply-To: <201007150908.20262.marcin@juszkiewicz.com.pl>
-References: <1278963950-2587-1-git-send-email-aalonso00@gmail.com>
-	<1278963950-2587-7-git-send-email-aalonso00@gmail.com>
-	<201007150908.20262.marcin@juszkiewicz.com.pl>
-Date: Fri, 16 Jul 2010 10:30:28 -0500
-Message-ID: <AANLkTilKMyyPE-OS357lmDhuxzZ29B9-vOj5T-uaEWuW@mail.gmail.com>
-From: Adrian Alonso <aalonso00@gmail.com>
+Received: by 10.220.158.9 with SMTP id d9mr650438vcx.105.1279294645264; Fri, 
+	16 Jul 2010 08:37:25 -0700 (PDT)
+Received: by 10.220.94.141 with HTTP; Fri, 16 Jul 2010 08:37:25 -0700 (PDT)
+In-Reply-To: <AANLkTilZ_BhgN8ZnWU5bwkACvtDysBOqoaMeB0nJjmHh@mail.gmail.com>
+References: <1279290319.10837.1747.camel@rex>
+	<AANLkTilZ_BhgN8ZnWU5bwkACvtDysBOqoaMeB0nJjmHh@mail.gmail.com>
+Date: Fri, 16 Jul 2010 10:37:25 -0500
+Message-ID: <AANLkTilEVfQgK6ImmdoaFM9jwiSNZIYGI4haHkd5i3kS@mail.gmail.com>
+From: Carl Simonson <simonsonc@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: simonsonc@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 7/9] xserver-kdrive-common: xilinx virtex5 support
+Subject: Re: A new bitbake extension: .bbappend files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,50 +53,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 15:31:12 -0000
-Content-Type: text/plain; charset=ISO-8859-2
+X-List-Received-Date: Fri, 16 Jul 2010 15:37:54 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-I'm not sure how to do it,
-I'm testing x11-sato-image, which includes xserver-kdrive-common and Xserve=
-r
-whit the proposed patchs I add support for the target that I'm interested;
-and bay the way it doesn't include `sato desktop` it end ups with a basic
-`gpe desktop`
-I guess that I need to look at x11-sato-image to include
-xserver-common instead of what
-right now is included and remove gpe dependencies to include sato desktop.
+I like it too.
 
-Regards
+So does this mean that PR bumps happen in the bbappend file? Obviously
+you need to have the recipe rebuilt if a change is made.
 
-On Thu, Jul 15, 2010 at 2:08 AM, Marcin Juszkiewicz <
-marcin@juszkiewicz.com.pl> wrote:
+Carl Simonson
+simonsonc@gmail.com
 
-> Dnia poniedzia=B3ek, 12 lipca 2010 o 21:45:48 Adrian Alonso napisa=B3(a):
-> >  .../xserver-kdrive-common/Xserver                  |   11 ++++++++++-
-> >  .../xserver-kdrive-common_0.1.bb                   |    2 +-
-> >  2 files changed, 11 insertions(+), 2 deletio
->
-> Can it finally die in favour or xserver-common 1.30?
->
-> Regards,
-> --
-> JID:      hrw@jabber.org
-> Website:  http://marcin.juszkiewicz.com.pl/
-> LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
->
->
->
+
+
+On Fri, Jul 16, 2010 at 9:35 AM, George C. Huntington, III
+<george.huntingtoniii@gmail.com> wrote:
+> I love this idea. =C2=A0seeing this would go a long way towards getting m=
+y
+> employers on board with using openembedded and even getting to contribute=
+.
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-
-
---=20
-Saludos
-Adrian Alonso
-http://aalonso.wordpress.com
 
