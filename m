@@ -1,45 +1,30 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OZebb-0007za-N3
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OZfAD-0007Gj-QM
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 08:41:13 +0200
-Received: by iwn34 with SMTP id 34so1892996iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 15 Jul 2010 23:41:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=+zpDSYrnr7BlV561bmeKDD9A/QwbxNHAfRcdlvecpXI=;
-	b=gnlQstVQ89wCRGRz2StFoZDAQgVZaudwTEaBHzy2+OzMDuu4uNAyTfMnW02mfMk1Y/
-	aC0dfIt3puNM24xwxNvqMBty7xg/SbiSRJz40Ofkg8/ErDcHbiujD9hguLeRQuUFGjwJ
-	B9QyQkiexzS2rvIyrrAzpUWF/4Hv0JegwzQPE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=gdFV/NmeO0XXI7HkHjPT7Qfh2jGEc4rrpT8r0w2NqI5GgM9wUZBN7fag3m0HjK+dKd
-	6+EP0ApPwcychTvuAo5w2D5O7nUiuHcFub2lJOI9XVfFaCGqYFKMM1w83fWJAzij26+d
-	/jlw8PcqqLlSR5sP37hu0VbQAJ8MwXL98i4Xc=
-MIME-Version: 1.0
-Received: by 10.231.149.80 with SMTP id s16mr472180ibv.81.1279262463451; Thu, 
-	15 Jul 2010 23:41:03 -0700 (PDT)
-Received: by 10.231.157.196 with HTTP; Thu, 15 Jul 2010 23:41:03 -0700 (PDT)
-In-Reply-To: <1279226782-6124-3-git-send-email-fransmeulenbroeks@gmail.com>
-References: <1279226782-6124-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<1279226782-6124-2-git-send-email-fransmeulenbroeks@gmail.com>
-	<1279226782-6124-3-git-send-email-fransmeulenbroeks@gmail.com>
-Date: Fri, 16 Jul 2010 16:11:03 +0930
-Message-ID: <AANLkTilHWrF3ceHTvbQOJWr9LEkCuvz5-2UZQbaby5Wt@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Fri, 16 Jul 2010 09:16:57 +0200
+Received: (qmail 7975 invoked by uid 813007); 16 Jul 2010 07:16:49 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 16 Jul 2010 07:16:49 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Fri, 16 Jul 2010 09:17:05 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-6-generic; KDE/4.4.92; x86_64; ; )
+References: <1279227362-6279-1-git-send-email-fransmeulenbroeks@gmail.com>
+In-Reply-To: <1279227362-6279-1-git-send-email-fransmeulenbroeks@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201007160917.07949.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.8 required=5.0 tests=AWL,BAYES_00,PLING_QUERY,
+	SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] glibc: remove old/obsolete versions
+Subject: Re: [PATCH] binutils: added COMPATIBLE_TARGET_SYS = "(?!nios2)"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,28 +38,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 06:41:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Jul 2010 07:16:57 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 16 July 2010 06:16, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
-> as mentioned before on the OE ML.
-> removing some old versions which are not pinned by any distro
-> and are fairly old:
-> glibc-initial_2.3.2+cvs20040726.bb
-> glibc-initial_2.3.6.bb
-> glibc-initial_2.4.bb
-> glibc-initial_2.7.bb
-> glibc_2.3.2+cvs20040726.bb
-> glibc_2.3.3+cvs20041128.bb
-> glibc_2.3.3+cvs20050221.bb
-> glibc_2.3.3+cvs20050420.bb
-> glibc_2.3.6.bb
-> glibc_2.4.bb
-> glibc_2.7.bb
->
+Dnia czwartek, 15 lipca 2010 o 22:56:02 Frans Meulenbroeks napisa=C5=82(a):
+> added COMPATIBLE_TARGET_SYS =3D "(?!nios2)" to all versions
+> that do not support nios2.
+>=20
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> ---
+> Once accepted I will remove the pinning from nios2.inc
+>=20
+> Frans
+>=20
+>  recipes/binutils/binutils_2.14.90.0.6.bb      |    2 ++
+>  recipes/binutils/binutils_2.14.90.0.7.bb      |    2 ++
+>  recipes/binutils/binutils_2.15.94.0.1.bb      |    2 ++
+>  recipes/binutils/binutils_2.16.1.bb           |    2 ++
+>  recipes/binutils/binutils_2.16.91.0.6.bb      |    2 ++
+>  recipes/binutils/binutils_2.16.91.0.7.bb      |    2 ++
+>  recipes/binutils/binutils_2.16.bb             |    2 ++
+>  recipes/binutils/binutils_2.17.50.0.1.bb      |    2 ++
+>  recipes/binutils/binutils_2.17.50.0.5.bb      |    2 ++
+>  recipes/binutils/binutils_2.17.50.0.8.bb      |    2 ++
+>  recipes/binutils/binutils_2.17.bb             |    2 ++
+>  recipes/binutils/binutils_2.18.50.0.7.bb      |    2 ++
+>  recipes/binutils/binutils_2.18.atmel.1.0.1.bb |    2 ++
+>  recipes/binutils/binutils_2.18.bb             |    2 ++
+>  recipes/binutils/binutils_2.19.1.bb           |    2 ++
+>  recipes/binutils/binutils_2.19.51.0.3.bb      |    2 ++
+>  recipes/binutils/binutils_2.19.51.bb          |    2 ++
+>  recipes/binutils/binutils_2.19.bb             |    2 ++
+>  recipes/binutils/binutils_2.20.bb             |    2 ++
+>  recipes/binutils/binutils_cvs.bb              |    2 ++
+>  20 files changed, 40 insertions(+), 0 deletions(-)
 
-Yes! OE needs more of this cruft removal.
+Maybe instead of populating so many files set it in binutils.inc (so all=20
+version will be marked as incompatible) and then set COMPATIBLE_TARGET_SYS=
+=3D""=20
+in version which is compatible.
 
-Acked-by: Graham Gower <graham.gower@gmail.com>
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
