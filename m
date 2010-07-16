@@ -1,41 +1,31 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from bay0-omc4-s16.bay0.hotmail.com ([65.54.190.218])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <george.huntingtoniii@gmail.com>) id 1OZmGa-0007Rb-Ti
+	(envelope-from <salehusman@hotmail.com>) id 1OZmaE-0006Dm-Qu
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 16:51:59 +0200
-Received: by wye20 with SMTP id 20so2015001wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 07:51:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=q2VMTbVePM6Bu5GJSPjMGWmTjyBoRq5KQzNnuSZ+ZQI=;
-	b=RBut1Jlw/yQZg9abpir5RXv/d2GXqerqF1Es2bXB+k6CqntMadQLovUmZ++kZGPzW/
-	i/dEYXNeowDe7JnSk6NuaR4cBJ4AW2kDukdhrBzD4O1jf+b06myJCZFlD2HHvSDkxkUU
-	RX2jgyVB1KUBzG5Xj7bJ0C049KX8ewkrAPbr8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=tKJagal3TxIB4Eh9tbDD0+DjVumByIMn8cvCeTc6LOTaCHVwhH6hjCh0/UO9CVQt0W
-	agI3g9ZqxDKfZ3TEhhoFe2fQM/C+6xdW2zpUEgI9bVXg8JWt9MYFwLDE3RKoNNWBMBc1
-	DrwvzpmxPNcXh2G187H0WSwr3oKlpbHtorRqk=
+	Fri, 16 Jul 2010 17:12:27 +0200
+Received: from BAY127-W14 ([65.54.190.199]) by bay0-omc4-s16.bay0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Fri, 16 Jul 2010 08:12:02 -0700
+Message-ID: <BAY127-W14254C957B2B347B4D3BDFD8BC0@phx.gbl>
+X-Originating-IP: [203.82.49.5]
+From: saleh usman <salehusman@hotmail.com>
+To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>, OSSIE
+	Embedded Discussion <ossie-sca@opensdr.com>
+Date: Fri, 16 Jul 2010 21:12:03 +0600
+Importance: Normal
 MIME-Version: 1.0
-Received: by 10.227.38.162 with SMTP id b34mr1010807wbe.129.1279291911336; 
-	Fri, 16 Jul 2010 07:51:51 -0700 (PDT)
-Received: by 10.216.156.133 with HTTP; Fri, 16 Jul 2010 07:51:51 -0700 (PDT)
-Date: Fri, 16 Jul 2010 10:51:51 -0400
-Message-ID: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
-From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: george.huntingtoniii@gmail.com
+X-OriginalArrivalTime: 16 Jul 2010 15:12:02.0927 (UTC)
+	FILETIME=[3ECCFFF0:01CB24F9]
+X-SA-Exim-Connect-IP: 65.54.190.218
+X-SA-Exim-Mail-From: salehusman@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: busybox mdev
+Subject: Problem of libpcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,8 +39,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 14:51:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Jul 2010 15:12:27 -0000
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
 
-how do i make a distribution use mdev instead of udev?
+
+I am bitbaking console-iamge but getting error of not building libpcap? I'v=
+e bitbake libpcap separately but it is also not building. Its bitbake fails=
+ during configure. These are shown in following terminal logs. Kindly tell =
+me how to remove this error?
+Saleh
+
+[Saleh@localhost ~]$ bitbake console-image
+NOTE: Handling BitBake files: \ (8169/8169) [100 %]
+NOTE: Parsing finished. 7530 cached=2C 309 parsed=2C 330 skipped=2C 0 maske=
+d.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1774 of 3226 (ID: 1317=2C /sdr/openembedded/recipes/libp=
+cap/libpcap_1.0.0.bb=2C do_configure)
+ERROR: function do_configure failed
+ERROR: log data follows (/sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi=
+/libpcap-1.0.0-r6/temp/log.do_configure.2961)
+| cat: /sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi/libpcap-1.0.0-r6/=
+libpcap-1.0.0/aclocal.m4: No such file or directory
+NOTE: Task failed: /sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi/libpc=
+ap-1.0.0-r6/temp/log.do_configure.2961
+ERROR: TaskFailed event exception=2C aborting
+ERROR: Build of /sdr/openembedded/recipes/libpcap/libpcap_1.0.0.bb do_confi=
+gure failed
+ERROR: Task 1317 (/sdr/openembedded/recipes/libpcap/libpcap_1.0.0.bb=2C do_=
+configure) failed
+NOTE: Tasks Summary: Attempted 1773 tasks of which 1773 didn't need to be r=
+erun and 1 failed.
+ERROR: '/sdr/openembedded/recipes/libpcap/libpcap_1.0.0.bb' failed
+
+
+[Saleh@localhost openembedded]$ bitbake libpcap
+NOTE: Handling BitBake files: \ (8169/8169) [100 %]
+NOTE: Parsing finished. 7530 cached=2C 309 parsed=2C 330 skipped=2C 0 maske=
+d.
+NOTE: Resolving any missing task queue dependencies
+NOTE: Preparing runqueue
+NOTE: Executing runqueue
+NOTE: Running task 1695 of 2385 (ID: 7=2C /sdr/openembedded/recipes/libpcap=
+/libpcap_1.0.0.bb=2C do_configure)
+ERROR: function do_configure failed
+ERROR: log data follows (/sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi=
+/libpcap-1.0.0-r6/temp/log.do_configure.11281)
+| cat: /sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi/libpcap-1.0.0-r6/=
+libpcap-1.0.0/aclocal.m4: No such file or directory
+NOTE: Task failed: /sdr/build/tmp/work/armv5te-angstrom-linux-gnueabi/libpc=
+ap-1.0.0-r6/temp/log.do_configure.11281
+ERROR: TaskFailed event exception=2C aborting
+ERROR: Build of /sdr/openembedded/recipes/libpcap/libpcap_1.0.0.bb do_confi=
+gure failed
+ERROR: Task 7 (/sdr/openembedded/recipes/libpcap/libpcap_1.0.0.bb=2C do_con=
+figure) failed
+NOTE: Tasks Summary: Attempted 1694 tasks of which 1694 didn't need to be r=
+erun and 1 failed.
+ERROR: '/sdr/openembedded/recipes/libpcap/libpcap_1.0.0.bb' failed
+
+ 		 	   		 =20
+_________________________________________________________________
+Hotmail: Trusted email with Microsoft=92s powerful SPAM protection.
+https://signup.live.com/signup.aspx?id=3D60969=
 
