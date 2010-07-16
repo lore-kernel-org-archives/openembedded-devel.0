@@ -1,43 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OZtxs-0005xg-MK for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 01:05:09 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OZtxn-00045N-Hx for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 01:05:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 01:05:03 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 01:05:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OZtzg-0006qX-MS
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 01:07:15 +0200
+Received: (qmail invoked by alias); 16 Jul 2010 23:00:07 -0000
+Received: from p508856FC.dip.t-dialin.net (EHLO [192.168.142.128])
+	[80.136.86.252]
+	by mail.gmx.net (mp008) with SMTP; 17 Jul 2010 01:00:07 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/I3nQEAhTIRkUYweZBueYYKf7kIxOMMEe0flEy1p
+	9VcuO3GDvvHBG9
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 17 Jul 2010 01:03:59 +0200
-Message-ID: <i1qogv$i28$2@dough.gmane.org>
-References: <1279216536.3741.27.camel@mattotaupa>	<1279270987.4164.29.camel@mattotaupa>
-	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Sat, 17 Jul 2010 00:52:26 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+MIME-Version: 1.0
+Message-Id: <201007170052.26932.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
+Subject: How to force a bash-function to be inserted in the package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,45 +39,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 23:05:09 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 16 Jul 2010 23:07:16 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I am working on a scenario where two recipes (powervr-drivers: libgles-omap3 / omap3-sgx-modules) should share the same code at the pkg_postinst state (I want to select if the cpu supports 
+sgx and select the proper version of module/lib 2.x 3.x 5.x only once and forever). To avoid redundant code I added a function in a file both recipes include. In the recipes I simply say 
 
-On 16-07-10 17:23, Khem Raj wrote:
-> On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
->> Dear OE folks,
->>
->>
->> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
->>
->>> I ran out of space and noticed
->>>
->>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
->>>
->>> is 8,1G big.
->>>
->>> Some of the executable files in
->>>
->>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroot-destdir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
->>>
->>> are 101 MB big.
-> 
-> its most probably the -g3/-ggdb3 bloat.
+pkg_postinst_${PN}_prepend() {
+	check_cpu_for_sgx ${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
+}
 
-No, it's git not creating (hard)links but copies of the same app. Run an
-md5sum on the binaries, they will all match. I suggest you stop
-spreading FUD about -ggdb3, it is not being appriciated.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+check_cpu_for_sgx is the function included in both recipes.
 
-iD8DBQFMQOVfMkyGM64RGpERAjW7AKCwH5aLnQ5AbEC8PESZf7Ny7psLsQCgt1Ve
-Z1rBOhQsiOxILfsDfyNLqrE=
-=OQOZ
------END PGP SIGNATURE-----
+I did not run this so far (I haven't got a hardware right now to test) but I expect this not to work because the function check_cpu_for_sgx will not be included the packet information (I checked I 
+didn't find this function in the files of the package).
 
+Now my question:
+
+Is there something (e.g a keyword prepended to the function) which forces oe to include a function in the postinst/postrm code?
 
 
