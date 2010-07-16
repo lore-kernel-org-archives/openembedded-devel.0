@@ -1,45 +1,43 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZoAG-0001yN-Pf
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZoT3-0003VD-5u
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 18:53:38 +0200
-Received: by bwz10 with SMTP id 10so1512584bwz.6
+	Fri, 16 Jul 2010 19:13:01 +0200
+Received: by ewy7 with SMTP id 7so839768ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 09:53:29 -0700 (PDT)
+	Fri, 16 Jul 2010 10:12:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=6i9UWwiF6x4yn6f1Dg+XRoNISK5MDYQnCgoC3kCLXS8=;
-	b=Ew4kmVJ+My6Sfn0Ng4SAigEZfW1HaVUMqlgFHSP6zSkejFMngma3PmfaPAGzNwNKmz
-	TmOjyCehSo4XbgQbUhvetCuzXx+7u2vONCR/WCOsTTiFEJu1WrXdZptQDV2oZ1LRd6BR
-	ZUjKPtdZfJ1Rp3Gwg18jadNPfdH84vcfO9cOA=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=xvyuug/PgY/kvSz81ebiRk4t1Rdt7I/mXdr47pA9Q00=;
+	b=tjc4apZH0aHTgDgWdcOULMm0/tn9albuT+dUytI6M6QTBg8fjOwvzevaUPQrGUHOv7
+	jl/ORfNDdXvQmAn40bomAO5VmS0OTDb3iJ/wmBNy9w6RNePeCC0S7ilRgV0fKcth9DfX
+	3DZzAqQKXVrQKBfrlRgPY4Y6pJG6ZxnsQKMok=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UCDTbn1YKKO3EYByn6AnpCU+bYGpGsih3PaNcV40gZtkHmipfAAwTEDVTrquRdpQov
-	0kpiiSxaYAJHuS2EaInKYD+qubAoQcXyRTO1WljAcivgDpxsrHeHUIgHWW+NMX115kHb
-	mxi1EC4RwR8t6J0hcIv+X8/BYDOxoLvujsUBc=
-MIME-Version: 1.0
-Received: by 10.204.81.130 with SMTP id x2mr1107850bkk.210.1279299209126; Fri, 
-	16 Jul 2010 09:53:29 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Fri, 16 Jul 2010 09:53:29 -0700 (PDT)
-In-Reply-To: <1279297456.10837.1942.camel@rex>
-References: <1279290319.10837.1747.camel@rex> <4C407EE5.6050802@cbnco.com>
-	<1279297456.10837.1942.camel@rex>
-Date: Fri, 16 Jul 2010 18:53:29 +0200
-Message-ID: <AANLkTikr86Xy4gg7cgLFnKEIbGEyOCFbauzMSzMZxtG3@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=GFqXDHbbUDTsGejQ8sAZJLNHpPRIgZdry7Jbq5uX6rcsc2CoclNgyQ2OHdpGxqxFuc
+	6F+Gi0NtiKzDLE5Ddv5RbA+q+ysiGyK1MEpS6dAv2JOR2jWyG+j/wOPeFbJhsER4D2Vr
+	rkb+FDsAI5F47AuR2U2OkqnvNGxwX6ckQoqTw=
+Received: by 10.213.28.194 with SMTP id n2mr4565352ebc.10.1279300366990;
+	Fri, 16 Jul 2010 10:12:46 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id z55sm19656640eeh.21.2010.07.16.10.12.46
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 16 Jul 2010 10:12:46 -0700 (PDT)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
+Date: Fri, 16 Jul 2010 19:12:40 +0200
+Message-Id: <1279300361-3838-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: [PATCH v2] binutils: added COMPATIBLE_TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,53 +51,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 16:53:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Jul 2010 17:13:02 -0000
 
-2010/7/16 Richard Purdie <rpurdie@rpsys.net>
+added COMPATIBLE_TARGET_SYS = "(?!nios2)" to the inc file
+and COMPATIBLE_TARGET_SYS = "" to the few recipes that do
+support nios2
 
-> On Fri, 2010-07-16 at 11:46 -0400, Michael Smith wrote:
-> > Richard Purdie wrote:
-> > > The idea is that if bitbake finds any X.bbappend files, when it loads
-> > > X.bb, it will also include these files after it parses the base .bb
-> file
-> > > (but before finalise and the anonymous methods run). This means that
-> > > the .bbappend file can poke around and do whatever it might want to the
-> > > recipe to customise it.
-> >
-> > Does this do anything different than amendrecipes.bbclass?
->
-> Several people have mentioned the amend bbclass. This implements
-> something very similar in quite a different way as part of the bitbake
-> tool itself. There are advantages and disadvantages to doing this.
->
-> The features I liked about the bbappend approach was the small amount of
-> code change required to bitbake compared to the functionality it offers
-> and also the overhead of the bbappend code is minimal.
->
-> I also feel the bbappend format is slightly easier for users to
-> comprehend but that is subjective.
->
-> A downside is that the .bbappend applies to specific versions, not all
-> versions as amend.bbclass can be setup. There are ways that could be
-> changed.
->
-> The amend class has a greater degree of flexibility in that you can make
-> changes to the class and it could be argued not changing the core is an
-> advantage too.
->
-> Cheers,
->
-> Richard,
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
 
-Looks like a fine idea to me (although I must say I was unaware of the amend
-class, so I cannot really compare).
+Modified as suggested by Marcin.
 
-An alternative I was thinking of was to have a mechanism in an overlayed
-recipe that would allow you to include whatever version was in a lower
-priority overlay, but your prososal looks also quite sound.
+ recipes/binutils/binutils.inc             |    2 ++
+ recipes/binutils/binutils_2.17.50.0.12.bb |    2 ++
+ recipes/binutils/binutils_2.20.1.bb       |    2 ++
+ 3 files changed, 6 insertions(+), 0 deletions(-)
 
-+1
+diff --git a/recipes/binutils/binutils.inc b/recipes/binutils/binutils.inc
+index a1866f3..279d653 100644
+--- a/recipes/binutils/binutils.inc
++++ b/recipes/binutils/binutils.inc
+@@ -5,6 +5,8 @@ LICENSE = "GPL"
+ 
+ INC_PR = "r10"
+ 
++COMPATIBLE_TARGET_SYS = "(?!nios2)"
++
+ inherit autotools gettext
+ 
+ PACKAGES += "${PN}-symlinks"
+diff --git a/recipes/binutils/binutils_2.17.50.0.12.bb b/recipes/binutils/binutils_2.17.50.0.12.bb
+index 70c0801..31ce22b 100644
+--- a/recipes/binutils/binutils_2.17.50.0.12.bb
++++ b/recipes/binutils/binutils_2.17.50.0.12.bb
+@@ -1,6 +1,8 @@
+ require binutils.inc
+ PR = "${INC_PR}.1"
+ 
++COMPATIBLE_TARGET_SYS = ""
++
+ SRC_URI = \
+     "${KERNELORG_MIRROR}/pub/linux/devel/binutils/binutils-${PV}.tar.bz2 \
+      file://binutils-2.16.91.0.6-objcopy-rename-errorcode.patch \
+diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
+index 624848c..b75de99 100644
+--- a/recipes/binutils/binutils_2.20.1.bb
++++ b/recipes/binutils/binutils_2.20.1.bb
+@@ -3,6 +3,8 @@ LICENSE = "GPLv3"
+ 
+ PR = "${INC_PR}.1"
+ 
++COMPATIBLE_TARGET_SYS = ""
++
+ SRC_URI = "\
+      ${GNU_MIRROR}/binutils/binutils-${PV}.tar.bz2;name=tarball \
+      file://binutils-uclibc-100-uclibc-conf.patch \
+-- 
+1.6.4.2
 
-Frans
+
 
