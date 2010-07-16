@@ -1,47 +1,46 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZjoX-000540-BK
+	(envelope-from <chasemaupin03@gmail.com>) id 1OZl0R-0007Sg-Ff
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 14:15:34 +0200
-Received: by bwz10 with SMTP id 10so1339482bwz.6
+	Fri, 16 Jul 2010 15:31:25 +0200
+Received: by gya6 with SMTP id 6so1304143gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 05:14:45 -0700 (PDT)
+	Fri, 16 Jul 2010 06:31:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=GtxdXHM9In5y7ryzFISq7P4iQEZqjmMfunCki9BGwxA=;
-	b=RnM7zny0DUGj0Pgia8lHonRPohWaoEXGqG2/PT/rfEuf0iMvbWMsvnCGExABc+zd5c
-	Kk3oP1D16aLR6+dTFF1hj4YzaMOeSCZhc/I8ucUjZ8cp2EdkcTSBChmvJg80PZbCVo8W
-	LXtqQ8sYuqp8u1y9EZtGxB9b8TkXwRpnVfvjk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=rsSQQGtqCkHY5rR929ucU/kFB83dr7K+U8uxktG82CQ=;
+	b=N7ORCOo+Xefo9nYZxeNVNJ2GC5SVotOgxCZOXaTJOuV124UIstew2Z44Q39Ey4MYhh
+	1dULs7CYBwGWYLDgH9zK1np3gPwlBQv08+Uq0vGbDS2WYqDrDuw88IbsTSlfog2DBu4g
+	okP8POTGmVIkhrDyJw/hqMBHtTnpT7yjsWNqw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=buhVGtOpd6JZZu5VP874uVX8JJcDA1DkoyXsb1r0ZG+C7xioKiCHXuWIXVDzFzxm9q
-	s5s732Dzv60ssdGt50ijgAnrnhXsBZuAXqRdnOZUxjaQK3zDGe/0Yjl62/s5FcQIYnaH
-	+kcnGJZsPHbdeeP/uwR86mQirpLfRbo+aZ5YI=
-MIME-Version: 1.0
-Received: by 10.204.150.92 with SMTP id x28mr865629bkv.132.1279282484203; Fri, 
-	16 Jul 2010 05:14:44 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Fri, 16 Jul 2010 05:14:44 -0700 (PDT)
-In-Reply-To: <4C40457A.9070005@balister.org>
-References: <AANLkTikabrLWPM53wvdCKrDSKRJdFQTdNsA2MnfwzrI0@mail.gmail.com>
-	<4C403F02.8080606@balister.org>
-	<AANLkTinyrz_-sC3VCRIj-O5bQoFjx-YJpa3vu7hR0uLx@mail.gmail.com>
-	<4C40457A.9070005@balister.org>
-Date: Fri, 16 Jul 2010 14:14:44 +0200
-Message-ID: <AANLkTikm8pusxOIcMmq2o6hFzuMph_okpKtKkXUvBUVA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=r8okf+2+SBL28zC/mHr5VuTm1VHi4GKuIpXNCvShVd3aigq64VfKFegAjYnmYVe4XR
+	XcxH1RPPGNWYF4t6d1ZPsscr5IagYL6fjGAjq1xZ+rInXY2zBOVgxtqTWdQD1AlowXdx
+	dgmn4yIoP0Kk3Wmk+YpfUBj8Hl4Sx6Id7iMtw=
+Received: by 10.150.140.6 with SMTP id n6mr1424132ybd.8.1279287064587;
+	Fri, 16 Jul 2010 06:31:04 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id v32sm522218yba.18.2010.07.16.06.31.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 16 Jul 2010 06:31:03 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri, 16 Jul 2010 08:24:20 -0500
+Message-Id: <1279286660-32423-2-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.6.0.4
+In-Reply-To: <1279286660-32423-1-git-send-email-chase.maupin@ti.com>
+References: <1279286660-32423-1-git-send-email-chase.maupin@ti.com>
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: u-boot-utils badness
+Cc: Chase Maupin <chase.maupin@ti.com>
+Subject: [PATCH 2/2] remove dm3730-am3715-evm machine type references
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,46 +54,157 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 12:15:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 16 Jul 2010 13:31:26 -0000
 
-2010/7/16 Philip Balister <philip@balister.org>
+* Removed references to the dm3730-am3715-evm machine type
+  and replaced with dm37x-evm and am37x-evm machine types.
 
->
->
-> On 07/16/2010 07:33 AM, Frans Meulenbroeks wrote:
->
->> 2010/7/16 Philip Balister<philip@balister.org>
->>
->>  On 07/15/2010 02:41 AM, Frans Meulenbroeks wrote:
->>>
->>>
->>>
->>>  As you wish :-)
->>
->> Note that u-boot-tools not only provides mkimage but also things like
->> fw_env
->> Also, to further mess up things: we also have u-boot-mkimage_1.3.2.bb
->> There seems to be room for some quality improvement.
->> Oh well....
->>
->
-> It might be worth consolidating these two recipes. But you'll need to
-> figure out why they both exist.
->
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ contrib/angstrom/sort.sh                           |    2 +-
+ recipes/clutter/clutter.inc                        |    2 +-
+ .../{dm3730-am3715-evm => am37x-evm}/defconfig     |    0
+ .../{dm3730-am3715-evm => dm37x-evm}/defconfig     |    0
+ recipes/linux/linux-omap-psp_2.6.32.bb             |    2 +-
+ recipes/powervr-drivers/libgles-omap3.inc          |    2 +-
+ recipes/ti/ti-dmai_2.05.00.14.bb                   |    2 +-
+ recipes/u-boot/u-boot_git.bb                       |   11 ++++++++---
+ recipes/x-load/x-load_git.bb                       |   11 ++++++++---
+ .../{dm3730-am3715-evm => am37x-evm}/xorg.conf     |    0
+ .../{am3517-evm => dm37x-evm}/xorg.conf            |    0
+ 11 files changed, 21 insertions(+), 11 deletions(-)
+ copy recipes/linux/linux-omap-psp-2.6.32/{dm3730-am3715-evm => am37x-evm}/defconfig (100%)
+ rename recipes/linux/linux-omap-psp-2.6.32/{dm3730-am3715-evm => dm37x-evm}/defconfig (100%)
+ rename recipes/xorg-xserver/xserver-xorg-conf/{dm3730-am3715-evm => am37x-evm}/xorg.conf (100%)
+ copy recipes/xorg-xserver/xserver-xorg-conf/{am3517-evm => dm37x-evm}/xorg.conf (100%)
 
-This info is probably hidden in time. They seem to be recipes from the pre
-git era.
+diff --git a/contrib/angstrom/sort.sh b/contrib/angstrom/sort.sh
+index 9a7615e..eed899d 100755
+--- a/contrib/angstrom/sort.sh
++++ b/contrib/angstrom/sort.sh
+@@ -60,7 +60,7 @@ case "$arch" in
+ 	"armv6-novfp")
+ 			machines="htcblackstone htcdiamond htcdream htckaiser htcnike htcpolaris htcraphael htctitan htcvogue" ;;
+ 	"armv7a")
+-			machines="am3517-evm archos5 archos5it beagleboard bug20 cm-t35 dm3730-am3715-evm htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre omap4430-panda" ;;
++			machines="am3517-evm archos5 archos5it beagleboard bug20 cm-t35 dm37x-evm am37x-evm htcleo igep0020 nokia900 omap3517-evm omap3evm omap3-pandora omap3-touchbook omap4430-sdp omapzoom omapzoom2 omapzoom36x overo palmpre omap4430-panda" ;;
+ 	"avr32")
+ 			machines="at32stk1000 atngw100" ;;
+ 	"bfin")
+diff --git a/recipes/clutter/clutter.inc b/recipes/clutter/clutter.inc
+index fce3236..3bcf895 100644
+--- a/recipes/clutter/clutter.inc
++++ b/recipes/clutter/clutter.inc
+@@ -2,7 +2,7 @@ DESCRIPTION = "Clutter graphics library"
+ HOMEPAGE = "http://www.clutter-project.org/"
+ LICENSE = "LGPL"
+ 
+-COMPATIBLE_MACHINE = "(zylonite|mx31litekit|omap-3430ldp|omap-3430sdp|mx31ads|qemuarm|qemux86|ipodtouch|am3517-evm|dm3730-am3715-evm|beagleboard|overo|omap3evm|omap5912osk)"
++COMPATIBLE_MACHINE = "(zylonite|mx31litekit|omap-3430ldp|omap-3430sdp|mx31ads|qemuarm|qemux86|ipodtouch|am3517-evm|dm37x-evm|am37x-evm|beagleboard|overo|omap3evm|omap5912osk)"
+ 
+ STDDEPENDS = "virtual/libx11 gtk-doc-native pango glib-2.0 libxfixes gtk+"
+ BASE_CONF = "--disable-gtk-doc ${@get_clutter_fpu_setting(bb, d)}"
+diff --git a/recipes/linux/linux-omap-psp-2.6.32/dm3730-am3715-evm/defconfig b/recipes/linux/linux-omap-psp-2.6.32/am37x-evm/defconfig
+similarity index 100%
+copy from recipes/linux/linux-omap-psp-2.6.32/dm3730-am3715-evm/defconfig
+copy to recipes/linux/linux-omap-psp-2.6.32/am37x-evm/defconfig
+diff --git a/recipes/linux/linux-omap-psp-2.6.32/dm3730-am3715-evm/defconfig b/recipes/linux/linux-omap-psp-2.6.32/dm37x-evm/defconfig
+similarity index 100%
+rename from recipes/linux/linux-omap-psp-2.6.32/dm3730-am3715-evm/defconfig
+rename to recipes/linux/linux-omap-psp-2.6.32/dm37x-evm/defconfig
+diff --git a/recipes/linux/linux-omap-psp_2.6.32.bb b/recipes/linux/linux-omap-psp_2.6.32.bb
+index 1e1562b..ae7429f 100644
+--- a/recipes/linux/linux-omap-psp_2.6.32.bb
++++ b/recipes/linux/linux-omap-psp_2.6.32.bb
+@@ -3,7 +3,7 @@ require multi-kernel.inc
+ DESCRIPTION = "Linux kernel for OMAP processors"
+ KERNEL_IMAGETYPE = "uImage"
+ 
+-COMPATIBLE_MACHINE = "beagleboard|omap3evm|am3517-evm|dm3730-am3715-evm|omap3-touchbook|overo"
++COMPATIBLE_MACHINE = "beagleboard|omap3evm|am3517-evm|dm37x-evm|am37x-evm|omap3-touchbook|overo"
+ 
+ # This is the v2.6.32_OMAPPSP_03.00.01.06 branch
+ SRCREV = "a6bad4464f985fdd3bed72e1b82dcbfc004d7869"
+diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
+index f250de0..a570435 100644
+--- a/recipes/powervr-drivers/libgles-omap3.inc
++++ b/recipes/powervr-drivers/libgles-omap3.inc
+@@ -3,7 +3,7 @@ LICENSE = "proprietary-binary"
+ 
+ PR = "r5"
+ 
+-COMPATIBLE_MACHINE = "(dm3730-am3715-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
++COMPATIBLE_MACHINE = "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
+ 
+ DEPENDS = "virtual/libx11 libxau libxdmcp"
+ 
+diff --git a/recipes/ti/ti-dmai_2.05.00.14.bb b/recipes/ti/ti-dmai_2.05.00.14.bb
+index 1d49ba7..586ad47 100644
+--- a/recipes/ti/ti-dmai_2.05.00.14.bb
++++ b/recipes/ti/ti-dmai_2.05.00.14.bb
+@@ -3,7 +3,7 @@ require ti-dmai.inc
+ PV = "2_05_00_14"
+ PR = "r0"
+  
+-COMPATIBLE_MACHINE = "(omap3evm|dm3730-am3715-evm)"
++COMPATIBLE_MACHINE = "(omap3evm|dm37x-evm|am37x-evm)"
+ 
+ SRC_URI_append = " \
+ 	file://doxygen_templates.tar.gz \
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index d67e787..e96b7d2 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -110,9 +110,14 @@ SRCREV_omap3evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
+ PV_omap3evm = "2009.11+${PR}+gitr${SRCREV}"
+ 
+ # ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
+-SRC_URI_dm3730-am3715-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git"
+-SRCREV_dm3730-am3715-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
+-PV_dm3730-am3715-evm = "2009.11+${PR}+gitr${SRCREV}"
++SRC_URI_dm37x-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git"
++SRCREV_dm37x-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
++PV_dm37x-evm = "2009.11+${PR}+gitr${SRCREV}"
++
++# ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
++SRC_URI_am37x-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git"
++SRCREV_am37x-evm = "c0a8fb217fdca7888d89f9a3dee74a4cec865620"
++PV_am37x-evm = "2009.11+${PR}+gitr${SRCREV}"
+ 
+ # ~ TI PSP v2009.11_OMAPPSP_03.00.01.06 (+ couple of commits)
+ SRC_URI_am3517-evm = "git://arago-project.org/git/projects/u-boot-omap3.git;protocol=git"
+diff --git a/recipes/x-load/x-load_git.bb b/recipes/x-load/x-load_git.bb
+index c7bb451..9f8c77d 100644
+--- a/recipes/x-load/x-load_git.bb
++++ b/recipes/x-load/x-load_git.bb
+@@ -30,9 +30,14 @@ SRCREV_omap3evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
+ PV_omap3evm = "1.46+${PR}+gitr${SRCREV}"
+ 
+ # TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
+-SRC_URI_dm3730-am3715-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
+-SRCREV_dm3730-am3715-evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
+-PV_dm3730-am3715-evm = "1.46+${PR}+gitr${SRCREV}"
++SRC_URI_dm37x-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
++SRCREV_dm37x-evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
++PV_dm37x-evm = "1.46+${PR}+gitr${SRCREV}"
++
++# TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
++SRC_URI_am37x-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
++SRCREV_am37x-evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
++PV_am37x-evm = "1.46+${PR}+gitr${SRCREV}"
+ 
+ # TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
+ SRC_URI_am3517-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf/dm3730-am3715-evm/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/am37x-evm/xorg.conf
+similarity index 100%
+rename from recipes/xorg-xserver/xserver-xorg-conf/dm3730-am3715-evm/xorg.conf
+rename to recipes/xorg-xserver/xserver-xorg-conf/am37x-evm/xorg.conf
+diff --git a/recipes/xorg-xserver/xserver-xorg-conf/am3517-evm/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/dm37x-evm/xorg.conf
+similarity index 100%
+copy from recipes/xorg-xserver/xserver-xorg-conf/am3517-evm/xorg.conf
+copy to recipes/xorg-xserver/xserver-xorg-conf/dm37x-evm/xorg.conf
+-- 
+1.7.0.4
 
-Wrt the machines using it:
-No idea why Tim added it for sheevaplug.
-Guess Leon just used sheevaplug as starting point for openrd base.
-Wrt openrd client: I just copied over from openrd base, but openrd client
-does not need it.
 
-(btw there is also something called u-boot-env.bb
-This is apparently a dummy recipe to get u-boot env into deploy and is only
-used by neuros)
-
-Frans.
 
