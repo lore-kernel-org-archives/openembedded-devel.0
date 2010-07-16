@@ -1,34 +1,36 @@
 Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZoT3-0003VD-5u
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZoSz-0003VG-Cv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 19:13:01 +0200
-Received: by ewy7 with SMTP id 7so839768ewy.6
+	Fri, 16 Jul 2010 19:13:07 +0200
+Received: by ewy7 with SMTP id 7so839811ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 10:12:47 -0700 (PDT)
+	Fri, 16 Jul 2010 10:12:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=xvyuug/PgY/kvSz81ebiRk4t1Rdt7I/mXdr47pA9Q00=;
-	b=tjc4apZH0aHTgDgWdcOULMm0/tn9albuT+dUytI6M6QTBg8fjOwvzevaUPQrGUHOv7
-	jl/ORfNDdXvQmAn40bomAO5VmS0OTDb3iJ/wmBNy9w6RNePeCC0S7ilRgV0fKcth9DfX
-	3DZzAqQKXVrQKBfrlRgPY4Y6pJG6ZxnsQKMok=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=++qhT7c/8QaVHAhdpcBE2z6MB6Ai/X+GuMc0Wh1cGFM=;
+	b=p32vx13yDvz85ltUDzJUgQfSWrjoWQRai/bR4+hr0yULUTbCNLkx6lFIiNOeH5Xkg6
+	sYmyM01gxwAOAlhfW3jbmv1Mejiyek1Y3n/OR2D8eXX40HdCPNqT/u0PUqf6xwoc3JHt
+	gD11rXXhILcIN3HAL+N10uXni+G4l0TsSMLN0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=GFqXDHbbUDTsGejQ8sAZJLNHpPRIgZdry7Jbq5uX6rcsc2CoclNgyQ2OHdpGxqxFuc
-	6F+Gi0NtiKzDLE5Ddv5RbA+q+ysiGyK1MEpS6dAv2JOR2jWyG+j/wOPeFbJhsER4D2Vr
-	rkb+FDsAI5F47AuR2U2OkqnvNGxwX6ckQoqTw=
-Received: by 10.213.28.194 with SMTP id n2mr4565352ebc.10.1279300366990;
-	Fri, 16 Jul 2010 10:12:46 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=irKOQbyoEgA7YQOi1BkuK/ORbOsMPepgIcIdhhQL2B6XAa+GzSHZVpAgCUd8CPvDf3
+	YTnZb4IGFioZrQuvjQr5xUPt8VzoUyUrKR2IZrepBBISemZBlETYq9BKuE4j7mtSbXsj
+	Q82OKsl7KfJv/9xaFNAJIDaQHDJ5E9LWBjQuE=
+Received: by 10.213.31.147 with SMTP id y19mr1320375ebc.81.1279300369744;
+	Fri, 16 Jul 2010 10:12:49 -0700 (PDT)
 Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id z55sm19656640eeh.21.2010.07.16.10.12.46
+	by mx.google.com with ESMTPS id z55sm19656640eeh.21.2010.07.16.10.12.49
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 16 Jul 2010 10:12:46 -0700 (PDT)
+	Fri, 16 Jul 2010 10:12:49 -0700 (PDT)
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jul 2010 19:12:40 +0200
-Message-Id: <1279300361-3838-1-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Fri, 16 Jul 2010 19:12:41 +0200
+Message-Id: <1279300361-3838-2-git-send-email-fransmeulenbroeks@gmail.com>
 X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1279300361-3838-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1279300361-3838-1-git-send-email-fransmeulenbroeks@gmail.com>
 X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -37,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] binutils: added COMPATIBLE_TARGET_SYS
+Subject: [PATCH v2] linux-libc-headers: added COMPATIBLE_TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,10 +53,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 17:13:02 -0000
+X-List-Received-Date: Fri, 16 Jul 2010 17:13:07 -0000
 
 added COMPATIBLE_TARGET_SYS = "(?!nios2)" to the inc file
-and COMPATIBLE_TARGET_SYS = "" to the few recipes that do
+and COMPATIBLE_TARGET_SYS = "" to the only recipe that does
 support nios2
 
 Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
@@ -62,50 +64,33 @@ Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 Modified as suggested by Marcin.
 
- recipes/binutils/binutils.inc             |    2 ++
- recipes/binutils/binutils_2.17.50.0.12.bb |    2 ++
- recipes/binutils/binutils_2.20.1.bb       |    2 ++
- 3 files changed, 6 insertions(+), 0 deletions(-)
+ recipes/linux-libc-headers/linux-libc-headers.inc  |    2 ++
+ .../linux-libc-headers_2.6.34.bb                   |    2 ++
+ 2 files changed, 4 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/binutils/binutils.inc b/recipes/binutils/binutils.inc
-index a1866f3..279d653 100644
---- a/recipes/binutils/binutils.inc
-+++ b/recipes/binutils/binutils.inc
-@@ -5,6 +5,8 @@ LICENSE = "GPL"
+diff --git a/recipes/linux-libc-headers/linux-libc-headers.inc b/recipes/linux-libc-headers/linux-libc-headers.inc
+index 3410f35..6ad6764 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers.inc
++++ b/recipes/linux-libc-headers/linux-libc-headers.inc
+@@ -8,3 +8,5 @@ RDEPENDS_${PN}-dev = ""
+ RRECOMMENDS_${PN}-dbg = "${PN}-dev (= ${EXTENDPV})"
  
- INC_PR = "r10"
- 
+ inherit kernel-arch
++
 +COMPATIBLE_TARGET_SYS = "(?!nios2)"
-+
- inherit autotools gettext
- 
- PACKAGES += "${PN}-symlinks"
-diff --git a/recipes/binutils/binutils_2.17.50.0.12.bb b/recipes/binutils/binutils_2.17.50.0.12.bb
-index 70c0801..31ce22b 100644
---- a/recipes/binutils/binutils_2.17.50.0.12.bb
-+++ b/recipes/binutils/binutils_2.17.50.0.12.bb
-@@ -1,6 +1,8 @@
- require binutils.inc
- PR = "${INC_PR}.1"
+diff --git a/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb b/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
+index e547399..92f18a0 100644
+--- a/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
++++ b/recipes/linux-libc-headers/linux-libc-headers_2.6.34.bb
+@@ -7,6 +7,8 @@ INHIBIT_DEFAULT_DEPS = "1"
+ DEPENDS += "unifdef-native"
+ PR = "r1"
  
 +COMPATIBLE_TARGET_SYS = ""
 +
- SRC_URI = \
-     "${KERNELORG_MIRROR}/pub/linux/devel/binutils/binutils-${PV}.tar.bz2 \
-      file://binutils-2.16.91.0.6-objcopy-rename-errorcode.patch \
-diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
-index 624848c..b75de99 100644
---- a/recipes/binutils/binutils_2.20.1.bb
-+++ b/recipes/binutils/binutils_2.20.1.bb
-@@ -3,6 +3,8 @@ LICENSE = "GPLv3"
+ SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+ 	  "
  
- PR = "${INC_PR}.1"
- 
-+COMPATIBLE_TARGET_SYS = ""
-+
- SRC_URI = "\
-      ${GNU_MIRROR}/binutils/binutils-${PV}.tar.bz2;name=tarball \
-      file://binutils-uclibc-100-uclibc-conf.patch \
 -- 
 1.6.4.2
 
