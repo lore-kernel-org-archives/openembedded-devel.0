@@ -1,37 +1,27 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from smtp209.alice.it ([82.57.200.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1OZn7i-0006IK-Cn
+	(envelope-from <GNUtoo@no-log.org>) id 1OZnS3-0001U5-Gi
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 17:46:52 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id DD2EA744DD2;
-	Fri, 16 Jul 2010 11:46:45 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 07908-02; Fri, 16 Jul 2010 11:46:45 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id B17017446FF;
-	Fri, 16 Jul 2010 11:46:45 -0400 (EDT)
-Message-ID: <4C407EE5.6050802@cbnco.com>
-Date: Fri, 16 Jul 2010 11:46:45 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
-MIME-Version: 1.0
-To: Richard Purdie <rpurdie@rpsys.net>
-References: <1279290319.10837.1747.camel@rex>
-In-Reply-To: <1279290319.10837.1747.camel@rex>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+	Fri, 16 Jul 2010 18:07:56 +0200
+Received: from [192.168.10.100] (95.232.142.62) by smtp209.alice.it
+	(8.5.124.08) (authenticated as editempo)
+	id 4C1A275901EFC33F for openembedded-devel@lists.openembedded.org;
+	Fri, 16 Jul 2010 18:07:45 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 16 Jul 2010 18:07:42 +0200
+Message-ID: <1279296462.8615.15.camel@gnutoo-laptop>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 82.57.200.105
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: [core] initscripts and keymap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,21 +35,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 15:46:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 16 Jul 2010 16:07:59 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Hi Richard,
+hi,
+in keymaps_1.0.bb:
+there is:
+RDEPENDS_${PN} = "initscripts console-tools"
 
-Does this do anything different than amendrecipes.bbclass?
+which is an issue for the shr distribution.
 
-Mike
+shr uses initscripts-shr.
 
-Richard Purdie wrote:
-> The idea is that if bitbake finds any X.bbappend files, when it loads
-> X.bb, it will also include these files after it parses the base .bb file
-> (but before finalise and the anonymous methods run). This means that
-> the .bbappend file can poke around and do whatever it might want to the
-> recipe to customise it.
+Pratically speaking it install initscripts instead of initscripts-shr in
+shr-image,which result in having the /etc/init.d/devices which
+is,according to mickeyl, an init script for devfs.
+if this init script is present(with the corresponding rc links) it get
+executed,which causes some devices nodes to lack.
+which prevent sound,modem and maybe other driver from working on the
+htcdream.
+
+what's the best way to fix it?
+
+mrmoku(which helped me) proposes(in #openmoko-cdevel):
+<mrmoku> that should be fixed to be ${IMAGE_INITSCRIPTS} instead
+probably
+but we're not sure at all that it's the correct variable or solution.
+
+Denis.
+
+
 
 
