@@ -1,43 +1,40 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OZoWm-0003d3-4e
+	(envelope-from <vwyodapink@gmail.com>) id 1OZpvO-0007hO-Ek
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 16 Jul 2010 19:16:48 +0200
-Received: by ewy7 with SMTP id 7so842194ewy.6
+	Fri, 16 Jul 2010 20:46:19 +0200
+Received: by yxi11 with SMTP id 11so571921yxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 10:16:44 -0700 (PDT)
+	Fri, 16 Jul 2010 11:46:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=eIxYbtuWIL6UOqY+cVdpCc+8kcrKXECDgIsSF4owDzA=;
-	b=SivBZNP7jyI1oc0/maTsb9AnjdC2PPM2Emk2D6XDj+3zU5x2MPFJ3nHC4pMyYJQwWr
-	pFSdc3p4sAln5BRKyEjr8pWvgZerlBvg4KO9RgYlRNp22KsfC64zM9zOo2jLngkXTr+w
-	L9Vb2LhgsaQVCBKbjYMAFSAGlSnXRKRoc/3mU=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=cn54aocAwDiUz6UeI0+T5li8Du9TKE3cTKfIV03H9Ag=;
+	b=wBG26ZOSITSjIPsn2meL4/AgJY3coKla8Pt3/DTh93qu+/4lDgDI874piq38rqebqz
+	Rps06FfGn5tOXghMvxPVq6DsOpYWbwNePnNbmuTXp9p+3QxstHR5R3tvyLOCKbS8e24c
+	3IWUau0BzFv7zpsQq0OHUS7QVly/xR1arVhMw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=EJ/xNdd6ArcnhePRDJyquAWr8TrkUHU8XdsYJ1/F9u7d+kN+O6qv91P9DTXUqCWK90
-	8K2cXobRG7aUwBzEJW3kCGReOFQfBAaDDnBo32nKqSDIijBf5gdUkGQH/x+2MxFt7xvD
-	DmUzBKOBI/4OOMHbNXBMGVRHvskJ6ftWVElFc=
-Received: by 10.213.33.4 with SMTP id f4mr1321818ebd.58.1279300603908;
-	Fri, 16 Jul 2010 10:16:43 -0700 (PDT)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id z55sm19683910eeh.21.2010.07.16.10.16.43
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 16 Jul 2010 10:16:43 -0700 (PDT)
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=xtMmFGg6om1+leVMpXnSYqaAQZtNENOQH3ImPvrsW0hPf83XQHy9Cjm2etxrmXSHQv
+	i6X0I0h9tJsKSuU775hx8Tioqi62RLTYnHy513PMoA6hwenDUD26ZNzG5zrcuhpkHRFv
+	k+6V2FiPdZ2yG9uaBRMdPtVkqtQZQ+QECojP4=
+MIME-Version: 1.0
+Received: by 10.100.12.14 with SMTP id 14mr1651738anl.244.1279305971931; Fri, 
+	16 Jul 2010 11:46:11 -0700 (PDT)
+Received: by 10.100.127.11 with HTTP; Fri, 16 Jul 2010 11:46:11 -0700 (PDT)
+Date: Fri, 16 Jul 2010 11:46:11 -0700
+Message-ID: <AANLkTimwFjLODTbT6WEEhthhjwYMiMQ4nt5RtXniNgZb@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 16 Jul 2010 19:16:39 +0200
-Message-Id: <1279300599-3978-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gcc: added COMPATIBLE_TARGET_SYS
+Subject: spca5xx does not build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,42 +48,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 17:16:48 -0000
+X-List-Received-Date: Fri, 16 Jul 2010 18:46:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-added COMPATIBLE_TARGET_SYS = "(?!nios2)" to gcc-common.inc file
-and COMPATIBLE_TARGET_SYS = "" to the 4.1.2 recipe (which at
-the moment is the only one that supports nios2)
+I was trying to build this for my gumstix and first it had a DL
+location issue which I fixed and its now downloading the pacakge but
+fails on the build with the following errors. Hope someone can make
+some sense of this as I have no clue nor does googling help any seems
+as though according to posts been unbuildable for a couple years? the
+earliest post I found complaining was 06 then 07 a update to file was
+done but still did not build correctly then according to the boards. I
+also tried gspcav1 as well since its a similar driver and that one
+fails as well.
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- recipes/gcc/gcc-common.inc |    2 ++
- recipes/gcc/gcc_4.1.2.bb   |    1 +
- 2 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/gcc/gcc-common.inc b/recipes/gcc/gcc-common.inc
-index 7aee542..9515f47 100644
---- a/recipes/gcc/gcc-common.inc
-+++ b/recipes/gcc/gcc-common.inc
-@@ -5,6 +5,8 @@ LICENSE = "GPL"
- 
- NATIVEDEPS = ""
- 
-+COMPATIBLE_TARGET_SYS = "(?!nios2)" 
-+
- inherit autotools gettext
- 
- FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/gcc-${PV}"
-diff --git a/recipes/gcc/gcc_4.1.2.bb b/recipes/gcc/gcc_4.1.2.bb
-index 2062ce5..42f530b 100644
---- a/recipes/gcc/gcc_4.1.2.bb
-+++ b/recipes/gcc/gcc_4.1.2.bb
-@@ -6,3 +6,4 @@ require gcc-package-target.inc
- 
- ARCH_FLAGS_FOR_TARGET += "-isystem${STAGING_INCDIR}"
- 
-+COMPATIBLE_TARGET_SYS = "" 
--- 
-1.6.4.2
 
+NOTE: Running task 516 of 750 (ID: 9,
+/home/vdubhack/overo-oe/org.openembedded.dev/recipes/spca5xx/spca5xx_20060501.bb,
+do_compile)
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-20060501-r81/temp/log.do_compile.17684)
+| NOTE: make -e MAKEFLAGS=
+KERNELDIR=/home/vdubhack/overo-oe/tmp/sysroots/overo-angstrom-linux-gnueabi/kernel
+CC=ccache arm-angstrom-linux-gnueabi-gcc
+LD=arm-angstrom-linux-gnueabi-ld
+|    Building SPCA5XX driver for 2.5/2.6 kernel.
+|    Remember: you must have read/write access to your kernel source tree.
+| make -C /home/vdubhack/overo-oe/tmp/sysroots/overo-angstrom-linux-gnueabi/kernel
+SUBDIRS=/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-20060501-r81/spca5xx-20060501
+CC="ccache arm-angstrom-linux-gnueabi-gcc " modules
+| make[1]: Entering directory
+`/home/vdubhack/overo-oe/tmp/sysroots/overo-angstrom-linux-gnueabi/kernel'
+| scripts/Makefile.build:49: *** CFLAGS was changed in
+"/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-20060501-r81/spca5xx-20060501/Makefile".
+Fix it to use EXTRA_CFLAGS.  Stop.
+| make[1]: *** [_module_/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-20060501-r81/spca5xx-20060501]
+Error 2
+| make[1]: Leaving directory
+`/home/vdubhack/overo-oe/tmp/sysroots/overo-angstrom-linux-gnueabi/kernel'
+| make: *** [default] Error 2
+| FATAL: oe_runmake failed
+NOTE: Task failed:
+/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-20060501-r81/temp/log.do_compile.17684
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/vdubhack/overo-oe/org.openembedded.dev/recipes/spca5xx/spca5xx_20060501.bb
+do_compile failed
+ERROR: Task 9 (/home/vdubhack/overo-oe/org.openembedded.dev/recipes/spca5xx/spca5xx_20060501.bb,
+do_compile) failed
+NOTE: Tasks Summary: Attempted 515 tasks of which 510 didn't need to
+be rerun and 1 failed.
+ERROR: '/home/vdubhack/overo-oe/org.openembedded.dev/recipes/spca5xx/spca5xx_20060501.bb'
+failed
 
 
