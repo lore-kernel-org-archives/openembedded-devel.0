@@ -1,53 +1,42 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OZt7p-00037d-MN
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 00:11:22 +0200
-Received: by fxm12 with SMTP id 12so1377644fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OZtvJ-0005n1-Fx for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 01:02:30 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OZtvB-0003Wu-Hl for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 01:02:21 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 01:02:21 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 15:11:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=puaHHO84MoAeppDnmpI858OFd7DAlS+/zAipTFm9o40=;
-	b=go84fmvPhUqZxErQVWuKG2L9sCL5KdPUuTKc6KmjS7Kz+aeLbRPoHXflThWuaOcB1t
-	K/GWJoEulSvYJqU3t4ck2HR6zLqZRlfZhyxP372mXITmTXnv6z33JewG6ExwRzMo/9ZE
-	gC5gRemzwFRZwY5H9E+uZyLctP0NJntq5wSzI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=ki5PP/gqRDjPJ3ie04mNkLBiCOOg27pV6R72gLKJZo7GyI/lHWAGA3pqeTNlK9xMcv
-	qG0ZF4D240kUWNEvJufnLo3kL8xDoQIJt1xi+AIYlmyXUOXBYDZ1rep2oHZkso3IDpx9
-	aexAo62Qd9mD7mTz5+2Y/Wt/yzdan/GcirhEw=
-Received: by 10.223.119.136 with SMTP id z8mr1173986faq.63.1279318275353;
-	Fri, 16 Jul 2010 15:11:15 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id k15sm918338fai.40.2010.07.16.15.11.14
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 16 Jul 2010 15:11:14 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OZt7Z-0002VV-A6; Sat, 17 Jul 2010 00:11:05 +0200
-Date: Sat, 17 Jul 2010 00:11:05 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Sat, 17 Jul 2010 01:02:21 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100716221105.GJ23169@mx.loc>
-References: <1279316946-8901-1-git-send-email-rep.dot.nop@gmail.com>
-	<1279317776.7632.15.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1279317776.7632.15.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 17 Jul 2010 01:02:08 +0200
+Message-ID: <i1qodg$i28$1@dough.gmane.org>
+References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][CFT 1/3] libmpc: bump version and cleanup staging
+Subject: Re: busybox mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,25 +50,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 22:11:22 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 16 Jul 2010 23:02:30 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jul 17, 2010 at 12:02:56AM +0200, Paul Menzel wrote:
->Dear Bernhard,
->
->
->what does CFT stand for? »Call for tender« [1].
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-hehe, i ment Call For Testers :)
+On 16-07-10 16:51, George C. Huntington, III wrote:
+> how do i make a distribution use mdev instead of udev?
 
-$ dict CFT
-1 definition found
+You mean "how do I make my image use mdev instead of udev?", right?
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-From V.E.R.A. -- Virtual Entity of Relevant Acronyms (June 2006) [vera]:
+iD8DBQFMQOTwMkyGM64RGpERAmYUAKCg99CQs/eiOtzhDPliahoCdzmuLwCfbnlS
+uXrn+V3JQ8812jdHUAcv0Uw=
+=p4jb
+-----END PGP SIGNATURE-----
 
-  CFT
-         Call For Testers
 
 
