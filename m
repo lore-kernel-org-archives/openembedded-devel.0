@@ -1,34 +1,45 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OaD4N-0002Rw-3V
+	(envelope-from <vwyodapink@gmail.com>) id 1OaDYG-0002X0-6Z
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 21:29:12 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OaD4H-0007ww-CN
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 20:29:01 +0100
-From: Phil Blundell <philb@gnu.org>
+	Sat, 17 Jul 2010 22:00:03 +0200
+Received: by gwj22 with SMTP id 22so1710172gwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 12:59:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=1+ETyVMRICQuGjhydDP+FsP0EwUITFyYQzivoLoYofA=;
+	b=a01CKhYDJ5I2KGkBoZEicAa1BkDCWnrYFoY2NJKYWfgqyvk7mIpbrNgeycQ/E4x80O
+	QNCvpU37oXce3abPr6pJRY8hUwxJsYCk42UhHKrhH0RNvd5vW4GQWyT1DRwdSL6BCeqf
+	x70+8HwkPgemsnq5B4QgX+pPyFOK9shjrNsXg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=eXH6gfkCvpdLxl6+i+KPTO7aL4SxiUs9A6cqrPdYu9cqT22pS9YE/F0iu3lyUBWkCW
+	gbcjYdUByZP3GwPNmT6byiPPR60Je8NXkKgRkSyHl3mxq2W/8WatkLlzjiYhSgL5HWaH
+	wwPJXMBmMyCG9o3o8OjmMcPyS8J3wtNJ0vvpk=
+MIME-Version: 1.0
+Received: by 10.100.112.20 with SMTP id k20mr2874625anc.234.1279396792631; 
+	Sat, 17 Jul 2010 12:59:52 -0700 (PDT)
+Received: by 10.100.127.11 with HTTP; Sat, 17 Jul 2010 12:59:52 -0700 (PDT)
+In-Reply-To: <4C417DA8.8050101@freyther.de>
+References: <AANLkTimwFjLODTbT6WEEhthhjwYMiMQ4nt5RtXniNgZb@mail.gmail.com>
+	<4C417DA8.8050101@freyther.de>
+Date: Sat, 17 Jul 2010 12:59:52 -0700
+Message-ID: <AANLkTimLRtZd_b0eDcCng2gQvZzWCSvqSHRAX9WX1Ar7@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
-References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
-	<i1qodg$i28$1@dough.gmane.org> <20100717000603.GK23169@mx.loc>
-	<1279373863.21888.10.camel@lenovo.internal.reciva.com>
-	<AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
-Date: Sat, 17 Jul 2010 20:29:11 +0100
-Message-ID: <1279394951.21888.31.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: busybox mdev
+Subject: Re: spca5xx does not build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,46 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 19:29:13 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 17 Jul 2010 20:00:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I'm not familiar with that recipe and I don't seem to have a
-micro-base.bb in my tree.  But, if it's sucking in udev, it sounds like
-a bogus dependency somewhere.  You can use bitbake -g to find out where.
+i tried editing the make file its self where it says but when I
+rebuilt it it just un tared it again and rewrote my change. Do I need
+to figure out how to make it use that in the bb file itself? Sorry for
+the basic questions just unsure
 
-p.
-
-On Sat, 2010-07-17 at 17:09 +0200, Bernhard Reutner-Fischer wrote:
-> Baking micro-base (not -image) tries to build udev for me?
-> 
-> On 17 Jul 2010 15:39, "Phil Blundell" <philb@gnu.org> wrote:
-> 
-> On Sat, 2010-07-17 at 02:06 +0200, Bernhard Reutner-Fischer wrote:
-> > (what's the reason micro-base u...
-> Er, does it?  My copy of micro-base-image.bb says:
-> 
-> # Include minimum init and init scripts
-> 
-> IMAGE_DEV_MANAGER = "busybox-mdev"
-> IMAGE_INIT_MANAGER = "sysvinit sysvinit-pidof"
-> IMAGE_INITSCRIPTS = ""
-> 
-> If it's using udev then that is definitely a bug.
-> 
-> p.
-> 
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-deve...
+On Sat, Jul 17, 2010 at 2:53 AM, Holger Freyther <holger+oe@freyther.de> wr=
+ote:
+>
+>> | make[1]: Entering directory
+>> `/home/vdubhack/overo-oe/tmp/sysroots/overo-angstrom-linux-gnueabi/kerne=
+l'
+>> | scripts/Makefile.build:49: *** CFLAGS was changed in
+>> "/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-2=
+0060501-r81/spca5xx-20060501/Makefile".
+>> Fix it to use EXTRA_CFLAGS. =A0Stop.
+>>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
-
+>
 
 
