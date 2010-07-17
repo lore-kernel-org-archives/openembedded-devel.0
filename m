@@ -1,27 +1,47 @@
-Received: from smtp202.alice.it ([82.57.200.98])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <GNUtoo@no-log.org>) id 1Oa8vq-0000G4-VM
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Oa91E-00019y-8y
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 17:04:06 +0200
-Received: from localhost.localdomain (95.232.142.62) by smtp202.alice.it
-	(8.5.124.08) (authenticated as editempo@alice.it)
-	id 4C1A2A7C005F758C; Sat, 17 Jul 2010 17:03:56 +0200
-From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
+	Sat, 17 Jul 2010 17:10:02 +0200
+Received: by wye20 with SMTP id 20so3108951wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 08:09:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:received
+	:in-reply-to:references:date:message-id:subject:from:to:content-type;
+	bh=JjxUmcPgMoLSAUf30GmOZaibCG9wBsTvHThJLnhghSY=;
+	b=BlSn6D8cAUSrMzVIgqXQJVBBq2xz5wjlNEr74v+zHFUyPMpUANthqoY9r0Hv2/zChB
+	uZwLCkKHKNvJ/e6gTsJB4m6k7PzReFC9kmBds83E2pb1KdZzMdCDrsr9MSRPnD1nr7kL
+	3WPl+U+/yeoyvLEj2YTCdYW8ZCga1pDQzzn70=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=HeSpOmi8p2UKhBLAWJN7BDNbipjzRC6EyZ0EyznudUyfkciVGpyiSMBhSQXUW5yF2v
+	X31EXrruosDVyIbVWk8L+RXXt7kWOtZ5m1+4iBo5LtI9Y9ALnMEXfR73Ah+DSQ+kpMny
+	w89H0v7xgmzOUxdLgh5f/3WbQ6yy5SYLELP6g=
+MIME-Version: 1.0
+Received: by 10.227.137.130 with SMTP id w2mr2031555wbt.135.1279379369055; 
+	Sat, 17 Jul 2010 08:09:29 -0700 (PDT)
+Received: by 10.216.234.17 with HTTP; Sat, 17 Jul 2010 08:09:28 -0700 (PDT)
+Received: by 10.216.234.17 with HTTP; Sat, 17 Jul 2010 08:09:28 -0700 (PDT)
+In-Reply-To: <1279373863.21888.10.camel@lenovo.internal.reciva.com>
+References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
+	<i1qodg$i28$1@dough.gmane.org> <20100717000603.GK23169@mx.loc>
+	<1279373863.21888.10.camel@lenovo.internal.reciva.com>
+Date: Sat, 17 Jul 2010 17:09:28 +0200
+Message-ID: <AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Jul 2010 17:03:24 +0200
-Message-Id: <1279379004-15038-2-git-send-email-GNUtoo@no-log.org>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1279379004-15038-1-git-send-email-GNUtoo@no-log.org>
-References: <1279379004-15038-1-git-send-email-GNUtoo@no-log.org>
-X-SA-Exim-Connect-IP: 82.57.200.98
-X-SA-Exim-Mail-From: GNUtoo@no-log.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] keymaps: remove initscripts dependency
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: busybox mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,49 +55,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 15:04:06 -0000
+X-List-Received-Date: Sat, 17 Jul 2010 15:10:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Multiple initscripts version exist,for instance
-  initscripts-shr,initscripts-openmoko,initscripts etc...
-Depending on a particular initscript is not a good idea:
+Baking micro-base (not -image) tries to build udev for me?
 
-For instance on SHR(distro) and htcdream(machine)
-  it install initscripts instead of initscripts-shr in
-  shr-image,which result in having the /etc/init.d/devices which
-  is,according to mickeyl, an init script for devfs.
-  if this init script is present(with the corresponding rc links) it get
-  executed,which causes some devices nodes to lack.
-  which prevent sound,modem and maybe other driver from working on the
-  htcdream.
+On 17 Jul 2010 15:39, "Phil Blundell" <philb@gnu.org> wrote:
 
-Thanks mrmoku in #openmoko-cdevel in Freenode
-  for helping me finding the offending recipe.
-Thanks mickeyl in #openmoko-cdevel in Freenode for telling me
-  that usually packages don't depend on the initscripts
+On Sat, 2010-07-17 at 02:06 +0200, Bernhard Reutner-Fischer wrote:
+> (what's the reason micro-base u...
+Er, does it?  My copy of micro-base-image.bb says:
 
-Signed-off-by: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
----
- recipes/keymaps/keymaps_1.0.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+# Include minimum init and init scripts
 
-diff --git a/recipes/keymaps/keymaps_1.0.bb b/recipes/keymaps/keymaps_1.0.bb
-index 25a93c2..f8cd77f 100644
---- a/recipes/keymaps/keymaps_1.0.bb
-+++ b/recipes/keymaps/keymaps_1.0.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "Keyboard map"
- SECTION = "base"
--RDEPENDS_${PN} = "initscripts console-tools"
-+RDEPENDS_${PN} = "console-tools"
- LICENSE = "GPL"
- PACKAGE_ARCH = "${MACHINE}"
--PR = "r24"
-+PR = "r25"
- 
- inherit update-rc.d
- 
--- 
-1.7.0.4
+IMAGE_DEV_MANAGER = "busybox-mdev"
+IMAGE_INIT_MANAGER = "sysvinit sysvinit-pidof"
+IMAGE_INITSCRIPTS = ""
+
+If it's using udev then that is definitely a bug.
+
+p.
 
 
+
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-deve...
 
