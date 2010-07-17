@@ -1,31 +1,52 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OZtzg-0006qX-MS
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OZuv4-0001y7-Vi
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 01:07:15 +0200
-Received: (qmail invoked by alias); 16 Jul 2010 23:00:07 -0000
-Received: from p508856FC.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.86.252]
-	by mail.gmx.net (mp008) with SMTP; 17 Jul 2010 01:00:07 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/I3nQEAhTIRkUYweZBueYYKf7kIxOMMEe0flEy1p
-	9VcuO3GDvvHBG9
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Sat, 17 Jul 2010 02:06:19 +0200
+Received: by bwz10 with SMTP id 10so1683277bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 16 Jul 2010 17:06:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=rX2rJSA5fwdmFiQL1HJ6VSI0/65apJiJx+MUC76V2wU=;
+	b=wXNeg85KiVkctb3Sx10+DMvX3cuoNvC2YIbjip1z0aAexQExNeNlHnkrryb7HT1NmT
+	82TCJjGxYFLADQLNOREXTSPKlRdbQK57dF9abeELpuwygQyKU3z28Xvfp1ZvmgcsMQn9
+	9LKUQ2pRw/k0gQNTgsYly6J+JvytTQs5KXETw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=yCac4LIgxthJEKuB4mSsZ6WkYKJoqUSnG/gFWXbjS9HORw8Mxux2WcG2N7hMAN+oMv
+	3ZzHgVmIbSIlNBB+PzKRsjyS58x1dsmPhBkGzUUrXI02r0Pe6hKMdmWHN5bs+spYmhPL
+	iPc7ktZoKLCk7qaQDia/+H+RrQStGEp1yA2Co=
+Received: by 10.204.24.1 with SMTP id t1mr1465273bkb.178.1279325174867;
+	Fri, 16 Jul 2010 17:06:14 -0700 (PDT)
+Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
+	by mx.google.com with ESMTPS id 24sm13190747bkr.7.2010.07.16.17.06.13
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 16 Jul 2010 17:06:14 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OZuup-00035h-Va; Sat, 17 Jul 2010 02:06:03 +0200
+Date: Sat, 17 Jul 2010 02:06:03 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 17 Jul 2010 00:52:26 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+Message-ID: <20100717000603.GK23169@mx.loc>
+References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
+	<i1qodg$i28$1@dough.gmane.org>
 MIME-Version: 1.0
-Message-Id: <201007170052.26932.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+In-Reply-To: <i1qodg$i28$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: How to force a bash-function to be inserted in the package
+Subject: Re: busybox mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +60,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 16 Jul 2010 23:07:16 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 17 Jul 2010 00:06:19 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-I am working on a scenario where two recipes (powervr-drivers: libgles-omap3 / omap3-sgx-modules) should share the same code at the pkg_postinst state (I want to select if the cpu supports 
-sgx and select the proper version of module/lib 2.x 3.x 5.x only once and forever). To avoid redundant code I added a function in a file both recipes include. In the recipes I simply say 
+On Sat, Jul 17, 2010 at 01:02:08AM +0200, Koen Kooi wrote:
+>-----BEGIN PGP SIGNED MESSAGE-----
+>Hash: SHA1
+>
+>On 16-07-10 16:51, George C. Huntington, III wrote:
+>> how do i make a distribution use mdev instead of udev?
+>
+>You mean "how do I make my image use mdev instead of udev?", right?
 
-pkg_postinst_${PN}_prepend() {
-	check_cpu_for_sgx ${base_libdir}/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
-}
-
-check_cpu_for_sgx is the function included in both recipes.
-
-I did not run this so far (I haven't got a hardware right now to test) but I expect this not to work because the function check_cpu_for_sgx will not be included the packet information (I checked I 
-didn't find this function in the files of the package).
-
-Now my question:
-
-Is there something (e.g a keyword prepended to the function) which forces oe to include a function in the postinst/postrm code?
+IMAGE_DEV_MANAGER = "busybox-mdev"
+in your local.conf (what's the reason micro-base uses udev instead of
+mdev, btw?)
 
 
