@@ -1,58 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1Oa5RX-0002uP-Jo
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 13:20:33 +0200
-Received: by fxm12 with SMTP id 12so1520046fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oa6Ij-0003eM-GE for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 14:15:31 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oa6Ie-00083q-HA for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 14:15:24 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 14:15:24 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 04:20:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=EMngMNz7hpTq81hT76HAqblX2zeB7AtCblpaEE+5UU4=;
-	b=uDNyzjfU6UC2C430yymc+Aw+q3gNzVatJ9UYH8LTmbOAdeBZ4pxccM6a0JwQPzLkTA
-	uLE1CxzMoki0aDSXQl1Hva6h+NhstcbF80Ii3Y3nO8eNyvN0OLDsm3/6jAA+CwGdNvYi
-	hq6QnNidxv0/PdQ/FmDGmeBBWKRZChQQZZsL8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=uhRV2WzGD6GhbYvXPEDlWvKycVvZpZnbd/2VbDXYBrW9Sl+kI3BHkU8ZA40yLMhryo
-	TS1nFaMc/FhdVxC6HdygHYUInbB0vz1iPCop4NGSifCG+UB6xdXvGifmauN8uuxqM1zg
-	KeZUF/YCBcJX4zIHenyIyt7NxYCt84eijHKiU=
-Received: by 10.223.116.197 with SMTP id n5mr1589865faq.53.1279365625149;
-	Sat, 17 Jul 2010 04:20:25 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id e20sm570732fak.23.2010.07.17.04.20.23
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 17 Jul 2010 04:20:23 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Oa5RL-0006L4-ME; Sat, 17 Jul 2010 13:20:19 +0200
-Date: Sat, 17 Jul 2010 13:20:19 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Sat, 17 Jul 2010 14:15:24 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100717112019.GL23169@mx.loc>
-References: <1279133054.4939.16.camel@mattotaupa>
-	<20100714194822.GB9771@rhein.zuhause.netz>
-	<1279216348.3741.24.camel@mattotaupa>
-	<20100715194805.GA8103@rhein.zuhause.netz>
-	<AANLkTimQo47xqCaKDLeRV0kclSF7KAloIDgp8Wfd6HUz@mail.gmail.com>
-	<20100715201635.GA11403@rhein.zuhause.netz>
-	<1279356998.14848.18.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1279356998.14848.18.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 17 Jul 2010 14:15:11 +0200
+Message-ID: <i1s6sg$d1j$1@dough.gmane.org>
+References: <1279216536.3741.27.camel@mattotaupa>	<1279270987.4164.29.camel@mattotaupa>	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>	<i1qogv$i28$2@dough.gmane.org>
+	<1279355702.14848.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <1279355702.14848.3.camel@mattotaupa>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom-2008.1, uclibc-git: oe_runmake failed: Error: unknown pseudo-op: `.cfi_sections' (was: oe_runmake failed: error: '__a1' undeclared (first use in this function))
+Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -66,87 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 11:20:33 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 17 Jul 2010 12:15:31 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jul 17, 2010 at 10:56:38AM +0200, Paul Menzel wrote:
->Am Donnerstag, den 15.07.2010, 22:16 +0200 schrieb Henning Heinold:
->
->> its pushed now.
->
->Henning and Khem, thank you for your fast and great help!
->
->I hit the next problem with `uclibc-git.bb`. This time it fails with the
->distribution angstrom-2008.1 (-ggdb3 removed) but works with the
->distribution minimal-uclibc.
->
->        arm-angstrom-linux-uclibceabi-gcc -march=3Darmv7-a -mtune=3Dcortex=
--a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -c libpthread/nptl/sysdeps/unix/sysv/=
-linux/open.S -o libpthread/nptl/sysdeps/unix/sysv/linux/open.o -include ./i=
-nclude/libc-symbols.h -Wall -Wstrict-prototypes -fno-strict-aliasing -Wnest=
-ed-externs -Wshadow -Wmissing-noreturn -Wmissing-format-attribute -Wformat=
-=3D2 -Wmissing-prototypes -Wmissing-declarations -Wold-style-declaration -W=
-old-style-definition -Wnonnull -Wundef -funsigned-char -fno-builtin -fno-as=
-m -mlittle-endian -mtune=3Darm9tdmi -march=3Darmv4t -fno-stack-protector -n=
-ostdinc -I./include -I./include -I. -I./libc/sysdeps/linux -I./libc/sysdeps=
-/linux/arm -fexpensive-optimizations -fomit-frame-pointer -frename-register=
-s -O2 -ggdb3 -Os -funit-at-a-time -fmerge-all-constants -fno-tree-loop-opti=
-mize -fno-tree-dominator-opts -fno-strength-reduce -fstrict-aliasing -DHAVE=
-_FORCED_UNWIND -I./libpthread/nptl -I./libpthread/nptl -I./libpthread/nptl/=
-sysdeps/unix/sysv/linux/arm/ -I./libpthread/nptl/sysdeps/unix/sy
->sv/linux/arm -I./libpthread/nptl/sysdeps/arm -I./libpthread/nptl/sysdeps/a=
-rm -I./libpthread/nptl/sysdeps/unix/sysv/linux -I./libpthread/nptl/sysdeps/=
-unix/sysv/linux -I./libpthread/nptl/sysdeps/generic -I./libpthread/nptl/sys=
-deps/pthread -I./libpthread/nptl/sysdeps/pthread/bits -I./ldso/ldso/arm -I.=
-/ldso/include -I./libc/sysdeps/linux/common -I/tmp/angstrom-dev/sysroots/ar=
-mv7a-angstrom-linux-uclibceabi/usr/include/ -isystem /tmp/angstrom-dev/cros=
-s/armv7a/lib/gcc/arm-angstrom-linux-uclibceabi/4.3.3/include-fixed -isystem=
- /tmp/angstrom-dev/cross/armv7a/lib/gcc/arm-angstrom-linux-uclibceabi/4.3.3=
-/include -DNDEBUG -D__USE_STDIO_FUTEXES__ -MT libpthread/nptl/sysdeps/unix/=
-sysv/linux/open.o -MD -MP -MF libpthread/nptl/sysdeps/unix/sysv/linux/.open=
-=2Eo.dep -D__ASSEMBLER__ -Wa,--noexecstack -D_LIBC_REENTRANT
->        libpthread/nptl/sysdeps/unix/sysv/linux/open.S: Assembler messages:
->        libpthread/nptl/sysdeps/unix/sysv/linux/open.S:8: Error: unknown p=
-seudo-op: `.cfi_sections'
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-binutils too old?
-qemuarm builds fine with 2.20.1, which version of binutils are you
-trying to use?
-See uclibc.org/FAQ#upstream_versions
-We support the last two official upstream versions of binutils/gcc, so
-that'd be binutils >=3D 2.20.latest and gcc-4.5.latest (i usually use both
-HEADs plus eventual fixups/tweaks myself).
-angstrom-2008.1.conf mentions 2.18 which is definitely way too old for
-uClibc master by now, fyi.
+On 17-07-10 10:35, Paul Menzel wrote:
+> Am Samstag, den 17.07.2010, 01:03 +0200 schrieb Koen Kooi:
+>> On 16-07-10 17:23, Khem Raj wrote:
+>>> On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
+>>> <paulepanter@users.sourceforge.net> wrote:
+> 
+>>>> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
+>>>>
+>>>>> I ran out of space and noticed
+>>>>>
+>>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
+>>>>>
+>>>>> is 8,1G big.
+>>>>>
+>>>>> Some of the executable files in
+>>>>>
+>>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroot-destdir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
+>>>>>
+>>>>> are 101 MB big.
+>>>
+>>> its most probably the -g3/-ggdb3 bloat.
+>>
+>> No, it's git not creating (hard)links but copies of the same app. Run an
+>> md5sum on the binaries, they will all match. I suggest you stop
+>> spreading FUD about -ggdb3, it is not being appriciated.
+> 
+> I do not know anything about the technical background. I can only report
+> that removing `-ggdb3` fixed it for me.
 
->        libpthread/nptl/sysdeps/unix/sysv/linux/close.S: Assembler message=
-s:
->        libpthread/nptl/sysdeps/unix/sysv/linux/close.S:9: Error: unknown =
-pseudo-op: `.cfi_sections'
->        make: *** [libpthread/nptl/sysdeps/unix/sysv/linux/open.o] Error 1
->        make: *** Waiting for unfinished jobs....
->        make: *** [libpthread/nptl/sysdeps/unix/sysv/linux/close.o] Error 1
->        libpthread/nptl/sysdeps/unix/sysv/linux/jmp-unwind.c:29: warning: =
-no previous prototype for '_longjmp_unwind'
->        FATAL: oe_runmake failed
->
->The full log is attached compressed. Uncompressed it was 1.7 MB big.
->
->
->Thanks,
->
->Paul
+Are you saying that removing -ggdb3 made git create proper (hard)links?
 
+regards.
 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-
-
->_______________________________________________
->Openembedded-devel mailing list
->Openembedded-devel@lists.openembedded.org
->http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+iD8DBQFMQZ7PMkyGM64RGpERAilSAJ0Xh7q/84Ls1fu9SiqPiX4FcOS+9ACfRG/L
+0sRjnr5z7xFxOVC7oSc1aG8=
+=MEay
+-----END PGP SIGNATURE-----
 
 
 
