@@ -1,45 +1,34 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oa2P5-0008Ui-OG
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 10:05:48 +0200
-Received: by bwz10 with SMTP id 10so1779071bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 01:05:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=hyOD9cmKCW1Wv4zEXinK7PE8tQ+gqUqXSuAtR/CKmFI=;
-	b=IIYYdtogl3RqY9sk4DtUQ+MWd/lRA+XXNyxLZn6diablh2TLSN9IjkY6RYUx5TEh/E
-	/VbkKCZEqn8HZVaubRKgE8jnx6E4SSiMODykHtFNaipLPXC7mcU8Re7kszBEyitXA1m2
-	dCDeB7sjP50B2HtLKGzsKiIt3K+kA+hwdfDVw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=oQBmKN7it0mV0rAB3ovraixGrKY8aR8N7mGMwFb5EPp7YSWrl4m6BWCG21BcWsvHN1
-	RpD8fOAm63KZvZ71+ecF5F5h6S5YV00QLqJCpl5AHESvuJum3GsH7Nvjg0Z0Mu6mMNox
-	jAJv0e9xGOrjfmJOtSu1ciY1gVLNn3gmSaWmg=
-MIME-Version: 1.0
-Received: by 10.204.163.7 with SMTP id y7mr1572369bkx.103.1279353941168; Sat, 
-	17 Jul 2010 01:05:41 -0700 (PDT)
-Received: by 10.204.66.68 with HTTP; Sat, 17 Jul 2010 01:05:41 -0700 (PDT)
-In-Reply-To: <20100717075639.GA1156@gmail.com>
-References: <1279226782-6124-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<20100717075639.GA1156@gmail.com>
-Date: Sat, 17 Jul 2010 10:05:41 +0200
-Message-ID: <AANLkTimHFFdqILpdd8z3Gb3456hQ0dZNQnBUlsZVkQ5r@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oa2rg-0002JM-P9 for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 10:35:21 +0200
+Received: from g229060051.adsl.alicedsl.de ([92.229.60.51]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oa2rS-0002sx-AG for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 08:35:06 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <i1qogv$i28$2@dough.gmane.org>
+References: <1279216536.3741.27.camel@mattotaupa>
+	<1279270987.4164.29.camel@mattotaupa>
+	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
+	<i1qogv$i28$2@dough.gmane.org>
+Date: Sat, 17 Jul 2010 10:35:02 +0200
+Message-ID: <1279355702.14848.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 1/3] glibc 2.9: cleaned up; patches only in local dir
+Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,32 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 08:05:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 17 Jul 2010 08:35:21 -0000
+X-Groupsio-MsgNum: 21083
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-114mPdjvqZj3d6AquYMb"
 
-2010/7/17 Khem Raj <raj.khem@gmail.com>
+--=-114mPdjvqZj3d6AquYMb
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On (15/07/10 22:46), Frans Meulenbroeks wrote:
-> > moved all patches to glibc-2.9
-> > removed references to other dirs.
->
->
-> Well you forgot to copy glibc-2.4/etc dir into glibc-2.9
-> this will render glibc 2.9 unbuildable.
->
+Am Samstag, den 17.07.2010, 01:03 +0200 schrieb Koen Kooi:
+> On 16-07-10 17:23, Khem Raj wrote:
+> > On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
+> > <paulepanter@users.sourceforge.net> wrote:
 
-Thanks for noticing this. Fixed.
-(apparently forgot the -r when copying the dir over)
+> >> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
+> >>
+> >>> I ran out of space and noticed
+> >>>
+> >>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
+> >>>
+> >>> is 8,1G big.
+> >>>
+> >>> Some of the executable files in
+> >>>
+> >>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroot-destd=
+ir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
+> >>>
+> >>> are 101 MB big.
+> >=20
+> > its most probably the -g3/-ggdb3 bloat.
+>=20
+> No, it's git not creating (hard)links but copies of the same app. Run an
+> md5sum on the binaries, they will all match. I suggest you stop
+> spreading FUD about -ggdb3, it is not being appriciated.
 
-Frans
+I do not know anything about the technical background. I can only report
+that removing `-ggdb3` fixed it for me.
 
->
-> Thx
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
+Thanks,
+
+Paul
+
+--=-114mPdjvqZj3d6AquYMb
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxBazYACgkQPX1aK2wOHVhxDQCdH0ScUspfoGi5BVhROxPwfj3L
+jrYAoIxAI/r4RA9+z/rAFa3L4TnSBcQA
+=scVA
+-----END PGP SIGNATURE-----
+
+--=-114mPdjvqZj3d6AquYMb--
