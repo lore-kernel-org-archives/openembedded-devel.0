@@ -1,30 +1,36 @@
-Received: from bay0-omc4-s20.bay0.hotmail.com ([65.54.190.222])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <salehusman@hotmail.com>) id 1OaAVA-0001y7-Q4
+	(envelope-from <philb@gnu.org>) id 1OaB1M-0007I1-6f
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 18:44:37 +0200
-Received: from BAY127-W10 ([65.54.190.199]) by bay0-omc4-s20.bay0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Sat, 17 Jul 2010 09:44:28 -0700
-Message-ID: <BAY127-W1085A1C64A947B08898FF8D8BD0@phx.gbl>
-X-Originating-IP: [203.82.49.5]
-From: saleh usman <salehusman@hotmail.com>
-To: Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-Date: Sat, 17 Jul 2010 22:44:29 +0600
-Importance: Normal
-MIME-Version: 1.0
-X-OriginalArrivalTime: 17 Jul 2010 16:44:28.0979 (UTC)
-	FILETIME=[52EB2030:01CB25CF]
-X-SA-Exim-Connect-IP: 65.54.190.222
-X-SA-Exim-Mail-From: salehusman@hotmail.com
+	Sat, 17 Jul 2010 19:17:52 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OaB1G-0006nq-Mf
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 18:17:46 +0100
+From: Phil Blundell <philb@gnu.org>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <i1s71i$d1j$2@dough.gmane.org>
+References: <1279216536.3741.27.camel@mattotaupa>
+	<1279270987.4164.29.camel@mattotaupa>
+	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
+	<i1qogv$i28$2@dough.gmane.org>
+	<AANLkTin6E1D5KENkaXn4lf4dF8hog7f-bnDmDXSWQn7L@mail.gmail.com>
+	<i1s71i$d1j$2@dough.gmane.org>
+Date: Sat, 17 Jul 2010 18:17:56 +0100
+Message-ID: <1279387076.21888.22.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Configuration of kernel image
+Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,18 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 16:44:37 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 17 Jul 2010 17:17:52 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+On Sat, 2010-07-17 at 14:17 +0200, Koen Kooi wrote:
+> And I was saying that the 8GB of git, if a bug in git, not with gdb3. I
+> know gdb3 makes unstripped executables bigger and don't deny that.
+> 
+> I do take offence with you saying that the root cause is -ggdb3, when
+> it's actually git being buggy. And as you have seen, instead of fixing
+> git, people are removing -ggdb3 :(
+
+It may well be true that the 8GB total folder size is due to a
+deficiency in git.  But, if the individual binaries are coming out at
+101MB, that's still an increase of something like 10000% compared to an
+equivalent build without debugging.
+
+Obviously it's up to angstrom to make its own policies, but I do wonder
+how many of its users actually find themselves debugging -native
+packages on a regular basis and, for those that do, how much benefit
+they are really gaining from -ggdb3 versus plain -g.
+
+p.
 
 
-I am bitbaking console-image for DM6446 to build a kernel image and root fi=
-le system. I using davinci kernel =2C which file exactly is used for the co=
-nfiguration of this  kernel iamge ?
 
-Saleh
- 		 	   		 =20
-_________________________________________________________________
-Hotmail: Free=2C trusted and rich email service.
-https://signup.live.com/signup.aspx?id=3D60969=
 
