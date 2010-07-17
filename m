@@ -1,36 +1,44 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OaB1M-0007I1-6f
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 19:17:52 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OaB1G-0006nq-Mf
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 18:17:46 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OaCNZ-0002q6-G7 for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 20:44:54 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OaCNU-0001AP-N8 for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 20:44:48 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 20:44:48 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 20:44:48 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i1s71i$d1j$2@dough.gmane.org>
-References: <1279216536.3741.27.camel@mattotaupa>
-	<1279270987.4164.29.camel@mattotaupa>
-	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
-	<i1qogv$i28$2@dough.gmane.org>
-	<AANLkTin6E1D5KENkaXn4lf4dF8hog7f-bnDmDXSWQn7L@mail.gmail.com>
-	<i1s71i$d1j$2@dough.gmane.org>
-Date: Sat, 17 Jul 2010 18:17:56 +0100
-Message-ID: <1279387076.21888.22.camel@lenovo.internal.reciva.com>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 17 Jul 2010 20:44:34 +0200
+Message-ID: <i1stmi$cms$1@dough.gmane.org>
+References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>	<i1qodg$i28$1@dough.gmane.org>
+	<20100717000603.GK23169@mx.loc>	<1279373863.21888.10.camel@lenovo.internal.reciva.com>
+	<AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
+Subject: Re: busybox mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,30 +52,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 17:17:52 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 17 Jul 2010 18:44:54 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Sat, 2010-07-17 at 14:17 +0200, Koen Kooi wrote:
-> And I was saying that the 8GB of git, if a bug in git, not with gdb3. I
-> know gdb3 makes unstripped executables bigger and don't deny that.
-> 
-> I do take offence with you saying that the root cause is -ggdb3, when
-> it's actually git being buggy. And as you have seen, instead of fixing
-> git, people are removing -ggdb3 :(
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It may well be true that the 8GB total folder size is due to a
-deficiency in git.  But, if the individual binaries are coming out at
-101MB, that's still an increase of something like 10000% compared to an
-equivalent build without debugging.
+On 17-07-10 17:09, Bernhard Reutner-Fischer wrote:
+> Baking micro-base (not -image) tries to build udev for me?
 
-Obviously it's up to angstrom to make its own policies, but I do wonder
-how many of its users actually find themselves debugging -native
-packages on a regular basis and, for those that do, how much benefit
-they are really gaining from -ggdb3 versus plain -g.
+And does it end up in your image? Bitbaking something also builds quilt
+for me, yet it doesn't show up in the image.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-p.
-
+iD8DBQFMQfoSMkyGM64RGpERAklNAKCn1Xv01ajA1KLNqmqiJZ7npEi9CwCgnh1v
+f8JqNkn0Vk3ASdabEZ/Mjvc=
+=Qhvx
+-----END PGP SIGNATURE-----
 
 
 
