@@ -1,53 +1,45 @@
-Received: from db3ehsobe006.messaging.microsoft.com ([213.199.154.144]
-	helo=DB3EHSOBE006.bigfish.com)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1Oa2H6-0002lj-Bl
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oa2P5-0008Ui-OG
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 09:57:42 +0200
-Received: from mail1-db3-R.bigfish.com (10.3.81.246) by
-	DB3EHSOBE006.bigfish.com (10.3.84.26) with Microsoft SMTP Server id
-	8.1.436.0; Sat, 17 Jul 2010 07:42:19 +0000
-Received: from mail1-db3 (localhost.localdomain [127.0.0.1])	by
-	mail1-db3-R.bigfish.com (Postfix) with ESMTP id 0B0D4DA05CE	for
-	<openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 07:42:19 +0000 (UTC)
-X-SpamScore: -6
-X-BigFish: VPS-6(zz14ffOzz1202hzzz32i2a8h67h)
-Received: from mail1-db3 (localhost.localdomain [127.0.0.1]) by mail1-db3
-	(MessageSwitch) id 1279352538936158_24362;
-	Sat, 17 Jul 2010 07:42:18 +0000 (UTC)
-Received: from DB3EHSMHS006.bigfish.com (unknown [10.3.81.247])	by
-	mail1-db3.bigfish.com (Postfix) with ESMTP id E01FC151004E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 07:42:18 +0000 (UTC)
-Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
-	DB3EHSMHS006.bigfish.com (10.3.87.106) with Microsoft SMTP Server (TLS)
-	id 14.0.482.44; Sat, 17 Jul 2010 07:42:18 +0000
-Received: from Kcinpunhjcms01.kpit.com ([172.10.16.121]) by
-	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
-	Sat, 17 Jul 2010 13:12:15 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Sat, 17 Jul 2010 13:11:56 +0530
-Thread-Topic: Could not find dbus-daemon in our root file system
-Thread-Index: AQHLJYOIsxMf5Pth8k+n7m0CigDS5A==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9455F8DE76@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Sat, 17 Jul 2010 10:05:48 +0200
+Received: by bwz10 with SMTP id 10so1779071bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 17 Jul 2010 01:05:42 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=hyOD9cmKCW1Wv4zEXinK7PE8tQ+gqUqXSuAtR/CKmFI=;
+	b=IIYYdtogl3RqY9sk4DtUQ+MWd/lRA+XXNyxLZn6diablh2TLSN9IjkY6RYUx5TEh/E
+	/VbkKCZEqn8HZVaubRKgE8jnx6E4SSiMODykHtFNaipLPXC7mcU8Re7kszBEyitXA1m2
+	dCDeB7sjP50B2HtLKGzsKiIt3K+kA+hwdfDVw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=oQBmKN7it0mV0rAB3ovraixGrKY8aR8N7mGMwFb5EPp7YSWrl4m6BWCG21BcWsvHN1
+	RpD8fOAm63KZvZ71+ecF5F5h6S5YV00QLqJCpl5AHESvuJum3GsH7Nvjg0Z0Mu6mMNox
+	jAJv0e9xGOrjfmJOtSu1ciY1gVLNn3gmSaWmg=
 MIME-Version: 1.0
-X-Reverse-DNS: Kcinpunhjhc01.kpit.com
-X-SA-Exim-Connect-IP: 213.199.154.144
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+Received: by 10.204.163.7 with SMTP id y7mr1572369bkx.103.1279353941168; Sat, 
+	17 Jul 2010 01:05:41 -0700 (PDT)
+Received: by 10.204.66.68 with HTTP; Sat, 17 Jul 2010 01:05:41 -0700 (PDT)
+In-Reply-To: <20100717075639.GA1156@gmail.com>
+References: <1279226782-6124-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<20100717075639.GA1156@gmail.com>
+Date: Sat, 17 Jul 2010 10:05:41 +0200
+Message-ID: <AANLkTimHFFdqILpdd8z3Gb3456hQ0dZNQnBUlsZVkQ5r@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Could not find dbus-daemon in our root file system
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 1/3] glibc 2.9: cleaned up; patches only in local dir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,27 +53,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 07:57:44 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 17 Jul 2010 08:05:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi All,
-   =
+2010/7/17 Khem Raj <raj.khem@gmail.com>
 
-    I am working on openembedded form past few days for Au1350 mipsel archi=
-tecture. I need to include
-dbus-daemon where should i include this?. I have included dbus-deamon-proxy=
-_git.bb in dbus in recipes and also
-in task-qte-toolcain-target.bb..I have build a root file system and toolcha=
-in from it.. But i could not find the dbus-deamon =
+> On (15/07/10 22:46), Frans Meulenbroeks wrote:
+> > moved all patches to glibc-2.9
+> > removed references to other dirs.
+>
+>
+> Well you forgot to copy glibc-2.4/etc dir into glibc-2.9
+> this will render glibc 2.9 unbuildable.
+>
 
-binary in our rfs.. Please suggest me if i am doing anything wrong..
+Thanks for noticing this. Fixed.
+(apparently forgot the -r when copying the dir over)
 
+Frans
 
-Regards,
-soumya =
-
-
-
+>
+> Thx
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
