@@ -1,52 +1,47 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OZuv4-0001y7-Vi
+	(envelope-from <raj.khem@gmail.com>) id 1OZwnp-0006PH-Mq
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 02:06:19 +0200
-Received: by bwz10 with SMTP id 10so1683277bwz.6
+	Sat, 17 Jul 2010 04:06:58 +0200
+Received: by iwn34 with SMTP id 34so2867858iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 16 Jul 2010 17:06:14 -0700 (PDT)
+	Fri, 16 Jul 2010 19:06:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=rX2rJSA5fwdmFiQL1HJ6VSI0/65apJiJx+MUC76V2wU=;
-	b=wXNeg85KiVkctb3Sx10+DMvX3cuoNvC2YIbjip1z0aAexQExNeNlHnkrryb7HT1NmT
-	82TCJjGxYFLADQLNOREXTSPKlRdbQK57dF9abeELpuwygQyKU3z28Xvfp1ZvmgcsMQn9
-	9LKUQ2pRw/k0gQNTgsYly6J+JvytTQs5KXETw=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Mfqr0NodXgC/Sx4vkiv9nOXbUtSchDtpmuVD3OoB87U=;
+	b=A7/QiAJbbbxLD7DbH55tAS42gybN7SMuyU78VI7SiXTpuoi/x0hBWzxUWaaucPS6Wy
+	SK2syd9xTqqgo9S+8WGAXarbChrmnNEuiXVPD+v0PFvvQs4bZn10s+S7kTcWBqkVIw3j
+	Gt12epNGOzjRN4gbS0VXSwArIGBxLH0ZJC9a4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=yCac4LIgxthJEKuB4mSsZ6WkYKJoqUSnG/gFWXbjS9HORw8Mxux2WcG2N7hMAN+oMv
-	3ZzHgVmIbSIlNBB+PzKRsjyS58x1dsmPhBkGzUUrXI02r0Pe6hKMdmWHN5bs+spYmhPL
-	iPc7ktZoKLCk7qaQDia/+H+RrQStGEp1yA2Co=
-Received: by 10.204.24.1 with SMTP id t1mr1465273bkb.178.1279325174867;
-	Fri, 16 Jul 2010 17:06:14 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id 24sm13190747bkr.7.2010.07.16.17.06.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 16 Jul 2010 17:06:14 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OZuup-00035h-Va; Sat, 17 Jul 2010 02:06:03 +0200
-Date: Sat, 17 Jul 2010 02:06:03 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100717000603.GK23169@mx.loc>
-References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
-	<i1qodg$i28$1@dough.gmane.org>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=hzYN0EtYYcnzuUhjzlom+5tf3s/TwbYshG9VG8WS8oAJKtbDltThwQ9AIo6nMu0g0e
+	UZ1qK4DEAUdzdWJMcgeM0sxxlxM3/e0EaOsjLTh5Eu0MZIIfK40LVk6Ebccq8W5mTmC7
+	FvrG17e0z2j8l7wbhhjtfvhpBBxQwYNv0XQmU=
+Received: by 10.231.39.134 with SMTP id g6mr1769583ibe.8.1279332412583; Fri, 
+	16 Jul 2010 19:06:52 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <i1qodg$i28$1@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Received: by 10.231.35.8 with HTTP; Fri, 16 Jul 2010 19:06:32 -0700 (PDT)
+In-Reply-To: <i1qogv$i28$2@dough.gmane.org>
+References: <1279216536.3741.27.camel@mattotaupa>
+	<1279270987.4164.29.camel@mattotaupa> 
+	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com> 
+	<i1qogv$i28$2@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 16 Jul 2010 19:06:32 -0700
+Message-ID: <AANLkTin6E1D5KENkaXn4lf4dF8hog7f-bnDmDXSWQn7L@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: busybox mdev
+Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB 	big, since some executables are 100 MB each
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,21 +55,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 00:06:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 17 Jul 2010 02:06:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Jul 17, 2010 at 01:02:08AM +0200, Koen Kooi wrote:
->-----BEGIN PGP SIGNED MESSAGE-----
->Hash: SHA1
+On Fri, Jul 16, 2010 at 4:03 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
+e:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
->On 16-07-10 16:51, George C. Huntington, III wrote:
->> how do i make a distribution use mdev instead of udev?
+> On 16-07-10 17:23, Khem Raj wrote:
+>> On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
+>> <paulepanter@users.sourceforge.net> wrote:
+>>> Dear OE folks,
+>>>
+>>>
+>>> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
+>>>
+>>>> I ran out of space and noticed
+>>>>
+>>>> =A0 =A0 /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
+>>>>
+>>>> is 8,1G big.
+>>>>
+>>>> Some of the executable files in
+>>>>
+>>>> =A0 =A0 /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroot-de=
+stdir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
+>>>>
+>>>> are 101 MB big.
+>>
+>> its most probably the -g3/-ggdb3 bloat.
 >
->You mean "how do I make my image use mdev instead of udev?", right?
+> No, it's git not creating (hard)links but copies of the same app. Run an
+> md5sum on the binaries, they will all match. I suggest you stop
+> spreading FUD about -ggdb3, it is not being appriciated.
 
-IMAGE_DEV_MANAGER = "busybox-mdev"
-in your local.conf (what's the reason micro-base uses udev instead of
-mdev, btw?)
+Hi Koen
+
+Its not FUD and I only speak of what I see with my eyes. I have data
+to prove it. Compile uclibc with ggdb3 and it ends up with 202M of
+shared library and without its only ~600K. (with gcc 4.4 and 4.5) I
+have similar experience with 4.3 but I dont
+have a build handy to see how big the binaries got.
+
+same for git native without -ggdb3 I get 1.4M of git executable and above 1=
+00M
+with -ggdb3 now if you copy 101M of binary 10 times it will highlight
+the problem
+even more.
+
+I will post complete result of a consol-image build with -ggdb3 and
+without it for reference and to clear FUD as well.
+
+I agree FUD should not be appreciated but facts should.
+
+Thanks
+-Khem
+
+
+
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMQOVfMkyGM64RGpERAjW7AKCwH5aLnQ5AbEC8PESZf7Ny7psLsQCgt1Ve
+> Z1rBOhQsiOxILfsDfyNLqrE=3D
+> =3DOQOZ
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
