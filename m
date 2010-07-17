@@ -1,46 +1,42 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from smtp-1.concepts.nl ([213.197.30.124])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1Oa91E-00019y-8y
+	(envelope-from <pieterg@gmx.com>) id 1Oa9VY-0007Xw-DE
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 17:10:02 +0200
-Received: by wye20 with SMTP id 20so3108951wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 08:09:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:received
-	:in-reply-to:references:date:message-id:subject:from:to:content-type;
-	bh=JjxUmcPgMoLSAUf30GmOZaibCG9wBsTvHThJLnhghSY=;
-	b=BlSn6D8cAUSrMzVIgqXQJVBBq2xz5wjlNEr74v+zHFUyPMpUANthqoY9r0Hv2/zChB
-	uZwLCkKHKNvJ/e6gTsJB4m6k7PzReFC9kmBds83E2pb1KdZzMdCDrsr9MSRPnD1nr7kL
-	3WPl+U+/yeoyvLEj2YTCdYW8ZCga1pDQzzn70=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=HeSpOmi8p2UKhBLAWJN7BDNbipjzRC6EyZ0EyznudUyfkciVGpyiSMBhSQXUW5yF2v
-	X31EXrruosDVyIbVWk8L+RXXt7kWOtZ5m1+4iBo5LtI9Y9ALnMEXfR73Ah+DSQ+kpMny
-	w89H0v7xgmzOUxdLgh5f/3WbQ6yy5SYLELP6g=
-MIME-Version: 1.0
-Received: by 10.227.137.130 with SMTP id w2mr2031555wbt.135.1279379369055; 
-	Sat, 17 Jul 2010 08:09:29 -0700 (PDT)
-Received: by 10.216.234.17 with HTTP; Sat, 17 Jul 2010 08:09:28 -0700 (PDT)
-Received: by 10.216.234.17 with HTTP; Sat, 17 Jul 2010 08:09:28 -0700 (PDT)
-In-Reply-To: <1279373863.21888.10.camel@lenovo.internal.reciva.com>
+	Sat, 17 Jul 2010 17:40:58 +0200
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-1.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>)
+	id 1Oa9VR-0005cc-6Q; Sat, 17 Jul 2010 17:40:49 +0200
+Received: from [10.9.0.12] (unknown [10.9.0.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 5E3CA6A0F3;
+	Sat, 17 Jul 2010 17:40:44 +0200 (CEST)
+From: pieterg <pieterg@gmx.com>
+To: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+Date: Sat, 17 Jul 2010 17:40:38 +0200
+User-Agent: KMail/1.9.9
 References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
-	<i1qodg$i28$1@dough.gmane.org> <20100717000603.GK23169@mx.loc>
 	<1279373863.21888.10.camel@lenovo.internal.reciva.com>
-Date: Sat, 17 Jul 2010 17:09:28 +0200
-Message-ID: <AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+	<AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
+In-Reply-To: <AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201007171740.39115.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1Oa9VR-0005cc-6Q
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+X-SA-Exim-Connect-IP: 213.197.30.124
+X-SA-Exim-Mail-From: pieterg@gmx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: openembedded-devel@lists.openembedded.org
 Subject: Re: busybox mdev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,31 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 15:10:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 17 Jul 2010 15:40:58 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Baking micro-base (not -image) tries to build udev for me?
+On Saturday 17 July 2010 17:09:28 Bernhard Reutner-Fischer wrote:
+> Baking micro-base (not -image) tries to build udev for me?
 
-On 17 Jul 2010 15:39, "Phil Blundell" <philb@gnu.org> wrote:
+Many packages (R)DEPEND on udev, it's very hard to build anything these days 
+without dragging in udev.
 
-On Sat, 2010-07-17 at 02:06 +0200, Bernhard Reutner-Fischer wrote:
-> (what's the reason micro-base u...
-Er, does it?  My copy of micro-base-image.bb says:
+What I usually do is add
 
-# Include minimum init and init scripts
+PROVIDES += "udev"
+RPROVIDES_${PN}-mdev += "udev"
 
-IMAGE_DEV_MANAGER = "busybox-mdev"
-IMAGE_INIT_MANAGER = "sysvinit sysvinit-pidof"
-IMAGE_INITSCRIPTS = ""
+to the busybox recipe, and just assume that whatever all those packages 
+claim they need udev for, is provided by mdev as well...
 
-If it's using udev then that is definitely a bug.
+And set a
 
-p.
+PREFERRED_PROVIDER_udev = "busybox"
 
+(I do that from the distro. People might argue this has to be an image 
+decision instead of a distro decision, but I prefer to set 
+IMAGE_DEV_MANAGER in the distro instead of the image..)
 
+Rgds, Pieter
 
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-deve...
 
