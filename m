@@ -1,41 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OaCNZ-0002q6-G7 for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 20:44:54 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OaCNU-0001AP-N8 for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 20:44:48 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 20:44:48 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 20:44:48 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1OaD4N-0002Rw-3V
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 21:29:12 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OaD4H-0007ww-CN
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 17 Jul 2010 20:29:01 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 17 Jul 2010 20:44:34 +0200
-Message-ID: <i1stmi$cms$1@dough.gmane.org>
-References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>	<i1qodg$i28$1@dough.gmane.org>
-	<20100717000603.GK23169@mx.loc>	<1279373863.21888.10.camel@lenovo.internal.reciva.com>
-	<AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
 In-Reply-To: <AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <AANLkTikZkRU-dCiBNlVdZ6XYsdBk3MjZBksexc6JtSAT@mail.gmail.com>
+	<i1qodg$i28$1@dough.gmane.org> <20100717000603.GK23169@mx.loc>
+	<1279373863.21888.10.camel@lenovo.internal.reciva.com>
+	<AANLkTimFuoxBKczjwGexQZAVGwEXqkHqfSbCf7xf7x90@mail.gmail.com>
+Date: Sat, 17 Jul 2010 20:29:11 +0100
+Message-ID: <1279394951.21888.31.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: busybox mdev
@@ -52,25 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 18:44:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 17 Jul 2010 19:29:13 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+I'm not familiar with that recipe and I don't seem to have a
+micro-base.bb in my tree.  But, if it's sucking in udev, it sounds like
+a bogus dependency somewhere.  You can use bitbake -g to find out where.
 
-On 17-07-10 17:09, Bernhard Reutner-Fischer wrote:
+p.
+
+On Sat, 2010-07-17 at 17:09 +0200, Bernhard Reutner-Fischer wrote:
 > Baking micro-base (not -image) tries to build udev for me?
+> 
+> On 17 Jul 2010 15:39, "Phil Blundell" <philb@gnu.org> wrote:
+> 
+> On Sat, 2010-07-17 at 02:06 +0200, Bernhard Reutner-Fischer wrote:
+> > (what's the reason micro-base u...
+> Er, does it?  My copy of micro-base-image.bb says:
+> 
+> # Include minimum init and init scripts
+> 
+> IMAGE_DEV_MANAGER = "busybox-mdev"
+> IMAGE_INIT_MANAGER = "sysvinit sysvinit-pidof"
+> IMAGE_INITSCRIPTS = ""
+> 
+> If it's using udev then that is definitely a bug.
+> 
+> p.
+> 
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-deve...
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-And does it end up in your image? Bitbaking something also builds quilt
-for me, yet it doesn't show up in the image.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMQfoSMkyGM64RGpERAklNAKCn1Xv01ajA1KLNqmqiJZ7npEi9CwCgnh1v
-f8JqNkn0Vk3ASdabEZ/Mjvc=
-=Qhvx
------END PGP SIGNATURE-----
 
 
 
