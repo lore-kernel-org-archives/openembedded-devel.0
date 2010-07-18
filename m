@@ -1,44 +1,43 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OaZpn-0003KM-IT
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OaaQb-0000nF-O4
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 21:47:36 +0200
-Received: by bwz10 with SMTP id 10so2213050bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 12:47:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=fJvepwAgR60IlcxdNbIP5NM3j/eV4WI7u0/eWp7Smm4=;
-	b=uqX0awd+1h0ThQE84tjn2m9hBqcy6Oi0QcbTxalc4rS6ATGVp8CZgX8j2HmKLmEXoB
-	LIx6l8EMgsBb6w+IRNlFWOiVAHoJ0UsUKbeBgAO7413ZCAmcBtqVx2MNPe/efwuD89GW
-	PaCtm0JQ+/UblHjwG2fv9npxCW6APQFE0D3EI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xGUe6IwsK7zrnS5q7YZlpLspXV27Z6Cic1OpP6sng64lEN5IRgSVcFuIR5YkZKGp+b
-	Cstu7axezatFsKxzNoEOZJDHZVu/ROGeVpTeMj6L6kHleuFEi2XiwJnO9U37tfrAJUw5
-	3xIWxDcTmjKAXVKjtR0JL8JwtuUmhde2BHRTo=
-MIME-Version: 1.0
-Received: by 10.204.131.200 with SMTP id y8mr3191702bks.107.1279482449475; 
-	Sun, 18 Jul 2010 12:47:29 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sun, 18 Jul 2010 12:47:29 -0700 (PDT)
-In-Reply-To: <1279290319.10837.1747.camel@rex>
-References: <1279290319.10837.1747.camel@rex>
-Date: Sun, 18 Jul 2010 21:47:29 +0200
-Message-ID: <AANLkTinYiD78udRbI9UYYpWceIKsIy0ZCY9V8GDFNN2t@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	Sun, 18 Jul 2010 22:25:40 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6IKPR83020056;
+	Sun, 18 Jul 2010 21:25:27 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 19464-10; Sun, 18 Jul 2010 21:25:23 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6IKPIxq020041
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Sun, 18 Jul 2010 21:25:18 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: Detlef Vollmann <dv@vollmann.ch>
+In-Reply-To: <4C4354EF.1080004@vollmann.ch>
+References: <1279290319.10837.1747.camel@rex> <4C42D208.2000909@vollmann.ch>
+	<AANLkTimGdT8mVtOVYiPZfeGhRvt02DyUiiKEtITzuyQT@mail.gmail.com>
+	<4C43255B.3000601@vollmann.ch>
+	<AANLkTilan1WpQ8ygbi4Dg3HLgRwyggP66X_-xlT1VB5r@mail.gmail.com>
+	<4C4354EF.1080004@vollmann.ch>
+Date: Sun, 18 Jul 2010 21:25:16 +0100
+Message-ID: <1279484716.10837.2467.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: A new bitbake extension: .bbappend files
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,71 +51,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 19:47:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 18 Jul 2010 20:25:40 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/7/16 Richard Purdie <rpurdie@rpsys.net>
+On Sun, 2010-07-18 at 21:24 +0200, Detlef Vollmann wrote:
+> On 07/18/10 18:06, Chris Larson wrote:
+> > On Sun, Jul 18, 2010 at 9:01 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
+> > 
+> >> On 07/18/10 17:13, Chris Larson wrote:
+> >>
+> >>> On Sun, Jul 18, 2010 at 3:06 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
+> >>>
+> >>>  On 07/16/10 16:25, Richard Purdie wrote:
+> >>>>  For the specific case of paths, I have wondered if there would be a way
+> >>>>> to leverage help from bitbake in creating a sane set of search paths but
+> >>>>> I'm still thinking about that. This extension is good enough in its own
+> >>>>> right in my opinion to be worthwhile.
+> >>>>>
+> >>>>>  This might be true, but solving the general path problem would be
+> >>>> much more useful.
+> >>>> If you want to add a new version of e.g. gcc in your ovlerlay,
+> >>>> you have to pull over the whole gcc directory with all its .inc classes.
+> >>>> This can't be solved by .bbapend, or am I missing something?
+> >>>>
+> >>>
+> >>> You can handle that today by adding to FILESPATHBASE.  All file:// files
+> >>> from SRC_URI are located using FILESPATH, which is constructed from
+> >>> FILESPATHBASE, FILESPATHPKG, and OVERRIDES.
+> >>>
+> >> AFAIK this doen't work for include/require :-(
+> > 
+> > 
+> > Don't copy the recipe at all, use .bbappend instead, and you won't need to
+> > have the .inc in a different collection from the recipe itself.
+> In that case I didn't understand .bbappend.
+> If I have a recipe gcc_4.3.2.bb in e.g. oe-stable/recipes/gcc, but in
+> that directory is no gcc_4.4.4.bb,  and I put gcc_4.4.4.bbappend into
+> myproject/recipes/gcc, that would probably given an error like
+> 'no .bb file to append'.
+> At least that's how I understood .bbappend.
+> 
+> > Alternatively, you can adjust BBPATH to also include the other collection
+> > based paths + os.path.dirname('${FILE_DIRNAME}') or so.
+> I'd be very interested to find a way so that a 'require gcc.inc' in
+> myproject/recipes/gcc_4.4.4.bb would find oe-stable/recipes/gcc/gcc.inc.
+> So far I failed.
 
-> Whilst our layers mechanism, is great it does have a drawback which has
-> bugged me for a while. If you have a recipe like pointercal which has
-> machine specific information in it and you have your new machine code in
-> a layer, how do you add a pointercal file for your machine?
->
-> Answer is you copy the whole pointercal recipe and files into your
-> layer, then add the single file for your machine. To me this is ugly,
-> ugly, ugly. We hate code duplication and as soon as you create two
-> copies of the same information, we've failed.
->
-> So how could we do this better? Somehow we need to say that a given
-> directory X has some information which should be merged with the
-> original recipe. I've thought through several different ways of doing
-> this and the best solution I found was "bbappend".
->
-> The idea is that if bitbake finds any X.bbappend files, when it loads
-> X.bb, it will also include these files after it parses the base .bb file
-> (but before finalise and the anonymous methods run). This means that
-> the .bbappend file can poke around and do whatever it might want to the
-> recipe to customise it.
->
-> I went ahead and tried it out as its quite simple to code this in
-> bitbake. I liked the result enough I've already merged this into Poky:
->
->
-> http://git.pokylinux.org/cgit.cgi/poky/commit/?id=63e6ba85677b8aa9f4cf9942a1fccbb8a8c72660
->
-> I'm proposing to push it to bitbake master if there are no serious
-> objections.
->
-> As an example use case, for the pointercal case above in another later
-> you could add a pointercal_0.0.bbappend file which contained something
-> like:
->
-> FILESPATH := "${FILESPATH}:${@os.path.dirname(bb.data.getVar('FILE', d,
-> True))}"
->
-> which would then cause the directory containing the bbappend file to be
-> searched for pointercal files.
->
-> There are of course many other uses this could be put to for creating
-> customised layers, its totally generic.
->
-> For the specific case of paths, I have wondered if there would be a way
-> to leverage help from bitbake in creating a sane set of search paths but
-> I'm still thinking about that. This extension is good enough in its own
-> right in my opinion to be worthwhile.
->
-> Cheers,
->
-> Richard
->
+Does something like "require recipes/gcc/gcc.inc" not just work already
+as it will search BBPATH...
 
-I've been pondering a litlte bit more about this.
-Will the .bbappend mechanism allow me to override a file in the original
-recipe?
-If so how?
+Cheers,
 
-Typical use case: I want to have a dedicated defconfig for my linux kernel.
-Alternate use case: a dedicated busybox configuration.
+Richard
 
-Frans.
+
+
+
+
 
