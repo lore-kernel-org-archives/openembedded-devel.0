@@ -1,48 +1,45 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OaOjW-0007JO-Ah
+	(envelope-from <esbenhaabendal@gmail.com>) id 1OaOzY-0001qi-EF
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 09:56:23 +0200
-Received: by fxm12 with SMTP id 12so1720892fxm.6
+	Sun, 18 Jul 2010 10:13:01 +0200
+Received: by fxm12 with SMTP id 12so1723576fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 00:56:15 -0700 (PDT)
+	Sun, 18 Jul 2010 01:12:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=wY0gzBmTJ3GoXHkNBVANFvLtOcUxD6OfXuNMPcU1/m8=;
-	b=k6HfZQqRFsHk73tYF9V/rAZBeJOae476ezUhffqfUSBnXz0FK6BKB9Fpc95DIYes+u
-	KygULHiEiqNkDuuCAYi2kJU1DcPo7hfZYCgHwqHbQ8N49Is4h2Ity0DU/hyZER0Ri/l8
-	Sbu6AXt/mY2NUIx52r+HZ10NiAHMVTfbdGfwQ=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=TnoLLyzKUuRa3nTj2zDXPdkp87PuR33ZKxyP2a/qLAY=;
+	b=t7djEmLHPKjWJF8lXyPyACZVgwQFym+E91V/7uUAS9lHNeWq8PCpxaWF6VPMC+QCqR
+	vSsjUhrIDISma2Yns3pb+fxmeOrivmEPDhkP1hWtXpJf2dCwf0F2LewpXm58suOt4+5G
+	/kVbgkunKTvp9oAJaqGtwm/gzdmOpDy5Umkzc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=BiMUoewh+TTW93PPvclrsw8yEKfvSS17puogTu8BG64//M/rjcDFeK5ELbh1fKkmNl
-	5yo3b4BUVKUWhxp1uAR696ifRlmKwyg19novGpkguvMfRxrTX/lhcmZ/JzpOV0Mz2MTg
-	iCZVcddmwTrk82SJVum9zvSWD+lYx+ad3bb60=
-Received: by 10.223.110.83 with SMTP id m19mr2343578fap.26.1279439774912;
-	Sun, 18 Jul 2010 00:56:14 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id r2sm1497716faq.28.2010.07.18.00.56.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 18 Jul 2010 00:56:13 -0700 (PDT)
-Date: Sun, 18 Jul 2010 09:56:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100718075638.GC16225@jama>
-References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=D1Ec+K12kkmzKP4aPtm4ZiUmOjLWeryIhyHIt2x/OtdYhwLHGOpV85+LIXaP7eFkPU
+	OEYU3+h11XunT5D6zQxPKRwKiqBs7rVNTHBPZNASMp+PQLD2lKd1uWRvHgAe2JYweC4v
+	k8QmRlsoZq0BvlbziCQ6PyFbAGYru69Q3DR0k=
 MIME-Version: 1.0
-In-Reply-To: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Received: by 10.239.161.203 with SMTP id i11mr233630hbd.116.1279440761239; 
+	Sun, 18 Jul 2010 01:12:41 -0700 (PDT)
+Received: by 10.239.181.207 with HTTP; Sun, 18 Jul 2010 01:12:41 -0700 (PDT)
+In-Reply-To: <AANLkTikr86Xy4gg7cgLFnKEIbGEyOCFbauzMSzMZxtG3@mail.gmail.com>
+References: <1279290319.10837.1747.camel@rex> <4C407EE5.6050802@cbnco.com>
+	<1279297456.10837.1942.camel@rex>
+	<AANLkTikr86Xy4gg7cgLFnKEIbGEyOCFbauzMSzMZxtG3@mail.gmail.com>
+Date: Sun, 18 Jul 2010 10:12:41 +0200
+Message-ID: <AANLkTimVmnNt95LtInA59x4kXjGTFbc4XkgzX1voX2Oq@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/3] Recipe for MuPDF
+Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,34 +53,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 07:56:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 18 Jul 2010 08:13:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Jun 09, 2010 at 11:32:59AM +0400, Dmitry Artamonow wrote:
-> Hi!
-> 
-> Here's recipe for MuPDF (X11 pdf viewer and toolkit) and its dependencies.
-> Viewer doesn't have any fancy GUI - just a plain window with rendered PDF,
-> but it's a good thing on small screens embedded devices usually have,
-> as no screen space is wasted on buttons, etc. Viewer is perfectly
-> controllable from keyboard (and keyboardless devices like PDAs usually
-> have some joystick which is enough to navigate through pages, and other
-> tasks can be performed from on-screen keyboard). Also pdf contents is
-> scrollable by finger/stylus/mouse. And last, but not least - viewer is
-> VERY fast, much faster than poppler/xpdf-based solutions. I never thought
-> I can get such a speed of PDF-rendering on ARM-based machine.
-> 
-> Build tested for armv4(h3600), armv5(hx4700), armv7(beagleboard), x86(qemux86)
-> Run tested on armv5 machine (hx4700)
+On Fri, Jul 16, 2010 at 6:53 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Looks like a fine idea to me (although I must say I was unaware of the amend
+> class, so I cannot really compare).
+>
+> An alternative I was thinking of was to have a mechanism in an overlayed
+> recipe that would allow you to include whatever version was in a lower
+> priority overlay, but your prososal looks also quite sound.
 
-Hi, is there PATCHv2 series with Khem's suggestions fixed?
+I have been thinking of this approach several times also.
+Something like
 
-Would be nice to have it in oe.dev.
+overlay_require pointercal_0.0.bb
 
-Thanks!
+But I like the bbappend approach also, so
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
++1
+
+from me also.  Simple is good :-)
+
+/Esben
 
 
