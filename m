@@ -1,41 +1,34 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OaRHb-0007sf-Pj
+	(envelope-from <martin.jansa@gmail.com>) id 1OaRVl-0002h2-BU
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 12:39:48 +0200
-Received: by fxm12 with SMTP id 12so1750130fxm.6
+	Sun, 18 Jul 2010 12:55:02 +0200
+Received: by fxm12 with SMTP id 12so1752799fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 03:39:34 -0700 (PDT)
+	Sun, 18 Jul 2010 03:54:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Y6OFuCZGWt5FwLXmApcFD4edcksdcZ/wW2kDcSPZQXc=;
-	b=owjqi1GZVrQclTqPpe8ErRg1y+Pw4fc2kcCYwbcSiGTALl+NSd+5zeCU+Gump0u7vJ
-	slHBzPnqMilJS93Q3SLiEJ5RfSaY64hMNRxxFCejFS2tmnRGO7AJte1cIXSGoFTjhl6H
-	JZz1vlzNnWj/Yq3dV+LBVu0TVfylcvgaSsF4E=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=/oF0xh2plmBdE8hQ3u7xv3kT/vqktNWGcyElL3IWL1U=;
+	b=EKezskmbQ4Ux71P0/1P6ArUm0Gsphq/1dOHXoH2MI4YQRxMLMftlG1noINIf8IF0WK
+	mpZzaTgz0hOxVMo6CqtiAMs2/nbHbGFjKxO40wqxvJKmWhQSWSSL0a5kFXfPBiiYyW1S
+	surz6uegtgL0Hm+BehYDDVUbjnSEZpjR6mc1w=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=dOjRUqn6pibgnR8U7jODdD59NJJ80Bt4sJGPRwVQRqMMBGjqk45Z70G37NAOE0wotj
-	Er0OGYmD2lD+W/XeEowSnLwPA/pqFol/qkFDlUmOa3n55FcIMelxbRcbSalMfus4gvLc
-	ZqMXe5h3tB7jAAN+n9dsb1241SYnU0ci9nTBI=
-Received: by 10.223.113.77 with SMTP id z13mr2448224fap.39.1279449574144;
-	Sun, 18 Jul 2010 03:39:34 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ZNE72HCIxHI8tAujwmaAJCNUxAVoKEl7ZehowrCo8vgIKUIXeB8/7adwIY6XArMHQG
+	V3wtl/VQImG41IhsuagQ7eLNkkwJa4plbXGQ2e5XHMfsQLzuu7yxyjVSe/VoLNMni/tc
+	rXCDflaAUZePedpPCO2OtI8TCOwFLHzXqshIQ=
+Received: by 10.223.117.20 with SMTP id o20mr2455831faq.55.1279450454133;
+	Sun, 18 Jul 2010 03:54:14 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b9sm1545286faq.7.2010.07.18.03.39.33
+	by mx.google.com with ESMTPS id m3sm1549573fai.41.2010.07.18.03.54.13
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 18 Jul 2010 03:39:33 -0700 (PDT)
-Date: Sun, 18 Jul 2010 12:40:00 +0200
+	Sun, 18 Jul 2010 03:54:13 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100718104000.GE16225@jama>
-References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
-	<1276068782-23257-4-git-send-email-mad_soft@inbox.ru>
-	<20100609133618.GC29724@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <20100609133618.GC29724@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Date: Sun, 18 Jul 2010 12:54:39 +0200
+Message-Id: <1279450479-11207-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.1.1
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -44,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] mupdf-0.6: new recipe
+Subject: [PATCH] angstrom-jalimo: fix openjdk-6-jre preferred version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,35 +51,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 10:39:48 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 18 Jul 2010 10:55:05 -0000
 
-On Wed, Jun 09, 2010 at 06:36:18AM -0700, Khem Raj wrote:
-> On (09/06/10 11:33), Dmitry Artamonow wrote:
-> > +do_configure() {
-> > +    cp ${WORKDIR}/Makerules ${S}/Makerules
-> > +
-> 
-> Why not create a patch for Makerules instread of creating a file and then
-> copying. It will help upgrades the patch will get refreshed for any changes
-> but this will overwrite those changes.
+---
+ conf/distro/include/angstrom-jalimo.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-This Makerules doesn't work very well for me
-
-    oe_runmake build/debug/cmapdump LD=${BUILD_CC} CC=${BUILD_CC}
-    oe_runmake build/debug/fontdump LD=${BUILD_CC} CC=${BUILD_CC}
-
-needs couple of -native stuff missing in DEPENDS and then pkg-config
-doesn't find ie freetype, because my host system doesn't have freetype
-etc.
-
-Any advice? (using pkg-config from armv4 staging dir returns right
-freetype for non-native build, but injects the same libs to
-cmapdump/fontdump which of course fails.
-
-Regards,
+diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
+index effde60..2aed63b 100644
+--- a/conf/distro/include/angstrom-jalimo.conf
++++ b/conf/distro/include/angstrom-jalimo.conf
+@@ -22,7 +22,7 @@ PREFERRED_VERSION_jamvm = "1.5.2"
+ PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
+ PREFERRED_PROVIDER_classpath = "classpath"
+ 
+-PREFERRED_VERSION_openjdk-6-jre = "6b18"
++PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8"
+ PREFERRED_VERSION_icedtea6-native = "1.7.3"
+ 
+ # Stage JAR files not into ARCH related dirs
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.1.1
+
 
 
