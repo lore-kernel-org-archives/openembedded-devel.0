@@ -1,39 +1,35 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mailrelay04.sunrise.ch ([194.158.229.47]
+	helo=smtp-be-02.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OaZ6q-0000I1-MB
+	(envelope-from <dv@vollmann.ch>) id 1OaZSv-0003jF-FB
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 21:01:10 +0200
-Received: from p5b0352a5.dip.t-dialin.net ([91.3.82.165] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OaZ6i-0003s0-BP by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 21:01:03 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OaZ6g-00016M-RV
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 21:00:58 +0200
-Date: Sun, 18 Jul 2010 21:00:58 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100718190058.GC1772@excalibur.local>
-References: <E1OaXxg-0006Jt-No@melo.openembedded.org>
-	<1279476715.25205.3.camel@saphir>
+	Sun, 18 Jul 2010 21:24:02 +0200
+Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140])
+	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
+	o6IJNg4J009351; Sun, 18 Jul 2010 21:23:42 +0200
+Message-ID: <4C4354EF.1080004@vollmann.ch>
+Date: Sun, 18 Jul 2010 21:24:31 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-In-Reply-To: <1279476715.25205.3.camel@saphir>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+To: Chris Larson <clarson@kergoth.com>
+References: <1279290319.10837.1747.camel@rex> <4C42D208.2000909@vollmann.ch>
+	<AANLkTimGdT8mVtOVYiPZfeGhRvt02DyUiiKEtITzuyQT@mail.gmail.com>
+	<4C43255B.3000601@vollmann.ch>
+	<AANLkTilan1WpQ8ygbi4Dg3HLgRwyggP66X_-xlT1VB5r@mail.gmail.com>
+In-Reply-To: <AANLkTilan1WpQ8ygbi4Dg3HLgRwyggP66X_-xlT1VB5r@mail.gmail.com>
+X-SA-Exim-Connect-IP: 194.158.229.47
+X-SA-Exim-Mail-From: dv@vollmann.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Stefan Schmidt : json-glib_0.10.4: Add json-glib
+Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
+	openembedded-devel@lists.openembedded.org
+Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,36 +43,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 19:01:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sun, 18 Jul 2010 19:24:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hello.
-
-On Sun, 2010-07-18 at 20:11, Michael 'Mickey' Lauer wrote:
-> Am Sonntag, den 18.07.2010, 17:47 +0000 schrieb git version control:
-> > Module: openembedded.git
-> > Branch: org.openembedded.dev
-> > Commit: 3b441d30742710dbd043938c21bf26d09240cd53
-> > URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=3b441d30742710dbd043938c21bf26d09240cd53
-> > 
-> > Author: Stefan Schmidt <stefan@buglabs.net>
-> > Date:   Sun Jul 18 19:40:46 2010 +0200
-> > 
-> > json-glib_0.10.4: Add json-glib
+On 07/18/10 18:06, Chris Larson wrote:
+> On Sun, Jul 18, 2010 at 9:01 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
 > 
-> Does this supersede the version in recipes/moblin?
+>> On 07/18/10 17:13, Chris Larson wrote:
+>>
+>>> On Sun, Jul 18, 2010 at 3:06 AM, Detlef Vollmann <dv@vollmann.ch> wrote:
+>>>
+>>>  On 07/16/10 16:25, Richard Purdie wrote:
+>>>>  For the specific case of paths, I have wondered if there would be a way
+>>>>> to leverage help from bitbake in creating a sane set of search paths but
+>>>>> I'm still thinking about that. This extension is good enough in its own
+>>>>> right in my opinion to be worthwhile.
+>>>>>
+>>>>>  This might be true, but solving the general path problem would be
+>>>> much more useful.
+>>>> If you want to add a new version of e.g. gcc in your ovlerlay,
+>>>> you have to pull over the whole gcc directory with all its .inc classes.
+>>>> This can't be solved by .bbapend, or am I missing something?
+>>>>
+>>>
+>>> You can handle that today by adding to FILESPATHBASE.  All file:// files
+>>> from SRC_URI are located using FILESPATH, which is constructed from
+>>> FILESPATHBASE, FILESPATHPKG, and OVERRIDES.
+>>>
+>> AFAIK this doen't work for include/require :-(
+> 
+> 
+> Don't copy the recipe at all, use .bbappend instead, and you won't need to
+> have the .inc in a different collection from the recipe itself.
+In that case I didn't understand .bbappend.
+If I have a recipe gcc_4.3.2.bb in e.g. oe-stable/recipes/gcc, but in
+that directory is no gcc_4.4.4.bb,  and I put gcc_4.4.4.bbappend into
+myproject/recipes/gcc, that would probably given an error like
+'no .bb file to append'.
+At least that's how I understood .bbappend.
 
-Now that I know about the recipe in moblin it looks like it supersedes it. For
-me it looks like it was moved from o-hand hosting to gnome.org. We need to make
-sure that they are identical and the moblin recipes are working with the newer
-version and move them as well.
+> Alternatively, you can adjust BBPATH to also include the other collection
+> based paths + os.path.dirname('${FILE_DIRNAME}') or so.
+I'd be very interested to find a way so that a 'require gcc.inc' in
+myproject/recipes/gcc_4.4.4.bb would find oe-stable/recipes/gcc/gcc.inc.
+So far I failed.
 
-> Anyhow it might be wise to put it into recipes/json/
-
-Done. Should avoid others missing them like me. Thanks for spotting.
-
-regards
-Stefan Schmidt
+   Detlef
 
 
