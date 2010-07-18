@@ -1,34 +1,36 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OaRVl-0002h2-BU
+	(envelope-from <martin.jansa@gmail.com>) id 1OaUKB-0005eO-2h
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 12:55:02 +0200
-Received: by fxm12 with SMTP id 12so1752799fxm.6
+	Sun, 18 Jul 2010 15:54:37 +0200
+Received: by fxm12 with SMTP id 12so1787058fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 03:54:14 -0700 (PDT)
+	Sun, 18 Jul 2010 06:54:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=/oF0xh2plmBdE8hQ3u7xv3kT/vqktNWGcyElL3IWL1U=;
-	b=EKezskmbQ4Ux71P0/1P6ArUm0Gsphq/1dOHXoH2MI4YQRxMLMftlG1noINIf8IF0WK
-	mpZzaTgz0hOxVMo6CqtiAMs2/nbHbGFjKxO40wqxvJKmWhQSWSSL0a5kFXfPBiiYyW1S
-	surz6uegtgL0Hm+BehYDDVUbjnSEZpjR6mc1w=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=jBUG9EMegUjqvVt1Wq3ILokduUhCUKULkQreQTlNZKE=;
+	b=FMi3ukaE4tFuXMfr4UXWyhvP5OeQrElHo6kxKxONOpJP9mRc+bao+KMvvgFmjK7Q/E
+	+yrAOUbu+Y58Ei4HxUuTzJ9QAHzBDWvxwEl+8ar/FUx6IsODHH2AoKSyZ9CDcxkIP8jh
+	tQ1JtHdHxmiQ1LL3U3YboCyghemRJgMD0LDJk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=ZNE72HCIxHI8tAujwmaAJCNUxAVoKEl7ZehowrCo8vgIKUIXeB8/7adwIY6XArMHQG
-	V3wtl/VQImG41IhsuagQ7eLNkkwJa4plbXGQ2e5XHMfsQLzuu7yxyjVSe/VoLNMni/tc
-	rXCDflaAUZePedpPCO2OtI8TCOwFLHzXqshIQ=
-Received: by 10.223.117.20 with SMTP id o20mr2455831faq.55.1279450454133;
-	Sun, 18 Jul 2010 03:54:14 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id m3sm1549573fai.41.2010.07.18.03.54.13
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 18 Jul 2010 03:54:13 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=puArerUVbOhRiUgqQu6qNx5DECg7Z5RMHsy4pATjQqqs1CQe1rmeA06uD58Uq+R2iC
+	+wAf/1rSCOyxK5IM/IckaUSgOsg5q2QCoCAx0mA/P7a7ZC+kgSSVVz5eW89fosZzxsfz
+	FXKD/HzUsByKkB6TXwd0vyMQATQvElzOKeblY=
+MIME-Version: 1.0
+Received: by 10.223.111.206 with SMTP id t14mr2586269fap.32.1279461267182; 
+	Sun, 18 Jul 2010 06:54:27 -0700 (PDT)
+Received: by 10.223.117.75 with HTTP; Sun, 18 Jul 2010 06:54:27 -0700 (PDT)
+In-Reply-To: <1279383976.25205.0.camel@saphir>
+References: <1279379004-15038-1-git-send-email-GNUtoo@no-log.org>
+	<1279379004-15038-2-git-send-email-GNUtoo@no-log.org>
+	<1279383976.25205.0.camel@saphir>
+Date: Sun, 18 Jul 2010 15:54:27 +0200
+Message-ID: <AANLkTimK3yG2qY11fmLkyVuTMhDOLuzokob7TxvNVR7C@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 18 Jul 2010 12:54:39 +0200
-Message-Id: <1279450479-11207-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.1.1
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -37,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] angstrom-jalimo: fix openjdk-6-jre preferred version
+Subject: Re: [PATCH] keymaps: remove initscripts dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,27 +53,13 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 10:55:05 -0000
+X-List-Received-Date: Sun, 18 Jul 2010 13:54:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
----
- conf/distro/include/angstrom-jalimo.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+On Sat, Jul 17, 2010 at 6:26 PM, Michael 'Mickey' Lauer
+<mickey@vanille-media.de> wrote:
+> Acked-by: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 
-diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
-index effde60..2aed63b 100644
---- a/conf/distro/include/angstrom-jalimo.conf
-+++ b/conf/distro/include/angstrom-jalimo.conf
-@@ -22,7 +22,7 @@ PREFERRED_VERSION_jamvm = "1.5.2"
- PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
- PREFERRED_PROVIDER_classpath = "classpath"
- 
--PREFERRED_VERSION_openjdk-6-jre = "6b18"
-+PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8"
- PREFERRED_VERSION_icedtea6-native = "1.7.3"
- 
- # Stage JAR files not into ARCH related dirs
--- 
-1.7.1.1
-
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
 
