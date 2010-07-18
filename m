@@ -1,45 +1,48 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OaELl-0002I6-Au
+	(envelope-from <martin.jansa@gmail.com>) id 1OaOjW-0007JO-Ah
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 17 Jul 2010 22:51:14 +0200
-Received: by gxk3 with SMTP id 3so1474168gxk.6
+	Sun, 18 Jul 2010 09:56:23 +0200
+Received: by fxm12 with SMTP id 12so1720892fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 17 Jul 2010 13:51:02 -0700 (PDT)
+	Sun, 18 Jul 2010 00:56:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=m/cMSDv/XfCKe12im3Qd+E4k8JZWtlsXzUzAeVVhSEc=;
-	b=CplOw9IqeBzlojVkCD6sydg9rGKyo7tnd4VoO3G7fHm/pGrAp4iS469+u2kFUDyBtU
-	CtsrvyyzCFqJ0BWE8JvfZ+4iqpfiWev3MjaCneeJh7PFmIBShwWjOXK5FDz5rMxVxUxf
-	iu2Hh1mc765oM1+RJ7LaNWJOGAv8H6SpD3nWM=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=wY0gzBmTJ3GoXHkNBVANFvLtOcUxD6OfXuNMPcU1/m8=;
+	b=k6HfZQqRFsHk73tYF9V/rAZBeJOae476ezUhffqfUSBnXz0FK6BKB9Fpc95DIYes+u
+	KygULHiEiqNkDuuCAYi2kJU1DcPo7hfZYCgHwqHbQ8N49Is4h2Ity0DU/hyZER0Ri/l8
+	Sbu6AXt/mY2NUIx52r+HZ10NiAHMVTfbdGfwQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=LoYepC9uVs820Trh95KoAi+CYdxNRcZppdgOKSFl/5LCh2zNfnKl5cxVcrFuXE9/O4
-	1Da7vEFYxGYyAeBlAPWVYRDvIeMNi5xgjf8Ix9Pst6vh/fDOEAHg/S7fEETsbVTgjd53
-	tcJfQFd7p/SpZnMMcyVXWglNHVLV0KuM7mCNY=
-MIME-Version: 1.0
-Received: by 10.100.141.3 with SMTP id o3mr2849664and.229.1279399861919; Sat, 
-	17 Jul 2010 13:51:01 -0700 (PDT)
-Received: by 10.100.127.11 with HTTP; Sat, 17 Jul 2010 13:51:01 -0700 (PDT)
-In-Reply-To: <4C417DA8.8050101@freyther.de>
-References: <AANLkTimwFjLODTbT6WEEhthhjwYMiMQ4nt5RtXniNgZb@mail.gmail.com>
-	<4C417DA8.8050101@freyther.de>
-Date: Sat, 17 Jul 2010 13:51:01 -0700
-Message-ID: <AANLkTilEVlCDZYYMFrjKI0xL2Yq-uOL1YED9CR5I2e5s@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=BiMUoewh+TTW93PPvclrsw8yEKfvSS17puogTu8BG64//M/rjcDFeK5ELbh1fKkmNl
+	5yo3b4BUVKUWhxp1uAR696ifRlmKwyg19novGpkguvMfRxrTX/lhcmZ/JzpOV0Mz2MTg
+	iCZVcddmwTrk82SJVum9zvSWD+lYx+ad3bb60=
+Received: by 10.223.110.83 with SMTP id m19mr2343578fap.26.1279439774912;
+	Sun, 18 Jul 2010 00:56:14 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id r2sm1497716faq.28.2010.07.18.00.56.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 18 Jul 2010 00:56:13 -0700 (PDT)
+Date: Sun, 18 Jul 2010 09:56:38 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+Message-ID: <20100718075638.GC16225@jama>
+References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+MIME-Version: 1.0
+In-Reply-To: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: spca5xx does not build
+Subject: Re: [PATCH 0/3] Recipe for MuPDF
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 17 Jul 2010 20:51:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 18 Jul 2010 07:56:23 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I just tried adding EXTRA_CFLAGS in the bb file and still errors in
-the same way. I also cleaned it to make sure before building.
+On Wed, Jun 09, 2010 at 11:32:59AM +0400, Dmitry Artamonow wrote:
+> Hi!
+> 
+> Here's recipe for MuPDF (X11 pdf viewer and toolkit) and its dependencies.
+> Viewer doesn't have any fancy GUI - just a plain window with rendered PDF,
+> but it's a good thing on small screens embedded devices usually have,
+> as no screen space is wasted on buttons, etc. Viewer is perfectly
+> controllable from keyboard (and keyboardless devices like PDAs usually
+> have some joystick which is enough to navigate through pages, and other
+> tasks can be performed from on-screen keyboard). Also pdf contents is
+> scrollable by finger/stylus/mouse. And last, but not least - viewer is
+> VERY fast, much faster than poppler/xpdf-based solutions. I never thought
+> I can get such a speed of PDF-rendering on ARM-based machine.
+> 
+> Build tested for armv4(h3600), armv5(hx4700), armv7(beagleboard), x86(qemux86)
+> Run tested on armv5 machine (hx4700)
 
-Also there is an error stating an implasibly old time stamp from 1964?
+Hi, is there PATCHv2 series with Khem's suggestions fixed?
 
+Would be nice to have it in oe.dev.
 
+Thanks!
 
-On Sat, Jul 17, 2010 at 2:53 AM, Holger Freyther <holger+oe@freyther.de> wr=
-ote:
->
->> | make[1]: Entering directory
->> `/home/vdubhack/overo-oe/tmp/sysroots/overo-angstrom-linux-gnueabi/kerne=
-l'
->> | scripts/Makefile.build:49: *** CFLAGS was changed in
->> "/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/spca5xx-2=
-0060501-r81/spca5xx-20060501/Makefile".
->> Fix it to use EXTRA_CFLAGS. =A0Stop.
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
