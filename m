@@ -1,32 +1,50 @@
-Received: from mailrelay3.sunrise.ch ([194.158.229.31]
-	helo=smtp-be-01.be08.sunrise.ch)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dv@vollmann.ch>) id 1OaQkR-00066N-MJ
+	(envelope-from <martin.jansa@gmail.com>) id 1OaRHb-0007sf-Pj
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 12:05:47 +0200
-Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
-	[212.98.43.140])
-	by smtp-be-01.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
-	o6IA5EDN013889; Sun, 18 Jul 2010 12:05:14 +0200
-Message-ID: <4C42D208.2000909@vollmann.ch>
-Date: Sun, 18 Jul 2010 12:06:00 +0200
-From: Detlef Vollmann <dv@vollmann.ch>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+	Sun, 18 Jul 2010 12:39:48 +0200
+Received: by fxm12 with SMTP id 12so1750130fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 18 Jul 2010 03:39:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Y6OFuCZGWt5FwLXmApcFD4edcksdcZ/wW2kDcSPZQXc=;
+	b=owjqi1GZVrQclTqPpe8ErRg1y+Pw4fc2kcCYwbcSiGTALl+NSd+5zeCU+Gump0u7vJ
+	slHBzPnqMilJS93Q3SLiEJ5RfSaY64hMNRxxFCejFS2tmnRGO7AJte1cIXSGoFTjhl6H
+	JZz1vlzNnWj/Yq3dV+LBVu0TVfylcvgaSsF4E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=dOjRUqn6pibgnR8U7jODdD59NJJ80Bt4sJGPRwVQRqMMBGjqk45Z70G37NAOE0wotj
+	Er0OGYmD2lD+W/XeEowSnLwPA/pqFol/qkFDlUmOa3n55FcIMelxbRcbSalMfus4gvLc
+	ZqMXe5h3tB7jAAN+n9dsb1241SYnU0ci9nTBI=
+Received: by 10.223.113.77 with SMTP id z13mr2448224fap.39.1279449574144;
+	Sun, 18 Jul 2010 03:39:34 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b9sm1545286faq.7.2010.07.18.03.39.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 18 Jul 2010 03:39:33 -0700 (PDT)
+Date: Sun, 18 Jul 2010 12:40:00 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100718104000.GE16225@jama>
+References: <1276068782-23257-1-git-send-email-mad_soft@inbox.ru>
+	<1276068782-23257-4-git-send-email-mad_soft@inbox.ru>
+	<20100609133618.GC29724@gmail.com>
 MIME-Version: 1.0
-To: Richard Purdie <rpurdie@rpsys.net>
-References: <1279290319.10837.1747.camel@rex>
-In-Reply-To: <1279290319.10837.1747.camel@rex>
-X-SA-Exim-Connect-IP: 194.158.229.31
-X-SA-Exim-Mail-From: dv@vollmann.ch
+In-Reply-To: <20100609133618.GC29724@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: Re: [PATCH 3/3] mupdf-0.6: new recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,23 +58,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 10:05:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 18 Jul 2010 10:39:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 07/16/10 16:25, Richard Purdie wrote:
-> For the specific case of paths, I have wondered if there would be a way
-> to leverage help from bitbake in creating a sane set of search paths but
-> I'm still thinking about that. This extension is good enough in its own
-> right in my opinion to be worthwhile.
-This might be true, but solving the general path problem would be
-much more useful.
-If you want to add a new version of e.g. gcc in your ovlerlay,
-you have to pull over the whole gcc directory with all its .inc classes.
-This can't be solved by .bbapend, or am I missing something?
+On Wed, Jun 09, 2010 at 06:36:18AM -0700, Khem Raj wrote:
+> On (09/06/10 11:33), Dmitry Artamonow wrote:
+> > +do_configure() {
+> > +    cp ${WORKDIR}/Makerules ${S}/Makerules
+> > +
+> 
+> Why not create a patch for Makerules instread of creating a file and then
+> copying. It will help upgrades the patch will get refreshed for any changes
+> but this will overwrite those changes.
+
+This Makerules doesn't work very well for me
+
+    oe_runmake build/debug/cmapdump LD=${BUILD_CC} CC=${BUILD_CC}
+    oe_runmake build/debug/fontdump LD=${BUILD_CC} CC=${BUILD_CC}
+
+needs couple of -native stuff missing in DEPENDS and then pkg-config
+doesn't find ie freetype, because my host system doesn't have freetype
+etc.
+
+Any advice? (using pkg-config from armv4 staging dir returns right
+freetype for non-native build, but injects the same libs to
+cmapdump/fontdump which of course fails.
 
 Regards,
-   Detlef
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
