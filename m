@@ -1,40 +1,45 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OayZg-000087-J4
+	(envelope-from <raj.khem@gmail.com>) id 1Oaz2m-0007iz-1M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 00:12:37 +0200
-Received: by gwj22 with SMTP id 22so2427040gwj.6
+	Tue, 20 Jul 2010 00:42:41 +0200
+Received: by iwn34 with SMTP id 34so5201199iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jul 2010 15:12:26 -0700 (PDT)
+	Mon, 19 Jul 2010 15:42:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=yVFYtMqTmT4Of7O/fsHbFy/osfhLFYGz/2cHJHYekOI=;
-	b=dTCEudvxiv93i5kLfFFES0GNcwENKII5cRyo3Ex93BhDs/qeL7iY0sZTg5hokX/+R9
-	tyut0uKR5yrKElcE7xqQ7DUSt0Yun2QSdhOgEGLbB9aiCUgThdJg2HxjM/8WIYRhlSwm
-	QpPVRtEMNboyr1nAlZ+2xkyjvhf30m2xBn7Is=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=OmimZ6yRay18GOQcGPp3xrtKs6mL/y3BziqwiEn7XX4=;
+	b=C+FtmOK65zxyYax6KrAUmBfuxI4oMzfkbu/dohbKlMKVET/aWOAgbuXJjck1SZoEyv
+	Gvyyjpv2gFaVNrKHe/lqX81wf93Q22WKceLjBKy/xxJvqbMPzlqhmgNXiwtgB8Nb46kk
+	vWMiRxeW8TR4DySTgJTUDQxiM9QXxJzCkYPgs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=f/Sv1YuO5pdG1lN/cG1rIa54cuGyedyc/shwcJFP3yeS12abWM7ZjgJWPEd55IFJFd
-	bTQHzCa5P5fIe2v+XAQ/rV6LWy6QtM+Uo7lQdwUMIBRKRQw5W41fk1Vp6mxUtzwytc17
-	/7XUSLafxtlQesi5V8qJVhlytNGyozwzHkzmc=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=MiW9Y2rqVdNzhuuq/emnCGF65lGKnSy9DNLBgBlS3WwFyxj7Ou5v5ourADEL4b1k/J
+	A1toBK9Y3CqSO/boxrw5MLirXDAPJNmFDX/QCVTx5HhvQ+qYicw6uPLUq1WpfR0JGgrP
+	z0ZY78oQNHuk16fVKaVsfrHK4ocezdjUJK8kk=
+Received: by 10.231.170.3 with SMTP id b3mr6672058ibz.122.1279579352339; Mon, 
+	19 Jul 2010 15:42:32 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.54.19 with SMTP id c19mr5608292ana.71.1279577546232; Mon, 
-	19 Jul 2010 15:12:26 -0700 (PDT)
-Received: by 10.100.42.4 with HTTP; Mon, 19 Jul 2010 15:12:26 -0700 (PDT)
-Date: Mon, 19 Jul 2010 15:12:26 -0700
-Message-ID: <AANLkTimlxdwUxIog99H_Er_QL-tzZ5Ntd9kTyT8BcG-Y@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+Received: by 10.231.35.8 with HTTP; Mon, 19 Jul 2010 15:42:12 -0700 (PDT)
+In-Reply-To: <1279570852.21888.123.camel@lenovo.internal.reciva.com>
+References: <1279527857-12295-1-git-send-email-raj.khem@gmail.com> 
+	<1279570852.21888.123.camel@lenovo.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 19 Jul 2010 15:42:12 -0700
+Message-ID: <AANLkTikFGZQaBsLm85m-yYbRnQ1UcpTjpwDTaiOAmhBw@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: GPSBABLE -- fixed recipe
+Subject: Re: [PATCH] sane-toolchain.inc: THUMB_INTERWORK should not be defined for armv4 and add armv4 to ARM EABI supporting architectures.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jul 2010 22:12:38 -0000
+X-List-Received-Date: Mon, 19 Jul 2010 22:42:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-It had bad checksums here is the fixed file, hope this helps
+On Mon, Jul 19, 2010 at 1:20 PM, Phil Blundell <philb@gnu.org> wrote:
+> On Mon, 2010-07-19 at 01:24 -0700, Khem Raj wrote:
+>> =A0 =A0 =A0 import bb
+>> =A0 =A0 =A0 arm_eabi_supporting_arches =3D "armv6 armv6-novfp \
+>> - =A0 =A0 armv5te iwmmxt armv7a armv7 armv5teb armv4t"
+>> + =A0 =A0 armv5te iwmmxt armv7a armv7 armv5teb armv4t armv4"
+>> =A0 =A0 =A0 ppc_spe_supporting_arches =3D "ppce500v2 ppce500"
+>
+> I guess it would make more sense to enumerate here the ARM arches which
+> don't support eabi. =A0All future ones will, presumably, so it's only
+> ARMv3 and older which don't. =A0That way we won't have to keep adjusting
+> this list for every new architecture variant that someone thinks up.
 
+yes thats good idea.
 
-SECTION = "console/utils"
-DESCRIPTION = "GPS data converter"
-DEPENDS = "expat virtual/libusb0"
-HOMEPAGE = "http://www.gpsbabel.org/"
-LICENSE = "GPL"
-
-SRC_URI = "http://www.gpsbabel.org/plan9.php?dl=gpsbabel-${PV}.tar.gz \
-           file://autotools.patch"
-
-inherit autotools pkgconfig
-
-SRC_URI[md5sum] = "d41d8cd98f00b204e9800998ecf8427e"
-SRC_URI[sha256sum] =
-"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
