@@ -1,27 +1,36 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1OaoOb-0001vB-9z
+	(envelope-from <philb@gnu.org>) id 1OarIi-0006NX-43
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Jul 2010 13:20:30 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id 832D21414B; Mon, 19 Jul 2010 13:10:40 +0200 (CEST)
-Date: Mon, 19 Jul 2010 13:10:40 +0200
-From: Marc Olzheim <zlo@zlo.nu>
+	Mon, 19 Jul 2010 16:26:37 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OarIa-00084h-M9
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 15:26:28 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OarIa-0002jI-E9
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 15:26:28 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100719111040.GA5607@zlo.nu>
-References: <1279531554-31896-1-git-send-email-zlo@zlo.nu>
-MIME-Version: 1.0
-In-Reply-To: <1279531554-31896-1-git-send-email-zlo@zlo.nu>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+In-Reply-To: <1279527857-12295-1-git-send-email-raj.khem@gmail.com>
+References: <1279527857-12295-1-git-send-email-raj.khem@gmail.com>
+Date: Mon, 19 Jul 2010 15:26:27 +0100
+Message-ID: <1279549587.2345.2154.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libpng: Add add 1.2.44, new version and new native version importing several security fixes.
+Subject: Re: [PATCH] sane-toolchain.inc: THUMB_INTERWORK should not be defined for armv4 and add armv4 to ARM EABI supporting architectures.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,38 +44,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jul 2010 11:20:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 19 Jul 2010 14:26:37 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 19, 2010 at 11:25:54AM +0200, Marc Olzheim wrote:
-> From: Marc Olzheim <marc@iphion.nl>
-> 
-> ---
->  recipes/libpng/libpng-native_1.2.44.bb |    6 ++++++
->  recipes/libpng/libpng_1.2.44.bb        |    8 ++++++++
->  2 files changed, 14 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/libpng/libpng-native_1.2.44.bb
->  create mode 100644 recipes/libpng/libpng_1.2.44.bb
-> 
-> diff --git a/recipes/libpng/libpng-native_1.2.44.bb b/recipes/libpng/libpng-native_1.2.44.bb
-> new file mode 100644
-> index 0000000..3c36b52
-> --- /dev/null
-> +++ b/recipes/libpng/libpng-native_1.2.44.bb
-> @@ -0,0 +1,6 @@
-> +require libpng_${PV}.bb
-> +require libpng-native.inc
+On Mon, 2010-07-19 at 01:24 -0700, Khem Raj wrote:
+> -THUMB_INTERWORK = "yes"
+> +# armv4 does not have thumb instruction set therefore no interworking instructions
+> +# so if machine is based on armv4 we dont have choice.
 > +
-> +PR = "r1"
-> +
-> +FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libpng-${PV}"
-> diff --git a/recipes/libpng/libpng_1.2.44.bb b/recipes/libpng/libpng_1.2.44.bb
-> new file mode 100644
-> index 0000000..e607f76
+> +THUMB_INTERWORK_armv4 = "no"
+> +THUMB_INTERWORK ?= "yes"
 
-Hmm, I should have stripped the PR = "r1" line of course...
+I don't think this is necessary or desirable.  If you are building for
+v4 then the BX instructions ought to be fixed up during final link.  Is
+there a particular problem that you're trying to solve?
 
-Marc
+p.
+
+
 
 
