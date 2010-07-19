@@ -1,30 +1,32 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oamn1-00033I-Mf for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Jul 2010 11:37:37 +0200
+	id 1OamuP-0001pf-NX for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 11:45:14 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oammv-0004IP-82 for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Jul 2010 11:37:29 +0200
+	id 1OamuG-00070A-7n for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 11:45:04 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jul 2010 11:37:29 +0200
+	Mon, 19 Jul 2010 11:45:04 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jul 2010 11:37:29 +0200
+	Mon, 19 Jul 2010 11:45:04 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 19 Jul 2010 11:37:19 +0200
-Message-ID: <i216cf$pju$1@dough.gmane.org>
+Date: Mon, 19 Jul 2010 11:39:59 +0200
+Message-ID: <i216hf$pju$2@dough.gmane.org>
+References: <1279450479-11207-1-git-send-email-Martin.Jansa@gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <1279450479-11207-1-git-send-email-Martin.Jansa@gmail.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -34,7 +36,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Openjdk shark and cacao VMs not working
+Subject: Re: [PATCH] angstrom-jalimo: fix openjdk-6-jre preferred version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,69 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jul 2010 09:37:37 -0000
+X-List-Received-Date: Mon, 19 Jul 2010 09:45:14 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-Hi,
+Acked-by: Koen Kooi <k-kooi@ti.com>
 
-I built openjdk completely from scratch and installed it:
+On 18-07-10 12:54, Martin Jansa wrote:
+> ---
+>  conf/distro/include/angstrom-jalimo.conf |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+> 
+> diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include/angstrom-jalimo.conf
+> index effde60..2aed63b 100644
+> --- a/conf/distro/include/angstrom-jalimo.conf
+> +++ b/conf/distro/include/angstrom-jalimo.conf
+> @@ -22,7 +22,7 @@ PREFERRED_VERSION_jamvm = "1.5.2"
+>  PREFERRED_PROVIDER_swt3.4-gtk = "swt3.4-gtk"
+>  PREFERRED_PROVIDER_classpath = "classpath"
+>  
+> -PREFERRED_VERSION_openjdk-6-jre = "6b18"
+> +PREFERRED_VERSION_openjdk-6-jre = "6b18-1.8"
+>  PREFERRED_VERSION_icedtea6-native = "1.7.3"
+>  
+>  # Stage JAR files not into ARCH related dirs
 
-opkg install openjdk-6-common openjdk-6-demo openjdk-6-java
-openjdk-6-jdk openjdk-6-jre
-
-opkg install openjdk-6-vm-shark openjdk-6-vm-cacao
-
-That needs to be done in 2 opkg commands since -cacao and -shark edit a
-jvm.cfg in their postinst which isn't in their Depends: line. Trivial to
-fix, need to sit down and see in which package it resides.
-
-So:
-
-root@beagleboard-C4:~# java -zero Linpack # [1]
-Mflops/s: 9.537  Time: 0.07 secs  Norm Res: 1.43  Precision:
-2.220446049250313E-16
-
-So far, so good. Better than the 3 Mflops jamvm+classpath gets, but not
-as nice as the 16Mflops cacao+classpath can do.
-
-So lets try some other VMs:
-
-root@beagleboard-C4:~# java -shark Linpack
-ARMCodeEmitter::emitPseudoInstruction
-UNREACHABLE executed at
-/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/llvm2.7-2.7-r6/llvm-2.7/lib/Target/ARM/ARMCodeEmitter.cpp:554!
-Stack dump:
-0.      Running pass 'ARM Machine Code Emitter' on function
-'@"Linpack::daxpy"'
-Aborted
-
-OK, Xerxes blogged about debugging such issues, but the summer intern is
-too busy with other stuff currently.
-
-root@beagleboard-C4:~# java -cacao Linpack
-java: avl.c:348: avl_find: Assertion `tree' failed.
-Aborted
-
-No idea on that.
-
-Do the java mages have some idea on how to get shark and cacao working well?
-
-regards,
-
-Koen
-
-[1] http://www.netlib.org/benchmark/linpackjava/LinpackJava.zip compiled
-with javac on osx
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMRBzPMkyGM64RGpERAiEJAJ4yeJVBcvuwHzVbS++Zt5iI9Rp11QCgm3aB
-Xqj79L9E1QpIz19c0QSxh6o=
-=OBoo
+iD8DBQFMRB1vMkyGM64RGpERAtP2AKCJr9A1Vtq2RDZcK730k1taZWfHdgCfYa9v
+xBLzSxAQze2M3Zf32zwlwE8=
+=AvQZ
 -----END PGP SIGNATURE-----
 
 
