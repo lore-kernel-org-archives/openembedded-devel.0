@@ -1,41 +1,25 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OallW-0005oC-IW for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Jul 2010 10:32:00 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet1.eads.net with ESMTP; 19 Jul 2010 10:22:41 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Mon, 19 Jul 2010 10:31:40 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 19 Jul 2010 10:31:39 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Mon, 19 Jul 2010 10:31:21 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B52D1@deimsg40.de.net.world>
-In-Reply-To: <4C4354EF.1080004@vollmann.ch>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [Bitbake-dev]  A new bitbake extension: .bbappend files
-Thread-Index: Acsmrxs3N9gGEQ7ZRa+YkvNJaZOJ0AAbMZfg
-References: <1279290319.10837.1747.camel@rex>
-	<4C42D208.2000909@vollmann.ch><AANLkTimGdT8mVtOVYiPZfeGhRvt02DyUiiKEtITzuyQT@mail.gmail.com><4C43255B.3000601@vollmann.ch><AANLkTilan1WpQ8ygbi4Dg3HLgRwyggP66X_-xlT1VB5r@mail.gmail.com>
-	<4C4354EF.1080004@vollmann.ch>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 19 Jul 2010 08:31:39.0346 (UTC)
-	FILETIME=[CEDEB320:01CB271C]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
+	id 1OameM-0004bq-2I for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 11:28:39 +0200
+Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
+	by mzh.zlo.nu (Postfix) with ESMTP id 76CF01402C
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Jul 2010 11:25:54 +0200 (CEST)
+From: Marc Olzheim <zlo@zlo.nu>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 19 Jul 2010 11:25:54 +0200
+Message-Id: <1279531554-31896-1-git-send-email-zlo@zlo.nu>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: zlo@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: [PATCH] libpng: Add add 1.2.44, new version and new native version importing several security fixes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,24 +33,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jul 2010 08:32:00 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 19 Jul 2010 09:28:39 -0000
 
->I'd be very interested to find a way so that a 'require gcc.inc' in
->myproject/recipes/gcc_4.4.4.bb would find
-oe-stable/recipes/gcc/gcc.inc.
->So far I failed.
+From: Marc Olzheim <marc@iphion.nl>
 
-Try to add the relative path of the .inc to your require statement:
-'require recipes/gcc/gcc.inc'
-(see also the arago overlays as example) my overlays are working in this
-way.
-The problem was, all require statements should be done in this way, so
-the building of overlays would be much easier.
+---
+ recipes/libpng/libpng-native_1.2.44.bb |    6 ++++++
+ recipes/libpng/libpng_1.2.44.bb        |    8 ++++++++
+ 2 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/libpng/libpng-native_1.2.44.bb
+ create mode 100644 recipes/libpng/libpng_1.2.44.bb
 
-Wolfgang
+diff --git a/recipes/libpng/libpng-native_1.2.44.bb b/recipes/libpng/libpng-native_1.2.44.bb
+new file mode 100644
+index 0000000..3c36b52
+--- /dev/null
++++ b/recipes/libpng/libpng-native_1.2.44.bb
+@@ -0,0 +1,6 @@
++require libpng_${PV}.bb
++require libpng-native.inc
++
++PR = "r1"
++
++FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libpng-${PV}"
+diff --git a/recipes/libpng/libpng_1.2.44.bb b/recipes/libpng/libpng_1.2.44.bb
+new file mode 100644
+index 0000000..e607f76
+--- /dev/null
++++ b/recipes/libpng/libpng_1.2.44.bb
+@@ -0,0 +1,8 @@
++require libpng.inc
++
++PR = "${INC_PR}.0"
++
++SRC_URI += "file://makefile_fix.patch"
++
++SRC_URI[tarball.md5sum] = "e3ac7879d62ad166a6f0c7441390d12b"
++SRC_URI[tarball.sha256sum] = "b9ab20f1c2c3bf6c4448fd9bd8a4a8905b918114d5fada56c97bb758a17b7215"
+-- 
+1.7.0.4
+
 
 
