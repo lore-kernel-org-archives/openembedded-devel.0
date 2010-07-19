@@ -1,57 +1,38 @@
-Received: from mailgw1.fjfi.cvut.cz ([147.32.9.3])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1OabLr-0003va-8Y
+Received: from na3sys009aog105.obsmtp.com ([74.125.149.75])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <douglas.royds@taitradio.com>) id 1Oaj42-0008EQ-Vg
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 18 Jul 2010 23:24:48 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 0740443D00
+	Mon, 19 Jul 2010 07:39:13 +0200
+Received: from source ([74.125.83.176]) by na3sys009aob105.postini.com
+	([74.125.148.12]) with SMTP
+	ID DSNKTEPk58wyUn7ukoufxxwTVNrWABbyH3+L@postini.com;
+	Sun, 18 Jul 2010 22:38:48 PDT
+Received: by mail-pv0-f176.google.com with SMTP id 21so3048091pvc.35
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 23:24:41 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 0740443D00
-DKIM-Signature: v=1; a=rsa-sha1; c=simple/simple; d=fjfi.cvut.cz; s=beta512;
-	t=1279488281; i=@fjfi.cvut.cz; bh=54gk0i7KkFcTPvtLenU+RaEzx6k=;
-	h=Date:From:To:Subject:Message-ID:MIME-Version:Content-Type;
-	b=c5X5AX1FsduVoq3kE8T/D8YpPwAB/P5ftSvFDTtH9toO1gIiScLNbR5gBLPbGKMbw
-	ARRKhO+V6aFcTICEzRY0w==
-X-CTU-FNSPE-Virus-Scanned: amavisd-new at fjfi.cvut.cz
-X-CTU-FNSPE: this_is_mailgw_for_ctu_fnspe_header
-X-CTU-FNSPE-Helo: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Client-Address: 147.32.5.111
-X-CTU-FNSPE-Client-Name: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Sender: zub@linux.fjfi.cvut.cz
-X-CTU-FNSPE-Recip: openembedded-devel@lists.openembedded.org
-Received: from mailgw1.fjfi.cvut.cz ([127.0.0.1])
-	by localhost (mailgw1.fjfi.cvut.cz [127.0.0.1]) (amavisd-new,
-	port 10026) with ESMTP id 1QrTXrXkRKTl
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 23:24:38 +0200 (CEST)
-Received: from linux.fjfi.cvut.cz (linux.fjfi.cvut.cz [147.32.5.111])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id AE62D43CB7
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 23:24:38 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz AE62D43CB7
-X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz AE62D43CB7
-Received: by linux.fjfi.cvut.cz (Postfix, from userid 1001)
-	id 8243946774; Sun, 18 Jul 2010 23:24:38 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by linux.fjfi.cvut.cz (Postfix) with ESMTP id 6835E46773
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 18 Jul 2010 23:24:38 +0200 (CEST)
-Date: Sun, 18 Jul 2010 23:24:38 +0200 (CEST)
-From: David Kozub <zub@linux.fjfi.cvut.cz>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <alpine.LRH.2.00.1007182316140.8873@linux.fjfi.cvut.cz>
-User-Agent: Alpine 2.00 (LRH 1167 2008-08-23)
+	Sun, 18 Jul 2010 22:38:47 -0700 (PDT)
+Received: by 10.114.183.11 with SMTP id g11mr5939608waf.33.1279497729394;
+	Sun, 18 Jul 2010 17:02:09 -0700 (PDT)
+Received: from [172.25.113.27] ([202.37.96.126])
+	by mx.google.com with ESMTPS id c16sm16283249rvn.1.2010.07.18.17.02.06
+	(version=SSLv3 cipher=RC4-MD5); Sun, 18 Jul 2010 17:02:06 -0700 (PDT)
+Message-ID: <4C4395FD.20604@taitradio.com>
+Date: Mon, 19 Jul 2010 12:02:05 +1200
+From: Douglas Royds <douglas.royds@taitradio.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.10) Gecko/20100528 Thunderbird/3.0.5
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 147.32.9.3
-X-SA-Exim-Mail-From: zub@linux.fjfi.cvut.cz
+To: openembedded-devel@lists.openembedded.org
+References: <1279290319.10837.1747.camel@rex>
+In-Reply-To: <1279290319.10837.1747.camel@rex>
+X-SA-Exim-Connect-IP: 74.125.149.75
+X-SA-Exim-Mail-From: douglas.royds@taitradio.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+X-Spam-Status: No, score=-4.6 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: base_do_compile() and GNUmakefile
+Subject: Re: A new bitbake extension: .bbappend files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -65,25 +46,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 18 Jul 2010 21:24:48 -0000
-Content-Type: TEXT/PLAIN; format=flowed; charset=US-ASCII
+X-List-Received-Date: Mon, 19 Jul 2010 05:39:31 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hello,
+On 17/07/10 02:25, Richard Purdie wrote:
+> Whilst our layers mechanism, is great it does have a drawback which has
+> bugged me for a while. If you have a recipe like pointercal which has
+> machine specific information in it and you have your new machine code in
+> a layer, how do you add a pointercal file for your machine?
+>
+> Answer is you copy the whole pointercal recipe and files into your
+> layer, then add the single file for your machine.
+>    
 
-there was a patch for base.bbclass that made it accept GNUmakefile as a 
-makefile. That patch was supposedly applied:
+For our overlay distro, I solved this problem as follows (in 
+"conf/distro/tait.conf"):
 
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06820.html
+# Compute a FILESPATHBASE that will cause the FILESPATH search string 
+(for file:// URIs) to
+# list tait.openembedded directories first, and org.openembedded 
+directories second.
+# This allows us to put a single file, eg. lighttpd.conf, into our 
+tait.openembedded distribution,
+# and it will be picked up by OE in preference to the deault lighttpd.conf.
+# The directory containing the recipe is not necessarily the same as the 
+package name.
+# For instance, for lighttpd_1.2.3.bb, we want
+# FILE_DIRBASENAME = lighttpd
+# FILESPATHBASE = 
+"/home/roydsd/Work/DBS/tait.openembedded/branches/2.6.32/recipes/lighttpd:
+# 
+/home/roydsd/Work/DBS/org.openembedded.dev/branches/2010-02-23/recipes/lighttpd"
+# BBFILES is a space-separated list of /path/to/recipes/*/*.bb patterns.
+# Split each pattern at the recipes keyword to get 
+/home/roydsd/Work/DBS/tait.oe/trunk/,
+# then tack on recipes/lighttpd, and
+# join the whole lot together with colons
+FILE_DIRBASENAME = 
+"${@os.path.basename(os.path.dirname(bb.data.getVar('FILE', d)))}"
+FILESPATHBASE = ${@':'.join([ pattern.split('recipes')[0] + 
+'recipes/${FILE_DIRBASENAME}' for pattern in '${BBFILES}'.split() ])}
 
-Yet I don't seem to see it committed:
+For example:
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/tree/classes/base.bbclass#n351
+tait.openembedded/trunk/recipes/ntp/
+└── files/
+└── ntp.conf
 
-What branch was it committed to? Code somebody commit/merge it into 
-org.openembedded.dev branch please?
+BBFILES="/home/roydsd/Work/DBS/tait.openembedded/trunk/recipes/*/*.bb 
+/home/roydsd/Work/DBS/org.openembedded.dev/branches/2010-02-23/recipes/*/*.bb"
+FILESPATHBASE="/home/roydsd/Work/DBS/tait.openembedded/trunk/recipes/ntp:/home/roydsd/Work/DBS/org.openembedded.dev/branches/2010-02-23/recipes/ntp"
 
-Best regards,
+Does this achieve what you had in mind?
+Douglas.
+=======================================================================
+This email, including any attachments, is only for the intended
+addressee.  It is subject to copyright, is confidential and may be
+the subject of legal or other privilege, none of which is waived or
+lost by reason of this transmission.
+If the receiver is not the intended addressee, please accept our
+apologies, notify us by return, delete all copies and perform no
+other act on the email.
+Unfortunately, we cannot warrant that the email has not been
+altered or corrupted during transmission.
+=======================================================================
 
-David
 
 
