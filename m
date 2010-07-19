@@ -1,25 +1,40 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
-	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
-	id 1OameM-0004bq-2I for openembedded-devel@lists.openembedded.org;
-	Mon, 19 Jul 2010 11:28:39 +0200
-Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
-	by mzh.zlo.nu (Postfix) with ESMTP id 76CF01402C
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oamn1-00033I-Mf for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 11:37:37 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oammv-0004IP-82 for openembedded-devel@lists.openembedded.org;
+	Mon, 19 Jul 2010 11:37:29 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 19 Jul 2010 11:37:29 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jul 2010 11:25:54 +0200 (CEST)
-From: Marc Olzheim <zlo@zlo.nu>
+	Mon, 19 Jul 2010 11:37:29 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 19 Jul 2010 11:25:54 +0200
-Message-Id: <1279531554-31896-1-git-send-email-zlo@zlo.nu>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: zlo@zlo.nu
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 19 Jul 2010 11:37:19 +0200
+Message-ID: <i216cf$pju$1@dough.gmane.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libpng: Add add 1.2.44, new version and new native version importing several security fixes.
+Subject: Openjdk shark and cacao VMs not working
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,45 +48,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 19 Jul 2010 09:28:39 -0000
+X-List-Received-Date: Mon, 19 Jul 2010 09:37:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-From: Marc Olzheim <marc@iphion.nl>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
----
- recipes/libpng/libpng-native_1.2.44.bb |    6 ++++++
- recipes/libpng/libpng_1.2.44.bb        |    8 ++++++++
- 2 files changed, 14 insertions(+), 0 deletions(-)
- create mode 100644 recipes/libpng/libpng-native_1.2.44.bb
- create mode 100644 recipes/libpng/libpng_1.2.44.bb
+Hi,
 
-diff --git a/recipes/libpng/libpng-native_1.2.44.bb b/recipes/libpng/libpng-native_1.2.44.bb
-new file mode 100644
-index 0000000..3c36b52
---- /dev/null
-+++ b/recipes/libpng/libpng-native_1.2.44.bb
-@@ -0,0 +1,6 @@
-+require libpng_${PV}.bb
-+require libpng-native.inc
-+
-+PR = "r1"
-+
-+FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/libpng-${PV}"
-diff --git a/recipes/libpng/libpng_1.2.44.bb b/recipes/libpng/libpng_1.2.44.bb
-new file mode 100644
-index 0000000..e607f76
---- /dev/null
-+++ b/recipes/libpng/libpng_1.2.44.bb
-@@ -0,0 +1,8 @@
-+require libpng.inc
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI += "file://makefile_fix.patch"
-+
-+SRC_URI[tarball.md5sum] = "e3ac7879d62ad166a6f0c7441390d12b"
-+SRC_URI[tarball.sha256sum] = "b9ab20f1c2c3bf6c4448fd9bd8a4a8905b918114d5fada56c97bb758a17b7215"
--- 
-1.7.0.4
+I built openjdk completely from scratch and installed it:
+
+opkg install openjdk-6-common openjdk-6-demo openjdk-6-java
+openjdk-6-jdk openjdk-6-jre
+
+opkg install openjdk-6-vm-shark openjdk-6-vm-cacao
+
+That needs to be done in 2 opkg commands since -cacao and -shark edit a
+jvm.cfg in their postinst which isn't in their Depends: line. Trivial to
+fix, need to sit down and see in which package it resides.
+
+So:
+
+root@beagleboard-C4:~# java -zero Linpack # [1]
+Mflops/s: 9.537  Time: 0.07 secs  Norm Res: 1.43  Precision:
+2.220446049250313E-16
+
+So far, so good. Better than the 3 Mflops jamvm+classpath gets, but not
+as nice as the 16Mflops cacao+classpath can do.
+
+So lets try some other VMs:
+
+root@beagleboard-C4:~# java -shark Linpack
+ARMCodeEmitter::emitPseudoInstruction
+UNREACHABLE executed at
+/OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/llvm2.7-2.7-r6/llvm-2.7/lib/Target/ARM/ARMCodeEmitter.cpp:554!
+Stack dump:
+0.      Running pass 'ARM Machine Code Emitter' on function
+'@"Linpack::daxpy"'
+Aborted
+
+OK, Xerxes blogged about debugging such issues, but the summer intern is
+too busy with other stuff currently.
+
+root@beagleboard-C4:~# java -cacao Linpack
+java: avl.c:348: avl_find: Assertion `tree' failed.
+Aborted
+
+No idea on that.
+
+Do the java mages have some idea on how to get shark and cacao working well?
+
+regards,
+
+Koen
+
+[1] http://www.netlib.org/benchmark/linpackjava/LinpackJava.zip compiled
+with javac on osx
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMRBzPMkyGM64RGpERAiEJAJ4yeJVBcvuwHzVbS++Zt5iI9Rp11QCgm3aB
+Xqj79L9E1QpIz19c0QSxh6o=
+=OBoo
+-----END PGP SIGNATURE-----
 
 
 
