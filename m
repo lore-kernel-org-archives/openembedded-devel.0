@@ -1,38 +1,33 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Ob6pK-0005ob-Hf
+	(envelope-from <philb@gnu.org>) id 1Ob6yy-00067c-7g
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 09:01:18 +0200
-Received: from guest185.ibr.cs.tu-bs.de ([134.169.35.185] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Ob6pB-0001yO-4A by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 09:01:11 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Ob6pA-0005o6-2U
+	Tue, 20 Jul 2010 09:11:17 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Ob6yn-0004gZ-6K
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 09:01:08 +0200
-Date: Tue, 20 Jul 2010 09:01:08 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Tue, 20 Jul 2010 08:11:05 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100720070108.GE1512@excalibur.local>
-References: <20100709204055.GA12163@excalibur.local>
-MIME-Version: 1.0
-In-Reply-To: <20100709204055.GA12163@excalibur.local>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+In-Reply-To: <AANLkTikpOHsMXiR-HLJCKr7yWSsc9wRpee9Vg1WvtDQn@mail.gmail.com>
+References: <1279527857-12295-1-git-send-email-raj.khem@gmail.com>
+	<1279570852.21888.123.camel@lenovo.internal.reciva.com>
+	<AANLkTikpOHsMXiR-HLJCKr7yWSsc9wRpee9Vg1WvtDQn@mail.gmail.com>
+Date: Tue, 20 Jul 2010 08:11:16 +0100
+Message-ID: <1279609876.21888.132.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] New stable branch (and maybe a new process?)
+Subject: Re: [PATCH] sane-toolchain.inc: THUMB_INTERWORK should not be defined for armv4 and add armv4 to ARM EABI supporting architectures.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,25 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 07:01:19 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Jul 2010 07:11:17 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello.
+On Mon, 2010-07-19 at 15:49 -0700, Khem Raj wrote:
+> and I think the oldest arm architecture we support is armv4 which means we may
+> not need this check at all anymore.
 
-On Fri, 2010-07-09 at 22:40, Stefan Schmidt wrote:
-> 
-> I want to gather some feedback what people are feeling about a new stable
-> branch. It feels like the right time to do it soon. We have so many big changes
-> in that are not likely to get into stable/2009 like:
+Yeah, that might well be right.  I had thought there were some ARM710
+(which is armv3) machines supported, but I can't see any trace of them
+now so either I imagined it or they have been deleted.
 
-From the silence on this topic I gather that the interest to create a new branch
-or change the process is quite low.
+p.
 
-Lets see how painful it will be to get all our overlay changes into stable/2009
-then. Some review/acks on the outstanding patches would be a good start here ;)
 
-regards
-Stefan Schmidt
 
 
