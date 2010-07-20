@@ -1,31 +1,44 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1ObKTJ-00004u-RK
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1ObL16-0007eL-4h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 23:35:34 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1ObKT0-0003f2-Qo
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 22:35:10 +0100
-From: Phil Blundell <philb@gnu.org>
+	Wed, 21 Jul 2010 00:10:25 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6KMAEbo001588
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 23:10:14 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 01070-07 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 23:10:10 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6KMA5tA001579
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 23:10:08 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1279656272.8360.4.camel@utx.lan>
-References: <1279656272.8360.4.camel@utx.lan>
-Date: Tue, 20 Jul 2010 22:35:21 +0100
-Message-ID: <1279661721.21888.136.camel@lenovo.internal.reciva.com>
+In-Reply-To: <20100720190410.GM1512@excalibur.local>
+References: <20100709204055.GA12163@excalibur.local>
+	<20100720070108.GE1512@excalibur.local> <i23lkm$ftn$1@dough.gmane.org>
+	<20100720084026.GI1512@excalibur.local> <i24kf7$3d3$1@dough.gmane.org>
+	<20100720173425.GL1512@excalibur.local> <i24qm2$qc6$1@dough.gmane.org>
+	<20100720190410.GM1512@excalibur.local>
+Date: Tue, 20 Jul 2010 23:09:59 +0100
+Message-ID: <1279663799.22581.1586.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: RDEPENDS_${PN} overwrites RDEPENDS_foo - bug or feature?
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,26 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 21:35:34 -0000
+X-List-Received-Date: Tue, 20 Jul 2010 22:10:25 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Tue, 2010-07-20 at 22:04 +0200, Stanislav Brabec wrote:
-> While verifying all aspects of proposed udev change, I experienced a
-> strange behavior of an udev recipe with RDEPENDS_udev:
+On Tue, 2010-07-20 at 21:04 +0200, Stefan Schmidt wrote:
+> Hello.
 > 
-> RDEPENDS_udev is always ignored. Searching in deep, I found that
-> RDEPENDS_${PN} defined in update-rc.d.bbclass overwrites RDEPENDS_udev.
+> On Tue, 2010-07-20 at 20:42, Koen Kooi wrote:
+> > 
+> > On 20-07-10 19:34, Stefan Schmidt wrote:
+> > > 
+> > > Wasn't there a list produced with all recipes that used legacy staging? I swear
+> > > I have seen something like this but I can't find it in my recent builds.
+> > 
+> > In your TMPDIR:
+> > 
+> > koen@dominion:/OE/angstrom-dev$ cat legacy-staging.log | sort | uniq | wc -l
+> > 53
 > 
-> Once RDEPENDS_${PN} is defined, RDEPENDS_udev has no effect.
+> Ha, there it was. :)
 > 
-> Is it a bug or documented feature?
+> > It includes beasts like perl and python.
+> 
+> Hmm, that would be tricky. But there are some more easier ones that could get
+> nucked before.
 
-Possibly neither of the above.  It's not a bug, but I'm not certain that
-it is very well documented either.
+Poky has removed legacy staging for perl and python so it is possible
+and there is an example out there...
 
-p.
+Cheers,
 
+Richard
 
 
 
