@@ -1,43 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ObHtM-0006mc-1w for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 20:50:12 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ObHtE-0003fm-1V for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 20:50:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 20:50:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 20:50:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <morphis@gravedo.de>) id 1ObHtW-0006nV-3N
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 20:50:24 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 08E6B80C536; Tue, 20 Jul 2010 20:45:06 +0200 (CEST)
+Received: from localhost (p5489DD67.dip.t-dialin.net [84.137.221.103])
+	by gravedo.de (Postfix) with ESMTPSA id DA0D280C536;
+	Tue, 20 Jul 2010 20:45:03 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 20 Jul 2010 20:46:31 +0200
-Message-ID: <i24qu7$qc6$2@dough.gmane.org>
-References: <201007201654.41292.schnitzeltony@gmx.de>	<i24ku9$5b7$1@dough.gmane.org>
-	<201007201944.05812.schnitzeltony@gmx.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <201007201944.05812.schnitzeltony@gmx.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Tue, 20 Jul 2010 20:44:54 +0200
+Message-Id: <1279651497-20918-2-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1279651497-20918-1-git-send-email-morphis@gravedo.de>
+References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] omap3/powervr-drivers: Cleanups & fixes
+Subject: [PATCH 1/4] lvm2: rebase all recipes on a global lvm2.inc recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,35 +37,138 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 18:50:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Jul 2010 18:50:25 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+This rebases all specific versions of lvm2 on a global recipe lvm2.inc which defines the
+common parameters for building lvm2. Staging is overwritten as we don't need any of the
+executables or manpages the build of lvm2 produces for any related builds.
 
-On 20-07-10 19:44, Andreas Mueller wrote:
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes/lvm2/files/crosscompile_fix.patch        |   13 +++++++++++++
+ recipes/lvm2/lvm2-2.01.15/crosscompile_fix.patch |   13 -------------
+ recipes/lvm2/lvm2.inc                            |   20 ++++++++++++++++++++
+ recipes/lvm2/lvm2_2.01.09.bb                     |   11 ++---------
+ recipes/lvm2/lvm2_2.01.15.bb                     |   17 ++---------------
+ 5 files changed, 37 insertions(+), 37 deletions(-)
+ create mode 100644 recipes/lvm2/files/crosscompile_fix.patch
+ delete mode 100644 recipes/lvm2/lvm2-2.01.15/crosscompile_fix.patch
+ create mode 100644 recipes/lvm2/lvm2.inc
 
->> It's not missing, it's present in all omap3 kernels in .dev that are
->> supported. This incarnation of the test wasn't accepted upstream, but
->> it's easy enough to patch in.
-> All the guys sitting on the gumstix tree like me are missing it. The latest driver is simply diabled with a commit msg. like 'does not build for kernel > 2.6.32'
-
-And there's your problem, you're using some unsupported crazy vendor
-branch. If you build from .dev, you'll get a perfectly working 2.6.32
-kernel with support for cpufreq, cpuidle, latest sgx drivers, dsp
-support, etc. I use it on all my overos daily.
-
-I see zero gain in uglifying the current recipe to support crazy vendor
-branches that will never get merged. Time is better spent on getting
-those vender changes upstream first.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMRe8HMkyGM64RGpERAgyQAJoD6BrNE/GXQTBnRqOnTuNgIPwOwQCfcwgW
-3HgBIj7R8MngEviSwoK5IV4=
-=Afz0
------END PGP SIGNATURE-----
+diff --git a/recipes/lvm2/files/crosscompile_fix.patch b/recipes/lvm2/files/crosscompile_fix.patch
+new file mode 100644
+index 0000000..7f54f80
+--- /dev/null
++++ b/recipes/lvm2/files/crosscompile_fix.patch
+@@ -0,0 +1,13 @@
++Index: LVM2.2.01.15/make.tmpl.in
++===================================================================
++--- LVM2.2.01.15.orig/make.tmpl.in	2008-03-26 11:24:50.000000000 +0000
+++++ LVM2.2.01.15/make.tmpl.in	2008-03-26 11:25:02.000000000 +0000
++@@ -72,7 +72,7 @@
++   CFLAGS += -DINTL_PACKAGE=\"@INTL_PACKAGE@\" -DLOCALEDIR=\"@LOCALEDIR@\"
++ endif
++ 
++-LDFLAGS += -L$(top_srcdir)/lib -L$(libdir)
+++LDFLAGS += -L$(top_srcdir)/lib
++ 
++ #CFLAGS += -DDEBUG_POOL
++ #CFLAGS += -DBOUNDS_CHECK
+diff --git a/recipes/lvm2/lvm2-2.01.15/crosscompile_fix.patch b/recipes/lvm2/lvm2-2.01.15/crosscompile_fix.patch
+deleted file mode 100644
+index 7f54f80..0000000
+--- a/recipes/lvm2/lvm2-2.01.15/crosscompile_fix.patch
++++ /dev/null
+@@ -1,13 +0,0 @@
+-Index: LVM2.2.01.15/make.tmpl.in
+-===================================================================
+---- LVM2.2.01.15.orig/make.tmpl.in	2008-03-26 11:24:50.000000000 +0000
+-+++ LVM2.2.01.15/make.tmpl.in	2008-03-26 11:25:02.000000000 +0000
+-@@ -72,7 +72,7 @@
+-   CFLAGS += -DINTL_PACKAGE=\"@INTL_PACKAGE@\" -DLOCALEDIR=\"@LOCALEDIR@\"
+- endif
+- 
+--LDFLAGS += -L$(top_srcdir)/lib -L$(libdir)
+-+LDFLAGS += -L$(top_srcdir)/lib
+- 
+- #CFLAGS += -DDEBUG_POOL
+- #CFLAGS += -DBOUNDS_CHECK
+diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
+new file mode 100644
+index 0000000..a7e37b5
+--- /dev/null
++++ b/recipes/lvm2/lvm2.inc
+@@ -0,0 +1,20 @@
++SECTION = "utils"
++DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
++LICENSE = "GPL"
++DEPENDS = "device-mapper"
++INC_PR = "r2"
++
++S = "${WORKDIR}/LVM2.${PV}"
++SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
++           file://crosscompile_fix.patch"
++
++# Unset user/group to unbreak install.
++EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
++EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
++
++inherit autotools
++
++# We don't need to stage anything (the executables are no needed at build time by any
++# other recipe)
++do_stage() {
++}
+diff --git a/recipes/lvm2/lvm2_2.01.09.bb b/recipes/lvm2/lvm2_2.01.09.bb
+index e708d10..9682fa7 100644
+--- a/recipes/lvm2/lvm2_2.01.09.bb
++++ b/recipes/lvm2/lvm2_2.01.09.bb
+@@ -1,15 +1,8 @@
+-SECTION = "utils"
+-DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+-LICENSE = "GPL"
+-PR = "r1"
+-DEPENDS = "device-mapper"
++require lvm2.inc
+ 
+-S = "${WORKDIR}/LVM2.${PV}"
+-
+-SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz"
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "ed6fe3b734d05c6497cfa4f9932046e6"
+ SRC_URI[sha256sum] = "f72b5868f8ab4c6d5ba4cd470e33ef8d916e9c6c1363a7ae48aefd9361e5fc90"
+ 
+-inherit autotools
+ 
+diff --git a/recipes/lvm2/lvm2_2.01.15.bb b/recipes/lvm2/lvm2_2.01.15.bb
+index d66e355..0c4d0ea 100644
+--- a/recipes/lvm2/lvm2_2.01.15.bb
++++ b/recipes/lvm2/lvm2_2.01.15.bb
+@@ -1,19 +1,6 @@
+-SECTION = "utils"
+-DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+-LICENSE = "GPL"
+-PR = "r1"
+-DEPENDS = "device-mapper"
+-
+-S = "${WORKDIR}/LVM2.${PV}"
+-
+-SRC_URI = "ftp://sources.redhat.com/pub/lvm2/LVM2.${PV}.tgz \
+-           file://crosscompile_fix.patch"
+-
+-# Unset user/group to unbreak install.
+-EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
+-EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
+-inherit autotools
++require lvm2.inc
+ 
++PR = "${INC_PR}.0"
+ 
+ SRC_URI[md5sum] = "c71654baff263254fb5a226624ee8ef3"
+ SRC_URI[sha256sum] = "80b47604ace83db4450f43d94a99fdf2ca317323fde8a591f57290d28ece7d3b"
+-- 
+1.7.0.4
 
 
 
