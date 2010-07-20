@@ -1,54 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1ObG5l-0001i4-8s
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 18:54:55 +0200
-Received: by gwj22 with SMTP id 22so2977536gwj.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ObG7F-0002qu-6F for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 18:56:26 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ObG77-000129-5d for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 18:56:17 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 18:56:17 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 09:54:39 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=qacT2j9ye48HDLwqAf8Wb4lcttBsvKv5bWh2AKbkeLk=;
-	b=OpFxcjDsObzscM21DDfqzx59blzvV63isoZtSOKhbMHIlZNtRtZmWkNe2VxfZNzFgZ
-	wNGjFTvkM+4ELvOnxsoTvbl6VXvKY/cvMULyI8Y9I6K1ZAjvKvbf0RQWBR2IXgjxB7Gx
-	okTDoXlZZE3WOSir9StkRWUcEI1ov4wqPEGTo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=mVmF1LIQiFX6KkdO6fhWEP27UYHCG3+79BS/gZdQUsVoHqg2IGHr2No2bKAQP+OKJs
-	lMLSdrK+uo8eBPx7IF9AwzrBLB0bj4JwEWh/UPweNPgYHcTJfeZVU6ExukDGH5S59Lnl
-	01ifUhBMY/9gsINAWr7bNqBXCb8ycsHCZcLUQ=
-Received: by 10.224.31.138 with SMTP id y10mr5974149qac.289.1279644879531; 
-	Tue, 20 Jul 2010 09:54:39 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.212.11 with HTTP; Tue, 20 Jul 2010 09:54:19 -0700 (PDT)
-In-Reply-To: <AANLkTikgXfuc1uHq38AHLGUnZgKzODoBuOe2h7oA89wG@mail.gmail.com>
-References: <1279290319.10837.1747.camel@rex> <4C44BAB3.8010703@mentor.com> 
-	<AANLkTild0OtzxFT1GmBoNoUj8spV7jcvp1s_Cd69Frdy@mail.gmail.com> 
-	<AANLkTinZATYyQw2PEk52Hk71R_4nIzdacjzB2qKt2ZnQ@mail.gmail.com> 
-	<AANLkTikAmC6Li8IdUfbfZ48Or-dEABfH4ua8JjIgA0JT@mail.gmail.com> 
-	<AANLkTim1m8AQ4WsVRLu_1BU3VUfOrCgpLNIclgewXhJz@mail.gmail.com> 
-	<4C45BE9F.7000002@mentor.com> <4C45C63E.70306@cbnco.com>
-	<AANLkTilXvrxo8FC6KYsyyxwVPOrzJvp9cleEfdzVANzA@mail.gmail.com> 
-	<AANLkTikgXfuc1uHq38AHLGUnZgKzODoBuOe2h7oA89wG@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 20 Jul 2010 09:54:19 -0700
-X-Google-Sender-Auth: eq9Ury8tS_Kb2LFbO9quC7adcLk
-Message-ID: <AANLkTimYqkRKIP2ErEY7ot_l0TtAljJLMTvM-n-KhVfB@mail.gmail.com>
+	Tue, 20 Jul 2010 18:56:17 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 20 Jul 2010 18:56:06 +0200
+Message-ID: <i24kf7$3d3$1@dough.gmane.org>
+References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<i23lkm$ftn$1@dough.gmane.org>
+	<20100720084026.GI1512@excalibur.local>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <20100720084026.GI1512@excalibur.local>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: A new bitbake extension: .bbappend files
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,63 +51,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 16:54:55 -0000
+X-List-Received-Date: Tue, 20 Jul 2010 16:56:26 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Tue, Jul 20, 2010 at 9:29 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> 2010/7/20 Chris Larson <clarson@kergoth.com>
->
-> > On Tue, Jul 20, 2010 at 8:52 AM, Michael Smith <msmith@cbnco.com> wrote:
-> >
-> > > Tom Rini wrote:
-> > >
-> > >> It's also needed, in some cases, to lock down your changes via
-> OVERRIDES
-> > >> that will only match what you want to work on.  For example, we're
-> using
-> > a
-> > >> snapshot with an older python, so amend.inc in our python directory
-> > looks
-> > >> like:
-> > >>
-> > >> SRC_URI_append_pn-python-native =
-> > >> "file://python-2.6-r73342.patch;patch=1;pnum=0"
-> > >> PARALLEL_MAKE_pn-python-native = ""
-> > >> PR_append_pn-python-native .= ".1"
-> > >>
-> > >> So that we only change python-native and not all of the other python
-> > >> recipes.
-> > >>
-> > >
-> > > I think you could get the same effect by putting your amend.inc in a
-> > > python-native subdirectory under your overlay recipes/python directory.
-> > >
-> > > Maybe there's some native magic going on that would break that. (I've
-> > never
-> > > amended a -native package but I use the same trick for other recipes
-> > where
-> > > there are multiple .bb files are in the same OE directory.)
-> >
-> >
-> > Well, that works for -native or -cross, but there's no -target, so you
-> have
-> > to use a pn- override to modify the target recipe but *not* native and
-> > cross.  If you put it in python/, it applies to all of them.
-> >
->
-> Should we have/create a -native ? Seems a logical extension.
-> (but don't know how to code it)
+On 20-07-10 10:40, Stefan Schmidt wrote:
+> Hello.
+> 
+> On Tue, 2010-07-20 at 10:09, Koen Kooi wrote:
+>> On 20-07-10 09:01, Stefan Schmidt wrote:
+>>>
+>>> From the silence on this topic I gather that the interest to create a new branch
+>>> or change the process is quite low.
+>>
+>> I have an interest in a new stable branch, but no interest in changing
+>> the process.
+> 
+> Fair enough. Lets handle the issues seperately for now.
+> 
+>> The biggest problem is the .dev is halfway into big changes, e.g.
+>> halfway into new-style staging,
+> 
+> Agreed. While I think we are more then halfway through with this. Recipes are
+> left but most of the active maintained are already done. NO numbers but my
+> feeling here.
+> 
+>> halfway into packaged-staging rework, halfway into nativesdk, etc.
+> 
+> These both are ongoing for quite some time already. I have to admit that I lost
+> track where they stand and what is still outstanding.
+> 
+> So your suggestion is to wait until all three are done?
+
+'Wait' is maybe the wrong word. I would try to do a call to arms to get
+more people interested into getting this done. I had hoped that the TSC
+would be more vocal about this, but we must do with the cards dealt.
+
+And of course the number of people screaming for a stable branch is an
+order of magnitude larger than the number of people that end up actually
+supporting it.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMRdUmMkyGM64RGpERAmlcAJ0TbmzdYV6Z8p+FdtCP1jwXWOdIowCfbEJ9
+8Zyd7nsYgEZZfj2daMq+EdI=
+=gEzx
+-----END PGP SIGNATURE-----
 
 
-I assume you mean -target.  You could easily enough add it to FILESPATHPKG
-conditionally based on inherits_class() of
-native/cross/nativesdk/crosssdk/etc.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
