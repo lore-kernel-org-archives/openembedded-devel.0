@@ -1,47 +1,43 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1ObJp4-0001gN-GX
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 22:53:55 +0200
-Received: by bwz10 with SMTP id 10so3469735bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ObJtS-0008EN-Vp for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 22:58:42 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ObJtK-0005kG-Ex for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 22:58:18 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 22:58:18 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 13:53:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=zVkj6IsSML6vlXchvpLOWNr+jsiG6Pq3B0FoN9B1ANU=;
-	b=OIEtvKv66+ikOnQI7s/umfQORcL2RsDM/1JaULrkxL0F3vdJvAylI2I7ntwZJUob7+
-	i223LlGbqWR5KAwNN7TM/NqmNoLowadKjbNBwhsXCDuoU2RX+rMYG5Ecku4SXSOdNYKT
-	ZipzRutDLbs+Ux7J0+ecJ1h81scILoJWSWpUo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=VN6gFZIXRGLbCyz0oPybMF4jvHCvbBp5KJhfWzGy7fG5oSEZrnT1Uyjq1tsJDYVd9N
-	gsXfpry0RKhegLKSHLTEOhTGW6Vn9wAVIlPYYLvDj5kuesbZv6LYjM2x2nOxwVQ7Cwr8
-	T9lf6yPFqDx/cWfuHhHFrqtBvfLTRpxeJgGwE=
-MIME-Version: 1.0
-Received: by 10.204.46.23 with SMTP id h23mr5568248bkf.75.1279659226315; Tue, 
-	20 Jul 2010 13:53:46 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Tue, 20 Jul 2010 13:53:46 -0700 (PDT)
-In-Reply-To: <i24qu7$qc6$2@dough.gmane.org>
-References: <201007201654.41292.schnitzeltony@gmx.de>
-	<i24ku9$5b7$1@dough.gmane.org>
-	<201007201944.05812.schnitzeltony@gmx.de>
-	<i24qu7$qc6$2@dough.gmane.org>
-Date: Tue, 20 Jul 2010 22:53:46 +0200
-Message-ID: <AANLkTinhpRrgv_cs5BojuTJFjMmhX-b-ZApiMf6KGNNK@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 20 Jul 2010 22:58:18 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 20 Jul 2010 22:58:09 +0200
+Message-ID: <i252l1$npj$1@dough.gmane.org>
+References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<i23lkm$ftn$1@dough.gmane.org>	<20100720084026.GI1512@excalibur.local>	<i24kf7$3d3$1@dough.gmane.org>	<20100720173425.GL1512@excalibur.local>	<i24qm2$qc6$1@dough.gmane.org>
+	<4C45F5FF.3010106@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <4C45F5FF.3010106@mentor.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] omap3/powervr-drivers: Cleanups & fixes
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,76 +51,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 20:53:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Jul 2010 20:58:42 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/7/20 Koen Kooi <k.kooi@student.utwente.nl>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 20-07-10 19:44, Andreas Mueller wrote:
->
-> >> It's not missing, it's present in all omap3 kernels in .dev that are
-> >> supported. This incarnation of the test wasn't accepted upstream, but
-> >> it's easy enough to patch in.
-> > All the guys sitting on the gumstix tree like me are missing it. The
-> latest driver is simply diabled with a commit msg. like 'does not build for
-> kernel > 2.6.32'
->
-> And there's your problem, you're using some unsupported crazy vendor
-> branch. If you build from .dev, you'll get a perfectly working 2.6.32
-> kernel with support for cpufreq, cpuidle, latest sgx drivers, dsp
-> support, etc. I use it on all my overos daily.
->
-> I see zero gain in uglifying the current recipe to support crazy vendor
-> branches that will never get merged. Time is better spent on getting
-> those vender changes upstream first.
->
+On 20-07-10 21:16, Tom Rini wrote:
+> Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 20-07-10 19:34, Stefan Schmidt wrote:
+>>> Hello.
+>>>
+>>> On Tue, 2010-07-20 at 18:56, Koen Kooi wrote:
+>>>> On 20-07-10 10:40, Stefan Schmidt wrote:
+>>>>> So your suggestion is to wait until all three are done?
+>>>> 'Wait' is maybe the wrong word. I would try to do a call to arms to get
+>>>> more people interested into getting this done.
+>>> Wasn't there a list produced with all recipes that used legacy
+>>> staging? I swear
+>>> I have seen something like this but I can't find it in my recent builds.
+>>
+>> In your TMPDIR:
+>>
+>> koen@dominion:/OE/angstrom-dev$ cat legacy-staging.log | sort | uniq |
+>> wc -l
+>> 53
+>>
+>> It includes beasts like perl and python.
+> 
+> perl yes, python no.  Overall point, yes.
+> 
 
-Ehm. What about the other omap kernel recipes.
-There are 38 (!) of them in 15 different flavours that have omap in the
-name:
+Mine lists:
 
-linux-amsdelta-2.6 (recipe is called linux-amsdelta-2.6_2.6.16-omap2.bb)
-linux-h6300-omap1
-linux-omap
-linux-omap-2.6
-linux-omap-archos
-linux-omap-multi-psp
-linux-omap-pm
-linux-omap-psp
-linux-omap-zoomsync
-linux-omap1
-linux-omap2
-linux-omapandroid
-linux-omapzoom
-linux-palm-omap1
-linux-tornado-omap2
+/OE/org.openembedded.dev/recipes/perl/perl_5.8.8.bb
+/OE/org.openembedded.dev/recipes/python/python_2.6.4.bb
 
-(and yeah, I know some are omap1 and some are omap2, but still I feel this
-is an unwarranted diversity that could benefit from unification).
+And that's from a rebuild from scratch last week.
 
-Apart from that there is linux-davinci with 5 recipes and linux-igep2 with a
-recipe.
+regards,
 
-Seems to me this has grown out of control.
-
-Frans
-
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMRe8HMkyGM64RGpERAgyQAJoD6BrNE/GXQTBnRqOnTuNgIPwOwQCfcwgW
-> 3HgBIj7R8MngEviSwoK5IV4=
-> =Afz0
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMRg3hMkyGM64RGpERAu2OAKCsIiUFeNEVUZkqBKLP9TKO9yW3eACfQ2rx
+ZTxsG0zc2k5hnjkwwDVwiAo=
+=Yjad
+-----END PGP SIGNATURE-----
+
+
 
