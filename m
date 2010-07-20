@@ -1,44 +1,35 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1ObL16-0007eL-4h
+Received: from mail.gmx.net ([213.165.64.20])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1ObLW5-0001i1-P4
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 00:10:25 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6KMAEbo001588
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 23:10:14 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 01070-07 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 23:10:10 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6KMA5tA001579
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 23:10:08 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Wed, 21 Jul 2010 00:42:27 +0200
+Received: (qmail invoked by alias); 20 Jul 2010 22:42:15 -0000
+Received: from p508857E4.dip.t-dialin.net (EHLO [192.168.142.128])
+	[80.136.87.228]
+	by mail.gmx.net (mp072) with SMTP; 21 Jul 2010 00:42:15 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19kWSo3ElxkSWOZHrIJ+gmllhUtoyZtfKT6cANG58
+	02WBCi+NOOFpc+
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100720190410.GM1512@excalibur.local>
-References: <20100709204055.GA12163@excalibur.local>
-	<20100720070108.GE1512@excalibur.local> <i23lkm$ftn$1@dough.gmane.org>
-	<20100720084026.GI1512@excalibur.local> <i24kf7$3d3$1@dough.gmane.org>
-	<20100720173425.GL1512@excalibur.local> <i24qm2$qc6$1@dough.gmane.org>
-	<20100720190410.GM1512@excalibur.local>
-Date: Tue, 20 Jul 2010 23:09:59 +0100
-Message-ID: <1279663799.22581.1586.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Date: Wed, 21 Jul 2010 00:33:41 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+References: <201007201654.41292.schnitzeltony@gmx.de>
+	<i24qu7$qc6$2@dough.gmane.org>
+	<AANLkTinhpRrgv_cs5BojuTJFjMmhX-b-ZApiMf6KGNNK@mail.gmail.com>
+In-Reply-To: <AANLkTinhpRrgv_cs5BojuTJFjMmhX-b-ZApiMf6KGNNK@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201007210033.41887.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.20
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] New stable branch (and maybe a new process?)
+Subject: Re: [PATCH] omap3/powervr-drivers: Cleanups & fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,38 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 22:10:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 20 Jul 2010 22:42:28 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Tue, 2010-07-20 at 21:04 +0200, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Tue, 2010-07-20 at 20:42, Koen Kooi wrote:
-> > 
-> > On 20-07-10 19:34, Stefan Schmidt wrote:
-> > > 
-> > > Wasn't there a list produced with all recipes that used legacy staging? I swear
-> > > I have seen something like this but I can't find it in my recent builds.
-> > 
-> > In your TMPDIR:
-> > 
-> > koen@dominion:/OE/angstrom-dev$ cat legacy-staging.log | sort | uniq | wc -l
-> > 53
-> 
-> Ha, there it was. :)
-> 
-> > It includes beasts like perl and python.
-> 
-> Hmm, that would be tricky. But there are some more easier ones that could get
-> nucked before.
+On Tuesday 20 July 2010 08:46:31 pm Koen Kooi wrote:
+> > 2. Work around the missing (??) function omap_rev_lt_3_0()
 
-Poky has removed legacy staging for perl and python so it is possible
-and there is an example out there...
+> Time is better spent on getting those vender changes upstream first. 
+I agree. 
 
-Cheers,
+On Tuesday 20 July 2010 10:53:46 pm Frans Meulenbroeks wrote:
+> Ehm. What about the other omap kernel recipes.
+> There are 38 (!) of them in 15 different flavours that have omap in the 
+Is git-clone git://git.kernel.org/pub/scm/linux/kernel/git/tmlind/linux-omap-2.6 the 'official' omap3 kernel source? Still I haven't found omap_rev_lt_3_0() yet..
 
-Richard
+> NAK on that, the split is done this way on purpose. Making the libs
+> machine specific is NOT acceptable.
+I need to understand how to decide if a package is machine or architectue specific. So PLEASE anybody out there give me some hints/links:
 
+1.  What pitfalls are to expect making a package machine specific which is architecture specific?
+2.  How do you decide if a package is machine/architecture specific? For example clutter: clutter itself is machine specific because it configures against machine specific gl/gles causing different 
+builds - OK. What about the dependent: clutter-box2d is machine dependent / clutter-gst, clutter-gtk is not. What caused the different handling?
+3.  This question is also related (correct me if I am wrong - maybe I haven't got the basic point): The reason for different handling machine/architecture is to reuse as much as possible in case 
+you have more than one machine of same architecture. For clutter: configure decides according to the include files it finds in tmp/sysroot/<arch>/.. to build against gl or gles. What happens in 
+case we have two machines of same architecture: one with gl only / the other gl/gles (e.g different OMAPs). What happens if we first build the gles-machine and then the gl-only: Does the 
+second get gles too or what mechanisms am I missing?
+
+regards
+
+Andreas
 
 
