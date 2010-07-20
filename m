@@ -1,40 +1,40 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1ObIA2-00021h-B1
+	(envelope-from <Tom_Rini@mentor.com>) id 1ObIIs-0005l5-5h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 21:07:38 +0200
-Received: by gxk3 with SMTP id 3so2866201gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 12:07:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:cc:content-type;
-	bh=mqQJagKbW+VTVUF4BHy5zjksb3/tD/XV43d8jwpZUyU=;
-	b=RXVS0ZZOcPAZhjjroRhHN7HuMu5UQw9pZLc3E2ewVgEf2eifSXGn2zjj9IICT4FP5S
-	odx193Dz1W8D6v26Vnr2VfDnM4BReu/HngGag66VRm+8IIsau/Sx+arOqTgXqEYbnLSC
-	s2dZ4U7bk8MN2QqaUbjT0BIsuRheqACIeNQhI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:cc:content-type;
-	b=JFLP7hkjrIwnRT7fshqEr+rn4NGie48rkJ8F9rVRtIuIjYt1w4WjMmXdKbbv3gP5R9
-	b9Q4xqWtpJ2pcw476RX595kiJHLb6pXUPkBUxi2zNo6gxPtUSYr7GUFr0Vr6c6MIuv6P
-	1RJ7DAAlOzOFK27jjKe0Wvdr+ONEh7T/qxh8s=
+	Tue, 20 Jul 2010 21:16:41 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1ObIIh-0006mh-4Y from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 12:16:23 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 20 Jul 2010 12:16:22 -0700
+Received: from [172.30.80.25] ([172.30.80.25]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 20 Jul 2010 13:16:21 -0600
+Message-ID: <4C45F5FF.3010106@mentor.com>
+Date: Tue, 20 Jul 2010 12:16:15 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.101.164.16 with SMTP id r16mr6907027ano.199.1279652835514; 
-	Tue, 20 Jul 2010 12:07:15 -0700 (PDT)
-Received: by 10.100.42.4 with HTTP; Tue, 20 Jul 2010 12:07:15 -0700 (PDT)
-Date: Tue, 20 Jul 2010 12:07:15 -0700
-Message-ID: <AANLkTikGUfcnu1X5N104c3LTBZKsZiwPhk-DYw9N8Hn3@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<i23lkm$ftn$1@dough.gmane.org>	<20100720084026.GI1512@excalibur.local>	<i24kf7$3d3$1@dough.gmane.org>	<20100720173425.GL1512@excalibur.local>
+	<i24qm2$qc6$1@dough.gmane.org>
+In-Reply-To: <i24qm2$qc6$1@dough.gmane.org>
+X-OriginalArrivalTime: 20 Jul 2010 19:16:22.0052 (UTC)
+	FILETIME=[09F8F640:01CB2840]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Looking for some help on making a recipe -- newbie needing help
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,79 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 19:07:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Jul 2010 19:16:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-First sorry for the basic questions here,
-I am in the process of trying to figure out how to make my own recipe
-for a new version of a program than what exists. I am trying to write
-a recipe for aircrack-ng 1.1, Where I am now is its failing unable to
-find some files. I think this is because i am missing something in my
-recipe. I tried looking at the previous versions and patch files but I
-do not understand how to put whats in the patch file into my new
-recipe so it would build in a similar manner. Is there a way I can
-take what they patched to the original recipe and incorporate it into
-my recipe? Or is there an easy way to read whats in the patch file and
-incorporate it into a new recipe? I have posted both the recipe I
-wrote and the patch from the original recipe. I am not looking to get
-spoon fed but I am at a total loss here and would really like to get a
-grasp on this as there a bunch of existing recipes that I would like
-to update to more current versions, and I am sure once I get through
-one or two of making my own I will get it better. I have read the OE
-manual and also the examples from gumstix. I am running my OE on the
-overo branch if that makes any difference. Thanks for your time and
-any help you can share with me. Hope to be more useful to the cause
-soon. Lastly if any of this didn't make sense let me know so I can try
-and clarify it better for everyone.
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 20-07-10 19:34, Stefan Schmidt wrote:
+>> Hello.
+>>
+>> On Tue, 2010-07-20 at 18:56, Koen Kooi wrote:
+>>> On 20-07-10 10:40, Stefan Schmidt wrote:
+>>>> So your suggestion is to wait until all three are done?
+>>> 'Wait' is maybe the wrong word. I would try to do a call to arms to get
+>>> more people interested into getting this done.
+>> Wasn't there a list produced with all recipes that used legacy staging? I swear
+>> I have seen something like this but I can't find it in my recent builds.
+> 
+> In your TMPDIR:
+> 
+> koen@dominion:/OE/angstrom-dev$ cat legacy-staging.log | sort | uniq | wc -l
+> 53
+> 
+> It includes beasts like perl and python.
 
-my aircrack-ng recipe:
-DESCRIPTION = "Aircrack-ng is a set of tools for wep key statistical cracking"
-HOMEPAGE = "http://www.aircrack-ng.org/"
-SECTION = "console/network"
-LICENSE = "GPLv2"
-DEPENDS = "openssl zlib sqlite3"
-PR = "r0"
-PN = "aircrack-ngtest"
+perl yes, python no.  Overall point, yes.
 
-SRC_URI = "http://download.aircrack-ng.org/aircrack-ng-1.1.tar.gz"
-
-S = "${WORKDIR}"
-OETMP = ${OVEROTOP}/tmp
-
-SBINFILES = "airodump-ng aireplay-ng airmon-ng airtun-ng"
-BINFILES = "aircrack-ng airdecap-ng packetforge-ng ivstools kstats makeivs"
-
-do_install() {
-	install -d ${D}/${sbindir}
-	for i in ${SBINFILES}; do
-		install -m 0755 $i ${D}/${sbindir}
-	done
-
-	install -d ${D}/${bindir}
-	for i in ${BINFILES}; do
-		install -m 0755 $i ${D}/${bindir}
-	done
-}
-
-
-SRC_URI[md5sum] = "f7a24ed8fad122c4187d06bfd6f998b4"
-SRC_URI[sha256sum] =
-"b136b549b7d2a2751c21793100075ea43b28de9af4c1969508bb95bcc92224ad"
-
-
-
-Here is the patch from the original .9.3  aircrack-ng recipe:
-diff -urN aircrack-ng-0.9.3.orig/Makefile aircrack-ng-0.9.3/Makefile
---- aircrack-ng-0.9.3.orig/Makefile	2008-02-24 20:22:35.000000000 +0100
-+++ aircrack-ng-0.9.3/Makefile	2009-04-09 07:53:12.000000000 +0200
-@@ -3,7 +3,7 @@
-
- CC              = gcc
- CFLAGS          ?= -g -W -Wall -O3
--OPTFLAGS        = -D_FILE_OFFSET_BITS=64
-+OPTFLAGS        = -D_FILE_OFFSET_BITS=64 $(LDFLAGS)
-
- iCC             = /opt/intel/cc/9.0/bin/icc
- iCFLAGS         = -w -mcpu=pentiumpro -march=pentiumpro
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
