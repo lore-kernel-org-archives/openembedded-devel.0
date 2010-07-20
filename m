@@ -1,17 +1,17 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1ObHtW-0006nU-3l
+	(envelope-from <morphis@gravedo.de>) id 1ObHtW-0006nW-3x
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 20:50:25 +0200
+	Tue, 20 Jul 2010 20:50:26 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id 0DB3680C537; Tue, 20 Jul 2010 20:45:07 +0200 (CEST)
+	id 5D8F780C53E; Tue, 20 Jul 2010 20:45:15 +0200 (CEST)
 Received: from localhost (p5489DD67.dip.t-dialin.net [84.137.221.103])
-	by gravedo.de (Postfix) with ESMTPSA id 4A57480C537;
-	Tue, 20 Jul 2010 20:45:06 +0200 (CEST)
+	by gravedo.de (Postfix) with ESMTPSA id 2F26580C53C;
+	Tue, 20 Jul 2010 20:45:11 +0200 (CEST)
 From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 20 Jul 2010 20:44:55 +0200
-Message-Id: <1279651497-20918-3-git-send-email-morphis@gravedo.de>
+Date: Tue, 20 Jul 2010 20:44:57 +0200
+Message-Id: <1279651497-20918-5-git-send-email-morphis@gravedo.de>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1279651497-20918-1-git-send-email-morphis@gravedo.de>
 References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>
@@ -23,7 +23,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/4] lvm2.inc: add patch to fix building
+Subject: [PATCH 4/4] lvm2: add configuration file for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,51 +37,434 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 18:50:26 -0000
-
-lvm2 fails to build cause there is a include of limits.h missing. The patch adds the
-include to the relevant file of the lvm2 source.
+X-List-Received-Date: Tue, 20 Jul 2010 18:50:27 -0000
 
 Signed-off-by: Simon Busch <morphis@gravedo.de>
 ---
- recipes/lvm2/files/include-limits.patch |   13 +++++++++++++
- recipes/lvm2/lvm2.inc                   |    3 ++-
- 2 files changed, 15 insertions(+), 1 deletions(-)
- create mode 100644 recipes/lvm2/files/include-limits.patch
+ recipes/lvm2/files/palmpre/lvm.conf |  414 +++++++++++++++++++++++++++++++++++
+ 1 files changed, 414 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/lvm2/files/palmpre/lvm.conf
 
-diff --git a/recipes/lvm2/files/include-limits.patch b/recipes/lvm2/files/include-limits.patch
+diff --git a/recipes/lvm2/files/palmpre/lvm.conf b/recipes/lvm2/files/palmpre/lvm.conf
 new file mode 100644
-index 0000000..4987766
+index 0000000..1cf16c6
 --- /dev/null
-+++ b/recipes/lvm2/files/include-limits.patch
-@@ -0,0 +1,13 @@
-+diff -rpN LVM2.2.01.15-orig/lib/locking/cluster_locking.c LVM2.2.01.15/lib/locking/cluster_locking.c
-+*** LVM2.2.01.15-orig/lib/locking/cluster_locking.c	2010-03-16 20:16:45.806355964 +0100
-+--- LVM2.2.01.15/lib/locking/cluster_locking.c	2010-03-16 20:19:08.946345762 +0100
-+***************
-+*** 29,34 ****
-+--- 29,35 ----
-+  #include <sys/socket.h>
-+  #include <sys/un.h>
-+  #include <unistd.h>
-++ #include <limits.h>
-+  
-+  #ifndef CLUSTER_LOCKING_INTERNAL
-+  int lock_resource(struct cmd_context *cmd, const char *resource, int flags);
-diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
-index a7e37b5..080f5ea 100644
---- a/recipes/lvm2/lvm2.inc
-+++ b/recipes/lvm2/lvm2.inc
-@@ -6,7 +6,8 @@ INC_PR = "r2"
- 
- S = "${WORKDIR}/LVM2.${PV}"
- SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
--           file://crosscompile_fix.patch"
-+           file://crosscompile_fix.patch \
-+           file://include-limits.patch"
- 
- # Unset user/group to unbreak install.
- EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
++++ b/recipes/lvm2/files/palmpre/lvm.conf
+@@ -0,0 +1,414 @@
++# This is an example configuration file for the LVM2 system.
++# It contains the default settings that would be used if there was no
++# /etc/lvm/lvm.conf file.
++#
++# Refer to 'man lvm.conf' for further information including the file layout.
++#
++# To put this file in a different directory and override /etc/lvm set
++# the environment variable LVM_SYSTEM_DIR before running the tools.
++
++
++# This section allows you to configure which block devices should
++# be used by the LVM system.
++devices {
++
++    # Where do you want your volume groups to appear ?
++    dir = "/dev"
++
++    # An array of directories that contain the device nodes you wish
++    # to use with LVM2.
++    scan = [ "/dev" ]
++
++    # If several entries in the scanned directories correspond to the
++    # same block device and the tools need to display a name for device,
++    # all the pathnames are matched against each item in the following
++    # list of regular expressions in turn and the first match is used.
++    preferred_names = [ ]
++
++    # Try to avoid using undescriptive /dev/dm-N names, if present.
++    # preferred_names = [ "^/dev/mpath/", "^/dev/mapper/mpath", "^/dev/[hs]d" ]
++
++    # A filter that tells LVM2 to only use a restricted set of devices.
++    # The filter consists of an array of regular expressions.  These
++    # expressions can be delimited by a character of your choice, and
++    # prefixed with either an 'a' (for accept) or 'r' (for reject).
++    # The first expression found to match a device name determines if
++    # the device will be accepted or rejected (ignored).  Devices that
++    # don't match any patterns are accepted.
++
++    # Be careful if there there are symbolic links or multiple filesystem 
++    # entries for the same device as each name is checked separately against
++    # the list of patterns.  The effect is that if any name matches any 'a'
++    # pattern, the device is accepted; otherwise if any name matches any 'r'
++    # pattern it is rejected; otherwise it is accepted.
++
++    # Don't have more than one filter line active at once: only one gets used.
++
++    # Run vgscan after you change this parameter to ensure that
++    # the cache file gets regenerated (see below).
++    # If it doesn't do what you expect, check the output of 'vgscan -vvvv'.
++
++
++    # By default we accept every block device:
++    # filter = [ "a/.*/" ]
++   
++    # Exclude everything but one mmc partition
++    filter = [ "a|^/dev/mmcblk0.*|" , "r|.*|" ]
++
++    # Exclude the cdrom drive
++    # filter = [ "r|/dev/cdrom|" ]
++
++    # When testing I like to work with just loopback devices:
++    # filter = [ "a/loop/", "r/.*/" ]
++
++    # Or maybe all loops and ide drives except hdc:
++    # filter =[ "a|loop|", "r|/dev/hdc|", "a|/dev/ide|", "r|.*|" ]
++
++    # Use anchors if you want to be really specific
++    # filter = [ "a|^/dev/hda8$|", "r/.*/" ]
++
++    # The results of the filtering are cached on disk to avoid
++    # rescanning dud devices (which can take a very long time).
++    # By default this cache is stored in the /etc/lvm/cache directory
++    # in a file called '.cache'.
++    # It is safe to delete the contents: the tools regenerate it.
++    # (The old setting 'cache' is still respected if neither of
++    # these new ones is present.)
++    cache_dir = "/var/lib/lvm/cache"
++    cache_file_prefix = ""
++
++    # You can turn off writing this cache file by setting this to 0.
++    write_cache_state = 1
++
++    # Advanced settings.
++
++    # List of pairs of additional acceptable block device types found 
++    # in /proc/devices with maximum (non-zero) number of partitions.
++    types = [ "mmc", 4 ]
++
++    # If sysfs is mounted (2.6 kernels) restrict device scanning to 
++    # the block devices it believes are valid.
++    # 1 enables; 0 disables.
++    sysfs_scan = 1	
++
++    # By default, LVM2 will ignore devices used as components of
++    # software RAID (md) devices by looking for md superblocks.
++    # 1 enables; 0 disables.
++    md_component_detection = 1
++
++    # By default, if a PV is placed directly upon an md device, LVM2
++    # will align its data blocks with the the chunk_size exposed in sysfs.
++    # 1 enables; 0 disables.
++    md_chunk_alignment = 1
++
++    # If, while scanning the system for PVs, LVM2 encounters a device-mapper
++    # device that has its I/O suspended, it waits for it to become accessible.
++    # Set this to 1 to skip such devices.  This should only be needed
++    # in recovery situations.
++    ignore_suspended_devices = 0
++}
++
++# This section that allows you to configure the nature of the
++# information that LVM2 reports.
++log {
++
++    # Controls the messages sent to stdout or stderr.
++    # There are three levels of verbosity, 3 being the most verbose.
++    verbose = 0
++
++    # Should we send log messages through syslog?
++    # 1 is yes; 0 is no.
++    syslog = 1
++
++    # Should we log error and debug messages to a file?
++    # By default there is no log file.
++    #file = "/var/log/lvm2.log"
++
++    # Should we overwrite the log file each time the program is run?
++    # By default we append.
++    overwrite = 0
++
++    # What level of log messages should we send to the log file and/or syslog?
++    # There are 6 syslog-like log levels currently in use - 2 to 7 inclusive.
++    # 7 is the most verbose (LOG_DEBUG).
++    level = 0
++    
++    # Format of output messages
++    # Whether or not (1 or 0) to indent messages according to their severity
++    indent = 1
++
++    # Whether or not (1 or 0) to display the command name on each line output
++    command_names = 0
++
++    # A prefix to use before the message text (but after the command name,
++    # if selected).  Default is two spaces, so you can see/grep the severity
++    # of each message.
++    prefix = "  "
++
++    # To make the messages look similar to the original LVM tools use:
++    #   indent = 0
++    #   command_names = 1
++    #   prefix = " -- "
++
++    # Set this if you want log messages during activation.
++    # Don't use this in low memory situations (can deadlock).
++    # activation = 0
++}
++
++# Configuration of metadata backups and archiving.  In LVM2 when we
++# talk about a 'backup' we mean making a copy of the metadata for the
++# *current* system.  The 'archive' contains old metadata configurations.
++# Backups are stored in a human readeable text format.
++backup {
++
++    # Should we maintain a backup of the current metadata configuration ?
++    # Use 1 for Yes; 0 for No.
++    # Think very hard before turning this off!
++    backup = 1
++
++    # Where shall we keep it ?
++    # Remember to back up this directory regularly!
++    backup_dir = "/var/lib/lvm/backup"
++
++    # Should we maintain an archive of old metadata configurations.
++    # Use 1 for Yes; 0 for No.
++    # On by default.  Think very hard before turning this off.
++    archive = 1
++
++    # Where should archived files go ?
++    # Remember to back up this directory regularly!
++    archive_dir = "/var/lib/lvm/archive"
++    
++    # What is the minimum number of archive files you wish to keep ?
++    retain_min = 10
++
++    # What is the minimum time you wish to keep an archive file for ?
++    retain_days = 30
++}
++
++# Settings for the running LVM2 in shell (readline) mode.
++shell {
++
++    # Number of lines of history to store in ~/.lvm_history
++    history_size = 100
++}
++
++
++# Miscellaneous global LVM2 settings
++global {
++    
++    # The file creation mask for any files and directories created.
++    # Interpreted as octal if the first digit is zero.
++    umask = 077
++
++    # Allow other users to read the files
++    #umask = 022
++
++    # Enabling test mode means that no changes to the on disk metadata
++    # will be made.  Equivalent to having the -t option on every
++    # command.  Defaults to off.
++    test = 0
++
++    # Default value for --units argument
++    units = "h"
++
++    # Whether or not to communicate with the kernel device-mapper.
++    # Set to 0 if you want to use the tools to manipulate LVM metadata 
++    # without activating any logical volumes.
++    # If the device-mapper kernel driver is not present in your kernel
++    # setting this to 0 should suppress the error messages.
++    activation = 1
++
++    # If we can't communicate with device-mapper, should we try running 
++    # the LVM1 tools?
++    # This option only applies to 2.4 kernels and is provided to help you
++    # switch between device-mapper kernels and LVM1 kernels.
++    # The LVM1 tools need to be installed with .lvm1 suffices
++    # e.g. vgscan.lvm1 and they will stop working after you start using
++    # the new lvm2 on-disk metadata format.
++    # The default value is set when the tools are built.
++    # fallback_to_lvm1 = 0
++
++    # The default metadata format that commands should use - "lvm1" or "lvm2".
++    # The command line override is -M1 or -M2.
++    # Defaults to "lvm1" if compiled in, else "lvm2".
++    # format = "lvm1"
++
++    # Location of proc filesystem
++    proc = "/proc"
++
++    # Type of locking to use. Defaults to local file-based locking (1).
++    # Turn locking off by setting to 0 (dangerous: risks metadata corruption
++    # if LVM2 commands get run concurrently).
++    # Type 2 uses the external shared library locking_library.
++    # Type 3 uses built-in clustered locking.
++    locking_type = 1
++
++    # If using external locking (type 2) and initialisation fails,
++    # with this set to 1 an attempt will be made to use the built-in
++    # clustered locking.
++    # If you are using a customised locking_library you should set this to 0.
++    fallback_to_clustered_locking = 1
++
++    # If an attempt to initialise type 2 or type 3 locking failed, perhaps
++    # because cluster components such as clvmd are not running, with this set
++    # to 1 an attempt will be made to use local file-based locking (type 1).
++    # If this succeeds, only commands against local volume groups will proceed.
++    # Volume Groups marked as clustered will be ignored.
++    fallback_to_local_locking = 1
++
++    # Local non-LV directory that holds file-based locks while commands are
++    # in progress.  A directory like /tmp that may get wiped on reboot is OK.
++    locking_dir = "/var/lock/lvm"
++
++    # Other entries can go here to allow you to load shared libraries
++    # e.g. if support for LVM1 metadata was compiled as a shared library use
++    #   format_libraries = "liblvm2format1.so" 
++    # Full pathnames can be given.
++
++    # Search this directory first for shared libraries.
++    #   library_dir = "/lib"
++
++    # The external locking library to load if locking_type is set to 2.
++    #   locking_library = "liblvm2clusterlock.so"
++}
++
++activation {
++    # How to fill in missing stripes if activating an incomplete volume.
++    # Using "error" will make inaccessible parts of the device return
++    # I/O errors on access.  You can instead use a device path, in which 
++    # case, that device will be used to in place of missing stripes.
++    # But note that using anything other than "error" with mirrored 
++    # or snapshotted volumes is likely to result in data corruption.
++    missing_stripe_filler = "error"
++
++    # How much stack (in KB) to reserve for use while devices suspended
++    reserved_stack = 256
++
++    # How much memory (in KB) to reserve for use while devices suspended
++    reserved_memory = 8192
++
++    # Nice value used while devices suspended
++    process_priority = -18
++
++    # If volume_list is defined, each LV is only activated if there is a
++    # match against the list.
++    #   "vgname" and "vgname/lvname" are matched exactly.
++    #   "@tag" matches any tag set in the LV or VG.
++    #   "@*" matches if any tag defined on the host is also set in the LV or VG
++    #
++    # volume_list = [ "vg1", "vg2/lvol1", "@tag1", "@*" ]
++
++    # Size (in KB) of each copy operation when mirroring
++    mirror_region_size = 512
++
++    # Setting to use when there is no readahead value stored in the metadata.
++    #
++    # "none" - Disable readahead.
++    # "auto" - Use default value chosen by kernel.
++    readahead = "auto"
++
++    # 'mirror_image_fault_policy' and 'mirror_log_fault_policy' define
++    # how a device failure affecting a mirror is handled.
++    # A mirror is composed of mirror images (copies) and a log.
++    # A disk log ensures that a mirror does not need to be re-synced
++    # (all copies made the same) every time a machine reboots or crashes.
++    #
++    # In the event of a failure, the specified policy will be used to
++    # determine what happens:
++    #
++    # "remove" - Simply remove the faulty device and run without it.  If
++    #            the log device fails, the mirror would convert to using
++    #            an in-memory log.  This means the mirror will not
++    #            remember its sync status across crashes/reboots and
++    #            the entire mirror will be re-synced.  If a
++    #            mirror image fails, the mirror will convert to a
++    #            non-mirrored device if there is only one remaining good
++    #            copy.
++    #
++    # "allocate" - Remove the faulty device and try to allocate space on
++    #            a new device to be a replacement for the failed device.
++    #            Using this policy for the log is fast and maintains the
++    #            ability to remember sync state through crashes/reboots.
++    #            Using this policy for a mirror device is slow, as it
++    #            requires the mirror to resynchronize the devices, but it
++    #            will preserve the mirror characteristic of the device.
++    #            This policy acts like "remove" if no suitable device and
++    #            space can be allocated for the replacement.
++    #            Currently this is not implemented properly and behaves
++    #            similarly to:
++    #
++    # "allocate_anywhere" - Operates like "allocate", but it does not
++    #            require that the new space being allocated be on a
++    #            device is not part of the mirror.  For a log device
++    #            failure, this could mean that the log is allocated on
++    #            the same device as a mirror device.  For a mirror
++    #            device, this could mean that the mirror device is
++    #            allocated on the same device as another mirror device.
++    #            This policy would not be wise for mirror devices
++    #            because it would break the redundant nature of the
++    #            mirror.  This policy acts like "remove" if no suitable
++    #            device and space can be allocated for the replacement.
++
++    mirror_log_fault_policy = "allocate"
++    mirror_device_fault_policy = "remove"
++}
++
++
++####################
++# Advanced section #
++####################
++
++# Metadata settings
++#
++# metadata {
++    # Default number of copies of metadata to hold on each PV.  0, 1 or 2.
++    # You might want to override it from the command line with 0 
++    # when running pvcreate on new PVs which are to be added to large VGs.
++
++    # pvmetadatacopies = 1
++
++    # Approximate default size of on-disk metadata areas in sectors.
++    # You should increase this if you have large volume groups or
++    # you want to retain a large on-disk history of your metadata changes.
++
++    # pvmetadatasize = 255
++
++    # List of directories holding live copies of text format metadata.
++    # These directories must not be on logical volumes!
++    # It's possible to use LVM2 with a couple of directories here,
++    # preferably on different (non-LV) filesystems, and with no other 
++    # on-disk metadata (pvmetadatacopies = 0). Or this can be in
++    # addition to on-disk metadata areas.
++    # The feature was originally added to simplify testing and is not
++    # supported under low memory situations - the machine could lock up.
++    #
++    # Never edit any files in these directories by hand unless you
++    # you are absolutely sure you know what you are doing! Use
++    # the supplied toolset to make changes (e.g. vgcfgrestore).
++
++    # dirs = [ "/etc/lvm/metadata", "/mnt/disk2/lvm/metadata2" ]
++#}
++
++# Event daemon
++#
++# dmeventd {
++    # mirror_library is the library used when monitoring a mirror device.
++    #
++    # "libdevmapper-event-lvm2mirror.so" attempts to recover from
++    # failures.  It removes failed devices from a volume group and
++    # reconfigures a mirror as necessary. If no mirror library is
++    # provided, mirrors are not monitored through dmeventd.
++
++    # mirror_library = "libdevmapper-event-lvm2mirror.so"
++
++    # snapshot_library is the library used when monitoring a snapshot device.
++    #
++    # "libdevmapper-event-lvm2snapshot.so" monitors the filling of
++    # snapshots and emits a warning through syslog, when the use of
++    # snapshot exceedes 80%. The warning is repeated when 85%, 90% and
++    # 95% of the snapshot are filled.
++
++    # snapshot_library = "libdevmapper-event-lvm2snapshot.so"
++#}
++
 -- 
 1.7.0.4
 
