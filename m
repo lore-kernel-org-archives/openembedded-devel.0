@@ -1,46 +1,36 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slapinid@gmail.com>) id 1ObEBd-0000Y4-Dm
+	(envelope-from <philb@gnu.org>) id 1ObEFN-0002w8-3m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 16:53:52 +0200
-Received: by bwz10 with SMTP id 10so3214644bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 07:52:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type;
-	bh=nFavCBuS1G9yWfqIEXlG6IDB3NOqY3RFb5c7MlaKLXk=;
-	b=w47jZOwSiYoRBB21L7ymOiG190hfrMNboq1GPEetrmnPiJCgHUVy5HdOuf6GNKH/5C
-	Y0iiRqzi2lW4XabuyyMU62Y6hhKRKhZ6wx+dVrUAsnGrg86Wb9rzabi/sY0wO9zawJKx
-	wKkwnIYV3/iJn+GZVJS9Oz2Tr+wJj/7/oda3I=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type;
-	b=amzUbSsEO9VsqSuNubMzzw8uV/zhMw4EgIvo8auDXcIJq1e4jVKjh0WyfVE5/+u4Ss
-	rXooNxCKxXnOMpvf9zobAV2a3tUYVLjXNCvP9uSBxhlp4Qi1Mu+p9lmFz0KQRwGrokcb
-	mX+iK8X7+dZ5tBKtfLAwQ7kihd5vzuRnfYaLY=
-MIME-Version: 1.0
-Received: by 10.204.119.134 with SMTP id z6mr720812bkq.193.1279637560728; Tue, 
-	20 Jul 2010 07:52:40 -0700 (PDT)
-Received: by 10.204.32.65 with HTTP; Tue, 20 Jul 2010 07:52:40 -0700 (PDT)
-In-Reply-To: <AANLkTilB16RBCmlt-mnOLlk2A5no0jrmm_LWlaywDW-X@mail.gmail.com>
-References: <AANLkTil7o0fTTOKgeENfJ54exQUXvpnDzIicIWfbDG2-@mail.gmail.com>
-	<AANLkTilB16RBCmlt-mnOLlk2A5no0jrmm_LWlaywDW-X@mail.gmail.com>
-Date: Tue, 20 Jul 2010 18:52:40 +0400
-Message-ID: <AANLkTimYkJaa2nCj_1LiDYwBtuONKIivzD5M_OYXnDF2@mail.gmail.com>
-From: Sergey Lapin <slapinid@gmail.com>
+	Tue, 20 Jul 2010 16:56:49 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1ObEFE-0000yS-Js
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 15:56:32 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1ObEFE-0005FA-B5
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 15:56:32 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: slapinid@gmail.com
+In-Reply-To: <1279602754-8620-1-git-send-email-raj.khem@gmail.com>
+References: <1279602754-8620-1-git-send-email-raj.khem@gmail.com>
+Date: Tue, 20 Jul 2010 15:56:31 +0100
+Message-ID: <1279637791.2345.2196.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: Strangeness with mkdosfs on OMAP3 board
+Subject: Re: [PATCH] sane-toolchain.inc: Check for architectures which dont support EABI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,53 +44,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 14:54:01 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Jul 2010 14:56:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jul 9, 2010 at 1:45 AM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Thu, Jul 8, 2010 at 6:54 AM, Sergey Lapin <slapinid@gmail.com> wrote:
->> -D_FILE_OFFSET_BITS=64, where it has gone?
->
-> CFLAGS are overwritten, and the makefile is a bit non cross compilation friendly
-> you can add this
->
-> CFLAGS += "-D_FILE_OFFSET_BITS=64
->
-> to dosfstools_2.11.bb and then rebuild just this recipe.
->
-> Does that help ?
-Yeah, this helps. Actually. the fast-baked patch I use locally:
-diff --git a/recipes/dosfstools/dosfstools_2.11.bb
-b/recipes/dosfstools/dosfstools_2.11.bb
-index 211912a..89522f5 100644
---- a/recipes/dosfstools/dosfstools_2.11.bb
-+++ b/recipes/dosfstools/dosfstools_2.11.bb
-@@ -8,15 +8,22 @@ SECTION = "base"
- PRIORITY = "optional"
- LICENSE = "GPLv2"
+On Mon, 2010-07-19 at 22:12 -0700, Khem Raj wrote:
+> * This patch reverses the check for EABI support. This would mean
+>   that future processors will not have to be added everytime they
+>   come out.
 
--PR = "r0"
-+PR = "r1"
+Thanks, that looks good.
 
- SRC_URI = "ftp://ftp.uni-erlangen.de/pub/Linux/LOCAL/dosfstools/dosfstools-${PV}.src.tar.gz
-\
-           file://alignment_hack.patch \
-            file://msdos_fat12_undefined.patch \
-           file://include-linux-types.patch"
+p.
 
-+do_compile () {
-+       oe_runmake "PREFIX=${D}" "SBINDIR=${D}${sbindir}" \
-+                  CFLAGS="${CFLAGS} -D_FILE_OFFSET_BITS=64" \
-+                  "MANDIR=${D}${mandir}/man8"
-+}
-+
- do_install () {
-        oe_runmake "PREFIX=${D}" "SBINDIR=${D}${sbindir}" \
-+                  CFLAGS="${CFLAGS} -D_FILE_OFFSET_BITS=64" \
-                   "MANDIR=${D}${mandir}/man8" install
- }
 
-But, probably, it is too many lines and I had no time to make proper
-one and commit :(
 
 
