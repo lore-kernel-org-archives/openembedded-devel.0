@@ -1,44 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1ObK7P-0007E9-8l
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 23:12:52 +0200
-Received: by bwz10 with SMTP id 10so3478755bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 14:12:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=CEQaQKpki9cjqCtAkkQAORMVUOuxEyu9hJgh+dl3sHI=;
-	b=gXqo7VIa6xH92fxqNcVV7Jg0aowD0qltND3Ch2CY1PbD3KY240iviorh9bmbtR25zL
-	WF7zHhkl9S2zyO0nBe+mgpid2wQEM+aNstWZq/H5qMatxdPE0wMsno79gD7x7/YtrS0v
-	ZG+1Y2F6FPeDS1+7/ri+xC1Pir9utXnakhURk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Sx/Pnh4XBwc/Y7fm6NaOV3JSYaE08pE2Qab7dUXu1qo7fxiF8p+JTCFIRwcHz6/pZs
-	+cNOg6EjPG2LaMgL6zIYQnxn8L3Xn6Vbfjue98MmlTb50sVgiBgK+oOeFidrZkYnCcTL
-	C3JT84xjDU553Z3tmb3kXBuTP2MM7gQDYRUtk=
-MIME-Version: 1.0
-Received: by 10.204.178.68 with SMTP id bl4mr5569107bkb.119.1279660360612; 
-	Tue, 20 Jul 2010 14:12:40 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Tue, 20 Jul 2010 14:12:40 -0700 (PDT)
-In-Reply-To: <1279656272.8360.4.camel@utx.lan>
-References: <1279656272.8360.4.camel@utx.lan>
-Date: Tue, 20 Jul 2010 23:12:40 +0200
-Message-ID: <AANLkTinBlA6nAsv2siYYqI0QTHavRuNkeceeOBUvD094@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1ObK9Z-0007em-6F for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 23:15:20 +0200
+Received: from f053032255.adsl.alicedsl.de ([78.53.32.255]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1ObK9L-0001jz-Nx for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 21:14:52 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1279464507.18570.59.camel@mattotaupa>
+References: <1279216536.3741.27.camel@mattotaupa>
+	<1279270987.4164.29.camel@mattotaupa>
+	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
+	<i1qogv$i28$2@dough.gmane.org> <1279355702.14848.3.camel@mattotaupa>
+	<i1s6sg$d1j$1@dough.gmane.org> <1279464507.18570.59.camel@mattotaupa>
+Date: Tue, 20 Jul 2010 23:14:48 +0200
+Message-ID: <1279660488.4096.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: RDEPENDS_${PN} overwrites RDEPENDS_foo - bug or feature?
+Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,40 +43,162 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 21:12:52 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 20 Jul 2010 21:15:21 -0000
+X-Groupsio-MsgNum: 21218
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-kcxdf3R+gX96Y11C2MLR"
 
-2010/7/20 Stanislav Brabec <utx@penguin.cz>
+--=-kcxdf3R+gX96Y11C2MLR
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> While verifying all aspects of proposed udev change, I experienced a
-> strange behavior of an udev recipe with RDEPENDS_udev:
->
-> RDEPENDS_udev is always ignored. Searching in deep, I found that
-> RDEPENDS_${PN} defined in update-rc.d.bbclass overwrites RDEPENDS_udev.
->
-> Once RDEPENDS_${PN} is defined, RDEPENDS_udev has no effect.
->
+Am Sonntag, den 18.07.2010, 16:48 +0200 schrieb Paul Menzel:
+> Am Samstag, den 17.07.2010, 14:15 +0200 schrieb Koen Kooi:
+> > On 17-07-10 10:35, Paul Menzel wrote:
+> > > Am Samstag, den 17.07.2010, 01:03 +0200 schrieb Koen Kooi:
+> > >> On 16-07-10 17:23, Khem Raj wrote:
+> > >>> On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
+> > >>> <paulepanter@users.sourceforge.net> wrote:
+> > >=20
+> > >>>> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
+> > >>>>
+> > >>>>> I ran out of space and noticed
+> > >>>>>
+> > >>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
+> > >>>>>
+> > >>>>> is 8,1G big.
+> > >>>>>
+> > >>>>> Some of the executable files in
+> > >>>>>
+> > >>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroot-d=
+estdir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
+> > >>>>>
+> > >>>>> are 101 MB big.
+> > >>>
+> > >>> its most probably the -g3/-ggdb3 bloat.
+> > >>
+> > >> No, it's git not creating (hard)links but copies of the same app. Ru=
+n an
+> > >> md5sum on the binaries, they will all match. I suggest you stop
+> > >> spreading FUD about -ggdb3, it is not being appriciated.
+> > >=20
+> > > I do not know anything about the technical background. I can only rep=
+ort
+> > > that removing `-ggdb3` fixed it for me.
+> >=20
+> > Are you saying that removing -ggdb3 made git create proper (hard)links?
+>=20
+> No, I just said, that after doing as Khem suggested the available space
+> was big enough.
+>=20
+> Anyway, I tried to investigate a little and could not find anything
+> related to (hard)link problems. But probably I overlooked something. I
+> head refresh my memory about hard and soft links [1].
+>=20
+> 1. As you suggested in your reply I ran `md5sum` on the binaries. They
+> do indeed match on the binaries I posted, but also the inode matches. It
+> looks like that is way it should be.
+>=20
+>         $ echo "Test" > test
+>         $ ln test test.link
+>         $ md5sum test*
+>         2205e48de5f93c784733ffcca841d2b5  test
+>         2205e48de5f93c784733ffcca841d2b5  test.link
+>         $ ls -1i test*
+>         3653430 test
+>         3653430 test.link
+>=20
+> So I think the hardlinks were created properly. I did not think of this
+> when reporting the problem so I did not run `ls -i` on the listed files
+> and I did not check with `du`.
+>=20
+>         /angstrom-dev/work/i686-linux/git-native-1.7.1.1-r0/image/angstro=
+m-dev/sysroots/i686-linux/usr/libexec/git-core $ md5sum * | sort
+>         [=E2=80=A6]
+>         82c05218d9634923e301a9463e8f9c0d  git-shell
+>         85edbd7803242b4895ed33b4fcfa3622  git-remote-ftp
+>         85edbd7803242b4895ed33b4fcfa3622  git-remote-ftps
+>         85edbd7803242b4895ed33b4fcfa3622  git-remote-http
+>         85edbd7803242b4895ed33b4fcfa3622  git-remote-https
+>         89a6ef52f4b7c336fb5fc0601edfd95f  git-mergetool
+>         9a7f760ecef6e64f370c907d61ad0ffb  git-svn
+>         9b57eb61ce668f2105a61a467f4d6d9b  git-difftool
+>         ac3472a81bc59a69119b0d027c3f617b  git-merge-one-file
+>         b14a5bba57d0ae0ccfdb0fceac0eb4ec  git-merge-octopus
+>         b6899828bc756c5d30398d49dce91deb  git-cvsexportcommit
+>         b775de2d21923f5d08e0bdcf3f9d31f6  git-mergetool--lib
+>         bd786a897bdc214bd5d89f51ad79f152  git-instaweb
+>         c8466908a274e211a43d287e510f2f19  git-merge-resolve
+>         ce109bd27d9404980bd82ddb529eca90  git-send-email
+>         d3da496bd962246727ceaabc1d4b1bdd  git-sh-setup
+>         d46c9b755b712bf3c27521b3c6e5fd30  git-relink
+>         d4b577d9a69d9af883de29d6af4f04c5  git
+>         d4b577d9a69d9af883de29d6af4f04c5  git-add
+>         d4b577d9a69d9af883de29d6af4f04c5  git-annotate
+>         d4b577d9a69d9af883de29d6af4f04c5  git-apply
+>         [=E2=80=A6]
+>=20
+>         /angstrom-dev/work/i686-linux/git-native-1.7.1.1-r0/image/angstro=
+m-dev/sysroots/i686-linux/usr/libexec/git-core $ ls -1i
+>         [ =E2=80=A6 ordered manually to match md5sum output]
+>         3691063 git-shell
+>         3691070 git-remote-ftp
+>         3691070 git-remote-ftps
+>         3691070 git-remote-http
+>         3691070 git-remote-https
+>         3691082 git-mergetool
+>         3691100 git-svn
+>         3691093 git-difftool
+>         3691080 git-merge-one-file
+>         3691079 git-merge-octopus
+>         3691095 git-cvsexportcommit
+>         3691102 git-mergetool--lib
+>         3691101 git-instaweb
+>         3691081 git-merge-resolve
+>         3691099 git-send-email
+>         3691104 git-sh-setup
+>         3691098 git-relink
+>         3691105 git
+>         [=E2=80=A6]
+>=20
+> What did I miss? Were you seeing something different?
+>=20
+> 2. You seem to have investigated this problem before and committed a fix
+> for git [2].
+>=20
+>     git 1.7.0.2: fix hardlinking problems as reported by Eric Brombaugh
+>=20
+> I could not find Eric=E2=80=99s report on this list or the Web. So I have=
+ to
+> test without your patch. But `git-native` does not seem to use your
+> patch, so I guess the behavior should be the one without your patch.
+>=20
+> Could you please tell me if my observations are correct.
 
-Not an expert in this, but would  RDEPENDS_${PN}_udev (or perhaps
-RDEPENDS_udev_${PN}) do the trick ?
-Ofc this is just a suggested workaround, no idea if what you describe is
-desired or not.
+I am a little bit lost. Koen, could you give me a pointer, please, so
+that I can try to continue to solve this issue.
 
-Frans
 
->
-> Is it a bug or documented feature?
->
-> --
->
-> ________________________________________________________________________
-> Stanislav Brabec
-> http://www.penguin.cz/~utx/zaurus <http://www.penguin.cz/%7Eutx/zaurus>
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Thanks,
 
+Paul
+
+
+> [1] info coreutils "ln invocation"
+> [2] http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D84de51=
+631e1e7bb76141332807ed2ba9e8df02ae
+
+--=-kcxdf3R+gX96Y11C2MLR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxGEcgACgkQPX1aK2wOHVgboACdHSC7wa49Y6/2myGK8pjuNIVv
+KysAniXegZOi0koMAxyBF9ebKB3zDLBH
+=jWzT
+-----END PGP SIGNATURE-----
+
+--=-kcxdf3R+gX96Y11C2MLR--
