@@ -1,45 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ob54A-0000C3-S6
+	(envelope-from <raj.khem@gmail.com>) id 1Ob584-0002Fs-Ee
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 07:08:32 +0200
-Received: by iwn34 with SMTP id 34so5544279iwn.6
+	Tue, 20 Jul 2010 07:12:33 +0200
+Received: by pvg13 with SMTP id 13so2210026pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 19 Jul 2010 22:08:22 -0700 (PDT)
+	Mon, 19 Jul 2010 22:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=hq7SPL4sePxqwqNSVM/9hP56LepUp6iQp55ZV+Q3Iqk=;
-	b=c7aNX8SYA/OkgVRCsYWIVcyWK+FnUF4OCZXh9qQrvWO13lh9Q2sLKQXGPtrAACq35F
-	jw1wmnUfNrJMvpLbLuSvtYZKOBCViA4Hedm787D7q7513Ts/3JVWyIOjqj1E/ZHhu17A
-	s6vqvqELgbYe21UXI52xCC8PXVLNUwZS67KH4=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=SgM3dBqby19/wQNnbKOuSmIWHhD5MGeYRJUEikRj3Gw=;
+	b=hWIvKszOHCi/QkQ0KD0fFDWzCXzQKRR8JupyTpM8dEEvyEYsCXj5r/WmOsFG4+sSB1
+	8w11jN91ybcknrTOavF1HEck7CgeSNO+H79O5ndwbXnLE8oqJzPfQ6q6+7MuMa99WBxY
+	XXFpOS7IvpHAEa8PUxhCbTthqgT1x7/5nsai4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=Nm+uwgbLtJv815Yvg/7ilWQ/hQCIHvFn70gVgsSrAgi+G3iABw1/S13f1MVr1AeLob
-	Qf8XlI5i8tMfNJQM+iUFhodB0me0K/pjmspP749KFhHCP8wQYxBO43+beBdZpuIOTnLU
-	AiKY5owcwftRjW0WdCaWXlSjW7KqxBNOwNTH8=
-Received: by 10.231.160.17 with SMTP id l17mr6473272ibx.102.1279602502495; 
-	Mon, 19 Jul 2010 22:08:22 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.186.88 with HTTP; Mon, 19 Jul 2010 22:08:02 -0700 (PDT)
-In-Reply-To: <AANLkTikmxYTbW7ZT5HoA8yyXfvaWbqu7ydQemXP8e4mm@mail.gmail.com>
-References: <1279527535-11994-1-git-send-email-raj.khem@gmail.com> 
-	<AANLkTikmxYTbW7ZT5HoA8yyXfvaWbqu7ydQemXP8e4mm@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=gVtP2XXW3mWNM65rHSvIOVP9Knds9wSMVc4a8nSBRkpfk/r17NySzoPBmUFcTGYjnO
+	uXOvnUelzmNOO7pQ68fZ9HOCSrn/nE3S5K48PlufihWX3DgcFhGzGTE52fBy5RsA9qNB
+	+7WMARlcOtOW6tQCIodV3RRpP+nYfZNfHnZ2s=
+Received: by 10.142.212.2 with SMTP id k2mr1953264wfg.35.1279602736810;
+	Mon, 19 Jul 2010 22:12:16 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id x18sm7306740wfd.8.2010.07.19.22.12.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 19 Jul 2010 22:12:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 19 Jul 2010 22:08:02 -0700
-Message-ID: <AANLkTimsDyM8w3UWdaalbgKIRp9cmE5iI29fVJPbNefB@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+Date: Mon, 19 Jul 2010 22:12:34 -0700
+Message-Id: <1279602754-8620-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC][PATCH] distro: Move thumb into distro features
+Subject: [PATCH] sane-toolchain.inc: Check for architectures which dont support EABI
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,483 +52,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 05:08:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 20 Jul 2010 05:12:33 -0000
 
-On Mon, Jul 19, 2010 at 3:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Mon, Jul 19, 2010 at 1:18 AM, Khem Raj <raj.khem@gmail.com> wrote:
->> * Currenlty we define the thumb specific overrides in machine tune files
->> =A0and as machine conf files are included before the distro conf files
->> =A0the overrides dont get right values and set incorrectly.
->>
->> * This patch moves the tune-thumb.inc from machine/include into
->> =A0distro/include and lets distro decide on thumb and thumb-interworking
->> =A0features based on the machine selected. If a machine which does not
->> =A0support thumb like all armv4 based machines is selected then distro
->> =A0makes correct decision now to disable thumb and thumb-interworking
->> =A0based upon the machine seletected.
->
-> I accidentally hit push button in wrong branch and this commit got pushed
-> I will revert it once I get home later today if someone gets bitten befor=
-e
-> feel free to revert it.
+* This patch reverses the check for EABI support. This would mean
+  that future processors will not have to be added everytime they
+  come out.
 
-Done. Meanwhile, Does this patch look ok for .dev ? I would like some ACKs
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/include/sane-toolchain.inc |    5 ++---
+ 1 files changed, 2 insertions(+), 3 deletions(-)
 
-Thanks
--Khem
+diff --git a/conf/distro/include/sane-toolchain.inc b/conf/distro/include/sane-toolchain.inc
+index 08fc077..de73922 100644
+--- a/conf/distro/include/sane-toolchain.inc
++++ b/conf/distro/include/sane-toolchain.inc
+@@ -153,8 +153,7 @@ def detect_arm_abi (d):
+ 
+ def compute_os_portion_of_target_triplet (d):
+ 	import bb
+-	arm_eabi_supporting_arches = "armv6 armv6-novfp \
+-	armv5te iwmmxt armv7a armv7 armv5teb armv4t armv4"
++	arm_eabi_unsupported_arches = "armv1 armv2 armv3"
+ 	ppc_spe_supporting_arches = "ppce500v2 ppce500"
+ 	gnu_suffix = ""
+ 	if bb.data.getVar('LIBC', d, 1) == "uclibc":
+@@ -175,7 +174,7 @@ def compute_os_portion_of_target_triplet (d):
+ 	bparch is not None:
+ 		if 'eabi' in bb.data.getVar('DISTRO_FEATURES',d,1).split() and \
+ 		bb.data.getVar('TARGET_ARCH', d, 1) in [ 'arm', 'armeb' ]:
+-			if bparch not in arm_eabi_supporting_arches.split():
++			if bparch in arm_eabi_unsupported_arches.split():
+ 				bb.fatal("DISTRO requested EABI but selected machine does not support EABI")
+ 				abi_suffix = ""
+ 			else:
+-- 
+1.7.0.4
 
->
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =A0conf/distro/angstrom-2008.1.conf =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A01 +
->> =A0conf/distro/gmustix.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0=
- =A02 +
->> =A0conf/distro/include/arm-thumb.inc =A0 =A0 =A0 =A0 =A0 | =A0 32 ++++++=
-+++++++++++++++++++++
->> =A0conf/distro/kaeilos-2010.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A01 =
-+
->> =A0conf/distro/kaeilos.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0=
- =A01 +
->> =A0conf/distro/micro.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 =A01 +
->> =A0conf/distro/minimal.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0=
- =A03 +-
->> =A0conf/distro/shr.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0|=
- =A0 =A01 +
->> =A0conf/distro/slugos.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0=
- =A02 +
->> =A0conf/machine/include/ixp4xx.inc =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =A01 -
->> =A0conf/machine/include/tune-arm1136-novfp.inc | =A0 =A03 --
->> =A0conf/machine/include/tune-arm1136jf-s.inc =A0 | =A0 =A03 --
->> =A0conf/machine/include/tune-arm1176jzf-s.inc =A0| =A0 =A03 --
->> =A0conf/machine/include/tune-arm920t.inc =A0 =A0 =A0 | =A0 =A04 ---
->> =A0conf/machine/include/tune-arm926ejs.inc =A0 =A0 | =A0 =A03 --
->> =A0conf/machine/include/tune-arm9tdmi.inc =A0 =A0 =A0| =A0 =A04 ---
->> =A0conf/machine/include/tune-armv7.inc =A0 =A0 =A0 =A0 | =A0 =A04 ---
->> =A0conf/machine/include/tune-ep9312.inc =A0 =A0 =A0 =A0| =A0 =A03 --
->> =A0conf/machine/include/tune-thumb.inc =A0 =A0 =A0 =A0 | =A0 32 --------=
--------------------
->> =A0conf/machine/include/tune-xscale.inc =A0 =A0 =A0 =A0| =A0 =A04 ---
->> =A0conf/machine/palmz31.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
-=A03 --
->> =A0conf/machine/palmz72.conf =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0 =
-=A03 --
->> =A022 files changed, 43 insertions(+), 71 deletions(-)
->> =A0create mode 100644 conf/distro/include/arm-thumb.inc
->> =A0delete mode 100644 conf/machine/include/tune-thumb.inc
->>
->> diff --git a/conf/distro/angstrom-2008.1.conf b/conf/distro/angstrom-200=
-8.1.conf
->> index 7c70c84..84e8096 100644
->> --- a/conf/distro/angstrom-2008.1.conf
->> +++ b/conf/distro/angstrom-2008.1.conf
->> @@ -136,6 +136,7 @@ PREFERRED_VERSION_binutils-cross-sdk_avr32 =3D "2.17=
-"
->>
->> =A0# Toolchain virtuals:
->> =A0require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
->> +require conf/distro/include/arm-thumb.inc
->>
->> =A0PREFERRED_PROVIDER_dbus-glib =A0 =A0 =A0 =A0 =A0 =A0 =3D "dbus-glib"
->> =A0PREFERRED_PROVIDER_hotplug =A0 =A0 =A0 =A0 =A0 =A0 =A0 =3D "udev"
->> diff --git a/conf/distro/gmustix.conf b/conf/distro/gmustix.conf
->> index 17f8056..5dd519d 100644
->> --- a/conf/distro/gmustix.conf
->> +++ b/conf/distro/gmustix.conf
->> @@ -5,6 +5,8 @@
->> =A0INHERIT +=3D "package_tar package_ipk"
->> =A0LIBC =3D "uclibc"
->> =A0require conf/distro/include/${LIBC}.inc
->> +require conf/distro/include/arm-thumb.inc
->> +
->> =A0TARGET_OS =3D "linux-uclibc"
->> =A0TARGET_FPU =3D "soft"
->> =A0IMAGE_FSTYPES =3D "jffs2"
->> diff --git a/conf/distro/include/arm-thumb.inc b/conf/distro/include/arm=
--thumb.inc
->> new file mode 100644
->> index 0000000..cd88bb4
->> --- /dev/null
->> +++ b/conf/distro/include/arm-thumb.inc
->> @@ -0,0 +1,32 @@
->> +#tune file for thumb instructions
->> +
->> +ARM_INSTRUCTION_SET ?=3D "arm"
->> +# "arm" "thumb"
->> +# =A0 =A0The instruction set the compiler should use when generating ap=
-plication
->> +# =A0 =A0code. =A0The kernel is always compiled with arm code at presen=
-t. =A0arm code
->> +# =A0 =A0is the original 32 bit ARM instruction set, thumb code is the =
-16 bit
->> +# =A0 =A0encoded RISC sub-set. =A0Thumb code is smaller (maybe 70% of t=
-he ARM size)
->> +# =A0 =A0but requires more instructions (140% for 70% smaller code) so =
-may be
->> +# =A0 =A0slower.
->> +
->> +THUMB_INTERWORK ?=3D "no"
->> +# "yes" "no"
->> +# =A0 =A0Whether to compile with code to allow interworking between the=
- two
->> +# =A0 =A0instruction sets. =A0This allows thumb code to be executed on =
-a primarily
->> +# =A0 =A0arm system and vice versa. =A0It is strongly recommended that =
-DISTROs not
->> +# =A0 =A0turn this off - the actual cost is very small.
->> +
->> +OVERRIDE_THUMB =3D "${@['', ':thumb'][bb.data.getVar('ARM_INSTRUCTION_S=
-ET', d, 1) =3D=3D 'thumb']}"
->> +OVERRIDE_INTERWORK =3D "${@['', ':thumb-interwork'][bb.data.getVar('THU=
-MB_INTERWORK', d, 1) =3D=3D 'yes']}"
->> +OVERRIDES .=3D "${OVERRIDE_THUMB}${OVERRIDE_INTERWORK}"
->> +
->> +# =A0 =A0Compiler and linker options for application code and kernel co=
-de. =A0These
->> +# =A0 =A0options ensure that the compiler has the correct settings for =
-the selected
->> +# =A0 =A0instruction set and interworking.
->> +ARM_INTERWORK_M_OPT =3D "${@['-mno-thumb-interwork', '-mthumb-interwork=
-'][bb.data.getVar('THUMB_INTERWORK', d, 1) =3D=3D 'yes']}"
->> +ARM_THUMB_M_OPT =3D "${@['-mno-thumb', '-mthumb'][bb.data.getVar('ARM_I=
-NSTRUCTION_SET', d, 1) =3D=3D 'thumb']}"
->> +
->> +#
->> +TARGET_CC_ARCH +=3D =A0"${ARM_INTERWORK_M_OPT} ${ARM_THUMB_M_OPT}"
->> +TARGET_CC_KERNEL_ARCH =A0+=3D "-mno-thumb-interwork -mno-thumb"
->> +
->> diff --git a/conf/distro/kaeilos-2010.conf b/conf/distro/kaeilos-2010.co=
-nf
->> index 4bb637c..ba37445 100644
->> --- a/conf/distro/kaeilos-2010.conf
->> +++ b/conf/distro/kaeilos-2010.conf
->> @@ -96,6 +96,7 @@ PREFERRED_VERSION_gcc-cross-intermediate ?=3D "${KAEIL=
-OS_GCC_VERSION}"
->>
->> =A0PREFERRED_ARM_INSTRUCTION_SET ?=3D "thumb"
->> =A0require conf/distro/include/sane-toolchain.inc
->> +require conf/distro/include/arm-thumb.inc
->>
->> =A0PREFERRED_PROVIDER_dbus-glib =A0 =A0 =A0 =A0 =A0 =A0 =3D "dbus-glib"
->> =A0PREFERRED_PROVIDER_hotplug =A0 =A0 =A0 =A0 =A0 =A0 =A0 =3D "udev"
->> diff --git a/conf/distro/kaeilos.conf b/conf/distro/kaeilos.conf
->> index eb12d2e..b141280 100644
->> --- a/conf/distro/kaeilos.conf
->> +++ b/conf/distro/kaeilos.conf
->> @@ -124,6 +124,7 @@ PREFERRED_VERSION_binutils-cross-sdk_avr32 =3D "2.17=
-"
->>
->> =A0# Toolchain virtuals:
->> =A0require conf/distro/include/toolchain-${TOOLCHAIN_TYPE}.inc
->> +require conf/distro/include/arm-thumb.inc
->>
->> =A0PREFERRED_PROVIDER_dbus-glib =A0 =A0 =A0 =A0 =A0 =A0 =3D "dbus-glib"
->> =A0PREFERRED_PROVIDER_hotplug =A0 =A0 =A0 =A0 =A0 =A0 =A0 =3D "udev"
->> diff --git a/conf/distro/micro.conf b/conf/distro/micro.conf
->> index 9885425..fc50391 100644
->> --- a/conf/distro/micro.conf
->> +++ b/conf/distro/micro.conf
->> @@ -66,6 +66,7 @@ PREFERRED_VERSION_glibc =A0 =A0 =A0 =A0 =A0 =A0 ?=3D "=
-2.10.1"
->> =A0PREFERRED_VERSION_glibc-initial =A0 =A0 ?=3D "2.10.1"
->> =A0PREFERRED_ARM_INSTRUCTION_SET ?=3D "thumb"
->> =A0require conf/distro/include/sane-toolchain.inc
->> +require conf/distro/include/arm-thumb.inc
->>
->> =A0#####################################################################=
-########
->> =A0# OVERRIDES adjusted from bitbake.conf to feature the MACHINE_CLASS
->> diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
->> index e400c14..9a08130 100644
->> --- a/conf/distro/minimal.conf
->> +++ b/conf/distro/minimal.conf
->> @@ -16,7 +16,7 @@ DISTRO_VERSION =3D "dev-snapshot-${SRCDATE}"
->> =A0DISTRO_TYPE ?=3D "debug"
->>
->> =A0# Ensure some form of release config, so error out if someone thinks =
-he knows better
->> -DISTRO_CHECK :=3D "${@bb.data.getVar('DISTRO_VERSION',d,1) or bb.fatal(=
-'Remove this line or set a dummy DISTRO_VERSION")
->> +DISTRO_CHECK :=3D "${@bb.data.getVar('DISTRO_VERSION',d,1) or bb.fatal(=
-'Remove this line or set a dummy DISTRO_VERSION')}"
->>
->> =A0#####################################################################=
-########
->> =A0# FEATURE SELECTION
->> @@ -86,6 +86,7 @@ MACHINE_KERNEL_VERSION =3D "2.6"
->> =A0#####################################################################=
-########
->> =A0LIBC ?=3D "eglibc"
->> =A0require conf/distro/include/sane-toolchain.inc
->> +require conf/distro/include/arm-thumb.inc
->>
->> =A0#####################################################################=
-########
->> =A0# PREFERRED VERSIONS
->> diff --git a/conf/distro/shr.conf b/conf/distro/shr.conf
->> index f0167da..9fd156f 100644
->> --- a/conf/distro/shr.conf
->> +++ b/conf/distro/shr.conf
->> @@ -159,6 +159,7 @@ PREFERRED_VERSION_eglibc =A0 =A0 =A0 =A0 =A0 =A0 ?=
-=3D "2.12"
->> =A0PREFERRED_VERSION_eglibc-initial =A0 =A0 ?=3D "2.12"
->> =A0PREFERRED_GCC_VERSION =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0?=3D "4.5"
->> =A0require conf/distro/include/sane-toolchain.inc
->> +require conf/distro/include/arm-thumb.inc
->>
->> =A0# Set some java bits
->> =A0require conf/distro/include/sane-toolchain-java.inc
->> diff --git a/conf/distro/slugos.conf b/conf/distro/slugos.conf
->> index 5a2f0dc..5f9c06c 100644
->> --- a/conf/distro/slugos.conf
->> +++ b/conf/distro/slugos.conf
->> @@ -22,3 +22,5 @@ require conf/distro/include/slugos.inc
->> =A0# Can be either glibc or eglibc (or perhaps even uclibc)
->> =A0LIBC ?=3D "eglibc"
->> =A0require conf/distro/include/${LIBC}.inc
->> +require conf/distro/include/arm-thumb.inc
->> +
->> diff --git a/conf/machine/include/ixp4xx.inc b/conf/machine/include/ixp4=
-xx.inc
->> index 192cbb1..cf7f0dd 100644
->> --- a/conf/machine/include/ixp4xx.inc
->> +++ b/conf/machine/include/ixp4xx.inc
->> @@ -22,7 +22,6 @@ IMAGE_FSTYPES ?=3D "jffs2 tar.gz"
->> =A0EXTRA_IMAGECMD_jffs2 =3D "--pad --eraseblock=3D0x20000 -n"
->>
->> =A0require conf/machine/include/tune-xscale.inc
->> -require conf/machine/include/tune-thumb.inc
->>
->> =A0#--------------------------------------------------------------------=
------------
->> =A0# Board defaults
->> diff --git a/conf/machine/include/tune-arm1136-novfp.inc b/conf/machine/=
-include/tune-arm1136-novfp.inc
->> index e1f7945..58134b7 100644
->> --- a/conf/machine/include/tune-arm1136-novfp.inc
->> +++ b/conf/machine/include/tune-arm1136-novfp.inc
->> @@ -5,6 +5,3 @@ TARGET_CC_ARCH =3D "-march=3Darmv6j -mtune=3Darm1136jf-s=
-"
->> =A0FEED_ARCH =3D "armv6-novfp"
->> =A0BASE_PACKAGE_ARCH =3D "armv6-novfp"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t armv5te armv6-novfp"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> diff --git a/conf/machine/include/tune-arm1136jf-s.inc b/conf/machine/in=
-clude/tune-arm1136jf-s.inc
->> index c532b9c..2944cc7 100644
->> --- a/conf/machine/include/tune-arm1136jf-s.inc
->> +++ b/conf/machine/include/tune-arm1136jf-s.inc
->> @@ -2,6 +2,3 @@ TARGET_CC_ARCH =3D "-march=3Darmv6j -mtune=3Darm1136jf-s=
- -mfpu=3Dvfp -mfloat-abi=3Dsoftfp"
->> =A0FEED_ARCH =3D "armv6"
->> =A0BASE_PACKAGE_ARCH =3D "armv6"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t armv5te armv6"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> diff --git a/conf/machine/include/tune-arm1176jzf-s.inc b/conf/machine/i=
-nclude/tune-arm1176jzf-s.inc
->> index b7c5291..ee2884b 100644
->> --- a/conf/machine/include/tune-arm1176jzf-s.inc
->> +++ b/conf/machine/include/tune-arm1176jzf-s.inc
->> @@ -2,6 +2,3 @@ TARGET_CC_ARCH =3D "-march=3Darmv6j -mtune=3Darm1176jzf-=
-s -mfpu=3Dvfp -mfloat-abi=3Dsoftfp
->> =A0FEED_ARCH =3D "armv6"
->> =A0BASE_PACKAGE_ARCH =3D "armv6"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t armv5te armv6"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> diff --git a/conf/machine/include/tune-arm920t.inc b/conf/machine/includ=
-e/tune-arm920t.inc
->> index 5a373e9..fee5c58 100644
->> --- a/conf/machine/include/tune-arm920t.inc
->> +++ b/conf/machine/include/tune-arm920t.inc
->> @@ -2,7 +2,3 @@ FEED_ARCH =3D "armv4t"
->> =A0BASE_PACKAGE_ARCH =3D "armv4t"
->> =A0TARGET_CC_ARCH =3D "-march=3Darmv4t -mtune=3Darm920t"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> -
->> diff --git a/conf/machine/include/tune-arm926ejs.inc b/conf/machine/incl=
-ude/tune-arm926ejs.inc
->> index f6f5064..f41e460 100644
->> --- a/conf/machine/include/tune-arm926ejs.inc
->> +++ b/conf/machine/include/tune-arm926ejs.inc
->> @@ -5,6 +5,3 @@ PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t armv5te"
->> =A0# For gcc 4.x you need:
->> =A0TARGET_CC_ARCH =3D "-march=3Darmv5te -mtune=3Darm926ej-s"
->> =A0BASE_PACKAGE_ARCH =3D "armv5te"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> diff --git a/conf/machine/include/tune-arm9tdmi.inc b/conf/machine/inclu=
-de/tune-arm9tdmi.inc
->> index a11ee38..d788b53 100644
->> --- a/conf/machine/include/tune-arm9tdmi.inc
->> +++ b/conf/machine/include/tune-arm9tdmi.inc
->> @@ -2,7 +2,3 @@ FEED_ARCH =3D "armv4t"
->> =A0BASE_PACKAGE_ARCH =3D "armv4t"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t"
->> =A0TARGET_CC_ARCH =3D "-mcpu=3Darm9tdmi -mtune=3Darm9tdmi"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> -
->> diff --git a/conf/machine/include/tune-armv7.inc b/conf/machine/include/=
-tune-armv7.inc
->> index 05ec3da..379a3eb 100644
->> --- a/conf/machine/include/tune-armv7.inc
->> +++ b/conf/machine/include/tune-armv7.inc
->> @@ -5,7 +5,3 @@ TARGET_CC_ARCH =3D "-march=3Darmv7 -mfpu=3Dvfp -mfloat-a=
-bi=3Dsoftfp"
->> =A0FEED_ARCH =3D "armv7"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "armv4 armv4t armv5te armv6 armv7"
->> =A0BASE_PACKAGE_ARCH =3D "armv7"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> -
->> diff --git a/conf/machine/include/tune-ep9312.inc b/conf/machine/include=
-/tune-ep9312.inc
->> index c8770e0..7458281 100644
->> --- a/conf/machine/include/tune-ep9312.inc
->> +++ b/conf/machine/include/tune-ep9312.inc
->> @@ -5,9 +5,6 @@ PACKAGE_EXTRA_ARCHS +=3D "armv4t ep9312"
->> =A0BASE_PACKAGE_ARCH =3D "ep9312"
->> =A0FEED_ARCH =3D "ep9312"
->>
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> -
->> =A0FULL_OPTIMIZATION =3D "-fexpensive-optimizations -fomit-frame-pointer=
- -frename-registers -O -fno-signed-zeros"
->> =A0DEBUG_OPTIMIZATION =3D "-O -fno-omit-frame-pointer -g"
->> =A0SELECTED_OPTIMIZATION =3D "${@bb.data.getVar(['FULL_OPTIMIZATION', 'D=
-EBUG_OPTIMIZATION'][bb.data.getVar('DEBUG_BUILD', d, 1) =3D=3D '1'], d, 1)}=
-"
->> diff --git a/conf/machine/include/tune-thumb.inc b/conf/machine/include/=
-tune-thumb.inc
->> deleted file mode 100644
->> index cd88bb4..0000000
->> --- a/conf/machine/include/tune-thumb.inc
->> +++ /dev/null
->> @@ -1,32 +0,0 @@
->> -#tune file for thumb instructions
->> -
->> -ARM_INSTRUCTION_SET ?=3D "arm"
->> -# "arm" "thumb"
->> -# =A0 =A0The instruction set the compiler should use when generating ap=
-plication
->> -# =A0 =A0code. =A0The kernel is always compiled with arm code at presen=
-t. =A0arm code
->> -# =A0 =A0is the original 32 bit ARM instruction set, thumb code is the =
-16 bit
->> -# =A0 =A0encoded RISC sub-set. =A0Thumb code is smaller (maybe 70% of t=
-he ARM size)
->> -# =A0 =A0but requires more instructions (140% for 70% smaller code) so =
-may be
->> -# =A0 =A0slower.
->> -
->> -THUMB_INTERWORK ?=3D "no"
->> -# "yes" "no"
->> -# =A0 =A0Whether to compile with code to allow interworking between the=
- two
->> -# =A0 =A0instruction sets. =A0This allows thumb code to be executed on =
-a primarily
->> -# =A0 =A0arm system and vice versa. =A0It is strongly recommended that =
-DISTROs not
->> -# =A0 =A0turn this off - the actual cost is very small.
->> -
->> -OVERRIDE_THUMB =3D "${@['', ':thumb'][bb.data.getVar('ARM_INSTRUCTION_S=
-ET', d, 1) =3D=3D 'thumb']}"
->> -OVERRIDE_INTERWORK =3D "${@['', ':thumb-interwork'][bb.data.getVar('THU=
-MB_INTERWORK', d, 1) =3D=3D 'yes']}"
->> -OVERRIDES .=3D "${OVERRIDE_THUMB}${OVERRIDE_INTERWORK}"
->> -
->> -# =A0 =A0Compiler and linker options for application code and kernel co=
-de. =A0These
->> -# =A0 =A0options ensure that the compiler has the correct settings for =
-the selected
->> -# =A0 =A0instruction set and interworking.
->> -ARM_INTERWORK_M_OPT =3D "${@['-mno-thumb-interwork', '-mthumb-interwork=
-'][bb.data.getVar('THUMB_INTERWORK', d, 1) =3D=3D 'yes']}"
->> -ARM_THUMB_M_OPT =3D "${@['-mno-thumb', '-mthumb'][bb.data.getVar('ARM_I=
-NSTRUCTION_SET', d, 1) =3D=3D 'thumb']}"
->> -
->> -#
->> -TARGET_CC_ARCH +=3D =A0"${ARM_INTERWORK_M_OPT} ${ARM_THUMB_M_OPT}"
->> -TARGET_CC_KERNEL_ARCH =A0+=3D "-mno-thumb-interwork -mno-thumb"
->> -
->> diff --git a/conf/machine/include/tune-xscale.inc b/conf/machine/include=
-/tune-xscale.inc
->> index 3a6bd0e..f0f58bc 100644
->> --- a/conf/machine/include/tune-xscale.inc
->> +++ b/conf/machine/include/tune-xscale.inc
->> @@ -7,7 +7,3 @@ TARGET_CC_ARCH =3D "-march=3Darmv5te -mtune=3Dxscale"
->> =A0TARGET_CC_KERNEL_ARCH =3D "-march=3Darmv5te -mtune=3Dxscale"
->> =A0PACKAGE_EXTRA_ARCHS +=3D "${@['armv4b armv4tb armv5teb', 'armv4 armv4=
-t armv5te'][ bb.data.getVar('TARGET_ARCH', d, 1) =3D=3D 'arm']}"
->> =A0BASE_PACKAGE_ARCH =3D "${@['armv5teb', 'armv5te'][bb.data.getVar('TAR=
-GET_ARCH', d, 1) =3D=3D 'arm']}"
->> -
->> -# Include tune file for thumb support, it defaults to off so DISTROs ca=
-n turn it on if they wish
->> -require conf/machine/include/tune-thumb.inc
->> -
->> diff --git a/conf/machine/palmz31.conf b/conf/machine/palmz31.conf
->> index 0332952..9fb5f7e 100644
->> --- a/conf/machine/palmz31.conf
->> +++ b/conf/machine/palmz31.conf
->> @@ -11,9 +11,6 @@ MACHINE_DISPLAY_HEIGHT_PIXELS =3D "160"
->>
->> =A0SERIAL_CONSOLE =3D "115200 ttyS0"
->>
->> -# Use tune-xscale per default. Machine independent feeds should be buil=
-t with tune-strongarm.
->> -require conf/machine/include/tune-thumb.inc
->> -
->> =A0MACHINE_EXTRA_RRECOMMENDS +=3D "kernel-module-i2c-pxa \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 kernel-module-i2=
-c-algo-pxa \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 kernel-module-i2=
-c-dev \
->> diff --git a/conf/machine/palmz72.conf b/conf/machine/palmz72.conf
->> index 502c11a..9766434 100644
->> --- a/conf/machine/palmz72.conf
->> +++ b/conf/machine/palmz72.conf
->> @@ -11,9 +11,6 @@ MACHINE_DISPLAY_HEIGHT_PIXELS =3D "320"
->>
->> =A0SERIAL_CONSOLE =3D "115200 ttyS0"
->>
->> -# Use tune-xscale per default. Machine independent feeds should be buil=
-t with tune-strongarm.
->> -require conf/machine/include/tune-thumb.inc
->> -
->> =A0MACHINE_EXTRA_RRECOMMENDS +=3D "kernel-module-i2c-pxa \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 kernel-module-i2=
-c-algo-pxa \
->> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 kernel-module-i2=
-c-dev \
->> --
->> 1.7.0.4
->>
->>
->
 
 
