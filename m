@@ -1,40 +1,44 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1ObI74-0007rd-Q4
+	(envelope-from <esbenhaabendal@gmail.com>) id 1ObIA6-00024E-M6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 21:04:23 +0200
-Received: from p5b0342e9.dip.t-dialin.net ([91.3.66.233] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1ObI6u-0005Br-Ez by authid <stefan@sostec.de> with cram_md5
+	Tue, 20 Jul 2010 21:07:37 +0200
+Received: by fxm12 with SMTP id 12so3124752fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 20 Jul 2010 21:04:14 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1ObI6s-0007mU-RR
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 21:04:10 +0200
-Date: Tue, 20 Jul 2010 21:04:10 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100720190410.GM1512@excalibur.local>
+	Tue, 20 Jul 2010 12:07:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=LT7ST7WMBCV8uIh69c72Qd+sDCkeY2NmQBRK0T81Vlk=;
+	b=hmhBnlcgdvZAjOORa/gTBdDPjpcwDedQGBhkj9et+OGvAu/cZRb5tgTIjEqHV5FDle
+	IqrsRBToPu2Sriujt8G4IgeaaAKqVTE6Yi3VvDcQ3cuX4s4quoMI19F9jTT+wkQK6flW
+	R1pew1lOBtN4p4xdpTR8L7hnFGLsPo1hS133c=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=kjIxBBXkxMqWzliHHwvrtwScGP5N6W49GxmaZ1AslatO9JzU0HloG74U1IiFMiRn2u
+	s1uyU9t52Qt2l48zhNsG2+B729yvgtGSAi7+fb0YoD7carBCzfhQXrmW2LTKTmNBWZxd
+	gy5m0umnHOKJWQVqgWfbJUNkr6lWYGC0T6Imo=
+MIME-Version: 1.0
+Received: by 10.239.135.78 with SMTP id c14mr474032hbc.64.1279652840677; Tue, 
+	20 Jul 2010 12:07:20 -0700 (PDT)
+Received: by 10.239.181.207 with HTTP; Tue, 20 Jul 2010 12:07:20 -0700 (PDT)
+In-Reply-To: <20100720173425.GL1512@excalibur.local>
 References: <20100709204055.GA12163@excalibur.local>
 	<20100720070108.GE1512@excalibur.local>
 	<i23lkm$ftn$1@dough.gmane.org>
 	<20100720084026.GI1512@excalibur.local>
 	<i24kf7$3d3$1@dough.gmane.org>
 	<20100720173425.GL1512@excalibur.local>
-	<i24qm2$qc6$1@dough.gmane.org>
-MIME-Version: 1.0
-In-Reply-To: <i24qm2$qc6$1@dough.gmane.org>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+Date: Tue, 20 Jul 2010 21:07:20 +0200
+Message-ID: <AANLkTikYdD7jzsJBNEK0MedOmM_jHIEcdCfE0APMSOqt@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -52,32 +56,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 19:04:23 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 20 Jul 2010 19:07:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hello.
+On Tue, Jul 20, 2010 at 7:34 PM, Stefan Schmidt
+<stefan@datenfreihafen.org> wrote:
+> On Tue, 2010-07-20 at 18:56, Koen Kooi wrote:
+>> And of course the number of people screaming for a stable branch is an
+>> order of magnitude larger than the number of people that end up actually
+>> supporting it.
+>
+> Sure, that is no surprise. :)
 
-On Tue, 2010-07-20 at 20:42, Koen Kooi wrote:
-> 
-> On 20-07-10 19:34, Stefan Schmidt wrote:
-> > 
-> > Wasn't there a list produced with all recipes that used legacy staging? I swear
-> > I have seen something like this but I can't find it in my recent builds.
-> 
-> In your TMPDIR:
-> 
-> koen@dominion:/OE/angstrom-dev$ cat legacy-staging.log | sort | uniq | wc -l
-> 53
+It might be surprising to some, but some of those not actively
+supporting the "stable" branch might choose not to do so because the
+chosen stable process does not fit their needs.
+Most likely, all people contributing to stable is mostly happy with
+how it is handled.
 
-Ha, there it was. :)
-
-> It includes beasts like perl and python.
-
-Hmm, that would be tricky. But there are some more easier ones that could get
-nucked before.
-
-regards
-Stefan Schmidt
+/Esben
 
 
