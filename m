@@ -1,27 +1,28 @@
-Received: from mail.dns-net.ch ([195.160.190.3] helo=111.com)
+Received: from mailrelay04.sunrise.ch ([194.158.229.47]
+	helo=smtp-be-02.be08.sunrise.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <c.aeschlimann@acn-group.ch>) id 1ObAek-0006s2-R7
+	(envelope-from <dv@vollmann.ch>) id 1ObArV-000782-W1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 13:06:40 +0200
-Received: from [172.16.145.92] (unknown [212.98.42.40])
-	by 111.com (Postfix) with ESMTPA id 5657A472DB;
-	Tue, 20 Jul 2010 13:06:31 +0200 (CEST)
-Message-ID: <4C45832C.1090108@acn-group.ch>
-Date: Tue, 20 Jul 2010 13:06:20 +0200
-From: Christophe Aeschlimann <c.aeschlimann@acn-group.ch>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB;
-	rv:1.9.2.4) Gecko/20100608 Thunderbird/3.1
+	Tue, 20 Jul 2010 13:19:51 +0200
+Received: from [192.168.26.14] (212-98-43-140.static.adslpremium.ch
+	[212.98.43.140])
+	by smtp-be-02.be08.sunrise.ch (8.13.1/8.12.10) with ESMTP id
+	o6KBJZnH016604; Tue, 20 Jul 2010 13:19:35 +0200
+Message-ID: <4C458674.5080802@vollmann.ch>
+Date: Tue, 20 Jul 2010 13:20:20 +0200
+From: Detlef Vollmann <dv@vollmann.ch>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<4C45619F.1060201@2net.co.uk>
-	<4C4576A5.7080009@nedap.com>
-In-Reply-To: <4C4576A5.7080009@nedap.com>
-X-SA-Exim-Connect-IP: 195.160.190.3
-X-SA-Exim-Mail-From: c.aeschlimann@acn-group.ch
+References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<i23lkm$ftn$1@dough.gmane.org>
+	<20100720084026.GI1512@excalibur.local>
+In-Reply-To: <20100720084026.GI1512@excalibur.local>
+X-SA-Exim-Connect-IP: 194.158.229.47
+X-SA-Exim-Mail-From: dv@vollmann.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] New stable branch (and maybe a new process?)
@@ -38,69 +39,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 11:06:40 -0000
+X-List-Received-Date: Tue, 20 Jul 2010 11:19:51 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 07/20/10 10:40, Stefan Schmidt wrote:
+> On Tue, 2010-07-20 at 10:09, Koen Kooi wrote:
+>> The biggest problem is the .dev is halfway into big changes, e.g.
+>> halfway into new-style staging,
+> 
+> Agreed. While I think we are more then halfway through with this. Recipes are
+> left but most of the active maintained are already done. NO numbers but my
+> feeling here.
+> 
+>> halfway into packaged-staging rework, halfway into nativesdk, etc.
+> 
+> These both are ongoing for quite some time already. I have to admit that I lost
+> track where they stand and what is still outstanding.
+> 
+> So your suggestion is to wait until all three are done?
+That would be my suggestion.
+What "done" exactly means is a separate issue.
 
-On 20.07.2010 12:12, Jaap de Jong wrote:
-> stable/2010?
-> Yes, please!!
+   Detlef
 
-I second that :)
-
->
-> Bye,
-> Jaap
->
-> On 07/20/2010 10:43 AM, Chris Simmonds wrote:
->> On 20/07/10 08:01, Stefan Schmidt wrote:
->>> Hello.
->>>
->>> On Fri, 2010-07-09 at 22:40, Stefan Schmidt wrote:
->>>>
->>>> I want to gather some feedback what people are feeling about a new
->>>> stable
->>>> branch. It feels like the right time to do it soon. We have so many
->>>> big changes
->>>> in that are not likely to get into stable/2009 like:
->>>
->>>> From the silence on this topic I gather that the interest to create
->>>> a new branch
->>> or change the process is quite low.
->>>
->>
->> I would like to vote for a 2010 stable branch. There is a lot of good
->> stuff in the dev branch that I would like to use in live projects.
->>
->> Bye for now,
->> Chris.
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
---=20
-Christophe Aeschlimann
-
-Embedded Software Engineer
-
-Advanced Communications Networks S.A.
-
-Rue du Puits-Godet 8a
-2000 Neuch=E2tel, Switzerland
-
-T=E9l. +41 32 724 74 31
-
-c.aeschlimann@acn-group.ch
 
 
