@@ -1,32 +1,39 @@
-Received: from moutng.kundenserver.de ([212.227.17.8])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chris.simmonds@2net.co.uk>) id 1Ob9Ss-0005aq-H1
+	(envelope-from <rpjday@crashcourse.ca>) id 1Ob9er-00014o-Gp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 11:50:24 +0200
-Received: from [192.168.159.11] ([92.27.160.242])
-	by mrelayeu.kundenserver.de (node=mrbap0) with ESMTP (Nemesis)
-	id 0LviEG-1P764K2LVs-017q8P; Tue, 20 Jul 2010 10:43:12 +0200
-Message-ID: <4C45619F.1060201@2net.co.uk>
-Date: Tue, 20 Jul 2010 09:43:11 +0100
-From: Chris Simmonds <chris.simmonds@2net.co.uk>
-Organization: 2net
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.10) Gecko/20100528 Thunderbird/3.0.5
-MIME-Version: 1.0
+	Tue, 20 Jul 2010 12:03:28 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1Ob9eX-0002pZ-Ae for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 06:02:21 -0400
+Date: Tue, 20 Jul 2010 06:01:26 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <4C45619F.1060201@2net.co.uk>
+Message-ID: <alpine.DEB.2.00.1007200556270.8124@lynx>
 References: <20100709204055.GA12163@excalibur.local>
 	<20100720070108.GE1512@excalibur.local>
-In-Reply-To: <20100720070108.GE1512@excalibur.local>
-X-Provags-ID: V02:K0:+3JfZLgzml6O9kDItXjl9/rnOuzE4ZjI9c4GoTdW9Zh
-	eylqpyIvS7wf1B9ZiRtxWx998nV7AErO291LX1xffoRms8yBD4
-	Ez+CGNPB9b25MSJEFpPtzU6muGivo4Gn1hAK6J8wIHdRbV2tEq
-	UDxmMhIZ7xEbfSAIwAx7yANFjbdn19nf1ZxqKsgHodQlk+MiWp
-	lZZFX82mNSAmI6OdZzcbd+VD3yvb5yy6spKr8vOSao=
-X-SA-Exim-Connect-IP: 212.227.17.8
-X-SA-Exim-Mail-From: chris.simmonds@2net.co.uk
+	<4C45619F.1060201@2net.co.uk>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -44,27 +51,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 09:50:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Jul 2010 10:04:00 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-On 20/07/10 08:01, Stefan Schmidt wrote:
-> Hello.
->
-> On Fri, 2010-07-09 at 22:40, Stefan Schmidt wrote:
->>
->> I want to gather some feedback what people are feeling about a new stable
->> branch. It feels like the right time to do it soon. We have so many big changes
->> in that are not likely to get into stable/2009 like:
->
->> From the silence on this topic I gather that the interest to create a new branch
-> or change the process is quite low.
->
+On Tue, 20 Jul 2010, Chris Simmonds wrote:
 
-I would like to vote for a 2010 stable branch. There is a lot of good 
-stuff in the dev branch that I would like to use in live projects.
+> On 20/07/10 08:01, Stefan Schmidt wrote:
+> > Hello.
+> >
+> > On Fri, 2010-07-09 at 22:40, Stefan Schmidt wrote:
+> > >
+> > > I want to gather some feedback what people are feeling about a new stable
+> > > branch. It feels like the right time to do it soon. We have so many big
+> > > changes
+> > > in that are not likely to get into stable/2009 like:
+> >
+> > > From the silence on this topic I gather that the interest to create a new
+> > > branch
+> > or change the process is quite low.
+> >
+>
+> I would like to vote for a 2010 stable branch. There is a lot of
+> good stuff in the dev branch that I would like to use in live
+> projects.
 
-Bye for now,
-Chris.
+  i second that, with the proviso that the primary focus for that
+new stable branch be on resolving any unbuildable packages for major
+distros.  as i've whined about before, there always seems to be a
+package or two from the dev branch that doesn't build on my standard
+64-bit ubuntu system (last time i checked, it was abiword).  i just
+did a git pull on the dev branch and am checking again to see what
+fails.
+
+  not to belabour the point, but if a new branch is created and tagged
+as "stable," it should build for anyone using any of the common
+distros.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+        Top-notch, inexpensive online Linux/OSS/kernel courses
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
