@@ -1,27 +1,39 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1ObCbJ-00073T-6b
+	(envelope-from <stefan@datenfreihafen.org>) id 1ObCwQ-0000xV-Gx
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 15:11:28 +0200
-Received: (qmail 10405 invoked by uid 1003); 20 Jul 2010 13:11:00 -0000
-Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 20 Jul 2010 13:10:59 -0000
-Message-ID: <4C45A062.6080606@balister.org>
-Date: Tue, 20 Jul 2010 09:10:58 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.10) Gecko/20100621 Fedora/3.0.5-1.fc13 Thunderbird/3.0.5
-MIME-Version: 1.0
+	Tue, 20 Jul 2010 15:33:03 +0200
+Received: from guest185.ibr.cs.tu-bs.de ([134.169.35.185] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1ObCwG-0008QD-Al by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 15:32:55 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1ObCwF-0000si-F6
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 20 Jul 2010 15:32:51 +0200
+Date: Tue, 20 Jul 2010 15:32:51 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<i23lkm$ftn$1@dough.gmane.org>
+Message-ID: <20100720133251.GK1512@excalibur.local>
+References: <20100709204055.GA12163@excalibur.local>
+	<20100720070108.GE1512@excalibur.local>
+	<i23lkm$ftn$1@dough.gmane.org>
 	<20100720084026.GI1512@excalibur.local>
-In-Reply-To: <20100720084026.GI1512@excalibur.local>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+	<4C45A062.6080606@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <4C45A062.6080606@balister.org>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] New stable branch (and maybe a new process?)
@@ -38,43 +50,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 13:11:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 20 Jul 2010 13:33:03 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 07/20/2010 04:40 AM, Stefan Schmidt wrote:
-> Hello.
->
-> On Tue, 2010-07-20 at 10:09, Koen Kooi wrote:
->> On 20-07-10 09:01, Stefan Schmidt wrote:
->>>
->>>  From the silence on this topic I gather that the interest to create a new branch
->>> or change the process is quite low.
->>
->> I have an interest in a new stable branch, but no interest in changing
->> the process.
->
-> Fair enough. Lets handle the issues seperately for now.
->
->> The biggest problem is the .dev is halfway into big changes, e.g.
->> halfway into new-style staging,
->
-> Agreed. While I think we are more then halfway through with this. Recipes are
-> left but most of the active maintained are already done. NO numbers but my
-> feeling here.
->
->> halfway into packaged-staging rework, halfway into nativesdk, etc.
->
-> These both are ongoing for quite some time already. I have to admit that I lost
-> track where they stand and what is still outstanding.
->
-> So your suggestion is to wait until all three are done?
+Hello.
 
-We should identify the work in progress in dev and decide which ones we 
-should finish before creating a new staging. There is no sense making a 
-new stable branch and then creating a major diversion from dev that will 
-make maintaining both in parallel for as long as possible difficult.
+On Tue, 2010-07-20 at 09:10, Philip Balister wrote:
+> On 07/20/2010 04:40 AM, Stefan Schmidt wrote:
+> >On Tue, 2010-07-20 at 10:09, Koen Kooi wrote:
+> >
+> >>The biggest problem is the .dev is halfway into big changes, e.g.
+> >>halfway into new-style staging,
+> >
+> >Agreed. While I think we are more then halfway through with this. Recipes are
+> >left but most of the active maintained are already done. NO numbers but my
+> >feeling here.
+> >
+> >>halfway into packaged-staging rework, halfway into nativesdk, etc.
+> >
+> >These both are ongoing for quite some time already. I have to admit that I lost
+> >track where they stand and what is still outstanding.
+> >
+> >So your suggestion is to wait until all three are done?
+> 
+> We should identify the work in progress in dev and decide which ones
+> we should finish before creating a new staging. There is no sense
+> making a new stable branch and then creating a major diversion from
+> dev that will make maintaining both in parallel for as long as
+> possible difficult.
 
-Philip
+Does my mail read as if I wanted to rush this in? If yes, that was not my
+intend.
+
+I'm interested in new stable branch. I had a moment where I hoped it would be
+ready in time for our upcoming BUG2.0 release, but this moment is over already.
+Neverless I want to see it happened and it should not be rushed in.
+
+The question was completely honest. Is the idea to wait until all three are
+finished (for every recipe in tree)?
+
+For the new staging I could imagine that we could get close. Of course minus all
+the recipes in tree nobody maintains. A problem we always have and which does
+not go away in a stable snapshot.
+
+For packaged staging it may come true as well, but the nativesdk part I see
+mostly arguing back and forth. So if the people listed as stable maintainers
+come to the conclusion that we should wait for all three that is fine with me.
+Maybe a roadmap what you guys want to have ready before branching of would help
+others then.
+
+regards
+Stefan Schmidt
 
 
