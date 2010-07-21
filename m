@@ -1,37 +1,48 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1ObMBE-0000mw-7P
+	(envelope-from <esbenhaabendal@gmail.com>) id 1ObSKd-00049k-Cm
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 01:24:58 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1ObMB3-0001JP-7S from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 20 Jul 2010 16:24:45 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 20 Jul 2010 16:24:44 -0700
-Received: from [172.30.80.25] ([172.30.80.25]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 20 Jul 2010 17:24:43 -0600
-Message-ID: <4C463035.7010100@mentor.com>
-Date: Tue, 20 Jul 2010 16:24:37 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 21 Jul 2010 07:59:04 +0200
+Received: by fxm12 with SMTP id 12so3300756fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 20 Jul 2010 22:58:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=P9FrJoCptKJQGooYndiiPk9SmxSBoz5nbNOssZr8MkE=;
+	b=Nkmubvn7RSCJkdDHfx93obiwbVYXlg+lCZKV5pgNJ+AtbrbMmNGhzN9TLb3jg/Pq4h
+	S9n3UQq/kzEAgagRLhDcMHRoAKANNlYGjs7+pISf1gq255RZNzt3rbRATQCopBIVIS4E
+	C+aSUWw321pggddadN6pAyhpRhNOC9P7HG0BU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=HeMJSGZLuGtau6vXYS0QZYUooahvoHK8Doytoc2Gu1tfDxcPkYwuHLXMdbxvtbvZ9F
+	AK3WJrjyV5ws3KbZGijqB9GAM26bcoE29V2/fNO3Xi5kZYI7e2i66DREku+N2JkGLKVZ
+	p7d1YyH7gGSALsWYSN6zabwXL8rqs7Bt9WW9Q=
 MIME-Version: 1.0
+Received: by 10.239.131.4 with SMTP id 4mr143479hbl.118.1279691932034; Tue, 20 
+	Jul 2010 22:58:52 -0700 (PDT)
+Received: by 10.239.181.207 with HTTP; Tue, 20 Jul 2010 22:58:51 -0700 (PDT)
+In-Reply-To: <20100720192253.GN1512@excalibur.local>
+References: <20100709204055.GA12163@excalibur.local>
+	<20100720070108.GE1512@excalibur.local>
+	<i23lkm$ftn$1@dough.gmane.org>
+	<20100720084026.GI1512@excalibur.local>
+	<i24kf7$3d3$1@dough.gmane.org>
+	<20100720173425.GL1512@excalibur.local>
+	<AANLkTikYdD7jzsJBNEK0MedOmM_jHIEcdCfE0APMSOqt@mail.gmail.com>
+	<20100720192253.GN1512@excalibur.local>
+Date: Wed, 21 Jul 2010 07:58:51 +0200
+Message-ID: <AANLkTinsqL1X3cuCRDedYB3h8rhDP3VehMC6RmKZ_wLw@mail.gmail.com>
+From: Esben Haabendal <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <20100709204055.GA12163@excalibur.local>	<20100720070108.GE1512@excalibur.local>	<i23lkm$ftn$1@dough.gmane.org>	<20100720084026.GI1512@excalibur.local>	<i24kf7$3d3$1@dough.gmane.org>	<20100720173425.GL1512@excalibur.local>	<i24qm2$qc6$1@dough.gmane.org>	<4C45F5FF.3010106@mentor.com>	<i252l1$npj$1@dough.gmane.org>
-	<4C462C32.40202@mentor.com>
-In-Reply-To: <4C462C32.40202@mentor.com>
-X-OriginalArrivalTime: 20 Jul 2010 23:24:43.0887 (UTC)
-	FILETIME=[BC2887F0:01CB2862]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [RFC] New stable branch (and maybe a new process?)
@@ -48,58 +59,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 20 Jul 2010 23:24:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 Jul 2010 05:59:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Tom Rini wrote:
-> Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 20-07-10 21:16, Tom Rini wrote:
->>> Koen Kooi wrote:
->>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>> Hash: SHA1
->>>>
->>>> On 20-07-10 19:34, Stefan Schmidt wrote:
->>>>> Hello.
->>>>>
->>>>> On Tue, 2010-07-20 at 18:56, Koen Kooi wrote:
->>>>>> On 20-07-10 10:40, Stefan Schmidt wrote:
->>>>>>> So your suggestion is to wait until all three are done?
->>>>>> 'Wait' is maybe the wrong word. I would try to do a call to arms 
->>>>>> to get
->>>>>> more people interested into getting this done.
->>>>> Wasn't there a list produced with all recipes that used legacy
->>>>> staging? I swear
->>>>> I have seen something like this but I can't find it in my recent 
->>>>> builds.
->>>> In your TMPDIR:
->>>>
->>>> koen@dominion:/OE/angstrom-dev$ cat legacy-staging.log | sort | uniq |
->>>> wc -l
->>>> 53
->>>>
->>>> It includes beasts like perl and python.
->>> perl yes, python no.  Overall point, yes.
->>>
->>
->> Mine lists:
->>
->> /OE/org.openembedded.dev/recipes/perl/perl_5.8.8.bb
->> /OE/org.openembedded.dev/recipes/python/python_2.6.4.bb
->>
->> And that's from a rebuild from scratch last week.
-> 
-> Going off list... 
-> http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=a753e680011a9843e0cd0ee928fd508667445d00 
-> and I just did a -c clean and rebuild.
+On Tue, Jul 20, 2010 at 9:22 PM, Stefan Schmidt
+<stefan@datenfreihafen.org> wrote:
 
-Welp, I fail today.  Sorry all.
+> What does not fit your needs with the current stable handling?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+It started out with a rather continous flow of changed from dev,
+causing it to be almost as unstable as dev. Now stable/2009 looks
+mostly dead.
+
+What I need is a really _STABLE_ branch, but still maintained, on
+which it is possible to base products on for customers which do not
+want to hear about problems with the chosen upstream build system.
+I realize that I am rather alone with my wishes for stable, so I just
+rather silently express my wishes here for the record.
+
+> I would like to have a more continous flow of changes from dev over some =
+testing
+> branch to stable. As indicated in my initial mail. That would people work=
+ing on
+> this idea and keeping it alive though. Given that no one seemed to be int=
+erested
+> but man seem to be interested to get a new stable/2010 branch the same wa=
+y we
+> had for 2009 it seems the most practical way to get one at all, no?
+>
+> Other models will only work if enough support from the active contributor=
+s is
+> available. Without this even the best idea might die.
+
+Exactly, and this is why I don't really want to push my idea on how a
+stable branch should work, as I realize I would likely end up being
+rather alone maintaining it, which is how it is today with my customer
+OE projects anyways.
+
+/Esben
+--=20
+Esben Haabendal, Senior Software Consultant
+Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
+Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
+WWW: http://www.doredevelopment.dk
 
 
