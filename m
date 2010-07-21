@@ -1,52 +1,51 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1ObTV0-0004lp-28
+	(envelope-from <martin.jansa@gmail.com>) id 1ObUIW-00018l-KF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 09:13:51 +0200
-Received: by bwz10 with SMTP id 10so3637769bwz.6
+	Wed, 21 Jul 2010 10:05:01 +0200
+Received: by fxm12 with SMTP id 12so3347124fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jul 2010 00:13:41 -0700 (PDT)
+	Wed, 21 Jul 2010 01:04:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=N9mwaUA9ShmYqt1VgHjS5Qc4q2LFB1ssQ5ZWCZwuDrw=;
-	b=XrwUb10PMnmHNzFEc3So3Gn5aBuyeQnLOGfLoUoD8UJnsMqP1b8vuJW39QB63quf39
-	390vJApkmprj6rXwEhOOtTuaGiYXDhOHHYs5EhoBBA7ckAjjzP3nSAI3Aaez54L2NAVo
-	9Eqcbr0BhRSOXf4MUypqOEXuGoJVAK3Go0BhY=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:content-transfer-encoding:in-reply-to:user-agent;
+	bh=bQPdc9/yZpUO8hHffzmg+ViHvEELh/MFIjmg8XpnIxA=;
+	b=GA7dimnOmRFGR5ThMr7W3JMxz6TLEms5NrdqGpFAJ/aMaJnWv4kjzcAtr8M/ELXsw/
+	jjZYNNBBueRzNpc9Uva5gZ3Ji2mERtGRLCXHI8laKPc2NrErKvrRMO4m04T1N79/HHJF
+	7ncqI7ult7q8JHK1+8xvUeNGtT9PJB/H9EvW4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=b6LJEaH9zM4D6iMaSx9VDy/STqNA/0jq77c7Uf5p8dtNPP8iFL+7/h9TWBRxF1wrhm
-	X3vlGH4eQyLLw+VfWwKoQOt4mGfF/Oefz6zH5432LpV3tfPyyNHNcfiit1t81pxVSeL2
-	vvqNyKfo00t12q7XB4PjpZsyUYDXgkN2CAs9k=
-MIME-Version: 1.0
-Received: by 10.204.178.146 with SMTP id bm18mr6023932bkb.99.1279696406753; 
-	Wed, 21 Jul 2010 00:13:26 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Wed, 21 Jul 2010 00:13:26 -0700 (PDT)
-In-Reply-To: <AANLkTinsqL1X3cuCRDedYB3h8rhDP3VehMC6RmKZ_wLw@mail.gmail.com>
-References: <20100709204055.GA12163@excalibur.local>
-	<20100720070108.GE1512@excalibur.local>
-	<i23lkm$ftn$1@dough.gmane.org>
-	<20100720084026.GI1512@excalibur.local>
-	<i24kf7$3d3$1@dough.gmane.org>
-	<20100720173425.GL1512@excalibur.local>
-	<AANLkTikYdD7jzsJBNEK0MedOmM_jHIEcdCfE0APMSOqt@mail.gmail.com>
-	<20100720192253.GN1512@excalibur.local>
-	<AANLkTinsqL1X3cuCRDedYB3h8rhDP3VehMC6RmKZ_wLw@mail.gmail.com>
-Date: Wed, 21 Jul 2010 09:13:26 +0200
-Message-ID: <AANLkTikP03HJoz0VI_tg6tV3Z4bGYsYaAA2mVwNO4nYq@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:content-transfer-encoding
+	:in-reply-to:user-agent;
+	b=kPPGB3NWBdu87Z65dJLUDhPrQI8VglN6ZKepFseZlSQNGs1sjr/i5teQz1xsMLqudU
+	LxQt/RjJBhwo9H+zOS7vJdxpa+QjZboHFpxJZmqKNP330tKosHEgJiNRzMCeYpDcLsQX
+	CuNEKFbijK76Y3i9hDAducZXdW38evx45fut8=
+Received: by 10.223.108.137 with SMTP id f9mr6432097fap.3.1279699490152;
+	Wed, 21 Jul 2010 01:04:50 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id l19sm2788987fap.33.2010.07.21.01.04.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 21 Jul 2010 01:04:48 -0700 (PDT)
+Date: Wed, 21 Jul 2010 10:05:35 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100721080535.GL16225@jama>
+References: <1279527535-11994-1-git-send-email-raj.khem@gmail.com>
+	<AANLkTikmxYTbW7ZT5HoA8yyXfvaWbqu7ydQemXP8e4mm@mail.gmail.com>
+	<AANLkTimsDyM8w3UWdaalbgKIRp9cmE5iI29fVJPbNefB@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimsDyM8w3UWdaalbgKIRp9cmE5iI29fVJPbNefB@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC] New stable branch (and maybe a new process?)
+Subject: Re: [RFC][PATCH] distro: Move thumb into distro features
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,67 +59,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jul 2010 07:13:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 21 Jul 2010 08:05:01 -0000
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
 
-2010/7/21 Esben Haabendal <esbenhaabendal@gmail.com>
-
-> On Tue, Jul 20, 2010 at 9:22 PM, Stefan Schmidt
-> <stefan@datenfreihafen.org> wrote:
->
-> > What does not fit your needs with the current stable handling?
->
-> It started out with a rather continous flow of changed from dev,
-> causing it to be almost as unstable as dev. Now stable/2009 looks
-> mostly dead.
->
-> What I need is a really _STABLE_ branch, but still maintained, on
-> which it is possible to base products on for customers which do not
-> want to hear about problems with the chosen upstream build system.
-> I realize that I am rather alone with my wishes for stable, so I just
-> rather silently express my wishes here for the record.
->
-
-You can create your own. That'll give you all the control.
-Alternately you just could decide to freeze whatever version you are using
-and only cherry pick some bugfixes.
-If you are doing end user products it may be a good plan to do a freeze at
-some point anyway, otherwise you're shooting at a moving target.
-
-Frans (who understands your desire)
-
->
-> > I would like to have a more continous flow of changes from dev over som=
-e
-> testing
-> > branch to stable. As indicated in my initial mail. That would people
-> working on
-> > this idea and keeping it alive though. Given that no one seemed to be
-> interested
-> > but man seem to be interested to get a new stable/2010 branch the same
-> way we
-> > had for 2009 it seems the most practical way to get one at all, no?
+On Mon, Jul 19, 2010 at 10:08:02PM -0700, Khem Raj wrote:
+> On Mon, Jul 19, 2010 at 3:46 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> > On Mon, Jul 19, 2010 at 1:18 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> >> * Currenlty we define the thumb specific overrides in machine tune files
+> >>  and as machine conf files are included before the distro conf files
+> >>  the overrides dont get right values and set incorrectly.
+> >>
+> >> * This patch moves the tune-thumb.inc from machine/include into
+> >>  distro/include and lets distro decide on thumb and thumb-interworking
+> >>  features based on the machine selected. If a machine which does not
+> >>  support thumb like all armv4 based machines is selected then distro
+> >>  makes correct decision now to disable thumb and thumb-interworking
+> >>  based upon the machine seletected.
 > >
-> > Other models will only work if enough support from the active
-> contributors is
-> > available. Without this even the best idea might die.
->
-> Exactly, and this is why I don't really want to push my idea on how a
-> stable branch should work, as I realize I would likely end up being
-> rather alone maintaining it, which is how it is today with my customer
-> OE projects anyways.
->
-> /Esben
-> --
-> Esben Haabendal, Senior Software Consultant
-> Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-> Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
-> WWW: http://www.doredevelopment.dk
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> > I accidentally hit push button in wrong branch and this commit got pushed
+> > I will revert it once I get home later today if someone gets bitten before
+> > feel free to revert it.
+> 
+> Done. Meanwhile, Does this patch look ok for .dev ? I would like some ACKs
+
+Looks fine for SHR
+Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
 
