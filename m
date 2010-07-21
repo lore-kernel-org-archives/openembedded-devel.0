@@ -1,37 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1ObWQ2-0005Ug-Jm for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 12:20:56 +0200
-Received: from f053041176.adsl.alicedsl.de ([78.53.41.176]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1ObWPt-00021p-SQ for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 10:20:46 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ObXI8-0002dT-1h for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jul 2010 13:16:51 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1ObXHy-0004gD-MU for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jul 2010 13:16:38 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Jul 2010 13:16:38 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 21 Jul 2010 13:16:38 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinveVXhVJje5LRxRLru_Ju-C1TK76QHBOAoHcgB@mail.gmail.com>
-References: <1279216536.3741.27.camel@mattotaupa>
-	<1279270987.4164.29.camel@mattotaupa>
-	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
-	<i1qogv$i28$2@dough.gmane.org> <1279355702.14848.3.camel@mattotaupa>
-	<i1s6sg$d1j$1@dough.gmane.org> <1279464507.18570.59.camel@mattotaupa>
-	<1279660488.4096.8.camel@mattotaupa>
-	<AANLkTinveVXhVJje5LRxRLru_Ju-C1TK76QHBOAoHcgB@mail.gmail.com>
-Date: Wed, 21 Jul 2010 12:20:42 +0200
-Message-ID: <1279707642.3928.2.camel@mattotaupa>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 21 Jul 2010 13:16:24 +0200
+Message-ID: <i26ku8$3cu$1@dough.gmane.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
+Subject: legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,179 +48,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jul 2010 10:20:56 -0000
-X-Groupsio-MsgNum: 21234
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-TQykggnUTP309kC9RAcq"
+X-List-Received-Date: Wed, 21 Jul 2010 11:16:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-TQykggnUTP309kC9RAcq
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am Dienstag, den 20.07.2010, 15:44 -0700 schrieb Khem Raj:
-> On Tue, Jul 20, 2010 at 2:14 PM, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> > Am Sonntag, den 18.07.2010, 16:48 +0200 schrieb Paul Menzel:
-> >> Am Samstag, den 17.07.2010, 14:15 +0200 schrieb Koen Kooi:
-> >> > On 17-07-10 10:35, Paul Menzel wrote:
-> >> > > Am Samstag, den 17.07.2010, 01:03 +0200 schrieb Koen Kooi:
-> >> > >> On 16-07-10 17:23, Khem Raj wrote:
-> >> > >>> On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
-> >> > >>> <paulepanter@users.sourceforge.net> wrote:
-> >> > >
-> >> > >>>> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
-> >> > >>>>
-> >> > >>>>> I ran out of space and noticed
-> >> > >>>>>
-> >> > >>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
-> >> > >>>>>
-> >> > >>>>> is 8,1G big.
-> >> > >>>>>
-> >> > >>>>> Some of the executable files in
-> >> > >>>>>
-> >> > >>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroo=
-t-destdir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
-> >> > >>>>>
-> >> > >>>>> are 101 MB big.
-> >> > >>>
-> >> > >>> its most probably the -g3/-ggdb3 bloat.
-> >> > >>
-> >> > >> No, it's git not creating (hard)links but copies of the same app.=
- Run an
-> >> > >> md5sum on the binaries, they will all match. I suggest you stop
-> >> > >> spreading FUD about -ggdb3, it is not being appriciated.
-> >> > >
-> >> > > I do not know anything about the technical background. I can only =
-report
-> >> > > that removing `-ggdb3` fixed it for me.
-> >> >
-> >> > Are you saying that removing -ggdb3 made git create proper (hard)lin=
-ks?
-> >>
-> >> No, I just said, that after doing as Khem suggested the available spac=
-e
-> >> was big enough.
-> >>
-> >> Anyway, I tried to investigate a little and could not find anything
-> >> related to (hard)link problems. But probably I overlooked something. I
-> >> head refresh my memory about hard and soft links [1].
-> >>
-> >> 1. As you suggested in your reply I ran `md5sum` on the binaries. They
-> >> do indeed match on the binaries I posted, but also the inode matches. =
-It
-> >> looks like that is way it should be.
-> >>
-> >>         $ echo "Test" > test
-> >>         $ ln test test.link
-> >>         $ md5sum test*
-> >>         2205e48de5f93c784733ffcca841d2b5  test
-> >>         2205e48de5f93c784733ffcca841d2b5  test.link
-> >>         $ ls -1i test*
-> >>         3653430 test
-> >>         3653430 test.link
-> >>
-> >> So I think the hardlinks were created properly. I did not think of thi=
-s
-> >> when reporting the problem so I did not run `ls -i` on the listed file=
-s
-> >> and I did not check with `du`.
-> >>
-> >>         /angstrom-dev/work/i686-linux/git-native-1.7.1.1-r0/image/angs=
-trom-dev/sysroots/i686-linux/usr/libexec/git-core $ md5sum * | sort
-> >>         [=E2=80=A6]
-> >>         82c05218d9634923e301a9463e8f9c0d  git-shell
-> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-ftp
-> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-ftps
-> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-http
-> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-https
-> >>         89a6ef52f4b7c336fb5fc0601edfd95f  git-mergetool
-> >>         9a7f760ecef6e64f370c907d61ad0ffb  git-svn
-> >>         9b57eb61ce668f2105a61a467f4d6d9b  git-difftool
-> >>         ac3472a81bc59a69119b0d027c3f617b  git-merge-one-file
-> >>         b14a5bba57d0ae0ccfdb0fceac0eb4ec  git-merge-octopus
-> >>         b6899828bc756c5d30398d49dce91deb  git-cvsexportcommit
-> >>         b775de2d21923f5d08e0bdcf3f9d31f6  git-mergetool--lib
-> >>         bd786a897bdc214bd5d89f51ad79f152  git-instaweb
-> >>         c8466908a274e211a43d287e510f2f19  git-merge-resolve
-> >>         ce109bd27d9404980bd82ddb529eca90  git-send-email
-> >>         d3da496bd962246727ceaabc1d4b1bdd  git-sh-setup
-> >>         d46c9b755b712bf3c27521b3c6e5fd30  git-relink
-> >>         d4b577d9a69d9af883de29d6af4f04c5  git
-> >>         d4b577d9a69d9af883de29d6af4f04c5  git-add
-> >>         d4b577d9a69d9af883de29d6af4f04c5  git-annotate
-> >>         d4b577d9a69d9af883de29d6af4f04c5  git-apply
-> >>         [=E2=80=A6]
-> >>
-> >>         /angstrom-dev/work/i686-linux/git-native-1.7.1.1-r0/image/angs=
-trom-dev/sysroots/i686-linux/usr/libexec/git-core $ ls -1i
-> >>         [ =E2=80=A6 ordered manually to match md5sum output]
-> >>         3691063 git-shell
-> >>         3691070 git-remote-ftp
-> >>         3691070 git-remote-ftps
-> >>         3691070 git-remote-http
-> >>         3691070 git-remote-https
-> >>         3691082 git-mergetool
-> >>         3691100 git-svn
-> >>         3691093 git-difftool
-> >>         3691080 git-merge-one-file
-> >>         3691079 git-merge-octopus
-> >>         3691095 git-cvsexportcommit
-> >>         3691102 git-mergetool--lib
-> >>         3691101 git-instaweb
-> >>         3691081 git-merge-resolve
-> >>         3691099 git-send-email
-> >>         3691104 git-sh-setup
-> >>         3691098 git-relink
-> >>         3691105 git
-> >>         [=E2=80=A6]
-> >>
-> >> What did I miss? Were you seeing something different?
-> >>
-> >> 2. You seem to have investigated this problem before and committed a f=
-ix
-> >> for git [2].
-> >>
-> >>     git 1.7.0.2: fix hardlinking problems as reported by Eric Brombaug=
-h
-> >>
-> >> I could not find Eric=E2=80=99s report on this list or the Web. So I h=
-ave to
-> >> test without your patch. But `git-native` does not seem to use your
-> >> patch, so I guess the behavior should be the one without your patch.
-> >>
-> >> Could you please tell me if my observations are correct.
-> >
-> > I am a little bit lost. Koen, could you give me a pointer, please, so
-> > that I can try to continue to solve this issue.
->=20
-> Koen fixed it for target git recipe I guess you need to port that fix
-> to git-native as well.
-> if you want to use git-native built with OE.
+Hi,
 
-But as far as I see, the hardlinks were created correctly in git-native
-for me. So I do not know what I am supposed to do.
+I built only a small sample of packages (angstrom-gnome-image and
+openjdk) and I get these 53 in legagy-staging.log:
+
+bcel/bcel_5.2.bb
+cacao/cacaoh-native_0.99.3.bb
+classpath/classpath-tools-native.bb
+classpath/classpath_0.98.bb
+cup/cup_0.10k.bb
+dbus/dbus-glib-native_0.76.bb
+gawk/gawk-native_3.1.4.bb
+gdbm/gdbm-native_1.8.3.bb
+gdbm/gdbm_1.8.3.bb
+glib-1.2/glib-1.2-native_1.2.10.bb
+gnome/gconf-native_2.6.1.bb
+gnome/pyorbit_2.24.0.bb
+gtk+/gtk+-1.2_1.2.10.bb
+guile/guile_1.8.7.bb
+intltool/intltool_0.40.3.bb
+jakarta-libs/regexp_1.5.bb
+jamvm/jamvm-initial_1.4.5.bb
+jlex/jlex_1.2.6.bb
+libffi/libffi-native_2.0+gcc4.3.2.bb
+libffi/libffi_3.0.8.bb
+libfribidi/libfribidi-native_0.10.4.bb
+libglade/libglade_2.6.4.bb
+libgsm/libgsm_1.0.12.bb
+libtool/libtool-cross_2.2.6b.bb
+libtool/libtool_2.2.6b.bb
+llvm/llvm2.7-native_2.7.bb
+llvm/llvm2.7_2.7.bb
+makedevs/makedevs-native_1.0.0.bb
+mml-widget/gtkmathview_0.8.0.bb
+mozilla/rhino_1.7r1.bb
+mpeg2dec/mpeg2dec_0.4.0b.bb
+mysql/mysql5-native_5.1.40.bb
+mysql/mysql5_5.1.40.bb
+openjdk/openjdk-6_6b18-1.8.bb
+openobex/openobex_1.5.bb
+perl/libnet-dbus-perl_0.33.6.bb
+perl/libxml-parser-perl_2.36.bb
+perl/libxml-simple-perl_2.18.bb
+perl/libxml-twig-perl_3.33.bb
+perl/perl_5.8.8.bb
+python/python-docutils-native_0.5.bb
+python/python_2.6.4.bb
+samba/samba_3.3.9.bb
+squashfs-tools/squashfs-tools-native_4.0.bb
+tcltk/tcl-native_8.4.19.bb
+tzcode/tzcode-native_2010j.bb
+u-boot/u-boot_git.bb
+xalan-j/xalan-j_2.7.1.bb
+xerces-j/xerces-j_2.9.1.bb
+xml-commons/jaxp1.3_1.3.04.bb
+xml-commons/xml-commons-resolver1.1_1.2.bb
+xorg-font/font-util-native_1.1.1.bb
+xorg-proto/calibrateproto_git.bb
 
 
-Thanks,
+regards,
 
-Paul
-
-
-> >> [1] info coreutils "ln invocation"
-> >> [2] http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D84d=
-e51631e1e7bb76141332807ed2ba9e8df02ae
-
---=-TQykggnUTP309kC9RAcq
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
+Koen
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkxGyfIACgkQPX1aK2wOHVgDWgCfeUVVOht/icHrd/zmYShaCSS5
-plcAniLqy2tUhaVsoYM5kN5b/X/Lx+Su
-=udaC
+iD8DBQFMRtcIMkyGM64RGpERApIlAKC5BoaFsz4G348MpmRqmyWPkFsOfgCbBuF+
+GByn4M5ZujEMfxs6v8WSUSk=
+=Pmnm
 -----END PGP SIGNATURE-----
 
---=-TQykggnUTP309kC9RAcq--
+
+
