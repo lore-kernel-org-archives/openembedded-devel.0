@@ -1,44 +1,41 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1ObYNQ-0001LZ-GK
+	(envelope-from <henning@tarent.de>) id 1ObZxO-0006VA-9k
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 14:26:26 +0200
-Received: by bwz10 with SMTP id 10so123796bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jul 2010 05:26:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=+8s8Js1ZUj8H6NhtbX+iv5xHjXquFv3xZZ4NIv4YbYo=;
-	b=O2U7SajEcCq2V5RXKVf/THsVoBAnWfeR0pusBE/7A46E5aWsUYZpE8f+xW/rFnyWpn
-	q3uEUKCzHTB6L+PzkIkqWhgEF5jNFjaKENziJoAmvhfc4zVPYchc5a/5qIOkSvSRiIjd
-	fePa+sQ7JVBEkXzk6bN+v7CiV8hSB9N32OA3o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=D4wjGbeB8WmyPNq6pBjW5AVJeo8sP+O3p+lhbvfwoglFSxx8nIIQg2J02HkAZSQHek
-	PLbmK6LL/V8nvHtQLYP7kFLZQm0fRTiY8+duklUrs1/aKpeUVf0q7vphLVF4k2gQAEBn
-	uj5G7/8Qqy0XQ1TwHAfpcbYhO8itVitFJRE3M=
-MIME-Version: 1.0
-Received: by 10.204.135.214 with SMTP id o22mr85257bkt.56.1279715170633; Wed, 
-	21 Jul 2010 05:26:10 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Wed, 21 Jul 2010 05:26:10 -0700 (PDT)
-In-Reply-To: <i26ku8$3cu$1@dough.gmane.org>
-References: <i26ku8$3cu$1@dough.gmane.org>
-Date: Wed, 21 Jul 2010 14:26:10 +0200
-Message-ID: <AANLkTimK0WRNk0i26nYcZW4wWms8SUwne06nGjnXw5zN@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 21 Jul 2010 16:07:45 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id D637740148CAA;
+	Wed, 21 Jul 2010 16:07:22 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id CEB5940148CA4;
+	Wed, 21 Jul 2010 16:07:22 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id qzsRkbhyH32A; Wed, 21 Jul 2010 16:07:22 +0200 (CEST)
+Received: from entw1 (lui.tarent.buero [192.168.4.41])
+	by ugs.tarent.de (Postfix) with ESMTPSA id A6AA340148CAA;
+	Wed, 21 Jul 2010 16:07:22 +0200 (CEST)
+Received: from henning by entw1 with local (Exim 4.71)
+	(envelope-from <henning@tarent.de>)
+	id 1ObZxA-0006Tk-LN; Wed, 21 Jul 2010 16:07:20 +0200
+From: heinold@inf.fu-berlin.de
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 21 Jul 2010 16:06:55 +0200
+Message-Id: <1279721232-24744-5-git-send-email-heinold@inf.fu-berlin.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
+References: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: henning@tarent.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: legacy staging
+Cc: Henning Heinold <h.heinold@tarent.de>
+Subject: [PATCH 04/21] jacl: backport from openembedded-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,103 +49,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jul 2010 12:26:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 21 Jul 2010 14:07:49 -0000
 
-2010/7/21 Koen Kooi <k.kooi@student.utwente.nl>
+From: Henning Heinold <h.heinold@tarent.de>
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Hi,
->
-> I built only a small sample of packages (angstrom-gnome-image and
-> openjdk) and I get these 53 in legagy-staging.log:
->
-> bcel/bcel_5.2.bb
-> cacao/cacaoh-native_0.99.3.bb
-> classpath/classpath-tools-native.bb
-> classpath/classpath_0.98.bb
-> cup/cup_0.10k.bb
-> dbus/dbus-glib-native_0.76.bb
-> gawk/gawk-native_3.1.4.bb
-> gdbm/gdbm-native_1.8.3.bb
-> gdbm/gdbm_1.8.3.bb
-> glib-1.2/glib-1.2-native_1.2.10.bb
-> gnome/gconf-native_2.6.1.bb
-> gnome/pyorbit_2.24.0.bb
-> gtk+/gtk+-1.2_1.2.10.bb
-> guile/guile_1.8.7.bb
-> intltool/intltool_0.40.3.bb
-> jakarta-libs/regexp_1.5.bb
-> jamvm/jamvm-initial_1.4.5.bb
-> jlex/jlex_1.2.6.bb
-> libffi/libffi-native_2.0+gcc4.3.2.bb
-> libffi/libffi_3.0.8.bb
-> libfribidi/libfribidi-native_0.10.4.bb
-> libglade/libglade_2.6.4.bb
-> libgsm/libgsm_1.0.12.bb
-> libtool/libtool-cross_2.2.6b.bb
-> libtool/libtool_2.2.6b.bb
-> llvm/llvm2.7-native_2.7.bb
-> llvm/llvm2.7_2.7.bb
-> makedevs/makedevs-native_1.0.0.bb
-> mml-widget/gtkmathview_0.8.0.bb
-> mozilla/rhino_1.7r1.bb
-> mpeg2dec/mpeg2dec_0.4.0b.bb
-> mysql/mysql5-native_5.1.40.bb
-> mysql/mysql5_5.1.40.bb
-> openjdk/openjdk-6_6b18-1.8.bb
-> openobex/openobex_1.5.bb
-> perl/libnet-dbus-perl_0.33.6.bb
-> perl/libxml-parser-perl_2.36.bb
-> perl/libxml-simple-perl_2.18.bb
-> perl/libxml-twig-perl_3.33.bb
-> perl/perl_5.8.8.bb
-> python/python-docutils-native_0.5.bb
-> python/python_2.6.4.bb
-> samba/samba_3.3.9.bb
-> squashfs-tools/squashfs-tools-native_4.0.bb
-> tcltk/tcl-native_8.4.19.bb
-> tzcode/tzcode-native_2010j.bb
-> u-boot/u-boot_git.bb
-> xalan-j/xalan-j_2.7.1.bb
-> xerces-j/xerces-j_2.9.1.bb
-> xml-commons/jaxp1.3_1.3.04.bb
-> xml-commons/xml-commons-resolver1.1_1.2.bb
-> xorg-font/font-util-native_1.1.1.bb
-> xorg-proto/calibrateproto_git.bb
->
->
-> regards,
->
-> Koen
->
+* checksum is already in conf/checksums.ini
+---
+ recipes/jacl/jacl-native_1.4.1.bb |    4 ++++
+ recipes/jacl/jacl_1.4.1.bb        |   20 ++++++++++++++++++++
+ 2 files changed, 24 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/jacl/jacl-native_1.4.1.bb
+ create mode 100644 recipes/jacl/jacl_1.4.1.bb
 
-What do you want to say with this list?
-I did a grep for do_stage and found 1119 recipes that still have a do_stage
-function.
-In my opinion all of these should be updated or removed (where for old
-recipes that are not pinned I have a strong preference for removing).
+diff --git a/recipes/jacl/jacl-native_1.4.1.bb b/recipes/jacl/jacl-native_1.4.1.bb
+new file mode 100644
+index 0000000..b0a0638
+--- /dev/null
++++ b/recipes/jacl/jacl-native_1.4.1.bb
+@@ -0,0 +1,4 @@
++require jacl_${PV}.bb
++
++inherit java-native
++
+diff --git a/recipes/jacl/jacl_1.4.1.bb b/recipes/jacl/jacl_1.4.1.bb
+new file mode 100644
+index 0000000..7c66c3e
+--- /dev/null
++++ b/recipes/jacl/jacl_1.4.1.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "Tcl interpreter for Java"
++LICENSES = "BSD"
++
++HOMEPAGE = "http://sourceforge.net/projects/tcljava"
++
++SRC_URI = "http://downloads.sourceforge.net/tcljava/jacl${PV}.tar.gz"
++
++inherit java-library
++
++S = "${WORKDIR}/jacl${PV}"
++
++DEPENDS = "fastjar-native"
++
++do_compile() {
++  mkdir -p build
++
++  javac -sourcepath src/tcljava:src/jacl -d build `find src/tcljava src/jacl -name "*.java"`
++
++  fastjar -C build -c -f ${JARFILENAME} .
++}
+-- 
+1.7.0.4
 
-Ideally in the end we should be able to remove the do_stage invocation from
-the build machinery (and if there are one or two recipes where it is
-unavoidable they could add it as a private task)
 
-I browsed the list to see if there was anything I created and/or felt
-responsible for.
-The only thing I could come up with is perl/libxml-twig-perl_3.33.bb which I
-created for mythtv.
-I've peeked into it and it has no do_stage, but it inherits cpan and
-cpan.bbclass contains a cpan_do_stage function.
-My guesspectation is that in cpan.bbclass the function cpan_do_stage can go
-together with the test in cpan_do_install, but I have not enough knowledge
-of our build machinery or perl & cpan to be sure enough to remove it.
-
-Frans.
-
-BTW: the observation with libxml-twig-perl shows that the actual # of
-recipes that has legacy staging is even greater than the 1119 I mentoned.
-The good news is that fixing things like cpan.bbclass fixes a lot of them at
-once.
 
