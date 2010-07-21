@@ -1,45 +1,44 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Obbr1-0005YD-51
+	(envelope-from <raj.khem@gmail.com>) id 1ObdfE-0002n0-J7
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 18:09:11 +0200
-Received: by bwz10 with SMTP id 10so317864bwz.6
+	Wed, 21 Jul 2010 20:05:06 +0200
+Received: by pvg13 with SMTP id 13so3015860pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jul 2010 09:08:57 -0700 (PDT)
+	Wed, 21 Jul 2010 11:04:52 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AQJCH1NdFbAdTrJoztKDxUTn9RyRUmZF/2fIokxrThc=;
-	b=MYgNu7d2kn8muELvLkFTwAq55/eqPhiKfKeDIDUMWd7y/89IJXADGlPh/kTQHeO1uG
-	X7n9dgf4L2G7hxzP4xaTFlIsgtokshodCTrWxMu4Y4yui1ByLYV8r+rE++nT0YEXg5uM
-	PfRi9BUDajRvqaNgQNJVCBzoYdd6wKuua0e5Q=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=L3X1Kwto4n36Q92NQY0BgfuZOpFA5Yj2X3bjox799Ck=;
+	b=itDLFECgs57JUE1d3imsnmNYPdEYN7tEfPWFbK1oriUFqdZNJjN9yunvbAt7UqiQtW
+	gRex04bto6lPJqSNbsRV/6kg7J+hXAN68A/VB9XHC0ONr2t9AxpYlPfgKEE8k3cjlBH1
+	IvAwrbh5cRA/F3BaynmsbfxMgi6L/99poz1uo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=FqGcF88gJk4G38va5G/7mUIXAoeV7stgX7G5kte+ScsRwsVrgxHsF77wcgAF2fERnP
-	dew/TSMdJRk0BBNlT6aZHKu9QJkHyMWnkx9zTQuNyZsUnH2v13X7SyDQY69GTr1nvdTl
-	aeqtlt4orIth1PVM6ZAeEqRk/8oJdvUohXdtk=
-MIME-Version: 1.0
-Received: by 10.204.60.130 with SMTP id p2mr269976bkh.166.1279728537358; Wed, 
-	21 Jul 2010 09:08:57 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Wed, 21 Jul 2010 09:08:57 -0700 (PDT)
-In-Reply-To: <AANLkTimK0WRNk0i26nYcZW4wWms8SUwne06nGjnXw5zN@mail.gmail.com>
-References: <i26ku8$3cu$1@dough.gmane.org>
-	<AANLkTimK0WRNk0i26nYcZW4wWms8SUwne06nGjnXw5zN@mail.gmail.com>
-Date: Wed, 21 Jul 2010 18:08:57 +0200
-Message-ID: <AANLkTinlrxdM_169eEurAjYMpjAEecQGogrpSjDyzRuQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=rj03o+k28oTVWHAULx1tH7VNMeTWAfQ/SIA0pxU7hCn5yCw1Ywc9R0kA8yehKvB4fH
+	9PfmFSLRx2g/hibMToYY9VWojJ2XT94QhZwLeYMO+Gz+UnYtVCy6omeihihedDlrfakr
+	b3aAG0Ndmj6nerWnWCL9UrTqttT6tTDnPw6RQ=
+Received: by 10.142.144.16 with SMTP id r16mr638744wfd.131.1279735492102;
+	Wed, 21 Jul 2010 11:04:52 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id n2sm9343482wfl.1.2010.07.21.11.04.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 21 Jul 2010 11:04:51 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 21 Jul 2010 11:04:42 -0700
+Message-Id: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: legacy staging
+Subject: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,132 +52,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jul 2010 16:09:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 21 Jul 2010 18:05:06 -0000
 
-2010/7/21 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Hi
 
->
->
-> 2010/7/21 Koen Kooi <k.kooi@student.utwente.nl>
->
-> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Hi,
->>
->> I built only a small sample of packages (angstrom-gnome-image and
->> openjdk) and I get these 53 in legagy-staging.log:
->>
->> bcel/bcel_5.2.bb
->> cacao/cacaoh-native_0.99.3.bb
->> classpath/classpath-tools-native.bb
->> classpath/classpath_0.98.bb
->> cup/cup_0.10k.bb
->> dbus/dbus-glib-native_0.76.bb
->> gawk/gawk-native_3.1.4.bb
->> gdbm/gdbm-native_1.8.3.bb
->> gdbm/gdbm_1.8.3.bb
->> glib-1.2/glib-1.2-native_1.2.10.bb
->> gnome/gconf-native_2.6.1.bb
->> gnome/pyorbit_2.24.0.bb
->> gtk+/gtk+-1.2_1.2.10.bb
->> guile/guile_1.8.7.bb
->> intltool/intltool_0.40.3.bb
->> jakarta-libs/regexp_1.5.bb
->> jamvm/jamvm-initial_1.4.5.bb
->> jlex/jlex_1.2.6.bb
->> libffi/libffi-native_2.0+gcc4.3.2.bb
->> libffi/libffi_3.0.8.bb
->> libfribidi/libfribidi-native_0.10.4.bb
->> libglade/libglade_2.6.4.bb
->> libgsm/libgsm_1.0.12.bb
->> libtool/libtool-cross_2.2.6b.bb
->> libtool/libtool_2.2.6b.bb
->> llvm/llvm2.7-native_2.7.bb
->> llvm/llvm2.7_2.7.bb
->> makedevs/makedevs-native_1.0.0.bb
->> mml-widget/gtkmathview_0.8.0.bb
->> mozilla/rhino_1.7r1.bb
->> mpeg2dec/mpeg2dec_0.4.0b.bb
->> mysql/mysql5-native_5.1.40.bb
->> mysql/mysql5_5.1.40.bb
->> openjdk/openjdk-6_6b18-1.8.bb
->> openobex/openobex_1.5.bb
->> perl/libnet-dbus-perl_0.33.6.bb
->> perl/libxml-parser-perl_2.36.bb
->> perl/libxml-simple-perl_2.18.bb
->> perl/libxml-twig-perl_3.33.bb
->> perl/perl_5.8.8.bb
->> python/python-docutils-native_0.5.bb
->> python/python_2.6.4.bb
->> samba/samba_3.3.9.bb
->> squashfs-tools/squashfs-tools-native_4.0.bb
->> tcltk/tcl-native_8.4.19.bb
->> tzcode/tzcode-native_2010j.bb
->> u-boot/u-boot_git.bb
->> xalan-j/xalan-j_2.7.1.bb
->> xerces-j/xerces-j_2.9.1.bb
->> xml-commons/jaxp1.3_1.3.04.bb
->> xml-commons/xml-commons-resolver1.1_1.2.bb
->> xorg-font/font-util-native_1.1.1.bb
->> xorg-proto/calibrateproto_git.bb
->>
->>
->> regards,
->>
->> Koen
->>
->
-> What do you want to say with this list?
-> I did a grep for do_stage and found 1119 recipes that still have a do_stage
-> function.
-> In my opinion all of these should be updated or removed (where for old
-> recipes that are not pinned I have a strong preference for removing).
->
-> Ideally in the end we should be able to remove the do_stage invocation from
-> the build machinery (and if there are one or two recipes where it is
-> unavoidable they could add it as a private task)
->
-> I browsed the list to see if there was anything I created and/or felt
-> responsible for.
-> The only thing I could come up with is perl/libxml-twig-perl_3.33.bb which
-> I created for mythtv.
-> I've peeked into it and it has no do_stage, but it inherits cpan and
-> cpan.bbclass contains a cpan_do_stage function.
-> My guesspectation is that in cpan.bbclass the function cpan_do_stage can go
-> together with the test in cpan_do_install, but I have not enough knowledge
-> of our build machinery or perl & cpan to be sure enough to remove it.
->
-> Frans.
->
-> BTW: the observation with libxml-twig-perl shows that the actual # of
-> recipes that has legacy staging is even greater than the 1119 I mentoned.
-> The good news is that fixing things like cpan.bbclass fixes a lot of them
-> at once.
->
-> Actually things are even worse. My grep that resulted in 1119 matches was
-on recipes/*/*.bb
-Grepping on recipes/*/*.inc results in another 141 matches
+The following 4 patches are based on  Jushua's work in poky to get rid of
+cross dir and install the toolchain in  native sysroot.
 
-and grepping for do_stage in classes results in the following 11 matches:
-classes/native.bbclass
-classes/staging.bbclass
-classes/java-library.bbclass
-classes/cpan.bbclass
-classes/srctree.bbclass
-classes/canadian-native.bbclass
-classes/packaged-staging.bbclass
-classes/cross.bbclass
-classes/autotools_stage.bbclass
-classes/xlibs.bbclass
-classes/canadian-cross.bbclass
+I have done native-sdk-builds for uclibc and eglibc. It could build the images
+and the images booted fine in qemu on mips and arm.
 
-Some of these are of course to invoke the do_stage function, but I guess
-some of these need to be reworked (e.g. cpan, xlibs, java-library, but
-probably others too)
+I would  appreciate if someone could lend a hand in testing these patches
 
-Frans
+And as we have changed tmpdir layout with this patch I have also bumped ABI
+which means tmp has to be nuked before you try these patches.
 
-Frans
+Please review/ack/nack
+
+Thanks
+-Khem
+
+
+
+
 
