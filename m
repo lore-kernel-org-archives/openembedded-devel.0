@@ -1,31 +1,37 @@
-Received: from smtp207.alice.it ([82.57.200.103])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ospite@studenti.unina.it>) id 1ObW41-0003wZ-Iz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 11:58:13 +0200
-Received: from jcn (82.57.78.224) by smtp207.alice.it (8.5.124.08)
-	id 4C1A26CF022FD609; Wed, 21 Jul 2010 11:57:58 +0200
-Date: Wed, 21 Jul 2010 11:57:35 +0200
-From: Antonio Ospite <ospite@studenti.unina.it>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1ObWQ2-0005Ug-Jm for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jul 2010 12:20:56 +0200
+Received: from f053041176.adsl.alicedsl.de ([78.53.41.176]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1ObWPt-00021p-SQ for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jul 2010 10:20:46 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-Id: <20100721115735.7bb34bc2.ospite@studenti.unina.it>
-In-Reply-To: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
-References: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
-X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
-X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
-	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
-	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
-	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
+In-Reply-To: <AANLkTinveVXhVJje5LRxRLru_Ju-C1TK76QHBOAoHcgB@mail.gmail.com>
+References: <1279216536.3741.27.camel@mattotaupa>
+	<1279270987.4164.29.camel@mattotaupa>
+	<AANLkTimGrdHiLeLLsInSl9L-KS8SbvNt4ws2kDcpEEN1@mail.gmail.com>
+	<i1qogv$i28$2@dough.gmane.org> <1279355702.14848.3.camel@mattotaupa>
+	<i1s6sg$d1j$1@dough.gmane.org> <1279464507.18570.59.camel@mattotaupa>
+	<1279660488.4096.8.camel@mattotaupa>
+	<AANLkTinveVXhVJje5LRxRLru_Ju-C1TK76QHBOAoHcgB@mail.gmail.com>
+Date: Wed, 21 Jul 2010 12:20:42 +0200
+Message-ID: <1279707642.3928.2.camel@mattotaupa>
 Mime-Version: 1.0
-X-SA-Exim-Connect-IP: 82.57.200.103
-X-SA-Exim-Mail-From: ospite@studenti.unina.it
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] libgpsbt_0.1: adding dbus-glib to DEPENDS
+Subject: Re: angstrom-2008.1, uclibc: git-native: sysroot-destdir 6, 4 GB big, since some executables are 100 MB each
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,53 +45,179 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jul 2010 09:58:13 -0000
-X-Groupsio-MsgNum: 21233
-Content-Type: multipart/signed; protocol="application/pgp-signature";
-	micalg="PGP-SHA1";
-	boundary="Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux"
+X-List-Received-Date: Wed, 21 Jul 2010 10:20:56 -0000
+X-Groupsio-MsgNum: 21234
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-TQykggnUTP309kC9RAcq"
 
---Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux
-Content-Type: text/plain; charset=US-ASCII
-Content-Disposition: inline
+--=-TQykggnUTP309kC9RAcq
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, 13 Jul 2010 16:08:56 +0200
-Nicola Ranaldo <nicola.ranaldo@gmail.com> wrote:
+Am Dienstag, den 20.07.2010, 15:44 -0700 schrieb Khem Raj:
+> On Tue, Jul 20, 2010 at 2:14 PM, Paul Menzel
+> <paulepanter@users.sourceforge.net> wrote:
+> > Am Sonntag, den 18.07.2010, 16:48 +0200 schrieb Paul Menzel:
+> >> Am Samstag, den 17.07.2010, 14:15 +0200 schrieb Koen Kooi:
+> >> > On 17-07-10 10:35, Paul Menzel wrote:
+> >> > > Am Samstag, den 17.07.2010, 01:03 +0200 schrieb Koen Kooi:
+> >> > >> On 16-07-10 17:23, Khem Raj wrote:
+> >> > >>> On Fri, Jul 16, 2010 at 2:03 AM, Paul Menzel
+> >> > >>> <paulepanter@users.sourceforge.net> wrote:
+> >> > >
+> >> > >>>> Am Donnerstag, den 15.07.2010, 19:55 +0200 schrieb Paul Menzel:
+> >> > >>>>
+> >> > >>>>> I ran out of space and noticed
+> >> > >>>>>
+> >> > >>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4
+> >> > >>>>>
+> >> > >>>>> is 8,1G big.
+> >> > >>>>>
+> >> > >>>>> Some of the executable files in
+> >> > >>>>>
+> >> > >>>>>     /angstrom-dev/work/i686-linux/git-native-1.7.0.2-r4/sysroo=
+t-destdir/angstrom-dev/sysroots/i686-linux/usr/libexec/git-core/
+> >> > >>>>>
+> >> > >>>>> are 101 MB big.
+> >> > >>>
+> >> > >>> its most probably the -g3/-ggdb3 bloat.
+> >> > >>
+> >> > >> No, it's git not creating (hard)links but copies of the same app.=
+ Run an
+> >> > >> md5sum on the binaries, they will all match. I suggest you stop
+> >> > >> spreading FUD about -ggdb3, it is not being appriciated.
+> >> > >
+> >> > > I do not know anything about the technical background. I can only =
+report
+> >> > > that removing `-ggdb3` fixed it for me.
+> >> >
+> >> > Are you saying that removing -ggdb3 made git create proper (hard)lin=
+ks?
+> >>
+> >> No, I just said, that after doing as Khem suggested the available spac=
+e
+> >> was big enough.
+> >>
+> >> Anyway, I tried to investigate a little and could not find anything
+> >> related to (hard)link problems. But probably I overlooked something. I
+> >> head refresh my memory about hard and soft links [1].
+> >>
+> >> 1. As you suggested in your reply I ran `md5sum` on the binaries. They
+> >> do indeed match on the binaries I posted, but also the inode matches. =
+It
+> >> looks like that is way it should be.
+> >>
+> >>         $ echo "Test" > test
+> >>         $ ln test test.link
+> >>         $ md5sum test*
+> >>         2205e48de5f93c784733ffcca841d2b5  test
+> >>         2205e48de5f93c784733ffcca841d2b5  test.link
+> >>         $ ls -1i test*
+> >>         3653430 test
+> >>         3653430 test.link
+> >>
+> >> So I think the hardlinks were created properly. I did not think of thi=
+s
+> >> when reporting the problem so I did not run `ls -i` on the listed file=
+s
+> >> and I did not check with `du`.
+> >>
+> >>         /angstrom-dev/work/i686-linux/git-native-1.7.1.1-r0/image/angs=
+trom-dev/sysroots/i686-linux/usr/libexec/git-core $ md5sum * | sort
+> >>         [=E2=80=A6]
+> >>         82c05218d9634923e301a9463e8f9c0d  git-shell
+> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-ftp
+> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-ftps
+> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-http
+> >>         85edbd7803242b4895ed33b4fcfa3622  git-remote-https
+> >>         89a6ef52f4b7c336fb5fc0601edfd95f  git-mergetool
+> >>         9a7f760ecef6e64f370c907d61ad0ffb  git-svn
+> >>         9b57eb61ce668f2105a61a467f4d6d9b  git-difftool
+> >>         ac3472a81bc59a69119b0d027c3f617b  git-merge-one-file
+> >>         b14a5bba57d0ae0ccfdb0fceac0eb4ec  git-merge-octopus
+> >>         b6899828bc756c5d30398d49dce91deb  git-cvsexportcommit
+> >>         b775de2d21923f5d08e0bdcf3f9d31f6  git-mergetool--lib
+> >>         bd786a897bdc214bd5d89f51ad79f152  git-instaweb
+> >>         c8466908a274e211a43d287e510f2f19  git-merge-resolve
+> >>         ce109bd27d9404980bd82ddb529eca90  git-send-email
+> >>         d3da496bd962246727ceaabc1d4b1bdd  git-sh-setup
+> >>         d46c9b755b712bf3c27521b3c6e5fd30  git-relink
+> >>         d4b577d9a69d9af883de29d6af4f04c5  git
+> >>         d4b577d9a69d9af883de29d6af4f04c5  git-add
+> >>         d4b577d9a69d9af883de29d6af4f04c5  git-annotate
+> >>         d4b577d9a69d9af883de29d6af4f04c5  git-apply
+> >>         [=E2=80=A6]
+> >>
+> >>         /angstrom-dev/work/i686-linux/git-native-1.7.1.1-r0/image/angs=
+trom-dev/sysroots/i686-linux/usr/libexec/git-core $ ls -1i
+> >>         [ =E2=80=A6 ordered manually to match md5sum output]
+> >>         3691063 git-shell
+> >>         3691070 git-remote-ftp
+> >>         3691070 git-remote-ftps
+> >>         3691070 git-remote-http
+> >>         3691070 git-remote-https
+> >>         3691082 git-mergetool
+> >>         3691100 git-svn
+> >>         3691093 git-difftool
+> >>         3691080 git-merge-one-file
+> >>         3691079 git-merge-octopus
+> >>         3691095 git-cvsexportcommit
+> >>         3691102 git-mergetool--lib
+> >>         3691101 git-instaweb
+> >>         3691081 git-merge-resolve
+> >>         3691099 git-send-email
+> >>         3691104 git-sh-setup
+> >>         3691098 git-relink
+> >>         3691105 git
+> >>         [=E2=80=A6]
+> >>
+> >> What did I miss? Were you seeing something different?
+> >>
+> >> 2. You seem to have investigated this problem before and committed a f=
+ix
+> >> for git [2].
+> >>
+> >>     git 1.7.0.2: fix hardlinking problems as reported by Eric Brombaug=
+h
+> >>
+> >> I could not find Eric=E2=80=99s report on this list or the Web. So I h=
+ave to
+> >> test without your patch. But `git-native` does not seem to use your
+> >> patch, so I guess the behavior should be the one without your patch.
+> >>
+> >> Could you please tell me if my observations are correct.
+> >
+> > I am a little bit lost. Koen, could you give me a pointer, please, so
+> > that I can try to continue to solve this issue.
+>=20
+> Koen fixed it for target git recipe I guess you need to port that fix
+> to git-native as well.
+> if you want to use git-native built with OE.
 
-> ---
->  recipes/maemo4/libgpsbt_0.1.bb |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->
+But as far as I see, the hardlinks were created correctly in git-native
+for me. So I do not know what I am supposed to do.
 
-Ah I just realized these patches miss the proper Signed-off-by line,
-Nicola, what address should I use for that? Maybe you are willing to
-send a v2 with proper SOB lines and improved commit messages?
 
 Thanks,
-   Antonio
 
---=20
-Antonio Ospite
-http://ao2.it
+Paul
 
-PGP public key ID: 0x4553B001
 
-A: Because it messes up the order in which people normally read text.
-   See http://en.wikipedia.org/wiki/Posting_style
-Q: Why is top-posting such a bad thing?
-A: Top-posting.
-Q: What is the most annoying thing in e-mail?
+> >> [1] info coreutils "ln invocation"
+> >> [2] http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3D84d=
+e51631e1e7bb76141332807ed2ba9e8df02ae
 
---Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux
-Content-Type: application/pgp-signature
+--=-TQykggnUTP309kC9RAcq
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEARECAAYFAkxGxI8ACgkQ5xr2akVTsAG63wCdE0PDgwcLehNOuzs9HnLy4hZX
-Y2IAnjn9asIpdx3X0oMds3+qrP+SUpSk
-=ki1I
+iEYEABECAAYFAkxGyfIACgkQPX1aK2wOHVgDWgCfeUVVOht/icHrd/zmYShaCSS5
+plcAniLqy2tUhaVsoYM5kN5b/X/Lx+Su
+=udaC
 -----END PGP SIGNATURE-----
 
---Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux--
+--=-TQykggnUTP309kC9RAcq--
