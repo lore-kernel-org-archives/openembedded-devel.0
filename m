@@ -1,40 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from smtp207.alice.it ([82.57.200.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ObVGP-0002i1-BE for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 11:06:54 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ObVGD-0004M3-5h for openembedded-devel@lists.openembedded.org;
-	Wed, 21 Jul 2010 11:06:41 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jul 2010 11:06:41 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 21 Jul 2010 11:06:41 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <ospite@studenti.unina.it>) id 1ObW41-0003wZ-Iz
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 21 Jul 2010 11:58:13 +0200
+Received: from jcn (82.57.78.224) by smtp207.alice.it (8.5.124.08)
+	id 4C1A26CF022FD609; Wed, 21 Jul 2010 11:57:58 +0200
+Date: Wed, 21 Jul 2010 11:57:35 +0200
+From: Antonio Ospite <ospite@studenti.unina.it>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 21 Jul 2010 11:06:31 +0200
-Message-ID: <i26dan$8jg$1@dough.gmane.org>
+Message-Id: <20100721115735.7bb34bc2.ospite@studenti.unina.it>
+In-Reply-To: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
+References: <1279030137-30479-1-git-send-email-nicola.ranaldo@gmail.com>
+X-Mailer: Sylpheed 3.0.2 (GTK+ 2.20.1; x86_64-pc-linux-gnu)
+X-Face: z*RaLf`X<@C75u6Ig9}{oW$H; 1_\2t5)({*|jhM<pyWR#k60!#=#>/Vb;
+	]yA5<GWI5`6u&+ ; 6b'@y|8w"wB;
+	4/e!7wYYrcqdJFY,~%Gk_4]cq$Ei/7<j&N3ah(m`ku?pX.&+~:_/wC~dwn^)MizBG
+	!pE^+iDQQ1yC6^,)YDKkxDd!T>\I~93>J<_`<4)A{':UrE
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 82.57.200.103
+X-SA-Exim-Mail-From: ospite@studenti.unina.it
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Openjdk shark and cacao VMs not working
+Subject: Re: [PATCH 1/2] libgpsbt_0.1: adding dbus-glib to DEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,81 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 21 Jul 2010 09:06:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 21 Jul 2010 09:58:13 -0000
+X-Groupsio-MsgNum: 21233
+Content-Type: multipart/signed; protocol="application/pgp-signature";
+	micalg="PGP-SHA1";
+	boundary="Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux
+Content-Type: text/plain; charset=US-ASCII
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-On 19-07-10 11:37, Koen Kooi wrote:
-> Hi,
->
-> I built openjdk completely from scratch and installed it:
->
-> opkg install openjdk-6-common openjdk-6-demo openjdk-6-java
-> openjdk-6-jdk openjdk-6-jre
->
-> opkg install openjdk-6-vm-shark openjdk-6-vm-cacao
->
-> That needs to be done in 2 opkg commands since -cacao and -shark edit a
-> jvm.cfg in their postinst which isn't in their Depends: line. Trivial to
-> fix, need to sit down and see in which package it resides.
->
-> So:
->
-> root@beagleboard-C4:~# java -zero Linpack # [1]
-> Mflops/s: 9.537  Time: 0.07 secs  Norm Res: 1.43  Precision:
-> 2.220446049250313E-16
->
-> So far, so good. Better than the 3 Mflops jamvm+classpath gets, but not
-> as nice as the 16Mflops cacao+classpath can do.
->
-> So lets try some other VMs:
->
-> root@beagleboard-C4:~# java -shark Linpack
-> ARMCodeEmitter::emitPseudoInstruction
-> UNREACHABLE executed at
-> /OE/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/llvm2.7-2.7-r6/llvm-2.7/lib/Target/ARM/ARMCodeEmitter.cpp:554!
-> Stack dump:
-> 0.      Running pass 'ARM Machine Code Emitter' on function
-> '@"Linpack::daxpy"'
-> Aborted
->
-> OK, Xerxes blogged about debugging such issues, but the summer intern is
-> too busy with other stuff currently.
->
-> root@beagleboard-C4:~# java -cacao Linpack
-> java: avl.c:348: avl_find: Assertion `tree' failed.
-> Aborted
->
-> No idea on that.
->
-> Do the java mages have some idea on how to get shark and cacao working well?
+On Tue, 13 Jul 2010 16:08:56 +0200
+Nicola Ranaldo <nicola.ranaldo@gmail.com> wrote:
 
-So, after yesterdays commits:
+> ---
+>  recipes/maemo4/libgpsbt_0.1.bb |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
+>
 
-root@beagleboard-C4:~# java -shark Linpack
-Mflops/s: 1.416  Time: 0.49 secs  Norm Res: 1.43  Precision:
-2.220446049250313E-16
-root@beagleboard-C4:~# java -zero Linpack
-Mflops/s: 8.918  Time: 0.08 secs  Norm Res: 1.43  Precision:
-2.220446049250313E-16
-root@beagleboard-C4:~# java -cacao Linpack
-Mflops/s: 20.808  Time: 0.03 secs  Norm Res: 1.43  Precision:
-2.220446049250313E-16
-root@beagleboard-C4:~#
+Ah I just realized these patches miss the proper Signed-off-by line,
+Nicola, what address should I use for that? Maybe you are willing to
+send a v2 with proper SOB lines and improved commit messages?
 
-regards,
+Thanks,
+   Antonio
 
-Koen
+--=20
+Antonio Ospite
+http://ao2.it
+
+PGP public key ID: 0x4553B001
+
+A: Because it messes up the order in which people normally read text.
+   See http://en.wikipedia.org/wiki/Posting_style
+Q: Why is top-posting such a bad thing?
+A: Top-posting.
+Q: What is the most annoying thing in e-mail?
+
+--Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux
+Content-Type: application/pgp-signature
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFMRriXMkyGM64RGpERAuaxAJ9uDgLjBWTeY6jIcrZ/9qYtM0DS+ACfUx14
-VmZeDQWat8eU6BfK8Lm1U3I=
-=zMJm
+iEYEARECAAYFAkxGxI8ACgkQ5xr2akVTsAG63wCdE0PDgwcLehNOuzs9HnLy4hZX
+Y2IAnjn9asIpdx3X0oMds3+qrP+SUpSk
+=ki1I
 -----END PGP SIGNATURE-----
 
-
-
+--Signature=_Wed__21_Jul_2010_11_57_35_+0200_qFSHZhkCEhHhH6Ux--
