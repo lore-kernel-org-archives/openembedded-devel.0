@@ -1,47 +1,32 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from [93.188.72.201] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Oc4yV-0005Px-BM
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1Oc5Hq-0007yN-9i
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 01:14:48 +0200
-Received: by ywe9 with SMTP id 9so1154098ywe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 16:14:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=udM0rNFexjh8xwD6r1z+55daKdHRCn4bH7MVuKfIPN0=;
-	b=KVMfjBWn/6L1ZUMGClESE+niHFspKvc3OnsytbVuc/7B0gCGNFoWwaN50wmPQa7Ego
-	kMoAZM9HT4mNuAmbJhtYbgGaz2ckK5z+0UDpoMB7d2nZi4BYC7+y+nw9FTBJV2FtmIkO
-	vRwHft96TRKTiudd+mkmkBE+Bo+9KtVQ+wFu0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=RMuzrUAn4OsXHmxW0/EGVkPR5AtnyhmZNRTa7ffPyDSdcDaXtqGMwFl+ADUeqEmZSd
-	xDYlBIdSyLc0yRonLMYTITEVxt3pclxEH0CsmMT8HlE8NpPfu3UcxgWF1SCxmIGuqc8m
-	ijDAl2afweNs//SRnvu0gUVPfkYusyW3UbEKU=
-Received: by 10.224.112.209 with SMTP id x17mr1781224qap.304.1279840469167; 
-	Thu, 22 Jul 2010 16:14:29 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.229.212.11 with HTTP; Thu, 22 Jul 2010 16:14:09 -0700 (PDT)
-In-Reply-To: <786613.21629.qm@web88307.mail.re4.yahoo.com>
-References: <786613.21629.qm@web88307.mail.re4.yahoo.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 22 Jul 2010 16:14:09 -0700
-X-Google-Sender-Auth: r_rC3EL4R4Q58Q-lVlzpvz0AmOM
-Message-ID: <AANLkTina2rXxt1VuLkZ89xRoD2jdCD2gIQoL_J3kJhP_@mail.gmail.com>
+	Fri, 23 Jul 2010 01:34:50 +0200
+Received: from dizzy-6.localnet ([::ffff:82.192.226.27])
+	(AUTH: PLAIN david.lanzendoerfer@o2s.ch, TLS: TLSv1/SSLv3, 256bits,
+	AES256-SHA) by koffein with esmtp; Fri, 23 Jul 2010 01:38:25 +0000
+	id 000000000002ECF5.000000004C48F291.00003E0F
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
+	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
+	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
+	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
+	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Fri, 23 Jul 2010 01:34:58 +0200
+MIME-Version: 1.0
+Message-Id: <201007230134.59343.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 93.188.72.201
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Is it possible to have variables that contain line breaks for module_conf
+Subject: [PATCH] Adding maxima recipe (tool for algebraic calculation)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,51 +40,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 23:14:48 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 22 Jul 2010 23:34:54 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-The only way today is to leverage the function syntax.  A function in a
-recipe is just a multi-line variable with a flag ("func") set.
+<JaMa> leviathan: and send PATCHv2 to ML if it builds for you correct .ipk I'll push it imediately
 
-On Thu, Jul 22, 2010 at 3:51 PM, Ron Zachariah <ron_zach@yahoo.com> wrote:
+leviathan@dizzy-6 /mnt/sdb/build_gta02 $ ls tmp/deploy/ipk/armv4t/maxima*
+tmp/deploy/ipk/armv4t/maxima_5.21.1-r0.5_armv4t.ipk  tmp/deploy/ipk/armv4t/maxima-dbg_5.21.1-r0.5_armv4t.ipk  tmp/deploy/ipk/armv4t/maxima-dev_5.21.1-r0.5_armv4t.ipk  tmp/deploy/ipk/armv4t/maxima-doc_5.21.1-r0.5_armv4t.ipk
 
-> I am trying to have a variable that contains a line break in it.  When I
-> use '\n' it seems to just print out the literal characters '\' 'n' and not a
-> line break.
->
-> The context for this is I want to create a module_conf for my device that
-> contains more than one line in it.
->
-> In my machine.conf file I have something like
-> module_conf_testa = """install testa /sbin/modprobe --ignore-install testa
-> force_testa=0,0x74; \
-> echo "1" > /sys/devices/plb.0/.../item1; \
-> echo "2" > /sys/devices/plb.0/.../item2 \
-> \
-> \n\nremove  testa /sbin/modprobe -r --ignore-remove testa"""
->
-> But when I look at the result /etc/modprobe.d/testa file there is only 1
-> line with explicit '\' 'n' characters.
-> Is there some syntax I can use to make these appear on seperate lines?
->
-> Thanks
-> Ron
->
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+@JaMa:
+The content of the ipkgs is ok.
+ready to push?
 
+best regards
+	leviathan
+---
+ recipes/maxima/maxima_5.21.1.bb |    9 +++++++++
+ 1 files changed, 9 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/maxima/maxima_5.21.1.bb
 
-
+diff --git a/recipes/maxima/maxima_5.21.1.bb b/recipes/maxima/maxima_5.21.1.bb
+new file mode 100644
+index 0000000..ae89bea
+--- /dev/null
++++ b/recipes/maxima/maxima_5.21.1.bb
+@@ -0,0 +1,9 @@
++DESCRIPTION="Free computer algebra environment based on Macsyma"
++HOMEPAGE="http://maxima.sourceforge.net/"
++SRC_URI="http://www.sfr-fresh.com/unix/misc/${P}.tar.gz"
++LICENSE="GPLv2"
++
++inherit autotools
++
++SRC_URI[md5sum] = "e08ed533f3059cec52788ef35198bdcc"
++SRC_URI[sha256sum] = "1dae887e1787871437d699a6b1acc1c1f7428729487492a07c6a31e26bf53a1b"
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+1.6.4.4
+
+
 
