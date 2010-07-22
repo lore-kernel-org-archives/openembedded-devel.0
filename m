@@ -1,33 +1,39 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1ObtVg-0001XK-St
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 13:00:18 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1ObtVW-0008Lo-6g
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 12:00:06 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1ObtVV-0001lm-QQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 12:00:05 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Obthm-00070Y-9I for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jul 2010 13:12:47 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Obthc-0005Sl-Cz for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jul 2010 13:12:36 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 13:12:36 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 13:12:36 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4C481AE8.3090702@gmx.net>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 22 Jul 2010 13:12:26 +0200
+Message-ID: <i2992q$p92$1@dough.gmane.org>
 References: <4C481AE8.3090702@gmx.net>
-Date: Thu, 22 Jul 2010 12:00:05 +0100
-Message-ID: <1279796405.2345.2233.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <4C481AE8.3090702@gmx.net>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: RFC: make all angstrom java related setting overridable from local.conf
@@ -44,23 +50,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 11:00:18 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 22 Jul 2010 11:12:47 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-On Thu, 2010-07-22 at 12:18 +0200, Robert Schuster wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 22-07-10 12:18, Robert Schuster wrote:
+> Hi,
 > atm angstrom does not allow me to override versions for the Java recipes
 > in local.conf. With the attached that is being made possible.
 
-Can you not override them as:
+The patch doesn't match your description. Could you please send a patch
+that changes the *version* assignments to weak so it matches your
+description *or* update the description to explain with providers and
+STAGING_DIR_JAVA needs tweaking as well?
 
-PREFERRED_VERSION_cacao_local = "0.99.4"
+regards,
 
-already?  If that's not working then it sounds like there is a bug
-elsewhere.  Adding these weak assignments ought not to be necessary.
+Koen
 
-p.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFMSCeaMkyGM64RGpERAnwRAJ0aPFq1TTp8V1/wmbH6sr8IHo+S8ACgrD6p
+aa5bM2lLOqvUisFUXGXn8Og=
+=uG3m
+-----END PGP SIGNATURE-----
 
 
 
