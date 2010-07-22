@@ -1,29 +1,47 @@
-Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcolz@zlo.nu>) id 1Obq3P-0008TK-Vc
+	(envelope-from <graham.gower@gmail.com>) id 1ObqAc-0000Bb-Ch
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 09:18:56 +0200
-Received: by mzh.zlo.nu (Postfix, from userid 1000)
-	id F2AFF1414B; Thu, 22 Jul 2010 09:18:39 +0200 (CEST)
-Date: Thu, 22 Jul 2010 09:18:39 +0200
-From: Marc Olzheim <zlo@zlo.nu>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100722071839.GA17760@zlo.nu>
-References: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
-	<1279721232-24744-2-git-send-email-heinold@inf.fu-berlin.de>
+	Thu, 22 Jul 2010 09:26:19 +0200
+Received: by iwn34 with SMTP id 34so7828667iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 00:26:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=EPLqTewSwXCad7pmezVZCgI/JnL8+mbSdQFzJOM1Pw4=;
+	b=ka1WzEsw4zucJlV4n9/QOsS6XUNJGcliSZZvQZNCbB61DlMEBu2ZWHwgtUF1w/vqwc
+	zZr/6jjkkHczTJF6lB7sbFAvwQG6kbbhEquNRuMNh3ta0kPb0/t6oX4wn0uIVAMtuVpT
+	ea+x1XkJwieSxJ29F8ykhH3ZCKsjZosbEOIxc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=sWYpUE1NBonDQqJf15II23XKStV72sDrl5P7lZXhxzZGRuq/m4qk+bnmNTkVOnd94B
+	N9C93vrUN8n8VtcUDjk4A8ri67gJ0tZavSeQ0tvxxixOmChzvxhKYmAziAfrU9NCGMY2
+	YGhczWVi+hSi2a1NcDGvrOBQgEleSMIv81Txs=
 MIME-Version: 1.0
-In-Reply-To: <1279721232-24744-2-git-send-email-heinold@inf.fu-berlin.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 85.17.141.90
-X-SA-Exim-Mail-From: marcolz@zlo.nu
+Received: by 10.231.159.204 with SMTP id k12mr1491875ibx.42.1279783568080; 
+	Thu, 22 Jul 2010 00:26:08 -0700 (PDT)
+Received: by 10.231.145.77 with HTTP; Thu, 22 Jul 2010 00:26:07 -0700 (PDT)
+In-Reply-To: <AANLkTinUM0JSiWeRkhCDo67KqyanvDiaIRiuCiT0tpOr@mail.gmail.com>
+References: <4C4704CB.2010204@gmail.com> <i275t3$65g$1@dough.gmane.org>
+	<4C475AC4.6010302@gmail.com>
+	<AANLkTimMZU5mXUn1ZSFJ0_8aDu8ykWYDXMD55iZW8s7A@mail.gmail.com>
+	<4C47E285.708@nedap.com>
+	<AANLkTinUM0JSiWeRkhCDo67KqyanvDiaIRiuCiT0tpOr@mail.gmail.com>
+Date: Thu, 22 Jul 2010 16:56:07 +0930
+Message-ID: <AANLkTil57uQl9XRZmHY7gDTviye2YboZ0G5QyGsEZCj2@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Henning Heinold <h.heinold@tarent.de>
-Subject: Re: [PATCH 01/21] ant: backport from openembedded-dev
+Subject: Re: opkg : angstrom fails console-image build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,71 +55,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 07:18:56 -0000
-X-Groupsio-MsgNum: 21282
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature"; boundary="J/dobhs11T7y2rNN"
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Jul 2010 07:26:19 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---J/dobhs11T7y2rNN
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+On 22 July 2010 16:41, Graham Gower <graham.gower@gmail.com> wrote:
+> On 22 July 2010 15:47, Jaap de Jong <jaap.dejong@nedap.com> wrote:
+>> I've made a completely clean build last night and it breaks at the same
+>> problem.
+>>
+>
+> Koen bumped the opkg SRCREV a couple of days ago. One of the recent
+> opkg changes was to return an error in some erroneous cases which were
+> incorrectly ignored previously (check_data_file_clashes errors are one
+> of these cases).
+>
+> Its possible that this problem was there beforehand and its only now
+> being caught because of less dumb error checking. Sorry, I don't know
+> what is causing the issue - you probably need to look at the
+> dependency graph to see why both opkg and opkg-nogpg-nocurl packages
+> are being built and installed.
+>
+> -Graham
+>
 
-On Wed, Jul 21, 2010 at 04:06:52PM +0200, heinold@inf.fu-berlin.de wrote:
-> From: Henning Heinold <h.heinold@tarent.de>
->=20
-> ---
->  conf/checksums.ini              |    4 ++
->  recipes/ant/ant-native_1.7.1.bb |   64 +++++++++++++++++++++++++++++++++=
-++++++
->  recipes/ant/files/ant           |   10 ++++++
->  3 files changed, 78 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/ant/ant-native_1.7.1.bb
->  create mode 100755 recipes/ant/files/ant
->=20
-> diff --git a/conf/checksums.ini b/conf/checksums.ini
-> index 909ade7..2c18f2e 100644
-> --- a/conf/checksums.ini
-> +++ b/conf/checksums.ini
-> @@ -1622,6 +1622,10 @@ sha256=3D4dc49a7260ef90a6dc6611b7e96b9f047d5075897=
-36d4a2ad6efbe3edfc6fba6
->  md5=3D2a44ff60456cf67bb83771cfcedb8e33
->  sha256=3D1a2fceea38f04e6fea0c0cb8ad7312dc948004af4d9308b5e630d299d89dfb38
-> =20
-> +[http://archive.apache.org/dist/ant/source/apache-ant-1.7.1-src.tar.gz]=
-=20
-> +md5=3D2a44ff60456cf67bb83771cfcedb8e33=20
-> +sha256=3D1a2fceea38f04e6fea0c0cb8ad7312dc948004af4d9308b5e630d299d89dfb38
-> +
->  [http://archive.apache.org/dist/logging/log4j/1.2.15/apache-log4j-1.2.15=
-=2Etar.gz]
->  md5=3D10f04abe4d68d5a89e8eb167e4e45e1a
->  sha256=3Df5d9f6aa78b9156ae2de2a32d0f26507d2e73db4993d501db2e79f0bd803ab31
+PS: pushing my opkg cleanup patch would probably fix this with no
+further need to investigate...
 
-[snip]
 
-I may be wrong, but per
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-April/019112.h=
-tml
-I have always thought that checksums.ini was to be removed and that new
-checksums are to be added to the .bb files.
-
-Apart from that, nice job on the patchset. ;-)
-
-Marc
-
---J/dobhs11T7y2rNN
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: Digital signature
-Content-Disposition: inline
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEARECAAYFAkxH8M8ACgkQezjnobFOgrFcDwCeJx/VC6R8dndGfYTCP5E9mgxg
-+tUAniZ8ySkAjh7LDV8wQsG7vdrSxYqC
-=7bkj
------END PGP SIGNATURE-----
-
---J/dobhs11T7y2rNN--
