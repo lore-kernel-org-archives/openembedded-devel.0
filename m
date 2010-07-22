@@ -1,42 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ObxAm-0005X9-Ta for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 16:54:57 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1ObxAW-0006vX-Nd for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 16:54:40 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 16:54:40 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1ObxUs-0003Xk-Mi
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jul 2010 17:16:02 +0200
+Received: by fxm12 with SMTP id 12so4425351fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 16:54:40 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 22 Jul 2010 08:15:28 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=hykzD8IgRx/BLsL2XpiPbpvonc8YCEkvrFmuz5kVtb8=;
+	b=q3lZTviJmFx0PsQzefQaYz/DHYpNGCDo2AAJeGWlqTZ5uZKEfSjhfNtQ0sdkVgQsJK
+	t9TzD2zIhejGIPACW1HthMkRgktwnODhPNQPVyBsf+4795ygjt0kZr+uynLsvu9TkN8g
+	ov2G2CL5Wg/kT4tNhN5PvsfaFALKnyH0tnEks=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=IF3XhuujSbWuHJPErRhXlAxIdGnG0+zJmzd/u7gYDw687NPjafvP5wvqNeoOY4jpmq
+	RFcXAE4RCJ6paMcBx2AaqOWOBa+3oAdFMJ5vwaUV7oXwJ495eNhEWadOk5RtcyUTmdVp
+	yC59U9MC7sRKDxnL32Em6cPi/b36gavXyPzLk=
+MIME-Version: 1.0
+Received: by 10.223.113.144 with SMTP id a16mr2044979faq.41.1279811728467; 
+	Thu, 22 Jul 2010 08:15:28 -0700 (PDT)
+Received: by 10.223.117.204 with HTTP; Thu, 22 Jul 2010 08:15:28 -0700 (PDT)
+In-Reply-To: <20100721142016.GH2189@jama>
+References: <i216cf$pju$1@dough.gmane.org> <4C46DCE3.1080207@zafena.se>
+	<20100721142016.GH2189@jama>
+Date: Thu, 22 Jul 2010 17:15:28 +0200
+Message-ID: <AANLkTikeJTj01x057Rur8H0haeDehcVVPqaQzDLq2dd6@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 22 Jul 2010 16:54:26 +0200
-Message-ID: <i29m32$blc$1@dough.gmane.org>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
+Subject: Re: Openjdk shark and cacao VMs not working - shark fixed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,39 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 14:54:58 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Jul 2010 15:16:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Wed, Jul 21, 2010 at 4:20 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+> FYI:
+>
+> Tested on om-gta02 (armv4t) and only -zero seems to work (built from
+> yesterday oe.dev, waiting for todays fixes to built).
+>
+> SHR root@gojama ~ $ javac -zero Linpack.java
+> Warning: no leading - on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+> Warning: missing VM type on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+> Warning: no leading - on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+> Warning: missing VM type on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
 
-On 21-07-10 20:04, Khem Raj wrote:
-> Hi
-> 
-> The following 4 patches are based on  Jushua's work in poky to get rid of
-> cross dir and install the toolchain in  native sysroot.
-> 
-> I have done native-sdk-builds for uclibc and eglibc. It could build the images
-> and the images booted fine in qemu on mips and arm.
-> 
-> I would  appreciate if someone could lend a hand in testing these patches
-> 
-> And as we have changed tmpdir layout with this patch I have also bumped ABI
-> which means tmp has to be nuked before you try these patches.
-> 
-> Please review/ack/nack
+With current version jvm.cfg warnings are gone, but cacao and shark still fails
+SHR root@gojama ~ $ java -zero Linpack
+Mflops/s: 1.691  Time: 0.41 secs  Norm Res: 1.43  Precision:
+2.220446049250313E-16
+SHR root@gojama ~ $ java -cacao Linpack
+LOG: [0x40190000] md_signal_handler_sigill: Unknown illegal
+instruction 0xed1c5a06 at 0x441c2790
+LOG: [0x40190000] Aborting...
+Aborted
+SHR root@gojama ~ $ java -shark Linpack
+dl failure on line 696Error: failed
+/usr/lib/jvm/java-6-openjdk/jre/lib/arm/shark/libjvm.so, because
+/usr/lib/libLLVMCodeGen.so: symbol powf, version GLIBCXX_3.4 not
+defined in file libstdc++.so.6 with link time reference
 
-A quick test didn't show big problems (or little ones), so:
-
-Acked-by: Koen Kooi <koen@openembedded.org>
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMSFuiMkyGM64RGpERAglXAJ9yESk18e5PmHNlo5QgxlZp2fzBQQCfYuZq
-LC5ebMKzuLJeJAmqES18Pt8=
-=U2q8
------END PGP SIGNATURE-----
-
+Let me know if you want more info.
 
 
