@@ -1,39 +1,40 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Obr7h-0006oY-M1
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Obr8s-0000LS-WA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 10:27:46 +0200
-Received: from guest185.ibr.cs.tu-bs.de ([134.169.35.185] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Obr75-0005MN-FT by authid <stefan@sostec.de> with cram_md5
+	Thu, 22 Jul 2010 10:28:40 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6M8S6f9029984
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 10:26:59 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Obr6s-0007kU-Re
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 10:26:30 +0200
-Date: Thu, 22 Jul 2010 10:26:30 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
+	Thu, 22 Jul 2010 09:28:06 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 29468-09 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 09:28:02 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6M8S1rj029978
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 09:28:01 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100722082630.GB10442@excalibur.local>
-References: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
-	<1279721232-24744-17-git-send-email-heinold@inf.fu-berlin.de>
-MIME-Version: 1.0
-In-Reply-To: <1279721232-24744-17-git-send-email-heinold@inf.fu-berlin.de>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+In-Reply-To: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+Date: Thu, 22 Jul 2010 09:27:57 +0100
+Message-ID: <1279787277.22581.1723.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 16/21] fastjar: backport 0.98 version from openembedded-dev
+Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,150 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 08:27:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Jul 2010 08:28:41 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hello.
-
-On Wed, 2010-07-21 at 16:07, heinold@inf.fu-berlin.de wrote:
-> From: Henning Heinold <h.heinold@tarent.de>
+On Wed, 2010-07-21 at 11:04 -0700, Khem Raj wrote:
+> The following 4 patches are based on  Jushua's work in poky to get rid of
+> cross dir and install the toolchain in  native sysroot.
 > 
-> ---
->  conf/checksums.ini                     |    4 +
->  recipes/fastjar/fastjar-native.inc     |   18 +++++
->  recipes/fastjar/fastjar-native_0.98.bb |    4 +
->  recipes/fastjar/fastjar.inc            |   18 +++++
->  recipes/fastjar/fastjar_0.98.bb        |    1 +
->  recipes/fastjar/files/jartool.patch    |  112 ++++++++++++++++++++++++++++++++
+> I have done native-sdk-builds for uclibc and eglibc. It could build the images
+> and the images booted fine in qemu on mips and arm.
+> 
+> I would  appreciate if someone could lend a hand in testing these patches
+> 
+> And as we have changed tmpdir layout with this patch I have also bumped ABI
+> which means tmp has to be nuked before you try these patches.
+> 
+> Please review/ack/nack
 
+Thanks for looking at this, its something I've wanted to get to for a
+while but haven't managed so far. Consider this an ack from me!
 
-I was going to test the whole patchset on stable. (The last two patches replaced
-with the updates versions posted).
+Cheers,
 
-I'm running into a problem where the patching of jartool.patch fails though.
-This is on planin stable/2009 without any overlay.
+Richard
 
-NOTE: Running task 88 of 147 (ID: 13,
-/home/stefan/openjdk-stable-test/oe/recipes/fastjar/fastjar-native_0.98.bb,
-do_distribute_sources)
-ERROR: Error in executing:
-/home/stefan/openjdk-stable-test/oe/recipes/fastjar/fastjar-native_0.98.bb
-ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1
-Output:
-Applying patch jartool.patch
-patching file jartool.c
-Hunk #4 FAILED at 1749.
-Hunk #5 succeeded at 1779 with fuzz 1.
-Hunk #6 succeeded at 1796 with fuzz 1.
-1 out of 8 hunks FAILED -- rejects in file jartool.c
-Patch jartool.patch does not apply (enforce with -f)
-ERROR: Printing the environment of the function
-ERROR: Error in executing:
-/home/stefan/openjdk-stable-test/oe/recipes/fastjar/fastjar-native_0.98.bb
-ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1
-Output:
-Applying patch jartool.patch
-patching file jartool.c
-Hunk #4 FAILED at 1749.
-Hunk #5 succeeded at 1779 with fuzz 1.
-Hunk #6 succeeded at 1796 with fuzz 1.
-1 out of 8 hunks FAILED -- rejects in file jartool.c
-Patch jartool.patch does not apply (enforce with -f)
-ERROR: Printing the environment of the function
-ERROR: Error in executing:
-/home/stefan/openjdk-stable-test/oe/recipes/fastjar/fastjar-native_0.98.bb
-ERROR: Exception:<class 'CmdError'> Message:Command Error: exit status: 1
-Output:
-Applying patch jartool.patch
-patching file jartool.c
-Hunk #4 FAILED at 1749.
-Hunk #5 succeeded at 1779 with fuzz 1.
-Hunk #6 succeeded at 1796 with fuzz 1.
-1 out of 8 hunks FAILED -- rejects in file jartool.c
-Patch jartool.patch does not apply (enforce with -f)
-ERROR: Printing the environment of the function
-ERROR: Build of
-/home/stefan/openjdk-stable-test/oe/recipes/fastjar/fastjar-native_0.98.bb
-do_patch failed
-Traceback (most recent call last):
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/bin/bitbake", line 143, in
-<module>
-    main()
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/bin/bitbake", line 140, in
-main
-    cooker.cook()
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/cooker.py", line 643,
-in cook
-    return self.buildTargets(pkgs_to_build)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/cooker.py", line 550,
-in buildTargets
-    failures = rq.execute_runqueue()
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/runqueue.py", line
-841, in execute_runqueue
-    self.execute_runqueue_internal()
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/runqueue.py", line
-950, in execute_runqueue_internal
-    self.cooker.tryBuild(fn)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/cooker.py", line 136,
-in tryBuild
-    return self.tryBuildPackage(fn, item, self.configuration.cmd, the_data)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/cooker.py", line 110,
-in tryBuildPackage
-    bb.build.exec_task('do_%s' % task, the_data)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 278,
-in exec_task
-    exec_func(task, localdata)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 113,
-in exec_func
-    exec_func_python(func, d)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 136,
-in exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/utils.py", line 171,
-in better_exec
-    exec code in context
-  File "do_patch", line 4, in <module>
-  File "do_patch", line 2, in do_patch
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 113,
-in exec_func
-    exec_func_python(func, d)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 136,
-in exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/utils.py", line 171,
-in better_exec
-    exec code in context
-  File "base_do_patch", line 4, in <module>
-  File "base_do_patch", line 2, in base_do_patch
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 113,
-in exec_func
-    exec_func_python(func, d)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/build.py", line 136,
-in exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/home/stefan/openjdk-stable-test/oe/bitbake/lib/bb/utils.py", line 171,
-in better_exec
-    exec code in context
-  File "patch_do_patch", line 100, in <module>
-  File "patch_do_patch", line 98, in patch_do_patch
-  File "<bb>", line 347, in Resolve
-__builtin__.CmdError: Command Error: exit status: 1  Output:
-Applying patch jartool.patch
-patching file jartool.c
-Hunk #4 FAILED at 1749.
-Hunk #5 succeeded at 1779 with fuzz 1.
-Hunk #6 succeeded at 1796 with fuzz 1.
-1 out of 8 hunks FAILED -- rejects in file jartool.c
-Patch jartool.patch does not apply (enforce with -f)
-NOTE: Running task 89 of 147 (ID: 107,
-/home/stefan/openjdk-stable-test/oe/recipes/gnu-config/gnu-config-native_20050701.bb,
-do_package_write_ipk)
-ERROR: Task 4
-(/home/stefan/openjdk-stable-test/oe/recipes/fastjar/fastjar-native_0.98.bb,
-do_patch) failed
-
-regards
-Stefan Schmidt
 
 
