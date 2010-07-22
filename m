@@ -1,33 +1,43 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1Obp6P-0003Ys-LD
+	(envelope-from <graham.gower@gmail.com>) id 1Obpwx-0008I5-Ty
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 08:18:22 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Thu, 22 Jul 2010 08:17:42 +0200
-X-TM-IMSS-Message-ID: <0c81ba1700004611@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0c81ba1700004611 for
-	<jaap.dejong@nedap.com>; Thu, 22 Jul 2010 08:17:38 +0100
-Message-ID: <4C47E285.708@nedap.com>
-Date: Thu, 22 Jul 2010 08:17:41 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100527 Lightning/1.0b1 Thunderbird/3.0.5
+	Thu, 22 Jul 2010 09:12:12 +0200
+Received: by gxk3 with SMTP id 3so4264703gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 00:11:58 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=OBvP52UlTLJ5JCka1+rKaoqfxto1S3ZarUihsPJmBBk=;
+	b=WvL+k00pJZL++Oft+8tevZ/YzjS1/3FtSF+WNRjOF53gCdXGv45nsOsJqTmRfOIjW5
+	MnGe0Mci22YRTqXfBejQvJRhzSemiGz0XTbeEjhoyeWWWKXSOUXsiAELbpI+6yNzWzuo
+	prqlEg9Zw3AT3TI302FBXwFXLfGm7pVZZA/Bk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Pdyd6I/Htf39SNl4oQmqlhPhLyAqgobxB+ENz6viJTTXSZm3+GYwhFOKjxWY2XnlgF
+	jCJZNYd8Z8Oo13xpRP7yt05J/bxPoGs4oBnvPativN2kN0IEvi4oBEH5/eWywaJxsuAR
+	muvYAOiDkBbfkOgoWqzkeisaOqUx5ekjLv5yc=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C4704CB.2010204@gmail.com>
-	<i275t3$65g$1@dough.gmane.org>	<4C475AC4.6010302@gmail.com>
+Received: by 10.151.42.18 with SMTP id u18mr3246303ybj.444.1279782718618; Thu, 
+	22 Jul 2010 00:11:58 -0700 (PDT)
+Received: by 10.231.145.77 with HTTP; Thu, 22 Jul 2010 00:11:58 -0700 (PDT)
+In-Reply-To: <4C47E285.708@nedap.com>
+References: <4C4704CB.2010204@gmail.com> <i275t3$65g$1@dough.gmane.org>
+	<4C475AC4.6010302@gmail.com>
 	<AANLkTimMZU5mXUn1ZSFJ0_8aDu8ykWYDXMD55iZW8s7A@mail.gmail.com>
-In-Reply-To: <AANLkTimMZU5mXUn1ZSFJ0_8aDu8ykWYDXMD55iZW8s7A@mail.gmail.com>
-X-OriginalArrivalTime: 22 Jul 2010 06:17:42.0105 (UTC)
-	FILETIME=[978A4C90:01CB2965]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+	<4C47E285.708@nedap.com>
+Date: Thu, 22 Jul 2010 16:41:58 +0930
+Message-ID: <AANLkTinUM0JSiWeRkhCDo67KqyanvDiaIRiuCiT0tpOr@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: opkg : angstrom fails console-image build
@@ -44,30 +54,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 06:18:31 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Jul 2010 07:12:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I've made a completely clean build last night and it breaks at the same 
-problem.
+On 22 July 2010 15:47, Jaap de Jong <jaap.dejong@nedap.com> wrote:
+> I've made a completely clean build last night and it breaks at the same
+> problem.
+>
 
+Koen bumped the opkg SRCREV a couple of days ago. One of the recent
+opkg changes was to return an error in some erroneous cases which were
+incorrectly ignored previously (check_data_file_clashes errors are one
+of these cases).
 
-> You have an 'opkg' package and an 'opkg-nogpg-nocurl' package. As far
-> as I can tell, if you had built from a clean dev tree then there would
-> be no 'opkg' package. Angstrom currently uses opkg-nogpg-nocurl, so
-> that is the only package you should have.
->
-> This indicates that you have a non clean dev tree, or have had a non
-> clean dev tree in the past. If you've done a build in the past with
-> patches applied, then you've reverted the patches, you probably need
-> to remove your temp dir and start the build again.
->
-> -Graham
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->    
+Its possible that this problem was there beforehand and its only now
+being caught because of less dumb error checking. Sorry, I don't know
+what is causing the issue - you probably need to look at the
+dependency graph to see why both opkg and opkg-nogpg-nocurl packages
+are being built and installed.
+
+-Graham
 
 
