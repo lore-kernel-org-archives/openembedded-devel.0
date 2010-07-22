@@ -1,44 +1,50 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1ObxUs-0003Xk-Mi
+	(envelope-from <raj.khem@gmail.com>) id 1Oc0hI-0002Ka-B9
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 17:16:02 +0200
-Received: by fxm12 with SMTP id 12so4425351fxm.6
+	Thu, 22 Jul 2010 20:40:57 +0200
+Received: by gyd8 with SMTP id 8so993363gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 08:15:28 -0700 (PDT)
+	Thu, 22 Jul 2010 11:40:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=hykzD8IgRx/BLsL2XpiPbpvonc8YCEkvrFmuz5kVtb8=;
-	b=q3lZTviJmFx0PsQzefQaYz/DHYpNGCDo2AAJeGWlqTZ5uZKEfSjhfNtQ0sdkVgQsJK
-	t9TzD2zIhejGIPACW1HthMkRgktwnODhPNQPVyBsf+4795ygjt0kZr+uynLsvu9TkN8g
-	ov2G2CL5Wg/kT4tNhN5PvsfaFALKnyH0tnEks=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=+WrpSrcjQMEzOZ9JrqQKis4WvzaKYrQjG2XnsT0Bcik=;
+	b=HOy6QDTfi4JsyaTI/E2Q3/00Lt7GTbUnN0nklLI7bJIZ3QCUOnJDW8HMdf/UJRtHXo
+	qVVrhSqRvtFSaBGmTiy4ZX+cXpYtSiy/Xwo40ann/q9ky0bVy/mU3BDrrdB097Q8CTqk
+	0UPzEsAKHTB9S0Gn5B0ZdMxWDfdg5uV8ViTEU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=IF3XhuujSbWuHJPErRhXlAxIdGnG0+zJmzd/u7gYDw687NPjafvP5wvqNeoOY4jpmq
-	RFcXAE4RCJ6paMcBx2AaqOWOBa+3oAdFMJ5vwaUV7oXwJ495eNhEWadOk5RtcyUTmdVp
-	yC59U9MC7sRKDxnL32Em6cPi/b36gavXyPzLk=
+	b=swaboSdhX9kwUB6veh8bcYnJE3W86/6kzTBI9A6EYZ0hkkHnXY4KHmqWmJgdn5VGbO
+	xgFZlGfUWp/8rWK2JgGFpilwX7ckOFkZPLH4jSeeJvfLmJmu1QIZkdeMKvhOiFNK0q5m
+	u9vUq6BNWFc+zQ+Wu5yGcsr7BfXc/aOzjcuTo=
+Received: by 10.100.136.3 with SMTP id j3mr2738199and.33.1279824027312; Thu, 
+	22 Jul 2010 11:40:27 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.113.144 with SMTP id a16mr2044979faq.41.1279811728467; 
-	Thu, 22 Jul 2010 08:15:28 -0700 (PDT)
-Received: by 10.223.117.204 with HTTP; Thu, 22 Jul 2010 08:15:28 -0700 (PDT)
-In-Reply-To: <20100721142016.GH2189@jama>
-References: <i216cf$pju$1@dough.gmane.org> <4C46DCE3.1080207@zafena.se>
-	<20100721142016.GH2189@jama>
-Date: Thu, 22 Jul 2010 17:15:28 +0200
-Message-ID: <AANLkTikeJTj01x057Rur8H0haeDehcVVPqaQzDLq2dd6@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+Received: by 10.231.186.88 with HTTP; Thu, 22 Jul 2010 11:40:07 -0700 (PDT)
+In-Reply-To: <AANLkTikP03HJoz0VI_tg6tV3Z4bGYsYaAA2mVwNO4nYq@mail.gmail.com>
+References: <20100709204055.GA12163@excalibur.local>
+	<20100720070108.GE1512@excalibur.local> 
+	<i23lkm$ftn$1@dough.gmane.org> <20100720084026.GI1512@excalibur.local> 
+	<i24kf7$3d3$1@dough.gmane.org> <20100720173425.GL1512@excalibur.local> 
+	<AANLkTikYdD7jzsJBNEK0MedOmM_jHIEcdCfE0APMSOqt@mail.gmail.com> 
+	<20100720192253.GN1512@excalibur.local>
+	<AANLkTinsqL1X3cuCRDedYB3h8rhDP3VehMC6RmKZ_wLw@mail.gmail.com> 
+	<AANLkTikP03HJoz0VI_tg6tV3Z4bGYsYaAA2mVwNO4nYq@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 22 Jul 2010 11:40:07 -0700
+Message-ID: <AANLkTikhNFfujtgYxFPKhszxj6XTiiwCrPuI-DCWNcv1@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Openjdk shark and cacao VMs not working - shark fixed
+Subject: Re: [RFC] New stable branch (and maybe a new process?)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,36 +58,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 15:16:18 -0000
+X-List-Received-Date: Thu, 22 Jul 2010 18:40:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Jul 21, 2010 at 4:20 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
-> FYI:
+On Wed, Jul 21, 2010 at 12:13 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/7/21 Esben Haabendal <esbenhaabendal@gmail.com>
 >
-> Tested on om-gta02 (armv4t) and only -zero seems to work (built from
-> yesterday oe.dev, waiting for todays fixes to built).
->
-> SHR root@gojama ~ $ javac -zero Linpack.java
-> Warning: no leading - on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-> Warning: missing VM type on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-> Warning: no leading - on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-> Warning: missing VM type on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+>> On Tue, Jul 20, 2010 at 9:22 PM, Stefan Schmidt
+>> <stefan@datenfreihafen.org> wrote:
+>>
+>> > What does not fit your needs with the current stable handling?
+>>
+>> It started out with a rather continous flow of changed from dev,
+>> causing it to be almost as unstable as dev. Now stable/2009 looks
+>> mostly dead.
+>>
 
-With current version jvm.cfg warnings are gone, but cacao and shark still fails
-SHR root@gojama ~ $ java -zero Linpack
-Mflops/s: 1.691  Time: 0.41 secs  Norm Res: 1.43  Precision:
-2.220446049250313E-16
-SHR root@gojama ~ $ java -cacao Linpack
-LOG: [0x40190000] md_signal_handler_sigill: Unknown illegal
-instruction 0xed1c5a06 at 0x441c2790
-LOG: [0x40190000] Aborting...
-Aborted
-SHR root@gojama ~ $ java -shark Linpack
-dl failure on line 696Error: failed
-/usr/lib/jvm/java-6-openjdk/jre/lib/arm/shark/libjvm.so, because
-/usr/lib/libLLVMCodeGen.so: symbol powf, version GLIBCXX_3.4 not
-defined in file libstdc++.so.6 with link time reference
+I think  a time based release will be really nice for OE for improving its
+consumption in production deployment, I am willing to help in this
+How often we want to release remains to be decided.
+We don't have to do huge backports and wait for a lot of features
+to go in for cutting out a stable release.
 
-Let me know if you want more info.
+-Khem
 
 
