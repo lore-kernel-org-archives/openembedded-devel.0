@@ -1,40 +1,25 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Obr8s-0000LS-WA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 10:28:40 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6M8S6f9029984
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
+	by linuxtogo.org with esmtp (Exim 4.69) (envelope-from <zlo@zlo.nu>)
+	id 1Obs2w-0000ah-1o for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jul 2010 11:27:19 +0200
+Received: from localhost.localdomain (seven.iphion.nl [80.255.245.169])
+	by mzh.zlo.nu (Postfix) with ESMTP id 8D2531402C
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 09:28:06 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 29468-09 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 09:28:02 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6M8S1rj029978
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 09:28:01 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Thu, 22 Jul 2010 11:26:18 +0200 (CEST)
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-Date: Thu, 22 Jul 2010 09:27:57 +0100
-Message-ID: <1279787277.22581.1723.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Date: Thu, 22 Jul 2010 11:26:18 +0200
+Message-Id: <1279790778-32476-1-git-send-email-zlo@zlo.nu>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: zlo@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
+Subject: [PATCH] coreutils: LICENSE for versions after 6.9 is GPLv3.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,30 +33,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 08:28:41 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 22 Jul 2010 09:27:42 -0000
 
-On Wed, 2010-07-21 at 11:04 -0700, Khem Raj wrote:
-> The following 4 patches are based on  Jushua's work in poky to get rid of
-> cross dir and install the toolchain in  native sysroot.
-> 
-> I have done native-sdk-builds for uclibc and eglibc. It could build the images
-> and the images booted fine in qemu on mips and arm.
-> 
-> I would  appreciate if someone could lend a hand in testing these patches
-> 
-> And as we have changed tmpdir layout with this patch I have also bumped ABI
-> which means tmp has to be nuked before you try these patches.
-> 
-> Please review/ack/nack
+From: Marc Olzheim <marc@iphion.nl>
 
-Thanks for looking at this, its something I've wanted to get to for a
-while but haven't managed so far. Consider this an ack from me!
+---
+ recipes/coreutils/coreutils-6.0.inc |    2 ++
+ recipes/coreutils/coreutils.inc     |    2 +-
+ 2 files changed, 3 insertions(+), 1 deletions(-)
 
-Cheers,
-
-Richard
+diff --git a/recipes/coreutils/coreutils-6.0.inc b/recipes/coreutils/coreutils-6.0.inc
+index 41f26cf..fb5abbc 100644
+--- a/recipes/coreutils/coreutils-6.0.inc
++++ b/recipes/coreutils/coreutils-6.0.inc
+@@ -1,5 +1,7 @@
+ require coreutils.inc
+ 
++LICENSE = GPLv2
++
+ SRC_URI = "\
+   ftp://alpha.gnu.org/gnu/coreutils/coreutils-${PV}.tar.bz2 \
+   file://futimens.patch \
+diff --git a/recipes/coreutils/coreutils.inc b/recipes/coreutils/coreutils.inc
+index 9242c51..e10896c 100644
+--- a/recipes/coreutils/coreutils.inc
++++ b/recipes/coreutils/coreutils.inc
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "A collection of core GNU utilities."
+ HOMEPAGE = "http://www.gnu.org/software/coreutils"
+-LICENSE = "GPL"
++LICENSE = "GPLv3"
+ SECTION = "base"
+ RREPLACES_${PN} = "textutils shellutils fileutils"
+ RPROVIDES_${PN} = "textutils shellutils fileutils"
+-- 
+1.7.0.4
 
 
 
