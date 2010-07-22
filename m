@@ -1,43 +1,42 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1Oc2jw-0003Vj-N1
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 22:51:46 +0200
-Received: by gwb15 with SMTP id 15so385550gwb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oc32L-0004DA-17 for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jul 2010 23:10:37 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oc327-0001gu-L4 for openembedded-devel@lists.openembedded.org;
+	Thu, 22 Jul 2010 23:10:23 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 23:10:23 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 13:51:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AjIHu6LyOpDBWnKAmvjZX1SBhycOcuequRjO51fqbac=;
-	b=Pvti6x/SRlKtrZj1BB5lDpgrsS5raKbeuqeOUESCaBczCTRG5qkxDo+1K/L+gqNLjP
-	PKjlOa4zEK6wLvkHp/cU/KPvSoU+bzKDtXd4waJoA7x2WIhCz47U2jG655ku04laSD6y
-	Bh5WtsZA5kKBwy9cb+XQ8Twi2A2eKMR63DNBA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=P5Yjj8zrZqwpj1HqAxEFbWxt0D7zBepycly9VGanm6CJvAj3KoxmPgRb1xb1CAoFUE
-	JZxL+rVrmwOBGERok9gLl5jI4UU5Mw25m98LdxCJ35mW5S4SO5hRgZmD9gs7KTJ39gmi
-	9sLa4LdTjsgRZK8EyAXQsBx6B1vz1w2JDqBoI=
-MIME-Version: 1.0
-Received: by 10.101.177.9 with SMTP id e9mr2826684anp.195.1279831878774; Thu, 
-	22 Jul 2010 13:51:18 -0700 (PDT)
-Received: by 10.100.42.4 with HTTP; Thu, 22 Jul 2010 13:51:18 -0700 (PDT)
-In-Reply-To: <AANLkTinwgeYKdpLSQs7pSftxdCcUeGBppIfYj5ChLnIV@mail.gmail.com>
-References: <AANLkTinwgeYKdpLSQs7pSftxdCcUeGBppIfYj5ChLnIV@mail.gmail.com>
-Date: Thu, 22 Jul 2010 13:51:18 -0700
-Message-ID: <AANLkTiloVWHCW6WtERRzrr_yKVCTweraq8_9bjPB1wv3@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	Thu, 22 Jul 2010 23:10:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 22 Jul 2010 23:10:14 +0200
+Message-ID: <i2ac3m$o3$1@dough.gmane.org>
+References: <201007222152.47408.david.lanzendoerfer@o2s.ch>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <201007222152.47408.david.lanzendoerfer@o2s.ch>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc/gettext isssue ?
+Subject: Re: [PATCH] Introduce maxima recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,34 +50,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 20:51:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 22 Jul 2010 21:10:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-I notice that for a bunch of recipes that build in my image. and its
-always a gettext error like that but it doesnt stop the build
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 22-07-10 21:52, David Lanzendörfer wrote:
+> Hello.
+> I was a bit surprised that maxima was missing in OE.
+> Because debian, maemo, and even windows have already maxima available.
 
+When I tried it a few years ago it didn't crosscompile, seems things
+have changed.
 
-On Thu, Jul 22, 2010 at 1:41 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> When building gcc I get:
-> NOTE: Gettext required but not in DEPENDS for file
-> /home/frans/oe/tmp_angstrom/work/nios2-linux/gcc-cross-4.1.2-r23.1/gcc-4.1.2/intl/
-> configure.ac.
-> Missing inherit gettext?
->
-> but gcc-common.inc (which is included indirectly from every gcc recipe)
-> says:
-> gcc-common.inc:inherit autotools gettext
->
-> What is wrong here?
-> How can I resolve this?
->
-> Frans
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> +do_configure () {
+> +        ./configure
+
+please change that ./configure to oe_runconf, Frans nailed the other
+problematic areas.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMSLO2MkyGM64RGpERAmCiAJ9uY+ztELSb3aJCVev5k6wd8E7uKQCffIZv
+mjamX5eZG7rW3/sBEr7zUzU=
+=U7zO
+-----END PGP SIGNATURE-----
+
 
 
