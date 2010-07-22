@@ -1,53 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1ObsBa-0007ht-Uc
+	(envelope-from <thebohemian@gmx.net>) id 1ObsqL-0006uR-Qa
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 11:35:30 +0200
-Received: by fxm12 with SMTP id 12so4180565fxm.6
+	Thu, 22 Jul 2010 12:17:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 857C340007785
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 02:35:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=G5ylBpJA86UDf4954ulEEaMgnUDzwRreHuAnlo87TtI=;
-	b=q9AuxhcxMFoXEn+r/WLX7MbKwuQIfdoMoREgY9T3nRZUDKQVDHWap6d112PC+i9jSh
-	tiWXA1SyLsxbsQx+LyOUjIxqIeLwwmLbVmTZ3lZ3HW0IAi2HNc5cmyUSUseKjpTv9/q3
-	0TGn1InvW3TTdozqJttiCuSFJl0bQg6bAiayw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=IllMjaXS4wAjA84lFxFgOA4DUr/YQLA2dGyEjOBg+3X5iFQL40hrupMVHbczaybs5G
-	6TeDOmRilS6u9NbWu7Vlypu0ToQWQCbRcmYQDy/Xs5PNPd8e91Ds9087JAZaLlv6K8e+
-	swh315ooP6Go1d6uNcju99z5aoHLu7LzwRPdA=
-Received: by 10.223.121.193 with SMTP id i1mr1515960far.77.1279791313671;
-	Thu, 22 Jul 2010 02:35:13 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id h4sm3248845faj.39.2010.07.22.02.35.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 22 Jul 2010 02:35:12 -0700 (PDT)
-Date: Thu, 22 Jul 2010 11:36:06 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100722093606.GK2189@jama>
-References: <4C4704CB.2010204@gmail.com> <i275t3$65g$1@dough.gmane.org>
-	<4C475AC4.6010302@gmail.com>
-	<AANLkTimMZU5mXUn1ZSFJ0_8aDu8ykWYDXMD55iZW8s7A@mail.gmail.com>
-	<4C47E285.708@nedap.com>
-	<AANLkTinUM0JSiWeRkhCDo67KqyanvDiaIRiuCiT0tpOr@mail.gmail.com>
-	<AANLkTil57uQl9XRZmHY7gDTviye2YboZ0G5QyGsEZCj2@mail.gmail.com>
+	Thu, 22 Jul 2010 12:17:21 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 7D55940055340
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 12:17:21 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id F5TBpxJIE5YZ
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 12:17:21 +0200 (CEST)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTPSA id 5019440007785
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 22 Jul 2010 12:17:21 +0200 (CEST)
+Message-ID: <4C481AE8.3090702@gmx.net>
+Date: Thu, 22 Jul 2010 12:18:16 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.10) Gecko/20100528 Thunderbird/3.0.5
 MIME-Version: 1.0
-In-Reply-To: <AANLkTil57uQl9XRZmHY7gDTviye2YboZ0G5QyGsEZCj2@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_FAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: opkg : angstrom fails console-image build
+Subject: RFC: make all angstrom java related setting overridable from local.conf
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,39 +51,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 09:35:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 22 Jul 2010 10:17:35 -0000
+X-Groupsio-MsgNum: 21289
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig4968B645334CC686FFDBE18D"
 
-On Thu, Jul 22, 2010 at 04:56:07PM +0930, Graham Gower wrote:
-> On 22 July 2010 16:41, Graham Gower <graham.gower@gmail.com> wrote:
-> > On 22 July 2010 15:47, Jaap de Jong <jaap.dejong@nedap.com> wrote:
-> >> I've made a completely clean build last night and it breaks at the same
-> >> problem.
-> >>
-> >
-> > Koen bumped the opkg SRCREV a couple of days ago. One of the recent
-> > opkg changes was to return an error in some erroneous cases which were
-> > incorrectly ignored previously (check_data_file_clashes errors are one
-> > of these cases).
-> >
-> > Its possible that this problem was there beforehand and its only now
-> > being caught because of less dumb error checking. Sorry, I don't know
-> > what is causing the issue - you probably need to look at the
-> > dependency graph to see why both opkg and opkg-nogpg-nocurl packages
-> > are being built and installed.
-> >
-> > -Graham
-> >
-> 
-> PS: pushing my opkg cleanup patch would probably fix this with no
-> further need to investigate...
+--------------enig4968B645334CC686FFDBE18D
+Content-Type: multipart/mixed;
+ boundary="------------070304060604030408030100"
 
-I have your patch in my local branch and it's not enough (one has to
-remove already staged opkg-nogpg(-nocurl) first).
+--------------070304060604030408030100
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+atm angstrom does not allow me to override versions for the Java recipes
+in local.conf. With the attached that is being made possible.
+
+Ok, for .dev?
 
 Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Robert
 
+--------------070304060604030408030100
+Content-Type: text/x-patch;
+ name="oe-angstrom-jalimo.patch"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: attachment;
+ filename="oe-angstrom-jalimo.patch"
 
+diff --git a/conf/distro/include/angstrom-jalimo.conf b/conf/distro/include=
+/angstrom-jalimo.conf
+index 2aed63b..06698c0 100644
+--- a/conf/distro/include/angstrom-jalimo.conf
++++ b/conf/distro/include/angstrom-jalimo.conf
+@@ -1,32 +1,32 @@
+ # Put a 'require conf/distro/include/angstrom-jalimo.conf' in your local.c=
+onf if you want to build from the jalimo overlay
+=20
+ # initial stuff
+-PREFERRED_VERSION_jamvm-initial =3D "1.4.5"
+-PREFERRED_VERSION_classpath-initial =3D "0.93"
++PREFERRED_VERSION_jamvm-initial ?=3D "1.4.5"
++PREFERRED_VERSION_classpath-initial ?=3D "0.93"
+=20
+ # Native VM
+-PREFERRED_PROVIDER_virtual/java-native =3D "jamvm-native"
+-PREFERRED_VERSION_jamvm-native =3D "1.5.3"
+-#PREFERRED_VERSION_cacao-native =3D "0.99.3"
+-PREFERRED_VERSION_classpath-native =3D "0.98"
++PREFERRED_PROVIDER_virtual/java-native ?=3D "jamvm-native"
++PREFERRED_VERSION_jamvm-native ?=3D "1.5.3"
++#PREFERRED_VERSION_cacao-native ?=3D "0.99.3"
++PREFERRED_VERSION_classpath-native ?=3D "0.98"
+=20
+ # Native compiler settings
+-PREFERRED_PROVIDER_virtual/javac-native =3D "ecj-bootstrap-native"
+-PREFERRED_VERSION_libecj-bootstrap =3D "3.6"
++PREFERRED_PROVIDER_virtual/javac-native ?=3D "ecj-bootstrap-native"
++PREFERRED_VERSION_libecj-bootstrap ?=3D "3.6"
+=20
+ # Target VM
+-PREFERRED_VERSION_cacao =3D "0.99.3"
+-PREFERRED_VERSION_cacaoh-native =3D "0.99.3"
++PREFERRED_VERSION_cacao ?=3D "0.99.3"
++PREFERRED_VERSION_cacaoh-native ?=3D "0.99.3"
+=20
+-PREFERRED_VERSION_jamvm =3D "1.5.2"
+-PREFERRED_PROVIDER_swt3.4-gtk =3D "swt3.4-gtk"
+-PREFERRED_PROVIDER_classpath =3D "classpath"
++PREFERRED_VERSION_jamvm ?=3D "1.5.2"
++PREFERRED_PROVIDER_swt3.4-gtk ?=3D "swt3.4-gtk"
++PREFERRED_PROVIDER_classpath ?=3D "classpath"
+=20
+-PREFERRED_VERSION_openjdk-6-jre =3D "6b18-1.8"
+-PREFERRED_VERSION_icedtea6-native =3D "1.7.3"
++PREFERRED_VERSION_openjdk-6-jre ?=3D "6b18-1.8"
++PREFERRED_VERSION_icedtea6-native ?=3D "1.7.3"
+=20
+ # Stage JAR files not into ARCH related dirs
+-STAGING_DIR_JAVA =3D "${STAGING_DIR}/java"
++STAGING_DIR_JAVA ?=3D "${STAGING_DIR}/java"
+ STAGING_DATADIR_JAVA ?=3D "${STAGING_DIR_JAVA}"
+=20
+=20
+
+--------------070304060604030408030100--
+
+--------------enig4968B645334CC686FFDBE18D
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAkxIGusACgkQG9cfwmwwEtqsxwCfVnu0wiXVkQOa6rC8fqXW6k+S
+ab8An3aj08QlS8mqpEfUVhcBbexIOG3a
+=lP9C
+-----END PGP SIGNATURE-----
+
+--------------enig4968B645334CC686FFDBE18D--
