@@ -1,50 +1,32 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from [93.188.72.201] (helo=mail.o2s.ch)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Oc0hI-0002Ka-B9
+	(envelope-from <david.lanzendoerfer@o2s.ch>) id 1Oc1tm-0005ES-Or
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 22 Jul 2010 20:40:57 +0200
-Received: by gyd8 with SMTP id 8so993363gyd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 22 Jul 2010 11:40:27 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=+WrpSrcjQMEzOZ9JrqQKis4WvzaKYrQjG2XnsT0Bcik=;
-	b=HOy6QDTfi4JsyaTI/E2Q3/00Lt7GTbUnN0nklLI7bJIZ3QCUOnJDW8HMdf/UJRtHXo
-	qVVrhSqRvtFSaBGmTiy4ZX+cXpYtSiy/Xwo40ann/q9ky0bVy/mU3BDrrdB097Q8CTqk
-	0UPzEsAKHTB9S0Gn5B0ZdMxWDfdg5uV8ViTEU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=swaboSdhX9kwUB6veh8bcYnJE3W86/6kzTBI9A6EYZ0hkkHnXY4KHmqWmJgdn5VGbO
-	xgFZlGfUWp/8rWK2JgGFpilwX7ckOFkZPLH4jSeeJvfLmJmu1QIZkdeMKvhOiFNK0q5m
-	u9vUq6BNWFc+zQ+Wu5yGcsr7BfXc/aOzjcuTo=
-Received: by 10.100.136.3 with SMTP id j3mr2738199and.33.1279824027312; Thu, 
-	22 Jul 2010 11:40:27 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.186.88 with HTTP; Thu, 22 Jul 2010 11:40:07 -0700 (PDT)
-In-Reply-To: <AANLkTikP03HJoz0VI_tg6tV3Z4bGYsYaAA2mVwNO4nYq@mail.gmail.com>
-References: <20100709204055.GA12163@excalibur.local>
-	<20100720070108.GE1512@excalibur.local> 
-	<i23lkm$ftn$1@dough.gmane.org> <20100720084026.GI1512@excalibur.local> 
-	<i24kf7$3d3$1@dough.gmane.org> <20100720173425.GL1512@excalibur.local> 
-	<AANLkTikYdD7jzsJBNEK0MedOmM_jHIEcdCfE0APMSOqt@mail.gmail.com> 
-	<20100720192253.GN1512@excalibur.local>
-	<AANLkTinsqL1X3cuCRDedYB3h8rhDP3VehMC6RmKZ_wLw@mail.gmail.com> 
-	<AANLkTikP03HJoz0VI_tg6tV3Z4bGYsYaAA2mVwNO4nYq@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 22 Jul 2010 11:40:07 -0700
-Message-ID: <AANLkTikhNFfujtgYxFPKhszxj6XTiiwCrPuI-DCWNcv1@mail.gmail.com>
+	Thu, 22 Jul 2010 21:57:46 +0200
+Received: from dizzy-6.localnet ([::ffff:82.192.226.27])
+	(AUTH: PLAIN david.lanzendoerfer@o2s.ch, TLS: TLSv1/SSLv3, 256bits,
+	AES256-SHA) by koffein with esmtp; Thu, 22 Jul 2010 21:56:13 +0000
+	id 000000000002ECD1.000000004C48BE7D.00003A4D
+From: David =?iso-8859-1?q?Lanzend=F6rfer?= <david.lanzendoerfer@o2s.ch>
+Organization: OpenSourceSupport GmbH
+X-Face: a023Y#Om+E(<|Tkz7Ae>YeJ\rvY,eXDn^g66`NiaNQ"#xRJ=gr'!V}V#{MN6!YO{s{{); h
+	=s@Vv%T)fi>gJrAHvijw^ZG9{b1rtf~mn$V^b`:3m>yH=o$Eo')Ul8f}F%1vdg9|52W=Xs
+	rR^/E/SPo^{-R22[a}c?@tgfp<I#oOW7r}0We&3g5"2>N5r/Vu|>kWs"|J'XppA; *0A,6>
+	*GY(0=H@>@^vEy]!m\)I42Lu@k~_=:U@/kf8{AO4'F7:Hy_*"5Xf9Vvkqr4E(32pVlT:=&
+	i4l[3%?Z<zzP~wGSke?1VJj\cd~Z(,Upc;nOR|pqK@<j(`EYFSn,jN)A(~`YwM2nIv,
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Thu, 22 Jul 2010 21:52:47 +0200
+MIME-Version: 1.0
+Message-Id: <201007222152.47408.david.lanzendoerfer@o2s.ch>
+X-SA-Exim-Connect-IP: 93.188.72.201
+X-SA-Exim-Mail-From: david.lanzendoerfer@o2s.ch
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL,BAYES_00,RDNS_NONE
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] New stable branch (and maybe a new process?)
+Subject: [PATCH] Introduce maxima recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,29 +40,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 22 Jul 2010 18:40:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 22 Jul 2010 19:57:46 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Jul 21, 2010 at 12:13 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/7/21 Esben Haabendal <esbenhaabendal@gmail.com>
->
->> On Tue, Jul 20, 2010 at 9:22 PM, Stefan Schmidt
->> <stefan@datenfreihafen.org> wrote:
->>
->> > What does not fit your needs with the current stable handling?
->>
->> It started out with a rather continous flow of changed from dev,
->> causing it to be almost as unstable as dev. Now stable/2009 looks
->> mostly dead.
->>
+Hello.
+I was a bit surprised that maxima was missing in OE.
+Because debian, maemo, and even windows have already maxima available.
+So I decided to make an initial try for building it.
+Could you please review it?
 
-I think  a time based release will be really nice for OE for improving its
-consumption in production deployment, I am willing to help in this
-How often we want to release remains to be decided.
-We don't have to do huge backports and wait for a lot of features
-to go in for cutting out a stable release.
+thx and best regards
+	leviathan
+---
+ recipes/maxima/maxima_5.21.1.bb |   26 ++++++++++++++++++++++++++
+ 1 files changed, 26 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/maxima/maxima_5.21.1.bb
 
--Khem
+diff --git a/recipes/maxima/maxima_5.21.1.bb b/recipes/maxima/maxima_5.21.1.bb
+new file mode 100644
+index 0000000..2cf42c8
+--- /dev/null
++++ b/recipes/maxima/maxima_5.21.1.bb
+@@ -0,0 +1,26 @@
++DESCRIPTION="Free computer algebra environment based on Macsyma"
++HOMEPAGE="http://maxima.sourceforge.net/"
++SRC_URI="http://www.sfr-fresh.com/unix/misc/maxima-5.21.1.tar.gz"
++
++LICENSE="GPL-2"
++S = "${WORKDIR}/maxima-${PV}"
++
++do_configure () {
++        ./configure
++}
++
++do_install () {
++        oe_runmake "DESTDIR=${D}" install
++}
++
++SRC_URI[md5sum] = "e08ed533f3059cec52788ef35198bdcc"
++SRC_URI[sha256sum] = "1dae887e1787871437d699a6b1acc1c1f7428729487492a07c6a31e26bf53a1b"
++
++FILES_${PN} += "/usr/local/bin/*"
++FILES_${PN} += "/usr/local/share/*"
++FILES_${PN} += "/usr/local/lib/*"
++FILES_${PN} += "/usr/local/libexec/*"
++
++FILES_${PN}-doc += "/usr/local/info/*"
++FILES_${PN}-doc += "/usr/local/man/*"
++
+-- 
+1.6.4.4
+
 
 
