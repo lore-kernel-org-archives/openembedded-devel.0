@@ -1,32 +1,33 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OcDDF-0002Xt-Qv
+	(envelope-from <jaap.dejong@nedap.com>) id 1OcDGp-0002bg-7y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:02:34 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OcDD2-0007aI-KI
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 09:02:20 +0100
-From: Phil Blundell <philb@gnu.org>
+	Fri, 23 Jul 2010 10:06:21 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 23 Jul 2010 10:06:02 +0200
+X-TM-IMSS-Message-ID: <120b489f000066b2@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 120b489f000066b2 for
+	<jaap.dejong@nedap.com>; Fri, 23 Jul 2010 10:05:59 +0100
+Message-ID: <4C494D69.5010807@nedap.com>
+Date: Fri, 23 Jul 2010 10:06:01 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10) Gecko/20100527 Lightning/1.0b1 Thunderbird/3.0.5
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i2bg5t$mvp$1@dough.gmane.org>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-	<i2bg5t$mvp$1@dough.gmane.org>
-Date: Fri, 23 Jul 2010 09:02:32 +0100
-Message-ID: <1279872152.21888.149.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-OriginalArrivalTime: 23 Jul 2010 08:06:02.0278 (UTC)
+	FILETIME=[E45BBC60:01CB2A3D]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
+	HTML_FONT_FACE_BAD,HTML_MESSAGE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: java -cacao issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,32 +41,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:02:35 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 23 Jul 2010 08:06:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
-> There is a BIG problem with these patches, they break multimachine builds.
-> 
-> The previous situation had:
-> 
-> cross/armv7a-angstrom-foo/usr/bin/
-> cross/armv5te-angstrom-foo/usr/bin/
-> etc
-> 
-> The new situation has:
-> 
-> x86_64-linux/usr/bin
-> 
-> So all the toolchains get dropped into the *same* directory, which
-> breaks horribly.
+Hi,
 
-Which are the actual binaries that collide?  I would have thought that
-everything which gets installed into the cross bindir ought to be
-prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
+Finally I've been able to build for at91sam9263ek without any errors...
 
-p.
+    $ git log | head
+    commit ebc2e1d43afa43877c29bc47c87f38792a791bd8
+    Author: Martin Jansa <Martin.Jansa@gmail.com>
+    Date:   Mon Jul 19 13:14:06 2010 +0200
 
+         linux-openmoko-2.6.32: add missing patch, enable XFS, brtfs, GPT
+
+         Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+
+
+The following results on the target:
+
+    # java -version
+    Warning: no leading - on line 43 of
+    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+    Warning: missing VM type on line 43 of
+    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+    Warning: no leading - on line 43 of
+    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+    Warning: missing VM type on line 43 of
+    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+    java version "1.6.0_18"
+    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
+    OpenJDK Shark VM (build 14.0-b16, mixed mode)
+
+After removing the trailing newline from 
+/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg the warnings are gone:
+
+
+    # java -version
+    java version "1.6.0_18"
+    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
+    OpenJDK Shark VM (build 14.0-b16, mixed mode)
+
+    # java -version -shark
+    java version "1.6.0_18"
+    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
+    OpenJDK Shark VM (build 14.0-b16, mixed mode)
+
+    # java -version -cacao
+    LOG: [0x4001ec80] md_signal_handler_sigill: Unknown illegal
+    instruction 0xed1c5a06 at 0x441dc790
+    LOG: [0x4001ec80] Aborting...
+    Aborted
+
+
+cacao crashes...
+Any ideas?
+
+Jaap de Jong
 
 
 
