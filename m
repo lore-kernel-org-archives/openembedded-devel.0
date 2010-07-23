@@ -1,39 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OcCeL-0007Tw-4I for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 09:27:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OcCdv-0005Do-06 for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 09:26:03 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 09:26:02 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 09:26:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philb@gnu.org>) id 1OcDDF-0002Xt-Qv
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:02:34 +0200
+Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
+	helo=[192.168.114.10])
+	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OcDD2-0007aI-KI
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 09:02:20 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Jul 2010 09:25:49 +0200
-Message-ID: <i2bg5t$mvp$1@dough.gmane.org>
+In-Reply-To: <i2bg5t$mvp$1@dough.gmane.org>
 References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+	<i2bg5t$mvp$1@dough.gmane.org>
+Date: Fri, 23 Jul 2010 09:02:32 +0100
+Message-ID: <1279872152.21888.149.camel@lenovo.internal.reciva.com>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
@@ -50,61 +40,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 07:27:17 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Jul 2010 08:02:35 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 21-07-10 20:04, Khem Raj wrote:
-> Hi
+On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
+> There is a BIG problem with these patches, they break multimachine builds.
 > 
-> The following 4 patches are based on  Jushua's work in poky to get rid of
-> cross dir and install the toolchain in  native sysroot.
+> The previous situation had:
 > 
-> I have done native-sdk-builds for uclibc and eglibc. It could build the images
-> and the images booted fine in qemu on mips and arm.
+> cross/armv7a-angstrom-foo/usr/bin/
+> cross/armv5te-angstrom-foo/usr/bin/
+> etc
 > 
-> I would  appreciate if someone could lend a hand in testing these patches
+> The new situation has:
 > 
-> And as we have changed tmpdir layout with this patch I have also bumped ABI
-> which means tmp has to be nuked before you try these patches.
+> x86_64-linux/usr/bin
 > 
-> Please review/ack/nack
+> So all the toolchains get dropped into the *same* directory, which
+> breaks horribly.
 
-There is a BIG problem with these patches, they break multimachine builds.
+Which are the actual binaries that collide?  I would have thought that
+everything which gets installed into the cross bindir ought to be
+prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
 
-The previous situation had:
+p.
 
-cross/armv7a-angstrom-foo/usr/bin/
-cross/armv5te-angstrom-foo/usr/bin/
-etc
-
-The new situation has:
-
-x86_64-linux/usr/bin
-
-So all the toolchains get dropped into the *same* directory, which
-breaks horribly.
-
-I see 2 courses of action to fix this quickly:
-
-1) add ${TARGET_SYS} back, bump ABI
-2) revert these patches, bump ABI
-
-So, what do other people think?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMSUP9MkyGM64RGpERAkkbAKCbMy47668egFF707rfNYNsiKSSKQCcDpbn
-53k+LcpMKzu2x8uwQUbqrl0=
-=Hy7k
------END PGP SIGNATURE-----
 
 
 
