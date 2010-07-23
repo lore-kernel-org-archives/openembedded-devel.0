@@ -1,44 +1,32 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OcFvo-0007qW-Gv
+Received: from mail.borenet.se ([213.134.106.117] helo=mail-storage.borenet.se)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <xerxes@zafena.se>) id 1OcFvh-0006Mw-Tg
 	for openembedded-devel@lists.openembedded.org;
 	Fri, 23 Jul 2010 12:57:00 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6NAuWKV014134
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 11:56:32 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 14093-01 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 11:56:28 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6NAuO39014128
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 11:56:25 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+Received: from [192.168.1.106] (labb.zafena.se [213.134.106.61])
+	by mail-storage.borenet.se (Postfix) with ESMTP id A3DC830DCC2;
+	Fri, 23 Jul 2010 12:56:20 +0200 (CEST)
+Message-ID: <4C4975C6.5030405@zafena.se>
+Date: Fri, 23 Jul 2010 12:58:14 +0200
+From: =?ISO-8859-1?Q?Xerxes_R=E5nby?= <xerxes@zafena.se>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.10) Gecko/20100527 Thunderbird/3.0.5
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1279880258.2692.15.camel@mill.internal.reciva.com>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-	<i2bg5t$mvp$1@dough.gmane.org>
-	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
-	<i2bir6$un3$1@dough.gmane.org>  <1279875548.13006.32.camel@rex>
-	<1279880258.2692.15.camel@mill.internal.reciva.com>
-Date: Fri, 23 Jul 2010 11:56:17 +0100
-Message-ID: <1279882577.13006.40.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+References: <i216cf$pju$1@dough.gmane.org>
+	<4C46DCE3.1080207@zafena.se>	<20100721142016.GH2189@jama>
+	<AANLkTikeJTj01x057Rur8H0haeDehcVVPqaQzDLq2dd6@mail.gmail.com>
+In-Reply-To: <AANLkTikeJTj01x057Rur8H0haeDehcVVPqaQzDLq2dd6@mail.gmail.com>
+X-SA-Exim-Connect-IP: 213.134.106.117
+X-SA-Exim-Mail-From: xerxes@zafena.se
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
+Cc: Martin Jansa <martin.jansa@gmail.com>
+Subject: Re: Openjdk shark and cacao VMs not working - armv4 LLVM symbol powf, version GLIBCXX_3.4 not, defined
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,62 +41,82 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Fri, 23 Jul 2010 10:58:09 -0000
-Content-Type: text/plain; charset="UTF-8"
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-07-23 at 11:17 +0100, Phil Blundell wrote:
-> On Fri, 2010-07-23 at 09:59 +0100, Richard Purdie wrote:
-> > On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
-> > > It's all 'arm-angstrom-foo', I was just about to make the suggestion to
-> > > change it to 'armv7a-angstrom-foo' :)
-> > 
-> > I've just been talking to Koen about this. When building for armv7a,
-> > TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
-> 
-> Ah, right, I see. 
-> 
-> > I suspect if we change TARGET_ARCH to be armv7a, nasty things will
-> > happen but I could be wrong.
-> 
-> I can't think offhand of any bad thing that would result from doing
-> that.  It certainly might be worth a try. 
+On 2010-07-22 17:15, Martin Jansa wrote:
+> On Wed, Jul 21, 2010 at 4:20 PM, Martin Jansa <martin.jansa@gmail.com> wrote:
+>   
+>> FYI:
+>>
+>> Tested on om-gta02 (armv4t) and only -zero seems to work (built from
+>> yesterday oe.dev, waiting for todays fixes to built).
+>>
+>> SHR root@gojama ~ $ javac -zero Linpack.java
+>> Warning: no leading - on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+>> Warning: missing VM type on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+>> Warning: no leading - on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+>> Warning: missing VM type on line 43 of `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
+>>     
+> With current version jvm.cfg warnings are gone, but cacao and shark still fails
+> SHR root@gojama ~ $ java -zero Linpack
+> Mflops/s: 1.691  Time: 0.41 secs  Norm Res: 1.43  Precision:
+> 2.220446049250313E-16
+>   
+We are quite happy with the current default zero vm in OE since we do
+not have any open bugreports for it, it seems stable and nice. :)
 
-config.sub was in my mind as Esben mentioned. Our siteinfo code will
-also probably get upset. Then there are the TARGET_SYS comparisons. 
+> SHR root@gojama ~ $ java -cacao Linpack
+> LOG: [0x40190000] md_signal_handler_sigill: Unknown illegal
+> instruction 0xed1c5a06 at 0x441c2790
+> LOG: [0x40190000] Aborting...
+> Aborted
+>   
+This regression on armv4 and armv5 are most likely caused by the
+"armv7" cacao compatible patches bundled with icedtea6-1.8.
 
-> On the other hand, I also can't think offhand of any significant way in
-> which the gcc builds for different subarches are going to be different.
-> The architecture selection is all done at run time using -march in
-> CFLAGS, isn't it?
+I will check if i can see anything obvious and try to debug it.
 
-Well, the libgcc and stdc++ generated are different so we can't use one
-build. I have so far failed to make gcc generate libgcc standalone as it
-makes some horrible build assumptions. Even generating libstdc++
-standalone was fun in Poky but I have that working at least.
+> SHR root@gojama ~ $ java -shark Linpack
+> dl failure on line 696Error: failed
+> /usr/lib/jvm/java-6-openjdk/jre/lib/arm/shark/libjvm.so, because
+> /usr/lib/libLLVMCodeGen.so: symbol powf, version GLIBCXX_3.4 not
+> defined in file libstdc++.so.6 with link time reference
+>   
+It looks like a different (older?) libstdc++ are used on your phone
+compared to whats got used during the build when linking LLVM.
+It would be good to check if a LLVM "HelloWorld" can get executed on the
+phone.
 
-The reason things break is we code the default sysroot option into gcc.
-So if you start using the wrong one, you pull in the wrong kind of
-binaries and depending on your build order at best it results in
-unoptimised code and worst, the binaries won't run.
+Please try this LLVM testcase on your phone and report if it work or not:
+======== start of file hello.ll
+@hello = internal global [12 x i8] c"Hello World\00"
 
-So in summary it'd be nice to have a single gcc per arch but we're not
-there yet.
+declare i32 @puts(i8*)
 
-> > Is that libiberty.a file actually useful or could we just stop
-> > binutils-cross installing it?
-> 
-> No, it isn't useful.
+define i32 @main() {
+    %r = call i32 @puts( i8* getelementptr ([12 x i8]* @hello, i64 0,
+i64 0) )
+    ret i32 0
+}
+======== end of file hello.ll
+and then execute the following two commands:
+llvm-as hello.ll
+lli hello.bc
 
-I'm testing some patches against poky which add an extra directory level
-in /usr/bin/. I've also patched binutils-cross to stop spewing excess
-bits all over the place. I'll report back how it goes.
+its possible that you have to type
+/usr/bin/llvm2.7/llvm-as hello.ll
+/usr/bin/llvm2.7/lli hello.bc
 
-Longer term there are probably better fixes but there are too many
-issues at present to do that.
+If all goes well then you should see.. yes you guessed it:
+HelloWorld
 
-Cheers,
+If it fail then try updating the libstdc++ to the same version used when
+linking llvm.
+check if libm are installed.
 
-Richard
+> Let me know if you want more info.
+>   
 
 
 
