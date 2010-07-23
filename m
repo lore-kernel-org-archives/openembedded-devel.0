@@ -1,40 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OcDM2-000365-Oy for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:11:40 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OcDLq-0000bX-2a for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:11:26 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 10:11:26 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1OcDRc-0007XL-R1
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:17:29 +0200
+Received: by fxm12 with SMTP id 12so4927889fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 10:11:26 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 23 Jul 2010 01:17:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=JXwjFbwZroHmhGo/4evzQr7kMymk9BKWs8JZXPzPkdo=;
+	b=nzVIaPginTmh4eGntCO8+ZYS2j+zEZ8RgJJHpg+UYg6FO3jBHCXFt5xqDCYbdLDY0R
+	UQZctoUSnXew9Dm+CUZt6dHWSnZyoYT2rAwkMe/B/cuPPVlZmCH7V9MExUY9jqj67n8a
+	o8l7rassWvh8C0EkJaq95RuoNaEP8St0XfTsU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=B1HNdwX7jyvEjd9cAxaerJBX5dPKg6XS/V2lKxbafqNB9F5GVcdpu4l4yZsfh3JkTo
+	a9t6SFhvxJH7TiVped2+OSZn04QqRE/Io5HQMnHj5GUEAvNPFoUIDAsuSwNewlnOlyNh
+	0W56+67EDMRTmaub9vb1GW/Z2KAesHzlpgfR0=
+Received: by 10.86.72.15 with SMTP id u15mr2448712fga.15.1279873027295;
+	Fri, 23 Jul 2010 01:17:07 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id m3sm3644524fai.41.2010.07.23.01.17.05
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 23 Jul 2010 01:17:06 -0700 (PDT)
+Date: Fri, 23 Jul 2010 10:18:06 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Jul 2010 10:11:18 +0200
-Message-ID: <i2bir6$un3$1@dough.gmane.org>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>	<i2bg5t$mvp$1@dough.gmane.org>
-	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1279872152.21888.149.camel@lenovo.internal.reciva.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100723081806.GQ2189@jama>
+References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+	<i2bg5t$mvp$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i2bg5t$mvp$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
@@ -51,51 +57,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:11:41 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Jul 2010 08:17:32 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Fri, Jul 23, 2010 at 09:25:49AM +0200, Koen Kooi wrote:
+> There is a BIG problem with these patches, they break multimachine builds.
 
-On 23-07-10 10:02, Phil Blundell wrote:
-> On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
->> There is a BIG problem with these patches, they break multimachine builds.
->>
->> The previous situation had:
->>
->> cross/armv7a-angstrom-foo/usr/bin/
->> cross/armv5te-angstrom-foo/usr/bin/
->> etc
->>
->> The new situation has:
->>
->> x86_64-linux/usr/bin
->>
->> So all the toolchains get dropped into the *same* directory, which
->> breaks horribly.
+Yes, I see it now too after launching another machine with different arm
+version (armv4/armv7) in my SHR builddir (om-gta0[12] were fine because
+both using armv4).
+
+ie binutils-cross versions are overwritten in
+sysroots/x86_64-linux/usr/arm-oe-linux-gnueabi/bin/
+and last build wins.
+
+> I see 2 courses of action to fix this quickly:
 > 
-> Which are the actual binaries that collide?  I would have thought that
-> everything which gets installed into the cross bindir ought to be
-> prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
+> 1) add ${TARGET_SYS} back, bump ABI
+> 2) revert these patches, bump ABI
 
-It's all 'arm-angstrom-foo', I was just about to make the suggestion to
-change it to 'armv7a-angstrom-foo' :)
+Someone know how it's solved in poky? I'm reading git log there and
+don't see TARGET_SYS used for every cross lib/bin, so maybe they don't
+allow multimachine (multiarch) builds?
 
-I don't know if that solves the binutils-cross problem[1], though.
+Regards,
 
-regards,
-
-Koen
-
-[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/34685
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMSU6mMkyGM64RGpERAt9ZAJ4i7784CSoa8MtBrAR0obTqY/M1AwCeLgCf
-fVax6pw0ubR9Iq8HKw08CUM=
-=TQ8M
------END PGP SIGNATURE-----
-
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
