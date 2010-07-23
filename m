@@ -1,50 +1,44 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OcEhY-0002JU-Aw
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 11:37:57 +0200
-Received: by fxm12 with SMTP id 12so4972636fxm.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcFBy-0000Zi-Lj for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 12:09:25 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcFBa-0006AI-42 for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 12:08:58 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 12:08:58 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 02:37:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=lSo4xqgcy8MX4/eMHwWKangZGI9GW3R8X7VftEv6AKE=;
-	b=OuX5KrMHRQ3yxjkUL3KmmKTZvSyOVZC5Fon+qlBxbP2q+h+sVQh2+GIhD1LIBNe0Rx
-	qXLDdA5BMrNDC7smI0TQsIprkTl38HJSo/orItPwwqaY1eRINgXnsaywi0Lj+yHkETOH
-	v5yDOcYp7JQqPor8dS0YA90ZgX2d2Xgz09gD4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=AnLR0RjyFe0bBy9HkE2YbwcwP2CPxcIuOSJUccpRDMP6yOMQsCKfmQZWHkm8+Qt1xp
-	dUosnTKbSvE1/Ljo0A1WQ6ynTjboGxsAEWHIY8yWXjYe+1Csb7zmRDLVU8AYpplVa5UF
-	t/Kza/poaoDEXKz/MHPjpNIBFSFZn04DnbJI4=
-Received: by 10.223.120.82 with SMTP id c18mr3027025far.69.1279877863721;
-	Fri, 23 Jul 2010 02:37:43 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b9sm16898faq.31.2010.07.23.02.37.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 23 Jul 2010 02:37:43 -0700 (PDT)
-Date: Fri, 23 Jul 2010 11:38:44 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Fri, 23 Jul 2010 12:08:58 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100723093844.GS2189@jama>
-References: <201007230134.59343.david.lanzendoerfer@o2s.ch>
-	<59B9E304-2B14-4D9F-80F7-8AB7A234D404@vanille-media.de>
-	<AANLkTinjBZ6TOcDYvoeeAbqKjA19Roh6XQwvg9=u006s@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTinjBZ6TOcDYvoeeAbqKjA19Roh6XQwvg9=u006s@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Jul 2010 12:08:48 +0200
+Message-ID: <i2bpng$m41$1@dough.gmane.org>
+References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>	<i2bg5t$mvp$1@dough.gmane.org>	<1279872152.21888.149.camel@lenovo.internal.reciva.com>	<i2bir6$un3$1@dough.gmane.org>
+	<1279875548.13006.32.camel@rex>
+	<AANLkTik8CaoY=od-BH7_ymJf1Yet5e-cJGJ3PFyPm42N@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <AANLkTik8CaoY=od-BH7_ymJf1Yet5e-cJGJ3PFyPm42N@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Adding maxima recipe (tool for algebraic calculation)
+Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,34 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 09:37:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Jul 2010 10:09:27 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Fri, Jul 23, 2010 at 11:23:21AM +0200, Frans Meulenbroeks wrote:
-> 2010/7/23 Dr. Michael Lauer <mickey@vanille-media.de>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 23-07-10 11:35, Esben Haabendal wrote:
+> On Fri, Jul 23, 2010 at 10:59 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
+>> On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
+>>> It's all 'arm-angstrom-foo', I was just about to make the suggestion to
+>>> change it to 'armv7a-angstrom-foo' :)
+>>
+>> I've just been talking to Koen about this. When building for armv7a,
+>> TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
+>>
+>> I suspect if we change TARGET_ARCH to be armv7a, nasty things will
+>> happen but I could be wrong.
 > 
-> > > +DESCRIPTION="Free computer algebra environment based on Macsyma"
-> > > +HOMEPAGE="http://maxima.sourceforge.net/"
-> > > +SRC_URI="http://www.sfr-fresh.com/unix/misc/${P}.tar.gz<http://www.sfr-fresh.com/unix/misc/$%7BP%7D.tar.gz>
-> > "
-> > > +LICENSE="GPLv2"
-> >
-> > Whitespace, please.
-> >
-> > Thanks.
-> >
-> > Mssed that one, but yes, you are right. For the author, Mickey means having
-> spaces around the =
+> config.sub will generally not accept something like armv7a-*
 > 
-> Linebreaks also crossed my mind, but frankly speaking I'm not too sure about
-> the policy there.
-> Also typically LICENSE is before SRC_URI (that should be fixed too)
+> If OE had not offered the vendor part of the arch strings to distros,
+> it could have
+> been solved by (in this case) using arm-v7a-foo ...
 
-done
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=570b4127ed3618be84d7952ec09b4fbb094f5dca
+Actually not, since that would break external toolchains.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+iD8DBQFMSWovMkyGM64RGpERAg1CAKC5vOFH/cNptjp5FMAz0eDpvp2YtACfaU5V
+cHrMjEFU8rRlDZhNXw5NTns=
+=JjxT
+-----END PGP SIGNATURE-----
+
 
 
