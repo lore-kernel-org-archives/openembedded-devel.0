@@ -1,37 +1,41 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OcFQB-00041w-V7
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OcFvo-0007qW-Gv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 12:24:04 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OcFPy-00007N-U1
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 11:23:50 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OcFPy-0002sx-M0
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 11:23:50 +0100
-From: Phil Blundell <philb@gnu.org>
+	Fri, 23 Jul 2010 12:57:00 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6NAuWKV014134
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 11:56:32 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 14093-01 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 11:56:28 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6NAuO39014128
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 11:56:25 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTik8CaoY=od-BH7_ymJf1Yet5e-cJGJ3PFyPm42N@mail.gmail.com>
+In-Reply-To: <1279880258.2692.15.camel@mill.internal.reciva.com>
 References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
 	<i2bg5t$mvp$1@dough.gmane.org>
 	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
-	<i2bir6$un3$1@dough.gmane.org> <1279875548.13006.32.camel@rex>
-	<AANLkTik8CaoY=od-BH7_ymJf1Yet5e-cJGJ3PFyPm42N@mail.gmail.com>
-Date: Fri, 23 Jul 2010 11:23:50 +0100
-Message-ID: <1279880630.2692.21.camel@mill.internal.reciva.com>
+	<i2bir6$un3$1@dough.gmane.org>  <1279875548.13006.32.camel@rex>
+	<1279880258.2692.15.camel@mill.internal.reciva.com>
+Date: Fri, 23 Jul 2010 11:56:17 +0100
+Message-ID: <1279882577.13006.40.camel@rex>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
@@ -48,27 +52,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 10:24:04 -0000
+X-List-Received-Date: Fri, 23 Jul 2010 10:58:09 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-07-23 at 11:35 +0200, Esben Haabendal wrote:
-> config.sub will generally not accept something like armv7a-*
+On Fri, 2010-07-23 at 11:17 +0100, Phil Blundell wrote:
+> On Fri, 2010-07-23 at 09:59 +0100, Richard Purdie wrote:
+> > On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
+> > > It's all 'arm-angstrom-foo', I was just about to make the suggestion to
+> > > change it to 'armv7a-angstrom-foo' :)
+> > 
+> > I've just been talking to Koen about this. When building for armv7a,
+> > TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
+> 
+> Ah, right, I see. 
+> 
+> > I suspect if we change TARGET_ARCH to be armv7a, nasty things will
+> > happen but I could be wrong.
+> 
+> I can't think offhand of any bad thing that would result from doing
+> that.  It certainly might be worth a try. 
 
-That's probably true, but it ought to accept armv7a-*-* (and has done
-for about fifteen years, so I expect almost all packages should now have
-picked up that change).  I think OE always uses the triple so there
-oughtn't to be any problem in practice.
+config.sub was in my mind as Esben mentioned. Our siteinfo code will
+also probably get upset. Then there are the TARGET_SYS comparisons. 
 
-> If OE had not offered the vendor part of the arch strings to distros,
-> it could have
-> been solved by (in this case) using arm-v7a-foo ...
+> On the other hand, I also can't think offhand of any significant way in
+> which the gcc builds for different subarches are going to be different.
+> The architecture selection is all done at run time using -march in
+> CFLAGS, isn't it?
 
-That doesn't sound very wholesome.  I don't think 'v7a' is really a
-vendor name by any stretch of the imagination.
+Well, the libgcc and stdc++ generated are different so we can't use one
+build. I have so far failed to make gcc generate libgcc standalone as it
+makes some horrible build assumptions. Even generating libstdc++
+standalone was fun in Poky but I have that working at least.
 
-p.
+The reason things break is we code the default sysroot option into gcc.
+So if you start using the wrong one, you pull in the wrong kind of
+binaries and depending on your build order at best it results in
+unoptimised code and worst, the binaries won't run.
 
+So in summary it'd be nice to have a single gcc per arch but we're not
+there yet.
+
+> > Is that libiberty.a file actually useful or could we just stop
+> > binutils-cross installing it?
+> 
+> No, it isn't useful.
+
+I'm testing some patches against poky which add an extra directory level
+in /usr/bin/. I've also patched binutils-cross to stop spewing excess
+bits all over the place. I'll report back how it goes.
+
+Longer term there are probably better fixes but there are too many
+issues at present to do that.
+
+Cheers,
+
+Richard
 
 
 
