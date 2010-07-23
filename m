@@ -1,29 +1,45 @@
-Received: from mail.borenet.se ([213.134.106.117] helo=mail-storage.borenet.se)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <xerxes@zafena.se>) id 1OcJO7-0004t8-Ld
+	(envelope-from <raj.khem@gmail.com>) id 1OcLam-0001KV-6s
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 16:38:14 +0200
-Received: from [192.168.1.106] (labb.zafena.se [213.134.106.61])
-	by mail-storage.borenet.se (Postfix) with ESMTP id 1316030DC4E;
-	Fri, 23 Jul 2010 16:37:44 +0200 (CEST)
-Message-ID: <4C49A9AB.5030001@zafena.se>
-Date: Fri, 23 Jul 2010 16:39:39 +0200
-From: =?ISO-8859-1?Q?Xerxes_R=E5nby?= <xerxes@zafena.se>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100527 Thunderbird/3.0.5
+	Fri, 23 Jul 2010 18:59:26 +0200
+Received: by gyd8 with SMTP id 8so219273gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 09:59:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=h25gus611zp4EBKaYcB+sSNsxEJQiytDngg86B9ydh8=;
+	b=oYDyTRc7d3LT+VuXwZd2sJnP4HYvLmH6hkn7DshnTlAQgWuI2DqqheNGKQxRdOopSG
+	hLW9JeRfcctBCgtAr8n8ljMfQJpt2uNIYev4tM2QoSllb6u3R6Ct0JyCuhhoBp0uCKat
+	leS8AsZ4uvZmgEVi9kTBhMTTlyg6uP7M6wM1Y=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=mYGo9QHi/Oc16U0aR10IP54r/vdxGR7SOi6q1kCu5SfUjJCPv1meourroklZl36wc8
+	Kpfbzc35O8bvCI991D00E2iCppFFFzSkidchs3TrybJjTdKboUWRPAstKgDtw+AGdCWx
+	06+h0FVEB7XPw134Y6EsTmSe6e2GmG17UTnSM=
+Received: by 10.101.106.17 with SMTP id i17mr4233714anm.104.1279904349660; 
+	Fri, 23 Jul 2010 09:59:09 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.231.186.88 with HTTP; Fri, 23 Jul 2010 09:58:49 -0700 (PDT)
+In-Reply-To: <1279886129.2692.39.camel@mill.internal.reciva.com>
+References: <1279752241-21656-1-git-send-email-raj.khem@gmail.com> 
+	<1279886129.2692.39.camel@mill.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 23 Jul 2010 09:58:49 -0700
+Message-ID: <AANLkTimx67wfuqBegdwsqM5BaSMX7DUoWStEaSnhyyYm@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C494D69.5010807@nedap.com>
-In-Reply-To: <4C494D69.5010807@nedap.com>
-X-SA-Exim-Connect-IP: 213.134.106.117
-X-SA-Exim-Mail-From: xerxes@zafena.se
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: java -cacao issues
+Subject: Re: [PATCH] distro: Add new feature to indicate thumb-interworking.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,107 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 14:38:15 -0000
+X-List-Received-Date: Fri, 23 Jul 2010 16:59:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
+On Fri, Jul 23, 2010 at 4:55 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Wed, 2010-07-21 at 15:44 -0700, Khem Raj wrote:
+>> +# Add thumb-interwork to feature list if selected machine supports it.
+>> +DISTRO_FEATURES +=3D ' ${@["", "thumb-interwork"][bb.data.getVar('THUMB=
+_INTERWORK', d, 1) =3D=3D "yes"]}'
+>
+> Would it not be better to put this in some generic place (maybe even
+> bitbake.conf) rather than adding it to every DISTRO individually?
+>
+>> --- a/conf/distro/include/slugos.inc
+>> +++ b/conf/distro/include/slugos.inc
+>> @@ -23,9 +23,18 @@ DISTRO_VERSION ?=3D "${SLUGOS_VERSION}${DISTRO_REVISI=
+ON}-${DISTRO_TYPE}"
+>> =A0# DISTRO_FEED ?=3D "${SLUGOS_VERSION}-${DISTRO_TYPE}"
+>> =A0DISTRO_FEED ?=3D "unstable"
+>>
+>> +THUMB_INTERWORK =3D "yes"
+>> +# "yes" "no"
+>> +# =A0 =A0Whether to compile with code to allow interworking between the=
+ two
+>> +# =A0 =A0instruction sets. =A0This allows thumb code to be executed on =
+a primarily
+>> +# =A0 =A0arm system and vice versa. =A0It is strongly recommended that =
+DISTROs not
+>> +# =A0 =A0turn this off - the actual cost is very small.
+>> =A0# We want images supporting the following features (for task-base)
+>> =A0DISTRO_FEATURES =3D "nfs smbfs wifi ppp alsa bluetooth ext2 vfat irda=
+ pcmcia usbgadget usbhost pci"
+>
+> Is this a policy change for slugos? =A0If so, are the SlugOS people happy
+> with it?
+>
 
+argggh I did not want to push it just yet. I will revert it. git push
+pushes staged commits on all branches
+I will have to modify my scripts to only push specific branch.
 
-On 2010-07-23 10:06, Jaap de Jong wrote:
-> Hi,
->
-> Finally I've been able to build for at91sam9263ek without any errors...
->
->    $ git log | head
->    commit ebc2e1d43afa43877c29bc47c87f38792a791bd8
->    Author: Martin Jansa <Martin.Jansa@gmail.com>
->    Date:   Mon Jul 19 13:14:06 2010 +0200
->
->         linux-openmoko-2.6.32: add missing patch, enable XFS, brtfs, GPT
->
->         Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> p.
 >
 >
-> The following results on the target:
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->    # java -version
->    Warning: no leading - on line 43 of
->    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
->    Warning: missing VM type on line 43 of
->    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
->    Warning: no leading - on line 43 of
->    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
->    Warning: missing VM type on line 43 of
->    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
->    java version "1.6.0_18"
->    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
->    OpenJDK Shark VM (build 14.0-b16, mixed mode)
->
-> After removing the trailing newline from
-> /usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg the warnings are gone:
->
->
->    # java -version
->    java version "1.6.0_18"
->    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
->    OpenJDK Shark VM (build 14.0-b16, mixed mode)
->
->    # java -version -shark
->    java version "1.6.0_18"
->    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
->    OpenJDK Shark VM (build 14.0-b16, mixed mode)
->
->    # java -version -cacao
->    LOG: [0x4001ec80] md_signal_handler_sigill: Unknown illegal
->    instruction 0xed1c5a06 at 0x441dc790
->    LOG: [0x4001ec80] Aborting...
->    Aborted
->
->
-> cacao crashes...
-> Any ideas?
-Hi
-
-Robert Schuster came up with the great idea that we have missed to
-enable softfloat when building cacao + openjdk and it are quite likely
-that we are building cacao with enabled VFP intructions that your armv5
-hardware do not have.
-
-It would be great if you could try to apply this patch on your oe.dev
-tree and see if it fixes your problem.
-
-Thanks,
-Xerxes
-
-======= snip
-
-Index: org.openembedded.dev/recipes/openjdk/openjdk-6-common.inc
-===================================================================
---- org.openembedded.dev.orig/recipes/openjdk/openjdk-6-common.inc	2010-07-23 15:36:52.000000000 +0200
-+++ org.openembedded.dev/recipes/openjdk/openjdk-6-common.inc	2010-07-23 15:38:25.000000000 +0200
-@@ -10,7 +10,7 @@
- S = "${WORKDIR}/${ICEDTEA}"
- B = "${S}/build"
- 
--INC_PR = "r8"
-+INC_PR = "r9"
- 
- SRC_URI = "\
-   ${ICEDTEA_URI} \
-@@ -72,7 +72,9 @@
- export ALT_CUPS_HEADERS_PATH = "${STAGING_INCDIR}"
- export ALT_FREETYPE_HEADERS_PATH = "${STAGING_INCDIR}/freetype2"
- export ALT_FREETYPE_LIB_PATH = "${STAGING_LIBDIR}"
--export CACAO_CONFIGURE_ARGS = "--with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-openjdk-0.99.4"
-+export CACAO_CONFIGURE_ARGS = "\
-+	${@['','--enable-softfloat'][bb.data.getVar('TARGET_FPU',d,1) == 'soft']} \
-+	--with-cacaoh=${STAGING_BINDIR_NATIVE}/cacaoh-openjdk-0.99.4"
- 
- JAVA_HOME[unexport] = "1"
-
-
-
-=== snap
-
 
 
