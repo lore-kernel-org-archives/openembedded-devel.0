@@ -1,32 +1,32 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OcDfE-00064J-HE
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OcDk8-0002qI-OQ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:31:32 +0200
-Received: by bwz10 with SMTP id 10so1500839bwz.6
+	Fri, 23 Jul 2010 10:36:47 +0200
+Received: by bwz10 with SMTP id 10so1503886bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 01:31:06 -0700 (PDT)
+	Fri, 23 Jul 2010 01:36:22 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=5unAHu308n5yYfY2e2zkrUaGCznyj/lo/sXTlHgkjHA=;
-	b=GIgh2usZyVkK0rczUPGLZ4QVvEpL258qEr10rgx+7lRxyz3mvNFy3cjMwF5JLgUSfG
-	FudYFRB82Wa6ROmDyOk9LVkoHS9JzKvdoTyVj9yIhzEXVn1y3WNHZEHNotybmhZc6134
-	p+GDo+Z3gA+gwB9DCbFBme0js80d40zqTx8Rc=
+	bh=u9L0RWOrF5P43UeL7oWxt4xEaEWRn55nvbxKp+dg4k4=;
+	b=SRwOwBVnlScILXN1XN6jSLtX6fOL9Whe86dy8XemgnKQKfcEnNjfss8sIVBcYMLHLd
+	ja/4+0qECiC7aI3Nv1GRiaZHkNa+Weawg8dNesivq66+yxom8z4MDX7rOSl6ukQeRmh9
+	nWYtHZ3smeLInIlSzvKPLm40OenpLyBxQwuz8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=QofkWOO5J/HW4UgQMsgFev5mC2mxDClyCZk1b/1KvW9lHEAf+mTCYH9bNLuXDcrNTT
-	LMqlXa96+ZS/aNPwdSYFxFQWpBsTpHlZksek7fwh1Jz7EuukYV2GrJYLRbk3ze0Y/N+O
-	j4gU8euLAMnPV4IT+Eg1EFhw7qHhylfCpjRsE=
+	b=DPZYTl8HcvdnBFo001AlqZ6Q8DC6MODylpwVp5/0s3/cYg8fyhf9eRIoNMZckruk9Y
+	nksp8xpRO6/nrcLaImA2UJ4mbG2UQQS+5CmuMWZeygWREpVJkuxemBXo6HTr2A3FAWhe
+	p9ddmVVOmyPzg/O+0Vc02wjA7dr5T9Lb0JbQ4=
 MIME-Version: 1.0
-Received: by 10.204.178.211 with SMTP id bn19mr2481286bkb.15.1279873865525; 
-	Fri, 23 Jul 2010 01:31:05 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Fri, 23 Jul 2010 01:31:05 -0700 (PDT)
-In-Reply-To: <201007230134.59343.david.lanzendoerfer@o2s.ch>
-References: <201007230134.59343.david.lanzendoerfer@o2s.ch>
-Date: Fri, 23 Jul 2010 10:31:05 +0200
-Message-ID: <AANLkTimTyS-wieT02dJVfBoP2+yGApyLD0UE0jd=CDvd@mail.gmail.com>
+Received: by 10.204.102.2 with SMTP id e2mr2326287bko.112.1279874181830; Fri, 
+	23 Jul 2010 01:36:21 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Fri, 23 Jul 2010 01:36:21 -0700 (PDT)
+In-Reply-To: <i2bf8b$joo$2@dough.gmane.org>
+References: <i2bf8b$joo$2@dough.gmane.org>
+Date: Fri, 23 Jul 2010 10:36:21 +0200
+Message-ID: <AANLkTim=jp4BQTg_nPkMg2yN_-g-6_Stta6ZkjD3H-Xb@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.47
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] Adding maxima recipe (tool for algebraic calculation)
+Subject: Re: binutils-cross problem with multimachine config after cross changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,57 +52,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:31:33 -0000
+X-List-Received-Date: Fri, 23 Jul 2010 08:36:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/7/23 David Lanzend=F6rfer <david.lanzendoerfer@o2s.ch>
+2010/7/23 Koen Kooi <k.kooi@student.utwente.nl>
 
-> <JaMa> leviathan: and send PATCHv2 to ML if it builds for you correct .ip=
-k
-> I'll push it imediately
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> leviathan@dizzy-6 /mnt/sdb/build_gta02 $ ls tmp/deploy/ipk/armv4t/maxima*
-> tmp/deploy/ipk/armv4t/maxima_5.21.1-r0.5_armv4t.ipk
->  tmp/deploy/ipk/armv4t/maxima-dbg_5.21.1-r0.5_armv4t.ipk
->  tmp/deploy/ipk/armv4t/maxima-dev_5.21.1-r0.5_armv4t.ipk
->  tmp/deploy/ipk/armv4t/maxima-doc_5.21.1-r0.5_armv4t.ipk
+> Hi,
 >
-> @JaMa:
-> The content of the ipkgs is ok.
-> ready to push?
+> I was doing a multimachine build and the armv7a bits completed
+> beautifully, but the armv5te bits break in binutils-cross:
 >
-> best regards
->        leviathan
-> ---
->  recipes/maxima/maxima_5.21.1.bb |    9 +++++++++
->  1 files changed, 9 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/maxima/maxima_5.21.1.bb
+> | /usr/bin/ld:
 >
-> diff --git a/recipes/maxima/maxima_5.21.1.bb b/recipes/maxima/
-> maxima_5.21.1.bb
-> new file mode 100644
-> index 0000000..ae89bea
-> --- /dev/null
-> +++ b/recipes/maxima/maxima_5.21.1.bb
-> @@ -0,0 +1,9 @@
-> +DESCRIPTION=3D"Free computer algebra environment based on Macsyma"
-> +HOMEPAGE=3D"http://maxima.sourceforge.net/"
-> +SRC_URI=3D"http://www.sfr-fresh.com/unix/misc/${P}.tar.gz<http://www.sfr=
--fresh.com/unix/misc/$%7BP%7D.tar.gz>
-> "
-> +LICENSE=3D"GPLv2"
-> +
-> +inherit autotools
-> +
-> +SRC_URI[md5sum] =3D "e08ed533f3059cec52788ef35198bdcc"
-> +SRC_URI[sha256sum] =3D
-> "1dae887e1787871437d699a6b1acc1c1f7428729487492a07c6a31e26bf53a1b"
-> --
-> 1.6.4.4
+> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a(cplus-dem.o):
+> relocation R_X86_64_32
+> used when making a shared object; recompile with -fPIC
+> |
 >
-> Can't test right now, but the recipe looks fine to me.
-Thanks for your contribution.
+> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a:
+> could not read symbols: Bad value
+> | collect2: ld returned 1 exit status
+>
+> Does anyone have a quick fix for that? My tinderbox looks so said with
+> all that red :(
+>
+
+Yesterday I noticed a similar issue with binutils 2.20.1 for nios2 when ld
+was called with -shared.
+2.17.50 did not have the problem.
+Didn't have time to investigate yet. (and probably it'll take a day or two
+before I get to this)
+
+Are you using the same version of binutils for v5 and v7? (and which one).
 
 Frans
+
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMSUBLMkyGM64RGpERAgopAJ96q9OiWD8Eywv0L/09b8wP92QfnwCgpt11
+> EoOVgGxVY+MeWMPJcoF8pg8=
+> =1cA2
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
