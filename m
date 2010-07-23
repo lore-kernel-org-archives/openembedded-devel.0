@@ -1,33 +1,43 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1OcDGp-0002bg-7y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:06:21 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Fri, 23 Jul 2010 10:06:02 +0200
-X-TM-IMSS-Message-ID: <120b489f000066b2@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 120b489f000066b2 for
-	<jaap.dejong@nedap.com>; Fri, 23 Jul 2010 10:05:59 +0100
-Message-ID: <4C494D69.5010807@nedap.com>
-Date: Fri, 23 Jul 2010 10:06:01 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100527 Lightning/1.0b1 Thunderbird/3.0.5
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcDM2-000365-Oy for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:11:40 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcDLq-0000bX-2a for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:11:26 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 10:11:26 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 10:11:26 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 23 Jul 2010 08:06:02.0278 (UTC)
-	FILETIME=[E45BBC60:01CB2A3D]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Jul 2010 10:11:18 +0200
+Message-ID: <i2bir6$un3$1@dough.gmane.org>
+References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>	<i2bg5t$mvp$1@dough.gmane.org>
+	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <1279872152.21888.149.camel@lenovo.internal.reciva.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
-	HTML_FONT_FACE_BAD,HTML_MESSAGE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: java -cacao issues
+Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,64 +51,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:06:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 23 Jul 2010 08:11:41 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Finally I've been able to build for at91sam9263ek without any errors...
+On 23-07-10 10:02, Phil Blundell wrote:
+> On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
+>> There is a BIG problem with these patches, they break multimachine builds.
+>>
+>> The previous situation had:
+>>
+>> cross/armv7a-angstrom-foo/usr/bin/
+>> cross/armv5te-angstrom-foo/usr/bin/
+>> etc
+>>
+>> The new situation has:
+>>
+>> x86_64-linux/usr/bin
+>>
+>> So all the toolchains get dropped into the *same* directory, which
+>> breaks horribly.
+> 
+> Which are the actual binaries that collide?  I would have thought that
+> everything which gets installed into the cross bindir ought to be
+> prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
 
-    $ git log | head
-    commit ebc2e1d43afa43877c29bc47c87f38792a791bd8
-    Author: Martin Jansa <Martin.Jansa@gmail.com>
-    Date:   Mon Jul 19 13:14:06 2010 +0200
+It's all 'arm-angstrom-foo', I was just about to make the suggestion to
+change it to 'armv7a-angstrom-foo' :)
 
-         linux-openmoko-2.6.32: add missing patch, enable XFS, brtfs, GPT
+I don't know if that solves the binutils-cross problem[1], though.
 
-         Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+regards,
 
+Koen
 
-The following results on the target:
+[1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/34685
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-    # java -version
-    Warning: no leading - on line 43 of
-    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-    Warning: missing VM type on line 43 of
-    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-    Warning: no leading - on line 43 of
-    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-    Warning: missing VM type on line 43 of
-    `/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg'
-    java version "1.6.0_18"
-    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
-    OpenJDK Shark VM (build 14.0-b16, mixed mode)
-
-After removing the trailing newline from 
-/usr/lib/jvm/java-6-openjdk/jre/lib/arm/jvm.cfg the warnings are gone:
-
-
-    # java -version
-    java version "1.6.0_18"
-    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
-    OpenJDK Shark VM (build 14.0-b16, mixed mode)
-
-    # java -version -shark
-    java version "1.6.0_18"
-    OpenJDK Runtime Environment (IcedTea6 1.8) (6b18-1.8)
-    OpenJDK Shark VM (build 14.0-b16, mixed mode)
-
-    # java -version -cacao
-    LOG: [0x4001ec80] md_signal_handler_sigill: Unknown illegal
-    instruction 0xed1c5a06 at 0x441dc790
-    LOG: [0x4001ec80] Aborting...
-    Aborted
-
-
-cacao crashes...
-Any ideas?
-
-Jaap de Jong
+iD8DBQFMSU6mMkyGM64RGpERAt9ZAJ4i7784CSoa8MtBrAR0obTqY/M1AwCeLgCf
+fVax6pw0ubR9Iq8HKw08CUM=
+=TQ8M
+-----END PGP SIGNATURE-----
 
 
 
