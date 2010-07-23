@@ -1,43 +1,44 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OcE6R-0006IJ-Ot
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OcE96-0006lD-0l
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:59:37 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6N8xNNc013248
+	Fri, 23 Jul 2010 11:02:20 +0200
+Received: by bwz10 with SMTP id 10so1518872bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 09:59:23 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 13123-02 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 09:59:19 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6N8xEQV013242
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 09:59:15 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Fri, 23 Jul 2010 02:02:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=sqMiEd4AoX8SB8h2a7Y5ufJrCqslXQJw+Gl0mBVm0/Y=;
+	b=e2+5ap39uqKYqSOIQvBVvv3Bn5aMaARuPIZ+fOsO9PpFzqS9QJdQ2k9VoUARCApCLI
+	6tbmECvu2cG2cjQ+0oV9BTDv58delDoA1+qPg22ji3QiAtM4hhrWQBrLNwuBhRlRlBkW
+	vtkMIiGXqggy8PvNEJQeeKWaYTc0avy8XfwTs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=YWNZTSLQQlc+G31Jjsr+ubO+/zMhpKO4S4OQhYNuU8FJBaNLO0L0z8rbKxpj+2PVkH
+	qQE+k2aVRAhFGvIieGRkhrK75NeKeTX3gCIl+YshGjLEZKp3uIQoWzj2fPpQGMAgDJgY
+	XCB5ymMsgKvda025YuZc7fBQ9MFzqSlnhQt08=
+MIME-Version: 1.0
+Received: by 10.204.34.2 with SMTP id j2mr2449662bkd.21.1279875729398; Fri, 23 
+	Jul 2010 02:02:09 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Fri, 23 Jul 2010 02:02:09 -0700 (PDT)
+In-Reply-To: <4C495665.3060605@nedap.com>
+References: <4C495665.3060605@nedap.com>
+Date: Fri, 23 Jul 2010 11:02:09 +0200
+Message-ID: <AANLkTikUv4ZX2tbfD1DCe2WM=_NBtZ2TnJYyUorpEjA1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i2bir6$un3$1@dough.gmane.org>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-	<i2bg5t$mvp$1@dough.gmane.org>
-	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
-	<i2bir6$un3$1@dough.gmane.org>
-Date: Fri, 23 Jul 2010 09:59:08 +0100
-Message-ID: <1279875548.13006.32.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] Introduce xc3sprog recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:59:37 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Jul 2010 09:02:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 23-07-10 10:02, Phil Blundell wrote:
-> > On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
-> >> There is a BIG problem with these patches, they break multimachine builds.
-> >>
-> >> The previous situation had:
-> >>
-> >> cross/armv7a-angstrom-foo/usr/bin/
-> >> cross/armv5te-angstrom-foo/usr/bin/
-> >> etc
-> >>
-> >> The new situation has:
-> >>
-> >> x86_64-linux/usr/bin
-> >>
-> >> So all the toolchains get dropped into the *same* directory, which
-> >> breaks horribly.
-> > 
-> > Which are the actual binaries that collide?  I would have thought that
-> > everything which gets installed into the cross bindir ought to be
-> > prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
-> 
-> It's all 'arm-angstrom-foo', I was just about to make the suggestion to
-> change it to 'armv7a-angstrom-foo' :)
+2010/7/23 Jaap de Jong <jaap.dejong@nedap.com>
 
-I've just been talking to Koen about this. When building for armv7a,
-TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
-
-I suspect if we change TARGET_ARCH to be armv7a, nasty things will
-happen but I could be wrong.
-
-If that doesn't help which I suspect it won't, my gut instinct is to add
-a architecture specific directory under bin for the cross bits. This
-could be as simple as changing bindir in cross.bbclass.
-
-> I don't know if that solves the binutils-cross problem[1], though.
+> Hi,
 >
-> Koen
-> 
-> [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/34685
+> below a recipe to build a great tool for programming Xilinx fpga's etc.
+>
+> thanks and best regards,
+>
+> Jaap
+> ---
+> diff --git a/recipes/xc3sprog/xc3sprog_461.bb b/recipes/xc3sprog/
+> xc3sprog_461.bb
+> new file mode 100644
+> index 0000000..66775d4
+> --- /dev/null
+> +++ b/recipes/xc3sprog/xc3sprog_461.bb
+> @@ -0,0 +1,18 @@
+> +DESCRIPTION = "suite of utilities for programming Xilinx FPGAs, CPLDs, and
+> EEPROMs"
+> +LICENSE = "GPL"
+> +HOMEPAGE = "http://sourceforge.net/projects/xc3sprog"
+> +SECTION = "console/utils"
+> +
+> +DEPENDS += "libftdi libusb"
+> +
+> +SRC_URI = "svn://${PN}.
+> svn.sourceforge.net/svnroot/${PN};module=trunk;proto=https<http://svn.sourceforge.net/svnroot/$%7BPN%7D;module=trunk;proto=https>
+> "
+> +SRCREV = ${PV}
+> +
+> +SRC_URI[md5sum] = "916f65fa68d154621fc0cf1f405f2726"
+> +SRC_URI[sha256sum] =
+> "5b6f3c3ee51c6aa24d3b87135e01762cf68821d1c3599d87d349fea4ede74c62"
+> +
+> +S = "${WORKDIR}/trunk"
+> +PR = "r0"
+> +
+> +inherit cmake
+> +
+>
+>
+> Cool, looks good to me. Will try to test it later.
+Thanks for your contribution.
 
-Is that libiberty.a file actually useful or could we just stop
-binutils-cross installing it?
-
-Cheers,
-
-Richard
+Frans
 
 
-
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
