@@ -1,32 +1,43 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1OcDs5-0006Os-2E
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:44:45 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Fri, 23 Jul 2010 10:44:22 +0200
-X-TM-IMSS-Message-ID: <122e61ca000067d0@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 122e61ca000067d0 for
-	<jaap.dejong@nedap.com>; Fri, 23 Jul 2010 10:44:19 +0100
-Message-ID: <4C495665.3060605@nedap.com>
-Date: Fri, 23 Jul 2010 10:44:21 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.10) Gecko/20100527 Lightning/1.0b1 Thunderbird/3.0.5
-MIME-Version: 1.0
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcDzp-00065Y-Fk for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:52:46 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcDzX-000271-9T for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:52:27 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 10:52:27 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 10:52:27 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 23 Jul 2010 08:44:22.0684 (UTC)
-	FILETIME=[3F81D5C0:01CB2A43]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 23 Jul 2010 10:52:18 +0200
+Message-ID: <i2bl83$7im$1@dough.gmane.org>
+References: <i2bf8b$joo$2@dough.gmane.org>
+	<AANLkTim=jp4BQTg_nPkMg2yN_-g-6_Stta6ZkjD3H-Xb@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <AANLkTim=jp4BQTg_nPkMg2yN_-g-6_Stta6ZkjD3H-Xb@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Introduce xc3sprog recipe
+Subject: Re: binutils-cross problem with multimachine config after cross changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +51,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:44:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Fri, 23 Jul 2010 08:52:46 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-below a recipe to build a great tool for programming Xilinx fpga's etc.
+On 23-07-10 10:36, Frans Meulenbroeks wrote:
+> 2010/7/23 Koen Kooi <k.kooi@student.utwente.nl>
+> 
+> Hi,
+> 
+> I was doing a multimachine build and the armv7a bits completed
+> beautifully, but the armv5te bits break in binutils-cross:
+> 
+> | /usr/bin/ld:
+> 
+> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a(cplus-dem.o):
+> relocation R_X86_64_32
+> used when making a shared object; recompile with -fPIC
+> |
+> 
+> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a:
+> could not read symbols: Bad value
+> | collect2: ld returned 1 exit status
+> 
+> Does anyone have a quick fix for that? My tinderbox looks so said with
+> all that red :(
+> 
+> 
+>> Yesterday I noticed a similar issue with binutils 2.20.1 for nios2 when ld
+>> was called with -shared.
+>> 2.17.50 did not have the problem.
+>> Didn't have time to investigate yet. (and probably it'll take a day or two
+>> before I get to this)
 
-thanks and best regards,
+I suspect the second binutils-cross is trying to link with the libs from
+the first, which breaks.
 
-Jaap
----
-diff --git a/recipes/xc3sprog/xc3sprog_461.bb 
-b/recipes/xc3sprog/xc3sprog_461.bb
-new file mode 100644
-index 0000000..66775d4
---- /dev/null
-+++ b/recipes/xc3sprog/xc3sprog_461.bb
-@@ -0,0 +1,18 @@
-+DESCRIPTION = "suite of utilities for programming Xilinx FPGAs, CPLDs, 
-and EEPROMs"
-+LICENSE = "GPL"
-+HOMEPAGE = "http://sourceforge.net/projects/xc3sprog"
-+SECTION = "console/utils"
-+
-+DEPENDS += "libftdi libusb"
-+
-+SRC_URI = 
-"svn://${PN}.svn.sourceforge.net/svnroot/${PN};module=trunk;proto=https"
-+SRCREV = ${PV}
-+
-+SRC_URI[md5sum] = "916f65fa68d154621fc0cf1f405f2726"
-+SRC_URI[sha256sum] = 
-"5b6f3c3ee51c6aa24d3b87135e01762cf68821d1c3599d87d349fea4ede74c62"
-+
-+S = "${WORKDIR}/trunk"
-+PR = "r0"
-+
-+inherit cmake
-+
+>> Are you using the same version of binutils for v5 and v7? (and which one).
+
+ANGSTROM_BINUTILS_VERSION                ?= "2.18"
+ANGSTROM_BINUTILS_VERSION_armv4          ?= "2.20"
+ANGSTROM_BINUTILS_VERSION_armv7a         ?= "2.18.50.0.7"
+
+Angstrom-next has a saner layout, that used 2.20.x for everything, but
+lots of things don't build with that and among those things are the
+things that bring in my paycheck.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMSVhCMkyGM64RGpERApymAJ0Yh8zUt3DklFUjAHc1P40t03LwAQCcCxDK
+6LJ5tQ/Vb7auH78ldPINVJE=
+=S65W
+-----END PGP SIGNATURE-----
 
 
 
