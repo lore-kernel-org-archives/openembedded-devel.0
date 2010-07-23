@@ -1,52 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OcGjV-0006T8-GD
+	(envelope-from <philb@gnu.org>) id 1OcGqu-0006gX-M7
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 13:48:08 +0200
-Received: by fxm12 with SMTP id 12so5048195fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 04:47:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=Astv2d3GUCuA6y9F2p3lqvAAs6fiKTQkvPYBLVtExaU=;
-	b=YgJ7b6wRK5WvIwagDIVWNV6DwSxJRjw0xM3ml0vahrYjTkv3kUnkmj3w1Fdp9gIHYW
-	SWGYvLwoZjtb0NL7pCT9KzBQQ8aqJSVCug828FmRezEyyqwqvBpnJRsyDww/q0JmTaqh
-	1aUSLQyzLiWD1DgLtoJWnxTMC8jWaTDLlVLLQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=NXicefEg9/Q4cHmicGX4oBingEiVijwq/mrFll4DWT58zH/Vb/K47ZL08b62TV5C8m
-	r9pL2KEC7PWz7AlQdcCFCKl3dvsth1WcbJTPf+rYjXaes/Zf57klhtOHx6d+jfMECIc2
-	8m+dAKxGAf35F2aGXWYGezUySaZUrRZxsk+Q0=
-Received: by 10.86.84.2 with SMTP id h2mr2608091fgb.47.1279885672701;
-	Fri, 23 Jul 2010 04:47:52 -0700 (PDT)
-Received: from s42.loc (85-127-92-50.dynamic.xdsl-line.inode.at [85.127.92.50])
-	by mx.google.com with ESMTPS id y2sm57065fau.36.2010.07.23.04.47.50
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 23 Jul 2010 04:47:51 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OcGjC-0006Sz-PX; Fri, 23 Jul 2010 13:47:46 +0200
-Date: Fri, 23 Jul 2010 13:47:46 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Fri, 23 Jul 2010 13:55:46 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OcGqf-0000nH-RC
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 12:55:29 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OcGqf-00050B-JA
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 12:55:29 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100723114746.GA19734@mx.loc>
-References: <1279316946-8901-1-git-send-email-rep.dot.nop@gmail.com>
-	<1279317776.7632.15.camel@mattotaupa>
-MIME-Version: 1.0
-In-Reply-To: <1279317776.7632.15.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+In-Reply-To: <1279752241-21656-1-git-send-email-raj.khem@gmail.com>
+References: <1279752241-21656-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 23 Jul 2010 12:55:29 +0100
+Message-ID: <1279886129.2692.39.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][CFT 1/3] libmpc: bump version and cleanup staging
+Subject: Re: [PATCH] distro: Add new feature to indicate thumb-interworking.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,45 +44,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 11:48:08 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 23 Jul 2010 11:55:46 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Sat, Jul 17, 2010 at 12:02:56AM +0200, Paul Menzel wrote:
->Dear Bernhard,
+On Wed, 2010-07-21 at 15:44 -0700, Khem Raj wrote:
+> +# Add thumb-interwork to feature list if selected machine supports it.
+> +DISTRO_FEATURES += ' ${@["", "thumb-interwork"][bb.data.getVar('THUMB_INTERWORK', d, 1) == "yes"]}'
 
->> --- a/recipes/libmpc/libmpc_0.8.1.bb
->> +++ b/recipes/libmpc/libmpc_0.8.1.bb
->> @@ -1,13 +1,12 @@
->>  require libmpc.inc
->>  
->>  DEPENDS = "gmp mpfr"
->> -
->> -SRC_URI = "http://www.multiprecision.org/mpc/download/mpc-${PV}.tar.gz"
->>  S = "${WORKDIR}/mpc-${PV}"
->> +NATIVE_INSTALL_WORKS = "1"
->> +BBCLASSEXTEND = "native"
->> +PR = "1"
->>  
->> -do_stage() {
->> -	autotools_stage_all
->> -}
->> +SRC_URI = "http://www.multiprecision.org/mpc/download/mpc-${PV}.tar.gz"
->
->Maybe you can put `SRC_URI` also in `libmpc.inc`?
+Would it not be better to put this in some generic place (maybe even
+bitbake.conf) rather than adding it to every DISTRO individually?
 
-mpc seems to be only available as .tar.gz (you even get a .tar.gz if you
-ask their server for a .tar.xz ATM, apache anti-typo module,
-apparently), so yes, i'll do that as a follow-up once these 3 are in,
-ok?
+> --- a/conf/distro/include/slugos.inc
+> +++ b/conf/distro/include/slugos.inc
+> @@ -23,9 +23,18 @@ DISTRO_VERSION ?= "${SLUGOS_VERSION}${DISTRO_REVISION}-${DISTRO_TYPE}"
+>  # DISTRO_FEED ?= "${SLUGOS_VERSION}-${DISTRO_TYPE}"
+>  DISTRO_FEED ?= "unstable"
+>  
+> +THUMB_INTERWORK = "yes"
+> +# "yes" "no"
+> +#    Whether to compile with code to allow interworking between the two
+> +#    instruction sets.  This allows thumb code to be executed on a primarily
+> +#    arm system and vice versa.  It is strongly recommended that DISTROs not
+> +#    turn this off - the actual cost is very small.
+>  # We want images supporting the following features (for task-base)
+>  DISTRO_FEATURES = "nfs smbfs wifi ppp alsa bluetooth ext2 vfat irda pcmcia usbgadget usbhost pci"
 
->Otherwise it looks fine.
->
->Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Is this a policy change for slugos?  If so, are the SlugOS people happy
+with it?
 
-ping these three (mpc, mpfr, gmp)
+p.
 
-Please, somebody with write privs for oe, install.
-TIA,
 
 
