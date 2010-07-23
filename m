@@ -1,35 +1,33 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OcEOx-0007Ap-6X
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OcETb-0001Sj-Ue
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 11:18:44 +0200
-Received: by bwz10 with SMTP id 10so1528612bwz.6
+	Fri, 23 Jul 2010 11:23:35 +0200
+Received: by bwz10 with SMTP id 10so1531596bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 02:18:32 -0700 (PDT)
+	Fri, 23 Jul 2010 02:23:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=7G7n77zeftu5N60SP7S6GeIRLhmywqdFSEb/wLlA6VI=;
-	b=CTaGt4vjOjNlIAaNR2h4rLvE/1dAYth6jxqf/mFJJfZ5iJKiWD6KYSlIikiqfin/R8
-	OZsenLiMMiBruWLb1inIWilneVCsnsT+Ddgio7lrsIsslNIke1PvGAJ5dpXy3Rksn5wA
-	RGyGqELbfZpvSOEw37dcioCoQe/XuvlBV4oYA=
+	bh=ZZXkKBtLRB+xfHJ4kDGCKvw7Etqo8MrNf2GlwM+0qjA=;
+	b=SGpsycagSglD4a4KiNEwR+5SjGDYnuNIX/24lZfQ39fcRmP3zsr5V1p3LR68n1T8ne
+	q//r2r83ycb1/bTIA/c9G9EcHs4EG9hd6GLS7dfP4891YLHJ5IsxH8oZITZvuZSiNpqr
+	x0zAHkjJcGdVTxXwMLQxkDTYa2dnB9fd1CnCY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=K8StFmGsXM8NJSsOsdYjNs2KQaGc2dQKdmXQ6qnV5ppcttKYN2Gurk/8PYAIciUK2k
-	KBCd81ZjRh98umLv583t5YGVvmEVDG0Ta+AqoSeEMe05T563mjgDVnkvAJI8Au25KGSk
-	TGIb+bDxKNJvVX0vCXhjlfzXYWo2iJoNGKkvQ=
+	b=WgZPHZsz5Uh/I2SSW4Q6z/IzrsDhrke4E7JFaHbHfOlriujGhY/iPCARyJz2TGMTSL
+	FqOyUoNe59DN5sDQqcwQEL8eg9zFXLqYmY23978Dnk91tC0qrt5HiHFmfLPRF1bNRA7a
+	3HP5vZNcarEvjn0CiXvTEPOUQDRN3HCSTu/3Q=
 MIME-Version: 1.0
-Received: by 10.204.154.66 with SMTP id n2mr2588674bkw.8.1279876712492; Fri, 
-	23 Jul 2010 02:18:32 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Fri, 23 Jul 2010 02:18:32 -0700 (PDT)
-In-Reply-To: <1279875548.13006.32.camel@rex>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-	<i2bg5t$mvp$1@dough.gmane.org>
-	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
-	<i2bir6$un3$1@dough.gmane.org> <1279875548.13006.32.camel@rex>
-Date: Fri, 23 Jul 2010 11:18:32 +0200
-Message-ID: <AANLkTi=XnYtiTtUke0aiPgvFao3De6-xxb1cWt3hr7=X@mail.gmail.com>
+Received: by 10.204.162.207 with SMTP id w15mr2287278bkx.63.1279877001369; 
+	Fri, 23 Jul 2010 02:23:21 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Fri, 23 Jul 2010 02:23:21 -0700 (PDT)
+In-Reply-To: <59B9E304-2B14-4D9F-80F7-8AB7A234D404@vanille-media.de>
+References: <201007230134.59343.david.lanzendoerfer@o2s.ch>
+	<59B9E304-2B14-4D9F-80F7-8AB7A234D404@vanille-media.de>
+Date: Fri, 23 Jul 2010 11:23:21 +0200
+Message-ID: <AANLkTinjBZ6TOcDYvoeeAbqKjA19Roh6XQwvg9=u006s@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.47
@@ -41,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages 	into native sysroot
+Subject: Re: [PATCH] Adding maxima recipe (tool for algebraic calculation)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,95 +53,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 09:18:44 -0000
+X-List-Received-Date: Fri, 23 Jul 2010 09:23:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/7/23 Richard Purdie <rpurdie@rpsys.net>
+2010/7/23 Dr. Michael Lauer <mickey@vanille-media.de>
 
-> On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> >
-> > On 23-07-10 10:02, Phil Blundell wrote:
-> > > On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
-> > >> There is a BIG problem with these patches, they break multimachine
-> builds.
-> > >>
-> > >> The previous situation had:
-> > >>
-> > >> cross/armv7a-angstrom-foo/usr/bin/
-> > >> cross/armv5te-angstrom-foo/usr/bin/
-> > >> etc
-> > >>
-> > >> The new situation has:
-> > >>
-> > >> x86_64-linux/usr/bin
-> > >>
-> > >> So all the toolchains get dropped into the *same* directory, which
-> > >> breaks horribly.
-> > >
-> > > Which are the actual binaries that collide?  I would have thought that
-> > > everything which gets installed into the cross bindir ought to be
-> > > prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
-> >
-> > It's all 'arm-angstrom-foo', I was just about to make the suggestion to
-> > change it to 'armv7a-angstrom-foo' :)
+> > +DESCRIPTION="Free computer algebra environment based on Macsyma"
+> > +HOMEPAGE="http://maxima.sourceforge.net/"
+> > +SRC_URI="http://www.sfr-fresh.com/unix/misc/${P}.tar.gz<http://www.sfr-fresh.com/unix/misc/$%7BP%7D.tar.gz>
+> "
+> > +LICENSE="GPLv2"
 >
-> I've just been talking to Koen about this. When building for armv7a,
-> TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
+> Whitespace, please.
 >
-> I suspect if we change TARGET_ARCH to be armv7a, nasty things will
-> happen but I could be wrong.
+> Thanks.
 >
+> Mssed that one, but yes, you are right. For the author, Mickey means having
+spaces around the =
 
-I've been pondering if TARGET_ARCH should be the real arch (like armv7a) and
-whether adjacent to that there should be a TARGET_ARCH_FAMILY or so.
+Linebreaks also crossed my mind, but frankly speaking I'm not too sure about
+the policy there.
+Also typically LICENSE is before SRC_URI (that should be fixed too)
 
-Changing TARGET_ARCH to armv7a without other changes definitely is going to
-break things.
-There are 110 .bb files that reference TARGET_ARCH
-
-the last two lines of the grep read:
-xqt2/xqt2_20060509.bb:    if [ ${TARGET_ARCH} == "arm" ]; then
-xqt/xqt_0.0.9.bb:    if [ ${TARGET_ARCH} == "arm" ]; then
-so these are definitely not going to fly
-
-for some other of the 110 recipes the change is harmless (e.g. because they
-compare to "mips" in gcc-common.inc)
-for most others I cannot judge this, e.g. because the value is passed to
-configure.
-
-unrelated side note:
-while grepping I noticed the existence of dirs like linux-uml and linux-atm.
-These contain kernel recipes.
-Shouldn't these be in linux recipes dir? (or alternately shouldn't there be
-also things like linux-omap and linux-nios2).
-
-frans
-
-
-> If that doesn't help which I suspect it won't, my gut instinct is to add
-> a architecture specific directory under bin for the cross bits. This
-> could be as simple as changing bindir in cross.bbclass.
->
-> > I don't know if that solves the binutils-cross problem[1], though.
-> >
-> > Koen
-> >
-> > [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/34685
->
-> Is that libiberty.a file actually useful or could we just stop
-> binutils-cross installing it?
->
-> Cheers,
->
-> Richard
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Frans
 
