@@ -1,41 +1,55 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OcMD6-0000uP-Bt
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OcMFd-0001Yt-Uv
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 19:39:02 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6NHcmTe020843
+	Fri, 23 Jul 2010 19:41:53 +0200
+Received: by pzk2 with SMTP id 2so180360pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 18:38:48 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 20594-04 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 18:38:44 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6NHcdXK020835
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 18:38:40 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Fri, 23 Jul 2010 10:41:18 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=T5YpivFtTndi13LsDNy6OH3YN8eBN2x5wR9sK2HPoOw=;
+	b=rEDTZGyLZL46TttliNMkidNvvHH6R0kKQu664zSkclTFNCUAgCzUo2IEe3D87hhPxE
+	DrkG29vThLSpzkdLsnO20Xt4Zp5jLLYCi1Xrz9gP3s99GlrW735hpg96G1HvVL0KWFbl
+	FJhUDsqaHVXgBkeXcqn7Y878v/N881I28lbRY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=p01xEeZqh2jc9ctDYo+/iNRGRa/l4CMHsfphAD3K0tIJlCIbfx0V3f480unyP/rOcp
+	WUsVyXzuueTgCyLhhodHjvbAVYSouDSfpO2J1LERmcbxzsCWN5Ox+LscRzwarIcFFG1S
+	vMMbW6THoYtHr6tBVgqtyoqD44QYi36VUFaUI=
+Received: by 10.114.109.10 with SMTP id h10mr5945933wac.132.1279906878667;
+	Fri, 23 Jul 2010 10:41:18 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id k17sm504692rvf.7.2010.07.23.10.41.17
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 23 Jul 2010 10:41:18 -0700 (PDT)
+Date: Fri, 23 Jul 2010 10:41:46 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=HD8OXhMhyaXHLfGsOYESC4+1s5fBYjCZFzsUm@mail.gmail.com>
-References: <i2bf8b$joo$2@dough.gmane.org>
-	<AANLkTi=HD8OXhMhyaXHLfGsOYESC4+1s5fBYjCZFzsUm@mail.gmail.com>
-Date: Fri, 23 Jul 2010 18:38:32 +0100
-Message-ID: <1279906712.13006.62.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100723174146.GA15294@gmail.com>
+References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+	<i2bg5t$mvp$1@dough.gmane.org>
+	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
+	<i2bir6$un3$1@dough.gmane.org> <1279875548.13006.32.camel@rex>
+	<AANLkTi=XnYtiTtUke0aiPgvFao3De6-xxb1cWt3hr7=X@mail.gmail.com>
+	<AANLkTinJZ-Nst4HvkGtuPG5Y9X3MQuqfFhmkoU=cKaER@mail.gmail.com>
+	<AANLkTin0jdsw3Pu9BkmEp0O9908dtMDN_=mmgsAehgH0@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTin0jdsw3Pu9BkmEp0O9908dtMDN_=mmgsAehgH0@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: binutils-cross problem with multimachine config after cross changes
+Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,40 +63,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 17:39:03 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 23 Jul 2010 17:41:55 -0000
+X-Groupsio-MsgNum: 21351
+Content-Type: multipart/mixed; boundary="1yeeQ81UyVL57Vl7"
+Content-Disposition: inline
 
-On Fri, 2010-07-23 at 10:02 -0700, Khem Raj wrote:
-> On Fri, Jul 23, 2010 at 12:10 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> > I was doing a multimachine build and the armv7a bits completed
-> > beautifully, but the armv5te bits break in binutils-cross:
+--1yeeQ81UyVL57Vl7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On (23/07/10 10:30), Chris Larson wrote:
+> On Fri, Jul 23, 2010 at 10:20 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> 
+> > On Fri, Jul 23, 2010 at 2:18 AM, Frans Meulenbroeks
+> > <fransmeulenbroeks@gmail.com> wrote:
+> > > 2010/7/23 Richard Purdie <rpurdie@rpsys.net>
+> > >
+> > >> On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
+> > >> > -----BEGIN PGP SIGNED MESSAGE-----
+> > >> > Hash: SHA1
+> > >> >
+> > >> > On 23-07-10 10:02, Phil Blundell wrote:
+> > >> > > On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
+> > >> > >> There is a BIG problem with these patches, they break multimachine
+> > >> builds.
+> > >> > >>
+> > >> > >> The previous situation had:
+> > >> > >>
+> > >> > >> cross/armv7a-angstrom-foo/usr/bin/
+> > >> > >> cross/armv5te-angstrom-foo/usr/bin/
+> > >> > >> etc
+> > >> > >>
+> > >> > >> The new situation has:
+> > >> > >>
+> > >> > >> x86_64-linux/usr/bin
+> > >> > >>
+> > >> > >> So all the toolchains get dropped into the *same* directory, which
+> > >> > >> breaks horribly.
+> > >> > >
+> > >> > > Which are the actual binaries that collide?  I would have thought
+> > that
+> > >> > > everything which gets installed into the cross bindir ought to be
+> > >> > > prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc,
+> > etc).
+> > >> >
+> > >> > It's all 'arm-angstrom-foo', I was just about to make the suggestion
+> > to
+> > >> > change it to 'armv7a-angstrom-foo' :)
+> > >>
+> > >> I've just been talking to Koen about this. When building for armv7a,
+> > >> TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
+> > >>
+> > >> I suspect if we change TARGET_ARCH to be armv7a, nasty things will
+> > >> happen but I could be wrong.
+> > >>
+> > >
+> > > I've been pondering if TARGET_ARCH should be the real arch (like armv7a)
+> > and
+> > > whether adjacent to that there should be a TARGET_ARCH_FAMILY or so.
+> > >
+> > > Changing TARGET_ARCH to armv7a without other changes definitely is going
+> > to
+> > > break things.
 > >
-> > | /usr/bin/ld:
-> > /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a(cplus-dem.o):
-> > relocation R_X86_64_32
-> > used when making a shared object; recompile with -fPIC
-> > |
-> > /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a:
-> > could not read symbols: Bad value
-> > | collect2: ld returned 1 exit status
+> >
+> > maybe we should not change TARGET_ARCH but use FEED_ARCH to construct
+> > TARGET_SYS
 > 
-> interesting. Does your native sysroot also have
-> sysroots/x86_64-linux/usr/lib/libiberty_pic.a ?
-> if not then its a problem. but that said I think different versions
-> for different machines of same arch
-> is not going to work if they share same canonical names for tools. For
-> different architectures it will work.
 > 
-> You can try to remove
+> Using a variable from packaging / rootfs creation as a field passed to
+> configure at build time strikes me as a terrible idea.
 
-I'm removing this in poky and will also look to remove the ones
-generated by gcc. If we need this file it should be being build by a
-bintutils-native (or libnfd-native)...
+we have MULTIMACH_* variables in bitbake.conf I have done this patch 
+using them. I trying a meta-toolchain build lets see
 
-Cheers,
+-Khem
 
-Richard
+> -- 
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
+--1yeeQ81UyVL57Vl7
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: attachment; filename=diff
 
+diff --git a/classes/cross.bbclass b/classes/cross.bbclass
+index 75b2abe..cadf245 100644
+--- a/classes/cross.bbclass
++++ b/classes/cross.bbclass
+@@ -8,7 +8,7 @@ EXCLUDE_FROM_WORLD = "1"
+ # In order to keep TARGET_PREFIX decoupled from TARGET_SYS, let's force the
+ # binary names to match the former, rather than relying on autoconf's implicit
+ # prefixing based on the latter.
+-EXTRA_OECONF_append = " --program-prefix=${TARGET_PREFIX}"
++EXTRA_OECONF_append = " --program-prefix=${MULTIMACH_TARGET_PREFIX}"
+ 
+ # Save PACKAGE_ARCH before changing HOST_ARCH
+ OLD_PACKAGE_ARCH := "${PACKAGE_ARCH}"
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 748abba..1564f10 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -135,6 +135,7 @@ PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}
+ MULTIMACH_ARCH = "${PACKAGE_ARCH}"
+ MULTIMACH_TARGET_SYS = "${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
+ MULTIMACH_HOST_SYS = "${MULTIMACH_ARCH}${HOST_VENDOR}-${HOST_OS}"
++MULTIMACH_TARGET_PREFIX = "${MULTIMACH_TARGET_SYS}-"
+ BASEPKG_HOST_SYS = "${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}"
+ BASEPKG_TARGET_SYS = "${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
+ 
 
+--1yeeQ81UyVL57Vl7--
