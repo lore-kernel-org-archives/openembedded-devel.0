@@ -1,46 +1,50 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1OcEfd-0000qa-Qq
+	(envelope-from <martin.jansa@gmail.com>) id 1OcEhY-0002JU-Aw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 11:36:00 +0200
-Received: by fxm12 with SMTP id 12so4971493fxm.6
+	Fri, 23 Jul 2010 11:37:57 +0200
+Received: by fxm12 with SMTP id 12so4972636fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 02:35:45 -0700 (PDT)
+	Fri, 23 Jul 2010 02:37:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=OPjFFwwFm2m8gZO4ICQuML70YQ+SrGKV6b7rE4wt7aw=;
-	b=Yxs4fTDJRFT8boUiJfmq2rXTCznMb1g1D232gvVG75/2Ayn/9gt3+zETYw23HBN8Mp
-	wlyFAGFPt1auh/KkS8Mt6reOqRQBii5vPQZU4ptvBQBey9AZcjUfRa/sn4pEbgA5vQDj
-	rSdkERUcS19H9jg/rx+q+pkhfWmwEaJnSvYX8=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=lSo4xqgcy8MX4/eMHwWKangZGI9GW3R8X7VftEv6AKE=;
+	b=OuX5KrMHRQ3yxjkUL3KmmKTZvSyOVZC5Fon+qlBxbP2q+h+sVQh2+GIhD1LIBNe0Rx
+	qXLDdA5BMrNDC7smI0TQsIprkTl38HJSo/orItPwwqaY1eRINgXnsaywi0Lj+yHkETOH
+	v5yDOcYp7JQqPor8dS0YA90ZgX2d2Xgz09gD4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=B+VbQN02Vu2Tw1dYh+ZaBajx1qNWYqtqSERsschZZM6Vs1BGTR9ax/KawUb4pwpWr+
-	Kc0HW1Tsz3FZN2Vp7zXWvlupR1BqPBNid/d4yqQjAWJ7ORiuKfWgEcK+NSr+YF3Z8v1N
-	FRs2uWWq7cLquqOPsoqFSR+xoXETf7jZiHGzI=
-MIME-Version: 1.0
-Received: by 10.239.163.143 with SMTP id p15mr168222hbd.158.1279877745104; 
-	Fri, 23 Jul 2010 02:35:45 -0700 (PDT)
-Received: by 10.239.181.207 with HTTP; Fri, 23 Jul 2010 02:35:45 -0700 (PDT)
-In-Reply-To: <1279875548.13006.32.camel@rex>
-References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
-	<i2bg5t$mvp$1@dough.gmane.org>
-	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
-	<i2bir6$un3$1@dough.gmane.org> <1279875548.13006.32.camel@rex>
-Date: Fri, 23 Jul 2010 11:35:45 +0200
-Message-ID: <AANLkTik8CaoY=od-BH7_ymJf1Yet5e-cJGJ3PFyPm42N@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=AnLR0RjyFe0bBy9HkE2YbwcwP2CPxcIuOSJUccpRDMP6yOMQsCKfmQZWHkm8+Qt1xp
+	dUosnTKbSvE1/Ljo0A1WQ6ynTjboGxsAEWHIY8yWXjYe+1Csb7zmRDLVU8AYpplVa5UF
+	t/Kza/poaoDEXKz/MHPjpNIBFSFZn04DnbJI4=
+Received: by 10.223.120.82 with SMTP id c18mr3027025far.69.1279877863721;
+	Fri, 23 Jul 2010 02:37:43 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b9sm16898faq.31.2010.07.23.02.37.42
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 23 Jul 2010 02:37:43 -0700 (PDT)
+Date: Fri, 23 Jul 2010 11:38:44 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100723093844.GS2189@jama>
+References: <201007230134.59343.david.lanzendoerfer@o2s.ch>
+	<59B9E304-2B14-4D9F-80F7-8AB7A234D404@vanille-media.de>
+	<AANLkTinjBZ6TOcDYvoeeAbqKjA19Roh6XQwvg9=u006s@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinjBZ6TOcDYvoeeAbqKjA19Roh6XQwvg9=u006s@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages 	into native sysroot
+Subject: Re: [PATCH] Adding maxima recipe (tool for algebraic calculation)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,26 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 09:36:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 23 Jul 2010 09:37:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Fri, Jul 23, 2010 at 10:59 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
->> It's all 'arm-angstrom-foo', I was just about to make the suggestion to
->> change it to 'armv7a-angstrom-foo' :)
->
-> I've just been talking to Koen about this. When building for armv7a,
-> TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
->
-> I suspect if we change TARGET_ARCH to be armv7a, nasty things will
-> happen but I could be wrong.
+On Fri, Jul 23, 2010 at 11:23:21AM +0200, Frans Meulenbroeks wrote:
+> 2010/7/23 Dr. Michael Lauer <mickey@vanille-media.de>
+> 
+> > > +DESCRIPTION="Free computer algebra environment based on Macsyma"
+> > > +HOMEPAGE="http://maxima.sourceforge.net/"
+> > > +SRC_URI="http://www.sfr-fresh.com/unix/misc/${P}.tar.gz<http://www.sfr-fresh.com/unix/misc/$%7BP%7D.tar.gz>
+> > "
+> > > +LICENSE="GPLv2"
+> >
+> > Whitespace, please.
+> >
+> > Thanks.
+> >
+> > Mssed that one, but yes, you are right. For the author, Mickey means having
+> spaces around the =
+> 
+> Linebreaks also crossed my mind, but frankly speaking I'm not too sure about
+> the policy there.
+> Also typically LICENSE is before SRC_URI (that should be fixed too)
 
-config.sub will generally not accept something like armv7a-*
+done
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=570b4127ed3618be84d7952ec09b4fbb094f5dca
 
-If OE had not offered the vendor part of the arch strings to distros,
-it could have
-been solved by (in this case) using arm-v7a-foo ...
-
-/Esben
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
