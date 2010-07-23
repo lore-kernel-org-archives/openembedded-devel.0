@@ -1,43 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OcDzp-00065Y-Fk for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:52:46 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OcDzX-000271-9T for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 10:52:27 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 10:52:27 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OcE6R-0006IJ-Ot
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 23 Jul 2010 10:59:37 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6N8xNNc013248
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 10:52:27 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 23 Jul 2010 09:59:23 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 13123-02 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 09:59:19 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6N8xEQV013242
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 23 Jul 2010 09:59:15 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 23 Jul 2010 10:52:18 +0200
-Message-ID: <i2bl83$7im$1@dough.gmane.org>
-References: <i2bf8b$joo$2@dough.gmane.org>
-	<AANLkTim=jp4BQTg_nPkMg2yN_-g-6_Stta6ZkjD3H-Xb@mail.gmail.com>
+In-Reply-To: <i2bir6$un3$1@dough.gmane.org>
+References: <1279735486-7050-1-git-send-email-raj.khem@gmail.com>
+	<i2bg5t$mvp$1@dough.gmane.org>
+	<1279872152.21888.149.camel@lenovo.internal.reciva.com>
+	<i2bir6$un3$1@dough.gmane.org>
+Date: Fri, 23 Jul 2010 09:59:08 +0100
+Message-ID: <1279875548.13006.32.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <AANLkTim=jp4BQTg_nPkMg2yN_-g-6_Stta6ZkjD3H-Xb@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: binutils-cross problem with multimachine config after cross changes
+Subject: Re: [PATCH 0/4][RFC] Remove CROSS_DIR, install cross-packages into native sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,65 +51,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 08:52:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 23 Jul 2010 08:59:37 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 23-07-10 10:36, Frans Meulenbroeks wrote:
-> 2010/7/23 Koen Kooi <k.kooi@student.utwente.nl>
+On Fri, 2010-07-23 at 10:11 +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Hi,
+> On 23-07-10 10:02, Phil Blundell wrote:
+> > On Fri, 2010-07-23 at 09:25 +0200, Koen Kooi wrote:
+> >> There is a BIG problem with these patches, they break multimachine builds.
+> >>
+> >> The previous situation had:
+> >>
+> >> cross/armv7a-angstrom-foo/usr/bin/
+> >> cross/armv5te-angstrom-foo/usr/bin/
+> >> etc
+> >>
+> >> The new situation has:
+> >>
+> >> x86_64-linux/usr/bin
+> >>
+> >> So all the toolchains get dropped into the *same* directory, which
+> >> breaks horribly.
+> > 
+> > Which are the actual binaries that collide?  I would have thought that
+> > everything which gets installed into the cross bindir ought to be
+> > prefixed with TARGET_SYS (i.e. usr/bin/armv7a-angstrom-linux-gcc, etc).
 > 
-> I was doing a multimachine build and the armv7a bits completed
-> beautifully, but the armv5te bits break in binutils-cross:
+> It's all 'arm-angstrom-foo', I was just about to make the suggestion to
+> change it to 'armv7a-angstrom-foo' :)
+
+I've just been talking to Koen about this. When building for armv7a,
+TARGET_ARCH which goes into TARGET_PREFIX and TARGET_SYS is "arm".
+
+I suspect if we change TARGET_ARCH to be armv7a, nasty things will
+happen but I could be wrong.
+
+If that doesn't help which I suspect it won't, my gut instinct is to add
+a architecture specific directory under bin for the cross bits. This
+could be as simple as changing bindir in cross.bbclass.
+
+> I don't know if that solves the binutils-cross problem[1], though.
+>
+> Koen
 > 
-> | /usr/bin/ld:
-> 
-> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a(cplus-dem.o):
-> relocation R_X86_64_32
-> used when making a shared object; recompile with -fPIC
-> |
-> 
-> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a:
-> could not read symbols: Bad value
-> | collect2: ld returned 1 exit status
-> 
-> Does anyone have a quick fix for that? My tinderbox looks so said with
-> all that red :(
-> 
-> 
->> Yesterday I noticed a similar issue with binutils 2.20.1 for nios2 when ld
->> was called with -shared.
->> 2.17.50 did not have the problem.
->> Didn't have time to investigate yet. (and probably it'll take a day or two
->> before I get to this)
+> [1] http://thread.gmane.org/gmane.comp.handhelds.openembedded/34685
 
-I suspect the second binutils-cross is trying to link with the libs from
-the first, which breaks.
+Is that libiberty.a file actually useful or could we just stop
+binutils-cross installing it?
 
->> Are you using the same version of binutils for v5 and v7? (and which one).
+Cheers,
 
-ANGSTROM_BINUTILS_VERSION                ?= "2.18"
-ANGSTROM_BINUTILS_VERSION_armv4          ?= "2.20"
-ANGSTROM_BINUTILS_VERSION_armv7a         ?= "2.18.50.0.7"
+Richard
 
-Angstrom-next has a saner layout, that used 2.20.x for everything, but
-lots of things don't build with that and among those things are the
-things that bring in my paycheck.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMSVhCMkyGM64RGpERApymAJ0Yh8zUt3DklFUjAHc1P40t03LwAQCcCxDK
-6LJ5tQ/Vb7auH78ldPINVJE=
-=S65W
------END PGP SIGNATURE-----
 
 
 
