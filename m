@@ -1,37 +1,35 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OcLam-0001KV-6s
+	(envelope-from <raj.khem@gmail.com>) id 1OcLeO-0001lU-HL
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 23 Jul 2010 18:59:26 +0200
-Received: by gyd8 with SMTP id 8so219273gyd.6
+	Fri, 23 Jul 2010 19:03:19 +0200
+Received: by iwn34 with SMTP id 34so379895iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 09:59:10 -0700 (PDT)
+	Fri, 23 Jul 2010 10:02:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=h25gus611zp4EBKaYcB+sSNsxEJQiytDngg86B9ydh8=;
-	b=oYDyTRc7d3LT+VuXwZd2sJnP4HYvLmH6hkn7DshnTlAQgWuI2DqqheNGKQxRdOopSG
-	hLW9JeRfcctBCgtAr8n8ljMfQJpt2uNIYev4tM2QoSllb6u3R6Ct0JyCuhhoBp0uCKat
-	leS8AsZ4uvZmgEVi9kTBhMTTlyg6uP7M6wM1Y=
+	:references:from:date:message-id:subject:to:content-type;
+	bh=tf/mwXw/W+NAYcx8/QSUvxaQVG+/Ri0m0kEfHHku5Z4=;
+	b=uIGdR5MLdPKq7ElVqhiwPtjAIAZq/p836cf+20vyFlZBQF8zINo0Ra+myErLjZJWAZ
+	2mjR7CNDJstxBqj1Gbz6LrVYqV3mX9Zstlukg4Zf2bKEWSdhs5K/gXNbhUc+V/ZMY6I3
+	Aacvk+DG9b2MazaNEEgnbLdBxxW3K7D2z1BUw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=mYGo9QHi/Oc16U0aR10IP54r/vdxGR7SOi6q1kCu5SfUjJCPv1meourroklZl36wc8
-	Kpfbzc35O8bvCI991D00E2iCppFFFzSkidchs3TrybJjTdKboUWRPAstKgDtw+AGdCWx
-	06+h0FVEB7XPw134Y6EsTmSe6e2GmG17UTnSM=
-Received: by 10.101.106.17 with SMTP id i17mr4233714anm.104.1279904349660; 
-	Fri, 23 Jul 2010 09:59:09 -0700 (PDT)
+	:content-type;
+	b=un7n3tOOHSbsm37/2/Vx4HsPlWEBRJ/6w6i1U/yc7Q/FoEG1GQYz3QjN6EHX76oRLf
+	hn0FQM0h7XyKzfBvi9QocXgd0x7IsaN12AokQfHX7H/JEJH7L3fbUdj8GX2UHv2PG49a
+	ru+Z2k6GJrR6gGTSc+JNs8GJguCTayc7I+QCs=
+Received: by 10.231.39.196 with SMTP id h4mr3781369ibe.64.1279904576445; Fri, 
+	23 Jul 2010 10:02:56 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.186.88 with HTTP; Fri, 23 Jul 2010 09:58:49 -0700 (PDT)
-In-Reply-To: <1279886129.2692.39.camel@mill.internal.reciva.com>
-References: <1279752241-21656-1-git-send-email-raj.khem@gmail.com> 
-	<1279886129.2692.39.camel@mill.internal.reciva.com>
+Received: by 10.231.186.88 with HTTP; Fri, 23 Jul 2010 10:02:35 -0700 (PDT)
+In-Reply-To: <i2bf8b$joo$2@dough.gmane.org>
+References: <i2bf8b$joo$2@dough.gmane.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 23 Jul 2010 09:58:49 -0700
-Message-ID: <AANLkTimx67wfuqBegdwsqM5BaSMX7DUoWStEaSnhyyYm@mail.gmail.com>
+Date: Fri, 23 Jul 2010 10:02:35 -0700
+Message-ID: <AANLkTi=HD8OXhMhyaXHLfGsOYESC4+1s5fBYjCZFzsUm@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] distro: Add new feature to indicate thumb-interworking.
+Subject: Re: binutils-cross problem with multimachine config after cross changes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,48 +51,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 23 Jul 2010 16:59:26 -0000
+X-List-Received-Date: Fri, 23 Jul 2010 17:03:19 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 23, 2010 at 4:55 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Wed, 2010-07-21 at 15:44 -0700, Khem Raj wrote:
->> +# Add thumb-interwork to feature list if selected machine supports it.
->> +DISTRO_FEATURES +=3D ' ${@["", "thumb-interwork"][bb.data.getVar('THUMB=
-_INTERWORK', d, 1) =3D=3D "yes"]}'
+On Fri, Jul 23, 2010 at 12:10 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
-> Would it not be better to put this in some generic place (maybe even
-> bitbake.conf) rather than adding it to every DISTRO individually?
+> Hi,
 >
->> --- a/conf/distro/include/slugos.inc
->> +++ b/conf/distro/include/slugos.inc
->> @@ -23,9 +23,18 @@ DISTRO_VERSION ?=3D "${SLUGOS_VERSION}${DISTRO_REVISI=
-ON}-${DISTRO_TYPE}"
->> =A0# DISTRO_FEED ?=3D "${SLUGOS_VERSION}-${DISTRO_TYPE}"
->> =A0DISTRO_FEED ?=3D "unstable"
->>
->> +THUMB_INTERWORK =3D "yes"
->> +# "yes" "no"
->> +# =A0 =A0Whether to compile with code to allow interworking between the=
- two
->> +# =A0 =A0instruction sets. =A0This allows thumb code to be executed on =
-a primarily
->> +# =A0 =A0arm system and vice versa. =A0It is strongly recommended that =
-DISTROs not
->> +# =A0 =A0turn this off - the actual cost is very small.
->> =A0# We want images supporting the following features (for task-base)
->> =A0DISTRO_FEATURES =3D "nfs smbfs wifi ppp alsa bluetooth ext2 vfat irda=
- pcmcia usbgadget usbhost pci"
+> I was doing a multimachine build and the armv7a bits completed
+> beautifully, but the armv5te bits break in binutils-cross:
 >
-> Is this a policy change for slugos? =A0If so, are the SlugOS people happy
-> with it?
->
+> | /usr/bin/ld:
+> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a(cplus-dem.o):
+> relocation R_X86_64_32
+> used when making a shared object; recompile with -fPIC
+> |
+> /work/autobuilder/build/tmp-angstrom_2008_1/sysroots/x86_64-linux/usr/lib/libiberty.a:
+> could not read symbols: Bad value
+> | collect2: ld returned 1 exit status
 
-argggh I did not want to push it just yet. I will revert it. git push
-pushes staged commits on all branches
-I will have to modify my scripts to only push specific branch.
+interesting. Does your native sysroot also have
+sysroots/x86_64-linux/usr/lib/libiberty_pic.a ?
+if not then its a problem. but that said I think different versions
+for different machines of same arch
+is not going to work if they share same canonical names for tools. For
+different architectures it will work.
 
-> p.
+You can try to remove
+
+>
+> Does anyone have a quick fix for that? My tinderbox looks so said with
+> all that red :(
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMSUBLMkyGM64RGpERAgopAJ96q9OiWD8Eywv0L/09b8wP92QfnwCgpt11
+> EoOVgGxVY+MeWMPJcoF8pg8=
+> =1cA2
+> -----END PGP SIGNATURE-----
 >
 >
 > _______________________________________________
