@@ -1,44 +1,45 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OcbC3-0006In-B1
+	(envelope-from <raj.khem@gmail.com>) id 1OcbGt-00021X-If
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jul 2010 11:38:56 +0200
-Received: by pxi12 with SMTP id 12so1845567pxi.6
+	Sat, 24 Jul 2010 11:44:01 +0200
+Received: by iwn34 with SMTP id 34so1084722iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jul 2010 02:38:40 -0700 (PDT)
+	Sat, 24 Jul 2010 02:43:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=9qng/hImPBtBYqV9td9QQOSuAOiToM4tXyDzHEymEZk=;
-	b=q6g0jmOCeBwHID9pXT15L/YAIrl8FfI6UZvRMEz+vcTZkbbc0yGuMv4d/sgkU96p2Q
-	P9vc7UeIVi8SvWa14ZUiRLgv+HcaFvMtirfL7A/OFOWlQrfyvqfXo41OdGBhMJ2MCs+i
-	q4w/VHYcI2QZauH6423PCw4n/KcKCS7l1stO8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=YdsCNmMY5NhzeAh7pApfZPuUekjydfL2UWZlVMsu6Hc=;
+	b=jT+VXUEqemXWU1njgJ2pjVAY9X+yo9Nq/DJX2kDVgAhojzy7ljG8Gsc1bR7KbMSbYe
+	jVoJ4ku1hV9Ap/5maASJh0SbHzzUVCC0TPdT1Amr2XlNN2drE9f2KdzK3DZ9JYQRrQkk
+	fpojkyhR05xCLq7FIGuoClPRptUUSLXy28GBM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=Pf2jVIVXvLZ/o1B7/Og2GaSycz/MPg3tCb0G1xpx4oDXCmqf1VvhueJsjB/zN1/VKC
-	gXCv7AdpU+9UbQogE/fHNWp1Z1l5boTS3cOW3CfLt0m2L3FQaQ+jgBGFhiAjFoJNgh8Z
-	iFaC2MXR165huBgHrJZluB+ui/JUUAcdSS3Ac=
-Received: by 10.142.211.6 with SMTP id j6mr5556028wfg.182.1279964320496;
-	Sat, 24 Jul 2010 02:38:40 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id n2sm1409791wfl.13.2010.07.24.02.38.39
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 24 Jul 2010 02:38:39 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=X65bnXJUkM2pP3L03G1DDhzJahO5NxF2MIQFwT+jlVKpxSv+8Ly47F5B94+5dWHNj8
+	AqXVi/DNsne1Z5CJiCJ/OSibyiYgkScqS5S+38lhexYr8ipnNaHJxzcBhqZw8S/gC8Go
+	PLyvABJAxRKEBTTNtm6xhvrnnCq9rgTMH29NE=
+Received: by 10.231.33.73 with SMTP id g9mr5358086ibd.62.1279964616154; Sat, 
+	24 Jul 2010 02:43:36 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.186.88 with HTTP; Sat, 24 Jul 2010 02:43:16 -0700 (PDT)
+In-Reply-To: <20100715073247.GB5745@jama>
+References: <4C2AC77A.70102@gmail.com> <4C2ACDE8.7080801@gmail.com> 
+	<20100715073247.GB5745@jama>
 From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 24 Jul 2010 02:43:16 -0700
+Message-ID: <AANLkTi=0stDrv15yUrN6mryycSNJmwk_r92atg2deSsj@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 24 Jul 2010 02:38:33 -0700
-Message-Id: <1279964313-4401-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 3/3, v2] gcc-cross: Use EXTRA_OECONF_PATHS in initial and intermediate recipes.
+Subject: Re: [PATCH v2] opkg recipe overhaul - removal of opkg-nogpg and opkg-nogpg-nocurl.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,66 +53,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 09:38:56 -0000
+X-List-Received-Date: Sat, 24 Jul 2010 09:44:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-hmmm missed a file last time. This one should be better.
+On Thu, Jul 15, 2010 at 12:32 AM, Martin Jansa <martin.jansa@gmail.com> wro=
+te:
+> On Wed, Jun 30, 2010 at 02:24:00PM +0930, Graham Gower wrote:
+>> None of the distros in OE appear to want/need gpg or curl support in opk=
+g;
+>> so have opkg.inc remove them by default. This diff makes things more con=
+sistent
+>> across all distros/tasks/images.
+>>
+>> The slugos recipe is kept intact and further divided from the more moder=
+n
+>> recipes. The opkg-native recipe is the sane-srcrev version even when bui=
+lding
+>> slugos, which should allow for changes to opkg related bbclasses without
+>> breaking the slugos build.
+>>
+>> Build tested for qemumipsel/minimal-image and nslu2/slugos-image.
+>> minimal-image builds 10% quicker in my setup and is 1mb smaller.
+>
+> Tested on SHR/om-gta02
+>
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 
-* Add new configure time option --with-build-time-tools
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/gcc/gcc-configure-cross.inc    |    5 +++--
- recipes/gcc/gcc-cross-initial.inc      |    3 +--
- recipes/gcc/gcc-cross-intermediate.inc |    3 +--
- 3 files changed, 5 insertions(+), 6 deletions(-)
+if there is no objection to this then I will like to push this patch
+with my next
+set of patches. Please let me know if you have concerns.
 
-diff --git a/recipes/gcc/gcc-configure-cross.inc b/recipes/gcc/gcc-configure-cross.inc
-index 8b97b09..869ac5e 100644
---- a/recipes/gcc/gcc-configure-cross.inc
-+++ b/recipes/gcc/gcc-configure-cross.inc
-@@ -3,9 +3,10 @@ require gcc-configure-common.inc
- USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibc", "no", "", d )}'
- 
- EXTRA_OECONF_PATHS = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
--		      --with-gxx-include-dir=${STAGING_DIR_TARGET}/${target_includedir}/c++ \
-+		      --with-gxx-include-dir=${STAGING_DIR_TARGET}${target_includedir}/c++ \
-                       --with-sysroot=${STAGING_DIR_TARGET} \
--                      --with-build-sysroot=${STAGING_DIR_TARGET}"
-+                      --with-build-sysroot=${STAGING_DIR_TARGET} \
-+		      --with-build-time-tools=${bindir}"
- 
- do_configure_prepend () {
- 	export CC="${BUILD_CC}"
-diff --git a/recipes/gcc/gcc-cross-initial.inc b/recipes/gcc/gcc-cross-initial.inc
-index 25d7ba5..b153322 100644
---- a/recipes/gcc/gcc-cross-initial.inc
-+++ b/recipes/gcc/gcc-cross-initial.inc
-@@ -13,8 +13,7 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
- 		--disable-__cxa_atexit \
- 		--enable-languages=c \
- 		--program-prefix=${TARGET_PREFIX} \
--		--with-sysroot=${STAGING_DIR_TARGET} \
--		--with-build-sysroot=${STAGING_DIR_TARGET} \
-+		${EXTRA_OECONF_PATHS} \
- 		${EXTRA_OECONF_INITIAL} \
- 		${OPTSPACE} \
- 		${@get_gcc_fpu_setting(bb, d)} \
-diff --git a/recipes/gcc/gcc-cross-intermediate.inc b/recipes/gcc/gcc-cross-intermediate.inc
-index cbc8638..6dbdb94 100644
---- a/recipes/gcc/gcc-cross-intermediate.inc
-+++ b/recipes/gcc/gcc-cross-intermediate.inc
-@@ -11,8 +11,7 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
- 		--disable-threads \
- 		--enable-languages=c \
- 		--program-prefix=${TARGET_PREFIX} \
--		--with-sysroot=${STAGING_DIR_TARGET} \
--		--with-build-sysroot=${STAGING_DIR_TARGET} \
-+		${EXTRA_OECONF_PATHS} \
- 		${OPTSPACE} \
- 		${EXTRA_OECONF_INTERMEDIATE} \
- 		${@get_gcc_fpu_setting(bb, d)} \
--- 
-1.7.1
+Thanks
+-Khem
 
+
+>
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
