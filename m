@@ -1,44 +1,50 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OcmAl-00082L-KL
+	(envelope-from <raj.khem@gmail.com>) id 1OcmDl-00089C-7f
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jul 2010 23:22:21 +0200
-Received: by fxm12 with SMTP id 12so5713681fxm.6
+	Sat, 24 Jul 2010 23:25:26 +0200
+Received: by pzk2 with SMTP id 2so641484pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jul 2010 14:22:05 -0700 (PDT)
+	Sat, 24 Jul 2010 14:25:10 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ei9nOUm6k6FkKeNvLptOtp5E/OZ9Gb6OwvS+b5ud9NM=;
-	b=Ei1I6h303J4TVViAbfEdHTL59BHUVIeoHVjehSHmPu/xQG8QAfsQGNAo6qiqdpMWoI
-	SBivgUTwcaPvYLYDXtiWjkcq6TKMbuxRBaGsalwCVUDJ8oOPDaBgLmz2V3Kvu+n/MB0K
-	TDikQ1pYHTa/igCC//qchxsEihqvAv4bmPl2M=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=0iiWl/lTNkdAlMj0CUp7FuwobjHmznZXVdpHYohv474=;
+	b=sE7sLxeG+RCiuNVHMWpwIkQ3wBlmsR6vfF4DLeESLMmXQ9f5E15xxLVq7qgi+auKJI
+	y0OWhFIddFOK/sZ0xI+0yxA+a9VQ6o0G6Fna5HKFb0YLQLHJ2Nw0k7D9KTWtbudj/gZ0
+	5Ns5Z4b7+8vBSH7jnAkiEDhcBAo5AvfRiydDQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ktP45TnC3/uhrfzPPziL/i3MXVdFffo4HVvM/xK8/LV1IW6w5AI2gGMe5Y0cwzALHc
-	kR0j93JLYTy4JuOoHYLE0PbwFJam2i43rXpYTdQZmcjzMZOgRR8qU7atuPrJrZHE5yaH
-	Pv5yiXSLCBua8Snc2q5xZZqOBoQMUKrYX05Kc=
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=K4g/StChv18QLmLMDDfR2+mg4LYIQk2MNt4T+D9RXTTv2mgeiGViE1rxoYkRrMReg5
+	x9jnMj/jl8O94xYrPmWvETDOVrhVGSM9sx/wq/1Ol0UaluCTBEY749Z0B09peyVHdMe+
+	QpNqF9/EAptMsp2J/HAD5XMtSUH+KfqWogUfM=
+Received: by 10.114.109.1 with SMTP id h1mr8026427wac.203.1280006709699;
+	Sat, 24 Jul 2010 14:25:09 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id d39sm3152796wam.16.2010.07.24.14.25.08
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sat, 24 Jul 2010 14:25:08 -0700 (PDT)
+Date: Sat, 24 Jul 2010 14:25:02 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100724212502.GA4218@gmail.com>
+References: <1279963975-3736-1-git-send-email-raj.khem@gmail.com>
+	<i2fjoo$iiu$1@dough.gmane.org>
 MIME-Version: 1.0
-Received: by 10.103.222.6 with SMTP id z6mr952620muq.94.1280006525230; Sat, 24 
-	Jul 2010 14:22:05 -0700 (PDT)
-Received: by 10.102.59.17 with HTTP; Sat, 24 Jul 2010 14:22:05 -0700 (PDT)
-In-Reply-To: <E1OcfGN-0007DB-9C@melo.openembedded.org>
-References: <E1OcfGN-0007DB-9C@melo.openembedded.org>
-Date: Sat, 24 Jul 2010 23:22:05 +0200
-Message-ID: <AANLkTik35dsZ6rMfu8KJNo7ZoKd6071ELAhYmzr6T7Y+@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
-To: openembedded-devel@lists.openembedded.org, utx@penguin.cz
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+In-Reply-To: <i2fjoo$iiu$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Stanislav Brabec : akita.conf, spitz.conf: Set PREFERRED_PROVIDER for udev-compat to udev-compat141.
+Subject: Re: [PATCH 0/3] Make multi-machine toolchains to co-exist.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,70 +58,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 21:22:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 24 Jul 2010 21:25:26 -0000
+X-Groupsio-MsgNum: 21383
+Content-Type: multipart/mixed; boundary="9amGYk9869ThD9tj"
+Content-Disposition: inline
 
-Stanislav,
+--9amGYk9869ThD9tj
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-thx for your work.
+On (24/07/10 22:51), Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 24-07-10 11:32, Khem Raj wrote:
+> > Hi
+> > 
+> > Following three patches are for making multi-machine toolchains co-exist with
+> > new cross staging for toolchain.
+> > 
+> > It changes the toolchain triplet from TARGET_ARCH-VENDOR-OS to TARGET_SUB_ARCH-VENDOR-OS
+> > 
+> > which means that a toolchain for armv7 is called armv7-oe-linux-gnueabi-*
+> > and for armv5te its called armv5te-oe-linux-gnueabi-*
+> > 
+> > They can coexist in same native sysroot. The symlinks would mean that
+> > gcc will not accidently mix the assemblers or linkers.
+> > 
+> > I have booted a minimal-image on qemuarm successfully. The build for 
+> > beagleboard in same sysroot is underway.
+> > 
+> > Please give it a shot in your environments (especially Koen's env)
+> 
+> MACHINE=beagleboard bitbake nano ; MACHINE=hawkboard bitbake nano work,
+> going to try a bigger build now.
 
-Please note that other machines (c7x0 and poodle) are needing the same
-preference, thus I propose you move this in zaurus-2.6.inc.
-Collie and tosa are not concerned, having 2.6.3x kernel.
+You will need 4th patch which is attached here, for the sdk recipes.
 
-Regards
+Thanks
+-Khem
 
-Andrea
+--9amGYk9869ThD9tj
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="0001-sdk.bbclass-override-BASEPKG_HOST_SYS-as-it-is-used-.patch"
 
-On Sat, Jul 24, 2010 at 3:59 PM, git version control
-<git@git.openembedded.org> wrote:
-> Module: openembedded.git
-> Branch: org.openembedded.dev
-> Commit: b634978194d9b8f2a833863c540ceb5458b41e45
-> URL: =A0 =A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcomm=
-it;h=3Db634978194d9b8f2a833863c540ceb5458b41e45
->
-> Author: Stanislav Brabec <sbrabec@suse.cz>
-> Date: =A0 Sat Jul 24 15:51:39 2010 +0200
->
-> akita.conf, spitz.conf: Set PREFERRED_PROVIDER for udev-compat to udev-co=
-mpat141.
->
-> ---
->
-> =A0conf/machine/akita.conf | =A0 =A03 +++
-> =A0conf/machine/spitz.conf | =A0 =A03 +++
-> =A02 files changed, 6 insertions(+), 0 deletions(-)
->
-> diff --git a/conf/machine/akita.conf b/conf/machine/akita.conf
-> index 4afa515..d2ff69e 100644
-> --- a/conf/machine/akita.conf
-> +++ b/conf/machine/akita.conf
-> @@ -21,3 +21,6 @@ MACHINE_DISPLAY_PPI =3D "216"
-> =A0UBOOT_MACHINE =3D "akita_config"
-> =A0UBOOT_ENTRYPOINT =3D "0xA1000000"
-> =A0UBOOT_LOADADDRESS =3D "${UBOOT_ENTRYPOINT}"
-> +
-> +# udev-141 is the latest version that works with linux-2.6.26-RP
-> +PREFERRED_PROVIDER_udev-compat =3D "udev-compat141"
-> diff --git a/conf/machine/spitz.conf b/conf/machine/spitz.conf
-> index 0b5331e..314d346 100644
-> --- a/conf/machine/spitz.conf
-> +++ b/conf/machine/spitz.conf
-> @@ -27,3 +27,6 @@ MACHINE_DISPLAY_PPI =3D "216"
-> =A0UBOOT_MACHINE =3D "akita_config"
-> =A0UBOOT_ENTRYPOINT =3D "0xA1000000"
-> =A0UBOOT_LOADADDRESS =3D "${UBOOT_ENTRYPOINT}"
-> +
-> +# udev-141 is the latest version that works with linux-2.6.26-RP
-> +PREFERRED_PROVIDER_udev-compat =3D "udev-compat141"
->
->
-> _______________________________________________
-> Openembedded-commits mailing list
-> Openembedded-commits@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-commits
->
+From 0998a5a7305bc92509aee13f0103b05f1965022b Mon Sep 17 00:00:00 2001
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 24 Jul 2010 14:21:42 -0700
+Subject: [PATCH] sdk.bbclass: override BASEPKG_HOST_SYS as it is used to make TARGET_SYS
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/sdk.bbclass |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
+index 198d147..049fda1 100644
+--- a/classes/sdk.bbclass
++++ b/classes/sdk.bbclass
+@@ -15,6 +15,7 @@ PACKAGE_ARCH = "${BUILD_ARCH}-${OLD_PACKAGE_ARCH}-sdk"
+ # Also save BASE_PACKAGE_ARCH since HOST_ARCH can influence it
+ OLD_BASE_PACKAGE_ARCH := "${BASE_PACKAGE_ARCH}"
+ BASE_PACKAGE_ARCH = "${OLD_BASE_PACKAGE_ARCH}"
++BASEPKG_HOST_SYS = "${BUILD_ARCH}-${HOST_OS}"
+ 
+ STAGING_DIR_HOST = "${STAGING_DIR}/${HOST_SYS}-sdk"
+ STAGING_DIR_TARGET = "${STAGING_DIR}/${OLD_MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
+-- 
+1.7.1
 
 
+--9amGYk9869ThD9tj--
