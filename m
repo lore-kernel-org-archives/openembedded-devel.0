@@ -1,28 +1,41 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OckGz-0004wy-8R
+	(envelope-from <raj.khem@gmail.com>) id 1OclgR-0001XT-JI
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jul 2010 21:20:39 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 716121660774; Sat, 24 Jul 2010 13:20:09 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id C0CD31660175;
-	Sat, 24 Jul 2010 13:19:48 -0600 (MDT)
-Message-ID: <4C4B3CD4.1000500@mlbassoc.com>
-Date: Sat, 24 Jul 2010 13:19:48 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Sat, 24 Jul 2010 22:51:02 +0200
+Received: by gyd8 with SMTP id 8so604798gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 24 Jul 2010 13:50:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:cc:content-type
+	:content-transfer-encoding;
+	bh=s1GUb4qnpfl6kx4/Tvwgtl5vegwqIYD4O4MLeBjgvYI=;
+	b=j9zu0N/2XpGUUSdVMt4i5+SnAkTAdQjSgiPgfCpOJ1qonxlktflxly1usXUk+fYVp2
+	xH1rLkgi2lKgEdLPAgBkvHPdCzFVteBH5c+FflsSBs3CQIswEp8WAYIfG6CcgpJhRBgu
+	aS0G3ihh0vweKkGYktf0HmLwIvPkooRzBQNUI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:cc:content-type:content-transfer-encoding;
+	b=CY7dlrICHI8zzqsYS5NdsUFY2zeYHWH89acZRGYp+poveF2ytZK5nN6CILQRlxUv1h
+	1Xv2tbN5xaWnDGbq9ArdqNqeN/NvM/JJsaP1iI80NobasQefDblxB4/Blq5eY0ib52T1
+	iNwRkUSyNGrM9huHyguxdsU4EZnS2o4NhtG2k=
+Received: by 10.100.128.16 with SMTP id a16mr5784825and.34.1280004630213; Sat, 
+	24 Jul 2010 13:50:30 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C4B387F.4040407@mlbassoc.com>
+Received: by 10.100.8.16 with HTTP; Sat, 24 Jul 2010 13:50:10 -0700 (PDT)
 In-Reply-To: <4C4B387F.4040407@mlbassoc.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+References: <4C4B387F.4040407@mlbassoc.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 24 Jul 2010 13:50:10 -0700
+Message-ID: <AANLkTimJ7urU4OQ-1BXBJgU7SZFBRyw2D+Adzw-13eDa@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Discussion of the angstrom distribution development
@@ -41,26 +54,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 19:20:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 24 Jul 2010 20:51:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 07/24/2010 01:01 PM, Gary Thomas wrote:
+On Sat, Jul 24, 2010 at 12:01 PM, Gary Thomas <gary@mlbassoc.com> wrote:
 > Trying to build angstrom-gnome-image for beagleboard, fresh checkout
 > of org.openembedded.dev:
-> commit 244deb462973a2d7a9bfcc3399843202f9d29d51
-> Author: Stanislav Brabec <utx@penguin.cz>
-> Date: Sat Jul 24 14:21:03 2010 +0000
+> =A0commit 244deb462973a2d7a9bfcc3399843202f9d29d51
+> =A0Author: Stanislav Brabec <utx@penguin.cz>
+> =A0Date: =A0 Sat Jul 24 14:21:03 2010 +0000
 >
 > On Fedora 13, I get this error:
 >
 > ERROR: Function do_configure failed
 > NOTE: Task failed: ('function do_configure failed',
-> '/home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3/temp/log.do_configure.10165')
->
+> '/home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r=
+3/temp/log.do_configure.10165')
 > ERROR: Logfile of failure stored in:
-> /home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3/temp/log.do_configure.10165
->
+> /home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3=
+/temp/log.do_configure.10165
 > Log data follows:
 > | automake (GNU automake) 1.11.1
 > | Copyright (C) 2009 Free Software Foundation, Inc.
@@ -70,43 +83,46 @@ On 07/24/2010 01:01 PM, Gary Thomas wrote:
 > | There is NO WARRANTY, to the extent permitted by law.
 > |
 > | Written by Tom Tromey <tromey@redhat.com>
-> | and Alexandre Duret-Lutz <adl@gnu.org>.
+> | =A0 =A0 =A0 =A0and Alexandre Duret-Lutz <adl@gnu.org>.
 > | AUTOV is 1.11
 > | NOTE:
-> /home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/gettext/config.rpath
+> /home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/gettex=
+t/config.rpath
 > not found. gettext is not installed.
-> | NOTE: Executing autoreconf --verbose --install --force
-> --exclude=autopoint -I
-> /home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3/gawk-3.1.4/m4/
-> -I/home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/aclocal-1.11
+> | NOTE: Executing autoreconf --verbose --install --force --exclude=3Dauto=
+point
 > -I
-> /home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/aclocal
-> | /usr/bin/autoreconf: unrecognized option `--exclude=autopoint'
+> /home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3=
+/gawk-3.1.4/m4/
+> -I/home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/aclo=
+cal-1.11
+> -I
+> /home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/acloca=
+l
+> | /usr/bin/autoreconf: unrecognized option `--exclude=3Dautopoint'
 > | Try `/usr/bin/autoreconf --help' for more information.
+
+Why dont you stage autoconf-native and automake-native
+
 > | FATAL: autoreconf execution failed.
 > NOTE: package gawk-native-3.1.4-r3: task do_configure: Failed
 >
 > The same tree builds on Fedora 12
-
-A little more info
-
-Differences:
-   Fedora 12 - autoconf 2.63
-   Fedora 13 - autoconf 2.65
-
-Neither manual page mentions a '--exclude=' option.
-
-The file classes/autotools.bbclass is explicitly adding this option.
-
+>
 > Any ideas how to work past this?
 >
 > Thanks
 >
-
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+> --
+> ------------------------------------------------------------
+> Gary Thomas =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =A0Consulting for the
+> MLB Associates =A0 =A0 =A0 =A0 =A0 =A0 =A0| =A0 =A0Embedded world
+> ------------------------------------------------------------
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
