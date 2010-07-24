@@ -1,34 +1,38 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Ocmjy-0007eO-6Q
+	(envelope-from <utx@penguin.cz>) id 1Ocmzx-0004cK-KH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jul 2010 23:58:44 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id A374716601DE; Sat, 24 Jul 2010 15:58:13 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 0E89C1660FB8;
-	Sat, 24 Jul 2010 15:57:53 -0600 (MDT)
-Message-ID: <4C4B61E1.8080502@mlbassoc.com>
-Date: Sat, 24 Jul 2010 15:57:53 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C4B387F.4040407@mlbassoc.com>
-	<AANLkTimJ7urU4OQ-1BXBJgU7SZFBRyw2D+Adzw-13eDa@mail.gmail.com>
-In-Reply-To: <AANLkTimJ7urU4OQ-1BXBJgU7SZFBRyw2D+Adzw-13eDa@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+	Sun, 25 Jul 2010 00:15:14 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id B89DF1416BC6;
+	Sun, 25 Jul 2010 00:20:20 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id Ke+VF9P-kLyz; Sun, 25 Jul 2010 00:20:20 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7])
+	by ns.penguin.cz (Postfix) with ESMTP id 8B7E31416BB2;
+	Sun, 25 Jul 2010 00:20:20 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: Andrea Adami <andrea.adami@gmail.com>
+In-Reply-To: <AANLkTik35dsZ6rMfu8KJNo7ZoKd6071ELAhYmzr6T7Y+@mail.gmail.com>
+References: <E1OcfGN-0007DB-9C@melo.openembedded.org>
+	<AANLkTik35dsZ6rMfu8KJNo7ZoKd6071ELAhYmzr6T7Y+@mail.gmail.com>
+Date: Sun, 25 Jul 2010 00:14:55 +0200
+Message-ID: <1280009695.11135.21.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: Can't build on Fedora 13
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe-commits] Stanislav Brabec : akita.conf, spitz.conf: Set PREFERRED_PROVIDER for udev-compat to udev-compat141.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,72 +46,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 21:58:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Sat, 24 Jul 2010 22:15:14 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
 Content-Transfer-Encoding: 7bit
 
-On 07/24/2010 02:50 PM, Khem Raj wrote:
-> On Sat, Jul 24, 2010 at 12:01 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
->> Trying to build angstrom-gnome-image for beagleboard, fresh checkout
->> of org.openembedded.dev:
->>   commit 244deb462973a2d7a9bfcc3399843202f9d29d51
->>   Author: Stanislav Brabec<utx@penguin.cz>
->>   Date:   Sat Jul 24 14:21:03 2010 +0000
->>
->> On Fedora 13, I get this error:
->>
->> ERROR: Function do_configure failed
->> NOTE: Task failed: ('function do_configure failed',
->> '/home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3/temp/log.do_configure.10165')
->> ERROR: Logfile of failure stored in:
->> /home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3/temp/log.do_configure.10165
->> Log data follows:
->> | automake (GNU automake) 1.11.1
->> | Copyright (C) 2009 Free Software Foundation, Inc.
->> | License GPLv2+: GNU GPL version 2 or later
->> <http://gnu.org/licenses/gpl-2.0.html>
->> | This is free software: you are free to change and redistribute it.
->> | There is NO WARRANTY, to the extent permitted by law.
->> |
->> | Written by Tom Tromey<tromey@redhat.com>
->> |        and Alexandre Duret-Lutz<adl@gnu.org>.
->> | AUTOV is 1.11
->> | NOTE:
->> /home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/gettext/config.rpath
->> not found. gettext is not installed.
->> | NOTE: Executing autoreconf --verbose --install --force --exclude=autopoint
->> -I
->> /home/local/Angstrom_BeagleBoard/tmp/work/i686-linux/gawk-native-3.1.4-r3/gawk-3.1.4/m4/
->> -I/home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/aclocal-1.11
->> -I
->> /home/local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/share/aclocal
->> | /usr/bin/autoreconf: unrecognized option `--exclude=autopoint'
->> | Try `/usr/bin/autoreconf --help' for more information.
->
-> Why dont you stage autoconf-native and automake-native
+Andrea Adami wrote:
+> Stanislav,
+> 
+> thx for your work.
 
-An interesting question (that I don't know the answer to - I'm just a simple
-user...)
+You are welcome. I wanted to boot my Zaurus Terrier even after opkg
+upgrade. And the latest vanilla is still one step from going to the
+production quality.
 
-A more interesting question is that I can see that all of these tools have been
-built - my work tree shows:
-   autoconf-native-2.65-r9.0
-   automake-native-1.11.1-r3.0
-   gettext-native-0.18-r1
-so why aren't they being used?  I instrumented the do_configure script to show
-which version of autoreconf was used and indeed it is /usr/bin/autoreconf!
+> Please note that other machines (c7x0 and poodle) are needing the same
+> preference, thus I propose you move this in zaurus-2.6.inc.
+> Collie and tosa are not concerned, having 2.6.3x kernel.
 
->> | FATAL: autoreconf execution failed.
->> NOTE: package gawk-native-3.1.4-r3: task do_configure: Failed
->>
->> The same tree builds on Fedora 12
->>
->> Any ideas how to work past this?
+Feel free to do it for more machines or move this preference to the
+defaults. The setting of preference has no effect until you add proper
+lines to udev recipes.
+
+I don't know, whether all Zaurii (and in general all old kernels) can
+live with udev-compat141. I only confirmed that udev-141 works with
+2.6.26 and udev-151 does not work with 2.6.26 (needs signalfd, CLOEXEC
+and inotify_init1).
+
+udev-compat141 recipe contains short manual for other users that may
+need it.
+
+Cloning udev-compat141 to udev-compat124 should work for machines that
+would not boot even with udev-141.
+
+Well, also libudev does not work completely with 2.6.26. Hopefully,
+udev_monitor_new_from_netlink() is the only function that does work, and
+this functions is needed only by udevd. But we run udevd-compat, which
+is statically linked with the old version of the library.
+
+Note: I committed sanity_check fixes as a separate patch, so people who
+tested patches from the list can easily review these changes. (Well,
+those people may want to force rebuild, as they will need to rebuild the
+same PR.)
+
+I guess that Koen can now remove udev-static.
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
