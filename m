@@ -1,35 +1,35 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OcV13-00025g-E4
+	(envelope-from <raj.khem@gmail.com>) id 1Ocawr-0005hs-8M
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jul 2010 05:03:13 +0200
-Received: by iwn34 with SMTP id 34so860964iwn.6
+	Sat, 24 Jul 2010 11:23:15 +0200
+Received: by iwn34 with SMTP id 34so1074027iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 23 Jul 2010 20:02:57 -0700 (PDT)
+	Sat, 24 Jul 2010 02:23:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=MDjTAnr5pwbGLq8qJsKRW67V9szUpUu8ytFJTwABKHM=;
-	b=m/G1sCQr3UNSuifutb0kzA9oo44HEthhTPKXSr2dO/qOnKblZy5HI+lRlQ4rQuaIne
-	hpuLRzhtlP8gSwwqHNdi674iwh64rOXswgRA9+vR1b6ZDiLPBZE9A8G26LnlMrLy6UCS
-	kgVmI8brnSE8Kg3AXStNJxfMS7I6nBeteJwPI=
+	bh=wC5rBiXNbe3bTA9AvfN63iKkjF2K9foYhafOF4CDS48=;
+	b=DHzKkyN7eFD+Q0qMGezmlQbGCW9ddDSVowsP8hyfXB0F1b8TI01/Y5vKKbeEjWwWj2
+	ANHFq8pHtFCfJJiWfu4kzGxy8NXvvzHEA1yqIKJLSwtzLgNrSPFTmFndA/Fcj5t6OKS1
+	k4M9jcLepzT7EW3SBCQykvILo7G7V84BoAvGU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=ATyNdfCfwDhYe+b4sCCnqdRoEksXwzmGenbuMGvhVk5PuoUq+5KZFXJ5Y9WQmpuMwb
-	TB1ILS1sEJgDbRH00O4iV2GGsiMMLkZ0zLE3VBu0weAOYdcpYcTCR04kmTqrdcCfDJsC
-	GlbMbWJTb5GBYUuGzJF/X+pQmI3/HY7IAJ37E=
-Received: by 10.231.10.137 with SMTP id p9mr4662367ibp.91.1279940576137; Fri, 
-	23 Jul 2010 20:02:56 -0700 (PDT)
+	b=fEDJ180M3I2vF1XmIQO4r+oQvGcMlxag2D5g6BLv1hx5N6Kx6fPlyVulmX3f8CIru7
+	7Q7zI0z3xXHlCRYo9GaozQxJdebJ07WbO8kr438MYysZIb96T5a1HSREM584X+AuvS4H
+	lDqCiA4snc3s6p29qFZvddh/G5ORka87OS6SQ=
+Received: by 10.231.39.134 with SMTP id g6mr5155842ibe.151.1279963380171; Sat, 
+	24 Jul 2010 02:23:00 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.186.88 with HTTP; Fri, 23 Jul 2010 20:02:36 -0700 (PDT)
-In-Reply-To: <20100723114746.GA19734@mx.loc>
-References: <1279316946-8901-1-git-send-email-rep.dot.nop@gmail.com> 
-	<1279317776.7632.15.camel@mattotaupa> <20100723114746.GA19734@mx.loc>
+Received: by 10.231.186.88 with HTTP; Sat, 24 Jul 2010 02:22:40 -0700 (PDT)
+In-Reply-To: <1279886129.2692.39.camel@mill.internal.reciva.com>
+References: <1279752241-21656-1-git-send-email-raj.khem@gmail.com> 
+	<1279886129.2692.39.camel@mill.internal.reciva.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 23 Jul 2010 20:02:36 -0700
-Message-ID: <AANLkTinSO44VVBAU7WhhmXe3SyVS52fR6_-U-qrcHCXC@mail.gmail.com>
+Date: Sat, 24 Jul 2010 02:22:40 -0700
+Message-ID: <AANLkTik+1nEThDrcaehKVZy3xS5YnKED8L+j+stDrAGZ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -39,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][CFT 1/3] libmpc: bump version and cleanup staging
+Subject: Re: [PATCH] distro: Add new feature to indicate thumb-interworking.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,56 +53,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 03:03:13 -0000
+X-List-Received-Date: Sat, 24 Jul 2010 09:23:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Jul 23, 2010 at 4:47 AM, Bernhard Reutner-Fischer
-<rep.dot.nop@gmail.com> wrote:
-> On Sat, Jul 17, 2010 at 12:02:56AM +0200, Paul Menzel wrote:
->>Dear Bernhard,
+On Fri, Jul 23, 2010 at 4:55 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Wed, 2010-07-21 at 15:44 -0700, Khem Raj wrote:
+>> +# Add thumb-interwork to feature list if selected machine supports it.
+>> +DISTRO_FEATURES +=3D ' ${@["", "thumb-interwork"][bb.data.getVar('THUMB=
+_INTERWORK', d, 1) =3D=3D "yes"]}'
 >
->>> --- a/recipes/libmpc/libmpc_0.8.1.bb
->>> +++ b/recipes/libmpc/libmpc_0.8.1.bb
->>> @@ -1,13 +1,12 @@
->>> =A0require libmpc.inc
->>>
->>> =A0DEPENDS =3D "gmp mpfr"
->>> -
->>> -SRC_URI =3D "http://www.multiprecision.org/mpc/download/mpc-${PV}.tar.=
-gz"
->>> =A0S =3D "${WORKDIR}/mpc-${PV}"
->>> +NATIVE_INSTALL_WORKS =3D "1"
->>> +BBCLASSEXTEND =3D "native"
->>> +PR =3D "1"
->>>
->>> -do_stage() {
->>> - =A0 =A0autotools_stage_all
->>> -}
->>> +SRC_URI =3D "http://www.multiprecision.org/mpc/download/mpc-${PV}.tar.=
-gz"
+> Would it not be better to put this in some generic place (maybe even
+> bitbake.conf) rather than adding it to every DISTRO individually?
+
+yes thats better I guess.
+
+>
+>> --- a/conf/distro/include/slugos.inc
+>> +++ b/conf/distro/include/slugos.inc
+>> @@ -23,9 +23,18 @@ DISTRO_VERSION ?=3D "${SLUGOS_VERSION}${DISTRO_REVISI=
+ON}-${DISTRO_TYPE}"
+>> =A0# DISTRO_FEED ?=3D "${SLUGOS_VERSION}-${DISTRO_TYPE}"
+>> =A0DISTRO_FEED ?=3D "unstable"
 >>
->>Maybe you can put `SRC_URI` also in `libmpc.inc`?
+>> +THUMB_INTERWORK =3D "yes"
+>> +# "yes" "no"
+>> +# =A0 =A0Whether to compile with code to allow interworking between the=
+ two
+>> +# =A0 =A0instruction sets. =A0This allows thumb code to be executed on =
+a primarily
+>> +# =A0 =A0arm system and vice versa. =A0It is strongly recommended that =
+DISTROs not
+>> +# =A0 =A0turn this off - the actual cost is very small.
+>> =A0# We want images supporting the following features (for task-base)
+>> =A0DISTRO_FEATURES =3D "nfs smbfs wifi ppp alsa bluetooth ext2 vfat irda=
+ pcmcia usbgadget usbhost pci"
 >
-> mpc seems to be only available as .tar.gz (you even get a .tar.gz if you
-> ask their server for a .tar.xz ATM, apache anti-typo module,
-> apparently), so yes, i'll do that as a follow-up once these 3 are in,
-> ok?
->
->>Otherwise it looks fine.
->>
->>Acked-by: Paul Menzel <paulepanter@users.sourceforge.net>
->
-> ping these three (mpc, mpfr, gmp)
->
-> Please, somebody with write privs for oe, install.
-> TIA,
->
+> Is this a policy change for slugos? =A0If so, are the SlugOS people happy
+> with it?
 
-I have them staged dont worry once the heavy changes are settled it will be=
- in.
+I have tried to build for slugos and the device nslu2 is based on xscale so=
+ I
+this this should be needed for slugos.
 
 
+>
+> p.
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
