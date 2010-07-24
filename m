@@ -1,41 +1,50 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OciWv-0001oz-KH
+	(envelope-from <raj.khem@gmail.com>) id 1Ocjql-0001NS-E6
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 24 Jul 2010 19:28:58 +0200
-Received: by bwz10 with SMTP id 10so2343090bwz.6
+	Sat, 24 Jul 2010 20:53:32 +0200
+Received: by iwn34 with SMTP id 34so1452143iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 24 Jul 2010 10:28:45 -0700 (PDT)
+	Sat, 24 Jul 2010 11:53:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=AFGTkWoz3+jVlpuYePAIWUcaBm0TlD2ZMmFYNUHWBgQ=;
-	b=Cf4Ujyd6XImuULA+GCZiqHNmmmttqiMFjcPKiPEdwN55puQg8dbNFOLluiPzMXITgo
-	Ljs2e451ddI0sf+7SjRvCTAKTHeWFQwgFS0L2UaW3r3VPGK7RBsGTgpeBExp3OnC5BEd
-	dpeI/ATClgItDG8knZ+ToxzewDtD2QBCZb6AE=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=q39f8L9iQlAF282q/SsGzeoSoMC/aoHW0V2Fx7kIyuc=;
+	b=Rwfs8RlaT/9SzGduH7pxLK72xZo9b2YHiiYZ9FGpcJ3kiVkhRP1R0cSS0Um3jjZ876
+	PO5M7VkhlG9kB2W///32YyrXTBnnTY4vlyndW1wX2a7iAxFhLmZwnkFMr7KlvhZ+n89S
+	oT8rw5y8jVY6pwvabqGPggAFYNUAxJL6H61WQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=gIm4wMa8RenGwXUqZlXTVwWl0btGc8WskNwy5qafa3m1vVlRPaLYArKKlpnDOwqsPB
-	IaSUH866Pf0XaQ8XW3uhx9YHyfBd8P5PIOnJ79T6ZfFu1usUS+2x5W1oH7CQ8bHUyBFB
-	v1FCUi4DYWscUz/srd3941uJPi97mI9AccBNQ=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=btfgl2vCvHf39Su50thSIuedse7IooOKTFJJ/8ea6wzjKW1k2gM+XjJoimKQ3Vck6a
+	0R4yQblqCHbZMVd/TlAG31TVxR+OnrJDHxS3/IlojqoOW/RZ5MlP3GY636jri3aZHlZD
+	0aibnCVvVgBqBy3J0jR247efKa0cSg18lqz8k=
+Received: by 10.231.149.3 with SMTP id r3mr5762991ibv.109.1279997598226; Sat, 
+	24 Jul 2010 11:53:18 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.204.21.135 with SMTP id j7mr3452066bkb.198.1279992525641; Sat, 
-	24 Jul 2010 10:28:45 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sat, 24 Jul 2010 10:28:45 -0700 (PDT)
-Date: Sat, 24 Jul 2010 19:28:45 +0200
-Message-ID: <AANLkTinADxGHsKKSmZQ6TXq=mk1SmsipHNyjLhHNxC1P@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.186.88 with HTTP; Sat, 24 Jul 2010 11:52:58 -0700 (PDT)
+In-Reply-To: <AANLkTinerH6EoKXHEcZa4As35XHbeVo8nk4BqkvDNnRV@mail.gmail.com>
+References: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com> 
+	<4C4AE42C.5000306@welchs.me.uk>
+	<AANLkTimG_U4Gsc9LuK6oKDJO2rE=xB7cDQzGf6dsh2GM@mail.gmail.com> 
+	<4C4B0125.1040304@vollmann.ch>
+	<AANLkTi=MJyW68ppn7YH-1LNp3rVwii9Gas+kUjQYAEEo@mail.gmail.com> 
+	<AANLkTimfB5y2WDyrNr7EZD+gFDS4cE-F_LkquAtD+UZF@mail.gmail.com> 
+	<AANLkTinerH6EoKXHEcZa4As35XHbeVo8nk4BqkvDNnRV@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 24 Jul 2010 11:52:58 -0700
+Message-ID: <AANLkTi=3tLxtsvO-ETEW90+Y-AH7=02kqeF8tzS1Cfhc@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: perl 5.8.8 issue
+Subject: Re: [RFC] get rid of legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,46 +58,95 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 17:28:58 -0000
+X-List-Received-Date: Sat, 24 Jul 2010 18:53:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-While trying to get perl running with new style staging I bumped upon the
-following issue:
+On Sat, Jul 24, 2010 at 10:22 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/7/24 Chris Larson <clarson@kergoth.com>
+>
+>> On Sat, Jul 24, 2010 at 9:08 AM, Frans Meulenbroeks <
+>> fransmeulenbroeks@gmail.com> wrote:
+>>
+>> > 2010/7/24 Detlef Vollmann <dv@vollmann.ch>
+>> >
+>> > > On 07/24/10 16:35, Frans Meulenbroeks wrote:
+>> > >
+>> > >> 2010/7/24 Martyn Welch <martyn@welchs.me.uk>
+>> > >>
+>> > >> =A0Can anyone point me to any documentation that describes what leg=
+acy
+>> > >>> staging
+>> > >>> is and roughly what needs to be done to remove it?
+>> > >>>
+>> > >>
+>> > >
+>> > >> There was a post half a year or so ago from Koen, but I can't find =
+it.
+>> > >> Basically it boils down to removing do_stage from a recipe in which
+>> case
+>> > >> do_install is used to install things in staging
+>> > >> in some cases do_install need to be modified to deal with
+>> peculiarities
+>> > >> that
+>> > >> were done in do_stage
+>> > >>
+>> > >> For native recipes NATIVE_INSTALL_WORKS =3D "1" may need to be adde=
+d.
+>> > >>
+>> > > That's not really much of an explanation.
+>> > > Let's take an example. =A0I have two out of tree kernel modules A an=
+d B.
+>> > > B depends on A.
+>> > > With "legacy" staging, in A_1.0.bb I have a do_install, that copies
+>> > > the kernel object, and a do_stage, that copies the header file at
+>> > > a place where B_1.0.bb can find it.
+>> > >
+>> > > How do I do that with non-"legacy" staging?
+>> > >
+>> >
+>> > Apologies if my explanation was too brief. Didn't have too much time (=
+and
+>> > still haven't)
+>> > I hope Koen's explanation below helps.
+>> > The way I perceive it is that the non-legacy staging is performed by
+>> doing
+>> > a
+>> > do_install with the staging dir as target directory.
+>> > Guess someone will correct this if I am wrong.
+>>
+>>
+>> You never touch a staging directory from do_install, ever. =A0You instal=
+l
+>> into
+>> the usual paths, relative to ${D}, and the machinery in the classes will
+>> automatically populate staging from that. =A0If you need to mangle a fil=
+e
+>>
+>
+> That is what actually what I wanted to say but apparently failed to expre=
+ss
+> properly
+> It is indeed the machinery that does the work, not the user itself.
+>
+> Frans.
+>
+>> differently in staging from how you want it in your package, you can
+>> install
+>> a hook that will be called at staging population time.
+>> --
 
-/home/frans/oe/tmp_angstrom/sysroots/i686-linux/usr/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/include/stdbool.h:36:1:
-warning: this is the location of the previous definition
-In file included from
-/home/frans/oe/tmp_angstrom/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/perl/5.8.8/CORE/op.h:497,
-                 from
-/home/frans/oe/tmp_angstrom/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/perl/5.8.8/CORE/perl.h:2754,
-                 from Curses.c:46:
-/home/frans/oe/tmp_angstrom/sysroots/armv5te-angstrom-linux-gnueabi/usr/lib/perl/5.8.8/CORE/reentr.h:612:
-error: field '_crypt_struct' has incomplete type
 
-This happens when building
-virtual:native:/home/frans/oe/openembedded/recipes/perl/
-libcurses-perl_1.28.bb
-as it is with a native recipe I suspect this is a perl issue not related to
-my staging changes.
+when we are at it may be at the same time look into converting native recip=
+es
+to use BBCLASSEXTEND. In my experience whenever I went to remove legacy
+staging I ended up converting the native recipes to use BBCLASSEXTEND along
+with
 
-reentrt 612 looks like
+I have a huge patch where I have removed inherit autotools_staging from
+all recipes in OE. I havent tested it so far but should be done in few days
 
-#ifdef HAS_CRYPT_R
-#if CRYPT_R_PROTO == REENTRANT_PROTO_B_CCD
-        CRYPTD* _crypt_data;
-#else
-        struct crypt_data _crypt_struct;
-#endif
-#endif /* HAS_CRYPT_R */
+-Khem
 
-where line 612 is the struct crypt_data line.
-This struct lives in crypt.h but apparently this one is not included (or the
-typedef is commented out)
-
-
-I've found I have this issue with a few more perl recipes.
-
-Anyone seen this before?
-
-Frans
 
