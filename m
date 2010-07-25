@@ -1,43 +1,51 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Od47l-0007eK-5D
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Od60S-0002zE-Cl
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 18:32:33 +0200
-Received: by eyf5 with SMTP id 5so359212eyf.6
+	Sun, 25 Jul 2010 20:33:02 +0200
+Received: by bwz10 with SMTP id 10so2659962bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jul 2010 09:32:12 -0700 (PDT)
+	Sun, 25 Jul 2010 11:32:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=+xtPErD1zyhNyXaHB9R9VRN2+H/Rm5KgN1LJ5aXehKk=;
-	b=Oh8WKoJSy6i8JToPMAKPhF4mOA710t/xJ8ryomhcoD3c0K19NgmzT5iu7lJbg79zDy
-	yhLQkaYY5Pv755xoJpMDf0zZg02+fO6ePP6lrwWhg4va6dXdqZuDUB/hKSBZtGfWtBeK
-	AW/Pf9kAJMvT3u5vmZK1OlwR6HYuVVvqzX0S0=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=d8bg90FkSjEaqpGUor/5+BgvPTNKoFtydragAPrpeuM=;
+	b=l89UW4ui5A+aUwgsd/NB8pTAOvRFy2D2emdgQWhrTClg/MzP/61Javr4RnCYaz8q8V
+	eoFRk7AxOfAd+toe0xgH3AkR8HUen6lyHgMpIzZ35+dXw55gRuG/5mFHABGSSodkxSzV
+	SBjoJeVDv4mQxfnS1rEUt5tFsS7GJodLkhnxw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=gMd7VVKy4hyimJDU/qM9NmtE8m5sHrx1Kse61fm1bmoXAzur9CHeGw6qPUqeE4yARm
-	6/Md6LAKERIg8CkuzdRy7V6nvs09F7PMneKIwS+rbbLn+c8eKTt1+S01d+r42XHGqx5H
-	P6+lxfpssss1JbugQHiqBls4pXXnbL110fr8k=
-Received: by 10.213.33.197 with SMTP id i5mr2768881ebd.44.1280075532100;
-	Sun, 25 Jul 2010 09:32:12 -0700 (PDT)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id a48sm4120358eei.13.2010.07.25.09.32.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 25 Jul 2010 09:32:11 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=hT9tHImbRIJUrEpby3jDPmC9xtX8deoxzi2SuklUHOEJobRrkjpjnh/bhsaU1hvpwL
+	vZpaQa3SS01131c2E0r2gEdsTILvPmQ5xL1IQoPj0HNqSxTaSlC4j9AjtC5CccR5ibQb
+	oZ85b/bJxbIn+utq41i9QkbEfXQQ7E5BLRm8A=
+MIME-Version: 1.0
+Received: by 10.204.126.92 with SMTP id b28mr4843536bks.47.1280082767065; Sun, 
+	25 Jul 2010 11:32:47 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Sun, 25 Jul 2010 11:32:46 -0700 (PDT)
+In-Reply-To: <AANLkTi=3tLxtsvO-ETEW90+Y-AH7=02kqeF8tzS1Cfhc@mail.gmail.com>
+References: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com>
+	<4C4AE42C.5000306@welchs.me.uk>
+	<AANLkTimG_U4Gsc9LuK6oKDJO2rE=xB7cDQzGf6dsh2GM@mail.gmail.com>
+	<4C4B0125.1040304@vollmann.ch>
+	<AANLkTi=MJyW68ppn7YH-1LNp3rVwii9Gas+kUjQYAEEo@mail.gmail.com>
+	<AANLkTimfB5y2WDyrNr7EZD+gFDS4cE-F_LkquAtD+UZF@mail.gmail.com>
+	<AANLkTinerH6EoKXHEcZa4As35XHbeVo8nk4BqkvDNnRV@mail.gmail.com>
+	<AANLkTi=3tLxtsvO-ETEW90+Y-AH7=02kqeF8tzS1Cfhc@mail.gmail.com>
+Date: Sun, 25 Jul 2010 20:32:46 +0200
+Message-ID: <AANLkTimbeZanQ_UKEcdEnqcYQji+1n3Si2nA8CNdrkpZ@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 25 Jul 2010 18:32:05 +0200
-Message-Id: <1280075525-31322-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Connect-IP: 209.85.214.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] cpan.bbclass: removed legacy staging
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [RFC] get rid of legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,93 +59,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Jul 2010 16:32:35 -0000
+X-List-Received-Date: Sun, 25 Jul 2010 18:33:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-bumped PR for the main perl recipes so this change takes effect
+2010/7/24 Khem Raj <raj.khem@gmail.com>
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
+> On Sat, Jul 24, 2010 at 10:22 AM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+> > 2010/7/24 Chris Larson <clarson@kergoth.com>
+> >
+> >> On Sat, Jul 24, 2010 at 9:08 AM, Frans Meulenbroeks <
+> >> fransmeulenbroeks@gmail.com> wrote:
+> >>
+> >> > 2010/7/24 Detlef Vollmann <dv@vollmann.ch>
+> >> >
+> >> > > On 07/24/10 16:35, Frans Meulenbroeks wrote:
+> >> > >
+> >> > >> 2010/7/24 Martyn Welch <martyn@welchs.me.uk>
+> >> > >>
+> >> > >>  Can anyone point me to any documentation that describes what
+> legacy
+> >> > >>> staging
+> >> > >>> is and roughly what needs to be done to remove it?
+> >> > >>>
+> >> > >>
+> >> > >
+> >> > >> There was a post half a year or so ago from Koen, but I can't find
+> it.
+> >> > >> Basically it boils down to removing do_stage from a recipe in which
+> >> case
+> >> > >> do_install is used to install things in staging
+> >> > >> in some cases do_install need to be modified to deal with
+> >> peculiarities
+> >> > >> that
+> >> > >> were done in do_stage
+> >> > >>
+> >> > >> For native recipes NATIVE_INSTALL_WORKS = "1" may need to be added.
+> >> > >>
+> >> > > That's not really much of an explanation.
+> >> > > Let's take an example.  I have two out of tree kernel modules A and
+> B.
+> >> > > B depends on A.
+> >> > > With "legacy" staging, in A_1.0.bb I have a do_install, that copies
+> >> > > the kernel object, and a do_stage, that copies the header file at
+> >> > > a place where B_1.0.bb can find it.
+> >> > >
+> >> > > How do I do that with non-"legacy" staging?
+> >> > >
+> >> >
+> >> > Apologies if my explanation was too brief. Didn't have too much time
+> (and
+> >> > still haven't)
+> >> > I hope Koen's explanation below helps.
+> >> > The way I perceive it is that the non-legacy staging is performed by
+> >> doing
+> >> > a
+> >> > do_install with the staging dir as target directory.
+> >> > Guess someone will correct this if I am wrong.
+> >>
+> >>
+> >> You never touch a staging directory from do_install, ever.  You install
+> >> into
+> >> the usual paths, relative to ${D}, and the machinery in the classes will
+> >> automatically populate staging from that.  If you need to mangle a file
+> >>
+> >
+> > That is what actually what I wanted to say but apparently failed to
+> express
+> > properly
+> > It is indeed the machinery that does the work, not the user itself.
+> >
+> > Frans.
+> >
+> >> differently in staging from how you want it in your package, you can
+> >> install
+> >> a hook that will be called at staging population time.
+> >> --
+>
+>
+> when we are at it may be at the same time look into converting native
+> recipes
+> to use BBCLASSEXTEND. In my experience whenever I went to remove legacy
+> staging I ended up converting the native recipes to use BBCLASSEXTEND along
+> with
+>
 
-removed legacy staging
+We still have 400 native recipes. in 270 or so directories
 
-as QA compared with the poky version.
-Also build all perl/lib* recipes with it (using perl 5.8.8).
-5 of these fail:
-ERROR: 'virtual:native:/home/frans/oe/openembedded/recipes/perl/libcurses-perl_1.28.bb' failed
-ERROR: '/home/frans/oe/openembedded/recipes/perl/libcurses-perl_1.28.bb' failed
-ERROR: '/home/frans/oe/openembedded/recipes/perl/libsocket6-perl_0.23.bb' failed
-ERROR: '/home/frans/oe/openembedded/recipes/perl/libdbd-mysql-perl-native_4.010.bb' failed
-ERROR: '/home/frans/oe/openembedded/recipes/perl/libencode-detect-perl_1.01.bb' failed
-However these 5 also failed before making the change.
-These recipes are broken and I did not see an apparent fix
+>
+> I have a huge patch where I have removed inherit autotools_staging from
+> all recipes in OE. I havent tested it so far but should be done in few days
+>
 
-please ack as this affects all perl cpan recipes.
+Cool, that would be a great step.
 
- classes/cpan.bbclass        |   15 ++++-----------
- recipes/perl/perl_5.10.1.bb |    2 +-
- recipes/perl/perl_5.8.8.bb  |    2 +-
- 3 files changed, 6 insertions(+), 13 deletions(-)
-
-diff --git a/classes/cpan.bbclass b/classes/cpan.bbclass
-index dfc0926..24e0c6e 100644
---- a/classes/cpan.bbclass
-+++ b/classes/cpan.bbclass
-@@ -13,6 +13,8 @@ export PERL_INC = "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}/CORE"
- export PERL_LIB = "${STAGING_DATADIR}/perl/${@get_perl_version(d)}"
- export PERL_ARCHLIB = "${STAGING_LIBDIR}/perl/${@get_perl_version(d)}"
- 
-+NATIVE_INSTALL_WORKS = "1"
-+
- cpan_do_configure () {
- 	yes '' | perl Makefile.PL ${EXTRA_CPANFLAGS}
- 	if [ "${BUILD_SYS}" != "${HOST_SYS}" ]; then
-@@ -31,16 +33,7 @@ cpan_do_compile () {
- }
- 
- cpan_do_install () {
--	if [ ${@is_target(d)} = "yes" ]; then
--		oe_runmake install_vendor
--	fi
--}
--
--cpan_do_stage () {
--	if [ ${@is_target(d)} = "no" ]; then
--		oe_runmake install_vendor
--	fi
-+	oe_runmake DESTDIR="${D}" install_vendor
- }
--								
- 
--EXPORT_FUNCTIONS do_configure do_compile do_install do_stage
-+EXPORT_FUNCTIONS do_configure do_compile do_install
-diff --git a/recipes/perl/perl_5.10.1.bb b/recipes/perl/perl_5.10.1.bb
-index 86b08dc..e7c90d8 100644
---- a/recipes/perl/perl_5.10.1.bb
-+++ b/recipes/perl/perl_5.10.1.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r7"
-+PR = "r8"
- 
- # Not tested enough
- DEFAULT_PREFERENCE = "-1"
-diff --git a/recipes/perl/perl_5.8.8.bb b/recipes/perl/perl_5.8.8.bb
-index c73fe4e..29ae66c 100644
---- a/recipes/perl/perl_5.8.8.bb
-+++ b/recipes/perl/perl_5.8.8.bb
-@@ -5,7 +5,7 @@ LICENSE = "Artistic|GPL"
- PRIORITY = "optional"
- # We need gnugrep (for -I)
- DEPENDS = "virtual/db perl-native grep-native"
--PR = "r34"
-+PR = "r35"
- 
- # Major part of version
- PVM = "5.8"
--- 
-1.6.4.2
-
-
+>
+> -Khem
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
