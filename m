@@ -1,36 +1,35 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Od2r4-0000iV-RM for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 17:11:07 +0200
+	id 1Od2zL-0000xF-9b for openembedded-devel@lists.openembedded.org;
+	Sun, 25 Jul 2010 17:19:39 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Od2qo-0004hZ-Oz for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 17:10:50 +0200
+	id 1Od2z7-0007tl-Pm for openembedded-devel@lists.openembedded.org;
+	Sun, 25 Jul 2010 17:19:25 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jul 2010 17:10:50 +0200
+	Sun, 25 Jul 2010 17:19:25 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jul 2010 17:10:50 +0200
+	Sun, 25 Jul 2010 17:19:25 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 25 Jul 2010 17:10:41 +0200
-Message-ID: <i2hk5h$86q$1@dough.gmane.org>
+Date: Sun, 25 Jul 2010 17:19:18 +0200
+Message-ID: <i2hklm$9no$1@dough.gmane.org>
 References: <1279963975-3736-1-git-send-email-raj.khem@gmail.com>
 	<i2fjoo$iiu$1@dough.gmane.org> <20100724212502.GA4218@gmail.com>
 	<i2gsqi$8sv$1@dough.gmane.org> <i2h6dv$1ni$1@dough.gmane.org>
-	<i2harj$e6t$1@dough.gmane.org>
-	<AANLkTik9ZnjaXvx6vxnjzxx013ms+cDjVv1FvsK31r5u@mail.gmail.com>
+	<AANLkTi=oZobRgCAqUv+vtYocHvH2BSbRBH-V09GEJrrc@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <AANLkTik9ZnjaXvx6vxnjzxx013ms+cDjVv1FvsK31r5u@mail.gmail.com>
+In-Reply-To: <AANLkTi=oZobRgCAqUv+vtYocHvH2BSbRBH-V09GEJrrc@mail.gmail.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -54,105 +53,96 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Jul 2010 15:11:07 -0000
+X-List-Received-Date: Sun, 25 Jul 2010 15:19:40 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 25-07-10 16:41, Khem Raj wrote:
-> On Sun, Jul 25, 2010 at 5:31 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> On 25-07-10 13:16, Koen Kooi wrote:
->>>> On 25-07-10 10:32, Koen Kooi wrote:
->>>>> On 24-07-10 23:25, Khem Raj wrote:
->>>>>> On (24/07/10 22:51), Koen Kooi wrote:
->>>>>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>>>>> Hash: SHA1
+On 25-07-10 16:30, Khem Raj wrote:
+> On Sun, Jul 25, 2010 at 4:16 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 25-07-10 10:32, Koen Kooi wrote:
+>>>> On 24-07-10 23:25, Khem Raj wrote:
+>>>>> On (24/07/10 22:51), Koen Kooi wrote:
+>>>>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>>>>> Hash: SHA1
+>>>>>>
+>>>>>> On 24-07-10 11:32, Khem Raj wrote:
+>>>>>>> Hi
 >>>>>>>
->>>>>>> On 24-07-10 11:32, Khem Raj wrote:
->>>>>>>> Hi
->>>>>>>>
->>>>>>>> Following three patches are for making multi-machine toolchains co-exist with
->>>>>>>> new cross staging for toolchain.
->>>>>>>>
->>>>>>>> It changes the toolchain triplet from TARGET_ARCH-VENDOR-OS to TARGET_SUB_ARCH-VENDOR-OS
->>>>>>>>
->>>>>>>> which means that a toolchain for armv7 is called armv7-oe-linux-gnueabi-*
->>>>>>>> and for armv5te its called armv5te-oe-linux-gnueabi-*
->>>>>>>>
->>>>>>>> They can coexist in same native sysroot. The symlinks would mean that
->>>>>>>> gcc will not accidently mix the assemblers or linkers.
->>>>>>>>
->>>>>>>> I have booted a minimal-image on qemuarm successfully. The build for
->>>>>>>> beagleboard in same sysroot is underway.
->>>>>>>>
->>>>>>>> Please give it a shot in your environments (especially Koen's env)
+>>>>>>> Following three patches are for making multi-machine toolchains co-exist with
+>>>>>>> new cross staging for toolchain.
 >>>>>>>
->>>>>>> MACHINE=beagleboard bitbake nano ; MACHINE=hawkboard bitbake nano work,
->>>>>>> going to try a bigger build now.
+>>>>>>> It changes the toolchain triplet from TARGET_ARCH-VENDOR-OS to TARGET_SUB_ARCH-VENDOR-OS
+>>>>>>>
+>>>>>>> which means that a toolchain for armv7 is called armv7-oe-linux-gnueabi-*
+>>>>>>> and for armv5te its called armv5te-oe-linux-gnueabi-*
+>>>>>>>
+>>>>>>> They can coexist in same native sysroot. The symlinks would mean that
+>>>>>>> gcc will not accidently mix the assemblers or linkers.
+>>>>>>>
+>>>>>>> I have booted a minimal-image on qemuarm successfully. The build for
+>>>>>>> beagleboard in same sysroot is underway.
+>>>>>>>
+>>>>>>> Please give it a shot in your environments (especially Koen's env)
+>>>>>>
+>>>>>> MACHINE=beagleboard bitbake nano ; MACHINE=hawkboard bitbake nano work,
+>>>>>> going to try a bigger build now.
 >>>>
->>>>>> You will need 4th patch which is attached here, for the sdk recipes.
+>>>>> You will need 4th patch which is attached here, for the sdk recipes.
 >>>>
->>>>> OK, applied that as well, 'MACHINE=beagleboard bitbake console-image ;
->>>>> MACHINE=hawkboard bitbake console-image' works as well.
->>>>> Let's see what xbmc does :)
->>>>
->>>> xbmc builds, but mplayer and gstreamer-ti fail.
->>>>
->>>> The fix for mplayer is simple, change configure:2106 from
->>>> arm|armv4t|armv5te) to arm*).
->>>>
->>>> The gstreamer-ti one is a bit harder to fix:
->>>>
->>>> | checking host system type... Invalid configuration
->>>> `beagleboard-angstrom-linux-gnueabi': machine `beagleboard-angstrom' not
->>>> recognized
->>>> | configure: error: /bin/sh ./config.sub
->>>> beagleboard-angstrom-linux-gnueabi failed
->>>>
->>>> That recipe is machine specific, so for TARGET_ARCH == MACHINE_ARCH we
->>>> probably need to change things. Does anyone have a sample on how to do that?
+>>>> OK, applied that as well, 'MACHINE=beagleboard bitbake console-image ;
+>>>> MACHINE=hawkboard bitbake console-image' works as well.
+>>>> Let's see what xbmc does :)
 > 
-> And cacao:
+> xbmc builds, but mplayer and gstreamer-ti fail.
 > 
-> | configure: error: armv7a systems are not supported at this time
-> | ERROR: Function do_configure failed
+> The fix for mplayer is simple, change configure:2106 from
+> arm|armv4t|armv5te) to arm*).
 > 
->> yes I was expecting that kind of problems. openssl also has similar issues.
+> The gstreamer-ti one is a bit harder to fix:
 > 
->> another idea that struck me was that we could change the target triplet to drop
->> TARGET_VENDOR and replace it with TARGET_SUB_ARCH and TARGET_SUBARCH
->> could be anything
->> we could even make it same as MACHINE_ARCH which means you will build
->> toolchain per machine
->> and they will live together.
+> | checking host system type... Invalid configuration
+> `beagleboard-angstrom-linux-gnueabi': machine `beagleboard-angstrom' not
+> recognized
+> | configure: error: /bin/sh ./config.sub
+> beagleboard-angstrom-linux-gnueabi failed
 > 
->> then the tool names will be something like arm-v7-linux-gnueabi-*
->> powerpc-e500-linux-gnu
->> mips-mips2-linux etc. instead of *-angstrom-*- or *-oe-*-
+> That recipe is machine specific, so for TARGET_ARCH == MACHINE_ARCH we
+> probably need to change things. Does anyone have a sample on how to do that?
 > 
->> or arm-beagleboad-linux-gnueabi-* etc if we go with MACHINE_ARCH
 > 
->> that would keep all recipe configury happy as the arch detected from
->> config.guess will be what
->> we had (arm, mips, mipsel powerpc etc) so no changes needed but we
->> will have to drop the brand
-> 
->> does it sound good ? bad?
+>> Actually I have yet another patch which uses a new variable called
+>> TARGET_SUB_ARCH
+>> which fixes this issue. I am attaching this here.
 
-I don't think abusing target vendor for that is a good idea. And I'm
-quite attached to my angstrom branded toolchains, tbh.
+That gives me a lot of:
 
-regards,
-
-Koen
+NOTE: Handling BitBake files: / (7837/8428) [92 %]ERROR: Information not
+available for target 'armv7a-linux-gnueabi'
+ERROR: argument of type 'NoneType' is not iterable while parsing
+/OE/org.openembedded.dev/recipes/openssl/openssl_0.9.7g.bb
+ERROR: Information not available for target 'armv7a-linux-gnueabi'
+NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
+iterable while evaluating:
+${@siteinfo_get_endianess(d)}
+NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
+iterable while evaluating:
+${@base_conditional('SITEINFO_ENDIANESS', 'le', '-DL_ENDIAN',
+'-DB_ENDIAN', d)}         -DTERMIO -fexpensive-optimizations
+- -frename-registers -fomit-frame-pointer -O2 -ggdb3 -Wall
+NOTE: <type 'exceptions.TypeError'>:argument of type 'NoneType' is not
+iterable while evaluating:
+${@'${CFLAG}'.replace('-O2', '')}
+ERROR: argument of type 'NoneType' is not iterable while parsing
+/OE/org.openembedded.dev/recipes/openssl/openssl_0.9.7g.bb
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMTFPwMkyGM64RGpERAs9AAJ0bVObloBojA0EJmNXnsaruS3NENQCgqClW
-e463bslpzDHNgdUQezMCTa0=
-=SYZ6
+iD8DBQFMTFX2MkyGM64RGpERAhIOAKCER+vxmHJW9lxS/fT07h3lAmMW+ACcCd2V
+sEdfPtSpiY7XEEryEqueNhA=
+=pD3d
 -----END PGP SIGNATURE-----
 
 
