@@ -1,51 +1,42 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Od60S-0002zE-Cl
+	(envelope-from <utx@penguin.cz>) id 1Od6GU-0006Tc-0V
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 20:33:02 +0200
-Received: by bwz10 with SMTP id 10so2659962bwz.6
+	Sun, 25 Jul 2010 20:49:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id EA0B81416BAC
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jul 2010 11:32:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=d8bg90FkSjEaqpGUor/5+BgvPTNKoFtydragAPrpeuM=;
-	b=l89UW4ui5A+aUwgsd/NB8pTAOvRFy2D2emdgQWhrTClg/MzP/61Javr4RnCYaz8q8V
-	eoFRk7AxOfAd+toe0xgH3AkR8HUen6lyHgMpIzZ35+dXw55gRuG/5mFHABGSSodkxSzV
-	SBjoJeVDv4mQxfnS1rEUt5tFsS7GJodLkhnxw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=hT9tHImbRIJUrEpby3jDPmC9xtX8deoxzi2SuklUHOEJobRrkjpjnh/bhsaU1hvpwL
-	vZpaQa3SS01131c2E0r2gEdsTILvPmQ5xL1IQoPj0HNqSxTaSlC4j9AjtC5CccR5ibQb
-	oZ85b/bJxbIn+utq41i9QkbEfXQQ7E5BLRm8A=
-MIME-Version: 1.0
-Received: by 10.204.126.92 with SMTP id b28mr4843536bks.47.1280082767065; Sun, 
-	25 Jul 2010 11:32:47 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sun, 25 Jul 2010 11:32:46 -0700 (PDT)
-In-Reply-To: <AANLkTi=3tLxtsvO-ETEW90+Y-AH7=02kqeF8tzS1Cfhc@mail.gmail.com>
-References: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com>
-	<4C4AE42C.5000306@welchs.me.uk>
-	<AANLkTimG_U4Gsc9LuK6oKDJO2rE=xB7cDQzGf6dsh2GM@mail.gmail.com>
-	<4C4B0125.1040304@vollmann.ch>
-	<AANLkTi=MJyW68ppn7YH-1LNp3rVwii9Gas+kUjQYAEEo@mail.gmail.com>
-	<AANLkTimfB5y2WDyrNr7EZD+gFDS4cE-F_LkquAtD+UZF@mail.gmail.com>
-	<AANLkTinerH6EoKXHEcZa4As35XHbeVo8nk4BqkvDNnRV@mail.gmail.com>
-	<AANLkTi=3tLxtsvO-ETEW90+Y-AH7=02kqeF8tzS1Cfhc@mail.gmail.com>
-Date: Sun, 25 Jul 2010 20:32:46 +0200
-Message-ID: <AANLkTimbeZanQ_UKEcdEnqcYQji+1n3Si2nA8CNdrkpZ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 25 Jul 2010 20:54:46 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 82fZ8Tq0VKRN
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Jul 2010 20:54:46 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id B95ED1416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Jul 2010 20:54:46 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <AANLkTinYV5jJRxJVqU83HNe0z2ywBpVBiJiNZVCxXYca@mail.gmail.com>
+References: <E1OcfGN-0007DB-9C@melo.openembedded.org>
+	<AANLkTik35dsZ6rMfu8KJNo7ZoKd6071ELAhYmzr6T7Y+@mail.gmail.com>
+	<1280009695.11135.21.camel@utx.lan>
+	<AANLkTinYV5jJRxJVqU83HNe0z2ywBpVBiJiNZVCxXYca@mail.gmail.com>
+Date: Sun, 25 Jul 2010 20:49:19 +0200
+Message-ID: <1280083759.29269.8.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC] get rid of legacy staging
+Subject: Re: [oe-commits] Stanislav Brabec : akita.conf, spitz.conf: Set PREFERRED_PROVIDER for udev-compat to udev-compat141.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,106 +50,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Jul 2010 18:33:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 25 Jul 2010 18:49:34 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 7bit
 
-2010/7/24 Khem Raj <raj.khem@gmail.com>
+Bernhard Reutner-Fischer wrote:
+> Just curious.. but wouldn't the logical scheme be that linux-2.6.26 sets the
+> preferred udev version?
 
-> On Sat, Jul 24, 2010 at 10:22 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
-> > 2010/7/24 Chris Larson <clarson@kergoth.com>
-> >
-> >> On Sat, Jul 24, 2010 at 9:08 AM, Frans Meulenbroeks <
-> >> fransmeulenbroeks@gmail.com> wrote:
-> >>
-> >> > 2010/7/24 Detlef Vollmann <dv@vollmann.ch>
-> >> >
-> >> > > On 07/24/10 16:35, Frans Meulenbroeks wrote:
-> >> > >
-> >> > >> 2010/7/24 Martyn Welch <martyn@welchs.me.uk>
-> >> > >>
-> >> > >>  Can anyone point me to any documentation that describes what
-> legacy
-> >> > >>> staging
-> >> > >>> is and roughly what needs to be done to remove it?
-> >> > >>>
-> >> > >>
-> >> > >
-> >> > >> There was a post half a year or so ago from Koen, but I can't find
-> it.
-> >> > >> Basically it boils down to removing do_stage from a recipe in which
-> >> case
-> >> > >> do_install is used to install things in staging
-> >> > >> in some cases do_install need to be modified to deal with
-> >> peculiarities
-> >> > >> that
-> >> > >> were done in do_stage
-> >> > >>
-> >> > >> For native recipes NATIVE_INSTALL_WORKS = "1" may need to be added.
-> >> > >>
-> >> > > That's not really much of an explanation.
-> >> > > Let's take an example.  I have two out of tree kernel modules A and
-> B.
-> >> > > B depends on A.
-> >> > > With "legacy" staging, in A_1.0.bb I have a do_install, that copies
-> >> > > the kernel object, and a do_stage, that copies the header file at
-> >> > > a place where B_1.0.bb can find it.
-> >> > >
-> >> > > How do I do that with non-"legacy" staging?
-> >> > >
-> >> >
-> >> > Apologies if my explanation was too brief. Didn't have too much time
-> (and
-> >> > still haven't)
-> >> > I hope Koen's explanation below helps.
-> >> > The way I perceive it is that the non-legacy staging is performed by
-> >> doing
-> >> > a
-> >> > do_install with the staging dir as target directory.
-> >> > Guess someone will correct this if I am wrong.
-> >>
-> >>
-> >> You never touch a staging directory from do_install, ever.  You install
-> >> into
-> >> the usual paths, relative to ${D}, and the machinery in the classes will
-> >> automatically populate staging from that.  If you need to mangle a file
-> >>
-> >
-> > That is what actually what I wanted to say but apparently failed to
-> express
-> > properly
-> > It is indeed the machinery that does the work, not the user itself.
-> >
-> > Frans.
-> >
-> >> differently in staging from how you want it in your package, you can
-> >> install
-> >> a hook that will be called at staging population time.
-> >> --
->
->
-> when we are at it may be at the same time look into converting native
-> recipes
-> to use BBCLASSEXTEND. In my experience whenever I went to remove legacy
-> staging I ended up converting the native recipes to use BBCLASSEXTEND along
-> with
->
+Kernel is machine specific package, udev has machine independent
+version.
 
-We still have 400 native recipes. in 270 or so directories
+If you do this, you cannot use armv5te feed and all machines that do it
+must be considered as a separate platform:
 
->
-> I have a huge patch where I have removed inherit autotools_staging from
-> all recipes in OE. I havent tested it so far but should be done in few days
->
+- If you subscribe to armv5te, then opkg upgrade will upgrade back to
+  udev-151 and your system will fail to boot.
 
-Cool, that would be a great step.
+If you unsibscribe from armv5te and create new platform armv5teoldudev
+then:
 
->
-> -Khem
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+- Old udev does not support libudev and libgudev. Application that
+  depend on it can't be built.
+
+=> udev-compat is still the simplest solution
+
+Another simple solution would be forcing of udev as machine specific
+package for all machines and remove it from the platform feed.
+
+-- 
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
+
 
