@@ -1,48 +1,45 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Od77O-0006EP-5H
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Od7fA-0002ya-TQ
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 21:44:15 +0200
-Received: by iwn34 with SMTP id 34so2195378iwn.6
+	Sun, 25 Jul 2010 22:19:10 +0200
+Received: by ewy7 with SMTP id 7so692320ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jul 2010 12:44:00 -0700 (PDT)
+	Sun, 25 Jul 2010 13:18:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=+dvVPx/ampUnAF3GhYCGUECjh+eeBhgzPRAS36TNz18=;
-	b=IwUsj2j6piF+p9gW0Nknf4IZUnv0+XIoxFoK8IqnPw4Vl6swmI1oT+jNh5pbn2iHW3
-	d8jgNw0Q/Hr8RdDavsk1wBv5DAZWUXw/Xmkp5PKVGDmlIupzPa0MZKsE28ge4KDOxfce
-	HgBscv4b6B82w2w3F79C28/qjGdRIrgNRk9vk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer:in-reply-to:references;
+	bh=6X3hQg5/zTVbWU4FyrGi79SD36pxemvKhh/KLAsqdvU=;
+	b=kUmZtUTXdbhtZfhLKYgmsMkBnwPNBKOUSGhw7oQF1/TfiIf8RNDsbD89Be2zqfKaSo
+	rTI0bzxz+0EZv0PKguZqR4EwV7SQXHw0HSbD3H73xpS6ykKp3Mq/YwynPiA5bx4GCHbH
+	tUOR1WKdfCAMkyU9I/ZgDPCiqbAYMg04WZdw4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=XzSZFwl6qXZU5vCY0RYD07vL7JcyUoJ5lg2HA/nCEsf3arLQ99fIz5fmBe7V2HeqaU
-	9Vr4eKOxlv2BC8ICNudobVXRHr3yOR78Tk7uDUxey02ZwO0fjKSWqs9kskkenAzE+3c5
-	gzSqG7P8vQa7Q7yCT7f40YyTvncV2gXNzoN/I=
-Received: by 10.231.40.9 with SMTP id i9mr4561256ibe.5.1280087039956; Sun, 25 
-	Jul 2010 12:43:59 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.186.88 with HTTP; Sun, 25 Jul 2010 12:43:39 -0700 (PDT)
-In-Reply-To: <1280073236.13006.125.camel@rex>
-References: <1279963975-3736-1-git-send-email-raj.khem@gmail.com> 
-	<i2fjoo$iiu$1@dough.gmane.org> <20100724212502.GA4218@gmail.com> 
-	<i2gsqi$8sv$1@dough.gmane.org> <i2h6dv$1ni$1@dough.gmane.org> 
-	<i2harj$e6t$1@dough.gmane.org>
-	<AANLkTik9ZnjaXvx6vxnjzxx013ms+cDjVv1FvsK31r5u@mail.gmail.com> 
-	<i2hk5h$86q$1@dough.gmane.org> <1280073236.13006.125.camel@rex>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 25 Jul 2010 12:43:39 -0700
-Message-ID: <AANLkTim8kQzq4_BxEAU4rtOqVdieD6q5s4dnr219LRbO@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=ADodoYj/vhY8WLK4yRBs8Usexh3zfnWtyw8QGfmF95cPUK43LZDNmLfxEeg0Y61P26
+	cWPvIi28teCQ7CFi7sDN3x1VugWpE62RwPkgcdlnEconsLkH/NqWjwuNlPopR91XYjC1
+	FtAtBa1dT3KbQWOC791/NPEziuuwaRqdmBbXU=
+Received: by 10.213.33.73 with SMTP id g9mr2861818ebd.41.1280089135732;
+	Sun, 25 Jul 2010 13:18:55 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id a48sm4400476eei.18.2010.07.25.13.18.54
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 25 Jul 2010 13:18:55 -0700 (PDT)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Sun, 25 Jul 2010 22:18:43 +0200
+Message-Id: <1280089125-30217-2-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+In-Reply-To: <1280089125-30217-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1280089125-30217-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/3] Make multi-machine toolchains to co-exist.
+Subject: [PATCH 2/4] gcc4.3.x: patch Makefile.in for cross compile badness
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,56 +53,260 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Jul 2010 19:44:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 25 Jul 2010 20:19:10 -0000
 
-On Sun, Jul 25, 2010 at 8:53 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Sun, 2010-07-25 at 17:10 +0200, Koen Kooi wrote:
->> > And cacao:
->> >
->> > | configure: error: armv7a systems are not supported at this time
->> > | ERROR: Function do_configure failed
->> >
->> >> yes I was expecting that kind of problems. openssl also has similar issues.
->> >
->> >> another idea that struck me was that we could change the target triplet to drop
->> >> TARGET_VENDOR and replace it with TARGET_SUB_ARCH and TARGET_SUBARCH
->> >> could be anything
->> >> we could even make it same as MACHINE_ARCH which means you will build
->> >> toolchain per machine
->> >> and they will live together.
->> >
->> >> then the tool names will be something like arm-v7-linux-gnueabi-*
->> >> powerpc-e500-linux-gnu
->> >> mips-mips2-linux etc. instead of *-angstrom-*- or *-oe-*-
->> >
->> >> or arm-beagleboad-linux-gnueabi-* etc if we go with MACHINE_ARCH
->> >
->> >> that would keep all recipe configury happy as the arch detected from
->> >> config.guess will be what
->> >> we had (arm, mips, mipsel powerpc etc) so no changes needed but we
->> >> will have to drop the brand
->> >
->> >> does it sound good ? bad?
->>
->> I don't think abusing target vendor for that is a good idea. And I'm
->> quite attached to my angstrom branded toolchains, tbh.
->
-> Note that you can still append your angstrom string to the vendor part
-> of the triplet...
+When compiling gcc target code make passes -I(GMPINC)
+but this one points to the host dir (it is set to HOST_GMPINC
+which in oe points to tmp/sysroots/i686-linux/usr/include).
+This patch breaks the env var $(INCLUDES) in two and
+only uses the TARGET specific part for compiling libgcc
+and the crt stuff.
 
-arm-v7_angstrom-linux-gnueabi-  etc. is a possibility
+The patch has been verified by baking all affected recipes with
+bitbake -c configure -b recipe
 
->
-> Cheers,
->
-> Richard
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+ recipes/gcc/gcc-4.3.1.inc               |    3 ++-
+ recipes/gcc/gcc-4.3.1/Makefile.in.patch |   29 +++++++++++++++++++++++++++++
+ recipes/gcc/gcc-4.3.2.inc               |    3 ++-
+ recipes/gcc/gcc-4.3.2/Makefile.in.patch |   29 +++++++++++++++++++++++++++++
+ recipes/gcc/gcc-4.3.3.inc               |    3 ++-
+ recipes/gcc/gcc-4.3.3/Makefile.in.patch |   29 +++++++++++++++++++++++++++++
+ recipes/gcc/gcc-4.3.4.inc               |    3 ++-
+ recipes/gcc/gcc-4.3.4/Makefile.in.patch |   29 +++++++++++++++++++++++++++++
+ 8 files changed, 124 insertions(+), 4 deletions(-)
+ create mode 100644 recipes/gcc/gcc-4.3.1/Makefile.in.patch
+ create mode 100644 recipes/gcc/gcc-4.3.2/Makefile.in.patch
+ create mode 100644 recipes/gcc/gcc-4.3.3/Makefile.in.patch
+ create mode 100644 recipes/gcc/gcc-4.3.4/Makefile.in.patch
+
+diff --git a/recipes/gcc/gcc-4.3.1.inc b/recipes/gcc/gcc-4.3.1.inc
+index 0f93d37..275ab9a 100644
+--- a/recipes/gcc/gcc-4.3.1.inc
++++ b/recipes/gcc/gcc-4.3.1.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r21"
++INC_PR = "r22"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -65,6 +65,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://zecke-xgcc-cpp.patch \
+ 	file://gcc-4.3.x-fix-EXTRA_BUILD.patch \
+ 	file://gcc-flags-for-build.patch \
++	file://Makefile.in.patch \
+ "
+ 
+ SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch "
+diff --git a/recipes/gcc/gcc-4.3.1/Makefile.in.patch b/recipes/gcc/gcc-4.3.1/Makefile.in.patch
+new file mode 100644
+index 0000000..4c11a64
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.1/Makefile.in.patch
+@@ -0,0 +1,29 @@
++Index: gcc-4.3.1/gcc/Makefile.in
++===================================================================
++--- gcc-4.3.1.orig/gcc/Makefile.in
+++++ gcc-4.3.1/gcc/Makefile.in
++@@ -575,7 +575,7 @@ LIBGCC2_INCLUDES =
++ TARGET_LIBGCC2_CFLAGS =
++ 
++ # Options to use when compiling crtbegin/end.
++-CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -g0 \
+++CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CFLAGS) -g0 \
++   -finhibit-size-directive -fno-inline-functions -fno-exceptions \
++   -fno-zero-initialized-in-bss -fno-toplevel-reorder -fno-tree-vectorize \
++   $(INHIBIT_LIBC_CFLAGS)
++@@ -901,9 +901,13 @@ BUILD_ERRORS = build/errors.o
++ # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
++ # currently being compiled, in both source trees, to be examined as well.
++ # libintl.h will be found in ../intl if we are using the included libintl.
++-INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+++#
+++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the host
+++# include dir) is used for compiling libgcc.a
+++TARGET_INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
++ 	   -I$(srcdir)/../include @INCINTL@ \
++-	   $(CPPINC) $(GMPINC) $(DECNUMINC)
+++	   $(CPPINC) $(DECNUMINC)
+++INCLUDES = $(TARGET_INCLUDES) $(GMPINC)
++ 
++ .c.o:
++ 	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
+diff --git a/recipes/gcc/gcc-4.3.2.inc b/recipes/gcc/gcc-4.3.2.inc
+index 5eebf0b..fa4e22e 100644
+--- a/recipes/gcc/gcc-4.3.2.inc
++++ b/recipes/gcc/gcc-4.3.2.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r11"
++INC_PR = "r12"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -61,6 +61,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://zecke-xgcc-cpp.patch \
+ 	file://gcc-4.3.x-fix-EXTRA_BUILD.patch \
+ 	file://gcc-flags-for-build.patch \
++	file://Makefile.in.patch \
+ "
+ 
+ SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch "
+diff --git a/recipes/gcc/gcc-4.3.2/Makefile.in.patch b/recipes/gcc/gcc-4.3.2/Makefile.in.patch
+new file mode 100644
+index 0000000..4c11a64
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.2/Makefile.in.patch
+@@ -0,0 +1,29 @@
++Index: gcc-4.3.1/gcc/Makefile.in
++===================================================================
++--- gcc-4.3.1.orig/gcc/Makefile.in
+++++ gcc-4.3.1/gcc/Makefile.in
++@@ -575,7 +575,7 @@ LIBGCC2_INCLUDES =
++ TARGET_LIBGCC2_CFLAGS =
++ 
++ # Options to use when compiling crtbegin/end.
++-CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -g0 \
+++CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CFLAGS) -g0 \
++   -finhibit-size-directive -fno-inline-functions -fno-exceptions \
++   -fno-zero-initialized-in-bss -fno-toplevel-reorder -fno-tree-vectorize \
++   $(INHIBIT_LIBC_CFLAGS)
++@@ -901,9 +901,13 @@ BUILD_ERRORS = build/errors.o
++ # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
++ # currently being compiled, in both source trees, to be examined as well.
++ # libintl.h will be found in ../intl if we are using the included libintl.
++-INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+++#
+++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the host
+++# include dir) is used for compiling libgcc.a
+++TARGET_INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
++ 	   -I$(srcdir)/../include @INCINTL@ \
++-	   $(CPPINC) $(GMPINC) $(DECNUMINC)
+++	   $(CPPINC) $(DECNUMINC)
+++INCLUDES = $(TARGET_INCLUDES) $(GMPINC)
++ 
++ .c.o:
++ 	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
+diff --git a/recipes/gcc/gcc-4.3.3.inc b/recipes/gcc/gcc-4.3.3.inc
+index aa16643..a2e93e7 100644
+--- a/recipes/gcc/gcc-4.3.3.inc
++++ b/recipes/gcc/gcc-4.3.3.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r14"
++INC_PR = "r15"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -63,6 +63,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://gcc-4.3.3-SYSROOT_CFLAGS_FOR_TARGET.patch \
+ 	file://gcc-4.3.3-fix-EXTRA_BUILD.patch \
+         file://arm-gcc-objective.patch \
++	file://Makefile.in.patch \
+ "
+ 
+ SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch "
+diff --git a/recipes/gcc/gcc-4.3.3/Makefile.in.patch b/recipes/gcc/gcc-4.3.3/Makefile.in.patch
+new file mode 100644
+index 0000000..4c11a64
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.3/Makefile.in.patch
+@@ -0,0 +1,29 @@
++Index: gcc-4.3.1/gcc/Makefile.in
++===================================================================
++--- gcc-4.3.1.orig/gcc/Makefile.in
+++++ gcc-4.3.1/gcc/Makefile.in
++@@ -575,7 +575,7 @@ LIBGCC2_INCLUDES =
++ TARGET_LIBGCC2_CFLAGS =
++ 
++ # Options to use when compiling crtbegin/end.
++-CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -g0 \
+++CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CFLAGS) -g0 \
++   -finhibit-size-directive -fno-inline-functions -fno-exceptions \
++   -fno-zero-initialized-in-bss -fno-toplevel-reorder -fno-tree-vectorize \
++   $(INHIBIT_LIBC_CFLAGS)
++@@ -901,9 +901,13 @@ BUILD_ERRORS = build/errors.o
++ # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
++ # currently being compiled, in both source trees, to be examined as well.
++ # libintl.h will be found in ../intl if we are using the included libintl.
++-INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+++#
+++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the host
+++# include dir) is used for compiling libgcc.a
+++TARGET_INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
++ 	   -I$(srcdir)/../include @INCINTL@ \
++-	   $(CPPINC) $(GMPINC) $(DECNUMINC)
+++	   $(CPPINC) $(DECNUMINC)
+++INCLUDES = $(TARGET_INCLUDES) $(GMPINC)
++ 
++ .c.o:
++ 	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
+diff --git a/recipes/gcc/gcc-4.3.4.inc b/recipes/gcc/gcc-4.3.4.inc
+index 8fd607a..37e5ec0 100644
+--- a/recipes/gcc/gcc-4.3.4.inc
++++ b/recipes/gcc/gcc-4.3.4.inc
+@@ -8,7 +8,7 @@ LICENSE = "GPLv3"
+ DEPENDS = "mpfr gmp"
+ NATIVEDEPS = "mpfr-native gmp-native"
+ 
+-INC_PR = "r9"
++INC_PR = "r10"
+ 
+ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://fedora/gcc43-c++-builtin-redecl.patch;striplevel=0 \
+@@ -61,6 +61,7 @@ SRC_URI = "${GNU_MIRROR}/gcc/gcc-${PV}/gcc-${PV}.tar.bz2;name=archive \
+ 	file://zecke-xgcc-cpp.patch \
+ 	file://gcc-4.3.x-fix-EXTRA_BUILD.patch \
+ 	file://gcc-flags-for-build.patch \
++	file://Makefile.in.patch \
+ "
+ 
+ SRC_URI_append_sh3  = " file://sh3-installfix-fixheaders.patch "
+diff --git a/recipes/gcc/gcc-4.3.4/Makefile.in.patch b/recipes/gcc/gcc-4.3.4/Makefile.in.patch
+new file mode 100644
+index 0000000..4c11a64
+--- /dev/null
++++ b/recipes/gcc/gcc-4.3.4/Makefile.in.patch
+@@ -0,0 +1,29 @@
++Index: gcc-4.3.1/gcc/Makefile.in
++===================================================================
++--- gcc-4.3.1.orig/gcc/Makefile.in
+++++ gcc-4.3.1/gcc/Makefile.in
++@@ -575,7 +575,7 @@ LIBGCC2_INCLUDES =
++ TARGET_LIBGCC2_CFLAGS =
++ 
++ # Options to use when compiling crtbegin/end.
++-CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(INCLUDES) $(MULTILIB_CFLAGS) -g0 \
+++CRTSTUFF_CFLAGS = -O2 $(GCC_CFLAGS) $(TARGET_INCLUDES) $(MULTILIB_CFLAGS) -g0 \
++   -finhibit-size-directive -fno-inline-functions -fno-exceptions \
++   -fno-zero-initialized-in-bss -fno-toplevel-reorder -fno-tree-vectorize \
++   $(INHIBIT_LIBC_CFLAGS)
++@@ -901,9 +901,13 @@ BUILD_ERRORS = build/errors.o
++ # -I$(@D) and -I$(srcdir)/$(@D) cause the subdirectory of the file
++ # currently being compiled, in both source trees, to be examined as well.
++ # libintl.h will be found in ../intl if we are using the included libintl.
++-INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
+++#
+++# TARGET_INCLUDES is added to avoid that GMPINC (which points to the host
+++# include dir) is used for compiling libgcc.a
+++TARGET_INCLUDES = -I. -I$(@D) -I$(srcdir) -I$(srcdir)/$(@D) \
++ 	   -I$(srcdir)/../include @INCINTL@ \
++-	   $(CPPINC) $(GMPINC) $(DECNUMINC)
+++	   $(CPPINC) $(DECNUMINC)
+++INCLUDES = $(TARGET_INCLUDES) $(GMPINC)
++ 
++ .c.o:
++ 	$(CC) -c $(ALL_CFLAGS) $(ALL_CPPFLAGS) $< $(OUTPUT_OPTION)
+-- 
+1.6.4.2
+
 
 
