@@ -1,38 +1,43 @@
-Received: from ns.penguin.cz ([84.21.108.25])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <utx@penguin.cz>) id 1Ocmzx-0004cK-KH
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 00:15:14 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ns.penguin.cz (Postfix) with ESMTP id B89DF1416BC6;
-	Sun, 25 Jul 2010 00:20:20 +0200 (CEST)
-X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
-Received: from ns.penguin.cz ([127.0.0.1])
-	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Ke+VF9P-kLyz; Sun, 25 Jul 2010 00:20:20 +0200 (CEST)
-Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
-	[85.207.165.7])
-	by ns.penguin.cz (Postfix) with ESMTP id 8B7E31416BB2;
-	Sun, 25 Jul 2010 00:20:20 +0200 (CEST)
-From: Stanislav Brabec <utx@penguin.cz>
-To: Andrea Adami <andrea.adami@gmail.com>
-In-Reply-To: <AANLkTik35dsZ6rMfu8KJNo7ZoKd6071ELAhYmzr6T7Y+@mail.gmail.com>
-References: <E1OcfGN-0007DB-9C@melo.openembedded.org>
-	<AANLkTik35dsZ6rMfu8KJNo7ZoKd6071ELAhYmzr6T7Y+@mail.gmail.com>
-Date: Sun, 25 Jul 2010 00:14:55 +0200
-Message-ID: <1280009695.11135.21.camel@utx.lan>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcwdY-0005B9-8J for openembedded-devel@lists.openembedded.org;
+	Sun, 25 Jul 2010 10:32:44 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OcwdH-0002DN-LU for openembedded-devel@lists.openembedded.org;
+	Sun, 25 Jul 2010 10:32:27 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Jul 2010 10:32:27 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 25 Jul 2010 10:32:27 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 25 Jul 2010 10:32:18 +0200
+Message-ID: <i2gsqi$8sv$1@dough.gmane.org>
+References: <1279963975-3736-1-git-send-email-raj.khem@gmail.com>	<i2fjoo$iiu$1@dough.gmane.org>
+	<20100724212502.GA4218@gmail.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-SA-Exim-Connect-IP: 84.21.108.25
-X-SA-Exim-Mail-From: utx@penguin.cz
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <20100724212502.GA4218@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [oe-commits] Stanislav Brabec : akita.conf, spitz.conf: Set PREFERRED_PROVIDER for udev-compat to udev-compat141.
+Subject: Re: [PATCH 0/3] Make multi-machine toolchains to co-exist.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,55 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 24 Jul 2010 22:15:14 -0000
-Content-Type: text/plain; charset="ISO-8859-2"
+X-List-Received-Date: Sun, 25 Jul 2010 08:32:45 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Andrea Adami wrote:
-> Stanislav,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 24-07-10 23:25, Khem Raj wrote:
+> On (24/07/10 22:51), Koen Kooi wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 24-07-10 11:32, Khem Raj wrote:
+>>> Hi
+>>>
+>>> Following three patches are for making multi-machine toolchains co-exist with
+>>> new cross staging for toolchain.
+>>>
+>>> It changes the toolchain triplet from TARGET_ARCH-VENDOR-OS to TARGET_SUB_ARCH-VENDOR-OS
+>>>
+>>> which means that a toolchain for armv7 is called armv7-oe-linux-gnueabi-*
+>>> and for armv5te its called armv5te-oe-linux-gnueabi-*
+>>>
+>>> They can coexist in same native sysroot. The symlinks would mean that
+>>> gcc will not accidently mix the assemblers or linkers.
+>>>
+>>> I have booted a minimal-image on qemuarm successfully. The build for 
+>>> beagleboard in same sysroot is underway.
+>>>
+>>> Please give it a shot in your environments (especially Koen's env)
+>>
+>> MACHINE=beagleboard bitbake nano ; MACHINE=hawkboard bitbake nano work,
+>> going to try a bigger build now.
 > 
-> thx for your work.
+> You will need 4th patch which is attached here, for the sdk recipes.
 
-You are welcome. I wanted to boot my Zaurus Terrier even after opkg
-upgrade. And the latest vanilla is still one step from going to the
-production quality.
+OK, applied that as well, 'MACHINE=beagleboard bitbake console-image ;
+MACHINE=hawkboard bitbake console-image' works as well.
+Let's see what xbmc does :)
 
-> Please note that other machines (c7x0 and poodle) are needing the same
-> preference, thus I propose you move this in zaurus-2.6.inc.
-> Collie and tosa are not concerned, having 2.6.3x kernel.
+regards,
 
-Feel free to do it for more machines or move this preference to the
-defaults. The setting of preference has no effect until you add proper
-lines to udev recipes.
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-I don't know, whether all Zaurii (and in general all old kernels) can
-live with udev-compat141. I only confirmed that udev-141 works with
-2.6.26 and udev-151 does not work with 2.6.26 (needs signalfd, CLOEXEC
-and inotify_init1).
-
-udev-compat141 recipe contains short manual for other users that may
-need it.
-
-Cloning udev-compat141 to udev-compat124 should work for machines that
-would not boot even with udev-141.
-
-Well, also libudev does not work completely with 2.6.26. Hopefully,
-udev_monitor_new_from_netlink() is the only function that does work, and
-this functions is needed only by udevd. But we run udevd-compat, which
-is statically linked with the old version of the library.
-
-Note: I committed sanity_check fixes as a separate patch, so people who
-tested patches from the list can easily review these changes. (Well,
-those people may want to force rebuild, as they will need to rebuild the
-same PR.)
-
-I guess that Koen can now remove udev-static.
-
--- 
-
-________________________________________________________________________
-Stanislav Brabec
-http://www.penguin.cz/~utx/zaurus
+iD8DBQFMS/aSMkyGM64RGpERAqTUAJ46VkTorvGKKzVpF4H/H/srZ8nTrwCcC9DI
+a1DXBV/9WlEHJwF6e1o/DEs=
+=2TTh
+-----END PGP SIGNATURE-----
 
 
 
