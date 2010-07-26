@@ -1,48 +1,31 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OdUT2-0005Dg-Mj
+	(envelope-from <msundius@sundius.com>) id 1OdUlq-0003aD-AW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 22:40:09 +0200
-Received: by ywe9 with SMTP id 9so489338ywe.6
+	Mon, 26 Jul 2010 22:59:37 +0200
+Received: by qyk31 with SMTP id 31so2613131qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 13:39:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=kdUxWWuW/UJB9tDQ7PtFqaWqlz+rI1jjOBu/tWdQgU0=;
-	b=FZBco8PkZmeckqSWP+U3a8ngcca4tS5DSHX1rjQ8K25QcM+5itzD53UEMpdYh/Symw
-	q3YOLVsFtKJGQL46ZEpGgu+70sSOYu9dKNt8B/wu54xCwJfVKhO71OumA8PXhK/m1sEu
-	dkC5krIIeQB61lJzW31Y3hTFVb7E/2BzMe9rw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=H5YhBSi126g27fdEKBFP79E9aCWRnKxwEgblAx2Yc/EJOVmo0GoFDRM86NR7CPZh4X
-	8eZMBYpDhmo2zKQ6p7xwcDYABviS0F7lIyX4le2j0CrQasaxHvLCE51Pguw703SA7kaN
-	48jdKh14kRl5JSPP3OizD7ziHo+4zYhg2b86I=
-Received: by 10.101.10.22 with SMTP id n22mr8163871ani.224.1280176791189; Mon, 
-	26 Jul 2010 13:39:51 -0700 (PDT)
+	Mon, 26 Jul 2010 13:59:17 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.186.88 with HTTP; Mon, 26 Jul 2010 13:39:30 -0700 (PDT)
-In-Reply-To: <i2kr8p$tsv$1@dough.gmane.org>
-References: <1280174528-27682-1-git-send-email-raj.khem@gmail.com> 
-	<1280174528-27682-8-git-send-email-raj.khem@gmail.com>
-	<i2kqgc$ql1$1@dough.gmane.org> 
-	<AANLkTik5Jq0YOAh3kmDzFZ55681Q4Q7z13RnR8sX6tB3@mail.gmail.com> 
-	<i2kr8p$tsv$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 26 Jul 2010 13:39:30 -0700
-Message-ID: <AANLkTinYWkr3k4qCqQXm=Mvy=9Av8wpX2USesMEUC-2K@mail.gmail.com>
+Received: by 10.224.96.144 with SMTP id h16mr6499944qan.372.1280177956844; 
+	Mon, 26 Jul 2010 13:59:16 -0700 (PDT)
+Received: by 10.229.241.133 with HTTP; Mon, 26 Jul 2010 13:59:16 -0700 (PDT)
+In-Reply-To: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com>
+References: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com>
+Date: Mon, 26 Jul 2010 13:59:16 -0700
+Message-ID: <AANLkTiks5W-tPf=D=Qo5UZf77ZA2R10=fkw2MmdeWfHc@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: msundius@sundius.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 7/7] recipes: Replace usage of MULTIMACH_TARGET_SYS with TARGET_SYS
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [RFC] get rid of legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,274 +39,189 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 20:40:09 -0000
+X-List-Received-Date: Mon, 26 Jul 2010 20:59:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Jul 26, 2010 at 1:30 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 26-07-10 22:24, Khem Raj wrote:
->> On Mon, Jul 26, 2010 at 1:17 PM, Koen Kooi <k.kooi@student.utwente.nl> w=
-rote:
->> Khem,
->>
->> What does '${TARGET_SYS}' expand to for machine specific recipes? The TI
->> tools need to go into sysroots/machine/, not sysroot/arch/ in the
->> current setup.
->>
->>> for qemuarm
->>
->>> TARGET_SYS=3D"arm-v5te_oe-linux-uclibceabi"
->>
->>> for beagleboard
->>
->>> TARGET_SYS=3D"arm-v7a_oe-linux-uclibceabi"
->
-> Right, that won't work then, the TI recipes need to so into
-> sysroots/beagleboard-foo-bar-baz/, not sysroots-v7a-bar-baz/.
->
+every time I see a conversation on this list that says something to the
+effect of "we have xxx number of recipes that do this" or "if we make this
+sort of change we'll have to change yyy number of recipes" I cringe. I ran:
 
-ok I will use MACHINE_SYS for it then which will expand to
-what you just mentioned above. Will that be ok ?
+[msundius@msundius-lnx1 recipes]$ find . -type f | grep "\.bb$" | wc
+   8581    8581  276766
+[msundius@msundius-lnx1 recipes]$ ls -1 | wc
+   2023    2023   18851
 
-> regards,
+8500 recipes just doesn't seem like a scalable number of recipes to manage
+w/ our development community. Its problematic for the following reasons:
+
+1) making a change that affects compatibility is difficult if not impossible
+2) most people working w/ embedded distros want only a small percentage of
+this beast
+3) building involves bitbake parsing all of these recipes before going to do
+the tree of what actually needs to be built.
+there are probably more complaints from the masses
+
+It seems to me that we need to decouple in a formal way the recipes from OE
+(classes and config files) and from each other.
+I am proposing that we do the following:
+- that we define exactly what it means to conform to a particular version of
+the OE Recipe API (or whatever you call it).
+- that we "fetch" recipes from well known repositories/mirrors (or locally)
+in the same way we fetch tarballs.
+- we parse recipes as we build the dependency tree.
+
+That way we don't have to look through the entire list 8500 recipes (parsing
+them all) before we build our tiny little embedded application that controls
+a refrigerator's ice making machine or whatever you make.
+
+For us, we simply don't use most of all of the recipes and I have found it
+hard to manage the disparity of the entire official tree vs the recipes that
+we use. I have simply created my own (sub)tree that is a subset to the
+greater tree.
+
+I also like the idea that we would be able to append our own configuration
+data patches etc for selected standard recipes (that could be "fetched" from
+somewhere) so that we would not really have to merge all of those specifics
+of our own system into the repository of recipes used by the whole world
+(i.e. noone cares about the busybox config file we use or a patch to the
+kernel to fix a dumb thing our HW engineers did). somthing akin to the
+.bbappend discussion as of late
+
+I realize that this is off topic here. I also am not qualified to propose
+how to implement such a solution. I'm just wondering if that might have
+already occurred to any of us that there's a fundamental issue that detracts
+us from creating a truly independent build framework. I'm also not trying to
+be a complainer.. I've been thinking about this for a long time and I'd like
+to help... I'm just not that good  w/ python :]
+
+Back to the discussion at hand, If we have a (versioned) compatibility
+standard for recipes then we could simply bump the number and exclude old
+recipes until their maintainer or someone who needed it, got around to
+upgrading the recipe.
+
+Mike
+
+On Sat, Jul 24, 2010 at 2:57 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
+
+> Dear all,
 >
-> Koen
+> The topic of legacy staging has been on the table for probably 8 months or
+> so.
+> Still we have a lot of recipes that use legacy staging.
+> This email tries to stir up the discussion on how to get rid of these.
 >
->>
->>
->>
->> regards,
->>
->> Koen
->>
->> On 26-07-10 22:02, Khem Raj wrote:
->>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>>> ---
->>>>> =A0recipes/gnuradio/gnuradio-libusb-compat.inc =A0 =A0 | =A0 =A02 +-
->>>>> =A0recipes/gnuradio/gnuradio.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-| =A0 =A02 +-
->>>>> =A0recipes/opencv/opencv-dsp-acceleration_svn.bb =A0 | =A0 =A02 +-
->>>>> =A0recipes/ti/README =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 =A0 | =A0 =A03 +-
->>>>> =A0recipes/ti/ti-paths.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 =A0 | =A0 34 +++++++++++-----------
->>>>> =A0recipes/ti/ti-staging.inc =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 | =A0 =A03 --
->>>>> =A0recipes/xapian/xapian-bindings-python_1.0.14.bb | =A0 =A02 +-
->>>>> =A07 files changed, 22 insertions(+), 26 deletions(-)
->>>>>
->>>>> diff --git a/recipes/gnuradio/gnuradio-libusb-compat.inc b/recipes/gn=
-uradio/gnuradio-libusb-compat.inc
->>>>> index efe2b88..aa4d41a 100644
->>>>> --- a/recipes/gnuradio/gnuradio-libusb-compat.inc
->>>>> +++ b/recipes/gnuradio/gnuradio-libusb-compat.inc
->>>>> @@ -8,7 +8,7 @@ INC_PR =3D "r7"
->>>>> =A0inherit distutils-base autotools autotools_stage pkgconfig
->>>>>
->>>>> =A0export BUILD_SYS
->>>>> -export HOST_SYS=3D${MULTIMACH_TARGET_SYS}
->>>>> +export HOST_SYS
->>>>>
->>>>> =A0CXXFLAGS_powerpc +=3D "-lstdc++"
->>>>>
->>>>> diff --git a/recipes/gnuradio/gnuradio.inc b/recipes/gnuradio/gnuradi=
-o.inc
->>>>> index 6eaf119..1a08930 100644
->>>>> --- a/recipes/gnuradio/gnuradio.inc
->>>>> +++ b/recipes/gnuradio/gnuradio.inc
->>>>> @@ -8,7 +8,7 @@ INC_PR =3D "r7"
->>>>> =A0inherit distutils-base autotools autotools_stage pkgconfig
->>>>>
->>>>> =A0export BUILD_SYS
->>>>> -export HOST_SYS=3D${MULTIMACH_TARGET_SYS}
->>>>> +export HOST_SYS
->>>>>
->>>>> =A0CXXFLAGS_powerpc +=3D "-lstdc++"
->>>>>
->>>>> diff --git a/recipes/opencv/opencv-dsp-acceleration_svn.bb b/recipes/=
-opencv/opencv-dsp-acceleration_svn.bb
->>>>> index 788e8e2..26fc3c6 100644
->>>>> --- a/recipes/opencv/opencv-dsp-acceleration_svn.bb
->>>>> +++ b/recipes/opencv/opencv-dsp-acceleration_svn.bb
->>>>> @@ -22,7 +22,7 @@ export OPENCV_PATH =3D "${STAGING_INCDIR}"
->>>>> =A0export DSPLIB_PATH =3D "${DSPLIB_INSTALL_DIR}"
->>>>>
->>>>> =A0# You need to extract the imglib from the .exe manually and place =
-it in /OE/tmp (or somewhere else and change the patch below)
->>>>> -export IMGLIB_PATH =3D "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${inst=
-alldir}/imglib_v201"
->>>>> +export IMGLIB_PATH =3D "${STAGING_DIR}/${TARGET_SYS}${installdir}/im=
-glib_v201"
->>>>>
->>>>> =A0do_configure() {
->>>>> =A0 =A0 =A0 echo "-l ${DSPLIB_INSTALL_DIR}/dsplib64plus.lib" >> ${S}/=
-beagle/server/opencv_unitserver_evm3530/link.cmd
->>>>> diff --git a/recipes/ti/README b/recipes/ti/README
->>>>> index 2fbb9f1..6262c9c 100644
->>>>> --- a/recipes/ti/README
->>>>> +++ b/recipes/ti/README
->>>>> @@ -29,13 +29,12 @@ Since most of the recipes in this directory deal =
-with a DSP (e.g OMAP3) or accel
->>>>> =A0The complete unpacked trees are staged to staging/machine/usr/shar=
-e/ti/${PN}(-tree) and all the _INSTALL_DIR vars will point to that. To make=
- this work there is a ti-staging.inc which contains:
->>>>>
->>>>> =A0PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->>>>> -BASEPKG_HOST_SYS =3D "${MULTIMACH_HOST_SYS}"
->>>>> =A0PACKAGE_STRIP =3D "no"
->>>>>
->>>>> =A0The 'BASEPKG_HOST_SYS' bit is what makes it work, but cause troubl=
-e is you want to read from it, so ti-paths.inc does:
->>>>>
->>>>> =A0export CODEGEN_INSTALL_DIR_RECIPE =A0 =A0=3D "${installdir}/ti-cgt=
-6x"
->>>>> -export CODEGEN_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${MULTIMACH_TA=
-RGET_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
->>>>> +export CODEGEN_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${TARGET_SYS}/=
-${CODEGEN_INSTALL_DIR_RECIPE}"
->>>>>
->>>>> =A0Which will point it to the machine specific staging like we want i=
-t to.
->>>>>
->>>>> diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
->>>>> index 27400a1..57af6c5 100644
->>>>> --- a/recipes/ti/ti-paths.inc
->>>>> +++ b/recipes/ti/ti-paths.inc
->>>>> @@ -22,23 +22,23 @@ export BIOSPSP_INSTALL_DIR_RECIPE =A0 =A0=3D "${i=
-nstalldir}/ti-biospsp-tree"
->>>>> =A0export AUDIO_SOC_INSTALL_DIR_RECIPE =A0=3D "${installdir}/ti-audio=
--soc-example-tree"
->>>>>
->>>>> =A0# This is where the tools will end up in staging provided PACKAGE_=
-ARCH =3D ${MACHINE_ARCH} is set
->>>>> -export CODEGEN_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${MULTIMACH_TA=
-RGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
->>>>> -export XDC_INSTALL_DIR =A0 =A0 =A0 =A0=3D "${STAGING_DIR}/${MULTIMAC=
-H_TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
->>>>> -export XDAIS_INSTALL_DIR =A0 =A0 =A0=3D "${STAGING_DIR}/${MULTIMACH_=
-TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
->>>>> -export BIOS_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${MULTIMACH_=
-TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
->>>>> -export SYSBIOS_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${MULTIMACH_TA=
-RGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
->>>>> -export BIOSUTILS_INSTALL_DIR =A0=3D "${STAGING_DIR}/${MULTIMACH_TARG=
-ET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
->>>>> -export FC_INSTALL_DIR =A0 =A0 =A0 =A0 =3D "${STAGING_DIR}/${MULTIMAC=
-H_TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
->>>>> -export CE_INSTALL_DIR =A0 =A0 =A0 =A0 =3D "${STAGING_DIR}/${MULTIMAC=
-H_TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
->>>>> -export EDMA3_LLD_INSTALL_DIR =A0=3D "${STAGING_DIR}/${MULTIMACH_TARG=
-ET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
->>>>> -export LINUXUTILS_INSTALL_DIR =3D "${STAGING_DIR}/${MULTIMACH_TARGET=
-_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
->>>>> -export CMEM_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${MULTIMACH_=
-TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
->>>>> -export LINK_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${MULTIMACH_=
-TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
->>>>> -export LPM_INSTALL_DIR =A0 =A0 =A0 =A0=3D "${STAGING_DIR}/${MULTIMAC=
-H_TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
->>>>> -export DMAI_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${MULTIMACH_=
-TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
->>>>> -export CODEC_INSTALL_DIR =A0 =A0 =A0=3D "${STAGING_DIR}/${MULTIMACH_=
-TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
->>>>> -export DSPLIB_INSTALL_DIR =A0 =A0 =3D "${STAGING_DIR}/${MULTIMACH_TA=
-RGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
->>>>> -export BIOSPSP_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${MULTIMACH_TA=
-RGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
->>>>> +export CODEGEN_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${TARGET_SYS}$=
-{CODEGEN_INSTALL_DIR_RECIPE}"
->>>>> +export XDC_INSTALL_DIR =A0 =A0 =A0 =A0=3D "${STAGING_DIR}/${TARGET_S=
-YS}${XDC_INSTALL_DIR_RECIPE}"
->>>>> +export XDAIS_INSTALL_DIR =A0 =A0 =A0=3D "${STAGING_DIR}/${TARGET_SYS=
-}${XDAIS_INSTALL_DIR_RECIPE}"
->>>>> +export BIOS_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${TARGET_SYS=
-}${BIOS_INSTALL_DIR_RECIPE}"
->>>>> +export SYSBIOS_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${TARGET_SYS}$=
-{SYSBIOS_INSTALL_DIR_RECIPE}"
->>>>> +export BIOSUTILS_INSTALL_DIR =A0=3D "${STAGING_DIR}/${TARGET_SYS}${B=
-IOSUTILS_INSTALL_DIR_RECIPE}"
->>>>> +export FC_INSTALL_DIR =A0 =A0 =A0 =A0 =3D "${STAGING_DIR}/${TARGET_S=
-YS}${FC_INSTALL_DIR_RECIPE}"
->>>>> +export CE_INSTALL_DIR =A0 =A0 =A0 =A0 =3D "${STAGING_DIR}/${TARGET_S=
-YS}${CE_INSTALL_DIR_RECIPE}"
->>>>> +export EDMA3_LLD_INSTALL_DIR =A0=3D "${STAGING_DIR}/${TARGET_SYS}${E=
-DMA3_LLD_INSTALL_DIR_RECIPE}"
->>>>> +export LINUXUTILS_INSTALL_DIR =3D "${STAGING_DIR}/${TARGET_SYS}${LIN=
-UXUTILS_INSTALL_DIR_RECIPE}"
->>>>> +export CMEM_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${TARGET_SYS=
-}${CMEM_INSTALL_DIR_RECIPE}"
->>>>> +export LINK_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${TARGET_SYS=
-}${LINK_INSTALL_DIR_RECIPE}"
->>>>> +export LPM_INSTALL_DIR =A0 =A0 =A0 =A0=3D "${STAGING_DIR}/${TARGET_S=
-YS}${LPM_INSTALL_DIR_RECIPE}"
->>>>> +export DMAI_INSTALL_DIR =A0 =A0 =A0 =3D "${STAGING_DIR}/${TARGET_SYS=
-}${DMAI_INSTALL_DIR_RECIPE}"
->>>>> +export CODEC_INSTALL_DIR =A0 =A0 =A0=3D "${STAGING_DIR}/${TARGET_SYS=
-}${CODEC_INSTALL_DIR_RECIPE}"
->>>>> +export DSPLIB_INSTALL_DIR =A0 =A0 =3D "${STAGING_DIR}/${TARGET_SYS}$=
-{DSPLIB_INSTALL_DIR_RECIPE}"
->>>>> +export BIOSPSP_INSTALL_DIR =A0 =A0=3D "${STAGING_DIR}/${TARGET_SYS}$=
-{BIOSPSP_INSTALL_DIR_RECIPE}"
->>>>>
->>>>> =A0DSPSUFFIX_omapl137 =3D "x674"
->>>>> =A0DSPSUFFIX_omapl138 =3D "x674"
->>>>> diff --git a/recipes/ti/ti-staging.inc b/recipes/ti/ti-staging.inc
->>>>> index 593f094..de2a882 100644
->>>>> --- a/recipes/ti/ti-staging.inc
->>>>> +++ b/recipes/ti/ti-staging.inc
->>>>> @@ -1,8 +1,5 @@
->>>>> =A0PACKAGE_ARCH =3D "${MACHINE_ARCH}"
->>>>>
->>>>> -# Allow staging into machine specific dir
->>>>> -BASEPKG_HOST_SYS =3D "${MULTIMACH_HOST_SYS}"
->>>>> -
->>>>> =A0# Search archdir for shlibs instead of machine dir due to above BA=
-SEPKG_HOST_SYS
->>>>> =A0SHLIBSDIR =3D "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${HOST_VENDOR}-$=
-{HOST_OS}/shlibs"
->>>>>
->>>>> diff --git a/recipes/xapian/xapian-bindings-python_1.0.14.bb b/recipe=
-s/xapian/xapian-bindings-python_1.0.14.bb
->>>>> index ae97779..6c24e2d 100644
->>>>> --- a/recipes/xapian/xapian-bindings-python_1.0.14.bb
->>>>> +++ b/recipes/xapian/xapian-bindings-python_1.0.14.bb
->>>>> @@ -18,7 +18,7 @@ EXTRA_OECONF =3D "--with-python --without-php --wit=
-hout-ruby --without-tcl \
->>>>> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0--without-csharp --without-java"
->>>>>
->>>>> =A0do_configure () {
->>>>> - =A0 =A0 =A0 =A0BUILD_SYS=3D${BUILD_SYS} HOST_SYS=3D${MULTIMACH_HOST=
-_SYS} \
->>>>> + =A0 =A0 =A0 =A0BUILD_SYS=3D${BUILD_SYS} HOST_SYS=3D${HOST_SYS} \
->>>>> =A0 =A0 =A0 =A0 =A0autotools_do_configure
->>>>> =A0}
->>>>>
->>
->>>
->>>
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
+> Most of the major recipes seem to be converted.
+> Koen reported 53 recipes with legacy staging after building
+> angstrom-gnome-image and openjdk. [1]
+> This seems an indication that lots of common and actively used recipes are
+> converted.
+> However there are still 1100+ recipes and about 150 .inc files that have a
+> do_stage rule [2]
 >
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
+> This indicates that quite some work is still needed.
+> Let's have a look at the options. What I see as possibilities are:
 >
-> iD8DBQFMTfBYMkyGM64RGpERAsYzAJ0fCSMs1WTnY4fsQT6stOEus/sYLwCfQ8Pi
-> lvYhUHTC7ZRfGZ6G6pvRDOo=3D
-> =3Dn/LZ
-> -----END PGP SIGNATURE-----
+> A: accept that we will have lots of recipes around that use legacy staging
+> B: update and test all recipes (at least up to the level that it is
+> verified
+> that the files stage properly after removing the legacy staging
+> C: with a sed script or so remove all do_stage functions and hope the best
+> for it.
+> D: remove the recipes that still use legacy staging as apparently no-one is
+> enough interested in them to update them.
 >
+> Let us now look at the pro's and con's of these possiblities:
 >
+> From the various calls to fix this that I have seen on the mailing list A
+> is
+> not really too desired.
+>
+> B would be nice, but is a hell lot of work. With 1100 recipes, 150 inc
+> files
+> and 5 minutes per recipe, this takes about 100 hours.
+> Even with one minute per recipe it would be about 20 hours.
+> Given that lots of the recipes for which this applies seem to be rarely
+> used
+> or are older versions of recipes that are not used any more, this seems
+> somewhat a waste of time.
+> Unless someone stands up as volunteer or someone develops an automated
+> solution, I feel this is not going to happen.
+> (and no: I feel no desire at all to spend hours and hours of my spare time
+> to convert recipes most of which I am very unlikely to use).
+>
+> C is a quick hack without warranty that the recipe is not broken.
+> I've no idea how you feel about this, but in my opinion I'd rather have a
+> legacy staging recipe which works than a non-legacy staging one which might
+> or might not be broken.
+>
+> That leaves option D. Of course removing all recipes that still use legacy
+> staging is not desired, as that would also mean e.g. removal of the 53
+> recipes identified by Koen. [1]
+> However, the idea has some merits. Lots of the recipes with legacy staging
+> seem to be old recipes. See e.g. the alsa-lib example [3]. By removing
+> these
+> at least the time and work needed for B would be less.
+>
+> Now how to proceed?
+> Well that is the reason for this email.
+> I would like to hear your opinions on this, so feel free to voice them.
+> If there is consensus we can start deploying things. If not we might ask
+> the
+> TSC for some guidance.
+>
+> To start off the discussion let me give you my personal view.
+>
+> I would be in favour to remove all recipes that use legacy staging and that
+> do not fit into one of the following categories:
+> - it is  the most recent version of the package that is build by the recipe
+> - it is not the most recent version but all more recent versions have
+> DEFAULT_PREFERENCE = "-1"
+> - it is pinned by a distro
+> - it is a toolchain recipe (gcc, binutils, automake, autoconf and probably
+> glibc)
+> - it is a kernel or u-boot recipe
+> The rationale behind this is that it removes a lot of recipes (and hence a
+> lot of work converting).
+> Note that the recipes are not gone. They will remain in the stable 2009
+> branch and they can always be retrieved from git.
+> So should someone for whatever reason need a recipe he/she can recover it,
+> fix it and put it back.
+>
+> After that we can make an inventory of the work remaining.
+> If there are relatively few recipes remaining it will become a lot simpler
+> to find volunteers to clean up those.
+> If there are many e.g. because an orphaned distro or machine pins lots of
+> legacy recipes) we might consider a different scenario.
+>
+> This is my personal view, but ofc I would like to have a discussion on this
+> and hear other opinions so preferably we can come to a consensus.
+> The only request I have is that if you advocate a certain solution that you
+> are willing to participate in realising that solution.
+> E.g. it is easy to say that B is the desired scenario and that others
+> should
+> implement this.
+>
+> Best regards, Frans.
+>
+> PS: if the consensus is to start off removing the legacy recipes as I
+> proposed above, I am more than willing to participate in that.
+> and if someone has a good idea on how to automate identification of
+> qualifying recipes (especially weeding out from the list, the ones we still
+> want to retain), I'd love to learn about that too.
+>
+> [1]
+>
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-July/021870.html
+> [2]
+>
+> http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-July/021901.html
+> [3]
+>
+> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg08150.html
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-
 
