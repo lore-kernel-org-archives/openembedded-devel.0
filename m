@@ -1,38 +1,38 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OdTsf-0007HS-54
+	(envelope-from <raj.khem@gmail.com>) id 1OdTsg-0007HU-1x
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 22:02:35 +0200
-Received: by pvg13 with SMTP id 13so229420pvg.6
+	Mon, 26 Jul 2010 22:02:36 +0200
+Received: by pxi12 with SMTP id 12so230104pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 13:02:16 -0700 (PDT)
+	Mon, 26 Jul 2010 13:02:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=7Ca2TJVpcpK2v5BAR+onoYJq90pM6tG3B8onG+HLRnU=;
-	b=vt+Jk12pgJuSfpSZdsbvgYZp9oSpxXirz3AZf55CATTm4NMp4ethEdQ/Je98hDZss5
-	f6GDPHa/KmojjsaBYhZDSXrzQYe/Zmgbc/GxMzS9HG1yxoy0vw5D8iOVFGEJHbnFqeiE
-	PnMJdg/cGjoEO6lWOuIgVkHlj2sHoTIvPlHV4=
+	bh=XCkcZFEXWy0ZtRpSGg276YxlUvsedxUcO77Szudh7kQ=;
+	b=Oplng2tFSEFaIap2HMQhXCwP3oiB7TV98EpPHS+TehuvNsTlPcGrg5Q0W34BiA456W
+	xDjAo/FfsP5a2fsrDK3Xde1zrlaMfPBJP9965NbtO2CYuXLA0k6fOrYlG/4ELxKM4+JV
+	gzO/gP8TTqyQLUJLgs198rlFtGad+FIumCquw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=nCb33EwydMrkTuN7TRo/xNyUHNBGzSbLYzLAeu2yxC43tG28JCPudkIL2bLRhXzavL
-	KjVTH2bLHsFfeBBUGgL+q/VFaKCvmqsxl249BdOSY0nCDHwQ7pewjqLWComqHdoxYct6
-	qlgrwpiO7k/aVePt9o+1wJmj3+z8JmJauPdJo=
-Received: by 10.142.204.21 with SMTP id b21mr8342231wfg.323.1280174535983;
-	Mon, 26 Jul 2010 13:02:15 -0700 (PDT)
+	b=M/4sG7naOeaUBVTfw+9ETpqgNBqK/Uw3M4aQ77PcG5e1qhoLc8M/nL0EaQDXdmFNhp
+	FrYxXTJWqu5o3Rw7g8J5e21PRGwCjURShXtFO+0s+rKfhuaXw8xQKWshbDD1O6skEPCh
+	CAQcUprbxNoI/dbeFE9QpzD1ZyCKnuxw/ZPog=
+Received: by 10.142.43.1 with SMTP id q1mr6719795wfq.35.1280174536971;
+	Mon, 26 Jul 2010 13:02:16 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id q27sm4573766wfc.18.2010.07.26.13.02.14
+	by mx.google.com with ESMTPS id q27sm4573766wfc.18.2010.07.26.13.02.16
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 26 Jul 2010 13:02:15 -0700 (PDT)
+	Mon, 26 Jul 2010 13:02:16 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jul 2010 13:02:03 -0700
-Message-Id: <1280174528-27682-3-git-send-email-raj.khem@gmail.com>
+Date: Mon, 26 Jul 2010 13:02:04 -0700
+Message-Id: <1280174528-27682-4-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
 References: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/7] binutils-cross.inc, binutils.inc: Overhaul for new cross dir structure.
+Subject: [PATCH 3/7] gcc-cross: Use EXTRA_OECONF_PATHS in initial and intermediate recipes.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,69 +54,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 20:02:35 -0000
+X-List-Received-Date: Mon, 26 Jul 2010 20:02:36 -0000
 
-* Install the symlinks instead of copied of tools.
-* Dont build shared libopcodes
-* We dont need to install libbfd a separate recipe should do that if
-  needed.
+* Add new configure time option --with-build-time-tools
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/binutils/binutils-cross.inc |   15 +++++++++++----
- recipes/binutils/binutils.inc       |    3 ---
- 2 files changed, 11 insertions(+), 7 deletions(-)
+ recipes/gcc/gcc-configure-cross.inc    |    5 +++--
+ recipes/gcc/gcc-cross-initial.inc      |    3 +--
+ recipes/gcc/gcc-cross-intermediate.inc |    3 +--
+ 3 files changed, 5 insertions(+), 6 deletions(-)
 
-diff --git a/recipes/binutils/binutils-cross.inc b/recipes/binutils/binutils-cross.inc
-index f3ba5c3..073cdad 100644
---- a/recipes/binutils/binutils-cross.inc
-+++ b/recipes/binutils/binutils-cross.inc
-@@ -5,15 +5,15 @@ PROVIDES = "virtual/${TARGET_PREFIX}binutils"
- PACKAGES = ""
- EXTRA_OECONF = "--with-sysroot=${STAGING_DIR_TARGET} \
+diff --git a/recipes/gcc/gcc-configure-cross.inc b/recipes/gcc/gcc-configure-cross.inc
+index 8b97b09..869ac5e 100644
+--- a/recipes/gcc/gcc-configure-cross.inc
++++ b/recipes/gcc/gcc-configure-cross.inc
+@@ -3,9 +3,10 @@ require gcc-configure-common.inc
+ USE_NLS = '${@base_conditional( "TARGET_OS", "linux-uclibc", "no", "", d )}'
+ 
+ EXTRA_OECONF_PATHS = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
+-		      --with-gxx-include-dir=${STAGING_DIR_TARGET}/${target_includedir}/c++ \
++		      --with-gxx-include-dir=${STAGING_DIR_TARGET}${target_includedir}/c++ \
+                       --with-sysroot=${STAGING_DIR_TARGET} \
+-                      --with-build-sysroot=${STAGING_DIR_TARGET}"
++                      --with-build-sysroot=${STAGING_DIR_TARGET} \
++		      --with-build-time-tools=${bindir}"
+ 
+ do_configure_prepend () {
+ 	export CC="${BUILD_CC}"
+diff --git a/recipes/gcc/gcc-cross-initial.inc b/recipes/gcc/gcc-cross-initial.inc
+index 25d7ba5..b153322 100644
+--- a/recipes/gcc/gcc-cross-initial.inc
++++ b/recipes/gcc/gcc-cross-initial.inc
+@@ -13,8 +13,7 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
+ 		--disable-__cxa_atexit \
+ 		--enable-languages=c \
  		--program-prefix=${TARGET_PREFIX} \
--		--enable-install-libbfd \
--		--enable-shared \
-+		--disable-install-libbfd \
-+		--disable-shared \
- 		--disable-werror \
- 	       "
- 
- do_install () {
- 	oe_runmake 'DESTDIR=${D}' install
--	install -m 0644 libiberty/pic/libiberty.a \
--	${D}${libdir}/libiberty_pic.a
-+	rm -rf ${D}${STAGING_DIR_NATIVE}${libdir_native}/libiberty.a
-+	rm -rf ${D}${STAGING_DIR_NATIVE}${prefix_native}/${TARGET_SYS}
- 
- 	# We don't really need these, so we'll remove them...
- 	rm -rf ${D}${STAGING_DIR_NATIVE}${prefix_native}/lib/ldscripts
-@@ -26,4 +26,11 @@ do_install () {
- 	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${libdir} || :
- 	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${libdir}64 || :
- 	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${prefix} || :
-+	# Insert symlinks into libexec so when tools without a prefix are searched for, the correct ones are
-+	# found.
-+	dest=${D}${STAGING_DIR_NATIVE}${prefix_native}/${TARGET_SYS}/bin/
-+	install -d $dest
-+	for t in ar as ld nm objcopy objdump ranlib strip; do
-+		ln -sf ../../bin/${TARGET_PREFIX}$t $dest$t
-+	done
- }
-diff --git a/recipes/binutils/binutils.inc b/recipes/binutils/binutils.inc
-index 75ee66a..c09b50a 100644
---- a/recipes/binutils/binutils.inc
-+++ b/recipes/binutils/binutils.inc
-@@ -43,9 +43,6 @@ B = "${S}/build.${HOST_SYS}.${TARGET_SYS}"
- EXTRA_OECONF = "--program-prefix=${TARGET_PREFIX} \
- 		--enable-shared"
- 
--# This is necessary due to a bug in the binutils Makefiles
--EXTRA_OEMAKE = "configure-build-libiberty all"
--
- export AR = "${HOST_PREFIX}ar"
- export AS = "${HOST_PREFIX}as"
- export LD = "${HOST_PREFIX}ld"
+-		--with-sysroot=${STAGING_DIR_TARGET} \
+-		--with-build-sysroot=${STAGING_DIR_TARGET} \
++		${EXTRA_OECONF_PATHS} \
+ 		${EXTRA_OECONF_INITIAL} \
+ 		${OPTSPACE} \
+ 		${@get_gcc_fpu_setting(bb, d)} \
+diff --git a/recipes/gcc/gcc-cross-intermediate.inc b/recipes/gcc/gcc-cross-intermediate.inc
+index cbc8638..6dbdb94 100644
+--- a/recipes/gcc/gcc-cross-intermediate.inc
++++ b/recipes/gcc/gcc-cross-intermediate.inc
+@@ -11,8 +11,7 @@ EXTRA_OECONF = "--with-local-prefix=${STAGING_DIR_TARGET}${target_prefix} \
+ 		--disable-threads \
+ 		--enable-languages=c \
+ 		--program-prefix=${TARGET_PREFIX} \
+-		--with-sysroot=${STAGING_DIR_TARGET} \
+-		--with-build-sysroot=${STAGING_DIR_TARGET} \
++		${EXTRA_OECONF_PATHS} \
+ 		${OPTSPACE} \
+ 		${EXTRA_OECONF_INTERMEDIATE} \
+ 		${@get_gcc_fpu_setting(bb, d)} \
 -- 
 1.7.1
 
