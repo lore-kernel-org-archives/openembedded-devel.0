@@ -1,27 +1,40 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OdNc2-0002tP-5C
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 15:20:59 +0200
-Received: (qmail 25431 invoked by uid 813007); 26 Jul 2010 13:20:43 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 26 Jul 2010 13:20:43 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdNmL-00038m-Sr for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 15:31:38 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdNm5-0005Lb-W0 for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 15:31:21 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 15:31:21 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 15:31:21 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jul 2010 15:20:38 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-10-generic; KDE/4.4.92; x86_64; ; )
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 26 Jul 2010 15:31:11 +0200
+Message-ID: <i2k2mv$v0c$1@dough.gmane.org>
 References: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
-In-Reply-To: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
-MIME-Version: 1.0
-Message-Id: <201007261520.43391.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+	<201007261520.43391.marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <201007261520.43391.marcin@juszkiewicz.com.pl>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 00/21] second round of patches needed for openjdk for oe-stable
@@ -38,42 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 13:20:59 -0000
-X-Groupsio-MsgNum: 21431
-Content-Type: multipart/signed; boundary="nextPart7532452.MVTi1yzutR";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Jul 2010 13:31:38 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
---nextPart7532452.MVTi1yzutR
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Dnia =C5=9Broda, 21 lipca 2010 o 16:06:51 heinold@inf.fu-berlin.de napisa=
-=C5=82(a):
-> sorry for the spam bu this is the second round of patches which are needed
-> to get openjdk into openembedded-stable.
+On 26-07-10 15:20, Marcin Juszkiewicz wrote:
+> Dnia środa, 21 lipca 2010 o 16:06:51 heinold@inf.fu-berlin.de napisał(a):
+>> sorry for the spam bu this is the second round of patches which are needed
+>> to get openjdk into openembedded-stable.
+> 
+> For whole series:
+> 
+> Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-=46or whole series:
+Same from me:
 
-Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
---nextPart7532452.MVTi1yzutR
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
+Acked-by: Koen Kooi <koen@openembedded.org>
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
+Version: GnuPG v1.4.5 (Darwin)
 
-iEYEABECAAYFAkxNi6gACgkQeQ6MlGH/2qsZjACZAd/tZ7AwPx5ZRGgX1ulLTptY
-8/YAn3L+doAfrcRmZt5Sod9rusony+jn
-=cOYC
+iD8DBQFMTY4fMkyGM64RGpERAj1VAJ49iX4jDtaMku5mAv0+jPnAY2yjywCcDttI
+wjq4SQ5WnZv5+YXTuv3V/7k=
+=DBSI
 -----END PGP SIGNATURE-----
 
---nextPart7532452.MVTi1yzutR--
+
+
