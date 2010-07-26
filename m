@@ -1,44 +1,43 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eblima@gmail.com>) id 1OdSC5-0007ft-A0
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 20:14:29 +0200
-Received: by gwb15 with SMTP id 15so179173gwb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdSZp-0002PH-Pg for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 20:39:02 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdSZY-0000IU-0i for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 20:38:44 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 20:38:44 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 11:14:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=WWEb1WV+2AycrINrXCkFcihnZBkTZju/zL1xkGaamls=;
-	b=GXTov+5bh041arrmEU8jS/vO9+GIU/AheWS8wTc7tBzvZ5HOkXDkcbn1OoXEkVVrZU
-	Ebw5zkoIsGw75+03jWQxuVpVPGnzj2xdTtSpd3QrkhiLTmQHQDamurhoqzJP2KKOLhTx
-	tXsazbSo7PZ3Ox3wYEzVsLLmG3BmUr8P3hcIE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=GWC7vDsukoM4P77t95fvxnv1MzL1EAMC+nFKA3nDYMJ39UN70GfwSRkLuyHfFRl9SK
-	z+nWe0tKlIz80iNc6XYlobAYkIReG8huB60pcZSZO/KYUIeQz6f7tst+6vn+huCVFO5c
-	HuOM4byGxhp1xRYfULoaKhZfAH0oSegNJPsQE=
-Received: by 10.100.50.33 with SMTP id x33mr8370118anx.79.1280168052563; Mon, 
-	26 Jul 2010 11:14:12 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.176.77 with HTTP; Mon, 26 Jul 2010 11:13:52 -0700 (PDT)
-In-Reply-To: <20100726175620.GA30949@rhein.zuhause.netz>
-References: <AANLkTimz9CwgpLeXVJfSpML7Piqh3M53jsx-ALgTJ+ac@mail.gmail.com> 
-	<20100726175620.GA30949@rhein.zuhause.netz>
-From: "Eduardo Lima (Etrunko)" <eblima@gmail.com>
-Date: Mon, 26 Jul 2010 15:13:52 -0300
-Message-ID: <AANLkTi=G+LN=nGOpPY-+KEMzRkJZonY-CTDx=jHpxE=g@mail.gmail.com>
+	Mon, 26 Jul 2010 20:38:44 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: eblima@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 26 Jul 2010 20:38:34 +0200
+Message-ID: <i2kkna$3o5$1@dough.gmane.org>
+References: <4C4D586A.5040202@kernelconcepts.de>	<i2jrnl$4j3$2@dough.gmane.org>	<AANLkTimRxtBib-WUkcm75eNLQvws8Rw-Nf-Z6uQvFetR@mail.gmail.com>	<i2julr$fbh$1@dough.gmane.org>	<FABAFD53-F00E-4D6E-811E-4249C9853C8C@vanille-media.de>	<4C4D862E.2050202@kernelconcepts.de>
+	<4C4DC285.3070201@mentor.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <4C4DC285.3070201@mentor.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Recipes for cmake 2.8.2
+Subject: Re: native preferences
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,23 +51,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 18:14:30 -0000
+X-List-Received-Date: Mon, 26 Jul 2010 18:39:02 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 26, 2010 at 2:56 PM, Henning Heinold
-<heinold@inf.fu-berlin.de> wrote:
-> Hi,
->
-> no chance to use BBCLASSEXTENDED = "native" ?
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Well, I'm quite new to the OE world, not very sure of what is the best
-way to do things yet. How would it be implemented?
+On 26-07-10 19:14, Tom Rini wrote:
+> Florian Boor wrote:
+>> Hi,
+>>
+>> Dr. Michael Lauer schrieb:
+>>> Of course the preferred way - rather than switching distros - is to
+>>> fix this obvious bug
+>>> in the OE metadata.
+>>
+>> yes I see it like this. Switching to a distribution that pins more
+>> versions is
+>> not really what I would call a fix. It is a workaround but should not
+>> become the
+>> default way to deal with such issues in OE.
+>> What we introduced here is clearly a bug in OE and not the
+>> distributions fault.
+> 
+> Except that it's a bitbake issue, not a metadata issue, iirc (which is
+> why it's fixed in the 1.10 branch, but not 1.8).
 
-Best regards, Etrunko
+Yes, that's why I said "the bug has been fixed
+in bitbake 1.10" earlier in the thread :)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
--- 
-Eduardo de Barros Lima
-eblima@gmail.com
+iD8DBQFMTdYqMkyGM64RGpERAnN3AKCdCvwWQhKF8Ta4A4x/vpctt45XGgCcC66C
+7swo93nDkqCt95K4OPWbTxY=
+=ENxb
+-----END PGP SIGNATURE-----
+
 
 
