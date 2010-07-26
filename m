@@ -1,44 +1,39 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Od7mX-0000V1-Go
+	(envelope-from <stefan@datenfreihafen.org>) id 1OdIOJ-0005Df-0X
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 25 Jul 2010 22:26:48 +0200
-Received: by bwz10 with SMTP id 10so2686751bwz.6
+	Mon, 26 Jul 2010 09:46:28 +0200
+Received: from test3.ibr.cs.tu-bs.de ([134.169.35.210] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OdINu-0001Pp-Np by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 25 Jul 2010 13:26:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=oW0YdlIOZOzIk/ns1P7d0kYz9R108JyJrJwEdLFuSss=;
-	b=p7XGG+rg4I/S/3pZZPW9KZzbM1keQ9SsWUcVg/QSln/misJbhCUQ8dGUCszevFgIGY
-	LetbHulV9JhJ7Sz25+vV3acn6kVbCJ8bcb6LWVBlk2qcJ1p10VK5tINYJmrxU+JENa3x
-	7GbZ3dV7iIJKtYw7jVEmW2eoacQf4zs5FNNrY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=aQ+tZUdXGrGRQN3FUH/yGQpSASQTl0l3EP2NZT3JZa89g2XP7zAgi/KqzOCoLodqzz
-	WrFRC3Vd75VhsLzCilQ0cl1THG4pCfDS13kXYYCFm2AcN5JUoPoIJCsFHu29ExCepuqE
-	iafM4NrF05z7Q/iBNWi/z+f7fvh4A6jnR6x8U=
-MIME-Version: 1.0
-Received: by 10.204.80.162 with SMTP id t34mr4932828bkk.81.1280089591142; Sun, 
-	25 Jul 2010 13:26:31 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sun, 25 Jul 2010 13:26:31 -0700 (PDT)
-In-Reply-To: <4C4C9AD7.7010603@gmx.net>
-References: <4C4C9AD7.7010603@gmx.net>
-Date: Sun, 25 Jul 2010 22:26:31 +0200
-Message-ID: <AANLkTinQG5SA2sGRj1xapuhfDCxQF4Sss7BHeS=nLesA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 26 Jul 2010 09:46:08 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OdINt-0007ZX-KF
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 09:46:01 +0200
+Date: Mon, 26 Jul 2010 09:46:01 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100726074601.GA27921@excalibur.local>
+References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>
+	<1279651497-20918-2-git-send-email-morphis@gravedo.de>
+MIME-Version: 1.0
+In-Reply-To: <1279651497-20918-2-git-send-email-morphis@gravedo.de>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: could not include bb file even though it exists and directory included in BBPATH
+Subject: Re: [PATCH 1/4] lvm2: rebase all recipes on a global lvm2.inc recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,91 +47,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 25 Jul 2010 20:26:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Jul 2010 07:46:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/7/25 Ossy <ossy1980@gmx.net>
+Hello.
 
-> Dear oe mailinglist,
->
-> I tried to set up oe and the sanity checker hasn't reported any anomalies.
-> But when building a simple image, bitbake wasn't able to include
-> console-base-image.bb.
->
-> But in fact this file is present in oe/recipes/images/* and BBPATH includes
-> the path to oe (which hopefully dives into recipes there).
->
-> I used kom to setup a new overlay project. Since listing the images gives
-> all images in oe, I'm sure that bitbake has access to those bb-files. The
-> conf/bbplayers.conf includes BBFILES to oe, too.
->
-> Where may I misconfigured the setup?
->
-> Thanks for any hint.
->
-> Kind regards,
-> Marcus
->
->
->
-> ossy@debian-virtual:~/buildroot/kom-dockstar$ ll
-> insgesamt 0
-> drwxr-xr-x 4 ossy ossy 27 23. Jul 20:37 build
-> drwxr-xr-x 4 ossy ossy 53 23. Jul 00:11 conf
-> drwxr-xr-x 3 ossy ossy 19 23. Jul 00:11 recipes
-> ossy@debian-virtual:~/buildroot/kom-dockstar$ echo $BBPATH
->
-> /home/ossy/kom/openembedded/:/home/ossy/buildroot/kom-dockstar/build:/home/ossy/buildroot/kom-dockstar
->
+On Tue, 2010-07-20 at 20:44, Simon Busch wrote:
+> This rebases all specific versions of lvm2 on a global recipe lvm2.inc which defines the
+> common parameters for building lvm2. Staging is overwritten as we don't need any of the
+> executables or manpages the build of lvm2 produces for any related builds.
+> 
+> Signed-off-by: Simon Busch <morphis@gravedo.de>
 
-Why do you have the last two paths ?
+Looks good. Two comments below.
 
+> diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
+> new file mode 100644
+> index 0000000..a7e37b5
+> --- /dev/null
+> +++ b/recipes/lvm2/lvm2.inc
+> @@ -0,0 +1,20 @@
+> +SECTION = "utils"
+> +DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+> +LICENSE = "GPL"
+> +DEPENDS = "device-mapper"
+> +INC_PR = "r2"
+> +
+> +S = "${WORKDIR}/LVM2.${PV}"
+> +SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+> +           file://crosscompile_fix.patch"
+> +
+> +# Unset user/group to unbreak install.
+> +EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
+> +EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
 
-> ossy@debian-virtual:~/buildroot/kom-dockstar$ ll
-> /home/ossy/kom/openembedded/recipes/images/console-*
-> -rw-r--r-- 1 ossy ossy 416 23. Jul 02:34
-> /home/ossy/kom/openembedded/recipes/images/console-base-image.bb
-> -rw-r--r-- 1 ossy ossy 184 23. Jul 02:34
-> /home/ossy/kom/openembedded/recipes/images/console-image.bb
-> -rw-r--r-- 1 ossy ossy 168 23. Jul 02:34
-> /home/ossy/kom/openembedded/recipes/images/console-mipv6-image.bb
-> ossy@debian-virtual:~/buildroot/kom-dockstar$ kom -L
-> 990     oe      ${oe}/recipes/*/*.bb
-> 1000    PRJDIR  ${PRJDIR}/recipes/*/*.bb
-> ossy@debian-virtual:~/buildroot/kom-dockstar$ bitbake minimal-image
-> NOTE: Handling BitBake files: \ (8414/8416) [99 %]ERROR: Could not include
-> required file console-base-image.bb while parsing
-> /home/ossy/buildroot/kom-dockstar/build/tmp/deploy/glibc/sources/MIT/console-image/
-> console-image.bb
->
+I can see that you just merged this in from an already existing recipe, but do
+we know why we have an overrirde for ARM here which changes nothing? Looks bogus
+to me.
 
-This suggests hat it is parsing a console-image.bb file which resides in
-your tmp/deploy dir.
-(and not the one in recipes/images).
-No idea how it ended up there. I suggest to clean at least that file, but
-preferably the whole tmp dir and build from scratch
+> +inherit autotools
+> +
+> +# We don't need to stage anything (the executables are no needed at build time by any
+> +# other recipe)
+> +do_stage() {
+> +}
 
-good luck, Frans
+While we don't need the executables the don't hurd either IMHO. Can we get rid
+of this?
 
-> ERROR: Could not include required file console-base-image.bb while parsing
-> /home/ossy/buildroot/kom-dockstar/build/tmp/deploy/glibc/sources/MIT/console-image/
-> console-image.bb
->
-> NOTE: Parsing finished. 7606 cached, 474 parsed, 334 skipped, 176 masked.
-> ERROR: Parsing errors found, exiting...
->
-> ossy@debian-virtual:~/buildroot/kom-dockstar$ cat conf/bblayers.conf |
-> grep BBFILE
-> BBFILES = " \
-> BBFILE_COLLECTIONS = " oe PRJDIR"
-> BBFILE_PATTERN_PRJDIR = "${PRJDIR}/recipes"
-> BBFILE_PRIORITY_PRJDIR = "1000"
-> BBFILE_PATTERN_oe = "recipes/*/*.bb"
-> BBFILE_PRIORITY_oe = "990"
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+regards
+Stefan Schmidt
+
 
