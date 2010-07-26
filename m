@@ -1,33 +1,30 @@
-Received: from mail.kernelconcepts.de ([212.60.202.196])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1OdNFL-0004GP-W8
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1OdNc2-0002tP-5C
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 14:57:33 +0200
-Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
-	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
-	(envelope-from <florian.boor@kernelconcepts.de>) id 1OdNHY-0006EY-Vb
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 12:59:48 +0000
-Message-ID: <4C4D862E.2050202@kernelconcepts.de>
-Date: Mon, 26 Jul 2010 14:57:18 +0200
-From: Florian Boor <florian.boor@kernelconcepts.de>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Mon, 26 Jul 2010 15:20:59 +0200
+Received: (qmail 25431 invoked by uid 813007); 26 Jul 2010 13:20:43 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 26 Jul 2010 13:20:43 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <4C4D586A.5040202@kernelconcepts.de>
-	<i2jrnl$4j3$2@dough.gmane.org>	<AANLkTimRxtBib-WUkcm75eNLQvws8Rw-Nf-Z6uQvFetR@mail.gmail.com>	<i2julr$fbh$1@dough.gmane.org>
-	<FABAFD53-F00E-4D6E-811E-4249C9853C8C@vanille-media.de>
-In-Reply-To: <FABAFD53-F00E-4D6E-811E-4249C9853C8C@vanille-media.de>
-X-Enigmail-Version: 0.95.7
-X-SA-Exim-Connect-IP: 212.60.202.196
-X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
+Date: Mon, 26 Jul 2010 15:20:38 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-10-generic; KDE/4.4.92; x86_64; ; )
+References: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
+In-Reply-To: <1279721232-24744-1-git-send-email-heinold@inf.fu-berlin.de>
+MIME-Version: 1.0
+Message-Id: <201007261520.43391.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: native preferences
+Subject: Re: [PATCH 00/21] second round of patches needed for openjdk for oe-stable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,30 +38,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 12:57:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Jul 2010 13:20:59 -0000
+X-Groupsio-MsgNum: 21431
+Content-Type: multipart/signed; boundary="nextPart7532452.MVTi1yzutR";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
 Content-Transfer-Encoding: 7bit
 
-Hi,
+--nextPart7532452.MVTi1yzutR
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Dr. Michael Lauer schrieb:
-> Of course the preferred way - rather than switching distros - is to fix this obvious bug
-> in the OE metadata.
+Dnia =C5=9Broda, 21 lipca 2010 o 16:06:51 heinold@inf.fu-berlin.de napisa=
+=C5=82(a):
+> sorry for the spam bu this is the second round of patches which are needed
+> to get openjdk into openembedded-stable.
 
-yes I see it like this. Switching to a distribution that pins more versions is
-not really what I would call a fix. It is a workaround but should not become the
-default way to deal with such issues in OE.
-What we introduced here is clearly a bug in OE and not the distributions fault.
+=46or whole series:
 
-Greetings
+Acked-by: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 
-Florian
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
 
--- 
-The dream of yesterday                  Florian Boor
-is the hope of today                    Tel: +49 271-771091-15
-and the reality of tomorrow.            Fax: +49 271-771091-19
-[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
-                                        http://www.kernelconcepts.de/en
+--nextPart7532452.MVTi1yzutR
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEABECAAYFAkxNi6gACgkQeQ6MlGH/2qsZjACZAd/tZ7AwPx5ZRGgX1ulLTptY
+8/YAn3L+doAfrcRmZt5Sod9rusony+jn
+=cOYC
+-----END PGP SIGNATURE-----
+
+--nextPart7532452.MVTi1yzutR--
