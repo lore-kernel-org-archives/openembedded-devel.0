@@ -1,42 +1,42 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OdLxn-0003Zq-2v for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 13:35:25 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OdLxY-0000tN-8U for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 13:35:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 13:35:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 13:35:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <rpjday@crashcourse.ca>) id 1OdM9T-0000Qt-Ts
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 13:47:25 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OdM9E-0005tQ-UC for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 07:47:09 -0400
+Date: Mon, 26 Jul 2010 07:46:57 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 26 Jul 2010 13:32:05 +0200
-Message-ID: <i2jrnl$4j3$2@dough.gmane.org>
-References: <4C4D586A.5040202@kernelconcepts.de>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <4C4D586A.5040202@kernelconcepts.de>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+In-Reply-To: <i2jrl9$4j3$1@dough.gmane.org>
+Message-ID: <alpine.DEB.2.00.1007260744150.11202@lynx>
+References: <alpine.DEB.2.00.1007260653230.5356@lynx>
+	<i2jrl9$4j3$1@dough.gmane.org>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: native preferences
+Subject: Re: should beagleboard-demo-image (b-d-i) be theoretically buildable?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +50,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 11:35:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Jul 2010 11:47:25 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Mon, 26 Jul 2010, Koen Kooi wrote:
 
-On 26-07-10 11:42, Florian Boor wrote:
-> Hi all,
-> 
-> I tried to build a "minimal" distribution image lately and ran into some trouble
->  because the old-style native packages seem to be preferred over the new ones
-> using BBCLASSEXTEND.
-> In this case we have glib-2.0-native 2.24.1 provided by the new mechanism and
-> 2.22.1 gets build which is the latest old-style native bb.
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> It builds fine on all the buildhosts I have (ubuntu 8.04-32bit,
+> 9.10-64bit, debian testing-64bit among others).
+>
+> And I see no logs attached to your email, so I can't help.
 
-That's minimals broken by design behaviour, it refuses to pin any
-version. So either pin the version or switch to a sane distro like
-angstrom or shr.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+  come on, koen, that last part was uncalled for.  i specifically
+stated that i hadn't run the build yet, i just wanted to know if there
+were any *known* issues for my 64-bit ubuntu 10.04 platform.
 
-iD8DBQFMTXI1MkyGM64RGpERAi1eAJ4q5Zwx4OTwV4sfjDFQ4GBE4uClbACfd2wo
-dYefl4wTR0njfF5r+bezfKs=
-=SfWy
------END PGP SIGNATURE-----
+  given that you certainly have *legitimate* reasons to criticize some
+of my posts here, you don't need to make stuff up.
 
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+        Top-notch, inexpensive online Linux/OSS/kernel courses
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
