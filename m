@@ -1,40 +1,40 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eblima@gmail.com>) id 1OdRD9-0002hw-F2
+	(envelope-from <Tom_Rini@mentor.com>) id 1OdRGc-0002rN-Jp
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 19:11:32 +0200
-Received: by gwb15 with SMTP id 15so153537gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 10:11:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=yA5v9+DcuoSOOiYmTMxg1IcAnesEFSGO9rP5O/3d8e0=;
-	b=s3JvHVKWrZ/ZO9drog2r2v7nvwDammBoxzDngcod9Onfq2QlmVtAUjZZO5rSpLm7Ps
-	q7CrrY73vkS1brFL/5AWDKWyF+XtBEgbMgwrIMwU1vsKIgUDcr2mpK2UcZMDCQbYzoq8
-	wcG8rqlLRVyZ5JpFFUraNVnBskIR0a+U8ON2A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=YYtRfjLKh2S2DYi/A+1/bt7TOU40Ghpfjv+M7Iv2O9dVAfyAxOWAKSVz8fI1FqV9ew
-	rWHEDOk4kjyLTjVaW3oxejIhlyTxP3D3R51LP8DP/x+8rMmmuUMhdaFOobhKD1JlshZ5
-	QW2OK1BYVHEcoKUUJyitapzkFqEzoEBGVf4aQ=
-Received: by 10.100.210.4 with SMTP id i4mr510920ang.262.1280164274054; Mon, 
-	26 Jul 2010 10:11:14 -0700 (PDT)
+	Mon, 26 Jul 2010 19:15:08 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OdRGL-0005JK-D3 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 10:14:49 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 26 Jul 2010 10:14:49 -0700
+Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 26 Jul 2010 11:14:47 -0600
+Message-ID: <4C4DC285.3070201@mentor.com>
+Date: Mon, 26 Jul 2010 10:14:45 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.231.176.77 with HTTP; Mon, 26 Jul 2010 10:10:53 -0700 (PDT)
-From: "Eduardo Lima (Etrunko)" <eblima@gmail.com>
-Date: Mon, 26 Jul 2010 14:10:53 -0300
-Message-ID: <AANLkTimz9CwgpLeXVJfSpML7Piqh3M53jsx-ALgTJ+ac@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: eblima@gmail.com
+References: <4C4D586A.5040202@kernelconcepts.de>	<i2jrnl$4j3$2@dough.gmane.org>	<AANLkTimRxtBib-WUkcm75eNLQvws8Rw-Nf-Z6uQvFetR@mail.gmail.com>	<i2julr$fbh$1@dough.gmane.org>	<FABAFD53-F00E-4D6E-811E-4249C9853C8C@vanille-media.de>
+	<4C4D862E.2050202@kernelconcepts.de>
+In-Reply-To: <4C4D862E.2050202@kernelconcepts.de>
+X-OriginalArrivalTime: 26 Jul 2010 17:14:48.0018 (UTC)
+	FILETIME=[0CDE3320:01CB2CE6]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Recipes for cmake 2.8.2
+Subject: Re: native preferences
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,55 +48,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 17:11:32 -0000
-X-Groupsio-MsgNum: 21433
-Content-Type: multipart/mixed; boundary=0016369895dbcf2a3e048c4d7879
+X-List-Received-Date: Mon, 26 Jul 2010 17:15:08 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
---0016369895dbcf2a3e048c4d7879
-Content-Type: text/plain; charset=UTF-8
+Florian Boor wrote:
+> Hi,
+> 
+> Dr. Michael Lauer schrieb:
+>> Of course the preferred way - rather than switching distros - is to fix this obvious bug
+>> in the OE metadata.
+> 
+> yes I see it like this. Switching to a distribution that pins more versions is
+> not really what I would call a fix. It is a workaround but should not become the
+> default way to deal with such issues in OE.
+> What we introduced here is clearly a bug in OE and not the distributions fault.
 
-Based on 2.6.4 recipes.
-
-Best Regards, Etrunko
+Except that it's a bitbake issue, not a metadata issue, iirc (which is 
+why it's fixed in the 1.10 branch, but not 1.8).
 
 -- 
-Eduardo de Barros Lima
-eblima@gmail.com
+Tom Rini
+Mentor Graphics Corporation
 
---0016369895dbcf2a3e048c4d7879
-Content-Type: text/x-patch; charset=US-ASCII; 
-	name="0001-CMake-Recipes-for-version-2.8.2.patch"
-Content-Disposition: attachment; 
-	filename="0001-CMake-Recipes-for-version-2.8.2.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gc3kq9dy0
 
-RnJvbSA4ZmUzMjYyYjQ3NjU1NTc3ZDM4NGZlYjUxNTBmYjgxOThmOWEwZWYwIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBFZHVhcmRvIExpbWEgKEV0cnVua28pIDxlYmxpbWFAZ21haWwu
-Y29tPgpEYXRlOiBNb24sIDI2IEp1bCAyMDEwIDE0OjA4OjM2IC0wMzAwClN1YmplY3Q6IFtQQVRD
-SF0gQ01ha2U6IFJlY2lwZXMgZm9yIHZlcnNpb24gMi44LjIKClNpZ25lZC1vZmYtYnk6IEVkdWFy
-ZG8gTGltYSAoRXRydW5rbykgPGVibGltYUBnbWFpbC5jb20+Ci0tLQogcmVjaXBlcy9jbWFrZS9j
-bWFrZS1uYXRpdmVfMi44LjIuYmIgfCAgICA5ICsrKysrKysrKwogcmVjaXBlcy9jbWFrZS9jbWFr
-ZV8yLjguMi5iYiAgICAgICAgfCAgIDEwICsrKysrKysrKysKIDIgZmlsZXMgY2hhbmdlZCwgMTkg
-aW5zZXJ0aW9ucygrKSwgMCBkZWxldGlvbnMoLSkKIGNyZWF0ZSBtb2RlIDEwMDY0NCByZWNpcGVz
-L2NtYWtlL2NtYWtlLW5hdGl2ZV8yLjguMi5iYgogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMv
-Y21ha2UvY21ha2VfMi44LjIuYmIKCmRpZmYgLS1naXQgYS9yZWNpcGVzL2NtYWtlL2NtYWtlLW5h
-dGl2ZV8yLjguMi5iYiBiL3JlY2lwZXMvY21ha2UvY21ha2UtbmF0aXZlXzIuOC4yLmJiCm5ldyBm
-aWxlIG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAuLjg1ZDRjMDIKLS0tIC9kZXYvbnVsbAorKysg
-Yi9yZWNpcGVzL2NtYWtlL2NtYWtlLW5hdGl2ZV8yLjguMi5iYgpAQCAtMCwwICsxLDkgQEAKK2lu
-aGVyaXQgbmF0aXZlCityZXF1aXJlIGNtYWtlLmluYworCitkb19pbnN0YWxsKCkgeworCW9lX3J1
-bm1ha2UgaW5zdGFsbAorfQorCitTUkNfVVJJW21kNXN1bV0gPSAiOGM5NjdkNTI2NDY1N2E3OThm
-MjJlZTIzOTc2ZmYwZDkiCitTUkNfVVJJW3NoYTI1NnN1bV0gPSAiNzY2ZmYxNjlhZjc5ODU5OWQ3
-ZGQ0MmU0MWU5ZjQ1MzNkNzM5NDJhMmJiOTI4MjM1MTE1NDEyZGNlNWI4MTQwNiIKZGlmZiAtLWdp
-dCBhL3JlY2lwZXMvY21ha2UvY21ha2VfMi44LjIuYmIgYi9yZWNpcGVzL2NtYWtlL2NtYWtlXzIu
-OC4yLmJiCm5ldyBmaWxlIG1vZGUgMTAwNjQ0CmluZGV4IDAwMDAwMDAuLmMzYjI1OTEKLS0tIC9k
-ZXYvbnVsbAorKysgYi9yZWNpcGVzL2NtYWtlL2NtYWtlXzIuOC4yLmJiCkBAIC0wLDAgKzEsMTAg
-QEAKK3JlcXVpcmUgY21ha2UuaW5jCisKK2luaGVyaXQgY21ha2UKKworZG9fY29uZmlndXJlX2Fw
-cGVuZCgpIHsKKwlzZWQgLWkgLWUgJ3MsSEFWRV9HTElCQ19TVFJFUlJPUl9SX19UUllSVU5fT1VU
-UFVULUFEVkFOQ0VEOklOVEVSTkFMPTEsSEFWRV9HTElCQ19TVFJFUlJPUl9SX19UUllSVU5fT1VU
-UFVULUFEVkFOQ0VEOklOVEVSTkFMPTAsJyBDTWFrZUNhY2hlLnR4dAorfQorCitTUkNfVVJJW21k
-NXN1bV0gPSAiOGM5NjdkNTI2NDY1N2E3OThmMjJlZTIzOTc2ZmYwZDkiCitTUkNfVVJJW3NoYTI1
-NnN1bV0gPSAiNzY2ZmYxNjlhZjc5ODU5OWQ3ZGQ0MmU0MWU5ZjQ1MzNkNzM5NDJhMmJiOTI4MjM1
-MTE1NDEyZGNlNWI4MTQwNiIKLS0gCjEuNy4wLjQKCg==
-
---0016369895dbcf2a3e048c4d7879--
