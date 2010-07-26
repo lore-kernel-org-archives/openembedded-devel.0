@@ -1,40 +1,34 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OdTjV-0006bZ-Qa
+	(envelope-from <morphis@gravedo.de>) id 1OdTpN-0006nD-Jr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 21:53:07 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OdTjE-0007N3-3D from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 12:52:48 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 26 Jul 2010 12:52:47 -0700
-Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 26 Jul 2010 13:52:46 -0600
-Message-ID: <4C4DE788.3050204@mentor.com>
-Date: Mon, 26 Jul 2010 12:52:40 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Mon, 26 Jul 2010 21:59:10 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 6843E80C52A; Mon, 26 Jul 2010 21:58:55 +0200 (CEST)
+Received: from [192.168.1.142] (p5489BA1E.dip.t-dialin.net [84.137.186.30])
+	by gravedo.de (Postfix) with ESMTPSA id 44CA180C524
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 21:58:54 +0200 (CEST)
+Message-ID: <4C4DE8FA.7060707@gravedo.de>
+Date: Mon, 26 Jul 2010 21:58:50 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com>	<4C4AE42C.5000306@welchs.me.uk>	<AANLkTimG_U4Gsc9LuK6oKDJO2rE=xB7cDQzGf6dsh2GM@mail.gmail.com>	<4C4B0125.1040304@vollmann.ch>
-	<i2f05l$pne$1@dough.gmane.org>
-In-Reply-To: <i2f05l$pne$1@dough.gmane.org>
-X-OriginalArrivalTime: 26 Jul 2010 19:52:46.0893 (UTC)
-	FILETIME=[1EB7BDD0:01CB2CFC]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>	<1279651497-20918-2-git-send-email-morphis@gravedo.de>
+	<20100726074601.GA27921@excalibur.local>
+In-Reply-To: <20100726074601.GA27921@excalibur.local>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] get rid of legacy staging
+Subject: Re: [PATCH 1/4] lvm2: rebase all recipes on a global lvm2.inc recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,61 +42,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 19:53:07 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Mon, 26 Jul 2010 19:59:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+On 26.07.2010 09:46, Stefan Schmidt wrote:
+> Hello.
 > 
-> On 24-07-10 17:05, Detlef Vollmann wrote:
->> On 07/24/10 16:35, Frans Meulenbroeks wrote:
->>> 2010/7/24 Martyn Welch <martyn@welchs.me.uk>
->>>
->>>> Can anyone point me to any documentation that describes what legacy
->>>> staging
->>>> is and roughly what needs to be done to remove it?
->>> There was a post half a year or so ago from Koen, but I can't find it.
->>> Basically it boils down to removing do_stage from a recipe in which case
->>> do_install is used to install things in staging
->>> in some cases do_install need to be modified to deal with
->>> peculiarities that
->>> were done in do_stage
->>>
->>> For native recipes NATIVE_INSTALL_WORKS = "1" may need to be added.
->> That's not really much of an explanation.
->> Let's take an example.  I have two out of tree kernel modules A and B.
->> B depends on A.
->> With "legacy" staging, in A_1.0.bb I have a do_install, that copies
->> the kernel object, and a do_stage, that copies the header file at
->> a place where B_1.0.bb can find it.
+> On Tue, 2010-07-20 at 20:44, Simon Busch wrote:
+>> This rebases all specific versions of lvm2 on a global recipe lvm2.inc which defines the
+>> common parameters for building lvm2. Staging is overwritten as we don't need any of the
+>> executables or manpages the build of lvm2 produces for any related builds.
 >>
->> How do I do that with non-"legacy" staging?
+>> Signed-off-by: Simon Busch <morphis@gravedo.de>
 > 
-> You copy the header in do_install to ${D}${includedir} or a subdir of
-> that depending on the header.
-> 
-> Cheat sheet:
-> 
-> STAGING_BINDIR -> ${D}${bindir}
-> STAGING_INCDIR -> ${D}${includedir}
-> STAGING_LIBDIR -> ${D}${libdir}
-> STAGING_DATADIR -> ${D}${datadir}
-> 
-> And if your recipe uses BBCLASS_EXTEND = native *and* 'make install'
-> doesn't do the job (e.g. using do_install_append), use
-> NATIVE_INSTALL_WORKS = "1"
-> 
-> If you use packaged-staging it's easy to do dpkg-deb -c on the staging
-> packages before and after the changes.
+> Looks good. Two comments below.
 
-http://wiki.openembedded.org/index.php/Legacy_staging
-and is linked from 
-http://wiki.openembedded.org/index.php/OpenEmbeddedJanitors
+Thank you for commenting this patches!
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+> 
+>> diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
+>> new file mode 100644
+>> index 0000000..a7e37b5
+>> --- /dev/null
+>> +++ b/recipes/lvm2/lvm2.inc
+>> @@ -0,0 +1,20 @@
+>> +SECTION = "utils"
+>> +DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+>> +LICENSE = "GPL"
+>> +DEPENDS = "device-mapper"
+>> +INC_PR = "r2"
+>> +
+>> +S = "${WORKDIR}/LVM2.${PV}"
+>> +SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+>> +           file://crosscompile_fix.patch"
+>> +
+>> +# Unset user/group to unbreak install.
+>> +EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
+>> +EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
+> 
+> I can see that you just merged this in from an already existing recipe, but do
+> we know why we have an overrirde for ARM here which changes nothing? Looks bogus
+> to me.
+
+Hm, you are right. I checked it with recompiling without the
+EXTRA_OECONF_arm statement. It works fine. Is it ok if I supply an extra
+patch removing this statement or should I rework this patch?
+
+> 
+>> +inherit autotools
+>> +
+>> +# We don't need to stage anything (the executables are no needed at build time by any
+>> +# other recipe)
+>> +do_stage() {
+>> +}
+> 
+> While we don't need the executables the don't hurd either IMHO. Can we get rid
+> of this?
+> 
+
+The problem was, that the executables and manpages where installed into
+the staging dir and never removed, when the packages was clean ur
+purged. So I added the empty do_stage block to avoid stage of anything
+from this package as we don't need them anyway.
+
+regards,
+morphis
+
 
 
