@@ -1,41 +1,42 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ranjithkannikara@gmail.com>) id 1OdLWZ-0001xR-5v
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 13:07:12 +0200
-Received: by gwb15 with SMTP id 15so5529gwb.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdLtu-0000Q1-Q0 for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 13:32:18 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdLtZ-0007Wg-BM for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 13:30:57 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 13:30:57 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 04:06:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=3jcmZRboQCfAAGYRWg6KVwtl5p8wnbTFRasiOmVSPX8=;
-	b=pIXBnuO3w998UEK6T3CevTbNpq5hCDsUO8irkKDxc/ARDA9s4ffxc0j+X3vYVeA8/H
-	nK/UW+Nf/YgbRN7zc78EoZwRw8e0xCN34NyugbyerDZSpXrNLCriKAJM0YPewgnUju1c
-	htFLAOg5x7zBhujJL/3OojjdJ3Vc951m9yCE8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=qu/NDrVZ4FU+OnoNWZrdtE+1dEopHfngVH9rgLsfgqOeoTo6SzBaAfTdQXpKYyVWYk
-	Q2r5AUuQ8ORA75I3nzVun+ciyMULaHWyZuA1VLvV9Zkt7gYD2ob0W0shxqreWG/0zY3w
-	6c7zpK3dy3IsfEZXJTpFe9QidO8NntdQVE7mE=
-Received: by 10.100.154.8 with SMTP id b8mr7492828ane.189.1280142414241; Mon, 
-	26 Jul 2010 04:06:54 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.181.166 with HTTP; Mon, 26 Jul 2010 04:06:33 -0700 (PDT)
-From: ranjith kannikara <ranjithkannikara@gmail.com>
-Date: Mon, 26 Jul 2010 16:36:33 +0530
-Message-ID: <AANLkTikNf=aE5dENWpkWxT3VY0p0Ap0f75Z=SRzjD=g=@mail.gmail.com>
+	Mon, 26 Jul 2010 13:30:57 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: ranjithkannikara@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 26 Jul 2010 13:30:48 +0200
+Message-ID: <i2jrl9$4j3$1@dough.gmane.org>
+References: <alpine.DEB.2.00.1007260653230.5356@lynx>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <alpine.DEB.2.00.1007260653230.5356@lynx>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: bitbake fso-illume-image returns error on gtk+ ..still not working
+Subject: Re: should beagleboard-demo-image (b-d-i) be theoretically buildable?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,96 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 11:07:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 26 Jul 2010 11:32:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 26, 2010 at 4:12 PM, ranjith kannikara <
-ranjithkannikara@gmail.com> wrote:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
->
->
-> On Mon, Jul 26, 2010 at 3:45 PM, Thomas Zimmermann <ml@vdm-design.de>wrote:
->
->> Am Montag 26 Juli 2010, 11:56:07 schrieb ranjith kannikara:
->> > Hi,
->> > I am a newbie in openembedded. I tried bitbake helloworld and it worked.
->> > But when i was running "bitbake fso-illume-image" . It returned an error
->> > that do_compile for gtk+ failed.
->> >
->> > The respective error log entry was
->> >
->> >
->> ../../../../arm-angstrom-linux-gnueabi/bin/ld:.libs/libgdk_pixbuf-2.0.ver:2
->> > : ignoring invalid character `\001' in script
->> > and
->> >
->> ../../../../arm-angstrom-linux-gnueabi/bin/ld:.libs/libgdk_pixbuf-2.0.ver:2
->> > : syntax error in VERSION script
->> >
->> > I tried googling and even asked in the irc channel #oe but dint get any
->> > useful information.
->> >
->> > Can any one tell me how to get this error cleared.
->> >
->> > I ran bitbake -crebuild gtk+ also , which ran succesfully at first and
->> when
->> > again i run bitbate fso-illume-image it gave the same error
->> > And now when i run bitbake -crebuild gtk+ that too shows the same error.
->> >
->> > Regards,
->> > Ranjith
->>
->> There is sth strange in the VERSION file of gtk+.
->> You have 2 alternatives:
->> 1) use bash
->
-> 2) clean the VERSION file
->>
->
-> I am already using bash, Anyway i shall try the next alternative you have
-> given.
-> Thanks for  your response
->
+It builds fine on all the buildhosts I have (ubuntu 8.04-32bit,
+9.10-64bit, debian testing-64bit among others).
 
-I am already using bash and i have also tried cleaning the  VERSION file but
-the file is created whenever the "bitbake fso-illume-image" is run and it
-generates the same error.
-Can anyone tell me why is it so. and how to make the build complete.
+And I see no logs attached to your email, so I can't help.
 
-Regards,
-Ranjith
+On 26-07-10 12:57, Robert P. J. Day wrote:
+> 
+>   been trying to keep up with the recent reorg so a quick question --
+> i was just about to clean and try a rebuild of b-d-i on my 64-bit
+> ubuntu 10.04 system.  should that work?
+> 
+>   i ask this since, a few days ago, during a test build, i was
+> surprised to note that, finally, abiword built but (sadly) firefox was
+> back to being unbuildable.  so i'm never sure what to *expect*.  if i
+> try to build from scratch, should i expect success right now?  i'm
+> going to start the rebuild, anyway.
+> 
+> rday
+> 
 
-Regards,
-> Ranjith
->
->>
->> Greets
->> Thomas
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
->
-> --
-> Ranjith Babu Kannikara
-> 0091 9809215273
-> Student, Computer science and engg, GEC Thrissur...
-> Student developer google ( 2008 GSOC ).
-> http://sourceforge.net/users/kannikara
-> http://www.ranjithkannikara.blogspot.com/
->
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMTXHoMkyGM64RGpERAqcSAKCgDwqqML5/QpbAwbFtYuotDcGoXACgllxl
+rIk5bHacyPx9eU1Sm0S6RXU=
+=g076
+-----END PGP SIGNATURE-----
 
 
-
--- 
-Ranjith Babu Kannikara
-0091 9809215273
-Student, Computer science and engg, GEC Thrissur...
-Student developer google ( 2008 GSOC ).
-http://sourceforge.net/users/kannikara
-http://www.ranjithkannikara.blogspot.com/
 
