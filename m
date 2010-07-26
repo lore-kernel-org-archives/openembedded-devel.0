@@ -1,34 +1,34 @@
 Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OdTsj-0007Hp-Bz
+	(envelope-from <raj.khem@gmail.com>) id 1OdTsk-0007Hx-7O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 22:02:38 +0200
-Received: by pvg13 with SMTP id 13so229441pvg.6
+	Mon, 26 Jul 2010 22:02:39 +0200
+Received: by pvg13 with SMTP id 13so229446pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 13:02:20 -0700 (PDT)
+	Mon, 26 Jul 2010 13:02:21 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=ouXavNLMoE8rFfrPicGacbtK0B2Okht2QbfL2GkXtE4=;
-	b=eU3yiQRnZ8iARzV6IM2LoqYbcmcG/7iwUWN17f55Ueov+baI7YU0emJavxOa919lw+
-	8hCvqoSj1tTfAe37sbqCVWXwQCuuwPH4BvCJYQZz1zp2XLCrigS8PAeXP8Nz72cLChPC
-	NB32lL9nf8wb4KvmzRLg0Yqd4ddUQ5egkq3lA=
+	bh=rtSJbJmNF+6GNCabbITAJNPoREFodn/Vs5nqnBXAoe0=;
+	b=tkXcbtQBY6uar6gCh3rXmDFfxnl/cPK+z/ofdpuR+jzI6HBpcI65ly/YvEI1iwkAka
+	gnjDgmHne8k8iDSsniHURpaoIUTrQqXIG46nErqskPZEmhpkBYZVgWLNAFtKW4jOp77h
+	dWwBuZTSue4qQI2H2Ia/NyyqfyGFD8CPvOTw0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=lf1ZmLtPU7c18ei/zk777fztY4dfPFHTfKRX/m8vmxleXBoSgb/yL6HBcc94MAfWqD
-	mqhrzpZWFzc8sZvUz/vT7N1mPFWVjqQBiPV1zkmQcRshyceSLdk0lrqg/DBL13KWKCvW
-	h+sUoiqN/R/KWk6kStWG+P5R0z+I7ZGRId/Jc=
-Received: by 10.142.51.13 with SMTP id y13mr6086517wfy.8.1280174540211;
-	Mon, 26 Jul 2010 13:02:20 -0700 (PDT)
+	b=NHRelEdP5hKCF12yErbImdPwIy8LzlqZWprJRu3uqeWjYJjBgE/gwusVvHi/BuPlpa
+	OfWIunh/Njbz7SEFegXzyExRj8g0H4sWxXOPOFrIY3fHJYmeGotLFmLrjws0hDigETY5
+	EWQORYp97mNcg9vJXIemnpAzhzT0RMjck/Lpc=
+Received: by 10.142.240.3 with SMTP id n3mr6120779wfh.191.1280174541135;
+	Mon, 26 Jul 2010 13:02:21 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id q27sm4573766wfc.18.2010.07.26.13.02.19
+	by mx.google.com with ESMTPS id q27sm4573766wfc.18.2010.07.26.13.02.20
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 26 Jul 2010 13:02:19 -0700 (PDT)
+	Mon, 26 Jul 2010 13:02:20 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jul 2010 13:02:07 -0700
-Message-Id: <1280174528-27682-7-git-send-email-raj.khem@gmail.com>
+Date: Mon, 26 Jul 2010 13:02:08 -0700
+Message-Id: <1280174528-27682-8-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
 References: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
 	UPPERCASE_50_75 autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 6/7] cross.bbclass, packaged-staging.bbclass, bitbake.conf: construct *VENDOR variable from TARGET_SUB_ARCH and DISTRO_VENDOR.
+Subject: [PATCH 7/7] recipes: Replace usage of MULTIMACH_TARGET_SYS with TARGET_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,163 +54,148 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 20:02:38 -0000
-
-* MULTIMACH_* are no longer needed TARGET_SYS is distinct enough to get
-  multi-machine builds going in same tmpdir.
+X-List-Received-Date: Mon, 26 Jul 2010 20:02:39 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- classes/cross.bbclass            |    2 +-
- classes/packaged-staging.bbclass |    2 +-
- conf/bitbake.conf                |   39 ++++++++++++-------------------------
- 3 files changed, 15 insertions(+), 28 deletions(-)
+ recipes/gnuradio/gnuradio-libusb-compat.inc     |    2 +-
+ recipes/gnuradio/gnuradio.inc                   |    2 +-
+ recipes/opencv/opencv-dsp-acceleration_svn.bb   |    2 +-
+ recipes/ti/README                               |    3 +-
+ recipes/ti/ti-paths.inc                         |   34 +++++++++++-----------
+ recipes/ti/ti-staging.inc                       |    3 --
+ recipes/xapian/xapian-bindings-python_1.0.14.bb |    2 +-
+ 7 files changed, 22 insertions(+), 26 deletions(-)
 
-diff --git a/classes/cross.bbclass b/classes/cross.bbclass
-index 5776a37..75b2abe 100644
---- a/classes/cross.bbclass
-+++ b/classes/cross.bbclass
-@@ -15,6 +15,7 @@ OLD_PACKAGE_ARCH := "${PACKAGE_ARCH}"
- PACKAGE_ARCH = "${OLD_PACKAGE_ARCH}"
- # Also save BASE_PACKAGE_ARCH since HOST_ARCH can influence it
- OLD_BASE_PACKAGE_ARCH := "${BASE_PACKAGE_ARCH}"
-+BASE_PACKAGE_ARCH = "${OLD_BASE_PACKAGE_ARCH}"
+diff --git a/recipes/gnuradio/gnuradio-libusb-compat.inc b/recipes/gnuradio/gnuradio-libusb-compat.inc
+index efe2b88..aa4d41a 100644
+--- a/recipes/gnuradio/gnuradio-libusb-compat.inc
++++ b/recipes/gnuradio/gnuradio-libusb-compat.inc
+@@ -8,7 +8,7 @@ INC_PR = "r7"
+ inherit distutils-base autotools autotools_stage pkgconfig
  
- HOST_ARCH = "${BUILD_ARCH}"
- HOST_VENDOR = "${BUILD_VENDOR}"
-@@ -22,7 +23,6 @@ HOST_OS = "${BUILD_OS}"
- HOST_PREFIX = "${BUILD_PREFIX}"
- HOST_CC_ARCH = "${BUILD_CC_ARCH}"
- HOST_EXEEXT = "${BUILD_EXEEXT}"
--BASE_PACKAGE_ARCH = "${OLD_BASE_PACKAGE_ARCH}"
- BASEPKG_HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
+ export BUILD_SYS
+-export HOST_SYS=${MULTIMACH_TARGET_SYS}
++export HOST_SYS
  
- CPPFLAGS = "${BUILD_CPPFLAGS}"
-diff --git a/classes/packaged-staging.bbclass b/classes/packaged-staging.bbclass
-index fda1431..6ff8106 100644
---- a/classes/packaged-staging.bbclass
-+++ b/classes/packaged-staging.bbclass
-@@ -15,7 +15,7 @@ PSTAGE_PKGVERSION = "${PV}-${PR}"
- PSTAGE_PKGARCH    = "${PACKAGE_ARCH}-${HOST_OS}"
- PSTAGE_EXTRAPATH  ?= "/${OELAYOUT_ABI}/${DISTRO_PR}/"
- PSTAGE_PKGPATH    = "${DISTRO}${PSTAGE_EXTRAPATH}"
--PSTAGE_PKGPN      = "${@bb.data.expand('staging-${PN}-${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}', d).replace('_', '-')}"
-+PSTAGE_PKGPN      = "${@bb.data.expand('staging-${PN}-${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}', d).replace('_', '-')}"
- PSTAGE_PKGNAME    = "${PSTAGE_PKGPN}_${PSTAGE_PKGVERSION}_${PSTAGE_PKGARCH}.ipk"
- PSTAGE_PKG        = "${PSTAGE_DIR}/${PSTAGE_PKGPATH}/${PSTAGE_PKGNAME}"
- PSTAGE_WORKDIR   = "${TMPDIR}/pstage"
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 66eebf3..dfdac40 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -98,7 +98,7 @@ BUILD_PREFIX = ""
- BUILD_CC_ARCH = ""
- BUILD_EXEEXT = ""
+ CXXFLAGS_powerpc += "-lstdc++"
  
--HOST_ARCH = "${TARGET_SUB_ARCH}"
-+HOST_ARCH = "${TARGET_ARCH}"
- HOST_OS = "${TARGET_OS}"
- HOST_VENDOR = "${TARGET_VENDOR}"
- HOST_SYS = "${HOST_ARCH}${HOST_VENDOR}-${HOST_OS}"
-@@ -108,8 +108,8 @@ HOST_EXEEXT = ""
+diff --git a/recipes/gnuradio/gnuradio.inc b/recipes/gnuradio/gnuradio.inc
+index 6eaf119..1a08930 100644
+--- a/recipes/gnuradio/gnuradio.inc
++++ b/recipes/gnuradio/gnuradio.inc
+@@ -8,7 +8,7 @@ INC_PR = "r7"
+ inherit distutils-base autotools autotools_stage pkgconfig
  
- TARGET_ARCH ?= "INVALID"
- TARGET_OS = "INVALID"
--TARGET_VENDOR = "${BUILD_VENDOR}"
--TARGET_SYS = "${TARGET_SUB_ARCH}${TARGET_VENDOR}${@['-' + bb.data.getVar('TARGET_OS', d, 1), ''][bb.data.getVar('TARGET_OS', d, 1) == ('' or 'custom')]}"
-+TARGET_VENDOR = "-${TARGET_SUB_ARCH}${DISTRO_VENDOR}"
-+TARGET_SYS = "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + bb.data.getVar('TARGET_OS', d, 1), ''][bb.data.getVar('TARGET_OS', d, 1) == ('' or 'custom')]}"
- TARGET_PREFIX = "${TARGET_SYS}-"
- TARGET_CC_ARCH = ""
- TARGET_EXEEXT = ""
-@@ -132,15 +132,6 @@ MACHINE_ARCH = "${@oe.utils.ifelse(bool(d.getVar('MACHINE', True)), '${MACHINE}'
-                                    'BASE_PACKAGE_ARCH')}"
- PACKAGE_ARCHS = "all any noarch ${TARGET_ARCH} ${PACKAGE_EXTRA_ARCHS} ${MACHINE}"
+ export BUILD_SYS
+-export HOST_SYS=${MULTIMACH_TARGET_SYS}
++export HOST_SYS
  
--MULTIMACH_ARCH = "${PACKAGE_ARCH}"
--MULTIMACH_TARGET_SYS = "${MULTIMACH_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
--MULTIMACH_HOST_SYS = "${MULTIMACH_ARCH}${HOST_VENDOR}-${HOST_OS}"
+ CXXFLAGS_powerpc += "-lstdc++"
+ 
+diff --git a/recipes/opencv/opencv-dsp-acceleration_svn.bb b/recipes/opencv/opencv-dsp-acceleration_svn.bb
+index 788e8e2..26fc3c6 100644
+--- a/recipes/opencv/opencv-dsp-acceleration_svn.bb
++++ b/recipes/opencv/opencv-dsp-acceleration_svn.bb
+@@ -22,7 +22,7 @@ export OPENCV_PATH = "${STAGING_INCDIR}"
+ export DSPLIB_PATH = "${DSPLIB_INSTALL_DIR}"
+ 
+ # You need to extract the imglib from the .exe manually and place it in /OE/tmp (or somewhere else and change the patch below)
+-export IMGLIB_PATH = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${installdir}/imglib_v201"
++export IMGLIB_PATH = "${STAGING_DIR}/${TARGET_SYS}${installdir}/imglib_v201"
+ 
+ do_configure() {
+ 	echo "-l ${DSPLIB_INSTALL_DIR}/dsplib64plus.lib" >> ${S}/beagle/server/opencv_unitserver_evm3530/link.cmd
+diff --git a/recipes/ti/README b/recipes/ti/README
+index 2fbb9f1..6262c9c 100644
+--- a/recipes/ti/README
++++ b/recipes/ti/README
+@@ -29,13 +29,12 @@ Since most of the recipes in this directory deal with a DSP (e.g OMAP3) or accel
+ The complete unpacked trees are staged to staging/machine/usr/share/ti/${PN}(-tree) and all the _INSTALL_DIR vars will point to that. To make this work there is a ti-staging.inc which contains:
+ 
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+-BASEPKG_HOST_SYS = "${MULTIMACH_HOST_SYS}"
+ PACKAGE_STRIP = "no"
+ 
+ The 'BASEPKG_HOST_SYS' bit is what makes it work, but cause trouble is you want to read from it, so ti-paths.inc does:
+ 
+ export CODEGEN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt6x"
+-export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
++export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
+ 
+ Which will point it to the machine specific staging like we want it to.
+ 
+diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
+index 27400a1..57af6c5 100644
+--- a/recipes/ti/ti-paths.inc
++++ b/recipes/ti/ti-paths.inc
+@@ -22,23 +22,23 @@ export BIOSPSP_INSTALL_DIR_RECIPE    = "${installdir}/ti-biospsp-tree"
+ export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
+ 
+ # This is where the tools will end up in staging provided PACKAGE_ARCH = ${MACHINE_ARCH} is set
+-export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
+-export XDC_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
+-export XDAIS_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
+-export BIOS_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
+-export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
+-export BIOSUTILS_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
+-export FC_INSTALL_DIR         = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
+-export CE_INSTALL_DIR         = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
+-export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
+-export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
+-export CMEM_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
+-export LINK_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
+-export LPM_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
+-export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
+-export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
+-export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
+-export BIOSPSP_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
++export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
++export XDC_INSTALL_DIR        = "${STAGING_DIR}/${TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
++export XDAIS_INSTALL_DIR      = "${STAGING_DIR}/${TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
++export BIOS_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
++export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
++export BIOSUTILS_INSTALL_DIR  = "${STAGING_DIR}/${TARGET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
++export FC_INSTALL_DIR         = "${STAGING_DIR}/${TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
++export CE_INSTALL_DIR         = "${STAGING_DIR}/${TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
++export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR}/${TARGET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
++export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR}/${TARGET_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
++export CMEM_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
++export LINK_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
++export LPM_INSTALL_DIR        = "${STAGING_DIR}/${TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
++export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
++export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
++export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
++export BIOSPSP_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
+ 
+ DSPSUFFIX_omapl137 = "x674"
+ DSPSUFFIX_omapl138 = "x674"
+diff --git a/recipes/ti/ti-staging.inc b/recipes/ti/ti-staging.inc
+index 593f094..de2a882 100644
+--- a/recipes/ti/ti-staging.inc
++++ b/recipes/ti/ti-staging.inc
+@@ -1,8 +1,5 @@
+ PACKAGE_ARCH = "${MACHINE_ARCH}"
+ 
+-# Allow staging into machine specific dir
+-BASEPKG_HOST_SYS = "${MULTIMACH_HOST_SYS}"
 -
--BASEPKG_HOST_SYS = "${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}"
--BASEPKG_TARGET_SYS = "${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
--
--#TARGET_SUB_ARCH = "${BASE_PACKAGE_ARCH}"
--
- # select proper CPU to get binary locales generated
- QEMU_OPTIONS = ""
- QEMU_OPTIONS_iwmmxt  = "-cpu pxa270-c5"
-@@ -289,8 +280,8 @@ GITDIR = "${CO_DIR}/git"
- BZRDIR = "${CO_DIR}/bzr"
- HGDIR = "${CO_DIR}/hg"
+ # Search archdir for shlibs instead of machine dir due to above BASEPKG_HOST_SYS
+ SHLIBSDIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}/shlibs"
  
--STAMP = "${TMPDIR}/stamps/${MULTIMACH_TARGET_SYS}/${PF}"
--WORKDIR = "${TMPDIR}/work/${MULTIMACH_TARGET_SYS}/${PF}"
-+STAMP = "${TMPDIR}/stamps/${TARGET_SYS}/${PF}"
-+WORKDIR = "${TMPDIR}/work/${TARGET_SYS}/${PF}"
- T = "${WORKDIR}/temp"
- D = "${WORKDIR}/image"
- S = "${WORKDIR}/${BP}"
-@@ -302,16 +293,14 @@ STAGING_DIR_JAVA = "${STAGING_DIR}/java"
- STAGING_DIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}"
- STAGING_BINDIR_NATIVE = "${STAGING_DIR_NATIVE}${bindir_native}"
- STAGING_SBINDIR_NATIVE = "${STAGING_DIR_NATIVE}${sbindir_native}"
--STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${bindir_native}/${MULTIMACH_HOST_SYS}"
--STAGING_BINDIR_CROSS_BASEPKG = "${STAGING_DIR_NATIVE}${bindir_native}/${BASEPKG_TARGET_SYS}"
-+STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${bindir_native}/${HOST_SYS}"
-+STAGING_BINDIR_CROSS_BASEPKG = "${STAGING_DIR_NATIVE}${bindir_native}/${TARGET_SYS}"
- STAGING_LIBDIR_NATIVE = "${STAGING_DIR_NATIVE}${libdir_native}"
- STAGING_INCDIR_NATIVE = "${STAGING_DIR_NATIVE}${includedir_native}"
- STAGING_ETCDIR_NATIVE = "${STAGING_DIR_NATIVE}${sysconfdir_native}"
- STAGING_DATADIR_NATIVE = "${STAGING_DIR_NATIVE}${datadir_native}"
+diff --git a/recipes/xapian/xapian-bindings-python_1.0.14.bb b/recipes/xapian/xapian-bindings-python_1.0.14.bb
+index ae97779..6c24e2d 100644
+--- a/recipes/xapian/xapian-bindings-python_1.0.14.bb
++++ b/recipes/xapian/xapian-bindings-python_1.0.14.bb
+@@ -18,7 +18,7 @@ EXTRA_OECONF = "--with-python --without-php --without-ruby --without-tcl \
+                 --without-csharp --without-java"
  
--# This should really be MULTIMACH_HOST_SYS but that breaks "all" and machine 
--# specific packages - hack around it for now.
--STAGING_DIR_HOST = "${STAGING_DIR}/${BASEPKG_HOST_SYS}"
-+STAGING_DIR_HOST = "${STAGING_DIR}/${HOST_SYS}"
- STAGING_BINDIR = "${STAGING_DIR_HOST}${bindir}"
- STAGING_LIBDIR = "${STAGING_DIR_HOST}${libdir}"
- STAGING_INCDIR = "${STAGING_DIR_HOST}${includedir}"
-@@ -322,9 +311,7 @@ STAGING_LOADER_DIR = "${STAGING_DIR_HOST}/loader"
- STAGING_FIRMWARE_DIR = "${STAGING_DIR_HOST}/firmware"
- STAGING_PYDIR = "${STAGING_DIR}/lib/python2.4"
+ do_configure () {
+-        BUILD_SYS=${BUILD_SYS} HOST_SYS=${MULTIMACH_HOST_SYS} \
++        BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
+         autotools_do_configure
+ }
  
--# This should really be MULTIMACH_TARGET_SYS but that breaks "all" and machine 
--# specific packages - hack around it for now.
--STAGING_DIR_TARGET = "${STAGING_DIR}/${BASEPKG_TARGET_SYS}"
-+STAGING_DIR_TARGET = "${STAGING_DIR}/${TARGET_SYS}"
- 
- STAGING_DIR_SDK = "${STAGING_DIR}/${SDK_SYS}"
- 
-@@ -338,7 +325,7 @@ DEPLOY_DIR_DEB = "${DEPLOY_DIR}/deb"
- DEPLOY_DIR_IMAGE = "${DEPLOY_DIR}/images"
- DEPLOY_DIR_TOOLS = "${DEPLOY_DIR}/tools"
- 
--PKGDATA_DIR = "${TMPDIR}/pkgdata/${MULTIMACH_TARGET_SYS}"
-+PKGDATA_DIR = "${TMPDIR}/pkgdata/${TARGET_SYS}"
- 
- SDK_NAME = "${DISTRO}/${TARGET_ARCH}"
- SDK_PATH = "/usr/local/${SDK_NAME}"
-@@ -348,7 +335,7 @@ SDKPATH = "${SDK_PATH}"
- # Kernel info.
- ##################################################################
- 
--STAGING_KERNEL_DIR = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/kernel"
-+STAGING_KERNEL_DIR = "${STAGING_DIR}/${TARGET_SYS}/kernel"
- 
- ##################################################################
- # Specific image creation and rootfs population info.
-@@ -635,9 +622,9 @@ SLOT = "0"
- 
- # Other
- 
--export PKG_CONFIG_DIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}${libdir}/pkgconfig"
-+export PKG_CONFIG_DIR = "${STAGING_DIR}/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}${libdir}/pkgconfig"
- export PKG_CONFIG_PATH = "${PKG_CONFIG_DIR}:${STAGING_DATADIR}/pkgconfig"
--export PKG_CONFIG_SYSROOT_DIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
-+export PKG_CONFIG_SYSROOT_DIR = "${STAGING_DIR}/${TARGET_ARCH}${TARGET_VENDOR}-${TARGET_OS}"
- export PKG_CONFIG_DISABLE_UNINSTALLED = "yes"
- 
- export XDG_DATA_DIRS = "${STAGING_DATADIR}"
 -- 
 1.7.1
 
