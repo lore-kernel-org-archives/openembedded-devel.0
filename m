@@ -1,34 +1,44 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OdTpN-0006nD-Jr
+	(envelope-from <raj.khem@gmail.com>) id 1OdTsd-0007HQ-A9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 21:59:10 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 6843E80C52A; Mon, 26 Jul 2010 21:58:55 +0200 (CEST)
-Received: from [192.168.1.142] (p5489BA1E.dip.t-dialin.net [84.137.186.30])
-	by gravedo.de (Postfix) with ESMTPSA id 44CA180C524
+	Mon, 26 Jul 2010 22:02:32 +0200
+Received: by pzk2 with SMTP id 2so1263612pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 21:58:54 +0200 (CEST)
-Message-ID: <4C4DE8FA.7060707@gravedo.de>
-Date: Mon, 26 Jul 2010 21:58:50 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
-MIME-Version: 1.0
+	Mon, 26 Jul 2010 13:02:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=YTn4VoX7JZQi+d7IMjan3QGh0wJ3Arrf3E+SRdKGFxM=;
+	b=HMnMLk6NQufFWDz+PyWlJUyeE8MeAVvF8pf7Nyo54X2PvBxh1ZJZ37Q/+h2LmVwH0N
+	zMrnU/iGBjLfK0wg+if5COI7SEEZaF533tjO5KTgCzWF6WJ+/XK5hkcOcr3Q458z7UjX
+	gEibZWu36Z0lEJokUV1TRvOerHYalskhu3ufQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=dBG1eMTWGWP+xCYSm6XVHOBHAQShZHohq6w13JOVVMqfKuLGbno+87mygq/rcSrZyV
+	HeNto83Ov7p2zxg84M6QpDGUWeW4I/ArqiH/NIGfNoc9o+9SNkX8rHvdPfZqq3JFxliy
+	i1urx5BbD8NsJMOHZFSbjNzGoP6rBEf+5s8vk=
+Received: by 10.142.48.6 with SMTP id v6mr8627776wfv.96.1280174533633;
+	Mon, 26 Jul 2010 13:02:13 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id q27sm4573766wfc.18.2010.07.26.13.02.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 26 Jul 2010 13:02:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>	<1279651497-20918-2-git-send-email-morphis@gravedo.de>
-	<20100726074601.GA27921@excalibur.local>
-In-Reply-To: <20100726074601.GA27921@excalibur.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+Date: Mon, 26 Jul 2010 13:02:01 -0700
+Message-Id: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] lvm2: rebase all recipes on a global lvm2.inc recipe
+Subject: [PATCH 0/7] Make multi-machine toolchains to co-exist (revised)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,72 +52,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 19:59:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 26 Jul 2010 20:02:32 -0000
 
-On 26.07.2010 09:46, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Tue, 2010-07-20 at 20:44, Simon Busch wrote:
->> This rebases all specific versions of lvm2 on a global recipe lvm2.inc which defines the
->> common parameters for building lvm2. Staging is overwritten as we don't need any of the
->> executables or manpages the build of lvm2 produces for any related builds.
->>
->> Signed-off-by: Simon Busch <morphis@gravedo.de>
-> 
-> Looks good. Two comments below.
+Hi
 
-Thank you for commenting this patches!
+Following series of patches are for making multi-machine toolchains co-exist with
+new cross staging for toolchain.
 
-> 
->> diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
->> new file mode 100644
->> index 0000000..a7e37b5
->> --- /dev/null
->> +++ b/recipes/lvm2/lvm2.inc
->> @@ -0,0 +1,20 @@
->> +SECTION = "utils"
->> +DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
->> +LICENSE = "GPL"
->> +DEPENDS = "device-mapper"
->> +INC_PR = "r2"
->> +
->> +S = "${WORKDIR}/LVM2.${PV}"
->> +SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
->> +           file://crosscompile_fix.patch"
->> +
->> +# Unset user/group to unbreak install.
->> +EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
->> +EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
-> 
-> I can see that you just merged this in from an already existing recipe, but do
-> we know why we have an overrirde for ARM here which changes nothing? Looks bogus
-> to me.
+It changes the toolchain triplet from ${TARGET_ARCH}-${VENDOR}-${OS} to 
+${TARGET_ARCH}-${CPU_SUB_TARGET}_${VENDOR}-OS
 
-Hm, you are right. I checked it with recompiling without the
-EXTRA_OECONF_arm statement. It works fine. Is it ok if I supply an extra
-patch removing this statement or should I rework this patch?
+which means that a toolchain for armv7 is called armi-v7a_oe-linux-gnueabi-*
+and for armv5te its called arm-v5te_oe-linux-gnueabi-*
 
-> 
->> +inherit autotools
->> +
->> +# We don't need to stage anything (the executables are no needed at build time by any
->> +# other recipe)
->> +do_stage() {
->> +}
-> 
-> While we don't need the executables the don't hurd either IMHO. Can we get rid
-> of this?
-> 
+They can coexist in same native sysroot. The symlinks would mean that
+gcc will not accidently mix the assemblers or linkers.
 
-The problem was, that the executables and manpages where installed into
-the staging dir and never removed, when the packages was clean ur
-purged. So I added the empty do_stage block to avoid stage of anything
-from this package as we don't need them anyway.
+MULTIMACH-* is not needed anymore as the TARGET_SYS is distinct enough
+to serve same purpose.
 
-regards,
-morphis
+I have booted a minimal-image on qemuarm qemuppc successfully. The build for 
+beagleboard in same sysroot went fine too. So I am confident of
+these patches.
+
+Please give it a shot in your environments
+
+If these patches look ok we can commit them and bump ABI once again
+
+Thanks
+-Khem
+
 
 
 
