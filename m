@@ -1,46 +1,45 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OdTsk-0007Hx-7O
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1OdTxc-0007zS-3P
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 22:02:39 +0200
-Received: by pvg13 with SMTP id 13so229446pvg.6
+	Mon, 26 Jul 2010 22:07:40 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 4FF52110009D
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 13:02:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=rtSJbJmNF+6GNCabbITAJNPoREFodn/Vs5nqnBXAoe0=;
-	b=tkXcbtQBY6uar6gCh3rXmDFfxnl/cPK+z/ofdpuR+jzI6HBpcI65ly/YvEI1iwkAka
-	gnjDgmHne8k8iDSsniHURpaoIUTrQqXIG46nErqskPZEmhpkBYZVgWLNAFtKW4jOp77h
-	dWwBuZTSue4qQI2H2Ia/NyyqfyGFD8CPvOTw0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=NHRelEdP5hKCF12yErbImdPwIy8LzlqZWprJRu3uqeWjYJjBgE/gwusVvHi/BuPlpa
-	OfWIunh/Njbz7SEFegXzyExRj8g0H4sWxXOPOFrIY3fHJYmeGotLFmLrjws0hDigETY5
-	EWQORYp97mNcg9vJXIemnpAzhzT0RMjck/Lpc=
-Received: by 10.142.240.3 with SMTP id n3mr6120779wfh.191.1280174541135;
-	Mon, 26 Jul 2010 13:02:21 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id q27sm4573766wfc.18.2010.07.26.13.02.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 26 Jul 2010 13:02:20 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Mon, 26 Jul 2010 22:07:25 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 24C8F1100097
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 22:07:24 +0200 (CEST)
+Received: from rhein.familie-heinold.de (g225073069.adsl.alicedsl.de
+	[92.225.73.69]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 22:07:24 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id B6B023C0EF; Mon, 26 Jul 2010 22:07:11 +0200 (CEST)
+Date: Mon, 26 Jul 2010 22:07:11 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 26 Jul 2010 13:02:08 -0700
-Message-Id: <1280174528-27682-8-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
-References: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100726200711.GA14360@rhein.zuhause.netz>
+References: <AANLkTimz9CwgpLeXVJfSpML7Piqh3M53jsx-ALgTJ+ac@mail.gmail.com>
+	<20100726175620.GA30949@rhein.zuhause.netz>
+	<AANLkTi=G+LN=nGOpPY-+KEMzRkJZonY-CTDx=jHpxE=g@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTi=G+LN=nGOpPY-+KEMzRkJZonY-CTDx=jHpxE=g@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
-	UPPERCASE_50_75 autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 7/7] recipes: Replace usage of MULTIMACH_TARGET_SYS with TARGET_SYS
+Subject: Re: [PATCH] Recipes for cmake 2.8.2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,150 +53,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 20:02:39 -0000
+X-List-Received-Date: Mon, 26 Jul 2010 20:07:40 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/gnuradio/gnuradio-libusb-compat.inc     |    2 +-
- recipes/gnuradio/gnuradio.inc                   |    2 +-
- recipes/opencv/opencv-dsp-acceleration_svn.bb   |    2 +-
- recipes/ti/README                               |    3 +-
- recipes/ti/ti-paths.inc                         |   34 +++++++++++-----------
- recipes/ti/ti-staging.inc                       |    3 --
- recipes/xapian/xapian-bindings-python_1.0.14.bb |    2 +-
- 7 files changed, 22 insertions(+), 26 deletions(-)
+On Mon, Jul 26, 2010 at 03:13:52PM -0300, Eduardo Lima (Etrunko) wrote:
+> On Mon, Jul 26, 2010 at 2:56 PM, Henning Heinold
+> <heinold@inf.fu-berlin.de> wrote:
+> > Hi,
+> >
+> > no chance to use BBCLASSEXTENDED = "native" ?
+> >
+> 
+> Well, I'm quite new to the OE world, not very sure of what is the best
+> way to do things yet. How would it be implemented?
+> 
+> Best regards, Etrunko
+> 
+> -- 
+> Eduardo de Barros Lima
+> eblima@gmail.com
 
-diff --git a/recipes/gnuradio/gnuradio-libusb-compat.inc b/recipes/gnuradio/gnuradio-libusb-compat.inc
-index efe2b88..aa4d41a 100644
---- a/recipes/gnuradio/gnuradio-libusb-compat.inc
-+++ b/recipes/gnuradio/gnuradio-libusb-compat.inc
-@@ -8,7 +8,7 @@ INC_PR = "r7"
- inherit distutils-base autotools autotools_stage pkgconfig
- 
- export BUILD_SYS
--export HOST_SYS=${MULTIMACH_TARGET_SYS}
-+export HOST_SYS
- 
- CXXFLAGS_powerpc += "-lstdc++"
- 
-diff --git a/recipes/gnuradio/gnuradio.inc b/recipes/gnuradio/gnuradio.inc
-index 6eaf119..1a08930 100644
---- a/recipes/gnuradio/gnuradio.inc
-+++ b/recipes/gnuradio/gnuradio.inc
-@@ -8,7 +8,7 @@ INC_PR = "r7"
- inherit distutils-base autotools autotools_stage pkgconfig
- 
- export BUILD_SYS
--export HOST_SYS=${MULTIMACH_TARGET_SYS}
-+export HOST_SYS
- 
- CXXFLAGS_powerpc += "-lstdc++"
- 
-diff --git a/recipes/opencv/opencv-dsp-acceleration_svn.bb b/recipes/opencv/opencv-dsp-acceleration_svn.bb
-index 788e8e2..26fc3c6 100644
---- a/recipes/opencv/opencv-dsp-acceleration_svn.bb
-+++ b/recipes/opencv/opencv-dsp-acceleration_svn.bb
-@@ -22,7 +22,7 @@ export OPENCV_PATH = "${STAGING_INCDIR}"
- export DSPLIB_PATH = "${DSPLIB_INSTALL_DIR}"
- 
- # You need to extract the imglib from the .exe manually and place it in /OE/tmp (or somewhere else and change the patch below)
--export IMGLIB_PATH = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${installdir}/imglib_v201"
-+export IMGLIB_PATH = "${STAGING_DIR}/${TARGET_SYS}${installdir}/imglib_v201"
- 
- do_configure() {
- 	echo "-l ${DSPLIB_INSTALL_DIR}/dsplib64plus.lib" >> ${S}/beagle/server/opencv_unitserver_evm3530/link.cmd
-diff --git a/recipes/ti/README b/recipes/ti/README
-index 2fbb9f1..6262c9c 100644
---- a/recipes/ti/README
-+++ b/recipes/ti/README
-@@ -29,13 +29,12 @@ Since most of the recipes in this directory deal with a DSP (e.g OMAP3) or accel
- The complete unpacked trees are staged to staging/machine/usr/share/ti/${PN}(-tree) and all the _INSTALL_DIR vars will point to that. To make this work there is a ti-staging.inc which contains:
- 
- PACKAGE_ARCH = "${MACHINE_ARCH}"
--BASEPKG_HOST_SYS = "${MULTIMACH_HOST_SYS}"
- PACKAGE_STRIP = "no"
- 
- The 'BASEPKG_HOST_SYS' bit is what makes it work, but cause trouble is you want to read from it, so ti-paths.inc does:
- 
- export CODEGEN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt6x"
--export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
-+export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
- 
- Which will point it to the machine specific staging like we want it to.
- 
-diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
-index 27400a1..57af6c5 100644
---- a/recipes/ti/ti-paths.inc
-+++ b/recipes/ti/ti-paths.inc
-@@ -22,23 +22,23 @@ export BIOSPSP_INSTALL_DIR_RECIPE    = "${installdir}/ti-biospsp-tree"
- export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
- 
- # This is where the tools will end up in staging provided PACKAGE_ARCH = ${MACHINE_ARCH} is set
--export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
--export XDC_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
--export XDAIS_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
--export BIOS_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
--export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
--export BIOSUTILS_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
--export FC_INSTALL_DIR         = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
--export CE_INSTALL_DIR         = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
--export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
--export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
--export CMEM_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
--export LINK_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
--export LPM_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
--export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
--export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
--export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
--export BIOSPSP_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
-+export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
-+export XDC_INSTALL_DIR        = "${STAGING_DIR}/${TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
-+export XDAIS_INSTALL_DIR      = "${STAGING_DIR}/${TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
-+export BIOS_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
-+export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
-+export BIOSUTILS_INSTALL_DIR  = "${STAGING_DIR}/${TARGET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
-+export FC_INSTALL_DIR         = "${STAGING_DIR}/${TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
-+export CE_INSTALL_DIR         = "${STAGING_DIR}/${TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
-+export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR}/${TARGET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
-+export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR}/${TARGET_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
-+export CMEM_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
-+export LINK_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
-+export LPM_INSTALL_DIR        = "${STAGING_DIR}/${TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
-+export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
-+export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
-+export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
-+export BIOSPSP_INSTALL_DIR    = "${STAGING_DIR}/${TARGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
- 
- DSPSUFFIX_omapl137 = "x674"
- DSPSUFFIX_omapl138 = "x674"
-diff --git a/recipes/ti/ti-staging.inc b/recipes/ti/ti-staging.inc
-index 593f094..de2a882 100644
---- a/recipes/ti/ti-staging.inc
-+++ b/recipes/ti/ti-staging.inc
-@@ -1,8 +1,5 @@
- PACKAGE_ARCH = "${MACHINE_ARCH}"
- 
--# Allow staging into machine specific dir
--BASEPKG_HOST_SYS = "${MULTIMACH_HOST_SYS}"
--
- # Search archdir for shlibs instead of machine dir due to above BASEPKG_HOST_SYS
- SHLIBSDIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}/shlibs"
- 
-diff --git a/recipes/xapian/xapian-bindings-python_1.0.14.bb b/recipes/xapian/xapian-bindings-python_1.0.14.bb
-index ae97779..6c24e2d 100644
---- a/recipes/xapian/xapian-bindings-python_1.0.14.bb
-+++ b/recipes/xapian/xapian-bindings-python_1.0.14.bb
-@@ -18,7 +18,7 @@ EXTRA_OECONF = "--with-python --without-php --without-ruby --without-tcl \
-                 --without-csharp --without-java"
- 
- do_configure () {
--        BUILD_SYS=${BUILD_SYS} HOST_SYS=${MULTIMACH_HOST_SYS} \
-+        BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
-         autotools_do_configure
- }
- 
--- 
-1.7.1
+Look at other recipes which has it already. The clue is that you dont need 
+an extra recipe for the native part. But you have to override some stuff with _virtclass-native
+maybee.
 
+Bye Henning
 
 
