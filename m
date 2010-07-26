@@ -1,45 +1,40 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OdTxc-0007zS-3P
+	(envelope-from <Tom_Rini@mentor.com>) id 1OdU35-00088N-42
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 26 Jul 2010 22:07:40 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 4FF52110009D
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 22:07:25 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 24C8F1100097
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 22:07:24 +0200 (CEST)
-Received: from rhein.familie-heinold.de (g225073069.adsl.alicedsl.de
-	[92.225.73.69]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 26 Jul 2010 22:07:24 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id B6B023C0EF; Mon, 26 Jul 2010 22:07:11 +0200 (CEST)
-Date: Mon, 26 Jul 2010 22:07:11 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100726200711.GA14360@rhein.zuhause.netz>
-References: <AANLkTimz9CwgpLeXVJfSpML7Piqh3M53jsx-ALgTJ+ac@mail.gmail.com>
-	<20100726175620.GA30949@rhein.zuhause.netz>
-	<AANLkTi=G+LN=nGOpPY-+KEMzRkJZonY-CTDx=jHpxE=g@mail.gmail.com>
+	Mon, 26 Jul 2010 22:13:19 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OdU2n-00022n-Iv from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 26 Jul 2010 13:13:01 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 26 Jul 2010 13:13:01 -0700
+Received: from [172.30.80.16] ([172.30.80.16]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 26 Jul 2010 14:13:00 -0600
+Message-ID: <4C4DEC49.9050708@mentor.com>
+Date: Mon, 26 Jul 2010 13:12:57 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=G+LN=nGOpPY-+KEMzRkJZonY-CTDx=jHpxE=g@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+To: openembedded-devel@lists.openembedded.org
+References: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
+	<1280174528-27682-3-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1280174528-27682-3-git-send-email-raj.khem@gmail.com>
+X-OriginalArrivalTime: 26 Jul 2010 20:13:00.0463 (UTC)
+	FILETIME=[F20FD3F0:01CB2CFE]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Recipes for cmake 2.8.2
+Subject: Re: [PATCH 2/7] binutils-cross.inc, binutils.inc: Overhaul for new cross dir structure.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,31 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 26 Jul 2010 20:07:40 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 26 Jul 2010 20:13:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 26, 2010 at 03:13:52PM -0300, Eduardo Lima (Etrunko) wrote:
-> On Mon, Jul 26, 2010 at 2:56 PM, Henning Heinold
-> <heinold@inf.fu-berlin.de> wrote:
-> > Hi,
-> >
-> > no chance to use BBCLASSEXTENDED = "native" ?
-> >
-> 
-> Well, I'm quite new to the OE world, not very sure of what is the best
-> way to do things yet. How would it be implemented?
-> 
-> Best regards, Etrunko
-> 
-> -- 
-> Eduardo de Barros Lima
-> eblima@gmail.com
+Khem Raj wrote:
+> * Install the symlinks instead of copied of tools.
+> * Dont build shared libopcodes
 
-Look at other recipes which has it already. The clue is that you dont need 
-an extra recipe for the native part. But you have to override some stuff with _virtclass-native
-maybee.
+Is that intended to fix the relocation issue with pstaging+relocatable? 
+  If so I was just about to push a PREPROCESS_RELOCATE_DIRS to deal with 
+that.  Or is there some other reason to disable shared versions of these 
+libraries?
 
-Bye Henning
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
