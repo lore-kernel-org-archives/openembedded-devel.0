@@ -1,41 +1,41 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OdmEs-0004Dx-SK for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 17:38:44 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet1.eads.net with ESMTP; 27 Jul 2010 17:28:30 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Tue, 27 Jul 2010 17:37:58 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 27 Jul 2010 17:37:58 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <Tom_Rini@mentor.com>) id 1Odnlk-0006wR-1d
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 19:16:45 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OdnlQ-0003qr-Ev from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 10:16:24 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 27 Jul 2010 10:16:24 -0700
+Received: from [172.30.80.63] ([172.30.80.63]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 27 Jul 2010 11:16:23 -0600
+Message-ID: <4C4F1463.5020804@mentor.com>
+Date: Tue, 27 Jul 2010 10:16:19 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Date: Tue, 27 Jul 2010 17:37:58 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B57B5@deimsg40.de.net.world>
-In-Reply-To: <alpine.DEB.2.00.1007270523480.16599@lynx>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] bitbake error on ncurses_5.4.bb C compiler cannot create
-	executables
-Thread-Index: AcstbfvBSz9ZQUatTA6nl3V5wgHD5gALkATQ
-References: <AANLkTik+1EuG8Se996jFqVfQBXc3fFqoYPGzHh4hRsV2@mail.gmail.com><1280222125.3763.6.camel@mattotaupa>
-	<alpine.DEB.2.00.1007270523480.16599@lynx>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 27 Jul 2010 15:37:58.0091 (UTC)
-	FILETIME=[B04B71B0:01CB2DA1]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+To: openembedded-devel@lists.openembedded.org
+References: <1280174528-27682-1-git-send-email-raj.khem@gmail.com>
+	<4C4E1332.9080804@mentor.com>
+	<AANLkTi=b_marUpgxb6c7eGercofhmySGo+6tMAEkq3vG@mail.gmail.com>
+In-Reply-To: <AANLkTi=b_marUpgxb6c7eGercofhmySGo+6tMAEkq3vG@mail.gmail.com>
+X-OriginalArrivalTime: 27 Jul 2010 17:16:23.0280 (UTC)
+	FILETIME=[700FC700:01CB2DAF]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake error on ncurses_5.4.bb C compiler cannot create executables
+Subject: Re: [PATCH 0/7] Make multi-machine toolchains to co-exist	(revised)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,115 +49,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 15:38:44 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 27 Jul 2010 17:16:45 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I use the http://gitorious.org/angstrom/openembedded repository, and the =
-latest pull reports the same error to me !
+Khem Raj wrote:
+> On Mon, Jul 26, 2010 at 3:58 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>> Khem Raj wrote:
+>>> Hi
+>>>
+>>> Following series of patches are for making multi-machine toolchains
+>>> co-exist with
+>>> new cross staging for toolchain.
+>>>
+>>> It changes the toolchain triplet from ${TARGET_ARCH}-${VENDOR}-${OS} to
+>>> ${TARGET_ARCH}-${CPU_SUB_TARGET}_${VENDOR}-OS
+>>>
+>>> which means that a toolchain for armv7 is called
+>>> armi-v7a_oe-linux-gnueabi-*
+>>> and for armv5te its called arm-v5te_oe-linux-gnueabi-*
+>> Sorry to come in late here, but why can't we instead populate
+>> sysroot/../usr/bin/${MACHINE_SYS}/ and keep the old toolchain triplet?
+> 
+> yes we can. it will create its own directory structure under
+> usr/bin/${MACHINE_SYS} and we also have to fix the accesses to tools
+> it uses probably some
+> other humps too I have not pursues this.
+> gcc install supports multiple installations to live together  thats what
+> I am doing with these patches.
 
-I build an image extending a console-base-image for opma3evm using =
-angstrom distro.=20
+If we just pass --bindir=${current stuff}/${MACHINE_SYS} that should be 
+enough to move the binaries around and have all of the usual relative 
+location stuff be calculated correctly.  Can you please try this out? 
+Thanks.
 
-Regards
-Wolfgang Hauser
-=20
------Urspr=FCngliche Nachricht-----
-Von: openembedded-devel-bounces@lists.openembedded.org =
-[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
-von Robert P. J. Day
-Gesendet: Dienstag, 27. Juli 2010 11:26
-An: openembedded-devel@lists.openembedded.org
-Betreff: Re: [oe] bitbake error on ncurses_5.4.bb C compiler cannot =
-create executables
-
-On Tue, 27 Jul 2010, Paul Menzel wrote:
-
-> Dear Ranjith,
->
->
-> Am Dienstag, den 27.07.2010, 09:44 +0530 schrieb ranjith kannikara:
->
-> > I was trying to run " bitbake fso-illume-image" and it rerturned an =
-error
-> > that do_config on ncurses5.4.bb failed
-> > the respective log is
-> >
-> > Configuring NCURSES 5.4 ABI 5 (Tue Jul 27 09:32:35 IST 2010)
-> > checking build system type... i686-pc-linux-gnu
-> > checking host system type... arm-oe-linux-gnueabi
-> > checking target system type... arm-oe-linux-gnueabi
-> > Configuring for linux-gnueabi
-> > checking for prefix... /usr
-> > checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc
-> > -march=3Darmv4t -mtune=3Darm920t -mthumb-interwork -mthumb
-> > checking whether the C compiler works... no
-> > configure: error: in
-> > =
-`/home/ranjith/test/build/tmp/work/armv4t-oe-linux-gnueabi/ncurses-5.4-r2=
-0.0/ncurses-5.4':
-> > configure: error: C compiler cannot create executables
->
-> Do other recipes work correctly?
->
-> > See `config.log' for more details.
-> >
-> > and the config.log entry is
-> >
-> > .## ----------- ##
-> > ## confdefs.h. ##
-> > ## ----------- ##
-> >
-> > /* confdefs.h */
-> > #define PACKAGE_NAME ""
-> > #define PACKAGE_TARNAME ""
-> > #define PACKAGE_VERSION ""
-> > #define PACKAGE_STRING ""
-> > #define PACKAGE_BUGREPORT ""
-> > #define PACKAGE_URL ""
-> > #define SYSTEM_NAME "linux-gnueabi"
-> >
-> > configure: exit 77
-> >
-> > I tried googling and tried installing gcc newer version, =
-buildessentials,
-> > epenembedded-essentials, but nothign worked for me.
-> > So can any one help me in this regard to solve this issue ,,
->
-> You did not provide information on what configuration and distribution
-> you use. Did you try to rebuild the whole tree in a clean environment?
-
-  not sure if this will be of any help but when i tried to build
-yesterday, i also got an error on ncurses.  i didn't do any debugging,
-i just waited a bit, did a "git pull", noticed some ncurses commits,
-tried again and it built.  so are you working with the absolutely
-latest repo contents?
-
-  and, yes, it would be useful to know your distro and architecture.
-
-rday
-
---=20
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-        Top-notch, inexpensive online Linux/OSS/kernel courses
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-
-_______________________________________________
-Openembedded-devel mailing list
-Openembedded-devel@lists.openembedded.org
-http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
