@@ -1,42 +1,30 @@
-Received: from astoria.ccjclearline.com ([64.235.106.9])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpjday@crashcourse.ca>) id 1OdgQD-0006kj-2M
+	(envelope-from <developer@alexandfliss.com>) id 1Odgvm-0000nO-VS
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 11:26:16 +0200
-Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
-	([99.235.245.115] helo=crashcourse.ca)
-	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
-	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
-	id 1OdgPx-0005pD-18 for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 05:25:45 -0400
-Date: Tue, 27 Jul 2010 05:25:44 -0400 (EDT)
-From: "Robert P. J. Day" <rpjday@crashcourse.ca>
-X-X-Sender: rpjday@lynx
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1280222125.3763.6.camel@mattotaupa>
-Message-ID: <alpine.DEB.2.00.1007270523480.16599@lynx>
-References: <AANLkTik+1EuG8Se996jFqVfQBXc3fFqoYPGzHh4hRsV2@mail.gmail.com>
-	<1280222125.3763.6.camel@mattotaupa>
-User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+	Tue, 27 Jul 2010 11:58:39 +0200
+Received: by wwb39 with SMTP id 39so887550wwb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Jul 2010 02:58:22 -0700 (PDT)
 MIME-Version: 1.0
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - crashcourse.ca
-X-Source: 
-X-Source-Args: 
-X-Source-Dir: 
-X-SA-Exim-Connect-IP: 64.235.106.9
-X-SA-Exim-Mail-From: rpjday@crashcourse.ca
+Received: by 10.216.210.206 with SMTP id u56mr8683008weo.50.1280224701733; 
+	Tue, 27 Jul 2010 02:58:21 -0700 (PDT)
+Sender: developer@alexandfliss.com
+Received: by 10.216.236.97 with HTTP; Tue, 27 Jul 2010 02:58:21 -0700 (PDT)
+Date: Tue, 27 Jul 2010 10:58:21 +0100
+X-Google-Sender-Auth: rkq2le9FpdQI1Rkm6EMUjmHDTVA
+Message-ID: <AANLkTi=JK37hYh26rGz3sY5byksJ0js_ihjk4y7tq-ad@mail.gmail.com>
+From: Alex Bennee <kernel-hacker@bennee.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: developer@alexandfliss.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake error on ncurses_5.4.bb C compiler cannot create executables
+Subject: [PATCH] Version bump tzcode/data to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,81 +38,116 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 09:26:40 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII
+X-List-Received-Date: Tue, 27 Jul 2010 09:58:40 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Tue, 27 Jul 2010, Paul Menzel wrote:
+From 73f2553c2549f9c7aea1eeb5e4505e734cb78771 Mon Sep 17 00:00:00 2001
+From: Alex Bennee <ajb@cbnl.com>
+Date: Tue, 27 Jul 2010 10:57:35 +0100
+Subject: [PATCH] Version bump tzcode/data to 2010k
 
-> Dear Ranjith,
->
->
-> Am Dienstag, den 27.07.2010, 09:44 +0530 schrieb ranjith kannikara:
->
-> > I was trying to run " bitbake fso-illume-image" and it rerturned an error
-> > that do_config on ncurses5.4.bb failed
-> > the respective log is
-> >
-> > Configuring NCURSES 5.4 ABI 5 (Tue Jul 27 09:32:35 IST 2010)
-> > checking build system type... i686-pc-linux-gnu
-> > checking host system type... arm-oe-linux-gnueabi
-> > checking target system type... arm-oe-linux-gnueabi
-> > Configuring for linux-gnueabi
-> > checking for prefix... /usr
-> > checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc
-> > -march=armv4t -mtune=arm920t -mthumb-interwork -mthumb
-> > checking whether the C compiler works... no
-> > configure: error: in
-> > `/home/ranjith/test/build/tmp/work/armv4t-oe-linux-gnueabi/ncurses-5.4-r20.0/ncurses-5.4':
-> > configure: error: C compiler cannot create executables
->
-> Do other recipes work correctly?
->
-> > See `config.log' for more details.
-> >
-> > and the config.log entry is
-> >
-> > .## ----------- ##
-> > ## confdefs.h. ##
-> > ## ----------- ##
-> >
-> > /* confdefs.h */
-> > #define PACKAGE_NAME ""
-> > #define PACKAGE_TARNAME ""
-> > #define PACKAGE_VERSION ""
-> > #define PACKAGE_STRING ""
-> > #define PACKAGE_BUGREPORT ""
-> > #define PACKAGE_URL ""
-> > #define SYSTEM_NAME "linux-gnueabi"
-> >
-> > configure: exit 77
-> >
-> > I tried googling and tried installing gcc newer version, buildessentials,
-> > epenembedded-essentials, but nothign worked for me.
-> > So can any one help me in this regard to solve this issue ,,
->
-> You did not provide information on what configuration and distribution
-> you use. Did you try to rebuild the whole tree in a clean environment?
+---
+ recipes/tzcode/tzcode-native_2010j.bb |   16 ----------------
+ recipes/tzcode/tzcode-native_2010k.bb |   16 ++++++++++++++++
+ recipes/tzdata/tzdata_2010j.bb        |   10 ----------
+ recipes/tzdata/tzdata_2010k.bb        |   10 ++++++++++
+ 4 files changed, 26 insertions(+), 26 deletions(-)
+ delete mode 100644 recipes/tzcode/tzcode-native_2010j.bb
+ create mode 100644 recipes/tzcode/tzcode-native_2010k.bb
+ delete mode 100644 recipes/tzdata/tzdata_2010j.bb
+ create mode 100644 recipes/tzdata/tzdata_2010k.bb
 
-  not sure if this will be of any help but when i tried to build
-yesterday, i also got an error on ncurses.  i didn't do any debugging,
-i just waited a bit, did a "git pull", noticed some ncurses commits,
-tried again and it built.  so are you working with the absolutely
-latest repo contents?
+diff --git a/recipes/tzcode/tzcode-native_2010j.bb
+b/recipes/tzcode/tzcode-native_2010j.bb
+deleted file mode 100644
+index 7e1ae77..0000000
+--- a/recipes/tzcode/tzcode-native_2010j.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-require tzcode-native.inc
+-
+-# Note that elsie.nci.nih.gov removes old versions when new is coming out
+-# So if this doesn't build for you because of missing source file, just
+-# bump it to the latest available version, removing old one
+-# Also, tzdata (and it is needed to build tzcode) version can differ from
+-# tzcode version, thus this variable
+-
+-TZDATA_PV = "2010j"
+-
+-SRC_URI[tzcode-2010j.md5sum] = "5ba8345720296d3a659b349b2052d139"
+-SRC_URI[tzcode-2010j.sha256sum] =
+"f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
+-SRC_URI[tzdata-2010j.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
+-SRC_URI[tzdata-2010j.sha256sum] =
+"dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
+-
+-PR = "${INC_PR}.0"
+diff --git a/recipes/tzcode/tzcode-native_2010k.bb
+b/recipes/tzcode/tzcode-native_2010k.bb
+new file mode 100644
+index 0000000..21796d6
+--- /dev/null
++++ b/recipes/tzcode/tzcode-native_2010k.bb
+@@ -0,0 +1,16 @@
++require tzcode-native.inc
++
++# Note that elsie.nci.nih.gov removes old versions when new is coming out
++# So if this doesn't build for you because of missing source file, just
++# bump it to the latest available version, removing old one
++# Also, tzdata (and it is needed to build tzcode) version can differ from
++# tzcode version, thus this variable
++
++TZDATA_PV = "2010k"
++
++SRC_URI[tzcode-2010k.md5sum] = "63cd2199679c91bed972a0248d6916af"
++SRC_URI[tzcode-2010k.sha256sum] =
+"96671eac3a98d0c974833c8bfa7ea9b537cc9d32573e902103846b90f6dccdbd"
++SRC_URI[tzdata-2010k.md5sum] = "5e2086249d6a6bb116534d358661ad3f"
++SRC_URI[tzdata-2010k.sha256sum] =
+"ef69c99504c0fd9864ba8ef1daae5f2d4df097cf7dc350f09b8f70386272408d"
++
++PR = "${INC_PR}.0"
+diff --git a/recipes/tzdata/tzdata_2010j.bb b/recipes/tzdata/tzdata_2010j.bb
+deleted file mode 100644
+index 79b7769..0000000
+--- a/recipes/tzdata/tzdata_2010j.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require tzdata.inc
+-
+-# Note that elsie.nci.nih.gov removes old archives when new is being
+-# released. So if this doesn't build for you because of missing source file
+-# just bump it to the latest available version, removing old one
+-
+-PR = "${INC_PR}.0"
+-
+-SRC_URI[tar.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
+-SRC_URI[tar.sha256sum] =
+"dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
+diff --git a/recipes/tzdata/tzdata_2010k.bb b/recipes/tzdata/tzdata_2010k.bb
+new file mode 100644
+index 0000000..216ae75
+--- /dev/null
++++ b/recipes/tzdata/tzdata_2010k.bb
+@@ -0,0 +1,10 @@
++require tzdata.inc
++
++# Note that elsie.nci.nih.gov removes old archives when new is being
++# released. So if this doesn't build for you because of missing source file
++# just bump it to the latest available version, removing old one
++
++PR = "${INC_PR}.0"
++
++SRC_URI[tar.md5sum] = "5e2086249d6a6bb116534d358661ad3f"
++SRC_URI[tar.sha256sum] =
+"ef69c99504c0fd9864ba8ef1daae5f2d4df097cf7dc350f09b8f70386272408d"
+-- 
+1.7.2
 
-  and, yes, it would be useful to know your distro and architecture.
 
-rday
 
 -- 
-
-========================================================================
-Robert P. J. Day                               Waterloo, Ontario, CANADA
-
-        Top-notch, inexpensive online Linux/OSS/kernel courses
-                        http://crashcourse.ca
-
-Twitter:                                       http://twitter.com/rpjday
-LinkedIn:                               http://ca.linkedin.com/in/rpjday
-========================================================================
+Alex, homepage: http://www.bennee.com/~alex/
+http://www.half-llama.co.uk
 
 
