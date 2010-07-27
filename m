@@ -1,42 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OdmBb-00045b-Aa for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 17:35:20 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OdmBL-0001gt-O5 for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 17:35:03 +0200
-Received: from a88-112-42-160.elisa-laajakaista.fi ([88.112.42.160])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 17:35:03 +0200
-Received: from matti.kaasinen by a88-112-42-160.elisa-laajakaista.fi with
-	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 17:35:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Matti Kaasinen <matti.kaasinen@gmail.com>
-Date: Tue, 27 Jul 2010 15:18:04 +0000 (UTC)
-Message-ID: <loom.20100727T163112-808@post.gmane.org>
-References: <op.u7dv44vqmn1qzu@camelguo>
-	<201002011021.47660.marcin@juszkiewicz.com.pl>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: sea.gmane.org
-User-Agent: Loom/3.14 (http://gmane.org/)
-X-Loom-IP: 88.112.42.160 (Mozilla/5.0 (X11; U; Linux i686; fi-FI;
-	rv:1.9.2.7) Gecko/20100715 Ubuntu/10.04 (lucid) Firefox/3.6.7)
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OdmEs-0004Dx-SK for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 17:38:44 +0200
+Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
+	by mail-dotnet1.eads.net with ESMTP; 27 Jul 2010 17:28:30 +0200
+Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Tue, 27 Jul 2010 17:37:58 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 27 Jul 2010 17:37:58 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Tue, 27 Jul 2010 17:37:58 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B57B5@deimsg40.de.net.world>
+In-Reply-To: <alpine.DEB.2.00.1007270523480.16599@lynx>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] bitbake error on ncurses_5.4.bb C compiler cannot create
+	executables
+Thread-Index: AcstbfvBSz9ZQUatTA6nl3V5wgHD5gALkATQ
+References: <AANLkTik+1EuG8Se996jFqVfQBXc3fFqoYPGzHh4hRsV2@mail.gmail.com><1280222125.3763.6.camel@mattotaupa>
+	<alpine.DEB.2.00.1007270523480.16599@lynx>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 27 Jul 2010 15:37:58.0091 (UTC)
+	FILETIME=[B04B71B0:01CB2DA1]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: circular dependency when building linux_2.6.30.bb
+Subject: Re: bitbake error on ncurses_5.4.bb C compiler cannot create executables
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,71 +49,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 15:35:20 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 27 Jul 2010 15:38:44 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Re: [oe] circular dependency when building linux_2.6.25.bb below
-Marcin Juszkiewicz <marcin <at> juszkiewicz.com.pl> writes:
+I use the http://gitorious.org/angstrom/openembedded repository, and the =
+latest pull reports the same error to me !
 
-> 
-> Dnia niedziela, 31 stycznia 2010 o 07:25:42 Guo Hongruan napisał(a):
-> > Hi guys,
-> >    I tried to build openembedded with the following configration in my
-> > local.conf
-> > MACHIN=at91-l9260
-> > DISTRO=micro
-> > LIBC=glibc
-> > 
-> > But I failed to start building and met the following error:
-> > ERROR: Unbuildable tasks were found.
-> > These are usually caused by circular dependencies and any circular
-> > dependency chains found will be printed below. Increase the debug level to
-> > see a list of unbuildable tasks.
-> 
-> Try this patch:
-> 
-> 10:21 hrw <at> home:linux$ git diff .
-> diff --git a/recipes/linux/linux_2.6.25.bb b/recipes/linux/linux_2.6.25.bb
-> index a89374a..38e651b 100644
-> --- a/recipes/linux/linux_2.6.25.bb
-> +++ b/recipes/linux/linux_2.6.25.bb
-> @@ -98,5 +98,5 @@ python do_compulab_image() {
->  }
-> 
-> -addtask compulab_image after do_deploy before do_package
-> +addtask compulab_image after do_deploy before do_build
-> 
-> As we moved deploy task to be *after* package.
-> 
-> Regards, 
--------------------------------------
-Hi,
+I build an image extending a console-base-image for opma3evm using =
+angstrom distro.=20
 
-I tried to build linux_2.6.30.bb, i.e. virtual/kernel using 
-linux4sam.org overlay with settings:
-MACHINE = "at91sam9260ek"
-DISTRO = "angstrom-2008.1"
-ANGSTROMLIBC = "glibc"
-and org.openembedded.dev
+Regards
+Wolfgang Hauser
+=20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Robert P. J. Day
+Gesendet: Dienstag, 27. Juli 2010 11:26
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] bitbake error on ncurses_5.4.bb C compiler cannot =
+create executables
 
-I faced similar problems as described above 
-(Re: [oe] circular dependency when building linux_2.6.25.bb)
-and thanks to the answer above I also managed finding solution as follows:
+On Tue, 27 Jul 2010, Paul Menzel wrote:
 
-oe_at91sam/...../linux.inc had line:
-addtask devicetree_image after do_deploy before do_package
+> Dear Ranjith,
+>
+>
+> Am Dienstag, den 27.07.2010, 09:44 +0530 schrieb ranjith kannikara:
+>
+> > I was trying to run " bitbake fso-illume-image" and it rerturned an =
+error
+> > that do_config on ncurses5.4.bb failed
+> > the respective log is
+> >
+> > Configuring NCURSES 5.4 ABI 5 (Tue Jul 27 09:32:35 IST 2010)
+> > checking build system type... i686-pc-linux-gnu
+> > checking host system type... arm-oe-linux-gnueabi
+> > checking target system type... arm-oe-linux-gnueabi
+> > Configuring for linux-gnueabi
+> > checking for prefix... /usr
+> > checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc
+> > -march=3Darmv4t -mtune=3Darm920t -mthumb-interwork -mthumb
+> > checking whether the C compiler works... no
+> > configure: error: in
+> > =
+`/home/ranjith/test/build/tmp/work/armv4t-oe-linux-gnueabi/ncurses-5.4-r2=
+0.0/ncurses-5.4':
+> > configure: error: C compiler cannot create executables
+>
+> Do other recipes work correctly?
+>
+> > See `config.log' for more details.
+> >
+> > and the config.log entry is
+> >
+> > .## ----------- ##
+> > ## confdefs.h. ##
+> > ## ----------- ##
+> >
+> > /* confdefs.h */
+> > #define PACKAGE_NAME ""
+> > #define PACKAGE_TARNAME ""
+> > #define PACKAGE_VERSION ""
+> > #define PACKAGE_STRING ""
+> > #define PACKAGE_BUGREPORT ""
+> > #define PACKAGE_URL ""
+> > #define SYSTEM_NAME "linux-gnueabi"
+> >
+> > configure: exit 77
+> >
+> > I tried googling and tried installing gcc newer version, =
+buildessentials,
+> > epenembedded-essentials, but nothign worked for me.
+> > So can any one help me in this regard to solve this issue ,,
+>
+> You did not provide information on what configuration and distribution
+> you use. Did you try to rebuild the whole tree in a clean environment?
 
-I replaced it to line below found from org.openembedded.dev/..../linux.inc:
-addtask devicetree_image after do_install before do_package do_deploy
+  not sure if this will be of any help but when i tried to build
+yesterday, i also got an error on ncurses.  i didn't do any debugging,
+i just waited a bit, did a "git pull", noticed some ncurses commits,
+tried again and it built.  so are you working with the absolutely
+latest repo contents?
 
-This solved the problem.
-I hope someone can find this useful,
--Matti
+  and, yes, it would be useful to know your distro and architecture.
 
+rday
 
+--=20
 
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Robert P. J. Day                               Waterloo, Ontario, CANADA
 
+        Top-notch, inexpensive online Linux/OSS/kernel courses
+                        http://crashcourse.ca
 
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
