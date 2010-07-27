@@ -1,63 +1,32 @@
-Received: from mailgw1.fjfi.cvut.cz ([147.32.9.3])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1Odfe2-0003iJ-CR
+	(envelope-from <jaap.dejong@nedap.com>) id 1Odflt-0007Pt-Nr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 10:36:16 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 24A6C43CFB
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 10:35:59 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 24A6C43CFB
-DKIM-Signature: v=1; a=rsa-sha1; c=simple/simple; d=fjfi.cvut.cz; s=beta512;
-	t=1280219759; i=@fjfi.cvut.cz; bh=KKgREwlHQxFqBrjZWyWybMytul8=;
-	h=Date:From:To:Subject:In-Reply-To:Message-ID:References:
-	MIME-Version:Content-Type;
-	b=yZPauhHQ3dmgfp8zTkjc+ARfAFjG/I5Zc/7ALY3n3ziDo3cTwpYpzni32D5/boCgR
-	R9Jt4MjXZzRq+9FwrxP8Q==
-X-CTU-FNSPE-Virus-Scanned: amavisd-new at fjfi.cvut.cz
-X-CTU-FNSPE: this_is_mailgw_for_ctu_fnspe_header
-X-CTU-FNSPE-Helo: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Client-Address: 147.32.5.111
-X-CTU-FNSPE-Client-Name: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Sender: zub@linux.fjfi.cvut.cz
-X-CTU-FNSPE-Recip: openembedded-devel@lists.openembedded.org
-Received: from mailgw1.fjfi.cvut.cz ([127.0.0.1])
-	by localhost (mailgw1.fjfi.cvut.cz [127.0.0.1]) (amavisd-new,
-	port 10026) with ESMTP id LE2t4Er7XCL0
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 10:35:56 +0200 (CEST)
-Received: from linux.fjfi.cvut.cz (linux.fjfi.cvut.cz [147.32.5.111])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id C6DA743CFA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 10:35:56 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz C6DA743CFA
-X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz C6DA743CFA
-Received: by linux.fjfi.cvut.cz (Postfix, from userid 1001)
-	id BD25346774; Tue, 27 Jul 2010 10:35:56 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by linux.fjfi.cvut.cz (Postfix) with ESMTP id B8EBC46773
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 10:35:56 +0200 (CEST)
-Date: Tue, 27 Jul 2010 10:35:56 +0200 (CEST)
-From: David Kozub <zub@linux.fjfi.cvut.cz>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100727083136.GB3397@rhein.zuhause.netz>
-Message-ID: <alpine.LRH.2.00.1007271034440.16525@linux.fjfi.cvut.cz>
-References: <20100727010733.1B6BB46773@linux.fjfi.cvut.cz>
-	<20100727071827.GA3397@rhein.zuhause.netz>
-	<alpine.LRH.2.00.1007270937190.16525@linux.fjfi.cvut.cz>
-	<20100727083136.GB3397@rhein.zuhause.netz>
-User-Agent: Alpine 2.00 (LRH 1167 2008-08-23)
+	Tue, 27 Jul 2010 10:44:23 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Tue, 27 Jul 2010 10:44:04 +0200
+X-TM-IMSS-Message-ID: <26c79adb0000c41d@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 26c79adb0000c41d for
+	<jaap.dejong@nedap.com>; Tue, 27 Jul 2010 10:44:07 +0100
+Message-ID: <4C4E9C53.7040405@nedap.com>
+Date: Tue, 27 Jul 2010 10:44:03 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 147.32.9.3
-X-SA-Exim-Mail-From: zub@linux.fjfi.cvut.cz
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 27 Jul 2010 08:44:04.0855 (UTC)
+	FILETIME=[DE885870:01CB2D67]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/3] cmake-native: add recipe for cmake 2.8.2.
+Subject: [PATCH] update libftdi recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -71,15 +40,105 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 08:36:17 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Tue, 27 Jul 2010 08:44:23 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-> I am not sure the inherit cmake inside cmake is really necessary try it without it and
-> see what may fail.
+Hi,
 
-It's because the non-native cmake is built with native cmake.
+below an update for building an up-to-date version of libftdi.
 
-Ok, I'll try building both cmakes the same way - with bootstrapping, w/o 
-the help of any other cmake.
+thanks and best regards,
+
+Jaap
+---
+diff --git a/recipes/libftdi/ftdi-eeprom-native_0.3.bb 
+b/recipes/libftdi/ftdi-eeprom-native_0.3.bb
+new file mode 100644
+index 0000000..ab30273
+--- /dev/null
++++ b/recipes/libftdi/ftdi-eeprom-native_0.3.bb
+@@ -0,0 +1,6 @@
++require ftdi-eeprom_${PV}.bb
++
++inherit native
++
++DEPENDS = "libftdi-native confuse-native"
++
+diff --git a/recipes/libftdi/ftdi-eeprom_0.3.bb 
+b/recipes/libftdi/ftdi-eeprom_0.3.bb
+new file mode 100644
+index 0000000..1289abe
+--- /dev/null
++++ b/recipes/libftdi/ftdi-eeprom_0.3.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "A tool for creating, uploading, and erasing the 
+configuration EEPROM for a FT232BM/FT245BM FTDI chip."
++HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi"
++LICENSE = "GPLv2"
++SECTION = "console/utils"
++
++DEPENDS = "libftdi confuse"
++
++SRC_URI = " \
++    
+http://www.intra2net.com/en/developer/libftdi/download/ftdi_eeprom-${PV}.tar.gz 
+\
++    "
++
++SRC_URI[md5sum] = "331652a593f0b0afd5f2874b37b7973a"
++SRC_URI[sha256sum] = 
+"7b40ec5abb2c93362b9636974e4e4715cb588121c1e1da09d7f499ac7f12d056"
++
++S = "${WORKDIR}/ftdi_eeprom-${PV}"
++
++inherit autotools
++
++EXTRA_OECONF = "--disable-docs"
++
+diff --git a/recipes/libftdi/libftdi-native_0.18.bb 
+b/recipes/libftdi/libftdi-native_0.18.bb
+new file mode 100644
+index 0000000..4ee0fb6
+--- /dev/null
++++ b/recipes/libftdi/libftdi-native_0.18.bb
+@@ -0,0 +1,6 @@
++require libftdi_${PV}.bb
++
++inherit native
++
++DEPENDS = "libusb-native cmake-native"
++
+diff --git a/recipes/libftdi/libftdi_0.18.bb 
+b/recipes/libftdi/libftdi_0.18.bb
+new file mode 100644
+index 0000000..7ee5f77
+--- /dev/null
++++ b/recipes/libftdi/libftdi_0.18.bb
+@@ -0,0 +1,20 @@
++DESCRIPTION = "A library to talk to FTDI chips: including 
+FT232BM/245BM, FT2232C/D and FT232/245R"
++HOMEPAGE = "http://www.intra2net.com/en/developer/libftdi"
++LICENSE = "GPLv2"
++SECTION = "libs"
++
++DEPENDS = "libusb"
++
++SRC_URI = " \
++    
+http://www.intra2net.com/en/developer/libftdi/download/libftdi-${PV}.tar.gz 
+\
++    "
++
++SRC_URI[md5sum] = "916f65fa68d154621fc0cf1f405f2726"
++SRC_URI[sha256sum] = 
+"5b6f3c3ee51c6aa24d3b87135e01762cf68821d1c3599d87d349fea4ede74c62"
++
++inherit autotools cmake
++
++do_stage() {
++    autotools_stage_all
++}
++
 
 
