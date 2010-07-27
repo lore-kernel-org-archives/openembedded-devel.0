@@ -1,48 +1,35 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OdhtA-0004N2-Dn
+	(envelope-from <jaap.dejong@nedap.com>) id 1OdiFM-0008HL-Jl
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 13:00:02 +0200
-Received: by bwz10 with SMTP id 10so3453573bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 03:59:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ks6tPn9TsWPHEghUM3OrFQicn79sosEFo9qx1DOdLr0=;
-	b=KY2rFs+qcxZR5FcpsABZzln1N8YPufPVi2Qappkl8gQfH4ivJ5CJMKzVW1F+uL8J5x
-	W58q5MSjZe/yq8sAtA+T7ICbu83pMFWID1YMb2QO99s3E0CQawSf8aa2fAYf+TfwJkxN
-	GbuqZvaWjUwzr+6rjwvKg0+9wMeOU/kk0X7xM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=DEv9idlpAL8UYwQlnYPvjpByGFC+2oXNpv/ZyKIMS2R222RNfumzWAzjO3Pzq3B/Jh
-	qI3QQhOOuFB7XWudB9XMKsf0AzZH77EQSZJYbMrhhpNi/X7tXKkPY4yYfwhUToWHDzaa
-	orvROXuWYo4TKRoNUHLhswvjjOu4nGpbrmwOY=
+	Tue, 27 Jul 2010 13:22:59 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Tue, 27 Jul 2010 13:22:39 +0200
+X-TM-IMSS-Message-ID: <2758cbfc0000ca1a@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 2758cbfc0000ca1a for
+	<jaap.dejong@nedap.com>; Tue, 27 Jul 2010 13:22:42 +0100
+Message-ID: <4C4EC17E.5040102@nedap.com>
+Date: Tue, 27 Jul 2010 13:22:38 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
 MIME-Version: 1.0
-Received: by 10.204.154.66 with SMTP id n2mr6725803bkw.8.1280228385160; Tue, 
-	27 Jul 2010 03:59:45 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Tue, 27 Jul 2010 03:59:45 -0700 (PDT)
-In-Reply-To: <i2mcv4$5a2$1@dough.gmane.org>
-References: <AANLkTim5aAnNi5VFs7=-gg1XaM=+KBeUs-G494SEbR+V@mail.gmail.com>
-	<AANLkTiks5W-tPf=D=Qo5UZf77ZA2R10=fkw2MmdeWfHc@mail.gmail.com>
-	<AANLkTinuoVzs556HmdOx-y1tMd6YB58NgPtoEhqma4HO@mail.gmail.com>
-	<AANLkTim1Cps1vdmbxSQGdKvn0WNL3nUB_+9bEu1SpN9R@mail.gmail.com>
-	<i2mcv4$5a2$1@dough.gmane.org>
-Date: Tue, 27 Jul 2010 12:59:45 +0200
-Message-ID: <AANLkTime_AUx8t=mDTSSBAQe9q8cHXt=kbKUasAoADWW@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C4E9C53.7040405@nedap.com>
+	<20100727085440.GC3397@rhein.zuhause.netz>
+In-Reply-To: <20100727085440.GC3397@rhein.zuhause.netz>
+X-OriginalArrivalTime: 27 Jul 2010 11:22:39.0557 (UTC)
+	FILETIME=[05BCA750:01CB2D7E]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [RFC] get rid of legacy staging
+Subject: Re: [PATCH] update libftdi recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,49 +43,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 11:00:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 27 Jul 2010 11:23:26 -0000
+X-List-Received-Date: Tue, 27 Jul 2010 11:23:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/7/27 Koen Kooi <k.kooi@student.utwente.nl>
+Agree on that!
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
+I was able to
+     bitbake ftdi-eeprom
+(which depends on libftdi) from scratch without errors.
+
+Is this different from the stable/2009 branch?
+
+Jaap
+
+On 07/27/2010 10:54 AM, Henning Heinold wrote:
+> On Tue, Jul 27, 2010 at 10:44:03AM +0200, Jaap de Jong wrote:
+>    
+>> Hi,
+>>
+>> below an update for building an up-to-date version of libftdi.
+>>
+>> thanks and best regards,
+>>
+>> Jaap
+>> ---
+>> +do_stage() {
+>> +    autotools_stage_all
+>> +}
+>> +
+>>      
+> Hi,
 >
-> On 27-07-10 12:19, Frans Meulenbroeks wrote:
+> the lines above arent needed anymore the do_install from inherit autotools is enough.
 >
-> > Bringing the thread back to the topic:
-> > I see no real interest into tackling removal of old style staging (or old
-> > native recipes).
->
-> It's hard to tackle that when OE is so broken you can't build anything,
-> as it is now due to the cross dir changes.
->
-
-Au contraire!
-This is an opportunity!
-
-actually I think one of the easy things is removing do_stage functions that
-only do an autotools_stage_all.
-This is one (if done with some care) that does not seem to need extensvie
-testing.
-There are 400+ of them, but I seem to recall someone already did a patch for
-this.
-
-Frans
-
-
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMTrcjMkyGM64RGpERAqQyAJwLPNi6KtWSbPapnVOgwcZA4yz3lwCfb6l9
-> vDgKnV1RO8s78ac4b4iFRFY=
-> =GLFm
-> -----END PGP SIGNATURE-----
->
+> Bye Henning
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>    
+
 
