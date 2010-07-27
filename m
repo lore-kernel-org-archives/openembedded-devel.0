@@ -1,29 +1,47 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OdaXw-0000Uw-4x
+	(envelope-from <kergoth@gmail.com>) id 1Odafn-00011G-BY
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 05:09:58 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id CD6F116605F5; Mon, 26 Jul 2010 21:09:04 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 02892166067E;
-	Mon, 26 Jul 2010 21:08:34 -0600 (MDT)
-Message-ID: <4C4E4DB2.9090606@mlbassoc.com>
-Date: Mon, 26 Jul 2010 21:08:34 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Tue, 27 Jul 2010 05:17:45 +0200
+Received: by qwg8 with SMTP id 8so579393qwg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 26 Jul 2010 20:17:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=4XHTSA0588JJ//3Gj7knPwrWy4Dthb09uIcrYVI/I08=;
+	b=FfhIkz0D2kyCK27w4033no4bmEATya6EcGjNtzsZtSszZZVYGSh+uoz4/OG+ectqJZ
+	RFCFI6Yt77ph3uksCN4alnCsSlJYAOqOBuWj2mXjxaNr7SGy55xmRYE4w5F8Eaw/ulXM
+	wCLDmzZwHt3Iyg1oMCgYEyTCrJa5hKL0A+Sb4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=aAyDiUne5sPl0kQVpO20Ed9NhZKd4diOSP7NCGB9T802mInpu8LoLfz2BiFzLS1W8y
+	hu52WBefCi7nafb6EGIsxX8bCJ6p5MOznAXr4JY5k3+BcUeDtUdYuiNYKLmfjBRXzVTU
+	YGbA290ek7TmgIJIJkTI1nJwhmSrsXAgd49fA=
+Received: by 10.224.2.147 with SMTP id 19mr7019878qaj.9.1280200646169; Mon, 26 
+	Jul 2010 20:17:26 -0700 (PDT)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.229.236.80 with HTTP; Mon, 26 Jul 2010 20:17:06 -0700 (PDT)
+In-Reply-To: <4C4E4DB2.9090606@mlbassoc.com>
+References: <4C4E4DB2.9090606@mlbassoc.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 26 Jul 2010 20:17:06 -0700
+X-Google-Sender-Auth: wQhuwO5FG_sfTkp7RCZScNUEC1g
+Message-ID: <AANLkTikRqVrJ6uS9njZm9CWW8FkVJZyZ6MbbOQ=BQuCQ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Checkin policy??
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Checkin policy??
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,75 +55,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 03:09:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Jul 2010 03:17:45 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Surely, there must not be any or else simple compile errors wouldn't get through :-(
+On Mon, Jul 26, 2010 at 8:08 PM, Gary Thomas <gary@mlbassoc.com> wrote:
 
-Trying to build angstrom-gnome-image, MACHINE=beagleboard, DISTRO=angstrom, latest
-org.openembedded.dev:
-   commit 45fc36a32fb23c513833d7e27fb4b9cd8be68fb5
-   Author: Chris Larson <clarson@kergoth.com>
-   Date:   Sun Jun 20 14:35:05 2010 -0700
+> Surely, there must not be any or else simple compile errors wouldn't get
+> through :-(
+>
 
-NOTE: package perl-5.8.8-r35: task do_configure: Started
-NOTE: <type 'exceptions.NameError'>:name 'siteinfo_get_bits' is not defined while evaluating:
-         # Make hostperl in build directory be the native perl
-         ln -sf /local/Angstrom_BeagleBoard/tmp/sysroots/i686-linux/usr/bin/perl5.8.8 hostperl
-
-         # Do out work in the cross subdir
-         cd Cross
-
-         # Generate configuration
-         rm -f config.sh-arm-linux-gnueabi
-         for i in /local/Angstrom_BeagleBoard/tmp/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r35/config.sh \
-                  /local/Angstrom_BeagleBoard/tmp/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r35/config.sh-${@siteinfo_get_bits(d)} \
-                  /local/Angstrom_BeagleBoard/tmp/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r35/config.sh-${@siteinfo_get_bits(d)}-${@siteinfo_get_endianess(d)}; do
-             cat $i >> config.sh-arm-linux-gnueabi
-         done
-
-         # Fixups for uclibc
-         if [ "linux-gnueabi" = "linux-uclibc" -o "linux-gnueabi" = "linux-uclibceabi" ]; then
-                 sed -i -e "s,\(d_crypt_r=\)'define',\1'undef',g" \
-                        -e "s,\(d_futimes=\)'define',\1'undef',g" \
-                        -e "s,\(crypt_r_proto=\)'\w+',\1'0',g" \
-                        -e "s,\(d_getnetbyname_r=\)'define',\1'undef',g" \
-                        -e "s,\(getnetbyname_r_proto=\)'\w+',\1'0',g" \
-                        -e "s,\(d_getnetbyaddr_r=\)'define',\1'undef',g" \
-                        -e "s,\(getnetbyaddr_r_proto=\)'\w+',\1'0',g" \
-                        -e "s,\(d_getnetent_r=\)'define',\1'undef',g" \
-                        -e "s,\(getnetent_r_proto=\)'\w+',\1'0',g" \
-                        -e "s,\(d_sockatmark=\)'define',\1'undef',g" \
-                        -e "s,\(d_sockatmarkproto=\)'\w+',\1'0',g" \
-                     config.sh-arm-linux-gnueabi
-         fi
-
-         # Update some paths in the configuration
-         sed -i -e 's,@DESTDIR@,/local/Angstrom_BeagleBoard/tmp/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r35/image,g' \
-                -e 's,@ARCH@,arm-linux-gnueabi,g' \
-                -e "s%/usr/include/%/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/%g" \
-                -e 's,/usr/,/usr/,g' \
-             config.sh-arm-linux-gnueabi
-
-         if test "beagleboard" != "native"; then
-             # These are strewn all over the source tree
-             for foo in `grep -I -m1 \/usr\/include\/.*\\.h /local/Angstrom_BeagleBoard/tmp/work/armv7a-angstrom-linux-gnueabi/perl-5.8.8-r35/* -r | cut -f 1 -d ":"` ; do
-                 echo Fixing: $foo
-                 sed -e "s%/usr/include/%/local/Angstrom_BeagleBoard/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/%g" -i $foo
-             done
-         fi
-
-         rm -f config
-         echo "ARCH = arm" > config
-         echo "OS = linux-gnueabi" >> config
-
-ERROR: Function do_configure failed
-
+It's a trunk/master branch, shit happens, and it's not reasonable to test
+every recipe for every target for each commit.  In addition, in this
+particular case, it's highly unlikely a review would have caught this error
+anyway.  Fix incoming.
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
