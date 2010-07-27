@@ -1,45 +1,42 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OdlxA-0007Wh-Dm
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 17:20:25 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id A5574110009C
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdmBb-00045b-Aa for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 17:35:20 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OdmBL-0001gt-O5 for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 17:35:03 +0200
+Received: from a88-112-42-160.elisa-laajakaista.fi ([88.112.42.160])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 27 Jul 2010 17:35:03 +0200
+Received: from matti.kaasinen by a88-112-42-160.elisa-laajakaista.fi with
+	local (Gmexim 0.1 (Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 17:20:08 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 2D9C01100082
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 17:20:07 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052230023.adsl.alicedsl.de
-	[78.52.230.23]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 17:20:07 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 0EF183C0EF; Tue, 27 Jul 2010 17:19:49 +0200 (CEST)
-Date: Tue, 27 Jul 2010 17:19:48 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Tue, 27 Jul 2010 17:35:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100727151948.GA3259@rhein.zuhause.netz>
-References: <4C4E9C53.7040405@nedap.com>
-	<20100727085440.GC3397@rhein.zuhause.netz>
-	<4C4EC17E.5040102@nedap.com>
-MIME-Version: 1.0
-In-Reply-To: <4C4EC17E.5040102@nedap.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+From: Matti Kaasinen <matti.kaasinen@gmail.com>
+Date: Tue, 27 Jul 2010 15:18:04 +0000 (UTC)
+Message-ID: <loom.20100727T163112-808@post.gmane.org>
+References: <op.u7dv44vqmn1qzu@camelguo>
+	<201002011021.47660.marcin@juszkiewicz.com.pl>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 88.112.42.160 (Mozilla/5.0 (X11; U; Linux i686; fi-FI;
+	rv:1.9.2.7) Gecko/20100715 Ubuntu/10.04 (lucid) Firefox/3.6.7)
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] update libftdi recipe
+Subject: circular dependency when building linux_2.6.30.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,25 +50,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 15:20:25 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 27 Jul 2010 15:35:20 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Jul 27, 2010 at 01:22:38PM +0200, Jaap de Jong wrote:
-> Agree on that!
+Re: [oe] circular dependency when building linux_2.6.25.bb below
+Marcin Juszkiewicz <marcin <at> juszkiewicz.com.pl> writes:
+
 > 
-> I was able to
->     bitbake ftdi-eeprom
-> (which depends on libftdi) from scratch without errors.
+> Dnia niedziela, 31 stycznia 2010 o 07:25:42 Guo Hongruan napisał(a):
+> > Hi guys,
+> >    I tried to build openembedded with the following configration in my
+> > local.conf
+> > MACHIN=at91-l9260
+> > DISTRO=micro
+> > LIBC=glibc
+> > 
+> > But I failed to start building and met the following error:
+> > ERROR: Unbuildable tasks were found.
+> > These are usually caused by circular dependencies and any circular
+> > dependency chains found will be printed below. Increase the debug level to
+> > see a list of unbuildable tasks.
 > 
-> Is this different from the stable/2009 branch?
+> Try this patch:
 > 
-> Jaap
+> 10:21 hrw <at> home:linux$ git diff .
+> diff --git a/recipes/linux/linux_2.6.25.bb b/recipes/linux/linux_2.6.25.bb
+> index a89374a..38e651b 100644
+> --- a/recipes/linux/linux_2.6.25.bb
+> +++ b/recipes/linux/linux_2.6.25.bb
+> @@ -98,5 +98,5 @@ python do_compulab_image() {
+>  }
+> 
+> -addtask compulab_image after do_deploy before do_package
+> +addtask compulab_image after do_deploy before do_build
+> 
+> As we moved deploy task to be *after* package.
+> 
+> Regards, 
+-------------------------------------
+Hi,
 
-Yes,
+I tried to build linux_2.6.30.bb, i.e. virtual/kernel using 
+linux4sam.org overlay with settings:
+MACHINE = "at91sam9260ek"
+DISTRO = "angstrom-2008.1"
+ANGSTROMLIBC = "glibc"
+and org.openembedded.dev
 
-dev has a new staging system and we are in the transition.
+I faced similar problems as described above 
+(Re: [oe] circular dependency when building linux_2.6.25.bb)
+and thanks to the answer above I also managed finding solution as follows:
 
-Bye Henning
+oe_at91sam/...../linux.inc had line:
+addtask devicetree_image after do_deploy before do_package
+
+I replaced it to line below found from org.openembedded.dev/..../linux.inc:
+addtask devicetree_image after do_install before do_package do_deploy
+
+This solved the problem.
+I hope someone can find this useful,
+-Matti
+
+
+
+
+
 
 
