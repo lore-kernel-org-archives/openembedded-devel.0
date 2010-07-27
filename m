@@ -1,28 +1,39 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from astoria.ccjclearline.com ([64.235.106.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OdgGF-0003z7-JQ for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 11:15:44 +0200
-Received: from g229062094.adsl.alicedsl.de ([92.229.62.94]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OdgG0-0006Dq-KT for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 09:15:28 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <rpjday@crashcourse.ca>) id 1OdgQD-0006kj-2M
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 11:26:16 +0200
+Received: from cpe002275e3273f-cm001225dbafb6.cpe.net.cable.rogers.com
+	([99.235.245.115] helo=crashcourse.ca)
+	by astoria.ccjclearline.com with esmtpsa (TLSv1:AES256-SHA:256)
+	(Exim 4.69) (envelope-from <rpjday@crashcourse.ca>)
+	id 1OdgPx-0005pD-18 for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 05:25:45 -0400
+Date: Tue, 27 Jul 2010 05:25:44 -0400 (EDT)
+From: "Robert P. J. Day" <rpjday@crashcourse.ca>
+X-X-Sender: rpjday@lynx
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTik+1EuG8Se996jFqVfQBXc3fFqoYPGzHh4hRsV2@mail.gmail.com>
+In-Reply-To: <1280222125.3763.6.camel@mattotaupa>
+Message-ID: <alpine.DEB.2.00.1007270523480.16599@lynx>
 References: <AANLkTik+1EuG8Se996jFqVfQBXc3fFqoYPGzHh4hRsV2@mail.gmail.com>
-Date: Tue, 27 Jul 2010 11:15:25 +0200
-Message-ID: <1280222125.3763.6.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	<1280222125.3763.6.camel@mattotaupa>
+User-Agent: Alpine 2.00 (DEB 1167 2008-08-23)
+MIME-Version: 1.0
+X-AntiAbuse: This header was added to track abuse,
+	please include it with any abuse report
+X-AntiAbuse: Primary Hostname - astoria.ccjclearline.com
+X-AntiAbuse: Original Domain - lists.openembedded.org
+X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
+X-AntiAbuse: Sender Address Domain - crashcourse.ca
+X-Source: 
+X-Source-Args: 
+X-Source-Dir: 
+X-SA-Exim-Connect-IP: 64.235.106.9
+X-SA-Exim-Mail-From: rpjday@crashcourse.ca
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: bitbake error on ncurses_5.4.bb C compiler cannot create executables
@@ -39,82 +50,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 09:15:45 -0000
-X-Groupsio-MsgNum: 21501
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-bsAjbVTpSBbUsjA6E7eE"
+X-List-Received-Date: Tue, 27 Jul 2010 09:26:40 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
---=-bsAjbVTpSBbUsjA6E7eE
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, 27 Jul 2010, Paul Menzel wrote:
 
-Dear Ranjith,
+> Dear Ranjith,
+>
+>
+> Am Dienstag, den 27.07.2010, 09:44 +0530 schrieb ranjith kannikara:
+>
+> > I was trying to run " bitbake fso-illume-image" and it rerturned an error
+> > that do_config on ncurses5.4.bb failed
+> > the respective log is
+> >
+> > Configuring NCURSES 5.4 ABI 5 (Tue Jul 27 09:32:35 IST 2010)
+> > checking build system type... i686-pc-linux-gnu
+> > checking host system type... arm-oe-linux-gnueabi
+> > checking target system type... arm-oe-linux-gnueabi
+> > Configuring for linux-gnueabi
+> > checking for prefix... /usr
+> > checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc
+> > -march=armv4t -mtune=arm920t -mthumb-interwork -mthumb
+> > checking whether the C compiler works... no
+> > configure: error: in
+> > `/home/ranjith/test/build/tmp/work/armv4t-oe-linux-gnueabi/ncurses-5.4-r20.0/ncurses-5.4':
+> > configure: error: C compiler cannot create executables
+>
+> Do other recipes work correctly?
+>
+> > See `config.log' for more details.
+> >
+> > and the config.log entry is
+> >
+> > .## ----------- ##
+> > ## confdefs.h. ##
+> > ## ----------- ##
+> >
+> > /* confdefs.h */
+> > #define PACKAGE_NAME ""
+> > #define PACKAGE_TARNAME ""
+> > #define PACKAGE_VERSION ""
+> > #define PACKAGE_STRING ""
+> > #define PACKAGE_BUGREPORT ""
+> > #define PACKAGE_URL ""
+> > #define SYSTEM_NAME "linux-gnueabi"
+> >
+> > configure: exit 77
+> >
+> > I tried googling and tried installing gcc newer version, buildessentials,
+> > epenembedded-essentials, but nothign worked for me.
+> > So can any one help me in this regard to solve this issue ,,
+>
+> You did not provide information on what configuration and distribution
+> you use. Did you try to rebuild the whole tree in a clean environment?
+
+  not sure if this will be of any help but when i tried to build
+yesterday, i also got an error on ncurses.  i didn't do any debugging,
+i just waited a bit, did a "git pull", noticed some ncurses commits,
+tried again and it built.  so are you working with the absolutely
+latest repo contents?
+
+  and, yes, it would be useful to know your distro and architecture.
+
+rday
+
+-- 
+
+========================================================================
+Robert P. J. Day                               Waterloo, Ontario, CANADA
+
+        Top-notch, inexpensive online Linux/OSS/kernel courses
+                        http://crashcourse.ca
+
+Twitter:                                       http://twitter.com/rpjday
+LinkedIn:                               http://ca.linkedin.com/in/rpjday
+========================================================================
 
 
-Am Dienstag, den 27.07.2010, 09:44 +0530 schrieb ranjith kannikara:
-
-> I was trying to run " bitbake fso-illume-image" and it rerturned an error
-> that do_config on ncurses5.4.bb failed
-> the respective log is
->=20
-> Configuring NCURSES 5.4 ABI 5 (Tue Jul 27 09:32:35 IST 2010)
-> checking build system type... i686-pc-linux-gnu
-> checking host system type... arm-oe-linux-gnueabi
-> checking target system type... arm-oe-linux-gnueabi
-> Configuring for linux-gnueabi
-> checking for prefix... /usr
-> checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc
-> -march=3Darmv4t -mtune=3Darm920t -mthumb-interwork -mthumb
-> checking whether the C compiler works... no
-> configure: error: in
-> `/home/ranjith/test/build/tmp/work/armv4t-oe-linux-gnueabi/ncurses-5.4-r2=
-0.0/ncurses-5.4':
-> configure: error: C compiler cannot create executables
-
-Do other recipes work correctly?
-
-> See `config.log' for more details.
->=20
-> and the config.log entry is
->=20
-> .## ----------- ##
-> ## confdefs.h. ##
-> ## ----------- ##
->=20
-> /* confdefs.h */
-> #define PACKAGE_NAME ""
-> #define PACKAGE_TARNAME ""
-> #define PACKAGE_VERSION ""
-> #define PACKAGE_STRING ""
-> #define PACKAGE_BUGREPORT ""
-> #define PACKAGE_URL ""
-> #define SYSTEM_NAME "linux-gnueabi"
->=20
-> configure: exit 77
->=20
-> I tried googling and tried installing gcc newer version, buildessentials,
-> epenembedded-essentials, but nothign worked for me.
-> So can any one help me in this regard to solve this issue ,,
-
-You did not provide information on what configuration and distribution
-you use. Did you try to rebuild the whole tree in a clean environment?
-
-
-Thanks,
-
-Paul
-
---=-bsAjbVTpSBbUsjA6E7eE
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxOo6YACgkQPX1aK2wOHVhmegCdHxUSxb1PhSfhlecgCClVvHSf
-DOAAnR8iMyUzTdSA7FqATsVFkJ6kLHBe
-=hWHb
------END PGP SIGNATURE-----
-
---=-bsAjbVTpSBbUsjA6E7eE--
