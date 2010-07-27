@@ -1,43 +1,48 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ode9K-0001Ci-4m for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 09:00:29 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ode8y-0007C9-4R for openembedded-devel@lists.openembedded.org;
-	Tue, 27 Jul 2010 09:00:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 09:00:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OdeFN-0002LO-V7
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 27 Jul 2010 09:06:56 +0200
+Received: by bwz10 with SMTP id 10so3343433bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 09:00:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 27 Jul 2010 00:06:27 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=4cJZRlIi1h/7Z7OSWVLKduFd723ffRA0jfSwKQY4JYE=;
+	b=GWeQbghIduz47QG3LHaME4KGACJF+WXPzCBRrU1g9Cz3xneTuabEdjjvL9HYRRi5bg
+	CxHnGEuClV1wzDXjigQHFRziVJtkxAUrko6//V0CLpDupufo2jZ1IXuOR64TRspjfqND
+	KX2TPv64eMItSHuDCiQu6PawsoEwHLcg1EdAk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Pdk+qe7J3QQaQKlKAikAp9okXawn9Rkl7OB3Rx+brU4/I0jjkiYOPc3b4lqAjpd9xO
+	az5OVTaljI11twe/GS3O8oogIWcabCLU4t4CHrwREtKIHNGragVj55NdjIsitDy0gIch
+	M+Upnfj0c8qqGjOXzS4nZ0zp312xbYNcKjlt0=
+MIME-Version: 1.0
+Received: by 10.204.102.2 with SMTP id e2mr6409084bko.112.1280214386466; Tue, 
+	27 Jul 2010 00:06:26 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Tue, 27 Jul 2010 00:06:26 -0700 (PDT)
+In-Reply-To: <4C4DF98E.6080703@gmx.net>
+References: <4C4C9AD7.7010603@gmx.net>
+	<AANLkTinQG5SA2sGRj1xapuhfDCxQF4Sss7BHeS=nLesA@mail.gmail.com>
+	<4C4DD663.1070902@gmx.net>
+	<AANLkTi=0VygaJwKNMTYj_HfxNj=zKDPNzmaCQNiU_bhN@mail.gmail.com>
+	<4C4DF98E.6080703@gmx.net>
+Date: Tue, 27 Jul 2010 09:06:26 +0200
+Message-ID: <AANLkTikNCidXo3Y3hwUj1sG5ev3xFYFka8diyJxp_KY1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 27 Jul 2010 08:57:41 +0200
-Message-ID: <i2m01a$qdr$2@dough.gmane.org>
-References: <1280213315-5513-1-git-send-email-raj.khem@gmail.com>
-	<1280213315-5513-8-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1280213315-5513-8-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS,UPPERCASE_50_75 autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 7/8] recipes: Replace usage of MULTIMACH_TARGET_SYS with CURRENT_TARGET_SYS
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: could not include bb file even though it exists and directory included in BBPATH
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,169 +56,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 27 Jul 2010 07:00:37 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 27 Jul 2010 07:06:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/7/26 Ossy <ossy1980@gmx.net>
 
-Does this make the TI recipes live in the same sysroot dir as the
-kernel? Thas was the aim for this.
-
-On 27-07-10 08:48, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/gnuradio/gnuradio-libusb-compat.inc     |    2 +-
->  recipes/gnuradio/gnuradio.inc                   |    2 +-
->  recipes/opencv/opencv-dsp-acceleration_svn.bb   |    2 +-
->  recipes/ti/README                               |    3 +-
->  recipes/ti/ti-paths.inc                         |   34 +++++++++++-----------
->  recipes/ti/ti-staging.inc                       |    4 +-
->  recipes/xapian/xapian-bindings-python_1.0.14.bb |    2 +-
->  7 files changed, 24 insertions(+), 25 deletions(-)
-> 
-> diff --git a/recipes/gnuradio/gnuradio-libusb-compat.inc b/recipes/gnuradio/gnuradio-libusb-compat.inc
-> index efe2b88..aa4d41a 100644
-> --- a/recipes/gnuradio/gnuradio-libusb-compat.inc
-> +++ b/recipes/gnuradio/gnuradio-libusb-compat.inc
-> @@ -8,7 +8,7 @@ INC_PR = "r7"
->  inherit distutils-base autotools autotools_stage pkgconfig
->  
->  export BUILD_SYS
-> -export HOST_SYS=${MULTIMACH_TARGET_SYS}
-> +export HOST_SYS
->  
->  CXXFLAGS_powerpc += "-lstdc++"
->  
-> diff --git a/recipes/gnuradio/gnuradio.inc b/recipes/gnuradio/gnuradio.inc
-> index 6eaf119..1a08930 100644
-> --- a/recipes/gnuradio/gnuradio.inc
-> +++ b/recipes/gnuradio/gnuradio.inc
-> @@ -8,7 +8,7 @@ INC_PR = "r7"
->  inherit distutils-base autotools autotools_stage pkgconfig
->  
->  export BUILD_SYS
-> -export HOST_SYS=${MULTIMACH_TARGET_SYS}
-> +export HOST_SYS
->  
->  CXXFLAGS_powerpc += "-lstdc++"
->  
-> diff --git a/recipes/opencv/opencv-dsp-acceleration_svn.bb b/recipes/opencv/opencv-dsp-acceleration_svn.bb
-> index 788e8e2..1a2d7bb 100644
-> --- a/recipes/opencv/opencv-dsp-acceleration_svn.bb
-> +++ b/recipes/opencv/opencv-dsp-acceleration_svn.bb
-> @@ -22,7 +22,7 @@ export OPENCV_PATH = "${STAGING_INCDIR}"
->  export DSPLIB_PATH = "${DSPLIB_INSTALL_DIR}"
->  
->  # You need to extract the imglib from the .exe manually and place it in /OE/tmp (or somewhere else and change the patch below)
-> -export IMGLIB_PATH = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${installdir}/imglib_v201"
-> +export IMGLIB_PATH = "${STAGING_DIR}/${MACHINE_SYS}${installdir}/imglib_v201"
->  
->  do_configure() {
->  	echo "-l ${DSPLIB_INSTALL_DIR}/dsplib64plus.lib" >> ${S}/beagle/server/opencv_unitserver_evm3530/link.cmd
-> diff --git a/recipes/ti/README b/recipes/ti/README
-> index 2fbb9f1..9a36f70 100644
-> --- a/recipes/ti/README
-> +++ b/recipes/ti/README
-> @@ -29,13 +29,12 @@ Since most of the recipes in this directory deal with a DSP (e.g OMAP3) or accel
->  The complete unpacked trees are staged to staging/machine/usr/share/ti/${PN}(-tree) and all the _INSTALL_DIR vars will point to that. To make this work there is a ti-staging.inc which contains:
->  
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
-> -BASEPKG_HOST_SYS = "${MULTIMACH_HOST_SYS}"
->  PACKAGE_STRIP = "no"
->  
->  The 'BASEPKG_HOST_SYS' bit is what makes it work, but cause trouble is you want to read from it, so ti-paths.inc does:
->  
->  export CODEGEN_INSTALL_DIR_RECIPE    = "${installdir}/ti-cgt6x"
-> -export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
-> +export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MACHINE_SYS}/${CODEGEN_INSTALL_DIR_RECIPE}"
->  
->  Which will point it to the machine specific staging like we want it to.
->  
-> diff --git a/recipes/ti/ti-paths.inc b/recipes/ti/ti-paths.inc
-> index 27400a1..de8893a 100644
-> --- a/recipes/ti/ti-paths.inc
-> +++ b/recipes/ti/ti-paths.inc
-> @@ -22,23 +22,23 @@ export BIOSPSP_INSTALL_DIR_RECIPE    = "${installdir}/ti-biospsp-tree"
->  export AUDIO_SOC_INSTALL_DIR_RECIPE  = "${installdir}/ti-audio-soc-example-tree"
->  
->  # This is where the tools will end up in staging provided PACKAGE_ARCH = ${MACHINE_ARCH} is set
-> -export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
-> -export XDC_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
-> -export XDAIS_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
-> -export BIOS_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
-> -export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
-> -export BIOSUTILS_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
-> -export FC_INSTALL_DIR         = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
-> -export CE_INSTALL_DIR         = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
-> -export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
-> -export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
-> -export CMEM_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
-> -export LINK_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
-> -export LPM_INSTALL_DIR        = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
-> -export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
-> -export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
-> -export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
-> -export BIOSPSP_INSTALL_DIR    = "${STAGING_DIR}/${MULTIMACH_TARGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
-> +export CODEGEN_INSTALL_DIR    = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${CODEGEN_INSTALL_DIR_RECIPE}"
-> +export XDC_INSTALL_DIR        = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${XDC_INSTALL_DIR_RECIPE}"
-> +export XDAIS_INSTALL_DIR      = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${XDAIS_INSTALL_DIR_RECIPE}"
-> +export BIOS_INSTALL_DIR       = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${BIOS_INSTALL_DIR_RECIPE}"
-> +export SYSBIOS_INSTALL_DIR    = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${SYSBIOS_INSTALL_DIR_RECIPE}"
-> +export BIOSUTILS_INSTALL_DIR  = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${BIOSUTILS_INSTALL_DIR_RECIPE}"
-> +export FC_INSTALL_DIR         = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${FC_INSTALL_DIR_RECIPE}"
-> +export CE_INSTALL_DIR         = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${CE_INSTALL_DIR_RECIPE}"
-> +export EDMA3_LLD_INSTALL_DIR  = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${EDMA3_LLD_INSTALL_DIR_RECIPE}"
-> +export LINUXUTILS_INSTALL_DIR = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${LINUXUTILS_INSTALL_DIR_RECIPE}"
-> +export CMEM_INSTALL_DIR       = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${CMEM_INSTALL_DIR_RECIPE}"
-> +export LINK_INSTALL_DIR       = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${LINK_INSTALL_DIR_RECIPE}"
-> +export LPM_INSTALL_DIR        = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${LPM_INSTALL_DIR_RECIPE}"
-> +export DMAI_INSTALL_DIR       = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${DMAI_INSTALL_DIR_RECIPE}"
-> +export CODEC_INSTALL_DIR      = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${CODEC_INSTALL_DIR_RECIPE}"
-> +export DSPLIB_INSTALL_DIR     = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${DSPLIB_INSTALL_DIR_RECIPE}"
-> +export BIOSPSP_INSTALL_DIR    = "${STAGING_DIR}/${CURRENT_TARGET_SYS}${BIOSPSP_INSTALL_DIR_RECIPE}"
->  
->  DSPSUFFIX_omapl137 = "x674"
->  DSPSUFFIX_omapl138 = "x674"
-> diff --git a/recipes/ti/ti-staging.inc b/recipes/ti/ti-staging.inc
-> index 593f094..c32f01c 100644
-> --- a/recipes/ti/ti-staging.inc
-> +++ b/recipes/ti/ti-staging.inc
-> @@ -1,10 +1,10 @@
->  PACKAGE_ARCH = "${MACHINE_ARCH}"
->  
->  # Allow staging into machine specific dir
-> -BASEPKG_HOST_SYS = "${MULTIMACH_HOST_SYS}"
-> +HOST_SYS = "${CURRENT_TARGET_SYS}"
->  
->  # Search archdir for shlibs instead of machine dir due to above BASEPKG_HOST_SYS
-> -SHLIBSDIR = "${STAGING_DIR}/${BASE_PACKAGE_ARCH}${HOST_VENDOR}-${HOST_OS}/shlibs"
-> +SHLIBSDIR = "${STAGING_DIR}/${HOST_SYS}/shlibs"
->  
->  PACKAGE_STRIP = "no"
->  
-> diff --git a/recipes/xapian/xapian-bindings-python_1.0.14.bb b/recipes/xapian/xapian-bindings-python_1.0.14.bb
-> index ae97779..6c24e2d 100644
-> --- a/recipes/xapian/xapian-bindings-python_1.0.14.bb
-> +++ b/recipes/xapian/xapian-bindings-python_1.0.14.bb
-> @@ -18,7 +18,7 @@ EXTRA_OECONF = "--with-python --without-php --without-ruby --without-tcl \
->                  --without-csharp --without-java"
->  
->  do_configure () {
-> -        BUILD_SYS=${BUILD_SYS} HOST_SYS=${MULTIMACH_HOST_SYS} \
-> +        BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} \
->          autotools_do_configure
->  }
->  
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMToNlMkyGM64RGpERAsFnAJ9+UXehtRlhzUMvFHpuokdGjyHgMQCfQWg3
-wNICOn4mFRWBj/gSN2iI/nQ=
-=SKRJ
------END PGP SIGNATURE-----
+> Am 26.07.2010 21:15, schrieb Frans Meulenbroeks:
+>
+>> Unfortunatly I'm still not able to create a minimal-image:
+>>> ERROR: Task 306 (/home/ossy/kom/openembedded/recipes/stage-manager/
+>>> stagemanager-native_0.0.1.bb, do_unpack) failed
+>>>
+>>> I guess the stagemanager is an essential tool and should be well tested.
+>>> So
+>>> were can I find some output which action went wrong?
+>>> (unpacking seems not that difficult to fail...)
+>>>
+>>>
+>> If stagemanager cannot unpack something is probably wrong in your source
+>> tree.
+>> My recipes/stage-manager has:
+>>
+>> rans@linux-suse:~/oe/openembedded/recipes/stage-manager>  ls -lR
+>> .:
+>> total 8
+>> drwxr-xr-x 2 frans users 4096 Jul 21 22:13 files
+>> -rw-r--r-- 1 frans users  626 Jul  9 15:26 stagemanager-native_0.0.1.bb
+>>
+>> ./files:
+>> total 48
+>> -rwxr-xr-x 1 frans users  5215 Aug 23  2009 stage-manager
+>> -rwxr-xr-x 1 frans users 28781 Jul 21 22:13 stage-manager-ipkg
+>> -rwxr-xr-x 1 frans users  6217 Aug 23  2009 stage-manager-ipkg-build
+>>
+>> You should have these as well. If not that is the root of your problem.
+>> If you have these, then probably your TMPDIR points to a nonexisting place
+>> (e.g. if it still points to .../build/tmp and you also removed build)
+>>
+>
+> I DO have the same file in recipes/stage-manager.
+> I set the tempdir to something outside my PRJDIR (overlay DIR).
+> The tmpdir outside fills when I run bitbake minimal-image, but I still run
+> into the an error:
+> NOTE: Running task 6 of 1092 (ID: 14,
+> /home/ossy/kom/openembedded/recipes/images/minimal-image.bb,
+> do_distribute_sources)
+> NOTE: Running task 7 of 1092 (ID: 306,
+> /home/ossy/kom/openembedded/recipes/stage-manager/
+> stagemanager-native_0.0.1.bb, do_unpack)
+> NOTE: Unpacking
+> ../../kom/openembedded/recipes/stage-manager/files/stage-manager to
+> ../tmp/work/x86_64-linux/stagemanager-native-0.0.1-r13/
+> NOTE: Unpacking
+> ../../kom/openembedded/recipes/stage-manager/files/stage-manager-ipkg to
+> ../tmp/work/x86_64-linux/stagemanager-native-0.0.1-r13/
+> NOTE: Unpacking
+> ../../kom/openembedded/recipes/stage-manager/files/stage-manager-ipkg-build
+> to ../tmp/work/x86_64-linux/stagemanager-native-0.0.1-r13/
+> ERROR: Task 0 (/home/ossy/kom/openembedded/recipes/images/minimal-image.bb,
+> do_unpack) failed
+> NOTE: Waiting for 2 active tasks to finish
+> NOTE: 1: /home/ossy/kom/openembedded/recipes/images/minimal-image.bb,
+> do_distribute_sources (2247)
+> NOTE: 2: /home/ossy/kom/openembedded/recipes/stage-manager/
+> stagemanager-native_0.0.1.bb, do_unpack (2248)
+> NOTE: Waiting for 1 active tasks to finish
+> NOTE: 1: /home/ossy/kom/openembedded/recipes/stage-manager/
+> stagemanager-native_0.0.1.bb, do_unpack (2248)
+> NOTE: Tasks Summary: Attempted 4 tasks of which 0 didn't need to be rerun
+> and 1 failed.
+> ERROR: '/home/ossy/kom/openembedded/recipes/images/minimal-image.bb'
+> failed
+> NOTE: oestats: build failed, see
+> http://tinderbox.openembedded.net/builds/79904/
+>
+>
+> Is there a problem with running multiple tasks? bitbake doesn't wait
+> correctly until the other task finishes? I'm running bitbake 1.8.18
+>
 
 
+mutlple tasks should not be a problem (I use that all the time), but if I
+recall correctly it can be disabled in local.conf
+Have you specified an absolute path to TMPDIR (e.g. /home/ossy/kom/tmp) ?
+ This part: ../tmp/work/x86_64-linux/stagemanager-native-0.0.1-r13/ does not
+look good
+(especially the ../tmp part of it).
+Can you verify TMPDIR and probably also mention it in your previous mail.
+
+If you want to you can also join #oe on freenode irc for faster feedback.
+
+Frans
+
+
+>
+> Regards,
+> Marcus
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
