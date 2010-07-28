@@ -1,44 +1,29 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OeCwH-0001fo-RB
+	(envelope-from <msundius@sundius.com>) id 1OeDKy-0000pP-UY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 22:09:18 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B8D5D11000A0
+	Wed, 28 Jul 2010 22:35:39 +0200
+Received: by qwg8 with SMTP id 8so1169293qwg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 22:09:00 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 8F034110009E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 22:08:59 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052066027.adsl.alicedsl.de
-	[78.52.66.27]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 22:08:59 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id F1C4B3C0EF; Wed, 28 Jul 2010 22:08:55 +0200 (CEST)
-Date: Wed, 28 Jul 2010 22:08:55 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100728200854.GB25439@rhein.zuhause.netz>
-References: <mailman.147.1280337399.17151.openembedded-devel@lists.openembedded.org>
-	<4C508B82.5060005@tycoelectronics.com>
+	Wed, 28 Jul 2010 13:34:29 -0700 (PDT)
 MIME-Version: 1.0
-In-Reply-To: <4C508B82.5060005@tycoelectronics.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Received: by 10.224.79.83 with SMTP id o19mr8869634qak.200.1280349269659; Wed, 
+	28 Jul 2010 13:34:29 -0700 (PDT)
+Received: by 10.229.251.195 with HTTP; Wed, 28 Jul 2010 13:34:28 -0700 (PDT)
+Date: Wed, 28 Jul 2010 13:34:28 -0700
+Message-ID: <AANLkTiki-zNM94gkoFf+WaMtWfnvpr=Pw-Y0sOSBqBAo@mail.gmail.com>
+From: C Michael Sundius <msundius@sundius.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: msundius@sundius.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Qt4 recipe fix; fixes configure so compiler is, detected, properly, and QXMLPatterns gets built
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: sending output from a command to the console
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,14 +37,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 20:09:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 28 Jul 2010 20:36:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Is there anyway to stop directing the output (of commands in a task) from
+being directed to the log file and send it to the standard output?
 
-because you are touching .inc files you need to increment the INC_PR number of the inc files.
+I have a situation where after the image is built I want to have oe to
+automatically down load the image to our hardware. the program that does the
+download asks the caller to push a button on our box before the
+download precedes.  I'd like to have its output not logged but rather sent
+to the console.
 
-Bye Henning
-
+Mike
 
