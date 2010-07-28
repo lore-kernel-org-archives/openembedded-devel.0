@@ -1,42 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oe6rt-00085H-AK for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 15:40:23 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oe6rc-0006Yx-D5 for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 15:40:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 15:40:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <stefan@datenfreihafen.org>) id 1Oe6wO-00035i-J0
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Jul 2010 15:45:58 +0200
+Received: from p5b0334de.dip.t-dialin.net ([91.3.52.222] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Oe6w4-0005xS-0D by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 15:40:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 28 Jul 2010 15:44:42 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1Oe6w2-0000x3-HH
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Jul 2010 15:44:38 +0200
+Date: Wed, 28 Jul 2010 15:44:38 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 28 Jul 2010 15:39:54 +0200
-Message-ID: <i2pbva$krl$1@dough.gmane.org>
-References: <4C5014FC.9040009@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <4C5014FC.9040009@balister.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100728134438.GA20716@excalibur.local>
+References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>
+	<1279651497-20918-2-git-send-email-morphis@gravedo.de>
+	<20100726074601.GA27921@excalibur.local>
+	<4C4DE8FA.7060707@gravedo.de>
+MIME-Version: 1.0
+In-Reply-To: <4C4DE8FA.7060707@gravedo.de>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Server issues
+Subject: Re: [PATCH 1/4] lvm2: rebase all recipes on a global lvm2.inc recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,41 +49,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 13:40:23 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Jul 2010 13:47:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello.
 
-On 28-07-10 13:31, Philip Balister wrote:
-> As people have noticed the server at OSUOSL that hosts many of the OE
-> services has been flaky for the past week or so.
+On Mon, 2010-07-26 at 21:58, Simon Busch wrote:
+> On 26.07.2010 09:46, Stefan Schmidt wrote:
+> > Hello.
+> > 
+> > On Tue, 2010-07-20 at 20:44, Simon Busch wrote:
+> >> This rebases all specific versions of lvm2 on a global recipe lvm2.inc which defines the
+> >> common parameters for building lvm2. Staging is overwritten as we don't need any of the
+> >> executables or manpages the build of lvm2 produces for any related builds.
+> >>
+> >> Signed-off-by: Simon Busch <morphis@gravedo.de>
+> > 
+> > Looks good. Two comments below.
 > 
-> Basically, the primary server seems to have some form of hardware issue.
-> The admins are moving the vm's to another server in a few hours so they
-> can take down the server and try to figure out what is going on. Things
-> may get slow, and non-essential services, such as tinderbox, may get
-> turned off.
+> Thank you for commenting this patches!
 > 
-> Please bear with us will we sort things out. The lack of emails is
-> largely due to the people working on the server working on the server
-> instead of sending emails and sleeping.
+> > 
+> >> diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
+> >> new file mode 100644
+> >> index 0000000..a7e37b5
+> >> --- /dev/null
+> >> +++ b/recipes/lvm2/lvm2.inc
+> >> @@ -0,0 +1,20 @@
+> >> +SECTION = "utils"
+> >> +DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
+> >> +LICENSE = "GPL"
+> >> +DEPENDS = "device-mapper"
+> >> +INC_PR = "r2"
+> >> +
+> >> +S = "${WORKDIR}/LVM2.${PV}"
+> >> +SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
+> >> +           file://crosscompile_fix.patch"
+> >> +
+> >> +# Unset user/group to unbreak install.
+> >> +EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
+> >> +EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
+> > 
+> > I can see that you just merged this in from an already existing recipe, but do
+> > we know why we have an overrirde for ARM here which changes nothing? Looks bogus
+> > to me.
+> 
+> Hm, you are right. I checked it with recompiling without the
+> EXTRA_OECONF_arm statement. It works fine. Is it ok if I supply an extra
+> patch removing this statement or should I rework this patch?
 
-Thank you for the update. Now we know people are working on it, instead
-of only knowing things are down.
-And a big thank you to the people moving the VMs!
+Both is fine with me.
 
-regards,
+> >> +inherit autotools
+> >> +
+> >> +# We don't need to stage anything (the executables are no needed at build time by any
+> >> +# other recipe)
+> >> +do_stage() {
+> >> +}
+> > 
+> > While we don't need the executables the don't hurd either IMHO. Can we get rid
+> > of this?
+> > 
+> 
+> The problem was, that the executables and manpages where installed into
+> the staging dir and never removed, when the packages was clean ur
+> purged. So I added the empty do_stage block to avoid stage of anything
+> from this package as we don't need them anyway.
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Hm, this smells like a bug somewhere else. Did the staged binaries bring in
+other problems or could they get staged until we find out why they are not
+removed?
 
-iD8DBQFMUDMqMkyGM64RGpERAgFRAKCxr9GD0P142G19Bi/HFsZ8XMT6zACeIJpc
-1NzGVMb4a/QBP6+jKcLdfxo=
-=hmLL
------END PGP SIGNATURE-----
-
+regards
+Stefan Schmidt
 
 
