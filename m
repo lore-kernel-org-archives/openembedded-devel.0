@@ -1,33 +1,37 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from ns.penguin.cz ([84.21.108.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Oe150-0001Iy-6M
+	(envelope-from <utx@penguin.cz>) id 1Oe2yR-0006vY-02
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 09:29:45 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id D14BC53EE
+	Wed, 28 Jul 2010 11:30:51 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ns.penguin.cz (Postfix) with ESMTP id 1ED321417181
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 11:33:20 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 28 Jul 2010 11:28:37 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <4C4F6F91.8000902@mentor.com>
-In-Reply-To: <4C4F6F91.8000902@mentor.com>
-MIME-Version: 1.0
-Message-Id: <201007281128.37653.khimov@altell.ru>
-X-Altell-MailScanner-ID: D14BC53EE.95C6D
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+	Wed, 28 Jul 2010 11:36:07 +0200 (CEST)
+X-Virus-Scanned: Debian amavisd-new at ns.penguin.cz
+Received: from ns.penguin.cz ([127.0.0.1])
+	by localhost (ns.penguin.cz [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 8zaqaZQPeZ2K
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jul 2010 11:36:07 +0200 (CEST)
+Received: from [192.168.1.2] (7-165-207-85.strcechy.adsl-llu.static.bluetone.cz
+	[85.207.165.7]) by ns.penguin.cz (Postfix) with ESMTP id E772D1416BA8
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jul 2010 11:36:06 +0200 (CEST)
+From: Stanislav Brabec <utx@penguin.cz>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Wed, 28 Jul 2010 11:30:34 +0200
+Message-ID: <1280309434.7083.8.camel@utx.lan>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-SA-Exim-Connect-IP: 84.21.108.25
+X-SA-Exim-Mail-From: utx@penguin.cz
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Disable packaged-staging for perl-native
+Subject: bitbake: staging of binary over symlink breaks sysroot (lzma x xz)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,28 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 07:29:45 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 28 Jul 2010 09:30:51 -0000
+Content-Type: text/plain; charset="ISO-8859-2"
+Content-Transfer-Encoding: 7bit
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 28 =D0=B8=D1=8E=D0=BB=D1=8F 2010 03:45:21 =
-=D0=B0=D0=B2=D1=82=D0=BE=D1=80 Tom Rini =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=
-=B0=D0=BB:
-> I'd like to disable packaged-staging for perl-native.  The problem here
-> comes from a number of things that happen.  Some of these can only
-> happen in combination with packaged-staging but others I believe could
-> happen today.  The problem itself is that if we have perl-native
-> available from packaged-staging it can suddenly exist very early.  What
-> this means in practical terms is that now we're trying to generate say
-> pod2man.pl from pod2man.pl.in and @perl@ is expanded to something beyond
-> the "#!" mechanic length limit and recipes start failing to build
-> (fixable by changing pod2man.pl.in to use /usr/bin/env perl (and if it
-> had a -w changing to Use warnings: or whatever the perl is)).
+I just built an angstrom image and thinks failed.
 
-So the problem really is that we have perl in /very-very-long-path/perl? IM=
-O=20
-/usr/bin/env change would be better in that case.=20
+lzma image depends on lzma-native, grep and other programs that use .xz
+suffix for tarballs depend on xz-native.
+This fact itself is bad - it creates file conflicts in the sysroot.
+
+But things were even worse:
+- xz-native staged xz binary and lzma as a symlink to xz.
+- lzma-native tried to stage lzma 4 minutes later
+
+But staging of lzma apparently went wrong. Instead of removal of lzma
+symlink and installation of lzma binary, bitbake followed the symlink
+and staged lzma as xz with a result of broken build environment.
+
+I have bitbake-1.8.18.
+
+-- 
+
+________________________________________________________________________
+Stanislav Brabec
+http://www.penguin.cz/~utx/zaurus
+
 
 
