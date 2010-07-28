@@ -1,39 +1,27 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Oe3Zv-0000Kj-GI
+	(envelope-from <philip@balister.org>) id 1Oe4rG-0002VN-Kh
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 12:09:36 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id C62142C807
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 10:04:35 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id djaIJNjparwI
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 10:04:31 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 6E7772C7E0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 10:04:31 +0000 (UTC)
-Message-ID: <4C5001C8.4070607@gmail.com>
-Date: Wed, 28 Jul 2010 12:09:12 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+	Wed, 28 Jul 2010 13:31:35 +0200
+Received: (qmail 30624 invoked by uid 1003); 28 Jul 2010 11:31:10 -0000
+Received: from localhost (HELO ?192.168.1.167?) (philip@opensdr.com@127.0.0.1)
+	by mail.geekisp.com with SMTP; 28 Jul 2010 11:31:10 -0000
+Message-ID: <4C5014FC.9040009@balister.org>
+Date: Wed, 28 Jul 2010 07:31:08 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.10) Gecko/20100621 Fedora/3.0.5-1.fc13 Thunderbird/3.0.5
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1280309434.7083.8.camel@utx.lan>
-In-Reply-To: <1280309434.7083.8.camel@utx.lan>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake: staging of binary over symlink breaks sysroot (lzma x xz)
+Subject: Server issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,31 +35,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 10:09:36 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 28 Jul 2010 11:31:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Stanislav Brabec ha scritto, Il 28/07/2010 11:30:
-> I just built an angstrom image and thinks failed.
-> 
-> lzma image depends on lzma-native, grep and other programs that use .xz
-> suffix for tarballs depend on xz-native.
-> This fact itself is bad - it creates file conflicts in the sysroot.
-> 
-> But things were even worse:
-> - xz-native staged xz binary and lzma as a symlink to xz.
-> - lzma-native tried to stage lzma 4 minutes later
-> 
-> But staging of lzma apparently went wrong. Instead of removal of lzma
-> symlink and installation of lzma binary, bitbake followed the symlink
-> and staged lzma as xz with a result of broken build environment.
-> 
-> I have bitbake-1.8.18.
-> 
+As people have noticed the server at OSUOSL that hosts many of the OE 
+services has been flaky for the past week or so.
 
-Yes :-(
- same here and other people I know are struggling trying to build.
+Basically, the primary server seems to have some form of hardware issue. 
+The admins are moving the vm's to another server in a few hours so they 
+can take down the server and try to figure out what is going on. Things 
+may get slow, and non-essential services, such as tinderbox, may get 
+turned off.
 
-/marco
+Please bear with us will we sort things out. The lack of emails is 
+largely due to the people working on the server working on the server 
+instead of sending emails and sleeping.
+
+Philip
+
 
 
