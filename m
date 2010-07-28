@@ -1,34 +1,44 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OeAIw-0004pv-SM
+	(envelope-from <raj.khem@gmail.com>) id 1OeAOC-0004zv-J9
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 19:20:31 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 3BB6780C53C; Wed, 28 Jul 2010 19:20:14 +0200 (CEST)
-Received: from [192.168.1.142] (p5489FF50.dip.t-dialin.net [84.137.255.80])
-	by gravedo.de (Postfix) with ESMTPSA id 51A7E80C4FA
+	Wed, 28 Jul 2010 19:25:57 +0200
+Received: by iwn34 with SMTP id 34so5053249iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 19:20:12 +0200 (CEST)
-Message-ID: <4C5066C9.4060902@gravedo.de>
-Date: Wed, 28 Jul 2010 19:20:09 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
+	Wed, 28 Jul 2010 10:25:39 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=RVRbmj4WxzwMhb59SeM1rt3JLRSj1WvjMo1RgurIn2k=;
+	b=OmmpXIK4vzGPwDpFG2wt4iwcvGrG0Rmac2yr4r4VFGOLh0iq9g1AwAEUlp3F2kmeq8
+	YvlfIWOV+2yDEKjBFd2AO3/mlYhNCHiKnHTI4LKqDqktW7fQX8WzJpvKzh3a8aKoj8kT
+	Dy30dbcf4LKNORjyCqNxztEvUyNu6RK1DeWVE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=kxfkA0Z1zY9LTNAhLAH1PU0JFa/QXVLt1R2vMe4NvU6rurOUhYxAXx3XeV2QxoAMAR
+	1n+D5+0iJfQ4fB9Xbl4a5QBKKcj4ALJwlrOrXj9Ech8Uic1cQuu/ysIN7s+qqtupn2dk
+	SOM3YVZRXyccdu0y+o8VvQdeb6zAtB6mLSph8=
+Received: by 10.231.170.208 with SMTP id e16mr12652019ibz.44.1280337939389; 
+	Wed, 28 Jul 2010 10:25:39 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.231.186.88 with HTTP; Wed, 28 Jul 2010 10:25:19 -0700 (PDT)
+In-Reply-To: <i2okvc$6j7$1@dough.gmane.org>
+References: <1280213315-5513-1-git-send-email-raj.khem@gmail.com> 
+	<i2okvc$6j7$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 28 Jul 2010 10:25:19 -0700
+Message-ID: <AANLkTin_ROfw2Gv6-6MD=VQrXZ2t6BRb3_yNyJOCEhCX@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>	<1279651497-20918-2-git-send-email-morphis@gravedo.de>	<20100726074601.GA27921@excalibur.local>	<4C4DE8FA.7060707@gravedo.de>
-	<20100728134438.GA20716@excalibur.local>
-In-Reply-To: <20100728134438.GA20716@excalibur.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/4] lvm2: rebase all recipes on a global lvm2.inc recipe
+Subject: Re: [PATCH 0/8][v3] Make multi-machine toolchains to co-exist (revised again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,85 +52,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 17:20:31 -0000
+X-List-Received-Date: Wed, 28 Jul 2010 17:25:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-On 28.07.2010 15:44, Stefan Schmidt wrote:
-> Hello.
-> 
-> On Mon, 2010-07-26 at 21:58, Simon Busch wrote:
->> On 26.07.2010 09:46, Stefan Schmidt wrote:
->>> Hello.
->>>
->>> On Tue, 2010-07-20 at 20:44, Simon Busch wrote:
->>>> This rebases all specific versions of lvm2 on a global recipe lvm2.inc which defines the
->>>> common parameters for building lvm2. Staging is overwritten as we don't need any of the
->>>> executables or manpages the build of lvm2 produces for any related builds.
->>>>
->>>> Signed-off-by: Simon Busch <morphis@gravedo.de>
->>>
->>> Looks good. Two comments below.
+On Wed, Jul 28, 2010 at 12:07 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 27-07-10 08:48, Khem Raj wrote:
+>> Hi
 >>
->> Thank you for commenting this patches!
+>> Following series of patches are for making multi-machine toolchains co-exist with
+>> new cross staging for toolchain.
 >>
->>>
->>>> diff --git a/recipes/lvm2/lvm2.inc b/recipes/lvm2/lvm2.inc
->>>> new file mode 100644
->>>> index 0000000..a7e37b5
->>>> --- /dev/null
->>>> +++ b/recipes/lvm2/lvm2.inc
->>>> @@ -0,0 +1,20 @@
->>>> +SECTION = "utils"
->>>> +DESCRIPTION = "LVM2 is a set of utilities to manage logical volumes in Linux."
->>>> +LICENSE = "GPL"
->>>> +DEPENDS = "device-mapper"
->>>> +INC_PR = "r2"
->>>> +
->>>> +S = "${WORKDIR}/LVM2.${PV}"
->>>> +SRC_URI = "ftp://sources.redhat.com/pub/lvm2/old/LVM2.${PV}.tgz \
->>>> +           file://crosscompile_fix.patch"
->>>> +
->>>> +# Unset user/group to unbreak install.
->>>> +EXTRA_OECONF = "--with-user= --with-group= --disable-o_direct"
->>>> +EXTRA_OECONF_arm = "--with-user= --with-group= --disable-o_direct"
->>>
->>> I can see that you just merged this in from an already existing recipe, but do
->>> we know why we have an overrirde for ARM here which changes nothing? Looks bogus
->>> to me.
+>> It changes the toolchain triplet from ${TARGET_ARCH}-${VENDOR}-${OS} to
+>> ${TARGET_ARCH}-${CPU_SUB_TARGET}_${VENDOR}-OS
 >>
->> Hm, you are right. I checked it with recompiling without the
->> EXTRA_OECONF_arm statement. It works fine. Is it ok if I supply an extra
->> patch removing this statement or should I rework this patch?
-> 
-> Both is fine with me.
-> 
->>>> +inherit autotools
->>>> +
->>>> +# We don't need to stage anything (the executables are no needed at build time by any
->>>> +# other recipe)
->>>> +do_stage() {
->>>> +}
->>>
->>> While we don't need the executables the don't hurd either IMHO. Can we get rid
->>> of this?
->>>
+>> which means that a toolchain for armv7 is called arm-v7a_oe-linux-gnueabi-*
+>> and for armv5te its called arm-v5te_oe-linux-gnueabi-*
 >>
->> The problem was, that the executables and manpages where installed into
->> the staging dir and never removed, when the packages was clean ur
->> purged. So I added the empty do_stage block to avoid stage of anything
->> from this package as we don't need them anyway.
-> 
-> Hm, this smells like a bug somewhere else. Did the staged binaries bring in
-> other problems or could they get staged until we find out why they are not
-> removed?
+>> They can coexist in same native sysroot. The symlinks would mean that
+>> gcc will not accidently mix the assemblers or linkers.
+>>
+>> MULTIMACH-* is not needed anymore as the TARGET_SYS is distinct enough
+>> to serve same purpose.
+>>
+>> I have booted a minimal-image on qemuarm qemuppc and qemumips successfully. The build for
+>> beagleboard native-sdk-image completed too.
+>
+> I tried v3 and it's close, but when building gstreamer-ti:
+>
+> | checking host system type... Invalid configuration
+> `beagleboard-angstrom-linux-gnueabi': machine `beagleboard-angstrom' not
+> recognized
+>
+> Any idea how I can have it stage in the machine sysroot but not get a
+> weird TARGET_PREFIX?
 
-Staging this binaries let the recompile of the same package fail as it
-tries to install the binaries + man pages again.
-Any hints where the bug could be? Within the staging logic?
+I will try to see whats going on.
 
-regards,
-morphis
-
+>
+> regards,
+>
+> Koen
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMT9csMkyGM64RGpERAgufAJ0aKRM+G56NH8Vf8fej71ELTVKq/ACfWGNU
+> gCqhPDOE0Pzfz0eiwKyt2Vw=
+> =0j2v
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
