@@ -1,28 +1,54 @@
-Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OeCkb-0001cT-S4
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OeCnX-0007J2-6S
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 21:57:16 +0200
-Received: from [163.241.71.52] (163.241.71.52) by
-	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
-	Server id 8.1.393.1; Wed, 28 Jul 2010 15:56:54 -0400
-Message-ID: <4C508B82.5060005@tycoelectronics.com>
-Date: Wed, 28 Jul 2010 15:56:50 -0400
-From: Jay Snyder <jay.snyder@tycoelectronics.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Wed, 28 Jul 2010 22:00:19 +0200
+Received: by bwz10 with SMTP id 10so4366219bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jul 2010 12:59:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=z9fMbiaSBOD26lzrYiZ8AFlmBrYZyv4xgNpT6eMu3io=;
+	b=BpAICFFV4PJnpb9iqdUEOpQQO5VX2LTkw9DxwimgrkJLNfVur2xmMyJqImw+qnK6J0
+	qYWvLM/p+G1ZwgSUVFeT7fyvnzFSaGouRHXjVBlXfkAJ9qbOqs7t5dxcheh6S5gtvFfB
+	IJmv98c7iH/8ZbqnViEhGfyzX3fHjiKFQfIXo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=dM8CQlBy9oUd4B7XiooZPD1IuyGDuwXal6hjS0xktj6KTHmhjFN+m+46d3qBnwziOL
+	NGcJox+T0qEoFlRWRTijGLXb+j9SCU+8S6/zN16qPp89gBQbL0jnFca/sSDcrdgnvJl/
+	aTMz4YnjgIBaHFXIE76ogQ3GVk69sNXLm0I4E=
+Received: by 10.204.49.22 with SMTP id t22mr7996697bkf.188.1280347192830;
+	Wed, 28 Jul 2010 12:59:52 -0700 (PDT)
+Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
+	by mx.google.com with ESMTPS id s17sm5047192bkx.6.2010.07.28.12.59.51
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 28 Jul 2010 12:59:52 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OeCn1-0007n3-VK; Wed, 28 Jul 2010 21:59:43 +0200
+Date: Wed, 28 Jul 2010 21:59:43 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100728195943.GA29909@mx.loc>
+References: <20100716213929.GI23169@mx.loc>
+	<1280337265-25582-1-git-send-email-rep.dot.nop@gmail.com>
+	<i2pokl$7iu$1@dough.gmane.org> <20100728173945.GD19135@mx.loc>
+	<i2q0sv$5tc$1@dough.gmane.org>
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <mailman.147.1280337399.17151.openembedded-devel@lists.openembedded.org>
-In-Reply-To: <mailman.147.1280337399.17151.openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 198.175.154.211
-X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
+In-Reply-To: <i2q0sv$5tc$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Qt4 recipe fix; fixes configure so compiler is, detected, properly, and QXMLPatterns gets built
+Subject: Re: [PATCH][v3] gcc-cross: fix PV and make it compile
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,80 +62,64 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 19:57:19 -0000
-Content-Type: multipart/mixed; boundary="------------020800040303070505070404"
+X-List-Received-Date: Wed, 28 Jul 2010 20:00:27 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---------------020800040303070505070404
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+On Wed, Jul 28, 2010 at 09:37:03PM +0200, Koen Kooi wrote:
+>-----BEGIN PGP SIGNED MESSAGE-----
+>Hash: SHA1
+>
+>
+>http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-July/021641.html
 
-Patch produced with 'diff -Naur', as per Henning Heinold's request:
+this is rather ugly and counter intuitive for i'll have to change the
+PREFERRED_GCC_VERSION whenever someone decides to change that "4.6+svnr",
+but ok, i'll drop the PR hunk :(
+thanks,
+
+>On 28-07-10 19:39, Bernhard Reutner-Fischer wrote:
+>> On Wed, Jul 28, 2010 at 07:16:05PM +0200, Koen Kooi wrote:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 28-07-10 19:14, Bernhard Reutner-Fischer wrote:
+>>>
+>>>> -PV = "4.6+svnr${SRCPV}"
+>>>> +PR = "4.6+svnr${SRCPV}"
+>>>
+>>> NAK, PV = "4.6+svnr${SRCPV}" is the right thing to do
+>> 
+>> ok what should i do then?
+>> I want to use the svn version of gcc regardless of it being called
+>> "1.2.3-svn" or "5.0.0-svn" so i put this into my local.conf:
+>> 
+>> #PREFERRED_GCC_VERSION = "4.4.4"
+>> PREFERRED_GCC_VERSION = "svn"
+>> 
+>> But that obviously doesn't work with a PV of "4.6+svnr${SRCPV}" like
+>> current git has.
+>> I made up that "svn" intuitively, with the following reasoning:
+>> i'm using the subversion version (_version_, hence PV)
+>> with an arbitrary revision as Package Release that will sort correctly
+>> iff a 4.6.0 release would be made.
+>> 
+>> Now how am i supposed to pick "svn" if not by using "svn"?
+>> 
+>> thanks for clarification,
+>
+>-----BEGIN PGP SIGNATURE-----
+>Version: GnuPG v1.4.5 (Darwin)
+>
+>iD8DBQFMUIbfMkyGM64RGpERAoPYAJ9rxqMp47aGQnPjE6R7GTIMx7CQpgCgmuIa
+>7su2ka+K0cQBaopKy11SRtk=
+>=1Jf8
+>-----END PGP SIGNATURE-----
+>
+>
+>_______________________________________________
+>Openembedded-devel mailing list
+>Openembedded-devel@lists.openembedded.org
+>http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
---------------020800040303070505070404
-Content-Type: text/x-diff; name="Qt4-recipe-compiler-fix.patch"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline; filename="Qt4-recipe-compiler-fix.patch"
-
-diff -Naur /home/oe/2010-06-23/openembedded/recipes/qt4/files/configure-conf_compiler-fix.patch /home/oe/local/recipes/qt4/files/configure-conf_compiler-fix.patch
---- /home/oe/2010-06-23/openembedded/recipes/qt4/files/configure-conf_compiler-fix.patch	1969-12-31 19:00:00.000000000 -0500
-+++ /home/oe/local/recipes/qt4/files/configure-conf_compiler-fix.patch	2010-07-28 09:42:06.000000000 -0400
-@@ -0,0 +1,12 @@
-+Index qt-everywhere-opensource-src-4.6.0.orig/configure
-+===================================================================
-+--- qt-everywhere-opensource-src-4.6.0/configure.orig	2009-12-10 15:49:49.000000000 -0500
-++++ qt-everywhere-opensource-src-4.6.0/configure	2009-12-10 15:50:20.000000000 -0500
-+@@ -2917,6 +2917,7 @@
-+ fi
-+ 
-+ QMAKE_CONF_COMPILER=`getQMakeConf "$XQMAKESPEC" | grep "^QMAKE_CXX[^_A-Z0-9]" | sed "s,.* *= *\(.*\)$,\1," | tail -1`
-++eval QMAKE_CONF_COMPILER=$(echo $QMAKE_CONF_COMPILER | sed "s/(/{/" | sed "s/)/}/")
-+ TEST_COMPILER="$CC"
-+ [ -z "$TEST_COMPILER" ] && TEST_COMPILER=$QMAKE_CONF_COMPILER
-+ 
-diff -Naur /home/oe/2010-06-23/openembedded/recipes/qt4/qt-4.6.0.inc /home/oe/local/recipes/qt4/qt-4.6.0.inc
---- /home/oe/2010-06-23/openembedded/recipes/qt4/qt-4.6.0.inc	2010-06-23 16:50:01.000000000 -0400
-+++ /home/oe/local/recipes/qt4/qt-4.6.0.inc	2010-07-28 09:43:19.000000000 -0400
-@@ -3,6 +3,7 @@
- FILESPATHPKG .= ":qt-${PV}"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
-+	   file://configure-conf_compiler-fix.patch \
-            file://0001-cross-compile.patch \
-            file://0002-fix-resinit-declaration.patch \
-            file://0004-no-qmake.patch \
-diff -Naur /home/oe/2010-06-23/openembedded/recipes/qt4/qt-4.6.2.inc /home/oe/local/recipes/qt4/qt-4.6.2.inc
---- /home/oe/2010-06-23/openembedded/recipes/qt4/qt-4.6.2.inc	2010-06-23 16:50:01.000000000 -0400
-+++ /home/oe/local/recipes/qt4/qt-4.6.2.inc	2010-07-28 09:43:16.000000000 -0400
-@@ -3,6 +3,7 @@
- FILESPATHPKG .= ":qt-${PV}"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
-+	   file://configure-conf_compiler-fix.patch \
-            file://0001-cross-compile.patch \
-            file://0002-fix-resinit-declaration.patch \
-            file://0004-no-qmake.patch \
-diff -Naur /home/oe/2010-06-23/openembedded/recipes/qt4/qt4-embedded.inc /home/oe/local/recipes/qt4/qt4-embedded.inc
---- /home/oe/2010-06-23/openembedded/recipes/qt4/qt4-embedded.inc	2010-06-23 16:50:01.000000000 -0400
-+++ /home/oe/local/recipes/qt4/qt4-embedded.inc	2010-07-28 09:43:31.000000000 -0400
-@@ -12,6 +12,7 @@
- QT_LIBINFIX = "E"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opensource-src-${PV}.tar.bz2 \
-+	   file://configure-conf_compiler-fix.patch \
-            file://0001-cross-compile.patch \
-            file://0002-fix-resinit-declaration.patch \
-            file://0003-no-tools.patch \
-diff -Naur /home/oe/2010-06-23/openembedded/recipes/qt4/qt4-x11-free.inc /home/oe/local/recipes/qt4/qt4-x11-free.inc
---- /home/oe/2010-06-23/openembedded/recipes/qt4/qt4-x11-free.inc	2010-06-29 16:11:40.000000000 -0400
-+++ /home/oe/local/recipes/qt4/qt4-x11-free.inc	2010-07-28 09:44:02.000000000 -0400
-@@ -8,6 +8,7 @@
- INC_PR = "r18"
- 
- SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-x11-opensource-src-${PV}.tar.gz \
-+	   file://configure-conf_compiler-fix.patch \
-            file://0001-cross-compile.patch \
-            file://0002-fix-resinit-declaration.patch \
-            file://0003-no-tools.patch \
-
---------------020800040303070505070404--
