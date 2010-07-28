@@ -1,26 +1,26 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1OeBbK-0002nH-D7
+	(envelope-from <stefan@datenfreihafen.org>) id 1OeBbu-0003i0-Cl
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 20:43:52 +0200
+	Wed, 28 Jul 2010 20:44:10 +0200
 Received: from p5b0334de.dip.t-dialin.net ([91.3.52.222] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1OeBb1-0002lY-M9 by authid <stefan@sostec.de> with cram_md5
+	id 1OeBbb-0002mC-PT by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 20:43:18 +0200
+	Wed, 28 Jul 2010 20:43:54 +0200
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1OeBb0-00067x-5M
+	(envelope-from <stefan@excalibur.local>) id 1OeBba-000685-88
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 20:43:14 +0200
-Date: Wed, 28 Jul 2010 20:43:13 +0200
+	Wed, 28 Jul 2010 20:43:50 +0200
+Date: Wed, 28 Jul 2010 20:43:49 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100728184313.GD20716@excalibur.local>
+Message-ID: <20100728184349.GE20716@excalibur.local>
 References: <1280220549-447-1-git-send-email-heinold@inf.fu-berlin.de>
-	<1280220549-447-2-git-send-email-heinold@inf.fu-berlin.de>
+	<1280220549-447-3-git-send-email-heinold@inf.fu-berlin.de>
 MIME-Version: 1.0
-In-Reply-To: <1280220549-447-2-git-send-email-heinold@inf.fu-berlin.de>
+In-Reply-To: <1280220549-447-3-git-send-email-heinold@inf.fu-berlin.de>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -33,7 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] llvm: backport llvm2.7 from openembedded-dev
+Subject: Re: [PATCH 2/2] openjdk: backport from openembedded-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,7 +47,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 18:43:57 -0000
+X-List-Received-Date: Wed, 28 Jul 2010 18:44:10 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
