@@ -1,30 +1,43 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <developer@alexandfliss.com>) id 1Oe9gf-00077D-Eo
+	(envelope-from <cliff.brake@gmail.com>) id 1Oe9gs-0007GZ-EB
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 18:40:58 +0200
-Received: by wyb38 with SMTP id 38so4567419wyb.6
+	Wed, 28 Jul 2010 18:41:11 +0200
+Received: by wwb31 with SMTP id 31so780wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 09:40:39 -0700 (PDT)
+	Wed, 28 Jul 2010 09:40:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=j9JhUdbiuQAr/zpAZjEsNNhN723fpkTTLgfmx3SmXlI=;
+	b=OMX020LXrCYuPZKAjXr6tQ5csMWIA+qqatqbJM89eD2nBbwvr/C42ugsTnifS8Tmnu
+	WSsBK5CTuUQ8eVh9MOQ38rcGg0MrA5e3ulUm3V8cwhqDK+PnmR9CS9/xWlpG13x+Nu4M
+	yzRjqtYeeiNYYLoyu5OP+FHpaX7Lw4bjXayk0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Jem9UzY8s3wlvySeQdh8kgXnINWDP2rw3OSB49eiPJWTzxrgo2ZRbTk1v8BFHRnaUE
+	nbvHjFOuuI/Mo2UWgk51azix9/ar5ZYqW57murDvZVfHYxjFs8DZlu8+KY0RkHMaK2RD
+	cEJcyrfiZWqKW3vVwmyy311xN8wDUOYkRUqaQ=
 MIME-Version: 1.0
-Received: by 10.216.237.100 with SMTP id x78mr10754299weq.114.1280335238502; 
-	Wed, 28 Jul 2010 09:40:38 -0700 (PDT)
-Sender: developer@alexandfliss.com
-Received: by 10.216.236.97 with HTTP; Wed, 28 Jul 2010 09:40:38 -0700 (PDT)
-Date: Wed, 28 Jul 2010 17:40:38 +0100
-X-Google-Sender-Auth: fviB0EeBCVjpOTDTJjyv65dnGUg
-Message-ID: <AANLkTintoXJZHPGxj1-sxHP31-VzOK3Washy+hZqbmgd@mail.gmail.com>
-From: Alex Bennee <kernel-hacker@bennee.com>
+Received: by 10.216.177.193 with SMTP id d43mr10900862wem.34.1280335247785; 
+	Wed, 28 Jul 2010 09:40:47 -0700 (PDT)
+Received: by 10.216.234.166 with HTTP; Wed, 28 Jul 2010 09:40:47 -0700 (PDT)
+In-Reply-To: <i2mdao$737$1@dough.gmane.org>
+References: <i2mdao$737$1@dough.gmane.org>
+Date: Wed, 28 Jul 2010 12:40:47 -0400
+Message-ID: <AANLkTi=qcJf87fWok-9EquBeFRHGveKwvG4_Bvpeh=jd@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: developer@alexandfliss.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Fix the compile failure of recode
+Subject: Re: OE server problems
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,29 +51,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 16:40:58 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 28 Jul 2010 16:41:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-The recode build fails because of CC/CXX environment variables being banged by:
+On Tue, Jul 27, 2010 at 6:44 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> Hi,
+>
+> In the past several weeks the OE server(s) have been down for extended
+> periods of time without so much a mail to this list about the cause,
+> solution or anything.
 
-TARGET_CC_ARCH_append = "${LDFLAGS}"
+From what I understand, the server that is hosting the OE melo virtual
+machine (http://wiki.openembedded.net/index.php/Infrastructure) has
+some stability problems.  The VM is being moved to another physical
+server as I type.  Depending what problems are found, we'll try to
+figure out the best path forward.
 
-Adding a space fixes it:
-
-From d792e217288ac56b1cc1f798c0ea67f749037f2a Mon Sep 17 00:00:00 2001
-From: Alex Bennee <ajb@cbnl.com> Date: Wed, 28 Jul 2010 17:38:39 +0100
-Subject: [PATCH] Add space to appended CC/CXX otherwise configure
-fails ---  recipes/recode/recode_3.6.bb |    2 +-  1 files changed, 1
-insertions(+), 1 deletions(-) diff --git
-a/recipes/recode/recode_3.6.bb b/recipes/recode/recode_3.6.bb index
-3e7c6cd..0cdd43d 100644 --- a/recipes/recode/recode_3.6.bb +++
-b/recipes/recode/recode_3.6.bb @@ -8,7 +8,7 @@ SRC_URI =
-"${GNU_MIRROR}/recode/recode-${PV}.tar.gz \    inherit autotools
--TARGET_CC_ARCH_append = "${LDFLAGS}" +TARGET_CC_ARCH_append = "
-${LDFLAGS}"    do_configure() {  	gnu-configize --  1.7.2
-
--- 
-Alex, homepage: http://www.bennee.com/~alex/
-http://www.half-llama.co.uk
+Thanks for your patience.
+Cliff
 
 
