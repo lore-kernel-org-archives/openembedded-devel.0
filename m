@@ -1,26 +1,37 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from familie-heinold.de
+	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Oe96Y-0003Gt-1p
+	(envelope-from <heinold@inf.fu-berlin.de>) id 1Oe9AJ-00066g-Je
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 18:03:49 +0200
-Received: from [192.168.2.139] (dsl-62-220-14-162.berlikomm.net
-	[62.220.14.162])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 291D31B10C09
+	Wed, 28 Jul 2010 18:07:35 +0200
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id D443611000A0
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 16:07:19 +0000 (UTC)
-Message-ID: <4C5054C7.4080602@freyther.de>
-Date: Thu, 29 Jul 2010 00:03:19 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.7) Gecko/20100720 Fedora/3.1.1-1.fc13 Lightning/1.0b2
-	Thunderbird/3.1.1
-MIME-Version: 1.0
+	Wed, 28 Jul 2010 18:07:14 +0200 (CEST)
+Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
+	[127.0.0.1])
+	by mail.familie-heinold.de (Postfix) with ESMTP id 2C428110009E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jul 2010 18:07:13 +0200 (CEST)
+Received: from rhein.familie-heinold.de (f052229176.adsl.alicedsl.de
+	[78.52.229.176]) by mail.familie-heinold.de (Postfix) with ESMTPA
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jul 2010 18:07:13 +0200 (CEST)
+Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
+	id 68A503C0EF; Wed, 28 Jul 2010 18:07:12 +0200 (CEST)
+Date: Wed, 28 Jul 2010 18:07:12 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100728160711.GA9553@rhein.zuhause.netz>
 References: <mailman.126.1280326040.17151.openembedded-devel@lists.openembedded.org>
 	<4C504C00.8080207@tycoelectronics.com>
+MIME-Version: 1.0
 In-Reply-To: <4C504C00.8080207@tycoelectronics.com>
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Virus-Scanned: ClamAV using ClamSMTP
+X-SA-Exim-Connect-IP: 85.214.48.103
+X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
@@ -41,20 +52,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 16:03:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 28 Jul 2010 16:07:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 07/28/2010 11:25 PM, Jay Snyder wrote:
-> Please see this link for two files, a patch for the recipe, and also a new file:
+Hi,
 
-> 
-> http://home.comcast.net/~jay.snyder/Qt4-recipe-compiler-fix/Qt4-recipe-compiler-fix.patch
+I would really kind of you to use "git diff" and attach the resulting patch here.
+Or use git format-patch and git send-email.
 
-this patch removes the patch you want to add. Is that correct? Could you add
-the "More Info" to the top of the patch as well? Could you also include the
-failure you are seeing?
-
-thanks
+Bye Henning
 
 
