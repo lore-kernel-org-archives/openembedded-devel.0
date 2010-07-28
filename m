@@ -1,43 +1,29 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Oe9C8-00077g-O2
+	(envelope-from <jay.snyder@tycoelectronics.com>) id 1Oe9aY-0005SA-IT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 18:09:27 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 38F7111000A0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 18:09:02 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B82B5110009E
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 18:09:00 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052229176.adsl.alicedsl.de
-	[78.52.229.176]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 18:09:00 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 8ECC33C0EF; Wed, 28 Jul 2010 18:09:00 +0200 (CEST)
-Date: Wed, 28 Jul 2010 18:09:00 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100728160900.GB9553@rhein.zuhause.netz>
-References: <BAY127-W2DE0FDEACF7F8948D3BC7D8A80@phx.gbl>
+	Wed, 28 Jul 2010 18:34:42 +0200
+Received: from [163.241.71.52] (163.241.71.52) by
+	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
+	Server id 8.1.393.1; Wed, 28 Jul 2010 12:34:19 -0400
+Message-ID: <4C505C08.8050603@tycoelectronics.com>
+Date: Wed, 28 Jul 2010 12:34:16 -0400
+From: Jay Snyder <jay.snyder@tycoelectronics.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-In-Reply-To: <BAY127-W2DE0FDEACF7F8948D3BC7D8A80@phx.gbl>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+To: <openembedded-devel@lists.openembedded.org>
+References: <mailman.142.1280333371.17151.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.142.1280333371.17151.openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 198.175.154.211
+X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: kernel for DM6446
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Qt4 recipe fix; fixes configure so compiler is, detected properly, and QXMLPatterns gets built
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +37,114 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 16:09:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 28 Jul 2010 16:34:43 -0000
+Content-Type: multipart/mixed; boundary="------------030609090508090306000301"
 
-On Wed, Jul 28, 2010 at 08:54:12PM +0600, saleh usman wrote:
-> 
-> I am bitbaking linux davinci recipe in openembedded to build a just kernel image for DM6446. Weather this is the suitable recipe for this?
-> Also it is giving an error of permission denied to /root as shown in terminal log. how I may remove this error? plz help.
-> 
-> [Saleh@localhost root]$ bitbake linux-davinci
-> NOTE: Handling BitBake files: \ (0004/8169) [ 0 %]ERROR: [Errno 13] Permission denied: '/root' while parsing /sdr/openembedded/recipes/oprofile/oprofileui_svn.bb
-> NOTE: Handling BitBake files: - (8169/8169) [100 %]
-> NOTE: Parsing finished. 7530 cached, 308 parsed, 330 skipped, 0 masked.
-> ERROR: Parsing errors found, exiting...
-> [Saleh@localhost root]$ 
-> 
-> 
-> Saleh
+--------------030609090508090306000301
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+>
+>
+> this patch removes the patch you want to add. Is that correct? Could 
+> you add
+> the "More Info" to the top of the patch as well? Could you also 
+> include the
+> failure you are seeing?
+>
+I have fixed the patch (common error, had reversed the order of 
+arguments to diff).
+http://home.comcast.net/~jay.snyder/Qt4-recipe-compiler-fix/Qt4-recipe-compiler-fix.patch
 
-Seems an error in your setup and you are using root to build the stuff which we not recommend. You can use
-the debug-output of bitbake to see more, whats going on.
+Please see attachments.
 
-bitbake -DDD your_recipe.
-
-Bye Henning
+Another user requested using git-diff.     My changes are in an overlay 
+directory, so git-diff will not work.    How do I get a git-format diff 
+from the normal diff program?
 
 
+Also, you ask to "include the failure you are seeing", here it is (from 
+log.do_configure.*):
+
+./configure: line 6406: $(OE_QMAKE_CXX): command not found
+
+
+The configure script needs to use the contents of the ${OE_QMAKE_CXX}  
+variable, but is instead trying to use $(OE_QMAKE_CXX), because that is 
+what QMAKE_CXX is set to in the .pro file, and in the resultant Makefile.
+
+The above failure results in compiler features not being tested, and 
+ultimately QtXmlPatterns doesn't get turned on (I don't know what other 
+features might get disabled, but this is one that I needed).
+
+Regards,
+Jay
+
+
+
+
+--------------030609090508090306000301
+Content-Type: text/x-diff; name="Qt4-recipe-compiler-fix.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline; filename="Qt4-recipe-compiler-fix.patch"
+
+--- 2010-06-23/openembedded/recipes/qt4/qt-4.6.0.inc	2010-06-23 16:50:01.000000000 -0400
++++ local/recipes/qt4/qt-4.6.0.inc	2010-07-28 09:43:19.000000000 -0400
+@@ -3,6 +3,7 @@
+ FILESPATHPKG .= ":qt-${PV}"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++	   file://configure-conf_compiler-fix.patch \
+            file://0001-cross-compile.patch \
+            file://0002-fix-resinit-declaration.patch \
+            file://0004-no-qmake.patch \
+--- 2010-06-23/openembedded/recipes/qt4/qt-4.6.2.inc	2010-06-23 16:50:01.000000000 -0400
++++ local/recipes/qt4/qt-4.6.2.inc	2010-07-28 09:43:16.000000000 -0400
+@@ -3,6 +3,7 @@
+ FILESPATHPKG .= ":qt-${PV}"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-everywhere-opensource-src-${PV}.tar.gz \
++	   file://configure-conf_compiler-fix.patch \
+            file://0001-cross-compile.patch \
+            file://0002-fix-resinit-declaration.patch \
+            file://0004-no-qmake.patch \
+--- 2010-06-23/openembedded/recipes/qt4/qt4-embedded.inc	2010-06-23 16:50:01.000000000 -0400
++++ local/recipes/qt4/qt4-embedded.inc	2010-07-28 09:43:31.000000000 -0400
+@@ -12,6 +12,7 @@
+ QT_LIBINFIX = "E"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opensource-src-${PV}.tar.bz2 \
++	   file://configure-conf_compiler-fix.patch \
+            file://0001-cross-compile.patch \
+            file://0002-fix-resinit-declaration.patch \
+            file://0003-no-tools.patch \
+--- 2010-06-23/openembedded/recipes/qt4/qt4-x11-free.inc	2010-06-29 16:11:40.000000000 -0400
++++ local/recipes/qt4/qt4-x11-free.inc	2010-07-28 09:44:02.000000000 -0400
+@@ -8,6 +8,7 @@
+ INC_PR = "r18"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-x11-opensource-src-${PV}.tar.gz \
++	   file://configure-conf_compiler-fix.patch \
+            file://0001-cross-compile.patch \
+            file://0002-fix-resinit-declaration.patch \
+            file://0003-no-tools.patch \
+
+--------------030609090508090306000301
+Content-Type: text/x-diff; name="configure-conf_compiler-fix.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline; filename="configure-conf_compiler-fix.patch"
+
+Index qt-everywhere-opensource-src-4.6.0.orig/configure
+===================================================================
+--- qt-everywhere-opensource-src-4.6.0/configure.orig	2009-12-10 15:49:49.000000000 -0500
++++ qt-everywhere-opensource-src-4.6.0/configure	2009-12-10 15:50:20.000000000 -0500
+@@ -2917,6 +2917,7 @@
+ fi
+ 
+ QMAKE_CONF_COMPILER=`getQMakeConf "$XQMAKESPEC" | grep "^QMAKE_CXX[^_A-Z0-9]" | sed "s,.* *= *\(.*\)$,\1," | tail -1`
++eval QMAKE_CONF_COMPILER=$(echo $QMAKE_CONF_COMPILER | sed "s/(/{/" | sed "s/)/}/")
+ TEST_COMPILER="$CC"
+ [ -z "$TEST_COMPILER" ] && TEST_COMPILER=$QMAKE_CONF_COMPILER
+ 
+
+--------------030609090508090306000301--
