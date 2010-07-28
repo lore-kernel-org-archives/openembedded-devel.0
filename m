@@ -1,47 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ranjithkannikara@gmail.com>) id 1OdwyY-0005XC-5I
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oe0HK-0005to-Kg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 05:06:35 +0200
-Received: by iwn34 with SMTP id 34so4455570iwn.6
+	Wed, 28 Jul 2010 08:38:11 +0200
+Received: by bwz10 with SMTP id 10so3955472bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 27 Jul 2010 20:06:17 -0700 (PDT)
+	Tue, 27 Jul 2010 23:37:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=Dy/Cnc81zHy720oHmymzuSdqVXofOJmj1c2w5S4D2kE=;
-	b=o/E24AfBhWof27P+sGlFpZatr1cavEsyoSqjzoNfpzhoOc4BfWplNr3NjvWhkKj2ZY
-	cluZLmH7FWqwJy3cB+BdXiphV5c9fAjstySxunx73D9v/ohl6Csu2vNnL3FnTARpeG1R
-	wxkdjl6K9KXKykawnMMJLKdGlxl/exWTuOpQU=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=GsNmSByzlNcGox08ZCqlRjgktsYK0XrgXSKJilDoXWc=;
+	b=hFOBx6b7mPT5qWV9riqvW9KAN81MKeMnACQZI7nlLTW0Mc3VxmI5pJMWtkHOnendF+
+	eJ720xVYUsFSzExB1WrcZrp2ujhAZoPXJ1gA99LTk3Ut/3xohM6a4GjmVyfPdXhtok0D
+	rMdZ45dUF0Uyp5bEZXIJASYHC6HdwzmQyL5Yc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=N13Mle9BJiPRIxA1dRZiS6rSYEdQeIMsL7Ri4J6rc3KbYSIvLp5p4zo4zp/lzqtpQr
-	NtTcryljkro5Lw4o5R1+SPylf39nqyOUeSN/aL0JJLWyIQNUlTTVrxLC5c6TDfjxmyBy
-	W4EYHEA8i5UYc43yjE0yAUO24v73iHBlVaCmQ=
-Received: by 10.231.149.80 with SMTP id s16mr11245822ibv.81.1280286376211; 
-	Tue, 27 Jul 2010 20:06:16 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=gAUuq8/SCIv5rzThz7AG5ALYxUEMhDLEKy46s8aWwLI940arj7HkU3+LAQZsjUig7t
+	1/uQ3+vvEG5TNjk8ircMgsb/7Bu/U0HgXiSSp4er618WhMlIqJWJ0ZsFosq7YzPOsj4U
+	cTfTuvNksi4IGQk9TgGCoJPyeZ2tP1pA6dK08=
 MIME-Version: 1.0
-Received: by 10.231.181.166 with HTTP; Tue, 27 Jul 2010 20:05:55 -0700 (PDT)
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B57B5@deimsg40.de.net.world>
-References: <AANLkTik+1EuG8Se996jFqVfQBXc3fFqoYPGzHh4hRsV2@mail.gmail.com> 
-	<1280222125.3763.6.camel@mattotaupa>
-	<alpine.DEB.2.00.1007270523480.16599@lynx> 
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA5018B57B5@deimsg40.de.net.world>
-From: ranjith kannikara <ranjithkannikara@gmail.com>
-Date: Wed, 28 Jul 2010 08:35:55 +0530
-Message-ID: <AANLkTino5uOku+4BeMp+3T3-X086eUhgtGXXQfX1xOwi@mail.gmail.com>
+Received: by 10.204.126.92 with SMTP id b28mr7622131bks.47.1280299072355; Tue, 
+	27 Jul 2010 23:37:52 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Tue, 27 Jul 2010 23:37:52 -0700 (PDT)
+Date: Wed, 28 Jul 2010 08:37:52 +0200
+Message-ID: <AANLkTin-WKHX0m7yU7pLGFV=g2X6kwcCdYEEUJ541SKq@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: ranjithkannikara@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: bitbake error on ncurses_5.4.bb C compiler cannot create executables
+Subject: [RFC] recipe owners
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,145 +49,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 03:06:35 -0000
+X-List-Received-Date: Wed, 28 Jul 2010 06:38:12 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-hi,
-Thanks for all the responses.
-I am using
-   bitbake 1.8.18
-   openembedded latest git pull form dev
-   os-ubuntu 10.04
+2010/7/27 Chris Larson <clarson@kergoth.com>
 
-I got the problem cleared by just commenting the line which has the flag
-"-fforward- ***" in the file ncurses5.4.inc <http://ncurses5.4.bb/>
-
-Regards,
-Ranjith
-On Tue, Jul 27, 2010 at 9:07 PM, Hauser, Wolfgang (external) <
-Wolfgang.Hauser.external@eads.com> wrote:
-
-> I use the http://gitorious.org/angstrom/openembedded repository, and the
-> latest pull reports the same error to me !
+> On Tue, Jul 27, 2010 at 3:19 AM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
 >
-> I build an image extending a console-base-image for opma3evm using angstr=
-om
-> distro.
+> > PS: I think part of the problem is that most recipes do not have a
+> > well-defined owner who is responsible for maintaining them. I know we use
+> > to
+> > have them  mentioned in the recipes. That had some issues, but at least
+> it
+> > was more clear who felt responsible for what, and it was also more clear
+> > who
+> > to bother to fix a recipe (and it was more clear which recipes are
+> orphaned
+> > or become orphaned when the maintainer leaves).
 >
-> Regards
-> Wolfgang Hauser
 >
-> -----Urspr=FCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org [mailto:
-> openembedded-devel-bounces@lists.openembedded.org] Im Auftrag von Robert
-> P. J. Day
-> Gesendet: Dienstag, 27. Juli 2010 11:26
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] bitbake error on ncurses_5.4.bb C compiler cannot creat=
-e
-> executables
->
-> On Tue, 27 Jul 2010, Paul Menzel wrote:
->
-> > Dear Ranjith,
-> >
-> >
-> > Am Dienstag, den 27.07.2010, 09:44 +0530 schrieb ranjith kannikara:
-> >
-> > > I was trying to run " bitbake fso-illume-image" and it rerturned an
-> error
-> > > that do_config on ncurses5.4.bb failed
-> > > the respective log is
-> > >
-> > > Configuring NCURSES 5.4 ABI 5 (Tue Jul 27 09:32:35 IST 2010)
-> > > checking build system type... i686-pc-linux-gnu
-> > > checking host system type... arm-oe-linux-gnueabi
-> > > checking target system type... arm-oe-linux-gnueabi
-> > > Configuring for linux-gnueabi
-> > > checking for prefix... /usr
-> > > checking for arm-oe-linux-gnueabi-gcc... arm-oe-linux-gnueabi-gcc
-> > > -march=3Darmv4t -mtune=3Darm920t -mthumb-interwork -mthumb
-> > > checking whether the C compiler works... no
-> > > configure: error: in
-> > >
-> `/home/ranjith/test/build/tmp/work/armv4t-oe-linux-gnueabi/ncurses-5.4-r2=
-0.0/ncurses-5.4':
-> > > configure: error: C compiler cannot create executables
-> >
-> > Do other recipes work correctly?
-> >
-> > > See `config.log' for more details.
-> > >
-> > > and the config.log entry is
-> > >
-> > > .## ----------- ##
-> > > ## confdefs.h. ##
-> > > ## ----------- ##
-> > >
-> > > /* confdefs.h */
-> > > #define PACKAGE_NAME ""
-> > > #define PACKAGE_TARNAME ""
-> > > #define PACKAGE_VERSION ""
-> > > #define PACKAGE_STRING ""
-> > > #define PACKAGE_BUGREPORT ""
-> > > #define PACKAGE_URL ""
-> > > #define SYSTEM_NAME "linux-gnueabi"
-> > >
-> > > configure: exit 77
-> > >
-> > > I tried googling and tried installing gcc newer version,
-> buildessentials,
-> > > epenembedded-essentials, but nothign worked for me.
-> > > So can any one help me in this regard to solve this issue ,,
-> >
-> > You did not provide information on what configuration and distribution
-> > you use. Did you try to rebuild the whole tree in a clean environment?
->
->  not sure if this will be of any help but when i tried to build
-> yesterday, i also got an error on ncurses.  i didn't do any debugging,
-> i just waited a bit, did a "git pull", noticed some ncurses commits,
-> tried again and it built.  so are you working with the absolutely
-> latest repo contents?
->
->  and, yes, it would be useful to know your distro and architecture.
->
-> rday
->
-> --
->
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> Robert P. J. Day                               Waterloo, Ontario, CANADA
->
->        Top-notch, inexpensive online Linux/OSS/kernel courses
->                        http://crashcourse.ca
->
-> Twitter:                                       http://twitter.com/rpjday
-> LinkedIn:                               http://ca.linkedin.com/in/rpjday
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> I very strongly agree with this, but there have been issues with it in the
+> past, due to people leaving the project, vacations, hiatus, they become a
+> bottleneck.  But conceptually, maintainership seems like a very good idea
+> to
+> me.  If I considered myself the maintainer of a set of recipes, I'd do my
+> best to ensure that they're always buildable and the recipes are always up
+> with current conventions.  *shrug*
 >
 
+Chris, thanks for your reply.
+I've turned this into a separate thread.
 
+I'm well aware of the issues that caused us to leave recipe owners (and move
+to the MAINTAINERS file).
+However for lots of recipes it is now completely in limbo who maintains them
+(if anyone).
+As such the current solution seems to be less than the solution with
+maintainer(s) per recipe.
 
---=20
-Ranjith Babu Kannikara
-0091 9809215273
-Student, Computer science and engg, GEC Thrissur...
-Student developer google ( 2008 GSOC ).
-http://sourceforge.net/users/kannikara
-http://www.ranjithkannikara.blogspot.com/
+Wrt the issues you mention: I understand this. It is unavoidable that people
+e.g. leave, so we could take that into account.
+Some ideas to tackle this:
+ - still allow others to do small changes even if the maintainer cannot be
+contacted (this is what to some  (this is similar to what we have in our
+current commit policy:
+
+ * It's fine to fix a recipe you don't maintain, but its polite to talk to
+   any else actively maintaining that recipe. Try to contact the maintainer
+   or, if no maintainer is listed, send a note to the OE developer mailing list.
+
+- if people maintain a recipe but they become non-responsive without known
+cause (e.g. no holidays, known issues, business trips, ...) the recipe
+becomes orphaned and someone can step up to become the new maintainer (I
+assume that someone is interested in the recipe, otherwise the orphanage of
+the recipe would probably not be noticed). Btw: it is quite ok for me if a
+recipe has >1 maintainer (and for core recipes I would even encourage that).
+We can define some terms to quantify non-responsiveness if needed (e.g. not
+responding to ML messages concerning your recipes for 3 weeks)
+
+What do others feel about this ?
+
+Frans (who prefers to have a recipe that he knows is maintained and looked
+after above a recipe of a more questionable ownership).
 
