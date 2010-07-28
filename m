@@ -1,39 +1,42 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1Oe6rU-00081q-9V
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 15:40:02 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id A34CD2C807
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oe6rt-00085H-AK for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Jul 2010 15:40:23 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oe6rc-0006Yx-D5 for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Jul 2010 15:40:04 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 28 Jul 2010 15:40:04 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 13:34:55 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id j7-uKWjQ5XUn
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 13:34:51 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 36F172C7E0
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 13:34:51 +0000 (UTC)
-Message-ID: <4C503315.8090009@gmail.com>
-Date: Wed, 28 Jul 2010 15:39:33 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Wed, 28 Jul 2010 15:40:04 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1280309434.7083.8.camel@utx.lan>
-In-Reply-To: <1280309434.7083.8.camel@utx.lan>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 28 Jul 2010 15:39:54 +0200
+Message-ID: <i2pbva$krl$1@dough.gmane.org>
+References: <4C5014FC.9040009@balister.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <4C5014FC.9040009@balister.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: bitbake: staging of binary over symlink breaks sysroot (lzma x xz)
+Subject: Re: Server issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,34 +50,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 13:40:02 -0000
+X-List-Received-Date: Wed, 28 Jul 2010 13:40:23 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Stanislav Brabec ha scritto, Il 28/07/2010 11:30:
-> I just built an angstrom image and thinks failed.
-> 
-> lzma image depends on lzma-native, grep and other programs that use .xz
-> suffix for tarballs depend on xz-native.
-> This fact itself is bad - it creates file conflicts in the sysroot.
-> 
-> But things were even worse:
-> - xz-native staged xz binary and lzma as a symlink to xz.
-> - lzma-native tried to stage lzma 4 minutes later
-> 
-> But staging of lzma apparently went wrong. Instead of removal of lzma
-> symlink and installation of lzma binary, bitbake followed the symlink
-> and staged lzma as xz with a result of broken build environment.
-> 
-> I have bitbake-1.8.18.
-> 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 28-07-10 13:31, Philip Balister wrote:
+> As people have noticed the server at OSUOSL that hosts many of the OE
+> services has been flaky for the past week or so.
+> 
+> Basically, the primary server seems to have some form of hardware issue.
+> The admins are moving the vm's to another server in a few hours so they
+> can take down the server and try to figure out what is going on. Things
+> may get slow, and non-essential services, such as tinderbox, may get
+> turned off.
+> 
+> Please bear with us will we sort things out. The lack of emails is
+> largely due to the people working on the server working on the server
+> instead of sending emails and sleeping.
 
-In the meantime we are waiting for a patch I used
- bitbake xz-native
-prior to launch
- bitbake x11-image
+Thank you for the update. Now we know people are working on it, instead
+of only knowing things are down.
+And a big thank you to the people moving the VMs!
 
-/marco
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMUDMqMkyGM64RGpERAgFRAKCxr9GD0P142G19Bi/HFsZ8XMT6zACeIJpc
+1NzGVMb4a/QBP6+jKcLdfxo=
+=hmLL
+-----END PGP SIGNATURE-----
+
 
 
