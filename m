@@ -1,29 +1,39 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msundius@sundius.com>) id 1OeDKy-0000pP-UY
+	(envelope-from <Tom_Rini@mentor.com>) id 1OeHy9-0001jw-9c
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 28 Jul 2010 22:35:39 +0200
-Received: by qwg8 with SMTP id 8so1169293qwg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 28 Jul 2010 13:34:29 -0700 (PDT)
+	Thu, 29 Jul 2010 03:31:35 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OeHxp-00027M-Bn from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 28 Jul 2010 18:31:13 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 28 Jul 2010 18:31:13 -0700
+Received: from [172.30.80.63] ([172.30.80.63]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 28 Jul 2010 19:31:12 -0600
+Message-ID: <4C50D9DB.1070006@mentor.com>
+Date: Wed, 28 Jul 2010 18:31:07 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.224.79.83 with SMTP id o19mr8869634qak.200.1280349269659; Wed, 
-	28 Jul 2010 13:34:29 -0700 (PDT)
-Received: by 10.229.251.195 with HTTP; Wed, 28 Jul 2010 13:34:28 -0700 (PDT)
-Date: Wed, 28 Jul 2010 13:34:28 -0700
-Message-ID: <AANLkTiki-zNM94gkoFf+WaMtWfnvpr=Pw-Y0sOSBqBAo@mail.gmail.com>
-From: C Michael Sundius <msundius@sundius.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: msundius@sundius.com
+References: <i1chst$tq5$1@dough.gmane.org>
+In-Reply-To: <i1chst$tq5$1@dough.gmane.org>
+X-OriginalArrivalTime: 29 Jul 2010 01:31:12.0475 (UTC)
+	FILETIME=[BA9D2AB0:01CB2EBD]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: sending output from a command to the console
+Subject: Re: 'LIBC' variable clashes with perl variable
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,17 +47,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 28 Jul 2010 20:36:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 29 Jul 2010 01:31:35 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Is there anyway to stop directing the output (of commands in a task) from
-being directed to the log file and send it to the standard output?
+Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> Hi,
+> 
+> Perl (among others) uses the 'LIBC' variable to point its linker to
+> libc.so.6, which fails due to OE redefing LIBC.
+> 
+> Any objections to renaming LIBC to TARGET_LIBC in OE?
 
-I have a situation where after the image is built I want to have oe to
-automatically down load the image to our hardware. the program that does the
-download asks the caller to push a button on our box before the
-download precedes.  I'd like to have its output not logged but rather sent
-to the console.
+bitbake.conf: Unexport LIBC from the environment
 
-Mike
+As spoted by Koen at least perl makes use of LIBC coming from the 
+environment to be meaningful, so don't export it as it doesn't match our 
+meaning.
+
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index d523519..ddb6a79 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -799,3 +799,6 @@ TARGET_ARCH[unexport] = "1"
+  # (breaks sysvinit at least)
+  DISTRO[unexport] = "1"
+
++# Make sure that LIBC isn't exported
++# (breaks perl at least)
++LIBC[unexport] = "1"
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
+
 
