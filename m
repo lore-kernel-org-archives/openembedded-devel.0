@@ -1,44 +1,46 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OeSFZ-0007HH-5h
+	(envelope-from <chasemaupin03@gmail.com>) id 1OeSFb-0007Kp-Gw
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 14:31:08 +0200
-Received: by ywe9 with SMTP id 9so78266ywe.6
+	Thu, 29 Jul 2010 14:31:01 +0200
+Received: by yxi11 with SMTP id 11so97347yxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 05:29:53 -0700 (PDT)
+	Thu, 29 Jul 2010 05:29:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=p08xfwXcPgH2w5DmHfs7AgTQC2G9uWfztQ5WxvLDU0M=;
-	b=dBY/iX12lp/OKbflJWlp1v+3tee46UK6tHJk7839IzlR67arb+o+h8Mqdo8EP0A+Qd
-	sF4/4bQxQ4bwdex0rjiVWHS+ecenAJRBMngyHtu9VPFhTeVrCnThb5wdc2urnNR2/Cng
-	Txizu36U2gY5DSqQWFYKc4qIRMQ20H7DxtZQE=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=VJ9vm3/ESLkBkRBvinh4A6KgL1YBie1AsOwqlvwi7Ic=;
+	b=bMppGndIj2Gi0g4vg/wW5zQl3Pmv7mAbTYgtcLbNG2iFCs4NMrQmkdiV8eS3y+XD9l
+	8ZSZlOqLWVIuzowTGh6NbFo0TUhOmf4NDSy+lZthZW/9HoqHt+CXtpS8kNMSglsEYTLS
+	7+eDx5HNSALPl8Ya3QPSEdPHhDKnZdDEWljIA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=oIeqsuOZr2UJ5O0QkvEqm+up6Z/ReqAlN5GmFIEjs5up8yrKDmPF7qyj6dTtv47myB
-	1dZlqHmIR+SV12I+8iCVYjGr8SDaADbb49LFAbjPV3wNqtS0v1ztxx9L/yE+7rRS94HB
-	6kZJF3IWEO1lPjgLrf+I/fOZhv+32f+nkUu18=
-Received: by 10.151.63.18 with SMTP id q18mr1044329ybk.100.1280406592057;
-	Thu, 29 Jul 2010 05:29:52 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=rlkti3dilon2IQlra0wkcChI/qZT5kAO2cPGfx+lHyLE6DuUQRVntRMzEknbsX0GWC
+	oNJR2gFQ9wcVY8sP3PEF1/2hYvg2NuIvhze+Jx40Or0gioz90To0GAo07nj37+yVmNU5
+	N9rvBx5DS6TsykKOIAD1JzGDR4pcOFkl5SL94=
+Received: by 10.150.69.32 with SMTP id r32mr972304yba.107.1280406595226;
+	Thu, 29 Jul 2010 05:29:55 -0700 (PDT)
 Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id e7sm7379938ybe.16.2010.07.29.05.29.50
+	by mx.google.com with ESMTPS id e7sm7379938ybe.16.2010.07.29.05.29.54
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 29 Jul 2010 05:29:51 -0700 (PDT)
+	Thu, 29 Jul 2010 05:29:54 -0700 (PDT)
 From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Jul 2010 07:26:16 -0500
-Message-Id: <1280406377-23902-1-git-send-email-chase.maupin@ti.com>
+Date: Thu, 29 Jul 2010 07:26:17 -0500
+Message-Id: <1280406377-23902-2-git-send-email-chase.maupin@ti.com>
 X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.213.47
+In-Reply-To: <1280406377-23902-1-git-send-email-chase.maupin@ti.com>
+References: <1280406377-23902-1-git-send-email-chase.maupin@ti.com>
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Cc: Chase Maupin <chase.maupin@ti.com>
-Subject: [PATCH 1/2] x-load_git: defined config for dm37x and am37x machines
+Subject: [PATCH 2/2] x-load: add signGP to sourceipk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,41 +56,45 @@ List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedde
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 29 Jul 2010 12:32:45 -0000
 
-* Defined the XLOAD_MACHINE value for dm37x-evm and am37x-evm
-  machine types.
+* When creating a source ipk for the x-load program copy the
+  signGP binary as well as this is needed when rebuilding.
+* Bump the PR for x-load-omap3pandora recipe.
 
 Signed-off-by: Chase Maupin <chase.maupin@ti.com>
 ---
- recipes/x-load/x-load_git.bb |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+ recipes/x-load/x-load-omap3pandora_git.bb |    2 +-
+ recipes/x-load/x-load.inc                 |    5 +++++
+ 2 files changed, 6 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/x-load/x-load_git.bb b/recipes/x-load/x-load_git.bb
-index cbcbf17..a14d6cb 100644
---- a/recipes/x-load/x-load_git.bb
-+++ b/recipes/x-load/x-load_git.bb
-@@ -9,7 +9,7 @@ SRCREV_beagleboard = "1c9276af4d6a5b7014a7630a1abeddf3b3177563"
+diff --git a/recipes/x-load/x-load-omap3pandora_git.bb b/recipes/x-load/x-load-omap3pandora_git.bb
+index 05dfc20..e9e6e49 100644
+--- a/recipes/x-load/x-load-omap3pandora_git.bb
++++ b/recipes/x-load/x-load-omap3pandora_git.bb
+@@ -9,7 +9,7 @@ SRCREV = "b3646a83f9e67ec9a2de3182fd254557fd6ad9aa"
+ PROVIDES = "x-load"
  
  PV = "1.42+${PR}+gitr${SRCREV}"
- PV_beagleboard = "1.44+${PR}+gitr${SRCREV}"
--PR ="r15"
-+PR ="r16"
+-PR ="r2"
++PR ="r3"
  PE = "1"
  
- SRC_URI = "git://gitorious.org/x-load-omap3/mainline.git;branch=master;protocol=git"
-@@ -34,11 +34,13 @@ PV_omap3evm = "1.46+${PR}+gitr${SRCREV}"
- SRC_URI_dm37x-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
- SRCREV_dm37x-evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
- PV_dm37x-evm = "1.46+${PR}+gitr${SRCREV}"
-+XLOAD_MACHINE_dm37x-evm = "omap3evm_config"
+ SRC_URI = "git://git.openpandora.org/pandora-x-loader.git;branch=master;protocol=git"
+diff --git a/recipes/x-load/x-load.inc b/recipes/x-load/x-load.inc
+index 0699c01..e786ac1 100644
+--- a/recipes/x-load/x-load.inc
++++ b/recipes/x-load/x-load.inc
+@@ -38,6 +38,11 @@ do_install () {
  
- # TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
- SRC_URI_am37x-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
- SRCREV_am37x-evm = "fc6d5be15c703d21aef0ae0b8c02177721f0445f"
- PV_am37x-evm = "1.46+${PR}+gitr${SRCREV}"
-+XLOAD_MACHINE_dm37x-evm = "omap3evm_config"
+ FILES_${PN} = "/boot"
  
- # TI PSP v1.46_OMAPPSP_03.00.01.06 (Tag is one commit different)
- SRC_URI_am3517-evm = "git://arago-project.org/git/projects/x-load-omap3.git;protocol=git"
++do_create_srcipk_prepend() {
++    mkdir -p ${WORKDIR}/sourceipk-tmp/psp/x-load/host-tools
++    cp `which signGP` ${WORKDIR}/sourceipk-tmp/psp/x-load/host-tools/
++}
++
+ do_deploy () {
+ 	install -d ${DEPLOY_DIR_IMAGE}
+ 	install ${S}/x-load.bin.ift ${DEPLOY_DIR_IMAGE}/${XLOAD_IMAGE}
 -- 
 1.7.0.4
 
