@@ -1,43 +1,30 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OeYkj-0008L1-QB
+	(envelope-from <roman@khimov.ru>) id 1OeZ6U-0001Od-SH
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 21:26:51 +0200
-Received: by yxi11 with SMTP id 11so276769yxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 12:26:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=M6gFx+gVlTkgb7YY1+0+CW0zWXZXrhCzifDBy9Hf5J4=;
-	b=k1R31UYbOXcpdLA2QFya7BrzBm7rG84wdynNi9QGozEmBpFulhTnT6H16Jc32x1zun
-	fQMUyqzFulICF1assRlbzXXAas9BGV1Uf4lQFXiTCvNesJD5ya1bnu27stt1iTw62Cjp
-	YPjyouV+t7JLo199UG/zqao+ZUsOaLnmbwxOs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=KoIfVZTWo8mbQBg+7szjbHAnjN8N2kUY5WVlSTJqZaUeqTOmu0geoazSLvHoEUVzFi
-	cEe0CEm0sGyfxe+PpY5mX7LY8wRpmrw0hgDjsYr9JOmRNG1hdOM5bY61I6pPICZKQ2F4
-	Z638uWjFjh67y4AqFwjRzBM490qEct8P5Wjig=
-Received: by 10.150.13.4 with SMTP id 4mr1697912ybm.89.1280431585453;
-	Thu, 29 Jul 2010 12:26:25 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id t2sm7740009yba.14.2010.07.29.12.26.24
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 29 Jul 2010 12:26:24 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	Thu, 29 Jul 2010 21:49:26 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OeZ69-00037N-MX
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 23:48:59 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Jul 2010 14:22:49 -0500
-Message-Id: <1280431369-30659-1-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+Date: Thu, 29 Jul 2010 23:48:53 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <AANLkTi=JK37hYh26rGz3sY5byksJ0js_ihjk4y7tq-ad@mail.gmail.com>
+In-Reply-To: <AANLkTi=JK37hYh26rGz3sY5byksJ0js_ihjk4y7tq-ad@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201007292348.56359.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] signGP: add BSD header and copyright
+Subject: Re: [PATCH] Version bump tzcode/data to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jul 2010 19:26:51 -0000
+X-List-Received-Date: Thu, 29 Jul 2010 19:49:30 -0000
+X-Groupsio-MsgNum: 21605
+Content-Type: multipart/signed; boundary="nextPart44173901.BGaOuTtkrh";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-* Add the BSD header to the signGP.c file with copyright year
-  2010.
+--nextPart44173901.BGaOuTtkrh
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
----
- recipes/x-load/files/signGP.c |   35 +++++++++++++++++++++++++++++++++++
- 1 files changed, 35 insertions(+), 0 deletions(-)
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 27 =D0=B8=D1=8E=D0=BB=D1=8F 2010=
+ 13:58:21 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Alex Bennee =D0=BD=D0=B0=D0=BF=D0=
+=B8=D1=81=D0=B0=D0=BB:
+> -SRC_URI[tzcode-2010j.md5sum] =3D "5ba8345720296d3a659b349b2052d139"
+> -SRC_URI[tzcode-2010j.sha256sum] =3D
+> "f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
 
-diff --git a/recipes/x-load/files/signGP.c b/recipes/x-load/files/signGP.c
-index 0e8ed07..bb00dc3 100644
---- a/recipes/x-load/files/signGP.c
-+++ b/recipes/x-load/files/signGP.c
-@@ -1,3 +1,38 @@
-+/*
-+ * Copyright (C) {2010} Texas Instruments Incorporated - http://www.ti.com/ 
-+ * 
-+ * 
-+ *  Redistribution and use in source and binary forms, with or without 
-+ *  modification, are permitted provided that the following conditions 
-+ *  are met:
-+ *
-+ *    Redistributions of source code must retain the above copyright 
-+ *    notice, this list of conditions and the following disclaimer.
-+ *
-+ *    Redistributions in binary form must reproduce the above copyright
-+ *    notice, this list of conditions and the following disclaimer in the 
-+ *    documentation and/or other materials provided with the   
-+ *    distribution.
-+ *
-+ *    Neither the name of Texas Instruments Incorporated nor the names of
-+ *    its contributors may be used to endorse or promote products derived
-+ *    from this software without specific prior written permission.
-+ *
-+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS 
-+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT 
-+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-+ *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT 
-+ *  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, 
-+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT 
-+ *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-+ *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-+ *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT 
-+ *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE 
-+ *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-+ *
-+*/
-+
-+
- //
- // signGP.c
- // Read the x-load.bin file and write out the x-load.bin.ift file.
--- 
-1.7.0.4
+I'd be happy to apply your patch, but=20
 
+1) it's broken:
 
+patching file recipes/tzcode/tzcode-native_2010j.bb
+patch: **** malformed patch at line 49:=20
+"f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
 
+Please resend it with `git send-email` rather than (what seems to be) copy-
+pasting to e-mail client that word-wrapped it
+
+2) "Signed-off-by" is missing (see
+    http://wiki.openembedded.net/index.php/Commit_Policy )
+
+Thanks.
+
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart44173901.BGaOuTtkrh
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkxR2ygACgkQXJ70z+XgVcMvhwCguSndMXAZqOoFyc8XOf3eWj/R
+HDUAn3wJHOwqB8LL60Ny579CWzwlR1xR
+=w1KE
+-----END PGP SIGNATURE-----
+
+--nextPart44173901.BGaOuTtkrh--
