@@ -1,39 +1,40 @@
-Received: from mta10.brinkster.com ([65.182.109.79])
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <John.Willis@Distant-earth.com>) id 1OeUsc-0008VL-Nk
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 17:19:10 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mta10.brinkster.com (Postfix) with ESMTP id CDF214EAA50;
-	Thu, 29 Jul 2010 11:11:26 -0400 (EDT)
-X-Virus-Scanned: amavisd-new at mta10.brinkster.com
-Received: from mta10.brinkster.com ([127.0.0.1])
-	by localhost (mta10.brinkster.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id sO4pxm4TxR+1; Thu, 29 Jul 2010 11:11:26 -0400 (EDT)
-Received: from MareImbrium (cpc1-bath2-0-0-cust327.aztw.cable.virginmedia.com
-	[82.46.19.72])
-	by mta10.brinkster.com (Postfix) with ESMTPA id 1A6DC4EA9D3;
-	Thu, 29 Jul 2010 11:11:25 -0400 (EDT)
-From: "John Willis" <John.Willis@Distant-earth.com>
-To: <openembedded-devel@lists.openembedded.org>
-References: <1280406377-23902-1-git-send-email-chase.maupin@ti.com>
-	<1280406377-23902-2-git-send-email-chase.maupin@ti.com>
-In-Reply-To: <1280406377-23902-2-git-send-email-chase.maupin@ti.com>
-Date: Thu, 29 Jul 2010 16:11:10 +0100
-Message-ID: <0d6a01cb2f30$47a0b040$d6e210c0$@Distant-earth.com>
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OeUtA-0002nS-VV for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 17:19:47 +0200
+Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
+	by mail-dotnet1.eads.net with ESMTP; 29 Jul 2010 17:09:00 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Thu, 29 Jul 2010 17:18:48 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 29 Jul 2010 17:18:48 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-X-Mailer: Microsoft Outlook 14.0
-Thread-Index: AQGtKv47OZmh4oXxqwyAaG276G0XDQH2MI1PkvRXbQA=
-X-SA-Exim-Connect-IP: 65.182.109.79
-X-SA-Exim-Mail-From: John.Willis@Distant-earth.com
+Date: Thu, 29 Jul 2010 17:18:46 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5958@deimsg40.de.net.world>
+In-Reply-To: <20100729151333.GA5867@mi.fu-berlin.de>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] eggdbus-native fails to build, dbus-glib-1.so is missing
+Thread-Index: AcsvMQoyXHFyG9ELTBKQxUKoZWj5DAAABUaA
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B58E2@deimsg40.de.net.world>
+	<20100729151333.GA5867@mi.fu-berlin.de>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 29 Jul 2010 15:18:48.0289 (UTC)
+	FILETIME=[57C91510:01CB2F31]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: 'Chase Maupin' <chase.maupin@ti.com>
-Subject: Re: [PATCH 2/2] x-load: add signGP to sourceipk
+Subject: Re: eggdbus-native fails to build, dbus-glib-1.so is missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,32 +49,55 @@ List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=hel
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
 X-List-Received-Date: Thu, 29 Jul 2010 15:19:48 -0000
+Content-class: urn:content-classes:message
 Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Language: en-us
+	charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-> * When creating a source ipk for the x-load program copy the
->   signGP binary as well as this is needed when rebuilding.
-> * Bump the PR for x-load-omap3pandora recipe.
-> 
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+Hi,
 
-Nack, this seems totally pointless, signGP is in the tree (signgp-native) so
-is it not better to bring that in?
+it is fixed, forgot to git pull in the morning today.
 
-Out of interest, what is the problem you see with the current setup, the
-recipes as they stand will give people signed and unsigned X-Loader binaries
-for just about all purposes you could want them on the OMAP3. Or is this
-patch aimed at using source IPK's for use in another non-OE SDK?
+Regards
+Wolfgang Hauser
+=20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Henning Heinold
+Gesendet: Donnerstag, 29. Juli 2010 17:14
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] eggdbus-native fails to build, dbus-glib-1.so is =
+missing
 
-Shipping binaries in a source IPK seems very wrong regardless of the need,
-it's not really source at that point ;-).
+On Thu, Jul 29, 2010 at 12:12:40PM +0200, Hauser, Wolfgang (external) =
+wrote:
+> Hello,
+>=20
+> the latest pull of http://git.gitourious.org/angstrom/openembedded.git
+> results in a missing dbus-glib-1.so while linking eggdbus.
+>=20
+> The problem was in dbus-glib.inc, where the glib-dbus-native staging
+> package don't include the shared library, the pkg-config.pc is
+> available.
+>=20
+> Seems, that the changes of the staging cause the error, an older =
+version
+> of OE containing a dbus-glib-native recipe was working well.
+>=20
+> Regards
+> Wolfgang Hauser
+>=20
 
-Regards,
+Hm,
 
-John
+I tought I have fixed yesterday.
 
+Bye Henning
 
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
