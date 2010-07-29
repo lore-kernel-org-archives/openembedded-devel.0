@@ -1,42 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-dotnet2.eads.net ([80.156.45.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OePgn-0007uv-JN for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 11:46:11 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OePgW-00021e-HQ for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 11:45:52 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 11:45:52 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 11:45:52 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 29 Jul 2010 11:45:43 +0200
-Message-ID: <i2rik7$ds1$1@dough.gmane.org>
-References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OeQ6t-0002Cp-Q7 for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 12:13:20 +0200
+Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
+	by mail-dotnet2.eads.net with ESMTP; 29 Jul 2010 12:01:42 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Thu, 29 Jul 2010 12:12:42 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 29 Jul 2010 12:12:41 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 29 Jul 2010 12:12:40 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B58E2@deimsg40.de.net.world>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: eggdbus-native fails to build, dbus-glib-1.so is missing
+Thread-Index: AcsvBpP6fFuE4zj8QEyzCuNai4fJzw==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 29 Jul 2010 10:12:41.0999 (UTC)
+	FILETIME=[949FA1F0:01CB2F06]
+X-SA-Exim-Connect-IP: 80.156.45.105
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE recipe tree quality
+Subject: eggdbus-native fails to build, dbus-glib-1.so is missing
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,53 +45,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jul 2010 09:46:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Jul 2010 10:13:21 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hello,
 
-On 29-07-10 10:50, Frans Meulenbroeks wrote:
-> Dear all,
-> 
-> Given the discussions on quality that sometimes pop up (and also triggered
-> by Robert's message), I decided to kick off a bitbake -k world.
+the latest pull of http://git.gitourious.org/angstrom/openembedded.git
+results in a missing dbus-glib-1.so while linking eggdbus.
 
-Could you first explain to me why 'bitbake world' is a good way to
-measure quality?
+The problem was in dbus-glib.inc, where the glib-dbus-native staging
+package don't include the shared library, the pkg-config.pc is
+available.
 
-I would think that building something like console-image and looking at
-the following would be a much better metric:
+Seems, that the changes of the staging cause the error, an older version
+of OE containing a dbus-glib-native recipe was working well.
 
-* does it build?
-* are all the rootfs types working?
-* does the image do what it is supposed to do?
-* Are all the licenses of the output packages correct?
-* Do the output packages have any spurious deps?
-* Is the content of the output packages correct?
-* Are there any known CVEs in the resulting packages?
-* Did packaged-staging do its job?
-* What kind of QA errors and warnings were raised?
-* Did all recipes pass recipe_sanity?
-* Did all recipes conform to oe-stylize.py?
-
-etc
-
-I would actually advocate removing the 'world' feature from bitbake/OE
-to stop people from wasting time on looking at bitbake world and have
-them fix actual problems.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMUU3HMkyGM64RGpERAgioAJ90DxRRG5meARUBbMcQ25jadn4k4QCeKkEd
-r4DWO6n6DTFhAucGqx78Yxc=
-=Dv4L
------END PGP SIGNATURE-----
+Regards
+Wolfgang Hauser
 
 
 
