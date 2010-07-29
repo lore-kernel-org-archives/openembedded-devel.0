@@ -1,38 +1,39 @@
-Received: from hsp-52.hspserver.com ([85.197.80.179])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ml@vdm-design.de>) id 1OePdn-0007m8-VU
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 11:43:05 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by hsp-52.hspserver.com (Postfix) with ESMTP id 66886A2C457
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OePgn-0007uv-JN for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 11:46:11 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OePgW-00021e-HQ for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 11:45:52 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Jul 2010 11:45:52 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 11:42:46 +0200 (CEST)
-Received: from hsp-52.hspserver.com ([127.0.0.1])
-	by localhost (hsp-52.hspserver.com [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id gmAbmCbkNHGD
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 11:42:30 +0200 (CEST)
-Received: from tomboy.localnet (pD9E177A6.dip.t-dialin.net [217.225.119.166])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by hsp-52.hspserver.com (Postfix) with ESMTPSA id D57D9A2C456
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 11:42:30 +0200 (CEST)
-From: Thomas Zimmermann <ml@vdm-design.de>
+	Thu, 29 Jul 2010 11:45:52 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 29 Jul 2010 11:42:30 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.34-0.slh.11-sidux-amd64; KDE/4.4.5; x86_64;
-	; )
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 29 Jul 2010 11:45:43 +0200
+Message-ID: <i2rik7$ds1$1@dough.gmane.org>
 References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
 In-Reply-To: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201007291142.30925.ml@vdm-design.de>
-X-SA-Exim-Connect-IP: 85.197.80.179
-X-SA-Exim-Mail-From: ml@vdm-design.de
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.3 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: OE recipe tree quality
@@ -49,59 +50,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jul 2010 09:43:06 -0000
-Content-Type: Text/Plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Thu, 29 Jul 2010 09:46:11 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
-Am Donnerstag 29 Juli 2010, 10:50:53 schrieb Frans Meulenbroeks:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 29-07-10 10:50, Frans Meulenbroeks wrote:
 > Dear all,
 > 
 > Given the discussions on quality that sometimes pop up (and also triggered
 > by Robert's message), I decided to kick off a bitbake -k world.
-> Below are some initial findings. I would like to use this as a starter to
-> kickoff the discusson on quality and what to do with broken stuff.
-> And also I hope that people who feel attached to a recipe mentioned below
-> will take action.
-> 
-> My setting:
-> local.conf:
-> IMAGE_LINGUAS = ""
-> ENABLE_BINARY_LOCALE_GENERATION = "0"
-> 
-> MACHINE = "beagleboard"
-> DISTRO = "angstrom-2008.1"
-> 
-> EXTRA_IMAGECMD_jffs2 = "--pad --eraseblock=0x20000"
-> MKUBIFS_ARGS = "-m 2048 -e 129024 -c 1024"
-> 
-> IMAGE_FSTYPES = "tar squashfs ubifs jffs2"
-> IMAGE_KEEPROOTFS = "1"
-> OE_ALLOW_INSECURE_DOWNLOADS = "yes"
-> 
-> I opted for angstromg and beagleboard as I feel this is the most often
-> build configuration, so it should have the least issues.
-> host is ubuntu 10.04 on 64 bit. tree is oe dev git head (as of jul 29)
-> 
-> All results are not in yet (there are 71047 taksks, I am at 159 :-)
-> However the parsing already gave some interesting output.
-> I've ordered them somehwat:
-> 
-> Nothing PROVIDES errors
-> ===================
-> ...
-Some of these 'Nothing PROVIDES' errors are because you are using angstrom as 
-distro and some recipes are blacklisted there (e.g. fso-apm), because of that 
-a lot of the shr specific recipes aren't buildable.
 
-I think one should do such a test with minimal distro because nothing is 
-blacklisted there.
+Could you first explain to me why 'bitbake world' is a good way to
+measure quality?
 
-Other recipes like etk or epsilon were moved to obsolete, but recipes 
-depending on them weren't. So i think recipes depending on etk and epsilon can 
-be moved to obsolete too.
+I would think that building something like console-image and looking at
+the following would be a much better metric:
 
-Regards
-Thomas
+* does it build?
+* are all the rootfs types working?
+* does the image do what it is supposed to do?
+* Are all the licenses of the output packages correct?
+* Do the output packages have any spurious deps?
+* Is the content of the output packages correct?
+* Are there any known CVEs in the resulting packages?
+* Did packaged-staging do its job?
+* What kind of QA errors and warnings were raised?
+* Did all recipes pass recipe_sanity?
+* Did all recipes conform to oe-stylize.py?
+
+etc
+
+I would actually advocate removing the 'world' feature from bitbake/OE
+to stop people from wasting time on looking at bitbake world and have
+them fix actual problems.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMUU3HMkyGM64RGpERAgioAJ90DxRRG5meARUBbMcQ25jadn4k4QCeKkEd
+r4DWO6n6DTFhAucGqx78Yxc=
+=Dv4L
+-----END PGP SIGNATURE-----
+
 
 
