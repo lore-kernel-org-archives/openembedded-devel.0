@@ -1,43 +1,44 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OeSZC-0004O2-An for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 14:52:14 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OeSYm-00041S-FD for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 14:50:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 14:50:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <chasemaupin03@gmail.com>) id 1OeUVi-00050u-Do
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 16:55:20 +0200
+Received: by ywe9 with SMTP id 9so137263ywe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 14:50:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 29 Jul 2010 07:54:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=pTUm5oa8FJc/RWry6JWzrRH/39lExnJGhKNe3581sW8=;
+	b=GDqqSgY2hYgK9bXIBnfYoXhN51Kp7OEPeurH3oZe02Cxc2AtcCV4oZ7uYzr0/B2fnI
+	62HxDFCziTQ2di6X4PbddIdOzAZA7jxWyU7TY7NJrnFjycJi6IzzclXNbDQst3fJtlIc
+	/gWZzuZxOUFZzk7H6H024EgYgDQbBZ5atkxH4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ro9KkAxK/1Zj0rF3STTHrF2aZBimIVjpGYrNY5Ht3s97ULHbsB2hEAJLVxewu/XEZC
+	1TfisGMrOYRLcpk5vG8qn9bqQFsyJ8LzA08BqoLjsZoBSIGc4hTWgzrX45CM8Ckee/Zm
+	FbTep9teL2Kb94//3+/rr2JMRLO3K2AVPUi6U=
+Received: by 10.150.163.9 with SMTP id l9mr1334469ybe.94.1280415277068;
+	Thu, 29 Jul 2010 07:54:37 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id u41sm1002256yba.10.2010.07.29.07.54.34
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 29 Jul 2010 07:54:35 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 29 Jul 2010 14:48:45 +0200
-Message-ID: <i2rtbe$i98$2@dough.gmane.org>
-References: <1280406377-23902-1-git-send-email-chase.maupin@ti.com>
-	<1280406377-23902-2-git-send-email-chase.maupin@ti.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
-In-Reply-To: <1280406377-23902-2-git-send-email-chase.maupin@ti.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu, 29 Jul 2010 09:51:01 -0500
+Message-Id: <1280415061-28353-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] x-load: add signGP to sourceipk
+Cc: Chase Maupin <chase.maupin@ti.com>
+Subject: [PATCH 1/1] distribute_license: added class to copy license files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,70 +52,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jul 2010 12:52:27 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 29 Jul 2010 14:55:20 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* This class can be used to copy license files from package
+  sources into the deploy directory so they can be distributed.
+* By default it searches the top-level source directory for
+  files matching COPYING* or LICENSE*
+* Search depth and pattern can be modified using the
+  LICENSE_SEARCH_DEPTH and LICENSE_FILES variables
+  respectively.
 
-On 29-07-10 14:26, Chase Maupin wrote:
-> * When creating a source ipk for the x-load program copy the
->   signGP binary as well as this is needed when rebuilding.
-> * Bump the PR for x-load-omap3pandora recipe.
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ classes/distribute_license.bbclass |   56 ++++++++++++++++++++++++++++++++++++
+ 1 files changed, 56 insertions(+), 0 deletions(-)
+ create mode 100644 classes/distribute_license.bbclass
 
-NAK. If you want to have signgp, bitbake signgp-native. Including
-'random' binaries from other recipes in packages is a no-no.
-
-regards,
-
-Koen
-
-
-> 
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> ---
->  recipes/x-load/x-load-omap3pandora_git.bb |    2 +-
->  recipes/x-load/x-load.inc                 |    5 +++++
->  2 files changed, 6 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/x-load/x-load-omap3pandora_git.bb b/recipes/x-load/x-load-omap3pandora_git.bb
-> index 05dfc20..e9e6e49 100644
-> --- a/recipes/x-load/x-load-omap3pandora_git.bb
-> +++ b/recipes/x-load/x-load-omap3pandora_git.bb
-> @@ -9,7 +9,7 @@ SRCREV = "b3646a83f9e67ec9a2de3182fd254557fd6ad9aa"
->  PROVIDES = "x-load"
->  
->  PV = "1.42+${PR}+gitr${SRCREV}"
-> -PR ="r2"
-> +PR ="r3"
->  PE = "1"
->  
->  SRC_URI = "git://git.openpandora.org/pandora-x-loader.git;branch=master;protocol=git"
-> diff --git a/recipes/x-load/x-load.inc b/recipes/x-load/x-load.inc
-> index 0699c01..e786ac1 100644
-> --- a/recipes/x-load/x-load.inc
-> +++ b/recipes/x-load/x-load.inc
-> @@ -38,6 +38,11 @@ do_install () {
->  
->  FILES_${PN} = "/boot"
->  
-> +do_create_srcipk_prepend() {
-> +    mkdir -p ${WORKDIR}/sourceipk-tmp/psp/x-load/host-tools
-> +    cp `which signGP` ${WORKDIR}/sourceipk-tmp/psp/x-load/host-tools/
-> +}
-> +
->  do_deploy () {
->  	install -d ${DEPLOY_DIR_IMAGE}
->  	install ${S}/x-load.bin.ift ${DEPLOY_DIR_IMAGE}/${XLOAD_IMAGE}
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMUXitMkyGM64RGpERAhUYAKC6fLMHo4tdV74afqFSzzfW7JZ0XgCgrNnS
-EbRbIAK7+yFW6gldUT+ETqs=
-=JZx8
------END PGP SIGNATURE-----
+diff --git a/classes/distribute_license.bbclass b/classes/distribute_license.bbclass
+new file mode 100644
+index 0000000..795a404
+--- /dev/null
++++ b/classes/distribute_license.bbclass
+@@ -0,0 +1,56 @@
++# distribute-license.bbclass will search the sources of a package to
++# a given depth looking for a match to the specified pattern and if
++# found will copy the matching file(s) to the deploy directory.
++#
++# This class is used to collect license files such as COPYING or
++# LICENSE where they are found and save them per package.
++#
++# This package uses the following variables to control its operations:
++#   - LICENSE_FILES         = Pattern of license files to be searched for.
++#                             By default this is COPYING* and LICENSE* but
++#                             this can be changed per package.
++#   - LICENSE_SEARCH_DEPTH  = The maximum depth to search in the package
++#                             sources for files matching the LICENSE_FILES
++#                             pattern.
++
++
++# Files to copy for the licensing.  By default this is looking for
++# files following the patters COPYING* or LICENSING* in the top
++# level sources directory.
++LICENSE_FILES ?= "COPYING* LICENSE*"
++
++# Maximum depth to look for license files
++LICENSE_SEARCH_DEPTH ?= "1"
++
++distribute_license_do_copy_license() {
++    # Change directory to source directory
++    cd ${S}
++
++    # Turn of globbing so that wildcards are not expanded in for loop
++    set -f
++
++    # Check if LICENSE_FILES exist.  If so copy them to DEPLOY_DIR
++    for lic in ${LICENSE_FILES}
++    do
++        res=""
++        res=`find . -maxdepth ${LICENSE_SEARCH_DEPTH} -name "$lic"`
++        if [ "$res" != "" ]
++        then
++            mkdir -p ${DEPLOY_DIR}/licenses/${PN}
++            cp $res ${DEPLOY_DIR}/licenses/${PN}
++        fi
++    done
++
++    # Turn globbing back on
++    set +f
++
++    # Just to be clean change directory back to where we started from.
++    cd -
++}
++
++EXPORT_FUNCTIONS do_copy_license
++
++# Put after do_patch in case a patch adds the license files
++do_copy_license[deptask] = "do_patch"
++
++addtask copy_license after do_patch before do_configure
+-- 
+1.7.0.4
 
 
 
