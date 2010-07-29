@@ -1,31 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OeNT7-00041a-7j for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 09:23:55 +0200
-Received: from f053034107.adsl.alicedsl.de ([78.53.34.107]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OeNSq-0001yD-4I for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 07:23:36 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <mickey@vanille-media.de>) id 1OeNvF-0004OK-9F
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 09:52:58 +0200
+Received: from [192.168.1.2] (e180148031.adsl.alicedsl.de [85.180.148.31])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 2870658437E
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Jul 2010 09:54:35 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTintoXJZHPGxj1-sxHP31-VzOK3Washy+hZqbmgd@mail.gmail.com>
-References: <AANLkTintoXJZHPGxj1-sxHP31-VzOK3Washy+hZqbmgd@mail.gmail.com>
-Date: Thu, 29 Jul 2010 09:23:33 +0200
-Message-ID: <1280388213.3873.3.camel@mattotaupa>
+In-Reply-To: <AANLkTi=W8PNpkUGY6zVpOxQoC3emXpW1TEtoRzK270j2@mail.gmail.com>
+References: <AANLkTin-WKHX0m7yU7pLGFV=g2X6kwcCdYEEUJ541SKq@mail.gmail.com>
+	<4C50DBF6.6040807@mentor.com>
+	<AANLkTi=W8PNpkUGY6zVpOxQoC3emXpW1TEtoRzK270j2@mail.gmail.com>
+Organization: Vanille-Media
+Date: Thu, 29 Jul 2010 09:52:35 +0200
+Message-ID: <1280389955.26249.20.camel@saphir>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Fix the compile failure of recode
+Subject: Re: [RFC] recipe owners
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,57 +41,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jul 2010 07:23:55 -0000
-X-Groupsio-MsgNum: 21577
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-zOmWl3dTA2zugJEfj7t+"
-
---=-zOmWl3dTA2zugJEfj7t+
+X-List-Received-Date: Thu, 29 Jul 2010 07:52:58 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 28.07.2010, 17:40 +0100 schrieb Alex Bennee:
-> The recode build fails because of CC/CXX environment variables being bang=
-ed by:
->=20
-> TARGET_CC_ARCH_append =3D "${LDFLAGS}"
->=20
-> Adding a space fixes it:
->=20
-> >From d792e217288ac56b1cc1f798c0ea67f749037f2a Mon Sep 17 00:00:00 2001
-> From: Alex Bennee <ajb@cbnl.com> Date: Wed, 28 Jul 2010 17:38:39 +0100
-> Subject: [PATCH] Add space to appended CC/CXX otherwise configure
-> fails ---  recipes/recode/recode_3.6.bb |    2 +-  1 files changed, 1
-> insertions(+), 1 deletions(-) diff --git
-> a/recipes/recode/recode_3.6.bb b/recipes/recode/recode_3.6.bb index
-> 3e7c6cd..0cdd43d 100644 --- a/recipes/recode/recode_3.6.bb +++
-> b/recipes/recode/recode_3.6.bb @@ -8,7 +8,7 @@ SRC_URI =3D
-> "${GNU_MIRROR}/recode/recode-${PV}.tar.gz \    inherit autotools
-> -TARGET_CC_ARCH_append =3D "${LDFLAGS}" +TARGET_CC_ARCH_append =3D "
-> ${LDFLAGS}"    do_configure() {  	gnu-configize --  1.7.2
+Am Mittwoch, den 28.07.2010, 19:40 -0700 schrieb Chris Larson:
+> I'd agree with that, for simple recipes, though I don't necessarily think
+> that precludes the maintainership concept.  I wouldn't mind just claiming
+> ownership of some recipes, and letting people fix things in them, and just
+> keeping an eye on it, reviewing the changes to them, making sure they don't
+> explode, whatever.
 
-It looks like your MUA mangled the patch. Could you please resend as v2.
-GMail should also be compatible with `git send-email` [1].
+I agree, that's how I viewed myself throughout the years with regards to
+Python in OE.
+
+Cheers,
+
+-- 
+:M:
 
 
-Thanks,
 
-Paul
-
-
-[1] http://www.kernel.org/pub/software/scm/git/docs/git-send-email.html
-
---=-zOmWl3dTA2zugJEfj7t+
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxRLGIACgkQPX1aK2wOHVjmegCeN3WWsDhTbV+3KhqzgCpGCHe8
-HuQAnjZYK3YWCFpBgQnkCPestleToyME
-=sWk7
------END PGP SIGNATURE-----
-
---=-zOmWl3dTA2zugJEfj7t+--
