@@ -1,44 +1,43 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eblima@gmail.com>) id 1OeX6t-0001VM-4B
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 29 Jul 2010 19:42:01 +0200
-Received: by yxi11 with SMTP id 11so233183yxi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OeX7p-00029d-GM for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 19:42:35 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OeX7R-0005zu-4z for openembedded-devel@lists.openembedded.org;
+	Thu, 29 Jul 2010 19:42:09 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 29 Jul 2010 19:42:09 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 29 Jul 2010 10:41:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=rb3epbR1X2sW9rthH60v07o/FFUd0pFxqeXTnpX53T8=;
-	b=ILoKM/YWFoi4KN61gTCUjPKg8R0YpAt5rM6objA0MVaWR0wrBuI5+WLkec9liJJeO+
-	gVK4+Oou8gtXu5x9OfJbySr2BM9pOzqY40QyXEjm0sg5oyD/w34nBNNQ3xpVsWEgFGJO
-	JagZZGRqsllKjmsEGQxImd7CrLr7pTlhuouKY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=tqxMqtl/2ueI50QSieJiwPZUYm+Tr4vLg3Ze8VKae3o/T92WaeRantt4XRgSzyZ82t
-	uVJJbpiEYQH1toSGB1NLJYTdoOXpuKGW2rjUXrpMUQuAhS7FGFOFdQQOVSSWqiTcmGDJ
-	SK+1eoyOrnXJleaAXaKv9EW8E9j8j14K1f1b4=
-Received: by 10.100.42.5 with SMTP id p5mr538741anp.15.1280425266472; Thu, 29 
-	Jul 2010 10:41:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.176.77 with HTTP; Thu, 29 Jul 2010 10:40:46 -0700 (PDT)
-In-Reply-To: <20100727010733.27CB746777@linux.fjfi.cvut.cz>
-References: <20100727010733.27CB746777@linux.fjfi.cvut.cz>
-From: "Eduardo Lima (Etrunko)" <eblima@gmail.com>
-Date: Thu, 29 Jul 2010 14:40:46 -0300
-Message-ID: <AANLkTimxdLKFKd0ecBHP=D+QVKijxv1Yr57UebcYLzqM@mail.gmail.com>
+	Thu, 29 Jul 2010 19:42:09 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: eblima@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 29 Jul 2010 19:41:54 +0200
+Message-ID: <i2seh2$mrf$1@dough.gmane.org>
+References: <1280406377-23902-1-git-send-email-chase.maupin@ti.com>	<1280406377-23902-2-git-send-email-chase.maupin@ti.com>
+	<0d6a01cb2f30$47a0b040$d6e210c0$@Distant-earth.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.10) Gecko/20100611 Shredder/3.0.6pre
+In-Reply-To: <0d6a01cb2f30$47a0b040$d6e210c0$@Distant-earth.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] cmake.bbclass: add CMAKE_SYSTEM_PROCESSOR into generated toolchain file
+Subject: Re: [PATCH 2/2] x-load: add signGP to sourceipk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,58 +51,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 29 Jul 2010 17:42:12 -0000
+X-List-Received-Date: Thu, 29 Jul 2010 17:42:46 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-On Mon, Jul 26, 2010 at 9:25 PM, David Kozub <zub@linux.fjfi.cvut.cz> wrote=
-:
-> Needed for packages that check this value, e.g. recent webkit.
->
-> Signed-off-by: David Kozub <zub@linux.fjfi.cvut.cz>
-> ---
-> =C2=A0classes/cmake.bbclass | =C2=A0 =C2=A01 +
-> =C2=A01 files changed, 1 insertions(+), 0 deletions(-)
->
-> diff --git a/classes/cmake.bbclass b/classes/cmake.bbclass
-> index 2376012..32ada35 100644
-> --- a/classes/cmake.bbclass
-> +++ b/classes/cmake.bbclass
-> @@ -28,6 +28,7 @@ cmake_do_generate_toolchain_file() {
-> =C2=A0# CMake system name must be something like "Linux".
-> =C2=A0# This is important for cross-compiling.
-> =C2=A0 echo "set( CMAKE_SYSTEM_NAME" `echo ${SDK_OS} | sed 's/^./\u&/'` "=
-)" > ${WORKDIR}/toolchain.cmake
-> + =C2=A0echo "set( CMAKE_SYSTEM_PROCESSOR ${TARGET_ARCH} )" >> ${WORKDIR}=
-/toolchain.cmake
-> =C2=A0 echo "set( CMAKE_C_COMPILER ${OECMAKE_C_COMPILER} )" >> ${WORKDIR}=
-/toolchain.cmake
-> =C2=A0 echo "set( CMAKE_CXX_COMPILER ${OECMAKE_CXX_COMPILER} )" >> ${WORK=
-DIR}/toolchain.cmake
-> =C2=A0 echo "set( CMAKE_C_FLAGS \"${OECMAKE_C_FLAGS}\" CACHE STRING \"Ope=
-nEmbedded CFLAGS\" )" >> ${WORKDIR}/toolchain.cmake
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-This is really necessary, check the last comment on CMake bug #9065
-(http://public.kitware.com/Bug/view.php?id=3D9065).
+On 29-07-10 17:11, John Willis wrote:
+>> * When creating a source ipk for the x-load program copy the
+>>   signGP binary as well as this is needed when rebuilding.
+>> * Bump the PR for x-load-omap3pandora recipe.
+>>
+>> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> 
+> Nack, this seems totally pointless, signGP is in the tree (signgp-native) so
+> is it not better to bring that in?
+> 
+> Out of interest, what is the problem you see with the current setup, the
+> recipes as they stand will give people signed and unsigned X-Loader binaries
+> for just about all purposes you could want them on the OMAP3. Or is this
+> patch aimed at using source IPK's for use in another non-OE SDK?
+> 
+> Shipping binaries in a source IPK seems very wrong regardless of the need,
+> it's not really source at that point ;-).
 
-IMHO It could go together with the CMake 2.8.2 patches.
+What Chase actually needed was an -sdk package, so:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=962d52ae8358d8fd11ae8a7054fa785d102cf274
 
-Best regards, Etrunko.
+regards,
 
-> --
-> 1.7.1
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFMUb1iMkyGM64RGpERArLhAJoD27ERUKmy2OrmVZNK5kzEzVWi8QCgmIpZ
+s2B/iRmjYI0hrFSLpiz9SBY=
+=4MXC
+-----END PGP SIGNATURE-----
 
-
---=20
-Eduardo de Barros Lima
-eblima@gmail.com
 
 
