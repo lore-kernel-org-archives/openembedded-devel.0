@@ -1,40 +1,29 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from evil.bitcloner.org ([62.2.86.239])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Oeqcs-0000SR-AY
+	(envelope-from <betheg@bitcloner.org>) id 1Oerb7-0007Ct-Ll
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 16:31:56 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OeqcT-0003xk-6P from Tom_Rini@mentor.com 
+	Fri, 30 Jul 2010 17:34:10 +0200
+Received: from frbg-5f732973.pool.mediaways.net ([95.115.41.115])
+	by a.mx.bitcloner.org with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(envelope-from <betheg@bitcloner.org>) id 1Oeran-0007Sq-S3
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 07:31:29 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 30 Jul 2010 07:31:28 -0700
-Received: from [172.30.80.28] ([172.30.80.28]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 30 Jul 2010 08:31:28 -0600
-Message-ID: <4C52E238.80603@mentor.com>
-Date: Fri, 30 Jul 2010 07:31:20 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Fri, 30 Jul 2010 17:33:49 +0200
+From: Michael Kurz <betheg@bitcloner.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1280475746-15699-1-git-send-email-raj.khem@gmail.com>
-	<i2u4cr$gkg$1@dough.gmane.org>
-In-Reply-To: <i2u4cr$gkg$1@dough.gmane.org>
-X-OriginalArrivalTime: 30 Jul 2010 14:31:28.0252 (UTC)
-	FILETIME=[E56793C0:01CB2FF3]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Fri, 30 Jul 2010 17:33:20 +0200
+Message-Id: <1280504000-3595-2-git-send-email-betheg@bitcloner.org>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1280504000-3595-1-git-send-email-betheg@bitcloner.org>
+References: <1280504000-3595-1-git-send-email-betheg@bitcloner.org>
+X-SA-Exim-Connect-IP: 62.2.86.239
+X-SA-Exim-Mail-From: betheg@bitcloner.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] bitbake.conf, cross.bbclass: Make multi-machine toolchains to co-exist
+Subject: [PATCH 2/2] libfso-glib_git.bb: sync PV with upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +37,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 14:31:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 30 Jul 2010 15:34:11 -0000
 
-Koen Kooi wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
-> 
-> On 30-07-10 09:42, Khem Raj wrote:
->> From: Tom Rini <tom_rini@mentor.com>
->>
->> the patch Tom sent has line breaks etc. this is same patch formatted for anybody to test
-> 
-> MACHINE=beagleboard bitbake ffmpeg:
-> 
-> | running configure fragment for nptl/sysdeps/pthread
-> | configure: error: compiler support for __thread is required
-> | ERROR: Function do_configure failed
-> NOTE: package glibc-initial-2.9-r36.3: task do_configure: Failed
 
-That's odd.  My beagleboard build got to mesa before my laptop hd filled 
-up overnight.  I'll try doing just beagle shortly
+Signed-off-by: Michael Kurz <betheg@bitcloner.org>
+---
+ recipes/freesmartphone/libfso-glib_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
+diff --git a/recipes/freesmartphone/libfso-glib_git.bb b/recipes/freesmartphone/libfso-glib_git.bb
+index 79da053..aa3e1ed 100644
+--- a/recipes/freesmartphone/libfso-glib_git.bb
++++ b/recipes/freesmartphone/libfso-glib_git.bb
+@@ -4,7 +4,7 @@ LICENSE = "LGPL"
+ SECTION = "devel"
+ DEPENDS = "vala-dbus-binding-tool-native dbus-glib glib-2.0 fso-specs"
+ SRCREV = "9ab41751525d89d834d3d1011a6cde9b16c69a0d"
+-PV = "2010.07.16.1+gitr${SRCPV}"
++PV = "2010.07.28.1+gitr${SRCPV}"
+ PE = "1"
+ PR = "r1"
+ 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
