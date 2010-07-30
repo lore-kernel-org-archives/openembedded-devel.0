@@ -1,45 +1,44 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1OejuH-0003cX-MN
+	(envelope-from <raj.khem@gmail.com>) id 1OekF4-00049L-Li
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 09:21:26 +0200
-Received: by fxm12 with SMTP id 12so721969fxm.6
+	Fri, 30 Jul 2010 09:42:55 +0200
+Received: by pzk2 with SMTP id 2so435081pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 00:21:05 -0700 (PDT)
+	Fri, 30 Jul 2010 00:42:32 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=XGdNCwntDSDkvSO/1Cj9TqWxj6CUXAYYggS5MvyWhUI=;
-	b=orYwpFf/i6l6swK50TyIFF4hrn6kJUkbL5rACkU/ZGQQBgXuhKeA0Cnh0wwT7xuUXM
-	3mqCDIfHW30z5B7aLcmY9JU5Bb13WL3dDzKEaAjJ899inqSJfz3+77Y0kClKa546Z9C4
-	Qfa0SOpE7m3gNfNai3MRj1RS1pwji/A9Mvlnw=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=9Vd7xQolFy9clr3/VPF9F02Z7gyBhYmgHyM3z1GyQro=;
+	b=FRlhQfXm6/19y26lUpsmWS4G49Vu/J0+h9ZK8DyNj08U0Ujz6AkXNppwwBAImqbbzQ
+	/En+6RTmvNdzY/PuiVAkv3+qdB27e0/cEFgm5ww8fj4hcXwKCt+MlRF7Kdtggk9CKspZ
+	e8SQ8RTemu8+V6HqgolwuSu2NedFojEmTOqCY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=FhUmhXrGguy31Vg+PPIsrkPN6TII98olxQbAckPT2M6Ch0ViWuhjK4H6jhEnSkdjab
-	Meil5XWXHYy0hzbKmvlCa29amREAIFG9vd9KRIKVfcJyKgEQN7aTcf/wfIbL9TZPbtrh
-	SKDQ7yhfvUfEzLXCj+NZEPiV172vzzldGPgrM=
-MIME-Version: 1.0
-Received: by 10.239.182.67 with SMTP id p3mr58257hbg.122.1280474463649; Fri, 
-	30 Jul 2010 00:21:03 -0700 (PDT)
-Received: by 10.239.181.207 with HTTP; Fri, 30 Jul 2010 00:21:03 -0700 (PDT)
-In-Reply-To: <4C516EF8.3080804@balister.org>
-References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
-	<i2rik7$ds1$1@dough.gmane.org> <4C516EF8.3080804@balister.org>
-Date: Fri, 30 Jul 2010 09:21:03 +0200
-Message-ID: <AANLkTikZQB39U7kUv9-0v-3gysX=tYFuwUiq3ygXJzAL@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=hr7U/7YUitWUGvGhOkOwyk3/jQJ0ltsGJDN8CFXbf6BrM8dk2FYF873Dkv1zTGgBsq
+	mBPpVtv+Qs/iCHgY94eUPRG9M05X/6x2tXWC3BQwqww4GM1UMptMQEBtDDVdp67TlUw1
+	RL5+3v1UrkODHTZYkbjHYYRGAOfcRIYTAgOqw=
+Received: by 10.114.121.10 with SMTP id t10mr1693308wac.161.1280475752380;
+	Fri, 30 Jul 2010 00:42:32 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id g4sm3180113wae.2.2010.07.30.00.42.31
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 30 Jul 2010 00:42:31 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+Date: Fri, 30 Jul 2010 00:42:26 -0700
+Message-Id: <1280475746-15699-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE recipe tree quality
+Subject: [PATCH] bitbake.conf, cross.bbclass: Make multi-machine toolchains to co-exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,75 +52,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 07:21:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Jul 2010 07:42:56 -0000
 
-On Thu, Jul 29, 2010 at 2:07 PM, Philip Balister <philip@balister.org> wrot=
-e:
->
->
-> On 07/29/2010 05:45 AM, Koen Kooi wrote:
->>
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 29-07-10 10:50, Frans Meulenbroeks wrote:
->>>
->>> Dear all,
->>>
->>> Given the discussions on quality that sometimes pop up (and also
->>> triggered
->>> by Robert's message), I decided to kick off a bitbake -k world.
->>
->> Could you first explain to me why 'bitbake world' is a good way to
->> measure quality?
->>
->> I would think that building something like console-image and looking at
->> the following would be a much better metric:
->>
->> * does it build?
->> * are all the rootfs types working?
->> * does the image do what it is supposed to do?
->> * Are all the licenses of the output packages correct?
->> * Do the output packages have any spurious deps?
->> * Is the content of the output packages correct?
->> * Are there any known CVEs in the resulting packages?
->> * Did packaged-staging do its job?
->> * What kind of QA errors and warnings were raised?
->> * Did all recipes pass recipe_sanity?
->> * Did all recipes conform to oe-stylize.py?
->>
->> etc
->>
->> I would actually advocate removing the 'world' feature from bitbake/OE
->> to stop people from wasting time on looking at bitbake world and have
->> them fix actual problems.
->
-> bitbake world seems to be the source of pointless listserv discussions. D=
-oes
-> it serve any purpose?
+From: Tom Rini <tom_rini@mentor.com>
 
-Pointless or not really depends on how you look at quality.
+the patch Tom sent has line breaks etc. this is same patch formatted for anybody to test
 
-If you look at it as you, Koen and other OE long-timers, yes, it looks
-rather pointless to have bitbake world.
-But for those of us who have a different view on what quality is, then
-bitbake world serves a purpose.
-It can be used to get a rough picture of the current quality, and if
-it were accepted, even use it to clean up OE and thus raise the
-quality according to our quality measurement.
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/cross.bbclass |    4 ++--
+ conf/bitbake.conf     |    2 +-
+ 2 files changed, 3 insertions(+), 3 deletions(-)
 
-So the actual discussion that is popping up (again), what the common
-quality goals for OE is.
-And that should hopefully not be seen as a pointless discussion.
-Hopefully, it will be a continous discussion, from now on and forever.
+diff --git a/classes/cross.bbclass b/classes/cross.bbclass
+index db86192..b3f74a2 100644
+--- a/classes/cross.bbclass
++++ b/classes/cross.bbclass
+@@ -44,9 +44,9 @@ target_base_libdir := "${base_libdir}"
+ target_prefix := "${prefix}"
+ 
+ # Overrides for paths
+-prefix = "${STAGING_DIR_NATIVE}${prefix_native}"
++prefix = "${STAGING_DIR_NATIVE}${prefix_native}/${MULTIMACH_TARGET_SYS}"
+ base_prefix = "${STAGING_DIR_NATIVE}"
+-exec_prefix = "${STAGING_DIR_NATIVE}${prefix_native}"
++exec_prefix = "${STAGING_DIR_NATIVE}${prefix_native}/${MULTIMACH_TARGET_SYS}"
+ base_sbindir = "${base_prefix}/bin"
+ sbindir = "${exec_prefix}/bin"
+ 
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index d523519..1b3dd6b 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -299,7 +299,7 @@ STAGING_DIR_JAVA = "${STAGING_DIR}/java"
+ STAGING_DIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}"
+ STAGING_BINDIR_NATIVE = "${STAGING_DIR_NATIVE}${bindir_native}"
+ STAGING_SBINDIR_NATIVE = "${STAGING_DIR_NATIVE}${sbindir_native}"
+-STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${bindir_native}/${MULTIMACH_HOST_SYS}"
++STAGING_BINDIR_CROSS  = "${STAGING_DIR_NATIVE}${bindir_native}/${MULTIMACH_TARGET_SYS}${base_bindir_native}"
+ STAGING_BINDIR_CROSS_BASEPKG = "${STAGING_DIR_NATIVE}${bindir_native}/${BASEPKG_TARGET_SYS}"
+ STAGING_LIBDIR_NATIVE = "${STAGING_DIR_NATIVE}${libdir_native}"
+ STAGING_INCDIR_NATIVE = "${STAGING_DIR_NATIVE}${includedir_native}"
+-- 
+1.7.1
 
-/Esben
---=20
-Esben Haabendal, Senior Software Consultant
-Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
-WWW: http://www.doredevelopment.dk
 
 
