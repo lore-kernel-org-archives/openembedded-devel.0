@@ -1,32 +1,30 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from smtp-68.nebula.fi ([83.145.220.68])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Oem0j-0006ZY-By
+	(envelope-from <henri.bragge@dcombus.com>) id 1OemtL-00029N-IK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 11:36:15 +0200
-Received: (qmail 23021 invoked by uid 813007); 30 Jul 2010 09:35:54 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 30 Jul 2010 09:35:54 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jul 2010 11:36:15 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-10-generic; KDE/4.4.92; x86_64; ; )
-References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
-	<4C5293A0.70802@xora.org.uk>
-	<AANLkTi=6zRL-+P-2jZzhgZXoMVSY-XdaBCW=JnNqmJom@mail.gmail.com>
-In-Reply-To: <AANLkTi=6zRL-+P-2jZzhgZXoMVSY-XdaBCW=JnNqmJom@mail.gmail.com>
+	Fri, 30 Jul 2010 12:32:40 +0200
+Received: from [100.100.100.68] (unknown [83.150.95.26])
+	by smtp-68.nebula.fi (Postfix) with ESMTP id CA7A943F036E
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Jul 2010 13:32:17 +0300 (EEST)
+Message-ID: <4C52AA5A.5030205@dcombus.com>
+Date: Fri, 30 Jul 2010 13:32:58 +0300
+From: Henri Bragge <henri.bragge@dcombus.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
 MIME-Version: 1.0
-Message-Id: <201007301136.16075.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+To: openembedded-devel@lists.openembedded.org
+References: <1280480631-23360-1-git-send-email-henri.bragge@dcombus.com>
+	<1280480631-23360-2-git-send-email-henri.bragge@dcombus.com>
+In-Reply-To: <1280480631-23360-2-git-send-email-henri.bragge@dcombus.com>
+X-SA-Exim-Connect-IP: 83.145.220.68
+X-SA-Exim-Mail-From: henri.bragge@dcombus.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE recipe tree quality
+Subject: Re: [PATCH 2/2] recipe for scli-0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,50 +38,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 09:36:16 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 30 Jul 2010 10:32:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Dnia pi=C4=85tek, 30 lipca 2010 o 11:07:32 Frans Meulenbroeks napisa=C5=82(=
-a):
-> > More interesting to me would be an algorithm more like.
-> >=20
-> > while recipe in recips/*.bb; do
-> >    rm -rf tmp/ ; bitbake recipe
-> > done
-> >=20
-> > with the test noting if the fail is due to a blacklisted dependency, a
-> > totally missing dependency (recipe been deleted sometime in past) or an
-> > actual compile fail due to a missing DEPENDS entry somewhere in the tre=
-e.
-> >=20
-> > But this is going to burn CPU time like never before.
+henri.bragge@dcombus.com wrote:
+> From: Henri Bragge <henri.bragge@dcombus.com>
+>
+> Signed-off-by: Henri Bragge <henri.bragge@dcombus.com>
+> ---
+>  recipes/scli/scli.inc    |    6 ++++++
+>  recipes/scli/scli_svn.bb |    8 ++++++++
+>  2 files changed, 14 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/scli/scli.inc
+>  create mode 100644 recipes/scli/scli_svn.bb
+>
+> diff --git a/recipes/scli/scli.inc b/recipes/scli/scli.inc
+> new file mode 100644
+> index 0000000..abe341d
+> --- /dev/null
+> +++ b/recipes/scli/scli.inc
+> @@ -0,0 +1,6 @@
+> +DESCRIPTION = "SNMP Command Line Interface"
+> +LICENSE = "GPLv2"
+> +SECTION = "console/network"
+> +DEPENDS = "gsnmp readline libxml2 ncurses"
+> +
+> +inherit autotools
+> diff --git a/recipes/scli/scli_svn.bb b/recipes/scli/scli_svn.bb
+> new file mode 100644
+> index 0000000..45bd08e
+> --- /dev/null
+> +++ b/recipes/scli/scli_svn.bb
+> @@ -0,0 +1,8 @@
+> +require scli.inc
+> +
+> +SRCREV = "3285"
+> +PV = "0.4.0+svnr${SRCREV}"
+> +PR = "r1"
+> +
+> +SRC_URI = "svn://cnds.eecs.jacobs-university.de/svn/schoenw/src/scli;module=trunk;proto=https"
+> +S = "${WORKDIR}/trunk"
+>   
 
-> Definitely an interesting test. Actually with packaged staging this might
-> become manageble.
-> I would not mind running such a test, even if it takes a week or so.
+Meant to include some info about these packages too.
 
-I did such ones for Poky and with packaged staging dir outside of tmpdir it=
-=20
-works very good. Most of time is spent on removing tmp and repopulating=20
-it from packages.
-=20
-> I guess it is hard to do this for older versions of recipes though.
-> afaik bitbake -b will not build things one depends on and bitbake recipe
-> will take either the pinned version or otherwise the last one a
-> non-negative DEFAULT_PREFERENCE.
+gsnmp:
+http://packages.debian.org/sid/libgsnmp0
 
-"bitbake recipe-version" works but you will need more work to get 'version'=
-=20
-part as it can contain SRCREV etc.
+scli:
+http://packages.debian.org/sid/scli
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
-
-
+Tested with Angstrom on at91sam9261ek board, bitbake 1.8.18.
 
 
