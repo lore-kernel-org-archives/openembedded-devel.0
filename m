@@ -1,44 +1,33 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OenoC-0003XB-FO
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1Oeoil-0000P4-8f
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 13:31:25 +0200
-Received: by bwz10 with SMTP id 10so732376bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 04:31:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=ScmS+vK6ZQ4Z9jQQ05HqcOgDPNQ5kyXLPa90fr8eUJQ=;
-	b=b7wchKRlcHAP+Cw778ylZ7BFNLBv+zzH4GdjgwNHr17U1BubRHTIxHVWAXeFtYSO0M
-	7f0lIfQZuBg0kAacLBIpPIjBtf/9q4wyWQE0hyEIrxsoFGdBHxETV70+f39Ui10Wj2c1
-	lOURpCdcPw5Buo32gTXycsZ84FJUpDOUL6M7w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=WVRK0pEZVh4UZlAMN4qNLl6BiJOlhdJpkmYHPFh3jI3o7Ae3g+0FWKkS5fMseQJJee
-	cbAAKz1ufiP502Yw/5nVCPIHr3y9IZElTpbjaJms8evincEeM2R4F+9LCOGjw2YV4skm
-	IAK4eA5u2c82fyY3fAwvBnKTI3M455pQ1YjLE=
-MIME-Version: 1.0
-Received: by 10.204.83.167 with SMTP id f39mr1061896bkl.151.1280489465452; 
-	Fri, 30 Jul 2010 04:31:05 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Fri, 30 Jul 2010 04:31:05 -0700 (PDT)
-In-Reply-To: <1280488945-6196-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-References: <1280488945-6196-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-Date: Fri, 30 Jul 2010 13:31:05 +0200
-Message-ID: <AANLkTi=mKtSOSr5cowgEVqNV2_QOHjMLVU033J-+CTMk@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 30 Jul 2010 14:30:01 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o6UCTPJB027346
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Fri, 30 Jul 2010 14:29:26 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
+	id 1OeoiK-00087e-Js; Fri, 30 Jul 2010 14:29:24 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri, 30 Jul 2010 14:29:23 +0200
+Message-Id: <1280492963-30578-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+X-Mailer: git-send-email 1.7.2
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] liboil: removed old cruft before 0.3.15
+Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Subject: [PATCH] ncurses: added 5.7 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,179 +41,251 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 11:31:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 30 Jul 2010 12:30:01 -0000
 
-2010/7/30 Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+It uses ideas from the old 5.4 recipe but brings a lot of new features
+like widec libs, pkgconfig files or splitted library packages.
 
-> Versions before 0.3.15 are more than 2 years old and not referenced
-> anywhere.
->
-> Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-> ---
->  recipes/liboil/liboil-0.3.11/ppc-detect-fpu.patch |   11 -----------
->  recipes/liboil/liboil_0.3.10.bb                   |   15 ---------------
->  recipes/liboil/liboil_0.3.11.bb                   |   18
-> ------------------
->  recipes/liboil/liboil_0.3.14.bb                   |   21
-> ---------------------
->  recipes/liboil/liboil_0.3.9.bb                    |   15 ---------------
->  5 files changed, 0 insertions(+), 80 deletions(-)
->  delete mode 100644 recipes/liboil/liboil-0.3.11/ppc-detect-fpu.patch
->  delete mode 100644 recipes/liboil/liboil_0.3.10.bb
->  delete mode 100644 recipes/liboil/liboil_0.3.11.bb
->  delete mode 100644 recipes/liboil/liboil_0.3.14.bb
->  delete mode 100644 recipes/liboil/liboil_0.3.9.bb
->
-> diff --git a/recipes/liboil/liboil-0.3.11/ppc-detect-fpu.patch
-> b/recipes/liboil/liboil-0.3.11/ppc-detect-fpu.patch
-> deleted file mode 100644
-> index 49485e3..0000000
-> --- a/recipes/liboil/liboil-0.3.11/ppc-detect-fpu.patch
-> +++ /dev/null
-> @@ -1,11 +0,0 @@
-> ---- /m4/orig-as-gcc-inline-assembly.m4 2007-03-17 04:03:30.000000000 +0200
-> -+++ /m4/as-gcc-inline-assembly.m4      2007-11-20 12:20:24.000000000 +0200
-> -@@ -38,7 +38,7 @@
-> - [
-> -   AC_MSG_CHECKING([if compiler supports FPU instructions on PowerPC])
-> -
-> --  AC_TRY_COMPILE([], [__asm__ ("fadd 0,0,0"::) ], [flag_ok=yes],
-> [flag_ok=no])
-> -+  AC_TRY_COMPILE([], [double x = 0; __asm__ ("fadd 0,0,0"::"f" (x):"32")
-> ], [flag_ok=yes], [flag_ok=no])
-> -
-> -   if test "X$flag_ok" = Xyes ; then
-> -     $1
-> diff --git a/recipes/liboil/liboil_0.3.10.bb b/recipes/liboil/
-> liboil_0.3.10.bb
-> deleted file mode 100644
-> index 7e5f951..0000000
-> --- a/recipes/liboil/liboil_0.3.10.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -DESCRIPTION = "Liboil is a library of simple functions that are optimized
-> for various CPUs."
-> -HOMEPAGE = "http://liboil.freedesktop.org/"
-> -LICENSE = "liboil"
-> -PR = "r1"
-> -
-> -SRC_URI = "http://liboil.freedesktop.org/download/${P}.tar.gz<http://liboil.freedesktop.org/download/$%7BP%7D.tar.gz>
-> "
-> -
-> -inherit autotools pkgconfig
-> -
-> -do_stage() {
-> -       autotools_stage_all
-> -}
-> -
-> -SRC_URI[md5sum] = "770f656bca8166dab33b322d5886a4bf"
-> -SRC_URI[sha256sum] =
-> "4587753a023550a066abe59a7e467c1af35b9f5e81bfb40a12463ad2df8f088c"
-> diff --git a/recipes/liboil/liboil_0.3.11.bb b/recipes/liboil/
-> liboil_0.3.11.bb
-> deleted file mode 100644
-> index d8e055a..0000000
-> --- a/recipes/liboil/liboil_0.3.11.bb
-> +++ /dev/null
-> @@ -1,18 +0,0 @@
-> -DESCRIPTION = "Liboil is a library of simple functions that are optimized
-> for various CPUs."
-> -HOMEPAGE = "http://liboil.freedesktop.org/"
-> -LICENSE = "liboil"
-> -PR ="r3"
-> -
-> -DEPENDS = "glib-2.0"
-> -
-> -SRC_URI = "http://liboil.freedesktop.org/download/${P}.tar.gz<http://liboil.freedesktop.org/download/$%7BP%7D.tar.gz>\
-> -           file://ppc-detect-fpu.patch"
-> -
-> -inherit autotools pkgconfig
-> -
-> -do_stage() {
-> -       autotools_stage_all
-> -}
-> -
-> -SRC_URI[md5sum] = "65ce3266be385d0c7cd9a1157433332f"
-> -SRC_URI[sha256sum] =
-> "deb6530d40ecad2b849d68912500e6d03bab4ac63de7a97340d05af1d7cf0ad4"
-> diff --git a/recipes/liboil/liboil_0.3.14.bb b/recipes/liboil/
-> liboil_0.3.14.bb
-> deleted file mode 100644
-> index 92db760..0000000
-> --- a/recipes/liboil/liboil_0.3.14.bb
-> +++ /dev/null
-> @@ -1,21 +0,0 @@
-> -DESCRIPTION = "Liboil is a library of simple functions that are optimized
-> for various CPUs."
-> -HOMEPAGE = "http://liboil.freedesktop.org/"
-> -LICENSE = "liboil"
-> -PR = "r1"
-> -
-> -# The configure script seems to have bogus checks, so let's not make it
-> the default
-> -DEFAULT_PREFERENCE = "-1"
-> -
-> -DEPENDS = "glib-2.0"
-> -
-> -SRC_URI = "http://liboil.freedesktop.org/download/${P}.tar.gz<http://liboil.freedesktop.org/download/$%7BP%7D.tar.gz>\
-> -          "
-> -
-> -inherit autotools pkgconfig
-> -
-> -do_stage() {
-> -       autotools_stage_all
-> -}
-> -
-> -SRC_URI[md5sum] = "7a9f719e50656b795c06c0167012a84f"
-> -SRC_URI[sha256sum] =
-> "a40c09db6ee24e03aa81f58329a57e45e55462a2e0f619b3796d4bf942c23f2f"
-> diff --git a/recipes/liboil/liboil_0.3.9.bb b/recipes/liboil/
-> liboil_0.3.9.bb
-> deleted file mode 100644
-> index c066fa4..0000000
-> --- a/recipes/liboil/liboil_0.3.9.bb
-> +++ /dev/null
-> @@ -1,15 +0,0 @@
-> -DESCRIPTION = "Liboil is a library of simple functions that are optimized
-> for various CPUs."
-> -HOMEPAGE = "http://liboil.freedesktop.org/"
-> -LICENSE = "liboil"
-> -PR = "r1"
-> -
-> -SRC_URI = "http://liboil.freedesktop.org/download/${P}.tar.gz<http://liboil.freedesktop.org/download/$%7BP%7D.tar.gz>
-> "
-> -
-> -inherit autotools pkgconfig
-> -
-> -do_stage() {
-> -       autotools_stage_all
-> -}
-> -
-> -SRC_URI[md5sum] = "5d139b1fb16f0e93f0c84290ad2aaff8"
-> -SRC_URI[sha256sum] =
-> "dd4d680ce95e586a1bbe767e1a7b25e1c53f842b8be6cf4e30e89cfa8232dd90"
-> --
-> 1.7.2
->
+As lot of packages depend on ncurses, whole distribution must be
+probably rebuild when updating to this new version.
 
-Given that
-- they are so old
-- no distro pinned them
-- deletion is in compliance with the guidelines of the TSC
-I say:
+Due to this and the complex recipe, it has a negative DEFAULT_PREFERENCE
+for now.
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+---
+ recipes/ncurses/ncurses-5.7/tic-hang.patch |   25 ++++
+ recipes/ncurses/ncurses_5.7.bb             |  187 ++++++++++++++++++++++++++++
+ 2 files changed, 212 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/ncurses/ncurses-5.7/tic-hang.patch
+ create mode 100644 recipes/ncurses/ncurses_5.7.bb
 
-Thanks for cleaning this up!
+diff --git a/recipes/ncurses/ncurses-5.7/tic-hang.patch b/recipes/ncurses/ncurses-5.7/tic-hang.patch
+new file mode 100644
+index 0000000..1678b88
+--- /dev/null
++++ b/recipes/ncurses/ncurses-5.7/tic-hang.patch
+@@ -0,0 +1,25 @@
++'tic' of some linux distributions (e.g. fedora 11) hang in an infinite
++loop when processing the original file.
++
++Index: ncurses-5.7/misc/terminfo.src
++===================================================================
++--- ncurses-5.7.orig/misc/terminfo.src
+++++ ncurses-5.7/misc/terminfo.src
++@@ -3706,12 +3706,11 @@ konsole-xf3x|KDE console window with key
++ # The value for kbs reflects local customization rather than the settings used
++ # for XFree86 xterm.
++ konsole-xf4x|KDE console window with keyboard for XFree86 4.x xterm,
++-	kend=\EOF, khome=\EOH, use=konsole+pcfkeys,
++-	use=konsole-vt100,
++-# Konsole does not implement shifted cursor-keys.
++-konsole+pcfkeys|konsole subset of xterm+pcfkeys,
++-	kLFT@, kRIT@, kcbt=\E[Z, kind@, kri@, kDN@, kUP@, use=xterm+pcc2,
++-	use=xterm+pcf0,
+++	kend=\EOF, kf1=\EOP, kf13=\EO2P, kf14=\EO2Q, kf15=\EO2R,
+++	kf16=\EO2S, kf17=\E[15;2~, kf18=\E[17;2~, kf19=\E[18;2~,
+++	kf2=\EOQ, kf20=\E[19;2~, kf21=\E[20;2~, kf22=\E[21;2~,
+++	kf23=\E[23;2~, kf24=\E[24;2~, kf3=\EOR, kf4=\EOS,
+++	khome=\EOH, use=konsole-vt100,
++ # KDE's "vt100" keyboard has no relationship to any terminal that DEC made, but
++ # it is still useful for deriving the other entries.
++ konsole-vt100|KDE console window with vt100 (sic) keyboard,
+diff --git a/recipes/ncurses/ncurses_5.7.bb b/recipes/ncurses/ncurses_5.7.bb
+new file mode 100644
+index 0000000..8afb1d6
+--- /dev/null
++++ b/recipes/ncurses/ncurses_5.7.bb
+@@ -0,0 +1,187 @@
++DESCRIPTION = "Ncurses library"
++HOMEPAGE = "http://www.gnu.org/software/ncurses/ncurses.html"
++LICENSE = "MIT"
++SECTION = "libs"
++PATCHDATE = "20100501"
++PKGV = "${PV}.${PATCHDATE}"
++PR = "r8"
++
++# recipe is experimental for now...
++DEFAULT_PREFERENCE = "-1"
++
++DEPENDS = "ncurses-native"
++DEPENDS_virtclass-native = ""
++
++inherit autotools_stage binconfig
++
++SRC_URI = "${GNU_MIRROR}/ncurses/ncurses-${PV}.tar.gz;name=tarball \
++        ftp://invisible-island.net/ncurses/5.7/ncurses-5.7-20100424-patch.sh.bz2;apply=yes;name=p20100424sh \
++\
++        ftp://invisible-island.net/ncurses/5.7/ncurses-5.7-${PATCHDATE}.patch.gz;name=p20100501 \
++        file://tic-hang.patch \
++"
++
++SRC_URI[tarball.md5sum] = "cce05daf61a64501ef6cd8da1f727ec6"
++SRC_URI[tarball.sha256sum] = "0a9bdea5c7de8ded5c9327ed642915f2cc380753f12d4ad120ef7da3ea3498f4"
++SRC_URI[p20100424sh.md5sum] = "3a5f76613f0f7ec3e0e73b835bc24864"
++SRC_URI[p20100424sh.sha256sum] = "1e9d70d2d1fe1fea471868832c52f1b9cc6065132102e49e2a3755f2f4f5be53"
++SRC_URI[p20100501.md5sum] = "6518cfa5d45e9069a1e042468161448b"
++SRC_URI[p20100501.sha256sum] = "a97ccc30e4bd6fbb89564f3058db0fe84bd35cfefee831556c500793b477abde"
++
++PARALLEL_MAKE = ""
++EXTRA_AUTORECONF = "-I m4"
++
++# Whether to enable separate widec libraries; must be 'true' or 'false'
++ENABLE_WIDEC = "true"
++# Build breaks on Ubuntu else :(
++ENABLE_WIDEC_virtclass-native = "false"
++
++
++# Override the function from the autotools class; ncurses requires a
++# patched autoconf213 to generate the configure script. This autoconf
++# is not available so that the shipped script will be used.
++do_configure() {
++        for i in \
++        'narrowc --with-ticlib' \
++        'widec   --enable-widec --without-progs'; do
++                set -- $i
++                mkdir -p $1
++                cd $1
++                shift
++
++                oe_runconf \
++                        --disable-static \
++                        --without-debug \
++                        --without-ada \
++                        --enable-hard-tabs \
++                        --enable-xmc-glitch \
++                        --enable-colorfgbg \
++                        --with-termpath='${sysconfdir}/termcap:${datadir}/misc/termcap' \
++                        --with-terminfo-dirs='${sysconfdir}/terminfo:${datadir}/terminfo' \
++                        --with-shared \
++                        --disable-big-core \
++                        --program-prefix= \
++                        --with-termlib=tinfo \
++                        --enable-sigwinch \
++                        --enable-pc-files \
++                        --with-build-cc="${BUILD_CC}" \
++                        --with-build-cpp="${BUILD_CPP}" \
++                        --with-build-ld="${BUILD_LD}" \
++                        --with-build-cflags="${BUILD_CFLAGS}" \
++                        --with-build-cppflags='${BUILD_CPPFLAGS} -D_GNU_SOURCE' \
++                        --with-build-ldflags='${BUILD_LDFLAGS}' \
++                        "$@"
++                cd ..
++        done
++}
++
++do_compile() {
++        oe_runmake -C narrowc libs
++        oe_runmake -C narrowc/progs
++
++        ! ${ENABLE_WIDEC} || \
++            oe_runmake -C widec libs
++}
++
++do_install() {
++        ## This variable is used as the installation direction of .pc
++        ## files and the cross variant is wrong here. pkgconfig itself
++        ## is not used so that this variable does not interfere with
++        ## the rest of the build process
++        sed -i \
++            -e 's!^\(PKG_CONFIG_LIBDIR.*=\).*!\1 /usr/lib/pkgconfig!g' \
++            misc/Makefile.in
++
++        ! ${ENABLE_WIDEC} || \
++               oe_runmake -C widec 'DESTDIR=${D}' \
++               install.libs install.includes install.man
++
++        oe_runmake -C narrowc 'DESTDIR=${D}' install.libs install.progs install.data
++
++
++        cd narrowc
++
++        # include some basic terminfo files
++        # stolen ;) from gentoo and modified a bit
++        for x in ansi console dumb linux rxvt screen sun vt{52,100,102,200,220} xterm-color xterm-xfree86
++        do
++                local termfile="$(find "${D}${datadir}/terminfo/" -name "${x}" 2>/dev/null)"
++                local basedir="$(basename $(dirname "${termfile}"))"
++
++                if [ -n "${termfile}" ]
++                then
++                        install -d ${D}${sysconfdir}/terminfo/${basedir}
++                        mv ${termfile} ${D}${sysconfdir}/terminfo/${basedir}/
++                        ln -s /etc/terminfo/${basedir}/${x} \
++                                ${D}${datadir}/terminfo/${basedir}/${x}
++                fi
++        done
++        # i think we can use xterm-color as default xterm
++        if [ -e ${D}${sysconfdir}/terminfo/x/xterm-color ]
++        then
++                ln -sf xterm-color ${D}${sysconfdir}/terminfo/x/xterm
++        fi
++
++        if [ "${PN}" = "ncurses" ]; then
++                mv ${D}${bindir}/clear ${D}${bindir}/clear.${PN}
++                mv ${D}${bindir}/reset ${D}${bindir}/reset.${PN}
++        fi
++}
++
++python populate_packages_prepend () {
++        libdir = bb.data.expand("${libdir}", d)
++        do_split_packages(d, libdir, '^lib(.*)\.so\..*', 'ncurses-lib%s', 'ncurses %s library', prepend=True, extra_depends = '', allow_links=True)
++}
++
++pkg_postinst_ncurses-tools () {
++        if [ "${PN}" = "ncurses" ]; then
++                update-alternatives --install ${bindir}/clear clear clear.${PN} 100
++                update-alternatives --install ${bindir}/reset reset reset.${PN} 100
++        fi
++}
++
++
++pkg_prerm_ncurses-tools () {
++        if [ "${PN}" = "ncurses" ]; then
++                update-alternatives --remove clear clear.${PN}
++                update-alternatives --remove reset reset.${PN}
++        fi
++}
++
++BBCLASSEXTEND = "native sdk"
++
++PACKAGES = " \
++  ncurses-dbg \
++  ncurses-dev \
++  ncurses-doc \
++  ncurses-tools \
++  ncurses \
++  ncurses-static \
++  ncurses-terminfo \
++"
++RSUGGESTS_${PN} = "ncurses-terminfo"
++
++FILES_${PN} = "\
++  ${bindir}/tput \
++  ${bindir}/tset \
++  ${datadir}/tabset \
++  ${sysconfdir}/terminfo \
++"
++
++# This keeps only tput/tset in ncurses
++# clear/reset are in already busybox
++FILES_ncurses-tools = "\
++  ${bindir}/tic \
++  ${bindir}/toe \
++  ${bindir}/infotocap \
++  ${bindir}/captoinfo \
++  ${bindir}/infocmp \
++  ${bindir}/clear.${PN} \
++  ${bindir}/reset.${PN} \
++  ${bindir}/tack \
++  ${bindir}/tabs \
++"
++
++FILES_ncurses-terminfo = "\
++  ${datadir}/terminfo \
++"
+-- 
+1.7.2
 
-Frans
 
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
