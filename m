@@ -1,36 +1,36 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1Oerhe-0000lV-0D
+	(envelope-from <aalonso00@gmail.com>) id 1Oerhu-0001D6-Cg
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 17:41:01 +0200
-Received: by mail-wy0-f175.google.com with SMTP id 38so1347518wyb.6
+	Fri, 30 Jul 2010 17:41:16 +0200
+Received: by wwb34 with SMTP id 34so23251wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 08:40:35 -0700 (PDT)
+	Fri, 30 Jul 2010 08:40:49 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=Qzc2dVIotkczEmVh+1AwBjJ29qxu0+VY0S66zUI0eUc=;
-	b=mxxmlcAed48JBtq+ALVsXXmQMgVuYzFt1b4pv+4zGx45kPRP1HyGziodRUjSBGXpJc
-	81CCvazboBINCezQGE1FXF3fCZeBZarHK33sE2hTCETIKCmu/keXk19qmxevISQry3xR
-	IhN5hYdRTFIeJUXbt/xJWC4/fW4+0siV+98Lg=
+	bh=98/o11vObIdjxwW2QbQBCXhg7rHiA9HNnzr/G0FRI7E=;
+	b=UbMEBIvmUVoqJZICgeOlmJMAvwDofxc/xoQyhlqNNryIxO006ZPW5JmOo4I+9LusgB
+	4WQaY8Mi6i3vhlKnX199z3y1kMgdcMuCsmTXJ0TRyjw39zwI2d7kN+IW90IF797Mh718
+	mr5gimpGTLReRFl6vCeLR02aONMVPESI8MLf0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=Va1zFUM4T98du19Bj9zPa6K6lKpNi2XA99/J24u0hhAGBNPK48M27e17ioPvm4ghc6
-	sfWwTPt+G98XTEiwOhydJ81zWaPjU9vukrgf9DFJah+rtSogVyUpDyjbZRqvCNHiyJV1
-	ZegZoiSB2bg44ClUvVp9WWZLcjs9jxl/BJAX8=
-Received: by 10.227.132.129 with SMTP id b1mr2000177wbt.5.1280504435733;
-	Fri, 30 Jul 2010 08:40:35 -0700 (PDT)
+	b=c/mB4Hz+Wg0t8H+g+zH4K5q5aVLZn8T5KR8KDYUOW0yxrSZP8GwbySmCZNvxkjOsct
+	Nz4A/gPa/IN4q61pVWJa9Va0a1uJrmIcnpmc86sLapomb7EKplGc51rLDtQlJkdlhFnr
+	YyI0rBcY0YZkDqQqfuj3qworoHyzqAhIYGJdw=
+Received: by 10.227.94.138 with SMTP id z10mr1872569wbm.166.1280504448826;
+	Fri, 30 Jul 2010 08:40:48 -0700 (PDT)
 Received: from aalonso-pc.lan ([201.153.218.190])
-	by mx.google.com with ESMTPS id h3sm2015014wbb.15.2010.07.30.08.40.31
-	(version=SSLv3 cipher=RC4-MD5); Fri, 30 Jul 2010 08:40:34 -0700 (PDT)
+	by mx.google.com with ESMTPS id h3sm2015014wbb.15.2010.07.30.08.40.46
+	(version=SSLv3 cipher=RC4-MD5); Fri, 30 Jul 2010 08:40:48 -0700 (PDT)
 From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jul 2010 10:42:28 -0500
-Message-Id: <1280504555-3633-3-git-send-email-aalonso00@gmail.com>
+Date: Fri, 30 Jul 2010 10:42:30 -0500
+Message-Id: <1280504555-3633-5-git-send-email-aalonso00@gmail.com>
 X-Mailer: git-send-email 1.7.2
 In-Reply-To: <openembedded-devel@lists.openembedded.org>
 References: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Connect-IP: 74.125.82.43
 X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 03/10] xilinx-virtex5: new file
+Subject: [PATCH 05/10] linux-xilinx: new kernel recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,60 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 15:41:01 -0000
+X-List-Received-Date: Fri, 30 Jul 2010 15:41:17 -0000
 
-* Config machine for virtex5 platforms ml505, ml507, ml510
-* Hardware reference design at
-  http://github.com/aalonso/xilinx-ml507
+* Kernel recipe for generic xilinx platforms
+* Inherits xilinx-bsp.bbclass to pass device
+  tree for the final arch
 
 Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 ---
- conf/machine/xilinx-virtex5.conf |   36 ++++++++++++++++++++++++++++++++++++
- 1 files changed, 36 insertions(+), 0 deletions(-)
- create mode 100644 conf/machine/xilinx-virtex5.conf
+ recipes/linux/linux-xilinx_git.bb |   35 +++++++++++++++++++++++++++++++++++
+ 1 files changed, 35 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/linux/linux-xilinx_git.bb
 
-diff --git a/conf/machine/xilinx-virtex5.conf b/conf/machine/xilinx-virtex5.conf
+diff --git a/recipes/linux/linux-xilinx_git.bb b/recipes/linux/linux-xilinx_git.bb
 new file mode 100644
-index 0000000..2e11b96
+index 0000000..6f6d5a5
 --- /dev/null
-+++ b/conf/machine/xilinx-virtex5.conf
-@@ -0,0 +1,36 @@
-+# Copyright (C) 2010, Adrian Alonso <aalonso00@gmail.com>
-+# Released under the MIT license (see packages/COPYING)
-+#@TYPE: Machine
-+#@Name: Xilinx Virtex5 FPGA Development Platforms
-+#@DESCRIPTION: Machine configuration for Xilinx Virtex5 boards
-+# Supported boards ML506, ML507, ML510
++++ b/recipes/linux/linux-xilinx_git.bb
+@@ -0,0 +1,35 @@
++require linux.inc
 +
-+TARGET_ARCH = "powerpc"
-+TARGET_CPU  = "440"
-+TARGET_FPU  = "soft"
-+#tune for the 440 cpu
-+require conf/machine/include/tune-ppc440.inc
++DESCRIPTION = "Linux kernel for Xilinx platforms"
 +
-+PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx"
-+PREFERRED_VERSION_u-boot_xilinx-virtex5 = "u-boot-xilinx"
++COMPATIBLE_MACHINE = "xilinx-virtex4|xilinx-virtex5|xilinx-mb-gen"
++DEFAULT_PREFERENCE = "-1"
++DEFAULT_PREFERENCE_xilinx-virtex4 = "1"
++DEFAULT_PREFERENCE_xilinx-virtex5 = "1"
++DEFAULT_PREFERENCE_xilinx-mb-gen = "1"
 +
-+KERNEL_IMAGETYPE = "uImage"
++PV = "2.6.33+git"
++PR = "r0"
 +
-+MACHINE_FEATURES = "kernel26 apm ext2 vfat ethernet screen"
-+MACHINE_EXTRA_RECOMMENDS = "kernel-modules"
++SRCREV = "17431547113100a3ae0a622b9f76ad17fb76eb56"
++SRC_URI = "git://git.xilinx.com/linux-2.6-xlnx.git;protocol=git \
++           file://xilinxfb-update-tft-comp.patch \
++	    file://defconfig"
 +
-+UBOOT_ENTRYPOINT ?= "0x00000000"
-+UBOOT_LOADADDRESS ?= "0x00000000"
++PV_xilinx-mb-gen = "2.6.34+git"
++SRCREV_xilinx-mb-gen = "382e23534109197daddbcbcdf5aae75c674638e7"
++SRC_URI_xilinx-mb-gen = "git://developer.petalogix.com/linux-2.6-microblaze.git;protocol=git \
++                       file://defconfig"
 +
-+# Xilinx EDK override hardware  definitions for xilinx-bsp
-+# Include in your local.conf
-+# XILINX_BSP_PATH = "complete path for Xilinx XPS project"
-+# XILINX_BOARD = "ml507"
++inherit kernel xilinx-bsp
 +
-+# Don't use tty1
-+# USE_VT = "0"
-+SERIAL_CONSOLE = "9600 ttyS0"
++TARGET_BOARD = "${@map_target(bb.data.getVar('TARGET_ARCH', d, 1), d)}"
++KERNEL_DEVICETREE_xilinx-virtex4 = "arch/${ARCH}/boot/dts/virtex${TARGET_BOARD}.dts"
++KERNEL_DEVICETREE_xilinx-virtex5 = "arch/${ARCH}/boot/dts/virtex${TARGET_BOARD}.dts"
++KERNEL_DEVICETREE_xilinx-mb-gen = "arch/${ARCH}/platform/generic/${TARGET_BOARD}.dts"
 +
-+# Device nodes add xsa for (system ace)
-+IMAGE_DEVICE_TABLES = "files/device_table-minimal.txt \
-+                       files/device_table_add-xsa.txt"
++S = "${WORKDIR}/git"
++
++do_configure_prepend() {
++    install -m 0644 ${WORKDIR}/defconfig ${S}/.config
++}
 -- 
 1.7.2
 
