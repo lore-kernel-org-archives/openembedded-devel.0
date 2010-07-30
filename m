@@ -1,48 +1,35 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OexL3-0002xM-CD
+	(envelope-from <developer@alexandfliss.com>) id 1Oey3v-00076o-BK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 23:41:59 +0200
-Received: by ywe9 with SMTP id 9so829587ywe.6
+	Sat, 31 Jul 2010 00:28:28 +0200
+Received: by wyb38 with SMTP id 38so1744250wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 14:41:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=mj5M+aMIy42bebmGv+a4QlDPXnuXjhs68HKT4n85e3Q=;
-	b=dst5vH07MlGIF5Roqo4cxjjtlhQxep6bm3EFMeNZtixEvA0kmMVwF5tvFpHhfm3nqT
-	YgqUa+Y7QUMkXg4onbe5ptkmxC5yE1DhLdfwnaQ3/GdXb+pGs53XdoTPjUFa7eEQiBiI
-	fZPTc56nswl689ZVLyyWhfx6r9xri6NbXN1Jg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=iEtDZ34F92KC7xquIEzmkwymDTrOqs0ddNbM6/7UvsVUD9SfIsOoFGLwGhcZMnTjVY
-	0Ohtz7iI71m3al112ipK8jh1EtsSThGEJqK+bvXXCSuaWA8vrfXI8mblapJurN/h6KGn
-	Fus1YzbzXy4OMd3vXa2mhkE0Yv6aJPBx+I7ec=
-Received: by 10.150.48.32 with SMTP id v32mr4029331ybv.115.1280526090282; Fri, 
-	30 Jul 2010 14:41:30 -0700 (PDT)
+	Fri, 30 Jul 2010 15:27:47 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.42.7.138 with HTTP; Fri, 30 Jul 2010 14:41:10 -0700 (PDT)
-In-Reply-To: <113134CF306E8E4CACC27BE5937261B20931FB4CF0@AUSX7MCPS303.AMER.DELL.COM>
-References: <AANLkTilMpRi2oaQWKO7BcgkhZeVojh7GA_-5_3SDG1A4@mail.gmail.com> 
-	<113134CF306E8E4CACC27BE5937261B20931AA0A82@AUSX7MCPS303.AMER.DELL.COM>
-	<AANLkTikN2OKgSvwW4vQ4h5tegaxdkDmYZpmMK7Fy+a1g@mail.gmail.com> 
-	<113134CF306E8E4CACC27BE5937261B20931FB4CF0@AUSX7MCPS303.AMER.DELL.COM>
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Fri, 30 Jul 2010 15:41:10 -0600
-Message-ID: <AANLkTimN2subbRqO5B4CEDPAQy-gd00Z8Up7V+B-suB2@mail.gmail.com>
-To: Sean_Hudson@dell.com, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+Received: by 10.216.81.213 with SMTP id m63mr2275186wee.25.1280528859327; Fri, 
+	30 Jul 2010 15:27:39 -0700 (PDT)
+Sender: developer@alexandfliss.com
+Received: by 10.216.235.233 with HTTP; Fri, 30 Jul 2010 15:27:39 -0700 (PDT)
+Received: by 10.216.235.233 with HTTP; Fri, 30 Jul 2010 15:27:39 -0700 (PDT)
+In-Reply-To: <201007292348.56359.roman@khimov.ru>
+References: <AANLkTi=JK37hYh26rGz3sY5byksJ0js_ihjk4y7tq-ad@mail.gmail.com>
+	<201007292348.56359.roman@khimov.ru>
+Date: Fri, 30 Jul 2010 23:27:39 +0100
+X-Google-Sender-Auth: R8cNLFhjvMLLEkbcrf8Kx2zsbdc
+Message-ID: <AANLkTikLH1mVOLwJVbyQbgpYxqH2jZ2vebSnDgn11n5-@mail.gmail.com>
+From: Alex Bennee <kernel-hacker@bennee.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: developer@alexandfliss.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] Add a waf bitbake class. (Koen Kooi)
+Subject: Re: [PATCH] Version bump tzcode/data to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,104 +43,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 21:41:59 -0000
-Content-Type: text/plain; charset=windows-1252
+X-List-Received-Date: Fri, 30 Jul 2010 22:28:30 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-Thanks for your help, I got it working.
+Will do. I was having trouble getting git email set up so I used the web UI
+(falsely) assuming it wouldn't munge it up.
 
-http://blog.coolaj86.info/2010/07/26/WAF-on-OpenEmbedded
+On 29 Jul 2010 20:51, "Roman I Khimov" <roman@khimov.ru> wrote:
 
-AJ ONeal
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 27 =D0=B8=D1=8E=D0=BB=D1=8F 2010=
+ 13:58:21 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Alex Bennee =D0=BD=D0=B0=D0=BF=D0=
+=B8=D1=81=D0=B0=D0=BB:
 
-On Tue, Jul 27, 2010 at 10:44 AM, <Sean_Hudson@dell.com> wrote:
+> -SRC_URI[tzcode-2010j.md5sum] =3D "5ba8345720296d3a659b349b2052d139"
+> -SRC_URI[tzcode-2010j.sha256s...
+I'd be happy to apply your patch, but
 
->  AJ,
->
->
->
->   Yes, by design, WAF is generally include with the source code.  (see
-> this link<http://freehackers.org/~tnagy/wafbook/index.html#_installing_wa=
-f_on_a_system>for reference) There is no specification to WAF to cross comp=
-ile, rather, it
-> will pick up the environment from the OE shell and act accordingly.  One
-> additional thought, in order to get the example binary into the package
-> correctly, don=92t forget to add a FILES_${PN} directive to your OE recip=
-e.
->
->
->
->   Hope this helps!
->
->
->
->     -Sean
->
->
->
-> *From:* AJ ONeal [mailto:coolaj86@gmail.com]
-> *Sent:* Monday, July 26, 2010 11:12 PM
->
-> *To:* Hudson, Sean
-> *Subject:* Re: [oe] [PATCH] Add a waf bitbake class. (Koen Kooi)
->
->
->
-> I'm trying to get a Hello World example together using bitbake and WAF
->
->
->
-> http://blog.coolaj86.info/2010/07/26/WAF-on-OpenEmbedded
->
->
->
-> Will you please help me complete this?
->
->
->
-> Is WAF supposed to be packaged with the source code?
->
-> How do we specify that WAF should cross compile rather than regular
-> compile?
->
->
->
-> Thanks,
->
->
->
-> AJ ONeal
->
-> On Thu, Jul 8, 2010 at 1:15 PM, <Sean_Hudson@dell.com> wrote:
->
-> It's quite simple.  In the recipe, inherit from the waf class, and you're
-> good to go.  One caveat, I didn't see this pulled into OE by one of the
-> committers, so be aware that it is not available other than through the
-> mailing list...
->
-> Sample recipe using the waf class...
->        DESCRIPTION =3D "foo"
->        LICENSE =3D "GPL"
->        SRC_URI =3D ""
->        S =3D "${WORKDIR}/trunk"
->
->        inherit waf
->
-> From: AJ ONeal [mailto:coolaj86@gmail.com]
-> Sent: Thursday, July 08, 2010 12:42 AM
-> To: Hudson, Sean
-> Subject: Re: [oe] [PATCH] Add a waf bitbake class. (Koen Kooi)
->
->
-> How would I use this patch with something like Node.js, which using waf f=
-or
-> compiling?
->
-> Do you have any sample .bb files that show how this is done? Or any
-> documentation?
->
-> AJ ONeal
->
->
->
+1) it's broken:
+
+patching file recipes/tzcode/tzcode-native_2010j.bb
+patch: **** malformed patch at line 49:
+"f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
+
+Please resend it with `git send-email` rather than (what seems to be) copy-
+pasting to e-mail client that word-wrapped it
+
+2) "Signed-off-by" is missing (see
+   http://wiki.openembedded.net/index.php/Commit_Policy )
+
+Thanks.
+
+--
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
