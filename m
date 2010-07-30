@@ -1,44 +1,44 @@
-Received: from mail-ww0-f41.google.com ([74.125.82.41])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OeriA-0001YR-QU
+	(envelope-from <raj.khem@gmail.com>) id 1OerkG-0003fT-Q9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 17:41:31 +0200
-Received: by wwd20 with SMTP id 20so7524700wwd.0
+	Fri, 30 Jul 2010 17:43:38 +0200
+Received: by gyd8 with SMTP id 8so716637gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 08:41:01 -0700 (PDT)
+	Fri, 30 Jul 2010 08:43:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=wnDhqdW358pT2lC6GDAaUUMtTCi3ucxBrf16Av0SSJA=;
-	b=NWZeaO2WGIZnjkXz90si4JP4+eTIegpWm9uux8ehPNBiqJcHwpS1hMpK3G+5CHrRGb
-	QkY/pZElsbrXX/EFrg4WuMQ+siS0wQK904UWHNYRdtE12jOK3vK0DmzVzOjEq8Z5DXhI
-	GjVJkt98NNGOF9iHewCvwBu74zq4kDc7NH4fI=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=kmQGzS6j5bI2D8U43ipgwLFv0/XTdubLRJUAGemXcrA=;
+	b=sF5NgsG0/Qq574eSLleel7W2E43EtYMeSOk67msDiKXFXb4MK4UG3Bg5d9NCEh1s+t
+	RClEIwqYDaAjqVFy9oxSoGCpPhr0qJ1f4VB8h0WHIdw/ctAxXW1iSTwC9/oCanaSGU3M
+	YiAwjM0xxUszKXgf27z2taUWdJzcsuI8iCsj8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=t0lEWcclzOjz3SAE3YwptDYrLVFV+wjl3ad+fqVkKfuHC7/lAThz1ml6mtDBL7shdN
-	CVtVnhEC6qjn/oTa4hvPt0Ka0K90nOGI5y8ki3SdYxDX/10Yad3DwvoMIo1wa9DuR6dz
-	bgjvaAVnP0zDOl87K721cFoIXmaIbLvSTUmRU=
-Received: by 10.227.69.202 with SMTP id a10mr1929064wbj.81.1280504461113;
-	Fri, 30 Jul 2010 08:41:01 -0700 (PDT)
-Received: from aalonso-pc.lan ([201.153.218.190])
-	by mx.google.com with ESMTPS id h3sm2015014wbb.15.2010.07.30.08.40.58
-	(version=SSLv3 cipher=RC4-MD5); Fri, 30 Jul 2010 08:41:00 -0700 (PDT)
-From: Adrian Alonso <aalonso00@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=lcAvH+gpl1VXvbjfuQHnzqloZ86RfU5BxFzpgRAOlAmdB5UJugqlWG0RBTk7L/H5c2
+	cTzm6dksoEU3fHHdryAN2Q+oWqk+dtDIiBhD5Py6plZzf6B6v4o89GL4jrl1vYVcomxl
+	XsQHiu8XowJHNayB3/PhQlMCYyjHI0IixZaDE=
+Received: by 10.151.134.2 with SMTP id l2mr3498151ybn.195.1280504595420; Fri, 
+	30 Jul 2010 08:43:15 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.186.88 with HTTP; Fri, 30 Jul 2010 08:42:55 -0700 (PDT)
+In-Reply-To: <i2u4cr$gkg$1@dough.gmane.org>
+References: <1280475746-15699-1-git-send-email-raj.khem@gmail.com> 
+	<i2u4cr$gkg$1@dough.gmane.org>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 30 Jul 2010 08:42:55 -0700
+Message-ID: <AANLkTinaX2p1LD6SbY31Fgn0kZCEK3ALKKdg5P-GF=4y@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jul 2010 10:42:34 -0500
-Message-Id: <1280504555-3633-9-git-send-email-aalonso00@gmail.com>
-X-Mailer: git-send-email 1.7.2
-In-Reply-To: <openembedded-devel@lists.openembedded.org>
-References: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.41
-X-SA-Exim-Mail-From: aalonso00@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 09/10] xorg-xserver-conf: virtex5 machine support
+Subject: Re: [PATCH] bitbake.conf, cross.bbclass: Make multi-machine 	toolchains to co-exist
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,75 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 15:41:32 -0000
+X-List-Received-Date: Fri, 30 Jul 2010 15:43:38 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Add xorg conf for virtex5 family targets
-* Increase PR
+On Fri, Jul 30, 2010 at 2:01 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 30-07-10 09:42, Khem Raj wrote:
+>> From: Tom Rini <tom_rini@mentor.com>
+>>
+>> the patch Tom sent has line breaks etc. this is same patch formatted for anybody to test
+>
+> MACHINE=beagleboard bitbake ffmpeg:
+>
+> | running configure fragment for nptl/sysdeps/pthread
+> | configure: error: compiler support for __thread is required
+> | ERROR: Function do_configure failed
+> NOTE: package glibc-initial-2.9-r36.3: task do_configure: Failed
 
-Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
----
- .../xserver-xorg-conf/xilinx-virtex5/xorg.conf     |   38 ++++++++++++++++++++
- recipes/xorg-xserver/xserver-xorg-conf_0.1.bb      |    2 +-
- 2 files changed, 39 insertions(+), 1 deletions(-)
- create mode 100644 recipes/xorg-xserver/xserver-xorg-conf/xilinx-virtex5/xorg.conf
+This is because its not finding the binutils in right place I think.
 
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf/xilinx-virtex5/xorg.conf b/recipes/xorg-xserver/xserver-xorg-conf/xilinx-virtex5/xorg.conf
-new file mode 100644
-index 0000000..61f0f9f
---- /dev/null
-+++ b/recipes/xorg-xserver/xserver-xorg-conf/xilinx-virtex5/xorg.conf
-@@ -0,0 +1,38 @@
-+# Xorg conf file for Xilinx platforms
-+Section "Monitor"
-+	Identifier "LCD Panel"
-+EndSection
-+
-+Section "Device"
-+    Identifier  "Xilinx frame buffer"
-+    Driver      "fbdev"
-+EndSection
-+
-+Section "Screen"
-+    Identifier  "Default Screen"
-+    Device      "Xilinx frame buffer"
-+    Monitor     "LCD Panel"
-+	SubSection "Display"
-+		Depth   24
-+        Modes   "640x480"
-+	EndSubSection
-+EndSection
-+
-+Section "InputDevice"
-+    Identifier  "Keyboard"
-+    Driver      "kbd"
-+EndSection
-+
-+Section "InputDevice"
-+    Identifier  "Mouse"
-+    Driver      "mouse"
-+    Option      "protocol" "auto"
-+    Option      "device" "/dev/input/mice"
-+EndSection
-+
-+Section "ServerLayout"
-+    Identifier  "Default Layout"
-+    Screen      0 "Default Screen" 0 0
-+    InputDevice "Keyboard"
-+    InputDevice "Mouse"
-+EndSection
-diff --git a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-index 976dfac..c3dbb01 100644
---- a/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-+++ b/recipes/xorg-xserver/xserver-xorg-conf_0.1.bb
-@@ -1,5 +1,5 @@
- DESCRIPTION = "Machine specific xorg.conf files"
--PR = "r29"
-+PR = "r30"
- 
- SRC_URI = "file://xorg.conf"
- 
--- 
-1.7.2
-
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMUpTbMkyGM64RGpERAt9YAJ9baoI1zJvmEuGPj9gvrR2eSkJ5CQCeKx++
+> fLr6Le14u/zC3AU41Jj0obk=
+> =itZg
+> -----END PGP SIGNATURE-----
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
