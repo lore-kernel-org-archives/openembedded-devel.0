@@ -1,64 +1,44 @@
-Received: from mailgw1.fjfi.cvut.cz ([147.32.9.3])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <zub@linux.fjfi.cvut.cz>) id 1Oekfw-00086W-GV
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 30 Jul 2010 10:10:42 +0200
-Received: from localhost (localhost.localdomain [127.0.0.1])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id C328143D5C
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OekrY-0006wx-Uw for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Jul 2010 10:22:51 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OekrC-0002Sa-5F for openembedded-devel@lists.openembedded.org;
+	Fri, 30 Jul 2010 10:22:18 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 30 Jul 2010 10:22:18 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 10:10:11 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz C328143D5C
-DKIM-Signature: v=1; a=rsa-sha1; c=simple/simple; d=fjfi.cvut.cz; s=beta512;
-	t=1280477411; i=@fjfi.cvut.cz; bh=U1ilGbEsfnzJaGjjWZP8iVAMKJM=;
-	h=Date:From:To:Subject:In-Reply-To:Message-ID:References:
-	MIME-Version:Content-Type;
-	b=DjYJA6gFaE+y1XX124IFlUxowo8+7etiI9llFT/P7WbqRXNI/UH3Q/8rN6rdnMP53
-	11vOAxCRg0lzr4OoumnAA==
-X-CTU-FNSPE-Virus-Scanned: amavisd-new at fjfi.cvut.cz
-X-CTU-FNSPE: this_is_mailgw_for_ctu_fnspe_header
-X-CTU-FNSPE-Helo: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Client-Address: 147.32.5.111
-X-CTU-FNSPE-Client-Name: linux.fjfi.cvut.cz
-X-CTU-FNSPE-Sender: zub@linux.fjfi.cvut.cz
-X-CTU-FNSPE-Recip: openembedded-devel@lists.openembedded.org
-Received: from mailgw1.fjfi.cvut.cz ([127.0.0.1])
-	by localhost (mailgw1.fjfi.cvut.cz [127.0.0.1]) (amavisd-new,
-	port 10026) with ESMTP id fsU2+gGm3RuU
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 10:10:08 +0200 (CEST)
-Received: from linux.fjfi.cvut.cz (linux.fjfi.cvut.cz [147.32.5.111])
-	by mailgw1.fjfi.cvut.cz (Postfix) with ESMTP id 93A3D43D5A
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 10:10:08 +0200 (CEST)
-X-DKIM: Sendmail DKIM Filter v2.8.2 mailgw1.fjfi.cvut.cz 93A3D43D5A
-X-DomainKeys: Sendmail DomainKeys Filter v1.0.2 mailgw1.fjfi.cvut.cz 93A3D43D5A
-Received: by linux.fjfi.cvut.cz (Postfix, from userid 1001)
-	id 5FA2D46774; Fri, 30 Jul 2010 10:10:08 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by linux.fjfi.cvut.cz (Postfix) with ESMTP id 528DE46773
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 10:10:08 +0200 (CEST)
-Date: Fri, 30 Jul 2010 10:10:08 +0200 (CEST)
-From: David Kozub <zub@linux.fjfi.cvut.cz>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-In-Reply-To: <20100730075731.GD12277@mx.loc>
-Message-ID: <alpine.LRH.2.00.1007301007020.21449@linux.fjfi.cvut.cz>
-References: <1280415061-28353-1-git-send-email-chase.maupin@ti.com>
-	<20100729205504.GE29814@mx.loc>
-	<131E5DFBE7373E4C8D813795A6AA7F0802E9149617@dlee06.ent.ti.com>
-	<20100730075731.GD12277@mx.loc>
-User-Agent: Alpine 2.00 (LRH 1167 2008-08-23)
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 147.32.9.3
-X-SA-Exim-Mail-From: zub@linux.fjfi.cvut.cz
+	Fri, 30 Jul 2010 10:22:18 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 30 Jul 2010 10:22:06 +0200
+Message-ID: <i2u23e$97d$1@dough.gmane.org>
+References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>	<i2rik7$ds1$1@dough.gmane.org>
+	<4C516EF8.3080804@balister.org>
+	<AANLkTikZQB39U7kUv9-0v-3gysX=tYFuwUiq3ygXJzAL@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <AANLkTikZQB39U7kUv9-0v-3gysX=tYFuwUiq3ygXJzAL@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/1] distribute_license: added class to copy license files
+Subject: Re: OE recipe tree quality
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -72,23 +52,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 30 Jul 2010 08:10:45 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 30 Jul 2010 08:22:51 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
->>>> +    set -f
->>>
->>> hush: set: -f: invalid option
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 30-07-10 09:21, Esben Haabendal wrote:
+> On Thu, Jul 29, 2010 at 2:07 PM, Philip Balister <philip@balister.org> wrote:
 >>
->> I thought bash was the standard shell for working with OE.  Is that wrong?
->
-> You're right, it is (and -f is a mandatory flag so disregard this,
-> sorry)
+>>
+>> On 07/29/2010 05:45 AM, Koen Kooi wrote:
+>>>
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 29-07-10 10:50, Frans Meulenbroeks wrote:
+>>>>
+>>>> Dear all,
+>>>>
+>>>> Given the discussions on quality that sometimes pop up (and also
+>>>> triggered
+>>>> by Robert's message), I decided to kick off a bitbake -k world.
+>>>
+>>> Could you first explain to me why 'bitbake world' is a good way to
+>>> measure quality?
+>>>
+>>> I would think that building something like console-image and looking at
+>>> the following would be a much better metric:
+>>>
+>>> * does it build?
+>>> * are all the rootfs types working?
+>>> * does the image do what it is supposed to do?
+>>> * Are all the licenses of the output packages correct?
+>>> * Do the output packages have any spurious deps?
+>>> * Is the content of the output packages correct?
+>>> * Are there any known CVEs in the resulting packages?
+>>> * Did packaged-staging do its job?
+>>> * What kind of QA errors and warnings were raised?
+>>> * Did all recipes pass recipe_sanity?
+>>> * Did all recipes conform to oe-stylize.py?
+>>>
+>>> etc
+>>>
+>>> I would actually advocate removing the 'world' feature from bitbake/OE
+>>> to stop people from wasting time on looking at bitbake world and have
+>>> them fix actual problems.
+>>
+>> bitbake world seems to be the source of pointless listserv discussions. Does
+>> it serve any purpose?
+> 
+> Pointless or not really depends on how you look at quality.
+> 
+> If you look at it as you, Koen and other OE long-timers, yes, it looks
+> rather pointless to have bitbake world.
+> But for those of us who have a different view on what quality is, then
+> bitbake world serves a purpose.
 
-Just yesterday I was spanked on IRC for wanting to use bashisms. I was 
-told OE should work with any reasonable posix-compliant shell.
+As Thomas points out, as soon as you start blacklisting things (which
+actually increases quality), bitbake world doesn't work anymore.
+That alone should be enough to kill it.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Regards,
+iD8DBQFMUouuMkyGM64RGpERAl42AKCE62tZc4ZGAH5WiLMPFNwn/YY0cACfTmMz
+/YBK4XU/u1PuqmzoyXbF1f8=
+=TNJJ
+-----END PGP SIGNATURE-----
 
-David
 
 
