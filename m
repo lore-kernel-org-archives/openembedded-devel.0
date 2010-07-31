@@ -1,40 +1,34 @@
-Received: from asmtpout030.mac.com ([17.148.16.105])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1OfAMm-00007L-RE
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 13:36:37 +0200
-MIME-version: 1.0
-Received: from [192.168.1.103] ([87.201.169.38])
-	by asmtp030.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0L6F003P36VWPB60@asmtp030.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	31 Jul 2010 04:36:00 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=6.0.2-1004200000 definitions=main-1007310047
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
-	definitions=2010-07-31_02:2010-07-31, 2010-07-31,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-In-reply-to: <AANLkTim_ffCU8p0VGgcZmuiN1q8cj6f3NS7=m2Bb8vSL@mail.gmail.com>
-Date: Sat, 31 Jul 2010 15:35:37 +0400
-Message-id: <6E215953-4068-4742-8423-E2CD9CA779D8@mac.com>
-References: <A806EA3C-FD29-40A7-82E7-9391241EF930@mac.com>
-	<AANLkTim_ffCU8p0VGgcZmuiN1q8cj6f3NS7=m2Bb8vSL@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OfANa-00028d-U4 for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 13:37:33 +0200
+Received: from f053040133.adsl.alicedsl.de ([78.53.40.133]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OfANH-0002qE-LU for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 11:37:07 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.105
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+In-Reply-To: <AANLkTimx9o-PzWgVJoPR3W3njy61wu1kowOPV2j-4vKM@mail.gmail.com>
+References: <openembedded-devel@lists.openembedded.org>
+	<1280504555-3633-2-git-send-email-aalonso00@gmail.com>
+	<1280573475.3721.44.camel@mattotaupa>
+	<AANLkTimx9o-PzWgVJoPR3W3njy61wu1kowOPV2j-4vKM@mail.gmail.com>
+Date: Sat, 31 Jul 2010 13:37:05 +0200
+Message-ID: <1280576225.3721.48.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Is bitbake 1.10 the latest stable version?
+Subject: Wiki: Added `pwclient` to page Patchwork (was: [PATCH 02/10] xilinx-virtex4: new file)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,23 +42,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 11:36:38 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 31 Jul 2010 11:37:33 -0000
+X-Groupsio-MsgNum: 21681
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ueM/vk1OOhSsgzzP0X+E"
 
-Hi,
-       If you ask me, updating bitbake and openembedded is bound to cause problems ! 
+--=-ueM/vk1OOhSsgzzP0X+E
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I was running bitbake 1.8 and oe from about 3 months ago, but when I tried updating it to bitbake 1.10 and did an update of my oe repo, I had failures for glibc,  complaining about LD_LIBRARY_PATH being set to the current directory. 
+Am Samstag, den 31.07.2010, 13:25 +0200 schrieb Frans Meulenbroeks:
+> 2010/7/31 Paul Menzel <paulepanter@users.sourceforge.net>
+>=20
+> > Am Freitag, den 30.07.2010, 10:42 -0500 schrieb Adrian Alonso:
+> > > +
+> > > +PREFERRED_PROVIDER_virtual/kernel =3D "linux-xilinx"
+> > > +PREFERRED_VERSION_u-boot_xilinx-virtex4 =3D "u-boot-xilinx"
+> >
+> > As far as I can see, those recipes are added in later patches. Would no=
+t
+> > that make this patch produce a non-working machine and therefore for
+> > example also render `git bisect` useless.
+> >
+> > If I was right, please reorder the patches. I do not know what the
+> > preferred way of adding new machines is. A big patch with all needed
+> > files or incremental ones.
+>=20
+> If you reorder please resubmit the full patchset, so it becomes clear wha=
+t
+> belongs together.
+> Also use PATCH v2 or so in he header to distinguish form earlier patches
 
-It is not the first time that this is happening, everytime you do an update of the oe repository, things start going wrong and you usually have to spend a whole week trying to fix things. 
-
-Luckily for me, I had a backup copy of my Fedora 12 x86 64-bit virtual machine, and now have switch to the older repository and working revision. 
-
-The resulting outputs of the OE build system are reproduceable, but OE behaviour by itself  across revisions is not. 
-
-Best regards,
-
-Elvis Dowson
+I updated the Wiki page for Patchwork [1].
 
 
+Thanks,
+
+Paul
+
+
+[1] http://wiki.openembedded.net/index.php/Patchwork
+
+--=-ueM/vk1OOhSsgzzP0X+E
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxUCuEACgkQPX1aK2wOHVhX6gCcDby72SxJwIrbnD1YD6a+nj22
+mt0AnjK5XiAmbhM4NlfAblYFEPtCWyZt
+=6vN4
+-----END PGP SIGNATURE-----
+
+--=-ueM/vk1OOhSsgzzP0X+E--
