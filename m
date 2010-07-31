@@ -1,46 +1,40 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from asmtpout030.mac.com ([17.148.16.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OfACj-0007zi-KX
+	(envelope-from <elvis.dowson@mac.com>) id 1OfAMm-00007L-RE
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 13:26:15 +0200
-Received: by bwz10 with SMTP id 10so1216774bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 04:25:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=StKkdns/QEv/EOw3qdzfZuPySZQW4a2OCi9uESC9OAI=;
-	b=i0EfIQdVPpG01AmbribL482lVkGqqVO8ZAPabKd0NJxZx5VuxlhTwALjY1u7EIUfTu
-	8x6eRMn2Kx3sVvmjSrtqHwqNSN17LEbSx6jLL0MXfmX+z7h0/+3v2kuk9ANfs0VTgETQ
-	aMckHooBAPjPXO/FoQOl9gFiTvApeE7ruAa0o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=e21G1eFzQB4hq0wF5JdCRqjVDvuaCDEicakjVteNfwFSzvw6FREWIgxnk3qKALEqv3
-	paTm55WMVH6PADnDRQTIzw1LWvuonnYYikCgk/ZO0ja+25xnzHd1GGQSJiEiti9mFa0U
-	DW200XOmJZxznu0Em4dATONiS/7FV3EJBIg7U=
-MIME-Version: 1.0
-Received: by 10.204.163.70 with SMTP id z6mr2209659bkx.29.1280575554028; Sat, 
-	31 Jul 2010 04:25:54 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sat, 31 Jul 2010 04:25:53 -0700 (PDT)
-In-Reply-To: <1280573475.3721.44.camel@mattotaupa>
-References: <openembedded-devel@lists.openembedded.org>
-	<1280504555-3633-2-git-send-email-aalonso00@gmail.com>
-	<1280573475.3721.44.camel@mattotaupa>
-Date: Sat, 31 Jul 2010 13:25:53 +0200
-Message-ID: <AANLkTimx9o-PzWgVJoPR3W3njy61wu1kowOPV2j-4vKM@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sat, 31 Jul 2010 13:36:37 +0200
+MIME-version: 1.0
+Received: from [192.168.1.103] ([87.201.169.38])
+	by asmtp030.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
+	(built Dec
+	16 2008; 32bit)) with ESMTPSA id <0L6F003P36VWPB60@asmtp030.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	31 Jul 2010 04:36:00 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=6.0.2-1004200000 definitions=main-1007310047
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
+	definitions=2010-07-31_02:2010-07-31, 2010-07-31,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <AANLkTim_ffCU8p0VGgcZmuiN1q8cj6f3NS7=m2Bb8vSL@mail.gmail.com>
+Date: Sat, 31 Jul 2010 15:35:37 +0400
+Message-id: <6E215953-4068-4742-8423-E2CD9CA779D8@mac.com>
+References: <A806EA3C-FD29-40A7-82E7-9391241EF930@mac.com>
+	<AANLkTim_ffCU8p0VGgcZmuiN1q8cj6f3NS7=m2Bb8vSL@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.105
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 02/10] xilinx-virtex4: new file
+Subject: Re: Is bitbake 1.10 the latest stable version?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,28 +48,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 11:26:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 31 Jul 2010 11:36:38 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-2010/7/31 Paul Menzel <paulepanter@users.sourceforge.net>
+Hi,
+       If you ask me, updating bitbake and openembedded is bound to cause problems ! 
 
-> Am Freitag, den 30.07.2010, 10:42 -0500 schrieb Adrian Alonso:
-> > +
-> > +PREFERRED_PROVIDER_virtual/kernel = "linux-xilinx"
-> > +PREFERRED_VERSION_u-boot_xilinx-virtex4 = "u-boot-xilinx"
->
-> As far as I can see, those recipes are added in later patches. Would not
-> that make this patch produce a non-working machine and therefore for
-> example also render `git bisect` useless.
->
-> If I was right, please reorder the patches. I do not know what the
-> preferred way of adding new machines is. A big patch with all needed
-> files or incremental ones.
->
+I was running bitbake 1.8 and oe from about 3 months ago, but when I tried updating it to bitbake 1.10 and did an update of my oe repo, I had failures for glibc,  complaining about LD_LIBRARY_PATH being set to the current directory. 
 
-If you reorder please resubmit the full patchset, so it becomes clear what
-belongs together.
-Also use PATCH v2 or so in he header to distinguish form earlier patches
+It is not the first time that this is happening, everytime you do an update of the oe repository, things start going wrong and you usually have to spend a whole week trying to fix things. 
 
-Frans
+Luckily for me, I had a backup copy of my Fedora 12 x86 64-bit virtual machine, and now have switch to the older repository and working revision. 
+
+The resulting outputs of the OE build system are reproduceable, but OE behaviour by itself  across revisions is not. 
+
+Best regards,
+
+Elvis Dowson
+
 
