@@ -1,37 +1,42 @@
-Received: from asmtpout025.mac.com ([17.148.16.100])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1Of8es-0008Rd-He
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 11:47:11 +0200
-MIME-version: 1.0
-Received: from [192.168.1.103] ([87.201.169.38])
-	by asmtp025.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0L6F007TL1TPZJ80@asmtp025.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	31 Jul 2010 02:46:46 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=6.0.2-1004200000 definitions=main-1007310031
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
-	definitions=2010-07-31_02:2010-07-31, 2010-07-31,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Sat, 31 Jul 2010 13:46:21 +0400
-Message-id: <9D2EA12D-A6C9-4965-A833-3B6CDCD8CD7B@mac.com>
-To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.100
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Of8hD-00007f-EZ for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 11:49:36 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Of8go-0004si-Gc for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 11:49:10 +0200
+Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 31 Jul 2010 11:49:10 +0200
+Received: from k.kooi by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 31 Jul 2010 11:49:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 31 Jul 2010 11:48:59 +0200
+Message-ID: <i30rie$8aq$1@dough.gmane.org>
+References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.5 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Which OE branch for beagleboard?
+Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,18 +50,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 09:47:11 -0000
-Content-transfer-encoding: 7BIT
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Sat, 31 Jul 2010 09:49:36 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi, 
-        Which OE branch should I use to build angstrom images for the beagleboard?
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Best regards,
+On 31-07-10 07:34, Khem Raj wrote:
+> Hi
+> 
+> Following series of patches are for making multi-machine toolchains co-exist with
+> new cross staging for toolchain.
+> 
+> It installs the toolchain in <native sysroot>/usr/${BASE_PACKAGE_ARCH}
+> this way we can have multiple toolchains co-existing for different sub-arches and major arches too.
+> 
+> I have booted a native-sdk-image on qemuarm successfully. The build for 
+> beagleboard minimal image using different versions of toolchain went all fine too.
+> 
+> Please test these patches and if seem ok provide some ACKS/NACKS
 
-Elvis Dowson
+Khem, thanks for working on this!
 
+Firing of a build now :)
 
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMU/GLMkyGM64RGpERAgsUAJ9pEYviFZX/DHvDnn5wYGPIpo45NACfZyYx
+ieovJk3ReBYIiOcjRfJwy3g=
+=YCE/
+-----END PGP SIGNATURE-----
 
 
 
