@@ -1,43 +1,41 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OfHDB-0001iS-Hx for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 20:55:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OfHCr-00043F-Gt for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 20:54:49 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 20:54:49 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OfL1h-0003da-Mw
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 01 Aug 2010 00:59:34 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6VMxCoW024613
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 20:54:49 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sat, 31 Jul 2010 23:59:12 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 24316-05 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 31 Jul 2010 23:59:08 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o6VMx6Xq024607
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 31 Jul 2010 23:59:06 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 31 Jul 2010 20:54:40 +0200
-Message-ID: <i31rhg$4a8$1@dough.gmane.org>
-References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>	<i30rie$8aq$1@dough.gmane.org>
-	<i318p1$ec3$1@dough.gmane.org>
+In-Reply-To: <AANLkTiketBU=4fc1w37V-34Ge1HHRbxxB8hCdX2w+vRh@mail.gmail.com>
+References: <4C523E6D.8040109@mentor.com>
+	<AANLkTiketBU=4fc1w37V-34Ge1HHRbxxB8hCdX2w+vRh@mail.gmail.com>
+Date: Sat, 31 Jul 2010 23:59:00 +0100
+Message-ID: <1280617140.1297.71.camel@rex>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
-In-Reply-To: <i318p1$ec3$1@dough.gmane.org>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
+Subject: Re: [PATCH][v4] Make multi-machine toolchains to co-exist (revised again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,50 +49,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 18:55:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 31 Jul 2010 22:59:34 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+On Thu, 2010-07-29 at 23:36 -0700, Khem Raj wrote:
+> On Thu, Jul 29, 2010 at 7:52 PM, Tom Rini <tom_rini@mentor.com> wrote:
+> > Hey all,
+> >
+> > As one of the folks who suggested something else, here's my take.
+> >
+> > We modify the prefix for cross stuff to dump everything into
+> > MULTIMACH_TARGET_SYS in the sysroot.
+> >
+> > Pro: It should work for all the cases
+> > Con: We're back to having a 'special' directory of cross stuff
+> > Pro: It's separate but still valid for $ORIGIN mangling, which is the
+> > other problem we had before.
+> >
+> > I've got a qemuarm console-image and then beagleboard console-image build
+> > going now and that's going to take time.
+> >
+> > Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> 
+> hah indecently I have been testing similar patch per our discussions on IRC
+> but trying to get program-transform-name to generate unique compiler names
+> which can coexist in <native sysroot>/usr/bin meanwhile I work on that this
+> portion looks ok to go in.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-On 31-07-10 15:34, Koen Kooi wrote:
-> On 31-07-10 11:48, Koen Kooi wrote:
->> On 31-07-10 07:34, Khem Raj wrote:
->>> Hi
-> 
->>> Following series of patches are for making multi-machine toolchains co-exist with
->>> new cross staging for toolchain.
-> 
->>> It installs the toolchain in <native sysroot>/usr/${BASE_PACKAGE_ARCH}
->>> this way we can have multiple toolchains co-existing for different sub-arches and major arches too.
-> 
->>> I have booted a native-sdk-image on qemuarm successfully. The build for 
->>> beagleboard minimal image using different versions of toolchain went all fine too.
-> 
->>> Please test these patches and if seem ok provide some ACKS/NACKS
-> 
->> Khem, thanks for working on this!
-> 
->> Firing of a build now :)
-> 
-> 'MACHINE=beagleboard bitbake ffmpeg samba mysql5 gstreamer-ti' completed
-> succesfully, doing a 'MACHINE=hawkboard bitbake gtk+' now.
+I've been trying to catch up with this issue and where OE is at now I'm
+back. Could someone summarise where we're at please as reading through
+the email threads which keep changing subject hasn't really educated me
+much :/ Did changing the triplet work out or not?
 
-And that seems to have worked as well. I have kicked of a huge
-multimachine build on the 16core buildserver at work and will inspect
-the results on monday. But so far it's looking really good.
+In Poky I've got the putting the toolchain into:
 
-regards,
+native-sysroot/usr/bin/<package-triplet>/${TARGET_SYS}-foo
 
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+and this seems to be working out okay after a slightly bumpy ride...
 
-iD8DBQFMVHFwMkyGM64RGpERAnYvAJ9nQgu0DyHWxb+UwmfDavSWgXlf0QCgsevW
-mSjAqZyvmUQN4UtSQOFnY/w=
-=J9TV
------END PGP SIGNATURE-----
+Cheers,
+
+Richard
+
+
 
 
 
