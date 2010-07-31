@@ -1,32 +1,38 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Of8wX-00062v-TJ for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 12:06:21 +0200
-Received: from f053040133.adsl.alicedsl.de ([78.53.40.133]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Of8wE-0005qf-Od for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 10:05:06 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Of997-0005XY-1V
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 12:18:25 +0200
+Received: (qmail 17839 invoked by uid 503); 31 Jul 2010 10:35:51 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 31 Jul 2010 10:35:50 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 31 Jul 2010 12:18:05 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 31 Jul 2010 12:18:04 +0200
+Message-ID: <4C53F85C.7080301@eukrea.com>
+Date: Sat, 31 Jul 2010 12:18:04 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.7) Gecko/20100713 Thunderbird/3.1.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1280504555-3633-10-git-send-email-aalonso00@gmail.com>
-References: <openembedded-devel@lists.openembedded.org>
-	<1280504555-3633-10-git-send-email-aalonso00@gmail.com>
-Date: Sat, 31 Jul 2010 12:05:04 +0200
-Message-ID: <1280570704.3721.18.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <A806EA3C-FD29-40A7-82E7-9391241EF930@mac.com>
+	<C3A2B5D3-75D5-4A5A-843A-631916635440@mac.com>
+In-Reply-To: <C3A2B5D3-75D5-4A5A-843A-631916635440@mac.com>
+X-Ovh-Tracer-Id: 17896179020704361801
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 10/10] xserver-kdrive-common: xilinx virtex5 support
+Subject: Re: Is bitbake 1.10 the latest stable version?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,112 +46,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 10:06:37 -0000
-X-Groupsio-MsgNum: 21673
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-FXT0PqnEpWoRgJ1ZJbom"
+X-List-Received-Date: Sat, 31 Jul 2010 10:18:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
---=-FXT0PqnEpWoRgJ1ZJbom
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Le 31/07/2010 09:43, Elvis Dowson a écrit :
+>
+> On Jul 31, 2010, at 11:07 AM, Elvis Dowson wrote:
+>
+>> I was wondering if bitbake-1.10 is the latest stable version?
+>
+> When trying to build a recipe, e.g. omap3-console-image, with the bitbake-1.10 and the current org.openembedded.dev, the display progress format looks pretty ugly  ..
+>
+this may be because you have several BBTHREADS and thus several fetch 
+running and outputing log at the same time.
 
-Am Freitag, den 30.07.2010, 10:42 -0500 schrieb Adrian Alonso:
-> * Add Xserver support for virtex5 board
-> * Update module id for Xilinx platforms, xserver
->   arguments are setup at runtime by getting
->   module id info from /proc/cpuinfo
-
-Please split those two changes up into separate patches.
-
-This should be worded differently. Maybe, =C2=BBOn Xilinx platforms there i=
-s
-no line `Hardware`. Instead it is stored in the line starting with
-`platform`.
-
-> * Increase PR
->=20
-> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
-
-NAK.
-
-> ---
->  .../xserver-kdrive-common/Xserver                  |    9 ++++++++-
->  .../xserver-kdrive-common_0.1.bb                   |    2 +-
->  2 files changed, 9 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver =
-b/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
-> index 347b005..375b787 100644
-> --- a/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
-> +++ b/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
-> @@ -34,7 +34,12 @@ module_id() {
->      # grep "Module ID" /proc/hal/assets | sed "s/.*://"
->      ## used to read from /proc/hal/model, but that is removed in 2.6
->      # echo ' iPAQ' `cat /proc/hal/model`
-> -    awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } ' </proc/cpuinfo
-> +    id=3D`awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } ' </proc/cpui=
-nfo`
-> +	if [ -n "$id" ]; then
-> +		echo -n "${id}"
-> +    else
-> +        awk 'BEGIN { FS=3D": " } /platform/ { print $2 } ' </proc/cpuinf=
-o
-> +	fi
->  }
-
-1. Please use spaces instead of tabulators.
-2. It took me some time to figure out, why you use a variable here. I
-think it would be nicer the following way.
-
-	id=3D`awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } ' </proc/cpuinfo`
-	if [ ! -n "$id" ]; then
-		id=3D`awk 'BEGIN { FS=3D": " } /platform/ { print $2 } ' </proc/cpuinfo`
-	echo -n "${id}"
-
-Why are the curly brackets needed?
-
->  export USER=3Droot
-> @@ -171,6 +176,8 @@ case `module_id` in
->                   if [ "$XSERVER" =3D "/usr/bin/Xorg" ];then
->                        ARGS=3D""
->                   fi;; #TODO: handle kdrive
-> +		 "Xilinx Virtex"*)
-> +				 ARGS=3D"$ARGS $PPM" ;;
->          *)
->                  # It is a device we do not know about, in which case we =
-force
->                  # kdrive to use the current framebuffer geometry -- othe=
-rwise
-
-Please use spaces instead of tabulators.
-
-[=E2=80=A6]
+Eric
 
 
-Thanks,
-
-Paul
-
-
-PS: Please remember to update the status of your patches in Patchwork
-[1][2].
-
-
-[1] http://patchwork.openembedded.org/
-[2] http://wiki.openembedded.net/index.php/Patchwork (I need to update
-this patch on how to use `pwclient` to update the states of the patches.
-
---=-FXT0PqnEpWoRgJ1ZJbom
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxT9VAACgkQPX1aK2wOHVh/eACgg4egzXG6t9Qy2YOlfSv+6Da5
-sIAAnigY+FW+dYOy/YNWENRuhXNv5kJ+
-=00u4
------END PGP SIGNATURE-----
-
---=-FXT0PqnEpWoRgJ1ZJbom--
