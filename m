@@ -1,36 +1,38 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Of4iV-0005uV-96
+	(envelope-from <raj.khem@gmail.com>) id 1Of4iW-0005uX-Pq
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 07:34:39 +0200
-Received: by pwi10 with SMTP id 10so830865pwi.6
+	Sat, 31 Jul 2010 07:34:42 +0200
+Received: by pvg13 with SMTP id 13so831255pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 30 Jul 2010 22:34:17 -0700 (PDT)
+	Fri, 30 Jul 2010 22:34:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=3c9fo746N5gsH2rxkbt6rncqnk8i0iRfiVh3ne7v+Hk=;
-	b=g4k7EpEHGGhq5dOVcc1Dv/zyNx/ETwWhUslN5K/J6s1FOJom4yDajtoboX8jvR5EV4
-	DUclI/16Ajb0kq43AOydpzZ2++LHgTdngodOgTvaEH9lfu2lYp1g7mWEi63tt5D6DSJV
-	lmDBmPBhyJoKPo6x6wbnqMuMe5bZ7bXWnYt1M=
+	:message-id:x-mailer:in-reply-to:references;
+	bh=V5FVKD4AKPhyzL0OjyVaoQw1FMKeYx+w5xzbUkgX+fY=;
+	b=fTEHBmBzK5VbncQO1Di8v9WFQGi9sP3NP9Ka1jlNd0ZCP9lC7Uwd9bB6y4bcCThpNQ
+	g7wieq7GQyQANHoh5D3Lm+B8LQwq8GCtOuaeWu3kN/u4rnWPjDA9wJzbZGm/J6fIuMpT
+	jmfIjo9Vppxd8gSMoROo7w9NMeFgCccQn9hwM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=lfCRvJx0ZaVxvu6aE98dAO91Zg9h6hEfu0rdEMd2FVwnjD7P30VQmF1pP2Pf4CzUV4
-	cXJjBrPJjet++HRBgw9b0jvQkNGwNbW+Qrt4oKDqBPIb5E8jj4rPxZgCqSHJWUrGIZih
-	XVnB1VvHwl02rq3EguLtT+OJ6H4okfwCdjI/w=
-Received: by 10.114.46.14 with SMTP id t14mr3489256wat.67.1280554457157;
-	Fri, 30 Jul 2010 22:34:17 -0700 (PDT)
+	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
+	b=YKk9HQHUgyftf8eOl4QDA8T1nskRPfpv/n7rKb/UohoDrq2zjOBzNSHObcDkNN2tDL
+	yztSsItwpnAvJBcwhb8MqlJisrxXltqi90QhdUw+2DayNb4mXm1cWHb/y7WLZiyn3RpU
+	f+HoYGWa8t8Ms8AUiX04WvQvL7HzU+ymX0RZI=
+Received: by 10.114.27.2 with SMTP id a2mr3598475waa.25.1280554459093;
+	Fri, 30 Jul 2010 22:34:19 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id n32sm5308381wag.23.2010.07.30.22.34.15
+	by mx.google.com with ESMTPS id n32sm5308381wag.23.2010.07.30.22.34.18
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 30 Jul 2010 22:34:16 -0700 (PDT)
+	Fri, 30 Jul 2010 22:34:18 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 30 Jul 2010 22:34:06 -0700
-Message-Id: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
+Date: Fri, 30 Jul 2010 22:34:08 -0700
+Message-Id: <1280554451-27780-3-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.160.47
+In-Reply-To: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
+References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -38,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
+Subject: [PATCH 2/5] binutils-cross.inc: Dont install duplicate copies of tools create relative symlinks instead.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,24 +54,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 05:34:40 -0000
+X-List-Received-Date: Sat, 31 Jul 2010 05:34:42 -0000
 
-Hi
+* Dont generate shared libraries and bfd.
 
-Following series of patches are for making multi-machine toolchains co-exist with
-new cross staging for toolchain.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/binutils/binutils-cross.inc |   33 ++++++++++++++++++---------------
+ 1 files changed, 18 insertions(+), 15 deletions(-)
 
-It installs the toolchain in <native sysroot>/usr/${BASE_PACKAGE_ARCH}
-this way we can have multiple toolchains co-existing for different sub-arches and major arches too.
-
-I have booted a native-sdk-image on qemuarm successfully. The build for 
-beagleboard minimal image using different versions of toolchain went all fine too.
-
-Please test these patches and if seem ok provide some ACKS/NACKS
-
-
-Thanks
--Khem
+diff --git a/recipes/binutils/binutils-cross.inc b/recipes/binutils/binutils-cross.inc
+index f3ba5c3..ba3e6b5 100644
+--- a/recipes/binutils/binutils-cross.inc
++++ b/recipes/binutils/binutils-cross.inc
+@@ -5,25 +5,28 @@ PROVIDES = "virtual/${TARGET_PREFIX}binutils"
+ PACKAGES = ""
+ EXTRA_OECONF = "--with-sysroot=${STAGING_DIR_TARGET} \
+ 		--program-prefix=${TARGET_PREFIX} \
+-		--enable-install-libbfd \
+-		--enable-shared \
+ 		--disable-werror \
+ 	       "
+ 
+ do_install () {
+ 	oe_runmake 'DESTDIR=${D}' install
+-	install -m 0644 libiberty/pic/libiberty.a \
+-	${D}${libdir}/libiberty_pic.a
+-
++	rm -rf ${D}${prefix}/${TARGET_SYS}
+ 	# We don't really need these, so we'll remove them...
+-	rm -rf ${D}${STAGING_DIR_NATIVE}${prefix_native}/lib/ldscripts
+-	rm -rf ${D}${STAGING_DIR_NATIVE}${prefix_native}/share/info
+-	rm -rf ${D}${STAGING_DIR_NATIVE}${prefix_native}/share/locale
+-	rm -rf ${D}${STAGING_DIR_NATIVE}${prefix_native}/share/man
+-	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/share || :
+-	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${libdir}/gcc-lib || :
+-	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${libdir}64/gcc-lib || :
+-	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${libdir} || :
+-	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${libdir}64 || :
+-	rmdir ${D}${STAGING_DIR_NATIVE}${prefix_native}/${prefix} || :
++	rm -rf ${D}${prefix}/lib/ldscripts
++	rm -rf ${D}${prefix}/share/info
++	rm -rf ${D}${prefix}/share/locale
++	rm -rf ${D}${prefix}/share/man
++	rmdir ${D}${prefix}/share || :
++	rmdir ${D}${prefix}/${libdir}/gcc-lib || :
++	rmdir ${D}${prefix}/${libdir}64/gcc-lib || :
++	rmdir ${D}${prefix}/${libdir} || :
++	rmdir ${D}${prefix}/${libdir}64 || :
++	rmdir ${D}${prefix}/${prefix} || :
++	# Insert symlinks into libexec so when tools without a prefix are searched for, the correct ones are
++	# found.
++	dest=${D}${prefix}/${TARGET_SYS}${base_bindir_native}
++	install -d $dest
++	for t in ar as ld nm objcopy objdump ranlib strip; do
++		ln -sf ../..${base_bindir_native}/${TARGET_PREFIX}$t $dest/$t
++	done
+ }
+-- 
+1.7.1
 
 
 
