@@ -1,43 +1,40 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from asmtpout026.mac.com ([17.148.16.101])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OfA4j-0007nR-PA
+	(envelope-from <elvis.dowson@mac.com>) id 1OfABx-0007xn-VD
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 13:17:59 +0200
-Received: by bwz10 with SMTP id 10so1215067bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 04:17:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=uzxl389d/ZeGVWtPLpe+a9qfbqC1uNYoroPEPWe53wg=;
-	b=C/ETExFZdZcfXbk9w9uHaEZumWgXNe/ZBWTsMXgr+OMmVHuNRqcIg1EchhNhTb/R7v
-	z8XgU2ImtF461JSVT84wWPnxFfMYz+A3E2oG4qnl43xKymYn09qY7u0Tl8zcSXmoS38F
-	DqpU72WPlW5ueD2qU8mJclnYErDYa81b0KylM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=InJUvUhK3Ga1f0TjOlPKJdzohVOXiP0qbiGEUP+vaCqHU590ouyKYj0oCKKjM+7KHC
-	PhYpb3w+PiIyvWzqpl3x4PuZFvUh3kJwP4GOtjQpicvXBx/HEveJAnrMEYgfBWYbSiAv
-	umKW3PBWbUaDf47met9OQNAP1wWvG+sTwAu8M=
-MIME-Version: 1.0
-Received: by 10.204.163.74 with SMTP id z10mr2153813bkx.34.1280575058499; Sat, 
-	31 Jul 2010 04:17:38 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sat, 31 Jul 2010 04:17:38 -0700 (PDT)
-In-Reply-To: <A806EA3C-FD29-40A7-82E7-9391241EF930@mac.com>
+	Sat, 31 Jul 2010 13:25:31 +0200
+MIME-version: 1.0
+Received: from [192.168.1.103] ([87.201.169.38])
+	by asmtp026.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
+	(built Dec
+	16 2008; 32bit)) with ESMTPSA id <0L6F00I2G6DGNN00@asmtp026.mac.com> for
+	openembedded-devel@lists.openembedded.org; Sat,
+	31 Jul 2010 04:24:56 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=6.0.2-1004200000 definitions=main-1007310046
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
+	definitions=2010-07-31_02:2010-07-31, 2010-07-31,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+In-reply-to: <4C53F85C.7080301@eukrea.com>
+Date: Sat, 31 Jul 2010 15:24:36 +0400
+Message-id: <7D0030BC-F8C2-479C-AF3D-072D5BD8D417@mac.com>
 References: <A806EA3C-FD29-40A7-82E7-9391241EF930@mac.com>
-Date: Sat, 31 Jul 2010 13:17:38 +0200
-Message-ID: <AANLkTim_ffCU8p0VGgcZmuiN1q8cj6f3NS7=m2Bb8vSL@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	<C3A2B5D3-75D5-4A5A-843A-631916635440@mac.com>
+	<4C53F85C.7080301@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.101
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-3.0 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Is bitbake 1.10 the latest stable version?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -52,22 +49,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 11:17:59 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sat, 31 Jul 2010 11:25:31 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: quoted-printable
 
-2010/7/31 Elvis Dowson <elvis.dowson@mac.com>
+Hi Eric,
 
-> Hi,
->       I was wondering if bitbake-1.10 is the latest stable version?
->
-> best regards,
->
->
-> I'd say this the bitbake 1.10 head is the most recent version. It is the
-recommended version if you want to build oe unstable head.
-I would not call it the "latest stable version" though. Stable for me means
-(among others) it is version tagged in git, which has not happened yet.
-So y
+On Jul 31, 2010, at 2:18 PM, Eric B=E9nard wrote:
 
-Frans
+>>=20
+> this may be because you have several BBTHREADS and thus several fetch =
+running and outputing log at the same time.
+>=20
+
+With bitbake 1.8.19, I don't have that problem, as seen from the output. =
+I have 6 threads set for make and bitbake, in the older instance, the =
+formatting works better.=20
+
+NOTE: Unpacking /usr/share/sources/Python-2.6.1.tar.bz2 to =
+tmp/work/x86_64-linux/python-native-2.6.1-ml8.2/
+NOTE: Running task 167 of 3214 (ID: 659, =
+/tool/overo-oe/org.openembedded.dev/recipes/util-linux-ng/util-linux-ng_2.=
+16.bb, do_fetch)
+NOTE: Running task 168 of 3214 (ID: 660, =
+/tool/overo-oe/org.openembedded.dev/recipes/util-linux-ng/util-linux-ng_2.=
+16.bb, do_unpack)
+NOTE: Unpacking /usr/share/sources/util-linux-ng-2.16.tar.bz2 to =
+tmp/work/armv7a-angstrom-linux-gnueabi/util-linux-ng-2.16-r9.3/
+NOTE: Running task 169 of 3214 (ID: 2174, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libice_1.0.6.bb, =
+do_setscene)
+NOTE: Running task 170 of 3214 (ID: 2824, =
+/tool/overo-oe/org.openembedded.dev/recipes/perl/perl-native_5.8.8.bb, =
+do_setscene)
+NOTE: Running task 171 of 3214 (ID: 2175, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libice_1.0.6.bb, =
+do_fetch)
+NOTE: Running task 172 of 3214 (ID: 2825, =
+/tool/overo-oe/org.openembedded.dev/recipes/perl/perl-native_5.8.8.bb, =
+do_fetch)
+NOTE: Running task 173 of 3214 (ID: 2176, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libice_1.0.6.bb, =
+do_unpack)
+NOTE: Running task 174 of 3214 (ID: 2826, =
+/tool/overo-oe/org.openembedded.dev/recipes/perl/perl-native_5.8.8.bb, =
+do_unpack)
+NOTE: Unpacking /usr/share/sources/libICE-1.0.6.tar.bz2 to =
+tmp/work/armv7a-angstrom-linux-gnueabi/libice-1_1.0.6-r1/
+NOTE: Unpacking /usr/share/sources/perl-5.8.8.tar.gz to =
+tmp/work/x86_64-linux/perl-native-5.8.8-r15/
+NOTE: Running task 175 of 3214 (ID: 2681, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libxdmcp_1.0.3.bb, =
+do_setscene)
+NOTE: Running task 176 of 3214 (ID: 2682, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libxdmcp_1.0.3.bb, =
+do_fetch)
+NOTE: Running task 177 of 3214 (ID: 2655, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libxau_1.0.5.bb, =
+do_setscene)
+NOTE: Running task 178 of 3214 (ID: 2683, =
+/tool/overo-oe/org.openembedded.dev/recipes/xorg-lib/libxdmcp_1.0.3.bb, =
+do_unpack)
+NOTE: Unpacking /usr/share/sources/libXdmcp-1.0.3.tar.bz2 to =
+tmp/work/armv7a-angstrom-linux-gnueabi/libxdmcp-1_1.0.3-r1/
+
+Best regards,
+
+Elvis Dowson=
+
 
