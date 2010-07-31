@@ -1,42 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Of8mp-0002yB-A3 for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 11:55:25 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Of8mV-0007A2-Uv for openembedded-devel@lists.openembedded.org;
-	Sat, 31 Jul 2010 11:55:03 +0200
-Received: from ip5451781a.direct-adsl.nl ([84.81.120.26])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 11:55:03 +0200
-Received: from k.kooi by ip5451781a.direct-adsl.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 11:55:03 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Of8wX-00062v-TJ for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 12:06:21 +0200
+Received: from f053040133.adsl.alicedsl.de ([78.53.40.133]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Of8wE-0005qf-Od for openembedded-devel@lists.openembedded.org;
+	Sat, 31 Jul 2010 10:05:06 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 31 Jul 2010 11:50:17 +0200
-Message-ID: <i30rks$8aq$2@dough.gmane.org>
-References: <9D2EA12D-A6C9-4965-A833-3B6CDCD8CD7B@mac.com>
+In-Reply-To: <1280504555-3633-10-git-send-email-aalonso00@gmail.com>
+References: <openembedded-devel@lists.openembedded.org>
+	<1280504555-3633-10-git-send-email-aalonso00@gmail.com>
+Date: Sat, 31 Jul 2010 12:05:04 +0200
+Message-ID: <1280570704.3721.18.camel@mattotaupa>
 Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: ip5451781a.direct-adsl.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
-In-Reply-To: <9D2EA12D-A6C9-4965-A833-3B6CDCD8CD7B@mac.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Which OE branch for beagleboard?
+Subject: Re: [PATCH 10/10] xserver-kdrive-common: xilinx virtex5 support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,34 +40,112 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 31 Jul 2010 09:55:25 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 31 Jul 2010 10:06:37 -0000
+X-Groupsio-MsgNum: 21673
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-FXT0PqnEpWoRgJ1ZJbom"
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+--=-FXT0PqnEpWoRgJ1ZJbom
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 31-07-10 11:46, Elvis Dowson wrote:
-> Hi, 
->         Which OE branch should I use to build angstrom images for the beagleboard?
+Am Freitag, den 30.07.2010, 10:42 -0500 schrieb Adrian Alonso:
+> * Add Xserver support for virtex5 board
+> * Update module id for Xilinx platforms, xserver
+>   arguments are setup at runtime by getting
+>   module id info from /proc/cpuinfo
+
+Please split those two changes up into separate patches.
+
+This should be worded differently. Maybe, =C2=BBOn Xilinx platforms there i=
+s
+no line `Hardware`. Instead it is stored in the line starting with
+`platform`.
+
+> * Increase PR
+>=20
+> Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
+
+NAK.
+
+> ---
+>  .../xserver-kdrive-common/Xserver                  |    9 ++++++++-
+>  .../xserver-kdrive-common_0.1.bb                   |    2 +-
+>  2 files changed, 9 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver =
+b/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
+> index 347b005..375b787 100644
+> --- a/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
+> +++ b/recipes/xserver-kdrive-common/xserver-kdrive-common/Xserver
+> @@ -34,7 +34,12 @@ module_id() {
+>      # grep "Module ID" /proc/hal/assets | sed "s/.*://"
+>      ## used to read from /proc/hal/model, but that is removed in 2.6
+>      # echo ' iPAQ' `cat /proc/hal/model`
+> -    awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } ' </proc/cpuinfo
+> +    id=3D`awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } ' </proc/cpui=
+nfo`
+> +	if [ -n "$id" ]; then
+> +		echo -n "${id}"
+> +    else
+> +        awk 'BEGIN { FS=3D": " } /platform/ { print $2 } ' </proc/cpuinf=
+o
+> +	fi
+>  }
+
+1. Please use spaces instead of tabulators.
+2. It took me some time to figure out, why you use a variable here. I
+think it would be nicer the following way.
+
+	id=3D`awk 'BEGIN { FS=3D": " } /Hardware/ { print $2 } ' </proc/cpuinfo`
+	if [ ! -n "$id" ]; then
+		id=3D`awk 'BEGIN { FS=3D": " } /platform/ { print $2 } ' </proc/cpuinfo`
+	echo -n "${id}"
+
+Why are the curly brackets needed?
+
+>  export USER=3Droot
+> @@ -171,6 +176,8 @@ case `module_id` in
+>                   if [ "$XSERVER" =3D "/usr/bin/Xorg" ];then
+>                        ARGS=3D""
+>                   fi;; #TODO: handle kdrive
+> +		 "Xilinx Virtex"*)
+> +				 ARGS=3D"$ARGS $PPM" ;;
+>          *)
+>                  # It is a device we do not know about, in which case we =
+force
+>                  # kdrive to use the current framebuffer geometry -- othe=
+rwise
+
+Please use spaces instead of tabulators.
+
+[=E2=80=A6]
 
 
-Use http://gitorious.org/angstrom/angstrom-setup-scripts [1], that will
-setup the right branch and bitbake for you.
+Thanks,
 
-regards,
+Paul
 
-Koen
 
-[1] once gitorious comes back to life, you can get the script from the
-webinterface as well
+PS: Please remember to update the status of your patches in Patchwork
+[1][2].
+
+
+[1] http://patchwork.openembedded.org/
+[2] http://wiki.openembedded.net/index.php/Patchwork (I need to update
+this patch on how to use `pwclient` to update the states of the patches.
+
+--=-FXT0PqnEpWoRgJ1ZJbom
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFMU/HZMkyGM64RGpERAjLSAJ9FbjrMRyG+INGFTmpVoprde42TiQCdFFwr
-OZYJNFtAYGr4l4TVv466UOo=
-=HhyF
+iEYEABECAAYFAkxT9VAACgkQPX1aK2wOHVh/eACgg4egzXG6t9Qy2YOlfSv+6Da5
+sIAAnigY+FW+dYOy/YNWENRuhXNv5kJ+
+=00u4
 -----END PGP SIGNATURE-----
 
-
-
+--=-FXT0PqnEpWoRgJ1ZJbom--
