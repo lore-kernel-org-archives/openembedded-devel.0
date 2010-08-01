@@ -1,40 +1,49 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OfefG-0004bM-5q
+Received: from mail-px0-f175.google.com ([209.85.212.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OfgKZ-0001f7-Nu
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Aug 2010 21:57:44 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o71Jv7Ns001297
+	Sun, 01 Aug 2010 23:44:28 +0200
+Received: by pxi12 with SMTP id 12so1197986pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 1 Aug 2010 20:57:07 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 00649-10 for <openembedded-devel@lists.openembedded.org>;
-	Sun,  1 Aug 2010 20:57:02 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o71Jux7V001291
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 1 Aug 2010 20:57:00 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
+	Sun, 01 Aug 2010 14:44:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=6CYCVxCta+pXZSEj8cpi2sR7FwOIJNP6SA7IZ7DFYrc=;
+	b=Rqt+xHXkZuCcfsB96BauvvLdoo/Ynt50LKoH9kUjPSyQhlbT6E9PFpwHXt95Pdt8BL
+	oxe+YzRX6rbu0VNmlHiFwLNFBNeVD0kT+hhjdLsDWuyvE2L4LAL4zJd+mow2gx/Czv+o
+	Elpn0dgHQXCQQUhTj1V+SbH3cI2YQvmmRflz4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=AVFAQdFo1sv3sK6HJiPiZ9j4tXplkL/VsT8606eKFYmLtzuAjDnufrwecUz9QWGt4n
+	lB/++zSjfmmij13bS5GevbaPHPqkjPuFt7afwgGzQi/sHHYB/n2lTFLLrdxXGJl71m3P
+	NZUzd++sz6fRDWHaoj/SD7ASRuAyNey5hbsAM=
+Received: by 10.114.127.11 with SMTP id z11mr6263951wac.7.1280699043386;
+	Sun, 01 Aug 2010 14:44:03 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id g4sm9896458wae.14.2010.08.01.14.44.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 01 Aug 2010 14:44:01 -0700 (PDT)
+Date: Sun, 1 Aug 2010 14:43:56 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikO742JLzxxxChmVAr6feBwJzzw9ikUEX+-g66v@mail.gmail.com>
-References: <AANLkTikO742JLzxxxChmVAr6feBwJzzw9ikUEX+-g66v@mail.gmail.com>
-Date: Sun, 01 Aug 2010 20:56:52 +0100
-Message-ID: <1280692612.1297.109.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Message-ID: <20100801214356.GB30928@gmail.com>
+References: <76E258664B189C4CBEF125491CA11ECC9455F8DE76@KCINPUNHJCMS01.kpit.com>
+MIME-Version: 1.0
+In-Reply-To: <76E258664B189C4CBEF125491CA11ECC9455F8DE76@KCINPUNHJCMS01.kpit.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: legacy staging: call for action
+Subject: Re: Could not find dbus-daemon in our root file system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,40 +57,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Aug 2010 19:57:44 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 01 Aug 2010 21:44:28 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Sun, 2010-08-01 at 13:49 +0200, Frans Meulenbroeks wrote:
-> In the attached file (which I hope will pass the mailing list) you find the
-> results.
-> I've also uploaded the file to http://filebin.ca/xotgad/do_stage so if it is
-> not attached you can find it there.
+On (17/07/10 13:11), Soumya R wrote:
+> Hi All,
+>    
+>     I am working on openembedded form past few days for Au1350 mipsel architecture. I need to include
+> dbus-daemon where should i include this?. I have included dbus-deamon-proxy_git.bb in dbus in recipes and also
+> in task-qte-toolcain-target.bb..I have build a root file system and toolchain from it.. But i could not find the dbus-deamon 
+> binary in our rfs.. Please suggest me if i am doing anything wrong..
 
-I'm a little dubious of doing it this way. It also includes some rather
-simple cases where do_stage does:
+you need to add dbus to your image task thru RDEPENDS
 
-do_stage () {
-	autotools_stage_all
-}
-
-which are null operations and can be removed in pretty much all cases. I
-was surprised to only find myself listed for about 5% of that list :).
-
-In the spirit of helping:
-
-http://git.openembedded.net/cgit.cgi/openembedded/log/?h=rpurdie/for-testing
-
-but I've not tested this so I'm going to need some assistance. I've made
-the changes by a combination of inspection and knowledge of what Poky
-does. I concentrated on the cross components since people are perhaps
-more wary of them.
-
-Cheers,
-
-Richard
-
-
-
+> 
+> 
+> Regards,
+> soumya 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
