@@ -1,49 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OfQpU-0004Y7-Cx
+	(envelope-from <raj.khem@gmail.com>) id 1OfThs-0006fL-6g
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Aug 2010 07:11:21 +0200
-Received: by bwz10 with SMTP id 10so1401031bwz.6
+	Sun, 01 Aug 2010 10:15:42 +0200
+Received: by iwn34 with SMTP id 34so2986056iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 31 Jul 2010 22:10:55 -0700 (PDT)
+	Sun, 01 Aug 2010 01:15:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=rOF6FfDnfLBAL4TZ76E9b5qjvC59qPbni8Q1sifvt3c=;
-	b=NniwVA7PWlkZVQwJGgTbrBM8lPsGHsBppsf63MlMcU/YIxnMWFfsz/ZzS41uGxuv4Y
-	uCaclzl0kZ6Xghw7Z/1SSnxcfp/2b7eWGtq1/PmN7MNqMPMQvnIzeaJbLpwPjjRMUe/3
-	x0XdOpavCEu8KzEtH/F24VFshr9bL3SlmP7pY=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=62a1IVVANPIPXIGm+Ap1MIjuNYfigyFdCBW6UBAnyxs=;
+	b=FlIc+6LopOQCPuRfoG0QfOGk823lqpDblRM0CzefqRbb7/Md2IFH2hlRGy7iL8yxRs
+	DSUnW6DP0bd7JvYO8eSRf5Z0KD35wdS4EzgE20aCgc+VAQRoAaISfzl+DusBUi4BPkzG
+	N4sTQiP08dG6Swu/HpqiDVglFUqcHYfrbcC94=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=qCU410tDv8LYxzGl3GjK9EXvkuYqp340yZ8T1pe9kBNP/yWNa7XgKlz4lOYMThnig3
-	jVHSJkIOhtKul+41r6acS3e0lnJG3ZBaI+wSrsAFYCyg1p5zZYqPvDrKlg8upsHYT2KX
-	DNsx1IxpuBqiv/0U6SbID6c/g95k23V9SFVIc=
+	b=mGhlZdzL5rZYhBwIFpdHbspjBFVcKV1uK8/jEDZHAzR2Ys8597o+swjxfhs+3C/6Ub
+	dusbb3Ea+AukQJpPB0ukuTG+zB0UN7j6nj4rh5/a7DYdL5ffgevXkGKvCH4jp7XEtVHj
+	LJBhT4VMDWDV7DA8bvqxaQOtJi4qFOmCisr5U=
+Received: by 10.231.119.229 with SMTP id a37mr4692137ibr.169.1280650517229; 
+	Sun, 01 Aug 2010 01:15:17 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.204.103.199 with SMTP id l7mr2823064bko.18.1280639455809; Sat, 
-	31 Jul 2010 22:10:55 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Sat, 31 Jul 2010 22:10:55 -0700 (PDT)
-In-Reply-To: <1280617976.1297.85.camel@rex>
-References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
-	<i2rik7$ds1$1@dough.gmane.org> <4C516EF8.3080804@balister.org>
-	<AANLkTikZQB39U7kUv9-0v-3gysX=tYFuwUiq3ygXJzAL@mail.gmail.com>
-	<i2u23e$97d$1@dough.gmane.org>
-	<AANLkTimUYuJBUa5Hz=N_dM-DOe6qPoCDbqCEs2LHTpab@mail.gmail.com>
-	<1280617976.1297.85.camel@rex>
-Date: Sun, 1 Aug 2010 07:10:55 +0200
-Message-ID: <AANLkTinSR6_bi8ACzz1_45Gsa8PvYi1XD=37pwjqXtoF@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.14.199 with HTTP; Sun, 1 Aug 2010 01:14:57 -0700 (PDT)
+In-Reply-To: <1280617140.1297.71.camel@rex>
+References: <4C523E6D.8040109@mentor.com>
+	<AANLkTiketBU=4fc1w37V-34Ge1HHRbxxB8hCdX2w+vRh@mail.gmail.com> 
+	<1280617140.1297.71.camel@rex>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sun, 1 Aug 2010 01:14:57 -0700
+Message-ID: <AANLkTi=UT11mxOQb+5f60EnQ5yoGaxjUMqMUdGtX663b@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: OE recipe tree quality
+Subject: Re: [PATCH][v4] Make multi-machine toolchains to co-exist (revised again)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,62 +53,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Aug 2010 05:11:21 -0000
+X-List-Received-Date: Sun, 01 Aug 2010 08:15:42 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/8/1 Richard Purdie <rpurdie@rpsys.net>
+On Sat, Jul 31, 2010 at 3:59 PM, Richard Purdie <rpurdie@rpsys.net> wrote:
+> On Thu, 2010-07-29 at 23:36 -0700, Khem Raj wrote:
+>> On Thu, Jul 29, 2010 at 7:52 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>> > Hey all,
+>> >
+>> > As one of the folks who suggested something else, here's my take.
+>> >
+>> > We modify the prefix for cross stuff to dump everything into
+>> > MULTIMACH_TARGET_SYS in the sysroot.
+>> >
+>> > Pro: It should work for all the cases
+>> > Con: We're back to having a 'special' directory of cross stuff
+>> > Pro: It's separate but still valid for $ORIGIN mangling, which is the
+>> > other problem we had before.
+>> >
+>> > I've got a qemuarm console-image and then beagleboard console-image build
+>> > going now and that's going to take time.
+>> >
+>> > Signed-off-by: Tom Rini <tom_rini@mentor.com>
+>>
+>> hah indecently I have been testing similar patch per our discussions on IRC
+>> but trying to get program-transform-name to generate unique compiler names
+>> which can coexist in <native sysroot>/usr/bin meanwhile I work on that this
+>> portion looks ok to go in.
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+> I've been trying to catch up with this issue and where OE is at now I'm
+> back. Could someone summarise where we're at please as reading through
+> the email threads which keep changing subject hasn't really educated me
+> much :/ Did changing the triplet work out or not?
+
+Yes it worked out to a certain extent but there was few rough edges left. I did
+not pursue it more as it seemed not so desired approach.
 
 >
+> In Poky I've got the putting the toolchain into:
 >
-> "world" is used by Poky quite successfully. In Poky we expect everything
-> to build with a known list of things that don't. Our aim is to have that
-> list consisting of zero items and I intend to see that happens :).
->
+> native-sysroot/usr/bin/<package-triplet>/${TARGET_SYS}-foo
 
-I would love the see this happen for OE as well.
+Something similar is what the v4 of the patch proposed. A difference is
+that it puts the toolchain in native-sysroot/usr/${BASE_PACKAGE_ARCH}/
 
->
-> I don't think many people have been watching Poky recently but we've
-> been quietly having a massive quality control effort on the metadata in
-> there. This has included:
->
-> a) Removal of legacy staging
-> b) Using BBCLASSEXTEND = native where it makes sense
-> c) Using nativesdk (no sdk class)
-> d) Upgrading everything to modern versions of the package concerned
-> e) Only allowing sane pkgconfig files
-> f) Enhancing the metadata with licence and other information
->
+Koen has been trying it out and so far he has had good results.
 
-Cool. I'll peek into it.
+Thanks
+-Khem
 
->
-> Its possible to contemplate this due to Poky's version policy and size
-> and its still taking significant effort. OE has always been pulled in
-> many directions and this is both a good and a bad thing. The only ways I
-> can think of to make a dramatic improvement to OE in this area would be
-> disliked by some of its users so I don't know what the solution is.
->
-
-*Any* solution (including the current status) will be disliked by some
-users.
-We need to set a direction. I hope and suggest the TSC will provide some
-guidance here.
-
-We can e.g. keep complaining about legacy staging, but if there is no action
-nothing will change.
-
-I'm trying to create awareness and do suggestions on how to resolve things.
-Unfortunately these are rejected by some, but at the same time these very
-same persons fail to provide an alternative scenario (apart from that
-*others* need to work on this.
-
->
-> There are other good things happening in Poky as well as the above too
-> btw :)
->
-
-I'll keep an eye on it!
-
-Frans
 
