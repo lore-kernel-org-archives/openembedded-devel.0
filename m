@@ -1,37 +1,45 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OfamE-0007eZ-OY
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1Ofdb6-0005Eu-85
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 01 Aug 2010 17:48:40 +0200
-Received: (qmail 9685 invoked by uid 503); 1 Aug 2010 16:06:12 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 1 Aug 2010 16:06:12 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 1 Aug 2010 17:48:17 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 1 Aug 2010 17:48:17 +0200
-Message-ID: <4C559740.9020102@eukrea.com>
-Date: Sun, 01 Aug 2010 17:48:16 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.7) Gecko/20100713 Thunderbird/3.1.1
-MIME-Version: 1.0
+	Sun, 01 Aug 2010 20:49:25 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o71Imvxb000797
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 1 Aug 2010 19:48:57 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 32713-09 for <openembedded-devel@lists.openembedded.org>;
+	Sun,  1 Aug 2010 19:48:53 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o71Imq4T000791
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 1 Aug 2010 19:48:52 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
-In-Reply-To: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
-X-Ovh-Tracer-Id: 10898992574910672201
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+In-Reply-To: <4C557F47.2080901@balister.org>
+References: <AANLkTimk_y-ntnLZpXfa_biLEcX_vO_Lk5PQXWPJcuec@mail.gmail.com>
+	<i2rik7$ds1$1@dough.gmane.org> <4C516EF8.3080804@balister.org>
+	<AANLkTikZQB39U7kUv9-0v-3gysX=tYFuwUiq3ygXJzAL@mail.gmail.com>
+	<i2u23e$97d$1@dough.gmane.org>
+	<AANLkTimUYuJBUa5Hz=N_dM-DOe6qPoCDbqCEs2LHTpab@mail.gmail.com>
+	<1280617976.1297.85.camel@rex>  <4C557F47.2080901@balister.org>
+Date: Sun, 01 Aug 2010 19:48:44 +0100
+Message-ID: <1280688524.1297.105.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
+Subject: Re: OE recipe tree quality
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,30 +53,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 01 Aug 2010 15:48:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 01 Aug 2010 18:49:30 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Hi Khem,
+On Sun, 2010-08-01 at 10:05 -0400, Philip Balister wrote:
+> On 07/31/2010 07:12 PM, Richard Purdie wrote:
+> > On Fri, 2010-07-30 at 10:34 +0200, Frans Meulenbroeks wrote:
+> >> 2010/7/30 Koen Kooi<k.kooi@student.utwente.nl>
+> >>> On 30-07-10 09:21, Esben Haabendal wrote:
+> >>>> On Thu, Jul 29, 2010 at 2:07 PM, Philip Balister<philip@balister.org>
+> >>> wrote:
+> >>>>> On 07/29/2010 05:45 AM, Koen Kooi wrote:
+> >
+> >>>>>> I would actually advocate removing the 'world' feature from bitbake/OE
+> >>>>>> to stop people from wasting time on looking at bitbake world and have
+> >>>>>> them fix actual problems.
+> >>>>>
+> >>>>> bitbake world seems to be the source of pointless listserv discussions.
+> >>> Does
+> >>>>> it serve any purpose?
+> >>>>
+> >>>> Pointless or not really depends on how you look at quality.
+> >>>>
+> >>>> If you look at it as you, Koen and other OE long-timers, yes, it looks
+> >>>> rather pointless to have bitbake world.
+> >>>> But for those of us who have a different view on what quality is, then
+> >>>> bitbake world serves a purpose.
+> >>>
+> >>> As Thomas points out, as soon as you start blacklisting things (which
+> >>> actually increases quality), bitbake world doesn't work anymore.
+> >>
+> >> Blacklisting does *NOT* increase quality. It just hides the problem and as
+> >> such it is ostrich behaviour.
+> >>
+> >> Instead of masking the problem, better fix things. That is what improves
+> >> quality!
+> >>
+> >> For me a non building recipe is a sign of poor quality.
+> >>
+> >> BTW: to avoid the blacklisting issue, I've restarted my test with minimal
+> >> distro.
+> >> Results will probably be available after the weekend.
+> >
+> > "world" is used by Poky quite successfully. In Poky we expect everything
+> > to build with a known list of things that don't. Our aim is to have that
+> > list consisting of zero items and I intend to see that happens :).
+> 
+> But Poky operates under different conditions than the main OE meta-data. 
+> Since you more focus on what Poky builds, you do not need to support the 
+> variety of recipes in the OE meta-data.
 
-Le 31/07/2010 07:34, Khem Raj a écrit :
-> Following series of patches are for making multi-machine toolchains co-exist with
-> new cross staging for toolchain.
->
-> It installs the toolchain in<native sysroot>/usr/${BASE_PACKAGE_ARCH}
-> this way we can have multiple toolchains co-existing for different sub-arches and major arches too.
->
-> I have booted a native-sdk-image on qemuarm successfully. The build for
-> beagleboard minimal image using different versions of toolchain went all fine too.
->
-> Please test these patches and if seem ok provide some ACKS/NACKS
->
-here is the result of my tests :
-* distro Angstrom for armv5 and armv6 machines : several images & sdk 
-are built fine (but not tested)
-* distro minimal for armv4 and armv5 machines : several images & sdk are 
-built fine (but not tested)
+Totally. I was mainly responding to the "world is useless, we should
+remove it" comment and also showing that blacklists are used by others
+too, in general with success.
 
-Eric
+Cheers,
+
+Richard
+
+
+
 
 
