@@ -1,29 +1,32 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from qmta03.westchester.pa.hmc1.comcast.net ([76.96.53.20])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1Og0xM-0002w8-RE
+	(envelope-from <jfaith@soundmetrics.com>) id 1Og1Ft-0004ok-Ae
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Aug 2010 21:45:53 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1Og0x0-0007cB-0P
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Aug 2010 20:45:30 +0100
-From: Phil Blundell <philb@gnu.org>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <4C571964.2070800@tycoelectronics.com>
+	Mon, 02 Aug 2010 22:05:02 +0200
+Received: from omta03.westchester.pa.hmc1.comcast.net ([76.96.53.19])
+	by qmta03.westchester.pa.hmc1.comcast.net with comcast
+	id pRHN1e0050Qry6409Y3Wf3; Mon, 02 Aug 2010 20:03:30 +0000
+Received: from [192.168.10.133] ([75.147.191.205])
+	by omta03.westchester.pa.hmc1.comcast.net with bizsmtp
+	id pY3V1e0034SLwm301Y3VjX; Mon, 02 Aug 2010 20:03:30 +0000
+Message-ID: <4C572463.4030009@soundmetrics.com>
+Date: Mon, 02 Aug 2010 13:02:43 -0700
+From: John Faith <jfaith@soundmetrics.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.8.1.22) Gecko/20090605 SeaMonkey/1.1.17
+	(Ubuntu-1.1.17+nobinonly-0ubuntu1)
+MIME-Version: 1.0
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
 References: <mailman.396.1280769240.17151.openembedded-devel@lists.openembedded.org>
 	<4C571964.2070800@tycoelectronics.com>
-Date: Mon, 02 Aug 2010 21:45:43 +0100
-Message-ID: <1280781943.10932.5.camel@lenovo.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+In-Reply-To: <4C571964.2070800@tycoelectronics.com>
+X-SA-Exim-Connect-IP: 76.96.53.20
+X-SA-Exim-Mail-From: jfaith@soundmetrics.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Chinese Fonts needed for xserver-xorg on OpenEmbedded
@@ -40,25 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Aug 2010 19:45:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 02 Aug 2010 20:05:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Mon, 2010-08-02 at 15:15 -0400, Jay Snyder wrote:
+Jay Snyder wrote:
 > I need to display Chinese fonts (unicode 4e00 & higher) on an 
 > xserver-xorg based OE system.
 > Is there a package(s) to install fonts that include these characters?
+>   
 
-Assuming you're using client-side fonts (i.e. freetype), a quick look in
-recipes/ttf-fonts suggests that ttf-wqy-zenhei might be what you need:
+Hi Jay,
+I use the package ttf-sazanami-mincho in recipes/ttf-fonts/ for Japanese 
+(on a non-X11 system) which has kanji glyphs over 4e00, or you might 
+have a look at ttf-wqy-zenhei.
 
-DESCRIPTION = "WenQuanYi Zen Hei - A Hei-Ti Style Chinese font"
-
-If you need an old-style core font then I don't think there is anything
-appropriate in OE although it probably wouldn't be hard to add.
-
-p.
-
+,
+John
 
 
 
