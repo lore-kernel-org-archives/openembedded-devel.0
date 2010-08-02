@@ -1,54 +1,29 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OfzdU-0004VD-RT
+	(envelope-from <jay.snyder@tycoelectronics.com>) id 1Og0EA-0001Uu-Gu
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Aug 2010 20:21:18 +0200
-Received: by bwz10 with SMTP id 10so1995151bwz.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Aug 2010 11:20:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=MXKnI87CzbqdDEa2+9gfX89Bp22pVaG2twslYvIDZl8=;
-	b=cGWh2DDiZFpTZ0+C62crBs1UjzG3UkYjyMN+VrSgevrHhmVECDvhBFo2RPEb9Ll0y9
-	1VRTzg8BEVQehhEXTa09IEkeFhYZnOB6d8/JH9asFdiWF72hNUf7XiVMq0R/0tVjRNud
-	af2EixczUzC1CieqcZJLR5oTCTCSONsJebpuM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=bZXBk2sn/NGvEAxGtlt3lH1qMeyV2LFGN68eO7kgBHCu1sX/XtkP3x4Vy1o2fM9krU
-	e3j4j1AYW42h3/liFRy9QG+KRPmC//cfkDHOGoKEb6XRyiHyvvJh7Zpn7/3vsh9Y9BAB
-	2/ork0N0u1rMzRIkqoglk30db9M3WvSJmbbas=
-Received: by 10.204.179.194 with SMTP id br2mr4337563bkb.196.1280773254458;
-	Mon, 02 Aug 2010 11:20:54 -0700 (PDT)
-Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
-	by mx.google.com with ESMTPS id y2sm4311790bkx.20.2010.08.02.11.20.52
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 02 Aug 2010 11:20:52 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Ofzcy-0001j9-UK; Mon, 02 Aug 2010 20:20:44 +0200
-Date: Mon, 2 Aug 2010 20:20:44 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100802182044.GA6299@mx.loc>
-References: <1280309434.7083.8.camel@utx.lan> <4C503315.8090009@gmail.com>
-	<20100728140613.GB19135@mx.loc> <20100728143208.GC19135@mx.loc>
-	<20100802171317.GF29814@mx.loc> <20100802174910.GA1503@gmail.com>
-	<20100802180716.GG29814@mx.loc> <20100802181343.GA1513@gmail.com>
+	Mon, 02 Aug 2010 20:59:11 +0200
+Received: from [163.241.71.52] (163.241.71.52) by
+	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
+	Server id 8.1.393.1; Mon, 2 Aug 2010 14:58:42 -0400
+Message-ID: <4C571568.4040400@tycoelectronics.com>
+Date: Mon, 2 Aug 2010 14:58:48 -0400
+From: Jay Snyder <jay.snyder@tycoelectronics.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-In-Reply-To: <20100802181343.GA1513@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+To: <openembedded-devel@lists.openembedded.org>
+References: <mailman.306.1280575532.17151.openembedded-devel@lists.openembedded.org>
+In-Reply-To: <mailman.306.1280575532.17151.openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 198.175.154.211
+X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH, RFC]: automatically depend xz compressed URIs on xz-native [was: Re: bitbake: staging of binary over symlink breaks sysroot (lzma x xz)]
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: how to NOT include xserver-kdrive in an OE build?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,72 +37,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Aug 2010 18:21:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 02 Aug 2010 18:59:11 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 02, 2010 at 11:13:43AM -0700, Khem Raj wrote:
->On (02/08/10 20:07), Bernhard Reutner-Fischer wrote:
->> On Mon, Aug 02, 2010 at 10:49:10AM -0700, Khem Raj wrote:
->> >On (02/08/10 19:13), Bernhard Reutner-Fischer wrote:
->> >> On Wed, Jul 28, 2010 at 04:32:08PM +0200, Bernhard Reutner-Fischer wrote:
->> >> >On Wed, Jul 28, 2010 at 04:06:13PM +0200, Bernhard Reutner-Fischer wrote:
->> >> >>On Wed, Jul 28, 2010 at 03:39:33PM +0200, Marco Cavallini wrote:
->> >> >>>Stanislav Brabec ha scritto, Il 28/07/2010 11:30:
->> >> 
->> >> comments on the attached RFC patch?
->> >> TIA,
->> >
->> >-snip-
->> >> @@ -420,12 +424,16 @@ python () {
->> >>  
->> >>      # unzip-native should already be staged before unpacking ZIP recipes
->> >>      need_unzip = bb.data.getVar('NEED_UNZIP_FOR_UNPACK', d, 1)
->> >> -    src_uri = bb.data.getVar('SRC_URI', d, 1)
->> >>  
->> >> -    if ".zip" in src_uri or need_unzip == "1":
->> >> +    if ".zip" in srcuri or need_unzip == "1":
->> >>          depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
->> >>          depends = depends + " unzip-native:do_populate_sysroot"
->> >>          bb.data.setVarFlag('do_unpack', 'depends', depends, d)
->> >> +    for ext in ['xz']: #['gzip', 'bzip2', 'xz']:
->> >> +        if '.' + ext in srcuri:
->> >> +            depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
->> >> +            depends += ' ' + ext + '-native:do_populate_sysroot'
->> >> +            bb.data.setVarFlag('do_unpack', 'depends', depends, d)
->> >
->> >what does above hunk do.
->> 
->> srcuri=proto://some.thing.tar.xz
->> if ".xz" in srcuri then depend do_unpack on '
->> xz-native:do_populate_sysroot'
->> 
->> Re-reading the hunk it should better read:
->>   import re
->>   for (ext,tool) in [('xz','xz')]: # ('gz','gzip'),('bz','bzip2')
->                                     ^
->
->that will turn the rest into comment is that ok ?          
+I am trying to use xorg-xserver 1.7.4 in my build for an Intel Atom Z510 
+system.
+I want to build xf86-video-intel, but get the following error:
 
-I didn't try the other two, so yes, it's ok.
-Feedback on doing the same for bzip2 is welcome but keep in
-mind that you _need_ gzip (or busybox with gz decompressor) on the host
-to unpack bzip2.tar.gz.
+    *| checking for XORG... configure: error: Package requirements
+    (xorg-server >= 1.6 xproto fontsproto  randrproto renderproto
+    xextproto x11 xextproto) were not met:
+    |
+    | Requested 'xorg-server >= 1.6' but version of xorg-server is 1.4.0.90
+    |
+    | Consider adjusting the PKG_CONFIG_PATH environment variable if you
+    | installed software in a non-standard prefix.
+    |
+    | Alternatively, you may set the environment variables XORG_CFLAGS
+    | and XORG_LIBS to avoid the need to call pkg-config.
+    | See the pkg-config man page for more details.
+    *
 
->
->>     rex = re.compile('.*\.' + ext + '$')
->>     if rex.match(srcuri):
->>       depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
->>       depends += ' ' + tool + '-native:do_populate_sysroot'
->>       bb.data.setVarFlag('do_unpack', 'depends', depends, d)
->> 
->> >in general approach looks ok to me. It would be nice that while you are at
->> >it other packages which are needed early like git etc can use this approach
->> >as well.
->> 
->> Agree. One step at a time, let's first handle the unpackers though, k?
->> 
->
->yes however I wanted to keep this in notice.
+|
+
+I checked the deply/glibc/ipk/i686 directory, and there are packages for 
+BOTH xserver-kdrive, and xserver-xorg built.
+
+The xorg-xserver version being returned by pkg-config is the one for the 
+kdrive serer.
+Since I'm not using the kdrive server, I'd like to prevent it from being 
+built at all, so that the pkg-config in my staging directories reflects 
+the actual version of xorg-xerver that I have built.
+
+Thanks,
+Jay
 
 
