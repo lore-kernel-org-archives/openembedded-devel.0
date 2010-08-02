@@ -1,45 +1,52 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ofxrg-0005nP-Hy
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OfyaG-0005QS-E3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Aug 2010 18:28:28 +0200
-Received: by ywe9 with SMTP id 9so1402339ywe.6
+	Mon, 02 Aug 2010 19:13:59 +0200
+Received: by fxm12 with SMTP id 12so1827548fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 02 Aug 2010 09:27:24 -0700 (PDT)
+	Mon, 02 Aug 2010 10:13:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=leaFZZ+35YPGi1OW+vFehbIrCRyHU663gT2WfYcf+2c=;
-	b=BW293G8j/XLQYQrJiit+stKG1LAWCD6aBWoP4WuIwgBUfi+d7MMoahiQEwFV/s3bFr
-	Om9SR98b3/L2fiwandCwToguny6N6Slj09z+xJCUr4S+N/VAOz6ybMQYDfBVCjfC0mW4
-	4aFKFE2yEYL78xvAfPjHxUDTMrwlOqMmi7nVI=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=LABzG82w99ZMiPJSCQPr+W4EQ+W6QfXuan8LMokMotQ=;
+	b=ODKOJ1IZ4bccuY7j1H9CJdGmYY/BHBZhXTxlOAQINSAK3WppsLsYuBXN4Cs2Y/H9Jo
+	+t1qyH79dMs75+hrtjlcsqNqyzPt+/ARPct9YgUTe6ZGHkwpu++hpAiXVb3rzC7xB6wM
+	0mg6TsppWTgyxnPNbJNgMdYq1YlZdfsbj+D6M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=v1ypiZ8hfO6RsD451xcNsUN2yFGukanwoEYiDufmVTJ7h6f37n77k3g5yqnQDaDB3m
-	FtqBcqAKc+Uzx7p+lyOFdjhOXVsQJkLQ9f0o2oB7DKHOUIH4Y5oXkoiGL+eY/SWfAvDb
-	rIMx4fHc3TOyzkCnfe6dO1HDFzsQNptpGqLiU=
-Received: by 10.151.109.13 with SMTP id l13mr1309746ybm.205.1280766442696; 
-	Mon, 02 Aug 2010 09:27:22 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.14.199 with HTTP; Mon, 2 Aug 2010 09:27:02 -0700 (PDT)
-In-Reply-To: <i363dm$17p$1@dough.gmane.org>
-References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com> 
-	<i30rie$8aq$1@dough.gmane.org> <i318p1$ec3$1@dough.gmane.org> 
-	<i31rhg$4a8$1@dough.gmane.org> <i363dm$17p$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 2 Aug 2010 09:27:02 -0700
-Message-ID: <AANLkTinE0=x74yBxHsGCpRLFoQfDF+gHeuHFMG=D+rY_@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Gez2ldU2gsFy/EHcCwYPjneTIj/zpwWNpJE/fECMqVrM43cEqUoClfzfTsDZY1mSxp
+	qMjE9hpLet3BCY1p86uTgoYk9IbtDziQ/plsuQkTxGcleTGBeggY6RzueOKFrB+CK4gE
+	tMN7jaYA9oC/Dl1QqJRFfyFD4Fo6xfOMmGkTE=
+Received: by 10.223.120.67 with SMTP id c3mr6123205far.70.1280769205945;
+	Mon, 02 Aug 2010 10:13:25 -0700 (PDT)
+Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
+	by mx.google.com with ESMTPS id 14sm2114732fav.2.2010.08.02.10.13.24
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 02 Aug 2010 10:13:25 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OfyZh-0001Lv-UG; Mon, 02 Aug 2010 19:13:17 +0200
+Date: Mon, 2 Aug 2010 19:13:17 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100802171317.GF29814@mx.loc>
+References: <1280309434.7083.8.camel@utx.lan> <4C503315.8090009@gmail.com>
+	<20100728140613.GB19135@mx.loc> <20100728143208.GC19135@mx.loc>
+MIME-Version: 1.0
+In-Reply-To: <20100728143208.GC19135@mx.loc>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
+Subject: [PATCH, RFC]: automatically depend xz compressed URIs on xz-native [was: Re: bitbake: staging of binary over symlink breaks sysroot (lzma x xz)]
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,68 +60,217 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Aug 2010 16:30:09 -0000
-X-List-Received-Date: Mon, 02 Aug 2010 16:30:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 02 Aug 2010 17:14:00 -0000
+X-Groupsio-MsgNum: 21710
+Content-Type: multipart/mixed; boundary="+pHx0qQiF2pBVqBT"
+Content-Disposition: inline
 
-On Mon, Aug 2, 2010 at 2:33 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 31-07-10 20:54, Koen Kooi wrote:
->> On 31-07-10 15:34, Koen Kooi wrote:
->>> On 31-07-10 11:48, Koen Kooi wrote:
->>>> On 31-07-10 07:34, Khem Raj wrote:
->>>>> Hi
->>
->>>>> Following series of patches are for making multi-machine toolchains co-exist with
->>>>> new cross staging for toolchain.
->>
->>>>> It installs the toolchain in <native sysroot>/usr/${BASE_PACKAGE_ARCH}
->>>>> this way we can have multiple toolchains co-existing for different sub-arches and major arches too.
->>
->>>>> I have booted a native-sdk-image on qemuarm successfully. The build for
->>>>> beagleboard minimal image using different versions of toolchain went all fine too.
->>
->>>>> Please test these patches and if seem ok provide some ACKS/NACKS
->>
->>>> Khem, thanks for working on this!
->>
->>>> Firing of a build now :)
->>
->>> 'MACHINE=beagleboard bitbake ffmpeg samba mysql5 gstreamer-ti' completed
->>> succesfully, doing a 'MACHINE=hawkboard bitbake gtk+' now.
->>
->> And that seems to have worked as well. I have kicked of a huge
->> multimachine build on the 16core buildserver at work and will inspect
->> the results on monday. But so far it's looking really good.
->
-> The multimachine build finished as well. Before I ack this patch, are we
-> going to match the OE layout to the one used in poky?
+--+pHx0qQiF2pBVqBT
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I think the layout we have is nice because it still keeps the cross
-bits somewhat
-and lets relocatable class to fudge the rpath and we are in native sysroot.
-and <sysroot>/usr/armv5te/bin looks a bit better than
-<sysroot>/usr/bin/armv5te/bin
+On Wed, Jul 28, 2010 at 04:32:08PM +0200, Bernhard Reutner-Fischer wrote:
+>On Wed, Jul 28, 2010 at 04:06:13PM +0200, Bernhard Reutner-Fischer wrote:
+>>On Wed, Jul 28, 2010 at 03:39:33PM +0200, Marco Cavallini wrote:
+>>>Stanislav Brabec ha scritto, Il 28/07/2010 11:30:
+>>>> I just built an angstrom image and thinks failed.
+>>>> 
+>>>> lzma image depends on lzma-native, grep and other programs that use .xz
+>>>> suffix for tarballs depend on xz-native.
+>>>> This fact itself is bad - it creates file conflicts in the sysroot.
+>>>> 
+>>>> But things were even worse:
+>>>> - xz-native staged xz binary and lzma as a symlink to xz.
+>>>> - lzma-native tried to stage lzma 4 minutes later
+>>>> 
+>>>> But staging of lzma apparently went wrong. Instead of removal of lzma
+>>>> symlink and installation of lzma binary, bitbake followed the symlink
+>>>> and staged lzma as xz with a result of broken build environment.
+>>>> 
+>>>> I have bitbake-1.8.18.
+>>>> 
+>>>
+>>>
+>>>In the meantime we are waiting for a patch I used
+>>> bitbake xz-native
+>>>prior to launch
+>>> bitbake x11-image
+>>
+>>To rectify this extra manual step, one would need to something like the
+>>attached (untested). This does not take care of diverting lzma/xz
+>>binaries which is a separate issue.
 
->
-> regards,
->
-> Koen
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMVpD2MkyGM64RGpERAsK8AJwMVi7zfHWt07AbegVk0MRvp4oMAgCaApKK
-> ADTLyDOwp79gCsVC1tV//mI=
-> =f9PZ
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+comments on the attached RFC patch?
+TIA,
 
+--+pHx0qQiF2pBVqBT
+Content-Type: text/x-diff; charset=us-ascii
+Content-Disposition: attachment; filename="oe-native-unpacker.01.patch"
 
+diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+index b2de2b1..b2901ff 100644
+--- a/classes/autotools.bbclass
++++ b/classes/autotools.bbclass
+@@ -1,8 +1,14 @@
+ # use autotools_stage_all for native packages
+ AUTOTOOLS_NATIVE_STAGE_INSTALL = "1"
+ 
+-def autotools_deps(d):
+-	if bb.data.getVar('INHIBIT_AUTOTOOLS_DEPS', d, 1):
++def autotools_deps(d, virtclass=None):
++	if virtclass:
++		virtclass_str = "_virtclass-%s" % (virtclass)
++	else:
++		virtclass_str = ""
++	if ((virtclass and bb.data.inherits_class(virtclass, d)) \
++	     or (virtclass is None)) \
++		and bb.data.getVar('INHIBIT_AUTOTOOLS_DEPS' + virtclass_str, d, 1):
+ 		return ''
+ 
+ 	pn = bb.data.getVar('PN', d, 1)
+@@ -17,7 +23,7 @@ def autotools_deps(d):
+ 		if not bb.data.inherits_class('native', d) \
+                         and not bb.data.inherits_class('cross', d) \
+                         and not bb.data.inherits_class('sdk', d) \
+-                        and not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d, 1):
++                        and not bb.data.getVar('INHIBIT_DEFAULT_DEPS' + virtclass_str, d, 1):
+                     deps += 'libtool-cross '
+ 
+ 	return deps + 'gnu-config-native '
+@@ -25,8 +31,8 @@ def autotools_deps(d):
+ EXTRA_OEMAKE = ""
+ 
+ DEPENDS_prepend = "${@autotools_deps(d)}"
+-DEPENDS_virtclass-native_prepend = "${@autotools_deps(d)}"
+-DEPENDS_virtclass-nativesdk_prepend = "${@autotools_deps(d)}"
++DEPENDS_virtclass-native_prepend = "${@autotools_deps(d, 'native')}"
++DEPENDS_virtclass-nativesdk_prepend = "${@autotools_deps(d, 'nativesdk')}"
+ 
+ inherit siteinfo
+ 
+@@ -86,6 +92,7 @@ oe_runconf () {
+ }
+ 
+ autotools_do_configure() {
++	[ "x${INHIBIT_AUTORECONF}" = "x" ] &&
+ 	case ${PN} in
+ 	autoconf*)
+ 	;;
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 1847491..c4856d1 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -57,7 +57,11 @@ oe_runmake() {
+ 	${MAKE} ${EXTRA_OEMAKE} "$@" || die "oe_runmake failed"
+ }
+ 
+-def base_deps(d):
++def base_deps(d, virtclass=None):
++	if virtclass:
++		virtclass_str = "_virtclass-%s" % (virtclass)
++	else:
++		virtclass_str = ""
+ 	#
+ 	# Ideally this will check a flag so we will operate properly in
+ 	# the case where host == build == target, for now we don't work in
+@@ -71,7 +75,7 @@ def base_deps(d):
+ 	# INHIBIT_DEFAULT_DEPS doesn't apply to the patch command.  Whether or  not
+ 	# we need that built is the responsibility of the patch function / class, not
+ 	# the application.
+-	if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d):
++	if not bb.data.getVar('INHIBIT_DEFAULT_DEPS' + virtclass_str, d):
+ 		if (bb.data.getVar('HOST_SYS', d, 1) !=
+ 	     	    bb.data.getVar('BUILD_SYS', d, 1)):
+ 			deps += " virtual/${TARGET_PREFIX}gcc virtual/libc "
+@@ -84,8 +88,8 @@ def base_deps(d):
+ 	return deps
+ 
+ DEPENDS_prepend="${@base_deps(d)} "
+-DEPENDS_virtclass-native_prepend="${@base_deps(d)} "
+-DEPENDS_virtclass-nativesdk_prepend="${@base_deps(d)} "
++DEPENDS_virtclass-native_prepend="${@base_deps(d, 'native')} "
++DEPENDS_virtclass-nativesdk_prepend="${@base_deps(d, 'nativesdk')} "
+ 
+ 
+ SCENEFUNCS += "base_scenefunction"
+@@ -420,12 +424,16 @@ python () {
+ 
+     # unzip-native should already be staged before unpacking ZIP recipes
+     need_unzip = bb.data.getVar('NEED_UNZIP_FOR_UNPACK', d, 1)
+-    src_uri = bb.data.getVar('SRC_URI', d, 1)
+ 
+-    if ".zip" in src_uri or need_unzip == "1":
++    if ".zip" in srcuri or need_unzip == "1":
+         depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
+         depends = depends + " unzip-native:do_populate_sysroot"
+         bb.data.setVarFlag('do_unpack', 'depends', depends, d)
++    for ext in ['xz']: #['gzip', 'bzip2', 'xz']:
++        if '.' + ext in srcuri:
++            depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
++            depends += ' ' + ext + '-native:do_populate_sysroot'
++            bb.data.setVarFlag('do_unpack', 'depends', depends, d)
+ 
+     # 'multimachine' handling
+     mach_arch = bb.data.getVar('MACHINE_ARCH', d, 1)
+diff --git a/classes/native.bbclass b/classes/native.bbclass
+index 3437836..9539d30 100644
+--- a/classes/native.bbclass
++++ b/classes/native.bbclass
+@@ -88,8 +88,7 @@ PKG_CONFIG_PATH .= "${EXTRA_NATIVE_PKGCONFIG_PATH}"
+ PKG_CONFIG_SYSROOT_DIR = ""
+ 
+ ORIG_DEPENDS := "${DEPENDS}"
+-
+-DEPENDS_virtclass-native ?= "${ORIG_DEPENDS}"
++DEPENDS_virtclass-native ?= "${@base_conditional('INHIBIT_DEFAULT_DEPS_virtclass-native', '1', '', '${ORIG_DEPENDS}', d)}"
+ 
+ python __anonymous () {
+     # If we've a legacy native do_stage, we need to neuter do_install
+@@ -111,7 +110,6 @@ python __anonymous () {
+             if dep.endswith("-cross"):
+                 newdeps.append(dep.replace("-cross", "-native"))
+             elif not dep.endswith("-native"):
+-     
+                 newdeps.append(dep + "-native")
+             else:
+                 newdeps.append(dep)
+@@ -121,9 +119,9 @@ python __anonymous () {
+             if prov.find(pn) != -1:
+                 continue
+             if not prov.endswith("-native"):
+-    
+                 provides = provides.replace(prov, prov + "-native")
+         bb.data.setVar("PROVIDES", provides, d)
+         bb.data.setVar("OVERRIDES", bb.data.getVar("OVERRIDES", d, False) + ":virtclass-native", d)
++        bb.data.setVar("INHIBIT_AUTORECONF", bb.data.getVar("INHIBIT_AUTORECONF_virtclass-native", d, True), d)
+ }
+ 
+diff --git a/recipes/grep/grep_2.6.3.bb b/recipes/grep/grep_2.6.3.bb
+index 981c062..5c76bab 100644
+--- a/recipes/grep/grep_2.6.3.bb
++++ b/recipes/grep/grep_2.6.3.bb
+@@ -3,8 +3,6 @@ SECTION = "console/utils"
+ DESCRIPTION = "grep GNU utility"
+ PR = "r2"
+ 
+-do_unpack[depends] += "xz-native:do_populate_sysroot"
+-
+ SRC_URI = "${GNU_MIRROR}/grep/grep-${PV}.tar.xz \
+            file://uclibc-fix.patch"
+ 
+diff --git a/recipes/xz/xz_4.999.9beta.bb b/recipes/xz/xz_4.999.9beta.bb
+index 8733023..fe49412 100644
+--- a/recipes/xz/xz_4.999.9beta.bb
++++ b/recipes/xz/xz_4.999.9beta.bb
+@@ -1,5 +1,8 @@
++INHIBIT_AUTOTOOLS_DEPS_virtclass-native = "1"
++INHIBIT_DEFAULT_DEPS_virtclass-native = "1"
++INHIBIT_AUTORECONF_virtclass-native = "1"
+ require xz.inc
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ SRC_URI = "http://tukaani.org/xz/xz-${PV}.tar.bz2;name=xz"
+ SRC_URI[xz.md5sum] = "cc4044fcc073b8bcf3164d1d0df82161"
+ SRC_URI[xz.sha256sum] = "330312c4397608d8b7be362cc7edbfeafa6101614bc2164d816ea767656aa15c"
+
+--+pHx0qQiF2pBVqBT--
