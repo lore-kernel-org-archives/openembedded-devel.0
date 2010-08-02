@@ -1,32 +1,37 @@
-Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1OfrqZ-0001W8-1D
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Aug 2010 12:05:21 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Mon, 2 Aug 2010 12:00:32 +0200
-X-TM-IMSS-Message-ID: <45f3d6eb00015f51@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 45f3d6eb00015f51 for
-	<jaap.dejong@nedap.com>; Mon, 2 Aug 2010 12:00:26 +0100
-Message-ID: <4C56973F.9090208@nedap.com>
-Date: Mon, 02 Aug 2010 12:00:31 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OfujH-00032v-DB for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Aug 2010 15:07:40 +0200
+Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
+	by mail-dotnet1.eads.net with ESMTP; 02 Aug 2010 14:56:14 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.7381); 
+	Mon, 2 Aug 2010 15:06:18 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 2 Aug 2010 15:06:18 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-OriginalArrivalTime: 02 Aug 2010 10:00:32.0895 (UTC)
-	FILETIME=[8BB230F0:01CB3229]
-X-SA-Exim-Connect-IP: 213.160.213.92
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+Date: Mon, 2 Aug 2010 15:06:16 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5ADD@deimsg40.de.net.world>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: Problems building gdb-cross-sdk
+Thread-Index: AcsyQ327qZlxZTrjSk2JIyV6+Te4Yg==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 02 Aug 2010 13:06:18.0350 (UTC)
+	FILETIME=[7EE7A8E0:01CB3243]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: PREMIRRORS trouble
+Subject: Problems building gdb-cross-sdk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,46 +45,156 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Aug 2010 10:07:48 -0000
-X-List-Received-Date: Mon, 02 Aug 2010 10:07:48 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 02 Aug 2010 13:11:02 -0000
+X-List-Received-Date: Mon, 02 Aug 2010 13:11:02 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi!
+Hello,
 
-I've run into some problems using PRE_MIRRORS.
-If I remove the line from build/conf/site.conf everything is OK.
+I am running in strange problems while building gdb-cross-sdk.
 
-     PREMIRRORS = "(ftp|http|https)://.*/.* http://myServer/sources/"
+If I run bitbake gdb-cross-sdk on exactly the same overlay/openembedded
+environment on different virtual machines, I succeed on my test
+VM, using my production VM I get the following error: =20
 
-Thanks!
-Jaap
+>>>>
+DEBUG: Legacy staging mode for
+/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
+DEBUG: update_data()
+DEBUG: update_data()
+DEBUG: Executing task do_populate_sysroot
+DEBUG: update_data()
+DEBUG: mkdirhier(/angstrom/temp/angstrom-omap3evm/pstage)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/armv7a-angstrom-linu
+x-gnueabi//usr/local/angstrom/arm/bin)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/armv7a-angstrom-linu
+x-gnueabi//usr/local/angstrom/arm/lib)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/armv7a-angstrom-linu
+x-gnueabi//usr/local/angstrom/arm/include)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux/usr/bin)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux/usr/lib)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux/usr/inclu
+de)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux-sdk/usr/l
+ocal/angstrom/arm/share)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
+-linux-gnueabi/gdb-cross-sdk-7.1-r6.0/gdb-7.1)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
+-linux-gnueabi/gdb-cross-sdk-7.1-r6.0/build-arm-angstrom-linux-gnueabi)
+NOTE: Legacy staging mode for
+/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
+-linux-gnueabi/gdb-cross-sdk-7.1-r6.0/temp)
+DEBUG:
+mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
+-linux-gnueabi/gdb-cross-sdk-7.1-r6.0/temp)ERROR: Error in executing:
+/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
+ERROR: Exception:<type 'exceptions.OSError'> Message:[Errno 1] Operation
+not permitted:
+'//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
+ERROR: Printing the environment of the function
+ERROR: Error in executing:
+/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
+ERROR: Exception:<type 'exceptions.OSError'> Message:[Errno 1] Operation
+not permitted:
+'//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
+ERROR: Printing the environment of the function
+ERROR: 	0029:        bb.build.exec_func('do_stage', d)
+ERROR: 	0030:        for f in
+(bb.data.getVar('SYSROOT_PREPROCESS_FUNCS', d, True) or '').split():
+ERROR: 	0031:            bb.build.exec_func(f, d)
+ERROR: 	0032:        bb.build.exec_func('populate_sysroot_posthook', d)
+ERROR: 	0033:        bb.utils.unlockfile(lock)
+ERROR: 	0034:    else:
+ERROR: 	0035:        dest =3D bb.data.getVar('D', d, True)
+ERROR: 	0036:        sysrootdest =3D
+bb.data.expand('${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}', d)
+ERROR: 	0037:        bb.mkdirhier(sysrootdest)
+ERROR: Build of
+/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
+do_populate_sysroot failed
+Traceback (most recent call last):
+  File "/angstrom/bsp_arm/bitbake/bin/bitbake", line 143, in <module>
+    main()
+  File "/angstrom/bsp_arm/bitbake/bin/bitbake", line 140, in main
+    cooker.cook()
+  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 640, in cook
+    return self.buildTargets(pkgs_to_build)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 547, in
+buildTargets
+    failures =3D rq.execute_runqueue()
+  File "/angstrom/bsp_arm/bitbake/lib/bb/runqueue.py", line 841, in
+execute_runqueue
+    self.execute_runqueue_internal()
+  File "/angstrom/bsp_arm/bitbake/lib/bb/runqueue.py", line 950, in
+execute_runqueue_internal
+    self.cooker.tryBuild(fn)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 136, in
+tryBuild
+    return self.tryBuildPackage(fn, item, self.configuration.cmd,
+the_data)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 110, in
+tryBuildPackage
+    bb.build.exec_task('do_%s' % task, the_data)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 283, in
+exec_task
+    exec_func(task, localdata)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 120, in
+exec_func
+    exec_func_python(func, d)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 141, in
+exec_func_python
+    utils.better_exec(comp, g, tmp, bbfile)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/utils.py", line 185, in
+better_exec
+    exec code in context
+  File "do_populate_sysroot", line 49, in <module>
+  File "do_populate_sysroot", line 31, in do_populate_sysroot
+  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 120, in
+exec_func
+    exec_func_python(func, d)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 141, in
+exec_func_python
+    utils.better_exec(comp, g, tmp, bbfile)
+  File "/angstrom/bsp_arm/bitbake/lib/bb/utils.py", line 185, in
+better_exec
+    exec code in context
+  File "relocatable_binaries_preprocess", line 4, in <module>
+  File "relocatable_binaries_preprocess", line 2, in
+relocatable_binaries_preprocess
+  File "<bb>", line 7, in rpath_replace
+  File "<bb>", line 33, in process_dir
+OSError: [Errno 1] Operation not permitted:
+'//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
+<<<<<
 
-$ bitbake at91bootstrap
-NOTE: Handling BitBake files: - (8448/8448) [100 %]
-NOTE: Parsing finished. 7634 cached, 474 parsed, 340 skipped, 1 masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Preparing runqueue
-NOTE: Executing runqueue
-NOTE: Running task 342 of 539 (ID: 6, 
-/unstable/org.openembedded.dev/recipes/at91bootstrap/at91bootstrap_2.10.bb, 
-do_setscene)
-NOTE: Running task 524 of 539 (ID: 5, 
-/unstable/org.openembedded.dev/recipes/at91bootstrap/at91bootstrap_2.10.bb, 
-do_fetch)
-NOTE: Task failed: Unknown fetch Error: too many values to unpack
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of 
-/unstable/org.openembedded.dev/recipes/at91bootstrap/at91bootstrap_2.10.bb 
-do_fetch failed
-ERROR: Task 5 
-(/unstable/org.openembedded.dev/recipes/at91bootstrap/at91bootstrap_2.10.bb, 
-do_fetch) failed
-NOTE: Tasks Summary: Attempted 523 tasks of which 522 didn't need to be 
-rerun and 1 failed.
-ERROR: 
-'/unstable/org.openembedded.dev/recipes/at91bootstrap/at91bootstrap_2.10.bb' 
-failed
+the production VM is drived from the test VM, so the used environment is
+mostly the same.
 
+The python routine obviously loose or mangle the ${SYSROOT_DESTDIR} and
+${STAGING_DIR_TARGET} Variable, but I can't figure out why.
+
+Instead of '//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
+it should be something  like
+'/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom-linux-gn
+ueabi/gdb-cross-sdk-7.1-r6.0/temp' I suppose.
+
+Has someone an idea what's going on ?
+
+Regards
+Wolfgang Hauser
 
 
