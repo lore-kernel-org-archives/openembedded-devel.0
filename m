@@ -1,37 +1,28 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OfujH-00032v-DB for openembedded-devel@lists.openembedded.org;
-	Mon, 02 Aug 2010 15:07:40 +0200
-Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
-	by mail-dotnet1.eads.net with ESMTP; 02 Aug 2010 14:56:14 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.7381); 
-	Mon, 2 Aug 2010 15:06:18 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Mon, 2 Aug 2010 15:06:18 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <marcolz@zlo.nu>) id 1OfvkE-0007GG-5s
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 02 Aug 2010 16:12:09 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 433AB1413C; Mon,  2 Aug 2010 16:11:12 +0200 (CEST)
+Date: Mon, 2 Aug 2010 16:11:12 +0200
+From: Marc Olzheim <zlo@zlo.nu>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100802141112.GA28268@zlo.nu>
+References: <1280415061-28353-1-git-send-email-chase.maupin@ti.com>
+	<20100729205504.GE29814@mx.loc> <i2tsjb$o2v$1@dough.gmane.org>
 MIME-Version: 1.0
-Date: Mon, 2 Aug 2010 15:06:16 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5ADD@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: Problems building gdb-cross-sdk
-Thread-Index: AcsyQ327qZlxZTrjSk2JIyV6+Te4Yg==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 02 Aug 2010 13:06:18.0350 (UTC)
-	FILETIME=[7EE7A8E0:01CB3243]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+In-Reply-To: <i2tsjb$o2v$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Problems building gdb-cross-sdk
+Subject: Re: [PATCH 1/1] distribute_license: added class to copy license files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,156 +36,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 02 Aug 2010 13:11:02 -0000
-X-List-Received-Date: Mon, 02 Aug 2010 13:11:02 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 02 Aug 2010 14:12:14 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Hello,
+On Fri, Jul 30, 2010 at 08:48:11AM +0200, Koen Kooi wrote:
+> > hush: set: -f: invalid option
+> 
+> I don't think we realistically support something different than bash.
+> Having said that, adding hashisms is bad, do you have a suggestion for a
+> more portable approach?
 
-I am running in strange problems while building gdb-cross-sdk.
+I've been building with dash as /bin/sh with no problems for almost 2
+years now. Not many gtk packages though. Anyway, I do not see any reason
+to introduce bashisms, but if you do not know how to do it "properly" in
+a portable way, you can always specificaly run bash to run certain
+scripts, as adding bash to OE's prerequisites is less intrusive than
+requiring /bin/sh to be bash.
 
-If I run bitbake gdb-cross-sdk on exactly the same overlay/openembedded
-environment on different virtual machines, I succeed on my test
-VM, using my production VM I get the following error: =20
-
->>>>
-DEBUG: Legacy staging mode for
-/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
-DEBUG: update_data()
-DEBUG: update_data()
-DEBUG: Executing task do_populate_sysroot
-DEBUG: update_data()
-DEBUG: mkdirhier(/angstrom/temp/angstrom-omap3evm/pstage)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/armv7a-angstrom-linu
-x-gnueabi//usr/local/angstrom/arm/bin)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/armv7a-angstrom-linu
-x-gnueabi//usr/local/angstrom/arm/lib)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/armv7a-angstrom-linu
-x-gnueabi//usr/local/angstrom/arm/include)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux/usr/bin)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux/usr/lib)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux/usr/inclu
-de)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/sysroots/i686-linux-sdk/usr/l
-ocal/angstrom/arm/share)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
--linux-gnueabi/gdb-cross-sdk-7.1-r6.0/gdb-7.1)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
--linux-gnueabi/gdb-cross-sdk-7.1-r6.0/build-arm-angstrom-linux-gnueabi)
-NOTE: Legacy staging mode for
-/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
--linux-gnueabi/gdb-cross-sdk-7.1-r6.0/temp)
-DEBUG:
-mkdirhier(/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom
--linux-gnueabi/gdb-cross-sdk-7.1-r6.0/temp)ERROR: Error in executing:
-/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
-ERROR: Exception:<type 'exceptions.OSError'> Message:[Errno 1] Operation
-not permitted:
-'//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
-ERROR: Printing the environment of the function
-ERROR: Error in executing:
-/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
-ERROR: Exception:<type 'exceptions.OSError'> Message:[Errno 1] Operation
-not permitted:
-'//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
-ERROR: Printing the environment of the function
-ERROR: 	0029:        bb.build.exec_func('do_stage', d)
-ERROR: 	0030:        for f in
-(bb.data.getVar('SYSROOT_PREPROCESS_FUNCS', d, True) or '').split():
-ERROR: 	0031:            bb.build.exec_func(f, d)
-ERROR: 	0032:        bb.build.exec_func('populate_sysroot_posthook', d)
-ERROR: 	0033:        bb.utils.unlockfile(lock)
-ERROR: 	0034:    else:
-ERROR: 	0035:        dest =3D bb.data.getVar('D', d, True)
-ERROR: 	0036:        sysrootdest =3D
-bb.data.expand('${SYSROOT_DESTDIR}${STAGING_DIR_TARGET}', d)
-ERROR: 	0037:        bb.mkdirhier(sysrootdest)
-ERROR: Build of
-/angstrom/bsp_arm/openembedded/recipes/gdb/gdb-cross-sdk_7.1.bb
-do_populate_sysroot failed
-Traceback (most recent call last):
-  File "/angstrom/bsp_arm/bitbake/bin/bitbake", line 143, in <module>
-    main()
-  File "/angstrom/bsp_arm/bitbake/bin/bitbake", line 140, in main
-    cooker.cook()
-  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 640, in cook
-    return self.buildTargets(pkgs_to_build)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 547, in
-buildTargets
-    failures =3D rq.execute_runqueue()
-  File "/angstrom/bsp_arm/bitbake/lib/bb/runqueue.py", line 841, in
-execute_runqueue
-    self.execute_runqueue_internal()
-  File "/angstrom/bsp_arm/bitbake/lib/bb/runqueue.py", line 950, in
-execute_runqueue_internal
-    self.cooker.tryBuild(fn)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 136, in
-tryBuild
-    return self.tryBuildPackage(fn, item, self.configuration.cmd,
-the_data)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/cooker.py", line 110, in
-tryBuildPackage
-    bb.build.exec_task('do_%s' % task, the_data)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 283, in
-exec_task
-    exec_func(task, localdata)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 120, in
-exec_func
-    exec_func_python(func, d)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 141, in
-exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/utils.py", line 185, in
-better_exec
-    exec code in context
-  File "do_populate_sysroot", line 49, in <module>
-  File "do_populate_sysroot", line 31, in do_populate_sysroot
-  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 120, in
-exec_func
-    exec_func_python(func, d)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/build.py", line 141, in
-exec_func_python
-    utils.better_exec(comp, g, tmp, bbfile)
-  File "/angstrom/bsp_arm/bitbake/lib/bb/utils.py", line 185, in
-better_exec
-    exec code in context
-  File "relocatable_binaries_preprocess", line 4, in <module>
-  File "relocatable_binaries_preprocess", line 2, in
-relocatable_binaries_preprocess
-  File "<bb>", line 7, in rpath_replace
-  File "<bb>", line 33, in process_dir
-OSError: [Errno 1] Operation not permitted:
-'//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
-<<<<<
-
-the production VM is drived from the test VM, so the used environment is
-mostly the same.
-
-The python routine obviously loose or mangle the ${SYSROOT_DESTDIR} and
-${STAGING_DIR_TARGET} Variable, but I can't figure out why.
-
-Instead of '//usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-nm'
-it should be something  like
-'/angstrom/temp/angstrom-omap3evm/work/i686-armv7a-sdk-angstrom-linux-gn
-ueabi/gdb-cross-sdk-7.1-r6.0/temp' I suppose.
-
-Has someone an idea what's going on ?
-
-Regards
-Wolfgang Hauser
+Marc
 
 
