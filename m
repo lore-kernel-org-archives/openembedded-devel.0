@@ -1,49 +1,40 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OgIFZ-00067Z-Gj
+Received: from li38-254.members.linode.com ([207.192.74.254]
+	helo=masterfoo.zenlinux.com) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sgarman@zenlinux.com>) id 1OgJ5m-0006mT-9R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 16:13:50 +0200
-Received: by wyb38 with SMTP id 38so4580472wyb.6
+	Tue, 03 Aug 2010 17:07:47 +0200
+Received: from [192.168.1.12] (c-71-193-142-55.hsd1.or.comcast.net
+	[71.193.142.55])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by masterfoo.zenlinux.com (Postfix) with ESMTP id B3CC130216
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 07:13:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=rlIQ4vfifHkmK8xwShkdMhb2TvX8ntNqcl+ArOzA5M8=;
-	b=Mn4Z++Kj08H+wSBmQ8inpcZhy/acbegfSHEBq+Z4lvrQqfIx+rp3G2It6oLuNezjXi
-	MxVfmI9QbmNWtEB5nLkCHG5uHpeszStOkcGNa0zF39gTxWUNPv6UhxM61FA8Tin9216Z
-	5T+v+UaV4SuXc02dKcrPBXQqXsv3wPAtEmc30=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=ccT4GxlkMbkdAJV7NUDWgRDjS7f/W9q4xA6NtHhqiJ99+d07hOTXa4OdYdJRv98D1P
-	Xp5n/3Cj5jOUtEkCOKjvQXOv0ZTQ5t+Wp0fcaG5GdmTywRtDk9nY7+qliGxGZ3i93pEr
-	jRm1P33Xt9Cp5QPhEELRYguAXIKaq5HTj3xlg=
-Received: by 10.216.50.73 with SMTP id y51mr6366848web.85.1280844824361; Tue, 
-	03 Aug 2010 07:13:44 -0700 (PDT)
+	Tue,  3 Aug 2010 11:07:35 -0400 (EDT)
+Message-ID: <4C583098.5050007@zenlinux.com>
+Date: Tue, 03 Aug 2010 08:07:04 -0700
+From: Scott Garman <sgarman@zenlinux.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.9pre) Gecko/20100217 Lightning/1.0b1 Shredder/3.0.3pre
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.16.204 with HTTP; Tue, 3 Aug 2010 07:13:23 -0700 (PDT)
-In-Reply-To: <1280842002.16235.83.camel@rex>
-References: <1279290319.10837.1747.camel@rex> <1280842002.16235.83.camel@rex>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 3 Aug 2010 07:13:23 -0700
-X-Google-Sender-Auth: Q2OmHSL8KY2v44e1Df8dfsFtDMo
-Message-ID: <AANLkTi=yp8ZMgBqx61BWus+G9p28iJcpKMXASdw_hDr8@mail.gmail.com>
-To: Richard Purdie <rpurdie@rpsys.net>
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1280808074-13861-1-git-send-email-sgarman@zenlinux.com>
+	<AANLkTimKyWgQyN0T6VExcAjE0=M2kuCLvbq-hEYJ70Fc@mail.gmail.com>
+In-Reply-To: <AANLkTimKyWgQyN0T6VExcAjE0=M2kuCLvbq-hEYJ70Fc@mail.gmail.com>
+X-MasterFoo-MailScanner-Information: Please contact the ISP for more
+	information
+X-MailScanner-ID: B3CC130216.94E8E
+X-MasterFoo-MailScanner: Found to be clean
+X-MasterFoo-MailScanner-SpamCheck: not spam
+X-MasterFoo-MailScanner-From: sgarman@zenlinux.com
+X-SA-Exim-Connect-IP: 207.192.74.254
+X-SA-Exim-Mail-From: sgarman@zenlinux.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: Re: [PATCH] tar: Upgrade to v1.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,53 +48,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 14:13:50 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 03 Aug 2010 15:07:47 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 3, 2010 at 6:26 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-
-> On Fri, 2010-07-16 at 15:25 +0100, Richard Purdie wrote:
-> > Whilst our layers mechanism, is great it does have a drawback which has
-> > bugged me for a while. If you have a recipe like pointercal which has
-> > machine specific information in it and you have your new machine code in
-> > a layer, how do you add a pointercal file for your machine?
-> >
-> > Answer is you copy the whole pointercal recipe and files into your
-> > layer, then add the single file for your machine. To me this is ugly,
-> > ugly, ugly. We hate code duplication and as soon as you create two
-> > copies of the same information, we've failed.
-> >
-> > So how could we do this better? Somehow we need to say that a given
-> > directory X has some information which should be merged with the
-> > original recipe. I've thought through several different ways of doing
-> > this and the best solution I found was "bbappend".
-> >
-> > The idea is that if bitbake finds any X.bbappend files, when it loads
-> > X.bb, it will also include these files after it parses the base .bb file
-> > (but before finalise and the anonymous methods run). This means that
-> > the .bbappend file can poke around and do whatever it might want to the
-> > recipe to customise it.
-> >
-> > I went ahead and tried it out as its quite simple to code this in
-> > bitbake. I liked the result enough I've already merged this into Poky:
-> >
-> >
-> http://git.pokylinux.org/cgit.cgi/poky/commit/?id=63e6ba85677b8aa9f4cf9942a1fccbb8a8c72660
-> >
-> > I'm proposing to push it to bitbake master if there are no serious
-> > objections.
+On 08/02/2010 11:14 PM, Frans Meulenbroeks wrote:
+> 2010/8/3 Scott Garman<sgarman@zenlinux.com>
 >
-> Whilst I think there were some initial concerns the consensus seemed to
-> be that this was a good thing to have in bitbake, its something that has
-> been on the feature wishlist since day one so I've merged the patch into
-> bitbake master.
+>> From: Scott Garman<scott.a.garman@intel.com>
+>>
+>> * Addresses CVE-2010-0624
+>>
 >
+> Please have a look at http://wiki.openembedded.net/index.php/Commit_Policy
+>
+> And especially this section:
 
-Glad to hear it, nice work putting it together.
+Hi Frans,
+
+Thanks for sending me these pointers. However, I'm a bit unclear on what 
+needs improvement. The subject line of this patch email corresponds to 
+the first line of the commit message, doesn't it?
+
+To go case-by-case:
+
+>   * Have a clear commit message (example
+> <http://wiki.openembedded.net/index.php/Commit_log_example>):
+>      - The first line of commit is a summary of the changes.
+
+Which in this case is:
+
+tar: Upgrade to v1.23
+
+>      - The first line should start with the name of the recipe the
+> change affects.
+
+tar: <- that's the name of the recipe
+
+>      - The rest of the message should give more details on the change
+> as appropriate.
+
+Given how trivial the change is, there's not much else to say. I did 
+make mention of the security advisory the upgrade fixes:
+
+* Addresses CVE-2010-0624
+
+>      - Mention the affected bug numbers if appropriate.
+
+N/A
+
+>      - Give credit where credit is due. If you commit someone else's
+> work more or
+>        less verbatim, you should use *git commit --author
+> $mail-of-author*. If pulling
+>        changes from somewhere like Poky or OpenMoko there is no problem with that
+>        but mention where the changes came from.
+
+Again, with something this trivial, I doubt anyone would consider me 
+taking credit for something inappropriately.
+
+>      - Include a Signed-off-by: line indicating the change has valid certificate
+>        of origin as per the Linux kernel<http://lwn.net/Articles/139916/>
+
+and indeed, I ended my commit with:
+
+Signed-off-by: Scott Garman <sgarman@zenlinux.com>
+
+I'm happy to respin the patch if needed, but I'm still unsure what needs 
+to be changed.
+
+Thanks,
+
+Scott
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Scott Garman
+sgarman at zenlinux dot com
+
 
