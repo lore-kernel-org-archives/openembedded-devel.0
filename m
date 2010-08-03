@@ -1,43 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from asmtpout026.mac.com ([17.148.16.101])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OgPOr-00067S-1m
+	(envelope-from <elvis.dowson@mac.com>) id 1OgPnE-0000va-Rp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 23:52:00 +0200
-Received: by yxi11 with SMTP id 11so1886457yxi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 14:51:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=7G2g0cUEM/mUEfPZn8I6edFDbYFjs11mhvoB+slhuL4=;
-	b=RV/FTEbJoG1p+I5CKG7vecDSusIMT00NH6bw+e84gl4nyR1fiIdLOso/GySyb5xP50
-	582G3uAEYSajhSpmFSadCoos9PwkdC367YQ5xb1A+uR8m2cSa1HZZsISRr77ER4HpkQn
-	+r2pvOLnwEulzSAyWjBpagO+yamf68Wdxxj2Q=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=uI5poyKorCLTQ57eEjcjnYBKonYXBaVN3qbi7bLkmEC4t6v4niWzZHztDE4oajPmll
-	XGyY4ep8TL6WGd829FYB3tKWH128oLajnL6sCnQaWNBXsg2gwmIC3ISclwjdMdopADqC
-	AL1jTd1fBXU1PXfYnMK0GhPTrHV8sdyzxWHeU=
-Received: by 10.150.62.5 with SMTP id k5mr9658919yba.421.1280872304737;
-	Tue, 03 Aug 2010 14:51:44 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id u42sm7074525yba.12.2010.08.03.14.51.42
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 03 Aug 2010 14:51:43 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Aug 2010 16:47:20 -0500
-Message-Id: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+	Wed, 04 Aug 2010 00:17:21 +0200
+MIME-version: 1.0
+Received: from [192.168.1.103] ([87.201.169.38])
+	by asmtp026.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
+	(built Dec
+	16 2008; 32bit)) with ESMTPSA id <0L6L00BEUKJM4Y90@asmtp026.mac.com> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	03 Aug 2010 15:16:39 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=6.0.2-1004200000 definitions=main-1008030183
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
+	definitions=2010-08-03_09:2010-08-03, 2010-08-03,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Wed, 04 Aug 2010 02:16:12 +0400
+Message-id: <EDA1D3B6-800D-41CB-9DAB-ADFB4D8D0618@mac.com>
+To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.101
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] base.bbclass: add support for SOC_FAMILY in COMPATIBLE_MACHINES
+Subject: Switching between linux kernel versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,36 +45,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 21:52:01 -0000
+X-List-Received-Date: Tue, 03 Aug 2010 22:17:22 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-* Add support for using SOC_FAMILY in the COMPATIBLE_MACHINES
-  setting for a recipe.
-* This will allow recipes to work for entire families of
-  devices without having to maintain/update the compatible
-  devices as new devices are added into a family
+Hi,
+       Will I encounter problems, if within a single oe installation, I keep switching back and forth between linux kernel versions, e.g. 
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
----
- classes/base.bbclass |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+linux-omap3-2.6.32  and linux-omap3-2.6.35 ?
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 1847491..02c7875 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -389,7 +389,9 @@ python () {
-             import re
-             this_machine = bb.data.getVar('MACHINE', d, 1)
-             if this_machine and not re.match(need_machine, this_machine):
--                raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
-+                this_soc_family = bb.data.getVar('SOC_FAMILY', d, 1)
-+                if this_soc_family and not re.match(need_machine, this_soc_family):
-+                    raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
- 
-         need_target = bb.data.getVar('COMPATIBLE_TARGET_SYS', d, 1)
-         if need_target:
--- 
-1.7.0.4
+I was told earlier that it wasn't a good idea to do this, but I've noticed that now, the machine PR is taken from one of the mach/omap files, and set to r51 for TI OMAP 35xx series, e.g. beagleboard and Overo platforms.
 
+So, is it safe to do this? I have to keep experimenting with various kernel versions, and what I'm doing at the moment is keeping the main recipe PV the same, e.g. linux-omap3-2.6.32, but internally, I change the git branch to point to different versions .e.g 2.6.35 , and perform the build, till I'm satisfied with the kernel version I want to work with.
+
+Best regards,
+
+Elvis
 
 
