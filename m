@@ -1,45 +1,46 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OgNbP-0006qE-3c
+	(envelope-from <raj.khem@gmail.com>) id 1OgNdo-0006t1-7m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 21:56:57 +0200
-Received: by pxi12 with SMTP id 12so1825263pxi.6
+	Tue, 03 Aug 2010 21:59:13 +0200
+Received: by pwi10 with SMTP id 10so1828090pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 12:56:38 -0700 (PDT)
+	Tue, 03 Aug 2010 12:58:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=ORr7CrvSjcPFh1sIOWLVnyHz0Km5rofsDsIA8KQwP90=;
-	b=EtBxwQlbfu1OzFPensYRXps4G+Vtnm6zjpO/L+JeXfgO7NMdYN8aiv/Rp7mkS4PeQC
-	zF0tvG4cj2D2sliw+zBhL0MDspkZjtsYOhW6ejTvrma/1AVrXIdB34m3++LabXzbo8BV
-	A6m+s/3PhFQxv2zagE+IkJtG5xh3NamJezXx8=
+	bh=MRXyKHNGDeoiw4P1eGX8CWPCLFSdEnUWK+Uh5Npji4c=;
+	b=DDi5cbj3mxh3AjJr0GdHUU5KTTpMmQ+FdziHX/ZRTXfhCXAuTWuvZpqY9fp7rr9wly
+	pC+OfJ6BU5muRxJqOaArzRqPRi0a6cgXDflJ+mI1vXFhNMDOwYxGxJI2Xv0TtHd94n5z
+	nyMALXBnvYT+C4IgC99LYObVA8n5eZ72aoZW0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ICJ09cAuG1dsnokL9vYV91iNDKgN+Zk8qLyspxCwKtCCtayNxfIC0tdqR77qPkec/V
-	ENZlbCDbwslx7WN1ZYklfYR/FFnt3Bfo9ZwZ/8hUlhGvtnHSImM7vHC9afghhkm0OksQ
-	j26AALjJc+tqEF0G28vZNvrOXsDuJHoSNHeOw=
-Received: by 10.114.24.15 with SMTP id 15mr9426480wax.122.1280865398719;
-	Tue, 03 Aug 2010 12:56:38 -0700 (PDT)
+	b=rg+qrZZlPwVcF93K5y96FNX7PE6OWKODBkPqUaods6JvX8I8HvSJ3SIde6wJIgq3Sq
+	25WhTVho6fh/YBjfWoW3fV9vmAjWwekELvn7CVaT5m3KeYbgO0LKNd30sgR4r8jiDVAa
+	gRpDYp+qgwhsil1DzReUqDinabvrk632/eDm4=
+Received: by 10.142.1.12 with SMTP id 12mr6994104wfa.233.1280865533868;
+	Tue, 03 Aug 2010 12:58:53 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id c24sm14241393wam.19.2010.08.03.12.56.37
+	by mx.google.com with ESMTPS id 23sm9557601wfa.10.2010.08.03.12.58.52
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 03 Aug 2010 12:56:38 -0700 (PDT)
-Date: Tue, 3 Aug 2010 12:56:29 -0700
+	Tue, 03 Aug 2010 12:58:53 -0700 (PDT)
+Date: Tue, 3 Aug 2010 12:58:47 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100803195629.GA5264@gmail.com>
+Message-ID: <20100803195847.GB5264@gmail.com>
 References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
 	<i30rie$8aq$1@dough.gmane.org> <i318p1$ec3$1@dough.gmane.org>
 	<i31rhg$4a8$1@dough.gmane.org> <i363dm$17p$1@dough.gmane.org>
 	<AANLkTinE0=x74yBxHsGCpRLFoQfDF+gHeuHFMG=D+rY_@mail.gmail.com>
 	<i38q56$4hq$1@dough.gmane.org> <20100803133515.GD12134@jama>
+	<i39d10$d2f$1@dough.gmane.org>
 MIME-Version: 1.0
-In-Reply-To: <20100803133515.GD12134@jama>
+In-Reply-To: <i39d10$d2f$1@dough.gmane.org>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 209.85.160.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -61,42 +62,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 19:56:58 -0000
+X-List-Received-Date: Tue, 03 Aug 2010 19:59:13 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (03/08/10 15:35), Martin Jansa wrote:
-> On Tue, Aug 03, 2010 at 12:13:58PM +0200, Koen Kooi wrote:
-> > -----BEGIN PGP SIGNED MESSAGE-----
-> > Hash: SHA1
-> > 
-> > Acked-by: Koen Kooi <k-kooi@ti.com>
-> > 
-> > If noone objects, can we get this in ASAP?
+On (03/08/10 17:36), Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 > 
-> Building from scratch armv4t then armv6 was ok, building few more
-> packages for armv4t again still worked, but now I've upgraded gcc/eglibc
-> and building eglibc-initial for armv4t first fails:
+> On 03-08-10 15:35, Martin Jansa wrote:
+> > On Tue, Aug 03, 2010 at 12:13:58PM +0200, Koen Kooi wrote:
+> >> -----BEGIN PGP SIGNED MESSAGE-----
+> >> Hash: SHA1
+> >>
+> >> Acked-by: Koen Kooi <k-kooi@ti.com>
+> >>
+> >> If noone objects, can we get this in ASAP?
+> > 
+> > Building from scratch armv4t then armv6 was ok, building few more
+> > packages for armv4t again still worked, but now I've upgraded gcc/eglibc
+> > and building eglibc-initial for armv4t first fails:
+> > 
+> > http://tinderbox.openembedded.org/packages/665289/
+> > http://build.shr-project.org/tests/jama/config.log
+> > 
+> > see 
+> > configure: error: compiler support for __thread is require
+> > and
+> > Fatal error: Invalid -march= option: `armv4t'
 > 
-> http://tinderbox.openembedded.org/packages/665289/
-> http://build.shr-project.org/tests/jama/config.log
+> I had that with a previous incarnation of that patchset, but it seems to
+> have gone away.
+> Do we want to solve this problem first or apply the patches and solve it
+> later?
 
+All right the beast is in. Please rebuild from scratch as the location of
+toolchain has once again changed.
 
-I tried this 
-MACHINE=qemuarm bitbake minimal-image
-MACHINE=beagleboard bitbake minimal-image
-MACHINE=qemuarm bitbake -c clean gcc-cross gcc-cross-intermediate gcc-cross-initial eglibc eglibc-initial
-MACHINE=qemuarm bitbake eglibc
-MACHINE=qemuarm bitbake minimal-image
-
-All these steps went without errors.
-
-I would be happy to assist in nailing this issue for you but I need a way
-to reproduce it. On other hand I gave a hint what could have gone wrong 
-Please check that
+Thanks a bunch to everyone who helped in testing these patches and thereby
+making them worthy
 
 Thanks
--Khem
 
+-Khem
 
 
