@@ -1,48 +1,40 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgEm2-0002J3-E8
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OgGrT-0006nk-N6
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 12:31:07 +0200
-Received: by bwz10 with SMTP id 10so2253154bwz.6
+	Tue, 03 Aug 2010 14:44:52 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o73CinNc008424
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 03:31:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=uppCca2XRz/4k76P5ZSfG6DvqTl1K0wYFg35NxIo+dE=;
-	b=dUGfbtWLLhrReZEBaDvo5ppHA1r3X9GowEVW3vn7e3g4/8FDyq7kYSc2aWnqewKhdk
-	60InmyaNLzjFMjhfV+UMEEq3mgz52+rCKVFganZFvtqEPo1wtF0P0mumYp+Sbqy2qg3l
-	+6hmuBdBXSwbbLqM4bQmA0THXKBTNwcRoRrqY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Q8n3Kezr4ARI+Ng9BGb4o16URXAEVDvNx7PmPg6y18jYpFxuCff99dwMUSmfILhdzE
-	u6WvaT579FfBiAwkQfzZjHEU3O95DOGEb7n3MmvZKIenGBnZ7cmOpVSwSez+TiU7L0bY
-	wp1vXYLuVTWtfYZPcx++wlLiCa/iB/4AaEJpc=
-MIME-Version: 1.0
-Received: by 10.204.126.161 with SMTP id c33mr5095392bks.108.1280831463034; 
-	Tue, 03 Aug 2010 03:31:03 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Tue, 3 Aug 2010 03:31:02 -0700 (PDT)
-In-Reply-To: <i38q56$4hq$1@dough.gmane.org>
-References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
-	<i30rie$8aq$1@dough.gmane.org> <i318p1$ec3$1@dough.gmane.org>
-	<i31rhg$4a8$1@dough.gmane.org> <i363dm$17p$1@dough.gmane.org>
-	<AANLkTinE0=x74yBxHsGCpRLFoQfDF+gHeuHFMG=D+rY_@mail.gmail.com>
-	<i38q56$4hq$1@dough.gmane.org>
-Date: Tue, 3 Aug 2010 12:31:02 +0200
-Message-ID: <AANLkTikpZ=om55=-xO3EChGV6h40wBvNUOQvKcLCm3Lv@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 3 Aug 2010 13:44:49 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04809-06 for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Aug 2010 13:44:44 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o73CidS5008404
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 3 Aug 2010 13:44:40 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Tue, 03 Aug 2010 13:44:28 +0100
+Message-ID: <1280839468.16235.67.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
+Subject: Re: [PATCH] 500+ recipes: remove do_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,27 +48,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 10:31:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 03 Aug 2010 12:44:52 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-2010/8/3 Koen Kooi <k.kooi@student.utwente.nl>
+On Mon, 2010-08-02 at 22:19 +0200, Frans Meulenbroeks wrote:
+> This patch removes all occurrences of
+> do_stage() {
+>         autotools_stage_all
+> }
+> including all kind of variants w.r.t whitespace
+> 
+> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> Acked-by: Koen Kooi <k-kooi@ti.com>
->
-> If noone objects, can we get this in ASAP?
->
-> Would it be good to do my do_stage patch first?
+Acked-by: Richard Purdie <rpurdie@linux.intel.com>
 
-rationale:
-this will require a full rebuild. the do_stage patch does not bump PR (which
-is technically probably not needed as nothing changes).
-By doing it just before a major change we are sure that it gets rebuild.
+Thanks for generating this! :)
 
-However, I cannot apply my patch in the next 6-7 hrs. Feel free to apply it
-for me.
+Cheers,
 
-Frans.
+Richard
+
+
 
