@@ -1,31 +1,31 @@
 Received: from smtp5-g21.free.fr ([212.27.42.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ydirson@free.fr>) id 1OgQDq-0002jv-Ir
+	(envelope-from <ydirson@free.fr>) id 1OgQE1-0003Wc-N6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 00:44:38 +0200
+	Wed, 04 Aug 2010 00:45:08 +0200
 Received: from home.lan (unknown [81.57.214.146])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id CB823D48042;
-	Wed,  4 Aug 2010 00:44:26 +0200 (CEST)
+	by smtp5-g21.free.fr (Postfix) with ESMTP id 20187D48079;
+	Wed,  4 Aug 2010 00:44:34 +0200 (CEST)
 Received: from yann by home.lan with local (Exim 4.72)
 	(envelope-from <ydirson@free.fr>)
-	id 1OgQJX-0006PL-Ce; Wed, 04 Aug 2010 00:50:27 +0200
-Date: Wed, 4 Aug 2010 00:50:27 +0200
-From: Yann Dirson <ydirson@free.fr>
+	id 1OgQJf-0006PW-MI; Wed, 04 Aug 2010 00:50:35 +0200
+Date: Wed, 4 Aug 2010 00:50:35 +0200
+From: ydirson@free.fr
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100803225027.GH4752@home.lan>
+Message-ID: <20100803225035.GI4752@home.lan>
 MIME-Version: 1.0
-In-Reply-To: <1280792514-24843-2-git-send-email-ydirson@altern.org>
+In-Reply-To: <1280792514-24843-3-git-send-email-ydirson@altern.org>
 X-Mailer: git-send-email 1.7.1
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 212.27.42.5
 X-SA-Exim-Mail-From: ydirson@free.fr
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/3] git: split space-hungry rarely-used commands into -perltools and -large packages.
+Subject: [PATCH 3/3] git: activate gitk.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,92 +39,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 22:44:41 -0000
+X-List-Received-Date: Tue, 03 Aug 2010 22:45:48 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-This trims the main package by ~75%, and split of all perl scripts allows
-to spare the installation of perl, which is no small bargain either.
+It does not work perfectly (complains about possible problems in the tcl
+package), and buttons are huge, but it allows to browse history.
 
-Note that git-remote-http triggers a strange bug (OE#5465), so it is not
-split out for now.
-
-Also drop cpio dependency, which has been unneeded since a number of git
-revisions.
-
-Tested rapidly on shr/testing: seen no problem doing clone/commit/amend/reset/
-revert/log/status/diff/rebase -i/conflict resolution.
+git-gui OTOH does not start at all, it only complains that tk is not
+correctly installed, so it is commented out.
 
 Signed-off-by: Yann Dirson <ydirson@altern.org>
 ---
- recipes/git/git_1.7.0.2.bb |   46 ++++++++++++++++++++++++++++++++++++++++++-
- 1 files changed, 44 insertions(+), 2 deletions(-)
+ recipes/git/git-native_1.7.0.2.bb |    1 +
+ recipes/git/git.inc               |    2 --
+ recipes/git/git_1.7.0.2.bb        |   22 ++++++++++++++++++++--
+ 3 files changed, 21 insertions(+), 4 deletions(-)
 
+diff --git a/recipes/git/git-native_1.7.0.2.bb b/recipes/git/git-native_1.7.0.2.bb
+index b55070a..7daee84 100644
+--- a/recipes/git/git-native_1.7.0.2.bb
++++ b/recipes/git/git-native_1.7.0.2.bb
+@@ -6,3 +6,4 @@ SRC_URI[src.md5sum] = "76518fa774b36de81d160b85fa4f19c1"
+ SRC_URI[src.sha256sum] = "5601df7fc282fdd66de196b282694eb77dcfc50438f01587de144b3ead1a6b2f"
+ 
+ EXTRA_OECONF_append = " --without-python"
++EXTRA_OEMAKE = "NO_TCLTK=1"
+diff --git a/recipes/git/git.inc b/recipes/git/git.inc
+index 8275adb..bbbd7e9 100644
+--- a/recipes/git/git.inc
++++ b/recipes/git/git.inc
+@@ -8,8 +8,6 @@ S = "${WORKDIR}/git-${PV}"
+ 
+ inherit autotools
+ 
+-EXTRA_OEMAKE = "NO_TCLTK=1"
+-
+ do_install () {
+ 	oe_runmake install DESTDIR="${D}" bindir=${bindir} \
+ 		template_dir=${datadir}/git-core/templates \
 diff --git a/recipes/git/git_1.7.0.2.bb b/recipes/git/git_1.7.0.2.bb
-index 917b609..4973f05 100644
+index 4973f05..4221a2f 100644
 --- a/recipes/git/git_1.7.0.2.bb
 +++ b/recipes/git/git_1.7.0.2.bb
-@@ -9,12 +9,12 @@ EXTRA_OECONF += "ac_cv_snprintf_returns_bogus=no ac_cv_c_c99_format=yes"
+@@ -8,13 +8,13 @@ SRC_URI += "file://git-less-hardlinks.diff"
+ EXTRA_OECONF += "ac_cv_snprintf_returns_bogus=no ac_cv_c_c99_format=yes"
  
  
- DEPENDS = "openssl curl zlib expat"
--RDEPENDS_${PN} = "perl perl-module-file-path cpio findutils sed"
-+RDEPENDS_${PN} = "findutils sed"
+-DEPENDS = "openssl curl zlib expat"
++DEPENDS = "openssl curl zlib expat tcl-native"
+ RDEPENDS_${PN} = "findutils sed"
  
  # Dropbear ssh needs a wrapper script, so install openssh-ssh to make it work out of the box
  RRECOMMENDS_${PN} = "openssh-ssh"
  
--PR = "r6.1"
-+PR = "r6.2"
+-PR = "r6.2"
++PR = "r6.3"
  
  do_install_append() {
  	# Fix broken hardlinks
-@@ -30,3 +30,45 @@ do_install_append() {
- }
- 
- FILES_${PN}-dbg += "${libexecdir}/git-core/.debug"
+@@ -72,3 +72,21 @@ FILES_${PN}-large += " \
+ #	/usr/libexec/git-core/git-remote-http \
+ #"
+ RDEPENDS_${PN}-large = "${PN}"
 +
-+PACKAGES =+ "${PN}-perltools"
-+FILES_${PN}-perltools += " \
-+	/usr/libexec/git-core/add--interactive \
-+	/usr/libexec/git-core/git-archimport \
-+	/usr/libexec/git-core/git-cvsexportcommit \
-+	/usr/libexec/git-core/git-cvsimport \
-+	/usr/libexec/git-core/git-cvsserver \
-+	/usr/bin/git-cvsserver \
-+	/usr/libexec/git-core/git-difftool \
-+	/usr/libexec/git-core/git-relink \
-+	/usr/libexec/git-core/git-send-email \
-+	/usr/libexec/git-core/git-svn \
-+	/usr/share/perl \
++# git-tk package with gitk and git-gui
++PACKAGES += "${PN}-tk"
++RDEPENDS_${PN}-tk = "${PN} tk tcl"
++EXTRA_OEMAKE = "TCL_PATH=${STAGING_BINDIR_CROSS}/tclsh"
++FILES_${PN}-tk = " \
++	/usr/bin/gitk \
++	/usr/share/gitk \
 +"
-+RDEPENDS_${PN}-perltools = "${PN} perl perl-module-file-path findutils"
-+
-+PACKAGES =+ "${PN}-large"
-+FILES_${PN}-large += " \
-+	/usr/libexec/git-core/git-http-backend \
-+	/usr/libexec/git-core/git-daemon \
-+	/usr/libexec/git-core/git-http-push \
-+	/usr/libexec/git-core/git-quiltimport \
-+	/usr/libexec/git-core/git-request-pull \
-+	/usr/libexec/git-core/git-shell \
-+	/usr/bin/git-shell \
-+	/usr/libexec/git-core/git-instaweb \
-+	/usr/libexec/git-core/git-fast-import \
-+	/usr/libexec/git-core/git-imap-send \
-+"
-+# those might be useful in a less-than-large package ?
-+FILES_${PN}-large += " \
-+	/usr/libexec/git-core/git-http-fetch \
-+	/usr/libexec/git-core/git-upload-pack \
-+	/usr/bin/git-upload-pack \
-+"
-+# same here, but adding it causes git to depend on git-large(!)
-+# see http://bugs.openembedded.net/show_bug.cgi?id=5465
-+#FILES_${PN}-large += " \
-+#	/usr/libexec/git-core/git-remote-http \
++# git gui does not start at all at this time
++#FILES_${PN}-tk += " \
++#	/usr/libexec/git-core/git-gui \
++#	/usr/libexec/git-core/git-gui--askpass \
++#	/usr/share/git-gui \
 +#"
-+RDEPENDS_${PN}-large = "${PN}"
++#PACKAGES += "${PN}-tk-locale"
++#PACKAGES_DYNAMIC = "${PN}-tk-locale-*"
++#FILES_${PN}-tk-locale = "${datadir}/git-gui/lib/msgs"
 -- 
 1.7.1
 
