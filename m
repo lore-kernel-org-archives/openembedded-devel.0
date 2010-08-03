@@ -1,36 +1,34 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from vms173001pub.verizon.net ([206.46.173.1])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OgRJC-0005om-Qd
+	(envelope-from <denis@denix.org>) id 1OgRNT-00011h-JV
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 01:54:17 +0200
+	Wed, 04 Aug 2010 01:58:43 +0200
 Received: from gandalf.denix.org ([unknown] [71.255.225.53])
-	by vms173013.mailsrvcs.net
+	by vms173001.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L6L00L69P1CZOW0@vms173013.mailsrvcs.net> for
+	2009)) with ESMTPA id <0L6L00HCWP90GO63@vms173001.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Tue,
-	03 Aug 2010 18:53:37 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 3661E14AF60; Tue,
-	03 Aug 2010 19:53:36 -0400 (EDT)
-Date: Tue, 03 Aug 2010 19:53:36 -0400
+	03 Aug 2010 18:58:18 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id D92F014AF60; Tue,
+	03 Aug 2010 19:58:11 -0400 (EDT)
+Date: Tue, 03 Aug 2010 19:58:11 -0400
 From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100803235336.GB17391@denix.org>
-References: <alpine.DEB.2.00.1007260653230.5356@lynx>
-	<i2jrl9$4j3$1@dough.gmane.org>
-	<alpine.DEB.2.00.1007260744150.11202@lynx>
-	<20100801223927.GE30928@gmail.com> <4C56D307.2090707@balister.org>
+Message-id: <20100803235811.GC17391@denix.org>
+References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<i38mr6$ng8$1@dough.gmane.org>
 MIME-version: 1.0
-In-reply-to: <4C56D307.2090707@balister.org>
+In-reply-to: <i38mr6$ng8$1@dough.gmane.org>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Connect-IP: 206.46.173.1
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: should beagleboard-demo-image (b-d-i) be theoretically	buildable?
+Subject: Re: [PATCH] 500+ recipes: remove do_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +42,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 23:54:17 -0000
+X-List-Received-Date: Tue, 03 Aug 2010 23:58:43 -0000
 Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Mon, Aug 02, 2010 at 10:15:35AM -0400, Philip Balister wrote:
-> On 08/01/2010 06:39 PM, Khem Raj wrote:
->> On (26/07/10 07:46), Robert P. J. Day wrote:
->>> On Mon, 26 Jul 2010, Koen Kooi wrote:
->>>
->>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>> Hash: SHA1
->>>>
->>>> It builds fine on all the buildhosts I have (ubuntu 8.04-32bit,
->>>> 9.10-64bit, debian testing-64bit among others).
->>>>
->>>> And I see no logs attached to your email, so I can't help.
->>>
->>>    come on, koen, that last part was uncalled for.  i specifically
->>> stated that i hadn't run the build yet, i just wanted to know if there
->>> were any *known* issues for my 64-bit ubuntu 10.04 platform.
->>>
->>>    given that you certainly have *legitimate* reasons to criticize some
->>> of my posts here, you don't need to make stuff up.
->>
->> You could also check tinderbox.openembedded.org for build results and
->> it will help you determine the state of stuff you are interested in.
->
-> Until the server situation gets sorted out, tinderbox may not be available 
-> at all times.
+On Tue, Aug 03, 2010 at 11:17:26AM +0200, Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 02-08-10 22:19, Frans Meulenbroeks wrote:
+> > This patch removes all occurrences of
+> > do_stage() {
+> >         autotools_stage_all
+> > }
+> > including all kind of variants w.r.t whitespace
+> 
+> [..]
+> 
+> > my proposal would be to apply it, and if there are a 
+> > few recipes broken after that, accept is as collateral damage and fix 
+> > it afterwards.
+> 
+> Agreed
+> 
+> Acked-by: Koen Kooi <koen@openembedded.org>
 
-Plus, tinderbox has been acting up lately, even before the server failure (or 
-was it actually related?) - in the past month or two there were intermittent 
-messages about it being unavailable during the build (going up and down all 
-the time), resulting in unfinished stats...
+First collateral damage - libxcb was broken, due to xcb-proto.inc having 
+do_stage(). Worked with Khem to find the cause and thanks for pushing the fix:
+
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=b0061845a60d7781f9287ae6955585485f5ba8e9
 
 -- 
 Denys
