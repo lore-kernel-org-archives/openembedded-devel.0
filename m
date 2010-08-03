@@ -1,52 +1,45 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgEMK-0006lT-VJ
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 12:04:34 +0200
-Received: by bwz10 with SMTP id 10so2242830bwz.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OgEVk-0008GB-Aa for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Aug 2010 12:14:17 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OgEVe-0001P6-8p for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Aug 2010 12:14:10 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Aug 2010 12:14:10 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 03:04:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AS/q7dEOUx/w+qn/mE5l/faOXzjLpyJaHVP4J6XezIo=;
-	b=DEqnQmJEZsJfQey4KNqXIk8IqqVJLFhBV7uWH8Ss8vciHQExYWrJP5KfR/cjLbyhf/
-	eLsd4L+NH4jRU6SkgsRzNT3m4x0SqeVuQDSxzbAJJvDPk06h/TS7o4F6qRvRRON8gDz/
-	bldjw+GRSCXHClvA72uoYoWXfWYUqfqDGjs/k=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=vaR6Jd8cNagPMHV76zyns3x0ttL7z5Otyct4kPTBL8RDUbyfuvLWyZuqPbtvqN+QMu
-	KCzmtdzZIAoBf5I+9GN+MVeCJKnuDosKb6L7BzaF0gQi5uwt8KsxX28AXbBKsI3KsHTk
-	WLw3BSNIKrKYAJcoKshQWT/D9AXVM9vQFv0nM=
-MIME-Version: 1.0
-Received: by 10.204.82.130 with SMTP id b2mr5145859bkl.12.1280829872043; Tue, 
-	03 Aug 2010 03:04:32 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Tue, 3 Aug 2010 03:04:31 -0700 (PDT)
-In-Reply-To: <AANLkTimYqkRKIP2ErEY7ot_l0TtAljJLMTvM-n-KhVfB@mail.gmail.com>
-References: <1279290319.10837.1747.camel@rex> <4C44BAB3.8010703@mentor.com>
-	<AANLkTild0OtzxFT1GmBoNoUj8spV7jcvp1s_Cd69Frdy@mail.gmail.com>
-	<AANLkTinZATYyQw2PEk52Hk71R_4nIzdacjzB2qKt2ZnQ@mail.gmail.com>
-	<AANLkTikAmC6Li8IdUfbfZ48Or-dEABfH4ua8JjIgA0JT@mail.gmail.com>
-	<AANLkTim1m8AQ4WsVRLu_1BU3VUfOrCgpLNIclgewXhJz@mail.gmail.com>
-	<4C45BE9F.7000002@mentor.com> <4C45C63E.70306@cbnco.com>
-	<AANLkTilXvrxo8FC6KYsyyxwVPOrzJvp9cleEfdzVANzA@mail.gmail.com>
-	<AANLkTikgXfuc1uHq38AHLGUnZgKzODoBuOe2h7oA89wG@mail.gmail.com>
-	<AANLkTimYqkRKIP2ErEY7ot_l0TtAljJLMTvM-n-KhVfB@mail.gmail.com>
-Date: Tue, 3 Aug 2010 12:04:31 +0200
-Message-ID: <AANLkTi=TyLCO9sTNmi_OH29Jm=Pn=p6FJjOKEG-YLa+k@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 03 Aug 2010 12:14:10 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 03 Aug 2010 12:13:58 +0200
+Message-ID: <i38q56$4hq$1@dough.gmane.org>
+References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>
+	<i30rie$8aq$1@dough.gmane.org> <i318p1$ec3$1@dough.gmane.org>
+	<i31rhg$4a8$1@dough.gmane.org> <i363dm$17p$1@dough.gmane.org>
+	<AANLkTinE0=x74yBxHsGCpRLFoQfDF+gHeuHFMG=D+rY_@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <AANLkTinE0=x74yBxHsGCpRLFoQfDF+gHeuHFMG=D+rY_@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: A new bitbake extension: .bbappend files
+Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,17 +53,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 10:04:34 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 03 Aug 2010 10:14:17 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Wrt the bbappend / amend.inc discussion:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I was wondering how version management would work.
-I can imagine that if I change something in a bbappend file (or amend.inc)
-file, I would like to have something like PR that I could bump.
-In my case these recipes live in an overlay which is also used by
-co-workers. I would like to be able to trigger a rebuild when they get a
-modified .bbappend file.
+Acked-by: Koen Kooi <k-kooi@ti.com>
 
-Frans
+If noone objects, can we get this in ASAP?
+
+
+
+On 02-08-10 18:27, Khem Raj wrote:
+> On Mon, Aug 2, 2010 at 2:33 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> On 31-07-10 20:54, Koen Kooi wrote:
+>>>> On 31-07-10 15:34, Koen Kooi wrote:
+>>>>> On 31-07-10 11:48, Koen Kooi wrote:
+>>>>>> On 31-07-10 07:34, Khem Raj wrote:
+>>>>>>> Hi
+>>>>
+>>>>>>> Following series of patches are for making multi-machine toolchains co-exist with
+>>>>>>> new cross staging for toolchain.
+>>>>
+>>>>>>> It installs the toolchain in <native sysroot>/usr/${BASE_PACKAGE_ARCH}
+>>>>>>> this way we can have multiple toolchains co-existing for different sub-arches and major arches too.
+>>>>
+>>>>>>> I have booted a native-sdk-image on qemuarm successfully. The build for
+>>>>>>> beagleboard minimal image using different versions of toolchain went all fine too.
+>>>>
+>>>>>>> Please test these patches and if seem ok provide some ACKS/NACKS
+>>>>
+>>>>>> Khem, thanks for working on this!
+>>>>
+>>>>>> Firing of a build now :)
+>>>>
+>>>>> 'MACHINE=beagleboard bitbake ffmpeg samba mysql5 gstreamer-ti' completed
+>>>>> succesfully, doing a 'MACHINE=hawkboard bitbake gtk+' now.
+>>>>
+>>>> And that seems to have worked as well. I have kicked of a huge
+>>>> multimachine build on the 16core buildserver at work and will inspect
+>>>> the results on monday. But so far it's looking really good.
+> 
+> The multimachine build finished as well. Before I ack this patch, are we
+> going to match the OE layout to the one used in poky?
+> 
+>> I think the layout we have is nice because it still keeps the cross
+>> bits somewhat
+>> and lets relocatable class to fudge the rpath and we are in native sysroot.
+>> and <sysroot>/usr/armv5te/bin looks a bit better than
+>> <sysroot>/usr/bin/armv5te/bin
+> 
+> 
+> regards,
+> 
+> Koen
+>>
+>>
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMV+vmMkyGM64RGpERAr53AJ9tDqQpQsYNI8ghsSZ/Jq6od6IilwCeJ9Cf
+GEp6+dnTlLtFyDcANsrx6lo=
+=dAXV
+-----END PGP SIGNATURE-----
+
+
 
