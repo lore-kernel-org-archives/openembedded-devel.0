@@ -1,13 +1,13 @@
 Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OgMWp-0007XI-Ru
+	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OgN4x-00023u-Q1
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 20:48:21 +0200
+	Tue, 03 Aug 2010 21:23:24 +0200
 Received: from [163.241.71.52] (163.241.71.52) by
 	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
-	Server id 8.1.393.1; Tue, 3 Aug 2010 14:36:37 -0400
-Message-ID: <4C5861BC.3010909@tycoelectronics.com>
-Date: Tue, 3 Aug 2010 14:36:44 -0400
+	Server id 8.1.393.1; Tue, 3 Aug 2010 15:23:02 -0400
+Message-ID: <4C586C9D.9060808@tycoelectronics.com>
+Date: Tue, 3 Aug 2010 15:23:09 -0400
 From: Jay Snyder <jay.snyder@tycoelectronics.com>
 User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
@@ -22,7 +22,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: gs-8.64 -- cups-gs broken
+Subject: Re: gs-8.64 -- cups-gs broken (by cups-config output)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,42 +36,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 18:48:25 -0000
+X-List-Received-Date: Tue, 03 Aug 2010 19:23:24 -0000
 Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
 Content-Transfer-Encoding: 7bit
 
-The cups-gs package is no longer being built by the gs-8.64 recipe.
+The problem seems to be caused by the cups-config program.
 
-This was fine with my previous git pull of 04-Dec-2009.
+With my old build:
+$/home/oe/build/tmp/staging/x86_64-linux/usr/bin/i686-angstrom-linux/cups-config 
+--serverbin
+/usr/lib/cups
 
-The problem is that the pstoraster and pstopxl executables are being 
-installed to a incorrect path.
 
- From my log file:
-====================================
-log.do_install.25037:mkdir -p 
-/home/oe/build-2010-07-29/tmp/work/i686-angstrom-linux/gs-8.64-r2/image/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib/cups/filter
-log.do_install.25037:./base/instcopy -c -m 755 cups/pstoraster 
-/home/oe/build-2010-07-29/tmp/work/i686-angstrom-linux/gs-8.64-r2/image/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib/cups/filter
-log.do_install.25037:       ./base/instcopy -c -m 755 ./bin/pdftoraster 
-/home/oe/build-2010-07-29/tmp/work/i686-angstrom-linux/gs-8.64-r2/image/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib/cups/filter; 
-\
-log.do_install.25037:./base/instcopy -c -m 755 cups/pstopxl 
-/home/oe/build-2010-07-29/tmp/work/i686-angstrom-linux/gs-8.64-r2/image/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib/cups/filter
-====================================
-FYI:
-PKGDIR=/home/oe/build-2010-07-29
+With my current build:
+$/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/bin/i686-angstrom-linux/cups-config 
+--serverbin
+/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib/cups
 
- From the looks of this, it is appending the stataging directory,
-/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib/cups/filter
 
-to the image directory:
-/home/oe/build-2010-07-29/tmp/work/i686-angstrom-linux/gs-8.64-r2/image
+It is the extra /home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux
 
-If someone knows how I can fix this, please let me know.
+on the beginning of the path that breaks things.
+
+I am using the cups 1.4.3 recipe, and had been using cups 1.4.2 with my 
+old build that was based on a git pull from 2009-dec-04.
 
 Thanks,
 Jay
-
 
 
