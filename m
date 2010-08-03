@@ -1,49 +1,31 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OgH01-0003um-QS
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 14:53:50 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o73CrdLq009275
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 3 Aug 2010 13:53:39 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 04809-09 for <openembedded-devel@lists.openembedded.org>;
-	Tue,  3 Aug 2010 13:53:35 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o73CrYLO009261
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 3 Aug 2010 13:53:34 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=TyLCO9sTNmi_OH29Jm=Pn=p6FJjOKEG-YLa+k@mail.gmail.com>
-References: <1279290319.10837.1747.camel@rex> <4C44BAB3.8010703@mentor.com>
-	<AANLkTild0OtzxFT1GmBoNoUj8spV7jcvp1s_Cd69Frdy@mail.gmail.com>
-	<AANLkTinZATYyQw2PEk52Hk71R_4nIzdacjzB2qKt2ZnQ@mail.gmail.com>
-	<AANLkTikAmC6Li8IdUfbfZ48Or-dEABfH4ua8JjIgA0JT@mail.gmail.com>
-	<AANLkTim1m8AQ4WsVRLu_1BU3VUfOrCgpLNIclgewXhJz@mail.gmail.com>
-	<4C45BE9F.7000002@mentor.com> <4C45C63E.70306@cbnco.com>
-	<AANLkTilXvrxo8FC6KYsyyxwVPOrzJvp9cleEfdzVANzA@mail.gmail.com>
-	<AANLkTikgXfuc1uHq38AHLGUnZgKzODoBuOe2h7oA89wG@mail.gmail.com>
-	<AANLkTimYqkRKIP2ErEY7ot_l0TtAljJLMTvM-n-KhVfB@mail.gmail.com>
-	<AANLkTi=TyLCO9sTNmi_OH29Jm=Pn=p6FJjOKEG-YLa+k@mail.gmail.com>
-Date: Tue, 03 Aug 2010 13:53:22 +0100
-Message-ID: <1280840002.16235.75.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <jkridner@beagleboard.org>) id 1OgHDm-0004rb-HS
+	for Openembedded-devel@lists.openembedded.org;
+	Tue, 03 Aug 2010 15:07:55 +0200
+Received: by vws13 with SMTP id 13so3137676vws.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 03 Aug 2010 06:07:50 -0700 (PDT)
+Received: by 10.220.61.140 with SMTP id t12mr5292299vch.54.1280840870602;
+	Tue, 03 Aug 2010 06:07:50 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id e31sm6814761vbm.7.2010.08.03.06.07.49
+	(version=SSLv3 cipher=RC4-MD5); Tue, 03 Aug 2010 06:07:49 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
+To: Openembedded-devel@lists.openembedded.org
+Date: Tue,  3 Aug 2010 08:07:48 -0500
+Message-Id: <1280840868-23058-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-0.4 required=5.0 tests=BAYES_00,TVD_SPACE_RATIO
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: A new bitbake extension: .bbappend files
+Subject: [PATCH] angstrom-uboot-scripts: added default boot scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,27 +39,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 12:53:50 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 03 Aug 2010 13:07:55 -0000
 
-On Tue, 2010-08-03 at 12:04 +0200, Frans Meulenbroeks wrote:
-> Wrt the bbappend / amend.inc discussion:
-> 
-> I was wondering how version management would work.
-> I can imagine that if I change something in a bbappend file (or amend.inc)
-> file, I would like to have something like PR that I could bump.
-> In my case these recipes live in an overlay which is also used by
-> co-workers. I would like to be able to trigger a rebuild when they get a
-> modified .bbappend file.
+Added default boot scripts for the BeagleBoard validation image.
+---
+ .../beagleboard-validation-boot.cmd                |   15 +++++++++++++++
+ .../beagleboard-validation-user.cmd                |   15 +++++++++++++++
+ 2 files changed, 30 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-boot.cmd
+ create mode 100644 recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
 
-You could use something like:
-
-PR := "${PR}.1"
-
-Cheers,
-
-Richard
+diff --git a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-boot.cmd b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-boot.cmd
+new file mode 100644
+index 0000000..1d0f223
+--- /dev/null
++++ b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-boot.cmd
+@@ -0,0 +1,15 @@
++setenv dvimode 'hd720'
++setenv vram '16M omapfb.vram=0:8M,1:4M,2:4M'
++if "${beaglerev}" = "AxBx"; then
++setenv mpurate 600
++setenv optargs 'mem=80M@0x80000000 musb_hdrc.fifomode=5'
++elif "${beaglerev}" = "Cx"; then
++setenv mpurate 720
++setenv optargs 'mem=80M@0x80000000 mem=128M@0x88000000 musb_hdrc.fifomode=5'
++else
++setenv mpurate 1000
++setenv optargs 'mem=80M@0x80000000 mem=384M@0x88000000'
++fi
++run loaduimage
++run mmcboot
++
+diff --git a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
+new file mode 100644
+index 0000000..0c32ae1
+--- /dev/null
++++ b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
+@@ -0,0 +1,15 @@
++setenv console 'tty0 console=ttyS2,115200n8'
++if "${beaglerev}" = "AxBx"; then
++setenv mpurate 600
++setenv optargs 'mem=80M@0x80000000 musb_hdrc.fifomode=5'
++elif "${beaglerev}" = "Cx"; then
++setenv mpurate 720
++setenv optargs 'mem=80M@0x80000000 mem=128M@0x88000000 musb_hdrc.fifomode=5'
++else
++setenv mpurate 1000
++setenv optargs 'mem=99M@0x80000000 mem=384M@0x88000000'
++fi
++run loaduimage
++run loadramdisk
++run ramboot
++
+-- 
+1.5.6.4
 
 
 
