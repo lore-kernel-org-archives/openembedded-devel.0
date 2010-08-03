@@ -1,35 +1,38 @@
-Received: from smtp5-g21.free.fr ([212.27.42.5])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ydirson@free.fr>) id 1OgQOY-0006d4-02
+	(envelope-from <msmith@cbnco.com>) id 1OgR1h-0007gF-3J
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 00:55:39 +0200
-Received: from home.lan (unknown [81.57.214.146])
-	by smtp5-g21.free.fr (Postfix) with ESMTP id F3C13D4807B
+	Wed, 04 Aug 2010 01:36:06 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 72F757597AC
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 00:55:31 +0200 (CEST)
-Received: from yann by home.lan with local (Exim 4.72)
-	(envelope-from <ydirson@free.fr>) id 1OgQUG-0006V7-Gu
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 01:01:32 +0200
-Date: Wed, 4 Aug 2010 01:01:32 +0200
-From: Yann Dirson <ydirson@free.fr>
+	Tue,  3 Aug 2010 19:36:02 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 27096-09 for <openembedded-devel@lists.openembedded.org>; 
+	Tue,  3 Aug 2010 19:36:02 -0400 (EDT)
+Received: from juice.ott.cti.com (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id 411AB3B55BC
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue,  3 Aug 2010 19:36:02 -0400 (EDT)
+Date: Tue, 3 Aug 2010 19:36:02 -0400 (EDT)
+From: Michael Smith <msmith@cbnco.com>
+X-X-Sender: michael@juice.ott.cti.com
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100803230132.GO4752@home.lan>
-References: <1280798728-13412-1-git-send-email-ydirson@altern.org>
-	<1280798728-13412-2-git-send-email-ydirson@altern.org>
+In-Reply-To: <4C56973F.9090208@nedap.com>
+Message-ID: <Pine.LNX.4.64.1008031934390.7055@juice.ott.cti.com>
+References: <4C56973F.9090208@nedap.com>
 MIME-Version: 1.0
-In-Reply-To: <1280798728-13412-2-git-send-email-ydirson@altern.org>
-X-Mailer: git-send-email 1.7.1
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 212.27.42.5
-X-SA-Exim-Mail-From: ydirson@free.fr
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] gnome-python-desktop: build a separate python-rsvg package.
+Subject: Re: PREMIRRORS trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,43 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 22:55:39 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 03 Aug 2010 23:36:07 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII
 
-That package has no dependency on gnome, and is useful of its own.
+On Mon, 2 Aug 2010, Jaap de Jong wrote:
 
-Signed-off-by: Yann Dirson <ydirson@altern.org>
----
- recipes/gnome/gnome-python-desktop_2.30.0.bb |    7 +++++++
- 1 files changed, 7 insertions(+), 0 deletions(-)
+>     PREMIRRORS = "(ftp|http|https)://.*/.* http://myServer/sources/"
 
-diff --git a/recipes/gnome/gnome-python-desktop_2.30.0.bb b/recipes/gnome/gnome-python-desktop_2.30.0.bb
-index 8dd73fa..9c72ed4 100644
---- a/recipes/gnome/gnome-python-desktop_2.30.0.bb
-+++ b/recipes/gnome/gnome-python-desktop_2.30.0.bb
-@@ -1,6 +1,8 @@
- LICENSE = "GPL/LGPL"
- DEPENDS = "librsvg libwnck totem-pl-parser libgtop gnome-panel gnome-desktop eds-dbus python-pygtk gnome-python libgnomeprint libgnomeprintui"
- 
-+PR = "r1"
-+
- inherit gnome distutils-base
- 
- EXTRA_OECONF += " ac_cv_path_PYGOBJECT_CODEGEN=${STAGING_DATADIR}/pygobject/2.0/codegen/codegen.py \
-@@ -26,5 +28,10 @@ do_configure_prepend() {
- 
- FILES_${PN}-dev += "${datadir}/pygtk"
- 
-+PACKAGES =+ "python-rsvg"
-+FILES_python-rsvg = " \
-+	/usr/lib/python*/site-packages/gtk-2.0/rsvg.* \
-+"
-+
- SRC_URI[archive.md5sum] = "a6d448d46a6b3062ce7a1b6a9fddfb48"
- SRC_URI[archive.sha256sum] = "db997a3c81967d6dc7210dd83e06f18ac6417f804f672e42f15a1d68af371f49"
--- 
-1.7.1
+> NOTE: Task failed: Unknown fetch Error: too many values to unpack
 
+Hi Jaap,
+
+Does it work if you set SOURCE_MIRROR_URL to your mirror, and add this to 
+your conf somewhere?
+
+INHERIT += "own-mirrors"
+
+Just a guess, but maybe it has trouble with the "(ftp|http|https)".
+
+Mike
 
 
