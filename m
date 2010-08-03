@@ -1,45 +1,46 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OgJXI-0001qt-Oz for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 17:36:13 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OgJXG-0000m8-PC for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 17:36:10 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 17:36:10 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgK1J-0004gi-0b
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 03 Aug 2010 18:07:14 +0200
+Received: by bwz10 with SMTP id 10so2408243bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 17:36:10 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 03 Aug 2010 09:07:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=eEMoTaVrOEbky75PLbEm0FDAhd/+JsW0OJMraqF7IuE=;
+	b=SMaxdNVFWUFHylC+3IpzWzMCa1XzNQ3POzRv7ssvt+D6vf38MXEsnqDUdAkhEFfy/h
+	ompiK69zYz2XOdL2Ffkdfi3UBYMXz7EgpbROOsxsSW0ttFWIkT88WaHank6cgg0NlFqr
+	VPBO8PhQO2v0Ov6iRaaaPG+S0Xtz8ldOb2ZLs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=DOOU+1D413y/fa1lXVsiEPYa+oDmythskCj32u4D4oiCFemXd3MmCa7HgDKXLiTVEo
+	b069TBkYgIJJ+Kpfy5bsuj+RDSBUNy48qCVwj2x0y19F7t+qcGC1QtozMv0+gYZTbro0
+	QeqdRmfRUOI4mA1rv5ermzhH3B7D0rOTLcHKE=
+MIME-Version: 1.0
+Received: by 10.204.140.219 with SMTP id j27mr5374133bku.153.1280851626533; 
+	Tue, 03 Aug 2010 09:07:06 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Tue, 3 Aug 2010 09:07:06 -0700 (PDT)
+In-Reply-To: <4C583098.5050007@zenlinux.com>
+References: <1280808074-13861-1-git-send-email-sgarman@zenlinux.com>
+	<AANLkTimKyWgQyN0T6VExcAjE0=M2kuCLvbq-hEYJ70Fc@mail.gmail.com>
+	<4C583098.5050007@zenlinux.com>
+Date: Tue, 3 Aug 2010 18:07:06 +0200
+Message-ID: <AANLkTi=PPJGv=zL6GwUVL78xER7oMTMFuPuy_QK=h=+4@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 03 Aug 2010 17:36:00 +0200
-Message-ID: <i39d10$d2f$1@dough.gmane.org>
-References: <1280554451-27780-1-git-send-email-raj.khem@gmail.com>	<i30rie$8aq$1@dough.gmane.org>
-	<i318p1$ec3$1@dough.gmane.org>	<i31rhg$4a8$1@dough.gmane.org>
-	<i363dm$17p$1@dough.gmane.org>	<AANLkTinE0=x74yBxHsGCpRLFoQfDF+gHeuHFMG=D+rY_@mail.gmail.com>	<i38q56$4hq$1@dough.gmane.org>
-	<20100803133515.GD12134@jama>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
-In-Reply-To: <20100803133515.GD12134@jama>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/5][v4] Make multi-machine toolchains to co-exist (Alternate approach)
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] tar: Upgrade to v1.23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,49 +54,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 15:36:13 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 03 Aug 2010 16:07:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+2010/8/3 Scott Garman <sgarman@zenlinux.com>
 
-On 03-08-10 15:35, Martin Jansa wrote:
-> On Tue, Aug 03, 2010 at 12:13:58PM +0200, Koen Kooi wrote:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
+> On 08/02/2010 11:14 PM, Frans Meulenbroeks wrote:
+>
+>> 2010/8/3 Scott Garman<sgarman@zenlinux.com>
 >>
->> Acked-by: Koen Kooi <k-kooi@ti.com>
+>>  From: Scott Garman<scott.a.garman@intel.com>
+>>>
+>>> * Addresses CVE-2010-0624
+>>>
+>>>
+>> Please have a look at
+>> http://wiki.openembedded.net/index.php/Commit_Policy
 >>
->> If noone objects, can we get this in ASAP?
-> 
-> Building from scratch armv4t then armv6 was ok, building few more
-> packages for armv4t again still worked, but now I've upgraded gcc/eglibc
-> and building eglibc-initial for armv4t first fails:
-> 
-> http://tinderbox.openembedded.org/packages/665289/
-> http://build.shr-project.org/tests/jama/config.log
-> 
-> see 
-> configure: error: compiler support for __thread is require
-> and
-> Fatal error: Invalid -march= option: `armv4t'
+>> And especially this section:
+>>
+>
+> Hi Frans,
+>
+> Thanks for sending me these pointers. However, I'm a bit unclear on what
+> needs improvement. The subject line of this patch email corresponds to the
+> first line of the commit message, doesn't it?
+>
+> To go case-by-case:
+>
+>   * Have a clear commit message (example
+>> <http://wiki.openembedded.net/index.php/Commit_log_example>):
+>>     - The first line of commit is a summary of the changes.
+>>
+>
+> Which in this case is:
+>
+> tar: Upgrade to v1.23
+>
+>      - The first line should start with the name of the recipe the
+>> change affects.
+>>
+>
+Ah ofcourse actually that was what I was missing.
+Will push it in a few minutes if not done yet.
 
-I had that with a previous incarnation of that patchset, but it seems to
-have gone away.
-Do we want to solve this problem first or apply the patches and solve it
-later?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMWDdgMkyGM64RGpERArNxAJ9bR5166BqmDfHPUakhlptOhZSfAQCfRZI4
-mUb3gJOmb3+3ajmmqC5Ht3w=
-=TBbU
------END PGP SIGNATURE-----
-
-
+Frans
 
