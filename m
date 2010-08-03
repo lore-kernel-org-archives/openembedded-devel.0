@@ -1,32 +1,32 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <aalonso00@gmail.com>) id 1OgKFT-0007tx-PN
+	(envelope-from <aalonso00@gmail.com>) id 1OgKFT-0007ug-H0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 03 Aug 2010 18:21:53 +0200
-Received: by mail-fx0-f47.google.com with SMTP id 12so2157397fxm.6
+	Tue, 03 Aug 2010 18:21:54 +0200
+Received: by fxm12 with SMTP id 12so2157441fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 09:21:50 -0700 (PDT)
+	Tue, 03 Aug 2010 09:21:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=6p5P5T16FruRxHUkEAUGHTAqI/2/JfeVKsXwfwIm+iQ=;
-	b=l+Z1l1s0Mg4hw2zOZD4J7/F15S9K8z/AvJcSdXczkrKHLzoKFLso1HkCuHBDiEs9vC
-	D1a1kCo8EdB4pnDUjSfxXps/HSmiZCPxpTbz8PEJmq1w2qM5KsQ/GMyJyJiC0fzsgm3u
-	kojVK9N3SEuMo2t5QrWlMsPIgTC3fHIHBVeJQ=
+	bh=MVVyorfve6UuzZxv92Nox1JxgX2ZEKuQX1aVzNx5Ba0=;
+	b=GxUrAkAntdzmZ3S5UbWGcdcKjlgu63R1o0EKwIBoafYHIU0JRmdQgdAJ4eFdMJDUDT
+	GmXRl8wyXh/FeBT2LsUPB/5+U9/wFa8kO7s2LO2f0PryXSGfAX05QhMWOEdYAANZM0MH
+	237I+4yPNQxBfb1tKlfo+edtuk5juVbvq2pgE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=OeYq27+xRGsS6HPrv/OtfJSH93miN3FWZMZ0liwBezHbsSoTq1srMzR43/BLMPYOF0
-	5QM35JyV3bSlPMiFHVVWW4sHY47h9M2pnJybd7Oluml8YoCsi3pHLAacrMQKHjLD2AaU
-	cWP/jHghRGKeheRqw7wWr3A9mtG0F8v0cVxlI=
-Received: by 10.223.121.19 with SMTP id f19mr7583643far.73.1280852510661;
-	Tue, 03 Aug 2010 09:21:50 -0700 (PDT)
+	b=Pao0pOpSxkEiQAp+1nxue3/G/lSwo6iceTwYdtGEcOR9GNMZ95km6zx+aiABfo6qc+
+	3oSFHARTSnoDpXnedJjqF+GXK6Ab5Hh7l93v+B4q8zmMu6MRnZ/kSlK20zgEP7hhkcmJ
+	TyLGfIK4dNDzixaDmBXBPIiD1yaf7xxszPGFA=
+Received: by 10.223.120.65 with SMTP id c1mr7574208far.68.1280852504524;
+	Tue, 03 Aug 2010 09:21:44 -0700 (PDT)
 Received: from aalonso-pc.lan ([201.153.72.151])
-	by mx.google.com with ESMTPS id s20sm2570960faa.28.2010.08.03.09.21.47
-	(version=SSLv3 cipher=RC4-MD5); Tue, 03 Aug 2010 09:21:49 -0700 (PDT)
+	by mx.google.com with ESMTPS id s20sm2570960faa.28.2010.08.03.09.21.41
+	(version=SSLv3 cipher=RC4-MD5); Tue, 03 Aug 2010 09:21:43 -0700 (PDT)
 From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  3 Aug 2010 11:23:23 -0500
-Message-Id: <1280852605-3524-9-git-send-email-aalonso00@gmail.com>
+Date: Tue,  3 Aug 2010 11:23:21 -0500
+Message-Id: <1280852605-3524-7-git-send-email-aalonso00@gmail.com>
 X-Mailer: git-send-email 1.7.2
 In-Reply-To: <1280852605-3524-1-git-send-email-aalonso00@gmail.com>
 References: <1280852605-3524-1-git-send-email-aalonso00@gmail.com>
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 09/11][v2] xserver-common: xilinx virtex support
+Subject: [PATCH 07/11][v2] initscripts: functions machine id xilinx virtex5 platforms
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,63 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 03 Aug 2010 16:21:53 -0000
+X-List-Received-Date: Tue, 03 Aug 2010 16:21:54 -0000
 
-* Add xilinx virtex platforms support
-* Set xserver args
+* Add machine_id support for xilinx virtex platforms
+  used in xserver-common for args settings.
+* On Xilinx platforms there is no line `Hardware`. Instead it is
+  stored in the line starting with `platform`.
 * Bump PR
-* v2 reorder patch set
+* v2 nicer machine_id function for handling xilinx virtex platforms
 
 Signed-off-by: Adrian Alonso <aalonso00@gmail.com>
 ---
- recipes/xserver-common/files/Xserver-virtex.patch |   14 ++++++++++++++
- recipes/xserver-common/xserver-common_1.33.bb     |    5 +++--
- 2 files changed, 17 insertions(+), 2 deletions(-)
- create mode 100644 recipes/xserver-common/files/Xserver-virtex.patch
+ recipes/initscripts/files/functions    |    6 +++++-
+ recipes/initscripts/initscripts_1.0.bb |    2 +-
+ 2 files changed, 6 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/xserver-common/files/Xserver-virtex.patch b/recipes/xserver-common/files/Xserver-virtex.patch
-new file mode 100644
-index 0000000..c7d6cc2
---- /dev/null
-+++ b/recipes/xserver-common/files/Xserver-virtex.patch
-@@ -0,0 +1,14 @@
-+Index: xserver-common-1.13/X11/xserver-common
-+===================================================================
-+--- xserver-common-1.13.orig/X11/xserver-common
-++++ xserver-common-1.13/X11/xserver-common
-+@@ -181,6 +181,9 @@ else
-+             # this is to rotate X display properly, tested with display TX09D71VM1CCA
-+             ronetix*pm9261*  | ronetix*pm9263*)
-+                  ARGS="$ARGS -screen 240/54x320/81@90x16" ;;
-++        "Xilinx Virtex"*)
-++            DPI="96"
-++            ARGS="$ARGS" ;;
-+         # This is a fallback for PCs
-+         "")
-+             if [ -f $BINDIR/Xvesa ]; then
-diff --git a/recipes/xserver-common/xserver-common_1.33.bb b/recipes/xserver-common/xserver-common_1.33.bb
-index cb644a4..71fa231 100644
---- a/recipes/xserver-common/xserver-common_1.33.bb
-+++ b/recipes/xserver-common/xserver-common_1.33.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "Common X11 scripts and support files"
+diff --git a/recipes/initscripts/files/functions b/recipes/initscripts/files/functions
+index fb9a914..51c1f13 100644
+--- a/recipes/initscripts/files/functions
++++ b/recipes/initscripts/files/functions
+@@ -5,7 +5,11 @@
+ #
+ 
+ machine_id() {		# return the machine ID
+-    awk 'BEGIN { FS=": " } /Hardware/ { gsub(" ", "_", $2); print tolower($2) } ' </proc/cpuinfo
++    id=`awk 'BEGIN { FS=": " } /Hardware/ { gsub(" ", "_", $2); print tolower($2) } ' </proc/cpuinfo`
++    if [ -n "$id" ]; then
++        id=`awk 'BEGIN { FS=": " } /platform/ { gsub(" ", "_", $2); print tolower($2) } ' </proc/cpuinfo`
++    fi
++    echo -n "$id"
+ }
+ 
+ killproc() {		# kill the named process(es)
+diff --git a/recipes/initscripts/initscripts_1.0.bb b/recipes/initscripts/initscripts_1.0.bb
+index 1b0a94c..38fe85e 100644
+--- a/recipes/initscripts/initscripts_1.0.bb
++++ b/recipes/initscripts/initscripts_1.0.bb
+@@ -4,7 +4,7 @@ PRIORITY = "required"
+ DEPENDS = "makedevs"
+ RDEPENDS_${PN} = "makedevs"
  LICENSE = "GPL"
- SECTION = "x11"
- RDEPENDS_${PN} = "xmodmap xrandr xdpyinfo"
--PR = "r4"
-+PR = "r5"
+-PR = "r121"
++PR = "r122"
  
- PACKAGE_ARCH = "all"
- DEFAULT_PREFERENCE = "-1"
-@@ -19,7 +19,8 @@ SRC_URI[sha256sum] = "4576ccca80730f1860a273df38b9f917cf906eca9865e108d76fc5460e
- SRC_URI_append = " file://loop.patch;striplevel=3 \
-                    file://rgba.diff \
-                    file://setDPI.sh \
--                   file://89xdgautostart.sh"
-+                   file://89xdgautostart.sh \
-+                   file://Xserver-virtex.patch"
- 
- SRC_URI_append_angstrom = " file://xtscal-fix.patch "
- RDEPENDS_${PN}_append_angstrom = " tslib-calibrate "
+ SRC_URI = "file://functions \
+            file://halt \
 -- 
 1.7.2
 
