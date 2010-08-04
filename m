@@ -1,43 +1,43 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Ogjq6-0002HX-K2
+	(envelope-from <raj.khem@gmail.com>) id 1Ogjtr-0002MO-Pw
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 21:41:39 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id EAD8AA5BF5
+	Wed, 04 Aug 2010 21:45:16 +0200
+Received: by gxk2 with SMTP id 2so2285198gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 20:41:10 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 1nIAsJxxXnPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 20:41:10 +0100 (BST)
-Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1C67CA5BF3
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 20:41:10 +0100 (BST)
-Message-ID: <4C59C255.7090101@xora.org.uk>
-Date: Wed, 04 Aug 2010 20:41:09 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.7) Gecko/20100720 Lightning/1.0b2 Thunderbird/3.1.1
+	Wed, 04 Aug 2010 12:45:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=VyyNh3fVsom+fMAJwFN53BcKC8QZqBrXCjP8WHUzfGY=;
+	b=J2FYafm1s3P3K4TO9TOTEOQEmm+BxUtYrCUUQFNW4fYeDZ15LX5jAc8FyZ7lHBlxz8
+	4zLiMHuNrhSdbzrALBV4QQUjQ94O60bqap0Rm4GH7uBdu2DGFu/RvEpVeyp6O0J9mSa1
+	cElwkyVo9tTljl+aN4gQmd2Ig89fqGXHs77bo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=FJCEyP1XGgyLGLIW0Oc/sjqaGbfOMaX8mu7SEKud0BGm7tnlHS3C2xUXY4ypzOxzdc
+	oUKNvvKnlWJnRFhtJarPrErJs4yvYWJyck1lcdjV9119tRQLj+GhgBwotl3ZH/ncz64k
+	EpouIrDqaNFgWrBFW4vJtb0wIQLQbXz4K0BAo=
+Received: by 10.100.91.1 with SMTP id o1mr10519411anb.186.1280951109445; Wed, 
+	04 Aug 2010 12:45:09 -0700 (PDT)
 MIME-Version: 1.0
+Received: by 10.231.12.137 with HTTP; Wed, 4 Aug 2010 12:44:49 -0700 (PDT)
+In-Reply-To: <4C5990C1.8050302@gmx.net>
+References: <4C5990C1.8050302@gmx.net>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 4 Aug 2010 12:44:49 -0700
+Message-ID: <AANLkTin4Sp6JsUww_LwtppEgXpuEkhKSScDZQfnE80g9@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>	<20100804001959.GF17391@denix.org>
-	<20100804052042.GB7085@gmail.com>	<1280920678.26249.33.camel@saphir>	<1280922518.2692.377.camel@mill.internal.reciva.com>	<20100804161327.GA7189@denix.org>
-	<4C599C72.10805@xora.org.uk> <20100804172121.GC7189@denix.org>
-In-Reply-To: <20100804172121.GC7189@denix.org>
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY	in	COMPATIBLE_MACHINES
+Subject: Re: MULTIMACHINE builds and PACKAGE_ARCH=all recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,61 +51,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 19:41:40 -0000
+X-List-Received-Date: Wed, 04 Aug 2010 19:45:17 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
- On 04/08/10 18:21, Denys Dmytriyenko wrote:
-> On Wed, Aug 04, 2010 at 05:59:30PM +0100, Graeme Gregory wrote:
->>  On 04/08/10 17:13, Denys Dmytriyenko wrote:
->>> On Wed, Aug 04, 2010 at 12:48:38PM +0100, Phil Blundell wrote:
->>>> On Wed, 2010-08-04 at 13:17 +0200, Michael 'Mickey' Lauer wrote:
->>>>> FWIW, minimal is using MACHINE_CLASS since quite a while to
->>>>> reduce the need for adding the same files over and over again,
->>>>> this is being used e.g. for HTC msm7 series and OpenEZX series
->>>>> (see conf/machine/include).
->>>>>
->>>>> Perhaps it's time to standardize something like that.
->>>> Yeah.  I certainly don't think we want a proliferation of such
->>>> mechanisms.  If minimal is already using MACHINE_CLASS then there would
->>>> be some sense in trying to make use of the same thing.
->>>>
->>>> Failing that though, testing COMPATIBLE_MACHINE against MACHINE_CLASS
->>>> probably is more desirable than adding a completely new variable (i.e.
->>>> SOC_FAMILY) for that purpose.
->>> Phil,
->>>
->>> Re: "adding a completely new variable" - SOC_FAMILY has been in use for almost 
->>> a year now. I'm hearing about MACHINE_CLASS for the first time, although it 
->>> appears to be slightly older than SOC_FAMILY though. But it doesn't seem to be 
->>> used anywhere besides in few machine configs and micro.conf. There are no 
->>> recipes actually using it, unlike SOC_FAMILY...
->>>
->>> I'm not saying one is better than the other (actually, unifying them would 
->>> be nice), I'm just saying it's too late to object adding SOC_FAMILY...
->>>
->> As the person who originally added MACHINE_CLASS to openmoko and the OE,
->> then removed it from OE I can say it has different meaning that
->> SOC_FAMILY. MACHINE_CLASS was to identify a range of machines that were
->> 90% the same but had a few differences. It was used in a few recipes
->> which were MACHINE_ARCH to make them use the same ARCH in these recipes
->> to stop them being rebuilt when switching machines.
->>
->> The original use was om-gta01 and om-gta02 which had the same MACHINE_CLASS.
-> Graeme,
+On Wed, Aug 4, 2010 at 9:09 AM, Robert Schuster <thebohemian@gmx.net> wrote:
+> Hi,
+> I am in the process of updating the java recipes to use
+> BBCLASSEXTEND="native" and fixing the do_stage use. However now I hit a
+> problem because of a workaround which was added months ago to install
+> Java libraries (jars) into one common directory in a multimachine build.
+> This workaround was *additionally* specifically added to the angstrom
+> 2008 distribution.
 >
-> Thanks for clarifying this! Do you still see a benefit in using MACHINE_CLASS? 
-> Why was it removed from OE? I don't see why it can't be used alongside 
-> SOC_FAMILY...
+> The problem that people wanted to solve was that in a multimachine build
+> the installation of a PACKAGE_ARCH="all" recipe was only being done once
+
+that seems a bug to me.
+
+> and so from the 2nd machine onwards the build process was unable to
+> access the jars.
 >
-I removed it as it was only used for the openmoko machines and outside
-of openmoko I didn't see the need for the extra maintenance work to save
-10ms of build time. I was just not maintaining enough recipes that used it.
+> For me I always wondered how it is for python, C# or perl
+> programs/libraries which we provide and why there is no problem with
+> them. As it looks they go the simple way and simply do not appear to
+> have set PACKAGE_ARCH="all".
+>
+> So for now I see 2 solutions for the Java recipes:
+> 1) Java packages do not appear as arch-independent anymore.
 
-That doesn't mean that I'm against people re-introducing it if there is
-a real need.
+its going to work but has additional penalty of compiling stuff.
 
-Graeme
+> 2) Bitbake (or OE) should be taught to install an arch dependent package
+> into all sysroots of a multimachine build.
+>
 
+this seems the right fix.
+
+> The former is quickly done because most recipes use java-library.bbclass
+> but I find this technically wrong somehow (it also slows down everyone's
+> multimachine builds considerably).
+>
+> I don't know how difficult or feasible it is to implement the 2nd option
+> (Bitbake gods anyone?) or whether there might even be a third option.
+>
+> I only know that the shit has hit the fan ... :-/
+>
+> Regards
+> Robert
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
