@@ -1,37 +1,43 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OgibK-0006xw-PO
+	(envelope-from <chasemaupin03@gmail.com>) id 1Ogibf-00075e-O5
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 20:22:05 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173019.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L6N00MOU1JLCRO1@vms173019.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	04 Aug 2010 12:21:27 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id AF98914AF64; Wed,
-	04 Aug 2010 13:21:21 -0400 (EDT)
-Date: Wed, 04 Aug 2010 13:21:21 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 04 Aug 2010 20:22:50 +0200
+Received: by yxi11 with SMTP id 11so2248335yxi.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Aug 2010 11:22:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=tjFHDqJaVDpue94j7A7y5BpkuIXiGkc/hDUTUQmlLDg=;
+	b=hRPg5kd7oIxkzS1ORkqoEx15LLOiZC827fhgF7yILCNwwXE3pMrNjXxGcOSWnOjW5l
+	XzllwwWbWHAtQP7rJSX86/Acf1aWuiLJjJvajEjm4EqexGFtO2rPTCGE2s9Yf35rfqNs
+	8EB5NP5LjeC40ZHJeCk+ZGQjeIZ5jAqHunqaU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ckPJSSmIW0MNcNrG78CUyL6l8fAm03PBQjD/hQgLvsSglzTa933pTAesbwp69YW/sN
+	5+PQDaXsheo1rKNerlHyG9kupWpWczZp1qVZyRt6yC5tXUW/nerKRB60mJYNe6hMCpQP
+	EA1j+MTkeQV4RZSiYCNqZzc+ZfabPHhRm1Omc=
+Received: by 10.101.155.15 with SMTP id h15mr10420030ano.162.1280946130933;
+	Wed, 04 Aug 2010 11:22:10 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id i30sm14148912anh.29.2010.08.04.11.22.08
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 11:22:10 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100804172121.GC7189@denix.org>
-References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>
-	<20100804001959.GF17391@denix.org> <20100804052042.GB7085@gmail.com>
-	<1280920678.26249.33.camel@saphir>
-	<1280922518.2692.377.camel@mill.internal.reciva.com>
-	<20100804161327.GA7189@denix.org> <4C599C72.10805@xora.org.uk>
-MIME-version: 1.0
-In-reply-to: <4C599C72.10805@xora.org.uk>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.19
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Wed,  4 Aug 2010 13:17:38 -0500
+Message-Id: <1280945858-19260-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in	COMPATIBLE_MACHINES
+Subject: [PATCH] matrix-gui-e: bump PR for init file fixes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,54 +51,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 18:22:06 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 04 Aug 2010 18:22:58 -0000
 
-On Wed, Aug 04, 2010 at 05:59:30PM +0100, Graeme Gregory wrote:
->  On 04/08/10 17:13, Denys Dmytriyenko wrote:
-> > On Wed, Aug 04, 2010 at 12:48:38PM +0100, Phil Blundell wrote:
-> >> On Wed, 2010-08-04 at 13:17 +0200, Michael 'Mickey' Lauer wrote:
-> >>> FWIW, minimal is using MACHINE_CLASS since quite a while to
-> >>> reduce the need for adding the same files over and over again,
-> >>> this is being used e.g. for HTC msm7 series and OpenEZX series
-> >>> (see conf/machine/include).
-> >>>
-> >>> Perhaps it's time to standardize something like that.
-> >> Yeah.  I certainly don't think we want a proliferation of such
-> >> mechanisms.  If minimal is already using MACHINE_CLASS then there would
-> >> be some sense in trying to make use of the same thing.
-> >>
-> >> Failing that though, testing COMPATIBLE_MACHINE against MACHINE_CLASS
-> >> probably is more desirable than adding a completely new variable (i.e.
-> >> SOC_FAMILY) for that purpose.
-> > Phil,
-> >
-> > Re: "adding a completely new variable" - SOC_FAMILY has been in use for almost 
-> > a year now. I'm hearing about MACHINE_CLASS for the first time, although it 
-> > appears to be slightly older than SOC_FAMILY though. But it doesn't seem to be 
-> > used anywhere besides in few machine configs and micro.conf. There are no 
-> > recipes actually using it, unlike SOC_FAMILY...
-> >
-> > I'm not saying one is better than the other (actually, unifying them would 
-> > be nice), I'm just saying it's too late to object adding SOC_FAMILY...
-> >
-> As the person who originally added MACHINE_CLASS to openmoko and the OE,
-> then removed it from OE I can say it has different meaning that
-> SOC_FAMILY. MACHINE_CLASS was to identify a range of machines that were
-> 90% the same but had a few differences. It was used in a few recipes
-> which were MACHINE_ARCH to make them use the same ARCH in these recipes
-> to stop them being rebuilt when switching machines.
-> 
-> The original use was om-gta01 and om-gta02 which had the same MACHINE_CLASS.
+* Forgot to bump the PR to pick up the changes to the init
+  scripts.  This patch bumps the PR.
 
-Graeme,
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/ti/matrix-gui-e_svn.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Thanks for clarifying this! Do you still see a benefit in using MACHINE_CLASS? 
-Why was it removed from OE? I don't see why it can't be used alongside 
-SOC_FAMILY...
-
+diff --git a/recipes/ti/matrix-gui-e_svn.bb b/recipes/ti/matrix-gui-e_svn.bb
+index 78ef003..adb14df 100644
+--- a/recipes/ti/matrix-gui-e_svn.bb
++++ b/recipes/ti/matrix-gui-e_svn.bb
+@@ -6,7 +6,7 @@ PRIORITY = "optional"
+ 
+ SRCREV = "58"
+ PV = "1.0"
+-PR = "r13+svnr${SRCPV}"
++PR = "r14+svnr${SRCPV}"
+ 
+ SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
+ 	file://init \
 -- 
-Denys
+1.7.0.4
+
 
 
