@@ -1,41 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OgjEv-0003GD-Fi
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgjXE-0004Nh-GQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 21:03:12 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OgjEo-0006OE-U3 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 12:02:50 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 4 Aug 2010 12:02:50 -0700
-Received: from [172.30.80.92] ([172.30.80.92]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 4 Aug 2010 13:02:49 -0600
-Message-ID: <4C59B955.1070009@mentor.com>
-Date: Wed, 04 Aug 2010 12:02:45 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 04 Aug 2010 21:22:12 +0200
+Received: by fxm12 with SMTP id 12so2635062fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Aug 2010 12:21:36 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=0gp9oBeE3k3dT8hl6F0d9uYAxgCjQ0mz0Ie5VTlhvMY=;
+	b=SupsAXbku8+C1Rkf2Vn96BX1oFgw2gntKMe5OA4qGM9qWyyhOK94GzEc1bsoqhfe/s
+	Z536MGA0uWL5DeNieVxFEhTSOtYCpRS9vBaew0+afJC6GmIgIMDhN9cOqQt7C+usOwTH
+	+RF0TgNDEgVuTOTlvcl+6cbzFV236UtYroxiE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=J0diLPeogcsiI5aCDB20GTcJIUfdWwieFiv+OYrQKujXtcJfLXLw6kVCErLeyrKA/V
+	nrR/0GWQoluCOr8fQmlCRo8cPMACG0Cuh+uOEEX64s7CbRoQ1RW+INgzaZAjQYP7F4Q1
+	rVQ6AGyOWsrKRrfYc+domkEaYaXOwx19/rSbs=
 MIME-Version: 1.0
+Received: by 10.103.172.10 with SMTP id z10mr868945muo.44.1280949696404; Wed, 
+	04 Aug 2010 12:21:36 -0700 (PDT)
+Received: by 10.102.213.28 with HTTP; Wed, 4 Aug 2010 12:21:36 -0700 (PDT)
+In-Reply-To: <1280948285-3458-7-git-send-email-raj.khem@gmail.com>
+References: <1280948285-3458-1-git-send-email-raj.khem@gmail.com>
+	<1280948285-3458-7-git-send-email-raj.khem@gmail.com>
+Date: Wed, 4 Aug 2010 21:21:36 +0200
+Message-ID: <AANLkTineQnzb6Bdsehc7CoSNPQ0wfDWyZhH5Fs7U046G@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>	<20100804001959.GF17391@denix.org>
-	<i3bavs$8c4$2@dough.gmane.org>
-	<AANLkTikjZtqw5yCUzeXGZdhqyEg-qwTz-q3aRSd2zK89@mail.gmail.com>
-In-Reply-To: <AANLkTikjZtqw5yCUzeXGZdhqyEg-qwTz-q3aRSd2zK89@mail.gmail.com>
-X-OriginalArrivalTime: 04 Aug 2010 19:02:49.0232 (UTC)
-	FILETIME=[A1B0B900:01CB3407]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in	COMPATIBLE_MACHINES
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 6/7] recipes: inherit autotools instead of autotools_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,36 +53,8 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 19:03:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Aug 2010 19:22:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Frans Meulenbroeks wrote:
-> 2010/8/4 Koen Kooi <k.kooi@student.utwente.nl>
-> 
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> On 04-08-10 02:19, Denys Dmytriyenko wrote:
->>> On Tue, Aug 03, 2010 at 04:47:20PM -0500, Chase Maupin wrote:
->>>> * Add support for using SOC_FAMILY in the COMPATIBLE_MACHINES
->>>>   setting for a recipe.
->>>> * This will allow recipes to work for entire families of
->>>>   devices without having to maintain/update the compatible
->>>>   devices as new devices are added into a family
->>>>
->>>> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
->>> Acked-by: Denys Dmytriyenko <denys@ti.com>
->> Acked-by: Koen Kooi <k-kooi@ti.com>
->>
->> I have no problems with the patch as such, but would appreciate a patch for
-> the documentation that describes this variable.
-
-In fact, I thought there was vague agreement here from the last time we 
-added or changed variable behavior.  Patch the docs at the same time.
-
--- 
-Tom Rini
-Mentor Graphics Corporation
-
+Visually inspected. Looks ok to me.
 
