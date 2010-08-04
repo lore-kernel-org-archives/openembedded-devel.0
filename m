@@ -1,40 +1,50 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1Ogf9r-0001Zh-G4
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1Ogfan-00082B-CJ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 16:41:28 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o74EfMj3032207;
-	Wed, 4 Aug 2010 15:41:22 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 31788-09; Wed,  4 Aug 2010 15:41:18 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o74EfDM5032201
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 4 Aug 2010 15:41:13 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: Khem Raj <raj.khem@gmail.com>
-In-Reply-To: <20100804040949.GA7085@gmail.com>
-References: <1279290319.10837.1747.camel@rex>
-	<1280842002.16235.83.camel@rex>  <20100804040949.GA7085@gmail.com>
-Date: Wed, 04 Aug 2010 15:40:58 +0100
-Message-ID: <1280932858.16235.165.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Wed, 04 Aug 2010 17:09:19 +0200
+Received: by pvg13 with SMTP id 13so2060661pvg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Aug 2010 08:09:07 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=TXS2M/2GiV8nvQbfDFFI1xplPNWOnZFyrtM52s+zqcw=;
+	b=B6t/R8Js5xRaLALsuygKnAIsSZTM25aDptgILU/lPAcm4wIcwoCx1mxfGGtpthUhOo
+	3BnYLATBRBbj2Sp20odBoT4HJWQkVnxr3TPVmoT9giDpC2dmOvjwYjLK5nI8zq016rzs
+	M7XyI4wGFHARACYqGkMpM3GB4KuOEn7ltoe88=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=wbGlRKOFX/9WZIjzJ04ZC3+sGGAMApF8FrZlMNtNOyJCE1+jUL0IYXetqoXOpVYzUX
+	jtEoS2JNZBJ0ba22k24zeEpvQkzGOoTGHrFUf9rxIEw5eYlkwudiljN7UlJsWJQvd0MI
+	Xhm51WFXrfvr7IrbR83BhuJ6xU8medu+kFJt4=
+Received: by 10.142.207.5 with SMTP id e5mr7892935wfg.123.1280934547515;
+	Wed, 04 Aug 2010 08:09:07 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id f2sm10686118wfp.23.2010.08.04.08.09.05
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 08:09:06 -0700 (PDT)
+Date: Wed, 4 Aug 2010 08:08:54 -0700
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100804150854.GA8728@gmail.com>
+References: <4C57294F.3030804@mentor.com>
+	<1280918251-19703-1-git-send-email-rep.dot.nop@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1280918251-19703-1-git-send-email-rep.dot.nop@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: Re: [PATCH] base.bbclass: depend unpacking on native unpackers
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,42 +58,217 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 14:41:29 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Aug 2010 15:09:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Tue, 2010-08-03 at 21:09 -0700, Khem Raj wrote:
-> On (03/08/10 14:26), Richard Purdie wrote:
-> > Whilst I think there were some initial concerns the consensus seemed to
-> > be that this was a good thing to have in bitbake, its something that has
-> > been on the feature wishlist since day one so I've merged the patch into
-> > bitbake master.
+On (04/08/10 12:37), Bernhard Reutner-Fischer wrote:
+> Automatically depend do_unpack on the corresponding native unpacker.
 > 
-> Now this fails.
+> If your package's SRC_URIs do not contain unambiguous extensions or are
+> misnamed (like .exe for ZIP'ed files) then add e.g.:
+> do_unpack[depends] += " unzip-native:do_populate_sysroot"
 > 
-> $ bitbake -c clean -b virtual:native:/home/kraj/work/oe/openembedded/recipes/zlib/zlib_1.2.3.bb
-> Command execution failed: Traceback (most recent call last):
->   File "/home/kraj/work/oe/bitbake/lib/bb/command.py", line 88, in
-> runAsyncCommand
->     commandmethod(self.cmds_async, self, options)
->   File "/home/kraj/work/oe/bitbake/lib/bb/command.py", line 174, in
-> buildFile
->     command.cooker.buildFile(bfile, task)
->   File "/home/kraj/work/oe/bitbake/lib/bb/cooker.py", line 640, in
-> buildFile
->     the_data = self.bb_cache.loadDataFull(fn, self.get_file_appends(fn),
-> self.configuration.data)
->   File "/home/kraj/work/oe/bitbake/lib/bb/cooker.py", line 897, in
-> get_file_appends
->     if f in self.appendlist:
-> AttributeError: BBCooker instance has no attribute 'appendlist'
+> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 
-Sorry, I'd tested with partial expressions in the -b option, not full
-paths. I've pushed a fix.
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
-Cheers,
-
-Richard
-
+> ---
+>  classes/autotools.bbclass    |   17 ++++++++++++-----
+>  classes/base.bbclass         |   31 ++++++++++++++++---------------
+>  classes/native.bbclass       |    6 ++----
+>  recipes/xz/xz_4.999.9beta.bb |    5 ++++-
+>  4 files changed, 34 insertions(+), 25 deletions(-)
+> 
+> diff --git a/classes/autotools.bbclass b/classes/autotools.bbclass
+> index b2de2b1..b2901ff 100644
+> --- a/classes/autotools.bbclass
+> +++ b/classes/autotools.bbclass
+> @@ -1,8 +1,14 @@
+>  # use autotools_stage_all for native packages
+>  AUTOTOOLS_NATIVE_STAGE_INSTALL = "1"
+>  
+> -def autotools_deps(d):
+> -	if bb.data.getVar('INHIBIT_AUTOTOOLS_DEPS', d, 1):
+> +def autotools_deps(d, virtclass=None):
+> +	if virtclass:
+> +		virtclass_str = "_virtclass-%s" % (virtclass)
+> +	else:
+> +		virtclass_str = ""
+> +	if ((virtclass and bb.data.inherits_class(virtclass, d)) \
+> +	     or (virtclass is None)) \
+> +		and bb.data.getVar('INHIBIT_AUTOTOOLS_DEPS' + virtclass_str, d, 1):
+>  		return ''
+>  
+>  	pn = bb.data.getVar('PN', d, 1)
+> @@ -17,7 +23,7 @@ def autotools_deps(d):
+>  		if not bb.data.inherits_class('native', d) \
+>                          and not bb.data.inherits_class('cross', d) \
+>                          and not bb.data.inherits_class('sdk', d) \
+> -                        and not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d, 1):
+> +                        and not bb.data.getVar('INHIBIT_DEFAULT_DEPS' + virtclass_str, d, 1):
+>                      deps += 'libtool-cross '
+>  
+>  	return deps + 'gnu-config-native '
+> @@ -25,8 +31,8 @@ def autotools_deps(d):
+>  EXTRA_OEMAKE = ""
+>  
+>  DEPENDS_prepend = "${@autotools_deps(d)}"
+> -DEPENDS_virtclass-native_prepend = "${@autotools_deps(d)}"
+> -DEPENDS_virtclass-nativesdk_prepend = "${@autotools_deps(d)}"
+> +DEPENDS_virtclass-native_prepend = "${@autotools_deps(d, 'native')}"
+> +DEPENDS_virtclass-nativesdk_prepend = "${@autotools_deps(d, 'nativesdk')}"
+>  
+>  inherit siteinfo
+>  
+> @@ -86,6 +92,7 @@ oe_runconf () {
+>  }
+>  
+>  autotools_do_configure() {
+> +	[ "x${INHIBIT_AUTORECONF}" = "x" ] &&
+>  	case ${PN} in
+>  	autoconf*)
+>  	;;
+> diff --git a/classes/base.bbclass b/classes/base.bbclass
+> index 1847491..c4bdece 100644
+> --- a/classes/base.bbclass
+> +++ b/classes/base.bbclass
+> @@ -57,7 +57,11 @@ oe_runmake() {
+>  	${MAKE} ${EXTRA_OEMAKE} "$@" || die "oe_runmake failed"
+>  }
+>  
+> -def base_deps(d):
+> +def base_deps(d, virtclass=None):
+> +	if virtclass:
+> +		virtclass_str = "_virtclass-%s" % (virtclass)
+> +	else:
+> +		virtclass_str = ""
+>  	#
+>  	# Ideally this will check a flag so we will operate properly in
+>  	# the case where host == build == target, for now we don't work in
+> @@ -71,7 +75,7 @@ def base_deps(d):
+>  	# INHIBIT_DEFAULT_DEPS doesn't apply to the patch command.  Whether or  not
+>  	# we need that built is the responsibility of the patch function / class, not
+>  	# the application.
+> -	if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d):
+> +	if not bb.data.getVar('INHIBIT_DEFAULT_DEPS' + virtclass_str, d):
+>  		if (bb.data.getVar('HOST_SYS', d, 1) !=
+>  	     	    bb.data.getVar('BUILD_SYS', d, 1)):
+>  			deps += " virtual/${TARGET_PREFIX}gcc virtual/libc "
+> @@ -84,8 +88,8 @@ def base_deps(d):
+>  	return deps
+>  
+>  DEPENDS_prepend="${@base_deps(d)} "
+> -DEPENDS_virtclass-native_prepend="${@base_deps(d)} "
+> -DEPENDS_virtclass-nativesdk_prepend="${@base_deps(d)} "
+> +DEPENDS_virtclass-native_prepend="${@base_deps(d, 'native')} "
+> +DEPENDS_virtclass-nativesdk_prepend="${@base_deps(d, 'nativesdk')} "
+>  
+>  
+>  SCENEFUNCS += "base_scenefunction"
+> @@ -374,26 +378,24 @@ do_build[func] = "1"
+>  
+>  python () {
+>      import exceptions
+> +    import re
+>  
+>      source_mirror_fetch = bb.data.getVar('SOURCE_MIRROR_FETCH', d, 0)
+>      if not source_mirror_fetch:
+>          need_host = bb.data.getVar('COMPATIBLE_HOST', d, 1)
+>          if need_host:
+> -            import re
+>              this_host = bb.data.getVar('HOST_SYS', d, 1)
+>              if not re.match(need_host, this_host):
+>                  raise bb.parse.SkipPackage("incompatible with host %s" % this_host)
+>  
+>          need_machine = bb.data.getVar('COMPATIBLE_MACHINE', d, 1)
+>          if need_machine:
+> -            import re
+>              this_machine = bb.data.getVar('MACHINE', d, 1)
+>              if this_machine and not re.match(need_machine, this_machine):
+>                  raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
+>  
+>          need_target = bb.data.getVar('COMPATIBLE_TARGET_SYS', d, 1)
+>          if need_target:
+> -            import re
+>              this_target = bb.data.getVar('TARGET_SYS', d, 1)
+>              if this_target and not re.match(need_target, this_target):
+>                  raise bb.parse.SkipPackage("incompatible with target system %s" % this_target)
+> @@ -418,14 +420,13 @@ python () {
+>          depends = depends + " git-native:do_populate_sysroot"
+>          bb.data.setVarFlag('do_fetch', 'depends', depends, d)
+>  
+> -    # unzip-native should already be staged before unpacking ZIP recipes
+> -    need_unzip = bb.data.getVar('NEED_UNZIP_FOR_UNPACK', d, 1)
+> -    src_uri = bb.data.getVar('SRC_URI', d, 1)
+> -
+> -    if ".zip" in src_uri or need_unzip == "1":
+> -        depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
+> -        depends = depends + " unzip-native:do_populate_sysroot"
+> -        bb.data.setVarFlag('do_unpack', 'depends', depends, d)
+> +    # Make sure that native unpackers are staged before trying to unpack
+> +    for (ext, tool) in [('xz','xz'),('zip','unzip')]:
+> +        rex = re.compile('\.' + ext + '($|;|\s)')
+> +        if rex.search(srcuri):
+> +            depends = bb.data.getVarFlag('do_unpack', 'depends', d) or ""
+> +            depends += ' ' + tool + '-native:do_populate_sysroot'
+> +            bb.data.setVarFlag('do_unpack', 'depends', depends, d)
+>  
+>      # 'multimachine' handling
+>      mach_arch = bb.data.getVar('MACHINE_ARCH', d, 1)
+> diff --git a/classes/native.bbclass b/classes/native.bbclass
+> index 345bd80..e38fe20 100644
+> --- a/classes/native.bbclass
+> +++ b/classes/native.bbclass
+> @@ -88,8 +88,7 @@ PKG_CONFIG_PATH .= "${EXTRA_NATIVE_PKGCONFIG_PATH}"
+>  PKG_CONFIG_SYSROOT_DIR = ""
+>  
+>  ORIG_DEPENDS := "${DEPENDS}"
+> -
+> -DEPENDS_virtclass-native ?= "${ORIG_DEPENDS}"
+> +DEPENDS_virtclass-native ?= "${@base_conditional('INHIBIT_DEFAULT_DEPS_virtclass-native', '1', '', '${ORIG_DEPENDS}', d)}"
+>  
+>  def native_virtclass_add_override(d):
+>      if "native" in (bb.data.getVar('BBCLASSEXTEND', d, True) or ""):
+> @@ -117,7 +116,6 @@ python __anonymous () {
+>              if dep.endswith("-cross"):
+>                  newdeps.append(dep.replace("-cross", "-native"))
+>              elif not dep.endswith("-native"):
+> -     
+>                  newdeps.append(dep + "-native")
+>              else:
+>                  newdeps.append(dep)
+> @@ -127,8 +125,8 @@ python __anonymous () {
+>              if prov.find(pn) != -1:
+>                  continue
+>              if not prov.endswith("-native"):
+> -    
+>                  provides = provides.replace(prov, prov + "-native")
+>          bb.data.setVar("PROVIDES", provides, d)
+> +        bb.data.setVar("INHIBIT_AUTORECONF", bb.data.getVar("INHIBIT_AUTORECONF_virtclass-native", d, True), d)
+>  }
+>  
+> diff --git a/recipes/xz/xz_4.999.9beta.bb b/recipes/xz/xz_4.999.9beta.bb
+> index 8733023..fe49412 100644
+> --- a/recipes/xz/xz_4.999.9beta.bb
+> +++ b/recipes/xz/xz_4.999.9beta.bb
+> @@ -1,5 +1,8 @@
+> +INHIBIT_AUTOTOOLS_DEPS_virtclass-native = "1"
+> +INHIBIT_DEFAULT_DEPS_virtclass-native = "1"
+> +INHIBIT_AUTORECONF_virtclass-native = "1"
+>  require xz.inc
+> -PR = "${INC_PR}.0"
+> +PR = "${INC_PR}.1"
+>  SRC_URI = "http://tukaani.org/xz/xz-${PV}.tar.bz2;name=xz"
+>  SRC_URI[xz.md5sum] = "cc4044fcc073b8bcf3164d1d0df82161"
+>  SRC_URI[xz.sha256sum] = "330312c4397608d8b7be362cc7edbfeafa6101614bc2164d816ea767656aa15c"
+> -- 
+> 1.7.1
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
