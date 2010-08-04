@@ -1,33 +1,33 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1Ogd1a-0000Om-N4
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 14:26:14 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o74COPq5032210
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Wed, 4 Aug 2010 14:24:27 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>)
-	id 1Ogd1F-0001pl-CQ; Wed, 04 Aug 2010 14:24:25 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Aug 2010 14:24:20 +0200
-Message-Id: <1280924660-7020-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
-X-Mailer: git-send-email 1.7.2
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+	(envelope-from <jkridner@beagleboard.org>) id 1OgdMW-0001ou-AH
+	for Openembedded-devel@lists.openembedded.org;
+	Wed, 04 Aug 2010 14:46:25 +0200
+Received: by qwg8 with SMTP id 8so3036901qwg.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Aug 2010 05:46:15 -0700 (PDT)
+Received: by 10.224.40.10 with SMTP id i10mr3730732qae.389.1280925974839;
+	Wed, 04 Aug 2010 05:46:14 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id r29sm2884496qcs.37.2010.08.04.05.46.11
+	(version=SSLv3 cipher=RC4-MD5); Wed, 04 Aug 2010 05:46:12 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
+To: Openembedded-devel@lists.openembedded.org
+Date: Wed,  4 Aug 2010 07:46:10 -0500
+Message-Id: <1280925970-11423-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+In-Reply-To: <1280897047-28860-1-git-send-email-jkridner@beagleboard.org>
+References: <1280897047-28860-1-git-send-email-jkridner@beagleboard.org>
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-Subject: [PATCH] packagehistory.bbclass: use PKGV + PKGR instead of PV + PR
+Subject: [PATCH] beagleboard-test-image: added ramdisk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,34 +41,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 12:26:15 -0000
+X-List-Received-Date: Wed, 04 Aug 2010 12:46:25 -0000
 
-In the final package feed there will be seen the PKGV/R values only
-and the PV/R ones are meaningless.  Hence, use PKGV/R for validating
-the package feed.
+Simply adding 'ext2.gz' to the IMAGE_FSTYPES to produce a default sized
+ramdisk image whenever this image is built.
 
-Signed-off-by: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+Uses 'IMAGE_FSTYPES +=' syntax to add a compressed ext2 image to use as
+a ramdisk for BeagleBoard validation.  No space is required in the
+string per link provided by Paul Menzel. [1]
+
+[1] http://docs.openembedded.org/usermanual/usermanual.html
 ---
- classes/packagehistory.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/images/beagleboard-test-image.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-diff --git a/classes/packagehistory.bbclass b/classes/packagehistory.bbclass
-index 492bbac..762388d 100644
---- a/classes/packagehistory.bbclass
-+++ b/classes/packagehistory.bbclass
-@@ -35,8 +35,8 @@ python emit_pkghistory() {
+diff --git a/recipes/images/beagleboard-test-image.bb b/recipes/images/beagleboard-test-image.bb
+index 0ea323a..669eb52 100644
+--- a/recipes/images/beagleboard-test-image.bb
++++ b/recipes/images/beagleboard-test-image.bb
+@@ -23,3 +23,4 @@ IMAGE_INSTALL += " \
+ export IMAGE_BASENAME = "beagleboard-test-image"
  
- 	for pkg in packages.split():
- 		pe = getpkgvar(pkg, 'PE') or "0"
--		pv = getpkgvar(pkg, 'PV')
--		pr = getpkgvar(pkg, 'PR')
-+		pv = getpkgvar(pkg, 'PKGV')
-+		pr = getpkgvar(pkg, 'PKGR')
- 		destdir = os.path.join(pkghistdir, pkg, pe, pv, pr)
- 		
- 		#
+ EXTRA_IMAGEDEPENDS += "x-load u-boot virtual/kernel"
++IMAGE_FSTYPES += "ext2.gz"
 -- 
-1.7.2
+1.5.6.4
 
 
 
