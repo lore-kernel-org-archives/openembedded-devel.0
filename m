@@ -1,47 +1,41 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OgjDT-0002IN-Tp
+	(envelope-from <Tom_Rini@mentor.com>) id 1OgjEv-0003GD-Fi
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 21:01:29 +0200
-Received: by ywe9 with SMTP id 9so2243661ywe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 12:01:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:cc:content-type
-	:content-transfer-encoding;
-	bh=teXMtGwAT6Kniy2CfXkEkWJzyb64Dk9Fq/V3Fc+vmq0=;
-	b=Qj4sGejjj8ymevwuPoT++N+qbR8yYwXyKmlVWiTQy6bOOg5FjxAwegNveau75Wde2a
-	IEaHyPbFdKqUiKGasYaCKX34kNrtJMfTbK50vHCIkZuZFzwKCFppQIRL8p13NuRPxEJy
-	q4ujARrB6XaP2mNm7j/FH3zI51hTt6eZicw9E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:cc:content-type:content-transfer-encoding;
-	b=HN1xWekfOODZq6FCfMAjnpNJEY9yskXoVfH3ajGIAGu8z5BvL1Mz8RDeTL9spEOvA9
-	p+nEvVwBILBqKRYgKmLEcS5xlXZBeWG7Btl43dKaiDe8Is+FL3acJCVTxe7FrRI3aiDt
-	rkwDKycPmxos8NtMulV+x7jdKR7sFqRC31vIc=
-Received: by 10.231.170.21 with SMTP id b21mr10801969ibz.122.1280948479381; 
-	Wed, 04 Aug 2010 12:01:19 -0700 (PDT)
+	Wed, 04 Aug 2010 21:03:12 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OgjEo-0006OE-U3 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Aug 2010 12:02:50 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 4 Aug 2010 12:02:50 -0700
+Received: from [172.30.80.92] ([172.30.80.92]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 4 Aug 2010 13:02:49 -0600
+Message-ID: <4C59B955.1070009@mentor.com>
+Date: Wed, 04 Aug 2010 12:02:45 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.231.12.137 with HTTP; Wed, 4 Aug 2010 12:00:59 -0700 (PDT)
-In-Reply-To: <1280932858.16235.165.camel@rex>
-References: <1279290319.10837.1747.camel@rex> <1280842002.16235.83.camel@rex> 
-	<20100804040949.GA7085@gmail.com> <1280932858.16235.165.camel@rex>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Aug 2010 12:00:59 -0700
-Message-ID: <AANLkTi==huSpPxRb8ig219x5AKkPTAts8PgC16kf29vX@mail.gmail.com>
-To: Richard Purdie <rpurdie@rpsys.net>
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>	<20100804001959.GF17391@denix.org>
+	<i3bavs$8c4$2@dough.gmane.org>
+	<AANLkTikjZtqw5yCUzeXGZdhqyEg-qwTz-q3aRSd2zK89@mail.gmail.com>
+In-Reply-To: <AANLkTikjZtqw5yCUzeXGZdhqyEg-qwTz-q3aRSd2zK89@mail.gmail.com>
+X-OriginalArrivalTime: 04 Aug 2010 19:02:49.0232 (UTC)
+	FILETIME=[A1B0B900:01CB3407]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: bitbake-dev <bitbake-dev@lists.berlios.de>,
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Re: [Bitbake-dev] A new bitbake extension: .bbappend files
+Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in	COMPATIBLE_MACHINES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,52 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 19:01:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Aug 2010 19:03:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 4, 2010 at 7:40 AM, Richard Purdie <rpurdie@rpsys.net> wrote:
-> On Tue, 2010-08-03 at 21:09 -0700, Khem Raj wrote:
->> On (03/08/10 14:26), Richard Purdie wrote:
->> > Whilst I think there were some initial concerns the consensus seemed t=
-o
->> > be that this was a good thing to have in bitbake, its something that h=
-as
->> > been on the feature wishlist since day one so I've merged the patch in=
-to
->> > bitbake master.
+Frans Meulenbroeks wrote:
+> 2010/8/4 Koen Kooi <k.kooi@student.utwente.nl>
+> 
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
 >>
->> Now this fails.
+>> On 04-08-10 02:19, Denys Dmytriyenko wrote:
+>>> On Tue, Aug 03, 2010 at 04:47:20PM -0500, Chase Maupin wrote:
+>>>> * Add support for using SOC_FAMILY in the COMPATIBLE_MACHINES
+>>>>   setting for a recipe.
+>>>> * This will allow recipes to work for entire families of
+>>>>   devices without having to maintain/update the compatible
+>>>>   devices as new devices are added into a family
+>>>>
+>>>> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+>>> Acked-by: Denys Dmytriyenko <denys@ti.com>
+>> Acked-by: Koen Kooi <k-kooi@ti.com>
 >>
->> $ bitbake -c clean -b virtual:native:/home/kraj/work/oe/openembedded/rec=
-ipes/zlib/zlib_1.2.3.bb
->> Command execution failed: Traceback (most recent call last):
->> =A0 File "/home/kraj/work/oe/bitbake/lib/bb/command.py", line 88, in
->> runAsyncCommand
->> =A0 =A0 commandmethod(self.cmds_async, self, options)
->> =A0 File "/home/kraj/work/oe/bitbake/lib/bb/command.py", line 174, in
->> buildFile
->> =A0 =A0 command.cooker.buildFile(bfile, task)
->> =A0 File "/home/kraj/work/oe/bitbake/lib/bb/cooker.py", line 640, in
->> buildFile
->> =A0 =A0 the_data =3D self.bb_cache.loadDataFull(fn, self.get_file_append=
-s(fn),
->> self.configuration.data)
->> =A0 File "/home/kraj/work/oe/bitbake/lib/bb/cooker.py", line 897, in
->> get_file_appends
->> =A0 =A0 if f in self.appendlist:
->> AttributeError: BBCooker instance has no attribute 'appendlist'
->
-> Sorry, I'd tested with partial expressions in the -b option, not full
-> paths. I've pushed a fix.
+>> I have no problems with the patch as such, but would appreciate a patch for
+> the documentation that describes this variable.
 
-thanks works well now :)
+In fact, I thought there was vague agreement here from the last time we 
+added or changed variable behavior.  Patch the docs at the same time.
 
->
-> Cheers,
->
-> Richard
->
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
