@@ -1,43 +1,44 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OgirQ-00050t-ME
+	(envelope-from <raj.khem@gmail.com>) id 1OgjAR-00063R-MP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 20:38:46 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id DD94E11000BF
+	Wed, 04 Aug 2010 20:58:34 +0200
+Received: by pzk2 with SMTP id 2so2204163pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 20:38:28 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 348DA110009D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 20:38:28 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052238131.adsl.alicedsl.de
-	[78.52.238.131]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 20:38:28 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id 37A693C0EF; Wed,  4 Aug 2010 20:38:11 +0200 (CEST)
-Date: Wed, 4 Aug 2010 20:38:11 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Wed, 04 Aug 2010 11:58:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=x4Vxv+yR3Etfhi/4auZICaJoxOcf7XMnKMc1z3JN/yk=;
+	b=kiTX2lZAO6iwU56Wt3Vr+3B6JiXWVwPaVkDO/DFLjlT11U3kWqnI//MFcxdRiRcur5
+	6e+Dy3EiSjQ+wv5mqIp1JF+W9f6f547Ohx58lYHxmHuIqtb5P2UrXDn22iWcztuau9/U
+	N3jjQBBvmvF7mESive7O7P87NF1EPbNdgs2xw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=LYusECLqoFnyV0KG7aQKc/KhfekFKfFqCmHXWmY8XryHME15eyQH5MwKQAw6j1ONXX
+	20gGKvLJeDQC1aXStrIEECZpecWzVA5pKVmomWaTQyPecPnw9s60uxKFDQOn3jgNgM6s
+	jA9eYX+epc1QmhJbs+gJbN4C6+8jkhv4G2Wcc=
+Received: by 10.142.215.7 with SMTP id n7mr8190312wfg.194.1280948292821;
+	Wed, 04 Aug 2010 11:58:12 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id n2sm10876016wfl.1.2010.08.04.11.58.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 11:58:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100804183810.GA3476@mail.familie-heinold.de>
-References: <AANLkTinhOYuaOPbgK1tk3qtUwRPTKs1EDvU8BtH9yWJF@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTinhOYuaOPbgK1tk3qtUwRPTKs1EDvU8BtH9yWJF@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Date: Wed,  4 Aug 2010 11:57:58 -0700
+Message-Id: <1280948285-3458-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OpenEmbedded compile error with MIPS and EGLIBC
+Subject: [PATCH 0/7] recipes: Dont inherit autotools_stage (revised)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,15 +52,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 18:38:46 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Aug 2010 18:58:34 -0000
 
-Hi,
+Hi
 
-please mention the version of binutils next time too, this looks like an assembler error.
+Following series of patches are for getting rid of
+autotools_staging class and its usage. Its replaced with
+autotools and staging functions are replaced
+
+Please test these patches and if seem ok provide some ACKS/NACKS
 
 
-Bye Henning
+Thanks
+-Khem
+
 
 
