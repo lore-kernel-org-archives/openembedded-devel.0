@@ -1,43 +1,43 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OgenA-0003kg-UX
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OgepS-0005o3-RI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 16:18:10 +0200
-Received: by fxm12 with SMTP id 12so2486775fxm.6
+	Wed, 04 Aug 2010 16:20:23 +0200
+Received: by fxm12 with SMTP id 12so2488061fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 07:17:54 -0700 (PDT)
+	Wed, 04 Aug 2010 07:20:18 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:received:date:from:to:subject
 	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=nKbGwLrDdAUYTcA0DBWRd5g7ZJClF+IdTyLGccBKc5Q=;
-	b=eh4Jnys33Lpvg4/GkeLvdQkgxK9T2IzTze2CTbFkMvjuKLHUBiEodpcHYYjkcgMBPK
-	McNdicP84tKNr8ebGwFHnM14HfCT4hRSH1frGwA2iepkTGJwvuKgCABrohg5Rcat0enD
-	XT6EalMvOnGNPqEFXcWbfgXZ6EjG00O4WcvZs=
+	:in-reply-to:user-agent;
+	bh=wKtNQB+m3FKxdx+/igthvRkTb+51TmxbsqqV7MN1dvs=;
+	b=PBOwOmbnHbBgZPf+CD+TaekjwwWePxQJaKCi+AeW2TQC/C9vxi85/WO5HFVkpJK5hS
+	57tZLj9V/Fii7BSdqYyXArDqMhfBCs5wYwqEqLPlLCiaGcfvTDBMtCbJV9lHgrODKB6G
+	uWMqQsWmxzht60FCInk0QlGHxSjq/tquNC1Rs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=B9tVYz2CECIEDO3g2Z0h4rlD8oxnkd6uAgwQPa8KdFHSAa5qwvGPaFsZImwhkNgwlS
-	3ITOStN/VtgkC4IeD17TVXmTDo4Pp5nYvXrlxBtZiCEfp+gniE6++Zkf+zc7HoBTNQwS
-	ze6NVtXtV9EQ6uN9abpklINhzWyS/Sjoudcxw=
-Received: by 10.223.118.211 with SMTP id w19mr2360591faq.19.1280931474726;
-	Wed, 04 Aug 2010 07:17:54 -0700 (PDT)
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=L475TeD1DXkxeCD0SxCcFZxaXPK7PN2HuiU5Vau7BxHSsf4vmqPtOEESXFafJpAjtN
+	JZsXJ2FTGPkVsBtkP/eCIPjnUAaCir7AQnWAY6nHmuuH7iQ6S9MEKzOLHwXilAEkR2iZ
+	Jxe25ygyLx4ZKYVmzDNOgcBRuYJ5lIxRP2194=
+Received: by 10.223.122.146 with SMTP id l18mr8993673far.82.1280931618722;
+	Wed, 04 Aug 2010 07:20:18 -0700 (PDT)
 Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
-	by mx.google.com with ESMTPS id r5sm2982328faq.32.2010.08.04.07.17.53
+	by mx.google.com with ESMTPS id l19sm2985494fap.9.2010.08.04.07.20.17
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Aug 2010 07:17:54 -0700 (PDT)
+	Wed, 04 Aug 2010 07:20:17 -0700 (PDT)
 Received: from cow by s42.loc with local (Exim 4.72)
 	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Ogemy-0006MT-3y; Wed, 04 Aug 2010 16:17:48 +0200
-Date: Wed, 4 Aug 2010 16:17:48 +0200
+	id 1OgepH-0006Oh-Vt; Wed, 04 Aug 2010 16:20:11 +0200
+Date: Wed, 4 Aug 2010 16:20:11 +0200
 From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100804141748.GC28187@mx.loc>
+Message-ID: <20100804142011.GD28187@mx.loc>
 References: <1280929918-23818-1-git-send-email-rep.dot.nop@gmail.com>
 	<201008041802.01481.khimov@altell.ru>
+	<20100804141748.GC28187@mx.loc>
 MIME-Version: 1.0
-In-Reply-To: <201008041802.01481.khimov@altell.ru>
+In-Reply-To: <20100804141748.GC28187@mx.loc>
 User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
@@ -61,23 +61,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 14:18:13 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Wed, 04 Aug 2010 14:20:23 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
 
-On Wed, Aug 04, 2010 at 06:02:01PM +0400, Roman I Khimov wrote:
->В сообщении от Среда 04 августа 2010 17:51:56 автор Bernhard Reutner-Fischer 
->написал:
->> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
->> ---
->>  recipes/perl/perl-native_5.8.8.bb |    4 ++--
->>  recipes/perl/perl_5.8.8.bb        |    6 ++++--
->>  2 files changed, 6 insertions(+), 4 deletions(-)
->
->Is it really appropriate for -native? And how about Perl 5.10.1?
-
-it's perfectly fine to build on a uclibc-based host with LFS off.
-Dunno about 5.10.1, it has a default preference of -1
+oh sorry, i just see that this needs even more munging so better
+disregard this for now.
 
 
