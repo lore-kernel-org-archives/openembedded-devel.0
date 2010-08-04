@@ -1,50 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1Oger1-0006lD-I2
+	(envelope-from <khimov@altell.ru>) id 1Ogf0W-0006gy-UF
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 16:22:01 +0200
-Received: by fxm12 with SMTP id 12so2489023fxm.6
+	Wed, 04 Aug 2010 16:31:53 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 4F7FF4656
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 07:21:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=nTTo9guC/3U4PiHM9kJyatYBIJdVzdTrglhKm4ThssA=;
-	b=XxPoHOv7v9tWbUFmvgHNBYDFRbUw9bm9gQrHiQTIwr7/S6LNuSaEsJeyIvppXXdIcM
-	ZMqlDQyoft85FoGgdx922aM08bPfleqZolV5gaqmUwRaM4ELG7rnEwi8jgBKrzW4B17X
-	ItxtSVk4AiUj9n8jdKCu9O5utO2G5u2YmOstA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=lAkQMA6USLDnmC66lo6rfROQOT5VN81gRJWuTDlBIBhJbvKuluXbTXYyGaDawEVmNF
-	ozGHRUCsT7ij/IASJZ4HmhkeV8UrNPtKV4KMzRgooO1gzRM2BOA3f3CCc9JJdHiCH+Yh
-	I60QUzUK5gll4ikOMlnMdPh2VvKDHgM7gDb7s=
-Received: by 10.223.119.198 with SMTP id a6mr9018232far.66.1280931715536;
-	Wed, 04 Aug 2010 07:21:55 -0700 (PDT)
-Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
-	by mx.google.com with ESMTPS id c5sm2985857fac.19.2010.08.04.07.21.52
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Aug 2010 07:21:52 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1Ogeqp-0006Os-6w; Wed, 04 Aug 2010 16:21:47 +0200
-Date: Wed, 4 Aug 2010 16:21:47 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+	Wed,  4 Aug 2010 18:36:14 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100804142147.GE28187@mx.loc>
+Date: Wed, 4 Aug 2010 18:31:30 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
 References: <1280929918-23818-1-git-send-email-rep.dot.nop@gmail.com>
-	<1280929918-23818-2-git-send-email-rep.dot.nop@gmail.com>
 	<201008041807.06239.khimov@altell.ru>
+	<20100804142147.GE28187@mx.loc>
+In-Reply-To: <20100804142147.GE28187@mx.loc>
 MIME-Version: 1.0
-In-Reply-To: <201008041807.06239.khimov@altell.ru>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+Message-Id: <201008041831.30860.khimov@altell.ru>
+X-Altell-MailScanner-ID: 4F7FF4656.17DC8
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -62,33 +43,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 14:22:07 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 04 Aug 2010 14:31:55 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-On Wed, Aug 04, 2010 at 06:07:06PM +0400, Roman I Khimov wrote:
->В сообщении от Среда 04 августа 2010 17:51:57 автор Bernhard Reutner-Fischer 
->написал:
->> .. to avoid
->> ERROR: Error Method already seen: all_perl_packages in' perl_5.8.8.bb'
->> now in 'perl_5.10.1.bb'
->> 
->> TODO: error() already prints "ERROR:" so the "Error" in above msg is
->> redundant
->> 
->> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
->
->What kind of configuration gives you such an error? Never seen that.
-
-It was applied by Chris as a5dee57033f7d9987858d2c0514f4e687ece2874
->
->Although the change itself looks good, I'd only probably rename 
->perl_helper.inc to plain perl.inc, we can merge more common things between 
->different perl versions later.
-
-fine with me, sure.
->
->Acked-by: Roman I Khimov <khimov@altell.ru>
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KHRgNC10LTQsCAwNCDQsNCy0LPRg9GB0YLQsCAy
+MDEwIDE4OjIxOjQ3INCw0LLRgtC+0YAgQmVybmhhcmQgUmV1dG5lci1GaXNjaGVyIArQvdCw0L/Q
+uNGB0LDQuzoKPiBPbiBXZWQsIEF1ZyAwNCwgMjAxMCBhdCAwNjowNzowNlBNICswNDAwLCBSb21h
+biBJIEtoaW1vdiB3cm90ZToKPiA+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0KHRgNC10LTQ
+sCAwNCDQsNCy0LPRg9GB0YLQsCAyMDEwIDE3OjUxOjU3INCw0LLRgtC+0YAgQmVybmhhcmQKPiA+
+IFJldXRuZXItRmlzY2hlcgo+ID4KPiA+0L3QsNC/0LjRgdCw0Ls6Cj4gPj4gLi4gdG8gYXZvaWQK
+PiA+PiBFUlJPUjogRXJyb3IgTWV0aG9kIGFscmVhZHkgc2VlbjogYWxsX3BlcmxfcGFja2FnZXMg
+aW4nIHBlcmxfNS44LjguYmInCj4gPj4gbm93IGluICdwZXJsXzUuMTAuMS5iYicKPiA+Pgo+ID4+
+IFRPRE86IGVycm9yKCkgYWxyZWFkeSBwcmludHMgIkVSUk9SOiIgc28gdGhlICJFcnJvciIgaW4g
+YWJvdmUgbXNnIGlzCj4gPj4gcmVkdW5kYW50Cj4gPj4KPiA+PiBTaWduZWQtb2ZmLWJ5OiBCZXJu
+aGFyZCBSZXV0bmVyLUZpc2NoZXIgPHJlcC5kb3Qubm9wQGdtYWlsLmNvbT4KPiA+Cj4gPldoYXQg
+a2luZCBvZiBjb25maWd1cmF0aW9uIGdpdmVzIHlvdSBzdWNoIGFuIGVycm9yPyBOZXZlciBzZWVu
+IHRoYXQuCj4gCj4gSXQgd2FzIGFwcGxpZWQgYnkgQ2hyaXMgYXMgYTVkZWU1NzAzM2Y3ZDk5ODc4
+NThkMmMwNTE0ZjRlNjg3ZWNlMjg3NAoKUHJvYmFibHkgZDY3YzRlNWJhNDk5YTA1NGY2N2Q2NjU3
+MzNkMjlmODczZTQyNmRiOT8gVmVyeSByZWNlbnQgY2hhbmdlLCBnb3QgaXQsIApPSy4K
 
 
