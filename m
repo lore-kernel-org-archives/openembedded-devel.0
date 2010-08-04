@@ -1,34 +1,36 @@
 Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgWov-0002dc-8R
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgWvf-0002rK-S2
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 07:47:18 +0200
-Received: by bwz10 with SMTP id 10so2643283bwz.6
+	Wed, 04 Aug 2010 07:54:16 +0200
+Received: by bwz10 with SMTP id 10so2644518bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 22:47:11 -0700 (PDT)
+	Tue, 03 Aug 2010 22:54:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=+syFX4c1im8zbOb7lBR4P0ls3bZjwyEmjQeJwKDTEvI=;
-	b=hnJVwL9bPAOeo4K5ML7BM+ThR6i6nYOGySCxue/xYX7OG+HxgqfqEaik44FVOdii+C
-	KIcEP1lWKKjLoYhL6CWRqoGzihJcLCRDOiPYiujcMk/cEb/x2Tangy8o9Pyj/5DBfu0x
-	PKW5rt5B1FK2NtsMWxzqv+dl+AHSZ2HKnjYQc=
+	bh=o+YQs2BCmdtTCXsz30mt08cNZ4JU1ETvsYYopDLDHMc=;
+	b=IQSj0W8AuzKr/Sube+k6LY+d0sZAL70Sl3llaFItDnhUsIi8/T84U6sAD928FpaP+/
+	v4tUkNyNs5ylFMif1i6EOUDIJVEeg+Odgia8zOa/eHfaweL+j4yqKF/b2RmnjntGdZXJ
+	AnMW3YtIxg6sPnr8edqXJ7zmyB0b8pxpn4buc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=MHigjxu2Nz1YutTkj2duDoKNzZEQ/PqyjcCcleHP5g9ZLXA49rF0pMXdgJQy6VTyam
-	gBs2UO/QWrSOYPlrPUvChgMopIMxUGIB8atB2bUaT4Ry18BKOliIqR3NFFFyJ9UjjgbJ
-	mHpAM+7wKeIbWV8jenl9aqF1CT03z+o9EgWMQ=
+	b=Va3XrQ+x0e8IjoZzdj4hqobJa31QRpwdZXxs1oz9K15YX12YmejikXiw4npei1CReJ
+	xEke1yX8E8u7unFnnPJaeesIMdx6i1gpwDjuBjpxSwdHpHJIT92z2WqTTiQaj3B4cRds
+	SLiBZWUdeP34GQHGZ1JAWyiCOpRglzdE8f5ZU=
 MIME-Version: 1.0
-Received: by 10.204.82.200 with SMTP id c8mr5924159bkl.102.1280900831011; Tue, 
-	03 Aug 2010 22:47:11 -0700 (PDT)
-Received: by 10.204.60.208 with HTTP; Tue, 3 Aug 2010 22:47:10 -0700 (PDT)
-In-Reply-To: <20100804001040.GE17391@denix.org>
+Received: by 10.204.82.200 with SMTP id c8mr5928793bkl.102.1280901254049; Tue, 
+	03 Aug 2010 22:54:14 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Tue, 3 Aug 2010 22:54:13 -0700 (PDT)
+In-Reply-To: <20100804021340.GA6206@gmail.com>
 References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
 	<i38mr6$ng8$1@dough.gmane.org> <20100803235811.GC17391@denix.org>
 	<20100804001040.GE17391@denix.org>
-Date: Wed, 4 Aug 2010 07:47:10 +0200
-Message-ID: <AANLkTi=QDw_sf4H8Kdt7L7nfNZ24bjVBJ4hdW6HPUupB@mail.gmail.com>
+	<AANLkTi=EvHvOcpqYp1rZx-C0hBnQbZneJW2L5og6eBZ4@mail.gmail.com>
+	<20100804021340.GA6206@gmail.com>
+Date: Wed, 4 Aug 2010 07:54:13 +0200
+Message-ID: <AANLkTinxkRqnaxxRWGv8Cqudx2t6YYXfFfK2r4LqOch_@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.47
@@ -54,40 +56,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 05:47:18 -0000
+X-List-Received-Date: Wed, 04 Aug 2010 05:54:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/8/4 Denys Dmytriyenko <denis@denix.org>
+2010/8/4 Khem Raj <raj.khem@gmail.com>
 
 >
-> >
-> > First collateral damage - libxcb was broken, due to xcb-proto.inc having
-> > do_stage(). Worked with Khem to find the cause and thanks for pushing the
-> fix:
-> >
-> >
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=b0061845a60d7781f9287ae6955585485f5ba8e9
+> > I dont think this has been pushed yet. I have it staged in my tree though
+> > I am building from scratch lets see.
 >
-> BTW, just wanted to mention - if corresponding PRs had been bumped, it
-> would
-> have been spotted sooner and not only by people with clean TMPDIR... :)
+> oh indeed it is pushed. Well well. We should have got rid of inherit
+> autotools_stage in mass as well but I have a patch for that.
 >
+> After gettting two acks and in view of the PR thing, Koen pushed it
+yesterday afternoon (his and my TZ).
 
-Thanks for noticing and fixing.
-Actually to some extend xcb was at fault. Having both the recipe and the
-.inc file define a do_stage is no good I'd say (and it would be nice if the
-tools would capture this and emit at least a warning, but preferably an
-error).
+Wrt your remark about getting rid of autotools_stage in mass and having a
+patch:
+Can you submit the patch for review so we do not duplicate work
 
-Wrt the PR bump, it was my understanding that the cross patches from Khem
-would require cleaning of tmp anyway. It was requested (in the cross patches
-thread) to apply this before the cross patch so we would be on a clean slate
-anyway.
-(and yeah, the patch was generated automatically, and manually adding some
-500+ recipes to bump PR is somewhat labourous).
+And while we're at it:
+Should code like this:
 
-Anyway, apologies for the inconvenience. Hope this is the only recipe
-causing an issue.
+do_install () {
+        autotools_do_install
+        install -d ${D}${base_bindir}
+        mv ${D}${bindir}/grep ${D}${base_bindir}/grep.${PN}
+        mv ${D}${bindir}/egrep ${D}${base_bindir}/egrep.${PN}
+        mv ${D}${bindir}/fgrep ${D}${base_bindir}/fgrep.${PN}
+}
 
-Frans.
+be changed into:
+
+do_install_append () {
+        install -d ${D}${base_bindir}
+        mv ${D}${bindir}/grep ${D}${base_bindir}/grep.${PN}
+        mv ${D}${bindir}/egrep ${D}${base_bindir}/egrep.${PN}
+        mv ${D}${bindir}/fgrep ${D}${base_bindir}/fgrep.${PN}
+}
+
+of course something similar could be done for other autotools_* things like
+this one:
+
+do_configure () {
+        autotools_do_configure
+        cd ${S}
+
+        # prevent libtool from linking libs against libstdc++, libgcc, ...
+        cat ${TARGET_PREFIX}libtool | sed -e 's/postdeps=".*"/postdeps=""/'
+> ${TARGET_PREFIX}libtool.tmp
+        mv ${TARGET_PREFIX}libtool.tmp ${TARGET_PREFIX}libtool
+}
+
+Best regards, Frans.
 
