@@ -1,45 +1,55 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ogjxv-0005d7-V7
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OgkK4-00012V-SD
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 21:49:58 +0200
-Received: by gyd8 with SMTP id 8so2285190gyd.6
+	Wed, 04 Aug 2010 22:12:21 +0200
+Received: by fxm12 with SMTP id 12so2653207fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 12:49:22 -0700 (PDT)
+	Wed, 04 Aug 2010 13:12:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=KLMoHnvSANQWwvTFl0lZhl+TtkUu3I7dBL7peMSbizc=;
-	b=EOls5OGG1D+6YwE8MpkzodUtAOE5bFwsrexLzQuGupvUGoqgrzPt8Wd7D/WXHlhYdo
-	JNFZCGoQLxwRzXCuuaGxqOgErri9rt8KVV7tgwdJ1e4+UCXQCspYjGwlDHTM1UEvXKxB
-	uj5cAn28y7ibpK9SYDe/vOU4ZeVjDgy/7Tp2I=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=8rCQna/SxZySuDONVG+mGdmWD1GMj+5h6GotablqsO0=;
+	b=j7ghk/6EwHlgd/Tz3f/PIxUrawCE/YOPVLT0qIoF681Dr0QAlGvW8sXc1H8XREDSY/
+	w+c07GtVCKo8Om9kkEUVfM1EIk6U9/3Xj13crwCwLCaWTSadv73Sf13DcDQrt9wyEvt7
+	4PXzLRv1s4+pTQuY4iIHngvWoS69WZ4xjJl90=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=AHNNzVf0AVbiXwCzp1E3tYmHQXcIvvJXFVjtbLmPn3u+zhNencQGeYUfEaTotegqZQ
-	8nrFUgt6NXQHySUN5FbSegddXulg9mNiEh4ttkzjzPvL2GZkg9DbqG7eXwK/eTjtpDnM
-	vJTermn952lEPZh//HzxZ4J8DTyEpS31nFpPA=
-Received: by 10.150.239.8 with SMTP id m8mr9491050ybh.401.1280951362428; Wed, 
-	04 Aug 2010 12:49:22 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.12.137 with HTTP; Wed, 4 Aug 2010 12:49:02 -0700 (PDT)
-In-Reply-To: <1280915670.2692.350.camel@mill.internal.reciva.com>
-References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com> 
-	<1280915670.2692.350.camel@mill.internal.reciva.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 4 Aug 2010 12:49:02 -0700
-Message-ID: <AANLkTinBPTAF2UH0weQ7FKpHqFUBeLkzoO8kuQg41e+0@mail.gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=IzZJPq8bde7bqvCKgtxnvUrASHKfugIXMYgZRd7jU7z5r6nvWJX2oIZVh7aSlldzHN
+	3DnKBT6kWoISZATlf4kE9jEVmdzboHJfKBG30Lnjn5JCojOo2qpeM05m0P1qk6ttOYzi
+	A9dM3xtnaTx1SfcBTpqI3WpTm4jYaMDbR0TqM=
+Received: by 10.223.124.145 with SMTP id u17mr9468918far.92.1280952732198;
+	Wed, 04 Aug 2010 13:12:12 -0700 (PDT)
+Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
+	by mx.google.com with ESMTPS id y2sm3142131fau.36.2010.08.04.13.12.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 13:12:11 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OgkJn-0008IH-Op; Wed, 04 Aug 2010 22:12:03 +0200
+Date: Wed, 4 Aug 2010 22:12:03 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-ID: <20100804201203.GB6299@mx.loc>
+References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<i38mr6$ng8$1@dough.gmane.org> <20100803235811.GC17391@denix.org>
+	<20100804001040.GE17391@denix.org>
+	<AANLkTi=QDw_sf4H8Kdt7L7nfNZ24bjVBJ4hdW6HPUupB@mail.gmail.com>
+	<20100804165030.GG28187@mx.loc> <i3c7lf$mpg$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i3c7lf$mpg$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in COMPATIBLE_MACHINES
+Subject: Re: [PATCH] 500+ recipes: remove do_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,38 +63,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 19:50:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Aug 2010 20:12:21 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, Aug 4, 2010 at 2:54 AM, Phil Blundell <philb@gnu.org> wrote:
-> On Tue, 2010-08-03 at 16:47 -0500, Chase Maupin wrote:
->> * Add support for using SOC_FAMILY in the COMPATIBLE_MACHINES
->> =A0 setting for a recipe.
->> * This will allow recipes to work for entire families of
->> =A0 devices without having to maintain/update the compatible
->> =A0 devices as new devices are added into a family
->
-> I don't suppose you'd consider refactoring your MACHINE names in order
-> to allow a simple regex in COMPATIBLE_MACHINE?
+On Wed, Aug 04, 2010 at 07:22:55PM +0200, Koen Kooi wrote:
 
-that would be a good approach too. Has it been
-considered.
+>You mean like I did yesterday:
+>http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=99f6333dd24a2a6eeeec0925a296906ee8145f92
+>?
 
-I don't have a strong
-> objection to this patch but, conceptually, it seems a bit ugly.
-
-
-
->
-> p.
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+exactly. stash was playing tricks on me, sorry.
 
 
