@@ -1,35 +1,50 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Ogfii-0003PB-RT
+	(envelope-from <raj.khem@gmail.com>) id 1Ogfkq-0004tV-CQ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 17:17:31 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id 076A84656
+	Wed, 04 Aug 2010 17:19:41 +0200
+Received: by pzk2 with SMTP id 2so2068200pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 19:22:04 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
+	Wed, 04 Aug 2010 08:19:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=vnh4Z9SzWyYV38CxjTLOUHEUBsfMkhImrd3POOXWJ28=;
+	b=eaTt6Alg7kwjE7nWPak2K0ugNtyFc4Zq350PfsQ3aBSaj1vWtA/sXd9XEJFPkN6OLB
+	QuZ773/VCI7U4GnjBgzE8wGk6NtvQ91lJ4W8TmQP0tmC1PuHVZ0tA2frHw8ArkZz8/AC
+	KYQQ4PpcEvHEOisX7xlpiLMRUhSWPTogUZJEQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Sb1ds/Zfx80hZWAkHAl5Rf6XeBP0/oY5m0O6gaToyWnTdDzl/60pxF/uSbRfB0/6JM
+	WBXYH2n6KfN/Yy5QKj+oW7gXvJP1ksW3YC4F2aabjYe7AIcZHQsUa/QI4d5YX0ppg/hq
+	/kFICHJiZUyLx8qnZhnajL3geVYQnvBCjyHtw=
+Received: by 10.114.95.12 with SMTP id s12mr10765327wab.226.1280935175309;
+	Wed, 04 Aug 2010 08:19:35 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id c24sm16042502wam.19.2010.08.04.08.19.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 08:19:33 -0700 (PDT)
+Date: Wed, 4 Aug 2010 08:19:27 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 4 Aug 2010 19:17:20 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1280929918-23818-1-git-send-email-rep.dot.nop@gmail.com>
-	<201008041802.01481.khimov@altell.ru>
-	<20100804141748.GC28187@mx.loc>
-In-Reply-To: <20100804141748.GC28187@mx.loc>
+Message-ID: <20100804151927.GB8728@gmail.com>
+References: <1280892816-18835-1-git-send-email-raj.khem@gmail.com>
+	<i3bata$8c4$1@dough.gmane.org>
 MIME-Version: 1.0
-Message-Id: <201008041917.20529.khimov@altell.ru>
-X-Altell-MailScanner-ID: 076A84656.EE0BA
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+In-Reply-To: <i3bata$8c4$1@dough.gmane.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/3] perl: honour DISTRO_FEATURE largefile
+Subject: Re: [PATCH v2] recipes: Dont inherit autotools_stage.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,48 +58,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 15:17:31 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Aug 2010 15:19:41 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 04 =D0=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=
-=B0 2010 18:17:48 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Bernhard Reutner-Fischer=20
-=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On Wed, Aug 04, 2010 at 06:02:01PM +0400, Roman I Khimov wrote:
-> >=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=A1=D1=80=D0=B5=D0=B4=D0=B0 04 =D0=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=
-=D0=B0 2010 17:51:56 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Bernhard
-> > Reutner-Fischer
-> >
-> >=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> >> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-> >> ---
-> >>  recipes/perl/perl-native_5.8.8.bb |    4 ++--
-> >>  recipes/perl/perl_5.8.8.bb        |    6 ++++--
-> >>  2 files changed, 6 insertions(+), 4 deletions(-)
-> >
-> >Is it really appropriate for -native? And how about Perl 5.10.1?
->=20
-> it's perfectly fine to build on a uclibc-based host with LFS off.
+On (04/08/10 11:12), Koen Kooi wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+> 
+> On 04-08-10 05:33, Khem Raj wrote:
+> > Some recipes had do_stage_append|prepend stuff. Fixed that too in this verison
+> 
+> I see a lot of:
+> 
+> > -inherit autotools_stage
+> > +
+> 
 
-Well, that's _build machine_ characteristic anyway, that's what I'm concern=
-ed=20
-about. DISTRO_FEATURES on the other hand characterize what we want to get o=
-n=20
-_target_ machine. So you might be building on uclibc-based no-LFS system fo=
-r=20
-uclibc-based LFS-enabled target or more common case with glibc-based build=
-=20
-system and uclibc no-LFS target. I'm very unsure about what kind of result=
-=20
-that might give.
+Do you mean empty line replacement? Not ideal but harmless should have used a different
+regexpt. I will see if I can change
 
-> Dunno about 5.10.1, it has a default preference of -1
 
-I think we should try to keep two versions in sync wrt to such changes, I c=
-an=20
-test on 5.10.1.
+> are those correct?
+> 
+> regards,
+> 
+> Koen
+> 
+> 
+> 
 
 
