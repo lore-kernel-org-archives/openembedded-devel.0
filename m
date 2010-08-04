@@ -1,45 +1,50 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OgWCb-0007T0-Ik
+	(envelope-from <raj.khem@gmail.com>) id 1OgWPT-0003QC-DC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 07:07:45 +0200
-Received: by iwn34 with SMTP id 34so5813183iwn.6
+	Wed, 04 Aug 2010 07:21:05 +0200
+Received: by gxk2 with SMTP id 2so1963807gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 03 Aug 2010 22:07:35 -0700 (PDT)
+	Tue, 03 Aug 2010 22:20:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=qheYfhhP+D+sNNTKRLYgfQBX+8VihPjZxKeDpiCpggc=;
-	b=pOrBOCNFbW2E8/XgPxg/xkcoxhAtUxcJ61DrwGRi+jP9KqhefgXhNDd6s+ACGf57S8
-	QA8lwphpXETqdSYOnBsnWhbkHpN5Qij3pz9t6nIo/IxDwxkj2NUOai89eItkFPKEFRKQ
-	Mg1VqpYG2Dlt3gfgogAUdZAehEdTuyp+UO8Ec=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=8jz8Zqfic5mZSqPMsrhSrCX29YRTRnOmmrx9ckIuHSM=;
+	b=NvSiBh0myne8shZzcB0yM+swuk1dbI2PKfr7mOjboK5cQq6EFsjpqdxixYCwyw7ilI
+	e+GDUpDN+PprnT4tlly2m7f7EcIAyeZFQRTq8wOqL/qSa6dIkYCC6hJsaK5uu5UCeIrs
+	nIqGvQC6RhqWbWfOTuHGG7/wVbmE6dfsBAtes=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=CYlCfqL5nMcmFGl3IWyRppZtX/LrXsG/cpH23uCAoFyL/C9Wi7NwdIzU0TZ+EQy38x
-	NbvPalrH6Sq60LZn2EGEZaZfN5RNsO8T/XE94LyvV2U5owkvb7Z9HzNuQIkceN0Jwdz0
-	w/dRjw8CO7ezy2rgT7q3h9c5XbRe4gTFJEfYc=
-MIME-Version: 1.0
-Received: by 10.231.183.81 with SMTP id cf17mr9825745ibb.32.1280898450126; 
-	Tue, 03 Aug 2010 22:07:30 -0700 (PDT)
-Received: by 10.231.145.77 with HTTP; Tue, 3 Aug 2010 22:07:30 -0700 (PDT)
-In-Reply-To: <20100804032153.GH17391@denix.org>
-References: <1280890173-31915-1-git-send-email-raj.khem@gmail.com>
-	<20100804032153.GH17391@denix.org>
-Date: Wed, 4 Aug 2010 14:37:30 +0930
-Message-ID: <AANLkTi=WHWm67_GkH7rFSvz+F=_cjP_CgBe5m5ME4tuH@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=plphoQhuYkZnBqmSiL1DjK+AHh3izC/2XPmA/BUpYp4EjcHgwWVy1sU+x199DQTrm7
+	4S668lcMeb5G37S/0X6d4glXnb8jWE2uaiPJ6Kn9VKSfrrb8BIUtnXv0TgsGrJociJ5f
+	x/uhG08FRveGUByf6/xKVvpcS6HmHHT6/XrR4=
+Received: by 10.150.230.14 with SMTP id c14mr7770675ybh.18.1280899250263;
+	Tue, 03 Aug 2010 22:20:50 -0700 (PDT)
+Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
+	[99.57.141.118])
+	by mx.google.com with ESMTPS id e7sm538279ybe.16.2010.08.03.22.20.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 03 Aug 2010 22:20:49 -0700 (PDT)
+Date: Tue, 3 Aug 2010 22:20:42 -0700
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Message-ID: <20100804052042.GB7085@gmail.com>
+References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>
+	<20100804001959.GF17391@denix.org>
+MIME-Version: 1.0
+In-Reply-To: <20100804001959.GF17391@denix.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] recipes: Dont inherit autotools_stage.
+Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in COMPATIBLE_MACHINES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,45 +58,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 05:07:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 04 Aug 2010 05:21:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 4 August 2010 12:51, Denys Dmytriyenko <denis@denix.org> wrote:
-> 1. Do you expect extensive fallout after this change? Since PRs are again=
- not
-> bumped, people should probably try 2 builds - with existing TMPDIR and wi=
-th a
-> clean one.
->
-> 2. This doesn't seem right (special case not handled by your regexp):
->
-> @@ -60,7 +60,7 @@ do_configure_append() {
-> =A0}
->
-> =A0do_stage() {
-> - =A0 =A0 =A0 autotools_stage_all
-> + =A0 =A0 =A0 _all
-> =A0 =A0 =A0 =A0sed -i s,-l:libusb-gnur.a,,g ${STAGING_LIBDIR}/libusrp.la
-> =A0}
->
-> --
-> Denys
->
+On (03/08/10 20:19), Denys Dmytriyenko wrote:
+> On Tue, Aug 03, 2010 at 04:47:20PM -0500, Chase Maupin wrote:
+> > * Add support for using SOC_FAMILY in the COMPATIBLE_MACHINES
+> >   setting for a recipe.
+> > * This will allow recipes to work for entire families of
+> >   devices without having to maintain/update the compatible
+> >   devices as new devices are added into a family
+> > 
+> > Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> 
+> Acked-by: Denys Dmytriyenko <denys@ti.com>
+> 
+> While SOC_FAMILY feature is relatively new on its own, it was designed and now 
+> being extensively used with TI machines and corresponding recipes as an 
+> effective override - e.g. covering many OMAP3-based machines with a single 
+> VAR_omap3 = "VAL" expression.
 
-This doesn't look right either.
+So arch -> sub-arch -> soc ->machine seems to be the heirarchy. I
+would prefer to keep it per machine unless its too much clutter
+and we have so many machines specific recipes.
 
---- a/recipes/bluez/bluez4-libs.inc
-+++ b/recipes/bluez/bluez4-libs.inc
-@@ -10,7 +10,7 @@ SRC_URI =3D
-"http://www.kernel.org/pub/linux/bluetooth/bluez-${PV}.tar.gz \
-
- S =3D "${WORKDIR}/bluez-${PV}"
-
--inherit autotools_stage
-+inherit
- AUTOTOOLS_STAGE_PKGCONFIG =3D "1"
-
- EXTRA_OECONF =3D "\
+> 
+> > ---
+> >  classes/base.bbclass |    4 +++-
+> >  1 files changed, 3 insertions(+), 1 deletions(-)
+> > 
+> > diff --git a/classes/base.bbclass b/classes/base.bbclass
+> > index 1847491..02c7875 100644
+> > --- a/classes/base.bbclass
+> > +++ b/classes/base.bbclass
+> > @@ -389,7 +389,9 @@ python () {
+> >              import re
+> >              this_machine = bb.data.getVar('MACHINE', d, 1)
+> >              if this_machine and not re.match(need_machine, this_machine):
+> > -                raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
+> > +                this_soc_family = bb.data.getVar('SOC_FAMILY', d, 1)
+> > +                if this_soc_family and not re.match(need_machine, this_soc_family):
+> > +                    raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
+> >  
+> >          need_target = bb.data.getVar('COMPATIBLE_TARGET_SYS', d, 1)
+> >          if need_target:
+> > -- 
+> > 1.7.0.4
+> > 
+> > 
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
