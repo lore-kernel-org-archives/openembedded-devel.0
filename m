@@ -1,37 +1,50 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Ogi7f-0007sx-1l
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ogi8w-0007uV-Gs
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 19:51:28 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L6N007IZ04UAXH0@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Wed,
-	04 Aug 2010 11:50:54 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id E748B14AF64; Wed,
-	04 Aug 2010 12:50:53 -0400 (EDT)
-Date: Wed, 04 Aug 2010 12:50:53 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Wed, 04 Aug 2010 19:52:43 +0200
+Received: by fxm12 with SMTP id 12so2600198fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Aug 2010 10:52:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=HTRuYexMzvaOe/ZMTmaVCepb40FKzPL5Rh8MT6xEQvE=;
+	b=ubvfe7wipcIF9LO5KPV73OUv1+PPSi/VtIKTnaoYSpUxsVmGwifY3MOndXiPs5Qh+S
+	H+buSVgsCrrXE1n3j9/SZ5MQpCR7o8fAIqBlcncZftsBHcFTAZPdtM+FAjkz3VMwUkUi
+	gtwOKumwDbG1MgRMn3odyr6hj0+9aRNmEqZKY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=egym87fH93oxejhHuClB/zTp7hJEQ+7lUxm2wRGxstF6jj2MIZBl+KkoQigk8kfDmT
+	0gqwKPBiDxrmDTuazVFh8JnvEdDodBF+GWbqqsIdTl/s5KLd7aSKSdiJWtFrqKii00Xu
+	pHRFtBuLW/BP5XvQ4d9ttEDHexdLc2EM+AZQg=
+MIME-Version: 1.0
+Received: by 10.103.138.4 with SMTP id q4mr1081403mun.26.1280944358179; Wed, 
+	04 Aug 2010 10:52:38 -0700 (PDT)
+Received: by 10.102.213.28 with HTTP; Wed, 4 Aug 2010 10:52:38 -0700 (PDT)
+In-Reply-To: <AANLkTimXqKMUJT4Cs+7h8pHEnhd5aQye_dLU35nqYtJq@mail.gmail.com>
+References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<i38mr6$ng8$1@dough.gmane.org> <20100803235811.GC17391@denix.org>
+	<20100804001040.GE17391@denix.org>
+	<AANLkTi=QDw_sf4H8Kdt7L7nfNZ24bjVBJ4hdW6HPUupB@mail.gmail.com>
+	<20100804165030.GG28187@mx.loc>
+	<AANLkTin7L42p5JHP3SV9Gbo9VLtZyOHkeKx1OxEx9-bS@mail.gmail.com>
+	<AANLkTimXqKMUJT4Cs+7h8pHEnhd5aQye_dLU35nqYtJq@mail.gmail.com>
+Date: Wed, 4 Aug 2010 19:52:38 +0200
+Message-ID: <AANLkTi=UsRguUtKsmSGOqNdw8AX3p9eaLgY1Vq6crYMP@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100804165053.GB7189@denix.org>
-References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>
-	<20100804001959.GF17391@denix.org> <20100804052042.GB7085@gmail.com>
-	<1280920678.26249.33.camel@saphir>
-	<1280922518.2692.377.camel@mill.internal.reciva.com>
-	<131E5DFBE7373E4C8D813795A6AA7F0802E9149F9B@dlee06.ent.ti.com>
-MIME-version: 1.0
-In-reply-to: <131E5DFBE7373E4C8D813795A6AA7F0802E9149F9B@dlee06.ent.ti.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.11
-X-SA-Exim-Mail-From: denis@denix.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in	COMPATIBLE_MACHINES
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] 500+ recipes: remove do_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,33 +58,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 17:51:29 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Wed, 04 Aug 2010 17:52:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Aug 04, 2010 at 09:11:19AM -0500, Maupin, Chase wrote:
-> 
-> > Failing that though, testing COMPATIBLE_MACHINE against MACHINE_CLASS
-> > probably is more desirable than adding a completely new variable (i.e.
-> > SOC_FAMILY) for that purpose.
-> 
-> From what I've learned it seems that MACHINE_CLASS and SOC_FAMILY are 
-> different in what they are trying to accomplish.
-> 
-> SOC_FAMILY is defining a family of processors and the features that 
-> processor has.  Whereas MACHINE_CLASS is defining a type of device and its 
-> features which can use different processors.  So basically SOC_FAMILY 
-> defines common processors and MACHINE_CLASS defines common end devices.
-> 
-> This difference is why SOC_FAMILY exists.  We can have many processors that 
-> fit into an SOC_FAMILY that can be used across a variety of end applications 
-> from DVR to ip net camera to mobile phone.
+2010/8/4 Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 
-I guess this conclusion was direved solely from the names of the respective 
-variables. As technically both of them are exactly the same - a variable set 
-in machine config or include file and used in OVERRIDES...
+> Hi,
+>
+> Were these really removed yet? I have just pulled and they are still in the
+> tree?
+> Note that I saw this when parsing, not building this old version.
+> Thanks,
+>
 
--- 
-Denys
+Guess there is something wrong with your tree
+they are not in mine (dev head) and here is the commit from koen:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=99f6333dd24a2a6eeeec0925a296906ee8145f92
 
+Frans
 
