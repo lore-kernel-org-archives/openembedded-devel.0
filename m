@@ -1,38 +1,31 @@
-Received: from asmtpout027.mac.com ([17.148.16.102])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1OgYaG-0005ho-2s
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 09:40:17 +0200
-MIME-version: 1.0
-Received: from [192.168.1.103] ([87.201.169.38])
-	by asmtp027.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0L6M001GQ7TJ3310@asmtp027.mac.com> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	03 Aug 2010 23:39:23 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=6.0.2-1004200000 definitions=main-1008030259
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
-	definitions=2010-08-04_03:2010-08-04, 2010-08-04,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Wed, 04 Aug 2010 10:38:58 +0400
-Message-id: <764E1214-84B1-42BB-996C-676D194F7208@mac.com>
-To: OpenEmbedded Developer <openembedded-devel@lists.openembedded.org>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.102
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OgYyN-0002yT-5N for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Aug 2010 10:05:11 +0200
+Received: from f053041223.adsl.alicedsl.de ([78.53.41.223]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OgYyL-0007Vp-8T for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Aug 2010 08:05:09 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1280901529-30358-1-git-send-email-raj.khem@gmail.com>
+References: <1280901529-30358-1-git-send-email-raj.khem@gmail.com>
+Date: Wed, 04 Aug 2010 10:05:05 +0200
+Message-ID: <1280909105.4225.1.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-3.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	RCVD_IN_DNSWL_LOW,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Error building libgles-omap3
+Subject: Re: [PATCH,v3] recipes: Dont inherit autotools_stage.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,48 +39,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 07:40:17 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Wed, 04 Aug 2010 08:05:11 -0000
+X-Groupsio-MsgNum: 21806
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-KVq8lYPD0GMwbYe3jKqQ"
 
-Hi,
-      I downloaded the OMAP35x graphics sdk, and put in it my DL_DIR, which is located in /usr/share/sources, and bitbaking omap3-console-image gives me the following error.
+--=-KVq8lYPD0GMwbYe3jKqQ
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I have created the md5 checksum, but it still complains that the checksum doesn't exist:
+Am Dienstag, den 03.08.2010, 22:58 -0700 schrieb Khem Raj:
+> Fixes issues seen by Graham and Denys among others.
+> My full x11-build is underway. Please inspect and/or try this
+> patch out. I will see how my builds complete in the morning.
+
+[=E2=80=A6]
+
+> -inherit autotools_stage
+> +
+> =20
+>  S =3D "${WORKDIR}/gc-${PV}"
+
+I would prefer the following.
+
+> -inherit autotools_stage
+> =20
+>  S =3D "${WORKDIR}/gc-${PV}"
+
+So just remove the line entirely instead of replacing it with an empty
+one.
 
 
-NOTE: Running task 3195 of 3228 (ID: 12, /tool/overo-oe/user.collection/recipes/images/omap3-console-image.bb, do_qa_staging)
-NOTE: Missing checksum
-ERROR: libgles-omap3-3.01.00.06: http://install.source.dir.local/OMAP35x_Graphics_SDK_setuplinux_3_01_00_06.bin has no checksum defined, cannot check archive integrity
-ERROR: Error in executing: /tool/overo-oe/user.collection/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Error in executing: /tool/overo-oe/user.collection/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Build of /tool/overo-oe/user.collection/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb do_fetch failed
-NOTE: Missing checksum
-ERROR: omap3-sgx-modules-1.4.14.2616: http://install.source.dir.local/OMAP35x_Graphics_SDK_setuplinux_3_01_00_06.bin has no checksum defined, cannot check archive integrity
+Thanks,
 
+Paul
 
-Here are the steps that I did to install the OMAP35x graphics sdk
+--=-KVq8lYPD0GMwbYe3jKqQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-How to install the TI OMAP35x Graphics SDK
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-01. Fetch the gl-es bin (full OMAP Graphics SDK) from here:
+iEYEABECAAYFAkxZHyoACgkQPX1aK2wOHViUswCff8Fyd825hGKcD+fn3OgyKMj6
+L7QAn1y7vex8gboViNxOZFsPuRUrRXgx
+=3NrH
+-----END PGP SIGNATURE-----
 
-http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
-
-02. Put the OMAP35x_*.bin file in $DL_DIR, i.e. downloads/
-
-mv OMAP35x_Graphics_SDK_setuplinux_3_01_00_06.bin ./downloads/
-
-03. make the checksum file in ./downloads/ directory:
-
-cd ./downloads/
-md5sum OMAP35x_Graphics_SDK_setuplinux_3_01_00_06.bin > OMAP35x_Graphics_SDK_setuplinux_3_01_00_06.bin.md5
-
-Best regards,
-
-Elvis Dowson
-
+--=-KVq8lYPD0GMwbYe3jKqQ--
