@@ -1,55 +1,49 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from comal.ext.ti.com ([198.47.26.152])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OgkK4-00012V-SD
+	(envelope-from <chase.maupin@ti.com>) id 1OgkWY-0001Ee-Ro
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 22:12:21 +0200
-Received: by fxm12 with SMTP id 12so2653207fxm.6
+	Wed, 04 Aug 2010 22:25:30 +0200
+Received: from dlep33.itg.ti.com ([157.170.170.112])
+	by comal.ext.ti.com (8.13.7/8.13.7) with ESMTP id o74KOxdq026605
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 13:12:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=8rCQna/SxZySuDONVG+mGdmWD1GMj+5h6GotablqsO0=;
-	b=j7ghk/6EwHlgd/Tz3f/PIxUrawCE/YOPVLT0qIoF681Dr0QAlGvW8sXc1H8XREDSY/
-	w+c07GtVCKo8Om9kkEUVfM1EIk6U9/3Xj13crwCwLCaWTSadv73Sf13DcDQrt9wyEvt7
-	4PXzLRv1s4+pTQuY4iIHngvWoS69WZ4xjJl90=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=IzZJPq8bde7bqvCKgtxnvUrASHKfugIXMYgZRd7jU7z5r6nvWJX2oIZVh7aSlldzHN
-	3DnKBT6kWoISZATlf4kE9jEVmdzboHJfKBG30Lnjn5JCojOo2qpeM05m0P1qk6ttOYzi
-	A9dM3xtnaTx1SfcBTpqI3WpTm4jYaMDbR0TqM=
-Received: by 10.223.124.145 with SMTP id u17mr9468918far.92.1280952732198;
-	Wed, 04 Aug 2010 13:12:12 -0700 (PDT)
-Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
-	by mx.google.com with ESMTPS id y2sm3142131fau.36.2010.08.04.13.12.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Aug 2010 13:12:11 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OgkJn-0008IH-Op; Wed, 04 Aug 2010 22:12:03 +0200
-Date: Wed, 4 Aug 2010 22:12:03 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100804201203.GB6299@mx.loc>
-References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<i38mr6$ng8$1@dough.gmane.org> <20100803235811.GC17391@denix.org>
-	<20100804001040.GE17391@denix.org>
-	<AANLkTi=QDw_sf4H8Kdt7L7nfNZ24bjVBJ4hdW6HPUupB@mail.gmail.com>
-	<20100804165030.GG28187@mx.loc> <i3c7lf$mpg$1@dough.gmane.org>
+	Wed, 4 Aug 2010 15:25:00 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id o74KOxY1023033
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 4 Aug 2010 15:24:59 -0500 (CDT)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o74KOx97006596
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 4 Aug 2010 15:24:59 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Wed, 4 Aug 2010 15:24:59 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Wed, 4 Aug 2010 15:24:57 -0500
+Thread-Topic: [oe] [PATCH] base.bbclass: add support for SOC_FAMILY in
+	COMPATIBLE_MACHINES
+Thread-Index: Acs0D/xJrNm+kE1+QHKNzzuLqDFroQAAnm2Q
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F0802E91E8FFA@dlee06.ent.ti.com>
+References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>
+	<1280915670.2692.350.camel@mill.internal.reciva.com>
+	<AANLkTinBPTAF2UH0weQ7FKpHqFUBeLkzoO8kuQg41e+0@mail.gmail.com>
+In-Reply-To: <AANLkTinBPTAF2UH0weQ7FKpHqFUBeLkzoO8kuQg41e+0@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-In-Reply-To: <i3c7lf$mpg$1@dough.gmane.org>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+X-SA-Exim-Connect-IP: 198.47.26.152
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] 500+ recipes: remove do_stage
+Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in	COMPATIBLE_MACHINES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,16 +57,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 20:12:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Aug 2010 20:25:30 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 04, 2010 at 07:22:55PM +0200, Koen Kooi wrote:
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Khem Raj
+> Sent: Wednesday, August 04, 2010 2:49 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH] base.bbclass: add support for SOC_FAMILY in
+> COMPATIBLE_MACHINES
+>=20
+> On Wed, Aug 4, 2010 at 2:54 AM, Phil Blundell <philb@gnu.org> wrote:
+> > On Tue, 2010-08-03 at 16:47 -0500, Chase Maupin wrote:
+> >> * Add support for using SOC_FAMILY in the COMPATIBLE_MACHINES
+> >> =A0 setting for a recipe.
+> >> * This will allow recipes to work for entire families of
+> >> =A0 devices without having to maintain/update the compatible
+> >> =A0 devices as new devices are added into a family
+> >
+> > I don't suppose you'd consider refactoring your MACHINE names in order
+> > to allow a simple regex in COMPATIBLE_MACHINE?
+>=20
+> that would be a good approach too. Has it been
+> considered.
 
->You mean like I did yesterday:
->http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=99f6333dd24a2a6eeeec0925a296906ee8145f92
->?
+As I mentioned before, we are matching the machine names to the name of the=
+ actual device.  Unfortunately, not every device that falls into an SOC fam=
+ily has a similar name and cannot all be dictated by us.  For example in om=
+ap3 SOC_FAMILY there is:
 
-exactly. stash was playing tricks on me, sorry.
+beagleboard
+omap3evm
+nokia900
+dm37x-evm
+archos5
+bug20
+
+and many many more.  These machines are defined by a variety of companies, =
+some from TI, some community, Nokia, Archos, etc.  I don't think it is like=
+ly that we will get agreement on the naming between all the groups.  I know=
+ that just within TI the naming is driven by marketing names for the device=
+s.
+
+>=20
+> I don't have a strong
+> > objection to this patch but, conceptually, it seems a bit ugly.
+>=20
+>=20
+>=20
+> >
+> > p.
+> >
+> >
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
