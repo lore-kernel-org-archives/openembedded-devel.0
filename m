@@ -1,43 +1,48 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1OghJW-00020o-QV
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OghZd-0002me-81
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 18:59:36 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 6EE9BA5BF0
+	Wed, 04 Aug 2010 19:16:17 +0200
+Received: by bwz10 with SMTP id 10so2949998bwz.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 17:59:31 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id p5MzOv8AZ-AB
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 17:59:30 +0100 (BST)
-Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id CBEB9A5BEF
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 17:59:30 +0100 (BST)
-Message-ID: <4C599C72.10805@xora.org.uk>
-Date: Wed, 04 Aug 2010 17:59:30 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.7) Gecko/20100720 Lightning/1.0b2 Thunderbird/3.1.1
+	Wed, 04 Aug 2010 10:16:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=N9S6LagihJqT95kTC8l87Imb+jmM5zQI/Q+2MQy6Ol4=;
+	b=bBai/FPZRXO8s7zDWQDb03SXI/7u6jGOrmZYRiqpy+OCZOWXcQKk7L8eZtJ9HsoaEh
+	smqH6gi6aic59gM4851jwV2iWbx9HC5hkozA+tUkLaIrNcB1tPNXnbEEe58aS6GERdNJ
+	2IPbO2O0iE8mesj3TXQ5WrZc9mm8/waO4ZKTE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=UjjhAW3FFcu0n6xic1JdeKXsHZJtACjy75IJpkn6Y7JnUugNmRXJK7iv49pA9+e72J
+	LkkYG4mMDUzq4crewOWzMQOFKhSuXhhIcvi9RBvG1L2lLBKRXoFL9eVVeLHxXd24wCrj
+	rWa6xU7fuNijfvN/B5+CIFP83Z2wo57fCl9qc=
 MIME-Version: 1.0
+Received: by 10.204.79.221 with SMTP id q29mr6528524bkk.49.1280942165026; Wed, 
+	04 Aug 2010 10:16:05 -0700 (PDT)
+Received: by 10.204.60.208 with HTTP; Wed, 4 Aug 2010 10:16:04 -0700 (PDT)
+In-Reply-To: <20100804165030.GG28187@mx.loc>
+References: <1280780382-11697-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<i38mr6$ng8$1@dough.gmane.org> <20100803235811.GC17391@denix.org>
+	<20100804001040.GE17391@denix.org>
+	<AANLkTi=QDw_sf4H8Kdt7L7nfNZ24bjVBJ4hdW6HPUupB@mail.gmail.com>
+	<20100804165030.GG28187@mx.loc>
+Date: Wed, 4 Aug 2010 19:16:04 +0200
+Message-ID: <AANLkTin7L42p5JHP3SV9Gbo9VLtZyOHkeKx1OxEx9-bS@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>	<20100804001959.GF17391@denix.org>
-	<20100804052042.GB7085@gmail.com>	<1280920678.26249.33.camel@saphir>	<1280922518.2692.377.camel@mill.internal.reciva.com>
-	<20100804161327.GA7189@denix.org>
-In-Reply-To: <20100804161327.GA7189@denix.org>
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY	in	COMPATIBLE_MACHINES
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] 500+ recipes: remove do_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,47 +56,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 16:59:36 -0000
+X-List-Received-Date: Wed, 04 Aug 2010 17:16:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
- On 04/08/10 17:13, Denys Dmytriyenko wrote:
-> On Wed, Aug 04, 2010 at 12:48:38PM +0100, Phil Blundell wrote:
->> On Wed, 2010-08-04 at 13:17 +0200, Michael 'Mickey' Lauer wrote:
->>> FWIW, minimal is using MACHINE_CLASS since quite a while to
->>> reduce the need for adding the same files over and over again,
->>> this is being used e.g. for HTC msm7 series and OpenEZX series
->>> (see conf/machine/include).
->>>
->>> Perhaps it's time to standardize something like that.
->> Yeah.  I certainly don't think we want a proliferation of such
->> mechanisms.  If minimal is already using MACHINE_CLASS then there would
->> be some sense in trying to make use of the same thing.
->>
->> Failing that though, testing COMPATIBLE_MACHINE against MACHINE_CLASS
->> probably is more desirable than adding a completely new variable (i.e.
->> SOC_FAMILY) for that purpose.
-> Phil,
+2010/8/4 Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+
 >
-> Re: "adding a completely new variable" - SOC_FAMILY has been in use for almost 
-> a year now. I'm hearing about MACHINE_CLASS for the first time, although it 
-> appears to be slightly older than SOC_FAMILY though. But it doesn't seem to be 
-> used anywhere besides in few machine configs and micro.conf. There are no 
-> recipes actually using it, unlike SOC_FAMILY...
+> Hi,
 >
-> I'm not saying one is better than the other (actually, unifying them would 
-> be nice), I'm just saying it's too late to object adding SOC_FAMILY...
+> i'm seeing this:
+> ERROR: This recipe recipes/libidl/libidl_0.8.3.bb) has a
+> do_stage_prepend or do_stage_append and do_stage now doesn't exist.
+> Please rename this to do_stage()
 >
-As the person who originally added MACHINE_CLASS to openmoko and the OE,
-then removed it from OE I can say it has different meaning that
-SOC_FAMILY. MACHINE_CLASS was to identify a range of machines that were
-90% the same but had a few differences. It was used in a few recipes
-which were MACHINE_ARCH to make them use the same ARCH in these recipes
-to stop them being rebuilt when switching machines.
+> given that only preferred-om-2008-versions.inc pins this to a specific
+> version (0.8.10) i'd remove the "broken" version and .2 too, while at
+> it:
+> $ git rm recipes/libidl/libidl*0.8.{2,3}.bb && git commit -s -m 'libidl:
+> Remove old versions' recipes/libidl/
+>
 
-The original use was om-gta01 and om-gta02 which had the same MACHINE_CLASS.
+Yeah it is risk that if e.g. an inc contains a do_stage and the recipe
+appends or prepends to that.
+Actually I should have checked that, but didn't think of it.
 
-Graeme
+As far as your removal of recipes concerns:
+I saw that Koen yesterday already removed them.
 
+Frans.
 
+(PS: how did you find this/why where you building such an old version?)
 
