@@ -1,30 +1,46 @@
-Received: from smtp-68.nebula.fi ([83.145.220.68])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <henri.bragge@dcombus.com>) id 1OgdUi-0003Ip-E6
+	(envelope-from <rep.dot.nop@gmail.com>) id 1OgeNr-00077T-02
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 14:54:54 +0200
-Received: from [100.100.100.68] (unknown [83.150.95.26])
-	by smtp-68.nebula.fi (Postfix) with ESMTP id AE17A43F0424
+	Wed, 04 Aug 2010 15:52:26 +0200
+Received: by fxm12 with SMTP id 12so2472652fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed,  4 Aug 2010 15:54:43 +0300 (EEST)
-Message-ID: <4C596314.3050305@dcombus.com>
-Date: Wed, 04 Aug 2010 15:54:44 +0300
-From: Henri Bragge <henri.bragge@dcombus.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	Wed, 04 Aug 2010 06:51:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:received:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=nCirYaFbRmvkX+rgFbb5/I1htO12L6qfXfm90QdqQRQ=;
+	b=ms5+dMBd2H7a8JHXIMIXKtjF36kazlkcERxlR/c6ntmocJcvx1VQaD3W4Zs1WWNAEc
+	+Crp7ylUGeLm9FBF2Zf8WNEsR9PpyX5wyzf9/9J1Gv7OgS3+3AEF6I5xY9JIx//e/IJg
+	zXuXWHtuAV0yosM42bAFLAGXTQzNAYG45fuVM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=HMcLCQS8awnYjFxLA6m9S7XysGt0od3YsMftyN2gMht0UJoMjWzwh7uhWVf9O+z5Dn
+	sh5Y0WfjRI8NC38Mjg1kE+N0utuB17rmK3NRFYoKIOGnRgrEiOk31Eo/ynjXSAnbsuIv
+	7AZie/sQp2DZY2Vs71IsbSEQ3RcZR9848aQR0=
+Received: by 10.223.106.203 with SMTP id y11mr9041016fao.16.1280929906542;
+	Wed, 04 Aug 2010 06:51:46 -0700 (PDT)
+Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
+	by mx.google.com with ESMTPS id 14sm2969762fav.26.2010.08.04.06.51.45
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 06:51:45 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1OgeNg-0006C6-33; Wed, 04 Aug 2010 15:51:40 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1280918590-5969-1-git-send-email-henri.bragge@dcombus.com>	<1280918590-5969-2-git-send-email-henri.bragge@dcombus.com>	<1280918590-5969-3-git-send-email-henri.bragge@dcombus.com>
-	<AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>
-In-Reply-To: <AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>
-X-SA-Exim-Connect-IP: 83.145.220.68
-X-SA-Exim-Mail-From: henri.bragge@dcombus.com
+Date: Wed,  4 Aug 2010 15:51:38 +0200
+Message-Id: <1280929898-23684-1-git-send-email-rep.dot.nop@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] recipe for scli-0.4.0
+Subject: [PATCH] staging.bbclass: do not fill log with empty .la files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,73 +54,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 12:54:54 -0000
-Content-Type: text/plain; charset=us-ascii; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 04 Aug 2010 13:52:39 -0000
 
-Frans Meulenbroeks wrote:
-> 2010/8/4 Henri Bragge <henri.bragge@dcombus.com>
->
->   
->> Signed-off-by: Henri Bragge <henri.bragge@dcombus.com>
->> ---
->>  recipes/scli/scli.inc    |    6 ++++++
->>  recipes/scli/scli_svn.bb |    8 ++++++++
->>  2 files changed, 14 insertions(+), 0 deletions(-)
->>  create mode 100644 recipes/scli/scli.inc
->>  create mode 100644 recipes/scli/scli_svn.bb
->>
->> diff --git a/recipes/scli/scli.inc b/recipes/scli/scli.inc
->> new file mode 100644
->> index 0000000..abe341d
->> --- /dev/null
->> +++ b/recipes/scli/scli.inc
->> @@ -0,0 +1,6 @@
->> +DESCRIPTION = "SNMP Command Line Interface"
->> +LICENSE = "GPLv2"
->> +SECTION = "console/network"
->> +DEPENDS = "gsnmp readline libxml2 ncurses"
->> +
->> +inherit autotools
->> diff --git a/recipes/scli/scli_svn.bb b/recipes/scli/scli_svn.bb
->> new file mode 100644
->> index 0000000..45bd08e
->> --- /dev/null
->> +++ b/recipes/scli/scli_svn.bb
->> @@ -0,0 +1,8 @@
->> +require scli.inc
->> +
->> +SRCREV = "3285"
->> +PV = "0.4.0+svnr${SRCREV}"
->> +PR = "r1"
->>
->>     
-> +
->   
->> +SRC_URI = "svn://
->> cnds.eecs.jacobs-university.de/svn/schoenw/src/scli;module=trunk;proto=https
->> "
->> +S = "${WORKDIR}/trunk"
->>
->>     
->
-> Same remarks as for the other one.
-> Also, do we need the .inc file. If I look at the content it is hardly worth
-> putting it in a separate file.
->
-> Then again *if* you insist on an inc file you should also have an INC_PR.
->
-> This also holds for the other recipe.
->   
+Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
+---
+ classes/staging.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Thanks for the comments, sent v2 of the patches.
+diff --git a/classes/staging.bbclass b/classes/staging.bbclass
+index e806449..f2046f8 100644
+--- a/classes/staging.bbclass
++++ b/classes/staging.bbclass
+@@ -47,7 +47,7 @@ sysroot_stage_libdir() {
+ 	cd $src
+ 	las=$(find . -name \*.la -type f)
+ 	cd $olddir
+-	echo "Found la files: $las"		 
++	[ -n "${las}" ] && echo "Found la files: $las"
+ 	for i in $las
+ 	do
+ 		sed -e 's/^installed=yes$/installed=no/' \
+-- 
+1.7.1
 
-Just thought .inc would be a good idea to separate generic stuff from 
-svn-specific, but indeed there's very little of the generic part to 
-justify its own file. Fixed the PRs also.
-
-Btw, only https seems to be available.
-
-- Henri
 
 
