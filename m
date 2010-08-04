@@ -1,33 +1,32 @@
-Received: from smtp-68.nebula.fi ([83.145.220.68])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hbragge@dcombus.com>) id 1OgbRU-0007Gv-Gl
+	(envelope-from <mickey@vanille-media.de>) id 1Ogbz7-0005KB-A3
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 12:43:30 +0200
-Received: from lumikki.dcombus.lan (unknown [83.150.95.26])
-	(using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by smtp-68.nebula.fi (Postfix) with ESMTP id B780043F0A18;
-	Wed,  4 Aug 2010 13:43:10 +0300 (EEST)
-Received: from hbragge by lumikki.dcombus.lan with local (Exim 4.69)
-	(envelope-from <hbragge@lumikki.dcombus.lan>)
-	id 1OgbRG-0000Za-Jy; Wed, 04 Aug 2010 13:43:10 +0300
-From: Henri Bragge <henri.bragge@dcombus.com>
+	Wed, 04 Aug 2010 13:19:16 +0200
+Received: from [192.168.1.2] (e180136000.adsl.alicedsl.de [85.180.136.0])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 011EA584135
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Aug 2010 13:20:32 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  4 Aug 2010 13:43:10 +0300
-Message-Id: <1280918590-5969-3-git-send-email-henri.bragge@dcombus.com>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1280918590-5969-2-git-send-email-henri.bragge@dcombus.com>
-References: <1280918590-5969-1-git-send-email-henri.bragge@dcombus.com>
-	<1280918590-5969-2-git-send-email-henri.bragge@dcombus.com>
-X-SA-Exim-Connect-IP: 83.145.220.68
-X-SA-Exim-Mail-From: hbragge@dcombus.com
+In-Reply-To: <20100804052042.GB7085@gmail.com>
+References: <1280872040-31952-1-git-send-email-chase.maupin@ti.com>
+	<20100804001959.GF17391@denix.org>  <20100804052042.GB7085@gmail.com>
+Organization: Vanille-Media
+Date: Wed, 04 Aug 2010 13:17:58 +0200
+Message-ID: <1280920678.26249.33.camel@saphir>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] recipe for scli-0.4.0
+Subject: Re: [PATCH] base.bbclass: add support for SOC_FAMILY in COMPATIBLE_MACHINES
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,44 +40,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 10:43:35 -0000
+X-List-Received-Date: Wed, 04 Aug 2010 11:19:49 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Henri Bragge <henri.bragge@dcombus.com>
----
- recipes/scli/scli.inc    |    6 ++++++
- recipes/scli/scli_svn.bb |    8 ++++++++
- 2 files changed, 14 insertions(+), 0 deletions(-)
- create mode 100644 recipes/scli/scli.inc
- create mode 100644 recipes/scli/scli_svn.bb
+FWIW, minimal is using MACHINE_CLASS since quite a while to
+reduce the need for adding the same files over and over again,
+this is being used e.g. for HTC msm7 series and OpenEZX series
+(see conf/machine/include).
 
-diff --git a/recipes/scli/scli.inc b/recipes/scli/scli.inc
-new file mode 100644
-index 0000000..abe341d
---- /dev/null
-+++ b/recipes/scli/scli.inc
-@@ -0,0 +1,6 @@
-+DESCRIPTION = "SNMP Command Line Interface"
-+LICENSE = "GPLv2"
-+SECTION = "console/network"
-+DEPENDS = "gsnmp readline libxml2 ncurses"
-+
-+inherit autotools
-diff --git a/recipes/scli/scli_svn.bb b/recipes/scli/scli_svn.bb
-new file mode 100644
-index 0000000..45bd08e
---- /dev/null
-+++ b/recipes/scli/scli_svn.bb
-@@ -0,0 +1,8 @@
-+require scli.inc
-+
-+SRCREV = "3285"
-+PV = "0.4.0+svnr${SRCREV}"
-+PR = "r1"
-+
-+SRC_URI = "svn://cnds.eecs.jacobs-university.de/svn/schoenw/src/scli;module=trunk;proto=https"
-+S = "${WORKDIR}/trunk"
+Perhaps it's time to standardize something like that.
+
+Cheers,
 -- 
-1.5.6.5
+:M:
 
 
 
