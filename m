@@ -1,56 +1,43 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OggMM-0000AO-Ay
+	(envelope-from <thebohemian@gmx.net>) id 1OggWR-00082d-DM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 17:58:37 +0200
-Received: by bwz10 with SMTP id 10so2908365bwz.6
+	Wed, 04 Aug 2010 18:08:59 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 66E19400E111F
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 08:58:24 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=XNfbgGCvfwyG7TW6gWKoRPAMxA5ars1wQcAyMGqff34=;
-	b=eLIFxq/ZzCKcEvoTtXn3tJgfXC+e/8YU0q+YU/90yhK3UiyJpRsuB/iLOu932m/1KS
-	opOoldOn0rjdXFBI5vFFyrgQaRGH0zcWMGS04OZovMYHtOeDEiKjPT2/tTHQq7hZnD2Z
-	I3S5tbhFbxheVU9ZgXhFurODKSqVqxUTQfAfY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=dDEuD0SqYMMw+b7UjMBOKJ6Lh259YQxVbpx52MJdy0B4bBEc7Rc1oeImZ/vL9SUyei
-	OFeB0V7H5SbtpvVy+KOmUxRZCdn2mwB7IOZVa029nWTmQqgWFyGy875kayL9C6Rl8fnS
-	OgZtkW7BBCTz70lslrUqeFYjlEboncTq/CWGI=
-Received: by 10.204.14.71 with SMTP id f7mr6323516bka.200.1280937503886;
-	Wed, 04 Aug 2010 08:58:23 -0700 (PDT)
-Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
-	by mx.google.com with ESMTPS id s34sm6048935bkk.13.2010.08.04.08.58.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Aug 2010 08:58:23 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OggMC-0006sU-Ah; Wed, 04 Aug 2010 17:58:16 +0200
-Date: Wed, 4 Aug 2010 17:58:16 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100804155816.GF28187@mx.loc>
-References: <1280929918-23818-1-git-send-email-rep.dot.nop@gmail.com>
-	<1280929918-23818-2-git-send-email-rep.dot.nop@gmail.com>
-	<201008041807.06239.khimov@altell.ru>
-	<20100804142147.GE28187@mx.loc>
-	<AANLkTikfcpiAy2RfYEv80GYf67PbNysRw1qN3qiz0KRN@mail.gmail.com>
+	Wed,  4 Aug 2010 18:08:36 +0200 (CEST)
+Received: from localhost (localhost [127.0.0.1])
+	by ugs.tarent.de (Postfix) with ESMTP id 5EEF5402C1E7E
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Aug 2010 18:08:36 +0200 (CEST)
+X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
+Received: from ugs.tarent.de ([127.0.0.1])
+	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id sIyfbUVcZZUm
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Aug 2010 18:08:36 +0200 (CEST)
+Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
+	by ugs.tarent.de (Postfix) with ESMTPSA id 36F7D400E111F
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  4 Aug 2010 18:08:36 +0200 (CEST)
+Message-ID: <4C5990C1.8050302@gmx.net>
+Date: Wed, 04 Aug 2010 18:09:37 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
 MIME-Version: 1.0
-In-Reply-To: <AANLkTikfcpiAy2RfYEv80GYf67PbNysRw1qN3qiz0KRN@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 212.79.178.249
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_FAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] perl: use only one method all_perl_packages
+Subject: MULTIMACHINE builds and PACKAGE_ARCH=all recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -64,47 +51,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 15:59:27 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 04 Aug 2010 16:08:59 -0000
+X-Groupsio-MsgNum: 21849
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enigDA4FE7F253DC0210FE477E1B"
 
-On Wed, Aug 04, 2010 at 07:36:01AM -0700, Chris Larson wrote:
->On Wed, Aug 4, 2010 at 7:21 AM, Bernhard Reutner-Fischer <
->rep.dot.nop@gmail.com> wrote:
->
->> On Wed, Aug 04, 2010 at 06:07:06PM +0400, Roman I Khimov wrote:
->> >В сообщении от Среда 04 августа 2010 17:51:57 автор Bernhard
->> Reutner-Fischer
->> >написал:
->> >> .. to avoid
->> >> ERROR: Error Method already seen: all_perl_packages in' perl_5.8.8.bb'
->> >> now in 'perl_5.10.1.bb'
->> >>
->> >> TODO: error() already prints "ERROR:" so the "Error" in above msg is
->> >> redundant
->> >>
->> >> Signed-off-by: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
->> >
->> >What kind of configuration gives you such an error? Never seen that.
->>
->> It was applied by Chris as a5dee57033f7d9987858d2c0514f4e687ece2874
->> >
->> >Although the change itself looks good, I'd only probably rename
->> >perl_helper.inc to plain perl.inc, we can merge more common things between
->> >different perl versions later.
->>
->> fine with me, sure.
->
->
->Thanks for the fix, appreciate it -- I was really surprised to see no
->perl.inc existed yet.
+--------------enigDA4FE7F253DC0210FE477E1B
+Content-Type: text/plain; charset=ISO-8859-15
+Content-Transfer-Encoding: quoted-printable
 
-It would be way cool if somebody with write-access could move the
-function into some perl.inc and push that change....
-Let me know if i'm supposed to send a patch with the correct .inc name
-instead.
+Hi,
+I am in the process of updating the java recipes to use
+BBCLASSEXTEND=3D"native" and fixing the do_stage use. However now I hit a=
 
-thanks,
+problem because of a workaround which was added months ago to install
+Java libraries (jars) into one common directory in a multimachine build.
+This workaround was *additionally* specifically added to the angstrom
+2008 distribution.
+
+The problem that people wanted to solve was that in a multimachine build
+the installation of a PACKAGE_ARCH=3D"all" recipe was only being done onc=
+e
+and so from the 2nd machine onwards the build process was unable to
+access the jars.
+
+For me I always wondered how it is for python, C# or perl
+programs/libraries which we provide and why there is no problem with
+them. As it looks they go the simple way and simply do not appear to
+have set PACKAGE_ARCH=3D"all".
+
+So for now I see 2 solutions for the Java recipes:
+1) Java packages do not appear as arch-independent anymore.
+2) Bitbake (or OE) should be taught to install an arch dependent package
+into all sysroots of a multimachine build.
+
+The former is quickly done because most recipes use java-library.bbclass
+but I find this technically wrong somehow (it also slows down everyone's
+multimachine builds considerably).
+
+I don't know how difficult or feasible it is to implement the 2nd option
+(Bitbake gods anyone?) or whether there might even be a third option.
+
+I only know that the shit has hit the fan ... :-/
+
+Regards
+Robert
 
 
+--------------enigDA4FE7F253DC0210FE477E1B
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAkxZkMUACgkQG9cfwmwwEtr2aACgjZDOjwhse3l/RlZHoUtjVsDB
+1jMAniCl9RGw/iyttW0F7PPGl26t7UZ1
+=BYDl
+-----END PGP SIGNATURE-----
+
+--------------enigDA4FE7F253DC0210FE477E1B--
