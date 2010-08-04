@@ -1,31 +1,48 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OgZAt-00059v-RP for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 10:18:08 +0200
-Received: from f053041223.adsl.alicedsl.de ([78.53.41.223]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OgZAs-0000Dk-2d for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 08:18:06 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1OgZI6-0007Dj-Lb
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 04 Aug 2010 10:25:36 +0200
+Received: by fxm12 with SMTP id 12so2352742fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 04 Aug 2010 01:25:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=CtGaNU1qsYMme9ebD0xgaizsktxgAw8o2HYyL6uS0J4=;
+	b=GMKz9iD5xazU1z819IuQS3n6b9XtxbBDPvTby7+sh5lh6fRZyRVLN2rt1NH7sV67ku
+	YDs5KdCeOqjtRGXMVLT13mM+L/r5uOFO4eIlMi1X/J+6rLoTYEaXYDWA3s4Z65b6Yew8
+	YtNQgmwniRX9v6UiP3sDdMI+UDvf3CpoVekvo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=cim/m2fWDUe0i/0zudsw9W76QOmAQQqtvnK4sxcauI/Yrm+XzegZYuuv/1Gvu1yH3z
+	7eaFY0Ng973j66t9jGVnWe2vPNdMeYZu3aRKEZYaNmg7lw+J2q/V3+IJb629qdcbhY+g
+	FDQYd6F3KKIiGK4KUKttQim+Ydkwmr2236dBI=
+Received: by 10.223.119.147 with SMTP id z19mr8451816faq.64.1280910329521;
+	Wed, 04 Aug 2010 01:25:29 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id s20sm2868340faa.4.2010.08.04.01.25.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 04 Aug 2010 01:25:29 -0700 (PDT)
+Date: Wed, 4 Aug 2010 10:25:39 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1280897047-28860-1-git-send-email-jkridner@beagleboard.org>
-References: <1280897047-28860-1-git-send-email-jkridner@beagleboard.org>
-Date: Wed, 04 Aug 2010 10:18:03 +0200
-Message-ID: <1280909883.4225.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20100804082539.GA30033@jama>
+References: <1280901529-30358-1-git-send-email-raj.khem@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1280901529-30358-1-git-send-email-raj.khem@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] beagleboard-test-image: added ramdisk
+Subject: Re: [PATCH,v3] recipes: Dont inherit autotools_stage.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,63 +56,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 08:18:08 -0000
-X-Groupsio-MsgNum: 21807
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-9R+VARwjDUAdjE8zBO+u"
+X-List-Received-Date: Wed, 04 Aug 2010 08:25:36 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-9R+VARwjDUAdjE8zBO+u
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Tue, Aug 03, 2010 at 10:58:49PM -0700, Khem Raj wrote:
+> Fixes issues seen by Graham and Denys among others.
+> My full x11-build is underway. Please inspect and/or try this
+> patch out. I will see how my builds complete in the morning.
 
-Am Dienstag, den 03.08.2010, 23:44 -0500 schrieb Jason Kridner:
-> Simply adding 'ext2.gz' to the IMAGE_FSTYPES to produce a default sized
-> ramdisk image whenever this image is built.
-> ---
->  recipes/images/beagleboard-test-image.bb |    3 ++-
->  1 files changed, 2 insertions(+), 1 deletions(-)
->=20
-> diff --git a/recipes/images/beagleboard-test-image.bb b/recipes/images/be=
-agleboard-test-image.bb
-> index 0ea323a..f4d736d 100644
-> --- a/recipes/images/beagleboard-test-image.bb
-> +++ b/recipes/images/beagleboard-test-image.bb
-> @@ -22,4 +22,5 @@ IMAGE_INSTALL +=3D " \
-> =20
->  export IMAGE_BASENAME =3D "beagleboard-test-image"
-> =20
-> -EXTRA_IMAGEDEPENDS +=3D "x-load u-boot virtual/kernel"
-> +EXTRA_IMAGEDEPENDS +=3D " x-load u-boot virtual/kernel"
+Few recipes are failing now for me (with rebuild from scratch).
 
-Not needed [1].
+I think we usually need just s/autotools_stage/autotools/g instead of
+s/autotools_stage//g. Otherwise nothing is installed to sysroots for
+many packages.
 
-        You can append values to existing variables using the +=3D
-        operator. Note that this operator will add a space between the
-        existing content of the variable and the new content.
-
-(It should have been a separate patch anyway.)
-
-> +IMAGE_FSTYPES +=3D " ext2.gz"
+Regards,
 
 
-Thanks,
-
-Paul
-
-
-[1] http://docs.openembedded.org/usermanual/usermanual.html
-
---=-9R+VARwjDUAdjE8zBO+u
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxZIjsACgkQPX1aK2wOHVicfwCfV0TXSqU67nccIDeAGRWKwgtu
-OZoAn3o2FvJ/a2djnzqiTADo4X8mtSdM
-=srXU
------END PGP SIGNATURE-----
-
---=-9R+VARwjDUAdjE8zBO+u--
