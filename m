@@ -1,48 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OgZI6-0007Dj-Lb
+	(envelope-from <fabio.mauri@gmail.com>) id 1OgZLL-0007Mc-Lq
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 04 Aug 2010 10:25:36 +0200
-Received: by fxm12 with SMTP id 12so2352742fxm.6
+	Wed, 04 Aug 2010 10:28:56 +0200
+Received: by wwb22 with SMTP id 22so481302wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 04 Aug 2010 01:25:29 -0700 (PDT)
+	Wed, 04 Aug 2010 01:28:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=CtGaNU1qsYMme9ebD0xgaizsktxgAw8o2HYyL6uS0J4=;
-	b=GMKz9iD5xazU1z819IuQS3n6b9XtxbBDPvTby7+sh5lh6fRZyRVLN2rt1NH7sV67ku
-	YDs5KdCeOqjtRGXMVLT13mM+L/r5uOFO4eIlMi1X/J+6rLoTYEaXYDWA3s4Z65b6Yew8
-	YtNQgmwniRX9v6UiP3sDdMI+UDvf3CpoVekvo=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=PVQbzSQfaaPww43E/C9YznpbxlE0NpNz6JF+yts7nOc=;
+	b=Tenik/i67d510a48YnLT2jbvg6xo+gTU8zJf0iCIP0Q6SupZXfg/dgEtDMNWRf7KbY
+	X9RR/edeoZo/tr0nvgKszA5iDmPAYOc8vcbBrTycVwvcbXIj+zY/ZM/3zPBfTSWGOSeX
+	IF92939vClO1oAWjE/tE3i2KI3mz1uuko/hPo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=cim/m2fWDUe0i/0zudsw9W76QOmAQQqtvnK4sxcauI/Yrm+XzegZYuuv/1Gvu1yH3z
-	7eaFY0Ng973j66t9jGVnWe2vPNdMeYZu3aRKEZYaNmg7lw+J2q/V3+IJb629qdcbhY+g
-	FDQYd6F3KKIiGK4KUKttQim+Ydkwmr2236dBI=
-Received: by 10.223.119.147 with SMTP id z19mr8451816faq.64.1280910329521;
-	Wed, 04 Aug 2010 01:25:29 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id s20sm2868340faa.4.2010.08.04.01.25.28
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 04 Aug 2010 01:25:29 -0700 (PDT)
-Date: Wed, 4 Aug 2010 10:25:39 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100804082539.GA30033@jama>
-References: <1280901529-30358-1-git-send-email-raj.khem@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=xDVQctAaZ7Jn9QdIVCvw/wGcsQkjdtcyoYCf05xydG+OQmxmrjlCUg5bfyJhJ0KgSt
+	9sRQRuqbxFO/Wk2uvlWdXWc6AteLswY6zofBNXcxMbxDy3nf45YX0wqJKFI9m8blA6Le
+	5khmJ2nsRl+TqoydyVgw7SZ2X0/YP6RwOzf8A=
 MIME-Version: 1.0
-In-Reply-To: <1280901529-30358-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.227.12.164 with SMTP id x36mr7382927wbx.97.1280910531574; Wed, 
+	04 Aug 2010 01:28:51 -0700 (PDT)
+Received: by 10.216.188.138 with HTTP; Wed, 4 Aug 2010 01:28:51 -0700 (PDT)
+Date: Wed, 4 Aug 2010 10:28:51 +0200
+Message-ID: <AANLkTinN+Yopob5DS5eGWJJj=06VKHP=Vd2tPEjsJDPm@mail.gmail.com>
+From: Fabio Mauri <fabio.mauri@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: fabio.mauri@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH,v3] recipes: Dont inherit autotools_stage.
+Subject: Angstrom benchmark
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,21 +48,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 04 Aug 2010 08:25:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 04 Aug 2010 08:28:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Aug 03, 2010 at 10:58:49PM -0700, Khem Raj wrote:
-> Fixes issues seen by Graham and Denys among others.
-> My full x11-build is underway. Please inspect and/or try this
-> patch out. I will see how my builds complete in the morning.
+Hi,
 
-Few recipes are failing now for me (with rebuild from scratch).
+   I'm building Angstrom in order to get a rootfs for a Ti DM365 device.
+In the last three months I was building an overlay over the commit
+d9264a5e565906ccf75f695dbecd251e21407fdf (11/05/2010).
+There isn't a particular reason for the choice of this commit, it
+simply was the head of branch org.openembedded.dev when I started
+working.
+My question is: is there a commit or tag considered "stable" for
+Angstrom, or at least considered as a benchmark for such an
+application?
 
-I think we usually need just s/autotools_stage/autotools/g instead of
-s/autotools_stage//g. Otherwise nothing is installed to sysroots for
-many packages.
+Best Regards.
 
-Regards,
+-- 
+Fabio Mauri
 
 
