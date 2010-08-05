@@ -1,48 +1,34 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ogukh-0007dE-Ui
+	(envelope-from <khimov@altell.ru>) id 1Ogv1q-0008Kx-RD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 09:20:32 +0200
-Received: by fxm12 with SMTP id 12so2782240fxm.6
+	Thu, 05 Aug 2010 09:38:22 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 529554669
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 00:20:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=TJgyFlq+dCr7PfaCV8FPPXdfhICHNkglWuMi4IRJOwE=;
-	b=eorePN1yI8PDS/xZOYgxxoyG7ezZV4sXSqlQhP3jkzws6RCK0tWUtRkzHQEAz4XQiX
-	fp7Mp8NPgokmkHYPCG20RPtScZ+C7a3QX97m1W02L0+fn1qyLLvT2hQsr2BOcAH54Sgl
-	2uzwOohPH3aFL9fX/eciWs8dTPmZJIPV8r+VE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=gWpR+BE25sgP6HCiyOCDWH0qifbEkEhDlaTxlNaxP7c9Fdyr+FkN5WbQtR+/rXZeja
-	M8qbvfx/bYVuGguKLprH1bXedwz6sc15oQGF5CuSiJB0hP00dlvjTZ+GyBqGFLHOVgx9
-	i+AY2D5VpRNHhKeYzxp9seJXtNFKJp7SGB94c=
-Received: by 10.223.119.198 with SMTP id a6mr10046634far.66.1280992826810;
-	Thu, 05 Aug 2010 00:20:26 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b9sm3326925faq.7.2010.08.05.00.20.26
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 05 Aug 2010 00:20:26 -0700 (PDT)
-Date: Thu, 5 Aug 2010 09:20:47 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu,  5 Aug 2010 11:42:44 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100805072047.GD29578@jama>
-References: <4C5A5AD6.9090409@gmail.com>
+Date: Thu, 5 Aug 2010 11:38:00 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <E1OguCD-00023v-03@melo.openembedded.org>
+	<20100805071201.GB29578@jama>
+In-Reply-To: <20100805071201.GB29578@jama>
 MIME-Version: 1.0
-In-Reply-To: <4C5A5AD6.9090409@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Message-Id: <201008051138.00510.khimov@altell.ru>
+X-Altell-MailScanner-ID: 529554669.1E1B0
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] package_ipk.bbclass: add lists_dir to sysroots' /etc/opkg.conf
+Subject: Re: [oe-commits] Roman I Khimov : bitbake.conf: trust server certificate when doing svn over https
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,25 +42,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 07:20:32 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Aug 2010 07:38:32 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Aug 05, 2010 at 04:01:50PM +0930, Graham Gower wrote:
-> This makes the sysroots' /etc/opkg.conf agree with opkg-collateral on where
-> the package lists database should be found. Fixes a problem whereby opkg
-> cannot find the package lists after opkg-collateral is installed.
-> 
-> This fixes the same problem as acc720fa80227d08fd15764117e0c34e2387e804.
-> But since that doesn't take into account other dependencies bringing
-> opkg-collateral into the image, it doesn't solve the problem in all
-> cases and could probably be reverted.
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 05 =D0=B0=D0=B2=D0=B3=D1=83=D1=
+=81=D1=82=D0=B0 2010 11:12:01 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Martin Jansa =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> Maybe we should add also
+> --accept theirs-full (just in case)
+> --force (to force overwrite of existing files)
+>=20
+> ie
+> matchbox-panel-2-icon-themes_0.0.1.bb
+> matchbox-panel-2_svn.bb
+> are checkouting/updating tiwo different SRCREVs and every few builds you
+> end up removing svn checkout from downloads dir, just because it
+> refuses to upgrade to newer revision (applets dir already exists there).
+>=20
+> Any objections (someone intentionaly keeping dirty checkouts in his
+> DL_DIR)?
 
-Agreed about revert, because for ONLINE_PACKAGE_MANAGEMENT == "none" it
-calls "opkg-cl ${IPKG_ARGS} install " without package name and image creation fails.
-
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+No objections here.
 
 
