@@ -1,46 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgxKV-0005dH-18
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 12:05:39 +0200
-Received: by fxm12 with SMTP id 12so2825816fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 03:05:34 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=JjYtCt3nztYPBEfYauah9lCct2gJzTMEo9c6RGVxwdE=;
-	b=j5efnRoNjwFYnAaMyzdnhnvIZsqxlbsdncFIsVi9AvYhtWD45ZU1SDCLp8jJIdZwSE
-	nc+sd7aPjSAxDI9+UppbiuO23gdu7Pdz10rK3WktEZ4DIrXCjT+2EB0DHxVKLvslrbgj
-	8UYBeAMBJTnHEknTbptpMs98uBNJ3WfqycAyg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=k8SEYZiwk7hyoEU+IHDFgk7fRbUuR1nF1q29DctREfR8+tNydX9+31NKs+co42OWXk
-	Ow6i9PMawsMysnrufFZWnnxC8mjMFE4srYoTVvTp7w6Opa4pFp2uXm5cq2i2bxyoKB6T
-	VZPDsBBxNZgpl/ByVN+2gcKG8OJnneD0ifa40=
-MIME-Version: 1.0
-Received: by 10.204.46.159 with SMTP id j31mr7265023bkf.5.1281002733981; Thu, 
-	05 Aug 2010 03:05:33 -0700 (PDT)
-Received: by 10.204.21.202 with HTTP; Thu, 5 Aug 2010 03:05:33 -0700 (PDT)
-In-Reply-To: <loom.20100805T104704-558@post.gmane.org>
-References: <AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>
-	<1280926084-7605-1-git-send-email-henri.bragge@dcombus.com>
-	<AANLkTinnz+cB5Au1hMsniwFbCSjo-EaNWoR=9Xae4krA@mail.gmail.com>
-	<loom.20100805T104704-558@post.gmane.org>
-Date: Thu, 5 Aug 2010 12:05:33 +0200
-Message-ID: <AANLkTik=13a7k7D1n=VfJnqO5DdPy5PUVdLdnDHtZh1d@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OgxVt-00006l-Qa for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Aug 2010 12:17:26 +0200
+Received: from g225136218.adsl.alicedsl.de ([92.225.136.218]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OgxVq-0002Se-Jt for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Aug 2010 10:17:22 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <20100803225018.GG4752@home.lan>
+References: <20100803225018.GG4752@home.lan>
+Date: Thu, 05 Aug 2010 12:17:19 +0200
+Message-ID: <1281003439.3692.4.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2 1/2] recipe for gsnmp-0.3.0
+Subject: Re: [PATCH 1/3] git: replace remaining broken hardlinks with symlinks.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,35 +39,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 10:05:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Aug 2010 10:17:26 -0000
+X-Groupsio-MsgNum: 21909
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-JBC9/fnY02+XI407s/uF"
 
-2010/8/5 Henri Bragge <henri.bragge@dcombus.com>:
-> Frans Meulenbroeks <fransmeulenbroeks <at> gmail.com> writes:
->
->>
->> tried to build this, stranded at this:
->>
->> ...
->>
->> NOTE: oestats: task failed, see
->> http://tinderbox.openembedded.net/packages/668019/
->> ERROR: TaskFailed event exception, aborting
->>
->> No idea what the policy on this is, but I'm not too eager to add all kind of
->> certificates to my system
->>
->
-> Posted v3, this time with ftp sources. Had forgotten that Deutsche Telekom
-> (which that certificate is rooted to) was an untrusted authority.
->
-> Sorry the hassle, this is my first patch to oe.
+--=-JBC9/fnY02+XI407s/uF
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-It is no problem, ftp is definitely better than svn/https (at least in
-my opinion).
-And wrt the hassle: we all had to go through the learning curve at one
-point in time.
-
-Frans
+Dear Yann,
 
 
+Am Mittwoch, den 04.08.2010, 00:50 +0200 schrieb Yann Dirson:
+
+[=E2=80=A6]
+
+could you do me a favor and explain what is broken regarding hardlinks
+please. This issue was pointed out to me before, but I could not
+reproduce it or did not understand it [1].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-July/02186=
+9.html
+
+--=-JBC9/fnY02+XI407s/uF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxaj6kACgkQPX1aK2wOHVjsTACfWZp8tDgYbUpZfiyzG6x6gPLg
+R6IAnjwzz6FG/mXiZpvwiFLv7yeEZoPj
+=JTQZ
+-----END PGP SIGNATURE-----
+
+--=-JBC9/fnY02+XI407s/uF--
