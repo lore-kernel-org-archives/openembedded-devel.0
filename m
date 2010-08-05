@@ -1,48 +1,41 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OgzAR-0003tj-N0
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OgzkG-0001Vj-Ly
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 14:03:27 +0200
-Received: by fxm12 with SMTP id 12so2911871fxm.6
+	Thu, 05 Aug 2010 14:40:25 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o75CeESJ014590
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 05:03:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=+xQR3NmLa7G6mWfpImPSi1zkARNSdO9+M1j4YWoejuQ=;
-	b=n7pg9gJa5rI4PLfwv0gmyYtrzjG1ofvqtg4vmq210vq2yF/QFBYOs+kSrw6mVbmGha
-	lKqt9ODAn8xfKNONmqfl+6LsA+c3eNEX4Jk/PG4KICFal0IMKVWvfWKF17U69/PSfcMP
-	X5Vxk5DwwBgd0StzT3mU7velfEiIek8htxLnY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=k6X9wrO4A2XLkojudD1WWUzo/gXJZ1De7zHQS0nBOzinVfT7i62OY/hVXVaPH8eTZx
-	RF4uzJBwlwdMwPjvCvMvuRm+rR4wJalyoP0rLh2tMUoGYkNDXzSD7Dc1A5DE3omXM8F0
-	hI6IDDyzTgwoC9a4f+/lwUm3u4Y5LRQfIJTJE=
-Received: by 10.223.118.211 with SMTP id w19mr3859628faq.19.1281009797959;
-	Thu, 05 Aug 2010 05:03:17 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id m3sm41763fai.41.2010.08.05.05.03.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 05 Aug 2010 05:03:17 -0700 (PDT)
-Date: Thu, 5 Aug 2010 14:03:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 5 Aug 2010 13:40:14 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 08456-05 for <openembedded-devel@lists.openembedded.org>;
+	Thu,  5 Aug 2010 13:40:10 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o75Ce9xs014572
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 5 Aug 2010 13:40:10 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100805120338.GG29578@jama>
-References: <1280948285-3458-1-git-send-email-raj.khem@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <1280948285-3458-1-git-send-email-raj.khem@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <AANLkTinDqkXzuPxytNCEq6xinJ1kct1cj5vU_kM=NZ=Z@mail.gmail.com>
+References: <1278323612.30247.3579.camel@rex> <1281003567.16235.254.camel@rex>
+	<AANLkTinDqkXzuPxytNCEq6xinJ1kct1cj5vU_kM=NZ=Z@mail.gmail.com>
+Date: Thu, 05 Aug 2010 13:39:53 +0100
+Message-ID: <1281011993.16235.284.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/7] recipes: Dont inherit autotools_stage (revised)
+Subject: Re: [Bitbake-dev] RFC: How to improve packaged-staging and setscene
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,32 +49,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 12:03:30 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 05 Aug 2010 12:40:25 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 04, 2010 at 11:57:58AM -0700, Khem Raj wrote:
-> Hi
+On Thu, 2010-08-05 at 13:12 +0200, Frans Meulenbroeks wrote:
+> Sounds good to me. Not sure whether I have time to try it out on short
+> term. Too much other things at hand.
 > 
-> Following series of patches are for getting rid of
-> autotools_staging class and its usage. Its replaced with
-> autotools and staging functions are replaced
-> 
-> Please test these patches and if seem ok provide some ACKS/NACKS
+> One small concern:
+> Would it in your proposal be possible to disable packaged staging?
+> I think it would be nice if a user (in local.conf or so) could decide
+> on whether he wants to spent build time and space on this.
 
-Rebuilt from scratch:
-spitz/minimal-x11-gpe-image (finishing x11-gpe-image now)
-om-gta02/shr-image
-nokia900/shr-image
+Technically, disabling would be possible but you lose some important
+benefits such as when enabled, cleaning a package will remove whatever
+it put into staging.
 
-both images + my favourite feeds seems fine, so for whole serie:
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+One of our problems in OE is too many code paths. I'd like to see us try
+and minimise that problem. Disk space is cheap and this code shouldn't
+take much more time.
 
-Thanks!
+Once combined with checksums, it should actually save people large
+amounts of time as needing to rebuild from scratch should be a think of
+the patch (unless you make a change effecting everything in which case
+you'd expect it).
 
-Regards,
+Cheers,
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Richard
+
+
 
 
