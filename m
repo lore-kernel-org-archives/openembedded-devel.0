@@ -1,43 +1,36 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OgyKp-0005yb-BV
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OgyLf-0005zP-VO
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 13:10:03 +0200
-Received: by fxm12 with SMTP id 12so2870794fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 04:09:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=ts10Iw8ud/oHH8YCQPYCWwsrbjaC27RtZ0La1ola0uo=;
-	b=Nlt3tYpIqv9NTjnDjgjODkUxdctdwwaFIlpFRRXCv3MhcYoO+Pf+izHpVtC5fKfaTM
-	jf+8aGKRrDLcfCJXRj9cowl4SB0HO/vRpA039wMN9E9RiLA9UF6mpED4lb9x7LG8BOnb
-	bWycRKX/RPgxQjZyW3jcoUW8LSFujfT2afmEc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=vpjE8U+FdQYfsX+F+X2eSOK2XPLymsaMVt5lCc6wursirWGOFo4TI3GlfYQ03DMJVr
-	BMHCwaPwc8SDe/K7DzWT+DwuM36VdcV/M1acOplX1zXSmQKoD8wE1cpYDBUO2ue/BoJY
-	XPbdMH2rYUnKgEXvkOneDdgwWMbRVZXgwx7Qk=
-Received: by 10.223.104.145 with SMTP id p17mr10451870fao.34.1281006593997;
-	Thu, 05 Aug 2010 04:09:53 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id a9sm21823faa.27.2010.08.05.04.09.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 05 Aug 2010 04:09:53 -0700 (PDT)
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Aug 2010 13:10:13 +0200
-Message-Id: <1281006613-31148-1-git-send-email-Martin.Jansa@gmail.com>
-X-Mailer: git-send-email 1.7.1.1
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+	Thu, 05 Aug 2010 13:11:09 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o75BAks4001453;
+	Thu, 5 Aug 2010 12:10:46 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 30875-04; Thu,  5 Aug 2010 12:10:42 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o75BAcfm001433
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Thu, 5 Aug 2010 12:10:38 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: bitbake-dev <bitbake-dev@lists.berlios.de>
+Date: Thu, 05 Aug 2010 12:10:23 +0100
+Message-ID: <1281006623.16235.277.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] Revert "rootfs_ipk.bbclass: install the package manager in a separate pass from the other packages"
+Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
+Subject: Add bb.data.flagAppend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,48 +44,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 11:10:03 -0000
+X-List-Received-Date: Thu, 05 Aug 2010 11:11:09 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-This reverts commit acc720fa80227d08fd15764117e0c34e2387e804.
+I've been wondering what we could do to get rid of clutter in some of
+our class files. One thing we see a lot of is getting a flag, appending
+to it and saving it again. In normal syntax, =+ works great for this but
+that doesn't help in anonymous python. We see lots of things like:
 
-Conflicts:
+deps = (bb.data.getVarFlag('do_package_write_ipk', 'depends', d) or "").split()
+deps.append('opkg-utils-native:do_populate_sysroot')
+deps.append('virtual/fakeroot-native:do_populate_sysroot')
+bb.data.setVarFlag('do_package_write_ipk', 'depends', " ".join(deps), d)
 
-	classes/rootfs_ipk.bbclass
----
- classes/rootfs_ipk.bbclass |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+where as it would be nice just to be able to write:
 
-diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
-index 7c85aae..db04fb6 100644
---- a/classes/rootfs_ipk.bbclass
-+++ b/classes/rootfs_ipk.bbclass
-@@ -25,7 +25,7 @@ BAD_RECOMMENDATIONS ?= ""
- IPKG_VARIANT ?= "opkg"
- 
- RDEPENDS_append = " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "${IPKG_VARIANT} opkg-collateral", d)}"
--PACKAGE_INSTALL_PKGMGR = " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "${IPKG_VARIANT} opkg-collateral", d)}"
-+PACKAGE_INSTALL_append = " ${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "${IPKG_VARIANT} opkg-collateral", d)}"
- 
- fakeroot rootfs_ipk_do_rootfs () {
- 	set -x
-@@ -44,6 +44,7 @@ fakeroot rootfs_ipk_do_rootfs () {
- 		echo "Status: deinstall ok not-installed" >> $STATUS
- 		echo >> $STATUS
- 	done
-+
- 	opkg-cl ${IPKG_ARGS} update
- 
- 	# Uclibc builds don't provide this stuff...
-@@ -63,7 +64,6 @@ fakeroot rootfs_ipk_do_rootfs () {
- 			opkg-cl ${IPKG_ARGS} install $i 2>&1 || true
- 		done > ${T}/log.do_rootfs-attemptonly.${PID}
- 	fi
--	opkg-cl ${IPKG_ARGS} install ${PACKAGE_INSTALL_PKGMGR}
- 
- 	export D=${IMAGE_ROOTFS}
- 	export OFFLINE_ROOT=${IMAGE_ROOTFS}
--- 
-1.7.1.1
+bb.data.varFlagAppend('do_package_write_ipk', 'depends', "opkg-utils-native:do_populate_sysroot virtual/fakeroot-native:do_populate_sysroot", d)
+
+or
+
+deps = "opkg-utils-native:do_populate_sysroot virtual/fakeroot-native:do_populate_sysroot"
+bb.data.varFlagAppend('do_package_write_ipk', 'depends', deps, d)
+
+if long lines make you uneasy.
+
+Does anyone else feel such a function would be of use? It would assume
+space delimitation as the "=+" and "+=" operators work. 
+
+Cheers,
+
+Richard
 
 
 
