@@ -1,41 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Oh1q8-0006Cb-Qx
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oh5Tt-0001zI-E1
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 16:54:38 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Oh1pv-00012Z-Rs from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 07:54:23 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 5 Aug 2010 07:54:23 -0700
-Received: from [172.30.80.92] ([172.30.80.92]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 5 Aug 2010 08:54:22 -0600
-Message-ID: <4C5AD09A.8090303@mentor.com>
-Date: Thu, 05 Aug 2010 07:54:18 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Thu, 05 Aug 2010 20:47:57 +0200
+Received: by fxm12 with SMTP id 12so3303700fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Aug 2010 11:47:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=JEoF9pWdCl78bcSWuz7C/er9TLRRwXCmKiNpbdap5SM=;
+	b=pdh8T33XQpb58tH0X4IYYmHRXeOE0DQJEQM/h6HeE/IH+Nsj4xZ5bw4ct7dhe41Ewy
+	rgF9Ld3HySzTo5ylxoqrKWGKgK2ejGYujI8yBVtc2D2QYISRlc3aT+3DiAz+/o2vEYXM
+	z+Jw56cT+OdStMYB0b2fgX7igjix8eHDhCTck=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=sbPGjc8SamrYJKRzhOKlv3SPWpI6J47fu/fG7HC9AwutpnxOutH9Yh/S+xoaWALfLF
+	GwLssnBd+Vp+SviZppEDcLT6I7uvWbDO41X5maNFQOtTZocEiJ2wcDbXUvjf6yE2gqd4
+	Rdv4ONX1zEa9DYlIE/Ml3pebjNI4xdzvi+uYI=
 MIME-Version: 1.0
+Received: by 10.204.46.159 with SMTP id j31mr7517657bkf.5.1281034064104; Thu, 
+	05 Aug 2010 11:47:44 -0700 (PDT)
+Received: by 10.204.21.202 with HTTP; Thu, 5 Aug 2010 11:47:44 -0700 (PDT)
+In-Reply-To: <1280997881-6037-2-git-send-email-henri.bragge@dcombus.com>
+References: <AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>
+	<1280997881-6037-1-git-send-email-henri.bragge@dcombus.com>
+	<1280997881-6037-2-git-send-email-henri.bragge@dcombus.com>
+Date: Thu, 5 Aug 2010 20:47:44 +0200
+Message-ID: <AANLkTikTrwy+=dhHj7Va4LcfxM1otvAjiPT2dMb1L5HZ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <E1OguCD-00023v-03@melo.openembedded.org>	<201008051138.00510.khimov@altell.ru>
-	<20100805082440.GE29578@jama>	<201008051241.24091.khimov@altell.ru>
-	<AANLkTimfaAw_wmNddavmknv4O5haMqLuXDa8v7ECYZyF@mail.gmail.com>
-In-Reply-To: <AANLkTimfaAw_wmNddavmknv4O5haMqLuXDa8v7ECYZyF@mail.gmail.com>
-X-OriginalArrivalTime: 05 Aug 2010 14:54:22.0916 (UTC)
-	FILETIME=[173F2840:01CB34AE]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Roman I Khimov : bitbake.conf: trust server certificate when doing svn over https
+Subject: Re: [PATCH v3 2/2] recipe for scli-0.4.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,29 +54,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 14:54:38 -0000
-Content-Type: text/plain; charset=KOI8-R; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 05 Aug 2010 18:47:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Frans Meulenbroeks wrote:
-> 2010/8/5 Roman I Khimov <khimov@altell.ru>:
->> В сообщении от Четверг 05 августа 2010 12:24:40 автор Martin Jansa написал:
-> 
->>> I don't know if it's worth it to force builders to upgrade subversion or
->>> add their FETCHCOMMAND_svn UPDATECOMMAND_svn to local.conf.
->> IMO we should not break support for major stable (or LTS) distros, so my patch
->> is broken.
->>
-> I agree that we should not break support for major distros. but
-> without your patch some of the recipes cannot be build easily.
-> The solution of Martin seems a good inbetween.
+2010/8/5 Henri Bragge <henri.bragge@dcombus.com>:
+>
+> Signed-off-by: Henri Bragge <henri.bragge@dcombus.com>
+> ---
+> =A0recipes/scli/scli_0.4.0.bb | =A0 12 ++++++++++++
+> =A01 files changed, 12 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/scli/scli_0.4.0.bb
+>
+> diff --git a/recipes/scli/scli_0.4.0.bb b/recipes/scli/scli_0.4.0.bb
+> new file mode 100644
+> index 0000000..3d24910
+> --- /dev/null
+> +++ b/recipes/scli/scli_0.4.0.bb
+> @@ -0,0 +1,12 @@
+> +DESCRIPTION =3D "SNMP Command Line Interface"
+> +SECTION =3D "console/network"
+> +LICENSE =3D "GPLv2"
+> +DEPENDS =3D "gsnmp readline libxml2 ncurses"
+> +PR =3D "r0"
+> +
+> +SRC_URI =3D "ftp://ftp.ibr.cs.tu-bs.de/pub/local/scli/scli-${PV}.tar.gz"
+> +
+> +SRC_URI[md5sum] =3D "486c92c76059a35c87e88edf24cbf804"
+> +SRC_URI[sha256sum] =3D "308511589260d3da9bc5817ace363180070ac83ccba9231b=
+7b9a01e1b0c29fe1"
+> +
+> +inherit autotools
+> --
+>
+Tried it. Fetch is ok now, but when building I get a QA issue causing
+the build to fail (angstrom/beagleboard):
 
-Adding subversion-native isn't hard, I've got one around locally for 
-RHEL4 :) It's svn 1.6.5.  Also got the logic to add svn-native for any 
-svn:// uris.
+OTE: Running task 665 of 669 (ID: 16,
+/home/frans/oe/openembedded/recipes/scli/scli_0.4.0.bb,
+do_package_write_ipk)
+ERROR: QA Issue with staging: libexslt.pc failed sanity test (tmpdir)
+in path /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/=
+usr/lib/pkgconfig
+ERROR: QA Issue with staging: libxslt.pc failed sanity test (tmpdir)
+in path /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/=
+usr/lib/pkgconfig
+ERROR: QA staging was broken by the package built above
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+see http://tinderbox.openembedded.net/builds/81310/
+
+
+Frans
 
 
