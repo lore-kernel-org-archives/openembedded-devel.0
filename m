@@ -1,43 +1,51 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgyNV-00062A-41
+	(envelope-from <rep.dot.nop@gmail.com>) id 1Ogz5A-0008Lh-GE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 13:13:03 +0200
-Received: by fxm12 with SMTP id 12so2872891fxm.6
+	Thu, 05 Aug 2010 13:57:57 +0200
+Received: by fxm12 with SMTP id 12so2907115fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 04:12:34 -0700 (PDT)
+	Thu, 05 Aug 2010 04:57:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=wLcVP/Cj0SOWtWecs2smQm2OIQxCXvdGNL/wo7TCMcI=;
-	b=FDduDhwRyzGk939v5dzoa9VVHqLoBJsZfVxylUVXhqlTPem4jkCmuotSiXNBNJJIEC
-	NMVAXfjzeOfKcEVanYFUwg4Xe46rPlsX6BGFOUHmmnpYza7CgdXoZhRULr/rQZB4nHEv
-	me6Aw98Vi+nLifUnV+xsa6Rv9I6Bw5I8J5VDA=
+	h=domainkey-signature:received:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=azxyuUWfhWCV6MddipYqWJ9L1WHq4Ak1XeNHEk9LQPo=;
+	b=PEkABOTUEHGiyE9J5QJMdgMOl9jgyw5S5n6iJmBA9tIyxQ9BBYYo8Iy/8ih4umqgx5
+	XcLbK3VCN5jmEwcClQc+Lr3IPsnD+c0ZPR/RZD5dHZIryIKpS4wuVfzTACzTuWn8JwCX
+	85sCU8oGj+PInyxxNhRkVNPvUD3TysUh/SFtc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=YVrf6ToQCmJR8o1nwEhrq0MB54nlDLTruww8qe8k6pw+Bx7yLYJM1xTnwVRZXwVo5m
-	MKjDsBYnHvHB9q0JKOauiTwi0+nLty43VpBlBiX/ikkkgxWrOLUaiE2ofPas3hsetxEn
-	VA6I52jTKjQRV13gOqQTmzdo+pqYeGFVyIE5M=
-MIME-Version: 1.0
-Received: by 10.204.51.3 with SMTP id b3mr7223508bkg.44.1281006753057; Thu, 05 
-	Aug 2010 04:12:33 -0700 (PDT)
-Received: by 10.204.21.202 with HTTP; Thu, 5 Aug 2010 04:12:33 -0700 (PDT)
-In-Reply-To: <1281003567.16235.254.camel@rex>
-References: <1278323612.30247.3579.camel@rex> <1281003567.16235.254.camel@rex>
-Date: Thu, 5 Aug 2010 13:12:33 +0200
-Message-ID: <AANLkTinDqkXzuPxytNCEq6xinJ1kct1cj5vU_kM=NZ=Z@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=IyrhVorPByIT5ODB7TPAgmiKAx663tV6MBRo5AnhnuLXzoywjtfyqw4l65jSSK+EB5
+	Bc7fq6lJjmOr9sOiodQVJvcZe0NybGtkZVh1fKT/ZdX0Ylc8SCYHRxOAhMgESPZN8pRk
+	MtLTXu2s9gZD5P3/Rx9/5f55+EPMwSmU1Z3Z0=
+Received: by 10.223.119.67 with SMTP id y3mr10529525faq.45.1281009471231;
+	Thu, 05 Aug 2010 04:57:51 -0700 (PDT)
+Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
+	by mx.google.com with ESMTPS id q17sm41193faa.21.2010.08.05.04.57.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 05 Aug 2010 04:57:50 -0700 (PDT)
+Received: from cow by s42.loc with local (Exim 4.72)
+	(envelope-from <rep.dot.nop@gmail.com>)
+	id 1Ogz4z-0004SK-6C; Thu, 05 Aug 2010 13:57:45 +0200
+Date: Thu, 5 Aug 2010 13:57:45 +0200
+From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
 To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100805115745.GH28187@mx.loc>
+References: <1281006613-31148-1-git-send-email-Martin.Jansa@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <1281006613-31148-1-git-send-email-Martin.Jansa@gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [Bitbake-dev] RFC: How to improve packaged-staging and setscene
+Subject: Re: [PATCH] Revert "rootfs_ipk.bbclass: install the package manager in a separate pass from the other packages"
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,19 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 11:13:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 05 Aug 2010 11:57:57 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Richard,
+On Thu, Aug 05, 2010 at 01:10:13PM +0200, Martin Jansa wrote:
+>This reverts commit acc720fa80227d08fd15764117e0c34e2387e804.
 
-Sounds good to me. Not sure whether I have time to try it out on short
-term. Too much other things at hand.
+I'd suggest to fix it instead, like put it into the properly guarded
+block:
 
-One small concern:
-Would it in your proposal be possible to disable packaged staging?
-I think it would be nice if a user (in local.conf or so) could decide
-on whether he wants to spent build time and space on this.
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index 7c85aae..4256945 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -63,7 +63,6 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 			opkg-cl ${IPKG_ARGS} install $i 2>&1 || true
+ 		done > ${T}/log.do_rootfs-attemptonly.${PID}
+ 	fi
+-	opkg-cl ${IPKG_ARGS} install ${PACKAGE_INSTALL_PKGMGR}
+ 
+ 	export D=${IMAGE_ROOTFS}
+ 	export OFFLINE_ROOT=${IMAGE_ROOTFS}
+@@ -71,6 +70,7 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 	export OPKG_OFFLINE_ROOT=${IPKG_OFFLINE_ROOT}
+ 	
+ 	if [ "${ONLINE_PACKAGE_MANAGEMENT}" != "none" ]; then
++		opkg-cl ${IPKG_ARGS} install ${PACKAGE_INSTALL_PKGMGR}
+         	mkdir -p ${IMAGE_ROOTFS}${sysconfdir}/opkg/
+ 		grep "^arch" ${IPKGCONF_TARGET} >${IMAGE_ROOTFS}${sysconfdir}/opkg/arch.conf
+ 	fi
 
-Frans
 
 
