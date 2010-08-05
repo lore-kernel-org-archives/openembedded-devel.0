@@ -1,40 +1,31 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oh69W-0001MQ-De for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 21:30:55 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oh69L-00041d-Le for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 21:30:43 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 21:30:43 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <jkridner@beagleboard.org>) id 1Oh6XG-0008JW-Tx
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Aug 2010 21:55:27 +0200
+Received: by qwg8 with SMTP id 8so4468536qwg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 05 Aug 2010 21:30:43 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 05 Aug 2010 12:55:20 -0700 (PDT)
+Received: by 10.229.51.197 with SMTP id e5mr3886813qcg.234.1281038120454;
+	Thu, 05 Aug 2010 12:55:20 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id w2sm615100qcq.24.2010.08.05.12.55.19
+	(version=SSLv3 cipher=RC4-MD5); Thu, 05 Aug 2010 12:55:19 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 05 Aug 2010 21:30:30 +0200
-Message-ID: <i3f3gm$5lu$1@dough.gmane.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Thu,  5 Aug 2010 14:55:18 -0500
+Message-Id: <1281038118-15059-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: patchwork, please keep patches up to date
+Subject: [PATCH] u-boot: beagleboard: fixed patch filename error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +39,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 19:30:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Aug 2010 19:55:27 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-Hi,
+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+---
+ recipes/u-boot/u-boot_git.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-I had a look around patchwork and I noticed lots of duplicates and
-already applied patches are still in the queue, so I have a small request:
-
-Could the people sending patches to this mailinglist update their status
-in patchwork? And can people applying patches also update the status?
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMWxFWMkyGM64RGpERAo9QAJ9fmxr+JIAWwAXofqjbGdPipFA3fgCbBTRT
-HroCseFeXy2c0FJpS5zco5Y=
-=lUq9
------END PGP SIGNATURE-----
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index 79c2b95..a016af8 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -69,8 +69,8 @@ SRC_URI_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
+                        file://0042-BeagleBoard-New-command-for-status-of-USER-button.patch \
+                        file://0043-BeagleBoard-Add-CONFIG_SYS_MEMTEST_SCRATCH.patch \
+                        file://0044-Beagleboard-Adjust-boot.patch \
+-                       file://0045-Beagleboard-Enable-pullups-on-i2c2.patch \
+-                       file://0046-Beagleboard-Add-camera-to-default-bootargs.patch \
++                       file://0045-BeagleBoard-Enable-pullups-on-i2c2.patch \
++                       file://0046-BeagleBoard-Add-camera-to-default-bootargs.patch \
+                        file://fw_env.config \
+ "
+ SRCREV_beagleboard = "ca6e1c136ddb720c3bb2cc043b99f7f06bc46c55"
+-- 
+1.5.6.4
 
 
 
