@@ -1,36 +1,43 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OgyLf-0005zP-VO
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OgyNV-00062A-41
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 13:11:09 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o75BAks4001453;
-	Thu, 5 Aug 2010 12:10:46 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 30875-04; Thu,  5 Aug 2010 12:10:42 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o75BAcfm001433
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Thu, 5 Aug 2010 12:10:38 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: bitbake-dev <bitbake-dev@lists.berlios.de>
-Date: Thu, 05 Aug 2010 12:10:23 +0100
-Message-ID: <1281006623.16235.277.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Thu, 05 Aug 2010 13:13:03 +0200
+Received: by fxm12 with SMTP id 12so2872891fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Aug 2010 04:12:34 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=wLcVP/Cj0SOWtWecs2smQm2OIQxCXvdGNL/wo7TCMcI=;
+	b=FDduDhwRyzGk939v5dzoa9VVHqLoBJsZfVxylUVXhqlTPem4jkCmuotSiXNBNJJIEC
+	NMVAXfjzeOfKcEVanYFUwg4Xe46rPlsX6BGFOUHmmnpYza7CgdXoZhRULr/rQZB4nHEv
+	me6Aw98Vi+nLifUnV+xsa6Rv9I6Bw5I8J5VDA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=YVrf6ToQCmJR8o1nwEhrq0MB54nlDLTruww8qe8k6pw+Bx7yLYJM1xTnwVRZXwVo5m
+	MKjDsBYnHvHB9q0JKOauiTwi0+nLty43VpBlBiX/ikkkgxWrOLUaiE2ofPas3hsetxEn
+	VA6I52jTKjQRV13gOqQTmzdo+pqYeGFVyIE5M=
+MIME-Version: 1.0
+Received: by 10.204.51.3 with SMTP id b3mr7223508bkg.44.1281006753057; Thu, 05 
+	Aug 2010 04:12:33 -0700 (PDT)
+Received: by 10.204.21.202 with HTTP; Thu, 5 Aug 2010 04:12:33 -0700 (PDT)
+In-Reply-To: <1281003567.16235.254.camel@rex>
+References: <1278323612.30247.3579.camel@rex> <1281003567.16235.254.camel@rex>
+Date: Thu, 5 Aug 2010 13:12:33 +0200
+Message-ID: <AANLkTinDqkXzuPxytNCEq6xinJ1kct1cj5vU_kM=NZ=Z@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Subject: Add bb.data.flagAppend
+Subject: Re: [Bitbake-dev] RFC: How to improve packaged-staging and setscene
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,37 +51,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 11:11:09 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 05 Aug 2010 11:13:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I've been wondering what we could do to get rid of clutter in some of
-our class files. One thing we see a lot of is getting a flag, appending
-to it and saving it again. In normal syntax, =+ works great for this but
-that doesn't help in anonymous python. We see lots of things like:
+Richard,
 
-deps = (bb.data.getVarFlag('do_package_write_ipk', 'depends', d) or "").split()
-deps.append('opkg-utils-native:do_populate_sysroot')
-deps.append('virtual/fakeroot-native:do_populate_sysroot')
-bb.data.setVarFlag('do_package_write_ipk', 'depends', " ".join(deps), d)
+Sounds good to me. Not sure whether I have time to try it out on short
+term. Too much other things at hand.
 
-where as it would be nice just to be able to write:
+One small concern:
+Would it in your proposal be possible to disable packaged staging?
+I think it would be nice if a user (in local.conf or so) could decide
+on whether he wants to spent build time and space on this.
 
-bb.data.varFlagAppend('do_package_write_ipk', 'depends', "opkg-utils-native:do_populate_sysroot virtual/fakeroot-native:do_populate_sysroot", d)
-
-or
-
-deps = "opkg-utils-native:do_populate_sysroot virtual/fakeroot-native:do_populate_sysroot"
-bb.data.varFlagAppend('do_package_write_ipk', 'depends', deps, d)
-
-if long lines make you uneasy.
-
-Does anyone else feel such a function would be of use? It would assume
-space delimitation as the "=+" and "+=" operators work. 
-
-Cheers,
-
-Richard
-
+Frans
 
 
