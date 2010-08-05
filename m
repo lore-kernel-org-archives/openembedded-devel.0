@@ -1,33 +1,42 @@
-Received: from smtp-68.nebula.fi ([83.145.220.68])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <hbragge@dcombus.com>) id 1Ogw4G-0008U4-AL
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 05 Aug 2010 10:44:59 +0200
-Received: from lumikki.dcombus.lan (unknown [83.150.95.26])
-	(using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by smtp-68.nebula.fi (Postfix) with ESMTP id 0B3C143F13CD;
-	Thu,  5 Aug 2010 11:44:42 +0300 (EEST)
-Received: from hbragge by lumikki.dcombus.lan with local (Exim 4.69)
-	(envelope-from <hbragge@lumikki.dcombus.lan>)
-	id 1Ogw49-0001Zo-Tr; Thu, 05 Aug 2010 11:44:41 +0300
-From: Henri Bragge <henri.bragge@dcombus.com>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OgwCy-0003bJ-VF for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Aug 2010 10:53:51 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OgwCn-0003hd-10 for openembedded-devel@lists.openembedded.org;
+	Thu, 05 Aug 2010 10:53:37 +0200
+Received: from 83.150.95.26 ([83.150.95.26])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Aug 2010 10:53:37 +0200
+Received: from henri.bragge by 83.150.95.26 with local (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 05 Aug 2010 10:53:37 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  5 Aug 2010 11:44:41 +0300
-Message-Id: <1280997881-6037-2-git-send-email-henri.bragge@dcombus.com>
-X-Mailer: git-send-email 1.5.6.5
-In-Reply-To: <1280997881-6037-1-git-send-email-henri.bragge@dcombus.com>
+From: Henri Bragge <henri.bragge@dcombus.com>
+Date: Thu, 5 Aug 2010 08:53:29 +0000 (UTC)
+Message-ID: <loom.20100805T104704-558@post.gmane.org>
 References: <AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>
-	<1280997881-6037-1-git-send-email-henri.bragge@dcombus.com>
-X-SA-Exim-Connect-IP: 83.145.220.68
-X-SA-Exim-Mail-From: hbragge@dcombus.com
+	<1280926084-7605-1-git-send-email-henri.bragge@dcombus.com>
+	<AANLkTinnz+cB5Au1hMsniwFbCSjo-EaNWoR=9Xae4krA@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: sea.gmane.org
+User-Agent: Loom/3.14 (http://gmane.org/)
+X-Loom-IP: 83.150.95.26 (Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100723 Ubuntu/8.04 (hardy) Firefox/3.6.8)
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,
+	RCVD_NUMERIC_HELO,SPF_HELO_PASS,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v3 2/2] recipe for scli-0.4.0
+Subject: Re: [PATCH v2 1/2] recipe for gsnmp-0.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,35 +50,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 05 Aug 2010 08:45:00 -0000
+X-List-Received-Date: Thu, 05 Aug 2010 08:53:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
+Frans Meulenbroeks <fransmeulenbroeks <at> gmail.com> writes:
 
-Signed-off-by: Henri Bragge <henri.bragge@dcombus.com>
----
- recipes/scli/scli_0.4.0.bb |   12 ++++++++++++
- 1 files changed, 12 insertions(+), 0 deletions(-)
- create mode 100644 recipes/scli/scli_0.4.0.bb
+> 
+> tried to build this, stranded at this:
+> 
+> ...
+> 
+> NOTE: oestats: task failed, see
+> http://tinderbox.openembedded.net/packages/668019/
+> ERROR: TaskFailed event exception, aborting
+> 
+> No idea what the policy on this is, but I'm not too eager to add all kind of
+> certificates to my system
+> 
 
-diff --git a/recipes/scli/scli_0.4.0.bb b/recipes/scli/scli_0.4.0.bb
-new file mode 100644
-index 0000000..3d24910
---- /dev/null
-+++ b/recipes/scli/scli_0.4.0.bb
-@@ -0,0 +1,12 @@
-+DESCRIPTION = "SNMP Command Line Interface"
-+SECTION = "console/network"
-+LICENSE = "GPLv2"
-+DEPENDS = "gsnmp readline libxml2 ncurses"
-+PR = "r0"
-+
-+SRC_URI = "ftp://ftp.ibr.cs.tu-bs.de/pub/local/scli/scli-${PV}.tar.gz"
-+
-+SRC_URI[md5sum] = "486c92c76059a35c87e88edf24cbf804"
-+SRC_URI[sha256sum] = "308511589260d3da9bc5817ace363180070ac83ccba9231b7b9a01e1b0c29fe1"
-+
-+inherit autotools
--- 
-1.5.6.5
+Posted v3, this time with ftp sources. Had forgotten that Deutsche Telekom
+(which that certificate is rooted to) was an untrusted authority.
+
+Sorry the hassle, this is my first patch to oe.
+
+- Henri
 
 
 
