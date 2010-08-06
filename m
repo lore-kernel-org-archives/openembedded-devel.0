@@ -1,34 +1,33 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OhMwg-0000Zt-2r
+	(envelope-from <martin.jansa@gmail.com>) id 1OhNNk-00020Z-6p
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Aug 2010 15:26:47 +0200
-Received: by fxm12 with SMTP id 12so4013920fxm.6
+	Fri, 06 Aug 2010 15:54:45 +0200
+Received: by fxm12 with SMTP id 12so4040887fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Aug 2010 06:26:37 -0700 (PDT)
+	Fri, 06 Aug 2010 06:54:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=BWCxfs4zRjjRDdaXMbR7LM6k/Jydoanwr+h1eu9sJWw=;
-	b=l26RTCvLlbwrHJlY/tBE45+YFqwt06Z2FyzZXffeMN913e4ffaI9sAEIDRMIPfQOhV
-	GKb0xICrJ/+QMp4fcbUSCoKBqr4U2F6itsskCoi7rrGd3wx7zM4nDY+gg5YMBq49drZ8
-	JwSflQm8sTszBEn/CERB16YsuKvhUiCMWn7eY=
+	bh=gds5coZ5OTV+wSNNrYDxOInluQTtpPf4yqoPikAwMrI=;
+	b=FXrEQ4GC1Opr8LDLDkIQS4EEGlR11KtD9uYZFtzcnLW6dNPQWEgg+M20QLMYcBsB/n
+	iQFgOwp+BYDDQcTKwDV1+MlCwmp/5kMEBppNDNCtMSg6Jz0SpT4uFkfSXTVIL5QczSCG
+	0NmA1bsOq7VQiqbYGMLBaYEddUea67MV0jOFA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=cG2I1hy/N6OEQPFbStd4Pe9EXseEFBeJl2nF+82tRvnvnGMmAxb9Lzc0JZT9MsXG67
-	P3jAXTm1P6ABBej5vws1ELZEDWr5hOxQubXAwKAcgpX5xCT/jihWsJkyvbPdS+DMTiUX
-	bgMb3RZ5ZY333sfnXR5+IuYwtTcpyRHUe4W1o=
+	b=pfeeSRT/InOaAkOqIyDBk6pmZf2vXdiwyy99v+FcN8y7giMFEzQlmt5YBVX0Ghr4uq
+	aVTKsF7eoKK8FlBD14w76Jhs9ugDR+6bk3EZ6Jt3agnrjSMHHaKNNSwsPgW4mdzEQaKf
+	ZwpHWRKqgxGgYS8X/99J/5VB3bLldTnw+BRVc=
 MIME-Version: 1.0
-Received: by 10.223.117.17 with SMTP id o17mr12856271faq.54.1281101196821; 
-	Fri, 06 Aug 2010 06:26:36 -0700 (PDT)
-Received: by 10.223.164.79 with HTTP; Fri, 6 Aug 2010 06:26:36 -0700 (PDT)
-In-Reply-To: <alpine.LRH.2.00.1007270937190.16525@linux.fjfi.cvut.cz>
-References: <20100727010733.1B6BB46773@linux.fjfi.cvut.cz>
-	<20100727071827.GA3397@rhein.zuhause.netz>
-	<alpine.LRH.2.00.1007270937190.16525@linux.fjfi.cvut.cz>
-Date: Fri, 6 Aug 2010 15:26:36 +0200
-Message-ID: <AANLkTik=kc6yux=p=vrW0i=CyrtZW5dZuN-u-+DZFOOJ@mail.gmail.com>
+Received: by 10.223.125.196 with SMTP id z4mr12861878far.80.1281102874806; 
+	Fri, 06 Aug 2010 06:54:34 -0700 (PDT)
+Received: by 10.223.164.79 with HTTP; Fri, 6 Aug 2010 06:54:34 -0700 (PDT)
+In-Reply-To: <AANLkTik-B0=_JyGLe1dpz9x+h-HE+H8AWd22uO8ioeaG@mail.gmail.com>
+References: <4C5A612E.9040702@gmail.com>
+	<AANLkTik-B0=_JyGLe1dpz9x+h-HE+H8AWd22uO8ioeaG@mail.gmail.com>
+Date: Fri, 6 Aug 2010 15:54:34 +0200
+Message-ID: <AANLkTimGYvMxV0MfaVZ8qRFCoFus8NMcUnJyBVHO8NB5@mail.gmail.com>
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
@@ -39,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/3] cmake-native: add recipe for cmake 2.8.2.
+Subject: Re: [PATCH] Remove redundant dependencies upon opkg and opkg-collateral.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,53 +52,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Aug 2010 13:26:47 -0000
+X-List-Received-Date: Fri, 06 Aug 2010 13:54:46 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Tue, Jul 27, 2010 at 9:43 AM, David Kozub <zub@linux.fjfi.cvut.cz> wrote:
-> On Tue, 27 Jul 2010, Henning Heinold wrote:
+On Thu, Aug 5, 2010 at 4:15 PM, Chris Larson <clarson@kergoth.com> wrote:
+> On Wed, Aug 4, 2010 at 11:58 PM, Graham Gower <graham.gower@gmail.com>wrote:
 >
->> Eduardo Lima sends in patches for cmake 2.8 too. So please coordinate with
->> him.
->> I would like to see a fine recipe with which uses the latest features
->> available in OE like BBCLASSEXTENDED and so on.
+>> rootfs_ipk.bbclass already pulls these in, so avoid some confusion.
+>>
+>> This is totally untested.
+>>
+>> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+>>
 >
-> I missed it. It even seems he's been working on webkit-efl too. I'll try to
-> contact him.
+> Looks reasonable to me.
 >
-> As for the cmake - I tried and failed. My problem is:
->
-> * cmake is built using cmake-native, and it uses inherit cmake
->
-> * I can't have inherit cmake in the native recipe, as it would be a circular
-> dependency
->
-> * I got stuck on: can I somehow "inherit cmake" only for the non-native
-> case?
+> Acked-by: Chris Larson <clarson@kergoth.com>
 
-looks strange, but works:
-BBCLASSEXTEND = "native"
-IS_NATIVE = "no"
-IS_NATIVE_virtclass-native = "yes"
-INHERIT += " ${@base_conditional("IS_NATIVE", "no", "autotools cmake",
-"autotools", d)}"
+I've already pushed it, but too late I noticed that only rootfs_ipk is
+handling DISTRO_PACKAGE_MANAGER and rpm/deb based rootfs will probably
+loose DISTRO_PACKAGE_MANAGER from image.
 
-looks even better, and still works:
-INHERIT_CLASSES = "autotools cmake"
-INHERIT_CLASSES_virtclass-native = "autotools"
-INHERIT += ${INHERIT_CLASSES}
-
-looks even better, and fails somehow :/:
-INHERIT_CLASSES = "cmake"
-INHERIT_CLASSES_virtclass-native = ""
-inherit autotools ${INHERIT_CLASSES}
-
-looks better, but fails:
-INHERIT_CLASSES = "autotools cmake"
-INHERIT_CLASSES_virtclass-native = "autotools"
-inherit ${INHERIT_CLASSES}
--> ParseError: Could not inherit file classes/autotools cmake.bbclass
-
-Tested only by checking -e output!
+Should I revert now or can we fix it soon?
 
 
