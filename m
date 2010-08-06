@@ -1,31 +1,48 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OhIqE-0003CH-TL for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Aug 2010 11:03:52 +0200
-Received: from f053037080.adsl.alicedsl.de ([78.53.37.80]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OhIqA-0001JX-SC for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Aug 2010 09:03:47 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OhJIJ-0004st-7U
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 06 Aug 2010 11:32:53 +0200
+Received: by fxm12 with SMTP id 12so3820100fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 06 Aug 2010 02:32:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=8JaUxtsC2kU2SrJ2NWNRQabX8TC+USoeL95rH209Sx0=;
+	b=HYySh+b0lfPa/f3B0MdRkm7y9031uJ4fo9xG60jTTBeYn4/RXW7HlOmYht5nPHd4TH
+	zQRhumUZDjr5kYkf5AsbNLOhERIv/2cXxizFq+85MRB/boDct2SDsyj4HoHrKRFvzOea
+	2rEqUAS7TkBwBcm87i7LBUQeBwqxLIqMR+QMU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=o07P6K3Q0wjiJBsrza2kuBbSEb0zH0l9knjzFsputpi/KWAA1H7gXUfSfUmNISe1fx
+	3yOajWha1+oxVGt2wWL94nAMBOFgpjlVl6LltUhStRXWb4+0Hv/wE26CvX9e43yK57BH
+	sv0Hg7WvmaN9wj5L+aXZ+X7jOJlOz6CWwwIa0=
+MIME-Version: 1.0
+Received: by 10.204.47.214 with SMTP id o22mr7610188bkf.17.1281087164986; Fri, 
+	06 Aug 2010 02:32:44 -0700 (PDT)
+Received: by 10.204.21.6 with HTTP; Fri, 6 Aug 2010 02:32:44 -0700 (PDT)
+In-Reply-To: <AANLkTim41rfG5eqwrEu5goiqFZqhZK3XY2Pq=shdANTU@mail.gmail.com>
+References: <AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>
+	<1280926084-7605-1-git-send-email-henri.bragge@dcombus.com>
+	<AANLkTinnz+cB5Au1hMsniwFbCSjo-EaNWoR=9Xae4krA@mail.gmail.com>
+	<loom.20100805T104704-558@post.gmane.org>
+	<AANLkTik=13a7k7D1n=VfJnqO5DdPy5PUVdLdnDHtZh1d@mail.gmail.com>
+	<AANLkTim41rfG5eqwrEu5goiqFZqhZK3XY2Pq=shdANTU@mail.gmail.com>
+Date: Fri, 6 Aug 2010 11:32:44 +0200
+Message-ID: <AANLkTincP+hP1RSsA+u5+HQ3xKLFgDkt7x4R-hN3kOsP@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <i3f3gm$5lu$1@dough.gmane.org>
-References: <i3f3gm$5lu$1@dough.gmane.org>
-Date: Fri, 06 Aug 2010 11:03:42 +0200
-Message-ID: <1281085422.3809.7.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patchwork, please keep patches up to date
+Subject: Re: [PATCH v2 1/2] recipe for gsnmp-0.3.0
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,56 +56,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Aug 2010 09:03:52 -0000
-X-Groupsio-MsgNum: 21936
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-yKIZEdDw7kC9WbDWXSet"
+X-List-Received-Date: Fri, 06 Aug 2010 09:32:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-yKIZEdDw7kC9WbDWXSet
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+2010/8/5 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> This one also failed building with a similar QA issue:
+>
+> NOTE: Running task 629 of 630 (ID: 10,
+> /home/frans/oe/openembedded/recipes/gsnmp/gsnmp_0.3.0.bb,
+> do_qa_staging)
+> ERROR: QA Issue with staging: libexslt.pc failed sanity test (tmpdir)
+> in path /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig
+> ERROR: QA Issue with staging: libxslt.pc failed sanity test (tmpdir)
+> in path /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig
+> ERROR: QA staging was broken by the package built above
+>
+>
+> see http://tinderbox.openembedded.net/builds/81312
+>
+> No idea how exactly to fix this.
+>
+> Frans
+>
+Please disregard ths comment and the one on the other recipe.
+Apparently some other recipe (libxslt) left a faulty pc file in pkgconfig.
+That is something that needs to be repaired (although I woudl not know
+how), but does not affect your recipe.
 
-Dear OE folks,
+Your recipes have been tested, build nicely and have been pushed.
+Thank you for your contribution, and again apologies for any
+inconvenience caused by the above mail)
 
-
-Am Donnerstag, den 05.08.2010, 21:30 +0200 schrieb Koen Kooi:
-
-[=E2=80=A6]
-
-> I had a look around patchwork and I noticed lots of duplicates and
-> already applied patches are still in the queue, so I have a small request=
-:
->=20
-> Could the people sending patches to this mailinglist update their status
-> in patchwork? And can people applying patches also update the status?
-
-there is also `pwclient` for the command line. Please take a look at the
-Wiki page [1] for more information.
-
-By the way, there are some examples in the Patchwork repository for post
-commit hooks to mark those patches automatically as applied. (Since the
-Patchwork repository is not browsable take a look at [2] for example.)
-
-
-Thanks,
-
-Paul
+Frans
 
 
-[1] http://wiki.openembedded.net/index.php?title=3DPatchwork
-[2] http://lists.ozlabs.org/pipermail/patchwork/2010-February/000224.html
-
---=-yKIZEdDw7kC9WbDWXSet
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxbz+gACgkQPX1aK2wOHVi6ZQCeO094xZq5TYZQaBfqZGV31eRY
-usMAnA6FoutguAIkDtmBZj8hkGCUjoH1
-=6ZiA
------END PGP SIGNATURE-----
-
---=-yKIZEdDw7kC9WbDWXSet--
