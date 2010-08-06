@@ -1,54 +1,40 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rep.dot.nop@gmail.com>) id 1OhKBf-0000ln-LA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OhKFt-0004l9-Ez
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 06 Aug 2010 12:30:04 +0200
-Received: by fxm12 with SMTP id 12so3858847fxm.6
+	Fri, 06 Aug 2010 12:34:27 +0200
+Received: by fxm12 with SMTP id 12so3861697fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Aug 2010 03:29:56 -0700 (PDT)
+	Fri, 06 Aug 2010 03:34:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=Ylair2xctsbLzAN0/R56fearcdkA8CM3elTbwNFruxA=;
-	b=o+fIpuaZh9QyzO2yczLzkWtPxtfqpCN7DtIvCOUFf/ngxlB0g9Xu8uvaEHjJVR7LTH
-	n/8A6KqUtIJ14HooSxJBJ9FqfFgmDainMSz1mJEmQuDvyWgBqgV+p95AhLa25M4MyuC3
-	U0pZ2hSWyArzLYsBnvHlQ7imY6vukhaLiF4Ks=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=yQ3hpLI6bTbTHYi66gkuAjawvDTZP7jFUdmdsABaZ0k=;
+	b=nuThGoV1sOdih0kwOFLZSswygzz8YCWK4L7T2IdgfTr/MQsUfO96z8a18jYYB6imoz
+	MlPeDoUSPgbLziu1qi0fyAiqH1BBMoHQ2Gu433kaT5lFObPB/phUvaZBoPXK829maZI1
+	P9C7LqLQvNyAuyEUanyYqAHo1tR9vKswO/drg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=XhLl7hXIphtFErPwt1aiSi4XHQPJZ0L4p4UkK2LgoJiZ85Y270v2HhlOw/gZJbQPQb
-	iHnSA9FpwDEnc4wY3Uw6ZZi6Uzb5/Xdm+W1GhZSJwWh7HFhcJpbyMpIZkB/OWujt+/K9
-	MC2s1STyQtOOrfPV95SWUfkA+UfbnUMZJYT0c=
-Received: by 10.223.121.4 with SMTP id f4mr12519844far.71.1281090596680;
-	Fri, 06 Aug 2010 03:29:56 -0700 (PDT)
-Received: from s42.loc (85-127-241-5.dynamic.xdsl-line.inode.at [85.127.241.5])
-	by mx.google.com with ESMTPS id f11sm557248fak.20.2010.08.06.03.29.55
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 06 Aug 2010 03:29:55 -0700 (PDT)
-Received: from cow by s42.loc with local (Exim 4.72)
-	(envelope-from <rep.dot.nop@gmail.com>)
-	id 1OhKBU-0003Pq-3w; Fri, 06 Aug 2010 12:29:52 +0200
-Date: Fri, 6 Aug 2010 12:29:52 +0200
-From: Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100806102952.GA11929@mx.loc>
-References: <1281087632-11759-1-git-send-email-rep.dot.nop@gmail.com>
-	<1281087632-11759-3-git-send-email-rep.dot.nop@gmail.com>
-	<1281089249.3809.68.camel@mattotaupa>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=r9jJ2hJJbgntXUryp/rCtYE1nZ58vAG5pEWvJqVfo7GLJi2A2Db1R1D8Q0dy1LOH3a
+	LVr15D5xxLSSCTydQpJpP9hyTRInhKHQayCT3DBCxyUbV98AXBgcVqB0GNuInK+fdDUf
+	l9OZuV35uZkjv3sg4KjrkJJ9Ej5Klak+44uV8=
 MIME-Version: 1.0
-In-Reply-To: <1281089249.3809.68.camel@mattotaupa>
-User-Agent: Mutt/1.5.20 (2009-06-14)
+Received: by 10.204.143.138 with SMTP id v10mr42550bku.133.1281090859070; Fri, 
+	06 Aug 2010 03:34:19 -0700 (PDT)
+Received: by 10.204.21.6 with HTTP; Fri, 6 Aug 2010 03:34:19 -0700 (PDT)
+Date: Fri, 6 Aug 2010 12:34:19 +0200
+Message-ID: <AANLkTinsm+MNgkpDw8X=TCV_V4vTFFmnAxSyhGA3fkvN@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: rep.dot.nop@gmail.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/4] git: add 1.7.2.1
+Subject: [RFD] openmoko status (and more specifically ./distro/include/preferred-om-2008-versions.inc)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -62,17 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 06 Aug 2010 10:30:04 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 06 Aug 2010 10:34:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Aug 06, 2010 at 12:07:29PM +0200, Paul Menzel wrote:
+Hi,
 
->did you take Yann’s patches into consideration [1].
+I was wondering whether someone is still doing something with openmoko.
+Rationale for asking is that om-2008 pins a lot of recipes in
+./distro/include/preferred-om-2008-versions.inc
+Now that is not necessarily bad, but some of those pinngs are to very
+old recipes. Some of these recipes use legacy staging, whereas the
+leading recipe (which is much newer) does not use legacy staging any
+more.
 
->[1] http://patchwork.openembedded.org/patch/2543/
+That brought me to the question is anyone still using this?
+If not, should we remove om support (or at least release the pinnings)
+so some of those old recipes can be retired.
 
-Didn't see that, no. Let me verify this.
+And if it still used, may I request the users to either
+- move to later versions (especially for versions that have a -native
+variant or use legacy staging)
+or (at your discretion)
+- fix the recipe involved.
+
+Best regards, Frans
 
 
