@@ -1,49 +1,47 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OhYYF-0007CB-Bl
+	(envelope-from <graham.gower@gmail.com>) id 1OhZ4V-0004BE-Ll
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Aug 2010 03:50:20 +0200
-Received: by wwi17 with SMTP id 17so1750883wwi.24
+	Sat, 07 Aug 2010 04:23:41 +0200
+Received: by iwn38 with SMTP id 38so1777054iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Aug 2010 18:50:11 -0700 (PDT)
+	Fri, 06 Aug 2010 19:23:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=UQa720gBp7B71NKDAFD4keOJ+VqTHLj5/8ivoheSW8c=;
-	b=A6U+j1/W3MTaq5RDKQf0J64kUZyPvaWn0TFTlvBWJ117Kvw1dv+Db3vHAfX9KI6u2a
-	CsGSANqfDTQkrTze9m7Hl3gNDCEPW2zzLpldQdd2vi/e8S+rDaQ9PNEu2hZIbc+5Bbju
-	+noxqV2o0tr3T9Cnl1ok1xasX77SEe3VBjY8g=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=kbq/bItuvh+tAH7KgX1V6C/4zgDQLcp6ZV9ugjq+4yI=;
+	b=bGjswHvX9rwiFPdejEtu6ETUVVxLPv50a1Lff4Y4PgacIqPICmAVvz56iZHhl2rNe8
+	WOJQhNRMGCgvOk3m6eLOr22O/b9dARV2uwqW0ATLSVnP4F+AWaHbXK+NyqLlgW2yj3na
+	wVRa0V2sCY20kPbmX7YL9VMqOAFYYy7f57cXk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=GfBxC0N9iWn1Dwt/Hl+2hLK70N+aozuYDCRrw7VCfuA1J5WkzIMcyo0qQ4+k/ykrSF
-	JQamIN5Whswp7qeddpNik3EZLcon3C5Dj/DUPH2pyRpDzBbhRGiComHe//NT+yQmQu2E
-	KAPpOjAAoz7tePUL07bqpkEQt+fv4EkH/hTdI=
-Received: by 10.216.30.10 with SMTP id j10mr181895wea.8.1281145811291; Fri, 06
-	Aug 2010 18:50:11 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=VBTwy11BSgXFOMjcL4DS22NyhUEmV5U7GZzjY4ZwJTLh7INYCEnXGkUiHdqPjm72r8
+	kr5/z93qmf4Sd9e60nEtPBC6P2XHHCNvU+kgpDadwky3tyQshm5mQIfNUKr6PmxvUN3K
+	A8N9fI1WE0wvLL4yLSTr5hktdfR88PQ7dAGYc=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.16.204 with HTTP; Fri, 6 Aug 2010 18:49:51 -0700 (PDT)
-In-Reply-To: <AANLkTim14Nqs6SJvda5YsD883HZxTp0jiRTbReM4QXGd@mail.gmail.com>
+Received: by 10.231.166.72 with SMTP id l8mr14657072iby.95.1281147809880; Fri, 
+	06 Aug 2010 19:23:29 -0700 (PDT)
+Received: by 10.231.145.77 with HTTP; Fri, 6 Aug 2010 19:23:29 -0700 (PDT)
+In-Reply-To: <AANLkTikiJFvOn_=VkTf7y5LTCUh5WOqfOhj8Udwbc5Ws@mail.gmail.com>
 References: <4C5A612E.9040702@gmail.com>
 	<AANLkTik-B0=_JyGLe1dpz9x+h-HE+H8AWd22uO8ioeaG@mail.gmail.com>
 	<AANLkTimGYvMxV0MfaVZ8qRFCoFus8NMcUnJyBVHO8NB5@mail.gmail.com>
 	<AANLkTim14Nqs6SJvda5YsD883HZxTp0jiRTbReM4QXGd@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 6 Aug 2010 18:49:51 -0700
-X-Google-Sender-Auth: Dk1eAqkkp85IZirvnzxZ62MraLE
-Message-ID: <AANLkTikiJFvOn_=VkTf7y5LTCUh5WOqfOhj8Udwbc5Ws@mail.gmail.com>
+	<AANLkTikiJFvOn_=VkTf7y5LTCUh5WOqfOhj8Udwbc5Ws@mail.gmail.com>
+Date: Sat, 7 Aug 2010 11:53:29 +0930
+Message-ID: <AANLkTi=B6DBq0z0Ra5OhB6iqirTCGje2-snfFodwfHUi@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] Remove redundant dependencies upon opkg and opkg-collateral.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -58,60 +56,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Aug 2010 01:50:20 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 07 Aug 2010 02:23:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 6, 2010 at 6:29 PM, Graham Gower <graham.gower@gmail.com> wrote:
+On 7 August 2010 11:19, Chris Larson <clarson@kergoth.com> wrote:
+>
+> BOOTSTRAP_EXTRA_RDEPENDS is a remnant. =A0We wouldn't want them controlli=
+ng it
+> from there anyway. =A0The fact that I INHERIT package_ipk doesn't mean I'=
+m
+> constructing an ipk image, only that I'm *emitting* packages of that
+> format. =A0IMAGE_PKGTYPE controls which rootfs_* bbclass will be used to
+> construct the image, but that doesn't control which package *manager* for
+> that type will be used, nor whether it should be installed at all
+> (ONLINE_PACKAGE_MANAGEMENT).
 
-> On 6 August 2010 23:24, Martin Jansa <martin.jansa@gmail.com> wrote:
-> > On Thu, Aug 5, 2010 at 4:15 PM, Chris Larson <clarson@kergoth.com>
-> wrote:
-> >> On Wed, Aug 4, 2010 at 11:58 PM, Graham Gower <graham.gower@gmail.com
-> >wrote:
-> >>
-> >>> rootfs_ipk.bbclass already pulls these in, so avoid some confusion.
-> >>>
-> >>> This is totally untested.
-> >>>
-> >>> Signed-off-by: Graham Gower <graham.gower@gmail.com>
-> >>>
-> >>
-> >> Looks reasonable to me.
-> >>
-> >> Acked-by: Chris Larson <clarson@kergoth.com>
-> >
-> > I've already pushed it, but too late I noticed that only rootfs_ipk is
-> > handling DISTRO_PACKAGE_MANAGER and rpm/deb based rootfs will probably
-> > loose DISTRO_PACKAGE_MANAGER from image.
-> >
-> > Should I revert now or can we fix it soon?
-> >
->
-> DISTRO_PACKAGE_MANAGER has been removed altogether. I can't see how it
-> would work reliably for all images - which is probably why it had
-> multiple definitions in the first place. And you could still end up
-> with opkg in your image when setting it to something else, e.g.
-> minimal-gpe-image and slugos pulled opkg in unconditionally.
-> DISTRO_PACKAGE_MANAGER could be fixed if it was put in a common
-> location like image.bbclass.
->
-> What is the intended mechanism for selecting a package manager?
-> INHERIT = "package_foo" looks like its going to do the trick for ipk
-> and deb. package_rpm.bbclass might need BOOTSTRAP_EXTRA_RDEPENDS +=
-> "rpm" or something.
->
+Thanks, that does clear up how things are intended to behave. However
+it doesn't reflect the reality of package_deb.bbclass and
+package_ipk.bbclass, which both add their package managers to the
+image unconditionally. i.e. using INHERIT=3D"package_ipk" and
+ONLINE_PACKAGE_MANAGEMENT=3D"none" will still get you an image with opkg
+installed.
 
-BOOTSTRAP_EXTRA_RDEPENDS is a remnant.  We wouldn't want them controlling it
-from there anyway.  The fact that I INHERIT package_ipk doesn't mean I'm
-constructing an ipk image, only that I'm *emitting* packages of that
-format.  IMAGE_PKGTYPE controls which rootfs_* bbclass will be used to
-construct the image, but that doesn't control which package *manager* for
-that type will be used, nor whether it should be installed at all
-(ONLINE_PACKAGE_MANAGEMENT).
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+My intention here is to cut off some of opkg's tentacles in OE. I
+expect more pruning will be required.
+
+-Graham
+
 
