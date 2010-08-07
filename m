@@ -1,48 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OhZ4V-0004BE-Ll
+	(envelope-from <raj.khem@gmail.com>) id 1OhcTR-0008Pe-5W
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 07 Aug 2010 04:23:41 +0200
-Received: by iwn38 with SMTP id 38so1777054iwn.6
+	Sat, 07 Aug 2010 08:02:11 +0200
+Received: by pzk2 with SMTP id 2so3138484pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 06 Aug 2010 19:23:29 -0700 (PDT)
+	Fri, 06 Aug 2010 23:01:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=kbq/bItuvh+tAH7KgX1V6C/4zgDQLcp6ZV9ugjq+4yI=;
-	b=bGjswHvX9rwiFPdejEtu6ETUVVxLPv50a1Lff4Y4PgacIqPICmAVvz56iZHhl2rNe8
-	WOJQhNRMGCgvOk3m6eLOr22O/b9dARV2uwqW0ATLSVnP4F+AWaHbXK+NyqLlgW2yj3na
-	wVRa0V2sCY20kPbmX7YL9VMqOAFYYy7f57cXk=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=0/ri2l47FX8fXgpl/9kpCWcAMeb3HsUz1pKoAmg+Gno=;
+	b=Wg9tpAk16cJQIHY8T5AktLbESq+d4PNXvux2KMcIkUN8hWG6DpZjJ/xqERYGbz8US/
+	1u0wxG+nlTYzMp6km6bA18cTEDscU7LGLu/zs0yPVZcrsnd4WkqflIzwn/tkY1HC7pWV
+	nNj21s+lKL/PIantJ8SFK62tCIIJqdcJSbnKo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=VBTwy11BSgXFOMjcL4DS22NyhUEmV5U7GZzjY4ZwJTLh7INYCEnXGkUiHdqPjm72r8
-	kr5/z93qmf4Sd9e60nEtPBC6P2XHHCNvU+kgpDadwky3tyQshm5mQIfNUKr6PmxvUN3K
-	A8N9fI1WE0wvLL4yLSTr5hktdfR88PQ7dAGYc=
-MIME-Version: 1.0
-Received: by 10.231.166.72 with SMTP id l8mr14657072iby.95.1281147809880; Fri, 
-	06 Aug 2010 19:23:29 -0700 (PDT)
-Received: by 10.231.145.77 with HTTP; Fri, 6 Aug 2010 19:23:29 -0700 (PDT)
-In-Reply-To: <AANLkTikiJFvOn_=VkTf7y5LTCUh5WOqfOhj8Udwbc5Ws@mail.gmail.com>
-References: <4C5A612E.9040702@gmail.com>
-	<AANLkTik-B0=_JyGLe1dpz9x+h-HE+H8AWd22uO8ioeaG@mail.gmail.com>
-	<AANLkTimGYvMxV0MfaVZ8qRFCoFus8NMcUnJyBVHO8NB5@mail.gmail.com>
-	<AANLkTim14Nqs6SJvda5YsD883HZxTp0jiRTbReM4QXGd@mail.gmail.com>
-	<AANLkTikiJFvOn_=VkTf7y5LTCUh5WOqfOhj8Udwbc5Ws@mail.gmail.com>
-Date: Sat, 7 Aug 2010 11:53:29 +0930
-Message-ID: <AANLkTi=B6DBq0z0Ra5OhB6iqirTCGje2-snfFodwfHUi@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=DemC1gcWWXKB15psFSKrD1n+lADmRY79wdkfMVKnG6zoQYW1hbRsSr9Xl4x7aAtXmz
+	jGsx6v63O9GDCfojDffFdJn/+FwSyKzA+mVtBD95DvnqUCrJcfg/Y0AociEtlRang0v+
+	XBvCZzKp8liMZI4LJDulpbe37t7jYp8AeuGFk=
+Received: by 10.114.113.5 with SMTP id l5mr15209774wac.53.1281160889086;
+	Fri, 06 Aug 2010 23:01:29 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id x9sm4412587waj.3.2010.08.06.23.01.25
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 06 Aug 2010 23:01:28 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Fri,  6 Aug 2010 23:01:22 -0700
+Message-Id: <1281160882-3811-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	TVD_SPACE_RATIO autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Remove redundant dependencies upon opkg and opkg-collateral.
+Subject: [PATCH] preferred-om-2008-versions.inc: Update PREFERRED_VERSION for libftdi confuse and ftdi_eeprom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,32 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 07 Aug 2010 02:23:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 07 Aug 2010 06:02:13 -0000
+X-List-Received-Date: Sat, 07 Aug 2010 06:02:13 -0000
 
-On 7 August 2010 11:19, Chris Larson <clarson@kergoth.com> wrote:
->
-> BOOTSTRAP_EXTRA_RDEPENDS is a remnant. =A0We wouldn't want them controlli=
-ng it
-> from there anyway. =A0The fact that I INHERIT package_ipk doesn't mean I'=
-m
-> constructing an ipk image, only that I'm *emitting* packages of that
-> format. =A0IMAGE_PKGTYPE controls which rootfs_* bbclass will be used to
-> construct the image, but that doesn't control which package *manager* for
-> that type will be used, nor whether it should be installed at all
-> (ONLINE_PACKAGE_MANAGEMENT).
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/distro/include/preferred-om-2008-versions.inc |   12 ++++++------
+ 1 files changed, 6 insertions(+), 6 deletions(-)
 
-Thanks, that does clear up how things are intended to behave. However
-it doesn't reflect the reality of package_deb.bbclass and
-package_ipk.bbclass, which both add their package managers to the
-image unconditionally. i.e. using INHERIT=3D"package_ipk" and
-ONLINE_PACKAGE_MANAGEMENT=3D"none" will still get you an image with opkg
-installed.
+diff --git a/conf/distro/include/preferred-om-2008-versions.inc b/conf/distro/include/preferred-om-2008-versions.inc
+index c2e68a9..92bb71d 100644
+--- a/conf/distro/include/preferred-om-2008-versions.inc
++++ b/conf/distro/include/preferred-om-2008-versions.inc
+@@ -172,8 +172,8 @@ PREFERRED_VERSION_cmake-native ?= "2.4.7"
+ PREFERRED_VERSION_cms92init ?= "0.1"
+ PREFERRED_VERSION_compositeproto ?= "0.4"
+ PREFERRED_VERSION_comprec ?= "0.02"
+-PREFERRED_VERSION_confuse ?= "2.5"
+-PREFERRED_VERSION_confuse-native ?= "2.5"
++PREFERRED_VERSION_confuse ?= "2.7"
++PREFERRED_VERSION_confuse-native ?= "2.7"
+ PREFERRED_VERSION_connect ?= "0.1"
+ PREFERRED_VERSION_connman ?= "0.15"
+ PREFERRED_VERSION_conserver ?= "8.1.14"
+@@ -401,8 +401,8 @@ PREFERRED_VERSION_froot ?= "0.7.1"
+ PREFERRED_VERSION_frotz ?= "2.43"
+ PREFERRED_VERSION_frozen-bubble ?= "1.0.0"
+ PREFERRED_VERSION_fsi-client ?= "20040803"
+-PREFERRED_VERSION_ftdi-eeprom ?= "0.2"
+-PREFERRED_VERSION_ftdi-eeprom-native ?= "0.2"
++PREFERRED_VERSION_ftdi-eeprom ?= "0.3"
++PREFERRED_VERSION_ftdi-eeprom-native ?= "0.3"
+ PREFERRED_VERSION_ftpd-topfield ?= "0.7.4"
+ PREFERRED_VERSION_fuse ?= "2.6.5"
+ PREFERRED_VERSION_fuse-module ?= "2.6.5"
+@@ -869,8 +869,8 @@ PREFERRED_VERSION_libfontenc ?= "1.0.4"
+ PREFERRED_VERSION_libfontenc-native ?= "1.0.4"
+ PREFERRED_VERSION_libfribidi ?= "0.10.4"
+ PREFERRED_VERSION_libfs ?= "1.0.0"
+-PREFERRED_VERSION_libftdi ?= "0.9"
+-PREFERRED_VERSION_libftdi-native ?= "0.9"
++PREFERRED_VERSION_libftdi ?= "0.18"
++PREFERRED_VERSION_libftdi-native ?= "0.18"
+ PREFERRED_VERSION_libg15 ?= "1.2.1"
+ PREFERRED_VERSION_libg15render ?= "1.2"
+ PREFERRED_VERSION_libgalago ?= "0.3.3"
+-- 
+1.7.1
 
-My intention here is to cut off some of opkg's tentacles in OE. I
-expect more pruning will be required.
-
--Graham
 
 
