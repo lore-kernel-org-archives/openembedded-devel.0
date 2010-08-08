@@ -1,40 +1,30 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oi8C7-00073q-JZ
+	(envelope-from <roman@khimov.ru>) id 1OiA2D-0003Ai-UN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Aug 2010 17:53:53 +0200
-Received: by iwn38 with SMTP id 38so2904141iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Aug 2010 08:53:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=bSYDF04zYkIugPukX7tO/jteAGaCaTxp7lReYFkHWI4=;
-	b=l0V/w/4AjGevDhjSMzUzvUoRHVD+PAuypQJQmYJ+HB9GV+GivYIo18PFYO0V/zZgJR
-	G3sMMQkWAzDUKL3g9jglGJhtLGPGKDL7n4NlaoDJfW5ks+3y7MPR29vOZqAbg88hylTy
-	SG46ZXjhBBl1sBTRUfwXWrSj+cpEpLxc/LvMM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=l7KE1h6TDy41ZvZclzc4pk+N4xpmhYElQsgNfqmZEJgWKhWm3U9uPVmUBempT1iB6Y
-	KCbQhym0F3EtAzzglm4KjAo1iBqBZBxVSjhfXbHJQSfr+5x99Z5oCrwkTaIw0gM61Zlk
-	DitgsKfUtvYl40zJAq3L4cpPUNK4I3BcrqFD8=
-MIME-Version: 1.0
-Received: by 10.231.174.84 with SMTP id s20mr17744441ibz.94.1281282822400; 
-	Sun, 08 Aug 2010 08:53:42 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Sun, 8 Aug 2010 08:53:42 -0700 (PDT)
-Date: Sun, 8 Aug 2010 17:53:42 +0200
-Message-ID: <AANLkTim_ukfazSeQbS5H_f=ouSzf1QUbJL3PvLivP9+O@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Sun, 08 Aug 2010 19:55:44 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Oi9zh-0002Yw-PQ
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 08 Aug 2010 21:51:27 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sun, 8 Aug 2010 21:48:53 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <AANLkTikqC4jZ2YrjVUiibof1vCOMUhr4=uq4UWFGtdo0@mail.gmail.com>
+In-Reply-To: <AANLkTikqC4jZ2YrjVUiibof1vCOMUhr4=uq4UWFGtdo0@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201008082148.56554.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: autotools issues (MKINSTALLDIRS, -s_
+Subject: Re: [PATCH] pkgconfig.bbclass: Remove spurious rpaths and -isystem includes from pkgconfig files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,60 +38,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Aug 2010 15:53:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 08 Aug 2010 17:55:45 -0000
+X-Groupsio-MsgNum: 21973
+Content-Type: multipart/signed; boundary="nextPart5156106.Lm6uZpcHL0";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Hi,
+--nextPart5156106.Lm6uZpcHL0
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm not too good in autotools. While makeing the git recipe for urjtag
-I bumped into the following two issues:
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D0=BE=D1=81=D0=BA=D1=80=D0=B5=D1=81=D0=B5=D0=BD=D1=8C=D0=B5 08 =D0=
+=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2010 07:14:49 =D0=B0=D0=B2=D1=82=D0=
+=BE=D1=80 Ash Charles =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> -                       -e 's:-I${STAGING_INCDIR}::g' \
+> +                       -e 's:-rpath-link,${STAGING_LIBDIR}::g' \
+> +                       -e 's:-I${STAGING_INCDIR}:-I${prefix}/include:g' \
+> +                       -e 's:-isystem${STAGING_INCDIR}::g' \
 
-First of all it seems autoreconf needs the -s flag. This tells to use
-symlinks. Guess things are done out of order or so.
-I've fixed this by adding EXTRA_AUTORECONF = "-s" to my recipes. That
-makes configure happy, but it does not really feel as a good solution.
+I have "-isystem..." change in my own patch queue and rpath-link should be=
+=20
+fine also. I'm not so sure about incdir or libdir change though.
 
-The second issue is that install fails.
-Apparently MKINSTALLDIRS does not have the proper value (it should be
-tools/mkinstalldirs, but it is an empty string).
-I've tried some things, peeked at some other patches for MKINSTALLDIRS
-but didn't really get to a satisfactory solution
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-(the only way I found now is to do a patch after configure (and maybe
-compile) have been run. That'll work but is not really a nice
-solution).
+--nextPart5156106.Lm6uZpcHL0
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-What makes things even stranger is that the 0.10 version of the recipe
-also uses MKINSTALLDIRS without giving any issue.
-I've troed to compare both trees, but without much success.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
-Any wizard here who can give me some guidance?
-I've just checked in urjtag_0.10.bb
-The git version is not yet in the archive but is given below.
-Anyone an idea?
+iEYEABECAAYFAkxe7ggACgkQXJ70z+XgVcP7gwCfT77QIRyvItstT2cCcYJmm2d3
+eIkAoNPIAusFd2W+XsSOrIlj0i3IQr6g
+=8Hc2
+-----END PGP SIGNATURE-----
 
-Frans
-
-ESCRIPTION = "UrJTAG is a universal JTAG library, servers and tools"
-HOMEPAGE = "http://urjtag.org/"
-LICENSE = "GPLv2"
-DEPENDS = "libftdi libusb gettext readline"
-
-SRCREV = "fc8686b8dd545f54d25e77f65e43f4d774bc46"
-
-PV = "0.10"
-PR = "r0"
-PR_append = "+gitr${SRCPV}"
-
-S = "${WORKDIR}/git/urjtag"
-
-SRC_URI = "git://urjtag.git.sourceforge.net/gitroot/urjtag/urjtag;protocol=git;branch=master
-\
-	"
-inherit autotools
-
-# no idea why -s would make a difference but without it configure fails.
-# guess the symlink is created before the actual content is there
-EXTRA_AUTORECONF = "-s"
-
-
+--nextPart5156106.Lm6uZpcHL0--
