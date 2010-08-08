@@ -1,40 +1,45 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ashcharles@gmail.com>) id 1OhwM2-00043R-GZ
+	(envelope-from <aspnair@gmail.com>) id 1Oi1iB-0000OB-WA
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Aug 2010 05:15:19 +0200
-Received: by qyk11 with SMTP id 11so1059815qyk.6
+	Sun, 08 Aug 2010 10:59:00 +0200
+Received: by iwn38 with SMTP id 38so2702741iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 07 Aug 2010 20:15:09 -0700 (PDT)
+	Sun, 08 Aug 2010 01:58:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=wjqD04GQlYsZJGa4Jx3unrNY0w116yMotj7n8FA6bTg=;
-	b=eOPXLTxojXD2hjtQPZVjMg6/k96JaRXuWwaHcJJaSqqJ7MNERNPDMIVzLXg0a+zls4
-	PqYKd03UlCX2ql2rGKhRKQAJbWMD/EKJD0Bh260wYJMd94WsGPSKYcY+tcFjoL6hSqMe
-	YVuIat5rW2NCVPN3oNrIOO+0nMi+/bijXVN6A=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=g5JCJJoKKUBxjOqCyQWcf23Wf03HradyxlgRpsPVIx4=;
+	b=BjFr2wPoyk4dlfmONz/Cyfgxh2oq3aeI1nI5npY3WwxvyBwLi2IduRCAe4bQy/zlBD
+	f941Lae2AszDiL0sDNc+Spz1ZTIqx7X2OYN79Bm9f1p8cKze+DFDS6RlPWFvmAtUM/pO
+	4VzuuYsl2QBwLs3Olh8+1P6nG5jl1XT4RBObc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=DBUCoXw+uxb3LKbkWaVgTt333k3ckydOAr9oNdgMwedUCecvHC4qCCF4hKnlgYaRcP
-	ZAuOJTie2zjqk41OE5TqfizgNBuZOwdTVbv2FOpydNxgxn1n++zfEPWSt684uyrL6Kx0
-	Fju7CG/H8z/fh/r9gAp6GXviKe0i/b1wxGm7o=
-Received: by 10.224.19.195 with SMTP id c3mr5173433qab.270.1281237309100; Sat, 
-	07 Aug 2010 20:15:09 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=EZpT7m3FkTMimDB2lU1LUQAojGp4k8RdQEX8uw5aSld3sBiE55JrTyXxgHMNZeOwHR
+	FQKoOiuBdjvZanEui46yfDbNXueSZmcq9yAyrUevQKm9vEDASwmjc9Q9Hd6Jfan+dqPJ
+	hDsqJsmce2CB/ZD72A6jRxCed1BMjWN3lcTnU=
 MIME-Version: 1.0
-Received: by 10.224.89.20 with HTTP; Sat, 7 Aug 2010 20:14:49 -0700 (PDT)
-From: Ash Charles <ashcharles@gmail.com>
-Date: Sat, 7 Aug 2010 20:14:49 -0700
-Message-ID: <AANLkTikqC4jZ2YrjVUiibof1vCOMUhr4=uq4UWFGtdo0@mail.gmail.com>
+Received: by 10.231.183.81 with SMTP id cf17mr16776316ibb.32.1281257895089; 
+	Sun, 08 Aug 2010 01:58:15 -0700 (PDT)
+Received: by 10.231.145.69 with HTTP; Sun, 8 Aug 2010 01:58:15 -0700 (PDT)
+In-Reply-To: <4C5DC505.9080104@eukrea.com>
+References: <AANLkTinV5sK_s_oNS5XjbzphdOFkMi2jvkOwa4-zMj8k@mail.gmail.com>
+	<4C5DC505.9080104@eukrea.com>
+Date: Sun, 8 Aug 2010 14:28:15 +0530
+Message-ID: <AANLkTinmLkXeKMtYfdXacu-KfUaaFsOPTd6wnnbgSvOs@mail.gmail.com>
+From: Anand Sivaram <aspnair@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: ashcharles@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: aspnair@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] pkgconfig.bbclass: Remove spurious rpaths and -isystem includes from pkgconfig files.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: getting gstreamer interfaces on openembedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,62 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Aug 2010 03:15:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 08 Aug 2010 08:59:03 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+On Sun, Aug 8, 2010 at 02:11, Eric B=E9nard <eric@eukrea.com> wrote:
 
-I made the following change to my pkgconfig.bbclass to fix some
-staging-qa.  Firstly, does this patch look good (I'm still learning
-here)?  Secondly, should a change like this also be made so libraries
-specified by pkgconfig files are actually available on the target?
+> Hi,
+>
+> Le 07/08/2010 19:09, Anand Sivaram a =E9crit :
+>
+>  I am trying to build a gstreamer application which uses
+>> gstreamer-interfaces,
+>> (to be linked with -lgstinterfaces-0.10) but I could not find any recipe
+>> for that.  Any idea from where I could get a recipe for gstreamer
+>> interfaces?
+>>
+>
+> it's in libgstinterfaces-0.10-*.ipk generated from gst-plugins-base recip=
+e.
+>
+> Eric
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---- a/classes/pkgconfig.bbclass
-+++ b/classes/pkgconfig.bbclass
-@@ -2,7 +2,7 @@ DEPENDS_prepend = "pkgconfig-native "
-
- do_install_prepend () {
-        for i in `find ${S}/ -name "*.pc" -type f` ; do \
--               sed -i -e 's:-L${STAGING_LIBDIR}::g' \
-+               sed -i -e 's:-L${STAGING_LIBDIR}:-L${prefix}/lib:g' \
-...
-
-Thanks,
-
-Ash
->>>>>>
-Signed-off-by: Ash Charles <ashcharles@gmail.com>
-[PATCH] pkgconfig.bbclass: Remove spurious rpaths and -isystem
-includes from pkgconfig files.
-
-* Some build configurators such as cmake include -isystem paths to use
-the staged system headers but these should not be included in
-pkgconfig files.
-* Likewise, pkgconfig.bbclass currently strips -R options from
-pkgconfig files; this should likewise apply to -rpath-link options.
-* Finally, we currently dispose of -I paths in our pkgconfig file that
-point to the staging directory but we in fact want to modify the -I
-paths to the correct location on the target.
----
- classes/pkgconfig.bbclass |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
-
-diff --git a/classes/pkgconfig.bbclass b/classes/pkgconfig.bbclass
-index cf37ca1..ae69258 100644
---- a/classes/pkgconfig.bbclass
-+++ b/classes/pkgconfig.bbclass
-@@ -4,7 +4,9 @@ do_install_prepend () {
-        for i in `find ${S}/ -name "*.pc" -type f` ; do \
-                sed -i -e 's:-L${STAGING_LIBDIR}::g' \
-                        -e 's:-R${STAGING_LIBDIR}::g' \
--                       -e 's:-I${STAGING_INCDIR}::g' \
-+                       -e 's:-rpath-link,${STAGING_LIBDIR}::g' \
-+                       -e 's:-I${STAGING_INCDIR}:-I${prefix}/include:g' \
-+                       -e 's:-isystem${STAGING_INCDIR}::g' \
-                        $i
-         done
- }
--- 
-1.7.0.4
-
+Thanks Eric,  I could find that.
 
