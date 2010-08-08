@@ -1,30 +1,44 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OiA2D-0003Ai-UN
+	(envelope-from <graham.gower@gmail.com>) id 1OiFW0-0003UW-RL
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Aug 2010 19:55:44 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Oi9zh-0002Yw-PQ
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 08 Aug 2010 21:51:27 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sun, 8 Aug 2010 21:48:53 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <AANLkTikqC4jZ2YrjVUiibof1vCOMUhr4=uq4UWFGtdo0@mail.gmail.com>
-In-Reply-To: <AANLkTikqC4jZ2YrjVUiibof1vCOMUhr4=uq4UWFGtdo0@mail.gmail.com>
+	Mon, 09 Aug 2010 01:42:53 +0200
+Received: by iwn38 with SMTP id 38so3146792iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 08 Aug 2010 16:42:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Tv2phVUfgvPkJkWRMzuuMhzhTejRTuUJF2gA0z1RlIM=;
+	b=mC5/oEHDkq/C40TxLmbWs3nFAXUWVBPllNGs+3nn0BfwGYTv1pZMTIR7edA0Wsg1T4
+	fab9kB+GbRwQ6jplZSLe5XU7ADZxmm+1C50upYZ8vEQYhxvtO8nlFf1Q85VwWuOWOlJD
+	3rcC52zvwLACj+qrFrCI2Y6Y2lsbmh+Yv4gUQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=MFd+qnK2bejLVlAAiuiNX7Sg03u7Ps/0ec7A90WmFZAkXGN22kCdjXGTQtzcOmQYE4
+	hBW7t4gmnpyYSTJaKygJMzm/pAJkjnlBFB1nz+KZCxEXu5uOminr04jlYmfvEoFBvtfV
+	w4G6PeRHs54WRbjQLDxpuN/GDig8XMlgdLkJc=
 MIME-Version: 1.0
-Message-Id: <201008082148.56554.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.231.166.72 with SMTP id l8mr17836904iby.95.1281310964885; Sun, 
+	08 Aug 2010 16:42:44 -0700 (PDT)
+Received: by 10.231.145.77 with HTTP; Sun, 8 Aug 2010 16:42:44 -0700 (PDT)
+In-Reply-To: <AANLkTikW-PHOKKuz1fOiocuU8gGiwFRk3CmTfYtU_gZf@mail.gmail.com>
+References: <AANLkTikW-PHOKKuz1fOiocuU8gGiwFRk3CmTfYtU_gZf@mail.gmail.com>
+Date: Mon, 9 Aug 2010 09:12:44 +0930
+Message-ID: <AANLkTi=vY5==A3XoJfhpp4Qjgbur+fy46L_gPacNhT6d@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] pkgconfig.bbclass: Remove spurious rpaths and -isystem includes from pkgconfig files.
+Subject: Re: application not getting loaded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,45 +52,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 08 Aug 2010 17:55:45 -0000
-X-Groupsio-MsgNum: 21973
-Content-Type: multipart/signed; boundary="nextPart5156106.Lm6uZpcHL0";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart5156106.Lm6uZpcHL0
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sun, 08 Aug 2010 23:42:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D0=BE=D1=81=D0=BA=D1=80=D0=B5=D1=81=D0=B5=D0=BD=D1=8C=D0=B5 08 =D0=
-=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2010 07:14:49 =D0=B0=D0=B2=D1=82=D0=
-=BE=D1=80 Ash Charles =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> -                       -e 's:-I${STAGING_INCDIR}::g' \
-> +                       -e 's:-rpath-link,${STAGING_LIBDIR}::g' \
-> +                       -e 's:-I${STAGING_INCDIR}:-I${prefix}/include:g' \
-> +                       -e 's:-isystem${STAGING_INCDIR}::g' \
+On 8 August 2010 20:25, Anand Sivaram <aspnair@gmail.com> wrote:
+> Dear All,
+>
+> I wrote a custom gstreamer application on ARM (dm6446) angstrom.
+> Whenever I try to run the application, I am getting the following error,
+> that looks
+> as if the shell is treating the application as a shell script.
+>
+> /usr/bin/app: line 1: syntax error: word unexpected (expecting ")")
+>
+> I made sure that the application is having 755 permission and readelf/fil=
+e
+> etc. from
+> a linux pc shows this as an ELF 32 bit ARM executable.
 
-I have "-isystem..." change in my own patch queue and rpath-link should be=
-=20
-fine also. I'm not so sure about incdir or libdir change though.
+This error message is typical when the system is trying to execute a
+binary built for a different architecture.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart5156106.Lm6uZpcHL0
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
+> These are the dynamic library dependencies during compilation.
+> pkg-config --libs gtk+-2.0 gstreamer-0.10 gstreamer-interfaces-0.10
+>
+> Is it due to some shared library loading problem? =A0In that case is ther=
+e
+> any arm "ldd" available on openembedded target or on build host to
+> verify what is missing?
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
+You can invoke the dynamic linker and have it print out the dependent
+dynamic libs. e.g.
+$ /lib/ld.so.1 --list /path/to/bin
 
-iEYEABECAAYFAkxe7ggACgkQXJ70z+XgVcP7gwCfT77QIRyvItstT2cCcYJmm2d3
-eIkAoNPIAusFd2W+XsSOrIlj0i3IQr6g
-=8Hc2
------END PGP SIGNATURE-----
+But this will execute the binary to make the list, so if your system
+doesn't recognise the binary, this won't work.
 
---nextPart5156106.Lm6uZpcHL0--
+-Graham
+
+
