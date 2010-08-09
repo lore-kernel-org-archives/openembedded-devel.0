@@ -1,46 +1,41 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OiYOM-0005td-7t
+	(envelope-from <aalonso00@gmail.com>) id 1OiYV9-0002NF-N0
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 21:52:40 +0200
-Received: by bwz8 with SMTP id 8so1510239bwz.6
+	Mon, 09 Aug 2010 21:59:17 +0200
+Received: by qwg8 with SMTP id 8so7800413qwg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Aug 2010 12:52:06 -0700 (PDT)
+	Mon, 09 Aug 2010 12:59:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=XlKtfgR7Q/7O6OpKZWb7FN+8yuiam6S0pYDYUgu1kqM=;
-	b=Q52rA52ZrnYj7THYyNkB0rKBKqklEyBbxbdKAzINEuxzbPMfUsW/mnUyebeYk6uKzf
-	HenUmOSgnv1/nnL4FTS7dq3zmaBERCJZ80SfXEkWH2vRXonWm5AIqvPwZsWkzlqMKR3k
-	Cr1cGhoxBg9PXxLyZAq3/8pSx2tSZXMWASr6U=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=1ua6uepFcZCAyVo1DTOx1EVIudVnrCFsFpMQMm7nnUI=;
+	b=sXM6mmpXduLp5iQUzEOKQ4O0hzMGS9ZvcpqAPjC2p45OkJlAbmMS3VM7iw7cKsnj9y
+	kaU1xU8QSdLPLXnEYm1VjB0Qral3LyNy760vE0dGOEjrOvWJL4WvRxH5JB4YF/A97YRz
+	eaqFgnafY8kJqteL1c2wk/a2VQVtB091xgzvc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=dweeIAxxagq3BVi1NdDzTUkQ8yq6FySjCv/xdg1PGylnfTA5HUZmNhTQq8B/Ar5XMJ
-	PNLL5ARpFXiUD/1PNl74C/iMNxYQrBfa3YvdIcgaqm1wrtA+lmv4haVW2VhpcOUNEHMa
-	fE/xqFdiOJwc3MhM85ZhvJ1UOKMYXxjnLpZf8=
-Received: by 10.204.46.159 with SMTP id j31mr3310069bkf.5.1281383526588; Mon, 
-	09 Aug 2010 12:52:06 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=n6/3LyH13OQbofM2sG82de3X70dwN8UPCKJxEsD8DpRumgF7XR21volnRs6dvrYll8
+	OdUkfEPX07OfAzp6kHl+mBgTmhI+uut3XjDsMXmhvYCS1mW8sg7vPjfkx2neRS4seBW4
+	mnvY9E4htMFC6smvR9FvPgKGZOILwUaTmNKzs=
 MIME-Version: 1.0
-Received: by 10.204.71.8 with HTTP; Mon, 9 Aug 2010 12:51:46 -0700 (PDT)
-In-Reply-To: <AANLkTin9dRBe8r_-gqQagZSZGTfPy2jT08Nvt12Nr+3w@mail.gmail.com>
-References: <AANLkTikW-PHOKKuz1fOiocuU8gGiwFRk3CmTfYtU_gZf@mail.gmail.com> 
-	<AANLkTi=vY5==A3XoJfhpp4Qjgbur+fy46L_gPacNhT6d@mail.gmail.com> 
-	<AANLkTin9dRBe8r_-gqQagZSZGTfPy2jT08Nvt12Nr+3w@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 9 Aug 2010 12:51:46 -0700
-Message-ID: <AANLkTikBRL9nujDhEFtkDqciQXupVJty9EYK4ZVK5uAF@mail.gmail.com>
+Received: by 10.224.54.13 with SMTP id o13mr8990577qag.228.1281383945148; Mon, 
+	09 Aug 2010 12:59:05 -0700 (PDT)
+Received: by 10.229.67.90 with HTTP; Mon, 9 Aug 2010 12:59:05 -0700 (PDT)
+Date: Mon, 9 Aug 2010 14:59:05 -0500
+Message-ID: <AANLkTimjiGEa47W9DiWyGawuQj7pTYdT-VSp4cVZ3tsJ@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: application not getting loaded
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: glibc-initial do_install failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,82 +49,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 19:52:40 -0000
+X-List-Received-Date: Mon, 09 Aug 2010 19:59:17 -0000
+X-Groupsio-MsgNum: 22016
+Content-Type: multipart/mixed; boundary=0015175cf80adf22be048d697246
+
+--0015175cf80adf22be048d697246
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 9, 2010 at 4:43 AM, Anand Sivaram <aspnair@gmail.com> wrote:
-> On Mon, Aug 9, 2010 at 05:12, Graham Gower <graham.gower@gmail.com> wrote=
-:
->
->> On 8 August 2010 20:25, Anand Sivaram <aspnair@gmail.com> wrote:
->> > Dear All,
->> >
->> > I wrote a custom gstreamer application on ARM (dm6446) angstrom.
->> > Whenever I try to run the application, I am getting the following erro=
-r,
->> > that looks
->> > as if the shell is treating the application as a shell script.
->> >
->> > /usr/bin/app: line 1: syntax error: word unexpected (expecting ")")
->> >
->> > I made sure that the application is having 755 permission and
->> readelf/file
->> > etc. from
->> > a linux pc shows this as an ELF 32 bit ARM executable.
->>
->> This error message is typical when the system is trying to execute a
->> binary built for a different architecture.
->>
->>
->> > These are the dynamic library dependencies during compilation.
->> > pkg-config --libs gtk+-2.0 gstreamer-0.10 gstreamer-interfaces-0.10
->> >
->> > Is it due to some shared library loading problem? =A0In that case is t=
-here
->> > any arm "ldd" available on openembedded target or on build host to
->> > verify what is missing?
->>
->> You can invoke the dynamic linker and have it print out the dependent
->> dynamic libs. e.g.
->> $ /lib/ld.so.1 --list /path/to/bin
->>
->> But this will execute the binary to make the list, so if your system
->> doesn't recognise the binary, this won't work.
->>
->> -Graham
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
-> Thanks Graham, =A0I am looking into that.
->
-> Also I noticed the following error while linking, but still the executabl=
-e
-> is getting built.
->
-> /mnt/project/angstrom-dev/cross/armv5te/lib/gcc/arm-angstrom-linux-gnueab=
-i/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-> warning: libc.so, needed by
-> /mnt/project/angstrom-dev/cross/armv5te/lib/gcc/arm-angstrom-linux-gnueab=
-i/4.3.3/../../../../arm-angstrom-linux-gnueabi/lib/libgcc_s.so,
-> not found (try using -rpath or -rpath-link)
->
-> Any idea?
+Hi,
 
-its a warning. should be fine
+I'm trying to build glibc-initial_2.3.6 for Microblaze arch
+and it fails in do_install function at final stage when linking
+libc.so; Error log attached
 
->
-> Thanks and Regards
->
-> Anand
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I notice that this always happends when invoking gcc with
+"-shared" flag it always returns the same error:
 
+/tmp/ccvUy8ol.o: could not read symbols: File format not recognized
+| collect2: ld returned 1 exit status
+| ERROR: Function do_install failed
 
+The combination of tools that trying to build
+
+binutils: 2.20.1
+gcc:      4.5 Microblaze svn branch
+glibc:    2.3.6 from petalogix know working port for microblaze
+Computer host: Fedora 13
+
+Can any one give me some advise on how to root cause and solve this problem?
+
+Thanks in advance;
+
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
+
+--0015175cf80adf22be048d697246
+Content-Type: text/x-log; charset=US-ASCII; name="glibc-initial_2.3.6.log"
+Content-Disposition: attachment; filename="glibc-initial_2.3.6.log"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gcnqz2x60
+
+bWljcm9ibGF6ZS1hbmdzdHJvbS1saW51eC1nY2MgLW1jcHU9djcuMzAuYSAvb3B0L29lL2J1aWxk
+LW1pY3JvYmxhemUtZ2VuZXJpYy9jb25mL3RtcC93b3JrL21pY3JvYmxhemUtYW5nc3Ryb20tbGlu
+dXgvZ2xpYmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9idWlsZC1taWNyb2JsYXplLWFuZ3N0cm9tLWxp
+bnV4L2NzdS9jcnRuLlMgLWMgIC1JLi4vaW5jbHVkZSAtSS4gLUkvb3B0L29lL2J1aWxkLW1pY3Jv
+YmxhemUtZ2VuZXJpYy9jb25mL3RtcC93b3JrL21pY3JvYmxhemUtYW5nc3Ryb20tbGludXgvZ2xp
+YmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9idWlsZC1taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2Nz
+dSAtSS4uIC1JLi4vbGliaW8gIC1JL29wdC9vZS9idWlsZC1taWNyb2JsYXplLWdlbmVyaWMvY29u
+Zi90bXAvd29yay9taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2dsaWJjLWluaXRpYWwtMi4zLjYt
+cjM2LjAvYnVpbGQtbWljcm9ibGF6ZS1hbmdzdHJvbS1saW51eCAtSS4uL3N5c2RlcHMvbWljcm9i
+bGF6ZS9lbGYgLUkuLi9zeXNkZXBzL3VuaXgvc3lzdi9saW51eC9taWNyb2JsYXplIC1JLi4vc3lz
+ZGVwcy91bml4L3N5c3YvbGludXggLUkuLi9zeXNkZXBzL2dudSAtSS4uL3N5c2RlcHMvdW5peC9j
+b21tb24gLUkuLi9zeXNkZXBzL3VuaXgvbW1hbiAtSS4uL3N5c2RlcHMvdW5peC9pbmV0IC1JLi4v
+c3lzZGVwcy91bml4L3N5c3YgLUkuLi9zeXNkZXBzL3VuaXggLUkuLi9zeXNkZXBzL3Bvc2l4IC1J
+Li4vc3lzZGVwcy9taWNyb2JsYXplIC1JLi4vc3lzZGVwcy93b3Jkc2l6ZS0zMiAtSS4uL3N5c2Rl
+cHMvaWVlZTc1NC9mbHQtMzIgLUkuLi9zeXNkZXBzL2llZWU3NTQvZGJsLTY0IC1JLi4vc3lzZGVw
+cy9pZWVlNzU0IC1JLi4vc3lzZGVwcy9nZW5lcmljL2VsZiAtSS4uL3N5c2RlcHMvZ2VuZXJpYyAt
+bm9zdGRpbmMgLWlzeXN0ZW0gL29wdC9vZS9idWlsZC1taWNyb2JsYXplLWdlbmVyaWMvY29uZi90
+bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9taWNyb2JsYXplL2xpYi9nY2MvbWljcm9ibGF6
+ZS1hbmdzdHJvbS1saW51eC80LjUuMC9pbmNsdWRlIC1pc3lzdGVtIC9vcHQvb2UvYnVpbGQtbWlj
+cm9ibGF6ZS1nZW5lcmljL2NvbmYvdG1wL3N5c3Jvb3RzL21pY3JvYmxhemUtYW5nc3Ryb20tbGlu
+dXgvdXNyL2luY2x1ZGUgIC1pbmNsdWRlIC4uL2luY2x1ZGUvbGliYy1zeW1ib2xzLmggICAgICAg
+LURIQVZFX0lOSVRGSU5JIC1EQVNTRU1CTEVSICAtSS9vcHQvb2UvYnVpbGQtbWljcm9ibGF6ZS1n
+ZW5lcmljL2NvbmYvdG1wL3dvcmsvbWljcm9ibGF6ZS1hbmdzdHJvbS1saW51eC9nbGliYy1pbml0
+aWFsLTIuMy42LXIzNi4wL2J1aWxkLW1pY3JvYmxhemUtYW5nc3Ryb20tbGludXgvY3N1Ly4gLWdn
+ZGIzICAgLWcwICAtbyAvb3B0L29lL2J1aWxkLW1pY3JvYmxhemUtZ2VuZXJpYy9jb25mL3RtcC93
+b3JrL21pY3JvYmxhemUtYW5nc3Ryb20tbGludXgvZ2xpYmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9i
+dWlsZC1taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2NzdS9jcnRuLm8KfCBtYWtlWzJdOiBMZWF2
+aW5nIGRpcmVjdG9yeSBgL29wdC9vZS9idWlsZC1taWNyb2JsYXplLWdlbmVyaWMvY29uZi90bXAv
+d29yay9taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2dsaWJjLWluaXRpYWwtMi4zLjYtcjM2LjAv
+Z2xpYmMtMi4zLjYvY3N1Jwp8IG1ha2VbMV06IExlYXZpbmcgZGlyZWN0b3J5IGAvb3B0L29lL2J1
+aWxkLW1pY3JvYmxhemUtZ2VuZXJpYy9jb25mL3RtcC93b3JrL21pY3JvYmxhemUtYW5nc3Ryb20t
+bGludXgvZ2xpYmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9nbGliYy0yLjMuNicKfCAvdG1wL2NjdlV5
+OG9sLm86IGNvdWxkIG5vdCByZWFkIHN5bWJvbHM6IEZpbGUgZm9ybWF0IG5vdCByZWNvZ25pemVk
+CnwgY29sbGVjdDI6IGxkIHJldHVybmVkIDEgZXhpdCBzdGF0dXMKfCBFUlJPUjogRnVuY3Rpb24g
+ZG9faW5zdGFsbCBmYWlsZWQKTk9URTogcGFja2FnZSBnbGliYy1pbml0aWFsLTIuMy42LXIzNi4w
+OiB0YXNrIGRvX2luc3RhbGw6IEZhaWxlZApFUlJPUjogVGFza0ZhaWxlZCBldmVudCBleGNlcHRp
+b24sIGFib3J0aW5nCkVSUk9SOiBCdWlsZCBvZiAvb3B0L29lL29wZW5lbWJlZGRlZC9yZWNpcGVz
+L2dsaWJjL2dsaWJjLWluaXRpYWxfMi4zLjYuYmIgZG9faW5zdGFsbCBmYWlsZWQKRVJST1I6IFRh
+c2sgMTQ1NSAoL29wdC9vZS9vcGVuZW1iZWRkZWQvcmVjaXBlcy9nbGliYy9nbGliYy1pbml0aWFs
+XzIuMy42LmJiLCBkb19pbnN0YWxsKSBmYWlsZWQgd2l0aCAyNTYKRVJST1I6ICcvb3B0L29lL29w
+ZW5lbWJlZGRlZC9yZWNpcGVzL2dsaWJjL2dsaWJjLWluaXRpYWxfMi4zLjYuYmInIGZhaWxlZApF
+UlJPUjogJy9vcHQvb2Uvb3BlbmVtYmVkZGVkL3JlY2lwZXMvZ2xpYmMvZ2xpYmMtaW5pdGlhbF8y
+LjMuNi5iYicgZmFpbGVkCg==
+
+--0015175cf80adf22be048d697246--
