@@ -1,30 +1,31 @@
-Received: from smtp-68.nebula.fi ([83.145.220.68])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <henri.bragge@dcombus.com>) id 1OiQlU-00017K-N9
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 13:43:38 +0200
-Received: from [100.100.100.68] (unknown [83.150.95.26])
-	by smtp-68.nebula.fi (Postfix) with ESMTP id 5E16D43F06A6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  9 Aug 2010 14:43:24 +0300 (EEST)
-Message-ID: <4C5FE9F0.20501@dcombus.com>
-Date: Mon, 09 Aug 2010 14:43:44 +0300
-From: Henri Bragge <henri.bragge@dcombus.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OiQpD-0003SK-RT for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Aug 2010 13:47:28 +0200
+Received: from f053041140.adsl.alicedsl.de ([78.53.41.140]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OiQp6-00043C-MS for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Aug 2010 11:47:20 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTik=Xm39yJcLnLH12heRyvS0gUEvSwFCJMBtWeLi@mail.gmail.com>	<1280926084-7605-1-git-send-email-henri.bragge@dcombus.com>	<AANLkTinnz+cB5Au1hMsniwFbCSjo-EaNWoR=9Xae4krA@mail.gmail.com>	<loom.20100805T104704-558@post.gmane.org>	<AANLkTik=13a7k7D1n=VfJnqO5DdPy5PUVdLdnDHtZh1d@mail.gmail.com>	<AANLkTim41rfG5eqwrEu5goiqFZqhZK3XY2Pq=shdANTU@mail.gmail.com>	<AANLkTincP+hP1RSsA+u5+HQ3xKLFgDkt7x4R-hN3kOsP@mail.gmail.com>	<4C5BDE5B.3050008@dcombus.com>
-	<AANLkTikjR5wxTzno2fJwtnDwVzDrQaMTVU=SiEbxHbCp@mail.gmail.com>
-In-Reply-To: <AANLkTikjR5wxTzno2fJwtnDwVzDrQaMTVU=SiEbxHbCp@mail.gmail.com>
-X-SA-Exim-Connect-IP: 83.145.220.68
-X-SA-Exim-Mail-From: henri.bragge@dcombus.com
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E5A@deimsg40.de.net.world>
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E5A@deimsg40.de.net.world>
+Date: Mon, 09 Aug 2010 13:47:18 +0200
+Message-ID: <1281354438.3767.21.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2 1/2] recipe for gsnmp-0.3.0
+Subject: Re: [PATCH][v2][Resent] busybox: fix defconfig handling problems triggered by "configure according to {MACHINE, DISTRO}_FEATURES"; added inetd handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,28 +39,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 11:43:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Aug 2010 11:47:28 -0000
+X-Groupsio-MsgNum: 21990
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-LnzJFjYile9tybZpKjVp"
 
-Frans Meulenbroeks wrote:
-> Still one issue left:
->
-> I saw this warning when building another package:
->
-> /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/aclocal/gsnmp.m4:4:
-> warning: underquoted definition of AM_PATH_GSNMP
-> /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/aclocal/gsnmp.m4:4:
->   run info '(automake)Extending aclocal'
-> /home/frans/oe/tmp_angstrom/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/aclocal/gsnmp.m4:4:
->   or see http://sources.redhat.com/automake/automake.html#Extending-aclocal
->
-> I suggest a patch to resolve this.
->   
+--=-LnzJFjYile9tybZpKjVp
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Posted a patch that should fix this. Couldn't really reproduce the 
-problem but I hope it helps..
+Am Montag, den 09.08.2010, 13:34 +0200 schrieb Hauser, Wolfgang (external):
+> It seams, attachment with binary mime type is ignored by patchwork.
+> Sent again.
 
-- Henri
+Sorry to bother you again. It looks like you appended to patches in your
+attachment. Please sent them separately.
+
+(You seem to have to commits in your local repository which is good. You
+should be able to create two patches with `git format-patch -2 -s`. You
+can adapt the second commit message with `git commit --amend` if it is
+the last commit or `git rebase -i =E2=80=A6` (see `git help rebase` under
+NOTES)).
 
 
+Thanks,
+
+Paul
+
+--=-LnzJFjYile9tybZpKjVp
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxf6sYACgkQPX1aK2wOHVhQzgCfR8yP6omuldsVuqcATe0UUiVg
+tnkAn3V6Uo2Mv9M9VvIuYfcjggLvbECK
+=J6Ht
+-----END PGP SIGNATURE-----
+
+--=-LnzJFjYile9tybZpKjVp--
