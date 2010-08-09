@@ -1,45 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from smtp-68.nebula.fi ([83.145.220.68])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OiTTX-0001Vu-OS
+	(envelope-from <hbragge@dcombus.com>) id 1OiUKK-0007Tf-I3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 16:37:16 +0200
-Received: by fxm6 with SMTP id 6so39543fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Aug 2010 07:37:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:mime-version:content-type:content-disposition:user-agent;
-	bh=rkZwlu57XqiCvWvxdnadOdzSv3SzsayzqwRl5FvXwLY=;
-	b=LcyRL6y+tFgXF9+9roU8o+WpgGehuNk9Gql495bUrmtPm/k3gmyY63JU9zYl/BTGGx
-	sMi3dTmsvyYEyi/dZ2tnT5k+phe62SPDQfI8xnbkF9w1nW0tYB5OGkj2ibJLhbTSaSJN
-	w7JsZPSfi+DlQehPgVq8afIC4NfU/hIIj/1IA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:mime-version:content-type
-	:content-disposition:user-agent;
-	b=odfxnTG6xkmpENDY+av59ocAuOa+3sqfQ7xLbin/lUS15xm3rI9qHUExb3C9AZzHYx
-	7/+PETWAKaMGqLh+nlb1vpklvTGOJo3pIPqvtnnHfVxXCtWWXjWYWtnar3Yi/D94IRJv
-	vh4lPnGk0X242d5QsSgKng2KRqprPTLloLG00=
-Received: by 10.223.105.76 with SMTP id s12mr5030362fao.107.1281364571385;
-	Mon, 09 Aug 2010 07:36:11 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 8sm312068fav.38.2010.08.09.07.36.07
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 09 Aug 2010 07:36:08 -0700 (PDT)
-Date: Mon, 9 Aug 2010 16:36:11 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 09 Aug 2010 17:31:49 +0200
+Received: from lumikki.dcombus.lan (unknown [83.150.95.26])
+	(using TLSv1 with cipher AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by smtp-68.nebula.fi (Postfix) with ESMTP id C807443F0C41;
+	Mon,  9 Aug 2010 18:31:37 +0300 (EEST)
+Received: from hbragge by lumikki.dcombus.lan with local (Exim 4.69)
+	(envelope-from <hbragge@lumikki.dcombus.lan>)
+	id 1OiUK9-000161-NM; Mon, 09 Aug 2010 18:31:37 +0300
+From: Henri Bragge <henri.bragge@dcombus.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100809143611.GA4396@jama>
-MIME-Version: 1.0
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Mon,  9 Aug 2010 18:31:37 +0300
+Message-Id: <1281367897-3680-1-git-send-email-henri.bragge@dcombus.com>
+X-Mailer: git-send-email 1.5.6.5
+In-Reply-To: <1281357382.3767.28.camel@mattotaupa>
+References: <1281357382.3767.28.camel@mattotaupa>
+X-SA-Exim-Connect-IP: 83.145.220.68
+X-SA-Exim-Mail-From: hbragge@dcombus.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: PACKAGE_ARCH_pn-${PN} should work?
+Subject: [PATCH v3 1/1] gsnmp-0.3.0: fix quoting in autoconf macros
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,44 +40,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 14:37:16 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 09 Aug 2010 15:31:49 -0000
 
-or did it worked before?
+Signed-off-by: Henri Bragge <henri.bragge@dcombus.com>
+---
+ recipes/gsnmp/gsnmp-0.3.0/quote-fix.patch |   28 ++++++++++++++++++++++++++++
+ recipes/gsnmp/gsnmp_0.3.0.bb              |    5 +++--
+ 2 files changed, 31 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/gsnmp/gsnmp-0.3.0/quote-fix.patch
 
-Today I noticed it keeps PACKAGE_ARCH = "all" in task-x11-server
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=bf3cf7b95cb10c830c39ca4bfec4e7fcc19dad83
-
-It's used in few more places (mostly OM/SHR which can be my fault from merging shr/import):
-
-conf/distro/openmoko.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta01 = "armv4t"
-conf/distro/openmoko.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta02 = "armv4t"
-conf/distro/openmoko.conf:PACKAGE_ARCH_pn-keymaps_om-gta01 = "armv4t"
-conf/distro/openmoko.conf:PACKAGE_ARCH_pn-keymaps_om-gta02 = "armv4t"
-conf/distro/openmoko.conf:PACKAGE_ARCH_pn-neod_om-gta01 = "armv4t"
-conf/distro/openmoko.conf:PACKAGE_ARCH_pn-neod_om-gta02 = "armv4t"
-conf/distro/shr.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta01 = "armv4t"
-conf/distro/shr.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta02 = "armv4t"
-conf/distro/shr.conf:PACKAGE_ARCH_pn-keymaps_om-gta01 = "armv4t"
-conf/distro/shr.conf:PACKAGE_ARCH_pn-keymaps_om-gta02 = "armv4t"
-conf/distro/shr.conf:PACKAGE_ARCH_pn-neod_om-gta01 = "armv4t"
-conf/distro/shr.conf:PACKAGE_ARCH_pn-neod_om-gta02 = "armv4t"
-recipes/fbreader/fbreader_0.8.2a.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/freesmartphone/frameworkd_git.bb:PACKAGE_ARCH_pn-${PN}-config = "${MACHINE_ARCH}"
-recipes/miniinit/miniinit.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/mipl-mipv6/mipv6_1.1-v2.4.26.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/mipl-mipv6/mipv6_2.0.2.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/obsolete/shr/alsa-scenarii-shr_git.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/openmoko2/openmoko-alsa-scenarios_svn.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/shadow/shadow.inc:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/shr/frameworkd-config-shr_git.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-recipes/sysvinit/sysvinit_2.86.bb:PACKAGE_ARCH_pn-${PN}-inittab = "${MACHINE_ARCH}"
-recipes/usb-gadget-mode/usb-gadget-mode.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
-
-Regards,
-
+diff --git a/recipes/gsnmp/gsnmp-0.3.0/quote-fix.patch b/recipes/gsnmp/gsnmp-0.3.0/quote-fix.patch
+new file mode 100644
+index 0000000..6cb2e0d
+--- /dev/null
++++ b/recipes/gsnmp/gsnmp-0.3.0/quote-fix.patch
+@@ -0,0 +1,28 @@
++upstream: n/a
++status: accepted in r3406
++comment: Fix underquoted macro definitions.
++
++diff -Nurd gsnmp-0.3.0.orig/acinclude.m4 gsnmp-0.3.0/acinclude.m4
++--- gsnmp-0.3.0.orig/acinclude.m4	2010-02-19 10:35:29.000000000 +0200
+++++ gsnmp-0.3.0/acinclude.m4	2010-08-09 13:30:32.000000000 +0300
++@@ -6,7 +6,7 @@
++ dnl usually in <utime.h>.
++ dnl Some systems have utime.h but don't declare the struct anywhere.
++ 
++-AC_DEFUN(jm_CHECK_TYPE_STRUCT_UTIMBUF,
+++AC_DEFUN([jm_CHECK_TYPE_STRUCT_UTIMBUF],
++ [
++   AC_CHECK_HEADERS(utime.h)
++   AC_REQUIRE([AC_HEADER_TIME])
++diff -Nurd gsnmp-0.3.0.orig/gsnmp.m4 gsnmp-0.3.0/gsnmp.m4
++--- gsnmp-0.3.0.orig/gsnmp.m4	2010-02-19 10:35:29.000000000 +0200
+++++ gsnmp-0.3.0/gsnmp.m4	2010-08-09 13:30:46.000000000 +0300
++@@ -1,7 +1,7 @@
++ dnl AM_PATH_GSNMP()
++ dnl 
++ 
++-AC_DEFUN(AM_PATH_GSNMP,
+++AC_DEFUN([AM_PATH_GSNMP],
++ [
++   PKG_CHECK_MODULES(GSNMP, glib-2.0 >= 2.0.1)
++ ])
+diff --git a/recipes/gsnmp/gsnmp_0.3.0.bb b/recipes/gsnmp/gsnmp_0.3.0.bb
+index b191762..e27e3e9 100644
+--- a/recipes/gsnmp/gsnmp_0.3.0.bb
++++ b/recipes/gsnmp/gsnmp_0.3.0.bb
+@@ -2,9 +2,10 @@ DESCRIPTION = "SNMP library written on top of glib and gnet."
+ SECTION = "libs/network"
+ LICENSE = "GPLv2"
+ DEPENDS = "glib-2.0 gnet"
+-PR = "r0"
++PR = "r1"
+ 
+-SRC_URI = "ftp://ftp.ibr.cs.tu-bs.de/local/gsnmp/gsnmp-${PV}.tar.gz"
++SRC_URI = "ftp://ftp.ibr.cs.tu-bs.de/local/gsnmp/gsnmp-${PV}.tar.gz \
++	   file://quote-fix.patch"
+ 
+ SRC_URI[md5sum] = "466699c11b70e18a04d51388b8f89f1c"
+ SRC_URI[sha256sum] = "e428b61071b8ba2971fc8737ed2987210b04a71ffde307900df12c06a0bed0f9"
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.5.6.5
+
 
 
