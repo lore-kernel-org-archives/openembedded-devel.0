@@ -1,47 +1,45 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OiTHv-0001u0-S1
+	(envelope-from <martin.jansa@gmail.com>) id 1OiTTX-0001Vu-OS
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 16:25:49 +0200
-Received: by wwb18 with SMTP id 18so911274wwb.24
+	Mon, 09 Aug 2010 16:37:16 +0200
+Received: by fxm6 with SMTP id 6so39543fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Aug 2010 07:25:05 -0700 (PDT)
+	Mon, 09 Aug 2010 07:37:06 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=Kesv+aqKfvHuOtHyPia8GIz8xbUmX7jUsDEv7N4FmLQ=;
-	b=mcnzTequoO/Th7yY9Rerq4ncVqGtmSbh5XuX+tqbhnKwKdwTB0xfCC/mbr55zWbHww
-	98Y6T41WBYcxRCpR5PRe/gQrXL/8zja3w3IKyZ0L1e8qIkr78Dol0OyE1O8ud4p6VD5d
-	x5PWh9rT2TSTFGTXJc6ltO1c8Oj2SVZGSXDyI=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:mime-version:content-type:content-disposition:user-agent;
+	bh=rkZwlu57XqiCvWvxdnadOdzSv3SzsayzqwRl5FvXwLY=;
+	b=LcyRL6y+tFgXF9+9roU8o+WpgGehuNk9Gql495bUrmtPm/k3gmyY63JU9zYl/BTGGx
+	sMi3dTmsvyYEyi/dZ2tnT5k+phe62SPDQfI8xnbkF9w1nW0tYB5OGkj2ibJLhbTSaSJN
+	w7JsZPSfi+DlQehPgVq8afIC4NfU/hIIj/1IA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=oeQhMFAQs6Ruoen/Qr4yhtkEB9R0lXHbWW1uLicPgegswIUEgXKnhLGBe3WkfNAX/n
-	WtgjhLXAoxsFCiwrFL0Ere/PKybNi5F9mPaxdQaMNnjaERHDn0DEdPERATwkmTchnG49
-	0ljTozxlUlb6Li0Je2V3nsIr7sP/eSC33djz8=
-Received: by 10.216.232.90 with SMTP id m68mr13891864weq.10.1281363801922; 
-	Mon, 09 Aug 2010 07:23:21 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.16.204 with HTTP; Mon, 9 Aug 2010 07:22:05 -0700 (PDT)
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 9 Aug 2010 07:22:05 -0700
-X-Google-Sender-Auth: g5OO__sfYTlw9WdbHMhhkSOvJAI
-Message-ID: <AANLkTinK5O3F25QJ40B8+rt5M57BKwWVOYytUEZqvP-D@mail.gmail.com>
+	h=date:from:to:subject:message-id:mime-version:content-type
+	:content-disposition:user-agent;
+	b=odfxnTG6xkmpENDY+av59ocAuOa+3sqfQ7xLbin/lUS15xm3rI9qHUExb3C9AZzHYx
+	7/+PETWAKaMGqLh+nlb1vpklvTGOJo3pIPqvtnnHfVxXCtWWXjWYWtnar3Yi/D94IRJv
+	vh4lPnGk0X242d5QsSgKng2KRqprPTLloLG00=
+Received: by 10.223.105.76 with SMTP id s12mr5030362fao.107.1281364571385;
+	Mon, 09 Aug 2010 07:36:11 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 8sm312068fav.38.2010.08.09.07.36.07
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 09 Aug 2010 07:36:08 -0700 (PDT)
+Date: Mon, 9 Aug 2010 16:36:11 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Message-ID: <20100809143611.GA4396@jama>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Why PREFERRED_VERSION setting of <distro>.conf overrules local.conf setting ?
+Subject: PACKAGE_ARCH_pn-${PN} should work?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,36 +53,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 14:26:07 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 09 Aug 2010 14:37:16 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Mon, Aug 9, 2010 at 6:26 AM, Hauser, Wolfgang (external) <
-Wolfgang.Hauser.external@eads.com> wrote:
+or did it worked before?
 
-> Hello,
->
-> I want to change some used versions of packages, so I added a
-> PREFERRED_VERSION_<package>="xxx" for the packages I want to have a
-> special(newer) version to be used.
->
-> But e. g. for busybox the version defined in the used <distro>.conf is
-> used instead of my setting in local.conf.
->
-> Should local.conf not overrule <distro/machine>.conf ??
+Today I noticed it keeps PACKAGE_ARCH = "all" in task-x11-server
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=bf3cf7b95cb10c830c39ca4bfec4e7fcc19dad83
 
+It's used in few more places (mostly OM/SHR which can be my fault from merging shr/import):
 
-Conceptually, local should override everything, as it's the "most specific"
-information available, but from a technical standpoint, we can't parse the
-machine and distro configs until local.conf is parsed, as that's usually
-where the MACHINE and DISTRO are set.  You can use a 'local' override to get
-around it, or you can ask the distro/machine maintainer to use ?=
-assignments (set only if unset).
+conf/distro/openmoko.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta01 = "armv4t"
+conf/distro/openmoko.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta02 = "armv4t"
+conf/distro/openmoko.conf:PACKAGE_ARCH_pn-keymaps_om-gta01 = "armv4t"
+conf/distro/openmoko.conf:PACKAGE_ARCH_pn-keymaps_om-gta02 = "armv4t"
+conf/distro/openmoko.conf:PACKAGE_ARCH_pn-neod_om-gta01 = "armv4t"
+conf/distro/openmoko.conf:PACKAGE_ARCH_pn-neod_om-gta02 = "armv4t"
+conf/distro/shr.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta01 = "armv4t"
+conf/distro/shr.conf:PACKAGE_ARCH_pn-usb-gadget-mode_om-gta02 = "armv4t"
+conf/distro/shr.conf:PACKAGE_ARCH_pn-keymaps_om-gta01 = "armv4t"
+conf/distro/shr.conf:PACKAGE_ARCH_pn-keymaps_om-gta02 = "armv4t"
+conf/distro/shr.conf:PACKAGE_ARCH_pn-neod_om-gta01 = "armv4t"
+conf/distro/shr.conf:PACKAGE_ARCH_pn-neod_om-gta02 = "armv4t"
+recipes/fbreader/fbreader_0.8.2a.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/freesmartphone/frameworkd_git.bb:PACKAGE_ARCH_pn-${PN}-config = "${MACHINE_ARCH}"
+recipes/miniinit/miniinit.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/mipl-mipv6/mipv6_1.1-v2.4.26.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/mipl-mipv6/mipv6_2.0.2.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/obsolete/shr/alsa-scenarii-shr_git.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/openmoko2/openmoko-alsa-scenarios_svn.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/shadow/shadow.inc:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/shr/frameworkd-config-shr_git.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
+recipes/sysvinit/sysvinit_2.86.bb:PACKAGE_ARCH_pn-${PN}-inittab = "${MACHINE_ARCH}"
+recipes/usb-gadget-mode/usb-gadget-mode.bb:PACKAGE_ARCH_pn-${PN} = "${MACHINE_ARCH}"
 
-PREFERRED_VERSION_<package>_local = "xxx" is how you use the override.
+Regards,
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+
 
