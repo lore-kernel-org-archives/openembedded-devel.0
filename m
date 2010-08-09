@@ -1,30 +1,31 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OiRgJ-0003EZ-SG
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 14:42:21 +0200
-Received: (qmail 19449 invoked by uid 1003); 9 Aug 2010 12:42:07 -0000
-Received: from localhost (HELO ?192.168.0.226?) (philip@opensdr.com@127.0.0.1)
-	by mail.geekisp.com with SMTP; 9 Aug 2010 12:42:07 -0000
-Message-ID: <4C5FF799.8090400@balister.org>
-Date: Mon, 09 Aug 2010 05:42:01 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.7) Gecko/20100720 Fedora/3.1.1-1.fc13 Thunderbird/3.1.1
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OiRh1-0003HM-QI for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Aug 2010 14:43:04 +0200
+Received: from f053041140.adsl.alicedsl.de ([78.53.41.140]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OiRgu-0005x1-Bq for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Aug 2010 12:42:56 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E17@deimsg40.de.net.world>	<1281346042.3767.6.camel@mattotaupa>	<0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E3E@deimsg40.de.net.world>	<1281348153.3767.9.camel@mattotaupa>	<0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E4A@deimsg40.de.net.world>
-	<1281354065.3767.15.camel@mattotaupa>
-In-Reply-To: <1281354065.3767.15.camel@mattotaupa>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E6B@deimsg40.de.net.world>
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E6B@deimsg40.de.net.world>
+Date: Mon, 09 Aug 2010 14:42:54 +0200
+Message-ID: <1281357774.3767.34.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Documentation of commit policy and examples
+Subject: Re: [PATCH][v2 2/2] busybox: fix defconfig handling problems triggered by "configure according to {MACHINE, DISTRO}_FEATURES"; added inetd handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,25 +39,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 12:42:21 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 09 Aug 2010 12:43:04 -0000
+X-Groupsio-MsgNum: 22000
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-ebmHYuXQfsdw6oPclvqd"
 
-On 08/09/2010 04:41 AM, Paul Menzel wrote:
-> Dear Wolfgang,
->
->
-> Am Montag, den 09.08.2010, 12:25 +0200 schrieb Hauser, Wolfgang (external):
->> I would do it myself, but as I am a newbee in OE, git, patchwork and bitbake, I don't have the know how to create a real good HowTo.
->> That should be done by experts.
->
-> well, the “experts” thought that the current documentation [1, 3] in the
-> Wiki is good enough. So it would be great if you told us what is
-> missing. (Since I think all your questions are answered on these pages.)
+--=-ebmHYuXQfsdw6oPclvqd
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Experts don't read the documenation :) I know they should at least check 
-it from time to time though.
+Am Montag, den 09.08.2010, 14:19 +0200 schrieb Hauser, Wolfgang (external):
+> busybox: revision change
 
-Philip
+(Please also adapt the message subject to the commit summary.)
+
+But this will not be necessary, as I overlooked that this is the only
+change. To get packages rebuild, when something changes (your patch 1/2)
+such changes should be incorporated into the changes.
+
+So please squash this patch. (`git rebase -i HEAD~4`, where =C2=BB4=C2=AB i=
+s the
+number on how many commits you have to go back.)
+
+> Signed-off-by: Wolfgang Hauser <wolfgang.hauser.external@eads.com>
+> ---
+>  recipes/busybox/busybox.inc       |    2 +-
+>  recipes/busybox/busybox_1.16.2.bb |    2 +-
+>  2 files changed, 2 insertions(+), 2 deletions(-)
+>=20
+> diff --git a/recipes/busybox/busybox.inc b/recipes/busybox/busybox.inc
+> index b4663f0..f77613e 100644
+> --- a/recipes/busybox/busybox.inc
+> +++ b/recipes/busybox/busybox.inc
+> @@ -11,7 +11,7 @@ LICENSE =3D "GPLv2"
+>  SECTION =3D "base"
+>  PRIORITY =3D "required"
+> =20
+> -INC_PR =3D "r32"
+> +INC_PR =3D "r33"
+> =20
+>  SRC_URI =3D "\
+>    file://busybox-cron \
+> diff --git a/recipes/busybox/busybox_1.16.2.bb
+> b/recipes/busybox/busybox_1.16.2.bb
+> index 6401bfa..0e6a250 100644
+> --- a/recipes/busybox/busybox_1.16.2.bb
+> +++ b/recipes/busybox/busybox_1.16.2.bb
+> @@ -1,5 +1,5 @@
+>  require busybox.inc
+> -PR =3D "${INC_PR}.2"
+> +PR =3D "${INC_PR}.3"
+
+That is not necessary as increasing of the INC_PR will have the PR
+increased along the way.
+
+[=E2=80=A6]
+
+I am sorry and I hope the formal stuff will be alright when you
+resubmit. (Should be v3.)
 
 
+Thanks,
+
+Paul
+
+--=-ebmHYuXQfsdw6oPclvqd
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxf984ACgkQPX1aK2wOHVgZlgCfZiZV4Mw7Rgdk3hCy8cuH58tb
+5EIAmwVCgVMj0nCwQoq6rHH2j3apmgCN
+=KkHY
+-----END PGP SIGNATURE-----
+
+--=-ebmHYuXQfsdw6oPclvqd--
