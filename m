@@ -1,34 +1,41 @@
-Received: from hxhsvr03.internetintuitive.net ([80.254.228.43])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OiYhq-0002gV-25
+	(envelope-from <aalonso00@gmail.com>) id 1OiZ8f-0002YE-JE
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 22:14:00 +0200
-Received: from durham.keylevel.com ([109.224.134.115]:9703 helo=[192.168.1.98])
-	by hxhsvr03.internetintuitive.net with esmtpa (Exim 4.69)
-	(envelope-from <dokuwiki@keylevel.com>) id 1OiYhh-0006Vt-Un
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 21:12:14 +0100
-Message-Id: <FDA0423D-F572-4F4D-9330-24890469FD70@keylevel.com>
-From: Chris Tapp <dokuwiki@keylevel.com>
+	Mon, 09 Aug 2010 22:40:08 +0200
+Received: by qyk32 with SMTP id 32so9664529qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 09 Aug 2010 13:39:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=iaqD1oogNUyDONe7jGNMrsZipMGazTsG26/S3OuIcRg=;
+	b=YBf9nq5J8ZGtXliTOs4vhjFmuzEyH8Pewz/+fbFqFp5T9WMah5mk0XqzGbox1Y8gxl
+	TPkYtECZaxeORZOFntO6xgqNOkl/OxacvHo+S8Kr22bbfkriizABqgo0h6rl5A2D5rxH
+	kpN/v1AJnKK5n3qPNKuSe8eGdN6kc0tJ5bTcw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=aoHVox9VzIauFBEGSMHEnVciTPG8dx3CqH7PiUpHcLmtjtIaXqmOgZeXD0Q3jnXrF6
+	Xi9oIFXEBs2kiBII+HeghjHCBYE/qXwa3P5b1gtjhm1qgaVVC9tSQcvrhPyrGz93qukk
+	oeQq9hqEdydtx++iWnnw76DNWu9j/rNGpt4Pc=
+MIME-Version: 1.0
+Received: by 10.229.247.3 with SMTP id ma3mr7729903qcb.1.1281386391369; Mon, 
+	09 Aug 2010 13:39:51 -0700 (PDT)
+Received: by 10.229.67.90 with HTTP; Mon, 9 Aug 2010 13:39:51 -0700 (PDT)
+Date: Mon, 9 Aug 2010 15:39:51 -0500
+Message-ID: <AANLkTinZJSeh++976L9WwTHGR=TrJA4=46kKKgyPiCyz@mail.gmail.com>
+From: Adrian Alonso <aalonso00@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v936)
-Date: Mon, 9 Aug 2010 21:12:11 +0100
-X-Mailer: Apple Mail (2.936)
-X-AntiAbuse: This header was added to track abuse,
-	please include it with any abuse report
-X-AntiAbuse: Primary Hostname - hxhsvr03.internetintuitive.net
-X-AntiAbuse: Original Domain - lists.openembedded.org
-X-AntiAbuse: Originator/Caller UID/GID - [47 12] / [47 12]
-X-AntiAbuse: Sender Address Domain - keylevel.com
-X-SA-Exim-Connect-IP: 80.254.228.43
-X-SA-Exim-Mail-From: dokuwiki@keylevel.com
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: aalonso00@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: How do I build and SDK?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: glibc-initial do_install failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +49,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 20:14:17 -0000
-Content-Type: text/plain; charset=US-ASCII; format=flowed; delsp=yes
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 09 Aug 2010 20:40:08 -0000
+X-Groupsio-MsgNum: 22019
+Content-Type: multipart/mixed; boundary=0016e6435336ad7873048d6a04d1
 
-I've had a look at the OE manual to try and understand what's needed  
-to build an SDK, but I'm still not sure what I need to do.
+--0016e6435336ad7873048d6a04d1
+Content-Type: text/plain; charset=ISO-8859-1
 
-I can 'bitbake my-image', giving me a system that boots ok on my target.
+Hi,
 
-What I want to do now is produce an SDK that allows binaries to be  
-built under an x86 hosted linux distro (e.g. ubuntu).
+I'm trying to build glibc-initial_2.3.6 for Microblaze arch
+and it fails in do_install function at final stage when linking
+libc.so; Error log attached
 
-I'm not sure why there is a host and target to configure - I was  
-expecting just to configure something for the platform that will run  
-the SDK - I was thinking that the current OE local.conf should give  
-the information needed to do this.
+I notice that this always happends when invoking gcc with
+"-shared" flag it always returns the same error:
 
-Is there an easy way to take a system configured to build 'my-image'  
-and produce an SDK from that? I'm running OE under Ubuntu, if that  
-makes things easier.
+/tmp/ccvUy8ol.o: could not read symbols: File format not recognized
+| collect2: ld returned 1 exit status
+| ERROR: Function do_install failed
 
-Failing that, are there any examples I can look at that would give me  
-a more information that what's in the documentation?
+The combination of tools that trying to build
 
-Thanks !
+binutils: 2.20.1
+gcc:      4.5 Microblaze svn branch
+glibc:    2.3.6 from petalogix know working port for microblaze
+Computer host: Fedora 13
 
-Chris
+Can any one give me some advise on how to root cause and solve this problem?
 
+Thanks in advance;
 
+-- 
+Saludos
+Adrian Alonso
+http://aalonso.wordpress.com
 
+--0016e6435336ad7873048d6a04d1
+Content-Type: text/x-log; charset=US-ASCII; name="glibc-initial_2.3.6.log"
+Content-Disposition: attachment; filename="glibc-initial_2.3.6.log"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_gcnsez990
+
+bWljcm9ibGF6ZS1hbmdzdHJvbS1saW51eC1nY2MgLW1jcHU9djcuMzAuYSAvb3B0L29lL2J1aWxk
+LW1pY3JvYmxhemUtZ2VuZXJpYy9jb25mL3RtcC93b3JrL21pY3JvYmxhemUtYW5nc3Ryb20tbGlu
+dXgvZ2xpYmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9idWlsZC1taWNyb2JsYXplLWFuZ3N0cm9tLWxp
+bnV4L2NzdS9jcnRuLlMgLWMgIC1JLi4vaW5jbHVkZSAtSS4gLUkvb3B0L29lL2J1aWxkLW1pY3Jv
+YmxhemUtZ2VuZXJpYy9jb25mL3RtcC93b3JrL21pY3JvYmxhemUtYW5nc3Ryb20tbGludXgvZ2xp
+YmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9idWlsZC1taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2Nz
+dSAtSS4uIC1JLi4vbGliaW8gIC1JL29wdC9vZS9idWlsZC1taWNyb2JsYXplLWdlbmVyaWMvY29u
+Zi90bXAvd29yay9taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2dsaWJjLWluaXRpYWwtMi4zLjYt
+cjM2LjAvYnVpbGQtbWljcm9ibGF6ZS1hbmdzdHJvbS1saW51eCAtSS4uL3N5c2RlcHMvbWljcm9i
+bGF6ZS9lbGYgLUkuLi9zeXNkZXBzL3VuaXgvc3lzdi9saW51eC9taWNyb2JsYXplIC1JLi4vc3lz
+ZGVwcy91bml4L3N5c3YvbGludXggLUkuLi9zeXNkZXBzL2dudSAtSS4uL3N5c2RlcHMvdW5peC9j
+b21tb24gLUkuLi9zeXNkZXBzL3VuaXgvbW1hbiAtSS4uL3N5c2RlcHMvdW5peC9pbmV0IC1JLi4v
+c3lzZGVwcy91bml4L3N5c3YgLUkuLi9zeXNkZXBzL3VuaXggLUkuLi9zeXNkZXBzL3Bvc2l4IC1J
+Li4vc3lzZGVwcy9taWNyb2JsYXplIC1JLi4vc3lzZGVwcy93b3Jkc2l6ZS0zMiAtSS4uL3N5c2Rl
+cHMvaWVlZTc1NC9mbHQtMzIgLUkuLi9zeXNkZXBzL2llZWU3NTQvZGJsLTY0IC1JLi4vc3lzZGVw
+cy9pZWVlNzU0IC1JLi4vc3lzZGVwcy9nZW5lcmljL2VsZiAtSS4uL3N5c2RlcHMvZ2VuZXJpYyAt
+bm9zdGRpbmMgLWlzeXN0ZW0gL29wdC9vZS9idWlsZC1taWNyb2JsYXplLWdlbmVyaWMvY29uZi90
+bXAvc3lzcm9vdHMveDg2XzY0LWxpbnV4L3Vzci9taWNyb2JsYXplL2xpYi9nY2MvbWljcm9ibGF6
+ZS1hbmdzdHJvbS1saW51eC80LjUuMC9pbmNsdWRlIC1pc3lzdGVtIC9vcHQvb2UvYnVpbGQtbWlj
+cm9ibGF6ZS1nZW5lcmljL2NvbmYvdG1wL3N5c3Jvb3RzL21pY3JvYmxhemUtYW5nc3Ryb20tbGlu
+dXgvdXNyL2luY2x1ZGUgIC1pbmNsdWRlIC4uL2luY2x1ZGUvbGliYy1zeW1ib2xzLmggICAgICAg
+LURIQVZFX0lOSVRGSU5JIC1EQVNTRU1CTEVSICAtSS9vcHQvb2UvYnVpbGQtbWljcm9ibGF6ZS1n
+ZW5lcmljL2NvbmYvdG1wL3dvcmsvbWljcm9ibGF6ZS1hbmdzdHJvbS1saW51eC9nbGliYy1pbml0
+aWFsLTIuMy42LXIzNi4wL2J1aWxkLW1pY3JvYmxhemUtYW5nc3Ryb20tbGludXgvY3N1Ly4gLWdn
+ZGIzICAgLWcwICAtbyAvb3B0L29lL2J1aWxkLW1pY3JvYmxhemUtZ2VuZXJpYy9jb25mL3RtcC93
+b3JrL21pY3JvYmxhemUtYW5nc3Ryb20tbGludXgvZ2xpYmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9i
+dWlsZC1taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2NzdS9jcnRuLm8KfCBtYWtlWzJdOiBMZWF2
+aW5nIGRpcmVjdG9yeSBgL29wdC9vZS9idWlsZC1taWNyb2JsYXplLWdlbmVyaWMvY29uZi90bXAv
+d29yay9taWNyb2JsYXplLWFuZ3N0cm9tLWxpbnV4L2dsaWJjLWluaXRpYWwtMi4zLjYtcjM2LjAv
+Z2xpYmMtMi4zLjYvY3N1Jwp8IG1ha2VbMV06IExlYXZpbmcgZGlyZWN0b3J5IGAvb3B0L29lL2J1
+aWxkLW1pY3JvYmxhemUtZ2VuZXJpYy9jb25mL3RtcC93b3JrL21pY3JvYmxhemUtYW5nc3Ryb20t
+bGludXgvZ2xpYmMtaW5pdGlhbC0yLjMuNi1yMzYuMC9nbGliYy0yLjMuNicKfCAvdG1wL2NjdlV5
+OG9sLm86IGNvdWxkIG5vdCByZWFkIHN5bWJvbHM6IEZpbGUgZm9ybWF0IG5vdCByZWNvZ25pemVk
+CnwgY29sbGVjdDI6IGxkIHJldHVybmVkIDEgZXhpdCBzdGF0dXMKfCBFUlJPUjogRnVuY3Rpb24g
+ZG9faW5zdGFsbCBmYWlsZWQKTk9URTogcGFja2FnZSBnbGliYy1pbml0aWFsLTIuMy42LXIzNi4w
+OiB0YXNrIGRvX2luc3RhbGw6IEZhaWxlZApFUlJPUjogVGFza0ZhaWxlZCBldmVudCBleGNlcHRp
+b24sIGFib3J0aW5nCkVSUk9SOiBCdWlsZCBvZiAvb3B0L29lL29wZW5lbWJlZGRlZC9yZWNpcGVz
+L2dsaWJjL2dsaWJjLWluaXRpYWxfMi4zLjYuYmIgZG9faW5zdGFsbCBmYWlsZWQKRVJST1I6IFRh
+c2sgMTQ1NSAoL29wdC9vZS9vcGVuZW1iZWRkZWQvcmVjaXBlcy9nbGliYy9nbGliYy1pbml0aWFs
+XzIuMy42LmJiLCBkb19pbnN0YWxsKSBmYWlsZWQgd2l0aCAyNTYKRVJST1I6ICcvb3B0L29lL29w
+ZW5lbWJlZGRlZC9yZWNpcGVzL2dsaWJjL2dsaWJjLWluaXRpYWxfMi4zLjYuYmInIGZhaWxlZApF
+UlJPUjogJy9vcHQvb2Uvb3BlbmVtYmVkZGVkL3JlY2lwZXMvZ2xpYmMvZ2xpYmMtaW5pdGlhbF8y
+LjMuNi5iYicgZmFpbGVkCg==
+
+--0016e6435336ad7873048d6a04d1--
