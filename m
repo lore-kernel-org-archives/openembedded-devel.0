@@ -1,26 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-dotnet2.eads.net ([80.156.45.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OiPBv-0000tF-2C for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 12:02:47 +0200
-Received: from f053041140.adsl.alicedsl.de ([78.53.41.140]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OiPBl-00064A-R3 for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 10:02:37 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E3E@deimsg40.de.net.world>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E17@deimsg40.de.net.world>
-	<1281346042.3767.6.camel@mattotaupa>
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E3E@deimsg40.de.net.world>
-Date: Mon, 09 Aug 2010 12:02:33 +0200
-Message-ID: <1281348153.3767.9.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OiPYd-0005mO-82 for openembedded-devel@lists.openembedded.org;
+	Mon, 09 Aug 2010 12:26:23 +0200
+Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
+	by mail-dotnet2.eads.net with ESMTP; 09 Aug 2010 12:23:28 +0200
+Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
+	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.7381); 
+	Mon, 9 Aug 2010 12:25:54 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 9 Aug 2010 12:25:54 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Mon, 9 Aug 2010 12:25:53 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E4A@deimsg40.de.net.world>
+In-Reply-To: <1281348153.3767.9.camel@mattotaupa>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [PATCH] busybox: fix defconfig handling problems triggered
+	by "configure according to {MACHINE, DISTRO}_FEATURES";
+	added inetd handling (resent)
+Thread-Index: Acs3qjdDrbIK8m4ESOyJzFFekuAdBAAAl9Pg
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E17@deimsg40.de.net.world><1281346042.3767.6.camel@mattotaupa><0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E3E@deimsg40.de.net.world>
+	<1281348153.3767.9.camel@mattotaupa>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 09 Aug 2010 10:25:54.0360 (UTC)
+	FILETIME=[3F739380:01CB37AD]
+X-SA-Exim-Connect-IP: 80.156.45.105
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
@@ -41,25 +50,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 10:02:47 -0000
-X-Groupsio-MsgNum: 21982
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-vAOVqh2Kj1gnJp01V8cZ"
-
---=-vAOVqh2Kj1gnJp01V8cZ
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Mon, 09 Aug 2010 10:26:26 -0000
+X-List-Received-Date: Mon, 09 Aug 2010 10:26:26 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-Am Montag, den 09.08.2010, 11:40 +0200 schrieb Hauser, Wolfgang (external):
-> I'll try it again, it's not easy to send out something in a proper way fr=
-om the "restricted area" here. (git-send-email is impossible for example)
+I would do it myself, but as I am a newbee in OE, git, patchwork and =
+bitbake, I don't have the know how to create a real good HowTo.
+That should be done by experts.
+
+Regards
+Wolfgang Hauser
+
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von Paul Menzel
+Gesendet: Montag, 9. August 2010 12:03
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] [PATCH] busybox: fix defconfig handling problems =
+triggered by "configure according to {MACHINE, DISTRO}_FEATURES"; added =
+inetd handling (resent)
+
+Am Montag, den 09.08.2010, 11:40 +0200 schrieb Hauser, Wolfgang =
+(external):
+> I'll try it again, it's not easy to send out something in a proper way =
+from the "restricted area" here. (git-send-email is impossible for =
+example)
 
 Thanks.
 
-> But by the way, it may be very useful for newbees like me to have an HowT=
-o to create a patch in a proper way, including the necessary git commands a=
-nd a complete example for subject and header data.
+> But by the way, it may be very useful for newbees like me to have an =
+HowTo to create a patch in a proper way, including the necessary git =
+commands and a complete example for subject and header data.
 
 There is a Wiki link in [1] pointing to an example [3]. Do you have any
 suggestions to improve this Wiki page? Since it is a Wiki you could also
@@ -75,16 +100,4 @@ Paul
 > [2] http://wiki.openembedded.net/index.php/Patchwork
 [3] http://wiki.openembedded.net/index.php/Commit_log_example
 
---=-vAOVqh2Kj1gnJp01V8cZ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxf0jkACgkQPX1aK2wOHViO6wCeKIRT4yqVsM68+2eOYCzgQddS
-PYcAnAjTGDt2TjwXEd4Nl2EKQTxpza6Y
-=mRbK
------END PGP SIGNATURE-----
-
---=-vAOVqh2Kj1gnJp01V8cZ--
