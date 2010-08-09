@@ -1,31 +1,44 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OiH2V-0004fr-2a
+	(envelope-from <raj.khem@gmail.com>) id 1OiM69-0003Gq-3E
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 09 Aug 2010 03:20:32 +0200
-Received: by qyk32 with SMTP id 32so8747051qyk.6
+	Mon, 09 Aug 2010 08:44:37 +0200
+Received: by pxi16 with SMTP id 16so1389336pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 08 Aug 2010 18:20:21 -0700 (PDT)
-Received: by 10.229.226.78 with SMTP id iv14mr6697746qcb.136.1281316821392;
-	Sun, 08 Aug 2010 18:20:21 -0700 (PDT)
+	Sun, 08 Aug 2010 23:44:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=5nBlwUtcIY3jOzDcZTQrK3UnqSTKyy1+moDxuq/aE/4=;
+	b=m0aeHb9PpqXuR+oImupYcU48gN7ipuIqyZUfEYG9GOY2yGpB1P2r3XjLPVDIBUEOz0
+	E9o+nvup53JxGFZLSDRV+IXkqXmHqfsrEPn42eZ/Gwgwi8zVuKCxkcFgWNATblO0HV7a
+	HejanjpHV7KfIbVKO3pMYvuRF8d0MWezCvctk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=u4cVOim6O20ugFRV7gnfyKskkSnbaMV3vfyJJJXLeyh+oN9sylfhbSuzAfLWga8wCx
+	eOZzYaOtoF1alE3nlFB2vOKotz28kLQFOlOgQ5Js9gogKc1ZalsCpGklp7xyHZpmy8Ni
+	4ioiKBv77a8XCXhrusnTT3onE7EgXekEkQRME=
+Received: by 10.114.74.3 with SMTP id w3mr18132073waa.3.1281336262426;
+	Sun, 08 Aug 2010 23:44:22 -0700 (PDT)
 Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id m5sm3817067qcu.3.2010.08.08.18.20.20
-	(version=SSLv3 cipher=RC4-MD5); Sun, 08 Aug 2010 18:20:20 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d39sm9741194wam.16.2010.08.08.23.44.20
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 08 Aug 2010 23:44:21 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  8 Aug 2010 20:20:18 -0500
-Message-Id: <1281316818-22277-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+Date: Sun,  8 Aug 2010 23:44:14 -0700
+Message-Id: <1281336254-11566-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] beagleboard-test-image: add additional packages
+Subject: [PATCH] cross.bbclass: Override STAGING_* paths to match cross installation
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 09 Aug 2010 01:20:32 -0000
+X-List-Received-Date: Mon, 09 Aug 2010 06:44:37 -0000
 
-Add sox for audio testing.
-Add kernel-module-mt9t112 for camera testing.
-Add u-boot-mkimage for editing the boot.scr and user.scr files.
-
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/images/beagleboard-test-image.bb |    3 +++
- 1 files changed, 3 insertions(+), 0 deletions(-)
+ classes/cross.bbclass |    8 ++++++++
+ 1 files changed, 8 insertions(+), 0 deletions(-)
 
-diff --git a/recipes/images/beagleboard-test-image.bb b/recipes/images/beagleboard-test-image.bb
-index e25a427..b54bc62 100644
---- a/recipes/images/beagleboard-test-image.bb
-+++ b/recipes/images/beagleboard-test-image.bb
-@@ -19,6 +19,9 @@ IMAGE_INSTALL += " \
-   beagleboard-test-scripts \
-   nano \
-   cpuburn-neon \
-+  kernel-module-mt9t112 \
-+  u-boot-mkimage \
-+  sox \
- "
+diff --git a/classes/cross.bbclass b/classes/cross.bbclass
+index cf14db1..64f7902 100644
+--- a/classes/cross.bbclass
++++ b/classes/cross.bbclass
+@@ -50,6 +50,14 @@ exec_prefix = "${prefix}"
+ base_sbindir = "${base_prefix}/bin"
+ sbindir = "${exec_prefix}/bin"
  
- export IMAGE_BASENAME = "beagleboard-test-image"
++# staging should be special for cross
++STAGING_BINDIR = "${bindir}"
++STAGING_LIBDIR = "${libdir}"
++STAGING_INCDIR = "${includedir}"
++STAGING_ETCDIR = "${sysconfdir}"
++STAGING_DATADIR = "${datadir}"
++STAGING_SBINDIR = "${sbindir}"
++
+ do_install () {
+ 	oe_runmake 'DESTDIR=${D}' install
+ }
 -- 
-1.5.6.4
+1.7.1
 
 
 
