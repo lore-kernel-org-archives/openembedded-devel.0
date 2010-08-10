@@ -1,29 +1,29 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OiqkO-0006E3-H8
+	(envelope-from <morphis@gravedo.de>) id 1OiqrZ-00037f-FR
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 17:28:16 +0200
+	Tue, 10 Aug 2010 17:35:38 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id 0768D80C4FF; Tue, 10 Aug 2010 17:28:03 +0200 (CEST)
+	id 8D25380C4FF; Tue, 10 Aug 2010 17:35:28 +0200 (CEST)
 Received: from localhost (unknown [82.113.106.4])
-	by gravedo.de (Postfix) with ESMTPSA id BDF6880C4FF;
-	Tue, 10 Aug 2010 17:28:01 +0200 (CEST)
+	by gravedo.de (Postfix) with ESMTPSA id 90CAC80C527;
+	Tue, 10 Aug 2010 17:35:26 +0200 (CEST)
 From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Aug 2010 17:27:57 +0200
-Message-Id: <1281454077-2977-1-git-send-email-morphis@gravedo.de>
+Date: Tue, 10 Aug 2010 17:35:14 +0200
+Message-Id: <1281454514-3614-2-git-send-email-morphis@gravedo.de>
 X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1281420092-883-1-git-send-email-morphis@gravedo.de>
-References: <1281420092-883-1-git-send-email-morphis@gravedo.de>
+In-Reply-To: <1281454514-3614-1-git-send-email-morphis@gravedo.de>
+References: <1281454514-3614-1-git-send-email-morphis@gravedo.de>
 X-SA-Exim-Connect-IP: 85.214.79.159
 X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] tzdata: bump version to 2010k
+Subject: [PATCH 2/2] linux-palmpre: bump git revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,48 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 15:28:17 -0000
+X-List-Received-Date: Tue, 10 Aug 2010 15:35:38 -0000
+
+The new version fixes a compile problem with software using the kernel typedefs u8 and __u8
 
 Signed-off-by: Simon Busch <morphis@gravedo.de>
 ---
- recipes/tzdata/tzdata_2010j.bb |   10 ----------
- recipes/tzdata/tzdata_2010k.bb |   10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 recipes/tzdata/tzdata_2010j.bb
- create mode 100644 recipes/tzdata/tzdata_2010k.bb
+ recipes/linux/linux-palmpre_git.bb |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-diff --git a/recipes/tzdata/tzdata_2010j.bb b/recipes/tzdata/tzdata_2010j.bb
-deleted file mode 100644
-index 79b7769..0000000
---- a/recipes/tzdata/tzdata_2010j.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require tzdata.inc
--
--# Note that elsie.nci.nih.gov removes old archives when new is being
--# released. So if this doesn't build for you because of missing source file
--# just bump it to the latest available version, removing old one
--
--PR = "${INC_PR}.0"
--
--SRC_URI[tar.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
--SRC_URI[tar.sha256sum] = "dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
-diff --git a/recipes/tzdata/tzdata_2010k.bb b/recipes/tzdata/tzdata_2010k.bb
-new file mode 100644
-index 0000000..216ae75
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2010k.bb
-@@ -0,0 +1,10 @@
-+require tzdata.inc
-+
-+# Note that elsie.nci.nih.gov removes old archives when new is being
-+# released. So if this doesn't build for you because of missing source file
-+# just bump it to the latest available version, removing old one
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[tar.md5sum] = "5e2086249d6a6bb116534d358661ad3f"
-+SRC_URI[tar.sha256sum] = "ef69c99504c0fd9864ba8ef1daae5f2d4df097cf7dc350f09b8f70386272408d"
+diff --git a/recipes/linux/linux-palmpre_git.bb b/recipes/linux/linux-palmpre_git.bb
+index 4deaaf2..59e8d6c 100644
+--- a/recipes/linux/linux-palmpre_git.bb
++++ b/recipes/linux/linux-palmpre_git.bb
+@@ -11,7 +11,7 @@ file://defconfig \
+ 
+ S = "${WORKDIR}/git/"
+ 
+-SRCREV = "d2f6283b8ca5b59e7f181ed391adf0e23e346c6d"
++SRCREV = "96eba42952e860f652e66a72569319dfd35756dc"
+ KV = "2.6.24"
+ PR="r1"
+ PV = "${KV}+gitr${SRCPV}"
 -- 
 1.7.0.4
 
