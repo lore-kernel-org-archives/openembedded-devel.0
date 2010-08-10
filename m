@@ -1,46 +1,44 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-qy0-f182.google.com ([209.85.216.182])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OiteY-0000K3-A7
+	(envelope-from <ashcharles@gmail.com>) id 1Oitrf-0007f8-CJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 20:35:05 +0200
-Received: by eyf5 with SMTP id 5so4076893eyf.6
+	Tue, 10 Aug 2010 20:49:00 +0200
+Received: by qyk32 with SMTP id 32so10671630qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 11:34:13 -0700 (PDT)
+	Tue, 10 Aug 2010 11:47:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=WqFoSHvRpriFgf/YYeG/coWrvh9j5NaE/o+Mv+g0WEg=;
-	b=h2gMMZDPvxjHiy12x0KVb6sHgVixvMFIY7hFhe33WKvpv/yTRNspAZ4yQMz864wu4D
-	6ASgeshk6OE0/yak2M7STL0V4Wd6HQ9N5bsECwVNcpMHiM230aaFF7skYxMuT9pcv8us
-	SkGk6VzntgQpEAvuWsS/yYj8UDbfTmRtFeX3Q=
+	:references:from:date:message-id:subject:to:content-type;
+	bh=z4IJPYLYHLGV6EBdCCe9X4oLG8Gbh7RF7lVJIUcwwok=;
+	b=C01kVGXgeHiLCbKuzjgaa5koxvplY5mW+7AwjREwzRe+0d6e5+xTNdbQbTiK4mqBGf
+	Ai7hPaDHoFysutKAMELTdILW0MArHy9vZYB3L0Zkzu8MK0rldNQcK7FLktyctIEeVdJF
+	UNqeMKmjCdpFifj0ErAihP2TVAnU8FGZaetKY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=gZo3gbCLWuMMmt9npwPExVKsYVJdY8Z4eMEYTDw27vD6CXndC+cSJe+WcoExvDSD7A
-	Km2vSAjimLMC3iUqXJxM0AqpE8GqEpvj+JsHSN6U5xHpp7HFeI7oJ5cTBHRKltREmopm
-	jM456xtmDZuebV4jGBKIzEPhktH4cwzfYe0y0=
-Received: by 10.213.33.135 with SMTP id h7mr4579520ebd.72.1281465253580; Tue,
-	10 Aug 2010 11:34:13 -0700 (PDT)
+	:content-type;
+	b=AyCfyHTx8zD5eONMoXFU7txHt8ZHmKfvhvp/yD70NoNB01g3FHclUtDNXlC92sekb7
+	lg4pIG3RoCLXOar5ebW6XE44ejCTyAxnwbSp3JigTckr5kcj59VlRpWyXydB+SWmk6lM
+	HtsSICDEhlws4ULoBRYOBDyVpbmWJhIFOK0hU=
+Received: by 10.224.2.147 with SMTP id 19mr9787849qaj.57.1281466061420; Tue, 
+	10 Aug 2010 11:47:41 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.213.35.135 with HTTP; Tue, 10 Aug 2010 11:33:52 -0700 (PDT)
-In-Reply-To: <AANLkTi=KQzRGtOGs3t2j_ta=_sDopowmaB2MdCx2_6E2@mail.gmail.com>
-References: <AANLkTinZJSeh++976L9WwTHGR=TrJA4=46kKKgyPiCyz@mail.gmail.com>
-	<AANLkTi=3rK8j32QEbR4ZZk_Tp_hwL3k9KOXDDWWywjFN@mail.gmail.com>
-	<AANLkTi=KQzRGtOGs3t2j_ta=_sDopowmaB2MdCx2_6E2@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Aug 2010 11:33:52 -0700
-Message-ID: <AANLkTinePf=cdpW4pCiV4V=mdyCvOHyrPpLa9AfVrO27@mail.gmail.com>
+Received: by 10.224.89.20 with HTTP; Tue, 10 Aug 2010 11:47:20 -0700 (PDT)
+In-Reply-To: <201008082148.56554.roman@khimov.ru>
+References: <AANLkTikqC4jZ2YrjVUiibof1vCOMUhr4=uq4UWFGtdo0@mail.gmail.com> 
+	<201008082148.56554.roman@khimov.ru>
+From: Ash Charles <ashcharles@gmail.com>
+Date: Tue, 10 Aug 2010 11:47:20 -0700
+Message-ID: <AANLkTi=0DY_=ozCP60XM4XkeufB4ziPsUa9TaxT53st0@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.182
+X-SA-Exim-Mail-From: ashcharles@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: glibc-initial do_install failure
+Subject: Re: [PATCH] pkgconfig.bbclass: Remove spurious rpaths and -isystem includes from pkgconfig files.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,75 +52,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 18:35:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 10 Aug 2010 18:49:03 -0000
+Content-Type: text/plain; charset=UTF-8
 
-On Mon, Aug 9, 2010 at 2:39 PM, Adrian Alonso <aalonso00@gmail.com> wrote:
-> Hi Khem,
+On Sun, Aug 8, 2010 at 10:48 AM, Roman I Khimov <roman@khimov.ru> wrote:
+> I have "-isystem..." change in my own patch queue and rpath-link should be
+> fine also. I'm not so sure about incdir or libdir change though.
 >
-> Log with -v option at http://pastebin.com/5mB7CvHm
+Okay---cool.
 
-OK it seems its using right assembler then I wonder why linker can not
-understand the objects generated by it. Try to generate a .o with this
-gcc
-for a small hello world program with and then put it somewhere or run
-readelf over it and inspect.
+The libdir & incdir stuff would be for such a case:
+To compile against libfoo, you need to include a non-standard path
+such as -I/usr/include/libfoo/bar/. Normally pkgconfig just adds this
+flag but the path (pre-pkgconfig.bbclass) is gross (<staging
+path>/usr/include/libfoo/bar/); the pkgconfig.bbclass strips this down
+to a floating 'libfoo/bar' in the flags line when it should be
+'-I/usr/include/libfoo/bar'.
 
->
-> Thanks
->
-> On Mon, Aug 9, 2010 at 4:06 PM, Khem Raj <raj.khem@gmail.com> wrote:
->
->> On Mon, Aug 9, 2010 at 1:39 PM, Adrian Alonso <aalonso00@gmail.com> wrot=
-e:
->> > Hi,
->> >
->> > I'm trying to build glibc-initial_2.3.6 for Microblaze arch
->> > and it fails in do_install function at final stage when linking
->> > libc.so; Error log attached
->> >
->> > I notice that this always happends when invoking gcc with
->> > "-shared" flag it always returns the same error:
->> >
->> > /tmp/ccvUy8ol.o: could not read symbols: File format not recognized
->> > | collect2: ld returned 1 exit status
->> > | ERROR: Function do_install failed
->> >
->> > The combination of tools that trying to build
->> >
->> > binutils: 2.20.1
->> > gcc: =A0 =A0 =A04.5 Microblaze svn branch
->> > glibc: =A0 =A02.3.6 from petalogix know working port for microblaze
->> > Computer host: Fedora 13
->> >
->> > Can any one give me some advise on how to root cause and solve this
->> problem?
->> >
->>
->> The problem is that its not using the right assembler AFAICT
->> the log you attached does not help. Can you try that same command
->> individually with -v added to it please.
->>
->> Thx
->> -Khem
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
->
-> --
-> Saludos
-> Adrian Alonso
-> http://aalonso.wordpress.com
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+I think the patch as I submitted it doesn't fix this properly for all
+cases.  Also relies on ${prefix} to be correctly set for
+pkgconfig---is this a safe assumption?
+
+Should I split out the -rpath-link and -isystem into a separate patch?
+
+Thanks,
+Ash
 
 
