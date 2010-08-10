@@ -1,29 +1,30 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OihuN-0005oF-Ux
+	(envelope-from <roman@khimov.ru>) id 1Oii39-0003SH-Kd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 08:02:14 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id EDCBA80C52A; Tue, 10 Aug 2010 08:01:40 +0200 (CEST)
-Received: from localhost (unknown [82.113.106.4])
-	by gravedo.de (Postfix) with ESMTPSA id D0E0280C4FF;
-	Tue, 10 Aug 2010 08:01:39 +0200 (CEST)
-From: Simon Busch <morphis@gravedo.de>
+	Tue, 10 Aug 2010 08:11:02 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Oii2v-0003m7-Pr
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Aug 2010 10:10:46 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Aug 2010 08:01:32 +0200
-Message-Id: <1281420092-883-2-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1281420092-883-1-git-send-email-morphis@gravedo.de>
+Date: Tue, 10 Aug 2010 10:10:42 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
 References: <1281420092-883-1-git-send-email-morphis@gravedo.de>
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+In-Reply-To: <1281420092-883-1-git-send-email-morphis@gravedo.de>
+MIME-Version: 1.0
+Message-Id: <201008101010.45082.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] tzdata: bump version to 2010k
+Subject: Re: [PATCH 1/2] tzcode-native: bump version to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,50 +38,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 06:02:15 -0000
+X-List-Received-Date: Tue, 10 Aug 2010 06:11:02 -0000
+X-Groupsio-MsgNum: 22031
+Content-Type: multipart/signed; boundary="nextPart2047599.oypunNi43x";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes/tzdata/tzdata_2010j.bb |   10 ----------
- recipes/tzdata/tzdata_2010k.bb |   10 ++++++++++
- 2 files changed, 10 insertions(+), 10 deletions(-)
- delete mode 100644 recipes/tzdata/tzdata_2010j.bb
- create mode 100644 recipes/tzdata/tzdata_2010k.bb
+--nextPart2047599.oypunNi43x
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-diff --git a/recipes/tzdata/tzdata_2010j.bb b/recipes/tzdata/tzdata_2010j.bb
-deleted file mode 100644
-index 79b7769..0000000
---- a/recipes/tzdata/tzdata_2010j.bb
-+++ /dev/null
-@@ -1,10 +0,0 @@
--require tzdata.inc
--
--# Note that elsie.nci.nih.gov removes old archives when new is being
--# released. So if this doesn't build for you because of missing source file
--# just bump it to the latest available version, removing old one
--
--PR = "${INC_PR}.0"
--
--SRC_URI[tar.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
--SRC_URI[tar.sha256sum] = "dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
-diff --git a/recipes/tzdata/tzdata_2010k.bb b/recipes/tzdata/tzdata_2010k.bb
-new file mode 100644
-index 0000000..216ae75
---- /dev/null
-+++ b/recipes/tzdata/tzdata_2010k.bb
-@@ -0,0 +1,10 @@
-+require tzdata.inc
-+
-+# Note that elsie.nci.nih.gov removes old archives when new is being
-+# released. So if this doesn't build for you because of missing source file
-+# just bump it to the latest available version, removing old one
-+
-+PR = "${INC_PR}.0"
-+
-+SRC_URI[tar.md5sum] = "5e2086249d6a6bb116534d358661ad3f"
-+SRC_URI[tar.sha256sum] = "ef69c99504c0fd9864ba8ef1daae5f2d4df097cf7dc350f09b8f70386272408d"
--- 
-1.7.0.4
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 10 =D0=B0=D0=B2=D0=B3=D1=83=D1=
+=81=D1=82=D0=B0 2010 10:01:31 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Simon Busch =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> ---
+>  recipes/tzcode/tzcode-native_2010j.bb |   16 ----------------
+>  recipes/tzcode/tzcode-native_2010k.bb |   16 ++++++++++++++++
+>  2 files changed, 16 insertions(+), 16 deletions(-)
+>  delete mode 100644 recipes/tzcode/tzcode-native_2010j.bb
+>  create mode 100644 recipes/tzcode/tzcode-native_2010k.bb
 
+"Signed-off-by" is missing in the first patch, please resend it with SOB=20
+added.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart2047599.oypunNi43x
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkxg7WUACgkQXJ70z+XgVcNwRQCbBqN9NtOcm+7YIdvSyE6zw5B1
+iLAAmwSPD5fiUIz0VxohHcY7UT3ndG8z
+=SXxN
+-----END PGP SIGNATURE-----
+
+--nextPart2047599.oypunNi43x--
