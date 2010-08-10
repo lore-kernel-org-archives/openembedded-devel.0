@@ -1,46 +1,48 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oiiok-0003o0-C9
+	(envelope-from <graham.gower@gmail.com>) id 1Oiis4-0003zK-U4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 09:00:11 +0200
-Received: by iwn38 with SMTP id 38so4108104iwn.6
+	Tue, 10 Aug 2010 09:03:37 +0200
+Received: by pwj1 with SMTP id 1so1615415pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 00:00:01 -0700 (PDT)
+	Tue, 10 Aug 2010 00:03:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Ak2MkTHW8LpgvWwYuElti2bEASXlyLvtmgoQ+NTiF5k=;
-	b=QY++WA3N7DUsZp48bPV7Npw0thE6N4a7+ADdmOF2/nQbrXlhuvMdg8ZANCc4yLqTj3
-	bldXKc8WW9a2Tw3K0Yji+EHEVY/pQ/yVpAl3sNDhUpotD33CwxajHSOOcEOlKij5A7KG
-	9eJqIW1Mcq4T2BhOl47f4Xn7It7uFeCPnVhB0=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=uUX5M2+b1eIKgn/xnaRf5z46JkgcmlECop+MJRx0huU=;
+	b=WemsKZL3pT3j20lDFjkak8cq55qOh+tiloNPS0qV6RDLnS8DhC5kkkYw03Z0DF2wSi
+	rr9OlNBn3iCxWbVaPfUgIxszwWwXFFc5eddxpZKpBiODOxGDtYW5+Ln6s+2GCLRIzqXP
+	htI3GLM7ztLXZdD6/NCdmfaR+yEV3KRCXZfGI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sXHIwLuPS6ZvleSDtQw1t3lGlJKJ+a6EsLbeS6SNjdzr/B4otvOFrT7zoDQNzEsZig
-	yC43MmA2Xwt48cQRDWUvU3rItIFTsNGKi6315virvy95lxV8HYdplQdE8UMb8ZcB2o72
-	s9cuXLQAynXiODFo2IyyfCQ2KAM/IV7HL47/I=
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=FXMSBYzoYi4V+qpn88oC/CUWAPmTxGZtJirs0zf4ctDgrjZxS5aAEhVcV4pwa5ECSO
+	0h/84Dk/gwyt23zDRZ/nC+muUwjbJthkUiSKfzFH/PT2nbWg/xjSM70m3oKwnIBgpJZR
+	kwjwVxtsyFkgv4WyfpXOUa/TaRqvnxadi8YPE=
+Received: by 10.142.230.18 with SMTP id c18mr14526268wfh.226.1281423805549;
+	Tue, 10 Aug 2010 00:03:25 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	t11sm7410255wfc.16.2010.08.10.00.03.22
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 10 Aug 2010 00:03:24 -0700 (PDT)
+Message-ID: <4C60F9B6.1040107@gmail.com>
+Date: Tue, 10 Aug 2010 16:33:18 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
 MIME-Version: 1.0
-Received: by 10.231.36.77 with SMTP id s13mr11630171ibd.190.1281423601190; 
-	Tue, 10 Aug 2010 00:00:01 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Tue, 10 Aug 2010 00:00:00 -0700 (PDT)
-In-Reply-To: <AANLkTimbjUYY22nf59gPAw-Xm05mMLNdDA61Ydc63DFs@mail.gmail.com>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world>
-	<AANLkTinK5O3F25QJ40B8+rt5M57BKwWVOYytUEZqvP-D@mail.gmail.com>
-	<AANLkTikjcrh78MDsSbdALEWbZGHU7nwrk14FQFiU=ynA@mail.gmail.com>
-	<AANLkTimbjUYY22nf59gPAw-Xm05mMLNdDA61Ydc63DFs@mail.gmail.com>
-Date: Tue, 10 Aug 2010 09:00:00 +0200
-Message-ID: <AANLkTin83G-uHv8oC1P0eQSxwddzAx406wjYV5jSqoZG@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Why PREFERRED_VERSION setting of <distro>.conf overrules local.conf setting ?
+Subject: [PATCH] package_ipk.bbclass: remove redundant dependencies upon opkg/opkg-collateral.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,38 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 07:00:12 -0000
+X-List-Received-Date: Tue, 10 Aug 2010 07:03:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-2010/8/10 Graham Gower <graham.gower@gmail.com>:
-> On 10 August 2010 04:31, Frans Meulenbroeks <fransmeulenbroeks@gmail.com> wrote:
->> 2010/8/9 Chris Larson <clarson@kergoth.com>:
->>> On Mon, Aug 9, 2010 at 6:26 AM, Hauser, Wolfgang (external) <
->>> Wolfgang.Hauser.external@eads.com> wrote:
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ classes/package_ipk.bbclass |    1 -
+ 1 files changed, 0 insertions(+), 1 deletions(-)
 
->>> PREFERRED_VERSION_<package>_local = "xxx" is how you use the override.
->>
->> The real solution woud be to either temporary store the
->> PREFERRED_VERSION and apply it later on.
->> Alternately we could parse local.conf twice, the first time ignoring
->> the PREFERRED lines, and the 2nd time only looking at these.
->> Yet another solution could be to split local.conf into two pieces, one
->> with settings like MACHINE and DISTRO, the other one with the
->> overrides.
->
-> Wouldn't it be far simpler to fix the distro conf file(s)? E.g. apply
-> something like this:
-> s/^PREFERRED_VERSION_\([a-z]*\) =/PREFERRED_VERSION_\1 ?=/
+diff --git a/classes/package_ipk.bbclass b/classes/package_ipk.bbclass
+index 3d70181..5d388da 100644
+--- a/classes/package_ipk.bbclass
++++ b/classes/package_ipk.bbclass
+@@ -1,6 +1,5 @@
+ inherit package
+ 
+-BOOTSTRAP_EXTRA_RDEPENDS += "opkg-collateral opkg"
+ IMAGE_PKGTYPE ?= "ipk"
+ 
+ IPKGCONF_TARGET = "${STAGING_ETCDIR_NATIVE}/opkg.conf"
+-- 
+1.7.1
 
-Yeah.
-Didn't really think about that one, but if distro's want to change and
-adhere to it, that would be the simplest solution
-Machines that pin something should probably also use weak binding.
-Conceptually it is probably marginally less desirable than a solution
-where local.conf has *always* control.
-
-What do the distro's think about this?
-
-Frans
 
 
