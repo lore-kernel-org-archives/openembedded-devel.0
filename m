@@ -1,20 +1,25 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1Oitsv-0007nx-JQ
+	(envelope-from <morphis@gravedo.de>) id 1Oitv9-0003Cv-KE
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 20:49:29 +0200
+	Tue, 10 Aug 2010 20:51:41 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id C4CE180C527; Tue, 10 Aug 2010 20:49:02 +0200 (CEST)
-Received: from localhost (p5489A930.dip.t-dialin.net [84.137.169.48])
-	by gravedo.de (Postfix) with ESMTPSA id 1226780C4FF;
-	Tue, 10 Aug 2010 20:49:00 +0200 (CEST)
+	id C126180C4FF; Tue, 10 Aug 2010 20:51:22 +0200 (CEST)
+Received: from [192.168.1.142] (p5489A930.dip.t-dialin.net [84.137.169.48])
+	by gravedo.de (Postfix) with ESMTPSA id 0464A80C4FF
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Aug 2010 20:51:21 +0200 (CEST)
+Message-ID: <4C619FA5.7090805@gravedo.de>
+Date: Tue, 10 Aug 2010 20:51:17 +0200
 From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12pre) Gecko/20100729 Shredder/3.0.7pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Aug 2010 20:48:50 +0200
-Message-Id: <1281466130-5731-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1281420092-883-1-git-send-email-morphis@gravedo.de>
-References: <1281420092-883-1-git-send-email-morphis@gravedo.de>
+References: <1281420092-883-1-git-send-email-morphis@gravedo.de>	<1281454077-2977-1-git-send-email-morphis@gravedo.de>
+	<201008102153.38314.roman@khimov.ru>
+In-Reply-To: <201008102153.38314.roman@khimov.ru>
+X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 85.214.79.159
 X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -23,7 +28,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2] tzcode-native: bump version to 2010k
+Subject: Re: [PATCH 2/2] tzdata: bump version to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,62 +42,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 18:50:36 -0000
+X-List-Received-Date: Tue, 10 Aug 2010 18:51:43 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes/tzcode/tzcode-native_2010j.bb |   16 ----------------
- recipes/tzcode/tzcode-native_2010k.bb |   16 ++++++++++++++++
- 2 files changed, 16 insertions(+), 16 deletions(-)
- delete mode 100644 recipes/tzcode/tzcode-native_2010j.bb
- create mode 100644 recipes/tzcode/tzcode-native_2010k.bb
+Am 10.08.2010 19:53, schrieb Roman I Khimov:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 10 =D0=B0=D0=B2=D0=B3=D1=83=
+=D1=81=D1=82=D0=B0 2010 19:27:57 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Simon Bus=
+ch =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+>> Signed-off-by: Simon Busch <morphis@gravedo.de>
+>=20
+> Uhm. I meant, the _first_ one, which is for tzcode-native.
+>=20
+> BTW, it would be nice if you've updated patchwork when submitting updat=
+ed=20
+> patches:
+> http://patchwork.openembedded.org/
+>=20
 
-diff --git a/recipes/tzcode/tzcode-native_2010j.bb b/recipes/tzcode/tzcode-native_2010j.bb
-deleted file mode 100644
-index 7e1ae77..0000000
---- a/recipes/tzcode/tzcode-native_2010j.bb
-+++ /dev/null
-@@ -1,16 +0,0 @@
--require tzcode-native.inc
--
--# Note that elsie.nci.nih.gov removes old versions when new is coming out
--# So if this doesn't build for you because of missing source file, just
--# bump it to the latest available version, removing old one
--# Also, tzdata (and it is needed to build tzcode) version can differ from
--# tzcode version, thus this variable
--
--TZDATA_PV = "2010j"
--
--SRC_URI[tzcode-2010j.md5sum] = "5ba8345720296d3a659b349b2052d139"
--SRC_URI[tzcode-2010j.sha256sum] = "f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
--SRC_URI[tzdata-2010j.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
--SRC_URI[tzdata-2010j.sha256sum] = "dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
--
--PR = "${INC_PR}.0"
-diff --git a/recipes/tzcode/tzcode-native_2010k.bb b/recipes/tzcode/tzcode-native_2010k.bb
-new file mode 100644
-index 0000000..21796d6
---- /dev/null
-+++ b/recipes/tzcode/tzcode-native_2010k.bb
-@@ -0,0 +1,16 @@
-+require tzcode-native.inc
-+
-+# Note that elsie.nci.nih.gov removes old versions when new is coming out
-+# So if this doesn't build for you because of missing source file, just
-+# bump it to the latest available version, removing old one
-+# Also, tzdata (and it is needed to build tzcode) version can differ from
-+# tzcode version, thus this variable
-+
-+TZDATA_PV = "2010k"
-+
-+SRC_URI[tzcode-2010k.md5sum] = "63cd2199679c91bed972a0248d6916af"
-+SRC_URI[tzcode-2010k.sha256sum] = "96671eac3a98d0c974833c8bfa7ea9b537cc9d32573e902103846b90f6dccdbd"
-+SRC_URI[tzdata-2010k.md5sum] = "5e2086249d6a6bb116534d358661ad3f"
-+SRC_URI[tzdata-2010k.sha256sum] = "ef69c99504c0fd9864ba8ef1daae5f2d4df097cf7dc350f09b8f70386272408d"
-+
-+PR = "${INC_PR}.0"
--- 
-1.7.0.4
+Sorry for this. I choose the file to send too quickly so I dismissed to
+choose the first one :) I have updated the status of the patches in the
+patchwork system (never worked with it before, so I decided to reject
+the wrong patches).
 
+Hope now everything is fine and the patches will be ack'ed :)
+
+regards,
+morphis
 
 
