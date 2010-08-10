@@ -1,46 +1,45 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <tasskjapp@gmail.com>) id 1OijGy-0007Ev-Ms
+	(envelope-from <martin.jansa@gmail.com>) id 1OijgU-0005jG-Sp
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 09:29:21 +0200
-Received: by ewy7 with SMTP id 7so3792421ewy.6
+	Tue, 10 Aug 2010 09:55:55 +0200
+Received: by fxm6 with SMTP id 6so507939fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 00:29:09 -0700 (PDT)
+	Tue, 10 Aug 2010 00:55:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type;
-	bh=TUghAG2tmrLuftnxdOBAokDgaZPSNfaMpHr+mbDv380=;
-	b=XQf/3rGZazA+sTrb/KfYcN0M7V4UA+/8ZybZlOzzYyDjPr8fBPgwa01yv9qudhSDf5
-	5XNmimWghQhI75PFg05CbkLPm7aKj7LysYm+cOmUPPovil5gogfqKPiKPBP1ygIF/d/4
-	1dhOlssPDMHFioi95QErcSRQJUY+YUPHzjHTw=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=vHR2/LdJTPXvs//w0e36GxkosYj0TED2Zf2xlDdH+4A=;
+	b=Hk5wFrmW4ydposMUXpRoZoECNelZHNukcgtQ1wBtVzV1214DBN0np3GjNidVmccsuJ
+	dNLC+2qAwXpasi10vcPlPV0/Pcjeuzfmd+VhytEYWtHCA3z1vnLIRZOaGhSiIsZPB6df
+	ByUsteAxxHebeCOu51zx00kgthfi4O059d9Mg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type;
-	b=O5sRf/ql460jzdU8zdvK3sD3tTZD/SXldd3TuKl8Hjt0L22uqFnrYHd6OpPQWWDM0t
-	S0C69wu1IhFqjoL5y1HPogqsMNzhv7UBjNDoKDEh9/GwwAqEnh7QHMXl8igJNuVlSOe+
-	QgL8fa8rQhaF05GhUYE1rPiBy5IG0cTV9Jr80=
-Received: by 10.213.31.194 with SMTP id z2mr300365ebc.82.1281425349471;
-	Tue, 10 Aug 2010 00:29:09 -0700 (PDT)
-Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
-	by mx.google.com with ESMTPS id u9sm9257025eeh.11.2010.08.10.00.29.08
-	(version=SSLv3 cipher=RC4-MD5); Tue, 10 Aug 2010 00:29:08 -0700 (PDT)
-Message-ID: <4C61009D.8050703@gmail.com>
-Date: Tue, 10 Aug 2010 09:32:45 +0200
-From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=JH+BueGEMKyWpr6JtMYdoXEm2y5TjSjQxEq27eR8jE9mQ1S1Kgk69dvpLqUD7phwwS
+	6DwEuDwwQU2VP10mCwHBKjidnYVO9mLXIdXwBNAQtqAdCFzbTHzK8YaA9TrvxrsGXWpt
+	gfD1lgZcfU7rvor2uGWoqqobgFlD0XOr8X9OI=
 MIME-Version: 1.0
+Received: by 10.223.123.79 with SMTP id o15mr17675153far.12.1281426927105; 
+	Tue, 10 Aug 2010 00:55:27 -0700 (PDT)
+Received: by 10.223.164.79 with HTTP; Tue, 10 Aug 2010 00:55:27 -0700 (PDT)
+In-Reply-To: <AANLkTi=Umaro-+_MQCjro6S6HrFfp_rek1aXmimYx0=y@mail.gmail.com>
+References: <1280492963-30578-1-git-send-email-enrico.scholz@sigma-chemnitz.de>
+	<AANLkTi=Umaro-+_MQCjro6S6HrFfp_rek1aXmimYx0=y@mail.gmail.com>
+Date: Tue, 10 Aug 2010 09:55:27 +0200
+Message-ID: <AANLkTinU7yQUdEJa0PrWr-TkZsLAbnWKBvkeurs+JDYL@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: tasskjapp@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: SDK problems. GCC won't launch because it can't find libmpfr.so.4
+Subject: Re: [PATCH] ncurses: added 5.7 recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,24 +53,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 07:29:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Aug 2010 07:55:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-  I've compiled an SDK from a source tree in 
-//data/src/lead-dev/openembedded/, and the resulting gcc compiler for 
-arm has an RPATH of 
-//data/src/lead-dev/openembedded/build/angstrom-dev/sysroots/i686-linux/usr/lib/, 
-and will only run on my machine as long as that directory exists. If I 
-remove that directory, it complains about libmpfr.so.4 not being found.
+On Mon, Aug 9, 2010 at 7:49 PM, Martin Jansa <martin.jansa@gmail.com> wrote=
+:
+> On Fri, Jul 30, 2010 at 2:29 PM, Enrico Scholz
+> <enrico.scholz@sigma-chemnitz.de> wrote:
+>> It uses ideas from the old 5.4 recipe but brings a lot of new features
+>> like widec libs, pkgconfig files or splitted library packages.
+>>
+>> As lot of packages depend on ncurses, whole distribution must be
+>> probably rebuild when updating to this new version.
+>>
+>> Due to this and the complex recipe, it has a negative DEFAULT_PREFERENCE
+>> for now.
+>
+> Hi,
+>
+> Only breakage I noticed sofar is in pidgin when pidgin-2.6.6 checks
+> for wide char support:
+> configure:16212: checking if
+> /OE/tmpdir-dev-shr/sysroots/armv4t-oe-linux-gnueabi/usr/include/ncurses.h
+> supports wide characters
+> | =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 #ifndef get_wch
+> | =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 # error get_wch not found!
+> | =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0=
+ =A0 #endif
+>
+> and then it decides not to build finch (and later do_package fails).
+>
+> is it about ENABLE_WIDEC, or something else?
+>
+> Thanks!
 
-The previous SDK I built also had this odd RPATH, but gcc would run on 
-other systems even if the RPATH-directory didn't exist.
+The problem seems to be in ncurses's do_install where you first install
+widec if enabled and then always narrowc, which overwrittes curses.h.
 
-I have placed the toolchain in a custom location and compile small 
-applications with makefiles pointing to it. I tried unpacking to 
-/usr/local/angstrom instead and ran the environment setup script, but 
-got the same error.
+With this change I was able to build pidgin with finch without
+problem, but no idea if it's right way to fix it.
 
-- Tasslehoff
+
+diff --git a/recipes/ncurses/ncurses_5.7.bb b/recipes/ncurses/ncurses_5.7.b=
+b
+index 3562685..725cf7b 100644
+--- a/recipes/ncurses/ncurses_5.7.bb
++++ b/recipes/ncurses/ncurses_5.7.bb
+@@ -90,12 +90,12 @@ _install_opts =3D "\
+ "
+
+ do_install() {
+-        ! ${ENABLE_WIDEC} || \
+-            oe_runmake -C widec ${_install_opts}
+-
+         oe_runmake -C narrowc ${_install_opts} \
+                install.data install.progs
+
++        ! ${ENABLE_WIDEC} || \
++            oe_runmake -C widec ${_install_opts}
++
+
+         cd narrowc
+
+Regards,
+
 
