@@ -1,34 +1,31 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OimYT-0008BG-Lt
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 12:59:42 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 3E5AF1660375; Tue, 10 Aug 2010 04:59:13 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id 9DDF11660783;
-	Tue, 10 Aug 2010 04:58:52 -0600 (MDT)
-Message-ID: <4C6130EC.9030602@mlbassoc.com>
-Date: Tue, 10 Aug 2010 04:58:52 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
-MIME-Version: 1.0
-To: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-References: <4C607E6C.2030104@mlbassoc.com>
-	<AANLkTi=zp9r7hoym3kFEx9hpCgoQ8iOBVNZ6FhN7F4q6@mail.gmail.com>
-In-Reply-To: <AANLkTi=zp9r7hoym3kFEx9hpCgoQ8iOBVNZ6FhN7F4q6@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oin6H-0004E2-OY for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Aug 2010 13:34:34 +0200
+Received: from f053040061.adsl.alicedsl.de ([78.53.40.61]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oin69-0004QL-Be for openembedded-devel@lists.openembedded.org;
+	Tue, 10 Aug 2010 11:34:25 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <1281379938-24296-1-git-send-email-jkridner@beagleboard.org>
+References: <1281379938-24296-1-git-send-email-jkridner@beagleboard.org>
+Date: Tue, 10 Aug 2010 13:34:22 +0200
+Message-ID: <1281440062.3888.5.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00
-	autolearn=unavailable version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: [Angstrom-devel] Can't build gstreamer-ti
+Subject: Re: [PATCH] angstrom-uboot-scripts: debugged beagleboard validation boot/user scripts
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,95 +39,79 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 10:59:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 10 Aug 2010 11:34:35 -0000
+X-Groupsio-MsgNum: 22044
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-xuk2pcD32efukTfc8Pva"
 
-On 08/09/2010 04:37 PM, Chethan Pandarinath wrote:
-> This seems to be the same error:
-> http://e2e.ti.com/support/dsp/omap_applications_processors/f/42/t/42905.aspx
->
-> With the problem being that the cl6x compiler isn't bundled with the rest of
-> the toolchain, and has to be downloaded separately.
->
+--=-xuk2pcD32efukTfc8Pva
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-But I've downloaded those tools and was able to build this recipe just
-a few weeks ago.  I think something in the staged packaging has broken it.
+Am Montag, den 09.08.2010, 13:52 -0500 schrieb Jason Kridner:
+> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
 
-> On Mon, Aug 9, 2010 at 6:17 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
->
->> Current org.openembedded.dev tree:
->> commit 9b1a9d8fd143fdab0a169dfda77a5309d52f76a4
->> Author: Stefan Schmidt<stefan@buglabs.net>
->> Date:   Mon Aug 9 17:26:00 2010 +0200
->>
->>     firmware: Add recipe to work with the marvell-sdio-tf-fw
->>
->> MACHINE=beagleboard, DISTRO=angstrom, TARGET=gstreamer-ti
->>
->> | Compiling failure.c...
->> |
->> /local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-cgt6x-tree/bin/cl6x
->> -g -d"_DEBUG" --no_compress -dMAX_DSPS=1 -dMAX_PROCESSORS=2 -dID_GPP=1
->> -dOMAP3530 -dPROC_COMPONENT -dPOOL_COMPONENT -dNOTIFY_COMPONENT
->> -dMPCS_COMPONENT -dRINGIO_COMPONENT -dMPLIST_COMPONENT -dMSGQ_COMPONENT
->> -dMSGQ_ZCPY_LINK -dCHNL_COMPONENT -dCHNL_ZCPY_LINK -dZCPY_LINK -dPROCID=0
->> -dOMAP3530 -dOMAP3530_INTERFACE=SHMEM_INTERFACE
->> -dPHYINTERFACE=SHMEM_INTERFACE -dDSP_SWI_MODE
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/inc
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/inc/DspBios
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/inc/DspBios/5.XX
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/inc/DspBios/5.XX/OMAP3530
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/inc/OMAP3530
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/inc/C64XX
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/src/base/gen
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/src/base/gen/DspBios
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/src/base/gen/DspBios/
->> -I/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dspbios-tree/packages/ti/bios/include
->> -I/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-cgt6x-tree/include
->> -I/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dspbios-tree/packages/ti/rtdx/include/c6000
->> -I/local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-dspbios-tree/packages/ti/psl/include
->> -I/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/BUILD/OMAP3530_0/INCLUDE
->> -q -pdr -pdv -pden -ml3 -mv6400+ --disable:sploop
->> -fr"/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/BUILD/OMAP3530_0/GEN/OBJ/DEBUG"
->> failure.c
->> | /bin/sh:
->> /local/Angstrom_BeagleBoard/tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-cgt6x-tree/bin/cl6x:
->> No such file or directory
->> | make[3]: *** [failure.c.deb] Error 127
->> | make[3]: Leaving directory
->> `/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/src/base/gen'
->> | make[2]: *** [objdeb] Error 2
->> | make[2]: Leaving directory
->> `/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/src/base/gen'
->> | make[1]: *** [gen.objdeb] Error 2
->> | make[1]: Leaving directory
->> `/local/Angstrom_BeagleBoard/tmp/work/beagleboard-angstrom-linux-gnueabi/ti-dsplink-1_1_64-r88h/dsplink_linux_1_64/dsplink/dsp/src/base'
->> | make: *** [base.objdeb] Error 2
->> NOTE: package ti-dsplink-1_1_64-r88h: task do_compile: Failed
->> ERROR: TaskFailed event exception, aborting
->> ERROR: Build of /local/Angstrom_BeagleBoard/openembedded/recipes/ti/
->> ti-dsplink_1.64.bb do_compile failed
->>
->> --
->> ------------------------------------------------------------
->> Gary Thomas                 |  Consulting for the
->> MLB Associates              |    Embedded world
->> ------------------------------------------------------------
->>
->> _______________________________________________
->> Angstrom-distro-devel mailing list
->> Angstrom-distro-devel@linuxtogo.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/angstrom-distro-devel
->>
->
->
->
+[=E2=80=A6]
 
--- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+I know this has already been committed in
+9eab7a12e4a94efbb53e5e43beeb67d15ae9eab5 [1].
+
+But I do not like the commit summary. Is this script developed in a
+repository somewhere else? Maybe put a link to the revision there.
+
+> ---
+>  recipes/angstrom/angstrom-uboot-scripts.bb         |    2 +-
+>  .../beagleboard-validation-boot.cmd                |   15 +++++++-------=
+-
+>  .../beagleboard-validation-user.cmd                |   15 +++++++-------=
+-
+>  3 files changed, 15 insertions(+), 17 deletions(-)
+
+[=E2=80=A6]
+=20
+> diff --git a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validati=
+on-boot.cmd b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validatio=
+n-boot.cmd
+> index 50a82a6..71d314c 100644
+> --- a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-boot=
+.cmd
+> +++ b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-boot=
+.cmd
+> @@ -1,14 +1,13 @@
+> -setenv dvimode 'hd720'
+> -setenv vram '16M omapfb.vram=3D0:8M,1:4M,2:4M'
+> +# On xM: bootargs=3Dconsole=3DttyS2,115200n8 mem=3D80M@0x80000000 mem=3D=
+384M@0x88000000 mpurate=3D1000 buddy=3Dnone camera=3Dlbcm3m1 vram=3D16M oma=
+pfb.vram=3D0:8M,1:4M,2:4M omapfb.mode=3Ddvi:hd720 omapdss.def_disp=3Ddvi ro=
+ot=3D/dev/mmcblk0p2 rw rootfstype=3Dext3 rootwait
+> +mmc init
+> +setenv dvimode hd720
+> +setenv vram 16M omapfb.vram=3D0:8M,1:4M,2:4M
+
+Also a note would have been nice, why the =C2=BB'=C2=AB were removed.
+
+[=E2=80=A6]
 
 
+Thanks,
+
+Paul
+
+
+[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D9eab7a1=
+2e4a94efbb53e5e43beeb67d15ae9eab5
+
+--=-xuk2pcD32efukTfc8Pva
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxhOTEACgkQPX1aK2wOHVjNbACfc539vo7VWIbMN2KGvG2pqJ9G
+8LYAn1h+58SfTA/AsZXbwclbDi5HUwXV
+=whlX
+-----END PGP SIGNATURE-----
+
+--=-xuk2pcD32efukTfc8Pva--
