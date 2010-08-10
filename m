@@ -1,48 +1,46 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Oij1j-0004BS-At
+	(envelope-from <tasskjapp@gmail.com>) id 1OijGy-0007Ev-Ms
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 09:13:36 +0200
-Received: by pvg6 with SMTP id 6so1058693pvg.6
+	Tue, 10 Aug 2010 09:29:21 +0200
+Received: by ewy7 with SMTP id 7so3792421ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 00:13:24 -0700 (PDT)
+	Tue, 10 Aug 2010 00:29:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=iTT84RBzjwx8PWEtNvtEKMgJr070hFHzbkwNHLr4S7k=;
-	b=dhzfQ7CNJ188qiaSTLtHXVSWAI9Pl9irev8KVKAPWtsF0XrOg0520gMrBDqIXrto06
-	9HY8MSFNAmp08GeF1qlWArQBTeA2hFQ1GTZ7Jke8723qbY8LkeDDaC3DVBwWtkF6Oh5o
-	b4xKEiVxFG91K4DizkWaBN45CUdctRsbkck3o=
+	:user-agent:mime-version:to:subject:content-type;
+	bh=TUghAG2tmrLuftnxdOBAokDgaZPSNfaMpHr+mbDv380=;
+	b=XQf/3rGZazA+sTrb/KfYcN0M7V4UA+/8ZybZlOzzYyDjPr8fBPgwa01yv9qudhSDf5
+	5XNmimWghQhI75PFg05CbkLPm7aKj7LysYm+cOmUPPovil5gogfqKPiKPBP1ygIF/d/4
+	1dhOlssPDMHFioi95QErcSRQJUY+YUPHzjHTw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=erDw84xOgOOWQ0uhBRD6X0T+MYNnrObs97HAt+cyhjT2byt2YoiP3KS/+eAzB8tlWO
-	p+rFm/jB/+UUaIwkAWqfnlov0/wDRXdBuyBKvQQ4Y1PuZMhKav68MF+CFLhSjssmJnZ/
-	HIUrxu06aJzmkzzdKAJhT5u3wlFQeUWhRQ88U=
-Received: by 10.114.88.18 with SMTP id l18mr19846129wab.175.1281424403899;
-	Tue, 10 Aug 2010 00:13:23 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	q6sm12159290waj.22.2010.08.10.00.13.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 10 Aug 2010 00:13:22 -0700 (PDT)
-Message-ID: <4C60FC0D.7040702@gmail.com>
-Date: Tue, 10 Aug 2010 16:43:17 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
+	:content-type;
+	b=O5sRf/ql460jzdU8zdvK3sD3tTZD/SXldd3TuKl8Hjt0L22uqFnrYHd6OpPQWWDM0t
+	S0C69wu1IhFqjoL5y1HPogqsMNzhv7UBjNDoKDEh9/GwwAqEnh7QHMXl8igJNuVlSOe+
+	QgL8fa8rQhaF05GhUYE1rPiBy5IG0cTV9Jr80=
+Received: by 10.213.31.194 with SMTP id z2mr300365ebc.82.1281425349471;
+	Tue, 10 Aug 2010 00:29:09 -0700 (PDT)
+Received: from [192.168.0.49] (147.84-49-231.nextgentel.com [84.49.231.147])
+	by mx.google.com with ESMTPS id u9sm9257025eeh.11.2010.08.10.00.29.08
+	(version=SSLv3 cipher=RC4-MD5); Tue, 10 Aug 2010 00:29:08 -0700 (PDT)
+Message-ID: <4C61009D.8050703@gmail.com>
+Date: Tue, 10 Aug 2010 09:32:45 +0200
+From: Tasslehoff Kjappfot <tasskjapp@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: tasskjapp@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] task-boot.bb: Don't pull in u-a if ONLINE_PACKAGE_MANAGEMENT="none".
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: SDK problems. GCC won't launch because it can't find libmpfr.so.4
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,35 +54,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 07:13:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 10 Aug 2010 07:29:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-This makes it possible to build an opkgless system, without having to set
-DISTRO_UPDATE_ALTERNATIVES. In the unlikely event that someone doesn't want
-opkg, but does want update-alternatives, one can set DISTRO_UPDATE_ALTERNATIVES
-in the local.conf.
+  I've compiled an SDK from a source tree in 
+//data/src/lead-dev/openembedded/, and the resulting gcc compiler for 
+arm has an RPATH of 
+//data/src/lead-dev/openembedded/build/angstrom-dev/sysroots/i686-linux/usr/lib/, 
+and will only run on my machine as long as that directory exists. If I 
+remove that directory, it complains about libmpfr.so.4 not being found.
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/tasks/task-boot.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+The previous SDK I built also had this odd RPATH, but gcc would run on 
+other systems even if the RPATH-directory didn't exist.
 
-diff --git a/recipes/tasks/task-boot.bb b/recipes/tasks/task-boot.bb
-index 45d50ef..d193393 100644
---- a/recipes/tasks/task-boot.bb
-+++ b/recipes/tasks/task-boot.bb
-@@ -17,7 +17,7 @@ MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS ?= ""
- # u-a script used for building image which is defined with
- # PREFERRED_PROVIDER_virtual/update-alternatives-native
- 
--DISTRO_UPDATE_ALTERNATIVES ?= "${PREFERRED_PROVIDER_virtual/update-alternatives}"
-+DISTRO_UPDATE_ALTERNATIVES ?= "${@base_conditional("ONLINE_PACKAGE_MANAGEMENT", "none", "", "${PREFERRED_PROVIDER_virtual/update-alternatives}", d)}"
- 
- # Make sure we build the kernel
- DEPENDS = "virtual/kernel"
--- 
-1.7.1
+I have placed the toolchain in a custom location and compile small 
+applications with makefiles pointing to it. I tried unpacking to 
+/usr/local/angstrom instead and ran the environment setup script, but 
+got the same error.
 
-
+- Tasslehoff
 
