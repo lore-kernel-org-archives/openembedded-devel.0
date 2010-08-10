@@ -1,34 +1,30 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1Oitv9-0003Cv-KE
+	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Oitx9-0002Qr-7y
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 20:51:41 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id C126180C4FF; Tue, 10 Aug 2010 20:51:22 +0200 (CEST)
-Received: from [192.168.1.142] (p5489A930.dip.t-dialin.net [84.137.169.48])
-	by gravedo.de (Postfix) with ESMTPSA id 0464A80C4FF
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 20:51:21 +0200 (CEST)
-Message-ID: <4C619FA5.7090805@gravedo.de>
-Date: Tue, 10 Aug 2010 20:51:17 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12pre) Gecko/20100729 Shredder/3.0.7pre
-MIME-Version: 1.0
+	Tue, 10 Aug 2010 20:53:36 +0200
+Received: (qmail 28170 invoked by uid 813007); 10 Aug 2010 18:46:03 -0000
+X-clamdmail: clamdmail 0.18a
+Received: from 195.149.226.213 (HELO home.localnet)
+	(marcin@juszkiewicz.com.pl@195.149.226.213)
+	by 195.149.226.213 with ESMTPA; 10 Aug 2010 18:46:03 -0000
+From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
 To: openembedded-devel@lists.openembedded.org
-References: <1281420092-883-1-git-send-email-morphis@gravedo.de>	<1281454077-2977-1-git-send-email-morphis@gravedo.de>
-	<201008102153.38314.roman@khimov.ru>
-In-Reply-To: <201008102153.38314.roman@khimov.ru>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+Date: Tue, 10 Aug 2010 20:46:20 +0200
+User-Agent: KMail/1.13.5 (Linux/2.6.35-10-generic; KDE/4.5.0; x86_64; ; )
+References: <1281462087-4693-1-git-send-email-fransmeulenbroeks@gmail.com>
+In-Reply-To: <1281462087-4693-1-git-send-email-fransmeulenbroeks@gmail.com>
+MIME-Version: 1.0
+Message-Id: <201008102046.21370.marcin@juszkiewicz.com.pl>
+X-SA-Exim-Connect-IP: 195.149.226.213
+X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] tzdata: bump version to 2010k
+Subject: Re: [RFC] add maintainers to distro conf files, move or remove orphaned distro's, remove obsolete distro's
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,33 +38,102 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 18:51:43 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 10 Aug 2010 18:53:38 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am 10.08.2010 19:53, schrieb Roman I Khimov:
-> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 10 =D0=B0=D0=B2=D0=B3=D1=83=
-=D1=81=D1=82=D0=B0 2010 19:27:57 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Simon Bus=
-ch =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
->> Signed-off-by: Simon Busch <morphis@gravedo.de>
->=20
-> Uhm. I meant, the _first_ one, which is for tzcode-native.
->=20
-> BTW, it would be nice if you've updated patchwork when submitting updat=
-ed=20
-> patches:
-> http://patchwork.openembedded.org/
->=20
+Dnia wtorek, 10 sierpnia 2010 o 19:41:27 Frans Meulenbroeks napisa=C5=82(a):
+=20
+> celinux-test.conf
+>   Not listed in MAINTAINERS
+>   created by Marcin Juszkiewicz in 2006
 
-Sorry for this. I choose the file to send too quickly so I dismissed to
-choose the first one :) I have updated the status of the patches in the
-patchwork system (never worked with it before, so I decided to reject
-the wrong patches).
+Created for CELF and their testlab. No idea is it in use or not. Probably T=
+im=20
+Bird would be a good contact. IIRC it was Angstrom fork.
+=20
+> gmustix.conf
+>   Not listed in MAINTAINERS
+>   created by Marcin Juszkiewicz in 2006
 
-Hope now everything is fine and the patches will be ack'ed :)
+I did not created it. Maybe I pushed someone's patch.
+=20
+> iphone-compat.conf
+>   Not listed in MAINTAINERS
+>   created by eremy Laine in 2009
 
-regards,
-morphis
+Imported from Poky or based on it probably.
+=20
+> maemo5-compat.conf
+>   Not listed in MAINTAINERS
+>   created by Marcin Juszkiewicz in 2010
+
+Created by Robert Schuster and edited/merged by me.
+=20
+> nylon.conf
+>   Not listed in MAINTAINERS
+>   created by Martin Dietze in 2009
+
+IIRC it is older then 2009 even.
+=20
+> openmn.conf
+>   Not listed in MAINTAINERS
+>   created by nslu2-linux.adm@bkbits.net (!) in 2005
+
+Maintained outside of OE tree and not merged back.
+=20
+> openwrt-sdk.conf
+>   Not listed in MAINTAINERS
+
+Created in 2008/2009 to use OpenEmbedded to build packages compatible with=
+=20
+OpenWRT. Worth staying.
+=20
+> sharprom-compatible.conf
+>   Not listed in MAINTAINERS
+>   probbly also created by nslu2-linux.adm@bkbits.net, but file has been
+> touched by several people
+
+Rolf 'Laibsch' Leggewie is closest to being maintainer of it.
+=20
+> ucslugc.conf
+>   Not listed in MAINTAINERS
+>   created by John Bowler in 2005, content is mostly from Rod Whitby
+> (2006/2007)
+
+Yet another nslu2 distro - no idea is it in use.
+=20
+> wrt54oe.conf
+>   Not listed in MAINTAINERS
+>   created by Chris Larson in 2005, content is mostly from Marcin
+> Juszkiewicz (2005)
+
+Gives packages which can be installed under OpenWRT 8.x (WhiteRussian).
+=20
+> Distro's mentioned in MAINTAINERS but with no entry in conf/distro:
+>   arago (Denys Dmytriyenko)
+
+External tree.
+
+>   familiar (Erik Hovland)
+
+Dead, already removed from OE.
+
+>   Sonkei (Rolf 'Laibsch' Leggewie, Matthias 'CoreDump' Hentges)
+
+OpenZaurus clone - was maintained externally.
+
+>   openzaurus (Richard Purdie)
+
+Dead, already removed from OE.
+
+Regards,=20
+=2D-=20
+JID:      hrw@jabber.org
+Website:  http://marcin.juszkiewicz.com.pl/
+LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+
+
 
 
