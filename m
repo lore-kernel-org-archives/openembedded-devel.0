@@ -1,37 +1,27 @@
-Received: from vms173013pub.verizon.net ([206.46.173.13])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OiuUa-0007xc-Vj
+	(envelope-from <morphis@gravedo.de>) id 1OiuW8-0001G3-Bg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 21:28:16 +0200
-Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173013.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L6Y001W4BDBD3G1@vms173013.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Tue,
-	10 Aug 2010 14:27:24 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D7AAA14AF64; Tue,
-	10 Aug 2010 15:27:10 -0400 (EDT)
-Date: Tue, 10 Aug 2010 15:27:10 -0400
-From: Denys Dmytriyenko <denis@denix.org>
+	Tue, 10 Aug 2010 21:29:47 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id AEFB080C527; Tue, 10 Aug 2010 21:29:32 +0200 (CEST)
+Received: from localhost (p5489A930.dip.t-dialin.net [84.137.169.48])
+	by gravedo.de (Postfix) with ESMTPSA id 8AF6B80C4FF;
+	Tue, 10 Aug 2010 21:29:31 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100810192710.GE7189@denix.org>
-References: <4C607E6C.2030104@mlbassoc.com>
-	<AANLkTi=zp9r7hoym3kFEx9hpCgoQ8iOBVNZ6FhN7F4q6@mail.gmail.com>
-	<4C6130EC.9030602@mlbassoc.com> <4C614AB7.2050709@mlbassoc.com>
-MIME-version: 1.0
-In-reply-to: <4C614AB7.2050709@mlbassoc.com>
-User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.13
-X-SA-Exim-Mail-From: denis@denix.org
+Date: Tue, 10 Aug 2010 21:29:28 +0200
+Message-Id: <1281468568-8990-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: [Angstrom-devel] Can't build gstreamer-ti
+Subject: [PATCH] ecore: remove fix-ecore-fb-initialization.patch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,29 +35,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 19:28:17 -0000
-Content-type: text/plain; charset=us-ascii
-Content-disposition: inline
+X-List-Received-Date: Tue, 10 Aug 2010 19:29:47 -0000
 
-On Tue, Aug 10, 2010 at 06:48:55AM -0600, Gary Thomas wrote:
-> On 08/10/2010 04:58 AM, Gary Thomas wrote:
->> But I've downloaded those tools and was able to build this recipe just
->> a few weeks ago. I think something in the staged packaging has broken it.
->
-> I worked past this problem by installing a symlink by hand to my DVSDK 
-> installed tools.
->
-> Next problem :-(
->
-> | Engine.c:(.text+0x19d4): undefined reference to `__aeabi_uidiv'
->
-> How were these packages built to be put on the Angstrom package feed?
-> Am I doing something wrong?
+Removing the fix-ecore-fb-initialization patch as it let ecore open the supplied
+touchscreen device twice which results in an error on platforms where the touchscreen
+device node can be opened only once. Furthermore I doubt that it is necessary to open the
+touchscreen device node more than one time.
 
-As Henning already said, Codec Engine only builds and works with binutils 2.18 
-(which IS Angstrom's default, btw) on TI OMAP3/DaVinci processors.
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes/efl1/ecore.inc                             |    2 -
+ .../efl1/ecore/fix-ecore-fb-initialization.patch   |   29 --------------------
+ 2 files changed, 0 insertions(+), 31 deletions(-)
+ delete mode 100644 recipes/efl1/ecore/fix-ecore-fb-initialization.patch
 
+diff --git a/recipes/efl1/ecore.inc b/recipes/efl1/ecore.inc
+index bb7eea5..081572d 100644
+--- a/recipes/efl1/ecore.inc
++++ b/recipes/efl1/ecore.inc
+@@ -12,8 +12,6 @@ inherit efl
+ 
+ BBCLASSEXTEND = "native"
+ 
+-SRC_URI += "file://fix-ecore-fb-initialization.patch"
+-
+ do_configure_prepend() {
+ 	touch ${S}/po/Makefile.in.in || true
+ 	sed -i -e 's: po::g' ${S}/Makefile.am
+diff --git a/recipes/efl1/ecore/fix-ecore-fb-initialization.patch b/recipes/efl1/ecore/fix-ecore-fb-initialization.patch
+deleted file mode 100644
+index 2ac61ca..0000000
+--- a/recipes/efl1/ecore/fix-ecore-fb-initialization.patch
++++ /dev/null
+@@ -1,29 +0,0 @@
+-#
+-# The whole ecore-fb init logic is somewhat flawed; with this patch we
+-# get at least a working touchscreen w/ tslib again.
+-#
+-# Signed-off-by: Michael 'Mickey' Lauer <mlauer@vanille-media.de>
+-#
+-
+-Index: ecore/src/lib/ecore_fb/ecore_fb.c
+-===================================================================
+---- ecore.orig/src/lib/ecore_fb/ecore_fb.c
+-+++ ecore/src/lib/ecore_fb/ecore_fb.c
+-@@ -46,6 +46,9 @@
+- 
+-    if (!ecore_fb_vt_init())
+-      return --_ecore_fb_init_count;
+-+     
+-+   if (!ecore_fb_ts_init())
+-+     return --_ecore_fb_init_count;
+- 
+-    ECORE_FB_EVENT_KEY_DOWN          = ecore_event_type_new();
+-    ECORE_FB_EVENT_KEY_UP            = ecore_event_type_new();
+-@@ -70,6 +73,7 @@
+-    if (--_ecore_fb_init_count != 0)
+-      return _ecore_fb_init_count;
+- 
+-+   ecore_fb_ts_shutdown();
+-    ecore_fb_vt_shutdown();
+- 
+-    return _ecore_fb_init_count;
 -- 
-Denys
+1.7.0.4
+
 
 
