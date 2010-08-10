@@ -1,18 +1,24 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1Oiue1-0002tX-Kn
+	(envelope-from <morphis@gravedo.de>) id 1Oiufh-00031j-7z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 21:37:58 +0200
+	Tue, 10 Aug 2010 21:39:38 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id A881B80C527; Tue, 10 Aug 2010 21:37:40 +0200 (CEST)
+	id 6CEBC80C527; Tue, 10 Aug 2010 21:39:24 +0200 (CEST)
 Received: from localhost (p5489A930.dip.t-dialin.net [84.137.169.48])
-	by gravedo.de (Postfix) with ESMTPSA id B407D80C4FF;
-	Tue, 10 Aug 2010 21:37:39 +0200 (CEST)
+	by gravedo.de (Postfix) with ESMTPSA id AAB7680C4FF
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 10 Aug 2010 21:39:23 +0200 (CEST)
+Date: Tue, 10 Aug 2010 21:39:23 +0200
 From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 10 Aug 2010 21:37:37 +0200
-Message-Id: <1281469057-11502-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.0.4
+Message-ID: <20100810193922.GA7157@nirvana>
+References: <1281420092-883-1-git-send-email-morphis@gravedo.de>
+	<201008102153.38314.roman@khimov.ru> <4C619FA5.7090805@gravedo.de>
+	<201008102320.23355.roman@khimov.ru>
+MIME-Version: 1.0
+In-Reply-To: <201008102320.23355.roman@khimov.ru>
+User-Agent: Mutt/1.5.20 (2009-06-14)
 X-SA-Exim-Connect-IP: 85.214.79.159
 X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -21,7 +27,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] tslib: add config files for palmpre machine
+Subject: Re: [PATCH 2/2] tzdata: bump version to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,63 +41,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 19:37:58 -0000
+X-List-Received-Date: Tue, 10 Aug 2010 19:39:38 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes/tslib/tslib/palmpre/ts.conf  |   27 +++++++++++++++++++++++++++
- recipes/tslib/tslib/palmpre/tslib.sh |    6 ++++++
- 2 files changed, 33 insertions(+), 0 deletions(-)
- create mode 100644 recipes/tslib/tslib/palmpre/ts.conf
- create mode 100644 recipes/tslib/tslib/palmpre/tslib.sh
+On Tue, Aug 10, 2010 at 11:20:18PM +0400, Roman I Khimov wrote:
+> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
+=82 =D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 10 =D0=B0=D0=B2=D0=B3=D1=83=
+=D1=81=D1=82=D0=B0 2010 22:51:17 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Simon Busch=
+ =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> > Sorry for this. I choose the file to send too quickly so I dismissed to
+> > choose the first one :) I have updated the status of the patches in the
+> > patchwork system (never worked with it before, so I decided to reject
+> > the wrong patches).
 
-diff --git a/recipes/tslib/tslib/palmpre/ts.conf b/recipes/tslib/tslib/palmpre/ts.conf
-new file mode 100644
-index 0000000..8857e8d
---- /dev/null
-+++ b/recipes/tslib/tslib/palmpre/ts.conf
-@@ -0,0 +1,27 @@
-+# Uncomment if you wish to use the linux input layer event interface
-+# module_raw input
-+
-+module cry8mrln_palmpre
-+
-+# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
-+# module_raw collie
-+
-+# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
-+# module_raw corgi
-+
-+# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
-+# module_raw ucb1x00
-+
-+# Uncomment if you're using an HP iPaq h3600 or similar
-+# module_raw h3600
-+
-+# Uncomment if you're using a Hitachi Webpad
-+# module_raw mk712
-+
-+# Uncomment if you're using an IBM Arctic II
-+# module_raw arctic2
-+
-+# module pthres pmin=1
-+# module variance delta=30
-+# module dejitter delta=100
-+# module linear
-diff --git a/recipes/tslib/tslib/palmpre/tslib.sh b/recipes/tslib/tslib/palmpre/tslib.sh
-new file mode 100644
-index 0000000..5c1cc25
---- /dev/null
-+++ b/recipes/tslib/tslib/palmpre/tslib.sh
-@@ -0,0 +1,6 @@
-+#!/bin/sh
-+
-+TSLIB_TSDEVICE=/dev/touchscreen
-+
-+export TSLIB_TSDEVICE
-+
--- 
-1.7.0.4
+> Just for the future, a more appropriate status in this case is "Supersede=
+d".
+> Checked and pushed both, thanks!
+
+Ok, will remember this for the future. Thank you for the review and=20
+committing both recipes.
+
+regards,
+morphis
 
 
 
