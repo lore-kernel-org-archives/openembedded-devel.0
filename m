@@ -1,31 +1,27 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1Oigub-0001Ra-Jj
+	(envelope-from <morphis@gravedo.de>) id 1OihuN-0005oA-VL
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 10 Aug 2010 06:58:06 +0200
-Received: by vws13 with SMTP id 13so7513425vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 09 Aug 2010 21:57:48 -0700 (PDT)
-Received: by 10.220.60.204 with SMTP id q12mr9848629vch.160.1281416268458;
-	Mon, 09 Aug 2010 21:57:48 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id w31sm3069662vbs.15.2010.08.09.21.57.47
-	(version=SSLv3 cipher=RC4-MD5); Mon, 09 Aug 2010 21:57:47 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	Tue, 10 Aug 2010 08:02:13 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 8688C80C527; Tue, 10 Aug 2010 08:01:38 +0200 (CEST)
+Received: from localhost (unknown [82.113.106.4])
+	by gravedo.de (Postfix) with ESMTPSA id 1F8B680C4FF;
+	Tue, 10 Aug 2010 08:01:35 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon,  9 Aug 2010 23:57:46 -0500
-Message-Id: <1281416266-10425-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+Date: Tue, 10 Aug 2010 08:01:31 +0200
+Message-Id: <1281420092-883-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] beagleboard-test-scripts: added new scripts
+Subject: [PATCH 1/2] tzcode-native: bump version to 2010k
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,49 +35,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 10 Aug 2010 04:58:06 -0000
+X-List-Received-Date: Tue, 10 Aug 2010 06:02:15 -0000
 
-testneon: runs burn-neon for 10 seconds
-testdsp: runs loopgpp dsplink example
-testmem: runs memtester
-
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
 ---
- .../beagleboard/beagleboard-test-scripts_git.bb    |    7 +++++--
- 1 files changed, 5 insertions(+), 2 deletions(-)
+ recipes/tzcode/tzcode-native_2010j.bb |   16 ----------------
+ recipes/tzcode/tzcode-native_2010k.bb |   16 ++++++++++++++++
+ 2 files changed, 16 insertions(+), 16 deletions(-)
+ delete mode 100644 recipes/tzcode/tzcode-native_2010j.bb
+ create mode 100644 recipes/tzcode/tzcode-native_2010k.bb
 
-diff --git a/recipes/beagleboard/beagleboard-test-scripts_git.bb b/recipes/beagleboard/beagleboard-test-scripts_git.bb
-index ea3cafe..be0d059 100644
---- a/recipes/beagleboard/beagleboard-test-scripts_git.bb
-+++ b/recipes/beagleboard/beagleboard-test-scripts_git.bb
-@@ -1,20 +1,23 @@
- ## Reminder:  The correct spacing for a variable is FOO = "BAR"  in : PR="r1"
- DESCRIPTION = "BeagleBoard test scripts"
- HOMEPAGE = "http://beagleboad.org/support"
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "git://gitorious.org/beagleboard-validation/scripts.git;protocol=git \
- "
- 
--SRCREV = "f009c731df5c410eb819fa90f199713ea60cea6a"
-+SRCREV = "473dd2ab20d866be6168c9f992c2c9e74e485c9d"
- S = "${WORKDIR}/git"
- 
- do_install() {
-   TEST_FILES=" \
-     testaudio \
-     testcamera \
-+    testdsp \
-     testedid \
-     testled \
-+    testmem \
-+    testneon \
-     testsvideo \
-     testuserbtn \
-     editbootscr \
+diff --git a/recipes/tzcode/tzcode-native_2010j.bb b/recipes/tzcode/tzcode-native_2010j.bb
+deleted file mode 100644
+index 7e1ae77..0000000
+--- a/recipes/tzcode/tzcode-native_2010j.bb
++++ /dev/null
+@@ -1,16 +0,0 @@
+-require tzcode-native.inc
+-
+-# Note that elsie.nci.nih.gov removes old versions when new is coming out
+-# So if this doesn't build for you because of missing source file, just
+-# bump it to the latest available version, removing old one
+-# Also, tzdata (and it is needed to build tzcode) version can differ from
+-# tzcode version, thus this variable
+-
+-TZDATA_PV = "2010j"
+-
+-SRC_URI[tzcode-2010j.md5sum] = "5ba8345720296d3a659b349b2052d139"
+-SRC_URI[tzcode-2010j.sha256sum] = "f32b46405190e3a5f1ee4db9fb50aaf1379e6af4e5493402ebfc8ee757058e97"
+-SRC_URI[tzdata-2010j.md5sum] = "f668f66b260e14b477eac3f48bcfb5f4"
+-SRC_URI[tzdata-2010j.sha256sum] = "dcf2101d0c5bb20a7f182866ea3e52b54c8f4d129c025a96c9a31377676f554b"
+-
+-PR = "${INC_PR}.0"
+diff --git a/recipes/tzcode/tzcode-native_2010k.bb b/recipes/tzcode/tzcode-native_2010k.bb
+new file mode 100644
+index 0000000..21796d6
+--- /dev/null
++++ b/recipes/tzcode/tzcode-native_2010k.bb
+@@ -0,0 +1,16 @@
++require tzcode-native.inc
++
++# Note that elsie.nci.nih.gov removes old versions when new is coming out
++# So if this doesn't build for you because of missing source file, just
++# bump it to the latest available version, removing old one
++# Also, tzdata (and it is needed to build tzcode) version can differ from
++# tzcode version, thus this variable
++
++TZDATA_PV = "2010k"
++
++SRC_URI[tzcode-2010k.md5sum] = "63cd2199679c91bed972a0248d6916af"
++SRC_URI[tzcode-2010k.sha256sum] = "96671eac3a98d0c974833c8bfa7ea9b537cc9d32573e902103846b90f6dccdbd"
++SRC_URI[tzdata-2010k.md5sum] = "5e2086249d6a6bb116534d358661ad3f"
++SRC_URI[tzdata-2010k.sha256sum] = "ef69c99504c0fd9864ba8ef1daae5f2d4df097cf7dc350f09b8f70386272408d"
++
++PR = "${INC_PR}.0"
 -- 
-1.5.6.4
+1.7.0.4
 
 
 
