@@ -1,44 +1,32 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oj9vT-0002AY-2N
+	(envelope-from <jaap.dejong@nedap.com>) id 1OjA2U-0007Yu-Fk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 13:56:57 +0200
-Received: by gwb15 with SMTP id 15so11147gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 04:56:43 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=voKJZM+EMm548dgtY0z64slctOYt3I2iHW0w0khnEno=;
-	b=BlUACj+6aj9D7swmF1orm76o3nRtlU3A7QKECqyBvEr6BeNWhbF2uFSfVUw4ZCjmNc
-	dURhITOKD7BEy1t8kFIKDBmQHa/z81xgH9P+ZL4+crjJWRuypZAFrkfx9gOUyzWwhJlZ
-	fTFKRYD4yE+LWc9iAx7x5td4hiFyWVHm5k59g=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=x44VXDjPUvZTUgekS6KHTx57f/Yob01U1rypHtdZ1CN34YbS1D5YHmmwbUlHKI5bj/
-	og+HZL77UKhnQ7E4L/An6LLY4hZH+2tho6QOJK/GVIcS9TKuQkjhx2F2i2vAvmJm6ty/
-	9vQiMv/78Kj/D7Sf3l5LSae5IvDVZD0aafUhM=
+	Wed, 11 Aug 2010 14:04:14 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Wed, 11 Aug 2010 14:03:58 +0200
+X-TM-IMSS-Message-ID: <1f4097cb00007649@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 1f4097cb00007649 for
+	<jaap.dejong@nedap.com>; Wed, 11 Aug 2010 14:04:02 +0100
+Message-ID: <4C6291AD.1090502@nedap.com>
+Date: Wed, 11 Aug 2010 14:03:57 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
 MIME-Version: 1.0
-Received: by 10.150.140.6 with SMTP id n6mr17427524ybd.315.1281527800917; Wed, 
-	11 Aug 2010 04:56:40 -0700 (PDT)
-Received: by 10.150.53.9 with HTTP; Wed, 11 Aug 2010 04:56:40 -0700 (PDT)
-In-Reply-To: <i3tp29$uvf$1@dough.gmane.org>
-References: <4C61E523.7070405@gmail.com>
-	<i3tp29$uvf$1@dough.gmane.org>
-Date: Wed, 11 Aug 2010 13:56:40 +0200
-Message-ID: <AANLkTin=ZaqVrBgzXYjfy_nchZVSh5eBUuqXQBRryEwt@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-OriginalArrivalTime: 11 Aug 2010 12:03:58.0448 (UTC)
+	FILETIME=[4777A700:01CB394D]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Mass convert PREFERRED_VERSION_* to be weakly assigned.
+Subject: build problems openjdk-6 in stable branch
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,25 +40,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 11:56:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Aug 2010 12:04:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/8/11 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 11-08-10 01:47, Graham Gower wrote:
->> find conf -type f -exec sed -i -e 's/^PREFERRED_VERSION_\([^ \t]*\)\([ \t]*\)=/PREFERRED_VERSION_\1\2?=/' {} \;
->
-> NAK, Angstrom pins things with a hard assignment for good reasons. We
-> are open to discuss specific issues you have with versions for various
-> recipes, though.
+Hi All!
 
-Well, I would like angstrom to move to the latest version of mythtv.
-Would that be possible (and if not what is the problem with mythtv 0.23)
+what is the status of openjdk-6 in the stable branch?
+I can not get it build...
 
-Frans.
+Jaap
 
-PS: I'm planning to migrate mythtv to 0.23.1 in a few days.
+$ bitbake openjdk-6
+////
+NOTE: Running task 1827 of 2707 (ID: 487, 
+/media/OpenEmbedded/stable/org.openembedded.dev/recipes/llvm/llvm2.7_2.7.bb, 
+do_compile)
+ERROR: function do_compile failed
+ERROR: log data follows 
+(/media/OpenEmbedded/stable/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/log.do_compile.6238)
+| NOTE: make -j5
+| Scanning dependencies of target count
+| [  1%] Building C object utils/count/CMakeFiles/count.dir/count.c.o
+| Scanning dependencies of target LLVMHello
+| Linking C executable ../../bin/count
+| [  1%] Building CXX object 
+lib/Transforms/Hello/CMakeFiles/LLVMHello.dir/Hello.cpp.o
+| Scanning dependencies of target LLVMSystem
+| [  1%] [  1%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Alarm.cpp.o
+| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Atomic.cpp.o
+| [  1%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Disassembler.cpp.o
+| [  1%] Built target count
+| [  1%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/DynamicLibrary.cpp.o
+| [  2%] [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Errno.cpp.o
+| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Host.cpp.o
+| [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/IncludeFile.cpp.o
+| [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Memory.cpp.o
+| [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Mutex.cpp.o
+| [  3%] Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Path.cpp.o
+| Linking CXX shared module ../../LLVMHello.so
+| 
+/media/OpenEmbedded/stable/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/llvm-2.7/lib/System/Memory.cpp: 
+In static member function 'static void 
+llvm::sys::Memory::InvalidateInstructionCache(const void*, size_t)':
+| 
+/media/OpenEmbedded/stable/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/llvm-2.7/lib/System/Memory.cpp:67: 
+error: '__clear_cache' was not declared in this scope
+| [  3%] Built target LLVMHello
+| [  3%] make[2]: *** 
+[lib/System/CMakeFiles/LLVMSystem.dir/Memory.cpp.o] Error 1
+| make[2]: *** Waiting for unfinished jobs....
+| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Process.cpp.o
+| make[1]: *** [lib/System/CMakeFiles/LLVMSystem.dir/all] Error 2
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
+NOTE: Task failed: 
+/media/OpenEmbedded/stable/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/log.do_compile.6238
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/media/OpenEmbedded/stable/org.openembedded.dev/recipes/llvm/llvm2.7_2.7.bb 
+do_compile failed
+ERROR: Task 487 
+(/media/OpenEmbedded/stable/org.openembedded.dev/recipes/llvm/llvm2.7_2.7.bb, 
+do_compile) failed
+NOTE: Waiting for 2 active tasks to finish
+NOTE: 1: 
+/media/OpenEmbedded/stable/org.openembedded.dev/recipes/qemu/qemu-native_0.10.3.bb, 
+do_compile (27024)
+NOTE: 2: 
+/media/OpenEmbedded/stable/org.openembedded.dev/recipes/icedtea/icedtea6-native_1.7.3.bb, 
+do_compile (24621)
+
 
 
