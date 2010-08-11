@@ -1,44 +1,45 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OjFm4-0001Bd-V1
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OjGmI-00011K-Ku
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 20:11:38 +0200
-Received: by gwb15 with SMTP id 15so137215gwb.6
+	Wed, 11 Aug 2010 21:15:56 +0200
+Received: by gwb15 with SMTP id 15so158303gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 11:11:24 -0700 (PDT)
+	Wed, 11 Aug 2010 12:15:37 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=4v5O0as4Hq7Rf/f6UqcpuCv78278b90xMT6ScbteZas=;
-	b=MHxYbUNVkbmcFiHw/K9isNBcg28SXwiJByKqcsoxx/BdVIk4WJLMpnJLXhYDvX+l0F
-	4MUoXX6454vaLuCpx/9lRtQ/dY3PkaqINE0q2ID9noEp7H9s5GlwOwlROyI59/QxOrMN
-	UtYUcSJ57CH5fuZC0jY2TQHToy3nVKE/S7vgg=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=0MPd5ITZ65Zl+oPFm/gN6KcxjpDeLOWE8bb5hv5yaPY=;
+	b=WwdNjPxo7MVKw8LAC/ihs4D54lQYwMk9XAJq1VaiMQx1WNr+05tGKz8y9mDAcVLKXm
+	aPVjwQ0Mxc/ft3JuaID64d2knfDTdSskRoG/KS2RGMgzLMpo7RehHXtRF4q67yjjtmKa
+	ukm2BPMk6kOTI6FJeB/psA7UX9PPYGAqjIKvc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=FzCTDspXHmG8aCc2cgeGrYs4lc037zuiXR43MCYhsPyG8PvHjP//P/DR4QYUgfaNnY
-	D/Ss1khny5FLsv/Z2+zmbe9jVmx7cRRnKED7Cn77KWJShoYlxqOcHXL2PpFOCiDPAaI6
-	3U/Ys5zL39MSpDBiklqRPNV0Qjl4KXZ6ej3tA=
-Received: by 10.100.209.15 with SMTP id h15mr21955631ang.232.1281550283739;
-	Wed, 11 Aug 2010 11:11:23 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id i30sm529188anh.9.2010.08.11.11.11.21
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 11 Aug 2010 11:11:22 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=HUU2Mi4bfN/NYNCysKqdibkw8xR/lZf6gF+urEKDmd49Ds1rOazR6XdI3tw5CRD5wF
+	Z4YErVsClC0dQ+MD9Mwg5YPr3LTDQfqiEbfCjj8zAzh5cPXxipyjEupY8YjZc9Ddx7h0
+	qqsy45BHPWvzxVgawh3uV4KnI7ES/76CZFeIk=
+MIME-Version: 1.0
+Received: by 10.151.143.19 with SMTP id v19mr12983533ybn.161.1281554131611; 
+	Wed, 11 Aug 2010 12:15:31 -0700 (PDT)
+Received: by 10.150.53.9 with HTTP; Wed, 11 Aug 2010 12:15:31 -0700 (PDT)
+In-Reply-To: <i3udjt$8l9$1@dough.gmane.org>
+References: <4C61E523.7070405@gmail.com> <i3tp29$uvf$1@dough.gmane.org>
+	<AANLkTin=ZaqVrBgzXYjfy_nchZVSh5eBUuqXQBRryEwt@mail.gmail.com>
+	<i3udjt$8l9$1@dough.gmane.org>
+Date: Wed, 11 Aug 2010 21:15:31 +0200
+Message-ID: <AANLkTimy+1YViDdGStjSiy6qrsYTZGOmY4y4tU8sX+Op@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Aug 2010 13:05:44 -0500
-Message-Id: <1281549944-13721-1-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
 X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Brijesh Singh <bksingh@ti.com>
-Subject: [PATCH] libgles-omap3: use es5 version for 37x machines
+Subject: Re: [PATCH] Mass convert PREFERRED_VERSION_* to be weakly assigned.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 18:11:38 -0000
+X-List-Received-Date: Wed, 11 Aug 2010 19:15:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Set BINLOCATION to use es5.x version for am37x-evm and
-  dm37x-evm machine types.
-* Bump PR
+2010/8/11 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 11-08-10 13:56, Frans Meulenbroeks wrote:
+>> 2010/8/11 Koen Kooi <k.kooi@student.utwente.nl>:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 11-08-10 01:47, Graham Gower wrote:
+>>>> find conf -type f -exec sed -i -e 's/^PREFERRED_VERSION_\([^ \t]*\)\([ \t]*\)=/PREFERRED_VERSION_\1\2?=/' {} \;
+>>>
+>>> NAK, Angstrom pins things with a hard assignment for good reasons. We
+>>> are open to discuss specific issues you have with versions for various
+>>> recipes, though.
+>>
+>> Well, I would like angstrom to move to the latest version of mythtv.
+>> Would that be possible (and if not what is the problem with mythtv 0.23)
+>
+> For mythtv I try to use a grace period so other distros have the chance
+> to have packages for the new mythtv. My backend runs debian, so I
+> generally wait for debian-multimedia to catch up.
+> I think it's safe to switch to 0.23.x now, and for future releases we
+> can see if this policy can be thrown out.
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-Signed-off-by: Brijesh Singh <bksingh@ti.com>
----
- recipes/powervr-drivers/libgles-omap3.inc          |    2 +-
- .../powervr-drivers/libgles-omap3_3.01.00.06.bb    |    4 +++-
- 2 files changed, 4 insertions(+), 2 deletions(-)
+Seems a good plan to move.
+I just bumped SRCREV to 25609; building it as I write this.
+It'll remain 0.23+fixes.
+Apparently 02.3.1 maintenance also takes place in 0.23+fixes (there is
+no 0.23.1+fixes and 0.23+fixes also refers to 0.23.1)
 
-diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
-index d183486..12839e6 100644
---- a/recipes/powervr-drivers/libgles-omap3.inc
-+++ b/recipes/powervr-drivers/libgles-omap3.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "libGLES for the omap3"
- LICENSE = "proprietary-binary"
- 
--PR = "r6"
-+PR = "r7"
- 
- COMPATIBLE_MACHINE = "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
- 
-diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb b/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
-index bb7994f..b3611a3 100644
---- a/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
-+++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
-@@ -1,4 +1,6 @@
--BINLOCATION = "${S}/gfx_rel_es3.x"
-+BINLOCATION_dm37x-evm = "${S}/gfx_rel_es5.x"
-+BINLOCATION_am37x-evm = "${S}/gfx_rel_es5.x"
-+BINLOCATION ?= "${S}/gfx_rel_es3.x"
- 
- ES2LOCATION = "${S}/gfx_rel_es2.x"
- ES3LOCATION = "${S}/gfx_rel_es3.x"
--- 
-1.7.0.4
-
+FM
 
 
