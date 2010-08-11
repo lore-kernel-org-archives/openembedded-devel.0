@@ -1,44 +1,39 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from vms173009pub.verizon.net ([206.46.173.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Oj0Gj-00071V-JY
+	(envelope-from <denis@denix.org>) id 1Oj0Lc-0007Au-DE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 03:38:14 +0200
-Received: by eyx24 with SMTP id 24so4597eyx.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 18:38:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=R5KxKVffuQOKa3puooepTdEh7KajSwJgktNhFfeMZFs=;
-	b=KEkzAGGVbaDi+12hTlK+D2FDDpj7BfClXF2kJGS5ihrMjQ9AE+dQYAbzp1L+h89g6E
-	6jxEyMuffGVYop/P3ry5TmWrt8zS4eTi8E2IFpksLLcte+xdHRv1cgL4K/Rt7kJXQBSO
-	GOEIvjH8Z89jLZWu2IgrGh+macbLbwGeQakOQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=mHBBOPbDIfraLjmELvi9oiZNLuZrXOMbLHUwMgP1qsQMgdLq8bDzaxHvTlxtr74d+u
-	iYUDvkjW4nV/iwim7yRJ1Eu/sQx5525pKNXXr8etkzIVx/Vn738rcNbQJaJHYYzQkAWH
-	EngdKMbfFF1jiURgNtNB8/X2kFWzN4sqFd0Bs=
-Received: by 10.213.63.142 with SMTP id b14mr14144881ebi.33.1281490684173; 
-	Tue, 10 Aug 2010 18:38:04 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.213.35.135 with HTTP; Tue, 10 Aug 2010 18:37:44 -0700 (PDT)
-In-Reply-To: <AANLkTi=1LPSYyP4HdPF6+AajoCmot2jzU2id1URxf_q0@mail.gmail.com>
-References: <4C61E523.7070405@gmail.com> <4C61EE40.5020201@balister.org> 
-	<AANLkTi=1LPSYyP4HdPF6+AajoCmot2jzU2id1URxf_q0@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Aug 2010 18:37:44 -0700
-Message-ID: <AANLkTimjTOJJf5HMvpBMhKtOdaTS-GTSyp2DHDXqKNy7@mail.gmail.com>
+	Wed, 11 Aug 2010 03:43:18 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.53.61])
+	by vms173009.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L6Y00MLWSRAE5I0@vms173009.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Tue,
+	10 Aug 2010 20:42:51 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 0366D14AF64; Tue,
+	10 Aug 2010 21:42:45 -0400 (EDT)
+Date: Tue, 10 Aug 2010 21:42:45 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <AANLkTinkuGZVYFHL7N6GwM5BftTr-+L4BP7-jwsRZzqL@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Message-id: <20100811014245.GF7189@denix.org>
+MIME-version: 1.0
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world>
+	<AANLkTinK5O3F25QJ40B8+rt5M57BKwWVOYytUEZqvP-D@mail.gmail.com>
+	<AANLkTikjcrh78MDsSbdALEWbZGHU7nwrk14FQFiU=ynA@mail.gmail.com>
+	<AANLkTimbjUYY22nf59gPAw-Xm05mMLNdDA61Ydc63DFs@mail.gmail.com>
+	<i3se2n$gj7$1@dough.gmane.org>
+	<AANLkTikUdG4hRo1wJmObU1g5fomeuViCirSBsVFCEYYZ@mail.gmail.com>
+	<AANLkTinkuGZVYFHL7N6GwM5BftTr-+L4BP7-jwsRZzqL@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] Mass convert PREFERRED_VERSION_* to be weakly assigned.
+Subject: Re: Why PREFERRED_VERSION setting of <distro>.conf overrules	local.conf setting ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,50 +47,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 01:38:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 11 Aug 2010 01:43:18 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: QUOTED-PRINTABLE
+Content-disposition: inline
 
-On Tue, Aug 10, 2010 at 6:05 PM, Graham Gower <graham.gower@gmail.com> wrote:
-> On 11 August 2010 09:56, Philip Balister <philip@balister.org> wrote:
->> On 08/10/2010 04:47 PM, Graham Gower wrote:
->>>
->>> find conf -type f -exec sed -i -e 's/^PREFERRED_VERSION_\([^ \t]*\)\([
->>> \t]*\)=/PREFERRED_VERSION_\1\2?=/' {} \;
->>
->> Shouldn't DISTRO's decide on a per DISTRO decision whether or not their
->> preferred versions are weak?
->>
->> I;m not entirely opposed to make the assignment weak for Angstrom, but I am
->> very opposed to making all DISTRO's use the same policy.
->
-> Surely having disunity by giving different distros different policies
-> would be worse?
+On Wed, Aug 11, 2010 at 09:14:41AM +0930, Graham Gower wrote:
+> On 11 August 2010 06:26, Chris Larson <clarson@kergoth.com> wrote:
+> > On Tue, Aug 10, 2010 at 1:50 PM, Koen Kooi <k.kooi@student.utwent=
+e.nl>wrote:
+> >> What's the point of setting a preferred version at all if you ma=
+ke it a
+> >> weak assignment?
+> >> The distro nearly always knows better and if you want to use a d=
+ifferent
+> >> version, sending a patch to change that version for review isn't=
+ exactly
+> >> rocket science.
+> >
+> >
+> > How about having decent usability? =A0The user asking for somethi=
+ng and not
+> > getting it is completely unintuitive. =A0If the user doesn't know=
+ what they
+> > want, they won't request a specific version. =A0If they do reques=
+t it, they
+> > should get it, anything else is an OE usability issue.
+>=20
+> Precisely. The user shouldn't have to understand the details of
+> parsing order, weak assignments, etc. in order to write a local.con=
+f
+> which works for them.
 
-whats issue with current versioning ? you always have _local override
-if you want
-to disregard what DISTRO sets it to. IMO it should be left upto DISTRO to hard
-assign or weak assign them. I dont think its a good idea to make all weak
+Yeah, and then distro maintainers are blamed for the breakage when us=
+ers unpin=20
+and change specific dependency for a package.
 
--Khem
+It's not just the parsing order problem. It's not clear for users tha=
+t if they=20
+change anything in local.conf, it can break. I.e. you break it - you =
+fix it.
 
->
->>
->> It is a real nuisance trying to debug someone's Angstrom build, only to fins
->> out they have loads of local overrides.
->
-> Point taken. local.conf really should be a mandatory piece of
-> information when reporting an issue.
->
->>
->> Philip
->>
->
-> -Graham
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+--=20
+Denys
+
 
 
