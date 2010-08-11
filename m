@@ -1,36 +1,39 @@
 Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Oj3dv-0001Fu-Lh
+	(envelope-from <raj.khem@gmail.com>) id 1Oj3ga-0001MV-IM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 07:14:26 +0200
-Received: by eyx24 with SMTP id 24so42111eyx.6
+	Wed, 11 Aug 2010 07:17:09 +0200
+Received: by eyx24 with SMTP id 24so42626eyx.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 22:14:07 -0700 (PDT)
+	Tue, 10 Aug 2010 22:16:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=oewwP0Q60WjdEE1BOp5zHUpr9OhLGeTE5VQPTZAfAQY=;
-	b=Xa1ppUao9168ggw2xsUy3ebsaSDze3SWf2VwJ1MU6/7Ubt4AtyCaQzNm+a6qUdumt9
-	ye1IsGlK4SkTWapsTR4DvPWaIDDXrDeBJO6aPDhRp8Uc+ZDUcYlRWKMKIyNNy37jfiL0
-	QGTzG8jXdxlPTLbwHuFfiyg9Ty0deyhPeyciY=
+	bh=g/FdTzR3V+K/C1iR6PhOUEtep6h0FOPb1c55ingfQAg=;
+	b=CAcRejd5A0/2Q+AYlHEWg1BOHyDRZ5NwMSnNi/Kq7Umg1LayLRHiFfM3YqDqjcTJCy
+	6YIDsIqL7XGzn8B5ECmt18yM+TdmOqz0yInhBWPxHgrv7wSFiwzNemsAABLHu8joVbtA
+	R5+wGpsm5sA8ijqbxWlCGbPbQSKcj11KA8PDA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=jB3so7kz5RYhdzy0e829L8NarJSYBAu/Oj0sC8Ew+EQFT4T99ue/U2dQceTJTR4l2+
-	r7H8QYJK+5v5bmJbtrjbtG8rwRRngFP5Oe5H9JSgRA3DClHnhFu0xiRJni2LT6OAN6yu
-	bTCuhmgJ2ujxPcn+rqSLoHFZWnWJHFuvcfG8I=
-Received: by 10.213.48.193 with SMTP id s1mr5313125ebf.20.1281503647288; Tue,
-	10 Aug 2010 22:14:07 -0700 (PDT)
+	b=r7dr6OQJXKNauyjaTDKobngd6yG+Eri2dHqbI5NcHHJU296PFUqf7qBeP2GxeRQ0jR
+	AWCM3tJF9kg2UEa6xXdvxKT0lQcvp9fz+10G0bTXIV9x/SvP5vL+SExXQCrE5WJdqh6w
+	AzNbZtIHa5635QwzBMd1GFOF1RTysE+DutDsM=
+Received: by 10.213.25.130 with SMTP id z2mr14707272ebb.12.1281503813196; Tue, 
+	10 Aug 2010 22:16:53 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.213.35.135 with HTTP; Tue, 10 Aug 2010 22:13:47 -0700 (PDT)
-In-Reply-To: <20100811024533.GA28059@game.jcrosoft.org>
-References: <20100810093550.GE10920@game.jcrosoft.org>
-	<AANLkTi=KL6T1jja4umSRjzSyk8iuj9dMb9fwKK7YO6au@mail.gmail.com>
-	<20100811024533.GA28059@game.jcrosoft.org>
+Received: by 10.213.35.135 with HTTP; Tue, 10 Aug 2010 22:16:33 -0700 (PDT)
+In-Reply-To: <AANLkTikUdG4hRo1wJmObU1g5fomeuViCirSBsVFCEYYZ@mail.gmail.com>
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world> 
+	<AANLkTinK5O3F25QJ40B8+rt5M57BKwWVOYytUEZqvP-D@mail.gmail.com> 
+	<AANLkTikjcrh78MDsSbdALEWbZGHU7nwrk14FQFiU=ynA@mail.gmail.com> 
+	<AANLkTimbjUYY22nf59gPAw-Xm05mMLNdDA61Ydc63DFs@mail.gmail.com> 
+	<i3se2n$gj7$1@dough.gmane.org>
+	<AANLkTikUdG4hRo1wJmObU1g5fomeuViCirSBsVFCEYYZ@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 10 Aug 2010 22:13:47 -0700
-Message-ID: <AANLkTinS+SQCyndCG82OiJzKa=w3LNd-7jkHjPKrmY35@mail.gmail.com>
+Date: Tue, 10 Aug 2010 22:16:33 -0700
+Message-ID: <AANLkTimVFCKL+M_c0rb=Zu0cktc0_QZQzZikR_T63Wj2@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.215.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -40,7 +43,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc-cross-initial-4.3.3-r14.1 failed on SH4 angstrom
+Subject: Re: Why PREFERRED_VERSION setting of <distro>.conf overrules local.conf setting ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,44 +57,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 05:14:26 -0000
+X-List-Received-Date: Wed, 11 Aug 2010 05:17:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 10, 2010 at 7:45 PM, Jean-Christophe PLAGNIOL-VILLARD
-<plagnioj@jcrosoft.com> wrote:
-> On 11:27 Tue 10 Aug =A0 =A0 , Khem Raj wrote:
->> On Tue, Aug 10, 2010 at 2:35 AM, Jean-Christophe PLAGNIOL-VILLARD
->> <plagnioj@jcrosoft.com> wrote:
->> > HI,
->> >
->> > =A0 =A0 =A0 =A0I'm currently trying to use OE for a titan (SH4) board =
-with Angstrom distrib
->> >
->> > =A0 =A0 =A0 =A0I've attached my conf and log
->> >
->> > =A0 =A0 =A0 =A0gcc-cross-initial-4.3.3-r14.1 failled to compile due to=
- the fact that
->> > =A0 =A0 =A0 =A0it's include /usr/include
->> >
->> > =A0 =A0 =A0 =A0is some have any idea?
+On Tue, Aug 10, 2010 at 1:56 PM, Chris Larson <clarson@kergoth.com> wrote:
+> On Tue, Aug 10, 2010 at 1:50 PM, Koen Kooi <k.kooi@student.utwente.nl>wro=
+te:
+>
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
 >>
+>> On 10-08-10 01:15, Graham Gower wrote:
+>> > On 10 August 2010 04:31, Frans Meulenbroeks <fransmeulenbroeks@gmail.c=
+om>
+>> wrote:
+>> >> 2010/8/9 Chris Larson <clarson@kergoth.com>:
+>> >>> On Mon, Aug 9, 2010 at 6:26 AM, Hauser, Wolfgang (external) <
+>> >>> Wolfgang.Hauser.external@eads.com> wrote:
+>> >>>
+>> >>>> Hello,
+>> >>>>
+>> >>>> I want to change some used versions of packages, so I added a
+>> >>>> PREFERRED_VERSION_<package>=3D"xxx" for the packages I want to have=
+ a
+>> >>>> special(newer) version to be used.
+>> >>>>
+>> >>>> But e. g. for busybox the version defined in the used <distro>.conf=
+ is
+>> >>>> used instead of my setting in local.conf.
+>> >>>>
+>> >>>> Should local.conf not overrule <distro/machine>.conf ??
+>> >>>
+>> >>>
+>> >>> Conceptually, local should override everything, as it's the "most
+>> specific"
+>> >>> information available, but from a technical standpoint, we can't par=
+se
+>> the
+>> >>> machine and distro configs until local.conf is parsed, as that's
+>> usually
+>> >>> where the MACHINE and DISTRO are set. =A0You can use a 'local' overr=
+ide
+>> to get
+>> >>> around it, or you can ask the distro/machine maintainer to use ?=3D
+>> >>> assignments (set only if unset).
+>> >>>
+>> >>> PREFERRED_VERSION_<package>_local =3D "xxx" is how you use the overr=
+ide.
+>> >>
+>> >> The real solution woud be to either temporary store the
+>> >> PREFERRED_VERSION and apply it later on.
+>> >> Alternately we could parse local.conf twice, the first time ignoring
+>> >> the PREFERRED lines, and the 2nd time only looking at these.
+>> >> Yet another solution could be to split local.conf into two pieces, on=
+e
+>> >> with settings like MACHINE and DISTRO, the other one with the
+>> >> overrides.
+>> >
+>> > Wouldn't it be far simpler to fix the distro conf file(s)? E.g. apply
+>> > something like this:
+>> > s/^PREFERRED_VERSION_\([a-z]*\) =3D/PREFERRED_VERSION_\1 ?=3D/
 >>
->> Please use gcc 4.4.4 for SH platform.
-> How can we update oe to do it automaticly for SH?
+>> What's the point of setting a preferred version at all if you make it a
+>> weak assignment?
+>> The distro nearly always knows better and if you want to use a different
+>> version, sending a patch to change that version for review isn't exactly
+>> rocket science.
 >
-> I known how to do in my conf or the machine but not in the distro for a
-> specific arch
+>
+> How about having decent usability? =A0The user asking for something and n=
+ot
+> getting it is completely unintuitive. =A0If the user doesn't know what th=
+ey
+> want, they won't request a specific version. =A0If they do request it, th=
+ey
+> should get it, anything else is an OE usability issue.
 
-e.g. for angstrom you will add
-ANGSTROM_GCC_VERSION_sh4 ?=3D "4.4.4"
-to angstrom-2008.1.conf
+why not use _local override and I think if user want to alter
+a distro choice I consider that user to be not a beginner.
 
->
->
-> Best Regards,
-> J.
->
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
