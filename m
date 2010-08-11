@@ -1,32 +1,31 @@
 Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
 	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1Oj5cQ-0002zo-B4
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1Oj5hI-0007ek-Cz
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 09:21:03 +0200
-Received: (qmail 21552 invoked from network); 11 Aug 2010 09:20:45 +0200
+	Wed, 11 Aug 2010 09:26:19 +0200
+Received: (qmail 22633 invoked from network); 11 Aug 2010 09:25:51 +0200
 Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 11 Aug 2010 09:20:45 +0200
+	by leibniz.math.fu-berlin.de with SMTP; 11 Aug 2010 09:25:51 +0200
 X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
 Received: from math.fu-berlin.de ([160.45.40.10])
 	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id L4Tfk0mdOL90
+	port 10024) with SMTP id p1RaMcHT1Lqc
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 09:20:31 +0200 (CEST)
-Received: (Qmail 21524 invoked from network); 11 Aug 2010 09:20:31 +0200
+	Wed, 11 Aug 2010 09:25:49 +0200 (CEST)
+Received: (Qmail 22628 invoked from network); 11 Aug 2010 09:25:49 +0200
 Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 11 Aug 2010 07:20:31 -0000
+	by leibniz.math.fu-berlin.de with SMTP; 11 Aug 2010 07:25:49 -0000
 Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1Oj5bz-000203-Dm; Wed, 11 Aug 2010 09:20:31 +0200
-Date: Wed, 11 Aug 2010 09:20:31 +0200
+	(Debian)) id 1Oj5h6-00028O-U1
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Aug 2010 09:25:48 +0200
+Date: Wed, 11 Aug 2010 09:25:48 +0200
 From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100811072031.GA7282@mi.fu-berlin.de>
-References: <4C607E6C.2030104@mlbassoc.com>
-	<AANLkTi=zp9r7hoym3kFEx9hpCgoQ8iOBVNZ6FhN7F4q6@mail.gmail.com>
-	<4C6130EC.9030602@mlbassoc.com> <4C614AB7.2050709@mlbassoc.com>
-	<20100810192710.GE7189@denix.org>
+Message-ID: <20100811072548.GB7282@mi.fu-berlin.de>
+References: <4C624772.8000607@nedap.com>
 MIME-Version: 1.0
-In-Reply-To: <20100810192710.GE7189@denix.org>
+In-Reply-To: <4C624772.8000607@nedap.com>
 User-Agent: Mutt/1.5.18 (2008-05-17)
 Sender: Henning Heinold <heinold@mi.fu-berlin.de>
 X-SA-Exim-Connect-IP: 160.45.40.10
@@ -34,12 +33,10 @@ X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
-	autolearn=unavailable version=3.2.5
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Discussion of the angstrom distribution development
-	<angstrom-distro-devel@linuxtogo.org>
-Subject: Re: [Angstrom-devel] Can't build gstreamer-ti
+Subject: Re: problem building openjdk-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,32 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 07:21:03 -0000
+X-List-Received-Date: Wed, 11 Aug 2010 07:26:21 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On Tue, Aug 10, 2010 at 03:27:10PM -0400, Denys Dmytriyenko wrote:
-> On Tue, Aug 10, 2010 at 06:48:55AM -0600, Gary Thomas wrote:
-> > On 08/10/2010 04:58 AM, Gary Thomas wrote:
-> >> But I've downloaded those tools and was able to build this recipe just
-> >> a few weeks ago. I think something in the staged packaging has broken it.
-> >
-> > I worked past this problem by installing a symlink by hand to my DVSDK 
-> > installed tools.
-> >
-> > Next problem :-(
-> >
-> > | Engine.c:(.text+0x19d4): undefined reference to `__aeabi_uidiv'
-> >
-> > How were these packages built to be put on the Angstrom package feed?
-> > Am I doing something wrong?
-> 
-> As Henning already said, Codec Engine only builds and works with binutils 2.18 
-> (which IS Angstrom's default, btw) on TI OMAP3/DaVinci processors.
+On Wed, Aug 11, 2010 at 08:47:14AM +0200, Jaap de Jong wrote:
+> Hi,
+>
+> since a day or 6/7 ago I can't build openjdk-6 anymore.
+> This is the latest patch that builds fine; later fail...
+>
+>    commit 13423cbf48e09af101dacba5e23695091582fc92
+>    Author: Robert Schuster <robertschuster@fsfe.org>
+>    Date:   Thu Jul 22 12:13:29 2010 +0200
+>
+>         jamvm-native 1.5.4: New version.
+>
+> Any clue?
+> Thanks!
+> Jaap de Jong
+>
 
-Hm,
+Hi Jaap,
 
-that is not 100% correct, but at the moment I dont have the time to make the patches for oe.
+the problem is that jamvm sometimes misscompiles some java-classes and the result is that the class is has 0 bytes.
+That's happening really rare and we didnt build yet a guard for it in. So find out from the errorlog which class is
+missing, mostly it some gnumail stuff and force to rebuild this package.
 
 Bye Henning
 
