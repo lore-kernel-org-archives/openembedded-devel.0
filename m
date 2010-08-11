@@ -1,42 +1,41 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1Oj5hI-0007ek-Cz
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 09:26:19 +0200
-Received: (qmail 22633 invoked from network); 11 Aug 2010 09:25:51 +0200
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 11 Aug 2010 09:25:51 +0200
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id p1RaMcHT1Lqc
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 09:25:49 +0200 (CEST)
-Received: (Qmail 22628 invoked from network); 11 Aug 2010 09:25:49 +0200
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 11 Aug 2010 07:25:49 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1Oj5h6-00028O-U1
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 09:25:48 +0200
-Date: Wed, 11 Aug 2010 09:25:48 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100811072548.GB7282@mi.fu-berlin.de>
-References: <4C624772.8000607@nedap.com>
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1Oj69C-0008Q2-6V for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Aug 2010 09:55:06 +0200
+Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
+	by mail-dotnet1.eads.net with ESMTP; 11 Aug 2010 09:43:42 +0200
+Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Wed, 11 Aug 2010 09:54:17 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 11 Aug 2010 09:54:17 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-In-Reply-To: <4C624772.8000607@nedap.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-SA-Exim-Connect-IP: 160.45.40.10
-X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
+Date: Wed, 11 Aug 2010 09:53:51 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5F6D@deimsg40.de.net.world>
+In-Reply-To: <20100811062010.GB32300@jama>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Why PREFERRED_VERSION setting of <distro>.conf overrules
+	local.conf setting ?
+Thread-Index: Acs5HWopOvMnTqMOS1yGi3simj6fVQACu6LQ
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world><AANLkTinK5O3F25QJ40B8+rt5M57BKwWVOYytUEZqvP-D@mail.gmail.com><AANLkTikjcrh78MDsSbdALEWbZGHU7nwrk14FQFiU=ynA@mail.gmail.com><AANLkTimbjUYY22nf59gPAw-Xm05mMLNdDA61Ydc63DFs@mail.gmail.com><i3se2n$gj7$1@dough.gmane.org><AANLkTikUdG4hRo1wJmObU1g5fomeuViCirSBsVFCEYYZ@mail.gmail.com><AANLkTimVFCKL+M_c0rb=Zu0cktc0_QZQzZikR_T63Wj2@mail.gmail.com><AANLkTim2yjjPSC6=KfCgqWQteTqSFFga39gNyg7SoB3+@mail.gmail.com>
+	<20100811062010.GB32300@jama>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 11 Aug 2010 07:54:17.0615 (UTC)
+	FILETIME=[6631F1F0:01CB392A]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problem building openjdk-6
+Subject: Re: Why PREFERRED_VERSION setting of <distro>.conf overrules local.conf setting ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,33 +49,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 07:26:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Aug 2010 07:55:06 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 11, 2010 at 08:47:14AM +0200, Jaap de Jong wrote:
-> Hi,
->
-> since a day or 6/7 ago I can't build openjdk-6 anymore.
-> This is the latest patch that builds fine; later fail...
->
->    commit 13423cbf48e09af101dacba5e23695091582fc92
->    Author: Robert Schuster <robertschuster@fsfe.org>
->    Date:   Thu Jul 22 12:13:29 2010 +0200
->
->         jamvm-native 1.5.4: New version.
->
-> Any clue?
-> Thanks!
-> Jaap de Jong
->
+Hello,
 
-Hi Jaap,
+I don't wanted to initiate heavy changes, for my experience: "Don't
+change a running system".
 
-the problem is that jamvm sometimes misscompiles some java-classes and the result is that the class is has 0 bytes.
-That's happening really rare and we didnt build yet a guard for it in. So find out from the errorlog which class is
-missing, mostly it some gnumail stuff and force to rebuild this package.
+I just asked for a simple way to use my preferred version for specific
+packages.
 
-Bye Henning
+As I understand OE, it should be possible to use the main repository
+with some view personal changes to get the image I need.=20
+If I have to change distro and machine configurations and hold them in
+my overlay, I can't use improvements of the main repository w/o heavy
+changes in my own overlay.
+
+For my opinion, a DISTRO only should be a recommendation for a set of
+working peaces and not a "you have to use it" dictation.
+There may be individual requirements a DISTRO never will be able to
+cover.
+
+Regards
+Wolfgang Hauser=20
+
+
+ =20
 
 
