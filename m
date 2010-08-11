@@ -1,31 +1,42 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OjH3Z-000597-NX
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 21:33:46 +0200
-Received: by qwi4 with SMTP id 4so94522qwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OjHIs-0008Jq-Jh for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Aug 2010 21:49:54 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OjHIh-0004Gz-Sp for openembedded-devel@lists.openembedded.org;
+	Wed, 11 Aug 2010 21:49:23 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Wed, 11 Aug 2010 21:49:23 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 12:33:33 -0700 (PDT)
-Received: by 10.224.73.106 with SMTP id p42mr11052207qaj.176.1281555212783;
-	Wed, 11 Aug 2010 12:33:32 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id t24sm609458qcs.11.2010.08.11.12.33.31
-	(version=SSLv3 cipher=RC4-MD5); Wed, 11 Aug 2010 12:33:32 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	Wed, 11 Aug 2010 21:49:23 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Aug 2010 14:33:29 -0500
-Message-Id: <1281555209-3993-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Wed, 11 Aug 2010 21:49:15 +0200
+Message-ID: <i3uurs$q8t$1@dough.gmane.org>
+References: <1281549944-13721-1-git-send-email-chase.maupin@ti.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <1281549944-13721-1-git-send-email-chase.maupin@ti.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] u-boot: beagleboard: adjusted clocks to match PSP
+Subject: Re: [PATCH] libgles-omap3: use es5 version for 37x machines
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,44 +50,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 19:33:46 -0000
+X-List-Received-Date: Wed, 11 Aug 2010 19:49:55 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+On 11-08-10 20:05, Chase Maupin wrote:
+> * Set BINLOCATION to use es5.x version for am37x-evm and
+>   dm37x-evm machine types.
+> * Bump PR
+
+NAK, this patch doesn't do what you think it does. The current ES5.x
+switching is already working like it should. What your patch does:
+
+copy es2 into ES2.0/
+don't copy es3 into ES3.0/
+copy es5 into ES5.0
+copy es5 into ES3.0
+
+Even if the switching wasn't working, this is the *completely* wrong way
+to fix it.
 
 
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
----
- ...3-clocks-update-clock-setup-for-36XX-37XX.patch |    4 ++--
- recipes/u-boot/u-boot_git.bb                       |    2 +-
- 2 files changed, 3 insertions(+), 3 deletions(-)
+> 
+> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> Signed-off-by: Brijesh Singh <bksingh@ti.com>
+> ---
+>  recipes/powervr-drivers/libgles-omap3.inc          |    2 +-
+>  .../powervr-drivers/libgles-omap3_3.01.00.06.bb    |    4 +++-
+>  2 files changed, 4 insertions(+), 2 deletions(-)
+> 
+> diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
+> index d183486..12839e6 100644
+> --- a/recipes/powervr-drivers/libgles-omap3.inc
+> +++ b/recipes/powervr-drivers/libgles-omap3.inc
+> @@ -1,7 +1,7 @@
+>  DESCRIPTION = "libGLES for the omap3"
+>  LICENSE = "proprietary-binary"
+>  
+> -PR = "r6"
+> +PR = "r7"
+>  
+>  COMPATIBLE_MACHINE = "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
+>  
+> diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb b/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
+> index bb7994f..b3611a3 100644
+> --- a/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
+> +++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
+> @@ -1,4 +1,6 @@
+> -BINLOCATION = "${S}/gfx_rel_es3.x"
+> +BINLOCATION_dm37x-evm = "${S}/gfx_rel_es5.x"
+> +BINLOCATION_am37x-evm = "${S}/gfx_rel_es5.x"
+> +BINLOCATION ?= "${S}/gfx_rel_es3.x"
+>  
+>  ES2LOCATION = "${S}/gfx_rel_es2.x"
+>  ES3LOCATION = "${S}/gfx_rel_es3.x"
 
-diff --git a/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-update-clock-setup-for-36XX-37XX.patch b/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-update-clock-setup-for-36XX-37XX.patch
-index 03da8ce..e5dbec6 100644
---- a/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-update-clock-setup-for-36XX-37XX.patch
-+++ b/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-update-clock-setup-for-36XX-37XX.patch
-@@ -726,9 +726,9 @@ index 73063ec..2045e4e 100644
- +per_36x_dpll_param:
- +/*    SYSCLK    M       N      M2      M3      M4     M5      M6      m2DIV */
- +.word 12000,    360,    4,     9,      16,     5,     4,      3,      1
--+.word 13000,   1728,   12,     9,      32,     18,    8,      6,      2
-++.word 13000,    864,   12,     9,      16,     9,     4,      3,      1
- +.word 19200,    360,    7,     9,      16,     5,     4,      3,      1
--+.word 26000,   1728,   12,     9,      32,     18,    8,      6,      2
-++.word 26000,    432,   12,     9,      16,     9,     4,      3,      1
- +.word 38400,    360,   15,     9,      16,     5,     4,      3,      1
- +
- +.globl get_36x_mpu_dpll_param
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index ed2ee92..7f26a87 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -1,5 +1,5 @@
- require u-boot.inc
--PR ="r62"
-+PR ="r63"
- 
- FILESPATHPKG =. "u-boot-git:"
- 
--- 
-1.5.6.4
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMYv67MkyGM64RGpERAvAYAJ9H5oJPSnLs7ez9XfgfnR3c4MS5HgCcDOvQ
+jQJXncXmttvmaPqmdq8n7SM=
+=l4tO
+-----END PGP SIGNATURE-----
 
 
 
