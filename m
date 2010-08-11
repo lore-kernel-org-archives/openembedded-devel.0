@@ -1,55 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Oj4fb-0008TX-Fg
+	(envelope-from <jaap.dejong@nedap.com>) id 1Oj55y-0000nS-Dx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 08:20:16 +0200
-Received: by fxm6 with SMTP id 6so1211838fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 10 Aug 2010 23:20:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=yeVL/9O2WUFtz/2MDJd8MdDC48gto874scPa+1e0UrI=;
-	b=sqK6e/mq17FfEKfcrnRLQrvrzVOTMnPdFH8vdC1gyB+wwP3YmJ6JBaokkJs3wtb7bK
-	Djvb06VYKIproHZc4FYJL4j+aJhMQV/7uJ8kIAvkdb6SZA10m9E5czNVOv42wsqw1sX2
-	Gx6lFOqZkexpwgOQl69xJtpmB7hdLbDhQGoHQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ETjfb7akCM8EA5ximZ3QUs8FEzNu2jw8kCCzu0Mz68v+MNvf/NzGEG47QjEu+cZiL2
-	mpCKqLPEvc8/7dC2mg7VA/e/W46dOm7AnEhbfR5NTiXLqadbAneDDM41T3hFvOONuLOy
-	0YnI9WO1MTBBMVM1iyXmAx1e/qqE6ADwTyrzA=
-Received: by 10.223.119.210 with SMTP id a18mr19296166far.52.1281507600163;
-	Tue, 10 Aug 2010 23:20:00 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id b9sm2689422faq.31.2010.08.10.23.19.59
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 10 Aug 2010 23:19:59 -0700 (PDT)
-Date: Wed, 11 Aug 2010 08:20:10 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100811062010.GB32300@jama>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E82@deimsg40.de.net.world>
-	<AANLkTinK5O3F25QJ40B8+rt5M57BKwWVOYytUEZqvP-D@mail.gmail.com>
-	<AANLkTikjcrh78MDsSbdALEWbZGHU7nwrk14FQFiU=ynA@mail.gmail.com>
-	<AANLkTimbjUYY22nf59gPAw-Xm05mMLNdDA61Ydc63DFs@mail.gmail.com>
-	<i3se2n$gj7$1@dough.gmane.org>
-	<AANLkTikUdG4hRo1wJmObU1g5fomeuViCirSBsVFCEYYZ@mail.gmail.com>
-	<AANLkTimVFCKL+M_c0rb=Zu0cktc0_QZQzZikR_T63Wj2@mail.gmail.com>
-	<AANLkTim2yjjPSC6=KfCgqWQteTqSFFga39gNyg7SoB3+@mail.gmail.com>
+	Wed, 11 Aug 2010 08:47:33 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Wed, 11 Aug 2010 08:47:15 +0200
+X-TM-IMSS-Message-ID: <1e1e9fdc00006cc5@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 1e1e9fdc00006cc5 for
+	<jaap.dejong@nedap.com>; Wed, 11 Aug 2010 08:47:18 +0100
+Message-ID: <4C624772.8000607@nedap.com>
+Date: Wed, 11 Aug 2010 08:47:14 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
 MIME-Version: 1.0
-In-Reply-To: <AANLkTim2yjjPSC6=KfCgqWQteTqSFFga39gNyg7SoB3+@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 11 Aug 2010 06:47:15.0068 (UTC)
+	FILETIME=[0891FBC0:01CB3921]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Why PREFERRED_VERSION setting of <distro>.conf overrules local.conf setting ?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: problem building openjdk-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,34 +41,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 06:20:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 11 Aug 2010 06:47:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 11, 2010 at 08:08:20AM +0200, Frans Meulenbroeks wrote:
-> Without quoting tons of text and without going into each individual
-> argument given there are a few remarks I want to give.
-> 
-> Things should be consistent and intuitive.
-> local.conf is for local configuration. as such it suggests that
-> whatever is in there is leading.
-> Having to append _local to an override to me is counter-intuitive.
-> (and *if* that is really desired or needed to have a _local suffix, it
-> should be documented clearly in the manual. Also an example should be
-> give in the local.conf.sample file. Afaik neither is the case as of
-> today). Even for a
+Hi,
 
-Somethimes I had to use normal assignment in distro config just to override
-some previous weak assignment from .inc file included and parsed before in 
-the same distro config.
+since a day or 6/7 ago I can't build openjdk-6 anymore.
+This is the latest patch that builds fine; later fail...
 
-So I would much more appreciate commit updating manual/local.conf.sample
-than just replacing all distro config with weak-assignments and
-expecting that nothing changed.
+    commit 13423cbf48e09af101dacba5e23695091582fc92
+    Author: Robert Schuster <robertschuster@fsfe.org>
+    Date:   Thu Jul 22 12:13:29 2010 +0200
 
-Regards,
+         jamvm-native 1.5.4: New version.
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Any clue?
+Thanks!
+Jaap de Jong
+
+
+
+| 4380. WARNING in src/org/apache/xalan/xslt/Process.java (at line 757)
+|     PrintWriter resultWriter;
+|                 ^^^^^^^^^^^^
+| The local variable resultWriter is never read
+| ----------
+| 4380 problems (3888 errors, 492 warnings)
+NOTE: Task failed: 
+/media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/xalan-j-2.7.1-r2/temp/log.do_compile.4145
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/xalan-j/xalan-j_2.7.1.bb 
+do_compile failed
+ERROR: Task 1879 
+(/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/xalan-j/xalan-j_2.7.1.bb, 
+do_compile) failed
+NOTE: Waiting for 2 active tasks to finish
 
 
