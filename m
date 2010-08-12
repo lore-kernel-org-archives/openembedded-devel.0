@@ -1,46 +1,43 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Ojeac-0002Pg-9c
+	(envelope-from <cliff.brake@gmail.com>) id 1OjfGZ-0002ey-94
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 22:41:39 +0200
-Received: by eyx24 with SMTP id 24so974537eyx.6
+	Thu, 12 Aug 2010 23:24:48 +0200
+Received: by wyb38 with SMTP id 38so1939736wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 12 Aug 2010 13:41:03 -0700 (PDT)
+	Thu, 12 Aug 2010 14:24:34 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=awffC8mNhmenvh/zQbmyolqQD0U6CkzregNi108ALCo=;
-	b=KJHSX6sZ8CL5iB3RdYgFOdjx3T4To22PlhCE3+G4fFdcdwUPWYhPjkS7gtG6NLgNem
-	jU50/68HlrLsQOBnuIh40zDcN/GHftpWzffT/TVBAurdRDLwKnm0zSN0G+ziZC+a5i20
-	efqsBJEtx/kytXPD/H0cU2m3vJ8HRP/GlFHdc=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=rVy8eUsfwt50MVz3dyxuGuJVOawIrlQNPosE+NlNM40=;
+	b=P2FWG0qhBZNBrWuZ23MJO7qev6tOwOK/o8B+kkoM0JsDKYSA76rzkhuXUFJ74JFS88
+	bNar+HEfTi0Ev0xkWG0XrKB2uHSXXtlkwH5sA4o7ZjK6XiT7lyMqo4fr1Nkw/SrAz70S
+	RNda5InbkIpa/DfPljin6/VDGuVwtXTTorzas=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=tK7McOVf6ORptV7Nq0elSCtWNT8dDFyLtrQt7qxe+aKhDBJmHAgYZEcc67V83rGyVR
-	wbUeJYxpyKi7yZTARJmNK3f6N2CUujS0a9Zb5Q1PxcrMANs1/zhZODNTCST16OiIRpeC
-	lTaOSavF29gMjgGslEizVxxuxcTi1iVlv9Kwg=
-Received: by 10.216.15.8 with SMTP id e8mr7186770wee.59.1281645663131; Thu, 12
-	Aug 2010 13:41:03 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=mD2i4GHnm6gHznQiMSMtfH7T6ekLJcepf2fFuEoM2UBd95gdk/n7UWYecbgO1XU7qj
+	oOMFITEap6NvLfByXkIu29+ysEkmjmfkLzdSsJc3Hw2Oe8CRcn8EeOWZoMw/FzI02aSc
+	R9hulk0IYnep7MGaUNIbvG2NSpce25uxk8eSU=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.166 with HTTP; Thu, 12 Aug 2010 13:40:43 -0700 (PDT)
-In-Reply-To: <1281571508-3792-1-git-send-email-raj.khem@gmail.com>
+Received: by 10.216.167.72 with SMTP id h50mr411819wel.103.1281648274086; Thu,
+	12 Aug 2010 14:24:34 -0700 (PDT)
+Received: by 10.216.234.166 with HTTP; Thu, 12 Aug 2010 14:24:33 -0700 (PDT)
+In-Reply-To: <AANLkTin4OUg1S1GYa0H8v1qHyvY77mHPVGF06=DkC5s+@mail.gmail.com>
 References: <1281571508-3792-1-git-send-email-raj.khem@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 12 Aug 2010 13:40:43 -0700
-X-Google-Sender-Auth: KSdMjrXmJsBim3o8zARhHJ8KaQQ
-Message-ID: <AANLkTin4OUg1S1GYa0H8v1qHyvY77mHPVGF06=DkC5s+@mail.gmail.com>
+	<AANLkTin4OUg1S1GYa0H8v1qHyvY77mHPVGF06=DkC5s+@mail.gmail.com>
+Date: Thu, 12 Aug 2010 17:24:33 -0400
+Message-ID: <AANLkTimvB1aOwZzpbyoh_kskiLh5ucH1vHJG_bzpM8Gv@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: [PATCH] srctree.bbclass: Also account fot deptask
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -55,22 +52,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Aug 2010 20:41:39 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 12 Aug 2010 21:24:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Aug 11, 2010 at 5:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> * Use exec_func instead of exec_task
-> * Use a new name for meta task
+On Thu, Aug 12, 2010 at 4:40 PM, Chris Larson <clarson@kergoth.com> wrote:
+> On Wed, Aug 11, 2010 at 5:05 PM, Khem Raj <raj.khem@gmail.com> wrote:
 >
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> * Use exec_func instead of exec_task
+>> * Use a new name for meta task
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
+>
+> Acked-by: Chris Larson <chris_larson@mentor.com>
 
+Acked-by: Cliff Brake <cbrake@bec-systems.com>
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+=================
+http://bec-systems.com
+
 
