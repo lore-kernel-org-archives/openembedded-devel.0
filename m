@@ -1,27 +1,43 @@
-Received: from static.88-198-71-155.clients.your-server.de ([88.198.71.155]
-	helo=socrates.bennee.com) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kernel-hacker@bennee.com>) id 1OjaKd-0005Nq-3z
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 18:08:39 +0200
-Received: from localhost ([127.0.0.1] helo=pitcairn.cambridgebroadband.com)
-	by socrates.bennee.com with esmtp (Exim 4.69)
-	(envelope-from <kernel-hacker@bennee.com>) id 1OjZoU-0006Fl-99
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 17:35:26 +0200
-From: kernel-hacker@bennee.com
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 12 Aug 2010 16:35:34 +0100
-Message-Id: <1281627336-686-1-git-send-email-kernel-hacker@bennee.com>
-X-Mailer: git-send-email 1.7.2.1
-X-SA-Exim-Connect-IP: 88.198.71.155
-X-SA-Exim-Mail-From: kernel-hacker@bennee.com
+Received: from mailde1.eads.com ([80.156.44.82])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1OjaaX-0006AL-AF for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Aug 2010 18:25:06 +0200
+Received: from de-gate1.mailhub.intra.corp ([53.154.243.33]) by
+	mailde1.eads.com with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 12 Aug 2010 18:26:40 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Thu, 12 Aug 2010 18:24:53 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 12 Aug 2010 18:24:53 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 12 Aug 2010 18:24:52 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B60A2@deimsg40.de.net.world>
+In-Reply-To: <1281357774.3767.34.camel@mattotaupa>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [PATCH][v2 2/2] busybox: fix defconfig handling problems
+	triggered by "configure according to {MACHINE,
+	DISTRO}_FEATURES"; added inetd handling
+Thread-Index: Acs3wJClH+LQVPRwQ6aI1me4isYcTgCefTRA
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E6B@deimsg40.de.net.world>
+	<1281357774.3767.34.camel@mattotaupa>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 12 Aug 2010 16:24:53.0753 (UTC)
+	FILETIME=[E52B5E90:01CB3A3A]
+X-SA-Exim-Connect-IP: 80.156.44.82
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: A few fixes (resend, hopefully not munged this time)
+Subject: Re: [PATCH][v2 2/2] busybox: fix defconfig handling problems triggered by "configure according to {MACHINE, DISTRO}_FEATURES"; added inetd handling
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,23 +51,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Aug 2010 16:08:39 -0000
+X-List-Received-Date: Thu, 12 Aug 2010 16:25:06 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
 
-Sorry for the delay resubmitting these. Please find attached the
-following patches we added to OE during bringing up our tree. Our
-actual patch series runs to around 14 patches but I assume your not
-interested in more non-consumer boards or patches that "work for us".
-However I'm happy to send them to the mailing list or privately if
-someone wants to review them. A number of the patches were from Phil
-Blundel and I believe have already worked their way upstream from his
-trees.
+>I am sorry and I hope the formal stuff will be alright when you
+>resubmit. (Should be v3.)
 
-[PATCH 1/2] freetype: include perl-native dependancy
-[PATCH 2/2] recode: Fix configure step.
+I haven't forgot this, I just haven't time to work on it.
 
---
-Alex.
+The new patch is on the way, I've done some tests and if I got a bit
+spare time I'll prepare the patch.
+
+Regards
+Wolfgang
 
 
