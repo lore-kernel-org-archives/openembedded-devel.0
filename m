@@ -1,31 +1,44 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OjHh8-0006zE-Sr
+	(envelope-from <raj.khem@gmail.com>) id 1OjLIc-0008Qk-GC
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 11 Aug 2010 22:14:40 +0200
-Received: by qwi4 with SMTP id 4so136622qwi.6
+	Thu, 12 Aug 2010 02:05:35 +0200
+Received: by pvg6 with SMTP id 6so254613pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 13:14:21 -0700 (PDT)
-Received: by 10.224.96.144 with SMTP id h16mr10931193qan.372.1281557647402;
-	Wed, 11 Aug 2010 13:14:07 -0700 (PDT)
+	Wed, 11 Aug 2010 17:05:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=O8/VaN6NWjWCOWSaFNYKJrFkLLifU/HuQX1VnAM+590=;
+	b=qt9bIMZPHni6/Y6LU3XGF2yL18LoP4YshU7PwWtpRemueW3qhMKcztczWmlff5Pxtk
+	w7FWr6gsIa1WYmaFsXdbBPGTfFQFckG8MFxjyQsLBrxRxbYAJPlIG9orjOHUGNKWHhIz
+	e1pcj8ewOYAs9aNwqd9sfUH5kHa8DZ5EnBRzU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=aujjgHBPTB/KqJDFR0HPyTMBTxel9N5/zhgUA8VV8NDtVj6GNHGN8oBBXrNTrDZGIY
+	WKcWv0ZWZEO5iwWm5LLYeCXXYNgJ5BndDg9Sq9rt3I3KxwyvUPEt3pU5QEnlUJ8YMbU9
+	dcsvlVi/KrAkjcXE1idqEUpPOT6qWasZrM9CQ=
+Received: by 10.142.180.20 with SMTP id c20mr16531428wff.136.1281571520750;
+	Wed, 11 Aug 2010 17:05:20 -0700 (PDT)
 Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id e6sm658776qcr.17.2010.08.11.13.14.05
-	(version=SSLv3 cipher=RC4-MD5); Wed, 11 Aug 2010 13:14:05 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id y16sm765075wff.14.2010.08.11.17.05.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 11 Aug 2010 17:05:20 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 11 Aug 2010 15:14:03 -0500
-Message-Id: <1281557643-24477-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+Date: Wed, 11 Aug 2010 17:05:08 -0700
+Message-Id: <1281571508-3792-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] u-boot/angstrom-uboot-scripts: resize ramdisk
+Subject: [PATCH] srctree.bbclass: Also account fot deptask
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,116 +52,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 11 Aug 2010 20:14:40 -0000
+X-List-Received-Date: Thu, 12 Aug 2010 00:05:36 -0000
 
+* Use exec_func instead of exec_task
+* Use a new name for meta task
 
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/angstrom/angstrom-uboot-scripts.bb         |    2 +-
- .../beagleboard-validation-user.cmd                |    7 +++-
- .../0001-BeagleBoard-move-ramdisk-parameters.patch |   38 ++++++++++++++++++++
- recipes/u-boot/u-boot_git.bb                       |    3 +-
- 4 files changed, 46 insertions(+), 4 deletions(-)
- create mode 100644 recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch
+ classes/srctree.bbclass |   31 ++++++++++++++++++-------------
+ 1 files changed, 18 insertions(+), 13 deletions(-)
 
-diff --git a/recipes/angstrom/angstrom-uboot-scripts.bb b/recipes/angstrom/angstrom-uboot-scripts.bb
-index a478cb2..020a7af 100644
---- a/recipes/angstrom/angstrom-uboot-scripts.bb
-+++ b/recipes/angstrom/angstrom-uboot-scripts.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Various uboot scripts"
+diff --git a/classes/srctree.bbclass b/classes/srctree.bbclass
+index 7232c26..1a88613 100644
+--- a/classes/srctree.bbclass
++++ b/classes/srctree.bbclass
+@@ -50,7 +50,7 @@ def merge_tasks(d):
+ 		__gather_taskdeps(task, items)
+ 		return items
  
--PR = "r9"
-+PR = "r10"
+-	newtask = "do_populate_sysroot"
++	newtask = "do_populate_sysroot_post"
+ 	mergedtasks = gather_taskdeps(newtask)
+ 	mergedtasks.pop()
+ 	deltasks = gather_taskdeps("do_patch")
+@@ -83,17 +83,22 @@ def merge_tasks(d):
+ 		d.setVarFlag(task, "deps", deps)
  
- DEPENDS = "u-boot-mkimage-native"
- 
-diff --git a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
-index 7dbf69b..971b96e 100644
---- a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
-+++ b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
-@@ -1,11 +1,14 @@
- mmc init
--setenv rdaddr 0x81000000
--setenv ramroot /dev/ram0
- if test "${beaglerev}" = "AxBx"; then
-+setenv rdaddr 0x81000000
- setenv optargs mem=80M@0x80000000 musb_hdrc.fifomode=5
- elif test "${beaglerev}" = "Cx"; then
-+setenv rdaddr 0x88000000
-+setenv ramroot /dev/ram0 rw ramdisk_size=131072 initrd=${rdaddr},128M
- setenv optargs mem=80M@0x80000000 mem=128M@0x88000000 musb_hdrc.fifomode=5
- else
-+setenv rdaddr 0x88000000
-+setenv ramroot /dev/ram0 rw ramdisk_size=131072 initrd=${rdaddr},128M
- setenv optargs mem=80M@0x80000000 mem=384M@0x88000000
- fi
- run loadramdisk
-diff --git a/recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch b/recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch
-new file mode 100644
-index 0000000..5d6e69d
---- /dev/null
-+++ b/recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch
-@@ -0,0 +1,38 @@
-+From c8d02f2a8500f06de39681aed60ea5c9894f8087 Mon Sep 17 00:00:00 2001
-+From: Jason Kridner <jkridner@beagleboard.org>
-+Date: Wed, 11 Aug 2010 14:50:38 -0500
-+Subject: [PATCH] BeagleBoard: move ramdisk parameters
+ 	# Pull cross recipe task deps over
+-	depends = (d.getVarFlag(task, "depends") or ""
+-	           for task in mergedtasks[:-1]
+-	           if not task in deltasks)
+-	d.setVarFlag("do_populate_sysroot", "depends", " ".join(depends))
++	depends = []
++	deptask = []
++	for task in mergedtasks[:-1]:
++	    if not task in deltasks:
++		depends.append(d.getVarFlag(task, "depends") or "")
++		deptask.append(d.getVarFlag(task, "deptask") or "")
 +
-+This will make it easier to reprogram the ramdisk size.
-+
-+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
-+---
-+ include/configs/omap3_beagle.h |    5 ++---
-+ 1 files changed, 2 insertions(+), 3 deletions(-)
-+
-+diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
-+index 48ad805..4f5c1d4 100644
-+--- a/include/configs/omap3_beagle.h
-++++ b/include/configs/omap3_beagle.h
-+@@ -217,7 +217,7 @@
-+ 	"mmcrootfstype=ext3 rootwait\0" \
-+ 	"nandroot=/dev/mtdblock4 rw\0" \
-+ 	"nandrootfstype=jffs2\0" \
-+-	"ramroot=/dev/ram0 rw\0" \
-++	"ramroot=/dev/ram0 rw ramdisk_size=65536 initrd=${rdaddr},64M\0" \
-+ 	"ramrootfstype=ext2\0" \
-+ 	"mmcargs=setenv bootargs console=${console} " \
-+ 		"${optargs} " \
-+@@ -248,8 +248,7 @@
-+ 		"vram=${vram} " \
-+ 		"omapfb.mode=dvi:${dvimode} " \
-+ 		"omapdss.def_disp=${defaultdisplay} " \
-+-		"root=${ramroot} rw ramdisk_size=65536 " \
-+-		"initrd=${rdaddr},64M " \
-++		"root=${ramroot} " \
-+ 		"rootfstype=${ramrootfstype}\0" \
-+ 	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
-+ 	"bootscript=echo Running bootscript from mmc ...; " \
-+-- 
-+1.5.6.4
-+
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 7f26a87..19386fc 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -1,5 +1,5 @@
- require u-boot.inc
--PR ="r63"
-+PR ="r64"
++	d.setVarFlag("do_populate_sysroot_post", "depends", " ".join(depends))
++	d.setVarFlag("do_populate_sysroot_post", "deptask", " ".join(deptask))
  
- FILESPATHPKG =. "u-boot-git:"
+ python () {
+     merge_tasks(d)
+ }
  
-@@ -71,6 +71,7 @@ SRC_URI_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
-                        file://0044-Beagleboard-Adjust-boot.patch \
-                        file://0045-BeagleBoard-Enable-pullups-on-i2c2.patch \
-                        file://0046-BeagleBoard-Add-camera-to-default-bootargs.patch \
-+		       file://0001-BeagleBoard-move-ramdisk-parameters.patch \
-                        file://fw_env.config \
- "
- SRCREV_beagleboard = "ca6e1c136ddb720c3bb2cc043b99f7f06bc46c55"
+-# Manually run do_install & all of its deps, then do_stage
+-python do_populate_sysroot () {
++# Manually run do_install & all of its deps
++python do_populate_sysroot_post () {
+ 	from os.path import exists
+ 	from bb.build import exec_task, exec_func
+ 	from bb import note
+@@ -105,11 +110,11 @@ python do_populate_sysroot () {
+ 			if not dep in seen:
+ 				rec_exec_task(dep, seen)
+ 		seen.add(task)
+-		#if not exists("%s.%s" % (stamp, task)):
+-		note("%s: executing task %s" % (d.getVar("PF", True), task))
+-		exec_task(task, d)
++		if not exists("%s.%s" % (stamp, task)):
++		    note("%s: executing task %s" % (d.getVar("PF", True), task))
++		    exec_func(task, d)
+ 
+-	rec_exec_task("do_install", set())
+-	exec_func("do_stage", d)
++	rec_exec_task("do_populate_sysroot", set())
+ }
+-do_populate_sysroot[lockfiles] += "${S}/.lock"
++addtask populate_sysroot_post after do_populate_sysroot
++do_populate_sysroot_post[lockfiles] += "${S}/.lock"
 -- 
-1.5.6.4
+1.7.1
 
 
 
