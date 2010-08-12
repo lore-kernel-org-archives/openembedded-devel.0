@@ -1,40 +1,43 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OjbKd-0005lR-Tp
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OjbSY-00060z-CQ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 19:12:44 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OjbKQ-0007Sp-6d from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 10:12:30 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Thu, 12 Aug 2010 10:12:29 -0700
-Received: from [172.30.80.91] ([172.30.80.91]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Thu, 12 Aug 2010 11:12:28 -0600
-Message-ID: <4C642B76.6090402@mentor.com>
-Date: Thu, 12 Aug 2010 10:12:22 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Thu, 12 Aug 2010 19:20:55 +0200
+Received: by eyx24 with SMTP id 24so840710eyx.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 12 Aug 2010 10:20:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=AI8IYsiY6SeMEn+494ysheNsMzDsditj/7WbTlFzUl4=;
+	b=bQ0Z6eKvKFK3W4c+pzWNTIz/vToQjQ+mkY6+xwimfgcEC/CbobuluNcHbg6gIXNvsb
+	z7kQUlS2pL00mRHXiTjUa0TW6Zgb7eaxKRynqnpOVZ9uzOad8kvBNslAXUpIuiv2oY32
+	9YHs0g4ra8Ez7jpa/kf/6l2QDIMa6qicIVFO4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=ESUXRlSHE5eicc1nLuRK65Dn3GCstvyi3dBjHrwGeR6A9HdW0ZEqhSJlroTxjrn/nz
+	J4jTLnNzTjxufo6E1pFQX+XNBWXFksYxWe9woh0AupVx2a4vVnrwws89U/n8su8Suj2A
+	8X+xUXJJvdmR4mHz7SfcTVUz0Ns8spiTlMgrI=
+Received: by 10.213.33.135 with SMTP id h7mr551299ebd.34.1281633630145;
+	Thu, 12 Aug 2010 10:20:30 -0700 (PDT)
+Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
+	by mx.google.com with ESMTPS id a48sm2511887eei.7.2010.08.12.10.20.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 12 Aug 2010 10:20:29 -0700 (PDT)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C4F6F91.8000902@mentor.com> <201007281128.37653.khimov@altell.ru>
-	<4C50507C.5050906@mentor.com>
-In-Reply-To: <4C50507C.5050906@mentor.com>
-X-OriginalArrivalTime: 12 Aug 2010 17:12:28.0982 (UTC)
-	FILETIME=[8B04BD60:01CB3A41]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Thu, 12 Aug 2010 19:20:23 +0200
+Message-Id: <1281633623-10945-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.6.4.2
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] Disable packaged-staging for perl-native
+Subject: [PATCH] src_distribute_local.bbclass: add an error message and exit if a file is not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,40 +51,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Aug 2010 17:12:44 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 12 Aug 2010 17:20:55 -0000
 
-Tom Rini wrote:
-> Roman I Khimov wrote:
->> В сообщении от Среда 28 июля 2010 03:45:21 автор Tom Rini написал:
->>> I'd like to disable packaged-staging for perl-native.  The problem here
->>> comes from a number of things that happen.  Some of these can only
->>> happen in combination with packaged-staging but others I believe could
->>> happen today.  The problem itself is that if we have perl-native
->>> available from packaged-staging it can suddenly exist very early.  What
->>> this means in practical terms is that now we're trying to generate say
->>> pod2man.pl from pod2man.pl.in and @perl@ is expanded to something beyond
->>> the "#!" mechanic length limit and recipes start failing to build
->>> (fixable by changing pod2man.pl.in to use /usr/bin/env perl (and if it
->>> had a -w changing to Use warnings: or whatever the perl is)).
->>
->> So the problem really is that we have perl in 
->> /very-very-long-path/perl? IMO /usr/bin/env change would be better in 
->> that case. 
-> 
-> The most common case is that one, yes.  I'm open to suggestions on 
-> catching and fixing these problems ahead of time but the issue is we're 
-> talking about for example wget which has no dependency on perl-native.
+When a file was not found do_distribute_local would still continue.
+This patch adds an error message and terminates do_distribute_local
 
-As I go over the list of stuff to get a "1.0" of relocatable packaged 
-staging done, ping?  Blacklist perl-native for now or someone suggest 
-how to catch and fixup all the cases to be /usr/bin/env perl ?  iirc 
-just setting ac_cv...="/usr/bin/env perl" won't do it since we end up 
-trying to invoke /usr/bin/env perl -w sometimes and that's an error.
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+ classes/src_distribute_local.bbclass |   28 +++++++++++++++++++++++-----
+ 1 files changed, 23 insertions(+), 5 deletions(-)
 
+diff --git a/classes/src_distribute_local.bbclass b/classes/src_distribute_local.bbclass
+index 7b1e7d7..bdf03e9 100644
+--- a/classes/src_distribute_local.bbclass
++++ b/classes/src_distribute_local.bbclass
+@@ -7,21 +7,39 @@ SRC_DISTRIBUTECOMMAND[dirs] = "${SRC_DISTRIBUTEDIR}/${LIC}/${PN}"
+ # symlinks the files to the SRC_DISTRIBUTEDIR
+ SRC_DISTRIBUTECOMMAND-symlink () {
+     test -e "${SRC}.md5" && ln -sf "${SRC}.md5" .
+-    ln -sf "${SRC}" .
++    if test -e {SRC}
++    then
++        ln -sf "${SRC}" .
++    else
++    	echo "File does not exist:" ${SRC}
++	exit 1
++    fi
+ }
+ 
+ # copies the files to the SRC_DISTRIBUTEDIR
+ SRC_DISTRIBUTECOMMAND-copy () {
+     test -e "${SRC}.md5" && cp -f "${SRC}.md5" .
+-    cp -fr "${SRC}" .
++    if test -e {SRC}
++    then
++        cp -fr "${SRC}" .
++    else
++    	echo "File does not exist:" ${SRC}
++	exit 1
++    fi
+ }
+ 
+ # moves the files to the SRC_DISTRIBUTEDIR and symlinks them back
+ SRC_DISTRIBUTECOMMAND-move+symlink () {
+     if ! [ -L ${SRC} ]; then
+-        src=`basename "${SRC}"`
+-        mv ${SRC} .
+-        ln -sf $src "${SRC}"
++        if test -e {SRC}
++        then
++            src=`basename "${SRC}"`
++            mv ${SRC} .
++            ln -sf $src "${SRC}"
++        else
++    	    echo "File does not exist:" ${SRC}
++	    exit 1
++        fi
+         if [ -e ${SRC}.md5 ]; then
+             mv ${SRC}.md5 .
+             ln -sf $src "${SRC}.md5"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.6.4.2
+
 
 
