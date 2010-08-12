@@ -1,31 +1,40 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OjNSx-0006AU-5W
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OjV4o-0003fL-9j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 04:24:29 +0200
-Received: by wwb34 with SMTP id 34so761540wwb.24
+	Thu, 12 Aug 2010 12:32:00 +0200
+Received: by gyd8 with SMTP id 8so347032gyd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 11 Aug 2010 19:24:10 -0700 (PDT)
+	Thu, 12 Aug 2010 03:31:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=Fve7kVhGAvpOPi1i5TGIUzt8GGUuADvNr60WJZuwACs=;
+	b=NGpWM56aar3NL0aJDYaF20h67fuHaVgarmEMu5ZzhpSRZAJmUHg5a+RmiqZ34Y+xuW
+	LsJ15v+lhkVMTK7pK83M++2ChOMR0JaqkYYRlGQ9h+f5NHTgDHssKj/60HgYQbFPq78h
+	EI3KxkzAxnhzQDdJzKUlUXN8t/lj4UBt2OQbY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=oZnZ8FZZxrI8wEF5FIOwd/5qmrvqqWjbUvxuHSwqabXENr2YxRyvM8NOKgoIBY+pbc
+	wr+C13ZyibgHunJkH/gdJOdeHHGgdS7RtUYBy7/nBchoMXK+835x62NkVpYYccuplWdN
+	lTtOh6KXtaYxGhiQfqCmWWeUmmfNb2d7CpIU8=
 MIME-Version: 1.0
-Received: by 10.216.17.135 with SMTP id j7mr6803826wej.97.1281579850457; Wed, 
-	11 Aug 2010 19:24:10 -0700 (PDT)
-Received: by 10.216.15.79 with HTTP; Wed, 11 Aug 2010 19:24:10 -0700 (PDT)
-In-Reply-To: <i3uuur$q8t$2@dough.gmane.org>
-References: <1281555209-3993-1-git-send-email-jkridner@beagleboard.org>
-	<i3uuur$q8t$2@dough.gmane.org>
-Date: Wed, 11 Aug 2010 22:24:10 -0400
-Message-ID: <AANLkTi=MPQ=HBjRSWNWdDruEwHPjK6RXX51xCj2a4XDi@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
+Received: by 10.150.202.9 with SMTP id z9mr60480ybf.124.1281609104434; Thu, 12
+	Aug 2010 03:31:44 -0700 (PDT)
+Received: by 10.150.53.9 with HTTP; Thu, 12 Aug 2010 03:31:44 -0700 (PDT)
+Date: Thu, 12 Aug 2010 12:31:44 +0200
+Message-ID: <AANLkTimWb7wC+KaptOZ13WfHeCe75ek4WjWPnL-2V5VR@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] u-boot: beagleboard: adjusted clocks to match PSP
+Subject: urjtag git version pushed, still could use some autotools improvement
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,57 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Aug 2010 02:24:30 -0000
+X-List-Received-Date: Thu, 12 Aug 2010 10:32:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 11, 2010 at 3:50 PM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 11-08-10 21:33, Jason Kridner wrote:
->>
->> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
->> ---
->> =A0...3-clocks-update-clock-setup-for-36XX-37XX.patch | =A0 =A04 ++--
->> =A0recipes/u-boot/u-boot_git.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =
-=A0 | =A0 =A02 +-
->> =A02 files changed, 3 insertions(+), 3 deletions(-)
->>
->> diff --git a/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-upd=
-ate-clock-setup-for-36XX-37XX.patch b/recipes/u-boot/u-boot-git/beagleboard=
-/0019-OMAP3-clocks-update-clock-setup-for-36XX-37XX.patch
->> index 03da8ce..e5dbec6 100644
->> --- a/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-update-clo=
-ck-setup-for-36XX-37XX.patch
->> +++ b/recipes/u-boot/u-boot-git/beagleboard/0019-OMAP3-clocks-update-clo=
-ck-setup-for-36XX-37XX.patch
->> @@ -726,9 +726,9 @@ index 73063ec..2045e4e 100644
->> =A0+per_36x_dpll_param:
->> =A0+/* =A0 =A0SYSCLK =A0 =A0M =A0 =A0 =A0 N =A0 =A0 =A0M2 =A0 =A0 =A0M3 =
-=A0 =A0 =A0M4 =A0 =A0 M5 =A0 =A0 =A0M6 =A0 =A0 =A0m2DIV */
->> =A0+.word 12000, =A0 =A0360, =A0 =A04, =A0 =A0 9, =A0 =A0 =A016, =A0 =A0=
- 5, =A0 =A0 4, =A0 =A0 =A03, =A0 =A0 =A01
->> -+.word 13000, =A0 1728, =A0 12, =A0 =A0 9, =A0 =A0 =A032, =A0 =A0 18, =
-=A0 =A08, =A0 =A0 =A06, =A0 =A0 =A02
->> ++.word 13000, =A0 =A0864, =A0 12, =A0 =A0 9, =A0 =A0 =A016, =A0 =A0 9, =
-=A0 =A0 4, =A0 =A0 =A03, =A0 =A0 =A01
->> =A0+.word 19200, =A0 =A0360, =A0 =A07, =A0 =A0 9, =A0 =A0 =A016, =A0 =A0=
- 5, =A0 =A0 4, =A0 =A0 =A03, =A0 =A0 =A01
->> -+.word 26000, =A0 1728, =A0 12, =A0 =A0 9, =A0 =A0 =A032, =A0 =A0 18, =
-=A0 =A08, =A0 =A0 =A06, =A0 =A0 =A02
->> ++.word 26000, =A0 =A0432, =A0 12, =A0 =A0 9, =A0 =A0 =A016, =A0 =A0 9, =
-=A0 =A0 4, =A0 =A0 =A03, =A0 =A0 =A01
->> =A0+.word 38400, =A0 =A0360, =A0 15, =A0 =A0 9, =A0 =A0 =A016, =A0 =A0 5=
-, =A0 =A0 4, =A0 =A0 =A03, =A0 =A0 =A01
->> =A0+
->
-> Are those actually correct? Last time I looked at that bit Sakomans code
-> was cleaner and better. Dunno if the PSP tree has changed to fix that.
+Hi,
 
-They work for getting the S-Video and DVI displays working in u-boot
-for xM testing.  It could be that the right thing is to fix some other
-values, but this is what I've got.
+I just pushed the git version of urjtag
+(http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=44ded83e917c4d8b47b215648efc2860f794c764)
+
+The recipe builds and works, but has some hacks to work around
+autotools issues that were beyon my capabilities of fixing.
+See http://permalink.gmane.org/gmane.comp.handhelds.openembedded/35345
+for a description.
+
+I would appreciate it if someone could have a peek at these.
+
+Frans
 
 
