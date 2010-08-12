@@ -1,43 +1,40 @@
-Received: from mailde1.eads.com ([80.156.44.82])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1OjaaX-0006AL-AF for openembedded-devel@lists.openembedded.org;
-	Thu, 12 Aug 2010 18:25:06 +0200
-Received: from de-gate1.mailhub.intra.corp ([53.154.243.33]) by
-	mailde1.eads.com with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 12 Aug 2010 18:26:40 +0200
-Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Thu, 12 Aug 2010 18:24:53 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Thu, 12 Aug 2010 18:24:53 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
+	(envelope-from <Tom_Rini@mentor.com>) id 1OjbCx-0005Q6-6R
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Aug 2010 19:04:48 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OjbCY-0005zZ-CP from Tom_Rini@mentor.com ;
+	Thu, 12 Aug 2010 10:04:22 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Thu, 12 Aug 2010 10:04:21 -0700
+Received: from [172.30.80.91] ([172.30.80.91]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 12 Aug 2010 11:04:21 -0600
+Message-ID: <4C64298E.3060509@mentor.com>
+Date: Thu, 12 Aug 2010 10:04:14 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Date: Thu, 12 Aug 2010 18:24:52 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B60A2@deimsg40.de.net.world>
-In-Reply-To: <1281357774.3767.34.camel@mattotaupa>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: [oe] [PATCH][v2 2/2] busybox: fix defconfig handling problems
-	triggered by "configure according to {MACHINE,
-	DISTRO}_FEATURES"; added inetd handling
-Thread-Index: Acs3wJClH+LQVPRwQ6aI1me4isYcTgCefTRA
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B5E6B@deimsg40.de.net.world>
-	<1281357774.3767.34.camel@mattotaupa>
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 12 Aug 2010 16:24:53.0753 (UTC)
-	FILETIME=[E52B5E90:01CB3A3A]
-X-SA-Exim-Connect-IP: 80.156.44.82
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+To: openembedded-devel@lists.openembedded.org
+References: <1281627336-686-1-git-send-email-kernel-hacker@bennee.com>
+	<1281627336-686-2-git-send-email-kernel-hacker@bennee.com>
+In-Reply-To: <1281627336-686-2-git-send-email-kernel-hacker@bennee.com>
+X-OriginalArrivalTime: 12 Aug 2010 17:04:21.0241 (UTC)
+	FILETIME=[684D5E90:01CB3A40]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH][v2 2/2] busybox: fix defconfig handling problems triggered by "configure according to {MACHINE, DISTRO}_FEATURES"; added inetd handling
+Cc: Alex Bennee <ajb@cbnl.com>
+Subject: Re: [PATCH 1/2] freetype: include perl-native dependancy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,22 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 12 Aug 2010 16:25:06 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 12 Aug 2010 17:04:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
+kernel-hacker@bennee.com wrote:
+> From: Alex Bennee <ajb@cbnl.com>
+> 
+> Freetype requires a native perl to build during it's configure step.
+> I'm unsure how it built before unless other uses had brought in
+> perl-native through another dependancy (our GTK setup is fairly
+> minimal).
+> 
+> Signed-off-by: Alex Bennee <ajb@cbnl.com>
 
->I am sorry and I hope the formal stuff will be alright when you
->resubmit. (Should be v3.)
+OE assumes that there is a host perl already.  perl-native is mainly 
+provided for some very special cases (such as building perl for the target).
 
-I haven't forgot this, I just haven't time to work on it.
-
-The new patch is on the way, I've done some tests and if I got a bit
-spare time I'll prepare the patch.
-
-Regards
-Wolfgang
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
