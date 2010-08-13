@@ -1,48 +1,41 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1Ok1Ln-0001BI-Qw
+	(envelope-from <coolaj86@gmail.com>) id 1Ok1eS-00020k-AI
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 22:59:55 +0200
-Received: from compute3.internal (compute3.internal [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 3D8D19AD
+	Fri, 13 Aug 2010 23:18:57 +0200
+Received: by fxm6 with SMTP id 6so2122432fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 16:59:27 -0400 (EDT)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Fri, 13 Aug 2010 16:59:27 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type:content-transfer-encoding;
-	s=smtpout; bh=xry/OmhesJIHl3Ny/88inGSrQwU=;
-	b=AtaVXiY392RGxUtvtHYKBwum0SmP3G2GFxNS/NlpJaFBy+15klaUcx8rY4YtP/JlPfXt8sa6fhoSDIRdFwnbMIxuRsiQJz5KNkBcRyNyZP/9IYE7LJrhYvg57J0bZT7wWu7RIAgqGJz+8GgOqVwX7aQqWudEcxuPyJWL2wo6Xag=
-X-Sasl-enc: QB1+Tj61NGcUQm9tPzyM4+7fnISREsbuR5jM/JCSEVus 1281733166
-Received: from [192.168.1.34] (hnvr-4d07a29e.pool.mediaWays.net [77.7.162.158])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id AAC5E4043DC
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 16:59:26 -0400 (EDT)
-Date: Fri, 13 Aug 2010 23:01:03 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1008132255040.11048@asterix.crazy-teaparty.dyndns.org>
-References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
-	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Fri, 13 Aug 2010 14:18:41 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=Rqba7ZiZQ2FxImdzBk+iMx3pO2TmM6A/Kzq5r+w6tnw=;
+	b=quCl47OXYIxIWgLUdZtpI/nb/1tCgptJTsNPidSyjOB2Vd+UHB6+WaZGAtG6jVHhm8
+	iTK4YByfp8swyxxr8ecRpxrWkUoZaI/pcbSklKA2PbKkGr4+Oz5cMRB4kn7UH8ZJ2l0D
+	fvNvpW4O3v4vrvW+5KATpG32pAgxRF1kA8Wo8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=PXmCD6MZcYzB2fILAdYEjXopNhDQcAx2gjziCNJ+eZ8aAjdBJmyVI2NY10dbUTJwfO
+	MwxTzjJJx2YcAmP6orQ6KLuWxmFyIrFgAeAFJvLaCflW2LT9jOT53aKGMRL3s+3HWLSd
+	CvmskxtS7ul5Bp+MrSdVay4GAzZmujkKcECCE=
+Received: by 10.223.110.83 with SMTP id m19mr2641996fap.26.1281734321107; Fri,
+	13 Aug 2010 14:18:41 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Received: by 10.223.125.209 with HTTP; Fri, 13 Aug 2010 14:18:21 -0700 (PDT)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Fri, 13 Aug 2010 15:18:21 -0600
+Message-ID: <AANLkTi=haC49V6XnCQpBCY8ickT24PL1F0sKYoh8h6=J@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: update canutils to current version
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: iputils fails to build due to missing sgmlspl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,59 +49,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 20:59:55 -0000
-Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Aug 2010 21:18:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, 13 Aug 2010, Khem Raj wrote:
+This is with a fresh install of oe and bitbake (as per the gumstix docs)
 
-> On Fri, Aug 13, 2010 at 2:59 AM, Vitus Jensen <vjensen@gmx.de> wrote:
->> On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
->>> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
->>>> On Fri, 13 Aug 2010, Vitus Jensen wrote:
->>>>
->>>>> The following patches will update canutils to the current version
->>>>> 4.0.6 and remove older 4.0.x versions. =C2=A0Also only the latest
->>>>> version of libsocketcan will be kept.
->>>>
->>>> Frans, thank you for the ACKs. =C2=A0Could you please apply the patc=
-hes,=20
->>>> too? I have no right to do so.
->>>
->>> Applied. Thanks for the contribution
->>>
->>> System guru's: Vitus's patches did not show up in patchwork
->>
->> They did. =C2=A0But after you posted you ACKs I changed their state to=
- "Accepted"
->> and then they are usually filtered by "Action Required". =C2=A0I'm not=
- really
->> sure I did the right thing but I don't believe they shouldn't remain i=
-n
->> "New".
->
-> If they got applied change the state to 'applied'
-
-Sure, already did!  Do I set the 'archive' bit, too?
+|
+/mnt/data/Code/overo-oe/tmp/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+warning: libc.so, needed by
+/mnt/data/Code/overo-oe/tmp/sysroots/i686-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/lib/libgcc_s.so,
+not found (try using -rpath or -rpath-link)
+| make -C doc man
+| make[1]: Entering directory
+`/mnt/data/Code/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/iputils-20071127-r1/iputils_20071127.orig/doc'
+| /bin/sh: sgmlspl: command not found
+| make[1]: *** [arping.8] Error 127
+| make[1]: Leaving directory
+`/mnt/data/Code/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/iputils-20071127-r1/iputils_20071127.orig/doc'
+| make: *** [man] Error 2
+| FATAL: oe_runmake failed
 
 
-Frans got hit by the fact, that 'accepted' patches don't show up in the=20
-list by default.
+The problem is not solved by
+bitbake -c clean iputils; bitbake sgmlspl; bitbake iputils
 
-Vitus posts patches
-Frans acks patches
-Vitus changes state to 'accepted'
-Vitus asks Frans to apply
-Frans: where are those patches in patchwork???
-Frans forces his googlemail to produce usable mail and applies
-Vitus changes state to 'applied'
-
-Probably I should update the wiki to document the above procedure, right?
-
-Vitus
-
---=20
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
-
+AJ ONeal
 
