@@ -1,31 +1,42 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OjpIP-0004w7-Jj for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 10:07:39 +0200
-Received: from g225081126.adsl.alicedsl.de ([92.225.81.126]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OjpIC-0005CK-3T for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 08:07:08 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1OjpUT-0005KM-Dy
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 10:20:05 +0200
+Received: (qmail 24238 invoked from network); 13 Aug 2010 10:19:22 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 13 Aug 2010 10:19:22 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id LaWMKirNcGPo
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Aug 2010 10:19:20 +0200 (CEST)
+Received: (Qmail 24195 invoked from network); 13 Aug 2010 10:19:20 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 13 Aug 2010 08:19:20 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1OjpTz-0002Lp-SX
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Aug 2010 10:19:19 +0200
+Date: Fri, 13 Aug 2010 10:19:19 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1281677993-19478-1-git-send-email-noor_ahsan@mentor.com>
-References: <1281677993-19478-1-git-send-email-noor_ahsan@mentor.com>
-Date: Fri, 13 Aug 2010 10:07:05 +0200
-Message-ID: <1281686825.3858.0.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <20100813081919.GB7328@mi.fu-berlin.de>
+References: <4C64A5DE.8010603@gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <4C64A5DE.8010603@gmail.com>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
+	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH]Removing Legacy staging from genboot native recipe
+Subject: Re: gnome-doc-utils: Add dependency upon gettext-native.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,42 +50,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 08:07:40 -0000
-X-Groupsio-MsgNum: 22141
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-mzBgwvAiN04XEuWpAo3c"
+X-List-Received-Date: Fri, 13 Aug 2010 08:20:05 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-mzBgwvAiN04XEuWpAo3c
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi,
 
-Am Freitag, den 13.08.2010, 11:39 +0600 schrieb noor_ahsan@mentor.com:
-> genboot: Removing legacy staging
->=20
-> * Replaced do_stage function with do_install and replaced ${STAGING_BINDI=
-R} with ${D}${bindir}=20
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentorg.com>
+normaly inherit gettext should work, unfornatly gome stuff is missusing
+the gettext m4 macros and made crappy one. Which furthermost dont let you
+disable nls at all. So the fix is okay.
 
-A =C2=BBg=C2=AB slipped in your email address.
-
-[=E2=80=A6]
+Bye Henning
 
 
-Thanks,
-
-Paul
-
---=-mzBgwvAiN04XEuWpAo3c
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxk/SMACgkQPX1aK2wOHVg/lQCfZgTCEYhWzhH9lQi9nMvglAAj
-kgEAnj6Nak0+tCKsfs7jnnQUKeXDB4QL
-=r/cF
------END PGP SIGNATURE-----
-
---=-mzBgwvAiN04XEuWpAo3c--
