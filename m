@@ -1,39 +1,32 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1Ojmpf-0006Im-6a
-	for Openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 07:29:32 +0200
-Received: from compute3.internal (compute3.internal [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 48766AE1;
-	Fri, 13 Aug 2010 01:29:15 -0400 (EDT)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Fri, 13 Aug 2010 01:29:15 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=from:to:cc:subject:date:message-id:in-reply-to:references;
-	s=smtpout; bh=SaP2xedFuLyYpMh2BaVltxcDmiU=;
-	b=nQL/BB8kKp1SOeKozxmxQ98oB6jp7lr5b9X4sU+BXP2nMj0ZHOo7w83/3kPNmmioXLOT8Vwcgpjt95FLot87Zx3MAoalFLWFBVhoriazk/KfjRU0wMgAnVgQPrJVvSXQmliwfE3Q1NHzk3K2wotYkGZryEid1NkUQBa5+E651Ik=
-X-Sasl-enc: RSDmK350LAi7x7yjg1iNH+5IimKZhqUYLeR6uLFp+13B 1281677354
-Received: from asterix.crazy-teaparty.dyndns.org
-	(hnvr-4d07a29e.pool.mediaWays.net [77.7.162.158])
-	by mail.messagingengine.com (Postfix) with ESMTPA id A18874032DC;
-	Fri, 13 Aug 2010 01:29:14 -0400 (EDT)
-From: Vitus Jensen <vjensen@gmx.de>
-To: Openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Aug 2010 07:30:17 +0200
-Message-Id: <1281677417-15063-4-git-send-email-vjensen@gmx.de>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1OjnM3-0002dL-0N
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 08:03:00 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Ojn0t-0005wS-Ru from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 12 Aug 2010 22:41:08 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 13 Aug 2010 07:41:06 +0200
+From: noor_ahsan@mentor.com
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 13 Aug 2010 11:39:53 +0600
+Message-Id: <1281677993-19478-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 13 Aug 2010 05:41:06.0327 (UTC)
+	FILETIME=[1FD7AA70:01CB3AAA]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Vitus Jensen <vjensen@gmx.de>
-Subject: [PATCH 3/3] canutils: update to version 4.0.6
+Subject: [PATCH]Removing Legacy staging from genboot native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,39 +40,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 05:29:32 -0000
+X-List-Received-Date: Fri, 13 Aug 2010 06:03:00 -0000
 
+genboot: Removing legacy staging
 
-Signed-off-by: Vitus Jensen <vjensen@gmx.de>
----
- recipes/socketcan/canutils_4.0.5.bb |    4 ----
- recipes/socketcan/canutils_4.0.6.bb |    4 ++++
- 2 files changed, 4 insertions(+), 4 deletions(-)
- delete mode 100644 recipes/socketcan/canutils_4.0.5.bb
- create mode 100644 recipes/socketcan/canutils_4.0.6.bb
-
-diff --git a/recipes/socketcan/canutils_4.0.5.bb b/recipes/socketcan/canutils_4.0.5.bb
-deleted file mode 100644
-index c084bcd..0000000
---- a/recipes/socketcan/canutils_4.0.5.bb
-+++ /dev/null
-@@ -1,4 +0,0 @@
--TAG = "v${PV}"
--require canutils.inc
--
--PR = "${INC_PR}.0"
-diff --git a/recipes/socketcan/canutils_4.0.6.bb b/recipes/socketcan/canutils_4.0.6.bb
-new file mode 100644
-index 0000000..9ddb697
---- /dev/null
-+++ b/recipes/socketcan/canutils_4.0.6.bb
-@@ -0,0 +1,4 @@
-+TAG = "canutils-${PV}"
-+require canutils.inc
+* Replaced do_stage function with do_install and replaced ${STAGING_BINDIR} with ${D}${bindir} 
+Signed-off-by: Noor Ahsan <noor_ahsan@mentorg.com>
+diff --git a/recipes/simpad-utilities/genboot-native.bb b/recipes/simpad-utilities/genboot-native.bb
+index 47b9b34..966a450 100644
+--- a/recipes/simpad-utilities/genboot-native.bb
++++ b/recipes/simpad-utilities/genboot-native.bb
+@@ -9,12 +9,15 @@ DEPENDS = "pad-native"
+ 
+ inherit native
+ 
++NATIVE_INSTALL_WORKS = "1"
 +
-+PR = "${INC_PR}.0"
--- 
-1.7.1
+ do_compile() {
+ 	cp ${WORKDIR}/*.h ${WORKDIR}/*.c .
+ 	${CC} -I. -o genboot gen_boot.c
+ }
+ 
+-do_stage() {
+-	install -m 0755 genboot ${STAGING_BINDIR}/
+-	install -m 0755 ${WORKDIR}/simpad-make-flashimg ${STAGING_BINDIR}/
++do_install() {
++	install -d ${D}${bindir}/
++	install -m 0755 genboot ${D}${bindir}/
++	install -m 0755 ${WORKDIR}/simpad-make-flashimg ${D}${bindir}/
+ }
 
 
 
