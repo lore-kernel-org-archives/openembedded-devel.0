@@ -1,27 +1,48 @@
-Received: from cp-out11.libero.it ([212.52.84.111])
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ilpaso@inwind.it>) id 1Ok1Bw-0000vK-Il
+	(envelope-from <vjensen@gmx.de>) id 1Ok1Ln-0001BI-Qw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 22:49:42 +0200
-Received: from [192.168.1.2] (151.47.90.212) by cp-out11.libero.it (8.5.119)
-	(authenticated as ilpaso@inwind.it)
-	id 4C4578E6019EB59D for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 22:46:44 +0200
-From: Davide Pasini <ilpaso@inwind.it>
+	Fri, 13 Aug 2010 22:59:55 +0200
+Received: from compute3.internal (compute3.internal [10.202.2.43])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 3D8D19AD
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Aug 2010 16:59:27 -0400 (EDT)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute3.internal (MEProxy); Fri, 13 Aug 2010 16:59:27 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type:content-transfer-encoding;
+	s=smtpout; bh=xry/OmhesJIHl3Ny/88inGSrQwU=;
+	b=AtaVXiY392RGxUtvtHYKBwum0SmP3G2GFxNS/NlpJaFBy+15klaUcx8rY4YtP/JlPfXt8sa6fhoSDIRdFwnbMIxuRsiQJz5KNkBcRyNyZP/9IYE7LJrhYvg57J0bZT7wWu7RIAgqGJz+8GgOqVwX7aQqWudEcxuPyJWL2wo6Xag=
+X-Sasl-enc: QB1+Tj61NGcUQm9tPzyM4+7fnISREsbuR5jM/JCSEVus 1281733166
+Received: from [192.168.1.34] (hnvr-4d07a29e.pool.mediaWays.net [77.7.162.158])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id AAC5E4043DC
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Aug 2010 16:59:26 -0400 (EDT)
+Date: Fri, 13 Aug 2010 23:01:03 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 13 Aug 2010 22:46:42 +0200
-Message-ID: <1281732402.28856.6.camel@paso-laptop>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 212.52.84.111
-X-SA-Exim-Mail-From: ilpaso@inwind.it
+In-Reply-To: <AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
+Message-ID: <alpine.LNX.2.00.1008132255040.11048@asterix.crazy-teaparty.dyndns.org>
+References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
+	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
+	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OE on my new tablet. How write a new machine conf file?
+Subject: Re: update canutils to current version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,32 +56,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 20:49:42 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 13 Aug 2010 20:59:55 -0000
+Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: quoted-printable
 
-Hi all
-I'm new in OpenEmbedded and it is a very good idea!
-Maybe this is not the right place for a newbie help req but the user
-mail list is a desert.
+On Fri, 13 Aug 2010, Khem Raj wrote:
 
-I bought a china tablet few days ago. It has Android or WinCe OS.
-I'd like to install a linux distro on it.
+> On Fri, Aug 13, 2010 at 2:59 AM, Vitus Jensen <vjensen@gmx.de> wrote:
+>> On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
+>>> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
+>>>> On Fri, 13 Aug 2010, Vitus Jensen wrote:
+>>>>
+>>>>> The following patches will update canutils to the current version
+>>>>> 4.0.6 and remove older 4.0.x versions. =C2=A0Also only the latest
+>>>>> version of libsocketcan will be kept.
+>>>>
+>>>> Frans, thank you for the ACKs. =C2=A0Could you please apply the patc=
+hes,=20
+>>>> too? I have no right to do so.
+>>>
+>>> Applied. Thanks for the contribution
+>>>
+>>> System guru's: Vitus's patches did not show up in patchwork
+>>
+>> They did. =C2=A0But after you posted you ACKs I changed their state to=
+ "Accepted"
+>> and then they are usually filtered by "Action Required". =C2=A0I'm not=
+ really
+>> sure I did the right thing but I don't believe they shouldn't remain i=
+n
+>> "New".
+>
+> If they got applied change the state to 'applied'
 
-I'm trying to build my distro (minimal distro with only a shell
-interface) but I'm lost in the .conf files.
-Obviously my machine is not in the "machines list" and I'd like to
-create an ad-hoc conf file maybe starting from an existing machine file.
+Sure, already did!  Do I set the 'archive' bit, too?
 
-my device mount an ARM 11 (ARM v6) CPU and this is the link to some
-additional infos http://forum.xda-developers.com/showthread.php?t=740631
 
-How write a new machine conf file?
-Any help is appreciated.
+Frans got hit by the fact, that 'accepted' patches don't show up in the=20
+list by default.
 
-Thanks
+Vitus posts patches
+Frans acks patches
+Vitus changes state to 'accepted'
+Vitus asks Frans to apply
+Frans: where are those patches in patchwork???
+Frans forces his googlemail to produce usable mail and applies
+Vitus changes state to 'applied'
 
-Davide Pasini
+Probably I should update the wiki to document the above procedure, right?
 
+Vitus
+
+--=20
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
