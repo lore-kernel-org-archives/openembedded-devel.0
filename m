@@ -1,39 +1,39 @@
-Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
-	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@mi.fu-berlin.de>) id 1OjpUT-0005KM-Dy
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 10:20:05 +0200
-Received: (qmail 24238 invoked from network); 13 Aug 2010 10:19:22 +0200
-Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
-	by leibniz.math.fu-berlin.de with SMTP; 13 Aug 2010 10:19:22 +0200
-X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
-Received: from math.fu-berlin.de ([160.45.40.10])
-	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
-	port 10024) with SMTP id LaWMKirNcGPo
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OjpWP-0007Ea-Dl for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 10:22:59 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OjpW8-0006O4-NM for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 10:21:32 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Aug 2010 10:21:32 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 10:19:20 +0200 (CEST)
-Received: (Qmail 24195 invoked from network); 13 Aug 2010 10:19:20 +0200
-Received: From andorra.imp.fu-berlin.de (160.45.42.84)
-	by leibniz.math.fu-berlin.de with SMTP; 13 Aug 2010 08:19:20 -0000
-Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
-	(Debian)) id 1OjpTz-0002Lp-SX
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 10:19:19 +0200
-Date: Fri, 13 Aug 2010 10:19:19 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
+	Fri, 13 Aug 2010 10:21:32 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100813081919.GB7328@mi.fu-berlin.de>
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 13 Aug 2010 10:21:23 +0200
+Message-ID: <i42va3$mpv$1@dough.gmane.org>
 References: <4C64A5DE.8010603@gmail.com>
-MIME-Version: 1.0
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
 In-Reply-To: <4C64A5DE.8010603@gmail.com>
-User-Agent: Mutt/1.5.18 (2008-05-17)
-Sender: Henning Heinold <heinold@mi.fu-berlin.de>
-X-SA-Exim-Connect-IP: 160.45.40.10
-X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
-	UNPARSEABLE_RELAY autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: gnome-doc-utils: Add dependency upon gettext-native.
@@ -50,16 +50,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 08:20:05 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 13 Aug 2010 08:22:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-normaly inherit gettext should work, unfornatly gome stuff is missusing
-the gettext m4 macros and made crappy one. Which furthermost dont let you
-disable nls at all. So the fix is okay.
+On 13-08-10 03:54, Graham Gower wrote:
 
-Bye Henning
+> --- a/recipes/gnome/gnome-doc-utils.inc
+> +++ b/recipes/gnome/gnome-doc-utils.inc
+> @@ -1,6 +1,6 @@
+>  LICENSE = "GPL LGPL"
+> -DEPENDS = "libxml2 libxslt libxslt-native libxml2-native"
+> -DEPENDS_virtclass-native = "libxslt-native libxml2-native"
+> +DEPENDS = "libxml2 libxslt libxslt-native libxml2-native gettext-native"
+> +DEPENDS_virtclass-native = "libxslt-native libxml2-native gettext-native"
+
+Wouldn't 'inherit gettext' be better?
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMZQCDMkyGM64RGpERAtdcAJ42IAoOpCt3a1Qs15syd14QwFgH8ACfU+7v
+RhMFZi+OkGPL0xnwobuTErM=
+=yieB
+-----END PGP SIGNATURE-----
+
 
 
