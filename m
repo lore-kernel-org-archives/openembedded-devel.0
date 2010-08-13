@@ -1,47 +1,32 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OjrQN-0007cH-IC
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1OjsHa-00082F-7E
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 12:23:44 +0200
-Received: by ywe9 with SMTP id 9so882715ywe.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 03:23:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=GyFc4Hb+ICoQBRpwRPnJaV+2Jic/IEhIEBJhscuy9eY=;
-	b=lYXmlxTkAtvpHTMFMOqSlPtZuHZAsrA1wo4b/9KRv5i5TN7xUsqt46kkb7laH8HryQ
-	R5AP4kEL/pHlLYOymYDONUpWzv8UP2xpHLN8NG77JR+wKIO87piB6W2LXrzQz20mieds
-	k046CIeCvJqGv9Nfy6OJ/B/TV53nwC9dxyols=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=jYQF++aCBAOo9mKcPZs8ddLwHj7lE1R8g1tUBwgHygsBH5FKac886KVXGFBkGqKdf+
-	sZWBMQvv6iswGhVhESBG8/CQpm101pLkJgXOff0mCLSmUJC6kojaNSegei4Ze5qZ+TYn
-	KFVsQUDkOCeYyc6k3fDsk2r4innKHFAHmBhGU=
-MIME-Version: 1.0
-Received: by 10.231.14.69 with SMTP id f5mr1403689iba.116.1281695006126; Fri,
-	13 Aug 2010 03:23:26 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Fri, 13 Aug 2010 03:23:26 -0700 (PDT)
-In-Reply-To: <alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
-References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
-	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
-Date: Fri, 13 Aug 2010 12:23:26 +0200
-Message-ID: <AANLkTikwc_QMdf-LzkAwO+dFeT9uw7hRgx+R=woUN_0c@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Fri, 13 Aug 2010 13:18:58 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OjsHL-0006Ei-Fn from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 04:18:27 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 13 Aug 2010 13:18:25 +0200
+From: noor_ahsan@mentor.com
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri, 13 Aug 2010 17:17:11 +0600
+Message-Id: <1281698231-26231-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 13 Aug 2010 11:18:26.0041 (UTC)
+	FILETIME=[3FA6EE90:01CB3AD9]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: update canutils to current version
+Subject: [PATCH]Removing Legacy staging from genboot native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,54 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 10:23:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Aug 2010 11:18:59 -0000
 
-2010/8/13 Vitus Jensen <vjensen@gmx.de>:
-> On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
->
->> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
->>>
->>> On Fri, 13 Aug 2010, Vitus Jensen wrote:
->>>
->>>> The following patches will update canutils to the current version
->>>> 4.0.6 and remove older 4.0.x versions. =A0Also only the latest
->>>> version of libsocketcan will be kept.
->>>
->>> Frans, thank you for the ACKs. =A0Could you please apply the patches, t=
-oo?
->>> I
->>> have no right to do so.
->>
->> Applied. Thanks for the contribution
->>
->> System guru's: Vitus's patches did not show up in patchwork
->
-> They did. =A0But after you posted you ACKs I changed their state to "Acce=
-pted"
-> and then they are usually filtered by "Action Required". =A0I'm not reall=
-y
-> sure I did the right thing but I don't believe they shouldn't remain in
-> "New".
->
-> http://wiki.openembedded.net/index.php/Patchwork doesn't describe states,
-> only that you should change them :(
->
-> Vitus
->
-Ah ok. Actually I only peeked at the new ones.
-Most people tend not to change the patchwork values so I didn't think
-of looking at the other states
-and I use patchwork to download the patches, much simpler than getting
-them from gmail.
+genboot-native: Removing legacy staging
 
-Wrt the states: that is indeed not too clear. I always have doubts
-what I should to with the archived checkbox.
+* Replaced do_stage function with do_install and replaced ${STAGING_BINDIR} with ${D}${bindir}
+ 
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
 
-Anyway, your changes are in, so please change the state in patchwork
-from Accepted to Applied.
-
-Frans
+diff --git a/recipes/simpad-utilities/genboot-native.bb b/recipes/simpad-utilities/genboot-native.bb
+index 47b9b34..f398a55 100644
+--- a/recipes/simpad-utilities/genboot-native.bb
++++ b/recipes/simpad-utilities/genboot-native.bb
+@@ -1,5 +1,5 @@
+ SECTION = "console/utils"
+-PR = "r1"
++PR = "r2"
+ DESCRIPTION = "Console utility for generating a SIMpad boot image for the proprietary SIEMENS Switzerland bootloader"
+ FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/genboot"
+ SRC_URI = "file://gen_boot.c file://arnold_boot.h file://simpad-make-flashimg"
+@@ -9,12 +9,15 @@ DEPENDS = "pad-native"
+ 
+ inherit native
+ 
++NATIVE_INSTALL_WORKS = "1"
++
+ do_compile() {
+-	cp ${WORKDIR}/*.h ${WORKDIR}/*.c .
+-	${CC} -I. -o genboot gen_boot.c
++        cp ${WORKDIR}/*.h ${WORKDIR}/*.c .
++        ${CC} -I. -o genboot gen_boot.c
+ }
+ 
+-do_stage() {
+-	install -m 0755 genboot ${STAGING_BINDIR}/
+-	install -m 0755 ${WORKDIR}/simpad-make-flashimg ${STAGING_BINDIR}/
++do_install() {
++        install -d ${D}${bindir}/
++        install -m 0755 genboot ${D}${bindir}/
++        install -m 0755 ${WORKDIR}/simpad-make-flashimg ${D}${bindir}/
+ }
 
 
