@@ -1,43 +1,44 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1Ojr1q-0000YU-Bt
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OjrQN-0007cH-IC
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 11:58:23 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 1A0B7585
+	Fri, 13 Aug 2010 12:23:44 +0200
+Received: by ywe9 with SMTP id 9so882715ywe.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 05:58:06 -0400 (EDT)
-Received: from frontend2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Fri, 13 Aug 2010 05:58:06 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type:content-transfer-encoding;
-	s=smtpout; bh=ALH8cwYkp412LCJNSWIBH54RoVg=;
-	b=qyzlw1zoGsB6FNQAyQRiAX+nXsoVu91DWOawhwhIYPzXj4jXlvZ2FLSYIixuT/MRlqAmLWwJsU6nEJxoJslKz0Fw1t+SkBWpGrA0u61jIq7LUeWin6lRPGGEw7Dd1m5y054ggV7ZVIu+nTQ+6rXsSGIq/VE17MYxtbPDY1jT1tc=
-X-Sasl-enc: VxpmQe2hCVXR2NS1oFXv0d4+yTTM01nDCghAkcwtvE6X 1281693485
-Received: from [192.168.1.34] (hnvr-4d07a29e.pool.mediaWays.net [77.7.162.158])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 92C0C5E2FB6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 05:58:05 -0400 (EDT)
-Date: Fri, 13 Aug 2010 11:59:42 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
+	Fri, 13 Aug 2010 03:23:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=GyFc4Hb+ICoQBRpwRPnJaV+2Jic/IEhIEBJhscuy9eY=;
+	b=lYXmlxTkAtvpHTMFMOqSlPtZuHZAsrA1wo4b/9KRv5i5TN7xUsqt46kkb7laH8HryQ
+	R5AP4kEL/pHlLYOymYDONUpWzv8UP2xpHLN8NG77JR+wKIO87piB6W2LXrzQz20mieds
+	k046CIeCvJqGv9Nfy6OJ/B/TV53nwC9dxyols=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=jYQF++aCBAOo9mKcPZs8ddLwHj7lE1R8g1tUBwgHygsBH5FKac886KVXGFBkGqKdf+
+	sZWBMQvv6iswGhVhESBG8/CQpm101pLkJgXOff0mCLSmUJC6kojaNSegei4Ze5qZ+TYn
+	KFVsQUDkOCeYyc6k3fDsk2r4innKHFAHmBhGU=
+MIME-Version: 1.0
+Received: by 10.231.14.69 with SMTP id f5mr1403689iba.116.1281695006126; Fri,
+	13 Aug 2010 03:23:26 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Fri, 13 Aug 2010 03:23:26 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
 References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
 	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
 	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
+Date: Fri, 13 Aug 2010 12:23:26 +0200
+Message-ID: <AANLkTikwc_QMdf-LzkAwO+dFeT9uw7hRgx+R=woUN_0c@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: update canutils to current version
@@ -54,40 +55,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 09:58:23 -0000
-Content-Type: TEXT/PLAIN; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 13 Aug 2010 10:23:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
-
-> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
->> On Fri, 13 Aug 2010, Vitus Jensen wrote:
->>
->>> The following patches will update canutils to the current version
->>> 4.0.6 and remove older 4.0.x versions. =C2=A0Also only the latest
->>> version of libsocketcan will be kept.
->>
->> Frans, thank you for the ACKs. =C2=A0Could you please apply the patche=
-s, too? I
->> have no right to do so.
+2010/8/13 Vitus Jensen <vjensen@gmx.de>:
+> On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
 >
-> Applied. Thanks for the contribution
+>> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
+>>>
+>>> On Fri, 13 Aug 2010, Vitus Jensen wrote:
+>>>
+>>>> The following patches will update canutils to the current version
+>>>> 4.0.6 and remove older 4.0.x versions. =A0Also only the latest
+>>>> version of libsocketcan will be kept.
+>>>
+>>> Frans, thank you for the ACKs. =A0Could you please apply the patches, t=
+oo?
+>>> I
+>>> have no right to do so.
+>>
+>> Applied. Thanks for the contribution
+>>
+>> System guru's: Vitus's patches did not show up in patchwork
 >
-> System guru's: Vitus's patches did not show up in patchwork
+> They did. =A0But after you posted you ACKs I changed their state to "Acce=
+pted"
+> and then they are usually filtered by "Action Required". =A0I'm not reall=
+y
+> sure I did the right thing but I don't believe they shouldn't remain in
+> "New".
+>
+> http://wiki.openembedded.net/index.php/Patchwork doesn't describe states,
+> only that you should change them :(
+>
+> Vitus
+>
+Ah ok. Actually I only peeked at the new ones.
+Most people tend not to change the patchwork values so I didn't think
+of looking at the other states
+and I use patchwork to download the patches, much simpler than getting
+them from gmail.
 
-They did.  But after you posted you ACKs I changed their state to=20
-"Accepted" and then they are usually filtered by "Action Required".  I'm=20
-not really sure I did the right thing but I don't believe they shouldn't=20
-remain in "New".
+Wrt the states: that is indeed not too clear. I always have doubts
+what I should to with the archived checkbox.
 
-http://wiki.openembedded.net/index.php/Patchwork doesn't describe states,=
-=20
-only that you should change them :(
+Anyway, your changes are in, so please change the state in patchwork
+from Accepted to Applied.
 
-Vitus
-
---=20
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+Frans
 
 
