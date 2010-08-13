@@ -1,47 +1,33 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OjvRl-0002FT-KL
+	(envelope-from <jkridner@beagleboard.org>) id 1OjvgS-0006Kr-Aa
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 16:41:44 +0200
-Received: by eyx24 with SMTP id 24so1315054eyx.6
+	Fri, 13 Aug 2010 16:56:59 +0200
+Received: by pxi11 with SMTP id 11so819159pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 07:41:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=d5dcVg5Ny+c1iP50SLzgsex3cwTJdRC5VkqyumIAw94=;
-	b=D9/OW4OD9uZPfh1GoAj8OHOlvWhAZnoq08O4G8BTBQuA6CvPEcpCgm6H9JLoFQVqlJ
-	8fMs2stIps4zuD0GAor5uzPCiNGPIsNhI6pea6mI2Fg4JvrrYlpG9tHU3Jg8ASgt0PLD
-	5NKZT8l2WBT846V/3H8ZhUEjPL9p9InzL6GDs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=t9JTo5q8Gia0XhZ090UmH6Y++dpDP50WMZDBOxBOCRLKv9faPBQfhBqvcEYwnlXwJF
-	704ab78qn1mZ6g50rrx/VICl3mq1tThlHXk54bWeyxA9T2cQIA/ki2u/vYolXdtokkLp
-	f5Bfsa94ZhkJzoUK9z/vUKCe7af9snN7w2sr4=
-Received: by 10.213.32.135 with SMTP id c7mr1932408ebd.2.1281710468207; Fri,
-	13 Aug 2010 07:41:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.213.35.135 with HTTP; Fri, 13 Aug 2010 07:40:48 -0700 (PDT)
-In-Reply-To: <alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
-References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
-	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 13 Aug 2010 07:40:48 -0700
-Message-ID: <AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
+	Fri, 13 Aug 2010 07:56:11 -0700 (PDT)
+Received: by 10.142.232.13 with SMTP id e13mr1336828wfh.160.1281711370804;
+	Fri, 13 Aug 2010 07:56:10 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id u1sm964282vcf.46.2010.08.13.07.56.09
+	(version=SSLv3 cipher=RC4-MD5); Fri, 13 Aug 2010 07:56:10 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Fri, 13 Aug 2010 09:56:07 -0500
+Message-Id: <1281711368-11618-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+In-Reply-To: <1281557643-24477-1-git-send-email-jkridner@beagleboard.org>
+References: <1281557643-24477-1-git-send-email-jkridner@beagleboard.org>
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: update canutils to current version
+Subject: [PATCH] u-boot/angstrom-uboot-scripts/beagleboard-test-image: increase ramdisk
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,52 +41,132 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 14:41:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 13 Aug 2010 14:57:00 -0000
 
-On Fri, Aug 13, 2010 at 2:59 AM, Vitus Jensen <vjensen@gmx.de> wrote:
-> On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
->
->> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
->>>
->>> On Fri, 13 Aug 2010, Vitus Jensen wrote:
->>>
->>>> The following patches will update canutils to the current version
->>>> 4.0.6 and remove older 4.0.x versions. =A0Also only the latest
->>>> version of libsocketcan will be kept.
->>>
->>> Frans, thank you for the ACKs. =A0Could you please apply the patches, t=
-oo?
->>> I
->>> have no right to do so.
->>
->> Applied. Thanks for the contribution
->>
->> System guru's: Vitus's patches did not show up in patchwork
->
-> They did. =A0But after you posted you ACKs I changed their state to "Acce=
-pted"
-> and then they are usually filtered by "Action Required". =A0I'm not reall=
-y
-> sure I did the right thing but I don't believe they shouldn't remain in
-> "New".
+* add initramfs image
+* move to 128MB ramdisk until I can get initramfs working
 
-If they got applied change the state to 'applied'
->
-> http://wiki.openembedded.net/index.php/Patchwork doesn't describe states,
-> only that you should change them :(
->
-> Vitus
->
-> --
-> Vitus Jensen, Hannover, Germany, Universe (current)
-> pgp public key available from keyservers
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+---
+ recipes/angstrom/angstrom-uboot-scripts.bb         |    2 +-
+ .../beagleboard-validation-user.cmd                |    7 +++-
+ recipes/images/beagleboard-test-image.bb           |    5 ++-
+ .../0001-BeagleBoard-move-ramdisk-parameters.patch |   38 ++++++++++++++++++++
+ recipes/u-boot/u-boot_git.bb                       |    3 +-
+ 5 files changed, 50 insertions(+), 5 deletions(-)
+ create mode 100644 recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch
+
+diff --git a/recipes/angstrom/angstrom-uboot-scripts.bb b/recipes/angstrom/angstrom-uboot-scripts.bb
+index a478cb2..020a7af 100644
+--- a/recipes/angstrom/angstrom-uboot-scripts.bb
++++ b/recipes/angstrom/angstrom-uboot-scripts.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Various uboot scripts"
+ 
+-PR = "r9"
++PR = "r10"
+ 
+ DEPENDS = "u-boot-mkimage-native"
+ 
+diff --git a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
+index 7dbf69b..971b96e 100644
+--- a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
++++ b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
+@@ -1,11 +1,14 @@
+ mmc init
+-setenv rdaddr 0x81000000
+-setenv ramroot /dev/ram0
+ if test "${beaglerev}" = "AxBx"; then
++setenv rdaddr 0x81000000
+ setenv optargs mem=80M@0x80000000 musb_hdrc.fifomode=5
+ elif test "${beaglerev}" = "Cx"; then
++setenv rdaddr 0x88000000
++setenv ramroot /dev/ram0 rw ramdisk_size=131072 initrd=${rdaddr},128M
+ setenv optargs mem=80M@0x80000000 mem=128M@0x88000000 musb_hdrc.fifomode=5
+ else
++setenv rdaddr 0x88000000
++setenv ramroot /dev/ram0 rw ramdisk_size=131072 initrd=${rdaddr},128M
+ setenv optargs mem=80M@0x80000000 mem=384M@0x88000000
+ fi
+ run loadramdisk
+diff --git a/recipes/images/beagleboard-test-image.bb b/recipes/images/beagleboard-test-image.bb
+index cbbd3c2..7361017 100644
+--- a/recipes/images/beagleboard-test-image.bb
++++ b/recipes/images/beagleboard-test-image.bb
+@@ -28,4 +28,7 @@ IMAGE_INSTALL += " \
+ export IMAGE_BASENAME = "beagleboard-test-image"
+ 
+ EXTRA_IMAGEDEPENDS += "x-load u-boot virtual/kernel"
+-IMAGE_FSTYPES += "ext2.gz"
++IMAGE_FSTYPES += "ext2.gz cpio.gz.u-boot"
++IMAGE_ROOTFS_SIZE_ext2 = "131072"
++EXTRA_IMAGECMD_ext2.gz += "-i 8192"
++
+diff --git a/recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch b/recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch
+new file mode 100644
+index 0000000..5d6e69d
+--- /dev/null
++++ b/recipes/u-boot/u-boot-git/beagleboard/0001-BeagleBoard-move-ramdisk-parameters.patch
+@@ -0,0 +1,38 @@
++From c8d02f2a8500f06de39681aed60ea5c9894f8087 Mon Sep 17 00:00:00 2001
++From: Jason Kridner <jkridner@beagleboard.org>
++Date: Wed, 11 Aug 2010 14:50:38 -0500
++Subject: [PATCH] BeagleBoard: move ramdisk parameters
++
++This will make it easier to reprogram the ramdisk size.
++
++Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
++---
++ include/configs/omap3_beagle.h |    5 ++---
++ 1 files changed, 2 insertions(+), 3 deletions(-)
++
++diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
++index 48ad805..4f5c1d4 100644
++--- a/include/configs/omap3_beagle.h
+++++ b/include/configs/omap3_beagle.h
++@@ -217,7 +217,7 @@
++ 	"mmcrootfstype=ext3 rootwait\0" \
++ 	"nandroot=/dev/mtdblock4 rw\0" \
++ 	"nandrootfstype=jffs2\0" \
++-	"ramroot=/dev/ram0 rw\0" \
+++	"ramroot=/dev/ram0 rw ramdisk_size=65536 initrd=${rdaddr},64M\0" \
++ 	"ramrootfstype=ext2\0" \
++ 	"mmcargs=setenv bootargs console=${console} " \
++ 		"${optargs} " \
++@@ -248,8 +248,7 @@
++ 		"vram=${vram} " \
++ 		"omapfb.mode=dvi:${dvimode} " \
++ 		"omapdss.def_disp=${defaultdisplay} " \
++-		"root=${ramroot} rw ramdisk_size=65536 " \
++-		"initrd=${rdaddr},64M " \
+++		"root=${ramroot} " \
++ 		"rootfstype=${ramrootfstype}\0" \
++ 	"loadramdisk=fatload mmc ${mmcdev} ${rdaddr} ramdisk.gz\0" \
++ 	"bootscript=echo Running bootscript from mmc ...; " \
++-- 
++1.5.6.4
++
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index 7f26a87..19386fc 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -1,5 +1,5 @@
+ require u-boot.inc
+-PR ="r63"
++PR ="r64"
+ 
+ FILESPATHPKG =. "u-boot-git:"
+ 
+@@ -71,6 +71,7 @@ SRC_URI_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
+                        file://0044-Beagleboard-Adjust-boot.patch \
+                        file://0045-BeagleBoard-Enable-pullups-on-i2c2.patch \
+                        file://0046-BeagleBoard-Add-camera-to-default-bootargs.patch \
++		       file://0001-BeagleBoard-move-ramdisk-parameters.patch \
+                        file://fw_env.config \
+ "
+ SRCREV_beagleboard = "ca6e1c136ddb720c3bb2cc043b99f7f06bc46c55"
+-- 
+1.5.6.4
+
 
 
