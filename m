@@ -1,33 +1,45 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OjqPe-0002rC-BA for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 11:18:56 +0200
-Received: from g225081126.adsl.alicedsl.de ([92.225.81.126]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OjqPS-0006OG-D1 for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 09:18:42 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OjqUu-000369-Uy
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 11:24:22 +0200
+Received: by gyd8 with SMTP id 8so855528gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 13 Aug 2010 02:24:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=HFZhpjqPhMZ+FcsOJNibU6OJVKD+MX/b9qCJIw9rlT8=;
+	b=Qn4NsYI0UstlDfybEDvfVu7efWOskUmHGUDjfbPagIhOg0J5FCdOLtfxtuy26bsDiH
+	G5XErLNZqV+xTtZXZvT8tKRLG8fFpdnTKQjbsrhjtIci6B/SM6ABM9HVfO6zMF1DoEzj
+	EPZtyKN/lin00zTpSRm0/705OUPCuyatyeCjo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=foDthTGmRDuauKuq40h6S6u9/14FW2uOrXg2pN0nek2fJX5Dkymbd4eye3RG0hvEPb
+	upFQp2Cx5D00/XEtyPyPATHW6p2btHHG9tqeBV2yqI/NiHel7erHM0cmQCttiCzcEpP9
+	LUxgjNmHa4zak5HAKElGTrY+OJo/qRiDE/p4c=
+MIME-Version: 1.0
+Received: by 10.231.13.130 with SMTP id c2mr1547577iba.24.1281691443551; Fri,
+	13 Aug 2010 02:24:03 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Fri, 13 Aug 2010 02:24:03 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
+References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
+	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
+Date: Fri, 13 Aug 2010 11:24:03 +0200
+Message-ID: <AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A504270EAC@eu2-mail.mgc.mentorg.com>
-References: <1281677993-19478-1-git-send-email-noor_ahsan@mentor.com>
-	<1281686825.3858.0.camel@mattotaupa>
-	<989A078976CDAD4CB2DC976EEF70E2A504270EAC@eu2-mail.mgc.mentorg.com>
-Date: Fri, 13 Aug 2010 11:18:38 +0200
-Message-ID: <1281691118.3858.22.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH]Removing Legacy staging from genboot native recipe
+Subject: Re: update canutils to current version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,39 +53,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 09:18:56 -0000
-X-Groupsio-MsgNum: 22146
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-2y3s9Gy8uhnSzZSIDFXl"
-
---=-2y3s9Gy8uhnSzZSIDFXl
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 13 Aug 2010 09:24:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 13.08.2010, 11:01 +0200 schrieb Ahsan, Noor:
-> Actually both works with me with "g" and without "g".
+2010/8/13 Vitus Jensen <vjensen@gmx.de>:
+> On Fri, 13 Aug 2010, Vitus Jensen wrote:
+>
+>> The following patches will update canutils to the current version
+>> 4.0.6 and remove older 4.0.x versions. =A0Also only the latest
+>> version of libsocketcan will be kept.
+>
+> Frans, thank you for the ACKs. =A0Could you please apply the patches, too=
+? I
+> have no right to do so.
 
-Sorry, I see.
 
-It looks like this is your first patch. So just remember to always sign
-off with the same address, so the statistics get right.
+Applied. Thanks for the contribution
+
+System guru's: Vitus's patches did not show up in patchwork
+
+Frans
 
 
-Thanks,
-
-Paul
-
---=-2y3s9Gy8uhnSzZSIDFXl
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxlDe4ACgkQPX1aK2wOHVgSLgCfYi/hmXHCka5ib5iaxOR01dyw
-MDYAnRJRkDnAjXIdo3O4EpMo4t90XeaU
-=cE00
------END PGP SIGNATURE-----
-
---=-2y3s9Gy8uhnSzZSIDFXl--
