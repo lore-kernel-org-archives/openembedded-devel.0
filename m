@@ -1,44 +1,35 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OjprI-0004Es-1E
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1Ojq9j-0001lx-0I
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 13 Aug 2010 10:43:30 +0200
-Received: from compute3.internal (compute3.internal [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id D63E38CA
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 04:43:11 -0400 (EDT)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Fri, 13 Aug 2010 04:43:11 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=ErXv3sn6g4qJQb0mA71iQiWmCMY=;
-	b=oBvkXdSL68oag6EfE1+t+GffXrsFqaVMxqPe48KnX69HyLl9HQBIKPIizF4ZY/N10arri4SiRuATxuGtI/c1Ckqle/JjVqQLXzvMyfOuuK4jTWMSCQKq5LjSN0acQfU1/+IQFJAP6QRtfTVCeV/n2t94Y6dkBnQC/5N6j2Lu0Tg=
-X-Sasl-enc: xrb29z8/D89XoFQYzD21qxiDFGjavNfJgZaLoeSz065Z 1281688991
-Received: from [192.168.1.34] (hnvr-4d07a29e.pool.mediaWays.net [77.7.162.158])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 5137640358F
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 04:43:11 -0400 (EDT)
-Date: Fri, 13 Aug 2010 10:44:48 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-Message-ID: <alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
-References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Fri, 13 Aug 2010 11:02:34 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Ojq9G-0007la-DP from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 13 Aug 2010 02:01:58 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Date: Fri, 13 Aug 2010 11:01:56 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A504270EAC@eu2-mail.mgc.mentorg.com>
+In-Reply-To: <1281686825.3858.0.camel@mattotaupa>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] [PATCH]Removing Legacy staging from genboot native recipe
+Thread-Index: Acs6vvq1lagQ/F0HSWi6T7pG7qWPCAABx2Yg
+References: <1281677993-19478-1-git-send-email-noor_ahsan@mentor.com>
+	<1281686825.3858.0.camel@mattotaupa>
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: update canutils to current version
+Subject: Re: [PATCH]Removing Legacy staging from genboot native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,22 +43,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 13 Aug 2010 08:43:32 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 13 Aug 2010 09:02:50 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 13 Aug 2010, Vitus Jensen wrote:
+Actually both works with me with "g" and without "g".
 
-> The following patches will update canutils to the current version
-> 4.0.6 and remove older 4.0.x versions.  Also only the latest
-> version of libsocketcan will be kept.
+-----Original Message-----
+From: openembedded-devel-bounces@lists.openembedded.org
+[mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+Paul Menzel
+Sent: Friday, August 13, 2010 1:07 PM
+To: openembedded-devel@lists.openembedded.org
+Subject: Re: [oe] [PATCH]Removing Legacy staging from genboot native
+recipe
 
-Frans, thank you for the ACKs.  Could you please apply the patches, too? 
-I have no right to do so.
+Am Freitag, den 13.08.2010, 11:39 +0600 schrieb noor_ahsan@mentor.com:
+> genboot: Removing legacy staging
+>=20
+> * Replaced do_stage function with do_install and replaced
+${STAGING_BINDIR} with ${D}${bindir}=20
+> Signed-off-by: Noor Ahsan <noor_ahsan@mentorg.com>
 
-Vitus
+A >g< slipped in your email address.
 
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+[...]
+
+
+Thanks,
+
+Paul
 
 
