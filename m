@@ -1,45 +1,41 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OkCa8-0002PS-L3
+	(envelope-from <coolaj86@gmail.com>) id 1OkD4M-0007jL-5N
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Aug 2010 10:59:13 +0200
-Received: by gxk2 with SMTP id 2so1361134gxk.6
+	Sat, 14 Aug 2010 11:30:27 +0200
+Received: by fxm6 with SMTP id 6so2316633fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Aug 2010 01:58:47 -0700 (PDT)
+	Sat, 14 Aug 2010 02:30:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=fegUgfD9TgFb6j7ZK5H8cW1HH4TnAd7aWmU3zY4B3NE=;
-	b=RDs/q8zswyPmoXHnvJf2c74n4Vr35mgSTiXv/ZEvNT/dyS/yJ4hEY46kp0nSVrEc8h
-	uWqsWfP+DhiRDnzzZsUTw0QBLiIp8SKpv6/4wzf+SS2T4NhRqtikJl+M7PwVbJRjTQcD
-	+IMEBqMFYl58PGy/bHZJ0X4BdVJfKGxzfBDWU=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=Xed/oqV2WZFbWwUpFKfwNzJb1danLmabnTdd4ID/jTg=;
+	b=PYQOHQqVIVj+zLhAvjFeB3fP37f0X4ghbLsYDVLq6us+5ApgaYE+MsHRJGObKNBtDs
+	b1TKQNY17LuvBcKvp4C6M32WtGIiOAv2aLceP94LqP3le5IRoaHweLJAfc7qSzO9EG+D
+	bku+8SbF7qaFOQmB1zdb2uO+0C9FUdCutN0Lc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Nu94wHQlXPAehdltrPiCkHu0obtkT3Rxbo6Daqv1RD/udOc6wFqzurnkoXYAwpQ5tm
-	0QDr+faiTov0EcXMCbvBXYCM3xe6BELoi6q2xYl6GVDi/m6zB98Pvm5cSaOzIB9MgjDK
-	f6b1SAf3ymJfuqP9nF1uUNBPJYOBT8nV271J4=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=hi2y3nN+rdKXS1gCkhL+Up0C2d4+JsaTzW4eCgkwn1TQeSLVKp7zUfnggSAqQYPdaF
+	wyiXQSp/nTy2hIfzkDtUVKALPuEBhbundxGkf2HAOgQReqcdiJSXoDSRZyk0tlFHV+35
+	8GXV4SfwrprkFwPjiz8fTAGHxa0VlvJOPKuH8=
+Received: by 10.223.110.67 with SMTP id m3mr3061353fap.24.1281778208237; Sat,
+	14 Aug 2010 02:30:08 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.39.69 with SMTP id f5mr2880524ibe.53.1281776327113; Sat,
-	14 Aug 2010 01:58:47 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Sat, 14 Aug 2010 01:58:47 -0700 (PDT)
-In-Reply-To: <989A078976CDAD4CB2DC976EEF70E2A504270EAC@eu2-mail.mgc.mentorg.com>
-References: <1281677993-19478-1-git-send-email-noor_ahsan@mentor.com>
-	<1281686825.3858.0.camel@mattotaupa>
-	<989A078976CDAD4CB2DC976EEF70E2A504270EAC@eu2-mail.mgc.mentorg.com>
-Date: Sat, 14 Aug 2010 10:58:47 +0200
-Message-ID: <AANLkTinZ+hV_6yzeTYouNn_B2Yg+E1ggcfwjrMXn18dS@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Received: by 10.223.125.209 with HTTP; Sat, 14 Aug 2010 02:29:48 -0700 (PDT)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Sat, 14 Aug 2010 03:29:48 -0600
+Message-ID: <AANLkTimR-8k8h_FAtt3KaNM1fe_FAMu2wZdmbRu2Un=z@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH]Removing Legacy staging from genboot native recipe
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: need help with do_install for v8 bitbake recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,14 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Aug 2010 08:59:13 -0000
+X-List-Received-Date: Sat, 14 Aug 2010 09:30:28 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-reworked the patch a little bit, tested building and pushed.
-FILEDIR is also gone
+I've created a recipe for v8 and the do_compile() works.
+http://fastr.github.com/articles/v8-on-OpenEmbedded.html
 
-thanks for your contribution
+I'm still not very familiar with bitbake and I'd like to know what I need to
+do with
+do_install() and do_stage() so that the library is available to other
+packages when
+I add DEPENDS += "libv8".
 
-Frans
+The only file is libv8.a in the builddir.
 
+Specifically I'm trying to build nodejs with v8 as a shared library, because
+I can't get
+the v8 that comes with it to cross-compile.
+
+AJ ONeal
 
