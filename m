@@ -1,37 +1,41 @@
-Received: from asmtpout024.mac.com ([17.148.16.99])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <elvis.dowson@mac.com>) id 1OkNz2-0001W8-V8
+	(envelope-from <coolaj86@gmail.com>) id 1OkOgO-00005A-8t
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Aug 2010 23:09:57 +0200
-MIME-version: 1.0
-Received: from [192.168.1.101] ([87.201.169.197])
-	by asmtp024.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
-	(built Dec
-	16 2008; 32bit)) with ESMTPSA id <0L75002LLUQEWY70@asmtp024.mac.com> for
-	openembedded-devel@lists.openembedded.org; Sat,
-	14 Aug 2010 14:08:42 -0700 (PDT)
-X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
-	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
-	adjust=0
-	reason=mlx engine=6.0.2-1004200000 definitions=main-1008140162
-X-Proofpoint-Virus-Version: vendor=fsecure
-	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
-	definitions=2010-08-14_07:2010-08-14, 2010-08-14,
-	1970-01-01 signatures=0
-From: Elvis Dowson <elvis.dowson@mac.com>
-Date: Sun, 15 Aug 2010 01:08:32 +0400
-In-reply-to: <4C66EB00.7050306@balister.org>
-To: openembedded-devel@lists.openembedded.org
+	Sat, 14 Aug 2010 23:54:29 +0200
+Received: by fxm6 with SMTP id 6so2499517fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 14 Aug 2010 14:54:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=lbKLD2+j9Xzm6cxZ0nYMkUJ8uGCZq02rKU+ZLEmYRtg=;
+	b=ngJ3hfowo8pZtaamY7tUiXsWYD1Ycq27d9gGtH0cTgFBVzeF4qY3yX9NtS4Yd5wHKi
+	U2wnl6jGzYwrYj4OvivU06qyu+P4Q9EUbm9rUaYQ0IJQGcbdJQwAfEhoVkGwmbcpvSmE
+	7jxaKjokwmjdUHOdtGo2CtBhwM7ULpj9+QJk8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=usRMV2M37MlHJavt3Op8jpM8HHSK/2YJ8QD7FtWUhqgp60lBCVASCkcw7FCJalqGvt
+	i6LjO0tbF25h2MxDjV10Tv1siH8qEJvPIWiiKhU46t3IeSyYaShhz8oyq8V98uQj20zh
+	UcyoLmbGxlioJmYwlZYIiLLFZqQGsGAXfE0jA=
+Received: by 10.223.113.5 with SMTP id y5mr3554513fap.93.1281822847163; Sat,
+	14 Aug 2010 14:54:07 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.125.209 with HTTP; Sat, 14 Aug 2010 14:53:47 -0700 (PDT)
+In-Reply-To: <AANLkTime6OXahfsppUL5gVvbSVmovWcYSv2OSTceYSBq@mail.gmail.com>
 References: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
 	<AANLkTim_u5O3bLgdLiwE4fPCnbjRoUY1+Pad9iB8qXPW@mail.gmail.com>
-	<4C66EB00.7050306@balister.org>
-Message-id: <78B7E1F8-0655-44B0-B510-FA876835EF8F@mac.com>
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 17.148.16.99
-X-SA-Exim-Mail-From: elvis.dowson@mac.com
+	<AANLkTime6OXahfsppUL5gVvbSVmovWcYSv2OSTceYSBq@mail.gmail.com>
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Sat, 14 Aug 2010 15:53:47 -0600
+Message-ID: <AANLkTim7NhKpm57xdraj57fhudBfv_5PkNJxry=D7UDi@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -50,27 +54,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Aug 2010 21:09:57 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: 7BIT
+X-List-Received-Date: Sat, 14 Aug 2010 21:54:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+How do I enable logging to tenderbox? I'd be happy to do that.
+I googled it to little avail:
+http://www.google.com/search?hl=en&q=tinderbox+openembedded
 
-On Aug 14, 2010, at 11:14 PM, Philip Balister wrote:
 
-> On 08/14/2010 12:01 PM, Frans Meulenbroeks wrote:
->> 2010/8/14 AJ ONeal<coolaj86@gmail.com>:
->>> This is about the 4th time that I've `rm -rf`-d everything and started from
->>> scratch and never yet got a working `bitbake omap3-console-image`
->>> 
->>> Every time I `git pull` it's a different set of problems. It's never the
->>> same package twice, but they never all compile for the basic console image
->>> anywhere from 4 to 20 hours in.
->>> 
+For reference, here's the process I've been following:
 
-> I think they are building from the gumstix overo repo. We are interested in failures (at least failures for recipes that are in .dev), but we can't guarantee when our fixes will hit the gumstix repository.
 
-The overo-oe repository setup instructions pull from a gitorious branch, that is based on the oe development branch. I too have faced these issues everytime. It really is a pain, one can never be sure if the overo-oe repo will compile reliably after a git pull. Its a total waste of time. 
+rm ~/overo-oe -rf                 # *clean it all out*
 
-Elvis Dowson
+mkdir -p ~/overo-oe
+cd ~/overo-oe
+
+git clone git://gitorious.org/gumstix-oe/mainline.git org.openembedded.dev
+      # *get a fresh copy of the repo*
+
+cd org.openembedded.dev
+git checkout --track -b overo origin/overo
+cd ~/overo-oe
+git clone git://git.openembedded.net/bitbake bitbake
+cd bitbake
+git checkout 1.8.18
+cd ~/overo-oe
+cp -r org.openembedded.dev/contrib/gumstix/build .
+cp ~/.bashrc ~/bashrc.bak
+cat ~/overo-oe/build/profile >> ~/.bashrc
+source ~/overo-oe/build/profile
+
+bitbake omap3-console-image                       # *make the basic image
+from a fresh start*
+
+
+AJ ONeal
+
+On Sat, Aug 14, 2010 at 1:04 PM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
+
+> 2010/8/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>
+> >
+> > If you are using dev head, you're living on the edge. If you can't
+> > stand that better use the stable branch.
+> >
+> > As far as there are issues:
+> > Either report them, or better fix them.
+> > (or as a workaround you could find the commit wthat broke it and
+> > report that and perhaps temporariy locally revert that commit if you
+> > cannot fix it).
+> >
+> > Having said that:
+> > I don't really see many issues. Maybe I'm building a different set of
+> > packages or for a different set of hw or for a different distro.
+> >
+> > Frans
+> >
+> Addition: I noticed when pressing send that you also mailed to
+> gumstix-users, so apparently you do have a gumstix.
+> I haven't so I have never build for it and cannot really help you with
+> it as I am not planning on buying one (so even though I could build I
+> cannot test).
+>
+> What you also can do is enable logging to tinderbox then at least the
+> info of the faulty builds becomes available for others.
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
