@@ -1,49 +1,49 @@
-Received: from mail-bw0-f47.google.com ([209.85.214.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lukasmaerdian@googlemail.com>) id 1Ok5Yz-0007WO-5H
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OkAsw-000089-8g
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Aug 2010 03:29:34 +0200
-Received: by bwz12 with SMTP id 12so645551bwz.6
+	Sat, 14 Aug 2010 09:10:44 +0200
+Received: by gwb15 with SMTP id 15so1334253gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 13 Aug 2010 18:29:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:mime-version:content-type
+	Sat, 14 Aug 2010 00:10:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=nWWyYldE0C5+vvPZ1LyqTS++5PQ8lTs4aYhb4rW1q7c=;
-	b=DhIW0UqHkUTcVswh50JmpIBZePZ92G15dU8/DOmkl2QQPuqgDZndgOsRCGQ8MkGdBM
-	NRw/Qa84c7jIH8NW8cAmJnMK4ypBIxaNhSR7AXQ47aetNXcEsdFV8Z7W+4lUZYzZ9Scf
-	eRVIk9AeVrRWzf81h33lB41rL7i/UQGEN3z78=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:mime-version
+	bh=MjkAhiUTgA0ArQ+7xZNDD5a496NbD+Zq3rDc62HJ3VU=;
+	b=sU31htfYVysoIX4ayOWstCL2Zfbdpad7W1Cn5+HgKXOaQmwuRbAWyoSEUpup1Zf4yr
+	UXn/Iq8UOdm3enHhAXeGn6rQNIH6AmugO8yCJcTuTgu4nmB2WOaV7icu5aUeWHBvtg/2
+	QPshK8wN0o/XE+PgHiOKWSv/6ZMtMb13XshIM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=oj+Inbf4QG92DHQAkveTLYKZ35RLXnoC1UjrYYXm5UgTYrAfJlEyL+tyeflky6Xa/P
-	RQENUkV0yisITSJJe2YtnPaMfIQvhOPGuXA6SVNeOb5m7otWB9pUYDNL4wxG9heRWKR+
-	302SBAfq5pYlBlSWIM/c1hnLPf4l0ahPSDwMY=
-Received: by 10.204.82.155 with SMTP id b27mr1223264bkl.182.1281749353967;
-	Fri, 13 Aug 2010 18:29:13 -0700 (PDT)
-Received: from localhost.localdomain (p4FDB1210.dip0.t-ipconnect.de
-	[79.219.18.16])
-	by mx.google.com with ESMTPS id x13sm2127120bki.12.2010.08.13.18.29.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 13 Aug 2010 18:29:12 -0700 (PDT)
-From: "=?UTF-8?q?Lukas=20M=C3=A4rdian?=" <lukasmaerdian@googlemail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 14 Aug 2010 03:28:44 +0200
-Message-Id: <1281749324-22589-1-git-send-email-lukasmaerdian@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
+	b=m266/cWvplangKLHnvtNzRLowKb9AYgjWysXvtwLPrmQMe41ux4Ytw+LwQgPATUpSf
+	hF+6toFzZ7Gv6h3lDFu3B+pURrRoQob7S9b+WWJIaA6J9DJ4jtJmuXd9Y7117DHaPFn5
+	nxDSG2VA7USqZgW5nnDm/BYc7MzhLcmYZTz3A=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.85.214.47
-X-SA-Exim-Mail-From: lukasmaerdian@googlemail.com
+Received: by 10.231.39.69 with SMTP id f5mr2796349ibe.53.1281769805956; Sat,
+	14 Aug 2010 00:10:05 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Sat, 14 Aug 2010 00:10:05 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1008132255040.11048@asterix.crazy-teaparty.dyndns.org>
+References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
+	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
+	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
+	<alpine.LNX.2.00.1008132255040.11048@asterix.crazy-teaparty.dyndns.org>
+Date: Sat, 14 Aug 2010 09:10:05 +0200
+Message-ID: <AANLkTi=p-1uQCfor_cLn1A8hM5XUmZ96eFP5-6-+5=UE@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?UTF-8?q?Lukas=20M=C3=A4rdian?= <lukasmaerdian@gmail.com>
-Subject: [PATCH] bump libphone-ui and libphone-ui-shr as to the 0.0.1 release and bump SRCREV to the 0.0.1 commit
+Subject: Re: update canutils to current version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,50 +57,63 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Aug 2010 01:29:34 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 14 Aug 2010 07:10:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Lukas Märdian <lukasmaerdian@gmail.com>
----
- recipes/shr/libphone-ui-shr_git.bb |    6 +++---
- recipes/shr/libphone-ui_git.bb     |    4 ++--
- 2 files changed, 5 insertions(+), 5 deletions(-)
+2010/8/13 Vitus Jensen <vjensen@gmx.de>:
+> On Fri, 13 Aug 2010, Khem Raj wrote:
+>
+>> On Fri, Aug 13, 2010 at 2:59 AM, Vitus Jensen <vjensen@gmx.de> wrote:
+>>>
+>>> On Fri, 13 Aug 2010, Frans Meulenbroeks wrote:
+>>>>
+>>>> 2010/8/13 Vitus Jensen <vjensen@gmx.de>:
+>>>>>
+>>>>> On Fri, 13 Aug 2010, Vitus Jensen wrote:
+>>>>>
+>>>>>> The following patches will update canutils to the current version
+>>>>>> 4.0.6 and remove older 4.0.x versions. =A0Also only the latest
+>>>>>> version of libsocketcan will be kept.
+>>>>>
+>>>>> Frans, thank you for the ACKs. =A0Could you please apply the patches,
+>>>>> too? I have no right to do so.
+>>>>
+>>>> Applied. Thanks for the contribution
+>>>>
+>>>> System guru's: Vitus's patches did not show up in patchwork
+>>>
+>>> They did. =A0But after you posted you ACKs I changed their state to
+>>> "Accepted"
+>>> and then they are usually filtered by "Action Required". =A0I'm not rea=
+lly
+>>> sure I did the right thing but I don't believe they shouldn't remain in
+>>> "New".
+>>
+>> If they got applied change the state to 'applied'
+>
+> Sure, already did! =A0Do I set the 'archive' bit, too?
+>
+>
+> Frans got hit by the fact, that 'accepted' patches don't show up in the l=
+ist
+> by default.
+>
+> Vitus posts patches
+> Frans acks patches
+> Vitus changes state to 'accepted'
+> Vitus asks Frans to apply
+> Frans: where are those patches in patchwork???
+> Frans forces his googlemail to produce usable mail and applies
+> Vitus changes state to 'applied'
+>
+> Probably I should update the wiki to document the above procedure, right?
+>
 
-diff --git a/recipes/shr/libphone-ui-shr_git.bb b/recipes/shr/libphone-ui-shr_git.bb
-index 098eeb7..c352bfa 100644
---- a/recipes/shr/libphone-ui-shr_git.bb
-+++ b/recipes/shr/libphone-ui-shr_git.bb
-@@ -1,9 +1,9 @@
- DESCRIPTION = "SHR default module for the Phone UI daemon"
- SECTION = "e/apps"
- DEPENDS += " dbus-glib libframeworkd-glib libfsoframework libphone-ui evas ecore edje edje-native elementary"
--SRCREV = "01c15bc1e68ba416dbdc8d85d0df3ecf4cd74608"
--PV = "0.0.0+gitr${SRCPV}"
--PR = "r9"
-+SRCREV = "be5a4b0f48ce5df67bdf01f88979c93c7d9a59d3"
-+PV = "0.0.1+gitr${SRCPV}"
-+PR = "r0"
- 
- SRC_URI = "git://shr.bearstech.com/repo/libphone-ui-shr.git;protocol=http;branch=master"
- S = "${WORKDIR}/git"
-diff --git a/recipes/shr/libphone-ui_git.bb b/recipes/shr/libphone-ui_git.bb
-index a4d7638..f874aac 100644
---- a/recipes/shr/libphone-ui_git.bb
-+++ b/recipes/shr/libphone-ui_git.bb
-@@ -2,8 +2,8 @@ DESCRIPTION = "A generic framework for phone ui"
- HOMEPAGE = "http://shr-project.org/"
- LICENSE = "GPL"
- SECTION = "libs"
--SRCREV = "cac36ceb360c457b8dce993f6363cf8688ab428a"
--PV = "0.0.0+gitr${SRCPV}"
-+SRCREV = "e031bdc36168da3c821c36fe470eb920c41ea92b"
-+PV = "0.0.1+gitr${SRCPV}"
- PR = "r0"
- 
- DEPENDS="glib-2.0 dbus-glib libframeworkd-glib libfso-glib libfsoframework libphone-utils alsa-lib"
--- 
-1.7.0.4
+I saw a different thread from Paul on patchwork.
+Let's discuss this  in that thread.
 
+
+Frans
 
 
