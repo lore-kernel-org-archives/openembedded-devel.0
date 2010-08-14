@@ -1,55 +1,47 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OkBzw-00064N-UK
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OkCJV-0003SF-3J
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Aug 2010 10:22:03 +0200
-Received: by fxm6 with SMTP id 6so2301505fxm.6
+	Sat, 14 Aug 2010 10:42:14 +0200
+Received: by gwb15 with SMTP id 15so1354672gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Aug 2010 01:21:18 -0700 (PDT)
+	Sat, 14 Aug 2010 01:41:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=AwDyC0Rvl2G58hJd+/sf4J1eaalIHWtu0jwMcg2kSvk=;
-	b=ZnGUt0cZUAlfu7Sle71oMcGXtbHzvZSzp3D8UNJTc8XqxD5W6EoT6De9lX0o7ALg6w
-	xJlPETc+yFiUJ5dGgzoESL7Fm/vmphGgLthfGjthceeGmOiFEq9LjWIC4cptpef34tLp
-	vssGmmGczAFESkj4kgwICjOzqgZJIK3UXSyCw=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=W4l1/dkOEfTAUoWUMB4qZsjnlO/MZSQtDPA6HFUZBU8=;
+	b=I+wEzS41thJcTh6ihYYfsXeeTX290Icl1jZRHROllJMM6JkoZ+P9oesgse3nrAFd6L
+	ZTZY/YEZinHHCYe0LJ3wb7ibxeJ+HUzygo3N3ERsHtvK4to0X4oEd/Fz68kea+d9Q6on
+	hrttOUGwaWokSqgtl/4KJslCgk6pClcb0ci/E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=GAz7fF/3D4KKYF5S1StblriRPuBvKeB9fY12FvQGwAy+S4ybZWlvwZv91+5mEQV/yQ
-	uzM9PiBlfqzUuKybrCUpgVOFnsJCwVq+qJVBjR707PGAi99KmMThNkOzQY3lE/46wV7d
-	DRwFN709S7C+Oc6WO4BOGJePn+YnPj3aFousM=
-Received: by 10.223.107.211 with SMTP id c19mr3033331fap.20.1281774078147;
-	Sat, 14 Aug 2010 01:21:18 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id r4sm733856faa.43.2010.08.14.01.21.17
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 14 Aug 2010 01:21:17 -0700 (PDT)
-Date: Sat, 14 Aug 2010 10:21:22 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100814082121.GF10076@jama>
-References: <1281677417-15063-1-git-send-email-vjensen@gmx.de>
-	<alpine.LNX.2.00.1008131040070.11048@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTikQ5qGF4N1N0Ud11cdS7P4+HxfPEXSvWwMvm4YV@mail.gmail.com>
-	<alpine.LNX.2.00.1008131154370.11048@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTinChtk+VTgQ4H3+sMfyTRUQks+=YQR9Agj8M7a_@mail.gmail.com>
-	<alpine.LNX.2.00.1008132255040.11048@asterix.crazy-teaparty.dyndns.org>
-	<1281734825.3858.281.camel@mattotaupa>
-	<AANLkTin28kSQZTgWHd_DsXcqeANKfBcg3+NLaOP74kaD@mail.gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=v5ovqpMsaLUE68mADIcduf8Ekpd+VY6qgqg0SHLy/WtigiBtcvkmoVzgJS+qtjfR8q
+	WbADpC29Fx/djIBsBGpsx89VNa1ro0gV2gUeHvbJhZUCj/7Jz4jA1UEMxaIii/Kqriw7
+	UEUDkylv5ARhvkcchW0ENQH71ivv1BQELOs38=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTin28kSQZTgWHd_DsXcqeANKfBcg3+NLaOP74kaD@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.39.69 with SMTP id f5mr2866622ibe.53.1281775285223; Sat,
+	14 Aug 2010 01:41:25 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Sat, 14 Aug 2010 01:41:25 -0700 (PDT)
+In-Reply-To: <i43kf7$942$1@dough.gmane.org>
+References: <1281698231-26231-1-git-send-email-noor_ahsan@mentor.com>
+	<1281701005.3858.129.camel@mattotaupa>
+	<AANLkTinLVmyz+QJQKXRcmf-1375uTPC84RYM8Xr59V3-@mail.gmail.com>
+	<i43kf7$942$1@dough.gmane.org>
+Date: Sat, 14 Aug 2010 10:41:25 +0200
+Message-ID: <AANLkTimJxb8L3Wk5nzbhFLqgACmSw=70nnT0NPEv93i1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patch queue/patchwork: How should states be used? (was: update canutils to current version)
+Subject: Re: [PATCH]Removing Legacy staging from genboot native recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -63,21 +55,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Aug 2010 08:22:03 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Sat, 14 Aug 2010 08:42:14 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 14, 2010 at 09:59:59AM +0200, Frans Meulenbroeks wrote:
-> review patch. if ok and it is a simple patch
-> download patch from patchwork in mbox fmt
-> git am patch
-> bitbake recipe
-> if ok, git push.
+2010/8/13 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 13-08-10 14:25, Frans Meulenbroeks wrote:
+>> 2010/8/13 Paul Menzel <paulepanter@users.sourceforge.net>:
+>>> Am Freitag, den 13.08.2010, 17:17 +0600 schrieb noor_ahsan@mentor.com:
+>
+>>>> +NATIVE_INSTALL_WORKS =3D "1"
+>>>
+>>> I am really a noob, but is not that for =93normal=94, i.e. no *-native,
+>>> recipes indicating no explicit native recipe is needed?
+>>
+>> Afaik this is not needed.
+>
+> If your -native recipe has something different than 'make install' in
+> do_install, it needs NATIVE_INSTALL_WORKS =3D "1" but only if you use
+> BBCLASSEXTEND to make it native.
+>
+The BBCLASSEXTEND part does not matter.
 
-check contrib/patchwork/pw-am.sh to simplify steps 2 and 3.
+If you have a -native recipe that does not use autotools and does not
+use make install
+NATIVE_INSTALL_WORKS =3D "1"
+is needed. Without it the following code is generated:
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+do_stage_native() {
+        # If autotools is active, use the autotools staging function, else
+        # use our "make install" equivalent
+        if [ "${AUTOTOOLS_NATIVE_STAGE_INSTALL}" =3D=3D "1" ]
+        then
+                autotools_stage_all
+        else
+                oe_runmake install
+        fi
+
+}
+
+BTW this is a recipe that has no target equivalent so there is no
+non-native variant.
+
+Frans
 
 
