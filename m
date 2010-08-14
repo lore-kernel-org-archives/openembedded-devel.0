@@ -1,43 +1,43 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OkIxE-0005yK-U8
+	(envelope-from <vwyodapink@gmail.com>) id 1OkJPP-0008Tg-VZ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 14 Aug 2010 17:47:43 +0200
-Received: by fxm6 with SMTP id 6so2411229fxm.6
+	Sat, 14 Aug 2010 18:16:52 +0200
+Received: by wyb38 with SMTP id 38so4034189wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 14 Aug 2010 08:47:09 -0700 (PDT)
+	Sat, 14 Aug 2010 09:16:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=oBuevdije6T+k8Uh4CWJgfeCLXaqKLdCkb/dacVnDXM=;
-	b=NOMw+BGeANEr5M8ES/cFkA8TFJLotUyAbTTDaN7/ji2V4HrjCmuBwAbIIQ32fkC0K6
-	CXx/OxPab4kkRsSxXo6ES7rY/tvFFlOP3nS+gXLKtag/rgrgQnOX3aX8tR79wJI+BAB4
-	yToUqXHM0eJdxb5+/eQorz0db3OgHTjW0ELyA=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=+f36p5O7oz+Jh/AkKt9czf4qm5O2Vw0KXz3UyWkqP3g=;
+	b=KaCWDdvOZpoeWmaG9b/dm/7dNOhYlyGCw5FuPeDt5UK/YDTytmdC5LNARy0dPBSWJd
+	mjUkMRZCmiuMhL4F/KGPpp4XBsqkOqSb5p5gIFbL+dQCy5eEn3r8gZDaYo72Mp6Iw0ui
+	/uEfEdlZFlXv/zIjFrQFpcFfJyUuY/Bwm3Xv0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=IYlnx64OW8BfrGhxG4QN8M0eFP5AK1YI0IIQvVDp82tDM8tZcIlmTkct0BYSwqnfJ1
-	cS3gsJOvSOZ4LAYjvHZgnw3rAB2jvtQ9QC4xvlaI3rsrY/JYmvLyJq3MsAP515K7ED0i
-	EfTUL6eupVzVsSxTobH8fQYK9ywNY61jx1dHg=
-Received: by 10.223.107.211 with SMTP id c19mr3369116fap.20.1281800829176;
-	Sat, 14 Aug 2010 08:47:09 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=x963BaLplsGSgDHZISru9/RpwaGfSZi82mPRchrRmJCjHO3DaUvhrUreBXh0BdtjYg
+	kBskbi6UCUJ1uCZUwJ2AOgeZfVevlRwgaM5N4Zuz+Acp09CXU+UrQJZ/m9UFVfYSSo5M
+	y6zvnulLx+y/egkXeRJVZRajj0bQQiyxo7EMI=
 MIME-Version: 1.0
-Received: by 10.223.125.209 with HTTP; Sat, 14 Aug 2010 08:46:49 -0700 (PDT)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Sat, 14 Aug 2010 09:46:49 -0600
-Message-ID: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
-	"General mailing list for gumstix users."
-	<gumstix-users@lists.sourceforge.net>
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+Received: by 10.216.70.201 with SMTP id p51mr764908wed.24.1281802572110; Sat,
+	14 Aug 2010 09:16:12 -0700 (PDT)
+Received: by 10.216.135.18 with HTTP; Sat, 14 Aug 2010 09:16:12 -0700 (PDT)
+In-Reply-To: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
+References: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
+Date: Sat, 14 Aug 2010 09:16:12 -0700
+Message-ID: <AANLkTina16zJVc+O13hPdpLzwV9X5mXAFhhUG5BWsb04@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: What to do about the poor bitbake Quality Control?
+Subject: Re: What to do about the poor bitbake Quality Control?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,28 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 14 Aug 2010 15:47:44 -0000
+X-List-Received-Date: Sat, 14 Aug 2010 16:16:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-This is about the 4th time that I've `rm -rf`-d everything and started from
-scratch and never yet got a working `bitbake omap3-console-image`
+I agree with you AJ, its become a serious pain to just get a built
+image. I myself have only built once completely and have yet to again
+since figuring out the changes I needed to make to that image. I would
+like to help myself but someone like me whose not very competent in
+this area finds the documentation a tad lacking to properly learn the
+ways to help. I still have yet to figure out how to even get my own
+program from the net to build with OE as just following the hello
+world does not seem to be enough for me to grasp how to do it with an
+actual problem. Which runs me into my next issue I can not properly
+modify the way some programs build to get the features I want.
 
-Every time I `git pull` it's a different set of problems. It's never the
-same package twice, but they never all compile for the basic console image
-anywhere from 4 to 20 hours in.
+I have also noticed on the gumstix boards while most of the time it
+seems its the same errors people get, every once in awhile you see
+some people with one issue and others with another.
 
-Fortunately, I do have a machine that did build omap3-console-image a few
-weeks ago at work. But I've never been able to get it on my machine at home
-(same os) to start playing around with.
-
-What needs to happen in order for things to git checked that they work with
-at least a few common meta-tasks before being pushed out?
-And is there anything I can do to help? (Donate some machine time to run
-tests, for example)
+I am sure this wont be of much use as a post but figured I would chime
+in from an inexperienced beginner trying to get a footing in here and
+to actually be able to use things properly.
 
 
-Obviously, we all have our day jobs and whatnot, but this is becoming really
-frustrating for me and I'd like to see things improve.
 
-AJ ONeal
+On Sat, Aug 14, 2010 at 8:46 AM, AJ ONeal <coolaj86@gmail.com> wrote:
+> This is about the 4th time that I've `rm -rf`-d everything and started from
+> scratch and never yet got a working `bitbake omap3-console-image`
+>
+> Every time I `git pull` it's a different set of problems. It's never the
+> same package twice, but they never all compile for the basic console image
+> anywhere from 4 to 20 hours in.
+>
+> Fortunately, I do have a machine that did build omap3-console-image a few
+> weeks ago at work. But I've never been able to get it on my machine at home
+> (same os) to start playing around with.
+>
+> What needs to happen in order for things to git checked that they work with
+> at least a few common meta-tasks before being pushed out?
+> And is there anything I can do to help? (Donate some machine time to run
+> tests, for example)
+>
+>
+> Obviously, we all have our day jobs and whatnot, but this is becoming really
+> frustrating for me and I'd like to see things improve.
+>
+> AJ ONeal
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 
