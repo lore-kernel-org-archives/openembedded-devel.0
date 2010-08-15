@@ -1,31 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OkiDO-0007xH-A3 for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Aug 2010 20:45:51 +0200
-Received: from f053041205.adsl.alicedsl.de ([78.53.41.205]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OkiD9-0002sU-UQ for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Aug 2010 18:45:36 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <ydirson@free.fr>) id 1OkjJT-0006ZJ-G0
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Aug 2010 21:56:12 +0200
+Received: from smtp6-g21.free.fr (smtp6-g21.free.fr [212.27.42.6])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id EC6F92CB01
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Aug 2010 21:55:50 +0200 (CEST)
+Received: from zimbra44-e7.priv.proxad.net (unknown [172.20.243.194])
+	by smtp6-g21.free.fr (Postfix) with ESMTP id 3178C82273
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 15 Aug 2010 21:55:45 +0200 (CEST)
+Date: Sun, 15 Aug 2010 21:55:44 +0200 (CEST)
+From: ydirson@free.fr
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1281861970.3854.14.camel@mattotaupa>
-References: <1281861970.3854.14.camel@mattotaupa>
-Date: Sun, 15 Aug 2010 20:45:33 +0200
-Message-ID: <1281897933.3693.41.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Message-ID: <404544342.1017011281902144985.JavaMail.root@zimbra44-e7.priv.proxad.net>
+In-Reply-To: <246310099.1016461281901672121.JavaMail.root@zimbra44-e7.priv.proxad.net>
+MIME-Version: 1.0
+X-Originating-IP: [87.100.101.212]
+X-Mailer: Zimbra 5.0 (ZimbraWebClient - FF3.0
+	(Linux)/5.0.15_GA_2815.UBUNTU8_64)
+X-Authenticated-User: ydirson@free.fr
+X-SA-Exim-Connect-IP: 212.27.42.9
+X-SA-Exim-Mail-From: ydirson@free.fr
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: evince_2.30.0.bb: Problem with new style staging? (was: warning: failed to load external entity "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl")
+Subject: Re: orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,93 +43,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Aug 2010 18:45:52 -0000
-X-Groupsio-MsgNum: 22208
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-1gbzALHNw4QDBFMPXOEe"
+X-List-Received-Date: Sun, 15 Aug 2010 19:56:12 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
 
---=-1gbzALHNw4QDBFMPXOEe
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Hi Frans,
 
-Am Sonntag, den 15.08.2010, 10:46 +0200 schrieb Paul Menzel:
+>I've made a list of patch files in recipes (prefixed with file://) and
+>compared it with the list of patch files as appear on disk.
+>Below is the list of 645 files that do not show up in any recipe and
+>as such can be considered as orphaned.
+>Proposal is to remove these files after double checking that they are
+>indeed not used.
+>
+>Do people agree with this? If so can I have an ack?
+>
+>And do we want to have a commit for every file (makes it easy to
+>revert an error) or a big commit with all removals?
+>(removals per dir are also possible but that process is more difficult
+>to automate and hence not my preferred solution.
 
-> I set up a basic build host with no GNOME installed and did `bitbake
-> beagleboard-demo-image` with the standard local.conf provided by
-> =C8=A6ngstr=C3=B6m and org.openembedded.dev.
->=20
-> Compile is failing because it is looking for a file on the build hosts
-> environment (and not stagang(?)).
->=20
->         xsltproc -o evince-C.omf --stringparam db2omf.basename evince --s=
-tringparam db2omf.format 'docbook' --stringparam db2omf.dtd "-//OASIS//DTD =
-DocBook XML V4.1.2//EN" --stringparam db2omf.lang C --stringparam db2omf.om=
-f_dir "/usr/share/omf" --stringparam db2omf.help_dir "/usr/share/gnome/help=
-" --stringparam db2omf.omf_in "/home/paul/oe/build/angstrom-dev/work/armv7a=
--angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30.0/help/evince.omf.in" =
- `/home/paul/oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/pkg-config -=
--variable db2omf gnome-doc-utils` C/evince.xml || { rm -f "evince-C.omf"; e=
-xit 1; }
->         warning: failed to load external entity "/usr/share/xml/gnome/xsl=
-t/docbook/omf/db2omf.xsl"
->         cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
->         make[2]: *** [evince-C.omf] Error 1
->         make[2]: Leaving directory `/home/paul/oe/build/angstrom-dev/work=
-/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30.0/help'
->         make[1]: *** [all-recursive] Error 1
->         make[1]: Leaving directory `/home/paul/oe/build/angstrom-dev/work=
-/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30.0'
->         make: *** [all] Error 2
->         FATAL: oe_runmake failed
->         ERROR: Function do_compile failed
->=20
-> The call of `xsltproc` seems to point to the wrong location. Does anyone
-> know how to fix this error besides installing those files on the build
-> host?
+It would be nice to have a checker script (not like lintian for debian
+packages), which would check for such probable or sure errors in packaging.
+Having it run when a recipe gets updated would help the person currently
+know where to look for improvements, and delaying in this case effective removal
+till someone who cares about the recipe can look at it, would probably
+cause a gradual improvement of the recipes.  Put another way, that would
+be: allow people who care with improving quality to just point the oe project to
+directions of improvements, and (when meaningful) let the ones who know
+the recipes best decide on the best course of action for that recipe.
 
-Judging from `run.do_compile.6321` `PKG_CONFIG_PATH` gets set
-incorrectly.
+Similarly (please excuse my Debian background), publishing the results of
+such automated tests on the oe website would allow someone to quickly get a grasp
+on the state of a package he cares about, possibly bringing more people to
+contribute ?  Have a look at packages.qa.debian.org, http://qa.debian.org/developer.php
+and the services aggregated from there for more details.
 
-        export PKG_CONFIG_PATH=3D"/oe/build/angstrom-dev/sysroots/armv7a-an=
-gstrom-linux-gnueabi/usr/lib/pkgconfig:/oe/build/angstrom-dev/sysroots/armv=
-7a-angstrom-linux-gnueabi/usr/share/pkgconfig"
+That also reminds me I thought a couple of days ago that something like the "Debian External
+Health Status" system would benefit much to oe, to help contributors to focus.  Maybe something
+can even be reused there, we would mostly have to add support for something like debian/watch
+files in the oe recipes and do probably-minor changes to the scripts that use them.
+See http://dehs.alioth.debian.org/stats.html
 
-I checked `gnome-doc-utils.pc` in these directories and both point to
-`/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl`, which is incorrect
-(`datadir=3D/usr/share`)
-
-In the staging(?) path
-`/oe/build/angstrom-dev/sysroots/i686-linux/usr/lib/pkgconfig/`
-everything is set up correctly.
-
-        datadir=3D/oe/build/angstrom-dev/sysroots/i686-linux/usr/share
-
-Also running=20
-
-        /oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/pkg-config --var=
-iable db2omf gnome-doc-utils
-
-in a clean environment without exporting `PKG_CONFIG_PATH` works.
-
-Is this a problem with new style staging? Could you please provide a
-hint on how to fix this.
+Best regards,
+-- 
+Yann
 
 
-Thanks,
-
-Paul
-
---=-1gbzALHNw4QDBFMPXOEe
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkxoNc0ACgkQPX1aK2wOHVjl0QCfUz6QfYAucxpUiMe6BwDuvg5D
-p6UAoIQg1V55XVhsyhkrb9+3w3Ixr9uY
-=TsSW
------END PGP SIGNATURE-----
-
---=-1gbzALHNw4QDBFMPXOEe--
