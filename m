@@ -1,34 +1,40 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OkbgZ-0006JX-3y
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OkegO-0002We-7b
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Aug 2010 13:47:45 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 0C6A780CB50; Sun, 15 Aug 2010 13:47:11 +0200 (CEST)
-Received: from [192.168.1.142] (p5489C4CA.dip.t-dialin.net [84.137.196.202])
-	by gravedo.de (Postfix) with ESMTPSA id B5CA280C51F
+	Sun, 15 Aug 2010 16:59:33 +0200
+Received: by iwn38 with SMTP id 38so707796iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Aug 2010 13:47:08 +0200 (CEST)
-Message-ID: <4C67D3BB.4080404@gravedo.de>
-Date: Sun, 15 Aug 2010 13:47:07 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12pre) Gecko/20100809 Shredder/3.0.7pre
+	Sun, 15 Aug 2010 07:59:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=GxMbUv4ghJQqsPdxzN2Jmh9dhXr0UZ1xhv2vJy15nu8=;
+	b=Tl94qLmBFa6iPqOCh4n5G9QyRYJLHAX8pR40lHsSppjhY5ZFsW81KMsm4xhYVcIOq5
+	66dlc7PJHLdUlLQU/cRRv/x7TMg8KYqW5Qf3Dqz2uxIZgKGSDeipZ20EYQsUU8KDbq+N
+	h4Nx8miAdA0S3dw0F4oTOflULdUMj5ekkZk1o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Rn7XbJnOhWQWh5yxSNUUFByKq6cGsveNnhfy4a/rZcaGMyV7q7lIOvaHYIrfjN+av8
+	sjE9XTe4meaesHdeazIU2eMrE6/PBHfbu0sVJ1xufADmBomlA16mPCG5PTkCPgFi912O
+	VNsextmUZPCzy0T6Ztn2fTFU7L06Zgtfnwckg=
 MIME-Version: 1.0
+Received: by 10.231.145.16 with SMTP id b16mr4160712ibv.198.1281884357470;
+	Sun, 15 Aug 2010 07:59:17 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Sun, 15 Aug 2010 07:59:17 -0700 (PDT)
+Date: Sun, 15 Aug 2010 16:59:17 +0200
+Message-ID: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1281468568-8990-1-git-send-email-morphis@gravedo.de>	<20100813215226.GB19855@excalibur.local>
-	<1281813967.2127.1.camel@saphir>
-In-Reply-To: <1281813967.2127.1.camel@saphir>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ecore: remove fix-ecore-fb-initialization.patch
+Subject: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,36 +48,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Aug 2010 11:48:06 -0000
+X-List-Received-Date: Sun, 15 Aug 2010 14:59:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Am 14.08.2010 21:26, schrieb Michael 'Mickey' Lauer:
-> Am Freitag, den 13.08.2010, 23:52 +0200 schrieb Stefan Schmidt:
->> Hello.
->>
->> On Tue, 2010-08-10 at 21:29, Simon Busch wrote:
->>> Removing the fix-ecore-fb-initialization patch as it let ecore open the supplied
->>> touchscreen device twice which results in an error on platforms where the touchscreen
->>> device node can be opened only once. Furthermore I doubt that it is necessary to open the
->>> touchscreen device node more than one time.
->>
->> Sounds good, but I want to hear Mickey on this before pushing it as it is his
->> patch.
-> 
-> NACK. Last time I checked, this patch was still necessary to fix
-> touchscreen access using Ecore on pure framebuffer. There may be
-> better approaches to it, but removing it now will break ecore on fb.
+Dear all,
 
-For me ecore worked on plain fb without this patch. Touchscreen access
-was possible and elementary-test worked fine. If it's not the case on
-other devies than the palm pre we have to find a way around this as it
-will break usage of ecore_fb for the palm pre!
+As some of you might have noticed I've been cleaning up our
+recipes.during the last week or so.
+As I had some time at hand this weekend, lots of cleaning has been done.
+I did my very best to stay within the guidelines of the TSC (as
+described in http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/020047.html),
+but it is quite possible that at some point I made a mistake or so.
+If so, let me know and I'll repair things and/or revert the commit. (I
+feel if you make a mess you should also clean it yourself).
 
-Will take a look into the code of ecore_fb if there is another way.
+Rationale for doing so is that it makes the tasks as listed in
+http://wiki.openembedded.org/index.php/OpenEmbeddedJanitors simpler
+(because less recipes need to be looked at).
 
-regards,
-morphis
+As it stands the job is not done. I've mainly peeked at all recipes
+that had more than 10 versions.
 
+I did not touch core directories like gcc, glibc/uclibc/eglibc,
+binutils, although I feel some pruging of old stuff would be useful
+there. E.g. is there still a use for gcc 4.1.0 ? )
+Then again these are typically well maintained and looked after, so
+there are probably hardly any issues that would require cleanup.
+
+I also stayed away from core recipes like linux and u-boot (although I
+can imagine some version scould be deprecated. Also the policy on when
+to create a different recipe and when to modify an existing one is
+vague at best.
+Some harmonisation would be nice.
+
+Then there are the opie dirs: bluelightning told me he would look into
+this and expire the older versions.
+
+X related stuff was also left untouched JaMa told me he was looking into that.
+
+And I skipped the ti dir. I would propose the ti people look into it.
+E.g. is there a need for 12 ti-xdctools recipes, 5 of wihch are pinned
+(and yeah, I understand that these probably are closely linked to a
+codec engine version, still 12 seems from a process point of view
+quite a lot)
+
+Anyway, if there are issues because of this action, or if you feel
+removal of a recipe was not in accordance with the TSC guidelines, let
+me know and I'll repair.
+
+Have fun!
+Frans
 
 
