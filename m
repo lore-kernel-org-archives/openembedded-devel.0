@@ -1,40 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OkhuE-0007OH-Mj
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Aug 2010 20:26:06 +0200
-Received: by iwn38 with SMTP id 38so845077iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Aug 2010 11:25:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=PLFscVvErHJN//gcR1tIru8/jdJiAh4uIHxt2a95yCk=;
-	b=XZ6iV4dQ8nHIjYjHD2OTavu+QaZmMygPeVqwL1vhLfPmMaoTmGCh5JTlJxmk3gawoO
-	7nJ3wf3WkGiaGlcC58zqE2clsmj+ILZy1kwQxRsuIUEcaz2/afaWVlhUHLZ3M659M0Ft
-	GyotRHWa81KNCXoWtDMyaQ/gbd0JIpYpKXfNw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=MtsviBDeusfPkfx9OZc68CyN6VkmnR0eN3aBfovk33YltS2+xFt5QW/cXfa49kdn4F
-	cuqHOLQtOldIWVi+Py8PqPiPDEVXwBGjGjlhH5tDGt4PkRrqcIyX9Lo1wsV428ylQx/g
-	2/5HemMpEfFqDQX8jHWXxoAfQlN2KkM8n/jiU=
-MIME-Version: 1.0
-Received: by 10.231.39.201 with SMTP id h9mr4444851ibe.118.1281896746964; Sun,
-	15 Aug 2010 11:25:46 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Sun, 15 Aug 2010 11:25:46 -0700 (PDT)
-Date: Sun, 15 Aug 2010 20:25:46 +0200
-Message-ID: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OkiDO-0007xH-A3 for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Aug 2010 20:45:51 +0200
+Received: from f053041205.adsl.alicedsl.de ([78.53.41.205]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OkiD9-0002sU-UQ for openembedded-devel@lists.openembedded.org;
+	Sun, 15 Aug 2010 18:45:36 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1281861970.3854.14.camel@mattotaupa>
+References: <1281861970.3854.14.camel@mattotaupa>
+Date: Sun, 15 Aug 2010 20:45:33 +0200
+Message-ID: <1281897933.3693.41.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: orphaned files
+Subject: Re: evince_2.30.0.bb: Problem with new style staging? (was: warning: failed to load external entity "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl")
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,671 +39,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Aug 2010 18:26:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 15 Aug 2010 18:45:52 -0000
+X-Groupsio-MsgNum: 22208
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-1gbzALHNw4QDBFMPXOEe"
 
-I've made a list of patch files in recipes (prefixed with file://) and
-compared it with the list of patch files as appear on disk.
-Below is the list of 645 files that do not show up in any recipe and
-as such can be considered as orphaned.
-Proposal is to remove these files after double checking that they are
-indeed not used.
+--=-1gbzALHNw4QDBFMPXOEe
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Do people agree with this? If so can I have an ack?
+Am Sonntag, den 15.08.2010, 10:46 +0200 schrieb Paul Menzel:
 
-And do we want to have a commit for every file (makes it easy to
-revert an error) or a big commit with all removals?
-(removals per dir are also possible but that process is more difficult
-to automate and hence not my preferred solution.
+> I set up a basic build host with no GNOME installed and did `bitbake
+> beagleboard-demo-image` with the standard local.conf provided by
+> =C8=A6ngstr=C3=B6m and org.openembedded.dev.
+>=20
+> Compile is failing because it is looking for a file on the build hosts
+> environment (and not stagang(?)).
+>=20
+>         xsltproc -o evince-C.omf --stringparam db2omf.basename evince --s=
+tringparam db2omf.format 'docbook' --stringparam db2omf.dtd "-//OASIS//DTD =
+DocBook XML V4.1.2//EN" --stringparam db2omf.lang C --stringparam db2omf.om=
+f_dir "/usr/share/omf" --stringparam db2omf.help_dir "/usr/share/gnome/help=
+" --stringparam db2omf.omf_in "/home/paul/oe/build/angstrom-dev/work/armv7a=
+-angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30.0/help/evince.omf.in" =
+ `/home/paul/oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/pkg-config -=
+-variable db2omf gnome-doc-utils` C/evince.xml || { rm -f "evince-C.omf"; e=
+xit 1; }
+>         warning: failed to load external entity "/usr/share/xml/gnome/xsl=
+t/docbook/omf/db2omf.xsl"
+>         cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
+>         make[2]: *** [evince-C.omf] Error 1
+>         make[2]: Leaving directory `/home/paul/oe/build/angstrom-dev/work=
+/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30.0/help'
+>         make[1]: *** [all-recursive] Error 1
+>         make[1]: Leaving directory `/home/paul/oe/build/angstrom-dev/work=
+/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30.0'
+>         make: *** [all] Error 2
+>         FATAL: oe_runmake failed
+>         ERROR: Function do_compile failed
+>=20
+> The call of `xsltproc` seems to point to the wrong location. Does anyone
+> know how to fix this error besides installing those files on the build
+> host?
 
-Your opinion is appreciated.
+Judging from `run.do_compile.6321` `PKG_CONFIG_PATH` gets set
+incorrectly.
 
-Frans
+        export PKG_CONFIG_PATH=3D"/oe/build/angstrom-dev/sysroots/armv7a-an=
+gstrom-linux-gnueabi/usr/lib/pkgconfig:/oe/build/angstrom-dev/sysroots/armv=
+7a-angstrom-linux-gnueabi/usr/share/pkgconfig"
 
-abiword abiword-plugin-pdf-poppler.patch
-alsa alsa-utils-sys-siglist.patch
-alsa unbreak_plugindir.patch
-apr configure_fixes.patch.old
-apt environment.patch
-atd no-oknodo.patch
-autoconf autoconf-x.patch
-autoconf autoconf259-update-configscripts.patch
-autoconf sizeof_types.patch
-binutils 503-avr32-fix-got-offset-init.patch
-binutils avr32-config.sub.patch
-binutils binutils-2.15.90.0.3-uclibc-100-conf.patch
-binutils binutils-2.15.90.0.3-uclibc-210-cflags.patch
-binutils binutils-petypes.patch
-binutils binutils-undefsym.patch
-binutils build_fix.patch
-binutils uclibc-segfault.patch
-bluez base.patch
-bluez blueboxes.patch
-bluez dbus-2.24.patch
-bluez dbus.patch
-bluez hciattach_devlength.patch
-bluez hcid-alignment-fix.patch
-bluez no-user-include.patch
-bluez ppoll-uclibc-arm-r0.patch
-bluez smash.patch
-bluez uclibc-fix.patch
-boost 01-no-serialization-test.patch
-boost 02-atomic-count-pthreads-on-arm.patch
-boost 03-exception-clone-destructor-fix.patch
-boost 1.34.1-gcc43.patch
-boost arm-intrinsics.patch
-boost sscanf.patch
-boost uclibc.patch
-boost unit_test_log10f.patch
-busybox add-getkey-applet.patch
-busybox angstrom-busybox-syslogd-conf.patch
-busybox below.patch
-busybox dhcpretrytime.patch
-busybox fbset.patch
-busybox glibc2.4-icmp6.patch
-busybox hdparm_M.patch
-busybox iproute-flush-cache.patch
-busybox mount-all-type.patch
-busybox r24785.patch
-busybox readlink.patch
-busybox rmmod.patch
-busybox udhcppidfile-breakage.patch
-busybox udhcppidfile.patch
-cacao cacao-0.98+svn-classpath_var.patch
-cacao cacao-codegen-arm3.patch
-cairo cairo-surface-cache-3.patch
-cairo cairo_directfb_is_similar-typo.patch
-cdparanoia Makefile.patch
-cdparanoia fixes.patch
-clamav cross-compile-fix.patch
-classpath cp-byte-loophelper.patch
-classpath decimalformat.patch
-classpath gjar-prefix-patch.diff
-classpath javanet-local.patch
-classpath netif_16.patch
-classpath sun-security-getproperty_0.96.1.patch
-classpath xmlstream-fix.patch
-clutter 0001-clutter-gst-videosink-guard-GL-calls-with-ifdef-CL.patch
-clutter fix.patch
-connman connman-build-and-work.patch
-cumulus qtooltip.patch
-curl curl-7.18.1-CVE-2009-2417.patch
-curl curl-7.19.5-CVE-2009-2417.patch
-curl curl-add_all_algorithms.patch
-directfb fix-pkgconfig-specs.patch
-dpkg autofoo.patch
-dpkg nochroot.patch
-driftnet arm.patch.old
-e17 Xserver.patch
-e17 config-db.patch
-e17 disable-autodetect.patch
-e17 disable-e-cursor.patch
-e17 disable-splash.patch
-e17 fix-configure.patch
-e17 gsm-segfault.patch
-e17 pkgconfig-fix.patch
-e17 profile-search.patch
-e17 set-autoscroll-defaults.patch
-e17 set-display-env.patch
-e2fsprogs compile-subst.patch
-e2fsprogs configure.patch
-e2fsprogs ldflags.patch
-e2fsprogs ln.patch
-e2fsprogs m4.patch
-e2fsprogs mkinstalldirs.patch
-efl1 add-tslib-support.patch
-efl1 fix-directfb-include.patch
-efl1 remove-local-includes-20080421.patch
-enchant configure.patch
-erlang lib-ssl-c_src-Makefile.in.patch
-esmtp configure.patch
-evince more-no-doc.patch
-evince no-doc.patch
-evince no-help-dir.patch
-fbida makefile.patch
-fbreader change-desktop.patch
-fbreader hack-makefile.patch
-fbreader set-target.patch
-ffalarms init.d-atd-restart.patch
-ffalarms no-oknodo.patch
-flite flite-alsa-1.2-configure-with-audio.patch
-fontconfig one-j-too-many.patch
-freesmartphone 0001-fsogsmd-update-sysfs-node-in-config-for-openmoko_gta.patch
-frodo no-pref-editor.patch
-ftpd-topfield usb-header-name.patch
-gcc 901-avr32-no-cond-exec-before-reload-by-default.patch
-gcc ada-acats.dpatch
-gcc ada-alpha.dpatch
-gcc ada-default-project-path.dpatch
-gcc ada-driver-check.dpatch
-gcc ada-driver.dpatch
-gcc ada-gcc-name.dpatch
-gcc ada-gnatvsn.dpatch
-gcc ada-libgnatprj.dpatch
-gcc ada-libgnatvsn.dpatch
-gcc ada-link-lib.dpatch
-gcc ada-sjlj.dpatch
-gcc ada-symbolic-tracebacks.dpatch
-gcc alpha-ieee-doc.dpatch
-gcc alpha-ieee.dpatch
-gcc alpha-no-ev4-directive.dpatch
-gcc arm-crunch-32bit-disable.patch
-gcc arm-crunch-64bit-disable-4.2.0.patch
-gcc arm-crunch-and-or.patch
-gcc arm-crunch-compare-unordered.patch-z-eq
-gcc arm-crunch-compare.patch-z-eq
-gcc arm-crunch-dominance.patch
-gcc arm-crunch-eabi.patch
-gcc arm-crunch-floatsi-disable-single.patch
-gcc arm-crunch-floatunsidf.patch
-gcc arm-crunch-neg.patch
-gcc arm-crunch-predicates.patch
-gcc arm-crunch-predicates2.patch
-gcc arm-crunch-scc.patch
-gcc arm-crunch-truncsi-disable-new.patch
-gcc boehm-gc-getnprocs.dpatch
-gcc boehm-gc-nocheck.dpatch
-gcc config-ml.dpatch
-gcc cpu-default-i486.dpatch
-gcc cross-fixes.dpatch
-gcc cross-include.dpatch
-gcc deb-protoize.dpatch
-gcc gcc-3.4.0-arm-softfloat.patch
-gcc gcc-arm-cp15-tpreg-for-TLS.patch
-gcc gcc-d-lang.dpatch
-gcc gcc-driver-extra-langs.dpatch
-gcc gcc-hash-style-both.dpatch
-gcc gcc-hash-style-gnu.dpatch
-gcc gcc-i386-emit-cld.dpatch
-gcc gcc-ice-apport.dpatch
-gcc gcc-multilib64dir.dpatch
-gcc gcc-pascal-lang.dpatch
-gcc gcc-ssp-default.dpatch
-gcc gcc-textdomain.dpatch
-gcc gcc-uclibc-3.4.0-120-softfloat.patch
-gcc gcc43-build-id.patch
-gcc gcc43-ppc64-ia64-GNU-stack.patch
-gcc gcc43-pr35440.patch
-gcc gcc43-pr35751.patch
-gcc gdc-fix-build-kbsd-gnu.dpatch
-gcc gfortran-csl.patch
-gcc gpc-4.1.dpatch
-gcc gpc-gcc-4.x.dpatch
-gcc gpc-names.dpatch
-gcc hurd-changes.dpatch
-gcc ignore-comp-fail.dpatch
-gcc kbsd-gnu-ada.dpatch
-gcc kbsd-gnu.dpatch
-gcc libffi-configure.dpatch
-gcc libjava-armel-ldflags.dpatch
-gcc libjava-debuginfo.dpatch
-gcc libjava-disable-static.dpatch
-gcc libjava-jar.dpatch
-gcc libjava-jnipath.dpatch
-gcc libjava-loading-constraints.dpatch
-gcc libjava-nobiarch-check.dpatch
-gcc libjava-realloc-leak.dpatch
-gcc libjava-rpath.dpatch
-gcc libjava-sjlj.dpatch
-gcc libjava-soname.dpatch
-gcc libjava-stacktrace.dpatch
-gcc libjava-subdir.dpatch
-gcc libjava-xulrunner1.9.dpatch
-gcc libobjc-gc-link.dpatch
-gcc libssp-gnu.dpatch
-gcc libstdc++-configure.patch
-gcc libstdc++-doclink.dpatch
-gcc libstdc++-symbols-hppa.dpatch
-gcc link-libs.dpatch
-gcc mips-triarch.dpatch
-gcc mudflap-nocheck.dpatch
-gcc multiarch-include.dpatch
-gcc multiarch-lib.dpatch
-gcc no-libfloat.patch
-gcc note-gnu-stack.dpatch
-gcc pic-without-sl.patch
-gcc powerpc-biarch.dpatch
-gcc ppc64-ada.dpatch
-gcc pr24170.dpatch
-gcc pr27880.dpatch
-gcc pr28102.dpatch
-gcc pr28322.dpatch
-gcc pr33148.dpatch
-gcc pr34571.dpatch
-gcc rename-info-files.dpatch
-gcc s390-biarch.dpatch
-gcc sparc-biarch.dpatch
-gcc svn-class-updates.dpatch
-gcc svn-doc-updates.dpatch
-gcc svn-gdc-updates.dpatch
-gcc svn-updates.dpatch
-gcc template.dpatch
-gdb libiberty-cross.patch
-gdb thumb-breakpoint.patch
-git git-gui-install-mode-arg-spaces.patch
-gkdial gkdial-arm.patch
-gkdial gkdial-gpe-su.patch
-gkdial header.patch
-glib-2.0 atomic_fix.patch
-glib-2.0 glib-gettextize-dir.patch
-glib-2.0 glib-mkenums-nowarn.patch
-glib-2.0 gobject.patch
-glib-2.0 gtk-doc.patch
-glib-2.0 visibility.patch
-glibc 50_glibc23-hppa-entry.patch
-glibc 50_glibc232-hppa-full-nptl-2003-10-22.patch
-glibc 50_glibc232-mips-buildfix.patch
-glibc 80_glibc232-futimes-buildfix.patch
-glibc 80_glibc232-iconvdata-fix.patch
-glibc 80_glibc232-locales-header.patch
-glibc 80_glibc232-wcsmbs-fix.patch
-glibc 81_glibc232-utimes-fix.patch
-glibc alpha-crti.patch
-glibc alpha-pwrite.patch
-glibc arm-check-pf.patch
-glibc eabi-patch-1
-glibc eabi-patch-2
-glibc eabi-patch-3
-glibc eabi-patch-4
-glibc glibc-2.3.2-200304020432.patch
-glibc glibc-2.3.2-initfini.patch
-glibc glibc-fp-byteorder.patch
-glibc glibc-includes-fixed-isystem.patch
-glibc glibc-linuxthreads-2.3.2-initfini.patch
-glibc glibc-make-check-perms.patch
-glibc glibc23-01-hppa-dl-machine.patch
-glibc glibc23-07-hppa-atomicity.patch
-glibc glibc23-hppa-compat.patch
-glibc glibc23-hppa-malloc8.patch
-glibc glibcbug.patch
-glibc lo_LA.UTF-8_not_supported.patch
-glibc mips-no-throw.patch
-glibc nptl-pthread-once.patch
-glibc nss_compat-shadow.patch
-glibc revert-old-libio.patch
-glibc sedscript.patch
-glibc syslog-backrev.patch
-glibc trampoline.patch
-gnome angstrom.patch
-gnome configure-gthread.patch
-gnome configure.patch
-gnome file_contains.patch
-gnome gdm-nodocs.patch
-gnome gdm-xklavier.patch
-gnome ggz-unbreak-m4.patch
-gnome makefile.patch
-gnome scrollkeeper.patch
-gnuradio gnuradio-libusb.patch
-gnuradio no-trellis-doc.patch
-gpe-appmgr no-render-h.patch
-gpe-bootsplash landscape_fix.patch
-gpe-edit desktop-categories.patch
-gpe-edit toolbar.patch
-gpe-login gpe-xcalibrate-rises-from-dead.patch
-gpe-login lock-on-supend.patch
-gpe-login size-autolock-properly.patch
-gpe-login use-xtscal.patch
-gpephone gtkmodule-location.patch
-gpsdrive gpsdrive-pda-fix.patch
-gputty conf.patch
-gsm 0001-Introduce-ports.patch
-gsm 0002-Flush-all-pending-commands-before-restarting-the-mod.patch
-gsm 0003-Correctly-segment-incoming-usock-data-into-packets.patch
-gsm 0004-Handle-read-and-write-return-values.patch
-gsm 0005-Add-ask-ds-option-forSMS.patch
-gsm 024_sms-text-in-bracket.patch
-gsm 025_sms-status-report.patch
-gsm 027_phonebook-find-and-read-range-support.patch
-gsm 028_shell-phonebook-find-and-read-range-support.patch
-gsm install-ts-headers.patch
-gsm lgsm_send_fix_return_value.patch
-gsoap rename_bogus_ldflags.patch
-gstreamer configure-largefile.patch
-gstreamer cross-compile.patch
-gstreamer filesrc-uri.patch
-gtk+ directfb-pixbuf-deprecated-fix.patch
-gtk+ disable-print.patch
-gtk+ gnome-bug-341177.patch
-gtk+ integer-pixops.patch
-gtk+ plana-pixops.patch
-gtk+ reduce-dependencies.patch
-gtk-webcore ua-iphone-0.1.10.patch
-gypsy fixups.patch
-hal dbus-fix-api.patch
-hostap Makefile.patch
-hostap add_event.patch
-hostap hostap-no-bsd.patch
-hostap hostap-utsname.patch
-hostap hostap_cardid.patch
-htmldoc paths_1.8.27.patch
-icedtea icedtea-ecj-disable-sanitychecks.patch
-ifupdown head-tail.patch
-initscripts devices.patch
-initscripts rootopts.patch
-ipkg libdir.patch
-ipkg patch-ipkg-localfilename
-ipkg uclibc.patch
-ipkg uninclude-replace.patch
-ipsec-tools racoon-search-missing.patch
-iscsi-target 2.6.31.patch
-iscsi-target 2.6.32.patch
-js host-cc.patch
-kexecboot 0001-ASoC-Add-support-for-OMAP3-EVM.patch
-kexecboot 0001-This-merges-Steve-Kipisz-USB-EHCI-support.-He-star.patch
-kexecboot 0001-backlight-tdo24m-ensure-chip-select-changes-between-.patch
-kexecboot 0002-ARM-OMAP-ehci-omap-use-new-location-for-usb.h-inc.patch
-kexecboot 0004-omap3-cm-t35-add-cm-t35-mux-configs.patch
-kexecboot 0008-scripts-Makefile.fwinst-fix-typo-missing-space-in.patch
-kexecboot 01-vfp-pm.patch
-kexecboot 80-kexec-atags.patch
-kexecboot cache-display-fix.patch
-kexecboot omap-2430-lcd.patch
-kexecboot poodle-bootparams.patch
-kexecboot poodle_buildfixes.patch
-kexecboot poodle_serial_vcc.patch
-kexecboot pxa-resume.patch
-kexecboot timer-suppression.patch
-kexecboot touchscreen.patch
-kexecboot usbttyfix.patch
-keylaunch makefile-fix.patch
-kismet no-chmod.patch
-klibc losetup.patch
-konqueror flashpart.patch
-konqueror kcookiejar-merge.patch.patch
-lemon snprintf.patch
-libmatchbox 16bppfixes-2.patch
-libmatchbox autofoo.patch
-libmatchbox fix-configure-for-1.9.patch
-libmatchbox svn-autofu-xsettings.patch
-libmatchbox svn-code-misc-xsettings.patch
-libmatchbox svn-explicit-types.patch
-libmimedir gslist-fix.patch
-libmimedir libmimedir-0.4.0-duration-wkst.patch
-libmimedir mimedir-update.patch
-libmimedir mimedir-write-sequence.patch
-libopie exports.patch
-libopie ipaq-2.6-sys-class-backlight-support.patch
-libopie ipaq-lcd-rotate-cleanup.patch
-libopie keyboardless-buttonmap.patch
-libopie wireless.patch
-libtool never-ever-do-rpath.patch
-libtool sedvar.patch
-libxslt destdir.patch
-linux 0001--tosa-Set-a-bus_id-for-the-tc6393xb-so-that-the-clk.patch
-linux 0001-ARM-Kirkwood-Sound-Sound-driver-added.patch
-linux 0001-ARM-OMAP-SmartReflex-driver.patch
-linux 0001-dm355-leopard-add-board-file-based-on-board-dm355-e.patch
-linux 0001-glamo-core-initialize-engine-states-as-disabled.patch
-linux 0001-omap3beagle-Partial-revert-HACK-try-to-poweron-stuff.patch
-linux 0001-omap3beagle-add-a-platform-device-to-hook-up-the-GP.patch
-linux 0001-xm_x2xx-config-fix-up-CMDLINE-map-in-NOR-mtd-dev.patch
-linux 0002-ARM-OMAP-SmartReflex-driver.patch
-linux 0002-ARM-OMAP-ehci-omap-use-new-location-for-usb.h-inc.patch
-linux 0002-at91sam9260ek_defconfig.patch
-linux 0003-ARM-OMAP-SmartReflex-driver.patch
-linux 0003-RS-485-mode-of-USART1.patch
-linux 0003-gesbc9302-defconfig.patch
-linux 0004-add-build-script.patch
-linux 0006-updated-defconfig.patch
-linux 0008-scripts-Makefile.fwinst-fix-typo-missing-space-in.patch
-linux 0009-cursor-fix.patch
-linux 0015-OMAPFB-remove-debug-print.patch
-linux 0015-ucb1x00-sound-hack-collie-specific.patch
-linux 0018-OMAP-SDP-Enable-DSS2-for-OMAP3-SDP-board.patch
-linux 0033-arch-hardware.h-is-no-longer-allowed-to-be-directly.patch
-linux 0035-Fix-power-and-PLL.patch
-linux 0046-attemp-to-fix-serial-console-corruption-during-cpuid.patch
-linux 0047-clock34xx-only-try-to-idle-IVA-subsys-when-CONFIG_PM.patch
-linux 0048-HACK-try-to-poweron-stuff-on-xM-rev-A.patch
-linux 01-vfp-pm.patch
-linux 04-zboot-2.4.24.patch
-linux 065-block2mtd_init.patch
-linux 07-zimage-flash-bin.patch
-linux 208-rtl8110sb_fix.patch
-linux 209-mini_fo.patch
-linux block-pio.patch
-linux bluetooth-patch-2.4.18-mh9.diff
-linux eabi-enums.patch
-linux earlydebug.patch
-linux echi.patch
-linux ep93xx-dma.patch
-linux ep93xx-eth.patch
-linux ep93xx-snd-ac97.patch
-linux geode-mfgpt-clock-event-device-support.patch
-linux geode-mfgpt-support-for-geode-class-machines.patch
-linux hx2750-make.patch
-linux ide_not_removable-r0.patch
-linux ixp4xx-kernel-svnpatch.inc
-linux linux-2.4-mmc-debugging.patch
-linux linux-2.6.28-at91-ronetix-12012009.patch
-linux msm_snd.patch
-linux msm_wifi.patch
-linux musb-fix-dbrownell.patch
-linux mvsdio.patch
-linux n30-batt.patch
-linux omap-2430-lcd.patch
-linux pitre-tls-2651.patch
-linux ppc4xx_pcie_payload.patch
-linux ramfs-mode-support.patch
-linux remove-todc.patch
-linux sched-cfs-v9-v2.6.20.11.patch
-linux screen-backlight.patch
-linux scrolling-area.patch
-linux sctp-fix.patch
-linux update-mach-types.patch
-linux usb-storage.patch
-linux vfpe.patch
-linux vfpe1.patch
-linux vfpe2.patch
-linux vfpe3.patch
-linux vfpe4.patch
-linux vfpe5.patch
-linux vfpe6.patch
-linux vfpe7.patch
-linux-uml 01-CONFIG_X86_CMPXCHG.patch-2
-linux-uml 02-config_cleanup.patch
-linux-uml 07-mconsole_dir_cleanup.patch
-linux-uml 10-flock.patch
-linux-uml 11-usr1_process_tkill.patch
-linux-uml 12-hostfs.patch
-linux-uml 13-hostfs_access.patch
-linux-uml compile-fix.patch
-linux-uml disable-aio-check.patch
-linux-uml fix-arg-max.patch
-linux-uml fix-includes.patch
-linux-uml unbreak-hostfs.patch
-ltrace no-usr-include.patch
-mamona sdk-libstdc++-includes.patch
-mamona zecke-no-host-includes.patch
-matchbox-keyboard matchbox-keyboard-applet.patch
-matchbox-keyboard matchbox-keyboard-hide-delay.patch
-matchbox-panel kernel2.6.patch
-matchbox-wm kbdconfig_keylaunch_simpad.patch
-matchbox2 glib-2.8-backport.patch
-mdadm install.patch
-modphp autotools.patch
-modphp endianness.patch
-modphp pear.patch
-monotone configure.ac.patch
-monotone cryptopp-endianness.patch
-monotone txt2c-cross.patch
-mozilla configure-wchart.patch
-mozilla host_ldflags_fix.patch
-mozilla linkage-problem.patch
-mozilla use-native-bpp.patch
-mpfr dont_use_mips_h_constraint.patch
-mplayer libmpdemux-ogg-include-svn.patch
-mt-daapd itunes-5-fix.patch
-musicbrainz libmusicbrainz-2.1.5-gcc43.patch
-musicpd fix-mod-support.patch
-musicpd save-volume-state.patch
-mysql gen_lex_hash.patch
-mysql mysql-5.1.40-have_atomic_pthread_t.patch
-navit navit.xml-so.patch
-neon no-func-checks.patch
-net-tools net-tools-1.60-bitkeeper.patch
-netbase busybox.patch
-networkmanager dbus-1.0-fix.patch
-networkmanager dbus-api-fix.patch
-omniorb arm_double.patch
-omniorb dynskel.patch
-openchrome configure.patch
-openmoko2 clockpatch.patch
-openmoko2 openmoko-dialer.patch
-openssh scp-nossl.patch
-openssh sftp-server-nolibcrypto.patch
-opensync syncml-client-plugin-h.patch
-opie-freetype modern-freetype-includes.patch
-opie-irdaapplet learning-cpp.patch
-opie-quicklauncher pro.patch
-oprofile no_arm_mapping_syms.patch
-oprofile opcontrol-busybox-compat.patch
-oprofile opcontrol_bashisms.patch
-oprofile xml_callgraph_details.patch
-orinoco add-spectrum-support.patch
-orinoco remove-slot-name.patch
-orinoco shmoo-monitor-0.13e.patch
-orinoco use-cs-error.patch
-packagekit modify_summary_and_adding_reposi_info.patch
-packagekit remove_search_memory_leak.patch
-pango gtk-doc.patch
-parted cross-gross-hack.patch
-patch
-patch global-reject-file.diff
-patch patch-2.5.9
-patch patch.inc
-patch patch_2.5.9.bb
-patch unified-reject-files.diff
-patchelf
-patchelf patchelf_0.5.bb
-patcher
-patcher files
-patcher patcher-native_20040913.bb
-patcher patcher_20040913.bb
-patchutils
-patchutils patchutils_0.2.31.bb
-pdm setuid.patch
-perl liblog-dispatch-perl-native_2.13.bb
-perl liblog-dispatch-perl_2.13.bb
-perl libperl-5.8.3-create-libperl-soname.patch
-perl native-ssp.patch
-pidgin status-icon-theme-crash.patch
-procps pagesz-not-constant.patch
-pthsem ldflags.patch
-python 04_qreal_api_fixes.dpatch
-python fix-directfb-detection.patch
-python fix-future-in-setup.patch
-qpe-gaim fix-compilation.patch
-qpe-gaim libopie2.patch
-qt4 0006-Disable-demos-browser.patch
-qt4 0838-Fixed-the-GL2-engine-stroker-to-handle-Qt-SvgMiterJo.patch
-qt4 1196-Fix-build-with-neon-instructions-enabled-but-not-set.patch
-qte c700-hardware.patch
-qte devfs.patch
-qte ipaq-keyboard.patch
-qte mnci-touchscreen.patch
-qte mnci.patch
-qte simpad-defaultkbd.patch
-qte simpad.patch
-rp-pppoe pppoe-no-timeout.patch
-sane sane-plustek.patch
-schroedinger Makefile.patch
-sdcc gcc4.patch
-sdlperl Makefile.patch
-socketcan install-can_netlink.h.patch
-speech-dispatcher
-speech-dispatcher files
-speech-dispatcher speech-dispatcher_0.6.6.bb
-sqlite cross-compile.patch
-sqlite ldflags.patch
-squashfs-tools lzma-support.patch
-squashfs-tools portability.patch
-strace arm-compilation.patch
-strace arm-syscall.patch
-strace strace-4.5.14-add-syscalls-up-to-sysvipc.patch
-swt make_linux-fix.patch
-sylpheed Makefile-am.patch
-sylpheed streamline-ui.patch
-sysfsutils libsysfs-write-attribute.patch
-tar configure.patch
-tar m4.patch
-tcpdump fix-paths.patch
-ti changed_insmod_to_modprobe_in_loadmodules.patch
-ti dmai-built-with-angstrom.patch
-ti dmai-do-not-panic-on-mixer-failure.patch
-ti dmai-support-32bit-align.patch
-ti dmai-update-cpu-name.patch
-ti dmai-update-fb-display.patch
-ti dmai-update-v4l2-display.patch
-ti mp3dec_cs1omap3530.patch
-ti touchbook-support.patch
-tinymail tmut-build-oe.patch
-tor openssl.patch
-transmission webupload.patch
-tslib multievent.patch
-twinkle configure.in.patch
-u-boot 0040-BeagleBoard-Check-for-ramdisk-on-boot.patch
-u-boot 006-081205-EEPROM_INTERSIL.patch
-u-boot bbt-scan-second.patch
-u-boot boot-menu-gfx-fix-openmoko-bug-1140.patch
-u-boot dfu-second-patch.patch
-u-boot early-powerdown.patch
-u-boot fix-data-abort-from-sd-ombug799.patch
-u-boot mmcinit-power-up.patch
-u-boot mpc8313e-rdb-watchdog.patch
-u-boot nand-otp.patch
-u-boot omap-usb-dev-dfu.patch
-u-boot rootfs.patch
-u-boot sffsdr-u-boot.patch
-u-boot u-boot-20061030-ext2load_hex.patch
-u-boot u-boot-2009.01-exp-001-config.patch
-u-boot u-boot-2009.01-include_asm-avr32_io.h.patch.avr32
-u-boot uboot-20070311-tools_makefile_ln_sf.patch
-u-boot uboot-eabi-fix-HACK.patch
-u-boot uboot-mokoversion.patch
-uclibc armeb-kernel-stat.h.patch
-uclibc kernel-key-t-ipc.h.patch
-udev fix-alignment.patch
-udev tmpfs.patch
-unionfs gcc2-hack.patch
-unionfs make.patch
-v4l2apps flags.patch
-visiscript compilefix.patch
-vpnc attribute.patch
-wireless-tools fixheaders.patch
-wlan-ng more-compat.patch
-wlan-ng pcmcia-driver.patch
-wlan-ng usb-owner.patch
-wpa-supplicant use-channel.patch
-wt cheader.patch
-xfce-base xfce4-settings-4.6.1-workspaces.c.patch
-xffm link.patch
-xorg-app autofoo.patch
-xorg-driver dontfloodevents006.patch
-xorg-driver no_neon.patch
-xorg-driver no_neon_flags.patch
-xorg-driver renaming_variables.patch
-xorg-font imake-staging.patch
-xorg-lib drm.patch
-xorg-lib nearest-neighbour.patch
-xorg-lib pixman-28986.patch
-xorg-lib prefetch.patch
-xorg-lib remove-broken.patch
-xorg-lib true.patch
-xorg-lib via.patch
-xorg-xserver dolt-fix.patch
-xorg-xserver epson.patch
-xorg-xserver fontfile.patch
-xorg-xserver freetype.patch
-xorg-xserver imake-installed.patch
-xorg-xserver no-screen-blanking.patch
-xorg-xserver xpconfig-parentdir.patch
-xserver-common at-fix-slcxxxx.patch
-xserver-common softkeys-slcxxxx-xmodmap.patch
-xserver-common ti-osk.patch
-xserver-common unbreak-simpad.patch
-xtscal xtscal-cxk.patch
-yaffs2 yaffs2-unioob.patch
-zd1211 makefile-unslung.patch
+I checked `gnome-doc-utils.pc` in these directories and both point to
+`/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl`, which is incorrect
+(`datadir=3D/usr/share`)
+
+In the staging(?) path
+`/oe/build/angstrom-dev/sysroots/i686-linux/usr/lib/pkgconfig/`
+everything is set up correctly.
+
+        datadir=3D/oe/build/angstrom-dev/sysroots/i686-linux/usr/share
+
+Also running=20
+
+        /oe/build/angstrom-dev/sysroots/i686-linux/usr/bin/pkg-config --var=
+iable db2omf gnome-doc-utils
+
+in a clean environment without exporting `PKG_CONFIG_PATH` works.
+
+Is this a problem with new style staging? Could you please provide a
+hint on how to fix this.
 
 
+Thanks,
+
+Paul
+
+--=-1gbzALHNw4QDBFMPXOEe
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxoNc0ACgkQPX1aK2wOHVjl0QCfUz6QfYAucxpUiMe6BwDuvg5D
+p6UAoIQg1V55XVhsyhkrb9+3w3Ixr9uY
+=TsSW
+-----END PGP SIGNATURE-----
+
+--=-1gbzALHNw4QDBFMPXOEe--
