@@ -1,29 +1,39 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1Ol56o-0000l3-6O
+	(envelope-from <stefan@datenfreihafen.org>) id 1Ol5B0-0006TU-1n
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:12:35 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id B15DB275D865; Mon, 16 Aug 2010 21:12:18 +0200 (CEST)
-Received: from localhost (p5489A50E.dip.t-dialin.net [84.137.165.14])
-	by gravedo.de (Postfix) with ESMTPSA id 8AFB7275D863;
-	Mon, 16 Aug 2010 21:12:17 +0200 (CEST)
-From: Simon Busch <morphis@gravedo.de>
+	Mon, 16 Aug 2010 21:16:57 +0200
+Received: from p5b035811.dip.t-dialin.net ([91.3.88.17] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Ol5Ah-0003re-M8 by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 21:16:39 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1Ol5Ag-0001E4-3E
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 21:16:34 +0200
+Date: Mon, 16 Aug 2010 21:16:33 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 21:12:13 +0200
-Message-Id: <1281985933-6172-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <20100813215306.GC19855@excalibur.local>
-References: <20100813215306.GC19855@excalibur.local>
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+Message-ID: <20100816191633.GH19855@excalibur.local>
+References: <20100813215427.GD19855@excalibur.local>
+	<1281985585-5715-1-git-send-email-morphis@gravedo.de>
+MIME-Version: 1.0
+In-Reply-To: <1281985585-5715-1-git-send-email-morphis@gravedo.de>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] tslib: add config files for palmpre machine
+Subject: Re: [PATCH] linux-palmpre: add git version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,77 +47,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:12:35 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 19:16:59 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes/tslib/tslib.inc              |    2 +-
- recipes/tslib/tslib/palmpre/ts.conf  |   27 +++++++++++++++++++++++++++
- recipes/tslib/tslib/palmpre/tslib.sh |    6 ++++++
- 3 files changed, 34 insertions(+), 1 deletions(-)
- create mode 100644 recipes/tslib/tslib/palmpre/ts.conf
- create mode 100644 recipes/tslib/tslib/palmpre/tslib.sh
+Hello.
 
-diff --git a/recipes/tslib/tslib.inc b/recipes/tslib/tslib.inc
-index b23198c..b6ba48a 100644
---- a/recipes/tslib/tslib.inc
-+++ b/recipes/tslib/tslib.inc
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://tslib.berlios.de/"
- AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
- SECTION = "base"
- LICENSE = "LGPLv2"
--INC_PR = "r25"
-+INC_PR = "r26"
- 
- SRC_URI += "\
-   file://ts.conf \
-diff --git a/recipes/tslib/tslib/palmpre/ts.conf b/recipes/tslib/tslib/palmpre/ts.conf
-new file mode 100644
-index 0000000..8857e8d
---- /dev/null
-+++ b/recipes/tslib/tslib/palmpre/ts.conf
-@@ -0,0 +1,27 @@
-+# Uncomment if you wish to use the linux input layer event interface
-+# module_raw input
-+
-+module cry8mrln_palmpre
-+
-+# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
-+# module_raw collie
-+
-+# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
-+# module_raw corgi
-+
-+# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
-+# module_raw ucb1x00
-+
-+# Uncomment if you're using an HP iPaq h3600 or similar
-+# module_raw h3600
-+
-+# Uncomment if you're using a Hitachi Webpad
-+# module_raw mk712
-+
-+# Uncomment if you're using an IBM Arctic II
-+# module_raw arctic2
-+
-+# module pthres pmin=1
-+# module variance delta=30
-+# module dejitter delta=100
-+# module linear
-diff --git a/recipes/tslib/tslib/palmpre/tslib.sh b/recipes/tslib/tslib/palmpre/tslib.sh
-new file mode 100644
-index 0000000..5c1cc25
---- /dev/null
-+++ b/recipes/tslib/tslib/palmpre/tslib.sh
-@@ -0,0 +1,6 @@
-+#!/bin/sh
-+
-+TSLIB_TSDEVICE=/dev/touchscreen
-+
-+export TSLIB_TSDEVICE
-+
--- 
-1.7.0.4
+On Mon, 2010-08-16 at 21:06, Simon Busch wrote:
+> The sources from Palm for the Palm Pre has beed modified with little improvements and are
+> rebased against the latest version from Palm found at http://opensource.palm.com from time
+> to time. The modified kernel tree is maintained by the FSO team.
+> 
+> Signed-off-by: Simon Busch <morphis@gravedo.de>
 
+Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+
+regards
+Stefan Schmidt
 
 
