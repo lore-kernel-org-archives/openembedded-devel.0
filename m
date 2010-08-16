@@ -1,33 +1,36 @@
 Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5vB-0002gn-70
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol618-0001KX-SD
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 22:04:37 +0200
-Received: by gwb15 with SMTP id 15so2144193gwb.6
+	Mon, 16 Aug 2010 22:10:47 +0200
+Received: by gwb15 with SMTP id 15so2147312gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:04:19 -0700 (PDT)
+	Mon, 16 Aug 2010 13:10:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=KrCdTLb3zOy/LAVTrYSsFjLejcE7QIsDmcWYsgFtFT8=;
-	b=cK0hmezTRB51ZxTVqG1VzWkiQ3EwiG6kyiaelkdVQjLM5lohGxXfQDz4VUKCJoDtY7
-	pVU9so9vJ9c/fQSIfTg0OT591BhpRmoySHN6R/nepEIen/VZ6FPEHG/7ZyLdkn6Zi5/r
-	Ftae3PX2f3D9a2UrnzqDMbwxfm7xoJFmoUg8A=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=y0DkfaOWROvKUtuwx0chl5AZM87C+tzINAvRrQH3US4=;
+	b=fp399TpRCyYHbWK70Z4vKvWGXD673nS18yTYnMhNdVMEggtJj9IuL/QF6QxIHqhaDA
+	7EbCguepALsw4AS0idwyAVETZt+hnZvALkf+Zn/j+IjYmhtLgkMkgrqZpA368L6fFSQs
+	vR/ZpSIsuIJiuPIzwrcxPjAKBEnF/TUEsSxOg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=D291oUZVUX6nXw06LEC4tx+dEIw4ZRDve5uLXlAYZVTEShAUL2jslhkfFw7kRAIVIf
-	AGT+RAk7sYLhoSoPYHUALDg7BujPUtej0IoO1sCyk0cJG+PkF017F5gLtub7bybgIpWS
-	hR3YWjHR7nKJnVpN60OgRg6zNKxqnuMTXPQxs=
+	:content-type:content-transfer-encoding;
+	b=IWxVwRCB9VWqkS18b2vb6u3y+QQlfq4+xiguxBF005aeIAvmlBWt775nuSMhPbGrvT
+	6sABLNyF9TybYNgP9qrdVcRcUjknXqSgpiefdPvscmq9C/oEJYWVWlivgGt45AqZ0YXv
+	IOHbOyzqLpGofsGK9bTwbFMpce7FvmtVocwiQ=
 MIME-Version: 1.0
-Received: by 10.101.176.2 with SMTP id d2mr6468603anp.101.1281989059486; Mon,
-	16 Aug 2010 13:04:19 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 13:04:19 -0700 (PDT)
-In-Reply-To: <AANLkTik3NJf+OF=Eobbmq1iKPdwzj87zmeWF6h6e9GhD@mail.gmail.com>
-References: <1281963140-29565-1-git-send-email-fahad_usman@mentor.com>
-	<AANLkTik3NJf+OF=Eobbmq1iKPdwzj87zmeWF6h6e9GhD@mail.gmail.com>
-Date: Mon, 16 Aug 2010 22:04:19 +0200
-Message-ID: <AANLkTi=zaSuDL5LCGAxcmV3tLK7recDUzwW96mf=Ly-t@mail.gmail.com>
+Received: by 10.231.36.134 with SMTP id t6mr6290614ibd.128.1281989428939; Mon,
+	16 Aug 2010 13:10:28 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 13:10:28 -0700 (PDT)
+In-Reply-To: <AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
+References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
+	<AANLkTi=gLCkfgLPgJT9oVVxxsfP10uf7w7r02Z5mBkOW@mail.gmail.com>
+	<201008162325.59305.roman@khimov.ru>
+	<AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
+Date: Mon, 16 Aug 2010 22:10:28 +0200
+Message-ID: <AANLkTinc3hESrnWRPeRs2EnGoqAy=fXB9PZxN2sOe_dg@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 74.125.83.47
@@ -38,7 +41,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] dcopidl-native_3.5.8.bb: Removed legacy style staging
+Subject: Re: [PATCH] openssl: update 1.0.0 to 1.0.0a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,16 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 20:04:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Aug 2010 20:10:47 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-Tested and pushed the patch.
-Thanks for your contribution
+2010/8/16 Khem Raj <raj.khem@gmail.com>:
+> On Mon, Aug 16, 2010 at 12:25 PM, Roman I Khimov <roman@khimov.ru> wrote:
+>> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB=
+ 16 =C1=D7=C7=D5=D3=D4=C1 2010 22:59:53 =C1=D7=D4=CF=D2 Frans Meulenbroeks
+>> =CE=C1=D0=C9=D3=C1=CC:
+>>> One small question: Do we want to keep this recipe at
+>>> DEFAULT_PREFERENCE =3D "-1" ??
+>>
+>> Well, we're using 1.0.0 since the day it's been released, and it's a per=
+fect
+>> fit for us, but I know that it _might_ break some things, just google fo=
+r
+>> openssl 1.0.0 breakage/compatibility patches/etc, that's why I've pushed=
+ it
+>> that way so that distro maintainers could test whether it works for them=
+ with
+>> their particular package sets and act accordingly.
+>>
+>> I certainly have nothing against removing that line if everyone is OK wi=
+th
+>> that.
+>>
+>
+> IMO the newest version in a recipe should always be default preference
+> this way we can
+> stabilize recipe upgrades quicker. This also means a wider testing
+> before pushing a new recipe
+> DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
+>
+For the record. We have 451 recipes with a DEFAULT_PREFERENCE clause.
+425 of these seem to have a negative value in it.
+In total there are 712 lines with DEFAULT_PREFERENCE
+(especailly kernel recipes have preferences for specific machines and
+have multiple DEFAULT_PREFERENCE lines)
 
-Next time if you create a new version of a patch, can you please add
-v2 to the subject line, and mark the old version as obsolete in
-patchwork. (http://patchwork.openembedded.org/project/openembedded/list/)
-
-Best regards, Frans
+Frans
 
 
