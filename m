@@ -1,49 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Okyap-0004t0-Ln
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1Okye1-00054f-6I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 14:15:08 +0200
-Received: by iwn38 with SMTP id 38so1585943iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 05:14:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=MozLILIr7hUd8Bdizh2cZPaAkXjtjjyLXaILSH2VR4E=;
-	b=FcLzQzfUmF3SKON4IAsqD/qRONcU+HM7ala8u0KIKxxkIdyZsF2ZMF3kcgXN8bA/oP
-	bfhSMtwxVV2bJKMGQyeb9NyS5x72WfqAk5eDvVX9Crn2I4la1NW11w66rqKjiadWVkhF
-	muLL5w8TX14ucjXwdTivuL0z2xLug3m4k98PI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pwnjm48BXwydty/D3Ai98t9w96NPodHhOwtZ85OTQcu/9zL5dhQlGUbKk5jqnlML6D
-	s0IlyzoFlj29OaqaLjl5WlXJDbIbxaUAev3qkziwuEzGBhP5sXXRiqNu7QAaDsHE13De
-	ITiO9fw4tdDHECYOFxTT6RKYbQaZ//FbUFjhE=
-MIME-Version: 1.0
-Received: by 10.231.12.75 with SMTP id w11mr5928279ibw.134.1281960891515; Mon,
-	16 Aug 2010 05:14:51 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 05:14:51 -0700 (PDT)
-In-Reply-To: <i4b7r1$sf8$1@dough.gmane.org>
-References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
-	<i4auje$u5g$1@dough.gmane.org>
-	<AANLkTimpAxxt7GR=1VV9ZrAWubMp63sX771+PfhLjWTu@mail.gmail.com>
-	<AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>
-	<i4b3dl$vbk$1@dough.gmane.org>
-	<AANLkTim8Et4FHon4o2dsTOyFe-8huxTmmFEYA5PNZirw@mail.gmail.com>
-	<i4b7r1$sf8$1@dough.gmane.org>
-Date: Mon, 16 Aug 2010 14:14:51 +0200
-Message-ID: <AANLkTin_ABBeGBY_rQpfmvnjf+afe+5gJqb85EzYHq+L@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 16 Aug 2010 14:18:27 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Okydi-0003ge-AQ from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 05:18:06 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 16 Aug 2010 14:18:04 +0200
+From: Noor Ahsan <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 16 Aug 2010 18:16:25 +0600
+Message-Id: <1281960985-8977-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 16 Aug 2010 12:18:04.0928 (UTC)
+	FILETIME=[14130000:01CB3D3D]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cleaning recipes
+Subject: [PATCH] sdcc-native: Added bison-native and flex-native in DEPENDS to remove configuration erros
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,22 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 12:15:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Aug 2010 12:18:27 -0000
 
-2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
-would be nice if oe would detect those cases and force a rebuild.
->
-> That doesn't help if you're using packagemanagement. Now you have
-> "foo_1.0-r0.ipk" in the feeds that statically linked to openssl 0.9.8
-> and "foo_1.0-r0.ipk" locally that statically links to 1.0.0. So users
-> still don't get the fixes that went into openssl.
+* configure script was unable to find bison and flex utilities. It was giving error "configure: error: Cannot find required program bison." and "configure: error: Cannot find required program flex." Added bison-native and flex-native in DEPENDS to remove this error.
+* Bump PR to r1.
+* Ran oe_stylize.py script and used it output to create a new recipe and PATCH.
 
-Agree.
-I vaguely recall an idea (I believe from RP) to have a hash or so
-derived from the whole dependency tree below it.
-This discussion probably ran somewhere last winter.
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ recipes/sdcc/sdcc-native_2.8.0.bb |   12 +++++-------
+ 1 files changed, 5 insertions(+), 7 deletions(-)
 
-Frans
+diff --git a/recipes/sdcc/sdcc-native_2.8.0.bb b/recipes/sdcc/sdcc-native_2.8.0.bb
+index dbecffa..ace693f 100644
+--- a/recipes/sdcc/sdcc-native_2.8.0.bb
++++ b/recipes/sdcc/sdcc-native_2.8.0.bb
+@@ -1,16 +1,14 @@
+ require sdcc_${PV}.bb
+-inherit native
+-DEPENDS = ""
++DEPENDS = "bison-native flex-native"
++PR = "r1"
+ 
+ # don't need native-tools patch here
+ SRC_URI = "${SOURCEFORGE_MIRROR}/sdcc/sdcc-src-${PV}.tar.bz2 \
+           "
+ 
++inherit native
++
+ do_stage() {
+-	oe_runmake install
++        oe_runmake install
+ }
+ 
+-#do_stage() {
+-#	find bin -type f -perm -0755 -exec install -m 0755 {} ${STAGING_BINDIR} \;
+-#}
+-
+-- 
+1.6.3.3
+
 
 
