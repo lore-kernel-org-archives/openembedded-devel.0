@@ -1,35 +1,35 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ol5gS-0004ts-M2
+	(envelope-from <martin.jansa@gmail.com>) id 1Ol5gv-0004ts-8p
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:49:32 +0200
-Received: by fxm6 with SMTP id 6so3250540fxm.6
+	Mon, 16 Aug 2010 21:50:01 +0200
+Received: by mail-fx0-f47.google.com with SMTP id 6so3250540fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:49:07 -0700 (PDT)
+	Mon, 16 Aug 2010 12:49:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references:mime-version
 	:content-type:content-transfer-encoding;
-	bh=fJxHJWRXEbkHhPbfI1wpAdciI7br90MCCBGqZIWU/Ck=;
-	b=oZ2Pwz8YKM67nHTOZExwKB4yNkqlnPXCy8d/mANlizU4NzDWGcyq4rvG75yh/DtQQt
-	+1EroJJJnRPJUp5BAVOjB4zcnZwiTKao5m4jlxOd1+54YPG+mhwAMYuftHVCV6NCjJSC
-	72cmoRxAgQR/5xllPKkMkv6ulZRMybcBbohh0=
+	bh=UiH+XA2zpw/3Ua69fjbZj/Hpod42siN0OBnLnlnauaU=;
+	b=itjR2bIH7lds/Ep0oJpYLg3EWESo/OGrgBKD1brpTglapfPl4aIXaK580jNiQlbMQy
+	Ue/rT1lcmgY/1sLV1CeLcFBvoQzm9eO8FfKaQIvrwpnZDTmw9Qen69YLV6RlYPrCasME
+	eb5mLfPH/sSGzq6TTVs79R/T1KyNHsVHZZmz4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references
 	:mime-version:content-type:content-transfer-encoding;
-	b=A4KGQ0wnBs6ca+ruNnI8xc0mOFkdqbf3ZLVNXBpmicWq2pObCwL8VEs3/hHlTsRZrZ
-	DkmfT1/Vxn8DUrV0PuGulRAkL6iU9lwraz9bni02tqupF2P8pBnwAEHfaP8H9pTi8QRu
-	CSCukmx/0q5Ds0TjIwtm77jK5UDKR/cU73D0k=
-Received: by 10.223.105.133 with SMTP id t5mr5503721fao.97.1281988147538;
-	Mon, 16 Aug 2010 12:49:07 -0700 (PDT)
+	b=ZtjNck2lIaTP5kwRA53MfIKQbZ9fKKnN4d1cAt16sNcqztNElffFUda+aCiHpx1am/
+	BDkMATJBEm0/Opb2TKiyKTDX2iJ8C7geW0UIDaT5xfdrO9SNKuYJ2S8XjAtXbwi7HLy5
+	4ruULh9tQcrk/eiPHQbsjpb5tJgboABpcGkcQ=
+Received: by 10.223.116.6 with SMTP id k6mr5594411faq.49.1281988178299;
+	Mon, 16 Aug 2010 12:49:38 -0700 (PDT)
 Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t6sm2004917faa.27.2010.08.16.12.49.01
+	by mx.google.com with ESMTPS id u8sm2625235fah.36.2010.08.16.12.49.35
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 16 Aug 2010 12:49:03 -0700 (PDT)
+	Mon, 16 Aug 2010 12:49:37 -0700 (PDT)
 From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 21:49:13 +0200
-Message-Id: <1281988153-21361-1-git-send-email-Martin.Jansa@gmail.com>
+Date: Mon, 16 Aug 2010 21:49:47 +0200
+Message-Id: <1281988187-21395-1-git-send-email-Martin.Jansa@gmail.com>
 X-Mailer: git-send-email 1.7.2
 In-Reply-To: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
 References: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
@@ -56,7 +56,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:49:32 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 19:50:01 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
@@ -1860,7 +1860,7 @@ index 0000000..f309add
 ++# 
 ++#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 ++# 
-++#  Copyright © 2003 Keith Packard
+++#  Copyright Â© 2003 Keith Packard
 ++# 
 ++#  Permission to use, copy, modify, distribute, and sell this software and its
 ++#  documentation for any purpose is hereby granted without fee, provided that
@@ -1924,7 +1924,7 @@ index 0000000..f309add
 ++dnl
 ++dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 ++dnl
-++dnl Copyright © 2003 Keith Packard
+++dnl Copyright Â© 2003 Keith Packard
 ++dnl
 ++dnl Permission to use, copy, modify, distribute, and sell this software and its
 ++dnl documentation for any purpose is hereby granted without fee, provided that
@@ -2030,7 +2030,7 @@ index 0000000..2526d95
 ++# 
 ++#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 ++# 
-++#  Copyright © 2003 Keith Packard
+++#  Copyright Â© 2003 Keith Packard
 ++# 
 ++#  Permission to use, copy, modify, distribute, and sell this software and its
 ++#  documentation for any purpose is hereby granted without fee, provided that
@@ -2087,7 +2087,7 @@ index 0000000..2526d95
 ++dnl
 ++dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 ++dnl
-++dnl Copyright © 2003 Keith Packard
+++dnl Copyright Â© 2003 Keith Packard
 ++dnl
 ++dnl Permission to use, copy, modify, distribute, and sell this software and its
 ++dnl documentation for any purpose is hereby granted without fee, provided that
@@ -2275,7 +2275,7 @@ index 0000000..b30a46b
 ++# 
 ++#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 ++# 
-++#  Copyright © 2003 Keith Packard
+++#  Copyright Â© 2003 Keith Packard
 ++# 
 ++#  Permission to use, copy, modify, distribute, and sell this software and its
 ++#  documentation for any purpose is hereby granted without fee, provided that
@@ -2339,7 +2339,7 @@ index 0000000..b30a46b
 ++dnl
 ++dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 ++dnl
-++dnl Copyright © 2003 Keith Packard
+++dnl Copyright Â© 2003 Keith Packard
 ++dnl
 ++dnl Permission to use, copy, modify, distribute, and sell this software and its
 ++dnl documentation for any purpose is hereby granted without fee, provided that
@@ -2460,7 +2460,7 @@ index 0000000..039d131
 ++# 
 ++#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 ++# 
-++#  Copyright © 2003 Keith Packard
+++#  Copyright Â© 2003 Keith Packard
 ++# 
 ++#  Permission to use, copy, modify, distribute, and sell this software and its
 ++#  documentation for any purpose is hereby granted without fee, provided that
@@ -2524,7 +2524,7 @@ index 0000000..039d131
 ++dnl
 ++dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 ++dnl
-++dnl Copyright © 2003 Keith Packard
+++dnl Copyright Â© 2003 Keith Packard
 ++dnl
 ++dnl Permission to use, copy, modify, distribute, and sell this software and its
 ++dnl documentation for any purpose is hereby granted without fee, provided that
@@ -4099,7 +4099,7 @@ index f309add..0000000
 -+# 
 -+#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 -+# 
--+#  Copyright © 2003 Keith Packard
+-+#  Copyright Â© 2003 Keith Packard
 -+# 
 -+#  Permission to use, copy, modify, distribute, and sell this software and its
 -+#  documentation for any purpose is hereby granted without fee, provided that
@@ -4163,7 +4163,7 @@ index f309add..0000000
 -+dnl
 -+dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 -+dnl
--+dnl Copyright © 2003 Keith Packard
+-+dnl Copyright Â© 2003 Keith Packard
 -+dnl
 -+dnl Permission to use, copy, modify, distribute, and sell this software and its
 -+dnl documentation for any purpose is hereby granted without fee, provided that
@@ -4269,7 +4269,7 @@ index 2526d95..0000000
 -+# 
 -+#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 -+# 
--+#  Copyright © 2003 Keith Packard
+-+#  Copyright Â© 2003 Keith Packard
 -+# 
 -+#  Permission to use, copy, modify, distribute, and sell this software and its
 -+#  documentation for any purpose is hereby granted without fee, provided that
@@ -4326,7 +4326,7 @@ index 2526d95..0000000
 -+dnl
 -+dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 -+dnl
--+dnl Copyright © 2003 Keith Packard
+-+dnl Copyright Â© 2003 Keith Packard
 -+dnl
 -+dnl Permission to use, copy, modify, distribute, and sell this software and its
 -+dnl documentation for any purpose is hereby granted without fee, provided that
@@ -4514,7 +4514,7 @@ index b30a46b..0000000
 -+# 
 -+#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 -+# 
--+#  Copyright © 2003 Keith Packard
+-+#  Copyright Â© 2003 Keith Packard
 -+# 
 -+#  Permission to use, copy, modify, distribute, and sell this software and its
 -+#  documentation for any purpose is hereby granted without fee, provided that
@@ -4578,7 +4578,7 @@ index b30a46b..0000000
 -+dnl
 -+dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 -+dnl
--+dnl Copyright © 2003 Keith Packard
+-+dnl Copyright Â© 2003 Keith Packard
 -+dnl
 -+dnl Permission to use, copy, modify, distribute, and sell this software and its
 -+dnl documentation for any purpose is hereby granted without fee, provided that
@@ -4699,7 +4699,7 @@ index 039d131..0000000
 -+# 
 -+#  $Id: Makefile.am,v 1.2 2004/06/25 19:38:50 markh Exp $
 -+# 
--+#  Copyright © 2003 Keith Packard
+-+#  Copyright Â© 2003 Keith Packard
 -+# 
 -+#  Permission to use, copy, modify, distribute, and sell this software and its
 -+#  documentation for any purpose is hereby granted without fee, provided that
@@ -4763,7 +4763,7 @@ index 039d131..0000000
 -+dnl
 -+dnl $Id: configure.ac,v 1.1 2003/10/09 06:16:59 keithp Exp $
 -+dnl
--+dnl Copyright © 2003 Keith Packard
+-+dnl Copyright Â© 2003 Keith Packard
 -+dnl
 -+dnl Permission to use, copy, modify, distribute, and sell this software and its
 -+dnl documentation for any purpose is hereby granted without fee, provided that
