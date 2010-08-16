@@ -1,40 +1,44 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5rk-0008WU-H9
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5vB-0002gn-70
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 22:01:05 +0200
-Received: by yws5 with SMTP id 5so1041838yws.6
+	Mon, 16 Aug 2010 22:04:37 +0200
+Received: by gwb15 with SMTP id 15so2144193gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:00:42 -0700 (PDT)
+	Mon, 16 Aug 2010 13:04:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=Hey76jOncYC0dPq/C4dUdL076mD2xNFLGiFbkFxN0+g=;
-	b=QDwgzNUkD/EUxAxlTY3nHT+QyBMkl0aKizL9XnrmPynn7fxP9iMl5wosoHNBmcQ5kw
-	gtVsogBKGoBDH2uIy69acCNz5T9ur8/77WpD10nxFvWhjqexBme37TU8j+dMJtR/Zb2y
-	wHFbGGYb/guUYNg+JnvkmPuIece2lFS60sQW8=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=KrCdTLb3zOy/LAVTrYSsFjLejcE7QIsDmcWYsgFtFT8=;
+	b=cK0hmezTRB51ZxTVqG1VzWkiQ3EwiG6kyiaelkdVQjLM5lohGxXfQDz4VUKCJoDtY7
+	pVU9so9vJ9c/fQSIfTg0OT591BhpRmoySHN6R/nepEIen/VZ6FPEHG/7ZyLdkn6Zi5/r
+	Ftae3PX2f3D9a2UrnzqDMbwxfm7xoJFmoUg8A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Doh0pctbedMQH1La65wpWcEGuKiEuhCd1aJxzaQhpvXQNvJKl3SMMBHA4t7ahMmEYS
-	+u+8kkuyf9gANC3S3Ea6sM6rIlF485Z31WlAEQB25Lo7XN+8vF/irYmJ/v5sD2XqaEAW
-	dABeEI5rF4OC3Tv0J1Qlk7HIR2g6M21FXKBfA=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=D291oUZVUX6nXw06LEC4tx+dEIw4ZRDve5uLXlAYZVTEShAUL2jslhkfFw7kRAIVIf
+	AGT+RAk7sYLhoSoPYHUALDg7BujPUtej0IoO1sCyk0cJG+PkF017F5gLtub7bybgIpWS
+	hR3YWjHR7nKJnVpN60OgRg6zNKxqnuMTXPQxs=
 MIME-Version: 1.0
-Received: by 10.151.138.13 with SMTP id q13mr6078392ybn.189.1281988842228;
-	Mon, 16 Aug 2010 13:00:42 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 13:00:42 -0700 (PDT)
-Date: Mon, 16 Aug 2010 22:00:42 +0200
-Message-ID: <AANLkTi=XK3Le8ERWqmMt2DEVX3K4n=ua0Zdyu6qEOUcw@mail.gmail.com>
+Received: by 10.101.176.2 with SMTP id d2mr6468603anp.101.1281989059486; Mon,
+	16 Aug 2010 13:04:19 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 13:04:19 -0700 (PDT)
+In-Reply-To: <AANLkTik3NJf+OF=Eobbmq1iKPdwzj87zmeWF6h6e9GhD@mail.gmail.com>
+References: <1281963140-29565-1-git-send-email-fahad_usman@mentor.com>
+	<AANLkTik3NJf+OF=Eobbmq1iKPdwzj87zmeWF6h6e9GhD@mail.gmail.com>
+Date: Mon, 16 Aug 2010 22:04:19 +0200
+Message-ID: <AANLkTi=zaSuDL5LCGAxcmV3tLK7recDUzwW96mf=Ly-t@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: rename files dirs
+Subject: Re: [PATCH] dcopidl-native_3.5.8.bb: Removed legacy style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +52,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 20:01:06 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 20:04:38 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Currently lots of our patches reside in a directory called files.
-Somewhere in the past koen explained me that that is not really proper
-(and I agree with them).
-files should only be used in case a dir has multiple recipes (say X.bb
-and Y.bb) which both use the same patch
-If there is only a single recipe with multiple versions (e.g.X_0.bb
-and X_1.bb) then common patches should go into a dir X.
-And if the patches are for a specific version they should go in X-0, X-1 etc.
+Tested and pushed the patch.
+Thanks for your contribution
 
-When I'm bored again on a rainy sunday afternoon or so, I can spent
-some time on moving things.
-Are people comfortable with that?
-Also what would be the preferred way to store the patches for a recipe
-with only one version (Z_3.bb)
-Should this preferably be in Z or in Z-3 ?
+Next time if you create a new version of a patch, can you please add
+v2 to the subject line, and mark the old version as obsolete in
+patchwork. (http://patchwork.openembedded.org/project/openembedded/list/)
 
-Your opinion is apprecated
-
-Frans
-
-(ps: in my enthousiasm I already listed this as a task in
-http://wiki.openembedded.org/index.php/OpenEmbeddedJanitors
-If people are unhappy with the idea, I'll remove it from it again).
+Best regards, Frans
 
 
