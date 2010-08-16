@@ -1,47 +1,48 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol618-0001KX-SD
+	(envelope-from <martin.jansa@gmail.com>) id 1Ol61Z-0001LZ-QO
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 22:10:47 +0200
-Received: by gwb15 with SMTP id 15so2147312gwb.6
+	Mon, 16 Aug 2010 22:11:15 +0200
+Received: by fxm6 with SMTP id 6so3261417fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:10:29 -0700 (PDT)
+	Mon, 16 Aug 2010 13:10:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=y0DkfaOWROvKUtuwx0chl5AZM87C+tzINAvRrQH3US4=;
-	b=fp399TpRCyYHbWK70Z4vKvWGXD673nS18yTYnMhNdVMEggtJj9IuL/QF6QxIHqhaDA
-	7EbCguepALsw4AS0idwyAVETZt+hnZvALkf+Zn/j+IjYmhtLgkMkgrqZpA368L6fFSQs
-	vR/ZpSIsuIJiuPIzwrcxPjAKBEnF/TUEsSxOg=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=Uhog3bPAgHTa5NRds+bd02rWj5w1hdBx0yshqdWzYtY=;
+	b=U0zkzTmtpXTFdF6K+2Hg6YCmZYYX272Qf6kdKHzkFkamF5dH2c1LTWry0IcsUjWTtJ
+	dMsQ52lYg5RGQ/xlKPjfrki8PXsOpDxB2mQluaFIWum6GcKQ/kNWGQQTTm9r+ZgjxXU+
+	EriOhjnwybOt39hipaAv4SwSNkyVMzgNncmrU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=IWxVwRCB9VWqkS18b2vb6u3y+QQlfq4+xiguxBF005aeIAvmlBWt775nuSMhPbGrvT
-	6sABLNyF9TybYNgP9qrdVcRcUjknXqSgpiefdPvscmq9C/oEJYWVWlivgGt45AqZ0YXv
-	IOHbOyzqLpGofsGK9bTwbFMpce7FvmtVocwiQ=
-MIME-Version: 1.0
-Received: by 10.231.36.134 with SMTP id t6mr6290614ibd.128.1281989428939; Mon,
-	16 Aug 2010 13:10:28 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 13:10:28 -0700 (PDT)
-In-Reply-To: <AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
-References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
-	<AANLkTi=gLCkfgLPgJT9oVVxxsfP10uf7w7r02Z5mBkOW@mail.gmail.com>
-	<201008162325.59305.roman@khimov.ru>
-	<AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
-Date: Mon, 16 Aug 2010 22:10:28 +0200
-Message-ID: <AANLkTinc3hESrnWRPeRs2EnGoqAy=fXB9PZxN2sOe_dg@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=idNTjeMs5AjriiHa4BHGqpC7X6RBgTNPtbS01+QqcFre31HMOUh5Lw03ejWwPeMmUW
+	kTt1MfpauLlSptwWodlbtqWUDCuYIFqQUvtQ65+lQDFpItqbPY1bSshZGv0LivcOWbh5
+	FCCsov7AEyijYyzCU38bzZ+rjl/HU+CRBtTtk=
+Received: by 10.223.114.69 with SMTP id d5mr5612723faq.43.1281989456555;
+	Mon, 16 Aug 2010 13:10:56 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id s20sm2635860faa.4.2010.08.16.13.10.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 16 Aug 2010 13:10:56 -0700 (PDT)
+Date: Mon, 16 Aug 2010 22:11:08 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100816201108.GI10076@jama>
+References: <AANLkTi=XK3Le8ERWqmMt2DEVX3K4n=ua0Zdyu6qEOUcw@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTi=XK3Le8ERWqmMt2DEVX3K4n=ua0Zdyu6qEOUcw@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] openssl: update 1.0.0 to 1.0.0a
+Subject: Re: rename files dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,45 +56,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 20:10:47 -0000
-Content-Type: text/plain; charset=KOI8-R
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Aug 2010 20:11:15 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-2010/8/16 Khem Raj <raj.khem@gmail.com>:
-> On Mon, Aug 16, 2010 at 12:25 PM, Roman I Khimov <roman@khimov.ru> wrote:
->> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB=
- 16 =C1=D7=C7=D5=D3=D4=C1 2010 22:59:53 =C1=D7=D4=CF=D2 Frans Meulenbroeks
->> =CE=C1=D0=C9=D3=C1=CC:
->>> One small question: Do we want to keep this recipe at
->>> DEFAULT_PREFERENCE =3D "-1" ??
->>
->> Well, we're using 1.0.0 since the day it's been released, and it's a per=
-fect
->> fit for us, but I know that it _might_ break some things, just google fo=
-r
->> openssl 1.0.0 breakage/compatibility patches/etc, that's why I've pushed=
- it
->> that way so that distro maintainers could test whether it works for them=
- with
->> their particular package sets and act accordingly.
->>
->> I certainly have nothing against removing that line if everyone is OK wi=
-th
->> that.
->>
->
-> IMO the newest version in a recipe should always be default preference
-> this way we can
-> stabilize recipe upgrades quicker. This also means a wider testing
-> before pushing a new recipe
-> DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
->
-For the record. We have 451 recipes with a DEFAULT_PREFERENCE clause.
-425 of these seem to have a negative value in it.
-In total there are 712 lines with DEFAULT_PREFERENCE
-(especailly kernel recipes have preferences for specific machines and
-have multiple DEFAULT_PREFERENCE lines)
+On Mon, Aug 16, 2010 at 10:00:42PM +0200, Frans Meulenbroeks wrote:
+> Currently lots of our patches reside in a directory called files.
+> Somewhere in the past koen explained me that that is not really proper
+> (and I agree with them).
+> files should only be used in case a dir has multiple recipes (say X.bb
+> and Y.bb) which both use the same patch
+> If there is only a single recipe with multiple versions (e.g.X_0.bb
+> and X_1.bb) then common patches should go into a dir X.
+> And if the patches are for a specific version they should go in X-0, X-1 etc.
+> 
+> When I'm bored again on a rainy sunday afternoon or so, I can spent
+> some time on moving things.
+> Are people comfortable with that?
+> Also what would be the preferred way to store the patches for a recipe
+> with only one version (Z_3.bb)
+> Should this preferably be in Z or in Z-3 ?
 
-Frans
+If it's something where you expect the need to update the patch for Z_4
+then I would say Z-3, but if it's some tweak (ie to allow crossbuilding)
+and the same patch applied to Z_[12345] then Z is right dir (if Z_6
+needs updated patch it will be named the same but in Z-6).
+> 
+> Your opinion is apprecated
+
+I did exactly the same while cleaning xorg-* dirs. So I agree.
+
+Regards,
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
