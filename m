@@ -1,43 +1,30 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OkkfK-0002Kt-Qd for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Aug 2010 23:22:51 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Okkez-00069u-LM for openembedded-devel@lists.openembedded.org;
-	Sun, 15 Aug 2010 23:22:29 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Aug 2010 23:22:29 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 15 Aug 2010 23:22:29 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from smtpauth02.prod.mesa1.secureserver.net ([64.202.165.182])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1OkqLb-0002oK-Tm
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 05:26:53 +0200
+Received: (qmail 1994 invoked from network); 16 Aug 2010 03:19:53 -0000
+Received: from unknown (209.242.7.179)
+	by smtpauth02.prod.mesa1.secureserver.net (64.202.165.182) with ESMTP;
+	16 Aug 2010 03:19:53 -0000
+Message-ID: <4C68AE52.8000709@mwester.net>
+Date: Sun, 15 Aug 2010 22:19:46 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 15 Aug 2010 23:22:15 +0200
-Message-ID: <i49lq7$jft$1@dough.gmane.org>
-References: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
-In-Reply-To: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
+In-Reply-To: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.202.165.182
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: gumstix-users@lists.sourceforge.net
-Subject: Re: What to do about the poor bitbake Quality Control?
+Subject: Re: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +38,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 15 Aug 2010 21:22:51 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Aug 2010 03:26:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Frans Meulenbroeks wrote:
+> Dear all,
+> 
+> As some of you might have noticed I've been cleaning up our
+> recipes.during the last week or so.
+...
+> Anyway, if there are issues because of this action, or if you feel
+> removal of a recipe was not in accordance with the TSC guidelines, let
+> me know and I'll repair.
 
-On 14-08-10 17:46, AJ ONeal wrote:
-> This is about the 4th time that I've `rm -rf`-d everything and started from
-> scratch and never yet got a working `bitbake omap3-console-image`
+(This is NOT how I read the TSC guidelines, but I'm tired of arguing
+with your obsession!)
 
-That recipe isn't in OE, so it seems you're building from what we call
-"some random tree", which is unsupported. Complain to the people in
-charge of that tree and tell them to fix things.
+Frankly, the issue isn't if YOU put back a missing recipe, or I do it.
+I know how to use an SCM tool, it's about 30 seconds -- or less -- to do
+it.  The problem, as I've mentioned before, is in finding that to be the
+issue, of course.
 
-If people don't care enough to get there stuff upstream, upstream won't
-care about problems in that tree.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+What distros (and their package feeds) have you built to test your
+assumptions?
 
-iD8DBQFMaFqHMkyGM64RGpERAnigAJ9sMzq5aph9ONHXjOc016N26xNvFwCgs2XJ
-GeX7r5WwkbKeoGi3rSShMdk=
-=miVm
------END PGP SIGNATURE-----
+> Have fun!
 
+Well, thank you for your wishes.  But to be honest, it's more fun when I
+can focus on fixing REAL problems, rather than worrying about artificial
+ones introduced for no really useful reason -- although I understand
+that you vehemently and stubbornly disagree.  I guess you win this
+point, so it's fun for you at least!
+
+> Frans
+-Mike (mwester)
 
 
