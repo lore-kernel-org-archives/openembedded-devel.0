@@ -1,30 +1,34 @@
-Received: from smtpauth02.prod.mesa1.secureserver.net ([64.202.165.182])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <mike@mwester.net>) id 1OkqLb-0002oK-Tm
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gary@mlbassoc.com>) id 1OkqXx-0000dj-9B
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 05:26:53 +0200
-Received: (qmail 1994 invoked from network); 16 Aug 2010 03:19:53 -0000
-Received: from unknown (209.242.7.179)
-	by smtpauth02.prod.mesa1.secureserver.net (64.202.165.182) with ESMTP;
-	16 Aug 2010 03:19:53 -0000
-Message-ID: <4C68AE52.8000709@mwester.net>
-Date: Sun, 15 Aug 2010 22:19:46 -0500
-From: Mike Westerhof <mike@mwester.net>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
-	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
+	Mon, 16 Aug 2010 05:39:39 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 19ADF16607CC; Sun, 15 Aug 2010 21:39:06 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 8A0FA16607C0;
+	Sun, 15 Aug 2010 21:38:45 -0600 (MDT)
+Message-ID: <4C68B2C5.5030908@mlbassoc.com>
+Date: Sun, 15 Aug 2010 21:38:45 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
-In-Reply-To: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.202.165.182
-X-SA-Exim-Mail-From: mike@mwester.net
+References: <AANLkTi=gYuoD-3RO=c5GpEbOZoHsAJOijrXXGnzcdNe9@mail.gmail.com>
+	<AANLkTim_u5O3bLgdLiwE4fPCnbjRoUY1+Pad9iB8qXPW@mail.gmail.com>
+In-Reply-To: <AANLkTim_u5O3bLgdLiwE4fPCnbjRoUY1+Pad9iB8qXPW@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cleaning recipes
+Cc: "General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>
+Subject: Re: What to do about the poor bitbake Quality Control?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,40 +42,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 03:26:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Aug 2010 03:39:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks wrote:
-> Dear all,
-> 
-> As some of you might have noticed I've been cleaning up our
-> recipes.during the last week or so.
-...
-> Anyway, if there are issues because of this action, or if you feel
-> removal of a recipe was not in accordance with the TSC guidelines, let
-> me know and I'll repair.
+On 08/14/2010 01:01 PM, Frans Meulenbroeks wrote:
+> 2010/8/14 AJ ONeal<coolaj86@gmail.com>:
+>> This is about the 4th time that I've `rm -rf`-d everything and started from
+>> scratch and never yet got a working `bitbake omap3-console-image`
+>>
+>> Every time I `git pull` it's a different set of problems. It's never the
+>> same package twice, but they never all compile for the basic console image
+>> anywhere from 4 to 20 hours in.
+>>
+>> Fortunately, I do have a machine that did build omap3-console-image a few
+>> weeks ago at work. But I've never been able to get it on my machine at home
+>> (same os) to start playing around with.
+>>
+>> What needs to happen in order for things to git checked that they work with
+>> at least a few common meta-tasks before being pushed out?
+>> And is there anything I can do to help? (Donate some machine time to run
+>> tests, for example)
+>>
+>>
+>> Obviously, we all have our day jobs and whatnot, but this is becoming really
+>> frustrating for me and I'd like to see things improve.
+>>
+>
+> If you are using dev head, you're living on the edge. If you can't
+> stand that better use the stable branch.
 
-(This is NOT how I read the TSC guidelines, but I'm tired of arguing
-with your obsession!)
+The biggest problem (as discussed at great length already) is that the
+distance from 'dev' to 'stable' can be measured in years :-(  'stable'
+just isn't useful at all for "current" work...
 
-Frankly, the issue isn't if YOU put back a missing recipe, or I do it.
-I know how to use an SCM tool, it's about 30 seconds -- or less -- to do
-it.  The problem, as I've mentioned before, is in finding that to be the
-issue, of course.
+> As far as there are issues:
+> Either report them, or better fix them.
+> (or as a workaround you could find the commit wthat broke it and
+> report that and perhaps temporariy locally revert that commit if you
+> cannot fix it).
+>
+> Having said that:
+> I don't really see many issues. Maybe I'm building a different set of
+> packages or for a different set of hw or for a different distro.
 
-What distros (and their package feeds) have you built to test your
-assumptions?
+Turning a blind eye, I would say.  I (and others) have nearly 0%
+success building any Angstrom image on an x86_64 based host.  I've tried
+the latest Ubuntu and Fedora - neither works, both yield different failures.
+At least I have i686 build hosts to fall back on, but there are issues there
+as well.
 
-> Have fun!
-
-Well, thank you for your wishes.  But to be honest, it's more fun when I
-can focus on fixing REAL problems, rather than worrying about artificial
-ones introduced for no really useful reason -- although I understand
-that you vehemently and stubbornly disagree.  I guess you win this
-point, so it's fun for you at least!
-
-> Frans
--Mike (mwester)
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
