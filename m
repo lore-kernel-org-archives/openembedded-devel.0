@@ -1,38 +1,32 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5jK-0005Di-Db
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5rk-0008WU-H9
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:52:23 +0200
-Received: by gyd8 with SMTP id 8so2106169gyd.6
+	Mon, 16 Aug 2010 22:01:05 +0200
+Received: by yws5 with SMTP id 5so1041838yws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:52:01 -0700 (PDT)
+	Mon, 16 Aug 2010 13:00:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=2E8sFE/qfFqQRKb8Pt/uRG2yybTMREyomZngYpBAscI=;
-	b=kPJeMRuJcZCVgiDpyHFXuE9qyuGdmOuqHvW5wyimSMwRrHFtrFGpM05Q42ZYlt8ez2
-	xRwd77yDX6FKxz4wLQRlo50q49KF8GFhSQunbJ/0rOsOBKhoXQOmagD47CAMMMe5euhO
-	s71nwYSzFICTbdEzxMK5gedRqQx7VH3gnOy6s=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=Hey76jOncYC0dPq/C4dUdL076mD2xNFLGiFbkFxN0+g=;
+	b=QDwgzNUkD/EUxAxlTY3nHT+QyBMkl0aKizL9XnrmPynn7fxP9iMl5wosoHNBmcQ5kw
+	gtVsogBKGoBDH2uIy69acCNz5T9ur8/77WpD10nxFvWhjqexBme37TU8j+dMJtR/Zb2y
+	wHFbGGYb/guUYNg+JnvkmPuIece2lFS60sQW8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=SqLl1QMiFvjxkqXsX+4/DBcBvs3yia9fTpPIMVepPzFSLhw/OoRkHmYNImS+Gu/ag6
-	Yy37TEpAMnU8xndv76cBp2obv3GREXk7hUbD2JyCDLbeiZYWhJjGJO0Fu3xM2o7sWHfX
-	9TmL2Qw506vTJBr3GrlSIVDQI6IhM0SvwaPXs=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Doh0pctbedMQH1La65wpWcEGuKiEuhCd1aJxzaQhpvXQNvJKl3SMMBHA4t7ahMmEYS
+	+u+8kkuyf9gANC3S3Ea6sM6rIlF485Z31WlAEQB25Lo7XN+8vF/irYmJ/v5sD2XqaEAW
+	dABeEI5rF4OC3Tv0J1Qlk7HIR2g6M21FXKBfA=
 MIME-Version: 1.0
-Received: by 10.101.176.2 with SMTP id d2mr6449469anp.101.1281988320591; Mon,
-	16 Aug 2010 12:52:00 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 12:52:00 -0700 (PDT)
-In-Reply-To: <20100816194216.GH10076@jama>
-References: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
-	<AANLkTinbdx5rKQOckS3BEuEE=mZsnLmER8TqA0U87YUY@mail.gmail.com>
-	<20100816194216.GH10076@jama>
-Date: Mon, 16 Aug 2010 21:52:00 +0200
-Message-ID: <AANLkTi=OYuOWVPO1f_HmjWFRob-Mg7AgK=e=Y9BHUZL6@mail.gmail.com>
+Received: by 10.151.138.13 with SMTP id q13mr6078392ybn.189.1281988842228;
+	Mon, 16 Aug 2010 13:00:42 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 13:00:42 -0700 (PDT)
+Date: Mon, 16 Aug 2010 22:00:42 +0200
+Message-ID: <AANLkTi=XK3Le8ERWqmMt2DEVX3K4n=ua0Zdyu6qEOUcw@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +34,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: xorg recipes cleanup
+Subject: rename files dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,44 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:52:23 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 20:01:06 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/8/16 Martin Jansa <martin.jansa@gmail.com>:
-> On Mon, Aug 16, 2010 at 09:25:51PM +0200, Frans Meulenbroeks wrote:
+Currently lots of our patches reside in a directory called files.
+Somewhere in the past koen explained me that that is not really proper
+(and I agree with them).
+files should only be used in case a dir has multiple recipes (say X.bb
+and Y.bb) which both use the same patch
+If there is only a single recipe with multiple versions (e.g.X_0.bb
+and X_1.bb) then common patches should go into a dir X.
+And if the patches are for a specific version they should go in X-0, X-1 etc.
 
->>
->> I could not test, as patch 2 is not on patchwork (and retrieving them
->> from gmail is somewhat tricky)
->
-> I'm checking why :/ only clue is
-> bitbake@jama ~/oe $ git send-email 0002-xorg-lib-move-older-not-pinned-ve=
-rsions-to-obsolete-.patch
-> The following files are 8bit, but do not declare a
-> Content-Transfer-Encoding.
-> =A0 =A00002-xorg-lib-move-older-not-pinned-versions-to-obsolete-.patch
-> Which 8bit encoding should I declare [UTF-8]?
-> <enter>
->
->> Do we indeed want to move this to obsolete? Is there a point in
->> retaining it? Why not just rm them (they are still in git)
->> Or do we want obsolete to become the graveyard of old recipes?
->
-> I usually move it to obsolete where it's not parsed if you have
-> 'standard'
-> BBFILES :=3D "/OE/dev/recipes/*/*.bb"
-> and if nobody screams then I'll remove whole obsolete/xorg dir after a
-> while.
->
-> I know it's SCM and I can look to every version in history, but while
-> it's still in obsolete it's faster to call just diff if I need to check
-> what changed since previous version.
+When I'm bored again on a rainy sunday afternoon or so, I can spent
+some time on moving things.
+Are people comfortable with that?
+Also what would be the preferred way to store the patches for a recipe
+with only one version (Z_3.bb)
+Should this preferably be in Z or in Z-3 ?
 
-Ah ok, well in that case I have no problems with moving to obsolete.
-I was assuming that would be the end-of-the-line. If it is temp until
-things stabilize, fine with me.
+Your opinion is apprecated
 
 Frans
+
+(ps: in my enthousiasm I already listed this as a task in
+http://wiki.openembedded.org/index.php/OpenEmbeddedJanitors
+If people are unhappy with the idea, I'll remove it from it again).
 
 
