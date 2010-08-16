@@ -1,27 +1,44 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1Ol4rN-0005GQ-M5
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol4sb-0005R9-Sg
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 20:56:38 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 673FB275D865; Mon, 16 Aug 2010 20:56:20 +0200 (CEST)
-Received: from localhost (p5489A50E.dip.t-dialin.net [84.137.165.14])
-	by gravedo.de (Postfix) with ESMTPSA id 7C823275D863;
-	Mon, 16 Aug 2010 20:56:18 +0200 (CEST)
-From: Simon Busch <morphis@gravedo.de>
+	Mon, 16 Aug 2010 20:57:54 +0200
+Received: by gwb15 with SMTP id 15so2109572gwb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 11:57:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=WEIe0kYgoUGTpItkK6gRhKnBKDDVLWHu5CfCyr6mg0g=;
+	b=KdK/Jk5vm29ymSrwJDzvzDmJUJBmvcqjFlRQwboqPQZGSSfDmo6Dm2C7MJWjWaa8+H
+	i5MWnMVFXl+hEaQ9YDoBnRsTjMzGmqV6gW8LHUB9Fh4v3szsDmO1ZeJaziHDtG1MaPsQ
+	5Ur8lIXI3u1pCm+b6DJxUFbgmSoijn6EpZerQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=f5RNMN9MGU9/ee2zWynS0fhRzTVJDKvSjk0n0vK8ZwLyxlf4Jry7SgPyGo1zSi07r/
+	STepPrJZ+pY+euPfeSO6OD/UiXP1MrJr6+JoRib0RUaBYqlRvuE35gROoaEayKT7wP6z
+	4fAjgp4NYV2uchBQs0Wes69s8gCW1IkjU89KI=
+MIME-Version: 1.0
+Received: by 10.101.28.16 with SMTP id f16mr6306168anj.59.1281985055564; Mon,
+	16 Aug 2010 11:57:35 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 11:57:35 -0700 (PDT)
+In-Reply-To: <1281975262-31559-1-git-send-email-jkridner@beagleboard.org>
+References: <1281975262-31559-1-git-send-email-jkridner@beagleboard.org>
+Date: Mon, 16 Aug 2010 20:57:35 +0200
+Message-ID: <AANLkTi=8-cC=3rYTeDpWmD837QPy90RcPhLNpMN1Mpyp@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 20:56:16 +0200
-Message-Id: <1281984976-4996-1-git-send-email-morphis@gravedo.de>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] u-boot: bump git revision for palmpre machine
+Subject: Re: [PATCH] libgcrypt: Add symlink for mpi files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,31 +52,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 18:56:38 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 18:57:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The current git revision for palmpre machine fails to compile. I updated it to the latest
-revision available as u-boot is currently not usable on the palmpre machine at all.
+2010/8/16 Jason Kridner <jkridner@beagleboard.org>:
+> 'configure' doesn't seem to include the necessary '../mpi' in the
+> symlinks that get generated. =A0This hack will make the symlinks that do
+> get created work.
+>
+> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+> ---
+> =A0recipes/libgcrypt/libgcrypt.inc | =A0 =A06 ++++++
+> =A01 files changed, 6 insertions(+), 0 deletions(-)
+>
+> diff --git a/recipes/libgcrypt/libgcrypt.inc b/recipes/libgcrypt/libgcryp=
+t.inc
+> index f29dc8d..0c44fff 100644
+> --- a/recipes/libgcrypt/libgcrypt.inc
+> +++ b/recipes/libgcrypt/libgcrypt.inc
+> @@ -4,6 +4,8 @@ PRIORITY =3D "optional"
+> =A0LICENSE =3D "GPL LGPL FDL"
+> =A0DEPENDS =3D "libgpg-error"
+>
+> +PR =3D "r1"
+> +
+> =A0SRC_URI =3D "ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-${PV}.tar.=
+gz \
+> =A0 =A0 =A0 =A0 =A0 =A0file://add-pkgconfig-support.patch \
+> =A0 =A0 =A0 =A0 =A0 =A0file://mips-h-constraint.patch"
+> @@ -14,6 +16,10 @@ EXTRA_OECONF =3D "--without-pth --disable-asm --with-c=
+apabilities"
+>
+> =A0ARM_INSTRUCTION_SET =3D "arm"
+>
+> +do_configure_append() {
+> + =A0 =A0 =A0 ln -s ${S}/mpi ${S}/mpi/mpi
+> +}
+> +
+> =A0do_install_append() {
+> =A0 =A0 =A0 =A0install -d ${D}/${libdir}/pkgconfig/
+> =A0 =A0 =A0 =A0cp ${S}/src/*.pc ${D}/${libdir}/pkgconfig/
+> --
+> 1.5.6.4
 
-Signed-off-by: Simon Busch <morphis@gravedo.de>
----
- recipes/u-boot/u-boot_git.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+I have some concerns with this patch.
+Jason mentioned this problem on irc last sunday. I peeked into it and
+I could not reproduce is (and for me the symlinks were created
+properly)
+I guess others have no problem with it either (I'm fairly sure the
+koens autobuilder will also build this (as gtk+ depends on libgcrypt).
 
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 19386fc..5a46961 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -10,7 +10,7 @@ SRCREV_spitz = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
- SRCREV_c7x0 = "9bf86baaa3b35b25baa2d664e2f7f6cafad689ee"
- SRCREV_afeb9260 = "6b8edfde22acc574b5532e9f086e6a7287a9bc78"
- SRCREV_afeb9260-180 = "6b8edfde22acc574b5532e9f086e6a7287a9bc78"
--SRCREV_palmpre = "6b8edfde22acc574b5532e9f086e6a7287a9bc78"
-+SRCREV_palmpre = "668a6b45915d10d75357f5b93f569bbf49ea2b06"
- SRCREV_cm-t35 = "3c014f1586d5bfe30dca7549396915c83f31cd30"
- SRCREV_mpc8641-hpcn = "f20393c5e787b3776c179d20f82a86bda124d651"
- SRCREV_p2020ds = "f20393c5e787b3776c179d20f82a86bda124d651"
--- 
-1.7.0.4
+Jason, have you tested rebuilding from scratch on dev head with no
+local patches/changes ? Does the problem then still occur ???
+(or in other words: are you sure it is nothing local)
 
+Frans.
 
 
