@@ -1,43 +1,31 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5Jz-0008UE-88
+	(envelope-from <roman@khimov.ru>) id 1Ol5K9-0008VR-51
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:26:11 +0200
-Received: by gyd8 with SMTP id 8so2092521gyd.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:25:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=N6de1JkEzPo6VOj8O8toGGsHuHahmQr9ogf9XMw1hIE=;
-	b=GRDbqHSFmw/xY5hWckpn9q/kGdeYU38mmp60x0rvvBvwD839P8aO4LIkPv3xdeqgEk
-	95Fbp1JqE/QJ7XrxEqMGhDCPaDUNTTCNqgYlYeohYo4lzBdoFcoKmYPdzY6ruEj3pULo
-	fAtVfXqVHjaJpDD89jI3bNieiQGdz3zqVgq9M=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=r5YRFMvNw2gfAefZ+dJOyr/MtcsfD+xSTnUc2Hc25xELOZMgSHXHs9HfU27I7kzxYt
-	MKzhPCLAIa/9zZ+FWAkVGD4aaTuZenvopJWQApwBEJRnmqSvAx4FFhBFy9EJwYMPFgBN
-	aZYaHf9Ztt8r+xK2zuMpT5flWJ8mX6sh6VpWw=
-MIME-Version: 1.0
-Received: by 10.231.12.73 with SMTP id w9mr6310938ibw.99.1281986751861; Mon,
-	16 Aug 2010 12:25:51 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 12:25:51 -0700 (PDT)
-In-Reply-To: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
-References: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
-Date: Mon, 16 Aug 2010 21:25:51 +0200
-Message-ID: <AANLkTinbdx5rKQOckS3BEuEE=mZsnLmER8TqA0U87YUY@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 16 Aug 2010 21:26:45 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Ol5Jq-00089u-1p
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 23:26:05 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 16 Aug 2010 23:25:52 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
+	<AANLkTi=gLCkfgLPgJT9oVVxxsfP10uf7w7r02Z5mBkOW@mail.gmail.com>
+In-Reply-To: <AANLkTi=gLCkfgLPgJT9oVVxxsfP10uf7w7r02Z5mBkOW@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201008162325.59305.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: xorg recipes cleanup
+Subject: Re: [PATCH] openssl: update 1.0.0 to 1.0.0a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +39,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:26:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Aug 2010 19:26:46 -0000
+X-Groupsio-MsgNum: 22275
+Content-Type: multipart/signed; boundary="nextPart1625841.oTOVWFbK7m";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-2010/8/16 Martin Jansa <martin.jansa@gmail.com>:
-> Hi,
->
-> all distributions are now using
-> preferred-xorg-versions-X11R7.5.inc or
-> preferred-xorg-versions-live.inc or
-> no preferred-xorg-versions*.inc at all
->
-> So we can remove some older versions not pinned in those 2
-> to make future maintanance of xorg-* dirs a bit easier.
->
-> As this is really easy to test (if you apply all 9 and build your
-> favourite target again, no xorg package should be rebuilt - version changed),
-> please test and ACK or don't scream later that you had some strange version
-> preferred from local.conf.
+--nextPart1625841.oTOVWFbK7m
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-I could not test, as patch 2 is not on patchwork (and retrieving them
-from gmail is somewhat tricky)
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA 16 =D0=
+=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2010 22:59:53 =D0=B0=D0=B2=D1=82=D0=
+=BE=D1=80 Frans Meulenbroeks=20
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> One small question: Do we want to keep this recipe at
+> DEFAULT_PREFERENCE =3D "-1" ??
 
-Do we indeed want to move this to obsolete? Is there a point in
-retaining it? Why not just rm them (they are still in git)
-Or do we want obsolete to become the graveyard of old recipes?
+Well, we're using 1.0.0 since the day it's been released, and it's a perfec=
+t=20
+fit for us, but I know that it _might_ break some things, just google for=20
+openssl 1.0.0 breakage/compatibility patches/etc, that's why I've pushed it=
+=20
+that way so that distro maintainers could test whether it works for them wi=
+th=20
+their particular package sets and act accordingly.
 
-Frans
+I certainly have nothing against removing that line if everyone is OK with=
+=20
+that.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart1625841.oTOVWFbK7m
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkxpkMcACgkQXJ70z+XgVcPfZQCgll9BynpfnFXACvRq/Q49z96j
+py0AoKzv32BKT3S+Q6NX7SoysS0LManp
+=Jx1d
+-----END PGP SIGNATURE-----
+
+--nextPart1625841.oTOVWFbK7m--
