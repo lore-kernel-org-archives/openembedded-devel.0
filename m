@@ -1,43 +1,34 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ol2cU-0004nq-6E for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 18:33:12 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ol2by-00061M-8h for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 18:32:34 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 18:32:34 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <morphis@gravedo.de>) id 1Ol3rg-0004Pm-Jl
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 19:52:53 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 8E296275D865; Mon, 16 Aug 2010 19:52:37 +0200 (CEST)
+Received: from [192.168.1.142] (p5489A50E.dip.t-dialin.net [84.137.165.14])
+	by gravedo.de (Postfix) with ESMTPSA id F3E2F275D863
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 18:32:34 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Mon, 16 Aug 2010 19:52:36 +0200 (CEST)
+Message-ID: <4C697ADF.4050904@gravedo.de>
+Date: Mon, 16 Aug 2010 19:52:31 +0200
+From: Simon Busch <morphis@gravedo.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12pre) Gecko/20100809 Shredder/3.0.7pre
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Mon, 16 Aug 2010 18:32:23 +0200
-Message-ID: <i4bp6n$8cv$1@dough.gmane.org>
-References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>	<20100816132317.GA7983@zlo.nu>	<AANLkTikB5uioXp0BwFg4Gj6GV9MjgMmyOgvjLLOwS8fh@mail.gmail.com>
-	<20100816140055.GB7983@zlo.nu>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
-In-Reply-To: <20100816140055.GB7983@zlo.nu>
+References: <1279651497-20918-1-git-send-email-morphis@gravedo.de>	<1281455076-4291-1-git-send-email-morphis@gravedo.de>	<20100813215524.GE19855@excalibur.local>
+	<20100816135943.GG19855@excalibur.local>
+In-Reply-To: <20100816135943.GG19855@excalibur.local>
 X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cleaning recipes
+Subject: Re: [PATCH 5/5] lvm2.inc: remove unnecessary EXTRA_OECONF_arm line from recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,49 +42,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 16:33:12 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Aug 2010 17:52:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 16-08-10 16:00, Marc Olzheim wrote:
-> On Mon, Aug 16, 2010 at 03:43:10PM +0200, Frans Meulenbroeks wrote:
->>> Hmm, the "guidelines" do not mention anything about licenses. Thus the
->>> only version you left of coreutils after
->>> 82dcd385984ba059b346a0e37fd3e14d536074ad is infected with GPLv3, while
->>> the older (6.0) GPLv2 version works fine for us.  I do not know
->>> whether other people mind about licenses, but we cannot use any GPLv3
->>> software in our image, because of its viral nature.
->>>
->>> Marc
->>
->> Valid point.
->> I did not consider licenses. Although the company I work for has no
->> problems with GPLv2, I understand your concern
->> What would be the most recent version of coreutils that is still using v2?
->> We can reinstate that one.
+Am 16.08.2010 15:59, schrieb Stefan Schmidt:
+> Hello.
 > 
-> In the case of coreutils, that is 6.0.
-> GPLv2 is ok here as well. The problem with GPLv3 here is that as soon as
-> we incorporate some GPLv3 package we need to provide the abilitiy for
-> customers to rebuild their image (Right to Tinker), which we cannot and
-> will not do.
+> On Fri, 2010-08-13 at 23:55, Stefan Schmidt wrote:
+>>
+>> On Tue, 2010-08-10 at 17:44, Simon Busch wrote:
+>>> Signed-off-by: Simon Busch <morphis@gravedo.de>
+>>
+>> Acked-by: Stefan Schmidt <stefan@datenfreihafen.org>
+>>
+>> Will apply this with the other lvm patches tomorrow.
+> 
+> Done now. Thanks for getting lvm2 into a working state.
+> 
 
-And the patent clause isn't fun if your company has tons of IP in that
-area (like mine).
+Thanks for commiting my patches!
 
 regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMaWgWMkyGM64RGpERAg6PAJ4+ANeicD6Iwz5VOFF7FXwBNIdtXgCeMZKK
-Ue6O0IThYTeDJ8RcCKbwIjE=
-=Rn2H
------END PGP SIGNATURE-----
-
+morphis
 
 
