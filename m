@@ -1,47 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-dotnet1.eads.net ([80.156.45.103])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Okxaf-0003pM-BT
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 13:10:54 +0200
-Received: by iwn38 with SMTP id 38so1532584iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 04:10:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=pkFS4nbPVy+1DCunW6V4vcefxVXVNNQdOaQ59P1+b8Q=;
-	b=hKLggXcxW4mQNubqY/ruvgGVWAdtUHufWWtDSmoSmdnqzZwEhOzOOsArAtuRM8gwv4
-	p0kdRBCF1Ju//7K6/g6sdFCHmQuvyN3crVoQgMiHl6RD9SaRgKbpn4CJtu+94itTck/W
-	KaPOZ9RQhuLhrF1EegabPnckLn8UjyCSLU0u4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=cM9VkvJmfp7nN1cGmok1GgO+GjgXkxv2VGqn7LMIlY1qbLH0IKy5ialFUQ10+UJs8Y
-	QLb0FBlHXVQgGZEec8VqLF67t+ElgTKKkzFqESzr8cFQikekgOx/21SfYqvFU89E9r3V
-	VBLCo53XISTA4hEs7J6q7jGDhoVGUN+MAthb8=
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1Okxjq-0002KC-7q for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 13:20:24 +0200
+Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
+	by mail-dotnet1.eads.net with ESMTP; 16 Aug 2010 13:08:47 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
+	Mon, 16 Aug 2010 13:20:03 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Mon, 16 Aug 2010 13:20:03 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.231.157.205 with SMTP id c13mr5965018ibx.71.1281957038013;
-	Mon, 16 Aug 2010 04:10:38 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 04:10:37 -0700 (PDT)
-In-Reply-To: <i4b3dl$vbk$1@dough.gmane.org>
-References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
-	<i4auje$u5g$1@dough.gmane.org>
-	<AANLkTimpAxxt7GR=1VV9ZrAWubMp63sX771+PfhLjWTu@mail.gmail.com>
-	<AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>
-	<i4b3dl$vbk$1@dough.gmane.org>
-Date: Mon, 16 Aug 2010 13:10:37 +0200
-Message-ID: <AANLkTim8Et4FHon4o2dsTOyFe-8huxTmmFEYA5PNZirw@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 16 Aug 2010 13:20:01 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5018B6174@deimsg40.de.net.world>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: image.bbclass (rootfs_ipk.bbclass) should run package pre- and
+	postinstall routines in package dependency order
+Thread-Index: Acs9NPd/45ROzqv4R4K6YRB7gM07Tg==
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 16 Aug 2010 11:20:03.0331 (UTC)
+	FILETIME=[F8E17530:01CB3D34]
+X-SA-Exim-Connect-IP: 80.156.45.103
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cleaning recipes
+Subject: image.bbclass (rootfs_ipk.bbclass) should run package pre- and postinstall routines in package dependency order
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,58 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 11:10:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Aug 2010 11:20:24 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 16-08-10 11:30, Frans Meulenbroeks wrote:
->> 2010/8/16 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->>> 2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
->>>> -----BEGIN PGP SIGNED MESSAGE-----
->>>> Hash: SHA1
->>>>
->>>> You removed the default openssl version (0.9.8) without bumping PR for
->>>> recipes using that, so now my autobuilder is quite red due to do_rootfs
->>>> failures (among other build errors related to these removals).
->>>
->>> I will reinstate openssl 0.9.8
->>> conf did not show any pinning but i missed the DEFAULT_PREFERENCE = "-1' in 1.0
->>> seems a good plan to upgrade to 0.9.8o though as it fixes some
->>> security vulnerabilities
->>>
->>
->> reverted the commit for removal of 0.9.8
->> I was unaware that a PR bump of recipes using another recipe needed to be done.
->
-> For libraries, certainly, as in this case SOVERSION changed, so the
-> resulting packagenames changes from
-> libssl0.9.8_0.9.8m-r12.0.5_armv7a.ipk to
-> libssl1.0.0_1.0.0-r12.2.5_armv7a.ipk. OE removes the first one, but
-> other packages still have it in DEPENDS.
->
-> And if SOVERSION doesn't change, bumping PR for dependant recipes is
-> needed for things that statically link to it (or even dynamically in
-> some case).
+Hello,
 
-Tanks for the explanation.
-It would be nice if oe would detect those cases and force a rebuild.
->
-> The ffmpeg recipes try to list the know offenders that break when
-> updating SRCREV, but I guess a bitbake tool (e.g. 'bitbake whatdepends
-> foo') would be nice for these kinds of things.
+I need to reconfigure some packages in my image, therefore I added some
+additional packages for configuring.
+I assumed, the packages are installed and configured in proper order
+while creating an image by bitbake.
 
-I've asked before about something like that, forgot why it was not
-easy/possible.
-i also did try a bitbake -g world to get a list of deps, but that also
-failed for some reason.
+But at the time, the package pre- and postinstalls are executed in
+alphabetic order
+by searching the path ../usr/lib/opkg/info/ for *.preinst/*.postinst
+while creating an image.
 
-I would expect that if you have the recipes in a parsed format, it
-should not be overly difficult.
-Anyhow, my pythonese is too limited to implement something like that.
+This cause problems because the install scripts of my configure packages
+need some data from the
+package(s) they depend on.
 
-Frans
+If I install the packages on the target, all is done well.
+
+It may be better to resolve the dependency chain and use this list to
+run the
+pre- and postinstall routines of the packages in order of dependency.
+
+It may be possible to create this dependency list by using opkg
+whatdepends -A
+<package>, or to use the bitbake internal order information of the
+packages.
+
+This should be a proposal for changing the behavior, I am not able to do
+such a change, I don't have the necessary knowledge in bitbake at the
+time.
+
+Or is there an other solution, except pinning the needed order by naming
+of the packages in the right alphabetic order.
+
+Wolfgang Hauser
 
 
