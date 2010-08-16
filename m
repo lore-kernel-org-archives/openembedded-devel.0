@@ -1,44 +1,43 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Okwn9-00012d-EJ
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 12:19:48 +0200
-Received: by ewy7 with SMTP id 7so2235272ewy.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OkwoT-00023i-PZ for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 12:21:07 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Okwo9-00077w-Vv for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 12:20:45 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 12:20:45 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 03:19:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=evQtHfIxy7CTKWBIE0txinflvGG7dYbG7ZokW7V9qWU=;
-	b=UvxuLQVsqpaDIGRK+nIWeKkOKUvIZFvi9V6V20OE3o/F4AhEzlJqyX1kGkmiUWQoD6
-	DuP2r1ag5nlqtrb2/JvfgD7Xr917XIZ9GdiFZmZUmAoL53LDoKxg4tlQwbu3CJCIUFIC
-	QHIQ1tTAQAgxDSAyS/c+YlwCH5a5sSyYRmaIs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=N3ZzS9iJtQkkjHatUebt0vvc6bJkz9nN6k3uGBODCcAMsXKVDDVfyOHo1qt1Y0o1VJ
-	W2adbOldjYQtpWQN9//AvpZ0dSZkLD7OC3eXW3pXuzvHGmYw1ZUazHN9xbPwGHnAD0ab
-	cMSd8hIKVG5dEwFB7XjCND+9rSpnxKPo3UPpo=
-Received: by 10.213.34.77 with SMTP id k13mr4523203ebd.77.1281953963372;
-	Mon, 16 Aug 2010 03:19:23 -0700 (PDT)
-Received: from localhost.localdomain (atwork-193.r-212.178.107.atwork.nl
-	[212.178.107.193])
-	by mx.google.com with ESMTPS id z55sm9742320eeh.3.2010.08.16.03.19.22
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 16 Aug 2010 03:19:22 -0700 (PDT)
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 16 Aug 2010 12:20:45 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 12:20:40 +0200
-Message-Id: <1281954040-17014-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Aug 2010 12:20:37 +0200
+Message-ID: <i4b3dl$vbk$1@dough.gmane.org>
+References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>	<i4auje$u5g$1@dough.gmane.org>	<AANLkTimpAxxt7GR=1VV9ZrAWubMp63sX771+PfhLjWTu@mail.gmail.com>
+	<AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] utils.bbclass: remove tests for checksums.ini
+Subject: Re: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,83 +51,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 10:20:04 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 10:21:09 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-As we have checksums in recipes for quite a while now, I feel the time has come to
-remove the checksums.ini code from utils.bbclass and to remove the (now empty)
-checksums.ini file.
+On 16-08-10 11:30, Frans Meulenbroeks wrote:
+> 2010/8/16 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>> 2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> You removed the default openssl version (0.9.8) without bumping PR for
+>>> recipes using that, so now my autobuilder is quite red due to do_rootfs
+>>> failures (among other build errors related to these removals).
+>>
+>> I will reinstate openssl 0.9.8
+>> conf did not show any pinning but i missed the DEFAULT_PREFERENCE = "-1' in 1.0
+>> seems a good plan to upgrade to 0.9.8o though as it fixes some
+>> security vulnerabilities
+>>
+> 
+> reverted the commit for removal of 0.9.8
+> I was unaware that a PR bump of recipes using another recipe needed to be done.
 
-Attached is the patch.
-Your feedback is appreciated
+For libraries, certainly, as in this case SOVERSION changed, so the
+resulting packagenames changes from
+libssl0.9.8_0.9.8m-r12.0.5_armv7a.ipk to
+libssl1.0.0_1.0.0-r12.2.5_armv7a.ipk. OE removes the first one, but
+other packages still have it in DEPENDS.
 
- classes/utils.bbclass |   45 +--------------------------------------------
- 1 files changed, 1 insertions(+), 44 deletions(-)
- delete mode 100644 conf/checksums.ini
+And if SOVERSION doesn't change, bumping PR for dependant recipes is
+needed for things that statically link to it (or even dynamically in
+some case).
 
-diff --git a/classes/utils.bbclass b/classes/utils.bbclass
-index 7740ea3..83cf33c 100644
---- a/classes/utils.bbclass
-+++ b/classes/utils.bbclass
-@@ -157,50 +157,7 @@ def base_get_checksums(pn, pv, src_uri, localpath, params, data):
-     expected_md5sum = bb.data.getVarFlag("SRC_URI", md5flag, data)
-     expected_sha256sum = bb.data.getVarFlag("SRC_URI", sha256flag, data)
- 
--    if (expected_md5sum and expected_sha256sum):
--        return (expected_md5sum,expected_sha256sum)
--    else:
--        # missing checksum, parse checksums.ini
--
--        # Verify the SHA and MD5 sums we have in OE and check what do
--        # in
--        checksum_paths = bb.data.getVar('BBPATH', data, True).split(":")
--
--        # reverse the list to give precedence to directories that
--        # appear first in BBPATH
--        checksum_paths.reverse()
--
--        checksum_files = ["%s/conf/checksums.ini" % path for path in checksum_paths]
--        try:
--            parser = base_chk_load_parser(checksum_files)
--        except ValueError:
--            bb.note("No conf/checksums.ini found, not checking checksums")
--            return (None,None)
--        except:
--            bb.note("Creating the CheckSum parser failed: %s:%s" % (sys.exc_info()[0], sys.exc_info()[1]))
--            return (None,None)
--        pn_pv_src = "%s-%s-%s" % (pn,pv,src_uri)
--        pn_src    = "%s-%s" % (pn,src_uri)
--        if parser.has_section(pn_pv_src):
--            expected_md5sum    = parser.get(pn_pv_src, "md5")
--            expected_sha256sum = parser.get(pn_pv_src, "sha256")
--        elif parser.has_section(pn_src):
--            expected_md5sum    = parser.get(pn_src, "md5")
--            expected_sha256sum = parser.get(pn_src, "sha256")
--        elif parser.has_section(src_uri):
--            expected_md5sum    = parser.get(src_uri, "md5")
--            expected_sha256sum = parser.get(src_uri, "sha256")
--        else:
--            return (None,None)
--        
--        if name:
--            bb.note("This package has no checksums in corresponding recipe '%s', please consider moving its checksums from checksums.ini file \
--                \nSRC_URI[%s.md5sum] = \"%s\"\nSRC_URI[%s.sha256sum] = \"%s\"\n" % (bb.data.getVar("FILE", data, True), name, expected_md5sum, name, expected_sha256sum))
--        else:
--            bb.note("This package has no checksums in corresponding recipe '%s', please consider moving its checksums from checksums.ini file \
--                \nSRC_URI[md5sum] = \"%s\"\nSRC_URI[sha256sum] = \"%s\"\n" % (bb.data.getVar("FILE", data, True), expected_md5sum, expected_sha256sum))
--
--        return (expected_md5sum, expected_sha256sum)
-+    return (expected_md5sum,expected_sha256sum)
- 
- def base_chk_file(pn, pv, src_uri, localpath, params, data):
-     (expected_md5sum, expected_sha256sum) = base_get_checksums(pn, pv, src_uri, localpath, params, data)
-diff --git a/conf/checksums.ini b/conf/checksums.ini
-deleted file mode 100644
-index e69de29..0000000
--- 
-1.7.0.4
+The ffmpeg recipes try to list the know offenders that break when
+updating SRCREV, but I guess a bitbake tool (e.g. 'bitbake whatdepends
+foo') would be nice for these kinds of things.
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMaRD0MkyGM64RGpERAusfAKCt0gfi9pt4VrKRIxthFlERfigcNQCghvNK
+nyqESj8sCFlsPMyBoUaqraw=
+=cX4G
+-----END PGP SIGNATURE-----
 
 
 
