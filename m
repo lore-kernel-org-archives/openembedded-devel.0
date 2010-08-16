@@ -1,26 +1,25 @@
 Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Ol5B0-0006TU-1n
+	(envelope-from <stefan@datenfreihafen.org>) id 1Ol5F7-00072H-GA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:16:57 +0200
+	Mon, 16 Aug 2010 21:21:10 +0200
 Received: from p5b035811.dip.t-dialin.net ([91.3.88.17] helo=excalibur.local)
 	by sirius.lasnet.de with esmtpsa 
 	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Ol5Ah-0003re-M8 by authid <stefan@sostec.de> with cram_md5
+	id 1Ol5Eo-00041a-TZ by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 21:16:39 +0200
+	Mon, 16 Aug 2010 21:20:54 +0200
 Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Ol5Ag-0001E4-3E
+	(envelope-from <stefan@excalibur.local>) id 1Ol5Em-0001EZ-O5
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:16:34 +0200
-Date: Mon, 16 Aug 2010 21:16:33 +0200
+	Mon, 16 Aug 2010 21:20:48 +0200
+Date: Mon, 16 Aug 2010 21:20:48 +0200
 From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100816191633.GH19855@excalibur.local>
-References: <20100813215427.GD19855@excalibur.local>
-	<1281985585-5715-1-git-send-email-morphis@gravedo.de>
+Message-ID: <20100816192048.GI19855@excalibur.local>
+References: <1281984976-4996-1-git-send-email-morphis@gravedo.de>
 MIME-Version: 1.0
-In-Reply-To: <1281985585-5715-1-git-send-email-morphis@gravedo.de>
+In-Reply-To: <1281984976-4996-1-git-send-email-morphis@gravedo.de>
 X-Mailer: Mutt http://www.mutt.org/
 X-KeyID: 0xDDF51665
 X-Website: http://www.datenfreihafen.org/
@@ -33,7 +32,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] linux-palmpre: add git version
+Subject: Re: [PATCH] u-boot: bump git revision for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,16 +46,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:16:59 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 19:21:10 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
 Hello.
 
-On Mon, 2010-08-16 at 21:06, Simon Busch wrote:
-> The sources from Palm for the Palm Pre has beed modified with little improvements and are
-> rebased against the latest version from Palm found at http://opensource.palm.com from time
-> to time. The modified kernel tree is maintained by the FSO team.
+On Mon, 2010-08-16 at 20:56, Simon Busch wrote:
+> The current git revision for palmpre machine fails to compile. I updated it to the latest
+> revision available as u-boot is currently not usable on the palmpre machine at all.
 > 
 > Signed-off-by: Simon Busch <morphis@gravedo.de>
 
