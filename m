@@ -1,46 +1,52 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ol5U3-0001Z3-UL
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5WB-0004U2-JR
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:36:40 +0200
-Received: by ewy7 with SMTP id 7so2674498ewy.6
+	Mon, 16 Aug 2010 21:38:48 +0200
+Received: by yws5 with SMTP id 5so1030233yws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:36:19 -0700 (PDT)
+	Mon, 16 Aug 2010 12:38:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=VE/6DTLETXjWx8QYPWsSFxp3V9/kwhkyh3vAIdLbaWI=;
-	b=ReB7LgJtYE+CsrDeNsO1Rcu9a81XUdIAJZqbPx7oQ0kEmsP02gz3QUd/8pxBkn/z4l
-	n/wVus+dEXhLRWrsF1YSYMyUo7ByYgSqdSaY7sRIx5+p0I9gQs4vGBpdT/v4+MfPipx4
-	mqfRXi+9e9tEaM6xJDe3wZ/LKoz3JNGKYlsEs=
+	bh=iun0ApIklN8e689X9mIWjD0IR/rapRN5lfEyBDX2wF0=;
+	b=HjTKhQX7Aq3s8c/kPlBI+dqbCFRBNYpg8P1R5/PTIHqQwpcUt1GxSQFyIShjlYEuJh
+	nETz+8EbwK0PG2fDmGAo+y/xXG4JORI2EJK9Ze6l+XucX7kHbK5UixD/iDrZqdSYJSIg
+	O4lOCWFJCexF5CYsGM4GGJYVP4IeSNfILxrm4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=ri3g7e8JYkzl+CaSwTy9izuJ9iQ5oejPUF85SzJd4YsYn1FZnK10f+6f7A3OaSmMS7
-	lstspVFv9YsMu2YzGsGTtKl7DTLQvvT1Ycv2UyEmD2G6p27JdsKoYuPz252vcy7TJ2xR
-	vcq8QZyYCJO0RWB3/1fnQlneWBjdMLeuCKFHQ=
-Received: by 10.213.3.70 with SMTP id 6mr5264129ebm.51.1281987379159; Mon, 16
-	Aug 2010 12:36:19 -0700 (PDT)
+	b=bf3946gI4mstwRAO/8r+sWf0esWZoe8XuLhWV/6oE+IQi5YXucqsh9N9RyZZKbf1OX
+	vTUHIGXzwAnNemrI3N0E4Pe/os8jZwOjBIQ4+5tKowuxBnUEMY+oo4/YWVwEsPW6EiGs
+	e8s76285TLQUqHhM8/VXRk8CACgvvSJFaUB1E=
 MIME-Version: 1.0
-Received: by 10.213.35.135 with HTTP; Mon, 16 Aug 2010 12:35:59 -0700 (PDT)
-In-Reply-To: <201008162325.59305.roman@khimov.ru>
-References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
-	<AANLkTi=gLCkfgLPgJT9oVVxxsfP10uf7w7r02Z5mBkOW@mail.gmail.com>
-	<201008162325.59305.roman@khimov.ru>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 16 Aug 2010 12:35:59 -0700
-Message-ID: <AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
+Received: by 10.150.52.2 with SMTP id z2mr6066708ybz.444.1281987509847; Mon,
+	16 Aug 2010 12:38:29 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 12:38:29 -0700 (PDT)
+In-Reply-To: <4C692F5F.9090208@xora.org.uk>
+References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
+	<i4auje$u5g$1@dough.gmane.org>
+	<AANLkTimpAxxt7GR=1VV9ZrAWubMp63sX771+PfhLjWTu@mail.gmail.com>
+	<AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>
+	<i4b3dl$vbk$1@dough.gmane.org>
+	<AANLkTim8Et4FHon4o2dsTOyFe-8huxTmmFEYA5PNZirw@mail.gmail.com>
+	<i4b7r1$sf8$1@dough.gmane.org>
+	<AANLkTin_ABBeGBY_rQpfmvnjf+afe+5gJqb85EzYHq+L@mail.gmail.com>
+	<4C692F5F.9090208@xora.org.uk>
+Date: Mon, 16 Aug 2010 21:38:29 +0200
+Message-ID: <AANLkTi=e72yJ743qLvPi9NFgnYSG5ZukshLn7cZ0mOnd@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] openssl: update 1.0.0 to 1.0.0a
+Subject: Re: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,47 +60,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:36:44 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Mon, 16 Aug 2010 19:38:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 16, 2010 at 12:25 PM, Roman I Khimov <roman@khimov.ru> wrote:
-> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
-16 =C1=D7=C7=D5=D3=D4=C1 2010 22:59:53 =C1=D7=D4=CF=D2 Frans Meulenbroeks
-> =CE=C1=D0=C9=D3=C1=CC:
->> One small question: Do we want to keep this recipe at
->> DEFAULT_PREFERENCE =3D "-1" ??
+2010/8/16 Graeme Gregory <dp@xora.org.uk>:
+> =A0On 16/08/10 13:14, Frans Meulenbroeks wrote:
+>> 2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
+>> would be nice if oe would detect those cases and force a rebuild.
+>>> That doesn't help if you're using packagemanagement. Now you have
+>>> "foo_1.0-r0.ipk" in the feeds that statically linked to openssl 0.9.8
+>>> and "foo_1.0-r0.ipk" locally that statically links to 1.0.0. So users
+>>> still don't get the fixes that went into openssl.
+>> Agree.
+>> I vaguely recall an idea (I believe from RP) to have a hash or so
+>> derived from the whole dependency tree below it.
+>> This discussion probably ran somewhere last winter.
+>>
+>> Frans
+>>
+> A quick implementation would sum all PR in depends tree above us.
 >
-> Well, we're using 1.0.0 since the day it's been released, and it's a perf=
-ect
-> fit for us, but I know that it _might_ break some things, just google for
-> openssl 1.0.0 breakage/compatibility patches/etc, that's why I've pushed =
-it
-> that way so that distro maintainers could test whether it works for them =
-with
-> their particular package sets and act accordingly.
->
-> I certainly have nothing against removing that line if everyone is OK wit=
-h
-> that.
+> Graeme
 >
 
-IMO the newest version in a recipe should always be default preference
-this way we can
-stabilize recipe upgrades quicker. This also means a wider testing
-before pushing a new recipe
-DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
+That would be an elegant and simple solution.
+There is a minor issue with it wrt lettering (but I guess these can be
+skipped) and maybe cvs/svn/git numbers (i seem to recall some of these
+are not monotonic).
+A more difficult issue is if a dependency is removed. Then suddenly
+the number will drop. The only solution I see right away is manually
+add an offset to the recipe to accomodate for this (but it is not
+really a nice solution).
 
-> --
-> =9Ahttp://roman.khimov.ru
-> mailto: roman@khimov.ru
-> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+Frans
 
 
