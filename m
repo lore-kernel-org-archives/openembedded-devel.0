@@ -1,39 +1,39 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol5QO-0000Kv-35
+	(envelope-from <raj.khem@gmail.com>) id 1Ol5U3-0001Z3-UL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:32:49 +0200
-Received: by yxd39 with SMTP id 39so1553058yxd.6
+	Mon, 16 Aug 2010 21:36:40 +0200
+Received: by ewy7 with SMTP id 7so2674498ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:32:26 -0700 (PDT)
+	Mon, 16 Aug 2010 12:36:19 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=Q5l5jT+Ix4HLey9blMEMC1F2ZiRYZWZZid4p0OdodDE=;
-	b=uH1FXB7FXoA0IFuJXnuPqB9ak6+5jnLH8difNnQmMAZyjJm9CZ7Pa5WMJimL0WCMq5
-	siqtKH0GNEKRl+lnAi8syMOrTDBEXp28TWhXB8TWNzG5QoBqBRQhjjCnb6ArcT7lIUUp
-	RqfgZVRtERY44v1j3zkLQVIQTzYOLCK0JMXTA=
+	bh=VE/6DTLETXjWx8QYPWsSFxp3V9/kwhkyh3vAIdLbaWI=;
+	b=ReB7LgJtYE+CsrDeNsO1Rcu9a81XUdIAJZqbPx7oQ0kEmsP02gz3QUd/8pxBkn/z4l
+	n/wVus+dEXhLRWrsF1YSYMyUo7ByYgSqdSaY7sRIx5+p0I9gQs4vGBpdT/v4+MfPipx4
+	mqfRXi+9e9tEaM6xJDe3wZ/LKoz3JNGKYlsEs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=tn57788vfUIw0rIbrtZSEurLhskUIuQKDgG/kBSiTwSJHudE1WoEx81hqkSazl5u9S
-	6LKeQ7f8Lr4icXNKPP1iqADUzVG7RvVMPBkjsugiBesKBc5jG5VM9AUqsq/NFB7raqjV
-	Dgwnk0OadBSCQ5VKyrpwPpG9Eohw3/xaVsal8=
+	b=ri3g7e8JYkzl+CaSwTy9izuJ9iQ5oejPUF85SzJd4YsYn1FZnK10f+6f7A3OaSmMS7
+	lstspVFv9YsMu2YzGsGTtKl7DTLQvvT1Ycv2UyEmD2G6p27JdsKoYuPz252vcy7TJ2xR
+	vcq8QZyYCJO0RWB3/1fnQlneWBjdMLeuCKFHQ=
+Received: by 10.213.3.70 with SMTP id 6mr5264129ebm.51.1281987379159; Mon, 16
+	Aug 2010 12:36:19 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.59.83 with SMTP id k19mr6229122ibh.178.1281987145782; Mon,
-	16 Aug 2010 12:32:25 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 12:32:25 -0700 (PDT)
+Received: by 10.213.35.135 with HTTP; Mon, 16 Aug 2010 12:35:59 -0700 (PDT)
 In-Reply-To: <201008162325.59305.roman@khimov.ru>
 References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
 	<AANLkTi=gLCkfgLPgJT9oVVxxsfP10uf7w7r02Z5mBkOW@mail.gmail.com>
 	<201008162325.59305.roman@khimov.ru>
-Date: Mon, 16 Aug 2010 21:32:25 +0200
-Message-ID: <AANLkTim3TYOOG4NPhE85eT2-t8gjqq+wP3Twydjk7MjQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 16 Aug 2010 12:35:59 -0700
+Message-ID: <AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -54,11 +54,11 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:32:49 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 19:36:44 -0000
 Content-Type: text/plain; charset=KOI8-R
 Content-Transfer-Encoding: quoted-printable
 
-2010/8/16 Roman I Khimov <roman@khimov.ru>:
+On Mon, Aug 16, 2010 at 12:25 PM, Roman I Khimov <roman@khimov.ru> wrote:
 > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
 16 =C1=D7=C7=D5=D3=D4=C1 2010 22:59:53 =C1=D7=D4=CF=D2 Frans Meulenbroeks
 > =CE=C1=D0=C9=D3=C1=CC:
@@ -77,19 +77,24 @@ with
 > I certainly have nothing against removing that line if everyone is OK wit=
 h
 > that.
+>
 
-Reason for bringing this up is that for a recipe (forgot which one) I
-noticed that the last 5 versions or so have DEFAULT_PREFERENCE =3D "-1".
-This at least seems odd.
+IMO the newest version in a recipe should always be default preference
+this way we can
+stabilize recipe upgrades quicker. This also means a wider testing
+before pushing a new recipe
+DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
 
-For me DEFAULT_PREFERENCE =3D "-1" is mainly to be used if the highest
-versioned recipe is not well tested or unfinished or so.
-Also it can be used e.g. if a certain version does not build for a
-specifc machine (DEFAULT_PREFERENCE_machine =3D "-1")
-Then again it might be that the common understanding on how to use
-DEFAULT_PREFERENCE is different.
-Probably this is something to be documented.
-
-Frans
+> --
+> =9Ahttp://roman.khimov.ru
+> mailto: roman@khimov.ru
+> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
 
