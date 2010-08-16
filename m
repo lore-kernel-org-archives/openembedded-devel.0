@@ -1,31 +1,43 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1Ol2Kh-0000Wh-Bb
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 18:15:03 +0200
-Received: by qwi2 with SMTP id 2so50254qwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ol2cU-0004nq-6E for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 18:33:12 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ol2by-00061M-8h for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 18:32:34 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 18:32:34 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 09:14:25 -0700 (PDT)
-Received: by 10.229.248.84 with SMTP id mf20mr3830534qcb.16.1281975265608;
-	Mon, 16 Aug 2010 09:14:25 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id e6sm7488239qcr.5.2010.08.16.09.14.23
-	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Aug 2010 09:14:24 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	Mon, 16 Aug 2010 18:32:34 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 11:14:22 -0500
-Message-Id: <1281975262-31559-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 16 Aug 2010 18:32:23 +0200
+Message-ID: <i4bp6n$8cv$1@dough.gmane.org>
+References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>	<20100816132317.GA7983@zlo.nu>	<AANLkTikB5uioXp0BwFg4Gj6GV9MjgMmyOgvjLLOwS8fh@mail.gmail.com>
+	<20100816140055.GB7983@zlo.nu>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <20100816140055.GB7983@zlo.nu>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] libgcrypt: Add symlink for mpi files
+Subject: Re: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,43 +51,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 16:15:22 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 16:33:12 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-'configure' doesn't seem to include the necessary '../mpi' in the
-symlinks that get generated.  This hack will make the symlinks that do
-get created work.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
----
- recipes/libgcrypt/libgcrypt.inc |    6 ++++++
- 1 files changed, 6 insertions(+), 0 deletions(-)
+On 16-08-10 16:00, Marc Olzheim wrote:
+> On Mon, Aug 16, 2010 at 03:43:10PM +0200, Frans Meulenbroeks wrote:
+>>> Hmm, the "guidelines" do not mention anything about licenses. Thus the
+>>> only version you left of coreutils after
+>>> 82dcd385984ba059b346a0e37fd3e14d536074ad is infected with GPLv3, while
+>>> the older (6.0) GPLv2 version works fine for us.  I do not know
+>>> whether other people mind about licenses, but we cannot use any GPLv3
+>>> software in our image, because of its viral nature.
+>>>
+>>> Marc
+>>
+>> Valid point.
+>> I did not consider licenses. Although the company I work for has no
+>> problems with GPLv2, I understand your concern
+>> What would be the most recent version of coreutils that is still using v2?
+>> We can reinstate that one.
+> 
+> In the case of coreutils, that is 6.0.
+> GPLv2 is ok here as well. The problem with GPLv3 here is that as soon as
+> we incorporate some GPLv3 package we need to provide the abilitiy for
+> customers to rebuild their image (Right to Tinker), which we cannot and
+> will not do.
 
-diff --git a/recipes/libgcrypt/libgcrypt.inc b/recipes/libgcrypt/libgcrypt.inc
-index f29dc8d..0c44fff 100644
---- a/recipes/libgcrypt/libgcrypt.inc
-+++ b/recipes/libgcrypt/libgcrypt.inc
-@@ -4,6 +4,8 @@ PRIORITY = "optional"
- LICENSE = "GPL LGPL FDL"
- DEPENDS = "libgpg-error"
- 
-+PR = "r1"
-+
- SRC_URI = "ftp://ftp.gnupg.org/gcrypt/libgcrypt/libgcrypt-${PV}.tar.gz \
-            file://add-pkgconfig-support.patch \
-            file://mips-h-constraint.patch"
-@@ -14,6 +16,10 @@ EXTRA_OECONF = "--without-pth --disable-asm --with-capabilities"
- 
- ARM_INSTRUCTION_SET = "arm"
- 
-+do_configure_append() {
-+	ln -s ${S}/mpi ${S}/mpi/mpi
-+}
-+
- do_install_append() {
- 	install -d ${D}/${libdir}/pkgconfig/
- 	cp ${S}/src/*.pc ${D}/${libdir}/pkgconfig/
--- 
-1.5.6.4
+And the patent clause isn't fun if your company has tons of IP in that
+area (like mine).
+
+regards,
+
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMaWgWMkyGM64RGpERAg6PAJ4+ANeicD6Iwz5VOFF7FXwBNIdtXgCeMZKK
+Ue6O0IThYTeDJ8RcCKbwIjE=
+=Rn2H
+-----END PGP SIGNATURE-----
 
 
 
