@@ -1,45 +1,43 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Ol0jx-0007hR-H0
+	(envelope-from <martin.jansa@gmail.com>) id 1Ol1ds-00067K-Ff
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 16:32:42 +0200
-Received: by wwb34 with SMTP id 34so5453861wwb.24
+	Mon, 16 Aug 2010 17:30:28 +0200
+Received: by fxm6 with SMTP id 6so3100953fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 07:32:24 -0700 (PDT)
+	Mon, 16 Aug 2010 08:30:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	bh=mAX+gRGa/b+3MqpAxnGGeO7RSVA+FSolYy8PwxrF4mc=;
-	b=F6dc0tEHD2kXAZZfiLCzR/JlnHJtbc/xhd8KXh6c4n8wbqqmFi/O2IvjDzurOLFGKs
-	bqEGPZ0UhUUpOmFNgtk9XC5oUubq1Fk/LDlV8RwFmgEGPsyVrsXv6aJY3dGMz8HE3oeK
-	9VSgRcuHSgLMO+a8M9pX9mspPqprc1BxFh090=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=i1n75YnQWLpLFsrr3npZQ+GNW8QpRpMApqxZPkYl9aw=;
+	b=pkohWZdS0shfOIL58/ScplJOfnWcMCVgWU7KyZ3Q8kMCTziCpG2tdCzHXtIu/UqmdH
+	C4hwxTaYtgnLj187E2lQpQi0R26gK2ghLdCcjMvhqMPHvJcD6oYrqmpJwBwd3dyadWVh
+	oEQAJDZo9FvTL2qzkMC5S2rh/XoQ3aiwJXuUQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	b=w2+qnE/RxJzC7ZFErgfkkcwqO0b9tT2Phvl5eDYSuyrJXXkT45OYPROLhcZ3TkQ6u0
-	LWLMU9BEkVZYr0/cFSEIHl/QffShsIkskUU+05wvJzlID0tO33j6hffxI6vTyWF/18UB
-	wiSvSZPSxogF0eNxg9k/HOej1vEVLBgNXAUKw=
-Received: by 10.227.132.199 with SMTP id c7mr4539769wbt.89.1281969144172; Mon,
-	16 Aug 2010 07:32:24 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.166 with HTTP; Mon, 16 Aug 2010 07:32:04 -0700 (PDT)
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 16 Aug 2010 07:32:04 -0700
-X-Google-Sender-Auth: 5GKD6TvyvjOsRNDP8qwfHKRv4Y0
-Message-ID: <AANLkTim90Y+pBFcF6YmYnXOdTB94JbB1=JMN1vpqL2k8@mail.gmail.com>
-To: bitbake-dev@lists.berlios.de, 
-	Openembedded Discussion <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+	h=from:to:subject:date:message-id:x-mailer;
+	b=G/xwWxCuUZTADRgZDRYOkgInjUeQqMUiHufkFpnLQwEZyKj8WFgxVht/8e55TzZuFg
+	qdo0OxVqYLkv3I1I8MO8GpUrDs/0HjdOez8+bF8inGzo/RjOUL1pwWOl0ds/QzO2Gu0c
+	4NQO1brdWnNuJlvRt4cNqGPEMH6l5OKQoVuLg=
+Received: by 10.223.126.14 with SMTP id a14mr5328754fas.44.1281972611451;
+	Mon, 16 Aug 2010 08:30:11 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id r10sm2501199faq.5.2010.08.16.08.30.10
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 16 Aug 2010 08:30:10 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Mon, 16 Aug 2010 17:30:11 +0200
+Message-Id: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.2
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: [ANNOUNCE] BitBake 1.10.0
+Subject: xorg recipes cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +51,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 14:32:42 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 16 Aug 2010 15:30:29 -0000
 
-Greetings all,
+Hi,
 
-I've created a 1.10.0 release based upon the current 1.10 branch in BitBake.
- Unfortunately, it's nontrivial to list here everything that has been done
-since 1.8, as master has been developed for years before stabilizing enough
-to be released.  See
-http://git.openembedded.org/cgit.cgi/bitbake/tree/ChangeLog?id=1.10.0 for an
-idea of some of the bigger developments.  One of the biggest is the
-frontend/backend split.  BitBake now has the ability to communicate between
-frontend and backend via XML/RPC in both directions, rather than being in a
-single process.  This means it will be much easier for things like the OE
-eclipse plugin to gain the ability to control builds, by sending a bitbake
-server commands and receiving events to display to the user.
+all distributions are now using 
+preferred-xorg-versions-X11R7.5.inc or
+preferred-xorg-versions-live.inc or
+no preferred-xorg-versions*.inc at all
 
-Again, I apologize for how very brief this announcement is, in the future
-we'll be doing a much better job at summarizing the changes in a release, as
-the change list will be within the bounds of reason :)  You can obtain the
-release archive at https://developer.berlios.de/projects/bitbake/ as always,
-or you can of course utilize the 1.10.0 tag in the bitbake git repository.
- Thanks for your time, and we'd greatly appreciate folks testing this out.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+So we can remove some older versions not pinned in those 2 
+to make future maintanance of xorg-* dirs a bit easier.
+
+As this is really easy to test (if you apply all 9 and build your 
+favourite target again, no xorg package should be rebuilt - version changed),
+please test and ACK or don't scream later that you had some strange version
+preferred from local.conf.
+
+Thanks,
+
+
 
