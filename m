@@ -1,46 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ol804-0005sZ-Bp
+	(envelope-from <jkridner@beagleboard.org>) id 1Ol8RY-0001J7-CV
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 00:17:53 +0200
-Received: by wwb34 with SMTP id 34so5873335wwb.24
+	Tue, 17 Aug 2010 00:46:20 +0200
+Received: by vws13 with SMTP id 13so3983377vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 15:17:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RRQSusyN+c00/AjJXypEbReJpW9/Z/TqyWsVVn0Co6w=;
-	b=odxO/OBPEXmJyORe0ZnBrJNckitRMvzvMwZyBVEtSOXl8x2Nsco4pmoE84HuHDPi4z
-	BaWsk1ZXoKp0+10poA/dgKdu7k5AkocffnAcXJHDUesNwoFjU5BLxN2yZC7DNp0e0ftI
-	oNZIIFZ/tjihYGpxYImQiM0m4j5lCkAw5xra4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=K8A3JDbyxk6ngD1HrOh2/4KQLMI7D3DCsWO9mVYcRhbeGSElpn0iBkPgT4OryZkaKR
-	Ahsz6Vz45qkYMWjQAl5BzAGEvzeiiVn9gPUu1YOGjDyChkUP0eChxlEg40xx/00twpBV
-	Dp8L1nlsW6COFXxak2n1BeKhDgdUsG0iVNc8M=
-MIME-Version: 1.0
-Received: by 10.227.145.14 with SMTP id b14mr5251503wbv.24.1281997050770; Mon,
-	16 Aug 2010 15:17:30 -0700 (PDT)
-Received: by 10.227.69.82 with HTTP; Mon, 16 Aug 2010 15:17:30 -0700 (PDT)
-In-Reply-To: <4C609035.7080500@gmail.com>
-References: <E1OhMNp-0001vS-Ot@melo.openembedded.org>
-	<AANLkTimcUgoNO73WXbn2R1O-pgXT-4raSGjtsHa8SvOC@mail.gmail.com>
-	<4C609035.7080500@gmail.com>
-Date: Tue, 17 Aug 2010 00:17:30 +0200
-Message-ID: <AANLkTinwNNmb-b2dDWycBeKmPWK4JP0sjYAYYZhmKwau@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	Mon, 16 Aug 2010 15:45:54 -0700 (PDT)
+Received: by 10.220.98.193 with SMTP id r1mr3609125vcn.229.1281998754232;
+	Mon, 16 Aug 2010 15:45:54 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id m30sm3811556vbr.19.2010.08.16.15.45.52
+	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Aug 2010 15:45:53 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Mon, 16 Aug 2010 17:45:51 -0500
+Message-Id: <1281998751-10781-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Graham Gower : package_ipk.bbclass: add lists_dir to sysroots' /etc/opkg. conf
+Subject: [PATCH] flex: disabled packaged staging of native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,95 +39,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 22:17:54 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 16 Aug 2010 22:46:24 -0000
 
-On Tue, Aug 10, 2010 at 1:33 AM, Graham Gower <graham.gower@gmail.com> wrot=
-e:
-> On 08/10/2010 07:24 AM, Andrea Adami wrote:
->> It seems this doesn't respect ${ONLINE_PACKAGE_MANAGEMENT}" =3D=3D "none=
-"
->>
->> I see a spurious /var/lib/opkg in the cpio of initramfs-kexecboot-image.
->>
->> oe =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=E2=94=82 =C2=A0 =C2=
-=A0 =C2=A00=E2=94=82Aug =C2=A09 23:32=E2=94=82
->> oe-all =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=E2=94=82 =C2=A064030=E2=94=82A=
-ug =C2=A09 23:32
->> oe-armv5te =C2=A0 =C2=A0 =C2=A0=E2=94=823637007=E2=94=82Aug =C2=A09 23:3=
-2
->> oe-tosa =C2=A0 =C2=A0 =C2=A0 =C2=A0 =E2=94=82 463708=E2=94=82Aug =C2=A09=
- 23:3
->>
->>
->> We don't need any extra cruft there ;)
->>
->> Regards
->>
->> Andrea
->>
->
-> /var/lib/opkg shouldn't be populated regardless of the value of ONLINE_PA=
-CKAGE_MANAGEMENT.
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
-> ---
-> diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
-> index db04fb6..b0baab0 100644
-> --- a/classes/rootfs_ipk.bbclass
-> +++ b/classes/rootfs_ipk.bbclass
-> @@ -98,15 +98,18 @@ fakeroot rootfs_ipk_do_rootfs () {
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0else
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0rm -f ${IMAGE_ROOTFS}${libdir}/opkg/lists/*
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
-> -
-> +
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rm -rf ${IMAGE_ROOTFS}=
-/var/lib/opkg/*
-> +
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0# Keep these lines=
- until package manager selection is implemented
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ln -s opkg ${IMAGE=
-_ROOTFS}${sysconfdir}/ipkg
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0ln -s opkg ${IMAGE=
-_ROOTFS}${libdir}/ipkg
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0else
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -rf ${IMAGE_ROO=
-TFS}${libdir}/opkg
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -rf ${IMAGE_ROO=
-TFS}/usr/lib/opkg
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 rm -rf ${IMAGE_ROOTFS}=
-/var/lib/opkg
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0fi
-> -
-> +
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0log_check rootfs
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0rm -rf ${IPKG_TMP_DIR}
-> =C2=A0}
+---
+ recipes/flex/flex.inc |    4 +++-
+ 1 files changed, 3 insertions(+), 1 deletions(-)
 
-We (SHR) are using tmp_dir pointing to /var/lib/opkg/tmp (because /tmp
-is size-limited tmpfs)
+diff --git a/recipes/flex/flex.inc b/recipes/flex/flex.inc
+index 49b26e8..5d3f076 100644
+--- a/recipes/flex/flex.inc
++++ b/recipes/flex/flex.inc
+@@ -4,7 +4,7 @@ LICENSE = "BSD"
+ 
+ DEPENDS = "gettext"
+ 
+-INC_PR = "r5"
++INC_PR = "r6"
+ 
+ S = "${WORKDIR}/flex-${PV}"
+ 
+@@ -16,3 +16,5 @@ inherit autotools gettext
+ # static-only library; that might be an error
+ 
+ FILES_${PN} += "${libdir}/libfl.a"
++
++PSTAGING_DISABLED_virtclass-native = "1"
+-- 
+1.5.6.4
 
-in opkg-collateral.bb:
-do_install_append_shr () {
-        install -d ${D}/var/lib/opkg/tmp
-}
-
-This change removes /var/lib/opkg/tmp from prepared image (and opkg
-calls then fail on target).
-
-Do you propose different tmp dir or can you update the logic somehow?
-
-Thanks,
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
