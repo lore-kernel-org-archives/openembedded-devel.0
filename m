@@ -1,31 +1,39 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1Ol8RY-0001J7-CV
+	(envelope-from <Tom_Rini@mentor.com>) id 1Ol9Ln-000435-ST
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 00:46:20 +0200
-Received: by vws13 with SMTP id 13so3983377vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 15:45:54 -0700 (PDT)
-Received: by 10.220.98.193 with SMTP id r1mr3609125vcn.229.1281998754232;
-	Mon, 16 Aug 2010 15:45:54 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id m30sm3811556vbr.19.2010.08.16.15.45.52
-	(version=SSLv3 cipher=RC4-MD5); Mon, 16 Aug 2010 15:45:53 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	Tue, 17 Aug 2010 01:44:21 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Ol9LV-00067I-MY from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 16:44:01 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 16 Aug 2010 16:44:01 -0700
+Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 16 Aug 2010 17:44:00 -0600
+Message-ID: <4C69CD3E.5090007@mentor.com>
+Date: Mon, 16 Aug 2010 16:43:58 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 17:45:51 -0500
-Message-Id: <1281998751-10781-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+References: <1281998751-10781-1-git-send-email-jkridner@beagleboard.org>
+In-Reply-To: <1281998751-10781-1-git-send-email-jkridner@beagleboard.org>
+X-OriginalArrivalTime: 16 Aug 2010 23:44:00.0663 (UTC)
+	FILETIME=[E6CDCA70:01CB3D9C]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] flex: disabled packaged staging of native builds
+Subject: Re: [PATCH] flex: disabled packaged staging of native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 22:46:24 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 23:44:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
----
- recipes/flex/flex.inc |    4 +++-
- 1 files changed, 3 insertions(+), 1 deletions(-)
+Jason Kridner wrote:
+> ---
+>  recipes/flex/flex.inc |    4 +++-
+>  1 files changed, 3 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/flex/flex.inc b/recipes/flex/flex.inc
+> index 49b26e8..5d3f076 100644
+> --- a/recipes/flex/flex.inc
+> +++ b/recipes/flex/flex.inc
+> @@ -4,7 +4,7 @@ LICENSE = "BSD"
+>  
+>  DEPENDS = "gettext"
+>  
+> -INC_PR = "r5"
+> +INC_PR = "r6"
+>  
+>  S = "${WORKDIR}/flex-${PV}"
+>  
+> @@ -16,3 +16,5 @@ inherit autotools gettext
+>  # static-only library; that might be an error
+>  
+>  FILES_${PN} += "${libdir}/libfl.a"
+> +
+> +PSTAGING_DISABLED_virtclass-native = "1"
 
-diff --git a/recipes/flex/flex.inc b/recipes/flex/flex.inc
-index 49b26e8..5d3f076 100644
---- a/recipes/flex/flex.inc
-+++ b/recipes/flex/flex.inc
-@@ -4,7 +4,7 @@ LICENSE = "BSD"
- 
- DEPENDS = "gettext"
- 
--INC_PR = "r5"
-+INC_PR = "r6"
- 
- S = "${WORKDIR}/flex-${PV}"
- 
-@@ -16,3 +16,5 @@ inherit autotools gettext
- # static-only library; that might be an error
- 
- FILES_${PN} += "${libdir}/libfl.a"
-+
-+PSTAGING_DISABLED_virtclass-native = "1"
+I assume you've ran into 2.3.35 not being relocation happy?  Have you 
+been able to look at this at all?  2.3.31 works so it's something 'bad' 
+done upstream.  Thanks!
+
 -- 
-1.5.6.4
-
+Tom Rini
+Mentor Graphics Corporation
 
 
