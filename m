@@ -1,32 +1,27 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from ns0.zlo.nu ([85.17.141.90] helo=mzh.zlo.nu)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1OkzVF-0000Rw-Gq
+	(envelope-from <marcolz@zlo.nu>) id 1Okzf4-0005PI-CB
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 15:13:58 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OkzUx-000251-7H from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 06:13:07 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 16 Aug 2010 15:13:05 +0200
-From: Noor Ahsan <noor_ahsan@mentor.com>
+	Mon, 16 Aug 2010 15:23:35 +0200
+Received: by mzh.zlo.nu (Postfix, from userid 1000)
+	id 9B100140CD; Mon, 16 Aug 2010 15:23:17 +0200 (CEST)
+Date: Mon, 16 Aug 2010 15:23:17 +0200
+From: Marc Olzheim <zlo@zlo.nu>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 19:11:24 +0600
-Message-Id: <1281964284-1963-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 16 Aug 2010 13:13:05.0704 (UTC)
-	FILETIME=[C37D7280:01CB3D44]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
+Message-ID: <20100816132317.GA7983@zlo.nu>
+References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 85.17.141.90
+X-SA-Exim-Mail-From: marcolz@zlo.nu
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH V2] sdcc-native: Run oe-stylize.py
+Subject: Re: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,41 +35,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 13:14:01 -0000
+X-List-Received-Date: Mon, 16 Aug 2010 13:23:35 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-* Run 'oe-stylize.py' on the recipe and make changes accordingly
+On Sun, Aug 15, 2010 at 04:59:17PM +0200, Frans Meulenbroeks wrote:
+> As some of you might have noticed I've been cleaning up our
+> recipes.during the last week or so.
+> As I had some time at hand this weekend, lots of cleaning has been done.
+> I did my very best to stay within the guidelines of the TSC (as
+> described in http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-May/020047.html),
+> but it is quite possible that at some point I made a mistake or so.
+> If so, let me know and I'll repair things and/or revert the commit. (I
+> feel if you make a mess you should also clean it yourself).
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- recipes/sdcc/sdcc-native_2.8.0.bb |    9 +++------
- 1 files changed, 3 insertions(+), 6 deletions(-)
+Hmm, the "guidelines" do not mention anything about licenses. Thus the
+only version you left of coreutils after
+82dcd385984ba059b346a0e37fd3e14d536074ad is infected with GPLv3, while
+the older (6.0) GPLv2 version works fine for us.  I do not know
+whether other people mind about licenses, but we cannot use any GPLv3
+software in our image, because of its viral nature.
 
-diff --git a/recipes/sdcc/sdcc-native_2.8.0.bb b/recipes/sdcc/sdcc-native_2.8.0.bb
-index dbecffa..60cebbe 100644
---- a/recipes/sdcc/sdcc-native_2.8.0.bb
-+++ b/recipes/sdcc/sdcc-native_2.8.0.bb
-@@ -1,16 +1,13 @@
- require sdcc_${PV}.bb
--inherit native
- DEPENDS = ""
- 
- # don't need native-tools patch here
- SRC_URI = "${SOURCEFORGE_MIRROR}/sdcc/sdcc-src-${PV}.tar.bz2 \
-           "
- 
-+inherit native
-+
- do_stage() {
--	oe_runmake install
-+        oe_runmake install
- }
- 
--#do_stage() {
--#	find bin -type f -perm -0755 -exec install -m 0755 {} ${STAGING_BINDIR} \;
--#}
--
--- 
-1.6.3.3
-
+Marc
 
 
