@@ -1,35 +1,45 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1Oky0r-0006MF-4e
+	(envelope-from <kousiklinux@gmail.com>) id 1OkyB7-0002t5-90
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 13:37:58 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o7GBbbfq023114
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Mon, 16 Aug 2010 13:48:36 +0200
+Received: by qwi2 with SMTP id 2so90421qwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:37:38 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1Oky0W-0001FA-Qp
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 13:37:36 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 16 Aug 2010 13:37:36 +0200
-Message-ID: <lyr5hyhjpb.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Mon, 16 Aug 2010 04:48:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=c0GZSm6dXX47ZIIHp/bHRkH24OrTdkYRhgrgstOfPNs=;
+	b=qLjLvs1DGVkHbzzkoEQ2jsMumet5A/W/V7+plwnZwRo8SQF+8q3x7CKLesHD2/gEBA
+	t6yrjI4sUhI8SSYCXeM+yx09TT1H/SY+S0unC/JO4vQGFzHWq2CCAFB71IjT7H1VL9V6
+	1iBqOPxORai9kL6Ma2kTrJqKI/zbhYY+X4jvk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=veKkWc0ZR/Brpo/2OLoRDLbgcNQt37F4cQXJNUARCwbM9aMhFWXwI6W9QiOz0mVxAW
+	34zxMqGd+F7jvp8Di5X5/Et5NX1xTwUvaBLJHl6cXE/AersNP8ZM/45ZB55EFh37uCKC
+	7GrhCeTpxJyhGbD3JIug6j5JYbonXMMRuXL3E=
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+Received: by 10.229.37.76 with SMTP id w12mr107614qcd.188.1281959290967; Mon,
+	16 Aug 2010 04:48:10 -0700 (PDT)
+Received: by 10.229.240.66 with HTTP; Mon, 16 Aug 2010 04:48:10 -0700 (PDT)
+In-Reply-To: <AANLkTimLboPPcFegwhZJswLr2cpYayryZMS6zu0SVn9E@mail.gmail.com>
+References: <AANLkTi=immHiyS5p0WWmCYaii-5xBruCuBi3_jC_s5Pw@mail.gmail.com>
+	<AANLkTimLboPPcFegwhZJswLr2cpYayryZMS6zu0SVn9E@mail.gmail.com>
+Date: Mon, 16 Aug 2010 17:18:10 +0530
+Message-ID: <AANLkTi=xMwTUONg0ugaR29hnJr8-tGcMUsd6JsQb0aat@mail.gmail.com>
+From: Kousik Maiti <kousiklinux@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: kousiklinux@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS,WEIRD_PORT autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Usage of NATIVE_INSTALL_WORKS
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Unable to build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,32 +53,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 11:37:58 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Mon, 16 Aug 2010 11:48:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi,
+Thanks Frans.
 
-http://wiki.openembedded.org/index.php/Legacy_staging states that
-NATIVE_INSTALL_WORKS must be set when there is a non trivial
-do_install() function and BBCLASSEXTEND is used.
+But now I am facing another problem.
 
-But 
+bitbake task-base
+/var/lib/python-support/python2.6/bb/COW.py:30: DeprecationWarning: the sets
+module is deprecated
+  import os, types, sets
+ERROR: no files to build.
 
-| git grep NATIVE_INSTALL_WORKS conf/ classes/ lib/ 
+NOTE: Parsing finished. 0 cached, 0 parsed, 0 skipped, 0 masked.
+NOTE: Cache is clean, not saving.
+Traceback (most recent call last):
+  File "/usr/bin/bitbake", line 143, in <module>
+    main()
+  File "/usr/bin/bitbake", line 140, in main
+    cooker.cook()
+  File "/var/lib/python-support/python2.6/bb/cooker.py", line 643, in cook
+    return self.buildTargets(pkgs_to_build)
+  File "/var/lib/python-support/python2.6/bb/cooker.py", line 530, in
+buildTargets
+    bb.event.fire(bb.event.BuildStarted(buildname, targets,
+self.configuration.event_data))
+  File "/var/lib/python-support/python2.6/bb/event.py", line 67, in fire
+    if tmpHandler(event) == Handled:
+  File "tmpHandler(e)", line 3, in tmpHandler
+  File "<bb>", line 19, in check_sanity
+NameError: global name 'os' is not defined
 
-shows only one place where this variable is evaluated:
+I have changed into /usr/share/bitbake/conf/bitbake.conf according to
+http://forums.xkcd.com/viewtopic.php?f=20&t=50227
 
-| classes/staging.bbclass:    elif bb.data.getVar('NATIVE_INSTALL_WORKS', d, 1) == "1":
-| classes/staging.bbclass-        legacy = False
+Can anybody help???
 
-And there, it is used only in the is_legacy_staging() function, to
-override legacy/non-legacy detection results.
+Thanks in advanced.
 
+With regards,
+Kousik
 
-Is there still any use for this variable in modern staging?  Or shall it
-be purged from non-legacy recipes?
+On Mon, Aug 16, 2010 at 1:29 PM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
-
-Enrico
-
+> 2010/8/16 Kousik Maiti <kousiklinux@gmail.com>:
+> > Hi List,
+> > I am new to openembeded.
+> > I read the usermanual of openembeded. I configured my system as given in
+> the
+> > manual. But when I run
+> > $ bitbake -b /home/kousikm/work/oe/openembedded/recipes/linux/
+> > linux_2.6.34.bb
+> >
+> Don't use bitbake -b. If you are doing that packages that are needed
+> to build the package are not build.
+> If you're new start with
+> bitbake helloworld
+> if you are daring then you can do
+> bitbake virtual/kernel
+> and/or
+> bitbake console-image
+>
+> don't use -b.
+>
+> Have fun! Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
