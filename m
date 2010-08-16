@@ -1,43 +1,29 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ol56P-0000je-TO
+	(envelope-from <morphis@gravedo.de>) id 1Ol56o-0000l3-6O
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:12:10 +0200
-Received: by gxk2 with SMTP id 2so2121915gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:11:52 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=HzCxbVldwfiQyt6x3p8gM/cl1eRx7tp+AjiqkTjwesg=;
-	b=IUESFFNEZt1wcEPKJ9afhm5RjkE9/6dgPdRHEtgV5MlLJHeLZloFqXQ2b2Xr91spV3
-	FW/KD1djhdMRe+p3GAUwZWAQ1VG4nN3AD8TfO11v40aeJAGSOwf2zsGYr3bI2Sgjwic3
-	glUeM9JKoyHa/95cUJMT/X9IeWHnuIrN0+tPU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=V2/HPKsgdGhCIVT3DtLhVQ9xPd/hOAonwFqA7VPLfLMjZJiNoaBXOLsy0AvoCW0fNM
-	AtmI254c0L/UxUT6RdJ2v3tCq7xp0NtExPheDkjzYl5F9rvE8Mr8haaiLG7GYtr3HhAc
-	z5uRbtPxDuJaM4X0N0qEHWdt46SYkX+MhXU0U=
-MIME-Version: 1.0
-Received: by 10.231.149.80 with SMTP id s16mr6472560ibv.81.1281985911883; Mon,
-	16 Aug 2010 12:11:51 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 12:11:51 -0700 (PDT)
-In-Reply-To: <AANLkTim90Y+pBFcF6YmYnXOdTB94JbB1=JMN1vpqL2k8@mail.gmail.com>
-References: <AANLkTim90Y+pBFcF6YmYnXOdTB94JbB1=JMN1vpqL2k8@mail.gmail.com>
-Date: Mon, 16 Aug 2010 21:11:51 +0200
-Message-ID: <AANLkTimynyWfEgGcKiO2h8kS04cJ2Ma5qCbpPU2t4vCB@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 16 Aug 2010 21:12:35 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id B15DB275D865; Mon, 16 Aug 2010 21:12:18 +0200 (CEST)
+Received: from localhost (p5489A50E.dip.t-dialin.net [84.137.165.14])
+	by gravedo.de (Postfix) with ESMTPSA id 8AFB7275D863;
+	Mon, 16 Aug 2010 21:12:17 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 16 Aug 2010 21:12:13 +0200
+Message-Id: <1281985933-6172-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.0.4
+In-Reply-To: <20100813215306.GC19855@excalibur.local>
+References: <20100813215306.GC19855@excalibur.local>
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [ANNOUNCE] BitBake 1.10.0
+Subject: [PATCH] tslib: add config files for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,13 +37,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:12:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 16 Aug 2010 19:12:35 -0000
 
-Chris,
+Signed-off-by: Simon Busch <morphis@gravedo.de>
+---
+ recipes/tslib/tslib.inc              |    2 +-
+ recipes/tslib/tslib/palmpre/ts.conf  |   27 +++++++++++++++++++++++++++
+ recipes/tslib/tslib/palmpre/tslib.sh |    6 ++++++
+ 3 files changed, 34 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/tslib/tslib/palmpre/ts.conf
+ create mode 100644 recipes/tslib/tslib/palmpre/tslib.sh
 
-Thanks for making the release & keep up the good work!
+diff --git a/recipes/tslib/tslib.inc b/recipes/tslib/tslib.inc
+index b23198c..b6ba48a 100644
+--- a/recipes/tslib/tslib.inc
++++ b/recipes/tslib/tslib.inc
+@@ -3,7 +3,7 @@ HOMEPAGE = "http://tslib.berlios.de/"
+ AUTHOR = "Russell King w/ plugins by Chris Larson et. al."
+ SECTION = "base"
+ LICENSE = "LGPLv2"
+-INC_PR = "r25"
++INC_PR = "r26"
+ 
+ SRC_URI += "\
+   file://ts.conf \
+diff --git a/recipes/tslib/tslib/palmpre/ts.conf b/recipes/tslib/tslib/palmpre/ts.conf
+new file mode 100644
+index 0000000..8857e8d
+--- /dev/null
++++ b/recipes/tslib/tslib/palmpre/ts.conf
+@@ -0,0 +1,27 @@
++# Uncomment if you wish to use the linux input layer event interface
++# module_raw input
++
++module cry8mrln_palmpre
++
++# Uncomment if you're using a Sharp Zaurus SL-5500/SL-5000d
++# module_raw collie
++
++# Uncomment if you're using a Sharp Zaurus SL-C700/C750/C760/C860
++# module_raw corgi
++
++# Uncomment if you're using a device with a UCB1200/1300/1400 TS interface
++# module_raw ucb1x00
++
++# Uncomment if you're using an HP iPaq h3600 or similar
++# module_raw h3600
++
++# Uncomment if you're using a Hitachi Webpad
++# module_raw mk712
++
++# Uncomment if you're using an IBM Arctic II
++# module_raw arctic2
++
++# module pthres pmin=1
++# module variance delta=30
++# module dejitter delta=100
++# module linear
+diff --git a/recipes/tslib/tslib/palmpre/tslib.sh b/recipes/tslib/tslib/palmpre/tslib.sh
+new file mode 100644
+index 0000000..5c1cc25
+--- /dev/null
++++ b/recipes/tslib/tslib/palmpre/tslib.sh
+@@ -0,0 +1,6 @@
++#!/bin/sh
++
++TSLIB_TSDEVICE=/dev/touchscreen
++
++export TSLIB_TSDEVICE
++
+-- 
+1.7.0.4
 
-Frans
 
 
