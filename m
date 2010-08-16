@@ -1,42 +1,33 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Okypm-0000yv-Md
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 14:31:17 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 070B4A5E04
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:30:13 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id J287tyQ-4DBj
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:30:11 +0100 (BST)
-Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id B2DC6A5E03
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 13:30:11 +0100 (BST)
-Message-ID: <4C692F5F.9090208@xora.org.uk>
-Date: Mon, 16 Aug 2010 13:30:23 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.7) Gecko/20100720 Lightning/1.0b2 Thunderbird/3.1.1
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Okyui-00048J-UP for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 14:35:41 +0200
+Received: from f053039031.adsl.alicedsl.de ([78.53.39.31]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OkyuT-00037r-Hi for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 12:35:25 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>	<i4auje$u5g$1@dough.gmane.org>	<AANLkTimpAxxt7GR=1VV9ZrAWubMp63sX771+PfhLjWTu@mail.gmail.com>	<AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>	<i4b3dl$vbk$1@dough.gmane.org>	<AANLkTim8Et4FHon4o2dsTOyFe-8huxTmmFEYA5PNZirw@mail.gmail.com>	<i4b7r1$sf8$1@dough.gmane.org>
-	<AANLkTin_ABBeGBY_rQpfmvnjf+afe+5gJqb85EzYHq+L@mail.gmail.com>
-In-Reply-To: <AANLkTin_ABBeGBY_rQpfmvnjf+afe+5gJqb85EzYHq+L@mail.gmail.com>
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+In-Reply-To: <AANLkTi=xMwTUONg0ugaR29hnJr8-tGcMUsd6JsQb0aat@mail.gmail.com>
+References: <AANLkTi=immHiyS5p0WWmCYaii-5xBruCuBi3_jC_s5Pw@mail.gmail.com>
+	<AANLkTimLboPPcFegwhZJswLr2cpYayryZMS6zu0SVn9E@mail.gmail.com>
+	<AANLkTi=xMwTUONg0ugaR29hnJr8-tGcMUsd6JsQb0aat@mail.gmail.com>
+Date: Mon, 16 Aug 2010 14:35:20 +0200
+Message-ID: <1281962120.3911.53.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.2 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,WEIRD_PORT
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cleaning recipes
+Subject: Re: Unable to build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,27 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 12:31:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 16 Aug 2010 12:35:41 -0000
+X-Groupsio-MsgNum: 22235
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Cum+ceXzQ8OyRl49Ebn4"
 
- On 16/08/10 13:14, Frans Meulenbroeks wrote:
-> 2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
-> would be nice if oe would detect those cases and force a rebuild.
->> That doesn't help if you're using packagemanagement. Now you have
->> "foo_1.0-r0.ipk" in the feeds that statically linked to openssl 0.9.8
->> and "foo_1.0-r0.ipk" locally that statically links to 1.0.0. So users
->> still don't get the fixes that went into openssl.
-> Agree.
-> I vaguely recall an idea (I believe from RP) to have a hash or so
-> derived from the whole dependency tree below it.
-> This discussion probably ran somewhere last winter.
->
-> Frans
->
-A quick implementation would sum all PR in depends tree above us.
+--=-Cum+ceXzQ8OyRl49Ebn4
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Graeme
+Am Montag, den 16.08.2010, 17:18 +0530 schrieb Kousik Maiti:
+> Thanks Frans.
+>=20
+> But now I am facing another problem.
+
+Please open a now thread for each new problem and use a precise and
+descriptive subject line.
+
+> bitbake task-base
+> /var/lib/python-support/python2.6/bb/COW.py:30: DeprecationWarning: the s=
+ets
+> module is deprecated
+>   import os, types, sets
+> ERROR: no files to build.
+>=20
+> NOTE: Parsing finished. 0 cached, 0 parsed, 0 skipped, 0 masked.
+
+[=E2=80=A6]
+
+> I have changed into /usr/share/bitbake/conf/bitbake.conf according to
+> http://forums.xkcd.com/viewtopic.php?f=3D20&t=3D50227
+>=20
+> Can anybody help???
+
+BitBake does not find your recipes, so the paths are set up incorrectly.
+Double check that please. If you do not get it too work, please paste a
+link to the tutorial you followed, attach your config files and an
+overview of your directory setup.
 
 
+Thanks,
 
+Paul
+
+--=-Cum+ceXzQ8OyRl49Ebn4
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxpMIgACgkQPX1aK2wOHVi/3wCeLHV7bJ58FHcfO2ge/9QqJTnn
+euQAn1378EVnrJWlKntTbtRYHus7AsNJ
+=08+u
+-----END PGP SIGNATURE-----
+
+--=-Cum+ceXzQ8OyRl49Ebn4--
