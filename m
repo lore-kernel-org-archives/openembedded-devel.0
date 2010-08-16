@@ -1,43 +1,42 @@
-Received: from gate.tarent.de ([212.79.178.249] helo=ugs.tarent.de)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <thebohemian@gmx.net>) id 1OktpX-00023R-B2
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oku5m-0006eO-B4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 09:10:08 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id A2B674000778E
+	Mon, 16 Aug 2010 09:26:47 +0200
+Received: by iwn38 with SMTP id 38so1367552iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 09:09:42 +0200 (CEST)
-Received: from localhost (localhost [127.0.0.1])
-	by ugs.tarent.de (Postfix) with ESMTP id 9A8DD400057FA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 09:09:42 +0200 (CEST)
-X-Virus-Scanned: by amavisd-new-2.6.1 (20080629) (Debian) at tarent.de
-Received: from ugs.tarent.de ([127.0.0.1])
-	by localhost (ugs.tarent.de [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id Lu0a8DvVck3O
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 09:09:42 +0200 (CEST)
-Received: from [192.168.4.51] (entw2.tarent.buero [192.168.4.51])
-	by ugs.tarent.de (Postfix) with ESMTPSA id 28EFA4000778E
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 09:09:42 +0200 (CEST)
-Message-ID: <4C68E471.7010206@gmx.net>
-Date: Mon, 16 Aug 2010 09:10:41 +0200
-From: Robert Schuster <thebohemian@gmx.net>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
+	Mon, 16 Aug 2010 00:26:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Ou3edutS1+MyFp5iweVJXM2C9yjvkaY3QYBEZTKRCII=;
+	b=FrfNfyCygvEVDrUCEH+7ciCuMZabWns9byfHIr6UPd9yLswPEaiXuPQs1ovpQtay2g
+	/7Ckw8OYwgml6LQE6TE2S2cWiwsbyZFqm7XJKv1P3UDhmmhTwYYMREPmyY5cdXs5Hcrf
+	sA/XmYId7xAApAdpoNc2RjAQ3/oWRYPev2vuw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=aYgbeoqckCmrj8Y/jepIdbB2eg3nVWdtNIYkWNc4/CwJ8Lr18YjTGQ7CJqaSgrGQcE
+	Rrd/ucHtqPYzxfEBByksoltpTj8o+WcDFF4hffb4udpPbOMVqUsHFZdYzNU817EOhtAS
+	nomt0TLMuicV/sZeCFQDCdecY0n3kfTOYpWL0=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.157.205 with SMTP id c13mr5681410ibx.71.1281943590775;
+	Mon, 16 Aug 2010 00:26:30 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Mon, 16 Aug 2010 00:26:30 -0700 (PDT)
+In-Reply-To: <4C68AE52.8000709@mwester.net>
 References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>
-	<4C68BDBF.1090008@mwester.net>
-In-Reply-To: <4C68BDBF.1090008@mwester.net>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 212.79.178.249
-X-SA-Exim-Mail-From: thebohemian@gmx.net
+	<4C68AE52.8000709@mwester.net>
+Date: Mon, 16 Aug 2010 09:26:30 +0200
+Message-ID: <AANLkTikwtrUPv8rQJRY2_XuM6Qv9z-iR=_n0mVZdV0=s@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_FAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: cleaning recipes
@@ -54,117 +53,107 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 07:10:10 -0000
-X-Groupsio-MsgNum: 22216
-Content-Type: multipart/signed; micalg=pgp-sha1;
-	protocol="application/pgp-signature";
-	boundary="------------enigF6C6CE1656205E8CE255B261"
-
---------------enigF6C6CE1656205E8CE255B261
+X-List-Received-Date: Mon, 16 Aug 2010 07:26:47 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Hi,
-I added this docbook stuff once. My source to understand how it is to be
-built was linuxfromscratch.org. So one should have a look at this
-again I think.
-
-Chaning the version of the DTD should be fine. If it is incompatible you
-would get loads of errors. :-)
-
-Regards
-Robert
-
-Am 16.08.2010 06:25, schrieb Mike Westerhof:
+2010/8/16 Mike Westerhof <mike@mwester.net>:
 > Frans Meulenbroeks wrote:
+>> Dear all,
+>>
+>> As some of you might have noticed I've been cleaning up our
+>> recipes.during the last week or so.
 > ...
->  =20
 >> Anyway, if there are issues because of this action, or if you feel
->> removal of a recipe was not in accordance with the TSC guidelines, let=
-
+>> removal of a recipe was not in accordance with the TSC guidelines, let
 >> me know and I'll repair.
->>    =20
-> Well, here's the first one, docbook-sgml-dtd-3.1-native, full log below=
-:
 >
-> . ./setup-env; exec bitbake -k "slugos-packages"
-> NOTE: Handling BitBake files: / (7840/7840) [100 %]
-> NOTE: Parsing finished. 7266 cached, 496 parsed, 78 skipped, 1 masked.
-> NOTE: Resolving any missing task queue dependencies
-> NOTE: multiple providers are available for u-boot (u-boot, u-boot-omap3=
-pandora);
-> NOTE: consider defining PREFERRED_PROVIDER_u-boot
-> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime enti=
-ty 'virtual/arm-linux-gnueabi-gcc-2.95' but it wasn't found in any PACKAG=
-E or RPROVIDES variables
-> NOTE: Runtime target 'virtual/arm-linux-gnueabi-gcc-2.95' is unbuildabl=
-e, removing...
-> Missing or unbuildable dependency chain was: ['virtual/arm-linux-gnueab=
-i-gcc-2.95']
-> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime enti=
-ty 'virtual/arm-linux-gnueabi-depmod-' but it wasn't found in any PACKAGE=
- or RPROVIDES variables
-> NOTE: Runtime target 'virtual/arm-linux-gnueabi-depmod-' is unbuildable=
-, removing...
-> Missing or unbuildable dependency chain was: ['virtual/arm-linux-gnueab=
-i-depmod-']
-> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime enti=
-ty 'virtual/arm-linux-gnueabi-depmod-1.0' but it wasn't found in any PACK=
-AGE or RPROVIDES variables
-> NOTE: Runtime target 'virtual/arm-linux-gnueabi-depmod-1.0' is unbuilda=
-ble, removing...
-> Missing or unbuildable dependency chain was: ['virtual/arm-linux-gnueab=
-i-depmod-1.0']
-> NOTE: Runtime target 'iputils-arping' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['iputils-arping', 'docboo=
-k-utils-native', 'docbook-sgml-dtd-3.1-native']
-> NOTE: Runtime target 'task-proper-tools' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['task-proper-tools', 'ipu=
-tils-arping', 'docbook-utils-native', 'docbook-sgml-dtd-3.1-native']
-> NOTE: Runtime target 'iputils-ping6' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['iputils-ping6', 'docbook=
--utils-native', 'docbook-sgml-dtd-3.1-native']
-> NOTE: Runtime target 'iputils-ping' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['iputils-ping', 'docbook-=
-utils-native', 'docbook-sgml-dtd-3.1-native']
-> NOTE: Runtime target 'iputils' is unbuildable, removing...
-> Missing or unbuildable dependency chain was: ['iputils', 'docbook-utils=
--native', 'docbook-sgml-dtd-3.1-native']
-> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime enti=
-ty 'docbook-sgml-dtd-3.1-native' but it wasn't found in any PACKAGE or RP=
-ROVIDES variables
-> NOTE: Runtime target 'docbook-sgml-dtd-3.1-native' is unbuildable, remo=
-ving...
-> Missing or unbuildable dependency chain was: ['docbook-sgml-dtd-3.1-nat=
-ive']
-> NOTE: Preparing runqueue
-> ERROR: All buildable tasks have been run but the build is incomplete (-=
--continue mode). Errors for the tasks that failed will have been printed =
-above.
+> (This is NOT how I read the TSC guidelines, but I'm tired of arguing
+> with your obsession!)
+
+Well here's what the TSC said about it:
+
+<quote>
+Removing old versions
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+The TSC looked into the topic of when to remove versions.
+
+
+The TSC thinks there can not be a general rule of when to delete
+a package. The TSC believes that in some cases a package should
+never be deleted, e.g. with GCC/GLIBC to target a specific device
+or distribution. For a series of major releases it seems plausible
+to only keep the latest minor release of each release series around
+given that the quality should increase with each minor release but
+a removal of a minor release should not be done if there is a
+PREFERRED_VERSION set. The TSC believes that 24 months can be a good
+time to remove old major releases but it is certainly not the only
+criteria for a removal.
+</quote>
+
+I've taken great care not to remove versions that are pinned by a
+distro or that have a DEFAULT_PREFERENCE on them.
+(but I cannot guarantee that I did not make a mistake). Also i avoided
+deleting recent major releases (although major release is sometimes
+something that is not too well defined).
+I feel I did my best to stay within the guidelines of TSC, but if I
+failed miserably to do so, I guess the TSC will tell me so (and I hope
+they will be kind enough to accept a few things that have slipped).
+
 >
+> Frankly, the issue isn't if YOU put back a missing recipe, or I do it.
+> I know how to use an SCM tool, it's about 30 seconds -- or less -- to do
+> it. =A0The problem, as I've mentioned before, is in finding that to be th=
+e
+> issue, of course.
 >
-> -Mike (mwester)
+> What distros (and their package feeds) have you built to test your
+> assumptions?
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->  =20
+>> Have fun!
+>
+> Well, thank you for your wishes. =A0But to be honest, it's more fun when =
+I
+> can focus on fixing REAL problems, rather than worrying about artificial
+> ones introduced for no really useful reason -- although I understand
+> that you vehemently and stubbornly disagree. =A0I guess you win this
+> point, so it's fun for you at least!
+
+Well it would help if recipe maintainers would do their thing and
+clean up things instead of leaving a trail of old (and often broken)
+recipes.
+
+E.g. we've decided to abandon legacy staging and where possible go to
+BBCLASSEXTEND =3D "native".
+Unfortunately I see only few people taking action despite several
+calls for action.
+At least one of the reasons seem to be the large amount of recipes to
+be converted. This is also due to the large trail of old versions we
+keep around.
+At least my action reduced the number of recipes to be looked at. Both
+the amount of native recipes and the amount of recipes that use legacy
+staging is reduced.
+
+Instead of complaining about my actions, perhaps first answer the
+question what you have done?
+E.g. how many recipes have you converted from legacy staging? How many
+recipes converted to BBCLASSEXTEND?
+At least I *do* something, trying to bring this to manageable proportions.
+
+But ofc I guess there is a good reason not to convert e.g.
+upslug2-native, and that there are good reasons to keep 3 different
+versions around, or to have upslug-native with do_stage.
+I don't mind having a few versions around as long as they are useful
+and maintained. However for a lot of recipes this does not seem to be
+the case. People just add new versions leaving a trail of old junk.
+Junk which is sometimes even dangerous (e.g. in case of the
+openssh/openssl/openvpn recipes, where the old versions have known
+security vulnerabilities.
+If the recipe owners did their thing, this would not be needed (but
+unfortunately the case is that some maintainers don't do their thing,
+and that lots of other recipes are orphaned)
+
+Leaving my soapbox. Have a nice day!
+Frans.
 
 
-
---------------enigF6C6CE1656205E8CE255B261
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="signature.asc"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
-
-iEYEARECAAYFAkxo5HEACgkQG9cfwmwwEtrEiwCgjeolz+wEV8DYx29w7+pAjtJA
-UVEAn3Cv+hdTrDpK4TprODMFWLg7anPT
-=6ucd
------END PGP SIGNATURE-----
-
---------------enigF6C6CE1656205E8CE255B261--
