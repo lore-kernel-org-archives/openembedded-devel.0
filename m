@@ -1,49 +1,42 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Ol5Zc-0004f0-Va
+	(envelope-from <dp@xora.org.uk>) id 1Ol5b6-0004lf-Ho
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 21:42:21 +0200
-Received: by fxm6 with SMTP id 6so3246913fxm.6
+	Mon, 16 Aug 2010 21:43:53 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 64D151C144
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 12:42:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=E70AdTIyv2MWauV4uG/iN5jOPzCjWKa4FmTgA+C4JvM=;
-	b=qT4skGjdKq0RIDcbKQTh/0WqO+fSTEJahk0rV5h6cZXDYXilQ53RcWNuZiA3x2plAm
-	1vojJ44znauioEWuVuEJzufNBmRKOjSEh2Q/vaP2CkM0oWoL+bI2WFpzAZWd59852x7B
-	qHuhX6AjffK7gGLvW5yNtaO7YjtAEKuxnEISs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=LSlzgWF15IJSFxQo+rR05ANqOo4zzcOW5DDYZeKT0kTaL99z+8fnjSUXAU8psSmRCa
-	qnssuUCKq3YoCz2yrNsln4qFcprALhrClmzB4ut3JK+4VpHHC+BXAqAkNXOwkWFD/0m8
-	lUI+0ySTj/iSevLqLseIhLljOKNqaxKvI+UMA=
-Received: by 10.223.103.148 with SMTP id k20mr5526345fao.101.1281987723858;
-	Mon, 16 Aug 2010 12:42:03 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id c20sm2213607fak.33.2010.08.16.12.42.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 16 Aug 2010 12:42:03 -0700 (PDT)
-Date: Mon, 16 Aug 2010 21:42:16 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100816194216.GH10076@jama>
-References: <1281972620-7317-1-git-send-email-Martin.Jansa@gmail.com>
-	<AANLkTinbdx5rKQOckS3BEuEE=mZsnLmER8TqA0U87YUY@mail.gmail.com>
+	Mon, 16 Aug 2010 20:43:36 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id Drs+4kGR113n
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 20:43:35 +0100 (BST)
+Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id AB35B1C13B
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 20:43:35 +0100 (BST)
+Message-ID: <4C6994F5.8080000@xora.org.uk>
+Date: Mon, 16 Aug 2010 20:43:49 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.7) Gecko/20100720 Lightning/1.0b2 Thunderbird/3.1.1
 MIME-Version: 1.0
-In-Reply-To: <AANLkTinbdx5rKQOckS3BEuEE=mZsnLmER8TqA0U87YUY@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTikW6GsKga3=6dWUcviDJqb8WqVqhSmBw6vACM3e@mail.gmail.com>	<i4auje$u5g$1@dough.gmane.org>	<AANLkTimpAxxt7GR=1VV9ZrAWubMp63sX771+PfhLjWTu@mail.gmail.com>	<AANLkTi=pVCajY==ZdehO_Bw33xsrYcvBnYHfN4s2Vne=@mail.gmail.com>	<i4b3dl$vbk$1@dough.gmane.org>	<AANLkTim8Et4FHon4o2dsTOyFe-8huxTmmFEYA5PNZirw@mail.gmail.com>	<i4b7r1$sf8$1@dough.gmane.org>	<AANLkTin_ABBeGBY_rQpfmvnjf+afe+5gJqb85EzYHq+L@mail.gmail.com>	<4C692F5F.9090208@xora.org.uk>
+	<AANLkTi=e72yJ743qLvPi9NFgnYSG5ZukshLn7cZ0mOnd@mail.gmail.com>
+In-Reply-To: <AANLkTi=e72yJ743qLvPi9NFgnYSG5ZukshLn7cZ0mOnd@mail.gmail.com>
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: xorg recipes cleanup
+Subject: Re: cleaning recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,54 +50,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 16 Aug 2010 19:42:21 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 16 Aug 2010 19:43:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 16, 2010 at 09:25:51PM +0200, Frans Meulenbroeks wrote:
-> 2010/8/16 Martin Jansa <martin.jansa@gmail.com>:
-> > Hi,
-> >
-> > all distributions are now using
-> > preferred-xorg-versions-X11R7.5.inc or
-> > preferred-xorg-versions-live.inc or
-> > no preferred-xorg-versions*.inc at all
-> >
-> > So we can remove some older versions not pinned in those 2
-> > to make future maintanance of xorg-* dirs a bit easier.
-> >
-> > As this is really easy to test (if you apply all 9 and build your
-> > favourite target again, no xorg package should be rebuilt - version changed),
-> > please test and ACK or don't scream later that you had some strange version
-> > preferred from local.conf.
-> 
-> I could not test, as patch 2 is not on patchwork (and retrieving them
-> from gmail is somewhat tricky)
+ On 16/08/10 20:38, Frans Meulenbroeks wrote:
+> 2010/8/16 Graeme Gregory <dp@xora.org.uk>:
+>>  On 16/08/10 13:14, Frans Meulenbroeks wrote:
+>>> 2010/8/16 Koen Kooi <k.kooi@student.utwente.nl>:
+>>> would be nice if oe would detect those cases and force a rebuild.
+>>>> That doesn't help if you're using packagemanagement. Now you have
+>>>> "foo_1.0-r0.ipk" in the feeds that statically linked to openssl 0.9.8
+>>>> and "foo_1.0-r0.ipk" locally that statically links to 1.0.0. So users
+>>>> still don't get the fixes that went into openssl.
+>>> Agree.
+>>> I vaguely recall an idea (I believe from RP) to have a hash or so
+>>> derived from the whole dependency tree below it.
+>>> This discussion probably ran somewhere last winter.
+>>>
+>>> Frans
+>>>
+>> A quick implementation would sum all PR in depends tree above us.
+>>
+>> Graeme
+>>
+> That would be an elegant and simple solution.
+> There is a minor issue with it wrt lettering (but I guess these can be
+> skipped) and maybe cvs/svn/git numbers (i seem to recall some of these
+> are not monotonic).
+> A more difficult issue is if a dependency is removed. Then suddenly
+> the number will drop. The only solution I see right away is manually
+> add an offset to the recipe to accomodate for this (but it is not
+> really a nice solution).
+>
+I never was a fan of the git rev being in the PR and Phil Blundell
+checked in a method we can use to avoid this but is not used by any
+distro so far AFAIK.
 
-I'm checking why :/ only clue is
-bitbake@jama ~/oe $ git send-email 0002-xorg-lib-move-older-not-pinned-versions-to-obsolete-.patch
-The following files are 8bit, but do not declare a
-Content-Transfer-Encoding.
-    0002-xorg-lib-move-older-not-pinned-versions-to-obsolete-.patch
-Which 8bit encoding should I declare [UTF-8]? 
-<enter>
+Graeme
 
-> Do we indeed want to move this to obsolete? Is there a point in
-> retaining it? Why not just rm them (they are still in git)
-> Or do we want obsolete to become the graveyard of old recipes?
-
-I usually move it to obsolete where it's not parsed if you have
-'standard'
-BBFILES := "/OE/dev/recipes/*/*.bb"
-and if nobody screams then I'll remove whole obsolete/xorg dir after a
-while.
-
-I know it's SCM and I can look to every version in history, but while
-it's still in obsolete it's faster to call just diff if I need to check
-what changed since previous version.
-
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
