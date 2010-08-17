@@ -1,32 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1OlFiC-0006SX-2d
+	(envelope-from <roman@khimov.ru>) id 1OlG0I-0002g1-Pt
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 08:31:53 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OlFho-0002iu-Il from Noor_Ahsan@mentor.com 
+	Tue, 17 Aug 2010 08:51:03 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OlG01-0008U7-Ol
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 16 Aug 2010 23:31:28 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 17 Aug 2010 08:31:27 +0200
-From: Noor Ahsan <noor_ahsan@mentor.com>
+	Tue, 17 Aug 2010 10:50:18 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Aug 2010 12:29:41 +0600
-Message-Id: <1282026581-14776-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 17 Aug 2010 06:31:27.0244 (UTC)
-	FILETIME=[D21A04C0:01CB3DD5]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
+Date: Tue, 17 Aug 2010 10:50:13 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
+	<201008162325.59305.roman@khimov.ru>
+	<AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
+In-Reply-To: <AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201008171050.16611.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,URI_NOVOWEL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] sgmlspl-native: convert to new style staging, remove do_stage()
+Subject: Re: [PATCH] openssl: update 1.0.0 to 1.0.0a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,45 +40,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 06:31:53 -0000
+X-List-Received-Date: Tue, 17 Aug 2010 06:51:04 -0000
+X-Groupsio-MsgNum: 22310
+Content-Type: multipart/signed; boundary="nextPart15085753.5sm9gOdOqz";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-* Remove do_stage() from the recipe. The cpan_do_install () replaces the do_stage () of the recipe.
-* Bump PR to "r1"
+--nextPart15085753.5sm9gOdOqz
+Content-Type: Text/Plain;
+  charset="koi8-r"
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- recipes/sgmlspl/sgmlspl-native_1.03ii.bb |    9 +--------
- 1 files changed, 1 insertions(+), 8 deletions(-)
+=F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB 16=
+ =C1=D7=C7=D5=D3=D4=C1 2010 23:35:59 =C1=D7=D4=CF=D2 Khem Raj =CE=C1=D0=C9=
+=D3=C1=CC:
+> IMO the newest version in a recipe should always be default preference
+> this way we can
+> stabilize recipe upgrades quicker. This also means a wider testing
+> before pushing a new recipe
+> DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
 
-diff --git a/recipes/sgmlspl/sgmlspl-native_1.03ii.bb b/recipes/sgmlspl/sgmlspl-native_1.03ii.bb
-index 36bb366..0a4cd12 100644
---- a/recipes/sgmlspl/sgmlspl-native_1.03ii.bb
-+++ b/recipes/sgmlspl/sgmlspl-native_1.03ii.bb
-@@ -2,6 +2,7 @@ DESCRIPTION = "A simple post-processor for SGMLS and NSGMLS"
- HOMEPAGE = "http://search.cpan.org/src/DMEGG/SGMLSpm-1.03ii/DOC/HTML/SGMLSpm/sgmlspm.html"
- SECTION = "libs"
- LICENSE = "GPL"
-+PR = "r1"
- 
- SRC_URI = "http://www.cpan.org/authors/id/D/DM/DMEGG/SGMLSpm-${PV}.tar.gz \
-           file://combined.patch"
-@@ -10,14 +11,6 @@ S = "${WORKDIR}/SGMLSpm"
- 
- inherit native cpan
- 
--do_install() {
--  :
--}
--
--do_stage() {
--  oe_runmake install_vendor
--}
--
- PACKAGES = "${PN}-dbg  "
- 
- SRC_URI[md5sum] = "5bcb197fd42e67d51c739b1414d514a7"
--- 
-1.6.3.3
+Well, consider Perl, for example. Making 5.10.1 a default preference would=
+=20
+break binary packaged perl modules built for 5.8.8, so technically some=20
+massive PR bump (most probably DISTRO_PR) is needed when updating to 5.10.1=
+=2E=20
+=46orcing distro maintainers to do that is not nice, IMO.
 
+Although the way it is now Perl 5.10.1 seems to be rarely used, which is al=
+so=20
+not nice. Probably, there is no way to solve this problem for everyone. Wit=
+h=20
+D_P it's not used much, removing D_P is asking for "YOU BROKE MY BUILD!!!"=
+=20
+love messages from random corners.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
+--nextPart15085753.5sm9gOdOqz
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkxqMSgACgkQXJ70z+XgVcOxewCfY7OMJ058MPZODDLrsoL7DEdi
+ejUAn2ko1bHlCyiDteV73MOm8pseVVmr
+=iQx2
+-----END PGP SIGNATURE-----
+
+--nextPart15085753.5sm9gOdOqz--
