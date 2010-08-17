@@ -1,31 +1,45 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OlRsX-0004xi-DX
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OlSFl-0005fJ-QI
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 21:31:40 +0200
-Received: by wwb22 with SMTP id 22so5115wwb.24
+	Tue, 17 Aug 2010 21:55:36 +0200
+Received: by gya6 with SMTP id 6so365115gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 12:30:58 -0700 (PDT)
-Received: by 10.227.151.195 with SMTP id d3mr5981947wbw.170.1282073457879;
-	Tue, 17 Aug 2010 12:30:57 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id p42sm4333294weq.36.2010.08.17.12.30.56
-	(version=SSLv3 cipher=RC4-MD5); Tue, 17 Aug 2010 12:30:57 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
+	Tue, 17 Aug 2010 12:54:52 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=C94nRW1c9n8AACzdABt9VCOJo5+c/Ofdhys5aORyVzI=;
+	b=mR9foP0WlL1p48kUkPcEA7L6k2VGPx4upFRHUZQPPdu35bSESUPde3NMMx3xUI+wky
+	cetlgt3e2v46g0I+cXFiDpAqYdhIhkbgJQuOyU87Pm3LHww+htTHi1vgc049dF8Dxj/D
+	gl+pEsXQ+yvynjOhLr+pl8NZ2TIBFhVi1P13Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=RSxPQ1pItLxM2XO8FoQXYk+9WRs+VdQrPf6ysL+IattP8VuWcSGXqE8ujDLDD8Qvs2
+	l412L5WT+OLBimFv9AV5DcFR5RK6Ljko7siG2YGchBiGeb+fz0tEgv5QNNbAd4tLINxM
+	XPOp4RGcuvikvQWRw7jKDiS7mYbnH3T5DqDwA=
+MIME-Version: 1.0
+Received: by 10.231.162.13 with SMTP id t13mr7895890ibx.160.1282074891903;
+	Tue, 17 Aug 2010 12:54:51 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Tue, 17 Aug 2010 12:54:51 -0700 (PDT)
+In-Reply-To: <1282072886-11562-2-git-send-email-jkridner@beagleboard.org>
+References: <1282072886-11562-1-git-send-email-jkridner@beagleboard.org>
+	<1282072886-11562-2-git-send-email-jkridner@beagleboard.org>
+Date: Tue, 17 Aug 2010 21:54:51 +0200
+Message-ID: <AANLkTik73cayAjmykmJvp8KqsJ_XrBfQTOkM8MJWydsP@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Aug 2010 14:30:55 -0500
-Message-Id: <1282073455-11905-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] u-boot: increase SD clock speed hack
+Subject: Re: [PATCH] beagleboard-olddemo-image: saved off beagleboard-demo-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,73 +53,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 19:31:40 -0000
+X-List-Received-Date: Tue, 17 Aug 2010 19:55:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+2010/8/17 Jason Kridner <jkridner@beagleboard.org>:
+> I want to use the name beagleboard-demo-image for what actually ships
+> with the xM boards.
+>
+> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+> ---
+> =A0recipes/images/beagleboard-olddemo-image.bb | =A0 30 +++++++++++++++++=
+++++++++++
+> =A01 files changed, 30 insertions(+), 0 deletions(-)
+> =A0create mode 100644 recipes/images/beagleboard-olddemo-image.bb
+>
+> diff --git a/recipes/images/beagleboard-olddemo-image.bb b/recipes/images=
+/beagleboard-olddemo-image.bb
+> new file mode 100644
+> index 0000000..d83281c
+> --- /dev/null
+> +++ b/recipes/images/beagleboard-olddemo-image.bb
+> @@ -0,0 +1,30 @@
+> +# Demo image for beagleboard
+> +
+> +IMAGE_LINGUAS =3D "de-de fr-fr en-gb en-us pt-br es-es kn-in ml-in ta-in=
+"
+> +
+> +XSERVER ?=3D "xserver-xorg \
+> + =A0 =A0 =A0 =A0 =A0 xf86-input-evdev \
+> + =A0 =A0 =A0 =A0 =A0 xf86-input-mouse \
+> + =A0 =A0 =A0 =A0 =A0 xf86-video-fbdev \
+> + =A0 =A0 =A0 =A0 =A0 xf86-input-keyboard \
+> +"
+> +
+> +ANGSTROM_EXTRA_INSTALL ?=3D ""
+> +SPLASH =3D "exquisite exquisite-themes exquisite-theme-angstrom"
+> +
+> +export IMAGE_BASENAME =3D "Beagleboard-demo-image"
+> +
+> +DEPENDS =3D "task-base"
+> +IMAGE_INSTALL =3D "\
+> + =A0 =A0${XSERVER} \
+> + =A0 =A0${ANGSTROM_EXTRA_INSTALL} \
+> + =A0 =A0task-beagleboard-demo \
+> + =A0 =A0${SPLASH} \
+> + =A0 =A0"
+> +
+> +IMAGE_PREPROCESS_COMMAND =3D "create_etc_timestamp"
+> +
+> +#zap root password for release images
+> +ROOTFS_POSTPROCESS_COMMAND +=3D 'install_linguas; ${@base_conditional("D=
+ISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
+> +
+> +inherit image
+> --
 
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
----
- ...-OMAP3-MMC-hack-to-always-use-48MHz-clock.patch |   30 ++++++++++++++++++++
- recipes/u-boot/u-boot_git.bb                       |    3 +-
- 2 files changed, 32 insertions(+), 1 deletions(-)
- create mode 100644 recipes/u-boot/u-boot-git/beagleboard/0001-OMAP3-MMC-hack-to-always-use-48MHz-clock.patch
+What about a better name? E.g. XM-demo-iimage?
 
-diff --git a/recipes/u-boot/u-boot-git/beagleboard/0001-OMAP3-MMC-hack-to-always-use-48MHz-clock.patch b/recipes/u-boot/u-boot-git/beagleboard/0001-OMAP3-MMC-hack-to-always-use-48MHz-clock.patch
-new file mode 100644
-index 0000000..9a85615
---- /dev/null
-+++ b/recipes/u-boot/u-boot-git/beagleboard/0001-OMAP3-MMC-hack-to-always-use-48MHz-clock.patch
-@@ -0,0 +1,30 @@
-+From 10392e88ff1be6314884ea3c9e675849efdef195 Mon Sep 17 00:00:00 2001
-+From: Jason Kridner <jkridner@beagleboard.org>
-+Date: Tue, 17 Aug 2010 14:26:32 -0500
-+Subject: [PATCH] OMAP3: MMC: hack to always use 48MHz clock
-+
-+Steve Kipisz tested this with several cards and will propose a longer
-+term fix in the future, but this provides a huge speed increase for
-+loading a big ramdisk image.
-+
-+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
-+---
-+ drivers/mmc/omap3_mmc.c |    2 +-
-+ 1 files changed, 1 insertions(+), 1 deletions(-)
-+
-+diff --git a/drivers/mmc/omap3_mmc.c b/drivers/mmc/omap3_mmc.c
-+index bf650ba..c6bc6b5 100644
-+--- a/drivers/mmc/omap3_mmc.c
-++++ b/drivers/mmc/omap3_mmc.c
-+@@ -139,7 +139,7 @@ unsigned char mmc_clock_config(unsigned int iclk, unsigned short clk_div)
-+ 		val = MMC_400kHz_CLK;
-+ 		break;
-+ 	case CLK_MISC:
-+-		val = clk_div;
-++		val = 2; /* always use 48MHz (hack, but works so far) */
-+ 		break;
-+ 	default:
-+ 		return 0;
-+-- 
-+1.5.6.4
-+
-diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
-index 5a46961..16d19d4 100644
---- a/recipes/u-boot/u-boot_git.bb
-+++ b/recipes/u-boot/u-boot_git.bb
-@@ -1,5 +1,5 @@
- require u-boot.inc
--PR ="r64"
-+PR ="r65"
- 
- FILESPATHPKG =. "u-boot-git:"
- 
-@@ -72,6 +72,7 @@ SRC_URI_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
-                        file://0045-BeagleBoard-Enable-pullups-on-i2c2.patch \
-                        file://0046-BeagleBoard-Add-camera-to-default-bootargs.patch \
- 		       file://0001-BeagleBoard-move-ramdisk-parameters.patch \
-+		       file://0001-OMAP3-MMC-hack-to-always-use-48MHz-clock.patch \
-                        file://fw_env.config \
- "
- SRCREV_beagleboard = "ca6e1c136ddb720c3bb2cc043b99f7f06bc46c55"
--- 
-1.5.6.4
+And to widen the question: do we want to maintain customer/supplier
+specific images in the oe repo?
+The company I work for also has some images, but for now we opted to
+keep them in a private overlay.
 
+Frans
 
 
