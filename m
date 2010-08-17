@@ -1,41 +1,33 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ranirajaram@gmail.com>) id 1OlIdv-0000AL-DT
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OlK03-0001uy-T9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 11:39:41 +0200
-Received: by qwi2 with SMTP id 2so789189qwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 02:39:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=p3e8F1Z/P06TP4JOMWKSR2eLE/HgOafJxVQ52mSAEPw=;
-	b=qIBbpJi0zxUUf2pJj5bQnclNMy++Udwk0CxF2JShSPo7QeDBhOHG6y21D1uBzct8XU
-	e8a6Va6iy4DOaVX1s2/iYconGlSsiBqo4RjJhiXzU6SwCN23gH06HAGF5nnbGODthbSw
-	Cq+sDOXijlGfo+TPSCQvgrC8Ry16nvkoG2y+w=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=c/NtYmdnmLftuRS3tYTdPxiPOhgQ44dNv3O38nuxi0mUNrnbs3Si7W84pTTAw7veKj
-	npkd0S/myM7NZvfKjjoNKBHKV0cmTraAkQyCusrlI97bpDzZy2xCw0Na7e346bmuS5rU
-	P33v/krzGrNujTgs4tZroVEL7bgzGfysPqBnM=
-MIME-Version: 1.0
-Received: by 10.229.223.198 with SMTP id il6mr4632515qcb.50.1282037934912;
-	Tue, 17 Aug 2010 02:38:54 -0700 (PDT)
-Received: by 10.229.28.69 with HTTP; Tue, 17 Aug 2010 02:38:53 -0700 (PDT)
-Date: Tue, 17 Aug 2010 15:08:53 +0530
-Message-ID: <AANLkTi=Phc7=BkAepqfLvekUwU+BMsOoXzFVHsE1JyDm@mail.gmail.com>
-From: rani rajaram <ranirajaram@gmail.com>
+	Tue, 17 Aug 2010 13:06:46 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OlJzV-0001Et-HH from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 04:06:01 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 17 Aug 2010 13:06:00 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: ranirajaram@gmail.com
+Date: Tue, 17 Aug 2010 16:08:34 +0500
+Message-Id: <1282043314-17275-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 17 Aug 2010 11:06:00.0213 (UTC)
+	FILETIME=[2CC19C50:01CB3DFC]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: loading jffs2 image on arm926ek board
+Cc: Fahad Usman <fahad_usman@mentor.com>
+Subject: [PATCH] cacaoh-native: Removed legacy style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,157 +41,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 09:39:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Aug 2010 11:06:46 -0000
 
-Hello,
+* converted do_stage to do_install
 
+* replaced ${STAGING_BINDIR} with ${D}${bindir}
 
-I have used openembedded   to build rfs image with x libraries for arm926ek
-board.
+* bumped the PR in the .bb files
 
-After loading the image i got following error:
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/cacao/cacaoh-native.inc       |    6 +++---
+ recipes/cacao/cacaoh-native_0.99.3.bb |    2 +-
+ recipes/cacao/cacaoh-native_0.99.4.bb |    2 +-
+ 3 files changed, 5 insertions(+), 5 deletions(-)
 
-bootm 0x20000000
-## Booting image at 20000000 ...
-   Image Name:   Linux-2.6.32.9
-   Image Type:   ARM Linux Kernel Image (uncompressed)
-   Data Size:    1392284 Bytes =3D  1.3 MB
-   Load Address: 20008000
-   Entry Point:  20008000
-   Verifying Checksum ... OK
-OK
-
-Starting kernel ...
-
-Uncompressing
-Linux......................................................................=
-....................
-done, booting the kernel.
-Linux version 2.6.32.9 (root@Nakshatra) (gcc version 4.2.2) #14 Fri Apr 9
-16:01:58 NPT 2010
-CPU: ARM926EJ-S [41069265] revision 5 (ARMv5TEJ), cr=3D00053177
-CPU: VIVT data cache, VIVT instruction cache
-Machine: Atmel AT91SAM9261-EK
-Ignoring unrecognised tag 0x54410008
-Memory policy: ECC disabled, Data cache writeback
-Clocks: CPU 198 MHz, master 99 MHz, main 18.432 MHz
-Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 32512
-Kernel command line: mem=3D128M console=3DttyS0,115200 rootfstype=3Djffs2
-root=3D/dev/mtdblock0 rw init=3D/bin/sh
-PID hash table entries: 512 (order: -1, 2048 bytes)
-Dentry cache hash table entries: 16384 (order: 4, 65536 bytes)
-Inode-cache hash table entries: 8192 (order: 3, 32768 bytes)
-Memory: 128MB =3D 128MB total
-Memory: 126932KB available (2520K code, 184K data, 124K init, 0K highmem)
-Hierarchical RCU implementation.
-NR_IRQS:192
-AT91: 96 gpio irqs in 3 banks
-Console: colour dummy device 80x30
-console [ttyS0] enabled
-Calibrating delay loop... 99.12 BogoMIPS (lpj=3D495616)
-Mount-cache hash table entries: 512
-CPU: Testing write buffer coherency: ok
-NET: Registered protocol family 16
-bio: create slab <bio-0> at 0
-SCSI subsystem initialized
-usbcore: registered new interface driver usbfs
-usbcore: registered new interface driver hub
-usbcore: registered new device driver usb
-Switching to clocksource pit
-NET: Registered protocol family 2
-IP route cache hash table entries: 1024 (order: 0, 4096 bytes)
-TCP established hash table entries: 4096 (order: 3, 32768 bytes)
-TCP bind hash table entries: 4096 (order: 2, 16384 bytes)
-TCP: Hash tables configured (established 4096 bind 4096)
-TCP reno registered
-NET: Registered protocol family 1
-NetWinder Floating Point Emulator V0.97 (double precision)
-JFFS2 version 2.2. (NAND) =A9 2001-2006 Red Hat, Inc.
-msgmni has been set to 248
-Block layer SCSI generic (bsg) driver version 0.4 loaded (major 254)
-io scheduler noop registered
-io scheduler anticipatory registered (default)
-atmel_lcdfb atmel_lcdfb.0: backlight control is not available
-atmel_lcdfb atmel_lcdfb.0: 600KiB frame buffer at 27900000 (mapped at
-ffc00000)
-Console: switching to colour frame buffer device 80x30
-atmel_lcdfb atmel_lcdfb.0: fb0: Atmel LCDC at 0x00600000 (mapped at
-c885a000), irq 21
-atmel_usart.0: ttyS0 at MMIO 0xfefff200 (irq =3D 1) is a ATMEL_SERIAL
-atmel_usart.1: ttyS1 at MMIO 0xfffb0000 (irq =3D 6) is a ATMEL_SERIAL
-atmel_usart.2: ttyS2 at MMIO 0xfffb4000 (irq =3D 7) is a ATMEL_SERIAL
-atmel_usart.3: ttyS3 at MMIO 0xfffb8000 (irq =3D 8) is a ATMEL_SERIAL
-brd: module loaded
-NAND device: Manufacturer ID: 0x20, Chip ID: 0xda (ST Micro NAND 256MiB 3,3=
-V
-8-bit)
-AT91 NAND: 8-bit, Software ECC
-Scanning device for bad blocks
-Bad eraseblock 56 at 0x000000700000
-Bad eraseblock 1909 at 0x00000eea0000
-Creating 2 MTD partitions on "atmel_nand":
-0x000000000000-0x000008000000 : "Partition 1"
-0x000008000000-0x000010000000 : "Partition 2"
-atmel_spi atmel_spi.0: Atmel SPI Controller at 0xfffc8000 (irq 12)
-dm9000 Ethernet Driver, V1.31
-dm9000 dm9000.0: read wrong id 0x342a0028
-dm9000 dm9000.0: read wrong id 0x2b2a0000
-dm9000 dm9000.0: read wrong id 0x2b2a0028
-dm9000 dm9000.0: read wrong id 0x342a0028
-dm9000 dm9000.0: read wrong id 0x2b2a0028
-dm9000 dm9000.0: read wrong id 0x2b2a2928
-dm9000 dm9000.0: read wrong id 0x2b2a0028
-dm9000 dm9000.0: read wrong id 0x2b002928
-dm9000 dm9000.0: wrong id: 0x2b002928
-dm9000 dm9000.0: not found (-19).
-usbmon: debugfs is not available
-ohci_hcd: USB 1.1 'Open' Host Controller (OHCI) Driver
-at91_ohci at91_ohci: AT91 OHCI
-at91_ohci at91_ohci: new USB bus registered, assigned bus number 1
-at91_ohci at91_ohci: irq 20, io mem 0x00500000
-usb usb1: configuration #1 chosen from 1 choice
-hub 1-0:1.0: USB hub found
-hub 1-0:1.0: 2 ports detected
-usbcore: registered new interface driver cdc_acm
-cdc_acm: v0.26:USB Abstract Control Model driver for USB modems and ISDN
-adapters
-Initializing USB Mass Storage driver...
-usbcore: registered new interface driver usb-storage
-USB Mass Storage support registered.
-udc: at91_udc version 3 May 2006
-mice: PS/2 mouse device common for all mice
-ads7846 spi0.2: touchscreen, irq 29
-input: ADS7843 Touchscreen as
-/devices/platform/atmel_spi.0/spi0.2/input/input0
-i2c /dev entries driver
-TCP cubic registered
-NET: Registered protocol family 17
-usb 1-1: new full speed USB device using at91_ohci and address 2
-usb 1-1: configuration #1 chosen from 1 choice
-scsi0 : SCSI emulation for USB Mass Storage devices
-VFS: Mounted root (jffs2 filesystem) on device 31:0.
-Freeing init memory: 124K
-Kernel panic - not syncing: Attempted to kill init!
-Backtrace:
-[<c002b40c>] (dump_backtrace+0x0/0x10c) from [<c002b54c>]
-(dump_stack+0x18/0x1c)
- r6:00000004 r5:c7815c40 r4:c02b9d8c
-[<c002b534>] (dump_stack+0x0/0x1c) from [<c003e43c>] (panic+0x4c/0x134)
-[<c003e3f0>] (panic+0x0/0x134) from [<c0041278>] (do_exit+0x64/0x5b0)
- r3:c02a56b4 r2:c7815d60 r1:c7819d20 r0:c0266378
-[<c0041214>] (do_exit+0x0/0x5b0) from [<c0041854>] (do_group_exit+0x90/0xc4=
-)
-[<c00417c4>] (do_group_exit+0x0/0xc4) from [<c004b0f4>]
-(get_signal_to_deliver+0x2e0/0x318)
- r4:00000004
-[<c004ae14>] (get_signal_to_deliver+0x0/0x318) from [<c002a104>]
-(do_notify_resume+0x60/0x578)
-[<c002a0a4>] (do_notify_resume+0x0/0x578) from [<c0027ea8>]
-(work_pending+0x1c/0x20)
+diff --git a/recipes/cacao/cacaoh-native.inc b/recipes/cacao/cacaoh-native.inc
+index a44c503..d255df4 100644
+--- a/recipes/cacao/cacaoh-native.inc
++++ b/recipes/cacao/cacaoh-native.inc
+@@ -20,7 +20,7 @@ do_compile() {
+   oe_runmake -C src/vmcore libvmcore.la
+   oe_runmake -C src/cacaoh cacaoh
+ }
+-
+-do_stage() {
+-	install -m 0755 src/cacaoh/.libs/cacaoh ${STAGING_BINDIR}/cacaoh-${PV}
++do_install() {
++	install -d ${D}${bindir}/cacaoh-${PV}
++	install -m 0755 src/cacaoh/.libs/cacaoh ${D}${bindir}/cacaoh-${PV}
+ }
+diff --git a/recipes/cacao/cacaoh-native_0.99.3.bb b/recipes/cacao/cacaoh-native_0.99.3.bb
+index b3baee0..b321329 100644
+--- a/recipes/cacao/cacaoh-native_0.99.3.bb
++++ b/recipes/cacao/cacaoh-native_0.99.3.bb
+@@ -1,6 +1,6 @@
+ require cacaoh-native.inc
+ 
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.bz2"
+ 
+diff --git a/recipes/cacao/cacaoh-native_0.99.4.bb b/recipes/cacao/cacaoh-native_0.99.4.bb
+index a9effc0..e269e43 100644
+--- a/recipes/cacao/cacaoh-native_0.99.4.bb
++++ b/recipes/cacao/cacaoh-native_0.99.4.bb
+@@ -1,6 +1,6 @@
+ require cacaoh-native.inc
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ SRC_URI = "http://www.complang.tuwien.ac.at/cacaojvm/download/cacao-${PV}/cacao-${PV}.tar.bz2"
+ 
+-- 
+1.6.3.3
 
 
-Kindly guide,
-rani
 
