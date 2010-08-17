@@ -1,29 +1,48 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OlBn9-0003Lj-Rr
+	(envelope-from <martin.jansa@gmail.com>) id 1OlELI-0006r1-0S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 04:20:45 +0200
-Received: (qmail 21626 invoked by uid 1003); 17 Aug 2010 02:20:24 -0000
-Received: from 207.47.37.7.static.nextweb.net (HELO ?192.168.0.121?)
-	(philip@opensdr.com@207.47.37.7)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	17 Aug 2010 02:20:23 -0000
-Message-ID: <4C69F1E7.50000@balister.org>
-Date: Mon, 16 Aug 2010 19:20:23 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.7) Gecko/20100720 Fedora/3.1.1-1.fc13 Thunderbird/3.1.1
-MIME-Version: 1.0
+	Tue, 17 Aug 2010 07:04:22 +0200
+Received: by fxm6 with SMTP id 6so3436163fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 16 Aug 2010 22:03:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=w/6bqwQyfDMve9L5L6dqPruidI6F8c+it9j836aS1Tk=;
+	b=m8pJsE7qEvnCCW4+eVINpHpCZhfX+L5VgfeH2pSrBAA7x/XTgxzut4jJfQjpuJF5Fr
+	PT5PDkVTlob1LF1i7U2Ir2zyHgJywQzFyEuNyroi80oUccXQJyaMWw57uio7VSzIQICr
+	WXZK9YDgNAdu8R845bgd815H+3dSahID49YZg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=loEU1lZznhdX+y/IM/ORo88oToUb3IJgzUHGf6W32iedVdpr0zEeI2+Wso+DcCH3IG
+	FrwCdHhcBgUxQTzcDdC1DG+UzTsskzbU7jWK+OV/Rbm4XYve2xMOA/eF4CU433i4gtSo
+	dQq/7JlEMcwVB2BhonxclhZ5ZxU2cLWOcBXFA=
+Received: by 10.223.103.148 with SMTP id k20mr5901483fao.101.1282021425376;
+	Mon, 16 Aug 2010 22:03:45 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 10sm2783792fax.42.2010.08.16.22.03.44
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 16 Aug 2010 22:03:44 -0700 (PDT)
+Date: Tue, 17 Aug 2010 07:03:59 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Message-ID: <20100817050359.GA11569@jama>
+References: <4C69F1E7.50000@balister.org>
+MIME-Version: 1.0
+In-Reply-To: <4C69F1E7.50000@balister.org>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: alsa-utils failure
+Subject: Re: alsa-utils failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,42 +56,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 02:20:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 17 Aug 2010 05:04:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-At least one other person is seeing this. Mine is on a clean build on a 
-new F13 machine. Any thoughts?
+On Mon, Aug 16, 2010 at 07:20:23PM -0700, Philip Balister wrote:
+> At least one other person is seeing this. Mine is on a clean build on a 
+> new F13 machine. Any thoughts?
 
-Philip
+It's calling ncurses-config from your host which returns also -ltinfo.
+Default ncurses in OE (5.4) doesn't have ncurses-config. It will build
+ok with 5.7 or you have to update configure to ignore ncurses-config
+from host.
 
-gnueabi/alsa-utils-1.0.20-r2/alsa-utils-1.0.20/po'
-| make[1]: Nothing to be done for `all'.
-| make[1]: Leaving directory 
-`/home/balister/oe/tmp/work/armv7a-angstrom-linux-gnueabi/alsa-utils-1.0.20-r2/alsa-utils-1.0.20/po'
-| Making all in alsamixer
-| make[1]: Entering directory 
-`/home/balister/oe/tmp/work/armv7a-angstrom-linux-gnueabi/alsa-utils-1.0.20-r2/alsa-utils-1.0.20/alsamixer'
-| arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8 
--mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb 
--DCURSESINC="<ncurses.h>" 
--isystem/home/balister/oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include 
--fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2 
--ggdb3 
--L/home/balister/oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib 
--Wl,-rpath-link,/home/balister/oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib 
--Wl,-O1 -Wl,--hash-style=gnu -o alsamixer alsamixer.o -lncurses -ltinfo 
--lasound -lm -ldl -lpthread
-| 
-/home/balister/oe/tmp/sysroots/x86_64-linux/usr/armv7a/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld: 
-cannot find -ltinfo
-| collect2: ld returned 1 exit status
-| make[1]: *** [alsamixer] Error 1
-| make[1]: Leaving directory 
-`/home/balister/oe/tmp/work/armv7a-angstrom-linux-gnueabi/alsa-utils-1.0.20-r2/alsa-utils-1.0.20/alsamixer'
-| make: *** [all-recursive] Error 1
-| FATAL: oe_runmake failed
-| ERROR: Function do_compile failed
-NOTE: package alsa-utils-1.0.20-r2: task do_compile: Failed
+http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg06852.html
+
+Regards,
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
