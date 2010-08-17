@@ -1,31 +1,32 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OlSga-0007x5-AO
+	(envelope-from <jkridner@beagleboard.org>) id 1OlSpg-0000LQ-Hq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 22:23:49 +0200
-Received: by qwi2 with SMTP id 2so1400087qwi.6
+	Tue, 17 Aug 2010 22:32:29 +0200
+Received: by ewy7 with SMTP id 7so3440513ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 13:22:40 -0700 (PDT)
-Received: by 10.224.121.65 with SMTP id g1mr4624986qar.370.1282076551987;
-	Tue, 17 Aug 2010 13:22:31 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id f15sm9191523qcr.13.2010.08.17.13.22.30
-	(version=SSLv3 cipher=RC4-MD5); Tue, 17 Aug 2010 13:22:30 -0700 (PDT)
+	Tue, 17 Aug 2010 13:32:12 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.216.67.6 with SMTP id i6mr1207035wed.44.1282077112830; Tue, 17
+	Aug 2010 13:31:52 -0700 (PDT)
+Received: by 10.216.15.79 with HTTP; Tue, 17 Aug 2010 13:31:52 -0700 (PDT)
+In-Reply-To: <AANLkTik73cayAjmykmJvp8KqsJ_XrBfQTOkM8MJWydsP@mail.gmail.com>
+References: <1282072886-11562-1-git-send-email-jkridner@beagleboard.org>
+	<1282072886-11562-2-git-send-email-jkridner@beagleboard.org>
+	<AANLkTik73cayAjmykmJvp8KqsJ_XrBfQTOkM8MJWydsP@mail.gmail.com>
+Date: Tue, 17 Aug 2010 16:31:52 -0400
+Message-ID: <AANLkTik=gnhtadZjsjx7i-g38iJxyF=PFkNOE9JydCO-@mail.gmail.com>
 From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Aug 2010 15:22:29 -0500
-Message-Id: <1282076549-13640-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] esc-gst: added revision 6
+Subject: Re: [PATCH] beagleboard-olddemo-image: saved off beagleboard-demo-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,46 +40,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 20:23:50 -0000
+X-List-Received-Date: Tue, 17 Aug 2010 20:32:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
+On Tue, Aug 17, 2010 at 3:54 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/8/17 Jason Kridner <jkridner@beagleboard.org>:
+>> I want to use the name beagleboard-demo-image for what actually ships
+>> with the xM boards.
+>>
+>> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+>> ---
+>> =A0recipes/images/beagleboard-olddemo-image.bb | =A0 30 ++++++++++++++++=
++++++++++++
+>> =A01 files changed, 30 insertions(+), 0 deletions(-)
+>> =A0create mode 100644 recipes/images/beagleboard-olddemo-image.bb
+>>
+>> diff --git a/recipes/images/beagleboard-olddemo-image.bb b/recipes/image=
+s/beagleboard-olddemo-image.bb
+>> new file mode 100644
+>> index 0000000..d83281c
+>> --- /dev/null
+>> +++ b/recipes/images/beagleboard-olddemo-image.bb
+>> @@ -0,0 +1,30 @@
+>> +# Demo image for beagleboard
+>> +
+>> +IMAGE_LINGUAS =3D "de-de fr-fr en-gb en-us pt-br es-es kn-in ml-in ta-i=
+n"
+>> +
+>> +XSERVER ?=3D "xserver-xorg \
+>> + =A0 =A0 =A0 =A0 =A0 xf86-input-evdev \
+>> + =A0 =A0 =A0 =A0 =A0 xf86-input-mouse \
+>> + =A0 =A0 =A0 =A0 =A0 xf86-video-fbdev \
+>> + =A0 =A0 =A0 =A0 =A0 xf86-input-keyboard \
+>> +"
+>> +
+>> +ANGSTROM_EXTRA_INSTALL ?=3D ""
+>> +SPLASH =3D "exquisite exquisite-themes exquisite-theme-angstrom"
+>> +
+>> +export IMAGE_BASENAME =3D "Beagleboard-demo-image"
+>> +
+>> +DEPENDS =3D "task-base"
+>> +IMAGE_INSTALL =3D "\
+>> + =A0 =A0${XSERVER} \
+>> + =A0 =A0${ANGSTROM_EXTRA_INSTALL} \
+>> + =A0 =A0task-beagleboard-demo \
+>> + =A0 =A0${SPLASH} \
+>> + =A0 =A0"
+>> +
+>> +IMAGE_PREPROCESS_COMMAND =3D "create_etc_timestamp"
+>> +
+>> +#zap root password for release images
+>> +ROOTFS_POSTPROCESS_COMMAND +=3D 'install_linguas; ${@base_conditional("=
+DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
+>> +
+>> +inherit image
+>> --
+>
+> What about a better name? E.g. XM-demo-iimage?
 
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
----
- recipes/esc/esc-gst_6.bb |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 recipes/esc/esc-gst_6.bb
+I don't know why we need two demo images.  This should run on Rev Cx as wel=
+l.
 
-diff --git a/recipes/esc/esc-gst_6.bb b/recipes/esc/esc-gst_6.bb
-new file mode 100644
-index 0000000..88840db
---- /dev/null
-+++ b/recipes/esc/esc-gst_6.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Gstreamer scripts for Embedded Systems Conference workshop"
-+LICENSE = "Various"
-+
-+SRC_URI = "http://hivelocity.dl.sourceforge.net/project/showoff/esc_gst_scripts.tar.gz \
-+"
-+SRC_URI[md5sum] = "944f4ea58e81c3a32b947322ac8f9e1d"
-+SRC_URI[sha256sum] = "589c3b611406f255204e1993e470d0d69ac8f12ff479febf4d5dc92915f982da"
-+
-+S = "${WORKDIR}/esc-gst"
-+
-+do_install() {
-+    ESC_FILES="a1 a2 a3 a4 a5 a6 d1 d2 d3 d4 d5 d6 g1 g2 g3 g4 g5 g6 g7 g8 g9"
-+    ESC_FILES="${ESC_FILES} n1 n2 n3 n4 p1 s v1 v2 v3 v4"
-+    install -d ${D}${datadir}/esc-gst
-+    for F in ${ESC_FILES} ; do
-+        install -m 0755 ${S}/${F} ${D}${datadir}/esc-gst
-+    done
-+    install -m 0644 ${S}/README ${D}${datadir}/esc-gst
-+    install -d ${D}${datadir}/applications
-+    install -m 0644 ${S}/GStreamer_Class.desktop ${D}${datadir}/applications/
-+}
-+
-+FILES_${PN} += "${datadir}/esc-gst"
--- 
-1.5.6.4
+>
+> And to widen the question: do we want to maintain customer/supplier
+> specific images in the oe repo?
+> The company I work for also has some images, but for now we opted to
+> keep them in a private overlay.
 
+I want this to be public and part of the mainline to make it easy for
+people to reproduce.  It is for a relatively broad target.  Is there a
+reason it shouldn't be there?
+
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
