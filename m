@@ -1,35 +1,43 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OlHki-0006UZ-59
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 10:42:36 +0200
-Received: from [192.168.1.25] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 9F35658411D
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OlHy3-0004B4-8j for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 10:56:25 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OlHxl-00073L-Ul for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 10:56:05 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Aug 2010 10:56:05 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 10:45:50 +0200 (CEST)
-Mime-Version: 1.0 (Apple Message framework v1081)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <1282030017.3641.18.camel@mattotaupa>
-Date: Tue, 17 Aug 2010 10:42:19 +0200
-Message-Id: <93156A86-D257-4A02-B728-9E3D43DEA61B@vanille-media.de>
-References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
-	<201008162325.59305.roman@khimov.ru>
-	<AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
-	<201008171050.16611.roman@khimov.ru>
-	<1282030017.3641.18.camel@mattotaupa>
+	Tue, 17 Aug 2010 10:56:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 17 Aug 2010 10:55:56 +0200
+Message-ID: <i4diqt$e6k$1@dough.gmane.org>
+References: <AANLkTi=XK3Le8ERWqmMt2DEVX3K4n=ua0Zdyu6qEOUcw@mail.gmail.com>
+	<47A90E34-ABBD-4D37-9F47-B1EF6BEFE198@vanille-media.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100718 Shredder/3.0.7pre
+In-Reply-To: <47A90E34-ABBD-4D37-9F47-B1EF6BEFE198@vanille-media.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: `DEFAULT_PREFERENCE = "-1"` of current (upstream) releases (was: [PATCH] openssl: update 1.0.0 to 1.0.0a)
+Subject: Re: rename files dirs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,53 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 08:42:36 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Aug 2010 08:56:26 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Am 17.08.2010 um 09:26 schrieb Paul Menzel:
+On 17-08-10 10:39, Dr. Michael Lauer wrote:
+>> Currently lots of our patches reside in a directory called files.
+>> Somewhere in the past koen explained me that that is not really proper
+>> (and I agree with them).
+> 
+> I disagree with that. In fact I'd rather suggest the other way, which
+> is: Put them all into files/ unless you have a compelling reason not to,
+> i.e. the moment one patch does not apply any longer to all versions of
+> the recipes; then it should be moved to PN-PV directory.
 
-> Am Dienstag, den 17.08.2010, 10:50 +0400 schrieb Roman I Khimov:
->> =D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=
-=82 =D0=9F=D0=BE=D0=BD=D0=B5=D0=B4=D0=B5=D0=BB=D1=8C=D0=BD=D0=B8=D0=BA =
-16 =D0=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=B0 2010 23:35:59 =D0=B0=D0=B2=D1=
-=82=D0=BE=D1=80 Khem Raj =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
->>> IMO the newest version in a recipe should always be default =
-preference
->>> this way we can
->>> stabilize recipe upgrades quicker. This also means a wider testing
->>> before pushing a new recipe
->>> DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
->>=20
->> Well, consider Perl, for example. Making 5.10.1 a default preference =
-would=20
->> break binary packaged perl modules built for 5.8.8, so technically =
-some=20
->> massive PR bump (most probably DISTRO_PR) is needed when updating to =
-5.10.1.=20
->> Forcing distro maintainers to do that is not nice, IMO.
->> Although the way it is now Perl 5.10.1 seems to be rarely used, which =
-is also=20
->> not nice. Probably, there is no way to solve this problem for =
-everyone. With=20
->> D_P it's not used much, removing D_P is asking for "YOU BROKE MY =
-BUILD!!!"=20
->> love messages from random corners.
->=20
-> What about removing `DEFAULT_PREFERENCE =3D "-1"` and have the
-> distributions not wanting it pinning to the old version? This could be
-> done after a period of time after the push and an announcement to the
-> list asking what distribution prefers what and make that change in one
-> commit.
+What's wrong with putting those patches in PN/ instead of files/? Having
+them in files/ significantly threatens all efforts to clean up the
+recipes/ structure :(
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-That sounds good to me. We should really try to keep a reasonable
-default set of preferences so that certain DISTRO setting are not
-mandatory.
-
-Cheers,
-
-:M:
+iD8DBQFMak6cMkyGM64RGpERAi7ZAKC3znJEhz9R+E+ogbSIk+CFNhscJwCeNzU5
+bj8CdsrE7eEOUc9QyPoJ2JE=
+=R/wu
+-----END PGP SIGNATURE-----
 
 
 
