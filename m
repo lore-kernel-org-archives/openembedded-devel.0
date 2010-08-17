@@ -1,31 +1,51 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1Ol9iU-0004u0-If
+	(envelope-from <graham.gower@gmail.com>) id 1Ol9sj-000569-2e
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 02:07:47 +0200
-Received: by wwb34 with SMTP id 34so5964419wwb.24
+	Tue, 17 Aug 2010 02:18:22 +0200
+Received: by pxi11 with SMTP id 11so2129246pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 17:07:29 -0700 (PDT)
+	Mon, 16 Aug 2010 17:18:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:content-type:content-transfer-encoding;
+	bh=x25UUr4FP1wTBG9cOO9xM1V+W4f7yZE2hzM+LC5KeCY=;
+	b=PCJn2AW86IeQT+nh5qlpSSbTWa1z1K7KkmfCuN2c07j9IY0CmjTMxVLWM1VcXY6FFR
+	PYH5/Q1/Gmx1pW+mwMRVA+lev+lmz19j4Os75LDm/qnaoqTsWN5OmfsbsiGi8BRntsmp
+	V15MQ43ptmR1TRix/vQsEYJIITXhLYsZpLP/Q=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:content-type:content-transfer-encoding;
+	b=MSvHqlCFX11ImCCR71o8/EDZcVzInKWuE22DO5ZzUWmzxc9dTjOFAHnuo6IeWa76E6
+	Aj4EBss26Ugjqf4OR3kMlqhFZmxb6UGItAt+9AnoJj4SPxBAHVDihzRT8nR9trcOor8M
+	XIPUZXSbclThhs8KdIZuCzql6PDzmbF/YI18g=
+Received: by 10.114.120.7 with SMTP id s7mr6992923wac.131.1282004282575;
+	Mon, 16 Aug 2010 17:18:02 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	c24sm13147916wam.19.2010.08.16.17.17.59
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 16 Aug 2010 17:18:01 -0700 (PDT)
+Message-ID: <4C69D533.7060902@gmail.com>
+Date: Tue, 17 Aug 2010 09:47:55 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
 MIME-Version: 1.0
-Received: by 10.227.43.9 with SMTP id u9mr5106093wbe.41.1282003649175; Mon, 16
-	Aug 2010 17:07:29 -0700 (PDT)
-Received: by 10.216.15.79 with HTTP; Mon, 16 Aug 2010 17:07:29 -0700 (PDT)
-In-Reply-To: <4C69CD3E.5090007@mentor.com>
-References: <1281998751-10781-1-git-send-email-jkridner@beagleboard.org>
-	<4C69CD3E.5090007@mentor.com>
-Date: Mon, 16 Aug 2010 20:07:29 -0400
-Message-ID: <AANLkTikGKtyVsmKKD4A8nuXS5wSGNOvCMb1apeFHPYE0@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+References: <E1OhMNp-0001vS-Ot@melo.openembedded.org>	<AANLkTimcUgoNO73WXbn2R1O-pgXT-4raSGjtsHa8SvOC@mail.gmail.com>	<4C609035.7080500@gmail.com>
+	<AANLkTinwNNmb-b2dDWycBeKmPWK4JP0sjYAYYZhmKwau@mail.gmail.com>
+In-Reply-To: <AANLkTinwNNmb-b2dDWycBeKmPWK4JP0sjYAYYZhmKwau@mail.gmail.com>
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] flex: disabled packaged staging of native builds
+Subject: [PATCH] rootfs_ipk.bbclass: remove host's lists in /var/lib/opkg/*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,50 +59,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 00:07:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 17 Aug 2010 00:18:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 16, 2010 at 7:43 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> Jason Kridner wrote:
->>
->> ---
->> =A0recipes/flex/flex.inc | =A0 =A04 +++-
->> =A01 files changed, 3 insertions(+), 1 deletions(-)
->>
->> diff --git a/recipes/flex/flex.inc b/recipes/flex/flex.inc
->> index 49b26e8..5d3f076 100644
->> --- a/recipes/flex/flex.inc
->> +++ b/recipes/flex/flex.inc
->> @@ -4,7 +4,7 @@ LICENSE =3D "BSD"
->> =A0DEPENDS =3D "gettext"
->> =A0-INC_PR =3D "r5"
->> +INC_PR =3D "r6"
->> =A0S =3D "${WORKDIR}/flex-${PV}"
->> =A0@@ -16,3 +16,5 @@ inherit autotools gettext
->> =A0# static-only library; that might be an error
->> =A0FILES_${PN} +=3D "${libdir}/libfl.a"
->> +
->> +PSTAGING_DISABLED_virtclass-native =3D "1"
->
-> I assume you've ran into 2.3.35 not being relocation happy? =A0Have you b=
-een
-> able to look at this at all? =A02.3.31 works so it's something 'bad' done
-> upstream. =A0Thanks!
 
-I did, but I didn't look into the details.  bison-native wouldn't
-rebuild when I used my flex-native pstage.  bitbake -c clean
-flex-native fixed it, so...
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ classes/rootfs_ipk.bbclass |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
 
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
+index db04fb6..915e3d7 100644
+--- a/classes/rootfs_ipk.bbclass
++++ b/classes/rootfs_ipk.bbclass
+@@ -98,15 +98,19 @@ fakeroot rootfs_ipk_do_rootfs () {
+ 		else
+ 			rm -f ${IMAGE_ROOTFS}${libdir}/opkg/lists/*
+ 		fi
+-	
++
++		# Remove lists, but leave SHR's tmp dir if it exists.
++		rm -f ${IMAGE_ROOTFS}/var/lib/opkg/* || true
++
+ 		# Keep these lines until package manager selection is implemented
+ 		ln -s opkg ${IMAGE_ROOTFS}${sysconfdir}/ipkg
+ 		ln -s opkg ${IMAGE_ROOTFS}${libdir}/ipkg
+ 	else
+ 		rm -rf ${IMAGE_ROOTFS}${libdir}/opkg
+ 		rm -rf ${IMAGE_ROOTFS}/usr/lib/opkg
++		rm -rf ${IMAGE_ROOTFS}/var/lib/opkg
+ 	fi
+-	
++
+ 	log_check rootfs 	
+ 	rm -rf ${IPKG_TMP_DIR}
+ }
+-- 
+1.7.1
+
+
 
 
