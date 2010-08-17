@@ -1,48 +1,47 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OlT9I-0001Dc-Hl
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OlTHz-00046V-3Z
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 22:52:59 +0200
-Received: by ewy7 with SMTP id 7so3457917ewy.6
+	Tue, 17 Aug 2010 23:01:44 +0200
+Received: by gxk2 with SMTP id 2so2888146gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 13:52:23 -0700 (PDT)
+	Tue, 17 Aug 2010 14:01:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=6ibGI8KqGWWu3WHPUnRHHQBmyPBJKChrcubD174WX5E=;
-	b=OVR3SCFnrcCiIMedgK/FxdFhkAFtMF+Drux0xw9aoff0qojvXWVeQweWzsvptGckLg
-	Cr4HXHm2R5bTMqiiBFS0VewL5zlWULeSY9thw6xRTVg+uUfVYkMyRWDshiGr8ENCWCyc
-	yS+pvSeM2rRl2ji1QrpVT54nB1zrM2E6FJdmI=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Qda4tKPjf62r3+7tAB/r44d7/ifr63bmNnFkbBSR9kE=;
+	b=V258beioQ/Dtqubpcjt28ebOuLcCHPx9VJ9SAfyPmkje6k571bOkwEvSqgjq6GeQUR
+	nQvo3k4NbLXnJ20fJtitHdYRz6F98RqLj8vNmtppNoA233SAK2vPXkhX1mnYb3g2sDaO
+	1ZRYHkFl0ufdZQsfH7lq+yAvt/R0RBNKGJT1o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=caMHzLxdmO+YaUAbJEIO95e6hcBHVwyn6dddKjaKPfDy0px/lPvZfG4ejm9mFZChzv
-	JyKwLZKesvzlgoJrcfLFAKrcdHaupb5xNBDT0ZQH9e3Vm0Cu928S4abX6UXqRCyElmqO
-	dTEw+upgdrKzEet+UY+3pzjDVVzazDJ9KeULA=
-Received: by 10.216.70.200 with SMTP id p50mr6211990wed.54.1282078343283; Tue,
-	17 Aug 2010 13:52:23 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=yFInYLDiB41cPbR4Km85+8FrchZdZtv9c4mSd9mqXhnszRspDG7pTir8jAoqEuq0r5
+	pZmiFXGtOcGj+5duzy4iDgtJW6dwXl0zsUwd8hh0FnGnpkeBISYOfcDVVmFxCBA+on30
+	Sq5Oa6Z+mdKdAMT0HwxHGu6N9mmhvf9B2FSBw=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.166 with HTTP; Tue, 17 Aug 2010 13:52:02 -0700 (PDT)
-In-Reply-To: <AANLkTinvpJphbWaNu_8s=oyxC_1PN=uSXRoNfuEVr=No@mail.gmail.com>
-References: <1282072782-11487-1-git-send-email-jkridner@beagleboard.org>
-	<AANLkTinvpJphbWaNu_8s=oyxC_1PN=uSXRoNfuEVr=No@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Tue, 17 Aug 2010 13:52:02 -0700
-X-Google-Sender-Auth: ePoATAKaSABRH1suECzD-WPJyLI
-Message-ID: <AANLkTikFP8vUiQ4PbJ6Acv=7TeY6fyP4LAq7C9GQkX0m@mail.gmail.com>
+Received: by 10.90.63.7 with SMTP id l7mr4871808aga.52.1282078883926; Tue, 17
+	Aug 2010 14:01:23 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Tue, 17 Aug 2010 14:01:23 -0700 (PDT)
+In-Reply-To: <AANLkTik=gnhtadZjsjx7i-g38iJxyF=PFkNOE9JydCO-@mail.gmail.com>
+References: <1282072886-11562-1-git-send-email-jkridner@beagleboard.org>
+	<1282072886-11562-2-git-send-email-jkridner@beagleboard.org>
+	<AANLkTik73cayAjmykmJvp8KqsJ_XrBfQTOkM8MJWydsP@mail.gmail.com>
+	<AANLkTik=gnhtadZjsjx7i-g38iJxyF=PFkNOE9JydCO-@mail.gmail.com>
+Date: Tue, 17 Aug 2010 23:01:23 +0200
+Message-ID: <AANLkTi=baeypmvV4Kx2NtHxQOO6w8HPYNoZH=gm2QaM=@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] quilt: disable packaged staging on native builds
+Subject: Re: [PATCH] beagleboard-olddemo-image: saved off beagleboard-demo-image
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,72 +55,94 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 20:53:00 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 17 Aug 2010 21:01:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 17, 2010 at 1:03 PM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
-
-> 2010/8/17 Jason Kridner <jkridner@beagleboard.org>:
-> >
-> > Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
-> > ---
-> >  recipes/quilt/quilt-native.inc |    3 +++
-> >  recipes/quilt/quilt_0.48.bb    |    2 +-
-> >  2 files changed, 4 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/recipes/quilt/quilt-native.inc
-> b/recipes/quilt/quilt-native.inc
-> > index 10d8183..f422b63 100644
-> > --- a/recipes/quilt/quilt-native.inc
-> > +++ b/recipes/quilt/quilt-native.inc
-> > @@ -6,6 +6,9 @@ RDEPENDS_${PN} = "diffstat-native patch-native
-> bzip2-native util-linux-native"
-> >  FILESPATHPKG =. quilt-${PV}
-> >  INHIBIT_AUTOTOOLS_DEPS = "1"
-> >
-> > +# Several packages fail to patch when using quilt from packaged staging
-> > +PSTAGING_DISABLED_virtclass-native = "1"
-> > +
-> >  inherit autotools native
-> >
-> >  PATCHTOOL = "patch"
-> > diff --git a/recipes/quilt/quilt_0.48.bb b/recipes/quilt/quilt_0.48.bb
-> > index 0a066df..99dc2a2 100644
-> > --- a/recipes/quilt/quilt_0.48.bb
-> > +++ b/recipes/quilt/quilt_0.48.bb
-> > @@ -1,6 +1,6 @@
-> >  require quilt-package.inc
-> >
-> > -PR="r1"
-> > +PR="r2"
-> >
-> >  SRC_URI[md5sum] = "f77adda60039ffa753f3c584a286f12b"
-> >  SRC_URI[sha256sum] =
-> "73fd760d3b5cbf06417576591dc37d67380d189392db9000c21b7cbebee49ffc"
-> > --
-> > 1.5.6.4
+2010/8/17 Jason Kridner <jkridner@beagleboard.org>:
+> On Tue, Aug 17, 2010 at 3:54 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+>> 2010/8/17 Jason Kridner <jkridner@beagleboard.org>:
+>>> I want to use the name beagleboard-demo-image for what actually ships
+>>> with the xM boards.
+>>>
+>>> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+>>> ---
+>>> =A0recipes/images/beagleboard-olddemo-image.bb | =A0 30 +++++++++++++++=
+++++++++++++
+>>> =A01 files changed, 30 insertions(+), 0 deletions(-)
+>>> =A0create mode 100644 recipes/images/beagleboard-olddemo-image.bb
+>>>
+>>> diff --git a/recipes/images/beagleboard-olddemo-image.bb b/recipes/imag=
+es/beagleboard-olddemo-image.bb
+>>> new file mode 100644
+>>> index 0000000..d83281c
+>>> --- /dev/null
+>>> +++ b/recipes/images/beagleboard-olddemo-image.bb
+>>> @@ -0,0 +1,30 @@
+>>> +# Demo image for beagleboard
+>>> +
+>>> +IMAGE_LINGUAS =3D "de-de fr-fr en-gb en-us pt-br es-es kn-in ml-in ta-=
+in"
+>>> +
+>>> +XSERVER ?=3D "xserver-xorg \
+>>> + =A0 =A0 =A0 =A0 =A0 xf86-input-evdev \
+>>> + =A0 =A0 =A0 =A0 =A0 xf86-input-mouse \
+>>> + =A0 =A0 =A0 =A0 =A0 xf86-video-fbdev \
+>>> + =A0 =A0 =A0 =A0 =A0 xf86-input-keyboard \
+>>> +"
+>>> +
+>>> +ANGSTROM_EXTRA_INSTALL ?=3D ""
+>>> +SPLASH =3D "exquisite exquisite-themes exquisite-theme-angstrom"
+>>> +
+>>> +export IMAGE_BASENAME =3D "Beagleboard-demo-image"
+>>> +
+>>> +DEPENDS =3D "task-base"
+>>> +IMAGE_INSTALL =3D "\
+>>> + =A0 =A0${XSERVER} \
+>>> + =A0 =A0${ANGSTROM_EXTRA_INSTALL} \
+>>> + =A0 =A0task-beagleboard-demo \
+>>> + =A0 =A0${SPLASH} \
+>>> + =A0 =A0"
+>>> +
+>>> +IMAGE_PREPROCESS_COMMAND =3D "create_etc_timestamp"
+>>> +
+>>> +#zap root password for release images
+>>> +ROOTFS_POSTPROCESS_COMMAND +=3D 'install_linguas; ${@base_conditional(=
+"DISTRO_TYPE", "release", "zap_root_password; ", "",d)}'
+>>> +
+>>> +inherit image
+>>> --
+>>
+>> What about a better name? E.g. XM-demo-iimage?
 >
-> I have some concerns with this patch.
-> I have a quilt native in my pstage dir from aug 7. (pstage is outside
-> TMPDIR)
-> Just did a bitbake beagleboard-demo-image after removing TMPDIR, with
-> quilt-native and quite some other packages in my pstage dir.
-> I am at "Running task 7313 of 11636", lots of packages have been
-> compiled and no patch has failed.
+> I don't know why we need two demo images. =A0This should run on Rev Cx as=
+ well.
+
+Actually XM-demo-image was just a proposal
+For me beagleboard-olddemo-image indicates that it is not really an up
+to date version.
+I think I would prefer a name that better indicates the purpose. Maybe
+add stable in the name?
+Another option would be to have the image delivered with the XM as
+e.g. beagleboard-demo-image_1.0 and the newer versions e.g. 1.1 etc
+(or 2.0 or whatever)
 >
-> My proposal is to put this patch on hold until proven to be an issue
-> by someone else.
+>>
+>> And to widen the question: do we want to maintain customer/supplier
+>> specific images in the oe repo?
+>> The company I work for also has some images, but for now we opted to
+>> keep them in a private overlay.
+>
+> I want this to be public and part of the mainline to make it easy for
+> people to reproduce. =A0It is for a relatively broad target. =A0Is there =
+a
+> reason it shouldn't be there?
+>
 
+Ok, I understand that (and I have not really a problem with that). It
+is just the name that didn't make me too happy.
 
-Did you build with TMPDIR in a *different* location using prebuilts?  If not
-you didn't prove anything at all about the relocatability of quilt.  If a
-package isn't relocatable, it shouldn't be enabled for pstaging, as the
-package can't be used reliably.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Frans
+
 
