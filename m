@@ -1,35 +1,36 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1OlML5-00029q-8M
+	(envelope-from <philb@gnu.org>) id 1OlMfM-0001wB-84
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 15:36:27 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OlMKl-0004BQ-Nc from Fahad_Usman@mentor.com 
+	Tue, 17 Aug 2010 15:57:25 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OlMf5-0006DI-5T
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 06:36:07 -0700
-Received: from 137.202.157.210 ([137.202.157.210]) by eu2-mail.mgc.mentorg.com
-	([137.202.76.30]) via Exchange Front-End Server
-	webmail.mentor.com ([192.94.38.218]) with Microsoft Exchange
-	Server HTTP-DAV ; Tue, 17 Aug 2010 13:36:06 +0000
-Received: from pkl-fusman-ubuntu by webmail.mentor.com;
-	17 Aug 2010 18:38:51 +0500
-From: Fahad <Fahad_Usman@mentor.com>
+	Tue, 17 Aug 2010 14:57:07 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OlMf4-0007AC-Mo
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 14:57:06 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-Organization: Mentor Graphics
-Date: Tue, 17 Aug 2010 18:38:50 +0500
-Message-ID: <1282052330.27679.145.camel@pkl-fusman-ubuntu>
+In-Reply-To: <1281993972-8643-1-git-send-email-jkridner@beagleboard.org>
+References: <1281993972-8643-1-git-send-email-jkridner@beagleboard.org>
+Date: Tue, 17 Aug 2010 14:57:05 +0100
+Message-ID: <1282053425.2692.1179.camel@mill.internal.reciva.com>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_NUMERIC_HELO autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cacaoh-native: used oe-stylize.py
+Subject: Re: [PATCH] bison: add flex dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 13:36:28 -0000
+X-List-Received-Date: Tue, 17 Aug 2010 13:57:25 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-2010/8/17 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> Have you tested this?
-> Moving a require file might lead to errors or unexpected results
-> a require (or include) is an inclusion of the file. Moving it might
-> cause a problem if the recipe itself redefines a var that is also
-> defined in the inc file.
-> (e.g. if the recipe overrules the DEPENDS that are in an .inc file)
->=20
-> Frans.
->=20
-yes, it appears to be working exactly the way it was before using the
-oe-stylize.py
+On Mon, 2010-08-16 at 16:26 -0500, Jason Kridner wrote:
+> -DEPENDS = "virtual/libintl"
+> +DEPENDS = "virtual/libintl virtual/flex"
 
-Fahad
+Does this actually work?  I couldn't immediately spot any obvious
+package which PROVIDES virtual/flex, and that sounds like a strange kind
+of virtual to have since I don't think there are any alternative
+implementations of flex.  (But if bison actually depends on lex
+generically, rather than flex specifically, it might make some sense to
+introduce a virtual/lex and have flex PROVIDE it.)
+
+p.
+
+
 
 
