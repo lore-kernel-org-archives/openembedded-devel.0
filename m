@@ -1,33 +1,40 @@
-Received: from gravedo.de ([85.214.79.159])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OlPrf-0005XW-4z
+	(envelope-from <Tom_Rini@mentor.com>) id 1OlPvf-0005b2-P0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 19:22:19 +0200
-Received: by gravedo.de (Postfix, from userid 5001)
-	id 29E45275CCC8; Tue, 17 Aug 2010 19:21:48 +0200 (CEST)
-Received: from [192.168.1.142] (p5489DE7F.dip.t-dialin.net [84.137.222.127])
-	by gravedo.de (Postfix) with ESMTPSA id 589B0275CCC2
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 19:21:47 +0200 (CEST)
-Message-ID: <4C6AC52A.4020801@gravedo.de>
-Date: Tue, 17 Aug 2010 19:21:46 +0200
-From: Simon Busch <morphis@gravedo.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12pre) Gecko/20100809 Shredder/3.0.7pre
+	Tue, 17 Aug 2010 19:26:43 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OlPvH-0000PB-8Q from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 10:26:03 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 17 Aug 2010 10:26:03 -0700
+Received: from [172.30.80.144] ([172.30.80.144]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 17 Aug 2010 11:26:01 -0600
+Message-ID: <4C6AC627.9050801@mentor.com>
+Date: Tue, 17 Aug 2010 10:25:59 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <20100817120643.GN19855@excalibur.local>
-In-Reply-To: <20100817120643.GN19855@excalibur.local>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 85.214.79.159
-X-SA-Exim-Mail-From: morphis@gravedo.de
+References: <1281998751-10781-1-git-send-email-jkridner@beagleboard.org>	<4C69CD3E.5090007@mentor.com>	<AANLkTikGKtyVsmKKD4A8nuXS5wSGNOvCMb1apeFHPYE0@mail.gmail.com>
+	<AANLkTi=YwSNSqe8eSykO_ajEc6dsMBdXFdzBA+to-fEV@mail.gmail.com>
+In-Reply-To: <AANLkTi=YwSNSqe8eSykO_ajEc6dsMBdXFdzBA+to-fEV@mail.gmail.com>
+X-OriginalArrivalTime: 17 Aug 2010 17:26:01.0852 (UTC)
+	FILETIME=[43979BC0:01CB3E31]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Write access for Simon Busch
+Subject: Re: [PATCH] flex: disabled packaged staging of native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,26 +48,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 17:22:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 17 Aug 2010 17:26:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Am 17.08.2010 14:06, schrieb Stefan Schmidt:
-> Hello.
+Frans Meulenbroeks wrote:
+> 2010/8/17 Jason Kridner <jkridner@beagleboard.org>:
+>> On Mon, Aug 16, 2010 at 7:43 PM, Tom Rini <tom_rini@mentor.com> wrote:
+>>> Jason Kridner wrote:
+>>>> ---
+>>>>  recipes/flex/flex.inc |    4 +++-
+>>>>  1 files changed, 3 insertions(+), 1 deletions(-)
+>>>>
+>>>> diff --git a/recipes/flex/flex.inc b/recipes/flex/flex.inc
+>>>> index 49b26e8..5d3f076 100644
+>>>> --- a/recipes/flex/flex.inc
+>>>> +++ b/recipes/flex/flex.inc
+>>>> @@ -4,7 +4,7 @@ LICENSE = "BSD"
+>>>>  DEPENDS = "gettext"
+>>>>  -INC_PR = "r5"
+>>>> +INC_PR = "r6"
+>>>>  S = "${WORKDIR}/flex-${PV}"
+>>>>  @@ -16,3 +16,5 @@ inherit autotools gettext
+>>>>  # static-only library; that might be an error
+>>>>  FILES_${PN} += "${libdir}/libfl.a"
+>>>> +
+>>>> +PSTAGING_DISABLED_virtclass-native = "1"
+>>> I assume you've ran into 2.3.35 not being relocation happy?  Have you been
+>>> able to look at this at all?  2.3.31 works so it's something 'bad' done
+>>> upstream.  Thanks!
+>> I did, but I didn't look into the details.  bison-native wouldn't
+>> rebuild when I used my flex-native pstage.  bitbake -c clean
+>> flex-native fixed it, so...
 > 
-> Over the last days I reviewed some patches from him. I have done this earlier as
-> well and have the feeling that he it ready for write access now.
-> 
-> The work was done well and he was always open for feedback and happy to fix
-> other issues around the original problem.
-> 
-> regards
-> Stefan Schmidt
-> 
+> After that would rebuilding from pstage cause the error again?
+> I'm a little bit worried that we inhibit PSTAGING because e.g.
+> something else is wrong (e.g. a change elsewhere that should have been
+> resulted in a flex PR bump).
 
-Thank you Stefan for proposing me and all other for the approvement!
+So, this change is fine itself.  The problem is that flex 2.3.35 has 
+introduced a hardcoded path somewhere into the binary.  So blacklisting 
+and bumping PR means that pstaging is sane again.
 
-regards,
-morphis
+> Besides (but this is more a global remark): it would be nice if a
+> recipe disables something that there is a short description why this
+> is done. (at least in the commit message, but imho preferably in the
+> recipe, so in half a year time, people still know why it is done and
+> can much easier judge if it can be removed).
+
+Yes, I agree with that, a comment why is good.
+
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
