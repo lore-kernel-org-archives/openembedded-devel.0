@@ -1,52 +1,32 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OlFRB-0003rV-K2
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1OlFiC-0006SX-2d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 08:14:18 +0200
-Received: by fxm6 with SMTP id 6so3452611fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 16 Aug 2010 23:14:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=DvgIxmTVbDjdATfRaqfmNmiirS5AIaexBusc4RY0B08=;
-	b=a5ZpgLqGrsDDdgHVUE5lRLG9ADi58dCK8f09I0+qoMY9BSP5sJpRrBlqifAneGGaRN
-	I6JPkYayapAtvW7jIIpNzbzmGGsE0mmOy1sYWujY94XmrhcYGi1Mo2qWKGHnPUlwa6Vc
-	vkU4ujduDwKzZ+oCpPgr8+gubfTdQxAstHJtg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=Jbh/pYvmFURb4UTVcYE4GIZJIfmWD1PGkdj9gEe5Q+8RN3NWCZe4eC9ZwzBISrDmGB
-	YemmlA1PkcraIKl4XkTafaVOUkYQpkUIYM/O9kQrbJpMJbKt1mu0hEKnb3HX8gyRcTaA
-	IE/BdJK90vBGTfkyAaAoZfZeIm1DdZhKW6JtU=
-Received: by 10.223.123.79 with SMTP id o15mr6042591far.12.1282025640028;
-	Mon, 16 Aug 2010 23:14:00 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id r10sm2804427faq.29.2010.08.16.23.13.59
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 16 Aug 2010 23:13:59 -0700 (PDT)
-Date: Tue, 17 Aug 2010 08:14:14 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Tue, 17 Aug 2010 08:31:53 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OlFho-0002iu-Il from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 16 Aug 2010 23:31:28 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 17 Aug 2010 08:31:27 +0200
+From: Noor Ahsan <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100817061411.GC11569@jama>
-References: <E1OhMNp-0001vS-Ot@melo.openembedded.org>
-	<AANLkTimcUgoNO73WXbn2R1O-pgXT-4raSGjtsHa8SvOC@mail.gmail.com>
-	<4C609035.7080500@gmail.com>
-	<AANLkTinwNNmb-b2dDWycBeKmPWK4JP0sjYAYYZhmKwau@mail.gmail.com>
-	<4C69D533.7060902@gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <4C69D533.7060902@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Tue, 17 Aug 2010 12:29:41 +0600
+Message-Id: <1282026581-14776-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 17 Aug 2010 06:31:27.0244 (UTC)
+	FILETIME=[D21A04C0:01CB3DD5]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,URI_NOVOWEL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rootfs_ipk.bbclass: remove host's lists in /var/lib/opkg/*
+Subject: [PATCH] sgmlspl-native: convert to new style staging, remove do_stage()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -60,57 +40,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 06:14:18 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 17 Aug 2010 06:31:53 -0000
 
-On Tue, Aug 17, 2010 at 09:47:55AM +0930, Graham Gower wrote:
-> 
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+* Remove do_stage() from the recipe. The cpan_do_install () replaces the do_stage () of the recipe.
+* Bump PR to "r1"
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ recipes/sgmlspl/sgmlspl-native_1.03ii.bb |    9 +--------
+ 1 files changed, 1 insertions(+), 8 deletions(-)
 
-> ---
->  classes/rootfs_ipk.bbclass |    8 ++++++--
->  1 files changed, 6 insertions(+), 2 deletions(-)
-> 
-> diff --git a/classes/rootfs_ipk.bbclass b/classes/rootfs_ipk.bbclass
-> index db04fb6..915e3d7 100644
-> --- a/classes/rootfs_ipk.bbclass
-> +++ b/classes/rootfs_ipk.bbclass
-> @@ -98,15 +98,19 @@ fakeroot rootfs_ipk_do_rootfs () {
->  		else
->  			rm -f ${IMAGE_ROOTFS}${libdir}/opkg/lists/*
->  		fi
-> -	
-> +
-> +		# Remove lists, but leave SHR's tmp dir if it exists.
-> +		rm -f ${IMAGE_ROOTFS}/var/lib/opkg/* || true
-> +
->  		# Keep these lines until package manager selection is implemented
->  		ln -s opkg ${IMAGE_ROOTFS}${sysconfdir}/ipkg
->  		ln -s opkg ${IMAGE_ROOTFS}${libdir}/ipkg
->  	else
->  		rm -rf ${IMAGE_ROOTFS}${libdir}/opkg
->  		rm -rf ${IMAGE_ROOTFS}/usr/lib/opkg
-> +		rm -rf ${IMAGE_ROOTFS}/var/lib/opkg
->  	fi
-> -	
-> +
->  	log_check rootfs 	
->  	rm -rf ${IPKG_TMP_DIR}
->  }
-> -- 
-> 1.7.1
-> 
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-
+diff --git a/recipes/sgmlspl/sgmlspl-native_1.03ii.bb b/recipes/sgmlspl/sgmlspl-native_1.03ii.bb
+index 36bb366..0a4cd12 100644
+--- a/recipes/sgmlspl/sgmlspl-native_1.03ii.bb
++++ b/recipes/sgmlspl/sgmlspl-native_1.03ii.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "A simple post-processor for SGMLS and NSGMLS"
+ HOMEPAGE = "http://search.cpan.org/src/DMEGG/SGMLSpm-1.03ii/DOC/HTML/SGMLSpm/sgmlspm.html"
+ SECTION = "libs"
+ LICENSE = "GPL"
++PR = "r1"
+ 
+ SRC_URI = "http://www.cpan.org/authors/id/D/DM/DMEGG/SGMLSpm-${PV}.tar.gz \
+           file://combined.patch"
+@@ -10,14 +11,6 @@ S = "${WORKDIR}/SGMLSpm"
+ 
+ inherit native cpan
+ 
+-do_install() {
+-  :
+-}
+-
+-do_stage() {
+-  oe_runmake install_vendor
+-}
+-
+ PACKAGES = "${PN}-dbg  "
+ 
+ SRC_URI[md5sum] = "5bcb197fd42e67d51c739b1414d514a7"
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.6.3.3
+
 
 
