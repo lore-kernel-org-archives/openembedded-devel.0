@@ -1,32 +1,44 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OlG0I-0002g1-Pt
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OlGA5-0004V2-V8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 08:51:03 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OlG01-0008U7-Ol
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 10:50:18 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 17 Aug 2010 10:50:13 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1281983778-21054-1-git-send-email-khimov@altell.ru>
-	<201008162325.59305.roman@khimov.ru>
-	<AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
-In-Reply-To: <AANLkTik-LOv_7xTmgsEz8ip_smmZ+L4FeG0Cr5rHc1zF@mail.gmail.com>
+	Tue, 17 Aug 2010 09:00:57 +0200
+Received: by gyd8 with SMTP id 8so2364741gyd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 17 Aug 2010 00:00:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=xPBWbU7wQiPtHCSFZGb2GIwBKlMa6StOANIuTJrWUas=;
+	b=H+3C1gPdq3QrU1uhjEtjJPlp1U+luivzNMPI5k9tc7LENyPnHvQWQbKtU7rbAk81Mi
+	aPBt0Uc4rRYE1LuKwLOjfOM6z7aaXMW9oXRmTJnei1E/7bqfM/pFXs9cG7jmoKjlCSGo
+	DTbh0i8o33EHnEPVfGB5vjce4SAln0jd+vTrE=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=dU3u7AeWqWyUcwNBAYoao3zOBe556xJbAo9SEuwYCSyixunEW6TauaAPw2oESwXR++
+	o/HcU06llElIOlUF6xcMk/MTEvbHx26gRDfs6Aa8RnWk3b/B3lVRK9vIX2Gf69tV8cIE
+	n0yoSyR81YNfxwpHcWk17yClyY4jjkTy1oHgY=
 MIME-Version: 1.0
-Message-Id: <201008171050.16611.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.150.2.19 with SMTP id 19mr6567259ybb.53.1282028423728; Tue, 17
+	Aug 2010 00:00:23 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Tue, 17 Aug 2010 00:00:23 -0700 (PDT)
+In-Reply-To: <1281993972-8643-1-git-send-email-jkridner@beagleboard.org>
+References: <1281993972-8643-1-git-send-email-jkridner@beagleboard.org>
+Date: Tue, 17 Aug 2010 09:00:23 +0200
+Message-ID: <AANLkTi=Op1aB0eY5B5XQj7c9TKFtZ2SD7cdEBYsD+6zR@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] openssl: update 1.0.0 to 1.0.0a
+Subject: Re: [PATCH] bison: add flex dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,56 +52,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 06:51:04 -0000
-X-Groupsio-MsgNum: 22310
-Content-Type: multipart/signed; boundary="nextPart15085753.5sm9gOdOqz";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart15085753.5sm9gOdOqz
-Content-Type: Text/Plain;
-  charset="koi8-r"
+X-List-Received-Date: Tue, 17 Aug 2010 07:00:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-=F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB 16=
- =C1=D7=C7=D5=D3=D4=C1 2010 23:35:59 =C1=D7=D4=CF=D2 Khem Raj =CE=C1=D0=C9=
-=D3=C1=CC:
-> IMO the newest version in a recipe should always be default preference
-> this way we can
-> stabilize recipe upgrades quicker. This also means a wider testing
-> before pushing a new recipe
-> DEFAULT_PREFERENCE =3D "-1" makes it to escape the testing.
+2010/8/16 Jason Kridner <jkridner@beagleboard.org>:
+> It seems that bison was missing this dependency. =A0I'm not 100% certain =
+this
+> is the right way to add it, so I'm leaving off my signed-off-by in hopes =
+that
+> someone will ack this who really knows.
+>
+> ---
+> =A0recipes/bison/bison.inc | =A0 =A04 ++--
+> =A01 files changed, 2 insertions(+), 2 deletions(-)
+>
+> diff --git a/recipes/bison/bison.inc b/recipes/bison/bison.inc
+> index 22672e2..d32f454 100644
+> --- a/recipes/bison/bison.inc
+> +++ b/recipes/bison/bison.inc
+> @@ -3,12 +3,12 @@ HOMEPAGE =3D "http://www.gnu.org/software/bison/"
+> =A0LICENSE =3D "GPL"
+> =A0SECTION =3D "devel"
+> =A0PRIORITY =3D "optional"
+> -DEPENDS =3D "virtual/libintl"
+> +DEPENDS =3D "virtual/libintl virtual/flex"
+>
+> =A0SRC_URI =3D "${GNU_MIRROR}/bison/bison-${PV}.tar.gz \
+> =A0 =A0 =A0 =A0 =A0 file://m4.patch"
+>
+> -INC_PR =3D "r7"
+> +INC_PR =3D "r8"
+>
+> =A0inherit autotools gettext
+>
+> --
 
-Well, consider Perl, for example. Making 5.10.1 a default preference would=
-=20
-break binary packaged perl modules built for 5.8.8, so technically some=20
-massive PR bump (most probably DISTRO_PR) is needed when updating to 5.10.1=
-=2E=20
-=46orcing distro maintainers to do that is not nice, IMO.
+It is my impression that virtual is only to be used if there can be
+different packages acting as source (so different providers) (e.g. for
+gcc, libc, u-boot, kernel etc)
+AFAIK that is not the case for flex so I would just have written
+DEPENDS =3D "virtual/libintl flex-native"
 
-Although the way it is now Perl 5.10.1 seems to be rarely used, which is al=
-so=20
-not nice. Probably, there is no way to solve this problem for everyone. Wit=
-h=20
-D_P it's not used much, removing D_P is asking for "YOU BROKE MY BUILD!!!"=
-=20
-love messages from random corners.
+Anyway, I peeked in the code and I can confirm that a dependency on
+flex exists. This went unnoticed until now as normally flex was
+already dragged in by another package.
+Either the change from Jason or the line I give above can have my ack.
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+Frans
 
---nextPart15085753.5sm9gOdOqz
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkxqMSgACgkQXJ70z+XgVcOxewCfY7OMJ058MPZODDLrsoL7DEdi
-ejUAn2ko1bHlCyiDteV73MOm8pseVVmr
-=iQx2
------END PGP SIGNATURE-----
-
---nextPart15085753.5sm9gOdOqz--
