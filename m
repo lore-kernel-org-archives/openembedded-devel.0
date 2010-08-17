@@ -1,34 +1,35 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1OlMGq-0007HD-Uz
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OlML5-00029q-8M
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 17 Aug 2010 15:32:25 +0200
+	Tue, 17 Aug 2010 15:36:27 +0200
 Received: from nat-dem.mentorg.com ([139.181.124.2]
 	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OlMGO-0003Ke-0J from Fahad_Usman@mentor.com ;
-	Tue, 17 Aug 2010 06:31:36 -0700
+	id 1OlMKl-0004BQ-Nc from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 06:36:07 -0700
 Received: from 137.202.157.210 ([137.202.157.210]) by eu2-mail.mgc.mentorg.com
 	([137.202.76.30]) via Exchange Front-End Server
 	webmail.mentor.com ([192.94.38.218]) with Microsoft Exchange
-	Server HTTP-DAV ; Tue, 17 Aug 2010 13:31:34 +0000
+	Server HTTP-DAV ; Tue, 17 Aug 2010 13:36:06 +0000
 Received: from pkl-fusman-ubuntu by webmail.mentor.com;
-	17 Aug 2010 18:34:19 +0500
+	17 Aug 2010 18:38:51 +0500
 From: Fahad <Fahad_Usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
 Organization: Mentor Graphics
-Date: Tue, 17 Aug 2010 18:34:18 +0500
-Message-ID: <1282052058.27679.141.camel@pkl-fusman-ubuntu>
+Date: Tue, 17 Aug 2010 18:38:50 +0500
+Message-ID: <1282052330.27679.145.camel@pkl-fusman-ubuntu>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.28.1 
 X-SA-Exim-Connect-IP: 192.94.38.131
 X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.4 required=5.0 tests=AWL,BAYES_00,
+X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,
 	RCVD_NUMERIC_HELO autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] cacaoh-native: Removed legacy style staging
+Subject: Re: [PATCH] cacaoh-native: used oe-stylize.py
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,28 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 13:32:46 -0000
+X-List-Received-Date: Tue, 17 Aug 2010 13:36:28 -0000
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
+2010/8/17 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> Have you tested this?
+> Moving a require file might lead to errors or unexpected results
+> a require (or include) is an inclusion of the file. Moving it might
+> cause a problem if the recipe itself redefines a var that is also
+> defined in the inc file.
+> (e.g. if the recipe overrules the DEPENDS that are in an .inc file)
+>=20
+> Frans.
+>=20
+yes, it appears to be working exactly the way it was before using the
+oe-stylize.py
 
-> 2010/8/17 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:=20
->=20
->=20
-> I think you need
-> NATIVE_INSTALL_WORKS =3D "1"
-> in your recipe.
->=20
-> When updating your patch please resubmit as v2 and update patchwork
->=20
-> Frans
->=20
-
-I am getting the same .pkg file and staging directory both with or
-without the NATIVE_INSTALL_WORKS =3D "1" line, should i still add it and
-update the patch?
-
-Thanks,
 Fahad
 
 
