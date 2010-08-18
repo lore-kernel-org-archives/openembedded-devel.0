@@ -1,30 +1,40 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OllFI-00020f-G3
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Olm38-0003E0-V0
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Aug 2010 18:12:09 +0200
-Received: by eyb7 with SMTP id 7so331401eyb.6
+	Wed, 18 Aug 2010 19:03:39 +0200
+Received: by yws5 with SMTP id 5so322833yws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Aug 2010 09:11:43 -0700 (PDT)
+	Wed, 18 Aug 2010 10:03:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=iPGLQS6rw+EKkBNT0uWRjAnkWgE3PnV/XFTgr+xtEo8=;
+	b=NiTskJ89rzCxrlVLVg+Rb5B/i+NvYAX5zFvy82wm+ZfwQpr0cE0Q4NJ1aPeMeNUnh9
+	twyv87FHxXj5RKZqRNIAOy0A6A4/WUs/Mi51O06pPrd5F80Awdtq/I+hGFlnUJZlatli
+	M79Gb79YmAdizv1uSnxTlNEAhKqxim964sSic=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=bFyrK98BIyBdY2FzYCTKfpy6kpirNNw7Hk4mQS1/UQcubSwrWve3P4lr0yTHg7vpmZ
+	v47OlXJw3BWSdxtJdS/CkHB+s7GNE9zcJ30MCjA2uOHOLtcCqq7QUme3w9i/3g2DQx3/
+	6P8lDLabpetCul3lqA4F5UeosFs0JnuQ5fJdU=
 MIME-Version: 1.0
-Received: by 10.216.59.148 with SMTP id s20mr2228957wec.41.1282147903014; Wed,
-	18 Aug 2010 09:11:43 -0700 (PDT)
-Received: by 10.216.15.79 with HTTP; Wed, 18 Aug 2010 09:11:42 -0700 (PDT)
-In-Reply-To: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
-References: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
-Date: Wed, 18 Aug 2010 12:11:42 -0400
-Message-ID: <AANLkTinytMQ0=hav0GiqPV0S-Avo16-DDFDcEd6QWYhg@mail.gmail.com>
-From: Jason Kridner <jkridner@beagleboard.org>
+Received: by 10.100.47.8 with SMTP id u8mr9574695anu.246.1282150998174; Wed,
+	18 Aug 2010 10:03:18 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Wed, 18 Aug 2010 10:03:17 -0700 (PDT)
+Date: Wed, 18 Aug 2010 19:03:17 +0200
+Message-ID: <AANLkTikDziMxB-MXW=i0UR9b2tP87sRe=+jz8Ly6OyVN@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE stable, testing, dev (was Re: What to do about the poor bitbake Quality Control?)
+Subject: cmake-native and packaged staging error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,68 +48,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Aug 2010 16:12:09 -0000
+X-List-Received-Date: Wed, 18 Aug 2010 17:03:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Wed, Aug 18, 2010 at 11:07 AM, Cliff Brake <cliff.brake@gmail.com> wrote=
-:
-> On Wed, Aug 18, 2010 at 4:30 AM, Martyn Welch <martyn.welch@ge.com> wrote=
-:
->> On 17/08/10 16:02, Cliff Brake wrote:
->>>
->>> I think it would be very useful to have a "stable" branch that is only
->>> synchronised with dev when X number of targets build from a clean
->>> build. =A0It seems like this would be high value, with little effort.
->>> Of course there will be corner things that break, but at least a new
->>> beagleboard user can check out something and have reasonable
->>> confidence that it will build images.
->>>
->>> Does anyone have suggestions for the branch name and a reasonable
->>> subset of machines and build targets? =A0Perhaps someone is already
->>> running these clean builds? =A0At one point we had a machine at OSUOSL
->>> dedicated to this purpose, but no one ever set it up.
->>>
->>
->> So something like Debian's stable, testing and unstable[1]?
->
-> That sounds good to me -- so how about org.openembedded.dev and
-> org.openembedded.testing branches?
->
-> I'll plan to start doing a clean build of dev every Monday for the
-> Beagleboard, and then merge to testing once it builds. =A0Initial
-> targets:
->
-> Angstrom Distro
-> beagleboard/beagleboard-linuxtag2010-demo-image
-> x86/minimal-image
->
-> My workstation runs a 64-bit OS, so that is probably worst case
-> (compared to i686).
->
-> Getting started
-> (http://wiki.openembedded.net/index.php/Getting_started) points to a
-> tarball for bitbake 1.8.18. =A0Is this still the recommended
-> version/mechanism for new users? =A0I much prefer simply pulling bitbake
-> from git.
+When restoring cmake-native from packaged staging I got this error on
+a package that used it (boost):
 
-Koen pointed me to
-http://gitorious.org/angstrom/angstrom-setup-scripts/blobs/master/oebb.sh
-for setting up my environment.  I also prefer pulling bitbake from
-git.  Koen seems to be pulling bitbake 1.10, instead of 1.8.18.
+CMake Error: Could not find CMAKE_ROOT !!!
+CMake has most likely not been installed correctly.
+Modules directory not found in
+/home/frans/oe/tmp_angstrom/sysroots/i686-linux/usr/bin
+CMake Error: Error executing cmake::LoadCache(). Aborting.
 
->
-> Thanks,
-> Cliff
->
-> --
-> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-> http://bec-systems.com
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Guess there is something wrong in the package. I've saved the pstage
+package, so if info from it is needed let me know.
+
+Frans
 
 
