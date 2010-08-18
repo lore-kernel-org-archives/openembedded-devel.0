@@ -1,41 +1,33 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OlkEe-0002rx-Rz
+	(envelope-from <stefan@datenfreihafen.org>) id 1Oll8c-0001SN-Gr
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Aug 2010 17:07:25 +0200
-Received: by fxm6 with SMTP id 6so344039fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Aug 2010 08:07:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=LN6iahyoD7PACjQRDc+pzdpK5b3q08xPieZwz3X+CkI=;
-	b=WlSFOGEVBXuy5tP7Tx8kAwbgbZ8WvtdtOYOhTF4KV9ENIrLgf/g40usJxb18MhXfIA
-	sXpDB/9HPWpBwgrdFm9916JXKkeHAUTbB7XY+UyAoyzXfOmC9mgvyWGVN03IrTeNggBF
-	437nntCSDe0FSig69y9pUvyS06Du9C3NDSWH0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=gOkGz2R/XrK3UN5azUHF1v1gQRKjGJKc92w401+CSHzKlAci0q0D17gOcO0vx4SA5V
-	RnE6AN0mImsKMM71ahaRjp3e9B1dH67moJaBGA4KMMNWxvYC3WI9JYdbmiMYgsTb8JhI
-	kS66ui4Upcl2Hv3/l5M/8u4q/YBTcI7+YKj8c=
-MIME-Version: 1.0
-Received: by 10.216.74.82 with SMTP id w60mr2087068wed.106.1282144025132; Wed,
-	18 Aug 2010 08:07:05 -0700 (PDT)
-Received: by 10.216.21.209 with HTTP; Wed, 18 Aug 2010 08:07:03 -0700 (PDT)
-Date: Wed, 18 Aug 2010 11:07:03 -0400
-Message-ID: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Wed, 18 Aug 2010 18:05:15 +0200
+Received: from p5b035be8.dip.t-dialin.net ([91.3.91.232] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Oll8G-0007bi-Rq by authid <stefan@sostec.de> with cram_md5;
+	Wed, 18 Aug 2010 18:04:56 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>)
+	id 1Oll8E-0005EQ-7E; Wed, 18 Aug 2010 18:04:50 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Date: Wed, 18 Aug 2010 18:04:44 +0200
+Message-Id: <1282147486-20078-2-git-send-email-stefan@datenfreihafen.org>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <1282147486-20078-1-git-send-email-stefan@datenfreihafen.org>
+References: <1282147486-20078-1-git-send-email-stefan@datenfreihafen.org>
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OE stable, testing, dev (was Re: What to do about the poor bitbake Quality Control?)
+Cc: Stefan Schmidt <stefan@buglabs.net>
+Subject: [PATCH resend][STABLE 2/4] alsa-state: Add state file for bug20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,53 +41,685 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Aug 2010 15:07:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Aug 2010 16:05:16 -0000
 
-On Wed, Aug 18, 2010 at 4:30 AM, Martyn Welch <martyn.welch@ge.com> wrote:
-> On 17/08/10 16:02, Cliff Brake wrote:
->>
->> I think it would be very useful to have a "stable" branch that is only
->> synchronised with dev when X number of targets build from a clean
->> build. =A0It seems like this would be high value, with little effort.
->> Of course there will be corner things that break, but at least a new
->> beagleboard user can check out something and have reasonable
->> confidence that it will build images.
->>
->> Does anyone have suggestions for the branch name and a reasonable
->> subset of machines and build targets? =A0Perhaps someone is already
->> running these clean builds? =A0At one point we had a machine at OSUOSL
->> dedicated to this purpose, but no one ever set it up.
->>
->
-> So something like Debian's stable, testing and unstable[1]?
+From: Stefan Schmidt <stefan@buglabs.net>
 
-That sounds good to me -- so how about org.openembedded.dev and
-org.openembedded.testing branches?
 
-I'll plan to start doing a clean build of dev every Monday for the
-Beagleboard, and then merge to testing once it builds.  Initial
-targets:
+Signed-off-by: Stefan Schmidt <stefan@buglabs.net>
+---
+ recipes/alsa/alsa-state.bb                 |    2 +-
+ recipes/alsa/alsa-state/bug20/asound.state |  646 ++++++++++++++++++++++++++++
+ 2 files changed, 647 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/alsa/alsa-state/bug20/asound.state
 
-Angstrom Distro
-beagleboard/beagleboard-linuxtag2010-demo-image
-x86/minimal-image
+diff --git a/recipes/alsa/alsa-state.bb b/recipes/alsa/alsa-state.bb
+index 09cf22b..a5609af 100644
+--- a/recipes/alsa/alsa-state.bb
++++ b/recipes/alsa/alsa-state.bb
+@@ -7,7 +7,7 @@
+ DESCRIPTION = "Alsa Scenario Files"
+ LICENSE = "MIT"
+ PV = "0.2.0"
+-PR = "r7"
++PR = "r8"
+ 
+ SRC_URI = "\
+   file://asound.conf \
+diff --git a/recipes/alsa/alsa-state/bug20/asound.state b/recipes/alsa/alsa-state/bug20/asound.state
+new file mode 100644
+index 0000000..f5e3913
+--- /dev/null
++++ b/recipes/alsa/alsa-state/bug20/asound.state
+@@ -0,0 +1,646 @@
++state.omap3bug {
++	control.1 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 'Option 2 (voice/audio)'
++		comment.item.1 'Option 1 (audio)'
++		iface MIXER
++		name 'Codec Operation Mode'
++		value 'Option 1 (audio)'
++	}
++	control.2 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 63'
++		comment.dbmin -6300
++		comment.dbmax 0
++		iface MIXER
++		name 'DAC1 Digital Fine Playback Volume'
++		value.0 0
++		value.1 0
++	}
++	control.3 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 63'
++		comment.dbmin -6300
++		comment.dbmax 0
++		iface MIXER
++		name 'DAC2 Digital Fine Playback Volume'
++		value.0 44
++		value.1 44
++	}
++	control.4 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 2'
++		comment.dbmin 0
++		comment.dbmax 1200
++		iface MIXER
++		name 'DAC1 Digital Coarse Playback Volume'
++		value.0 0
++		value.1 0
++	}
++	control.5 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 2'
++		comment.dbmin 0
++		comment.dbmax 1200
++		iface MIXER
++		name 'DAC2 Digital Coarse Playback Volume'
++		value.0 1
++		value.1 1
++	}
++	control.6 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 18'
++		comment.dbmin -2400
++		comment.dbmax 1200
++		iface MIXER
++		name 'DAC1 Analog Playback Volume'
++		value.0 18
++		value.1 18
++	}
++	control.7 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 18'
++		comment.dbmin -2400
++		comment.dbmax 1200
++		iface MIXER
++		name 'DAC2 Analog Playback Volume'
++		value.0 9
++		value.1 9
++	}
++	control.8 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 2
++		iface MIXER
++		name 'DAC1 Analog Playback Switch'
++		value.0 false
++		value.1 false
++	}
++	control.9 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 2
++		iface MIXER
++		name 'DAC2 Analog Playback Switch'
++		value.0 true
++		value.1 true
++	}
++	control.10 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 1
++		comment.range '0 - 49'
++		comment.dbmin -3700
++		comment.dbmax 1200
++		iface MIXER
++		name 'DAC Voice Digital Downlink Volume'
++		value 0
++	}
++	control.11 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 1
++		comment.range '0 - 18'
++		comment.dbmin -2400
++		comment.dbmax 1200
++		iface MIXER
++		name 'DAC Voice Analog Downlink Volume'
++		value 18
++	}
++	control.12 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'DAC Voice Analog Downlink Switch'
++		value false
++	}
++	control.13 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 3'
++		comment.dbmin -1200
++		comment.dbmax 600
++		iface MIXER
++		name 'PreDriv Playback Volume'
++		value.0 3
++		value.1 3
++	}
++	control.14 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 3'
++		comment.dbmin -1200
++		comment.dbmax 600
++		iface MIXER
++		name 'Headset Playback Volume'
++		value.0 2
++		value.1 2
++	}
++	control.15 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 3'
++		comment.dbmin -1200
++		comment.dbmax 600
++		iface MIXER
++		name 'Carkit Playback Volume'
++		value.0 0
++		value.1 0
++	}
++	control.16 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 1
++		comment.range '0 - 3'
++		comment.dbmin -600
++		comment.dbmax 1200
++		iface MIXER
++		name 'Earpiece Playback Volume'
++		value 0
++	}
++	control.17 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 31'
++		comment.dbmin 0
++		comment.dbmax 3100
++		iface MIXER
++		name 'TX1 Digital Capture Volume'
++		value.0 12
++		value.1 12
++	}
++	control.18 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 31'
++		comment.dbmin 0
++		comment.dbmax 3100
++		iface MIXER
++		name 'TX2 Digital Capture Volume'
++		value.0 0
++		value.1 0
++	}
++	control.19 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 2
++		comment.range '0 - 5'
++		comment.dbmin 0
++		comment.dbmax 3000
++		iface MIXER
++		name 'Analog Capture Volume'
++		value.0 0
++		value.1 0
++	}
++	control.20 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 '27/20/14 ms'
++		comment.item.1 '55/40/27 ms'
++		comment.item.2 '109/81/55 ms'
++		comment.item.3 '218/161/109 ms'
++		comment.item.4 '437/323/218 ms'
++		comment.item.5 '874/645/437 ms'
++		comment.item.6 '1748/1291/874 ms'
++		comment.item.7 '3495/2581/1748 ms'
++		iface MIXER
++		name 'HS ramp delay'
++		value '437/323/218 ms'
++	}
++	control.21 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 'Vibra H-bridge direction'
++		comment.item.1 'Audio data MSB'
++		iface MIXER
++		name 'Vibra H-bridge mode'
++		value 'Vibra H-bridge direction'
++	}
++	control.22 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 'Positive polarity'
++		comment.item.1 'Negative polarity'
++		iface MIXER
++		name 'Vibra H-bridge direction'
++		value 'Positive polarity'
++	}
++	control.23 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Analog Right Capture Route Sub mic'
++		value false
++	}
++	control.24 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Analog Right Capture Route AUXR'
++		value false
++	}
++	control.25 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Analog Left Capture Route Main mic'
++		value false
++	}
++	control.26 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Analog Left Capture Route Headset mic'
++		value false
++	}
++	control.27 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Analog Left Capture Route AUXL'
++		value false
++	}
++	control.28 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Analog Left Capture Route Carkit mic'
++		value false
++	}
++	control.29 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 Analog
++		comment.item.1 Digimic1
++		iface MIXER
++		name 'TX2 Capture Route'
++		value Analog
++	}
++	control.30 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 Analog
++		comment.item.1 Digimic0
++		iface MIXER
++		name 'TX1 Capture Route'
++		value Analog
++	}
++	control.31 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 'Local vibrator'
++		comment.item.1 Audio
++		iface MIXER
++		name 'Vibra Route'
++		value 'Local vibrator'
++	}
++	control.32 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 AudioL1
++		comment.item.1 AudioR1
++		comment.item.2 AudioL2
++		comment.item.3 AudioR2
++		iface MIXER
++		name 'Vibra Mux'
++		value AudioL1
++	}
++	control.33 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HandsfreeR Switch Switch'
++		value false
++	}
++	control.34 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 Voice
++		comment.item.1 AudioR1
++		comment.item.2 AudioR2
++		comment.item.3 AudioL2
++		iface MIXER
++		name 'HandsfreeR Mux'
++		value Voice
++	}
++	control.35 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HandsfreeL Switch Switch'
++		value false
++	}
++	control.36 {
++		comment.access 'read write'
++		comment.type ENUMERATED
++		comment.count 1
++		comment.item.0 Voice
++		comment.item.1 AudioL1
++		comment.item.2 AudioL2
++		comment.item.3 AudioR2
++		iface MIXER
++		name 'HandsfreeL Mux'
++		value Voice
++	}
++	control.37 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'CarkitR Mixer Voice'
++		value false
++	}
++	control.38 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'CarkitR Mixer AudioR1'
++		value false
++	}
++	control.39 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'CarkitR Mixer AudioR2'
++		value false
++	}
++	control.40 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'CarkitL Mixer Voice'
++		value false
++	}
++	control.41 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'CarkitL Mixer AudioL1'
++		value false
++	}
++	control.42 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'CarkitL Mixer AudioL2'
++		value false
++	}
++	control.43 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HeadsetR Mixer Voice'
++		value false
++	}
++	control.44 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HeadsetR Mixer AudioR1'
++		value false
++	}
++	control.45 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HeadsetR Mixer AudioR2'
++		value true
++	}
++	control.46 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HeadsetL Mixer Voice'
++		value false
++	}
++	control.47 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HeadsetL Mixer AudioL1'
++		value false
++	}
++	control.48 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'HeadsetL Mixer AudioL2'
++		value true
++	}
++	control.49 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveR Mixer Voice'
++		value false
++	}
++	control.50 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveR Mixer AudioR1'
++		value false
++	}
++	control.51 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveR Mixer AudioR2'
++		value true
++	}
++	control.52 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveR Mixer AudioL2'
++		value false
++	}
++	control.53 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveL Mixer Voice'
++		value false
++	}
++	control.54 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveL Mixer AudioL1'
++		value false
++	}
++	control.55 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveL Mixer AudioL2'
++		value true
++	}
++	control.56 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'PredriveL Mixer AudioR2'
++		value true
++	}
++	control.57 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Earpiece Mixer Voice'
++		value false
++	}
++	control.58 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Earpiece Mixer AudioL1'
++		value false
++	}
++	control.59 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Earpiece Mixer AudioL2'
++		value false
++	}
++	control.60 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Earpiece Mixer AudioR1'
++		value false
++	}
++	control.61 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 1
++		comment.range '0 - 41'
++		comment.dbmin -5100
++		comment.dbmax -1000
++		iface MIXER
++		name 'Voice Digital Loopback Volume'
++		value 0
++	}
++	control.62 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 1
++		comment.range '0 - 7'
++		comment.dbmin -2400
++		comment.dbmax 0
++		iface MIXER
++		name 'Right Digital Loopback Volume'
++		value 0
++	}
++	control.63 {
++		comment.access 'read write'
++		comment.type INTEGER
++		comment.count 1
++		comment.range '0 - 7'
++		comment.dbmin -2400
++		comment.dbmax 0
++		iface MIXER
++		name 'Left Digital Loopback Volume'
++		value 0
++	}
++	control.64 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Voice Analog Loopback Switch'
++		value false
++	}
++	control.65 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Left2 Analog Loopback Switch'
++		value false
++	}
++	control.66 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Right2 Analog Loopback Switch'
++		value false
++	}
++	control.67 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Left1 Analog Loopback Switch'
++		value false
++	}
++	control.68 {
++		comment.access 'read write'
++		comment.type BOOLEAN
++		comment.count 1
++		iface MIXER
++		name 'Right1 Analog Loopback Switch'
++		value false
++	}
++}
+-- 
+1.7.1
 
-My workstation runs a 64-bit OS, so that is probably worst case
-(compared to i686).
-
-Getting started
-(http://wiki.openembedded.net/index.php/Getting_started) points to a
-tarball for bitbake 1.8.18.  Is this still the recommended
-version/mechanism for new users?  I much prefer simply pulling bitbake
-from git.
-
-Thanks,
-Cliff
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
 
 
