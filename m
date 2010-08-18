@@ -1,44 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OldNU-0002OS-16
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OldUl-0001Mr-UE
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Aug 2010 09:48:06 +0200
-Received: by iwn38 with SMTP id 38so346160iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Aug 2010 00:47:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=jQCOTfFUzHy9xAN1nmkTpPypneoijFQyvwWFNDG636A=;
-	b=Wl/z/bK2jaV9k6g8CUakdVKREbFJJTk0cdaeJSG+eNo9bSjBrGRyxh5HShRu7iOfsh
-	YEQX5JK1Pi7m6/EC52qO2Y3tU8Ch82scAxPbVWQYlXFtgifIcfsDp4XgbdM4XPFISq/X
-	LJ3QDUgR7xto0ANXnkGapzTnAEGzY1om4sWug=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ns6NEBpUk1GkbP9Kt+u5biwhaD/P2ExdKjFrp9EaxBkFVjOmnLSHdtyY15sYIcTMcv
-	I76GLqCh7AMew8PWZNWfHMZaGPPFITEbvM9T2EXWIxXkoEU6Sqiq03DeJDIR2sWnCjpq
-	OMFCoHyqG9pSnO4K2FSSJ2Oei5IOnyFzdrRiU=
-MIME-Version: 1.0
-Received: by 10.231.183.134 with SMTP id cg6mr8735762ibb.197.1282117666345;
-	Wed, 18 Aug 2010 00:47:46 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Wed, 18 Aug 2010 00:47:46 -0700 (PDT)
-In-Reply-To: <1282054949-3588-1-git-send-email-noor_ahsan@mentor.com>
-References: <1282054949-3588-1-git-send-email-noor_ahsan@mentor.com>
-Date: Wed, 18 Aug 2010 09:47:46 +0200
-Message-ID: <AANLkTimN_QvwUR03nce7tV5V2QAMgiKuiE4RvccQvdgK@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 18 Aug 2010 09:55:40 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OldUC-0000q0-Ac from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 18 Aug 2010 00:55:00 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 18 Aug 2010 09:54:58 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 18 Aug 2010 12:57:42 +0500
+Message-Id: <1282118262-27445-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 18 Aug 2010 07:54:58.0635 (UTC)
+	FILETIME=[A78959B0:01CB3EAA]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] sox-native: Run oe-stylize.py
+Subject: [PATCH] elftoaout-native_2.3.bb: Removed legacy style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,56 +40,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 18 Aug 2010 07:48:06 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Aug 2010 07:55:40 -0000
 
-2010/8/17 Noor Ahsan <noor_ahsan@mentor.com>:
-> * Run oe-stylize.py script on the recipe and modified the recipe accordin=
-g to the output of oe-stylize.py.
->
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
-> ---
-> =A0recipes/sox/sox-native_13.0.0.bb | =A0 13 ++++++-------
-> =A01 files changed, 6 insertions(+), 7 deletions(-)
->
-> diff --git a/recipes/sox/sox-native_13.0.0.bb b/recipes/sox/sox-native_13=
-.0.0.bb
-> index 9be0322..0dc90ca 100644
-> --- a/recipes/sox/sox-native_13.0.0.bb
-> +++ b/recipes/sox/sox-native_13.0.0.bb
-> @@ -7,13 +7,12 @@ inherit native
-> =A0do_patch() {
-> =A0 =A0 =A0 =A0 true
-> =A0}
-> -
-> -do_stage() {
-> - =A0 =A0 =A0 make bindir=3D"${STAGING_BINDIR}" libdir=3D"${STAGING_LIBDI=
-R}" mandir=3D"${STAGING_DIR_HOST}${layout_mandir}" includedir=3D"${STAGING_=
-INCDIR}" install
-> - =A0 =A0 =A0 rm ${STAGING_BINDIR}/rec
-> - =A0 =A0 =A0 ln -s ${STAGING_BINDIR}/play ${STAGING_BINDIR}/rec
-> -}
-> -
-> =A0do_install() {
-> =A0 =A0 =A0 =A0 true
-> =A0}
-> +do_stage() {
-> + =A0 =A0 =A0 =A0make bindir=3D"${STAGING_BINDIR}" libdir=3D"${STAGING_LI=
-BDIR}" mandir=3D"${STAGING_DIR_HOST}${layout_mandir}" includedir=3D"${STAGI=
-NG_INCDIR}" install
-> + =A0 =A0 =A0 =A0rm ${STAGING_BINDIR}/rec
-> + =A0 =A0 =A0 =A0ln -s ${STAGING_BINDIR}/play ${STAGING_BINDIR}/rec
-> +}
-> +
+* converted do_stage to do_install
 
-The sox recipe already has been converted about two weeks ago:
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dfc909a927dd=
-fcb4c0c10da1b278b496c68319a6a
-I suggest doing a fresh pull of the head before changing files (in
-order to avoid wasting time on work that has been done already or
-avoid that you change and old version which is has fixes in git head)
+* replaced ${STAGING_BINDIR} with ${D}${bindir}
 
-Frans
+* added NATIVE_INSTALL_WORKS = "1"
+
+* added PR = "r1"
+
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/elftoaout/elftoaout-native_2.3.bb |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/elftoaout/elftoaout-native_2.3.bb b/recipes/elftoaout/elftoaout-native_2.3.bb
+index 9b43805..04a26ba 100644
+--- a/recipes/elftoaout/elftoaout-native_2.3.bb
++++ b/recipes/elftoaout/elftoaout-native_2.3.bb
+@@ -1,13 +1,17 @@
+ SECTION = "console/utils"
+ LICENSE = "GPL"
+ SRC_URI = "http://www.uk.debian.org/debian/pool/main/s/sparc-utils/sparc-utils_1.9.orig.tar.gz"
++PR = "r1"
+ 
+ inherit native
+ 
+ S = "${WORKDIR}/sparc-utils-1.9.orig/elftoaout-${PV}"
+ 
+-do_stage() {
+-	install elftoaout ${STAGING_BINDIR}
++NATIVE_INSTALL_WORKS = "1"
++
++do_install() {
++    install -d ${D}${bindir}
++    install elftoaout ${D}${bindir}
+ }
+ 
+ SRC_URI[md5sum] = "08bf3f6d8433a1f4981a2afaa6b49a6c"
+-- 
+1.6.3.3
+
 
 
