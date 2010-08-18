@@ -1,46 +1,39 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OlV0H-00078z-VC
+	(envelope-from <Tom_Rini@mentor.com>) id 1OlXFW-0003X5-DG
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 18 Aug 2010 00:51:38 +0200
-Received: by ewy7 with SMTP id 7so3532363ewy.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 17 Aug 2010 15:51:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=NDBYRxkqhBlfYBbpWoO6MxwRzzLRNyBGuAbihNjZprk=;
-	b=QPvWXUFheKAwW8LB8StkhMkG4vQiRH8/10+/VcFeLnsBta8wdeBP7i7KRdtei4MCES
-	blbhAYMw8JrHXR14hBPo2VS+4JnAY311zNDhcROD+0BOB79+AefhezgB1bFEDNBSdyMc
-	bD54LDJzhGNShrDRIv+Pm7/EnhPZgT7vL4Djs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=cxUlT/tr9WR3OGXNRJNKP61FjAOnGeGBscCiOEP+I90PT2fzotahMRcF9+TOKjEbPb
-	3NsSyrPajcurKjb5RKKOEhkOVClchnSX1DQRKZkhx2AYU6kttV7nFCMXjP317RYbKHdC
-	QwCrBvjPrXPH1n+g0vwmqFYH1MXchF0kUCUfI=
-Received: by 10.213.17.7 with SMTP id q7mr6601557eba.23.1282085477134; Tue, 17
-	Aug 2010 15:51:17 -0700 (PDT)
+	Wed, 18 Aug 2010 03:15:28 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OlXF7-00039n-Gi from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 17 Aug 2010 18:15:01 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Tue, 17 Aug 2010 18:15:01 -0700
+Received: from [172.30.80.170] ([172.30.80.170]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 17 Aug 2010 19:14:59 -0600
+Message-ID: <4C6B3412.7000700@mentor.com>
+Date: Tue, 17 Aug 2010 18:14:58 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.213.35.135 with HTTP; Tue, 17 Aug 2010 15:50:56 -0700 (PDT)
-In-Reply-To: <1282030248.3641.19.camel@mattotaupa>
-References: <1281861970.3854.14.camel@mattotaupa>
-	<1281897933.3693.41.camel@mattotaupa>
-	<1282030248.3641.19.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 17 Aug 2010 15:50:56 -0700
-Message-ID: <AANLkTimm+Y2A_kvu-Et3t7Hfthg4fGLLmMHcMEh_Q8-j@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <1282072782-11487-1-git-send-email-jkridner@beagleboard.org>
+In-Reply-To: <1282072782-11487-1-git-send-email-jkridner@beagleboard.org>
+X-OriginalArrivalTime: 18 Aug 2010 01:15:00.0138 (UTC)
+	FILETIME=[C75150A0:01CB3E72]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: evince_2.30.0.bb: Problem with new style staging?
+Subject: Re: [PATCH] quilt: disable packaged staging on native builds
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,96 +47,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 17 Aug 2010 22:51:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 18 Aug 2010 01:15:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Tue, Aug 17, 2010 at 12:30 AM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Am Sonntag, den 15.08.2010, 20:45 +0200 schrieb Paul Menzel:
->> Am Sonntag, den 15.08.2010, 10:46 +0200 schrieb Paul Menzel:
->>
->> > I set up a basic build host with no GNOME installed and did `bitbake
->> > beagleboard-demo-image` with the standard local.conf provided by
->> > =C8=A6ngstr=C3=B6m and org.openembedded.dev.
->> >
->> > Compile is failing because it is looking for a file on the build hosts
->> > environment (and not stagang(?)).
->> >
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 xsltproc -o evince-C.omf --stringparam db2=
-omf.basename evince --stringparam db2omf.format 'docbook' --stringparam db2=
-omf.dtd "-//OASIS//DTD DocBook XML V4.1.2//EN" --stringparam db2omf.lang C =
---stringparam db2omf.omf_dir "/usr/share/omf" --stringparam db2omf.help_dir=
- "/usr/share/gnome/help" --stringparam db2omf.omf_in "/home/paul/oe/build/a=
-ngstrom-dev/work/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evince-2.30=
-.0/help/evince.omf.in" =C2=A0`/home/paul/oe/build/angstrom-dev/sysroots/i68=
-6-linux/usr/bin/pkg-config --variable db2omf gnome-doc-utils` C/evince.xml =
-|| { rm -f "evince-C.omf"; exit 1; }
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 warning: failed to load external entity "/=
-usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 cannot parse /usr/share/xml/gnome/xslt/doc=
-book/omf/db2omf.xsl
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 make[2]: *** [evince-C.omf] Error 1
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 make[2]: Leaving directory `/home/paul/oe/=
-build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evin=
-ce-2.30.0/help'
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 make[1]: *** [all-recursive] Error 1
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 make[1]: Leaving directory `/home/paul/oe/=
-build/angstrom-dev/work/armv7a-angstrom-linux-gnueabi/evince-2.30.0-r1/evin=
-ce-2.30.0'
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 make: *** [all] Error 2
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 FATAL: oe_runmake failed
->> > =C2=A0 =C2=A0 =C2=A0 =C2=A0 ERROR: Function do_compile failed
->> >
->> > The call of `xsltproc` seems to point to the wrong location. Does anyo=
-ne
->> > know how to fix this error besides installing those files on the build
->> > host?
->>
->> Judging from `run.do_compile.6321` `PKG_CONFIG_PATH` gets set
->> incorrectly.
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 export PKG_CONFIG_PATH=3D"/oe/build/angstrom=
--dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/pkgconfig:/oe/build/ang=
-strom-dev/sysroots/armv7a-angstrom-linux-gnueabi/usr/share/pkgconfig"
->>
->> I checked `gnome-doc-utils.pc` in these directories and both point to
->> `/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl`, which is incorrect
->> (`datadir=3D/usr/share`)
->>
->> In the staging(?) path
->> `/oe/build/angstrom-dev/sysroots/i686-linux/usr/lib/pkgconfig/`
->> everything is set up correctly.
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 datadir=3D/oe/build/angstrom-dev/sysroots/i6=
-86-linux/usr/share
->>
->> Also running
->>
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 /oe/build/angstrom-dev/sysroots/i686-linux/u=
-sr/bin/pkg-config --variable db2omf gnome-doc-utils
->>
->> in a clean environment without exporting `PKG_CONFIG_PATH` works.
->>
->> Is this a problem with new style staging? Could you please provide a
->> hint on how to fix this.
->
-> I am stuck. Could someone take a look at this please and give me a hint
-> on how to proceed? (I know the week just started.)
->
->
+Jason Kridner wrote:
+> Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+> ---
+>  recipes/quilt/quilt-native.inc |    3 +++
+>  recipes/quilt/quilt_0.48.bb    |    2 +-
+>  2 files changed, 4 insertions(+), 1 deletions(-)
+> 
+> diff --git a/recipes/quilt/quilt-native.inc b/recipes/quilt/quilt-native.inc
+> index 10d8183..f422b63 100644
+> --- a/recipes/quilt/quilt-native.inc
+> +++ b/recipes/quilt/quilt-native.inc
+> @@ -6,6 +6,9 @@ RDEPENDS_${PN} = "diffstat-native patch-native bzip2-native util-linux-native"
+>  FILESPATHPKG =. quilt-${PV}
+>  INHIBIT_AUTOTOOLS_DEPS = "1"
+>  
+> +# Several packages fail to patch when using quilt from packaged staging
+> +PSTAGING_DISABLED_virtclass-native = "1"
+> +
+>  inherit autotools native
+>  
+>  PATCHTOOL = "patch"
+> diff --git a/recipes/quilt/quilt_0.48.bb b/recipes/quilt/quilt_0.48.bb
+> index 0a066df..99dc2a2 100644
+> --- a/recipes/quilt/quilt_0.48.bb
+> +++ b/recipes/quilt/quilt_0.48.bb
+> @@ -1,6 +1,6 @@
+>  require quilt-package.inc
+>  
+> -PR="r1"
+> +PR="r2"
+>  
+>  SRC_URI[md5sum] = "f77adda60039ffa753f3c584a286f12b"
+>  SRC_URI[sha256sum] = "73fd760d3b5cbf06417576591dc37d67380d189392db9000c21b7cbebee49ffc"
 
-I fixed it. Update evince and see if it builds for you now.
+After some poking, testing and what I pushed recently, NAK.  What's 
+going on here is that we didn't have a real non-legacy staging.  As seen 
+in quilt-package.inc, the normal autotools install rules don't move the 
+install around for us, so we ended up with, in some cases (No, I can't 
+explain why off the top of my head, but yes, I've seen both what Jason 
+saw and what Frans saw in the past) empty pstaging packages, which means 
+no quilt, and a certain failure to apply patches.  To Chris' concern, 
+I've gotten past the point of a patch being applied with quilt-native 
+from pstaging from a TMPDIR named differently than what I extracted 
+pstaging into.
 
-> Thanks,
->
-> Paul
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+-- 
+Tom Rini
+Mentor Graphics Corporation
+
 
 
