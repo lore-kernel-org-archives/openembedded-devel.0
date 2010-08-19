@@ -1,38 +1,37 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmAXt-0007VS-3B
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmAZJ-0007g4-5f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 21:13:01 +0200
-Received: by iwn38 with SMTP id 38so2047897iwn.6
+	Thu, 19 Aug 2010 21:14:29 +0200
+Received: by yws5 with SMTP id 5so949249yws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 12:12:42 -0700 (PDT)
+	Thu, 19 Aug 2010 12:14:08 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=//+SgjZJ0ojz1bq+kEAITkr4hoDZ/gqdBp1GLO925yo=;
-	b=Wo4oYg09S2Dzd569cRpDyshNpA9ZTY7X7CsfjHV6sEDhw6O2Wx3twr7vonNDFOwP+x
-	FQWmGpVD9c6ewpuHxgoAtwX27eLd8prTCyB+r4O4pcaTXT1nTDRvqNdD3MSxl8xHSKzd
-	aJgoPaE6uOHrOyQiVeemLmS5jQh8Yx7809kDg=
+	bh=8KgZ1lqA2BbxJ/QIZHngp68orruKEc5WmVBo7mtg18g=;
+	b=qehAI/Vgjm4vaG8P+1MyzFRvQwhIvAB/cgJvPw1SC0Hbl07yBYJrGmjUnjCnP4zJkQ
+	bwMoxbfQ4akLweUVO4s+ePTgmmLIwtUZ5SQ9Uf+9KOslI3jKIl6Z8CDapV4bjdzmiUNR
+	KTooFx7FW9oWQ1vbDbnrpXlAyj6jWU/pPr+dE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=h11VIf1RaPnqJ58G/YApllZaFQsyNNVpMfZkZbhPNyXYshfONcWdRBYckEYNnLwEf7
-	U7fGwH4049eDAAb6FFkEpTbCI9vaJ+4KyuKGaXyoDIAy6aW+xp0oQOg/Hargxa+pmGbt
-	GRxmsLt25dV5uJrtoilgHugeaVc7gcKr/aJNc=
+	b=sUsgZN30zozi1AHAvyVWHtOEarbRCSgzMHsntgcaR74gbgh3HG/tOWiPRoCZSvPyQZ
+	mHMseG22+bsiz9c6b9uJWBs3Hx+rYTCpA+2xSDuueGj3Zt0V+S0NGwE+4Hr5Ejj8OAG4
+	t20/YXMO8hqO+RFT3+TfJQZbuz/Ay1OP6IwP4=
 MIME-Version: 1.0
-Received: by 10.231.40.9 with SMTP id i9mr290181ibe.5.1282245161591; Thu, 19
-	Aug 2010 12:12:41 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Thu, 19 Aug 2010 12:12:41 -0700 (PDT)
-In-Reply-To: <4C6D4B99.6000506@mentor.com>
-References: <1282172296-11638-1-git-send-email-tom_rini@mentor.com>
-	<AANLkTinTOZLHAxskyt4gUqyERhZchiMaqeZGKvJPycgg@mail.gmail.com>
-	<4C6D4B99.6000506@mentor.com>
-Date: Thu, 19 Aug 2010 21:12:41 +0200
-Message-ID: <AANLkTinjqcw1c_bDHvo4jRbqiSF9X_z8Hhm4kvUnqvcQ@mail.gmail.com>
+Received: by 10.90.120.12 with SMTP id s12mr387926agc.198.1282245246912; Thu,
+	19 Aug 2010 12:14:06 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Thu, 19 Aug 2010 12:14:06 -0700 (PDT)
+In-Reply-To: <AANLkTinBzdnAYv_0O=vXnaJ5VNj56Th74eZ=naVSFcFB@mail.gmail.com>
+References: <AANLkTimxWVes3DZQPGn53BZ1cL6BSX5BT3hwgFHrCUA4@mail.gmail.com>
+	<AANLkTinBzdnAYv_0O=vXnaJ5VNj56Th74eZ=naVSFcFB@mail.gmail.com>
+Date: Thu, 19 Aug 2010 21:14:06 +0200
+Message-ID: <AANLkTikSBQOi6aC0W8QzfEOk6skMcBmbaJdmE4K+Auwd@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +39,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base-files: Prefer ext4 > ext3 > ext2
+Subject: Re: virtclass_install prepend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,47 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 19:13:01 -0000
+X-List-Received-Date: Thu, 19 Aug 2010 19:14:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/8/19 Tom Rini <tom_rini@mentor.com>:
-> Frans Meulenbroeks wrote:
->>
->> 2010/8/19 Tom Rini <tom_rini@mentor.com>:
->>>
->>> Have /etc/filesystems try and mount ext4 then ext3 then ext2
->>>
->>> Signed-off-by: Tom Rini <tom_rini@mentor.com>
->>> ---
->>> =A0recipes/base-files/base-files/filesystems | =A0 =A03 ++-
->>> =A01 files changed, 2 insertions(+), 1 deletions(-)
->>>
->>> diff --git a/recipes/base-files/base-files/filesystems
->>> b/recipes/base-files/base-files/filesystems
->>> index 653593a..10726c6 100644
->>> --- a/recipes/base-files/base-files/filesystems
->>> +++ b/recipes/base-files/base-files/filesystems
->>> @@ -1,6 +1,7 @@
->>> =A0minix
->>> =A0fat
->>> =A0vfat
->>> -ext2
->>> +ext4
->>> =A0ext3
->>> +ext2
->>> =A0*
->>
->> Is this the order in which they are tried?
->> If so I would suggest reordering them according to likelihood (e.g. mini=
-x
->> last)
+2010/8/19 Chris Larson <clarson@kergoth.com>:
+> On Thu, Aug 19, 2010 at 4:29 AM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
 >
-> We could also do that, yes. =A0For sanity, I'd have changing behavior of
-> ext[234] done on its own.
+>> Hi,
+>>
+>> Found this in our reicpes:
+>>
+>> dbus/dbus-glib_0.86.bb:do_install_virtclass-native_prepend() {
+>>
+>
+> This prepends to do_install_virtclass-native, which will then replace
+> do_install when the overrides are applied. =A0This is prepending to a var=
+iable
+> which overrides, as opposed to the other, which is a conditional prepend.
+> =A0The two are quite different. =A0It's unlikely that this is what they
+> intended. =A0Far more likely that it should be changed to
+> _prepend_virtclass-native.
 
-Fine with me.
-In that case for your patch:
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+I have no idea what is intended and I have no dbus knowledge, so can't fix =
+this.
+I'll leave it to someone else to resolve this.
+
+Frans
 
 
