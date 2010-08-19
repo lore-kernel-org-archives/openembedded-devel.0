@@ -1,34 +1,35 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1Olz6v-0000xr-6Q
+	(envelope-from <coolaj86@gmail.com>) id 1Olz7q-0000zp-9F
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 09:00:26 +0200
-Received: by fxm6 with SMTP id 6so854484fxm.6
+	Thu, 19 Aug 2010 09:01:22 +0200
+Received: by fxm6 with SMTP id 6so854819fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 00:00:05 -0700 (PDT)
+	Thu, 19 Aug 2010 00:01:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type;
-	bh=hkq2Z9JwuQmvVfsVywMRfp84vhKt4LrhnPDM3NuvaLE=;
-	b=Kl7ZPm/00SWmHV/AdWevQ9wPZ1hWIN73tkJC9ZW8oFMxmyxnimZDYhQcDxPcHcTpz7
-	JsDpBDclA1HaeExa12qpCAqdGkvQA+Qv4+r12HCcC1Be5OwKIFMno8ZuhCFDk0Jiz7Y8
-	QH6yR+YeKtULXTkQDQIy4PS5DpdKv7bF7DX2k=
+	bh=l39qcRrjFsjAJlS/bSGqzbM9edWTzzBJftkzR6nRVpY=;
+	b=UHF2q4ua+UXYHz2HOL57wJzW2h4iGQYdTJ6jZmBJ6SoUtx00auW4LTrKc++l0xKQ83
+	h9zsNm7cFvAPgn/d0vF8whQ2kk8C/kDqS6wceBJC5LwctDG6q9KtG0Yq5Z7r1zgsdNAa
+	M7lnteXMZxxGCEThiIE6lcGNDW9jPY6dUtNS4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=ZGnFjNLGsUlNdqaaIA6OxGW+iGWh2RLpfo7Mc3IVVsya4jLqwf6epJ9a582cPvX97S
-	TbGEVRI4KiHINTJAfWr9GYV57ee0Gd1A2ZN9e/dRCFsVA5cgexGWMR+oCYdPs4yv99VJ
-	QaCC1QMCIvBXj/UgciOp745qPJpyP9Pk/fJlc=
-Received: by 10.223.119.82 with SMTP id y18mr8794347faq.60.1282201205189; Thu,
-	19 Aug 2010 00:00:05 -0700 (PDT)
+	b=sVSbn5ByrLUAZBXVCYIrK6ug+JC4m7S4aEx9hAlUHNreXEEk3meUG2AhPr10AmZfVQ
+	q2Wl5WTRgOkt+cF9tzdHxTz405Ctfzxjme2Tu8XVu/JjmvVteO34hREri7GdTkpzscL6
+	z7piujaJdbML4HpSyCcfFEW6jpF6gX0aA1Y1E=
+Received: by 10.223.122.6 with SMTP id j6mr8768105far.78.1282201260173; Thu,
+	19 Aug 2010 00:01:00 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.125.209 with HTTP; Wed, 18 Aug 2010 23:59:45 -0700 (PDT)
-In-Reply-To: <AANLkTin1LNj80zSFxs81euO+0gw2bEA-JCpkx8s04FLh@mail.gmail.com>
+Received: by 10.223.125.209 with HTTP; Thu, 19 Aug 2010 00:00:40 -0700 (PDT)
+In-Reply-To: <AANLkTikW7eaRS4Ov0n9eT+_0qgU1E=8Q_3+P2SRN3eRo@mail.gmail.com>
 References: <1282198749-25911-1-git-send-email-coolaj86@gmail.com>
 	<AANLkTin1LNj80zSFxs81euO+0gw2bEA-JCpkx8s04FLh@mail.gmail.com>
+	<AANLkTikW7eaRS4Ov0n9eT+_0qgU1E=8Q_3+P2SRN3eRo@mail.gmail.com>
 From: AJ ONeal <coolaj86@gmail.com>
-Date: Thu, 19 Aug 2010 00:59:45 -0600
-Message-ID: <AANLkTikW7eaRS4Ov0n9eT+_0qgU1E=8Q_3+P2SRN3eRo@mail.gmail.com>
+Date: Thu, 19 Aug 2010 01:00:40 -0600
+Message-ID: <AANLkTik8Qtn7YiVNcXthaPD2Eac-TaM3c-D+-hEa0RaC@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: coolaj86@gmail.com
@@ -53,66 +54,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 07:00:26 -0000
+X-List-Received-Date: Thu, 19 Aug 2010 07:01:22 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I created the node recipe in the last e-mail patch, but I had a leftover
-test file that I didn't mean to commit. This removed it.
+the e-mail entitled
 
-AJ ONeal
+[patch] added a .bb for node.js
 
-
-On Thu, Aug 19, 2010 at 12:50 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
-
-> 2010/8/19 AJ ONeal <coolaj86@gmail.com>:
-> > ---
-> >  recipes/node/node_v0.1.104.bb |   23 -----------------------
-> >  1 files changed, 0 insertions(+), 23 deletions(-)
-> >  delete mode 100644 recipes/node/node_v0.1.104.bb
-> >
-> > diff --git a/recipes/node/node_v0.1.104.bb b/recipes/node/
-> node_v0.1.104.bb
-> > deleted file mode 100644
-> > index 368b8fb..0000000
-> > --- a/recipes/node/node_v0.1.104.bb
-> > +++ /dev/null
-> > @@ -1,23 +0,0 @@
-> > -DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> > -PR = "r0"
-> > -DEPENDS = "openssl"
-> > -SRC_URI = " \
-> > -http://nodejs.org/dist/node-v${PV}.tar.gz \
-> > -"
-> > -#libev-cross.patch
-> > -#node-cross.patch
-> > -SRC_URI[md5sum] = "907fa1e0a2f1f0c3df5efc97fd05a7d2"
-> > -SRC_URI[sha256sum] =
-> "a1c776f44bc07305dc0e56df17cc3260eaafa0394c3b06c27448ad85bec272df"
-> > -S = "${WORKDIR}/node-v${PV}"
-> > -do_configure () {
-> > -./configure
-> > -}
-> > -do_compile () {
-> > -export DEST_CPU=arm
-> > -make
-> > -}
-> > -do_install () {
-> > -install -d ${D}${bindir}/
-> > -install -m 0755 ${S}/node ${D}${bindir}/
-> > -}
-> > -FILES_${PN} = "${bindir}/node"
-> > --
-> > 1.6.0.4
-> >
-> Not sure where you got this from but my tree does not have a node
-> recipe and it does not show up in dev head in cgit.
->
-> Frans
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+is is the correct way to add a new recipe?
 
