@@ -1,43 +1,38 @@
-Received: from mail-pz0-f47.google.com ([209.85.210.47])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OlyZS-0008Hg-Kh
+	(envelope-from <stefan@datenfreihafen.org>) id 1Olyqj-0004AZ-JB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 08:25:51 +0200
-Received: by pzk2 with SMTP id 2so583568pzk.6
+	Thu, 19 Aug 2010 08:43:46 +0200
+Received: from [134.169.35.210] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OlyqP-00026X-ML by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Aug 2010 23:25:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=8X9weCOIS2TMbYIZFI2rHDliqpXRUFDxaHuHQudQ78E=;
-	b=CekY8M1RuF8rmVSE8R9ic9LUjkLDXBPS3VJ6HCZTb+DWHVWOopvdV8pncXc5jpb+UC
-	N+U8qjWHqE2HAwtQLM6Rh5dQTf0Ke9sKmNoUunLjuRWmx4xRHElJYhG6mFuG4/p11Q4q
-	eyC0FLyD+iDSq4ycXtfxM0aPr/DvYMirsEFBg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=md3vnOTIPcAKX5zn45YVKKStIMzVqLG66K8P9KI2t2u2X/l10USDzjSYtHgoXwonJC
-	fmXb4qIj4QGtlXzVlL187lXHH+Jj6EaNTUzxvj4x2qMO5I5Ab+R13fJ9G+M3mXQlx8vi
-	uBMBQRRR8WFfvXQY7s0AUZy+E6v3uFWDNfjak=
-Received: by 10.142.132.18 with SMTP id f18mr8008165wfd.190.1282198779449;
-	Wed, 18 Aug 2010 23:19:39 -0700 (PDT)
-Received: from localhost.localdomain ([76.8.213.37])
-	by mx.google.com with ESMTPS id b19sm1295551wff.7.2010.08.18.23.19.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 18 Aug 2010 23:19:38 -0700 (PDT)
-From: AJ ONeal <coolaj86@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-Date: Thu, 19 Aug 2010 00:19:09 -0600
-Message-Id: <1282198749-25911-1-git-send-email-coolaj86@gmail.com>
-X-Mailer: git-send-email 1.6.0.4
-X-SA-Exim-Connect-IP: 209.85.210.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+	Thu, 19 Aug 2010 08:43:24 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OlyqP-0004fi-3a
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Aug 2010 08:43:21 +0200
+Date: Thu, 19 Aug 2010 08:43:21 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
+To: openembedded-devel@lists.openembedded.org
+Message-ID: <20100819064321.GA3792@excalibur.local>
+References: <AANLkTinW6EWy5rWVHmQoCc_BsC=2XDdnoXWSgnh73Cvn@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinW6EWy5rWVHmQoCc_BsC=2XDdnoXWSgnh73Cvn@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] removed duplicate node recipe
+Subject: Re: etk is in obsolete but there are recipes which depend on it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,44 +46,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 06:25:51 -0000
+X-List-Received-Date: Thu, 19 Aug 2010 06:44:02 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
----
- recipes/node/node_v0.1.104.bb |   23 -----------------------
- 1 files changed, 0 insertions(+), 23 deletions(-)
- delete mode 100644 recipes/node/node_v0.1.104.bb
+Hello.
 
-diff --git a/recipes/node/node_v0.1.104.bb b/recipes/node/node_v0.1.104.bb
-deleted file mode 100644
-index 368b8fb..0000000
---- a/recipes/node/node_v0.1.104.bb
-+++ /dev/null
-@@ -1,23 +0,0 @@
--DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
--PR = "r0"
--DEPENDS = "openssl"
--SRC_URI = " \
--http://nodejs.org/dist/node-v${PV}.tar.gz \
--"
--#libev-cross.patch
--#node-cross.patch
--SRC_URI[md5sum] = "907fa1e0a2f1f0c3df5efc97fd05a7d2"
--SRC_URI[sha256sum] = "a1c776f44bc07305dc0e56df17cc3260eaafa0394c3b06c27448ad85bec272df"
--S = "${WORKDIR}/node-v${PV}"
--do_configure () {
--./configure
--}
--do_compile () {
--export DEST_CPU=arm
--make
--}
--do_install () {
--install -d ${D}${bindir}/
--install -m 0755 ${S}/node ${D}${bindir}/
--}
--FILES_${PN} = "${bindir}/node"
--- 
-1.6.0.4
+On Wed, 2010-08-18 at 13:52, Khem Raj wrote:
+> 
+> However there are recipes which still depend on this
+> 
+> e17/e17edje-player_svn.bb
+> e17/edje-editor_svn.bb
 
+Role replaced by editje upstream
+
+> comic-reader/comic-reader_svn.bb
+> e17/exhibit_svn.bb
+> efl1/eflpp_svn.bb
+> efl1/evolve_svn.bb
+
+No idea.
+
+> openmoko-projects/om-locations_git.bb
+
+I know we shipped this with an OM version but that was never updated and is
+dead.
+
+> openmoko-projects/diversity-radar_svn.bb
+> openmoko-projects/assassin_svn.bb
+
+Not sure we even shipped these. THey are dead as well.
+
+regards
+Stefan Schmidt
 
 
