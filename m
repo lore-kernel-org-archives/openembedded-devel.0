@@ -1,48 +1,40 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Olxjx-0006qm-6Y
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Olxoy-000729-3y
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 07:32:37 +0200
-Received: by fxm6 with SMTP id 6so826569fxm.6
+	Thu, 19 Aug 2010 07:37:49 +0200
+Received: by iwn38 with SMTP id 38so1429642iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Aug 2010 22:32:17 -0700 (PDT)
+	Wed, 18 Aug 2010 22:37:29 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=kgOs07F6b9f3aGUO29haMDo3sstDbi3W2Y7JYbNxLVg=;
-	b=QworMahqSIquQLZnMvNKUoJeQkULPr3NKCvI232XkCB/N2384KCkIZVOtrQm0XCQbx
-	C2er5PaUUEpA6X3yZfEuRdUlk42xmixOcGDuwKUQ99o9fdC6fGOWA4Mjubr/b58GPPIR
-	7XGOpd2nh9GHSEYxx5x1zDodFJeGa7iQ7aF3E=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=9HhuW24Kde6J+vTUkRZ2RY9obZRUlVQe3+HHz+y5nYI=;
+	b=aNnpqPqq2jqCs+6O0/3FYxwQUL453m62RgrYzivgSMBnZA4nTB5bpLCDgNmQ/kMIu8
+	uuKBjGqFItDOHgW2FzxIdZuKQtXu5r2kZzvsY4hZmgVuAxioVQNwC0oxWSJQXBup9KPd
+	YBDUm34xGPf78a/hAxOqaluxodgpe53ULZmmQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=pETytklRAtAqmgvuurA3hBb9UfFS4Ux2vV3yPyH+3qY7HZV4TP49JD8h86GAR4sBpn
-	Zjw9A2ZLdT2soCjuw2v0JRFBcCZ5HgA3NOMxHhf4mEIm3wXJSyZUrQRbSM7j0CLqV/53
-	XjyED48B+uxxt5CmPLmm6Tpzub7+OHgPaDSFY=
-Received: by 10.223.108.204 with SMTP id g12mr8762703fap.21.1282195937639;
-	Wed, 18 Aug 2010 22:32:17 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 10sm509497fax.18.2010.08.18.22.32.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 18 Aug 2010 22:32:17 -0700 (PDT)
-Date: Thu, 19 Aug 2010 07:32:38 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100819053238.GI11569@jama>
-References: <4C6B74CF.2090708@gmail.com>
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=Fxgx0a5YwZeigaUYId0xAfaMtDH4SE3wEqYxZLKIVo1FwbUUhAigHXkwNa9f87YWCK
+	eHBcbcoUJWcxeiGR5rCageaJpMa2zO/uUOIxkw6s7tPKumog/4wn76D+s4QTQxqtqWtb
+	2mzccimG5CSsD8cv4b+hd6ZV4itIqGl9TPVGc=
 MIME-Version: 1.0
-In-Reply-To: <4C6B74CF.2090708@gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Received: by 10.231.185.142 with SMTP id co14mr9855371ibb.97.1282196249455;
+	Wed, 18 Aug 2010 22:37:29 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Wed, 18 Aug 2010 22:37:29 -0700 (PDT)
+Date: Thu, 19 Aug 2010 07:37:29 +0200
+Message-ID: <AANLkTiktUAR5vEATH0ZoeOLHcM0zJf4i3oCXqpyJfZnd@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rootfs_ipk.bbclass: Fix BAD_RECOMMENDATIONS.
+Subject: tinderbox packages
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,23 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 05:32:37 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Aug 2010 05:37:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Aug 18, 2010 at 03:21:11PM +0930, Graham Gower wrote:
-> See http://code.google.com/p/opkg/source/detail?r=553
-> And previous discussions:
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg01423.html
-> http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg04051.html
-> 
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+In my dir I have these bb files:
+docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
+docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
+docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
+docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
 
-Image rebuilt from scratch and it looks good
+However tinderbox only shows the first one in the list of packages.
+Does this mean the other ones are never build?
+Or does something need to be done to add them to tinderbox?
+Or is this a bug ?
 
-Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
+Any wiz around who can shed a light?
 
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Frans
 
 
