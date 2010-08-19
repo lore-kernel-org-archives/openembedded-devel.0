@@ -1,33 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OlyE8-0000T4-KS
+	(envelope-from <raj.khem@gmail.com>) id 1OlyGF-0000ZZ-EC
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 08:03:50 +0200
-Received: by iwn38 with SMTP id 38so1450537iwn.6
+	Thu, 19 Aug 2010 08:06:00 +0200
+Received: by iwn38 with SMTP id 38so1452378iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 18 Aug 2010 23:03:30 -0700 (PDT)
+	Wed, 18 Aug 2010 23:05:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type;
-	bh=NEk5URJnj4q8+PpIlYlhT9Sh2RZqp/s8n6XwOBr8lI8=;
-	b=szlHEB0W76pbbiJE0kWhCLXFgf8y9YTlS2+Z4PMoqOmpO16zcqHVzsAIUgbdLOntwC
-	gZQWuJnROM5naSZ0pm5dzFLjOy6R4iYDfSqvv/VkWJFtcVPtMAok2SGsQFhxHQpDsvsY
-	RJ1PhwM7p/z2wGpnyq8En75GveniRyhbYGx84=
+	bh=XUFlHnyfxIVvYnPUYmzS56EIUAYhhhntK6xNd+KWLRI=;
+	b=VcwuWqZGXFmvZ2X37KBHNfZfIA2SVHuvanij1slIwjT6cjhFvpPjTSXPPqTM9BhLfm
+	Hh7wM8IJMNPYoyWI9sALdsrRZzNT/9HII0G6CycEeLOaD9H1AwRKooPENK0gw73yBASt
+	fkQLErI4VHNP6C2Ft4atAHdQgrXcfZOIVMebw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=b0k6aigbQH+BySf4JG4TyYD59ewLB76AjoZw+BYzOxq01YkMzmuO7wrn741Rj05Igp
-	l5PI6HymbcVctb+OzUhqIYWTjtunKF06PfGKEcnvZnUsF/hTAKSpyFa+8mBhLL5CXd9t
-	oa4NOsJTk5cMNe0QXNi37pHdf5haTyQqoqOBM=
-Received: by 10.231.183.81 with SMTP id cf17mr10828554ibb.32.1282197806482;
-	Wed, 18 Aug 2010 23:03:26 -0700 (PDT)
+	b=fBW+5eEdiVmcy9CsyG0fEXS2yjW9x+tHIf1WbYA2AP0sV+pX3XqNQGWBVU1/8KiAXB
+	MYFxhaVWRwaSVufS4hp5BY44kK6mPIBr9eZv6cLLy3urKr8vMiPw1Ez8vPK4qDql73na
+	h7fZLHtrFkr8v6AqvreXhlTeHljpDzYHBvwQA=
+Received: by 10.231.30.134 with SMTP id u6mr10719819ibc.121.1282197941158;
+	Wed, 18 Aug 2010 23:05:41 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.200.199 with HTTP; Wed, 18 Aug 2010 23:02:59 -0700 (PDT)
-In-Reply-To: <AANLkTiktUAR5vEATH0ZoeOLHcM0zJf4i3oCXqpyJfZnd@mail.gmail.com>
-References: <AANLkTiktUAR5vEATH0ZoeOLHcM0zJf4i3oCXqpyJfZnd@mail.gmail.com>
+Received: by 10.231.200.199 with HTTP; Wed, 18 Aug 2010 23:05:21 -0700 (PDT)
+In-Reply-To: <AANLkTi=WhXyczDLG0_Lt66RxTKfQswu4dNfGAyRHyKja@mail.gmail.com>
+References: <AANLkTi=WhXyczDLG0_Lt66RxTKfQswu4dNfGAyRHyKja@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 18 Aug 2010 23:02:59 -0700
-Message-ID: <AANLkTi=jJL-sjcN1eOmFaj1JUro5cPja7Ps0iQ+mbn-9@mail.gmail.com>
+Date: Wed, 18 Aug 2010 23:05:21 -0700
+Message-ID: <AANLkTik1kB09u203gue2RGAyD7-6yPoodqs=Lqg4+Eau@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -37,7 +37,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: tinderbox packages
+Subject: Re: cmake-native dependency
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,32 +51,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 06:03:50 -0000
+X-List-Received-Date: Thu, 19 Aug 2010 06:06:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Aug 18, 2010 at 10:37 PM, Frans Meulenbroeks
+On Wed, Aug 18, 2010 at 10:46 PM, Frans Meulenbroeks
 <fransmeulenbroeks@gmail.com> wrote:
-> In my dir I have these bb files:
-> docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
-> docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
-> docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
-> docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
+> Dear all,
 >
-> However tinderbox only shows the first one in the list of packages.
-> Does this mean the other ones are never build?
-> Or does something need to be done to add them to tinderbox?
-> Or is this a bug ?
+> Yesterday I noticed a cmake error due to pstaging on boost and
+> usbmuxd. I noticed cmake-native was not in the dependency list, so I
+> added it. However after doing so Koen told me that this dependency is
+> automatically added by
+> inherit cmake.
 >
+> Questions:
+> - what to do next (options: leave as is, revert commit (probably not a
+> good idea as that would decrease PR), or undo change with a separate
+> edit (no PR bump needed).
 
-we may not have them in DEPENDS but they will be needed in docbook
-document generation.
-the formats are different. see bus-java/dbus-java_2.5.1.bb needs 4.1
-but 4.4 and 4.5 looks
-not used thus far but they are later versions so I would intend to
-keep them for future use
+yes undo commit and bump PR again.
 
-
-> Any wiz around who can shed a light?
+> - should we note somewhere what dependencies are included by inherits
+> (e.g. I was unaware that inherit cmake would drag in cmake-native, so
+> I guess this will at least for some others be the case)
+> E.g. we could do something like
+> inherit cmake # adds dependency to cmake-native
+> in the bb files that inherit cmake.
+>
+> Your suggestions are appreciated.
 >
 > Frans
 >
