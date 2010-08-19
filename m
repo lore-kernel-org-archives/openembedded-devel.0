@@ -1,40 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Om3JJ-00086N-8y
+Received: from leibniz.math.fu-berlin.de ([160.45.40.10]
+	helo=mail.math.fu-berlin.de) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <heinold@mi.fu-berlin.de>) id 1Om3zw-0002Qt-Gn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 13:29:29 +0200
-Received: by iwn38 with SMTP id 38so1721897iwn.6
+	Thu, 19 Aug 2010 14:13:46 +0200
+Received: (qmail 2185 invoked from network); 19 Aug 2010 14:13:06 +0200
+Received: from hydra.imp.fu-berlin.de (HELO hydra) (160.45.117.149)
+	by leibniz.math.fu-berlin.de with SMTP; 19 Aug 2010 14:13:06 +0200
+X-Virus-Scanned: Debian amavisd-new on 'hydra':10024 at mi.fu-berlin.de
+Received: from math.fu-berlin.de ([160.45.40.10])
+	by hydra (hydra.imp.fu-berlin.de [160.45.117.149]) (amavisd-new,
+	port 10024) with SMTP id 2ac-sUv-JbSg
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 04:29:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=4nzyyAcYf80PnCCb1ChCn+dB8yLNhQMxlF0KyQpMriA=;
-	b=jRC+KVYTW2Fb1q/TuMyT3WFyO9OmszsYHLTs/D9hZXwh7uXXOb/uXatE1d8ZSq9qjv
-	1JWPiZV/1//zCvsnmFXjRJQiabheGCn4ssd+pT7PfOrbxNPsgP4HVV9q5ZlIANYwNSd+
-	9KTEvZORErUTp/nWlpw/3KfJiWfRHPiCoA0xQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=O15ut96DI1te07qs86nk/9JPw7p5qvavtYmlJ+pV5VVgTU+7xpDxy69ZmJa5hGyXSV
-	MNZTVCFoIyh7qPaPKtg0gDV/N9TsKUAhJdH2DtmL5UMtVOTTyLCOcPESu9TKkCjjERhI
-	IAkxvQcTf8QbRsqEDxm/81mS8BdN2AFowUs6I=
-MIME-Version: 1.0
-Received: by 10.231.148.195 with SMTP id q3mr10949816ibv.199.1282217341031;
-	Thu, 19 Aug 2010 04:29:01 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Thu, 19 Aug 2010 04:29:00 -0700 (PDT)
-Date: Thu, 19 Aug 2010 13:29:00 +0200
-Message-ID: <AANLkTimxWVes3DZQPGn53BZ1cL6BSX5BT3hwgFHrCUA4@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 19 Aug 2010 14:13:01 +0200 (CEST)
+Received: (Qmail 2170 invoked from network); 19 Aug 2010 14:13:01 +0200
+Received: From andorra.imp.fu-berlin.de (160.45.42.84)
+	by leibniz.math.fu-berlin.de with SMTP; 19 Aug 2010 12:13:01 -0000
+Received: from heinold by andorra.imp.fu-berlin.de with local (Exim 4.69 #1
+	(Debian)) id 1Om3zR-0005md-H3
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Aug 2010 14:13:01 +0200
+Date: Thu, 19 Aug 2010 14:13:01 +0200
+From: Henning Heinold <heinold@inf.fu-berlin.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100819121301.GA21426@mi.fu-berlin.de>
+References: <4C624772.8000607@nedap.com>
+	<20100811072548.GB7282@mi.fu-berlin.de>
+	<20100819105518.GL11569@jama>
+MIME-Version: 1.0
+In-Reply-To: <20100819105518.GL11569@jama>
+User-Agent: Mutt/1.5.18 (2008-05-17)
+Sender: Henning Heinold <heinold@mi.fu-berlin.de>
+X-SA-Exim-Connect-IP: 160.45.40.10
+X-SA-Exim-Mail-From: heinold@mi.fu-berlin.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,UNPARSEABLE_RELAY
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: virtclass_install prepend
+Subject: Re: problem building openjdk-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,20 +52,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 11:29:30 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Aug 2010 12:13:46 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+
+On Thu, Aug 19, 2010 at 12:55:18PM +0200, Martin Jansa wrote:
+> Hi,
+> 
+> did you resolve it somehow? I still have the same issue on 2 hosts, 2
+> different DISTROs and I didn't find any empty .jar or something.
+> 
+> Regards,
+> 
+> -- 
+> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 Hi,
 
-Found this in our reicpes:
+not the jars are empty, some classes inside the jar. Unfornatly I will
+not have the time to fix this before Sept. 13
 
-dbus/dbus-glib_0.86.bb:do_install_virtclass-native_prepend() {
-postfix/postfix.inc:do_install_prepend_virtclass-native() {
+So rebuild packages where classes inside the jars have 0 Bytes.
 
-Who is right wrt the position of _prepend ?
-
-Or are both ok ? (and if so are there any differences? )
-
-Frans
+Bye Henning
 
 
