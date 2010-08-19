@@ -1,33 +1,41 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1Om7DE-00041H-Fn
+	(envelope-from <coolaj86@gmail.com>) id 1Om7jJ-0001Cw-J0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 17:39:34 +0200
-Received: by qyk8 with SMTP id 8so1477108qyk.6
+	Thu, 19 Aug 2010 18:12:40 +0200
+Received: by fxm6 with SMTP id 6so1214262fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 08:39:03 -0700 (PDT)
-Received: by 10.224.20.9 with SMTP id d9mr6596924qab.310.1282232341837;
-	Thu, 19 Aug 2010 08:39:01 -0700 (PDT)
-Received: from localhost.localdomain
-	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id f15sm1838426qcr.25.2010.08.19.08.39.00
-	(version=SSLv3 cipher=RC4-MD5); Thu, 19 Aug 2010 08:39:00 -0700 (PDT)
-From: Jason Kridner <jkridner@beagleboard.org>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Aug 2010 10:38:59 -0500
-Message-Id: <1282232339-24482-1-git-send-email-jkridner@beagleboard.org>
-X-Mailer: git-send-email 1.5.6.4
-In-Reply-To: <1282085220-18619-1-git-send-email-jkridner@beagleboard.org>
-References: <1282085220-18619-1-git-send-email-jkridner@beagleboard.org>
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: jkridner@beagleboard.org
+	Thu, 19 Aug 2010 09:12:17 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=JTMiQYkx5uXpwzqsCQ0PwRQ6q3K0ygO0TMog/islZT0=;
+	b=S42fg0k6IL8qM4Ox4ZbU8xMaoWKcH+qOuH13jdbjx+SXUsECY9L9bw0ChCkTTSZNtR
+	bVLSd29FvmPJ7kYyfB+OvLmQUObSy0pUQmTwlIy8aEWA+ahT/XemXnVtUKV2ZdYGHOBm
+	f1vSvnKlpw7Q7vf3FuAgs/cjN+xhO6CUvy9Bw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=RNg4MUh3nOBi6EeA5VyWVLuhjfKvgA/uJrMmoQtqr9OL7K00xL7YRgwR/YVcO/vOb6
+	VIahrWWPrSDyiWP39gkSRbweTiuByyEB873mETaKbVCMbHjhEMYejCV3qjg4DovHa/pP
+	5rQSUytM37P6ZUSoxCIwjjzdQ+hdvu2uCvlcE=
+Received: by 10.223.104.145 with SMTP id p17mr56627fao.34.1282234337211; Thu,
+	19 Aug 2010 09:12:17 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.125.209 with HTTP; Thu, 19 Aug 2010 09:11:57 -0700 (PDT)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Thu, 19 Aug 2010 10:11:57 -0600
+Message-ID: <AANLkTinbLOK+FkKCKxkrA0pCQDD0O6DbimBUbDEv0dKZ@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,
+	HTML_FONT_FACE_BAD,HTML_MESSAGE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] esc-media: updated revision
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Creating a new recipe, how to fix config.log: CROSS COMPILE Badness /usr/include in INCLUDEPATH?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,47 +49,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 15:39:34 -0000
+X-List-Received-Date: Thu, 19 Aug 2010 16:12:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Added startup.wav (missed it the first time).  Corrected the MD5SUM.
+I'm assuming that this "CROSS COMPILE Badness" is part of OE and not part of
+the package.
 
-Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
----
- recipes/esc/esc-media_5.bb |   23 +++++++++++++++++++++++
- 1 files changed, 23 insertions(+), 0 deletions(-)
- create mode 100644 recipes/esc/esc-media_5.bb
-
-diff --git a/recipes/esc/esc-media_5.bb b/recipes/esc/esc-media_5.bb
-new file mode 100644
-index 0000000..725de19
---- /dev/null
-+++ b/recipes/esc/esc-media_5.bb
-@@ -0,0 +1,23 @@
-+DESCRIPTION = "Media files to include on the Embedded Systems Conference workshop"
-+LICENSE="Various"
-+
-+SRC_URI = "http://hivelocity.dl.sourceforge.net/project/showoff/esc_media_files.tar.gz"
-+SRC_URI[md5sum] = "b75cbc0ce0dfcbd85de12e7fe9ecab8b"
-+SRC_URI[sha256sum] = "364f474a6356326c113d964885207d90741f2e95770b079d96fffc4295e62739"
-+
-+S=${WORKDIR}/esc_media_files
-+
-+do_install() {
-+    ESC_MEDIA="2009-obama-congress-speech.avi AlphaAnimal.license \
-+               AlphaAnimal.m4a BigBuckBunny_640x360.m4v bbb.flac \
-+               bbb.mp3 bbb.ogg davincieffect.aac gstreamer-logo.svg \
-+               sprc720.flv startup.wav"
-+
-+    install -d ${D}${datadir}/esc-media
-+    for F in ${ESC_MEDIA} ; do
-+        install -m 0644 ${S}/${F} ${D}${datadir}/esc-media
-+    done
-+}
-+
-+FILES_${PN} += "${datadir}/esc-media"
-+
--- 
-1.5.6.4
+What is it that I need to do to correct this error? Please point me in the
+right direction.
 
 
+NOTE: Running task 391 of 552 (ID: 8,
+/home/coolaj86/overo-oe/user.collection/recipes/nodejs/nodejs_0.1.104.bb,
+do_qa_configure)
+ERROR: This autoconf log indicates errors, it looked at host includes.
+Rerun configure task after fixing this.
+
+
+
+
+config.log:
+----------------------------------------
+Checking for library execinfo
+==>
+
+int main() {
+  return 0;
+}
+
+<==
+[1/2] cxx: build/.conf_check_0/test.cpp ->
+build/.conf_check_0/testbuild/default/test_1.o
+CROSS COMPILE Badness: /usr/include in INCLUDEPATH: /usr/include
+cc1plus: internal compiler error: in add_path, at c-incpath.c:425
+Please submit a full bug report,
+with preprocessed source if appropriate.
+See <http://gcc.gnu.org/bugs.html> for instructions.
+['arm-angstrom-linux-gnueabi-g++', '-march=armv7-a', '-mtune=cortex-a8',
+'-mfpu=neon', '-mfloat-abi=softfp',
+'-isystem/home/coolaj86/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include',
+'-fexpensive-optimizations', '-frename-registers', '-fomit-frame-pointer',
+'-O2', '-ggdb3', '-fpermissive', '-fvisibility-inlines-hidden',
+'-isystem/home/coolaj86/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include',
+'-isystem/home/coolaj86/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include',
+'-I/usr/local/include', '-I/usr/include', '../test.cpp', '-c', '-o',
+'default/test_1.o']
+command returned 'Build failed:  -> task failed (err #1): \n\t{task: cxx
+test.cpp -> test_1.o}'not found
+
+
+
+
+I'm also assuming that this error is not what triggered the config.log
+error?
+
+Checking for header port.h
+==>
+#include <port.h>
+
+int main() {
+  return 0;
+}
+
+<==
+[1/2] cc: build/.conf_check_0/test.c ->
+build/.conf_check_0/testbuild/default/test_1.o
+../test.c:1:18: error: port.h: No such file or directory
+['arm-angstrom-linux-gnueabi-gcc', '-march=armv7-a', '-mtune=cortex-a8',
+'-mfpu=neon', '-mfloat-abi=softfp',
+'-isystem/home/coolaj86/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include',
+'-fexpensive-optimizations', '-frename-registers', '-fomit-frame-pointer',
+'-O2', '-ggdb3', '-rdynamic', '-D_GNU_SOURCE', '-DHAVE_CONFIG_H=1',
+'-isystem/home/coolaj86/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include',
+'-isystem/home/coolaj86/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include',
+'../test.c', '-c', '-o', 'default/test_1.o']
+command returned 'Build failed:  -> task failed (err #1): \n\t{task: cc
+test.c -> test_1.o}'not found
+
+
+
+AJ ONeal
 
