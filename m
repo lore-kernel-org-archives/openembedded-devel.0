@@ -1,23 +1,25 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1Om6xq-0000CY-Ti
+	(envelope-from <jkridner@beagleboard.org>) id 1Om7DE-00041H-Fn
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 17:23:36 +0200
-Received: by qwd7 with SMTP id 7so189862qwd.6
+	Thu, 19 Aug 2010 17:39:34 +0200
+Received: by qyk8 with SMTP id 8so1477108qyk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 08:23:13 -0700 (PDT)
-Received: by 10.229.52.5 with SMTP id f5mr139980qcg.254.1282231392785;
-	Thu, 19 Aug 2010 08:23:12 -0700 (PDT)
+	Thu, 19 Aug 2010 08:39:03 -0700 (PDT)
+Received: by 10.224.20.9 with SMTP id d9mr6596924qab.310.1282232341837;
+	Thu, 19 Aug 2010 08:39:01 -0700 (PDT)
 Received: from localhost.localdomain
 	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id t1sm1818750qcs.45.2010.08.19.08.23.11
-	(version=SSLv3 cipher=RC4-MD5); Thu, 19 Aug 2010 08:23:11 -0700 (PDT)
+	by mx.google.com with ESMTPS id f15sm1838426qcr.25.2010.08.19.08.39.00
+	(version=SSLv3 cipher=RC4-MD5); Thu, 19 Aug 2010 08:39:00 -0700 (PDT)
 From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 19 Aug 2010 10:23:10 -0500
-Message-Id: <1282231390-23994-1-git-send-email-jkridner@beagleboard.org>
+Date: Thu, 19 Aug 2010 10:38:59 -0500
+Message-Id: <1282232339-24482-1-git-send-email-jkridner@beagleboard.org>
 X-Mailer: git-send-email 1.5.6.4
-X-SA-Exim-Connect-IP: 209.85.216.47
+In-Reply-To: <1282085220-18619-1-git-send-email-jkridner@beagleboard.org>
+References: <1282085220-18619-1-git-send-email-jkridner@beagleboard.org>
+X-SA-Exim-Connect-IP: 209.85.216.175
 X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -25,7 +27,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] ti-msp430-chronos: replaced dos2unix with fromdos
+Subject: [PATCH] esc-media: updated revision
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,82 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 15:23:36 -0000
+X-List-Received-Date: Thu, 19 Aug 2010 15:39:34 -0000
 
-* Added dependency on tofrodos-native
-* Ran oe-stylize.pl
-* Corrected spelling of "LICENSE"
+Added startup.wav (missed it the first time).  Corrected the MD5SUM.
 
 Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
 ---
- recipes/ti/ti-msp430-chronos_1.05.00.00.bb |   33 +++++++++++----------------
- 1 files changed, 14 insertions(+), 19 deletions(-)
+ recipes/esc/esc-media_5.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/esc/esc-media_5.bb
 
-diff --git a/recipes/ti/ti-msp430-chronos_1.05.00.00.bb b/recipes/ti/ti-msp430-chronos_1.05.00.00.bb
-index 3455697..8faf351 100644
---- a/recipes/ti/ti-msp430-chronos_1.05.00.00.bb
-+++ b/recipes/ti/ti-msp430-chronos_1.05.00.00.bb
-@@ -1,46 +1,41 @@
- DESCRIPTION = "eZ430 Chronos Tools - MSP430 Development Kit/Watch"
- HOMEPAGE = "http://processors.wiki.ti.com/index.php/EZ430-Chronos"
--LICENCE = "unknown"
- SECTION = "multimedia"
--
-+LICENSE = "unknown"
-+DEPENDS = "tofrodos-native"
-+RDEPENDS_ti-msp430-chronos-apps += " tcl tk xdotool"
- PV = "1_05_00_00"
--PR = "2"
-+PR = "3"
- 
- SRC_URI = "http://focus.ti.com/lit/sw/slac388/slac388.zip;name=slac388zip"
--
- SRC_URI[slac388zip.md5sum] = "22d4104a07af584222828fb377793796"
- SRC_URI[slac388zip.sha256sum] = "1c9cd1e36015e8db3b36c98be41907628144b76002b3f76b27fd310f4bd35ad7"
- 
--require ti-paths.inc
--require ti-staging.inc
--require ti-eula-unpack.inc
--
- S = "${WORKDIR}/ti/eZ430-Chronos"
- 
--BINFILE="Chronos-Setup"
--TI_BIN_UNPK_CMDS="Y:workdir:"
--
- do_unpack_append() {
-     os.system('mv "Texas Instruments" ti')
- }
--
- do_compile() {
-     echo "Do Nothing for Now"
- }
--
- do_install() {
--
-     install -d ${D}/${installdir}/ti-msp430-chronos-apps
-     cp -pPrf "${S}"/"Control Center"/* ${D}/${installdir}/ti-msp430-chronos-apps
--
-     # Remove dos formatting
--    dos2unix "${D}/${installdir}/ti-msp430-chronos-apps/Chronos Data Logger"/*
--    dos2unix "${D}/${installdir}/ti-msp430-chronos-apps/Chronos Control Center"/*
--
-+    fromdos "${D}/${installdir}/ti-msp430-chronos-apps/Chronos Data Logger"/*
-+    fromdos "${D}/${installdir}/ti-msp430-chronos-apps/Chronos Control Center"/*
-     # Should probably also remove hardcoded script reference to tcl8.5
- }
- 
- PACKAGES += "ti-msp430-chronos-apps"
+diff --git a/recipes/esc/esc-media_5.bb b/recipes/esc/esc-media_5.bb
+new file mode 100644
+index 0000000..725de19
+--- /dev/null
++++ b/recipes/esc/esc-media_5.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "Media files to include on the Embedded Systems Conference workshop"
++LICENSE="Various"
 +
- FILES_ti-msp430-chronos-apps = "${installdir}/ti-msp430-chronos-apps/*"
- 
--RDEPENDS_ti-msp430-chronos-apps += " tcl tk xdotool"
-+require ti-paths.inc
-+require ti-staging.inc
-+require ti-eula-unpack.inc
++SRC_URI = "http://hivelocity.dl.sourceforge.net/project/showoff/esc_media_files.tar.gz"
++SRC_URI[md5sum] = "b75cbc0ce0dfcbd85de12e7fe9ecab8b"
++SRC_URI[sha256sum] = "364f474a6356326c113d964885207d90741f2e95770b079d96fffc4295e62739"
 +
-+BINFILE = "Chronos-Setup"
++S=${WORKDIR}/esc_media_files
 +
-+TI_BIN_UNPK_CMDS = "Y:workdir:"
++do_install() {
++    ESC_MEDIA="2009-obama-congress-speech.avi AlphaAnimal.license \
++               AlphaAnimal.m4a BigBuckBunny_640x360.m4v bbb.flac \
++               bbb.mp3 bbb.ogg davincieffect.aac gstreamer-logo.svg \
++               sprc720.flv startup.wav"
++
++    install -d ${D}${datadir}/esc-media
++    for F in ${ESC_MEDIA} ; do
++        install -m 0644 ${S}/${F} ${D}${datadir}/esc-media
++    done
++}
++
++FILES_${PN} += "${datadir}/esc-media"
++
 -- 
 1.5.6.4
 
