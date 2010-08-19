@@ -1,42 +1,48 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Om0jU-00034X-MJ for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 10:44:21 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Om0jC-0003CD-Ef for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 10:44:02 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 10:44:02 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <martin.jansa@gmail.com>) id 1Om12h-0005y3-0Q
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Aug 2010 11:04:11 +0200
+Received: by fxm6 with SMTP id 6so899578fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 10:44:02 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Thu, 19 Aug 2010 02:03:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=MbEcaNC9yl4FhZ8SdaCAcBSs3e2Z/ZAjcMTbxxUt/ZU=;
+	b=nzsMhEkDcrdbKXzyaX7pcpdNuN/7T2yeBwIfR5Tgw2ohNK+ndpPx9Uh4/cEWuu54ac
+	KkPlLn8+eGOzF3KNbRbUAYLwinrU2MEpcnrNNMKIzStxow58h2KmJFwqPrmZxrreGIQa
+	ro1S2jPeB2YubH7bgGGW/ZMWA+Q6rtyZ1vQns=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=IHI8O50AFJpUDoiMak06Pm5vAgJbKym2JOMFrVtAjCwTn45Sj/VpXbkiXqmMwFr+Sb
+	oZoGxmejnMlgDFMHq7YVXmgE9gOjr+dsTAZySPGJJ6z13+bDuMrFh8Y+hVUfboWt/jFb
+	YxrpVahu8n7Ay0+3IQAtsPMHcblPfnWjUbdbA=
+Received: by 10.223.111.137 with SMTP id s9mr8959512fap.30.1282208630926;
+	Thu, 19 Aug 2010 02:03:50 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u8sm572446fah.36.2010.08.19.02.03.50
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 19 Aug 2010 02:03:50 -0700 (PDT)
+Date: Thu, 19 Aug 2010 11:04:13 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 19 Aug 2010 10:43:52 +0200
-Message-ID: <i4iqs8$kpd$1@dough.gmane.org>
-References: <1282198068-25415-1-git-send-email-coolaj86@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <1282198068-25415-1-git-send-email-coolaj86@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100819090412.GJ11569@jama>
+References: <AANLkTinW6EWy5rWVHmQoCc_BsC=2XDdnoXWSgnh73Cvn@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTinW6EWy5rWVHmQoCc_BsC=2XDdnoXWSgnh73Cvn@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] added a .bb for node.js
+Subject: Re: etk is in obsolete but there are recipes which depend on it
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,187 +56,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 08:44:21 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 19 Aug 2010 09:04:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-And the PN should be nodejs
-
-
-On 19-08-10 08:07, AJ ONeal wrote:
-> ---
->  recipes/node/files/libev-arm-cross.patch |   45 ++++++++++++++++++++++++++++++
->  recipes/node/files/node-arm-cross.patch  |   31 ++++++++++++++++++++
->  recipes/node/node_0.1.104.bb             |   28 ++++++++++++++++++
->  recipes/node/node_v0.1.104.bb            |   23 +++++++++++++++
->  4 files changed, 127 insertions(+), 0 deletions(-)
->  create mode 100644 recipes/node/files/libev-arm-cross.patch
->  create mode 100644 recipes/node/files/node-arm-cross.patch
->  create mode 100644 recipes/node/node_0.1.104.bb
->  create mode 100644 recipes/node/node_v0.1.104.bb
+On Wed, Aug 18, 2010 at 01:52:45PM -0700, Khem Raj wrote:
+> Hi
 > 
-> diff --git a/recipes/node/files/libev-arm-cross.patch b/recipes/node/files/libev-arm-cross.patch
-> new file mode 100644
-> index 0000000..340dd98
-> --- /dev/null
-> +++ b/recipes/node/files/libev-arm-cross.patch
-> @@ -0,0 +1,45 @@
-> +diff --git node-v0.1.104/deps/libev/wscript.orig node-v0.1.104/deps/libev/wscript
-> +index 19e7bb2..a62f418 100644
-> +--- node-v0.1.104/deps/libev/wscript.orig
-> ++++ node-v0.1.104/deps/libev/wscript
-> +@@ -40,20 +40,27 @@ def configure(conf):
-> +   if conf.check_cc(header_name="sys/eventfd.h"):
-> +     conf.check_cc(header_name="sys/eventfd.h", function_name="eventfd")
-> + 
-> ++  # TODO find a way to determine this from the environment
-> ++  CROSS = True
-> ++  TARGET_OS = "linux"
-> + 
-> +-  code = """
-> +-      #include <syscall.h>
-> +-      #include <time.h>
-> +-      #include <stdio.h>
-> +-
-> +-      int main() {
-> +-          struct timespec ts; 
-> +-          int status = syscall(SYS_clock_gettime, CLOCK_REALTIME, &ts);
-> +-          return 0;
-> +-      }
-> +-  """
-> +-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
-> +-                msg="Checking for SYS_clock_gettime")
-> ++  if CROSS:
-> ++    if TARGET_OS == 'linux':
-> ++      conf.define("HAVE_CLOCK_SYSCALL", 1)
-> ++  else:
-> ++    code = """
-> ++        #include <syscall.h>
-> ++        #include <time.h>
-> ++        #include <stdio.h>
-> ++
-> ++        int main() {
-> ++            struct timespec ts; 
-> ++            int status = syscall(SYS_clock_gettime, CLOCK_REALTIME, &ts);
-> ++            return 0;
-> ++        }
-> ++    """
-> ++    conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
-> ++                  msg="Checking for SYS_clock_gettime")
-> + 
-> +   have_librt = conf.check(lib='rt', uselib_store='RT')
-> +   if have_librt:
-> diff --git a/recipes/node/files/node-arm-cross.patch b/recipes/node/files/node-arm-cross.patch
-> new file mode 100644
-> index 0000000..8ee6c18
-> --- /dev/null
-> +++ b/recipes/node/files/node-arm-cross.patch
-> @@ -0,0 +1,31 @@
-> +diff --git node-v0.1.104/wscript.orig node-v0.1.104/wscript
-> +index ba60514..d6a54fe 100644
-> +--- node-v0.1.104/wscript.orig
-> ++++ node-v0.1.104/wscript
-> +@@ -313,17 +313,25 @@ def v8_cmd(bld, variant):
-> +   # cannot see symbols in the executable which are hidden, even if the
-> +   # executable is statically linked together...
-> + 
-> ++  HOST_CPU = 'not-arm' # TODO probe for this
-> ++  snapshot = 'snapshot=on'
-> ++
-> +   # XXX Remove this when v8 defaults x86_64 to native builds
-> +   arch = ""
-> +   if bld.env['DEST_CPU'] == 'x86_64':
-> +     arch = "arch=x64"
-> ++  elif bld.env['DEST_CPU'] == 'arm':
-> ++    arch = "arch=arm"
-> ++
-> ++  if bld.env['DEST_CPU'] != HOST_CPU:
-> ++    snapshot = ""
-> + 
-> +   if variant == "default":
-> +     mode = "release"
-> +   else:
-> +     mode = "debug"
-> + 
-> +-  cmd_R = 'python "%s" -j %d -C "%s" -Y "%s" visibility=default mode=%s %s library=static snapshot=on'
-> ++  cmd_R = 'python "%s" -j %d -C "%s" -Y "%s" visibility=default mode=%s %s library=static ' + snapshot
-> + 
-> +   cmd = cmd_R % ( scons
-> +                 , Options.options.jobs
-> diff --git a/recipes/node/node_0.1.104.bb b/recipes/node/node_0.1.104.bb
-> new file mode 100644
-> index 0000000..a99eaff
-> --- /dev/null
-> +++ b/recipes/node/node_0.1.104.bb
-> @@ -0,0 +1,28 @@
-> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> +PR = "r0"
-> +DEPENDS = "openssl"
-> +SRC_URI = " \
-> +http://nodejs.org/dist/node-v${PV}.tar.gz \
-> +file://libev-arm-cross.patch;apply=yes \
-> +file://node-arm-cross.patch;apply=yes \
-> +"
-> +SRC_URI[md5sum] = "907fa1e0a2f1f0c3df5efc97fd05a7d2"
-> +SRC_URI[sha256sum] = "a1c776f44bc07305dc0e56df17cc3260eaafa0394c3b06c27448ad85bec272df"
-> +S = "${WORKDIR}/node-v${PV}"
-> +do_configure () {
-> +export DEST_CPU=arm
-> +./configure
-> +# skip complaints about 'config.log'
-> +cat /dev/null > ${S}/build/config.log
-> +}
-> +do_qa_configure () {
-> +}
-> +do_compile () {
-> +export DEST_CPU=arm
-> +make
-> +}
-> +do_install () {
-> +install -d ${D}${bindir}/
-> +install -m 0755 ${S}/node ${D}${bindir}/
-> +}
-> +FILES_${PN} = "${bindir}/node"
-> diff --git a/recipes/node/node_v0.1.104.bb b/recipes/node/node_v0.1.104.bb
-> new file mode 100644
-> index 0000000..368b8fb
-> --- /dev/null
-> +++ b/recipes/node/node_v0.1.104.bb
-> @@ -0,0 +1,23 @@
-> +DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-> +PR = "r0"
-> +DEPENDS = "openssl"
-> +SRC_URI = " \
-> +http://nodejs.org/dist/node-v${PV}.tar.gz \
-> +"
-> +#libev-cross.patch
-> +#node-cross.patch
-> +SRC_URI[md5sum] = "907fa1e0a2f1f0c3df5efc97fd05a7d2"
-> +SRC_URI[sha256sum] = "a1c776f44bc07305dc0e56df17cc3260eaafa0394c3b06c27448ad85bec272df"
-> +S = "${WORKDIR}/node-v${PV}"
-> +do_configure () {
-> +./configure
-> +}
-> +do_compile () {
-> +export DEST_CPU=arm
-> +make
-> +}
-> +do_install () {
-> +install -d ${D}${bindir}/
-> +install -m 0755 ${S}/node ${D}${bindir}/
-> +}
-> +FILES_${PN} = "${bindir}/node"
+> This commit below moved etk to obsolete
+> 
+> commit bd75858d8e523dfbed244bf4046b5ce01eeee690
+> Author: Martin Jansa <Martin.Jansa@gmail.com>
+> Date:   Fri Mar 19 18:14:59 2010 +0100
+> 
+>     efl: move epsilon/etk to obsolete, because they're not supported
+> with newer ecore anymore
+> 
+>     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+> 
+> 
+> However there are recipes which still depend on this
+> 
+> e17/e17edje-player_svn.bb
+> e17/edje-editor_svn.bb
+> comic-reader/comic-reader_svn.bb
+> e17/exhibit_svn.bb
+> efl1/eflpp_svn.bb
+> efl1/evolve_svn.bb
+> openmoko-projects/om-locations_git.bb
+> openmoko-projects/diversity-radar_svn.bb
+> openmoko-projects/assassin_svn.bb
+> 
+> should they also find their way into obsolete ? or is there a new
+> replacement package they should depend on
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+cleaned + few more
 
-iD8DBQFMbO7IMkyGM64RGpERAutSAJ4rEznKqUERzRw63i45U5HKZDzn8wCfWwbp
-GrHdH6tC0/HZ6/kCY+wxExQ=
-=GrlM
------END PGP SIGNATURE-----
-
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
