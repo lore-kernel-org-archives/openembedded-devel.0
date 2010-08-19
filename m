@@ -1,38 +1,49 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1Om23l-0001xN-BZ
+	(envelope-from <martin.jansa@gmail.com>) id 1Om2mE-0000gN-3q
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 12:09:22 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Om23P-0005l0-CC from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 03:08:59 -0700
-Received: from 137.202.157.210 ([137.202.157.210]) by eu2-mail.mgc.mentorg.com
-	([137.202.76.30]) via Exchange Front-End Server
-	webmail.mentor.com ([192.94.38.218]) with Microsoft Exchange
-	Server HTTP-DAV ; Thu, 19 Aug 2010 10:08:58 +0000
-Received: from pkl-fusman-ubuntu by webmail.mentor.com;
-	19 Aug 2010 15:11:54 +0500
-From: Fahad <Fahad_Usman@mentor.com>
+	Thu, 19 Aug 2010 12:55:20 +0200
+Received: by fxm6 with SMTP id 6so948351fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Aug 2010 03:54:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=gfAQ66Qux1kfSzG9B6Rz0eY4jNE/Y33ufpliBe+Ft5A=;
+	b=EvG8WAwXXOJoRFWzGZe/mnSvo0tgH7G5zCdvQIG/Ln8C2LAxkec750vyLDLMa3krpk
+	DmGX6gy9O8W3jf411SFDl9QkwwV1EsVftHV0ICtNSq8ZpeW8IACsEVRsm+bi9yM2MidE
+	2uSjxtalrWIvBFRUkllH8KZM6UCgr03vt1Yo4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=Sy119K+I2bs3tu51Se+w0jz14tdjIhLqEvYPxDTgjGA2i+Kswl/xtC/noPMe77vVIV
+	fNW7bs8KGucwhaxou/2dBVnzm8yOwMsV6DwGPoVrCOf3lIBwT0+jpS8t9rPkmRcliZls
+	aAKBSAxGP406z4NirqIft0760gOnG3S9YPZMs=
+Received: by 10.223.124.145 with SMTP id u17mr9045832far.92.1282215297247;
+	Thu, 19 Aug 2010 03:54:57 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id k25sm607447fac.41.2010.08.19.03.54.55
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 19 Aug 2010 03:54:56 -0700 (PDT)
+Date: Thu, 19 Aug 2010 12:55:18 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTik0m-1QRcExaT9wX2kc5SA8XyBDOGiC7nad5rvz@mail.gmail.com>
-References: <1282118880-27729-1-git-send-email-fahad_usman@mentor.com>
-	<AANLkTik0m-1QRcExaT9wX2kc5SA8XyBDOGiC7nad5rvz@mail.gmail.com>
-Organization: Mentor Graphics
-Date: Thu, 19 Aug 2010 15:11:54 +0500
-Message-ID: <1282212714.27679.158.camel@pkl-fusman-ubuntu>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.1 
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+Message-ID: <20100819105518.GL11569@jama>
+References: <4C624772.8000607@nedap.com>
+	<20100811072548.GB7282@mi.fu-berlin.de>
+MIME-Version: 1.0
+In-Reply-To: <20100811072548.GB7282@mi.fu-berlin.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,
-	RCVD_NUMERIC_HELO autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gawk-native_3.1.4.bb: Removed legacy style staging
+Subject: Re: problem building openjdk-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,70 +57,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 10:09:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Aug 2010 10:55:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On Wed, 2010-08-18 at 10:40 +0200, Frans Meulenbroeks wrote:
-> 2010/8/18 Fahad Usman <fahad_usman@mentor.com>:
-> > * converted do_stage to do_install
+On Wed, Aug 11, 2010 at 09:25:48AM +0200, Henning Heinold wrote:
+> On Wed, Aug 11, 2010 at 08:47:14AM +0200, Jaap de Jong wrote:
+> > Hi,
 > >
-> > * replaced ${STAGING_BINDIR} with ${D}${bindir}
+> > since a day or 6/7 ago I can't build openjdk-6 anymore.
+> > This is the latest patch that builds fine; later fail...
 > >
-> > * added NATIVE_INSTALL_WORKS =3D "1"
+> >    commit 13423cbf48e09af101dacba5e23695091582fc92
+> >    Author: Robert Schuster <robertschuster@fsfe.org>
+> >    Date:   Thu Jul 22 12:13:29 2010 +0200
 > >
-> > * added PR =3D "r1"
+> >         jamvm-native 1.5.4: New version.
 > >
-> > Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
-> > ---
-> >  recipes/gawk/gawk-native_3.1.4.bb |    9 ++++++---
-> >  1 files changed, 6 insertions(+), 3 deletions(-)
+> > Any clue?
+> > Thanks!
+> > Jaap de Jong
 > >
-> > diff --git a/recipes/gawk/gawk-native_3.1.4.bb b/recipes/gawk/gawk-nati=
-ve_3.1.4.bb
-> > index 0a33f71..67d254c 100644
-> > --- a/recipes/gawk/gawk-native_3.1.4.bb
-> > +++ b/recipes/gawk/gawk-native_3.1.4.bb
-> > @@ -1,5 +1,8 @@
-> >  INHIBIT_AUTOTOOLS_DEPS =3D "1"
-> >  require gawk_${PV}.bb
-> > +PR =3D "r1"
-> > +
-> > +NATIVE_INSTALL_WORKS =3D "1"
-> >
-> >  inherit native
-> >
-> > @@ -8,7 +11,7 @@ PATCHTOOL =3D "patch"
-> >
-> >  S =3D "${WORKDIR}/gawk-${PV}"
-> >
-> > -do_stage() {
-> > -       install -d ${STAGING_BINDIR}
-> > -       install -m 755 gawk ${STAGING_BINDIR}
-> > +do_install() {
-> > +       install -d ${D}${bindir}
-> > +       install -m 755 gawk ${D}${bindir}
-> >  }
-> > --
->=20
-> I suggest to merge this with the non-native recipe.
-> Also I feel that the default do_install should work here, so a
-> specific do_install seems not needed (it is an autotools recipe).
->=20
-> Frans
->=20
+> 
+> Hi Jaap,
+> 
+> the problem is that jamvm sometimes misscompiles some java-classes and the result is that the class is has 0 bytes.
+> That's happening really rare and we didnt build yet a guard for it in. So find out from the errorlog which class is
+> missing, mostly it some gnumail stuff and force to rebuild this package.
+> 
+> Bye Henning
 
-Hi Frans,
-With this do_install function, I get only one binary file
-(sysroots/i686-linux/usr/bin/gawk) in the resulting .ipk file, but if I
-remove the do_install function from the recipe and let the autotools's
-do_install execute, a bunch of other binary files end up in the .ipk
-file along with a lot of other stuff. Is it okay to have extra files in
-the ipk package or should I leave the do_install function in the recipe.
+Hi,
 
-Secondly, is there a way to merge native and non-native recipes if the
-native one need a different do_install function?
+did you resolve it somehow? I still have the same issue on 2 hosts, 2
+different DISTROs and I didn't find any empty .jar or something.
 
-Fahad
+Regards,
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
