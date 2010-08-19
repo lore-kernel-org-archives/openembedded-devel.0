@@ -1,38 +1,44 @@
-Received: from 70.mail-out.ovh.net ([91.121.185.63])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OmCn4-00036U-AP
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <andrea.adami@gmail.com>) id 1OmCro-0004m9-HK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 23:36:51 +0200
-Received: (qmail 17827 invoked by uid 503); 19 Aug 2010 21:31:14 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 70.mail-out.ovh.net with SMTP; 19 Aug 2010 21:31:14 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 19 Aug 2010 23:36:31 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 19 Aug 2010 23:36:29 +0200
-Message-ID: <4C6DA3DD.4080501@eukrea.com>
-Date: Thu, 19 Aug 2010 23:36:29 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+	Thu, 19 Aug 2010 23:41:46 +0200
+Received: by qwd7 with SMTP id 7so573193qwd.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Aug 2010 14:41:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=HNrQmkUdqEb1Snar5jit3qckPG7z8p/dFCtrbZkmCNY=;
+	b=lhIxpiKNqmCjWggH3k38Dt1Rn98HLYmr6DwucKh2+2QSXXLLX9SCRQfMHnftK91ZaM
+	yZ6kJe325Z60D5l2clMbBioSHEFigklSqmat2xx8QBhPQGd5hmi1ObpnWfUdM9rQQOWG
+	n3TJQaT45xb6XwKNing4SQrGFAdmXiyGCP0Mc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=bv+1t0kv1ZCsT6UATSeun0OFk37WT6mY7McfGlQW8jQk3khnjEuwI+ipCJtdforsRV
+	kAbmFW1TYVbG8K3MxJCxKHN4HQGeim/R1GYpfTEiCPIKB8wGb+Yd1IaSzYFQaX+q/BfU
+	+Jz8p0MLT42gwnPIppXLB9b4oFPMX3uwv7cd8=
 MIME-Version: 1.0
+Received: by 10.229.251.210 with SMTP id mt18mr383530qcb.151.1282254083444;
+	Thu, 19 Aug 2010 14:41:23 -0700 (PDT)
+Received: by 10.229.27.204 with HTTP; Thu, 19 Aug 2010 14:41:23 -0700 (PDT)
+In-Reply-To: <AANLkTilIn7VbqhAFxA5AX2TsWeBHOBNIY0Xf2LL6Z7EE@mail.gmail.com>
+References: <20100528052720.GA15949@gmail.com> <htnnq0$75p$1@dough.gmane.org>
+	<AANLkTilIn7VbqhAFxA5AX2TsWeBHOBNIY0Xf2LL6Z7EE@mail.gmail.com>
+Date: Thu, 19 Aug 2010 23:41:23 +0200
+Message-ID: <AANLkTikn7+Kin_QGf0wiSzFYiZh6j35OoNUo662e1vHF@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <7FC9418E-5EF5-4750-BFD7-DB7E43B38513@chumby.com>	<i4iq60$g6i$1@dough.gmane.org>
-	<B49DA616-CD60-4E6E-A141-C3637BA9EB24@chumby.com>
-In-Reply-To: <B49DA616-CD60-4E6E-A141-C3637BA9EB24@chumby.com>
-X-Ovh-Tracer-Id: 11807593799174827337
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.63
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] Add chumby falconwing kernel recipe
+Subject: Re: <package>-static name conflict with some recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,30 +52,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 21:36:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Thu, 19 Aug 2010 21:41:46 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Sean,
+Bump
 
-Le 19/08/2010 21:21, Sean Cross a écrit :
-> On Aug 19, 2010, at 1:32 AM, Koen Kooi wrote:
->> Can't this me merged into the .26.28 kernel recipe?
->>
-> I can do that, but the resulting patch is 28 megabytes. I think
-> that's a bit big.
->
-> It's Freescale's kernel patch, which supports all of their
-> processors, not just the i.MX233.  My guess is that nobody's tried to
-> get these patches into the kernel upstream.
->
-> The resulting patch I get is mostly an additive patch, as I count
-> 800,000 added lines in the patch, and 1200 removed lines.
->
-maybe using Freecale git server with the right revision will allow you
-to only have one smaller patch which adds support of your board :
-http://opensource.freescale.com/git?p=imx/linux-2.6-imx.git;a=summary
+> ./kexec-tools/kexec-tools-klibc-static_1.101.bb
+> ./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
+> ./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
+> ./klibc/klibc-utils-static_1.5.15+1.5.16.bb
+> ./klibc/klibc-utils-static_1.5.18.bb
+> ./klibc/klibc-utils-static_1.5.15.bb
+> ./klibc/klibc-utils-static_1.5.bb
+> ./klibc/klibc-utils-static_1.5.17.bb
 
-Eric
+I renamed the a.m. recipes: please check what's remaining after the
+massive purge of last week...
+
+Regards
+
+Andrea
 
 
