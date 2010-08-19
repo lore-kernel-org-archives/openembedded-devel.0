@@ -1,46 +1,31 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmCGX-0001ya-6U
+	(envelope-from <gary@mlbassoc.com>) id 1OmCGf-00020F-QD
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 23:03:14 +0200
-Received: by gwb15 with SMTP id 15so962521gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 14:02:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=DMTBwu1A4AQQadpG5A0JcOHChgRJZIKIeswa+km7Wd0=;
-	b=tGaRkzBkQSCEUdTJCFRTjMzuX1PD390AnLi01/B0ubwpUR4AUuVZ2hmZDh6c3M4Iku
-	uv+iAsD5wCT7NZ16LZQQdKCObW65gBFiQHxpuMGv22Fk+s+SDIypT1Sj9Mfl5fPXty+v
-	eY8Dc04WmrtIufb46b7t59QodJ7Kvj0Vw+uVc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=N0da6FpD7AajMoAsUMAVp07oBDN71AYmWIUE7hAu/gAMZ7eR8ncYoLAEhlHNavTPd8
-	uuu7AGPJLDK4yftYKwUOssmo7o5OouDASm0Vd7hv0GQVMTD6zkAqQgCK3tGMZUbpAG5f
-	LOHt+ZIfPSKBrlbvv4VXcTagh5QRGlgpQYRts=
+	Thu, 19 Aug 2010 23:03:24 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id DC1B616609D2; Thu, 19 Aug 2010 15:02:46 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 64128166093C;
+	Thu, 19 Aug 2010 15:02:17 -0600 (MDT)
+Message-ID: <4C6D9BD9.6040206@mlbassoc.com>
+Date: Thu, 19 Aug 2010 15:02:17 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.151.6.5 with SMTP id j5mr590638ybi.278.1282251770079; Thu, 19
-	Aug 2010 14:02:50 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Thu, 19 Aug 2010 14:02:50 -0700 (PDT)
-In-Reply-To: <AANLkTikg6S_BgHYYfDb63Pd1qLMHD5T8obfx4_R+rJNV@mail.gmail.com>
-References: <1282118880-27729-1-git-send-email-fahad_usman@mentor.com>
-	<AANLkTik0m-1QRcExaT9wX2kc5SA8XyBDOGiC7nad5rvz@mail.gmail.com>
-	<1282212714.27679.158.camel@pkl-fusman-ubuntu>
-	<AANLkTikg6S_BgHYYfDb63Pd1qLMHD5T8obfx4_R+rJNV@mail.gmail.com>
-Date: Thu, 19 Aug 2010 23:02:50 +0200
-Message-ID: <AANLkTinoi=QYMhf7ZZRUii1QB6jzBNSj-vX-ZD=EfwER@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1282248521-32053-1-git-send-email-jkridner@beagleboard.org>
+In-Reply-To: <1282248521-32053-1-git-send-email-jkridner@beagleboard.org>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gawk-native_3.1.4.bb: Removed legacy style staging
+Subject: Re: [PATCH] base-files: beagleboard: profile: use nano
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,13 +39,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 21:03:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Aug 2010 21:03:26 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Since I had some time to spare I converted the recipe to BBCLASSEXTEND
-= "native"
-Thanks for your contribution and inspiration.
+On 08/19/2010 02:08 PM, Jason Kridner wrote:
+> If nano is available and EDITOR isn't otherwise set, then use it.
+> Advanced users who would prefer vi will know how to set EDITOR anyway.
+> I can clearly see myself being frustrated typing 'export EDITOR=vi'
+> every time I start a BeagleBoard test ramdisk image, but better me have
+> that than to try to explain to someone fresh how to use vi.
+>
+> Signed-off-by: Jason Kridner<jkridner@beagleboard.org>
+> ---
+>   recipes/base-files/base-files/beagleboard/profile |   41 +++++++++++++++++++++
+>   1 files changed, 41 insertions(+), 0 deletions(-)
+>   create mode 100644 recipes/base-files/base-files/beagleboard/profile
+>
+> diff --git a/recipes/base-files/base-files/beagleboard/profile b/recipes/base-files/base-files/beagleboard/profile
+> new file mode 100644
+> index 0000000..7b1cf52
+> --- /dev/null
+> +++ b/recipes/base-files/base-files/beagleboard/profile
+> @@ -0,0 +1,41 @@
+> +# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
+> +# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
+> +
+> +PATH="/usr/local/bin:/usr/bin:/bin"
+> +# EDITOR needed for packages like cron
+> +if [ "$EDITOR" ]; then
 
-Frans
+You sure you don't want this test instead?
+   if [ -z "$EDITOR" ]; then
+
+Otherwise, you'll be overriding some guy's choice and never defining
+it for those who haven't
+
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
