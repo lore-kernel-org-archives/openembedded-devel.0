@@ -1,44 +1,33 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail-vw0-f47.google.com ([209.85.212.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OmCro-0004m9-HK
+	(envelope-from <jkridner@beagleboard.org>) id 1OmDR1-0000vI-W7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 23:41:46 +0200
-Received: by qwd7 with SMTP id 7so573193qwd.6
+	Fri, 20 Aug 2010 00:18:18 +0200
+Received: by vws13 with SMTP id 13so2310067vws.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 14:41:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=HNrQmkUdqEb1Snar5jit3qckPG7z8p/dFCtrbZkmCNY=;
-	b=lhIxpiKNqmCjWggH3k38Dt1Rn98HLYmr6DwucKh2+2QSXXLLX9SCRQfMHnftK91ZaM
-	yZ6kJe325Z60D5l2clMbBioSHEFigklSqmat2xx8QBhPQGd5hmi1ObpnWfUdM9rQQOWG
-	n3TJQaT45xb6XwKNing4SQrGFAdmXiyGCP0Mc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=bv+1t0kv1ZCsT6UATSeun0OFk37WT6mY7McfGlQW8jQk3khnjEuwI+ipCJtdforsRV
-	kAbmFW1TYVbG8K3MxJCxKHN4HQGeim/R1GYpfTEiCPIKB8wGb+Yd1IaSzYFQaX+q/BfU
-	+Jz8p0MLT42gwnPIppXLB9b4oFPMX3uwv7cd8=
-MIME-Version: 1.0
-Received: by 10.229.251.210 with SMTP id mt18mr383530qcb.151.1282254083444;
-	Thu, 19 Aug 2010 14:41:23 -0700 (PDT)
-Received: by 10.229.27.204 with HTTP; Thu, 19 Aug 2010 14:41:23 -0700 (PDT)
-In-Reply-To: <AANLkTilIn7VbqhAFxA5AX2TsWeBHOBNIY0Xf2LL6Z7EE@mail.gmail.com>
-References: <20100528052720.GA15949@gmail.com> <htnnq0$75p$1@dough.gmane.org>
-	<AANLkTilIn7VbqhAFxA5AX2TsWeBHOBNIY0Xf2LL6Z7EE@mail.gmail.com>
-Date: Thu, 19 Aug 2010 23:41:23 +0200
-Message-ID: <AANLkTikn7+Kin_QGf0wiSzFYiZh6j35OoNUo662e1vHF@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Thu, 19 Aug 2010 15:17:46 -0700 (PDT)
+Received: by 10.220.60.204 with SMTP id q12mr258049vch.183.1282256266729;
+	Thu, 19 Aug 2010 15:17:46 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id m9sm848013vcz.41.2010.08.19.15.17.45
+	(version=SSLv3 cipher=RC4-MD5); Thu, 19 Aug 2010 15:17:45 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Thu, 19 Aug 2010 17:17:44 -0500
+Message-Id: <1282256264-4206-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+In-Reply-To: <1282248521-32053-1-git-send-email-jkridner@beagleboard.org>
+References: <1282248521-32053-1-git-send-email-jkridner@beagleboard.org>
+X-SA-Exim-Connect-IP: 209.85.212.47
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: <package>-static name conflict with some recipes
+Subject: [PATCH] base-files: beagleboard: profile: use nano
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,25 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 21:41:46 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Aug 2010 22:18:19 -0000
 
-Bump
+If nano is available and EDITOR isn't otherwise set, then use it.
+Advanced users who would prefer vi will know how to set EDITOR anyway.
+I can clearly see myself being frustrated typing 'export EDITOR=vi'
+every time I start a BeagleBoard test ramdisk image, but better me have
+that than to try to explain to someone fresh how to use vi.
 
-> ./kexec-tools/kexec-tools-klibc-static_1.101.bb
-> ./kexec-tools/kexec-tools-klibc-static_2.0.1.bb
-> ./zaurus-utils/nandlogical-klibc-static_1.0.0.bb
-> ./klibc/klibc-utils-static_1.5.15+1.5.16.bb
-> ./klibc/klibc-utils-static_1.5.18.bb
-> ./klibc/klibc-utils-static_1.5.15.bb
-> ./klibc/klibc-utils-static_1.5.bb
-> ./klibc/klibc-utils-static_1.5.17.bb
+Updated with feedback from Gary Thomas to avoid overwriting anyone
+else's preference.
 
-I renamed the a.m. recipes: please check what's remaining after the
-massive purge of last week...
+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+---
+ recipes/base-files/base-files/beagleboard/profile |   41 +++++++++++++++++++++
+ recipes/base-files/base-files_3.0.14.bb           |    2 +-
+ 2 files changed, 42 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/base-files/base-files/beagleboard/profile
 
-Regards
+diff --git a/recipes/base-files/base-files/beagleboard/profile b/recipes/base-files/base-files/beagleboard/profile
+new file mode 100644
+index 0000000..301fc93
+--- /dev/null
++++ b/recipes/base-files/base-files/beagleboard/profile
+@@ -0,0 +1,41 @@
++# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
++# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
++
++PATH="/usr/local/bin:/usr/bin:/bin"
++# EDITOR needed for packages like cron
++if [ -z "$EDITOR" ]; then
++	if [ -x /usr/bin/nano ]; then
++		EDITOR="/usr/bin/nano"
++	else
++		EDITOR="/bin/vi"
++	fi
++fi
++test -z "$TERM" && TERM="vt100"	# Basic terminal capab. For screen etc.
++
++if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
++	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
++				# for an explanation of how to set this to your local timezone.
++	export TZ
++fi
++
++if [ "`id -u`" -eq 0 ]; then
++   PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
++fi
++if [ "$PS1" ]; then
++# works for bash and ash (no other shells known to be in use here)
++   PS1='\u@\h:\w\$ '
++fi
++
++if [ -d /etc/profile.d ]; then
++  for i in /etc/profile.d/*.sh; do
++    if [ -r $i ]; then
++      . $i
++    fi
++  done
++  unset i
++fi
++
++export PATH PS1 OPIEDIR QPEDIR QTDIR EDITOR TERM
++
++umask 022
++
+diff --git a/recipes/base-files/base-files_3.0.14.bb b/recipes/base-files/base-files_3.0.14.bb
+index f8d0778..ab554bb 100644
+--- a/recipes/base-files/base-files_3.0.14.bb
++++ b/recipes/base-files/base-files_3.0.14.bb
+@@ -1,7 +1,7 @@
+ DESCRIPTION = "Miscellaneous files for the base system."
+ SECTION = "base"
+ PRIORITY = "required"
+-PR = "r97"
++PR = "r98"
+ LICENSE = "GPL"
+ 
+ SRC_URI = " \
+-- 
+1.5.6.4
 
-Andrea
 
 
