@@ -1,51 +1,46 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Om7ov-0001MW-JM
+	(envelope-from <kergoth@gmail.com>) id 1Om9mv-0001hy-3v
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 18:18:28 +0200
-Received: by fxm6 with SMTP id 6so1220323fxm.6
+	Thu, 19 Aug 2010 20:24:30 +0200
+Received: by pxi11 with SMTP id 11so869396pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 09:18:05 -0700 (PDT)
+	Thu, 19 Aug 2010 11:24:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=edVonP1hQ4VZC4N3oyXFtlkaVEU4jqeBN48uo5VsqN8=;
-	b=uqJrFrOcMikNhfnGq4PYTNbWnDpzb6DwqpecOiXtKW6jzXCfs7YsH4qwbb7nFz4rxm
-	CtX7YfY9wEEB1C/3NgG8ts/cPRNLeumETMqohW20uZC0W03O5i8wBYQbumf7LbZBtbRC
-	WaJ3y4Rf+fJyOzga2zi3+uubA/aTrdNJJbliI=
+	h=domainkey-signature:received:received:sender:from:to:cc:subject
+	:date:message-id:x-mailer;
+	bh=ivwBMFcl7UGYxmzYJupzvdTAfHEyXskle9CTq4BBiEg=;
+	b=dYAQ0ez6N9vxdUcUsyTRY9G7RMb3CAu2qKFzFKFKyOCi//Zz1wfzuskVnXUFJfIjrs
+	Y9re+XRhYhgW88Zd6FPqhdN2iSEHw1fHVfsOVRsGQUS7nMmylpHGCkDlWGtLRRrg4aZe
+	/O3UC8Pxc0MwIEPVSsw10IEIt9rbdny5soSOY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=ajLX7RIZ9h/eKRgars0oEif4wk6pZSUO3LualZPPxz/r4Jyiau/xCCCV3kpOoR1paD
-	eRwzrJQD8RUXbpzJaVc+97JglWZpvOp3ZVKfW2eOtwRHhG3KlUJ/3G586WpvI9zQc6fG
-	Z752r6QCG3ir/N2Pk9qptXAu1XKLYLstSIn0s=
-Received: by 10.223.108.204 with SMTP id g12mr77060fap.21.1282234680923;
-	Thu, 19 Aug 2010 09:18:00 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id r5sm773237faq.8.2010.08.19.09.17.59
+	h=sender:from:to:cc:subject:date:message-id:x-mailer;
+	b=pxULU6kDVqZV/N8vPW5aZyYnyOsLoaqluOIuUYuwr73YqgQoZ1HmE1Mo9y67zW7/fg
+	xR4nPxk//j7xJkJMMSXj4TYzQqQGf6Zq+5N/fTU3/eNMwXvF5b3Q3blX4RMYs0U//O2o
+	b9iXojhUBKf7VlyC8hsshqJLUtPAx9F05keHI=
+Received: by 10.142.141.10 with SMTP id o10mr93122wfd.285.1282242247196;
+	Thu, 19 Aug 2010 11:24:07 -0700 (PDT)
+Received: from localhost.localdomain (ip24-251-170-95.ph.ph.cox.net
+	[24.251.170.95])
+	by mx.google.com with ESMTPS id t11sm2060433wfc.16.2010.08.19.11.24.05
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Aug 2010 09:18:00 -0700 (PDT)
-Date: Thu, 19 Aug 2010 18:18:23 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 19 Aug 2010 11:24:06 -0700 (PDT)
+Sender: Chris Larson <kergoth@gmail.com>
+From: Chris Larson <clarson@kergoth.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100819161823.GN11569@jama>
-References: <4C624772.8000607@nedap.com>
-	<20100811072548.GB7282@mi.fu-berlin.de>
-	<20100819105518.GL11569@jama>
-	<20100819121301.GA21426@mi.fu-berlin.de>
-MIME-Version: 1.0
-In-Reply-To: <20100819121301.GA21426@mi.fu-berlin.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Thu, 19 Aug 2010 11:23:59 -0700
+Message-Id: <1282242239-30776-1-git-send-email-clarson@kergoth.com>
+X-Mailer: git-send-email 1.7.2.1.66.g0d0ba
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problem building openjdk-6
+Cc: Chris Larson <chris_larson@mentor.com>
+Subject: [PATCH] Fix the package_arch=machine_arch logic to use FILESPATH*
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,44 +54,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 16:18:28 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Aug 2010 18:24:30 -0000
 
-On Thu, Aug 19, 2010 at 02:13:01PM +0200, Henning Heinold wrote:
-> On Thu, Aug 19, 2010 at 12:55:18PM +0200, Martin Jansa wrote:
-> > Hi,
-> > 
-> > did you resolve it somehow? I still have the same issue on 2 hosts, 2
-> > different DISTROs and I didn't find any empty .jar or something.
-> > 
-> > Regards,
-> > 
-> > -- 
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> 
-> Hi,
-> 
-> not the jars are empty, some classes inside the jar. Unfornatly I will
-> not have the time to fix this before Sept. 13
-> 
-> So rebuild packages where classes inside the jars have 0 Bytes.
-> 
-> Bye Henning
+From: Chris Larson <chris_larson@mentor.com>
 
-xalan-j now compiled fine but openjdk failed later with:
+- Use FILESPATHPKG and FILESPATHBASE to locate the machine specific dirs
+- Use the fetch urldata rather than poking at urls ourselves
+- Move the logic into utils.bbclass as def'd python functions
+- Simplify
 
-| checking for a xalan2 serializer jar... no
-| configure: error: "A xalan2-serializer jar was not found."
-NOTE: package openjdk-6-jre-6b18-1.8-r10.6: task do_configure: Failed
+Signed-off-by: Chris Larson <chris_larson@mentor.com>
+---
+ classes/base.bbclass  |   21 ++++-----------------
+ classes/utils.bbclass |   18 ++++++++++++++++++
+ 2 files changed, 22 insertions(+), 17 deletions(-)
 
-http://tinderbox.openembedded.org/packages/704760/
-
-any hint?
-
-Regards,
-
+diff --git a/classes/base.bbclass b/classes/base.bbclass
+index 02c7875..89f983f 100644
+--- a/classes/base.bbclass
++++ b/classes/base.bbclass
+@@ -442,23 +442,10 @@ python () {
+     # unless the package sets SRC_URI_OVERRIDES_PACKAGE_ARCH=0
+     #
+     override = bb.data.getVar('SRC_URI_OVERRIDES_PACKAGE_ARCH', d, 1)
+-    if override != '0':
+-        paths = []
+-        for p in [ "${PF}", "${P}", "${PN}", "files", "" ]:
+-            path = bb.data.expand(os.path.join("${FILE_DIRNAME}", p, "${MACHINE}"), d)
+-            if os.path.isdir(path):
+-                paths.append(path)
+-        if len(paths) != 0:
+-            for s in srcuri.split():
+-                if not s.startswith("file://"):
+-                    continue
+-                local = bb.data.expand(bb.fetch.localpath(s, d), d)
+-                for mp in paths:
+-                    if local.startswith(mp):
+-                        #bb.note("overriding PACKAGE_ARCH from %s to %s" % (pkg_arch, mach_arch))
+-                        bb.data.setVar('PACKAGE_ARCH', "${MACHINE_ARCH}", d)
+-                        bb.data.setVar('MULTIMACH_ARCH', mach_arch, d)
+-                        return
++    if override != '0' and is_machine_specific(d):
++        bb.data.setVar('PACKAGE_ARCH', "${MACHINE_ARCH}", d)
++        bb.data.setVar('MULTIMACH_ARCH', mach_arch, d)
++        return
+ 
+     multiarch = pkg_arch
+ 
+diff --git a/classes/utils.bbclass b/classes/utils.bbclass
+index 7740ea3..4840c4f 100644
+--- a/classes/utils.bbclass
++++ b/classes/utils.bbclass
+@@ -38,6 +38,24 @@ def oe_filter(f, str, d):
+ def oe_filter_out(f, str, d):
+     return oe.utils.str_filter_out(f, str, d)
+ 
++def machine_paths(d):
++    """List any existing machine specific filespath directories"""
++    machine = d.getVar("MACHINE", True)
++    filespathpkg = d.getVar("FILESPATHPKG", True).split(":")
++    for basepath in d.getVar("FILESPATHBASE", True).split(":"):
++        for pkgpath in filespathpkg:
++            machinepath = os.path.join(basepath, pkgpath, machine)
++            if os.path.isdir(machinepath):
++                yield machinepath
++
++def is_machine_specific(d):
++    """Determine whether the current recipe is machine specific"""
++    machinepaths = set(machine_paths(d))
++    urldatadict = bb.fetch.init(d.getVar("SRC_URI", True).split(), d, True)
++    for urldata in (urldata for urldata in urldatadict.itervalues()
++                    if urldata.type == "file"):
++        if any(urldata.path.startswith(mp + "/") for mp in machinepaths):
++            return True
+ 
+ def subprocess_setup():
+    import signal
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+1.7.2.1.66.g0d0ba
+
 
 
