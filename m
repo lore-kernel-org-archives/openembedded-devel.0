@@ -1,48 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Om12h-0005y3-0Q
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Om1VH-00071H-1G
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 11:04:11 +0200
-Received: by fxm6 with SMTP id 6so899578fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 02:03:51 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=MbEcaNC9yl4FhZ8SdaCAcBSs3e2Z/ZAjcMTbxxUt/ZU=;
-	b=nzsMhEkDcrdbKXzyaX7pcpdNuN/7T2yeBwIfR5Tgw2ohNK+ndpPx9Uh4/cEWuu54ac
-	KkPlLn8+eGOzF3KNbRbUAYLwinrU2MEpcnrNNMKIzStxow58h2KmJFwqPrmZxrreGIQa
-	ro1S2jPeB2YubH7bgGGW/ZMWA+Q6rtyZ1vQns=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=IHI8O50AFJpUDoiMak06Pm5vAgJbKym2JOMFrVtAjCwTn45Sj/VpXbkiXqmMwFr+Sb
-	oZoGxmejnMlgDFMHq7YVXmgE9gOjr+dsTAZySPGJJ6z13+bDuMrFh8Y+hVUfboWt/jFb
-	YxrpVahu8n7Ay0+3IQAtsPMHcblPfnWjUbdbA=
-Received: by 10.223.111.137 with SMTP id s9mr8959512fap.30.1282208630926;
-	Thu, 19 Aug 2010 02:03:50 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id u8sm572446fah.36.2010.08.19.02.03.50
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Aug 2010 02:03:50 -0700 (PDT)
-Date: Thu, 19 Aug 2010 11:04:13 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100819090412.GJ11569@jama>
-References: <AANLkTinW6EWy5rWVHmQoCc_BsC=2XDdnoXWSgnh73Cvn@mail.gmail.com>
+	Thu, 19 Aug 2010 11:33:43 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1Om1ag-0003Q9-8I
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 19 Aug 2010 11:39:18 +0200
+Message-ID: <4C6CFA65.3000604@kernelconcepts.de>
+Date: Thu, 19 Aug 2010 11:33:25 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-In-Reply-To: <AANLkTinW6EWy5rWVHmQoCc_BsC=2XDdnoXWSgnh73Cvn@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
+In-Reply-To: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: etk is in obsolete but there are recipes which depend on it
+Subject: Re: OE stable, testing, dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,44 +39,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 09:04:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Aug 2010 09:33:44 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Aug 18, 2010 at 01:52:45PM -0700, Khem Raj wrote:
-> Hi
-> 
-> This commit below moved etk to obsolete
-> 
-> commit bd75858d8e523dfbed244bf4046b5ce01eeee690
-> Author: Martin Jansa <Martin.Jansa@gmail.com>
-> Date:   Fri Mar 19 18:14:59 2010 +0100
-> 
->     efl: move epsilon/etk to obsolete, because they're not supported
-> with newer ecore anymore
-> 
->     Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
-> 
-> 
-> However there are recipes which still depend on this
-> 
-> e17/e17edje-player_svn.bb
-> e17/edje-editor_svn.bb
-> comic-reader/comic-reader_svn.bb
-> e17/exhibit_svn.bb
-> efl1/eflpp_svn.bb
-> efl1/evolve_svn.bb
-> openmoko-projects/om-locations_git.bb
-> openmoko-projects/diversity-radar_svn.bb
-> openmoko-projects/assassin_svn.bb
-> 
-> should they also find their way into obsolete ? or is there a new
-> replacement package they should depend on
+Hi,
 
-cleaned + few more
+Cliff Brake schrieb:
+>> So something like Debian's stable, testing and unstable[1]?
+> 
+> That sounds good to me -- so how about org.openembedded.dev and
+> org.openembedded.testing branches?
 
-Regards,
+great to see this finally happen, I remember we discussed this years ago.
+
+> I'll plan to start doing a clean build of dev every Monday for the
+> Beagleboard, and then merge to testing once it builds.  Initial
+> targets:
+> 
+> Angstrom Distro
+> beagleboard/beagleboard-linuxtag2010-demo-image
+> x86/minimal-image
+
+I would start to make use of it right now. Starting with builds for armv6 and
+armv4t. I would use a different distribution (minimal maybe) for one of the
+builds at least to see how this behaves.
+
+> My workstation runs a 64-bit OS, so that is probably worst case
+> (compared to i686).
+
+Did you ever build on a PowerPC? :-)
+
+Greetings
+
+Florian
+
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
 
 
