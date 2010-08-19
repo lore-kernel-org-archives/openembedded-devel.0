@@ -1,51 +1,44 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Om4Ev-00048o-GO
+	(envelope-from <vjensen@gmx.de>) id 1Om4P8-0002Xn-Sx
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 14:29:15 +0200
-Received: by fxm6 with SMTP id 6so1002109fxm.6
+	Thu, 19 Aug 2010 14:39:38 +0200
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 5A10A323
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 05:28:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=8756H5mnhj26vPrBLkmmuvYfAV9JVdWKm70xrgSQVE0=;
-	b=wK6nzkG+XCn75OeFB3ZEDwZdoJUvXxdEZksz7h5VyJIY2ZuEZ1vcb8JgeRp3sKnmKk
-	0PJ4oq/92X0z7gaO4+9Z2o9ige2lDysU9y+24WD57wq/2aUcyEDtOQoF97bniLDWIKkQ
-	HHWTTlguWU5+izT5eDcAOfrQNH8R0lp5wsnDM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=EEhdE+rCyM71OS1eWYLvvI1BunIYquhMhqSM5wdquPuF4lKqwtJs4w7tsMpvVT+N/c
-	xRccnctBfxQWp0T/EUJ+t21osK3De5bq81dHhv7Mq+lGxyWb8gV4gQOaJIEhOxUPpxAz
-	XwLlJ9fDohlOhOLOJQwO1CUVjSNXzZ12MM2xY=
-Received: by 10.223.116.3 with SMTP id k3mr5878867faq.81.1282220921180;
-	Thu, 19 Aug 2010 05:28:41 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id t6sm637975faa.27.2010.08.19.05.28.40
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Aug 2010 05:28:40 -0700 (PDT)
-Date: Thu, 19 Aug 2010 14:29:03 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	Thu, 19 Aug 2010 08:39:07 -0400 (EDT)
+Received: from frontend2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Thu, 19 Aug 2010 08:39:07 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=LrwF/eUxXb9FeCOxZg2G21CnhTY=;
+	b=FtVVdGbCy4r3noW9r/lucs4zsCiYrK8lAthbJaHy4Q09L7BuwmdtaU7rKIw/D1V2Qyfj+sBPGfUnnFPh6SIOaDwOxzJgNZe4cWHbTpWo+jD/y96H1/o3q7mxTCkcjx+zX1L8llR9fGs7EA90s7QL3kkDgBXDHlVY1zXSN1xJs8o=
+X-Sasl-enc: YR6WU25xL+JcYJF5FiyohqfB/CIFx/If+9y+9X9XlKtF 1282221546
+Received: from [192.168.1.34] (hnvr-4d07974b.pool.mediaWays.net [77.7.151.75])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id C9EDB5E6906
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 19 Aug 2010 08:39:06 -0400 (EDT)
+Date: Thu, 19 Aug 2010 14:40:44 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100819122903.GM11569@jama>
-References: <4C624772.8000607@nedap.com>
-	<20100811072548.GB7282@mi.fu-berlin.de>
-	<20100819105518.GL11569@jama>
-	<20100819121301.GA21426@mi.fu-berlin.de>
+In-Reply-To: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
+Message-ID: <alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-In-Reply-To: <20100819121301.GA21426@mi.fu-berlin.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: problem building openjdk-6
+Subject: Re: orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,40 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 12:29:15 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 19 Aug 2010 12:39:38 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Thu, Aug 19, 2010 at 02:13:01PM +0200, Henning Heinold wrote:
-> On Thu, Aug 19, 2010 at 12:55:18PM +0200, Martin Jansa wrote:
-> > Hi,
-> > 
-> > did you resolve it somehow? I still have the same issue on 2 hosts, 2
-> > different DISTROs and I didn't find any empty .jar or something.
-> > 
-> > Regards,
-> > 
-> > -- 
-> > Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
-> 
-> Hi,
-> 
-> not the jars are empty, some classes inside the jar. Unfornatly I will
-> not have the time to fix this before Sept. 13
-> 
-> So rebuild packages where classes inside the jars have 0 Bytes.
-> 
-> Bye Henning
+On Sun, 15 Aug 2010, Frans Meulenbroeks wrote:
 
-Hi,
+> I've made a list of patch files in recipes (prefixed with file://) and
+> compared it with the list of patch files as appear on disk.
+> Below is the list of 645 files that do not show up in any recipe and
+> as such can be considered as orphaned.
+> Proposal is to remove these files after double checking that they are
+> indeed not used.
+>
+> Do people agree with this? If so can I have an ack?
+>
+> And do we want to have a commit for every file (makes it easy to
+> revert an error) or a big commit with all removals?
+> (removals per dir are also possible but that process is more difficult
+> to automate and hence not my preferred solution.
+>
+> Your opinion is appreciated.
+>
+> Frans
 
-found better fix and pushed it :).
+Hello Frans,
 
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=a1f89a780e9900c168c165e4120cf13c21de6c0f
+how did you create that list?  As I see it, there must be an error in the 
+analysis somewhere:
 
-Regards,
+> htmldoc paths_1.8.27.patch
+
+
+vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ fgrep -C 1 paths_1.8.27.patch *
+htmldoc_1.8.27.bb-SRC_URI = "http://..../htmldoc-${PV}-source.tar.bz2 \
+htmldoc_1.8.27.bb:file://paths_1.8.27.patch"
+htmldoc_1.8.27.bb-
+--
+htmldoc-gui_1.8.27.bb-SRC_URI = "http://..../${PV}/htmldoc-${PV}-source.tar.bz2 \
+htmldoc-gui_1.8.27.bb:file://paths_1.8.27.patch"
+htmldoc-gui_1.8.27.bb-
+--
+htmldoc-native_1.8.27.bb-SRC_URI = "http://.../htmldoc-${PV}-source.tar.bz2 \
+htmldoc-native_1.8.27.bb:file://paths_1.8.27.patch"
+htmldoc-native_1.8.27.bb-
+vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ find . -name paths_1.8.27.patch
+./files/paths_1.8.27.patch
+vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$
+
+
+Best regards,
+    Vitus
 
 -- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
