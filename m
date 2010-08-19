@@ -1,36 +1,31 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sean@chumby.com>) id 1OmAgB-0007Wf-9s
+	(envelope-from <jkridner@beagleboard.org>) id 1OmBQ9-000521-5p
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 21:21:36 +0200
-Received: by pxi11 with SMTP id 11so890731pxi.6
+	Thu, 19 Aug 2010 22:09:06 +0200
+Received: by qwd7 with SMTP id 7so479292qwd.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 12:21:14 -0700 (PDT)
-Received: by 10.142.83.12 with SMTP id g12mr164139wfb.173.1282245674006;
-	Thu, 19 Aug 2010 12:21:14 -0700 (PDT)
-Received: from [172.22.1.136] (ip65-44-204-2.z204-44-65.customer.algx.net
-	[65.44.204.2])
-	by mx.google.com with ESMTPS id 33sm2113398wfg.21.2010.08.19.12.21.11
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 19 Aug 2010 12:21:12 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1081)
-From: Sean Cross <sean@chumby.com>
-In-Reply-To: <i4iq60$g6i$1@dough.gmane.org>
-Date: Thu, 19 Aug 2010 12:21:09 -0700
-Message-Id: <B49DA616-CD60-4E6E-A141-C3637BA9EB24@chumby.com>
-References: <7FC9418E-5EF5-4750-BFD7-DB7E43B38513@chumby.com>
-	<i4iq60$g6i$1@dough.gmane.org>
+	Thu, 19 Aug 2010 13:08:43 -0700 (PDT)
+Received: by 10.229.117.136 with SMTP id r8mr11128qcq.201.1282248523789;
+	Thu, 19 Aug 2010 13:08:43 -0700 (PDT)
+Received: from localhost.localdomain
+	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
+	by mx.google.com with ESMTPS id l13sm1957068qck.31.2010.08.19.13.08.42
+	(version=SSLv3 cipher=RC4-MD5); Thu, 19 Aug 2010 13:08:42 -0700 (PDT)
+From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: sean@chumby.com
+Date: Thu, 19 Aug 2010 15:08:41 -0500
+Message-Id: <1282248521-32053-1-git-send-email-jkridner@beagleboard.org>
+X-Mailer: git-send-email 1.5.6.4
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] Add chumby falconwing kernel recipe
+Subject: [PATCH] base-files: beagleboard: profile: use nano
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,42 +39,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 19:21:36 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 19 Aug 2010 20:09:06 -0000
 
+If nano is available and EDITOR isn't otherwise set, then use it.
+Advanced users who would prefer vi will know how to set EDITOR anyway.
+I can clearly see myself being frustrated typing 'export EDITOR=vi'
+every time I start a BeagleBoard test ramdisk image, but better me have
+that than to try to explain to someone fresh how to use vi.
 
-On Aug 19, 2010, at 1:32 AM, Koen Kooi wrote:
+Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
+---
+ recipes/base-files/base-files/beagleboard/profile |   41 +++++++++++++++++++++
+ 1 files changed, 41 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/base-files/base-files/beagleboard/profile
 
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->=20
->=20
-> Can't this me merged into the .26.28 kernel recipe?
->=20
-> On 19-08-10 01:03, Sean Cross wrote:
->>=20
->> Signed-off-by: Sean Cross <sean@chumby.com>
->> ---
->> recipes/linux/linux-chumby-falconwing.bb        |   14 +
->> recipes/linux/linux-chumby-falconwing/defconfig | 1987 =
-+++++++++++++++++++++++
->> 2 files changed, 2001 insertions(+), 0 deletions(-)
->> create mode 100644 recipes/linux/linux-chumby-falconwing.bb
->> create mode 100644 recipes/linux/linux-chumby-falconwing/defconfig
-
-I can do that, but the resulting patch is 28 megabytes. I think that's a =
-bit big.
-
-It's Freescale's kernel patch, which supports all of their processors, =
-not just the i.MX233.  My guess is that nobody's tried to get these =
-patches into the kernel upstream.
-
-The resulting patch I get is mostly an additive patch, as I count =
-800,000 added lines in the patch, and 1200 removed lines.
-
-Which would you prefer?  Putting it in 2.6.28, or keeping it as a =
-separate build?
+diff --git a/recipes/base-files/base-files/beagleboard/profile b/recipes/base-files/base-files/beagleboard/profile
+new file mode 100644
+index 0000000..7b1cf52
+--- /dev/null
++++ b/recipes/base-files/base-files/beagleboard/profile
+@@ -0,0 +1,41 @@
++# /etc/profile: system-wide .profile file for the Bourne shell (sh(1))
++# and Bourne compatible shells (bash(1), ksh(1), ash(1), ...).
++
++PATH="/usr/local/bin:/usr/bin:/bin"
++# EDITOR needed for packages like cron
++if [ "$EDITOR" ]; then
++	if [ -x /usr/bin/nano ]; then
++		EDITOR="/usr/bin/nano"
++	else
++		EDITOR="/bin/vi"
++	fi
++fi
++test -z "$TERM" && TERM="vt100"	# Basic terminal capab. For screen etc.
++
++if [ ! -e /etc/localtime -a ! -e /etc/TZ ]; then
++	TZ="UTC"		# Time Zone. Look at http://theory.uwinnipeg.ca/gnu/glibc/libc_303.html 
++				# for an explanation of how to set this to your local timezone.
++	export TZ
++fi
++
++if [ "`id -u`" -eq 0 ]; then
++   PATH=$PATH:/usr/local/sbin:/usr/sbin:/sbin
++fi
++if [ "$PS1" ]; then
++# works for bash and ash (no other shells known to be in use here)
++   PS1='\u@\h:\w\$ '
++fi
++
++if [ -d /etc/profile.d ]; then
++  for i in /etc/profile.d/*.sh; do
++    if [ -r $i ]; then
++      . $i
++    fi
++  done
++  unset i
++fi
++
++export PATH PS1 OPIEDIR QPEDIR QTDIR EDITOR TERM
++
++umask 022
++
+-- 
+1.5.6.4
 
 
 
