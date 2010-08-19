@@ -1,46 +1,45 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1Olz7q-0000zp-9F
+	(envelope-from <coolaj86@gmail.com>) id 1OlzJ2-0000Lq-CB
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 19 Aug 2010 09:01:22 +0200
-Received: by fxm6 with SMTP id 6so854819fxm.6
+	Thu, 19 Aug 2010 09:12:57 +0200
+Received: by pxi11 with SMTP id 11so587620pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 00:01:02 -0700 (PDT)
+	Thu, 19 Aug 2010 00:12:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=l39qcRrjFsjAJlS/bSGqzbM9edWTzzBJftkzR6nRVpY=;
-	b=UHF2q4ua+UXYHz2HOL57wJzW2h4iGQYdTJ6jZmBJ6SoUtx00auW4LTrKc++l0xKQ83
-	h9zsNm7cFvAPgn/d0vF8whQ2kk8C/kDqS6wceBJC5LwctDG6q9KtG0Yq5Z7r1zgsdNAa
-	M7lnteXMZxxGCEThiIE6lcGNDW9jPY6dUtNS4=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=VtY2JYG1RTv0HsX1TGhCZg51Y5CY61umBdZTar0YcJE=;
+	b=kFElGTWGbdooIGba+oDvqSecpsSh1hAV8xzYJrg009LrrAgNYSJ4Lx0ZusFKAKt65b
+	M6+ewmrNiR5FrP/b6qWF2pTQGcNNNWJ8Bt+02RyOAoRSwBVFE1m3kkx+SulWswLisl22
+	JyAoHWBE92IuG1wyJl38/erCsuA3X1gJa6ucA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=sVSbn5ByrLUAZBXVCYIrK6ug+JC4m7S4aEx9hAlUHNreXEEk3meUG2AhPr10AmZfVQ
-	q2Wl5WTRgOkt+cF9tzdHxTz405Ctfzxjme2Tu8XVu/JjmvVteO34hREri7GdTkpzscL6
-	z7piujaJdbML4HpSyCcfFEW6jpF6gX0aA1Y1E=
-Received: by 10.223.122.6 with SMTP id j6mr8768105far.78.1282201260173; Thu,
-	19 Aug 2010 00:01:00 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.125.209 with HTTP; Thu, 19 Aug 2010 00:00:40 -0700 (PDT)
-In-Reply-To: <AANLkTikW7eaRS4Ov0n9eT+_0qgU1E=8Q_3+P2SRN3eRo@mail.gmail.com>
-References: <1282198749-25911-1-git-send-email-coolaj86@gmail.com>
-	<AANLkTin1LNj80zSFxs81euO+0gw2bEA-JCpkx8s04FLh@mail.gmail.com>
-	<AANLkTikW7eaRS4Ov0n9eT+_0qgU1E=8Q_3+P2SRN3eRo@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=bKGfdA+Sy6AT3zVJZXqudyHXc7bnMzudlzqfPzPo/k8Is9F8AMVx3aJVNM53cGNJEE
+	AMRH+4kxg7nVga/U+0+CSPUOztb75BtUPgW7QQKRxtINXZprFj/4D94T8kd342/XQmHF
+	uVHgRrvXXqyrDkrc5QQKJsUTLjSZyxvvcFfmc=
+Received: by 10.142.147.7 with SMTP id u7mr8007269wfd.218.1282198101542;
+	Wed, 18 Aug 2010 23:08:21 -0700 (PDT)
+Received: from localhost.localdomain ([76.8.213.37])
+	by mx.google.com with ESMTPS id n2sm1282266wfl.13.2010.08.18.23.08.19
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 18 Aug 2010 23:08:20 -0700 (PDT)
 From: AJ ONeal <coolaj86@gmail.com>
-Date: Thu, 19 Aug 2010 01:00:40 -0600
-Message-ID: <AANLkTik8Qtn7YiVNcXthaPD2Eac-TaM3c-D+-hEa0RaC@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
+To: "openembedded-devel" <openembedded-devel@lists.openembedded.org>,
+	"General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>
+Date: Thu, 19 Aug 2010 00:07:48 -0600
+Message-Id: <1282198068-25415-1-git-send-email-coolaj86@gmail.com>
+X-Mailer: git-send-email 1.6.0.4
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] removed duplicate node recipe
+Subject: [PATCH] added a .bb for node.js
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,12 +53,172 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 19 Aug 2010 07:01:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 19 Aug 2010 07:12:57 -0000
 
-the e-mail entitled
+---
+ recipes/node/files/libev-arm-cross.patch |   45 ++++++++++++++++++++++++++++++
+ recipes/node/files/node-arm-cross.patch  |   31 ++++++++++++++++++++
+ recipes/node/node_0.1.104.bb             |   28 ++++++++++++++++++
+ recipes/node/node_v0.1.104.bb            |   23 +++++++++++++++
+ 4 files changed, 127 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/node/files/libev-arm-cross.patch
+ create mode 100644 recipes/node/files/node-arm-cross.patch
+ create mode 100644 recipes/node/node_0.1.104.bb
+ create mode 100644 recipes/node/node_v0.1.104.bb
 
-[patch] added a .bb for node.js
+diff --git a/recipes/node/files/libev-arm-cross.patch b/recipes/node/files/libev-arm-cross.patch
+new file mode 100644
+index 0000000..340dd98
+--- /dev/null
++++ b/recipes/node/files/libev-arm-cross.patch
+@@ -0,0 +1,45 @@
++diff --git node-v0.1.104/deps/libev/wscript.orig node-v0.1.104/deps/libev/wscript
++index 19e7bb2..a62f418 100644
++--- node-v0.1.104/deps/libev/wscript.orig
+++++ node-v0.1.104/deps/libev/wscript
++@@ -40,20 +40,27 @@ def configure(conf):
++   if conf.check_cc(header_name="sys/eventfd.h"):
++     conf.check_cc(header_name="sys/eventfd.h", function_name="eventfd")
++ 
+++  # TODO find a way to determine this from the environment
+++  CROSS = True
+++  TARGET_OS = "linux"
++ 
++-  code = """
++-      #include <syscall.h>
++-      #include <time.h>
++-      #include <stdio.h>
++-
++-      int main() {
++-          struct timespec ts; 
++-          int status = syscall(SYS_clock_gettime, CLOCK_REALTIME, &ts);
++-          return 0;
++-      }
++-  """
++-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
++-                msg="Checking for SYS_clock_gettime")
+++  if CROSS:
+++    if TARGET_OS == 'linux':
+++      conf.define("HAVE_CLOCK_SYSCALL", 1)
+++  else:
+++    code = """
+++        #include <syscall.h>
+++        #include <time.h>
+++        #include <stdio.h>
+++
+++        int main() {
+++            struct timespec ts; 
+++            int status = syscall(SYS_clock_gettime, CLOCK_REALTIME, &ts);
+++            return 0;
+++        }
+++    """
+++    conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
+++                  msg="Checking for SYS_clock_gettime")
++ 
++   have_librt = conf.check(lib='rt', uselib_store='RT')
++   if have_librt:
+diff --git a/recipes/node/files/node-arm-cross.patch b/recipes/node/files/node-arm-cross.patch
+new file mode 100644
+index 0000000..8ee6c18
+--- /dev/null
++++ b/recipes/node/files/node-arm-cross.patch
+@@ -0,0 +1,31 @@
++diff --git node-v0.1.104/wscript.orig node-v0.1.104/wscript
++index ba60514..d6a54fe 100644
++--- node-v0.1.104/wscript.orig
+++++ node-v0.1.104/wscript
++@@ -313,17 +313,25 @@ def v8_cmd(bld, variant):
++   # cannot see symbols in the executable which are hidden, even if the
++   # executable is statically linked together...
++ 
+++  HOST_CPU = 'not-arm' # TODO probe for this
+++  snapshot = 'snapshot=on'
+++
++   # XXX Remove this when v8 defaults x86_64 to native builds
++   arch = ""
++   if bld.env['DEST_CPU'] == 'x86_64':
++     arch = "arch=x64"
+++  elif bld.env['DEST_CPU'] == 'arm':
+++    arch = "arch=arm"
+++
+++  if bld.env['DEST_CPU'] != HOST_CPU:
+++    snapshot = ""
++ 
++   if variant == "default":
++     mode = "release"
++   else:
++     mode = "debug"
++ 
++-  cmd_R = 'python "%s" -j %d -C "%s" -Y "%s" visibility=default mode=%s %s library=static snapshot=on'
+++  cmd_R = 'python "%s" -j %d -C "%s" -Y "%s" visibility=default mode=%s %s library=static ' + snapshot
++ 
++   cmd = cmd_R % ( scons
++                 , Options.options.jobs
+diff --git a/recipes/node/node_0.1.104.bb b/recipes/node/node_0.1.104.bb
+new file mode 100644
+index 0000000..a99eaff
+--- /dev/null
++++ b/recipes/node/node_0.1.104.bb
+@@ -0,0 +1,28 @@
++DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
++PR = "r0"
++DEPENDS = "openssl"
++SRC_URI = " \
++http://nodejs.org/dist/node-v${PV}.tar.gz \
++file://libev-arm-cross.patch;apply=yes \
++file://node-arm-cross.patch;apply=yes \
++"
++SRC_URI[md5sum] = "907fa1e0a2f1f0c3df5efc97fd05a7d2"
++SRC_URI[sha256sum] = "a1c776f44bc07305dc0e56df17cc3260eaafa0394c3b06c27448ad85bec272df"
++S = "${WORKDIR}/node-v${PV}"
++do_configure () {
++export DEST_CPU=arm
++./configure
++# skip complaints about 'config.log'
++cat /dev/null > ${S}/build/config.log
++}
++do_qa_configure () {
++}
++do_compile () {
++export DEST_CPU=arm
++make
++}
++do_install () {
++install -d ${D}${bindir}/
++install -m 0755 ${S}/node ${D}${bindir}/
++}
++FILES_${PN} = "${bindir}/node"
+diff --git a/recipes/node/node_v0.1.104.bb b/recipes/node/node_v0.1.104.bb
+new file mode 100644
+index 0000000..368b8fb
+--- /dev/null
++++ b/recipes/node/node_v0.1.104.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
++PR = "r0"
++DEPENDS = "openssl"
++SRC_URI = " \
++http://nodejs.org/dist/node-v${PV}.tar.gz \
++"
++#libev-cross.patch
++#node-cross.patch
++SRC_URI[md5sum] = "907fa1e0a2f1f0c3df5efc97fd05a7d2"
++SRC_URI[sha256sum] = "a1c776f44bc07305dc0e56df17cc3260eaafa0394c3b06c27448ad85bec272df"
++S = "${WORKDIR}/node-v${PV}"
++do_configure () {
++./configure
++}
++do_compile () {
++export DEST_CPU=arm
++make
++}
++do_install () {
++install -d ${D}${bindir}/
++install -m 0755 ${S}/node ${D}${bindir}/
++}
++FILES_${PN} = "${bindir}/node"
+-- 
+1.6.0.4
 
-is is the correct way to add a new recipe?
+
 
