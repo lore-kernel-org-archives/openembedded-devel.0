@@ -1,16 +1,16 @@
 Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1OmP0n-0002gY-Vt
+	(envelope-from <jaap.dejong@nedap.com>) id 1OmR72-0002yw-Pw
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 12:39:50 +0200
+	Fri, 20 Aug 2010 14:54:25 +0200
 Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Fri, 20 Aug 2010 12:39:25 +0200
-X-TM-IMSS-Message-ID: <0f289d700000544c@nedap.com>
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 20 Aug 2010 14:53:52 +0200
+X-TM-IMSS-Message-ID: <0fa3b44d00005985@nedap.com>
 Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0f289d700000544c for
-	<jaap.dejong@nedap.com>; Fri, 20 Aug 2010 12:39:25 +0100
-Message-ID: <4C6E5B5C.7020905@nedap.com>
-Date: Fri, 20 Aug 2010 12:39:24 +0200
+	ESMTP (TREND IMSS SMTP Service 7.0) id 0fa3b44d00005985 for
+	<jaap.dejong@nedap.com>; Fri, 20 Aug 2010 14:53:52 +0100
+Message-ID: <4C6E7ADF.7040401@nedap.com>
+Date: Fri, 20 Aug 2010 14:53:51 +0200
 From: Jaap de Jong <jaap.dejong@nedap.com>
 User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
 	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
@@ -19,8 +19,8 @@ To: openembedded-devel@lists.openembedded.org
 References: <4C624772.8000607@nedap.com>	<20100811072548.GB7282@mi.fu-berlin.de>	<20100819105518.GL11569@jama>	<20100819121301.GA21426@mi.fu-berlin.de>	<20100819122903.GM11569@jama>	<4C6E29B3.8050801@nedap.com>	<20100820074410.GO11569@jama>
 	<4C6E354A.9040906@nedap.com> <4C6E5867.1030703@gmx.net>
 In-Reply-To: <4C6E5867.1030703@gmx.net>
-X-OriginalArrivalTime: 20 Aug 2010 10:39:25.0992 (UTC)
-	FILETIME=[F5C40A80:01CB4053]
+X-OriginalArrivalTime: 20 Aug 2010 12:53:52.0420 (UTC)
+	FILETIME=[BDBB4640:01CB4066]
 X-SA-Exim-Connect-IP: 87.249.123.12
 X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -44,16 +44,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 10:39:50 -0000
+X-List-Received-Date: Fri, 20 Aug 2010 12:54:26 -0000
 Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Hi Robert,
+The trouble is somewhere else:
 
-virtclass-native: I understand; but what about the changes in the link 
-from Martin (see below)
+ERROR: function do_compile failed
+ERROR: log data follows 
+(/media/OpenEmbedded/stable-2009/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/log.do_compile.20297)
+| NOTE: make -j5
+| Scanning dependencies of target count
+| Scanning dependencies of target LLVMHello
+| Scanning dependencies of target LLVMSystem
+| [  1%] [  1%] Building C object utils/count/CMakeFiles/count.dir/count.c.o
+| [  1%] Building CXX object 
+lib/Transforms/Hello/CMakeFiles/LLVMHello.dir/Hello.cpp.o
+| [  1%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Alarm.cpp.o
+| [  1%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Atomic.cpp.o
+| Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Disassembler.cpp.o
+| Linking C executable ../../bin/count
+| [  1%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/DynamicLibrary.cpp.o
+| [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Errno.cpp.o
+| [  2%] Built target count
+| [  2%] Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Host.cpp.o
+| [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/IncludeFile.cpp.o
+| [  2%] Building CXX object 
+lib/System/CMakeFiles/LLVMSystem.dir/Memory.cpp.o
+| [  2%] 
+/media/OpenEmbedded/stable-2009/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/llvm-2.7/lib/System/Memory.cpp: 
+In static member function 'static void 
+llvm::sys::Memory::InvalidateInstructionCache(const void*, size_t)':
+| 
+/media/OpenEmbedded/stable-2009/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/llvm-2.7/lib/System/Memory.cpp:67: 
+error: '__clear_cache' was not declared in this scope
+| [  3%] make[2]: *** 
+[lib/System/CMakeFiles/LLVMSystem.dir/Memory.cpp.o] Error 1
+| make[2]: *** Waiting for unfinished jobs....
+| Linking CXX shared module ../../LLVMHello.so
+| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Mutex.cpp.o
+| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Path.cpp.o
+| [  3%] Built target LLVMHello
+| make[1]: *** [lib/System/CMakeFiles/LLVMSystem.dir/all] Error 2
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
 
-Jaap
+
 
 On 08/20/2010 12:26 PM, Robert Schuster wrote:
 > Hi Jaap,
