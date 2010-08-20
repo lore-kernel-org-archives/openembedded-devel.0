@@ -1,32 +1,50 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1OmMTh-00084j-MX
+	(envelope-from <martin.jansa@gmail.com>) id 1OmMdr-0004ow-3n
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 09:57:38 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Fri, 20 Aug 2010 09:57:00 +0200
-X-TM-IMSS-Message-ID: <0e93e73f00004d36@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0e93e73f00004d36 for
-	<jaap.dejong@nedap.com>; Fri, 20 Aug 2010 09:57:04 +0100
-Message-ID: <4C6E354A.9040906@nedap.com>
-Date: Fri, 20 Aug 2010 09:56:58 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
-MIME-Version: 1.0
+	Fri, 20 Aug 2010 10:08:00 +0200
+Received: by fxm6 with SMTP id 6so1713024fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Aug 2010 01:07:35 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=TxtJg8laoRa/LLNN2tzjnB/VwAXKuG7iRxPquKIy15w=;
+	b=maPCgBaO/kbcFXKFwwk2/7iCyYJK9p+p+RyCFpwTtwZJ/FtUoiszea6FikzlzgBwJ3
+	bhssETfYXCOYO6qXc+szHRdXJ5cvM+vMVWhg8UN4iRCKDgZTIysRCU8dFX8GHlnMmDCI
+	eVWJTcdrCZInqVMYW2bgSWobgyHE0KyBdWqww=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=VHXJWbM6C9bmRdhCoOb/HGL2D1z+IL0ZF4yZNeNFnYIqtAkyYHHjZ99MYFehTUNmud
+	5LEcfPIdc4Hk/lj9WjRPOJmCogh8kch+Kpu8mTZGUb9o/Ebch64JSbW9HIE3G+tQYDIg
+	47vROaaU78dGs6flq5uCUqcECTUVBymMHsW4U=
+Received: by 10.223.125.196 with SMTP id z4mr728821far.80.1282291655131;
+	Fri, 20 Aug 2010 01:07:35 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id u8sm1083335fah.12.2010.08.20.01.07.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 20 Aug 2010 01:07:34 -0700 (PDT)
+Date: Fri, 20 Aug 2010 10:07:59 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C624772.8000607@nedap.com>	<20100811072548.GB7282@mi.fu-berlin.de>	<20100819105518.GL11569@jama>	<20100819121301.GA21426@mi.fu-berlin.de>	<20100819122903.GM11569@jama>
-	<4C6E29B3.8050801@nedap.com> <20100820074410.GO11569@jama>
-In-Reply-To: <20100820074410.GO11569@jama>
-X-OriginalArrivalTime: 20 Aug 2010 07:57:00.0204 (UTC)
-	FILETIME=[44D2CEC0:01CB403D]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+Message-ID: <20100820080759.GP11569@jama>
+References: <4C624772.8000607@nedap.com>
+	<20100811072548.GB7282@mi.fu-berlin.de>
+	<20100819105518.GL11569@jama>
+	<20100819121301.GA21426@mi.fu-berlin.de>
+	<20100819122903.GM11569@jama> <4C6E29B3.8050801@nedap.com>
+	<20100820074410.GO11569@jama> <4C6E354A.9040906@nedap.com>
+MIME-Version: 1.0
+In-Reply-To: <4C6E354A.9040906@nedap.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: problem building openjdk-6
@@ -43,39 +61,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 07:57:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Aug 2010 08:08:00 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Thanks Martin,
+On Fri, Aug 20, 2010 at 09:56:58AM +0200, Jaap de Jong wrote:
+> Thanks Martin,
+> 
+> it is translating right now...
+> do_configure for openjdk-6-jre-6b18-1.8-r10.6 passed, so this problem is 
+> solved!
+> 
+> The same (minor changes) applies to the stable/2009 branch?
 
-it is translating right now...
-do_configure for openjdk-6-jre-6b18-1.8-r10.6 passed, so this problem is 
-solved!
+You're welcome!
 
-The same (minor changes) applies to the stable/2009 branch?
+I'm not using/watching stable/2009 branch at all, so no idea, but
+openjdk built fine about month ago.
 
-Jaap
+check if this patch and other java related changes are already in stable/2009
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=fb352eddb0c1356a03cb304ae40d3d67077de521
 
-On 08/20/2010 09:44 AM, Martin Jansa wrote:
-> On Fri, Aug 20, 2010 at 09:07:31AM +0200, Jaap de Jong wrote:
->    
->> Hi Martin,
->>      
-> Hi Jaap,
->
->    
->> I've read about your fix on this matter and did a complete new rebuild
->> last night, but it still does not translate here.
->> Although the error is somewhere else.
->>      
-> Yes, I know..
->
-> try again with:
-> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=aa5fae1ad0f33ca478873ffd1a48fcaefff61b13
->
-> Regards,
->
->    
+Or wait for OE java gurus to test/fix it.
+
+Regards,
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
