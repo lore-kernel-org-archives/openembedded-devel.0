@@ -1,48 +1,36 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmL2W-00066d-1b
+	(envelope-from <jaap.dejong@nedap.com>) id 1OmLhh-0001Mi-Gb
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 08:25:22 +0200
-Received: by iwn2 with SMTP id 2so11586iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 19 Aug 2010 23:25:00 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=HrJ4bryIJCR/AGl1kbu98jHTK9uImp4PEZbDIzrBQj8=;
-	b=mbowywYELsgIotETeK3lCR7B25PL2LOqh2zNIyQbitzRQS6WRE0yfvUmhof+o11bYA
-	TyR+yQthg98yUQBaQTfgkzTXAqpevW3oLVcUwsqyyihzCKl8EKfDnUzpp4ObrLgDvTa3
-	Wxb88h7BA0f9la0EmIqAwnVmpbAMO7KekElzI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xJg7Aq5wc2YwxCjfpXCwxjEWZ9fpuS4L/jwiEN58uI2bRG9KFIDxYHOpOwU9Ul0H66
-	YT51aY/SHTUfY/Wu599W7cUlr6f03WTppgcpQ4ALJaycr7kY9t7OXSeTEr/wRX5svI3X
-	ig3EvOBGZ9uEH8ZNwe0Xe2weDb4SU0fKGA6fY=
+	Fri, 20 Aug 2010 09:07:56 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Fri, 20 Aug 2010 09:07:32 +0200
+X-TM-IMSS-Message-ID: <0e669f1500004be5@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 0e669f1500004be5 for
+	<jaap.dejong@nedap.com>; Fri, 20 Aug 2010 09:07:36 +0100
+Message-ID: <4C6E29B3.8050801@nedap.com>
+Date: Fri, 20 Aug 2010 09:07:31 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
 MIME-Version: 1.0
-Received: by 10.231.14.76 with SMTP id f12mr1145477iba.63.1282285500399; Thu,
-	19 Aug 2010 23:25:00 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Thu, 19 Aug 2010 23:25:00 -0700 (PDT)
-In-Reply-To: <20100819230246.GC26112@denix.org>
-References: <AANLkTi=haC49V6XnCQpBCY8ickT24PL1F0sKYoh8h6=J@mail.gmail.com>
-	<4C65BA04.9020908@mentor.com>
-	<AANLkTim0dxLN000-oqvGbeaBdLTs7P6=9ZVDBfGn4LuA@mail.gmail.com>
-	<AANLkTikAY38Wg01czaYa_o3_a2pXg2YcjAL8vbrEUYpL@mail.gmail.com>
-	<AANLkTik8ujUK5vczYTOuoDdjuEEzTuY7_ifxbBnePpN9@mail.gmail.com>
-	<20100819230246.GC26112@denix.org>
-Date: Fri, 20 Aug 2010 08:25:00 +0200
-Message-ID: <AANLkTik33d=iQg5bkkej26eq2BUVuLU8h4Z85WB1inqO@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C624772.8000607@nedap.com>	<20100811072548.GB7282@mi.fu-berlin.de>	<20100819105518.GL11569@jama>	<20100819121301.GA21426@mi.fu-berlin.de>
+	<20100819122903.GM11569@jama>
+In-Reply-To: <20100819122903.GM11569@jama>
+X-OriginalArrivalTime: 20 Aug 2010 07:07:32.0600 (UTC)
+	FILETIME=[5BFE5F80:01CB4036]
+X-SA-Exim-Connect-IP: 87.249.123.12
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: iputils fails to build due to missing sgmlspl
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: problem building openjdk-6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,35 +44,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 06:25:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 20 Aug 2010 07:07:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/8/20 Denys Dmytriyenko <denis@denix.org>:
-> On Sat, Aug 14, 2010 at 09:35:02AM -0600, AJ ONeal wrote:
->
->> I was mistaken. It didn't build iputils. I started over from scratch, built
->> everything up to iputils, and failed!
+Hi Martin,
+
+I've read about your fix on this matter and did a complete new rebuild 
+last night, but it still does not translate here.
+Although the error is somewhere else.
+
+    ///
+    | checking for a xalan2 jar...
+    /media/OpenEmbedded/unstable/tmp/sysroots/java/xalan2.jar
+    | checking for a xalan2 serializer jar... no
+    | configure: error: "A xalan2-serializer jar was not found."
+    NOTE: Task failed:
+    /media/OpenEmbedded/unstable/tmp/work/armv5te-angstrom-linux-gnueabi/openjdk-6-jre-6b18-1.8-r10.6/temp/log.do_configure.12290
+    ERROR: TaskFailed event exception, aborting
+    ERROR: Build of
+    /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/openjdk/openjdk-6_6b18-1.8.bb
+    do_configure failed
+    ERROR: Task 909
+    (/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/openjdk/openjdk-6_6b18-1.8.bb,
+    do_configure) failed
+    NOTE: Waiting for 2 active tasks to finish
+    NOTE: 1:
+    /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/mono/mono-mcs-intermediate_2.6.3.bb,
+    do_compile (9520)
+    NOTE: 2:
+    /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/busybox/busybox_1.13.2.bb,
+    do_package (14124)
+    NOTE: Waiting for 1 active tasks to finish
+    NOTE: 1:
+    /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/busybox/busybox_1.13.2.bb,
+    do_package (14124)
+    NOTE: Tasks Summary: Attempted 3363 tasks of which 0 didn't need to
+    be rerun and 1 failed.
+    ERROR:
+    '/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/openjdk/openjdk-6_6b18-1.8.bb'
+    failed
+
+
+Jaap
+
+
+On 08/19/2010 02:29 PM, Martin Jansa wrote:
+> On Thu, Aug 19, 2010 at 02:13:01PM +0200, Henning Heinold wrote:
+>    
+>> On Thu, Aug 19, 2010 at 12:55:18PM +0200, Martin Jansa wrote:
+>>      
+>>> Hi,
+>>>
+>>> did you resolve it somehow? I still have the same issue on 2 hosts, 2
+>>> different DISTROs and I didn't find any empty .jar or something.
+>>>
+>>> Regards,
+>>>
+>>> -- 
+>>> Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>>>        
+>> Hi,
 >>
-[...]
-
->> sudo-apt-get install sgmlspl
->> bitbake iputils
-
-That is a workaround which works because then you're using the native
-sgmlspl (which is probably not too desirable wrt reproducability on
-other systems).
+>> not the jars are empty, some classes inside the jar. Unfornatly I will
+>> not have the time to fix this before Sept. 13
 >>
->> now it appears to be running...
+>> So rebuild packages where classes inside the jars have 0 Bytes.
+>>
+>> Bye Henning
+>>      
+> Hi,
 >
-> BTW, I think it has just been fixed:
+> found better fix and pushed it :).
 >
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=4511027a40d9659d944ff2e02503d51536af92a6
-
-Yup. I bumped into the same issue (being unawara of this thread).
-sgmlspl-native did not export its executable, only a -dev pacakge
-(which might have sufficed at some point in time).
-I just let it stage all its files. After that for me iputils builds fine.
-
-Enjoy, Frans
-
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=a1f89a780e9900c168c165e4120cf13c21de6c0f
+>
+> Regards,
+>
+>    
 
