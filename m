@@ -1,36 +1,45 @@
-Received: from smtp3.nedap.com ([87.249.123.12] helo=smtp.nedap.com)
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jaap.dejong@nedap.com>) id 1OmR72-0002yw-Pw
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmREV-0006SO-LZ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 14:54:25 +0200
-Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
-	Microsoft SMTPSVC(6.0.3790.1830); Fri, 20 Aug 2010 14:53:52 +0200
-X-TM-IMSS-Message-ID: <0fa3b44d00005985@nedap.com>
-Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
-	ESMTP (TREND IMSS SMTP Service 7.0) id 0fa3b44d00005985 for
-	<jaap.dejong@nedap.com>; Fri, 20 Aug 2010 14:53:52 +0100
-Message-ID: <4C6E7ADF.7040401@nedap.com>
-Date: Fri, 20 Aug 2010 14:53:51 +0200
-From: Jaap de Jong <jaap.dejong@nedap.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
+	Fri, 20 Aug 2010 15:02:28 +0200
+Received: by gxk2 with SMTP id 2so1246392gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 20 Aug 2010 06:01:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=TildlNNNOF9m2P62v241cHYOj+Nup73zsfxgPli2uG8=;
+	b=c1v47Vxfd6+UzaxNK9I1hGXQniQWwzUz0ypPT37i9prXMghdSUjDemXPXDggVf++bh
+	nR05l70/NRTE0058XeAuNmgj0UL8MKj0rNANhRguEk8TbCTQ6g2D1KMzdYpfXNuesUkR
+	UYuL6BYunnXz9vPsFLtFqq5DmDLglHT918TRk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=U9auaQJyfyyeov/PwSz33O3m/f05JKoT0rmJL1p5jo7xreuHfKA0H7A8istwdKrnSd
+	yi0NVud2q4Tijue/MZst2RsGcH2pj5Y5s2rfQTMUC8rtw+pbILr0ZzmQiQnhLx/YceVK
+	HKxajDezGOtaqYcgjM97j7iENhAy71Rap+za8=
 MIME-Version: 1.0
+Received: by 10.150.96.8 with SMTP id t8mr1999961ybb.1.1282309300190; Fri, 20
+	Aug 2010 06:01:40 -0700 (PDT)
+Received: by 10.231.208.72 with HTTP; Fri, 20 Aug 2010 06:01:40 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
+	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
+Date: Fri, 20 Aug 2010 15:01:40 +0200
+Message-ID: <AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C624772.8000607@nedap.com>	<20100811072548.GB7282@mi.fu-berlin.de>	<20100819105518.GL11569@jama>	<20100819121301.GA21426@mi.fu-berlin.de>	<20100819122903.GM11569@jama>	<4C6E29B3.8050801@nedap.com>	<20100820074410.GO11569@jama>
-	<4C6E354A.9040906@nedap.com> <4C6E5867.1030703@gmx.net>
-In-Reply-To: <4C6E5867.1030703@gmx.net>
-X-OriginalArrivalTime: 20 Aug 2010 12:53:52.0420 (UTC)
-	FILETIME=[BDBB4640:01CB4066]
-X-SA-Exim-Connect-IP: 87.249.123.12
-X-SA-Exim-Mail-From: jaap.dejong@nedap.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: problem building openjdk-6
+Subject: Re: orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,121 +53,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 12:54:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 20 Aug 2010 13:02:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The trouble is somewhere else:
-
-ERROR: function do_compile failed
-ERROR: log data follows 
-(/media/OpenEmbedded/stable-2009/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/log.do_compile.20297)
-| NOTE: make -j5
-| Scanning dependencies of target count
-| Scanning dependencies of target LLVMHello
-| Scanning dependencies of target LLVMSystem
-| [  1%] [  1%] Building C object utils/count/CMakeFiles/count.dir/count.c.o
-| [  1%] Building CXX object 
-lib/Transforms/Hello/CMakeFiles/LLVMHello.dir/Hello.cpp.o
-| [  1%] Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/Alarm.cpp.o
-| [  1%] Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/Atomic.cpp.o
-| Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/Disassembler.cpp.o
-| Linking C executable ../../bin/count
-| [  1%] Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/DynamicLibrary.cpp.o
-| [  2%] Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/Errno.cpp.o
-| [  2%] Built target count
-| [  2%] Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Host.cpp.o
-| [  2%] Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/IncludeFile.cpp.o
-| [  2%] Building CXX object 
-lib/System/CMakeFiles/LLVMSystem.dir/Memory.cpp.o
-| [  2%] 
-/media/OpenEmbedded/stable-2009/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/llvm-2.7/lib/System/Memory.cpp: 
-In static member function 'static void 
-llvm::sys::Memory::InvalidateInstructionCache(const void*, size_t)':
-| 
-/media/OpenEmbedded/stable-2009/tmp/work/armv5te-angstrom-linux-gnueabi/llvm2.7-2.7-r8/llvm-2.7/lib/System/Memory.cpp:67: 
-error: '__clear_cache' was not declared in this scope
-| [  3%] make[2]: *** 
-[lib/System/CMakeFiles/LLVMSystem.dir/Memory.cpp.o] Error 1
-| make[2]: *** Waiting for unfinished jobs....
-| Linking CXX shared module ../../LLVMHello.so
-| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Mutex.cpp.o
-| Building CXX object lib/System/CMakeFiles/LLVMSystem.dir/Path.cpp.o
-| [  3%] Built target LLVMHello
-| make[1]: *** [lib/System/CMakeFiles/LLVMSystem.dir/all] Error 2
-| make: *** [all] Error 2
-| FATAL: oe_runmake failed
-
-
-
-On 08/20/2010 12:26 PM, Robert Schuster wrote:
-> Hi Jaap,
-> no the fix is not necessary since stable does not have the
-> virtclass-native stuff.
+2010/8/19 Vitus Jensen <vjensen@gmx.de>:
+> On Sun, 15 Aug 2010, Frans Meulenbroeks wrote:
 >
-> Apart from that adding the jamvm-native 1.5.4 recipe to stable would be
-> a good idea.
->
-> Regards
-> Robert
->
-> Am 20.08.2010 09:56, schrieb Jaap de Jong:
->    
->> Thanks Martin,
+>> I've made a list of patch files in recipes (prefixed with file://) and
+>> compared it with the list of patch files as appear on disk.
+>> Below is the list of 645 files that do not show up in any recipe and
+>> as such can be considered as orphaned.
+>> Proposal is to remove these files after double checking that they are
+>> indeed not used.
 >>
->> it is translating right now...
->> do_configure for openjdk-6-jre-6b18-1.8-r10.6 passed, so this problem
->> is solved!
+>> Do people agree with this? If so can I have an ack?
 >>
->> The same (minor changes) applies to the stable/2009 branch?
+>> And do we want to have a commit for every file (makes it easy to
+>> revert an error) or a big commit with all removals?
+>> (removals per dir are also possible but that process is more difficult
+>> to automate and hence not my preferred solution.
 >>
->> Jaap
+>> Your opinion is appreciated.
 >>
->> On 08/20/2010 09:44 AM, Martin Jansa wrote:
->>      
->>> On Fri, Aug 20, 2010 at 09:07:31AM +0200, Jaap de Jong wrote:
->>>
->>>        
->>>> Hi Martin,
->>>>
->>>>          
->>> Hi Jaap,
->>>
->>>
->>>        
->>>> I've read about your fix on this matter and did a complete new rebuild
->>>> last night, but it still does not translate here.
->>>> Although the error is somewhere else.
->>>>
->>>>          
->>> Yes, I know..
->>>
->>> try again with:
->>> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=aa5fae1ad0f33ca478873ffd1a48fcaefff61b13
->>>
->>>
->>> Regards,
->>>
->>>
->>>        
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>      
+>> Frans
 >
->    
+> Hello Frans,
+>
+> how did you create that list? =A0As I see it, there must be an error in t=
+he
+> analysis somewhere:
+
+The procedure is described above
+more explicit:
+something like
+grep -"file://.*patch" in recipes/*/* > file1
+find recipes | grep patch >file2
+
+in the editor change both file1 and file2 to whack off things like
+;apply=3Dyes and a few more things in file1, also discard the file://
+section and unify whitespace file layout of both file1 and file2
+becomes as listed above.
+then run diff file1 file2
+visually examine the differences (especially for things like
+file://x-${PV}.patch which of course do not match
+then anything that appears in file2 and not in file1 is what is in the
+list above
+
+>
+>> htmldoc paths_1.8.27.patch
 >
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->    
+> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ fgrep -C 1
+> paths_1.8.27.patch *
+> htmldoc_1.8.27.bb-SRC_URI =3D "http://..../htmldoc-${PV}-source.tar.bz2 \
+> htmldoc_1.8.27.bb:file://paths_1.8.27.patch"
+> htmldoc_1.8.27.bb-
+> --
+> htmldoc-gui_1.8.27.bb-SRC_URI =3D
+> "http://..../${PV}/htmldoc-${PV}-source.tar.bz2 \
+> htmldoc-gui_1.8.27.bb:file://paths_1.8.27.patch"
+> htmldoc-gui_1.8.27.bb-
+> --
+> htmldoc-native_1.8.27.bb-SRC_URI =3D "http://.../htmldoc-${PV}-source.tar=
+.bz2
+> \
+> htmldoc-native_1.8.27.bb:file://paths_1.8.27.patch"
+> htmldoc-native_1.8.27.bb-
+> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ find . -name
+> paths_1.8.27.patch
+> ./files/paths_1.8.27.patch
+> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$
+>
+
+I thought I made a mistake in the script, but after verification I have not=
+.
+The recipes you mention have been removed a few days ago
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De5287904a9d=
+ddc8ddc0f486d8526bc8cfda427b7
+
+It there any particular reason why you want to have both the 1.8 and
+1.9 versions in the archive?
+If so, we should revert the commit above (and then of course the patch
+file itself should not be removed either.
+
+Frans
+
 
