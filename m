@@ -1,44 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OmRzP-0005zr-Ee
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmSPl-0007fY-Vj
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 15:50:36 +0200
-Received: by wwe15 with SMTP id 15so674306wwe.24
+	Fri, 20 Aug 2010 16:17:52 +0200
+Received: by ewy7 with SMTP id 7so2138879ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 06:50:11 -0700 (PDT)
+	Fri, 20 Aug 2010 07:17:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=KuDnOb7KYXrGkRn/YcKBYN1DIGUqyG4xuzMX2Gnio6E=;
-	b=oBV4qluhnwqFomhZ9TXeXmyTjnUwy4l6w8wqLY+pwRqUSS7zpybDTYHDKoa9AU3cmF
-	GlxCRb3TQS/d3OpEkkAhb/909GXwUL4N0LbkL/YdX6qcwWps/k9s9od9Gb4Miwg+XaP2
-	Cn4pfNMkmM94pu0M3/KXXg3UNjmEqavSzi6/M=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=wjUGE84F0AWMVGMJlgljTd7TAHsodwqVFhOYtB7RXds=;
+	b=ZpORzTWEZT0xeqwn14Qwi0EOFK/JeyAVEAajiQ7kt63azwC4OVLtFbrYkLF5JMaRJN
+	SKgg6Z6OZklCmoJ8jVIl6kPzugEQU3AuQYfNQgdbXtdU+WwkM+gvz6C/T1k0z1LYejgd
+	yBm3+esKUcqt6NyXqEggmarcjsWspEwA8oSaQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=W5sJ7vuSupSQJ/QVgKGiA/ZwHQO+npUW7X3JHz5afYehlhjLYgkgevOeREcQkNT5CN
-	oXGObitiFj9O9TLG7vMT9wYl0V2EL29lcSeAvM/A3m0kwxAbZ4RdVW7CTs2Y4yblGaKg
-	QXdx6xHnD8OgKXjDRvHsOWXsRzPV0xJ7XGE1M=
-MIME-Version: 1.0
-Received: by 10.227.156.83 with SMTP id v19mr1289378wbw.67.1282312210930; Fri,
-	20 Aug 2010 06:50:10 -0700 (PDT)
-Received: by 10.227.69.82 with HTTP; Fri, 20 Aug 2010 06:50:10 -0700 (PDT)
-In-Reply-To: <A06367EE83B2214587BB5C9037AD244F1E35AB0561@34093-MBX-C14.mex07a.mlsrvr.com>
-References: <A06367EE83B2214587BB5C9037AD244F1E35AB0561@34093-MBX-C14.mex07a.mlsrvr.com>
-Date: Fri, 20 Aug 2010 15:50:10 +0200
-Message-ID: <AANLkTimO3XjDg1B4Jxqgb_NBfFvg2iKkCwr54-ygu1H7@mail.gmail.com>
-From: Martin Jansa <martin.jansa@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=prAop4zrGKtTAKdl/KSrcdLcQCD5QQmmsSpG1NRt7WESd081UBVpp0pzsX9LXxwJkw
+	Yvg7sZyBsds9jVv+1Cy0eQ3ttkFNuzHyVqilw6xDdZnHIFHpVHrdR6YxErIr9mUVKg1x
+	RcK8145KeP7ZhuGTEQPPS0WUyC7/3PRZI1zFE=
+Received: by 10.213.97.129 with SMTP id l1mr365217ebn.56.1282313849929;
+	Fri, 20 Aug 2010 07:17:29 -0700 (PDT)
+Received: from localhost.localdomain (atwork-193.r-212.178.107.atwork.nl
+	[212.178.107.193])
+	by mx.google.com with ESMTPS id z55sm4836608eeh.3.2010.08.20.07.17.28
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 20 Aug 2010 07:17:29 -0700 (PDT)
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+Date: Fri, 20 Aug 2010 16:19:37 +0200
+Message-Id: <1282313977-31805-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: configure error for xproto
+Subject: [PATCH] native.bbclass: add (re)definitions for TARGET_SYS and HOST_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,39 +52,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 13:50:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 20 Aug 2010 14:17:52 -0000
 
-On Thu, Aug 19, 2010 at 3:50 PM, David Peters <davidp@matrixpd.com> wrote:
-> I recently ran "sh oebb.sh update" and tried building packages for the am=
-3517-evm board. =A0I'm now getting the following error. =A0Any ideas what i=
-s causing this?
-> .
-> 614 configure:3097: checking whether the C compiler works
-> 615 configure:3119: arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtun=
-e=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thum=
-b -isystem/home/dapeters/angstrom-setup-scripts/build/tmp-angstrom_2008_1/s=
-ysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations=
- -frename-registers -fomit-frame-pointer -O2 -ggdb3 -isystem/home/dapeters/=
-angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-l=
-inux-gnueabi/usr/include -L/home/dapeters/angstrom-setup-scripts/build/tmp-=
-angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib -Wl,-rpath-l=
-ink,/home/dapeters/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroot=
-s/armv7a-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu conf=
-test.c =A0>&5
-> 616 Assembler messages:
-> 617 Fatal error: Invalid -march=3D option: `armv7-a'
+Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
 
-similar issue was reported today on IRC #oe
+The issue at hand was discovered by setting 
+TARGET_OS_local = "linux-gnuspe"
+in my local.conf file as I needed to build for ppc e500
+This caused configure of gmp-native to be called with
+--build=x86_64-linux --host=x86_64-linux --target=x86_64-linux-gnuspe
+which in turn caused configure to fail.
+The odd thing is that for a native recipe I would expect
+that build host and target gets the same args.
 
-did you rebuild from scratch ( TMPDIR removed ) after
-http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dff701435705b=
-6d0bb28a051e5e3c524b2badc834
+The configure line comes from autotools.bbclass 
+which says:
+CONFIGUREOPTS = " --build=${BUILD_SYS} \
+                  --host=${HOST_SYS} \
+                  --target=${TARGET_SYS} \
 
-sanity check should force you to remove it..
-but fahad_usman also had still old tmp/cross in PATH..
+Apparently HOST_SYS and TARGET_SYS are not identical for native recipes
+Peeking into native.bbclass learned that things like TARGET_PREFIX and
+HOST_PREFIX are redefined, but TARGET_SYS and HOST_SYS are not.
 
-Regards,
+This patch adds assignments to fix this.
+I have tested this by building the image I am working on 
+(which includes some low level stuff like kernel and u-boot, and 
+also requires that lots of native recipes are build)
+No problem was detected during that test.
+
+If TARGET_OS = "linux" this will not make any difference for you.
+If your TARGET_OS = "linux-gnuspe" like it is for me and your
+build system has "linux" as OS, a side effect of this change
+is that a rebuild is needed as the work dir will change
+from (in my case) x68_64-linux to x86_64-linux-gnuspe
+It might be that a full rebuild is needed in that case
+(haven't tested that case)
+
+Frans
+
+ classes/native.bbclass |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
+
+diff --git a/classes/native.bbclass b/classes/native.bbclass
+index 3437836..85c7cf1 100644
+--- a/classes/native.bbclass
++++ b/classes/native.bbclass
+@@ -23,6 +23,7 @@ TARGET_VENDOR = "${BUILD_VENDOR}"
+ TARGET_PREFIX = "${BUILD_PREFIX}"
+ TARGET_CC_ARCH = "${BUILD_CC_ARCH}"
+ TARGET_EXEEXT = "${BUILD_EXEEXT}"
++TARGET_SYS = "${BUILD_SYS}"
+ 
+ HOST_ARCH = "${BUILD_ARCH}"
+ HOST_OS = "${BUILD_OS}"
+@@ -30,6 +31,7 @@ HOST_VENDOR = "${BUILD_VENDOR}"
+ HOST_PREFIX = "${BUILD_PREFIX}"
+ HOST_CC_ARCH = "${BUILD_CC_ARCH}"
+ HOST_EXEEXT = "${BUILD_EXEEXT}"
++HOST_SYS = "${BUILD_SYS}"
+ 
+ CPPFLAGS = "${BUILD_CPPFLAGS}"
+ CFLAGS = "${BUILD_CFLAGS}"
+-- 
+1.7.0.4
+
 
 
