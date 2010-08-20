@@ -1,45 +1,44 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmREV-0006SO-LZ
+	(envelope-from <martin.jansa@gmail.com>) id 1OmRzP-0005zr-Ee
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 15:02:28 +0200
-Received: by gxk2 with SMTP id 2so1246392gxk.6
+	Fri, 20 Aug 2010 15:50:36 +0200
+Received: by wwe15 with SMTP id 15so674306wwe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 06:01:40 -0700 (PDT)
+	Fri, 20 Aug 2010 06:50:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=TildlNNNOF9m2P62v241cHYOj+Nup73zsfxgPli2uG8=;
-	b=c1v47Vxfd6+UzaxNK9I1hGXQniQWwzUz0ypPT37i9prXMghdSUjDemXPXDggVf++bh
-	nR05l70/NRTE0058XeAuNmgj0UL8MKj0rNANhRguEk8TbCTQ6g2D1KMzdYpfXNuesUkR
-	UYuL6BYunnXz9vPsFLtFqq5DmDLglHT918TRk=
+	bh=KuDnOb7KYXrGkRn/YcKBYN1DIGUqyG4xuzMX2Gnio6E=;
+	b=oBV4qluhnwqFomhZ9TXeXmyTjnUwy4l6w8wqLY+pwRqUSS7zpybDTYHDKoa9AU3cmF
+	GlxCRb3TQS/d3OpEkkAhb/909GXwUL4N0LbkL/YdX6qcwWps/k9s9od9Gb4Miwg+XaP2
+	Cn4pfNMkmM94pu0M3/KXXg3UNjmEqavSzi6/M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=U9auaQJyfyyeov/PwSz33O3m/f05JKoT0rmJL1p5jo7xreuHfKA0H7A8istwdKrnSd
-	yi0NVud2q4Tijue/MZst2RsGcH2pj5Y5s2rfQTMUC8rtw+pbILr0ZzmQiQnhLx/YceVK
-	HKxajDezGOtaqYcgjM97j7iENhAy71Rap+za8=
+	b=W5sJ7vuSupSQJ/QVgKGiA/ZwHQO+npUW7X3JHz5afYehlhjLYgkgevOeREcQkNT5CN
+	oXGObitiFj9O9TLG7vMT9wYl0V2EL29lcSeAvM/A3m0kwxAbZ4RdVW7CTs2Y4yblGaKg
+	QXdx6xHnD8OgKXjDRvHsOWXsRzPV0xJ7XGE1M=
 MIME-Version: 1.0
-Received: by 10.150.96.8 with SMTP id t8mr1999961ybb.1.1282309300190; Fri, 20
-	Aug 2010 06:01:40 -0700 (PDT)
-Received: by 10.231.208.72 with HTTP; Fri, 20 Aug 2010 06:01:40 -0700 (PDT)
-In-Reply-To: <alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
-	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
-Date: Fri, 20 Aug 2010 15:01:40 +0200
-Message-ID: <AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.227.156.83 with SMTP id v19mr1289378wbw.67.1282312210930; Fri,
+	20 Aug 2010 06:50:10 -0700 (PDT)
+Received: by 10.227.69.82 with HTTP; Fri, 20 Aug 2010 06:50:10 -0700 (PDT)
+In-Reply-To: <A06367EE83B2214587BB5C9037AD244F1E35AB0561@34093-MBX-C14.mex07a.mlsrvr.com>
+References: <A06367EE83B2214587BB5C9037AD244F1E35AB0561@34093-MBX-C14.mex07a.mlsrvr.com>
+Date: Fri, 20 Aug 2010 15:50:10 +0200
+Message-ID: <AANLkTimO3XjDg1B4Jxqgb_NBfFvg2iKkCwr54-ygu1H7@mail.gmail.com>
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: orphaned files
+Subject: Re: configure error for xproto
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,90 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 13:02:36 -0000
+X-List-Received-Date: Fri, 20 Aug 2010 13:50:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/8/19 Vitus Jensen <vjensen@gmx.de>:
-> On Sun, 15 Aug 2010, Frans Meulenbroeks wrote:
->
->> I've made a list of patch files in recipes (prefixed with file://) and
->> compared it with the list of patch files as appear on disk.
->> Below is the list of 645 files that do not show up in any recipe and
->> as such can be considered as orphaned.
->> Proposal is to remove these files after double checking that they are
->> indeed not used.
->>
->> Do people agree with this? If so can I have an ack?
->>
->> And do we want to have a commit for every file (makes it easy to
->> revert an error) or a big commit with all removals?
->> (removals per dir are also possible but that process is more difficult
->> to automate and hence not my preferred solution.
->>
->> Your opinion is appreciated.
->>
->> Frans
->
-> Hello Frans,
->
-> how did you create that list? =A0As I see it, there must be an error in t=
-he
-> analysis somewhere:
+On Thu, Aug 19, 2010 at 3:50 PM, David Peters <davidp@matrixpd.com> wrote:
+> I recently ran "sh oebb.sh update" and tried building packages for the am=
+3517-evm board. =A0I'm now getting the following error. =A0Any ideas what i=
+s causing this?
+> .
+> 614 configure:3097: checking whether the C compiler works
+> 615 configure:3119: arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtun=
+e=3Dcortex-a8 -mfpu=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thum=
+b -isystem/home/dapeters/angstrom-setup-scripts/build/tmp-angstrom_2008_1/s=
+ysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations=
+ -frename-registers -fomit-frame-pointer -O2 -ggdb3 -isystem/home/dapeters/=
+angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroots/armv7a-angstrom-l=
+inux-gnueabi/usr/include -L/home/dapeters/angstrom-setup-scripts/build/tmp-=
+angstrom_2008_1/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib -Wl,-rpath-l=
+ink,/home/dapeters/angstrom-setup-scripts/build/tmp-angstrom_2008_1/sysroot=
+s/armv7a-angstrom-linux-gnueabi/usr/lib -Wl,-O1 -Wl,--hash-style=3Dgnu conf=
+test.c =A0>&5
+> 616 Assembler messages:
+> 617 Fatal error: Invalid -march=3D option: `armv7-a'
 
-The procedure is described above
-more explicit:
-something like
-grep -"file://.*patch" in recipes/*/* > file1
-find recipes | grep patch >file2
+similar issue was reported today on IRC #oe
 
-in the editor change both file1 and file2 to whack off things like
-;apply=3Dyes and a few more things in file1, also discard the file://
-section and unify whitespace file layout of both file1 and file2
-becomes as listed above.
-then run diff file1 file2
-visually examine the differences (especially for things like
-file://x-${PV}.patch which of course do not match
-then anything that appears in file2 and not in file1 is what is in the
-list above
+did you rebuild from scratch ( TMPDIR removed ) after
+http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dff701435705b=
+6d0bb28a051e5e3c524b2badc834
 
->
->> htmldoc paths_1.8.27.patch
->
->
-> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ fgrep -C 1
-> paths_1.8.27.patch *
-> htmldoc_1.8.27.bb-SRC_URI =3D "http://..../htmldoc-${PV}-source.tar.bz2 \
-> htmldoc_1.8.27.bb:file://paths_1.8.27.patch"
-> htmldoc_1.8.27.bb-
-> --
-> htmldoc-gui_1.8.27.bb-SRC_URI =3D
-> "http://..../${PV}/htmldoc-${PV}-source.tar.bz2 \
-> htmldoc-gui_1.8.27.bb:file://paths_1.8.27.patch"
-> htmldoc-gui_1.8.27.bb-
-> --
-> htmldoc-native_1.8.27.bb-SRC_URI =3D "http://.../htmldoc-${PV}-source.tar=
-.bz2
-> \
-> htmldoc-native_1.8.27.bb:file://paths_1.8.27.patch"
-> htmldoc-native_1.8.27.bb-
-> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ find . -name
-> paths_1.8.27.patch
-> ./files/paths_1.8.27.patch
-> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$
->
+sanity check should force you to remove it..
+but fahad_usman also had still old tmp/cross in PATH..
 
-I thought I made a mistake in the script, but after verification I have not=
-.
-The recipes you mention have been removed a few days ago
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De5287904a9d=
-ddc8ddc0f486d8526bc8cfda427b7
-
-It there any particular reason why you want to have both the 1.8 and
-1.9 versions in the archive?
-If so, we should revert the commit above (and then of course the patch
-file itself should not be removed either.
-
-Frans
+Regards,
 
 
