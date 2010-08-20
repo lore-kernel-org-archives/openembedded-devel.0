@@ -1,46 +1,45 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OmTGT-00020B-6g
+	(envelope-from <raj.khem@gmail.com>) id 1OmTcs-0004OE-I0
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 17:12:19 +0200
-Received: from compute1.internal (compute1.internal [10.202.2.41])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id DCD91449
+	Fri, 20 Aug 2010 17:35:27 +0200
+Received: by gwb15 with SMTP id 15so1319903gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 11:11:56 -0400 (EDT)
-Received: from frontend2.messagingengine.com ([10.202.2.161])
-	by compute1.internal (MEProxy); Fri, 20 Aug 2010 11:11:56 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=LHLKNPOWoyUOohFsqgaN/NQBUps=;
-	b=GMoGgNYCfn91N6QGlthyxq87YvjwG5bW2lsyt/sGb2iZ82how2aF3t5QFC2Oh7JRk70EFuCJylYx14PuWxiLbhnZVwJ/o8m53SkFC/ZIznfgUGDjPhXMC06N1fTtRiTuqatVbO5uUDO3ulsZ17moNaHYH/fTfA2cjujX/kzpJtQ=
-X-Sasl-enc: X2+Tctv0xKj+LIvkm+2OGKL26z0S2cH8Pa/jXUbC6EGi 1282317116
-Received: from [192.168.1.34] (hnvr-4d07974b.pool.mediaWays.net [77.7.151.75])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 5DF7D5E6BDD
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 11:11:56 -0400 (EDT)
-Date: Fri, 20 Aug 2010 17:13:34 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
-	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Fri, 20 Aug 2010 08:35:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Ndc+W4MUF9kRwIeQuMm3NuW+JoW+FQGd1clyUF8AK6I=;
+	b=SI6IjiLwsNfJU+Le7usIbHpHOrhGKL5yiw4Ska/aKiGvlIjx0KjZw7xxqY9vCt71z/
+	5wsQbrwJ1Q1AdAXY+Z60HJrl8nIh7Os/B7So6zaLhyjmy26kvgcQKsteRVp+YVI8a4oz
+	qzpiB+CHcDHzYM+vfTjlRt9LxyL3BjBGZnIAw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=BdU34zU2xLSL3wgO2dPb5d7k7U0BdCiuYr89FL4xQcxX5s66vqFMHpD71K9ih7t1V6
+	tiTxfgs64xdpEGWc8HuDyEZ/28EIOVng1/U3bCv9LELPliwpaH/lp+XfViUfaICduQEj
+	2NjEXCqRJqHIXfe3oHgMG7t81ZvPMvZ7RWrxk=
+Received: by 10.90.26.1 with SMTP id 1mr1249060agz.186.1282318496311; Fri, 20
+	Aug 2010 08:34:56 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Received: by 10.231.200.199 with HTTP; Fri, 20 Aug 2010 08:34:36 -0700 (PDT)
+In-Reply-To: <1282315196.13038.44.camel@mill.internal.reciva.com>
+References: <1282313977-31805-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<1282315196.13038.44.camel@mill.internal.reciva.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 20 Aug 2010 08:34:36 -0700
+Message-ID: <AANLkTin4OrsobbFpGe-vaTfUCdbjAi=XF65VfJzYjrWm@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: orphaned files
+Subject: Re: [PATCH] native.bbclass: add (re)definitions for TARGET_SYS and HOST_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,74 +53,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 15:12:19 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Fri, 20 Aug 2010 15:35:27 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Fri, 20 Aug 2010, Frans Meulenbroeks wrote:
+On Fri, Aug 20, 2010 at 7:39 AM, Phil Blundell <philb@gnu.org> wrote:
+> On Fri, 2010-08-20 at 16:19 +0200, Frans Meulenbroeks wrote:
+>> @@ -23,6 +23,7 @@ TARGET_VENDOR =3D "${BUILD_VENDOR}"
+>> =A0TARGET_PREFIX =3D "${BUILD_PREFIX}"
+>> =A0TARGET_CC_ARCH =3D "${BUILD_CC_ARCH}"
+>> =A0TARGET_EXEEXT =3D "${BUILD_EXEEXT}"
+>> +TARGET_SYS =3D "${BUILD_SYS}"
 
-> 2010/8/19 Vitus Jensen <vjensen@gmx.de>:
->> On Sun, 15 Aug 2010, Frans Meulenbroeks wrote:
->>
->>> I've made a list of patch files in recipes (prefixed with file://) and
->>> compared it with the list of patch files as appear on disk.
->>> Below is the list of 645 files that do not show up in any recipe and
->>> as such can be considered as orphaned.
->>> Proposal is to remove these files after double checking that they are
->>> indeed not used.
->>>
->>> Do people agree with this? If so can I have an ack?
->>>
->>> And do we want to have a commit for every file (makes it easy to
->>> revert an error) or a big commit with all removals?
->>> (removals per dir are also possible but that process is more difficult
->>> to automate and hence not my preferred solution.
->>>
->>> Your opinion is appreciated.
->>>
->>> Frans
->>
+bitbake.conf already has
 
->>> htmldoc paths_1.8.27.patch
->>
->>
->> vitus@asterix:/home/nobkp/oe.dev/recipes/htmldoc$ fgrep -C 1
->> paths_1.8.27.patch *
->> htmldoc_1.8.27.bb-SRC_URI = "http://..../htmldoc-${PV}-source.tar.bz2 \
->> htmldoc_1.8.27.bb:file://paths_1.8.27.patch"
->> htmldoc_1.8.27.bb-
+TARGET_SYS=3D${TARGET_ARCH}${TARGET_VENDOR}${@['-' +
+bb.data.getVar('TARGET_OS', d, 1), ''][bb.data.getVar('TARGET_OS', d,
+1) =3D=3D ('' or 'custom')]}
 
+so once you have TARGET_OS set correctly this should work well for native t=
+oo.
 
-....
-
-> I thought I made a mistake in the script, but after verification I have not.
-> The recipes you mention have been removed a few days ago
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=e5287904a9dddc8ddc0f486d8526bc8cfda427b7
-
-But I made a mistake when I used git fetch and forgot the merge :-( 
-Sorry to have caused noice.
-
-
-> It there any particular reason why you want to have both the 1.8 and
-> 1.9 versions in the archive?
-> If so, we should revert the commit above (and then of course the patch
-> file itself should not be removed either.
-
-Well, htmldoc_1.9.x-r1571.bb fetches an older "developer snapshot" as 
-www.htmldoc.org/ calls it.  The download link on that page offers 1.8.27 
-as the official version.  1.8.28 is in the work.  In my opinion one should 
-always offer to build the official version, not some revision from an 
-arbitrary point of time.
-
-Having said this 1.9.x-r1571 was added because it contains a feature which 
-one customer required and wasn't in the official release from that time. 
-I don't know whether someone at all is using that recipe now.  So it's 
-only the official vs. developer version thingy.
-
-Bye,
-    Vitus
-
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+>
+> I don't think this is the right thing; native.bbclass already assigns
+> TARGET_OS =3D "${BUILD_OS}".
+>
+> Do you really need to use a _local override for TARGET_OS? =A0If so then =
+I
+> guess you need to find a way to stop it applying for virtclass-native.
+>
+> p.
+>
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
