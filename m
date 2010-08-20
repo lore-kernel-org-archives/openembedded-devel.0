@@ -1,31 +1,36 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OmSeh-0001cn-Pd
+	(envelope-from <philb@gnu.org>) id 1OmSlV-0000Dg-D8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 20 Aug 2010 16:33:19 +0200
-Received: (qmail 23200 invoked by uid 1003); 20 Aug 2010 14:33:04 -0000
-Received: from 207.47.37.61.static.nextweb.net (HELO ?192.168.0.121?)
-	(philip@opensdr.com@207.47.37.61)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	20 Aug 2010 14:33:04 -0000
-Message-ID: <4C6E920E.4030806@balister.org>
-Date: Fri, 20 Aug 2010 07:32:46 -0700
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.7) Gecko/20100720 Fedora/3.1.1-1.fc13 Thunderbird/3.1.1
-MIME-Version: 1.0
+	Fri, 20 Aug 2010 16:40:19 +0200
+Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
+	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OmSlA-0003Fv-Lt
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Aug 2010 15:39:56 +0100
+Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
+	by lurch.internal.reciva.com with esmtp (Exim 4.63)
+	(envelope-from <philb@gnu.org>) id 1OmSlA-00034K-DV
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 20 Aug 2010 15:39:56 +0100
+From: Phil Blundell <philb@gnu.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1282294508.6198.27.camel@dpdev>
-In-Reply-To: <1282294508.6198.27.camel@dpdev>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+In-Reply-To: <1282313977-31805-1-git-send-email-fransmeulenbroeks@gmail.com>
+References: <1282313977-31805-1-git-send-email-fransmeulenbroeks@gmail.com>
+Date: Fri, 20 Aug 2010 15:39:56 +0100
+Message-ID: <1282315196.13038.44.camel@mill.internal.reciva.com>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.1.2 
+X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
+X-SA-Exim-Connect-IP: 109.169.29.93
+X-SA-Exim-Mail-From: philb@gnu.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: udev hangs on boot
+Subject: Re: [PATCH] native.bbclass: add (re)definitions for TARGET_SYS and HOST_SYS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,45 +44,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 20 Aug 2010 14:33:22 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
+X-List-Received-Date: Fri, 20 Aug 2010 14:40:19 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-On 08/20/2010 01:55 AM, Dimitris Papastamos wrote:
-> Hello,
->
-> I've built the standard console-image for the SMDK6410 platform using
-> the configuration provided by oe. The problem is that when I boot the
-> image over the network, and then mount the rootfs over nfs, the system
-> hangs before even entering runlevel 5. If I chmod -x udev udev-cache in
-> the init scripts then I can get a usable system which I can ssh into.
-> I've also tried to use a snapshot from Linus's git however the same
-> problem appeared.
+On Fri, 2010-08-20 at 16:19 +0200, Frans Meulenbroeks wrote:
+> @@ -23,6 +23,7 @@ TARGET_VENDOR = "${BUILD_VENDOR}"
+>  TARGET_PREFIX = "${BUILD_PREFIX}"
+>  TARGET_CC_ARCH = "${BUILD_CC_ARCH}"
+>  TARGET_EXEEXT = "${BUILD_EXEEXT}"
+> +TARGET_SYS = "${BUILD_SYS}"
 
-Look in /etc/network/interfaces (I think, not at a desk where I can 
-check) and comment out the line auto eth0. I think the bootscripts take 
-the interface down and up and that is bad if you are using root over nfs.
+I don't think this is the right thing; native.bbclass already assigns
+TARGET_OS = "${BUILD_OS}".
 
-Philip
+Do you really need to use a _local override for TARGET_OS?  If so then I
+guess you need to find a way to stop it applying for virtclass-native.
+
+p.
 
 
->
-> I am using the latest snapshot of oe as of now and bitbake 1.8.18. The
-> version of udev appears to be 151. My target distro is angstrom-2008.1.
-> I've also tried to build a base-image and a bootstrap-image and I had
-> the same problem.
->
-> I've attached my oe kernel configuration, my oe local.conf as well as
-> the boot process log.
->
-> Thanks,
-> Dimitrios
->
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
