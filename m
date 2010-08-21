@@ -1,35 +1,39 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Omho1-0001nF-5M
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Omhxc-0001zI-6w
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Aug 2010 08:43:54 +0200
-Received: by ewy7 with SMTP id 7so2662493ewy.6
+	Sat, 21 Aug 2010 08:53:49 +0200
+Received: by iwn2 with SMTP id 2so1097274iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 23:43:33 -0700 (PDT)
+	Fri, 20 Aug 2010 23:53:27 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=tVU+0Q3PN9SKHtP5JLea/GXJmeEUdQY4YPvIX+lnbiA=;
-	b=rpydTCtd5wvcJ6wUfl3BJDP8/tEsI7JpNYwnQ9sPC3iZDIkjrAev2eF2+scQKsoC0J
-	x/hwZUI1mtK+aKCMFThY1QaA8TpLH1CnvO50tlv6ZYOFNy4JaRgkIAv4QB/GDkQ9iyfl
-	wTVrngXsXDGs45jjmgNZqCARtklJ/dD3+Rgik=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=ODUu6SknVb0tOWPow6yLJ67mRblbPvcBkpxScQe9yz8=;
+	b=NZBiyRwXtiUhKDCHh7Ns8x7tDW0RaqP8NwQKugx6id61EbR1j+/Ib8bTKqFfgh2BWd
+	PZBelezQ/5dndLjtZLa0a7rJJYxxufSswpxR+GIi9LJVEDVR5rv6ArwEnpuwDTe4+41C
+	NBRUZ1YgIa8yNSBnU/h0ySdvlGElH89EO7zz8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=O9zDOV+DCY6GPrbzlHSoGL/hu2AwAsbZ2ucIlHCD2jo6Y6KPaKaebGm0MhGpOXrvjX
-	V1DQ+Ev+aYP56kAUwnNT7JdMQLa9SH9CAU4lABpzpuoLGfBfF1MMcy4pxX7UlS1wRh20
-	zeXrHbJqrxNx7EPIbPwe2kX/4uGAII13fKWFM=
-Received: by 10.213.35.1 with SMTP id n1mr2245129ebd.84.1282373013079;
-	Fri, 20 Aug 2010 23:43:33 -0700 (PDT)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id u9sm6266489eeh.17.2010.08.20.23.43.31
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 20 Aug 2010 23:43:32 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=Fj1Yf83tOs6d8SJ7Ro2z0tW60IFfewD5/YHQI9UNiJELR5/vDVyHz8tGnvboCfjuFA
+	a4HH+sX5mv+Gj84gkwC2wgvzyFQ6EZ+uTTjlSxBKOVet5c6OsnM6ttZbiZ5wfazjwrsP
+	1QqQEz123DvFoouDmUqrzbultRLpwt1Z1+7x0=
+MIME-Version: 1.0
+Received: by 10.231.39.195 with SMTP id h3mr2935046ibe.88.1282373607463; Fri,
+	20 Aug 2010 23:53:27 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Fri, 20 Aug 2010 23:53:27 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
+	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
+	<alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
+Date: Sat, 21 Aug 2010 08:53:27 +0200
+Message-ID: <AANLkTime=tuSZNkBnM6XacjEC2Nucix0UtWTJ1VehOsr@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Aug 2010 08:43:25 +0200
-Message-Id: <1282373005-16453-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -37,7 +41,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] make: BBCLASSEXTEND = "native"; remove native recipe
+Subject: Re: orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,58 +55,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Aug 2010 06:43:54 -0000
+X-List-Received-Date: Sat, 21 Aug 2010 06:53:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-This also gets rid of the legacy staging in the native recipe
+2010/8/20 Vitus Jensen <vjensen@gmx.de>:
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
+>
+>> I thought I made a mistake in the script, but after verification I have
+>> not.
+>> The recipes you mention have been removed a few days ago
+>>
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De5287904=
+a9dddc8ddc0f486d8526bc8cfda427b7
+>
+> But I made a mistake when I used git fetch and forgot the merge :-( Sorry=
+ to
+> have caused noice.
+>
+>
+>> It there any particular reason why you want to have both the 1.8 and
+>> 1.9 versions in the archive?
+>> If so, we should revert the commit above (and then of course the patch
+>> file itself should not be removed either.
+>
+> Well, htmldoc_1.9.x-r1571.bb fetches an older "developer snapshot" as
+> www.htmldoc.org/ calls it. =A0The download link on that page offers 1.8.2=
+7 as
+> the official version. =A01.8.28 is in the work. =A0In my opinion one shou=
+ld
+> always offer to build the official version, not some revision from an
+> arbitrary point of time.
+>
+> Having said this 1.9.x-r1571 was added because it contains a feature whic=
+h
+> one customer required and wasn't in the official release from that time. =
+I
+> don't know whether someone at all is using that recipe now. =A0So it's on=
+ly
+> the official vs. developer version thingy.
 
-Despite the change being minimal:
-As this recipe is crucial for our build process I would like to 
-have a review on this.
+Vitus as the owner/maintainer of the recipe do you want me to reinstate 1.8=
+.28 ?
 
- recipes/make/make-native_3.81.bb |   14 --------------
- recipes/make/make_3.81.bb        |    4 +++-
- 2 files changed, 3 insertions(+), 15 deletions(-)
- delete mode 100644 recipes/make/make-native_3.81.bb
-
-diff --git a/recipes/make/make-native_3.81.bb b/recipes/make/make-native_3.81.bb
-deleted file mode 100644
-index 509558c..0000000
---- a/recipes/make/make-native_3.81.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--PR = "r0"
--
--S = "${WORKDIR}/make-${PV}"
--
--inherit native
--
--do_stage() {
--        install -d ${STAGING_BINDIR}
--        install -m 755 make ${STAGING_BINDIR}
--}
--
--FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/make-${PV}"
--
--require make_${PV}.bb
-diff --git a/recipes/make/make_3.81.bb b/recipes/make/make_3.81.bb
-index b399255..f0bd382 100644
---- a/recipes/make/make_3.81.bb
-+++ b/recipes/make/make_3.81.bb
-@@ -1,6 +1,8 @@
--PR = "r0"
-+PR = "r1"
- 
- require make.inc
- 
-+BBCLASSEXTEND = "native"
-+
- SRC_URI[md5sum] = "354853e0b2da90c527e35aabb8d6f1e6"
- SRC_URI[sha256sum] = "f3e69023771e23908f5d5592954d8271d3d6af09693cecfd29cee6fde8550dc8"
--- 
-1.6.4.2
-
+Frans
 
 
