@@ -1,44 +1,41 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1Omh1q-0000Sk-AH
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OmhXW-0001QB-7U
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Aug 2010 07:54:07 +0200
-Received: by qyk4 with SMTP id 4so4191176qyk.6
+	Sat, 21 Aug 2010 08:27:05 +0200
+Received: by iwn2 with SMTP id 2so1081362iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 22:53:43 -0700 (PDT)
+	Fri, 20 Aug 2010 23:26:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=iwgzbmKL21bGtdVj9tdm7c3SI584gSlbexsWrVxql7A=;
-	b=DCXnk7Qc+HEb8FxSFgwReMWUy1j1Xo3+GT3xxYqG3Hb5bDfS2m/gQIj7JcQcSegbFX
-	F4jdaYjQleF83Ec+QPtNOvx0pcLtvgz8y4r5Ut1Jr8KlvLBKalPi17S7l5WWHnI3hMaQ
-	En63Ndqcw/1dDmwRcW1hJWAcl5YARfPx0x3fQ=
+	bh=n9pE3xHWafvKNnf3WoWgpMZR5rUTPsbObbBOVHcTI8A=;
+	b=vXiwzQt1wjJ3I/DbVSPwzp9Te9sHKPmOb8IZ814Y4om13oJoqOw0yTbL2MUljQpx+z
+	5pPl5cGdRLMoyhHQOETb5lEOAWjkIrB7wrNKN98oPrOiujXGosqpR4hx6anVJwxRyZHb
+	s586hq2fZIdGwdPP/t/33Tr7WIH2nikCBer9g=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=jtUK9iTEgZoHVMIyQYx7YX3GtbzcVFZFSBiOPoZ+Cfgu8Hcq+WqeZsdxL+5bj0YZpP
-	3/sL5pUTbkdTejvqTTI7y+Tps10sSFQRsIAETsuak6g3cnhSzsfoW01f3/iPODJ4IyHv
-	+szKoyFhqJx4cU40PW+kbynitbJi4aew+cd7E=
+	b=iSgHb3k2OaFrVPmP6nXgCiQboiP4Tb6wxeYjkcthtRWC5w2tjGJCOFMbck3PFpZJqy
+	06Qxczz32a6p3QifvlDJeONNiAU6cGaI4Rrb+RWdDI9BcDuGqamkInCKr8vffW4abuDC
+	lN4VDn2ILk04/qVIlfxofegzIgLKEDAtSQSos=
 MIME-Version: 1.0
-Received: by 10.229.215.67 with SMTP id hd3mr1834633qcb.74.1282370023683; Fri,
-	20 Aug 2010 22:53:43 -0700 (PDT)
-Received: by 10.229.23.1 with HTTP; Fri, 20 Aug 2010 22:53:43 -0700 (PDT)
-In-Reply-To: <20100820000226.GD26112@denix.org>
+Received: by 10.231.166.139 with SMTP id m11mr2739689iby.136.1282371984391;
+	Fri, 20 Aug 2010 23:26:24 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Fri, 20 Aug 2010 23:26:24 -0700 (PDT)
+In-Reply-To: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
 References: <AANLkTiknntyGcs6gdHDx84J8m7QufqZ8CPVs4nF5urD7@mail.gmail.com>
-	<AANLkTinytMQ0=hav0GiqPV0S-Avo16-DDFDcEd6QWYhg@mail.gmail.com>
-	<AANLkTinvou+tVwQ683OqsTrRvHJV8HdBfTJOuPiBoK5q@mail.gmail.com>
-	<20100820000226.GD26112@denix.org>
-Date: Sat, 21 Aug 2010 07:53:43 +0200
-Message-ID: <AANLkTi=QyChsM2bquh6uGB-8jqRP8uwDrfX75qerrwGx@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+Date: Sat, 21 Aug 2010 08:26:24 +0200
+Message-ID: <AANLkTinzw_8N9fu5bpuT17zcjffqWJ3ZH9rLK1cA-yG9@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: OE stable, testing, dev (was Re: What to do about the poor bitbake Quality Control?)
@@ -55,51 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Aug 2010 05:54:07 -0000
+X-List-Received-Date: Sat, 21 Aug 2010 06:27:05 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On 8/20/10, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Wed, Aug 18, 2010 at 07:05:48PM +0200, Frans Meulenbroeks wrote:
->> 2010/8/18 Jason Kridner <jkridner@beagleboard.org>:
->> > On Wed, Aug 18, 2010 at 11:07 AM, Cliff Brake <cliff.brake@gmail.com>
->> > wrote:
+2010/8/18 Cliff Brake <cliff.brake@gmail.com>:
+> On Wed, Aug 18, 2010 at 4:30 AM, Martyn Welch <martyn.welch@ge.com> wrote=
+:
+>> On 17/08/10 16:02, Cliff Brake wrote:
+>>>
+>>> I think it would be very useful to have a "stable" branch that is only
+>>> synchronised with dev when X number of targets build from a clean
+>>> build. =A0It seems like this would be high value, with little effort.
+>>> Of course there will be corner things that break, but at least a new
+>>> beagleboard user can check out something and have reasonable
+>>> confidence that it will build images.
+>>>
+>>> Does anyone have suggestions for the branch name and a reasonable
+>>> subset of machines and build targets? =A0Perhaps someone is already
+>>> running these clean builds? =A0At one point we had a machine at OSUOSL
+>>> dedicated to this purpose, but no one ever set it up.
+>>>
 >>
->> >>
->> >> Getting started
->> >> (http://wiki.openembedded.net/index.php/Getting_started) points to a
->> >> tarball for bitbake 1.8.18. =A0Is this still the recommended
->> >> version/mechanism for new users? =A0I much prefer simply pulling bitb=
-ake
->> >> from git.
->> >
->> > Koen pointed me to
->> > http://gitorious.org/angstrom/angstrom-setup-scripts/blobs/master/oebb=
-.sh
->> > for setting up my environment. =A0I also prefer pulling bitbake from
->> > git. =A0Koen seems to be pulling bitbake 1.10, instead of 1.8.18.
->> >
->> 1.10 is now officially released and is supposed to be better and faster.
->> I think we should change the wiki page to reflect using 1.10
+>> So something like Debian's stable, testing and unstable[1]?
 >
-> 1.10 is Python 2.6 based (AFAIK) and some people are not up to speed with
-> that, i.e. using older distros with 2.5 or even 2.4...
->
-> --
-> Denys
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> That sounds good to me -- so how about org.openembedded.dev and
+> org.openembedded.testing branches?
 
+Good plan!
 
---=20
-Esben Haabendal, Senior Software Consultant
-Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
-WWW: http://www.doredevelopment.dk
+>
+> I'll plan to start doing a clean build of dev every Monday for the
+> Beagleboard, and then merge to testing once it builds. =A0Initial
+> targets:
+
+Cool!
+>
+> Angstrom Distro
+> beagleboard/beagleboard-linuxtag2010-demo-image
+> x86/minimal-image
+
+It would be nice to have some additional distro's (e.g. minimal, shr)
+and machines (what would be a good coverage here) tested before it is
+pushed
+>
+> My workstation runs a 64-bit OS, so that is probably worst case
+> (compared to i686).
+>
+What OS? If you want to make things really nasty go to RHEL4 (but I
+think most people would be fine with e.g. ubuntu 10.04)
+Ideally you'd do this in a clean vm to make sure that there is no
+dependency on whatever happens to be installed on your workstation for
+other purposes.
+
+Frans
 
 
