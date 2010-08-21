@@ -1,34 +1,34 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Omryy-0004cc-LU
+	(envelope-from <raj.khem@gmail.com>) id 1Oms0G-0004f6-F4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Aug 2010 19:35:53 +0200
-Received: by iwn2 with SMTP id 2so1520543iwn.6
+	Sat, 21 Aug 2010 19:37:13 +0200
+Received: by iwn2 with SMTP id 2so1521459iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Aug 2010 10:35:31 -0700 (PDT)
+	Sat, 21 Aug 2010 10:36:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=frxOAZ0jjwvgbdUszs85+yWNT2Jnu7o3NOgXr7m8is4=;
-	b=myKVmUmhtLafKfBTJaaxN3qVCWNGixTEw1p9nn2k4L/dvBKL9dKbfexl7ePnstkG5h
-	kt6O/gbvVKIWG6vyTS/Bd+oGulAUMCK+0+KM9nuOxlTmWyC+Iz9k4Bz5dbiZim+6xb6y
-	GDN3y+2aflx1QKvL0ZgiI0goYhUpr3Zhdd6hs=
+	bh=i5s4Q6vmsIiIdDVht1+uGKNR7qbPtsdya/k5ao5qoXs=;
+	b=PbQsZuiIDXIw9DXd0hbQbEnbtgUnxor2Sj80m66alOir9p+Sy37g1nXg2PX74V/+3F
+	pTDOTJdTiD7zuIel9/KXgNQm4bpAPnNnO70HBXxRr4N7kuwz4wxGuYE28QZHAaT0lkFH
+	Ea6EUXpOyzqfliPv6FLeC87E+7gCCwxpRK/C0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=XZ9OGbdpkdB294HojjGneX9iChG7whs/h2yN2K7/z9vARtWfNbK8NVVGM5hBSK/JtP
-	EF80FuPKoYUimuebEEoxf6p1Wc5qGwVQ4Ldst6BupVdH8otrEuUxYzsRSntCHkJdIiCh
-	RqEjy+4PwQgjLlqX5zo97l33ljHXEVPNe9+CI=
-Received: by 10.231.39.69 with SMTP id f5mr3763230ibe.53.1282412131255; Sat,
-	21 Aug 2010 10:35:31 -0700 (PDT)
+	b=wAUcalJQ893VDDec+uaA7VzA5+0D2CmCYSNW+7mjzALa9I2lMBwm3bE4b4truKcbXi
+	bJbkPDYMM0f5YnNnPaMVH7fqdczSqVpIjf6/t2v7tyPfqgbilwilKJcpdNWl2q3zYWp7
+	z+iKKpRSj/yFiC8aWbo8YkvFdKmg21G47voxA=
+Received: by 10.231.193.135 with SMTP id du7mr3444252ibb.176.1282412211167;
+	Sat, 21 Aug 2010 10:36:51 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.200.199 with HTTP; Sat, 21 Aug 2010 10:35:11 -0700 (PDT)
-In-Reply-To: <1282373005-16453-1-git-send-email-fransmeulenbroeks@gmail.com>
-References: <1282373005-16453-1-git-send-email-fransmeulenbroeks@gmail.com>
+Received: by 10.231.200.199 with HTTP; Sat, 21 Aug 2010 10:36:31 -0700 (PDT)
+In-Reply-To: <1282406429-13062-1-git-send-email-khimov@altell.ru>
+References: <1282406429-13062-1-git-send-email-khimov@altell.ru>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sat, 21 Aug 2010 10:35:11 -0700
-Message-ID: <AANLkTi=c+4PCUa0gfJo+bcCx222WQ9YjtFHKP7k1Eq6s@mail.gmail.com>
+Date: Sat, 21 Aug 2010 10:36:31 -0700
+Message-ID: <AANLkTimP_m6bur02tUH+sfLuW_qsO6iPnAu36SU4of68@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] make: BBCLASSEXTEND = "native"; remove native recipe
+Subject: Re: [PATCH] libpcre: fix QA 'non -dev package contains symlink .so' issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,66 +52,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Aug 2010 17:35:53 -0000
+X-List-Received-Date: Sat, 21 Aug 2010 17:37:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 20, 2010 at 11:43 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> This also gets rid of the legacy staging in the native recipe
+On Sat, Aug 21, 2010 at 9:00 AM, Roman I Khimov <khimov@altell.ru> wrote:
+> Effectively reverts 402f1f697406d4d1a844a6c6b7736435053d69c6, maybe it wa=
+s
+> useful back then, but as of today libpcre packages better without prepend=
+ing
+> pythonic functions.
 >
-> Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> Signed-off-by: Roman I Khimov <khimov@altell.ru>
 
 Acked-by: Khem Raj <raj.khem@gmail.com>
 
 > ---
+> =A0recipes/libpcre/libpcre_7.6.bb | =A0 15 ++++-----------
+> =A01 files changed, 4 insertions(+), 11 deletions(-)
 >
-> Despite the change being minimal:
-> As this recipe is crucial for our build process I would like to
-> have a review on this.
+> diff --git a/recipes/libpcre/libpcre_7.6.bb b/recipes/libpcre/libpcre_7.6=
+.bb
+> index b0eff17..aec3a5c 100644
+> --- a/recipes/libpcre/libpcre_7.6.bb
+> +++ b/recipes/libpcre/libpcre_7.6.bb
+> @@ -5,7 +5,7 @@ provides a POSIX calling interface to PCRE; the regular e=
+xpressions \
+> =A0themselves still follow Perl syntax and semantics. The header file for=
+ \
+> =A0the POSIX-style functions is called pcreposix.h."
+> =A0SECTION =3D "devel"
+> -PR =3D "r7"
+> +PR =3D "r8"
+> =A0LICENSE =3D "BSD"
+> =A0SRC_URI =3D "${SOURCEFORGE_MIRROR}/pcre/pcre-${PV}.tar.bz2 \
+> =A0 =A0 =A0 =A0 =A0 =A0file://pcre-cross.patch"
+> @@ -43,17 +43,10 @@ do_install_append () {
+> =A0 =A0 install -m 0755 ${D}${bindir}/pcre-config ${STAGING_BINDIR}/
+> =A0}
 >
-> =A0recipes/make/make-native_3.81.bb | =A0 14 --------------
-> =A0recipes/make/make_3.81.bb =A0 =A0 =A0 =A0| =A0 =A04 +++-
-> =A02 files changed, 3 insertions(+), 15 deletions(-)
-> =A0delete mode 100644 recipes/make/make-native_3.81.bb
->
-> diff --git a/recipes/make/make-native_3.81.bb b/recipes/make/make-native_=
-3.81.bb
-> deleted file mode 100644
-> index 509558c..0000000
-> --- a/recipes/make/make-native_3.81.bb
-> +++ /dev/null
-> @@ -1,14 +0,0 @@
-> -PR =3D "r0"
-> -
-> -S =3D "${WORKDIR}/make-${PV}"
-> -
-> -inherit native
-> -
-> -do_stage() {
-> - =A0 =A0 =A0 =A0install -d ${STAGING_BINDIR}
-> - =A0 =A0 =A0 =A0install -m 755 make ${STAGING_BINDIR}
+> -python populate_packages_prepend () {
+> - =A0 =A0 =A0 pcre_libdir =3D bb.data.expand('${libdir}', d)
+> - =A0 =A0 =A0 pcre_libdir_dbg =3D bb.data.expand('${libdir}/.debug', d)
+> - =A0 =A0 =A0 do_split_packages(d, pcre_libdir, '^lib(.*)\.so$', 'lib%s-d=
+ev', 'libpcre %s development package', extra_depends=3D'${PN}-dev', allow_l=
+inks=3DTrue)
+> - =A0 =A0 =A0 do_split_packages(d, pcre_libdir, '^lib(.*)\.la$', 'lib%s-d=
+ev', 'libpcre %s development package', extra_depends=3D'${PN}-dev')
+> - =A0 =A0 =A0 do_split_packages(d, pcre_libdir, '^lib(.*)\.a$', 'lib%s-de=
+v', 'libpcre %s development package', extra_depends=3D'${PN}-dev')
+> - =A0 =A0 =A0 do_split_packages(d, pcre_libdir, '^lib(.*)\.so\.*', 'lib%s=
+', 'libpcre %s library', extra_depends=3D'', allow_links=3DTrue)
 > -}
 > -
-> -FILESDIR =3D "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/make-${PV}=
-"
-> -
-> -require make_${PV}.bb
-> diff --git a/recipes/make/make_3.81.bb b/recipes/make/make_3.81.bb
-> index b399255..f0bd382 100644
-> --- a/recipes/make/make_3.81.bb
-> +++ b/recipes/make/make_3.81.bb
-> @@ -1,6 +1,8 @@
-> -PR =3D "r0"
-> +PR =3D "r1"
+> -FILES_${PN} =3D "${libdir}/libpcre.so.*"
+> +FILES_${PN} =3D "${libdir}/lib*${SOLIBS}"
+> =A0FILES_${PN}-dev +=3D "${bindir}/*"
 >
-> =A0require make.inc
->
-> +BBCLASSEXTEND =3D "native"
+> +LEAD_SONAME =3D "libpcre.so.*"
 > +
-> =A0SRC_URI[md5sum] =3D "354853e0b2da90c527e35aabb8d6f1e6"
-> =A0SRC_URI[sha256sum] =3D "f3e69023771e23908f5d5592954d8271d3d6af09693cec=
-fd29cee6fde8550dc8"
+> =A0SRC_URI[md5sum] =3D "2af38e083fb90ef60fa9eda7cc290e86"
+> =A0SRC_URI[sha256sum] =3D "362e4b4473f2f7a3bfa28ea73e80ec00a2fe525a1aceb5=
+f66e1c528a900bd735"
 > --
 > 1.6.4.2
 >
