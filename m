@@ -1,36 +1,34 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Omhxc-0001zI-6w
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Omi2D-00027g-Uz
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Aug 2010 08:53:49 +0200
-Received: by iwn2 with SMTP id 2so1097274iwn.6
+	Sat, 21 Aug 2010 08:58:35 +0200
+Received: by iwn2 with SMTP id 2so1099952iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 20 Aug 2010 23:53:27 -0700 (PDT)
+	Fri, 20 Aug 2010 23:58:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=ODUu6SknVb0tOWPow6yLJ67mRblbPvcBkpxScQe9yz8=;
-	b=NZBiyRwXtiUhKDCHh7Ns8x7tDW0RaqP8NwQKugx6id61EbR1j+/Ib8bTKqFfgh2BWd
-	PZBelezQ/5dndLjtZLa0a7rJJYxxufSswpxR+GIi9LJVEDVR5rv6ArwEnpuwDTe4+41C
-	NBRUZ1YgIa8yNSBnU/h0ySdvlGElH89EO7zz8=
+	bh=lLKpNHFtLQ59bSNiBTxbIkwm2UCxfdDXNfo65vX+BTs=;
+	b=i6H0sPWfMY2ft+9TNyetSv4gFO1dSRtsIfHyKDffzArJAMRCLrtm6dvJHeNS7wOfYg
+	jHhR/84oxu9gXudc9UREvwfF27JQ0bpud/zBY3dWP2Zs+3g7gxdEXUq9aK3+fq5YhWRf
+	UntAukPdAjmmTJ8GSK4Dc0j5dBD8PfIuJdKJA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=Fj1Yf83tOs6d8SJ7Ro2z0tW60IFfewD5/YHQI9UNiJELR5/vDVyHz8tGnvboCfjuFA
-	a4HH+sX5mv+Gj84gkwC2wgvzyFQ6EZ+uTTjlSxBKOVet5c6OsnM6ttZbiZ5wfazjwrsP
-	1QqQEz123DvFoouDmUqrzbultRLpwt1Z1+7x0=
+	b=AuqdFErq72CJiaeOF1ixgZNscTfpL730R7S9rzxW/49Pfl2b7+Xc32gL8JmNmw10tl
+	D5yviIY0WlXxM7y9G1bGJ6cnzuUfeW0kuxXHIKK/zDvRt1fQgiMAwvn9YmzFu1pdZDUt
+	HdjGqte9HenTcXcwcc83Z9f6eOVX4+QIenUKA=
 MIME-Version: 1.0
-Received: by 10.231.39.195 with SMTP id h3mr2935046ibe.88.1282373607463; Fri,
-	20 Aug 2010 23:53:27 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Fri, 20 Aug 2010 23:53:27 -0700 (PDT)
-In-Reply-To: <alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
-	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
-	<alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
-Date: Sat, 21 Aug 2010 08:53:27 +0200
-Message-ID: <AANLkTime=tuSZNkBnM6XacjEC2Nucix0UtWTJ1VehOsr@mail.gmail.com>
+Received: by 10.231.184.156 with SMTP id ck28mr2748899ibb.168.1282373892315;
+	Fri, 20 Aug 2010 23:58:12 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Fri, 20 Aug 2010 23:58:11 -0700 (PDT)
+In-Reply-To: <404544342.1017011281902144985.JavaMail.root@zimbra44-e7.priv.proxad.net>
+References: <246310099.1016461281901672121.JavaMail.root@zimbra44-e7.priv.proxad.net>
+	<404544342.1017011281902144985.JavaMail.root@zimbra44-e7.priv.proxad.net>
+Date: Sat, 21 Aug 2010 08:58:11 +0200
+Message-ID: <AANLkTi=DAE8Ch9rkM_FStx4vLjG0Wm=SBtAGvEtA6yLM@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -55,49 +53,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Aug 2010 06:53:49 -0000
+X-List-Received-Date: Sat, 21 Aug 2010 06:58:35 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/8/20 Vitus Jensen <vjensen@gmx.de>:
+2010/8/15  <ydirson@free.fr>:
 
+> It would be nice to have a checker script (not like lintian for debian
+> packages), which would check for such probable or sure errors in packagin=
+g.
+> Having it run when a recipe gets updated would help the person currently
+> know where to look for improvements, and delaying in this case effective =
+removal
+> till someone who cares about the recipe can look at it, would probably
+> cause a gradual improvement of the recipes. =A0Put another way, that woul=
+d
+> be: allow people who care with improving quality to just point the oe pro=
+ject to
+> directions of improvements, and (when meaningful) let the ones who know
+> the recipes best decide on the best course of action for that recipe.
 >
->> I thought I made a mistake in the script, but after verification I have
->> not.
->> The recipes you mention have been removed a few days ago
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3De5287904=
-a9dddc8ddc0f486d8526bc8cfda427b7
+> Similarly (please excuse my Debian background), publishing the results of
+> such automated tests on the oe website would allow someone to quickly get=
+ a grasp
+> on the state of a package he cares about, possibly bringing more people t=
+o
+> contribute ? =A0Have a look at packages.qa.debian.org, http://qa.debian.o=
+rg/developer.php
+> and the services aggregated from there for more details.
 >
-> But I made a mistake when I used git fetch and forgot the merge :-( Sorry=
- to
-> have caused noice.
->
->
->> It there any particular reason why you want to have both the 1.8 and
->> 1.9 versions in the archive?
->> If so, we should revert the commit above (and then of course the patch
->> file itself should not be removed either.
->
-> Well, htmldoc_1.9.x-r1571.bb fetches an older "developer snapshot" as
-> www.htmldoc.org/ calls it. =A0The download link on that page offers 1.8.2=
-7 as
-> the official version. =A01.8.28 is in the work. =A0In my opinion one shou=
-ld
-> always offer to build the official version, not some revision from an
-> arbitrary point of time.
->
-> Having said this 1.9.x-r1571 was added because it contains a feature whic=
-h
-> one customer required and wasn't in the official release from that time. =
-I
-> don't know whether someone at all is using that recipe now. =A0So it's on=
-ly
-> the official vs. developer version thingy.
+> That also reminds me I thought a couple of days ago that something like t=
+he "Debian External
+> Health Status" system would benefit much to oe, to help contributors to f=
+ocus. =A0Maybe something
+> can even be reused there, we would mostly have to add support for somethi=
+ng like debian/watch
+> files in the oe recipes and do probably-minor changes to the scripts that=
+ use them.
+> See http://dehs.alioth.debian.org/stats.html
 
-Vitus as the owner/maintainer of the recipe do you want me to reinstate 1.8=
-.28 ?
+I think this would definitely help, but I'm not sure how to set this up.
+If there is a good testing system, I might be able to get some cpu
+cycles and disk space for it.
 
-Frans
+As a starter it would already be nice to have a tool to check for
+stale/unused files.
+However, I think it is beyond my python knowledge to write one.
+
+Frans.
 
 
