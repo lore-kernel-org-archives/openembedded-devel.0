@@ -1,27 +1,42 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OmsfX-0000Qo-3A
+	(envelope-from <raj.khem@gmail.com>) id 1OmtEV-0000YY-5W
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Aug 2010 20:19:52 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OmsfA-0005cG-Jg
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 21 Aug 2010 22:19:30 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Aug 2010 22:19:24 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+	Sat, 21 Aug 2010 20:56:28 +0200
+Received: by iwn2 with SMTP id 2so1571726iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 21 Aug 2010 11:55:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=BXL3IdUrPmJwt/6tqNI76rQZ0iFjb5kHYFXA3XE6Ft0=;
+	b=d8j26eCYLkuPnyF9UNdfiqwNgKpkifXMfGOnoMBymolE+3xDfIfRL8WC176n2U1bQw
+	gXKkUtJlUPCULpxvfu7IreBMUze9kXIoVTZf6ujJx3NMhB9PmBCnI7MhZF5u2qLB+40M
+	UiN1qToH+hQiQ1/yAtM4piTf9oznjgwH6ZoYc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=vPX7o3Nskk62SoYUm5zgz9eDWwnCsE8Bb6zfhUOO6kq7tfw9mDAA+1wna1tTNywMTT
+	Qm1ntylOJy+VAUB24XyrIaiS17bTRydivGG/La2YMXnksj/lhVbkAoawLac5G5QPsjxy
+	PbF3GPQGnky74pZViCoBr+souOb8+IQNGGWKo=
+Received: by 10.231.157.205 with SMTP id c13mr3729257ibx.71.1282416938139;
+	Sat, 21 Aug 2010 11:55:38 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.200.199 with HTTP; Sat, 21 Aug 2010 11:55:18 -0700 (PDT)
+In-Reply-To: <201008212219.27410.roman@khimov.ru>
 References: <1282406626-13837-1-git-send-email-khimov@altell.ru>
 	<AANLkTimSd5v_KD7cz92JHTxp-sELd4ri9OLdpkNU4zO_@mail.gmail.com>
-In-Reply-To: <AANLkTimSd5v_KD7cz92JHTxp-sELd4ri9OLdpkNU4zO_@mail.gmail.com>
-MIME-Version: 1.0
-Message-Id: <201008212219.27410.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+	<201008212219.27410.roman@khimov.ru>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Sat, 21 Aug 2010 11:55:18 -0700
+Message-ID: <AANLkTi==V_i_jLyeMQnF+D9Nwm0D5y0-ohUBx6E3AYdN@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -39,75 +54,74 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 21 Aug 2010 18:19:52 -0000
-X-Groupsio-MsgNum: 22510
-Content-Type: multipart/signed; boundary="nextPart2757531.Um6L8ycxRg";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart2757531.Um6L8ycxRg
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Sat, 21 Aug 2010 18:56:37 -0000
+Content-Type: text/plain; charset=KOI8-R
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=83=D0=B1=D0=B1=D0=BE=D1=82=D0=B0 21 =D0=B0=D0=B2=D0=B3=D1=83=D1=
-=81=D1=82=D0=B0 2010 21:38:48 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Khem Raj =D0=
-=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On Sat, Aug 21, 2010 at 9:03 AM, Roman I Khimov <khimov@altell.ru> wrote:
-> > It wasn't possible to install prepackaged clamav-data with the way it's
-> > been packaged. And there are situations where you want to have at least
-> > prepackaged AV databases before you could do any sort of update. Also,
-> > logically freshclam doesn't substitute clamav-data, but rather
-> > complements it.
-> >
-> > Signed-off-by: Roman I Khimov <khimov@altell.ru>
->=20
-> Will there be any conflicts with prepackaged clamav-data
-> otherwise you have the ack.
+On Sat, Aug 21, 2010 at 11:19 AM, Roman I Khimov <roman@khimov.ru> wrote:
+> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F3=D5=C2=C2=CF=D4=C1 21 =C1=D7=C7=
+=D5=D3=D4=C1 2010 21:38:48 =C1=D7=D4=CF=D2 Khem Raj =CE=C1=D0=C9=D3=C1=CC:
+>> On Sat, Aug 21, 2010 at 9:03 AM, Roman I Khimov <khimov@altell.ru> wrote=
+:
+>> > It wasn't possible to install prepackaged clamav-data with the way it'=
+s
+>> > been packaged. And there are situations where you want to have at leas=
+t
+>> > prepackaged AV databases before you could do any sort of update. Also,
+>> > logically freshclam doesn't substitute clamav-data, but rather
+>> > complements it.
+>> >
+>> > Signed-off-by: Roman I Khimov <khimov@altell.ru>
+>>
+>> Will there be any conflicts with prepackaged clamav-data
+>> otherwise you have the ack.
+>
+> Well, -data is data. -freshclam is freshclam. Freshclam updates the data,=
+ but
+> the data files are defined as CONFFILES already, so there is no conflict =
+at
+> this level.
+>
+> But thinking another 5 minutes about it there is an issue with this patch=
+ in
+> that it actually makes clamav-data installation (and that is huge, 25M)
+> _mandatory_, whether you want that or not depends on situation. We want t=
+hat
+> (hence the patch), someone might not.
+>
+> Technically, there are three possible installation combinations, each has=
+ its
+> valid use:
+> =9A* clamav-data
+> =9A* clamav-freshclam
+> =9A* clamav-data & clamav-freshclam
+>
+> Before the patch only second one was possible (probably with the recent
+> BAD_RECOMMENDATIONS fixes to opkg and OE also the first one). After the p=
+atch
+> only first and third will be possible. Do we really care about second cas=
+e?
 
-Well, -data is data. -freshclam is freshclam. Freshclam updates the data, b=
-ut=20
-the data files are defined as CONFFILES already, so there is no conflict at=
-=20
-this level.
+Can clamav-freshclam function without clamav-data? If yes then
+I guess if someone does not need it and does not need data
+and is forced to install would be unwelcome particularly when
+the size is big enough.
 
-But thinking another 5 minutes about it there is an issue with this patch i=
-n=20
-that it actually makes clamav-data installation (and that is huge, 25M)=20
-_mandatory_, whether you want that or not depends on situation. We want tha=
-t=20
-(hence the patch), someone might not.
+> And if yes, how to allow all of three to coexist?
+>
 
-Technically, there are three possible installation combinations, each has i=
-ts=20
-valid use:
- * clamav-data
- * clamav-freshclam
- * clamav-data & clamav-freshclam
+may be have separate recipe for data.
 
-Before the patch only second one was possible (probably with the recent=20
-BAD_RECOMMENDATIONS fixes to opkg and OE also the first one). After the pat=
-ch=20
-only first and third will be possible. Do we really care about second case?=
-=20
-And if yes, how to allow all of three to coexist?
+> --
+> =9Ahttp://roman.khimov.ru
+> mailto: roman@khimov.ru
+> gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+>
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart2757531.Um6L8ycxRg
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkxwGK8ACgkQXJ70z+XgVcM4wACfUB6sdwP0WvZHWHLPOx8uDED1
-GucAoONxPB5FNLuH+zA+0locq90Wvv5/
-=Uvs1
------END PGP SIGNATURE-----
-
---nextPart2757531.Um6L8ycxRg--
