@@ -1,25 +1,24 @@
 Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jkridner@beagleboard.org>) id 1OnHMo-0000TU-K4
+	(envelope-from <jkridner@beagleboard.org>) id 1OnHMn-0000TP-18
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Aug 2010 22:42:11 +0200
-Received: by qwa26 with SMTP id 26so1626240qwa.6
+	Sun, 22 Aug 2010 22:42:25 +0200
+Received: by qwa26 with SMTP id 26so1626220qwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Aug 2010 13:41:46 -0700 (PDT)
-Received: by 10.229.71.68 with SMTP id g4mr2169155qcj.174.1282509706659;
-	Sun, 22 Aug 2010 13:41:46 -0700 (PDT)
+	Sun, 22 Aug 2010 13:41:44 -0700 (PDT)
+Received: by 10.224.67.81 with SMTP id q17mr2766302qai.102.1282509704682;
+	Sun, 22 Aug 2010 13:41:44 -0700 (PDT)
 Received: from localhost.localdomain
 	(ec2-75-101-156-174.compute-1.amazonaws.com [75.101.156.174])
-	by mx.google.com with ESMTPS id l8sm6127913qck.30.2010.08.22.13.41.44
-	(version=SSLv3 cipher=RC4-MD5); Sun, 22 Aug 2010 13:41:45 -0700 (PDT)
+	by mx.google.com with ESMTPS id l8sm6127913qck.30.2010.08.22.13.41.43
+	(version=SSLv3 cipher=RC4-MD5); Sun, 22 Aug 2010 13:41:43 -0700 (PDT)
 From: Jason Kridner <jkridner@beagleboard.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Aug 2010 15:41:41 -0500
-Message-Id: <1282509701-7944-3-git-send-email-jkridner@beagleboard.org>
+Date: Sun, 22 Aug 2010 15:41:40 -0500
+Message-Id: <1282509701-7944-2-git-send-email-jkridner@beagleboard.org>
 X-Mailer: git-send-email 1.5.6.4
-In-Reply-To: <1282509701-7944-2-git-send-email-jkridner@beagleboard.org>
+In-Reply-To: <1282509701-7944-1-git-send-email-jkridner@beagleboard.org>
 References: <1282509701-7944-1-git-send-email-jkridner@beagleboard.org>
-	<1282509701-7944-2-git-send-email-jkridner@beagleboard.org>
 X-SA-Exim-Connect-IP: 209.85.216.47
 X-SA-Exim-Mail-From: jkridner@beagleboard.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -28,7 +27,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] angstrom-uboot-scripts: beagleboard: use XGA and toggle LEDs
+Subject: [PATCH] u-boot: beagleboard: use user.scr when no boot.scr
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,56 +41,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Aug 2010 20:42:11 -0000
+X-List-Received-Date: Sun, 22 Aug 2010 20:42:25 -0000
 
-* set dvimode to 1024x768
-* add tty0 to console=
-* toggle LEDs
-** led 0 and 1 are on by default in u-boot
-** turn led 1 off at start
-** turn led 0 off at end of ramdisk load
-** turn led 1 on again just before boot
+Even if the USER button isn't pressed.  Still don't default to ramdisk
+unless the USER button is pressed.
 
 Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
 ---
- recipes/angstrom/angstrom-uboot-scripts.bb         |    2 +-
- .../beagleboard-validation-user.cmd                |    6 ++++++
- 2 files changed, 7 insertions(+), 1 deletions(-)
+ ...rd-try-user.scr-even-if-USER-isn-t-presse.patch |   63 ++++++++++++++++++++
+ recipes/u-boot/u-boot_git.bb                       |    3 +-
+ 2 files changed, 65 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/u-boot/u-boot-git/beagleboard/0001-beagleboard-try-user.scr-even-if-USER-isn-t-presse.patch
 
-diff --git a/recipes/angstrom/angstrom-uboot-scripts.bb b/recipes/angstrom/angstrom-uboot-scripts.bb
-index 020a7af..497bd79 100644
---- a/recipes/angstrom/angstrom-uboot-scripts.bb
-+++ b/recipes/angstrom/angstrom-uboot-scripts.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Various uboot scripts"
+diff --git a/recipes/u-boot/u-boot-git/beagleboard/0001-beagleboard-try-user.scr-even-if-USER-isn-t-presse.patch b/recipes/u-boot/u-boot-git/beagleboard/0001-beagleboard-try-user.scr-even-if-USER-isn-t-presse.patch
+new file mode 100644
+index 0000000..ebc1831
+--- /dev/null
++++ b/recipes/u-boot/u-boot-git/beagleboard/0001-beagleboard-try-user.scr-even-if-USER-isn-t-presse.patch
+@@ -0,0 +1,63 @@
++From dcbcbcded81e92a30081663371e2bd458ecccaba Mon Sep 17 00:00:00 2001
++From: Jason Kridner <jkridner@beagleboard.org>
++Date: Fri, 20 Aug 2010 15:40:33 -0500
++Subject: [PATCH] beagleboard: try user.scr, even if USER isn't pressed
++
++But only do so after looking for boot.scr.
++
++Signed-off-by: Jason Kridner <jkridner@beagleboard.org>
++---
++ include/configs/omap3_beagle.h |   33 ++++++++++++++++-----------------
++ 1 files changed, 16 insertions(+), 17 deletions(-)
++
++diff --git a/include/configs/omap3_beagle.h b/include/configs/omap3_beagle.h
++index 6bc992c..978b41a 100644
++--- a/include/configs/omap3_beagle.h
+++++ b/include/configs/omap3_beagle.h
++@@ -272,27 +272,26 @@
++ 			"setenv bootscr user.scr;" \
++ 			"if run loadbootscript; then " \
++ 				"run bootscript; " \
++-			"else " \
++-				"if run loaduimage; then " \
++-					"if run loadramdisk; then " \
++-						"run ramboot; " \
++-					"else " \
++-						"run mmcboot; " \
++-					"fi; " \
++-				"fi; " \
++ 			"fi; " \
++-		"else " \
++-			"setenv bootscr boot.scr; " \
++-			"if run loadbootscript; then " \
++-				"run bootscript; " \
++-			"else " \
++-				"if run loaduimage; then " \
++-					"run mmcboot; " \
++-				"else run nandboot; " \
+++			"if run loaduimage; then " \
+++				"if run loadramdisk; then " \
+++					"run ramboot; " \
++ 				"fi; " \
+++				"run mmcboot; " \
++ 			"fi; " \
++ 		"fi; " \
++-	"else run nandboot; fi"
+++		"if run loadbootscript; then " \
+++			"run bootscript; " \
+++		"fi; " \
+++		"setenv bootscr user.scr;" \
+++		"if run loadbootscript; then " \
+++			"run bootscript; " \
+++		"fi; " \
+++		"if run loaduimage; then " \
+++			"run mmcboot; " \
+++		"fi; " \
+++	"fi; " \
+++	"run nandboot;"
++ 
++ #define CONFIG_AUTO_COMPLETE		1
++ /*
++-- 
++1.5.6.4
++
+diff --git a/recipes/u-boot/u-boot_git.bb b/recipes/u-boot/u-boot_git.bb
+index ae47ee5..90978f8 100644
+--- a/recipes/u-boot/u-boot_git.bb
++++ b/recipes/u-boot/u-boot_git.bb
+@@ -1,5 +1,5 @@
+ require u-boot.inc
+-PR ="r67"
++PR ="r68"
  
--PR = "r10"
-+PR = "r11"
+ FILESPATHPKG =. "u-boot-git:"
  
- DEPENDS = "u-boot-mkimage-native"
- 
-diff --git a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
-index 971b96e..7a7939a 100644
---- a/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
-+++ b/recipes/angstrom/angstrom-uboot-scripts/beagleboard-validation-user.cmd
-@@ -1,4 +1,8 @@
-+led 1 off
- mmc init
-+setenv dvimode 1024x768MR-16@60
-+setenv vram 16M omapfb.vram=0:8M,1:4M,2:4M
-+setenv console tty0 console=ttyS2,115200n8
- if test "${beaglerev}" = "AxBx"; then
- setenv rdaddr 0x81000000
- setenv optargs mem=80M@0x80000000 musb_hdrc.fifomode=5
-@@ -12,6 +16,8 @@ setenv ramroot /dev/ram0 rw ramdisk_size=131072 initrd=${rdaddr},128M
- setenv optargs mem=80M@0x80000000 mem=384M@0x88000000
- fi
- run loadramdisk
-+led 0 off
- run loaduimage
-+led 1 on
- run ramboot
- 
+@@ -73,6 +73,7 @@ SRC_URI_beagleboard = "git://www.denx.de/git/u-boot.git;protocol=git \
+                        file://0046-BeagleBoard-Add-camera-to-default-bootargs.patch \
+ 		       file://0001-BeagleBoard-move-ramdisk-parameters.patch \
+ 		       file://0001-beagleboard-improved-boot-env-var-setting.patch \
++		       file://0001-beagleboard-try-user.scr-even-if-USER-isn-t-presse.patch \
+                        file://fw_env.config \
+ "
+ SRCREV_beagleboard = "ca6e1c136ddb720c3bb2cc043b99f7f06bc46c55"
 -- 
 1.5.6.4
 
