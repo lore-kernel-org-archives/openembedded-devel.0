@@ -1,44 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OnEai-0000cS-I9
+	(envelope-from <philip@balister.org>) id 1OnEeF-0003OY-UU
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Aug 2010 19:44:21 +0200
-Received: by wwe15 with SMTP id 15so3016414wwe.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Aug 2010 10:43:56 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=P4995UhOHjm7ngeDekzcbCPRIxYl0TgBXj7mFJdDEPQ=;
-	b=EU1Ld9hOgLABlsu64nmKRnp4/XkIFD6IZik8zFFyJK9rKAOXu3yiJ5ng3jktWyYIh9
-	hveJ9TkmexIpuJmd1pSX9kXpx5uGNn8+SEJUNtWWxX4ZiVqOrxEivKuGimwBIgcGj1gS
-	jXHg1QWPDETFp7PVfLXFO8kMO8WEvuc89LNdw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fjpa5ZdxuFE7XW9AY4dwyFbAjSGD5VrePK5PKdF54y8faBHGGN98RI5O8wuHBPu7lX
-	c4C213AHhtgmjnMM+MLL1B8vQkAsRXj+ueuBPITuagZAcAfZT9RgWbkjBpvscjkzYNPI
-	aRmHoOc5X4SomnOphUmpsVAXkrqZ6pl+lewAs=
+	Sun, 22 Aug 2010 19:48:01 +0200
+Received: (qmail 27237 invoked by uid 1003); 22 Aug 2010 17:47:34 -0000
+Received: from pool-96-240-180-89.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.89)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	22 Aug 2010 17:47:34 -0000
+Message-ID: <4C7162B0.6090206@balister.org>
+Date: Sun, 22 Aug 2010 13:47:28 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.216.236.149 with SMTP id w21mr3538824weq.65.1282499036289;
-	Sun, 22 Aug 2010 10:43:56 -0700 (PDT)
-Received: by 10.216.135.18 with HTTP; Sun, 22 Aug 2010 10:43:56 -0700 (PDT)
-In-Reply-To: <AANLkTimsCtDRzzCcWsQLikvrKujYo4G9Ls0JX3MS9Lp7@mail.gmail.com>
-References: <AANLkTinS5vKrq8vunasV2KCgoD9rgDV5hS6vt69Uu26M@mail.gmail.com>
-	<AANLkTimsCtDRzzCcWsQLikvrKujYo4G9Ls0JX3MS9Lp7@mail.gmail.com>
-Date: Sun, 22 Aug 2010 10:43:56 -0700
-Message-ID: <AANLkTikbA5tcuyzJuO2YcFQLcCi_yUB_eRusqOpCSkJa@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <1282498345-8697-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1282498345-8697-1-git-send-email-raj.khem@gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Getting Started with bitbake as a developer?
+Subject: Re: [PATCH] ncurses_5.7.bb: Make DEFAULT_PREFERENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,45 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Aug 2010 17:44:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 22 Aug 2010 17:48:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-I think AJ meant there needs to be another more in depth one. I would
-agree with that myself. That one barely touches anything about OE to
-me its to simple of an example.
+On 08/22/2010 01:32 PM, Khem Raj wrote:
+> * Select 5.7 if none pinned.
+>
+> Signed-off-by: Khem Raj<raj.khem@gmail.com>
+> ---
+>   recipes/ncurses/ncurses_5.7.bb |    3 ---
+>   1 files changed, 0 insertions(+), 3 deletions(-)
+>
+> diff --git a/recipes/ncurses/ncurses_5.7.bb b/recipes/ncurses/ncurses_5.7.bb
+> index ab029ae..57374ec 100644
+> --- a/recipes/ncurses/ncurses_5.7.bb
+> +++ b/recipes/ncurses/ncurses_5.7.bb
+> @@ -6,9 +6,6 @@ PATCHDATE = "20100501"
+>   PKGV = "${PV}+${PATCHDATE}"
+>   PR = "r11"
+>
+> -# recipe is experimental for now...
+> -DEFAULT_PREFERENCE = "-99"
+> -
+>   DEPENDS = "ncurses-native unifdef-native"
+>   DEPENDS_virtclass-native = "unifdef-native"
+>
 
+We need to combine this with a PR bump for all recipes that DEPEND on 
+ncurses ....
 
-
-On Sun, Aug 22, 2010 at 1:38 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> 2010/8/22 AJ ONeal <coolaj86@gmail.com>:
->> http://www.google.com/search?q=openembedded+bitbake
->> http://www.google.com/search?q=bitbake+getting+started
->>
->> Notice that the only useful information for a dev on there is the gumstix
->> link, which is apparently not up to par with the oe standards.
->> http://www.gumstix.net/Setup-and-Programming/view/Build-system-overview/Hello-world-tutorial/111.html
->>
->> May I suggest that someone put up a doc on the oe wiki for this? or if there
->> is one, put keywords on it so it gets a ranking?
->>
->> I would be happy to write one, but I don't know enough yet.
->>
->> AJ ONeal
->
-> Can we reuse or refer to the gumstix tut?
-> Or could the gumstix tut be an appendix to the bitbake manual?
-> http://bitbake.berlios.de/manual/
->
-> I feel it is useful to have a getting started doc. The manual on
-> itself is too overwhelming.
->
-> Frans
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Philip
 
 
