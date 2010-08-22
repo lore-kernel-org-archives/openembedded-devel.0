@@ -1,47 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <slightlyunconventional@gmail.com>)
-	id 1OnDgo-0001OY-DY for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Aug 2010 18:46:37 +0200
-Received: by wwe15 with SMTP id 15so2974846wwe.24
+	(envelope-from <raj.khem@gmail.com>) id 1OnEPq-0006hz-Lc
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 22 Aug 2010 19:33:08 +0200
+Received: by pwj8 with SMTP id 8so208209pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Aug 2010 09:46:11 -0700 (PDT)
+	Sun, 22 Aug 2010 10:32:30 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:sender:received
-	:in-reply-to:references:date:x-google-sender-auth:message-id:subject
-	:from:to:content-type:content-transfer-encoding;
-	bh=d1x/NRDYo3LXs/RE0kPRoMnXA2hFxmki+vZN0u9lir8=;
-	b=kcU7+lTC9l3gNIdATrUUugLDk7CHCeY3F9vmZkAg4vTEvnrXgWWMP/saAduKQyVW4/
-	KG3cFQZbssUsJG2vesfyEllGKqK5kET71nq9GJz0QvU0NAyr/rxDwhiFUc4TuE155Cno
-	s6CnLnMMS/0+KlfZYe+Ryl0p0E/NyQn+4TZkE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=iABJ9akfd9xraJby0aoZW1DiiGrQSQ80TPWpTP0+MUI=;
+	b=iLMfXTBmUzATCBJs42VimuxnhZ7pLCDwDB9K6UuHXv3NTOqoGNjdtzRGGx8M4wrAft
+	nLYYBUZDIRITnb9jlmIejQ+l4MMup1D6n1HICyk8pSCRnBf55hrklwJkW9QYqEy5dAfn
+	OL4ghBRgMjETSTrOZLQZ7wktDui61tmVIV0UA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:date
-	:x-google-sender-auth:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=mr1uFGCtyjV02b9P2c01SjJOh4YNG3XVNKVLAhPyelBCtkl4VDXyjobpg2JZ6ddAID
-	52ym2a5utxopNp+EcKwIcsOSL462JthfXx7SlzsnV1nZZYr6Z1rJKRLROTDVyNTNHNyR
-	2JpE9/Lt77yDND8QjSLwf1Oe7owY8Z7fcp/bM=
-MIME-Version: 1.0
-Received: by 10.227.134.144 with SMTP id j16mr3624077wbt.50.1282495570942;
-	Sun, 22 Aug 2010 09:46:10 -0700 (PDT)
-Sender: slightlyunconventional@gmail.com
-Received: by 10.227.134.211 with HTTP; Sun, 22 Aug 2010 09:46:10 -0700 (PDT)
-In-Reply-To: <AANLkTinOcOEsWCF=oaqta+io5ymwP_bfiMWJJXqm02jw@mail.gmail.com>
-References: <AANLkTinOcOEsWCF=oaqta+io5ymwP_bfiMWJJXqm02jw@mail.gmail.com>
-Date: Sun, 22 Aug 2010 09:46:10 -0700
-X-Google-Sender-Auth: ttsga5h2IyIgJ99M2khVUztfLB4
-Message-ID: <AANLkTi=EkASHaQyXGqabEYJm3R+yPAJskM25UA6x4wLg@mail.gmail.com>
-From: Hollis Blanchard <hollis@penguinppc.org>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: slightlyunconventional@gmail.com
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=GeWroRqfRYGqmA/Ymmi+NJiV57pLK9q/RWjtgJHMaV9fluT1LfUWgpVIG5B6TKDs82
+	TMl96CBb2gtK5KVyCMjkDVaOpUrDXLo4kCce4EuJR45dLV7iPB/ctAxbkMX+0BaSufSJ
+	3FDzQ5U/oDquYDfVPeNSWgXPqCo9btcYK2X3A=
+Received: by 10.143.18.20 with SMTP id v20mr3436441wfi.12.1282498350327;
+	Sun, 22 Aug 2010 10:32:30 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d4sm7179794wfh.23.2010.08.22.10.32.29
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 22 Aug 2010 10:32:29 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Sun, 22 Aug 2010 10:32:25 -0700
+Message-Id: <1282498345-8697-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: meta-toolchain can't find libstdc++-dev?
+Subject: [PATCH] ncurses_5.7.bb: Make DEFAULT_PREFERENCE
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,25 +52,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Aug 2010 16:46:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 22 Aug 2010 17:33:08 -0000
 
-On Fri, Aug 20, 2010 at 9:13 AM, Hollis Blanchard <hollis@penguinppc.org> w=
-rote:
-> % bitbake meta-toolchain
-...
-> | Collected errors:
-> | =A0* satisfy_dependencies_for: Cannot satisfy the following
-> dependencies for task-sdk-host:
-> | =A0* =A0 =A0binutils-cross-sdk * =A0 =A0gcc-cross-sdk * =A0 =A0 =A0 =A0=
- gdb-cross-sdk
-> * =A0 =A0 =A0 =A0 opkg-sdk *
+* Select 5.7 if none pinned.
 
-For the record, this seems to have been caused by inconsistent state
-in my tmp/ directory. I deleted the whole thing and rebuild from
-scratch, and no errors this time.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/ncurses/ncurses_5.7.bb |    3 ---
+ 1 files changed, 0 insertions(+), 3 deletions(-)
 
--Hollis
+diff --git a/recipes/ncurses/ncurses_5.7.bb b/recipes/ncurses/ncurses_5.7.bb
+index ab029ae..57374ec 100644
+--- a/recipes/ncurses/ncurses_5.7.bb
++++ b/recipes/ncurses/ncurses_5.7.bb
+@@ -6,9 +6,6 @@ PATCHDATE = "20100501"
+ PKGV = "${PV}+${PATCHDATE}"
+ PR = "r11"
+ 
+-# recipe is experimental for now...
+-DEFAULT_PREFERENCE = "-99"
+-
+ DEPENDS = "ncurses-native unifdef-native"
+ DEPENDS_virtclass-native = "unifdef-native"
+ 
+-- 
+1.7.1
+
 
 
