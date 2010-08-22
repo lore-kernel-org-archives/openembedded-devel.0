@@ -1,43 +1,37 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from vms173019pub.verizon.net ([206.46.173.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1On659-00018j-Vb
+	(envelope-from <openembedded@rkmorris.us>) id 1OnB8Z-0000ux-P7
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Aug 2010 10:39:13 +0200
-Received: by iwn2 with SMTP id 2so1966005iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Aug 2010 01:38:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=V8a+FvXoblBvpoHDpqfh3bRvLqImfM6zXa+ZbaNtWNI=;
-	b=d88RLejjtmIM/W7/F+SMXgphLg+VZQERELnpUVmuutAzLp5uQgWWcI5L2Kui51/CkS
-	AZO7RRPmFYZHCdlPFaiV3GpOmupkUM3k4cvOXGCWlxzV+ptA4uPUDAUCXw7AXmXRoF1J
-	lhBaae/K7p7gR9TE1yxeh3pGgDvdicikirnwg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Ho2Wlu2CAYCQ4wEEG60KtqNFVLYY+BwsdfPWDd/0dR9IzO0RRjei7TGfuUZ3akCjFg
-	aAlReyOjav0p3dqbQVkg7LG3cHfJ39CymE7mGmPH1PE1nyqm4zsRVlFCyizZi6gPXjDI
-	W5sko5NHPooMxbRCxExGCzxPRxhImg63GBO98=
-MIME-Version: 1.0
-Received: by 10.231.148.20 with SMTP id n20mr4394785ibv.196.1282466328142;
-	Sun, 22 Aug 2010 01:38:48 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Sun, 22 Aug 2010 01:38:48 -0700 (PDT)
-In-Reply-To: <AANLkTinS5vKrq8vunasV2KCgoD9rgDV5hS6vt69Uu26M@mail.gmail.com>
-References: <AANLkTinS5vKrq8vunasV2KCgoD9rgDV5hS6vt69Uu26M@mail.gmail.com>
-Date: Sun, 22 Aug 2010 10:38:48 +0200
-Message-ID: <AANLkTimsCtDRzzCcWsQLikvrKujYo4G9Ls0JX3MS9Lp7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	Sun, 22 Aug 2010 16:03:08 +0200
+Received: from server ([unknown] [71.170.86.183]) by vms173019.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L7K001CN1JFKZ90@vms173019.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Sun,
+	22 Aug 2010 08:02:09 -0500 (CDT)
+Received: from server [127.0.0.1] by server (Axigen)
+	with ESMTPSA id 2DFB1E; Sun, 22 Aug 2010 08:01:52 -0500
+Received: from [192.168.1.3] by rkmorris.us with HTTP; Sun,
+	22 Aug 2010 08:01:51 -0500
+From: <openembedded@rkmorris.us>
+Date: Sun, 22 Aug 2010 08:01:51 -0500
+X-Mailer: Axigen WebMail
+To: openembedded-users@linuxtogo.org, openembedded-issues@linuxtogo.org,
+	openembedded-devel@lists.openembedded.org
+Message-id: <1282482111330517500@rkmorris.us>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 5
+X-SA-Exim-Connect-IP: 206.46.173.19
+X-SA-Exim-Mail-From: openembedded@rkmorris.us
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.2 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	MIME_QP_LONG_LINE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Getting Started with bitbake as a developer?
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: H1940 Boot Issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,31 +45,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Aug 2010 08:39:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 22 Aug 2010 14:03:08 -0000
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-2010/8/22 AJ ONeal <coolaj86@gmail.com>:
-> http://www.google.com/search?q=openembedded+bitbake
-> http://www.google.com/search?q=bitbake+getting+started
->
-> Notice that the only useful information for a dev on there is the gumstix
-> link, which is apparently not up to par with the oe standards.
-> http://www.gumstix.net/Setup-and-Programming/view/Build-system-overview/Hello-world-tutorial/111.html
->
-> May I suggest that someone put up a doc on the oe wiki for this? or if there
-> is one, put keywords on it so it gets a ranking?
->
-> I would be happy to write one, but I don't know enough yet.
->
-> AJ ONeal
 
-Can we reuse or refer to the gumstix tut?
-Or could the gumstix tut be an appendix to the bitbake manual?
-http://bitbake.berlios.de/manual/
 
-I feel it is useful to have a getting started doc. The manual on
-itself is too overwhelming.
-
-Frans
-
+ *      1024x768=20
+ *=20
+ *    Clean            false  false  false    EN-US  X-NONE  X-NONE        =
+                               MicrosoftInternetExplorer4       =20
+  =20
+                                                                           =
+                                                                           =
+                                                                           =
+                                                                           =
+   /* Style Definitions */  table.MsoNormalTable	{mso-style-name:"Table Nor=
+mal";	mso-tstyle-rowband-size:0;	mso-tstyle-colband-size:0;	mso-style-nosho=
+w:yes;	mso-style-priority:99;	mso-style-qformat:yes;	mso-style-parent:"";	m=
+so-padding-alt:0in 5.4pt 0in 5.4pt;	mso-para-margin:0in;	mso-para-margin-bo=
+ttom:.0001pt;	mso-pagination:widow-orphan;	font-size:11.0pt;	font-family:"C=
+alibri","sans-serif";	mso-ascii-font-family:Calibri;	mso-ascii-theme-font:m=
+inor-latin;	mso-hansi-font-family:Calibri;	mso-hansi-theme-font:minor-latin=
+;	mso-bidi-font-family:"Times New Roman";	mso-bidi-theme-font:minor-bidi;} =
+    Hi,
+=20
+My apologies in advance =E2=80=93 as this is a fairly basicoperating questi=
+on (so likely just me doing something stupid =E2=80=A6 L), and I=E2=80=99m =
+notsure which list to post this to =E2=80=A6 so for now I=E2=80=99m posting=
+ to allthree (so sorry for the spam!).
+=20
+I am trying to get OpenEmbeddedrunning on my iPAQ 1940. I have to do this m=
+yself, asAngstrom does not seem to have a build setup for this target hardw=
+are. However,I have been able to follow the OE wiki, and have the build up =
+and running justfine now =E2=80=93 or at least I=E2=80=99m able to generate=
+ all the requiredoutputs it seems =E2=80=A6 I say this, because it=E2=80=99=
+s not quite working on myiPAQ. Let me explain what I see =E2=80=A6
+=20
+1)     The kernel does seem to come up fine =E2=80=93 andif I turn kernel l=
+ogging on (using loglevel in thecommand line passed over by HaRET) I do see=
+ expectedoutputs on the screen (as I=E2=80=99m directing console output to =
+tty0).
+2)     I seem to get to the point where the kernel istrying to launch the f=
+ile system =E2=80=93 but that=E2=80=99s where everything justseems to hang.=
+ I see a message about loading a RAMDISK (if I use initrd), or mounting the=
+ file system if I create apartition and file system on my SD card. The same=
+ result in either case =E2=80=93the RAMDISK / mount message, then a console=
+ output noting that some initial memoryhas been freed up =E2=80=A6 then not=
+hing more. The system is not dead, as I doget messages on the console if I =
+plug / unplug the USB cable, or if I presskeys on the iPAQ =E2=80=A6 but th=
+e system does notboot.
+3)     I took the same initrdimages and tried running them under QEMU (I re=
+ally did try to debug this myselffirst! =E2=80=A6 J).I have to use a differ=
+ent kernel =E2=80=A6 which I don=E2=80=99t quite understandyet, so if someo=
+ne could explain this also I would appreciate it, but that=E2=80=99sa side =
+issue. In any case, QEMU boots off its own kernel (for an ARM processoralso=
+), and they happily launches my initrd and worksjust fine. I have tried thr=
+ee images =E2=80=A6 console-image, x11-image, and opie-image =E2=80=93 they=
+ all work fine in QEMU (but not onthe iPAQ itself).
+4)     I tried moving from initrd(RAMDISK) to the file system on the SD car=
+d, hoping then to see someinformation in the Linux logs that would help me =
+out (i.e. /var/log),but after I (forcefully) reboot the iPAQ and pull theSD=
+ card back out there is nothing here =E2=80=A6 so no help unfortunately.
+=20
+Does anyone have any debugging tricks or pointers that theycan pass on to m=
+e? I=E2=80=99m definitely open to any suggestions! Of course, ifyou have se=
+en similar issues and know how to resolve this it would be greatlyappreciat=
+ed. Unfortunately I seem to be stuck right now.
+=20
+Thanks in advance for your help!!!
+=20
+=20
 
