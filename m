@@ -1,43 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1On1Fo-0001Zk-9X
+	(envelope-from <martin.jansa@gmail.com>) id 1On3cU-00086F-Th
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Aug 2010 05:29:56 +0200
-Received: by pvg6 with SMTP id 6so1848787pvg.6
+	Sun, 22 Aug 2010 08:01:29 +0200
+Received: by fxm6 with SMTP id 6so2589133fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 21 Aug 2010 20:29:27 -0700 (PDT)
+	Sat, 21 Aug 2010 23:01:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer;
-	bh=ktmryXAkYJee/pDYJKcXXxl5zP1ivTqLA8q6KiZMj4U=;
-	b=t44l3JmdZxpstubI+8hGWem+LOwOjBEbfbT0yNdTi1UngJcUgMJp4ZKCk63Kwlx/1T
-	B5zCwy4N6ck3E7RUJg4Djkj9RSOFMhltM4bwYD7ddqqCGhV1qoOU0tRDIQib+ZA4zCu4
-	oKGDRwCYQTel8xbBr6LgFoUc3E8fAfzsMcok4=
+	bh=+cBTedCqDT3LEgUiZcyHi0lcXh7A2ehRBALOjIrg+ZY=;
+	b=MuDrTKjd4d+DY/DZ2HLUYSNS5S3Pbyu0SvCQQHwIXbKCIBiOpd0Jd1lM1hNQJS8mjo
+	ZXb+BP9AJod9BGFefqBWYwJh5HOCt9Ysl6Hpl1B009uHCVvZSRIfRNCP43nwXyOe06Y+
+	0iwP/xnjsCsonS1Qmqvp9974jC1or6GDlTuNg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=pyb6r+V4WIZMqeANcNJVio3jh0Ecc0g+XYDDltLuKMb8ozfDW0lNGyYei5HBl4YOoE
-	fKrpgIzKyqSLQNkqO3i3umUxKO9I7EbUh+LgmAGTIJVGmlROuIO+bmJyzlGq4ZZXb0NE
-	62XTQyPtQHuu+jayoksRBmk/0J/JyxWASH4GU=
-Received: by 10.114.111.13 with SMTP id j13mr3834254wac.123.1282447767827;
-	Sat, 21 Aug 2010 20:29:27 -0700 (PDT)
-Received: from localhost.localdomain ([76.8.213.37])
-	by mx.google.com with ESMTPS id c10sm8930693wam.1.2010.08.21.20.29.26
+	b=BP4s/ekmgBl0inh2y4n0rknM+4rX7bIfNnldJUqRk4OFIlMGNy9F3DxzGwbwveLZ/L
+	AE2SlXZMgeVaKdbdmgk5sP/oN1D6JBCw163MB/ar912hv1ED2aocQRDgIWZRA7y2EEqj
+	7sVCI4R2Ttv/Kx3+8Srqbhj/nuJ+I12iUKMKk=
+Received: by 10.223.110.212 with SMTP id o20mr2794523fap.27.1282456860684;
+	Sat, 21 Aug 2010 23:01:00 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id 2sm1895904faz.38.2010.08.21.23.00.59
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 21 Aug 2010 20:29:27 -0700 (PDT)
-From: AJ ONeal <coolaj86@gmail.com>
+	Sat, 21 Aug 2010 23:01:00 -0700 (PDT)
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 21 Aug 2010 21:28:29 -0600
-Message-Id: <1282447709-15130-1-git-send-email-coolaj86@gmail.com>
-X-Mailer: git-send-email 1.6.0.4
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+Date: Sun, 22 Aug 2010 08:01:03 +0200
+Message-Id: <1282456863-18251-1-git-send-email-Martin.Jansa@gmail.com>
+X-Mailer: git-send-email 1.7.2
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] [v2] added recipe for nodejs
+Subject: [PATCH] matchbox-panel-2-icon-themes: use same SRCREV as matchbox-panel-2
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,127 +51,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Aug 2010 03:29:56 -0000
+X-List-Received-Date: Sun, 22 Aug 2010 06:01:29 -0000
 
+* battery/data was removed in 1919 http://svn.o-hand.com/view/matchbox/trunk/matchbox-panel-2/applets/battery/Makefile.am?rev=1919&view=auto
+* prevent downgrade/upgrade cycle in matchbox-panel-2 checkout ending with (svn: Failed to add directory 'applets': an unversioned directory of the same name already exists)
 ---
- recipes/nodejs/files/libev-cross-cc.patch          |   18 ++++++++++++
- recipes/nodejs/files/node-cross-cc.patch           |   14 ++++++++++
- .../node-dont-include-hosts-usr-include.patch      |   22 +++++++++++++++
- recipes/nodejs/nodejs_0.2.0.bb                     |   28 ++++++++++++++++++++
- 4 files changed, 82 insertions(+), 0 deletions(-)
- create mode 100644 recipes/nodejs/files/libev-cross-cc.patch
- create mode 100644 recipes/nodejs/files/node-cross-cc.patch
- create mode 100644 recipes/nodejs/files/node-dont-include-hosts-usr-include.patch
- create mode 100644 recipes/nodejs/nodejs_0.2.0.bb
+ .../matchbox-panel-2-icon-themes_0.0.1.bb          |    7 ++-----
+ 1 files changed, 2 insertions(+), 5 deletions(-)
 
-diff --git a/recipes/nodejs/files/libev-cross-cc.patch b/recipes/nodejs/files/libev-cross-cc.patch
-new file mode 100644
-index 0000000..446015b
---- /dev/null
-+++ b/recipes/nodejs/files/libev-cross-cc.patch
-@@ -0,0 +1,18 @@
-+diff --git node-v0.2.0/deps/libev/wscript.orig node-v0.2.0/deps/libev/wscript
-+index 19e7bb2..f0a3d3b 100644
-+--- node-v0.2.0/deps/libev/wscript.orig
-++++ node-v0.2.0/deps/libev/wscript
-+@@ -52,7 +52,12 @@ def configure(conf):
-+           return 0;
-+       }
-+   """
-+-  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=True,
-++  # TODO determine this dynamically
-++  CROSS = True
-++  execute = True
-++  if CROSS:
-++    execute = False
-++  conf.check_cc(fragment=code, define_name="HAVE_CLOCK_SYSCALL", execute=execute,
-+                 msg="Checking for SYS_clock_gettime")
-+ 
-+   have_librt = conf.check(lib='rt', uselib_store='RT')
-diff --git a/recipes/nodejs/files/node-cross-cc.patch b/recipes/nodejs/files/node-cross-cc.patch
-new file mode 100644
-index 0000000..48a6226
---- /dev/null
-+++ b/recipes/nodejs/files/node-cross-cc.patch
-@@ -0,0 +1,14 @@
-+diff --git node-v0.2.0/wscript.orig node-v0.2.0/wscript
-+index df9ef53..a55d464 100644
-+--- node-v0.2.0/wscript.orig
-++++ node-v0.2.0/wscript
-+@@ -326,6 +326,9 @@ def v8_cmd(bld, variant):
-+   arch = ""
-+   if bld.env['DEST_CPU'] == 'x86_64':
-+     arch = "arch=x64"
-++  # XXX Better support cross-compilation
-++  else:
-++    arch = "arch=" + bld.env['DEST_CPU']
-+ 
-+   if variant == "default":
-+     mode = "release"
-diff --git a/recipes/nodejs/files/node-dont-include-hosts-usr-include.patch b/recipes/nodejs/files/node-dont-include-hosts-usr-include.patch
-new file mode 100644
-index 0000000..edbf7c4
---- /dev/null
-+++ b/recipes/nodejs/files/node-dont-include-hosts-usr-include.patch
-@@ -0,0 +1,22 @@
-+diff --git node-v0.2.0/wscript.orig node-v0.2.0/wscript
-+index 3c5ebc5..905bd58 100644
-+--- node-v0.2.0/wscript.orig
-++++ node-v0.2.0/wscript
-+@@ -162,11 +162,12 @@ def configure(conf):
-+   if Options.options.efence:
-+     conf.check(lib='efence', libpath=['/usr/lib', '/usr/local/lib'], uselib_store='EFENCE')
-+ 
-+-  if not conf.check(lib="execinfo", includes=['/usr/include', '/usr/local/include'], libpath=['/usr/lib', '/usr/local/lib'], uselib_store="EXECINFO"):
-+-    # Note on Darwin/OS X: This will fail, but will still be used as the
-+-    # execinfo stuff are part of the standard library.
-+-    if sys.platform.startswith("freebsd"):
-+-      conf.fatal("Install the libexecinfo port from /usr/ports/devel/libexecinfo.")
-++  # OpenEmbedded doesn't like us checking here
-++  #if not conf.check(lib="execinfo", includes=['/usr/include', '/usr/local/include'], libpath=['/usr/lib', '/usr/local/lib'], uselib_store="EXECINFO"):
-++  #  # Note on Darwin/OS X: This will fail, but will still be used as the
-++  #  # execinfo stuff are part of the standard library.
-++  #  if sys.platform.startswith("freebsd"):
-++  #    conf.fatal("Install the libexecinfo port from /usr/ports/devel/libexecinfo.")
-+ 
-+   if not Options.options.without_ssl:
-+     if conf.check_cfg(package='openssl',
-diff --git a/recipes/nodejs/nodejs_0.2.0.bb b/recipes/nodejs/nodejs_0.2.0.bb
-new file mode 100644
-index 0000000..83bfa2e
---- /dev/null
-+++ b/recipes/nodejs/nodejs_0.2.0.bb
-@@ -0,0 +1,28 @@
-+DESCRIPTION = "nodeJS Evented I/O for V8 JavaScript"
-+HOMEPAGE = "http://nodejs.org"
-+LICENSE = "MIT"
-+DEPENDS = "openssl"
-+SRC_URI = " \
-+  http://nodejs.org/dist/node-v${PV}.tar.gz \
-+  file://node-cross-cc.patch \
-+  file://libev-cross-cc.patch \
-+  file://node-dont-include-hosts-usr-include.patch \
-+"
-+#file://libev-arm-cross.patch \
-+SRC_URI[md5sum] = "99a6dacc44b3f9c6ec376ccb446dd0b8"
-+SRC_URI[sha256sum] = "3d3eff9287c9917af4044f3cef99ae5b17946710a71e83039de4fcb4b0a26631"
-+S = "${WORKDIR}/node-v${PV}"
-+do_configure () {
-+  ./configure --prefix=${D} --without-snapshot
-+}
-+do_compile () {
-+  make
-+}
-+do_install () {
-+  #oe_runmake install # doesn't install to correct location
-+
-+  # This works
-+  install -d ${D}${bindir}/
-+  install -m 0755 ${S}/node ${D}${bindir}/
-+}
-+FILES_${PN} = "${bindir}/node"
+diff --git a/recipes/matchbox2/matchbox-panel-2-icon-themes_0.0.1.bb b/recipes/matchbox2/matchbox-panel-2-icon-themes_0.0.1.bb
+index bcd7706..257477f 100644
+--- a/recipes/matchbox2/matchbox-panel-2-icon-themes_0.0.1.bb
++++ b/recipes/matchbox2/matchbox-panel-2-icon-themes_0.0.1.bb
+@@ -5,14 +5,13 @@ DEPENDS = "imagemagick-native"
+ RPROVIDES_${PN} = "matchbox-panel-2-icon-theme"
+ PACKAGE_ARCH = "all"
+ SRCREV_FORMAT = "startup"
+-SRCREV = "1907"
++SRCREV = "2098"
+ PV = "0.0.1+svnr${SRCPV}"
+ PR = "r0"
+ 
+ inherit gtk-icon-cache
+ 
+-SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-panel-2/applets/battery/data;proto=http;maxrev=1918 \
+-	   svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-panel-2/applets/startup/data;proto=http;name=startup \
++SRC_URI = "svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-panel-2/applets/startup/data;proto=http;name=startup \
+ 	   svn://svn.o-hand.com/repos/matchbox/trunk;module=matchbox-panel-2/applets/brightness/data;proto=http \
+ 	   file://user-desktop.png \
+ 	   file://task-switcher.png \
+@@ -21,8 +20,6 @@ S = "${WORKDIR}"
+ 
+ do_install() {
+ 	cd ${S}
+-	mkdir -p ${D}${datadir}/icons/HighContrast/48x48/status ${D}${datadir}/icons/HighContrastInverse/48x48/status
+-	install -m 0644 matchbox-panel-2/applets/battery/data/*.png ${D}${datadir}/icons/HighContrastInverse/48x48/status/
+ 	mkdir -p ${D}${datadir}/icons/HighContrast/32x32/status ${D}${datadir}/icons/HighContrastInverse/32x32/status
+ 	install -m 0644 matchbox-panel-2/applets/brightness/data/*.png ${D}${datadir}/icons/HighContrastInverse/32x32/status/
+ 	mkdir -p ${D}${datadir}/icons/HighContrast/32x32/animations ${D}${datadir}/icons/HighContrastInverse/32x32/animations
 -- 
-1.6.0.4
+1.7.2
 
 
 
