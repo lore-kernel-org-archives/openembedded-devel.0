@@ -1,44 +1,44 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OnEPq-0006hz-Lc
+	(envelope-from <vwyodapink@gmail.com>) id 1OnEai-0000cS-I9
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 22 Aug 2010 19:33:08 +0200
-Received: by pwj8 with SMTP id 8so208209pwj.6
+	Sun, 22 Aug 2010 19:44:21 +0200
+Received: by wwe15 with SMTP id 15so3016414wwe.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 22 Aug 2010 10:32:30 -0700 (PDT)
+	Sun, 22 Aug 2010 10:43:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=iABJ9akfd9xraJby0aoZW1DiiGrQSQ80TPWpTP0+MUI=;
-	b=iLMfXTBmUzATCBJs42VimuxnhZ7pLCDwDB9K6UuHXv3NTOqoGNjdtzRGGx8M4wrAft
-	nLYYBUZDIRITnb9jlmIejQ+l4MMup1D6n1HICyk8pSCRnBf55hrklwJkW9QYqEy5dAfn
-	OL4ghBRgMjETSTrOZLQZ7wktDui61tmVIV0UA=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=P4995UhOHjm7ngeDekzcbCPRIxYl0TgBXj7mFJdDEPQ=;
+	b=EU1Ld9hOgLABlsu64nmKRnp4/XkIFD6IZik8zFFyJK9rKAOXu3yiJ5ng3jktWyYIh9
+	hveJ9TkmexIpuJmd1pSX9kXpx5uGNn8+SEJUNtWWxX4ZiVqOrxEivKuGimwBIgcGj1gS
+	jXHg1QWPDETFp7PVfLXFO8kMO8WEvuc89LNdw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=GeWroRqfRYGqmA/Ymmi+NJiV57pLK9q/RWjtgJHMaV9fluT1LfUWgpVIG5B6TKDs82
-	TMl96CBb2gtK5KVyCMjkDVaOpUrDXLo4kCce4EuJR45dLV7iPB/ctAxbkMX+0BaSufSJ
-	3FDzQ5U/oDquYDfVPeNSWgXPqCo9btcYK2X3A=
-Received: by 10.143.18.20 with SMTP id v20mr3436441wfi.12.1282498350327;
-	Sun, 22 Aug 2010 10:32:30 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id d4sm7179794wfh.23.2010.08.22.10.32.29
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 22 Aug 2010 10:32:29 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=fjpa5ZdxuFE7XW9AY4dwyFbAjSGD5VrePK5PKdF54y8faBHGGN98RI5O8wuHBPu7lX
+	c4C213AHhtgmjnMM+MLL1B8vQkAsRXj+ueuBPITuagZAcAfZT9RgWbkjBpvscjkzYNPI
+	aRmHoOc5X4SomnOphUmpsVAXkrqZ6pl+lewAs=
+MIME-Version: 1.0
+Received: by 10.216.236.149 with SMTP id w21mr3538824weq.65.1282499036289;
+	Sun, 22 Aug 2010 10:43:56 -0700 (PDT)
+Received: by 10.216.135.18 with HTTP; Sun, 22 Aug 2010 10:43:56 -0700 (PDT)
+In-Reply-To: <AANLkTimsCtDRzzCcWsQLikvrKujYo4G9Ls0JX3MS9Lp7@mail.gmail.com>
+References: <AANLkTinS5vKrq8vunasV2KCgoD9rgDV5hS6vt69Uu26M@mail.gmail.com>
+	<AANLkTimsCtDRzzCcWsQLikvrKujYo4G9Ls0JX3MS9Lp7@mail.gmail.com>
+Date: Sun, 22 Aug 2010 10:43:56 -0700
+Message-ID: <AANLkTikbA5tcuyzJuO2YcFQLcCi_yUB_eRusqOpCSkJa@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 22 Aug 2010 10:32:25 -0700
-Message-Id: <1282498345-8697-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] ncurses_5.7.bb: Make DEFAULT_PREFERENCE
+Subject: Re: Getting Started with bitbake as a developer?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,31 +52,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 22 Aug 2010 17:33:08 -0000
+X-List-Received-Date: Sun, 22 Aug 2010 17:44:21 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Select 5.7 if none pinned.
+I think AJ meant there needs to be another more in depth one. I would
+agree with that myself. That one barely touches anything about OE to
+me its to simple of an example.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/ncurses/ncurses_5.7.bb |    3 ---
- 1 files changed, 0 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/ncurses/ncurses_5.7.bb b/recipes/ncurses/ncurses_5.7.bb
-index ab029ae..57374ec 100644
---- a/recipes/ncurses/ncurses_5.7.bb
-+++ b/recipes/ncurses/ncurses_5.7.bb
-@@ -6,9 +6,6 @@ PATCHDATE = "20100501"
- PKGV = "${PV}+${PATCHDATE}"
- PR = "r11"
- 
--# recipe is experimental for now...
--DEFAULT_PREFERENCE = "-99"
--
- DEPENDS = "ncurses-native unifdef-native"
- DEPENDS_virtclass-native = "unifdef-native"
- 
--- 
-1.7.1
 
+On Sun, Aug 22, 2010 at 1:38 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/8/22 AJ ONeal <coolaj86@gmail.com>:
+>> http://www.google.com/search?q=openembedded+bitbake
+>> http://www.google.com/search?q=bitbake+getting+started
+>>
+>> Notice that the only useful information for a dev on there is the gumstix
+>> link, which is apparently not up to par with the oe standards.
+>> http://www.gumstix.net/Setup-and-Programming/view/Build-system-overview/Hello-world-tutorial/111.html
+>>
+>> May I suggest that someone put up a doc on the oe wiki for this? or if there
+>> is one, put keywords on it so it gets a ranking?
+>>
+>> I would be happy to write one, but I don't know enough yet.
+>>
+>> AJ ONeal
+>
+> Can we reuse or refer to the gumstix tut?
+> Or could the gumstix tut be an appendix to the bitbake manual?
+> http://bitbake.berlios.de/manual/
+>
+> I feel it is useful to have a getting started doc. The manual on
+> itself is too overwhelming.
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
