@@ -1,32 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1OnUKL-0001w2-Hj
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OnWBs-0002gi-8I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 12:32:47 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OnUJw-0003uS-5E from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 03:32:04 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 23 Aug 2010 12:32:02 +0200
-From: Noor Ahsan <noor_ahsan@mentor.com>
+	Mon, 23 Aug 2010 14:31:52 +0200
+Received: by iwn2 with SMTP id 2so2995164iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Aug 2010 05:31:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=JzOq+c56Z2d2IszU/KaqoDKd9F2c8RnYr0VXYVMEggY=;
+	b=TwsbIGjTtgMDhXY8Q6ngzXvjeLWnFHUibeimFB/yxk/Io88eHh7zDHq0lthZNNIXgz
+	ItpHBltWLrdWvdJXI6Cbsr35PMYiXHaPNjCJrKIJUF5XZHFC/QX558tlSzWaht0HbSmC
+	Z+sgpd3w4FUYJekfzccloi95oNbl41K05vTqc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=ML8Aj7FOu/Pu65Ii+1MgNwyd43xw3BrJfX9JaX4PZV6xdwrxfE3biLKfYNqbJWtD8c
+	fN3MWX4ku/T/j1ud3DXjrczfoT5Y5L16hXhUbJ67oykKeB0BUJyWskYCSxcDSYw/ew0w
+	AFyBQdXx0SwaHe5UCHhCRiTgY+mmloqkdC/NI=
+MIME-Version: 1.0
+Received: by 10.231.191.6 with SMTP id dk6mr6707269ibb.51.1282566685540; Mon,
+	23 Aug 2010 05:31:25 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 05:31:25 -0700 (PDT)
+Date: Mon, 23 Aug 2010 14:31:25 +0200
+Message-ID: <AANLkTin-zjJeiVyEEV-d2Ghy0JCHgvJwEwAiPb=dEbAk@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 23 Aug 2010 16:29:27 +0600
-Message-Id: <1282559367-7589-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 23 Aug 2010 10:32:02.0768 (UTC)
-	FILETIME=[6CD2AD00:01CB42AE]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] uicmoc4-native: Convert to new style staging, Remove do_stage()
+Subject: INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,43 +48,19 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 10:32:47 -0000
+X-List-Received-Date: Mon, 23 Aug 2010 12:31:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Remove do_stage function
-* set NATIVE_INSTALL_WORKS = "1"
+Probably a useless fact but less than 25% of our inc files uses INC_PR:
 
-Signed-off-by: Noor Ahsan <nahsan@pkl-nahsan-ubuntu.(none)>
----
- recipes/uicmoc/uicmoc4-native_4.4.3.bb |   15 ++-------------
- 1 files changed, 2 insertions(+), 13 deletions(-)
+frans@frans-desktop:~/workspace/openembedded.git/recipes$ ls */*inc | wc -l
+890
+frans@frans-desktop:~/workspace/openembedded.git/recipes$ grep -l
+INC_PR */*inc | wc -l
+202
 
-diff --git a/recipes/uicmoc/uicmoc4-native_4.4.3.bb b/recipes/uicmoc/uicmoc4-native_4.4.3.bb
-index d1816d2..d106929 100644
---- a/recipes/uicmoc/uicmoc4-native_4.4.3.bb
-+++ b/recipes/uicmoc/uicmoc4-native_4.4.3.bb
-@@ -2,18 +2,7 @@ require uicmoc4-native.inc
- 
- inherit native
- 
--do_stage() {
--    install -d ${STAGING_BINDIR}/
--    install -m 0755 bin/moc ${STAGING_BINDIR}/moc4
--    install -m 0755 bin/uic ${STAGING_BINDIR}/uic4
--    install -m 0755 bin/uic3 ${STAGING_BINDIR}/uic34
--    install -m 0755 bin/rcc ${STAGING_BINDIR}/rcc4
--    install -m 0755 bin/lrelease ${STAGING_BINDIR}/lrelease4
--    install -m 0755 bin/lupdate ${STAGING_BINDIR}/lupdate4
--    install -d ${STAGING_DIR_NATIVE}/qt4/
--    install -m 0644 tools/porting/src/q3porting.xml ${STAGING_DIR_NATIVE}/qt4/
--}
--
--
- SRC_URI[md5sum] = "9a639aec44a1e4c70040117183d247a3"
- SRC_URI[sha256sum] = "05d06b93f95092f1318634fca24f0c2d0a1252c9f1dc2fbb427b07e8ecbb4f39"
-+
-+NATIVE_INSTALL_WORKS = "1"
--- 
-1.6.3.3
+So 890 inc files, 202 inc files have INC_PR
 
+Frans
 
 
