@@ -1,46 +1,44 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OndyM-00069s-PC
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1One6D-0006zW-0w
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 22:50:36 +0200
-Received: by gwj15 with SMTP id 15so29002gwj.6
+	Mon, 23 Aug 2010 22:58:45 +0200
+Received: by ywa8 with SMTP id 8so1403621ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 13:49:56 -0700 (PDT)
+	Mon, 23 Aug 2010 13:58:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=X+2R9Ab23CrY7/K5jmzXgTGFBdp6Y9kv/2i7OYFq6zw=;
-	b=kgDjBSB7Dq3OguulfiE27E3tSVpPCnbce48bcS5V6X8uYzGAd3bnYAXKYdaGq/jf8U
-	AE8GzyQx+YLeeT0IW0uwLLVUW5fDHqoxkrIGp3iFh7YrVgT6OPOQx83/6hoW0rAatmo+
-	Ry4/R1nCfCdd8tK8dhjPyrzwtqUY+dW8CPetk=
+	bh=g1VAYU4ksg+7g6lXpg7zbzk3XKz0dCZLIn1FhLhk7Hg=;
+	b=pEouQTk28lX3TfXEr0m0B0WQl/zp3uHduYK5g57BW3Xa1J1G9N87Ww4gGfqOoLTSeZ
+	CoMuy8hf0rnbFG/4rKIqLfjQupPHeMA6TEMzYI8hb7IoOJBG2ComruRYFhpUDtg9jRbp
+	CTDJZbIHl/uUBtM/dJlVOF8oKq2W/GlBsAUfo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=CdaRMJaFNIEowp/SEkrlvCdzbkGnCghzV0YtVa6k5pXBzal8FW6SyBdJ+td+kHKVu3
-	Y+nleK893lrhS6MMvbgNcIQ5/DFZ1DR+n/fZ7s7WISwgdjUwUDBUv9TFnVLNAZh6U7rX
-	34rdtuCjQ3U60EPaZ4xKXjPRa24Vw+9WrtdDA=
+	b=g6K0+lpuO4wJbmbVcj1uyJ4AFCY1T/E2YpjNzUb0f+nlSHs+US92d4peOgNT/HDVF7
+	Dj8iD1ggJC6wG5buQN7x3T5gTrKPYcCOCuwKYZp4Rm96BAGvitvmIMVL9x3s/RC1TjmO
+	esD4w11hE/2fP6CiaY2jTdOTYvOf+KkNfmQXk=
 MIME-Version: 1.0
-Received: by 10.151.5.12 with SMTP id h12mr6199040ybi.73.1282596595961; Mon,
-	23 Aug 2010 13:49:55 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 13:49:55 -0700 (PDT)
-In-Reply-To: <AANLkTikVJFZcEO39CnBJfVBdVvjFohDM+E17kXZCmjrr@mail.gmail.com>
-References: <1281459157-4103-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<20100810171950.GA32300@jama>
-	<AANLkTikVJFZcEO39CnBJfVBdVvjFohDM+E17kXZCmjrr@mail.gmail.com>
-Date: Mon, 23 Aug 2010 22:49:55 +0200
-Message-ID: <AANLkTi=9xFW0rcHUZ1tM9dV=Uw3sN8DVQgEpdWT7kQDc@mail.gmail.com>
+Received: by 10.90.103.17 with SMTP id a17mr3923818agc.28.1282597087131; Mon,
+	23 Aug 2010 13:58:07 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 13:58:07 -0700 (PDT)
+In-Reply-To: <4C72C920.7080709@tycoelectronics.com>
+References: <4C72C920.7080709@tycoelectronics.com>
+Date: Mon, 23 Aug 2010 22:58:07 +0200
+Message-ID: <AANLkTi=kCVt_+xBF+r400Nm6AXuApGk1ceuHVEim=K1c@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] conf/distro/include: remove unused versions
+Subject: Re: several recipes give a link error: libc.so, needed by libgcc_s.so, not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,71 +52,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 20:50:36 -0000
+X-List-Received-Date: Mon, 23 Aug 2010 20:58:45 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Summarizing and concluding this:
-The proposed list was
+2010/8/23 Jay Snyder <jay.snyder@tycoelectronics.com>:
+> I am getting the following warning (I assume it is a warning, because they
+> all seem to produce working executables) for several recipes (rxvt-unicode
+> shown):
+>
+> ./rxvt-unicode-7.9-r1/temp/log.do_compile.9530:44:/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/bin/ld:
+> warning: libc.so, needed by
+> /home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/lib/libgcc_s.so,
+> not found (try using -rpath or -rpath-link)
+>
+> The following recipes all exhibit this error:
+>
+> qt4-x11-free-4.6.3-r19.2
+> gs-8.64-r2
+> schroedinger-1.0.9-r0
+> gtk+-2.20.1-r8.1
+> libsndfile1-1.0.21-r1
+> mysql-4.1.22-r6
+> libmusicbrainz-3.0.2-r1
+> cups-1.4.3-r2
+> rxvt-unicode-7.9-r1
+> gnutls-2.8.6-r10.0
+>
+> Also, anything I attempt to build with the above mentioned qt4-x11-free also
+> produce the same warning.
+>
+> There is a file, libc.so in the
+> /home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib path,
+> which IS in an -Wl,rpath= argument being passed to gcc (or g++) (and
+> subsequently to the linker).
+>
+> This problem didn't occur on a git-pull from December 4, 2009, but does on a
+> July 29,2010 pull.
+>
+I have seen the same message for libusb both with gcc 4.4.4 and 4.3.3
+Note that libc.so is in usr/lib while the lib.so.6 file is in lib.
+No idea if that is relevant.
 
-conf/distro/include/freeze.inc
-conf/distro/include/fso-autorev.inc
-conf/distro/include/insane-srcrevs.inc
-conf/distro/include/maemo-preferred.inc
-conf/distro/include/preferred-gpe-versions-2.6.inc
-conf/distro/include/preferred-gpe-versions-2.7.inc
-conf/distro/include/preferred-om-2009-versions.inc
-conf/distro/include/preferred-opie-cvs-versions.inc
-conf/distro/include/preferred-opie-versions-1.2.3.inc
-conf/distro/include/preferred-xorg-versions-X11R7.0.inc
-conf/distro/include/preferred-xorg-versions-X11R7.1.inc
-conf/distro/include/preferred-xorg-versions-X11R7.2.inc
-conf/distro/include/preferred-xorg-versions-X11R7.3.inc
-conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc
-conf/distro/include/preferred-xorg-versions-X11R7.4.inc
-conf/distro/include/preferred-xorg-versions-live.inc
-conf/distro/include/preferred-xorg-versions.inc
+libc.so contains:
+frans@linux-suse:~/oe/tmp_angstrom/sysroots> cat
+./armv7a-angstrom-linux-gnueabi/usr/lib/libc.so
+/* GNU ld script
+   Use the shared library, but some functions are only in
+   the static library, so try that secondarily.  */
+OUTPUT_FORMAT(elf32-littlearm)
+GROUP ( /lib/libc.so.6 /usr/lib/libc_nonshared.a  AS_NEEDED (
+/lib/ld-linux.so.3 ) )
 
-Meanwhile the om version has been removed as openmoko has been removed.
-Martin removed the unneeded xorg versions
-Paul (bluelightning) confirmed that he is still using and maintaining
-the opie versions (we also have the opie 1.2.3 recipes)
-Martin stated fso-autorev.inc is still useful, and I think freeze.inc
-is probably also worthwhile keeping.
+No idea if these should be paths in sysroots (I'm not a dynamic linking expert).
 
-That leaves 4 files which I will discuss below:
-
-conf/distro/include/insane-srcrevs.inc
-Last time file has been modified is aug 22, 2008. Not sure if it is
-useful any more. Would like opinions
-
-conf/distro/include/maemo-preferred.inc
-last modification aug 29, 2006. Pins 10 recipes. Not all of them do
-still exist (e.g. diet-X11 is in obsolete)
-no distro is using this. suggestion: remove
-
-conf/distro/include/preferred-gpe-versions-2.6.inc
-last modification nov 11, 2006.
-pins some 80 recipes, several of these to recipes that are gone for
-quite a while.
-Clearly not maintained, not used by any distro, suggestion: remove
-
-conf/distro/include/preferred-gpe-versions-2.7.inc
-last modification jan 12, 2007.
-again pins some 80 recipes, several of these to recipes that are gone
-for quite a while.
-Clearly not maintained, not used by any distro, suggestion: remove
-
-I feel keeping old inc files around that are not used by any distro in
-the tree, that are not maintained and that contain several pinnings to
-recipes that do not exist any more, is pretty useless.
-If you feel otherwise, please respond to this message, preferably
-indicating why we should keep them and what should be done to update
-them.
-If I get no objections I will remove the last 3 versions next week (30
-aug or so, somewhere after 16.00 GMT) As I feel less certain on
-insane-srcrevs.inc I will keep that one unless being told that it is
-useless too.
-
-Frans.
+Frans
 
 
