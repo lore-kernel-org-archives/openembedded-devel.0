@@ -1,44 +1,27 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1OnabW-0002lR-Sa
+	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OncWS-000183-M6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 19:14:55 +0200
-Received: by gwb15 with SMTP id 15so2293589gwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 10:14:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=3akOIwxjJY9gaV3ueqoJQY1GROoawKWsBcGnv17Hy3U=;
-	b=RT1JLxX0AuvTu3i1IcJ7L06XY+Q7LiHZ1eD1BskxcN0x7xIke2ZSVjLhQW7wCuy6G9
-	i1JYm3hUC5BLhxkjls3N/4m42kpC54bs6c5ZixiGf5+i+uoiMVFtcHO3I8HMPjtj6bQE
-	sXWaoaw5yKv50JZ56NW6diGDTXAX+MbDrdLoA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dcSuDci5fxxP/xtKPL66qSxaqE4sqAH+owtjiingGXM/8eEvvbLe4ZQELFNOP6qmuC
-	nAfqsDhVWuQZtZdIX4pT+IGNB/tu0xNQBKc9G8W39L/PyWxokqMSwLdT7FfpG854RP2m
-	2NHb20IQO0vUK+oLDbo7BFhUYlaEC2e0kZUVc=
+	Mon, 23 Aug 2010 21:17:59 +0200
+Received: from [163.241.71.52] (163.241.71.52) by
+	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
+	Server id 8.1.393.1; Mon, 23 Aug 2010 15:16:41 -0400
+Message-ID: <4C72C920.7080709@tycoelectronics.com>
+Date: Mon, 23 Aug 2010 15:16:48 -0400
+From: Jay Snyder <jay.snyder@tycoelectronics.com>
+User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
 MIME-Version: 1.0
-Received: by 10.239.182.7 with SMTP id o7mr245085hbg.144.1282583628114; Mon,
-	23 Aug 2010 10:13:48 -0700 (PDT)
-Received: by 10.239.152.71 with HTTP; Mon, 23 Aug 2010 10:13:48 -0700 (PDT)
-In-Reply-To: <1282533191-11579-1-git-send-email-raj.khem@gmail.com>
-References: <1282533191-11579-1-git-send-email-raj.khem@gmail.com>
-Date: Mon, 23 Aug 2010 19:13:48 +0200
-Message-ID: <AANLkTi=JGes_Lsf65g0ax0trPNgmMj710ndRPh82Cmq0@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
+To: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 198.175.154.211
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 0/3] Add efika MX support to OE
+Subject: several recipes give a link error: libc.so, needed by libgcc_s.so, not found
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,23 +35,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 17:15:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 23 Aug 2010 19:18:59 -0000
+X-List-Received-Date: Mon, 23 Aug 2010 19:18:59 -0000
+Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Khem,
+I am getting the following warning (I assume it is a warning, because 
+they all seem to produce working executables) for several recipes 
+(rxvt-unicode shown):
 
-On Mon, Aug 23, 2010 at 5:13 AM, Khem Raj <raj.khem@gmail.com> wrote:
->
-> Following three patches will make OE support Efika MX smart computer.
-> The kernel and u-boot is used from powerdeveloper.org as all the changes
-> are not upstream yet.
->
-Thanks, it was on my to-do.  Do you have the Efika MX hardware?
+./rxvt-unicode-7.9-r1/temp/log.do_compile.9530:44:/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/bin/ld: 
+warning: libc.so, needed by 
+/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/lib/libgcc_s.so, 
+not found (try using -rpath or -rpath-link)
 
-I can send you one MX if it helps, it's not the newest board revision though.
+The following recipes all exhibit this error:
 
-Regards,
--- 
-Leon
+qt4-x11-free-4.6.3-r19.2
+gs-8.64-r2
+schroedinger-1.0.9-r0
+gtk+-2.20.1-r8.1
+libsndfile1-1.0.21-r1
+mysql-4.1.22-r6
+libmusicbrainz-3.0.2-r1
+cups-1.4.3-r2
+rxvt-unicode-7.9-r1
+gnutls-2.8.6-r10.0
+
+Also, anything I attempt to build with the above mentioned qt4-x11-free 
+also produce the same warning.
+
+There is a file, libc.so in the 
+/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib path, 
+which IS in an -Wl,rpath= argument being passed to gcc (or g++) (and 
+subsequently to the linker).
+
+This problem didn't occur on a git-pull from December 4, 2009, but does 
+on a July 29,2010 pull.
+
+Thanks,
+Jay
+
 
 
