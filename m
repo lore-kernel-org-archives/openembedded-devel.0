@@ -1,27 +1,49 @@
-Received: from us194mx009.tycoelectronics.net ([198.175.154.211])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jay.snyder@tycoelectronics.com>) id 1OncWS-000183-M6
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OndJW-0005k0-8W
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 21:17:59 +0200
-Received: from [163.241.71.52] (163.241.71.52) by
-	us194mx009.tycoelectronics.net (163.241.185.250) with Microsoft SMTP
-	Server id 8.1.393.1; Mon, 23 Aug 2010 15:16:41 -0400
-Message-ID: <4C72C920.7080709@tycoelectronics.com>
-Date: Mon, 23 Aug 2010 15:16:48 -0400
-From: Jay Snyder <jay.snyder@tycoelectronics.com>
-User-Agent: Thunderbird 2.0.0.23 (X11/20090817)
+	Mon, 23 Aug 2010 22:08:23 +0200
+Received: by iwn2 with SMTP id 2so3249132iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 23 Aug 2010 13:07:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=S6Umxhg7qWoAj1MmAcuQRsZd3FW8TB5smnnvS255TwM=;
+	b=L0sgyHilIYaa7ogoqX8nbBVaMq4o7UfU47Hn0FkazEthQD6BcFoBIYW9xy47+ixVse
+	RycSwcjzj2kUtKx5ykcQiP0fAB8Jr6741mrV2drIHrBr2buTR3qc9Kkl3LmL1M3/lH7H
+	hzzHHoDi1SWfqAGOor8q7+5zgqeCjGsYU1UXA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=p6Pe3z/JTfkqMx1R/WCFX4GrLpuya0yRtMMITQ5ZK2zkiaeyIr9tuaNpWejc5Bmbao
+	+WNAQ73p17AuVpr6tMk1LaL2yu6mUyVfpo0x9zmlMWqeUZKR5D2sy8cMEBt54lT4Ivh+
+	upNWTWIATRODCEwx1K5hsyBQUn73H/jiviM4c=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 198.175.154.211
+Received: by 10.231.192.80 with SMTP id dp16mr7199255ibb.39.1282594067669;
+	Mon, 23 Aug 2010 13:07:47 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 13:07:47 -0700 (PDT)
+In-Reply-To: <alpine.LNX.2.00.1008231134030.5745@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
+	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
+	<alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
+	<AANLkTime=tuSZNkBnM6XacjEC2Nucix0UtWTJ1VehOsr@mail.gmail.com>
+	<alpine.LNX.2.00.1008231134030.5745@asterix.crazy-teaparty.dyndns.org>
+Date: Mon, 23 Aug 2010 22:07:47 +0200
+Message-ID: <AANLkTik-1P7AHQnMzWu0c4b=AZeESjV6Gd4mMrXLZjgN@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Mail-From: jay.snyder@tycoelectronics.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: several recipes give a link error: libc.so, needed by libgcc_s.so, not found
+Subject: Re: orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,46 +57,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 19:18:59 -0000
-X-List-Received-Date: Mon, 23 Aug 2010 19:18:59 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 23 Aug 2010 20:08:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-I am getting the following warning (I assume it is a warning, because 
-they all seem to produce working executables) for several recipes 
-(rxvt-unicode shown):
+2010/8/23 Vitus Jensen <vjensen@gmx.de>:
+> On Sat, 21 Aug 2010, Frans Meulenbroeks wrote:
 
-./rxvt-unicode-7.9-r1/temp/log.do_compile.9530:44:/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/bin/ld: 
-warning: libc.so, needed by 
-/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/lib/libgcc_s.so, 
-not found (try using -rpath or -rpath-link)
+>> Vitus as the owner/maintainer of the recipe do you want me to reinstate
+>> 1.8.28 ?
+>
+> Yes, please do so.
+>
+> Afterwards I will move 1.8 and 1.9 to the current versions.
+>
+> Vitus
+>
+reverted the patch as requested.
 
-The following recipes all exhibit this error:
+Vitus can you also try to merge the native and non-native recipe
+(BBCLASSEXTEBD = "native") and remove the legacy staging?
 
-qt4-x11-free-4.6.3-r19.2
-gs-8.64-r2
-schroedinger-1.0.9-r0
-gtk+-2.20.1-r8.1
-libsndfile1-1.0.21-r1
-mysql-4.1.22-r6
-libmusicbrainz-3.0.2-r1
-cups-1.4.3-r2
-rxvt-unicode-7.9-r1
-gnutls-2.8.6-r10.0
-
-Also, anything I attempt to build with the above mentioned qt4-x11-free 
-also produce the same warning.
-
-There is a file, libc.so in the 
-/home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib path, 
-which IS in an -Wl,rpath= argument being passed to gcc (or g++) (and 
-subsequently to the linker).
-
-This problem didn't occur on a git-pull from December 4, 2009, but does 
-on a July 29,2010 pull.
-
-Thanks,
-Jay
-
+Thanks, Frans.
 
 
