@@ -1,32 +1,37 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OndUT-0001MB-2v
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OndyM-00069s-PC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 22:19:45 +0200
-Received: by gya6 with SMTP id 6so2404818gya.6
+	Mon, 23 Aug 2010 22:50:36 +0200
+Received: by gwj15 with SMTP id 15so29002gwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 13:19:02 -0700 (PDT)
+	Mon, 23 Aug 2010 13:49:56 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=69IoRuA28ovez4DBbGhZMHS19lyhRNxsEA+Q23emF2c=;
-	b=rCUTWMM019Mf+5+lSbAD+vneFvE2hZEZdyvvdq9ZdpbZHj9YAt7zvP0w9ds23AwbYP
-	dfdoerk8Vu5LYtd+0Y87makjT7sg6o1xFz5JyJU8rAPEWZ0uY/73LaP8tRpbbGMxqKRY
-	g+FPXPDzdDRZMr8mIqa/4QGI7ltUzAc1fH+8I=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=X+2R9Ab23CrY7/K5jmzXgTGFBdp6Y9kv/2i7OYFq6zw=;
+	b=kgDjBSB7Dq3OguulfiE27E3tSVpPCnbce48bcS5V6X8uYzGAd3bnYAXKYdaGq/jf8U
+	AE8GzyQx+YLeeT0IW0uwLLVUW5fDHqoxkrIGp3iFh7YrVgT6OPOQx83/6hoW0rAatmo+
+	Ry4/R1nCfCdd8tK8dhjPyrzwtqUY+dW8CPetk=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=eUfBEsdXDAUbEBroHXqSNkTN6dKZ2Bw7BrdgfYU3uwfhXG50yTzyzO3ld09BS/1Igk
-	jeemc8hFO1Jd46QdCYRTRxdcQgcLKKwqnaJoVUvXtPKzOTxsk+FxEpav2tb/nyqZnJnP
-	2665Y8ChDI89DTZCbkOdAFHdbh+EuRBy8qBZU=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=CdaRMJaFNIEowp/SEkrlvCdzbkGnCghzV0YtVa6k5pXBzal8FW6SyBdJ+td+kHKVu3
+	Y+nleK893lrhS6MMvbgNcIQ5/DFZ1DR+n/fZ7s7WISwgdjUwUDBUv9TFnVLNAZh6U7rX
+	34rdtuCjQ3U60EPaZ4xKXjPRa24Vw+9WrtdDA=
 MIME-Version: 1.0
-Received: by 10.151.59.20 with SMTP id m20mr5903531ybk.88.1282594742622; Mon,
-	23 Aug 2010 13:19:02 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 13:19:02 -0700 (PDT)
-Date: Mon, 23 Aug 2010 22:19:02 +0200
-Message-ID: <AANLkTimXc3kLFR1m1uXM6OXZQn3idnbiDcEHPU0wpwEC@mail.gmail.com>
+Received: by 10.151.5.12 with SMTP id h12mr6199040ybi.73.1282596595961; Mon,
+	23 Aug 2010 13:49:55 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 13:49:55 -0700 (PDT)
+In-Reply-To: <AANLkTikVJFZcEO39CnBJfVBdVvjFohDM+E17kXZCmjrr@mail.gmail.com>
+References: <1281459157-4103-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<20100810171950.GA32300@jama>
+	<AANLkTikVJFZcEO39CnBJfVBdVvjFohDM+E17kXZCmjrr@mail.gmail.com>
+Date: Mon, 23 Aug 2010 22:49:55 +0200
+Message-ID: <AANLkTi=9xFW0rcHUZ1tM9dV=Uw3sN8DVQgEpdWT7kQDc@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -35,7 +40,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: script to remove orphaned files
+Subject: Re: [PATCH] conf/distro/include: remove unused versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,76 +54,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 20:19:45 -0000
+X-List-Received-Date: Mon, 23 Aug 2010 20:50:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Dear all,
+Summarizing and concluding this:
+The proposed list was
 
-As I indicated before there are quite some orphaned patch files that
-are not used in any recipe.
+conf/distro/include/freeze.inc
+conf/distro/include/fso-autorev.inc
+conf/distro/include/insane-srcrevs.inc
+conf/distro/include/maemo-preferred.inc
+conf/distro/include/preferred-gpe-versions-2.6.inc
+conf/distro/include/preferred-gpe-versions-2.7.inc
+conf/distro/include/preferred-om-2009-versions.inc
+conf/distro/include/preferred-opie-cvs-versions.inc
+conf/distro/include/preferred-opie-versions-1.2.3.inc
+conf/distro/include/preferred-xorg-versions-X11R7.0.inc
+conf/distro/include/preferred-xorg-versions-X11R7.1.inc
+conf/distro/include/preferred-xorg-versions-X11R7.2.inc
+conf/distro/include/preferred-xorg-versions-X11R7.3.inc
+conf/distro/include/preferred-xorg-versions-X11R7.4-updates.inc
+conf/distro/include/preferred-xorg-versions-X11R7.4.inc
+conf/distro/include/preferred-xorg-versions-live.inc
+conf/distro/include/preferred-xorg-versions.inc
 
-To resolve this I've written a small bash script to remove unused
-patches/files from a directory.
-Below is a copy of the script.
-This is posted to get feedback on the script (with the review comments
-added this can probably be put in the contrib dir).
-If the script is considered to be good, we can run it on the
-directories that we have to clean them up.
-My preference is that recipe owners do this, but as a lot of dirs are
-orphaned, I am planning to do this myself in due time (after the
-review and after giving recipe owners a chance to do it themselves).
+Meanwhile the om version has been removed as openmoko has been removed.
+Martin removed the unneeded xorg versions
+Paul (bluelightning) confirmed that he is still using and maintaining
+the opie versions (we also have the opie 1.2.3 recipes)
+Martin stated fso-autorev.inc is still useful, and I think freeze.inc
+is probably also worthwhile keeping.
 
-Attached is the script. It takes a recipe dir as argument (e.g. recipes/gcc)
-It searches for all .patch and .diff files in that dir, and checks if
-they are mentioned in a .bb file or .inc file
-if the file is there, nothing is done.
-If the fileis not there and there is a -d argument before the dir
-name, the files are actually removed and the change committed.
-Otherwise this filename is just listed.
+That leaves 4 files which I will discuss below:
 
-Proposal is to start with a 1 week script review period.
+conf/distro/include/insane-srcrevs.inc
+Last time file has been modified is aug 22, 2008. Not sure if it is
+useful any more. Would like opinions
+
+conf/distro/include/maemo-preferred.inc
+last modification aug 29, 2006. Pins 10 recipes. Not all of them do
+still exist (e.g. diet-X11 is in obsolete)
+no distro is using this. suggestion: remove
+
+conf/distro/include/preferred-gpe-versions-2.6.inc
+last modification nov 11, 2006.
+pins some 80 recipes, several of these to recipes that are gone for
+quite a while.
+Clearly not maintained, not used by any distro, suggestion: remove
+
+conf/distro/include/preferred-gpe-versions-2.7.inc
+last modification jan 12, 2007.
+again pins some 80 recipes, several of these to recipes that are gone
+for quite a while.
+Clearly not maintained, not used by any distro, suggestion: remove
+
+I feel keeping old inc files around that are not used by any distro in
+the tree, that are not maintained and that contain several pinnings to
+recipes that do not exist any more, is pretty useless.
+If you feel otherwise, please respond to this message, preferably
+indicating why we should keep them and what should be done to update
+them.
+If I get no objections I will remove the last 3 versions next week (30
+aug or so, somewhere after 16.00 GMT) As I feel less certain on
+insane-srcrevs.inc I will keep that one unless being told that it is
+useless too.
 
 Frans.
-
-The script:
-
-#!/bin/bash
-# clean-recipe: a small shell script to clean unneeded patch/diff
-files from a recipe folder
-if [ $# -eq 0 ]
-then
-    echo "usage " $0 "[-d] recipe-dir-name"
-    exit
-fi
-delete=0
-if [ $1 = "-d" ]
-then
-    delete=1
-    shift;
-fi
-dir=$1
-if [ ! -d $dir ]
-then
-    echo $dir " is not a directory"
-    exit
-fi
-cd $dir
-removed=0
-find -name "*.diff" -o -name "*.patch" | (while  read name
-    do
-        bname=`basename $name`
-        grep -q $bname *.bb *.inc || \
-        if [ $delete -eq 0 ]
-        then
-        echo $name " is unused"
-        else
-        git rm $name
-        removed=1
-        fi
-    done
-    if [ $removed -eq 1 ]
-    then
-        echo $dir ": removed unneeded files" | git commit -s -F -
-    fi )
 
 
