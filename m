@@ -1,35 +1,35 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OneWm-0000NS-3Q
+	(envelope-from <coolaj86@gmail.com>) id 1OneZ3-0000RD-Sy
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 23:26:01 +0200
-Received: by fxm6 with SMTP id 6so3576863fxm.6
+	Mon, 23 Aug 2010 23:28:25 +0200
+Received: by fxm6 with SMTP id 6so3579291fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 14:25:35 -0700 (PDT)
+	Mon, 23 Aug 2010 14:27:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type;
-	bh=1R2/LCyPujDcQjR+8xUOBb1zqG7kOdMOkRFlSCHE5tA=;
-	b=CT7qhQUBNdT9cwogpa3xo/K+Ot22Y/ETQxN/0OS8J8oHagY8w5mPxesSK1z95nJrOr
-	UAzf+TwnyIEiRFEf07cGN3XhgxpK6geIZB2bIEQOVdxeIhNks2+y79oe6WOaE/k/I5lH
-	Y4TFfrEOrui2hRFReHrSEbkUgQGiOA+jBxUFM=
+	bh=DsfmZei7I1yxjHVn4TVFYEDfdVEzyjFbXZXQEzzLsGQ=;
+	b=P3BIxx6ejrh4KRqfkENSFcEEsSfDzR5o3Kr9MUAb8QCn+OcvRJvJ1KhTkkVzcGEWpm
+	34AyUJ2es2XEtaUgJ2Sfbr52jLwDdQ5A2kJhwhqxRGVf7XqZz18t7Es46wyb2RTimoUI
+	nU0cEq+hgURP3JSr+RoXvXFm4ukbgCuTUf9Hg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=vHy6DLu7w/RGqAZH59I7DBpjCk7M7UkFomR3P9uqxYGheoElvV6txLosNWtNFq4ji2
-	/JLecdTeIXlp7zq6lQ77dA6BQsf396ZnRG75bbdZDKHH16xeYRMWGMzPi2PaUFW8lEff
-	P6gTUX/1CZt5DpTZLCMAs2Jtp/WiW5xcAGdyI=
-Received: by 10.223.125.196 with SMTP id z4mr5025075far.80.1282598735142; Mon,
-	23 Aug 2010 14:25:35 -0700 (PDT)
+	b=pU7IlFIbSXExKXxlvq8NC9dU1y5UDJlF7/xYh3GWlnWu6gRrmxoXJTj329WYWUrpqU
+	s6bDFoZ8F0NQOAoYt2n2rEWvqZcaPE6zCuP+mjO1CJVmcDZtn2dQqNnD+hJ//eQoF6mx
+	QulfAq897Lefd0q7FNTnOuuNrcjx7v2LRGF1k=
+Received: by 10.223.126.14 with SMTP id a14mr5088714fas.44.1282598875276; Mon,
+	23 Aug 2010 14:27:55 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.125.209 with HTTP; Mon, 23 Aug 2010 14:25:15 -0700 (PDT)
+Received: by 10.223.125.209 with HTTP; Mon, 23 Aug 2010 14:27:35 -0700 (PDT)
 In-Reply-To: <1282556402.3853.17.camel@mattotaupa>
 References: <1282198068-25415-1-git-send-email-coolaj86@gmail.com>
 	<AANLkTi=bCxyXU+mubbmFcrtUsHiVsmtsDw0235E69XRd@mail.gmail.com>
 	<1282556402.3853.17.camel@mattotaupa>
 From: AJ ONeal <coolaj86@gmail.com>
-Date: Mon, 23 Aug 2010 15:25:15 -0600
-Message-ID: <AANLkTimWTfusnW2REvKOhH+vnjS=4EFrKV5DvDNOoYo5@mail.gmail.com>
+Date: Mon, 23 Aug 2010 15:27:35 -0600
+Message-ID: <AANLkTi=ktBQXfW_dbi-2+yUkgGSrParCNt9ZEJCK+JC0@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
@@ -55,21 +55,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 21:26:01 -0000
+X-List-Received-Date: Mon, 23 Aug 2010 21:28:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
 >
-> Please also remember to update the patch queue [2].
+> You are also missing a Signed-off-by line.
 >
 
-Update it to what?
-
-That link you gave me is very unclear
-
-It is desirable to update the state of the patch in the patch queue. This
-> could also be added to the script.
-
-
-The patch is listed as "new". I'd agree with that state. It certainly isn't
-"accepted" - that's someone else's job to put that, right?
+All I do to add that is --signoff, correct?
 
