@@ -1,53 +1,32 @@
-Received: from am1ehsobe005.messaging.microsoft.com ([213.199.154.208]
-	helo=AM1EHSOBE005.bigfish.com)
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Soumya.R@kpitcummins.com>) id 1OnTBe-0002Ae-Ne
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 11:19:42 +0200
-Received: from mail63-am1-R.bigfish.com (10.3.201.248) by
-	AM1EHSOBE005.bigfish.com (10.3.204.25) with Microsoft SMTP Server id
-	8.1.240.5; Mon, 23 Aug 2010 09:03:50 +0000
-Received: from mail63-am1 (localhost.localdomain [127.0.0.1])	by
-	mail63-am1-R.bigfish.com (Postfix) with ESMTP id 5F16E97834D	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 09:03:50 +0000 (UTC)
-X-SpamScore: -12
-X-BigFish: VPS-12(zz14ffO1443Nzz1202hzzz32i2a8h63h)
-Received: from mail63-am1 (localhost.localdomain [127.0.0.1]) by mail63-am1
-	(MessageSwitch) id 1282554230204740_31803;
-	Mon, 23 Aug 2010 09:03:50 +0000 (UTC)
-Received: from am1ehsmhs004.bigfish.com (unknown [10.3.201.250])	by
-	mail63-am1.bigfish.com (Postfix) with ESMTP id 21D65117004E	for
-	<openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 09:03:50 +0000 (UTC)
-Received: from Kcinpunhjhc01.kpit.com (203.197.93.240) by
-	am1ehsmhs004.bigfish.com (10.3.207.104) with Microsoft SMTP Server
-	(TLS) id 14.0.482.44; Mon, 23 Aug 2010 09:03:50 +0000
-Received: from Kcinpunhjcms01.kpit.com ([172.10.16.121]) by
-	Kcinpunhjhc01.kpit.com ([172.10.16.123]) with mapi;
-	Mon, 23 Aug 2010 14:33:46 +0530
-From: Soumya R <Soumya.R@kpitcummins.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 23 Aug 2010 14:33:45 +0530
-Thread-Topic: Issue regarding integrating Qt with OpenGL ES 2.0
-Thread-Index: AQHLQqIXbGFws1hrIkKpAaCbZMxpbw==
-Message-ID: <76E258664B189C4CBEF125491CA11ECC9457D64ECC@KCINPUNHJCMS01.kpit.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-Reverse-DNS: Kcinpunhjhc01.kpit.com
-X-SA-Exim-Connect-IP: 213.199.154.208
-X-SA-Exim-Mail-From: Soumya.R@kpitcummins.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OnTVz-0002hg-54 for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Aug 2010 11:40:42 +0200
+Received: from f053041221.adsl.alicedsl.de ([78.53.41.221]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OnTVc-0007My-Rd for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Aug 2010 09:40:05 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <AANLkTi=bCxyXU+mubbmFcrtUsHiVsmtsDw0235E69XRd@mail.gmail.com>
+References: <1282198068-25415-1-git-send-email-coolaj86@gmail.com>
+	<AANLkTi=bCxyXU+mubbmFcrtUsHiVsmtsDw0235E69XRd@mail.gmail.com>
+Date: Mon, 23 Aug 2010 11:40:02 +0200
+Message-ID: <1282556402.3853.17.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Issue regarding integrating Qt with OpenGL ES 2.0
+Subject: Re: [PATCH] added a .bb for node.js
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,43 +40,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 09:19:42 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
+X-List-Received-Date: Mon, 23 Aug 2010 09:40:42 -0000
+X-Groupsio-MsgNum: 22558
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-UKYB5IELm6DVdaj1yifS"
+
+--=-UKYB5IELm6DVdaj1yifS
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hi All,
+Am Donnerstag, den 19.08.2010, 00:15 -0600 schrieb AJ ONeal:
+> P.S. Is this correct way for me to add a recipe? I didn't notice a
+> particular document for it on the website.
 
-    I need to integrate Qt with OpenGl Es 2.0 for mipsel db1300. I am new t=
-o OpenGL . I just included qt-embedded-gles in my image avn-gles-image. =
+You are also missing a Signed-off-by line.
 
-When i run my image  =
+The process is documented in the Wiki [1] including an example. (Left
+navigation bar, choose =C2=BBDevs=C2=AB for an overview and choose =C2=BBPo=
+licies=C2=AB
+under subcategories.)
 
-
-bitbake avn-gles-image
-NOTE: Handling BitBake files: | (0385/0385) [100 %]
-NOTE: Parsing finished. 368 cached, 13 parsed, 4 skipped, 0 masked.
-NOTE: Resolving any missing task queue dependencies
-NOTE: Runtime target 'qt4-embedded-gles' is unbuildable, removing...
-Missing or unbuildable dependency chain was: ['qt4-embedded-gles', 'virtual=
-/egl']
-ERROR: Required build target 'avn-gles-image' has no buildable providers.
-Missing or unbuildable dependency chain was: ['avn-gles-image', 'qt4-embedd=
-ed-gles', 'virtual/egl']..
-
-  In the recipes i could not find egl recipe. =
+Please also remember to update the patch queue [2].
 
 
-If I write our own recipe for egl , what does the source code should contai=
-n ? . Any Similar recipe is present which i can look into and do the same f=
-or egl.
-I am new to this please guide me how can i start with it.
+Thanks,
 
-Thanks in advance
-
-Regards,
-Soumya
+Paul
 
 
+[1] http://wiki.openembedded.net/index.php/Commit_Policy
+[2] http://wiki.openembedded.net/index.php/Patchwork
 
+--=-UKYB5IELm6DVdaj1yifS
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkxyQfIACgkQPX1aK2wOHViMbgCdE2d/fNxPZjOBTv/GZgTgE6Z6
+UwkAniSy1Saz5kmc0qRgMzlNYqn+5ssK
+=rgcY
+-----END PGP SIGNATURE-----
+
+--=-UKYB5IELm6DVdaj1yifS--
