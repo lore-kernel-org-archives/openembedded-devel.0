@@ -1,42 +1,44 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OnaN3-0001uQ-Rd
+	(envelope-from <raj.khem@gmail.com>) id 1OnaXh-00071S-1L
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 23 Aug 2010 18:59:43 +0200
-Received: by wwi14 with SMTP id 14so351784wwi.24
+	Mon, 23 Aug 2010 19:11:03 +0200
+Received: by pvg6 with SMTP id 6so2404504pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 09:59:09 -0700 (PDT)
+	Mon, 23 Aug 2010 10:09:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=xyV8Zcf5xbUBrJlFJilrdMTzkoipsVrCX7CWlJWQxZY=;
-	b=q0dQta9Dhv3mqaBzjn9tSVgcfAsa6c6/umnG8Z9gV6ALFCg6w2oegUJf6qSsAWoqb4
-	pEyLpAKN+i7UQw5b9Qw24yU6+0BvakQ0pUGFAj23WhqS3iEBzMWmGnCAxk/OHzBfhMQK
-	KL9ZMbBgHk+o5GgnoL9iWTPGAj4Jda9rL6WIU=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=76ayYUjcqsqQ+cFqctWlvmddhF+tCDaxvTCDOU822MI=;
+	b=yDUoiseCPHFNEv8l4gQyjZOioHqQllnYWOGpxPR3tkMuqO4ayjVCnjPHuOjUuOsXuZ
+	w5vLhzlquJI86B5ziVurZghegUXrbxr4J3JjdffMysaklquLSKetSUEESwgFl3CQpRJH
+	0ix4efROrnaUZp0IeGODmkwkBPZJjos+uqtYA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=Inr75f+31vDxAZ5bBoZHj5wmP8ihxQ4fasU6Fo/3WwUjVwZiPUkEVIvgyEgDueXXUH
-	GvjEamD86sL9AgoDJhvKKydymKJ2sKCBs2kJZURHi92nLK1IaCN5PO9KcfMELKn8QqeG
-	0zirgRi+D4wIidXCYvYXdOY4QSqYv0QgoGgSU=
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=pjwVUpBHjhRk3SZA21IOoxYPiT1BRWuiKRbyvdjdu78IZM9PW8ZWC3dHsQp1w7lunz
+	EhzosKL0XFuV2JdRKQj67wWyRVRufzPIqPYlMX7LOVwvV0BQtGEDhUnJwTWWwwlEDTz6
+	WuXFV3GZzX0bORNgsIpgDzIfRSuUGwbrmYoWM=
+Received: by 10.114.39.16 with SMTP id m16mr6300581wam.119.1282583397237; Mon,
+	23 Aug 2010 10:09:57 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.1.18 with SMTP id 18mr1861245wec.24.1282582749205; Mon, 23
-	Aug 2010 09:59:09 -0700 (PDT)
-Received: by 10.216.21.209 with HTTP; Mon, 23 Aug 2010 09:59:08 -0700 (PDT)
-Date: Mon, 23 Aug 2010 12:59:08 -0400
-Message-ID: <AANLkTi=dy24JRuj7eCUJzfwm-tV2Zj=bq9w1V3C4g0oZ@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+Received: by 10.231.207.8 with HTTP; Mon, 23 Aug 2010 10:09:36 -0700 (PDT)
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4379@deimsg40.de.net.world>
+References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4379@deimsg40.de.net.world>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 23 Aug 2010 10:09:36 -0700
+Message-ID: <AANLkTinrm0Mo+GSZfK5XiY6gNq_Pep8nHUeBBw_BA1bz@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE stable, testing, dev
+Subject: Re: new recipe for obexpushd
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,34 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 23 Aug 2010 16:59:43 -0000
+X-List-Received-Date: Mon, 23 Aug 2010 17:11:03 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 21, 2010 at 8:31 AM, Gary Thomas <gary@mlbassoc.com> wrote:
+On Mon, Aug 23, 2010 at 5:55 AM, Hauser, Wolfgang (external)
+<Wolfgang.Hauser.external@eads.com> wrote:
+> Hello, we needed the package obexpushd (from debian) for our system.
 >
-> Perhaps share this load? =A0I'd volunteer to make some tests using
-> my Fedora servers.
+> I've created a recipe for that package. If there is any interest, I can
+> provide this package.
 
-I have posted some initial thoughts to:
+I think if you provide it upstream then you can avoid some maintenance
+on it but not all. in general its
+good practice to provide new recipes here. Well written ones get
+merged pretty fast.
 
-http://wiki.openembedded.org/index.php/Testing
+>
+> I load the original source package from debian package server. Is that
+> the proper way to get the sources ?
 
-Please sign up for combinations you want to test.  Perhaps we can
-automate this effort more with tinderbox at some point.
+debian servers are ok we have many recipes getting sources from debian mirrors.
 
-I realize this is all very manual compared to "continuous
-integration", etc, but I really think OE needs dedicated testing
-manpower, and having a somewhat "manual" process will encourage
-interaction and I think overall be good for the project.
+> It may be possible to get the package from the authors server, I
+> suppose, the debian server is the reliable one.
 
-I'm certainly open to other ideas.
+as long as you get reliable tar file its ok.
 
-Thanks,
-Cliff
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
+>
+> Your suggests ?
+>
+> Wolfgang Hauser
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
