@@ -1,51 +1,41 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1OnnHK-0003OS-TM
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OnnSY-0006HH-AT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Aug 2010 08:46:40 +0200
-Received: from compute3.internal (compute3.internal [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 2F5982AD
+	Tue, 24 Aug 2010 08:58:15 +0200
+Received: by iwn2 with SMTP id 2so3702732iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Aug 2010 02:46:12 -0400 (EDT)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Tue, 24 Aug 2010 02:46:12 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=sPogIE/S0Nxz/NqNF8LMW7rOXA8=;
-	b=VFTRI7I0okS8cYUBuTHdqq9Ug5Z5H1jy9TVA8Be0OnL+oKdU7oq1K5vMcNg4qbxJSEaoCo2COutJ6qd/p0oKwyDb8mNuGifYeLqJh3M/QFozbcNCYcmFEC+e7AaCvIZt1ETVdM/xDevTBF3tWV6xLLrJIl04/iwyCAzVCDvPNc4=
-X-Sasl-enc: F/GYY73fV1sSO4Usu+1kZR3xbxkCa0/Zt1toHL5vxuO4 1282632371
-Received: from [192.168.1.39] (hnvr-4d079266.pool.mediaWays.net [77.7.146.102])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id A7A7140B2A7
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Aug 2010 02:46:11 -0400 (EDT)
-Date: Tue, 24 Aug 2010 08:47:51 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTik-1P7AHQnMzWu0c4b=AZeESjV6Gd4mMrXLZjgN@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1008240846100.5745@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTinr4-xEo+Urc_9P+uLmLk6qPJSRzCJNYVsKAxD6@mail.gmail.com>
-	<alpine.LNX.2.00.1008191432360.5745@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTinMr1=Bj8eK2D+mg_J-P6jzvSAQAhXNtgkK=u1n@mail.gmail.com>
-	<alpine.LNX.2.00.1008201656030.5745@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTime=tuSZNkBnM6XacjEC2Nucix0UtWTJ1VehOsr@mail.gmail.com>
-	<alpine.LNX.2.00.1008231134030.5745@asterix.crazy-teaparty.dyndns.org>
-	<AANLkTik-1P7AHQnMzWu0c4b=AZeESjV6Gd4mMrXLZjgN@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Mon, 23 Aug 2010 23:57:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=4hxnl7AwKLEdyaGdumfwnR4ATWYbyyOhtWFTfMfDbgM=;
+	b=VODEP1SJyY1m3zCUMXGmeSA8MKTb0KOieXEWxXJrB4i9Q6Qc30L6tR0VxFSnwLFD5/
+	McYzKauBeSDQVir7mQYL1Z58PfJFOTaBkSQSb4twWPmhfmLIP6vBjHQHjMI2aIhfjELE
+	8uoCsVdYX0p2Nd/X6gno2q0rKrvtabG9Ji8/4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=kWYEcxnmiQcP/mG+FqmJzzL6j2D7KJuDfWPMmLjdDmiD7oFfCZybHvtxnfo7YX6NoJ
+	r0U5lyZCUjfaJV02HWhjZXIvCMH1UrxKrjoR40nojURmQZdnl9EYU27QxnNJFA+X+TIl
+	l1CXl4luFoNYGV2GcWr5dfkh0BJwGyOpLCbYE=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
+Received: by 10.231.167.80 with SMTP id p16mr7691439iby.119.1282633070181;
+	Mon, 23 Aug 2010 23:57:50 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 23:57:50 -0700 (PDT)
+Date: Tue, 24 Aug 2010 08:57:50 +0200
+Message-ID: <AANLkTi=V=icH-HF-BqgO96jo0-9-PWgoJQQXvWYyE2oZ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Mail-From: vjensen@gmx.de
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: orphaned files
+Subject: revert policy
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,34 +49,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Aug 2010 06:46:40 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Tue, 24 Aug 2010 06:58:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, 23 Aug 2010, Frans Meulenbroeks wrote:
+Dear all,
 
-> 2010/8/23 Vitus Jensen <vjensen@gmx.de>:
->> On Sat, 21 Aug 2010, Frans Meulenbroeks wrote:
->
->>> Vitus as the owner/maintainer of the recipe do you want me to reinstate
->>> 1.8.28 ?
->>
->> Yes, please do so.
->>
->> Afterwards I will move 1.8 and 1.9 to the current versions.
->>
-> reverted the patch as requested.
->
-> Vitus can you also try to merge the native and non-native recipe
-> (BBCLASSEXTEBD = "native") and remove the legacy staging?
+I saw some reverts recently that did not have ack's.
+My understanding of our policy is that a revert either can be done by
+the person who did the commit (e.g. to withdraw a faulty patch), or
+would require (if I recall correctly) two acks.
 
-I feared that you may ask this :-D
+Is my understanding right?
+If not, can someone explain our revert policy
+If yes, can people please adhere the policy
 
-It's on my agenda, I will try to do it next Saturday.
+In any case it seems good to add the revert policy to the wiki. I
+could not find it there.
 
-Vitus
-
--- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+Frans.
 
 
