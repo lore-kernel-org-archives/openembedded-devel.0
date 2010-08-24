@@ -1,41 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OnnSY-0006HH-AT
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1OnnUD-0007tD-W5
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Aug 2010 08:58:15 +0200
-Received: by iwn2 with SMTP id 2so3702732iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 23 Aug 2010 23:57:50 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=4hxnl7AwKLEdyaGdumfwnR4ATWYbyyOhtWFTfMfDbgM=;
-	b=VODEP1SJyY1m3zCUMXGmeSA8MKTb0KOieXEWxXJrB4i9Q6Qc30L6tR0VxFSnwLFD5/
-	McYzKauBeSDQVir7mQYL1Z58PfJFOTaBkSQSb4twWPmhfmLIP6vBjHQHjMI2aIhfjELE
-	8uoCsVdYX0p2Nd/X6gno2q0rKrvtabG9Ji8/4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=kWYEcxnmiQcP/mG+FqmJzzL6j2D7KJuDfWPMmLjdDmiD7oFfCZybHvtxnfo7YX6NoJ
-	r0U5lyZCUjfaJV02HWhjZXIvCMH1UrxKrjoR40nojURmQZdnl9EYU27QxnNJFA+X+TIl
-	l1CXl4luFoNYGV2GcWr5dfkh0BJwGyOpLCbYE=
-MIME-Version: 1.0
-Received: by 10.231.167.80 with SMTP id p16mr7691439iby.119.1282633070181;
-	Mon, 23 Aug 2010 23:57:50 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Mon, 23 Aug 2010 23:57:50 -0700 (PDT)
-Date: Tue, 24 Aug 2010 08:57:50 +0200
-Message-ID: <AANLkTi=V=icH-HF-BqgO96jo0-9-PWgoJQQXvWYyE2oZ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 24 Aug 2010 08:59:59 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OnnTn-0003XX-D5 from Noor_Ahsan@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 23 Aug 2010 23:59:31 -0700
+Received: from localhost.localdomain ([137.202.156.152]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 24 Aug 2010 08:59:29 +0200
+From: Noor Ahsan <noor_ahsan@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+Date: Tue, 24 Aug 2010 12:56:47 +0600
+Message-Id: <1282633007-664-1-git-send-email-noor_ahsan@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 24 Aug 2010 06:59:30.0160 (UTC)
+	FILETIME=[E616DF00:01CB4359]
+X-SA-Exim-Connect-IP: 192.94.38.131
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: revert policy
+Subject: [PATCH] uicmoc-native.inc: Changed PR to INC_PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,23 +41,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Aug 2010 06:58:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 24 Aug 2010 06:59:59 -0000
 
-Dear all,
+* Converted PR to INC_PR
 
-I saw some reverts recently that did not have ack's.
-My understanding of our policy is that a revert either can be done by
-the person who did the commit (e.g. to withdraw a faulty patch), or
-would require (if I recall correctly) two acks.
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ recipes/uicmoc/uicmoc4-native.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Is my understanding right?
-If not, can someone explain our revert policy
-If yes, can people please adhere the policy
+diff --git a/recipes/uicmoc/uicmoc4-native.inc b/recipes/uicmoc/uicmoc4-native.inc
+index 1124226..ea6a469 100644
+--- a/recipes/uicmoc/uicmoc4-native.inc
++++ b/recipes/uicmoc/uicmoc4-native.inc
+@@ -4,7 +4,7 @@ SECTION = "libs"
+ HOMEPAGE = "http://www.trolltech.com"
+ PRIORITY = "optional"
+ LICENSE = "GPL"
+-PR = "r1"
++INC_PR = "r1"
+ 
+ SRC_URI = "ftp://ftp.trolltech.com/qt/source/qt-embedded-linux-opensource-src-${PV}.tar.bz2 \
+            file://configure-fix.patch"
+-- 
+1.6.3.3
 
-In any case it seems good to add the revert policy to the wiki. I
-could not find it there.
 
-Frans.
+From b5ec4b836699cc8780524a214a9e884ca0936212 Mon Sep 17 00:00:00 2001
+Date: Mon, 23 Aug 2010 18:28:38 +0600
+Subject: [PATCH] uicmoc4-native: Introduced PR in the recipe file
+
+* Introduced PR and set it to ${INC_PR}.0
+
+Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+---
+ recipes/uicmoc/uicmoc4-native_4.4.3.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+
+diff --git a/recipes/uicmoc/uicmoc4-native_4.4.3.bb b/recipes/uicmoc/uicmoc4-native_4.4.3.bb
+index d1816d2..0ef53e1 100644
+--- a/recipes/uicmoc/uicmoc4-native_4.4.3.bb
++++ b/recipes/uicmoc/uicmoc4-native_4.4.3.bb
+@@ -1,3 +1,4 @@
++PR = ${INC_PR}.0
+ require uicmoc4-native.inc
+ 
+ inherit native
+-- 
+1.6.3.3
+
 
 
