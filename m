@@ -1,30 +1,39 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Onu6a-000395-DY
+	(envelope-from <stefan@datenfreihafen.org>) id 1OnuZ3-0007Nt-8j
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Aug 2010 16:04:15 +0200
-Received: (qmail 28834 invoked by uid 1003); 24 Aug 2010 14:03:18 -0000
-Received: from pool-96-240-180-89.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.89)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	24 Aug 2010 14:03:18 -0000
-Message-ID: <4C73D124.9080501@balister.org>
-Date: Tue, 24 Aug 2010 10:03:16 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
-MIME-Version: 1.0
+	Tue, 24 Aug 2010 16:33:48 +0200
+Received: from [134.169.35.210] (helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1OnuYK-0000Nq-Sr by authid <stefan@sostec.de> with cram_md5
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Aug 2010 16:32:55 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1OnuYE-0000T3-NQ
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 24 Aug 2010 16:32:34 +0200
+Date: Tue, 24 Aug 2010 16:32:34 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 216.168.135.169
+Message-ID: <20100824143234.GC7560@excalibur.local>
+References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
 X-SA-Exim-Rcpt-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Has the file:// behavior changed in SRC_URI
+Subject: Re: testing branch 2010-08-23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,20 +47,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Aug 2010 14:04:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 24 Aug 2010 14:33:48 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-I know I used to be able to use a local directory with kernel source 
-like this:
+Hello.
 
-SRC_URI = "file:///home/balister/kernel_source"
+On Mon, 2010-08-23 at 19:49, Cliff Brake wrote:
+> http://wiki.openembedded.net/index.php/Testing
 
-but now all that is copied to ${WORK} is an empty directory. This is 
-with bitbake 1.10.0.
+Added myself with bug20 as machine and openjdk-6 as target. (That is until we
+have a real bug image in dev)
 
-Any thoughts?
+> I have branched dev.oe.org to the testing-testing branch, and have
+> verified it builds the following.
+> 
+> beagleboard 	angstrom-2008.1 	beagleboard-linuxtag2010-demo-image
+> 	Ubuntu 10.04 64-bit 	User:Cbrake
+> beagleboard 	angstrom-2008.1 	console-image 	Ubuntu 10.04 64-bit 	User:Cbrake 	
 
-Philip
+My build was also working fine:
+bug20 	angstrom-2008.1 	openjdk-6 	Debian Unstable 64-bit 	Stefan testing_2010-08-23 
+
+regards
+Stefan Schmidt
 
 
