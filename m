@@ -1,47 +1,43 @@
 Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Onwmr-00056o-Pn
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Onwo4-00058P-MP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Aug 2010 18:56:02 +0200
-Received: by ywa8 with SMTP id 8so1723655ywa.6
+	Tue, 24 Aug 2010 18:57:16 +0200
+Received: by ywa8 with SMTP id 8so1724221ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Aug 2010 09:55:10 -0700 (PDT)
+	Tue, 24 Aug 2010 09:56:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=ygANZuz9od9IZOALvL7d7/hoYUMQpXFiAqgLIjFgZGk=;
-	b=XXAa+d2JA9Orb0cPEH4V40bwxhWHtqcDQ50DwWvxs2hmXItU/tDAShG456oMHJ+LTJ
-	agXdlP+hfDqRXM+ptEcg/zai18AXDOn3MuON+txyXZYV9QpHLptP7+wLOKgvNRyN0pXc
-	1D5y3XWQYfNfYPyYv/7AVqvLpePAgPBSnUhRI=
+	:references:date:message-id:subject:from:to:content-type;
+	bh=jedanWgp4RhKtVH/qHKh6D0PCnjbgu+h1NBRcAkQ0Pc=;
+	b=rLGBoUioXJHcEiuhX4rx2PHS4scYxsJu7Rm3N6Cpbbk3Ex6olwpqbmlpa4BIzUgyRn
+	tDPCl/t/4W3VnEOD4/PsdQPOOpxoomS36Rc7+vQetYWW9dZsOMiLs9WwIL/1Hh3IUAXU
+	i3M5hJ7vPGhinLfAZ8bCpb10+7FgDQzjIgjek=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=YdpGiWDjFauHw4Hnu/sfxSUJbXN/csWMjAk1OGPdcO9LAviYhzOtwCxcv6oLRWKcqj
-	h5m3kW3wLkdYRlIw/zmlqT+dDYhuNOuRpTsthq4rDzGuNAt0Ql366jhQQ7pLFu/gYWzu
-	+BUi63McgqfHQ8nupjl6+dWFqE+vcg4AuCJUc=
+	:content-type;
+	b=a5wSjet4lyec7wTSZYldUAECs1yO7YNNP9SbEmSHQrvmBWLODPi7I76goTo0bagT9b
+	drgwrXUxjh1le2SbCyYpjYfKXCbawnYnRfYRc6BR2NZqcPm6cgXGf0utsPdV5rF1lA8H
+	jR1WBJXNFpIcHoHOkW4/dywsAmjwGZx5H3Ozs=
 MIME-Version: 1.0
-Received: by 10.90.72.15 with SMTP id u15mr4547666aga.189.1282668910560; Tue,
-	24 Aug 2010 09:55:10 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Tue, 24 Aug 2010 09:55:10 -0700 (PDT)
-In-Reply-To: <AANLkTinWXK-HZHOLv2b2ApdPQ+LW22bvwsOO5TGOc1kx@mail.gmail.com>
-References: <AANLkTimXc3kLFR1m1uXM6OXZQn3idnbiDcEHPU0wpwEC@mail.gmail.com>
-	<AANLkTikd-_vDny=kJKeS+NVWeYyfxiE_yXdUE+t1ac48@mail.gmail.com>
-	<AANLkTi=s9gHBx_uPgiPGhu9b7D10JGytQaxyd-SZ+sfQ@mail.gmail.com>
-	<AANLkTinWXK-HZHOLv2b2ApdPQ+LW22bvwsOO5TGOc1kx@mail.gmail.com>
-Date: Tue, 24 Aug 2010 18:55:10 +0200
-Message-ID: <AANLkTim9n1JsDc+bmYN5g20kBtobi5Ti-60Joq1U_rQZ@mail.gmail.com>
+Received: by 10.150.132.5 with SMTP id f5mr7054186ybd.417.1282668983748; Tue,
+	24 Aug 2010 09:56:23 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Tue, 24 Aug 2010 09:56:23 -0700 (PDT)
+In-Reply-To: <1282654258-31963-1-git-send-email-noor_ahsan@mentor.com>
+References: <1282654258-31963-1-git-send-email-noor_ahsan@mentor.com>
+Date: Tue, 24 Aug 2010 18:56:23 +0200
+Message-ID: <AANLkTi=5eqeBTy8p2unpbp4mrHNXE8Fx=g6fGF+acpr3@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: script to remove orphaned files
+Subject: Re: [PATCH] sgml-common-native: Convert to new style staging, remove do_stage()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,35 +51,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Aug 2010 16:56:02 -0000
+X-List-Received-Date: Tue, 24 Aug 2010 16:57:16 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-2010/8/24 Chris Larson <clarson@kergoth.com>:
-> On Mon, Aug 23, 2010 at 11:32 PM, Frans Meulenbroeks <
-> fransmeulenbroeks@gmail.com> wrote:
->
-
->> Currently the parser is in bitbake, I have no idea on how to hook
->> those kind of checks in the parser, or how to craft a python parser
->> that would be able to do the above.
->> It would be nice if someone with more python knowledge could give that a
->> stab.
->> BTW: I have been thinking about crafting a parser with lex/yacc, but
->> especially the override mechanism does not allow to make a simple .y
->> file for it (e.g. SRC_URI cannot be made a token because we also can
->> have SRC_URI_xyz etc)
->
->
-> SRC_URI shouldn't be a token. =A0It's not special to the file format, it'=
-s
-> just a variable :)
-
-True.
-Language it is not different from another variable, but semantically
-it has a specific meaning, that's why I also see it as a token
-although technically it isn't.
-
-Frans.
+tested and pushed. Also the other sgml-common-native one.
+Thanks.
 
 
