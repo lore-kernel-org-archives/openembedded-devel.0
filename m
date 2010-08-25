@@ -1,36 +1,40 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sean@chumby.com>) id 1Oo82N-0003sQ-6y
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 06:56:37 +0200
-Received: by iwn2 with SMTP id 2so243398iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 24 Aug 2010 21:56:00 -0700 (PDT)
-Received: by 10.231.172.70 with SMTP id k6mr9739514ibz.125.1282712160126;
-	Tue, 24 Aug 2010 21:56:00 -0700 (PDT)
-Received: from [10.0.239.103] (cm229.psi191.maxonline.com.sg [58.146.191.229])
-	by mx.google.com with ESMTPS id n20sm886174ibe.17.2010.08.24.21.55.57
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 24 Aug 2010 21:55:58 -0700 (PDT)
-Mime-Version: 1.0 (Apple Message framework v1081)
-From: Sean Cross <sean@chumby.com>
-In-Reply-To: <4C6DA3DD.4080501@eukrea.com>
-Date: Wed, 25 Aug 2010 12:55:54 +0800
-Message-Id: <DC46371C-F872-45D1-910F-D1E0CCAC0FA2@chumby.com>
-References: <7FC9418E-5EF5-4750-BFD7-DB7E43B38513@chumby.com>	<i4iq60$g6i$1@dough.gmane.org>
-	<B49DA616-CD60-4E6E-A141-C3637BA9EB24@chumby.com>
-	<4C6DA3DD.4080501@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1081)
+	(envelope-from <raj.khem@gmail.com>) id 1Oo8zL-0000TK-WD
+	for Openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 07:57:34 +0200
+Received: by iwn2 with SMTP id 2so282757iwn.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Aug 2010 22:56:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=aZr/oMqIMVaMWY7m2+QAA6AxWAUO+abytaRTTu8WHvI=;
+	b=WpCHU4IcPojYD4gtncSw0RuZbv+aO7zg4yLYeDFRBeKfy1Sno0F1/fja/KsBBPS3iE
+	pJtGIKPQm2SjRm6qLG7iSQ0zBdr2Xu2xNr7jdZ3Y1aupxi+9p+JUz4X1jyw6H1aEJmql
+	5UkwS58ZGEyGNyon3tTlwPb4qdB1gc3BZXM40=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=RRx1I/Q3Cz/aWQqg5b6wV/rjOExd4rASUO0jaKI30iDIB8ZHdjm485li2lo/yS6y2c
+	rA7F05coax0ImVykJEcJ9AowqRdJWUP9x2B+ylZy7LY69FaTxDq4MOn2OPIVqLuPUaT5
+	MMWSMBSw2b2IRi0bPKIXKufR4C/w1OB/WkLjI=
+Received: by 10.231.13.130 with SMTP id c2mr9158921iba.24.1282715817330; Tue,
+	24 Aug 2010 22:56:57 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.207.8 with HTTP; Tue, 24 Aug 2010 22:56:37 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 24 Aug 2010 22:56:37 -0700
+Message-ID: <AANLkTi=aRz_1tiE51NVYH3v67R0uD8WNtn4vzH+WnYNY@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
 X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: sean@chumby.com
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/3] Add chumby falconwing kernel recipe
+Subject: commit fc3233b3a21ac14127bdd4931687ef39482cb0ec would need partial revert
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,40 +48,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 04:56:37 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Aug 2010 05:57:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+
+Hi Frans and all
+
+commit fc3233b3a21ac14127bdd4931687ef39482cb0ec
+Author: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Date:   Tue Aug 10 19:49:56 2010 +0200
+
+    autoconf: remove a few old unused versions
+
+    Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
-On Aug 20, 2010, at 5:36 AM, Eric B=E9nard wrote:
 
-> Hi Sean,
->=20
-> Le 19/08/2010 21:21, Sean Cross a =E9crit :
->> On Aug 19, 2010, at 1:32 AM, Koen Kooi wrote:
->>> Can't this me merged into the .26.28 kernel recipe?
->>>=20
->> I can do that, but the resulting patch is 28 megabytes. I think
->> that's a bit big.
->>=20
->> It's Freescale's kernel patch, which supports all of their
->> processors, not just the i.MX233.  My guess is that nobody's tried to
->> get these patches into the kernel upstream.
->>=20
->> The resulting patch I get is mostly an additive patch, as I count
->> 800,000 added lines in the patch, and 1200 removed lines.
->>=20
-> maybe using Freecale git server with the right revision will allow you
-> to only have one smaller patch which adds support of your board :
-> http://opensource.freescale.com/git?p=3Dimx/linux-2.6-imx.git;a=3Dsummar=
-y
+This commit removed autoconf213-native_2.13.bb which is a named
+differently for a reason
+because there were some packages which needed it one of the packages is fennec.
+I am trying to see if we can get fennec upgraded to latest and remove
+the dependency
+on 2.13 if I succeed then no changes will be needed but if it happens
+that 2.13 is
+required then we might have to let autoconf213 live.
 
-I'll work on doing that.  But I don't see any other Linux kernel recipes =
-that use this repo.  What's the advantage of using this GIT server and =
-including a patch against it, rather than pulling the chumby tgz file =
-and not having any patches?
+Thanks
 
-
-Sean=
+-Khem
 
 
