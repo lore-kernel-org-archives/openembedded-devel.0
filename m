@@ -1,37 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OoM5j-0008LG-4F
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoN1r-0005JC-DO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 21:57:08 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OoM5H-0007PO-31 from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 12:56:31 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 25 Aug 2010 12:56:30 -0700
-Received: from [172.30.80.146] ([172.30.80.146]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 25 Aug 2010 13:56:31 -0600
-Message-ID: <4C757565.3010107@mentor.com>
-Date: Wed, 25 Aug 2010 12:56:21 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 25 Aug 2010 22:57:29 +0200
+Received: by iwn2 with SMTP id 2so849528iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Aug 2010 13:56:37 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=2xAnkBDISIkvO72vg4jATcLGdRGi4QzPagWfZ1d3WAg=;
+	b=HVRMbhnAvp/mRv/8UaPUWzU1UYSh+NLwQ+WkZwJDnkq0YVXg8z5pDdkiBfeXtMPyZ5
+	gLE0Tto/XByI8vGTr6nk8kYZvqFN10HlScmhNNuOhNZytNejXjFJkZ3u2NSVwI2i+loh
+	4GrxLUkpy8pWiOHI+DE26MZXR5gnXrp+V2vTY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=JSuutfEgCD8BfwKiTe7I8LycSjEGJGk6+iwtBPd6L2Yx1erqV1UGGg39NaFvDOWznn
+	ud2iFaL3F8X4kX+53ZublFz74aubrbh3geoQ7htgWZ/lER04ProasH7ZTJ10zQ9aJQGi
+	b98lkkroeNnnJgzTvxFG6wDatPLBx+CJD+ylw=
 MIME-Version: 1.0
+Received: by 10.231.118.28 with SMTP id t28mr9377331ibq.131.1282769797774;
+	Wed, 25 Aug 2010 13:56:37 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Wed, 25 Aug 2010 13:56:37 -0700 (PDT)
+In-Reply-To: <4C757565.3010107@mentor.com>
+References: <AANLkTimd9f1LPJ8f7Bi1+8V7T8dJ-C+3m5NxgWGQ8Tuw@mail.gmail.com>
+	<201008252132.03713.roman@khimov.ru>
+	<AANLkTinQqY=C+7ES=qZ8vRuQi_UOWOKX4PHQ7XFtqH2k@mail.gmail.com>
+	<201008252221.59989.roman@khimov.ru> <4C757565.3010107@mentor.com>
+Date: Wed, 25 Aug 2010 22:56:37 +0200
+Message-ID: <AANLkTi=C2B9VxaR0EVGWJf-ayoQ12shcvbO_Enp3KbEZ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimd9f1LPJ8f7Bi1+8V7T8dJ-C+3m5NxgWGQ8Tuw@mail.gmail.com>	<201008252132.03713.roman@khimov.ru>	<AANLkTinQqY=C+7ES=qZ8vRuQi_UOWOKX4PHQ7XFtqH2k@mail.gmail.com>
-	<201008252221.59989.roman@khimov.ru>
-In-Reply-To: <201008252221.59989.roman@khimov.ru>
-X-OriginalArrivalTime: 25 Aug 2010 19:56:31.0244 (UTC)
-	FILETIME=[9CD57CC0:01CB448F]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: squid: remove 2.x versions
@@ -48,26 +55,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 19:57:08 -0000
-Content-Type: text/plain; charset=KOI8-R; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 25 Aug 2010 20:57:30 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-Roman I Khimov wrote:
-> В сообщении от Среда 25 августа 2010 21:59:31 автор Frans Meulenbroeks 
-> написал:
->> Ok, as you are definitely more knowledgeable than I am, I follow your
->>  proposal. As you are probably the owner of the recipe (and have more
->>  knowledge) can you give followup to this.
-> 
-> Well, MAINTAINERS file disagree a bit with this ownership, but seems like I'm 
-> the one who cares most about it at this day and age, so. Patch will follow.
+2010/8/25 Tom Rini <tom_rini@mentor.com>:
+> Roman I Khimov wrote:
+>>
+>> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F3=D2=C5=C4=C1 25 =C1=D7=C7=D5=
+=D3=D4=C1 2010 21:59:31 =C1=D7=D4=CF=D2 Frans Meulenbroeks
+>> =CE=C1=D0=C9=D3=C1=CC:
+>>>
+>>> Ok, as you are definitely more knowledgeable than I am, I follow your
+>>> =9Aproposal. As you are probably the owner of the recipe (and have more
+>>> =9Aknowledge) can you give followup to this.
+>>
+>> Well, MAINTAINERS file disagree a bit with this ownership, but seems lik=
+e
+>> I'm the one who cares most about it at this day and age, so. Patch will
+>> follow.
+>
+> An also active (yes, I'll call March active) developer. =9APerhaps it's O=
+K to
+> have > 1 MAINTAINER for a recipe, and you'd like to sign up for some of t=
+he
+> other thing you've been keeping a good eye on? =9AThanks :)
+>
+> --
 
-An also active (yes, I'll call March active) developer.  Perhaps it's OK 
-to have > 1 MAINTAINER for a recipe, and you'd like to sign up for some 
-of the other thing you've been keeping a good eye on?  Thanks :)
+I think it is fine to have more than one developer for a recipe.
+guess this also applies to e.g. the linux and u-boot recipes
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Frans
 
 
