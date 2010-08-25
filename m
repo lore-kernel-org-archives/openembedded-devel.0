@@ -1,30 +1,44 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1OoJq5-0001wg-0h
+	(envelope-from <vwyodapink@gmail.com>) id 1OoK4k-0004UV-0T
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 19:32:45 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1OoJpW-0006Jz-At
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 21:32:11 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Aug 2010 21:31:28 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <AANLkTimd9f1LPJ8f7Bi1+8V7T8dJ-C+3m5NxgWGQ8Tuw@mail.gmail.com>
-In-Reply-To: <AANLkTimd9f1LPJ8f7Bi1+8V7T8dJ-C+3m5NxgWGQ8Tuw@mail.gmail.com>
+	Wed, 25 Aug 2010 19:47:51 +0200
+Received: by wwb18 with SMTP id 18so1375173wwb.0
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Aug 2010 10:47:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=i4vHqyNGnj/LDlPsUGFSjwwvOUwUWCB4BPtDX8jxhSk=;
+	b=KGn+PRcPn9PbSaTi5agidXpgbJqpHYrEKlyQsUjoc4eYFLXAZTjuAtgC+FLuqIw0Od
+	wmRyCefwdilq55pfC8PlIyuJnToOd7EYBOiMcKXYGZt1mQdPdENVW8VjfvqHaf5eiiqH
+	ce0MBv5fSnwhwvaoCnTU1CLdmaC6JL7jUC3s4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=LhZY6ZFTMtUGXfCa9qO+1Ca2IglbV4fphnGoD1oRckwZuHrLZD80u95pICHJK8rbII
+	Ada3JepkyQv4o5t9CgPZMiAjxm+P4dbTBKue/6pf0TZmhpvdzECxWLyXI3pi0oiFbwbG
+	NpFzhyRg5PnobUsQdiPZ1qcnwUg6ystkiOwq0=
 MIME-Version: 1.0
-Message-Id: <201008252132.03713.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.227.127.149 with SMTP id g21mr7466906wbs.218.1282758443205;
+	Wed, 25 Aug 2010 10:47:23 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Wed, 25 Aug 2010 10:47:23 -0700 (PDT)
+In-Reply-To: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+References: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+Date: Wed, 25 Aug 2010 10:47:23 -0700
+Message-ID: <AANLkTikXMR7j0r20XWCdMpDa69P92m6wbPLZVNH_Nob_@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: squid: remove 2.x versions
+Subject: Re: Patch procedure for dummies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,65 +52,80 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 17:32:45 -0000
-X-Groupsio-MsgNum: 22650
-Content-Type: multipart/signed; boundary="nextPart1316274.UA1j6CRBnR";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
-
---nextPart1316274.UA1j6CRBnR
-Content-Type: Text/Plain;
-  charset="utf-8"
+X-List-Received-Date: Wed, 25 Aug 2010 17:47:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=A1=D1=80=D0=B5=D0=B4=D0=B0 25 =D0=B0=D0=B2=D0=B3=D1=83=D1=81=D1=82=D0=
-=B0 2010 21:12:02 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Frans Meulenbroeks=20
-=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> Triggered by the recent commit from Roman:
-> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db0f0b3ab8=
-7cf8
-> 5c76498b57f8300539d133efa6f There are various DoS issues resolved in 3 th=
-at
->  are not resolved in 2.x (http://www.squid-cache.org/Advisories/)
->=20
-> 2.6 is not a recommended version any more. 2.7 is lagging a version
-> (latest is stable9).
-> I propose to remove the 2.x versions and keep only 3.1.7
+A huge thanks for taking the time AJ keep you the great work, I am
+sure your helping tons of people me included!
 
-I'd remove 2.6 and leave 2.7 since AFAIK it is officially maintained (STABL=
-E9=20
-has almost no changes compared to STABLE8, I've seen that and not bothered =
-to=20
-update even when we've been on 2.7):
-http://www.squid-cache.org/Versions/v2/2.7/changesets/SQUID_2_7_STABLE9.html
 
-3.x and 2.x branches are very different so there are situations where 3.x h=
-as=20
-a bug and 2.x doesn't (3.1.6 bug is in this category)
 
-2.x also has some features 3.x doesn't:
-http://www.squid-cache.org/Versions/v3/3.1/RELEASENOTES.html#s6
 
-2.6, especially since it's STABLE14 and no one cares to update it to latest=
-=20
-STABLE, yes, good candidate for removal.
+On Wed, Aug 25, 2010 at 7:43 AM, AJ ONeal <coolaj86@gmail.com> wrote:
+> Please give me feedback and I'll post this on the wiki.
+>
+> A task-oriented guide to creating a patch:
+>
+>
+>
+>> Let's say you create a new recipe and you'd like to submit it for inclus=
+ion
+>> (and you've already tested that it works, of course).
+>>
+>> 1. Now commit with a good strong helpful message
+>>
+>> =A0 =A0 git add recipes/nodejs/
+>> =A0 =A0 git commit # don't use the -m option
+>>
+>> 2. The message should look like this
+>>
+>> =A0 =A0 added recipe for node.js
+>>
+>> =A0 =A0 * added recipe for node.js (bug #5555 - no nodejs recipe)
+>> =A0 =A0 ** patched libev's wscript to not try to execute code
+>> =A0 =A0 ** patched node's wscript to not search in '/usr/include'
+>>
+>> =A0 =A0 Signed-off-by: AJ ONeal <coolaj86@gmail.com>
+>>
+>> 3. Create your patch
+>>
+>> =A0 =A0 git format-patch -1 # or however many commits are part of this c=
+hange
+>>
+>> 3++. If you are submitting a second version also add "--subject-prefix
+>> [v2]"
+>>
+>> =A0 =A0 git send-email
+>>
+>> Your patch will be immediately visible on
+>> http://patchwork.openembedded.org/patch/
+>>
+>
+>
+>> 4. Once your patch has been accepted or rejected, create an account and
+>> update the status to "accepted" or "rejected"
+>>
+>> 4++. If you get soft-rejected (a lot of feedback), make the changes, sub=
+mit
+>> the next version, and update the status of the previous patch to
+>> "superseded"
+>>
+>> Appendix: Properly configuring git (using tekkub@gmail.com as an example
+>> user)
+>>
+>> =A0 =A0 sudo apt-get install git-core git-email
+>> =A0 =A0 git config --global user.name "Tekkub"
+>> =A0 =A0 git config --global user.email "tekkub@gmail.com"
+>> =A0 =A0 git config --global sendemail.smtpserver smtp.gmail.com
+>> =A0 =A0 git config --global sendemail.smtpserverport 587
+>> =A0 =A0 git config --global sendemail.smtpencryption tls
+>> =A0 =A0 git config --global sendemail.smtpuser tekkupl@gmail.com
+>>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
---nextPart1316274.UA1j6CRBnR
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkx1U5MACgkQXJ70z+XgVcOIwACfTh1eZ+l812l/zEkDB0EZ94pS
-m5wAn3g0hzj9CqslWnFYn24n3w2e1jhv
-=j/Pb
------END PGP SIGNATURE-----
-
---nextPart1316274.UA1j6CRBnR--
