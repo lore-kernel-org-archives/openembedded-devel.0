@@ -1,25 +1,46 @@
-Received: from mail.infocentr.ru ([78.108.66.4])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OoJBo-0003Lh-9q
+	(envelope-from <norguhtar@gmail.com>) id 1OoJCq-0003V5-5u
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 18:51:07 +0200
-Received: from localhost.localdomain (unknown [192.168.62.150])
-	by mail.infocentr.ru (Postfix) with ESMTP id 5F760B0016E3;
-	Wed, 25 Aug 2010 22:44:30 +0600 (YEKST)
+	Wed, 25 Aug 2010 18:52:08 +0200
+Received: by ewy7 with SMTP id 7so425490ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Aug 2010 09:51:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=tgG/dYewh7Gds8zPjnBbUfQVeIxDF8USh9zWbPkTosM=;
+	b=sWbcahnEesCGmAMX7IS14TlvRjbG4KD2Pe5/g/FTui9Ox6j9SLFNKTZ+cpFjeoBa+4
+	A+l4kbPD6g9IOjPaNxhMigOlXDH2AOxB1th+2hle7oB3A5juwOIWL312p+kgU5yUvpfz
+	hSOcggVZ8M448pnZiTNnqTxOhZBo4z19O8Yqs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=GgO6LZisfnNmNty7G1f6rHvzYC2g1rBNMGFFsjMXxWtQFSR2n7ObvoE8eXbxssnsBS
+	aPzrrgwgsrMDJfSiGgzECXumb/0Tn8i3uuNx6+yrKt2hO34p2baOZR3SLYVUCmaspXIp
+	DU9sMZRp1dGPmfhQW85iGKSR0UmCqcyT2FuKA=
+MIME-Version: 1.0
+Received: by 10.213.31.73 with SMTP id x9mr4000914ebc.51.1282755103462; Wed,
+	25 Aug 2010 09:51:43 -0700 (PDT)
+Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 09:51:43 -0700 (PDT)
+In-Reply-To: <1282739805.3880.96.camel@mattotaupa>
+References: <AANLkTi=nsTUOndpz7duDncPmbto8vueL0axvEV2qRCBQ@mail.gmail.com>
+	<1282731315.3880.8.camel@mattotaupa>
+	<AANLkTi=ofXwz1kEQih4Yk0At8X0YDFmtQ2TwrWZTuwji@mail.gmail.com>
+	<1282739805.3880.96.camel@mattotaupa>
+Date: Wed, 25 Aug 2010 22:51:43 +0600
+Message-ID: <AANLkTi=SgVW5dOyK6m1ezv6F7HQB9AUNo_eOPaKzRrYi@mail.gmail.com>
 From: Anatoly Shipitsin <norguhtar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Aug 2010 22:44:24 +0600
-Message-Id: <1282754664-7480-1-git-send-email-norguhtar@gmail.com>
-X-Mailer: git-send-email 1.6.0.6
-X-SA-Exim-Connect-IP: 78.108.66.4
+X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: norguhtar@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.2 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v3] sysvinit_2.86.bb: change sysvinit-utils for compatible with upstart
+Subject: Re: Upstart sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,74 +54,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 16:51:07 -0000
+X-List-Received-Date: Wed, 25 Aug 2010 16:52:08 -0000
+Content-Type: text/plain; charset=UTF-8
 
-From: Norguhtar <norguhtar@gmail.com>
+> Unfortunately I am quite lost, what patch is right and what wrong, since
+> they have no iteration numbers [v2], [v3].
+>
+> Please resend making this clear. Since they all are mangled, this is
+> necessary anyway.
+Done.
 
-* move shutdown to sysvinit package
-* move killall5 to sysvinit-utils
-* change PR = "r59"
-
-Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
----
- recipes/sysvinit/sysvinit_2.86.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
-index 40c642a..aca5249 100644
---- a/recipes/sysvinit/sysvinit_2.86.bb
-+++ b/recipes/sysvinit/sysvinit_2.86.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "System-V like init."
- SECTION = "base"
- LICENSE = "GPLv2+"
- HOMEPAGE = "http://freshmeat.net/projects/sysvinit/"
--PR = "r58"
-+PR = "r59"
- 
- # USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .conf.
- # Set PACKAGE_ARCH appropriately.
-@@ -42,7 +42,7 @@ PACKAGES =+ "sysvinit-utils sysvinit-pidof sysvinit-sulogin"
- FILES_${PN} += "${base_sbindir}/* ${base_bindir}/*"
- FILES_sysvinit-pidof = "${base_bindir}/pidof.sysvinit"
- FILES_sysvinit-sulogin = "${base_sbindir}/sulogin"
--FILES_sysvinit-utils = "${bindir}/last.${PN} ${bindir}/mesg.${PN} ${bindir}/wall.${PN} ${base_sbindir}/shutdown.${PN} ${bindir}/lastb ${bindir}/utmpdump ${base_sbindir}/runlevel"
-+FILES_sysvinit-utils = "${bindir}/last.${PN} ${bindir}/mesg.${PN} ${bindir}/wall.${PN} ${bindir}/lastb ${bindir}/utmpdump ${base_sbindir}/killall5"
- RRECOMMENDS_${PN} = "sysvinit-utils"
- RRECOMMENDS_${PN}_micro = ""
- 
-@@ -112,6 +112,7 @@ pkg_postinst_${PN} () {
- update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
- update-alternatives --install ${base_sbindir}/reboot reboot reboot.${PN} 200
- update-alternatives --install ${base_sbindir}/poweroff poweroff poweroff.${PN} 200
-+update-alternatives --install ${base_sbindir}/shutdown shutdown shutdown.${PN} 200
- }
- 
- pkg_postinst_sysvinit-utils () {
-@@ -119,13 +120,13 @@ pkg_postinst_sysvinit-utils () {
- update-alternatives --install ${bindir}/last last last.${PN} 200
- update-alternatives --install ${bindir}/mesg mesg mesg.${PN} 200
- update-alternatives --install ${bindir}/wall wall wall.${PN} 200
--update-alternatives --install ${base_sbindir}/shutdown shutdown shutdown.${PN} 200
- }
- 
- pkg_prerm_${PN} () {
- #!/bin/sh
- update-alternatives --remove halt halt.${PN}
- update-alternatives --remove reboot reboot.${PN}
-+update-alternatives --remove shutdown shutdown.${PN}
- }
- 
- pkg_prerm_sysvinit-utils () {
-@@ -133,7 +134,6 @@ pkg_prerm_sysvinit-utils () {
- update-alternatives --remove last last.${PN}
- update-alternatives --remove mesg mesg.${PN}
- update-alternatives --remove wall wall.${PN}
--update-alternatives --remove shutdown shutdown.${PN}
- }
- 
- pkg_postinst_sysvinit-pidof () {
--- 
-1.6.0.6
-
+> Sorry for the inconvenience. I hope the next iteration will be fine.
+No problem. Now i'm know how right send patch :)
 
 
