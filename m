@@ -1,43 +1,35 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oo31I-0006Rz-Cw for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 01:35:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oo30o-0001fZ-HQ for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 01:34:38 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 01:34:38 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <sean@chumby.com>) id 1Oo4qL-0003E2-JG
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 03:32:19 +0200
+Received: by pxi11 with SMTP id 11so7268pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 01:34:38 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 24 Aug 2010 18:31:29 -0700 (PDT)
+Received: by 10.142.136.1 with SMTP id j1mr6522603wfd.26.1282699889734;
+	Tue, 24 Aug 2010 18:31:29 -0700 (PDT)
+Received: from [192.168.1.13] (bb121-7-86-104.singnet.com.sg [121.7.86.104])
+	by mx.google.com with ESMTPS id 23sm815094wfa.10.2010.08.24.18.31.26
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 24 Aug 2010 18:31:28 -0700 (PDT)
+Mime-Version: 1.0 (Apple Message framework v1081)
+From: Sean Cross <sean@chumby.com>
+In-Reply-To: <20100819224603.GB26112@denix.org>
+Date: Wed, 25 Aug 2010 09:31:21 +0800
+Message-Id: <C1A8A762-21AC-40E0-AE5E-D4E8DDB048DB@chumby.com>
+References: <04B05A09-EB4A-4EE3-9DC9-6843A7173EDD@chumby.com>
+	<20100819224603.GB26112@denix.org>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 25 Aug 2010 01:34:30 +0200
-Message-ID: <i51ku6$in$1@dough.gmane.org>
-References: <1281459157-4103-1-git-send-email-fransmeulenbroeks@gmail.com>	<20100810171950.GA32300@jama>	<AANLkTikVJFZcEO39CnBJfVBdVvjFohDM+E17kXZCmjrr@mail.gmail.com>
-	<AANLkTi=9xFW0rcHUZ1tM9dV=Uw3sN8DVQgEpdWT7kQDc@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <AANLkTi=9xFW0rcHUZ1tM9dV=Uw3sN8DVQgEpdWT7kQDc@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: sean@chumby.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] conf/distro/include: remove unused versions
+Subject: Re: Add chumby falconwing support
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,26 +43,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 24 Aug 2010 23:35:11 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 25 Aug 2010 01:32:20 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 23-08-10 22:49, Frans Meulenbroeks wrote:
+On Aug 20, 2010, at 6:46 AM, Denys Dmytriyenko wrote:
 
-> If I get no objections I will remove the last 3 versions next week (30
-> aug or so, somewhere after 16.00 GMT) 
+> On Wed, Aug 18, 2010 at 04:03:16PM -0700, Sean Cross wrote:
+>> The following patches add support for chumby Falconwing-based boards, =
+such=20
+>> as the chumby One.  This is distinct from the current "chumby" =
+machine,=20
+>> which appears to be support for the Chumy Classic, Ironforge-based =
+devices.
+>=20
+> Sean,
+>=20
+> I guess I should have replied to this message instead of to one of the =
+actual=20
+> patches... Anyway, I wanted to ask:
+>=20
+> Do you have corresponding configs for a Silvermoon machine as well? :) =
+I
+> wouldn't mind playing with that... :)
 
-I object
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMdFcGMkyGM64RGpERAgknAKCex19BCTaNn5inpuLf9fCtO489eQCfbwho
-vrLmEHOmJwYa2k8cjrjKc+c=
-=OVhX
------END PGP SIGNATURE-----
-
+Silvermoon is my next goal.  I'm experimenting with using OE as a build =
+system, and Falconwing seemed like a good first candidate :)=
 
 
