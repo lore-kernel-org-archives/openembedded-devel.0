@@ -1,32 +1,47 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1Oo9Md-00022p-9j
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oo9NO-0004ez-9r
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 08:21:48 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Oo9MA-0002ka-BX from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 24 Aug 2010 23:21:06 -0700
-Received: from localhost.localdomain ([137.202.157.210]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 25 Aug 2010 08:21:04 +0200
-From: Fahad Usman <fahad_usman@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 25 Aug 2010 11:24:41 +0500
-Message-Id: <1282717481-18836-1-git-send-email-fahad_usman@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 25 Aug 2010 06:21:05.0005 (UTC)
-	FILETIME=[B285E1D0:01CB441D]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+	Wed, 25 Aug 2010 08:22:33 +0200
+Received: by iwn2 with SMTP id 2so298450iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 24 Aug 2010 23:21:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=pkDxSf3QGmSSvebqPXoG0rxVmQV1ASQf8TKHF6KTTEg=;
+	b=cpyF0ln27e/ShH/JZtpI/a5mgG1Xox3NMSU6eDSChHllgbXS/KKEGDJs60gcAAOl6u
+	wxkfcWJEj9lNepCW2qQDBpMaMhe8Io/UXkoikWqJeVMa3C1mdIVtmHCtkb4J3WfTv8YL
+	VFkHAuH4KnhNiMguAcI3U/UE2SIx1+bwH/6y0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=gXu7qV1AeD2RSsdoVJ8IKaNST6yJgz4vgwHr9IYjkSq43MgIqyhKairDTzbzrikpBl
+	qNAu+yH/4dQXvgl5xnGqy8VUFQI1B92HlPowjLdO0BSLBv3rr3kxaeIVqM7Ec35HAsxP
+	V3GSq2mdJFvc1qU9iLecJ6Uq39FZkKmHvN1zM=
+MIME-Version: 1.0
+Received: by 10.231.35.202 with SMTP id q10mr9556808ibd.138.1282717303142;
+	Tue, 24 Aug 2010 23:21:43 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Tue, 24 Aug 2010 23:21:43 -0700 (PDT)
+In-Reply-To: <i51ku6$in$1@dough.gmane.org>
+References: <1281459157-4103-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<20100810171950.GA32300@jama>
+	<AANLkTikVJFZcEO39CnBJfVBdVvjFohDM+E17kXZCmjrr@mail.gmail.com>
+	<AANLkTi=9xFW0rcHUZ1tM9dV=Uw3sN8DVQgEpdWT7kQDc@mail.gmail.com>
+	<i51ku6$in$1@dough.gmane.org>
+Date: Wed, 25 Aug 2010 08:21:43 +0200
+Message-ID: <AANLkTinPev+sOMubjKeGaKkB7-eoWx1Ks-7rWtEUJTye@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, k.kooi@student.utwente.nl
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] kakasi-native_2.3.4.bb: Removed legacy style staging
+Subject: Re: [PATCH] conf/distro/include: remove unused versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,47 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 06:21:48 -0000
+X-List-Received-Date: Wed, 25 Aug 2010 06:22:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-From: Fahad <fahad@pkl-fusman-ubuntu.(none)>
+2010/8/25 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 23-08-10 22:49, Frans Meulenbroeks wrote:
+>
+>> If I get no objections I will remove the last 3 versions next week (30
+>> aug or so, somewhere after 16.00 GMT)
+>
+> I object
 
-* converted do_stage to do_install
+Koen,
 
-* replaced ${STAGING_BINDIR} with ${D}${bindir}
+It would be very nice to give some underpinning to your objection.
 
-* added PR = "r1"
+Can you please enlighten the rest of the community why exactly keeping
+a few 4 year old include files around that are not used by any distro,
+not maintained, and contain pinnings to recipes that do not exist any
+more or are moved to obsolete is a good idea?
+I realize that there is an infinitesimally small chance that someone
+somewhere might be using this from a private overlay while still using
+dev head. Then again, this person (should he or she exist) is probably
+better off using e.g. the stable branch. And if this probably
+hypothetical person really cares about this inc file it is still
+possible to copy the inc file to his/her overlay.
+Also if this person is so attached to this file, I suggest that he/she
+steps forward and claims ownership (and at least makes it in such a
+form that the pinnings to nonexistent recipes are updated or removed).
 
-* added NATIVE_INSTALL_WORKS = "1"
+Wrt my proposal: I want to take the opportunity to amend the last paragraph:
 
-Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
----
- recipes/kakasi/kakasi-native_2.3.4.bb |    9 ++++++---
- 1 files changed, 6 insertions(+), 3 deletions(-)
+If I get no objections with some form of reasonable motivation I will
+remove the last 3 versions next week (30 aug or so, somewhere after
+16.00 GMT) As I feel less certain on insane-srcrevs.inc I will keep
+that one unless being told that it isuseless too. If there are
+motivated objections I will raise the issue with the TSC for
+resolution.
 
-diff --git a/recipes/kakasi/kakasi-native_2.3.4.bb b/recipes/kakasi/kakasi-native_2.3.4.bb
-index 24d4e1d..447b452 100644
---- a/recipes/kakasi/kakasi-native_2.3.4.bb
-+++ b/recipes/kakasi/kakasi-native_2.3.4.bb
-@@ -2,11 +2,14 @@ require kakasi.inc
- 
- inherit native
- 
--do_stage() {
--        install src/mkkanwa ${STAGING_BINDIR}
--}
-+PR = "r1"
- 
-+do_install() {
-+        install -d ${D}${bindir}
-+        install src/mkkanwa ${D}${bindir}
-+}
- 
-+NATIVE_INSTALL_WORKS = "1"
- 
- SRC_URI[md5sum] = "4eff51aafbd56c9635791a20c03efa8f"
- SRC_URI[sha256sum] = "c272560f5c11fe45b011c4e26ada66218fb0109d5582c5876aa49c5e24718534"
--- 
-1.6.3.3
+Frans
 
+PS: while removing some old recipes a 1.5 week or so ago I carefully
+avoided removing anything that is pinned from these files. So missing
+pinnings are (most likely) not caused by my removal.
+PPS: I'm very flexible wrt "reasonable", but a sole statement like "I
+object" or "I object because I don't like it" is not really helpful
+and does not help if the issue has to be escalated. Some indication
+why keeping this junk around should there.
 
 
