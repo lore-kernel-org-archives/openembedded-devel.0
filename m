@@ -1,41 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OoHDN-0005WW-SZ
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 16:44:35 +0200
-Received: by fxm6 with SMTP id 6so357226fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 07:44:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=hRYvCX/RbeT9LvgBUwQ0JN8yCMjbn/lrWAIyk2TEhPo=;
-	b=MFee+VLTlKPCIffy9p83u194usiefWsvF67UIWfFLKLpJiv+0N7nq73FW3C+PyzYwH
-	zhbPtXbeVVlm9XjkiQY0IIAG8ZYk3pCXBeuiBPDE/JF1AruCyryNekECAAuPhdZZMMDs
-	o/QE6o6zh8SUmhjZYfmQYBvnNxrrQ7dpj79sU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=pxrAeG+gagXxQmyMblpqKBW08sikevN+YoMdXA6sWoDGwEhyB+x8Z6ExuyVHLvcmyK
-	SvJwZMPwYdHf8umoytr+jncHQuFUyrZJ2I/4uhcpYp8eN0b874uKeqHNlgg2ZFng7x/X
-	Q0tOB87QtCZpVPvO0lSj5vr2hrhPDBjsrT58w=
-Received: by 10.223.119.203 with SMTP id a11mr7664992far.42.1282747446847;
-	Wed, 25 Aug 2010 07:44:06 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.223.125.209 with HTTP; Wed, 25 Aug 2010 07:43:45 -0700 (PDT)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Wed, 25 Aug 2010 08:43:45 -0600
-Message-ID: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoHnD-0002zd-Vn for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 17:22:31 +0200
+Received: from f053042170.adsl.alicedsl.de ([78.53.42.170]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoHmK-00057F-RP for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 15:20:40 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+In-Reply-To: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+References: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+Date: Wed, 25 Aug 2010 17:20:36 +0200
+Message-ID: <1282749636.3880.143.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Patch procedure for dummies
+Subject: Re: Patch procedure for dummies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,63 +39,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 14:44:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 Aug 2010 15:23:44 -0000
+X-Groupsio-MsgNum: 22644
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-9VIb2FmkJut3/btosRnR"
 
-Please give me feedback and I'll post this on the wiki.
+--=-9VIb2FmkJut3/btosRnR
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-A task-oriented guide to creating a patch:
+Am Mittwoch, den 25.08.2010, 08:43 -0600 schrieb AJ ONeal:
+> Please give me feedback and I'll post this on the wiki.
+>=20
+> A task-oriented guide to creating a patch:
+>=20
+> > Let's say you create a new recipe and you'd like to submit it for inclu=
+sion
+> > (and you've already tested that it works, of course).
+> >
+> > 1. Now commit with a good strong helpful message
+
+=E2=80=A6 explaining your changes in a way others get a short overview with=
+out
+looking at the code.
+
+> >     git add recipes/nodejs/
+> >     git commit # don't use the -m option
+> >
+> > 2. The message should look like this
+> >
+> >     added recipe for node.js
+
+The rule is to give the recipe name at the beginning followed by a
+colon.
+
+> >     * added recipe for node.js (bug #5555 - no nodejs recipe)
+> >     ** patched libev's wscript to not try to execute code
+> >     ** patched node's wscript to not search in '/usr/include'
+> >
+> >     Signed-off-by: AJ ONeal <coolaj86@gmail.com>
+> >
+> > 3. Create your patch
+> >
+> >     git format-patch -1 # or however many commits are part of this chan=
+ge
+
+Signed-off-by line can be added automatically either using `-s` either
+in 1. or 3.. I would recommend 3..
+
+> > 3++. If you are submitting a second version also add "--subject-prefix
+> > [v2]"
+
+=E2=80=A6 to `git format-patch`.
+
+> >     git send-email
+> >
+> > Your patch will be immediately visible on
+> > http://patchwork.openembedded.org/patch/
+> >
+>=20
+>=20
+> > 4. Once your patch has been accepted or rejected, create an account and
+> > update the status to "accepted" or "rejected"
+> >
+> > 4++. If you get soft-rejected (a lot of feedback), make the changes, su=
+bmit
+> > the next version,
+
+=E2=80=A6 using `--subject-prefix` to mark the patch iteration.
+
+> > and update the status of the previous patch to
+> > "superseded"
+> >
+> > Appendix: Properly configuring git (using tekkub@gmail.com as an exampl=
+e
+> > user)
+> >
+> >     sudo apt-get install git-core git-email
+
+Please use `sudo aptitude install git-core git-email` since it is the
+recommended package tool by Debian. People preferring `apt-get` know how
+to use it instead.
+
+> >     git config --global user.name "Tekkub"
+> >     git config --global user.email "tekkub@gmail.com"
+
+These two should be given in 0. or 1. as they are also important for the
+commit meta data.
+
+> >     git config --global sendemail.smtpserver smtp.gmail.com
+> >     git config --global sendemail.smtpserverport 587
+> >     git config --global sendemail.smtpencryption tls
+> >     git config --global sendemail.smtpuser tekkupl@gmail.com
+
+Thank you for your work. I would suggest to include links to more in
+depth information (commit policy, patchwork) after each section for a
+clarification.
 
 
+Thanks,
 
-> Let's say you create a new recipe and you'd like to submit it for inclusion
-> (and you've already tested that it works, of course).
->
-> 1. Now commit with a good strong helpful message
->
->     git add recipes/nodejs/
->     git commit # don't use the -m option
->
-> 2. The message should look like this
->
->     added recipe for node.js
->
->     * added recipe for node.js (bug #5555 - no nodejs recipe)
->     ** patched libev's wscript to not try to execute code
->     ** patched node's wscript to not search in '/usr/include'
->
->     Signed-off-by: AJ ONeal <coolaj86@gmail.com>
->
-> 3. Create your patch
->
->     git format-patch -1 # or however many commits are part of this change
->
-> 3++. If you are submitting a second version also add "--subject-prefix
-> [v2]"
->
->     git send-email
->
-> Your patch will be immediately visible on
-> http://patchwork.openembedded.org/patch/
->
+Paul
 
+--=-9VIb2FmkJut3/btosRnR
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-> 4. Once your patch has been accepted or rejected, create an account and
-> update the status to "accepted" or "rejected"
->
-> 4++. If you get soft-rejected (a lot of feedback), make the changes, submit
-> the next version, and update the status of the previous patch to
-> "superseded"
->
-> Appendix: Properly configuring git (using tekkub@gmail.com as an example
-> user)
->
->     sudo apt-get install git-core git-email
->     git config --global user.name "Tekkub"
->     git config --global user.email "tekkub@gmail.com"
->     git config --global sendemail.smtpserver smtp.gmail.com
->     git config --global sendemail.smtpserverport 587
->     git config --global sendemail.smtpencryption tls
->     git config --global sendemail.smtpuser tekkupl@gmail.com
->
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
+iEYEABECAAYFAkx1NMQACgkQPX1aK2wOHVhqIwCfRbgBNmzy5wEH9Y0XMmjATtWS
+vaoAnj13A4nIy/pc/Kk8T9Do2P9reQz1
+=yTVS
+-----END PGP SIGNATURE-----
+
+--=-9VIb2FmkJut3/btosRnR--
