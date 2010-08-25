@@ -1,33 +1,32 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OoDme-00007E-VS
+	(envelope-from <norguhtar@gmail.com>) id 1OoDvl-0000Lf-NU
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 13:04:58 +0200
-Received: by eyb7 with SMTP id 7so138259eyb.6
+	Wed, 25 Aug 2010 13:14:21 +0200
+Received: by ewy7 with SMTP id 7so127233ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 04:04:15 -0700 (PDT)
+	Wed, 25 Aug 2010 04:13:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=VNNDQzBthnc7mJ+EbkaC+mcpMV1p42S75u8OWEdjWeA=;
-	b=wOM/MbeuT4Yw6/EaRfPpkUJyN2UWsrvJrLVJBRkQ1AMNWA/j6iQXRU6W8ZoloVBQEw
-	m+d5SCQ6ufSHdckvP1SUSJSjlV0kWOkWtEPw+mU6xH6ED3iEBnzFknRy04EcTr5C2tZ+
-	liRv9vJEmFjEVaK7+YTHPNk3eeNivvIAqpFwI=
+	:subject:from:to:content-type;
+	bh=NgIGdkBqAnHHCtbXxPHr7tblmFj7B2gnVxmK0zfrW/0=;
+	b=vVCkucwN7E+xtzOflsXZqrDWPDXWQogPNUPrOmF+TE3F0LbHcXOuod+38kZjnh7pY9
+	jH6XJEriZH906RidN8UFKAS4+5YbXDPDkD/kY0WHtYSdQlW2IAayBdGPbY/TvBrevjNE
+	hZ9wc3hp9zLELqgrXY84U+34EePT4H3s+ZfCc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=pqMoFRXuec4HcGXijkyU0wtlqOyPPeKpupWNVBowAxy2UV153vwf+ze1TUlGHeZFtY
-	TAG8X/3Bk+gV4jg159tXOEe4FfEp2vZk8gUSDIKD/HeObLv8fkDT2JZ95aI13Ckhy8f/
-	0dkxiFmSIucAiNaGnXkOWLi+uWMF7f5C+5+gw=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=EGLqL/pKkkOZb0NVCSGiGxc/3aFKdl/Qp0mb2uvthciYk1GhYoF4/k7en+72mzjJ7+
+	UJMtkj3bqY5FWvyMe1hTscW2CXAOUXzAhYsc50j802iftrG3I8ruviXcUh1iG9Kk1eg/
+	VNYqts7iy94sQ7ad+KPkInpV1NUf6lKhrJK78=
 MIME-Version: 1.0
-Received: by 10.213.29.137 with SMTP id q9mr5511428ebc.11.1282734255499; Wed,
-	25 Aug 2010 04:04:15 -0700 (PDT)
-Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 04:04:15 -0700 (PDT)
-Date: Wed, 25 Aug 2010 17:04:15 +0600
-Message-ID: <AANLkTinTAbx5g2SOB8dGjyPbSGOJCAoeD6YCf2=MUa+F@mail.gmail.com>
+Received: by 10.213.7.81 with SMTP id c17mr3366242ebc.57.1282734822955; Wed,
+	25 Aug 2010 04:13:42 -0700 (PDT)
+Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 04:13:42 -0700 (PDT)
+Date: Wed, 25 Aug 2010 17:13:42 +0600
+Message-ID: <AANLkTikvLoGEKA-kmer4_QOVMPG+fynmOPDca03eWJ=X@mail.gmail.com>
 From: Anatoly Shipitsin <norguhtar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Connect-IP: 209.85.215.47
 X-SA-Exim-Mail-From: norguhtar@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -35,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] sysvinit_2.86.bb: change sysvinit-utils for compatible with upstart
+Subject: [PATCH] upstart_0.3.11.bb: fix upstart sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,86 +48,225 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 11:04:59 -0000
+X-List-Received-Date: Wed, 25 Aug 2010 11:14:21 -0000
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
 
 From: Anatoly Shipitsin <norguhtar@gmail.com>
 
 * move shutdown to sysvinit package
 * move killall5 to sysvinit-utils
-* change PR =3D "r59"
+* change PR = "r59"
 
-Signed-off-by:=C2=A0Anatoly Shipitsin <norguhtar@gmail.com>
+Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
 
 ---
-recipes/sysvinit/sysvinit_2.86.bb | =C2=A0 =C2=A08 ++++----
-=C2=A01 files changed, 4 insertions(+), 4 deletions(-)
+ recipes/upstart/upstart.inc       |  111 +++++++++++++++++++++++++++++++++++-
+ recipes/upstart/upstart_0.3.11.bb |   15 ++++-
+ recipes/upstart/upstart_0.3.8.bb  |   14 +++--
+ 3 files changed, 127 insertions(+), 13 deletions(-)
 
-diff --git a/recipes/sysvinit/sysvinit_2.86.bb
-b/recipes/sysvinit/sysvinit_2.86.bb
-index 40c642a..aca5249 100644
---- a/recipes/sysvinit/sysvinit_2.86.bb
-+++ b/recipes/sysvinit/sysvinit_2.86.bb
-@@ -2,7 +2,7 @@ DESCRIPTION =3D "System-V like init."
-=C2=A0SECTION =3D "base"
-=C2=A0LICENSE =3D "GPLv2+"
-=C2=A0HOMEPAGE =3D "http://freshmeat.net/projects/sysvinit/"
--PR =3D "r58"
-+PR =3D "r59"
 
-=C2=A0# USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .con=
-f.
-=C2=A0# Set PACKAGE_ARCH appropriately.
-@@ -42,7 +42,7 @@ PACKAGES =3D+ "sysvinit-utils sysvinit-pidof sysvinit-sul=
-ogin"
-=C2=A0FILES_${PN} +=3D "${base_sbindir}/* ${base_bindir}/*"
-=C2=A0FILES_sysvinit-pidof =3D "${base_bindir}/pidof.sysvinit"
-=C2=A0FILES_sysvinit-sulogin =3D "${base_sbindir}/sulogin"
--FILES_sysvinit-utils =3D "${bindir}/last.${PN} ${bindir}/mesg.${PN}
-${bindir}/wall.${PN} ${base_sbindir}/shutdown.${PN} ${bindir}/lastb
-${bindir}/utmpdump ${base_sbindir}/runlevel"
-+FILES_sysvinit-utils =3D "${bindir}/last.${PN} ${bindir}/mesg.${PN}
-${bindir}/wall.${PN} ${bindir}/lastb ${bindir}/utmpdump
-${base_sbindir}/killall5"
-=C2=A0RRECOMMENDS_${PN} =3D "sysvinit-utils"
-=C2=A0RRECOMMENDS_${PN}_micro =3D ""
+diff --git a/recipes/upstart/upstart.inc b/recipes/upstart/upstart.inc
+index e67774a..7512133 100644
+--- a/recipes/upstart/upstart.inc
++++ b/recipes/upstart/upstart.inc
+@@ -4,7 +4,7 @@ DEPENDS = ""
+ DESCRIPTION = "Event driven system init"
+ LICENSE = "GPL"
 
-@@ -112,6 +112,7 @@ pkg_postinst_${PN} () {
-=C2=A0update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 20=
-0
-=C2=A0update-alternatives --install ${base_sbindir}/reboot reboot reboot.${=
-PN} 200
-=C2=A0update-alternatives --install ${base_sbindir}/poweroff poweroff
+-inherit autotools pkgconfig
++inherit autotools pkgconfig update-alternatives
+
+ # --enable-compat builds halt, reboot, shutdown tools
+ EXTRA_OECONF += "--enable-compat"
+@@ -17,6 +17,109 @@ FILES_libupstart-dev += "${libdir}/libupstart.*
+${includedir}/upstart/"
+
+ # upstart-sysvcompat provides Sys V Init compatible tools: halt, reboot,
+ # shutdown, telinit. These might be needed by other scripts.
+-PACKAGES =+ "upstart-sysvcompat upstart-sysvtools-doc"
+-FILES_upstart-sysvcompat += "${sbindir}/reboot ${sbindir}/halt
+${sbindir}/shutdown ${sbindir}/telinit"
+-FILES_upstart-sysvcompat-doc += "${mandir}/*/reboot.*
+${mandir}/*/halt.* ${mandir}/*/shutdown.* ${mandir}/*/telinit.*"
++PACKAGES =+ "upstart-sysvcompat upstart-sysvcompat-doc"
++FILES_upstart-sysvcompat += " \
++    ${base_sbindir}/reboot.* ${base_sbindir}/halt.*
+${base_sbindir}/poweroff.* \
++    ${base_sbindir}/shutdown.* ${base_sbindir}/telinit
+${base_sbindir}/runlevel \
++    ${sysconfdir}/event.d/control-alt-delete \
++    ${sysconfdir}/event.d/rc* \
++    ${sysconfdir}/event.d/sulogin \
++    ${sysconfdir}/init.d \
++    ${sysconfdir}/default/rcS \
++"
++FILES_upstart-sysvcompat-doc += " \
++    ${mandir}/*/reboot.* ${mandir}/*/halt.* ${mandir}/*/poweroff.* \
++     ${mandir}/*/shutdown.* ${mandir}/*/telinit.* ${mandir}/*/runlevel.* \
++"
++
++ALTERNATIVE_NAME = "init"
++ALTERNATIVE_LINK = "${base_sbindir}/init"
++ALTERNATIVE_PATH = "${base_sbindir}/init.${PN}"
++ALTERNATIVE_PRIORITY = "60"
++
+
++EXTRA_OEMAKE += "'bindir=${base_bindir}' \
++                'sbindir=${base_sbindir}' \
++                'usrbindir=${bindir}' \
++                'usrsbindir=${sbindir}' \
++                'includedir=${includedir}' \
++                'mandir=${mandir}'"
++
++do_install () {
++       oe_runmake 'DESTDIR=${D}' install
++       install -d ${D}${sysconfdir}
++       install -d ${D}${sysconfdir}/default
++       install -d ${D}${sysconfdir}/init.d
++
++       install -m 0644 ${WORKDIR}/init/rcS-default
+${D}${sysconfdir}/default/rcS
++       install -m 0755 ${WORKDIR}/init/rc              ${D}${sysconfdir}/init.d
++       install -m 0755 ${WORKDIR}/init/rcS             ${D}${sysconfdir}/init.d
++       install -m 0644 ${WORKDIR}/rc*
+${D}${sysconfdir}/event.d
++       install -m 0644 ${WORKDIR}/control-alt-delete
+${D}${sysconfdir}/event.d
++       install -m 0644 ${WORKDIR}/sulogin
+${D}${sysconfdir}/event.d
++
++       if [ ! -z "${SERIAL_CONSOLE}" ]; then
++            cat <<EOF >> ${D}${sysconfdir}/event.d/tty-serial
++# tty-serial - getty
++#
++# This service maintains a getty on tty-serial from the point the system is
++# started until it is shut down again.
++
++start on runlevel 2
++start on runlevel 3
++start on runlevel 4
++start on runlevel 5
++
++stop on runlevel 0
++stop on runlevel 1
++stop on runlevel 6
++
++respawn
++exec ${base_sbindir}/getty ${SERIAL_CONSOLE}
++EOF
++       fi
+
++       if [ "${USE_VT}" = "1" ]; then
++           for n in ${SYSVINIT_ENABLED_GETTYS}
++           do
++            cat <<EOF >> ${D}${sysconfdir}/event.d/tty$n
++# tty$n - getty
++#
++# This service maintains a getty on tty$n from the point the system is
++# started until it is shut down again.
++
++start on runlevel 2
++start on runlevel 3
++start on runlevel 4
++start on runlevel 5
++
++stop on runlevel 0
++stop on runlevel 1
++stop on runlevel 6
++
++respawn
++exec ${base_sbindir}/getty 38400 tty$n
++EOF
++           done
++       fi
++
++       mv ${D}${base_sbindir}/init     ${D}${base_sbindir}/init.${PN}
++        mv ${D}${base_sbindir}/halt ${D}${base_sbindir}/halt.${PN}
++       mv ${D}${base_sbindir}/reboot ${D}${base_sbindir}/reboot.${PN}
++        mv ${D}${base_sbindir}/shutdown ${D}${base_sbindir}/shutdown.${PN}
++       mv ${D}${base_sbindir}/poweroff ${D}${base_sbindir}/poweroff.${PN}
++}
++
++pkg_postinst_${PN}-sysvcompat () {
++#!/bin/sh
++update-alternatives --install ${base_sbindir}/reboot reboot reboot.${PN} 200
++update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
++update-alternatives --install ${base_sbindir}/poweroff poweroff
 poweroff.${PN} 200
 +update-alternatives --install ${base_sbindir}/shutdown shutdown
 shutdown.${PN} 200
-=C2=A0}
++}
++
++pkg_prerm_${PN}-sysvcompat () {
 
-=C2=A0pkg_postinst_sysvinit-utils () {
-@@ -119,13 +120,13 @@ pkg_postinst_sysvinit-utils () {
-=C2=A0update-alternatives --install ${bindir}/last last last.${PN} 200
-=C2=A0update-alternatives --install ${bindir}/mesg mesg mesg.${PN} 200
-=C2=A0update-alternatives --install ${bindir}/wall wall wall.${PN} 200
--update-alternatives --install ${base_sbindir}/shutdown shutdown
-shutdown.${PN} 200
-=C2=A0}
-
-=C2=A0pkg_prerm_${PN} () {
-=C2=A0#!/bin/sh
-=C2=A0update-alternatives --remove halt halt.${PN}
-=C2=A0update-alternatives --remove reboot reboot.${PN}
++#!/bin/sh
++update-alternatives --remove reboot reboot.${PN}
++update-alternatives --remove halt halt.${PN}
++update-alternatives --remove poweroff reboot.${PN}
 +update-alternatives --remove shutdown shutdown.${PN}
-=C2=A0}
++}
+diff --git a/recipes/upstart/upstart_0.3.11.bb
+b/recipes/upstart/upstart_0.3.11.bb
+index c4db01b..a0bd17e 100644
+--- a/recipes/upstart/upstart_0.3.11.bb
++++ b/recipes/upstart/upstart_0.3.11.bb
+@@ -1,11 +1,18 @@
+ require upstart.inc
 
-=C2=A0pkg_prerm_sysvinit-utils () {
-@@ -133,7 +134,6 @@ pkg_prerm_sysvinit-utils () {
-=C2=A0update-alternatives --remove last last.${PN}
-=C2=A0update-alternatives --remove mesg mesg.${PN}
-=C2=A0update-alternatives --remove wall wall.${PN}
--update-alternatives --remove shutdown shutdown.${PN}
-=C2=A0}
+-SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2 \
++SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2;name=upstart
+\
++    http://upstart.ubuntu.com/download/example-jobs/0.3/example-jobs-${PV}.tar.gz;name=compat
+\
++    file://init/rcS-default file://init/rc file://init/rcS \
+ "
 
-=C2=A0pkg_postinst_sysvinit-pidof () {
+ RRECOMMENDS_${PN} = "libupstart upstart-sysvcompat"
+
+-PR = "r1"
++PR = "r2"
+
+-SRC_URI[md5sum] = "a9e475e1458c876add0441d9d4cfe9c0"
+-SRC_URI[sha256sum] =
+"d4f7fff9112049eab318518719735d0ac66ff558ed91c2d7c7c41124de2832b6"
++USE_VT ?= "1"
++SYSVINIT_ENABLED_GETTYS ?= "1"
++
++SRC_URI[upstart.md5sum] = "a9e475e1458c876add0441d9d4cfe9c0"
++SRC_URI[upstart.sha256sum] =
+"d4f7fff9112049eab318518719735d0ac66ff558ed91c2d7c7c41124de2832b6"
++SRC_URI[compat.md5sum] = "22d66ef8bc9d167eb822bbfecb584107"
++SRC_URI[compat.sha256sum] =
+"f53fae7258fcf67cb29d344e53e1548171e4781af11ff4ba92b8b81caab3c315"
+diff --git a/recipes/upstart/upstart_0.3.8.bb b/recipes/upstart/upstart_0.3.8.bb
+index 1b2cfb5..baf00d2 100644
+--- a/recipes/upstart/upstart_0.3.8.bb
++++ b/recipes/upstart/upstart_0.3.8.bb
+@@ -1,10 +1,14 @@
+ require upstart.inc
+
+-SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2 \
++SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2;name=upstart
+\
++    http://upstart.ubuntu.com/download/example-jobs/0.3/example-jobs-${PV}.tar.gz;name=compat
+\
++    file://init/rcS-default file://init/rc file://init/rcS \
+
++    file://autoconf_version.patch \
++"
+
+ PR = "r1"
+
+-
+-SRC_URI[md5sum] = "5cdd2dc3a3f02089c9450edf4e8f4941"
+-SRC_URI[sha256sum] =
+"9a2a37455ad4e9dd2856b5a0f15adb1a3f84439f60d0f63b041584a2666e9835"
++SRC_URI[upstart.md5sum] = "5cdd2dc3a3f02089c9450edf4e8f4941"
++SRC_URI[upstart.sha256sum] =
+"9a2a37455ad4e9dd2856b5a0f15adb1a3f84439f60d0f63b041584a2666e9835"
++SRC_URI[compat.md5sum] = "22d66ef8bc9d167eb822bbfecb584107"
++SRC_URI[compat.sha256sum] =
+"f53fae7258fcf67cb29d344e53e1548171e4781af11ff4ba92b8b81caab3c315"
 
 
