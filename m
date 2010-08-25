@@ -1,40 +1,41 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OoDvl-0000Lf-NU
+	(envelope-from <norguhtar@gmail.com>) id 1OoEFC-0000qC-GT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 13:14:21 +0200
-Received: by ewy7 with SMTP id 7so127233ewy.6
+	Wed, 25 Aug 2010 13:34:44 +0200
+Received: by eyb7 with SMTP id 7so151387eyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 04:13:43 -0700 (PDT)
+	Wed, 25 Aug 2010 04:33:50 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=NgIGdkBqAnHHCtbXxPHr7tblmFj7B2gnVxmK0zfrW/0=;
-	b=vVCkucwN7E+xtzOflsXZqrDWPDXWQogPNUPrOmF+TE3F0LbHcXOuod+38kZjnh7pY9
-	jH6XJEriZH906RidN8UFKAS4+5YbXDPDkD/kY0WHtYSdQlW2IAayBdGPbY/TvBrevjNE
-	hZ9wc3hp9zLELqgrXY84U+34EePT4H3s+ZfCc=
+	:subject:from:to:content-type:content-transfer-encoding;
+	bh=AsrfAqcNoKNiTP6oueiUi8e0H7xN1F8KXQ7/PqyCMHI=;
+	b=WY1twqJ70FMIyfja9FyuURsTMAAeZCDuHueRo9Z1ZiP6z7qz2dlwozdsShYdLGxHhb
+	CReYmGhUFbe2H7EAxTVUZxHxpvvLrs//SOTtn22RQlB7dAroKzLZJ5jbpwi65wZvgq6g
+	G0EBKUN3aw+9tt+OcKF+j7T2T08qT5FYExrDs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=EGLqL/pKkkOZb0NVCSGiGxc/3aFKdl/Qp0mb2uvthciYk1GhYoF4/k7en+72mzjJ7+
-	UJMtkj3bqY5FWvyMe1hTscW2CXAOUXzAhYsc50j802iftrG3I8ruviXcUh1iG9Kk1eg/
-	VNYqts7iy94sQ7ad+KPkInpV1NUf6lKhrJK78=
+	h=mime-version:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	b=RkVxuX2eSdX5E64ik6aUKq2R6hT9SJ9JY8YhT577Ds4uJUDbKh4Y5axQYkOpF4EgUS
+	RczFX801Yd0iakIy3Zq0D7iKrbWiPRVcqlMD5ttQSpQMyBHKlp71kF4dctuztyrzb9aL
+	koPlMq02I5+ID3LE109NQq2ZGCYpUY4qytsOA=
 MIME-Version: 1.0
-Received: by 10.213.7.81 with SMTP id c17mr3366242ebc.57.1282734822955; Wed,
-	25 Aug 2010 04:13:42 -0700 (PDT)
-Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 04:13:42 -0700 (PDT)
-Date: Wed, 25 Aug 2010 17:13:42 +0600
-Message-ID: <AANLkTikvLoGEKA-kmer4_QOVMPG+fynmOPDca03eWJ=X@mail.gmail.com>
+Received: by 10.213.20.132 with SMTP id f4mr6511425ebb.19.1282736030130; Wed,
+	25 Aug 2010 04:33:50 -0700 (PDT)
+Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 04:33:50 -0700 (PDT)
+Date: Wed, 25 Aug 2010 17:33:50 +0600
+Message-ID: <AANLkTi=VbBKRtr3jpb77PoqJZa4iVbBUnrAM2z6gxwxB@mail.gmail.com>
 From: Anatoly Shipitsin <norguhtar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Connect-IP: 209.85.215.175
 X-SA-Exim-Mail-From: norguhtar@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] upstart_0.3.11.bb: fix upstart sysvinit compat
+Subject: [PATCH] upstart: fix sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,19 +49,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 11:14:21 -0000
+X-List-Received-Date: Wed, 25 Aug 2010 11:34:44 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
 From: Anatoly Shipitsin <norguhtar@gmail.com>
 
-* move shutdown to sysvinit package
-* move killall5 to sysvinit-utils
-* change PR = "r59"
+* change PR =3D "r2"
+* add example-jobs for sysvinit compat
+* add update-alternatives for proper switch
+* add native tty service generate
+* add rc rcS scripts for run sysvinit scripts
+* change reboot halt poweroff shutdown for compatible with update-alternati=
+ves
+* move runlevel to upstart-sysvinit
+* change upstart-sysvtools-doc to upstart-sysvcompat-doc
 
-Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
+Signed-off-by:=C2=A0Anatoly Shipitsin <norguhtar@gmail.com>
 
 ---
- recipes/upstart/upstart.inc       |  111 +++++++++++++++++++++++++++++++++++-
+ recipes/upstart/upstart.inc       |  111 +++++++++++++++++++++++++++++++++=
+++-
  recipes/upstart/upstart_0.3.11.bb |   15 ++++-
  recipes/upstart/upstart_0.3.8.bb  |   14 +++--
  3 files changed, 127 insertions(+), 13 deletions(-)
@@ -70,27 +79,27 @@ diff --git a/recipes/upstart/upstart.inc b/recipes/upstart/upstart.inc
 index e67774a..7512133 100644
 --- a/recipes/upstart/upstart.inc
 +++ b/recipes/upstart/upstart.inc
-@@ -4,7 +4,7 @@ DEPENDS = ""
- DESCRIPTION = "Event driven system init"
- LICENSE = "GPL"
+@@ -4,7 +4,7 @@ DEPENDS =3D ""
+ DESCRIPTION =3D "Event driven system init"
+ LICENSE =3D "GPL"
 
 -inherit autotools pkgconfig
 +inherit autotools pkgconfig update-alternatives
 
  # --enable-compat builds halt, reboot, shutdown tools
- EXTRA_OECONF += "--enable-compat"
-@@ -17,6 +17,109 @@ FILES_libupstart-dev += "${libdir}/libupstart.*
+ EXTRA_OECONF +=3D "--enable-compat"
+@@ -17,6 +17,109 @@ FILES_libupstart-dev +=3D "${libdir}/libupstart.*
 ${includedir}/upstart/"
 
  # upstart-sysvcompat provides Sys V Init compatible tools: halt, reboot,
  # shutdown, telinit. These might be needed by other scripts.
--PACKAGES =+ "upstart-sysvcompat upstart-sysvtools-doc"
--FILES_upstart-sysvcompat += "${sbindir}/reboot ${sbindir}/halt
+-PACKAGES =3D+ "upstart-sysvcompat upstart-sysvtools-doc"
+-FILES_upstart-sysvcompat +=3D "${sbindir}/reboot ${sbindir}/halt
 ${sbindir}/shutdown ${sbindir}/telinit"
--FILES_upstart-sysvcompat-doc += "${mandir}/*/reboot.*
+-FILES_upstart-sysvcompat-doc +=3D "${mandir}/*/reboot.*
 ${mandir}/*/halt.* ${mandir}/*/shutdown.* ${mandir}/*/telinit.*"
-+PACKAGES =+ "upstart-sysvcompat upstart-sysvcompat-doc"
-+FILES_upstart-sysvcompat += " \
++PACKAGES =3D+ "upstart-sysvcompat upstart-sysvcompat-doc"
++FILES_upstart-sysvcompat +=3D " \
 +    ${base_sbindir}/reboot.* ${base_sbindir}/halt.*
 ${base_sbindir}/poweroff.* \
 +    ${base_sbindir}/shutdown.* ${base_sbindir}/telinit
@@ -101,34 +110,35 @@ ${base_sbindir}/runlevel \
 +    ${sysconfdir}/init.d \
 +    ${sysconfdir}/default/rcS \
 +"
-+FILES_upstart-sysvcompat-doc += " \
++FILES_upstart-sysvcompat-doc +=3D " \
 +    ${mandir}/*/reboot.* ${mandir}/*/halt.* ${mandir}/*/poweroff.* \
 +     ${mandir}/*/shutdown.* ${mandir}/*/telinit.* ${mandir}/*/runlevel.* \
 +"
 +
-+ALTERNATIVE_NAME = "init"
-+ALTERNATIVE_LINK = "${base_sbindir}/init"
-+ALTERNATIVE_PATH = "${base_sbindir}/init.${PN}"
-+ALTERNATIVE_PRIORITY = "60"
++ALTERNATIVE_NAME =3D "init"
++ALTERNATIVE_LINK =3D "${base_sbindir}/init"
++ALTERNATIVE_PATH =3D "${base_sbindir}/init.${PN}"
++ALTERNATIVE_PRIORITY =3D "60"
 +
-
-+EXTRA_OEMAKE += "'bindir=${base_bindir}' \
-+                'sbindir=${base_sbindir}' \
-+                'usrbindir=${bindir}' \
-+                'usrsbindir=${sbindir}' \
-+                'includedir=${includedir}' \
-+                'mandir=${mandir}'"
++EXTRA_OEMAKE +=3D "'bindir=3D${base_bindir}' \
++                'sbindir=3D${base_sbindir}' \
++                'usrbindir=3D${bindir}' \
++                'usrsbindir=3D${sbindir}' \
++                'includedir=3D${includedir}' \
++                'mandir=3D${mandir}'"
 +
 +do_install () {
-+       oe_runmake 'DESTDIR=${D}' install
++       oe_runmake 'DESTDIR=3D${D}' install
 +       install -d ${D}${sysconfdir}
 +       install -d ${D}${sysconfdir}/default
 +       install -d ${D}${sysconfdir}/init.d
 +
 +       install -m 0644 ${WORKDIR}/init/rcS-default
 ${D}${sysconfdir}/default/rcS
-+       install -m 0755 ${WORKDIR}/init/rc              ${D}${sysconfdir}/init.d
-+       install -m 0755 ${WORKDIR}/init/rcS             ${D}${sysconfdir}/init.d
++       install -m 0755 ${WORKDIR}/init/rc              ${D}${sysconfdir}/i=
+nit.d
++       install -m 0755 ${WORKDIR}/init/rcS             ${D}${sysconfdir}/i=
+nit.d
 +       install -m 0644 ${WORKDIR}/rc*
 ${D}${sysconfdir}/event.d
 +       install -m 0644 ${WORKDIR}/control-alt-delete
@@ -140,7 +150,8 @@ ${D}${sysconfdir}/event.d
 +            cat <<EOF >> ${D}${sysconfdir}/event.d/tty-serial
 +# tty-serial - getty
 +#
-+# This service maintains a getty on tty-serial from the point the system is
++# This service maintains a getty on tty-serial from the point the system i=
+s
 +# started until it is shut down again.
 +
 +start on runlevel 2
@@ -156,8 +167,7 @@ ${D}${sysconfdir}/event.d
 +exec ${base_sbindir}/getty ${SERIAL_CONSOLE}
 +EOF
 +       fi
-
-+       if [ "${USE_VT}" = "1" ]; then
++       if [ "${USE_VT}" =3D "1" ]; then
 +           for n in ${SYSVINIT_ENABLED_GETTYS}
 +           do
 +            cat <<EOF >> ${D}${sysconfdir}/event.d/tty$n
@@ -190,7 +200,8 @@ ${D}${sysconfdir}/event.d
 +
 +pkg_postinst_${PN}-sysvcompat () {
 +#!/bin/sh
-+update-alternatives --install ${base_sbindir}/reboot reboot reboot.${PN} 200
++update-alternatives --install ${base_sbindir}/reboot reboot reboot.${PN} 2=
+00
 +update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
 +update-alternatives --install ${base_sbindir}/poweroff poweroff
 poweroff.${PN} 200
@@ -199,7 +210,6 @@ shutdown.${PN} 200
 +}
 +
 +pkg_prerm_${PN}-sysvcompat () {
-
 +#!/bin/sh
 +update-alternatives --remove reboot reboot.${PN}
 +update-alternatives --remove halt halt.${PN}
@@ -214,59 +224,66 @@ index c4db01b..a0bd17e 100644
 @@ -1,11 +1,18 @@
  require upstart.inc
 
--SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2 \
-+SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2;name=upstart
+-SRC_URI =3D "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2 =
 \
-+    http://upstart.ubuntu.com/download/example-jobs/0.3/example-jobs-${PV}.tar.gz;name=compat
++SRC_URI =3D "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2;=
+name=3Dupstart
+\
++    http://upstart.ubuntu.com/download/example-jobs/0.3/example-jobs-${PV}=
+.tar.gz;name=3Dcompat
 \
 +    file://init/rcS-default file://init/rc file://init/rcS \
  "
 
- RRECOMMENDS_${PN} = "libupstart upstart-sysvcompat"
+ RRECOMMENDS_${PN} =3D "libupstart upstart-sysvcompat"
 
--PR = "r1"
-+PR = "r2"
+-PR =3D "r1"
++PR =3D "r2"
 
--SRC_URI[md5sum] = "a9e475e1458c876add0441d9d4cfe9c0"
--SRC_URI[sha256sum] =
+-SRC_URI[md5sum] =3D "a9e475e1458c876add0441d9d4cfe9c0"
+-SRC_URI[sha256sum] =3D
 "d4f7fff9112049eab318518719735d0ac66ff558ed91c2d7c7c41124de2832b6"
-+USE_VT ?= "1"
-+SYSVINIT_ENABLED_GETTYS ?= "1"
++USE_VT ?=3D "1"
++SYSVINIT_ENABLED_GETTYS ?=3D "1"
 +
-+SRC_URI[upstart.md5sum] = "a9e475e1458c876add0441d9d4cfe9c0"
-+SRC_URI[upstart.sha256sum] =
++SRC_URI[upstart.md5sum] =3D "a9e475e1458c876add0441d9d4cfe9c0"
++SRC_URI[upstart.sha256sum] =3D
 "d4f7fff9112049eab318518719735d0ac66ff558ed91c2d7c7c41124de2832b6"
-+SRC_URI[compat.md5sum] = "22d66ef8bc9d167eb822bbfecb584107"
-+SRC_URI[compat.sha256sum] =
++SRC_URI[compat.md5sum] =3D "22d66ef8bc9d167eb822bbfecb584107"
++SRC_URI[compat.sha256sum] =3D
 "f53fae7258fcf67cb29d344e53e1548171e4781af11ff4ba92b8b81caab3c315"
-diff --git a/recipes/upstart/upstart_0.3.8.bb b/recipes/upstart/upstart_0.3.8.bb
+diff --git a/recipes/upstart/upstart_0.3.8.bb b/recipes/upstart/upstart_0.3=
+.8.bb
 index 1b2cfb5..baf00d2 100644
 --- a/recipes/upstart/upstart_0.3.8.bb
 +++ b/recipes/upstart/upstart_0.3.8.bb
 @@ -1,10 +1,14 @@
  require upstart.inc
 
--SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2 \
-+SRC_URI = "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2;name=upstart
+-SRC_URI =3D "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2 =
 \
-+    http://upstart.ubuntu.com/download/example-jobs/0.3/example-jobs-${PV}.tar.gz;name=compat
+-file://autoconf_version.patch"
++SRC_URI =3D "http://upstart.ubuntu.com/download/0.3/upstart-${PV}.tar.bz2;=
+name=3Dupstart
+\
++    http://upstart.ubuntu.com/download/example-jobs/0.3/example-jobs-${PV}=
+.tar.gz;name=3Dcompat
 \
 +    file://init/rcS-default file://init/rc file://init/rcS \
-
 +    file://autoconf_version.patch \
 +"
 
- PR = "r1"
+ PR =3D "r1"
 
 -
--SRC_URI[md5sum] = "5cdd2dc3a3f02089c9450edf4e8f4941"
--SRC_URI[sha256sum] =
+-SRC_URI[md5sum] =3D "5cdd2dc3a3f02089c9450edf4e8f4941"
+-SRC_URI[sha256sum] =3D
 "9a2a37455ad4e9dd2856b5a0f15adb1a3f84439f60d0f63b041584a2666e9835"
-+SRC_URI[upstart.md5sum] = "5cdd2dc3a3f02089c9450edf4e8f4941"
-+SRC_URI[upstart.sha256sum] =
++SRC_URI[upstart.md5sum] =3D "5cdd2dc3a3f02089c9450edf4e8f4941"
++SRC_URI[upstart.sha256sum] =3D
 "9a2a37455ad4e9dd2856b5a0f15adb1a3f84439f60d0f63b041584a2666e9835"
-+SRC_URI[compat.md5sum] = "22d66ef8bc9d167eb822bbfecb584107"
-+SRC_URI[compat.sha256sum] =
++SRC_URI[compat.md5sum] =3D "22d66ef8bc9d167eb822bbfecb584107"
++SRC_URI[compat.sha256sum] =3D
 "f53fae7258fcf67cb29d344e53e1548171e4781af11ff4ba92b8b81caab3c315"
 
 
