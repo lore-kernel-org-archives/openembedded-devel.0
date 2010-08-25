@@ -1,46 +1,45 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OoJCq-0003V5-5u
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoJHL-0003iA-9g
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 18:52:08 +0200
-Received: by ewy7 with SMTP id 7so425490ewy.6
+	Wed, 25 Aug 2010 18:56:48 +0200
+Received: by ywa8 with SMTP id 8so308835ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 09:51:43 -0700 (PDT)
+	Wed, 25 Aug 2010 09:56:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=tgG/dYewh7Gds8zPjnBbUfQVeIxDF8USh9zWbPkTosM=;
-	b=sWbcahnEesCGmAMX7IS14TlvRjbG4KD2Pe5/g/FTui9Ox6j9SLFNKTZ+cpFjeoBa+4
-	A+l4kbPD6g9IOjPaNxhMigOlXDH2AOxB1th+2hle7oB3A5juwOIWL312p+kgU5yUvpfz
-	hSOcggVZ8M448pnZiTNnqTxOhZBo4z19O8Yqs=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=rhdf278bGOolPJxEAUeMhSlnQqY1P3DhfEeGUdBZdv0=;
+	b=p/97Xs3E4TtWwqdF08Ap11rHni+R1KnTbcYTXSiprOhKZ1q3kTbrDcmtZWpIeCumkO
+	kkTfOMajaJ2MA9WfbDmeVUYdcM5zbwpYGa1RmLMGZ6Jfe1rgzeaaX/RuahGDAhdESUa5
+	igzuHLE+FxqITvNQYaLhtsTJgPy5q8rUntaLg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=GgO6LZisfnNmNty7G1f6rHvzYC2g1rBNMGFFsjMXxWtQFSR2n7ObvoE8eXbxssnsBS
-	aPzrrgwgsrMDJfSiGgzECXumb/0Tn8i3uuNx6+yrKt2hO34p2baOZR3SLYVUCmaspXIp
-	DU9sMZRp1dGPmfhQW85iGKSR0UmCqcyT2FuKA=
+	:content-type:content-transfer-encoding;
+	b=Wiyk3lG1ZjX2LXfyqHL0H1QZZIdEYL4vsM6w1NIsF+AAeSL+xGjt5Xn/Gg7A6HpEvt
+	U116HGuRhnO3QhuB7wb9bg4slj+h+2AE7mpiqfCXYxTGuvxLoW7eSM6gPNUU0qjB90X6
+	TQcHBJJeor4MzdTDLV3v0Jt9vWdXjZMtkLhTE=
 MIME-Version: 1.0
-Received: by 10.213.31.73 with SMTP id x9mr4000914ebc.51.1282755103462; Wed,
-	25 Aug 2010 09:51:43 -0700 (PDT)
-Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 09:51:43 -0700 (PDT)
-In-Reply-To: <1282739805.3880.96.camel@mattotaupa>
-References: <AANLkTi=nsTUOndpz7duDncPmbto8vueL0axvEV2qRCBQ@mail.gmail.com>
-	<1282731315.3880.8.camel@mattotaupa>
-	<AANLkTi=ofXwz1kEQih4Yk0At8X0YDFmtQ2TwrWZTuwji@mail.gmail.com>
-	<1282739805.3880.96.camel@mattotaupa>
-Date: Wed, 25 Aug 2010 22:51:43 +0600
-Message-ID: <AANLkTi=SgVW5dOyK6m1ezv6F7HQB9AUNo_eOPaKzRrYi@mail.gmail.com>
-From: Anatoly Shipitsin <norguhtar@gmail.com>
+Received: by 10.101.189.33 with SMTP id r33mr9493961anp.123.1282755376747;
+	Wed, 25 Aug 2010 09:56:16 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Wed, 25 Aug 2010 09:56:16 -0700 (PDT)
+In-Reply-To: <1282749636.3880.143.camel@mattotaupa>
+References: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+	<1282749636.3880.143.camel@mattotaupa>
+Date: Wed, 25 Aug 2010 18:56:16 +0200
+Message-ID: <AANLkTi=ObHptxoHzC5Y8FACFXMt52-QsPzhx8y-ei6N+@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: norguhtar@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Upstart sysvinit compat
+Subject: Re: Patch procedure for dummies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,17 +53,115 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 16:52:08 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 25 Aug 2010 16:56:48 -0000
+Content-Type: text/plain; charset=windows-1252
+Content-Transfer-Encoding: quoted-printable
 
-> Unfortunately I am quite lost, what patch is right and what wrong, since
-> they have no iteration numbers [v2], [v3].
+2010/8/25 Paul Menzel <paulepanter@users.sourceforge.net>:
+> Am Mittwoch, den 25.08.2010, 08:43 -0600 schrieb AJ ONeal:
+>> Please give me feedback and I'll post this on the wiki.
+>>
+>> A task-oriented guide to creating a patch:
+>>
+>> > Let's say you create a new recipe and you'd like to submit it for incl=
+usion
+>> > (and you've already tested that it works, of course).
+>> >
+>> > 1. Now commit with a good strong helpful message
 >
-> Please resend making this clear. Since they all are mangled, this is
-> necessary anyway.
-Done.
+> =85 explaining your changes in a way others get a short overview without
+> looking at the code.
 
-> Sorry for the inconvenience. I hope the next iteration will be fine.
-No problem. Now i'm know how right send patch :)
+See http://wiki.openembedded.net/index.php/Commit_Policy on what
+should be in the commit message.
+>
+>> > =A0 =A0 git add recipes/nodejs/
+>> > =A0 =A0 git commit # don't use the -m option
+>> >
+>> > 2. The message should look like this
+>> >
+>> > =A0 =A0 added recipe for node.js
+>
+> The rule is to give the recipe name at the beginning followed by a
+> colon.
+>
+>> > =A0 =A0 * added recipe for node.js (bug #5555 - no nodejs recipe)
+>> > =A0 =A0 ** patched libev's wscript to not try to execute code
+>> > =A0 =A0 ** patched node's wscript to not search in '/usr/include'
+>> >
+>> > =A0 =A0 Signed-off-by: AJ ONeal <coolaj86@gmail.com>
+>> >
+>> > 3. Create your patch
+>> >
+>> > =A0 =A0 git format-patch -1 # or however many commits are part of this=
+ change
+>
+> Signed-off-by line can be added automatically either using `-s` either
+> in 1. or 3.. I would recommend 3..
+>
+>> > 3++. If you are submitting a second version also add "--subject-prefix
+>> > [v2]"
+>
+> =85 to `git format-patch`.
+>
+>> > =A0 =A0 git send-email
+
+with the names of the files generated by git format-patch as argument.
+e.g. git format-patch 0001-this-is-an-example.patch
+>> >
+>> > Your patch will be immediately visible on
+>> > http://patchwork.openembedded.org/patch/
+>> >
+>>
+>>
+>> > 4. Once your patch has been accepted or rejected, create an account an=
+d
+>> > update the status to "accepted" or "rejected"
+>> >
+>> > 4++. If you get soft-rejected (a lot of feedback), make the changes, s=
+ubmit
+>> > the next version,
+>
+> =85 using `--subject-prefix` to mark the patch iteration.
+>
+>> > and update the status of the previous patch to
+>> > "superseded"
+>> >
+>> > Appendix: Properly configuring git (using tekkub@gmail.com as an examp=
+le
+>> > user)
+>> >
+>> > =A0 =A0 sudo apt-get install git-core git-email
+>
+> Please use `sudo aptitude install git-core git-email` since it is the
+> recommended package tool by Debian. People preferring `apt-get` know how
+> to use it instead.
+
+Note that this is specific for debian variants (including ubuntu).
+Fedora and openSuse have different packet managers
+>
+>> > =A0 =A0 git config --global user.name "Tekkub"
+>> > =A0 =A0 git config --global user.email "tekkub@gmail.com"
+>
+> These two should be given in 0. or 1. as they are also important for the
+> commit meta data.
+
+Agree (otherwise git commit -s is not going to work)
+>
+>> > =A0 =A0 git config --global sendemail.smtpserver smtp.gmail.com
+>> > =A0 =A0 git config --global sendemail.smtpserverport 587
+>> > =A0 =A0 git config --global sendemail.smtpencryption tls
+>> > =A0 =A0 git config --global sendemail.smtpuser tekkupl@gmail.com
+>
+> Thank you for your work. I would suggest to include links to more in
+> depth information (commit policy, patchwork) after each section for a
+> clarification.
+>
+>
+Fully agree.
+
+Thanks for writing this.
+
+Frans
 
 
