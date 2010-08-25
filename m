@@ -1,20 +1,22 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OoFAa-0000ej-KL for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 14:33:36 +0200
+	id 1OoFED-0000jn-9r for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 14:37:17 +0200
 Received: from f053042170.adsl.alicedsl.de ([78.53.42.170]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OoFA7-0003lb-Av for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 12:33:03 +0000
+	id 1OoFDm-000566-2s for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 12:36:50 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinTAbx5g2SOB8dGjyPbSGOJCAoeD6YCf2=MUa+F@mail.gmail.com>
-References: <AANLkTinTAbx5g2SOB8dGjyPbSGOJCAoeD6YCf2=MUa+F@mail.gmail.com>
-Date: Wed, 25 Aug 2010 14:33:00 +0200
-Message-ID: <1282739580.3880.88.camel@mattotaupa>
+In-Reply-To: <AANLkTi=ofXwz1kEQih4Yk0At8X0YDFmtQ2TwrWZTuwji@mail.gmail.com>
+References: <AANLkTi=nsTUOndpz7duDncPmbto8vueL0axvEV2qRCBQ@mail.gmail.com>
+	<1282731315.3880.8.camel@mattotaupa>
+	<AANLkTi=ofXwz1kEQih4Yk0At8X0YDFmtQ2TwrWZTuwji@mail.gmail.com>
+Date: Wed, 25 Aug 2010 14:36:45 +0200
+Message-ID: <1282739805.3880.96.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 X-SA-Exim-Connect-IP: 188.40.100.199
@@ -25,7 +27,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sysvinit_2.86.bb: change sysvinit-utils for compatible with upstart
+Subject: Re: Upstart sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,50 +41,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 12:33:36 -0000
-X-Groupsio-MsgNum: 22641
+X-List-Received-Date: Wed, 25 Aug 2010 12:37:17 -0000
+X-Groupsio-MsgNum: 22642
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-DcXHZWaC+VYnrwI1j/Vn"
+	boundary="=-LZKQTzOE06cAdHytyFKz"
 
---=-DcXHZWaC+VYnrwI1j/Vn
+--=-LZKQTzOE06cAdHytyFKz
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Mittwoch, den 25.08.2010, 17:04 +0600 schrieb Anatoly Shipitsin:
-> From: Anatoly Shipitsin <norguhtar@gmail.com>
+Am Mittwoch, den 25.08.2010, 17:45 +0600 schrieb Anatoly Shipitsin:
+> > Please take a look at the commit policy [1], resend as v2 and please
+> > remember to update the patch queue.
 >=20
-> * move shutdown to sysvinit package
-> * move killall5 to sysvinit-utils
-> * change PR =3D "r59"
->=20
-> Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
->=20
-> ---
-> recipes/sysvinit/sysvinit_2.86.bb |    8 ++++----
->  1 files changed, 4 insertions(+), 4 deletions(-)
+> I'm resend patch.
 
-[=E2=80=A6]
+Thank you!
 
-Same here. Please resend the patch not mangled and mark the patch
-iteration [v3] (`git help format-patch` =E2=86=92 `--subject-prefix`) pleas=
-e.
+> Now all fine? Sorry for wrong second message.
+
+Unfortunately I am quite lost, what patch is right and what wrong, since
+they have no iteration numbers [v2], [v3].
+
+Please resend making this clear. Since they all are mangled, this is
+necessary anyway.
+
+Sorry for the inconvenience. I hope the next iteration will be fine.
 
 
 Thanks,
 
 Paul
 
---=-DcXHZWaC+VYnrwI1j/Vn
+--=-LZKQTzOE06cAdHytyFKz
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkx1DXwACgkQPX1aK2wOHVjKBwCeKATzkCB9oRfPFkzyM6PmQEBB
-Fi8Ani/2Ym++NEilo2e+/qQa58tevtdt
-=mrZu
+iEYEABECAAYFAkx1Dl0ACgkQPX1aK2wOHVhwzQCeM95zXm6H08UVBKEKAaJD/UnS
+8hgAni6t4aOtvfPt9Z+Vt3BJNIdbc010
+=4TjQ
 -----END PGP SIGNATURE-----
 
---=-DcXHZWaC+VYnrwI1j/Vn--
+--=-LZKQTzOE06cAdHytyFKz--
