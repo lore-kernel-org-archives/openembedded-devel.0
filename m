@@ -1,40 +1,31 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoEtk-00054A-0T
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 14:16:08 +0200
-Received: by yxk30 with SMTP id 30so155162yxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 05:15:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=xUU8Gc3RPP+riqgHk+qFU8l3UREPspHk7051DjDXpsQ=;
-	b=bfaG0dvaLxEmnV49SQjf/0pO3NEHBJqjC+tCdxueDQuoY8Dks5/jyPlc7hRulrC8dr
-	UkM048Hh0E6AQ4XMQVCwPZoirQKMAK3+XcRYq0hhRdZqx9DKaKEjEQ+/4mwtkQGWxQMK
-	4sdeTYTDO5pGXrt01FBjB5JEbNSS4ZQKDsoYQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=cUz2pay3S0PA0fHkL7g+SOH5wEtVIPGWiKs4xMFiW+ZvY4rF7dYSRQ97Jp32pa/o0p
-	qM+1Wop8jfP4Yl6wFY6j5X8BXBbpImN6j4PnBPE8ZpFYXAkfqLibDsZWbLA9hTRKgaq5
-	xeqvNIGJhbtFVNWugV+PD2O0Yky2pK6KCXk7c=
-MIME-Version: 1.0
-Received: by 10.150.182.8 with SMTP id e8mr8373558ybf.424.1282738540865; Wed,
-	25 Aug 2010 05:15:40 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Wed, 25 Aug 2010 05:15:40 -0700 (PDT)
-Date: Wed, 25 Aug 2010 14:15:40 +0200
-Message-ID: <AANLkTin7=Kq6GAzXmOSZErzd=FvXNtNL8zGuVQ-mE7wX@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoF85-0000PI-3L for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 14:31:13 +0200
+Received: from f053042170.adsl.alicedsl.de ([78.53.42.170]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoF7f-0002vi-9N for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 12:30:31 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <AANLkTikvLoGEKA-kmer4_QOVMPG+fynmOPDca03eWJ=X@mail.gmail.com>
+References: <AANLkTikvLoGEKA-kmer4_QOVMPG+fynmOPDca03eWJ=X@mail.gmail.com>
+Date: Wed, 25 Aug 2010 14:30:28 +0200
+Message-ID: <1282739428.3880.82.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: PR on native recipe
+Subject: Re: [PATCH] upstart_0.3.11.bb: fix upstart sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,31 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 12:16:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 25 Aug 2010 12:31:13 -0000
+X-Groupsio-MsgNum: 22639
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-3oH0TS8PFH1li4dDdYOF"
 
-Dear all,
+--=-3oH0TS8PFH1li4dDdYOF
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Fahad Usman asked a while ago on how to deal with PR in native recipes
-if the native recipe does an include of the non-native recipe (which
-is quite common).
-Currently I see two solutions being used.
+Am Mittwoch, den 25.08.2010, 17:13 +0600 schrieb Anatoly Shipitsin:
+> From: Anatoly Shipitsin <norguhtar@gmail.com>
+>=20
+> * move shutdown to sysvinit package
+> * move killall5 to sysvinit-utils
+> * change PR =3D "r59"
 
-One is to give a native recipe its own PR. Issue is that if the target
-recipe changes, the native recipe should also have a PR bump (and I
-fear that that is often forgotten).
-The other is to have no PR in the native recipe and bump the target
-recipe PR even if the native recipe only changes.
+The commit message does not seem to be correct but just copied from the
+sysvinit commit message.
 
-Both occur now. What is the preferred solution?
+> Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
+>=20
+> ---
+>  recipes/upstart/upstart.inc       |  111 +++++++++++++++++++++++++++++++=
+++++-
+>  recipes/upstart/upstart_0.3.11.bb |   15 ++++-
+>  recipes/upstart/upstart_0.3.8.bb  |   14 +++--
+>  3 files changed, 127 insertions(+), 13 deletions(-)
 
-(btw there are other solutions possible too. Not sure if something like
-PR += ".0"
-in the native recipe is possible. That could be a good alternative.
-
-(and yeah: I know we should try to get rid of those native recipes,
-but that is not always possible right away).
-
-Frans
+[=E2=80=A6]
+Besides it looks like your MUA mangled the patch (inserted line breaks).
+Please resend as v3. Please make sure to mark your patches as such.
 
 
+Thanks,
+
+Paul
+
+--=-3oH0TS8PFH1li4dDdYOF
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkx1DOQACgkQPX1aK2wOHVgy8wCdGNpdPHuJgMbRguw4YPFEQk3+
+PjkAn3geCrgDSC+GMdiEf+JLWFs05Sbf
+=e5RE
+-----END PGP SIGNATURE-----
+
+--=-3oH0TS8PFH1li4dDdYOF--
