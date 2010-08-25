@@ -1,48 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1OoF9w-0000dQ-UF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 14:32:56 +0200
-Received: by fxm6 with SMTP id 6so241980fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 05:32:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:in-reply-to:user-agent;
-	bh=b6NWdm71bylLdV2hjqWsdZ8HntEXNIFga2ZKRdQCX/4=;
-	b=T2LJpqlWZJgrAdYNHZMY9sGZf27lFh98C2zBmQCwkMARi+IoymYY5kZC+/7bBhCIZf
-	IAsnMWRXXE7TQG2NNYWJCKz6dmRDH/glNQjiXbmeK1p9T8SEQ8U1GIr4XlToWFb0Jxcy
-	8q8ggg+PVOnJD8SI4T/YMZLn88fWLSK32hhIY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:in-reply-to:user-agent;
-	b=DDn7PBsD8L1GWOCPGifrrmAYl+98/44VRBvhak6G9ORJ/n4nIe2e3F14nF2MUn8pCd
-	auJOhNaTsKNTBAqDcaxxKwf5gHyiTCfdoC69YM/QghadsL0rZWPhM9EHdu8Kzg96bThe
-	AbPr9HTDdrQ3HW1tz41aMhTbatGGtTErFy1UA=
-Received: by 10.223.113.135 with SMTP id a7mr7454738faq.40.1282739536863;
-	Wed, 25 Aug 2010 05:32:16 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id f28sm619887faa.24.2010.08.25.05.32.15
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 25 Aug 2010 05:32:16 -0700 (PDT)
-Date: Wed, 25 Aug 2010 14:32:35 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoFAa-0000ej-KL for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 14:33:36 +0200
+Received: from f053042170.adsl.alicedsl.de ([78.53.42.170]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoFA7-0003lb-Av for openembedded-devel@lists.openembedded.org;
+	Wed, 25 Aug 2010 12:33:03 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100825123235.GB17268@jama>
-References: <AANLkTin7=Kq6GAzXmOSZErzd=FvXNtNL8zGuVQ-mE7wX@mail.gmail.com>
-MIME-Version: 1.0
-In-Reply-To: <AANLkTin7=Kq6GAzXmOSZErzd=FvXNtNL8zGuVQ-mE7wX@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+In-Reply-To: <AANLkTinTAbx5g2SOB8dGjyPbSGOJCAoeD6YCf2=MUa+F@mail.gmail.com>
+References: <AANLkTinTAbx5g2SOB8dGjyPbSGOJCAoeD6YCf2=MUa+F@mail.gmail.com>
+Date: Wed, 25 Aug 2010 14:33:00 +0200
+Message-ID: <1282739580.3880.88.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: PR on native recipe
+Subject: Re: [PATCH] sysvinit_2.86.bb: change sysvinit-utils for compatible with upstart
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,45 +39,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 12:32:56 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Wed, 25 Aug 2010 12:33:36 -0000
+X-Groupsio-MsgNum: 22641
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-DcXHZWaC+VYnrwI1j/Vn"
 
-On Wed, Aug 25, 2010 at 02:15:40PM +0200, Frans Meulenbroeks wrote:
-> Dear all,
-> 
-> Fahad Usman asked a while ago on how to deal with PR in native recipes
-> if the native recipe does an include of the non-native recipe (which
-> is quite common).
-> Currently I see two solutions being used.
-> 
-> One is to give a native recipe its own PR. Issue is that if the target
-> recipe changes, the native recipe should also have a PR bump (and I
-> fear that that is often forgotten).
-> The other is to have no PR in the native recipe and bump the target
-> recipe PR even if the native recipe only changes.
-> 
-> Both occur now. What is the preferred solution?
-> 
-> (btw there are other solutions possible too. Not sure if something like
-> PR += ".0"
-> in the native recipe is possible. That could be a good alternative.
+--=-DcXHZWaC+VYnrwI1j/Vn
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This is not good, because after PR there is DISTRO_PR, so for:
-non-native PR = "r1"
-DISTRO_PR="4"
+Am Mittwoch, den 25.08.2010, 17:04 +0600 schrieb Anatoly Shipitsin:
+> From: Anatoly Shipitsin <norguhtar@gmail.com>
+>=20
+> * move shutdown to sysvinit package
+> * move killall5 to sysvinit-utils
+> * change PR =3D "r59"
+>=20
+> Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
+>=20
+> ---
+> recipes/sysvinit/sysvinit_2.86.bb |    8 ++++----
+>  1 files changed, 4 insertions(+), 4 deletions(-)
 
-now you add native PR += ".0" and from 
-PKGR    ?= "${PR}${DISTRO_PR}"
+[=E2=80=A6]
 
-PKGR r1.4 you get r1.0.4 which is lower, so at least you had to increase
-PR in non-native to introduce PR += in non-native.
-
-changing PR in non-native seems like safe solution to me (unneeded
-rebuild/upgrade because of native recipe changes doesn't cost that much IMHO).
-
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+Same here. Please resend the patch not mangled and mark the patch
+iteration [v3] (`git help format-patch` =E2=86=92 `--subject-prefix`) pleas=
+e.
 
 
+Thanks,
+
+Paul
+
+--=-DcXHZWaC+VYnrwI1j/Vn
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkx1DXwACgkQPX1aK2wOHVjKBwCeKATzkCB9oRfPFkzyM6PmQEBB
+Fi8Ani/2Ym++NEilo2e+/qQa58tevtdt
+=mrZu
+-----END PGP SIGNATURE-----
+
+--=-DcXHZWaC+VYnrwI1j/Vn--
