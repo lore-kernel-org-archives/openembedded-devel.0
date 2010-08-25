@@ -1,39 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoN1r-0005JC-DO
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoN9t-0001mh-QA
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 22:57:29 +0200
-Received: by iwn2 with SMTP id 2so849528iwn.6
+	Wed, 25 Aug 2010 23:05:30 +0200
+Received: by gxk2 with SMTP id 2so386078gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 13:56:37 -0700 (PDT)
+	Wed, 25 Aug 2010 14:04:51 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=2xAnkBDISIkvO72vg4jATcLGdRGi4QzPagWfZ1d3WAg=;
-	b=HVRMbhnAvp/mRv/8UaPUWzU1UYSh+NLwQ+WkZwJDnkq0YVXg8z5pDdkiBfeXtMPyZ5
-	gLE0Tto/XByI8vGTr6nk8kYZvqFN10HlScmhNNuOhNZytNejXjFJkZ3u2NSVwI2i+loh
-	4GrxLUkpy8pWiOHI+DE26MZXR5gnXrp+V2vTY=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=lMO9XqUDXps4mvaYoGT/xIWiqYoQG7Kj2q7C4UiOv4g=;
+	b=gzxCjohg5a4n3G1XZBSkCLynx2tcZr09EePoRyL1aeLa870FAZDE0pePB7naXSKPB2
+	KtwEKGWdZtJSrKUMre1kYvVWPRHqysyYRk7ChK+CZLbb6Xft1lUd3eaMEHwdfw+9rFSP
+	kdu3kQfEio1X9OeHr2bWgU1XuYIUhdFeBep88=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=JSuutfEgCD8BfwKiTe7I8LycSjEGJGk6+iwtBPd6L2Yx1erqV1UGGg39NaFvDOWznn
-	ud2iFaL3F8X4kX+53ZublFz74aubrbh3geoQ7htgWZ/lER04ProasH7ZTJ10zQ9aJQGi
-	b98lkkroeNnnJgzTvxFG6wDatPLBx+CJD+ylw=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=fuWsCwVS43sQl5TvPi0R5Xj9Gdt1kdJ45wwln2NjdoK1NhQ5Y7dxZCOaIE8Ilm/Hkp
+	vW7iMUm29pq+YNFeFxQ+YZzraaBPUz7haWkWGa/m62AitBy04tcSLH9wZCC2/+YeFt1F
+	679owKAvxBhIIYvqnko//guLPAVs/+QoxSiIs=
 MIME-Version: 1.0
-Received: by 10.231.118.28 with SMTP id t28mr9377331ibq.131.1282769797774;
-	Wed, 25 Aug 2010 13:56:37 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Wed, 25 Aug 2010 13:56:37 -0700 (PDT)
-In-Reply-To: <4C757565.3010107@mentor.com>
-References: <AANLkTimd9f1LPJ8f7Bi1+8V7T8dJ-C+3m5NxgWGQ8Tuw@mail.gmail.com>
-	<201008252132.03713.roman@khimov.ru>
-	<AANLkTinQqY=C+7ES=qZ8vRuQi_UOWOKX4PHQ7XFtqH2k@mail.gmail.com>
-	<201008252221.59989.roman@khimov.ru> <4C757565.3010107@mentor.com>
-Date: Wed, 25 Aug 2010 22:56:37 +0200
-Message-ID: <AANLkTi=C2B9VxaR0EVGWJf-ayoQ12shcvbO_Enp3KbEZ@mail.gmail.com>
+Received: by 10.151.63.19 with SMTP id q19mr9273793ybk.292.1282770291226; Wed,
+	25 Aug 2010 14:04:51 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Wed, 25 Aug 2010 14:04:51 -0700 (PDT)
+Date: Wed, 25 Aug 2010 23:04:51 +0200
+Message-ID: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Connect-IP: 209.85.161.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +34,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: squid: remove 2.x versions
+Subject: how to add file to SRC_URI for target only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,36 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 25 Aug 2010 20:57:30 -0000
-Content-Type: text/plain; charset=KOI8-R
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 25 Aug 2010 21:05:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-2010/8/25 Tom Rini <tom_rini@mentor.com>:
-> Roman I Khimov wrote:
->>
->> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F3=D2=C5=C4=C1 25 =C1=D7=C7=D5=
-=D3=D4=C1 2010 21:59:31 =C1=D7=D4=CF=D2 Frans Meulenbroeks
->> =CE=C1=D0=C9=D3=C1=CC:
->>>
->>> Ok, as you are definitely more knowledgeable than I am, I follow your
->>> =9Aproposal. As you are probably the owner of the recipe (and have more
->>> =9Aknowledge) can you give followup to this.
->>
->> Well, MAINTAINERS file disagree a bit with this ownership, but seems lik=
-e
->> I'm the one who cares most about it at this day and age, so. Patch will
->> follow.
->
-> An also active (yes, I'll call March active) developer. =9APerhaps it's O=
-K to
-> have > 1 MAINTAINER for a recipe, and you'd like to sign up for some of t=
-he
-> other thing you've been keeping a good eye on? =9AThanks :)
->
-> --
+Is it possible to add a file to SRC_URI for target only in a combined
+native/target recipe?
 
-I think it is fine to have more than one developer for a recipe.
-guess this also applies to e.g. the linux and u-boot recipes
+Of course I know I can fully redefine SRC_URI, but I feel that is less
+desirable.
+The issue is that the target recipe needs an additional patch that the
+native recipe cannot use.
+
+Or do we need to introduce an _target suffix?
+
+Guess an intermediate variable also could do the trick.
+E.g.
+
+PATCH = "xx.patch"
+PATCH_virtclass-native = ""
+SRC_URI = "source and files and patches ${PATCH}"
+
+not really ideal either.
+
+I saw some other places where we need to tweak similarly with DEPENDS
+e.g.
+DEPENDS = "x"
+DEPENDS_virtclass-natvie = ""
+
+guess here _target could help too.
+
+Any ideas/comments/patches/... ?
 
 Frans
 
