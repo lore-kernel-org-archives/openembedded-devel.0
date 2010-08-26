@@ -1,33 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OoY6K-0004NJ-Mh for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 10:46:25 +0200
-Received: from f053041083.adsl.alicedsl.de ([78.53.41.83]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OoY5v-0005JS-1G for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 08:45:59 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OoYac-0003Zr-OA
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Aug 2010 11:17:44 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OoYaA-0000B8-HG from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Aug 2010 02:17:14 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 26 Aug 2010 11:17:12 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=gHjEM7eFzNEsZOq9b3y9X06NRq4amF9h0_yhG@mail.gmail.com>
-References: <1282754957-7589-1-git-send-email-norguhtar@gmail.com>
-	<1282775656.3711.22.camel@mattotaupa>
-	<AANLkTi=gHjEM7eFzNEsZOq9b3y9X06NRq4amF9h0_yhG@mail.gmail.com>
-Date: Thu, 26 Aug 2010 10:45:56 +0200
-Message-ID: <1282812356.3726.33.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Thu, 26 Aug 2010 14:20:55 +0500
+Message-Id: <1282814455-6071-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 26 Aug 2010 09:17:13.0168 (UTC)
+	FILETIME=[780D5500:01CB44FF]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] upstart: fix sysvinit compat
+Subject: [PATCH] makedevs_1.0.0: got rid of separate native recipe and removed legacy staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,86 +40,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 08:46:25 -0000
-X-Groupsio-MsgNum: 22667
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-nLQLsymczI1ax0hXWkLv"
+X-List-Received-Date: Thu, 26 Aug 2010 09:17:45 -0000
 
---=-nLQLsymczI1ax0hXWkLv
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* converted do_stage to do_install
 
-Am Donnerstag, den 26.08.2010, 09:14 +0600 schrieb Anatoly Shipitsin:
-> On Thu, Aug 26, 2010 at 04:34, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> > Am Mittwoch, den 25.08.2010, 22:49 +0600 schrieb Anatoly Shipitsin:
-> >
-> > Where did you take those from?
-> Need more info?
+* replaced ${STAGING_BINDIR} with ${D}${bindir}
 
-I mean, did you write the those rc, rcS and rcS-default scripts
-yourself? (Probably not judging from the copyright in the header.) So
-where did you those from? From another distribution? Are they included
-somewhere?
+* moved the do_install to non-native recipe
 
-> > Small commits =E2=80=93 like changing the package name =E2=80=93 make i=
-t easier to
-> > review.
-> Okey. May be i'm split patch to 5 small patches?
+* added BBCLASSEXTEND = "native"
 
-If it is possible, yes!
+* added NATIVE_INSTALL_WORKS = "1"
 
-> > Is not that picked up automatically?
-> No.
+* bumped PR
 
-Please do not cut the lines out I referred to, because I already forget
-it ;-) and other would not have to look up the old message too but just
-the latest one.
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>Signed-off-by: Fahad <fahad@pkl-fusman-ubuntu.(none)>
+---
+ recipes/makedevs/makedevs-native_1.0.0.bb |   10 ----------
+ recipes/makedevs/makedevs_1.0.0.bb        |   10 ++++++++--
+ 2 files changed, 8 insertions(+), 12 deletions(-)
 
-Just to be clear that a meant the following line.
+diff --git a/recipes/makedevs/makedevs-native_1.0.0.bb b/recipes/makedevs/makedevs-native_1.0.0.bb
+deleted file mode 100644
+index 004a713..0000000
+--- a/recipes/makedevs/makedevs-native_1.0.0.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-SECTION = "base"
+-require makedevs_${PV}.bb
+-inherit native
+-
+-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/makedevs-${PV}"
+-
+-do_stage() {
+-	install -d ${STAGING_BINDIR}/
+-        install -m 0755 ${S}/makedevs ${STAGING_BINDIR}/
+-}
+diff --git a/recipes/makedevs/makedevs_1.0.0.bb b/recipes/makedevs/makedevs_1.0.0.bb
+index cab1a4c..2b7e84a 100644
+--- a/recipes/makedevs/makedevs_1.0.0.bb
++++ b/recipes/makedevs/makedevs_1.0.0.bb
+@@ -2,12 +2,11 @@ DESCRIPTION = "A tool to make device nodes"
+ LICENSE = "GPL"
+ SECTION = "base"
+ PRIORITY = "required"
++PR = "r9"
+ 
+ SRC_URI = "file://makedevs.c"
+ S = "${WORKDIR}/makedevs-${PV}"
+ 
+-PR = "r8"
+-
+ inherit update-alternatives
+ 
+ do_configure() {
+@@ -18,6 +17,11 @@ do_compile() {
+ 	${CC} ${CFLAGS} ${LDFLAGS} -o ${S}/makedevs ${S}/makedevs.c
+ }
+ 
++do_install_virtclass-native() {
++        install -d ${D}${bindir}/
++        install -m 0755 ${S}/makedevs ${D}${bindir}/
++}
++
+ do_install() {
+ 	install -d ${D}${base_sbindir}
+ 	install -m 0755 ${S}/makedevs ${D}${base_sbindir}/makedevs.makedevs
+@@ -28,4 +32,6 @@ ALTERNATIVE_NAME = "makedevs"
+ ALTERNATIVE_LINK = "${base_sbindir}/makedevs"
+ ALTERNATIVE_PRIORITY = "50"
+ 
++BBCLASSEXTEND = "native"
+ 
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
 
-> +EXTRA_OEMAKE +=3D "'bindir=3D${base_bindir}' \
-> +              'sbindir=3D${base_sbindir}' \
-> +              'usrbindir=3D${bindir}' \
-> +              'usrsbindir=3D${sbindir}' \
-> +              'includedir=3D${includedir}' \
-> +              'mandir=3D${mandir}'"
-
-> Automatically  upstart installed in /usr but for simple and right
-> switching with update-alternatives
-> it's move to root.
-
-Sorry, I do not understand. What is =C2=BBroot=C2=AB? If it is =C2=BB/=C2=
-=AB I do not see in
-which line it is used.
-
-> I'm got this additional parameters from sysvinit.
-
-Are you referring to those two?
-
-> +USE_VT ?=3D "1"
-> +SYSVINIT_ENABLED_GETTYS ?=3D "1"
-
-But why don=E2=80=99t you add them to `recipes/upstart/upstart_0.3.8.bb`. Y=
-ou
-could add them to the inc file then.
 
 
-Thanks,
-
-Paul
-
---=-nLQLsymczI1ax0hXWkLv
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx2Kb4ACgkQPX1aK2wOHVgL0wCfUGuog+BsfxO9oTMXQUfi9In6
-ShEAn385O69WRqI0MyoAvVMHOgpNbPl1
-=DTFn
------END PGP SIGNATURE-----
-
---=-nLQLsymczI1ax0hXWkLv--
