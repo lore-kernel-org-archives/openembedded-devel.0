@@ -1,28 +1,32 @@
-Received: from mail.altenpts.nl ([195.86.56.45])
+Received: from smtp2.nedap.com ([213.160.213.92] helo=smtp.nedap.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <bberg@mail.altenpts.nl>) id 1OoaxF-0001Nc-Nl
+	(envelope-from <jaap.dejong@nedap.com>) id 1Ooayn-00031h-OK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 13:49:16 +0200
-Received: from [89.146.6.202] ([89.146.6.202]) by mail.altenpts.nl
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 13:18:49 +0200
-From: "Bas van den Berg" <bberg@mail.altenpts.nl>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100826111849.bf99cfff@mail.altenpts.nl>
-Date: Thu, 26 Aug 2010 13:18:49 +0200
-X-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.8) Gecko/20100723 Ubuntu/10.04 (lucid) Firefox/3.6.8
+	Thu, 26 Aug 2010 13:50:51 +0200
+Received: from nvs0066.nedap.local ([10.91.8.1]) by smtp.nedap.com with
+	Microsoft SMTPSVC(6.0.3790.1830); Thu, 26 Aug 2010 13:50:20 +0200
+X-TM-IMSS-Message-ID: <2e4fc5740001c26e@nedap.com>
+Received: from [10.2.40.10] ([10.2.40.10]) by nedap.com ([10.91.8.1]) with
+	ESMTP (TREND IMSS SMTP Service 7.0) id 2e4fc5740001c26e for
+	<jaap.dejong@nedap.com>; Thu, 26 Aug 2010 13:50:25 +0100
+Message-ID: <4C7654FB.4050506@nedap.com>
+Date: Thu, 26 Aug 2010 13:50:19 +0200
+From: Jaap de Jong <jaap.dejong@nedap.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.11) Gecko/20100713 Lightning/1.0b1 Thunderbird/3.0.6
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 195.86.56.45
-X-SA-Exim-Mail-From: bberg@mail.altenpts.nl
+To: openembedded-devel@lists.openembedded.org
+X-OriginalArrivalTime: 26 Aug 2010 11:50:20.0488 (UTC)
+	FILETIME=[DC1F1C80:01CB4514]
+X-SA-Exim-Connect-IP: 213.160.213.92
+X-SA-Exim-Mail-From: jaap.dejong@nedap.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: stripping qt4-embedded
+Subject: llvm cmake error
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -36,30 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 11:49:16 -0000
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 26 Aug 2010 11:50:51 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Hi All,
 
-when building qt4-embedded, you get a lot of stuff by default:
-        qt4-embedded-examples
-        qt4-embedded-demos
-       libqtwebkite4
-          libqt... (many)
+I have some strange behavior while building openjdk-6 for ipx4xxbe
+Any ideas are welcome!
 
-I tried changing the recipe to get rid of these, but to no effect. The rec=
-ipes for
-qt4 seems to be the most complex of all recipes ;], so no wonder..
-Would the EXCLUDE like in the toolchain recipes work for qt4-embedded?
-From fransmeulenbroeks@gmail.com Thu Aug 26 13:50:26 2010
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoayQ-00030D-0S
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 13:50:26 +0200
-Received: by ywa8 with SMTP id 8so668327ywa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 04:49:51 -0700 (PDT)
-DKIM-Signature: v
+Jaap
+
+  
+$ MACHINE=ixp4xxbe bitbake openjdk-6
+//
+ERROR: function do_configure failed
+ERROR: log data follows
+(/media/OpenEmbedded/unstable/tmp/work/armv5teb-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/log.do_configure.31516)
+| /media/OpenEmbedded/unstable/tmp/work/armv5teb-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/run.do_configure.31516:
+line 625: cmake_do_configure: command not found
+NOTE: Task failed: /media/OpenEmbedded/unstable/tmp/work/armv5teb-angstrom-linux-gnueabi/llvm2.7-2.7-r8/temp/log.do_configure.31516
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /media/OpenEmbedded/unstable/org.openembedded.dev/recipes/llvm/llvm2.7_2.7.bb do_configure failed
+ERROR: Task 488 (/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/llvm/llvm2.7_2.7.bb, do_configure) failed
+ERROR: '/media/OpenEmbedded/unstable/org.openembedded.dev/recipes/llvm/llvm2.7_2.7.bb' failed
+
+
+
