@@ -1,41 +1,44 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OoUvC-0002ry-US
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoVjW-0002AK-47
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 07:22:43 +0200
-Received: by eyb7 with SMTP id 7so1065664eyb.6
+	Thu, 26 Aug 2010 08:14:43 +0200
+Received: by gxk2 with SMTP id 2so543650gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 25 Aug 2010 22:22:17 -0700 (PDT)
+	Wed, 25 Aug 2010 23:14:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=IcYTwIKFEhGy0yIDyDfTIfU1GpOheIyITxr9EYH6zBs=;
-	b=fGANtsaHG8LBI7Op/uTWgFAnh36lRifTeXR2Yo2uGpd89IdNxHTs0ctyojuJ5405Nm
-	v/7bkRPE4+OTGVWcPVa8H0kowYAgnDBdkEU2Cj9voN/7ynAF1JcoG1FBTJFCNfikq3To
-	OcGFeuiY7Nr0ZXCNEPq+hxvkJn/DTOIGuLWCA=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=YZsbkAAM4fygeCJzUByEhC00TOWOpkBS9xZ+kX6Kfpg=;
+	b=x+cdsFX8QQpLtXXhRMgrwUG+JSBWcQDJCrF5wFZk4nA0PXVCejRfqC2MJ+zGCjpP3O
+	k/xDhh0oML27GNmu9oGXSF7C1k1djzV32J+3kp1+hbwE/LtglSovWh6YpaKUrZdApFN5
+	nUsEX5T+YJg1k07N8ZElstEQaaJ1si441hIgw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=XfaALr8XM8r8qhmuoLhbvGrckU/F9LcF1bxOM098wf5TIGILUx+hHfCtBsO+aXqUDB
-	v+1tAu30Vh0Tt9DeYQAtAsjxzTDhtcChRH8NN+4asj+CsbOy6+lZ0BS4wCct7Ezsnhfa
-	btF+PgM4hQMnHpHCVVEu7dUlkjspWsP7kQwiM=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=BBZCZTbeyz1EjXOAHWounDmmIVSqrAeTq0F17OwaW9RkFe0/r/kh49H/fms/h/p0ZY
+	lfXgVWaYa9YRl1s5zVPh6PDtyLBZP2f3Ot58iCyr8eROiRbeLLqaFW9qg/4bjlp2oAmx
+	+a1Y64JBdpaWQJzOnbS+2pq/WUGlZkAJ36ZO4=
 MIME-Version: 1.0
-Received: by 10.213.14.131 with SMTP id g3mr6306995eba.47.1282800137715; Wed,
-	25 Aug 2010 22:22:17 -0700 (PDT)
-Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 22:22:17 -0700 (PDT)
-Date: Thu, 26 Aug 2010 11:22:17 +0600
-Message-ID: <AANLkTinbTzD_2XfYFxMv9CYrJF7ho0iNCM+b-y4sB5wv@mail.gmail.com>
-From: Anatoly Shipitsin <norguhtar@gmail.com>
+Received: by 10.90.88.8 with SMTP id l8mr162049agb.205.1282803253606; Wed, 25
+	Aug 2010 23:14:13 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Wed, 25 Aug 2010 23:14:13 -0700 (PDT)
+In-Reply-To: <AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
+References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
+	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
+Date: Thu, 26 Aug 2010 08:14:13 +0200
+Message-ID: <AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: norguhtar@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Native scripts for upstart and other init system
+Subject: Re: how to add file to SRC_URI for target only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,11 +52,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 05:22:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 26 Aug 2010 06:14:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Now OpenEmbedded support and include start script only for sysvinit. But
-repository include systemd and upstart init system.
-This init system use other start script format. Can i'm add support to
-OpenEmbedded multiplie start script to package? How i can do it?
+2010/8/25 Chris Larson <clarson@kergoth.com>:
+> On Wed, Aug 25, 2010 at 2:04 PM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
+>
+>> Is it possible to add a file to SRC_URI for target only in a combined
+>> native/target recipe?
+>>
+>> Of course I know I can fully redefine SRC_URI, but I feel that is less
+>> desirable.
+>> The issue is that the target recipe needs an additional patch that the
+>> native recipe cannot use.
+>>
+>> Or do we need to introduce an _target suffix?
+>>
+>> Guess an intermediate variable also could do the trick.
+>> E.g.
+>>
+>> PATCH = "xx.patch"
+>> PATCH_virtclass-native = ""
+>> SRC_URI = "source and files and patches ${PATCH}"
+>>
+>> not really ideal either.
+>>
+>> I saw some other places where we need to tweak similarly with DEPENDS
+>> e.g.
+>> DEPENDS = "x"
+>> DEPENDS_virtclass-natvie = ""
+>>
+>> guess here _target could help too.
+>>
+>> Any ideas/comments/patches/... ?
+>
+>
+> Something like this should work:
+> DEPENDS += "${@['', 'foo']['${BPN}' == '${PN}']}"
+
+Wow.
+I think it indeed does, but my knowledge of the language is not that
+good that I can say for sure.
+The construct above also is not too understandable for beginners. I
+think in this case I prefer an overrriding _virtclass-native
+assignment (or a new-to-be-introduced _target suffix).
+
+Frans
+
 
