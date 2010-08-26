@@ -1,45 +1,33 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Ool2t-0004xR-A8
+	(envelope-from <gary@mlbassoc.com>) id 1OolHo-0004Km-8O
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 00:35:44 +0200
-Received: by yxk30 with SMTP id 30so922749yxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 15:35:15 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=m0TzABHBhivTiLsBmA8O5w7PBwm+ytS79T9ZSYVEgjM=;
-	b=uu2GYxkh79tuJPsTNvAT1RC07SQSopSBus8ih6awNewCp8KPyf6Ho75s3FWX1alOVY
-	Kjm9GGAyomlTTfHqf9WlDd9WB0N/MnTqJhrhr3npuUk92dgBLpZljNM/BeNWppHXC+yL
-	MnRjrQwL5BjKH1iakt267dwJhAc+4rATTcdYE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=nJmPolFdSkmhvXluat40nC1WRLtXvwTrp3G6X1YAp0UGwug5nUfnyxAOlN6WSSjAZM
-	QCAqhHzGYSVsTKEd22HXc+v1NlmMsU7nsO+0wQUedlzwSmkO1SNnr/ZvTKPF3PdEPWUg
-	9hxQzyOWZclPtSuwZBUYiX/IC50+3joTcqCSs=
-Received: by 10.151.48.17 with SMTP id a17mr902742ybk.95.1282855152018;
-	Thu, 26 Aug 2010 13:39:12 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id c2sm7895189ybi.21.2010.08.26.13.39.10
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 26 Aug 2010 13:39:11 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Aug 2010 15:31:08 -0500
-Message-Id: <1282854668-16940-2-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1282854668-16940-1-git-send-email-chase.maupin@ti.com>
-References: <1282854668-16940-1-git-send-email-chase.maupin@ti.com>
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+	Fri, 27 Aug 2010 00:51:11 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 1E67F1660935; Thu, 26 Aug 2010 14:23:29 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id B94B4166092F;
+	Thu, 26 Aug 2010 14:23:08 -0600 (MDT)
+Message-ID: <4C76CD2C.2090102@mlbassoc.com>
+Date: Thu, 26 Aug 2010 14:23:08 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
+To: Cliff Brake <cliff.brake@gmail.com>
+References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>	<4C76C597.9050302@mlbassoc.com>
+	<AANLkTinnnfOCw3m_q6_d27o9Luyw4dWS-uVhJzYUTTbZ@mail.gmail.com>
+In-Reply-To: <AANLkTinnnfOCw3m_q6_d27o9Luyw4dWS-uVhJzYUTTbZ@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] matrix-gui-e: change initscript start level
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: testing branch 2010-08-23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,42 +41,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 22:35:45 -0000
+X-List-Received-Date: Thu, 26 Aug 2010 22:51:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-* Set the init script to be added to list of run level
-  5 scripts.
+On 08/26/2010 02:10 PM, Cliff Brake wrote:
+> On Thu, Aug 26, 2010 at 3:50 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
+>> On 08/23/2010 05:49 PM, Cliff Brake wrote:
+>>>
+>>> Hello,
+>>>
+>>> As detailed in the following page, we are trying to get a testing
+>>> branch going where we try to verify OE builds for a number of
+>>> combinations of distro/machine/target/
+>>>
+>>> http://wiki.openembedded.net/index.php/Testing
+>>>
+>>> I have branched dev.oe.org to the testing-testing branch, and have
+>>> verified it builds the following.
+>>>
+>>> beagleboard     angstrom-2008.1
+>>> beagleboard-linuxtag2010-demo-image
+>>>         Ubuntu 10.04 64-bit     User:Cbrake
+>>> beagleboard     angstrom-2008.1         console-image   Ubuntu 10.04
+>>> 64-bit     User:Cbrake
+>>
+>> To be clear, a line with an entry in the 'last tested' column indicates a
+>> successful build of that combination?
+>
+> Yes, that is my current idea.  I changed the name of the column to
+> "last successful build" to be a little more clear.
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
----
- recipes/ti/matrix-gui-e_svn.bb |    6 +++---
- 1 files changed, 3 insertions(+), 3 deletions(-)
+OK, I've added a couple of builds I'm trying.  It's interesting to
+note that all the other builds are using 64-bit hosts and I've had
+0% luck with that myself :-(
 
-diff --git a/recipes/ti/matrix-gui-e_svn.bb b/recipes/ti/matrix-gui-e_svn.bb
-index 3bb304d..35abd25 100644
---- a/recipes/ti/matrix-gui-e_svn.bb
-+++ b/recipes/ti/matrix-gui-e_svn.bb
-@@ -6,7 +6,7 @@ PRIORITY = "optional"
- 
- SRCREV = "58"
- PV = "1.0"
--PR = "r15+svnr${SRCPV}"
-+PR = "r16+svnr${SRCPV}"
- 
- SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=anonymous;pswd='' \
- 	file://init \
-@@ -15,8 +15,8 @@ SRC_URI = "svn://gforge.ti.com/svn/matrix_gui/;module=trunk;proto=https;user=ano
- S = "${WORKDIR}/trunk"
- 
- INITSCRIPT_NAME = "matrix-gui-e"
--#INITSCRIPT_PARAMS = "defaults 99"
--INITSCRIPT_PARAMS = "start 99 3 . stop 99 3 ."
-+INITSCRIPT_PARAMS = "defaults 99"
-+#INITSCRIPT_PARAMS = "start 99 3 . stop 99 3 ."
- 
- inherit qt4e update-rc.d
- 
 -- 
-1.7.0.4
-
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
