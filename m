@@ -1,35 +1,40 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-dotnet2.eads.net ([80.156.45.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OoZhA-0003SM-RR for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 12:28:36 +0200
-Received: from f053041083.adsl.alicedsl.de ([78.53.41.83]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OoZgl-00006V-F3 for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 10:28:07 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinxVh9JCQnQpSxV_rr74truVwBeQ3e+=nc1Yf=s@mail.gmail.com>
-References: <1282754957-7589-1-git-send-email-norguhtar@gmail.com>
-	<1282775656.3711.22.camel@mattotaupa>
-	<AANLkTi=gHjEM7eFzNEsZOq9b3y9X06NRq4amF9h0_yhG@mail.gmail.com>
-	<1282812356.3726.33.camel@mattotaupa>
-	<AANLkTinxVh9JCQnQpSxV_rr74truVwBeQ3e+=nc1Yf=s@mail.gmail.com>
-Date: Thu, 26 Aug 2010 12:28:05 +0200
-Message-ID: <1282818485.3726.52.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <Wolfgang.Hauser.external@eads.com>)
+	id 1Ooab3-0002YH-OZ for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Aug 2010 13:26:39 +0200
+Received: from unknown (HELO de-gate2.mailhub.intra.corp) ([53.154.243.34])
+	by mail-dotnet2.eads.net with ESMTP; 26 Aug 2010 13:21:50 +0200
+Received: from gateinet0.mail.ds.corp ([149.207.23.240]) by
+	de-gate2.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.7381); 
+	Thu, 26 Aug 2010 13:25:36 +0200
+Received: from deimsg40.de.net.world ([53.141.233.80]) by
+	gateinet0.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
+	Thu, 26 Aug 2010 13:25:36 +0200
+X-MimeOLE: Produced By Microsoft Exchange V6.5
+MIME-Version: 1.0
+Date: Thu, 26 Aug 2010 13:25:34 +0200
+Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4563@deimsg40.de.net.world>
+In-Reply-To: <AANLkTikXMR7j0r20XWCdMpDa69P92m6wbPLZVNH_Nob_@mail.gmail.com>
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+Thread-Topic: [oe] Patch procedure for dummies
+thread-index: ActEfbakvgowR00QTQG/TDMjOlqvOQAkyb+w
+References: <AANLkTikhCMBU=h90KpjDOEMEJgXDqVHdjpcLjdV9xq-s@mail.gmail.com>
+	<AANLkTikXMR7j0r20XWCdMpDa69P92m6wbPLZVNH_Nob_@mail.gmail.com>
+From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 26 Aug 2010 11:25:36.0289 (UTC)
+	FILETIME=[67785110:01CB4511]
+X-SA-Exim-Connect-IP: 80.156.45.105
+X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] upstart: fix sysvinit compat
+Subject: Re: Patch procedure for dummies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,97 +48,106 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 10:28:39 -0000
-X-Groupsio-MsgNum: 22672
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-xzpdKpD73tSpOPUNoZM9"
-
---=-xzpdKpD73tSpOPUNoZM9
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 26 Aug 2010 11:26:43 -0000
+Content-class: urn:content-classes:message
+Content-Type: text/plain;
+	charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 
-[Please do not include =C2=BB>=C2=AB in front of your *latest* answers.]
+Thanks from me too, but for me it would be helpful to add the necessary =
+steps for people which don't have
+snmp access for git and have to send patches through the allowed mail =
+client as an attachment.
+
+Regards
+Wolfgang
+=20
+-----Urspr=FCngliche Nachricht-----
+Von: openembedded-devel-bounces@lists.openembedded.org =
+[mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag =
+von J. L.=20
+Gesendet: Mittwoch, 25. August 2010 19:47
+An: openembedded-devel@lists.openembedded.org
+Betreff: Re: [oe] Patch procedure for dummies
+
+A huge thanks for taking the time AJ keep you the great work, I am
+sure your helping tons of people me included!
 
 
-Am Donnerstag, den 26.08.2010, 16:07 +0600 schrieb Anatoly Shipitsin:
-> On Thu, Aug 26, 2010 at 14:45, Paul Menzel <paulepanter@users.sourceforge=
-.net> wrote:
-> >
-> > I mean, did you write the those rc, rcS and rcS-default scripts
-> > yourself? (Probably not judging from the copyright in the header.) So
-> > where did you those from? From another distribution? Are they included
-> > somewhere?
-> >
-> > I'm get it from sysvinit recipe
 
-Maybe add a note to the commit message then.
 
-[=E2=80=A6]
-
-> > Just to be clear that a meant the following line.
-> >
-> > > +EXTRA_OEMAKE +=3D "'bindir=3D${base_bindir}' \
-> > > +              'sbindir=3D${base_sbindir}' \
-> > > +              'usrbindir=3D${bindir}' \
-> > > +              'usrsbindir=3D${sbindir}' \
-> > > +              'includedir=3D${includedir}' \
-> > > +              'mandir=3D${mandir}'"
-> >
-> > > Automatically  upstart installed in /usr but for simple and right
-> > > switching with update-alternatives
-> > > it's move to root.
-> >
-> > Sorry, I do not understand. What is =C2=BBroot=C2=AB? If it is =C2=BB/=
-=C2=AB I do not see in
-> > which line it is used.
-> >
-> > yes to /
-
-Can you give me the line where it is installed to /. Is not always a
-subdirectory of / used?
-
-> > > I'm got this additional parameters from sysvinit.
-> >
-> > Are you referring to those two?
-> >
-> > > +USE_VT ?=3D "1"
-> > > +SYSVINIT_ENABLED_GETTYS ?=3D "1"
-> >
-> > But why don=E2=80=99t you add them to `recipes/upstart/upstart_0.3.8.bb=
-`. You
-> > could add them to the inc file then.
+On Wed, Aug 25, 2010 at 7:43 AM, AJ ONeal <coolaj86@gmail.com> wrote:
+> Please give me feedback and I'll post this on the wiki.
 >
-> I'm forgot about this. But now i'm try build upstart_0.3.8.bb and this no=
-t
-> buildable.
+> A task-oriented guide to creating a patch:
+>
+>
+>
+>> Let's say you create a new recipe and you'd like to submit it for =
+inclusion
+>> (and you've already tested that it works, of course).
+>>
+>> 1. Now commit with a good strong helpful message
+>>
+>> =A0 =A0 git add recipes/nodejs/
+>> =A0 =A0 git commit # don't use the -m option
+>>
+>> 2. The message should look like this
+>>
+>> =A0 =A0 added recipe for node.js
+>>
+>> =A0 =A0 * added recipe for node.js (bug #5555 - no nodejs recipe)
+>> =A0 =A0 ** patched libev's wscript to not try to execute code
+>> =A0 =A0 ** patched node's wscript to not search in '/usr/include'
+>>
+>> =A0 =A0 Signed-off-by: AJ ONeal <coolaj86@gmail.com>
+>>
+>> 3. Create your patch
+>>
+>> =A0 =A0 git format-patch -1 # or however many commits are part of =
+this change
+>>
+>> 3++. If you are submitting a second version also add =
+"--subject-prefix
+>> [v2]"
+>>
+>> =A0 =A0 git send-email
+>>
+>> Your patch will be immediately visible on
+>> http://patchwork.openembedded.org/patch/
+>>
+>
+>
+>> 4. Once your patch has been accepted or rejected, create an account =
+and
+>> update the status to "accepted" or "rejected"
+>>
+>> 4++. If you get soft-rejected (a lot of feedback), make the changes, =
+submit
+>> the next version, and update the status of the previous patch to
+>> "superseded"
+>>
+>> Appendix: Properly configuring git (using tekkub@gmail.com as an =
+example
+>> user)
+>>
+>> =A0 =A0 sudo apt-get install git-core git-email
+>> =A0 =A0 git config --global user.name "Tekkub"
+>> =A0 =A0 git config --global user.email "tekkub@gmail.com"
+>> =A0 =A0 git config --global sendemail.smtpserver smtp.gmail.com
+>> =A0 =A0 git config --global sendemail.smtpserverport 587
+>> =A0 =A0 git config --global sendemail.smtpencryption tls
+>> =A0 =A0 git config --global sendemail.smtpuser tekkupl@gmail.com
+>>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Can you find out if this version is pinned by any distribution in OE?
-
-    $ git grep "0\.3\.8"
-
-did not return anything for me regarding Upstart as far as I could see.
-
-Maybe send a patch removing 0.3.8 first with =C2=BBupstart: remove 0.3.8 b/=
-c
-not buildable=C2=AB as the commit summary and the failure in the commit
-message. That would be great.
+_______________________________________________
+Openembedded-devel mailing list
+Openembedded-devel@lists.openembedded.org
+http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
-Thanks,
-
-Paul
-
---=-xzpdKpD73tSpOPUNoZM9
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx2QbQACgkQPX1aK2wOHVjX7ACfRy+olOjCuOp3gB1ZbvrMEkXS
-WhMAn3J9l3fRzkrKhCg3DTr2Zoq0JWoa
-=Nwo4
------END PGP SIGNATURE-----
-
---=-xzpdKpD73tSpOPUNoZM9--
