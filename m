@@ -1,50 +1,40 @@
-Received: from cassiel.sirena.org.uk ([80.68.93.111])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1OobcD-0000QX-Us
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oobh4-00032i-1d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 14:31:35 +0200
-Received: from broonie by cassiel.sirena.org.uk with local (Exim 4.69)
-	(envelope-from <broonie@sirena.org.uk>) id 1Oobbj-0001UP-Ty
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 13:31:03 +0100
-Resent-From: broonie@sirena.org.uk
-Resent-Date: Thu, 26 Aug 2010 13:31:03 +0100
-Resent-Message-ID: <20100826123103.GA5721@sirena.org.uk>
-Resent-To: openembedded-devel@lists.openembedded.org
-Received: from opensource.wolfsonmicro.com ([80.75.67.52]
-	helo=opensource2.wolfsonmicro.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <broonie@opensource.wolfsonmicro.com>)
-	id 1OoFrp-0004pJ-OH for openembedded-devel@lists.openembedded.org;
-	Wed, 25 Aug 2010 15:18:30 +0200
-Received: from finisterre.wolfsonmicro.main (lumison.wolfsonmicro.com
-	[87.246.78.27])
-	by opensource2.wolfsonmicro.com (Postfix) with ESMTPSA id CA00178815C; 
-	Wed, 25 Aug 2010 14:12:11 +0100 (BST)
-Received: from broonie by finisterre.wolfsonmicro.main with local (Exim 4.72)
-	(envelope-from <broonie@opensource.wolfsonmicro.com>)
-	id 1OoFmI-0000Hv-UL; Wed, 25 Aug 2010 14:12:30 +0100
-Date: Wed, 25 Aug 2010 14:12:30 +0100
-From: Mark Brown <broonie@opensource.wolfsonmicro.com>
-To: Dimitris Papastamos <dp@opensource.wolfsonmicro.com>
-Message-ID: <20100825131230.GA1102@opensource.wolfsonmicro.com>
-References: <1282294508.6198.27.camel@dpdev> <4C6E920E.4030806@balister.org>
-	<1282319238.17914.5.camel@dpdev> <1282733124.8247.0.camel@dpdev>
+	Thu, 26 Aug 2010 14:36:34 +0200
+Received: by ywa8 with SMTP id 8so685873ywa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Aug 2010 05:36:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=SBdXVGYreFdWWoCqmwx531eGQbMfwOynYdz/8KU71t8=;
+	b=ChWLe5olgLNBFRQNuRSlfamKzw7pUET6cRzoROWmkTc1jddHsp+MFbc6R+3FOFFNZG
+	YD1Tgi4n+dB6SEMG/jcHZAu9oxauNWmmdPaJdMLxZDd+hVUiVMQF78HCwM4fFu/I+Hk2
+	dqJ7TVIOvYVhi0PunU4ma1/X9Mbx7liqUtf5U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=SNZs4ee7nHDj/GE8xABp8/q86SXi+8RabMwWCQvQs1UoZSq2jKEcTDPeWHVqdY2VAS
+	7K1PsgxeesehceZAtpTrHC5ZUXKKqzpgUMvIYTtJa32CiaZqGvDDHxdtaNh5c0Z+KCb1
+	4KKhZTNobpT/4E/zKINAs/NtCK1sTxEvxDOxA=
 MIME-Version: 1.0
-In-Reply-To: <1282733124.8247.0.camel@dpdev>
-X-Cookie: You will be awarded some great honor.
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Resent-Date: Thu, 26 Aug 2010 13:31:03 +0100
-X-SA-Exim-Connect-IP: 80.68.93.111
-X-SA-Exim-Mail-From: broonie@sirena.org.uk
+Received: by 10.150.177.19 with SMTP id z19mr103680ybe.161.1282826165687; Thu,
+	26 Aug 2010 05:36:05 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Thu, 26 Aug 2010 05:36:05 -0700 (PDT)
+Date: Thu, 26 Aug 2010 14:36:05 +0200
+Message-ID: <AANLkTimT-Bwj8mnJk8uHhXFXhauHv0PO0P2eZic9bMbD@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: udev hangs on boot
+Subject: remove cdrtools ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,17 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 12:31:35 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Thu, 26 Aug 2010 12:36:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Wed, Aug 25, 2010 at 11:45:24AM +0100, Dimitris Papastamos wrote:
+While browsing through our recipes I found this:
+cdrtools/cdrtools-native_2.01.01_alpha77.bb
 
-> The issue has been resolved. Udev was hanging on boot because the kernel
-> was compiled without unix domain sockets support.
+This was added in 2006 by Raymond Danks, I did some cleaning 1.5 year
+ago, Holger moved it to the latest version last march.
 
-Hrm, udev probably ought to be complaining more loudly about that one,
-and have error handling that doesn't involve hanging.
+When I wanted to attack this device to remove legacy staging, I
+suddenly asked myself: why do we have this recipe in the first place?
 
+Facts:
+There is no target recipe for it
+no one pins it
+no recipe depends on it
+
+I can imagine having a cd recording app could be useful, but do we
+within oe really want to support and maintain recording apps?
+I guess any decent dev system has cdrtools and at least 5 other
+recording apps, so I consider this recipe to be out of scope for OE.
+
+My proposal: remove this recipe
+
+Can I have an ack for this (or if you feel this should be kept can you
+please explain why this would be useful to keep and would you then
+please also convert the recipe from legacy staging (and probably move
+to 3.0)?
+
+Frans.
 
 
