@@ -1,25 +1,45 @@
-Received: from mail.infocentr.ru ([78.108.66.4])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OoSkF-000216-Rp
+	(envelope-from <norguhtar@gmail.com>) id 1OoSvE-0002JR-RJ
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 05:03:17 +0200
-Received: from localhost.localdomain (unknown [192.168.62.150])
-	by mail.infocentr.ru (Postfix) with ESMTP id A4065B0016E9;
-	Thu, 26 Aug 2010 09:02:48 +0600 (YEKST)
+	Thu, 26 Aug 2010 05:14:37 +0200
+Received: by eyb7 with SMTP id 7so918698eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 25 Aug 2010 20:14:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Uc/Na1XnxMkx2flwhwx/wsT5Krf+wUcJxJxmO1QRU+U=;
+	b=Cz5ei+5W52tEDgp8yTll2Jgh734PVWJ3ZjC9EtTJvVetuKeb//Fr6cYB+lgQKCKkgt
+	JfPjlr+qVIfNhRYnwbs7BLqB+hL+mSK8cVrkrtH4HFQ6vfWNbFsvC9FR++FrO2AxUQJd
+	jYAZGDVcu1MbGiYhKxutrfECfjaDtjvkxin0o=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=JgUoLR/yylZfrZRr+6Ap0QUJ11YLrvxkFclVGIi1xEVQ5eczzxLX0/qQNBfFtbpA1t
+	j5cdXlaLzOrF9vD85x64I1e3V4f7uH/r79kBM+KvNbhinHk+dOZdR9MFj6qCHVINn6y9
+	4XwO1GSKRPRpCWtntsbZ67QS5Pt5RGAn0GCSM=
+MIME-Version: 1.0
+Received: by 10.213.27.141 with SMTP id i13mr6666336ebc.5.1282792451844; Wed,
+	25 Aug 2010 20:14:11 -0700 (PDT)
+Received: by 10.14.6.75 with HTTP; Wed, 25 Aug 2010 20:14:11 -0700 (PDT)
+In-Reply-To: <1282775656.3711.22.camel@mattotaupa>
+References: <1282754957-7589-1-git-send-email-norguhtar@gmail.com>
+	<1282775656.3711.22.camel@mattotaupa>
+Date: Thu, 26 Aug 2010 09:14:11 +0600
+Message-ID: <AANLkTi=gHjEM7eFzNEsZOq9b3y9X06NRq4amF9h0_yhG@mail.gmail.com>
 From: Anatoly Shipitsin <norguhtar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 26 Aug 2010 09:02:48 +0600
-Message-Id: <1282791768-14275-1-git-send-email-norguhtar@gmail.com>
-X-Mailer: git-send-email 1.6.0.6
-X-SA-Exim-Connect-IP: 78.108.66.4
+X-SA-Exim-Connect-IP: 209.85.215.175
 X-SA-Exim-Mail-From: norguhtar@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.6 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v4] sysvinit_2.86.bb: change sysvinit-utils for compatible with upstart
+Subject: Re: [PATCH v2] upstart: fix sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -33,73 +53,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 03:03:17 -0000
+X-List-Received-Date: Thu, 26 Aug 2010 03:14:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-* move shutdown and runlevel to sysvinit package to halt and poweroff, upstart include this utils
-* move killall5 to sysvinit-utils, it used by scripts when system goes shutdown or halt, upstart not provide it
-* change PR = "r59"
+On Thu, Aug 26, 2010 at 04:34, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Am Mittwoch, den 25.08.2010, 22:49 +0600 schrieb Anatoly Shipitsin:
+>
+> Where did you take those from?
+Need more info?
 
-Signed-off-by: Anatoly Shipitsin <norguhtar@gmail.com>
-Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
- recipes/sysvinit/sysvinit_2.86.bb |    8 ++++----
- 1 files changed, 4 insertions(+), 4 deletions(-)
+>
+> Small commits =E2=80=93 like changing the package name =E2=80=93 make it =
+easier to
+> review.
+Okey. May be i'm split patch to 5 small patches?
 
-diff --git a/recipes/sysvinit/sysvinit_2.86.bb b/recipes/sysvinit/sysvinit_2.86.bb
-index 40c642a..aca5249 100644
---- a/recipes/sysvinit/sysvinit_2.86.bb
-+++ b/recipes/sysvinit/sysvinit_2.86.bb
-@@ -2,7 +2,7 @@ DESCRIPTION = "System-V like init."
- SECTION = "base"
- LICENSE = "GPLv2+"
- HOMEPAGE = "http://freshmeat.net/projects/sysvinit/"
--PR = "r58"
-+PR = "r59"
- 
- # USE_VT and SERIAL_CONSOLE are generally defined by the MACHINE .conf.
- # Set PACKAGE_ARCH appropriately.
-@@ -42,7 +42,7 @@ PACKAGES =+ "sysvinit-utils sysvinit-pidof sysvinit-sulogin"
- FILES_${PN} += "${base_sbindir}/* ${base_bindir}/*"
- FILES_sysvinit-pidof = "${base_bindir}/pidof.sysvinit"
- FILES_sysvinit-sulogin = "${base_sbindir}/sulogin"
--FILES_sysvinit-utils = "${bindir}/last.${PN} ${bindir}/mesg.${PN} ${bindir}/wall.${PN} ${base_sbindir}/shutdown.${PN} ${bindir}/lastb ${bindir}/utmpdump ${base_sbindir}/runlevel"
-+FILES_sysvinit-utils = "${bindir}/last.${PN} ${bindir}/mesg.${PN} ${bindir}/wall.${PN} ${bindir}/lastb ${bindir}/utmpdump ${base_sbindir}/killall5"
- RRECOMMENDS_${PN} = "sysvinit-utils"
- RRECOMMENDS_${PN}_micro = ""
- 
-@@ -112,6 +112,7 @@ pkg_postinst_${PN} () {
- update-alternatives --install ${base_sbindir}/halt halt halt.${PN} 200
- update-alternatives --install ${base_sbindir}/reboot reboot reboot.${PN} 200
- update-alternatives --install ${base_sbindir}/poweroff poweroff poweroff.${PN} 200
-+update-alternatives --install ${base_sbindir}/shutdown shutdown shutdown.${PN} 200
- }
- 
- pkg_postinst_sysvinit-utils () {
-@@ -119,13 +120,13 @@ pkg_postinst_sysvinit-utils () {
- update-alternatives --install ${bindir}/last last last.${PN} 200
- update-alternatives --install ${bindir}/mesg mesg mesg.${PN} 200
- update-alternatives --install ${bindir}/wall wall wall.${PN} 200
--update-alternatives --install ${base_sbindir}/shutdown shutdown shutdown.${PN} 200
- }
- 
- pkg_prerm_${PN} () {
- #!/bin/sh
- update-alternatives --remove halt halt.${PN}
- update-alternatives --remove reboot reboot.${PN}
-+update-alternatives --remove shutdown shutdown.${PN}
- }
- 
- pkg_prerm_sysvinit-utils () {
-@@ -133,7 +134,6 @@ pkg_prerm_sysvinit-utils () {
- update-alternatives --remove last last.${PN}
- update-alternatives --remove mesg mesg.${PN}
- update-alternatives --remove wall wall.${PN}
--update-alternatives --remove shutdown shutdown.${PN}
- }
- 
- pkg_postinst_sysvinit-pidof () {
--- 
-1.6.0.6
 
+> Is not that picked up automatically?
+No. Automatically  upstart installed in /usr but for simple and right
+switching with update-alternatives
+it's move to root. I'm got this additional parameters from sysvinit.
 
 
