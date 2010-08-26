@@ -1,44 +1,33 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1OoXYm-000501-Nu
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 10:11:45 +0200
-Received: by qwi4 with SMTP id 4so9135qwi.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 01:11:14 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=sVyYKNx6jOp8AYbSVi/DSaLDZGsAQoFjz4aLxvIGZO0=;
-	b=IX6vc0lfkC9XualH7hLKOkfNh0YdBmb2jYhDopgZosLt84VtX48Ausdjp+ZCFgoJ3I
-	2+VbQByN9YmLm61hUWHeKCQqsa+CSMJ4H4in9gktp4lR0zMCvt4LtFdSjtWYKSzOOFZq
-	Jw586trlV2K3rVy2BMqNeRDHIHmXL24lByGlg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=rJYkv1VtWZh3SYSSUEL/DR60JzVCxxU/ENYtTwnp3vj/gAMAN6lEk4WC32ZBG3MfzZ
-	zhCiR/4sKWHTghiN9+BqJKWJJZDAen/fZLq7EOQ3nD423mkKtT4UCz6MXwwEmq6BPhDg
-	Zk52BvmBuo/sUc9V8rwupRkZ1ezsfFpYg7xxc=
-MIME-Version: 1.0
-Received: by 10.229.71.69 with SMTP id g5mr5719636qcj.176.1282810273826; Thu,
-	26 Aug 2010 01:11:13 -0700 (PDT)
-Received: by 10.229.23.1 with HTTP; Thu, 26 Aug 2010 01:11:13 -0700 (PDT)
-In-Reply-To: <AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
-	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-Date: Thu, 26 Aug 2010 10:11:13 +0200
-Message-ID: <AANLkTimSYhZOhkdjo19HhRg98A7LNQ9dw81Rs6VJJf-q@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoY6K-0004NJ-Mh for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Aug 2010 10:46:25 +0200
+Received: from f053041083.adsl.alicedsl.de ([78.53.41.83]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OoY5v-0005JS-1G for openembedded-devel@lists.openembedded.org;
+	Thu, 26 Aug 2010 08:45:59 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+In-Reply-To: <AANLkTi=gHjEM7eFzNEsZOq9b3y9X06NRq4amF9h0_yhG@mail.gmail.com>
+References: <1282754957-7589-1-git-send-email-norguhtar@gmail.com>
+	<1282775656.3711.22.camel@mattotaupa>
+	<AANLkTi=gHjEM7eFzNEsZOq9b3y9X06NRq4amF9h0_yhG@mail.gmail.com>
+Date: Thu, 26 Aug 2010 10:45:56 +0200
+Message-ID: <1282812356.3726.33.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: how to add file to SRC_URI for target only
+Subject: Re: [PATCH v2] upstart: fix sysvinit compat
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,16 +41,86 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 08:11:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 26 Aug 2010 08:46:25 -0000
+X-Groupsio-MsgNum: 22667
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-nLQLsymczI1ax0hXWkLv"
 
-On Wed, Aug 25, 2010 at 11:11 PM, Chris Larson <clarson@kergoth.com> wrote:
+--=-nLQLsymczI1ax0hXWkLv
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-> Something like this should work:
-> DEPENDS += "${@['', 'foo']['${BPN}' == '${PN}']}"
+Am Donnerstag, den 26.08.2010, 09:14 +0600 schrieb Anatoly Shipitsin:
+> On Thu, Aug 26, 2010 at 04:34, Paul Menzel
+> <paulepanter@users.sourceforge.net> wrote:
+> > Am Mittwoch, den 25.08.2010, 22:49 +0600 schrieb Anatoly Shipitsin:
+> >
+> > Where did you take those from?
+> Need more info?
 
-What is the run-time cost of this, compared to an overrides based approach?
+I mean, did you write the those rc, rcS and rcS-default scripts
+yourself? (Probably not judging from the copyright in the header.) So
+where did you those from? From another distribution? Are they included
+somewhere?
 
-/Esben
+> > Small commits =E2=80=93 like changing the package name =E2=80=93 make i=
+t easier to
+> > review.
+> Okey. May be i'm split patch to 5 small patches?
+
+If it is possible, yes!
+
+> > Is not that picked up automatically?
+> No.
+
+Please do not cut the lines out I referred to, because I already forget
+it ;-) and other would not have to look up the old message too but just
+the latest one.
+
+Just to be clear that a meant the following line.
+
+> +EXTRA_OEMAKE +=3D "'bindir=3D${base_bindir}' \
+> +              'sbindir=3D${base_sbindir}' \
+> +              'usrbindir=3D${bindir}' \
+> +              'usrsbindir=3D${sbindir}' \
+> +              'includedir=3D${includedir}' \
+> +              'mandir=3D${mandir}'"
+
+> Automatically  upstart installed in /usr but for simple and right
+> switching with update-alternatives
+> it's move to root.
+
+Sorry, I do not understand. What is =C2=BBroot=C2=AB? If it is =C2=BB/=C2=
+=AB I do not see in
+which line it is used.
+
+> I'm got this additional parameters from sysvinit.
+
+Are you referring to those two?
+
+> +USE_VT ?=3D "1"
+> +SYSVINIT_ENABLED_GETTYS ?=3D "1"
+
+But why don=E2=80=99t you add them to `recipes/upstart/upstart_0.3.8.bb`. Y=
+ou
+could add them to the inc file then.
 
 
+Thanks,
+
+Paul
+
+--=-nLQLsymczI1ax0hXWkLv
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkx2Kb4ACgkQPX1aK2wOHVgL0wCfUGuog+BsfxO9oTMXQUfi9In6
+ShEAn385O69WRqI0MyoAvVMHOgpNbPl1
+=DTFn
+-----END PGP SIGNATURE-----
+
+--=-nLQLsymczI1ax0hXWkLv--
