@@ -1,44 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoiDn-0001l2-C9
+	(envelope-from <cliff.brake@gmail.com>) id 1OokXR-0002mT-Fv
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 21:34:48 +0200
-Received: by iwn2 with SMTP id 2so1752625iwn.6
+	Fri, 27 Aug 2010 00:03:14 +0200
+Received: by eyb7 with SMTP id 7so1764298eyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 12:34:16 -0700 (PDT)
+	Thu, 26 Aug 2010 15:02:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	:references:date:message-id:subject:from:to:cc:content-type
 	:content-transfer-encoding;
-	bh=bkb15MT4vH0QatJLz+7ClaWIaB7vq9EOjGcdmslUbWg=;
-	b=C2SKql+7u8Zhwi5H3IeJ0OnMjpijmHHq4Nokz87D3Sv8Agbd8SUl7UPsC12sYKEdgi
-	ayhfnh3ECh5z+/yNUyb5s27WZ6ULmq0vMRZ40XdMB8XcL0qLsE59qAzo4i3PdJoOuv8u
-	qC+RcZ394tWHX43gCaDugeh58IKK+ZzlSbTo4=
+	bh=lxmNUhpE2MAlHYivTa//IIJRMsfv2/DsvnInOTwG598=;
+	b=isGpwnRR5hfSn1LbUKWr1vKInnDbj/OVuxwDqd+XFyh/XYxR4apjJeqdL4LvaUy94b
+	6i/JP2u0ok+Kr0rVivEOQd2B3HfuxfUucFIC03g25Ewu1VJPpuiU17pwzEVpeXnbEn2W
+	1+z+8UEO66llEqVOlg7MgqbWgcfUR9/8g2aok=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Z0GkseAADlJzTGTuGbP68GvQJTO6l5HRJct0a90Eogics/+so93K+rBIVhiwH+ymxZ
-	4OpQ53wTzvUZz0rV9886mxyP3iCBsMrb4ahmYMJ6jULmFYp8ghOO9tTM5wxmzEb7NfBf
-	o6HB0+5zoxEbHgkQXSjZ+t4/6PjBVwoQcSx1I=
+	:cc:content-type:content-transfer-encoding;
+	b=Z/VeK4t65EVEDcVgwNlORX4M72cXh74oHpg2A7wjDJfwckF4iWDew5l1/gFQmkyDO+
+	C2zAmx3YYSGVKxoHv1t82fACiWlsQ637UoqQTDeNDggJGZM/tBQUiF2ZMpAdAh8FKUDe
+	+7veRCGVbY4bz0Jscd68PlJCZq5+L/koB2wNw=
 MIME-Version: 1.0
-Received: by 10.231.182.196 with SMTP id cd4mr12441714ibb.191.1282851256370;
-	Thu, 26 Aug 2010 12:34:16 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Thu, 26 Aug 2010 12:34:16 -0700 (PDT)
-In-Reply-To: <AANLkTinGpZfVnPea6ZCcs+UxePXkRAkT6BDpxaNQezGU@mail.gmail.com>
-References: <AANLkTinGpZfVnPea6ZCcs+UxePXkRAkT6BDpxaNQezGU@mail.gmail.com>
-Date: Thu, 26 Aug 2010 21:34:16 +0200
-Message-ID: <AANLkTi=TUw1VshDF5Gg0Ki_WDQGR3iy+QOAu4W3jeRhy@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Received: by 10.216.10.77 with SMTP id 55mr9470251weu.17.1282853453658; Thu,
+	26 Aug 2010 13:10:53 -0700 (PDT)
+Received: by 10.216.21.209 with HTTP; Thu, 26 Aug 2010 13:10:53 -0700 (PDT)
+In-Reply-To: <4C76C597.9050302@mlbassoc.com>
+References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
+	<4C76C597.9050302@mlbassoc.com>
+Date: Thu, 26 Aug 2010 16:10:53 -0400
+Message-ID: <AANLkTinnnfOCw3m_q6_d27o9Luyw4dWS-uVhJzYUTTbZ@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: Gary Thomas <gary@mlbassoc.com>
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: hildon-lgpl in nonworking but appears in DEPENDS in recipes
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: testing branch 2010-08-23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,62 +54,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 19:34:49 -0000
+X-List-Received-Date: Thu, 26 Aug 2010 22:03:15 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/8/26 Khem Raj <raj.khem@gmail.com>:
-> Hi,
+On Thu, Aug 26, 2010 at 3:50 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> On 08/23/2010 05:49 PM, Cliff Brake wrote:
+>>
+>> Hello,
+>>
+>> As detailed in the following page, we are trying to get a testing
+>> branch going where we try to verify OE builds for a number of
+>> combinations of distro/machine/target/
+>>
+>> http://wiki.openembedded.net/index.php/Testing
+>>
+>> I have branched dev.oe.org to the testing-testing branch, and have
+>> verified it builds the following.
+>>
+>> beagleboard =A0 =A0 angstrom-2008.1
+>> beagleboard-linuxtag2010-demo-image
+>> =A0 =A0 =A0 =A0Ubuntu 10.04 64-bit =A0 =A0 User:Cbrake
+>> beagleboard =A0 =A0 angstrom-2008.1 =A0 =A0 =A0 =A0 console-image =A0 Ub=
+untu 10.04
+>> 64-bit =A0 =A0 User:Cbrake
 >
-> hildon was moved to nonworking recipes but there are recipes which
-> DEPEND on this.
->
-> gpe-mini-browser/gpe-mini-browser-hildon_0.16.bb:DEPENDS =A0 =A0 =A0=3D
-> "osb-nrcit libosso hildon-lgpl hildon-fm libgpewidget"
-> gpe-mini-browser/gpe-mini-browser-hildon_0.15.bb:DEPENDS =A0 =A0 =A0=3D
-> "osb-nrcit libosso hildon-lgpl hildon-fm libgpewidget"
-> gpe-mini-browser/gpe-mini-browser-hildon_0.17.bb:DEPENDS =A0 =A0 =A0=3D
-> "osb-nrcit libosso hildon-lgpl hildon-fm libgpewidget"
-> libgpepimc/libgpepimc-hildon_0.5.bb:DEPENDS =A0 =A0 =3D "libgpewidget-hil=
-don
-> gtk+ sqlite hildon-lgpl"
-> maemo/hildon-status-bar_0.8.11-1.bb:DEPENDS =3D "hildon-lgpl libosso hild=
-on-libs"
-> maemo/hildon-control-panel_0.9.1-1.2.bb:DEPENDS =3D "hildon-lgpl
-> hildon-base-lib osso-af-settings libosso hildon-libs osso-af-settings
-> libosso-help"
-> maemo/libosso-help_1.0.01.bb:DEPENDS =3D =A0"libosso hildon-lgpl
-> hildon-base-lib hildon-libs"
-> maemo/osso-application-installer_1.0.03-1.bb:DEPENDS =3D "hildon-lgpl
-> hildon-base-lib libosso hildon-libs hildon-control-panel
-> shared-mime-info"
-> tasks/task-maemo.bb: =A0 =A0hildon-lgpl
->
-> I am tempted to move them to nonworking as well. opinions ?
+> To be clear, a line with an entry in the 'last tested' column indicates a
+> successful build of that combination?
 
-I agree that it is pointless to keep them if they do not build so
-moving them to nonworking is imho quite logical and therefore has my
-blessing.
+Yes, that is my current idea.  I changed the name of the column to
+"last successful build" to be a little more clear.
 
-However, while you're at it there is more to be moved as there are
-recipes which depend on the ones you propose to move:
-dependencies on libgpepimc-hildon
-gpe-todo/gpe-todo-hildon_0.54.bb:DEPENDS     =3D "libgpewidget-hildon
-libgpepimc-hildon libtododb sdk-default-icons libosso"
-gpe-todo/gpe-todo-hildon_0.55.bb:DEPENDS     =3D "libgpewidget-hildon
-libgpepimc-hildon libtododb sdk-default-icons libosso"
-:
-dependencies on libosso-help:
-maemo-mapper/maemo-mapper_svn.bb:DEPENDS =3D "gdbm libconic sqlite3 gtk+
-libhildonfm libosso osso-ic-oss libosso-help gnome-vfs dbus
-bluez-libs"
-maemo/hildon-control-panel_0.9.1-1.2.bb:DEPENDS =3D "hildon-lgpl
-hildon-base-lib osso-af-settings libosso hildon-libs osso-af-settings
-libosso-help"
+Thanks,
+Cliff
 
-I haven't checked for the non-lib recipes, might be some additonal deps too=
-.
-
-Frans
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
