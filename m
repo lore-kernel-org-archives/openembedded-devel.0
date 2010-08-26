@@ -1,44 +1,40 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OohI3-0003V2-Ky
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 26 Aug 2010 20:35:25 +0200
-Received: by gxk2 with SMTP id 2so825947gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 11:34:33 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1Ooha4-0002Lr-PK
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 26 Aug 2010 20:53:47 +0200
+Received: by iwn2 with SMTP id 2so1726865iwn.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 26 Aug 2010 11:53:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=o+yUl7eJVaMBBvaVcbGebF9om72h84zUYTHaTOzo56Y=;
-	b=rkFtmhrcAd4+OmnVd+OzQuS5K+rIhQ8i2KErkl4o9FWtcqTlIW97Y97vg/QBf5ORxc
-	DwAk4K5OEeUN1VBAw99Z698b4ffoz19vgofOyJDOaQPh9tsrbhczCp7JEhkVCPF7iULv
-	yPugC3M3naCts9n+o4QEMXQKZTI1E0OrtEWAA=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=/TzvXm6CTpOJldoQJDxkzX7ipXiSGAluEYCemCTNh8Y=;
+	b=Y2as4KK2RmOrYqkZ1FmgVww8PaP9dvPhYMco1vTZffeiO5PXihSWhfrDus9ODm0xlg
+	249b1h7BXwU4hAeqjqcSPN1hAF4Gk+2jcomsE+Ty5JAvN8t6JXYwvUZDP7wI2f1fP14U
+	/WBVmeMUYh/P/VtpyDRdQfEKqh+Ktf5v3QvyE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=hR/DTU8Adv97/T7APw69SezIaaXgGmUPt/S43NThm1ow0seh3x+xmzpGVHYcmu6zQl
-	46CTOLXuvz0M90mEQV5KIshn6hF1bMi8QnaN920dcgyyB5rHQmwiIklAqNNEljzbgPam
-	awmoTNAjm8iSMm3e933VEKBUpy+Di4pksBvyI=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=lWJXReEgUtS+i8b5Ngx1hpqd1t2jt4DJ2vuVW7DNZKE0O0+Xto2mZAKPrcGugwQJqR
+	u0HRABNkfoj6iNKgScp3876GjdeSxGoMra38QRzoOvv1PDQ1WeVybZGAiFskGKLn+0MC
+	EY+73R0HcCXf4KCPFXHKCzb6PjHXu/QgaWkJk=
+Received: by 10.231.79.77 with SMTP id o13mr12508051ibk.36.1282848793212; Thu,
+	26 Aug 2010 11:53:13 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.101.149.5 with SMTP id b5mr11378801ano.32.1282847673327; Thu,
-	26 Aug 2010 11:34:33 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Thu, 26 Aug 2010 11:34:33 -0700 (PDT)
-In-Reply-To: <4C768F22.5070204@mentor.com>
-References: <AANLkTimT-Bwj8mnJk8uHhXFXhauHv0PO0P2eZic9bMbD@mail.gmail.com>
-	<4C768EA4.70902@mentor.com> <4C768F22.5070204@mentor.com>
-Date: Thu, 26 Aug 2010 20:34:33 +0200
-Message-ID: <AANLkTi=Ps2ErLCCX1kMpsEUEHdsH9Yuv5vUgrwiehSg7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Received: by 10.231.207.8 with HTTP; Thu, 26 Aug 2010 11:52:53 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 26 Aug 2010 11:52:53 -0700
+Message-ID: <AANLkTinGpZfVnPea6ZCcs+UxePXkRAkT6BDpxaNQezGU@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: remove cdrtools ?
+Subject: hildon-lgpl in nonworking but appears in DEPENDS in recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +48,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 26 Aug 2010 18:35:25 -0000
+X-List-Received-Date: Thu, 26 Aug 2010 18:54:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/8/26 Tom Rini <tom_rini@mentor.com>:
-> Tom Rini wrote:
->>
->> Frans Meulenbroeks wrote:
->>>
->>> While browsing through our recipes I found this:
->>> cdrtools/cdrtools-native_2.01.01_alpha77.bb
->>>
->>> This was added in 2006 by Raymond Danks, I did some cleaning 1.5 year
->>> ago, Holger moved it to the latest version last march.
->>>
->>> When I wanted to attack this device to remove legacy staging, I
->>> suddenly asked myself: why do we have this recipe in the first place?
->>
->> It's needed for making ISO images of which I thought we used to support
->> (boot CDs for x86 boards for example).
->
-> See bootimg.bbclass
+Hi,
 
-Ah, ok, didn't know that.
-Actually it seems that bootimg.bbclass is not used, and a quick search
-didn't show up a way to use it, but its existence is good enough to
-keep cdrtools.
-I'll see if I can update it.
+hildon was moved to nonworking recipes but there are recipes which
+DEPEND on this.
 
-Frans
+gpe-mini-browser/gpe-mini-browser-hildon_0.16.bb:DEPENDS      =
+"osb-nrcit libosso hildon-lgpl hildon-fm libgpewidget"
+gpe-mini-browser/gpe-mini-browser-hildon_0.15.bb:DEPENDS      =
+"osb-nrcit libosso hildon-lgpl hildon-fm libgpewidget"
+gpe-mini-browser/gpe-mini-browser-hildon_0.17.bb:DEPENDS      =
+"osb-nrcit libosso hildon-lgpl hildon-fm libgpewidget"
+libgpepimc/libgpepimc-hildon_0.5.bb:DEPENDS     = "libgpewidget-hildon
+gtk+ sqlite hildon-lgpl"
+maemo/hildon-status-bar_0.8.11-1.bb:DEPENDS = "hildon-lgpl libosso hildon-libs"
+maemo/hildon-control-panel_0.9.1-1.2.bb:DEPENDS = "hildon-lgpl
+hildon-base-lib osso-af-settings libosso hildon-libs osso-af-settings
+libosso-help"
+maemo/libosso-help_1.0.01.bb:DEPENDS =  "libosso hildon-lgpl
+hildon-base-lib hildon-libs"
+maemo/osso-application-installer_1.0.03-1.bb:DEPENDS = "hildon-lgpl
+hildon-base-lib libosso hildon-libs hildon-control-panel
+shared-mime-info"
+tasks/task-maemo.bb:    hildon-lgpl
+
+I am tempted to move them to nonworking as well. opinions ?
+
+Thanks
+-Khem
 
 
