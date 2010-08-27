@@ -1,37 +1,43 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@eads.com>)
-	id 1Oow3M-0000el-8R for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 12:20:56 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet1.eads.net with ESMTP; 27 Aug 2010 12:08:15 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Fri, 27 Aug 2010 12:20:06 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Fri, 27 Aug 2010 12:20:06 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Fri, 27 Aug 2010 12:20:04 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B45FF@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: svn:// fetcher do not checkout repository at every build
-thread-index: ActF0WqNP0WhmhscQgyc1zcdtpEpIA==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@eads.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 27 Aug 2010 10:20:06.0389 (UTC)
-	FILETIME=[6B7AEA50:01CB45D1]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@eads.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OowoD-0001IZ-Ah for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 13:09:22 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oownm-0003VI-Mw for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 13:08:54 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 13:08:54 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 13:08:54 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Fri, 27 Aug 2010 13:08:45 +0200
+Message-ID: <i586bt$t12$1@dough.gmane.org>
+References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
+	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <1282896714-3167-3-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: svn:// fetcher do not checkout repository at every build
+Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,24 +51,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 10:20:57 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Aug 2010 11:09:22 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-as pointed in the bitbake user manual, the svn fetcher should checkout a
-repository at every build if SRCDATE is set to "now".
+On 27-08-10 10:11, Khem Raj wrote:
+> * Move recipes to nonwotking which are depending upon other recipes
+>   which are already in nonworking state.
+> 
+> * Fix other recipes for renamed dependencies etc.
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  recipes/angstrom/angstrom-bootmanager.bb           |    2 +-
 
-If I want to use that in OE (for our local applications), always the
-archive for the repository, stored in download cache, is used instead of
-doing a new checkout. (I user bb 1.8.18)
+NAK
 
-Is it possible to turn off the download cache check for a recipe ?=20
+>  recipes/esc/esc-node-demo_git.bb                   |    4 +-
 
-Regards
-Wolfgang Hauser
+NAK
+
+>  recipes/meta/meta-toolchain-arago-dvsdk.bb         |    1 +
+
+NAK
+
+>  recipes/sugar/sugar-fructose.bb                    |    2 +-
+
+NAK
+
+>  recipes/tasks/task-arago-toolchain-target.bb       |    3 +-
+
+NAK
+
+>  recipes/tasks/task-demo-x11.bb                     |   17 ++---
+
+NAK
+
+>  recipes/tasks/task-gmae.bb                         |    7 ++
+
+NAK
+
+>  recipes/tasks/task-gpe.bb                          |    6 +-
+
+NAK
+
+>  recipes/udev/udev-compat141_141.bb                 |    6 ++-
+
+NAK
+
+>  recipes/vlc/vlc-davinci_0.8.6h.bb                  |    2 +-
+
+NAK
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMd5y9MkyGM64RGpERAp7CAJ9Hdw0XIynob+zbnWWDSvB2LMCR7QCggZUJ
+c4ydMxejzuOOqvU2RJYBWxA=
+=RBfq
+-----END PGP SIGNATURE-----
+
 
 
