@@ -1,45 +1,30 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Op0Uc-0002jO-9B
+	(envelope-from <roman@khimov.ru>) id 1Op0bK-0003zS-Ge
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 17:05:23 +0200
-Received: by wyg36 with SMTP id 36so3147424wyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 08:04:53 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=WcM4fFMoTkiEMMlJ7D8HPATpikMhCNklklA/3bdVV0s=;
-	b=ktY16uWhStSM7EVsHW8CQ1X4FDtqjbJhMhtaLrbWMCNSpKPcPvcmAYVzcHp46ycHg9
-	0QGrPEz9AiV5owOS/QdaM5qzTNP+Ez9gh6Lu5ODobqm1mZ4VTAmquuY2RFEl+XastHD1
-	BW6P6XD5vk1BpSQN4QdtLbMzN7kUvOTvyuPpI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=BH5OXVq32ZBlCr/by8V04Y8II/4a8N9JoaD4jdcW3GLfS/iEchxuBHp3yhAao4EjOp
-	jylKBrsJP74RqI3EimzJU89HlUpY3WhyYynz57lBfTJtobegMmhP3u/UslZds9H90BvP
-	9OBrZRHXC3M124VOFzI4PtRUO1yfMyNeMX/kI=
-MIME-Version: 1.0
-Received: by 10.227.146.213 with SMTP id i21mr835634wbv.99.1282921493647; Fri,
-	27 Aug 2010 08:04:53 -0700 (PDT)
-Received: by 10.216.21.209 with HTTP; Fri, 27 Aug 2010 08:04:53 -0700 (PDT)
-In-Reply-To: <AANLkTikMx==1HnsZ12pGdWi4hdyzKmg4NJNO23EdACJS@mail.gmail.com>
-References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
-	<AANLkTikMx==1HnsZ12pGdWi4hdyzKmg4NJNO23EdACJS@mail.gmail.com>
-Date: Fri, 27 Aug 2010 11:04:53 -0400
-Message-ID: <AANLkTi=39EL+2Vq9=1LGhdB87dhsmmYOHtd7Gw8+nQXs@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Fri, 27 Aug 2010 17:12:19 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Op0as-0001Tb-AO
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 19:11:51 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Date: Fri, 27 Aug 2010 19:11:46 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <AANLkTin5LRCz6PU_x6Mw+V2Xf8W=i+n4RLqQjwON1R7+@mail.gmail.com>
+In-Reply-To: <AANLkTin5LRCz6PU_x6Mw+V2Xf8W=i+n4RLqQjwON1R7+@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201008271911.49376.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-08-23
+Subject: Re: [RFC] review process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,36 +38,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 15:05:23 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Aug 2010 15:12:19 -0000
+X-Groupsio-MsgNum: 22755
+Content-Type: multipart/signed; boundary="nextPart1431226.ANT2YaDUeI";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
+
+--nextPart1431226.ANT2YaDUeI
+Content-Type: Text/Plain;
+  charset="utf-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Tue, Aug 24, 2010 at 10:58 AM, Chris Larson <clarson@kergoth.com> wrote:
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=9F=D1=8F=D1=82=D0=BD=D0=B8=D1=86=D0=B0 27 =D0=B0=D0=B2=D0=B3=D1=83=D1=
+=81=D1=82=D0=B0 2010 16:15:01 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Frans Meulenbr=
+oeks=20
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> 1. If a patch does not get any review feedback in X weeks time; it is
+> ok to apply it. People who need more time to review a patch can
+> mention that in a short reply. In that case they are granted Y more
+> weeks to review.
+> (suggestion: X =3D Y =3D 2)
+> 2. If someone NAKs a patch it is obligatory to provide an explanation
+> why the patch is not good.
+> Rationale is that
+> a) people can fix the problem seen by the reviewer
+> b) people learn from it
+> c) if there is a disagreement it can be discussed (and if needed
+> raised to the TSC)
+> 3) NAKs that are not motivated/explained can be ignored as not given.
 
-> I like the concept. =A0It seems not unlike the 'master' vs 'next' or linu=
-x vs
-> linux-test, or indeed, as you imply, unstable vs testing in debian. =A0I =
-do
-> want to point out that you could, if you chose to, include the tested
-> baselines in the message attached to the tag (if annotated). =A0The only
-> downside to that being you couldn't add to it after the fact the way you
-> could with a wiki. =A0At a minimum, I'd link to the wiki page for that ta=
-g
-> from a tag message.
+Looks good to me, especially the first one as some defined period of time t=
+o=20
+wait is useful. Two weeks is OK.
 
-Thanks for the ideas -- I have updated the process some, and I think
-we could apply the tag on the following Monday after the testing is
-complete -- this would allow us to add the annotations.
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
 
-I'm also thinking on the next cycle to use the name testing-next
-(instead of testing-testing) for branch we create every week for
-testing.
+--nextPart1431226.ANT2YaDUeI
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
 
-Thanks,
-Cliff
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
+iEYEABECAAYFAkx31bUACgkQXJ70z+XgVcNs2gCg4KXFtWwMEC2bA8ziVRXaiEP6
+Nn4AoOdBrJFnnoYzPfRrHyzzNDQTHQci
+=7Qba
+-----END PGP SIGNATURE-----
 
-
+--nextPart1431226.ANT2YaDUeI--
