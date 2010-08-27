@@ -1,32 +1,45 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OovDs-0007yH-5l for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 11:27:45 +0200
-Received: from f053040121.adsl.alicedsl.de ([78.53.40.121]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OovDR-0001Nu-Oc for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 09:27:17 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OovQi-0003vK-4e
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 11:41:01 +0200
+Received: by iwn2 with SMTP id 2so2365698iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 02:40:31 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=w9gFDVE9dhoqPPgV2FVzd7h7byiQH0lMjTzEnttSo7s=;
+	b=bS8QQXy1p5wPw0q267dNGxMEL1wLfXse1fwyYXT0iludRzX/eluw0TV/wWqLXMktSM
+	kdlhIa40+9hLRkmx+YD/TU+pBhFWPMHZBrmaFR2/RBTNCUXONNP8hzPBD2bU1X19h8G3
+	mXd7n4M0L8+Gh5YI8bAbMnkMNnMTNQWDONelQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=TT82aHA2c7soCU2iw3vwkFvNvntdYHf0M/TH3SORaY4eCJo8NbnRTQN7FuS3lGct3V
+	AXGFt254O7gL0VQip/Y01c6ArnpKB86FJjoyt3DGVkp6+w3XzPq9eV5kSnJGlqaec0+l
+	TvQCu63V7V3mNrbQQLDARAGxN2H6bqdsAMZqE=
+MIME-Version: 1.0
+Received: by 10.231.190.75 with SMTP id dh11mr765243ibb.189.1282902030264;
+	Fri, 27 Aug 2010 02:40:30 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Fri, 27 Aug 2010 02:40:30 -0700 (PDT)
+In-Reply-To: <1282896714-3167-3-git-send-email-raj.khem@gmail.com>
+References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
+	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
+Date: Fri, 27 Aug 2010 11:40:30 +0200
+Message-ID: <AANLkTinOBdbZGQLChSYb1JtN5xU5QD5+dt0b=7KYTZZ1@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTimQ6vdijXjgq+ct5T2h5-WeDa4dnR2NiKrnUUBf@mail.gmail.com>
-References: <AANLkTinDA-hgVagfF0add1ONi8Z-=sBha7mnit-Ui7bp@mail.gmail.com>
-	<AANLkTimQ6vdijXjgq+ct5T2h5-WeDa4dnR2NiKrnUUBf@mail.gmail.com>
-Date: Fri, 27 Aug 2010 11:27:14 +0200
-Message-ID: <1282901234.3882.3.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Openembedded and Gstreamer
+Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,62 +53,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 09:27:45 -0000
-X-Groupsio-MsgNum: 22722
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-bolfNWmDxnZgwUqFFow1"
-
---=-bolfNWmDxnZgwUqFFow1
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Fri, 27 Aug 2010 09:41:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Freitag, den 27.08.2010, 11:11 +0200 schrieb Alberto Milla:
-> I try
->=20
-> #gst-launch --gst-debug=3D*:3 audiotestsrc ! audioconvert ! alsasink
->=20
-> and I obtain the next output: http://pastebin.com/EVQjRVqS
->=20
-> where I can see 3 warning at lines 57, 58 and 59:
->=20
-> alsa gstalsa.c:124:gst_alsa_detect_formats:<alsasink0> skipping non-int f=
-ormat
-> alsa conf.c:3952:snd_config_expand: alsalib error: Unknown parameters
-> {AES0 0x02 AES1 0x82 AES2 0x00 AES3 0x02}
-> alsa pcm.c:2202:snd_pcm_open_noupdate: alsalib error: Unknown PCM
-> iec958:{AES0 0x02 AES1 0x82 AES2 0x00 AES3 0x02}
->=20
-> and from the line 75 I get a dump that starts with a:
->=20
-> 0:00:02.183681854   953    0x15050 INFO   GST_EVENT
-> gstevent.c:1091:gst_event_new_latenUnable to handle kernel paging
-> request at virtual address aafaaaae
->=20
-> Can it be an alsa problem?
+Khem,
 
-I do not know that. But this list is more about packaging programs for
-OE. I guess you could get faster and more knowledgeable help asking your
-question on a GStreamer list [1].
+Thanks for the good work.
+I've gone through the file and saw no problems.
+The move of the nonbuilding recipes due to missing dependencies (like
+with hildon) has been discussed on irc too).
+I have a few small remarks (see below), but nothing blocking an ack so,
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+
+Btw: next time please split things like this in two:
+one patch with the files that are moved and one patch with the files
+that are modified.
+That makes it easier to review the modified recipes.
+
+> diff --git a/recipes/angstrom/angstrom-bootmanager.bb b/recipes/angstrom/=
+angstrom-bootmanager.bb
+> index 6cae115..e5f3478 100644
+> --- a/recipes/angstrom/angstrom-bootmanager.bb
+> +++ b/recipes/angstrom/angstrom-bootmanager.bb
+> @@ -1,7 +1,7 @@
+> =A0DESCRIPTION =3D "A graphical Boot Manager for the =C5ngstr=F6m Linux D=
+istribution"
+> =A0AUTHOR =3D "Michael 'Mickey' Lauer <mickey@Vanille.de>"
+> =A0SECTION =3D "base"
+> -DEPENDS =3D "evas-fb ecore-fb esmart-fb imlib2-fb edje efl++-fb"
+> +#DEPENDS =3D "ecore esmart-fb imlib2-fb edje efl++-fb"
+> =A0#RDEPENDS_${PN} =3D "libefl++0"
+>
+> =A0ALLOW_EMPTY =3D "1"
+
+I'm not too keen on commenting out things. If it is not needed any
+more it should just go.
+Something like the lines above only cause confusion.
+suggest to remove the # lines or to add a short comment explaining why
+they are commented out but not removed.
 
 
-Thanks and good luck,
+> diff --git a/recipes/xqt2/xqt2_20060509.bb b/recipes/xqt2/xqt2_20060509.b=
+b
+> index 7634d27..4492bc7 100644
+> --- a/recipes/xqt2/xqt2_20060509.bb
+> +++ b/recipes/xqt2/xqt2_20060509.bb
+> @@ -1,6 +1,6 @@
+> =A0DESCRIPTION =3D "Xqt2 is an X-Server than runs within the Opie environ=
+ment"
+> =A0HOMEPAGE =3D "http://xqt.sourceforge.jp"
+> -DEPENDS =3D "freetype libxi xmu flex-native virtual/libqte2 libqpe-opie"
+> +DEPENDS =3D "freetype libxi libxmu flex-native virtual/libqte2 libqpe-op=
+ie"
+> =A0LICENSE =3D "GPL"
+> =A0SECTION =3D "opie/applications"
+> =A0APPTYPE =3D "binary"
+> --
+> 1.7.1
 
-Paul
+With recipes like this I always wonder if we should keep them.
+Apparently they are not build, otherwise the faulty DEPENDS would have
+been detected earlier.
+And the fact that it is a recipe from 2006 also indicates it is
+probably not important.
+Can an opie maintainer say whether it is useful to keep this?
+
+Thanks for the good work!
+Frans
 
 
-[1] http://gstreamer.freedesktop.org/lists/
-
---=-bolfNWmDxnZgwUqFFow1
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx3hOwACgkQPX1aK2wOHVhmiACeNC5xlIxzMJU+WscQJX+T9h1u
-skYAoIYXB/jZs/Bq5dPYU83KAQT2XKC/
-=0moQ
------END PGP SIGNATURE-----
-
---=-bolfNWmDxnZgwUqFFow1--
