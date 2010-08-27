@@ -1,41 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from vms173013pub.verizon.net ([206.46.173.13])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lazy.gopher@gmail.com>) id 1Op39z-0000gK-1y
+	(envelope-from <openembedded@rkmorris.us>) id 1Op4lC-0004jH-JR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 19:56:15 +0200
-Received: by iwn2 with SMTP id 2so2705396iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 10:55:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=5em6W/Cgztdq8wABi2G7HOilvTL0kH4vLRd1KztcuhE=;
-	b=VHHp1l5wB0o+3WqkNcHIskBuulYG1uyCHnGlmnQE9LqNDEFUQW0ZiD94TQnfzOQPki
-	iK31x32m1QCkUMBNf1mfF+ut14HEoJnKIzt0wEbvZ9201DzCcraEDefXD7lTBh4GrfyP
-	o4g9cvXZqkxx9AqyYti2kWG2LHc1I8ARi7NhM=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=YDSC8AWvZrtjaTdYAspVZUHTAEr1h14ZXtaBoKB7xA0Khrrb34H3G90nbnZCLYDPaQ
-	E77ZX6KPWgs3WclDdIiuWRikGbte/MfivEykfeSFHfgLu3ZfkYUxBNsWythYg+dXU+Qr
-	eTLcp7QLWnW8iCVqRoUIC7pEQ4ksy6mRvvTKU=
-MIME-Version: 1.0
-Received: by 10.231.183.81 with SMTP id cf17mr1478361ibb.32.1282931746564;
-	Fri, 27 Aug 2010 10:55:46 -0700 (PDT)
-Received: by 10.231.142.90 with HTTP; Fri, 27 Aug 2010 10:55:46 -0700 (PDT)
-Date: Fri, 27 Aug 2010 19:55:46 +0200
-Message-ID: <AANLkTikEXrrN54mzFeDmxwm=kPYpLSz1XJww0tFBVuwW@mail.gmail.com>
-From: Maksym Parkachov <lazy.gopher@gmail.com>
+	Fri, 27 Aug 2010 21:38:48 +0200
+Received: from server ([unknown] [71.170.86.183]) by vms173013.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L7T00F6HT72NNB0@vms173013.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	27 Aug 2010 14:37:50 -0500 (CDT)
+Received: from server [127.0.0.1] by server (Axigen)
+	with ESMTPSA id 302E2D; Fri, 27 Aug 2010 14:37:48 -0500
+Received: from [192.168.1.2] by rkmorris.us with HTTP; Fri,
+	27 Aug 2010 14:37:47 -0500
+From: <openembedded@rkmorris.us>
+Date: Fri, 27 Aug 2010 14:37:47 -0500
+X-Mailer: Axigen WebMail
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: lazy.gopher@gmail.com
+Message-id: <1282937867899813500@rkmorris.us>
+In-reply-to: <AANLkTi=00LEM9HsXtK8m4LPU0aW6Q-kBOPVaB-6DxfYq@mail.gmail.com>
+References: <AANLkTin5LRCz6PU_x6Mw+V2Xf8W=i+n4RLqQjwON1R7+@mail.gmail.com>
+	<1282916770549933500@rkmorris.us>
+	<AANLkTi=00LEM9HsXtK8m4LPU0aW6Q-kBOPVaB-6DxfYq@mail.gmail.com>
+Importance: Normal
+MIME-version: 1.0
+X-AxigenVirus-Level: 1
+X-AxigenSpam-Level: 4
+X-SA-Exim-Connect-IP: 206.46.173.13
+X-SA-Exim-Mail-From: openembedded@rkmorris.us
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Custom kernel + TI - modules
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Execution of Build Output Failing (Testing)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,43 +48,69 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 17:56:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Aug 2010 19:38:48 -0000
+Content-Type: text/plain
 Content-Transfer-Encoding: quoted-printable
+Content-Disposition: inline
 
-Hi everyone,
-
-I'm building a custom image based on the unstable angstrom (couple of
-weeks old openembedded) with custom kernel.
-
-DISTRO =3D "angstrom-2008.1"
-MACHINE =3D "beagleboard"
-
-I created the build/conf/machine/beagleboard.conf with
-PREFERRED_PROVIDER_virtual/kernel =3D "linux-xenomai"
-and put the overlay in bb search path.
-
-The linux-xenomai_2.6.33.7.bb recipe is found and perfectly built with
-bitbake virtual/kernel.
-I can boot the console image and everything works.
-
-But, when I try to build the ti-gstreamer and corresponding ti kernel
-modules, they got compiled with some weird version.
-
-In the sysroot/kernel for some reason the config is called 2.6.32.7
-(where the 32 comes from ? I'm building the 33 kernel, but .7 is found
-correct) and all ti-modules are built in
-
-$ ls lib/modules/2.6.32.7/kernel/drivers/dsp/
-cmemk.ko =C2=A0dsplinkk.ko =C2=A0lpm_omap3530.ko =C2=A0sdmak.ko
-
-All other modules, coming from the kernel configuration, are correctly
-built as 33.7 and installed in /lib/modules/2.6.33.7/
-
-I would really appreciate if someone could enlighten me, where is the
-32 version could come from.
-
-Regards,
-Maksym.
+Hi,
+Thanks for the quick response!
+What's strange is that watching the boot in QEMU it seems to be looking fo=
+r 2.6.17-rc3 inside the /lib/modules directory ... but if I mount my initrd=
+ (un-gzip, then mount as ext2), and look inside this directory - the direct=
+ory is 2.6.34 instead! Somewhere / somehow there seems to be a versioning i=
+ssue perhaps?
+Thoughts?
+Thanks again,... Russell
 
 
+On Fri, Aug 27, 2010 12:41  PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Fri, Aug 27, 2010 at 6:46 AM,  <openembedded@rkmorris.us> wrote:
+> > Hi,
+> > As I reported recently, I am having issues getting my OE output up and=
+ running on my h1940 device. It seems to be some sort of issue between the =
+kernel and initrd files, so to debug this I figured that I'd build and test=
+ on QEMU (hoping that the recent udev related issues were my problem, and t=
+o make sure that I could build "properly").
+> > Given this, I went ahead and built console-image (angstrom 2008.1 dist=
+ro) for qemuarm, to see if it was perhaps just me having issues (which is s=
+till possible). However, I took the output from the qemuarm build and tried=
+ to run it ... and still have issues (not the same as my h1940, but still f=
+atal).
+> > On QEMU (verified to work with the QEMU provide example ARM images) I =
+am able to boot, at least part way, but end up with a FATAL message about a=
+ missing directory ... /lib/modules/2.6.17-rc3.
+> > Is this a known issue? Any proposed fixes or workarounds for this?
+>=20
+> oe.dev works well on qemuarm here with
+>=20
+> PREFERRED_VERSION_usbutils_local                =3D "0.86"
+> PREFERRED_VERSION_udev_local                    =3D "151"
+>=20
+> in local.conf and minimal/angstrom distro last time I tried it booted
+> fine. you can also adapt
+> contrib/qemu/run-qemu.sh to run OE in qemu.
+>=20
+> > Thanks!
+> > ... Russell
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+From raj.khem@gmail.com Fri Aug 27 22:17:59 2010
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1Op5MY-000859-3Y
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 22:17:50 +0200
+Received: by iwn2 with SMTP id 2so2795409iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 13:16:54 -0700 (PDT)
+DKIM-Signature: v
