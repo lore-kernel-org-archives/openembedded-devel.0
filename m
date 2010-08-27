@@ -1,47 +1,48 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OoqCH-00026U-D5
+	(envelope-from <graham.gower@gmail.com>) id 1OoqJ9-0002OQ-MK
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 06:05:46 +0200
-Received: by wwb31 with SMTP id 31so2450668wwb.24
+	Fri, 27 Aug 2010 06:12:52 +0200
+Received: by gxk2 with SMTP id 2so1006825gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 21:05:17 -0700 (PDT)
+	Thu, 26 Aug 2010 21:12:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=E2ctvfZ946wzrifzHWD7z2g3RVMqcv+14ucZ3pFe7zw=;
-	b=B+H0PcoBdJVxrAku5rEZRrQleD/aC/y3eEtpNVGw9rv0l6ncX73gYRtQeonyJwGoVd
-	dSxc1DbQv0d+7x78UxMkT2er4gN4J0T+ER5oVtqsXNAfwFePpuj1Hw8Q49H4UUPBh16/
-	dfM5oxKQX+megaYfa008DE2KgzTjdST36vPI4=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=76SZ4y6MARbDr9lgbdOnnc+4M3tlljzSHBRtCVEU8gE=;
+	b=FUlUZQEPJrZuEMUMk8vCHTmQfxaDTav6sn6jkMI64LQAA5QvmKK3asozufR+W3nk/n
+	EZ5KD/F/ljTpnV9FoXxZ7hAqCX+WP9dqoivJRKwLFm1IuPoWO9+VmBasyDpl00m5Uyeh
+	MW1/r9aAFsdrY8IjjpRWfW9DOlMioNRLnveho=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=JRr8pY3Nh+cYNw/tTCwXDQuLoJ6utm6dLdjgTKM3UPHMCtM9Jcncjyc6qjAu/1YYaN
-	gn4YANHaSItBKMfHjqAPGnT/tXdLOpiWL2Pp3fvfz+apaehSURQocgNYY5Vm0k/gnmJE
-	oH8tFIwlVeA3pskSZjXT9d9lOcjrDOi6gvvwQ=
-Received: by 10.216.51.212 with SMTP id b62mr238415wec.97.1282881858186; Thu,
-	26 Aug 2010 21:04:18 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=I1J19vkWJ8PVFSW/4JMQHyFc+i4leWZUZ8CdmlFeNWoWd0IvMRuBxM8Ak9vicf7C04
+	M6ig22bGpPTlxm8JZj1WEJ9qsZRzh/bLUE68XfnADwhXoqWYdYeeB5y7BYPTvTV9jrSi
+	BhgFI/JVSp3pAl+vg4PDOl6D2zOg0TcLjS3qM=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Thu, 26 Aug 2010 21:03:58 -0700 (PDT)
-In-Reply-To: <1278706889-319-1-git-send-email-raj.khem@gmail.com>
-References: <1278706889-319-1-git-send-email-raj.khem@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 26 Aug 2010 21:03:58 -0700
-X-Google-Sender-Auth: 7zhoi4NrcnjWMN6QW9dp9Xdr4FM
-Message-ID: <AANLkTimcy2cCSmA8juYj+ErrSwppyetANzG0kW+L28ji@mail.gmail.com>
+Received: by 10.150.148.16 with SMTP id v16mr1203588ybd.268.1282882342944;
+	Thu, 26 Aug 2010 21:12:22 -0700 (PDT)
+Received: by 10.231.167.79 with HTTP; Thu, 26 Aug 2010 21:12:22 -0700 (PDT)
+In-Reply-To: <AANLkTi=cBDtFg9=GvPu0t01hVOhO=4uS5kwSAqLT+cax@mail.gmail.com>
+References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
+	<4C76C597.9050302@mlbassoc.com>
+	<AANLkTinnnfOCw3m_q6_d27o9Luyw4dWS-uVhJzYUTTbZ@mail.gmail.com>
+	<4C76CD2C.2090102@mlbassoc.com>
+	<AANLkTi=WnKFoiutD+vZHEQLDQzmFnhdrUMjYrvc_MNam@mail.gmail.com>
+	<AANLkTi=cBDtFg9=GvPu0t01hVOhO=4uS5kwSAqLT+cax@mail.gmail.com>
+Date: Fri, 27 Aug 2010 13:42:22 +0930
+Message-ID: <AANLkTi=HYU2iy923icHth=5zo1cvJOUTQxk+EK2kPVWQ@mail.gmail.com>
+From: Graham Gower <graham.gower@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] quilt: Add option QUILT_NO_RM_SYMLINKS so follow symlinks with quilt refresh
+Subject: Re: testing branch 2010-08-23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,21 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 04:05:46 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 27 Aug 2010 04:12:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Fri, Jul 9, 2010 at 1:21 PM, Khem Raj <raj.khem@gmail.com> wrote:
-
-> ++          if [ "$QUILT_NO_RM_SYMLINKS" != "yes" ]
+On 27 August 2010 13:15, Khem Raj <raj.khem@gmail.com> wrote:
+> On Thu, Aug 26, 2010 at 4:20 PM, Graham Gower <graham.gower@gmail.com> wrote:
+>> """if a build fails, then issues are reported, and the testing-testing
+>> branch is moved ahead to capture fixes made in the dev branch. Once
+>> the issue is fixed, all combinations are retested."""
+>>
+>> Can I suggest that the testing-testing branch not be moved ahead?
 >
+>
+> I think yes the fixes should be committed to master and then pulled
+> into the testing-testing branch
+> IOW testing-testing moved ahead to new head on each monday and I think
+> if you have successful build
+> on prior monday and dont want to test it the tag should still be
+> there. I think continuous build is the only
+> way we can make sure that what we are committing is not breaking
+> stuff. ideally testing branch should move
+> every time a fix is committed upstream which was reported in
+> testing-testing branch but Monday to Monday is
+> ok too.
 
+I think maybe I was just confused about how it will work in practise.
+I'll just wait and watch it for a couple of weeks :)
 
-I'd suggest:
-          if [ -L "$filename" -a "$QUILT_NO_RM_SYMLINKS" != "yes" ]
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+-Graham
+
 
