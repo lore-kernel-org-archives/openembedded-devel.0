@@ -1,32 +1,45 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1Ooyx6-0007OQ-NV
+	(envelope-from <cliff.brake@gmail.com>) id 1OozLr-0004qk-4d
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 15:26:42 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Ooywc-0001WT-LP from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 06:26:10 -0700
-Received: from localhost.localdomain ([137.202.157.210]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 27 Aug 2010 15:26:09 +0200
-From: Fahad Usman <fahad_usman@mentor.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Fri, 27 Aug 2010 18:29:51 +0500
-Message-Id: <1282915791-14096-1-git-send-email-fahad_usman@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 27 Aug 2010 13:26:09.0316 (UTC)
-	FILETIME=[691A6640:01CB45EB]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+	Fri, 27 Aug 2010 15:52:16 +0200
+Received: by wwb31 with SMTP id 31so3120386wwb.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 06:51:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:cc:content-type
+	:content-transfer-encoding;
+	bh=eTn+uxtt0BLaVqeazrGPuhH4h1kUfPPGQ+EFk16oKrw=;
+	b=BHisbYc1Nn5gWN+d46fHSENxufjpuTajKHszHTBzOO/UQfA2xEepsLzJxMV33kK2YP
+	5DdmGKjoo9pIXunNc4LsptGcYoIVJsXrr5RAbGxooE2nCDPRrDXjzas2MmjWTTrcVTE+
+	CW35vCIkRzuKhgPG8MgfSYuVcxeS47mCKFV2I=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:cc:content-type:content-transfer-encoding;
+	b=CvGGP93I9i33SDgehPoU2863QGjRcJKIpI3QC3g42YxBvQI1HWsMuUSJR48SYcgTqS
+	lsLSO0CCi4tLylaoEnQp1Kki8yyMrjUSuJsBVFXkP7pHFNbJDgs4hxkAMNDXdwj9RWKj
+	+I4T8XzDu+w+ln0n5yNj45CIJWh8rP8maehQM=
+MIME-Version: 1.0
+Received: by 10.227.147.142 with SMTP id l14mr463114wbv.105.1282917062519;
+	Fri, 27 Aug 2010 06:51:02 -0700 (PDT)
+Received: by 10.216.21.209 with HTTP; Fri, 27 Aug 2010 06:51:02 -0700 (PDT)
+In-Reply-To: <4C771A94.1020802@mlbassoc.com>
+References: <4C771A94.1020802@mlbassoc.com>
+Date: Fri, 27 Aug 2010 09:51:02 -0400
+Message-ID: <AANLkTimhME5XnoVz+a6vrnDyvZBeoK9Yy9st0MVAQ2H3@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: Gary Thomas <gary@mlbassoc.com>
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] lemon_3.5.4: merged native and non-native recipes
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Testing build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,61 +53,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 13:26:42 -0000
+X-List-Received-Date: Fri, 27 Aug 2010 13:52:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* removed the lemon-native_3.5.4.bb file
-* added NATIVE_INSTALL_WORKS = "1"
-* added BBCLASSEXTEND = "native"
-* bumped PR
+On Thu, Aug 26, 2010 at 9:53 PM, Gary Thomas <gary@mlbassoc.com> wrote:
+> MACHINE=3Dbeagleboard
+> DISTRO=3Dangstrom-2010.x
+> IMAGE=3Dbeagleboard-linuxtag2010-demo-image
+> HOST=3DFedora 12 32-bit
+> fails to build ti-dsplink
+> =A0-- because ti-cgt6x installed tools incorrectly
+>
+> Cliff - how did this build for you on Ubuntu/64-bit? =A0Can you send me
+> the logs for ti-dsplink and ti-cgt6x?
 
-Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
----
- recipes/lemon/lemon-native_3.5.4.bb |   14 --------------
- recipes/lemon/lemon_3.5.4.bb        |    6 +++++-
- 2 files changed, 5 insertions(+), 15 deletions(-)
+Hi Gary,
 
-diff --git a/recipes/lemon/lemon-native_3.5.4.bb b/recipes/lemon/lemon-native_3.5.4.bb
-deleted file mode 100644
-index f293ab1..0000000
---- a/recipes/lemon/lemon-native_3.5.4.bb
-+++ /dev/null
-@@ -1,14 +0,0 @@
--require lemon.inc
--
--PR = "r0"
--
--inherit native
--
--do_stage() {
--	install -d ${STAGING_BINDIR}
--	install -m 0755 lemon ${STAGING_BINDIR}
--	install -m 0644 lempar.c ${STAGING_BINDIR}
--}
--
--SRC_URI[md5sum] = "f17da840eed792e896c3408d0ce97718"
--SRC_URI[sha256sum] = "47daba209bd3bcffa1c5fcd5fdfc4f524eae619b4fa855aeeb1bbbc8bd2bb04f"
-diff --git a/recipes/lemon/lemon_3.5.4.bb b/recipes/lemon/lemon_3.5.4.bb
-index 0be511a..719a84f 100644
---- a/recipes/lemon/lemon_3.5.4.bb
-+++ b/recipes/lemon/lemon_3.5.4.bb
-@@ -1,6 +1,6 @@
- require lemon.inc
- 
--PR = "r0"
-+PR = "r1"
- 
- do_install() {
- 	install -d ${D}${bindir}
-@@ -12,3 +12,7 @@ do_install() {
- 
- SRC_URI[md5sum] = "f17da840eed792e896c3408d0ce97718"
- SRC_URI[sha256sum] = "47daba209bd3bcffa1c5fcd5fdfc4f524eae619b4fa855aeeb1bbbc8bd2bb04f"
-+
-+BBCLASSEXTEND = "native"
-+
-+NATIVE_INSTALL_WORKS = "1"
--- 
-1.6.3.3
+I was using the angstrom-2008.1 distro -- not sure if that matters.
+It looks like 2010.x is not ready for general use based on comments in
+inc files.
 
+I ran into an issue with one of the TI components where I had a '.' in
+my directory path that it did not like.
+
+I assume you have manually downloaded the binaries from TI and have
+placed them in your sources/downloads directory?
+
+My logs are:
+http://bec-systems.com/oe/ti-cgt6x-1_6_1_9-r4.tar.gz
+http://bec-systems.com/oe/ti-dsplink-1_1_64-r88h.tar.gz
+
+Thanks,
+Cliff
+
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+http://bec-systems.com
 
 
