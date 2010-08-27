@@ -1,39 +1,38 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Op0wY-0008OA-E1
+	(envelope-from <raj.khem@gmail.com>) id 1Op0zv-0006h3-LN
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 17:34:14 +0200
-Received: by gxk2 with SMTP id 2so1229976gxk.6
+	Fri, 27 Aug 2010 17:37:44 +0200
+Received: by iwn2 with SMTP id 2so2620284iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 08:33:45 -0700 (PDT)
+	Fri, 27 Aug 2010 08:37:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=ZjB0KFp3xpTmcTYFj57WEtErQesBNpZ8Mpu1Rgw09ew=;
-	b=wO72WMra/JUI5uW8IJc4ihwSdDHVBUpRpm0lkN1v8U8K2ERKiyclLyr+tGDz/tp0Ms
-	/tS676DDpA7Ml6v9prSs4gwH5w9MlFXJ49tYGsdUY6EqNljkIl7Jv5dM7TXbac6AAxKp
-	S+ko0tyG0TzMAV4v2txln0Rgj0xCLkhXhDiuc=
+	bh=EjnrjtPYDcHKW3f6OV1lIhlE0fGf8sIJo/RCN5qglH0=;
+	b=CLzFpyAoQfmEIoB1i084SIL2Uao4qrYL9SomMPkqptapiL6/ESKiwHMrLuCSUyFis5
+	wazYOYz8/rHM+WwMi58Q4yPNQi3USljUro6/NnRVGVzXJ0leLYuBCK0nvD2iOQrx1915
+	UVKaD2pUWAip2d9j6GFla/BjrduxpDvbn4bvo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=gqu+3mbnO6Y+pckWpeC8jd9HM0zJfLjPmGmXAIWLEyveNUfyeXeCJ3sL9RvV4aZ+W/
-	Cfqj5n5UCdqJYmfragrAVc6KrE/fsoHy96Pg57JPITODAKLA1y24OJXy3QSSh2g+eicO
-	lJF1/cf7vefGCiYS1GUja+7ubPqIpRx3E1VJs=
-Received: by 10.90.96.17 with SMTP id t17mr1923939agb.33.1282923224732; Fri,
-	27 Aug 2010 08:33:44 -0700 (PDT)
+	b=NI3iMlUsd5IPxhQKvu6Hb3jkS67OgQvf3Z75ZmlNjwcauC9KxYoIFG3sYeskCxr1sp
+	YIc2YOW9hFVBod2Ht0FAmMjglWdNvdy1UPXYHpttuTEoy4FrVjylgvVzB9JKuYPvk29f
+	6GY5hTftA97fo0sSyy/E77ZDU/qgEuLExPI1w=
+Received: by 10.231.184.71 with SMTP id cj7mr1249444ibb.159.1282923436149;
+	Fri, 27 Aug 2010 08:37:16 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Fri, 27 Aug 2010 08:33:23 -0700 (PDT)
-In-Reply-To: <AANLkTi=o=4pS4tLrhXErembiZ5j4ye+EzAk91yc02rya@mail.gmail.com>
+Received: by 10.231.207.8 with HTTP; Fri, 27 Aug 2010 08:36:56 -0700 (PDT)
+In-Reply-To: <AANLkTinOBdbZGQLChSYb1JtN5xU5QD5+dt0b=7KYTZZ1@mail.gmail.com>
 References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
 	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
-	<i586bt$t12$1@dough.gmane.org>
-	<AANLkTi=o=4pS4tLrhXErembiZ5j4ye+EzAk91yc02rya@mail.gmail.com>
+	<AANLkTinOBdbZGQLChSYb1JtN5xU5QD5+dt0b=7KYTZZ1@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 27 Aug 2010 08:33:23 -0700
-Message-ID: <AANLkTi=oitWLGPS9UZRmufugcA10XGCacoWaoC9Tjocm@mail.gmail.com>
+Date: Fri, 27 Aug 2010 08:36:56 -0700
+Message-ID: <AANLkTikUB6xwPoWwtofLcSRd5WWeoyW6gpCgF6X_MCGp@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -55,27 +54,92 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 15:34:14 -0000
+X-List-Received-Date: Fri, 27 Aug 2010 15:37:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Aug 27, 2010 at 5:13 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
-e:
->>> =A0recipes/udev/udev-compat141_141.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 |=
- =A0 =A06 ++-
->>
->> NAK
->>
+On Fri, Aug 27, 2010 at 2:40 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Khem,
 >
-> This one is an hack in progress, needed only for Zaurus until 2.6.36
-> (hopefully).
-> Please keep ;)
+> Thanks for the good work.
+> I've gone through the file and saw no problems.
+> The move of the nonbuilding recipes due to missing dependencies (like
+> with hildon) has been discussed on irc too).
+> I have a few small remarks (see below), but nothing blocking an ack so,
+> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>
+> Btw: next time please split things like this in two:
 
-If you look at the patch then you will see that it only fixes this recipe
-it does not move it to nonworking so no issues to worry about for Zaurus
+yes would have been better.
+
+> one patch with the files that are moved and one patch with the files
+> that are modified.
+> That makes it easier to review the modified recipes.
+>
+>> diff --git a/recipes/angstrom/angstrom-bootmanager.bb b/recipes/angstrom=
+/angstrom-bootmanager.bb
+>> index 6cae115..e5f3478 100644
+>> --- a/recipes/angstrom/angstrom-bootmanager.bb
+>> +++ b/recipes/angstrom/angstrom-bootmanager.bb
+>> @@ -1,7 +1,7 @@
+>> =A0DESCRIPTION =3D "A graphical Boot Manager for the =C5ngstr=F6m Linux =
+Distribution"
+>> =A0AUTHOR =3D "Michael 'Mickey' Lauer <mickey@Vanille.de>"
+>> =A0SECTION =3D "base"
+>> -DEPENDS =3D "evas-fb ecore-fb esmart-fb imlib2-fb edje efl++-fb"
+>> +#DEPENDS =3D "ecore esmart-fb imlib2-fb edje efl++-fb"
+>> =A0#RDEPENDS_${PN} =3D "libefl++0"
+>>
+>> =A0ALLOW_EMPTY =3D "1"
+>
+> I'm not too keen on commenting out things. If it is not needed any
+> more it should just go.
+
+It could but I do not claim to know it well.
+so I will leave that to someone else.
+
+> Something like the lines above only cause confusion.
+> suggest to remove the # lines or to add a short comment explaining why
+> they are commented out but not removed.
+
+I can add comments yes will do.
 
 >
-> Andrea
+>
+>> diff --git a/recipes/xqt2/xqt2_20060509.bb b/recipes/xqt2/xqt2_20060509.=
+bb
+>> index 7634d27..4492bc7 100644
+>> --- a/recipes/xqt2/xqt2_20060509.bb
+>> +++ b/recipes/xqt2/xqt2_20060509.bb
+>> @@ -1,6 +1,6 @@
+>> =A0DESCRIPTION =3D "Xqt2 is an X-Server than runs within the Opie enviro=
+nment"
+>> =A0HOMEPAGE =3D "http://xqt.sourceforge.jp"
+>> -DEPENDS =3D "freetype libxi xmu flex-native virtual/libqte2 libqpe-opie=
+"
+>> +DEPENDS =3D "freetype libxi libxmu flex-native virtual/libqte2 libqpe-o=
+pie"
+>> =A0LICENSE =3D "GPL"
+>> =A0SECTION =3D "opie/applications"
+>> =A0APPTYPE =3D "binary"
+>> --
+>> 1.7.1
+>
+> With recipes like this I always wonder if we should keep them.
+> Apparently they are not build, otherwise the faulty DEPENDS would have
+> been detected earlier.
+
+very true. But that is another step.
+
+> And the fact that it is a recipe from 2006 also indicates it is
+> probably not important.
+> Can an opie maintainer say whether it is useful to keep this?
+>
+> Thanks for the good work!
+
+thx for looking into it.
+> Frans
 >
 > _______________________________________________
 > Openembedded-devel mailing list
