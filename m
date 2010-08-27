@@ -1,49 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oosm5-0007Xn-0u
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Ootnf-0007QV-4C
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 08:51:23 +0200
-Received: by iwn2 with SMTP id 2so2247716iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 26 Aug 2010 23:50:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=4osoleBIRph0tmw7jFJY/hUNLiQsrA7Q0PGaZSevUBM=;
-	b=aQQM4RPakgqmvhhldwwz0saeg6914+Lzx949f2r6Up5XtPuLG3cfGaNJOC96GKBcAw
-	nDp9TsQX1Go+j+h3L9ECLeKrYD3Lo9PQU+H0nBfF5lQbjGhR1uztrTYxn8GuaMPCZbbk
-	it75o8U34aCGcxUWC9MkbB0g8nm7BKgtAIFPE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=NTkcvHmwHK9ZY1RHL6HbP6dAsJprosRUp14T4r3K+FCeSYpgmgzo5TphtQBtGAfe2m
-	qeUNGvmLLBpLR4SYwbCDhTW5x6PhXTtaaK+ZTPJsokX1zZirnDuxjcFhpEsmzt4SN8GQ
-	ijdEDaQtUxOHcmIMJZk5vQTU8G3u04zEEIzuU=
+	Fri, 27 Aug 2010 09:56:36 +0200
+Received: (qmail 29314 invoked by uid 503); 27 Aug 2010 08:17:13 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 27 Aug 2010 08:17:13 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 27 Aug 2010 09:56:08 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 27 Aug 2010 09:56:07 +0200
+Message-ID: <4C776F96.2000307@eukrea.com>
+Date: Fri, 27 Aug 2010 09:56:06 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.15.195 with SMTP id l3mr557318iba.188.1282891826127; Thu,
-	26 Aug 2010 23:50:26 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Thu, 26 Aug 2010 23:50:26 -0700 (PDT)
-In-Reply-To: <AANLkTi=HYU2iy923icHth=5zo1cvJOUTQxk+EK2kPVWQ@mail.gmail.com>
-References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
-	<4C76C597.9050302@mlbassoc.com>
-	<AANLkTinnnfOCw3m_q6_d27o9Luyw4dWS-uVhJzYUTTbZ@mail.gmail.com>
-	<4C76CD2C.2090102@mlbassoc.com>
-	<AANLkTi=WnKFoiutD+vZHEQLDQzmFnhdrUMjYrvc_MNam@mail.gmail.com>
-	<AANLkTi=cBDtFg9=GvPu0t01hVOhO=4uS5kwSAqLT+cax@mail.gmail.com>
-	<AANLkTi=HYU2iy923icHth=5zo1cvJOUTQxk+EK2kPVWQ@mail.gmail.com>
-Date: Fri, 27 Aug 2010 08:50:26 +0200
-Message-ID: <AANLkTi=VbHxv0hejLkjjXzJFtX+Kuyf=xU+4ty4TLKxr@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1282858170-31241-1-git-send-email-eric@eukrea.com>	<1282858170-31241-2-git-send-email-eric@eukrea.com>
+	<4C76E762.4030307@mentor.com>
+In-Reply-To: <4C76E762.4030307@mentor.com>
+X-Ovh-Tracer-Id: 8040895661608643913
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-08-23
+Subject: Re: [PATCH] ncurses-5.7 : fix sdk build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,41 +46,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 06:51:25 -0000
-X-List-Received-Date: Fri, 27 Aug 2010 06:51:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Aug 2010 07:56:36 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-I'll add myself in a week or so. Need to see how I can get this organized.
+Hi,
 
-Wrt the wiki page
-I'd day remove the last succesful build column (or add a new one).
-The new column should mention the last build. In yet another column we
-can then add the reason.
+Le 27/08/2010 00:14, Tom Rini a écrit :
+> Eric Bénard wrote:
+>
+>> @@ -170,7 +170,7 @@ pkg_prerm_ncurses-tools () {
+>> fi
+>> }
+>>
+>> -BBCLASSEXTEND = "native sdk"
+>> +BBCLASSEXTEND = "native nativesdk"
+>
+> Don't remove sdk from here, just add nativesdk. We haven't fully
+> converted everything.
+>
+in fact there is a problem when keeping sdk + nativesdk :
 
-E.g. currently khem has a ppc qemu thing where it says " 	fails to
-build sed ". Next tuesday it will be unclear if this is from last
-monday's tree or this monday's tree.
+ENABLE_WIDEC_virtclass-nativesdk = "false"
+is no more taken in account.
 
-Also i would suggest that everyone who participates builds with
-tinderbox enabled, and (at least in case of failure) adds a link to
-the tinderbox log.
+_virtclass-sdk or _sdk or _${PN}-sdk are also not good overides.
 
-And one more question:
-The wiki pages says: "All volunteers start clean builds for the
-combinations they test,"
-I have some platforms that are quite identical (eg sheevaplug and
-openrd; both marvell/kirkwood based). I have no problems testing for
-both, but as they are both armv5 and use the same soc, compiler etc, I
-kinda feel this as a waste of time. I think I would prefer it to do
-e.g. a bake for sheeva, followed by one for openrd (without a clean
-inbetween) to verify that the openrd specifics (probably only u-boot
-and kernel) work.
-I can imagine for the various omap3530 variants (beagle, overo, ...)
-this is also the case.
+Do you have any idea how to fix this ?
 
-(thinking of it, if cpu cycles/time an issue we could decide to pull
-some packages (e.g. some of the native ones) from pstage)
-
-Frans
+Eric
 
 
