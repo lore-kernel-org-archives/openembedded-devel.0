@@ -1,43 +1,33 @@
-Received: from mail-gw0-f50.google.com ([74.125.83.50])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oozfo-0000OB-QP
+	(envelope-from <gary@mlbassoc.com>) id 1Oozs3-0002eQ-OF
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 16:12:53 +0200
-Received: by gwaa20 with SMTP id a20so1169620gwa.9
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 07:12:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=mEwaZFBiXAKLZkOP0u/tiXg/+ynrMcjsuII96mBtwgg=;
-	b=ufiFJrESznai32/Vh7vKh1SSyN4efqczCtpSHzNOldsm1KBxjRPHooRcuBeVTe9HXN
-	EbXyh+3C3tAWPIjVOVPszPG6qITzFw6RTYUmSTY0HAKbr1Cl02pmw3NR4ss57Ql8/h13
-	zCdFPjJKgh9G9ttjdamVeKxJ0hFCwNSqX5U78=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=j3njNOYU8ZEOKe9sXn1IG3q+mLgJBX2x2KiBjWOYR9CvA4UoogoAXqJkvJhPhO45Xg
-	/KwYXc+cx62T4NBNEXihGsNrYY0iu3T68GPlRMQZ8YHIrQKKdF2tc6Id9/Gd3U+r9Q2A
-	h29roC3+IMzZKLhVC51J3k/iWiUkqUKkcfakw=
+	Fri, 27 Aug 2010 16:25:34 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id DC2521660968; Fri, 27 Aug 2010 08:24:48 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 39D551660962;
+	Fri, 27 Aug 2010 08:24:28 -0600 (MDT)
+Message-ID: <4C77CA9C.6080205@mlbassoc.com>
+Date: Fri, 27 Aug 2010 08:24:28 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.90.103.13 with SMTP id a13mr1569964agc.117.1282918327275; Fri,
-	27 Aug 2010 07:12:07 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Fri, 27 Aug 2010 07:12:07 -0700 (PDT)
-In-Reply-To: <1282915791-14096-1-git-send-email-fahad_usman@mentor.com>
-References: <1282915791-14096-1-git-send-email-fahad_usman@mentor.com>
-Date: Fri, 27 Aug 2010 16:12:07 +0200
-Message-ID: <AANLkTikg89+1Vp6ssbj3Ovh8BtVQQ-v1c_LfB-Bk+7Cy@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.50
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+To: Cliff Brake <cliff.brake@gmail.com>
+References: <4C771A94.1020802@mlbassoc.com>
+	<AANLkTimhME5XnoVz+a6vrnDyvZBeoK9Yy9st0MVAQ2H3@mail.gmail.com>
+In-Reply-To: <AANLkTimhME5XnoVz+a6vrnDyvZBeoK9Yy9st0MVAQ2H3@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] lemon_3.5.4: merged native and non-native recipes
+Cc: openembedded-devel@lists.openembedded.org
+Subject: Re: Testing build failure
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,17 +41,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 14:12:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Aug 2010 14:25:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-reviewed and build the patch.
+On 08/27/2010 07:51 AM, Cliff Brake wrote:
+> On Thu, Aug 26, 2010 at 9:53 PM, Gary Thomas<gary@mlbassoc.com>  wrote:
+>> MACHINE=beagleboard
+>> DISTRO=angstrom-2010.x
+>> IMAGE=beagleboard-linuxtag2010-demo-image
+>> HOST=Fedora 12 32-bit
+>> fails to build ti-dsplink
+>>   -- because ti-cgt6x installed tools incorrectly
+>>
+>> Cliff - how did this build for you on Ubuntu/64-bit?  Can you send me
+>> the logs for ti-dsplink and ti-cgt6x?
+>
+> Hi Gary,
+>
+> I was using the angstrom-2008.1 distro -- not sure if that matters.
+> It looks like 2010.x is not ready for general use based on comments in
+> inc files.
 
-The nasty thing is that neither of the two recipes that use this one
-(netsurf and wireshark ) build.
-Netsurf comes wiht a gtk error, wireshark with an autoconf version error.
-As neither of these are related to lemon or lemon-native and both
-build fine, I'm pushing this.
+I already had success with this for qemuarm, so I thought I'd continue
+with it (fuller testing coverage)
 
-Frans
+> I ran into an issue with one of the TI components where I had a '.' in
+> my directory path that it did not like.
+
+I've run into this before myself.
+
+> I assume you have manually downloaded the binaries from TI and have
+> placed them in your sources/downloads directory?
+
+Certainly.
+
+The problem I have is that the ti-cgt6x tools are installed into /opt/TI/TI_CGT_C6000_6.1.9
+instead of tmp/sysroots/beagleboard-angstrom-linux-gnueabi/usr/share/ti/ti-cgt6x-tree
+
+I see that when you ran it, the do_unpack step for ti-cgt6x got this error:
+   Where do you want to install C6000 Code Generation Tools?
+   [/opt/TI/TI_CGT_C6000_6.1.9]
+   Install Error: You do not have permission to write to /opt.
+
+Presumably it then installed into $HOME (that's what the recipe is expecting).
+On my system though, I _have_ write permission in /opt and the tools end up
+in the wrong place and everything falls apart from there onwards.
+
+I just checked and if I remove write permission to /opt, this package
+runs properly.  I've worked out a patch using --prefix= to the TI binary
+installer that makes it install correctly even if /opt is writeable.
+
+> My logs are:
+> http://bec-systems.com/oe/ti-cgt6x-1_6_1_9-r4.tar.gz
+> http://bec-systems.com/oe/ti-dsplink-1_1_64-r88h.tar.gz
+
+Thanks, I think these showed the problem well.
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
