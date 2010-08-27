@@ -1,27 +1,29 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <amilla@vicomtech.org>) id 1Oouyu-0000x5-5Y
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 11:12:17 +0200
-Received: by qwa26 with SMTP id 26so335397qwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 02:11:47 -0700 (PDT)
-Received: by 10.229.224.149 with SMTP id io21mr294823qcb.160.1282900307092;
-	Fri, 27 Aug 2010 02:11:47 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.186.11 with HTTP; Fri, 27 Aug 2010 02:11:07 -0700 (PDT)
-In-Reply-To: <AANLkTinDA-hgVagfF0add1ONi8Z-=sBha7mnit-Ui7bp@mail.gmail.com>
-References: <AANLkTinDA-hgVagfF0add1ONi8Z-=sBha7mnit-Ui7bp@mail.gmail.com>
-From: Alberto Milla <amilla@vicomtech.org>
-Date: Fri, 27 Aug 2010 11:11:07 +0200
-Message-ID: <AANLkTimQ6vdijXjgq+ct5T2h5-WeDa4dnR2NiKrnUUBf@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OovDs-0007yH-5l for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 11:27:45 +0200
+Received: from f053040121.adsl.alicedsl.de ([78.53.40.121]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OovDR-0001Nu-Oc for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 09:27:17 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: amilla@vicomtech.org
+In-Reply-To: <AANLkTimQ6vdijXjgq+ct5T2h5-WeDa4dnR2NiKrnUUBf@mail.gmail.com>
+References: <AANLkTinDA-hgVagfF0add1ONi8Z-=sBha7mnit-Ui7bp@mail.gmail.com>
+	<AANLkTimQ6vdijXjgq+ct5T2h5-WeDa4dnR2NiKrnUUBf@mail.gmail.com>
+Date: Fri, 27 Aug 2010 11:27:14 +0200
+Message-ID: <1282901234.3882.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Openembedded and Gstreamer
@@ -38,85 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 09:12:17 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Aug 2010 09:27:45 -0000
+X-Groupsio-MsgNum: 22722
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-bolfNWmDxnZgwUqFFow1"
 
-I try
+--=-bolfNWmDxnZgwUqFFow1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-#gst-launch --gst-debug=*:3 audiotestsrc ! audioconvert ! alsasink
+Am Freitag, den 27.08.2010, 11:11 +0200 schrieb Alberto Milla:
+> I try
+>=20
+> #gst-launch --gst-debug=3D*:3 audiotestsrc ! audioconvert ! alsasink
+>=20
+> and I obtain the next output: http://pastebin.com/EVQjRVqS
+>=20
+> where I can see 3 warning at lines 57, 58 and 59:
+>=20
+> alsa gstalsa.c:124:gst_alsa_detect_formats:<alsasink0> skipping non-int f=
+ormat
+> alsa conf.c:3952:snd_config_expand: alsalib error: Unknown parameters
+> {AES0 0x02 AES1 0x82 AES2 0x00 AES3 0x02}
+> alsa pcm.c:2202:snd_pcm_open_noupdate: alsalib error: Unknown PCM
+> iec958:{AES0 0x02 AES1 0x82 AES2 0x00 AES3 0x02}
+>=20
+> and from the line 75 I get a dump that starts with a:
+>=20
+> 0:00:02.183681854   953    0x15050 INFO   GST_EVENT
+> gstevent.c:1091:gst_event_new_latenUnable to handle kernel paging
+> request at virtual address aafaaaae
+>=20
+> Can it be an alsa problem?
 
-and I obtain the next output: http://pastebin.com/EVQjRVqS
-
-where I can see 3 warning at lines 57, 58 and 59:
-
-alsa gstalsa.c:124:gst_alsa_detect_formats:<alsasink0> skipping non-int format
-alsa conf.c:3952:snd_config_expand: alsalib error: Unknown parameters
-{AES0 0x02 AES1 0x82 AES2 0x00 AES3 0x02}
-alsa pcm.c:2202:snd_pcm_open_noupdate: alsalib error: Unknown PCM
-iec958:{AES0 0x02 AES1 0x82 AES2 0x00 AES3 0x02}
-
-and from the line 75 I get a dump that starts with a:
-
-0:00:02.183681854   953    0x15050 INFO   GST_EVENT
-gstevent.c:1091:gst_event_new_latenUnable to handle kernel paging
-request at virtual address aafaaaae
-
-Can it be an alsa problem?
-
-On 27 August 2010 08:28, Alberto Milla <amilla@vicomtech.org> wrote:
-> Hi, I am working with an at91sam9g45ekes board and openembedded at its
-> stable branch.
->
-> I tried to do a simple hello world program with gstreamer but it did
-> not work. After that I started testing gstreamer with the command:
->
-> # gst-launch audiotestsrc ! audioconvert ! alsasink
->
-> I get:
->
-> Setting pipeline to PAUSED ...
-> Pipeline is PREROLLING ...
-> Pipeline is PREROLLED ...
-> Setting pipeline to PLAYING ...
-> New clock: GstAudioSinkClock
->
-> And gst-launch get stucked without playing any buzzer sound and to
-> exit I had to do a ctrl-c and after that gstreamer stopped in:
->
-> Caught interrupt -- handling interrupt.
-> Interrupt: Stopping pipeline ...
-> Execution ended after 11443136693 ns.
-> Setting pipeline to PAUSED ...
->
-> After that, I have to do a reset to the board.
-> But if I play a OGG file:
->
-> # gst-launch filesrc location=music.ogg ! oggdemux ! vorbisdec ! alsasink
->
-> I get only a warning but no sound:
->
-> WARNING: erroneous pipeline: could not link vorbisdec0 to alsasink0
->
-> And to finish, I tried too with a mp3 file and I had the audiotestsrc problem:
->
-> # gst-launch filesrc location=music.mp3 ! mad ! alsasink
->
-> Setting pipeline to PAUSED ...
-> Pipeline is PREROLLING ...
-> Pipeline is PREROLLED ...
-> Setting pipeline to PLAYING ...
-> New clock: GstAudioSinkClock
->
-> music.mp3 and music.ogg play correctly if you use mplayer
->
->
-> Can you help me? Has anyone managed to work with the at91sam9g45ekes
-> and gstreamer?
->
->
-> Thanks,
->
-> Alberto
->
+I do not know that. But this list is more about packaging programs for
+OE. I guess you could get faster and more knowledgeable help asking your
+question on a GStreamer list [1].
 
 
+Thanks and good luck,
+
+Paul
+
+
+[1] http://gstreamer.freedesktop.org/lists/
+
+--=-bolfNWmDxnZgwUqFFow1
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkx3hOwACgkQPX1aK2wOHVhmiACeNC5xlIxzMJU+WscQJX+T9h1u
+skYAoIYXB/jZs/Bq5dPYU83KAQT2XKC/
+=0moQ
+-----END PGP SIGNATURE-----
+
+--=-bolfNWmDxnZgwUqFFow1--
