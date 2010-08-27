@@ -1,46 +1,32 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1Ooymo-00017S-R4
+	(envelope-from <Fahad_Usman@mentor.com>) id 1Ooyx6-0007OQ-NV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 15:16:12 +0200
-Received: by qwa26 with SMTP id 26so527845qwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 06:15:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=gAi9bzw8kOKUqPC5W4fNoEHL6lVK1+Sun27TqjTOWqg=;
-	b=K67v4O6Y2ZGiTifFss8i4fpkUeEeg0M1DzJshQEs3E9OV3HSlCRUC7/2B+ottmbnLk
-	N8oKP0qulhprhugek/h1SxLh7zomShsMTj6lzO/9oIlLN8RW4M0e2hJPZnd2uoxX/l2n
-	axvorvmHFZAMmvrbyZpAYKW+TRCww1Y7z7SVg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=N9hx2g6O9+NGbAVVfJMg2OnBN7KTbacgircGaSrVEUluPYfWDeGNFNmkV/JXg3RwqQ
-	u9FNlQ3dvqSfPqli/bQdpd9Zh0HlpuBmt3GmalxTR0oxQ0ZoIEFVwF1wIlCznr4FX5Uw
-	9ORDwKteEQ8AnVkLv9Fg3gJdfKGaEcH0j7+9U=
-MIME-Version: 1.0
-Received: by 10.224.64.159 with SMTP id e31mr311793qai.297.1282914930550; Fri,
-	27 Aug 2010 06:15:30 -0700 (PDT)
-Received: by 10.229.27.204 with HTTP; Fri, 27 Aug 2010 06:15:30 -0700 (PDT)
-In-Reply-To: <AANLkTi=o=4pS4tLrhXErembiZ5j4ye+EzAk91yc02rya@mail.gmail.com>
-References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
-	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
-	<i586bt$t12$1@dough.gmane.org>
-	<AANLkTi=o=4pS4tLrhXErembiZ5j4ye+EzAk91yc02rya@mail.gmail.com>
-Date: Fri, 27 Aug 2010 15:15:30 +0200
-Message-ID: <AANLkTikFF89LgDVa7VOHTCxEVu9BfNBEFOEbov6N-xJK@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Fri, 27 Aug 2010 15:26:42 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Ooywc-0001WT-LP from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 06:26:10 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 27 Aug 2010 15:26:09 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Fri, 27 Aug 2010 18:29:51 +0500
+Message-Id: <1282915791-14096-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 27 Aug 2010 13:26:09.0316 (UTC)
+	FILETIME=[691A6640:01CB45EB]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
+Subject: [PATCH] lemon_3.5.4: merged native and non-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,28 +40,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 13:16:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Aug 2010 13:26:42 -0000
 
-On Fri, Aug 27, 2010 at 2:13 PM, Andrea Adami <andrea.adami@gmail.com> wrote:
->>>  recipes/udev/udev-compat141_141.bb                 |    6 ++-
->>
->> NAK
->>
->
-> This one is an hack in progress, needed only for Zaurus until 2.6.36
-> (hopefully).
-> Please keep ;)
->
-> Andrea
->
+* removed the lemon-native_3.5.4.bb file
+* added NATIVE_INSTALL_WORKS = "1"
+* added BBCLASSEXTEND = "native"
+* bumped PR
 
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/lemon/lemon-native_3.5.4.bb |   14 --------------
+ recipes/lemon/lemon_3.5.4.bb        |    6 +++++-
+ 2 files changed, 5 insertions(+), 15 deletions(-)
 
-BTW grepping in conf should have revealed some pinned versions (this
-one was in conf/machine/include/zaurus-2.6.inc).
+diff --git a/recipes/lemon/lemon-native_3.5.4.bb b/recipes/lemon/lemon-native_3.5.4.bb
+deleted file mode 100644
+index f293ab1..0000000
+--- a/recipes/lemon/lemon-native_3.5.4.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require lemon.inc
+-
+-PR = "r0"
+-
+-inherit native
+-
+-do_stage() {
+-	install -d ${STAGING_BINDIR}
+-	install -m 0755 lemon ${STAGING_BINDIR}
+-	install -m 0644 lempar.c ${STAGING_BINDIR}
+-}
+-
+-SRC_URI[md5sum] = "f17da840eed792e896c3408d0ce97718"
+-SRC_URI[sha256sum] = "47daba209bd3bcffa1c5fcd5fdfc4f524eae619b4fa855aeeb1bbbc8bd2bb04f"
+diff --git a/recipes/lemon/lemon_3.5.4.bb b/recipes/lemon/lemon_3.5.4.bb
+index 0be511a..719a84f 100644
+--- a/recipes/lemon/lemon_3.5.4.bb
++++ b/recipes/lemon/lemon_3.5.4.bb
+@@ -1,6 +1,6 @@
+ require lemon.inc
+ 
+-PR = "r0"
++PR = "r1"
+ 
+ do_install() {
+ 	install -d ${D}${bindir}
+@@ -12,3 +12,7 @@ do_install() {
+ 
+ SRC_URI[md5sum] = "f17da840eed792e896c3408d0ce97718"
+ SRC_URI[sha256sum] = "47daba209bd3bcffa1c5fcd5fdfc4f524eae619b4fa855aeeb1bbbc8bd2bb04f"
++
++BBCLASSEXTEND = "native"
++
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
 
-Regards and thx for your work
-
-Andrea
 
 
