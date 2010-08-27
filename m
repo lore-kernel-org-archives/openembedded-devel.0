@@ -1,40 +1,38 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoxQa-0008U8-0e
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OoxTT-0002cH-Ka
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 13:49:00 +0200
-Received: by iwn2 with SMTP id 2so2458782iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 04:48:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=6Mf+njYlO+5hvRvGBDHKJ2y7W8F3cm3iI0z1d1MKhL0=;
-	b=Cn0l0UjM+Srl0Xo8K62nKZALbXgcQdExCDy3FrLjg9IcheousoiU+LAmAeHcXql5i1
-	BhXPZJfPXV7oVN1/BDfijx7FCg9Jipdh5zPEnci5GgOxK4zQMFp/aeWb6SiyuOyXZBpp
-	/1AMAH6L6Z8GqN1bbW0wMLM8lbJwfgWrVXDGk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=cb9ETA6co287lSC3/wFLEAAPE2k47SKaCnzlkfQO01CF5YgUwq0pc3fFYDSzNyXg+V
-	Cw+iX1fDED5V0AdRiF3pflBQx6c/0e80C8FgW6L+Ka2XVq8/fdY0bhYACCjDOHOOD3u/
-	2AGCZGSid36DtFYGZCyQznHWCccoICvoWsFV0=
+	Fri, 27 Aug 2010 13:52:00 +0200
+Received: (qmail 25628 invoked by uid 503); 27 Aug 2010 12:12:38 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 27 Aug 2010 12:12:38 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 27 Aug 2010 13:51:32 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 27 Aug 2010 13:51:31 +0200
+Message-ID: <4C77A6C2.5040008@eukrea.com>
+Date: Fri, 27 Aug 2010 13:51:30 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.149.12 with SMTP id r12mr959203ibv.185.1282909712564; Fri,
-	27 Aug 2010 04:48:32 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Fri, 27 Aug 2010 04:48:32 -0700 (PDT)
-Date: Fri, 27 Aug 2010 13:48:32 +0200
-Message-ID: <AANLkTimHJqkoxBAhBo=HJDqC=joPovjO6joi2sXiLJHM@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
+	<i586bt$t12$1@dough.gmane.org>
+In-Reply-To: <i586bt$t12$1@dough.gmane.org>
+X-Ovh-Tracer-Id: 12016448232071146825
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: lemon install
+Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,29 +46,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 11:49:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 27 Aug 2010 11:52:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hi all,
+Le 27/08/2010 13:08, Koen Kooi a écrit :
+> On 27-08-10 10:11, Khem Raj wrote:
+>>   recipes/vlc/vlc-davinci_0.8.6h.bb                  |    2 +-
+>
+> NAK
 
-No idea who is responsible for lemon but triggered by Fasas I noticed this:
+Why ? This fix looks sane as codec-engine doesn't exist
 
-do_install() {
-	install -d ${D}${bindir}
-	install -m 0755 lemon ${D}${bindir}
-	install -m 0644 lempar.c ${D}${bindir}
-	install -d ${D}${mandir}/man1
-	install -m 0644 ${WORKDIR}/lemon.1 ${D}${mandir}/man1/
-}
-
-
-A .c file that is copied to bindir?
-I know this is a parser, but I would expect .c files to be placed in a
-different location.
-Can someone shed a light on this?
-Or, even better: fix this?
-
-Thanks!
-Frans.
+Eric
 
 
