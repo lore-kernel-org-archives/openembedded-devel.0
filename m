@@ -1,32 +1,45 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Ooy4z-0006fg-8y
+	(envelope-from <elena.valhalla@gmail.com>) id 1Ooy75-0006n5-Gh
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 14:30:47 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 15FB3166096C; Fri, 27 Aug 2010 06:30:01 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id CCB631660953;
-	Fri, 27 Aug 2010 06:29:40 -0600 (MDT)
-Message-ID: <4C77AFB4.6000809@mlbassoc.com>
-Date: Fri, 27 Aug 2010 06:29:40 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Fri, 27 Aug 2010 14:32:57 +0200
+Received: by qyk8 with SMTP id 8so603173qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 05:32:23 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=YH4Fvn63bU6ilsM/VzwK+T3W+ZZW+gynYrXda4JT++o=;
+	b=ZyO43HwHJ7QhuFVuenOxBmTuXxt6gXWzLnuHw4wXjUfYYSIG1ExfghEdhhKsfY6eb0
+	h2PzmibMyWjfol8lUu6TxySsGMbMKVzYPFUZe5R/nSGPJ+LWg8aBAeNQbOgd7SgZCOdz
+	oMpgok+2RgNxnqdhGbI9q7slqbnLOlm9zEfnw=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=vzIyLTRCXt7P4kzJJr9mo+1CKoFoejoYnqByOauEPIXIVCmqhUxYcucofFJMofhUSY
+	y4O7RzezlUm7lJ/IC6PySKVX6sCvbTghn84oLdHt98LdaoQXzz7e3yEM3BXaFk7X7On8
+	lH93TinDooKIqglxyJ8u7fLX4FP+dJrPXliso=
 MIME-Version: 1.0
+Received: by 10.229.191.147 with SMTP id dm19mr468196qcb.33.1282912343236;
+	Fri, 27 Aug 2010 05:32:23 -0700 (PDT)
+Received: by 10.229.234.76 with HTTP; Fri, 27 Aug 2010 05:32:23 -0700 (PDT)
+In-Reply-To: <i586bt$t12$1@dough.gmane.org>
+References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
+	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
+	<i586bt$t12$1@dough.gmane.org>
+Date: Fri, 27 Aug 2010 14:32:23 +0200
+Message-ID: <AANLkTi=wiFDsP33tndm0HA7jBkTUzsStWLfz5wc8J+0z@mail.gmail.com>
+From: Elena of Valhalla <elena.valhalla@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTin5LRCz6PU_x6Mw+V2Xf8W=i+n4RLqQjwON1R7+@mail.gmail.com>
-	<4C77AE8B.80607@xora.org.uk>
-In-Reply-To: <4C77AE8B.80607@xora.org.uk>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: elena.valhalla@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] review process
+Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,28 +53,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 12:30:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Aug 2010 12:32:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 08/27/2010 06:24 AM, Graeme Gregory wrote:
->   On 27/08/10 13:15, Frans Meulenbroeks wrote:
->> 1. If a patch does not get any review feedback in X weeks time; it is
->> ok to apply it. People who need more time to review a patch can
->> mention that in a short reply. In that case they are granted Y more
->> weeks to review.
->> (suggestion: X = Y = 2)
-> I have always been a supported of apply it and see who screams. I have
-> suggested before that after 2 weeks without review any non core patch is
-> obviously OK.
+On 8/27/10, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> (...)
+>>  recipes/sugar/sugar-fructose.bb                    |    2 +-
+>
+> NAK
 
-That said, what good does it do for those affected to scream if
-the originator simply ignores it??
+IIRC this one has never worked (no sugar-web-activity), and should be
+changed in a task anyway
+
+(which is in my long-term plans to do)
 
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Elena ``of Valhalla''
+
+homepage: http://www.trueelena.org
+email: elena.valhalla@gmail.com
 
 
