@@ -1,38 +1,44 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Ootnf-0007QV-4C
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1Oou3B-0004Sw-As
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 09:56:36 +0200
-Received: (qmail 29314 invoked by uid 503); 27 Aug 2010 08:17:13 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 27 Aug 2010 08:17:13 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 27 Aug 2010 09:56:08 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 27 Aug 2010 09:56:07 +0200
-Message-ID: <4C776F96.2000307@eukrea.com>
-Date: Fri, 27 Aug 2010 09:56:06 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
-MIME-Version: 1.0
+	Fri, 27 Aug 2010 10:12:38 +0200
+Received: by pzk2 with SMTP id 2so1019481pzk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 01:12:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=yiraE1jAYqrImLrQIKzl35KSiimS056P694A6kKzvCQ=;
+	b=tEnaMp1KqaBXSf1WKxWVAnASegyYTegGr10q6EsTpsir1ZWx5DwEnM/l7GK7g7sx8L
+	sW6Ur9FDlAm/YJ2P/gySKT8+/HILU3yPeHc9wCULwvFJpmuKiMf0yZDxYLW83W3BzzLt
+	buTFPXXfIZa+wsx8Wye0ihBQjXDMPQ3isU/W8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=vZPYGzt4XivdafMdf1zanMmTMWh6Q4e54FJBgu6vXX6rKitkWFswKrIDWKpPFfGj7r
+	B/JsL2Z6zEBItR2tkzdhkD7jYjeN7ugIjvfeIGwgN++3oI6YySKtekaUGFfaxwn37+Bu
+	SdqYUjg6jy+8rZcWGZpE7oxbXZNaqtZFCPRzs=
+Received: by 10.142.204.17 with SMTP id b17mr988947wfg.109.1282896724928;
+	Fri, 27 Aug 2010 01:12:04 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id y16sm4056848wff.14.2010.08.27.01.12.03
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 27 Aug 2010 01:12:04 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1282858170-31241-1-git-send-email-eric@eukrea.com>	<1282858170-31241-2-git-send-email-eric@eukrea.com>
-	<4C76E762.4030307@mentor.com>
-In-Reply-To: <4C76E762.4030307@mentor.com>
-X-Ovh-Tracer-Id: 8040895661608643913
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Fri, 27 Aug 2010 01:11:52 -0700
+Message-Id: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] ncurses-5.7 : fix sdk build
+Subject: [PATCH 0/2] Step forward in 'bitbake world'
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,34 +52,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 07:56:36 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 27 Aug 2010 08:12:38 -0000
 
-Hi,
+These two patches enable the metadata to be parsed and a runqueue generated successfully
+when doing bitbake world (~73000 tasks)
 
-Le 27/08/2010 00:14, Tom Rini a écrit :
-> Eric Bénard wrote:
->
->> @@ -170,7 +170,7 @@ pkg_prerm_ncurses-tools () {
->> fi
->> }
->>
->> -BBCLASSEXTEND = "native sdk"
->> +BBCLASSEXTEND = "native nativesdk"
->
-> Don't remove sdk from here, just add nativesdk. We haven't fully
-> converted everything.
->
-in fact there is a problem when keeping sdk + nativesdk :
+Its first step in the process. Next steps would be to fix the failing recipes now.
+and prune more recipes into nonworking and obsolete dirs.
 
-ENABLE_WIDEC_virtclass-nativesdk = "false"
-is no more taken in account.
+The changes in these patches should not cause any problems in general becuase they only
+deal with already broken recipes.
 
-_virtclass-sdk or _sdk or _${PN}-sdk are also not good overides.
+if these patches look ok please ack
 
-Do you have any idea how to fix this ?
+Thanks
 
-Eric
+-Khem
+
 
 
