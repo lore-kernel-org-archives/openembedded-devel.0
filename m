@@ -1,35 +1,48 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@rkmorris.us>) id 1Op6SF-0004cy-OM
+	(envelope-from <martin.jansa@gmail.com>) id 1Op6gw-00039S-Oc
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 23:27:21 +0200
-Received: from server ([unknown] [71.170.86.183]) by vms173011.mailsrvcs.net
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L7T009IGVG14P10@vms173011.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	27 Aug 2010 15:26:26 -0500 (CDT)
-Received: from server [127.0.0.1] by server (Axigen)
-	with ESMTPSA id 2EDBA4; Fri, 27 Aug 2010 15:26:23 -0500
-Received: from [192.168.1.2] by rkmorris.us with HTTP; Fri,
-	27 Aug 2010 15:26:22 -0500
-From: <openembedded@rkmorris.us>
-Date: Fri, 27 Aug 2010 15:26:22 -0500
-X-Mailer: Axigen WebMail
+	Fri, 27 Aug 2010 23:42:34 +0200
+Received: by fxm6 with SMTP id 6so2421491fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 27 Aug 2010 14:42:01 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=QHuPhsAwSbgE5yPjh/+IkddoVD6Y84oRqMMIKAQfj28=;
+	b=Lol8cLD40R4pXdIe1U/80aHDO2XTr6aGPc4NNTRBiMXnnekA5YOSnW+1qc7v7IfGcD
+	AGPsqNLSfs7X20BOQQ3BKWikA1Od5Xqy+EByWPqcwKvD8gMTTxzApwW1TMIqfvQDVn+D
+	Ke+fIA3T8OqjM1V3DUzmvlK1rou3aPUjjezl4=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=wnLtJTaYPftxNQEcPogKifedKj5GJ5r0fHqhdzNEbiX4AIE/5y3MRrQY9XRP/TsAIm
+	1Bq4b2+WQ76IdNI44XeqfdlImTSCGggUCNpCeZM/dz5o9SujKDaPBHuDS1MvCYlOjYJy
+	VfInHU7osOmKniGD31OFyZ/OPmCLq6QPdLdtw=
+Received: by 10.223.122.202 with SMTP id m10mr583168far.55.1282945321606;
+	Fri, 27 Aug 2010 14:42:01 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b11sm2167082faq.30.2010.08.27.14.42.00
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 27 Aug 2010 14:42:00 -0700 (PDT)
+Date: Fri, 27 Aug 2010 23:42:40 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <1282940782400087500@rkmorris.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 5
-X-SA-Exim-Connect-IP: 206.46.173.11
-X-SA-Exim-Mail-From: openembedded@rkmorris.us
+Message-ID: <20100827214240.GI17268@jama>
+References: <1282940782400087500@rkmorris.us> <1282944432199625500@rkmorris.us>
+	<1282944796856928500@rkmorris.us>
+MIME-Version: 1.0
+In-Reply-To: <1282944796856928500@rkmorris.us>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	MIME_QP_LONG_LINE autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
 Subject: Re: Execution of Build Output Failing (Testing)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -44,123 +57,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 21:27:21 -0000
-Content-Type: text/plain
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 27 Aug 2010 21:42:56 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-Yep, this makes complete sense - but I haven't tried to change versions (at=
- least not on purpose ... :-)). Rather, these are what seem to happen by de=
-fault. Let me look at the config files a bit more, to see if I can force th=
-is (or if you know, but all means yell about what I'm missing!).
-BTW, on the PREFERRED_VERSION items below - likely a dumb question, but ho=
-w is someone to know about this?
-Thanks!
-... Russell
+On Fri, Aug 27, 2010 at 04:33:16PM -0500, openembedded@rkmorris.us wrote:
+> Hi,
+> 
+>  
+> 
+> I am running a build with Angstrom, and I receive the following error messages - is this expected (and is there a fix for this?)?
+> 
+>  
+> 
+> NOTE: Handling BitBake files: \ (0754/7160) [10 %]NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been replaced by bluez4
+> NOTE: Handling BitBake files: \ (0960/7160) [13 %]NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x has been replaced by bluez4
+> NOTE: Handling BitBake files: \ (0970/7160) [13 %]NOTE: Angstrom DOES NOT support ipkg because ipkg has been superseded by opkg
+> NOTE: Handling BitBake files: | (1191/7160) [16 %]NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv replacement is used
+> NOTE: Handling BitBake files: \ (1404/7160) [19 %]NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv replacement is used
+> NOTE: Handling BitBake files: | (4881/7160) [68 %]NOTE: Angstrom DOES NOT support bluez-utils because bluez-utils 3.x has been replaced by bluez4
+> NOTE: Handling BitBake files: | (5731/7160) [80 %]NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been replaced by bluez4
+> NOTE: Handling BitBake files: \ (5964/7160) [83 %]NOTE: Angstrom DOES NOT support libiconv because the glibc builtin iconv replacement is used
+> NOTE: Handling BitBake files: - (6038/7160) [84 %]NOTE: Angstrom DOES NOT support fso-apm because regular apmd is good enough
+> NOTE: Handling BitBake files: - (6508/7160) [90 %]NOTE: Angstrom DOES NOT support bluez-libs because bluez-libs 3.x has been replaced by bluez4
+> NOTE: Handling BitBake files: \ (7160/7160) [100 %]
+
+Those are not error messages, just note that some packages are
+blacklisted, see ie: 
+ANGSTROM_BLACKLIST_pn-bluez-libs = "bluez-libs 3.x has been replaced by bluez4"
+etc in distro configs like conf/distro/angstrom-2010.x.conf
+
+So it's expected.
+
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
-
-On Fri, Aug 27, 2010 03:16  PM, Khem Raj <raj.khem@gmail.com> wrote:
-> On Fri, Aug 27, 2010 at 12:37 PM,  <openembedded@rkmorris.us> wrote:
-> > Hi,
-> > Thanks for the quick response!
-> > What's strange is that watching the boot in QEMU it seems to be lookin=
-g for 2.6.17-rc3 inside the /lib/modules directory ... but if I mount my in=
-itrd (un-gzip, then mount as ext2), and look inside this directory - the di=
-rectory is 2.6.34 instead! Somewhere / somehow there seems to be a versioni=
-ng issue perhaps?
-> > Thoughts?
->=20
-> yes because the default kernel for qemuarm machine is 2.6.34 and hence
-> the modules which are part of rfs are for that kernel.
-> you should use same kernel to boot qemu for best results.
->=20
-> > Thanks again,... Russell
-> >
-> >
-> > On Fri, Aug 27, 2010 12:41  PM, Khem Raj <raj.khem@gmail.com> wrote:
-> >> On Fri, Aug 27, 2010 at 6:46 AM,  <openembedded@rkmorris.us> wrote:
-> >> > Hi,
-> >> > As I reported recently, I am having issues getting my OE output up =
-and running on my h1940 device. It seems to be some sort of issue between t=
-he kernel and initrd files, so to debug this I figured that I'd build and t=
-est on QEMU (hoping that the recent udev related issues were my problem, an=
-d to make sure that I could build "properly").
-> >> > Given this, I went ahead and built console-image (angstrom 2008.1 d=
-istro) for qemuarm, to see if it was perhaps just me having issues (which i=
-s still possible). However, I took the output from the qemuarm build and tr=
-ied to run it ... and still have issues (not the same as my h1940, but stil=
-l fatal).
-> >> > On QEMU (verified to work with the QEMU provide example ARM images)=
- I am able to boot, at least part way, but end up with a FATAL message abou=
-t a missing directory ... /lib/modules/2.6.17-rc3.
-> >> > Is this a known issue? Any proposed fixes or workarounds for this?
-> >>
-> >> oe.dev works well on qemuarm here with
-> >>
-> >> PREFERRED_VERSION_usbutils_local                =3D "0.86"
-> >> PREFERRED_VERSION_udev_local                    =3D "151"
-> >>
-> >> in local.conf and minimal/angstrom distro last time I tried it booted
-> >> fine. you can also adapt
-> >> contrib/qemu/run-qemu.sh to run OE in qemu.
-> >>
-> >> > Thanks!
-> >> > ... Russell
-> >> > _______________________________________________
-> >> > Openembedded-devel mailing list
-> >> > Openembedded-devel@lists.openembedded.org
-> >> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-de=
-vel
-> >> >
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-deve=
-l
-> >>
-> > _______________________________________________
-> > Openembedded-devel mailing list
-> > Openembedded-devel@lists.openembedded.org
-> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-From openembedded@rkmorris.us Fri Aug 27 23:34:04 2010
-Received: from vms173017pub.verizon.net ([206.46.173.17])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <openembedded@rkmorris.us>) id 1Op6Yj-0002FI-DW
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 23:34:04 +0200
-Received: from server ([unknown] [71.170.86.183]) by vms173017.mailsrvcs.n=
-et
-	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L7T006MBYJJ0V30@vms173017.mailsrvcs.net> for
-	openembedded-devel@lists.openembedded.org; Fri,
-	27 Aug 2010 16:33:24 -0500 (CDT)
-Received: from server [127.0.0.1] by server (Axigen)
-	with ESMTPSA id 1AF6F8; Fri, 27 Aug 2010 16:33:18 -0500
-Received: from [192.168.1.4] by rkmorris.us with HTTP; Fri,
-	27 Aug 2010 16:33:16 -0500
-From: <openembedded@rkmorris.us>
-Date: Fri, 27 Aug 2010 16:33:16 -0500
-X-Mailer: Axigen WebMail
-To: openembedded-devel@lists.openembedded.org
-Message-id: <1282944796856928500@rkmorris.us>
-In-reply-to: <1282944432199625500@rkmorris.us>
-References: <1282940782400087500@rkmorris.us> <1282944432199625500@rkmorri=
-s.us>
-Importance: Normal
-MIME-version: 1.0
-X-AxigenVirus-Level: 1
-X-AxigenSpam-Level: 4
-X-SA-Exim-Connect-IP: 206.46.173.17
-X-SA-Exim-Mail-From: openembedded@rkmorris.us
-X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
-X-Spam-Level:
-X-Spam-Status: No, score
