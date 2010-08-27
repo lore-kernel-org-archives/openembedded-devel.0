@@ -1,43 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OowoD-0001IZ-Ah for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 13:09:22 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oownm-0003VI-Mw for openembedded-devel@lists.openembedded.org;
-	Fri, 27 Aug 2010 13:08:54 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 13:08:54 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OoxQa-0008U8-0e
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 27 Aug 2010 13:49:00 +0200
+Received: by iwn2 with SMTP id 2so2458782iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 27 Aug 2010 13:08:54 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Fri, 27 Aug 2010 04:48:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=6Mf+njYlO+5hvRvGBDHKJ2y7W8F3cm3iI0z1d1MKhL0=;
+	b=Cn0l0UjM+Srl0Xo8K62nKZALbXgcQdExCDy3FrLjg9IcheousoiU+LAmAeHcXql5i1
+	BhXPZJfPXV7oVN1/BDfijx7FCg9Jipdh5zPEnci5GgOxK4zQMFp/aeWb6SiyuOyXZBpp
+	/1AMAH6L6Z8GqN1bbW0wMLM8lbJwfgWrVXDGk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=cb9ETA6co287lSC3/wFLEAAPE2k47SKaCnzlkfQO01CF5YgUwq0pc3fFYDSzNyXg+V
+	Cw+iX1fDED5V0AdRiF3pflBQx6c/0e80C8FgW6L+Ka2XVq8/fdY0bhYACCjDOHOOD3u/
+	2AGCZGSid36DtFYGZCyQznHWCccoICvoWsFV0=
+MIME-Version: 1.0
+Received: by 10.231.149.12 with SMTP id r12mr959203ibv.185.1282909712564; Fri,
+	27 Aug 2010 04:48:32 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Fri, 27 Aug 2010 04:48:32 -0700 (PDT)
+Date: Fri, 27 Aug 2010 13:48:32 +0200
+Message-ID: <AANLkTimHJqkoxBAhBo=HJDqC=joPovjO6joi2sXiLJHM@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Fri, 27 Aug 2010 13:08:45 +0200
-Message-ID: <i586bt$t12$1@dough.gmane.org>
-References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
-	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <1282896714-3167-3-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
+Subject: lemon install
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,67 +48,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 27 Aug 2010 11:09:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 27 Aug 2010 11:49:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi all,
 
-On 27-08-10 10:11, Khem Raj wrote:
-> * Move recipes to nonwotking which are depending upon other recipes
->   which are already in nonworking state.
-> 
-> * Fix other recipes for renamed dependencies etc.
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/angstrom/angstrom-bootmanager.bb           |    2 +-
+No idea who is responsible for lemon but triggered by Fasas I noticed this:
 
-NAK
+do_install() {
+	install -d ${D}${bindir}
+	install -m 0755 lemon ${D}${bindir}
+	install -m 0644 lempar.c ${D}${bindir}
+	install -d ${D}${mandir}/man1
+	install -m 0644 ${WORKDIR}/lemon.1 ${D}${mandir}/man1/
+}
 
->  recipes/esc/esc-node-demo_git.bb                   |    4 +-
 
-NAK
+A .c file that is copied to bindir?
+I know this is a parser, but I would expect .c files to be placed in a
+different location.
+Can someone shed a light on this?
+Or, even better: fix this?
 
->  recipes/meta/meta-toolchain-arago-dvsdk.bb         |    1 +
-
-NAK
-
->  recipes/sugar/sugar-fructose.bb                    |    2 +-
-
-NAK
-
->  recipes/tasks/task-arago-toolchain-target.bb       |    3 +-
-
-NAK
-
->  recipes/tasks/task-demo-x11.bb                     |   17 ++---
-
-NAK
-
->  recipes/tasks/task-gmae.bb                         |    7 ++
-
-NAK
-
->  recipes/tasks/task-gpe.bb                          |    6 +-
-
-NAK
-
->  recipes/udev/udev-compat141_141.bb                 |    6 ++-
-
-NAK
-
->  recipes/vlc/vlc-davinci_0.8.6h.bb                  |    2 +-
-
-NAK
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMd5y9MkyGM64RGpERAp7CAJ9Hdw0XIynob+zbnWWDSvB2LMCR7QCggZUJ
-c4ydMxejzuOOqvU2RJYBWxA=
-=RBfq
------END PGP SIGNATURE-----
-
+Thanks!
+Frans.
 
 
