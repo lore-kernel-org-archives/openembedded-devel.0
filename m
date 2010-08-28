@@ -1,44 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <lazy.gopher@gmail.com>) id 1OpTDD-000492-1k
+	(envelope-from <leon.woestenberg@gmail.com>) id 1OpTsP-0001w9-E4
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 23:45:19 +0200
-Received: by iwn2 with SMTP id 2so3583508iwn.6
+	Sun, 29 Aug 2010 00:27:54 +0200
+Received: by fxm6 with SMTP id 6so2813769fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 14:44:49 -0700 (PDT)
+	Sat, 28 Aug 2010 15:27:23 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=45pg+bhsRgtkSZcH6pkjqx5x+hVcKcmXU7wPWPo7O+o=;
-	b=k68npLdGGC3EMSPEKyGBlFbxsQpdlKrmAVwa91zk4yBsoQ2MZnhpKkyHTdoHB17YgX
-	X+H02vgRKYQS0St4BxcKPD+etn4jLaKsX7Z4OJsk2vo6qEBAcEVM8xR+Vb+xE8VQxotW
-	xojUdNLg8Z0IKbYqn05MwS5k3kIjUeZLpW5I0=
+	bh=pbNOhuKueJR9qM/W8DbxFbLga2WwlKxF0nojGcoWCd0=;
+	b=aRGYftlx5JTTvdjlr2NIBQfEPxbLJhAsPbJMd8Kz7+wfQ3UWwmb2V13R0GQ9jmCOYw
+	UO+LQSH3XTsqyrDKnTndhUdtVcTupUi5OhCOG4iCT7UGfYWjVx0yQ4SE6N6s6JU1cODk
+	4g6TZ5mNdavZxOtCsvqoRhwzZYr8uybraCHnU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=McXkgb3PT8uvNn+BOzHHBrEZ6b3Kdh/Dgkpt2Le+lCezDM7ZRZoYTcSoK8lO8NJauH
-	WL7did9oVRGiYlGTxPjFHqdc59h2brCJ1y5bjs4CaLumobtmSWnIqGIOYlrdATylNjcj
-	gQr5y0np5R2owu8OYcVn00FrGlvjY49oeUQqY=
+	b=EYxss4VS0a5GtvcFwEW0V9kRbsLO32O1mDFCajK+SCI33dKncdREh0WnRpBx+MtKTu
+	jVTbvBiORTgJ6/+cmFO4g2AW4v1H9wN6VGIQMMO0ttMrVr7jRbutvcRYUnPaeOiKBHl7
+	KQKKR0OOZXnr6J1vGjnrcC/MyxnKMDSB5GD70=
 MIME-Version: 1.0
-Received: by 10.231.167.67 with SMTP id p3mr3104847iby.20.1283031889879; Sat,
-	28 Aug 2010 14:44:49 -0700 (PDT)
-Received: by 10.231.142.90 with HTTP; Sat, 28 Aug 2010 14:44:49 -0700 (PDT)
-In-Reply-To: <20100828083325.GA10221@rhein.zuhause.netz>
-References: <AANLkTikEXrrN54mzFeDmxwm=kPYpLSz1XJww0tFBVuwW@mail.gmail.com>
-	<20100828083325.GA10221@rhein.zuhause.netz>
-Date: Sat, 28 Aug 2010 23:44:49 +0200
-Message-ID: <AANLkTimJKQE_4wH9SYkS+zGp5Y_hBh3MxDR7PUHQsrab@mail.gmail.com>
-From: Maksym Parkachov <lazy.gopher@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: lazy.gopher@gmail.com
+Received: by 10.239.183.212 with SMTP id v20mr146152hbg.25.1283034441164; Sat,
+	28 Aug 2010 15:27:21 -0700 (PDT)
+Received: by 10.239.152.71 with HTTP; Sat, 28 Aug 2010 15:27:21 -0700 (PDT)
+In-Reply-To: <AANLkTinvhMiZhHC4GrR8Muf-7oPa-j3zBeDWCZrkTd-z@mail.gmail.com>
+References: <AANLkTinvhMiZhHC4GrR8Muf-7oPa-j3zBeDWCZrkTd-z@mail.gmail.com>
+Date: Sun, 29 Aug 2010 00:27:21 +0200
+Message-ID: <AANLkTimH2YnW3CnLFxa6NyNCeC0-jNqy0dhDXS_ddWX_@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Custom kernel + TI - modules
+Subject: Re: Simple srctree example seems not depend on toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,17 +51,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 21:45:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 28 Aug 2010 22:27:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Henning,
+Hello,
 
-thanks for the answer, though this an answer I was fearing to hear.
+On Sat, Aug 28, 2010 at 10:46 PM, Leon Woestenberg
+<leon.woestenberg@gmail.com> wrote:
+> in an attempt to learn how to use srctree I am hitting either 1) an
+> oversight on my behalf or 2) a bug in srctree.bbclass 3) something
+> else
+>
+After further debugging I am more sure I'm seeing wrong behaviour from
+srctree.bbclass.
 
-Cheers,
-Maksym.
+If I change "inherit srctree" into "inherit autotools" (just for
+testing, there is no real dependency on autotools) the toolchain gets
+built first.
+Also, if I remote "inherit srctree" the toolchain gets built first.
+If I use "inherit srctree" the toolchain does not get built.
+As a workaround I tried to add DEPENDS = "helloworld" and was
+surprised that this dependency was not effective.
 
-> TI-Stuff is only known to work with 2.6.29-psp or 2.6.32-psp. To my Knowledge
-> there is no variant for 2.6.33.
+In all faulty cases, bitbake tries to build my recipe right away,
+failing on the toolchain not being built yet.
+
+I suspect the dependency mangling in srctree.bbclass to be faulty.
+
+I'll go from here. A minimal test case is online at
+http://www.sidebranch.com/openembedded/helloworld2.tar.bz2.
+Extract inside openembedded.git/
+
+Copy of the latest test bb below:
+
+Regards,
+
+Leon.
+
+
+DESCRIPTION = "Minimal statically compiled Hello world!"
+LICENSE = "GPL"
+PR = "r0"
+
+inherit srctree
+
+# workaround for the facts that srctree seems to ignore
+# run-time dependency on the toolchain
+DEPENDS = "helloworld"
+
+# build in the src/ subdirectory in the recipe directory
+S = "${FILE_DIRNAME}/src"
+
+FILES_${PN}-dbg += "${bindir}/.debug"
+
+do_compile() {
+        oe_runmake
+}
+
+do_install() {
+        export INSTALL_ROOT=${D}
+        make install
+}
+
+
+
+
+
+-- 
+Leon
 
 
