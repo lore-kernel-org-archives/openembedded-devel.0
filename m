@@ -1,25 +1,25 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OpMz0-0001rl-2c for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 17:06:14 +0200
+	id 1OpNHM-0004rc-12 for openembedded-devel@lists.openembedded.org;
+	Sat, 28 Aug 2010 17:25:12 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OpMyY-0002Fq-5V for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 17:05:46 +0200
+	id 1OpNGs-0004Op-LR for openembedded-devel@lists.openembedded.org;
+	Sat, 28 Aug 2010 17:24:42 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 17:05:46 +0200
+	Sat, 28 Aug 2010 17:24:42 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 17:05:46 +0200
+	Sat, 28 Aug 2010 17:24:42 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 28 Aug 2010 17:05:38 +0200
-Message-ID: <i5b8k2$m1l$1@dough.gmane.org>
+Date: Sat, 28 Aug 2010 17:24:34 +0200
+Message-ID: <i5b9ni$qra$1@dough.gmane.org>
 References: <AANLkTinFXpPdAkd79h94z70m_8MbamLd48pzR4sLQs34@mail.gmail.com>	<i5b7mm$iso$1@dough.gmane.org>
 	<AANLkTimui4vCRmhufXA9MGyjWWstr7C=O9tAErBsa-uv@mail.gmail.com>
 Mime-Version: 1.0
@@ -51,7 +51,7 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 15:06:14 -0000
+X-List-Received-Date: Sat, 28 Aug 2010 15:25:13 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
@@ -66,18 +66,30 @@ On 28-08-10 16:55, Chris Larson wrote:
 >> your openssl fiasco is so much work to fix for distro maintainers.
 > 
 > 
-> If someone is missing something, then explain it to them. 
+> If someone is missing something, then explain it to them.  Whining and
+> calling people clueless does absolutely nothing for the project but alienate
+> developers.  If you need to take out your frustration, buy a punching bag,
+> don't do it on the mailing list, please.
 
-Like I did here
-http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/022867.html
-? How many times do I need to explain the same thing to the same person?
-Graeme also pointed it out on multiple occasions this month....
+And Chris, you don't have much right to say anything about this, since I
+raised my frustration with all this to the TSC almost two weeks ago, and
+I have only heard from Holger something and like "I haven't followed OE
+the past months".
+I haven't heard anything else, so keep getting more and more frustrated
+by frans moving goal posts ("ack or nak", "nak with explanation" "only
+naks from flawless maintainers") with the TSC doing seemingly nothing.
+
+I do *not* have the time to read oe-devel daily, nor to do proper test
+builds within a day. Especially not with the current mega patches posted
+for review. I must admit that them being posted for review is an
+improvement, but by the looks of it the respective maintainers don't get
+a say since they aren't doing a perfect job.
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMeSXCMkyGM64RGpERAvq+AKCO/3M2XqAwaoVxHeJyM3GS7itOBgCfX1QP
-a42RepdtB5WnE7LoA/+oaHo=
-=bFcT
+iD8DBQFMeSoyMkyGM64RGpERAoVtAKCL+pF8wx34pS6hSi/+HtA3vXwNSQCeMhgi
+dR0qTSGHVO3iokRIYAd1FnU=
+=YA8h
 -----END PGP SIGNATURE-----
 
 
