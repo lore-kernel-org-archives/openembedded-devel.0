@@ -1,38 +1,38 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OpRy4-0001qj-CY
+	(envelope-from <raj.khem@gmail.com>) id 1OpRxx-0001rn-H6
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 22:25:43 +0200
-Received: by mail-pv0-f175.google.com with SMTP id 6so1648285pvg.6
+	Sat, 28 Aug 2010 22:25:41 +0200
+Received: by pzk2 with SMTP id 2so1637564pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 13:25:07 -0700 (PDT)
+	Sat, 28 Aug 2010 13:24:55 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=TYHNNrdLJv3+y8JkQO83zwxdVVLEuPr0pC8tMZN3bPs=;
-	b=m40gScP7LnsRYnfad2EXRU86hNSmyE9wwO7vDgyNquFw4YAgrb0Suu9QlHWNlM1cIA
-	zYrrY2cFUQwIhqM+SkwnOWLx4i8NJEx4u3QfgPt3D9punXir6OgBYEdF/8zoteazAe7f
-	7LfSLbLjt/d0Oe6xnT/7KZKTSC3WXJ1m6slU0=
+	bh=jZ5KFDafFqKOur263e1ng/i1SvdfpddCKW9SjaZ7Ujs=;
+	b=dVbVw0lpRerG1Yv87DCgEHLgHrpDJ3PFCuBQw9RKIRkac2Tc8FVDLQF5+btWIi6tac
+	JNau7K9ry9aKi0UNooGZEk9tY7HgL0GtSMb/OVZn3vDl+ls/Sa8M1c4CdBBNNXlo5sV8
+	LghrifsWKTIshGwkYo6kfBsComTSEmyKO1B8E=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ibdX4WHpopqDfiWTKTd3erJm+DhTAT0B/2DPYA76NomBXaaFjSev0NSyYE/p3P6Otp
-	xUJA9UrTFn1svB5fjhR3Zbxs7sdYop2I/vsOhTqPcrXt8MmYfmdCifpVlq1TfOjy5xy6
-	nRsAf5Fr65gsEKkQu276ny52PG3RmIPYDhSa0=
-Received: by 10.142.147.7 with SMTP id u7mr2685648wfd.221.1283027106759;
-	Sat, 28 Aug 2010 13:25:06 -0700 (PDT)
+	b=kunk/ab+2+Haexxf1Irb1Xd205YUp7xWxK7bp04wMFW91hw9JmvT/54X/tkenL9lQM
+	+MY4JglnmMVNdYmuZa2n7oB/ufkblA8zx+/560BYJoxzLSrq3NGbP14fPkXJSx7Fq1Pr
+	W2jcK8kwPNpfIuTuHpjiPIm3Z28sBQ82Dh6wQ=
+Received: by 10.142.136.1 with SMTP id j1mr2637472wfd.331.1283027095056;
+	Sat, 28 Aug 2010 13:24:55 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id n2sm6649371wfl.13.2010.08.28.13.25.05
+	by mx.google.com with ESMTPS id n2sm6649371wfl.13.2010.08.28.13.24.53
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 28 Aug 2010 13:25:06 -0700 (PDT)
+	Sat, 28 Aug 2010 13:24:54 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Aug 2010 13:24:31 -0700
-Message-Id: <1283027073-12308-22-git-send-email-raj.khem@gmail.com>
+Date: Sat, 28 Aug 2010 13:24:20 -0700
+Message-Id: <1283027073-12308-11-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
 References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.210.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 21/23] xqt2_20060509.bb: DEPEND on libxmu instead of xmu
+Subject: [PATCH 10/23] task-gpe.bb: virtual/xserver can not be RDEPEND'ed on it can be DEPEND'ed upon
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,21 +58,33 @@ X-List-Received-Date: Sat, 28 Aug 2010 20:25:44 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/xqt2/xqt2_20060509.bb |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/tasks/task-gpe.bb |    6 ++++--
+ 1 files changed, 4 insertions(+), 2 deletions(-)
 
-diff --git a/recipes/xqt2/xqt2_20060509.bb b/recipes/xqt2/xqt2_20060509.bb
-index 7634d27..4492bc7 100644
---- a/recipes/xqt2/xqt2_20060509.bb
-+++ b/recipes/xqt2/xqt2_20060509.bb
-@@ -1,6 +1,6 @@
- DESCRIPTION = "Xqt2 is an X-Server than runs within the Opie environment"
- HOMEPAGE = "http://xqt.sourceforge.jp"
--DEPENDS = "freetype libxi xmu flex-native virtual/libqte2 libqpe-opie"
-+DEPENDS = "freetype libxi libxmu flex-native virtual/libqte2 libqpe-opie"
- LICENSE = "GPL"
- SECTION = "opie/applications"
- APPTYPE = "binary"
+diff --git a/recipes/tasks/task-gpe.bb b/recipes/tasks/task-gpe.bb
+index 785f018..92efb3a 100644
+--- a/recipes/tasks/task-gpe.bb
++++ b/recipes/tasks/task-gpe.bb
+@@ -18,7 +18,9 @@ PACKAGES = "\
+     gpe-task-sectest"
+ 
+ RDEPENDS_gpe-base-depends = "\
+-    diet-x11 \
++    diet-x11"
++
++DEPENDS_gpe-base-depends = "\
+     virtual/xserver"
+ 
+ RDEPENDS_gpe-task-base = "\
+@@ -102,7 +104,7 @@ RDEPENDS_gpe-task-games = "\
+     xdemineur"
+ 
+ RDEPENDS_gpe-task-connectivity = "\
+-    gpe-mini-browser"
++    gpe-mini-browser2"
+ #    gaim
+ #    linphone-hh
+ 
 -- 
 1.7.1
 
