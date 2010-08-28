@@ -1,31 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OpNad-0005iX-DD
+	(envelope-from <kergoth@gmail.com>) id 1OpNg4-0002qi-Hr
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 17:45:09 +0200
-Received: by wwb31 with SMTP id 31so4556183wwb.24
+	Sat, 28 Aug 2010 17:50:45 +0200
+Received: by wyg36 with SMTP id 36so4417113wyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 08:44:33 -0700 (PDT)
+	Sat, 28 Aug 2010 08:50:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:sender:received
 	:in-reply-to:references:from:date:x-google-sender-auth:message-id
 	:subject:to:content-type;
-	bh=jb6Cos+EsLKnGc69lEsWprISel4Fho9axVt0Q4hv3Uk=;
-	b=mVT0FHSYFUM7UjeLoDmpBuZXjF1fm7zTszyj/yiMXg7Zl4wEbMb0w9RGLkhFYFKk/y
-	eY6gGfEI4i5fMcHYSDnVOOCDevIahEhzE1ZfHi+Eeg0MTHBhtfzkeeyqquBFn4d3SmMN
-	udR5SzXfjUrBpXlg2IwFgRRZ0t7U0BsumZyMs=
+	bh=lFi6S+lLtgLoYv7t0gSbE7ks3HS40Ny4V2C56ESiDGc=;
+	b=LV0ezbpyG1AX1lngYPfVo16ztE4cEQ+nGY97/59i+x6a7gPIIgMourPpy6s6w9m83n
+	iqnJa89pTOqYh68UYfBw7y8u3+ITtQfeph/ymfm5txsjs2WzndusVz36I83VJ9X+6d8N
+	hVX/r5s53vMDxg+k7rvmkmbrnfYBPH8K3KhLQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:sender:in-reply-to:references:from:date
 	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=OGz77pIdeUyK/rOUBff4HvSxHJ1GdUBJcbv0kJb3gDf3tIcRtWTohV9469H3hKgDWT
-	CezqNltSB6Kxi6fpeRJ4uoeV15IlztBfzQulfHMB2u24cKHMDNAlO71/+yU65ysL0vus
-	NEZMatj7sf1C6BZdETDhdAEUnNS2/tnna7w2M=
-Received: by 10.227.127.194 with SMTP id h2mr2405996wbs.74.1283010273285; Sat,
-	28 Aug 2010 08:44:33 -0700 (PDT)
+	b=RjoWHMnNrNARAFS5H6H++Q1X/q7a9z7006L+Xzed4y3fclGWIMKiYj/0+FJ17N2f8Z
+	GprGM83o27AU1RgA8Qy8Cr3JgBPip2pgX/GS8/mTgJ9FcNTA7upvYLF9pjXPeywzt8ST
+	PmhztuQMPLGZUPIChI/URQAS4XSSF0Hf7nBKU=
+Received: by 10.216.48.146 with SMTP id v18mr2488938web.56.1283010614198; Sat,
+	28 Aug 2010 08:50:14 -0700 (PDT)
 MIME-Version: 1.0
 Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Sat, 28 Aug 2010 08:44:13 -0700 (PDT)
-In-Reply-To: <4C79253F.7010504@balister.org>
+Received: by 10.216.237.167 with HTTP; Sat, 28 Aug 2010 08:49:54 -0700 (PDT)
+In-Reply-To: <i5b82o$kgn$1@dough.gmane.org>
 References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
 	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
 	<i586bt$t12$1@dough.gmane.org>
@@ -34,17 +34,17 @@ References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
 	<AANLkTi=stV1ahzagn-7Fzq73pL3xYDDBZpAsfRUbA86v@mail.gmail.com>
 	<4C790CCD.9060403@balister.org>
 	<AANLkTinMWegmS0vGvqXnkrPPqHXnDh+YkB-sxJ95KcTp@mail.gmail.com>
-	<4C79253F.7010504@balister.org>
+	<i5b82o$kgn$1@dough.gmane.org>
 From: Chris Larson <clarson@kergoth.com>
-Date: Sat, 28 Aug 2010 08:44:13 -0700
-X-Google-Sender-Auth: lXI-lvifxn2--yYCQpMFWeWAjbQ
-Message-ID: <AANLkTi=qHjTPQ6rqFAP8OpTHnYHS+K0R9vjkBCs0SW5=@mail.gmail.com>
+Date: Sat, 28 Aug 2010 08:49:54 -0700
+X-Google-Sender-Auth: ENYwCETs-U-POtV5oPL3y2m97Ho
+Message-ID: <AANLkTinUOXAUg66Pgs=JM_19Lw_66HWRztCbD-ww1=9Z@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Connect-IP: 74.125.82.175
 X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -63,78 +63,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 15:45:09 -0000
+X-List-Received-Date: Sat, 28 Aug 2010 15:50:45 -0000
 Content-Type: text/plain; charset=UTF-8
 
-On Sat, Aug 28, 2010 at 8:03 AM, Philip Balister <philip@balister.org>wrote:
+On Sat, Aug 28, 2010 at 7:56 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
-> On 08/28/2010 10:39 AM, Chris Larson wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
 >
->> On Sat, Aug 28, 2010 at 6:19 AM, Philip Balister<philip@balister.org
->> >wrote:
->>
->>  On 08/28/2010 07:51 AM, Frans Meulenbroeks wrote:
->>>
->>>  2010/8/28 Koen Kooi<k.kooi@student.utwente.nl>:
->>>>
->>>>  -----BEGIN PGP SIGNED MESSAGE-----
->>>>> Hash: SHA1
->>>>>
->>>>> Your patch does too many things at once, to recipes I maintain, so
->>>>> please split it up per recipe and I'll ack/nack the seperate patches.
->>>>> I'm getting suck of such jumbo patches that can't be reverted cleanly.
->>>>> I'm still dealing with the fallout from the crappy deletions frans did,
->>>>> so patches like this aren't helping.
->>>>>
->>>>>
->>>> Ehm, I did not see a request to revert any of the deletions.
->>>> There have been two issues (openssl and docbook-sgml-dtd, and both
->>>> have been reverted in 16 hrs or so. (and later on one or two other
->>>> deletions have been reverted on request of the recipe owners, but
->>>> these did not cause any breakage afaik).
->>>> So I really don't know what fallout you are dealing with.
->>>> And my deletions were not exactly jumbo patches and were very easy to
->>>> revert if needed.
->>>>
->>>> And as I already wrote before: dev head is bleeding edge, so sometimes
->>>> things go wrong. Can happen. No big deal if resolved quickly. That is
->>>> the risk of living on the edge. If you can't live with that use the
->>>> stable branch or create your own branch where you are in full control.
->>>> The root cause is that you do what can be considered production work
->>>> on dev head. Most seasoned software engineers will agree that that is
->>>> not very wise and
->>>>
->>>> BTW apparently your perception on my work apparently is a minority
->>>> viewpoint. If I recall correctly two people complained to me and at
->>>> least 5 mentioned to me that they appreciated my activity.
->>>>
->>>>
->>> Add my voice to the "minority". You've been pushing some large patches
->>> that
->>> work for you, but may not for others. There is always work in progress in
->>> .dev, so all recipes may not meet your standards.
->>>
->>
->>
->> *Every* patch that gets proposed is a patch that "works for you, but may
->> not
->> for others".  You simply can't test every combination for every change you
->> make, it's not possible.  As long as these sorts of patches go the list
->> for
->> review, as they now seem to be, I don't see the problem.
->>
+> On 28-08-10 16:39, Chris Larson wrote:
 >
-> Yes, but 99% of patches are small enough that they are easily fixable as
-> problems come up, and the impact is limited.
+> > *Every* patch that gets proposed is a patch that "works for you, but may
+> not
+> > for others".  You simply can't test every combination for every change
+> you
+> > make, it's not possible.  As long as these sorts of patches go the list
+> for
+> > review, as they now seem to be, I don't see the problem.
 >
-> I'd also question the wisdom of doing changes with broad impact during
-> July/August. It seems like a large number of people are on extended
-> vacations during this time period.
+> You mean like the patch that removed the default openssl version for
+> *every* distro and introduced an SOVERSION change to libs that can't be
+> parallel installed, that got pushed without review? That one?
+>
+
+No.  That patch was not posted for review, and I just stated that the
+patches need to go to the list for review, and I stated "patch that gets
+proposed", not "patch that gets pushed", but I guess you're too frustrated
+to bother reading the mail you reply to.
 
 
-Are we going to block off every other part of the year where people take
-vacations too?  Please.  We'd better never do any real development during
-Christmas or New Years either.
+> So a patch was was tested nor reviewed that broke a lot got pushed and
+> the person who pushed it refuses to help with the cleanup, just awesome.
+
+
+I realize its more fun to ignore what people are saying and continue to
+bring up something that was obviously not well done due to the lack of
+review on the mailing list, but you're not accomplishing anything by doing
+so.
 -- 
 Christopher Larson
 clarson at kergoth dot com
