@@ -1,38 +1,34 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OpRkK-0005y9-RU
+Received: from smtpfb2-g21.free.fr ([212.27.42.10])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OpRlb-0006ue-9A
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 22:11:25 +0200
-Received: (qmail 6493 invoked by uid 503); 28 Aug 2010 20:32:12 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 28 Aug 2010 20:32:12 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 28 Aug 2010 22:10:56 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 28 Aug 2010 22:10:55 +0200
-Message-ID: <4C796D4F.3010405@eukrea.com>
-Date: Sat, 28 Aug 2010 22:10:55 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
-MIME-Version: 1.0
+	Sat, 28 Aug 2010 22:12:45 +0200
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb2-g21.free.fr (Postfix) with ESMTP id 53264D1AFE9
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 28 Aug 2010 22:06:59 +0200 (CEST)
+Received: from localhost.localdomain (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id A48E94B004D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 28 Aug 2010 22:06:54 +0200 (CEST)
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
+Date: Sat, 28 Aug 2010 22:06:36 +0200
+Message-Id: <1283025996-28435-2-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1283025996-28435-1-git-send-email-eric@eukrea.com>
 References: <4C776F96.2000307@eukrea.com>
 	<1283025996-28435-1-git-send-email-eric@eukrea.com>
-In-Reply-To: <1283025996-28435-1-git-send-email-eric@eukrea.com>
-X-Ovh-Tracer-Id: 7876514273441066313
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 212.27.42.10
 X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] ncurses-5.7 : fix sdk build
+Subject: [PATCH 2/2] sdk.bbclass: allow virtclass-sdk override
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,15 +42,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 20:11:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sat, 28 Aug 2010 20:12:45 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Le 28/08/2010 22:06, Eric Bénard a écrit :
-> fix ncurses-sdk build (tested on ubuntu using angstrom 2010.x)
->
-forget it, there is still a problem with the splited packages for libraries.
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ classes/sdk.bbclass |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Eric
+diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
+index 198d147..c8fa076 100644
+--- a/classes/sdk.bbclass
++++ b/classes/sdk.bbclass
+@@ -66,3 +66,5 @@ FILES_${PN}-dbg +=3D "${prefix}/.debug \
+                    "
+=20
+ export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR_HOST}"
++
++OVERRIDES .=3D ":virtclass-sdk"
+--=20
+1.6.3.3
+
 
 
