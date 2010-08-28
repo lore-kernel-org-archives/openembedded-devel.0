@@ -1,46 +1,46 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OpRxk-0001qj-Sk
+	(envelope-from <raj.khem@gmail.com>) id 1OpRxl-0001qz-Uk
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 22:25:18 +0200
-Received: by mail-pv0-f175.google.com with SMTP id 6so1648285pvg.6
+	Sat, 28 Aug 2010 22:25:19 +0200
+Received: by pxi11 with SMTP id 11so1624265pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 13:24:48 -0700 (PDT)
+	Sat, 28 Aug 2010 13:24:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:from:to:cc:subject:date
 	:message-id:x-mailer:in-reply-to:references;
-	bh=RA/OzFu3KU+qcc2UPTZlQ+CBT15E08J+IWXInMkeOC0=;
-	b=vzRZS03RInbbYjVnG7SF4M+NRKCPqF0nzJiZvWy/Dt/B2du40bZdBGVm0swc6VMSYv
-	tP+NbIiNKnkZHeSJxi8f93MrT85K1S+inJYd4oWuMH8OmaDYswLaJFNzAycV6Koz+wOM
-	buWKr0arlZKIuvOTK9AUfe5eYfzO2Rc8Nd0nM=
+	bh=VPL/ajosdmdB5rtI/mIOhx0eKNzlg9UouXgi0pT93gk=;
+	b=UbmbJCSMgNIkndU4qkfwRcvp8fQErUSgmN5Ee+MR6VV+Wh3EBjGh9fgg+BPm1qC5GA
+	1iw/VlipzcrkGvS7RWAYrb/4Gq7REnRoKm1qa3YjxgyT53veKqaci6hOF6YDUYdXQ3yE
+	3IcpiXnvx7vy6aXAu6O1L04/Nnf7A8N1r8EV0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=ThoCNWvj1dsOnEW1IxgRlM4qMrlb6b6/YQJSo7vJF0e7VNLECzT0+xb/TOyDJN7BRe
-	wOAbmSVoD3VZ9pVW1pfOVE8D+zM1odcrgA1rTqE4h+YF7XxqcaVqmyeOO4vE1yOqovVy
-	XBUJw7ZOHcDi/tyhVrcwts+IqUrJXkYqSupYM=
-Received: by 10.142.49.6 with SMTP id w6mr2775229wfw.98.1283027088174;
-	Sat, 28 Aug 2010 13:24:48 -0700 (PDT)
+	b=UQZyu4DQthxK9H2gOa1C/o91RyhWY3L8xrb8eFNVRyDL6x4xYbegS4ki8CM48wkLgR
+	nOGXhhmmxi0mCaAIgO6AeloCVG4MmNd8IhIKkVS9SrP5Gj47TPejNo7iczUFX9Ftk34r
+	h0Zlj6LB1uq/iSupQPEQ7N+MRPaDJYpwtz6dA=
+Received: by 10.142.232.13 with SMTP id e13mr2770805wfh.87.1283027086092;
+	Sat, 28 Aug 2010 13:24:46 -0700 (PDT)
 Received: from localhost.localdomain
 	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id n2sm6649371wfl.13.2010.08.28.13.24.47
+	by mx.google.com with ESMTPS id n2sm6649371wfl.13.2010.08.28.13.24.45
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sat, 28 Aug 2010 13:24:47 -0700 (PDT)
+	Sat, 28 Aug 2010 13:24:45 -0700 (PDT)
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 28 Aug 2010 13:24:14 -0700
-Message-Id: <1283027073-12308-5-git-send-email-raj.khem@gmail.com>
+Date: Sat, 28 Aug 2010 13:24:12 -0700
+Message-Id: <1283027073-12308-3-git-send-email-raj.khem@gmail.com>
 X-Mailer: git-send-email 1.7.1
 In-Reply-To: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
 References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS,
+	TVD_SPACE_RATIO autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 04/23] esc-node-demo_git.bb: Do not RDEPEND on a recipe yet which is under review
+Subject: [PATCH 02/23] clutter_0.6svn.bb, clutter-gtk-0.6_git.bb: Unused and unbuildable for long hence removed.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,27 +54,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 20:25:19 -0000
+X-List-Received-Date: Sat, 28 Aug 2010 20:25:20 -0000
 
 Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/esc/esc-node-demo_git.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ recipes/clutter/clutter-gtk-0.6_git.bb |   10 ----------
+ recipes/clutter/clutter_0.6svn.bb      |   10 ----------
+ 2 files changed, 0 insertions(+), 20 deletions(-)
+ delete mode 100644 recipes/clutter/clutter-gtk-0.6_git.bb
+ delete mode 100644 recipes/clutter/clutter_0.6svn.bb
 
-diff --git a/recipes/esc/esc-node-demo_git.bb b/recipes/esc/esc-node-demo_git.bb
-index 814771b..f29b7ba 100644
---- a/recipes/esc/esc-node-demo_git.bb
-+++ b/recipes/esc/esc-node-demo_git.bb
-@@ -23,7 +23,7 @@ do_install() {
-         install -m 0755 ${S}/${i} ${D}${datadir}/esc-training
-     done
- }
+diff --git a/recipes/clutter/clutter-gtk-0.6_git.bb b/recipes/clutter/clutter-gtk-0.6_git.bb
+deleted file mode 100644
+index e37c4c9..0000000
+--- a/recipes/clutter/clutter-gtk-0.6_git.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require clutter-gtk.inc
 -
--RDEPENDS_${PN} = "nodejs"
-+# disable for now until nodejs recipe is committed
-+#RDEPENDS_${PN} = "nodejs"
- FILES_${PN} += "${datadir}/esc-training"
- 
+-SRCREV = "2ba362a1a223c2b28541030a80aa11191615340a"
+-PV = "0.6.0+git${SRCREV}"
+-
+-DEPENDS += "clutter-0.6"
+-
+-SRC_URI = "git://git.clutter-project.org/clutter-gtk.git;protocol=git;branch=clutter-gtk-0-6"
+-
+-S = "${WORKDIR}/git"
+diff --git a/recipes/clutter/clutter_0.6svn.bb b/recipes/clutter/clutter_0.6svn.bb
+deleted file mode 100644
+index e86cbaf..0000000
+--- a/recipes/clutter/clutter_0.6svn.bb
++++ /dev/null
+@@ -1,10 +0,0 @@
+-require clutter.inc
+-
+-PV = "0.6.0+svnr${SRCPV}"
+-PR = "${INC_PR}.0"
+-SRCREV = "3240"
+-
+-SRC_URI = "svn://svn.o-hand.com/repos/clutter/branches;module=clutter-0-6;proto=http \
+-	   file://enable_tests-0.6.patch "
+-
+-S = "${WORKDIR}/clutter-0-6"
 -- 
 1.7.1
 
