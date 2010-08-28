@@ -1,40 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OpMqD-00045f-5g for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 16:57:10 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OpMpe-0006Um-7P for openembedded-devel@lists.openembedded.org;
-	Sat, 28 Aug 2010 16:56:34 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 16:56:34 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 16:56:34 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	(envelope-from <philip@balister.org>) id 1OpMwp-0001kz-VS
+	for openembedded-devel@lists.openembedded.org;
+	Sat, 28 Aug 2010 17:04:01 +0200
+Received: (qmail 5418 invoked by uid 1003); 28 Aug 2010 15:03:28 -0000
+Received: from pool-96-240-180-89.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.89)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	28 Aug 2010 15:03:27 -0000
+Message-ID: <4C79253F.7010504@balister.org>
+Date: Sat, 28 Aug 2010 11:03:27 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 28 Aug 2010 16:56:24 +0200
-Message-ID: <i5b82o$kgn$1@dough.gmane.org>
 References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>	<i586bt$t12$1@dough.gmane.org>	<AANLkTikWe-88_U7FmV2mi4=J6XV-A3-nYUqJdjDNzOA9@mail.gmail.com>	<i5aoas$sja$2@dough.gmane.org>	<AANLkTi=stV1ahzagn-7Fzq73pL3xYDDBZpAsfRUbA86v@mail.gmail.com>	<4C790CCD.9060403@balister.org>
 	<AANLkTinMWegmS0vGvqXnkrPPqHXnDh+YkB-sxJ95KcTp@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
 In-Reply-To: <AANLkTinMWegmS0vGvqXnkrPPqHXnDh+YkB-sxJ95KcTp@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
@@ -51,42 +40,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 14:57:10 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 28 Aug 2010 15:04:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 28-08-10 16:39, Chris Larson wrote:
-
+On 08/28/2010 10:39 AM, Chris Larson wrote:
+> On Sat, Aug 28, 2010 at 6:19 AM, Philip Balister<philip@balister.org>wrote:
+>
+>> On 08/28/2010 07:51 AM, Frans Meulenbroeks wrote:
+>>
+>>> 2010/8/28 Koen Kooi<k.kooi@student.utwente.nl>:
+>>>
+>>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>>> Hash: SHA1
+>>>>
+>>>> Your patch does too many things at once, to recipes I maintain, so
+>>>> please split it up per recipe and I'll ack/nack the seperate patches.
+>>>> I'm getting suck of such jumbo patches that can't be reverted cleanly.
+>>>> I'm still dealing with the fallout from the crappy deletions frans did,
+>>>> so patches like this aren't helping.
+>>>>
+>>>
+>>> Ehm, I did not see a request to revert any of the deletions.
+>>> There have been two issues (openssl and docbook-sgml-dtd, and both
+>>> have been reverted in 16 hrs or so. (and later on one or two other
+>>> deletions have been reverted on request of the recipe owners, but
+>>> these did not cause any breakage afaik).
+>>> So I really don't know what fallout you are dealing with.
+>>> And my deletions were not exactly jumbo patches and were very easy to
+>>> revert if needed.
+>>>
+>>> And as I already wrote before: dev head is bleeding edge, so sometimes
+>>> things go wrong. Can happen. No big deal if resolved quickly. That is
+>>> the risk of living on the edge. If you can't live with that use the
+>>> stable branch or create your own branch where you are in full control.
+>>> The root cause is that you do what can be considered production work
+>>> on dev head. Most seasoned software engineers will agree that that is
+>>> not very wise and
+>>>
+>>> BTW apparently your perception on my work apparently is a minority
+>>> viewpoint. If I recall correctly two people complained to me and at
+>>> least 5 mentioned to me that they appreciated my activity.
+>>>
+>>
+>> Add my voice to the "minority". You've been pushing some large patches that
+>> work for you, but may not for others. There is always work in progress in
+>> .dev, so all recipes may not meet your standards.
+>
+>
 > *Every* patch that gets proposed is a patch that "works for you, but may not
 > for others".  You simply can't test every combination for every change you
 > make, it's not possible.  As long as these sorts of patches go the list for
 > review, as they now seem to be, I don't see the problem.
 
-You mean like the patch that removed the default openssl version for
-*every* distro and introduced an SOVERSION change to libs that can't be
-parallel installed, that got pushed without review? That one?
+Yes, but 99% of patches are small enough that they are easily fixable as 
+problems come up, and the impact is limited.
 
-Of course reverting fixes it, no problem, we don't have to manually
-check all recipes and packages to see what dynamically links against
-openssl to bump PR and rebuild and upload all of those, of course. And
-of course the person causing the mess did all that to clean it up.
-And no need to check recipes that statically link either.
-</sarcasm>
+I'd also question the wisdom of doing changes with broad impact during 
+July/August. It seems like a large number of people are on extended 
+vacations during this time period.
 
-So a patch was was tested nor reviewed that broke a lot got pushed and
-the person who pushed it refuses to help with the cleanup, just awesome.
-
-Drat, that was a bit sarcastic as well.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMeSOYMkyGM64RGpERAn/UAJ4loSu9hp9c9gsrAZiaaXlUNamOEQCfSjee
-8QSoyXOItmwJrkZcyPZHE7g=
-=mhuT
------END PGP SIGNATURE-----
-
+Philip
 
 
