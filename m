@@ -1,39 +1,38 @@
-Received: from mail.cvg.de ([62.153.82.30])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OpoDi-00029b-LR
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Opogf-0004g9-DA
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 22:11:53 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o7TKAgbC021877
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 22:10:43 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OpoDB-0002N7-So
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 22:10:42 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <4C79C7C4.1050304@mwester.net> <4C7A302A.5060606@eukrea.com>
-Date: Sun, 29 Aug 2010 22:10:41 +0200
-In-Reply-To: <4C7A302A.5060606@eukrea.com> ("Eric =?iso-8859-1?Q?B=E9nard?=
-	=?iso-8859-1?Q?=22's?= message of "Sun,
-	29 Aug 2010 12:02:18 +0200")
-Message-ID: <lyhbidmb7i.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Sun, 29 Aug 2010 22:41:11 +0200
+Received: (qmail 10563 invoked by uid 503); 29 Aug 2010 21:02:03 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 29 Aug 2010 21:02:03 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 29 Aug 2010 22:40:39 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 29 Aug 2010 22:40:37 +0200
+Message-ID: <4C7AC5BF.9030502@eukrea.com>
+Date: Sun, 29 Aug 2010 22:40:31 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+To: openembedded-devel@lists.openembedded.org
+References: <1283078750-25729-1-git-send-email-eric@eukrea.com>	<1283080970-2494-1-git-send-email-eric@eukrea.com>	<lywrr95ys7.fsf@ensc-virt.intern.sigma-chemnitz.de>	<4C7A6EFD.5010803@eukrea.com>
+	<lylj7pmbbz.fsf@ensc-virt.intern.sigma-chemnitz.de>
+In-Reply-To: <lylj7pmbbz.fsf@ensc-virt.intern.sigma-chemnitz.de>
+X-Ovh-Tracer-Id: 14250796596701015369
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: ncurses 5.7 doesn't build libtermcap anymore?
+Subject: Re: [PATCH v2] ncurses-5.7 : fix sdk build + add libtermcap link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,18 +46,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 20:11:54 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 29 Aug 2010 20:41:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Eric B=E9nard <eric@eukrea.com> writes:
+Hi Enrico,
 
-> 5.7 is also broken for sdk build,=20
+Le 29/08/2010 22:08, Enrico Scholz a écrit :
+> I do not see a reason, not to apply '--with-ticlib' to widec.  I changed
+> this in git.
+>
+>
+> Thanks for noticing it
 
-I think that I fixed widec builds for native targets in git. 'sdk' and
-'native' works on Fedora 13 now; please check other distributions.
+well if the meaning of noticing is spending 2 days on this recipe trying 
+to fix it, yes I noticed it :-)
+Thanks for finishing the work, I'm currently rebuilding from scratch to 
+test.
 
-
-Enrico
+Eric
 
 
