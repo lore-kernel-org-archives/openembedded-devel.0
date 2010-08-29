@@ -1,25 +1,21 @@
-Received: from smtpfb1-g21.free.fr ([212.27.42.9])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OpfJW-00072d-GR
+	(envelope-from <eric@eukrea.com>) id 1OpfPN-0007Fk-Dk
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 12:40:39 +0200
-Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
-	by smtpfb1-g21.free.fr (Postfix) with ESMTP id B9B2077C632
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 12:40:08 +0200 (CEST)
+	Sun, 29 Aug 2010 12:46:42 +0200
 Received: from localhost.localdomain (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id 15BA64B017D
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 02B7B4B009F
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 12:40:03 +0200 (CEST)
+	Sun, 29 Aug 2010 12:46:08 +0200 (CEST)
 From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Sun, 29 Aug 2010 12:39:46 +0200
-Message-Id: <1283078386-20947-1-git-send-email-eric@eukrea.com>
+Date: Sun, 29 Aug 2010 12:45:50 +0200
+Message-Id: <1283078750-25729-1-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
 In-Reply-To: <4C7A302A.5060606@eukrea.com>
 References: <4C7A302A.5060606@eukrea.com>
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.27.42.9
+X-SA-Exim-Connect-IP: 212.27.42.2
 X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -27,7 +23,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] sdk.bbclass: allow virtclass-sdk override
+Subject: [PATCH] ncurses-5.7 : fix sdk build + add libtermcap link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,25 +37,119 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 10:40:39 -0000
+X-List-Received-Date: Sun, 29 Aug 2010 10:46:42 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
+- fix ncurses-sdk build (compile tested on ubuntu using angstrom
+2010.x and 2008.1 for armv6 target on i686 host)
+- fix asterisk build (by adding libtermcap's link), compile tested
+on angstrom 2008.1 for armv6
+
 Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
 ---
- classes/sdk.bbclass |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes/ncurses/ncurses_5.7.bb |   35 +++++++++++++++++++---------------=
+-
+ 1 files changed, 19 insertions(+), 16 deletions(-)
 
-diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
-index 198d147..c8fa076 100644
---- a/classes/sdk.bbclass
-+++ b/classes/sdk.bbclass
-@@ -66,3 +66,5 @@ FILES_${PN}-dbg +=3D "${prefix}/.debug \
-                    "
+diff --git a/recipes/ncurses/ncurses_5.7.bb b/recipes/ncurses/ncurses_5.7=
+.bb
+index 57374ec..6476a8b 100644
+--- a/recipes/ncurses/ncurses_5.7.bb
++++ b/recipes/ncurses/ncurses_5.7.bb
+@@ -4,7 +4,7 @@ LICENSE =3D "MIT"
+ SECTION =3D "libs"
+ PATCHDATE =3D "20100501"
+ PKGV =3D "${PV}+${PATCHDATE}"
+-PR =3D "r11"
++PR =3D "r12"
 =20
- export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR_HOST}"
+ DEPENDS =3D "ncurses-native unifdef-native"
+ DEPENDS_virtclass-native =3D "unifdef-native"
+@@ -32,15 +32,15 @@ EXTRA_AUTORECONF =3D "-I m4"
+ ENABLE_WIDEC =3D "true"
+ # Build breaks on Ubuntu else :(
+ ENABLE_WIDEC_virtclass-native =3D "false"
+-
++ENABLE_WIDEC_virtclass-sdk =3D "false"
+=20
+ # Override the function from the autotools class; ncurses requires a
+ # patched autoconf213 to generate the configure script. This autoconf
+ # is not available so that the shipped script will be used.
+ do_configure() {
+         for i in \
+-        'narrowc --with-ticlib' \
+-        'widec   --enable-widec --without-progs'; do
++        'narrowc  --with-ticlib' \
++        'widec    --with-ticlib --enable-widec --without-progs'; do
+                 set -- $i
+                 mkdir -p $1
+                 cd $1
+@@ -144,6 +144,11 @@ do_install() {
+                 ln -sf xterm-color ${D}${sysconfdir}/terminfo/x/xterm
+         fi
+=20
++	cd ${D}${libdir}
++	ln -sf libncurses.so libtermcap.so
++	ln -sf libncurses.a libtermcap.a
++	ln -sf libncurses.so.5 libtermcap.so.5
 +
-+OVERRIDES .=3D ":virtclass-sdk"
+         if [ "${PN}" =3D "ncurses" ]; then
+                 mv ${D}${bindir}/clear ${D}${bindir}/clear.${PN}
+                 mv ${D}${bindir}/reset ${D}${bindir}/reset.${PN}
+@@ -155,7 +160,6 @@ python populate_packages_prepend () {
+         do_split_packages(d, libdir, '^lib(.*)\.so\..*', 'ncurses-lib%s'=
+, 'ncurses %s library', prepend=3DTrue, extra_depends =3D '', allow_links=
+=3DTrue)
+ }
+=20
+-
+ pkg_postinst_ncurses-tools () {
+         if [ "${PN}" =3D "ncurses" ]; then
+                 update-alternatives --install ${bindir}/clear clear clea=
+r.${PN} 100
+@@ -172,16 +176,15 @@ pkg_prerm_ncurses-tools () {
+=20
+ BBCLASSEXTEND =3D "native sdk"
+=20
+-PACKAGES =3D " \
+-  ncurses-dbg \
+-  ncurses-dev \
+-  ncurses-doc \
+-  ncurses-tools \
+-  ncurses \
+-  ncurses-static \
+-  ncurses-terminfo \
++PACKAGES +=3D " \
++  ${PN}-tools \
++  ${PN}-terminfo \
+ "
+-RSUGGESTS_${PN} =3D "ncurses-terminfo"
++
++RSUGGESTS_${PN} =3D "${PN}-terminfo"
++RPROVIDES_${PN} =3D "libncurses5"
++RCONFLICTS_${PN} =3D "libncurses5"
++RREPLACES_${PN} =3D "libncurses5"
+=20
+ FILES_${PN} =3D "\
+   ${bindir}/tput \
+@@ -192,7 +195,7 @@ FILES_${PN} =3D "\
+=20
+ # This keeps only tput/tset in ncurses
+ # clear/reset are in already busybox
+-FILES_ncurses-tools =3D "\
++FILES_${PN}-tools =3D "\
+   ${bindir}/tic \
+   ${bindir}/toe \
+   ${bindir}/infotocap \
+@@ -204,6 +207,6 @@ FILES_ncurses-tools =3D "\
+   ${bindir}/tabs \
+ "
+=20
+-FILES_ncurses-terminfo =3D "\
++FILES_${PN}-terminfo =3D "\
+   ${datadir}/terminfo \
+ "
 --=20
 1.6.3.3
 
