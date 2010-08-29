@@ -1,36 +1,36 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OpdG0-0000A0-6R
+	(envelope-from <raj.khem@gmail.com>) id 1OpdJA-0000He-8d
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 10:28:53 +0200
-Received: by iwn2 with SMTP id 2so3854297iwn.6
+	Sun, 29 Aug 2010 10:32:09 +0200
+Received: by iwn2 with SMTP id 2so3855496iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 01:28:23 -0700 (PDT)
+	Sun, 29 Aug 2010 01:31:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=154QwLBztPRgDlUWknPNCvwFW3JP+Fq0jPiOGTt250Y=;
-	b=kVSzTC/Y0bfk98vSJTY+3z6FjBG0ZZKTmuR8AZIksJOjDdtfyDZaM4Xcby0HVWHT8T
-	R99PeCbH+hE0fK0JEMMjwB0JlYigSeXGoPKHl8IsqcQbfaS5jkuYm1qfx7j9EE7jW5jh
-	I5zQ/62Ke/lLzFgYTUm4ApzhQ5vU6aAhE6Tu0=
+	bh=u3XNQthyLmhlkNT1Oshyc0rSairuFprsbkod4iqNwjQ=;
+	b=iAXhN2119MRtcdrALeuYhEPAYjjc7m+m/BJdwySbbfUZLc5tpJt3ANWYkIykZJENrN
+	cECy0oV/6ckxRNIgKK/GTdLaq4n04Md0BTShAZxMCuoXf1UPUAdG43UnW06hp+05Owhw
+	AE6omx5+deXAZfl39NnON7QNzZjSG8OxPDrlo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=NlbaxDeJ/qQiJciJYM4hc0omcMxwYhG52pPI787s/lYbU3H0sufOYX06qR1HnTIS6Q
-	p2D0qAauEsWU1+hSh7V4/ncmaFr6Hph8eusF/NN+lfDZfLEC4W4aXoNsKF3/ajG6H757
-	oNuAibt/7fk14PYMou+aVrVb+DxfZCx0q6Ris=
-Received: by 10.231.31.199 with SMTP id z7mr3547294ibc.50.1283070503159; Sun,
-	29 Aug 2010 01:28:23 -0700 (PDT)
+	b=Kk8N0mohkmLtvUaQD+YwVvqfvBDR1sty1BRBouu1W58Ob/0+g0zexZJNu21m46a4UX
+	wfu0V+5WU2zG+tbmk5WEgSsPIP649tCTLudsgd5Vl8RTNqi9ief+QH4nqMiTjTTsNCd3
+	Vm0nQ/c9Uyd41oiZkT5hsr2mWgpjHF5QHMTUs=
+Received: by 10.231.19.6 with SMTP id y6mr3547513iba.16.1283070699130; Sun, 29
+	Aug 2010 01:31:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Sun, 29 Aug 2010 01:28:03 -0700 (PDT)
-In-Reply-To: <AANLkTik-7oaZUABzC2ui0Oa8sAiPahHsR0x1K_g66Y9p@mail.gmail.com>
+Received: by 10.231.207.8 with HTTP; Sun, 29 Aug 2010 01:31:19 -0700 (PDT)
+In-Reply-To: <AANLkTinJTRgxw3zLkeweU-WsWrABz298X67tHkWcVwXv@mail.gmail.com>
 References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-	<1283027073-12308-7-git-send-email-raj.khem@gmail.com>
-	<AANLkTik-7oaZUABzC2ui0Oa8sAiPahHsR0x1K_g66Y9p@mail.gmail.com>
+	<1283027073-12308-20-git-send-email-raj.khem@gmail.com>
+	<AANLkTinJTRgxw3zLkeweU-WsWrABz298X67tHkWcVwXv@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Aug 2010 01:28:03 -0700
-Message-ID: <AANLkTi=xUsGz0DCUouYVrJnxVr7AoNAdTXit4a8GdKzi@mail.gmail.com>
+Date: Sun, 29 Aug 2010 01:31:19 -0700
+Message-ID: <AANLkTi=VySVy92pqhs6VPTdn_j3WnAEjuX6K+NK_jA=e@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -40,7 +40,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 06/23] sugar-fructose.bb: sugar-web-activity is not provided by any recipe dont DEPEND on it.
+Subject: Re: [PATCH 19/23] cnetworkmanager_git.bb: python-uuid is not provided remove it from RDENEDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,38 +54,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 08:28:53 -0000
+X-List-Received-Date: Sun, 29 Aug 2010 08:32:09 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Aug 29, 2010 at 12:25 AM, Frans Meulenbroeks
+On Sat, Aug 28, 2010 at 11:55 PM, Frans Meulenbroeks
 <fransmeulenbroeks@gmail.com> wrote:
-> I seem to recall from previous discussion that it will still build.
-> Haven't tested that part.
+> mistyped DEPENDS in commit but still
 
-Well as I said if this recipe is broken the patch does not break it
-any more than it already is.
+Thanks I will amend this commit.
 
-> Still:
 > Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
 >
 > 2010/8/28 Khem Raj <raj.khem@gmail.com>:
 >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >> ---
->> =A0recipes/sugar/sugar-fructose.bb | =A0 =A02 +-
+>> =A0recipes/networkmanager/cnetworkmanager_git.bb | =A0 =A02 +-
 >> =A01 files changed, 1 insertions(+), 1 deletions(-)
 >>
->> diff --git a/recipes/sugar/sugar-fructose.bb b/recipes/sugar/sugar-fruct=
-ose.bb
->> index ad0db39..697ac21 100644
->> --- a/recipes/sugar/sugar-fructose.bb
->> +++ b/recipes/sugar/sugar-fructose.bb
->> @@ -1,3 +1,3 @@
->> =A0DESCRIPTION =3D "Sugar fructose activities"
+>> diff --git a/recipes/networkmanager/cnetworkmanager_git.bb b/recipes/net=
+workmanager/cnetworkmanager_git.bb
+>> index d8ec179..5625502 100644
+>> --- a/recipes/networkmanager/cnetworkmanager_git.bb
+>> +++ b/recipes/networkmanager/cnetworkmanager_git.bb
+>> @@ -2,7 +2,7 @@ DESCRIPTION =3D "Command line interface for Network Mana=
+ger"
+>> =A0HOMEPAGE =3D "http://vidner.net/martin/software/cnetworkmanager/"
+>> =A0LICENSE =3D "GPL"
+>> =A0SECTION =3D "console/network"
+>> -RDEPENDS_${PN} =3D "python-core python-crypt python-dbus python-math py=
+thon-pygobject python-re python-textutils python-uuid python-xml"
+>> +RDEPENDS_${PN} =3D "python-core python-crypt python-dbus python-math py=
+thon-pygobject python-re python-textutils python-xml"
+>> =A0PR =3D "r2"
+>> =A0PV =3D "0.8+git"
 >>
->> -DEPENDS =3D "etoys sugar-web-activity"
->> +DEPENDS =3D "etoys"
 >> --
 >> 1.7.1
 >>
