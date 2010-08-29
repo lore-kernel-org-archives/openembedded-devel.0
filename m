@@ -1,43 +1,37 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Opegi-0002Pq-Nl for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 12:00:33 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OpegG-0002ly-2r for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 12:00:04 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 12:00:04 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 12:00:04 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Opeiu-0002Xf-OU
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Aug 2010 12:02:49 +0200
+Received: (qmail 14655 invoked by uid 503); 29 Aug 2010 10:23:40 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 29 Aug 2010 10:23:40 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 29 Aug 2010 12:02:19 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 29 Aug 2010 12:02:19 +0200
+Message-ID: <4C7A302A.5060606@eukrea.com>
+Date: Sun, 29 Aug 2010 12:02:18 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 29 Aug 2010 11:56:19 +0200
-Message-ID: <i5das3$v2$3@dough.gmane.org>
-References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-	<1283027073-12308-12-git-send-email-raj.khem@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <1283027073-12308-12-git-send-email-raj.khem@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+References: <4C79C7C4.1050304@mwester.net>
+In-Reply-To: <4C79C7C4.1050304@mwester.net>
+X-Ovh-Tracer-Id: 3470867937900342601
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 11/23] udev-compat141_141.bb: if machine is not one of spitz akita c70x poodle then it is not needed to RDEPEND'ed on udev-compat-wrapper
+Subject: Re: ncurses 5.7 doesn't build libtermcap anymore?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,46 +45,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 10:00:33 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 29 Aug 2010 10:02:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+Hi Mike,
 
-On 28-08-10 22:24, Khem Raj wrote:
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> ---
->  recipes/udev/udev-compat141_141.bb |    6 +++++-
->  1 files changed, 5 insertions(+), 1 deletions(-)
-> 
-> diff --git a/recipes/udev/udev-compat141_141.bb b/recipes/udev/udev-compat141_141.bb
-> index 2411fc6..c39d4cb 100644
-> --- a/recipes/udev/udev-compat141_141.bb
-> +++ b/recipes/udev/udev-compat141_141.bb
-> @@ -15,7 +15,11 @@ PACKAGES = "${PN} ${PN}-dbg"
->  PROVIDES = "udev-compat"
->  
->  # Need udev with udev-compat-wrapper support and nothing else.
-> -RDEPENDS_${PN} = "udev-compat-wrapper"
-> +RDEPENDS_${PN}_spitz = "udev-compat-wrapper"
-> +RDEPENDS_${PN}_akita = "udev-compat-wrapper"
-> +RDEPENDS_${PN}_c7x0 = "udev-compat-wrapper"
-> +RDEPENDS_${PN}_poodle = "udev-compat-wrapper"
-> +
->  # Remove hotplug RPROVIDES
->  RPROVIDES_${PN} = "udev-compat"
+Le 29/08/2010 04:36, Mike Westerhof a écrit :
+> I've been working on some recent problems that popped up in the SlugOS
+> feeds; one that appeared recently is that asterisk no longer builds;
+> configure complains about -ltermcap, and investigation shows that
+> indeed, libtermcap is missing.  It seems that the new ncurses recipe
+> (5.7) no longer builds it for some reason.
 
-NAK, this is a generic wrapper to use recent udev on older kernels, not
-specific to zaurus.
+it's because 5.7's configure is using --with-ticlib which is 
+incompatible with --enable-termcap.
+On ubuntu, it seems they simply do the following links :
+usr/lib/libncurses.so usr/lib/libtermcap.so
+usr/lib/libncurses.a  usr/lib/libtermcap.a
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
+>  I think the same problem is
+> the root cause for the failure of js to build as well.
+>
+> So I guess the first question is if this is intentional or not?  If it
+> is, then I guess I'll modify the asterisk recipe to remove the
+> dependency and submit that patch.  Otherwise, well, I guess I could
+> attempt to debug and fix the ncurses recipe, but it looks a bit, um,
+> "non-trivial" so any advice would be appreciated.
+>
+> Or should I just pin ncurses to the old 5.4 version that worked?
+>
+5.7 is also broken for sdk build, I'm currently trying to fix this, I've 
+add the link and tested asterisk's build, patch is coming.
 
-iD8DBQFMei7DMkyGM64RGpERAlCJAKCmAKGCSfycd7te59U6LXjh2uB16wCeKAtv
-BwH22cNlpYQZPS2ohlGp7tc=
-=VWjc
------END PGP SIGNATURE-----
-
+Eric
 
 
