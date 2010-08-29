@@ -1,50 +1,38 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <martin.jansa@gmail.com>) id 1Opia6-0001mT-Tk
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OpiuM-0006e1-Ma
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 16:09:59 +0200
-Received: by fxm6 with SMTP id 6so3008671fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 07:09:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:date:from:to:subject
-	:message-id:references:mime-version:content-type:content-disposition
-	:content-transfer-encoding:in-reply-to:user-agent;
-	bh=QHyhnKWbCjK+igp4dKMaOl7V0SMQ7rr+YyLa0D0sd9U=;
-	b=lP6Rh1hmyedOU/+5RHgLeacu2zcsFyQ5CdX00lk0JD9/I/3ZQA6n52c3Ofemfg/o3j
-	VgDrvapEmlF+tCrPQ6F5f0U/CmymXu5T0hslRn5wa/mYYqEZdNHNT9e7BQjoELGbUVmc
-	KPtCAZ8VW4fK7c2UMf51SviMy08WGP5rJKaCQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=date:from:to:subject:message-id:references:mime-version
-	:content-type:content-disposition:content-transfer-encoding
-	:in-reply-to:user-agent;
-	b=G9Jnz92xoUPdvq3qf4ADdeXDOvvVM6J1+XNTUp7wg9RRVKqsdkXFlG/Tchi1FReQ+f
-	Tx2yUkxUVJdebRHoQsIQu1gZciKvtrsP+kx6ODuBVeQ2C7yUAaplQjkEkbfxAjKLT5HF
-	Y4rfmm+6P5U8CFFvsLfszKHL2AG1WcQMqCl2k=
-Received: by 10.223.124.9 with SMTP id s9mr2610851far.91.1283090961131;
-	Sun, 29 Aug 2010 07:09:21 -0700 (PDT)
-Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
-	by mx.google.com with ESMTPS id 2sm2874048faz.38.2010.08.29.07.09.20
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 29 Aug 2010 07:09:20 -0700 (PDT)
-Date: Sun, 29 Aug 2010 16:10:15 +0200
-From: Martin Jansa <martin.jansa@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100829141015.GR17268@jama>
-References: <1283086227-13224-1-git-send-email-eric@eukrea.com>
-	<lysk1x5xk3.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	Sun, 29 Aug 2010 16:30:55 +0200
+Received: (qmail 13860 invoked by uid 503); 29 Aug 2010 14:51:45 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 29 Aug 2010 14:51:44 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 29 Aug 2010 16:30:23 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 29 Aug 2010 16:30:21 +0200
+Message-ID: <4C7A6EFD.5010803@eukrea.com>
+Date: Sun, 29 Aug 2010 16:30:21 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
 MIME-Version: 1.0
-In-Reply-To: <lysk1x5xk3.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: martin.jansa@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1283078750-25729-1-git-send-email-eric@eukrea.com>	<1283080970-2494-1-git-send-email-eric@eukrea.com>
+	<lywrr95ys7.fsf@ensc-virt.intern.sigma-chemnitz.de>
+In-Reply-To: <lywrr95ys7.fsf@ensc-virt.intern.sigma-chemnitz.de>
+X-Ovh-Tracer-Id: 7997548513833626953
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] alsa-utils-alsamixer: add ncurses-terminfo RDEPENDS
+Subject: Re: [PATCH v2] ncurses-5.7 : fix sdk build + add libtermcap link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,28 +46,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 14:09:59 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
+X-List-Received-Date: Sun, 29 Aug 2010 14:30:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 8bit
 
-On Sun, Aug 29, 2010 at 03:59:56PM +0200, Enrico Scholz wrote:
-> Eric Bénard <eric@eukrea.com> writes:
-> 
-> > +RDEPENDS_alsa-utils-alsamixer = "ncurses-terminfo"
-> 
-> I think this should be solved in ncurses because it affects other
-> packages too; e.g. moving its /etc/terminfo files from 'ncurses' into
-> an own package and rrecommending this in the libtinfo package.
+Hi Enrico,
 
-I've already added this to few recipes:
-http://git.openembedded.org/cgit.cgi/openembedded/log/?qt=grep&q=terminfo
+thanks for the review,
 
-but only as RRECOMMENDS (RDEPENDS would be better), because ncurses-5.7
-wasn't default and not all distros had ncurses-terminfo available.
+Le 29/08/2010 15:33, Enrico Scholz a écrit :
+> Eric Bénard<eric@eukrea.com>  writes:
+>
+>> -        'narrowc --with-ticlib' \
+>> -        'widec   --enable-widec --without-progs'; do
+>> +        'narrowc  --with-ticlib' \
+>> +        'widec    --with-ticlib --enable-widec --without-progs'; do
+>
+> can you place this in a separate patch please?
+>
+I'm not fully sure of this change, do you think this is needed or is 
+this a mistake ?
+>
+>> +	cd ${D}${libdir}
+>> +	ln -sf libncurses.so libtermcap.so
+>> +	ln -sf libncurses.a libtermcap.a
+>
+> This part is wrong; libtermcap functionality is provided by libtinfo and
+> does not need whole libncurses.
+>
+that's the way it's done on ubuntu so I thought this could be ok -but it 
+seems there is no libtinfo on ubuntu which may explain this point), I 
+will switch the link to libtinfo and test asterisk build.
 
-Regards,
--- 
-Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
+>> +	ln -sf libncurses.so.5 libtermcap.so.5
+>
+> This is not needed; DL_NEEDED will be libtinfo.so.X both if you create a
+> symlink or use the linkerscript.  There is nothing with a libtermcap.so.5
+> SONAME either.
+>
+yes this was a test, I forget to remove this line sorry.
+
+Eric
 
 
