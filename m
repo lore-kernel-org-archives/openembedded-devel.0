@@ -1,38 +1,40 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Opogf-0004g9-DA
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vwyodapink@gmail.com>) id 1Opq5Y-0007fS-Kl
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 22:41:11 +0200
-Received: (qmail 10563 invoked by uid 503); 29 Aug 2010 21:02:03 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 29 Aug 2010 21:02:03 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 29 Aug 2010 22:40:39 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 29 Aug 2010 22:40:37 +0200
-Message-ID: <4C7AC5BF.9030502@eukrea.com>
-Date: Sun, 29 Aug 2010 22:40:31 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+	Mon, 30 Aug 2010 00:10:58 +0200
+Received: by wyg36 with SMTP id 36so5535382wyg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Aug 2010 15:10:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=tvBUjYwwHLTt4+eiHtIcTui9CrKgo+su2e4dV6fcroI=;
+	b=ZYqT6kfUYqV6mKSX/rPNKA1NR46R5/BvXmedp0Qb5tgQd68I3I6VTAygXFDrtplTRo
+	ovsbiLyP3UZcv4lC2i/NdhQeqpnbLaHdrIcnZJmu+9/Wouis7k+yo7bWZrRmaleIsFXn
+	TV8DP5uCKNSvGxzOauvG6LbfviFOVSAJIR3mk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=dbYPpJaytbgiN/dJfJD60UtmtCVcZTH0+ss5eLPHCN2ZaI0GVWhMUmZO627HkxkrLX
+	PLyfdoTFsEzd78WDgIVzzXYZX/fHdWNEzud062VI7QneRzUpZFRvifMxMs52Pt0z+Jf/
+	5pKgtxi6oePCCevNd/UbJMJHS8DFzuD/2Rr8w=
 MIME-Version: 1.0
+Received: by 10.216.89.149 with SMTP id c21mr4073619wef.73.1283119823244; Sun,
+	29 Aug 2010 15:10:23 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Sun, 29 Aug 2010 15:10:23 -0700 (PDT)
+Date: Sun, 29 Aug 2010 15:10:23 -0700
+Message-ID: <AANLkTinA9eBvR8GED__wEG=Yy-DSfdSDWfUBp-pA+pO3@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1283078750-25729-1-git-send-email-eric@eukrea.com>	<1283080970-2494-1-git-send-email-eric@eukrea.com>	<lywrr95ys7.fsf@ensc-virt.intern.sigma-chemnitz.de>	<4C7A6EFD.5010803@eukrea.com>
-	<lylj7pmbbz.fsf@ensc-virt.intern.sigma-chemnitz.de>
-In-Reply-To: <lylj7pmbbz.fsf@ensc-virt.intern.sigma-chemnitz.de>
-X-Ovh-Tracer-Id: 14250796596701015369
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] ncurses-5.7 : fix sdk build + add libtermcap link
+Subject: gpe-package 0.4 does not build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,24 +48,77 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 20:41:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 29 Aug 2010 22:10:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Enrico,
+I have yet another package failing to build its gpe-package .04 comes
+with this error message: Can anyone help?
 
-Le 29/08/2010 22:08, Enrico Scholz a écrit :
-> I do not see a reason, not to apply '--with-ticlib' to widec.  I changed
-> this in git.
->
->
-> Thanks for noticing it
-
-well if the meaning of noticing is spending 2 days on this recipe trying 
-to fix it, yes I noticed it :-)
-Thanks for finishing the work, I'm currently rebuilding from scratch to 
-test.
-
-Eric
+NOTE: Running task 2765 of 2777 (ID: 10,
+/home/vdubhack/overo-oe/org.openembedded.dev/recipes/gpe-package/gpe-package_0.4.bb,
+do_compile)
+ERROR: function do_compile failed
+ERROR: log data follows
+(/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/gpe-package-0.4-r2/temp/log.do_compile.25974)
+| NOTE: make -e MAKEFLAGS= PREFIX=/usr
+| arm-angstrom-linux-gnueabi-gcc -march=armv7-a -mtune=cortex-a8
+-mfpu=neon -mfloat-abi=softfp -mthumb-interwork -mno-thumb
+-isystem/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
+-fexpensive-optimizations -frename-registers -fomit-frame-pointer -O2
+-ggdb3 -DENABLE_PCRE
+-isystem/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include
+-DVERSION=\"0.4\" -DPREFIX=\"/usr\" -D_GNU_SOURCE
+-DPACKAGE=\"gpe-package\" -DPACKAGE_LOCALE_DIR=\"/usr/share/locale\"
+-DIPKG_LIB  `pkg-config --cflags libipkg` -pthread
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12
+  -pthread -I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/gtk-2.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/gtk-2.0/include
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/atk-1.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/cairo
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pango-1.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/glib-2.0
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/lib/glib-2.0/include
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/pixman-1
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/freetype2
+-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include/libpng12
+  -MD -Wall   -c main.c -o main.o
+| Package libipkg was not found in the pkg-config search path.
+| Perhaps you should add the directory containing `libipkg.pc'
+| to the PKG_CONFIG_PATH environment variable
+| No package 'libipkg' found
+| In file included from main.c:28:
+| packages.h:4:33: error: libipkg.h: No such file or directory
+| In file included from main.c:28:
+| packages.h:57: error: expected specifier-qualifier-list before
+'pkg_state_status_t'
+| main.c: In function 'main':
+| main.c:46: warning: implicit declaration of function 'exit'
+| main.c:46: warning: incompatible implicit declaration of built-in
+function 'exit'
+| main.c:72: warning: incompatible implicit declaration of built-in
+function 'exit'
+| make: *** [main.o] Error 1
+| FATAL: oe_runmake failed
+NOTE: Task failed:
+/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/gpe-package-0.4-r2/temp/log.do_compile.25974
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/vdubhack/overo-oe/org.openembedded.dev/recipes/gpe-package/gpe-package_0.4.bb
+do_compile failed
+ERROR: Task 10 (/home/vdubhack/overo-oe/org.openembedded.dev/recipes/gpe-package/gpe-package_0.4.bb,
+do_compile) failed
+NOTE: Tasks Summary: Attempted 2764 tasks of which 2746 didn't need to
+be rerun and 1 failed.
+ERROR: '/home/vdubhack/overo-oe/org.openembedded.dev/recipes/gpe-package/gpe-package_0.4.bb'
+failed
 
 
