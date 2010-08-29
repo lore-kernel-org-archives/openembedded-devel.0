@@ -1,40 +1,45 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OpYJI-0002YE-0c
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Opboa-0000XS-D0
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 05:11:57 +0200
-Received: by wyg36 with SMTP id 36so4868202wyg.6
+	Sun, 29 Aug 2010 08:56:29 +0200
+Received: by iwn2 with SMTP id 2so3819215iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 20:11:25 -0700 (PDT)
+	Sat, 28 Aug 2010 23:55:59 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=7kAtdppZJaCy+uqhMJUbkyfXqmFGMNi/C40IC6Q+uy4=;
-	b=P+ZWYeETEncrwl8i0B9m0XY0GSUIT3agdRvpd8eAL5Plg6O6mzaTBHOZ7AIvfKcJF7
-	fawtBdkt3nt9s2U1tomh4p7l3GNvHlX37cqVbmEgkd1VMlLOgeJBajbTv4U8W2tznVU1
-	ZVGRX7l13ecunxH7pYUvBLwaNLt8v8eLMH4Yk=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=XR9fCM3gFvWZDTVct4YtK1FmmxQlGHjeibYiIiLDH9w=;
+	b=WSEbsqnTyW7y2MVQemlOat1jmTWa/Eu83h3bPlfqxqPGVC/W1s/KJYIirQVO1Z/FIV
+	pJJVxpgtD+nz5cJV/w+nVUT0ixBZKYtlov7QZciuDCSJrVDtTCzZy53sIZDhd3LBtZ7/
+	J28nf0jaNJKVUj0hSFp7ZIF/uQKC3XTrh/BGg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=HWIV99dUSLuoddX3BdpwuF7GpFjZprwXTVGekGbmVqb4K6fap8gg4afuR0Ks2Cqj60
-	FGiEeKMlut+zMfTDlVsgCAkdbvt/9fCJUWSM4oQ81RXen82NUlr2NOKAjPa4CJ0KeNmr
-	G6oknCoiTXjirx8DvpPViPYi3OW/sop4mT4Os=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=SlI69YAVuW1eVYLGGisnv0Zqvcr7lI5xKK9s71jGXrkqBvIx0LsKJ8rZsslBoMZs++
+	o0Mk3P3Ol2ZSLtf9Xx9FKWnue+DsZLk7/4RPwuEz315YbXvCPJ0I/C15JoVb/wVRhqRs
+	typnlcj9WPFlXxaSacfXkDJ0L+LDxT/XKh7og=
 MIME-Version: 1.0
-Received: by 10.216.154.206 with SMTP id h56mr2857144wek.111.1283051485491;
-	Sat, 28 Aug 2010 20:11:25 -0700 (PDT)
-Received: by 10.216.179.76 with HTTP; Sat, 28 Aug 2010 20:11:25 -0700 (PDT)
-Date: Sat, 28 Aug 2010 20:11:25 -0700
-Message-ID: <AANLkTi=7Ys9reqVWjN5Byrpt+kagk6EBO-9xLr9ptPFa@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+Received: by 10.231.149.12 with SMTP id r12mr3375395ibv.185.1283064959210;
+	Sat, 28 Aug 2010 23:55:59 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Sat, 28 Aug 2010 23:55:59 -0700 (PDT)
+In-Reply-To: <1283027073-12308-20-git-send-email-raj.khem@gmail.com>
+References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
+	<1283027073-12308-20-git-send-email-raj.khem@gmail.com>
+Date: Sun, 29 Aug 2010 08:55:59 +0200
+Message-ID: <AANLkTinJTRgxw3zLkeweU-WsWrABz298X67tHkWcVwXv@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: apr-util_1.3.4 does not build
+Subject: Re: [PATCH 19/23] cnetworkmanager_git.bb: python-uuid is not provided remove it from RDENEDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,36 +53,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 03:11:57 -0000
+X-List-Received-Date: Sun, 29 Aug 2010 06:56:29 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I am running ubuntu 9.10 with and up to date overo branch of OE and
-apr- util will not build gives the following error:
+mistyped DEPENDS in commit but still
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-NOTE: Running task 819 of 832 (ID: 9,
-/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb,
-do_qa_configure)
-ERROR: This autoconf log indicates errors, it looked at host includes.
-Rerun configure task after fixing this. The path was
-'/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/apr-util-1.3.4-r5/apr-util-1.3.4'
-ERROR: Error in executing:
-/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb
-ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-ERROR: Printing the environment of the function
-ERROR: Build of
-/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb
-do_qa_configure failed
-ERROR: Task 9 (/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb,
-do_qa_configure) failed
-NOTE: Tasks Summary: Attempted 818 tasks of which 818 didn't need to
-be rerun and 1 failed.
-ERROR: '/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb'
-failed
-
-
-I have tried cleaning the recipe and rebuilding with no luck as well
-as trying to build from a fresh tmp directory. Though I think I
-understand the error I do not know how to go about fixing it with a
-proper patch. I would appreciate any help with this.
+2010/8/28 Khem Raj <raj.khem@gmail.com>:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+> =A0recipes/networkmanager/cnetworkmanager_git.bb | =A0 =A02 +-
+> =A01 files changed, 1 insertions(+), 1 deletions(-)
+>
+> diff --git a/recipes/networkmanager/cnetworkmanager_git.bb b/recipes/netw=
+orkmanager/cnetworkmanager_git.bb
+> index d8ec179..5625502 100644
+> --- a/recipes/networkmanager/cnetworkmanager_git.bb
+> +++ b/recipes/networkmanager/cnetworkmanager_git.bb
+> @@ -2,7 +2,7 @@ DESCRIPTION =3D "Command line interface for Network Manag=
+er"
+> =A0HOMEPAGE =3D "http://vidner.net/martin/software/cnetworkmanager/"
+> =A0LICENSE =3D "GPL"
+> =A0SECTION =3D "console/network"
+> -RDEPENDS_${PN} =3D "python-core python-crypt python-dbus python-math pyt=
+hon-pygobject python-re python-textutils python-uuid python-xml"
+> +RDEPENDS_${PN} =3D "python-core python-crypt python-dbus python-math pyt=
+hon-pygobject python-re python-textutils python-xml"
+> =A0PR =3D "r2"
+> =A0PV =3D "0.8+git"
+>
+> --
+> 1.7.1
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
