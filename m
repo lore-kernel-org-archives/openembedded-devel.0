@@ -1,33 +1,36 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ope0S-0001vM-RC
+	(envelope-from <raj.khem@gmail.com>) id 1Ope16-0001zz-L6
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 11:16:54 +0200
-Received: by iwn2 with SMTP id 2so3872380iwn.6
+	Sun, 29 Aug 2010 11:17:33 +0200
+Received: by iwn2 with SMTP id 2so3872626iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 02:16:23 -0700 (PDT)
+	Sun, 29 Aug 2010 02:17:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=+1IDf+vVbHbcD+zzpXV4T5LHknisSd04cvSirhry+TE=;
-	b=wkfU8NdAsYXoDo3AtJ8YYuyNzpaRRLsRCTknn6MXQPuNo0nsVz9xs1DwhOUa6phONd
-	f8DxZt4OxVwZYQkt+5j/tX6//liFmQw7rT+wr2UAQVjhlD/5KODb3GjZQpUTzY2I7G8P
-	Gl8HOVqAhUlVI4GtEiFnxDMXyRJz+jHTi46XU=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=mM40nNS+MI0+fKV9HXRlNoHLjLpSBZyjO9t5LYGSgQg=;
+	b=PzRWfLB2w+1a8kD4a/ru8/NSz4dfcpydv/R8pfyyYjlk6VJD3QrRfW2Vj4RV1tYzxi
+	4HXxim6zLBd3h2Q22+yENh0OYCPjrkjcGWWzOrVVXyyv+/gO5JMPf1mRItyKq7vWkzQ+
+	3kgmdNi4K1KIJichN8F2B1NBic2Yh3j7z2u0s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=pe3EHEKKg2p8bxdAcyPupRTY/es+aaQDzBIUG5IoWfQ4gmZO+GnkPTaHc2zZTOQbR0
-	AUSBSF1Y2c/6XH2M1eNvRe4eZPigap5nXBzzYaerZsPZYqw53YiH9UZR+MKNxL7uOsuB
-	65RiCgeX79S3E4hPjxGvUI+b1EldBPXDbivfA=
-Received: by 10.231.37.75 with SMTP id w11mr3598414ibd.45.1283073383087; Sun,
-	29 Aug 2010 02:16:23 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=gdm8QnXeIrGnS4Zrd1F3+rPgUViwhv+s8e0QIL+N6QhTk+YEsDT68hOwZOx/rWps1N
+	gS+unfcUbilkqLQWUj53SJmAO7x36rBx8dki8EW3tCty27ST5svtGIVcZANW5E7OMtIZ
+	2m9gYOLUQ88RG6TaJAvuGe+rVUpPsupBdGDs4=
+Received: by 10.231.19.6 with SMTP id y6mr3589248iba.16.1283073423143; Sun, 29
+	Aug 2010 02:17:03 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Sun, 29 Aug 2010 02:16:03 -0700 (PDT)
-In-Reply-To: <AANLkTi=7Ys9reqVWjN5Byrpt+kagk6EBO-9xLr9ptPFa@mail.gmail.com>
-References: <AANLkTi=7Ys9reqVWjN5Byrpt+kagk6EBO-9xLr9ptPFa@mail.gmail.com>
+Received: by 10.231.207.8 with HTTP; Sun, 29 Aug 2010 02:16:43 -0700 (PDT)
+In-Reply-To: <1283025996-28435-2-git-send-email-eric@eukrea.com>
+References: <4C776F96.2000307@eukrea.com>
+	<1283025996-28435-1-git-send-email-eric@eukrea.com>
+	<1283025996-28435-2-git-send-email-eric@eukrea.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Aug 2010 02:16:03 -0700
-Message-ID: <AANLkTikkqKU+_z56TRPJKruaK9H4gKyH3wH4F1Y05fVi@mail.gmail.com>
+Date: Sun, 29 Aug 2010 02:16:43 -0700
+Message-ID: <AANLkTiki_iDV1gX2qPFUv9bxeNtKM5ORcn4WnLba6ib2@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -37,7 +40,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: apr-util_1.3.4 does not build
+Subject: Re: [PATCH 2/2] sdk.bbclass: allow virtclass-sdk override
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +54,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 09:16:54 -0000
+X-List-Received-Date: Sun, 29 Aug 2010 09:17:33 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 28, 2010 at 8:11 PM, J. L. <vwyodapink@gmail.com> wrote:
-> I am running ubuntu 9.10 with and up to date overo branch of OE and
-> apr- util will not build gives the following error:
+On Sat, Aug 28, 2010 at 1:06 PM, Eric B=E9nard <eric@eukrea.com> wrote:
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
 
-I cant reproduce it on ubuntu 10.04. If possible can you retry to
-reproduce it on some
-other build OS than 9.10
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
+> ---
+> =A0classes/sdk.bbclass | =A0 =A02 ++
+> =A01 files changed, 2 insertions(+), 0 deletions(-)
 >
-> NOTE: Running task 819 of 832 (ID: 9,
-> /home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb,
-> do_qa_configure)
-> ERROR: This autoconf log indicates errors, it looked at host includes.
-> Rerun configure task after fixing this. The path was
-> '/home/vdubhack/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/apr-util-1.3.4-r5/apr-util-1.3.4'
-> ERROR: Error in executing:
-> /home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb
-> ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
-> ERROR: Printing the environment of the function
-> ERROR: Build of
-> /home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb
-> do_qa_configure failed
-> ERROR: Task 9 (/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb,
-> do_qa_configure) failed
-> NOTE: Tasks Summary: Attempted 818 tasks of which 818 didn't need to
-> be rerun and 1 failed.
-> ERROR: '/home/vdubhack/overo-oe/org.openembedded.dev/recipes/apr/apr-util_1.3.4.bb'
-> failed
+> diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
+> index 198d147..c8fa076 100644
+> --- a/classes/sdk.bbclass
+> +++ b/classes/sdk.bbclass
+> @@ -66,3 +66,5 @@ FILES_${PN}-dbg +=3D "${prefix}/.debug \
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0"
 >
+> =A0export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR_HOST}"
+> +
+> +OVERRIDES .=3D ":virtclass-sdk"
+> --
+> 1.6.3.3
 >
-> I have tried cleaning the recipe and rebuilding with no luck as well
-> as trying to build from a fresh tmp directory. Though I think I
-> understand the error I do not know how to go about fixing it with a
-> proper patch. I would appreciate any help with this.
 >
 > _______________________________________________
 > Openembedded-devel mailing list
