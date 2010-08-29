@@ -1,46 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Opmip-0004J8-7z
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OpoB9-0001R3-G5
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 20:35:16 +0200
-Received: by iwn2 with SMTP id 2so4175010iwn.6
+	Sun, 29 Aug 2010 22:08:36 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o7TK81Et021311
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 11:34:45 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=dMCdYAwV/jZkQErlEYeJRTLb56Scaetbk23wfE2nFJc=;
-	b=qN2lqPb7CAcY+WDIVRn00F3mtXAV53wMpRPe2CKng+hyY2wrlEx7l3VI8xHIb0NwXw
-	VyWRuIx26b2W00MB2jyePzv+5QENjCaV/2n7g7vKkup5PdykobDUp5Vv6rh1/EvhoTNr
-	MPA3+tWt6bPrctxRZVrusweNMBgxugMD2W0kk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=pRTf2JrOX/onHtl/xuwO53+Dx9a3oszxP/BgGtNBb6efE+drHWoaHGBW8+y0vVW21U
-	/wMZb2IlCcbByQF5bg7zCVMjXbVmdjP3UoGozdAZmXhnzEYVAnt9oCZ25eiH4GrmxWYo
-	3zXlyfzGTmMSFjWZFKkc3/tcEVYrFPkKAq32E=
-Received: by 10.231.166.72 with SMTP id l8mr4271831iby.95.1283106698457; Sun,
-	29 Aug 2010 11:31:38 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Sun, 29 Aug 2010 11:29:27 -0700 (PDT)
-In-Reply-To: <i5dans$v2$1@dough.gmane.org>
-References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-	<1283027073-12308-5-git-send-email-raj.khem@gmail.com>
-	<i5dans$v2$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Aug 2010 11:29:27 -0700
-Message-ID: <AANLkTimY78Zz8F_H96D4+gXSNe6VvLM4tE-kfYBMHuXk@mail.gmail.com>
+	Sun, 29 Aug 2010 22:08:02 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OpoAa-0002Mt-Pf
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Aug 2010 22:08:01 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <1283078750-25729-1-git-send-email-eric@eukrea.com>
+	<1283080970-2494-1-git-send-email-eric@eukrea.com>
+	<lywrr95ys7.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<4C7A6EFD.5010803@eukrea.com>
+Date: Sun, 29 Aug 2010 22:08:00 +0200
+In-Reply-To: <4C7A6EFD.5010803@eukrea.com> ("Eric =?iso-8859-1?Q?B=E9nard?=
+	=?iso-8859-1?Q?=22's?= message of "Sun,
+	29 Aug 2010 16:30:21 +0200")
+Message-ID: <lylj7pmbbz.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 04/23] esc-node-demo_git.bb: Do not RDEPEND on a recipe yet which is under review
+Subject: Re: [PATCH v2] ncurses-5.7 : fix sdk build + add libtermcap link
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,53 +50,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 18:35:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 29 Aug 2010 20:08:38 -0000
+Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, Aug 29, 2010 at 2:54 AM, Koen Kooi <k.kooi@student.utwente.nl> wrot=
-e:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 28-08-10 22:24, Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =A0recipes/esc/esc-node-demo_git.bb | =A0 =A04 ++--
->> =A01 files changed, 2 insertions(+), 2 deletions(-)
+Eric B=E9nard <eric@eukrea.com> writes:
+
+>>> -        'narrowc --with-ticlib' \
+>>> -        'widec   --enable-widec --without-progs'; do
+>>> +        'narrowc  --with-ticlib' \
+>>> +        'widec    --with-ticlib --enable-widec --without-progs'; do
 >>
->> diff --git a/recipes/esc/esc-node-demo_git.bb b/recipes/esc/esc-node-dem=
-o_git.bb
->> index 814771b..f29b7ba 100644
->> --- a/recipes/esc/esc-node-demo_git.bb
->> +++ b/recipes/esc/esc-node-demo_git.bb
->> @@ -23,7 +23,7 @@ do_install() {
->> =A0 =A0 =A0 =A0 =A0install -m 0755 ${S}/${i} ${D}${datadir}/esc-training
->> =A0 =A0 =A0done
->> =A0}
->> -
->> -RDEPENDS_${PN} =3D "nodejs"
->> +# disable for now until nodejs recipe is committed
->> +#RDEPENDS_${PN} =3D "nodejs"
->> =A0FILES_${PN} +=3D "${datadir}/esc-training"
->
-> NAK, push the nodejs patch instead
+>> can you place this in a separate patch please?
+>>
+> I'm not fully sure of this change, do you think this is needed or is
+> this a mistake ?
 
-It was still under review I can wait until that recipe is OKed
+I do not see a reason, not to apply '--with-ticlib' to widec.  I changed
+this in git.
 
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMei48MkyGM64RGpERAj2fAKCkRK+MKrSrtYzIDiYqsEgB1VZSSACeN8cp
-> wzPv0Q/K0arcwOsf3SfM+MY=3D
-> =3DzXOz
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+
+Thanks for noticing it
+Enrico
 
 
