@@ -1,33 +1,33 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from smtpfb1-g21.free.fr ([212.27.42.9])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OpfIP-0006w9-EX
+	(envelope-from <eric@eukrea.com>) id 1OpfJW-00072d-GR
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 12:39:30 +0200
-Received: from [192.168.1.2] (e180132238.adsl.alicedsl.de [85.180.132.238])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 8812E584381
+	Sun, 29 Aug 2010 12:40:39 +0200
+Received: from smtp2-g21.free.fr (smtp2-g21.free.fr [212.27.42.2])
+	by smtpfb1-g21.free.fr (Postfix) with ESMTP id B9B2077C632
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 12:43:31 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sun, 29 Aug 2010 12:40:08 +0200 (CEST)
+Received: from localhost.localdomain (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 15BA64B017D
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 29 Aug 2010 12:40:03 +0200 (CEST)
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinqLrOTqvdTPrOyh-u-XtieLgywqZC-fSV3hJYR@mail.gmail.com>
-References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-	<1283027073-12308-4-git-send-email-raj.khem@gmail.com>
-	<AANLkTinqLrOTqvdTPrOyh-u-XtieLgywqZC-fSV3hJYR@mail.gmail.com>
-Organization: Vanille-Media
-Date: Sun, 29 Aug 2010 12:38:07 +0200
-Message-ID: <1283078287.2012.6.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Date: Sun, 29 Aug 2010 12:39:46 +0200
+Message-Id: <1283078386-20947-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <4C7A302A.5060606@eukrea.com>
+References: <4C7A302A.5060606@eukrea.com>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 212.27.42.9
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 03/23] angstrom-bootmanager.bb: recipes it depends upon do not exist
+Subject: [PATCH] sdk.bbclass: allow virtclass-sdk override
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,16 +41,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 10:39:30 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 29 Aug 2010 10:40:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-I never have finished this software and will not. The whole recipe can
-go IMO.
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+---
+ classes/sdk.bbclass |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-Cheers,
--- 
-:M:
+diff --git a/classes/sdk.bbclass b/classes/sdk.bbclass
+index 198d147..c8fa076 100644
+--- a/classes/sdk.bbclass
++++ b/classes/sdk.bbclass
+@@ -66,3 +66,5 @@ FILES_${PN}-dbg +=3D "${prefix}/.debug \
+                    "
+=20
+ export PKG_CONFIG_SYSROOT_DIR =3D "${STAGING_DIR_HOST}"
++
++OVERRIDES .=3D ":virtclass-sdk"
+--=20
+1.6.3.3
 
 
 
