@@ -1,29 +1,26 @@
 Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OpoB9-0001R3-G5
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OpoDi-00029b-LR
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 22:08:36 +0200
+	Sun, 29 Aug 2010 22:11:53 +0200
 Received: from ensc-virt.intern.sigma-chemnitz.de
 	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o7TK81Et021311
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o7TKAgbC021877
 	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 22:08:02 +0200
+	Sun, 29 Aug 2010 22:10:43 +0200
 Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OpoAa-0002Mt-Pf
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OpoDB-0002N7-So
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 22:08:01 +0200
+	Sun, 29 Aug 2010 22:10:42 +0200
 From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1283078750-25729-1-git-send-email-eric@eukrea.com>
-	<1283080970-2494-1-git-send-email-eric@eukrea.com>
-	<lywrr95ys7.fsf@ensc-virt.intern.sigma-chemnitz.de>
-	<4C7A6EFD.5010803@eukrea.com>
-Date: Sun, 29 Aug 2010 22:08:00 +0200
-In-Reply-To: <4C7A6EFD.5010803@eukrea.com> ("Eric =?iso-8859-1?Q?B=E9nard?=
+References: <4C79C7C4.1050304@mwester.net> <4C7A302A.5060606@eukrea.com>
+Date: Sun, 29 Aug 2010 22:10:41 +0200
+In-Reply-To: <4C7A302A.5060606@eukrea.com> ("Eric =?iso-8859-1?Q?B=E9nard?=
 	=?iso-8859-1?Q?=22's?= message of "Sun,
-	29 Aug 2010 16:30:21 +0200")
-Message-ID: <lylj7pmbbz.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	29 Aug 2010 12:02:18 +0200")
+Message-ID: <lyhbidmb7i.fsf@ensc-virt.intern.sigma-chemnitz.de>
 User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
 MIME-Version: 1.0
 Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
@@ -36,7 +33,7 @@ X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
 	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH v2] ncurses-5.7 : fix sdk build + add libtermcap link
+Subject: Re: ncurses 5.7 doesn't build libtermcap anymore?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,27 +47,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 20:08:38 -0000
+X-List-Received-Date: Sun, 29 Aug 2010 20:11:54 -0000
 Content-Type: text/plain; charset=iso-8859-1
 Content-Transfer-Encoding: quoted-printable
 
 Eric B=E9nard <eric@eukrea.com> writes:
 
->>> -        'narrowc --with-ticlib' \
->>> -        'widec   --enable-widec --without-progs'; do
->>> +        'narrowc  --with-ticlib' \
->>> +        'widec    --with-ticlib --enable-widec --without-progs'; do
->>
->> can you place this in a separate patch please?
->>
-> I'm not fully sure of this change, do you think this is needed or is
-> this a mistake ?
+> 5.7 is also broken for sdk build,=20
 
-I do not see a reason, not to apply '--with-ticlib' to widec.  I changed
-this in git.
+I think that I fixed widec builds for native targets in git. 'sdk' and
+'native' works on Fedora 13 now; please check other distributions.
 
 
-Thanks for noticing it
 Enrico
 
 
