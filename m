@@ -1,43 +1,31 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1OpTsP-0001w9-E4
+Received: from smtpauth22.prod.mesa1.secureserver.net ([64.202.165.44])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <mike@mwester.net>) id 1OpWUP-0003Yt-JG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 00:27:54 +0200
-Received: by fxm6 with SMTP id 6so2813769fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 28 Aug 2010 15:27:23 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=pbNOhuKueJR9qM/W8DbxFbLga2WwlKxF0nojGcoWCd0=;
-	b=aRGYftlx5JTTvdjlr2NIBQfEPxbLJhAsPbJMd8Kz7+wfQ3UWwmb2V13R0GQ9jmCOYw
-	UO+LQSH3XTsqyrDKnTndhUdtVcTupUi5OhCOG4iCT7UGfYWjVx0yQ4SE6N6s6JU1cODk
-	4g6TZ5mNdavZxOtCsvqoRhwzZYr8uybraCHnU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=EYxss4VS0a5GtvcFwEW0V9kRbsLO32O1mDFCajK+SCI33dKncdREh0WnRpBx+MtKTu
-	jVTbvBiORTgJ6/+cmFO4g2AW4v1H9wN6VGIQMMO0ttMrVr7jRbutvcRYUnPaeOiKBHl7
-	KQKKR0OOZXnr6J1vGjnrcC/MyxnKMDSB5GD70=
+	Sun, 29 Aug 2010 03:15:19 +0200
+Received: (qmail 32122 invoked from network); 29 Aug 2010 01:08:05 -0000
+Received: from unknown (209.242.7.179)
+	by smtpauth22.prod.mesa1.secureserver.net (64.202.165.44) with ESMTP;
+	29 Aug 2010 01:08:05 -0000
+Message-ID: <4C79B2E7.6070806@mwester.net>
+Date: Sat, 28 Aug 2010 20:07:51 -0500
+From: Mike Westerhof <mike@mwester.net>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US;
+	rv:1.8.1.24) Gecko/20100228 Thunderbird/2.0.0.24 Mnenhy/0.7.6.0
 MIME-Version: 1.0
-Received: by 10.239.183.212 with SMTP id v20mr146152hbg.25.1283034441164; Sat,
-	28 Aug 2010 15:27:21 -0700 (PDT)
-Received: by 10.239.152.71 with HTTP; Sat, 28 Aug 2010 15:27:21 -0700 (PDT)
-In-Reply-To: <AANLkTinvhMiZhHC4GrR8Muf-7oPa-j3zBeDWCZrkTd-z@mail.gmail.com>
-References: <AANLkTinvhMiZhHC4GrR8Muf-7oPa-j3zBeDWCZrkTd-z@mail.gmail.com>
-Date: Sun, 29 Aug 2010 00:27:21 +0200
-Message-ID: <AANLkTimH2YnW3CnLFxa6NyNCeC0-jNqy0dhDXS_ddWX_@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>	<i586bt$t12$1@dough.gmane.org>	<AANLkTikWe-88_U7FmV2mi4=J6XV-A3-nYUqJdjDNzOA9@mail.gmail.com>	<i5aoas$sja$2@dough.gmane.org>	<AANLkTi=stV1ahzagn-7Fzq73pL3xYDDBZpAsfRUbA86v@mail.gmail.com>
+	<AANLkTinPBor3x6fYemS6h7_R-TR8Tx01exHzG+YhTAz=@mail.gmail.com>
+In-Reply-To: <AANLkTinPBor3x6fYemS6h7_R-TR8Tx01exHzG+YhTAz=@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.202.165.44
+X-SA-Exim-Mail-From: mike@mwester.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Simple srctree example seems not depend on toolchain
+Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,73 +39,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 28 Aug 2010 22:27:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 29 Aug 2010 01:15:19 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Hello,
+Frans Meulenbroeks wrote:
+> Koen brought up this in the thread on the review process. As it
+> (mostly) is about this thread I felt it was more appropriate here.
+[snip]
+> I don't know what others think about it, but I see only a few matches.
+[snip]
+> PS: I think this is also an excellent case why it is a good idea to
+> identify the maintainer within the recipe/
 
-On Sat, Aug 28, 2010 at 10:46 PM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> in an attempt to learn how to use srctree I am hitting either 1) an
-> oversight on my behalf or 2) a bug in srctree.bbclass 3) something
-> else
->
-After further debugging I am more sure I'm seeing wrong behaviour from
-srctree.bbclass.
+I think this gets at the heart of why Frans' recent changes make *me*
+uncomfortable -- their scope is broad and the general approach by Frans
+is to make everyone else provide detailed and precise arguments
+defending why the broad change should not apply to specific items.
 
-If I change "inherit srctree" into "inherit autotools" (just for
-testing, there is no real dependency on autotools) the toolchain gets
-built first.
-Also, if I remote "inherit srctree" the toolchain gets built first.
-If I use "inherit srctree" the toolchain does not get built.
-As a workaround I tried to add DEPENDS = "helloworld" and was
-surprised that this dependency was not effective.
+I, for one, would like to understand where this "cleanup" effort is
+ultimately going to go.  What distros will ultimately remain in OE?
+What what will be the final criteria for recipes being permitted to
+remain in OE (it seems to be converging on "it must build with bitbake
+world, despite the many emails that have offered sound reasons for why
+that is a poor test of recipe quality (which begs the question of why
+recipe buildability might be a valid measure of quality in the first
+place)).
 
-In all faulty cases, bitbake tries to build my recipe right away,
-failing on the toolchain not being built yet.
+Most of the patches and changes in OE have very specific distros in
+mind, or they set out to solve reasonably bounded problems when they
+cross distro boundaries.  Frans' changes do not.  The result is that
+each and every of these patches must be carefully reviewed.  I asked a
+specific question of Frans earlier that he did not answer, for whatever
+reason.  I'll ask again: What distros does Frans test to ensure that his
+patches are sane?
 
-I suspect the dependency mangling in srctree.bbclass to be faulty.
+It's great that we "clean up" OE, but in my opinion, it's being done
+with a sledgehammer approach, and I for one find it uncomfortable being
+"threatened" by the creator of these global giant patches setting
+policies about same that require the community to carefully defend their
+work or interests, or else.
 
-I'll go from here. A minimal test case is online at
-http://www.sidebranch.com/openembedded/helloworld2.tar.bz2.
-Extract inside openembedded.git/
+C'mon folks -- I'm not the only one who's busy, and who's uncomfortable
+with this.  Dev branch or not, this is NOT the way to get a community
+working together.
 
-Copy of the latest test bb below:
-
-Regards,
-
-Leon.
-
-
-DESCRIPTION = "Minimal statically compiled Hello world!"
-LICENSE = "GPL"
-PR = "r0"
-
-inherit srctree
-
-# workaround for the facts that srctree seems to ignore
-# run-time dependency on the toolchain
-DEPENDS = "helloworld"
-
-# build in the src/ subdirectory in the recipe directory
-S = "${FILE_DIRNAME}/src"
-
-FILES_${PN}-dbg += "${bindir}/.debug"
-
-do_compile() {
-        oe_runmake
-}
-
-do_install() {
-        export INSTALL_ROOT=${D}
-        make install
-}
-
-
-
-
-
--- 
-Leon
+-Mike (mwester)
 
 
