@@ -1,51 +1,47 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OpdmC-0001Rl-5y
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Opdna-0001Yi-PG
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 11:02:09 +0200
-Received: by iwn2 with SMTP id 2so3866574iwn.6
+	Sun, 29 Aug 2010 11:03:36 +0200
+Received: by iwn2 with SMTP id 2so3867238iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 02:01:39 -0700 (PDT)
+	Sun, 29 Aug 2010 02:03:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=Tl3v3wLl04ibenbA3OVcj71Xglfbq15p2rrkEQjdw6E=;
-	b=QObslDjVIaqRWscKZUXZQSUclk04R6dHDWHaZi77KQsY65PzhkevRFh1XSRilK4Lwq
-	EJS5EWxGaJdbBTdaUd9KIb2oJOiqhTMoj1MOEOF1nNQH5ofQhxtL+ia87XPtr7pfOZtw
-	1XxbURcCKmrxpplPtim53FsUczIvQUcXRDnAU=
+	bh=4KOwbdFGwdaRSWwCZdKEUgKnqReV3bIyE7jHCkRxJ7Q=;
+	b=A/Ylh6dSRxBBjk5yjH554jZpz1lsdgHfcvW24lotswQ/Wcl64JHnoRNakUx8BiCsMH
+	WTRhnL6hvINo51sdTaJZZlDBPEL/uKeQfa9+M0NCl86P8cH7ypp6sEDtLTv1w7QOyUJ1
+	pAW1kKho/hlcpcNIxkm78iQESAP42BmXmrJLw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=MlXvYraKar2e82fz1JQl87Nc0y78GqMGMrqlYSLHkDTQlUHxGu48hXRVW3LsbqfIBp
-	DI/4YPmeBa4h5Z6NM9k7kJruOgIy1LoywNEtNNLk/l1oT/y0xfPzqfGYoGHQ3Ru3cPHu
-	chKnMG5NnIf2G4tQODk9ftbyEGeHof56hRpfg=
-Received: by 10.231.15.9 with SMTP id i9mr3571673iba.58.1283072499199; Sun, 29
-	Aug 2010 02:01:39 -0700 (PDT)
+	b=f30k3F66fAChVfbp7fjSrssjr1TNzMv1BZMHBS9qB49bu1rlUrKG3AMSAxXN2hBnLf
+	yRAMBl7+cN432uCJUS76zjk7EQn9PEcXWQc1jV7/awiOvMS1EF5dxF0kvGRmBzSbiT+I
+	O9DGyj0R0+0LfctxtoCY/fkdCq1VM9iKxfdZE=
 MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Sun, 29 Aug 2010 02:01:19 -0700 (PDT)
-In-Reply-To: <4C79B2E7.6070806@mwester.net>
-References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
-	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
-	<i586bt$t12$1@dough.gmane.org>
-	<AANLkTikWe-88_U7FmV2mi4=J6XV-A3-nYUqJdjDNzOA9@mail.gmail.com>
-	<i5aoas$sja$2@dough.gmane.org>
-	<AANLkTi=stV1ahzagn-7Fzq73pL3xYDDBZpAsfRUbA86v@mail.gmail.com>
-	<AANLkTinPBor3x6fYemS6h7_R-TR8Tx01exHzG+YhTAz=@mail.gmail.com>
-	<4C79B2E7.6070806@mwester.net>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Sun, 29 Aug 2010 02:01:19 -0700
-Message-ID: <AANLkTi=ouYU-pn4Po3G9bqgxNYTquRH+06RuWr8W5_z_@mail.gmail.com>
+Received: by 10.231.79.213 with SMTP id q21mr3497905ibk.137.1283072583008;
+	Sun, 29 Aug 2010 02:03:03 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Sun, 29 Aug 2010 02:03:02 -0700 (PDT)
+In-Reply-To: <20100829074414.GM17268@jama>
+References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
+	<1283027073-12308-22-git-send-email-raj.khem@gmail.com>
+	<AANLkTinto0DJo6_PQ+c55fdsn45xfP6RgTHV-CUednpQ@mail.gmail.com>
+	<20100829074414.GM17268@jama>
+Date: Sun, 29 Aug 2010 11:03:02 +0200
+Message-ID: <AANLkTimcCY+ZtEjcCwsbctrOWHsXfr6d9HqNimhDh69r@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
+Subject: Re: [PATCH 21/23] xqt2_20060509.bb: DEPEND on libxmu instead of xmu
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,79 +55,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 09:02:09 -0000
+X-List-Received-Date: Sun, 29 Aug 2010 09:03:36 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Sat, Aug 28, 2010 at 6:07 PM, Mike Westerhof <mike@mwester.net> wrote:
-> Frans Meulenbroeks wrote:
->> Koen brought up this in the thread on the review process. As it
->> (mostly) is about this thread I felt it was more appropriate here.
-> [snip]
->> I don't know what others think about it, but I see only a few matches.
-> [snip]
->> PS: I think this is also an excellent case why it is a good idea to
->> identify the maintainer within the recipe/
+2010/8/29 Martin Jansa <martin.jansa@gmail.com>:
+> On Sun, Aug 29, 2010 at 09:14:03AM +0200, Frans Meulenbroeks wrote:
+>> I think this is very bad that we apparenlty have a recipe from 2006
+>> that has a problem with a lib that is not there:
+>> The DEPENDS is also from 2006.
+>> Was it possible to have broken depends in the past, or was xmu a good
+>> depends in the past?
+>> If not, is it worthwhile to keep recipes from 2006 that are apparently
+>> not maintained and have been kept around for so long ?
 >
-> I think this gets at the heart of why Frans' recent changes make *me*
-> uncomfortable -- their scope is broad and the general approach by Frans
-> is to make everyone else provide detailed and precise arguments
-> defending why the broad change should not apply to specific items.
+> This was my fault from 2010-06-24
+> http://git.openembedded.org/cgit.cgi/openembedded/commit/?id=3Dc470dca9dd=
+eaa911c4d63edd8e863f31e537e97f
 >
-> I, for one, would like to understand where this "cleanup" effort is
-> ultimately going to go. =A0What distros will ultimately remain in OE?
-> What what will be the final criteria for recipes being permitted to
-> remain in OE (it seems to be converging on "it must build with bitbake
-> world, despite the many emails that have offered sound reasons for why
-> that is a poor test of recipe quality (which begs the question of why
-> recipe buildability might be a valid measure of quality in the first
-> place)).
+> and the fix is right
 
-From a distro maintainer POV I can understand you point very well. I
-don't feel strongly
-about removal of recipes if they work and are old but I don't see any
-value in a recipe which does not build in any combination either.
-would you agree? Either we fix it or we can get rid of it as second choice.
+Ah ok, that explains why I saw that the depends on Xmu was already
+there for 4 years.
+Thanks for explaining this.
 
-I think bitbake world might be a far fetched goal but then I think it
-speaks of health of the metadata.
-(once bitbake world worked in OE) did we improve the situation by
-making it unbuildable I dont think so.
-and other distros do have these targets and they build too (e.g. freebsd)
-I am afraid If we leave status quo then the cruft will keep piling up
-and it will become really
-unmanageable. Somewhere we need to bite the bullet. IMO OE should not
-become a dumpyard of recipes where
-you dig the ones that work and create a distro out of it but we should
-try to make it a collection of working recipes(most of them) which
-offers a wide set of recipes(different versions of same package or
-different alternatives) to distros.
-and all ideas are welcome to do it in a co-operative way. Lets make
-sure that patches get reviewed here
-and chance given to voice opinions and test patches by interested
-parties before they get applied.
-
+Frans
 >
-> Most of the patches and changes in OE have very specific distros in
-> mind, or they set out to solve reasonably bounded problems when they
-> cross distro boundaries. =A0Frans' changes do not. =A0The result is that
-> each and every of these patches must be carefully reviewed. =A0I asked a
-> specific question of Frans earlier that he did not answer, for whatever
-> reason. =A0I'll ask again: What distros does Frans test to ensure that hi=
-s
-> patches are sane?
+> Acked-by: Martin Jansa <Martin.Jansa@gmail.com>
 >
-> It's great that we "clean up" OE, but in my opinion, it's being done
-> with a sledgehammer approach, and I for one find it uncomfortable being
-> "threatened" by the creator of these global giant patches setting
-> policies about same that require the community to carefully defend their
-> work or interests, or else.
+>> Anyway wrt the patch:
+>> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>>
+>>
+>>
+>> 2010/8/28 Khem Raj <raj.khem@gmail.com>:
+>> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> > ---
+>> > =A0recipes/xqt2/xqt2_20060509.bb | =A0 =A02 +-
+>> > =A01 files changed, 1 insertions(+), 1 deletions(-)
+>> >
+>> > diff --git a/recipes/xqt2/xqt2_20060509.bb b/recipes/xqt2/xqt2_2006050=
+9.bb
+>> > index 7634d27..4492bc7 100644
+>> > --- a/recipes/xqt2/xqt2_20060509.bb
+>> > +++ b/recipes/xqt2/xqt2_20060509.bb
+>> > @@ -1,6 +1,6 @@
+>> > =A0DESCRIPTION =3D "Xqt2 is an X-Server than runs within the Opie envi=
+ronment"
+>> > =A0HOMEPAGE =3D "http://xqt.sourceforge.jp"
+>> > -DEPENDS =3D "freetype libxi xmu flex-native virtual/libqte2 libqpe-op=
+ie"
+>> > +DEPENDS =3D "freetype libxi libxmu flex-native virtual/libqte2 libqpe=
+-opie"
+>> > =A0LICENSE =3D "GPL"
+>> > =A0SECTION =3D "opie/applications"
+>> > =A0APPTYPE =3D "binary"
+>> > --
+>> > 1.7.1
+>> >
+>> >
+>> > _______________________________________________
+>> > Openembedded-devel mailing list
+>> > Openembedded-devel@lists.openembedded.org
+>> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>> >
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> C'mon folks -- I'm not the only one who's busy, and who's uncomfortable
-> with this. =A0Dev branch or not, this is NOT the way to get a community
-> working together.
->
-> -Mike (mwester)
+> --
+> Martin 'JaMa' Jansa =A0 =A0 jabber: Martin.Jansa@gmail.com
 >
 > _______________________________________________
 > Openembedded-devel mailing list
