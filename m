@@ -1,43 +1,40 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OpjIm-0007O9-C4
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OpjOY-0007uo-Us
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 29 Aug 2010 16:56:09 +0200
-Received: by wyg36 with SMTP id 36so5259717wyg.6
+	Sun, 29 Aug 2010 17:02:07 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o7TF1Y7U004398
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 07:55:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=VGOkxdC9XJX79TB0pN4kLnXXNIYQXIpTnnvrm0jbiZs=;
-	b=JVw9MvZqM9JGNDFv+uthsJVZexpWHC00Gb6KqIns6qFWyNaKiyv1xqc3J3e46gyTCo
-	ILeAW1AIYDhElcMUHDqYzDbMTsnbiMNa6vDUm/M3SW3XLPolQrfHN/QkB8Gzzy7oMvzW
-	7InnOWb8eLmydOlSvyU8zpo2pir6qwqvOs3kA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=RVrJT26A7XdgRgrXR1IW4sH9595uk8qQA+yO1Yu8+HvqfkBsnfzA/ShX/lG9XkIrgk
-	NuUX7jL+52E3XmYWqgolWd7CSCz1iKqpmSr1XbidpYN2L6lTX9UHKFsSpcCbfgLNYL2u
-	tUnzz4vErcyHYvVcgqmlHS5V79Yl7dNqGu1vY=
-MIME-Version: 1.0
-Received: by 10.216.38.20 with SMTP id z20mr3607391wea.108.1283093737620; Sun,
-	29 Aug 2010 07:55:37 -0700 (PDT)
-Received: by 10.216.179.76 with HTTP; Sun, 29 Aug 2010 07:55:37 -0700 (PDT)
-In-Reply-To: <AANLkTikqOjKcJGArouoVst7BxVE+82_VyZ8hS+KqcCD6@mail.gmail.com>
-References: <AANLkTikqOjKcJGArouoVst7BxVE+82_VyZ8hS+KqcCD6@mail.gmail.com>
-Date: Sun, 29 Aug 2010 07:55:37 -0700
-Message-ID: <AANLkTine9b-E1ueo0Ye8xLL6Lb7+BmwtP1-yG6WZhY4z@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	Sun, 29 Aug 2010 17:01:35 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OpjO2-0001Ze-78
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 29 Aug 2010 17:01:34 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <1283086227-13224-1-git-send-email-eric@eukrea.com>
+	<lysk1x5xk3.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<20100829141015.GR17268@jama>
+Date: Sun, 29 Aug 2010 17:01:34 +0200
+In-Reply-To: <20100829141015.GR17268@jama> (Martin Jansa's message of "Sun, 29
+	Aug 2010 16:10:15 +0200")
+Message-ID: <lyy6bpmpip.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: gcc-4.3.3 DEPENDS on gettext
+Subject: Re: [PATCH] alsa-utils-alsamixer: add ncurses-terminfo RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +48,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 29 Aug 2010 14:56:09 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 29 Aug 2010 15:02:07 -0000
+Content-Type: text/plain; charset=us-ascii
 
-I notice that message in a bunch of packages that build on my system.
+Martin Jansa <martin.jansa@gmail.com> writes:
 
-On Sun, Aug 29, 2010 at 7:32 AM, Leon Woestenberg
-<leon.woestenberg@gmail.com> wrote:
-> Hello,
+>> > +RDEPENDS_alsa-utils-alsamixer = "ncurses-terminfo"
+>> 
+>> I think this should be solved in ncurses because it affects other
+>> packages too; e.g. moving its /etc/terminfo files from 'ncurses' into
+>> an own package and rrecommending this in the libtinfo package.
 >
-> can others review their logs for similar messages on GCC:
->
-> NOTE: Gettext required but not in DEPENDS for file
-> /home/leon/sandbox/ccm/topha/openembedded/tmp/work/ppce500v2-angstrom-linux-gnuspe/gcc-cross-initial-4.3.3-r16.1/gcc-4.3.3/intl/configure.ac.
-> Missing inherit gettext?
->
->
-> Regards,
-> --
-> Leon
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> I've already added this to few recipes:
+> http://git.openembedded.org/cgit.cgi/openembedded/log/?qt=grep&q=terminfo
+
+The 'ncurses-terminfo' is a large package (>500kB) and contains definitions
+for exotic terminal.  The definitions on 'ncurses' take only 6kB and cover
+perhaps 95% of all use cases (linux, xterm, vt100, screen).
+
+I will move them into an own -terminfo-base package; atm I am not sure
+whether I should write
+
+| RSUGGESTS_${PN}-libtinfo = "${PN}-terminfo"
+| RRECOMMENDS_${PN}-libtinfo = "${PN}-terminfo-base"
+
+or
+
+| RPROVIDES_${PN}-terminfo = "virtual/terminfo"
+| RPROVIDES_${PN}-terminfo-base = "virtual/terminfo"
+| RDEPENDS_${PN}-libtinfo = "virtual/terminfo"
+
+I tend to the first variant.
+
+
+Enrico
 
 
