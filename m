@@ -1,48 +1,31 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1Oq8wI-0000Hz-4T
+	(envelope-from <philip@balister.org>) id 1Oq8y5-0002lX-MN
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 20:19:04 +0200
-Received: by qyk8 with SMTP id 8so3309729qyk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 11:18:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=IZtYBAB8/bAO1yRnfVqcPL50cQw+baxClaDeks+jcIk=;
-	b=K9MNJJtFBy9I0/qZKA6wzIFXe6cEECuhRQx/fXT4R5ntTNRg8/hcZGuIqPl25zTnGd
-	XWGyxeS6aHjkxVVJXDZVy02XeQls06V66H8oFiwv3QB3EPDOyVKDFlQHJDjQ2ALMiqr3
-	lZo0nQH1GM9D+jBT7ZgIWTTQXdBoyeUc+u140=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ajE+/kihqVKzxjSRl4XxkrfDAk3zmctoc1/dhqacBhr6ecDUvPjQh3dEcmjXwu+6a9
-	tZaS5kD4XQavB1NmPif2cKPiBEJJO/VPYFbAU0n/gug4goSWsU0CausW2uBLLQDdX/IV
-	twLTkL2EKBZR5DuNG8H4HAOKFtZcyWjrJb8Kg=
+	Mon, 30 Aug 2010 20:20:36 +0200
+Received: (qmail 10350 invoked by uid 1003); 30 Aug 2010 18:19:56 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	30 Aug 2010 18:19:55 -0000
+Message-ID: <4C7BF64A.6080408@balister.org>
+Date: Mon, 30 Aug 2010 14:19:54 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.229.215.67 with SMTP id hd3mr3348756qcb.74.1283192284763; Mon,
-	30 Aug 2010 11:18:04 -0700 (PDT)
-Received: by 10.229.23.1 with HTTP; Mon, 30 Aug 2010 11:18:04 -0700 (PDT)
-In-Reply-To: <AANLkTimtj4nLzXBR5j=MJ6htymbtVQh93YK=F-Sa8bA0@mail.gmail.com>
-References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
-	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-	<AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
-	<AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
-	<AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
-	<AANLkTimtj4nLzXBR5j=MJ6htymbtVQh93YK=F-Sa8bA0@mail.gmail.com>
-Date: Mon, 30 Aug 2010 20:18:04 +0200
-Message-ID: <AANLkTinr5r8Jtd+ZWznHaBBSK1cB=+XjzDRAPuet1+tr@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+References: <AANLkTikcbgZQ8EkyCh3a7mby5VbXZ4Hp8bXRORPpZKsY@mail.gmail.com>
+In-Reply-To: <AANLkTikcbgZQ8EkyCh3a7mby5VbXZ4Hp8bXRORPpZKsY@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: how to add file to SRC_URI for target only
+Subject: Re: linux-omap-psp-2.6.32 breaks iscsi-target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,47 +39,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 18:19:35 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Aug 2010 18:20:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Aug 30, 2010 at 7:07 PM, Chris Larson <clarson@kergoth.com> wrote:
-> On Mon, Aug 30, 2010 at 9:52 AM, Esben Haabendal
-> <esbenhaabendal@gmail.com>wrote:
+On 08/30/2010 01:47 PM, Frans Meulenbroeks wrote:
+> The current beagleboard angstrom and minimal distro's (and maybe
+> others) use the linux-omap-psp_2.6.32.bb recipe to build the kernel.
+
+What is iscsi and why would I need it on the Beagleboard?
+
+Philip
+
 >
->> On Thu, Aug 26, 2010 at 4:27 PM, Chris Larson <clarson@kergoth.com> wrote:
->>
->> > Okay, how about..
->> >
->> > OVERRIDES =. "${@['', 'target:']['${BPN}' == '${PN}']}"
->>
->> I can also think of at least one way to do this without using anonymous
->> code.
->>
->> In base.bbclass:
->> RECIPE_TYPE = "target"
->> OVERRIDES =. "${RECIPE_TYPE}"
->>
->> In native.bbclass:
->> RECIPE_TYPE = "native"
->>
->> In cross.bbclass:
->> RECIPE_TYPE = "cross"
+> This one says:
+> # This is the v2.6.32_OMAPPSP_03.00.01.06 branch
+> SRCREV = "a6bad4464f985fdd3bed72e1b82dcbfc004d7869"
 >
+> # The main PR is now using MACHINE_KERNEL_PR, for omap3 see
+> conf/machine/include/omap3.inc
+> MACHINE_KERNEL_PR_append = "+gitr${SRCREV}"
 >
-> And nativesdk, and sdk, and crosssdk, and cross-canadian, and.. ;)
-
-Exactly.  But that is about it. The number of recipe types are really
-quite limited.
-
-This type of override is quite similar to the virtclass-* overrides,
-just that it can be used independent on what recipe type is the
-original one (not virtual).
-
-Anyway, I were merely illustrating that a more efficient solution is
-there, and could even be argued to be "cleaner" than the alternative.
-Of-course, the last part is quite subjective, so anyone is free to
-disagree.
-
-/Esben
+> SRC_URI = "git://arago-project.org/git/people/sriram/ti-psp-omap.git;protocol=git;branch=master
+> \
+>
+> Building it creates:
+> linux-omap-psp-2.6.32-r88+gitra6bad4464f985fdd3bed72e1b82dcbfc004d7869
+>
+> However this is not a sound 2.6.32 tree. It contains this patch
+> http://arago-project.org/git/people/?p=sriram/ti-psp-omap.git;a=commit;h=c720c7e8383aff1cb219bddf474ed89d850336e3
+> which was not in the mainstream kernel in 2.6.32
+>
+> (compare
+> http://arago-project.org/git/people/?p=sriram/ti-psp-omap.git;a=blob;f=include/net/inet_sock.h;hb=c720c7e8383aff1cb219bddf474ed89d850336e3
+> with
+> http://git.kernel.org/?p=linux/kernel/git/stable/linux-2.6.32.y.git;a=blob;f=include/net/inet_sock.h;h=47004f35cc7eaf6f2b3cac2779ea7b7ccd5d9c1f;hb=HEAD
+> ).
+>
+> The patch mentioned above was integrated in a 2.6.33 rc version.
+>
+> iscsi-utils uses the inet_sock struct, and contains code to access the
+> daddr field of this struct. For versions<= .32 daddr is used. for
+> higher versions inet_daddr is used.
+> However the omap-psp kernel from arago does contain this patch  but
+> reports as a .32 kernel causing a compiler errir when compiling
+> iscsi_target (as the name the recipe expects is not there).
+>
+> Not sure how to fix it. Changing the test in iscsi-target is not an
+> option as then it does not work for official .32 kernels.
+> Probably the best way to fix this is to use the above patch to revert
+> the change.
+>
+> anyone a better solution?
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
