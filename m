@@ -1,44 +1,51 @@
-Received: from out1.smtp.messagingengine.com ([66.111.4.25])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1Oq7gg-00019j-UK
+	(envelope-from <kergoth@gmail.com>) id 1Oq7qR-0005KY-S4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 18:59:00 +0200
-Received: from compute3.internal (compute3.internal [10.202.2.43])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 6FABF482
+	Mon, 30 Aug 2010 19:10:02 +0200
+Received: by eyb7 with SMTP id 7so3379269eyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 12:57:56 -0400 (EDT)
-Received: from frontend1.messagingengine.com ([10.202.2.160])
-	by compute3.internal (MEProxy); Mon, 30 Aug 2010 12:57:56 -0400
-DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
-	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=sesm+++LylX+6amosLK6Awk56vg=;
-	b=Xa59g9XoWuF7v5ufTeCKo+h/kfcr28MK2aE8hn3qz//45pgtXxxHpoe/GBhiTeYKld5VsmofEqjLuvJLhxq7XdmcsTIYxX0LVUf57oRWEagyuvslvCFnMFmtX3V1mkXLYtxUXG/ppSE4zETSgUS98n3V6kvlR4ueu1to8r7Xs5A=
-X-Sasl-enc: FaoqQQgyBhkoXoeF0Kkld5WNr2GPppohfoO7KR5wWIDW 1283187476
-Received: from [192.168.1.34] (hnvr-4d078ce1.pool.mediaWays.net [77.7.140.225])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id D7889402C04
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 12:57:55 -0400 (EDT)
-Date: Mon, 30 Aug 2010 18:59:33 +0200 (CEST)
-From: Vitus Jensen <vjensen@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinFXpPdAkd79h94z70m_8MbamLd48pzR4sLQs34@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1008301851400.5745@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTinFXpPdAkd79h94z70m_8MbamLd48pzR4sLQs34@mail.gmail.com>
-User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
-Jabber-ID: vitus_jensen@gmx.de
-X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
-X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
-	@ www.ii.com
+	Mon, 30 Aug 2010 10:07:57 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=yaEyK57RTVnO/69QqiE2eUH1JH0g9J3qu/Tc12UcrLc=;
+	b=x3sjyYhfDnrgvBc/3CKsTIzFs/aPH1fA0tPXCUbZdkk01IDAVSBYvlevTTgMCnIBfk
+	FjuLyQ5/XpEuFJlzOPqsm2f62tHzbWyfu+eK0JH5+iOTKnVQZuQ/yc1TR9T7MYSudNcH
+	oM+HKni3WRprMlYbNnKRd71ZOh/5tpS2kjOqc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=K84rbLrt49yr8Qf5nWnUgl4SPrkaxx780bFennt9zJI5EzItGAxdtRiYVyyTaR2PoB
+	KLehCJTzh6Dykyys483nkfiGBk62BIw9Mk4IzVQeqW6EaIB5S1COpxA7Kk/kG/gr7k3X
+	+Tlz98nhOjD/LDHnfT7C3WQFiYH7KV44AeOMA=
+Received: by 10.216.165.77 with SMTP id d55mr5293724wel.23.1283188077235; Mon,
+	30 Aug 2010 10:07:57 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 66.111.4.25
-X-SA-Exim-Mail-From: vjensen@gmx.de
+Sender: kergoth@gmail.com
+Received: by 10.216.237.167 with HTTP; Mon, 30 Aug 2010 10:07:37 -0700 (PDT)
+In-Reply-To: <AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
+References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
+	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
+	<AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
+	<AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
+	<AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 30 Aug 2010 10:07:37 -0700
+X-Google-Sender-Auth: 93bRJP77PsxGeYYVlMeOxwFUKr0
+Message-ID: <AANLkTimtj4nLzXBR5j=MJ6htymbtVQh93YK=F-Sa8bA0@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFD] increased dependency checking
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: how to add file to SRC_URI for target only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,46 +59,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 16:59:05 -0000
-Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
+X-List-Received-Date: Mon, 30 Aug 2010 17:11:11 -0000
+X-List-Received-Date: Mon, 30 Aug 2010 17:11:11 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Hello Frans,
+On Mon, Aug 30, 2010 at 9:52 AM, Esben Haabendal
+<esbenhaabendal@gmail.com>wrote:
 
-On Sat, 28 Aug 2010, Frans Meulenbroeks wrote:
+> On Thu, Aug 26, 2010 at 4:27 PM, Chris Larson <clarson@kergoth.com> wrote:
+>
+> > Okay, how about..
+> >
+> > OVERRIDES =. "${@['', 'target:']['${BPN}' == '${PN}']}"
+>
+> I can also think of at least one way to do this without using anonymous
+> code.
+>
+> In base.bbclass:
+> RECIPE_TYPE = "target"
+> OVERRIDES =. "${RECIPE_TYPE}"
+>
+> In native.bbclass:
+> RECIPE_TYPE = "native"
+>
+> In cross.bbclass:
+> RECIPE_TYPE = "cross"
 
-> Currently if a package in the DEPENDS list is modified, a package that
-> depends on it does not get updated even if explicitly build
-> E.g. when I just updated libexif and after that did a bitbake
-> mythplugins (which has a DEPENDS on libexif) libexif got build but
-> mythplugins did not get rebuild.
 
-First: bitbake isn't make.  So doing it half-automatic is OK.
-
-> This is not really proper. E.g. if the lib changed a .h file the build
-> of the using package could fail, but it could easily get unnoticed as
-> one will only become aware of this when forcefully rebuilding that
-> using package.
-
-In my opinion a change of a header is a change of interface, and a change 
-of the package the lib is packed into.  This always requires a bump of PR 
-of that package.
-
-> I think we can do better by better exploiting the timestamp.
-> E.g. what about doing it this way:
-
-So you don't need to exploit the timestamps, you "just" have to keep the 
-dependency chain at the moment a package was built.  On the next run you 
-compare the dependency chain and rebuild if a package got a new PV-PR.
-
-This information could be kept in the bitbake cache.  When someone changes
-  distro / machine / local conf he has to do the rebuild himself.  after 
-all, bitbake isn't make.
-
-Best regards,
-    Vitus
-
+And nativesdk, and sdk, and crosssdk, and cross-canadian, and.. ;)
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
