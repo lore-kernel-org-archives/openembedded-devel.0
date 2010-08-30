@@ -1,47 +1,44 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <esbenhaabendal@gmail.com>) id 1Oq7b8-0004f7-0B
+	(envelope-from <vjensen@gmx.de>) id 1Oq7gg-00019j-UK
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 18:52:43 +0200
-Received: by qyk8 with SMTP id 8so3218603qyk.6
+	Mon, 30 Aug 2010 18:59:00 +0200
+Received: from compute3.internal (compute3.internal [10.202.2.43])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 6FABF482
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 09:52:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=T76dRSNx059bvEn8BxIf/N28DmbCHasszh6zoUD82r4=;
-	b=msRqk2b/k4+avTKA0b9vr/M5qg+a11pQb2XLEKCEKWXzlqtbuj87GMjQ13x2BIHoPp
-	3HDPWMWFQ7M+fwPlnm968z5qyGVzpqgFgZthjU9UU8tplH21vlMK2YYM4nhN4viYP/+7
-	cJbylsdHEDAolEATPFtERcBLOR8uVJPgMfKjE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=OSy79vJ2r6XSkZIOTNHyx8eKJ+9Bx9J2kYMc7Xj6FMTjYIW2ShuzfZlifsEfLxzFhh
-	rHPiYwCHjw1f4s+6CEttLtE0EFRg7v4Eh4xVJ4G6SUAAS98rCTLW4ASDy6yp1Zyu+YdC
-	9UciQrXe+xI8Woz9ILquROM07AqZvCvweDoWY=
-MIME-Version: 1.0
-Received: by 10.229.37.3 with SMTP id v3mr3239636qcd.169.1283187128323; Mon,
-	30 Aug 2010 09:52:08 -0700 (PDT)
-Received: by 10.229.23.1 with HTTP; Mon, 30 Aug 2010 09:52:07 -0700 (PDT)
-In-Reply-To: <AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
-References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
-	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-	<AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
-	<AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
-Date: Mon, 30 Aug 2010 18:52:07 +0200
-Message-ID: <AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
-From: Esben Haabendal <esbenhaabendal@gmail.com>
+	Mon, 30 Aug 2010 12:57:56 -0400 (EDT)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute3.internal (MEProxy); Mon, 30 Aug 2010 12:57:56 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=sesm+++LylX+6amosLK6Awk56vg=;
+	b=Xa59g9XoWuF7v5ufTeCKo+h/kfcr28MK2aE8hn3qz//45pgtXxxHpoe/GBhiTeYKld5VsmofEqjLuvJLhxq7XdmcsTIYxX0LVUf57oRWEagyuvslvCFnMFmtX3V1mkXLYtxUXG/ppSE4zETSgUS98n3V6kvlR4ueu1to8r7Xs5A=
+X-Sasl-enc: FaoqQQgyBhkoXoeF0Kkld5WNr2GPppohfoO7KR5wWIDW 1283187476
+Received: from [192.168.1.34] (hnvr-4d078ce1.pool.mediaWays.net [77.7.140.225])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id D7889402C04
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Aug 2010 12:57:55 -0400 (EDT)
+Date: Mon, 30 Aug 2010 18:59:33 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: esbenhaabendal@gmail.com
+In-Reply-To: <AANLkTinFXpPdAkd79h94z70m_8MbamLd48pzR4sLQs34@mail.gmail.com>
+Message-ID: <alpine.LNX.2.00.1008301851400.5745@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTinFXpPdAkd79h94z70m_8MbamLd48pzR4sLQs34@mail.gmail.com>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: how to add file to SRC_URI for target only
+Subject: Re: [RFD] increased dependency checking
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,36 +52,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 16:52:43 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Aug 2010 16:59:05 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Thu, Aug 26, 2010 at 4:27 PM, Chris Larson <clarson@kergoth.com> wrote:
+Hello Frans,
 
-> Okay, how about..
->
-> OVERRIDES =3D. "${@['', 'target:']['${BPN}' =3D=3D '${PN}']}"
+On Sat, 28 Aug 2010, Frans Meulenbroeks wrote:
 
-I can also think of at least one way to do this without using anonymous cod=
-e.
+> Currently if a package in the DEPENDS list is modified, a package that
+> depends on it does not get updated even if explicitly build
+> E.g. when I just updated libexif and after that did a bitbake
+> mythplugins (which has a DEPENDS on libexif) libexif got build but
+> mythplugins did not get rebuild.
 
-In base.bbclass:
-RECIPE_TYPE =3D "target"
-OVERRIDES =3D. "${RECIPE_TYPE}"
+First: bitbake isn't make.  So doing it half-automatic is OK.
 
-In native.bbclass:
-RECIPE_TYPE =3D "native"
+> This is not really proper. E.g. if the lib changed a .h file the build
+> of the using package could fail, but it could easily get unnoticed as
+> one will only become aware of this when forcefully rebuilding that
+> using package.
 
-In cross.bbclass:
-RECIPE_TYPE =3D "cross"
+In my opinion a change of a header is a change of interface, and a change 
+of the package the lib is packed into.  This always requires a bump of PR 
+of that package.
 
-and so on...
+> I think we can do better by better exploiting the timestamp.
+> E.g. what about doing it this way:
 
-/Esben
---=20
-Esben Haabendal, Senior Software Consultant
-Dor=E9Development ApS, Ved Stranden 1, 9560 Hadsund, DK-Denmark
-Phone: +45 51 92 53 93, E-mail: eha@doredevelopment.dk
-WWW: http://www.doredevelopment.dk
+So you don't need to exploit the timestamps, you "just" have to keep the 
+dependency chain at the moment a package was built.  On the next run you 
+compare the dependency chain and rebuild if a package got a new PV-PR.
+
+This information could be kept in the bitbake cache.  When someone changes
+  distro / machine / local conf he has to do the rebuild himself.  after 
+all, bitbake isn't make.
+
+Best regards,
+    Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
