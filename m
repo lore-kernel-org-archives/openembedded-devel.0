@@ -1,51 +1,47 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Oq7qR-0005KY-S4
+	(envelope-from <raj.khem@gmail.com>) id 1Oq843-0007GA-NW
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 19:10:02 +0200
-Received: by eyb7 with SMTP id 7so3379269eyb.6
+	Mon, 30 Aug 2010 19:22:41 +0200
+Received: by pxi11 with SMTP id 11so2264951pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 10:07:57 -0700 (PDT)
+	Mon, 30 Aug 2010 10:22:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=yaEyK57RTVnO/69QqiE2eUH1JH0g9J3qu/Tc12UcrLc=;
-	b=x3sjyYhfDnrgvBc/3CKsTIzFs/aPH1fA0tPXCUbZdkk01IDAVSBYvlevTTgMCnIBfk
-	FjuLyQ5/XpEuFJlzOPqsm2f62tHzbWyfu+eK0JH5+iOTKnVQZuQ/yc1TR9T7MYSudNcH
-	oM+HKni3WRprMlYbNnKRd71ZOh/5tpS2kjOqc=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=/sAhlBCMs3a2tD1ghIU7iY54aCMVjHCwd8S9dhr9uhE=;
+	b=SYWQmB1AxqtlfQLXPW7G7aXLtr11hQn1fpU9SzZByluJwWfQg46xjhw9XsrBCca1SK
+	nwlkeEfRN7wcnlqvWLj8ru7S8P4tVDJXspWrbx719v1bBp0r4PRRH9+1UdBJ2KREsBu7
+	jYu1kEX5S4/74UIyy/8i2w+SteqBH8rPSCn8U=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=K84rbLrt49yr8Qf5nWnUgl4SPrkaxx780bFennt9zJI5EzItGAxdtRiYVyyTaR2PoB
-	KLehCJTzh6Dykyys483nkfiGBk62BIw9Mk4IzVQeqW6EaIB5S1COpxA7Kk/kG/gr7k3X
-	+Tlz98nhOjD/LDHnfT7C3WQFiYH7KV44AeOMA=
-Received: by 10.216.165.77 with SMTP id d55mr5293724wel.23.1283188077235; Mon,
-	30 Aug 2010 10:07:57 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=XMsUsIgFDiahZx3MWUramexdKxUc4Y+OuenGEC7vzHxpWA5RA16WM4h0EbnXj2G0/D
+	uo29rpuow310L28m5whsL8/h+btxXdk6guWdPNyz6WmBwcqzBsv7fxjp69g5BXMjUuW+
+	AP/28NMRIPmNTC9K9jJbKXGnqFsOY+1ayIihE=
+Received: by 10.143.1.12 with SMTP id d12mr4824190wfi.327.1283188922497; Mon,
+	30 Aug 2010 10:22:02 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Mon, 30 Aug 2010 10:07:37 -0700 (PDT)
-In-Reply-To: <AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
-References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
-	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-	<AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
-	<AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
-	<AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 30 Aug 2010 10:07:37 -0700
-X-Google-Sender-Auth: 93bRJP77PsxGeYYVlMeOxwFUKr0
-Message-ID: <AANLkTimtj4nLzXBR5j=MJ6htymbtVQh93YK=F-Sa8bA0@mail.gmail.com>
+Received: by 10.231.207.8 with HTTP; Mon, 30 Aug 2010 10:21:42 -0700 (PDT)
+In-Reply-To: <AANLkTi=_WQfCcTZ4JmHOOTagBiN+4EtAi3J=5XpoRopt@mail.gmail.com>
+References: <AANLkTinvhMiZhHC4GrR8Muf-7oPa-j3zBeDWCZrkTd-z@mail.gmail.com>
+	<AANLkTimH2YnW3CnLFxa6NyNCeC0-jNqy0dhDXS_ddWX_@mail.gmail.com>
+	<AANLkTinJ7rUj8jq=PYeVXk7yZiLB6AtxQm9JKDcXZswR@mail.gmail.com>
+	<AANLkTikONxUinXtW0V6nxzt11MWE0Qt3HUxsZ9N+0_48@mail.gmail.com>
+	<AANLkTi=_WQfCcTZ4JmHOOTagBiN+4EtAi3J=5XpoRopt@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 30 Aug 2010 10:21:42 -0700
+Message-ID: <AANLkTi=znNpSvhjp7n8j-2Ht-Dk3XnSyaXJYjOXb21ZR@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: how to add file to SRC_URI for target only
+Subject: Re: Simple srctree example seems not depend on toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,38 +55,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 17:11:11 -0000
-X-List-Received-Date: Mon, 30 Aug 2010 17:11:11 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 30 Aug 2010 17:22:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Aug 30, 2010 at 9:52 AM, Esben Haabendal
-<esbenhaabendal@gmail.com>wrote:
+On Mon, Aug 30, 2010 at 9:09 AM, Cliff Brake <cliff.brake@gmail.com> wrote:
+> On Sun, Aug 29, 2010 at 2:24 PM, Khem Raj <raj.khem@gmail.com> wrote:
+>> On Sun, Aug 29, 2010 at 7:30 AM, Leon Woestenberg
+>> <leon.woestenberg@gmail.com> wrote:
+>>> Hello,
+>>>
+>>> On Sun, Aug 29, 2010 at 12:27 AM, Leon Woestenberg
+>>> <leon.woestenberg@gmail.com> wrote:
+>>>> On Sat, Aug 28, 2010 at 10:46 PM, Leon Woestenberg
+>>>> <leon.woestenberg@gmail.com> wrote:
+>>>>> in an attempt to learn how to use srctree I am hitting either 1) an
+>>>>> oversight on my behalf or 2) a bug in srctree.bbclass 3) something
+>>>>> else
+>>>>>
+>>>> After further debugging I am more sure I'm seeing wrong behaviour from
+>>>> srctree.bbclass.
+>>>>
+>>>
+>>> This was a bogus report. I thought I was working against latest OE
+>>> GIT, but in fact, it seems the GIT service is unreliable currently and
+>>> I have probably hit an aborted pull.
+>>> Download speed from GIT is ~20 kB/s.
+>>>
+>>> I'm interested in adding this helloworld2 as helloworld-srctree as an
+>>> srctree example.
+>>
+>> Yes please go ahead that will be a good template to have.
+>
+> I have two other srctree examples -- I wonder if we should think of a
+> consistent way to organize examples so its a little more obvious where
+> to find them?
 
-> On Thu, Aug 26, 2010 at 4:27 PM, Chris Larson <clarson@kergoth.com> wrote:
->
-> > Okay, how about..
-> >
-> > OVERRIDES =. "${@['', 'target:']['${BPN}' == '${PN}']}"
->
-> I can also think of at least one way to do this without using anonymous
-> code.
->
-> In base.bbclass:
-> RECIPE_TYPE = "target"
-> OVERRIDES =. "${RECIPE_TYPE}"
->
-> In native.bbclass:
-> RECIPE_TYPE = "native"
->
-> In cross.bbclass:
-> RECIPE_TYPE = "cross"
+may we could have something like recipes/templates or a separate
+overlay which has examples
 
 
-And nativesdk, and sdk, and crosssdk, and cross-canadian, and.. ;)
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+>
+> http://cgit.bec-systems.com/cgit.cgi/autotools-demo/
+> http://cgit.bec-systems.com/cgit.cgi/qt-overo-palo-gpio/
+>
+> example-helloworld
+> example-srctree-helloworld
+> example-srctree-autotools
+> example-srctree-qt-overo-palo-gpio
+>
+> Thanks,
+> Cliff
+>
+> --
+> =================
+> http://bec-systems.com
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
 
