@@ -1,51 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oq9Fo-0008SU-0U
+	(envelope-from <philip@balister.org>) id 1Oq9Hq-0001QF-Ck
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 20:38:49 +0200
-Received: by iwn2 with SMTP id 2so4959356iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 11:38:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=AvGW7HK0EX0pXo8why5vdKzvm4bZ6sv3Hs0k17QqSA8=;
-	b=MS8Ml+52GNpuHogpoTwTDg0/WM0B7wfwagK6F9GPTMWA3Z55mEVYkabFXZCzwb9k53
-	zTtWmbwYhzdH0wpK7ohDWsoWe09f4w+uKXhmRb52TTlu0Ue/jqiz+9oxs+l2YMPFIT6O
-	yiHg56XC5ldU3SMgLfPd9XH2zV4yGJcqqYH5o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=grQDtaZ8E+Bt9knxxUiqxqPLM9kNVzfP4SCgsFfIKoiGXkqfR3EIeIHlW4WTsCCygt
-	+Dij9UvkEoE3KJtunX5B3n7Cgh0M3BE9nkiLMvUoXn2Mddgdxo0SfpSHgXnUi/x30ydL
-	V2wbss7JXUhmuOIBvG10YTNRqo5AbCA5btSzI=
+	Mon, 30 Aug 2010 20:40:56 +0200
+Received: (qmail 25114 invoked by uid 1003); 30 Aug 2010 18:40:21 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	30 Aug 2010 18:40:21 -0000
+Message-ID: <4C7BFB14.2010009@balister.org>
+Date: Mon, 30 Aug 2010 14:40:20 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.33.140 with SMTP id h12mr5597399ibd.59.1283193496788; Mon,
-	30 Aug 2010 11:38:16 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Mon, 30 Aug 2010 11:38:16 -0700 (PDT)
-In-Reply-To: <AANLkTin+3XSMcnYqk4HNC4C2Mur4zsQw5Oc9nV2hbGOS@mail.gmail.com>
-References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
-	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-	<AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
-	<AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
-	<AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
-	<AANLkTimtj4nLzXBR5j=MJ6htymbtVQh93YK=F-Sa8bA0@mail.gmail.com>
-	<AANLkTinr5r8Jtd+ZWznHaBBSK1cB=+XjzDRAPuet1+tr@mail.gmail.com>
-	<AANLkTin+3XSMcnYqk4HNC4C2Mur4zsQw5Oc9nV2hbGOS@mail.gmail.com>
-Date: Mon, 30 Aug 2010 20:38:16 +0200
-Message-ID: <AANLkTikZDtaCN_VMKLTS=SD=JNGr2omwxTdg4LTmqh=t@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTikcbgZQ8EkyCh3a7mby5VbXZ4Hp8bXRORPpZKsY@mail.gmail.com>	<4C7BF64A.6080408@balister.org>
+	<AANLkTikfDN6d8X+OgR0AYRyPM78GXwN_RqFAxp48e9d0@mail.gmail.com>
+In-Reply-To: <AANLkTikfDN6d8X+OgR0AYRyPM78GXwN_RqFAxp48e9d0@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: how to add file to SRC_URI for target only
+Subject: Re: linux-omap-psp-2.6.32 breaks iscsi-target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,24 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 18:38:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Aug 2010 18:40:56 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/8/30 Chris Larson <clarson@kergoth.com>:
+On 08/30/2010 02:35 PM, Frans Meulenbroeks wrote:
+> 2010/8/30 Philip Balister<philip@balister.org>:
+>> On 08/30/2010 01:47 PM, Frans Meulenbroeks wrote:
+>>>
+>>> The current beagleboard angstrom and minimal distro's (and maybe
+>>> others) use the linux-omap-psp_2.6.32.bb recipe to build the kernel.
+>>
+>> What is iscsi and why would I need it on the Beagleboard?
 >
+> http://stgt.sourceforge.net/
 >
-> The logic already exists. =A0SPECIAL_PKGSUFFIX has to have current inform=
-ation
-> about the suffixes in order for BPN to be correct. =A0It seems pretty sil=
-ly to
-> duplicate it, but whatever works.
+> the pacakge is from
+> http://iscsitarget.sourceforge.net/
+> It is used by tgt (http://stgt.sourceforge.net/)
+>
+> with it you can e.g. mount an iscsi disk.
+> iscsi is for instance also supported by windows 7 and by various NAS-es.
+> Its throughput is better than Samba or NFS.
+>
+> So for beagle it could act as mechanism to e.g. retrieve content from a NAS.
 
-I thought there was no suffix for target. It would be nice to have
-that. For _native, _sdk etc it exists, but I cannot say
-DEPENDS_target =3D ...
-which could be handy in recipes using BBCLASSEXTEND =3D "native"
+So the trade off is a kernel that has the best chance of fully 
+supporting the OMAP3 peripherals, or attaching to a NAS that is windows 
+centric.
 
-Frans.
+The point I am trying to make is we can't expect all packages to build 
+for every MACHINE/DISTRO combination. People have to make tradeoffs.
+
+Philip
 
 
