@@ -1,29 +1,45 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oq71k-0002gX-Bn for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 18:16:09 +0200
-Received: from g225140092.adsl.alicedsl.de ([92.225.140.92]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oq71G-0004rj-Cm for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 16:15:38 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <martin.jansa@gmail.com>) id 1Oq78u-00046M-MH
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Aug 2010 18:23:51 +0200
+Received: by fxm6 with SMTP id 6so3580628fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Aug 2010 09:23:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:references:mime-version:content-type:content-disposition
+	:in-reply-to:user-agent;
+	bh=6CWY4/gsjjyIW+6KnIjDgH6cRF+q7w+047awfFQKnrk=;
+	b=sy7XoAiWHx3lQn7hoxCpTo7u1KPAI25EIm6LIL13jXVnYLsbHx76abGqqve3FEKtT4
+	ZscDeICDb+Hv6BrvJXZRjcKq9ULzaYmEQjIchrTHiYHKG2BppnHgq6xkmrT6NIRVd5Et
+	hin7AkeDOX6DPdEHTI5FIIB4radDzATk080n0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=UhVZOcMJ5lZpHl9WH/nqIaH8ldbeiXwcSXJOUWsoS3eY+0HQBbPxd4Pzl03hloGNGd
+	v7VS8g3paOqsTC0DIEtMys+qtQiFoAJ6btLZyM3BdxnxVx7rJiExN7gx8gnDo6nPyxcp
+	RfdHdJKyGUU57bBrkpv9Rj10/IFU7roa0m8nw=
+Received: by 10.223.125.131 with SMTP id y3mr3861828far.9.1283185380847;
+	Mon, 30 Aug 2010 09:23:00 -0700 (PDT)
+Received: from localhost (161-24.13.24.78.awnet.cz [78.24.13.161])
+	by mx.google.com with ESMTPS id b11sm3417491faq.30.2010.08.30.09.22.59
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 30 Aug 2010 09:23:00 -0700 (PDT)
+Date: Mon, 30 Aug 2010 18:24:04 +0200
+From: Martin Jansa <martin.jansa@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201008301808.10029.marcin@juszkiewicz.com.pl>
+Message-ID: <20100830162404.GX17268@jama>
 References: <AANLkTimgF4zbXEyzYK-BQqtgiv2fk1rvgi3W4MdfQ5Wt@mail.gmail.com>
-	<201008301808.10029.marcin@juszkiewicz.com.pl>
-Date: Mon, 30 Aug 2010 18:15:35 +0200
-Message-ID: <1283184935.3795.27.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+MIME-Version: 1.0
+In-Reply-To: <AANLkTimgF4zbXEyzYK-BQqtgiv2fk1rvgi3W4MdfQ5Wt@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: martin.jansa@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: branch namespace clutter
@@ -40,50 +56,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 16:16:09 -0000
-X-Groupsio-MsgNum: 22913
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-Tw/bi/zWHNPMqzMdy4wh"
+X-List-Received-Date: Mon, 30 Aug 2010 16:23:52 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
---=-Tw/bi/zWHNPMqzMdy4wh
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+On Mon, Aug 30, 2010 at 11:56:52AM -0400, Cliff Brake wrote:
+> Hello,
+> 
+> If there are any branches in the OE git repo that are no longer in
+> use, please let me know and I'll delete them.  Our branch namespace is
+> getting rather cluttered.
+> 
+> http://cgit.openembedded.org/cgit.cgi/openembedded/refs/heads
+> 
+> Thanks,
+> Cliff
 
-Am Montag, den 30.08.2010, 18:08 +0200 schrieb Marcin Juszkiewicz:
-> Dnia poniedzia=C5=82ek, 30 sierpnia 2010 o 17:56:52 Cliff Brake napisa=C5=
-=82(a):
+please delete
+martin_jansa/srcpv
+martin_jansa/xorg-7.5
 
-> > If there are any branches in the OE git repo that are no longer in
-> > use, please let me know and I'll delete them.  Our branch namespace is
-> > getting rather cluttered.
->=20
-> Drop:
-> hrw/linux-updates
->=20
-> Most of those >1y old branches got merged or are totally obsolete.
+both merged
 
-I think creators of these branches can delete those themselves.
+Regards,
 
-	git push origin :hrw/linux-updates
-
-Where origin is the name of the remote OE repository.
+-- 
+Martin 'JaMa' Jansa     jabber: Martin.Jansa@gmail.com
 
 
-Thanks,
-
-Paul
-
---=-Tw/bi/zWHNPMqzMdy4wh
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx72ScACgkQPX1aK2wOHVjRegCcC/kzAnJt2Og5KLtX6H0v+2gG
-DJoAn2fVFKRByDdWXDR4oxPsbI0Np/8q
-=JWFt
------END PGP SIGNATURE-----
-
---=-Tw/bi/zWHNPMqzMdy4wh--
