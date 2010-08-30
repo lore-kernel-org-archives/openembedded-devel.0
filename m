@@ -1,53 +1,32 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oq9wE-00069O-HS
+	(envelope-from <philip@balister.org>) id 1Oq9xy-0006Ue-8I
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 21:22:39 +0200
-Received: by yxk30 with SMTP id 30so2244664yxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 12:22:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=fdug1IflH3NO5bhjl91iUYTqu6p3E6X4qdLYsgnJ5+w=;
-	b=mbKhTci2UdGD5Y7+y7dy7ENlEhTUhtR92xY4s9QgWMKTV61V7ZbGtwCZPA1/JaXb1Q
-	nAQ0zaVICYdVCu2HGnsHvcxXKW09u1hCWml0OjWiKvWKsVwAIPnHjcu2PkDnWWgGfmyF
-	GEeTkXvh38z3dxpCZv4waAJA6lZrRnhbKm4mA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=iEu7sXGmnzfUlZppca4RrzjUbOrGV230AZBKLq+kHpK49KOeOON8a78htO2tTl4GBO
-	kzAulk7SjnIgY4MyXPCC5dEN0EVsTzyj+/V00oWGC/v8ijrzTRFDb/1wH3xtZOyHuxaS
-	s5NfP2S3LDvGbrrXN0JJcU73P2VqoYXr1a5/c=
+	Mon, 30 Aug 2010 21:24:28 +0200
+Received: (qmail 23527 invoked by uid 1003); 30 Aug 2010 19:23:53 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	30 Aug 2010 19:23:53 -0000
+Message-ID: <4C7C0548.5030803@balister.org>
+Date: Mon, 30 Aug 2010 15:23:52 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.150.215.21 with SMTP id n21mr559712ybg.298.1283196125777; Mon,
-	30 Aug 2010 12:22:05 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Mon, 30 Aug 2010 12:22:05 -0700 (PDT)
-In-Reply-To: <AANLkTinJqDYX1UGCF0yiX6FP+tORvA5wcHEOZDX=thLF@mail.gmail.com>
-References: <AANLkTik0bbo2=KrKw2+_Y4D-5Kc6O0OPynt8qd7cs6JH@mail.gmail.com>
-	<AANLkTimBkaij-xQ2w+HEHgnZgss7dR4gJMXMtWU7qWX0@mail.gmail.com>
-	<AANLkTikqFLr7yc-Q9ucNTaifi-Oup0hyhgSo7AmT1sJA@mail.gmail.com>
-	<AANLkTinafU3d3yABuoieUrwLbhrw1qzkuLwdc2FNzFZj@mail.gmail.com>
-	<AANLkTi=qX7ksv67Hj=7ocbfiSkM4mDU1w-fAUFWP9EJt@mail.gmail.com>
-	<AANLkTimtj4nLzXBR5j=MJ6htymbtVQh93YK=F-Sa8bA0@mail.gmail.com>
-	<AANLkTinr5r8Jtd+ZWznHaBBSK1cB=+XjzDRAPuet1+tr@mail.gmail.com>
-	<AANLkTin+3XSMcnYqk4HNC4C2Mur4zsQw5Oc9nV2hbGOS@mail.gmail.com>
-	<AANLkTikZDtaCN_VMKLTS=SD=JNGr2omwxTdg4LTmqh=t@mail.gmail.com>
-	<AANLkTinJqDYX1UGCF0yiX6FP+tORvA5wcHEOZDX=thLF@mail.gmail.com>
-Date: Mon, 30 Aug 2010 21:22:05 +0200
-Message-ID: <AANLkTimBbpjo+zDQppAhOTqvKNojUg9qb6iJGWoLPUkm@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTikcbgZQ8EkyCh3a7mby5VbXZ4Hp8bXRORPpZKsY@mail.gmail.com>	<4C7BF64A.6080408@balister.org>	<AANLkTikfDN6d8X+OgR0AYRyPM78GXwN_RqFAxp48e9d0@mail.gmail.com>	<4C7BFB14.2010009@balister.org>
+	<AANLkTi=OfvXtUvPcTjSvA=v=jXWWdjixgPQp9201jUpH@mail.gmail.com>
+In-Reply-To: <AANLkTi=OfvXtUvPcTjSvA=v=jXWWdjixgPQp9201jUpH@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: how to add file to SRC_URI for target only
+Subject: Re: linux-omap-psp-2.6.32 breaks iscsi-target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -61,39 +40,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 19:22:39 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Aug 2010 19:24:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/8/30 Chris Larson <clarson@kergoth.com>:
-> On Mon, Aug 30, 2010 at 11:38 AM, Frans Meulenbroeks <
-> fransmeulenbroeks@gmail.com> wrote:
+On 08/30/2010 02:49 PM, J. L. wrote:
+> Why is it bad to expect all packages build for all the machine/distro
+> ? I would think that would be a more "ideal" situation especially if
+> its a supported machine and distro
+
+It is not bad. But we have a lot of packages and the people maintaining 
+stuff have limited time. Hopefully the TI kernel guys can find a way to 
+fix the issue Frans pointed out.
+
+Philip
+
 >
->> 2010/8/30 Chris Larson <clarson@kergoth.com>:
->> >
->> >
->> > The logic already exists. =A0SPECIAL_PKGSUFFIX has to have current
->> information
->> > about the suffixes in order for BPN to be correct. =A0It seems pretty =
-silly
->> to
->> > duplicate it, but whatever works.
+>
+>
+> On Mon, Aug 30, 2010 at 11:40 AM, Philip Balister<philip@balister.org>  wrote:
+>> On 08/30/2010 02:35 PM, Frans Meulenbroeks wrote:
+>>>
+>>> 2010/8/30 Philip Balister<philip@balister.org>:
+>>>>
+>>>> On 08/30/2010 01:47 PM, Frans Meulenbroeks wrote:
+>>>>>
+>>>>> The current beagleboard angstrom and minimal distro's (and maybe
+>>>>> others) use the linux-omap-psp_2.6.32.bb recipe to build the kernel.
+>>>>
+>>>> What is iscsi and why would I need it on the Beagleboard?
+>>>
+>>> http://stgt.sourceforge.net/
+>>>
+>>> the pacakge is from
+>>> http://iscsitarget.sourceforge.net/
+>>> It is used by tgt (http://stgt.sourceforge.net/)
+>>>
+>>> with it you can e.g. mount an iscsi disk.
+>>> iscsi is for instance also supported by windows 7 and by various NAS-es.
+>>> Its throughput is better than Samba or NFS.
+>>>
+>>> So for beagle it could act as mechanism to e.g. retrieve content from a
+>>> NAS.
 >>
->> I thought there was no suffix for target. It would be nice to have
->> that. For _native, _sdk etc it exists, but I cannot say
->> DEPENDS_target =3D ...
->> which could be handy in recipes using BBCLASSEXTEND =3D "native"
+>> So the trade off is a kernel that has the best chance of fully supporting
+>> the OMAP3 peripherals, or attaching to a NAS that is windows centric.
+>>
+>> The point I am trying to make is we can't expect all packages to build for
+>> every MACHINE/DISTRO combination. People have to make tradeoffs.
+>>
+>> Philip
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> There is no suffix for target, which is why the previously mentioned snip=
-pet
-> compares PN to BPN (BPN is PN with the SPECIAL_PKGSUFFIX'es removed).
-> --
-Yes, well my concern is that that solution is not too understandable
-for the average developer.
-And from a consistent/standard viewpoint it seems to have sense to
-have _target adjacent to _natve etc.
-
-Frans
 
 
