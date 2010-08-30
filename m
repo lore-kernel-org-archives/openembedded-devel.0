@@ -1,44 +1,48 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1OqAPX-0001d5-Vg
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OqAPs-0001dd-GM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 21:52:58 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o7UJqLrf002215
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Mon, 30 Aug 2010 14:52:21 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o7UJqLCi021405;
-	Mon, 30 Aug 2010 14:52:21 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o7UJqLBU015024;
-	Mon, 30 Aug 2010 14:52:21 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Mon, 30 Aug 2010 14:52:21 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: Chase Maupin <chasemaupin03@gmail.com>,
-	"openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Mon, 30 Aug 2010 14:52:19 -0500
-Thread-Topic: [PATCH] matrix-tui: add dependency on ncurses and zlib
-Thread-Index: ActIfEVM+JtaqdR0RjaCcMZALuzYngAAIvPg
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310753E9F@dlee06.ent.ti.com>
-References: <1283197156-22017-1-git-send-email-chase.maupin@ti.com>
-In-Reply-To: <1283197156-22017-1-git-send-email-chase.maupin@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Mon, 30 Aug 2010 21:53:16 +0200
+Received: by gxk2 with SMTP id 2so2263472gxk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Aug 2010 12:52:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=xomem8I2NyAhcbDlTlBe61kGMsTqSBo3Wu2mH5NJa6Y=;
+	b=INbD+x9Hvc6IkbouvzFHSs2mGvOf4w+IJCl6Xgq1YtCfFahc6EMqsZixQeI/MM0JAe
+	MmwNcjQwaC0AkDd6X2ffN3jOdki+chLpGR7AcxWiJU9P/xBV4MnIn/++RGBc96g/WhtI
+	QRYsuyvtHj6xYYSpduWJQvKMrS2VUW+LLhM6U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=d0S6IV6t2H7erNeIz6Sj/P99y9h1c9i3TddplKGoujRo4EQvH8Ei06ElwRiCPp0w6R
+	J5NBBDAmNgHV3oYu/DVBhDjP43UNm143mWKRcqtpF6batmmBiIlSf0wTGPIIoxmoP+73
+	IGfDRLQnQPa6+0694udW74DRodK51hlLOPp+A=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.101.180.40 with SMTP id h40mr5331577anp.50.1283197962846; Mon,
+	30 Aug 2010 12:52:42 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Mon, 30 Aug 2010 12:52:42 -0700 (PDT)
+In-Reply-To: <4C7C0548.5030803@balister.org>
+References: <AANLkTikcbgZQ8EkyCh3a7mby5VbXZ4Hp8bXRORPpZKsY@mail.gmail.com>
+	<4C7BF64A.6080408@balister.org>
+	<AANLkTikfDN6d8X+OgR0AYRyPM78GXwN_RqFAxp48e9d0@mail.gmail.com>
+	<4C7BFB14.2010009@balister.org>
+	<AANLkTi=OfvXtUvPcTjSvA=v=jXWWdjixgPQp9201jUpH@mail.gmail.com>
+	<4C7C0548.5030803@balister.org>
+Date: Mon, 30 Aug 2010 21:52:42 +0200
+Message-ID: <AANLkTi=XX_mNEz7eo5BiDL7RoVCC-4q3-RsmA3j0WXfO@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] matrix-tui: add dependency on ncurses and zlib
+Subject: Re: linux-omap-psp-2.6.32 breaks iscsi-target
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,63 +56,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 19:52:58 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Aug 2010 19:53:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Please ignore this patch.  I didn't realize Denys had already pushed one.
+2010/8/30 Philip Balister <philip@balister.org>:
+> On 08/30/2010 02:49 PM, J. L. wrote:
+>>
+>> Why is it bad to expect all packages build for all the machine/distro
+>> ? I would think that would be a more "ideal" situation especially if
+>> its a supported machine and distro
+>
+> It is not bad. But we have a lot of packages and the people maintaining
+> stuff have limited time. Hopefully the TI kernel guys can find a way to fix
+> the issue Frans pointed out.
+>
+> Philip
 
-Sincerely,
-Chase Maupin
-Software Applications
-Catalog DSP Products
-e-mail: chase.maupin@ti.com
-phone: (281) 274-3285
+I understand that people have limited time.
 
-For support:
-Forums - http://community.ti.com/forums/
-Wiki - http://wiki.davincidsp.com/
+What happened is that I bumped into a problem, I analyzed it and I
+reported my findings, and suggested a way to fix it.
+I can develop a patch if needed, but before investing time in that, I
+would like to learn if there are better/more desirable solutions, and
+whether a patch has a fair chance on getting accepted.
+(btw I can see some other options, .e.g. maybe a #define could be
+added in the .h file, but that is probably less desirable. there are
+probably more alternatives)
 
-> -----Original Message-----
-> From: Chase Maupin [mailto:chasemaupin03@gmail.com]
-> Sent: Monday, August 30, 2010 2:39 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: [PATCH] matrix-tui: add dependency on ncurses and zlib
->=20
-> * The matrix-tui application depends on the ncurses libraries
->   and header files during build time.
-> * The matrix-tui application depends on the zlib libraries
->   and header files during build time.
-> * Add ncurses and zlib to the DEPENDS list for matrix-tui
->=20
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> ---
->  recipes/ti/matrix-tui_svn.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
->=20
-> diff --git a/recipes/ti/matrix-tui_svn.bb b/recipes/ti/matrix-tui_svn.bb
-> index 13ec5c5..1e4f7ea 100644
-> --- a/recipes/ti/matrix-tui_svn.bb
-> +++ b/recipes/ti/matrix-tui_svn.bb
-> @@ -3,11 +3,11 @@ HOMEPAGE =3D
-> "https://gforge.ti.com/gf/project/matrix_tui/"
->  LICENSE =3D "BSD"
->  SECTION =3D "multimedia"
->  PRIORITY =3D "optional"
-> -DEPENDS =3D "libxml2"
-> +DEPENDS =3D "libxml2 ncurses zlib"
->=20
->  SRCREV =3D "29"
->  PV =3D "1.0"
-> -PR =3D "r2+svnr${SRCPV}"
-> +PR =3D "r3+svnr${SRCPV}"
->=20
->  INSANE_SKIP_${PN} =3D "True"
->=20
-> --
-> 1.7.0.4
-
+Frans
 
 
