@@ -1,48 +1,40 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Opx0D-0000cX-Ga
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 07:33:55 +0200
-Received: by ywa8 with SMTP id 8so2016569ywa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Opzeo-0001QE-EF for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Aug 2010 10:23:59 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OpzeH-0006Z6-Fx for openembedded-devel@lists.openembedded.org;
+	Mon, 30 Aug 2010 10:23:25 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Aug 2010 10:23:25 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 29 Aug 2010 22:33:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=SxFvNDseZGWlg59tSpB8Or5j950nkQpp5DEwxzufkwQ=;
-	b=LY4QId/nuwB0JfGhryZ5gQkJBlDuVsHLlFsJ6FWARYENkd2Wz7IDNkmK6QALmjX9Cw
-	wdCcI0Kr4Cs/HMntc04PTXeQKiEW1IdN8Bigi8p/zXkf7mLhEIdhebOBAd3T/focmAZo
-	3urv+g6FPsHhxrYe0nE+Yciqh4UlYWBiEj4NI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ZU8V2UDpJpp8f1pPpOH6Za+e9vZyUjnfBKZ2oVy+NPkcrepjwYxmigmKu/3QjHpjQD
-	NF+1IhqKyLa+PHiQLJ37EVq5jMD7RPdWmUhBZOeHZ6Siwq/B3bZ2XHlNM6KRfVDKaWXX
-	JF2yE3RjRVd4zLsUTTNepVRQwlxcSTYsodsZ4=
-MIME-Version: 1.0
-Received: by 10.150.54.11 with SMTP id c11mr4879145yba.124.1283146401483; Sun,
-	29 Aug 2010 22:33:21 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Sun, 29 Aug 2010 22:33:21 -0700 (PDT)
-In-Reply-To: <AANLkTikQHt0QdM7b+s9SyYWMRBE3gULYJ4q3_QqMdmg0@mail.gmail.com>
-References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>
-	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>
-	<i586bt$t12$1@dough.gmane.org>
-	<AANLkTikWe-88_U7FmV2mi4=J6XV-A3-nYUqJdjDNzOA9@mail.gmail.com>
-	<i5aoas$sja$2@dough.gmane.org>
-	<AANLkTi=stV1ahzagn-7Fzq73pL3xYDDBZpAsfRUbA86v@mail.gmail.com>
-	<AANLkTinPBor3x6fYemS6h7_R-TR8Tx01exHzG+YhTAz=@mail.gmail.com>
-	<4C79B2E7.6070806@mwester.net>
-	<AANLkTikQHt0QdM7b+s9SyYWMRBE3gULYJ4q3_QqMdmg0@mail.gmail.com>
-Date: Mon, 30 Aug 2010 07:33:21 +0200
-Message-ID: <AANLkTi=CnhfkWw3JysxiaoVpknE2XP1cgGzu5FDFkM3b@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 30 Aug 2010 10:23:25 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 30 Aug 2010 10:23:15 +0200
+Message-ID: <i5fppj$e5c$1@dough.gmane.org>
+References: <1282896714-3167-1-git-send-email-raj.khem@gmail.com>	<1282896714-3167-3-git-send-email-raj.khem@gmail.com>	<i586bt$t12$1@dough.gmane.org>	<AANLkTikWe-88_U7FmV2mi4=J6XV-A3-nYUqJdjDNzOA9@mail.gmail.com>	<i5aoas$sja$2@dough.gmane.org>	<AANLkTi=stV1ahzagn-7Fzq73pL3xYDDBZpAsfRUbA86v@mail.gmail.com>	<AANLkTinPBor3x6fYemS6h7_R-TR8Tx01exHzG+YhTAz=@mail.gmail.com>
+	<4C79B2E7.6070806@mwester.net>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <4C79B2E7.6070806@mwester.net>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: [PATCH 2/2] recipes: Update recipes to get 'bitbake world' parse and calculate runqueue successfully.
@@ -59,38 +51,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 05:33:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 30 Aug 2010 08:23:59 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-BTW forgot 2 things in the long story above.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Recipes that had a positive default preference were also kept.
-But of course the actual steps do not matter that much. What I just
-want to say that it was not a blind deletion action. I tried carefully
-to delete only recipes that were not used by a distro, and I also
-tried to stay within the criteria outlined by the TSC. But yes, better
-testing would have helped
+On 29-08-10 03:07, Mike Westerhof wrote:
 
-And actually there was a third issue (which I forgot to mentioned).
-Khem noticed that autoconf231 or something like that also got deleted
-but there were a few recipes that relied on that specific version.
-Khem took care on resolving that (thanks!).
+> It's great that we "clean up" OE, but in my opinion, it's being done
+> with a sledgehammer approach, and I for one find it uncomfortable being
+> "threatened" by the creator of these global giant patches setting
+> policies about same that require the community to carefully defend their
+> work or interests, or else.
+> 
+> C'mon folks -- I'm not the only one who's busy, and who's uncomfortable
+> with this.  Dev branch or not, this is NOT the way to get a community
+> working together.
 
-As far as I am concerned things happened the way they happened. We all
-agree that it was not the best way.
-My proposal is to close the topic and look forward again (but if there
-is any fallout left, I'm still more than willing to repair it;
-actually after the deletion I build beagleboard-demo-image from
-scratch. That showed some problems but none were related to the
-removal of the recipes (and meanwhile the issues encountered have been
-fixed by Jason and me).
+Well said, the current angstrom maintainers agree wholeheartedly with you!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Wrt bitbake world:
-At least one of the advantages of having a buildable world target is
-that can be build if one wants to verify a big change. Currently for
-beagleboard (armv7) things like demo-image or linux-tag provide a
-reasonable coverage, but they are no good targets for ppc or nios2.
+iD8DBQFMe2pzMkyGM64RGpERAqMsAJoCSh6fQ2jvQnzKUES1ujrYJceGwQCfXwqd
+khDYfBCiJXUFMtgUXXRoxwE=
+=GFA1
+-----END PGP SIGNATURE-----
 
-Frans
 
 
