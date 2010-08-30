@@ -1,27 +1,28 @@
-Received: from vms173011pub.verizon.net ([206.46.173.11])
+Received: from vms173015pub.verizon.net ([206.46.173.15])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1OqCGg-0005Hw-Jp
+	(envelope-from <denis@denix.org>) id 1OqDMU-0004Cd-8T
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 23:51:56 +0200
+	Tue, 31 Aug 2010 01:01:59 +0200
 Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173011.mailsrvcs.net
+	by vms173015.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L7Z00EV1JD3QIH6@vms173011.mailsrvcs.net> for
+	2009)) with ESMTPA id <0L7Z005TPJT7LFI3@vms173015.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Mon,
-	30 Aug 2010 16:51:09 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id A89D114AF64; Mon,
-	30 Aug 2010 17:51:03 -0400 (EDT)
-Date: Mon, 30 Aug 2010 17:51:03 -0400
+	30 Aug 2010 17:00:43 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id DF3CF14AF64; Mon,
+	30 Aug 2010 18:00:42 -0400 (EDT)
+Date: Mon, 30 Aug 2010 18:00:42 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <AANLkTi=9m7CTcpofRQjmqYGpBzy807qkD5k4AddLN5hX@mail.gmail.com>
+In-reply-to: <AANLkTimnfsHbd0sWxGLBfawD9w5M4OLGWbH_gN6_9T-h@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100830215103.GB14561@denix.org>
+Message-id: <20100830220042.GC14561@denix.org>
 MIME-version: 1.0
 References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-	<1283027073-12308-8-git-send-email-raj.khem@gmail.com>
-	<AANLkTi=9m7CTcpofRQjmqYGpBzy807qkD5k4AddLN5hX@mail.gmail.com>
+	<1283027073-12308-6-git-send-email-raj.khem@gmail.com>
+	<i5dap0$v2$2@dough.gmane.org>
+	<AANLkTimnfsHbd0sWxGLBfawD9w5M4OLGWbH_gN6_9T-h@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.11
+X-SA-Exim-Connect-IP: 206.46.173.15
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -29,7 +30,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 07/23] task-arago-toolchain-target.bb: remove	libpng12-dev which is not provided and e2fsprogs-libs-dev is now	e2fsprogs-dev
+Subject: Re: [PATCH 05/23] meta-toolchain-arago-dvsdk.bb: Exclude from	world build.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,62 +44,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 21:51:56 -0000
+X-List-Received-Date: Mon, 30 Aug 2010 23:01:59 -0000
 Content-type: text/plain; charset=iso-8859-1
 Content-transfer-encoding: QUOTED-PRINTABLE
 Content-disposition: inline
 
-On Sun, Aug 29, 2010 at 09:23:40AM +0200, Frans Meulenbroeks wrote:
-> good catch, there are some more
->=20
-> meta/foonas-packages.bb:=09e2fsprogs-libs \
-> meta/openprotium-packages.bb:=09e2fsprogs-libs \
-> meta/oplinux-packages.bb:=09e2fsprogs-libs
->=20
-> maybe I overlooked things (still early here) but I didn't see an e2=
-fsprogs-libs
-> Guess those 3 should be fixed too
-> (or moved to nonworking so someone can pick them up if they are not=
- working)
-
-Actually, I had this recipe fixed in Arago by replacing e2fsprogs-lib=
-s-dev=20
-with util-linux-ng-dev for the tools in use...
-
-Acked-by: Denys Dmytriyenko <denis@denix.org>
-
-> For this one
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->=20
-> 2010/8/28 Khem Raj <raj.khem@gmail.com>:
-> > Signed-off-by: Khem Raj <raj.khem@gmail.com>
-> > ---
-> > =A0recipes/tasks/task-arago-toolchain-target.bb | =A0 =A03 +--
-> > =A01 files changed, 1 insertions(+), 2 deletions(-)
+On Sun, Aug 29, 2010 at 11:20:24AM -0700, Khem Raj wrote:
+> On Sun, Aug 29, 2010 at 2:54 AM, Koen Kooi <k.kooi@student.utwente.=
+nl> wrote:
+> > -----BEGIN PGP SIGNED MESSAGE-----
+> > Hash: SHA1
 > >
-> > diff --git a/recipes/tasks/task-arago-toolchain-target.bb b/recip=
-es/tasks/task-arago-toolchain-target.bb
-> > index aa592b6..496910e 100644
-> > --- a/recipes/tasks/task-arago-toolchain-target.bb
-> > +++ b/recipes/tasks/task-arago-toolchain-target.bb
-> > @@ -14,14 +14,13 @@ RDEPENDS_${PN} =3D "\
-> > =A0 =A0 alsa-lib-dev \
-> > =A0 =A0 alsa-utils-dev \
-> > =A0 =A0 curl-dev \
-> > - =A0 =A0e2fsprogs-libs-dev \
-> > + =A0 =A0e2fsprogs-dev \
-> > =A0 =A0 i2c-tools-dev \
-> > =A0 =A0 freetype-dev \
-> > =A0 =A0 jpeg-dev \
-> > =A0 =A0 lzo-dev \
-> > =A0 =A0 libopkg-dev \
-> > =A0 =A0 libpng-dev \
-> > - =A0 =A0libpng12-dev \
-> > =A0 =A0 readline-dev \
-> > =A0 =A0 libts-dev \
-> > =A0 =A0 libusb-compat-dev \
-> > --
-> > 1.7.1
+> > On 28-08-10 22:24, Khem Raj wrote:
+> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> >> ---
+> >> =A0recipes/meta/meta-toolchain-arago-dvsdk.bb | =A0 =A01 +
+> >> =A01 files changed, 1 insertions(+), 0 deletions(-)
+> >>
+> >> diff --git a/recipes/meta/meta-toolchain-arago-dvsdk.bb b/recipe=
+s/meta/meta-toolchain-arago-dvsdk.bb
+> >> index 8e5b233..6deb2bc 100644
+> >> --- a/recipes/meta/meta-toolchain-arago-dvsdk.bb
+> >> +++ b/recipes/meta/meta-toolchain-arago-dvsdk.bb
+> >> @@ -1,3 +1,4 @@
+> >> +EXCLUDE_FROM_WORLD =3D "1"
+> >> =A0TOOLCHAIN_HOST_TASK =3D "task-arago-toolchain-dvsdk-host"
+> >> =A0TOOLCHAIN_TARGET_TASK =3D "task-arago-toolchain-dvsdk-target"
+> >>
+> >
+> > NAK, you're not saying why this needs to get excluded from world,=
+ it
+> > seems to build fine over here.
+>=20
+> Does not parse for me.
+>=20
+> NOTE: Runtime target 'ti-xdctools-sdk' is unbuildable, removing...
+> Missing or unbuildable dependency chain was: ['ti-xdctools-sdk']
+> NOTE: Runtime target 'task-arago-toolchain-dvsdk-host' is unbuildab=
+le,
+> removing...
+> Missing or unbuildable dependency chain was:
+> ['task-arago-toolchain-dvsdk-host', 'ti-xdctools-sdk']
+> ERROR: Required build target 'meta-toolchain-arago-dvsdk' has no
+> buildable providers.
+> Missing or unbuildable dependency chain was:
+> ['meta-toolchain-arago-dvsdk', 'task-arago-toolchain-dvsdk-host',
+> 'ti-xdctools-sdk']
+>=20
+> What provides ti-xdctools-sdk in your case ?
+>=20
+> hmm if you see sdk.bbclass then you will see that it demands the
+> recipes inheriting from it to be
+> excluded from build it being sdk I just excluded it.
+
+Koen, Khem,
+
+meta-toolchain-arago-dvsdk (and corresponding ti-<blah>-sdk.bb recipe=
+s) were=20
+used by legacy dvsdk builds early on and never got merged into OE. Mo=
+reover,=20
+the legacy dvsdk support was deprecated even in the mainline Arago...
+As we don't have necessary ti-<blah>-sdk.bb recipes, this meta recipe=
+ can=20
+safely be excluded from world or even removed completely.
+
+--=20
+Denys
 
 
 
