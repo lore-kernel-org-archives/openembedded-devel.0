@@ -1,30 +1,46 @@
-Received: from host4.kei.pl ([195.149.226.213] helo=smtp.host4.kei.pl)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <marcin@juszkiewicz.com.pl>) id 1Oq6uA-0000wV-It
+	(envelope-from <cliff.brake@gmail.com>) id 1Oq6vW-0002Nc-S3
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 30 Aug 2010 18:08:29 +0200
-Received: (qmail 3573 invoked by uid 813007); 30 Aug 2010 16:07:33 -0000
-X-clamdmail: clamdmail 0.18a
-Received: from 195.149.226.213 (HELO home.localnet)
-	(marcin@juszkiewicz.com.pl@195.149.226.213)
-	by 195.149.226.213 with ESMTPA; 30 Aug 2010 16:07:33 -0000
-From: Marcin Juszkiewicz <marcin@juszkiewicz.com.pl>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Aug 2010 18:08:07 +0200
-User-Agent: KMail/1.13.5 (Linux/2.6.35-17-generic; KDE/4.5.0; x86_64; ; )
-References: <AANLkTimgF4zbXEyzYK-BQqtgiv2fk1rvgi3W4MdfQ5Wt@mail.gmail.com>
-In-Reply-To: <AANLkTimgF4zbXEyzYK-BQqtgiv2fk1rvgi3W4MdfQ5Wt@mail.gmail.com>
+	Mon, 30 Aug 2010 18:09:49 +0200
+Received: by eyb7 with SMTP id 7so3334959eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 30 Aug 2010 09:09:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=oBd9jYC+dZhOvwO4YS2Djrv/SM22uhv8AKLJA+G2r/M=;
+	b=WBecsPAmFkNC/V+vP2/ADKubJVoxIgoU7JClWiaXv/XD7tkoBI93STa+vG89URJk29
+	KQ+FWBK3Cmfg8CDoyZYvgVfLy0owwxjOpAM8+BEXrzy57WDsSDChQFzwyy5PX+pOTiOV
+	VAVojGo61pecdwA5HpyCQ6QSCNHIhWhZ69bbU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=a2JM8JxUcYlm/xn0QsBZoeQqBBRYrkhubo1dNQlb+KMe/WCzwcHTvb9a9TEfa2Np1D
+	yfda1Axcd1rsvf1KD7zKa61cvv84eqTuWjwlrgBloc2BsPOOLuhNFu4iIujbljORkMK/
+	akIq5bU5i/Q0Mva4miY+n2Mx2UH7/3Y1Pj8/Y=
 MIME-Version: 1.0
-Message-Id: <201008301808.10029.marcin@juszkiewicz.com.pl>
-X-SA-Exim-Connect-IP: 195.149.226.213
-X-SA-Exim-Mail-From: marcin@juszkiewicz.com.pl
+Received: by 10.216.185.4 with SMTP id t4mr5035258wem.87.1283184552873; Mon,
+	30 Aug 2010 09:09:12 -0700 (PDT)
+Received: by 10.216.21.209 with HTTP; Mon, 30 Aug 2010 09:09:12 -0700 (PDT)
+In-Reply-To: <AANLkTikONxUinXtW0V6nxzt11MWE0Qt3HUxsZ9N+0_48@mail.gmail.com>
+References: <AANLkTinvhMiZhHC4GrR8Muf-7oPa-j3zBeDWCZrkTd-z@mail.gmail.com>
+	<AANLkTimH2YnW3CnLFxa6NyNCeC0-jNqy0dhDXS_ddWX_@mail.gmail.com>
+	<AANLkTinJ7rUj8jq=PYeVXk7yZiLB6AtxQm9JKDcXZswR@mail.gmail.com>
+	<AANLkTikONxUinXtW0V6nxzt11MWE0Qt3HUxsZ9N+0_48@mail.gmail.com>
+Date: Mon, 30 Aug 2010 12:09:12 -0400
+Message-ID: <AANLkTi=_WQfCcTZ4JmHOOTagBiN+4EtAi3J=5XpoRopt@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: branch namespace clutter
+Subject: Re: Simple srctree example seems not depend on toolchain
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,30 +54,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 30 Aug 2010 16:08:29 -0000
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 30 Aug 2010 16:09:50 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Dnia poniedzia=C5=82ek, 30 sierpnia 2010 o 17:56:52 Cliff Brake napisa=C5=
-=82(a):
-> Hello,
->=20
-> If there are any branches in the OE git repo that are no longer in
-> use, please let me know and I'll delete them.  Our branch namespace is
-> getting rather cluttered.
+On Sun, Aug 29, 2010 at 2:24 PM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sun, Aug 29, 2010 at 7:30 AM, Leon Woestenberg
+> <leon.woestenberg@gmail.com> wrote:
+>> Hello,
+>>
+>> On Sun, Aug 29, 2010 at 12:27 AM, Leon Woestenberg
+>> <leon.woestenberg@gmail.com> wrote:
+>>> On Sat, Aug 28, 2010 at 10:46 PM, Leon Woestenberg
+>>> <leon.woestenberg@gmail.com> wrote:
+>>>> in an attempt to learn how to use srctree I am hitting either 1) an
+>>>> oversight on my behalf or 2) a bug in srctree.bbclass 3) something
+>>>> else
+>>>>
+>>> After further debugging I am more sure I'm seeing wrong behaviour from
+>>> srctree.bbclass.
+>>>
+>>
+>> This was a bogus report. I thought I was working against latest OE
+>> GIT, but in fact, it seems the GIT service is unreliable currently and
+>> I have probably hit an aborted pull.
+>> Download speed from GIT is ~20 kB/s.
+>>
+>> I'm interested in adding this helloworld2 as helloworld-srctree as an
+>> srctree example.
+>
+> Yes please go ahead that will be a good template to have.
 
-Drop:
-hrw/linux-updates
+I have two other srctree examples -- I wonder if we should think of a
+consistent way to organize examples so its a little more obvious where
+to find them?
 
-Most of those >1y old branches got merged or are totally obsolete.
+http://cgit.bec-systems.com/cgit.cgi/autotools-demo/
+http://cgit.bec-systems.com/cgit.cgi/qt-overo-palo-gpio/
 
-Regards,=20
-=2D-=20
-JID:      hrw@jabber.org
-Website:  http://marcin.juszkiewicz.com.pl/
-LinkedIn: http://www.linkedin.com/in/marcinjuszkiewicz
+example-helloworld
+example-srctree-helloworld
+example-srctree-autotools
+example-srctree-qt-overo-palo-gpio
 
+Thanks,
+Cliff
 
+-- 
+=================
+http://bec-systems.com
 
 
