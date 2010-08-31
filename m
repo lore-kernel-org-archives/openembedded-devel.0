@@ -1,17 +1,17 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OqKOy-0000O1-Ez
+	(envelope-from <morphis@gravedo.de>) id 1OqKOy-0000O3-Fr
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 08:33:00 +0200
+	Tue, 31 Aug 2010 08:33:01 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id 2FEA7275D101; Tue, 31 Aug 2010 08:32:25 +0200 (CEST)
+	id B2677275D105; Tue, 31 Aug 2010 08:32:29 +0200 (CEST)
 Received: from localhost (unknown [89.204.137.96])
-	by gravedo.de (Postfix) with ESMTPSA id CBA55275CCC2;
-	Tue, 31 Aug 2010 08:32:24 +0200 (CEST)
+	by gravedo.de (Postfix) with ESMTPSA id 2C0F9275CCC2;
+	Tue, 31 Aug 2010 08:32:27 +0200 (CEST)
 From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Aug 2010 08:32:00 +0200
-Message-Id: <1283236322-5116-4-git-send-email-morphis@gravedo.de>
+Date: Tue, 31 Aug 2010 08:32:01 +0200
+Message-Id: <1283236322-5116-5-git-send-email-morphis@gravedo.de>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1283236322-5116-1-git-send-email-morphis@gravedo.de>
 References: <1283236322-5116-1-git-send-email-morphis@gravedo.de>
@@ -19,11 +19,11 @@ X-SA-Exim-Connect-IP: 85.214.79.159
 X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_SORBS_WEB autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,RCVD_IN_SORBS_WEB
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 3/5] fso-autorev: add msmcommd-specs and libmsmcomm
+Subject: [PATCH 4/5] libfsotransport: add dependency on palmpre-systems-deps-native for palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,26 +37,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 06:33:00 -0000
+X-List-Received-Date: Tue, 31 Aug 2010 06:33:01 -0000
+
+libfsotransport provides a special hsuart transport which only works and is used on
+the palmpre machine. For this the palmpre-systems-deps are needed to provide ioctl
+support for the hsuart.
 
 Signed-off-by: Simon Busch <morphis@gravedo.de>
 ---
- conf/distro/include/fso-autorev.inc |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes/freesmartphone/libfsotransport_git.bb |    3 +++
+ 1 files changed, 3 insertions(+), 0 deletions(-)
 
-diff --git a/conf/distro/include/fso-autorev.inc b/conf/distro/include/fso-autorev.inc
-index 33b9c90..2c618ec 100644
---- a/conf/distro/include/fso-autorev.inc
-+++ b/conf/distro/include/fso-autorev.inc
-@@ -26,6 +26,8 @@ SRCREV_pn-libmsmcomm = "${AUTOREV}"
- SRCREV_pn-libpersistence = "${AUTOREV}"
- SRCREV_pn-misc-vapi = "${AUTOREV}"
- SRCREV_pn-msmcommd = "${AUTOREV}"
-+SRCREV_pn-msmcommd-specs = "${AUTOREV}"
-+SRCREV_pn-libmsmcomm = "${AUTOREV}"
- SRCREV_pn-vala-dbus-binding-tool-native = "${AUTOREV}"
- SRCREV_pn-vala-dbus-binding-tool = "${AUTOREV}"
- SRCREV_pn-vala = "${AUTOREV}"
+diff --git a/recipes/freesmartphone/libfsotransport_git.bb b/recipes/freesmartphone/libfsotransport_git.bb
+index 7e7e6d6..882fc12 100644
+--- a/recipes/freesmartphone/libfsotransport_git.bb
++++ b/recipes/freesmartphone/libfsotransport_git.bb
+@@ -4,3 +4,6 @@ SRCREV = "${FSO_CORNUCOPIA_SRCREV}"
+ PV = "0.9.6+gitr${SRCPV}"
+ PE = "1"
+ PR = "${INC_PR}.0"
++
++EXTRA_OECONF_palmpre = "--with-machine=palmpre"
++DEPENDS_palmpre = "palmpre-system-deps-native"
 -- 
 1.7.0.4
 
