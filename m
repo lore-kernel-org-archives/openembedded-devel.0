@@ -1,33 +1,33 @@
 Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OqVI2-0006gB-8L
+	(envelope-from <coolaj86@gmail.com>) id 1OqVNp-0004Uw-Ee
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 20:10:38 +0200
-Received: by fxm6 with SMTP id 6so4458059fxm.6
+	Tue, 31 Aug 2010 20:17:51 +0200
+Received: by fxm6 with SMTP id 6so4463852fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Aug 2010 11:10:01 -0700 (PDT)
+	Tue, 31 Aug 2010 11:16:00 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:from:date
 	:message-id:subject:to:content-type;
-	bh=5WTaRLnqsNK3hOoynczP0/XaqhBjMjTSW++rJ94tPXQ=;
-	b=DvCrhcuTOjgfE+X7LR1NjHTVPBzohZexqLNlov8JW8gJf9y+Y/wl3WuV98Q2JBnpsG
-	EnIXKe/6FhsAYxFV2TO7J+Cv6kIls972dIX+cOEtaRMgdaek4CIGumZ+kfUWdGQvutf6
-	N6nLvQS0cPrqG8wD15zk8NjnS1KZakr+n2aqI=
+	bh=uQrB5A9DlZxx/k/EfRTgKaRU/QLWRQjqEKul+FB6NhY=;
+	b=MJU+UKIsY9WKr2K+l5C/3zPYDG0HiFn9VwZqE/jH+tpm/eep7npnflal5BHNpg8ufu
+	r+0h2+vtq1QF1XyyOJLg6i3CkHQcGlxq+37+6p7sGLpawtuXxNSdCBRwM4kIsPRb/vMk
+	97FEpuld0vuk3BRsKUdQBq365MikSTBEq8QBg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=GtFHA0Doo8MQLS43MncXD3hAwcvmLt+A4zj08AAPwApfl3BTVuYWyGXS+xun3S3uNB
-	0qosgvBCYTCSt42i0y81NOx6sVNHLZfhgcTLxmTr6jMZHZMQXbUkPkjklpIwbYvRnYPX
-	2PToO+em2Ql8cwBZw08nhnsF3NYxrlP8BE77o=
-Received: by 10.223.125.142 with SMTP id y14mr1363388far.2.1283278201179; Tue,
-	31 Aug 2010 11:10:01 -0700 (PDT)
+	b=gtB72pOhcLE3WyLivr/l5+jYheGFOymOLKo9pVLaWH4DqKAK0khno6jErGoMCcrBPl
+	wLtnv5TCShk5hdPIGMGdY/58iLsq9NyEOksQ4xLFqyNYnpQ7o7ZLTO0Nbx12RKfeTfOq
+	G9XNrIlwahJG3MAI2Y/7NRbGmMcKcUWn8MYYg=
+Received: by 10.223.112.13 with SMTP id u13mr1087555fap.36.1283278560156; Tue,
+	31 Aug 2010 11:16:00 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.223.112.81 with HTTP; Tue, 31 Aug 2010 11:09:41 -0700 (PDT)
+Received: by 10.223.112.81 with HTTP; Tue, 31 Aug 2010 11:15:40 -0700 (PDT)
 From: AJ ONeal <coolaj86@gmail.com>
-Date: Tue, 31 Aug 2010 12:09:41 -0600
-Message-ID: <AANLkTi=gi0VPPLGTJ+ZuV4akF5DA+qtYGBvuVsfe5Any@mail.gmail.com>
-To: "General mailing list for gumstix users."
-	<gumstix-users@lists.sourceforge.net>, 
-	openembedded-devel <openembedded-devel@lists.openembedded.org>
+Date: Tue, 31 Aug 2010 12:15:40 -0600
+Message-ID: <AANLkTiknf6cyy6i5uE5nFAW2sTyXCDkO+aHZcibZMsYn@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>, 
+	"General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>
 X-SA-Exim-Connect-IP: 209.85.161.47
 X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -37,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: aufs2-util fails to compile
+Subject: unionfs-utils fails to build also
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,55 +51,67 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 18:10:38 -0000
+X-List-Received-Date: Tue, 31 Aug 2010 18:17:59 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-NOTE: Running task 472 of 672 (ID: 9,
-/home/coolaj86/overo-oe/org.openembedded.dev/recipes/aufs/aufs2-util_git.bb,
-do_compile)
-ERROR: function do_compile failed
-ERROR: log data follows
-(/home/coolaj86/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/aufs2-util-git-r1/temp/log.do_compile.21597)
-| c2tmac.c:21:29: error: linux/aufs_type.h: No such file or directory
-| c2tmac.c: In function 'main':
-| c2tmac.c:29: error: 'AUFS_VERSION' undeclared (first use in this function)
-| c2tmac.c:29: error: (Each undeclared identifier is reported only once
-| c2tmac.c:29: error: for each function it appears in.)
-| c2tmac.c:30: error: 'AUFS_XINO_FNAME' undeclared (first use in this
-function)
-| c2tmac.c:31: error: 'AUFS_XINO_DEFPATH' undeclared (first use in this
-function)
-| c2tmac.c:32: error: 'AUFS_DIRWH_DEF' undeclared (first use in this
-function)
-| c2tmac.c:33: error: 'AUFS_WH_PFX' undeclared (first use in this function)
-| c2tmac.c:34: error: 'AUFS_WH_PFX_LEN' undeclared (first use in this
-function)
-| c2tmac.c:35: error: 'AUFS_WKQ_NAME' undeclared (first use in this
-function)
-| c2tmac.c:36: error: 'AUFS_NWKQ_DEF' undeclared (first use in this
-function)
-| c2tmac.c:37: error: 'AUFS_WH_DIROPQ' undeclared (first use in this
-function)
-| c2tmac.c:38: error: 'AUFS_WH_BASE' undeclared (first use in this function)
-| c2tmac.c:39: error: 'AUFS_WH_PLINKDIR' undeclared (first use in this
-function)
-| c2tmac.c:40: error: 'AUFS_MFS_SECOND_DEF' undeclared (first use in this
-function)
-| c2tmac.c:41: error: 'AUFS_RDBLK_DEF' undeclared (first use in this
-function)
-| c2tmac.c:42: error: 'AUFS_RDHASH_DEF' undeclared (first use in this
-function)
-NOTE: Task failed:
-/home/coolaj86/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/aufs2-util-git-r1/temp/log.do_compile.21597
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of /home/coolaj86/overo-oe/org.openembedded.dev/recipes/aufs/
-aufs2-util_git.bb do_compile failed
-ERROR: Task 9 (/home/coolaj86/overo-oe/org.openembedded.dev/recipes/aufs/
-aufs2-util_git.bb, do_compile) failed
-NOTE: Tasks Summary: Attempted 471 tasks of which 297 didn't need to be
+NOTE: Running task 359 of 552 (ID: 0,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_unpack)
+NOTE: Unpacking sources/unionfs-1.0.13.tar.gz to
+tmp/work/armv7a-angstrom-linux-gnueabi/unionfs-utils-1.0.13-r0/
+NOTE: Running task 377 of 552 (ID: 1,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_patch)
+NOTE: Running task 378 of 552 (ID: 7,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_configure)
+NOTE: Running task 389 of 552 (ID: 8,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_qa_configure)
+NOTE: Running task 390 of 552 (ID: 9,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_compile)
+NOTE: Running task 391 of 552 (ID: 2,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_install)
+NOTE: Running task 395 of 552 (ID: 12,
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_package)
+ERROR: QA Issue with unionfs-utils: No GNU_HASH in the elf binary:
+'/home/coolaj86/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/unionfs-utils-1.0.13-r0/packages-split/unionfs-utils/usr/sbin/unionctl'
+ERROR: QA Issue with unionfs-utils-dev: No GNU_HASH in the elf binary:
+'/home/coolaj86/overo-oe/tmp/work/armv7a-angstrom-linux-gnueabi/unionfs-utils-1.0.13-r0/packages-split/unionfs-utils-dev/usr/sbin/uniondbg'
+ERROR: QA run found fatal errors. Please consider fixing them.
+ERROR: Error in executing:
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in executing:
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in executing:
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Error in executing:
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb
+ERROR: Exception:<type 'exceptions.SystemExit'> Message:1
+ERROR: Printing the environment of the function
+ERROR: Build of
+/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb do_package failed
+ERROR: Task 12
+(/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb, do_package) failed
+NOTE: Tasks Summary: Attempted 394 tasks of which 386 didn't need to be
 rerun and 1 failed.
-ERROR: '/home/coolaj86/overo-oe/org.openembedded.dev/recipes/aufs/
-aufs2-util_git.bb' failed
+ERROR: '/home/coolaj86/overo-oe/org.openembedded.dev/recipes/unionfs/
+unionfs-utils_1.0.13.bb' failed
 
 AJ ONeal
 
