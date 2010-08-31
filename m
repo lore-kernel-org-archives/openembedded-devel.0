@@ -1,17 +1,17 @@
 Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <morphis@gravedo.de>) id 1OqKOq-0000Ml-Ni
+	(envelope-from <morphis@gravedo.de>) id 1OqKOs-0000Mq-Kz
 	for openembedded-devel@lists.openembedded.org;
 	Tue, 31 Aug 2010 08:32:54 +0200
 Received: by gravedo.de (Postfix, from userid 5001)
-	id 8FA31275D101; Tue, 31 Aug 2010 08:32:21 +0200 (CEST)
+	id 07297275D105; Tue, 31 Aug 2010 08:32:23 +0200 (CEST)
 Received: from localhost (unknown [89.204.137.96])
-	by gravedo.de (Postfix) with ESMTPSA id A3B48275CCC2;
-	Tue, 31 Aug 2010 08:32:19 +0200 (CEST)
+	by gravedo.de (Postfix) with ESMTPSA id 47EA9275CCC2;
+	Tue, 31 Aug 2010 08:32:22 +0200 (CEST)
 From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Aug 2010 08:31:58 +0200
-Message-Id: <1283236322-5116-2-git-send-email-morphis@gravedo.de>
+Date: Tue, 31 Aug 2010 08:31:59 +0200
+Message-Id: <1283236322-5116-3-git-send-email-morphis@gravedo.de>
 X-Mailer: git-send-email 1.7.0.4
 In-Reply-To: <1283236322-5116-1-git-send-email-morphis@gravedo.de>
 References: <1283236322-5116-1-git-send-email-morphis@gravedo.de>
@@ -23,7 +23,7 @@ X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,RCVD_IN_SORBS_WEB
 	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/5] msmcomm: split msmcommd recipe into three parts as upstream layout has changed
+Subject: [PATCH 2/5] palmpre-system-deps-native: add initial recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,122 +37,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 06:32:54 -0000
+X-List-Received-Date: Tue, 31 Aug 2010 06:32:55 -0000
 
-We have now three parts for the msmcomm daemon:
- * libmsmcomm: the actual protocol implementation of the msmcomm protocol
- * msmcommd: the daemon which manages the link layer + takes command from the clients and
-   submits them to the modem
- * msmcommd-specs: provides the dbus API definition for the msmcomm daemon which lets the
-   client talk to the daemon
+The palmpre-system-deps provides some essential header + vapi files for programs written
+for the palm pre machine. For example it includes a vapi file for the hsuart.h kernel
+header file which provides different ioctl's parameters for managing the hsuart of the
+palm pre device.
 
 Signed-off-by: Simon Busch <morphis@gravedo.de>
 ---
- recipes/freesmartphone/libmsmcomm_git.bb     |    9 +++++++
- recipes/freesmartphone/msmcomm.inc           |   11 +++++++++
- recipes/freesmartphone/msmcommd-specs_git.bb |   17 ++++++++++++++
- recipes/freesmartphone/msmcommd_git.bb       |   31 +++++++++++++------------
- 4 files changed, 53 insertions(+), 15 deletions(-)
- create mode 100644 recipes/freesmartphone/libmsmcomm_git.bb
- create mode 100644 recipes/freesmartphone/msmcomm.inc
- create mode 100644 recipes/freesmartphone/msmcommd-specs_git.bb
+ recipes/palmpre/palmpre-system-deps-native_git.bb |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/palmpre/palmpre-system-deps-native_git.bb
 
-diff --git a/recipes/freesmartphone/libmsmcomm_git.bb b/recipes/freesmartphone/libmsmcomm_git.bb
+diff --git a/recipes/palmpre/palmpre-system-deps-native_git.bb b/recipes/palmpre/palmpre-system-deps-native_git.bb
 new file mode 100644
-index 0000000..5df9e41
+index 0000000..1f907c9
 --- /dev/null
-+++ b/recipes/freesmartphone/libmsmcomm_git.bb
-@@ -0,0 +1,9 @@
-+require msmcomm.inc
-+
-+PR = "${INC_PR}.0"
-+PV = "0.5.0+gitr${SRCPV}"
-+PE = "1"
-+
-+S = "${WORKDIR}/git/libmsmcomm"
-+
-+inherit autotools
-diff --git a/recipes/freesmartphone/msmcomm.inc b/recipes/freesmartphone/msmcomm.inc
-new file mode 100644
-index 0000000..bf01a12
---- /dev/null
-+++ b/recipes/freesmartphone/msmcomm.inc
-@@ -0,0 +1,11 @@
-+DESCRIPTION = "Low level protocol implementation for binary protocol spoken by some Qualcomm modems"
++++ b/recipes/palmpre/palmpre-system-deps-native_git.bb
+@@ -0,0 +1,12 @@
++DESCRIPTION = "Important header and vapi files for some programs running on the palmpre machine"
 +HOMEPAGE = "http://www.freesmartphone.org"
-+AUTHOR = "Simon Busch <morphis@gravedo.de>"
-+SECTION = "console/network"
++AUTHOR = "Simon Busch <morphis@gravedo.de>
++SECTION = "console/utils"
 +LICENSE = "GPL"
-+INC_PR = "r4"
-+PV = "Please override!"
++PR = "r0"
 +
-+SRC_REV = "d631d009c791085faf0ebaac4601da905bc5c0ed"
-+SRC_URI = "${FREESMARTPHONE_GIT}/msmcomm.git;protocol=git;branch=master"
++SRCREV = "93a640dafa8ebebdb1a03f051cb1b566629b227c"
++SRC_URI = "${FREESMARTPHONE_GIT}/utilities.git;protocol=git;branch=master"
++S = "${WORKDIR}/git/palmpre/palmpre-system-deps"
 +
-diff --git a/recipes/freesmartphone/msmcommd-specs_git.bb b/recipes/freesmartphone/msmcommd-specs_git.bb
-new file mode 100644
-index 0000000..f756312
---- /dev/null
-+++ b/recipes/freesmartphone/msmcommd-specs_git.bb
-@@ -0,0 +1,17 @@
-+require msmcomm.inc
-+
-+PR = "${INC_PR}.0"
-+PV = "0.5.0+gitr${SRCPV}"
-+PE = "1"
-+
-+DEPENDS = " \
-+ vala-native \
-+ glib-2.0 \
-+ dbus \
-+ dbus-glib \
-+"
-+
-+S = "${WORKDIR}/git/msmcommd-specs"
-+
-+inherit autotools vala
-+
-diff --git a/recipes/freesmartphone/msmcommd_git.bb b/recipes/freesmartphone/msmcommd_git.bb
-index bd74dc0..d123501 100644
---- a/recipes/freesmartphone/msmcommd_git.bb
-+++ b/recipes/freesmartphone/msmcommd_git.bb
-@@ -1,20 +1,21 @@
--DESCRIPTION = "Low level protocol implementation for binary protocol spoken by some Qualcomm modems"
--HOMEPAGE = "http://www.freesmartphone.org"
--AUTHOR = "Simon Busch <morphis@gravedo.de>"
--SECTION = "console/network"
--LICENSE = "GPL"
--DEPENDS = "libgee libfsotransport gtk+"
--SRCREV = "91ea329fd3be68d031c61a587c6c0036b94cf2cd"
--PV = "0.1.0+gitr${SRCPV}"
--PR = "r2"
-+require msmcomm.inc
-+
-+PR = "${INC_PR}.0"
-+PV = "0.5.0+gitr${SRCPV}"
- PE = "1"
- 
--SRC_URI = "${FREESMARTPHONE_GIT}/msmcomm.git;protocol=git;branch=master"
--S = "${WORKDIR}/git"
-+DEPENDS = " \
-+ vala-native \
-+ glib-2.0 \
-+ dbus \
-+ dbus-glib \
-+ libfso-glib \
-+ libgee \
-+ libmsmcomm \
-+ msmcommd-specs \
-+"
- 
--inherit autotools vala
-+S = "${WORKDIR}/git/msmcommd"
- 
--PACKAGES =+ "${PN}-lib ${PN}-term"
--FILES_${PN}-lib = "${libdir}/lib*.so.*"
--FILES_${PN}-term = "${sbindir}/msmvterm"
-+inherit autotools vala
- 
++inherit autotools native pkgconfig
 -- 
 1.7.0.4
 
