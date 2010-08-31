@@ -1,35 +1,47 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OqPx7-00007s-I4
+	(envelope-from <kergoth@gmail.com>) id 1OqRu4-0004c0-S7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 14:28:38 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id CF3F8491282;
-	Tue, 31 Aug 2010 14:28:04 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 31 Aug 2010 14:28:04 +0200
-Message-ID: <4C7CF560.7050506@dresearch.de>
-Date: Tue, 31 Aug 2010 14:28:16 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
+	Tue, 31 Aug 2010 16:33:38 +0200
+Received: by ewy7 with SMTP id 7so3749372ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Aug 2010 07:33:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=7RT1BPCaTO0XiA0awsvO0BNX1Ect2PU5ZK1p9HnRlwM=;
+	b=nbg+Tj5LNHd/o/Q/nIRsCgLq+2RE0yLrOdNCudjlVwWgf9Qbqmc7MWcwjvTLk5hr8n
+	1XGrZJ6hC+y4lU5a98MI9a85FDIlKDs5s+RogwCcyGdVFf6EMfT8yPko+68sXw7YewVD
+	loJRcUapR9ffSYIoyUKCMe1GNu/2QYsL1ZyAI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=H4IsP+bzdQdvKUNztvUTcT57lz4I4V26NzyL+PgU93h/V/MwVanA3a+ewGzJcr0wtn
+	4NSoY3iHRLeTiGNp7z/pR/S4pgykcX5dRFNYRn3YJu9+dJrOm3jU9dnnSL7NHosH9sMb
+	s5m3dQod59cY9DbE517u0w/C6LqaqBT2ev2kI=
+Received: by 10.216.87.209 with SMTP id y59mr6339344wee.91.1283265183179; Tue,
+	31 Aug 2010 07:33:03 -0700 (PDT)
 MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.237.167 with HTTP; Tue, 31 Aug 2010 07:32:43 -0700 (PDT)
+In-Reply-To: <i5ihne$6pq$1@dough.gmane.org>
+References: <4C7CB4F0.4070306@freyther.de> <i5ihne$6pq$1@dough.gmane.org>
+From: Chris Larson <clarson@kergoth.com>
+Date: Tue, 31 Aug 2010 07:32:43 -0700
+X-Google-Sender-Auth: o8aCZKDE49maj8KZ_uIWRdzQ6s0
+Message-ID: <AANLkTi=rWZyoq4R3rktWwGoivU4ryMfwcbHW8N+1rhhH@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1282916906-21411-1-git-send-email-sledz@dresearch.de>	<4C77C60E.3080106@dresearch.de>	<AANLkTinuV6vLXXKJ_hrkNs-23cauS8OZA6gpyZySz-=s@mail.gmail.com>	<4C7A46EA.9040609@dresearch.de>	<1283256795.13038.210.camel@mill.internal.reciva.com>	<4C7CF29F.6090806@dresearch.de>
-	<4C7CF3D7.8090002@xora.org.uk>
-In-Reply-To: <4C7CF3D7.8090002@xora.org.uk>
-X-OriginalArrivalTime: 31 Aug 2010 12:28:04.0915 (UTC)
-	FILETIME=[F5E40030:01CB4907]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rsyslog: keep rsyslog running as long as possible on shutdown
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: Latest base.bbclass commit breaks meta-toolchain build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,16 +55,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 12:28:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 Aug 2010 14:33:38 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Am 31.08.2010 14:21, schrieb Graeme Gregory:
-> For Angstrom
-> 
-> Acked-by: Graeme Gregory <dp@xora.org.uk>
+On Tue, Aug 31, 2010 at 2:23 AM, Koen Kooi <k.kooi@student.utwente.nl>wrote:
 
-Is this valid for [PATCH v2]?
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 31-08-10 09:53, Holger Freyther wrote:
+> > Hi,
+> >
+> > with the latest change the task-host-sdk.bb tries to copy it on itself
+> and cp
+> > breaks. Reverting the commit has fixed the issue for me.
+>
+> The tinderbox as work is turning red as well for tasks and images ('cp:
+> foo.bb and foo.bb are the same file') and reverting this change seems to
+> make it work again.
+>
 
-
+This makes no sense -- something must be making some really foolish
+assumptions somewhere.  Reverted for now, we're back to having broken
+absolute file:// uris again.
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
