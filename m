@@ -1,45 +1,34 @@
-Received: from mail-vw0-f47.google.com ([209.85.212.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1OqRz0-0000Kj-5X
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OqSDl-0002c6-B0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 16:38:49 +0200
-Received: by vws9 with SMTP id 9so2594800vws.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Aug 2010 07:38:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=maS07XJ0U5m75OBiKrBLNrZUSCyRdVXeGzFH4FTLF0s=;
-	b=nxMjZdueXagPtthElhMowW3eiGNmDZ0G9zkpO0MCpal3ed/Kc43/nHaxZPQL1Knf6D
-	98ougZniTbkbDUgsGcKc04FNsoWia6X2lwPjP2DvVLQCSKqIFfMXqYfHHoSkdofZFnZi
-	u/f9EC8Ai9jKX52+mCdCoAZz7t0elWpqy7XJI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=hyO+YoohWY1oE9tatTZKZkcDdZ0HcAJL6lMlrXXJzNt9i/oUcKVNk154fkeT92TzUG
-	lnMiQ1Ro/4IrZFAc+vZm1WS1TGVrFiWcThC3sIVZfBElZZDCMnc861JJ3pnDd/pxX6X0
-	pTwNo3PVWO1ynuFPH9Dn+0eDW/DeIu+vxLh48=
-Received: by 10.229.237.130 with SMTP id ko2mr4230373qcb.121.1283265488156;
-	Tue, 31 Aug 2010 07:38:08 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.229.46.72 with HTTP; Tue, 31 Aug 2010 07:37:48 -0700 (PDT)
-In-Reply-To: <4C7BBA85.8040101@selfish.org>
-References: <AANLkTikCe=1MNhEuYTG2Wusn1Fk43k-_7VTqaf6geFuT@mail.gmail.com>
-	<4C7BBA85.8040101@selfish.org>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Tue, 31 Aug 2010 16:37:48 +0200
-Message-ID: <AANLkTi=ikw_D=38eMtVAMz08YifDNAf=zkWN39xcbuYa@mail.gmail.com>
+	Tue, 31 Aug 2010 16:54:24 +0200
+Received: (qmail invoked by alias); 31 Aug 2010 14:53:08 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp008) with SMTP; 31 Aug 2010 16:53:08 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1+bbGlVQ1ab/AWsHrduzZrYY/92PHea0za0WZMkRb
+	E/ZenKMHlHVr7w
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.47
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+Date: Tue, 31 Aug 2010 16:41:00 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+References: <201008271556.24288.schnitzeltony@gmx.de>
+	<201008301816.41691.schnitzeltony@gmx.de>
+	<i5ieth$qi2$2@dough.gmane.org>
+In-Reply-To: <i5ieth$qi2$2@dough.gmane.org>
+MIME-Version: 1.0
+Message-Id: <201008311641.00363.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: a recipe for qt4-plugin-phonon-backend-vlc
+Subject: Re: [PATCH][v2] clutter: Bump revisions to latest stable & cleanup
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,39 +42,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 14:38:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 Aug 2010 14:55:42 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-I tried to update automoc-native and kde4 but it is not better.
-I know that Q_WS_WIN is only defined when Qt was build for windows. But how
-to fix this?
-I am not very skilled, at least not enough to fix this..
-I miss some things so more explanation/help will be very well received!
-thx
-Sylvain
+On Tuesday 31 August 2010 10:36:01 am Koen Kooi wrote:
+> It is used to seperate the clutter api/abi change. 0.8 is parallel
+> installable with 1.0 (0.9 is 1.0rc), so the naming is there to support
+> both kinds of clutter.
+> What I wanted to do, but didn't find time for:
+> 
+> 1) name the clutter 0.8 series clutter-*-0.8
+> 2) name the post 0.8 series clutter-*
+> 
+> That should be safe to do since clutter 1.2 is supposed to be compatible
+> with 1.0.
+I would like to take care for this. Before I dive into it how about this schedule:
+
+1. remove very old recipes: clutter*svn*.  As far as I saw are the o-hand svn-sources for clutter no more available. Replace DEPENDS on clutter-cairo to clutter & cairo.
+
+2a. all recipes with v >=0.9 rename to clutter*_v
+2b. all recipes with v < 0.9 rename to clutter-*-0.8
+2c. recipes depending on clutter*: Those depending on v >= 0.9 will get DEPENDS on clutter* / those depending on v < 0.9 ( think it will only be recipes/gnome/libchamplain-gtk_0.2.8.bb ) get 
+DEPENDS on clutter*-0.8 ( maybe this can be changed later to clutter* )
+
+3. Add the recipes I made for latest stable versions
+
+What do you think?
+
+Andreas
 
 
-2010/8/30 Holger Freyther <zecke@selfish.org>
-
-> On 08/27/2010 08:39 PM, Sylvain Par=E9 wrote:
->
-> > automoc-native itself does not build.
-> > (According to OE's log automoc-native is ~ 2 years old.)
->
->
-> Well, pick the latest version then, /usr/include/qt4 as include is lookin=
-g
-> bad, Q_WS_WIN is only defined when Qt was build for windows.
->
-> So in summary...
->        - automoc-native probably deserves an update
->        - it should use the "native" version of Qt (like qmake, uic, moc..=
-.)
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
