@@ -1,30 +1,40 @@
-Received: from exchge01.hosted.kanobe.net ([76.191.73.10])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jfaith@soundmetrics.com>) id 1OqXM3-0007QS-F0
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OqXRJ-0007ci-Lw
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 22:22:55 +0200
-Received: from [192.168.10.133] (75.147.191.205) by exchge-01.knbe.kanobe.net
-	(76.191.73.11) with Microsoft SMTP Server id 14.0.702.0;
-	Tue, 31 Aug 2010 13:20:54 -0700
-Message-ID: <4C7D6411.6030407@soundmetrics.com>
-Date: Tue, 31 Aug 2010 13:20:33 -0700
-From: John Faith <jfaith@soundmetrics.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.8.1.22) Gecko/20090605 SeaMonkey/1.1.17
-	(Ubuntu-1.1.17+nobinonly-0ubuntu1)
+	Tue, 31 Aug 2010 22:28:18 +0200
+Received: by iwn2 with SMTP id 2so5963215iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Aug 2010 13:27:45 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=CUuxV2bviw4mgnRhlrNyFmuywmaOYI0mvBVF9fAoG8s=;
+	b=OiGu8/18OwZmBaDv5fBYFLWB+AloP7Pv5LlmtZtS75tiZGd1r6FF1v0ykhSDUtq3dz
+	kOEss9NF2NT4NyER6+mxCU/LH379myGcDqT0utYsi7rpxZboQzduM/5uKSlZxUoMQ0Nt
+	zHoJLWKWAXc7rteGWFZ/Ltp+Sw0TZ2SkBzPZM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=T/xDpPWXtt34uHn5lTmnKHw16A+3e1EC++qme/LFAEjbT0yuoCid3NJyiUG8QIOb7f
+	MJvL3tk6g9LAYnrBmN2Mx4UXa2G5rYPNifTQSPsLejU3PH85qFV7Qa3tO8vwuWvo3xPo
+	2FkBhQ7jPGuIzyr4SDOff1MLbbgTn5PisnnRI=
 MIME-Version: 1.0
-To: <openembedded-devel@lists.openembedded.org>
-References: <AANLkTimq+M2qtGzz1keuPBXFfYi-Qw9fPz2v4XXCd0JT@mail.gmail.com>
-In-Reply-To: <AANLkTimq+M2qtGzz1keuPBXFfYi-Qw9fPz2v4XXCd0JT@mail.gmail.com>
-X-SA-Exim-Connect-IP: 76.191.73.10
-X-SA-Exim-Mail-From: jfaith@soundmetrics.com
+Received: by 10.231.191.136 with SMTP id dm8mr7840889ibb.75.1283286464349;
+	Tue, 31 Aug 2010 13:27:44 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Tue, 31 Aug 2010 13:27:44 -0700 (PDT)
+Date: Tue, 31 Aug 2010 22:27:44 +0200
+Message-ID: <AANLkTimumzzaPyD=ebU_5io8UD_A_z3hd3LtxaeYtxka@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Boost 1.41 seems to have build issues
+Subject: commit 0ba9d6f94caea026c282d9d87704e4ada62babf0: qmake2: use the new qt4-tools instead of the unmaintained uicmoc recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,89 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 20:22:55 -0000
-Content-Type: text/plain; charset="ISO-8859-1"; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 Aug 2010 20:28:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-J. L. wrote:
-> When I bummed boost to the 1.41 version I noticed during building it
-> did not build in the normal manner and displayed a bunch of warning
-> though did not fail to build. Seems like it should not have so many
-> errors or inability to find libraries. Could be my inexperience
-> talking. Hope someone can explain why this isnt bad if it isnt but to
-> me an error is an error, and would cause other issues once used on the
-> image possibly. This is not the full message just a clip of it:
->
-> NOTE:   /usr/lib/Boost.cmake
-> NOTE:   /usr/share/boost-1.41.0/cmake/BoostConfig.cmake
-> NOTE:   /usr/share/boost-1.41.0/cmake/BoostConfigVersion.cmake
-> NOTE: Multiple libraries (libboost_date_time-mt-d.so.1.41.0,
-> libboost_date_time-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_filesystem-mt.so.1.41.0,
-> libboost_filesystem-mt-d.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_graph-mt.so.1.41.0,
-> libboost_graph-mt-d.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_iostreams-mt-d.so.1.41.0,
-> libboost_iostreams-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_program_options-mt.so.1.41.0,
-> libboost_program_options-mt-d.so.1.41.0) found and LEAD_SONAME not
-> defined
-> NOTE: Multiple libraries (libboost_python-mt-d.so.1.41.0,
-> libboost_python-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_regex-mt-d.so.1.41.0,
-> libboost_regex-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_wserialization-mt-d.so.1.41.0,
-> libboost_serialization-mt-d.so.1.41.0,
-> libboost_wserialization-mt.so.1.41.0,
-> libboost_serialization-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_signals-mt-d.so.1.41.0,
-> libboost_signals-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_system-mt-d.so.1.41.0,
-> libboost_system-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_unit_test_framework-mt-d.so.1.41.0,
-> libboost_unit_test_framework-mt.so.1.41.0) found and LEAD_SONAME not
-> defined
-> NOTE: Multiple libraries (libboost_thread-mt.so.1.41.0,
-> libboost_thread-mt-d.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Multiple libraries (libboost_prg_exec_monitor-mt-d.so.1.41.0,
-> libboost_wave-mt-d.so.1.41.0, libboost_prg_exec_monitor-mt.so.1.41.0,
-> libboost_wave-mt.so.1.41.0) found and LEAD_SONAME not defined
-> NOTE: Couldn't find shared library provider for libstdc++.so.6
-> NOTE: Couldn't find shared library provider for libgcc_s.so.1
->
->   
-<snip>
-> ERROR: QA Issue with boost-date-time: non -dev package contains
-> symlink .so: boost-date-time path
-> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/boost-date-time/usr/lib/libboost_date_time-mt.so'
-> ERROR: QA Issue with boost-date-time: non -dev package contains
-> symlink .so: boost-date-time path
-> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/boost-date-time/usr/lib/libboost_date_time-mt-d.so'
->
->   
-<snip>
+Is the uicmoc4-sdk dep in this one still needed ?
 
+meta/meta-toolchain-neuros.bb:                       qmake2-sdk uicmoc4-sdk"
 
-Which machine are you building for?
+and if not, should the uicmoc4 recipe be moved to obsolete to avoid
+that people mistakenly use it for a new recipe? (apart from the line
+below there is no one having a DEPENDS on it).
 
-Not sure about the errors you saw, but when I tried to build for 
-omap3evm, I hit a completely different problem:
-
-cd 
-/home/jfaith/oe/arago-tmp/work/armv7a-none-linux-gnueabi/boost-1.41.0-r8.1/boost-1.41.0.cmake0/libs/date_time/src 
-&& /home/jfaith/oe/arago-tmp/sysroots/i686-linux/usr/bin/cmake -E 
-cmake_link_script CMakeFiles/boost_date_time-mt-static.dir/link.txt 
---verbose=1
-CMAKE_AR-NOTFOUND cr ../../../lib/libboost_date_time-mt.a  
-CMakeFiles/boost_date_time-mt-static.dir/gregorian/greg_month.cpp.o 
-CMakeFiles/boost_date_time-mt-static.dir/gregorian/greg_weekday.cpp.o 
-CMakeFiles/boost_date_time-mt-static.dir/gregorian/date_generators.cpp.o
-Error running link command: No such file or directory
-make[2]: *** [lib/libboost_date_time-mt.a] Error 2
-
-,
-John
-
-
+Frans.
 
 
