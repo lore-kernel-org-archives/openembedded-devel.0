@@ -1,44 +1,35 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OqHa7-0002Kb-JK
+	(envelope-from <sledz@dresearch.de>) id 1OqKJK-0000B1-5R
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 05:32:21 +0200
-Received: by gxk2 with SMTP id 2so2445420gxk.6
+	Tue, 31 Aug 2010 08:27:10 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 6F420491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 30 Aug 2010 20:31:46 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=vvs0vDQOm/4oooN/kDHuGp6mXV3P+H3jOCxrcoq/cao=;
-	b=ssBlnIP8TkYL13QGCLBPAOfBoxIIzo3hYBI/U6nospMudSFaFMrSiSc47sazMn5Soo
-	MBArF1garDqc3DoejMf/RBGxJlnF9GUm30cJJe+/+akXqUYUzVGe0vLwCt2D6zYgFKSu
-	yGY10prk4DMa36kqRzKmJQUYYg5/zF4pOAJyw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=CO56FAdqflkmJxgpE3tk3WQSSitV4mJvU4FcdFHBqMWBdgaOX39+3RyS5OqZLgeORP
-	5sfdImZ7Ksb+MvtDbKzRXctk4jCNuYDz7W9HPByz7Lbg4RGtZj0YPrwYQb7n3q9DAkFG
-	uPIkYiHEiSP3C3QkA94IFiTdsECSxOSqWIvPc=
-Received: by 10.101.75.5 with SMTP id c5mr5732119anl.190.1283225506511;
-	Mon, 30 Aug 2010 20:31:46 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id h5sm13775139anb.8.2010.08.30.20.31.44
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 30 Aug 2010 20:31:45 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Tue, 31 Aug 2010 08:26:39 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Tue, 31 Aug 2010 08:12:07 +0200
+Message-ID: <4C7C9D3E.60007@dresearch.de>
+Date: Tue, 31 Aug 2010 08:12:14 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 30 Aug 2010 20:31:39 -0700
-Message-Id: <1283225499-11712-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
+In-Reply-To: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
+X-OriginalArrivalTime: 31 Aug 2010 06:12:07.0910 (UTC)
+	FILETIME=[70DE3060:01CB48D3]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] make_3.82.bb: Add new recipe.
+Subject: Re: testing branch 2010-08-23
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,28 +43,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 03:32:21 -0000
+X-List-Received-Date: Tue, 31 Aug 2010 06:27:10 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/make/make_3.82.bb |    6 ++++++
- 1 files changed, 6 insertions(+), 0 deletions(-)
- create mode 100644 recipes/make/make_3.82.bb
+Am 24.08.2010 01:49, schrieb Cliff Brake:
+> As detailed in the following page, we are trying to get a testing
+> branch going where we try to verify OE builds for a number of
+> combinations of distro/machine/target/
+> 
+> http://wiki.openembedded.net/index.php/Testing
+> ...
 
-diff --git a/recipes/make/make_3.82.bb b/recipes/make/make_3.82.bb
-new file mode 100644
-index 0000000..3cdc0a0
---- /dev/null
-+++ b/recipes/make/make_3.82.bb
-@@ -0,0 +1,6 @@
-+require make.inc
-+
-+BBCLASSEXTEND = "native"
-+SRC_URI[md5sum] = "1a11100f3c63fcf5753818e59d63088f"
-+SRC_URI[sha256sum] = "e2c1a73f179c40c71e2fe8abf8a8a0688b8499538512984da4a76958d0402966"
-+
--- 
-1.7.1
+Conforming to the testing procedure i'd expected a message in this list which announces a new testing cycle yesterday. Was a new testing branch created?
+
+Which branch is the right one? I see testing-testing and testing-next.
+
+Steffen
 
 
 
