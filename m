@@ -1,46 +1,32 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OqYhA-0006jT-DT
+	(envelope-from <gary@mlbassoc.com>) id 1OqZ1X-0003Od-Ob
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 23:48:47 +0200
-Received: by wyg36 with SMTP id 36so7821525wyg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Aug 2010 14:48:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=HxLX/TJA6ZMHHoD8MdVQZIv3fWgkxj6UN1PZ7f0hcYo=;
-	b=AbRUfpdORMvU5zYggkrj9ES1O9NA1+buroO8z0FqTS/9HGXB9SSz+MpFZZ1g4fbEQF
-	d1YlPxEAF6lFotChbsvYQCU8GPX1/H599l1dQclpiEY2o3n/U1KcVa8vXPmtAZDR14ii
-	Rk9+OKtGJVLf9RvglIqK//yshxM128HfPB9oU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=j7dXNttN2HpN/ANYWezQEBJh2nbXimNKhC5LIbJaStmqGoqBeOkNzkAVs6aFcUW4Dn
-	4NF1LlfGFbK3G4h5cS8SCH1ZPulmuD1O/3gmS2hcN8CBvs9vXd4UHfquSzAcz8k26WnX
-	GCaPkgobX2cApHQ6Fn4+zZix+zoAbO80Q47Gk=
+	Wed, 01 Sep 2010 00:09:54 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 9517716606B2; Tue, 31 Aug 2010 16:09:10 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id C65D01660390;
+	Tue, 31 Aug 2010 16:09:09 -0600 (MDT)
+Message-ID: <4C7D7D85.9020903@mlbassoc.com>
+Date: Tue, 31 Aug 2010 16:09:09 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.227.128.79 with SMTP id j15mr7266162wbs.88.1283291291077; Tue,
-	31 Aug 2010 14:48:11 -0700 (PDT)
-Received: by 10.216.179.76 with HTTP; Tue, 31 Aug 2010 14:48:11 -0700 (PDT)
-In-Reply-To: <AANLkTim39-M7sS3WhWLsAE2tDUGvJRLhebuBHkRHSKPy@mail.gmail.com>
-References: <AANLkTimq+M2qtGzz1keuPBXFfYi-Qw9fPz2v4XXCd0JT@mail.gmail.com>
-	<4C7D6411.6030407@soundmetrics.com>
-	<AANLkTim39-M7sS3WhWLsAE2tDUGvJRLhebuBHkRHSKPy@mail.gmail.com>
-Date: Tue, 31 Aug 2010 14:48:11 -0700
-Message-ID: <AANLkTimUwTqTPWq07gvMxOAyNsTW0Yfa6LM3M_FdXA67@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
+	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
+In-Reply-To: <AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Boost 1.41 seems to have build issues
+Subject: Re: testing branch 2010-08-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,124 +40,71 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 21:48:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 31 Aug 2010 22:09:54 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Going over more of the output on this build I am seeing a bunch of
-these messages "NOTE: Couldn't find shared library provider for
-libgcc_s.so.1" I have noticed at least just this libgcc file mentioned
-in 5 other program builds.
-
-Since the build does not stop does that mean there are no real issues there=
- or?
-
-Thanks
-
-
-
-On Tue, Aug 31, 2010 at 1:55 PM, J. L. <vwyodapink@gmail.com> wrote:
-> overo fire with the psp kernel is what I am building
+On 08/31/2010 05:05 AM, Cliff Brake wrote:
+> sending again as it appears the last email did not make it ...
 >
 >
-> On Tue, Aug 31, 2010 at 1:20 PM, John Faith <jfaith@soundmetrics.com> wro=
-te:
->> J. L. wrote:
->>>
->>> When I bummed boost to the 1.41 version I noticed during building it
->>> did not build in the normal manner and displayed a bunch of warning
->>> though did not fail to build. Seems like it should not have so many
->>> errors or inability to find libraries. Could be my inexperience
->>> talking. Hope someone can explain why this isnt bad if it isnt but to
->>> me an error is an error, and would cause other issues once used on the
->>> image possibly. This is not the full message just a clip of it:
->>>
->>> NOTE: =A0 /usr/lib/Boost.cmake
->>> NOTE: =A0 /usr/share/boost-1.41.0/cmake/BoostConfig.cmake
->>> NOTE: =A0 /usr/share/boost-1.41.0/cmake/BoostConfigVersion.cmake
->>> NOTE: Multiple libraries (libboost_date_time-mt-d.so.1.41.0,
->>> libboost_date_time-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_filesystem-mt.so.1.41.0,
->>> libboost_filesystem-mt-d.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_graph-mt.so.1.41.0,
->>> libboost_graph-mt-d.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_iostreams-mt-d.so.1.41.0,
->>> libboost_iostreams-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_program_options-mt.so.1.41.0,
->>> libboost_program_options-mt-d.so.1.41.0) found and LEAD_SONAME not
->>> defined
->>> NOTE: Multiple libraries (libboost_python-mt-d.so.1.41.0,
->>> libboost_python-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_regex-mt-d.so.1.41.0,
->>> libboost_regex-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_wserialization-mt-d.so.1.41.0,
->>> libboost_serialization-mt-d.so.1.41.0,
->>> libboost_wserialization-mt.so.1.41.0,
->>> libboost_serialization-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_signals-mt-d.so.1.41.0,
->>> libboost_signals-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_system-mt-d.so.1.41.0,
->>> libboost_system-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_unit_test_framework-mt-d.so.1.41.0,
->>> libboost_unit_test_framework-mt.so.1.41.0) found and LEAD_SONAME not
->>> defined
->>> NOTE: Multiple libraries (libboost_thread-mt.so.1.41.0,
->>> libboost_thread-mt-d.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Multiple libraries (libboost_prg_exec_monitor-mt-d.so.1.41.0,
->>> libboost_wave-mt-d.so.1.41.0, libboost_prg_exec_monitor-mt.so.1.41.0,
->>> libboost_wave-mt.so.1.41.0) found and LEAD_SONAME not defined
->>> NOTE: Couldn't find shared library provider for libstdc++.so.6
->>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
->>>
->>>
->>
->> <snip>
->>>
->>> ERROR: QA Issue with boost-date-time: non -dev package contains
->>> symlink .so: boost-date-time path
->>>
->>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
-oost-date-time/usr/lib/libboost_date_time-mt.so'
->>> ERROR: QA Issue with boost-date-time: non -dev package contains
->>> symlink .so: boost-date-time path
->>>
->>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
-oost-date-time/usr/lib/libboost_date_time-mt-d.so'
->>>
->>>
->>
->> <snip>
->>
->>
->> Which machine are you building for?
->>
->> Not sure about the errors you saw, but when I tried to build for omap3ev=
-m, I
->> hit a completely different problem:
->>
->> cd
->> /home/jfaith/oe/arago-tmp/work/armv7a-none-linux-gnueabi/boost-1.41.0-r8=
-.1/boost-1.41.0.cmake0/libs/date_time/src
->> && /home/jfaith/oe/arago-tmp/sysroots/i686-linux/usr/bin/cmake -E
->> cmake_link_script CMakeFiles/boost_date_time-mt-static.dir/link.txt
->> --verbose=3D1
->> CMAKE_AR-NOTFOUND cr ../../../lib/libboost_date_time-mt.a
->> =A0CMakeFiles/boost_date_time-mt-static.dir/gregorian/greg_month.cpp.o
->> CMakeFiles/boost_date_time-mt-static.dir/gregorian/greg_weekday.cpp.o
->> CMakeFiles/boost_date_time-mt-static.dir/gregorian/date_generators.cpp.o
->> Error running link command: No such file or directory
->> make[2]: *** [lib/libboost_date_time-mt.a] Error 2
->>
->> ,
->> John
->>
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+> ---------- Forwarded message ----------
+> From: Cliff Brake<cliff.brake@gmail.com>
+> Date: Mon, Aug 30, 2010 at 11:51 AM
+> Subject: testing branch 2010-08-30
+> To: openembedded-devel@lists.openembedded.org
 >
+>
+> Hello,
+>
+> Last weeks testing cycle was a good success I think -- thanks to all
+> who participated.
+>
+> http://wiki.openembedded.net/index.php/Testing
+>
+> I have tagged the branch with an annotated tag that includes what built:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-08-23
+>
+> It seems like we are getting good coverage of target machines,
+> distros, and host machines.  I would like to add a target to get some
+> coverage of Qt x11 and Qt embedded.
+
+Did you have some machine/distro/image combos in mind?  I can put some
+of my machines on this if I know what to build.
+
+Right now, I'm attempting
+   MACHINE=qemuarm
+   DISTRO=angstrom-2010.x
+   IMAGE=opie-kdepim-image
+I'm not sure if this combination makes sense, but I thought I'd see
+what happens.
+
+>
+> Ideas on how to make this better are appreciated.
+>
+> One change from last week -- I renamed the testing-testing branch to
+> testing-next as I think that is a little more descriptive.
+>
+> The testing-next branch has been updated for the next testing cycle,
+> and is ready for builds.  Please see
+> http://wiki.openembedded.net/index.php/Testing if you would like to
+> contribute tested combinations.
+>
+> Thanks,
+> Cliff
+>
+> --
+> =================
+> http://bec-systems.com
+>
+>
+>
+
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
