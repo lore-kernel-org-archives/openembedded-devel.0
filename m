@@ -1,35 +1,28 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from gravedo.de ([85.214.79.159])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OqKJK-0000B1-5R
+	(envelope-from <morphis@gravedo.de>) id 1OqKOn-0000Ma-6l
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 08:27:10 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 6F420491278
+	Tue, 31 Aug 2010 08:32:49 +0200
+Received: by gravedo.de (Postfix, from userid 5001)
+	id 771F3275D101; Tue, 31 Aug 2010 08:32:18 +0200 (CEST)
+Received: from localhost (unknown [89.204.137.96])
+	by gravedo.de (Postfix) with ESMTPSA id EB040275CCC2
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Aug 2010 08:26:39 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Tue, 31 Aug 2010 08:12:07 +0200
-Message-ID: <4C7C9D3E.60007@dresearch.de>
-Date: Tue, 31 Aug 2010 08:12:14 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
-MIME-Version: 1.0
+	Tue, 31 Aug 2010 08:32:16 +0200 (CEST)
+From: Simon Busch <morphis@gravedo.de>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
-In-Reply-To: <AANLkTim6-d4krhcMuAZojQVNdy3W-m_ON-mOvK5y3tqn@mail.gmail.com>
-X-OriginalArrivalTime: 31 Aug 2010 06:12:07.0910 (UTC)
-	FILETIME=[70DE3060:01CB48D3]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+Date: Tue, 31 Aug 2010 08:31:57 +0200
+Message-Id: <1283236322-5116-1-git-send-email-morphis@gravedo.de>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 85.214.79.159
+X-SA-Exim-Mail-From: morphis@gravedo.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.0 required=5.0 tests=BAYES_00,RCVD_IN_SORBS_WEB
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-08-23
+Subject: Updates for the palmpre machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,23 +36,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 06:27:10 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 31 Aug 2010 06:32:49 -0000
 
-Am 24.08.2010 01:49, schrieb Cliff Brake:
-> As detailed in the following page, we are trying to get a testing
-> branch going where we try to verify OE builds for a number of
-> combinations of distro/machine/target/
-> 
-> http://wiki.openembedded.net/index.php/Testing
-> ...
+Heyho,
 
-Conforming to the testing procedure i'd expected a message in this list which announces a new testing cycle yesterday. Was a new testing branch created?
+the following patches improves the support for the palmpre machine. They updates the
+recipes for the msmcomm daemon to the latest version and fix the dependencies on
+libfsotransport and fsogsmd. If nobody has any complaints about these patches I will 
+commit them in the next days.
 
-Which branch is the right one? I see testing-testing and testing-next.
-
-Steffen
+regards,
+morphis
 
 
 
