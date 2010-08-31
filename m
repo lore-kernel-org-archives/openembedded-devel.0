@@ -1,32 +1,31 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Noor_Ahsan@mentor.com>) id 1OqOCh-0007kY-Vo
+	(envelope-from <mickey@vanille-media.de>) id 1OqOTh-0005s1-6W
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 12:36:40 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OqOC5-0005zo-7Z from Noor_Ahsan@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 31 Aug 2010 03:35:57 -0700
-Received: from localhost.localdomain ([137.202.156.152]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 31 Aug 2010 12:35:55 +0200
-From: Noor Ahsan <noor_ahsan@mentor.com>
+	Tue, 31 Aug 2010 12:54:12 +0200
+Received: from [192.168.1.9] (business-092-079-168-007.static.arcor-ip.net
+	[92.79.168.7])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id 94AAE58419B
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Aug 2010 12:58:18 +0200 (CEST)
+Mime-Version: 1.0 (Apple Message framework v1081)
+From: "Dr. Michael Lauer" <mickey@vanille-media.de>
+In-Reply-To: <AANLkTi=1tFx5YDCMPmB4EVz944EJbDDGKxoK=mt-jgNO@mail.gmail.com>
+Date: Tue, 31 Aug 2010 12:53:37 +0200
+Message-Id: <C88102FB-5B65-490A-A405-818DB5DBD36A@vanille-media.de>
+References: <AANLkTi=1tFx5YDCMPmB4EVz944EJbDDGKxoK=mt-jgNO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 31 Aug 2010 16:34:53 +0600
-Message-Id: <1283250893-13141-1-git-send-email-noor_ahsan@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 31 Aug 2010 10:35:55.0565 (UTC)
-	FILETIME=[4AE2ADD0:01CB48F8]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] tk: Merge target and native packages using BBCLASSEXTEND
+Subject: Re: [oe-commits] Michael 'Mickey' Lauer : vala: add 0.9.6.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +39,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 10:36:41 -0000
+X-List-Received-Date: Tue, 31 Aug 2010 10:54:24 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-* Set BBCLASSEXTEND to native
-* Bump PR to "r2"
+Thanks Graham,
 
-Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
----
- recipes/tcltk/tk_8.5.8.bb |    3 ++-
- 1 files changed, 2 insertions(+), 1 deletions(-)
+I fixed it upstream.
 
-diff --git a/recipes/tcltk/tk_8.5.8.bb b/recipes/tcltk/tk_8.5.8.bb
-index 01d09e8..5dcd61a 100644
---- a/recipes/tcltk/tk_8.5.8.bb
-+++ b/recipes/tcltk/tk_8.5.8.bb
-@@ -3,7 +3,7 @@ HOMEPAGE = "http://tcl.sourceforge.net"
- SECTION = "devel/tcltk"
- LICENSE = "tcl"
- DEPENDS = "tcl virtual/libx11 libxt"
--PR = "r1"
-+PR = "r2"
- 
- SRC_URI = "\
-   ${SOURCEFORGE_MIRROR}/tcl/tk${PV}-src.tar.gz \
-@@ -42,4 +42,5 @@ FILES_${PN}-lib = "${libdir}/libtk8.5.so.*"
- FILES_${PN} += "${libdir}/tk*"
- 
- BINCONFIG_GLOB = "*Config.sh"
-+BBCLASSEXTEND = "native"
- 
--- 
-1.6.3.3
+Cheers,
+
+:M:
 
 
 
