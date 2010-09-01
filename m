@@ -1,45 +1,40 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OquUi-0003DM-7E
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OqueG-0008QA-JZ
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 23:05:20 +0200
-Received: by wwb31 with SMTP id 31so223650wwb.24
+	Wed, 01 Sep 2010 23:15:13 +0200
+Received: by iwn2 with SMTP id 2so6965841iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 14:04:45 -0700 (PDT)
+	Wed, 01 Sep 2010 14:14:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=kE0V0Cc/YAMo/yjnQi2+j6mehrpm7bZyxKtz4HIqQW4=;
-	b=skwmYlsfbP8SNJddpjRk9dPvnZd5AaRuT4igME52gwO+lVwG+CNvwSRo2cDk/LqLOx
-	ufrIdkHIMI2T2t6UPHDPVSVCO2HBJnlWYmdC09ARucuLAv6XC+mGLzR4JMDHzZVjfE6S
-	bgV5Fo+1OgdW1WxQaDf8geVGtOm+IWJS1W7L8=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=Yn7hRfdJG6LUFpfk9vQGtZSxLJJygOEkreXgxgKtT/Y=;
+	b=l8v2DCSswjU2hnxGsf2mK1Tb9vd/LS7tHapKQjzjE21TiZKT59gvXucSz+YMYfypEG
+	fqsA51/Xdua9VRrOAprwTkz+sV9t4ZFzkfKyMxVrGunoTrjxd9GY/8VRBpMxs1itfF6X
+	3bxJNFQIfbGEMyqvLuzvgyDbDGn7fI1UDMObo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=Ot9OJLQkQEPXHea65ciiya/zkc2dO0sgJxUgnKpcs+thw/kawV50rMqjaa9/CDnE7q
-	QTGeKvzYSX3F+5UPz/DCpLtmjnBAOyiHhXQHM3ZpqzZmZ8UMgmPB80p2pA0IHOIUNo1j
-	DOrjt702zJbXoVor87bmaRqETeNkwIK49NtTM=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=RRjzcFlTiiRBUp8bdwqhc4d2qxM1O9Bbn8yzMOkuDNJfZ/YKT4wtutY8Y8iXLCnlE2
+	Ko8GHGhCfS7hbrrtG7e2xuJZukG1PQ/i0gThpQLO5/pnbaJL523DqkUvOGmrqvhwf0YH
+	ZaHpVtkSabBJTPH+2KR06YkT81yT5oyimvpiE=
 MIME-Version: 1.0
-Received: by 10.216.236.226 with SMTP id w76mr8412666weq.7.1283375085782; Wed,
-	01 Sep 2010 14:04:45 -0700 (PDT)
-Received: by 10.216.179.76 with HTTP; Wed, 1 Sep 2010 14:04:45 -0700 (PDT)
-In-Reply-To: <AANLkTimamK0_tQw32zWAuANT2fBTDgSHUdPZPWbe-E-3@mail.gmail.com>
-References: <AANLkTimeV1FbwQCMYL7WH3tuo_zwcYX1o9cs1H66VPhu@mail.gmail.com>
-	<AANLkTinqVEs+Uh6jNJJVzqjE2SXMbM1ni60nUx+qtXka@mail.gmail.com>
-	<AANLkTimamK0_tQw32zWAuANT2fBTDgSHUdPZPWbe-E-3@mail.gmail.com>
-Date: Wed, 1 Sep 2010 14:04:45 -0700
-Message-ID: <AANLkTimEE4VSR3C6XSQUCYXTgbA1m=Zdw1f8w9vm76_X@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+Received: by 10.231.157.143 with SMTP id b15mr9362676ibx.113.1283375679428;
+	Wed, 01 Sep 2010 14:14:39 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Wed, 1 Sep 2010 14:14:39 -0700 (PDT)
+Date: Wed, 1 Sep 2010 23:14:39 +0200
+Message-ID: <AANLkTikp1c5AcYFDU74kn4oiioqW4L+ZQaofB7rp0iE7@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libxml-namespacesupport-perl stuck in do configure
+Subject: SOC_FAMILY broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,47 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 21:05:21 -0000
+X-List-Received-Date: Wed, 01 Sep 2010 21:15:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-Thanks Frans that fixed it by setting up CPAN on the build machine :)
+Patch http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=07076390358f211bd96779bec2d6eb5eaa0ad699
+creates errors like:
+ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+entity 'virtual/arm-oe-linux-gnueabi-gcc-2.95' but it wasn't found in
+any PACKAGE or RPROVIDES variables
 
+Root cause: if SOC_FAMILY is not set (awhich is the case for most
+MACHINEs  and all distro's except angstrom) the test in base.bbclass
+to skip recipes for different machines never raises the SkipPackage
+exception.
 
+This is the current code (about line 387 in base.bbclass):
+        need_machine = bb.data.getVar('COMPATIBLE_MACHINE', d, 1)
+        if need_machine:
+            import re
+            this_machine = bb.data.getVar('MACHINE', d, 1)
+            if this_machine and not re.match(need_machine, this_machine):
+                this_soc_family = bb.data.getVar('SOC_FAMILY', d, 1)
+                if this_soc_family and not re.match(need_machine,
+this_soc_family):
+                    raise bb.parse.SkipPackage("incompatible with
+machine %s" % this_machine)
 
-On Wed, Sep 1, 2010 at 1:16 PM, J. L. <vwyodapink@gmail.com> wrote:
-> so if i set up CPAN properly on the build machine that should get
-> through that part? Did I understand that properly? I will try that out
-> though, thanks a ton for the response. I will post if that works or
-> doesnt regardless
->
->
->
-> On Wed, Sep 1, 2010 at 1:08 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> 2010/9/1 J. L. <vwyodapink@gmail.com>:
->>> I am trying to get this to build and it seems to be stuck on the
->>> do_configure part, I let it run for over 24 hours before killing it
->>> and when I tried to alt C to kill it, it endlessly looped showing
->>> something about selecting the country your in and loops through the
->>> choices endlessly the only way I could kill it fully was to close the
->>> terminal. I noticed in May someone else brought up this or a very
->>> similar issue, what is the work around and or fix for this? Thanks for
->>> any help or tips
->>
->>
->> I think I had this once too.
->> Not sure how I solved it, it is quite some time ago.
->> However, it could be that I configured cpan manually on the host system
->>
->> No idea how to fix this permanently.
->>
->> Frans
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
+I see two possible fixes.
+1. Make sure SOC_FAMILY is always defined. E.g. in bitbake.conf say
+SOC_FAMILY ?= "Unknown"
+2. improve the test to deal with an undefined soc_famile
+E.g rewrite the one but last line to:
+                    if (this_soc_family and not re.match(need_machine,
+this_soc_family)) or not this_soc_family:
+
+I tested the 2nd patch with distro minimal, target sheevaplug, which
+gave the error before. After rewriting the line as suggested skipping
+works and the problem is gone.
+I have this also as a formal patch, but there might be more desirable
+ways to do this.
+
+Please advise.
+
+Frans.
 
 
