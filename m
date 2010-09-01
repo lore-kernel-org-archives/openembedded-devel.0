@@ -1,28 +1,36 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OqwOS-0003ZX-LY
+	(envelope-from <Tom_Rini@mentor.com>) id 1OqwQC-0003fG-80
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 01:07:01 +0200
-Received: from [192.168.1.2] (e180147196.adsl.alicedsl.de [85.180.147.196])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 94A31584122
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu,  2 Sep 2010 01:11:16 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Thu, 02 Sep 2010 01:08:49 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OqwPc-0004di-Lf from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 16:08:12 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 1 Sep 2010 16:08:12 -0700
+Received: from [172.30.80.207] ([172.30.80.207]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 1 Sep 2010 17:08:11 -0600
+Message-ID: <4C7EDCD7.3030300@mentor.com>
+Date: Wed, 01 Sep 2010 16:08:07 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikGdRbLuVujasDCgu2eiyn0VCVCbjXjRo8Zv1xr@mail.gmail.com>
 References: <1283356972-28880-1-git-send-email-noor_ahsan@mentor.com>
-	<AANLkTikGdRbLuVujasDCgu2eiyn0VCVCbjXjRo8Zv1xr@mail.gmail.com>
-Organization: Vanille-Media
-Date: Thu, 02 Sep 2010 01:05:07 +0200
-Message-ID: <1283382307.2012.20.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+	<1283382009.2012.15.camel@saphir>
+In-Reply-To: <1283382009.2012.15.camel@saphir>
+X-OriginalArrivalTime: 01 Sep 2010 23:08:11.0516 (UTC)
+	FILETIME=[8C6BFBC0:01CB4A2A]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -40,34 +48,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 23:07:01 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Wed, 01 Sep 2010 23:08:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-Am Mittwoch, den 01.09.2010, 21:41 +0200 schrieb Frans Meulenbroeks:
-> Mickey can you say something about this recipe.
-> It is from 2008 and has DEFAULT_PREFERENCE = -1
+Michael 'Mickey' Lauer wrote:
+> Thanks for your patch, but here's what I don't like
+> (yes, probably oe-stylize is to blame, perhaps someone
+> could fix it there)
+> 
+>> -export BUILD_SYS
+>> -export HOST_SYS
+>> -export STAGING_LIBDIR
+>> -export STAGING_INCDIR
+>> -
+>>  EXTRA_QMAKEVARS_POST += "DESTDIR=${S} CONFIG=console"
+>>  
+>>  do_configure_prepend() {
+>> -	cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
+>> +        cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
+>>  }
+>> -
+>>  do_stage() {
+>> -	install -m 0755 sip ${STAGING_BINDIR_NATIVE}/sip
+>> -	cd ${WORKDIR}/sip-${PV} && python configure.py
+>> -	install -d ${STAGING_PYDIR}/site-packages
+>> -	install -m 0755 sip*.py ${STAGING_PYDIR}/site-packages
+>> +        install -m 0755 sip ${STAGING_BINDIR_NATIVE}/sip
+>> +        cd ${WORKDIR}/sip-${PV} && python configure.py
+>> +        install -d ${STAGING_PYDIR}/site-packages
+>> +        install -m 0755 sip*.py ${STAGING_PYDIR}/site-packages
+>>  }
+>>  
+>> -SRC_URI[md5sum] = "597d7ff7edb42a18421c806ffd18a136"
+>> -SRC_URI[sha256sum] = "7faaccb6f17296399051bd076a7f41e0f6d95a28eda3e30468f1bd7cf45898e1"
+>> +export BUILD_SYS
+>> +export HOST_SYS
+>> +export STAGING_LIBDIR
+>> +export STAGING_INCDIR
+>> +
+>> +DEFAULT_PREFERENCE = "-1"
+> 
+> I like to keep a mental model of recipes being somewhat executed in a
+> top-down manner; in the model, exported variable assignments do in fact
+> affect all of tasks, so I think they should be kept next to the
+> non-exported assignments.
 
-sip is sip4 and has never been tested as extensively as I have tested
-sip3.
-
-> pyqt seems to depend on this recipe
-
-Yes. sip is 'a sip of swig', a preprocessor to create Python bindings.
-
-> and there are also two sip3-native recipes. Could not find a user for this.
-
-PyQt3 used to depend on it and I used to maintain PyQt/Embedded for the
-Zaurus and iPaq many years after the original author lost interest
-(Sharp actually stopped paying him to do that, but that's another
-story). Since 2007 I no longer use it though and since there have been
-so many changes in Qt and PyQt, I'm afraid I don't know about the state
-of it in OE.
-
-Cheers,
+Yes, that does sound right, fixing oe-stylize now...
 
 -- 
-:M:
-
+Tom Rini
+Mentor Graphics Corporation
 
 
