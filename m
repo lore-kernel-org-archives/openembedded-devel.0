@@ -1,32 +1,48 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1OqZ1X-0003Od-Ob
+	(envelope-from <graham.gower@gmail.com>) id 1Oqgee-0007BU-9i
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 00:09:54 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 9517716606B2; Tue, 31 Aug 2010 16:09:10 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id C65D01660390;
-	Tue, 31 Aug 2010 16:09:09 -0600 (MDT)
-Message-ID: <4C7D7D85.9020903@mlbassoc.com>
-Date: Tue, 31 Aug 2010 16:09:09 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Wed, 01 Sep 2010 08:18:41 +0200
+Received: by pvg6 with SMTP id 6so2888985pvg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 31 Aug 2010 23:18:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=r5qIWf9K3NTxwmxFKKup79OG5ninr/eWzPkjSFZMSgc=;
+	b=ikBSTMfVsBlOec1GU5GRQkGauk10RnseV6Q/FwaoZGhwozXGDqqAkBqWhmmHSlpdy8
+	To1MI0uoyWMLeJJevGnE3Z8jrOXs7b2hMmHiIIqXwCdDtrqtKNLyeNzWXTc00sfB8cau
+	f4n3saYkuSFNS3jiMt5WbP4izYo7+32cATAA0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=Oh8ZCSVOLUnSyfX0vD98/7FAL8hfJFIUk/ya8vsBR/0r+TMzRHWdngdxImZ7Os2OVP
+	maY/qZihouq9Ne/XibDgXz9SnhcRG/m+EV7QeCQOM1/sYikM2LRhUMtQZzKWLP5Vcurc
+	UUAu/cfDs7sRg1Vu74du+VIW/GMcBPP4tyoys=
+Received: by 10.142.187.6 with SMTP id k6mr7007099wff.3.1283321885410;
+	Tue, 31 Aug 2010 23:18:05 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	v38sm12032371wfh.12.2010.08.31.23.18.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 31 Aug 2010 23:18:04 -0700 (PDT)
+Message-ID: <4C7DF016.1020707@gmail.com>
+Date: Wed, 01 Sep 2010 15:47:58 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
-	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
-In-Reply-To: <AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-08-30
+Subject: [PATCH] gst-plugins-bad_0.10.19.bb: add libmodplug to DEPENDS.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,71 +56,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 31 Aug 2010 22:09:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 01 Sep 2010 06:18:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 08/31/2010 05:05 AM, Cliff Brake wrote:
-> sending again as it appears the last email did not make it ...
->
->
-> ---------- Forwarded message ----------
-> From: Cliff Brake<cliff.brake@gmail.com>
-> Date: Mon, Aug 30, 2010 at 11:51 AM
-> Subject: testing branch 2010-08-30
-> To: openembedded-devel@lists.openembedded.org
->
->
-> Hello,
->
-> Last weeks testing cycle was a good success I think -- thanks to all
-> who participated.
->
-> http://wiki.openembedded.net/index.php/Testing
->
-> I have tagged the branch with an annotated tag that includes what built:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-08-23
->
-> It seems like we are getting good coverage of target machines,
-> distros, and host machines.  I would like to add a target to get some
-> coverage of Qt x11 and Qt embedded.
+Several images want gst-plugin-modplug (e.g. illume-image and the
+fso images). They fail to find it without this.
 
-Did you have some machine/distro/image combos in mind?  I can put some
-of my machines on this if I know what to build.
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
+---
+ recipes/gstreamer/gst-plugins-bad_0.10.19.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-Right now, I'm attempting
-   MACHINE=qemuarm
-   DISTRO=angstrom-2010.x
-   IMAGE=opie-kdepim-image
-I'm not sure if this combination makes sense, but I thought I'd see
-what happens.
-
->
-> Ideas on how to make this better are appreciated.
->
-> One change from last week -- I renamed the testing-testing branch to
-> testing-next as I think that is a little more descriptive.
->
-> The testing-next branch has been updated for the next testing cycle,
-> and is ready for builds.  Please see
-> http://wiki.openembedded.net/index.php/Testing if you would like to
-> contribute tested combinations.
->
-> Thanks,
-> Cliff
->
-> --
-> =================
-> http://bec-systems.com
->
->
->
-
+diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.19.bb b/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
+index 0f0ff21..2351431 100644
+--- a/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
++++ b/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
+@@ -3,9 +3,9 @@ require gst-plugins.inc
+ SRC_URI[archive.md5sum] = "368f72e2a1c7a6e8fe60394e4315259b"
+ SRC_URI[archive.sha256sum] = "7b6c49f22caad3b573aee481381355b38ac9f2077f291d9f33a9a808a2568888"
+ 
+-DEPENDS += "orc-native orc libcdaudio gst-plugins-base openssl directfb"
++DEPENDS += "orc-native orc libcdaudio gst-plugins-base openssl directfb libmodplug"
+ 
+-PR = "${INC_PR}.2"
++PR = "${INC_PR}.3"
+ 
+ # We don't have vdpau headers in OE and it creates crosscompile badness
+ EXTRA_OECONF_append = " --disable-vdpau --enable-sdl"
 -- 
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+1.7.1
+
 
 
