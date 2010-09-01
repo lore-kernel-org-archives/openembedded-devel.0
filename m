@@ -1,40 +1,32 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
+	helo=phalanx.drlauer-research.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OqwQC-0003fG-80
+	(envelope-from <mickey@vanille-media.de>) id 1OqwSX-0004Pn-0r
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 01:08:49 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OqwPc-0004di-Lf from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 16:08:12 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 1 Sep 2010 16:08:12 -0700
-Received: from [172.30.80.207] ([172.30.80.207]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 1 Sep 2010 17:08:11 -0600
-Message-ID: <4C7EDCD7.3030300@mentor.com>
-Date: Wed, 01 Sep 2010 16:08:07 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Thu, 02 Sep 2010 01:11:15 +0200
+Received: from [192.168.1.2] (e180147196.adsl.alicedsl.de [85.180.147.196])
+	by phalanx.drlauer-research.com (Postfix) with ESMTP id E1E39584122
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Sep 2010 01:15:28 +0200 (CEST)
+From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
 To: openembedded-devel@lists.openembedded.org
-References: <1283356972-28880-1-git-send-email-noor_ahsan@mentor.com>
-	<1283382009.2012.15.camel@saphir>
-In-Reply-To: <1283382009.2012.15.camel@saphir>
-X-OriginalArrivalTime: 01 Sep 2010 23:08:11.0516 (UTC)
-	FILETIME=[8C6BFBC0:01CB4A2A]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <AANLkTimNWTc1-qGCcZoOfSX96RZvy0OUKk4bTOU_c4pe@mail.gmail.com>
+References: <AANLkTikp1c5AcYFDU74kn4oiioqW4L+ZQaofB7rp0iE7@mail.gmail.com>
+	<AANLkTimNWTc1-qGCcZoOfSX96RZvy0OUKk4bTOU_c4pe@mail.gmail.com>
+Organization: Vanille-Media
+Date: Thu, 02 Sep 2010 01:09:20 +0200
+Message-ID: <1283382560.2012.24.camel@saphir>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 78.47.116.26
+X-SA-Exim-Mail-From: mickey@vanille-media.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sip-native: Run oe-stylize script on the recipe and modify the recipe accordingly.
+Subject: Re: SOC_FAMILY broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,56 +40,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 23:08:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 01 Sep 2010 23:11:15 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 
-Michael 'Mickey' Lauer wrote:
-> Thanks for your patch, but here's what I don't like
-> (yes, probably oe-stylize is to blame, perhaps someone
-> could fix it there)
+Am Mittwoch, den 01.09.2010, 23:22 +0200 schrieb Leon Woestenberg:
+> On Wed, Sep 1, 2010 at 11:14 PM, Frans Meulenbroeks
+> <fransmeulenbroeks@gmail.com> wrote:
+> > Root cause: if SOC_FAMILY is not set (awhich is the case for most
+> > MACHINEs  and all distro's except angstrom) the test in base.bbclass
+> >
 > 
->> -export BUILD_SYS
->> -export HOST_SYS
->> -export STAGING_LIBDIR
->> -export STAGING_INCDIR
->> -
->>  EXTRA_QMAKEVARS_POST += "DESTDIR=${S} CONFIG=console"
->>  
->>  do_configure_prepend() {
->> -	cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
->> +        cat sipgen.sbf | sed s,target,TARGET, | sed s,sources,SOURCES, | sed s,headers,HEADERS, > sipgen.pro
->>  }
->> -
->>  do_stage() {
->> -	install -m 0755 sip ${STAGING_BINDIR_NATIVE}/sip
->> -	cd ${WORKDIR}/sip-${PV} && python configure.py
->> -	install -d ${STAGING_PYDIR}/site-packages
->> -	install -m 0755 sip*.py ${STAGING_PYDIR}/site-packages
->> +        install -m 0755 sip ${STAGING_BINDIR_NATIVE}/sip
->> +        cd ${WORKDIR}/sip-${PV} && python configure.py
->> +        install -d ${STAGING_PYDIR}/site-packages
->> +        install -m 0755 sip*.py ${STAGING_PYDIR}/site-packages
->>  }
->>  
->> -SRC_URI[md5sum] = "597d7ff7edb42a18421c806ffd18a136"
->> -SRC_URI[sha256sum] = "7faaccb6f17296399051bd076a7f41e0f6d95a28eda3e30468f1bd7cf45898e1"
->> +export BUILD_SYS
->> +export HOST_SYS
->> +export STAGING_LIBDIR
->> +export STAGING_INCDIR
->> +
->> +DEFAULT_PREFERENCE = "-1"
+> Good point, but I never understood SOC_FAMILY. From an old email:
 > 
-> I like to keep a mental model of recipes being somewhat executed in a
-> top-down manner; in the model, exported variable assignments do in fact
-> affect all of tasks, so I think they should be kept next to the
-> non-exported assignments.
+> "SOC_FAMILY is defining a family of processors and the features that processor
+> has.  Whereas MACHINE_CLASS is defining a type of device and its features which
+> can use different processors."
+> 
+> I think the first sentence is contradicting itself.
+> 
+> A "family of processors" vs. "features that processor had". This can
+> be fully orthogonal (worst case),
+> so the definition of the variable is crap. I wonder, has it proven
+> more useful than cumbersome?
 
-Yes, that does sound right, fixing oe-stylize now...
+I still don't know why we need both SOC_FAMILY and MACHINE_CLASS in the
+first place. MACHINE_CLASS has been around for much longer and if you
+look how it's being used or intended to use, you see that there are
+hardly any processor differences in the members of those classes (e.g.
+openezx, qualcomm msm7, om-gta01/02, clamshell zaurus models, ...).
 
+I'm still unconvinced that we need both variables.
+
+Cheers,
 -- 
-Tom Rini
-Mentor Graphics Corporation
+:M:
+
 
 
