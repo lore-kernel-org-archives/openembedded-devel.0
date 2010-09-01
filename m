@@ -1,42 +1,43 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OqrqV-0002Ng-6V for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 20:15:39 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Oqrpx-0008RR-1S for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 20:15:05 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 20:15:05 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <chasemaupin03@gmail.com>) id 1OqrzC-0005hm-DJ
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 20:24:40 +0200
+Received: by gya6 with SMTP id 6so3359102gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 20:15:05 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Wed, 01 Sep 2010 11:24:03 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=h9ikwdplri3pJk0PRLznr89qpZ1jeGln4ZgvsNXRh0o=;
+	b=KwOjWhl9Udrl6BtMTLbAZ+YJlEhGZqer9yCLMk240gv6gWWJKGSKPyn1kzaF+VlknG
+	8v4wEAdQX0kbXNltlcyBLCh8GJr0X1oqgXRE/fA6gMKGSEMzmNco9Btlh2VR2aVnsSQy
+	mWutSQYh49yyo88LeSowLL72ppeP5LdvsI8Hk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=NpWs17CrAUIi9iF3/F1dezqoUdcknJsX+hM2CLFU25v1Ay+sBUHIVffhbMUjdLtzE4
+	SjzNASQGTm8LiLFEWo6No2lI4E/fAf6FuGaGuSq0fEaTBTQxIbFO6zkFWorePiYiy0Th
+	ZSqIoTTrQRh3DdUlrzNhgSzNXmlF3OQbziVhI=
+Received: by 10.150.133.5 with SMTP id g5mr1095467ybd.311.1283365443292;
+	Wed, 01 Sep 2010 11:24:03 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id u42sm10435313yba.0.2010.09.01.11.24.01
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 01 Sep 2010 11:24:02 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Wed, 01 Sep 2010 20:08:03 +0200
-Message-ID: <i5m4q4$l1b$2@dough.gmane.org>
-References: <4C7DF016.1020707@gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <4C7DF016.1020707@gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Date: Wed,  1 Sep 2010 13:15:07 -0500
+Message-Id: <1283364908-21950-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] gst-plugins-bad_0.10.19.bb: add libmodplug to DEPENDS.
+Subject: [PATCH 1/2] ti-graphics-sdk: Update download links
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,49 +51,93 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 18:15:39 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Sep 2010 18:24:42 -0000
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
+* Changed the download links to point to the specific version
+  of the TI Graphics SDK installer rather than to just the
+  latest.
+* The libgles-omap3.inc file still contains the link to the
+  latest version of the installer.
 
-On 01-09-10 08:17, Graham Gower wrote:
-> Several images want gst-plugin-modplug (e.g. illume-image and the
-> fso images). They fail to find it without this.
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ recipes/powervr-drivers/libgles-omap3.inc          |    5 ++++-
+ .../powervr-drivers/libgles-omap3_3.01.00.02.bb    |    2 +-
+ .../powervr-drivers/libgles-omap3_3.01.00.06.bb    |    2 +-
+ .../omap3-sgx-modules_1.4.14.2514.bb               |    2 +-
+ .../omap3-sgx-modules_1.4.14.2616.bb               |    2 +-
+ 5 files changed, 8 insertions(+), 5 deletions(-)
 
-Applied, thanks for the patch!
-
-> 
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
-> ---
->  recipes/gstreamer/gst-plugins-bad_0.10.19.bb |    4 ++--
->  1 files changed, 2 insertions(+), 2 deletions(-)
-> 
-> diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.19.bb b/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
-> index 0f0ff21..2351431 100644
-> --- a/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
-> +++ b/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
-> @@ -3,9 +3,9 @@ require gst-plugins.inc
->  SRC_URI[archive.md5sum] = "368f72e2a1c7a6e8fe60394e4315259b"
->  SRC_URI[archive.sha256sum] = "7b6c49f22caad3b573aee481381355b38ac9f2077f291d9f33a9a808a2568888"
->  
-> -DEPENDS += "orc-native orc libcdaudio gst-plugins-base openssl directfb"
-> +DEPENDS += "orc-native orc libcdaudio gst-plugins-base openssl directfb libmodplug"
->  
-> -PR = "${INC_PR}.2"
-> +PR = "${INC_PR}.3"
->  
->  # We don't have vdpau headers in OE and it creates crosscompile badness
->  EXTRA_OECONF_append = " --disable-vdpau --enable-sdl"
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMfpaDMkyGM64RGpERAmFTAJ0XVvxQv93/tW2bdTXr2G4H/ETYpACfaSJt
-uAnNkktToDEbAHk2f+3MGPs=
-=ut0J
------END PGP SIGNATURE-----
+diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
+index d183486..5b248b0 100644
+--- a/recipes/powervr-drivers/libgles-omap3.inc
++++ b/recipes/powervr-drivers/libgles-omap3.inc
+@@ -15,7 +15,10 @@ PROVIDES += "virtual/egl"
+ # 1. if you don't already have a ti account get one here. it's free:
+ #  http://www.ti.com/hdr_my_ti
+ # 2. fetch the gl-es bin (full OMAP Graphics SDK) from here:
+-#  http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++#    Check the libgles recipe for your version to find the link to the
++#    download for that version.  The following link will provide the
++#    latest version available.
++#    http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
+ # 3. put the OMAP35x_*.bin file in $DL_DIR, i.e. downloads/
+ #  mv OMAP35x_Graphics_SDK_setuplinux_3_01_00_06.bin ./downloads/
+ # 4. make the checksum file in ./downloads/ directory:
+diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.02.bb b/recipes/powervr-drivers/libgles-omap3_3.01.00.02.bb
+index 3b68c18..544fabf 100644
+--- a/recipes/powervr-drivers/libgles-omap3_3.01.00.02.bb
++++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.02.bb
+@@ -5,7 +5,7 @@ require libgles-omap3.inc
+ PR = "r7"
+ 
+ # download required binary distribution from:
+-# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_02/index_FDS.html
+ # see libgles-omap3.inc for detailed installation instructions
+ 
+ SGXPV = "3_01_00_02"
+diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb b/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
+index bb7994f..0d41a23 100644
+--- a/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
++++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.06.bb
+@@ -7,7 +7,7 @@ ES5LOCATION = "${S}/gfx_rel_es5.x"
+ require libgles-omap3.inc
+ 
+ # download required binary distribution from:
+-# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++#  http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_06/index_FDS.html
+ # see libgles-omap3.inc for detailed installation instructions
+ 
+ SGXPV = "3_01_00_06"
+diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
+index 6f6e073..a2fcf22 100644
+--- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
++++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ PR_append = "a"
+ 
+ # download required binary distribution from:
+-# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_02/index_FDS.html
+ # see libgles-omap3.inc for detailed installation instructions
+ 
+ TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+index 0d2818b..4ed2540 100644
+--- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
++++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+@@ -4,7 +4,7 @@ LICENSE = "GPLv2"
+ PR_append = "c"
+ 
+ # download required binary distribution from:
+-# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
++# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_06/index_FDS.html
+ # see libgles-omap3.inc for detailed installation instructions
+ 
+ TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
+-- 
+1.7.0.4
 
 
 
