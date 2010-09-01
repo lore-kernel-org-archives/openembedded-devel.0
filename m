@@ -1,41 +1,40 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <ka6sox@gmail.com>) id 1Oqvyy-0002jp-Mh
+	(envelope-from <Tom_Rini@mentor.com>) id 1Oqw37-0002wE-Vp
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 00:40:41 +0200
-Received: by iwn2 with SMTP id 2so7033907iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 15:40:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=GPRn3u8TEao0IHlhDQdzauyCX7nXuMwGV9vYvB/CYLo=;
-	b=jTbKQREJntmSlbGraaXholCavuPq05KJSaXpj2H5rB8mLlZTCnM07x+ytnHmnBvGBs
-	mKiRi5o5ydKEjAilKbKsHfOlV1hGoH4atQcaLSaEUY4BqgBcgaiDR+czaWdiVHeHmD1A
-	6x6ZGBlSJq88uVpOPfLwyNLjIATQVhXIldQJg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Anpim1gx0zqag3w4YeQoLAKh6Xn3SLlnbdPsfUpXxqvgg2K/xuk6fh9vff/86VvX8F
-	vNwTiGRHp+FeVfTILxvpDas4H49CxdOel09tIz9Y29In8Ic/aovnhUKUKH/ppvj+G6Qa
-	YqQhfoBefZKziZgfDKGraWtVN6nxO1LaG0BLA=
+	Thu, 02 Sep 2010 00:44:59 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1Oqw2Y-0001yB-Fz from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 15:44:22 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 1 Sep 2010 15:44:22 -0700
+Received: from [172.30.80.207] ([172.30.80.207]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 1 Sep 2010 16:44:21 -0600
+Message-ID: <4C7ED741.7000801@mentor.com>
+Date: Wed, 01 Sep 2010 15:44:17 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.231.167.67 with SMTP id p3mr9400586iby.20.1283380807292; Wed,
-	01 Sep 2010 15:40:07 -0700 (PDT)
-Received: by 10.231.199.139 with HTTP; Wed, 1 Sep 2010 15:40:07 -0700 (PDT)
-Date: Wed, 1 Sep 2010 15:40:07 -0700
-Message-ID: <AANLkTimEeD6E0qo7G=mNW6_zvf8H=NNJJU8xkmZ5nk85@mail.gmail.com>
-From: Tom King <ka6sox@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: ka6sox@gmail.com
+References: <10034543.559431283349469680.JavaMail.defaultUser@defaultHost>	<AANLkTi=U33a2xMK4SWWmF8c6hPi18vnedSaoTARuMwPn@mail.gmail.com>	<20100901192510.GA24544@denix.org>
+	<AANLkTim=he3n7LUhmOJh2zJGJXymZvnv8kviGSAPnC3p@mail.gmail.com>
+In-Reply-To: <AANLkTim=he3n7LUhmOJh2zJGJXymZvnv8kviGSAPnC3p@mail.gmail.com>
+X-OriginalArrivalTime: 01 Sep 2010 22:44:21.0567 (UTC)
+	FILETIME=[381B14F0:01CB4A27]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Garnet Build Server
+Subject: Re: opkg vs dpkg/rpm
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,15 +48,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 22:40:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 01 Sep 2010 22:44:59 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-The Garnet build server is being upgraded to Ubuntu Lucid 64-bit today.
+Graham Gower wrote:
+> On 2 September 2010 04:55, Denys Dmytriyenko <denis@denix.org> wrote:
+>> On Wed, Sep 01, 2010 at 07:43:38AM -0700, Chris Larson wrote:
+>>> In addition to package writing, there's the IMAGE_PKGTYPE varaible which
+>>> controls which of the rootfs_<pkgtype> bbclasses is used to construct the
+>>> root filesystem.  You can inherit multiple packaging formats, resulting in
+>>> multiple formats being emitted, but one has to be selected specifically for
+>>> the filesystem.  If you only inherit one packaging class (i.e. package_ipk)
+>>> it will automatically set the image packaging type to match.  So, to switch:
+>>>
+>>> 1) INHERIT += "package_rpm"
+>>> 2) IMAGE_PKGTYPE = "rpm"
+>> Just a small clarification for Chris' excelent explanation - the change of the
+>> above variables will require a complete rebuild/repackage of all the packages
+>> and the filesystem image. And it's not possible to make the switch for an
+>> existing image or add another package manager to an existing image w/o losing
+>> the database of installed packages...
+>>
+>> --
+>> Denys
+> 
+> It would be trivial to write a script to convert the package database
+> from one package manager's format to another. Surely someone has
+> already done this?
 
-It will be offline for approximately 2-3hrs.
+The big issue is converting the package files, although I suspect alien 
+could be used here since it does .debs and ipk is a stripped down deb it 
+might work, or might not, but could be made to work.
 
-Thanks,
+The bigger problem however is it's unclear if rpm or deb support is 
+currently unbitrotten enough to work (deb stuff frequently has the 
+problem that upstream upgraded, and we did not, so sources are gone).
 
-ka6sox
-(for the oe infrastructure team)
+-- 
+Tom Rini
+Mentor Graphics Corporation
+
 
