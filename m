@@ -1,38 +1,37 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Oqv2X-0008Ex-BS
+	(envelope-from <raj.khem@gmail.com>) id 1Oqv3i-0008KK-Ag
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 23:40:18 +0200
-Received: by iwn2 with SMTP id 2so6984491iwn.6
+	Wed, 01 Sep 2010 23:41:31 +0200
+Received: by iwn2 with SMTP id 2so6985386iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 14:39:44 -0700 (PDT)
+	Wed, 01 Sep 2010 14:40:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=OUu5BeIiTDhA1Er7+PK8Qq3xmzJ6hspXqqMpTNiJbwk=;
-	b=IXLWvJK25TJGsPtqOcx29NZRx7TggFpmacMwQSq3G7FNH+qn8QnblyP2ln6md0majX
-	OdidJG5ec+vIu7vEBwhfSpCSt/1Wl9KYQ1MowrM2NqMWQLq08Q3CqRV9N824AuhkxCbu
-	hikLqIajMTJI8QLd2VKjUOkxoGsOCepAMyjaM=
+	bh=glMmeh5endij5T/pEzXuLrSOyM2wub4z+7HHpx8iXDc=;
+	b=xbLWCuQC1+K+c+09xjT1J/Q7/qa3C3rtkbmhLvcfVvcQujJKXms/LR+MBFrzAZc/8b
+	fIGNKDKu/EJyibDzMTpIy4yk275A1CKFmt2fn2dw3YPz73YrbpsZNg4z8mVtQvlCGfcW
+	j8nfMYIX020q1e3L/J3CyrMza9fPEqctUqeqE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=Bjbfzp8uq1IVLqTgWEKo5AvNa55ZOeGWTciDYXQISxr+tfUSALS8v8+tiGe0rNK6A5
-	YQjJwpqchqxGcw+zuuoXxVP4CYhpZ6dObT71jUbhHd9kyQqbJWS0IYEpNo43/zlD/8Bk
-	K8c3qW3YrszFNcCbqj+YgI+7UJEMS70K9ol1o=
-Received: by 10.231.152.78 with SMTP id f14mr9777666ibw.60.1283377184292; Wed,
-	01 Sep 2010 14:39:44 -0700 (PDT)
+	b=v+AqHN5d1GMM/QXRQppoogS22h1e0Y2e5757JXMq4+TJ1ScjsA8wYD1/uV4W3Jsx94
+	2ZRyqISP47mxUJjQihqgAzFbIRWfeuAEVo0844aOs9aqslmrzrxU3vPd+s4qSTaWGFIE
+	QmnDRzcR85VoPRUXfFaiZk8wMjdUCoGraDb2o=
+Received: by 10.231.14.140 with SMTP id g12mr8613725iba.84.1283377241406; Wed,
+	01 Sep 2010 14:40:41 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Wed, 1 Sep 2010 14:39:24 -0700 (PDT)
-In-Reply-To: <20100830220042.GC14561@denix.org>
+Received: by 10.231.207.8 with HTTP; Wed, 1 Sep 2010 14:40:20 -0700 (PDT)
+In-Reply-To: <AANLkTikE=wDnQPu5txDEL4QdOjfrD3YK1DOphAqvZZ4h@mail.gmail.com>
 References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
-	<1283027073-12308-6-git-send-email-raj.khem@gmail.com>
-	<i5dap0$v2$2@dough.gmane.org>
-	<AANLkTimnfsHbd0sWxGLBfawD9w5M4OLGWbH_gN6_9T-h@mail.gmail.com>
-	<20100830220042.GC14561@denix.org>
+	<1283027073-12308-12-git-send-email-raj.khem@gmail.com>
+	<i5das3$v2$3@dough.gmane.org>
+	<AANLkTikE=wDnQPu5txDEL4QdOjfrD3YK1DOphAqvZZ4h@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 1 Sep 2010 14:39:24 -0700
-Message-ID: <AANLkTi=ztrx5mOSAUaMDq0qSKp3TjGKuV_2231nySHdz@mail.gmail.com>
+Date: Wed, 1 Sep 2010 14:40:20 -0700
+Message-ID: <AANLkTin3L-dJY_KRx5BjdSPCfU1nr-iTYvkzuE5KNE3B@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -42,7 +41,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 05/23] meta-toolchain-arago-dvsdk.bb: Exclude from world build.
+Subject: Re: [PATCH 11/23] udev-compat141_141.bb: if machine is not one of spitz akita c70x poodle then it is not needed to RDEPEND'ed on udev-compat-wrapper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,78 +55,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 21:40:18 -0000
+X-List-Received-Date: Wed, 01 Sep 2010 21:41:31 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Aug 30, 2010 at 3:00 PM, Denys Dmytriyenko <denis@denix.org> wrote:
-> On Sun, Aug 29, 2010 at 11:20:24AM -0700, Khem Raj wrote:
->> On Sun, Aug 29, 2010 at 2:54 AM, Koen Kooi <k.kooi@student.utwente.nl> w=
-rote:
->> > -----BEGIN PGP SIGNED MESSAGE-----
->> > Hash: SHA1
->> >
->> > On 28-08-10 22:24, Khem Raj wrote:
->> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> >> ---
->> >> =A0recipes/meta/meta-toolchain-arago-dvsdk.bb | =A0 =A01 +
->> >> =A01 files changed, 1 insertions(+), 0 deletions(-)
->> >>
->> >> diff --git a/recipes/meta/meta-toolchain-arago-dvsdk.bb b/recipes/met=
-a/meta-toolchain-arago-dvsdk.bb
->> >> index 8e5b233..6deb2bc 100644
->> >> --- a/recipes/meta/meta-toolchain-arago-dvsdk.bb
->> >> +++ b/recipes/meta/meta-toolchain-arago-dvsdk.bb
->> >> @@ -1,3 +1,4 @@
->> >> +EXCLUDE_FROM_WORLD =3D "1"
->> >> =A0TOOLCHAIN_HOST_TASK =3D "task-arago-toolchain-dvsdk-host"
->> >> =A0TOOLCHAIN_TARGET_TASK =3D "task-arago-toolchain-dvsdk-target"
->> >>
->> >
->> > NAK, you're not saying why this needs to get excluded from world, it
->> > seems to build fine over here.
+On Sun, Aug 29, 2010 at 11:15 AM, Khem Raj <raj.khem@gmail.com> wrote:
+> On Sun, Aug 29, 2010 at 2:56 AM, Koen Kooi <k.kooi@student.utwente.nl> wr=
+ote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
 >>
->> Does not parse for me.
+>> On 28-08-10 22:24, Khem Raj wrote:
+>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>> ---
+>>> =A0recipes/udev/udev-compat141_141.bb | =A0 =A06 +++++-
+>>> =A01 files changed, 5 insertions(+), 1 deletions(-)
+>>>
+>>> diff --git a/recipes/udev/udev-compat141_141.bb b/recipes/udev/udev-com=
+pat141_141.bb
+>>> index 2411fc6..c39d4cb 100644
+>>> --- a/recipes/udev/udev-compat141_141.bb
+>>> +++ b/recipes/udev/udev-compat141_141.bb
+>>> @@ -15,7 +15,11 @@ PACKAGES =3D "${PN} ${PN}-dbg"
+>>> =A0PROVIDES =3D "udev-compat"
+>>>
+>>> =A0# Need udev with udev-compat-wrapper support and nothing else.
+>>> -RDEPENDS_${PN} =3D "udev-compat-wrapper"
+>>> +RDEPENDS_${PN}_spitz =3D "udev-compat-wrapper"
+>>> +RDEPENDS_${PN}_akita =3D "udev-compat-wrapper"
+>>> +RDEPENDS_${PN}_c7x0 =3D "udev-compat-wrapper"
+>>> +RDEPENDS_${PN}_poodle =3D "udev-compat-wrapper"
+>>> +
+>>> =A0# Remove hotplug RPROVIDES
+>>> =A0RPROVIDES_${PN} =3D "udev-compat"
 >>
->> NOTE: Runtime target 'ti-xdctools-sdk' is unbuildable, removing...
->> Missing or unbuildable dependency chain was: ['ti-xdctools-sdk']
->> NOTE: Runtime target 'task-arago-toolchain-dvsdk-host' is unbuildable,
->> removing...
->> Missing or unbuildable dependency chain was:
->> ['task-arago-toolchain-dvsdk-host', 'ti-xdctools-sdk']
->> ERROR: Required build target 'meta-toolchain-arago-dvsdk' has no
->> buildable providers.
->> Missing or unbuildable dependency chain was:
->> ['meta-toolchain-arago-dvsdk', 'task-arago-toolchain-dvsdk-host',
->> 'ti-xdctools-sdk']
->>
->> What provides ti-xdctools-sdk in your case ?
->>
->> hmm if you see sdk.bbclass then you will see that it demands the
->> recipes inheriting from it to be
->> excluded from build it being sdk I just excluded it.
+>> NAK, this is a generic wrapper to use recent udev on older kernels, not
+>> specific to zaurus.
 >
-> Koen, Khem,
->
-> meta-toolchain-arago-dvsdk (and corresponding ti-<blah>-sdk.bb recipes) w=
-ere
-> used by legacy dvsdk builds early on and never got merged into OE. Moreov=
-er,
-> the legacy dvsdk support was deprecated even in the mainline Arago...
-> As we don't have necessary ti-<blah>-sdk.bb recipes, this meta recipe can
-> safely be excluded from world or even removed completely.
+> OK then why is this wrapper only rprovided for specific machines and
+> not rprovided always for every machine ?
+> It seems its does not do what you are saying IIUC.
 
-I have removed this recipe as you suggested.
-
->
-> --
-> Denys
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+ping ?
 
 
