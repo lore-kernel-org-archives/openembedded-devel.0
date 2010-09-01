@@ -1,45 +1,45 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Oqrzh-0005zk-9t
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OqsAi-0004Xr-OT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 20:25:20 +0200
-Received: by yxk30 with SMTP id 30so3315645yxk.6
+	Wed, 01 Sep 2010 20:36:33 +0200
+Received: by gwb1 with SMTP id 1so3195505gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 11:24:28 -0700 (PDT)
+	Wed, 01 Sep 2010 11:35:57 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer:in-reply-to:references;
-	bh=A2XrVt+HQ2WlUE9fvCwFfWHdHmEu3RJRFan8ytfYjw8=;
-	b=ejcAoI0Mhg9MqzWgdHQwz2C4l66Ab+ltG6EJJipDyVyvlFiIMlwyWs7hf8Tg/x5RkI
-	HFKRrD/lVA8SGqzybdqAZr0LVg6EBPMAee2j1MJ48CrxgSHIEVNcS/y30uBUlyEu222k
-	goi2tT+IZ+byKpZ3Dk9CQcwQOoeB1UJajpTdE=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=vnlipYbahR/tQ/rC3BZuzuY69jcWl7kdn87UjiMBo6Q=;
+	b=Ea3KR3dzSYbg2Pi34hwevTt2XAJVAQgeTqd82QuXWu4eDZaBiXSJ7J71OWqBxzYqdV
+	isupApx6dmSIg2Gh1k0lyFmUZR5QsieDu2gEV88UKYiX9cL/taLbycytIWli6koCLX+Y
+	mIMiqZ8DkA0KBMyesSVFX8SaOtczN2oXGyE1s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer:in-reply-to:references;
-	b=JAogTbV/Gzl0fj8gdkywf8Bffb3bRtfQu7nGThfXInJSZbE8QS0ZCmX4GQJ1gdzVkn
-	xaSpHcFsuQHvNED+V+TOkJS4Hn+LOswVFAArzzqcaAOhdnJWG//4N1XMB2df2F543Ma3
-	aoG8EfEDBOvi4bgQrU6p5uJmy0mu7CjRF95kA=
-Received: by 10.150.146.15 with SMTP id t15mr909265ybd.305.1283365445550;
-	Wed, 01 Sep 2010 11:24:05 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id u42sm10435313yba.0.2010.09.01.11.24.04
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Sep 2010 11:24:04 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=BAPsvw9nK07+wRxGuxZsfjm0rjDHs8KP6B8iKIzayCCBZYL5ku359nPxJi8bSQuDQ9
+	Em85L3KSuM+ITbM2xXlJNdykNcx05raNUxWGo/7oERgYMa2No2BhvRQg8LyehDhEBwXc
+	WUB5yPLCdCRspykALNMLF2EbSYaBVghv7dOjE=
+MIME-Version: 1.0
+Received: by 10.151.50.16 with SMTP id c16mr2058654ybk.41.1283366157474; Wed,
+	01 Sep 2010 11:35:57 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Wed, 1 Sep 2010 11:35:57 -0700 (PDT)
+In-Reply-To: <i5m4sn$l1b$3@dough.gmane.org>
+References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
+	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
+	<i5m4sn$l1b$3@dough.gmane.org>
+Date: Wed, 1 Sep 2010 20:35:57 +0200
+Message-ID: <AANLkTikvh8BY9odbVKg55K-UJjQsnqVqsOWRkqsMQ+GZ@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  1 Sep 2010 13:15:08 -0500
-Message-Id: <1283364908-21950-2-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-In-Reply-To: <1283364908-21950-1-git-send-email-chase.maupin@ti.com>
-References: <1283364908-21950-1-git-send-email-chase.maupin@ti.com>
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] ti-graphics-sdk: display full license during build
+Subject: Re: testing branch 2010-08-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,77 +53,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 18:25:21 -0000
+X-List-Received-Date: Wed, 01 Sep 2010 18:36:33 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Change the TI_BIN_UNPK_CMDS to feed in enought spaces to
-  display the entire EULA during the build process.
+2010/9/1 Koen Kooi <k.kooi@student.utwente.nl>:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 31-08-10 13:05, Cliff Brake wrote:
+>> sending again as it appears the last email did not make it ...
+>>
+>>
+>> ---------- Forwarded message ----------
+>> From: Cliff Brake <cliff.brake@gmail.com>
+>> Date: Mon, Aug 30, 2010 at 11:51 AM
+>> Subject: testing branch 2010-08-30
+>> To: openembedded-devel@lists.openembedded.org
+>>
+>>
+>> Hello,
+>>
+>> Last weeks testing cycle was a good success I think -- thanks to all
+>> who participated.
+>>
+>> http://wiki.openembedded.net/index.php/Testing
+>
+> Looking at the wiki it seems that extending tinderbox to show results
+> for a certain git revision would be a lot easier to maintain, no?
+>
+> regards,
+>
+> Koen
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
----
- recipes/powervr-drivers/libgles-omap3.inc          |    7 +++++--
- .../omap3-sgx-modules_1.4.14.2514.bb               |    5 ++++-
- .../omap3-sgx-modules_1.4.14.2616.bb               |    5 ++++-
- 3 files changed, 13 insertions(+), 4 deletions(-)
+Yes. Good idea. Feel free to add it.
 
-diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
-index 5b248b0..1c00708 100644
---- a/recipes/powervr-drivers/libgles-omap3.inc
-+++ b/recipes/powervr-drivers/libgles-omap3.inc
-@@ -1,7 +1,7 @@
- DESCRIPTION = "libGLES for the omap3"
- LICENSE = "proprietary-binary"
- 
--PR = "r6"
-+PR = "r7"
- 
- COMPATIBLE_MACHINE = "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
- 
-@@ -37,7 +37,10 @@ SRC_URI = "http://install.source.dir.local/OMAP35x_Graphics_SDK_setuplinux_${SGX
- S = "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
- 
- # Logic to unpack installjammer file
--TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+# NOTE: It takes 16 spaces to display the full EULA.  Too many spaces
-+#       will cause the package to be installed into the wrong directory
-+#       and you will see build failures.  This EULA should not change.
-+TI_BIN_UNPK_CMDS="Y:                qY:workdir:Y"
- require ../ti/ti-eula-unpack.inc
- 
- BINLOCATION ?= "${S}/gfx_rel"
-diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-index a2fcf22..350dc09 100644
---- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-+++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-@@ -7,7 +7,10 @@ PR_append = "a"
- # http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_02/index_FDS.html
- # see libgles-omap3.inc for detailed installation instructions
- 
--TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+# NOTE: It takes 16 spaces to display the full EULA.  Too many spaces
-+#       will cause the package to be installed into the wrong directory
-+#       and you will see build failures.  This EULA should not change.
-+TI_BIN_UNPK_CMDS="Y:                qY:workdir:Y"
- require ../ti/ti-eula-unpack.inc
- 
- SGXPV = "3_01_00_02"
-diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-index 4ed2540..ba6e925 100644
---- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-+++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-@@ -7,7 +7,10 @@ PR_append = "c"
- # http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_06/index_FDS.html
- # see libgles-omap3.inc for detailed installation instructions
- 
--TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
-+# NOTE: It takes 16 spaces to display the full EULA.  Too many spaces
-+#       will cause the package to be installed into the wrong directory
-+#       and you will see build failures.  This EULA should not change.
-+TI_BIN_UNPK_CMDS="Y:                qY:workdir:Y"
- require ../ti/ti-eula-unpack.inc
- 
- SGXPV = "3_01_00_06"
--- 
-1.7.0.4
-
+Frans
 
 
