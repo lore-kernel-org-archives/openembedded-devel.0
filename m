@@ -1,40 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Oqusd-0004ih-HF
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 23:30:04 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Oqus4-0003ZW-0l from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 14:29:28 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 1 Sep 2010 14:29:27 -0700
-Received: from [172.30.80.207] ([172.30.80.207]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 1 Sep 2010 15:29:26 -0600
-Message-ID: <4C7EC5B2.5090202@mentor.com>
-Date: Wed, 01 Sep 2010 14:29:22 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Oquyn-000829-4k for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 23:36:25 +0200
+Received: from f053039179.adsl.alicedsl.de ([78.53.39.179]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OquyG-0005cv-M6 for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 21:35:52 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimeV1FbwQCMYL7WH3tuo_zwcYX1o9cs1H66VPhu@mail.gmail.com>	<AANLkTinqVEs+Uh6jNJJVzqjE2SXMbM1ni60nUx+qtXka@mail.gmail.com>	<AANLkTimamK0_tQw32zWAuANT2fBTDgSHUdPZPWbe-E-3@mail.gmail.com>	<AANLkTimEE4VSR3C6XSQUCYXTgbA1m=Zdw1f8w9vm76_X@mail.gmail.com>
-	<AANLkTimwWFkDscFgDvQQzNbXm+t4SXKnCbWQobK2nu9U@mail.gmail.com>
-In-Reply-To: <AANLkTimwWFkDscFgDvQQzNbXm+t4SXKnCbWQobK2nu9U@mail.gmail.com>
-X-OriginalArrivalTime: 01 Sep 2010 21:29:26.0574 (UTC)
-	FILETIME=[C0E194E0:01CB4A1C]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+In-Reply-To: <AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
+References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
+	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
+	<i5m4sn$l1b$3@dough.gmane.org>
+	<AANLkTimttxo+X6DaN8SatwXbKYJWoTJQ27D3bhW9FEq5@mail.gmail.com>
+	<AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
+Date: Wed, 01 Sep 2010 23:35:49 +0200
+Message-ID: <1283376949.26541.13.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libxml-namespacesupport-perl stuck in do configure
+Subject: Re: testing branch 2010-08-30
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,24 +43,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 21:30:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Sep 2010 21:36:25 -0000
+X-Groupsio-MsgNum: 23029
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-W7wlYgyYd8/rbDSn+QKm"
 
-Frans Meulenbroeks wrote:
-> 2010/9/1 J. L. <vwyodapink@gmail.com>:
->> Thanks Frans that fixed it by setting up CPAN on the build machine :)
-> 
-> J.L, thanks for reporting this back.
-> 
-> Actually we do need a real fix for this.
-> any perl wizards that can take this up?
+--=-W7wlYgyYd8/rbDSn+QKm
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-I'm confused since I thought I had done this already with 
-71a16be679041bb042c02f0f59c56141d963562c
+Am Mittwoch, den 01.09.2010, 23:23 +0200 schrieb Frans Meulenbroeks:
+> For what it is worth.
+> I've gotten permission from my company to put a few builds on our
+> autobuilder provided there can be a small note on the wiki page
+> acknowledging that they donated the resources for that test.
+> Guess that is ok.
+>=20
+> I still need to set things up, maybe tomorrow. I'll probably start
+> with a single machine/distro, and probably it will be combo's that the
+> company has interest in.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+> PS: for building we use http://hudson-ci.org/
+> Great tool (probably could also be mentioned on the page)
+
+Could you document the steps to set that up somewhere. I (and maybe
+others) have some resources too and would be interested in how to set up
+an autobuilder.
 
 
+Thanks,
+
+Paul
+
+--=-W7wlYgyYd8/rbDSn+QKm
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkx+xzQACgkQPX1aK2wOHViQiwCeMHnjb4+ACUlp85Cbvd+Px0xS
+MQoAn3/rEUdmVvkmSu5NP1likxjrk66n
+=Eb7/
+-----END PGP SIGNATURE-----
+
+--=-W7wlYgyYd8/rbDSn+QKm--
