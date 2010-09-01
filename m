@@ -1,39 +1,40 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oqtcc-0003Rc-Gz
+	(envelope-from <vwyodapink@gmail.com>) id 1Oqtja-0005lR-6N
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 22:09:26 +0200
-Received: by gya6 with SMTP id 6so3411520gya.6
+	Wed, 01 Sep 2010 22:16:39 +0200
+Received: by wwb31 with SMTP id 31so172266wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 13:08:51 -0700 (PDT)
+	Wed, 01 Sep 2010 13:16:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=GHoGEgkzcBDivZBzeR0M3mzGoE5S0dA9TkB5Agybszw=;
-	b=aM9K6euxX0hFLN/cyW4uuwgf8vlS7RpoPnIXSIHS7bpkhsL2w1ggAjxVIeT+l18LoD
-	A/ASVHLwwKHnI4wNOqUGdlAZ7h9KaoId+ebOxNBrt523WrCPQcKdskB2u7nSt1iQ5r3n
-	90lkbBtSp7z5fQsMs4610O0ZHtWuY+OalOTlc=
+	bh=Bpnok5nYrQGEaG2yV+y+29WAkwqEHngUV3zBtm6y40o=;
+	b=BDBemVaf5BGwsr97S4XhlDc0P8yi9I3PxJxFd4wypSQR6N2acuINOyUMGltpmb+Lp4
+	qd27B6pV5Z8HActCuo3gSXxafXP4r/xg8kQz+SiMa+ifFAm/9z7g6JmanxbvBbEI9crJ
+	pSJ7eMWPyWvmYgwAKYkB5AvqgFFHZxRxcBYyg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=NMJ7W0TwZYzde1KCLYBdcKql9IeeSE3FTwhKXNyEWkefmf1Bxqj6eheXI+kPSG77kO
-	dnbrX7A3MEfyn7C+Mfp6bwJEenUvE1AYYB5PwlMo7BIySfDYtHfWopWwti7iCQutJsIP
-	C5HfVWlfkNJmmaD4zt3HwO9W6i6TDn6WN/2Fk=
+	b=E7efziEYlhM0n6dUKbetsGs7uLlGRhH60NQ89XtkpaF0nGAxvUD9XpWMtqltwMU2Xa
+	Vn4Wt+6j1XMrgQ7Sf/Zm8hQ5yZvayJUOUggJlbLUSLRtzpcSMJQh3TgXvXVOrRVEIR3e
+	UeOWdZ0K7VmOBz/2Yps1CbdfIA+krHk1drD5M=
 MIME-Version: 1.0
-Received: by 10.90.94.2 with SMTP id r2mr4943217agb.77.1283371725628; Wed, 01
-	Sep 2010 13:08:45 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Wed, 1 Sep 2010 13:08:45 -0700 (PDT)
-In-Reply-To: <AANLkTimeV1FbwQCMYL7WH3tuo_zwcYX1o9cs1H66VPhu@mail.gmail.com>
+Received: by 10.216.155.206 with SMTP id j56mr8291479wek.67.1283372164028;
+	Wed, 01 Sep 2010 13:16:04 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Wed, 1 Sep 2010 13:16:03 -0700 (PDT)
+In-Reply-To: <AANLkTinqVEs+Uh6jNJJVzqjE2SXMbM1ni60nUx+qtXka@mail.gmail.com>
 References: <AANLkTimeV1FbwQCMYL7WH3tuo_zwcYX1o9cs1H66VPhu@mail.gmail.com>
-Date: Wed, 1 Sep 2010 22:08:45 +0200
-Message-ID: <AANLkTinqVEs+Uh6jNJJVzqjE2SXMbM1ni60nUx+qtXka@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	<AANLkTinqVEs+Uh6jNJJVzqjE2SXMbM1ni60nUx+qtXka@mail.gmail.com>
+Date: Wed, 1 Sep 2010 13:16:03 -0700
+Message-ID: <AANLkTimamK0_tQw32zWAuANT2fBTDgSHUdPZPWbe-E-3@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -51,26 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 20:09:27 -0000
+X-List-Received-Date: Wed, 01 Sep 2010 20:16:39 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/9/1 J. L. <vwyodapink@gmail.com>:
-> I am trying to get this to build and it seems to be stuck on the
-> do_configure part, I let it run for over 24 hours before killing it
-> and when I tried to alt C to kill it, it endlessly looped showing
-> something about selecting the country your in and loops through the
-> choices endlessly the only way I could kill it fully was to close the
-> terminal. I noticed in May someone else brought up this or a very
-> similar issue, what is the work around and or fix for this? Thanks for
-> any help or tips
+so if i set up CPAN properly on the build machine that should get
+through that part? Did I understand that properly? I will try that out
+though, thanks a ton for the response. I will post if that works or
+doesnt regardless
 
 
-I think I had this once too.
-Not sure how I solved it, it is quite some time ago.
-However, it could be that I configured cpan manually on the host system
 
-No idea how to fix this permanently.
-
-Frans
+On Wed, Sep 1, 2010 at 1:08 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/9/1 J. L. <vwyodapink@gmail.com>:
+>> I am trying to get this to build and it seems to be stuck on the
+>> do_configure part, I let it run for over 24 hours before killing it
+>> and when I tried to alt C to kill it, it endlessly looped showing
+>> something about selecting the country your in and loops through the
+>> choices endlessly the only way I could kill it fully was to close the
+>> terminal. I noticed in May someone else brought up this or a very
+>> similar issue, what is the work around and or fix for this? Thanks for
+>> any help or tips
+>
+>
+> I think I had this once too.
+> Not sure how I solved it, it is quite some time ago.
+> However, it could be that I configured cpan manually on the host system
+>
+> No idea how to fix this permanently.
+>
+> Frans
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
