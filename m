@@ -1,32 +1,44 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Oquyn-000829-4k for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 23:36:25 +0200
-Received: from f053039179.adsl.alicedsl.de ([78.53.39.179]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OquyG-0005cv-M6 for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 21:35:52 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
+	(envelope-from <raj.khem@gmail.com>) id 1Oqv1d-00089O-1u
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 23:39:24 +0200
+Received: by iwn2 with SMTP id 2so6983734iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 01 Sep 2010 14:38:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=rWpbP0+wxGI4Mkacqw+5uY+gnnE0DQjAnvXcG7bXP2s=;
+	b=ttFesqBBTl3h4l7PTjsqsvPg/ICmFKWvPmAbQ5eG9KCb1rSnLiRXOIYfmb6kF2RDNa
+	NIQE4pMuK8hqMkdL4zVEfKlT+cA50UN9f1fh+IsHLCp/Ab4ZWNf18fyd10DWPPb4KyWv
+	6t9T3/NFuHbI81ttromMquLClRBQ+rzsLr290=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=yDZ5H9bRfdXwpshx+xrtsdGC93KR+EJ3ILg08KrR6v3w4FQA9GTNOlxNsjQPE7QHnU
+	x85aCF8sw763bu5Z1jV3T2SRM3Whl2lL5Z7jis3gMXSVevkYjeZaIlCXpx4c7XwpCJPK
+	L1O6fxTVL6e/f+bANLWZwzrzc/ICewvYw/tU8=
+Received: by 10.231.33.73 with SMTP id g9mr9087916ibd.117.1283377125202; Wed,
+	01 Sep 2010 14:38:45 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.207.8 with HTTP; Wed, 1 Sep 2010 14:38:25 -0700 (PDT)
 In-Reply-To: <AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
 References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
 	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
 	<i5m4sn$l1b$3@dough.gmane.org>
 	<AANLkTimttxo+X6DaN8SatwXbKYJWoTJQ27D3bhW9FEq5@mail.gmail.com>
 	<AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
-Date: Wed, 01 Sep 2010 23:35:49 +0200
-Message-ID: <1283376949.26541.13.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 1 Sep 2010 14:38:25 -0700
+Message-ID: <AANLkTi=b+gi7YZj5ZfhErXFkUfR1qrp1VUCvW2UQC3R9@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: testing branch 2010-08-30
@@ -43,49 +55,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 21:36:25 -0000
-X-Groupsio-MsgNum: 23029
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-W7wlYgyYd8/rbDSn+QKm"
+X-List-Received-Date: Wed, 01 Sep 2010 21:39:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---=-W7wlYgyYd8/rbDSn+QKm
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-
-Am Mittwoch, den 01.09.2010, 23:23 +0200 schrieb Frans Meulenbroeks:
+On Wed, Sep 1, 2010 at 2:23 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
 > For what it is worth.
 > I've gotten permission from my company to put a few builds on our
 > autobuilder provided there can be a small note on the wiki page
 > acknowledging that they donated the resources for that test.
+
+You can use your company name for tester in table just an idea unless
+you are looking for flashy logos
+
 > Guess that is ok.
->=20
+>
 > I still need to set things up, maybe tomorrow. I'll probably start
 > with a single machine/distro, and probably it will be combo's that the
 > company has interest in.
-
+>
+> Frans.
+>
 > PS: for building we use http://hudson-ci.org/
 > Great tool (probably could also be mentioned on the page)
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-Could you document the steps to set that up somewhere. I (and maybe
-others) have some resources too and would be interested in how to set up
-an autobuilder.
 
-
-Thanks,
-
-Paul
-
---=-W7wlYgyYd8/rbDSn+QKm
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx+xzQACgkQPX1aK2wOHViQiwCeMHnjb4+ACUlp85Cbvd+Px0xS
-MQoAn3/rEUdmVvkmSu5NP1likxjrk66n
-=Eb7/
------END PGP SIGNATURE-----
-
---=-W7wlYgyYd8/rbDSn+QKm--
