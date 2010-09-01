@@ -1,46 +1,44 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OquiU-0000GA-L4
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Oqum6-0000n0-ED
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 23:19:36 +0200
-Received: by gya6 with SMTP id 6so3447935gya.6
+	Wed, 01 Sep 2010 23:23:20 +0200
+Received: by wyg36 with SMTP id 36so9144538wyg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 14:18:56 -0700 (PDT)
+	Wed, 01 Sep 2010 14:22:41 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=lF5xDNPUTCiAfG9TCASy3umxKfpidmb5qhVsmDPGQFU=;
-	b=QAHrirQwMQAcafmnRY1jtuI9VYBjt7YMY5GycDI3T7IFgWLWZnf357HgG02XEp1X1P
-	57zOdVA1aHK89BcLWnhZGueLvbNAIJVpBqerU/s9lSyRAA/djeYXyPIsLLTewEKplFeW
-	2HGERHcQux1CZ/cZb/Ui1ONOVA4aDf4ZOUby8=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gV+h6jy8Z0n3g3oF30i7rcnYGy2PWUz06qZRYcwprFA=;
+	b=LWsfOuWWg0wt9U7haDx+BCS4X472WQTyqqVlS+bJX2HgbCm3kCmEBlNrRS9gyWbjeF
+	Uqrkew9y5krvLyBbeNS4Vv4F+nbKjQCYJYQrecwnrmqlsCQ+ofk4psExLofyZWA6wOPk
+	dtTkAIK3PSFB5o+cNtKLo6/AobP3ULV1uVK5s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UD9YkMIsh09tWhCPKD0+rDiARBR0DZqkaTyoC1U17jio7ipSDeO3HpYQCeyG82Phyo
-	4+cDb4CmFHrtBJ/tF11dZv7X+RJxt6AA36YL9iVsytJNsloRNbmNjUsKV7HgzukV2HPs
-	sonJiR1gthFt6rB1pHklOeUpOEL5d4alIc2Fg=
+	:content-type:content-transfer-encoding;
+	b=VNE6jo/RYir5se/3OeaZQ1zh0T48GCjHsQOWzMzkCBbioGQ26O0GW+x/cWDBcdiSzI
+	45wWs73bBp9bWs73pVMc3ULTAXp2S2i1qjO/x6XXjO/HRqsYpLZEIp1Pal68BuxTsv06
+	/pnl1Xnx69aZg8sn1wJK3d8T7hV6oIPi9miqA=
 MIME-Version: 1.0
-Received: by 10.151.79.18 with SMTP id g18mr4668565ybl.166.1283375936159; Wed,
-	01 Sep 2010 14:18:56 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Wed, 1 Sep 2010 14:18:56 -0700 (PDT)
-In-Reply-To: <AANLkTimEE4VSR3C6XSQUCYXTgbA1m=Zdw1f8w9vm76_X@mail.gmail.com>
-References: <AANLkTimeV1FbwQCMYL7WH3tuo_zwcYX1o9cs1H66VPhu@mail.gmail.com>
-	<AANLkTinqVEs+Uh6jNJJVzqjE2SXMbM1ni60nUx+qtXka@mail.gmail.com>
-	<AANLkTimamK0_tQw32zWAuANT2fBTDgSHUdPZPWbe-E-3@mail.gmail.com>
-	<AANLkTimEE4VSR3C6XSQUCYXTgbA1m=Zdw1f8w9vm76_X@mail.gmail.com>
-Date: Wed, 1 Sep 2010 23:18:56 +0200
-Message-ID: <AANLkTimwWFkDscFgDvQQzNbXm+t4SXKnCbWQobK2nu9U@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.227.128.13 with SMTP id i13mr8769841wbs.31.1283376161160; Wed,
+	01 Sep 2010 14:22:41 -0700 (PDT)
+Received: by 10.227.142.79 with HTTP; Wed, 1 Sep 2010 14:22:41 -0700 (PDT)
+In-Reply-To: <AANLkTikp1c5AcYFDU74kn4oiioqW4L+ZQaofB7rp0iE7@mail.gmail.com>
+References: <AANLkTikp1c5AcYFDU74kn4oiioqW4L+ZQaofB7rp0iE7@mail.gmail.com>
+Date: Wed, 1 Sep 2010 23:22:41 +0200
+Message-ID: <AANLkTimNWTc1-qGCcZoOfSX96RZvy0OUKk4bTOU_c4pe@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libxml-namespacesupport-perl stuck in do configure
+Subject: Re: SOC_FAMILY broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,61 +52,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 21:19:37 -0000
+X-List-Received-Date: Wed, 01 Sep 2010 21:23:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2010/9/1 J. L. <vwyodapink@gmail.com>:
-> Thanks Frans that fixed it by setting up CPAN on the build machine :)
+Hello,
 
-J.L, thanks for reporting this back.
+On Wed, Sep 1, 2010 at 11:14 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Root cause: if SOC_FAMILY is not set (awhich is the case for most
+> MACHINEs =A0and all distro's except angstrom) the test in base.bbclass
+>
 
-Actually we do need a real fix for this.
-any perl wizards that can take this up?
+Good point, but I never understood SOC_FAMILY. From an old email:
 
-Frans
->
->
->
-> On Wed, Sep 1, 2010 at 1:16 PM, J. L. <vwyodapink@gmail.com> wrote:
->> so if i set up CPAN properly on the build machine that should get
->> through that part? Did I understand that properly? I will try that out
->> though, thanks a ton for the response. I will post if that works or
->> doesnt regardless
->>
->>
->>
->> On Wed, Sep 1, 2010 at 1:08 PM, Frans Meulenbroeks
->> <fransmeulenbroeks@gmail.com> wrote:
->>> 2010/9/1 J. L. <vwyodapink@gmail.com>:
->>>> I am trying to get this to build and it seems to be stuck on the
->>>> do_configure part, I let it run for over 24 hours before killing it
->>>> and when I tried to alt C to kill it, it endlessly looped showing
->>>> something about selecting the country your in and loops through the
->>>> choices endlessly the only way I could kill it fully was to close the
->>>> terminal. I noticed in May someone else brought up this or a very
->>>> similar issue, what is the work around and or fix for this? Thanks for
->>>> any help or tips
->>>
->>>
->>> I think I had this once too.
->>> Not sure how I solved it, it is quite some time ago.
->>> However, it could be that I configured cpan manually on the host system
->>>
->>> No idea how to fix this permanently.
->>>
->>> Frans
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+"SOC_FAMILY is defining a family of processors and the features that proces=
+sor
+has.  Whereas MACHINE_CLASS is defining a type of device and its features w=
+hich
+can use different processors."
+
+I think the first sentence is contradicting itself.
+
+A "family of processors" vs. "features that processor had". This can
+be fully orthogonal (worst case),
+so the definition of the variable is crap. I wonder, has it proven
+more useful than cumbersome?
+
+If it truly has a clear function in OpenEmbedded that can apply to all
+processors, can someone explain what the variable should be set to?
+
+
+Regards,
+--=20
+Leon
 
 
