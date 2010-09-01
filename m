@@ -1,37 +1,38 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Oqv1d-00089O-1u
+	(envelope-from <raj.khem@gmail.com>) id 1Oqv2X-0008Ex-BS
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 23:39:24 +0200
-Received: by iwn2 with SMTP id 2so6983734iwn.6
+	Wed, 01 Sep 2010 23:40:18 +0200
+Received: by iwn2 with SMTP id 2so6984491iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 14:38:46 -0700 (PDT)
+	Wed, 01 Sep 2010 14:39:44 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=rWpbP0+wxGI4Mkacqw+5uY+gnnE0DQjAnvXcG7bXP2s=;
-	b=ttFesqBBTl3h4l7PTjsqsvPg/ICmFKWvPmAbQ5eG9KCb1rSnLiRXOIYfmb6kF2RDNa
-	NIQE4pMuK8hqMkdL4zVEfKlT+cA50UN9f1fh+IsHLCp/Ab4ZWNf18fyd10DWPPb4KyWv
-	6t9T3/NFuHbI81ttromMquLClRBQ+rzsLr290=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=OUu5BeIiTDhA1Er7+PK8Qq3xmzJ6hspXqqMpTNiJbwk=;
+	b=IXLWvJK25TJGsPtqOcx29NZRx7TggFpmacMwQSq3G7FNH+qn8QnblyP2ln6md0majX
+	OdidJG5ec+vIu7vEBwhfSpCSt/1Wl9KYQ1MowrM2NqMWQLq08Q3CqRV9N824AuhkxCbu
+	hikLqIajMTJI8QLd2VKjUOkxoGsOCepAMyjaM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=yDZ5H9bRfdXwpshx+xrtsdGC93KR+EJ3ILg08KrR6v3w4FQA9GTNOlxNsjQPE7QHnU
-	x85aCF8sw763bu5Z1jV3T2SRM3Whl2lL5Z7jis3gMXSVevkYjeZaIlCXpx4c7XwpCJPK
-	L1O6fxTVL6e/f+bANLWZwzrzc/ICewvYw/tU8=
-Received: by 10.231.33.73 with SMTP id g9mr9087916ibd.117.1283377125202; Wed,
-	01 Sep 2010 14:38:45 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=Bjbfzp8uq1IVLqTgWEKo5AvNa55ZOeGWTciDYXQISxr+tfUSALS8v8+tiGe0rNK6A5
+	YQjJwpqchqxGcw+zuuoXxVP4CYhpZ6dObT71jUbhHd9kyQqbJWS0IYEpNo43/zlD/8Bk
+	K8c3qW3YrszFNcCbqj+YgI+7UJEMS70K9ol1o=
+Received: by 10.231.152.78 with SMTP id f14mr9777666ibw.60.1283377184292; Wed,
+	01 Sep 2010 14:39:44 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Wed, 1 Sep 2010 14:38:25 -0700 (PDT)
-In-Reply-To: <AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
-References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
-	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
-	<i5m4sn$l1b$3@dough.gmane.org>
-	<AANLkTimttxo+X6DaN8SatwXbKYJWoTJQ27D3bhW9FEq5@mail.gmail.com>
-	<AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
+Received: by 10.231.207.8 with HTTP; Wed, 1 Sep 2010 14:39:24 -0700 (PDT)
+In-Reply-To: <20100830220042.GC14561@denix.org>
+References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>
+	<1283027073-12308-6-git-send-email-raj.khem@gmail.com>
+	<i5dap0$v2$2@dough.gmane.org>
+	<AANLkTimnfsHbd0sWxGLBfawD9w5M4OLGWbH_gN6_9T-h@mail.gmail.com>
+	<20100830220042.GC14561@denix.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 1 Sep 2010 14:38:25 -0700
-Message-ID: <AANLkTi=b+gi7YZj5ZfhErXFkUfR1qrp1VUCvW2UQC3R9@mail.gmail.com>
+Date: Wed, 1 Sep 2010 14:39:24 -0700
+Message-ID: <AANLkTi=ztrx5mOSAUaMDq0qSKp3TjGKuV_2231nySHdz@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -41,7 +42,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-08-30
+Subject: Re: [PATCH 05/23] meta-toolchain-arago-dvsdk.bb: Exclude from world build.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,29 +56,73 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 21:39:24 -0000
+X-List-Received-Date: Wed, 01 Sep 2010 21:40:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 1, 2010 at 2:23 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> For what it is worth.
-> I've gotten permission from my company to put a few builds on our
-> autobuilder provided there can be a small note on the wiki page
-> acknowledging that they donated the resources for that test.
+On Mon, Aug 30, 2010 at 3:00 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+> On Sun, Aug 29, 2010 at 11:20:24AM -0700, Khem Raj wrote:
+>> On Sun, Aug 29, 2010 at 2:54 AM, Koen Kooi <k.kooi@student.utwente.nl> w=
+rote:
+>> > -----BEGIN PGP SIGNED MESSAGE-----
+>> > Hash: SHA1
+>> >
+>> > On 28-08-10 22:24, Khem Raj wrote:
+>> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> >> ---
+>> >> =A0recipes/meta/meta-toolchain-arago-dvsdk.bb | =A0 =A01 +
+>> >> =A01 files changed, 1 insertions(+), 0 deletions(-)
+>> >>
+>> >> diff --git a/recipes/meta/meta-toolchain-arago-dvsdk.bb b/recipes/met=
+a/meta-toolchain-arago-dvsdk.bb
+>> >> index 8e5b233..6deb2bc 100644
+>> >> --- a/recipes/meta/meta-toolchain-arago-dvsdk.bb
+>> >> +++ b/recipes/meta/meta-toolchain-arago-dvsdk.bb
+>> >> @@ -1,3 +1,4 @@
+>> >> +EXCLUDE_FROM_WORLD =3D "1"
+>> >> =A0TOOLCHAIN_HOST_TASK =3D "task-arago-toolchain-dvsdk-host"
+>> >> =A0TOOLCHAIN_TARGET_TASK =3D "task-arago-toolchain-dvsdk-target"
+>> >>
+>> >
+>> > NAK, you're not saying why this needs to get excluded from world, it
+>> > seems to build fine over here.
+>>
+>> Does not parse for me.
+>>
+>> NOTE: Runtime target 'ti-xdctools-sdk' is unbuildable, removing...
+>> Missing or unbuildable dependency chain was: ['ti-xdctools-sdk']
+>> NOTE: Runtime target 'task-arago-toolchain-dvsdk-host' is unbuildable,
+>> removing...
+>> Missing or unbuildable dependency chain was:
+>> ['task-arago-toolchain-dvsdk-host', 'ti-xdctools-sdk']
+>> ERROR: Required build target 'meta-toolchain-arago-dvsdk' has no
+>> buildable providers.
+>> Missing or unbuildable dependency chain was:
+>> ['meta-toolchain-arago-dvsdk', 'task-arago-toolchain-dvsdk-host',
+>> 'ti-xdctools-sdk']
+>>
+>> What provides ti-xdctools-sdk in your case ?
+>>
+>> hmm if you see sdk.bbclass then you will see that it demands the
+>> recipes inheriting from it to be
+>> excluded from build it being sdk I just excluded it.
+>
+> Koen, Khem,
+>
+> meta-toolchain-arago-dvsdk (and corresponding ti-<blah>-sdk.bb recipes) w=
+ere
+> used by legacy dvsdk builds early on and never got merged into OE. Moreov=
+er,
+> the legacy dvsdk support was deprecated even in the mainline Arago...
+> As we don't have necessary ti-<blah>-sdk.bb recipes, this meta recipe can
+> safely be excluded from world or even removed completely.
 
-You can use your company name for tester in table just an idea unless
-you are looking for flashy logos
+I have removed this recipe as you suggested.
 
-> Guess that is ok.
 >
-> I still need to set things up, maybe tomorrow. I'll probably start
-> with a single machine/distro, and probably it will be combo's that the
-> company has interest in.
+> --
+> Denys
 >
-> Frans.
->
-> PS: for building we use http://hudson-ci.org/
-> Great tool (probably could also be mentioned on the page)
 >
 > _______________________________________________
 > Openembedded-devel mailing list
