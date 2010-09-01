@@ -1,48 +1,32 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Oqgee-0007BU-9i
+	(envelope-from <Fahad_Usman@mentor.com>) id 1Oqluh-0006Vd-21
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 01 Sep 2010 08:18:41 +0200
-Received: by pvg6 with SMTP id 6so2888985pvg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 31 Aug 2010 23:18:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=r5qIWf9K3NTxwmxFKKup79OG5ninr/eWzPkjSFZMSgc=;
-	b=ikBSTMfVsBlOec1GU5GRQkGauk10RnseV6Q/FwaoZGhwozXGDqqAkBqWhmmHSlpdy8
-	To1MI0uoyWMLeJJevGnE3Z8jrOXs7b2hMmHiIIqXwCdDtrqtKNLyeNzWXTc00sfB8cau
-	f4n3saYkuSFNS3jiMt5WbP4izYo7+32cATAA0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=Oh8ZCSVOLUnSyfX0vD98/7FAL8hfJFIUk/ya8vsBR/0r+TMzRHWdngdxImZ7Os2OVP
-	maY/qZihouq9Ne/XibDgXz9SnhcRG/m+EV7QeCQOM1/sYikM2LRhUMtQZzKWLP5Vcurc
-	UUAu/cfDs7sRg1Vu74du+VIW/GMcBPP4tyoys=
-Received: by 10.142.187.6 with SMTP id k6mr7007099wff.3.1283321885410;
-	Tue, 31 Aug 2010 23:18:05 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	v38sm12032371wfh.12.2010.08.31.23.18.02
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Tue, 31 Aug 2010 23:18:04 -0700 (PDT)
-Message-ID: <4C7DF016.1020707@gmail.com>
-Date: Wed, 01 Sep 2010 15:47:58 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
-MIME-Version: 1.0
+	Wed, 01 Sep 2010 13:55:40 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Oqlu7-0001QM-HC from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 01 Sep 2010 04:54:59 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 1 Sep 2010 13:54:57 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Wed,  1 Sep 2010 16:54:55 +0500
+Message-Id: <1283342095-7236-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 01 Sep 2010 11:54:58.0096 (UTC)
+	FILETIME=[80113B00:01CB49CC]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gst-plugins-bad_0.10.19.bb: add libmodplug to DEPENDS.
+Subject: [PATCH] docbook-sgml-dtd-native: converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,36 +40,121 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 01 Sep 2010 06:18:41 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 01 Sep 2010 11:55:41 -0000
 
-Several images want gst-plugin-modplug (e.g. illume-image and the
-fso images). They fail to find it without this.
+* Converted do_stage to do_install.
+* Moved the catalog files from ${sysconfdir}/sgml to ${D}${sysconfdir}/sgml so that they get included in the package file resulting with the new style staging.
+* Added a function docbook_sgml_dtd_native_mangle, to correct the path in .cat file and added it to SYSROOT_PREPROCESS_FUNCS.
+* Added INC_PR = "r1" to the .inc file and PR = "${INC_PR}.0" to the .bb files
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
 ---
- recipes/gstreamer/gst-plugins-bad_0.10.19.bb |    4 ++--
- 1 files changed, 2 insertions(+), 2 deletions(-)
+ .../docbook-sgml-dtd-3.1-native.bb                 |    2 +
+ .../docbook-sgml-dtd-4.1-native.bb                 |    2 +
+ .../docbook-sgml-dtd-4.4-native.bb                 |    2 +
+ .../docbook-sgml-dtd-4.5-native.bb                 |    2 +
+ .../docbook-sgml-dtd/docbook-sgml-dtd-native.inc   |   27 ++++++++++++++-----
+ 5 files changed, 28 insertions(+), 7 deletions(-)
 
-diff --git a/recipes/gstreamer/gst-plugins-bad_0.10.19.bb b/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
-index 0f0ff21..2351431 100644
---- a/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
-+++ b/recipes/gstreamer/gst-plugins-bad_0.10.19.bb
-@@ -3,9 +3,9 @@ require gst-plugins.inc
- SRC_URI[archive.md5sum] = "368f72e2a1c7a6e8fe60394e4315259b"
- SRC_URI[archive.sha256sum] = "7b6c49f22caad3b573aee481381355b38ac9f2077f291d9f33a9a808a2568888"
+diff --git a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
+index 939fd53..7f5e19e 100644
+--- a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
++++ b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-3.1-native.bb
+@@ -2,6 +2,8 @@ require docbook-sgml-dtd-native.inc
  
--DEPENDS += "orc-native orc libcdaudio gst-plugins-base openssl directfb"
-+DEPENDS += "orc-native orc libcdaudio gst-plugins-base openssl directfb libmodplug"
+ DTD_VERSION = "3.1"
  
--PR = "${INC_PR}.2"
-+PR = "${INC_PR}.3"
++PR = "${INC_PR}.0"
++
+ SRC_URI = "http://www.docbook.org/sgml/3.1/docbk31.zip;md5sum=432749c0c806dbae81c8bcb70da3b5d3"
  
- # We don't have vdpau headers in OE and it creates crosscompile badness
- EXTRA_OECONF_append = " --disable-vdpau --enable-sdl"
+ do_compile() {
+diff --git a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
+index 2bc43e1..e6650ed 100644
+--- a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
++++ b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.1-native.bb
+@@ -2,6 +2,8 @@ require docbook-sgml-dtd-native.inc
+ 
+ DTD_VERSION = "4.1"
+ 
++PR = "${INC_PR}.0"
++
+ SRC_URI = "http://docbook.org/sgml/4.1/docbk41.zip"
+ 
+ do_compile() {
+diff --git a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
+index 9e51964..537e8b2 100644
+--- a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
++++ b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.4-native.bb
+@@ -2,6 +2,8 @@ require docbook-sgml-dtd-native.inc
+ 
+ DTD_VERSION = "4.4"
+ 
++PR = "${INC_PR}.0"
++
+ do_compile() {
+     # Refer to http://www.linuxfromscratch.org/blfs/view/stable/pst/sgml-dtd.html
+     # for details.
+diff --git a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
+index f5e257c..82deb33 100644
+--- a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
++++ b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-4.5-native.bb
+@@ -2,6 +2,8 @@ require docbook-sgml-dtd-native.inc
+ 
+ DTD_VERSION = "4.5"
+ 
++PR = "${INC_PR}.0"
++
+ do_compile() {
+     # Refer to http://www.linuxfromscratch.org/blfs/view/stable/pst/sgml-dtd.html
+     # for details.
+diff --git a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
+index 69c9811..06db68d 100644
+--- a/recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
++++ b/recipes/docbook-sgml-dtd/docbook-sgml-dtd-native.inc
+@@ -12,20 +12,33 @@ SRC_URI = "http://www.docbook.org/sgml/${DTD_VERSION}/docbook-${DTD_VERSION}.zip
+ 
+ S = "${WORKDIR}"
+ 
++INC_PR = "r1"
++
++SYSROOT_PREPROCESS_FUNCS += "docbook_sgml_dtd_native_mangle"
++
+ inherit native
+ 
+-do_stage () {
++do_install () {
+     # Refer to http://www.linuxfromscratch.org/blfs/view/stable/pst/sgml-dtd.html
+     # for details.
+-    install -d -m 755 ${STAGING_DATADIR}/sgml/docbook/sgml-dtd-${DTD_VERSION}
+-    install docbook.cat ${STAGING_DATADIR}/sgml/docbook/sgml-dtd-${DTD_VERSION}/catalog
+-    cp -dpr *.dtd *.mod *.dcl ${STAGING_DATADIR}/sgml/docbook/sgml-dtd-${DTD_VERSION}
+-    
++    install -d -m 755 ${D}${datadir}/sgml/docbook/sgml-dtd-${DTD_VERSION}
++    install docbook.cat ${D}${datadir}/sgml/docbook/sgml-dtd-${DTD_VERSION}/catalog
++    cp -dpr *.dtd *.mod *.dcl ${D}${datadir}/sgml/docbook/sgml-dtd-${DTD_VERSION}
++
+     install-catalog --add ${sysconfdir}/sgml/sgml-docbook-dtd-${DTD_VERSION}.cat \
+-      ${STAGING_DATADIR}/sgml/docbook/sgml-dtd-${DTD_VERSION}/catalog
+-	
++      ${D}${datadir}/sgml/docbook/sgml-dtd-${DTD_VERSION}/catalog
+     install-catalog --add ${sysconfdir}/sgml/sgml-docbook-dtd-${DTD_VERSION}.cat \
+       ${sysconfdir}/sgml/sgml-docbook.cat
++    # Moving them to image directory so that they get included in the .ipk file 
++    # generated by new style staging.
++    install -d ${D}${sysconfdir}/sgml
++    cp ${sysconfdir}/sgml/sgml-docbook-dtd-${DTD_VERSION}.cat ${D}${sysconfdir}/sgml/sgml-docbook-dtd-${DTD_VERSION}.cat
++    cp ${sysconfdir}/sgml/catalog ${D}${sysconfdir}/sgml/
+ }
+ 
+ PACKAGES = ""
++docbook_sgml_dtd_native_mangle () {
++    # Removing the image directory path (${D}) from the .cat file.
++    sed -i -e "s|${D}||g" ${SYSROOT_DESTDIR}${sysconfdir}/sgml/sgml-docbook-dtd-${DTD_VERSION}.cat
++}
++NATIVE_INSTALL_WORKS = "1"
 -- 
-1.7.1
+1.6.3.3
 
 
 
