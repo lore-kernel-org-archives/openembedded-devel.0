@@ -1,45 +1,31 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Or5u5-0000hr-LA
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 11:16:30 +0200
-Received: by gxk2 with SMTP id 2so100730gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 02:15:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=1RoGsjozE2DUE3756WOc0waaSqN581rBK0+3DXWaFm4=;
-	b=KqAzVLi/14gHUWQi/+IREfhTALj+ehKZn8NAH6Gr76emab2W+5tFurUVL/SWwiL5jS
-	0mIekyTMOa18kr6bNlqjQIGQgpLSTMdIyWgzEhVJmYOQyz7EzuKtRQXdaNzLQS7Md+Uc
-	fN/d+ws9m3xqNsihLDmJkt4K4e0lWuMFXukuc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=DTnQQ5b8bUpglsYurACeywPDb2E+/zbo1JnTWE2spXkpC7D3CKDlOzqqkBzAGyilqh
-	P0d51kwSg8umyranMKI+kWL9WqIsRUwwSiIASIPyVLe9l/BMGAWFaUvpkbwQxHUmjbGT
-	YGYEUZRYFha64/SdvR8fmzFNSSsus+q5NOHZM=
-MIME-Version: 1.0
-Received: by 10.150.138.4 with SMTP id l4mr5378126ybd.237.1283418941988; Thu,
-	02 Sep 2010 02:15:41 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Thu, 2 Sep 2010 02:15:41 -0700 (PDT)
-In-Reply-To: <6A0959E7-8C24-4F4B-BD61-73E4EF0AB687@vanille-media.de>
-References: <AANLkTimDF5zZ-F3-GDe_OUJv3nFKD+YGn4_7xWYuEatc@mail.gmail.com>
-	<AANLkTinbOUUS3vw+yoHqaMRELMGyC_Xikf-QH8CWsOLQ@mail.gmail.com>
-	<6A0959E7-8C24-4F4B-BD61-73E4EF0AB687@vanille-media.de>
-Date: Thu, 2 Sep 2010 11:15:41 +0200
-Message-ID: <AANLkTikckP7bNgyffDP=u002kT30Ds_pgDiQ26vfR9=S@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Or5xU-0001Su-1b for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 11:19:49 +0200
+Received: from f053037242.adsl.alicedsl.de ([78.53.37.242]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1Or5wx-0006Jr-40 for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 09:19:15 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <1283417769-26234-1-git-send-email-noor_ahsan@mentor.com>
+References: <1283417769-26234-1-git-send-email-noor_ahsan@mentor.com>
+Date: Thu, 02 Sep 2010 11:19:12 +0200
+Message-ID: <1283419152.3990.9.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] openocd-native_svn.bb
+Subject: Re: [PATCH] sqlite3: Merged target and native recipe using BBCLASSEXTEND
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,31 +39,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 09:16:42 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 Sep 2010 09:19:49 -0000
+X-Groupsio-MsgNum: 23063
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-uGd/ENb3VpVXNfFwGj3J"
 
-2010/9/2 Dr. Michael Lauer <mickey@vanille-media.de>:
-> Am 02.09.2010 um 11:01 schrieb Frans Meulenbroeks:
->> 2010/8/6 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->>> Hi, I bumped upon openocd-native_svn.bb and I was wondering why we have that.
->>> No-one seems to depend on it.
->>> Do we want our own openocd instead of the one that is on the host?
->>> Or should this be removed?
->
-> IIRC I have added this recipe when I worked with the
-> Openmoko devices which needed a custom version of openocd-native
-> (built out of the OM SVN) to debug.
->
-> Until we have verified that the specifics have moved upstream,
-> I'd like to keep this.
->
-> Cheers,
->
-> Mickey.
+--=-uGd/ENb3VpVXNfFwGj3J
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Ah ok.
-Thanks for the explanation.
-
-Frans
+Dear Noor,
 
 
+your commit summary is a bit misleading, since there does not seem to
+have ever been a native recipe for 3.6.23.1. So I think =C2=BBextend=C2=AB =
+instead
+of =C2=BBmerge=C2=AB would have been better.
+
+Am Donnerstag, den 02.09.2010, 14:56 +0600 schrieb Noor Ahsan:
+> * Set BBCLASSEXTEND to "native" to use target recipe as native recipe
+> * In include file tcl-native was present in DEPENDS list, remove it from =
+DEPENDS list by setting DEPENDS_virtclass-native =3D "readline-native ncurs=
+es-native"
+> * Bump PR "${INC_PR}.1"
+>=20
+> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
+Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
+
+[=E2=80=A6]
+
+Do you know if the other SQlite recipes can be converted too or are you
+already on it?
+
+
+Thanks,
+
+Paul
+
+--=-uGd/ENb3VpVXNfFwGj3J
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkx/bBAACgkQPX1aK2wOHVgnqwCeO3LRc/Ek+wY+TGJcZtjQqKfu
+qHMAnjy2dMpiV4O4N8bHsudDtJjdU/7U
+=C70n
+-----END PGP SIGNATURE-----
+
+--=-uGd/ENb3VpVXNfFwGj3J--
