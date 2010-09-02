@@ -1,31 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Or5xU-0001Su-1b for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 11:19:49 +0200
-Received: from f053037242.adsl.alicedsl.de ([78.53.37.242]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Or5wx-0006Jr-40 for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 09:19:15 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Fahad_Usman@mentor.com>) id 1Or6Yx-0005Yy-4j
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 11:58:32 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Or6YM-0004QG-E6 from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 02:57:54 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Thu, 2 Sep 2010 11:57:52 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1283417769-26234-1-git-send-email-noor_ahsan@mentor.com>
-References: <1283417769-26234-1-git-send-email-noor_ahsan@mentor.com>
-Date: Thu, 02 Sep 2010 11:19:12 +0200
-Message-ID: <1283419152.3990.9.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Thu,  2 Sep 2010 14:57:57 +0500
+Message-Id: <1283421477-29534-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 02 Sep 2010 09:57:53.0118 (UTC)
+	FILETIME=[4F4467E0:01CB4A85]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sqlite3: Merged target and native recipe using BBCLASSEXTEND
+Subject: [PATCH] pngcrush_1.7.9: merged native and non-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,54 +40,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 09:19:49 -0000
-X-Groupsio-MsgNum: 23063
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-uGd/ENb3VpVXNfFwGj3J"
+X-List-Received-Date: Thu, 02 Sep 2010 09:58:32 -0000
 
---=-uGd/ENb3VpVXNfFwGj3J
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* removed the pngcrush-native_1.7.9.bb file
+* added NATIVE_INSTALL_WORKS = "1"
+* added BBCLASSEXTEND = "native"
+* added PR = "r1"
 
-Dear Noor,
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/pngcrush/pngcrush-native_1.7.9.bb |    9 ---------
+ recipes/pngcrush/pngcrush_1.7.9.bb        |    5 +++++
+ 2 files changed, 5 insertions(+), 9 deletions(-)
+
+diff --git a/recipes/pngcrush/pngcrush-native_1.7.9.bb b/recipes/pngcrush/pngcrush-native_1.7.9.bb
+deleted file mode 100644
+index 4e119a1..0000000
+--- a/recipes/pngcrush/pngcrush-native_1.7.9.bb
++++ /dev/null
+@@ -1,9 +0,0 @@
+-require pngcrush_${PV}.bb
+-
+-inherit native
+-
+-S = "${WORKDIR}/pngcrush-${PV}"
+-
+-do_stage() {
+-        install -m 755 ${S}/pngcrush ${STAGING_BINDIR}/
+-}
+diff --git a/recipes/pngcrush/pngcrush_1.7.9.bb b/recipes/pngcrush/pngcrush_1.7.9.bb
+index fc284f2..a4a2273 100644
+--- a/recipes/pngcrush/pngcrush_1.7.9.bb
++++ b/recipes/pngcrush/pngcrush_1.7.9.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Tool to optimize PNG images"
+ SECTION = "console/graphics"
+ HOMEPAGE = "http://pmt.sourceforge.net/pngcrush"
++PR = "r1"
+ 
+ SRC_URI = "${SOURCEFORGE_MIRROR}/pmt/pngcrush-${PV}.tar.gz;name=src"
+ 
+@@ -16,3 +17,7 @@ do_install () {
+         install -d ${D}${bindir}
+         install -m 755 ${BPN} ${D}${bindir}
+ }
++
++BBCLASSEXTEND = "native"
++
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
 
 
-your commit summary is a bit misleading, since there does not seem to
-have ever been a native recipe for 3.6.23.1. So I think =C2=BBextend=C2=AB =
-instead
-of =C2=BBmerge=C2=AB would have been better.
 
-Am Donnerstag, den 02.09.2010, 14:56 +0600 schrieb Noor Ahsan:
-> * Set BBCLASSEXTEND to "native" to use target recipe as native recipe
-> * In include file tcl-native was present in DEPENDS list, remove it from =
-DEPENDS list by setting DEPENDS_virtclass-native =3D "readline-native ncurs=
-es-native"
-> * Bump PR "${INC_PR}.1"
->=20
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
-Reviewed-by: Paul Menzel <paulepanter@users.sourceforge.net>
-
-[=E2=80=A6]
-
-Do you know if the other SQlite recipes can be converted too or are you
-already on it?
-
-
-Thanks,
-
-Paul
-
---=-uGd/ENb3VpVXNfFwGj3J
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx/bBAACgkQPX1aK2wOHVgnqwCeO3LRc/Ek+wY+TGJcZtjQqKfu
-qHMAnjy2dMpiV4O4N8bHsudDtJjdU/7U
-=C70n
------END PGP SIGNATURE-----
-
---=-uGd/ENb3VpVXNfFwGj3J--
