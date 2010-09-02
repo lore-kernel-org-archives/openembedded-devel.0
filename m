@@ -1,31 +1,33 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Or9mK-0000Xx-LQ for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 15:24:33 +0200
-Received: from f053037242.adsl.alicedsl.de ([78.53.37.242]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Or9ln-00018V-M7 for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 13:23:59 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1283432785-13292-1-git-send-email-noor_ahsan@mentor.com>
-References: <1283432785-13292-1-git-send-email-noor_ahsan@mentor.com>
-Date: Thu, 02 Sep 2010 15:23:57 +0200
-Message-ID: <1283433837.3990.39.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+	(envelope-from <sledz@dresearch.de>) id 1OrA1Z-0006gA-Nh
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 15:40:56 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id BA301491287
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  2 Sep 2010 15:39:44 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 2 Sep 2010 15:39:44 +0200
+Message-ID: <4C7FA92E.4080504@dresearch.de>
+Date: Thu, 02 Sep 2010 15:39:58 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
+MIME-Version: 1.0
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 02 Sep 2010 13:39:44.0807 (UTC)
+	FILETIME=[4DA6F370:01CB4AA4]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sqlite: Merge target and native recipe using BBCLASSEXTEND
+Subject: URL for Ralink RT3572 driver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,46 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 13:24:33 -0000
-X-Groupsio-MsgNum: 23077
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-pYZlpCzS4VNg9AuvtK3u"
+X-List-Received-Date: Thu, 02 Sep 2010 13:41:01 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
---=-pYZlpCzS4VNg9AuvtK3u
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+I'd like to add a recipe for Ralink RT3572 similar to the one for RT3070. The problem is that i couldn't find a persistent URL for the driver download. :(
 
-Am Donnerstag, den 02.09.2010, 19:06 +0600 schrieb Noor Ahsan:
-> * Merge target and native recipes using BBCLASSEXTEND, Set BBCLASSEXTEND =
-=3D "native"
-> * Bump PR to "r7"
->=20
-> Signed-off-by: Noor Ahsan <noor_ahsan@mentor.com>
-> ---
->  recipes/sqlite/sqlite_2.8.17.bb |    4 +++-
->  1 files changed, 3 insertions(+), 1 deletions(-)
+One can download the driver archive 2010_0709_RT3572_Linux_STA_v2.4.0.1.tar from <http://www.ralinktech.com/support.php?s=2> by selecting "RT3572USB" and accepting the following form.
 
-As Frans pointed out in another comment to a patch, please remove the
-old native recipe in the same patch.
+What can/should i do? Place the file into the oe area?
 
-[=E2=80=A6]
+Steffen
 
 
-Thanks a lot for your effort,
 
-Paul
-
---=-pYZlpCzS4VNg9AuvtK3u
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkx/pW0ACgkQPX1aK2wOHVhT9wCfYogPBtCPEhpeZ1yhpeOaYvMA
-OOkAnis80xeyR/fI6KcpRZELcXyTk7bR
-=cCsE
------END PGP SIGNATURE-----
-
---=-pYZlpCzS4VNg9AuvtK3u--
