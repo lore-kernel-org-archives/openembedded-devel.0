@@ -1,46 +1,46 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from arroyo.ext.ti.com ([192.94.94.40])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Or860-0001UR-Ut
+	(envelope-from <chase.maupin@ti.com>) id 1Or8jm-0002An-NA
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 13:36:46 +0200
-Received: by iwn2 with SMTP id 2so423922iwn.6
+	Thu, 02 Sep 2010 14:17:54 +0200
+Received: from dlep35.itg.ti.com ([157.170.170.118])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o82CHEip028919
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 04:36:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:cc:content-type
-	:content-transfer-encoding;
-	bh=H34D/1vy5HtBLjphNwUpb+LH89ymqiowxNcjVo+oWKw=;
-	b=KDhSurnzXD1ec/ZCV0UjKheXpsEbwsRjgyL3uWRSjmvbLXD54VKaheJSTQ+/WBvLm7
-	WIpxaUcmPqRh8lDTy8aqLosDQ2IkXV87skFkOQqsYXamdpPPhC2vYdxgaqB5JuMbVCph
-	EtwEw682YxOmATQTUSnj6BhUU/+zF/tfwwm74=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:cc:content-type:content-transfer-encoding;
-	b=lc5g0ghpfv20zNkdleGM3fG0HJKchDPeV2KXjJ3OhNpd5aUD6Unf2uEZV8FHpr+sHu
-	Uzm/mkpkAiRXjGWYQScPC/jM7NXwpkI7yPDjAWwt8dCC0ZrXoZzcpLRR/49lTGtewQPK
-	VeM2xY596HmzBdiaB4ck2ZcgWEcDK2JQK+0qs=
+	Thu, 2 Sep 2010 07:17:14 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o82CHEE1028345
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Sep 2010 07:17:14 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o82CHEhO014336
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 2 Sep 2010 07:17:14 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Thu, 2 Sep 2010 07:17:14 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 2 Sep 2010 07:17:12 -0500
+Thread-Topic: [oe] SOC_FAMILY broken
+Thread-Index: ActKGtyqDLRb+q+fSBuzFk1ItjTDUwAfci/g
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310754538@dlee06.ent.ti.com>
+References: <AANLkTikp1c5AcYFDU74kn4oiioqW4L+ZQaofB7rp0iE7@mail.gmail.com>
+In-Reply-To: <AANLkTikp1c5AcYFDU74kn4oiioqW4L+ZQaofB7rp0iE7@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.231.174.84 with SMTP id s20mr10297658ibz.94.1283427371060;
-	Thu, 02 Sep 2010 04:36:11 -0700 (PDT)
-Received: by 10.231.167.79 with HTTP; Thu, 2 Sep 2010 04:36:10 -0700 (PDT)
-In-Reply-To: <AANLkTimJ47S_5NRyubHegYQ4S_xYK6aiBu_TkvNrtqCt@mail.gmail.com>
-References: <AANLkTimJ47S_5NRyubHegYQ4S_xYK6aiBu_TkvNrtqCt@mail.gmail.com>
-Date: Thu, 2 Sep 2010 21:06:10 +0930
-Message-ID: <AANLkTikfPnTmSF_H=u=EQtSA+NkM=jVSWhqEC7UGFDfT@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: "General mailing list for gumstix users."
-	<gumstix-users@lists.sourceforge.net>
-Subject: Re: Can someone help me understand these errors I got in my build
+Subject: Re: SOC_FAMILY broken
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,142 +54,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 11:36:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 Sep 2010 12:17:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-On 2 September 2010 17:30, J. L. <vwyodapink@gmail.com> wrote:
-> When it was going through the final stages in my build I ended up with
-> some conflict errors and not sure if I understand how to fix this
-> properly. Do I just remove what its says is why it cant install one
-> file because another is trying to install the same file ? Or? But I
-> dont think I am understanding these correctly as I have never gotten
-> them before. I would really appreciate any help on this one so I can
-> get my image packaged now that everything is built. Also I can post my
-> image I am trying to build if that helps its a very bloated desktop
-> image, here is the error:
->
-> also I tried to clean it by doing bitbake -c clean and then bitbake
-> myimage but still same result.
->
-> | Collected errors:
-> | =A0* check_data_file_clashes: Package kernel-firmware-down3 wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/lib/firmware/e=
-dgeport/down3.bin
-> | =A0 =A0 =A0 But that file is already provided by package =A0* linux-fir=
-mware
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Frans Meulenbroeks
+> Sent: Wednesday, September 01, 2010 4:15 PM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: [oe] SOC_FAMILY broken
+>=20
+> Patch
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D070763903=
+58f
+> 211bd96779bec2d6eb5eaa0ad699
+> creates errors like:
+> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+> entity 'virtual/arm-oe-linux-gnueabi-gcc-2.95' but it wasn't found in
+> any PACKAGE or RPROVIDES variables
+>=20
+> Root cause: if SOC_FAMILY is not set (awhich is the case for most
+> MACHINEs  and all distro's except angstrom) the test in base.bbclass
+> to skip recipes for different machines never raises the SkipPackage
+> exception.
+>=20
+> This is the current code (about line 387 in base.bbclass):
+>         need_machine =3D bb.data.getVar('COMPATIBLE_MACHINE', d, 1)
+>         if need_machine:
+>             import re
+>             this_machine =3D bb.data.getVar('MACHINE', d, 1)
+>             if this_machine and not re.match(need_machine, this_machine):
+>                 this_soc_family =3D bb.data.getVar('SOC_FAMILY', d, 1)
+>                 if this_soc_family and not re.match(need_machine,
+> this_soc_family):
+>                     raise bb.parse.SkipPackage("incompatible with
+> machine %s" % this_machine)
+>=20
+> I see two possible fixes.
+> 1. Make sure SOC_FAMILY is always defined. E.g. in bitbake.conf say
+> SOC_FAMILY ?=3D "Unknown"
+> 2. improve the test to deal with an undefined soc_famile
+> E.g rewrite the one but last line to:
+>                     if (this_soc_family and not re.match(need_machine,
+> this_soc_family)) or not this_soc_family:
+>=20
+> I tested the 2nd patch with distro minimal, target sheevaplug, which
+> gave the error before. After rewriting the line as suggested skipping
+> works and the problem is gone.
+> I have this also as a formal patch, but there might be more desirable
+> ways to do this.
+>=20
+> Please advise.
 
-These two packages cannot be installed on the same system. There are
-two possibilities for fixing this: either don't included both packages
-in the same image or remove the file from one of the packages.
+I like your second proposal.  Thanks for finding this issue and a solution =
+to it.
 
-> | =A0* opkg_install_cmd: Cannot install package task-base-extended.
-
-For whatever reason, the task-base-extended ipk cannot be found in
-your package repository. There are many reasons why this may occur and
-I will not speculate upon it.
-
-> | =A0* check_data_file_clashes: Package rt73-firmware wants to install
-> file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/lib/firmware/rt73.bin
-> | =A0 =A0 =A0 But that file is already provided by package =A0* linux-fir=
-mware
-> | =A0* opkg_install_cmd: Cannot install package rt73-firmware.
-> | =A0* opkg_install_cmd: Cannot install package libnet.
-> | =A0* check_data_file_clashes: Package glproto-dev wants to install
-> file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/include/GL/interna=
-l/glcore.h
-> | =A0 =A0 =A0 But that file is already provided by package =A0* libgl-dev
-> | =A0* opkg_install_cmd: Cannot install package artoolkit-dev.
-> | =A0* satisfy_dependencies_for: Cannot satisfy the following
-> dependencies for task-sdk-native:
-> | =A0* =A0 =A0libdbd-sqlite-perl * =A0 =A0libdbix-simple-perl *
-
-The libdbd-sqlite-perl and libdbix-simple-perl ipks cannot be found in
-your repository.
-
-> | =A0* opkg_install_cmd: Cannot install package task-native-sdk.
-> | =A0* check_data_file_clashes: Package python-zopeinterface wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python=
-2.6/site-packages/setuptools.pth
-> | =A0 =A0 =A0 But that file is already provided by package =A0* python-se=
-tuptools
-> | =A0* check_data_file_clashes: Package python-zopeinterface wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python=
-2.6/site-packages/site.pyo
-> | =A0 =A0 =A0 But that file is already provided by package =A0* python-se=
-tuptools
-> | =A0* check_data_file_clashes: Package python-zopeinterface wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python=
-2.6/site-packages/site.py
-> | =A0 =A0 =A0 But that file is already provided by package =A0* python-se=
-tuptools
-> | =A0* check_data_file_clashes: Package python-zopeinterface wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/bin/easy_i=
-nstall-2.6
-> | =A0 =A0 =A0 But that file is already provided by package =A0* python-se=
-tuptools
-> | =A0* check_data_file_clashes: Package python-zopeinterface wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/bin/easy_i=
-nstall
-> | =A0 =A0 =A0 But that file is already provided by package =A0* python-se=
-tuptools
-> | =A0* opkg_install_cmd: Cannot install package python-twisted.
-> | =A0* opkg_install_cmd: Cannot install package gst-plugin-video4linux2.
-> | =A0* resolve_conffiles: Existing conffile
-> /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/etc/device_table is
-> different from the conffile in the new package. The new conffile will
-> be placed at /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/etc/device_tab=
-le-opkg.
-
-Two packages both provide the same config file. This should really
-error out, but its only a warning at the moment because it would cause
-too many breakages (the message printing is deferred until the end of
-opkg's processing, like an error).
-
-> | =A0* check_data_file_clashes: Package gpe-theme-clearlooks wants to
-> install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/share/them=
-es/Clearlooks/gtk-2.0/gtkrc
-> | =A0 =A0 =A0 But that file is already provided by package =A0* gtk-theme=
--clearlooks
-> | =A0* opkg_install_cmd: Cannot install package gpe-session-scripts.
-> NOTE: Task failed:
-> /home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/UAV-Dimage-=
-1.0-r0/temp/log.do_rootfs.4216
-> NOTE: oestats: task failed, see
-> http://tinderbox.openembedded.net/public/logs/task/7541484.txt
-> ERROR: TaskFailed event exception, aborting
-> ERROR: Build of
-> /home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb
-> do_rootfs failed
-> ERROR: Task 11 (/home/vdubhack/overo-oe/user.collection/recipes/images/UA=
-V-Dimage.bb,
-> do_rootfs) failed
-> NOTE: Tasks Summary: Attempted 11557 tasks of which 11540 didn't need
-> to be rerun and 1 failed.
-> ERROR: '/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage=
-.bb'
-> failed
-> NOTE: oestats: build failed, see http://tinderbox.openembedded.net/builds=
-/85611/
->
->
-> Thanks as always !
->
+>=20
+> Frans.
+>=20
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-I suggest you start with a much smaller image and add to it
-incrementally. That way, if/when you encounter problems, it is much
-easier to narrow down which recipe or recipe dependency is causing
-problems. Building a dependency graph with bitbake -g may help narrow
-down some problems.
-
--Graham
-
-PS: I appreciate that opkg error messages can be a little cryptic.
-Patches welcome!
 
 
