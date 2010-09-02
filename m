@@ -1,48 +1,47 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Or3Yv-0006Kg-Fa
+	(envelope-from <vwyodapink@gmail.com>) id 1Or3mq-0007yv-Cf
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 08:46:18 +0200
-Received: by iwn2 with SMTP id 2so195839iwn.6
+	Thu, 02 Sep 2010 09:00:52 +0200
+Received: by wwb31 with SMTP id 31so269788wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 23:45:44 -0700 (PDT)
+	Thu, 02 Sep 2010 00:00:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=I71dif1alXTqf0EcA3uK5ph1yHYkGB0xNlQPnzVxuHw=;
-	b=VzkoW7+vOYcR2jgEEuR9QpKePd6FUvm7Fiaba4t6ecO6FWvfCoAuUMaZ51ExWHq4jv
-	6QLX0ccUpiwou+I4ZCbPSLmIiFJs3U8zdncuRFODqedDBDq2pFPOci8LTLupAfd1pK84
-	GcSIHzh8SDNt/b+gdIawRsWDIarJ9elqxVa+8=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=vj6qxND9AVukfhzU0JWtDTvXF2k7hB0hQtLtFkDU7M8=;
+	b=BDrkzd64mBKWFk8e1XRyzlINiEDpXFyCtguhW67DdjNcvnnpOjOtRr3cImE78ho9S/
+	vKWT7fE0pfO8YU+IkM/ArRZRtD0AUjivW1pIF4zyN7VynBX5POkLQIaZ+29CKPo1GbXd
+	Z+Uvn2vbWDq2M+ryHRxeDt37uaqe2OQDU4Pj4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UQ5VZ8nm3kYKOA2Kxo2UqT2DqU1+jVe3NeIagh5evlYGMEeERwVLvVl4qtEGcy/IR0
-	EwLqdjPiLwCqU7QS5o+iGV4fYz2nzYxUKLb5C9HzGkgR1jHpYBNZDN6TtYbnoc0GxugA
-	dfESON0WJ6TldJKnvIUXZifEJX0628K39+WFs=
+	:content-type:content-transfer-encoding;
+	b=cpeUbbhhlEuFRAUjdplNZSHhMIsj90Rk8kb776N5SQVAEqKih5HO7b8NDcNCYCnccX
+	nXK7GEb1Lj8/9A8vDVRPU4QKB1QaVyGmDq6TbLp45juS22TmEjzoXC+nt4eseQQHqRM+
+	GE6/IEvU15yVGvJK9ySHEh6sZwyGYV3PAv7lA=
 MIME-Version: 1.0
-Received: by 10.231.167.80 with SMTP id p16mr10027621iby.119.1283409944042;
-	Wed, 01 Sep 2010 23:45:44 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Wed, 1 Sep 2010 23:45:43 -0700 (PDT)
-In-Reply-To: <AANLkTi=b+gi7YZj5ZfhErXFkUfR1qrp1VUCvW2UQC3R9@mail.gmail.com>
-References: <AANLkTinuQnnOAh62GF+v0TzU8mRj1F+m1YGi6DdohNmr@mail.gmail.com>
-	<AANLkTim=Bb_yWWuKOd=JMQ9GGL5aoxAyaO7oJnXO+zyK@mail.gmail.com>
-	<i5m4sn$l1b$3@dough.gmane.org>
-	<AANLkTimttxo+X6DaN8SatwXbKYJWoTJQ27D3bhW9FEq5@mail.gmail.com>
-	<AANLkTikPjmgPn3d7xSwxFt8Po2+vJ8JsnG1nQ=Zms0Sz@mail.gmail.com>
-	<AANLkTi=b+gi7YZj5ZfhErXFkUfR1qrp1VUCvW2UQC3R9@mail.gmail.com>
-Date: Thu, 2 Sep 2010 08:45:43 +0200
-Message-ID: <AANLkTik6Rdr4wMxLJpf1ijBeOctWaO+VEFja3ytnmPAx@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Received: by 10.216.181.84 with SMTP id k62mr8874548wem.76.1283410805646; Thu,
+	02 Sep 2010 00:00:05 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Thu, 2 Sep 2010 00:00:05 -0700 (PDT)
+In-Reply-To: <4C7DAEDA.1090904@alexthegeek.com>
+References: <AANLkTimq+M2qtGzz1keuPBXFfYi-Qw9fPz2v4XXCd0JT@mail.gmail.com>
+	<4C7DAEDA.1090904@alexthegeek.com>
+Date: Thu, 2 Sep 2010 00:00:05 -0700
+Message-ID: <AANLkTinWnzzdtZ+zmX7VtZDKAfLsyf0xbhnyS6KvSqQE@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: "General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>, 
+	openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-08-30
+Subject: Re: [Gumstix-users] Boost 1.41 seems to have build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,30 +55,282 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 06:46:18 -0000
+X-List-Received-Date: Thu, 02 Sep 2010 07:00:53 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-2010/9/1 Khem Raj <raj.khem@gmail.com>:
-> On Wed, Sep 1, 2010 at 2:23 PM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> For what it is worth.
->> I've gotten permission from my company to put a few builds on our
->> autobuilder provided there can be a small note on the wiki page
->> acknowledging that they donated the resources for that test.
+Now the closer my image gets to being built since bumping this package
+to 1.41 its seems to me roughly half the programs and dependencies
+build with one or both of these notes in them "NOTE: Couldn't find
+shared library provider for libstdc++.so.6
+NOTE: Couldn't find shared library provider for libgcc_s.so.1" as it
+did with this package. just wanted to post my other observations on
+this as well..
+
+
+On Tue, Aug 31, 2010 at 6:39 PM, Alex Gibson <alxx@alexthegeek.com> wrote:
 >
-> You can use your company name for tester in table just an idea unless
-> you are looking for flashy logos
-
-I'm not looking for a flashy logo. Just want to give some credit.
-Appending the company name in the tester table is fine with me. I do
-want my name here too as the testing is something that I do as a
-private initiative, so the company is not involved in or responsible
-for the results. They just donate the resources.
-
-Frans
-
-(and to Paul: I'll try to document the steps, but the tool itself has
-already been setup, so it would only be on adding a testing project in
-it)
+> Getting exactly the same messages
+>
+> Alex
+>
+>
+> On 1/09/2010 5:27 AM, J. L. wrote:
+>> When I bummed boost to the 1.41 version I noticed during building it
+>> did not build in the normal manner and displayed a bunch of warning
+>> though did not fail to build. Seems like it should not have so many
+>> errors or inability to find libraries. Could be my inexperience
+>> talking. Hope someone can explain why this isnt bad if it isnt but to
+>> me an error is an error, and would cause other issues once used on the
+>> image possibly. This is not the full message just a clip of it:
+>>
+>> NOTE: =A0 /usr/lib/Boost.cmake
+>> NOTE: =A0 /usr/share/boost-1.41.0/cmake/BoostConfig.cmake
+>> NOTE: =A0 /usr/share/boost-1.41.0/cmake/BoostConfigVersion.cmake
+>> NOTE: Multiple libraries (libboost_date_time-mt-d.so.1.41.0,
+>> libboost_date_time-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_filesystem-mt.so.1.41.0,
+>> libboost_filesystem-mt-d.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_graph-mt.so.1.41.0,
+>> libboost_graph-mt-d.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_iostreams-mt-d.so.1.41.0,
+>> libboost_iostreams-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_program_options-mt.so.1.41.0,
+>> libboost_program_options-mt-d.so.1.41.0) found and LEAD_SONAME not
+>> defined
+>> NOTE: Multiple libraries (libboost_python-mt-d.so.1.41.0,
+>> libboost_python-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_regex-mt-d.so.1.41.0,
+>> libboost_regex-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_wserialization-mt-d.so.1.41.0,
+>> libboost_serialization-mt-d.so.1.41.0,
+>> libboost_wserialization-mt.so.1.41.0,
+>> libboost_serialization-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_signals-mt-d.so.1.41.0,
+>> libboost_signals-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_system-mt-d.so.1.41.0,
+>> libboost_system-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_unit_test_framework-mt-d.so.1.41.0,
+>> libboost_unit_test_framework-mt.so.1.41.0) found and LEAD_SONAME not
+>> defined
+>> NOTE: Multiple libraries (libboost_thread-mt.so.1.41.0,
+>> libboost_thread-mt-d.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Multiple libraries (libboost_prg_exec_monitor-mt-d.so.1.41.0,
+>> libboost_wave-mt-d.so.1.41.0, libboost_prg_exec_monitor-mt.so.1.41.0,
+>> libboost_wave-mt.so.1.41.0) found and LEAD_SONAME not defined
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>> ERROR: QA Issue with boost-date-time: non -dev package contains
+>> symlink .so: boost-date-time path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-date-time/usr/lib/libboost_date_time-mt.so'
+>> ERROR: QA Issue with boost-date-time: non -dev package contains
+>> symlink .so: boost-date-time path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-date-time/usr/lib/libboost_date_time-mt-d.so'
+>> ERROR: QA Issue with boost-filesystem: non -dev package contains
+>> symlink .so: boost-filesystem path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-filesystem/usr/lib/libboost_filesystem-mt-d.so'
+>> ERROR: QA Issue with boost-filesystem: non -dev package contains
+>> symlink .so: boost-filesystem path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-filesystem/usr/lib/libboost_filesystem-mt.so'
+>> ERROR: QA Issue with boost-graph: non -dev package contains symlink
+>> .so: boost-graph path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-graph/usr/lib/libboost_graph-mt.so'
+>> ERROR: QA Issue with boost-graph: non -dev package contains symlink
+>> .so: boost-graph path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-graph/usr/lib/libboost_graph-mt-d.so'
+>> ERROR: QA Issue with boost-iostreams: non -dev package contains
+>> symlink .so: boost-iostreams path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-iostreams/usr/lib/libboost_iostreams-mt-d.so'
+>> ERROR: QA Issue with boost-iostreams: non -dev package contains
+>> symlink .so: boost-iostreams path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-iostreams/usr/lib/libboost_iostreams-mt.so'
+>> ERROR: QA Issue with boost-program-options: non -dev package contains
+>> symlink .so: boost-program-options path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-program-options/usr/lib/libboost_program_options-mt.so'
+>> ERROR: QA Issue with boost-program-options: non -dev package contains
+>> symlink .so: boost-program-options path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-program-options/usr/lib/libboost_program_options-mt-d.so'
+>> ERROR: QA Issue with boost-python: non -dev package contains symlink
+>> .so: boost-python path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-python/usr/lib/libboost_python-mt-d.so'
+>> ERROR: QA Issue with boost-python: non -dev package contains symlink
+>> .so: boost-python path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-python/usr/lib/libboost_python-mt.so'
+>> ERROR: QA Issue with boost-regex: non -dev package contains symlink
+>> .so: boost-regex path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-regex/usr/lib/libboost_regex-mt-d.so'
+>> ERROR: QA Issue with boost-regex: non -dev package contains symlink
+>> .so: boost-regex path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-regex/usr/lib/libboost_regex-mt.so'
+>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>> symlink .so: boost-serialization path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-serialization/usr/lib/libboost_wserialization-mt-d.so'
+>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>> symlink .so: boost-serialization path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-serialization/usr/lib/libboost_serialization-mt-d.so'
+>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>> symlink .so: boost-serialization path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-serialization/usr/lib/libboost_wserialization-mt.so'
+>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>> symlink .so: boost-serialization path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-serialization/usr/lib/libboost_serialization-mt.so'
+>> ERROR: QA Issue with boost-signals: non -dev package contains symlink
+>> .so: boost-signals path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-signals/usr/lib/libboost_signals-mt-d.so'
+>> ERROR: QA Issue with boost-signals: non -dev package contains symlink
+>> .so: boost-signals path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-signals/usr/lib/libboost_signals-mt.so'
+>> ERROR: QA Issue with boost-system: non -dev package contains symlink
+>> .so: boost-system path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-system/usr/lib/libboost_system-mt.so'
+>> ERROR: QA Issue with boost-system: non -dev package contains symlink
+>> .so: boost-system path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-system/usr/lib/libboost_system-mt-d.so'
+>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>> .so: boost-test path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-test/usr/lib/libboost_unit_test_framework-mt-d.so'
+>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>> .so: boost-test path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-test/usr/lib/libboost_prg_exec_monitor-mt.so'
+>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>> .so: boost-test path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-test/usr/lib/libboost_prg_exec_monitor-mt-d.so'
+>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>> .so: boost-test path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-test/usr/lib/libboost_unit_test_framework-mt.so'
+>> ERROR: QA Issue with boost-thread: non -dev package contains symlink
+>> .so: boost-thread path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-thread/usr/lib/libboost_thread-mt.so'
+>> ERROR: QA Issue with boost-thread: non -dev package contains symlink
+>> .so: boost-thread path
+>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/bo=
+ost-thread/usr/lib/libboost_thread-mt-d.so'
+>>
+>> ------------------------------------------------------------------------=
+------
+>> This SF.net Dev2Dev email is sponsored by:
+>>
+>> Show off your parallel programming skills.
+>> Enter the Intel(R) Threading Challenge 2010.
+>> http://p.sf.net/sfu/intel-thread-sfd
+>> _______________________________________________
+>> gumstix-users mailing list
+>> gumstix-users@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/gumstix-users
+>
+>
+> --
+> UTS CRICOS Provider Code: =A000099F
+> DISCLAIMER: This email message and any accompanying attachments may conta=
+in
+> confidential information. =A0If you are not the intended recipient, do no=
+t
+> read, use, disseminate, distribute or copy this message or attachments. =
+=A0If
+> you have received this message in error, please notify the sender
+> immediately and delete this message. Any views expressed in this message
+> are those of the individual sender, except where the sender expressly, an=
+d
+> with authority, states them to be the views the University of Technology,
+> Sydney. Before opening any attachments, please check them for viruses and
+> defects.
+>
+> -------------------------------------------------------------------------=
+-----
+> This SF.net Dev2Dev email is sponsored by:
+>
+> Show off your parallel programming skills.
+> Enter the Intel(R) Threading Challenge 2010.
+> http://p.sf.net/sfu/intel-thread-sfd
+> _______________________________________________
+> gumstix-users mailing list
+> gumstix-users@lists.sourceforge.net
+> https://lists.sourceforge.net/lists/listinfo/gumstix-users
+>
 
 
