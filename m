@@ -1,48 +1,44 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OqzEr-0008Sg-TI
+	(envelope-from <raj.khem@gmail.com>) id 1Or0R0-0006Ig-SW
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 04:09:32 +0200
-Received: by pvg6 with SMTP id 6so3243437pvg.6
+	Thu, 02 Sep 2010 05:26:09 +0200
+Received: by pwj8 with SMTP id 8so81101pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 01 Sep 2010 19:08:32 -0700 (PDT)
+	Wed, 01 Sep 2010 20:25:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=b9y/TYF3WQ88VMTz98+Z/Ui8f/bMbXI0FcU0/49gIzY=;
-	b=KgmZQleGvkBBxMp1GWzaT4REIvkLpKk/rtqwJYMk3hDTKx7GFPMkC9cigFx4jWxANT
-	eQXXR5FMQXEs0lHFko4NGoiHUZaBv/R0DlbU2ZnG1AxaI8nw9BPfe6gQ/R168nujJx/r
-	ck5uBTIii2zkPUpsT/xgZ/Fj70TLk8reuwX0o=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=lla70w83BLBpFCdQQwsHmCNq2ti78xhg/LrVXMOkHDc=;
+	b=TyEEK4Os7d/tjY3XrnR892xiB4KRx0wL1LHbQgXbZQzoMSZUri1GLEZNW4nYiU9yA2
+	No32acHW9maSTUSG37XPsgEX7j+ALJFJERDr4GRKTwbxY0OA2dNN30Gm6ktJJKbFe1jt
+	1h6jAy38DHYXmw8/UUD1MMnvNpn7Eua+PGVrI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=TSBU27X/QA5ijPfS43xhKMpEbv3TVCWJH1G2Ff5+KmptBGEvtfAh5dqbv3uvGbeqZx
-	gMHpslP7fNi0y2rENdLu/xkZZ0EcF75ry0NxN/9Zbvw5DDCcjalOGA/YL7zE2uEbznyn
-	JKgLrc5a/vafJRUXo2nfh00JZ0zvk6P/iwEQM=
-Received: by 10.115.18.12 with SMTP id v12mr9802351wai.114.1283393312188;
-	Wed, 01 Sep 2010 19:08:32 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id
-	d38sm19697728wam.8.2010.09.01.19.08.29
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Yu2Zyd5LGQT/xA/Zja5p/Kh6+5wIw0C0X64Um6HYj3DBWYD3fjNXXqW5Ros8giQZ9e
+	yv76VzB8MV7fp+Y/Z+EJsTsa0jZCxBEiN+osc5Mro9eduUpvuqD0rQVfaGnEU11jRI8m
+	sw8/9z/mwRgvTK+7KDiFTpOLKKoYPlMTZUE9E=
+Received: by 10.114.76.9 with SMTP id y9mr9820942waa.26.1283397912864;
+	Wed, 01 Sep 2010 20:25:12 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d38sm19809580wam.20.2010.09.01.20.25.11
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 01 Sep 2010 19:08:31 -0700 (PDT)
-Message-ID: <4C7F071A.8020501@gmail.com>
-Date: Thu, 02 Sep 2010 11:38:26 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
-MIME-Version: 1.0
+	Wed, 01 Sep 2010 20:25:12 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Wed,  1 Sep 2010 20:25:07 -0700
+Message-Id: <1283397907-28392-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] gpsd: unbreak gpsd_2.38.bb and gpsd_2.39.bb
+Subject: [PATCH] minimal.conf: Select bluez4 for bluez-utils-dbus and bluez-utils
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,107 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 02:09:32 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Sep 2010 03:26:09 -0000
 
-The older recipe(s) are needed for programs which have not updated to gpsd's
-newer api. e.g. prismstumbler.
+* Set bluez-libs for PREFERRED_PROVIDER for bluez-libs
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
+ conf/distro/minimal.conf |    6 +++++-
+ 1 files changed, 5 insertions(+), 1 deletions(-)
 
-Updated v2 patch as a new gpsd recipe has been added.
-
----
- recipes/gpsd/gpsd.inc     |    5 ++---
- recipes/gpsd/gpsd_2.90.bb |    5 +++++
- recipes/gpsd/gpsd_2.91.bb |    5 +++++
- recipes/gpsd/gpsd_2.94.bb |    5 +++++
- recipes/gpsd/gpsd_2.95.bb |    5 +++++
- 5 files changed, 22 insertions(+), 3 deletions(-)
-
-diff --git a/recipes/gpsd/gpsd.inc b/recipes/gpsd/gpsd.inc
-index 63d6433..23335f0 100644
---- a/recipes/gpsd/gpsd.inc
-+++ b/recipes/gpsd/gpsd.inc
-@@ -4,7 +4,7 @@ PRIORITY = "optional"
- LICENSE = "GPL"
- DEPENDS = "dbus-glib ncurses python"
- PROVIDES = "virtual/gpsd"
--INC_PR = "r9"
-+INC_PR = "r10"
- 
- EXTRA_OECONF = "--x-includes=${STAGING_INCDIR}/X11 \
-                 --x-libraries=${STAGING_LIBDIR} \
-@@ -49,14 +49,13 @@ do_install_append() {
-     install -m 0644 ${WORKDIR}/60-gpsd.rules ${D}/${sysconfdir}/udev/rules.d
-     install -d ${D}${base_libdir}/udev/
-     install -m 0755 ${S}/gpsd.hotplug ${D}${base_libdir}/udev/
--    install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
- }
- 
- pkg_postinst_${PN}-conf() {
- 	update-alternatives --install ${sysconfdir}/default/gpsd gpsd-defaults ${sysconfdir}/default/gpsd.default 10
- }
- 
--pkg_postrm_${PN}-conf() {	
-+pkg_postrm_${PN}-conf() {
- 	update-alternatives --remove gpsd-defaults ${sysconfdir}/default/gpsd.default	
- }
- 
-diff --git a/recipes/gpsd/gpsd_2.90.bb b/recipes/gpsd/gpsd_2.90.bb
-index 25c739b..69cd9ba 100644
---- a/recipes/gpsd/gpsd_2.90.bb
-+++ b/recipes/gpsd/gpsd_2.90.bb
-@@ -7,3 +7,8 @@ SRC_URI[gpsd.sha256sum] = "8c81461266fc95aae6519ec996d7e4f4801fb5a02dbcc7a5d1c13
- PR = "${INC_PR}.0"
- 
- PARALLEL_MAKE = ""
+diff --git a/conf/distro/minimal.conf b/conf/distro/minimal.conf
+index 7216976..2f3a821 100644
+--- a/conf/distro/minimal.conf
++++ b/conf/distro/minimal.conf
+@@ -22,7 +22,11 @@ DISTRO_CHECK := "${@bb.data.getVar('DISTRO_VERSION',d,1) or bb.fatal('Remove thi
+ # FEATURE SELECTION
+ #############################################################################
+ # Use bluetooth 4.0
+-DISTRO_BLUETOOTH_MANAGER = "bluez4"
++DISTRO_BLUETOOTH_MANAGER            = "bluez4"
++PREFERRED_PROVIDER_bluez-utils-dbus = "bluez4"
++PREFERRED_PROVIDER_bluez-libs       = "bluez-libs"
++PREFERRED_PROVIDER_bluez-utils      = "bluez4"
 +
-+do_install_append() {
-+	install -d ${D}${base_libdir}/udev/
-+	install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
-+}
-diff --git a/recipes/gpsd/gpsd_2.91.bb b/recipes/gpsd/gpsd_2.91.bb
-index 7c575cb..2c964ca 100644
---- a/recipes/gpsd/gpsd_2.91.bb
-+++ b/recipes/gpsd/gpsd_2.91.bb
-@@ -8,3 +8,8 @@ SRC_URI[gpsd.sha256sum] = "02ee0f0a86a3c74fe807ea0a3fce908cb94dd7ff3afcef0b1fb66
- PR = "${INC_PR}.0"
- 
- PARALLEL_MAKE = ""
-+
-+do_install_append() {
-+	install -d ${D}${base_libdir}/udev/
-+	install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
-+}
-diff --git a/recipes/gpsd/gpsd_2.94.bb b/recipes/gpsd/gpsd_2.94.bb
-index 66bd559..2b5e9d3 100644
---- a/recipes/gpsd/gpsd_2.94.bb
-+++ b/recipes/gpsd/gpsd_2.94.bb
-@@ -10,3 +10,8 @@ SRC_URI[gpsd.sha256sum] = "1520b87d106d198aa42137db4b230615dbd0d06b04e6fcc84e010
- PR = "${INC_PR}.1"
- 
- PARALLEL_MAKE = ""
-+
-+do_install_append() {
-+	install -d ${D}${base_libdir}/udev/
-+	install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
-+}
-diff --git a/recipes/gpsd/gpsd_2.95.bb b/recipes/gpsd/gpsd_2.95.bb
-index 27aa851..ddc4e91 100644
---- a/recipes/gpsd/gpsd_2.95.bb
-+++ b/recipes/gpsd/gpsd_2.95.bb
-@@ -12,3 +12,8 @@ SRC_URI[gpsd.sha256sum] = "832343a53921a8371efa540ba57c91dadedda445e571c1beb97c0
- PR = "${INC_PR}.0"
- 
- PARALLEL_MAKE = ""
-+
-+do_install_append() {
-+	install -d ${D}${base_libdir}/udev/
-+	install -m 0755 ${S}/gpsd.hotplug.wrapper ${D}${base_libdir}/udev/
-+}
+ # We want images supporting the following features (for task-base)
+ DISTRO_FEATURES = "ipv4 ipv6 nfs smbfs wifi ppp alsa ext2 vfat pcmcia usbgadget usbhost pci"
+ # Following features are for ARM and E500 based machines
 -- 
 1.7.1
 
