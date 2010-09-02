@@ -1,43 +1,40 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1OrDSS-0001u2-PM
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 19:20:29 +0200
-Received: by eyb7 with SMTP id 7so457682eyb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 10:19:38 -0700 (PDT)
+	(envelope-from <raj.khem@gmail.com>) id 1OrEap-00068e-8e
+	for Openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 20:33:00 +0200
+Received: by iwn2 with SMTP id 2so703408iwn.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Sep 2010 11:32:25 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AwhZxRY5OUg+Zn28PYBFNVqfZm067Y4rM8M71DV8Phg=;
-	b=EY3vVw9fb9vXe2yzsTFA0EHETwYVMLL/D1d6Ay/t5oblohjk8uDP96jKUrKwIKNFsu
-	TVc+V1HVMrnrlTJNFtmjkbvYW2xPMXqhiPshKH5qQWz5eE8kb1Tlb7U62rvOvUXEQ0PF
-	/4s0IHKs1GSZZthbn2gS+skEBUi0qaxhDqyB0=
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=YL+xKttVsnJeI/jh5u8UYul7j6Ih7vpgAKMtdB3SFdg=;
+	b=aYl+4POBv2AS+FXw9HDOkYF6cizdsXkm63NIB7mbjOd4qlE9Q1YWDL1swBRhft+E/D
+	C3q9BrZvyKtadbqdMv5vAqQRCONH7kH1vL8Z3SKXFPfat14W8HwfDFc4jA3RckyXICv6
+	9SAQC3WAXyry9QRmS3Am47f3ytUwD0D6cH28M=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=qAqEOztzpPmBTGOWJx9zQDN2gyWPIxVvuojDFpcg/IasaLaLQbe7L+boACeniA6LHE
-	niiMGZyQk0f53IrlngU3Rj4QJvPwOuIdWPgse0pp3lwwv6kFqCZZAGfREkAGMe2DZJ1H
-	0dnLb+H5LnUYuNIcuotQogNQaZFz6Dn+LzbtI=
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=ZVb9tdd8LAlSpYeaRjZTtzJoJHYS28jGnE15yA9ldzk+gtzdCzNgTK3Sp14b69WHxs
+	i4+H+Lze92aZpeYLOpu5wbR8zUyDWv5q7UPiZ5KnkRYceyQ3NJk03sU4n7MN+Qkw58it
+	AK2FSDdHHrWhx/VqmlWxDbRJW1f6Itl6AQgwA=
+Received: by 10.231.36.134 with SMTP id t6mr11168743ibd.128.1283452345159;
+	Thu, 02 Sep 2010 11:32:25 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.87.209 with SMTP id y59mr9592820wee.91.1283447978267; Thu,
-	02 Sep 2010 10:19:38 -0700 (PDT)
-Received: by 10.216.179.76 with HTTP; Thu, 2 Sep 2010 10:19:38 -0700 (PDT)
-In-Reply-To: <AANLkTimsOCL0xo1Y+KL6FdmXWRcXpNf=DN2PR14tmDz0@mail.gmail.com>
-References: <AANLkTimsOCL0xo1Y+KL6FdmXWRcXpNf=DN2PR14tmDz0@mail.gmail.com>
-Date: Thu, 2 Sep 2010 10:19:38 -0700
-Message-ID: <AANLkTikBBUuSKeXh=k+G1ejHNSdMdab_ngijDiQu7POJ@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+Received: by 10.231.207.8 with HTTP; Thu, 2 Sep 2010 11:32:05 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Sep 2010 11:32:05 -0700
+Message-ID: <AANLkTik8+=mYOhnbv=R=-LJN81eHhTJd5Nh-dOdoEy0K@mail.gmail.com>
+To: openembeded-devel <Openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Does the OS make a difference?
+Subject: build errors bitbaking gnumail_1.1.2.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,33 +48,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 17:20:29 -0000
+X-List-Received-Date: Thu, 02 Sep 2010 18:33:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I would be interested to know as well I am building on 9.10 and seem
-to get more errors than those building on 10.04 or 10.10 with 64 bit
+Hi
+
+When I bitbake above recipe for qemuarm/minimal it ends up with this error
+
+| checking for a BSD-compatible install...
+/scratch/oe/sysroots/x86_64-linux/usr/bin/install -c
+| checking whether build environment is sane... yes
+| checking for arm-oe-linux-gnueabi-strip... arm-oe-linux-gnueabi-strip
+| checking for a thread-safe mkdir -p...
+/scratch/oe/sysroots/x86_64-linux/usr/bin/mkdir -p
+| checking for gawk... gawk
+| checking whether make sets $(MAKE)... yes
+| checking if /scratch/oe/sysroots/x86_64-linux/usr/bin/javac works... yes
+| checking for fastjar... fastjar
+| checking for /scratch/oe/sysroots/java/activation.jar... yes
+| checking for /scratch/oe/sysroots/java/inetlib.jar... configure:
+error: can't find inetlib.jar in specified path
 
 
+This jar file is actually staged in
 
-On Thu, Sep 2, 2010 at 8:46 AM, AJ ONeal <coolaj86@gmail.com> wrote:
-> The way that I understand it, OE natively compiles everything it needs for
-> cross-compiling everything the target needs - perl, python, etc.
->
-> However, I hear people using Ubuntu 10.04 say that they don't have problems
-> building the same thing that I'm building.
->
-> Is that just random happenstance or is there something about the OS that
-> would make successful builds more likely?
->
-> It would be worth it to upgrade from Ubuntu 8.10 to 10.04 if it really makes
-> a difference... but it would take time and disrupt workflow and otherwise
-> provide little advantage.
->
-> AJ ONeal
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+./x86_64-linux/usr/share/java/inetlib.jar
+./armv5te-oe-linux-gnueabi/usr/share/java/inetlib.jar
+
+
+for native and target in my sysroot but then I looked into
+/scratch/oe/sysroots/java/
+and indeed it has some .jar there but not the one its looking for and
+recipe specifically
+asks to look into this location via
+
+ EXTRA_OECONF = "\
+  --with-inetlib-jar=${STAGING_DATADIR_JAVA} \
+  --with-activation-jar=${STAGING_DATADIR_JAVA} \
+  "
+
+
+As Andy also found out that
+
+we have
+
+native.bbclass:
+STAGING_DIR_JAVA = "${STAGING_DATADIR_JAVA_NATIVE}"
+
+java.bbclass:
+STAGING_DATADIR_JAVA ?= ${STAGING_DIR_JAVA}
+STAGING_DATADIR_JAVA_NATIVE ?= ${STAGING_DATADIR_NATIVE}/java
+
+Who sets what here ?
+
+Thanks for your help
+
+-Khem
 
 
