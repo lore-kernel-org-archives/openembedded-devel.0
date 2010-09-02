@@ -1,47 +1,42 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Or3uq-00036q-OD
+	(envelope-from <vwyodapink@gmail.com>) id 1Or4jF-0004Eq-DP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 09:08:59 +0200
-Received: by pvg6 with SMTP id 6so42670pvg.6
+	Thu, 02 Sep 2010 10:01:14 +0200
+Received: by ewy7 with SMTP id 7so60596ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 00:08:20 -0700 (PDT)
+	Thu, 02 Sep 2010 01:00:28 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:content-type
-	:content-transfer-encoding;
-	bh=iOqTJjELhq7VLBukNv2Mq/nquCGh7ITVZtLDG1jXwtI=;
-	b=orRC5gYbY1wSPmX1iIDxHYAhwhEAn9l2ooUE+mOaYMObvIT4NcONOkGD485K6SNFfg
-	s6Skk4rKRTa5Xvre4D0oxwE+//qfMmgEkx35nYvreA2NHNTCXnd1LMdIm6v0UtqXlZ8P
-	4sRRiBLXFU9WojJfs59le/faDpVzGgg9mVPuY=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=vIhE4XZXKXpo49fAr9J/L3pI9yl1ap1YVEmst6VANEc=;
+	b=tlCPyMbmS5/cHwHkqlkqCToXeG78Nsuyljnb5NLL6u0vyZU/stPAuwg8MKchKmogt4
+	6GV2zpyCDMkxXHPu02LTTP49rHjBLUqKLOdeGwTkY4W9c2+brNl0RAHziODpat8H2cOc
+	hKl7c6ZG70gr268KnIko9U+UgIBv08+vXvjns=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject
-	:content-type:content-transfer-encoding;
-	b=o2qmFSBcFSF8YXJKlMhCDNiTecsmMmhDAzMY5Y5L2mWWTJ4yTXyBYi4QUaHgPigkTs
-	ncyO0S76/z67/IwmDnuLPMmwHBQ/iOMnvysV7079ieDymDEacRYRmlxThmSl4j72ijTg
-	7EJm4ZnjaVBvYxFTOpvlM0/WCZqbYkyk9rq04=
-Received: by 10.114.58.19 with SMTP id g19mr9935192waa.73.1283411300692;
-	Thu, 02 Sep 2010 00:08:20 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id x9sm295929waj.15.2010.09.02.00.08.18
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 02 Sep 2010 00:08:19 -0700 (PDT)
-Message-ID: <4C7F4D5E.6070206@gmail.com>
-Date: Thu, 02 Sep 2010 16:38:14 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=qWWYND6qll7s5RtAHDtbvpGuJkp3uYCvW1xEnXFTl5kyoyiw08XpiBBX/qOrM2Tbgu
+	gI7y5TRmc92FmoWiRRjOd3qA4FFr7ofduLUNW4mXDQ9uvT7GgTmPTQL9u3zJ4QcZmmQn
+	zcx20gO8I07TIpjms0vNI+wIA/YRL/aqJGmP0=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Received: by 10.216.159.195 with SMTP id s45mr8952812wek.43.1283414428082;
+	Thu, 02 Sep 2010 01:00:28 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Thu, 2 Sep 2010 01:00:28 -0700 (PDT)
+Date: Thu, 2 Sep 2010 01:00:28 -0700
+Message-ID: <AANLkTimJ47S_5NRyubHegYQ4S_xYK6aiBu_TkvNrtqCt@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: "General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>, 
+	openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] mbmerlin_0.8.1-2.bb: Don't overwrite a file staged by libx11.
+Subject: Can someone help me understand these errors I got in my build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,40 +50,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 07:08:59 -0000
+X-List-Received-Date: Thu, 02 Sep 2010 08:01:14 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-If mbmerlin is staged, packages which use the x11.pc file will get one
-that mbmerlin provides.
+When it was going through the final stages in my build I ended up with
+some conflict errors and not sure if I understand how to fix this
+properly. Do I just remove what its says is why it cant install one
+file because another is trying to install the same file ? Or? But I
+dont think I am understanding these correctly as I have never gotten
+them before. I would really appreciate any help on this one so I can
+get my image packaged now that everything is built. Also I can post my
+image I am trying to build if that helps its a very bloated desktop
+image, here is the error:
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
----
- recipes/mbmerlin/mbmerlin_0.8.1-2.bb |    7 ++++++-
- 1 files changed, 6 insertions(+), 1 deletions(-)
+also I tried to clean it by doing bitbake -c clean and then bitbake
+myimage but still same result.
 
-diff --git a/recipes/mbmerlin/mbmerlin_0.8.1-2.bb b/recipes/mbmerlin/mbmerlin_0.8.1-2.bb
-index 5c3a93a..e5c582a 100644
---- a/recipes/mbmerlin/mbmerlin_0.8.1-2.bb
-+++ b/recipes/mbmerlin/mbmerlin_0.8.1-2.bb
-@@ -1,5 +1,5 @@
- LICENSE = "GPL"
--PR = "r3"
-+PR = "r4"
- 
- inherit pkgconfig gpe
- 
-@@ -19,3 +19,8 @@ CFLAGS += " -D_GNU_SOURCE"
- 
- SRC_URI[md5sum] = "c379c781ac05d3b64228f48362aecaca"
- SRC_URI[sha256sum] = "d2a482d4b7bce5cc41bacddc8ef48ebd21fecbe6585b74036e432c030595b11f"
-+
-+do_install_prepend() {
-+    # This package is not x11, this file should not be staged.
-+    rm ${S}/build/x11.pc
-+}
--- 
-1.7.1
+| Collected errors:
+|  * check_data_file_clashes: Package kernel-firmware-down3 wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/lib/firmware/edgeport/down3.bin
+| 	But that file is already provided by package  * linux-firmware
+|  * opkg_install_cmd: Cannot install package task-base-extended.
+|  * check_data_file_clashes: Package rt73-firmware wants to install
+file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/lib/firmware/rt73.bin
+| 	But that file is already provided by package  * linux-firmware
+|  * opkg_install_cmd: Cannot install package rt73-firmware.
+|  * opkg_install_cmd: Cannot install package libnet.
+|  * check_data_file_clashes: Package glproto-dev wants to install
+file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/include/GL/internal/glcore.h
+| 	But that file is already provided by package  * libgl-dev
+|  * opkg_install_cmd: Cannot install package artoolkit-dev.
+|  * satisfy_dependencies_for: Cannot satisfy the following
+dependencies for task-sdk-native:
+|  * 	libdbd-sqlite-perl * 	libdbix-simple-perl *
+|  * opkg_install_cmd: Cannot install package task-native-sdk.
+|  * check_data_file_clashes: Package python-zopeinterface wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python2.6/site-packages/setuptools.pth
+| 	But that file is already provided by package  * python-setuptools
+|  * check_data_file_clashes: Package python-zopeinterface wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python2.6/site-packages/site.pyo
+| 	But that file is already provided by package  * python-setuptools
+|  * check_data_file_clashes: Package python-zopeinterface wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python2.6/site-packages/site.py
+| 	But that file is already provided by package  * python-setuptools
+|  * check_data_file_clashes: Package python-zopeinterface wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/bin/easy_install-2.6
+| 	But that file is already provided by package  * python-setuptools
+|  * check_data_file_clashes: Package python-zopeinterface wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/bin/easy_install
+| 	But that file is already provided by package  * python-setuptools
+|  * opkg_install_cmd: Cannot install package python-twisted.
+|  * opkg_install_cmd: Cannot install package gst-plugin-video4linux2.
+|  * resolve_conffiles: Existing conffile
+/home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/etc/device_table is
+different from the conffile in the new package. The new conffile will
+be placed at /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/etc/device_table-opkg.
+|  * check_data_file_clashes: Package gpe-theme-clearlooks wants to
+install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/share/themes/Clearlooks/gtk-2.0/gtkrc
+| 	But that file is already provided by package  * gtk-theme-clearlooks
+|  * opkg_install_cmd: Cannot install package gpe-session-scripts.
+NOTE: Task failed:
+/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/UAV-Dimage-1.0-r0/temp/log.do_rootfs.4216
+NOTE: oestats: task failed, see
+http://tinderbox.openembedded.net/public/logs/task/7541484.txt
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of
+/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb
+do_rootfs failed
+ERROR: Task 11 (/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb,
+do_rootfs) failed
+NOTE: Tasks Summary: Attempted 11557 tasks of which 11540 didn't need
+to be rerun and 1 failed.
+ERROR: '/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb'
+failed
+NOTE: oestats: build failed, see http://tinderbox.openembedded.net/builds/85611/
 
+
+Thanks as always !
 
 
