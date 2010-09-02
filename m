@@ -1,47 +1,43 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1OrAZR-0002D6-FV
+	(envelope-from <raj.khem@gmail.com>) id 1OrAmW-000780-0d
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 16:15:45 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o82EEb43006209
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Thu, 02 Sep 2010 16:28:49 +0200
+Received: by gxk2 with SMTP id 2so218020gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Sep 2010 09:14:37 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o82EEbVo005704
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Sep 2010 09:14:37 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o82EEb5N009176
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 2 Sep 2010 09:14:37 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Thu, 2 Sep 2010 09:14:37 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 2 Sep 2010 09:14:35 -0500
-Thread-Topic: [oe] git issues
-Thread-Index: ActKojTTj2Bx9fptQzu4WhANK7mglgABs5yQ
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F08031075458D@dlee06.ent.ti.com>
-References: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
-	<4C7FA54D.5070908@mlbassoc.com>
-In-Reply-To: <4C7FA54D.5070908@mlbassoc.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 02 Sep 2010 07:28:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=Eybai/tYr9hHboISC1m/XZ3z7yvGOe0QRHZfaZHojZY=;
+	b=v5bUrIPG4azp6dVImkUIlyE/RiGpfcBLlPZGX8RIOKuF5+/6zKBkpQTIXJDKQAB319
+	qoAKZgNIZslcB5fGvFxeAliE8XaJwAk+spZkbx2MVlY31hfLHDUEYsvgN2pOas1VhRa/
+	DC2eRgBysVwDTNpZg9ozxaF/oF0SM9BVyxe8U=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=dncDKRC2tGSOBCxB6J3Vr2IpKMZqoulLbrY0RPXRKTRuEdlvEUe/oHq0r7yXl50OZl
+	meW/CKRpXiRnL7v9saNdoRalqap8JdBP0W50dSgfwRmZEVc91oMeZn1TF9ULhCVL94iV
+	uLhTHDgE4YVVyMCsDCOs8X5pkV+42pnLmwi1Y=
+Received: by 10.150.47.37 with SMTP id u37mr187640ybu.47.1283437692191; Thu,
+	02 Sep 2010 07:28:12 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.231.207.8 with HTTP; Thu, 2 Sep 2010 07:27:52 -0700 (PDT)
+In-Reply-To: <4C7FAE91.1010409@dresearch.de>
+References: <4C7FA92E.4080504@dresearch.de> <4C7FAE91.1010409@dresearch.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Sep 2010 07:27:52 -0700
+Message-ID: <AANLkTi=1-rA+0Xh+TQFUtHjoj-tphoqpBprNHmkRRVHW@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git issues
+Subject: Re: URL for Ralink RT3572 driver
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,58 +51,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 14:15:48 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 02 Sep 2010 14:28:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
+On Thu, Sep 2, 2010 at 7:02 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> Am 02.09.2010 15:39, schrieb Steffen Sledz:
+>> ... 2010_0709_RT3572_Linux_STA_v2.4.0.1.tar ...
+>
+> 2010_0709_RT3572_Linux_STA_v2.4.0.1.tar.bz2 is the right name.
+>
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Gary Thomas
-> Sent: Thursday, September 02, 2010 8:23 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] git issues
->=20
-> On 09/02/2010 06:59 AM, Frans Meulenbroeks wrote:
-> > For some reason recently every once in a while on a git pull or git
-> > clone I get an error like this:
-> >
-> > git clone git://git.openembedded.net/openembedded openembedded
-> > Initialized empty Git repository in
-> > /home/frans/workspace/Linux/openembedded-test/openembedded/.git/
-> > fatal: The remote end hung up unexpectedly
-> > make: *** [all] Error 128
-> >
-> > Repeating the command often makes it work.
-> >
-> > Also I notice that the transfer rate is about 100-120 KB/s
-> > I seem to recall Leon also reported something like this with irc.
-> >
-> > Is this something others see as well?
-> > Especially the hangup does not really help to set up an automated test
-> system.
->=20
-> I've seen this on a number of sites, not just OE.  As you say, trying
-> again makes it happy.
->=20
-> I think it's a generic GIT problem (at least that's my experience)
->=20
+I think we could store it on our mirrors. May be Cliff can help you with that.
 
-I've been noticing this only with openembedded so far.  I'm not sure about =
-the transfer rate issue but I have had my git pull fail the first time and =
-succeed the second time.
-
-> --
-> ------------------------------------------------------------
-> Gary Thomas                 |  Consulting for the
-> MLB Associates              |    Embedded world
-> ------------------------------------------------------------
->=20
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
