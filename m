@@ -1,42 +1,43 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1Or4jF-0004Eq-DP
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 10:01:14 +0200
-Received: by ewy7 with SMTP id 7so60596ewy.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Or5LO-0007ux-NX for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 10:40:28 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Or5Kr-0002OJ-3J for openembedded-devel@lists.openembedded.org;
+	Thu, 02 Sep 2010 10:39:53 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Sep 2010 10:39:53 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 01:00:28 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=vIhE4XZXKXpo49fAr9J/L3pI9yl1ap1YVEmst6VANEc=;
-	b=tlCPyMbmS5/cHwHkqlkqCToXeG78Nsuyljnb5NLL6u0vyZU/stPAuwg8MKchKmogt4
-	6GV2zpyCDMkxXHPu02LTTP49rHjBLUqKLOdeGwTkY4W9c2+brNl0RAHziODpat8H2cOc
-	hKl7c6ZG70gr268KnIko9U+UgIBv08+vXvjns=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=qWWYND6qll7s5RtAHDtbvpGuJkp3uYCvW1xEnXFTl5kyoyiw08XpiBBX/qOrM2Tbgu
-	gI7y5TRmc92FmoWiRRjOd3qA4FFr7ofduLUNW4mXDQ9uvT7GgTmPTQL9u3zJ4QcZmmQn
-	zcx20gO8I07TIpjms0vNI+wIA/YRL/aqJGmP0=
-MIME-Version: 1.0
-Received: by 10.216.159.195 with SMTP id s45mr8952812wek.43.1283414428082;
-	Thu, 02 Sep 2010 01:00:28 -0700 (PDT)
-Received: by 10.216.179.76 with HTTP; Thu, 2 Sep 2010 01:00:28 -0700 (PDT)
-Date: Thu, 2 Sep 2010 01:00:28 -0700
-Message-ID: <AANLkTimJ47S_5NRyubHegYQ4S_xYK6aiBu_TkvNrtqCt@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
-To: "General mailing list for gumstix users."
-	<gumstix-users@lists.sourceforge.net>, 
-	openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+	Thu, 02 Sep 2010 10:39:53 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 02 Sep 2010 10:39:43 +0200
+Message-ID: <i5nnsf$1sq$2@dough.gmane.org>
+References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>	<1283027073-12308-12-git-send-email-raj.khem@gmail.com>	<i5das3$v2$3@dough.gmane.org>	<AANLkTikE=wDnQPu5txDEL4QdOjfrD3YK1DOphAqvZZ4h@mail.gmail.com>
+	<AANLkTin3L-dJY_KRx5BjdSPCfU1nr-iTYvkzuE5KNE3B@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <AANLkTin3L-dJY_KRx5BjdSPCfU1nr-iTYvkzuE5KNE3B@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Can someone help me understand these errors I got in my build
+Subject: Re: [PATCH 11/23] udev-compat141_141.bb: if machine is not one of spitz akita c70x poodle then it is not needed to RDEPEND'ed on udev-compat-wrapper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,82 +51,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 08:01:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 Sep 2010 08:40:29 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-When it was going through the final stages in my build I ended up with
-some conflict errors and not sure if I understand how to fix this
-properly. Do I just remove what its says is why it cant install one
-file because another is trying to install the same file ? Or? But I
-dont think I am understanding these correctly as I have never gotten
-them before. I would really appreciate any help on this one so I can
-get my image packaged now that everything is built. Also I can post my
-image I am trying to build if that helps its a very bloated desktop
-image, here is the error:
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-also I tried to clean it by doing bitbake -c clean and then bitbake
-myimage but still same result.
+On 01-09-10 23:40, Khem Raj wrote:
+> On Sun, Aug 29, 2010 at 11:15 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>> On Sun, Aug 29, 2010 at 2:56 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 28-08-10 22:24, Khem Raj wrote:
+>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>> ---
+>>>>  recipes/udev/udev-compat141_141.bb |    6 +++++-
+>>>>  1 files changed, 5 insertions(+), 1 deletions(-)
+>>>>
+>>>> diff --git a/recipes/udev/udev-compat141_141.bb b/recipes/udev/udev-compat141_141.bb
+>>>> index 2411fc6..c39d4cb 100644
+>>>> --- a/recipes/udev/udev-compat141_141.bb
+>>>> +++ b/recipes/udev/udev-compat141_141.bb
+>>>> @@ -15,7 +15,11 @@ PACKAGES = "${PN} ${PN}-dbg"
+>>>>  PROVIDES = "udev-compat"
+>>>>
+>>>>  # Need udev with udev-compat-wrapper support and nothing else.
+>>>> -RDEPENDS_${PN} = "udev-compat-wrapper"
+>>>> +RDEPENDS_${PN}_spitz = "udev-compat-wrapper"
+>>>> +RDEPENDS_${PN}_akita = "udev-compat-wrapper"
+>>>> +RDEPENDS_${PN}_c7x0 = "udev-compat-wrapper"
+>>>> +RDEPENDS_${PN}_poodle = "udev-compat-wrapper"
+>>>> +
+>>>>  # Remove hotplug RPROVIDES
+>>>>  RPROVIDES_${PN} = "udev-compat"
+>>>
+>>> NAK, this is a generic wrapper to use recent udev on older kernels, not
+>>> specific to zaurus.
+>>
+>> OK then why is this wrapper only rprovided for specific machines and
+>> not rprovided always for every machine ?
+>> It seems its does not do what you are saying IIUC.
+> 
+> ping ?
 
-| Collected errors:
-|  * check_data_file_clashes: Package kernel-firmware-down3 wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/lib/firmware/edgeport/down3.bin
-| 	But that file is already provided by package  * linux-firmware
-|  * opkg_install_cmd: Cannot install package task-base-extended.
-|  * check_data_file_clashes: Package rt73-firmware wants to install
-file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/lib/firmware/rt73.bin
-| 	But that file is already provided by package  * linux-firmware
-|  * opkg_install_cmd: Cannot install package rt73-firmware.
-|  * opkg_install_cmd: Cannot install package libnet.
-|  * check_data_file_clashes: Package glproto-dev wants to install
-file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/include/GL/internal/glcore.h
-| 	But that file is already provided by package  * libgl-dev
-|  * opkg_install_cmd: Cannot install package artoolkit-dev.
-|  * satisfy_dependencies_for: Cannot satisfy the following
-dependencies for task-sdk-native:
-|  * 	libdbd-sqlite-perl * 	libdbix-simple-perl *
-|  * opkg_install_cmd: Cannot install package task-native-sdk.
-|  * check_data_file_clashes: Package python-zopeinterface wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python2.6/site-packages/setuptools.pth
-| 	But that file is already provided by package  * python-setuptools
-|  * check_data_file_clashes: Package python-zopeinterface wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python2.6/site-packages/site.pyo
-| 	But that file is already provided by package  * python-setuptools
-|  * check_data_file_clashes: Package python-zopeinterface wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/lib/python2.6/site-packages/site.py
-| 	But that file is already provided by package  * python-setuptools
-|  * check_data_file_clashes: Package python-zopeinterface wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/bin/easy_install-2.6
-| 	But that file is already provided by package  * python-setuptools
-|  * check_data_file_clashes: Package python-zopeinterface wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/bin/easy_install
-| 	But that file is already provided by package  * python-setuptools
-|  * opkg_install_cmd: Cannot install package python-twisted.
-|  * opkg_install_cmd: Cannot install package gst-plugin-video4linux2.
-|  * resolve_conffiles: Existing conffile
-/home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/etc/device_table is
-different from the conffile in the new package. The new conffile will
-be placed at /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/etc/device_table-opkg.
-|  * check_data_file_clashes: Package gpe-theme-clearlooks wants to
-install file /home/vdubhack/overo-oe/tmp/rootfs/UAV-Dimage/usr/share/themes/Clearlooks/gtk-2.0/gtkrc
-| 	But that file is already provided by package  * gtk-theme-clearlooks
-|  * opkg_install_cmd: Cannot install package gpe-session-scripts.
-NOTE: Task failed:
-/home/vdubhack/overo-oe/tmp/work/overo-angstrom-linux-gnueabi/UAV-Dimage-1.0-r0/temp/log.do_rootfs.4216
-NOTE: oestats: task failed, see
-http://tinderbox.openembedded.net/public/logs/task/7541484.txt
-ERROR: TaskFailed event exception, aborting
-ERROR: Build of
-/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb
-do_rootfs failed
-ERROR: Task 11 (/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb,
-do_rootfs) failed
-NOTE: Tasks Summary: Attempted 11557 tasks of which 11540 didn't need
-to be rerun and 1 failed.
-ERROR: '/home/vdubhack/overo-oe/user.collection/recipes/images/UAV-Dimage.bb'
-failed
-NOTE: oestats: build failed, see http://tinderbox.openembedded.net/builds/85611/
+The zaurus people screwed up when adding this, it is still intended as a
+generic stopgap measure for device stuck on <2.6.27 kernels.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
+iD8DBQFMf2LPMkyGM64RGpERAjcVAJ9YbT9CqldvYPwDHHeNmtbfA+CAVwCgqe+S
+AXL+nBPaMGgv3uMOWjsf8Oo=
+=DmtX
+-----END PGP SIGNATURE-----
 
-Thanks as always !
 
 
