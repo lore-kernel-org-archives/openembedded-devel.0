@@ -1,43 +1,33 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail.multitech.com ([65.126.90.84])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OrAmW-000780-0d
+	(envelope-from <jgilles@multitech.com>) id 1OrB98-0003tW-F0
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 16:28:49 +0200
-Received: by gxk2 with SMTP id 2so218020gxk.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 07:28:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=Eybai/tYr9hHboISC1m/XZ3z7yvGOe0QRHZfaZHojZY=;
-	b=v5bUrIPG4azp6dVImkUIlyE/RiGpfcBLlPZGX8RIOKuF5+/6zKBkpQTIXJDKQAB319
-	qoAKZgNIZslcB5fGvFxeAliE8XaJwAk+spZkbx2MVlY31hfLHDUEYsvgN2pOas1VhRa/
-	DC2eRgBysVwDTNpZg9ozxaF/oF0SM9BVyxe8U=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=dncDKRC2tGSOBCxB6J3Vr2IpKMZqoulLbrY0RPXRKTRuEdlvEUe/oHq0r7yXl50OZl
-	meW/CKRpXiRnL7v9saNdoRalqap8JdBP0W50dSgfwRmZEVc91oMeZn1TF9ULhCVL94iV
-	uLhTHDgE4YVVyMCsDCOs8X5pkV+42pnLmwi1Y=
-Received: by 10.150.47.37 with SMTP id u37mr187640ybu.47.1283437692191; Thu,
-	02 Sep 2010 07:28:12 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.207.8 with HTTP; Thu, 2 Sep 2010 07:27:52 -0700 (PDT)
-In-Reply-To: <4C7FAE91.1010409@dresearch.de>
-References: <4C7FA92E.4080504@dresearch.de> <4C7FAE91.1010409@dresearch.de>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 2 Sep 2010 07:27:52 -0700
-Message-ID: <AANLkTi=1-rA+0Xh+TQFUtHjoj-tphoqpBprNHmkRRVHW@mail.gmail.com>
+	Thu, 02 Sep 2010 16:52:12 +0200
+X-Ninja-PIM: Scanned by Ninja
+X-Ninja-AttachmentFiltering: (no action)
+Received: from [192.168.52.113] ([192.168.52.113]) by mail.multitech.com with
+	Microsoft SMTPSVC(5.0.2195.7381); Thu, 2 Sep 2010 09:49:47 -0500
+From: Jesse Gilles <jgilles@multitech.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F08031075458D@dlee06.ent.ti.com>
+References: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
+	<4C7FA54D.5070908@mlbassoc.com>
+	<131E5DFBE7373E4C8D813795A6AA7F08031075458D@dlee06.ent.ti.com>
+Date: Thu, 02 Sep 2010 09:50:25 -0500
+Message-ID: <1283439025.8317.2.camel@jjg-linux>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-OriginalArrivalTime: 02 Sep 2010 14:49:47.0349 (UTC)
+	FILETIME=[168FF850:01CB4AAE]
+X-SA-Exim-Connect-IP: 65.126.90.84
+X-SA-Exim-Mail-From: jgilles@multitech.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: URL for Ralink RT3572 driver
+Subject: Re: git issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,23 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 14:28:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Thu, 02 Sep 2010 14:52:12 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
 
-On Thu, Sep 2, 2010 at 7:02 AM, Steffen Sledz <sledz@dresearch.de> wrote:
-> Am 02.09.2010 15:39, schrieb Steffen Sledz:
->> ... 2010_0709_RT3572_Linux_STA_v2.4.0.1.tar ...
->
-> 2010_0709_RT3572_Linux_STA_v2.4.0.1.tar.bz2 is the right name.
->
+On Thu, 2010-09-02 at 09:14 -0500, Maupin, Chase wrote:
+> I've been noticing this only with openembedded so far.  I'm not sure
+> about the transfer rate issue but I have had my git pull fail the
+> first time and succeed the second time.
 
-I think we could store it on our mirrors. May be Cliff can help you with that.
+I have also noticed the exact same behavior -- first pull fails, second
+succeeds.
 
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
