@@ -1,43 +1,43 @@
-Received: from mail-ey0-f175.google.com ([209.85.215.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OrEtu-0003Xe-QI
+	(envelope-from <raj.khem@gmail.com>) id 1OrEv2-0003cw-KK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 20:52:43 +0200
-Received: by eyb7 with SMTP id 7so552223eyb.6
+	Thu, 02 Sep 2010 20:53:53 +0200
+Received: by gwb1 with SMTP id 1so315590gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 11:52:09 -0700 (PDT)
+	Thu, 02 Sep 2010 11:53:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=zQTmmqDio2p1Fmi4a8fXZUqh1pSF48Frx6jOqKR/F+M=;
-	b=HHoZiFe69GihSPUfFkb+MAmyZ5AOoHhanO4GMxbDGQ+QyJtyzRN405T7RqW28sFo++
-	JChKkm2QyUSc0gwLDI8RJ3JovuTh1K0Lhc8WxNicAcxWHeEtCicLu8jC2w0p5sR2qokm
-	7RsrI0m+TwHrjvYlRTWEAYi4KrqoZnS/3hbm8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=tx4mGoIpP9NidaEXvQ5DwMl6RvGGjZHhOb8wnKA6OhU=;
+	b=BiLAuJbjEc1vFIU423qEuUwN6caCVzDNVcn8AsAo+OneMv6adm6sudRkIqMr7SqcJJ
+	gF7PAwVkOTnS7LDdCvH7iXBNfFyzLfviTXS5SEF4meWFvjUBAX2Rq4K8SYfJRwaAP9W7
+	FKU07f4eqQYY+YeZnKsoph2is4JYSB2EGt0RY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=m3NYonTHqfoyuLYq2C32D0w2Q9pUJKzd00ufWclNxwJtoIbTHedUgi4knhP6n3I4Xi
-	Exde9k0u9MLPN1f59SOf/3yR+VHxJ+aZhs7/BZ9wuzQdOqaNc8e3XY7H5Y9P4yC6rdSr
-	yrTwBcgRVCWITBeoZWbOsAdHn6wFMQtPCavZI=
-Received: by 10.213.22.19 with SMTP id l19mr14251ebb.75.1283453529430;
-	Thu, 02 Sep 2010 11:52:09 -0700 (PDT)
-Received: from localhost.localdomain (j200125.upc-j.chello.nl [24.132.200.125])
-	by mx.google.com with ESMTPS id z55sm1202485eeh.3.2010.09.02.11.52.08
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Thu, 02 Sep 2010 11:52:08 -0700 (PDT)
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=H2Lru+WsofhG73gZtaPr7qEyBodkgkAVYLi/F7aBVC6vC1emF0fMbWBd9GV7fmEk0u
+	0Vwrt1JsrTz0ZOUrpao837P29cyjDBp44zoUf/pZQE95zxwcY9d33MCh7am8OPmjclMT
+	ac9Vfo+07zW1GlYks4WbLYJy+DdreIp7DB0fk=
+Received: by 10.150.205.3 with SMTP id c3mr554936ybg.317.1283453596275; Thu,
+	02 Sep 2010 11:53:16 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.207.8 with HTTP; Thu, 2 Sep 2010 11:52:56 -0700 (PDT)
+In-Reply-To: <AANLkTimsOCL0xo1Y+KL6FdmXWRcXpNf=DN2PR14tmDz0@mail.gmail.com>
+References: <AANLkTimsOCL0xo1Y+KL6FdmXWRcXpNf=DN2PR14tmDz0@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Thu, 2 Sep 2010 11:52:56 -0700
+Message-ID: <AANLkTi=q=PLzWBCu=oQaY3pt4yxtM+thUpVdBjbbLQio@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Thu,  2 Sep 2010 20:52:02 +0200
-Message-Id: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
-X-Mailer: git-send-email 1.6.4.2
-X-SA-Exim-Connect-IP: 209.85.215.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] base.bbclass: fix soc-family test
+Subject: Re: Does the OS make a difference?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,30 +51,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 18:52:43 -0000
+X-List-Received-Date: Thu, 02 Sep 2010 18:53:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-see http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-September/023680.html
+On Thu, Sep 2, 2010 at 8:46 AM, AJ ONeal <coolaj86@gmail.com> wrote:
+> The way that I understand it, OE natively compiles everything it needs for
+> cross-compiling everything the target needs - perl, python, etc.
 
-Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- classes/base.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+not everything but things that it needs different from native ones. It
+still uses lot of
+the packages installed on build host.
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 299e875..2c9ad89 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -337,7 +337,7 @@ python () {
-             this_machine = bb.data.getVar('MACHINE', d, 1)
-             if this_machine and not re.match(need_machine, this_machine):
-                 this_soc_family = bb.data.getVar('SOC_FAMILY', d, 1)
--                if this_soc_family and not re.match(need_machine, this_soc_family):
-+                if (this_soc_family and not re.match(need_machine, this_soc_family)) or not this_soc_family:
-                     raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
- 
-         need_target = bb.data.getVar('COMPATIBLE_TARGET_SYS', d, 1)
--- 
-1.6.4.2
+>
+> However, I hear people using Ubuntu 10.04 say that they don't have problems
+> building the same thing that I'm building.
+>
 
+could be. I don't know what your problem is.
+
+> Is that just random happenstance or is there something about the OS that
+> would make successful builds more likely?
+>
+> It would be worth it to upgrade from Ubuntu 8.10 to 10.04 if it really makes
+> a difference... but it would take time and disrupt workflow and otherwise
+> provide little advantage.
+>
+> AJ ONeal
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
