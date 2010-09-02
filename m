@@ -1,33 +1,41 @@
-Received: from mail.multitech.com ([65.126.90.84])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <jgilles@multitech.com>) id 1OrB98-0003tW-F0
+	(envelope-from <coolaj86@gmail.com>) id 1OrC0H-0005Iv-Bk
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 02 Sep 2010 16:52:12 +0200
-X-Ninja-PIM: Scanned by Ninja
-X-Ninja-AttachmentFiltering: (no action)
-Received: from [192.168.52.113] ([192.168.52.113]) by mail.multitech.com with
-	Microsoft SMTPSVC(5.0.2195.7381); Thu, 2 Sep 2010 09:49:47 -0500
-From: Jesse Gilles <jgilles@multitech.com>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F08031075458D@dlee06.ent.ti.com>
-References: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
-	<4C7FA54D.5070908@mlbassoc.com>
-	<131E5DFBE7373E4C8D813795A6AA7F08031075458D@dlee06.ent.ti.com>
-Date: Thu, 02 Sep 2010 09:50:25 -0500
-Message-ID: <1283439025.8317.2.camel@jjg-linux>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-OriginalArrivalTime: 02 Sep 2010 14:49:47.0349 (UTC)
-	FILETIME=[168FF850:01CB4AAE]
-X-SA-Exim-Connect-IP: 65.126.90.84
-X-SA-Exim-Mail-From: jgilles@multitech.com
+	Thu, 02 Sep 2010 17:47:08 +0200
+Received: by fxm6 with SMTP id 6so382139fxm.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 02 Sep 2010 08:46:30 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=0v4qCdJ/4pnB+sAmw0eULziFG5rsxa4K2wIAJLZBeSo=;
+	b=VX4ZTYv+J02WZLlUaIW/9EMXKlMV/BTzzmLAn0zdzQgbk150Pf/YxOvAg/yTy36q18
+	6tPkpY+Kc5xRbDnpcT6iK1W5R1dWvay2VSOaSlYKd9C8NniHbwHV9odwPCpqtyp6Mgo6
+	o8l8nOHbzbNky6LvVE2S1V12JW9WAtB+xjWfg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=d5aZXmGevom6LlOMd+Kf26LaY+hwQMdzVrDxL/gb1+bhtVovXoW2spk+XwqHTlLgnd
+	iSeGThsUDSsudzHb4uD2F4TB9igVvsCC6vRlyZtDejKvXWdWWJBSZwnv9098RDMh8NN6
+	DzXf2KgMe6rDVgwCPP/ygQ96mNSZ6UIqruXwM=
+Received: by 10.223.123.129 with SMTP id p1mr5251139far.94.1283442389379; Thu,
+	02 Sep 2010 08:46:29 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.223.112.81 with HTTP; Thu, 2 Sep 2010 08:46:09 -0700 (PDT)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Thu, 2 Sep 2010 09:46:09 -0600
+Message-ID: <AANLkTimsOCL0xo1Y+KL6FdmXWRcXpNf=DN2PR14tmDz0@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git issues
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Does the OS make a difference?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,17 +49,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 02 Sep 2010 14:52:12 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 02 Sep 2010 15:47:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Thu, 2010-09-02 at 09:14 -0500, Maupin, Chase wrote:
-> I've been noticing this only with openembedded so far.  I'm not sure
-> about the transfer rate issue but I have had my git pull fail the
-> first time and succeed the second time.
+The way that I understand it, OE natively compiles everything it needs for
+cross-compiling everything the target needs - perl, python, etc.
 
-I have also noticed the exact same behavior -- first pull fails, second
-succeeds.
+However, I hear people using Ubuntu 10.04 say that they don't have problems
+building the same thing that I'm building.
 
+Is that just random happenstance or is there something about the OS that
+would make successful builds more likely?
 
+It would be worth it to upgrade from Ubuntu 8.10 to 10.04 if it really makes
+a difference... but it would take time and disrupt workflow and otherwise
+provide little advantage.
+
+AJ ONeal
 
