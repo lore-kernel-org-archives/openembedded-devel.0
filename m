@@ -1,47 +1,44 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OrXWa-0006Kq-Gu
+	(envelope-from <raj.khem@gmail.com>) id 1OrYHx-0002rf-4E
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Sep 2010 16:45:56 +0200
-Received: by wye20 with SMTP id 20so1701525wye.6
+	Fri, 03 Sep 2010 17:35:02 +0200
+Received: by iwn2 with SMTP id 2so1614006iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Sep 2010 07:45:15 -0700 (PDT)
+	Fri, 03 Sep 2010 08:34:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=+AwrJ/VUyQXp/LOVfsacIoQFubIwqK/jYgVMMjl6aHs=;
-	b=rUAHUtMLEvcTuZWhBQ5mz6HsrtItndgOKo+OEEvbGiE6WOoL4/L2edcKMDMr+lagUG
-	sCQapC0fVTF7EJEJ2YYPPWPjE5R9iUAnwyIjRe0e83l/DaMwuh9enqnYsD2J4UewbYr+
-	bI22VZg/Z0ZWjiCpkUoPUhPVi6m7zfxFg2Rn0=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Efw/nfcpC37b7i3JLPkuyqWm8nd7ZUxsilduZzHIwgw=;
+	b=U5vlfIz9zqMEA8JaUcLQPZpHNGdcWg/LBjQB914PpMgt+vAIEJyaq/UjXlW9zsS5FL
+	mAn5zbnvrE8bFP82AUO8TPa9Gq3TX1NFlU+cJIBKf0LLNzJmJEZCx0Kj8xjKW0h9xJRZ
+	NYgmEroi4uYCyamF2gKiFxxNntxhDOTVaSano=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=Hk9lSoPqojMHfXwhofnMU3Kt32k0D3OMRQYYcIAwCL+H4ZAoIfhrouYf8ishtNU4Q7
-	fL0lxCRG6NPmSb9zpA0jqq+spQR6REyvdIMhP3euhVoncK0vMPNVAJLzqQKKPnDLYbzu
-	gVZ8tJbgrQxDowTi4hQM7U7LITn6rt8B/nAYE=
-Received: by 10.227.155.70 with SMTP id r6mr127397wbw.26.1283525115203; Fri,
-	03 Sep 2010 07:45:15 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=TJEDaR+vpbbcZaWB/MPYpfwy95LBeHvaHP9ePkdmgNxKS0Hym2L81kJfCtYj3KuDKl
+	0ih2hRWvL6ZgJfdkNaWpcnh15FmfdK3M6P9u2iPV9gbYdWvI5OKIpWnemDmPhbiMeHi5
+	AFC+js/rZ2LAKSk3b3SyTc5gmHGojkAYkjUCc=
+Received: by 10.231.34.139 with SMTP id l11mr1042829ibd.141.1283528047325;
+	Fri, 03 Sep 2010 08:34:07 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Fri, 3 Sep 2010 07:44:55 -0700 (PDT)
-In-Reply-To: <20100903111210.GA17702@game.jcrosoft.org>
-References: <20100903111210.GA17702@game.jcrosoft.org>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 3 Sep 2010 07:44:55 -0700
-X-Google-Sender-Auth: LC8J1beIU9RmU9wP31gjHZh2I3E
-Message-ID: <AANLkTin7HBBUQk0STC=zAPgbceC+dfLFB=3eaYORr7Ws@mail.gmail.com>
+Received: by 10.231.207.8 with HTTP; Fri, 3 Sep 2010 08:33:47 -0700 (PDT)
+In-Reply-To: <201009031221.42662.schnitzeltony@gmx.de>
+References: <201009031221.42662.schnitzeltony@gmx.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Fri, 3 Sep 2010 08:33:47 -0700
+Message-ID: <AANLkTimhrzw9etPHFqtCUWz9fbwup6_A8gpMA20KepfO@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: How to extend SRC_URI_append?
+Subject: Re: redland build fails
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,31 +52,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2010 14:45:56 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Fri, 03 Sep 2010 15:35:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-The append syntax you're referring to uses OVERRIDES.  FOO_somevalue
-replaces FOO if somevalue is in OVERRIDES.  FOO_append_somevalue is added to
-FOO if somevalue is in OVERRIDES.  I don't think SOC_FAMILY is in overrides
-at this time.
+On Fri, Sep 3, 2010 at 3:21 AM, Andreas Mueller <schnitzeltony@gmx.de> wrot=
+e:
+> On building redland I get
+>
+> | /bin/sh ../arm-angstrom-linux-gnueabi-libtool --tag=3DCC =A0 --mode=3Dc=
+ompile
+> arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=
+=3Dneon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -DHAVE_CONFIG_H -=
+I. =A0-I../rasqal/src -I../raptor/src =A0-isystem/home/Superandi/OpenEmbedd=
+ed/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -I/home/Superandi=
+/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -I/hom=
+e/Superandi/OpenEmbedded/tmp/sysroots/i686-linux/usr/armv7a/include -isyste=
+m/home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/us=
+r/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer=
+ -ggdb3 -DPKGDATADIR=3D"\"/usr/share/redland\"" =A0-I../rasqal/src -I../rap=
+tor/src =A0-isystem/home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstro=
+m-linux-gnueabi/usr/include -I/home/Superandi/OpenEmbedded/tmp/sysroots/arm=
+v7a-angstrom-linux-gnueabi/usr/include -I/home/Superandi/OpenEmbedded/tmp/s=
+ysroots/i686-linux/usr/armv7a/include -isystem/home/Superandi/OpenEmbedded/=
+tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimiza=
+tions -frename-registers -fomit-frame-pointer -ggdb3 =A0 -DLIBRDF_INTERNAL=
+=3D1 -isystem/home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linu=
+x-gnueabi/usr/include -fexpensive-optimizations -frename-registers -fomit-f=
+rame-pointer -O2 -ggdb3 -MT
+> rdf_storage_mysql.lo -MD -MP -MF .deps/rdf_storage_mysql.Tpo -c -o rdf_st=
+orage_mysql.lo rdf_storage_mysql.c
+> ..
+> | rdf_storage_mysql.c:49:19: error: mysql.h: No such file or directory
+> | rdf_storage_mysql.c:50:26: error: mysqld_error.h: No such file or direc=
+tory
+> | rdf_storage_mysql.c:134: error: expected specifier-qualifier-list befor=
+e 'MYSQL'
+> ....
+>
+> I checked: these files are found in tmp/sysroots/armv7a-angstrom-linux-gn=
+ueabi/usr/include/mysql. There is not path for usr/include/mysql.
+>
+> Any suggestions to get this buildingo?
 
-On Fri, Sep 3, 2010 at 4:12 AM, Jean-Christophe PLAGNIOL-VILLARD <
-plagnioj@jcrosoft.com> wrote:
+patch redland to include <mysql/mysql.h> I am guessing right now it does
+include <mysql.h> or you could add the above path to -I list so compiler fi=
+nds
+this header
 
-> Hi,
 >
->        I'm currently working on the adding of a sub SH arch the st40
->
->        for this I've define the SOC_FAMILY as SOC_FAMILY="st40"
->
->        but now I want to apply some patch to gcc, binutils and others
->
->        via SRC_URI_append_st40 or SRC_URI_append_sh_st40
->
->        how can i do it?
->
-> Best Regards,
-> J.
+> Andreas
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -87,12 +109,4 @@ plagnioj@jcrosoft.com> wrote:
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
 
-
-
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
