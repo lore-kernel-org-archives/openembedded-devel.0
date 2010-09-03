@@ -1,36 +1,43 @@
-Received: from na3sys009aog106.obsmtp.com ([74.125.149.77])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <douglas.royds@taitradio.com>) id 1OrKzB-0002zd-LA
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <vwyodapink@gmail.com>) id 1OrLYu-0001cs-Kd
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Sep 2010 03:23:03 +0200
-Received: from source ([209.85.212.44]) by na3sys009aob106.postini.com
-	([74.125.148.12]) with SMTP
-	ID DSNKTIBNsRlg9snY/V42mWHRkcRv82RtPqCX@postini.com;
-	Thu, 02 Sep 2010 18:22:00 PDT
-Received: by mail-vw0-f44.google.com with SMTP id 10so930714vws.31
+	Fri, 03 Sep 2010 03:59:36 +0200
+Received: by eyb7 with SMTP id 7so805725eyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 02 Sep 2010 18:21:53 -0700 (PDT)
-Received: by 10.220.123.160 with SMTP id p32mr88400vcr.80.1283475520017;
-	Thu, 02 Sep 2010 17:58:40 -0700 (PDT)
-Received: from [172.25.116.150] ([202.37.96.126])
-	by mx.google.com with ESMTPS id m30sm735343vbr.9.2010.09.02.17.58.37
-	(version=SSLv3 cipher=RC4-MD5); Thu, 02 Sep 2010 17:58:38 -0700 (PDT)
-Message-ID: <4C804878.4060204@taitradio.com>
-Date: Fri, 03 Sep 2010 12:59:36 +1200
-From: Douglas Royds <douglas.royds@taitradio.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
+	Thu, 02 Sep 2010 18:58:55 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=FZVhn6+iuBzkRNAewF+t7OprZkijM5vQXh6GNztUE9U=;
+	b=jOM/5KTDrE2eNgBhzDnxdQ2M2c+SChocbPKrHXNg1G6Mttsn/o4zlhYW+vjKp5G7Tv
+	0mfcjMX6RK0jMA90ioV7FlDsEHY5nSzHjNiGfP6LVSjms8atUJiacrxkkfcXZvOPpyze
+	lATQTru/6ue7oCDVeIpQLvzVI3K/A7wp+PO/E=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=MJUlj2ys2ae/DT0pGyNL5OD6I4kiQCOUZ521TxCbb8RannqcINIAT9kCUx8BE4NQdJ
+	nuV12gTmbeXgDVme5PQubIsFCnCZXzHyAGiQOMC3Uyp0+nELLILh0T154P/X7ALj9TVJ
+	wyZJEX+gXLf4Ht8f9lxUNs6omIwjcbHNg3kZ4=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.216.87.18 with SMTP id x18mr44673wee.31.1283479134820; Thu, 02
+	Sep 2010 18:58:54 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Thu, 2 Sep 2010 18:58:54 -0700 (PDT)
+In-Reply-To: <4C804878.4060204@taitradio.com>
 References: <AANLkTimsOCL0xo1Y+KL6FdmXWRcXpNf=DN2PR14tmDz0@mail.gmail.com>
 	<AANLkTikBBUuSKeXh=k+G1ejHNSdMdab_ngijDiQu7POJ@mail.gmail.com>
-In-Reply-To: <AANLkTikBBUuSKeXh=k+G1ejHNSdMdab_ngijDiQu7POJ@mail.gmail.com>
-X-SA-Exim-Connect-IP: 74.125.149.77
-X-SA-Exim-Mail-From: douglas.royds@taitradio.com
+	<4C804878.4060204@taitradio.com>
+Date: Thu, 2 Sep 2010 18:58:54 -0700
+Message-ID: <AANLkTimSiMkabHG_VzXJBWfDxXZcgbzfTt46pbJ7ryWK@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-5.0 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: Does the OS make a difference?
@@ -47,47 +54,68 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2010 01:23:03 -0000
-X-List-Received-Date: Fri, 03 Sep 2010 01:23:03 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Sep 2010 01:59:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 03/09/10 05:19, J. L. wrote:
-> I would be interested to know as well I am building on 9.10 and seem
-> to get more errors than those building on 10.04 or 10.10 with 64 bit
+Do you know if doing a standard method of upgrading would be ok or
+should I start from a full clean install? Thanks
+
+
+
+On Thu, Sep 2, 2010 at 5:59 PM, Douglas Royds
+<douglas.royds@taitradio.com> wrote:
+> On 03/09/10 05:19, J. L. wrote:
+>>
+>> I would be interested to know as well I am building on 9.10 and seem
+>> to get more errors than those building on 10.04 or 10.10 with 64 bit
+>>
+>>
+>>
+>> On Thu, Sep 2, 2010 at 8:46 AM, AJ ONeal<coolaj86@gmail.com> =A0wrote:
+>>
+>>>
+>>> It would be worth it to upgrade from Ubuntu 8.10 to 10.04 if it really
+>>> makes
+>>> a difference... but it would take time and disrupt workflow and otherwi=
+se
+>>> provide little advantage.
+>>>
+>
+> As an aside, you should both be aware that neither 9.10 nor 8.10 are "LTS=
+"
+> (long-term support) Ubuntu releases. As such, Ubuntu are no longer
+> back-porting security fixes.
+>
+> I recommend that you both upgrade to 10.04 LTS. Ubuntu will support 10.04
+> for 3 years (ie. until April 2013).
+>
+> Douglas.
 >
 >
 >
-> On Thu, Sep 2, 2010 at 8:46 AM, AJ ONeal<coolaj86@gmail.com>  wrote:
->    
->> It would be worth it to upgrade from Ubuntu 8.10 to 10.04 if it really makes
->> a difference... but it would take time and disrupt workflow and otherwise
->> provide little advantage.
->>      
-
-As an aside, you should both be aware that neither 9.10 nor 8.10 are 
-"LTS" (long-term support) Ubuntu releases. As such, Ubuntu are no longer 
-back-porting security fixes.
-
-I recommend that you both upgrade to 10.04 LTS. Ubuntu will support 
-10.04 for 3 years (ie. until April 2013).
-
-Douglas.
-
-
-
-
-=======================================================================
-This email, including any attachments, is only for the intended
-addressee.  It is subject to copyright, is confidential and may be
-the subject of legal or other privilege, none of which is waived or
-lost by reason of this transmission.
-If the receiver is not the intended addressee, please accept our
-apologies, notify us by return, delete all copies and perform no
-other act on the email.
-Unfortunately, we cannot warrant that the email has not been
-altered or corrupted during transmission.
-=======================================================================
-
+>
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+> This email, including any attachments, is only for the intended
+> addressee. =A0It is subject to copyright, is confidential and may be
+> the subject of legal or other privilege, none of which is waived or
+> lost by reason of this transmission.
+> If the receiver is not the intended addressee, please accept our
+> apologies, notify us by return, delete all copies and perform no
+> other act on the email.
+> Unfortunately, we cannot warrant that the email has not been
+> altered or corrupted during transmission.
+> =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
