@@ -1,36 +1,44 @@
-Received: from 29.mail-out.ovh.net ([87.98.216.213])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <plagnioj@jcrosoft.com>) id 1OrUJM-0001Js-SJ
+Received: from mail-bw0-f47.google.com ([209.85.214.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <michael.lippautz@gmail.com>) id 1OrX1Y-0004ZO-PR
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Sep 2010 13:20:13 +0200
-Received: (qmail 12931 invoked by uid 503); 3 Sep 2010 11:22:01 -0000
-Received: from b6.ovh.net (HELO mail645.ha.ovh.net) (213.186.33.56)
-	by 29.mail-out.ovh.net with SMTP; 3 Sep 2010 11:22:00 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 3 Sep 2010 13:13:29 +0200
-Received: from ns32433.ovh.net (HELO localhost)
-	(plagnioj%jcrosoft.com@213.251.161.87)
-	by ns0.ovh.net with SMTP; 3 Sep 2010 13:13:28 +0200
-Date: Fri, 3 Sep 2010 13:12:10 +0200
-From: Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
+	Fri, 03 Sep 2010 16:13:51 +0200
+Received: by bwz12 with SMTP id 12so1769485bwz.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 03 Sep 2010 07:13:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=IM4KGwZcRc4WjuuRTyex+ejCPnBqzLtbGNJWur78Zh0=;
+	b=Oy6yVWQtCjS4L1ptV6Hj4QyuRjtircFQI0cMzBpIBjM6GKDq89yLlDLsCvRuR3mMZq
+	ljYbxkQeZGdWHLzy8AS+Bqo3reuMTQM/chlmdpJUr5OyV55uPW0yzdk9vgMjMbt6S++R
+	x03c32V9i31mKy3yHLbFdkahaWk/vut47yFAI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=sYk6rV+ePAkwMk3bUZtTpXskw3nHzVNLxl6HEQZok8XXZO20hCY1TioggZ87+/nrBl
+	i76cEW6hfWn6Q3PsRiEFgPk1zsQ3cMrnAICUPcWDgT+Es2cUas/S6fFJUwnSSCaIwfTQ
+	5WqK7HK9rNNaobxIRKAPYEuWnSaaziJUwZTJo=
+Received: by 10.204.47.38 with SMTP id l38mr514585bkf.154.1283523193825;
+	Fri, 03 Sep 2010 07:13:13 -0700 (PDT)
+Received: from localhost.localdomain (85-127-150-21.dynamic.xdsl-line.inode.at
+	[85.127.150.21])
+	by mx.google.com with ESMTPS id 11sm1500207bkj.23.2010.09.03.07.13.10
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 03 Sep 2010 07:13:10 -0700 (PDT)
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100903111210.GA17702@game.jcrosoft.org>
-MIME-Version: 1.0
-X-PGP-Key: http://uboot.jcrosoft.org/plagnioj.asc
-X-PGP-key-fingerprint: 6309 2BBA 16C8 3A07 1772 CC24 DEFC FFA3 279C CE7C
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Ovh-Tracer-Id: 15589210110826949449
-X-Ovh-Remote: 213.251.161.87 (ns32433.ovh.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 87.98.216.213
-X-SA-Exim-Mail-From: plagnioj@jcrosoft.com
+Date: Fri,  3 Sep 2010 16:14:44 +0200
+Message-Id: <1283523286-30999-1-git-send-email-michael.lippautz@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.214.47
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.2 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: How to extend SRC_URI_append?
+Subject: [PATCHES] Unbreak igep0020
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,23 +52,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2010 11:20:50 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Fri, 03 Sep 2010 14:13:54 -0000
 
-Hi,
+These patches should unbreak the igep0020 (igepv2) machine.
 
-	I'm currently working on the adding of a sub SH arch the st40
+* x-load is required since e2b9225af36b2979b255634f79ceecea482601a7.
+* u-boot-2009.08 has been unbuildable with recent gcc.
 
-	for this I've define the SOC_FAMILY as SOC_FAMILY="st40"
+Since I am not the maintainer of the machine/x-load/u-boot, ACKs or 
+comments are needed.
 
-	but now I want to apply some patch to gcc, binutils and others
-
-	via SRC_URI_append_st40 or SRC_URI_append_sh_st40
-
-	how can i do it?
-
-Best Regards,
-J.
 
 
