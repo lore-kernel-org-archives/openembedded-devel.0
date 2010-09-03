@@ -1,43 +1,30 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1OrRls-00060Y-1b
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OrS7P-0005Gt-G8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Sep 2010 10:37:18 +0200
-Received: by wwi14 with SMTP id 14so38600wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Sep 2010 01:36:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=V+1j1kKw6zkjqNnihoiiag906gaa1VN+ek2q4E0Gdvc=;
-	b=c/uis+bEaroE/2q7phoddEJjCKKpK/DXO7kpoyUXkv1UZeIOVo05GhKz+UX7/1JHTY
-	Lk0zgQGOkmOWkAdszKop9A8HQ6vlq18BPRzVAeUAfliPnw0iiNChDCGnCxy6J5sRbYNn
-	PKkD4z1ilYVR1hhL3hJB5iCeFYaSFIJI4jBCo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=fiVoDxMNe80GI9uK8Kye8r28ycGaLhNRqAfheSveL/aApaJbn/O4o17LffjAUjtglh
-	Ie29llbubU3pOAQ9AUJIyl74MX+WRTqu0XEoJo7S7uayfPDgDgK+0NqB+6tl4EC2cZov
-	r8xbkoeqr7JTk8EFaOsferYTVGXkdxgdltiPA=
-MIME-Version: 1.0
-Received: by 10.227.133.139 with SMTP id f11mr344035wbt.132.1283502989968;
-	Fri, 03 Sep 2010 01:36:29 -0700 (PDT)
-Received: by 10.227.142.79 with HTTP; Fri, 3 Sep 2010 01:36:29 -0700 (PDT)
-In-Reply-To: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
-References: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
-Date: Fri, 3 Sep 2010 10:36:29 +0200
-Message-ID: <AANLkTim_3ROst4tmPrxJhxDwi+9K4mprMSAbq0g4sqRB@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
+	Fri, 03 Sep 2010 11:00:22 +0200
+Received: (qmail invoked by alias); 03 Sep 2010 08:58:55 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp005) with SMTP; 03 Sep 2010 10:58:55 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/RSnMjOtbRAuB11VvAlhDGZt8vrCkdvpUd9CFMAt
+	/df2+NCzmbLCvQ
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+Date: Fri, 3 Sep 2010 10:46:30 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+MIME-Version: 1.0
+Message-Id: <201009031046.30672.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: git issues
+Subject: linux-omap-psp_2.6.32.bb fails at do_compileconfigs
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +38,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2010 08:37:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 03 Sep 2010 09:00:47 -0000
+X-List-Received-Date: Fri, 03 Sep 2010 09:00:47 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Hello,
+I have
 
-On Thu, Sep 2, 2010 at 2:59 PM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
->
-> git clone git://git.openembedded.net/openembedded openembedded
-> Initialized empty Git repository in
-> /home/frans/workspace/Linux/openembedded-test/openembedded/.git/
-> fatal: The remote end hung up unexpectedly
-> make: *** [all] Error 128
->
-> Also I notice that the transfer rate is about 100-120 KB/s
-> I seem to recall Leon also reported something like this with irc.
->
-Yup, OE GIT is unreliable (or overloaded) the last week or so.
+* pulled last night 261676fed0818a60a6f5b4dc781235cc6c49ba86
+* deleted tmp dir for fresh build
+* tried baking single packages (round the clutter stuff I posted)
 
-Who of the admins can have a look at this?
+Now I get
 
-Regards,
--- 
-Leon
+ERROR: TaskFailed event exception, aborting
+ERROR: Build of /home/Superandi/OpenEmbedded/gumstix-oe/recipes/linux/linux-omap-psp_2.6.32.bb do_compileconfigs failed
+ERROR: Function do_compileconfigs failed
+NOTE: Task failed: ('function do_compileconfigs 
+failed', '/home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r88+gitra6bad4464f985fdd3bed72e1b82dcbfc004d7869/temp/log.do_compileconfigs.12972')
+ERROR: Logfile of failure stored 
+in: /home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r88+gitra6bad4464f985fdd3bed72e1b82dcbfc004d7869/temp/log.do_compileconfigs.12972
+Log data follows:
+| Multiple configs found, building those first
+| cp: cannot stat `/home/Superandi/OpenEmbedded/tmp/work/overo-angstrom-linux-gnueabi/linux-omap-psp-2.6.32-r88+gitra6bad4464f985fdd3bed72e1b82dcbfc004d7869/configs/*': No such 
+file or directory
+| ERROR: Function do_compileconfigs failed
+NOTE: package linux-omap-psp-2.6.32-r88+gitra6bad4464f985fdd3bed72e1b82dcbfc004d7869: task do_compileconfigs: Failed
+
+My last fresh build was based on 
+
+7ec84b10a33241350d53efe50b7ca31bdecb2204
+Date:   Mon Aug 30 14:51:47 2010 -040
+
+I checked for changes within recipes/linux for changes during the time perioud and found nothing helpful for this issue.
+
+But I found several commits at base.bbclass. Is it possible that these are related to the problem?
+
+Andreas  
 
 
