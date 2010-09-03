@@ -1,30 +1,36 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+Received: from 29.mail-out.ovh.net ([87.98.216.213])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OrTbZ-00069q-Hf
+	(envelope-from <plagnioj@jcrosoft.com>) id 1OrUJM-0001Js-SJ
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Sep 2010 12:34:46 +0200
-Received: (qmail invoked by alias); 03 Sep 2010 10:34:09 -0000
-Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
-	by mail.gmx.net (mp060) with SMTP; 03 Sep 2010 12:34:09 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19PsahnNNZP+Ut/SafLI9tKD+e3EQ0sMX8zHnN0H9
-	EfWweuJdmtsq4s
-From: Andreas Mueller <schnitzeltony@gmx.de>
+	Fri, 03 Sep 2010 13:20:13 +0200
+Received: (qmail 12931 invoked by uid 503); 3 Sep 2010 11:22:01 -0000
+Received: from b6.ovh.net (HELO mail645.ha.ovh.net) (213.186.33.56)
+	by 29.mail-out.ovh.net with SMTP; 3 Sep 2010 11:22:00 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 3 Sep 2010 13:13:29 +0200
+Received: from ns32433.ovh.net (HELO localhost)
+	(plagnioj%jcrosoft.com@213.251.161.87)
+	by ns0.ovh.net with SMTP; 3 Sep 2010 13:13:28 +0200
+Date: Fri, 3 Sep 2010 13:12:10 +0200
+From: Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 3 Sep 2010 12:21:42 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+Message-ID: <20100903111210.GA17702@game.jcrosoft.org>
 MIME-Version: 1.0
-Message-Id: <201009031221.42662.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+X-PGP-Key: http://uboot.jcrosoft.org/plagnioj.asc
+X-PGP-key-fingerprint: 6309 2BBA 16C8 3A07 1772 CC24 DEFC FFA3 279C CE7C
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Ovh-Tracer-Id: 15589210110826949449
+X-Ovh-Remote: 213.251.161.87 (ns32433.ovh.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 87.98.216.213
+X-SA-Exim-Mail-From: plagnioj@jcrosoft.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: redland build fails
+Subject: How to extend SRC_URI_append?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,49 +44,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2010 10:34:47 -0000
+X-List-Received-Date: Fri, 03 Sep 2010 11:20:50 -0000
+Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
 
-On building redland I get
+Hi,
 
-| /bin/sh ../arm-angstrom-linux-gnueabi-libtool --tag=3DCC   --mode=3Dcompi=
-le=20
-arm-angstrom-linux-gnueabi-gcc -march=3Darmv7-a -mtune=3Dcortex-a8 -mfpu=3D=
-neon -mfloat-abi=3Dsoftfp -mthumb-interwork -mno-thumb -DHAVE_CONFIG_H -I. =
- -I../rasqal/src -I../raptor/src  -isystem/home/Superandi/OpenEmbedded/tmp/=
-sysroots/armv7a-angstrom-linux-gnueabi/usr/include -I/home/Superandi/OpenEm=
-bedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/include -I/home/Super=
-andi/OpenEmbedded/tmp/sysroots/i686-linux/usr/armv7a/include -isystem/home/=
-Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/inclu=
-de -fexpensive-optimizations -frename-registers -fomit-frame-pointer -ggdb3=
- -DPKGDATADIR=3D"\"/usr/share/redland\""  -I../rasqal/src -I../raptor/src  =
-=2Disystem/home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-g=
-nueabi/usr/include -I/home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angst=
-rom-linux-gnueabi/usr/include -I/home/Superandi/OpenEmbedded/tmp/sysroots/i=
-686-linux/usr/armv7a/include -isystem/home/Superandi/OpenEmbedded/tmp/sysro=
-ots/armv7a-angstrom-linux-gnueabi/usr/include -fexpensive-optimizations -fr=
-ename-registers -fomit-frame-pointer -ggdb3   -DLIBRDF_INTERNAL=3D1 -isyste=
-m/home/Superandi/OpenEmbedded/tmp/sysroots/armv7a-angstrom-linux-gnueabi/us=
-r/include -fexpensive-optimizations -frename-registers -fomit-frame-pointer=
- -O2 -ggdb3 -MT=20
-rdf_storage_mysql.lo -MD -MP -MF .deps/rdf_storage_mysql.Tpo -c -o rdf_stor=
-age_mysql.lo rdf_storage_mysql.c
-=2E.
-| rdf_storage_mysql.c:49:19: error: mysql.h: No such file or directory
-| rdf_storage_mysql.c:50:26: error: mysqld_error.h: No such file or directo=
-ry
-| rdf_storage_mysql.c:134: error: expected specifier-qualifier-list before =
-'MYSQL'
-=2E...
+	I'm currently working on the adding of a sub SH arch the st40
 
-I checked: these files are found in tmp/sysroots/armv7a-angstrom-linux-gnue=
-abi/usr/include/mysql. There is not path for usr/include/mysql.
+	for this I've define the SOC_FAMILY as SOC_FAMILY="st40"
 
-Any suggestions to get this buildingo?
+	but now I want to apply some patch to gcc, binutils and others
 
-Andreas
+	via SRC_URI_append_st40 or SRC_URI_append_sh_st40
+
+	how can i do it?
+
+Best Regards,
+J.
 
 
