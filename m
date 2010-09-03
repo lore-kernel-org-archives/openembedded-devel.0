@@ -1,39 +1,43 @@
-Received: from li19-45.members.linode.com ([64.22.125.45] helo=wiki.koala.it)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <koansoftware@gmail.com>) id 1OrR8n-0001XI-90
+	(envelope-from <leon.woestenberg@gmail.com>) id 1OrRls-00060Y-1b
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 03 Sep 2010 09:56:55 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by wiki.koala.it (Postfix) with ESMTP id A23042C839
+	Fri, 03 Sep 2010 10:37:18 +0200
+Received: by wwi14 with SMTP id 14so38600wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Sep 2010 07:50:18 +0000 (UTC)
-Received: from wiki.koala.it ([127.0.0.1])
-	by localhost (wiki.koala.it [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id yMPnoJRNRTcL
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Sep 2010 07:50:14 +0000 (UTC)
-Received: from [192.168.0.5] (host56-7-static.30-87-b.business.telecomitalia.it
-	[87.30.7.56]) by wiki.koala.it (Postfix) with ESMTPSA id 15ADE2C824
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri,  3 Sep 2010 07:50:13 +0000 (UTC)
-Message-ID: <4C80AA1B.7080406@gmail.com>
-Date: Fri, 03 Sep 2010 09:56:11 +0200
-From: Marco Cavallini <koansoftware@gmail.com>
-Organization: Marco Cavallini - Bergamo - Italia
-User-Agent: Thunderbird 2.0.0.24 (X11/20100317)
+	Fri, 03 Sep 2010 01:36:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=V+1j1kKw6zkjqNnihoiiag906gaa1VN+ek2q4E0Gdvc=;
+	b=c/uis+bEaroE/2q7phoddEJjCKKpK/DXO7kpoyUXkv1UZeIOVo05GhKz+UX7/1JHTY
+	Lk0zgQGOkmOWkAdszKop9A8HQ6vlq18BPRzVAeUAfliPnw0iiNChDCGnCxy6J5sRbYNn
+	PKkD4z1ilYVR1hhL3hJB5iCeFYaSFIJI4jBCo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=fiVoDxMNe80GI9uK8Kye8r28ycGaLhNRqAfheSveL/aApaJbn/O4o17LffjAUjtglh
+	Ie29llbubU3pOAQ9AUJIyl74MX+WRTqu0XEoJo7S7uayfPDgDgK+0NqB+6tl4EC2cZov
+	r8xbkoeqr7JTk8EFaOsferYTVGXkdxgdltiPA=
 MIME-Version: 1.0
+Received: by 10.227.133.139 with SMTP id f11mr344035wbt.132.1283502989968;
+	Fri, 03 Sep 2010 01:36:29 -0700 (PDT)
+Received: by 10.227.142.79 with HTTP; Fri, 3 Sep 2010 01:36:29 -0700 (PDT)
+In-Reply-To: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
+References: <AANLkTinhxdSG3M3ddEa6Bgtbkp4Pg8H5MSxkUAgWGZUk@mail.gmail.com>
+Date: Fri, 3 Sep 2010 10:36:29 +0200
+Message-ID: <AANLkTim_3ROst4tmPrxJhxDwi+9K4mprMSAbq0g4sqRB@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C7FCA85.8050807@gmail.com> <4C7FCEBD.6050407@kernelconcepts.de>
-In-Reply-To: <4C7FCEBD.6050407@kernelconcepts.de>
-X-SA-Exim-Connect-IP: 64.22.125.45
-X-SA-Exim-Mail-From: koansoftware@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.9 required=5.0 tests=AWL,BAYES_00,SPF_NEUTRAL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: minimal-image doesn't boot
+Subject: Re: git issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,40 +51,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 03 Sep 2010 07:56:55 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 03 Sep 2010 08:37:18 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Florian Boor ha scritto, Il 02/09/2010 18:20:
-> Hi Marco,
-> 
-> Marco Cavallini schrieb:
->> I have been trying to run a minimal-image on an ARM system, because I
->> plan to use it on a 16MB NOR Flash.
->>
->> I started wirh a PXA270 based board but I faced to puzzling jffs2
->> errors, then I tried on a more reliable machine (for me) Ronetix-pm9263
->> with same results.
->>
->> Does anybody tested minimal-image recently?
->> Did it work?
->> With which machine?
->>
->> Any hint will be greatly appreciated.
-> 
-> this looks like either the jffs2 image are completely messed up (not very
-> likely) or something went wrong while flashing. Do the bootloader agree with the
-> kernels about the partition layout and was the root flash partition erased
-> completely?
-> 
-> I do not have a Ronetix board around which would be useful to verify but I could
-> try it with the SimOne I have - I built a minimal image for it recently but
-> didn't test it so far.
+Hello,
 
-Dear Florian,
-a complete root flash partition clean solved the problem
-Thank you
+On Thu, Sep 2, 2010 at 2:59 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+>
+> git clone git://git.openembedded.net/openembedded openembedded
+> Initialized empty Git repository in
+> /home/frans/workspace/Linux/openembedded-test/openembedded/.git/
+> fatal: The remote end hung up unexpectedly
+> make: *** [all] Error 128
+>
+> Also I notice that the transfer rate is about 100-120 KB/s
+> I seem to recall Leon also reported something like this with irc.
+>
+Yup, OE GIT is unreliable (or overloaded) the last week or so.
 
-/marco
+Who of the admins can have a look at this?
+
+Regards,
+-- 
+Leon
 
 
