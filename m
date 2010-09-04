@@ -1,32 +1,33 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OrnPw-00010z-EC
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OrnRj-00017D-PH
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Sep 2010 09:44:07 +0200
-Received: by iwn2 with SMTP id 2so2216055iwn.6
+	Sat, 04 Sep 2010 09:45:57 +0200
+Received: by iwn2 with SMTP id 2so2217019iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Sep 2010 00:43:27 -0700 (PDT)
+	Sat, 04 Sep 2010 00:45:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=q0xncpYQGQM0YQQt9I5VAS90+2XaBiY3Rug6QbOou5I=;
-	b=NJ9pP2uAcUibHsxiTqiXzow+ylwyIGhG869PHWarIa6fzCYAgAREUJxYmfo82ERqkr
-	PhVxLtNLNISRozIO7Mtw4rWr2kl8pjPjZoeKzYTrE3H9ixKBwVpOQ2r6CPrJsWdR9OeV
-	lvf2IIO6dnqoKcU96ovROoN/Zy+CL1U1uwiQw=
+	bh=Sd1wqEsRogWaDh1lo+jgzilkkMvwXaOQT4kNECUyboA=;
+	b=b1W6SMKwBAbbIhMbKo+dTjv+EpaARA7AtKtZX2oedpV5fr91iZAk8lHVn/O/KOdwxS
+	1GDT5YUdzjWirl4ZcCKV1f7JyxTPsfzEspxm+FujhO/34tx6WvnNH+bHZbsN6ND9AW4r
+	J2fBQpKOkGiJF97zySaHQN01ZeI3oEeUh2lHU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=H5b399jkoERTAcg7tIkCCBkg9LmMXrtPerjNcJbCxN+12kucdvb6UUze65qDRb1J88
-	i5TP6di8CrM7kS84g6qxkccQm90kWlQx9umi8AnvJxHUOFxTzB/XI99UHuvLgCX5O8AG
-	9D4vWzEgioHwwEJMEoke8YxaMv/fQFbMY1kTY=
+	b=d2aXfeFBoKr1MXuAWBkemrPCMXoaZQt/Yr+JWhJapziRs1r4p28JMzuNQNCm2E3Yk6
+	Hl263TGSFFY4HKlDvtyRJ7Ix5lCvmLnEs5DmSoioF7NziTpDePJoKpR94i5XYNabYI2u
+	JqvUrqNSAsOkJpW1lSwSSGMCAO+1JLrmklSpo=
 MIME-Version: 1.0
-Received: by 10.231.14.69 with SMTP id f5mr2264103iba.116.1283586206912; Sat,
-	04 Sep 2010 00:43:26 -0700 (PDT)
-Received: by 10.231.205.138 with HTTP; Sat, 4 Sep 2010 00:43:26 -0700 (PDT)
-In-Reply-To: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
-References: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
-Date: Sat, 4 Sep 2010 09:43:26 +0200
-Message-ID: <AANLkTi=jLFN8N+R7wh27ZE1hqoktiibGhO1-LuS-KOZy@mail.gmail.com>
+Received: by 10.231.32.140 with SMTP id c12mr2332202ibd.90.1283586320403; Sat,
+	04 Sep 2010 00:45:20 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Sat, 4 Sep 2010 00:45:20 -0700 (PDT)
+In-Reply-To: <1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
+References: <20100903111210.GA17702@game.jcrosoft.org>
+	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
+Date: Sat, 4 Sep 2010 09:45:20 +0200
+Message-ID: <AANLkTim57opnM=fn47pQ-GeNsNbSyydHd3TKSWhdD5z5@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -37,7 +38,7 @@ X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE donations
+Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make it global
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,29 +52,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Sep 2010 07:44:07 -0000
+X-List-Received-Date: Sat, 04 Sep 2010 07:45:57 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/9/3 Cliff Brake <cliff.brake@gmail.com>:
-
+2010/9/4 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>:
+> add global OVERRIDES ${TARGET_SOC_FAMILY} and ${TARGET_ARCH}_${TARGET_SOC_FAMILY}
 >
-> Our immediate financial need is to upgrade storage on our server hardware:
->
-> 4 new 1.5TB drives. Approx $1k
 
-Maybe before we spent 1k on disks:
-
-How much diskspace do we have now?
-How much of it is used?
-And what stored is on it?
-And why is this massive amount of storage (4.5 TB assuming they are in
-RAID5) needed?
-
-I feel 1k is a big amount for a small e.V. like ours, and before
-deciding on the spending of it we should probably first discuss the
-issue and evaluate other options.
-E.g. maybe we can find a sponsor to donate some space and bandwidth on
-their server.
+What is the rationale for this?
+And why not fix the problem there is in base.bbclass as well.
 
 Frans.
 
