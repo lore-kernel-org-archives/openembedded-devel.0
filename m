@@ -1,45 +1,45 @@
-Received: from mail-qy0-f182.google.com ([209.85.216.182])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <michael.lippautz@gmail.com>) id 1Orncn-0001MS-Fu
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OrnzL-0008HA-0o
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Sep 2010 09:57:23 +0200
-Received: by qyk4 with SMTP id 4so2894496qyk.6
+	Sat, 04 Sep 2010 10:20:40 +0200
+Received: by iwn2 with SMTP id 2so2236838iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Sep 2010 00:56:43 -0700 (PDT)
+	Sat, 04 Sep 2010 01:20:03 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type;
-	bh=VRyIGInaGu2LiuUNRmhF5YLJ1GiuFEIeT5MOvDWtfHk=;
-	b=gUPTjDMEzhjW54ol81GvpPA4ExisvL0HSejz8HW0dv0LCMuXKwizCNIY9Rv0iRamIa
-	b6k6Ne6IczxbEXs4jxRFcdfYVTgPwcc8+xf4tdho/X7Cn4h9/kZLeWvXcieSt1cO9w9N
-	rqm26la20O3ugzwiI5+lBGn7O+/axcOXn8ywg=
+	bh=CwvEB7ZDjUNZU2SWIzG0Csa/qHN5IzmJ2v+rPp+9BOA=;
+	b=VQcAQniEcwOvjbVXlyb/BGxHn9ow1OB2El1y4zqbqF9iDfCc0Apy7cqrKuBOPyOrjs
+	4E1A16hiXtS2rnwdnU5gi5nUJATo6HakSRjQ9bMnOhMbaW7E70/UJ474fxX3r4mlGDmO
+	kmLT2ys35YCHAp0egVV7ZMOkURgyPF/0y3e/8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type;
-	b=eOMJrwqTGDEFZuKIfIoDqvsXw5VzvaAMFtZxyQXaq12RJGrYcWneqwlHJDAV/j6BSn
-	XdaKJVltrILm8tM1KSx3fKtTPOR5UdMxpgASQKhzA2sIYjVCQpx8QN3qYfCHQRJuQSp2
-	FbXe67pRE6SWOKNpZWPg4NLlGmAH22IjUYUSQ=
+	b=PhkFwYXy/tznqFQnLA2UO91fvBwW/n3cvT/v/gHAvFQCghYSzSasMTdwmAtwNRIlV3
+	c0/A+dYb+BfhZSI/h3M1kVQmbytbwDNFr3AoAzPw+Ch8SZ7xYoJdD1IAwIipgqpzqH+h
+	nsaCxBRDMjY+z6REawg2D5QtmcUxJ/YkNqVfI=
 MIME-Version: 1.0
-Received: by 10.229.52.26 with SMTP id f26mr1080135qcg.244.1283587002846; Sat,
-	04 Sep 2010 00:56:42 -0700 (PDT)
-Received: by 10.229.49.205 with HTTP; Sat, 4 Sep 2010 00:56:42 -0700 (PDT)
-In-Reply-To: <AANLkTin9pQfGPRHfp5kro__vknb_Wn+Qb-Zh9Hfn-vSH@mail.gmail.com>
-References: <1283523286-30999-1-git-send-email-michael.lippautz@gmail.com>
-	<1283523286-30999-2-git-send-email-michael.lippautz@gmail.com>
-	<AANLkTin9pQfGPRHfp5kro__vknb_Wn+Qb-Zh9Hfn-vSH@mail.gmail.com>
-Date: Sat, 4 Sep 2010 09:56:42 +0200
-Message-ID: <AANLkTimmcz6jgqVnQmA21OAdUPCu4TqeCPO20hVSd-BQ@mail.gmail.com>
-From: Michael Lippautz <michael.lippautz@gmail.com>
+Received: by 10.231.30.75 with SMTP id t11mr2365511ibc.27.1283588403424; Sat,
+	04 Sep 2010 01:20:03 -0700 (PDT)
+Received: by 10.231.205.138 with HTTP; Sat, 4 Sep 2010 01:20:03 -0700 (PDT)
+In-Reply-To: <AANLkTim57opnM=fn47pQ-GeNsNbSyydHd3TKSWhdD5z5@mail.gmail.com>
+References: <20100903111210.GA17702@game.jcrosoft.org>
+	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
+	<AANLkTim57opnM=fn47pQ-GeNsNbSyydHd3TKSWhdD5z5@mail.gmail.com>
+Date: Sat, 4 Sep 2010 10:20:03 +0200
+Message-ID: <AANLkTikyFRQskds_P9AH+=_km46KEf1cPm-Vq1+MhdhC@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.182
-X-SA-Exim-Mail-From: michael.lippautz@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] x-load/igep0020.conf: Unbreak x-load for igep0020 machine.
+Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make it global
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,19 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Sep 2010 07:57:23 -0000
+X-List-Received-Date: Sat, 04 Sep 2010 08:20:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/9/3 Khem Raj <raj.khem@gmail.com>:
+2010/9/4 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> 2010/9/4 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>:
+>> add global OVERRIDES ${TARGET_SOC_FAMILY} and ${TARGET_ARCH}_${TARGET_SOC_FAMILY}
+>>
 >
-> looks ok but why is it needed to remove ldflags
+> What is the rationale for this?
+> And why not fix the problem there is in base.bbclass as well.
 >
+> Frans.
+>
+Forgot about this, but a variable should go with documentation.
+This already has been raised with the orginal patch, but was ignored
+by the submitters.
 
-LDFLAGS have been wrapped with -Wl,... arguments to allow passing into gcc.
+Consider this a NAK.
 
-Unfortunatelly ld fails when passing the flags to it. Can I access the raw flags
-somehow. (ld can produce an link the x-load without LDFLAGS though).
-
-Michael
+Frans
 
 
