@@ -1,48 +1,48 @@
 Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Orjj6-0002ci-55
+	(envelope-from <vwyodapink@gmail.com>) id 1Ork9Z-0003VM-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Sep 2010 05:47:37 +0200
-Received: by wye20 with SMTP id 20so2429243wye.6
+	Sat, 04 Sep 2010 06:14:59 +0200
+Received: by wye20 with SMTP id 20so2448289wye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 03 Sep 2010 20:46:59 -0700 (PDT)
+	Fri, 03 Sep 2010 21:14:20 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=JmBr7mxUYnjclgvAnYdqy5wj8p7TWRGRYoDWwvKWyCc=;
-	b=wWv5MpUQCUXY2p2MebQyTXcFN/Ugc3hPqcuHMs8PHBmzNS3j6BueQMdw2sKUH8+bWf
-	DjKmHOmgB5vDwKzF7Xm5e3dJJiHxRC0cEACKdMbcOeHmoxVYduaLFzkIW1DwyYC/c3pd
-	EzPHszEMKQiu5VGgtyDozcFfY5BJzLuuwf5zs=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=v1pBGhJVPhoxyQnKUZ+cQeWKn83tSWJOaPMmO78tRW0=;
+	b=OEZ3OFsy/762lNjlql7TUyoObR7XZaqByYbFXavkHl8znrJh3CXlF4gjgS1gVkhrSY
+	FfCZi8smXEnQSnYOc8BXtVXdZ+KpwAK53vcnSawkMjcvebX+R2gsmlcnZ0F19tLakIiJ
+	1KOLP6vo8PCpD7QLmQK61JQzQR1KEi7jlW5Hc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=NCbopAkBKtEIqxlvVpJCFauYbrzv/LA/HIzsEvC2LQOfx6oxmGPFE27S0L4ZUwiTFn
-	AiknLlkpkhKvKcx/9KTjHO3xJlmV/KMHFsQgWg9ATDUQ24mbtnG1W8yun04PWxe/a62O
-	J/nAzjeUTUuTlUQp8vKnBdhr1P52jtmw4PRcg=
-Received: by 10.216.233.234 with SMTP id p84mr1444200weq.38.1283572019230;
-	Fri, 03 Sep 2010 20:46:59 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=H40XgzK9xM6D4MkdF8ybUhut9YipIxJ1S0nx62jXp8B5+gxVIxgDIuSqDjbf/yhy6e
+	3Aclc6WvOSq/Wa/H+Wm2mPR/tGXd5OedaDvrbHAjPypv5oAAw3IqxjhdcPhKZqn1w4uo
+	O3NZk+ETfcJc+7DAoah1yiEcH8Eu7pXUJbH9M=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Fri, 3 Sep 2010 20:46:39 -0700 (PDT)
-In-Reply-To: <20100812223234.GA7917@merkur.sol.de>
-References: <AANLkTim_ukfazSeQbS5H_f=ouSzf1QUbJL3PvLivP9+O@mail.gmail.com>
-	<20100812223234.GA7917@merkur.sol.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Fri, 3 Sep 2010 20:46:39 -0700
-X-Google-Sender-Auth: 5QG5QJW9VvALNuZJa881VpWg2Xc
-Message-ID: <AANLkTi=B4WQ+LWOHFS1tWFfb32S+x4Ebm46EdP4VG+ea@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.216.85.133 with SMTP id u5mr1427904wee.82.1283573648662; Fri,
+	03 Sep 2010 21:14:08 -0700 (PDT)
+Received: by 10.216.179.76 with HTTP; Fri, 3 Sep 2010 21:14:08 -0700 (PDT)
+In-Reply-To: <AANLkTinWnzzdtZ+zmX7VtZDKAfLsyf0xbhnyS6KvSqQE@mail.gmail.com>
+References: <AANLkTimq+M2qtGzz1keuPBXFfYi-Qw9fPz2v4XXCd0JT@mail.gmail.com>
+	<4C7DAEDA.1090904@alexthegeek.com>
+	<AANLkTinWnzzdtZ+zmX7VtZDKAfLsyf0xbhnyS6KvSqQE@mail.gmail.com>
+Date: Fri, 3 Sep 2010 21:14:08 -0700
+Message-ID: <AANLkTin3okevekurJ3AbBJ-zCQHmKcQXRRWqY_1EXcJq@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: "General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>, 
+	openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: autotools issues (MKINSTALLDIRS, -s_
+Subject: Re: [Gumstix-users] Boost 1.41 seems to have build issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,68 +56,294 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Sep 2010 03:47:37 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sat, 04 Sep 2010 04:15:00 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I noticed a long time ago that a certain error from the autoreconf is a sign
-that your po/ makefiles are from old gettext, and will end up seeing the
-mkinstalldirs failure.  See http://patchwork.openembedded.org/patch/1004/.
-Haven't had a chance to do any further investigation on it since then,
-however.
+On Thu, Sep 2, 2010 at 12:00 AM, J. L. <vwyodapink@gmail.com> wrote:
+> Now the closer my image gets to being built since bumping this package
+> to 1.41 its seems to me roughly half the programs and dependencies
+> build with one or both of these notes in them "NOTE: Couldn't find
+> shared library provider for libstdc++.so.6
+> NOTE: Couldn't find shared library provider for libgcc_s.so.1" as it
+> did with this package. just wanted to post my other observations on
+> this as well..
+>
+>
+> On Tue, Aug 31, 2010 at 6:39 PM, Alex Gibson <alxx@alexthegeek.com> wrote=
+:
+>>
+>> Getting exactly the same messages
+>>
+>> Alex
+>>
+>>
+>> On 1/09/2010 5:27 AM, J. L. wrote:
+>>> When I bummed boost to the 1.41 version I noticed during building it
+>>> did not build in the normal manner and displayed a bunch of warning
+>>> though did not fail to build. Seems like it should not have so many
+>>> errors or inability to find libraries. Could be my inexperience
+>>> talking. Hope someone can explain why this isnt bad if it isnt but to
+>>> me an error is an error, and would cause other issues once used on the
+>>> image possibly. This is not the full message just a clip of it:
+>>>
+>>> NOTE: =A0 /usr/lib/Boost.cmake
+>>> NOTE: =A0 /usr/share/boost-1.41.0/cmake/BoostConfig.cmake
+>>> NOTE: =A0 /usr/share/boost-1.41.0/cmake/BoostConfigVersion.cmake
+>>> NOTE: Multiple libraries (libboost_date_time-mt-d.so.1.41.0,
+>>> libboost_date_time-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_filesystem-mt.so.1.41.0,
+>>> libboost_filesystem-mt-d.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_graph-mt.so.1.41.0,
+>>> libboost_graph-mt-d.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_iostreams-mt-d.so.1.41.0,
+>>> libboost_iostreams-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_program_options-mt.so.1.41.0,
+>>> libboost_program_options-mt-d.so.1.41.0) found and LEAD_SONAME not
+>>> defined
+>>> NOTE: Multiple libraries (libboost_python-mt-d.so.1.41.0,
+>>> libboost_python-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_regex-mt-d.so.1.41.0,
+>>> libboost_regex-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_wserialization-mt-d.so.1.41.0,
+>>> libboost_serialization-mt-d.so.1.41.0,
+>>> libboost_wserialization-mt.so.1.41.0,
+>>> libboost_serialization-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_signals-mt-d.so.1.41.0,
+>>> libboost_signals-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_system-mt-d.so.1.41.0,
+>>> libboost_system-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_unit_test_framework-mt-d.so.1.41.0,
+>>> libboost_unit_test_framework-mt.so.1.41.0) found and LEAD_SONAME not
+>>> defined
+>>> NOTE: Multiple libraries (libboost_thread-mt.so.1.41.0,
+>>> libboost_thread-mt-d.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Multiple libraries (libboost_prg_exec_monitor-mt-d.so.1.41.0,
+>>> libboost_wave-mt-d.so.1.41.0, libboost_prg_exec_monitor-mt.so.1.41.0,
+>>> libboost_wave-mt.so.1.41.0) found and LEAD_SONAME not defined
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> NOTE: Couldn't find shared library provider for libstdc++.so.6
+>>> NOTE: Couldn't find shared library provider for libgcc_s.so.1
+>>> ERROR: QA Issue with boost-date-time: non -dev package contains
+>>> symlink .so: boost-date-time path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-date-time/usr/lib/libboost_date_time-mt.so'
+>>> ERROR: QA Issue with boost-date-time: non -dev package contains
+>>> symlink .so: boost-date-time path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-date-time/usr/lib/libboost_date_time-mt-d.so'
+>>> ERROR: QA Issue with boost-filesystem: non -dev package contains
+>>> symlink .so: boost-filesystem path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-filesystem/usr/lib/libboost_filesystem-mt-d.so'
+>>> ERROR: QA Issue with boost-filesystem: non -dev package contains
+>>> symlink .so: boost-filesystem path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-filesystem/usr/lib/libboost_filesystem-mt.so'
+>>> ERROR: QA Issue with boost-graph: non -dev package contains symlink
+>>> .so: boost-graph path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-graph/usr/lib/libboost_graph-mt.so'
+>>> ERROR: QA Issue with boost-graph: non -dev package contains symlink
+>>> .so: boost-graph path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-graph/usr/lib/libboost_graph-mt-d.so'
+>>> ERROR: QA Issue with boost-iostreams: non -dev package contains
+>>> symlink .so: boost-iostreams path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-iostreams/usr/lib/libboost_iostreams-mt-d.so'
+>>> ERROR: QA Issue with boost-iostreams: non -dev package contains
+>>> symlink .so: boost-iostreams path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-iostreams/usr/lib/libboost_iostreams-mt.so'
+>>> ERROR: QA Issue with boost-program-options: non -dev package contains
+>>> symlink .so: boost-program-options path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-program-options/usr/lib/libboost_program_options-mt.so'
+>>> ERROR: QA Issue with boost-program-options: non -dev package contains
+>>> symlink .so: boost-program-options path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-program-options/usr/lib/libboost_program_options-mt-d.so'
+>>> ERROR: QA Issue with boost-python: non -dev package contains symlink
+>>> .so: boost-python path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-python/usr/lib/libboost_python-mt-d.so'
+>>> ERROR: QA Issue with boost-python: non -dev package contains symlink
+>>> .so: boost-python path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-python/usr/lib/libboost_python-mt.so'
+>>> ERROR: QA Issue with boost-regex: non -dev package contains symlink
+>>> .so: boost-regex path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-regex/usr/lib/libboost_regex-mt-d.so'
+>>> ERROR: QA Issue with boost-regex: non -dev package contains symlink
+>>> .so: boost-regex path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-regex/usr/lib/libboost_regex-mt.so'
+>>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>>> symlink .so: boost-serialization path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-serialization/usr/lib/libboost_wserialization-mt-d.so'
+>>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>>> symlink .so: boost-serialization path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-serialization/usr/lib/libboost_serialization-mt-d.so'
+>>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>>> symlink .so: boost-serialization path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-serialization/usr/lib/libboost_wserialization-mt.so'
+>>> ERROR: QA Issue with boost-serialization: non -dev package contains
+>>> symlink .so: boost-serialization path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-serialization/usr/lib/libboost_serialization-mt.so'
+>>> ERROR: QA Issue with boost-signals: non -dev package contains symlink
+>>> .so: boost-signals path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-signals/usr/lib/libboost_signals-mt-d.so'
+>>> ERROR: QA Issue with boost-signals: non -dev package contains symlink
+>>> .so: boost-signals path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-signals/usr/lib/libboost_signals-mt.so'
+>>> ERROR: QA Issue with boost-system: non -dev package contains symlink
+>>> .so: boost-system path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-system/usr/lib/libboost_system-mt.so'
+>>> ERROR: QA Issue with boost-system: non -dev package contains symlink
+>>> .so: boost-system path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-system/usr/lib/libboost_system-mt-d.so'
+>>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>>> .so: boost-test path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-test/usr/lib/libboost_unit_test_framework-mt-d.so'
+>>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>>> .so: boost-test path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-test/usr/lib/libboost_prg_exec_monitor-mt.so'
+>>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>>> .so: boost-test path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-test/usr/lib/libboost_prg_exec_monitor-mt-d.so'
+>>> ERROR: QA Issue with boost-test: non -dev package contains symlink
+>>> .so: boost-test path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-test/usr/lib/libboost_unit_test_framework-mt.so'
+>>> ERROR: QA Issue with boost-thread: non -dev package contains symlink
+>>> .so: boost-thread path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-thread/usr/lib/libboost_thread-mt.so'
+>>> ERROR: QA Issue with boost-thread: non -dev package contains symlink
+>>> .so: boost-thread path
+>>> '/work/armv7a-angstrom-linux-gnueabi/boost-1.41.0-r8.1/packages-split/b=
+oost-thread/usr/lib/libboost_thread-mt-d.so'
+>>>
+>>> -----------------------------------------------------------------------=
+-------
+>>> This SF.net Dev2Dev email is sponsored by:
+>>>
+>>> Show off your parallel programming skills.
+>>> Enter the Intel(R) Threading Challenge 2010.
+>>> http://p.sf.net/sfu/intel-thread-sfd
+>>> _______________________________________________
+>>> gumstix-users mailing list
+>>> gumstix-users@lists.sourceforge.net
+>>> https://lists.sourceforge.net/lists/listinfo/gumstix-users
+>>
+>>
+>> --
+>> UTS CRICOS Provider Code: =A000099F
+>> DISCLAIMER: This email message and any accompanying attachments may cont=
+ain
+>> confidential information. =A0If you are not the intended recipient, do n=
+ot
+>> read, use, disseminate, distribute or copy this message or attachments. =
+=A0If
+>> you have received this message in error, please notify the sender
+>> immediately and delete this message. Any views expressed in this message
+>> are those of the individual sender, except where the sender expressly, a=
+nd
+>> with authority, states them to be the views the University of Technology=
+,
+>> Sydney. Before opening any attachments, please check them for viruses an=
+d
+>> defects.
+>>
+>> ------------------------------------------------------------------------=
+------
+>> This SF.net Dev2Dev email is sponsored by:
+>>
+>> Show off your parallel programming skills.
+>> Enter the Intel(R) Threading Challenge 2010.
+>> http://p.sf.net/sfu/intel-thread-sfd
+>> _______________________________________________
+>> gumstix-users mailing list
+>> gumstix-users@lists.sourceforge.net
+>> https://lists.sourceforge.net/lists/listinfo/gumstix-users
+>>
+>
 
-On Thu, Aug 12, 2010 at 3:32 PM, Jens Seidel <jensseidel@users.sf.net>wrote:
+Now after upgrading to 10.04 and going back to the boost version
+before this I am not seeing all the libgcc and libstdc warnings I was
+before. So far so good on build as well even other packages that were
+not building before are now. Not sure if it was the move back down on
+boost or the upgrade but I would think more it being the downgrading
+of boost
 
-> On Sun, Aug 08, 2010 at 05:53:42PM +0200, Frans Meulenbroeks wrote:
-> > I'm not too good in autotools. While makeing the git recipe for urjtag
-> > I bumped into the following two issues:
-> >
-> > First of all it seems autoreconf needs the -s flag. This tells to use
-> > symlinks. Guess things are done out of order or so.
-> > I've fixed this by adding EXTRA_AUTORECONF = "-s" to my recipes. That
-> > makes configure happy, but it does not really feel as a good solution.
->
-> Don't know about this.
->
-> > The second issue is that install fails.
-> > Apparently MKINSTALLDIRS does not have the proper value (it should be
-> > tools/mkinstalldirs, but it is an empty string).
-> > I've tried some things, peeked at some other patches for MKINSTALLDIRS
-> > but didn't really get to a satisfactory solution
->
-> > Any wizard here who can give me some guidance?
->
-> I noticed in the past also trouble with MKINSTALLDIRS and I think older
-> gettext versions are buggy and affect this. I workaround it with
->
-> AM_GNU_GETTEXT([external])
-> # version 0.11 doesn't support make distcheck, see
-> # http://lists.debian.org/debian-i18n/2009/09/msg00176.html
-> # versions 0.12-0.14.6 require a mkinstalldirs hack for make distcheck
-> # (at least for automake version 1.11)
-> MKINSTALLDIRS=\$\(top_srcdir\)/autotools/mkinstalldirs
-> AC_SUBST(MKINSTALLDIRS)
-> AM_GNU_GETTEXT_VERSION(0.12)
->
-> in my configure.ac. Try increasing the version of the required gettext
-> version
-> in the last line to verify that you have the same problem.
->
-> If you don't use gettext than I cannot help you ...
->
-> Jens
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
