@@ -1,35 +1,37 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Ors1L-0007lF-BI
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Ors9T-0000zu-VN
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 04 Sep 2010 14:39:00 +0200
-Received: by wwi14 with SMTP id 14so1676422wwi.24
+	Sat, 04 Sep 2010 14:47:24 +0200
+Received: by wye20 with SMTP id 20so2818513wye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 04 Sep 2010 05:38:22 -0700 (PDT)
+	Sat, 04 Sep 2010 05:46:46 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=uFYWzN0PFfcPX3VeOuWmZyCLvclPkzBwxX4e5bY6i88=;
-	b=wwgUW38mfcTovTAi9Az8q3zWNgqr1hqsXNEhlIaByc2TTjU0sEBlbsqdLHm5Ld59Rg
-	PAXWioqeIoVM2WzkDYxGOl4eVfFt8kLf2jajjXV4ZFmgQcRGCpV6s2Bw19DgBaylILPa
-	2Fr/9FNs8Oa0+sxE8In6InbNXX6+51LgkAbk0=
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=C1yDNsvJYvkQ6uubkDsIv95Yh1hUkwsTlqtF44LOspQ=;
+	b=aR6FrtN/PWClj6Z+aQ9zO7Bj6+2Ih/LUj5qMg/ch/FDgj0DTz5DzbtIHxDYqYqvgKx
+	wep1jL34arIQB5MsXALeRn14cs7pTyv0R0IMX67kBXgOZwLsZdrrIOWVlwlKWcTAJGoO
+	i/6gSG+F+Ulf2wbcDNUitrk2aFmuemsrRLOQ8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=hPBvjEVccEx6yEgjZFtHRmwrca+/kSWSAEIgcKU+wAlqYqLwCYMwRzBWpxy0z0w0eg
-	YFCNO8pkttTvvPDLhaOPID67KJnlBUjH4St2QKK22mzT0PZP1CPFY49JIqy3KKkgCDB/
-	QsKBYhaCiJ0K4RKTO6+W70sxttAnreCajg00I=
+	:content-type:content-transfer-encoding;
+	b=WvZDS8Nd8X8EKzJx2lljoxJt1BGBXjAhg/d0A0vPWGfKuNrAMw15qYw3vz+fe8Mcwa
+	R+NIGZWIkbT/crzMcpyqoidV0BLasQeQ532TLFvB0rkr+MDkjeDE/lKeF9GCEJf2IlZx
+	AxKbxt1CYVSJcP6CV3920apXW/zdApEPC/tCM=
 MIME-Version: 1.0
-Received: by 10.227.155.82 with SMTP id r18mr673551wbw.70.1283603901974; Sat,
-	04 Sep 2010 05:38:21 -0700 (PDT)
-Received: by 10.227.142.79 with HTTP; Sat, 4 Sep 2010 05:38:21 -0700 (PDT)
-In-Reply-To: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
+Received: by 10.227.154.129 with SMTP id o1mr911138wbw.175.1283604406318; Sat,
+	04 Sep 2010 05:46:46 -0700 (PDT)
+Received: by 10.227.142.79 with HTTP; Sat, 4 Sep 2010 05:46:46 -0700 (PDT)
+In-Reply-To: <AANLkTim+0_mNkiVBgjLyo4GRMsnFGgk0Rn5sHJYScZAs@mail.gmail.com>
 References: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
-Date: Sat, 4 Sep 2010 14:38:21 +0200
-Message-ID: <AANLkTim+0_mNkiVBgjLyo4GRMsnFGgk0Rn5sHJYScZAs@mail.gmail.com>
+	<AANLkTim+0_mNkiVBgjLyo4GRMsnFGgk0Rn5sHJYScZAs@mail.gmail.com>
+Date: Sat, 4 Sep 2010 14:46:46 +0200
+Message-ID: <AANLkTim69oCz_SmpYnAbHu0Y+XAjNePkW4dVN=521byp@mail.gmail.com>
 From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Connect-IP: 74.125.82.175
 X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -51,35 +53,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 04 Sep 2010 12:39:00 -0000
+X-List-Received-Date: Sat, 04 Sep 2010 12:47:24 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello all,
+Hello,
 
-On Fri, Sep 3, 2010 at 11:26 PM, Cliff Brake <cliff.brake@gmail.com> wrote:
+On Sat, Sep 4, 2010 at 2:38 PM, Leon Woestenberg
+<leon.woestenberg@gmail.com> wrote:
+> A bit more transparency (why? what? how? solves what?) =A0would be
+> welcomed and would help fund raising efforts.
 >
-> There is now a donation page on the OE website:
->
-> ...
->
-> Our immediate financial need is to upgrade storage on our server hardware:
->
-> 4 new 1.5TB drives. Approx $1k
->
-Cliff, thanks for the announcement and pragmatism (solving problems at hand).
+I was pleasantly surprised by the up-to-date wiki page on our
+infrastructure, so I take back that remark, and donated (0.6 TB) right
+away.
 
-A bit more transparency (why? what? how? solves what?)  would be
-welcomed and would help fund raising efforts.
-
-The last week we seem to have a bandwidth problem at hand (at least to
-.eu) so I expect that to be touched as well. Who feels / is
-responsible for this?
-
-If someone can explain the current situation, and what the plan is to
-improve on this, I'll be happy to consider a donation.
+The question on the networking side of things remains,
 
 Regards,
--- 
+--=20
 Leon
 
 
