@@ -1,37 +1,40 @@
-Received: from 63.mail-out.ovh.net ([91.121.185.56])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OsB7e-0005Z5-AK
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsBFl-0005k7-2n
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Sep 2010 11:02:49 +0200
-Received: (qmail 14554 invoked by uid 503); 5 Sep 2010 09:24:21 -0000
-Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
-	by 63.mail-out.ovh.net with SMTP; 5 Sep 2010 09:24:21 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 5 Sep 2010 11:02:08 +0200
-Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
-	(ebenard%eukrea.com@82.233.81.124)
-	by ns0.ovh.net with SMTP; 5 Sep 2010 11:02:06 +0200
-Message-ID: <4C835C8E.1000008@eukrea.com>
-Date: Sun, 05 Sep 2010 11:02:06 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+	Sun, 05 Sep 2010 11:11:09 +0200
+Received: by iwn2 with SMTP id 2so3075109iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sun, 05 Sep 2010 02:10:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=PPWu9VN5DlHmNGGegrID5OquORAY6j67IcTK0Vzanyk=;
+	b=MN9c2FmWZ9KsCP1H14FfeP3DDCa4QAbK3tGcQ0/CwYwFKN9TdBKo6cL6mQiQUR9XZk
+	L9LSd2XnUFx9Tu+w/4VnjXmDjG8RA1YGR2T8+xk+dIKhj/nhk9+g5tQPV5VW2v41+p5M
+	Jn3+niWsM8eYWHkh+V1diDL5haLPRIjceNkg0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=j81DYmNIewNkiNsAzVFfiySZVJrdzoRPbk9DYBXO67PeA3ey2obPHYrBkQoLOj59Sw
+	NfTECssILy1WcCxRJR2BOWND9ASPzCYgaFCj5DoH+r+fUuy1SJge50eGTjU9db9rlbzU
+	y/YkidKLrsviNJ2iGT0sUNOY+txyajS65zPqI=
 MIME-Version: 1.0
+Received: by 10.231.146.136 with SMTP id h8mr4141132ibv.0.1283677832236; Sun,
+	05 Sep 2010 02:10:32 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Sun, 5 Sep 2010 02:10:32 -0700 (PDT)
+Date: Sun, 5 Sep 2010 11:10:32 +0200
+Message-ID: <AANLkTikC4v+QEpYsos2=f4wtEUUCt8Q=VK9ByT56pn-L@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=j4E6ZLet=qemx-Ec1CaySKLCuzZMDriX9WQ=T@mail.gmail.com>
-In-Reply-To: <AANLkTi=j4E6ZLet=qemx-Ec1CaySKLCuzZMDriX9WQ=T@mail.gmail.com>
-X-Ovh-Tracer-Id: 6669268098437918025
-X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.56
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: ushare_hg (the leading ushare recipe) does not fetch
+Subject: pulseaudio issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,40 +48,22 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Sep 2010 09:02:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Sun, 05 Sep 2010 09:11:09 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Frans,
+I have an issue with pulseaudio:
 
-Le 05/09/2010 10:41, Frans Meulenbroeks a écrit :
-> I tried to build ushare, but it fails to fetch the source.
-> This source is at http://hg.geexbox.org/ushare/summary
->
-> II'm not a mercurial wiz, still tried a few things, but can't seem to
-> be able to resolve it.
-> Can someone with more hg knowledge peek into this?
->
-> Meanwhile, I suggest adding a DP of  -1 to the hg version. The 1.1a
-> version still builds properly.
->
-does the attached patch to bitbake fix this for you ?
-(you need to delete the directory in downloads :hg/hg.geexbox.org/ushare 
-before).
+|   CC     libpulsecore_0.9.21_la-svolume_arm.lo
+| pulsecore/svolume_arm.c: In function 'pa_volume_s16ne_arm':
+| pulsecore/svolume_arm.c:53: error: can't find a register in class
+'LO_REGS' while reloading 'asm'
+| pulsecore/svolume_arm.c:53: error: 'asm' operand has impossible constraints
+| make[3]: *** [libpulsecore_0.9.21_la-svolume_arm.lo] Error 1
 
-Eric
+From searching the irc log this is a longer standing issue.
+Is there any suggested solution for this.
+If I understand corrrectly it affects all our armv4 and armv5 machines.
 
-diff --git a/lib/bb/fetch/hg.py b/lib/bb/fetch/hg.py
-index d075638..bb156ed 100644
---- a/lib/bb/fetch/hg.py
-+++ b/lib/bb/fetch/hg.py
-@@ -138,6 +138,7 @@ class Hg(Fetch):
-         # Even when we clone (fetch), we still need to update as hg's clone
-         # won't checkout the specified revision if its on a branch
-          updatecmd = self._buildhgcommand(ud, d, "update")
-+        os.chdir(ud.moddir)
-          bb.msg.debug(1, bb.msg.domain.Fetcher, "Running %s" % updatecmd)
-          runfetchcmd(updatecmd, d)
-
+Frans
 
 
