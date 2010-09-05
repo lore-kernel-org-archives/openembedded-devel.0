@@ -1,31 +1,44 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1OsE8Q-0004C3-LY
+	(envelope-from <raj.khem@gmail.com>) id 1OsMz5-0006Zx-RS
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Sep 2010 14:15:51 +0200
-Received: from [192.168.1.2] (e180151223.adsl.alicedsl.de [85.180.151.223])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 765F3584117
+	Sun, 05 Sep 2010 23:42:45 +0200
+Received: by pwj8 with SMTP id 8so919888pwj.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun,  5 Sep 2010 14:20:16 +0200 (CEST)
-From: Michael 'Mickey' Lauer <mickey@vanille-media.de>
+	Sun, 05 Sep 2010 14:42:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=c8QxpNbQXxqMfEN5U7DNzVO72093ofKMEL4Kbn+ethY=;
+	b=jZ4/jVMAEPNMFnzSck9Uq7ipeZYudmP4R0wdiXNJnzBZHfpIxVzKj4x3V5tBgYVL7a
+	fmCFKYVsGc/2Ng/85u0SxDykS7mhVfWY8T7+n9p+AU7JkYzNLuThfElK8jdJETIoI+Hm
+	QkqvHwwCMaa1Gl8+O0co2rdCDKemGiHccH+RI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=aR+ic8jMbwbuw13oOe03r3eY1kSIZTCkcVUOnahNpRR7yYRVRXbBNs2PPYcZMcWXnr
+	zVRewr38JG9S6DdvhYUy5rSXBZWufOfL74eHU0ZJrcB7OnR3Tu2L+1R3IBVkeN60mdcK
+	kHNAJaLgTzp7cuG4i/2mDSLavSZGD8n5IXXtA=
+Received: by 10.114.106.13 with SMTP id e13mr2162677wac.153.1283722923961;
+	Sun, 05 Sep 2010 14:42:03 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id r37sm9740100wak.11.2010.09.05.14.42.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 05 Sep 2010 14:42:03 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTikC4v+QEpYsos2=f4wtEUUCt8Q=VK9ByT56pn-L@mail.gmail.com>
-References: <AANLkTikC4v+QEpYsos2=f4wtEUUCt8Q=VK9ByT56pn-L@mail.gmail.com>
-Organization: Vanille-Media
-Date: Sun, 05 Sep 2010 14:14:49 +0200
-Message-ID: <1283688889.25525.1.camel@saphir>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+Date: Sun,  5 Sep 2010 14:41:53 -0700
+Message-Id: <1283722913-25949-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: pulseaudio issue
+Subject: [PATCH] bitbake.conf: Redefine STAGING_DIR_JAVA to point to target sysroot by default
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,33 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Sep 2010 12:15:58 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sun, 05 Sep 2010 21:42:45 -0000
 
-Am Sonntag, den 05.09.2010, 11:10 +0200 schrieb Frans Meulenbroeks:
-> I have an issue with pulseaudio:
-> 
-> |   CC     libpulsecore_0.9.21_la-svolume_arm.lo
-> | pulsecore/svolume_arm.c: In function 'pa_volume_s16ne_arm':
-> | pulsecore/svolume_arm.c:53: error: can't find a register in class
-> 'LO_REGS' while reloading 'asm'
-> | pulsecore/svolume_arm.c:53: error: 'asm' operand has impossible constraints
-> | make[3]: *** [libpulsecore_0.9.21_la-svolume_arm.lo] Error 1
-> 
-> From searching the irc log this is a longer standing issue.
-> Is there any suggested solution for this.
-> If I understand corrrectly it affects all our armv4 and armv5 machines.
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ conf/bitbake.conf |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Indeed. Pulseaudio has broken armv4 and armv5 support since a couple of
-versions. We should probably add some COMPATIBLE_ARCH (do we have that?)
-as a duct tape until someone knowledgable can fix the ARM ASM portions
-for good.
-
-Cheers,
-
-:M:
-
+diff --git a/conf/bitbake.conf b/conf/bitbake.conf
+index 677c76a..b099499 100644
+--- a/conf/bitbake.conf
++++ b/conf/bitbake.conf
+@@ -295,7 +295,6 @@ B = "${S}"
+ 
+ STAGING_DIR = "${TMPDIR}/sysroots"
+ 
+-STAGING_DIR_JAVA = "${STAGING_DIR}/java"
+ STAGING_DIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}"
+ STAGING_BINDIR_NATIVE = "${STAGING_DIR_NATIVE}${bindir_native}"
+ STAGING_SBINDIR_NATIVE = "${STAGING_DIR_NATIVE}${sbindir_native}"
+@@ -321,6 +320,7 @@ STAGING_PYDIR = "${STAGING_DIR}/lib/python2.4"
+ # This should really be MULTIMACH_TARGET_SYS but that breaks "all" and machine 
+ # specific packages - hack around it for now.
+ STAGING_DIR_TARGET = "${STAGING_DIR}/${BASEPKG_TARGET_SYS}"
++STAGING_DIR_JAVA = "${STAGING_DATADIR}/java"
+ 
+ STAGING_DIR_SDK = "${STAGING_DIR}/${SDK_SYS}"
+ 
+-- 
+1.7.1
 
 
 
