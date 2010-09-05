@@ -1,42 +1,35 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsBPy-000291-8l
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OsBaC-0006Hw-LI
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Sep 2010 11:21:45 +0200
-Received: by iwn2 with SMTP id 2so3080230iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Sep 2010 02:21:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=QtQiSOWNMDHNzeDPq9CHqolhE1A3Q0587SBQahQjfnU=;
-	b=u/m7ogaoWzkuuJKQdJnxFqFIWyeJNwN5Zqth4BqauyLKd19+uMNV5z5Nq+NLwb+1wk
-	k8BJ+gV+21brbFWiHgT1Ha6Se0uNq5UoSJhTp8qMmaUB5IA1QUyLl1yoQ+SrRbKEybOl
-	jhwm0Ptr9lBUW6A2oIvRnM5nH2NIekN/qUwaA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=inIr5qGj24GoxfGtKeFjXridKA+Aj+YSHURtBJpdDwI8rji4aXd2oqsu6BCDCBwV58
-	joWYasm0Od8FAsSR9Ghz9ejC3V8RoItdf4eOiCGqOVH4HFHCurhHUlBiCn+jMTUIg7Kq
-	5PTPpc9M8rqf7nTdQ12zJNGZP9b9unthfUvAk=
+	Sun, 05 Sep 2010 11:32:17 +0200
+Received: (qmail 26467 invoked by uid 503); 5 Sep 2010 09:53:49 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 5 Sep 2010 09:53:49 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 5 Sep 2010 11:31:37 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 5 Sep 2010 11:31:35 +0200
+Message-ID: <4C836376.3050709@eukrea.com>
+Date: Sun, 05 Sep 2010 11:31:34 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.12.2 with SMTP id v2mr4144901ibv.99.1283678465038; Sun, 05
-	Sep 2010 02:21:05 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Sun, 5 Sep 2010 02:21:04 -0700 (PDT)
-In-Reply-To: <4C835C8E.1000008@eukrea.com>
-References: <AANLkTi=j4E6ZLet=qemx-Ec1CaySKLCuzZMDriX9WQ=T@mail.gmail.com>
-	<4C835C8E.1000008@eukrea.com>
-Date: Sun, 5 Sep 2010 11:21:04 +0200
-Message-ID: <AANLkTi=GrTNa2H+UZjM6RrYU6xAx-DZg2KwDix8MzOgM@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTi=j4E6ZLet=qemx-Ec1CaySKLCuzZMDriX9WQ=T@mail.gmail.com>	<4C835C8E.1000008@eukrea.com>
+	<AANLkTi=GrTNa2H+UZjM6RrYU6xAx-DZg2KwDix8MzOgM@mail.gmail.com>
+In-Reply-To: <AANLkTi=GrTNa2H+UZjM6RrYU6xAx-DZg2KwDix8MzOgM@mail.gmail.com>
+X-Ovh-Tracer-Id: 7167197333834804553
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL, BAYES_00, SPF_PASS,
-	URI_HEX autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,URI_HEX
+	autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: ushare_hg (the leading ushare recipe) does not fetch
@@ -53,65 +46,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Sep 2010 09:21:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 05 Sep 2010 09:32:17 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-2010/9/5 Eric B=E9nard <eric@eukrea.com>:
-> Hi Frans,
+Le 05/09/2010 11:21, Frans Meulenbroeks a écrit :
+> Alas, this did not help.
 >
-> Le 05/09/2010 10:41, Frans Meulenbroeks a =E9crit :
->>
->> I tried to build ushare, but it fails to fetch the source.
->> This source is at http://hg.geexbox.org/ushare/summary
->>
->> II'm not a mercurial wiz, still tried a few things, but can't seem to
->> be able to resolve it.
->> Can someone with more hg knowledge peek into this?
->>
->> Meanwhile, I suggest adding a DP of =A0-1 to the hg version. The 1.1a
->> version still builds properly.
->>
-> does the attached patch to bitbake fix this for you ?
-> (you need to delete the directory in downloads :hg/hg.geexbox.org/ushare
-> before).
+> NOTE: Running task 520 of 759 (ID: 5,
+> /home/frans/oe/openembedded/recipes/ushare/ushare_hg.bb, do_fetch)
+> NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetch: Started
+> NOTE: Fetch hg://hg.geexbox.org;proto=http;module=ushare;rev=2e40e513a4a0
+> NOTE: Task failed: Unknown fetch Error: [Errno 2] No such file or
+> directory: '/home/frans/oe/downloads/ushare__hg.geexbox.org_2e40e513a4a0.tar.gz'
+> ERROR: TaskFailed event exception, aborting
 >
-> Eric
+> This is after removing the downloads/hg dir and all downloads/ushare* files
 >
-> diff --git a/lib/bb/fetch/hg.py b/lib/bb/fetch/hg.py
-> index d075638..bb156ed 100644
-> --- a/lib/bb/fetch/hg.py
-> +++ b/lib/bb/fetch/hg.py
-> @@ -138,6 +138,7 @@ class Hg(Fetch):
-> =A0 =A0 =A0 =A0# Even when we clone (fetch), we still need to update as h=
-g's clone
-> =A0 =A0 =A0 =A0# won't checkout the specified revision if its on a branch
-> =A0 =A0 =A0 =A0 updatecmd =3D self._buildhgcommand(ud, d, "update")
-> + =A0 =A0 =A0 =A0os.chdir(ud.moddir)
-> =A0 =A0 =A0 =A0 bb.msg.debug(1, bb.msg.domain.Fetcher, "Running %s" % upd=
-atecmd)
-> =A0 =A0 =A0 =A0 runfetchcmd(updatecmd, d)
+> I have also tried without the proto=http; part (as that did not appear
+> in other recipes using hg://) but that did not make a difference
+> either.
+> I have checked and the rev exists.
 >
+strange, here (x86 host, ubuntu 9.10, bitbake 1.10, hg 1.43 installed on 
+the host) this solves the problem :
 
-Alas, this did not help.
-
-NOTE: Running task 520 of 759 (ID: 5,
-/home/frans/oe/openembedded/recipes/ushare/ushare_hg.bb, do_fetch)
+* before :
+NOTE: Running task 219 of 220 (ID: 0, 
+/home/ebenard/cpuimx25/openembedded/recipes/ushare/ushare_hg.bb, do_fetch)
 NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetch: Started
-NOTE: Fetch hg://hg.geexbox.org;proto=3Dhttp;module=3Dushare;rev=3D2e40e513=
-a4a0
-NOTE: Task failed: Unknown fetch Error: [Errno 2] No such file or
-directory: '/home/frans/oe/downloads/ushare__hg.geexbox.org_2e40e513a4a0.ta=
-r.gz'
+NOTE: Fetch hg://hg.geexbox.org;proto=http;module=ushare;rev=2e40e513a4a0
+requesting all changes
+adding changesets
+adding manifests
+adding file changes
+added 433 changesets with 1023 changes to 102 files
+updating to branch default
+74 files updated, 0 files merged, 0 files removed, 0 files unresolved
+abandon : There is no Mercurial repository here (.hg not found) !
+NOTE: Task failed: Unknown fetch Error: [Errno 2] No such file or 
+directory: 
+'/home/ebenard/oe_downloads/ushare__hg.geexbox.org_2e40e513a4a0.tar.gz'
 ERROR: TaskFailed event exception, aborting
+ERROR: Build of 
+/home/ebenard/cpuimx25/openembedded/recipes/ushare/ushare_hg.bb do_fetch 
+failed
+ERROR: Task 0 
+(/home/ebenard/cpuimx25/openembedded/recipes/ushare/ushare_hg.bb, 
+do_fetch) failed with 256
+ERROR: '/home/ebenard/cpuimx25/openembedded/recipes/ushare/ushare_hg.bb' 
+failed
+NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetch: Failed
 
-This is after removing the downloads/hg dir and all downloads/ushare* files
+* after :
+NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetch: Started
+NOTE: Fetch hg://hg.geexbox.org;proto=http;module=ushare;rev=2e40e513a4a0
+requesting all changes
+adding changesets
+adding manifests
+adding file changes
+added 433 changesets with 1023 changes to 102 files
+updating to branch default
+74 files updated, 0 files merged, 0 files removed, 0 files unresolved
+0 files updated, 0 files merged, 0 files removed, 0 files unresolved
+NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetch: Succeeded
+NOTE: Running task 220 of 220 (ID: 1, 
+/home/ebenard/cpuimx25/openembedded/recipes/ushare/ushare_hg.bb, 
+do_fetchall)
+NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetchall: Started
+NOTE: package ushare-1.1a-r1+hg2e40e513a4a0: task do_fetchall: Succeeded
 
-I have also tried without the proto=3Dhttp; part (as that did not appear
-in other recipes using hg://) but that did not make a difference
-either.
-I have checked and the rev exists.
+Can you run bitbake with -vvv to get more log of what is failing ?
 
-Frans
+Eric
 
 
