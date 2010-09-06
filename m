@@ -1,27 +1,45 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Osgp2-00027g-PC
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Osgr5-0002Er-VR
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 20:53:41 +0200
-Received: from localhost.localdomain (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id EB0674B0028
+	Mon, 06 Sep 2010 20:55:57 +0200
+Received: by iwn2 with SMTP id 2so4406269iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Sep 2010 20:52:59 +0200 (CEST)
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Sep 2010 20:51:52 +0200
-Message-Id: <1283799112-7092-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+	Mon, 06 Sep 2010 11:55:09 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=xyzFvFPAvkRQpibKuXoqd1pKsi25G+Wsq9d89H3mm6k=;
+	b=sMZpZUM4jUAnFiHYrW/EWS4rDSe6I31lrVAjZRMu1kYgBHzdvrbKMbZ1CjvAgWbWoh
+	E2iuYe9gAARLmH7J4xg38AHGdQU5HB2yaGrmx0DEMgrc8qKQmuDh3FmJVkpm6ef50NSe
+	wA+yMnyrKqFwgoKrG9Jt4sLaeaexQsa6l9aCU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=TEMtkx0ietVlhOMqWFwPP8h40ItGupZEHNjRjK4PtF9h2kPZ+LYkLN0K82dP2jxU/p
+	LtSKd0iNdWunQEjilH3L1YTuDixPggW5/BiXdvC67KSsTnDBK8OiFUOzAxqyCdBMAhRw
+	U6erJA/IkdryXghlHfjv8pCSe0eNFbNOAWbxU=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+Received: by 10.231.172.75 with SMTP id k11mr6698760ibz.4.1283799297057; Mon,
+	06 Sep 2010 11:54:57 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 11:54:57 -0700 (PDT)
+In-Reply-To: <AANLkTimg-G7W0SNdf_35BRENQvBOJ9UVdn9Xugwn_AcW@mail.gmail.com>
+References: <AANLkTin5LRCz6PU_x6Mw+V2Xf8W=i+n4RLqQjwON1R7+@mail.gmail.com>
+	<i5ao76$sja$1@dough.gmane.org>
+	<AANLkTimg-G7W0SNdf_35BRENQvBOJ9UVdn9Xugwn_AcW@mail.gmail.com>
+Date: Mon, 6 Sep 2010 20:54:57 +0200
+Message-ID: <AANLkTimzKa8Uv8gDwBrwyK6hCmRirKM7R0dFjes3-3gP@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org, tsc@openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] bitbake: lib/bb/fetch/hg: fix fetching from a mercurial repository
+Subject: Re: [RFC] review process
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -35,35 +53,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 18:53:41 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Sep 2010 18:55:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* without this fix, we get :
-updating working directory
-74 files updated, 0 files merged, 0 files removed, 0 files unresolved
-abort: There is no Mercurial repository here (.hg not found)!
+As there have not been any more replies in this thread in more than a
+week, I feel the discussion has ended.
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-Tested-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- lib/bb/fetch/hg.py |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
+May I ask the TSC to conclude on this and provide a recommended way of working?
 
-diff --git a/lib/bb/fetch/hg.py b/lib/bb/fetch/hg.py
-index d075638..bb156ed 100644
---- a/lib/bb/fetch/hg.py
-+++ b/lib/bb/fetch/hg.py
-@@ -138,6 +138,7 @@ class Hg(Fetch):
- 	# Even when we clone (fetch), we still need to update as hg's clone
- 	# won't checkout the specified revision if its on a branch
-         updatecmd =3D self._buildhgcommand(ud, d, "update")
-+        os.chdir(ud.moddir)
-         bb.msg.debug(1, bb.msg.domain.Fetcher, "Running %s" % updatecmd)
-         runfetchcmd(updatecmd, d)
-=20
---=20
-1.6.3.3
-
+Best regards, Frans
 
 
