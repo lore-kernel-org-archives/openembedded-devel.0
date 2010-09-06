@@ -1,29 +1,48 @@
-Received: from smtp2-g21.free.fr ([212.27.42.2])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OsirC-00014l-2V
+	(envelope-from <kergoth@gmail.com>) id 1Osiu9-0003Dy-PM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 23:04:03 +0200
-Received: from localhost.localdomain (unknown [82.240.38.71])
-	by smtp2-g21.free.fr (Postfix) with ESMTP id BF8354B0095
+	Mon, 06 Sep 2010 23:07:09 +0200
+Received: by wye20 with SMTP id 20so5133721wye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon,  6 Sep 2010 23:03:20 +0200 (CEST)
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Sep 2010 23:02:12 +0200
-Message-Id: <1283806932-26926-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
-References: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
+	Mon, 06 Sep 2010 14:06:25 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=8dO+GjSmpvqJPLhDTlClxNFLoZXDu7W4zP7dAMLA22I=;
+	b=xUPn/iGHyapwzuD+qVVi/rBpQDermxqsaO8yZvg90etiY5+G5gKUcXpDm6gB/hyrS9
+	nVfQlP2hgYqRuNWUkgXCAsSauNJSPVmZN3oVCuU9JiHKq2V9Y9Ljo/DDv1AW7uoZrbS8
+	74g5je/cQa4McXd4dOY+GMGqk4bMk+2E+Y4X8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=JDiaEV45W+pQyAAOp4nlulkD3dnzweQZI42kpyis68JUf5ZlK+yK2L2xsYjZdFEVEy
+	jysnCSLL2mrk69nOT2MKiRnKM+Bn+F4PFX7dOdrhdNg9Bs488DBK1UlJ+qvbyamANPtR
+	4e3ZC2g2ghY5eVuW3HCV7aYLBlvURXCNRuArw=
+Received: by 10.216.158.18 with SMTP id p18mr1332247wek.2.1283807185150; Mon,
+	06 Sep 2010 14:06:25 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 212.27.42.2
-X-SA-Exim-Mail-From: eric@eukrea.com
+Sender: kergoth@gmail.com
+Received: by 10.216.237.167 with HTTP; Mon, 6 Sep 2010 14:06:05 -0700 (PDT)
+In-Reply-To: <1283806652-8619-1-git-send-email-eric@eukrea.com>
+References: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
+	<1283806652-8619-1-git-send-email-eric@eukrea.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 6 Sep 2010 14:06:05 -0700
+X-Google-Sender-Auth: 14viPZdpFxgEwdbM4WZCV2CTBro
+Message-ID: <AANLkTinp=X1NhM2=Jeg3cSO5=uLf=bSYfeKsgQ6d44UC@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] asterisk: replace termcap by tinfo
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH v2] lib/oe/unpack.py: fix uncompressing .gz .bz2 or .xz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,55 +56,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 21:04:03 -0000
-Content-Type: text/plain; charset=utf-8
+X-List-Received-Date: Mon, 06 Sep 2010 21:07:10 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-* this fix the following configure problem :
-checking for tgetent in -ltermcap... no
-configure: ***
-configure: *** The Termcap installation on this system appears to be brok=
-en.
-configure: *** Either correct the installation, or run configure
-configure: *** without explicitly specifying --with-termcap
-* PR bumped
+On Mon, Sep 6, 2010 at 1:57 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
 
-Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
----
- recipes/asterisk/asterisk_1.4.23.1.bb |    5 +++--
- 1 files changed, 3 insertions(+), 2 deletions(-)
+> * Actually, the uncompressed file is written into the source
+> path instead of the destination path.
+> * By also removing the source path, this patch should fix this problem.
+> * An other fix could be to not uncompress to stdout but let gunzip|bunzip=
+2|
+> xz uncompress directly to the file.
+>
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>
 
-diff --git a/recipes/asterisk/asterisk_1.4.23.1.bb b/recipes/asterisk/ast=
-erisk_1.4.23.1.bb
-index af6967a..5869187 100644
---- a/recipes/asterisk/asterisk_1.4.23.1.bb
-+++ b/recipes/asterisk/asterisk_1.4.23.1.bb
-@@ -5,8 +5,9 @@ HOMEPAGE =3D "http://www.asterisk.org"
- LICENSE =3D "GPLv2"
- PRIORITY =3D "optional"
- SECTION =3D "console/telephony"
--DEPENDS =3D "speex readline zlib openssl curl popt gnutls sqlite libogg =
-libvorbis"
-+DEPENDS =3D "speex readline zlib openssl curl popt gnutls sqlite libogg =
-libvorbis ncurses"
- #RRECOMMENDS_${PN} =3D "logrotate"
-+PR =3D "r1"
-=20
- SRC_URI=3D"http://downloads.digium.com/pub/asterisk/releases/asterisk-${=
-PV}.tar.gz \
- #	file://sounds.xml.patch \
-@@ -28,7 +29,7 @@ inherit autotools update-rc.d
- EXTRA_OECONF =3D  "--with-ssl=3D${STAGING_EXECPREFIXDIR} \
- 			--with-z=3D${STAGING_EXECPREFIXDIR} \
- 			--with-curl=3D${STAGING_EXECPREFIXDIR} \
--			--with-termcap=3D${STAGING_EXECPREFIXDIR} \
-+			--with-tinfo=3D${STAGING_EXECPREFIXDIR} \
- 			--with-ogg=3D${STAGING_EXECPREFIXDIR} \
- 			--with-vorbis=3D${STAGING_EXECPREFIXDIR} \
- 			--with-sqlite=3D${STAGING_EXECPREFIXDIR} \
+Acked-by: Chris Larson <chris_larson@mentor.com>
 --=20
-1.6.3.3
-
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
