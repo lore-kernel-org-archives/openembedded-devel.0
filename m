@@ -1,47 +1,45 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Oshjb-00028i-QD
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OshlI-00033Y-TX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 21:52:17 +0200
-Received: by wye20 with SMTP id 20so5064542wye.6
+	Mon, 06 Sep 2010 21:54:05 +0200
+Received: by iwn2 with SMTP id 2so4452068iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 12:51:28 -0700 (PDT)
+	Mon, 06 Sep 2010 12:53:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=TlTUmES9sIdWkuj7IZFvXYLQTWvFHHi3jeoLD2jRorE=;
-	b=oSi0ii+dQqTXGoWh8iSWNCmJJTQ42dKvMhDuaAwQaYQEJkVGU4WCdISsBT52+/mf+n
-	J5HzvMWzwL3eGMfIFONrT9yVVAYftGsBjTAnHEONnR5tI5MHRyn5o99Qk9z78THDCwTQ
-	XwPh1C5vxW4n2kmPVzePRN61yDqkSWLE/E9YY=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=Uep4zjKFclnX9Yif4Hws6FddHhSEpaJ/sFsjXn+7X9I=;
+	b=qYmYPq/gqIcL1uF/B/0FoT+uQ2rwCA0/qrxVJChA5vYR+b3TUTKCRu54p/VxdevMGz
+	dkNzrrV86pje9nDXz5sAYCqNKp2i4MPB0FzrqBeSFvPBmx2rl0hy75fF5NmYGvfQPqZv
+	vbSzW30lnR64YNODiJ2juu8vsnLBwAJkRBKiM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=b9Ht0rDo0vTOIg6Ll+LlIDlloflFaJ59ww2mqxVad5ZAWWDwCUfWu1d72jE+0bD/OJ
-	yn7h4HL8S7uTtMwZElem5WfFctEff7hd7bDtJUKQSzU4IHDtKMYoY1DXMNlC1ctXCzse
-	aLKCRD25BQGv36gnXNrCAbP3B1ylSJLDR58rk=
-Received: by 10.216.67.6 with SMTP id i6mr940881wed.44.1283802687538; Mon, 06
-	Sep 2010 12:51:27 -0700 (PDT)
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=uRtIYeLGrc8E0yl87ktHwf0J3MaNpkVNaYn144CUyZXi+AJOvLrZg6GVjGHon6mFP3
+	tPn7NISw3sx7WjliCxPffTusTfMPPBzsTa/JCOrZNiSXcuHKKhXGI2uGf1P9bJ4hS8yU
+	mfR53kWpVbGDS1XadKVvufbPeMRPOVQ/OUbuw=
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Mon, 6 Sep 2010 12:50:59 -0700 (PDT)
-In-Reply-To: <1283798935-4819-1-git-send-email-eric@eukrea.com>
-References: <1283798935-4819-1-git-send-email-eric@eukrea.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 6 Sep 2010 12:50:59 -0700
-X-Google-Sender-Auth: qlpkYcj_WAKdEvZLZckG_ofy5aE
-Message-ID: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
+Received: by 10.231.182.201 with SMTP id cd9mr6787963ibb.21.1283802792720;
+	Mon, 06 Sep 2010 12:53:12 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 12:53:12 -0700 (PDT)
+In-Reply-To: <1283688889.25525.1.camel@saphir>
+References: <AANLkTikC4v+QEpYsos2=f4wtEUUCt8Q=VK9ByT56pn-L@mail.gmail.com>
+	<1283688889.25525.1.camel@saphir>
+Date: Mon, 6 Sep 2010 21:53:12 +0200
+Message-ID: <AANLkTinzpowwAP-eTfJMLCraeRT5TWCYFsmg_PpLNeqG@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] lib/oe/unpack.py: fix uncompressing .gz .bz2 or .xz
+Subject: Re: pulseaudio issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,52 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 19:52:19 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 06 Sep 2010 19:54:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 6, 2010 at 11:48 AM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
-
-> * Actually, the destination file has the full path (ie it's uncompressed
-> in the download directory) as only the extension is removed.
-> * By also removing the path, this patch should fix this problem.
-> * An other fix could be to no uncompress to stdout but let gunzip|bunzip2=
-|
-> xz uncompress directly to the file.
+2010/9/5 Michael 'Mickey' Lauer <mickey@vanille-media.de>:
+> Am Sonntag, den 05.09.2010, 11:10 +0200 schrieb Frans Meulenbroeks:
+>> I have an issue with pulseaudio:
+>>
+>> | =A0 CC =A0 =A0 libpulsecore_0.9.21_la-svolume_arm.lo
+>> | pulsecore/svolume_arm.c: In function 'pa_volume_s16ne_arm':
+>> | pulsecore/svolume_arm.c:53: error: can't find a register in class
+>> 'LO_REGS' while reloading 'asm'
+>> | pulsecore/svolume_arm.c:53: error: 'asm' operand has impossible constr=
+aints
+>> | make[3]: *** [libpulsecore_0.9.21_la-svolume_arm.lo] Error 1
+>>
+>> From searching the irc log this is a longer standing issue.
+>> Is there any suggested solution for this.
+>> If I understand corrrectly it affects all our armv4 and armv5 machines.
 >
-
-Thanks for looking into this.  I appreciate your putting together a fix.
-See code comments below.
-
-Please improve the wording of the commit message here.  "has the full path"
-is unclear.  I'd suggest referring to the fact that it's currently writing
-into the *source* path rather than the *destination* path, to clarify a bit=
-.
-
-    elif file.endswith('.gz') or file.endswith('.Z') or file.endswith('.z')=
-:
->         base, ext =3D os.path.splitext(file)
-> +        ext, base =3D os.path.split(base)
+> Indeed. Pulseaudio has broken armv4 and armv5 support since a couple of
+> versions. We should probably add some COMPATIBLE_ARCH (do we have that?)
+> as a duct tape until someone knowledgable can fix the ARM ASM portions
+> for good.
 >
+We have COMPATIBLE_HOST. Guess that can be used.
+0.9.15 builds fine for arm5. Haven't exained the differences in that file y=
+et
+Frans
 
-This variable naming is wrong and misleading.  The leading portion of the
-split is not an extension, so 'ext' is not correct.  Also, you just throw
-away the leading portion anyway, so there's no need to use os.path.split at
-all.  Instead, I'd suggest changing this:
-
-    base, ext =3D os.path.splitext(file)
-    cmd =3D 'bzip2 -dc %s > %s' % (file, base)
-
-to this:
-
-    root, ext =3D os.path.splitext(file)
-    cmd =3D 'bzip2 -dc %s > %s' % (file, os.path.basename(root))
-
-Thanks again,
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
 
