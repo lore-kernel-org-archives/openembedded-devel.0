@@ -1,47 +1,40 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1Osi3a-0005vx-3l
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Osi9P-00045N-Rr
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 22:12:47 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id EEAFE11000BD;
-	Mon,  6 Sep 2010 22:12:04 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id 7DD9F110009A;
-	Mon,  6 Sep 2010 22:11:51 +0200 (CEST)
-Received: from rhein.familie-heinold.de (f052234098.adsl.alicedsl.de
-	[78.52.234.98]) by mail.familie-heinold.de (Postfix) with ESMTPA;
-	Mon,  6 Sep 2010 22:11:51 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id A4E643C0C3; Mon,  6 Sep 2010 22:11:45 +0200 (CEST)
-Date: Mon, 6 Sep 2010 22:11:45 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-Message-ID: <20100906201144.GA8176@rhein.zuhause.netz>
-References: <AANLkTimxWVes3DZQPGn53BZ1cL6BSX5BT3hwgFHrCUA4@mail.gmail.com>
-	<AANLkTinBzdnAYv_0O=vXnaJ5VNj56Th74eZ=naVSFcFB@mail.gmail.com>
-	<AANLkTikSBQOi6aC0W8QzfEOk6skMcBmbaJdmE4K+Auwd@mail.gmail.com>
-	<20100906035002.GB5320@gmail.com>
-	<AANLkTinvnAhcr63sm=O+s+iyZw8tKfspjzhR__XOb5mU@mail.gmail.com>
-	<AANLkTi=zkn=Ns7MgcakxC8F61O9it3FTYb8XgtHRmcrD@mail.gmail.com>
-	<AANLkTimNk1mKqHBsfW6S-KuQkbVyT8f4ajz1d8adDFcc@mail.gmail.com>
+	Mon, 06 Sep 2010 22:18:49 +0200
+Received: by iwn2 with SMTP id 2so4472611iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Sep 2010 13:18:06 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=nsijEj3FgoH8lV6fdFmkA8+OM0wsXsfk6pIGlRtGCf8=;
+	b=IoYU4v6c+Jn9onxdC4h/0YcxZXNcmE9ydAEiu9HOFk3cSIvAH7CjOmAFcQT6QYk6vA
+	afuUICnewvi4oObAltyrIz8mi4GhPxbD1mHdLDZ07AsrXyQZuPPtl4Pvzvy/JzIQEYfU
+	MkClS87jfpWY+A+P8FJ07e8TsiAHLUEHLdMGM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=aydE3odfv6wzoasUoJy9QG+HR/uQJH2MyGkMu7pLUHRUvPzVyY82XrSEFO2hi27TfD
+	Yq2qbXrp+/AXGPfzBfjn03hG5cHftPEbNU4TFfehjp5/H+jewB/sRCyMh5w9UWBnNKfz
+	8fHbhcU1rD/91AYLJrvyXrLMqOprQeUUt7yKc=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTimNk1mKqHBsfW6S-KuQkbVyT8f4ajz1d8adDFcc@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Received: by 10.231.149.140 with SMTP id t12mr6807904ibv.100.1283804286273;
+	Mon, 06 Sep 2010 13:18:06 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 13:18:06 -0700 (PDT)
+Date: Mon, 6 Sep 2010 22:18:06 +0200
+Message-ID: <AANLkTi=9YbV7fVNDx44GKfe3_tcLS5pQ_D=MWTDgDv1d@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-devel@lists.openembedded.org
-Subject: Re: virtclass_install prepend
+Subject: NOTE: Couldn't find shared library provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,52 +48,16 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 20:12:47 -0000
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Sep 2010 20:18:49 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-> >> The code is:
-> >> do_install_virtclass-native_prepend() {
-> >> =A0 =A0 =A0 =A0 install -d ${D}${datadir}/dbus
-> >> =A0 =A0 =A0 =A0install -m 0644 dbus-bus-introspect.xml ${D}${datadir=
-}/dbus
-> >> }
-> >>
-> >> Actually if the standard do_install needs to be changed, it generall=
-y
-> >> raises some alarms with me.
-> >> Why would we need to install something that the package normally doe=
-s
-> >> not install?
-> >> (of course this could be a bug in the package, but then I would pref=
-er
-> >> a patch that we also try to push upstream).
-> >>
-> >
-> > Agreed, that is odd. =A0If it's something that dbus using things migh=
-t need,
-> > why is it only prepended for the native version, and as you say, why =
-is it
-> > not installed by the upstream install target. =A0I'd do a git blame a=
-nd figure
-> > out who added that and ask them :)
-> > --
->=20
-> Henning,
-> Git blame gives your name as the person who created those lines.
-> Care to comment?
->=20
-> Frans
+Anyone an idea on what this means and how to fix it:
 
-Hi,
+NOTE: Couldn't find shared library provider for libstdc++.so.6
+NOTE: Couldn't find shared library provider for libgcc_s.so.1
 
-if I remember correctly this file is generated in the build process. But =
-somehow
-in the later versions of dbus-glib there is somehow an error so this file=
- gets not installed
-at all in the native variant. So I did it per hand.
+Today I've seen it with asterisk but I have seen it before.
 
-Bye Henning
+Frans
 
 
