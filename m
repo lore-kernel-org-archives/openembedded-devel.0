@@ -1,44 +1,29 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from smtp2-g21.free.fr ([212.27.42.2])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsieJ-000308-Bg
+	(envelope-from <eric@eukrea.com>) id 1Osimg-0000TN-TM
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 22:50:50 +0200
-Received: by iwn2 with SMTP id 2so4498585iwn.6
+	Mon, 06 Sep 2010 22:59:24 +0200
+Received: from localhost.localdomain (unknown [82.240.38.71])
+	by smtp2-g21.free.fr (Postfix) with ESMTP id 3F4594B0131
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 13:50:03 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=oocQS4ZUn4Uh/jJb0538FQcXap5UF6K5F+huS2Q3vV8=;
-	b=vEnAJUbTstxdmAsXRNjKFGGAX5LdxxbY2FuXnx0hZRKnvSElU61j4HlSy/xzsCh8GZ
-	rimgJ4Khqron/YB59Xdde4lwQg0Qu9lWC9jU0SpT1sz/QmKxmlNUk1EUqMQWeTF+PuHH
-	AGAk365OQ2pGNh5cfzG4uFE3Ax3j11Wt3fgBk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=dKF928a4sq1VeR6Tq1G8mhc+k+RzNlLaVHxuX+q5iC1fyg4NF9qJ2SdQv4kVD6gPtw
-	UphI73THuwLQJDtAphGpK+qgqZHKJsBitALHc8BOYBXIohdKHSIrc5Df2uRfGW0h7p6I
-	5bLgXl0NZ6r3/6Ex3thjggCZqIhhJbdt6g3ds=
-MIME-Version: 1.0
-Received: by 10.231.17.11 with SMTP id q11mr6807668iba.63.1283806202610; Mon,
-	06 Sep 2010 13:50:02 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 13:50:02 -0700 (PDT)
-In-Reply-To: <4C85506E.5020708@gmail.com>
-References: <AANLkTineLTCDtymfwbaAJXcrz0vB=V4++=HOwEA7wQHU@mail.gmail.com>
-	<4C85506E.5020708@gmail.com>
-Date: Mon, 6 Sep 2010 22:50:02 +0200
-Message-ID: <AANLkTina_X+E_5rmCytJTK36RF-AV-vhpLQNiS4us+1R@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon,  6 Sep 2010 22:58:40 +0200 (CEST)
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon,  6 Sep 2010 22:57:32 +0200
+Message-Id: <1283806652-8619-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
+References: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 212.27.42.2
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libtermcap (was: Re: Asterisk and termcap)
+Subject: [PATCH v2] lib/oe/unpack.py: fix uncompressing .gz .bz2 or .xz
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,27 +37,59 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 20:50:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Sep 2010 20:59:24 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-2010/9/6 Arigead <captain.deadly@gmail.com>:
+* Actually, the uncompressed file is written into the source
+path instead of the destination path.
+* By also removing the source path, this patch should fix this problem.
+* An other fix could be to not uncompress to stdout but let gunzip|bunzip=
+2|
+xz uncompress directly to the file.
 
->
-> thanks a million for that Frans. I'll keep my ears on here and see if an
-> answer to this comes up.
->
+Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+---
+v2:
+	python part reworked as per Chris Larson's suggestion
+	commit message rephrased to clarify it.
 
-You're welcome.
-Actually you should thank Eric, he did the work.
-The patch will be there soon I assume.
-I already saw and tested it (that is: verified that asterisk builds).
-Leaving it to Eric to post the patch. He should get the credit for
-this.
+ lib/oe/unpack.py |   12 ++++++------
+ 1 files changed, 6 insertions(+), 6 deletions(-)
 
-Have fun, Frans.
+diff --git a/lib/oe/unpack.py b/lib/oe/unpack.py
+index 34569aa..6d24c5e 100644
+--- a/lib/oe/unpack.py
++++ b/lib/oe/unpack.py
+@@ -63,16 +63,16 @@ def unpack_file(file, destdir, dos=3DFalse, env=3DNon=
+e):
+     elif file.endswith('.tbz') or file.endswith('.tbz2') or file.endswit=
+h('.tar.bz2'):
+         cmd =3D 'bzip2 -dc %s | tar x --no-same-owner -f -' % file
+     elif file.endswith('.gz') or file.endswith('.Z') or file.endswith('.=
+z'):
+-        base, ext =3D os.path.splitext(file)
+-        cmd =3D 'gzip -dc %s > %s' % (file, base)
++        root, ext =3D os.path.splitext(file)
++        cmd =3D 'gzip -dc %s > %s' % (file, os.path.basename(root))
+     elif file.endswith('.bz2'):
+-        base, ext =3D os.path.splitext(file)
+-        cmd =3D 'bzip2 -dc %s > %s' % (file, base)
++        root, ext =3D os.path.splitext(file)
++        cmd =3D 'bzip2 -dc %s > %s' % (file, os.path.basename(root))
+     elif file.endswith('.tar.xz'):
+         cmd =3D 'xz -dc %s | tar x --no-same-owner -f -' % file
+     elif file.endswith('.xz'):
+-        base, ext =3D os.path.splitext(file)
+-        cmd =3D 'xz -dc %s > %s' % (file, base)
++        root, ext =3D os.path.splitext(file)
++        cmd =3D 'xz -dc %s > %s' % (file, os.path.basename(root))
+     elif file.endswith('.zip') or file.endswith('.jar'):
+         cmd =3D 'unzip -q -o'
+         if dos:
+--=20
+1.6.3.3
 
-PS: I appreciate it if you could share your experiences with running th program.
-Actually perhaps we should try to upgrade the program to 1.6.2.11 (or
-maybe even 1.8 beta 4)
 
 
