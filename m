@@ -1,41 +1,49 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <neo.freerunner@googlemail.com>) id 1Ose5E-00037b-6F
+	(envelope-from <raj.khem@gmail.com>) id 1OseWi-00016Z-6o
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 17:58:14 +0200
-Received: by wye20 with SMTP id 20so4829539wye.6
+	Mon, 06 Sep 2010 18:26:37 +0200
+Received: by ywa8 with SMTP id 8so1778115ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 08:57:29 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-	d=googlemail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=nlPL9D2ONb4D5pfIbp821YbdGB1smFllvtqnsvNphMo=;
-	b=WtPi/Esif58bP7NofcjSUuiekFiPD02WQg3GyPRqu/iDzykNPAUNI4J9iCySqZSxLx
-	sVolepmzsRdIZPVbGid/moDagL5GxP1JX/sXAsM8dEhhKzOxe+WFSzLawZyHSudwMaR7
-	ocnq9jQJcLKLy/67SEzwyKvGZJbSHkF1VbpU8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=googlemail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=d8RFYFRpYLAjtIVuDeHIW/asC0gosEgYhy2gmPCiA2YDTwZmLVO/1lj/y8EeQRCUQL
-	Hah0tnedn45Z334wSGJwLt4IW8VhCQuo/NtMmGJMCe/LX20H8RjnwaS0wQaEKe1FTiXT
-	fx3/MrPCBJfzl4FgAzeiLypFB9ZET1hnXS+As=
+	Mon, 06 Sep 2010 09:25:56 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=2JSBFvIyzE9D2v3e68Xm1QySRQzRMwtSPkO0wowFQKc=;
+	b=HkLkCmUKx1VsggfgnBiaMukDKzFhiHj91qsaBMj4GgEHJv32BvS3AA45zFe3IzV0vC
+	J0fluvJvuKSqabW8eZWd+o7N5S3a2tIqa0ttyoUQ7lYSSdaOVTONxnrNIebcLggPsKBz
+	9f69pxRpj3dwnfMfgATX5n1cP3CjxPgoexskU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=aZu/u9olapN5su5G24NK0e9H5e0jCu7BacjRngIuYjQo6hkYHqDqTiCe05GpPktzWH
+	25njNL4dJcYnGIv7EcZXgIngbsMcE6wY8UIZuLYM1PT698zBR0VDNOuuYkWnD5WjL0VE
+	EXtYPF+OjlZ5xHQVNWxv+32b9Gk+yi52x39uY=
+Received: by 10.150.53.18 with SMTP id b18mr104431yba.331.1283790355605; Mon,
+	06 Sep 2010 09:25:55 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.216.30.207 with SMTP id k57mr178105wea.88.1283788649701; Mon,
-	06 Sep 2010 08:57:29 -0700 (PDT)
-Received: by 10.216.91.68 with HTTP; Mon, 6 Sep 2010 08:57:29 -0700 (PDT)
-Date: Mon, 6 Sep 2010 17:57:29 +0200
-Message-ID: <AANLkTinxEPBjSeAwF+MWJB-tyX1WMoeW+oMCUR84EKZg@mail.gmail.com>
-From: Peter Klassen <neo.freerunner@googlemail.com>
+Received: by 10.231.205.134 with HTTP; Mon, 6 Sep 2010 09:25:35 -0700 (PDT)
+In-Reply-To: <AANLkTi=zkn=Ns7MgcakxC8F61O9it3FTYb8XgtHRmcrD@mail.gmail.com>
+References: <AANLkTimxWVes3DZQPGn53BZ1cL6BSX5BT3hwgFHrCUA4@mail.gmail.com>
+	<AANLkTinBzdnAYv_0O=vXnaJ5VNj56Th74eZ=naVSFcFB@mail.gmail.com>
+	<AANLkTikSBQOi6aC0W8QzfEOk6skMcBmbaJdmE4K+Auwd@mail.gmail.com>
+	<20100906035002.GB5320@gmail.com>
+	<AANLkTinvnAhcr63sm=O+s+iyZw8tKfspjzhR__XOb5mU@mail.gmail.com>
+	<AANLkTi=zkn=Ns7MgcakxC8F61O9it3FTYb8XgtHRmcrD@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 6 Sep 2010 09:25:35 -0700
+Message-ID: <AANLkTi=Zy32F8kE3WdWmdmyj6Avg=D6Uv6YEaNLUHtBM@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: neo.freerunner@googlemail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] xserver-xorg-conf/palmpre/xorg.conf
+Subject: Re: virtclass_install prepend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,70 +57,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 15:58:14 -0000
-X-Groupsio-MsgNum: 23190
-Content-Type: multipart/mixed; boundary=0016e6ddab476ea2df048f995625
-
---0016e6ddab476ea2df048f995625
+X-List-Received-Date: Mon, 06 Sep 2010 16:26:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hey devs,
+On Mon, Sep 6, 2010 at 6:54 AM, Chris Larson <clarson@kergoth.com> wrote:
+> On Mon, Sep 6, 2010 at 12:41 AM, Frans Meulenbroeks <
+> fransmeulenbroeks@gmail.com> wrote:
+>
+>> 2010/9/6 Khem Raj <raj.khem@gmail.com>:
+>> > On (19/08/10 21:14), Frans Meulenbroeks wrote:
+>> >> 2010/8/19 Chris Larson <clarson@kergoth.com>:
+>> >> > On Thu, Aug 19, 2010 at 4:29 AM, Frans Meulenbroeks <
+>> >> > fransmeulenbroeks@gmail.com> wrote:
+>> >> >
+>> >> >> Hi,
+>> >> >>
+>> >> >> Found this in our reicpes:
+>> >> >>
+>> >> >> dbus/dbus-glib_0.86.bb:do_install_virtclass-native_prepend() {
+>> >> >>
+>> >> >
+>> >> > This prepends to do_install_virtclass-native, which will then repla=
+ce
+>> >> > do_install when the overrides are applied. =A0This is prepending to=
+ a
+>> variable
+>> >> > which overrides, as opposed to the other, which is a conditional
+>> prepend.
+>> >> > =A0The two are quite different. =A0It's unlikely that this is what =
+they
+>> >> > intended. =A0Far more likely that it should be changed to
+>> >> > _prepend_virtclass-native.
+>> >>
+>> >> I have no idea what is intended and I have no dbus knowledge, so can'=
+t
+>> fix this.
+>> >> I'll leave it to someone else to resolve this.
+>> >
+>> > I think the correct fix is as Chris suggested. Please go ahead and fix
+>> it.
+>> >
+>>
+>> Well I am a little bit hesitating as I am by no means an expert on the
+>> dbus recipe.
+>>
+>> The other question that immediately popped up is:
+>> If the code is wrong and no-one noticed, is it actually needed?
+>>
+>> The code is:
+>> do_install_virtclass-native_prepend() {
+>> =A0 =A0 =A0 =A0 install -d ${D}${datadir}/dbus
+>> =A0 =A0 =A0 =A0install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/db=
+us
+>> }
+>>
+>> Actually if the standard do_install needs to be changed, it generally
+>> raises some alarms with me.
+>> Why would we need to install something that the package normally does
+>> not install?
+>> (of course this could be a bug in the package, but then I would prefer
+>> a patch that we also try to push upstream).
+>>
+>
+> Agreed, that is odd. =A0If it's something that dbus using things might ne=
+ed,
+> why is it only prepended for the native version, and as you say, why is i=
+t
+> not installed by the upstream install target. =A0I'd do a git blame and f=
+igure
+> out who added that and ask them :)
 
-attached to this mail you will find a pathch for xorg-conf
-to support palm pre.
-This is my very first patch ever, so I hope I havent't build in any
-faux pas
+I guess it was part of converting dbus recipes to new staging in which case
+it is converted but may not be used
 
-best
-Peter
+> --
+> Christopher Larson
+> clarson at kergoth dot com
+> Founder - BitBake, OpenEmbedded, OpenZaurus
+> Maintainer - Tslib
+> Senior Software Engineer, Mentor Graphics
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---0016e6ddab476ea2df048f995625
-Content-Type: text/x-patch; charset=US-ASCII; name="palmpre-xorg-conf.patch"
-Content-Disposition: attachment; filename="palmpre-xorg-conf.patch"
-Content-Transfer-Encoding: base64
-X-Attachment-Id: f_gdrilgcv0
 
-RnJvbSAxODQ0NzZhMWYyZDU3MjFiYzJmZTYwOWFjYTkxYzI5OWY0Y2NkMGJkIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBQZXRlciBLbGFzc2VuIDxwa2xhc3NlbkB3ZWIuZGU+CkRhdGU6
-IE1vbiwgNiBTZXAgMjAxMCAxNjoyOTozMSArMDIwMApTdWJqZWN0OiBbUEFUQ0hdIHhvcmcuY29u
-ZiBmb3IgcGFsbXByZQoKaW5pdGlhbCB4b3JnLmNvbmYgZm9yIHBhbG0gcHJlIHRha2VuIChhbmQg
-bW9kaWZpZWQpCmZyb20gZnJlZXNtYXJ0cGhvbmUgZ2l0IHRyZWUKLS0tCiAuLi4veHNlcnZlci14
-b3JnLWNvbmYvcGFsbXByZS94b3JnLmNvbmYgICAgICAgICAgICB8ICAgNDQgKysrKysrKysrKysr
-KysrKysrKysKIHJlY2lwZXMveG9yZy14c2VydmVyL3hzZXJ2ZXIteG9yZy1jb25mXzAuMS5iYiAg
-ICAgIHwgICAgMiArLQogMiBmaWxlcyBjaGFuZ2VkLCA0NSBpbnNlcnRpb25zKCspLCAxIGRlbGV0
-aW9ucygtKQogY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMveG9yZy14c2VydmVyL3hzZXJ2ZXIt
-eG9yZy1jb25mL3BhbG1wcmUveG9yZy5jb25mCgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy94b3JnLXhz
-ZXJ2ZXIveHNlcnZlci14b3JnLWNvbmYvcGFsbXByZS94b3JnLmNvbmYgYi9yZWNpcGVzL3hvcmct
-eHNlcnZlci94c2VydmVyLXhvcmctY29uZi9wYWxtcHJlL3hvcmcuY29uZgpuZXcgZmlsZSBtb2Rl
-IDEwMDY0NAppbmRleCAwMDAwMDAwLi44MjJiMmFkCi0tLSAvZGV2L251bGwKKysrIGIvcmVjaXBl
-cy94b3JnLXhzZXJ2ZXIveHNlcnZlci14b3JnLWNvbmYvcGFsbXByZS94b3JnLmNvbmYKQEAgLTAs
-MCArMSw0NCBAQAorU2VjdGlvbiAiTW9kdWxlIgorICAgIExvYWQgICAgImV4dG1vZCIgCisgICAg
-TG9hZCAgICAiZGJlIgorICAgIExvYWQgICAgImZyZWV0eXBlIgorICAgIExvYWQgICAgInR5cGUx
-IgorICAgIExvYWQgICAgInJlY29yZCIKKyAgICBMb2FkICAgICJkcmkiCitFbmRTZWN0aW9uCisK
-K1NlY3Rpb24gIk1vbml0b3IiCisgICAgSWRlbnRpZmllciAgIkJ1aWx0aW4gRGVmYXVsdCBNb25p
-dG9yIgorRW5kU2VjdGlvbgorCitTZWN0aW9uICJEZXZpY2UiCisgICAgSWRlbnRpZmllciAgIkJ1
-aWx0aW4gRGVmYXVsdCBmYmRldiBEZXZpY2UgMCIKKyAgICBEcml2ZXIgICAgICAib21hcGZiIgor
-ICAgIE9wdGlvbiAiZmIiICIvZGV2L2ZiMCIKK0VuZFNlY3Rpb24KKworU2VjdGlvbiAiU2NyZWVu
-IgorICAgIElkZW50aWZpZXIgICJCdWlsdGluIERlZmF1bHQgZmJkZXYgU2NyZWVuIDAiCisgICAg
-RGV2aWNlICAgICAgIkJ1aWx0aW4gRGVmYXVsdCBmYmRldiBEZXZpY2UgMCIKKyAgICBNb25pdG9y
-ICAgICAiQnVpbHRpbiBEZWZhdWx0IE1vbml0b3IiCitFbmRTZWN0aW9uCisKK1NlY3Rpb24gIlNl
-cnZlckxheW91dCIKKyAgICBJZGVudGlmaWVyICAiQnVpbHRpbiBEZWZhdWx0IExheW91dCIKKyAg
-ICBTY3JlZW4gICAgICAiQnVpbHRpbiBEZWZhdWx0IGZiZGV2IFNjcmVlbiAwIgorICAgIElucHV0
-RGV2aWNlICJUb3VjaHNjcmVlbiIgIkNvcmVQb2ludGVyIgorRW5kU2VjdGlvbgorCitTZWN0aW9u
-ICJJbnB1dERldmljZSIKKyAgICBJZGVudGlmaWVyICAiVG91Y2hzY3JlZW4iCisgICAgRHJpdmVy
-ICAgICAgInRzbGliIgorICAgIE9wdGlvbiAgICAgICJEZXZpY2UiICAgICAgICAgICAgICAgICIv
-ZGV2L3RvdWNoc2NyZWVuIgorICAgIE9wdGlvbiAgICAgICJDb3JlUG9pbnRlciIgICAgICAgICAg
-ICJ0cnVlIgorICAgIE9wdGlvbiAgICAgICJTZW5kQ29yZUV2ZW50cyIgICAgICAgICJ0cnVlIgor
-ICAgIE9wdGlvbiAgICAgICJQcm90b2NvbCIgICAgICAgICAgICAgICJBdXRvIgorICAgIE9wdGlv
-biAgICAgICJXaWR0aCIgICAgICAgICAgICAgICAgICIzMjAiCisgICAgT3B0aW9uICAgICAgIkhl
-aWdodCIgICAgICAgICAgICAgICAgIjQ4MCIKKyAgICBPcHRpb24gICAgICAiRW11bGF0ZVJpZ2h0
-QnV0dG9uIiAgICAiMSIKKyAgICBPcHRpb24gICAgICAiQ29yZVBvaW50ZXIiICAgICAgICAgICAi
-dHJ1ZSIKKworRW5kU2VjdGlvbgpkaWZmIC0tZ2l0IGEvcmVjaXBlcy94b3JnLXhzZXJ2ZXIveHNl
-cnZlci14b3JnLWNvbmZfMC4xLmJiIGIvcmVjaXBlcy94b3JnLXhzZXJ2ZXIveHNlcnZlci14b3Jn
-LWNvbmZfMC4xLmJiCmluZGV4IGMxNWJhZTYuLjBiMWI2MGQgMTAwNjQ0Ci0tLSBhL3JlY2lwZXMv
-eG9yZy14c2VydmVyL3hzZXJ2ZXIteG9yZy1jb25mXzAuMS5iYgorKysgYi9yZWNpcGVzL3hvcmct
-eHNlcnZlci94c2VydmVyLXhvcmctY29uZl8wLjEuYmIKQEAgLTEsNSArMSw1IEBACiBERVNDUklQ
-VElPTiA9ICJNYWNoaW5lIHNwZWNpZmljIHhvcmcuY29uZiBmaWxlcyIKLVBSID0gInIzMSIKK1BS
-ID0gInIzMiIKIAogU1JDX1VSSSA9ICJmaWxlOi8veG9yZy5jb25mIgogCi0tIAoxLjcuMC40Cgo=
-
---0016e6ddab476ea2df048f995625--
