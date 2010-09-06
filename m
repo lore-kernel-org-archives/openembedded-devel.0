@@ -1,40 +1,44 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sakoman@gmail.com>) id 1Osk4p-0005jU-SZ
+	(envelope-from <vwyodapink@gmail.com>) id 1OskYM-0000Ar-J3
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 00:22:13 +0200
-Received: by wye20 with SMTP id 20so5198094wye.6
+	Tue, 07 Sep 2010 00:52:43 +0200
+Received: by wwi14 with SMTP id 14so4458467wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 15:21:32 -0700 (PDT)
+	Mon, 06 Sep 2010 15:52:02 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=rweECwjUK0kL47kq6TtsNlCEzbSCfKV7Ry4Gu9wV4Pk=;
-	b=EnmzEogUGZZ6+A9UDrJHabfg5hsTXCmb490JRv9GXYvR0wBbb78XTU9/ves3DANmEO
-	WrEmvyvamhomp+Z76Cwn/+JPoPkz8KAD4Q6aQfJyrhSB+I7JHQCN/zKRxBaZ+Tg1W9Ox
-	B1VigrukHqhF6zyaNr8HZqFQZDHcgqnhTRabk=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=w8X+qWLsOXomF4Mvfpz02QrEWRRvO/Ln8xQeq8TGS24=;
+	b=C23ylkMB5cQHqs3BMEHBcEnRXYNk2mwsISkdmEAMxgkYtujgudetwLJ/5mUWBturW2
+	OVGcnCoKwZlrzVOvOGmnkTB8bV/zdY+XNzK/rXe+yIoT8NHwsBi/3CD639SKL/0JoX64
+	/H9YIJmP4HlCiKq6xNyz4ndVrUi3Kts8t+eQA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=MMa76b6Z+Kp/V8awmNjh9gJeK1syRst1TWc/ZC36zVy4NZiNDp5dkfsyfHVjOpK4iC
-	ry2iTUf6PqHWb4DeyFDc+oEjLI7mJg3+hAAgIdL1+oUwkMa/rDVdJodIPk8M8W8N3eiX
-	qWffVsFozQtgtdp4WxGWNJdx/u6yVPQVN7vcg=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NsNMytYD61fKNJbFCGbHCO4L9/ExMkJ+0WyULHGpKCN13JbXQCl0UKDkO1W4D0VqpM
+	3O9ua4nOHtufiE3tqYYmmJtrLxFDOxcGZkq6OrhDT6tV/YEZ1hKoBP+vLJ4hiZWketOO
+	x7LqndiNunvoCz5IpszZlvfOakTPnui8HvNTc=
 MIME-Version: 1.0
-Received: by 10.216.179.137 with SMTP id h9mr2804586wem.39.1283811692032; Mon,
-	06 Sep 2010 15:21:32 -0700 (PDT)
-Received: by 10.216.16.193 with HTTP; Mon, 6 Sep 2010 15:21:31 -0700 (PDT)
-Date: Mon, 6 Sep 2010 15:21:31 -0700
-Message-ID: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
-From: Steve Sakoman <sakoman@gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: sakoman@gmail.com
+Received: by 10.216.35.78 with SMTP id t56mr4307202wea.34.1283813522173; Mon,
+	06 Sep 2010 15:52:02 -0700 (PDT)
+Received: by 10.216.58.197 with HTTP; Mon, 6 Sep 2010 15:52:02 -0700 (PDT)
+In-Reply-To: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
+References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
+Date: Mon, 6 Sep 2010 15:52:02 -0700
+Message-ID: <AANLkTim6mO+jXyKAdyHN_K8sDwBWwhM35XHO2L-ux_RU@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Images no longer automatically include libstdc++6
+Subject: Re: Images no longer automatically include libstdc++6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,18 +52,37 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 22:22:13 -0000
+X-List-Received-Date: Mon, 06 Sep 2010 22:52:43 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Using current top of tree to build some of my images I noticed that
-quite a few apps seems to be broken at run time (Firefox, Epiphany,
-Gnome-mplayer, and others).
+On Mon, Sep 6, 2010 at 3:21 PM, Steve Sakoman <sakoman@gmail.com> wrote:
+> Using current top of tree to build some of my images I noticed that
+> quite a few apps seems to be broken at run time (Firefox, Epiphany,
+> Gnome-mplayer, and others).
+>
+> All were complaining about libstdc++6 being missing. =A0Manually
+> installing the libstdc++6 package fixed the issue.
 
-All were complaining about libstdc++6 being missing.  Manually
-installing the libstdc++6 package fixed the issue.
+I have reported this on the gumstix board as well steve and Frans did
+a post about this here on OE and the other one libgcc_s.so.1 that
+seems to be missing. Thanks for posting your work around I thought I
+had tried that on my machine but will try again. here is Frans post
+this am [oe] NOTE: Couldn't find shared library provider, also my
+boost threads have the errors listed in them as well.
 
-Any idea what changed that introduced this issue?
+JL
 
-Steve
+
+>
+> Any idea what changed that introduced this issue?
+>
+> Steve
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
