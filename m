@@ -1,48 +1,37 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Osiu9-0003Dy-PM
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OsjZz-0006iu-ER
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 23:07:09 +0200
-Received: by wye20 with SMTP id 20so5133721wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 14:06:25 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=8dO+GjSmpvqJPLhDTlClxNFLoZXDu7W4zP7dAMLA22I=;
-	b=xUPn/iGHyapwzuD+qVVi/rBpQDermxqsaO8yZvg90etiY5+G5gKUcXpDm6gB/hyrS9
-	nVfQlP2hgYqRuNWUkgXCAsSauNJSPVmZN3oVCuU9JiHKq2V9Y9Ljo/DDv1AW7uoZrbS8
-	74g5je/cQa4McXd4dOY+GMGqk4bMk+2E+Y4X8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=JDiaEV45W+pQyAAOp4nlulkD3dnzweQZI42kpyis68JUf5ZlK+yK2L2xsYjZdFEVEy
-	jysnCSLL2mrk69nOT2MKiRnKM+Bn+F4PFX7dOdrhdNg9Bs488DBK1UlJ+qvbyamANPtR
-	4e3ZC2g2ghY5eVuW3HCV7aYLBlvURXCNRuArw=
-Received: by 10.216.158.18 with SMTP id p18mr1332247wek.2.1283807185150; Mon,
-	06 Sep 2010 14:06:25 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.167 with HTTP; Mon, 6 Sep 2010 14:06:05 -0700 (PDT)
-In-Reply-To: <1283806652-8619-1-git-send-email-eric@eukrea.com>
-References: <AANLkTinZzUuqZTPN_-XfqYPrQXgVcjPCQh34c2F9D0kX@mail.gmail.com>
-	<1283806652-8619-1-git-send-email-eric@eukrea.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 6 Sep 2010 14:06:05 -0700
-X-Google-Sender-Auth: 14viPZdpFxgEwdbM4WZCV2CTBro
-Message-ID: <AANLkTinp=X1NhM2=Jeg3cSO5=uLf=bSYfeKsgQ6d44UC@mail.gmail.com>
+	Mon, 06 Sep 2010 23:50:28 +0200
+Received: (qmail 2038 invoked by uid 503); 6 Sep 2010 21:54:02 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 6 Sep 2010 21:54:02 -0000
+Received: (qmail 29217 invoked by uid 503); 6 Sep 2010 21:27:16 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 6 Sep 2010 21:27:15 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 6 Sep 2010 23:42:59 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 6 Sep 2010 23:42:58 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Mon,  6 Sep 2010 23:41:49 +0200
+Message-Id: <1283809310-29893-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 6945113576459840841
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH v2] lib/oe/unpack.py: fix uncompressing .gz .bz2 or .xz
+Subject: [PATCH 1/2] mercurial-native: add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,28 +45,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 21:07:10 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 06 Sep 2010 21:50:28 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Mon, Sep 6, 2010 at 1:57 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+* mercurial is a distributed SCM
+* having the native recipe inside OpenEmbedded gives the
+possibility to fetch code from mercurial's repositories
+without the need to have mercurial installed on the host
 
-> * Actually, the uncompressed file is written into the source
-> path instead of the destination path.
-> * By also removing the source path, this patch should fix this problem.
-> * An other fix could be to not uncompress to stdout but let gunzip|bunzip=
-2|
-> xz uncompress directly to the file.
->
-> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
->
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/mercurial/mercurial-native_1.6.3.bb |   23 +++++++++++++++++++++++
+ 1 files changed, 23 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/mercurial/mercurial-native_1.6.3.bb
 
-Acked-by: Chris Larson <chris_larson@mentor.com>
---=20
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+diff --git a/recipes/mercurial/mercurial-native_1.6.3.bb b/recipes/mercurial/mercurial-native_1.6.3.bb
+new file mode 100644
+index 0000000..58fcaf1
+--- /dev/null
++++ b/recipes/mercurial/mercurial-native_1.6.3.bb
+@@ -0,0 +1,23 @@
++DESCRIPTION = "The Mercurial distributed SCM"
++SECTION = "console/utils"
++LICENSE = "GPLv2"
++
++SRC_URI = "http://mercurial.selenic.com/release/mercurial-${PV}.tar.gz;name=src"
++
++DEPENDS = "python-native"
++PR = "r0"
++
++S = "${WORKDIR}/mercurial-${PV}"
++EXTRA_OEMAKE = "STAGING_LIBDIR=${STAGING_LIBDIR} STAGING_INCDIR=${STAGING_INCDIR} \
++	BUILD_SYS=${BUILD_SYS} HOST_SYS=${HOST_SYS} PREFIX=${STAGING_DIR_NATIVE}/usr"
++
++do_install () {
++        install -d ${STAGING_DIR_NATIVE}/usr
++        oe_runmake install
++}
++
++inherit native
++
++SRC_URI[src.md5sum] = "fcd61edc488d1b9aa831dde6f14d9a13"
++SRC_URI[src.sha256sum] = "57e5d26d35fbec71206378e3af111193e6eee7bb1dfb6447bbc4b9e03ce937bd"
++
+-- 
+1.6.3.3
+
+
 
