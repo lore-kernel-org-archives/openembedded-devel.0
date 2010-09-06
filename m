@@ -1,36 +1,29 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Osf2y-000299-OP
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsfqI-0004N4-B4
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 18:59:57 +0200
-Received: by iwn2 with SMTP id 2so4322580iwn.6
+	Mon, 06 Sep 2010 19:50:55 +0200
+Received: by iwn2 with SMTP id 2so4358733iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 09:59:18 -0700 (PDT)
+	Mon, 06 Sep 2010 10:50:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=owB46L5m7OL4Bfgd8stuMTj9p/STVGM1RJlo2p1VL+o=;
-	b=nVQvXY6Ft+n0QhjnPc2I/FUihWQ6Vlp03A74BOGQ2GVzzFtgnridyCodWjzY0aL86f
-	B/x2jU7LrhXj2l1FOdX3dn9GZVOOX2GnpdG6B6V/kPa0s5wshZxJ1Js09UAQuQrHZjmz
-	CTNvXK71XdsVuO60JDpS12y3gCPW8VvRTYAkg=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=MBqYFvI6r+kAa1iYGx33pwo+OtDpQ0FdElLbM64ZkEA=;
+	b=jcfWoliPWbXDS3klYRbfdbBSGiPRqF1Xi0GlyFDX1jdrXMWNFBRCf4+2Vfjyj7CaEI
+	O1yt1wX07tD81zOfJ2J/adNH3GbPjAXQd/9oA65nKT/dnz/FVw/L3mKymz+XgFUsB0Ug
+	/OKdteWrBQD9ahPMt2TVwjzJZD5P3nbbXkEQ8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=sMuJC/8mX2FTveD1ngkTQi670FdZHbhDQ2lgBnC1dTwg3vsTF/6yk9MYx5hXSWFDjB
-	l90xJp6ed6AI36iRoU2GK6uJ18JUTkrWwv4DZO6xv1CxHKKJR28q4Tuv503XfQY9orbH
-	qMq0jjeQmSGq/exGktHh5VwhbrbsAPkUM5bb4=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=f4nKIMT1chs+5bGoMH11tZma1WxRVMRyC8n9IZwcQDTyB8x/duz5VIytUIBUdsUWs5
+	ot1Wcm22ajGMq1TpK1SBW+/byFwP3/VjuhZUZ5PSVlQyaw/Fexuyyap2zeUkk+XPN2oL
+	P43Om44jKuenRx3gem0cXC6d0Yt+BuXA1vdxA=
 MIME-Version: 1.0
-Received: by 10.231.191.74 with SMTP id dl10mr6452520ibb.157.1283792357831;
-	Mon, 06 Sep 2010 09:59:17 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 09:59:17 -0700 (PDT)
-In-Reply-To: <AANLkTiktKfjWwgs2-xAxoOWH7_RdXfkbAYiOZoCbf51M@mail.gmail.com>
-References: <AANLkTi=j4E6ZLet=qemx-Ec1CaySKLCuzZMDriX9WQ=T@mail.gmail.com>
-	<4C835C8E.1000008@eukrea.com>
-	<AANLkTi=GrTNa2H+UZjM6RrYU6xAx-DZg2KwDix8MzOgM@mail.gmail.com>
-	<4C836376.3050709@eukrea.com>
-	<AANLkTiktKfjWwgs2-xAxoOWH7_RdXfkbAYiOZoCbf51M@mail.gmail.com>
-Date: Mon, 6 Sep 2010 18:59:17 +0200
-Message-ID: <AANLkTi=3MVqehDdODOS_HhSfo4XcY=owt-=t+_THQYrY@mail.gmail.com>
+Received: by 10.231.153.76 with SMTP id j12mr6566907ibw.66.1283795415748; Mon,
+	06 Sep 2010 10:50:15 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 10:50:15 -0700 (PDT)
+Date: Mon, 6 Sep 2010 19:50:15 +0200
+Message-ID: <AANLkTineLTCDtymfwbaAJXcrz0vB=V4++=HOwEA7wQHU@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
@@ -41,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: ushare_hg (the leading ushare recipe) does not fetch
+Subject: libtermcap (was: Re: Asterisk and termcap)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,32 +48,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 16:59:57 -0000
+X-List-Received-Date: Mon, 06 Sep 2010 17:50:56 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-2010/9/6 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> Eric,
+2010/9/6 Arigead <captain.deadly@gmail.com>:
+> was trying to build Asterisk for the OpenMoko Free runner and it failed
+> on a dependency on termcap so I tried to bitbake termcap first and that
+> failed. The termcap compile stage is working but it's when it tries to
+> install that the recipe seems to fail but I'm new to this.
 >
-> I think the problem is resolved. Somewhere something went wrong with
-> installing 1.10.
-> Although my bitbake dir was a symlink to the 1.10 dir it still
-> reported as 1.8.18, so guess either I misplaced things or maybe this
-> is a pre 1.10 version.
->
-> berlios is currently not responding so cannot re-download 1.10. I'll
-> try later and let you know the result.
->
-> Thanks alot for your help!
->
-> Frans
->
+> I'm off to read the openembedded documentation again but in the mean
+> time if anybody can give me a hit that would be great.
 
-Retested with 1.10 and help of Eric.
-The patch works for me.
-Maybe I had to install mercurial to get thngs going (after applying the patch).
-mercurial is not in the sanity checker. alternately maybe hg.py should
-warn or we should have a mercurial_native recipe.
+Eric peeked into the termcap problem. I've tested his patch and it
+works. He will probably push a patch later today.
 
-Frans
+The termcap problem from asterisk is not related. It cannot find
+libtermcap. This one does not exist any more with ncurses 5.7.
+
+People how should we fix this? I know it has been discussed before,
+but I don't recall a solution.
+I bumped into this for a different package too. There I fixed things
+by adding a patch, but I am not sure if that is really the desired
+solution.
+
+Best regards, Frans
 
 
