@@ -1,46 +1,43 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsV9P-0002in-IM
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 08:26:12 +0200
-Received: by gya6 with SMTP id 6so1656705gya.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OsVSg-00052O-RV for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Sep 2010 08:45:53 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OsVS3-0007qp-Oc for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Sep 2010 08:45:11 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Sep 2010 08:45:11 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Sep 2010 23:25:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=6ErDu94LbkKvsQ3gxaRmtKi6oeerUScVAKjmh9i+4oE=;
-	b=qJAFBFeh5yM5uc3w1ly046m0rbjc5R23Lcf5lvVljk8W3znQcUaZpFOEt6prFttGNW
-	yND+iKEZ5RmlGduTi7bsWG2FvwXILIrEcfhrQI/PNZDuxP2eWNHoP0F6a+HrZdTi5+K1
-	kcLiEESjH5TzA7lYTCPqA6WMx4wSVdLB4zOr0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=rOEYadXiblypm6nRJ57QIpJbClLsresIBmhmwm32wGpf3LCizO5kH+vzq6leTQkvhn
-	lezVKqQdMvxejr2+sRWRA/bA4vOr5tqI5V20v2yDAOutMALTXrS4QI8fF3xV8Fd0xWa2
-	lWozo2oqoDTMVu4ZdDAQiB5HfFukZLjEk1CZg=
-MIME-Version: 1.0
-Received: by 10.101.176.35 with SMTP id d35mr2467662anp.107.1283754312835;
-	Sun, 05 Sep 2010 23:25:12 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Sun, 5 Sep 2010 23:25:12 -0700 (PDT)
-In-Reply-To: <4C836376.3050709@eukrea.com>
-References: <AANLkTi=j4E6ZLet=qemx-Ec1CaySKLCuzZMDriX9WQ=T@mail.gmail.com>
-	<4C835C8E.1000008@eukrea.com>
-	<AANLkTi=GrTNa2H+UZjM6RrYU6xAx-DZg2KwDix8MzOgM@mail.gmail.com>
-	<4C836376.3050709@eukrea.com>
-Date: Mon, 6 Sep 2010 08:25:12 +0200
-Message-ID: <AANLkTiktKfjWwgs2-xAxoOWH7_RdXfkbAYiOZoCbf51M@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 06 Sep 2010 08:45:11 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Mon, 06 Sep 2010 08:44:59 +0200
+Message-ID: <i622lb$jp9$1@dough.gmane.org>
+References: <1283027073-12308-1-git-send-email-raj.khem@gmail.com>	<1283027073-12308-12-git-send-email-raj.khem@gmail.com>	<i5das3$v2$3@dough.gmane.org>	<AANLkTikE=wDnQPu5txDEL4QdOjfrD3YK1DOphAqvZZ4h@mail.gmail.com>	<AANLkTin3L-dJY_KRx5BjdSPCfU1nr-iTYvkzuE5KNE3B@mail.gmail.com>	<i5nnsf$1sq$2@dough.gmane.org>
+	<AANLkTintRQq9RKAYhr48K7oyJFhG9WzX2k4e5KZbXr9m@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <AANLkTintRQq9RKAYhr48K7oyJFhG9WzX2k4e5KZbXr9m@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: ushare_hg (the leading ushare recipe) does not fetch
+Subject: Re: [PATCH 11/23] udev-compat141_141.bb: if machine is not one of spitz akita c70x poodle then it is not needed to RDEPEND'ed on udev-compat-wrapper
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,22 +51,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 06:26:12 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Sep 2010 06:45:53 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-Eric,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-I think the problem is resolved. Somewhere something went wrong with
-installing 1.10.
-Although my bitbake dir was a symlink to the 1.10 dir it still
-reported as 1.8.18, so guess either I misplaced things or maybe this
-is a pre 1.10 version.
+Looks good to me, but I haven't tested it.
 
-berlios is currently not responding so cannot re-download 1.10. I'll
-try later and let you know the result.
+On 03-09-10 09:01, Khem Raj wrote:
+> On Thu, Sep 2, 2010 at 1:39 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
+>>
+>> On 01-09-10 23:40, Khem Raj wrote:
+>>> On Sun, Aug 29, 2010 at 11:15 AM, Khem Raj <raj.khem@gmail.com> wrote:
+>>>> On Sun, Aug 29, 2010 at 2:56 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+>>>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>>>> Hash: SHA1
+>>>>>
+>>>>> On 28-08-10 22:24, Khem Raj wrote:
+>>>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>>>>>> ---
+>>>>>>  recipes/udev/udev-compat141_141.bb |    6 +++++-
+>>>>>>  1 files changed, 5 insertions(+), 1 deletions(-)
+>>>>>>
+>>>>>> diff --git a/recipes/udev/udev-compat141_141.bb b/recipes/udev/udev-compat141_141.bb
+>>>>>> index 2411fc6..c39d4cb 100644
+>>>>>> --- a/recipes/udev/udev-compat141_141.bb
+>>>>>> +++ b/recipes/udev/udev-compat141_141.bb
+>>>>>> @@ -15,7 +15,11 @@ PACKAGES = "${PN} ${PN}-dbg"
+>>>>>>  PROVIDES = "udev-compat"
+>>>>>>
+>>>>>>  # Need udev with udev-compat-wrapper support and nothing else.
+>>>>>> -RDEPENDS_${PN} = "udev-compat-wrapper"
+>>>>>> +RDEPENDS_${PN}_spitz = "udev-compat-wrapper"
+>>>>>> +RDEPENDS_${PN}_akita = "udev-compat-wrapper"
+>>>>>> +RDEPENDS_${PN}_c7x0 = "udev-compat-wrapper"
+>>>>>> +RDEPENDS_${PN}_poodle = "udev-compat-wrapper"
+>>>>>> +
+>>>>>>  # Remove hotplug RPROVIDES
+>>>>>>  RPROVIDES_${PN} = "udev-compat"
+>>>>>
+>>>>> NAK, this is a generic wrapper to use recent udev on older kernels, not
+>>>>> specific to zaurus.
+>>>>
+>>>> OK then why is this wrapper only rprovided for specific machines and
+>>>> not rprovided always for every machine ?
+>>>> It seems its does not do what you are saying IIUC.
+>>>
+>>> ping ?
+>>
+>> The zaurus people screwed up when adding this, it is still intended as a
+>> generic stopgap measure for device stuck on <2.6.27 kernels.
+> 
+> alright got it. what do you think of attached patch ?
+> 
+> Thanks
+> 
+> -Khem
+> 
+> 
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
-Thanks alot for your help!
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-Frans
+iD8DBQFMhI3qMkyGM64RGpERAghfAJ9/Rj0V9//ayw0lVjNYe1ZPiar0qACgoecF
+ELHTDHU7/kF8YQchnDHm51E=
+=v6Ah
+-----END PGP SIGNATURE-----
+
 
 
