@@ -1,44 +1,48 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OsMz5-0006Zx-RS
+	(envelope-from <graham.gower@gmail.com>) id 1OsPQG-0004bl-HT
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 05 Sep 2010 23:42:45 +0200
-Received: by pwj8 with SMTP id 8so919888pwj.6
+	Mon, 06 Sep 2010 02:18:57 +0200
+Received: by pvg6 with SMTP id 6so1339418pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Sep 2010 14:42:04 -0700 (PDT)
+	Sun, 05 Sep 2010 17:18:16 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=c8QxpNbQXxqMfEN5U7DNzVO72093ofKMEL4Kbn+ethY=;
-	b=jZ4/jVMAEPNMFnzSck9Uq7ipeZYudmP4R0wdiXNJnzBZHfpIxVzKj4x3V5tBgYVL7a
-	fmCFKYVsGc/2Ng/85u0SxDykS7mhVfWY8T7+n9p+AU7JkYzNLuThfElK8jdJETIoI+Hm
-	QkqvHwwCMaa1Gl8+O0co2rdCDKemGiHccH+RI=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=PQWnicfUE9Io7sWgrUtONBSh+Y738kICeASQtzUijxg=;
+	b=Ya4HQ0Tp9In4r+eVV7uw2TgjWE/L9j2bReFxBVwd+5jh83XrSDlsdkte11G5ZCldCq
+	g605CFTou5r2Zvnad6tsGYZXm78Vfxt2ZLXoRRNmKI3V8yLXo18dLAUyLCV0fUOXiGFL
+	DQhneE7eLFe8l72VcbQvgygy2wFYu+L6PTLw4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=aR+ic8jMbwbuw13oOe03r3eY1kSIZTCkcVUOnahNpRR7yYRVRXbBNs2PPYcZMcWXnr
-	zVRewr38JG9S6DdvhYUy5rSXBZWufOfL74eHU0ZJrcB7OnR3Tu2L+1R3IBVkeN60mdcK
-	kHNAJaLgTzp7cuG4i/2mDSLavSZGD8n5IXXtA=
-Received: by 10.114.106.13 with SMTP id e13mr2162677wac.153.1283722923961;
-	Sun, 05 Sep 2010 14:42:03 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id r37sm9740100wak.11.2010.09.05.14.42.02
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=E8UTjS5T3bZk6eHa/XkXGECxEXOcCZfg1gorF+eivroZVzusF0xiBkHZzBOkeZxO5L
+	EY8+pUpX0owKDX9jKufeNFAIQQSrAoshQBPPFTIIlaqfOLsv7U5K5sRkrsyyzuGICl8L
+	WmiUCmjjYEzPLirNxDfJrP5bzFRcfe6i3WzCk=
+Received: by 10.142.231.7 with SMTP id d7mr1910392wfh.162.1283732296725;
+	Sun, 05 Sep 2010 17:18:16 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	n35sm3362183wfa.15.2010.09.05.17.18.14
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 05 Sep 2010 14:42:03 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	Sun, 05 Sep 2010 17:18:16 -0700 (PDT)
+Message-ID: <4C843342.7000601@gmail.com>
+Date: Mon, 06 Sep 2010 09:48:10 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100721 Thunderbird/3.0.6
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-Date: Sun,  5 Sep 2010 14:41:53 -0700
-Message-Id: <1283722913-25949-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] bitbake.conf: Redefine STAGING_DIR_JAVA to point to target sysroot by default
+Subject: [PATCH] gdb-common, gdb-cross-sdk: don't install libiberty on 64bit hosts.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,32 +56,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 05 Sep 2010 21:42:45 -0000
+X-List-Received-Date: Mon, 06 Sep 2010 00:18:57 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
+
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- conf/bitbake.conf |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/gdb/gdb-common.inc    |    3 +--
+ recipes/gdb/gdb-cross-sdk.inc |    2 +-
+ 2 files changed, 2 insertions(+), 3 deletions(-)
 
-diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-index 677c76a..b099499 100644
---- a/conf/bitbake.conf
-+++ b/conf/bitbake.conf
-@@ -295,7 +295,6 @@ B = "${S}"
+diff --git a/recipes/gdb/gdb-common.inc b/recipes/gdb/gdb-common.inc
+index c3eef69..93d5492 100644
+--- a/recipes/gdb/gdb-common.inc
++++ b/recipes/gdb/gdb-common.inc
+@@ -31,7 +31,6 @@ do_install_append() {
  
- STAGING_DIR = "${TMPDIR}/sysroots"
+ 	# We use libiberty from binutils
+ 	rm -f ${D}${prefix}/${TARGET_SYS}/lib/libiberty.a
+-	rm -f ${D}${libdir}/libiberty.a
+-
++	rm -f ${D}${prefix}/lib{,64}/libiberty.a
+ }
  
--STAGING_DIR_JAVA = "${STAGING_DIR}/java"
- STAGING_DIR_NATIVE = "${STAGING_DIR}/${BUILD_SYS}"
- STAGING_BINDIR_NATIVE = "${STAGING_DIR_NATIVE}${bindir_native}"
- STAGING_SBINDIR_NATIVE = "${STAGING_DIR_NATIVE}${sbindir_native}"
-@@ -321,6 +320,7 @@ STAGING_PYDIR = "${STAGING_DIR}/lib/python2.4"
- # This should really be MULTIMACH_TARGET_SYS but that breaks "all" and machine 
- # specific packages - hack around it for now.
- STAGING_DIR_TARGET = "${STAGING_DIR}/${BASEPKG_TARGET_SYS}"
-+STAGING_DIR_JAVA = "${STAGING_DATADIR}/java"
+diff --git a/recipes/gdb/gdb-cross-sdk.inc b/recipes/gdb/gdb-cross-sdk.inc
+index 7c85653..21f3267 100644
+--- a/recipes/gdb/gdb-cross-sdk.inc
++++ b/recipes/gdb/gdb-cross-sdk.inc
+@@ -1,7 +1,7 @@
+ require gdb-cross.inc
+ LICENSE = "GPLv3"
  
- STAGING_DIR_SDK = "${STAGING_DIR}/${SDK_SYS}"
+-INC_PR = "r6"
++INC_PR = "r7"
+ 
+ inherit sdk
  
 -- 
 1.7.1
