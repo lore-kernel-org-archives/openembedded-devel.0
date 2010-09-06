@@ -1,50 +1,51 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OsT5A-0006Nx-8y
+	(envelope-from <raj.khem@gmail.com>) id 1OsT6y-0006nL-Ew
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 06:13:35 +0200
-Received: by pxi11 with SMTP id 11so926839pxi.6
+	Mon, 06 Sep 2010 06:15:35 +0200
+Received: by pvg6 with SMTP id 6so1386991pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 05 Sep 2010 21:12:44 -0700 (PDT)
+	Sun, 05 Sep 2010 21:14:36 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:received:date:from:to:cc:subject
 	:message-id:references:mime-version:content-type:content-disposition
 	:in-reply-to:user-agent;
-	bh=a4cFj/Nndz+lHEvCwW82bgY8Yuj+Zxsm0vckfcHfQpg=;
-	b=mlgpqZQnqDd46c4kVPrBTJiX689JIoSmMdKE4XuKOFmMSoNctAOvWbAozaFEz0dw3H
-	aGAgz9Bjl7emS6LDfmwHkpR1eKHQdr6pLXymeNcx97clkOUFFk4KdpLmOEgzqzqgwibG
-	jO1UlR9RlC8S89YDZ/erk7TTudfrwIcr5IpSk=
+	bh=85cN2Cky9iH7iYQa+Gel8dBIIZsmKdGpzwsprKDx434=;
+	b=ZI/y5YhW3uKmTg90gZpBzKPwyFYHuwKwOxfDcJROpQIFqyv+5DrKsXU6pcsZzkfZew
+	V0bHFA/ppTRapKsSxPcr36CFre/YCSM9wO1k8SXPdA0upGvyTX+bWC75ci2pnjekMy12
+	egTkb+ppOuwVkzrx8+XV3P9ZDOw4uahchEYS8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=date:from:to:cc:subject:message-id:references:mime-version
 	:content-type:content-disposition:in-reply-to:user-agent;
-	b=cMTguFDLV1ozWRZ6LKo2ql5mb6HgQrLStnx99tNOTXCOxAfaKUscQMCCgHMvLcDfxg
-	4CX8WFJhxLFjMZUMOnQDAUyWim+LjrP6UiaRlwhtYkjhY3ZowDBR6s1SiGdKtkvoJUVK
-	ZJ1kCJWzVfCQSBDXOXPl2nN4HmCcES4nIYTVo=
-Received: by 10.142.43.7 with SMTP id q7mr2087976wfq.45.1283746364528;
-	Sun, 05 Sep 2010 21:12:44 -0700 (PDT)
+	b=jp8B//c35QH20pabuhKovbQvh8SrahjuKxa8EpgFieKpnAxAl0wUlYpLX4KkJoVKbw
+	11OgnunFmYcvaAov4HSEIhKWb+iPqEAA0UmZHeC3pXNzeZNeQuPwpV62k1IwajoAFTOp
+	6A+lcPhZ1yOVNJv2x07Y5iJarv8zKwpCvhuNY=
+Received: by 10.114.77.11 with SMTP id z11mr1175157waa.112.1283746476128;
+	Sun, 05 Sep 2010 21:14:36 -0700 (PDT)
 Received: from gmail.com (99-57-141-118.lightspeed.sntcca.sbcglobal.net
 	[99.57.141.118])
-	by mx.google.com with ESMTPS id n35sm3606043wfa.3.2010.09.05.21.12.42
+	by mx.google.com with ESMTPS id x9sm10383696waj.15.2010.09.05.21.14.34
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Sun, 05 Sep 2010 21:12:43 -0700 (PDT)
-Date: Sun, 5 Sep 2010 21:12:26 -0700
+	Sun, 05 Sep 2010 21:14:35 -0700 (PDT)
+Date: Sun, 5 Sep 2010 21:14:18 -0700
 From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100906041226.GC5320@gmail.com>
-References: <1282482111330517500@rkmorris.us> <1282619676244726500@rkmorris.us>
+Message-ID: <20100906041418.GD5320@gmail.com>
+References: <AANLkTi=AYdkOG3e-DmhTNqULsCFHW2bvDGr+M0xTs0HJ@mail.gmail.com>
 MIME-Version: 1.0
-In-Reply-To: <1282619676244726500@rkmorris.us>
+In-Reply-To: <AANLkTi=AYdkOG3e-DmhTNqULsCFHW2bvDGr+M0xTs0HJ@mail.gmail.com>
 User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 74.125.83.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=unavailable version=3.2.5
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: openembedded-users@linuxtogo.org, openembedded-issues@linuxtogo.org
-Subject: Re: H1940 Boot Issue
+Cc: "General mailing list for gumstix users."
+	<gumstix-users@lists.sourceforge.net>
+Subject: Re: base_files 3.0.14 has dangling symlinks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,19 +59,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 04:13:36 -0000
+X-List-Received-Date: Mon, 06 Sep 2010 04:15:43 -0000
 Content-Type: text/plain; charset=us-ascii
 Content-Disposition: inline
 
-On (23/08/10 22:14), openembedded@rkmorris.us wrote:
-> Hi,
-> One more observation after a bit of debugging here - I am able to use my OE generated kernel with an older (non-OE) initrd was able to find ... so it seems that the OE generated file system / initrd is the issue. I have tried using a ramdisk, and also a SD partition, to debug the issue - but the boot hangs before anything is written to the log files (on the SD partition).
-> Any suggestions how to debug this?
+On (22/08/10 10:54), J. L.  wrote:
+> While trying to do a new image I came across this error is it anything
+> to worry about? Or something that needs to be fixed?  Here is the
+> error:
+> 
+> NOTE: Running task 8590 of 11052 (ID: 251,
+> /home/vdubhack/overo-oe/org.openembedded.dev/recipes/base-files/base-files_3.0.14.bb,
+> do_package)
+> NOTE: base-files contains dangling symlink to /media/net
+> NOTE: base-files contains dangling symlink to /media/card
+> NOTE: base-files contains dangling symlink to /media/ram
+> NOTE: base-files contains dangling symlink to /media/cf
+> 
 
+Worth looking into them I guess. Sometimes they may be ok when they appear
+on root file system on target
 
-it seems your kernel is booting fine you can point init to a statically
-linked bash or dash and then debug init from there
-
--Khem
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
