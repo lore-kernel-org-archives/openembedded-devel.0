@@ -1,45 +1,33 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsWM9-0002po-P4
+	(envelope-from <Noor_Ahsan@mentor.com>) id 1OsXZd-00007U-BQ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 09:43:11 +0200
-Received: by gya6 with SMTP id 6so1673063gya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 00:42:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=hU77Zc3jNOAidMkjML5eitVP2zdPQ5eSlyxdYUy5zL4=;
-	b=oBc22rgrnjTZUjMPJo+RiBkXaiSE7LHC4Xu6U4qK9EUtxnoVN/VORGcTDm12+crBCj
-	ka8YP1pr6F/3HjFfw1frexMzfVXLof1zit/cQT1aHAAYv9lFbWC3S2gMoiIYvkPtFIlJ
-	yZfocFlB/wyRGOcqM3GG8IyJ+KXT/VWvb3ysw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=xwnyOBRqObEceCC/RII+VsqcMqa2axPUQpJF8HDvURGrvdrxh19+beVJVIyavq4cGk
-	+VfyAreaVjfHOA60UCf/itX7nOZLfIojqvztKITTgZLV0a1Kz2T8uAmhL6qhSimZ9EqS
-	GJn5VffaawJABP8cB1qb49HhASTFd5HHFFpYo=
+	Mon, 06 Sep 2010 11:01:12 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OsXYu-0003Qh-SD from Noor_Ahsan@mentor.com ;
+	Mon, 06 Sep 2010 02:00:25 -0700
+X-MimeOLE: Produced By Microsoft Exchange V6.5
 MIME-Version: 1.0
-Received: by 10.100.7.17 with SMTP id 17mr1263719ang.21.1283758950213; Mon, 06
-	Sep 2010 00:42:30 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 00:42:30 -0700 (PDT)
-In-Reply-To: <20100906041418.GD5320@gmail.com>
-References: <AANLkTi=AYdkOG3e-DmhTNqULsCFHW2bvDGr+M0xTs0HJ@mail.gmail.com>
-	<20100906041418.GD5320@gmail.com>
-Date: Mon, 6 Sep 2010 09:42:30 +0200
-Message-ID: <AANLkTikTnJsYNur+inxCCSVqnZeOBNgAot_hKeQO0Y-O@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 6 Sep 2010 11:00:21 +0200
+Message-ID: <989A078976CDAD4CB2DC976EEF70E2A5042F15B5@eu2-mail.mgc.mentorg.com>
+X-MS-Has-Attach: yes
+X-MS-TNEF-Correlator: 
+Thread-Topic: llvm-native package dependency on binutils-croos package
+Thread-Index: ActNoe9JZDMN3VuVSpqMuuH9SbHdDg==
+From: "Ahsan, Noor" <Noor_Ahsan@mentor.com>
+To: <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Noor_Ahsan@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.1 required=5.0 tests=AWL, BAYES_00,
+	EXTRA_MPART_TYPE, HTML_MESSAGE autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: base_files 3.0.14 has dangling symlinks
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Cc: robertschuster@fsfe.org
+Subject: llvm-native package dependency on binutils-croos package
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,34 +41,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 07:43:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 06 Sep 2010 09:01:12 -0000
+Content-class: urn:content-classes:message
+Content-Type: multipart/related; type="multipart/alternative";
+	boundary="----_=_NextPart_001_01CB4DA1.F0D7700B"
+
+------_=_NextPart_001_01CB4DA1.F0D7700B
+Content-Type: text/plain;
+	charset="us-ascii"
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/6 Khem Raj <raj.khem@gmail.com>:
-> On (22/08/10 10:54), J. L. =A0wrote:
->> While trying to do a new image I came across this error is it anything
->> to worry about? Or something that needs to be fixed? =A0Here is the
->> error:
->>
->> NOTE: Running task 8590 of 11052 (ID: 251,
->> /home/vdubhack/overo-oe/org.openembedded.dev/recipes/base-files/base-fil=
-es_3.0.14.bb,
->> do_package)
->> NOTE: base-files contains dangling symlink to /media/net
->> NOTE: base-files contains dangling symlink to /media/card
->> NOTE: base-files contains dangling symlink to /media/ram
->> NOTE: base-files contains dangling symlink to /media/cf
->>
->
-> Worth looking into them I guess. Sometimes they may be ok when they appea=
-r
-> on root file system on target
->
+Hi all,
 
-These might not be problems on the target.
-e.g. /media/cf seems like a place where a CF card is mounted.
+=20
 
-Frans
+I was looking into llvm2.7-native package (llvm2.7-native_2.7.bb). Its
+recipe file includes llvm-native.inc, in this file the DEPENDS lists
+contains binutils-cross package. I am bit confused that why a non-native
+package is present in DPENDS list of a native package. This commit link
+is 6da4ed714f269373271a14149b131bf1ff7a6def.=20
+
+=20
+
+When I removed the binutils-cross from the dependency list and cleaned
+binutils-cross and llvm-native packages and rebuilt llvm-native package
+it built without any problem. So if llvm-native build successfully then
+I think binutils-cross should be removed from the DEPENDS list. Can
+somebody explain the reason if binutils-cross in the DEPENDS list?
+Thanks.
+
+=20
+
+Regards,
+
+Noor
+
+=20
+
+Noor Ahsan Khawaja
+
+Team Lead, Pakistan SystemBuilder / EDGE Group
+
+Embedded Systems Division
+
+Mentor Graphics Pakistan Development (Pvt) Ltd
+
+Direct: +92 42 609-9196
+
+www.mentor.com/embedded <http://www.mentor.com/embedded>=20
+
+=20
+
+=20
+
+=20
 
 
+------_=_NextPart_001_01CB4DA1.F0D7700B--
