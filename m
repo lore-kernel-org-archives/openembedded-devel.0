@@ -1,41 +1,35 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <norguhtar@gmail.com>) id 1OsXnR-0007Ci-7f
+	(envelope-from <sledz@dresearch.de>) id 1OsYBp-0003gO-Nh
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 11:15:26 +0200
-Received: by ewy7 with SMTP id 7so1965275ewy.6
+	Mon, 06 Sep 2010 11:40:38 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 8C86C491286
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 02:14:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=ccioffri7wJ8ma2aO8VJ5OEgcWD3xlz61ayWayjqqd0=;
-	b=cSLPOInPDXkIlYMlVbTNBQ7ZkxUtU1Lb+qxlr9ujil2xEXU8/VTbkc/ko0fiKasMbL
-	A1DBv9XsoF+rTCPeitQa8kYQtkpkk+xEkZcE/ETZ97HKUBwWwI9tz6K0XebxJ/E03EQR
-	cVfRkk26RQaXQi2Zxm0EwSalT0MwKRApL5eBI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=roF6NBz6rrjjNrAJs+JvGMV2PXYaOFkenX99GznXZ5rUHDJbS6PbQV6BvCMXVcqHO4
-	W1qUX7wY8+jZkmUVSm1vBoCHyXzehF3EZUeJgtQfyM/GDXLfRUUmTYoBDCqXbsneCLo9
-	vKemnRJTdIi67LuaDmrdPz1KuyS0Zi8QW9i0w=
+	Mon,  6 Sep 2010 11:40:00 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Mon, 6 Sep 2010 11:39:18 +0200
+Message-ID: <4C84B6D9.5060407@dresearch.de>
+Date: Mon, 06 Sep 2010 11:39:37 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.8) Gecko/20100802 Lightning/1.0b2 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.213.52.5 with SMTP id f5mr1984260ebg.35.1283764487737; Mon, 06
-	Sep 2010 02:14:47 -0700 (PDT)
-Received: by 10.14.22.72 with HTTP; Mon, 6 Sep 2010 02:14:47 -0700 (PDT)
-Date: Mon, 6 Sep 2010 15:14:47 +0600
-Message-ID: <AANLkTikip1BtRR_9_89C53gvPiniOo0tk7B_B19zB+y5@mail.gmail.com>
-From: Anatoly Shipitsin <norguhtar@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: norguhtar@gmail.com
+References: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
+In-Reply-To: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
+X-OriginalArrivalTime: 06 Sep 2010 09:39:18.0064 (UTC)
+	FILETIME=[604BAB00:01CB4DA7]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Russian translation Bitbake User Manual
+Subject: Re: OE donations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,10 +43,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 09:15:26 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 06 Sep 2010 09:40:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello i'm end russian translation Bitbake user manual. You can read this on
-http://bitbake.openembedded.ru and get source here
-http://bitbake.openembedded.ru/usermanual.xml
+Am 03.09.2010 23:26, schrieb Cliff Brake:
+> There is now a donation page on the OE website:
+> 
+> http://wiki.openembedded.net/index.php/Donate
+
+What about publishing account information (account holder, account number, bank code number/BLZ, IBAN) for direct transfers (which are free of charge at least in germany)?
+
+What about additional payment services like Flattr <http://flattr.com/> or Kachingle <http://kachingle.com/>?
+
+Steffen
+
+
 
