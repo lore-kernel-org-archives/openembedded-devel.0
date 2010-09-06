@@ -1,39 +1,40 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OsjZz-0006iv-En
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sakoman@gmail.com>) id 1Osk4p-0005jU-SZ
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 06 Sep 2010 23:50:34 +0200
-Received: (qmail 2030 invoked by uid 503); 6 Sep 2010 21:54:02 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 6 Sep 2010 21:54:02 -0000
-Received: (qmail 29215 invoked by uid 503); 6 Sep 2010 21:27:16 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 6 Sep 2010 21:27:15 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 6 Sep 2010 23:43:00 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 6 Sep 2010 23:42:58 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon,  6 Sep 2010 23:41:50 +0200
-Message-Id: <1283809310-29893-2-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1283809310-29893-1-git-send-email-eric@eukrea.com>
-References: <1283809310-29893-1-git-send-email-eric@eukrea.com>
+	Tue, 07 Sep 2010 00:22:13 +0200
+Received: by wye20 with SMTP id 20so5198094wye.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 06 Sep 2010 15:21:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=rweECwjUK0kL47kq6TtsNlCEzbSCfKV7Ry4Gu9wV4Pk=;
+	b=EnmzEogUGZZ6+A9UDrJHabfg5hsTXCmb490JRv9GXYvR0wBbb78XTU9/ves3DANmEO
+	WrEmvyvamhomp+Z76Cwn/+JPoPkz8KAD4Q6aQfJyrhSB+I7JHQCN/zKRxBaZ+Tg1W9Ox
+	B1VigrukHqhF6zyaNr8HZqFQZDHcgqnhTRabk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=MMa76b6Z+Kp/V8awmNjh9gJeK1syRst1TWc/ZC36zVy4NZiNDp5dkfsyfHVjOpK4iC
+	ry2iTUf6PqHWb4DeyFDc+oEjLI7mJg3+hAAgIdL1+oUwkMa/rDVdJodIPk8M8W8N3eiX
+	qWffVsFozQtgtdp4WxGWNJdx/u6yVPQVN7vcg=
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 6945113576459840842
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+Received: by 10.216.179.137 with SMTP id h9mr2804586wem.39.1283811692032; Mon,
+	06 Sep 2010 15:21:32 -0700 (PDT)
+Received: by 10.216.16.193 with HTTP; Mon, 6 Sep 2010 15:21:31 -0700 (PDT)
+Date: Mon, 6 Sep 2010 15:21:31 -0700
+Message-ID: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] base.bbclass: depend on mercurial-native if SRC_URI contains hg://
+Subject: Images no longer automatically include libstdc++6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,33 +48,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 06 Sep 2010 21:50:35 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 06 Sep 2010 22:22:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- classes/base.bbclass |    5 +++++
- 1 files changed, 5 insertions(+), 0 deletions(-)
+Using current top of tree to build some of my images I noticed that
+quite a few apps seems to be broken at run time (Firefox, Epiphany,
+Gnome-mplayer, and others).
 
-diff --git a/classes/base.bbclass b/classes/base.bbclass
-index 299e875..2e6fb84 100644
---- a/classes/base.bbclass
-+++ b/classes/base.bbclass
-@@ -367,6 +367,11 @@ python () {
-         depends = depends + " git-native:do_populate_sysroot"
-         bb.data.setVarFlag('do_fetch', 'depends', depends, d)
- 
-+    if "hg://" in srcuri:
-+        depends = bb.data.getVarFlag('do_fetch', 'depends', d) or ""
-+        depends = depends + " mercurial-native:do_populate_sysroot"
-+        bb.data.setVarFlag('do_fetch', 'depends', depends, d)
-+
-     # unzip-native should already be staged before unpacking ZIP recipes
-     need_unzip = bb.data.getVar('NEED_UNZIP_FOR_UNPACK', d, 1)
-     src_uri = bb.data.getVar('SRC_URI', d, 1)
--- 
-1.6.3.3
+All were complaining about libstdc++6 being missing.  Manually
+installing the libstdc++6 package fixed the issue.
 
+Any idea what changed that introduced this issue?
+
+Steve
 
 
