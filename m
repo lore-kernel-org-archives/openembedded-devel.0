@@ -1,31 +1,32 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OstbP-0006Er-Fg for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 10:32:28 +0200
-Received: from f053042255.adsl.alicedsl.de ([78.53.42.255]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ostan-00030R-67 for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 08:31:49 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OsuTd-0006Dj-W6
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Sep 2010 11:28:35 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OsuSy-0003sy-4U from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Sep 2010 02:27:48 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Tue, 7 Sep 2010 11:27:46 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <201009070843.36066.schnitzeltony@gmx.de>
-References: <201009070843.36066.schnitzeltony@gmx.de>
-Date: Tue, 07 Sep 2010 10:31:45 +0200
-Message-ID: <1283848305.3951.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Tue,  7 Sep 2010 14:27:41 +0500
+Message-Id: <1283851661-26819-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 07 Sep 2010 09:27:46.0472 (UTC)
+	FILETIME=[EE7CDA80:01CB4E6E]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: clutter patches status
+Subject: [PATCH] docbook-dsssl-stylesheets-native_1.79.bb: converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,55 +40,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 08:32:29 -0000
-X-Groupsio-MsgNum: 23240
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-lWZvG2Aulhatm4skhHPk"
+X-List-Received-Date: Tue, 07 Sep 2010 09:28:35 -0000
 
---=-lWZvG2Aulhatm4skhHPk
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+* Converted do_stage to do_install.
+* Moved the catalog files from ${sysconfdir}/sgml to ${D}${sysconfdir}/sgml so that they get included in the package file resulting with the new style staging.
+* Added a function docbook_dssl_stylesheets_native_mangle, to correct the path in .cat file and added it to SYSROOT_PREPROCESS_FUNCS.
+* Added PR = "r1"
 
-Am Dienstag, den 07.09.2010, 08:43 +0200 schrieb Andreas Mueller:
-> the patches I sent on Sep. 3rd were acked by Koen and are marked as 'appl=
-ied' in patchwork but I can't find them in org.openembedded.dev or any othe=
-r branch.
->=20
-> I would like to send/implement further patches ontop:
->=20
-> - workaround clutter font problem (implemented & tested - waiting for ups=
-tream)
-> - clutter-gegl (TBD / required by toys/attic/gcr)
-> - clutter-helix (TBD / optionally required by toys/attic/woohaa)
-> - toys: multiple configure done / update to 1.0 interface (hope to get th=
-at upstream at clutter-project)
-> - pyclutter: implemented but build fails for GLES (GL ok)
-> - clutter-gesture (builds ok - don't know how to test yet)
->=20
-> Please let me know the status of the patches sent.
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ .../docbook-dsssl-stylesheets-native_1.79.bb       |   41 ++++++++++++++------
+ 1 files changed, 29 insertions(+), 12 deletions(-)
 
-Koen pushed them half an hour ago [1].=20
+diff --git a/recipes/docbook-dsssl-stylesheets/docbook-dsssl-stylesheets-native_1.79.bb b/recipes/docbook-dsssl-stylesheets/docbook-dsssl-stylesheets-native_1.79.bb
+index cd4e56c..234606f 100644
+--- a/recipes/docbook-dsssl-stylesheets/docbook-dsssl-stylesheets-native_1.79.bb
++++ b/recipes/docbook-dsssl-stylesheets/docbook-dsssl-stylesheets-native_1.79.bb
+@@ -9,30 +9,47 @@ SRC_URI = "${SOURCEFORGE_MIRROR}/docbook/docbook-dsssl-${PV}.tar.bz2"
+ 
+ S = "${WORKDIR}/docbook-dsssl-${PV}"
+ 
++PR = "r1"
++
++SYSROOT_PREPROCESS_FUNCS += "docbook_dssl_stylesheets_native_mangle"
++
+ inherit native
+ 
+-do_stage () {
++do_install () {
+     # Refer to http://www.linuxfromscratch.org/blfs/view/stable/pst/docbook-dsssl.html
+     # for details.
+-    install -d ${STAGING_BINDIR_NATIVE}
+-    install -m 0755 bin/collateindex.pl ${STAGING_BINDIR_NATIVE}
+-    
+-    install -d ${STAGING_DATADIR}/sgml/docbook/dsssl-stylesheets-${PV}
+-    install -m 0644 catalog ${STAGING_DATADIR}/sgml/docbook/dsssl-stylesheets-${PV}
+-    cp -dpr common ${STAGING_DATADIR}/sgml/docbook/dsssl-stylesheets-${PV}
+-    
++    install -d ${D}${bindir}
++    install -m 0755 bin/collateindex.pl ${D}${bindir}
++     
++    install -d ${D}${datadir}/sgml/docbook/dsssl-stylesheets-${PV}
++    install -m 0644 catalog ${D}${datadir}/sgml/docbook/dsssl-stylesheets-${PV}
++    cp -dpr common ${D}${datadir}/sgml/docbook/dsssl-stylesheets-${PV}
++
+     install-catalog --add ${sysconfdir}/sgml/dsssl-docbook-stylesheets.cat \
+-      ${STAGING_DATADIR}/sgml/docbook/dsssl-stylesheets-${PV}/catalog
+-	
++      ${D}${datadir}/sgml/docbook/dsssl-stylesheets-${PV}/catalog
++
+     install-catalog --add ${sysconfdir}/sgml/dsssl-docbook-stylesheets.cat \
+-      ${STAGING_DATADIR}/sgml/docbook/dsssl-stylesheets-${PV}/common/catalog
++      ${D}${datadir}/sgml/docbook/dsssl-stylesheets-${PV}/common/catalog
+ 
+     install-catalog --add ${sysconfdir}/sgml/sgml-docbook.cat \
+       ${sysconfdir}/sgml/dsssl-docbook-stylesheets.cat
+-	
++
++    # Moving them to image directory so that they get included in the .ipk file 
++    # generated by new style staging.
++    install -d ${D}${sysconfdir}/sgml
++    cp ${sysconfdir}/sgml/dsssl-docbook-stylesheets.cat ${D}${sysconfdir}/sgml/
++    cp ${sysconfdir}/sgml/sgml-docbook.cat ${D}${sysconfdir}/sgml/
++    cp ${sysconfdir}/sgml/catalog ${D}${sysconfdir}/sgml/
+ }
+ 
+ PACKAGES = ""
+ 
++docbook_dssl_stylesheets_native_mangle () {
++    # Removing the image directory path (${D}) from the .cat file.
++    sed -i -e "s|${D}||g" ${SYSROOT_DESTDIR}${sysconfdir}/sgml/dsssl-docbook-stylesheets.cat
++}
++
+ SRC_URI[md5sum] = "bc192d23266b9a664ca0aba4a7794c7c"
+ SRC_URI[sha256sum] = "2f329e120bee9ef42fbdd74ddd60e05e49786c5a7953a0ff4c680ae6bdf0e2bc"
++
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
 
 
-Thanks,
 
-Paul
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D2eca1eb=
-59ccb0890e4db078a4af456c9f2d194ad
-
---=-lWZvG2Aulhatm4skhHPk
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyF+GwACgkQPX1aK2wOHVjiMgCfcL8HV9/s/XbW+oM4Jp6cTTsC
-iNUAn3n+3DLMIsadTgI7lfcTfZsXhjqD
-=CMyD
------END PGP SIGNATURE-----
-
---=-lWZvG2Aulhatm4skhHPk--
