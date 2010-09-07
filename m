@@ -1,43 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Ot1Xm-00081a-Dn
+	(envelope-from <chasemaupin03@gmail.com>) id 1Ot1mK-0006hE-H9
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 19:01:15 +0200
-Received: by pvg6 with SMTP id 6so1901333pvg.6
+	Tue, 07 Sep 2010 19:16:17 +0200
+Received: by yxk30 with SMTP id 30so2077264yxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 10:00:32 -0700 (PDT)
+	Tue, 07 Sep 2010 10:15:35 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=ttjI4yQriItd1RHt4lazxeUzKBumDF657lMk2fFsg6s=;
-	b=qGMhqDHXnGHlBRWiUU6Lvf+viFm8m8j0pX5uN3RlAY1t6xJ/MO+k7OG53rmqC/tXIC
-	+qE7QmWd454ysIfmBmiUvM2qNLQqUqiECw6eXtq5sdUy4lUZOhqIiBDu0xkfrIA9n9n0
-	lxjLAc2raNJXx/bMlIWnITNDSHdT+bNqQd85Y=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=24sDU76LavlQ/1vmdEvo0eycV8132bMrisHt17nMR1M=;
+	b=WwI8V4csCH7E15cS2nem6qOLy/PWPiSnV1DEEYma4jguLUK/X33GI/NKS68uEfFtoa
+	rA7cntq17iL2Y8RJpYO69I0AKLe2Rog3dSNRJIAVxKfbafvXLLYEZ0fgAG/s/0L3DBNr
+	9TigSvF1jF92mrH6jYiuA6IEYKaZtj/jdY1XU=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=RC/Z9NMh4jyqFhvOp7HJ+0qY9AbqMzF0Y4UVXOUO4OIe+sHLl0bovtyxic3CUgJgFm
-	O0tZzodImHFrUEbDP8aRsZMtOZvNl7X70v4eZq+sZdF5cePVGfyOrSMtQfj+agJuFOR0
-	WdGDGrAW7uCEfsPLIbJ2eb30bes+bZH0SmSmQ=
-Received: by 10.142.246.1 with SMTP id t1mr159652wfh.80.1283878832555; Tue, 07
-	Sep 2010 10:00:32 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Tue, 7 Sep 2010 10:00:12 -0700 (PDT)
-In-Reply-To: <20100907163605.GA15949@boggieman.bredbandsbolaget.se>
-References: <20100907163605.GA15949@boggieman.bredbandsbolaget.se>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 7 Sep 2010 10:00:12 -0700
-Message-ID: <AANLkTikinUbL68vz9fgLSeoyeB+XnKPH+qf4VHv4pRvd@mail.gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=FgkjI1Lp3dYtJXDh30nLsQmv9SwUb72Oaa7/cssxV6r1D80oPbjGGumLZgFNz27LHJ
+	klDhiEWhRVpvovMeF+FRi8uF+ojVfLMx0z8PXXlBPkuzHhxOjhnvqi187tUcHTNK/7Lv
+	8H3nq5qC+7akDSeIo9bhlE9Vyo0w5VupuoHf4=
+Received: by 10.100.41.9 with SMTP id o9mr358014ano.240.1283879735209;
+	Tue, 07 Sep 2010 10:15:35 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id f22sm11771418anh.4.2010.09.07.10.15.33
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 07 Sep 2010 10:15:34 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Tue,  7 Sep 2010 12:05:44 -0500
+Message-Id: <1283879144-9127-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Moving keys to development server
+Subject: [PATCH] sourceipk: make extra files inclusion optional
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,33 +51,66 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 17:01:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Sep 2010 17:16:17 -0000
 
-On Tue, Sep 7, 2010 at 9:36 AM, Kristoffer Ericson
-<kristoffer.ericson@gmail.com> wrote:
-> Greetings,
->
-> We at JLime are setting up an development server to be able for all
-> developers to work on same machine (and build/push alot faster). Im having issues
-> getting the write access from the server (works fine from my laptop).
-> Ive moved the keys into my server user account but cant get it to work.
-> It fails with access denied.
->
-> So, what am I missing
+* Make the inclusion of the README and recipe files optional
+  for source ipks.  For some packages the sources owner may not
+  want these additional files added to their sources.
 
-your private ssh keys which are in ~/.ssh on your laptop
-either you copy them over or you can setup keychain/ssh-agent
-to forward it from your laptop to this server whatever fits your security needs
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ classes/sourceipk.bbclass |   15 ++++++++++++---
+ 1 files changed, 12 insertions(+), 3 deletions(-)
 
->
-> Best wishes
-> Kristoffer
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
+index 4957e4a..182785b 100644
+--- a/classes/sourceipk.bbclass
++++ b/classes/sourceipk.bbclass
+@@ -14,6 +14,9 @@
+ #   - SRCIPK_PACKAGE_ARCH   = This variable allows specific recipies to
+ #                             specify an architecture for the sourcetree
+ #                             package is "all" is not appropriate
++#   - SRCIPK_INC_EXTRAFILES = When set to 1 this variable indicates that
++#                             the source ipk should contain extra files
++#                             such as the README file and recipe.
+ #
+ # The default installation directory for the sources is:
+ #   /usr/src/${PN}-src
+@@ -47,6 +50,9 @@ SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
+ # Default PACKAGE_ARCH for sources is "all"
+ SRCIPK_PACKAGE_ARCH ?= "all"
+ 
++# Default SRCIPK_INCLUDE_EXTRAFILES is to include the extra files
++SRCIPK_INCLUDE_EXTRAFILES ?= "1"
++
+ # Create a README file that describes the contents of the source ipk
+ sourceipk_create_readme() {
+     readme="$1/README.${PN}-src"
+@@ -91,7 +97,6 @@ sourceipk_do_create_srcipk() {
+             srcuri="OpenEmbedded"
+         fi
+         echo "Source: $srcuri" >> $control_file
+-
+         #Write the control tarball
+         tar -C $tmp_dir/CONTROL --owner=0 --group=0 -czf $srcipk_dir/control.tar.gz .
+ 
+@@ -101,8 +106,12 @@ sourceipk_do_create_srcipk() {
+         # Copy sources for packaging
+         mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
+         cp -rLf ${S}/* $tmp_dir/${SRCIPK_INSTALL_DIR}/
+-        sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
+-        cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
++
++        if [ ${SRCIPK_INCLUDE_EXTRAFILES} != "0" ]
++        then
++            sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
++            cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
++        fi
+ 
+         #Write the data tarball
+         tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
+-- 
+1.7.0.4
+
 
 
