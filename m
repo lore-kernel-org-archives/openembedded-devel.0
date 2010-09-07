@@ -1,35 +1,44 @@
-Received: from blu0-omc4-s34.blu0.hotmail.com ([65.55.111.173])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mgcse@hotmail.com>) id 1Osxny-0001R2-Jn
+Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
+	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <rpurdie@rpsys.net>) id 1OsyhG-0006DH-F8
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 15:02:46 +0200
-Received: from BLU132-W9 ([65.55.111.137]) by blu0-omc4-s34.blu0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 7 Sep 2010 05:59:56 -0700
-Message-ID: <BLU132-W907085C23EFDAF5660F2DB0710@phx.gbl>
-X-Originating-IP: [212.175.157.5]
-From: mahmut g <mgcse@hotmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Sep 2010 12:59:56 +0000
-Importance: Normal
-In-Reply-To: <AANLkTintK8OdmZbumTuVA6UAv=PYujw9PmjzKL1wtDMj@mail.gmail.com>
-References: <BLU132-W8FA51733A7631FEA4FB63B0710@phx.gbl>,
-	<AANLkTi=Y90PWXBSsZmbtub-S519CdBaAEEDQ-dnTrsvN@mail.gmail.com>,
-	<BLU132-W287C05944F8D53A62038EDB0710@phx.gbl>,
-	<AANLkTintK8OdmZbumTuVA6UAv=PYujw9PmjzKL1wtDMj@mail.gmail.com>
-MIME-Version: 1.0
-X-OriginalArrivalTime: 07 Sep 2010 12:59:56.0922 (UTC)
-	FILETIME=[926D5DA0:01CB4E8C]
-X-SA-Exim-Connect-IP: 65.55.111.173
-X-SA-Exim-Mail-From: mgcse@hotmail.com
+	Tue, 07 Sep 2010 15:59:29 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o87DwATK004284;
+	Tue, 7 Sep 2010 14:58:10 +0100
+Received: from tim.rpsys.net ([127.0.0.1])
+	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
+	port 10024) with LMTP
+	id 04263-01; Tue,  7 Sep 2010 14:58:06 +0100 (BST)
+Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
+	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o87Dw5kQ004268
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
+	Tue, 7 Sep 2010 14:58:06 +0100
+From: Richard Purdie <rpurdie@rpsys.net>
+To: openembedded-devel@lists.openembedded.org
+In-Reply-To: <20100906201144.GA8176@rhein.zuhause.netz>
+References: <AANLkTimxWVes3DZQPGn53BZ1cL6BSX5BT3hwgFHrCUA4@mail.gmail.com>
+	<AANLkTinBzdnAYv_0O=vXnaJ5VNj56Th74eZ=naVSFcFB@mail.gmail.com>
+	<AANLkTikSBQOi6aC0W8QzfEOk6skMcBmbaJdmE4K+Auwd@mail.gmail.com>
+	<20100906035002.GB5320@gmail.com>
+	<AANLkTinvnAhcr63sm=O+s+iyZw8tKfspjzhR__XOb5mU@mail.gmail.com>
+	<AANLkTi=zkn=Ns7MgcakxC8F61O9it3FTYb8XgtHRmcrD@mail.gmail.com>
+	<AANLkTimNk1mKqHBsfW6S-KuQkbVyT8f4ajz1d8adDFcc@mail.gmail.com>
+	<20100906201144.GA8176@rhein.zuhause.netz>
+Date: Tue, 07 Sep 2010 14:57:58 +0100
+Message-ID: <1283867878.26335.305.camel@rex>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.3 
+X-Virus-Scanned: amavisd-new at rpsys.net
+X-SA-Exim-Connect-IP: 93.97.173.237
+X-SA-Exim-Mail-From: rpurdie@rpsys.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
+	TVD_RCVD_IP autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: selecting needed applications only
+Subject: Re: virtclass_install prepend
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,40 +52,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 13:03:15 -0000
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 07 Sep 2010 13:59:51 -0000
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+
+On Mon, 2010-09-06 at 22:11 +0200, Henning Heinold wrote:
+> > >> The code is:
+> > >> do_install_virtclass-native_prepend() {
+> > >>         install -d ${D}${datadir}/dbus
+> > >>        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus
+> > >> }
+> > >>
+> > >> Actually if the standard do_install needs to be changed, it generally
+> > >> raises some alarms with me.
+> > >> Why would we need to install something that the package normally does
+> > >> not install?
+> > >> (of course this could be a bug in the package, but then I would prefer
+> > >> a patch that we also try to push upstream).
+> > >>
+> > >
+> > > Agreed, that is odd.  If it's something that dbus using things might need,
+> > > why is it only prepended for the native version, and as you say, why is it
+> > > not installed by the upstream install target.  I'd do a git blame and figure
+> > > out who added that and ask them :)
+> > > --
+> > 
+> > Henning,
+> > Git blame gives your name as the person who created those lines.
+> > Care to comment?
+> > 
+> > Frans
+>
+> if I remember correctly this file is generated in the build process. But somehow
+> in the later versions of dbus-glib there is somehow an error so this file gets not installed
+> at all in the native variant. So I did it per hand.
+
+I suspect that code could well have come from Poky. In this case the
+native recipe generates a file which is then used by the target builds.
+It can't be generated in the target recipe as that would mean running
+target binaries.
+
+So it is in fact a perfectly valid thing to do in this case.
+
+Cheers,
+
+Richard
 
 
-
-> Date: Tue=2C 7 Sep 2010 14:47:30 +0200
-> From: fransmeulenbroeks@gmail.com
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] selecting needed applications only
->=20
-> 2010/9/7 mahmut g <mgcse@hotmail.com>:
-> >
-> >
-> >     Thanks Frans=2C in this case I have a new question. How can I deter=
-mine the packages' dependency? For instance I just want to use QT on user s=
-pace. Is that a way to learn which packages must be for QT? I am familiar w=
-ith menuconfig selection=2C is there any tool/script which handles dependen=
-cies?
-> > Regards=2C
-> > MahmutG
-> >
-> >
-> Please do not top post.
-> There is no need to determine dependencies.
-> The build machinery will take care about that and include all what is
-> needed (this is specified in the recipe in DEPENDS/RDEPENDS)
->=20
-> Just give it a try!
->=20
-> Frans
->=20
-
-Thank you=2C I will try at home tonighttonight.
-Regards=2C
-Mahmut 		 	   		  =
 
