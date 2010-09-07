@@ -1,44 +1,37 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Osr9M-0000Wa-9D
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OsrAI-0000Z2-ND
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 07:55:21 +0200
-Received: by iwn2 with SMTP id 2so4906312iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 06 Sep 2010 22:54:41 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=qdCi8Eq0CW5FOCC6v+DnpM+lrIPVSgBJpyBpA4eSXvI=;
-	b=GdJ00H0IbsJZymZnT1tjoUfJnmNnxykvoIftVQmQRpYUYFXHSNwl1+6ggBdEulbmQp
-	2QYjvaT4y3SMQBw523slxSLFhrSsi6/b4q7Dqh8V9MhG3vpruj6Yv+nY/BXuRAsWTSm3
-	AuQe25rvkARp4L1txPIUCx6QM8jZ+ROgE008o=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=p/e5xFvyg5hm+kFbNORthU6HKf1DnKrAo+2In+5WSI06VkehOaegVkHAlZVUQcVumL
-	tN5KRE3OYg9D1gK+fzV83xFtxfDSlCb9ZW7hBE7xV2wvoKPqkOeD6EInOpCspFb5PJ0I
-	wbiIGPiYt7NINoDwtEmcy4oXI830g9I7UU98U=
-Received: by 10.231.144.74 with SMTP id y10mr470383ibu.65.1283838881172; Mon,
-	06 Sep 2010 22:54:41 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Mon, 6 Sep 2010 22:54:21 -0700 (PDT)
-In-Reply-To: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 6 Sep 2010 22:54:21 -0700
-Message-ID: <AANLkTi=0ukfZL=oQxGHXaoUg30TCu5LfkTKhrvCM5g8d@mail.gmail.com>
+	Tue, 07 Sep 2010 07:56:20 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Osr9d-0006rB-5w from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 06 Sep 2010 22:55:37 -0700
+Received: from 137.202.157.210 ([137.202.157.210]) by eu2-mail.mgc.mentorg.com
+	([137.202.76.30]) via Exchange Front-End Server
+	webmail.mentor.com ([192.94.38.218]) with Microsoft Exchange
+	Server HTTP-DAV ; Tue,  7 Sep 2010 05:55:35 +0000
+Received: from pkl-fusman-ubuntu by webmail.mentor.com;
+	07 Sep 2010 10:55:34 +0500
+From: Fahad <Fahad_Usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <1283777330-31590-1-git-send-email-fahad_usman@mentor.com>
+References: <1283777330-31590-1-git-send-email-fahad_usman@mentor.com>
+Organization: Mentor Graphics
+Date: Tue, 07 Sep 2010 10:55:34 +0500
+Message-ID: <1283838934.16315.26.camel@pkl-fusman-ubuntu>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.28.1 
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00,
+	RCVD_NUMERIC_HELO autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Images no longer automatically include libstdc++6
+Subject: Re: [PATCH] uicmoc-native_2.3.10.bb: converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,34 +45,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 05:55:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Sep 2010 05:56:20 -0000
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 6, 2010 at 3:21 PM, Steve Sakoman <sakoman@gmail.com> wrote:
-> Using current top of tree to build some of my images I noticed that
-> quite a few apps seems to be broken at run time (Firefox, Epiphany,
-> Gnome-mplayer, and others).
->
-> All were complaining about libstdc++6 being missing. =A0Manually
-> installing the libstdc++6 package fixed the issue.
->
-> Any idea what changed that introduced this issue?
+On Mon, 2010-09-06 at 17:48 +0500, Fahad Usman wrote:
+> * Converted do_stage to do_install.
+> * Bumped PR
+> * Added NATIVE_INSTALL_WORKS =3D "1"
+>=20
+> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+> ---
+>  recipes/uicmoc/uicmoc-native_2.3.10.bb |   13 ++++++++-----
+>  1 files changed, 8 insertions(+), 5 deletions(-)
+>=20
+> diff --git a/recipes/uicmoc/uicmoc-native_2.3.10.bb b/recipes/uicmoc/uicm=
+oc-native_2.3.10.bb
+> index c161571..8c69bef 100644
+> --- a/recipes/uicmoc/uicmoc-native_2.3.10.bb
+> +++ b/recipes/uicmoc/uicmoc-native_2.3.10.bb
+> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.trolltech.com"
+>  SECTION =3D "devel"
+>  PRIORITY =3D "optional"
+>  LICENSE =3D "GPL QPL"
+> -PR =3D "r4"
+> +PR =3D "r5"
+> =20
+>  SRC_URI =3D "ftp://ftp.trolltech.com/pub/qt/source/qt-embedded-${PV}-fre=
+e.tar.gz \
+>             file://fix-makefile.patch \
+> @@ -43,11 +43,14 @@ do_compile() {
+>      oe_runmake -C tools/makeqpf       || die "Building makeqpf failed"
+>  }
+> =20
+> -do_stage() {
+> -    install -m 0755 bin/moc ${STAGING_BINDIR}
+> -    install -m 0755 bin/uic ${STAGING_BINDIR}
+> -    install -m 0755 tools/makeqpf/makeqpf ${STAGING_BINDIR}
+> +do_install() {
+> +    install -d ${D}${bindir}
+> +    install -m 0755 bin/moc ${D}${bindir}
+> +    install -m 0755 bin/uic ${D}${bindir}
+> +    install -m 0755 tools/makeqpf/makeqpf ${D}${bindir}
+>  }
+> =20
+>  SRC_URI[md5sum] =3D "1f7ad30113afc500cab7f5b2f4dec0d7"
+>  SRC_URI[sha256sum] =3D "883363eb0c94de3d1e36f3ab9e09a8f127418d497213cc1a=
+0ed1a1588ecd66b8"
+> +
+> +NATIVE_INSTALL_WORKS =3D "1"=20
 
-Yes I have been seeing that and spent not so much time on the real cause
-but it seems that the depends get lost when we rename the pkgs in debian wa=
-y
-may be thats not the real cause I dont know yet. but that something to look=
- at
-even libstdc++-dev ipks miss to have dependencies on libstdc++
+This patch was already sent by Noor Ahsan on September 2,
+http://patchwork.openembedded.org/patch/2852/
+I have changed the status of my patch to "Not Applicable" in patchwork
 
->
-> Steve
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Regards,
+Fahad
 
 
