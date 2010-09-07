@@ -1,40 +1,37 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1Ot7n2-0001i3-Ew
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Ot7ty-0001v8-KW
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 01:41:25 +0200
-Received: by wye20 with SMTP id 20so6558235wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 16:40:42 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=ZCoMENnQI15PLjT2qww6aj2AmdOsY/Fml54fn/ttS/0=;
-	b=bKUD6ZKdKH4xMwtJQETlmicIsVRPocIVOIGk1U0thu8rcrlMqTB51gf4HNDT7Y2dfh
-	/F4GhlJ2m2LEWet+X/BVm06TNRzg4Xc40lmY2V0IEAGAyavQLnHsu/r6ARVNn1qmQEZC
-	FoKhGH/pFProIQXau0kRvEwWvGZO4ncWqdOEA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=W7oQO4TZsFPtgcxFFZZVCR+msm3ITq7XM4cOvjuOW6WSEo9KRVosF+WU039Xw7AbEE
-	QLlzu6b7PJRDcRE0poG1p1wxwotabgAiJd/Z0PFd82aJiJjJBQgwpdNDhCGRk0H/jSyi
-	ACtkWE6UKZPIZilQOx8igomp0q3qkUIA3cnHg=
-MIME-Version: 1.0
-Received: by 10.216.157.13 with SMTP id n13mr3744674wek.35.1283902842707; Tue,
-	07 Sep 2010 16:40:42 -0700 (PDT)
-Received: by 10.216.21.209 with HTTP; Tue, 7 Sep 2010 16:40:42 -0700 (PDT)
-Date: Tue, 7 Sep 2010 19:40:42 -0400
-Message-ID: <AANLkTi=H6oMWDysJdxA+AsRvYLRxTqRZFBJz+1qVKuf-@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	Wed, 08 Sep 2010 01:48:35 +0200
+Received: (qmail 4860 invoked by uid 503); 7 Sep 2010 23:59:08 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 7 Sep 2010 23:59:08 -0000
+Received: (qmail 26419 invoked by uid 503); 7 Sep 2010 23:32:05 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 7 Sep 2010 23:32:04 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 8 Sep 2010 01:47:55 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 8 Sep 2010 01:47:53 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Date: Wed,  8 Sep 2010 01:46:38 +0200
+Message-Id: <1283903199-24538-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 14927462441744379209
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: libsegfault on ARMV5
+Subject: [PATCH 1/2] python-2.6: remove python-dev from python-modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +45,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 23:41:25 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Sep 2010 23:48:35 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Hello,
+actually python-modules installs python-dev in the image which pulls several
+dev packages leading to a >250MB image instead of a 60MB image with this
+patch.
 
-I'm trying to use libsegfault to log any application faults.  On x86
-it works great:
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/python/python-2.6-manifest.inc |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-Backtrace:
-./src/svs(_ZN7Mapping22mapping_control_threadEPv+0xa2)[0x81badf]
-/lib/libglib-2.0.so.0(+0x67b84)[0x7f87e6266b84]
-/lib/libpthread.so.0(+0x69ca)[0x7f87e53489ca]
-/lib/libc.so.6(clone+0x6d)[0x7f87e43ae6fd]
-
-
-But, on my PXA270 system, it only provides:
-
-Backtrace:
-/lib/libSegFault.so[0x400275cc]
-/lib/libc.so.6(__default_rt_sa_restorer_v2+0x0)[0x4105e9c0]
-
-I'm running: libsegfault - 2.9-r36.3.5
-
-Has anyone else successfully used libsegfault on ARM built with OE, or
-have other ideas on how to accomplish this?
-
-Thanks,
-Cliff
-
+diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
+index 4ed05cb..eec9f22 100644
+--- a/recipes/python/python-2.6-manifest.inc
++++ b/recipes/python/python-2.6-manifest.inc
+@@ -266,7 +266,7 @@ RDEPENDS_python-audio="python-core"
+ FILES_python-audio="${libdir}/python2.6/wave.* ${libdir}/python2.6/chunk.* ${libdir}/python2.6/sndhdr.* ${libdir}/python2.6/lib-dynload/ossaudiodev.so ${libdir}/python2.6/lib-dynload/audioop.so "
+ 
+ DESCRIPTION_python-modules="All Python modules"
+-RDEPENDS_python-modules="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-resource python-json python-dev python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-numbers python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio  "
++RDEPENDS_python-modules="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-resource python-json python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-numbers python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio  "
+ ALLOW_EMPTY_python-modules = "1"
+ 
+ 
 -- 
-=================
-http://bec-systems.com
+1.6.3.3
+
 
 
