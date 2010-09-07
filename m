@@ -1,32 +1,30 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1Osvuj-0006WH-5x
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OsvwX-0007LZ-6Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 13:00:59 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1Osvu3-00030w-SU from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 03:59:52 -0700
-Received: from localhost.localdomain ([137.202.157.210]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 7 Sep 2010 12:59:50 +0200
-From: Fahad Usman <fahad_usman@mentor.com>
+	Tue, 07 Sep 2010 13:03:09 +0200
+Received: (qmail invoked by alias); 07 Sep 2010 11:01:45 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp030) with SMTP; 07 Sep 2010 13:01:45 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/PJ4EtDAfPN8+uVCBJ5pMGRSG1uI8P+C+j2myY/H
+	Kw0i7X/q5i9DPi
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue,  7 Sep 2010 15:59:44 +0500
-Message-Id: <1283857184-18261-1-git-send-email-fahad_usman@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 07 Sep 2010 10:59:50.0402 (UTC)
-	FILETIME=[CB01AE20:01CB4E7B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+Date: Tue, 7 Sep 2010 12:47:24 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+MIME-Version: 1.0
+Message-Id: <201009071247.24747.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gconf-native_2.6.1.bb: Converted to new style staging
+Subject: [PATCH] clutter: the font display problem is worked around.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,42 +38,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 11:01:13 -0000
+X-List-Received-Date: Tue, 07 Sep 2010 11:05:22 -0000
+X-List-Received-Date: Tue, 07 Sep 2010 11:05:22 -0000
+X-List-Received-Date: Tue, 07 Sep 2010 11:05:22 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-* Converted do_stage to do_install.
-* Added NATIVE_INSTALL_WORKS = "1"
-* Added PR = "r1"
-Note: Not merging it into the non-native recipe as this is a dummy recipe and it does not need all the regular stuff.
+* see http://lists.clutter-project.org/pipermail/clutter-devel-list/2010-September/000071.html
+  for more details
 
-Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
 ---
- recipes/gnome/gconf-native_2.6.1.bb |   10 +++++++---
- 1 files changed, 7 insertions(+), 3 deletions(-)
+ .../clutter/workaround-broken-mipmaps.patch        |   13 +++++++++++++
+ recipes/clutter/clutter_1.2.12.bb                  |    1 +
+ 2 files changed, 14 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/clutter/clutter/workaround-broken-mipmaps.patch
 
-diff --git a/recipes/gnome/gconf-native_2.6.1.bb b/recipes/gnome/gconf-native_2.6.1.bb
-index 79163a4..f3f5fd8 100644
---- a/recipes/gnome/gconf-native_2.6.1.bb
-+++ b/recipes/gnome/gconf-native_2.6.1.bb
-@@ -1,10 +1,14 @@
- NOTE = "This is just a dummy package to get packages stop complaining about gconftool-2 \
-         which they are not using anyway... :D"
+diff --git a/recipes/clutter/clutter/workaround-broken-mipmaps.patch b/recipes/clutter/clutter/workaround-broken-mipmaps.patch
+new file mode 100644
+index 0000000..f2a2915
+--- /dev/null
++++ b/recipes/clutter/clutter/workaround-broken-mipmaps.patch
+@@ -0,0 +1,13 @@
++--- a/clutter/cogl/pango/cogl-pango-fontmap.c.old	2010-06-08 16:19:26.000000000 +0200
+++++ b/clutter/cogl/pango/cogl-pango-fontmap.c	2010-09-06 14:26:07.000000000 +0200
++@@ -173,7 +173,9 @@
++ 
++   renderer = COGL_PANGO_RENDERER (cogl_pango_font_map_get_renderer (fm));
++ 
++-  _cogl_pango_renderer_set_use_mipmapping (renderer, value);
+++  /* disable mipmaps until they are fixed */
+++  /* _cogl_pango_renderer_set_use_mipmapping (renderer, value); */
+++  _cogl_pango_renderer_set_use_mipmapping (renderer, FALSE);
++ }
++ 
++ /**
+diff --git a/recipes/clutter/clutter_1.2.12.bb b/recipes/clutter/clutter_1.2.12.bb
+index a454544..fd6247f 100644
+--- a/recipes/clutter/clutter_1.2.12.bb
++++ b/recipes/clutter/clutter_1.2.12.bb
+@@ -3,6 +3,7 @@ require clutter.inc
+ PR = "${INC_PR}.1"
  
-+PR = "r1"
-+
- inherit native
+ SRC_URI = "http://source.clutter-project.org/sources/clutter/1.2/clutter-${PV}.tar.bz2 \
++           file://workaround-broken-mipmaps.patch \
+            ${INC_SRC_URI} \
+           "
  
--do_stage() {
--	echo "#!/bin/sh" >${STAGING_BINDIR}/gconftool-2
--	chmod a+rx ${STAGING_BINDIR}/gconftool-2
-+do_install() {
-+        install -d ${D}${bindir}
-+        echo "#!/bin/sh" >${D}${bindir}/gconftool-2
-+        chmod a+rx ${D}${bindir}/gconftool-2
- }
- 
-+NATIVE_INSTALL_WORKS = "1"
 -- 
-1.6.3.3
-
+1.5.3.4
 
 
