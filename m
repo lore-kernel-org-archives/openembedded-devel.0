@@ -1,48 +1,40 @@
-Received: from arroyo.ext.ti.com ([192.94.94.40])
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1OszPP-0007it-4L
+	(envelope-from <cliff.brake@gmail.com>) id 1OszUP-0001mw-4F
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 16:44:28 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o87Ehknq009271
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Tue, 07 Sep 2010 16:49:37 +0200
+Received: by wye20 with SMTP id 20so6012584wye.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Sep 2010 09:43:46 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o87Ehjux006652
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Sep 2010 09:43:46 -0500 (CDT)
-Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o87EhjBa008091
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 7 Sep 2010 09:43:45 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
-	([156.117.232.23]) with mapi; Tue, 7 Sep 2010 09:43:45 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Sep 2010 09:43:44 -0500
-Thread-Topic: [oe] [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make
-	it	global
-Thread-Index: ActL35ys6JiqTSKzTnCMLD83n/YVEwCumRKw
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFA4BD@dlee06.ent.ti.com>
-References: <20100903111210.GA17702@game.jcrosoft.org>
-	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
-In-Reply-To: <1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Tue, 07 Sep 2010 07:48:53 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=yMHgVB9rwo0KVSXVGrxvvBxytZpo2kRJUXqyizEmacw=;
+	b=F2U/R7DIGenimVzjB+O5Ce4hu9WBZoDfqvjXH+8tuiaJTBU2MJ9eGN/TC3JPQaGvoa
+	WvjZruiP/pkT2rcnpBHY7XgG6rIccuzkLuYlJiIG600a71HqT+4J/7AO/pBNLWchQ+rW
+	9+1L+QQGIGcV9eloE9JBlLAWICSDfrG+V2FdM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=GoqUYKn2dgeore7fOvn8SRmockYFF64IG27/H8BOjGQGwfj4f1fOsSuwWYq9wXOcdG
+	FGYGheQXf/l2wyTUKdO9900zjPuGioPpi2OjphPkAHwZp1ar5IfjOiDYTfahKHGtV4Pr
+	12QMmm8ZdT4k9eGpWjs2nKJRgOGYxBjF6KN5k=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.40
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.216.232.90 with SMTP id m68mr1069857weq.10.1283870933614; Tue,
+	07 Sep 2010 07:48:53 -0700 (PDT)
+Received: by 10.216.21.209 with HTTP; Tue, 7 Sep 2010 07:48:53 -0700 (PDT)
+Date: Tue, 7 Sep 2010 10:48:53 -0400
+Message-ID: <AANLkTi=Pukbe6T_LM59_1BJS3TG8PwEBWP064YaDCs6u@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make it	global
+Subject: testing branch 2010-09-07
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,31 +48,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 14:44:28 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 07 Sep 2010 14:49:37 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-> add global OVERRIDES ${TARGET_SOC_FAMILY} and
-> ${TARGET_ARCH}_${TARGET_SOC_FAMILY}
->=20
-For my part I would ask why you are renaming SOC_FAMILY to TARGET_SOC_FAMIL=
-Y?  Why not leave the name the way it is since others may be using it in ov=
-erlays, etc?
+Last weeks testing cycle was successful:
 
-Also, you might want to make sure your patch would include Fran's fix to ba=
-se.bbclass that he mentioned at http://lists.linuxtogo.org/pipermail/openem=
-bedded-devel/2010-September/023680.html
+http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-08-30
 
-For what my input is worth I would NAK this patch because:
+I see a few more builds succeeding that were failing last week.
 
-1.  I don't see a reason to add this to the generic set of overrides.
-2.  I don't understand why the name of the variable SOC_FAMILY needs to be =
-changed.  I know this will break existing overlays and I don't see any reas=
-on why the change is made.
-3.  I disagree with the ${TARGET_ARCH}_${TARGET_SOC_FAMILY} override.  If y=
-ou have two patch series for different architectures then you should have t=
-wo SOC_FAMILY settings or use the MACHINE setting for the override.  I thin=
-k this override is confusing and redundant.
+The testing-next branch has been moved to current org.openembedded.dev
+and is ready for clean builds.
+
+http://wiki.openembedded.net/index.php/Testing
+
+Thanks,
+Cliff
+
+-- 
+=================
+http://bec-systems.com
 
 
