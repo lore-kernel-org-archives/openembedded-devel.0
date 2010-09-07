@@ -1,40 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Ot035-0007Ma-8m
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <thebohemian@gmx.net>) id 1Ot0Wn-00078Z-5s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 17:25:30 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Ot02P-0001bW-Pm from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 08:24:45 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 7 Sep 2010 08:24:45 -0700
-Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 7 Sep 2010 09:24:44 -0600
-Message-ID: <4C86593A.7000006@mentor.com>
-Date: Tue, 07 Sep 2010 08:24:42 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Tue, 07 Sep 2010 17:56:13 +0200
+Received: (qmail invoked by alias); 07 Sep 2010 15:48:49 -0000
+Received: from 234.163.71-86.rev.gaoland.net (EHLO [192.168.1.71])
+	[86.71.163.234]
+	by mail.gmx.net (mp043) with SMTP; 07 Sep 2010 17:48:49 +0200
+X-Authenticated: #17532834
+X-Provags-ID: V01U2FsdGVkX1+Pu1ES9HiPQ2efikTKV1+HJC6KFBdSW1zl+9FDcv
+	oKNCuTfxlHPUf4
+Message-ID: <4C865EDC.4080807@gmx.net>
+Date: Tue, 07 Sep 2010 17:48:44 +0200
+From: Robert Schuster <thebohemian@gmx.net>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.11) Gecko/20100713 Thunderbird/3.0.6
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinU39HjKWb9=VMiSa=R2YA_9BxPDctiW1ire48C@mail.gmail.com>	<AANLkTikk1sce-dOHW_uVOO3m+XPx1ZjapvcNAAHiXwnS@mail.gmail.com>	<AANLkTikkJod_2MTGN4B+8Q4wS74v9Z=nEBqrucUrcYjv@mail.gmail.com>	<AANLkTikZuBMiU2H8m3M97xFwcQE2GCdQ_2Q=TSM4b23-@mail.gmail.com>
-	<AANLkTi=eX15FWkO+Fux8UpNv9tXkTVtkYrd=t3c_==2k@mail.gmail.com>
-In-Reply-To: <AANLkTi=eX15FWkO+Fux8UpNv9tXkTVtkYrd=t3c_==2k@mail.gmail.com>
-X-OriginalArrivalTime: 07 Sep 2010 15:24:44.0861 (UTC)
-	FILETIME=[CCD7A6D0:01CB4EA0]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <1283842952-20249-1-git-send-email-raj.khem@gmail.com>
+In-Reply-To: <1283842952-20249-1-git-send-email-raj.khem@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: thebohemian@gmx.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Perl modules I can not get to build, libdbd-sqlite-perl libversion-perl
+Subject: Re: [PATCH 1/2] java-library.bbclass: do_stage is not needed anymore
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,34 +43,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 15:25:33 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Sep 2010 15:56:13 -0000
+X-Groupsio-MsgNum: 23270
+Content-Type: multipart/signed; micalg=pgp-sha1;
+	protocol="application/pgp-signature";
+	boundary="------------enig3C777F5941FDF07D46DE11C7"
 
-Graham Gower wrote:
-> On 3 September 2010 09:13, J. L. <vwyodapink@gmail.com> wrote:
-[snip]
-> 
->> and the other is honestly above me at the moment as I do not grasp
->> using devshell yet and how to work with in there, let alone properly
->> lay out a program recipe and then patch it to work properly. Once I
->> grasp things more I hope to be a help and not such a hindrance, I
->> welcome any tips links or anything to point to how to fix either and I
->> will try more on more with those pointers and if successful post the
->> results and maybe a patch or post the failure.
-> 
-> Read the OE manual. Read the Bitbake manual. Read .bb files. Read
-> .conf files. Read .bbclass files. Read Bitbake sources. Send patches.
-> Add time. Repeat. == expert!
+--------------enig3C777F5941FDF07D46DE11C7
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-I'd just like to add in that while it's great (really, I mean it), 
-you're reporting problems, if you can reproduce them in vanilla OE with 
-something like MACHINE=qemuarm and DISTRO=angstrom-2008.1 (or 
-DISTRO=minimal) or similar, that will help rule out a lot of concern on 
-our part and give a testcase we can all easily try out.
+Patch is fine!
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+Signed-off-by: Robert Schuster <robertschuster@fsfe.org>
+
+Am 07.09.2010 09:02, schrieb Khem Raj:
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+> ---
+>  classes/java-library.bbclass |    4 ----
+>  1 files changed, 0 insertions(+), 4 deletions(-)
+>=20
+> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclas=
+s
+> index 904b4f1..5ce0537 100644
+> --- a/classes/java-library.bbclass
+> +++ b/classes/java-library.bbclass
+> @@ -65,7 +65,3 @@ do_install() {
+>  java_stage() {
+>    oe_jarinstall -s ${JARFILENAME} ${ALTJARFILENAMES}
+>  }
+> -
+> -do_stage() {
+> -  java_stage
+> -}
 
 
+
+
+
+--------------enig3C777F5941FDF07D46DE11C7
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+Comment: Using GnuPG with Mozilla - http://enigmail.mozdev.org/
+
+iEYEARECAAYFAkyGXt8ACgkQG9cfwmwwEtourwCfUZFBq6caHTGjwQEy0RfjhOy8
+sbIAnjfFzqxGSPK0jFMKLYH8AVZHzFRu
+=QT5S
+-----END PGP SIGNATURE-----
+
+--------------enig3C777F5941FDF07D46DE11C7--
