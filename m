@@ -1,38 +1,30 @@
-Received: from sirius.lasnet.de ([78.47.116.19])
+Received: from blu0-omc4-s25.blu0.hotmail.com ([65.55.111.164])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <stefan@datenfreihafen.org>) id 1Osx6s-00059r-K0
+	(envelope-from <mgcse@hotmail.com>) id 1Osx6u-00059s-W7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:17:11 +0200
-Received: from guest190.ibr.cs.tu-bs.de ([134.169.35.190] helo=excalibur.local)
-	by sirius.lasnet.de with esmtpsa 
-	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
-	id 1Osx6E-0007gG-5A by authid <stefan@sostec.de> with cram_md5
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 14:16:32 +0200
-Received: from stefan by excalibur.local with local (Exim 4.72)
-	(envelope-from <stefan@excalibur.local>) id 1Osx6C-0006yq-Rp
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:16:28 +0200
-Date: Tue, 7 Sep 2010 14:16:28 +0200
-From: Stefan Schmidt <stefan@datenfreihafen.org>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100907121628.GC571@excalibur.local>
-References: <4C862985.9050205@mlbassoc.com>
+	Tue, 07 Sep 2010 14:17:14 +0200
+Received: from BLU132-W8 ([65.55.111.136]) by blu0-omc4-s25.blu0.hotmail.com
+	with Microsoft SMTPSVC(6.0.3790.4675); 
+	Tue, 7 Sep 2010 05:15:29 -0700
+Message-ID: <BLU132-W8FA51733A7631FEA4FB63B0710@phx.gbl>
+X-Originating-IP: [212.175.157.5]
+From: mahmut g <mgcse@hotmail.com>
+To: <openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Sep 2010 12:15:29 +0000
+Importance: Normal
 MIME-Version: 1.0
-In-Reply-To: <4C862985.9050205@mlbassoc.com>
-X-Mailer: Mutt http://www.mutt.org/
-X-KeyID: 0xDDF51665
-X-Website: http://www.datenfreihafen.org/
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-SA-Exim-Connect-IP: 78.47.116.19
-X-SA-Exim-Mail-From: stefan@datenfreihafen.org
+X-OriginalArrivalTime: 07 Sep 2010 12:15:29.0657 (UTC)
+	FILETIME=[5C9D0690:01CB4E86]
+X-SA-Exim-Connect-IP: 65.55.111.164
+X-SA-Exim-Mail-From: mgcse@hotmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00, HTML_FONT_FACE_BAD, 
+	HTML_MESSAGE,SPF_PASS autolearn=no version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: opkg install without feed
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: selecting needed applications only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,23 +38,25 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 12:17:11 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 07 Sep 2010 12:17:14 -0000
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Hello.
 
-On Tue, 2010-09-07 at 06:01, Gary Thomas wrote:
-> 
-> Sometimes I have a locally created .ipk file and it's cumbersome
-> to get it into my feed setup.  It would be nice to be able to
-> just install it directly.
 
-opkg install YOURFILE.ipk should work just fine.
+I am new at OE. Actually I heard from many people Openembedded is the best =
+and decided to try. However I couldn't figure out how I can select applicat=
+ions just I want to be included to my image. There are too many files and r=
+ules. I had tired to use with beagle board and finally given up. The main r=
+eason for learning and using OE was that we wanted to use QT on our board. =
+May someone advice any nice guide or documents which show how to select jus=
+t wanted applications and how I can add a new application=2C it will be app=
+reciated.=20
+Regards=2C
+MahmutG
 
-Of course you need to take care about the deps yourself this way.
 
-regards
-Stefan Schmidt
 
+
+ 		 	   		  =
 
