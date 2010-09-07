@@ -1,40 +1,50 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Ot29B-0001Cn-B6
+	(envelope-from <kristoffer.ericson@gmail.com>) id 1Ot2wX-0003ug-Jv
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 19:39:54 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Ot28S-0007YP-CM from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 10:39:08 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Tue, 7 Sep 2010 10:39:08 -0700
-Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Tue, 7 Sep 2010 11:39:07 -0600
-Message-ID: <4C8678B7.8010002@mentor.com>
-Date: Tue, 07 Sep 2010 10:39:03 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Tue, 07 Sep 2010 20:30:55 +0200
+Received: by eyb7 with SMTP id 7so2574656eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Sep 2010 11:30:14 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:reply-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=87lz9EBtj9I59M7uCbfxEbINtFw/Kl5e09HVtWRdiBM=;
+	b=lJd0zrzOPgMvuWOPw1hf9I7VMviL6ioBC2pvensqoWLJX2jSvnCQZohbn9ko7aiE3S
+	J866yEfKoMgq4gPcmFDH6h/g1yRVziHgxHfwlsHnWegr6JYWB8S9A2GkR/N1B8OA5sPp
+	RgutOfypicPRtcRYOTQzDPcMboLKLyal0DSTs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:reply-to:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=j8GYrHIIBBg8APt4IbL5FS0N38P/EGdbHjkNQCK6F5hJI3dUhhIQWfrB7+nPtPImqG
+	/WgQgjJ44xm+G3DbfazWR43oWdzMekXv64u+LN+/t4EXUmIqINdeTAjJ3ttHkVCFWkOj
+	afwy0zicHyNgQxPLGEBftCtL/TBwXDA7cJndk=
+Received: by 10.213.13.142 with SMTP id c14mr62800eba.84.1283884214731;
+	Tue, 07 Sep 2010 11:30:14 -0700 (PDT)
+Received: from localhost (c-96dde555.010-30-6c6b7012.cust.bredbandsbolaget.se
+	[85.229.221.150])
+	by mx.google.com with ESMTPS id v59sm10342338eeh.16.2010.09.07.11.30.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 07 Sep 2010 11:30:13 -0700 (PDT)
+Date: Tue, 7 Sep 2010 20:33:06 +0200
+From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTinU39HjKWb9=VMiSa=R2YA_9BxPDctiW1ire48C@mail.gmail.com>	<AANLkTikk1sce-dOHW_uVOO3m+XPx1ZjapvcNAAHiXwnS@mail.gmail.com>	<AANLkTikkJod_2MTGN4B+8Q4wS74v9Z=nEBqrucUrcYjv@mail.gmail.com>	<AANLkTikZuBMiU2H8m3M97xFwcQE2GCdQ_2Q=TSM4b23-@mail.gmail.com>	<AANLkTi=eX15FWkO+Fux8UpNv9tXkTVtkYrd=t3c_==2k@mail.gmail.com>	<4C86593A.7000006@mentor.com>
-	<AANLkTi=AL6HCYtK7CuCwzeTo7WW2QvfT8p9s8R73gVsO@mail.gmail.com>
-In-Reply-To: <AANLkTi=AL6HCYtK7CuCwzeTo7WW2QvfT8p9s8R73gVsO@mail.gmail.com>
-X-OriginalArrivalTime: 07 Sep 2010 17:39:07.0193 (UTC)
-	FILETIME=[925DE290:01CB4EB3]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-ID: <20100907183306.GB15949@boggieman.bredbandsbolaget.se>
+References: <20100907163605.GA15949@boggieman.bredbandsbolaget.se>
+	<AANLkTikinUbL68vz9fgLSeoyeB+XnKPH+qf4VHv4pRvd@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikinUbL68vz9fgLSeoyeB+XnKPH+qf4VHv4pRvd@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: kristoffer.ericson@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Perl modules I can not get to build, libdbd-sqlite-perl libversion-perl
+Subject: Re: Moving keys to development server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,54 +58,56 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 17:39:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Sep 2010 18:30:55 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-J. L. wrote:
-> On Tue, Sep 7, 2010 at 8:24 AM, Tom Rini <tom_rini@mentor.com> wrote:
->> Graham Gower wrote:
->>> On 3 September 2010 09:13, J. L. <vwyodapink@gmail.com> wrote:
->> [snip]
->>>> and the other is honestly above me at the moment as I do not grasp
->>>> using devshell yet and how to work with in there, let alone properly
->>>> lay out a program recipe and then patch it to work properly. Once I
->>>> grasp things more I hope to be a help and not such a hindrance, I
->>>> welcome any tips links or anything to point to how to fix either and I
->>>> will try more on more with those pointers and if successful post the
->>>> results and maybe a patch or post the failure.
->>> Read the OE manual. Read the Bitbake manual. Read .bb files. Read
->>> .conf files. Read .bbclass files. Read Bitbake sources. Send patches.
->>> Add time. Repeat. == expert!
->> I'd just like to add in that while it's great (really, I mean it), you're
->> reporting problems, if you can reproduce them in vanilla OE with something
->> like MACHINE=qemuarm and DISTRO=angstrom-2008.1 (or DISTRO=minimal) or
->> similar, that will help rule out a lot of concern on our part and give a
->> testcase we can all easily try out.
+On Tue, Sep 07, 2010 at 10:00:12AM -0700, Khem Raj wrote:
+> On Tue, Sep 7, 2010 at 9:36 AM, Kristoffer Ericson
+> <kristoffer.ericson@gmail.com> wrote:
+> > Greetings,
+> >
+> > We at JLime are setting up an development server to be able for all
+> > developers to work on same machine (and build/push alot faster). Im having issues
+> > getting the write access from the server (works fine from my laptop).
+> > Ive moved the keys into my server user account but cant get it to work.
+> > It fails with access denied.
+> >
+> > So, what am I missing
 > 
-> OK thanks Tom I will try and read more on how to do that. Have not
-> done anything with qemu yet. But what I get now and correct if I am
-> wrong by OE vanilla you mean fresh directly off the dev branch no
-> other sub tree correct? then modify my .conf to to the settings you
-> listed above? If I am way off dont worry about taking the time to
+> your private ssh keys which are in ~/.ssh on your laptop
+> either you copy them over or you can setup keychain/ssh-agent
+> to forward it from your laptop to this server whatever fits your security needs
+> 
 
-Correct.
+Ive done exactly that, but getting this:
 
-> explain in detail I will just read about it. I feel I have become an
-> annoyance on the boards from my lacking knowledge. Would showing the
-> recipe I build for my gumstix help? Its now building but not with
-> everything I want and some programs are broken, but its very close the
-> closest I have gotten so far. Any who thanks for replying and giving
-> me more info on how to help you guys help me. I do appreciate
-> everyones help and input a bunch.
+kristoffer.ericson@jlime:~$ git clone git@git.openembedded.org:openembedded
+Initialized empty Git repository in /home/users/kristoffer.ericson/openembedded/.git/
+The authenticity of host 'git.openembedded.org (140.211.169.165)' can't be established.
+RSA key fingerprint is xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx:xx.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added 'git.openembedded.org,140.211.169.165' (RSA) to the list of known hosts.
+Agent admitted failure to sign using the key.
+Permission denied (publickey).
+fatal: The remote end hung up unexpectedly
+kristoffer.ericson@jlime:~$ 
 
-We're happy to have a problem report, really.  It's just that since yes, 
-you're working with more than just the vanilla tree we want to be 
-certain that the problem is in the vanilla tree and not a conflict in 
-having additional overlays and such available.
+So what could it be? Is it because my username is different on the server (kristoffer.ericson vs kristoffer)?
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+> >
+> > Best wishes
+> > Kristoffer
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
