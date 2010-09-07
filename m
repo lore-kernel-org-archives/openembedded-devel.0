@@ -1,32 +1,44 @@
-Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gary@mlbassoc.com>) id 1Osx9Z-0005N9-9h
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsxBw-0005V9-62
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:19:58 +0200
-Received: by mail.chez-thomas.org (Postfix, from userid 999)
-	id 80D361660934; Tue,  7 Sep 2010 06:19:18 -0600 (MDT)
-Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
-	by mail.chez-thomas.org (Postfix) with ESMTP id F19AE166092B;
-	Tue,  7 Sep 2010 06:19:17 -0600 (MDT)
-Message-ID: <4C862DC5.1020605@mlbassoc.com>
-Date: Tue, 07 Sep 2010 06:19:17 -0600
-From: Gary Thomas <gary@mlbassoc.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+	Tue, 07 Sep 2010 14:22:25 +0200
+Received: by iwn2 with SMTP id 2so5183077iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Sep 2010 05:21:44 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gKgcZhvgw99+gm1DvxBIKi55jOnC7k7hEr7r9+nvMtU=;
+	b=DMdU7TRA0oWTrpz4HNXeVoEfmkRVMiP7qwkYj9RD9intXfoXYH7M8/zlScu0GxiZSU
+	9bT3GpjxndnwRKm9Z/4B2gr8ocC/gQN2P1/UodwfbS6Zm29Dhplnnjrtc+6ICAm18msW
+	3i+w2ZWAZWr9otqnZYpd7NpdOGhw2u5zoYbaQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=WvjMOpFYbnrkDsrR+aejJmIgcammMcn8DqAGVrzJJtwaSJcYhwfsBV/d7cWrAbCo9U
+	NYn7OKpIDgM+T9a7qsBwTg3f1r5zhUFfFV3JxOL0bpyZNqLlWO8givP4gFLThVVJ0djo
+	dUEmPnXH5HVAms7/KQNXfButsQSlXeJcz9Kjk=
 MIME-Version: 1.0
+Received: by 10.231.148.83 with SMTP id o19mr7906824ibv.112.1283862101553;
+	Tue, 07 Sep 2010 05:21:41 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Tue, 7 Sep 2010 05:21:41 -0700 (PDT)
+In-Reply-To: <BLU132-W8FA51733A7631FEA4FB63B0710@phx.gbl>
+References: <BLU132-W8FA51733A7631FEA4FB63B0710@phx.gbl>
+Date: Tue, 7 Sep 2010 14:21:41 +0200
+Message-ID: <AANLkTi=Y90PWXBSsZmbtub-S519CdBaAEEDQ-dnTrsvN@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C862985.9050205@mlbassoc.com> <4C862B28.9090309@eukrea.com>
-In-Reply-To: <4C862B28.9090309@eukrea.com>
-X-SA-Exim-Connect-IP: 64.234.241.98
-X-SA-Exim-Mail-From: gary@mlbassoc.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-Subject: Re: opkg install without feed
+Subject: Re: selecting needed applications only
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,30 +52,28 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 12:19:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 07 Sep 2010 12:22:25 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-On 09/07/2010 06:08 AM, Eric B=E9nard wrote:
-> Le 07/09/2010 14:01, Gary Thomas a =E9crit :
->> Is there any way to install a .ipk file, without loading it
->> from one of the defined feeds? This would be akin to the
->> yum localinstall operation?
->>
->> Sometimes I have a locally created .ipk file and it's cumbersome
->> to get it into my feed setup. It would be nice to be able to
->> just install it directly.
->>
-> I think you can run
-> opkg install file.ipk
+2010/9/7 mahmut g <mgcse@hotmail.com>:
+>
+>
+> I am new at OE. Actually I heard from many people Openembedded is the bes=
+t and decided to try. However I couldn't figure out how I can select applic=
+ations just I want to be included to my image. There are too many files and=
+ rules. I had tired to use with beagle board and finally given up. The main=
+ reason for learning and using OE was that we wanted to use QT on our board=
+. May someone advice any nice guide or documents which show how to select j=
+ust wanted applications and how I can add a new application, it will be app=
+reciated.
+> Regards,
+> MahmutG
 
-Cool, that worked :-)  n.b. I thought I had tried this and failed
-in the past!
+If you want full control make your own image. E.g. start with
+recipes/images/minimal-image.bb copy and rename that and add the
+packages you want to add to IMAGE_INSTALL.
 
---=20
-------------------------------------------------------------
-Gary Thomas                 |  Consulting for the
-MLB Associates              |    Embedded world
-------------------------------------------------------------
+Good luck, Frans
 
 
