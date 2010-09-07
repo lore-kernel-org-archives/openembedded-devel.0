@@ -1,40 +1,38 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from sirius.lasnet.de ([78.47.116.19])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Osx17-0001Nh-0S
+	(envelope-from <stefan@datenfreihafen.org>) id 1Osx6s-00059r-K0
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:11:14 +0200
-Received: by gya6 with SMTP id 6so2099522gya.6
+	Tue, 07 Sep 2010 14:17:11 +0200
+Received: from guest190.ibr.cs.tu-bs.de ([134.169.35.190] helo=excalibur.local)
+	by sirius.lasnet.de with esmtpsa 
+	(Cipher TLS-1.0:RSA_AES_256_CBC_SHA1:32) (Exim 4.63 #1)
+	id 1Osx6E-0007gG-5A by authid <stefan@sostec.de> with cram_md5
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 05:10:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=fkqKFZoSF5CPjtKxiPqzSs8ISZNarQe26zk6Ti7G5TE=;
-	b=EQOGbNxHSRrfFNECmotO59GGsWckGhjzpnNhr0ZXydobTbjJhKFUG2EuJTakB6QKJ9
-	q6j7MaMPpRizRbrWTg0wCaPtGDlkfA188Ifd3VyNqnlSPQISu7jvj0J5LfGQ0Xg4aGik
-	XOvsvg9KKhBWlB3T9yvILJjqOUGNBn9AARWxk=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=kVDo842lG/7GwuEyV8MaS3BX9/ZLOPbjVG6mNkMAubONi/drMRqAi5rUghJgf2iDjm
-	bHeedDccfDKi+QgzHfHxnK1Iyex4+8ZleCdg/LbCqvWKa6/e5DSF92n0qo15Z+0ItE6i
-	r0XqwGs8NRLz9AWNE8njDUgsyqeUm6xw3SMLk=
-MIME-Version: 1.0
-Received: by 10.90.35.8 with SMTP id i8mr346059agi.200.1283861431745; Tue, 07
-	Sep 2010 05:10:31 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Tue, 7 Sep 2010 05:10:31 -0700 (PDT)
-Date: Tue, 7 Sep 2010 14:10:31 +0200
-Message-ID: <AANLkTinCbuso+UXvq7Ru1ZDAXhMB=Jbx34k-b2RZC-s=@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 07 Sep 2010 14:16:32 +0200
+Received: from stefan by excalibur.local with local (Exim 4.72)
+	(envelope-from <stefan@excalibur.local>) id 1Osx6C-0006yq-Rp
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Sep 2010 14:16:28 +0200
+Date: Tue, 7 Sep 2010 14:16:28 +0200
+From: Stefan Schmidt <stefan@datenfreihafen.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Message-ID: <20100907121628.GC571@excalibur.local>
+References: <4C862985.9050205@mlbassoc.com>
+MIME-Version: 1.0
+In-Reply-To: <4C862985.9050205@mlbassoc.com>
+X-Mailer: Mutt http://www.mutt.org/
+X-KeyID: 0xDDF51665
+X-Website: http://www.datenfreihafen.org/
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 78.47.116.19
+X-SA-Exim-Mail-From: stefan@datenfreihafen.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: rd5b3850cb6 openembedded.git/recipes/bash/bash_3.2.bb: bash 3.2: bump PR
+Subject: Re: opkg install without feed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,17 +46,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 12:11:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Sep 2010 12:17:11 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Can we have clearer commit messages please?
-The message in the subject line should at least have explained why a
-PR bump is needed at all.
+Hello.
 
-See also http://wiki.openembedded.net/index.php/Commit_Policy for the
-policy on commit messages.
+On Tue, 2010-09-07 at 06:01, Gary Thomas wrote:
+> 
+> Sometimes I have a locally created .ipk file and it's cumbersome
+> to get it into my feed setup.  It would be nice to be able to
+> just install it directly.
 
-Thank you!
-Frans
+opkg install YOURFILE.ipk should work just fine.
+
+Of course you need to take care about the deps yourself this way.
+
+regards
+Stefan Schmidt
 
 
