@@ -1,48 +1,46 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vwyodapink@gmail.com>) id 1Ot0xV-0001pP-3T
+	(envelope-from <kristoffer.ericson@gmail.com>) id 1Ot17O-0008IR-T7
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 18:23:46 +0200
-Received: by wwi14 with SMTP id 14so5536251wwi.24
+	Tue, 07 Sep 2010 18:34:04 +0200
+Received: by ewy7 with SMTP id 7so2490835ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 09:23:04 -0700 (PDT)
+	Tue, 07 Sep 2010 09:33:13 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=YP7ghy+R7LElwVU7o5Nu7Z4F+KqI+W/zEwAIdPhXk9w=;
-	b=lZmYrBqWRO5djjkovB++pw58rTUGSb5xq6jnwp+FNtXJENVd+ZUBHbLUZYaAzZuAuu
-	yegeWVIS3BcC4HJeYiptFd8AQbJd6vdmsFUDBLJ929bt22qV4rtCgLQuhjyymQyRj15W
-	ULLn1PuJ0rc4FYFJRpPea50NbfY9AoA/6XAkY=
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:reply-to:mime-version:content-type:content-disposition
+	:user-agent; bh=i2nQIJedAzWZs1elW8PPRWKl68mMiQEU2zIQ7k6FcAE=;
+	b=BPMrVfxEshivMZR/58zWD4tnuYxf2Z5eEKI0+AdcyD6yn3xbXwUQpW/8M71IuLwTn0
+	XGpv0aXGOoyG586NazmZ2cbdDo4k8dOaxsRcfOwDANb0iECtzr4x13arZKmvIPcyXMis
+	2CM1Q3eRI9P2JYOgBGoVhsWsyBB/DpnsjxgTc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=EUP6u850pa9Dp2LAoyH+fSldQM5iZBUk0G5ZJC5fJVGt5C+00XAOtEZMPniBhWRBDe
-	tRXQOYUMy3K3Ou2SIdXFbQxQG9TYJ3Y7r1OCe1WYUuZX7Sle/MxM+YD7zWKrq2w3dVCW
-	sqGlJu3Hs+Cj+UF2ZODby+9D+Lr/2koN+ZLL4=
-MIME-Version: 1.0
-Received: by 10.227.138.84 with SMTP id z20mr129630wbt.214.1283876568058; Tue,
-	07 Sep 2010 09:22:48 -0700 (PDT)
-Received: by 10.216.58.197 with HTTP; Tue, 7 Sep 2010 09:22:47 -0700 (PDT)
-In-Reply-To: <4C86593A.7000006@mentor.com>
-References: <AANLkTinU39HjKWb9=VMiSa=R2YA_9BxPDctiW1ire48C@mail.gmail.com>
-	<AANLkTikk1sce-dOHW_uVOO3m+XPx1ZjapvcNAAHiXwnS@mail.gmail.com>
-	<AANLkTikkJod_2MTGN4B+8Q4wS74v9Z=nEBqrucUrcYjv@mail.gmail.com>
-	<AANLkTikZuBMiU2H8m3M97xFwcQE2GCdQ_2Q=TSM4b23-@mail.gmail.com>
-	<AANLkTi=eX15FWkO+Fux8UpNv9tXkTVtkYrd=t3c_==2k@mail.gmail.com>
-	<4C86593A.7000006@mentor.com>
-Date: Tue, 7 Sep 2010 09:22:47 -0700
-Message-ID: <AANLkTi=AL6HCYtK7CuCwzeTo7WW2QvfT8p9s8R73gVsO@mail.gmail.com>
-From: "J. L. " <vwyodapink@gmail.com>
+	h=date:from:to:subject:message-id:reply-to:mime-version:content-type
+	:content-disposition:user-agent;
+	b=NFw37gUjWyvL7uW3Oc62VJvjc63pCe6hby7guh5i9TH0I15w0FoBE+B1j9S4HM+bNJ
+	bxzUz8doyGg113XSl0mRJHb9QleiN/W2yB3BjdzVLRuzBHFijxMEUV0u2Z93oZ9QP4Y9
+	eKXlVmIhZGBOOTliCCdjUcDzsJafg8TnZPF/k=
+Received: by 10.213.11.8 with SMTP id r8mr28114ebr.54.1283877193373;
+	Tue, 07 Sep 2010 09:33:13 -0700 (PDT)
+Received: from localhost (c-96dde555.010-30-6c6b7012.cust.bredbandsbolaget.se
+	[85.229.221.150])
+	by mx.google.com with ESMTPS id v59sm10171036eeh.22.2010.09.07.09.33.12
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 07 Sep 2010 09:33:12 -0700 (PDT)
+Date: Tue, 7 Sep 2010 18:36:05 +0200
+From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: vwyodapink@gmail.com
+Message-ID: <20100907163605.GA15949@boggieman.bredbandsbolaget.se>
+MIME-Version: 1.0
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: kristoffer.ericson@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Perl modules I can not get to build, libdbd-sqlite-perl libversion-perl
+Subject: Moving keys to development server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,57 +54,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 16:23:47 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 07 Sep 2010 16:34:05 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
-On Tue, Sep 7, 2010 at 8:24 AM, Tom Rini <tom_rini@mentor.com> wrote:
-> Graham Gower wrote:
->>
->> On 3 September 2010 09:13, J. L. <vwyodapink@gmail.com> wrote:
->
-> [snip]
->>
->>> and the other is honestly above me at the moment as I do not grasp
->>> using devshell yet and how to work with in there, let alone properly
->>> lay out a program recipe and then patch it to work properly. Once I
->>> grasp things more I hope to be a help and not such a hindrance, I
->>> welcome any tips links or anything to point to how to fix either and I
->>> will try more on more with those pointers and if successful post the
->>> results and maybe a patch or post the failure.
->>
->> Read the OE manual. Read the Bitbake manual. Read .bb files. Read
->> .conf files. Read .bbclass files. Read Bitbake sources. Send patches.
->> Add time. Repeat. == expert!
->
-> I'd just like to add in that while it's great (really, I mean it), you're
-> reporting problems, if you can reproduce them in vanilla OE with something
-> like MACHINE=qemuarm and DISTRO=angstrom-2008.1 (or DISTRO=minimal) or
-> similar, that will help rule out a lot of concern on our part and give a
-> testcase we can all easily try out.
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Greetings,
 
-OK thanks Tom I will try and read more on how to do that. Have not
-done anything with qemu yet. But what I get now and correct if I am
-wrong by OE vanilla you mean fresh directly off the dev branch no
-other sub tree correct? then modify my .conf to to the settings you
-listed above? If I am way off dont worry about taking the time to
-explain in detail I will just read about it. I feel I have become an
-annoyance on the boards from my lacking knowledge. Would showing the
-recipe I build for my gumstix help? Its now building but not with
-everything I want and some programs are broken, but its very close the
-closest I have gotten so far. Any who thanks for replying and giving
-me more info on how to help you guys help me. I do appreciate
-everyones help and input a bunch.
+We at JLime are setting up an development server to be able for all
+developers to work on same machine (and build/push alot faster). Im having issues
+getting the write access from the server (works fine from my laptop).
+Ive moved the keys into my server user account but cant get it to work.
+It fails with access denied.
 
-JL
+So, what am I missing?
+
+Best wishes
+Kristoffer
 
 
