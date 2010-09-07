@@ -1,42 +1,44 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1Osrj6-0001Dc-PA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OsrjX-0001H2-1d
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 08:32:17 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id ADE54A6014
+	Tue, 07 Sep 2010 08:32:44 +0200
+Received: by iwn2 with SMTP id 2so4930332iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 07:31:37 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id RUty5WvsDF-x
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 07:31:36 +0100 (BST)
-Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 57A41A6013
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 07:31:34 +0100 (BST)
-Message-ID: <4C85DBD0.9050708@xora.org.uk>
-Date: Tue, 07 Sep 2010 07:29:36 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.7) Gecko/20100720 Lightning/1.0b2 Thunderbird/3.1.1
+	Mon, 06 Sep 2010 23:32:04 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=u6uq7pLZZLmMweu9KrktlVs3s9kII3+Cna82nF1JhCU=;
+	b=vPsW6OUBCTXhPYAffTuLmqA8/8UZtdd3rrYh1l5e7NDrN4EM5RLg8l7oZ63K0qLN15
+	7jNCePu4+t9PqKbmG5f0Ut971cd9ngwihwilDkFJuZhF+7GnawSZ8Zk0SiKmXHShaXI2
+	N/Fyj2pgAviXNtCEAh9X8Mc9IXXBTv9wvYdjc=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Qlg4qy/3smi8XVh4DdNtRXgs69NRTRD/hGIVbbpFxjI4ywNuTfZsWm5fMuFKtOApQ0
+	/HRzlD3HYOgtKsUWoMQs9ARCO1qgzMe/ukUw6DtYrI0wy4Br2WKXDQb1+tiNi88xKE9O
+	jTyB42Sa6ORyz05GFoBylixSuTTUPeXnO0Up8=
 MIME-Version: 1.0
+Received: by 10.231.179.24 with SMTP id bo24mr6882342ibb.193.1283841124220;
+	Mon, 06 Sep 2010 23:32:04 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 23:32:04 -0700 (PDT)
+In-Reply-To: <AANLkTimjZwZ9TCLcWz3ZRQ2pGYj_nb=kE-qYtVW5uSBg@mail.gmail.com>
+References: <1283775540-13164-1-git-send-email-noor_ahsan@mentor.com>
+	<AANLkTimjZwZ9TCLcWz3ZRQ2pGYj_nb=kE-qYtVW5uSBg@mail.gmail.com>
+Date: Tue, 7 Sep 2010 08:32:04 +0200
+Message-ID: <AANLkTimxy+r7_Wgaq1SvmWHBPRuvZ+Wtvn1Ctm=maaGb@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1283809310-29893-1-git-send-email-eric@eukrea.com>
-	<AANLkTi=LswfyrP_t-5G2iipd6umjkAmdwFiECLmZXMXW@mail.gmail.com>
-In-Reply-To: <AANLkTi=LswfyrP_t-5G2iipd6umjkAmdwFiECLmZXMXW@mail.gmail.com>
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] mercurial-native: add recipe
+Subject: Re: [PATCH] libsdl-native: Convert to new style staging, remove do_stage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,60 +52,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 06:32:17 -0000
+X-List-Received-Date: Tue, 07 Sep 2010 06:32:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
- On 07/09/10 07:27, Frans Meulenbroeks wrote:
-> 2010/9/6 Eric B=E9nard <eric@eukrea.com>:
->> * mercurial is a distributed SCM
->> * having the native recipe inside OpenEmbedded gives the
->> possibility to fetch code from mercurial's repositories
->> without the need to have mercurial installed on the host
->>
->> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
->> ---
->>  recipes/mercurial/mercurial-native_1.6.3.bb |   23 ++++++++++++++++++=
-+++++
->>  1 files changed, 23 insertions(+), 0 deletions(-)
->>  create mode 100644 recipes/mercurial/mercurial-native_1.6.3.bb
->>
->> diff --git a/recipes/mercurial/mercurial-native_1.6.3.bb b/recipes/mer=
-curial/mercurial-native_1.6.3.bb
->> new file mode 100644
->> index 0000000..58fcaf1
->> --- /dev/null
->> +++ b/recipes/mercurial/mercurial-native_1.6.3.bb
->> @@ -0,0 +1,23 @@
->> +DESCRIPTION =3D "The Mercurial distributed SCM"
->> +SECTION =3D "console/utils"
->> +LICENSE =3D "GPLv2"
->> +
->> +SRC_URI =3D "http://mercurial.selenic.com/release/mercurial-${PV}.tar=
-.gz;name=3Dsrc"
->> +
->> +DEPENDS =3D "python-native"
->> +PR =3D "r0"
->> +
->> +S =3D "${WORKDIR}/mercurial-${PV}"
->> +EXTRA_OEMAKE =3D "STAGING_LIBDIR=3D${STAGING_LIBDIR} STAGING_INCDIR=3D=
-${STAGING_INCDIR} \
->> +       BUILD_SYS=3D${BUILD_SYS} HOST_SYS=3D${HOST_SYS} PREFIX=3D${STA=
-GING_DIR_NATIVE}/usr"
->> +
->> +do_install () {
->> +        install -d ${STAGING_DIR_NATIVE}/usr
-> I'm a little bit surprised that you need this. I had expected install
-> to take care of that.
-> Otherwise, the recipe looks fine to me (but haven't test-build it yet)
+2010/9/7 Graham Gower <graham.gower@gmail.com>:
+> On 6 September 2010 21:49, Noor Ahsan <noor_ahsan@mentor.com> wrote:
+>> * Remove do_stage ()
+>> * Replace tabs with 8 spaces in do_configure
 >
-Missed the original mail, but the install -d line should be in
-do_install_prepend()
+> I see that spaces and not tabs are the OE policy, but I can't lay my
+> eyes on anything that says how many spaces are preferred. I see a lot
+> of recipes and examples using 4 space indentation (and most others use
+> a tab). Is this something that people care about?
+>
+> -Graham
+>
+> PS: Personally I'm a tab man, not a spaceman.
 
-This makes it clearer that its a hack. You then also wont need to
-specify the oe_runmake install bit.
+Afaik it is not defined.
+There is http://wiki.openembedded.net/index.php/Styleguide
+which only says "#
+# Use spaces for indentation as developers tends to use different
+amount of spaces per one tab. "
+now we're just using a different amount of spaces :-)
 
-Graeme
+(actually using different # of spaces for a tab is not that bad as
+long as you stick to tabs only. That is why the linux kernel requires
+indentig by tabs).
 
+Frans (who also likes tabs, if only because it is the default in vi
+with autoindent (and yeah, I know you can change that))
 
 
