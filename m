@@ -1,43 +1,50 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ot3So-0005SR-10 for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 21:04:20 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ot3S2-00011r-3b for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 21:03:26 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 21:03:26 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <kristoffer.ericson@gmail.com>) id 1Ot3ZU-0004UB-Dc
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Sep 2010 21:11:08 +0200
+Received: by ewy7 with SMTP id 7so2612486ewy.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 21:03:26 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Tue, 07 Sep 2010 12:10:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:date:from:to:subject
+	:message-id:reply-to:references:mime-version:content-type
+	:content-disposition:in-reply-to:user-agent;
+	bh=FDR+DTb+3Xegl5QEF9mr/BMD9/715RAp4R3ZAqcDo9Y=;
+	b=Lyg4PC+VJSu6V0IFDPiqDgJEyG3JWfAB2PSiUlRGO3jgBBIVUWgv0mzyyMN40YlbNp
+	Y49VvtkGCSRXqF9Xru4QW5byibGVuPcJT/RKecssRnTPhfhtaJpLjXHl4XOR6cTUdQOY
+	0k4NK0KilEYwxH6H7s2eS+GXcM+66r0gzJFFg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=date:from:to:subject:message-id:reply-to:references:mime-version
+	:content-type:content-disposition:in-reply-to:user-agent;
+	b=OKIckUNFYiQ0ufPQuWp1P/gtLT7vp/zFZ4gm8crZOyGY13n8DJRI+woGTZSNT3bYFA
+	kZ+DipdS98ahNkW35ydiwdPJelUb7VlXXqlqskJoP0uUwVpTp2nlW26h/BT805g4yHIL
+	P5fFJkC4vbgtK36bBYVRvwBtRMxiJHMeZn6eE=
+Received: by 10.213.48.193 with SMTP id s1mr131563ebf.20.1283885636315;
+	Tue, 07 Sep 2010 11:53:56 -0700 (PDT)
+Received: from localhost (c-96dde555.010-30-6c6b7012.cust.bredbandsbolaget.se
+	[85.229.221.150])
+	by mx.google.com with ESMTPS id v8sm10381661eeh.2.2010.09.07.11.53.54
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 07 Sep 2010 11:53:55 -0700 (PDT)
+Date: Tue, 7 Sep 2010 20:56:47 +0200
+From: Kristoffer Ericson <kristoffer.ericson@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Tue, 07 Sep 2010 21:03:14 +0200
-Message-ID: <i6629i$d5c$1@dough.gmane.org>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=0ukfZL=oQxGHXaoUg30TCu5LfkTKhrvCM5g8d@mail.gmail.com>	<i65ci4$4c3$1@dough.gmane.org>
-	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100907185647.GC15949@boggieman.bredbandsbolaget.se>
+References: <20100907163605.GA15949@boggieman.bredbandsbolaget.se>
+	<AANLkTikinUbL68vz9fgLSeoyeB+XnKPH+qf4VHv4pRvd@mail.gmail.com>
+MIME-Version: 1.0
+In-Reply-To: <AANLkTikinUbL68vz9fgLSeoyeB+XnKPH+qf4VHv4pRvd@mail.gmail.com>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: kristoffer.ericson@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Images no longer automatically include libstdc++6
+Subject: Re: Moving keys to development server
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,40 +58,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 19:04:22 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Sep 2010 19:11:09 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
-
-On 07-09-10 18:18, Khem Raj wrote:
-> On Tue, Sep 7, 2010 at 5:52 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->>
->> it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
->> create a libstdc6++ package, but it does create a libstdc-dev package.
->>
+On Tue, Sep 07, 2010 at 10:00:12AM -0700, Khem Raj wrote:
+> On Tue, Sep 7, 2010 at 9:36 AM, Kristoffer Ericson
+> <kristoffer.ericson@gmail.com> wrote:
+> > Greetings,
+> >
+> > We at JLime are setting up an development server to be able for all
+> > developers to work on same machine (and build/push alot faster). Im having issues
+> > getting the write access from the server (works fine from my laptop).
+> > Ive moved the keys into my server user account but cant get it to work.
+> > It fails with access denied.
+> >
+> > So, what am I missing
 > 
-> I see thats plausible. I think its time to look into separating gcc runtime
-> from gcc on the lines of poky.
+> your private ssh keys which are in ~/.ssh on your laptop
+> either you copy them over or you can setup keychain/ssh-agent
+> to forward it from your laptop to this server whatever fits your security needs
 
-I put back libgcc and libstdc++ for the time being:
+Got it working by doing
+ssh-add .ssh/id-rsa
 
-http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=241b8865f20b9e3c3beb334535e6cd8452cbf47d
-
-I have a feeling the others needs to put back as well (e.g. fortran),
-but this fixes the immediate problem.
-
-regards,
-
-Koen
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMhoxwMkyGM64RGpERAihiAJkBqBI+yvfQEwEzwgVKQgGWRvRy1QCfS6kF
-oOBWADuHZO69kRkC/Rbcsns=
-=OyU4
------END PGP SIGNATURE-----
-
+> 
+> >
+> > Best wishes
+> > Kristoffer
+> >
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> >
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
