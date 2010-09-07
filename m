@@ -1,46 +1,43 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Osxau-0003v9-Fp
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:49:04 +0200
-Received: by ywa8 with SMTP id 8so2063590ywa.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Osxfg-00026B-LE for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Sep 2010 14:53:10 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Osxf3-0006ux-CZ for openembedded-devel@lists.openembedded.org;
+	Tue, 07 Sep 2010 14:52:29 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Sep 2010 14:52:29 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 07 Sep 2010 05:47:30 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=7PVUPhuj8X8iPWKr8ml3vsYg3P9I2kUWlGHASEG5rKY=;
-	b=Okwrm/2B8lv8Yu2AkBa8TGc23qtfof1oS87Rif4klbDYmI2zl9NVwiJwwuM4wSFaUm
-	GJngBEOvtTmZPyt8dv8fyKeQ7pcFWCKGTZ/26A62qIClju/thBXs4EnIMtR3FM132S8x
-	J3QaNIbP9lMsprycopU8MKq4dAj67EKdPZHAQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=qzO5o1ZF5Nc+CBgq61bpoi7+/ZMct/aB6QEYQrAD0JUQ1cu2h2o2erYsfVaH0RxGtt
-	DctDMqUrKLLc/3qOQ9gbwp6Rn5V/WkeHBoYQ7mQapIMXg8nGpx/SCIIWCJz1zEElJ2Jj
-	jiZ374QT1olgYBGy/dgvMSdVLJi5uag6wl+uI=
-MIME-Version: 1.0
-Received: by 10.151.130.17 with SMTP id h17mr1066626ybn.426.1283863650836;
-	Tue, 07 Sep 2010 05:47:30 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Tue, 7 Sep 2010 05:47:30 -0700 (PDT)
-In-Reply-To: <BLU132-W287C05944F8D53A62038EDB0710@phx.gbl>
-References: <BLU132-W8FA51733A7631FEA4FB63B0710@phx.gbl>
-	<AANLkTi=Y90PWXBSsZmbtub-S519CdBaAEEDQ-dnTrsvN@mail.gmail.com>
-	<BLU132-W287C05944F8D53A62038EDB0710@phx.gbl>
-Date: Tue, 7 Sep 2010 14:47:30 +0200
-Message-ID: <AANLkTintK8OdmZbumTuVA6UAv=PYujw9PmjzKL1wtDMj@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Tue, 07 Sep 2010 14:52:29 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 07 Sep 2010 14:52:20 +0200
+Message-ID: <i65ci4$4c3$1@dough.gmane.org>
+References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
+	<AANLkTi=0ukfZL=oQxGHXaoUg30TCu5LfkTKhrvCM5g8d@mail.gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <AANLkTi=0ukfZL=oQxGHXaoUg30TCu5LfkTKhrvCM5g8d@mail.gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: selecting needed applications only
+Subject: Re: Images no longer automatically include libstdc++6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,29 +51,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 12:49:45 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 07 Sep 2010 12:53:11 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/9/7 mahmut g <mgcse@hotmail.com>:
->
->
-> =A0 =A0 Thanks Frans, in this case I have a new question. How can I deter=
-mine the packages' dependency? For instance I just want to use QT on user s=
-pace. Is that a way to learn which packages must be for QT? I am familiar w=
-ith menuconfig selection, is there any tool/script which handles dependenci=
-es?
-> Regards,
-> MahmutG
->
->
-Please do not top post.
-There is no need to determine dependencies.
-The build machinery will take care about that and include all what is
-needed (this is specified in the recipe in DEPENDS/RDEPENDS)
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Just give it a try!
+On 07-09-10 07:54, Khem Raj wrote:
+> On Mon, Sep 6, 2010 at 3:21 PM, Steve Sakoman <sakoman@gmail.com> wrote:
+>> Using current top of tree to build some of my images I noticed that
+>> quite a few apps seems to be broken at run time (Firefox, Epiphany,
+>> Gnome-mplayer, and others).
+>>
+>> All were complaining about libstdc++6 being missing.  Manually
+>> installing the libstdc++6 package fixed the issue.
+>>
+>> Any idea what changed that introduced this issue?
+> 
+> Yes I have been seeing that and spent not so much time on the real cause
+> but it seems that the depends get lost when we rename the pkgs in debian way
+> may be thats not the real cause I dont know yet. but that something to look at
+> even libstdc++-dev ipks miss to have dependencies on libstdc++
 
-Frans
+it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
+create a libstdc6++ package, but it does create a libstdc-dev package.
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMhjWEMkyGM64RGpERAkP3AJ9664771JV6Rap+9F6c9xbeh69fZgCggBVt
+XerzMrwvIL7HaPknWKd816Y=
+=t1WC
+-----END PGP SIGNATURE-----
+
 
 
