@@ -1,30 +1,32 @@
-Received: from blu0-omc4-s25.blu0.hotmail.com ([65.55.111.164])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mgcse@hotmail.com>) id 1Osx6u-00059s-W7
+	(envelope-from <gary@mlbassoc.com>) id 1Osx9Z-0005N9-9h
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:17:14 +0200
-Received: from BLU132-W8 ([65.55.111.136]) by blu0-omc4-s25.blu0.hotmail.com
-	with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 7 Sep 2010 05:15:29 -0700
-Message-ID: <BLU132-W8FA51733A7631FEA4FB63B0710@phx.gbl>
-X-Originating-IP: [212.175.157.5]
-From: mahmut g <mgcse@hotmail.com>
-To: <openembedded-devel@lists.openembedded.org>
-Date: Tue, 7 Sep 2010 12:15:29 +0000
-Importance: Normal
+	Tue, 07 Sep 2010 14:19:58 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id 80D361660934; Tue,  7 Sep 2010 06:19:18 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id F19AE166092B;
+	Tue,  7 Sep 2010 06:19:17 -0600 (MDT)
+Message-ID: <4C862DC5.1020605@mlbassoc.com>
+Date: Tue, 07 Sep 2010 06:19:17 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-X-OriginalArrivalTime: 07 Sep 2010 12:15:29.0657 (UTC)
-	FILETIME=[5C9D0690:01CB4E86]
-X-SA-Exim-Connect-IP: 65.55.111.164
-X-SA-Exim-Mail-From: mgcse@hotmail.com
+To: openembedded-devel@lists.openembedded.org
+References: <4C862985.9050205@mlbassoc.com> <4C862B28.9090309@eukrea.com>
+In-Reply-To: <4C862B28.9090309@eukrea.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-1.7 required=5.0 tests=BAYES_00, HTML_FONT_FACE_BAD, 
-	HTML_MESSAGE,SPF_PASS autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: selecting needed applications only
+Cc: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+Subject: Re: opkg install without feed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,25 +40,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 12:17:14 -0000
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Tue, 07 Sep 2010 12:19:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
+On 09/07/2010 06:08 AM, Eric B=E9nard wrote:
+> Le 07/09/2010 14:01, Gary Thomas a =E9crit :
+>> Is there any way to install a .ipk file, without loading it
+>> from one of the defined feeds? This would be akin to the
+>> yum localinstall operation?
+>>
+>> Sometimes I have a locally created .ipk file and it's cumbersome
+>> to get it into my feed setup. It would be nice to be able to
+>> just install it directly.
+>>
+> I think you can run
+> opkg install file.ipk
 
+Cool, that worked :-)  n.b. I thought I had tried this and failed
+in the past!
 
-I am new at OE. Actually I heard from many people Openembedded is the best =
-and decided to try. However I couldn't figure out how I can select applicat=
-ions just I want to be included to my image. There are too many files and r=
-ules. I had tired to use with beagle board and finally given up. The main r=
-eason for learning and using OE was that we wanted to use QT on our board. =
-May someone advice any nice guide or documents which show how to select jus=
-t wanted applications and how I can add a new application=2C it will be app=
-reciated.=20
-Regards=2C
-MahmutG
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
-
-
-
- 		 	   		  =
 
