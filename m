@@ -1,42 +1,45 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1OsrmI-0003UJ-2m
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oss0X-0005rq-1m
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 08:35:35 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 0D41BA6014
+	Tue, 07 Sep 2010 08:50:18 +0200
+Received: by iwn2 with SMTP id 2so4941806iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 07:34:55 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id cfZMvNDFwrB8
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 07:34:54 +0100 (BST)
-Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id E6647A6013
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 07:34:48 +0100 (BST)
-Message-ID: <4C85DC92.2070002@xora.org.uk>
-Date: Tue, 07 Sep 2010 07:32:50 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.7) Gecko/20100720 Lightning/1.0b2 Thunderbird/3.1.1
+	Mon, 06 Sep 2010 23:49:38 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=hO8DNFOfO0/Xyve2Xv25x4eAuEuCCKVvqA5R9tMpqlg=;
+	b=fbdf1kniqJPr14lsjmuJDCpS/H0Dp3I3Ki1mPAN7PCQvP4qcfujHi9K1XqjnyK/Euz
+	VPamlLsDGMZUXWPYoFOQhvFvKDC/1nKdNm8lOplfTfBEMvwmfppQDhlVFZZla5LLB9Wj
+	Mmv86gcdI2rvDnsCYOuvQ5AseIJutKKrlWszk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=MB+9w/F8ns4HbraoIIcjIvVy6YwGTaChaDulE/JmnHOaBXM7PeSgEE2geIxTXYRpk4
+	gAlxN2FoKqsVEct/ngO4iNVQx/hW8bo8ujfvR9M8M5P5ykcM2aY2SMrzEqaUev6BIUZR
+	qFL3+IbAqaowccgApGUMPb9lphQAdb+Nfye2U=
 MIME-Version: 1.0
+Received: by 10.231.162.2 with SMTP id t2mr1692345ibx.57.1283842178342; Mon,
+	06 Sep 2010 23:49:38 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 6 Sep 2010 23:49:38 -0700 (PDT)
+In-Reply-To: <AANLkTimt2g=o04TocN=w9t6z2sHk3vopELdgCqYTKQ4h@mail.gmail.com>
+References: <1283777330-31590-1-git-send-email-fahad_usman@mentor.com>
+	<AANLkTimt2g=o04TocN=w9t6z2sHk3vopELdgCqYTKQ4h@mail.gmail.com>
+Date: Tue, 7 Sep 2010 08:49:38 +0200
+Message-ID: <AANLkTikZ63T3=3fpb1iMNKmjJpEX9JQ1W80Xh_vOS1NU@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1283775540-13164-1-git-send-email-noor_ahsan@mentor.com>	<AANLkTimjZwZ9TCLcWz3ZRQ2pGYj_nb=kE-qYtVW5uSBg@mail.gmail.com>
-	<AANLkTimxy+r7_Wgaq1SvmWHBPRuvZ+Wtvn1Ctm=maaGb@mail.gmail.com>
-In-Reply-To: <AANLkTimxy+r7_Wgaq1SvmWHBPRuvZ+Wtvn1Ctm=maaGb@mail.gmail.com>
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libsdl-native: Convert to new style staging, remove do_stage
+Subject: Re: [PATCH] uicmoc-native_2.3.10.bb: converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,41 +53,83 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 06:35:35 -0000
+X-List-Received-Date: Tue, 07 Sep 2010 06:50:18 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
- On 07/09/10 07:32, Frans Meulenbroeks wrote:
-> 2010/9/7 Graham Gower <graham.gower@gmail.com>:
->> On 6 September 2010 21:49, Noor Ahsan <noor_ahsan@mentor.com> wrote:
->>> * Remove do_stage ()
->>> * Replace tabs with 8 spaces in do_configure
->> I see that spaces and not tabs are the OE policy, but I can't lay my
->> eyes on anything that says how many spaces are preferred. I see a lot
->> of recipes and examples using 4 space indentation (and most others use
->> a tab). Is this something that people care about?
+2010/9/7 Khem Raj <raj.khem@gmail.com>:
+> On Mon, Sep 6, 2010 at 5:48 AM, Fahad Usman <fahad_usman@mentor.com> wrot=
+e:
+>> * Converted do_stage to do_install.
+>> * Bumped PR
+>> * Added NATIVE_INSTALL_WORKS =3D "1"
 >>
->> -Graham
+>> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+>
+> looks ok
+
+looks ok to me too, not sure whether I tested it and not sure if that
+uicmoc stuff is still relelvant
+See also: http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D0=
+ba9d6f94caea026c282d9d87704e4ada62babf0
+I've asked about whether it was relevant, but (obviously) did not get a rep=
+ly.
+
+Frans
+>> ---
+>> =A0recipes/uicmoc/uicmoc-native_2.3.10.bb | =A0 13 ++++++++-----
+>> =A01 files changed, 8 insertions(+), 5 deletions(-)
 >>
->> PS: Personally I'm a tab man, not a spaceman.
-> Afaik it is not defined.
-> There is http://wiki.openembedded.net/index.php/Styleguide
-> which only says "#
-> # Use spaces for indentation as developers tends to use different
-> amount of spaces per one tab. "
-> now we're just using a different amount of spaces :-)
+>> diff --git a/recipes/uicmoc/uicmoc-native_2.3.10.bb b/recipes/uicmoc/uic=
+moc-native_2.3.10.bb
+>> index c161571..8c69bef 100644
+>> --- a/recipes/uicmoc/uicmoc-native_2.3.10.bb
+>> +++ b/recipes/uicmoc/uicmoc-native_2.3.10.bb
+>> @@ -3,7 +3,7 @@ HOMEPAGE =3D "http://www.trolltech.com"
+>> =A0SECTION =3D "devel"
+>> =A0PRIORITY =3D "optional"
+>> =A0LICENSE =3D "GPL QPL"
+>> -PR =3D "r4"
+>> +PR =3D "r5"
+>>
+>> =A0SRC_URI =3D "ftp://ftp.trolltech.com/pub/qt/source/qt-embedded-${PV}-=
+free.tar.gz \
+>> =A0 =A0 =A0 =A0 =A0 =A0file://fix-makefile.patch \
+>> @@ -43,11 +43,14 @@ do_compile() {
+>> =A0 =A0 oe_runmake -C tools/makeqpf =A0 =A0 =A0 || die "Building makeqpf=
+ failed"
+>> =A0}
+>>
+>> -do_stage() {
+>> - =A0 =A0install -m 0755 bin/moc ${STAGING_BINDIR}
+>> - =A0 =A0install -m 0755 bin/uic ${STAGING_BINDIR}
+>> - =A0 =A0install -m 0755 tools/makeqpf/makeqpf ${STAGING_BINDIR}
+>> +do_install() {
+>> + =A0 =A0install -d ${D}${bindir}
+>> + =A0 =A0install -m 0755 bin/moc ${D}${bindir}
+>> + =A0 =A0install -m 0755 bin/uic ${D}${bindir}
+>> + =A0 =A0install -m 0755 tools/makeqpf/makeqpf ${D}${bindir}
+>> =A0}
+>>
+>> =A0SRC_URI[md5sum] =3D "1f7ad30113afc500cab7f5b2f4dec0d7"
+>> =A0SRC_URI[sha256sum] =3D "883363eb0c94de3d1e36f3ab9e09a8f127418d497213c=
+c1a0ed1a1588ecd66b8"
+>> +
+>> +NATIVE_INSTALL_WORKS =3D "1"
+>> --
+>> 1.6.3.3
+>>
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
 >
-> (actually using different # of spaces for a tab is not that bad as
-> long as you stick to tabs only. That is why the linux kernel requires
-> indentig by tabs).
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
-> Frans (who also likes tabs, if only because it is the default in vi
-> with autoindent (and yeah, I know you can change that))
->
-Informally the policy has always been we dont care tabs or spaces as
-long as its consistent within the same recipe.
-
-Graeme
-
 
 
