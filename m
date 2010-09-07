@@ -1,40 +1,40 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Oswym-0002CD-8X
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Osx17-0001Nh-0S
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 14:08:50 +0200
-Received: (qmail 31781 invoked by uid 503); 7 Sep 2010 12:19:17 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 7 Sep 2010 12:19:17 -0000
-Received: (qmail 11246 invoked by uid 503); 7 Sep 2010 11:52:22 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 7 Sep 2010 11:52:21 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 7 Sep 2010 14:08:09 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 7 Sep 2010 14:08:08 +0200
-Message-ID: <4C862B28.9090309@eukrea.com>
-Date: Tue, 07 Sep 2010 14:08:08 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+	Tue, 07 Sep 2010 14:11:14 +0200
+Received: by gya6 with SMTP id 6so2099522gya.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 07 Sep 2010 05:10:32 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=fkqKFZoSF5CPjtKxiPqzSs8ISZNarQe26zk6Ti7G5TE=;
+	b=EQOGbNxHSRrfFNECmotO59GGsWckGhjzpnNhr0ZXydobTbjJhKFUG2EuJTakB6QKJ9
+	q6j7MaMPpRizRbrWTg0wCaPtGDlkfA188Ifd3VyNqnlSPQISu7jvj0J5LfGQ0Xg4aGik
+	XOvsvg9KKhBWlB3T9yvILJjqOUGNBn9AARWxk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=kVDo842lG/7GwuEyV8MaS3BX9/ZLOPbjVG6mNkMAubONi/drMRqAi5rUghJgf2iDjm
+	bHeedDccfDKi+QgzHfHxnK1Iyex4+8ZleCdg/LbCqvWKa6/e5DSF92n0qo15Z+0ItE6i
+	r0XqwGs8NRLz9AWNE8njDUgsyqeUm6xw3SMLk=
 MIME-Version: 1.0
+Received: by 10.90.35.8 with SMTP id i8mr346059agi.200.1283861431745; Tue, 07
+	Sep 2010 05:10:31 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Tue, 7 Sep 2010 05:10:31 -0700 (PDT)
+Date: Tue, 7 Sep 2010 14:10:31 +0200
+Message-ID: <AANLkTinCbuso+UXvq7Ru1ZDAXhMB=Jbx34k-b2RZC-s=@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C862985.9050205@mlbassoc.com>
-In-Reply-To: <4C862985.9050205@mlbassoc.com>
-X-Ovh-Tracer-Id: 3109735544623050057
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: opkg install without feed
+Subject: rd5b3850cb6 openembedded.git/recipes/bash/bash_3.2.bb: bash 3.2: bump PR
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,22 +48,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 12:08:50 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 07 Sep 2010 12:11:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Le 07/09/2010 14:01, Gary Thomas a écrit :
-> Is there any way to install a .ipk file, without loading it
-> from one of the defined feeds? This would be akin to the
-> yum localinstall operation?
->
-> Sometimes I have a locally created .ipk file and it's cumbersome
-> to get it into my feed setup. It would be nice to be able to
-> just install it directly.
->
-I think you can run
-opkg install file.ipk
+Can we have clearer commit messages please?
+The message in the subject line should at least have explained why a
+PR bump is needed at all.
 
-Eric
+See also http://wiki.openembedded.net/index.php/Commit_Policy for the
+policy on commit messages.
+
+Thank you!
+Frans
 
 
