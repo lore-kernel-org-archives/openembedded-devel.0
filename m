@@ -1,32 +1,29 @@
-Received: from static.26.116.47.78.clients.your-server.de ([78.47.116.26]
-	helo=phalanx.drlauer-research.com)
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <mickey@vanille-media.de>) id 1Osvy6-0000ye-U6
+	(envelope-from <gary@mlbassoc.com>) id 1Osws2-0007BY-Hz
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 13:05:34 +0200
-Received: from [192.168.1.7] (business-092-079-168-007.static.arcor-ip.net
-	[92.79.168.7])
-	by phalanx.drlauer-research.com (Postfix) with ESMTP id 811EE584869
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue,  7 Sep 2010 13:08:40 +0200 (CEST)
-Mime-Version: 1.0 (Apple Message framework v1081)
-From: "Dr. Michael Lauer" <mickey@vanille-media.de>
-In-Reply-To: <4C861721.6060700@dresearch.de>
-Date: Tue, 7 Sep 2010 13:03:24 +0200
-Message-Id: <827E2E26-E24C-402A-A1C7-4748DB49AE6E@vanille-media.de>
-References: <4C8506A2.1030702@dresearch.de> <1283796607.25525.3.camel@saphir>
-	<4C861721.6060700@dresearch.de>
+	Tue, 07 Sep 2010 14:01:52 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id D448E16607DD; Tue,  7 Sep 2010 06:01:09 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 8CD671660552;
+	Tue,  7 Sep 2010 06:01:09 -0600 (MDT)
+Message-ID: <4C862985.9050205@mlbassoc.com>
+Date: Tue, 07 Sep 2010 06:01:09 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 78.47.116.26
-X-SA-Exim-Mail-From: mickey@vanille-media.de
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OE MediaWiki Version
+Subject: opkg install without feed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,37 +37,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 11:06:52 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 07 Sep 2010 12:01:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Am 07.09.2010 um 12:42 schrieb Steffen Sledz:
-> Am 06.09.2010 20:10, schrieb Michael 'Mickey' Lauer:
->> Am Montag, den 06.09.2010, 17:20 +0200 schrieb Steffen Sledz:
->>> Just a little hint to the OE wiki admins:
->>>=20
->>> The running MediaWiki version 1.12.0 (see =
-<http://wiki.openembedded.net/index.php/Special:Version>) is really =
-outdated. There are a lot of bug and security fixes (see =
-<http://www.mediawiki.org/wiki/News>). May be there's some time to run a =
-little update. ;-)
->>=20
->> I'm afraid there's no one feeling responsible for it atm.,
->> e.g. the wiki still runs on amethyst although I asked for it to
->> be moved to the main server months ago...
->=20
-> If there's really nobody responsible for it i could (try to) do the =
-work.
+Is there any way to install a .ipk file, without loading it
+from one of the defined feeds?  This would be akin to the
+yum localinstall operation?
 
-Cool. Rolf used to do that, but he's no longer OE these days.
+Sometimes I have a locally created .ipk file and it's cumbersome
+to get it into my feed setup.  It would be nice to be able to
+just install it directly.
 
-> But i cannot engage myself to maintain it all the time in the future.
+Thanks
 
-Sure. Do you have experience with linux server configuration etc.?
-
-Cheers,
-
-:M:
-
+-- 
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
