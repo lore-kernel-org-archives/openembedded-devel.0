@@ -1,44 +1,50 @@
-Received: from 93-97-173-237.zone5.bethere.co.uk ([93.97.173.237]
-	helo=tim.rpsys.net) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <rpurdie@rpsys.net>) id 1OsyhG-0006DH-F8
+Received: from arroyo.ext.ti.com ([192.94.94.40])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <chase.maupin@ti.com>) id 1Osz3Y-0006u0-3s
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 07 Sep 2010 15:59:29 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o87DwATK004284;
-	Tue, 7 Sep 2010 14:58:10 +0100
-Received: from tim.rpsys.net ([127.0.0.1])
-	by localhost (tim.rpsys.net [127.0.0.1]) (amavisd-new,
-	port 10024) with LMTP
-	id 04263-01; Tue,  7 Sep 2010 14:58:06 +0100 (BST)
-Received: from [192.168.3.10] ([192.168.3.10]) (authenticated bits=0)
-	by tim.rpsys.net (8.13.6/8.13.8) with ESMTP id o87Dw5kQ004268
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO);
-	Tue, 7 Sep 2010 14:58:06 +0100
-From: Richard Purdie <rpurdie@rpsys.net>
-To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <20100906201144.GA8176@rhein.zuhause.netz>
-References: <AANLkTimxWVes3DZQPGn53BZ1cL6BSX5BT3hwgFHrCUA4@mail.gmail.com>
-	<AANLkTinBzdnAYv_0O=vXnaJ5VNj56Th74eZ=naVSFcFB@mail.gmail.com>
-	<AANLkTikSBQOi6aC0W8QzfEOk6skMcBmbaJdmE4K+Auwd@mail.gmail.com>
-	<20100906035002.GB5320@gmail.com>
-	<AANLkTinvnAhcr63sm=O+s+iyZw8tKfspjzhR__XOb5mU@mail.gmail.com>
-	<AANLkTi=zkn=Ns7MgcakxC8F61O9it3FTYb8XgtHRmcrD@mail.gmail.com>
-	<AANLkTimNk1mKqHBsfW6S-KuQkbVyT8f4ajz1d8adDFcc@mail.gmail.com>
-	<20100906201144.GA8176@rhein.zuhause.netz>
-Date: Tue, 07 Sep 2010 14:57:58 +0100
-Message-ID: <1283867878.26335.305.camel@rex>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.28.3 
-X-Virus-Scanned: amavisd-new at rpsys.net
-X-SA-Exim-Connect-IP: 93.97.173.237
-X-SA-Exim-Mail-From: rpurdie@rpsys.net
+	Tue, 07 Sep 2010 16:21:54 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by arroyo.ext.ti.com (8.13.7/8.13.7) with ESMTP id o87EL7FA026709
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 7 Sep 2010 09:21:07 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o87EL61O020022
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 7 Sep 2010 09:21:06 -0500 (CDT)
+Received: from dsbe71.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o87EL5dL024619
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 7 Sep 2010 09:21:05 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dsbe71.ent.ti.com
+	([156.117.232.23]) with mapi; Tue, 7 Sep 2010 09:21:05 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Tue, 7 Sep 2010 09:21:04 -0500
+Thread-Topic: [oe] [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make
+	it	global
+Thread-Index: ActMChI2fH9cct28Rn2nRwUvrwqhHACjZsfg
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFA4A2@dlee06.ent.ti.com>
+References: <20100903111210.GA17702@game.jcrosoft.org>
+	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
+	<AANLkTim57opnM=fn47pQ-GeNsNbSyydHd3TKSWhdD5z5@mail.gmail.com>
+	<AANLkTikyFRQskds_P9AH+=_km46KEf1cPm-Vq1+MhdhC@mail.gmail.com>
+In-Reply-To: <AANLkTikyFRQskds_P9AH+=_km46KEf1cPm-Vq1+MhdhC@mail.gmail.com>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 192.94.94.40
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.5 required=5.0 tests=AWL,BAYES_00,RDNS_DYNAMIC,
-	TVD_RCVD_IP autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: virtclass_install prepend
+Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make it	global
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,51 +58,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 13:59:51 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 07 Sep 2010 14:21:54 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, 2010-09-06 at 22:11 +0200, Henning Heinold wrote:
-> > >> The code is:
-> > >> do_install_virtclass-native_prepend() {
-> > >>         install -d ${D}${datadir}/dbus
-> > >>        install -m 0644 dbus-bus-introspect.xml ${D}${datadir}/dbus
-> > >> }
-> > >>
-> > >> Actually if the standard do_install needs to be changed, it generally
-> > >> raises some alarms with me.
-> > >> Why would we need to install something that the package normally does
-> > >> not install?
-> > >> (of course this could be a bug in the package, but then I would prefer
-> > >> a patch that we also try to push upstream).
-> > >>
-> > >
-> > > Agreed, that is odd.  If it's something that dbus using things might need,
-> > > why is it only prepended for the native version, and as you say, why is it
-> > > not installed by the upstream install target.  I'd do a git blame and figure
-> > > out who added that and ask them :)
-> > > --
-> > 
-> > Henning,
-> > Git blame gives your name as the person who created those lines.
-> > Care to comment?
-> > 
-> > Frans
->
-> if I remember correctly this file is generated in the build process. But somehow
-> in the later versions of dbus-glib there is somehow an error so this file gets not installed
-> at all in the native variant. So I did it per hand.
 
-I suspect that code could well have come from Poky. In this case the
-native recipe generates a file which is then used by the target builds.
-It can't be generated in the target recipe as that would mean running
-target binaries.
 
-So it is in fact a perfectly valid thing to do in this case.
+> -----Original Message-----
+> From: openembedded-devel-bounces@lists.openembedded.org
+> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
+> Frans Meulenbroeks
+> Sent: Saturday, September 04, 2010 3:20 AM
+> To: openembedded-devel@lists.openembedded.org
+> Subject: Re: [oe] [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make
+> it global
+>=20
+> 2010/9/4 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> > 2010/9/4 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>:
+> >> add global OVERRIDES ${TARGET_SOC_FAMILY} and
+> ${TARGET_ARCH}_${TARGET_SOC_FAMILY}
+> >>
+> >
+> > What is the rationale for this?
+> > And why not fix the problem there is in base.bbclass as well.
+> >
+> > Frans.
+> >
+> Forgot about this, but a variable should go with documentation.
+> This already has been raised with the orginal patch, but was ignored
+> by the submitters.
 
-Cheers,
+Frans, Are you counting me as one of the original submitters?  I mainly use=
+ the SOC_FAMILY, I didn't create it.  That being said, if you have a recomm=
+ended section of the usermanual that this should be documented in I'll try =
+to add something.
 
-Richard
-
+>=20
+> Consider this a NAK.
+>=20
+> Frans
+>=20
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
