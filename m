@@ -1,41 +1,46 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OtH1M-00050y-RY
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <michael.lippautz@gmail.com>) id 1OtHaU-00077A-14
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 11:32:49 +0200
-Received: (qmail 17158 invoked by uid 503); 8 Sep 2010 09:43:22 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 8 Sep 2010 09:43:22 -0000
-Received: (qmail 22071 invoked by uid 503); 8 Sep 2010 09:16:13 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 8 Sep 2010 09:16:13 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 Sep 2010 11:32:05 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 8 Sep 2010 11:32:03 +0200
-Message-ID: <4C875813.2040504@eukrea.com>
-Date: Wed, 08 Sep 2010 11:32:03 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+	Wed, 08 Sep 2010 12:09:11 +0200
+Received: by qwa26 with SMTP id 26so5444842qwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Sep 2010 03:08:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=qt3UuPei4WEal6WE0vYuXXsYAPz6uAqT0Lqb1XspDxQ=;
+	b=yFiQEpAmkq6qvs2qCCg8jxNq/Kl6AQYzxs4W0iWoEsT4//ZNcVXsxcT7JFUIm3fDOu
+	AdMw/iu8zw4airFroHQk61VN2hBEgVpxasNYN0bQoqfN5DABpbFTFdpGz+xwU4C2QBt6
+	3Kzvd227duMzUI1j5jc08qMh8IkPgvuiwu6NQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=vI9jHO1w4o4Wm8rhg74fNdhzDpohvuUBKur0fU6rLSZUk1DJ3bZ6Z/ZcBIOiLuT4Vt
+	Yr5KL9n+0eDHwfmotF9wkIv0Y+M+2pJQBM+x3cst41xPfU059tvenkukaK95w0UWfaWd
+	1Gq28qq3Fy1A1UTCpNOF14Xl1PTlKqHuUbRus=
 MIME-Version: 1.0
+Received: by 10.229.89.15 with SMTP id c15mr5878253qcm.202.1283940503863; Wed,
+	08 Sep 2010 03:08:23 -0700 (PDT)
+Received: by 10.229.218.79 with HTTP; Wed, 8 Sep 2010 03:08:23 -0700 (PDT)
+In-Reply-To: <AANLkTimmcz6jgqVnQmA21OAdUPCu4TqeCPO20hVSd-BQ@mail.gmail.com>
+References: <1283523286-30999-1-git-send-email-michael.lippautz@gmail.com>
+	<1283523286-30999-2-git-send-email-michael.lippautz@gmail.com>
+	<AANLkTin9pQfGPRHfp5kro__vknb_Wn+Qb-Zh9Hfn-vSH@mail.gmail.com>
+	<AANLkTimmcz6jgqVnQmA21OAdUPCu4TqeCPO20hVSd-BQ@mail.gmail.com>
+Date: Wed, 8 Sep 2010 12:08:23 +0200
+Message-ID: <AANLkTi=-drL9CWmjPqu20cXJHEEY4W7YqNJ=QiR2cr9v@mail.gmail.com>
+From: Michael Lippautz <michael.lippautz@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1283903199-24538-1-git-send-email-eric@eukrea.com>
-	<A88FB909-75F8-430A-B6E7-16C4A1C51A13@vanille-media.de>
-In-Reply-To: <A88FB909-75F8-430A-B6E7-16C4A1C51A13@vanille-media.de>
-X-Ovh-Tracer-Id: 6346416300854783305
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: michael.lippautz@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] python-2.6: remove python-dev from	python-modules
+Subject: Re: [PATCH 1/2] x-load/igep0020.conf: Unbreak x-load for igep0020 machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,22 +54,9 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 09:32:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Sep 2010 10:09:11 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Hi Michael,
-
-Le 08/09/2010 11:17, Dr. Michael Lauer a écrit :
-> thanks for your patches. Unfortunately we can't apply them in the
-> present form since (as you can see when you read the first
-> couple of lines of manifest.inc) the manifest is autogenerated
-> by a script in our contrib/python directory.
->
-> Please patch this script rather than the manifest itself.
-
-OK I didn't find this script yesterday, now I can hack it, thanks.
-
-Eric
+Bump, as it blocks any igep0020 image from building.
 
 
