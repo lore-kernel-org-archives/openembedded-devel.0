@@ -1,32 +1,38 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtM1Q-0006I0-3u
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtM37-0001hZ-Gk
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 16:53:15 +0200
-Received: by pxi11 with SMTP id 11so56193pxi.6
+	Wed, 08 Sep 2010 16:55:00 +0200
+Received: by yxk30 with SMTP id 30so63089yxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 07:52:29 -0700 (PDT)
+	Wed, 08 Sep 2010 07:54:11 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=buN2DwM8MsUi12ScEpalk3GF0wk22StfM/YC7xC924E=;
-	b=WjZC4wxKm2sVQ9oZMVdJQgi+J7Dm2h/tYpGjD256HG4iEOEDhqkm3hZL/vAKo43BiR
-	qT1TmO7TFAkDtu7SKAewhuGnhhMjlY8FiilKkwfbTrIxP0wUVEMaG4/P5+nyQejkMXeG
-	9xGbrsjlmzAAm3ZYkzmS2tGia0SBbL60mVpeI=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=hQuGxFUtlI6BqAJu2QfEpcNq05SWwbJKbdilBHC5eXQ=;
+	b=wYmS4neMKiMHAtAzXCnslwu4cdjPVTCFaKofrIwnt6IC8xFPEtwBs80s49L3a1W+dV
+	fKV7WOURCTegAcxgv+yKsAoBAifoo78NEHH5P+dvBuyoThh+X3OP+c4HEwQZVYeWv1ZK
+	2vhvphYbB/4vqAu8wRLvBN0e5C3hrZQN3HtwY=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=dvS++GmuMSrl5OKp9otk3SICOjVuwE5zdeo6LeZHlaDlMaWhcj4gI5p1W4Lf2ZmIU+
-	5WxWw9kqiBz/PxNi5xO1EriloI7pOHeIRU5HeJuDrghc+zDL2dyGoNF9KVWb/BlSF72t
-	4LmuWB1xXlY7aOTsG9d1chK4uNrzi/Z1korcA=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=m11I2912FiKxJ2f/MDF8M+xe0Pr5mJKBBSZHjvIyItfveQmQhDSHODWlZbQ4xhfQiM
+	WudGHLeHxQRzQGgsvmnUJDtKf3iO7lUL8Xo3R/F1bMUyamaoZauZwJWbNlJSm3DtkHhw
+	eXfeHbWers5K6gMFxiUi+8DB5KdTzre69NTyY=
 MIME-Version: 1.0
-Received: by 10.114.67.8 with SMTP id p8mr75797waa.102.1283957542237; Wed, 08
-	Sep 2010 07:52:22 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 07:52:20 -0700 (PDT)
-Date: Wed, 8 Sep 2010 16:52:20 +0200
-Message-ID: <AANLkTimJj=8JDVsumZDSzNrpWcf6t1t4FA5WrGgWofDX@mail.gmail.com>
+Received: by 10.150.219.1 with SMTP id r1mr118321ybg.173.1283957651202; Wed,
+	08 Sep 2010 07:54:11 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 07:54:11 -0700 (PDT)
+In-Reply-To: <1283954503-25418-3-git-send-email-eric@eukrea.com>
+References: <1283954503-25418-1-git-send-email-eric@eukrea.com>
+	<1283954503-25418-2-git-send-email-eric@eukrea.com>
+	<1283954503-25418-3-git-send-email-eric@eukrea.com>
+Date: Wed, 8 Sep 2010 16:54:11 +0200
+Message-ID: <AANLkTinfxZO07kTjsaFWWZfXzwAdPgKNZAaWEKV-ZTVg@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 209.85.213.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -34,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: SRC_URI_arch override. error?
+Subject: Re: [PATCH 3/3] rlpr: remove version 2.05
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,66 +54,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 14:53:30 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 14:55:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hi,
+2010/9/8 Eric B=E9nard <eric@eukrea.com>:
+> now replaced by 2.06
+>
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+> =A0recipes/rlpr/rlpr_2.05.bb | =A0 20 --------------------
+> =A01 files changed, 0 insertions(+), 20 deletions(-)
+> =A0delete mode 100644 recipes/rlpr/rlpr_2.05.bb
+>
+> diff --git a/recipes/rlpr/rlpr_2.05.bb b/recipes/rlpr/rlpr_2.05.bb
+> deleted file mode 100644
+> index 2751b9f..0000000
+> --- a/recipes/rlpr/rlpr_2.05.bb
+> +++ /dev/null
+> @@ -1,20 +0,0 @@
+> -DESCRIPTION =3D "rlpr makes it possible to print files on remote sites t=
+o your networked printers"
+> -HOMEPAGE =3D "http://freshmeat.net/projects/rlpr/"
+> -SECTION =3D "console/network"
+> -LICENSE =3D "GPL"
+> -PR =3D "r1"
+> -
+> -SRC_URI =3D "${DEBIAN_MIRROR}/main/r/rlpr/rlpr_2.05.orig.tar.gz"
+> -SRC_URI[md5sum] =3D "64ee8ccd94aabc90b9f40d0b2ad79e79"
+> -SRC_URI[sha256sum] =3D "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f3=
+efe22d16af14ba9a"
+> -
+> -inherit autotools
+> -
+> -do_configure() {
+> - =A0 =A0 =A0 =A0oe_runconf
+> -}
+> -do_install() {
+> - =A0 =A0 =A0 =A0make install DESTDIR=3D${D}
+> -}
+> -
+> -TARGET_CC_ARCH +=3D " ${LDFLAGS}"
+> --
+> 1.6.3.3
+>
 
-I have an issue with the linux-libc-headers recipe for nios2.
-Maybe I am trying to do something what is not possible.
+if you are updating a recipe I suggest to use git mv
+That way the history is retained.
 
-The recipe contains:
-SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
-	  "
-
-SRC_URI_nios2 =
-"ftp://opensource.axon.nl/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz;name=nios2tarball
-\
-	  "
-
-I was under the assumption that when building with TARGET_ARCH set to
-"nios2" (e.g. for machine neek) I would get the 2nd uri.
-However actually the system seems to concatenate these two URI's.
-
-I have locally modified classes/base.bbclass function base_do_unpack
-do dump some info:
-python base_do_unpack() {
-    from glob import glob
-
-    srcurldata = bb.fetch.init(d.getVar("SRC_URI", True).split(), d, True)
-    bb.note("unpacking SRC_URI %s" % d.getVar("SRC_URI", True))
-    bb.note("unpacking SRC_URI split %s" % d.getVar("SRC_URI", True).split())
-    bb.note("unpacking srcurldata %s" % srcurldata)
-
-This generates the following output
-
-NOTE: unpacking SRC_URI
-ftp://opensource.axon.nl/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz;name=nios2tarball
-NOTE: package linux-libc-headers-2.6.34-r1: task do_distribute_sources: Started
-NOTE: unpacking SRC_URI split
-['ftp://opensource.axon.nl/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz;name=nios2tarball']
-NOTE: unpacking srcurldata
-{'ftp://opensource.axon.nl/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz;name=nios2tarball':
-<bb.fetch.FetchData object at 0x12786610>,
-'http://kernel.org/pub/linux/kernel/v2.6/linux-2.6.34.tar.bz2':
-<bb.fetch.FetchData object at 0x12786590>}
-NOTE: unpacking url
-/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz
-NOTE: Unpacking
-../downloads/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz
-to ../tmp/work/nios2-linux/linux-libc-headers-2.6.34-r1/
-NOTE: package linux-libc-headers-2.6.34-r1: task
-do_distribute_sources: Succeeded
-NOTE: unpacking url /pub/linux/kernel/v2.6/linux-2.6.34.tar.bz2
-...
-
-The odd thing is that the first two debug statements deliver exactly
-what I expect.
-However srcurldata seems to create fetch objects for both url's.
-I didn't manage yet to debug bb.fetch.init, but maybe someone has
-already an idea on this (or on how to debug this).
-Anyway, any help is appreciated.
-
-Frans.
+Frans
 
 
