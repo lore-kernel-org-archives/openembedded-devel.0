@@ -1,43 +1,32 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtJ1h-0004kh-DZ
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OtJ5J-0007Cs-6g
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 13:41:18 +0200
-Received: by gya6 with SMTP id 6so2560608gya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 04:40:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=p8wq5bw5AySRIWkJlb+0GgSSWT3EXxBRtnDpxLsNd2w=;
-	b=cQynbvMmQwM3zwB04ekfqgGgKlUc7Vu4M2iYZFq7LWsjyvT83MgfjjOQTmHDCOtKzI
-	1EtKsGtdFoUoFCRxZi2td9vgpw0I8DMD50qxib0rprpsFbkUG3Vjrx7ybCLa+m8qNEzs
-	TIUkCi++BvXaz5zKfOh07qZ76r4UBn3p1t6Qs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=WE1I3CHZ4sjSw6jRJB3NMHreNliNyA9rQTpjkp91xu2BAKy1xIsDjeeosWvjDvh4ui
-	i10vmfpqkMdCGZAMXnW3WqKC2a1y6e9mp4e6DwgVV63w4imODDgFsr4oRWVJ6BDBMAAB
-	bSfUbzzof67wsqCVGmnb/8LMP0flR1GgwJHkE=
-MIME-Version: 1.0
-Received: by 10.150.53.18 with SMTP id b18mr348157yba.331.1283946032307; Wed,
-	08 Sep 2010 04:40:32 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 04:40:32 -0700 (PDT)
-In-Reply-To: <AANLkTi=Pukbe6T_LM59_1BJS3TG8PwEBWP064YaDCs6u@mail.gmail.com>
-References: <AANLkTi=Pukbe6T_LM59_1BJS3TG8PwEBWP064YaDCs6u@mail.gmail.com>
-Date: Wed, 8 Sep 2010 13:40:32 +0200
-Message-ID: <AANLkTinQjJA1F9yqwSXWcB=DG9S7FsnSGuV8-JgEkMJ=@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 08 Sep 2010 13:45:04 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OtJ4a-0007Q7-2v from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Sep 2010 04:44:16 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 8 Sep 2010 13:44:14 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed,  8 Sep 2010 16:43:51 +0500
+Message-Id: <1283946231-29039-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 08 Sep 2010 11:44:14.0603 (UTC)
+	FILETIME=[29683DB0:01CB4F4B]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-09-07
+Subject: [PATCH] glib-1.2: merged native and non-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,33 +40,128 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 11:41:18 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Sep 2010 11:45:05 -0000
 
-2010/9/7 Cliff Brake <cliff.brake@gmail.com>:
-> Last weeks testing cycle was successful:
->
-> http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-08-30
->
-> I see a few more builds succeeding that were failing last week.
->
-> The testing-next branch has been moved to current org.openembedded.dev
-> and is ready for clean builds.
->
-> http://wiki.openembedded.net/index.php/Testing
->
-> Thanks,
-> Cliff
->
+* removed the glib-1.2-native_1.2.10.bb file
+* added NATIVE_INSTALL_WORKS = "1"
+* added BBCLASSEXTEND = "native"
+* converted do_stage of native recipe to do_install_virtclass-native in the combined recipe
+* added DEPENDS_virtclass-native = "" to avoid dependencies loops
+* added gettext in inherit because it was needed by the native recipes
+* bumped PR
 
-calamari/minimal/console-image builds fine for me
-still have some nios2 issues, might be in my setup, looking into it.
-Added entries in the wiki.
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/glib-1.2/glib-1.2-native_1.2.10.bb |   49 ----------------------------
+ recipes/glib-1.2/glib-1.2_1.2.10.bb        |   20 ++++++++++-
+ 2 files changed, 18 insertions(+), 51 deletions(-)
 
-I suggest if people report failure they also report what version this
-applies to (so we can easily see if it was a failure report from an
-older test or for the latest version.
+diff --git a/recipes/glib-1.2/glib-1.2-native_1.2.10.bb b/recipes/glib-1.2/glib-1.2-native_1.2.10.bb
+deleted file mode 100644
+index d00e9a1..0000000
+--- a/recipes/glib-1.2/glib-1.2-native_1.2.10.bb
++++ /dev/null
+@@ -1,49 +0,0 @@
+-PR = "r0"
+-LICENSE = "LGPL"
+-DESCRIPTION = "GLib 1.2 is a deprecated libray to \
+-provide support for old glib 1.2 based applications"
+-SECTION = "libs"
+-PRIORITY = "optional"
+-DEPENDS = ""
+-
+-FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glib-1.2-${PV}"
+-
+-EXTRA_OECONF = "--disable-debug"
+-
+-SRC_URI = "ftp://ftp.gtk.org/pub/gtk/v1.2/glib-${PV}.tar.gz \
+-           file://glibconfig-sysdefs.h \
+-           file://depcomp \
+-           file://glib-reconf-fix;apply=yes \
+-           file://posix-conf-changes;apply=yes \
+-           file://gcc-3.4-pretty_function;apply=yes"
+-
+-
+-S = "${WORKDIR}/glib-${PV}"
+-
+-inherit autotools pkgconfig native gettext
+-
+-acpaths = ""
+-do_configure_prepend () {
+-	install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h .
+-	install -m 0644 ${WORKDIR}/depcomp .
+-	rm -f ltconfig acinclude.m4 libtool ltmain.sh
+-}
+-
+-
+-do_stage () {
+-	oe_libinstall -so libglib ${STAGING_LIBDIR}
+-	oe_libinstall -so -C gmodule libgmodule ${STAGING_LIBDIR}
+-	oe_libinstall -so -C gthread libgthread ${STAGING_LIBDIR}
+-	autotools_stage_includes
+-	install -d ${STAGING_INCDIR}/glib-1.2
+-	install -m 0755 ${S}/glibconfig.h ${STAGING_INCDIR}/glib-1.2/glibconfig.h
+-	install -d ${STAGING_DATADIR}/aclocal
+-	install -m 0644 ${S}/glib.m4 ${STAGING_DATADIR}/aclocal/glib-1.2.m4
+-}
+-
+-do_install () {
+-	:
+-}
+-
+-SRC_URI[md5sum] = "6fe30dad87c77b91b632def29dd69ef9"
+-SRC_URI[sha256sum] = "6e1ce7eedae713b11db82f11434d455d8a1379f783a79812cd2e05fc024a8d9f"
+diff --git a/recipes/glib-1.2/glib-1.2_1.2.10.bb b/recipes/glib-1.2/glib-1.2_1.2.10.bb
+index 72ee826..67266d4 100644
+--- a/recipes/glib-1.2/glib-1.2_1.2.10.bb
++++ b/recipes/glib-1.2/glib-1.2_1.2.10.bb
+@@ -4,7 +4,8 @@ SECTION = "libs"
+ PRIORITY = "optional"
+ LICENSE = "LGPL"
+ DEPENDS = "glib-1.2-native"
+-PR = "r4"
++DEPENDS_virtclass-native = ""
++PR = "r5"
+ 
+ LEAD_SONAME = "libglib-1.2.*"
+ 
+@@ -22,7 +23,7 @@ SRC_URI = "ftp://ftp.gtk.org/pub/gtk/v1.2/glib-${PV}.tar.gz \
+ 
+ S = "${WORKDIR}/glib-${PV}"
+ 
+-inherit autotools pkgconfig binconfig
++inherit autotools pkgconfig binconfig gettext
+ 
+ acpaths = ""
+ do_configure_prepend () {
+@@ -31,6 +32,17 @@ do_configure_prepend () {
+ 	rm -f ltconfig acinclude.m4 libtool ltmain.sh
+ }
+ 
++do_install_virtclass-native () {
++        oe_libinstall -so libglib ${D}${libdir}
++        oe_libinstall -so -C gmodule libgmodule ${D}${libdir}
++        oe_libinstall -so -C gthread libgthread ${D}${libdir}
++        autotools_do_install
++        install -d ${D}${includedir}/glib-1.2
++        install -m 0644 glibconfig.h glib.h ${D}${includedir}/glib-1.2/
++        install -d ${D}${datadir}/aclocal
++        install -m 0644 ${S}/glib.m4 ${D}${datadir}/aclocal/glib-1.2.m4
++}
++
+ do_install_append () {
+ 	install -d ${D}${includedir}/glib-1.2
+ 	install -m 0644 glibconfig.h glib.h ${D}${includedir}/glib-1.2/
+@@ -42,3 +54,7 @@ FILES_${PN}-dev += "${libdir}/glib/include/glibconfig.h"
+ 
+ SRC_URI[md5sum] = "6fe30dad87c77b91b632def29dd69ef9"
+ SRC_URI[sha256sum] = "6e1ce7eedae713b11db82f11434d455d8a1379f783a79812cd2e05fc024a8d9f"
++
++BBCLASSEXTEND = "native"
++
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
 
-Frans
 
 
