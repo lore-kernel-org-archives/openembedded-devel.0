@@ -1,40 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OtQ67-0001xk-22
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OtQsU-0006Nc-6m
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 21:14:19 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OtQ5Q-0001MO-UW from Tom_Rini@mentor.com 
+	Wed, 08 Sep 2010 22:04:21 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o88K3Ybd011118
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 8 Sep 2010 22:03:35 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OtQrl-0005kj-Io
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 12:13:36 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 8 Sep 2010 12:13:36 -0700
-Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 8 Sep 2010 13:13:35 -0600
-Message-ID: <4C87E05A.6050004@mentor.com>
-Date: Wed, 08 Sep 2010 12:13:30 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Wed, 08 Sep 2010 22:03:34 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTineLTCDtymfwbaAJXcrz0vB=V4++=HOwEA7wQHU@mail.gmail.com>
-	<lybp88kr5j.fsf@ensc-virt.intern.sigma-chemnitz.de>
-In-Reply-To: <lybp88kr5j.fsf@ensc-virt.intern.sigma-chemnitz.de>
-X-OriginalArrivalTime: 08 Sep 2010 19:13:35.0951 (UTC)
-	FILETIME=[EF9F75F0:01CB4F89]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+References: <4C874458.3060101@nedap.com>
+	<lytym0e69l.fsf@ensc-virt.intern.sigma-chemnitz.de>
+	<4C87D8FD.9050709@mentor.com>
+Date: Wed, 08 Sep 2010 22:03:33 +0200
+In-Reply-To: <4C87D8FD.9050709@mentor.com> (Tom Rini's message of "Wed, 08 Sep
+	2010 11:42:05 -0700")
+Message-ID: <ly7hiwknoq.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libtermcap
+Subject: Re: cmake-native trouble making
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,37 +48,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 19:14:19 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Sep 2010 20:04:22 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Enrico Scholz wrote:
-> Frans Meulenbroeks <fransmeulenbroeks@gmail.com> writes:
-> 
->> Eric peeked into the termcap problem. I've tested his patch and it
->> works. He will probably push a patch later today.
+Tom Rini <tom_rini@mentor.com> writes:
+
+>>> | /usr/bin/ld: cannot find -ltinfo
 >>
->> The termcap problem from asterisk is not related. It cannot find
->> libtermcap. This one does not exist any more with ncurses 5.7.
+>> no, 'DEPENDS = "ncurses-native"'; BUT:
 >>
->> People how should we fix this? 
-> 
-> I added 9e58422868a03eeafa72781477174850d1c5abe7 some hours ago so that
-> '-ltermcap' should work again.  Patch does not break my builds but I do
-> not know whether it unbreaks the problematic ones ;)
-> 
-> Things are too different across the distributions (some have the
-> ncurses-config binconfig tools, other the .pc files, some have
-> libtinfo, some not) to find *the* correct solution.
+>> * it will cause problems on (host)distributions which do not have libtinfo
+>>   (e.g. RHEL5) and have ncurses-native in their ASSUME_PROVIDED
+>
+> Isn't the whole point of ASSUME_PROVIDED that user be aware?
 
-Maybe I'm jumping in too late here.  Why is the correct solution not 
-"make our ncurses-native build and install what's required by other 
-recipes, fix broken recipes that look for the wrong thing" ?  IMHO, if 
-you ASSUME_PROVIDED and things break, thats not our problem, its your 
-problem (Doctor, it hurts when I do *this*.  Don't do *that* !)
+Would be too arbitrary in this case because it forces people to check by
+trial & error whether ASSUME_PROVIDED are working.  A raw guideline for
+adding an entry to ASSUME_PROVIDED should be, whether a corresponding,
+recent -devel package has been installed on the host.
 
--- 
-Tom Rini
-Mentor Graphics Corporation
+imo, packages should not have so strict requirements on the actual
+provider but check in their configure task what to use (this includes
+autodetection of libtinfo vs. libtermcap vs. libncurses).
+
+
+For cmake, problem above can by solved by an initial configuration
+script having
+
+| SET (BUILD_CursesDialog OFF CACHE BOOL "" FORCE)
+
+
+>> * some hours ago I added a libtermcap.so compatibility symlink to
+>>   ncurses(-native) so that 5ea3047995421d99f7f3537cb8f9ae23f3185a9f
+>>   might not be needed anymore
+>
+> Um, is there a reason this wasn't just done as a ln within the recipe?
+
+It's a mix of personal preference, following Fedora's packaging of this
+file and the hope to use some more of the power of linker scripts (giving
+out a deprecated warning, add AS_NEEDED, linking against multiple files).
+There was no opposition when I wrote about linker scripts neither.
+
+Perhaps I should have made it inline by 'echo INPUT(-ltinfo) > ...' but
+I did not saw this when I committed the patch.
+
+
+
+Enrico
 
 
