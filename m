@@ -1,39 +1,44 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OtLFX-0003F6-7f
+Received: from smtp-4.concepts.nl ([213.197.30.111])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>) id 1OtLaS-00029l-ST
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 16:03:50 +0200
-Received: (qmail 20556 invoked by uid 503); 8 Sep 2010 14:14:21 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 8 Sep 2010 14:14:21 -0000
-Received: (qmail 6342 invoked by uid 503); 8 Sep 2010 13:47:09 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 8 Sep 2010 13:47:09 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 Sep 2010 16:03:02 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 8 Sep 2010 16:03:01 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Wed, 08 Sep 2010 16:25:21 +0200
+Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
+	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
+	(envelope-from <pieterg@gmx.com>) id 1OtLLG-0002An-Mn
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Sep 2010 16:09:38 +0200
+Received: from [10.9.0.12] (unknown [10.9.0.12])
+	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mx1.grimmerink.nl (Postfix) with ESMTPSA id 2546D6A07D
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Sep 2010 16:09:34 +0200 (CEST)
+From: pieterg <pieterg@gmx.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Sep 2010 16:01:42 +0200
-Message-Id: <1283954503-25418-2-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1283954503-25418-1-git-send-email-eric@eukrea.com>
-References: <1283954503-25418-1-git-send-email-eric@eukrea.com>
+Date: Wed, 8 Sep 2010 16:09:32 +0200
+User-Agent: KMail/1.9.9
+References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
+	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>
+	<i6629i$d5c$1@dough.gmane.org>
+In-Reply-To: <i6629i$d5c$1@dough.gmane.org>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 10922636472649297226
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+Message-Id: <201009081609.32135.pieterg@gmx.com>
+X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
+	information
+X-Concepts-MailScanner-ID: 1OtLLG-0002An-Mn
+X-Concepts-MailScanner: Found to be clean
+X-Concepts-MailScanner-SpamCheck: 
+X-Concepts-MailScanner-From: pieterg@gmx.com
+X-SA-Exim-Connect-IP: 213.197.30.111
+X-SA-Exim-Mail-From: pieterg@gmx.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/3] rlpr: add version 2.06
+Subject: Re: Images no longer automatically include libstdc++6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,44 +52,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 14:03:50 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Sep 2010 14:25:22 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/rlpr/rlpr_2.06.bb |   20 ++++++++++++++++++++
- 1 files changed, 20 insertions(+), 0 deletions(-)
- create mode 100644 recipes/rlpr/rlpr_2.06.bb
+On Tuesday 07 September 2010 21:03:14 Koen Kooi wrote:
+> On 07-09-10 18:18, Khem Raj wrote:
+> > On Tue, Sep 7, 2010 at 5:52 AM, Koen Kooi <k.kooi@student.utwente.nl> 
+wrote:
+> >> it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
+> >> create a libstdc6++ package, but it does create a libstdc-dev package.
+> >
+> > I see thats plausible. I think its time to look into separating gcc
+> > runtime from gcc on the lines of poky.
+>
+> I put back libgcc and libstdc++ for the time being:
+>
+> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=241b8865f20
+>b9e3c3beb334535e6cd8452cbf47d
+>
+> I have a feeling the others needs to put back as well (e.g. fortran),
+> but this fixes the immediate problem.
 
-diff --git a/recipes/rlpr/rlpr_2.06.bb b/recipes/rlpr/rlpr_2.06.bb
-new file mode 100644
-index 0000000..64220ce
---- /dev/null
-+++ b/recipes/rlpr/rlpr_2.06.bb
-@@ -0,0 +1,20 @@
-+DESCRIPTION = "rlpr makes it possible to print files on remote sites to your networked printers"
-+HOMEPAGE = "http://freshmeat.net/projects/rlpr/"
-+SECTION = "console/network"
-+LICENSE = "GPL"
-+PR = "r0"
-+
-+SRC_URI = "http://linuxfocus.org/~guido/rlpr-2.06.tar.gz"
-+SRC_URI[md5sum] = "c3192d0e84ccae432e754640f6003478"
-+SRC_URI[sha256sum] = "32ae5893f4b9250b7a02c98a41b5929cfdd5731b6efbd7edfc77c2c5314388f7"
-+
-+inherit autotools
-+
-+do_configure() {
-+        oe_runconf
-+}
-+do_install() {
-+        make install DESTDIR=${D}
-+}
-+
-+TARGET_CC_ARCH += " ${LDFLAGS}"
--- 
-1.6.3.3
+Not for me, after a clean build today packages are still missing libstdc++ 
+in their deps (and as a result the images are still missing libstdc++).
+So there must be more to it.
 
+Rgds, Pieter
 
 
