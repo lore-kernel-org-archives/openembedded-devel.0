@@ -1,45 +1,39 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OtM5s-0002dA-3b
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OtMRd-0002N2-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 16:57:54 +0200
-Received: by pvg6 with SMTP id 6so57941pvg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 07:57:05 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=AJGm4KreY67//Q4GuABbatu3Ax7BE4x5NJWDwaUar7k=;
-	b=DKfy1wm8mTmX3isPhcjWuco2kKI/UQykqq9sc5TSr/D879QMI5niIbBtoLWTLzNYjf
-	qlaefCsMWbVWCf+fRFwfUFUG7lTXT4B0GLjYBFxmGrzpcu/UnUm9biHb0IYCbFzZqpz3
-	9pX9Dde4JD6Zr/KBagtI6nflRgo3eQBw6I8D0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=dE4tOYiaiiLHsw94aK8e0M7UxPO7AZXwWRa091Ii2Y9JU9NkETh3R/2g3ABYXxHHiP
-	lg3CA8+O1pBb11OabIbfWoKQSv0U4d+FIHUuf2wvibJ5sA1uCDUGfAog8UqkkuDQ4G2w
-	7aREsVPDiBZ6RoyczvqUQDk22PvtadYbP/moc=
-Received: by 10.114.111.15 with SMTP id j15mr87494wac.119.1283957823979; Wed,
-	08 Sep 2010 07:57:03 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Wed, 8 Sep 2010 07:56:43 -0700 (PDT)
-In-Reply-To: <1283925467.17152.1.camel@pkl-fusman-ubuntu>
-References: <1283842952-20249-1-git-send-email-raj.khem@gmail.com>
-	<1283925467.17152.1.camel@pkl-fusman-ubuntu>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 8 Sep 2010 07:56:43 -0700
-Message-ID: <AANLkTi=rudmjsFvYs32RrwZ-KfRiOmUtNsXq9Vn8FS0x@mail.gmail.com>
+	Wed, 08 Sep 2010 17:20:22 +0200
+Received: (qmail 12619 invoked by uid 503); 8 Sep 2010 15:30:49 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 8 Sep 2010 15:30:49 -0000
+Received: (qmail 15607 invoked by uid 503); 8 Sep 2010 15:03:36 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 8 Sep 2010 15:03:36 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 8 Sep 2010 17:19:30 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 8 Sep 2010 17:19:30 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Wed,  8 Sep 2010 17:18:11 +0200
+Message-Id: <1283959092-6481-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <AANLkTinfxZO07kTjsaFWWZfXzwAdPgKNZAaWEKV-ZTVg@mail.gmail.com>
+References: <AANLkTinfxZO07kTjsaFWWZfXzwAdPgKNZAaWEKV-ZTVg@mail.gmail.com>
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 12214043664615124297
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] java-library.bbclass: do_stage is not needed anymore
+Subject: [PATCH v2 1/2] rlpr 2.05: unbreak recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,41 +47,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 14:57:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Sep 2010 15:20:22 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 7, 2010 at 10:57 PM, Fahad <Fahad_Usman@mentor.com> wrote:
-> On Tue, 2010-09-07 at 00:02 -0700, Khem Raj wrote:
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =A0classes/java-library.bbclass | =A0 =A04 ----
->> =A01 files changed, 0 insertions(+), 4 deletions(-)
->>
->> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
->> index 904b4f1..5ce0537 100644
->> --- a/classes/java-library.bbclass
->> +++ b/classes/java-library.bbclass
->> @@ -65,7 +65,3 @@ do_install() {
->> =A0java_stage() {
->> =A0 =A0oe_jarinstall -s ${JARFILENAME} ${ALTJARFILENAMES}
->> =A0}
-> Shouldn't you remove this java_stage function as well, as it won't be
-> called anymore.
+* source URL is no more working so use debian mirrors
+* fix GNU_HASH issue
+* tested on armv5
 
-its still used in do_install. but yes there can be some cleanup done
-there. I did
-minimum to fix it.
->> -
->> -do_stage() {
->> - =A0java_stage
->> -}
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/rlpr/rlpr_2.05.bb |   18 ++++++++++--------
+ 1 files changed, 10 insertions(+), 8 deletions(-)
+
+diff --git a/recipes/rlpr/rlpr_2.05.bb b/recipes/rlpr/rlpr_2.05.bb
+index 47ac9c3..2751b9f 100644
+--- a/recipes/rlpr/rlpr_2.05.bb
++++ b/recipes/rlpr/rlpr_2.05.bb
+@@ -1,18 +1,20 @@
+-SECTION = "console/network"
+ DESCRIPTION = "rlpr makes it possible to print files on remote sites to your networked printers"
+-HOMEPAGE = "http://truffula.com/rlpr/"
++HOMEPAGE = "http://freshmeat.net/projects/rlpr/"
++SECTION = "console/network"
+ LICENSE = "GPL"
+-SRC_URI = "ftp://www.truffula.com/pub/rlpr-2.05.tar.gz"
++PR = "r1"
++
++SRC_URI = "${DEBIAN_MIRROR}/main/r/rlpr/rlpr_2.05.orig.tar.gz"
++SRC_URI[md5sum] = "64ee8ccd94aabc90b9f40d0b2ad79e79"
++SRC_URI[sha256sum] = "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f3efe22d16af14ba9a"
+ 
+ inherit autotools
+ 
+ do_configure() {
+-	oe_runconf
++        oe_runconf
+ }
+-
+ do_install() {
+-	make install DESTDIR=${D}
++        make install DESTDIR=${D}
+ }
+ 
+-SRC_URI[md5sum] = "64ee8ccd94aabc90b9f40d0b2ad79e79"
+-SRC_URI[sha256sum] = "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f3efe22d16af14ba9a"
++TARGET_CC_ARCH += " ${LDFLAGS}"
+-- 
+1.6.3.3
+
 
 
