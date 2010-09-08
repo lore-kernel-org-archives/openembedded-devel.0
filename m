@@ -1,43 +1,44 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-gx0-f175.google.com ([209.85.161.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1OtPAR-0007JG-QT
+	(envelope-from <raj.khem@gmail.com>) id 1OtPWu-0004ye-GY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 20:14:44 +0200
-Received: by gwb1 with SMTP id 1so201318gwb.6
+	Wed, 08 Sep 2010 20:37:57 +0200
+Received: by gxk2 with SMTP id 2so216946gxk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 11:14:01 -0700 (PDT)
+	Wed, 08 Sep 2010 11:37:14 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=NA1zVWRXMugJHm+4dL0C3IFFwFf0R0U7SqYHjjKGoEI=;
-	b=e+ZX4uHaY2TR8yIoyL8Osf10oLDH6cUz6THF/uqKw3BIjcoZccRz40aSj2vQHGLUX3
-	GIZtnWBQCUlHpXSGGShZaXRfNkMfntKiZw9am6LYZDRs0gl+GOUsXXWvAAJyHABbM1qY
-	kiAs6ERcvrb7Mz5wLS5S1Fk6EThIK1RosX2Wg=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=TPFnVZxPzsYIQzideklJbfDtbM3tPQxCFlvFnmWvuhE=;
+	b=kmby/oGqMqPp0+Md9lmPPoRqtQYPA4k7jWdp/QAGFmRglZI0Cw9VKosGi99Kz/Ye9H
+	OIcvmeWJasO7yxa8LYNdjWgF3qFT984VLRz0e3CUbSKUjli0y3Cl7Sd9Zbr3tGa0FWtt
+	LDIFp+M0MR20BqGg5G4gLkp59BjmDuK4opYC4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=OLZMlxkKTwnno7JAFDtKIlnkWkFsxxxvYzaZOiOzjOd9CQLudZfR0YT8heY96PpJO0
-	6/OHov/tDfaT3Ei6CF0u69ot1GmKqF/aXM6cqti7j8/CAUb+2FjJtId32sEnXjOHOLI1
-	f+hjiOKGetVCXv42kJXZ727QOt7x/tTZS/IJk=
-Received: by 10.151.102.8 with SMTP id e8mr163225ybm.83.1283969635626;
-	Wed, 08 Sep 2010 11:13:55 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id m12sm331851ybn.19.2010.09.08.11.13.53
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 08 Sep 2010 11:13:54 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=isnLtDp88bsjouk7oyok4DOLBF4KHX4tueOs62YlKrqJlzjhLDHz06tJ8zmbq4ruGH
+	3tQpMi30oQwTMxCEaAw1Pbpc2qiTawvKOtRCSAiEzhBzNteljIjWjB6jD1gHOV1XRcPQ
+	LJHfl6r/+R5vnwHfGSOstTCeJ66QFAo0Whu1o=
+Received: by 10.150.92.9 with SMTP id p9mr32031ybb.198.1283971033349; Wed, 08
+	Sep 2010 11:37:13 -0700 (PDT)
+MIME-Version: 1.0
+Received: by 10.231.205.134 with HTTP; Wed, 8 Sep 2010 11:36:53 -0700 (PDT)
+In-Reply-To: <AANLkTimJj=8JDVsumZDSzNrpWcf6t1t4FA5WrGgWofDX@mail.gmail.com>
+References: <AANLkTimJj=8JDVsumZDSzNrpWcf6t1t4FA5WrGgWofDX@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Sep 2010 11:36:53 -0700
+Message-ID: <AANLkTi=+8Aq14dN9TrbyY851cr43neEKAbU58MqXrq6f@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Sep 2010 13:03:55 -0500
-Message-Id: <1283969035-1397-1-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCHv2] common_use_cases: add description of SOC_FAMILY
+Subject: Re: SRC_URI_arch override. error?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,53 +52,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 18:14:44 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 18:37:58 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-* Added a description of the SOC_FAMILY variable that
-  can be set in the machine configuration files.
+On Wed, Sep 8, 2010 at 7:52 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Hi,
+>
+> I have an issue with the linux-libc-headers recipe for nios2.
+> Maybe I am trying to do something what is not possible.
+>
+> The recipe contains:
+> SRC_URI =3D "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz=
+2 \
+> =A0 =A0 =A0 =A0 =A0"
+>
+> SRC_URI_nios2 =3D
+> "ftp://opensource.axon.nl/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a=
+32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz;name=3Dnios2tarball
+> \
+> =A0 =A0 =A0 =A0 =A0"
+>
+> I was under the assumption that when building with TARGET_ARCH set to
+> "nios2" (e.g. for machine neek) I would get the 2nd uri.
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
----
- docs/usermanual/chapters/common_use_cases.xml |   24 ++++++++++++++++++++++++
- 1 files changed, 24 insertions(+), 0 deletions(-)
 
-diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs/usermanual/chapters/common_use_cases.xml
-index d86d0ca..ef81b95 100644
---- a/docs/usermanual/chapters/common_use_cases.xml
-+++ b/docs/usermanual/chapters/common_use_cases.xml
-@@ -94,6 +94,30 @@ SRCDATE = "20061014"
-         </listitem>
-       </itemizedlist></para>
- 
-+    <para>There are also some optional variables that can be defined:
-+    <itemizedlist>
-+    <listitem>
-+          <para><command>SOC_FAMILY</command> describes a family of processors
-+            that all share common features such as kernel versions,
-+            bootloaders, etc.  This is used to allow overrides for a whole
-+            set of devices rather than per machine overrides being used.
-+            The use of SOC_FAMILY as an override is currently a distribution
-+            or local setting.
-+          </para>
-+          <para>
-+            NOTE: SOC_FAMILY is different than MACHINE_CLASS in that 
-+            MACHINE_CLASS is intended to specify a grouping of devices
-+            that may have different processors but share common features.
-+            For example all OMAP3 devices can be described using the SOC_FAMILY
-+            "omap3" and this value can be used in overrides to prevent
-+            requiring multiple machine specific overrides.  MACHINE_CLASS
-+            might be used to describe a class of devices such as a cell
-+            phone in which the processor may be different but the
-+            features such as touchscreen, GPS, modem, etc are the same.
-+          </para>
-+        </listitem>
-+    </itemizedlist></para>
-+
-     <para>Next the kernel recipe needs to be added if it doesn't already exist.
-     </para>
-   </section>
--- 
-1.7.0.4
-
+I still get this correct. I am using bitbake master
 
 
