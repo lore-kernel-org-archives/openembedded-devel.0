@@ -1,40 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OtPbl-0000jy-6h
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtPhU-0000tQ-OO
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 20:42:58 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OtPb3-0005NA-Lk from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 11:42:13 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Wed, 8 Sep 2010 11:42:13 -0700
-Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 8 Sep 2010 12:42:11 -0600
-Message-ID: <4C87D8FD.9050709@mentor.com>
-Date: Wed, 08 Sep 2010 11:42:05 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Wed, 08 Sep 2010 20:48:53 +0200
+Received: by ywa8 with SMTP id 8so223780ywa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 08 Sep 2010 11:48:10 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=jaA2eV6yhvrL13D9oYSUjZWpnN1ohTg6nPGNvT6Mjss=;
+	b=KEYpr9c4r6w67vh/aUXlZDsXQv56hbFZ+GYprOlj1NyGuFIsyebe3177eL2Q5rH7hU
+	qrBKrhzo+wctoepUT9L6meIchVZh0xQzBGJa9VzvIOmeiCBdl+Qjw43llScngt1ZDgDl
+	R/qEaERyqP48BtOtrj9MDEhxAOPEADHS/2leY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=VqIXJnqYeTKok3+tecANoJeuEmq/mK2iB/hmqv/OpCCVVbX4MiqbXSj0mKYLX6LqOR
+	KmI5URzFIdD/w/rhjHug2qZBnbPDPVjgnapWHx10PkfPncwGZW8JLM6J8vWSNrYOgFs+
+	IZmNkxjt/cBNNV6CrKD8KQ39x87mEzwbcofy0=
 MIME-Version: 1.0
+Received: by 10.151.154.14 with SMTP id g14mr380853ybo.314.1283971690513; Wed,
+	08 Sep 2010 11:48:10 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 11:48:10 -0700 (PDT)
+In-Reply-To: <4C87D894.9050609@mentor.com>
+References: <AANLkTi=3gKS1xKPCLJOg0vxpVSgxOwx9N-GmiQS1zO9g@mail.gmail.com>
+	<AANLkTi=YqpnwM52LoTsVSb6wZJaGEXfyxrQiV_tMjwSH@mail.gmail.com>
+	<4C87D894.9050609@mentor.com>
+Date: Wed, 8 Sep 2010 20:48:10 +0200
+Message-ID: <AANLkTino843P2Cxr8g=s6H7pv3dTTH1iAp051MwPN6w8@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C874458.3060101@nedap.com>
-	<lytym0e69l.fsf@ensc-virt.intern.sigma-chemnitz.de>
-In-Reply-To: <lytym0e69l.fsf@ensc-virt.intern.sigma-chemnitz.de>
-X-OriginalArrivalTime: 08 Sep 2010 18:42:11.0778 (UTC)
-	FILETIME=[8C917A20:01CB4F85]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cmake-native trouble making
+Subject: Re: recipe simplification questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,44 +54,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 18:42:58 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 08 Sep 2010 18:48:53 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Enrico Scholz wrote:
-> Jaap de Jong <jaap.dejong@nedap.com> writes:
-> 
->> $ bitbake cmake-native
->> ////
->> | [ 87%] Building CXX object
->> Source/CMakeFiles/CPackLib.dir/CPack/cmCPackNSISGenerator.o
->> | /usr/bin/ld: cannot find -ltinfo
->> | collect2: ld returned 1 exit status
->> | make[2]: *** [bin/ccmake] Error 1
->> | make[1]: *** [Source/CMakeFiles/ccmake.dir/all] Error 2
->> | make[1]: *** Waiting for unfinished jobs....
->> ////
+2010/9/8 Tom Rini <tom_rini@mentor.com>:
+> Khem Raj wrote:
 >>
->> Is cmake-native_2.8.2.bb missing this line:
+>> On Wed, Sep 8, 2010 at 10:41 AM, Frans Meulenbroeks
+>> <fransmeulenbroeks@gmail.com> wrote:
+>>>
+>>> Hi
+>>>
+>>> While browsing through a recipe I stumbled upon the following two
+>>> functions:
+>
+> [snip]
+>>>
+>>> do_install() {
+>>> =A0 =A0 =A0 make install DESTDIR=3D${D}
+>>> }
+>>>
 >>
->>     RDEPENDS = "ncurses-terminfo"
-> 
-> no, 'DEPENDS = "ncurses-native"'; BUT:
-> 
-> * it will cause problems on (host)distributions which do not have libtinfo
->   (e.g. RHEL5) and have ncurses-native in their ASSUME_PROVIDED
+>> this if used in a recipe which inherits autotools could be for getting
+>> parallelism out of context during install but not during compile.
+>> again this kind of stuff should be avoided.
+>
+> Not true (but I had to double check just now, so it's quite possible some
+> others have assumed this behavior). =A0If we look at bitbake.conf:
+> EXTRA_OEMAKE_prepend_task_do_compile =3D "${PARALLEL_MAKE} "
+> EXTRA_OEMAKE_prepend_task-compile =3D "${PARALLEL_MAKE} "
+>
+> So in the case of literally having DESTDIR=3D${D}, these can just go away=
+.
+> =A0There are some annoying cases however where it's not DESTDIR but some =
+other
+> variable. =A0IMHO, it's questionable if it'd be cleaner to do a custom on=
+e
+> line do_install vs EXTRA_OEMAKE_append_task-do_install =3D "PREFIX=3D${D}=
+"
 
-Isn't the whole point of ASSUME_PROVIDED that user be aware?
+Woudht aht have to be an EXTRA_OEMAKE_append_task-do_install ?
+I see also recipes that just add PREFIX or DESTDIR to EXTRA_OEMAKE
+(actually I would expect the presence or absence not to be an issue in
+most cases (as DESTDIR is quite likely not used during compile)
 
-> 
-> * some hours ago I added a libtermcap.so compatibility symlink to
->   ncurses(-native) so that 5ea3047995421d99f7f3537cb8f9ae23f3185a9f
->   might not be needed anymore
-
-Um, is there a reason this wasn't just done as a ln within the recipe?
-
--- 
-Tom Rini
-Mentor Graphics Corporation
+Frans
 
 
