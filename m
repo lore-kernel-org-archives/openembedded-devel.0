@@ -1,40 +1,38 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail.cvg.de ([62.153.82.30])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtKKh-0007AU-2e
+	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OtKKg-0007Al-LR
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 15:05:03 +0200
-Received: by gwb1 with SMTP id 1so4623gwb.6
+	Wed, 08 Sep 2010 15:05:04 +0200
+Received: from ensc-virt.intern.sigma-chemnitz.de
+	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
+	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o88D472q026303
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 06:04:10 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=BdGcNL0J3w/+V9AHld3GwUZ1liLDx0mkosNVPJ/J2OE=;
-	b=Jq/BvVoOSjnwulPrXJRqbGUBpiPn4Hm1PCkGrNJWPWSRxwljNDSa/xqc1prriZFuwz
-	fN+OvPvY2aATWeDzHHstv08qSWbgkrrVn1XuwEuUD4J1XH9Qh0sJQYfPYvKQsdB5AUhI
-	8aAiFQH1ru1duV0JNipvHYpE7WbpcCZ/mB6ws=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=uZJ2LGmPlZ+xmUcqDMxzB6regU2i53GMoHEQwgoytaIHU+u248ic1vVPW9pzawosWR
-	Z9gDNfWGhikDW250TVoISyazIeISG3OFRXj8WZa21RUdfuHtv5bFIOdtfTO5MbTcfb/Z
-	4DbwvZnCMeZYT1U5vFTc9fyLga6Pe5GLkN7Zw=
-MIME-Version: 1.0
-Received: by 10.90.104.10 with SMTP id b10mr724929agc.10.1283951046147; Wed,
-	08 Sep 2010 06:04:06 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 06:04:05 -0700 (PDT)
-Date: Wed, 8 Sep 2010 15:04:05 +0200
-Message-ID: <AANLkTimVjyq7CA2CqyaR_D-AJ-8Aawhoknzs1Xs1R2fc@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Wed, 8 Sep 2010 15:04:10 +0200
+Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
+	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OtKJq-0007lL-Je
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 08 Sep 2010 15:04:06 +0200
+From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C874458.3060101@nedap.com>
+Date: Wed, 08 Sep 2010 15:04:06 +0200
+In-Reply-To: <4C874458.3060101@nedap.com> (Jaap de Jong's message of "Wed, 08
+	Sep 2010 10:07:52 +0200")
+Message-ID: <lytym0e69l.fsf@ensc-virt.intern.sigma-chemnitz.de>
+User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+MIME-Version: 1.0
+Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
+X-SA-Exim-Connect-IP: 62.153.82.30
+X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OBSOLETE in base.bbclass
+Subject: Re: cmake-native trouble making
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,28 +46,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 13:05:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 08 Sep 2010 13:05:05 -0000
+Content-Type: text/plain; charset=us-ascii
 
-Bumped upon this while peeking in base.bbclass:
+Jaap de Jong <jaap.dejong@nedap.com> writes:
 
-    # OBSOLETE in bitbake 1.7.4
-    srcdate = bb.data.getVar('SRCDATE_%s' % pn, d, 1)
-    if srcdate != None:
-        bb.data.setVar('SRCDATE', srcdate, d)
+> $ bitbake cmake-native
+> ////
+> | [ 87%] Building CXX object
+> Source/CMakeFiles/CPackLib.dir/CPack/cmCPackNSISGenerator.o
+> | /usr/bin/ld: cannot find -ltinfo
+> | collect2: ld returned 1 exit status
+> | make[2]: *** [bin/ccmake] Error 1
+> | make[1]: *** [Source/CMakeFiles/ccmake.dir/all] Error 2
+> | make[1]: *** Waiting for unfinished jobs....
+> ////
+>
+> Is cmake-native_2.8.2.bb missing this line:
+>
+>     RDEPENDS = "ncurses-terminfo"
 
-    use_nls = bb.data.getVar('USE_NLS_%s' % pn, d, 1)
-    if use_nls != None:
-        bb.data.setVar('USE_NLS', use_nls, d)
+no, 'DEPENDS = "ncurses-native"'; BUT:
 
-    setup_checksum_deps(d)
+* it will cause problems on (host)distributions which do not have libtinfo
+  (e.g. RHEL5) and have ncurses-native in their ASSUME_PROVIDED
 
-Not sure what part exactly is OBSOLETE, but I don't think we support
-1.7.4 any more, so I feel it is better to clean this and remove the
-obsolete section.
+* some hours ago I added a libtermcap.so compatibility symlink to
+  ncurses(-native) so that 5ea3047995421d99f7f3537cb8f9ae23f3185a9f
+  might not be needed anymore
 
-Any bitbake wiz care to comment on this?
+* build of the curses frontend should be disabled for cmake-native because
+  we do automated builds only; I do not know atm how to configure cmake
+  for this...
 
-Frans
+
+Enrico
 
 
