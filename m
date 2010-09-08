@@ -1,46 +1,45 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtM37-0001hZ-Gk
+	(envelope-from <raj.khem@gmail.com>) id 1OtM5s-0002dA-3b
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 16:55:00 +0200
-Received: by yxk30 with SMTP id 30so63089yxk.6
+	Wed, 08 Sep 2010 16:57:54 +0200
+Received: by pvg6 with SMTP id 6so57941pvg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 07:54:11 -0700 (PDT)
+	Wed, 08 Sep 2010 07:57:05 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=hQuGxFUtlI6BqAJu2QfEpcNq05SWwbJKbdilBHC5eXQ=;
-	b=wYmS4neMKiMHAtAzXCnslwu4cdjPVTCFaKofrIwnt6IC8xFPEtwBs80s49L3a1W+dV
-	fKV7WOURCTegAcxgv+yKsAoBAifoo78NEHH5P+dvBuyoThh+X3OP+c4HEwQZVYeWv1ZK
-	2vhvphYbB/4vqAu8wRLvBN0e5C3hrZQN3HtwY=
+	bh=AJGm4KreY67//Q4GuABbatu3Ax7BE4x5NJWDwaUar7k=;
+	b=DKfy1wm8mTmX3isPhcjWuco2kKI/UQykqq9sc5TSr/D879QMI5niIbBtoLWTLzNYjf
+	qlaefCsMWbVWCf+fRFwfUFUG7lTXT4B0GLjYBFxmGrzpcu/UnUm9biHb0IYCbFzZqpz3
+	9pX9Dde4JD6Zr/KBagtI6nflRgo3eQBw6I8D0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=m11I2912FiKxJ2f/MDF8M+xe0Pr5mJKBBSZHjvIyItfveQmQhDSHODWlZbQ4xhfQiM
-	WudGHLeHxQRzQGgsvmnUJDtKf3iO7lUL8Xo3R/F1bMUyamaoZauZwJWbNlJSm3DtkHhw
-	eXfeHbWers5K6gMFxiUi+8DB5KdTzre69NTyY=
+	b=dE4tOYiaiiLHsw94aK8e0M7UxPO7AZXwWRa091Ii2Y9JU9NkETh3R/2g3ABYXxHHiP
+	lg3CA8+O1pBb11OabIbfWoKQSv0U4d+FIHUuf2wvibJ5sA1uCDUGfAog8UqkkuDQ4G2w
+	7aREsVPDiBZ6RoyczvqUQDk22PvtadYbP/moc=
+Received: by 10.114.111.15 with SMTP id j15mr87494wac.119.1283957823979; Wed,
+	08 Sep 2010 07:57:03 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.150.219.1 with SMTP id r1mr118321ybg.173.1283957651202; Wed,
-	08 Sep 2010 07:54:11 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 07:54:11 -0700 (PDT)
-In-Reply-To: <1283954503-25418-3-git-send-email-eric@eukrea.com>
-References: <1283954503-25418-1-git-send-email-eric@eukrea.com>
-	<1283954503-25418-2-git-send-email-eric@eukrea.com>
-	<1283954503-25418-3-git-send-email-eric@eukrea.com>
-Date: Wed, 8 Sep 2010 16:54:11 +0200
-Message-ID: <AANLkTinfxZO07kTjsaFWWZfXzwAdPgKNZAaWEKV-ZTVg@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.205.134 with HTTP; Wed, 8 Sep 2010 07:56:43 -0700 (PDT)
+In-Reply-To: <1283925467.17152.1.camel@pkl-fusman-ubuntu>
+References: <1283842952-20249-1-git-send-email-raj.khem@gmail.com>
+	<1283925467.17152.1.camel@pkl-fusman-ubuntu>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Sep 2010 07:56:43 -0700
+Message-ID: <AANLkTi=rudmjsFvYs32RrwZ-KfRiOmUtNsXq9Vn8FS0x@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] rlpr: remove version 2.05
+Subject: Re: [PATCH 1/2] java-library.bbclass: do_stage is not needed anymore
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,54 +53,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 14:55:00 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 14:57:58 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/8 Eric B=E9nard <eric@eukrea.com>:
-> now replaced by 2.06
->
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
-> ---
-> =A0recipes/rlpr/rlpr_2.05.bb | =A0 20 --------------------
-> =A01 files changed, 0 insertions(+), 20 deletions(-)
-> =A0delete mode 100644 recipes/rlpr/rlpr_2.05.bb
->
-> diff --git a/recipes/rlpr/rlpr_2.05.bb b/recipes/rlpr/rlpr_2.05.bb
-> deleted file mode 100644
-> index 2751b9f..0000000
-> --- a/recipes/rlpr/rlpr_2.05.bb
-> +++ /dev/null
-> @@ -1,20 +0,0 @@
-> -DESCRIPTION =3D "rlpr makes it possible to print files on remote sites t=
-o your networked printers"
-> -HOMEPAGE =3D "http://freshmeat.net/projects/rlpr/"
-> -SECTION =3D "console/network"
-> -LICENSE =3D "GPL"
-> -PR =3D "r1"
-> -
-> -SRC_URI =3D "${DEBIAN_MIRROR}/main/r/rlpr/rlpr_2.05.orig.tar.gz"
-> -SRC_URI[md5sum] =3D "64ee8ccd94aabc90b9f40d0b2ad79e79"
-> -SRC_URI[sha256sum] =3D "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f3=
-efe22d16af14ba9a"
-> -
-> -inherit autotools
-> -
-> -do_configure() {
-> - =A0 =A0 =A0 =A0oe_runconf
-> -}
-> -do_install() {
-> - =A0 =A0 =A0 =A0make install DESTDIR=3D${D}
-> -}
-> -
-> -TARGET_CC_ARCH +=3D " ${LDFLAGS}"
-> --
-> 1.6.3.3
->
+On Tue, Sep 7, 2010 at 10:57 PM, Fahad <Fahad_Usman@mentor.com> wrote:
+> On Tue, 2010-09-07 at 00:02 -0700, Khem Raj wrote:
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>> =A0classes/java-library.bbclass | =A0 =A04 ----
+>> =A01 files changed, 0 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/classes/java-library.bbclass b/classes/java-library.bbclass
+>> index 904b4f1..5ce0537 100644
+>> --- a/classes/java-library.bbclass
+>> +++ b/classes/java-library.bbclass
+>> @@ -65,7 +65,3 @@ do_install() {
+>> =A0java_stage() {
+>> =A0 =A0oe_jarinstall -s ${JARFILENAME} ${ALTJARFILENAMES}
+>> =A0}
+> Shouldn't you remove this java_stage function as well, as it won't be
+> called anymore.
 
-if you are updating a recipe I suggest to use git mv
-That way the history is retained.
-
-Frans
+its still used in do_install. but yes there can be some cleanup done
+there. I did
+minimum to fix it.
+>> -
+>> -do_stage() {
+>> - =A0java_stage
+>> -}
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
