@@ -1,38 +1,47 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OtKKg-0007Al-LR
+	(envelope-from <kergoth@gmail.com>) id 1OtL6d-0005tH-6J
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 15:05:04 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o88D472q026303
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Wed, 08 Sep 2010 15:54:33 +0200
+Received: by wwi14 with SMTP id 14so42785wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Sep 2010 15:04:10 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OtKJq-0007lL-Je
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 15:04:06 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <4C874458.3060101@nedap.com>
-Date: Wed, 08 Sep 2010 15:04:06 +0200
-In-Reply-To: <4C874458.3060101@nedap.com> (Jaap de Jong's message of "Wed, 08
-	Sep 2010 10:07:52 +0200")
-Message-ID: <lytym0e69l.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Wed, 08 Sep 2010 06:53:15 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=WDrsNy1fkveOw5wsynd4jz3l94vqozleWkNG3oZFmT0=;
+	b=ayadVUkd/JMAWAg7p29CDj0IG0RVEWcJ2jldpUl+zd7WV92pKW8ipb+4F+SROsVCvz
+	3zFOQJiskBZsSRhkUxampysQhsebwS81LwcK5hrKaq+xgBchNTYGBOWeCEcfIWRk2t61
+	+i5o++H+BKMDCjY9m5kgAaPXtuzqEFSgAGRTo=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=lIWLaTncfcNuh10aAnzDDtfTOtPdT8LB/P1SnOd2O87x6tIVLTj2lIx4qPYLpCfHuF
+	LkWRDp9r/vGFYbCU+o1lHOZ0YJ2CySB+sfyGVrcYKNWh54wO+qVLk5pPYRW65LGMGdSF
+	p4wEJWaNEaQhVi1YHPYpg7WZ2nXXLvz2/X9oU=
+Received: by 10.227.129.12 with SMTP id m12mr1847wbs.102.1283953948269; Wed,
+	08 Sep 2010 06:52:28 -0700 (PDT)
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+Sender: kergoth@gmail.com
+Received: by 10.216.237.168 with HTTP; Wed, 8 Sep 2010 06:52:04 -0700 (PDT)
+In-Reply-To: <AANLkTimVjyq7CA2CqyaR_D-AJ-8Aawhoknzs1Xs1R2fc@mail.gmail.com>
+References: <AANLkTimVjyq7CA2CqyaR_D-AJ-8Aawhoknzs1Xs1R2fc@mail.gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 8 Sep 2010 06:52:04 -0700
+X-Google-Sender-Auth: BlP84CRMWmD-rgHdOgWErVDcR04
+Message-ID: <AANLkTi=-H-JnU5VyoGO_NEAgORF27GkM1X+VazqYq2Jt@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: cmake-native trouble making
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: OBSOLETE in base.bbclass
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,40 +55,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 13:05:05 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 08 Sep 2010 13:54:34 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Jaap de Jong <jaap.dejong@nedap.com> writes:
+On Wed, Sep 8, 2010 at 6:04 AM, Frans Meulenbroeks <
+fransmeulenbroeks@gmail.com> wrote:
 
-> $ bitbake cmake-native
-> ////
-> | [ 87%] Building CXX object
-> Source/CMakeFiles/CPackLib.dir/CPack/cmCPackNSISGenerator.o
-> | /usr/bin/ld: cannot find -ltinfo
-> | collect2: ld returned 1 exit status
-> | make[2]: *** [bin/ccmake] Error 1
-> | make[1]: *** [Source/CMakeFiles/ccmake.dir/all] Error 2
-> | make[1]: *** Waiting for unfinished jobs....
-> ////
+> Bumped upon this while peeking in base.bbclass:
 >
-> Is cmake-native_2.8.2.bb missing this line:
+>    # OBSOLETE in bitbake 1.7.4
+>    srcdate = bb.data.getVar('SRCDATE_%s' % pn, d, 1)
+>    if srcdate != None:
+>        bb.data.setVar('SRCDATE', srcdate, d)
 >
->     RDEPENDS = "ncurses-terminfo"
-
-no, 'DEPENDS = "ncurses-native"'; BUT:
-
-* it will cause problems on (host)distributions which do not have libtinfo
-  (e.g. RHEL5) and have ncurses-native in their ASSUME_PROVIDED
-
-* some hours ago I added a libtermcap.so compatibility symlink to
-  ncurses(-native) so that 5ea3047995421d99f7f3537cb8f9ae23f3185a9f
-  might not be needed anymore
-
-* build of the curses frontend should be disabled for cmake-native because
-  we do automated builds only; I do not know atm how to configure cmake
-  for this...
+>    use_nls = bb.data.getVar('USE_NLS_%s' % pn, d, 1)
+>    if use_nls != None:
+>        bb.data.setVar('USE_NLS', use_nls, d)
+>
+>    setup_checksum_deps(d)
+>
+> Not sure what part exactly is OBSOLETE, but I don't think we support
+> 1.7.4 any more, so I feel it is better to clean this and remove the
+> obsolete section.
+>
+> Any bitbake wiz care to comment on this?
 
 
-Enrico
-
+Hmm, I think that was from the time period when I wasn't involved in the
+project.  Hopefully RP can speak to this :)
+-- 
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
