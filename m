@@ -1,39 +1,31 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Ot7ty-0001v9-Rp
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <philip@balister.org>) id 1Ot8F5-00054S-6d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 01:48:36 +0200
-Received: (qmail 4858 invoked by uid 503); 7 Sep 2010 23:59:08 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 7 Sep 2010 23:59:08 -0000
-Received: (qmail 26418 invoked by uid 503); 7 Sep 2010 23:32:05 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 7 Sep 2010 23:32:04 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 8 Sep 2010 01:47:55 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 8 Sep 2010 01:47:53 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Sep 2010 01:46:39 +0200
-Message-Id: <1283903199-24538-2-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <1283903199-24538-1-git-send-email-eric@eukrea.com>
-References: <1283903199-24538-1-git-send-email-eric@eukrea.com>
+	Wed, 08 Sep 2010 02:10:24 +0200
+Received: (qmail 25122 invoked by uid 1003); 8 Sep 2010 00:09:41 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	8 Sep 2010 00:09:41 -0000
+Message-ID: <4C86D444.2050105@balister.org>
+Date: Tue, 07 Sep 2010 20:09:40 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 14927462441744379210
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
+In-Reply-To: <AANLkTikDDfWBM=VfC_XBzkp+-ZMycJ6kqkS56=_O6xW4@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2] python-2.6: remove python-distutils from python-modules
+Subject: Re: OE donations
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,33 +39,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 07 Sep 2010 23:48:37 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Wed, 08 Sep 2010 00:10:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-this module seems only needed for development. No installing it with
-python-modules saves 6MB on the image.
+On 09/03/2010 05:26 PM, Cliff Brake wrote:
+> Hello,
+>
+> There is now a donation page on the OE website:
+>
+> http://wiki.openembedded.net/index.php/Donate
+>
+> The funds will be used by the board
+> (http://wiki.openembedded.net/index.php/Organization) for various
+> purposes, so please discuss with one of them if you have questions.  I
+> would assume there will be some type of report published as to how
+> money is spent, but again that is not my responsibility.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/python/python-2.6-manifest.inc |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+The treasurer (Florian Bloor) is responsible for presenting the eV's 
+finances to the membership. Typically, this occurs during a General 
+Assembly.
 
-diff --git a/recipes/python/python-2.6-manifest.inc b/recipes/python/python-2.6-manifest.inc
-index eec9f22..ff54d36 100644
---- a/recipes/python/python-2.6-manifest.inc
-+++ b/recipes/python/python-2.6-manifest.inc
-@@ -266,7 +266,7 @@ RDEPENDS_python-audio="python-core"
- FILES_python-audio="${libdir}/python2.6/wave.* ${libdir}/python2.6/chunk.* ${libdir}/python2.6/sndhdr.* ${libdir}/python2.6/lib-dynload/ossaudiodev.so ${libdir}/python2.6/lib-dynload/audioop.so "
- 
- DESCRIPTION_python-modules="All Python modules"
--RDEPENDS_python-modules="python-profile python-threading python-distutils python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-resource python-json python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-numbers python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio  "
-+RDEPENDS_python-modules="python-profile python-threading python-doctest python-stringold python-codecs python-ctypes python-pickle python-datetime python-core python-io python-compiler python-compression python-re python-xmlrpc python-terminal python-email python-image python-tests python-resource python-json python-difflib python-math python-syslog python-hotshot python-unixadmin python-textutils python-tkinter python-gdbm python-elementtree python-fcntl python-netclient python-pprint python-netserver python-curses python-smtpd python-html python-readline python-subprocess python-pydoc python-logging python-mailbox python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittest python-multiprocessing python-robotparser python-compile python-debugger python-pkgutil python-shell python-bsddb python-numbers python-mmap python-zlib python-db python-crypt python-idle python-lang python-audio  "
- ALLOW_EMPTY_python-modules = "1"
- 
- 
--- 
-1.6.3.3
+> Our immediate financial need is to upgrade storage on our server hardware:
+>
+> 4 new 1.5TB drives. Approx $1k
 
+In the past the eV has received money to help pay people's travel to 
+events that benefit the project.
+
+It would be nice to have money on hand so we can be more responsive when 
+the people working on the hosting need help.
+
+Philip
+
+
+>
+> Thanks,
+> Cliff
+>
 
 
