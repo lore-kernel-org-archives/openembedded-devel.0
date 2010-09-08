@@ -1,26 +1,29 @@
 Received: from 68.mail-out.ovh.net ([91.121.185.69])
 	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OtLFX-0003F4-6g
+	(envelope-from <eric@eukrea.com>) id 1OtLFX-0003F5-6q
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 16:03:48 +0200
-Received: (qmail 20539 invoked by uid 503); 8 Sep 2010 14:14:21 -0000
+	Wed, 08 Sep 2010 16:03:49 +0200
+Received: (qmail 20538 invoked by uid 503); 8 Sep 2010 14:14:21 -0000
 Received: from 30.mail-out.ovh.net (213.186.62.213)
 	by 68.mail-out.ovh.net with SMTP; 8 Sep 2010 14:14:21 -0000
-Received: (qmail 6337 invoked by uid 503); 8 Sep 2010 13:47:09 -0000
+Received: (qmail 6335 invoked by uid 503); 8 Sep 2010 13:47:09 -0000
 Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
 	by 30.mail-out.ovh.net with SMTP; 8 Sep 2010 13:47:09 -0000
 Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
 	by b0.ovh.net with SMTP; 8 Sep 2010 16:03:02 +0200
 Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
 	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 8 Sep 2010 16:03:00 +0200
+	by ns0.ovh.net with SMTP; 8 Sep 2010 16:03:01 +0200
 From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Sep 2010 16:01:41 +0200
-Message-Id: <1283954503-25418-1-git-send-email-eric@eukrea.com>
+Date: Wed,  8 Sep 2010 16:01:43 +0200
+Message-Id: <1283954503-25418-3-git-send-email-eric@eukrea.com>
 X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <1283954503-25418-2-git-send-email-eric@eukrea.com>
+References: <1283954503-25418-1-git-send-email-eric@eukrea.com>
+	<1283954503-25418-2-git-send-email-eric@eukrea.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 10922354997672586569
+X-Ovh-Tracer-Id: 10922636472649297227
 X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
 X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
 X-SA-Exim-Connect-IP: 91.121.185.69
@@ -31,7 +34,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/3] rlpr 2.05: unbreak recipe
+Subject: [PATCH 3/3] rlpr: remove version 2.05
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,48 +52,40 @@ X-List-Received-Date: Wed, 08 Sep 2010 14:03:49 -0000
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: 8bit
 
-* source URL is no more working so use debian mirrors
-* fix GNU_HASH issue
-* tested on armv5
+now replaced by 2.06
 
 Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/rlpr/rlpr_2.05.bb |   18 ++++++++++--------
- 1 files changed, 10 insertions(+), 8 deletions(-)
+ recipes/rlpr/rlpr_2.05.bb |   20 --------------------
+ 1 files changed, 0 insertions(+), 20 deletions(-)
+ delete mode 100644 recipes/rlpr/rlpr_2.05.bb
 
 diff --git a/recipes/rlpr/rlpr_2.05.bb b/recipes/rlpr/rlpr_2.05.bb
-index 47ac9c3..2751b9f 100644
+deleted file mode 100644
+index 2751b9f..0000000
 --- a/recipes/rlpr/rlpr_2.05.bb
-+++ b/recipes/rlpr/rlpr_2.05.bb
-@@ -1,18 +1,20 @@
++++ /dev/null
+@@ -1,20 +0,0 @@
+-DESCRIPTION = "rlpr makes it possible to print files on remote sites to your networked printers"
+-HOMEPAGE = "http://freshmeat.net/projects/rlpr/"
 -SECTION = "console/network"
- DESCRIPTION = "rlpr makes it possible to print files on remote sites to your networked printers"
--HOMEPAGE = "http://truffula.com/rlpr/"
-+HOMEPAGE = "http://freshmeat.net/projects/rlpr/"
-+SECTION = "console/network"
- LICENSE = "GPL"
--SRC_URI = "ftp://www.truffula.com/pub/rlpr-2.05.tar.gz"
-+PR = "r1"
-+
-+SRC_URI = "${DEBIAN_MIRROR}/main/r/rlpr/rlpr_2.05.orig.tar.gz"
-+SRC_URI[md5sum] = "64ee8ccd94aabc90b9f40d0b2ad79e79"
-+SRC_URI[sha256sum] = "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f3efe22d16af14ba9a"
- 
- inherit autotools
- 
- do_configure() {
--	oe_runconf
-+        oe_runconf
- }
+-LICENSE = "GPL"
+-PR = "r1"
 -
- do_install() {
--	make install DESTDIR=${D}
-+        make install DESTDIR=${D}
- }
- 
+-SRC_URI = "${DEBIAN_MIRROR}/main/r/rlpr/rlpr_2.05.orig.tar.gz"
 -SRC_URI[md5sum] = "64ee8ccd94aabc90b9f40d0b2ad79e79"
 -SRC_URI[sha256sum] = "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f3efe22d16af14ba9a"
-+TARGET_CC_ARCH += " ${LDFLAGS}"
+-
+-inherit autotools
+-
+-do_configure() {
+-        oe_runconf
+-}
+-do_install() {
+-        make install DESTDIR=${D}
+-}
+-
+-TARGET_CC_ARCH += " ${LDFLAGS}"
 -- 
 1.6.3.3
 
