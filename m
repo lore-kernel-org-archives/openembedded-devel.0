@@ -1,32 +1,35 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Fahad_Usman@mentor.com>) id 1OtJ5J-0007Cs-6g
+	(envelope-from <sledz@dresearch.de>) id 1OtJLU-0008RB-Q6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 13:45:04 +0200
-Received: from nat-dem.mentorg.com ([139.181.124.2]
-	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
-	id 1OtJ4a-0007Q7-2v from Fahad_Usman@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 04:44:16 -0700
-Received: from localhost.localdomain ([137.202.157.210]) by
-	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Wed, 8 Sep 2010 13:44:14 +0200
-From: Fahad Usman <fahad_usman@mentor.com>
+	Wed, 08 Sep 2010 14:03:41 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 6AB78491278;
+	Wed,  8 Sep 2010 14:01:05 +0200 (CEST)
+Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
+	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
+	Wed, 8 Sep 2010 14:01:05 +0200
+Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
+	id D8C7C2DA4D; Wed,  8 Sep 2010 14:01:04 +0200 (CEST)
+From: Steffen Sledz <sledz@dresearch.de>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Sep 2010 16:43:51 +0500
-Message-Id: <1283946231-29039-1-git-send-email-fahad_usman@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 08 Sep 2010 11:44:14.0603 (UTC)
-	FILETIME=[29683DB0:01CB4F4B]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
+Date: Wed,  8 Sep 2010 14:00:46 +0200
+Message-Id: <1283947246-30457-1-git-send-email-sledz@dresearch.de>
+X-Mailer: git-send-email 1.7.1
+In-Reply-To: <4C86151D.50801@dresearch.de>
+References: <4C86151D.50801@dresearch.de>
+X-OriginalArrivalTime: 08 Sep 2010 12:01:05.0543 (UTC)
+	FILETIME=[83F97170:01CB4F4D]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] glib-1.2: merged native and non-native recipes
+Subject: [PATCH] gtk+: fix configure problem for native build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,128 +43,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 11:45:05 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 12:04:36 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 12:04:36 -0000
 
-* removed the glib-1.2-native_1.2.10.bb file
-* added NATIVE_INSTALL_WORKS = "1"
-* added BBCLASSEXTEND = "native"
-* converted do_stage of native recipe to do_install_virtclass-native in the combined recipe
-* added DEPENDS_virtclass-native = "" to avoid dependencies loops
-* added gettext in inherit because it was needed by the native recipes
-* bumped PR
-
-Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+Signed-off-by: Steffen Sledz <sledz@dresearch.de>
 ---
- recipes/glib-1.2/glib-1.2-native_1.2.10.bb |   49 ----------------------------
- recipes/glib-1.2/glib-1.2_1.2.10.bb        |   20 ++++++++++-
- 2 files changed, 18 insertions(+), 51 deletions(-)
+ recipes/gtk+/gtk+_2.18.6.bb |    2 +-
+ recipes/gtk+/gtk+_2.20.0.bb |    2 +-
+ recipes/gtk+/gtk+_2.20.1.bb |    2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/glib-1.2/glib-1.2-native_1.2.10.bb b/recipes/glib-1.2/glib-1.2-native_1.2.10.bb
-deleted file mode 100644
-index d00e9a1..0000000
---- a/recipes/glib-1.2/glib-1.2-native_1.2.10.bb
-+++ /dev/null
-@@ -1,49 +0,0 @@
--PR = "r0"
--LICENSE = "LGPL"
--DESCRIPTION = "GLib 1.2 is a deprecated libray to \
--provide support for old glib 1.2 based applications"
--SECTION = "libs"
--PRIORITY = "optional"
--DEPENDS = ""
--
--FILESDIR = "${@os.path.dirname(bb.data.getVar('FILE',d,1))}/glib-1.2-${PV}"
--
--EXTRA_OECONF = "--disable-debug"
--
--SRC_URI = "ftp://ftp.gtk.org/pub/gtk/v1.2/glib-${PV}.tar.gz \
--           file://glibconfig-sysdefs.h \
--           file://depcomp \
--           file://glib-reconf-fix;apply=yes \
--           file://posix-conf-changes;apply=yes \
--           file://gcc-3.4-pretty_function;apply=yes"
--
--
--S = "${WORKDIR}/glib-${PV}"
--
--inherit autotools pkgconfig native gettext
--
--acpaths = ""
--do_configure_prepend () {
--	install -m 0644 ${WORKDIR}/glibconfig-sysdefs.h .
--	install -m 0644 ${WORKDIR}/depcomp .
--	rm -f ltconfig acinclude.m4 libtool ltmain.sh
--}
--
--
--do_stage () {
--	oe_libinstall -so libglib ${STAGING_LIBDIR}
--	oe_libinstall -so -C gmodule libgmodule ${STAGING_LIBDIR}
--	oe_libinstall -so -C gthread libgthread ${STAGING_LIBDIR}
--	autotools_stage_includes
--	install -d ${STAGING_INCDIR}/glib-1.2
--	install -m 0755 ${S}/glibconfig.h ${STAGING_INCDIR}/glib-1.2/glibconfig.h
--	install -d ${STAGING_DATADIR}/aclocal
--	install -m 0644 ${S}/glib.m4 ${STAGING_DATADIR}/aclocal/glib-1.2.m4
--}
--
--do_install () {
--	:
--}
--
--SRC_URI[md5sum] = "6fe30dad87c77b91b632def29dd69ef9"
--SRC_URI[sha256sum] = "6e1ce7eedae713b11db82f11434d455d8a1379f783a79812cd2e05fc024a8d9f"
-diff --git a/recipes/glib-1.2/glib-1.2_1.2.10.bb b/recipes/glib-1.2/glib-1.2_1.2.10.bb
-index 72ee826..67266d4 100644
---- a/recipes/glib-1.2/glib-1.2_1.2.10.bb
-+++ b/recipes/glib-1.2/glib-1.2_1.2.10.bb
-@@ -4,7 +4,8 @@ SECTION = "libs"
- PRIORITY = "optional"
- LICENSE = "LGPL"
- DEPENDS = "glib-1.2-native"
--PR = "r4"
-+DEPENDS_virtclass-native = ""
-+PR = "r5"
+diff --git a/recipes/gtk+/gtk+_2.18.6.bb b/recipes/gtk+/gtk+_2.18.6.bb
+index 237689d..864f4ba 100644
+--- a/recipes/gtk+/gtk+_2.18.6.bb
++++ b/recipes/gtk+/gtk+_2.18.6.bb
+@@ -16,7 +16,7 @@ XKBTOGGLE = " --disable-xkb"
+ XKBTOGGLE_angstrom = ""
  
- LEAD_SONAME = "libglib-1.2.*"
+ EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
+-EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
++EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
  
-@@ -22,7 +23,7 @@ SRC_URI = "ftp://ftp.gtk.org/pub/gtk/v1.2/glib-${PV}.tar.gz \
+ PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
  
- S = "${WORKDIR}/glib-${PV}"
+diff --git a/recipes/gtk+/gtk+_2.20.0.bb b/recipes/gtk+/gtk+_2.20.0.bb
+index 2c061b7..1e07e83 100644
+--- a/recipes/gtk+/gtk+_2.20.0.bb
++++ b/recipes/gtk+/gtk+_2.20.0.bb
+@@ -20,7 +20,7 @@ XKBTOGGLE = " --disable-xkb"
+ XKBTOGGLE_angstrom = ""
  
--inherit autotools pkgconfig binconfig
-+inherit autotools pkgconfig binconfig gettext
+ EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
+-EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
++EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
  
- acpaths = ""
- do_configure_prepend () {
-@@ -31,6 +32,17 @@ do_configure_prepend () {
- 	rm -f ltconfig acinclude.m4 libtool ltmain.sh
- }
+ PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
  
-+do_install_virtclass-native () {
-+        oe_libinstall -so libglib ${D}${libdir}
-+        oe_libinstall -so -C gmodule libgmodule ${D}${libdir}
-+        oe_libinstall -so -C gthread libgthread ${D}${libdir}
-+        autotools_do_install
-+        install -d ${D}${includedir}/glib-1.2
-+        install -m 0644 glibconfig.h glib.h ${D}${includedir}/glib-1.2/
-+        install -d ${D}${datadir}/aclocal
-+        install -m 0644 ${S}/glib.m4 ${D}${datadir}/aclocal/glib-1.2.m4
-+}
-+
- do_install_append () {
- 	install -d ${D}${includedir}/glib-1.2
- 	install -m 0644 glibconfig.h glib.h ${D}${includedir}/glib-1.2/
-@@ -42,3 +54,7 @@ FILES_${PN}-dev += "${libdir}/glib/include/glibconfig.h"
+diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
+index 1568e61..ca5e197 100644
+--- a/recipes/gtk+/gtk+_2.20.1.bb
++++ b/recipes/gtk+/gtk+_2.20.1.bb
+@@ -24,7 +24,7 @@ XKBTOGGLE = " --disable-xkb"
+ XKBTOGGLE_angstrom = ""
  
- SRC_URI[md5sum] = "6fe30dad87c77b91b632def29dd69ef9"
- SRC_URI[sha256sum] = "6e1ce7eedae713b11db82f11434d455d8a1379f783a79812cd2e05fc024a8d9f"
-+
-+BBCLASSEXTEND = "native"
-+
-+NATIVE_INSTALL_WORKS = "1"
+ EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
+-EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
++EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
+ 
+ PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
+ 
 -- 
-1.6.3.3
+1.7.1
 
 
 
