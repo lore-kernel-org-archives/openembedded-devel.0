@@ -1,45 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtOnq-0003tD-UX
+	(envelope-from <chasemaupin03@gmail.com>) id 1OtPAR-0007JG-QT
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 19:51:23 +0200
-Received: by iwn2 with SMTP id 2so200537iwn.6
+	Wed, 08 Sep 2010 20:14:44 +0200
+Received: by gwb1 with SMTP id 1so201318gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 10:50:40 -0700 (PDT)
+	Wed, 08 Sep 2010 11:14:01 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=OWioKWao8apN8MLr0GT7fl0SGiTaRbTJXEmMoMf3DRM=;
-	b=ShdE/bVqwHEClhC4/jI+noL+tqil4V/oRA1VtJpCAD7rvUmRlieSWOWcLW9U40m0f8
-	2ronPJVChaH2V29kLW9jafbBjMTkqyfv9rukvddANFnVSpW+gEnNyXo8gImdEZuWYOu9
-	7v/2ny3xUWAebI7uOoFuQZnZpuIRh1TMEwuKE=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=NA1zVWRXMugJHm+4dL0C3IFFwFf0R0U7SqYHjjKGoEI=;
+	b=e+ZX4uHaY2TR8yIoyL8Osf10oLDH6cUz6THF/uqKw3BIjcoZccRz40aSj2vQHGLUX3
+	GIZtnWBQCUlHpXSGGShZaXRfNkMfntKiZw9am6LYZDRs0gl+GOUsXXWvAAJyHABbM1qY
+	kiAs6ERcvrb7Mz5wLS5S1Fk6EThIK1RosX2Wg=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=aFBstDQBOlVki6n/Pg8ko9K0M40vnZaHIdn0bbkf8P8px5u8bo31TQRnTXLJ+s+unX
-	ThTeaBTQQAlSZWMHzzy6mW+dsNyXdjXX5vlG52pm6LgKSRqkElDuYD650dxm2ZMuR1WY
-	rXRs0Y0aTpBSLa5TpUHDyepburzi4CAD87HwY=
-MIME-Version: 1.0
-Received: by 10.231.169.210 with SMTP id a18mr10174308ibz.5.1283968233792;
-	Wed, 08 Sep 2010 10:50:33 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 10:50:33 -0700 (PDT)
-In-Reply-To: <AANLkTinGsnbP++GV+sLj3Q0g5R1HHHkq7NtBVWrhSmzh@mail.gmail.com>
-References: <AANLkTikC4v+QEpYsos2=f4wtEUUCt8Q=VK9ByT56pn-L@mail.gmail.com>
-	<AANLkTinGsnbP++GV+sLj3Q0g5R1HHHkq7NtBVWrhSmzh@mail.gmail.com>
-Date: Wed, 8 Sep 2010 19:50:33 +0200
-Message-ID: <AANLkTinbuOq_8bFSys6=b2pbEq6Gg7cssk+Fhhj2yYOy@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=OLZMlxkKTwnno7JAFDtKIlnkWkFsxxxvYzaZOiOzjOd9CQLudZfR0YT8heY96PpJO0
+	6/OHov/tDfaT3Ei6CF0u69ot1GmKqF/aXM6cqti7j8/CAUb+2FjJtId32sEnXjOHOLI1
+	f+hjiOKGetVCXv42kJXZ727QOt7x/tTZS/IJk=
+Received: by 10.151.102.8 with SMTP id e8mr163225ybm.83.1283969635626;
+	Wed, 08 Sep 2010 11:13:55 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id m12sm331851ybn.19.2010.09.08.11.13.53
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 08 Sep 2010 11:13:54 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed,  8 Sep 2010 13:03:55 -0500
+Message-Id: <1283969035-1397-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 74.125.83.47
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: pulseaudio issue
+Subject: [PATCHv2] common_use_cases: add description of SOC_FAMILY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,59 +51,53 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 17:51:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 08 Sep 2010 18:14:44 -0000
 
-2010/9/7 Khem Raj <raj.khem@gmail.com>:
-> On Sun, Sep 5, 2010 at 2:10 AM, Frans Meulenbroeks
-> <fransmeulenbroeks@gmail.com> wrote:
->> I have an issue with pulseaudio:
->>
->> | =A0 CC =A0 =A0 libpulsecore_0.9.21_la-svolume_arm.lo
->> | pulsecore/svolume_arm.c: In function 'pa_volume_s16ne_arm':
->> | pulsecore/svolume_arm.c:53: error: can't find a register in class
->> 'LO_REGS' while reloading 'asm'
->> | pulsecore/svolume_arm.c:53: error: 'asm' operand has impossible constr=
-aints
->> | make[3]: *** [libpulsecore_0.9.21_la-svolume_arm.lo] Error 1
->>
->> From searching the irc log this is a longer standing issue.
->> Is there any suggested solution for this.
->> If I understand corrrectly it affects all our armv4 and armv5 machines.
->>
->
-> well its not arm v4 or v5 but its thumb. If you use arm instruction
-> set then it would
-> work. set ARM_INSTRUCTION_SET =3D "arm" in the recipe and retry.
->
-That seems to have helped a little bit but not enough.
-Apparently there is armv6 asm or so in it:
+* Added a description of the SOC_FAMILY variable that
+  can be set in the machine configuration files.
 
-|   CC     libpulsecore_0.9.21_la-svolume_arm.lo
-| {standard input}: Assembler messages:
-| {standard input}:33: Error: selected processor does not support
-`ssat r0,#16,r0'
-| {standard input}:47: Error: selected processor does not support
-`ssat r2,#16,r2'
-| {standard input}:48: Error: selected processor does not support
-`ssat r3,#16,r3'
-| {standard input}:49: Error: selected processor does not support
-`pkhbt r0,r3,r2,LSL#16'
-| {standard input}:65: Error: selected processor does not support
-`ssat r2,#16,r2'
-| {standard input}:66: Error: selected processor does not support
-`ssat r3,#16,r3'
-| {standard input}:67: Error: selected processor does not support
-`ssat r4,#16,r4'
-| {standard input}:68: Error: selected processor does not support
-`ssat r5,#16,r5'
-| {standard input}:69: Error: selected processor does not support
-`pkhbt r0,r3,r2,LSL#16'
-| {standard input}:70: Error: selected processor does not support
-`pkhbt r1,r5,r4,LSL#16'
-| make[3]: *** [libpulsecore_0.9.21_la-svolume_arm.lo] Error 1
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ docs/usermanual/chapters/common_use_cases.xml |   24 ++++++++++++++++++++++++
+ 1 files changed, 24 insertions(+), 0 deletions(-)
 
-see also: http://tinderbox.openembedded.net/public/logs/task/7634513.txt
+diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs/usermanual/chapters/common_use_cases.xml
+index d86d0ca..ef81b95 100644
+--- a/docs/usermanual/chapters/common_use_cases.xml
++++ b/docs/usermanual/chapters/common_use_cases.xml
+@@ -94,6 +94,30 @@ SRCDATE = "20061014"
+         </listitem>
+       </itemizedlist></para>
+ 
++    <para>There are also some optional variables that can be defined:
++    <itemizedlist>
++    <listitem>
++          <para><command>SOC_FAMILY</command> describes a family of processors
++            that all share common features such as kernel versions,
++            bootloaders, etc.  This is used to allow overrides for a whole
++            set of devices rather than per machine overrides being used.
++            The use of SOC_FAMILY as an override is currently a distribution
++            or local setting.
++          </para>
++          <para>
++            NOTE: SOC_FAMILY is different than MACHINE_CLASS in that 
++            MACHINE_CLASS is intended to specify a grouping of devices
++            that may have different processors but share common features.
++            For example all OMAP3 devices can be described using the SOC_FAMILY
++            "omap3" and this value can be used in overrides to prevent
++            requiring multiple machine specific overrides.  MACHINE_CLASS
++            might be used to describe a class of devices such as a cell
++            phone in which the processor may be different but the
++            features such as touchscreen, GPS, modem, etc are the same.
++          </para>
++        </listitem>
++    </itemizedlist></para>
++
+     <para>Next the kernel recipe needs to be added if it doesn't already exist.
+     </para>
+   </section>
+-- 
+1.7.0.4
+
 
 
