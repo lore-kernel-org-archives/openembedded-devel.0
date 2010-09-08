@@ -1,32 +1,37 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OtLjF-0002Ut-4h
+	(envelope-from <sledz@dresearch.de>) id 1OtLpi-0002iL-OY
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 16:34:26 +0200
-Received: (qmail 8333 invoked by uid 1003); 8 Sep 2010 14:33:42 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	8 Sep 2010 14:33:42 -0000
-Message-ID: <4C879EC5.10402@balister.org>
-Date: Wed, 08 Sep 2010 10:33:41 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
+	Wed, 08 Sep 2010 16:41:07 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id 48B51491282
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed,  8 Sep 2010 16:40:27 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 8 Sep 2010 16:40:27 +0200
+Message-ID: <4C87A071.9020908@dresearch.de>
+Date: Wed, 08 Sep 2010 16:40:49 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100825 Lightning/1.0b2 Thunderbird/3.1.3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>	<i6629i$d5c$1@dough.gmane.org>
-	<201009081609.32135.pieterg@gmx.com>
-In-Reply-To: <201009081609.32135.pieterg@gmx.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+References: <4C86151D.50801@dresearch.de>
+	<1283947246-30457-1-git-send-email-sledz@dresearch.de>
+	<4C877B47.8020609@xora.org.uk>
+In-Reply-To: <4C877B47.8020609@xora.org.uk>
+X-OriginalArrivalTime: 08 Sep 2010 14:40:27.0303 (UTC)
+	FILETIME=[C73A3B70:01CB4F63]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Images no longer automatically include libstdc++6
+Subject: Re: [PATCH] gtk+: fix configure problem for native build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,36 +45,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 14:34:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Wed, 08 Sep 2010 14:41:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: 7bit
 
-On 09/08/2010 10:09 AM, pieterg wrote:
-> On Tuesday 07 September 2010 21:03:14 Koen Kooi wrote:
->> On 07-09-10 18:18, Khem Raj wrote:
->>> On Tue, Sep 7, 2010 at 5:52 AM, Koen Kooi<k.kooi@student.utwente.nl>
-> wrote:
->>>> it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
->>>> create a libstdc6++ package, but it does create a libstdc-dev package.
->>>
->>> I see thats plausible. I think its time to look into separating gcc
->>> runtime from gcc on the lines of poky.
->>
->> I put back libgcc and libstdc++ for the time being:
->>
->> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=241b8865f20
->> b9e3c3beb334535e6cd8452cbf47d
->>
->> I have a feeling the others needs to put back as well (e.g. fortran),
->> but this fixes the immediate problem.
->
-> Not for me, after a clean build today packages are still missing libstdc++
-> in their deps (and as a result the images are still missing libstdc++).
-> So there must be more to it.
+Patch pushed to the testing-next branch by mistake. :(
 
-Does anyone have any idea what commit caused this breakage? It is 
-causing a lot of problems for people.
+Big problem?
 
-Philip
+Sorry,
+Steffen
+
+
 
 
