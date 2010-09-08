@@ -1,35 +1,39 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OtJLU-0008RB-Q6
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OtJMS-0003ge-0Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 14:03:41 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 6AB78491278;
-	Wed,  8 Sep 2010 14:01:05 +0200 (CEST)
-Received: from mobil-400-586.intern.dresearch.de ([10.32.11.62]) by
-	exchange.intern.dresearch.de with Microsoft SMTPSVC(6.0.3790.4675); 
-	Wed, 8 Sep 2010 14:01:05 +0200
-Received: by mobil-400-586.intern.dresearch.de (Postfix, from userid 1000)
-	id D8C7C2DA4D; Wed,  8 Sep 2010 14:01:04 +0200 (CEST)
-From: Steffen Sledz <sledz@dresearch.de>
+	Wed, 08 Sep 2010 14:04:35 +0200
+Received: (qmail 2608 invoked by uid 503); 8 Sep 2010 12:13:20 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 8 Sep 2010 12:13:20 -0000
+Received: (qmail 32767 invoked by uid 503); 8 Sep 2010 11:46:09 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 8 Sep 2010 11:46:09 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 8 Sep 2010 14:02:03 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 8 Sep 2010 14:02:01 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed,  8 Sep 2010 14:00:46 +0200
-Message-Id: <1283947246-30457-1-git-send-email-sledz@dresearch.de>
-X-Mailer: git-send-email 1.7.1
-In-Reply-To: <4C86151D.50801@dresearch.de>
-References: <4C86151D.50801@dresearch.de>
-X-OriginalArrivalTime: 08 Sep 2010 12:01:05.0543 (UTC)
-	FILETIME=[83F97170:01CB4F4D]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+Date: Wed,  8 Sep 2010 14:00:42 +0200
+Message-Id: <1283947243-26897-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+In-Reply-To: <A88FB909-75F8-430A-B6E7-16C4A1C51A13@vanille-media.de>
+References: <A88FB909-75F8-430A-B6E7-16C4A1C51A13@vanille-media.de>
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 8879128142317923657
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] gtk+: fix configure problem for native build
+Subject: [PATCH 1/2] generate-manifest-2.6.py: tune python-modules' RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,57 +47,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 12:04:36 -0000
-X-List-Received-Date: Wed, 08 Sep 2010 12:04:36 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 12:05:22 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 12:05:22 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+* python-dev: pulls several dev packages leading to a >256MB image instead
+of a 60MB image without this packages
+
+* python-distutils: seems only needed for development. No installing it with
+python-modules saves 6MB on the image.
+
+Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- recipes/gtk+/gtk+_2.18.6.bb |    2 +-
- recipes/gtk+/gtk+_2.20.0.bb |    2 +-
- recipes/gtk+/gtk+_2.20.1.bb |    2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ contrib/python/generate-manifest-2.6.py |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/recipes/gtk+/gtk+_2.18.6.bb b/recipes/gtk+/gtk+_2.18.6.bb
-index 237689d..864f4ba 100644
---- a/recipes/gtk+/gtk+_2.18.6.bb
-+++ b/recipes/gtk+/gtk+_2.18.6.bb
-@@ -16,7 +16,7 @@ XKBTOGGLE = " --disable-xkb"
- XKBTOGGLE_angstrom = ""
+diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/generate-manifest-2.6.py
+index 1a0f1d3..136cb2e 100755
+--- a/contrib/python/generate-manifest-2.6.py
++++ b/contrib/python/generate-manifest-2.6.py
+@@ -12,7 +12,7 @@ import time
+ VERSION = "2.6.4"
  
- EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
--EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
-+EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
+ __author__ = "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
+-__version__ = "20100711"
++__version__ = "20100908"
  
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
+ class MakefileMaker:
  
-diff --git a/recipes/gtk+/gtk+_2.20.0.bb b/recipes/gtk+/gtk+_2.20.0.bb
-index 2c061b7..1e07e83 100644
---- a/recipes/gtk+/gtk+_2.20.0.bb
-+++ b/recipes/gtk+/gtk+_2.20.0.bb
-@@ -20,7 +20,7 @@ XKBTOGGLE = " --disable-xkb"
- XKBTOGGLE_angstrom = ""
+@@ -123,7 +123,7 @@ class MakefileMaker:
+         line = 'RDEPENDS_python-modules="'
  
- EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
--EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
-+EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
+         for name, data in self.packages.iteritems():
+-            if name != 'python-core-dbg':
++            if name not in ['python-core-dbg', 'python-dev', 'python-distutils']:
+                 line += "%s " % name
  
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
+         self.out( "%s \"" % line )
+@@ -164,7 +164,7 @@ if __name__ == "__main__":
+     m.addPackage( "python-core-dbg", "Python core module debug information", "python-core",
+     "config/.debug lib-dynload/.debug ${bindir}/.debug ${libdir}/.debug" )
  
-diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
-index 1568e61..ca5e197 100644
---- a/recipes/gtk+/gtk+_2.20.1.bb
-+++ b/recipes/gtk+/gtk+_2.20.1.bb
-@@ -24,7 +24,7 @@ XKBTOGGLE = " --disable-xkb"
- XKBTOGGLE_angstrom = ""
+-    m.addPackage( "python-devel", "Python Development Package", "python-core",
++    m.addPackage( "python-dev", "Python Development Package", "python-core",
+     "${includedir} ${libdir}/libpython2.6.so config" ) # package
  
- EXTRA_OECONF = "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_can_sniff=yes"
--EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg"
-+EXTRA_OECONF_append_virtclass-native = " --without-libtiff --without-libjpeg --disable-cups"
- 
- PACKAGES_DYNAMIC = "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* gtk-printbackend-*"
- 
+     m.addPackage( "python-idle", "Python Integrated Development Environment", "python-core python-tkinter",
 -- 
-1.7.1
+1.6.3.3
 
 
 
