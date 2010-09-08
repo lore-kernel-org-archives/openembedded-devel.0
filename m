@@ -1,38 +1,40 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OtPi3-0000yE-IU
+	(envelope-from <Tom_Rini@mentor.com>) id 1OtQ0q-0001lv-9O
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 20:49:28 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o88Imf27031873
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 8 Sep 2010 20:48:42 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OtPhI-0005OJ-KH
+	Wed, 08 Sep 2010 21:08:52 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OtQ0A-0000lp-5c from Tom_Rini@mentor.com 
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 20:48:41 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-To: openembedded-devel@lists.openembedded.org
-References: <AANLkTineLTCDtymfwbaAJXcrz0vB=V4++=HOwEA7wQHU@mail.gmail.com>
-Date: Wed, 08 Sep 2010 20:48:40 +0200
-In-Reply-To: <AANLkTineLTCDtymfwbaAJXcrz0vB=V4++=HOwEA7wQHU@mail.gmail.com>
-	(Frans Meulenbroeks's message of "Mon, 6 Sep 2010 19:50:15 +0200")
-Message-ID: <lybp88kr5j.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
+	Wed, 08 Sep 2010 12:08:10 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Wed, 8 Sep 2010 12:08:09 -0700
+Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Wed, 8 Sep 2010 13:08:08 -0600
+Message-ID: <4C87DF14.7010602@mentor.com>
+Date: Wed, 08 Sep 2010 12:08:04 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTi=3gKS1xKPCLJOg0vxpVSgxOwx9N-GmiQS1zO9g@mail.gmail.com>	<AANLkTi=YqpnwM52LoTsVSb6wZJaGEXfyxrQiV_tMjwSH@mail.gmail.com>	<4C87D894.9050609@mentor.com>
+	<AANLkTino843P2Cxr8g=s6H7pv3dTTH1iAp051MwPN6w8@mail.gmail.com>
+In-Reply-To: <AANLkTino843P2Cxr8g=s6H7pv3dTTH1iAp051MwPN6w8@mail.gmail.com>
+X-OriginalArrivalTime: 08 Sep 2010 19:08:09.0188 (UTC)
+	FILETIME=[2CDB6240:01CB4F89]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: libtermcap
+Subject: Re: recipe simplification questions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -46,28 +48,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 18:49:28 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Wed, 08 Sep 2010 19:08:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Frans Meulenbroeks <fransmeulenbroeks@gmail.com> writes:
+Frans Meulenbroeks wrote:
+> 2010/9/8 Tom Rini <tom_rini@mentor.com>:
+>> Khem Raj wrote:
+>>> On Wed, Sep 8, 2010 at 10:41 AM, Frans Meulenbroeks
+>>> <fransmeulenbroeks@gmail.com> wrote:
+>>>> Hi
+>>>>
+>>>> While browsing through a recipe I stumbled upon the following two
+>>>> functions:
+>> [snip]
+>>>> do_install() {
+>>>>       make install DESTDIR=${D}
+>>>> }
+>>>>
+>>> this if used in a recipe which inherits autotools could be for getting
+>>> parallelism out of context during install but not during compile.
+>>> again this kind of stuff should be avoided.
+>> Not true (but I had to double check just now, so it's quite possible some
+>> others have assumed this behavior).  If we look at bitbake.conf:
+>> EXTRA_OEMAKE_prepend_task_do_compile = "${PARALLEL_MAKE} "
+>> EXTRA_OEMAKE_prepend_task-compile = "${PARALLEL_MAKE} "
+>>
+>> So in the case of literally having DESTDIR=${D}, these can just go away.
+>>  There are some annoying cases however where it's not DESTDIR but some other
+>> variable.  IMHO, it's questionable if it'd be cleaner to do a custom one
+>> line do_install vs EXTRA_OEMAKE_append_task-do_install = "PREFIX=${D}"
+> 
+> Woudht aht have to be an EXTRA_OEMAKE_append_task-do_install ?
+> I see also recipes that just add PREFIX or DESTDIR to EXTRA_OEMAKE
+> (actually I would expect the presence or absence not to be an issue in
+> most cases (as DESTDIR is quite likely not used during compile)
 
-> Eric peeked into the termcap problem. I've tested his patch and it
-> works. He will probably push a patch later today.
->
-> The termcap problem from asterisk is not related. It cannot find
-> libtermcap. This one does not exist any more with ncurses 5.7.
->
-> People how should we fix this? 
+Yes, it could also probably live in just plain old EXTRA_OEMAKE. 
+Another task for the janitors page I suppose :)
 
-I added 9e58422868a03eeafa72781477174850d1c5abe7 some hours ago so that
-'-ltermcap' should work again.  Patch does not break my builds but I do
-not know whether it unbreaks the problematic ones ;)
-
-Things are too different across the distributions (some have the
-ncurses-config binconfig tools, other the .pc files, some have
-libtinfo, some not) to find *the* correct solution.
-
-
-Enrico
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
