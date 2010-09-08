@@ -1,45 +1,45 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OtOha-0000jW-Ip
+	(envelope-from <raj.khem@gmail.com>) id 1OtOj2-0000pH-L6
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 08 Sep 2010 19:44:56 +0200
-Received: by ywa8 with SMTP id 8so179909ywa.6
+	Wed, 08 Sep 2010 19:46:25 +0200
+Received: by iwn2 with SMTP id 2so197632iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 08 Sep 2010 10:44:12 -0700 (PDT)
+	Wed, 08 Sep 2010 10:45:42 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=5LyfROLvfDrPEkJeUVLocOgDnbsj1wA/iY8vbGqL+zA=;
-	b=nM4upXem2JAvLSr9C4IcsmTSuHKjJm4OXZX79ctYgg8YMWTpDg1zjbgyG/EksQ0fcZ
-	u3GttlN0l5KJASceU5T5Ch/UpzE22rm5LGPwJpFMRi4RBdrnFRdjQdsQ0cwbzFhGntVi
-	l4qt3IYkkatG9GMaS5pmainU/Yj3zD9dXrR8U=
+	bh=pizHC16E1Sef9eaQ8vVVmV0JABbCXgVluAnLr9A/91U=;
+	b=BnLe1HbuOlUIu7tFM0x83s4P3Xr/shAhYZxJgKsuDkH7qpa7WU1Bz6kUllnChnKce5
+	znrz5YjhBOTZsktdCJE83Yy3QYIFbRYLVYjOCt/Jt0qTAqJ2652KSgXuJ2uvVaQMRTpM
+	k8q5zA6XJWFR63UAvpu5Cxalx+D/WN/9vhWOo=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=leHMtRwM4Ftugk3OR3GZEo34QYmS1oSKhBtUbHk1PqhVUcvKteXAu7+Vo9WZvbL+mY
-	l3N5ETIldqH0U9H6mtwjxx1Qd00gGhgkkyhiS9nP3/UUS8bH4SmWbh+ZBrnqlnRaA68C
-	VzAJFFKNkvpG+XOBh9PvrWSnqZ8vxhKt18+DQ=
+	b=R4NgWKve0ZrnYcJz9DGce2EB2opKfopt2rxSQYMMMkOD6NiQX4TIMOS4wchX4f4heK
+	zjct4tFLzrBnwxOERK/WJG2DoEM/npDtJti2lXebAPhh1x8ZkawEYkJVwgxDDifiaxQW
+	sDNHP88Rn11yLdeqfHNHuODlkY6nrUZ/JvS9s=
+Received: by 10.231.15.9 with SMTP id i9mr62588iba.58.1283967940257; Wed, 08
+	Sep 2010 10:45:40 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.100.138.20 with SMTP id l20mr424914and.10.1283967852076; Wed,
-	08 Sep 2010 10:44:12 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Wed, 8 Sep 2010 10:44:11 -0700 (PDT)
-In-Reply-To: <AANLkTin8rLFWXNpNHsxELiWCrh40iXbnib1V7DLh7sDu@mail.gmail.com>
-References: <1283954503-25418-1-git-send-email-eric@eukrea.com>
-	<AANLkTin8rLFWXNpNHsxELiWCrh40iXbnib1V7DLh7sDu@mail.gmail.com>
-Date: Wed, 8 Sep 2010 19:44:11 +0200
-Message-ID: <AANLkTikDfw1BEM3ss8Mp3xKrDf48-b9gRcdygAdHetqc@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.231.205.134 with HTTP; Wed, 8 Sep 2010 10:45:20 -0700 (PDT)
+In-Reply-To: <1283947246-30457-1-git-send-email-sledz@dresearch.de>
+References: <4C86151D.50801@dresearch.de>
+	<1283947246-30457-1-git-send-email-sledz@dresearch.de>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Wed, 8 Sep 2010 10:45:20 -0700
+Message-ID: <AANLkTingMoUOwMbGaWOYAJuX_je9v-EWrq2TFZwW-jTM@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/3] rlpr 2.05: unbreak recipe
+Subject: Re: [PATCH] gtk+: fix configure problem for native build
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,71 +53,78 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 08 Sep 2010 17:44:56 -0000
+X-List-Received-Date: Wed, 08 Sep 2010 17:46:25 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/8 Khem Raj <raj.khem@gmail.com>:
-> On Wed, Sep 8, 2010 at 7:01 AM, Eric B=E9nard <eric@eukrea.com> wrote:
->> * source URL is no more working so use debian mirrors
->> * fix GNU_HASH issue
->> * tested on armv5
->>
->> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+On Wed, Sep 8, 2010 at 5:00 AM, Steffen Sledz <sledz@dresearch.de> wrote:
+> Signed-off-by: Steffen Sledz <sledz@dresearch.de>
+> ---
+> =A0recipes/gtk+/gtk+_2.18.6.bb | =A0 =A02 +-
+> =A0recipes/gtk+/gtk+_2.20.0.bb | =A0 =A02 +-
+> =A0recipes/gtk+/gtk+_2.20.1.bb | =A0 =A02 +-
+> =A03 files changed, 3 insertions(+), 3 deletions(-)
 >
-> Acked-by: Khem Raj <raj.khem@gmail.com>
+> diff --git a/recipes/gtk+/gtk+_2.18.6.bb b/recipes/gtk+/gtk+_2.18.6.bb
+> index 237689d..864f4ba 100644
+> --- a/recipes/gtk+/gtk+_2.18.6.bb
+> +++ b/recipes/gtk+/gtk+_2.18.6.bb
+> @@ -16,7 +16,7 @@ XKBTOGGLE =3D " --disable-xkb"
+> =A0XKBTOGGLE_angstrom =3D ""
+>
+> =A0EXTRA_OECONF =3D "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_c=
+an_sniff=3Dyes"
+> -EXTRA_OECONF_append_virtclass-native =3D " --without-libtiff --without-l=
+ibjpeg"
+> +EXTRA_OECONF_append_virtclass-native =3D " --without-libtiff --without-l=
+ibjpeg --disable-cups"
+>
+> =A0PACKAGES_DYNAMIC =3D "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* =
+gtk-printbackend-*"
+>
+> diff --git a/recipes/gtk+/gtk+_2.20.0.bb b/recipes/gtk+/gtk+_2.20.0.bb
+> index 2c061b7..1e07e83 100644
+> --- a/recipes/gtk+/gtk+_2.20.0.bb
+> +++ b/recipes/gtk+/gtk+_2.20.0.bb
+> @@ -20,7 +20,7 @@ XKBTOGGLE =3D " --disable-xkb"
+> =A0XKBTOGGLE_angstrom =3D ""
+>
+> =A0EXTRA_OECONF =3D "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_c=
+an_sniff=3Dyes"
+> -EXTRA_OECONF_append_virtclass-native =3D " --without-libtiff --without-l=
+ibjpeg"
+> +EXTRA_OECONF_append_virtclass-native =3D " --without-libtiff --without-l=
+ibjpeg --disable-cups"
+>
+> =A0PACKAGES_DYNAMIC =3D "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* =
+gtk-printbackend-*"
+>
+> diff --git a/recipes/gtk+/gtk+_2.20.1.bb b/recipes/gtk+/gtk+_2.20.1.bb
+> index 1568e61..ca5e197 100644
+> --- a/recipes/gtk+/gtk+_2.20.1.bb
+> +++ b/recipes/gtk+/gtk+_2.20.1.bb
+> @@ -24,7 +24,7 @@ XKBTOGGLE =3D " --disable-xkb"
+> =A0XKBTOGGLE_angstrom =3D ""
+>
+> =A0EXTRA_OECONF =3D "--with-libtiff ${XKBTOGGLE} --disable-glibtest gio_c=
+an_sniff=3Dyes"
+> -EXTRA_OECONF_append_virtclass-native =3D " --without-libtiff --without-l=
+ibjpeg"
+> +EXTRA_OECONF_append_virtclass-native =3D " --without-libtiff --without-l=
+ibjpeg --disable-cups"
+>
+> =A0PACKAGES_DYNAMIC =3D "gtk-module-* gdk-pixbuf-loader-* gtk-immodule-* =
+gtk-printbackend-*"
+>
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Why are we disabling cups ? you could have added dependency on
+cups-native instead if your build machine does not
+have full installation of cups. you would also need to BBCLASSEXTEND
+cups recipes.
+
+> --
+> 1.7.1
 >
->> ---
->> =A0recipes/rlpr/rlpr_2.05.bb | =A0 18 ++++++++++--------
->> =A01 files changed, 10 insertions(+), 8 deletions(-)
->>
->> diff --git a/recipes/rlpr/rlpr_2.05.bb b/recipes/rlpr/rlpr_2.05.bb
->> index 47ac9c3..2751b9f 100644
->> --- a/recipes/rlpr/rlpr_2.05.bb
->> +++ b/recipes/rlpr/rlpr_2.05.bb
->> @@ -1,18 +1,20 @@
->> -SECTION =3D "console/network"
->> =A0DESCRIPTION =3D "rlpr makes it possible to print files on remote site=
-s to your networked printers"
->> -HOMEPAGE =3D "http://truffula.com/rlpr/"
->> +HOMEPAGE =3D "http://freshmeat.net/projects/rlpr/"
->> +SECTION =3D "console/network"
->> =A0LICENSE =3D "GPL"
->> -SRC_URI =3D "ftp://www.truffula.com/pub/rlpr-2.05.tar.gz"
->> +PR =3D "r1"
->> +
->> +SRC_URI =3D "${DEBIAN_MIRROR}/main/r/rlpr/rlpr_2.05.orig.tar.gz"
->> +SRC_URI[md5sum] =3D "64ee8ccd94aabc90b9f40d0b2ad79e79"
->> +SRC_URI[sha256sum] =3D "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f=
-3efe22d16af14ba9a"
->>
->> =A0inherit autotools
->>
->> =A0do_configure() {
->> - =A0 =A0 =A0 oe_runconf
->> + =A0 =A0 =A0 =A0oe_runconf
->> =A0}
->> -
->> =A0do_install() {
->> - =A0 =A0 =A0 make install DESTDIR=3D${D}
->> + =A0 =A0 =A0 =A0make install DESTDIR=3D${D}
->> =A0}
->>
->> -SRC_URI[md5sum] =3D "64ee8ccd94aabc90b9f40d0b2ad79e79"
->> -SRC_URI[sha256sum] =3D "6b1261c8a23a58c8e174d8ee1ad53c138ed0b9211f7ea3f=
-3efe22d16af14ba9a"
->> +TARGET_CC_ARCH +=3D " ${LDFLAGS}"
->> --
->> 1.6.3.3
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
