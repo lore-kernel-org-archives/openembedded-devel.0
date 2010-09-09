@@ -1,28 +1,27 @@
 Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1OtaFB-0004SV-FY
+	(envelope-from <sledz@dresearch.de>) id 1OtaFB-0004SW-HT
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 08:04:22 +0200
+	Thu, 09 Sep 2010 08:04:23 +0200
 Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
 	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id 4EEE1491278
+	by mail.dresearch.de (Postfix) with ESMTP id 601D649127F
 	for <openembedded-devel@lists.openembedded.org>;
 	Thu,  9 Sep 2010 08:03:41 +0200 (CEST)
 Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 9 Sep 2010 07:51:25 +0200
-Message-ID: <4C8875F1.8010308@dresearch.de>
-Date: Thu, 09 Sep 2010 07:51:45 +0200
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 9 Sep 2010 07:54:23 +0200
+Message-ID: <4C8876A7.4010200@dresearch.de>
+Date: Thu, 09 Sep 2010 07:54:47 +0200
 From: Steffen Sledz <sledz@dresearch.de>
 User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
 	rv:1.9.2.9) Gecko/20100825 Lightning/1.0b2 Thunderbird/3.1.3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4C86151D.50801@dresearch.de>	<1283947246-30457-1-git-send-email-sledz@dresearch.de>	<4C877B47.8020609@xora.org.uk>
-	<4C87A071.9020908@dresearch.de>
-	<AANLkTimG9OBesBqC_0Y4JnPZjAVcxbvmurojfZDOpOOw@mail.gmail.com>
-In-Reply-To: <AANLkTimG9OBesBqC_0Y4JnPZjAVcxbvmurojfZDOpOOw@mail.gmail.com>
-X-OriginalArrivalTime: 09 Sep 2010 05:51:25.0488 (UTC)
-	FILETIME=[0A0B6300:01CB4FE3]
+References: <4C86151D.50801@dresearch.de>	<1283947246-30457-1-git-send-email-sledz@dresearch.de>
+	<AANLkTingMoUOwMbGaWOYAJuX_je9v-EWrq2TFZwW-jTM@mail.gmail.com>
+In-Reply-To: <AANLkTingMoUOwMbGaWOYAJuX_je9v-EWrq2TFZwW-jTM@mail.gmail.com>
+X-OriginalArrivalTime: 09 Sep 2010 05:54:23.0672 (UTC)
+	FILETIME=[74401B80:01CB4FE3]
 X-SA-Exim-Connect-IP: 87.193.137.100
 X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -45,21 +44,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 06:04:22 -0000
+X-List-Received-Date: Thu, 09 Sep 2010 06:04:23 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+Content-Transfer-Encoding: quoted-printable
 
-Am 08.09.2010 19:41, schrieb Khem Raj:
-> On Wed, Sep 8, 2010 at 7:40 AM, Steffen Sledz <sledz@dresearch.de> wrote:
->> Patch pushed to the testing-next branch by mistake. :(
-> 
-> Well you should push it to org.openembedded.dev as well. or may be we
-> could merge back testing-next into org.openembedded.dev
-> after this cycle.
+Am 08.09.2010 19:45, schrieb Khem Raj:
+> Why are we disabling cups ? you could have added dependency on
+> cups-native instead if your build machine does not
+> have full installation of cups.
+> you would also need to BBCLASSEXTEND cups recipes.
 
-I did.
+It was a suggestion from Graeme (a gtk+ maintainer) and i agreed. For the=
+ *native* build there is no need for cups.
 
 Steffen
+
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
 
 
