@@ -1,47 +1,41 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Othrb-0008JI-0a
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OthvW-0008U8-6O
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 16:12:31 +0200
-Received: by wye20 with SMTP id 20so1494406wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 07:11:48 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=6s4LpaTxgXY1kGPBW2k3aHc2mUtMp8JoFlfJ+icgXIk=;
-	b=aezJVjwThBzgTLGp9elVN4nILRiH0GOapdR0nb7jefd2pe+0np1zJo6Dn6jkmGEMzt
-	d995UdfIE5wPOyYRXX4HWAqd8/NJulUkfwwdj3mgGtVeMQGs6G+/PQEVCBI3zxcfOVm9
-	3rFO2UlktrHKlaIs30XbH78dfyNdRjKIOyOKo=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=l0tvP/MJ7Ff3COZnScChkymYYZZtdiNLgvpzr+SQ9lWKOfIckGaBxixiG1d6BOm6Fc
-	BQeAM0SchcViRDAohekj3/fYMl7GNUhwPZu29ibqawmICghV+zvprNpgxq4ykNNhFXNd
-	zihPiRDwB+pwkSJy5hIxMuL2EEZDtLBmzbNX0=
-Received: by 10.227.137.149 with SMTP id w21mr109002wbt.169.1284041508194;
-	Thu, 09 Sep 2010 07:11:48 -0700 (PDT)
+	Thu, 09 Sep 2010 16:16:34 +0200
+Received: (qmail 22436 invoked by uid 503); 9 Sep 2010 14:27:21 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 9 Sep 2010 14:27:21 -0000
+Received: (qmail 9492 invoked by uid 503); 9 Sep 2010 13:59:53 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 9 Sep 2010 13:59:53 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Sep 2010 16:15:53 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 9 Sep 2010 16:15:53 +0200
+Message-ID: <4C88EC18.3020109@eukrea.com>
+Date: Thu, 09 Sep 2010 16:15:52 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100825 Thunderbird/3.1.3
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.168 with HTTP; Thu, 9 Sep 2010 07:11:28 -0700 (PDT)
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4C38@deimsg40.de.net.world>
-References: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4C38@deimsg40.de.net.world>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 9 Sep 2010 07:11:28 -0700
-X-Google-Sender-Auth: eQh-3PBkrRORWzV9m7thJbpVkuo
-Message-ID: <AANLkTi=ZBDKa_O45MA--ZhY8W0SDyceWREjkvbjyV63T@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+References: <4C85058D.8070506@gmail.com>	<1283996027.3036.1.camel@gnutoo-laptop>	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>	<4C88E7C2.1030500@gmail.com>	<4C88E9BC.9040603@eukrea.com>
+	<4C88EAF2.7010208@gmail.com>
+In-Reply-To: <4C88EAF2.7010208@gmail.com>
+X-Ovh-Tracer-Id: 17012629068236369225
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: What is the difference of classes sdk and nativesdk ?
+Subject: Re: Asterisk and termcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,32 +49,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 14:12:31 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Sep 2010 14:16:34 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 9, 2010 at 7:01 AM, Hauser, Wolfgang (external) <
-Wolfgang.Hauser.external@eads.com> wrote:
+Le 09/09/2010 16:10, Arigead a écrit :
+> Sorry I'll have to get back to you on that one. I left my OpenMoko (The
+> Target) at home this morning so can't install the ipk :-(
+>
+> Actually thinking about it I'd not be too sure if Asterisk was ever
+> running fine on a mobile phone. Simply wanted to play with it and see
+> what it could do. There is an OpenMoko wiki page on messing with it so
+> thought I'd have a look.
+>
+> Anyhow I'll get back to you when I test it later today or tomorrow if
+> that's any help.
+>
+thanks, before pushing it it would be great if you could test it runs 
+fine with the fix.
 
-> Hello,
->
-> in OE the class sdk is marked as deprecated and nativesdk should be
-> used.
->
-> But all toolchain recipes using sdk class.
->
-> What is the difference/purpose of the nativesdk class ?
->
-> It is used in OE in few cases, could it be mixed up with recipes
-> inheriting sdk class while building a toolchain ?
->
+Eric
 
-A toolchain can contain both native and cross tools.  Hence the existence of
-nativesdk and crosssdk.  "sdk" is from before those two were created, and
-its naming is unclear about what it does.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+
 
