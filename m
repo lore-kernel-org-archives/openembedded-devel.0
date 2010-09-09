@@ -1,31 +1,45 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OtkzQ-0003kM-86
+	(envelope-from <vwyodapink@gmail.com>) id 1Otl1b-0003vG-Tz
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 19:32:54 +0200
-Received: (qmail 24173 invoked by uid 1003); 9 Sep 2010 17:31:59 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	9 Sep 2010 17:31:59 -0000
-Message-ID: <4C891A0A.2060103@balister.org>
-Date: Thu, 09 Sep 2010 13:31:54 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
+	Thu, 09 Sep 2010 19:35:04 +0200
+Received: by wwi14 with SMTP id 14so1908745wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Sep 2010 10:34:21 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=qwiym24LD6pOL3F01Gd9X8KsQH8Z5xvXCZvvhbZTZzY=;
+	b=kX/UTWSJW1SIUoRI728daAul6KEM+Y3L8eaCtd+aiKcXPl9BrtiVJkw9Enju8Jy3gM
+	rrPtNyqd7GnG7SzBDBNqkkUYE8+3Y7vNtToriY+civfO9+m6uofIFTximWXYu1P23mGl
+	qW+jXNq5vBSNJgr6/0xhL0RLTz5y1bTkEfgHg=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=AexGNYFnzYNzThsX5hBBk8F0UGTWN/xvLqSoDDVvHgLm7QMHLBLIeRDhTK4EX5NW58
+	LN00kIyQtF2DdZ05jaAiXyPM9bmVdzWDTU+iavy6QRHRfJkJWI9Lw8gnVEiMEqh9StT+
+	efyN56zoPRPK/UYEtTlDnLGXh7Dhb9VOFzB8k=
 MIME-Version: 1.0
+Received: by 10.216.158.18 with SMTP id p18mr597110wek.2.1284053659104; Thu,
+	09 Sep 2010 10:34:19 -0700 (PDT)
+Received: by 10.216.58.197 with HTTP; Thu, 9 Sep 2010 10:34:19 -0700 (PDT)
+In-Reply-To: <1284048433-20991-1-git-send-email-eric@eukrea.com>
+References: <AANLkTi=KDR=mtuVUiQE-5_-FL4oR+meQssfeUgz6bBLq@mail.gmail.com>
+	<1284048433-20991-1-git-send-email-eric@eukrea.com>
+Date: Thu, 9 Sep 2010 10:34:19 -0700
+Message-ID: <AANLkTike7kmRPU9iw8wyC3v5=rLrr+DqiyskkoGC5H30@mail.gmail.com>
+From: "J. L. " <vwyodapink@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1284049847-22660-1-git-send-email-fahad_usman@mentor.com>
-In-Reply-To: <1284049847-22660-1-git-send-email-fahad_usman@mentor.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: vwyodapink@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] omniorb_4.1.4: merged native and non-native recipes
+Subject: Re: [PATCH 1/3] generate-manifest-2.6.py: tune python-modules' RDEPENDS
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,129 +53,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 17:32:54 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Sep 2010 17:35:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On 09/09/2010 12:30 PM, Fahad Usman wrote:
-> * removed the omniorb-native_4.1.4.bb file
-> * added DEPENDS_pn-omniorb = "omniorb-native" and DEPENDS_pn-omniorb-native += "python-native" to handle different dependencies for native and target recipes, thanks to Vitus Jensen for guidance
-> * added NATIVE_INSTALL_WORKS = "1"
-> * added BBCLASSEXTEND = "native"
-> * added do_install_virtclass-native and converted do_stage from native recipe to do_install_virtclass-native_append in the combined recipe
-> * bumped PR
-
-Are you testing these changes? There are only a few users of omniorb I 
-know of, and I am not in a position to test these.
-
-The native part of the build is only needed to make the omniidl tool, so 
-it is more of a cross thing than native.
-
-Unless there is a compelling reason to do this work, I'd rather people 
-leave this recipe alone.
-
-Philip
-
+On Thu, Sep 9, 2010 at 9:07 AM, Eric B=E9nard <eric@eukrea.com> wrote:
+> * python-dev: pulls several dev packages leading to a >256MB image instea=
+d
+> of a 60MB image without this packages
 >
-> Signed-off-by: Fahad Usman<fahad_usman@mentor.com>
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
 > ---
->   recipes/omniorb/omniorb-native_4.1.4.bb |   23 ---------------------
->   recipes/omniorb/omniorb_4.1.4.bb        |   33 +++++++++++++++++++++++++-----
->   2 files changed, 27 insertions(+), 29 deletions(-)
+> =A0contrib/python/generate-manifest-2.6.py | =A0 =A06 +++---
+> =A01 files changed, 3 insertions(+), 3 deletions(-)
 >
-> diff --git a/recipes/omniorb/omniorb-native_4.1.4.bb b/recipes/omniorb/omniorb-native_4.1.4.bb
-> deleted file mode 100644
-> index c5c550d..0000000
-> --- a/recipes/omniorb/omniorb-native_4.1.4.bb
-> +++ /dev/null
-> @@ -1,23 +0,0 @@
-> -SECTION = "devel"
-> -DEPENDS += "python-native"
-> -PR = "r0"
-> -
-> -SRC_URI = "http://downloads.sourceforge.net/omniorb/omniORB-4.1.4.tar.gz;name=omniORB414targz \
-> -	  file://omniorb_4.1.4.patch \
-> -"
-> -
-> -SRC_URI[omniORB414targz.md5sum] = "1f6070ff9b6339876976d61981eeaa6a"
-> -SRC_URI[omniORB414targz.sha256sum] = "84fb9790c25d6e46248c9773747e393b429573190da2150850d4a49debda4e8e"
-> -
-> -S = "${WORKDIR}/omniORB-${PV}"
-> -
-> -inherit native autotools
-> -
-> -do_compile () {
-> -        oe_runmake
-> -}
-> -# Ugly hack so libtool does not find native libs when building cross packages
-> -# We really only build this package for omniidl anyway
-> -do_stage_append() {
-> -        rm -f  ${STAGING_LIBDIR_NATIVE}/libomni*
-> -}
-> diff --git a/recipes/omniorb/omniorb_4.1.4.bb b/recipes/omniorb/omniorb_4.1.4.bb
-> index a4c032c..03a1554 100644
-> --- a/recipes/omniorb/omniorb_4.1.4.bb
-> +++ b/recipes/omniorb/omniorb_4.1.4.bb
-> @@ -2,8 +2,9 @@ DESCRIPTION = "OmniORB High Performance ORB"
->   SECTION = "devel"
->   PRIORITY = "optional"
->   LICENSE = "LGPL"
-> -DEPENDS = "omniorb-native"
-> -PR = "r0"
-> +DEPENDS_pn-omniorb = "omniorb-native"
-> +DEPENDS_pn-omniorb-native += "python-native"
-> +PR = "r1"
+> diff --git a/contrib/python/generate-manifest-2.6.py b/contrib/python/gen=
+erate-manifest-2.6.py
+> index 1a0f1d3..5ebafb8 100755
+> --- a/contrib/python/generate-manifest-2.6.py
+> +++ b/contrib/python/generate-manifest-2.6.py
+> @@ -12,7 +12,7 @@ import time
+> =A0VERSION =3D "2.6.4"
 >
->   SRC_URI = "http://downloads.sourceforge.net/omniorb/omniORB-4.1.4.tar.gz;name=omniORB414targz \
->   file://omniorb_4.1.4.patch \
-> @@ -12,6 +13,10 @@ file://omniORB-cross.patch \
->   file://omniORB_embedded_appl.patch \
->   file://rm_LongDouble.patch \
->   "
-> +SRC_URI_virtclass-native = "http://downloads.sourceforge.net/omniorb/omniORB-4.1.4.tar.gz;name=omniORB414targz \
-> +	  file://omniorb_4.1.4.patch \
-> +"
-> +
+> =A0__author__ =3D "Michael 'Mickey' Lauer <mlauer@vanille-media.de>"
+> -__version__ =3D "20100711"
+> +__version__ =3D "20100908"
 >
->   SRC_URI[omniORB414targz.md5sum] = "1f6070ff9b6339876976d61981eeaa6a"
->   SRC_URI[omniORB414targz.sha256sum] = "84fb9790c25d6e46248c9773747e393b429573190da2150850d4a49debda4e8e"
-> @@ -29,9 +34,14 @@ do_compile () {
->   	oe_runmake
->   	
->   }
-> +
-> +do_compile_virtclass-native() {
-> +        oe_runmake
-> +}
-> +
->   do_install () {
->           export EmbeddedSystem=1
-> -        make DESTDIR=${D} install
-> +        autotools_do_install
->           install -d ${D}${sysconfdir}
->           install -m 0644 ${WORKDIR}/omniORB.cfg ${D}${sysconfdir}
->           install -d ${D}${localstatedir}/omninames
-> @@ -39,7 +49,18 @@ do_install () {
->   	#only executable libraries are stripped by the stripper
->   	chmod +x ${WORKDIR}/image/usr/lib/lib*
->   }
-> -do_stage () {
-> -        export EmbeddedSystem=1
-> -        autotools_stage_all
-> +
-> +do_install_virtclass-native() {
-> +        autotools_do_install
-> +}
-> +
-> +# The following comment is from the omniorb-native recipe which is now merged into this one...
-> +# Ugly hack so libtool does not find native libs when building cross packages
-> +# We really only build this package for omniidl anyway
-> +do_install_virtclass-native_append() {
-> +        rm -f  ${D}${libdir}/libomni*
->   }
-> +
-> +BBCLASSEXTEND = "native"
-> +
-> +NATIVE_INSTALL_WORKS = "1"
+> =A0class MakefileMaker:
+>
+> @@ -123,7 +123,7 @@ class MakefileMaker:
+> =A0 =A0 =A0 =A0 line =3D 'RDEPENDS_python-modules=3D"'
+>
+> =A0 =A0 =A0 =A0 for name, data in self.packages.iteritems():
+> - =A0 =A0 =A0 =A0 =A0 =A0if name !=3D 'python-core-dbg':
+> + =A0 =A0 =A0 =A0 =A0 =A0if name not in ['python-core-dbg', 'python-dev']=
+:
+> =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 line +=3D "%s " % name
+>
+> =A0 =A0 =A0 =A0 self.out( "%s \"" % line )
+> @@ -164,7 +164,7 @@ if __name__ =3D=3D "__main__":
+> =A0 =A0 m.addPackage( "python-core-dbg", "Python core module debug inform=
+ation", "python-core",
+> =A0 =A0 "config/.debug lib-dynload/.debug ${bindir}/.debug ${libdir}/.deb=
+ug" )
+>
+> - =A0 =A0m.addPackage( "python-devel", "Python Development Package", "pyt=
+hon-core",
+> + =A0 =A0m.addPackage( "python-dev", "Python Development Package", "pytho=
+n-core",
+> =A0 =A0 "${includedir} ${libdir}/libpython2.6.so config" ) # package
+>
+> =A0 =A0 m.addPackage( "python-idle", "Python Integrated Development Envir=
+onment", "python-core python-tkinter",
+> --
+> 1.6.3.3
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+Dumb comment time: Wouldnt it be better to make maybe a few different
+python module packages installs instead of thining out the
+python-module? I know I personally use all the modules for python
+available here plus some other modules as well. I know not everyone is
+concerned with making their images as small as possible. Probably just
+not getting the reasoning or point but just thought I would make the
+statement there are those that use python-dev as is
+
+JL
 
 
