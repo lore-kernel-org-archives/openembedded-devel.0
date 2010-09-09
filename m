@@ -1,43 +1,48 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OtiPy-0004A1-2X
+	(envelope-from <sladedals@gmail.com>) id 1OtiYf-0005w1-3e
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 16:48:02 +0200
-Received: by gxk2 with SMTP id 2so672187gxk.6
+	Thu, 09 Sep 2010 16:57:02 +0200
+Received: by pwi10 with SMTP id 10so130434pwi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 07:47:18 -0700 (PDT)
+	Thu, 09 Sep 2010 07:56:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=rkYH/96e2yTyWZWWTBNlQiQ1k66FKan+h2SpXw/9CQc=;
-	b=BWkEK+aryTVNeDm38ebtQI5QH9KUy76VPnyIwsSUrJVbEkc06viGZuz0U5a3wgbnbT
-	fox85YYmEljV0vDLmT3cAvYJz5Mrxugs0M7oPnm2a1CqeUWm6bUqxWRoQOu9aFJtszaX
-	dHXNtpsbReqOvvOt50sh9m1BbjqhKlA5RFcEw=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=YcqH+jBXfMbHv8gtdhSU2m5GZ3yka9fJeEI1K/Q78ck=;
+	b=RLZtpBktj5Jtz/8dPDk0baNbK51mGkNqtofw59yaimh0UfQrvvJFjAXpTiy6zMjhKV
+	HVedfizuEmbGxf1ZusMBE4yCXXMTv9v3csXthLymV97doC35VpA4/kbHcBklG3aR6ag0
+	6K7G1s106usuVoUxkg3U4RC6xMy5k+l9chwOE=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=H6zMvqbhaBs3bDTHlDts5XTkRoD89g1yEOm09slO1vwREsDQYmis/m/NWrpOZs+4wD
-	vPjDkPhBySkNSXUWJvTcvj73ydW3+1nSSr7IAeFdCDO5B/q7Ar68JvOW6kx5VBFgh5OU
-	jvCUIHCCv9L+5f6dnuvaXO3QeKf6r2lrEntvw=
-Received: by 10.100.209.9 with SMTP id h9mr1545438ang.189.1284043638514; Thu,
-	09 Sep 2010 07:47:18 -0700 (PDT)
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=FuV9NF3XeSt1lItl2aJcPpacj77wIM/ebyeKep9Wl8oBr+NOCpT7MyaKOBLWF3Rd5b
+	+3pSRU9e3C5WKfqEyb92qZYoqqTtT392Uyw99/rPqFUBjlxldu7/UC11o6KUell8aCWD
+	48apW4wz5ukVa9ggMxcErKwN6sdtLIY8KAaPg=
+Received: by 10.114.109.8 with SMTP id h8mr64498wac.135.1284044170625; Thu, 09
+	Sep 2010 07:56:10 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Thu, 9 Sep 2010 07:46:58 -0700 (PDT)
-In-Reply-To: <AANLkTikamPAk9W64hf3HYX4effDwOovU=rvs=CiwccgS@mail.gmail.com>
-References: <AANLkTikamPAk9W64hf3HYX4effDwOovU=rvs=CiwccgS@mail.gmail.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Sep 2010 07:46:58 -0700
-Message-ID: <AANLkTikxykdyukc+Qak3q-LnfH08TBADVmPbsXX2XVJk@mail.gmail.com>
+Sender: sladedals@gmail.com
+Received: by 10.42.6.68 with HTTP; Thu, 9 Sep 2010 07:55:50 -0700 (PDT)
+In-Reply-To: <1283903199-24538-2-git-send-email-eric@eukrea.com>
+References: <1283903199-24538-1-git-send-email-eric@eukrea.com>
+	<1283903199-24538-2-git-send-email-eric@eukrea.com>
+From: cdric julien <c.dricjulien@gmail.com>
+Date: Thu, 9 Sep 2010 16:55:50 +0200
+X-Google-Sender-Auth: z0wmddFmOXjYuuEhJ68unDFtZiM
+Message-ID: <AANLkTi=KDR=mtuVUiQE-5_-FL4oR+meQssfeUgz6bBLq@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: sladedals@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: slugos/nslu2le/binutils build: fail
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH 2/2] python-2.6: remove python-distutils from python-modules
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,43 +56,84 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 14:48:03 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Sep 2010 14:57:02 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Thu, Sep 9, 2010 at 2:42 AM, Frans Meulenbroeks
-<fransmeulenbroeks@gmail.com> wrote:
-> I was asked to give slugos as spin on the autobuilder, and as slugos
-> still occupies a sweet spot in me I gave it a spin.
-> Unfoprtunately things did not build:
->
-> distro: slugos
-> machine: nslu2le
-> bitbake target: binutils
-> libc: glibc.
+Be careful, this module is needed to install python modules on target via
+the "python setup.py install" method. If removed, some python packages won'=
+t
+install anymore...
+If you want to gain space on target, there are a few wininst*.exe in
+distutils/command directory that could be removed and the "config" director=
+y
+which contains libpython2.6.a (2.1Mo) is really useless.
 
-as I can see slugos uses eglibc 2.11 is there any special reason you
-chose glibc 2.10 ?
-I would suggest to try the defaults and subject of this email is wrong.
 
+2010/9/8 Eric B=E9nard <eric@eukrea.com>
+
+> this module seems only needed for development. No installing it with
+> python-modules saves 6MB on the image.
 >
-> Failure is in building glibc.c:
+> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+> ---
+>  recipes/python/python-2.6-manifest.inc |    2 +-
+>  1 files changed, 1 insertions(+), 1 deletions(-)
 >
-> | /home/hudson/jobs/FM_test/workspace/tmp/work/armv5te-linux-gnueabi/glibc-2.10.1-r36.1/build-arm-linux-gnueabi/libc_pic.os:
-> In function `faccessat':
-> | find_exidx.c:(.text+0x900e8): undefined reference to `fstatat64'
-> | collect2: ld returned 1 exit status
-> | make[1]: *** [/home/hudson/jobs/FM_test/workspace/tmp/work/armv5te-linux-gnueabi/glibc-2.10.1-r36.1/build-arm-linux-gnueabi/libc.so]
-> Error 1
-> | make[1]: Leaving directory
-> `/home/hudson/jobs/FM_test/workspace/tmp/work/armv5te-linux-gnueabi/glibc-2.10.1-r36.1/glibc-2.10.1'
-> | make: *** [all] Error 2
-> | FATAL: oe_runmake failed
-> NOTE: package glibc-2.10.1-r36.1: task do_compile: Failed
+> diff --git a/recipes/python/python-2.6-manifest.inc
+> b/recipes/python/python-2.6-manifest.inc
+> index eec9f22..ff54d36 100644
+> --- a/recipes/python/python-2.6-manifest.inc
+> +++ b/recipes/python/python-2.6-manifest.inc
+> @@ -266,7 +266,7 @@ RDEPENDS_python-audio=3D"python-core"
+>  FILES_python-audio=3D"${libdir}/python2.6/wave.* ${libdir}/python2.6/chu=
+nk.*
+> ${libdir}/python2.6/sndhdr.* ${libdir}/python2.6/lib-dynload/ossaudiodev.=
+so
+> ${libdir}/python2.6/lib-dynload/audioop.so "
 >
-> I can imagine this has something to do with kernel headers, but didn't
-> investigate.
+>  DESCRIPTION_python-modules=3D"All Python modules"
+> -RDEPENDS_python-modules=3D"python-profile python-threading python-distut=
+ils
+> python-doctest python-stringold python-codecs python-ctypes python-pickle
+> python-datetime python-core python-io python-compiler python-compression
+> python-re python-xmlrpc python-terminal python-email python-image
+> python-tests python-resource python-json python-difflib python-math
+> python-syslog python-hotshot python-unixadmin python-textutils
+> python-tkinter python-gdbm python-elementtree python-fcntl python-netclie=
+nt
+> python-pprint python-netserver python-curses python-smtpd python-html
+> python-readline python-subprocess python-pydoc python-logging python-mail=
+box
+> python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittes=
+t
+> python-multiprocessing python-robotparser python-compile python-debugger
+> python-pkgutil python-shell python-bsddb python-numbers python-mmap
+> python-zlib python-db python-crypt python-idle python-lang python-audio  =
+"
+> +RDEPENDS_python-modules=3D"python-profile python-threading python-doctes=
+t
+> python-stringold python-codecs python-ctypes python-pickle python-datetim=
+e
+> python-core python-io python-compiler python-compression python-re
+> python-xmlrpc python-terminal python-email python-image python-tests
+> python-resource python-json python-difflib python-math python-syslog
+> python-hotshot python-unixadmin python-textutils python-tkinter python-gd=
+bm
+> python-elementtree python-fcntl python-netclient python-pprint
+> python-netserver python-curses python-smtpd python-html python-readline
+> python-subprocess python-pydoc python-logging python-mailbox python-xml
+> python-mime python-sqlite3 python-sqlite3-tests python-unittest
+> python-multiprocessing python-robotparser python-compile python-debugger
+> python-pkgutil python-shell python-bsddb python-numbers python-mmap
+> python-zlib python-db python-crypt python-idle python-lang python-audio  =
+"
+>  ALLOW_EMPTY_python-modules =3D "1"
 >
-> Frans
+>
+> --
+> 1.6.3.3
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -96,8 +142,10 @@ I would suggest to try the defaults and subject of this email is wrong.
 >
 
 
-
--- 
--Khem
-
+--=20
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+C.dric JULIEN
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+Always code as if the guy who ends up maintaining your code will be a
+violent psychopath who knows where you live
 
