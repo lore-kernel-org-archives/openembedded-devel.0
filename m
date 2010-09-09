@@ -1,47 +1,37 @@
-Received: from bear.ext.ti.com ([192.94.94.41])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1Otfx1-0004sK-1j
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Otg0x-0008Lf-89
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 14:10:06 +0200
-Received: from dlep34.itg.ti.com ([157.170.170.115])
-	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o89C9Fwn005359
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 07:09:15 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o89C9FeR020659
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 07:09:15 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o89C9Fot011804
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 07:09:15 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Thu, 9 Sep 2010 07:09:15 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Sep 2010 07:09:14 -0500
-Thread-Topic: [oe] [PATCHv2] common_use_cases: add description of SOC_FAMILY
-Thread-Index: ActPn5uFmaoCuOMZScy5CPn8K+BuOQAd822Q
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFAA0F@dlee06.ent.ti.com>
-References: <1283969035-1397-1-git-send-email-chase.maupin@ti.com>
-	<1283982455.21233.48.camel@mattotaupa>
-In-Reply-To: <1283982455.21233.48.camel@mattotaupa>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 09 Sep 2010 14:14:10 +0200
+Received: (qmail 21093 invoked by uid 503); 9 Sep 2010 12:24:49 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 9 Sep 2010 12:24:49 -0000
+Received: (qmail 13712 invoked by uid 503); 9 Sep 2010 11:57:23 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 9 Sep 2010 11:57:22 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Sep 2010 14:13:21 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 9 Sep 2010 14:13:21 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Thu,  9 Sep 2010 14:11:57 +0200
+Message-Id: <1284034317-9428-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 192.94.94.41
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+X-Ovh-Tracer-Id: 14942943564204780873
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2] common_use_cases: add description of SOC_FAMILY
+Subject: [PATCH] fix bitbake ERRORS for machine not having virtual/egl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,45 +45,182 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 12:10:08 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+X-List-Received-Date: Thu, 09 Sep 2010 12:14:11 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
-Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
-dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IFBhdWwg
-TWVuemVsDQo+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDA4LCAyMDEwIDQ6NDggUE0NCj4g
-VG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6
-IFJlOiBbb2VdIFtQQVRDSHYyXSBjb21tb25fdXNlX2Nhc2VzOiBhZGQgZGVzY3JpcHRpb24gb2YN
-Cj4gU09DX0ZBTUlMWQ0KPiANCj4gQW0gTWl0dHdvY2gsIGRlbiAwOC4wOS4yMDEwLCAxMzowMyAt
-MDUwMCBzY2hyaWViIENoYXNlIE1hdXBpbjoNCj4gPiAqIEFkZGVkIGEgZGVzY3JpcHRpb24gb2Yg
-dGhlIFNPQ19GQU1JTFkgdmFyaWFibGUgdGhhdA0KPiA+ICAgY2FuIGJlIHNldCBpbiB0aGUgbWFj
-aGluZSBjb25maWd1cmF0aW9uIGZpbGVzLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogQ2hhc2Ug
-TWF1cGluIDxjaGFzZS5tYXVwaW5AdGkuY29tPg0KPiA+IC0tLQ0KPiA+ICBkb2NzL3VzZXJtYW51
-YWwvY2hhcHRlcnMvY29tbW9uX3VzZV9jYXNlcy54bWwgfCAgIDI0DQo+ICsrKysrKysrKysrKysr
-KysrKysrKysrKw0KPiA+ICAxIGZpbGVzIGNoYW5nZWQsIDI0IGluc2VydGlvbnMoKyksIDAgZGVs
-ZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvZG9jcy91c2VybWFudWFsL2NoYXB0ZXJz
-L2NvbW1vbl91c2VfY2FzZXMueG1sDQo+IGIvZG9jcy91c2VybWFudWFsL2NoYXB0ZXJzL2NvbW1v
-bl91c2VfY2FzZXMueG1sDQo+ID4gaW5kZXggZDg2ZDBjYS4uZWY4MWI5NSAxMDA2NDQNCj4gPiAt
-LS0gYS9kb2NzL3VzZXJtYW51YWwvY2hhcHRlcnMvY29tbW9uX3VzZV9jYXNlcy54bWwNCj4gPiAr
-KysgYi9kb2NzL3VzZXJtYW51YWwvY2hhcHRlcnMvY29tbW9uX3VzZV9jYXNlcy54bWwNCj4gPiBA
-QCAtOTQsNiArOTQsMzAgQEAgU1JDREFURSA9ICIyMDA2MTAxNCINCj4gPiAgICAgICAgICA8L2xp
-c3RpdGVtPg0KPiA+ICAgICAgICA8L2l0ZW1pemVkbGlzdD48L3BhcmE+DQo+ID4NCj4gPiArICAg
-IDxwYXJhPlRoZXJlIGFyZSBhbHNvIHNvbWUgb3B0aW9uYWwgdmFyaWFibGVzIHRoYXQgY2FuIGJl
-IGRlZmluZWQ6DQo+ID4gKyAgICA8aXRlbWl6ZWRsaXN0Pg0KPiA+ICsgICAgPGxpc3RpdGVtPg0K
-PiA+ICsgICAgICAgICAgPHBhcmE+PGNvbW1hbmQ+U09DX0ZBTUlMWTwvY29tbWFuZD4gZGVzY3Jp
-YmVzIGEgZmFtaWx5IG9mDQo+IHByb2Nlc3NvcnMNCj4gPiArICAgICAgICAgICAgdGhhdCBhbGwg
-c2hhcmUgY29tbW9uIGZlYXR1cmVzIHN1Y2ggYXMga2VybmVsIHZlcnNpb25zLA0KPiA+ICsgICAg
-ICAgICAgICBib290bG9hZGVycywgZXRjLiAgVGhpcyBpcyB1c2VkIHRvIGFsbG93IG92ZXJyaWRl
-cyBmb3IgYQ0KPiB3aG9sZQ0KPiANCj4gSSB0aGluayBhIGZ1bGwgc3RvcCBpcyByZXF1aXJlZCBl
-dmVuIGlmIHRoZXJlIGlzIGFuIGFiYnJldmlhdGlvbiBpbg0KPiBmcm9udCBvZiBpdC4g4oaSIGV0
-Yy4uDQoNClBhdWwsDQoNCkknbSBhZnJhaWQgSSBkb24ndCB1bmRlcnN0YW5kIHdoYXQgeW91IGFy
-ZSBhc2tpbmcgdG8gaGF2ZSBmaXhlZC4gIEFyZSB5b3Ugc2F5aW5nIHlvdSB3YW50IGl0IHRvIGJl
-IGV0Yy4uIGluc3RlYWQgb2YgZXRjLg0KDQpKdXN0IHdhbnQgdG8gY2xhcmlmeSBiZWZvcmUgSSBy
-ZW1ha2UgdGhpcyBwYXRjaC4NCg0KPiANCj4gW+KApl0NCj4gDQo+IFdpdGggdGhpcyBmaXhlZDoN
-Cj4gDQo+IEFja2VkLWJ5OiBQYXVsIE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9y
-Z2UubmV0Pg0KPiANCj4gDQo+IFRoYW5rcyBmb3IgaW1wcm92aW5nIHRoZSBkb2N1bWVudGF0aW9u
-LA0KPiANCj4gUGF1bA0K
+* several recipes depend on virtual/egl which currently has only one
+provider : powervr-drivers/libgles-omap. This provider sets
+COMPATIBLE_MACHINE to a few TI based machines.
+When building for machines which don't provide virtual/egl, we get
+the following errors :
+ERROR: '['path_to/openembedded/recipes/qt4/qt4-embedded-gles_4.6.3.bb']'
+      RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
+     'qt4-embedded-gles' but it wasn't found in any PACKAGE or RPROVIDES
+     variables of any buildable targets.
+ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+     entity 'virtual/egl' but it wasn't found in any PACKAGE or RPROVIDES
+     variables
+
+* This patch creates a egl.inc which contains the compatible machines for
+recipes depending on virtual/egl and thus will workaround this error.
+
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/egl/egl.inc                        |    1 +
+ recipes/irrlicht/irrlicht-examples-gles.bb |    1 +
+ recipes/ogre/ogre-egl_svn.bb               |    1 +
+ recipes/powervr-drivers/bc-cube_0.1.0.bb   |    1 +
+ recipes/powervr-drivers/bc-cube_0.2.0.bb   |    1 +
+ recipes/qt4/qt4-embedded-gles_4.6.0.bb     |    1 +
+ recipes/qt4/qt4-embedded-gles_4.6.2.bb     |    1 +
+ recipes/qt4/qt4-embedded-gles_4.6.3.bb     |    1 +
+ recipes/qt4/qt4-x11-free-gles_4.5.2.bb     |    1 +
+ recipes/qt4/qt4-x11-free-gles_4.6.0.bb     |    1 +
+ recipes/qt4/qt4-x11-free-gles_4.6.2.bb     |    1 +
+ recipes/qt4/qt4-x11-free-gles_4.6.3.bb     |    1 +
+ recipes/xbmc/xbmc_svn.bb                   |    1 +
+ 13 files changed, 13 insertions(+), 0 deletions(-)
+ create mode 100644 recipes/egl/egl.inc
+
+diff --git a/recipes/egl/egl.inc b/recipes/egl/egl.inc
+new file mode 100644
+index 0000000..6bbfaaf
+--- /dev/null
++++ b/recipes/egl/egl.inc
+@@ -0,0 +1 @@
++COMPATIBLE_MACHINE = "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
+diff --git a/recipes/irrlicht/irrlicht-examples-gles.bb b/recipes/irrlicht/irrlicht-examples-gles.bb
+index 6bce68a..e515fc7 100644
+--- a/recipes/irrlicht/irrlicht-examples-gles.bb
++++ b/recipes/irrlicht/irrlicht-examples-gles.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "Irrlicht 3D rendering engine "
+ LICENSE = "zlib"
+ DEPENDS = "virtual/libx11 libxxf86vm virtual/egl"
++require recipes/egl/egl.inc
+ 
+ SRCREV = "2409"
+ PV = "1.6+svnr${SRCPV}"
+diff --git a/recipes/ogre/ogre-egl_svn.bb b/recipes/ogre/ogre-egl_svn.bb
+index caa96c3..5cb7393 100644
+--- a/recipes/ogre/ogre-egl_svn.bb
++++ b/recipes/ogre/ogre-egl_svn.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "OGRE (Object-Oriented Graphics Rendering Engine) is a scene-oriented, flexible 3D engine "
+ LICENSE = "LGPL"
+ DEPENDS = "gtk+ wgois cppunit zziplib boost freeimage freetype virtual/libx11 virtual/egl"
++require recipes/egl/egl.inc
+ 
+ PR = "r3"
+ 
+diff --git a/recipes/powervr-drivers/bc-cube_0.1.0.bb b/recipes/powervr-drivers/bc-cube_0.1.0.bb
+index 6323a79..62dfc5b 100644
+--- a/recipes/powervr-drivers/bc-cube_0.1.0.bb
++++ b/recipes/powervr-drivers/bc-cube_0.1.0.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "TI Texture streaming using bufferclass API demo (spinning video cube)"
+ LICENSE = "TI-BSD/GPLv2"
+ DEPENDS = "virtual/egl"
++require recipes/egl/egl.inc
+ 
+ SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/apps_processors/OMAP35x_AM35x_Video_Texture_Streaming/1_0/exports/bc-cat-${PV}.tar.gz \
+            file://bc-cat-0.1.0-BC_PIX_FMT_.patch;striplevel=0"
+diff --git a/recipes/powervr-drivers/bc-cube_0.2.0.bb b/recipes/powervr-drivers/bc-cube_0.2.0.bb
+index cf2aa95..c639283 100644
+--- a/recipes/powervr-drivers/bc-cube_0.2.0.bb
++++ b/recipes/powervr-drivers/bc-cube_0.2.0.bb
+@@ -1,6 +1,7 @@
+ DESCRIPTION = "TI Texture streaming using bufferclass API demo (spinning video cube)"
+ LICENSE = "TI-BSD/GPLv2"
+ DEPENDS = "virtual/egl"
++require recipes/egl/egl.inc
+ 
+ PR = "r2"
+ 
+diff --git a/recipes/qt4/qt4-embedded-gles_4.6.0.bb b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+index 3b3ea15..3e132bf 100644
+--- a/recipes/qt4/qt4-embedded-gles_4.6.0.bb
++++ b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+@@ -10,3 +10,4 @@ require qt-4.6.0.inc
+ FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+diff --git a/recipes/qt4/qt4-embedded-gles_4.6.2.bb b/recipes/qt4/qt4-embedded-gles_4.6.2.bb
+index 21c461a..0b047fc 100644
+--- a/recipes/qt4/qt4-embedded-gles_4.6.2.bb
++++ b/recipes/qt4/qt4-embedded-gles_4.6.2.bb
+@@ -11,3 +11,4 @@ SRC_URI += "file://cursor-hack.diff"
+ FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+diff --git a/recipes/qt4/qt4-embedded-gles_4.6.3.bb b/recipes/qt4/qt4-embedded-gles_4.6.3.bb
+index 21c461a..0b047fc 100644
+--- a/recipes/qt4/qt4-embedded-gles_4.6.3.bb
++++ b/recipes/qt4/qt4-embedded-gles_4.6.3.bb
+@@ -11,3 +11,4 @@ SRC_URI += "file://cursor-hack.diff"
+ FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+diff --git a/recipes/qt4/qt4-x11-free-gles_4.5.2.bb b/recipes/qt4/qt4-x11-free-gles_4.5.2.bb
+index 3fe7218..57e1524 100644
+--- a/recipes/qt4/qt4-x11-free-gles_4.5.2.bb
++++ b/recipes/qt4/qt4-x11-free-gles_4.5.2.bb
+@@ -11,6 +11,7 @@ require qt4-x11-free_${PV}.bb
+ PR = "${INC_PR}.3"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+ PROVIDES += "qt4-x11-free"
+ #SRC_URI += "file://sgx-hack.patch"
+ SRC_URI += "file://hack-out-pg_config.patch"
+diff --git a/recipes/qt4/qt4-x11-free-gles_4.6.0.bb b/recipes/qt4/qt4-x11-free-gles_4.6.0.bb
+index dfd53e5..0821595 100644
+--- a/recipes/qt4/qt4-x11-free-gles_4.6.0.bb
++++ b/recipes/qt4/qt4-x11-free-gles_4.6.0.bb
+@@ -13,4 +13,5 @@ QT_CONFIG_FLAGS += " \
+ FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+ PROVIDES += "qt4-x11-free"
+diff --git a/recipes/qt4/qt4-x11-free-gles_4.6.2.bb b/recipes/qt4/qt4-x11-free-gles_4.6.2.bb
+index 307770f..b7cbde5 100644
+--- a/recipes/qt4/qt4-x11-free-gles_4.6.2.bb
++++ b/recipes/qt4/qt4-x11-free-gles_4.6.2.bb
+@@ -13,4 +13,5 @@ QT_CONFIG_FLAGS += " \
+ FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+ PROVIDES += "qt4-x11-free"
+diff --git a/recipes/qt4/qt4-x11-free-gles_4.6.3.bb b/recipes/qt4/qt4-x11-free-gles_4.6.3.bb
+index 307770f..b7cbde5 100644
+--- a/recipes/qt4/qt4-x11-free-gles_4.6.3.bb
++++ b/recipes/qt4/qt4-x11-free-gles_4.6.3.bb
+@@ -13,4 +13,5 @@ QT_CONFIG_FLAGS += " \
+ FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
+ 
+ DEPENDS += "virtual/egl"
++require recipes/egl/egl.inc
+ PROVIDES += "qt4-x11-free"
+diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
+index 5b1d8bb..b42d7fa 100644
+--- a/recipes/xbmc/xbmc_svn.bb
++++ b/recipes/xbmc/xbmc_svn.bb
+@@ -2,6 +2,7 @@ DESCRIPTION = "XBMC Media Center"
+ LICENSE = "xbmc"
+ 
+ DEPENDS = "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi libsamplerate0 libxrandr bzip2 virtual/libsdl"
++require recipes/egl/egl.inc
+ 
+ SRCREV = "e2ab481ebe964321c358ab9d6402088c714adcbe"
+ 
+-- 
+1.6.3.3
+
 
 
