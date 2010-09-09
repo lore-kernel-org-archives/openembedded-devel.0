@@ -1,47 +1,38 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1Otm5B-0005tW-9L
+Received: from 63.mail-out.ovh.net ([91.121.185.56])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OtmR8-0000o1-Hs
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 20:42:50 +0200
-Received: from dlep33.itg.ti.com ([157.170.170.112])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o89Ig62a029535
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 13:42:06 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep33.itg.ti.com (8.13.7/8.13.7) with ESMTP id o89Ig5d6016391
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 13:42:05 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o89Ig59i022830
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 13:42:05 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Thu, 9 Sep 2010 13:42:05 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Sep 2010 13:42:04 -0500
-Thread-Topic: [PATCH 2/2] ti-graphics-sdk: display full license during build
-Thread-Index: ActKAurneG2Oh/9DQXakHjOskZqYSAGS5Eow
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFAB82@dlee06.ent.ti.com>
-References: <1283364908-21950-1-git-send-email-chase.maupin@ti.com>
-	<1283364908-21950-2-git-send-email-chase.maupin@ti.com>
-In-Reply-To: <1283364908-21950-2-git-send-email-chase.maupin@ti.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 09 Sep 2010 21:05:35 +0200
+Received: (qmail 31107 invoked by uid 503); 9 Sep 2010 19:27:34 -0000
+Received: from b9.ovh.net (HELO mail239.ha.ovh.net) (213.186.33.59)
+	by 63.mail-out.ovh.net with SMTP; 9 Sep 2010 19:27:34 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Sep 2010 21:04:49 +0200
+Received: from tal33-3-82-233-81-124.fbx.proxad.net (HELO ?192.168.2.15?)
+	(ebenard%eukrea.com@82.233.81.124)
+	by ns0.ovh.net with SMTP; 9 Sep 2010 21:04:47 +0200
+Message-ID: <4C892FCE.3080306@eukrea.com>
+Date: Thu, 09 Sep 2010 21:04:46 +0200
+From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100825 Thunderbird/3.1.3
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.153
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+To: openembedded-devel@lists.openembedded.org
+References: <1284034317-9428-1-git-send-email-eric@eukrea.com>	<i6atdj$5b0$1@dough.gmane.org>	<4C88FA2F.1030206@eukrea.com>
+	<i6b912$snb$1@dough.gmane.org>
+In-Reply-To: <i6b912$snb$1@dough.gmane.org>
+X-Ovh-Tracer-Id: 3444972242051378505
+X-Ovh-Remote: 82.233.81.124 (tal33-3-82-233-81-124.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.56
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] ti-graphics-sdk: display full license during build
+Subject: Re: [PATCH] fix bitbake ERRORS for machine not having	virtual/egl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,101 +46,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 18:42:50 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Sep 2010 19:05:36 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Bump
+Le 09/09/2010 20:28, Koen Kooi a écrit :
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 09-09-10 17:15, Eric Bénard wrote:
+>> Hi Koen,
+>>
+>> Le 09/09/2010 17:10, Koen Kooi a écrit :
+>> On 09-09-10 14:11, Eric Bénard wrote:
+>>>> * This patch creates a egl.inc which contains the compatible machines
+>>>> for
+>>>> recipes depending on virtual/egl and thus will workaround this error.
+>>>
+>>> The intent is good, but I have to NAK this for the time being.
+>>>
+>>> Could you change that to use:
+>>>
+>>> COMPATIBLE_MACHINE = "omap3"?
+>>>
+>> in egl.inc ?
+>> Should this also be changed in powervr-drivers/libgles-omap.inc ?
+>>
+>> Then, how do you handle omap3 machines which don't have GLES engine (ex
+>> OMAP3503) ?
+>
+> That's handled by the initscript:
+> http://gitorious.org/angstrom/openembedded/blobs/org.openembedded.dev/recipes/powervr-drivers/libgles-omap3/rc.pvr#line33
+>
+OK but that won't prevent packages of applications which depends on 
+virtual/egl to be installed and the user to try to run applications 
+which will fail because GLES is not handled by the machine.
 
-> -----Original Message-----
-> From: Chase Maupin [mailto:chasemaupin03@gmail.com]
-> Sent: Wednesday, September 01, 2010 1:15 PM
-> To: openembedded-devel@lists.openembedded.org
-> Cc: Maupin, Chase
-> Subject: [PATCH 2/2] ti-graphics-sdk: display full license during build
->=20
-> * Change the TI_BIN_UNPK_CMDS to feed in enought spaces to
->   display the entire EULA during the build process.
->=20
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> ---
->  recipes/powervr-drivers/libgles-omap3.inc          |    7 +++++--
->  .../omap3-sgx-modules_1.4.14.2514.bb               |    5 ++++-
->  .../omap3-sgx-modules_1.4.14.2616.bb               |    5 ++++-
->  3 files changed, 13 insertions(+), 4 deletions(-)
->=20
-> diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-
-> drivers/libgles-omap3.inc
-> index 5b248b0..1c00708 100644
-> --- a/recipes/powervr-drivers/libgles-omap3.inc
-> +++ b/recipes/powervr-drivers/libgles-omap3.inc
-> @@ -1,7 +1,7 @@
->  DESCRIPTION =3D "libGLES for the omap3"
->  LICENSE =3D "proprietary-binary"
->=20
-> -PR =3D "r6"
-> +PR =3D "r7"
->=20
->  COMPATIBLE_MACHINE =3D "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-
-> t35|igep0020|omap3-pandora|omap3-
-> touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
->=20
-> @@ -37,7 +37,10 @@ SRC_URI =3D
-> "http://install.source.dir.local/OMAP35x_Graphics_SDK_setuplinux_${SGX
->  S =3D "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}"
->=20
->  # Logic to unpack installjammer file
-> -TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
-> +# NOTE: It takes 16 spaces to display the full EULA.  Too many spaces
-> +#       will cause the package to be installed into the wrong directory
-> +#       and you will see build failures.  This EULA should not change.
-> +TI_BIN_UNPK_CMDS=3D"Y:                qY:workdir:Y"
->  require ../ti/ti-eula-unpack.inc
->=20
->  BINLOCATION ?=3D "${S}/gfx_rel"
-> diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-> b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-> index a2fcf22..350dc09 100644
-> --- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-> +++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2514.bb
-> @@ -7,7 +7,10 @@ PR_append =3D "a"
->  # http://software-
-> dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_02/inde=
-x
-> _FDS.html
->  # see libgles-omap3.inc for detailed installation instructions
->=20
-> -TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
-> +# NOTE: It takes 16 spaces to display the full EULA.  Too many spaces
-> +#       will cause the package to be installed into the wrong directory
-> +#       and you will see build failures.  This EULA should not change.
-> +TI_BIN_UNPK_CMDS=3D"Y:                qY:workdir:Y"
->  require ../ti/ti-eula-unpack.inc
->=20
->  SGXPV =3D "3_01_00_02"
-> diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-> b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-> index 4ed2540..ba6e925 100644
-> --- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-> +++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-> @@ -7,7 +7,10 @@ PR_append =3D "c"
->  # http://software-
-> dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/3_01_00_06/inde=
-x
-> _FDS.html
->  # see libgles-omap3.inc for detailed installation instructions
->=20
-> -TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
-> +# NOTE: It takes 16 spaces to display the full EULA.  Too many spaces
-> +#       will cause the package to be installed into the wrong directory
-> +#       and you will see build failures.  This EULA should not change.
-> +TI_BIN_UNPK_CMDS=3D"Y:                qY:workdir:Y"
->  require ../ti/ti-eula-unpack.inc
->=20
->  SGXPV =3D "3_01_00_06"
-> --
-> 1.7.0.4
+Actually OMAP3 boards supported in OE seems to all have the GLES support 
+so that won't be a big problem and that will remove the error.
 
+Eric
 
 
