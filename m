@@ -1,45 +1,37 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Otn1G-0002s0-DI
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Oto4o-0002ug-T3
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 21:42:52 +0200
-Received: by yxg6 with SMTP id 6so313666yxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 12:42:06 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=OmXDLgqhRVrzWyXxQRejGRK0aMVoMeIgZhSmlpO2gbY=;
-	b=tfjB2lzEvdBJ81ZxCx4PPSCWHXIORB/mueBVhuWPNAcPKD4JeupkHDSvEEjAZ5xfKI
-	HLcaq4S6HmqDhzAyiRf/xC3FsdRjFisT8Ea+rUGoVhjhmn3K+Urt6DclXCYPn5e7kVQ/
-	NoCDJiQHjCTI8InKrcm7NtEMHYFmgOtTWhcmU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=EAx4bxc2ZDemsFw+bQ5esMxOMN6KFa+pRa5f7kSfwwFoG3c51N+AfiDyizm0oKh0Gd
-	UeNlFb8PF5clJ78VUoVuVCFFWoZioy5U0dpF+iGp/ajFvzg5l7RRnyrTvixv5pNUuSZM
-	AC//SJFgqF/L/sIpuwU2pa8/0JGZXNbli+i98=
-Received: by 10.100.80.6 with SMTP id d6mr401395anb.64.1284061325449; Thu, 09
-	Sep 2010 12:42:05 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Thu, 9 Sep 2010 12:41:45 -0700 (PDT)
-In-Reply-To: <i6a71i$2tv$1@dough.gmane.org>
-References: <1284010137-15488-1-git-send-email-raj.khem@gmail.com>
-	<i6a71i$2tv$1@dough.gmane.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Thu, 9 Sep 2010 12:41:45 -0700
-Message-ID: <AANLkTi=+R=7t_6Uh2GXPAgzV_ViPwK3v9dkTLajzFSVb@mail.gmail.com>
+	Thu, 09 Sep 2010 22:50:38 +0200
+Received: (qmail 22130 invoked by uid 503); 9 Sep 2010 21:01:24 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 9 Sep 2010 21:01:24 -0000
+Received: (qmail 960 invoked by uid 503); 9 Sep 2010 20:33:52 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 9 Sep 2010 20:33:52 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Sep 2010 22:49:53 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 9 Sep 2010 22:49:52 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Thu,  9 Sep 2010 22:48:27 +0200
+Message-Id: <1284065307-5766-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 5219671969043361097
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libgles-omap3_3.01.00.07.bb: Add recipe
+Subject: [PATCH] util-linux-ng: fix readprofile update-alternatives vs busybox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,125 +45,87 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 19:42:53 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Sep 2010 20:50:39 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote=
-:
-> -----BEGIN PGP SIGNED MESSAGE-----
-> Hash: SHA1
->
-> On 09-09-10 07:28, Khem Raj wrote:
->> * Fix omap3-sgx-modules_1.4.14.2616.bb to use new SDK
->
-> Khem, the .07 release was made to get the license and distribution
-> changes through, it can now be downloaded with wget without filling in a
-> form.
-> Could you please amend this patch so that the recipes fetch it directly?
+* util-linux-ng installs readprofile in /sbin, busybox installs
+it in /usr/sbin which tiggers the following log when configuring
+the package :
+Configuring util-linux-ng-readprofile.
+update-alternatives: Error: cannot register alternative readprofile to
+/sbin/readprofile since it is already registered to /usr/sbin/readprofile
+Collected errors:
+ * pkg_run_script: postinst script returned status 1.
+ * opkg_configure: util-linux-ng-readprofile.postinst returned 1.
 
-hmm thats good. but I could not grok the direct link. Do you have it handy =
-?
+* the fix is to have util-linux-ng install readprofile in /usr/sbin
 
->
->
-> regards,
->
-> Koen
->
->
->>
->> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->> ---
->> =C2=A0.../powervr-drivers/libgles-omap3_3.01.00.07.bb =C2=A0 =C2=A0| =C2=
-=A0 19 +++++++++++++++++++
->> =C2=A0.../omap3-sgx-modules_1.4.14.2616.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A08 +++-----
->> =C2=A02 files changed, 22 insertions(+), 5 deletions(-)
->> =C2=A0create mode 100644 recipes/powervr-drivers/libgles-omap3_3.01.00.0=
-7.bb
->>
->> diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb b/recip=
-es/powervr-drivers/libgles-omap3_3.01.00.07.bb
->> new file mode 100644
->> index 0000000..30a65b3
->> --- /dev/null
->> +++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb
->> @@ -0,0 +1,19 @@
->> +BINLOCATION =3D "${S}/gfx_rel_es3.x"
->> +
->> +ES2LOCATION =3D "${S}/gfx_rel_es2.x"
->> +ES3LOCATION =3D "${S}/gfx_rel_es3.x"
->> +ES5LOCATION =3D "${S}/gfx_rel_es5.x"
->> +
->> +require libgles-omap3.inc
->> +
->> +# download required binary distribution from:
->> +# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf=
-xsdk/latest/index_FDS.html
->> +# see libgles-omap3.inc for detailed installation instructions
->> +
->> +SGXPV =3D "3_01_00_07"
->> +IMGPV =3D "1.4.14.2616"
->> +BINFILE :=3D "OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin"
->> +
->> +SRC_URI[md5sum] =3D "b33a82d393ed0a6c26ad0d952542d762"
->> +SRC_URI[sha256sum] =3D "6f1720c2a8c2ce84b0020e144c2d77b56106a1fff45b44f=
-8fcfd74d0f2559d8e"
->> +
->> diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb b/=
-recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
->> index 0d2818b..fc98b7b 100644
->> --- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
->> +++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
->> @@ -10,12 +10,11 @@ PR_append =3D "c"
->> =C2=A0TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
->> =C2=A0require ../ti/ti-eula-unpack.inc
->>
->> -SGXPV =3D "3_01_00_06"
->> +SGXPV =3D "3_01_00_07"
->> =C2=A0IMGPV =3D "1.4.14.2616"
->> =C2=A0BINFILE :=3D "OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin"
->>
->> =C2=A0SRC_URI =3D "http://install.source.dir.local/OMAP35x_Graphics_SDK_=
-setuplinux_${SGXPV}.bin \
->> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://texture-width.patch;striplev=
-el=3D2 \
->> =C2=A0"
->>
->> =C2=A0S =3D "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}/GFX_Linux_KM"
->> @@ -35,6 +34,5 @@ do_install() {
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${S}/services4/3rdparty/bufferclass_ti=
-/bufferclass_ti.ko \
->> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0${D}/lib/modules/${KERNEL_VERSION}/ker=
-nel/drivers/gpu/pvr
->> =C2=A0}
->> -
->> -SRC_URI[md5sum] =3D "7aa37ca72f34011d353e72cc67f8aac1"
->> -SRC_URI[sha256sum] =3D "02276bc728699c36b0d2411c60f23030aa066ca6b8ed5ad=
-b7a40204563a227fb"
->> +SRC_URI[md5sum] =3D "b33a82d393ed0a6c26ad0d952542d762"
->> +SRC_URI[sha256sum] =3D "6f1720c2a8c2ce84b0020e144c2d77b56106a1fff45b44f=
-8fcfd74d0f2559d8e"
->
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
->
-> iD8DBQFMiJ9yMkyGM64RGpERAoK2AJ9SsjGBUCtYY5/BOE8FX9ZQq8in3wCgqhnk
-> H28hsB4lTTxnuJUwxpjcSJc=3D
-> =3D9LzQ
-> -----END PGP SIGNATURE-----
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+* this patch fix http://bugs.openembedded.org/show_bug.cgi?id=5474 as
+suggested by Tom Rini
 
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/util-linux-ng/util-linux-ng.inc |   15 +++++++++++----
+ 1 files changed, 11 insertions(+), 4 deletions(-)
 
+diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
+index cbdf68d..ca0790e 100644
+--- a/recipes/util-linux-ng/util-linux-ng.inc
++++ b/recipes/util-linux-ng/util-linux-ng.inc
+@@ -8,7 +8,7 @@ inherit autotools gettext
+ 
+ DEFAULT_PREFERENCE = "-1"
+ 
+-INC_PR = "r27"
++INC_PR = "r28"
+ 
+ # allows for a release candidate
+ RC ?= ""
+@@ -51,7 +51,7 @@ FILES_util-linux-ng-losetup = "${base_sbindir}/losetup.${PN}"
+ FILES_util-linux-ng-mount = "${base_bindir}/mount.${PN} ${sysconfdir}/default/mountall"
+ FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
+ # Moved to ${base_sbindir} by do_install:
+-FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
++FILES_util-linux-ng-readprofile = "${sbindir}/readprofile.${PN}"
+ FILES_util-linux-ng-fsck = "${base_sbindir}/fsck.${PN}"
+ FILES_util-linux-ng-blkid = "${base_sbindir}/blkid.${PN}"
+ FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
+@@ -124,8 +124,9 @@ do_install () {
+ 	mkdir -p ${D}${base_bindir}
+ 
+         sbinprogs="agetty blockdev ctrlaltdel cfdisk"
+-        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk readprofile fsck blkid vigr vipw"
++        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk fsck blkid vigr vipw"
+         usrbinprogs_a="chfn chsh hexdump last logger mesg newgrp renice wall setsid chrt"
++        usrsbinprogs_a="readprofile"
+         binprogs_a="dmesg kill more umount mount login reset"
+ 
+         if [ "${base_sbindir}" != "${sbindir}" ]; then
+@@ -152,6 +153,12 @@ do_install () {
+                 fi
+         done
+ 
++        for p in $usrsbinprogs_a; do
++                if [ -f "${D}${sbindir}/$p" ]; then
++                        mv "${D}${sbindir}/$p" "${D}${sbindir}/$p.${PN}"
++                fi
++        done
++
+         for p in $binprogs_a; do
+                 if [ -f "${D}${base_bindir}/$p" ]; then
+                         mv "${D}${base_bindir}/$p" "${D}${base_bindir}/$p.${PN}"
+@@ -271,7 +278,7 @@ pkg_prerm_util-linux-ng-swaponoff () {
+ }
+ 
+ pkg_postinst_util-linux-ng-readprofile() {
+-    update-alternatives --install ${base_sbindir}/readprofile readprofile readprofile.${PN} 100
++    update-alternatives --install ${sbindir}/readprofile readprofile readprofile.${PN} 100
+ }
+ 
+ pkg_prerm_util-linux-ng-readprofile () {
+-- 
+1.6.3.3
 
---=20
--Khem
 
 
