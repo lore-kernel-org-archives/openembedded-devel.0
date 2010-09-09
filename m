@@ -1,30 +1,39 @@
-Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OtdbQ-0003jH-HS
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 11:39:33 +0200
-Received: (qmail invoked by alias); 09 Sep 2010 09:38:49 -0000
-Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
-	by mail.gmx.net (mp022) with SMTP; 09 Sep 2010 11:38:49 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX19cSNNQ3EdcNEkyAW713IOFu4Mrm3l/TtlETLasUq
-	ksztc8JKdG2/vG
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 9 Sep 2010 11:23:58 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Otdep-0004IZ-4I
+	for openembedded-devel@openembedded.org; Thu, 09 Sep 2010 11:43:04 +0200
+Received: by gya6 with SMTP id 6so560107gya.6
+	for <openembedded-devel@openembedded.org>;
+	Thu, 09 Sep 2010 02:42:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=k/KIQU2IZVRJ4NwQlw8SHR21TNOYZrdicHbm/fuuJYk=;
+	b=Yk9Ox7bRKaEUWB1c2qpqUJbGmEN4uqhlRv2MnJx7Hhk2rl7huPYwCHsCOfPri2tqF2
+	IN0MsYTV51aiGrT/S+VOl4Lk6yoiq+RCMl1FmCPmJyv8gtvhfSBL+ninkmb8lQj2TCi5
+	HBqTB4cATFTHES4ygcG7N1nLfluAl96xdCa4g=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=TIdwQ88tm1chuMlJZ3Nks3XaCdFiUXBtHTT1yENQ4jkRRjkq4AoIaFP+7P9WZ+FIrX
+	nV6iUu0xaERNOhsX74QUtyE/OUFGLSMu9Zg7vjZCrFmZnp0aa6kOnaOdkIvU1a8aoGbo
+	x2+H8dnG1EpC/rkP/Rt8nOVKJPy7D+bb8buJI=
 MIME-Version: 1.0
-Message-Id: <201009091123.58183.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.22
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Received: by 10.150.190.10 with SMTP id n10mr219168ybf.286.1284025340209; Thu,
+	09 Sep 2010 02:42:20 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Thu, 9 Sep 2010 02:42:20 -0700 (PDT)
+Date: Thu, 9 Sep 2010 11:42:20 +0200
+Message-ID: <AANLkTikamPAk9W64hf3HYX4effDwOovU=rvs=CiwccgS@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] clutter-box2d: renamed clutter-box2d_0.10.0_git.bb -> clutter-box2d_git.bb
+Subject: slugos/nslu2le/binutils build: fail
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,57 +47,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 09:39:33 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Sep 2010 09:43:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
----
- recipes/clutter/clutter-box2d_0.10.0_git.bb |   12 ------------
- recipes/clutter/clutter-box2d_git.bb        |   12 ++++++++++++
- 2 files changed, 12 insertions(+), 12 deletions(-)
- delete mode 100644 recipes/clutter/clutter-box2d_0.10.0_git.bb
- create mode 100644 recipes/clutter/clutter-box2d_git.bb
+I was asked to give slugos as spin on the autobuilder, and as slugos
+still occupies a sweet spot in me I gave it a spin.
+Unfoprtunately things did not build:
 
-diff --git a/recipes/clutter/clutter-box2d_0.10.0_git.bb b/recipes/clutter/clutter-box2d_0.10.0_git.bb
-deleted file mode 100644
-index 4696a01..0000000
---- a/recipes/clutter/clutter-box2d_0.10.0_git.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require clutter-box2d.inc
--
--SRCREV = "4e72b9c135a9439b82d801c62422531db611f98b"
--
--PR = "${INC_PR}.0"
--PR_append = "+git${SRCREV}"
--
--SRC_URI = "git://git.clutter-project.org/clutter-box2d.git;protocol=git \
--           file://example-data-location.patch \
--          "
--
--S = "${WORKDIR}/git"
-diff --git a/recipes/clutter/clutter-box2d_git.bb b/recipes/clutter/clutter-box2d_git.bb
-new file mode 100644
-index 0000000..4696a01
---- /dev/null
-+++ b/recipes/clutter/clutter-box2d_git.bb
-@@ -0,0 +1,12 @@
-+require clutter-box2d.inc
-+
-+SRCREV = "4e72b9c135a9439b82d801c62422531db611f98b"
-+
-+PR = "${INC_PR}.0"
-+PR_append = "+git${SRCREV}"
-+
-+SRC_URI = "git://git.clutter-project.org/clutter-box2d.git;protocol=git \
-+           file://example-data-location.patch \
-+          "
-+
-+S = "${WORKDIR}/git"
--- 
-1.5.3.4
+distro: slugos
+machine: nslu2le
+bitbake target: binutils
+libc: glibc.
+
+Failure is in building glibc.c:
+
+| /home/hudson/jobs/FM_test/workspace/tmp/work/armv5te-linux-gnueabi/glibc-2.10.1-r36.1/build-arm-linux-gnueabi/libc_pic.os:
+In function `faccessat':
+| find_exidx.c:(.text+0x900e8): undefined reference to `fstatat64'
+| collect2: ld returned 1 exit status
+| make[1]: *** [/home/hudson/jobs/FM_test/workspace/tmp/work/armv5te-linux-gnueabi/glibc-2.10.1-r36.1/build-arm-linux-gnueabi/libc.so]
+Error 1
+| make[1]: Leaving directory
+`/home/hudson/jobs/FM_test/workspace/tmp/work/armv5te-linux-gnueabi/glibc-2.10.1-r36.1/glibc-2.10.1'
+| make: *** [all] Error 2
+| FATAL: oe_runmake failed
+NOTE: package glibc-2.10.1-r36.1: task do_compile: Failed
+
+I can imagine this has something to do with kernel headers, but didn't
+investigate.
+
+Frans
 
 
