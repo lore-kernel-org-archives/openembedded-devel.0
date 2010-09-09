@@ -1,47 +1,45 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1OtgHB-0000gW-Nt
+	(envelope-from <sakoman@gmail.com>) id 1OtgoR-0000Xx-ML
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 14:30:51 +0200
-Received: from dlep35.itg.ti.com ([157.170.170.118])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o89CU6Sp001147
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Thu, 09 Sep 2010 15:05:13 +0200
+Received: by wwi14 with SMTP id 14so1608557wwi.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 07:30:06 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep35.itg.ti.com (8.13.7/8.13.7) with ESMTP id o89CU5Ag019394
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 07:30:05 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o89CU5Kf018595
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 07:30:05 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Thu, 9 Sep 2010 07:30:04 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Thu, 9 Sep 2010 07:30:04 -0500
-Thread-Topic: [oe] [PATCH] base.bbclass: fix soc-family test
-Thread-Index: ActP7mpdEP3ZkX3QTsK1iMT5KJmcPAALD8Ew
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFAA14@dlee06.ent.ti.com>
-References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
-In-Reply-To: <AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
+	Thu, 09 Sep 2010 06:04:29 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=xd+kdm9rjwWmMLTofBlxJrRGYj2FjRNj0QdciUckqJ4=;
+	b=TZL/YGqq7AXHj2AM4xj96s9EiGnzchC2H/C0bxFEbs+5T9R7gEomu2plLaoT9ggU/4
+	pruAgDbdngMd7W1wNBdeE0LuJ7n7Npe7xxnDEWM/2hVRDriK378h3SBdqyGOuz0x/RQM
+	NlsQY/7sh7SXeyDKG1pvivygK02H5qLlTSmGA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=NKm/ImOUbctEnJg9c284hapIj9OBduABeNEST5VaxYkXC8TIeauhHDoyD+wBRaDa/J
+	ImymUegiUs+X8LiXfh5abXPMkSY0suW//BN2SkeqoMox+FypBCdmdhrWAnvd7wlkUkzF
+	Qxf3zUo8eooLFnQanneJy1kQQanAGLke/PXsk=
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.153
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+Received: by 10.216.158.140 with SMTP id q12mr287521wek.14.1284037468507; Thu,
+	09 Sep 2010 06:04:28 -0700 (PDT)
+Received: by 10.216.16.193 with HTTP; Thu, 9 Sep 2010 06:04:28 -0700 (PDT)
+In-Reply-To: <i6a71i$2tv$1@dough.gmane.org>
+References: <1284010137-15488-1-git-send-email-raj.khem@gmail.com>
+	<i6a71i$2tv$1@dough.gmane.org>
+Date: Thu, 9 Sep 2010 06:04:28 -0700
+Message-ID: <AANLkTin-FbqWWLQE+ZJ9TA3zF70U=GBy5cbVm_DHqW5J@mail.gmail.com>
+From: Steve Sakoman <sakoman@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: sakoman@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: fix soc-family test
+Subject: Re: [PATCH] libgles-omap3_3.01.00.07.bb: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,77 +53,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 12:30:51 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="iso-8859-1"
+X-List-Received-Date: Thu, 09 Sep 2010 13:05:13 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Frans Meulenbroeks
-> Sent: Thursday, September 09, 2010 2:11 AM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH] base.bbclass: fix soc-family test
->=20
-> 2010/9/2 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> > see http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-
-> September/023680.html
-> >
-> > Signed-off-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-> > ---
-> > =A0classes/base.bbclass | =A0 =A02 +-
-> > =A01 files changed, 1 insertions(+), 1 deletions(-)
-> >
-> > diff --git a/classes/base.bbclass b/classes/base.bbclass
-> > index 299e875..2c9ad89 100644
-> > --- a/classes/base.bbclass
-> > +++ b/classes/base.bbclass
-> > @@ -337,7 +337,7 @@ python () {
-> > =A0 =A0 =A0 =A0 =A0 =A0 this_machine =3D bb.data.getVar('MACHINE', d, 1=
-)
-> > =A0 =A0 =A0 =A0 =A0 =A0 if this_machine and not re.match(need_machine,
-> this_machine):
-> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 this_soc_family =3D bb.data.getVar('SOC=
-_FAMILY', d, 1)
-> > - =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if this_soc_family and not re.match(ne=
-ed_machine,
-> this_soc_family):
-> > + =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0if (this_soc_family and not re.match(n=
-eed_machine,
-> this_soc_family)) or not this_soc_family:
-> > =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0 raise bb.parse.SkipPackage("inc=
-ompatible with
-> machine %s" % this_machine)
-> >
-> > =A0 =A0 =A0 =A0 need_target =3D bb.data.getVar('COMPATIBLE_TARGET_SYS',=
- d, 1)
-> > --
-> > 1.6.4.2
-> >
+n Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+> -----BEGIN PGP SIGNED MESSAGE-----
+> Hash: SHA1
+>
+> On 09-09-10 07:28, Khem Raj wrote:
+>> * Fix omap3-sgx-modules_1.4.14.2616.bb to use new SDK
+>
+> Khem, the .07 release was made to get the license and distribution
+> changes through, it can now be downloaded with wget without filling in a
+> form.
 
-Acked-by: Chase Maupin <chase.maupin@ti.com>
+Koen:  does the .07 release build against recent linux-omap kernels or
+is it still broken in the same way as the .06 version?
 
->=20
-> Bump.
->=20
-> This is out for a week now without any feedback, although the patch is
-> quite trivial.
->=20
-> Actually I am quite disappointed by the developers who created and
-> pushed the SOC_FAMILY patch.
-> They were very eager to push this change in a day, without waiting for
-> the discussion on it to conclude, but they seem to be not-so-willing
-> to review a fix for a problem they caused (let alone resolve the
-> problem). What is even somewhat irritating is that one of the people
-> involved is often in the front seat when it comes to criticizing
-> others if they make a mistake.
->=20
-> Frans.
->=20
+Steve
+
+> Could you please amend this patch so that the recipes fetch it directly?
+>
+>
+> regards,
+>
+> Koen
+>
+>
+>>
+>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>> ---
+>> =A0.../powervr-drivers/libgles-omap3_3.01.00.07.bb =A0 =A0| =A0 19 +++++=
+++++++++++++++
+>> =A0.../omap3-sgx-modules_1.4.14.2616.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 | =
+=A0 =A08 +++-----
+>> =A02 files changed, 22 insertions(+), 5 deletions(-)
+>> =A0create mode 100644 recipes/powervr-drivers/libgles-omap3_3.01.00.07.b=
+b
+>>
+>> diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb b/recip=
+es/powervr-drivers/libgles-omap3_3.01.00.07.bb
+>> new file mode 100644
+>> index 0000000..30a65b3
+>> --- /dev/null
+>> +++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb
+>> @@ -0,0 +1,19 @@
+>> +BINLOCATION =3D "${S}/gfx_rel_es3.x"
+>> +
+>> +ES2LOCATION =3D "${S}/gfx_rel_es2.x"
+>> +ES3LOCATION =3D "${S}/gfx_rel_es3.x"
+>> +ES5LOCATION =3D "${S}/gfx_rel_es5.x"
+>> +
+>> +require libgles-omap3.inc
+>> +
+>> +# download required binary distribution from:
+>> +# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf=
+xsdk/latest/index_FDS.html
+>> +# see libgles-omap3.inc for detailed installation instructions
+>> +
+>> +SGXPV =3D "3_01_00_07"
+>> +IMGPV =3D "1.4.14.2616"
+>> +BINFILE :=3D "OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin"
+>> +
+>> +SRC_URI[md5sum] =3D "b33a82d393ed0a6c26ad0d952542d762"
+>> +SRC_URI[sha256sum] =3D "6f1720c2a8c2ce84b0020e144c2d77b56106a1fff45b44f=
+8fcfd74d0f2559d8e"
+>> +
+>> diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb b/=
+recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+>> index 0d2818b..fc98b7b 100644
+>> --- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+>> +++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
+>> @@ -10,12 +10,11 @@ PR_append =3D "c"
+>> =A0TI_BIN_UNPK_CMDS=3D"Y: qY:workdir:Y"
+>> =A0require ../ti/ti-eula-unpack.inc
+>>
+>> -SGXPV =3D "3_01_00_06"
+>> +SGXPV =3D "3_01_00_07"
+>> =A0IMGPV =3D "1.4.14.2616"
+>> =A0BINFILE :=3D "OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin"
+>>
+>> =A0SRC_URI =3D "http://install.source.dir.local/OMAP35x_Graphics_SDK_set=
+uplinux_${SGXPV}.bin \
+>> - =A0 =A0 =A0 =A0 =A0 file://texture-width.patch;striplevel=3D2 \
+>> =A0"
+>>
+>> =A0S =3D "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}/GFX_Linux_KM"
+>> @@ -35,6 +34,5 @@ do_install() {
+>> =A0 =A0 =A0 =A0 =A0${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti=
+.ko \
+>> =A0 =A0 =A0 =A0 =A0${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu=
+/pvr
+>> =A0}
+>> -
+>> -SRC_URI[md5sum] =3D "7aa37ca72f34011d353e72cc67f8aac1"
+>> -SRC_URI[sha256sum] =3D "02276bc728699c36b0d2411c60f23030aa066ca6b8ed5ad=
+b7a40204563a227fb"
+>> +SRC_URI[md5sum] =3D "b33a82d393ed0a6c26ad0d952542d762"
+>> +SRC_URI[sha256sum] =3D "6f1720c2a8c2ce84b0020e144c2d77b56106a1fff45b44f=
+8fcfd74d0f2559d8e"
+>
+> -----BEGIN PGP SIGNATURE-----
+> Version: GnuPG v1.4.5 (Darwin)
+>
+> iD8DBQFMiJ9yMkyGM64RGpERAoK2AJ9SsjGBUCtYY5/BOE8FX9ZQq8in3wCgqhnk
+> H28hsB4lTTxnuJUwxpjcSJc=3D
+> =3D9LzQ
+> -----END PGP SIGNATURE-----
+>
+>
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
