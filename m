@@ -1,30 +1,46 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1Otecx-00062y-FF
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <sylvain.pare@gmail.com>) id 1OtelZ-0008DE-OK
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 12:45:31 +0200
-Received: (qmail invoked by alias); 09 Sep 2010 10:44:28 -0000
-Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
-	by mail.gmx.net (mp039) with SMTP; 09 Sep 2010 12:44:28 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX18KA2M129wKQ1IELQbQbDhJlFJNKxJVRM3GLFDXfL
-	WSMGTmNdGgkeQO
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Thu, 9 Sep 2010 12:29:35 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+	Thu, 09 Sep 2010 12:54:16 +0200
+Received: by qyk31 with SMTP id 31so6233725qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Sep 2010 03:53:22 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=VYtBY5JjYGTMw4CkpAotkajaIRbqRstc1YrXe3lAELU=;
+	b=uaU/nnnGpaQZusuC9H2CAFpuYBa6v28GseFpFuVIagn2Ik2Wk1bYHwU0OYJmqW4x5c
+	s4MbzJ1ksq21C0xmEMhwAQNVeVgpJHQvsrp0ZyKGQkucwP/QYTtA5U3bvLGRZi65snz9
+	BSBbjIG+n/TQAe0Lie0dNEnzMrCPhtTJ0p134=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type;
+	b=I70S3J0wikZuBkq48Efb6IFL0D4xAtQZ9MQHzLqHkaKGkvk3YUvC4kMRLQXRhVZ/3l
+	bNGWMiMQSyQKIjG4dUZw4E3cf+FLxJm+uKMLKYREyIvsHcLR1TRaypyIIyZS8x3bH/5i
+	iD4noYo8GVJbdKLbT9nZtNXaPiPijS6dETzUg=
+Received: by 10.229.190.21 with SMTP id dg21mr2086901qcb.211.1284029602360;
+	Thu, 09 Sep 2010 03:53:22 -0700 (PDT)
 MIME-Version: 1.0
-Message-Id: <201009091229.35447.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Received: by 10.229.52.74 with HTTP; Thu, 9 Sep 2010 03:53:02 -0700 (PDT)
+In-Reply-To: <AANLkTi=ikw_D=38eMtVAMz08YifDNAf=zkWN39xcbuYa@mail.gmail.com>
+References: <AANLkTikCe=1MNhEuYTG2Wusn1Fk43k-_7VTqaf6geFuT@mail.gmail.com>
+	<4C7BBA85.8040101@selfish.org>
+	<AANLkTi=ikw_D=38eMtVAMz08YifDNAf=zkWN39xcbuYa@mail.gmail.com>
+From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
+Date: Thu, 9 Sep 2010 12:53:02 +0200
+Message-ID: <AANLkTim1FvDwBBJQMqs7y3AxWos_c3sa_8dV=Mj1tL4A@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: sylvain.pare@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCHv2] clutter-box2d: renamed clutter-box2d_0.10.0_git.bb -> clutter-box2d_git.bb
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: a recipe for qt4-plugin-phonon-backend-vlc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,58 +54,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 10:45:40 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Thu, 09 Sep 2010 10:54:16 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
----
- recipes/clutter/clutter-box2d_0.10.0_git.bb |   12 ------------
- recipes/clutter/clutter-box2d_git.bb        |   13 +++++++++++++
- 2 files changed, 13 insertions(+), 12 deletions(-)
- delete mode 100644 recipes/clutter/clutter-box2d_0.10.0_git.bb
- create mode 100644 recipes/clutter/clutter-box2d_git.bb
+sorry but it is to complicated ofr my skill with oe
+so if someone is interessted int this and/or kind enought to take a look at
+this..
+thanks
+personnaly I drop it .
+KR
+Sylvain
 
-diff --git a/recipes/clutter/clutter-box2d_0.10.0_git.bb b/recipes/clutter/clutter-box2d_0.10.0_git.bb
-deleted file mode 100644
-index 4696a01..0000000
---- a/recipes/clutter/clutter-box2d_0.10.0_git.bb
-+++ /dev/null
-@@ -1,12 +0,0 @@
--require clutter-box2d.inc
--
--SRCREV = "4e72b9c135a9439b82d801c62422531db611f98b"
--
--PR = "${INC_PR}.0"
--PR_append = "+git${SRCREV}"
--
--SRC_URI = "git://git.clutter-project.org/clutter-box2d.git;protocol=git \
--           file://example-data-location.patch \
--          "
--
--S = "${WORKDIR}/git"
-diff --git a/recipes/clutter/clutter-box2d_git.bb b/recipes/clutter/clutter-box2d_git.bb
-new file mode 100644
-index 0000000..c503f81
---- /dev/null
-+++ b/recipes/clutter/clutter-box2d_git.bb
-@@ -0,0 +1,13 @@
-+require clutter-box2d.inc
-+
-+SRCREV = "4e72b9c135a9439b82d801c62422531db611f98b"
-+
-+PV = 0.10.0
-+PR = "${INC_PR}.0"
-+PR_append = "+git${SRCREV}"
-+
-+SRC_URI = "git://git.clutter-project.org/clutter-box2d.git;protocol=git \
-+           file://example-data-location.patch \
-+          "
-+
-+S = "${WORKDIR}/git"
--- 
-1.5.3.4
+2010/8/31 Sylvain Par=E9 <sylvain.pare@gmail.com>
 
+> I tried to update automoc-native and kde4 but it is not better.
+> I know that Q_WS_WIN is only defined when Qt was build for windows. But h=
+ow
+> to fix this?
+> I am not very skilled, at least not enough to fix this..
+> I miss some things so more explanation/help will be very well received!
+> thx
+> Sylvain
+>
+>
+> 2010/8/30 Holger Freyther <zecke@selfish.org>
+>
+> On 08/27/2010 08:39 PM, Sylvain Par=E9 wrote:
+>>
+>> > automoc-native itself does not build.
+>> > (According to OE's log automoc-native is ~ 2 years old.)
+>>
+>>
+>> Well, pick the latest version then, /usr/include/qt4 as include is looki=
+ng
+>> bad, Q_WS_WIN is only defined when Qt was build for windows.
+>>
+>> So in summary...
+>>        - automoc-native probably deserves an update
+>>        - it should use the "native" version of Qt (like qmake, uic,
+>> moc...)
+>>
+>> _______________________________________________
+>> Openembedded-devel mailing list
+>> Openembedded-devel@lists.openembedded.org
+>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>>
+>
+>
 
