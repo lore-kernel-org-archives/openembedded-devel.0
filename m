@@ -1,35 +1,43 @@
-Received: from mail.cvg.de ([62.153.82.30])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <enrico.scholz@sigma-chemnitz.de>) id 1OtlYi-0004cb-LJ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 20:09:17 +0200
-Received: from ensc-virt.intern.sigma-chemnitz.de
-	(ensc-virt.intern.sigma-chemnitz.de [192.168.3.24])
-	by mail.cvg.de (8.14.4/8.14.4) with ESMTP id o89I8Weh016362
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OtlsY-0007Wq-KW for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Sep 2010 20:29:47 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Otlrr-0000In-I6 for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Sep 2010 20:29:03 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Sep 2010 20:29:03 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 9 Sep 2010 20:08:33 +0200
-Received: from ensc by ensc-virt.intern.sigma-chemnitz.de with local (Exim
-	4.72) (envelope-from <ensc@sigma-chemnitz.de>) id 1OtlXz-00014j-VM
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 20:08:32 +0200
-From: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
+	Thu, 09 Sep 2010 20:29:03 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-Date: Thu, 09 Sep 2010 20:08:31 +0200
-Message-ID: <ly62yeaixs.fsf@ensc-virt.intern.sigma-chemnitz.de>
-User-Agent: Gnus/5.13 (Gnus v5.13) Emacs/23.2 (gnu/linux)
-MIME-Version: 1.0
-Sender: Enrico Scholz <enrico.scholz@sigma-chemnitz.de>
-X-Scanned-By: MIMEDefang 2.68 on 62.153.82.30
-X-SA-Exim-Connect-IP: 62.153.82.30
-X-SA-Exim-Mail-From: enrico.scholz@sigma-chemnitz.de
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 09 Sep 2010 20:28:50 +0200
+Message-ID: <i6b912$snb$1@dough.gmane.org>
+References: <1284034317-9428-1-git-send-email-eric@eukrea.com>	<i6atdj$5b0$1@dough.gmane.org>
+	<4C88FA2F.1030206@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <4C88FA2F.1030206@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-6.6 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_MED,SPF_HELO_PASS,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: ncurses/libtermcap fixes
+Subject: Re: [PATCH] fix bitbake ERRORS for machine not having virtual/egl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,33 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 18:09:17 -0000
-Content-Type: text/plain; charset=us-ascii
+X-List-Received-Date: Thu, 09 Sep 2010 18:29:47 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Hi,
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-in the last days I committed several changes to the ncurses receipt
-which should fix:
+On 09-09-10 17:15, Eric Bénard wrote:
+> Hi Koen,
+> 
+> Le 09/09/2010 17:10, Koen Kooi a écrit :
+> On 09-09-10 14:11, Eric Bénard wrote:
+>>> * This patch creates a egl.inc which contains the compatible machines
+>>> for
+>>> recipes depending on virtual/egl and thus will workaround this error.
+>>
+>> The intent is good, but I have to NAK this for the time being.
+>>
+>> Could you change that to use:
+>>
+>> COMPATIBLE_MACHINE = "omap3"?
+>>
+> in egl.inc ?
+> Should this also be changed in powervr-drivers/libgles-omap.inc ?
+> 
+> Then, how do you handle omap3 machines which don't have GLES engine (ex
+> OMAP3503) ?
 
-* broken widec builds for native/sdk targets
+That's handled by the initscript:
+http://gitorious.org/angstrom/openembedded/blobs/org.openembedded.dev/recipes/powervr-drivers/libgles-omap3/rc.pvr#line33
 
-* missing -ltermcap
+regards,
 
-* implicit -ltinfo on -lncurses (--> this might require a 
+Koen
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
 
-  |  bitbake ncurses -c clean
-
-  to take an effect because staging does not change symbolic links to
-  regular files on updates)
-
-
-I saw several patches which deal with this issues and which are probably
-not needed anymore.  So, please give recent snapshot a try and see whether
-problems are still there.
-
-
-
-Enrico
+iD8DBQFMiSdiMkyGM64RGpERAgZ9AKCc8SaPq3w9pL5ZC/vMFgo9mdv05ACgn7CM
+rBtN/3iHVSWLrI5nUy3Grm4=
+=1czF
+-----END PGP SIGNATURE-----
 
 
 
