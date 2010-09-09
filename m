@@ -1,37 +1,44 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from out1.smtp.messagingengine.com ([66.111.4.25])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OtdPd-0005HA-3l
+	(envelope-from <vjensen@gmx.de>) id 1OtdSr-0007YG-RP
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 11:27:22 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OtdOx-0006n0-Tk
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 10:26:39 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OtdOx-0005rf-KQ
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 10:26:39 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 09 Sep 2010 11:30:46 +0200
+Received: from compute1.internal (compute1.nyi.mail.srv.osa [10.202.2.41])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 3148F1F1
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Sep 2010 05:30:01 -0400 (EDT)
+Received: from frontend2.messagingengine.com ([10.202.2.161])
+	by compute1.internal (MEProxy); Thu, 09 Sep 2010 05:30:01 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=uZMX/fkOadjgmlWUvl6d5ti25EY=;
+	b=fxiWUWOonntn30O0p4/tEHsTYMWvjviu8Uki5XYWT13Fj/wM8M7TMdQKYje5gUuwSINYp3m8UrBx7gQWyT6a0oc81bfV6Cgf3YIXTZyQx+APohUDZNUGGZhK9RWtiq8nIYEWjEuXTwmvqPkV/U49g42GDNnQJ6CXKzCqJiMCAgE=
+X-Sasl-enc: RARkyCdPMjgDSZTvoIfVsB4WRn4sx9PHup6z7shtLJoV 1284024600
+Received: from [192.168.1.34] (hnvr-4d07b782.pool.mediaWays.net [77.7.183.130])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id A15D75E1379
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu,  9 Sep 2010 05:30:00 -0400 (EDT)
+Date: Thu, 9 Sep 2010 11:31:41 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
-References: <20100903111210.GA17702@game.jcrosoft.org>
-	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
-Date: Thu, 09 Sep 2010 10:26:39 +0100
-Message-ID: <1284024399.28520.1444.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+In-Reply-To: <1283946231-29039-1-git-send-email-fahad_usman@mentor.com>
+Message-ID: <alpine.LNX.2.00.1009091126390.11516@asterix.crazy-teaparty.dyndns.org>
+References: <1283946231-29039-1-git-send-email-fahad_usman@mentor.com>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
+MIME-Version: 1.0
+X-SA-Exim-Connect-IP: 66.111.4.25
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make it global
+Subject: Re: [PATCH] glib-1.2: merged native and non-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,43 +52,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 09:27:22 -0000
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 09 Sep 2010 09:30:46 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Sat, 2010-09-04 at 05:14 +0200, Jean-Christophe PLAGNIOL-VILLARD
-wrote:
-> diff --git a/conf/bitbake.conf b/conf/bitbake.conf
-> index 677c76a..672d8df 100644
-> --- a/conf/bitbake.conf
-> +++ b/conf/bitbake.conf
-> @@ -113,6 +113,8 @@ TARGET_SYS = "${TARGET_ARCH}${TARGET_VENDOR}${@['-' + bb.data.getVar('TARGET_OS'
->  TARGET_PREFIX = "${TARGET_SYS}-"
->  TARGET_CC_ARCH = ""
->  TARGET_EXEEXT = ""
-> +TARGET_SOC_FAMILY ?= "Unknown"
-> +
->  
->  SDK_ARCH ?= "${BUILD_ARCH}"
->  SDK_OS ?= "${BUILD_OS}"
-> @@ -677,9 +679,9 @@ BUILDCFG_NEEDEDVARS ?= "TARGET_ARCH TARGET_OS"
->  #
->  # This works for  functions as well, they are really just environment variables.
->  # Default OVERRIDES to make compilation fail fast in case of build system misconfiguration.
-> -OVERRIDES = "local:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:build-${BUILD_OS}:fail-fast:pn-${PN}"
-> +OVERRIDES = "local:${MACHINE}:${DISTRO}:${TARGET_OS}:${TARGET_ARCH}:${TARGET_SOC_FAMILY}:${TARGET_ARCH}_${TARGET_SOC_FAMILY}:build-${BUILD_OS}:fail-fast:pn-${PN}"
+Hello Fahad,
 
-I don't have much of an opinion on the renaming, but the overrides part
-will cause an unacceptable level of namespace pollution.  As it stands,
-everybody will suddenly get "Unknown" in their OVERRIDES and this is not
-at all desirable.
+On Wed, 8 Sep 2010, Fahad Usman wrote:
 
-If you must add these kinds of things to the default OVERRIDES then they
-need a suitable namespace prefix, for example something like
-soc-family-${SOC_FAMILY}.  (Alternatively, put it in your own DISTRO
-configuration where you can do whatever you like.)
+> * removed the glib-1.2-native_1.2.10.bb file
+> * added NATIVE_INSTALL_WORKS = "1"
+> * added BBCLASSEXTEND = "native"
+> * converted do_stage of native recipe to do_install_virtclass-native in the combined recipe
+> * added DEPENDS_virtclass-native = "" to avoid dependencies loops
+> * added gettext in inherit because it was needed by the native recipes
+> * bumped PR
+>
+> Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+> ---
+> recipes/glib-1.2/glib-1.2-native_1.2.10.bb |   49 ----------------------------
+> recipes/glib-1.2/glib-1.2_1.2.10.bb        |   20 ++++++++++-
+> 2 files changed, 18 insertions(+), 51 deletions(-)
 
-p. 
 
+> diff --git a/recipes/glib-1.2/glib-1.2_1.2.10.bb b/recipes/glib-1.2/glib-1.2_1.2.10.bb
+> index 72ee826..67266d4 100644
+> --- a/recipes/glib-1.2/glib-1.2_1.2.10.bb
+> +++ b/recipes/glib-1.2/glib-1.2_1.2.10.bb
+> @@ -4,7 +4,8 @@ SECTION = "libs"
+> PRIORITY = "optional"
+> LICENSE = "LGPL"
+> DEPENDS = "glib-1.2-native"
+> -PR = "r4"
+> +DEPENDS_virtclass-native = ""
+> +PR = "r5"
+
+I don't know if everyone thinks so but I feel the following line is more 
+elegant:
+
+DEPENDS_pn-glib-1.2 += "glib-1.2-native"
+
+You skip the DEPENDS_virtclass-native line and may use the "+=" operator.
+
+Best regards,
+    Vitus
+
+PS: taken from my htmldoc recipe in patchwork
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
