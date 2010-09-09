@@ -1,48 +1,51 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oth0d-00048U-Tj
+	(envelope-from <captain.deadly@gmail.com>) id 1Othdg-0005Ee-Ks
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 15:17:50 +0200
-Received: by ywa8 with SMTP id 8so617915ywa.6
+	Thu, 09 Sep 2010 15:58:09 +0200
+Received: by wwb13 with SMTP id 13so348690wwb.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 06:16:55 -0700 (PDT)
+	Thu, 09 Sep 2010 06:57:26 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=KlBYcorDk4Ne8YUIacZ21nOrc18XvFxNvSXnScLq570=;
-	b=JsgfLAJBhQDcV/+BevXKTtARQ5tR/EASLt5Iwwbd6IC13rFLUESKEGdNqvZz6n72jT
-	dK9ZMpaWjWcumRaTkEAJRK8jd6S26E+Ww53he2Se3o/eyOrnfjOa2c+Nj+j47BHPTS/9
-	+106jCU8wq+usrD3Pvr0s/Ovm00el0gdO3UL0=
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:references:in-reply-to
+	:x-enigmail-version:content-type:content-transfer-encoding;
+	bh=k2qsoRLCcMjn8T3pAKntSXEtX/RNDKQssjMSPHX8Q/o=;
+	b=MVwjNEM2OLkzzbcKDFyTP6cuJeE+HikZMjtU+a2So83WTLSqvcEaCSIYikvFiQHZLo
+	4KXvPU1NdBS2RRDQAaN/OyxH5bhmAhifp27tjnEUK8jbZTIpSCRKfxLfmFuXO0R5OFwg
+	LY2NZc2qQRLbUNRMrm9Ca36EKWYFNNsgjglvw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=c8DvHI6lMAa7m4AXRxAiXcyzSNVc5SpHJ8qTWf2iaV6NcuprWA3//BKq1iJf1mYAHY
-	7yYn9GJm4WUSThjuI9yni+MSP7zMw5PRg9DpyT1JYXHE3Gc0tgGxa+2axQPhYJpN/l87
-	0KhlgIgI9Uu8zzf25jmcyehZpnyTVkyS148lQ=
+	h=message-id:date:from:user-agent:mime-version:to:subject:references
+	:in-reply-to:x-enigmail-version:content-type
+	:content-transfer-encoding;
+	b=VfBRmB/+Y78QE850yO8TnM81XpxR+T4XEuDOJfHsdFDrHhJpteBSolouExXoDND1C1
+	hnjxMA20fQLaZCpAByMJ6U/BxP2pEvEzNSh9FQnw1k/u3o461vjRCYEHanOv/PydKoaq
+	vFvF3n8KoJVYFew+5jY+6OBN3DSYvGKVvaPDY=
+Received: by 10.227.135.71 with SMTP id m7mr50725wbt.11.1284040645226;
+	Thu, 09 Sep 2010 06:57:25 -0700 (PDT)
+Received: from [192.168.1.134] (dsl-51-41.dsl.netsource.ie [213.79.51.41])
+	by mx.google.com with ESMTPS id e31sm1149902wbe.17.2010.09.09.06.57.23
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Thu, 09 Sep 2010 06:57:24 -0700 (PDT)
+Message-ID: <4C88E7C2.1030500@gmail.com>
+Date: Thu, 09 Sep 2010 14:57:22 +0100
+From: Arigead <captain.deadly@gmail.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Received: by 10.100.139.7 with SMTP id m7mr182208and.49.1284038214976; Thu, 09
-	Sep 2010 06:16:54 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Thu, 9 Sep 2010 06:16:54 -0700 (PDT)
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310BFAA13@dlee06.ent.ti.com>
-References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
-	<1284024609.28520.1446.camel@mill.internal.reciva.com>
-	<AANLkTimLWtJhYn009OchBss+LJpNx9Pt+nDZ=GGyu=a7@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310BFAA13@dlee06.ent.ti.com>
-Date: Thu, 9 Sep 2010 15:16:54 +0200
-Message-ID: <AANLkTikLhZ-vsO34S30T5RekoaKJpwyECmjyryY8d6wV@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C85058D.8070506@gmail.com>	<1283996027.3036.1.camel@gnutoo-laptop>
+	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
+In-Reply-To: <AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
+X-Enigmail-Version: 0.96.0
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: captain.deadly@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: fix soc-family test
+Subject: Re: Asterisk and termcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,70 +59,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 13:17:51 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Sep 2010 13:58:09 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: 7bit
 
-2010/9/9 Maupin, Chase <chase.maupin@ti.com>:
-
+Frans Meulenbroeks wrote:
+> 2010/9/9 Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>:
+>> On Mon, 2010-09-06 at 16:15 +0100, Arigead wrote:
+>>> was trying to build Asterisk for the OpenMoko Free runner and it failed
+>>> on a dependency on termcap so I tried to bitbake termcap first and that
+>>> failed. The termcap compile stage is working but it's when it tries to
+>>> install that the recipe seems to fail but I'm new to this.
+>>>
+>>> I'm off to read the openembedded documentation again but in the mean
+>>> time if anybody can give me a hit that would be great.
+>> We can't help you if you don't post some logs or console output.
+>> Copy-pasting the part where it fails, if it's small, could be enough for
+>> a start.
+>> Denis.
 >>
->> I'm not too sure on the usefulness of it either, but there is some
->> breakage so we should either revert the patch or fix it.
 >>
->> Actually the SOC_FAMILY got pushed before the review was concluded.
->> Technically it got the ack's but the discussion was still ongoing when
->> this was pushed.
->> What also makes it fishy is that all acks are from the same company
->> (which is the same one as the person who submitted the patch):
->>
->> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
->> Acked-by: Denys Dmytriyenko <denys@ti.com>
->> Acked-by: Koen Kooi <k-kooi@ti.com>
->> Signed-off-by: Koen Kooi <koen@openembedded.org>
->>
->> I would suggest modifying the commit policy disallowing these kind of
->> things, saying the two Ack's must be from two developers not
->> affiliated with the same company.
->> (actually we might even want to take it further and saying that global
->> changes that affect everyone would require ACK's from developers from
->> more than one distro).
->>
->> Question to the TSC: should the SOC_FAMILY patch be reverted and put
->> on hold until there is agreement whether or not we want this?
->
-> Frans,
->
-> As the person who submitted this change I'd like to ask that it not be re=
-verted. =A0I am using it currently so that when defining COMPATIBLE_MACHINE=
- for recipes targeted at OMAP3 devices I do not have to keep a rolling list=
- of all the various OMAP3 devices. =A0This can quickly become:
->
-> COMPATIBLE_MACHINE =3D "dm37x-evm|am37x-evm|omap3evm|am3517-evm|beagleboa=
-rd|......"
->
-> Instead by allowing SOC_FAMILY to be used as a COMPATIBLE_MACHINE this ca=
-n be handled cleanly with:
->
-> COMPATIBLE_MACHINE =3D "omap3"
->
-> Please consider this use case. =A0I would much prefer if your fix was put=
- into the base.bbclass than if this were removed.
->
+> Denis, the message from Arigead is 3 days old and has already been dealt with.
+> There is a patch for asterisk from Eric that makes it build fine for me.
+> 
+> Frans.
+> 
 
-Chase,
+Yes sorry if my original post was too vague, but it was a known issue at
+the time anyhow. As Frans says the patch was added and is in the feeds
+and Asterisk is now building for my target device. Thanks for you help
+and pointing out where the problem was.
 
-I understand your use case.
-The major concern I see is the overlap with MACHINE_CLASS.
-Anyway, I have no real objections against SOC_FAMILY.
-The only observation is that it has been introduced a little bit
-hastily without the community reaching consensus.
-
-Frans.
-
-PS: thanks for the ack that arrived while I was typing this
-PPS: wrt COMPATIBLE_MACHINE: I think it is possible to use wildcards,
-so *if* the machines with omap3 get that as a prefix it could also be
-used
-(and yes: this is just an alternate option, and I see the con's of it)
 
 
