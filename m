@@ -1,37 +1,30 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OtdT0-0007ez-KE
+Received: from mailout-de.gmx.net ([213.165.64.22] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OtdbQ-0003jH-HS
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 11:30:53 +0200
-Received: from [62.7.80.98] (helo=lurch.internal.reciva.com)
-	by crown.reciva.com with esmtpsa (TLS1.0:RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OtdSM-0006sh-B6
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 10:30:10 +0100
-Received: from mill.internal.reciva.com ([192.168.106.87] ident=pb)
-	by lurch.internal.reciva.com with esmtp (Exim 4.63)
-	(envelope-from <philb@gnu.org>) id 1OtdSM-0005wM-34
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 10:30:10 +0100
-From: Phil Blundell <philb@gnu.org>
+	Thu, 09 Sep 2010 11:39:33 +0200
+Received: (qmail invoked by alias); 09 Sep 2010 09:38:49 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp022) with SMTP; 09 Sep 2010 11:38:49 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX19cSNNQ3EdcNEkyAW713IOFu4Mrm3l/TtlETLasUq
+	ksztc8JKdG2/vG
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
-References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
-Date: Thu, 09 Sep 2010 10:30:09 +0100
-Message-ID: <1284024609.28520.1446.camel@mill.internal.reciva.com>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.1.2 
-X-Broken-Reverse-DNS: no host name found for IP address 62.7.80.98
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+Date: Thu, 9 Sep 2010 11:23:58 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+MIME-Version: 1.0
+Message-Id: <201009091123.58183.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.22
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: fix soc-family test
+Subject: [PATCH] clutter-box2d: renamed clutter-box2d_0.10.0_git.bb -> clutter-box2d_git.bb
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,25 +38,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 09:30:53 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 09 Sep 2010 09:39:33 -0000
+Content-Type: text/plain;
+  charset="us-ascii"
 Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Thu, 2010-09-09 at 09:11 +0200, Frans Meulenbroeks wrote:
-> 2010/9/2 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> > -                if this_soc_family and not re.match(need_machine, this_soc_family):
-> > +                if (this_soc_family and not re.match(need_machine, this_soc_family)) or not this_soc_family:
-> >                     raise bb.parse.SkipPackage("incompatible with machine %s" % this_machine)
+Signed-off-by: Andreas Mueller <schnitzeltony@gmx.de>
+---
+ recipes/clutter/clutter-box2d_0.10.0_git.bb |   12 ------------
+ recipes/clutter/clutter-box2d_git.bb        |   12 ++++++++++++
+ 2 files changed, 12 insertions(+), 12 deletions(-)
+ delete mode 100644 recipes/clutter/clutter-box2d_0.10.0_git.bb
+ create mode 100644 recipes/clutter/clutter-box2d_git.bb
 
-I am still far from convinced that this hunk of SOC_FAMILY code is
-desirable to have in the first place but, if it's going to stay there,
-clearly it should be fixed so that it doesn't cause problems for
-non-users.  
-
-So, yes, your patch looks fine to me.
-
-p.
-
-
+diff --git a/recipes/clutter/clutter-box2d_0.10.0_git.bb b/recipes/clutter/clutter-box2d_0.10.0_git.bb
+deleted file mode 100644
+index 4696a01..0000000
+--- a/recipes/clutter/clutter-box2d_0.10.0_git.bb
++++ /dev/null
+@@ -1,12 +0,0 @@
+-require clutter-box2d.inc
+-
+-SRCREV = "4e72b9c135a9439b82d801c62422531db611f98b"
+-
+-PR = "${INC_PR}.0"
+-PR_append = "+git${SRCREV}"
+-
+-SRC_URI = "git://git.clutter-project.org/clutter-box2d.git;protocol=git \
+-           file://example-data-location.patch \
+-          "
+-
+-S = "${WORKDIR}/git"
+diff --git a/recipes/clutter/clutter-box2d_git.bb b/recipes/clutter/clutter-box2d_git.bb
+new file mode 100644
+index 0000000..4696a01
+--- /dev/null
++++ b/recipes/clutter/clutter-box2d_git.bb
+@@ -0,0 +1,12 @@
++require clutter-box2d.inc
++
++SRCREV = "4e72b9c135a9439b82d801c62422531db611f98b"
++
++PR = "${INC_PR}.0"
++PR_append = "+git${SRCREV}"
++
++SRC_URI = "git://git.clutter-project.org/clutter-box2d.git;protocol=git \
++           file://example-data-location.patch \
++          "
++
++S = "${WORKDIR}/git"
+-- 
+1.5.3.4
 
 
