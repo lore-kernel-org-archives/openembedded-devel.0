@@ -1,47 +1,41 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OthkY-0005rp-Gc
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Othlp-0006Om-E7
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 16:05:15 +0200
-Received: by wye20 with SMTP id 20so1487103wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 07:04:32 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=sOmZGEvgrFgETw4eKyAXcSME7bZAzo4oGgNVaJHclT0=;
-	b=WWKdliRHU7wiKgjmEpUbncU4VE3psF59gg76sQ9Y9jZFI5plcE/oH7hK09O/FIaQq9
-	MqmB/lLWeLJDXPbSbx3CX/bgAcmPoDASRhRz/6u+05hU3JOteYdDv+8zRUkv2+/7Vrb+
-	ObEU/X0ujTQQln22y79mB1SSAFhTD/2+5cNzs=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=DO08+dK6IAhGO5LKcq45lmQE6kq3gds04aOxO/CXnBgL4mFQrt0Wb6JoqZoroidAsI
-	aNAZkDHUrFNrkwFyitnIxY0edamqGp1JEXPBt8BfLUhewyytXQi1zl6dcWBo/gzroCgj
-	RLcAvgXpHowNu/ivXmz91Hso0C+sP7feHc970=
-Received: by 10.227.145.69 with SMTP id c5mr195051wbv.168.1284041071995; Thu,
-	09 Sep 2010 07:04:31 -0700 (PDT)
+	Thu, 09 Sep 2010 16:06:39 +0200
+Received: (qmail 2919 invoked by uid 503); 9 Sep 2010 14:17:20 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 9 Sep 2010 14:17:20 -0000
+Received: (qmail 22560 invoked by uid 503); 9 Sep 2010 13:49:52 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 9 Sep 2010 13:49:51 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 9 Sep 2010 16:05:49 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 9 Sep 2010 16:05:48 +0200
+Message-ID: <4C88E9BC.9040603@eukrea.com>
+Date: Thu, 09 Sep 2010 16:05:48 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100825 Thunderbird/3.1.3
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.168 with HTTP; Thu, 9 Sep 2010 07:04:11 -0700 (PDT)
-In-Reply-To: <AANLkTi=GypXSJV_8VDUQ9dO5oYKSJPtAzUOhvGAquLyd@mail.gmail.com>
-References: <AANLkTi=GypXSJV_8VDUQ9dO5oYKSJPtAzUOhvGAquLyd@mail.gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Thu, 9 Sep 2010 07:04:11 -0700
-X-Google-Sender-Auth: _vDUO2VXPzKP05hd6uf1zALamsQ
-Message-ID: <AANLkTiktxuLopxPbjsfMZHsGVW2LmXRgAaTC2Ta=_Qz4@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+References: <4C85058D.8070506@gmail.com>	<1283996027.3036.1.camel@gnutoo-laptop>	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
+	<4C88E7C2.1030500@gmail.com>
+In-Reply-To: <4C88E7C2.1030500@gmail.com>
+X-Ovh-Tracer-Id: 16842336708164037961
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: double _'s in names
+Subject: Re: Asterisk and termcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,23 +49,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 14:05:15 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Thu, 09 Sep 2010 14:06:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-On Thu, Sep 9, 2010 at 1:25 AM, Frans Meulenbroeks <
-fransmeulenbroeks@gmail.com> wrote:
-
-> I noticed that we have some recipes with double underscores in the name.
-> Not sure how that will parse wrt PN_PV.bb
+Le 09/09/2010 15:57, Arigead a écrit :
+> Frans Meulenbroeks wrote:
+>> 2010/9/9 Denis 'GNUtoo' Carikli<GNUtoo@no-log.org>:
+>>> On Mon, 2010-09-06 at 16:15 +0100, Arigead wrote:
+>>>> was trying to build Asterisk for the OpenMoko Free runner and it failed
+>>>> on a dependency on termcap so I tried to bitbake termcap first and that
+>>>> failed. The termcap compile stage is working but it's when it tries to
+>>>> install that the recipe seems to fail but I'm new to this.
+>>>>
+>>>> I'm off to read the openembedded documentation again but in the mean
+>>>> time if anybody can give me a hit that would be great.
+>>> We can't help you if you don't post some logs or console output.
+>>> Copy-pasting the part where it fails, if it's small, could be enough for
+>>> a start.
+>>> Denis.
+>>>
+>>>
+>> Denis, the message from Arigead is 3 days old and has already been dealt with.
+>> There is a patch for asterisk from Eric that makes it build fine for me.
+>>
+>> Frans.
+>>
 >
+> Yes sorry if my original post was too vague, but it was a known issue at
+> the time anyhow. As Frans says the patch was added and is in the feeds
+> and Asterisk is now building for my target device. Thanks for you help
+> and pointing out where the problem was.
+>
+OK so it means the patch solves your problem. Does asterisk runs fine on 
+the target ?
 
-It'll parse the third component as the PR, which would then likely be
-overridden by an explicit PR set in the recipe.  See the default definitions
-of PN, PV, and PR in bitbake.conf (~line 178).
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Eric
+
 
