@@ -1,48 +1,42 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sladedals@gmail.com>) id 1OtiYf-0005w1-3e
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 16:57:02 +0200
-Received: by pwi10 with SMTP id 10so130434pwi.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Otimm-00050T-1W for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Sep 2010 17:11:37 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Otim7-0002su-0I for openembedded-devel@lists.openembedded.org;
+	Thu, 09 Sep 2010 17:10:55 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 09 Sep 2010 17:10:54 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 07:56:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=YcqH+jBXfMbHv8gtdhSU2m5GZ3yka9fJeEI1K/Q78ck=;
-	b=RLZtpBktj5Jtz/8dPDk0baNbK51mGkNqtofw59yaimh0UfQrvvJFjAXpTiy6zMjhKV
-	HVedfizuEmbGxf1ZusMBE4yCXXMTv9v3csXthLymV97doC35VpA4/kbHcBklG3aR6ag0
-	6K7G1s106usuVoUxkg3U4RC6xMy5k+l9chwOE=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=FuV9NF3XeSt1lItl2aJcPpacj77wIM/ebyeKep9Wl8oBr+NOCpT7MyaKOBLWF3Rd5b
-	+3pSRU9e3C5WKfqEyb92qZYoqqTtT392Uyw99/rPqFUBjlxldu7/UC11o6KUell8aCWD
-	48apW4wz5ukVa9ggMxcErKwN6sdtLIY8KAaPg=
-Received: by 10.114.109.8 with SMTP id h8mr64498wac.135.1284044170625; Thu, 09
-	Sep 2010 07:56:10 -0700 (PDT)
-MIME-Version: 1.0
-Sender: sladedals@gmail.com
-Received: by 10.42.6.68 with HTTP; Thu, 9 Sep 2010 07:55:50 -0700 (PDT)
-In-Reply-To: <1283903199-24538-2-git-send-email-eric@eukrea.com>
-References: <1283903199-24538-1-git-send-email-eric@eukrea.com>
-	<1283903199-24538-2-git-send-email-eric@eukrea.com>
-From: cdric julien <c.dricjulien@gmail.com>
-Date: Thu, 9 Sep 2010 16:55:50 +0200
-X-Google-Sender-Auth: z0wmddFmOXjYuuEhJ68unDFtZiM
-Message-ID: <AANLkTi=KDR=mtuVUiQE-5_-FL4oR+meQssfeUgz6bBLq@mail.gmail.com>
+	Thu, 09 Sep 2010 17:10:54 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: sladedals@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 09 Sep 2010 17:10:43 +0200
+Message-ID: <i6atdj$5b0$1@dough.gmane.org>
+References: <1284034317-9428-1-git-send-email-eric@eukrea.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <1284034317-9428-1-git-send-email-eric@eukrea.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH 2/2] python-2.6: remove python-distutils from python-modules
+Subject: Re: [PATCH] fix bitbake ERRORS for machine not having virtual/egl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,96 +50,204 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 14:57:02 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Sep 2010 15:11:37 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
 
-Be careful, this module is needed to install python modules on target via
-the "python setup.py install" method. If removed, some python packages won'=
-t
-install anymore...
-If you want to gain space on target, there are a few wininst*.exe in
-distutils/command directory that could be removed and the "config" director=
-y
-which contains libpython2.6.a (2.1Mo) is really useless.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
+On 09-09-10 14:11, Eric Bénard wrote:
+> * several recipes depend on virtual/egl which currently has only one
+> provider : powervr-drivers/libgles-omap. This provider sets
+> COMPATIBLE_MACHINE to a few TI based machines.
+> When building for machines which don't provide virtual/egl, we get
+> the following errors :
+> ERROR: '['path_to/openembedded/recipes/qt4/qt4-embedded-gles_4.6.3.bb']'
+>       RDEPENDS/RRECOMMENDS or otherwise requires the runtime entity
+>      'qt4-embedded-gles' but it wasn't found in any PACKAGE or RPROVIDES
+>      variables of any buildable targets.
+> ERROR: '[]' RDEPENDS/RRECOMMENDS or otherwise requires the runtime
+>      entity 'virtual/egl' but it wasn't found in any PACKAGE or RPROVIDES
+>      variables
+> 
+> * This patch creates a egl.inc which contains the compatible machines for
+> recipes depending on virtual/egl and thus will workaround this error.
 
-2010/9/8 Eric B=E9nard <eric@eukrea.com>
+The intent is good, but I have to NAK this for the time being.
 
-> this module seems only needed for development. No installing it with
-> python-modules saves 6MB on the image.
->
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+Could you change that to use:
+
+COMPATIBLE_MACHINE = "omap3"?
+
+That would future proof it a lot better :)
+
+regards,
+
+Koen
+
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
 > ---
->  recipes/python/python-2.6-manifest.inc |    2 +-
->  1 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/recipes/python/python-2.6-manifest.inc
-> b/recipes/python/python-2.6-manifest.inc
-> index eec9f22..ff54d36 100644
-> --- a/recipes/python/python-2.6-manifest.inc
-> +++ b/recipes/python/python-2.6-manifest.inc
-> @@ -266,7 +266,7 @@ RDEPENDS_python-audio=3D"python-core"
->  FILES_python-audio=3D"${libdir}/python2.6/wave.* ${libdir}/python2.6/chu=
-nk.*
-> ${libdir}/python2.6/sndhdr.* ${libdir}/python2.6/lib-dynload/ossaudiodev.=
-so
-> ${libdir}/python2.6/lib-dynload/audioop.so "
->
->  DESCRIPTION_python-modules=3D"All Python modules"
-> -RDEPENDS_python-modules=3D"python-profile python-threading python-distut=
-ils
-> python-doctest python-stringold python-codecs python-ctypes python-pickle
-> python-datetime python-core python-io python-compiler python-compression
-> python-re python-xmlrpc python-terminal python-email python-image
-> python-tests python-resource python-json python-difflib python-math
-> python-syslog python-hotshot python-unixadmin python-textutils
-> python-tkinter python-gdbm python-elementtree python-fcntl python-netclie=
-nt
-> python-pprint python-netserver python-curses python-smtpd python-html
-> python-readline python-subprocess python-pydoc python-logging python-mail=
-box
-> python-xml python-mime python-sqlite3 python-sqlite3-tests python-unittes=
-t
-> python-multiprocessing python-robotparser python-compile python-debugger
-> python-pkgutil python-shell python-bsddb python-numbers python-mmap
-> python-zlib python-db python-crypt python-idle python-lang python-audio  =
-"
-> +RDEPENDS_python-modules=3D"python-profile python-threading python-doctes=
-t
-> python-stringold python-codecs python-ctypes python-pickle python-datetim=
-e
-> python-core python-io python-compiler python-compression python-re
-> python-xmlrpc python-terminal python-email python-image python-tests
-> python-resource python-json python-difflib python-math python-syslog
-> python-hotshot python-unixadmin python-textutils python-tkinter python-gd=
-bm
-> python-elementtree python-fcntl python-netclient python-pprint
-> python-netserver python-curses python-smtpd python-html python-readline
-> python-subprocess python-pydoc python-logging python-mailbox python-xml
-> python-mime python-sqlite3 python-sqlite3-tests python-unittest
-> python-multiprocessing python-robotparser python-compile python-debugger
-> python-pkgutil python-shell python-bsddb python-numbers python-mmap
-> python-zlib python-db python-crypt python-idle python-lang python-audio  =
-"
->  ALLOW_EMPTY_python-modules =3D "1"
->
->
-> --
-> 1.6.3.3
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+>  recipes/egl/egl.inc                        |    1 +
+>  recipes/irrlicht/irrlicht-examples-gles.bb |    1 +
+>  recipes/ogre/ogre-egl_svn.bb               |    1 +
+>  recipes/powervr-drivers/bc-cube_0.1.0.bb   |    1 +
+>  recipes/powervr-drivers/bc-cube_0.2.0.bb   |    1 +
+>  recipes/qt4/qt4-embedded-gles_4.6.0.bb     |    1 +
+>  recipes/qt4/qt4-embedded-gles_4.6.2.bb     |    1 +
+>  recipes/qt4/qt4-embedded-gles_4.6.3.bb     |    1 +
+>  recipes/qt4/qt4-x11-free-gles_4.5.2.bb     |    1 +
+>  recipes/qt4/qt4-x11-free-gles_4.6.0.bb     |    1 +
+>  recipes/qt4/qt4-x11-free-gles_4.6.2.bb     |    1 +
+>  recipes/qt4/qt4-x11-free-gles_4.6.3.bb     |    1 +
+>  recipes/xbmc/xbmc_svn.bb                   |    1 +
+>  13 files changed, 13 insertions(+), 0 deletions(-)
+>  create mode 100644 recipes/egl/egl.inc
+> 
+> diff --git a/recipes/egl/egl.inc b/recipes/egl/egl.inc
+> new file mode 100644
+> index 0000000..6bbfaaf
+> --- /dev/null
+> +++ b/recipes/egl/egl.inc
+> @@ -0,0 +1 @@
+> +COMPATIBLE_MACHINE = "(dm37x-evm|am37x-evm|am3517-evm|beagleboard|cm-t35|igep0020|omap3-pandora|omap3-touchbook|omap3evm|omapzoom|omapzoom2|overo|palmpre)"
+> diff --git a/recipes/irrlicht/irrlicht-examples-gles.bb b/recipes/irrlicht/irrlicht-examples-gles.bb
+> index 6bce68a..e515fc7 100644
+> --- a/recipes/irrlicht/irrlicht-examples-gles.bb
+> +++ b/recipes/irrlicht/irrlicht-examples-gles.bb
+> @@ -1,6 +1,7 @@
+>  DESCRIPTION = "Irrlicht 3D rendering engine "
+>  LICENSE = "zlib"
+>  DEPENDS = "virtual/libx11 libxxf86vm virtual/egl"
+> +require recipes/egl/egl.inc
+>  
+>  SRCREV = "2409"
+>  PV = "1.6+svnr${SRCPV}"
+> diff --git a/recipes/ogre/ogre-egl_svn.bb b/recipes/ogre/ogre-egl_svn.bb
+> index caa96c3..5cb7393 100644
+> --- a/recipes/ogre/ogre-egl_svn.bb
+> +++ b/recipes/ogre/ogre-egl_svn.bb
+> @@ -1,6 +1,7 @@
+>  DESCRIPTION = "OGRE (Object-Oriented Graphics Rendering Engine) is a scene-oriented, flexible 3D engine "
+>  LICENSE = "LGPL"
+>  DEPENDS = "gtk+ wgois cppunit zziplib boost freeimage freetype virtual/libx11 virtual/egl"
+> +require recipes/egl/egl.inc
+>  
+>  PR = "r3"
+>  
+> diff --git a/recipes/powervr-drivers/bc-cube_0.1.0.bb b/recipes/powervr-drivers/bc-cube_0.1.0.bb
+> index 6323a79..62dfc5b 100644
+> --- a/recipes/powervr-drivers/bc-cube_0.1.0.bb
+> +++ b/recipes/powervr-drivers/bc-cube_0.1.0.bb
+> @@ -1,6 +1,7 @@
+>  DESCRIPTION = "TI Texture streaming using bufferclass API demo (spinning video cube)"
+>  LICENSE = "TI-BSD/GPLv2"
+>  DEPENDS = "virtual/egl"
+> +require recipes/egl/egl.inc
+>  
+>  SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/apps_processors/OMAP35x_AM35x_Video_Texture_Streaming/1_0/exports/bc-cat-${PV}.tar.gz \
+>             file://bc-cat-0.1.0-BC_PIX_FMT_.patch;striplevel=0"
+> diff --git a/recipes/powervr-drivers/bc-cube_0.2.0.bb b/recipes/powervr-drivers/bc-cube_0.2.0.bb
+> index cf2aa95..c639283 100644
+> --- a/recipes/powervr-drivers/bc-cube_0.2.0.bb
+> +++ b/recipes/powervr-drivers/bc-cube_0.2.0.bb
+> @@ -1,6 +1,7 @@
+>  DESCRIPTION = "TI Texture streaming using bufferclass API demo (spinning video cube)"
+>  LICENSE = "TI-BSD/GPLv2"
+>  DEPENDS = "virtual/egl"
+> +require recipes/egl/egl.inc
+>  
+>  PR = "r2"
+>  
+> diff --git a/recipes/qt4/qt4-embedded-gles_4.6.0.bb b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+> index 3b3ea15..3e132bf 100644
+> --- a/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+> +++ b/recipes/qt4/qt4-embedded-gles_4.6.0.bb
+> @@ -10,3 +10,4 @@ require qt-4.6.0.inc
+>  FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+> diff --git a/recipes/qt4/qt4-embedded-gles_4.6.2.bb b/recipes/qt4/qt4-embedded-gles_4.6.2.bb
+> index 21c461a..0b047fc 100644
+> --- a/recipes/qt4/qt4-embedded-gles_4.6.2.bb
+> +++ b/recipes/qt4/qt4-embedded-gles_4.6.2.bb
+> @@ -11,3 +11,4 @@ SRC_URI += "file://cursor-hack.diff"
+>  FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+> diff --git a/recipes/qt4/qt4-embedded-gles_4.6.3.bb b/recipes/qt4/qt4-embedded-gles_4.6.3.bb
+> index 21c461a..0b047fc 100644
+> --- a/recipes/qt4/qt4-embedded-gles_4.6.3.bb
+> +++ b/recipes/qt4/qt4-embedded-gles_4.6.3.bb
+> @@ -11,3 +11,4 @@ SRC_URI += "file://cursor-hack.diff"
+>  FILESPATHPKG .= ":qt4-embedded-${PV}:qt4-embedded"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+> diff --git a/recipes/qt4/qt4-x11-free-gles_4.5.2.bb b/recipes/qt4/qt4-x11-free-gles_4.5.2.bb
+> index 3fe7218..57e1524 100644
+> --- a/recipes/qt4/qt4-x11-free-gles_4.5.2.bb
+> +++ b/recipes/qt4/qt4-x11-free-gles_4.5.2.bb
+> @@ -11,6 +11,7 @@ require qt4-x11-free_${PV}.bb
+>  PR = "${INC_PR}.3"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+>  PROVIDES += "qt4-x11-free"
+>  #SRC_URI += "file://sgx-hack.patch"
+>  SRC_URI += "file://hack-out-pg_config.patch"
+> diff --git a/recipes/qt4/qt4-x11-free-gles_4.6.0.bb b/recipes/qt4/qt4-x11-free-gles_4.6.0.bb
+> index dfd53e5..0821595 100644
+> --- a/recipes/qt4/qt4-x11-free-gles_4.6.0.bb
+> +++ b/recipes/qt4/qt4-x11-free-gles_4.6.0.bb
+> @@ -13,4 +13,5 @@ QT_CONFIG_FLAGS += " \
+>  FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+>  PROVIDES += "qt4-x11-free"
+> diff --git a/recipes/qt4/qt4-x11-free-gles_4.6.2.bb b/recipes/qt4/qt4-x11-free-gles_4.6.2.bb
+> index 307770f..b7cbde5 100644
+> --- a/recipes/qt4/qt4-x11-free-gles_4.6.2.bb
+> +++ b/recipes/qt4/qt4-x11-free-gles_4.6.2.bb
+> @@ -13,4 +13,5 @@ QT_CONFIG_FLAGS += " \
+>  FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+>  PROVIDES += "qt4-x11-free"
+> diff --git a/recipes/qt4/qt4-x11-free-gles_4.6.3.bb b/recipes/qt4/qt4-x11-free-gles_4.6.3.bb
+> index 307770f..b7cbde5 100644
+> --- a/recipes/qt4/qt4-x11-free-gles_4.6.3.bb
+> +++ b/recipes/qt4/qt4-x11-free-gles_4.6.3.bb
+> @@ -13,4 +13,5 @@ QT_CONFIG_FLAGS += " \
+>  FILESPATHPKG .= ":qt4-x11-free-${PV}:qt4-x11-free"
+>  
+>  DEPENDS += "virtual/egl"
+> +require recipes/egl/egl.inc
+>  PROVIDES += "qt4-x11-free"
+> diff --git a/recipes/xbmc/xbmc_svn.bb b/recipes/xbmc/xbmc_svn.bb
+> index 5b1d8bb..b42d7fa 100644
+> --- a/recipes/xbmc/xbmc_svn.bb
+> +++ b/recipes/xbmc/xbmc_svn.bb
+> @@ -2,6 +2,7 @@ DESCRIPTION = "XBMC Media Center"
+>  LICENSE = "xbmc"
+>  
+>  DEPENDS = "libxmu fribidi mpeg2dec ffmpeg samba fontconfig curl libmodplug libmicrohttpd wavpack libmms cmake-native libsdl-image libsdl-mixer virtual/egl mysql5 sqlite3 libmms faad2 libcdio libpcre boost lzo2 enca avahi libsamplerate0 libxrandr bzip2 virtual/libsdl"
+> +require recipes/egl/egl.inc
+>  
+>  SRCREV = "e2ab481ebe964321c358ab9d6402088c714adcbe"
+>  
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMiPjzMkyGM64RGpERAuZ/AKC7Et1WKxMgwE1YIPJaPh7/SUlfPACdFWRG
+SSWCIpmBl7NFBZIryUgLR1I=
+=yas7
+-----END PGP SIGNATURE-----
 
 
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-C.dric JULIEN
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-Always code as if the guy who ends up maintaining your code will be a
-violent psychopath who knows where you live
 
