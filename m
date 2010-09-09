@@ -1,46 +1,47 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from bear.ext.ti.com ([192.94.94.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sylvain.pare@gmail.com>) id 1OtelZ-0008DE-OK
+	(envelope-from <chase.maupin@ti.com>) id 1Otfx1-0004sK-1j
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 09 Sep 2010 12:54:16 +0200
-Received: by qyk31 with SMTP id 31so6233725qyk.6
+	Thu, 09 Sep 2010 14:10:06 +0200
+Received: from dlep34.itg.ti.com ([157.170.170.115])
+	by bear.ext.ti.com (8.13.7/8.13.7) with ESMTP id o89C9Fwn005359
+	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 03:53:22 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=VYtBY5JjYGTMw4CkpAotkajaIRbqRstc1YrXe3lAELU=;
-	b=uaU/nnnGpaQZusuC9H2CAFpuYBa6v28GseFpFuVIagn2Ik2Wk1bYHwU0OYJmqW4x5c
-	s4MbzJ1ksq21C0xmEMhwAQNVeVgpJHQvsrp0ZyKGQkucwP/QYTtA5U3bvLGRZi65snz9
-	BSBbjIG+n/TQAe0Lie0dNEnzMrCPhtTJ0p134=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=I70S3J0wikZuBkq48Efb6IFL0D4xAtQZ9MQHzLqHkaKGkvk3YUvC4kMRLQXRhVZ/3l
-	bNGWMiMQSyQKIjG4dUZw4E3cf+FLxJm+uKMLKYREyIvsHcLR1TRaypyIIyZS8x3bH/5i
-	iD4noYo8GVJbdKLbT9nZtNXaPiPijS6dETzUg=
-Received: by 10.229.190.21 with SMTP id dg21mr2086901qcb.211.1284029602360;
-	Thu, 09 Sep 2010 03:53:22 -0700 (PDT)
+	Thu, 9 Sep 2010 07:09:15 -0500
+Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
+	by dlep34.itg.ti.com (8.13.7/8.13.7) with ESMTP id o89C9FeR020659
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 9 Sep 2010 07:09:15 -0500 (CDT)
+Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
+	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o89C9Fot011804
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 9 Sep 2010 07:09:15 -0500 (CDT)
+Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
+	([157.170.170.8]) with mapi; Thu, 9 Sep 2010 07:09:15 -0500
+From: "Maupin, Chase" <chase.maupin@ti.com>
+To: "openembedded-devel@lists.openembedded.org"
+	<openembedded-devel@lists.openembedded.org>
+Date: Thu, 9 Sep 2010 07:09:14 -0500
+Thread-Topic: [oe] [PATCHv2] common_use_cases: add description of SOC_FAMILY
+Thread-Index: ActPn5uFmaoCuOMZScy5CPn8K+BuOQAd822Q
+Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFAA0F@dlee06.ent.ti.com>
+References: <1283969035-1397-1-git-send-email-chase.maupin@ti.com>
+	<1283982455.21233.48.camel@mattotaupa>
+In-Reply-To: <1283982455.21233.48.camel@mattotaupa>
+Accept-Language: en-US
+X-MS-Has-Attach: 
+X-MS-TNEF-Correlator: 
+acceptlanguage: en-US
 MIME-Version: 1.0
-Received: by 10.229.52.74 with HTTP; Thu, 9 Sep 2010 03:53:02 -0700 (PDT)
-In-Reply-To: <AANLkTi=ikw_D=38eMtVAMz08YifDNAf=zkWN39xcbuYa@mail.gmail.com>
-References: <AANLkTikCe=1MNhEuYTG2Wusn1Fk43k-_7VTqaf6geFuT@mail.gmail.com>
-	<4C7BBA85.8040101@selfish.org>
-	<AANLkTi=ikw_D=38eMtVAMz08YifDNAf=zkWN39xcbuYa@mail.gmail.com>
-From: =?ISO-8859-1?Q?Sylvain_Par=E9?= <sylvain.pare@gmail.com>
-Date: Thu, 9 Sep 2010 12:53:02 +0200
-Message-ID: <AANLkTim1FvDwBBJQMqs7y3AxWos_c3sa_8dV=Mj1tL4A@mail.gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: sylvain.pare@gmail.com
+X-SA-Exim-Connect-IP: 192.94.94.41
+X-SA-Exim-Mail-From: chase.maupin@ti.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: a recipe for qt4-plugin-phonon-backend-vlc
+Subject: Re: [PATCHv2] common_use_cases: add description of SOC_FAMILY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,52 +55,45 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 10:54:16 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 09 Sep 2010 12:10:08 -0000
+Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 
-sorry but it is to complicated ofr my skill with oe
-so if someone is interessted int this and/or kind enought to take a look at
-this..
-thanks
-personnaly I drop it .
-KR
-Sylvain
+PiAtLS0tLU9yaWdpbmFsIE1lc3NhZ2UtLS0tLQ0KPiBGcm9tOiBvcGVuZW1iZWRkZWQtZGV2ZWwt
+Ym91bmNlc0BsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFttYWlsdG86b3BlbmVtYmVkZGVkLWRl
+dmVsLWJvdW5jZXNAbGlzdHMub3BlbmVtYmVkZGVkLm9yZ10gT24gQmVoYWxmIE9mDQo+IFBhdWwg
+TWVuemVsDQo+IFNlbnQ6IFdlZG5lc2RheSwgU2VwdGVtYmVyIDA4LCAyMDEwIDQ6NDggUE0NCj4g
+VG86IG9wZW5lbWJlZGRlZC1kZXZlbEBsaXN0cy5vcGVuZW1iZWRkZWQub3JnDQo+IFN1YmplY3Q6
+IFJlOiBbb2VdIFtQQVRDSHYyXSBjb21tb25fdXNlX2Nhc2VzOiBhZGQgZGVzY3JpcHRpb24gb2YN
+Cj4gU09DX0ZBTUlMWQ0KPiANCj4gQW0gTWl0dHdvY2gsIGRlbiAwOC4wOS4yMDEwLCAxMzowMyAt
+MDUwMCBzY2hyaWViIENoYXNlIE1hdXBpbjoNCj4gPiAqIEFkZGVkIGEgZGVzY3JpcHRpb24gb2Yg
+dGhlIFNPQ19GQU1JTFkgdmFyaWFibGUgdGhhdA0KPiA+ICAgY2FuIGJlIHNldCBpbiB0aGUgbWFj
+aGluZSBjb25maWd1cmF0aW9uIGZpbGVzLg0KPiA+DQo+ID4gU2lnbmVkLW9mZi1ieTogQ2hhc2Ug
+TWF1cGluIDxjaGFzZS5tYXVwaW5AdGkuY29tPg0KPiA+IC0tLQ0KPiA+ICBkb2NzL3VzZXJtYW51
+YWwvY2hhcHRlcnMvY29tbW9uX3VzZV9jYXNlcy54bWwgfCAgIDI0DQo+ICsrKysrKysrKysrKysr
+KysrKysrKysrKw0KPiA+ICAxIGZpbGVzIGNoYW5nZWQsIDI0IGluc2VydGlvbnMoKyksIDAgZGVs
+ZXRpb25zKC0pDQo+ID4NCj4gPiBkaWZmIC0tZ2l0IGEvZG9jcy91c2VybWFudWFsL2NoYXB0ZXJz
+L2NvbW1vbl91c2VfY2FzZXMueG1sDQo+IGIvZG9jcy91c2VybWFudWFsL2NoYXB0ZXJzL2NvbW1v
+bl91c2VfY2FzZXMueG1sDQo+ID4gaW5kZXggZDg2ZDBjYS4uZWY4MWI5NSAxMDA2NDQNCj4gPiAt
+LS0gYS9kb2NzL3VzZXJtYW51YWwvY2hhcHRlcnMvY29tbW9uX3VzZV9jYXNlcy54bWwNCj4gPiAr
+KysgYi9kb2NzL3VzZXJtYW51YWwvY2hhcHRlcnMvY29tbW9uX3VzZV9jYXNlcy54bWwNCj4gPiBA
+QCAtOTQsNiArOTQsMzAgQEAgU1JDREFURSA9ICIyMDA2MTAxNCINCj4gPiAgICAgICAgICA8L2xp
+c3RpdGVtPg0KPiA+ICAgICAgICA8L2l0ZW1pemVkbGlzdD48L3BhcmE+DQo+ID4NCj4gPiArICAg
+IDxwYXJhPlRoZXJlIGFyZSBhbHNvIHNvbWUgb3B0aW9uYWwgdmFyaWFibGVzIHRoYXQgY2FuIGJl
+IGRlZmluZWQ6DQo+ID4gKyAgICA8aXRlbWl6ZWRsaXN0Pg0KPiA+ICsgICAgPGxpc3RpdGVtPg0K
+PiA+ICsgICAgICAgICAgPHBhcmE+PGNvbW1hbmQ+U09DX0ZBTUlMWTwvY29tbWFuZD4gZGVzY3Jp
+YmVzIGEgZmFtaWx5IG9mDQo+IHByb2Nlc3NvcnMNCj4gPiArICAgICAgICAgICAgdGhhdCBhbGwg
+c2hhcmUgY29tbW9uIGZlYXR1cmVzIHN1Y2ggYXMga2VybmVsIHZlcnNpb25zLA0KPiA+ICsgICAg
+ICAgICAgICBib290bG9hZGVycywgZXRjLiAgVGhpcyBpcyB1c2VkIHRvIGFsbG93IG92ZXJyaWRl
+cyBmb3IgYQ0KPiB3aG9sZQ0KPiANCj4gSSB0aGluayBhIGZ1bGwgc3RvcCBpcyByZXF1aXJlZCBl
+dmVuIGlmIHRoZXJlIGlzIGFuIGFiYnJldmlhdGlvbiBpbg0KPiBmcm9udCBvZiBpdC4g4oaSIGV0
+Yy4uDQoNClBhdWwsDQoNCkknbSBhZnJhaWQgSSBkb24ndCB1bmRlcnN0YW5kIHdoYXQgeW91IGFy
+ZSBhc2tpbmcgdG8gaGF2ZSBmaXhlZC4gIEFyZSB5b3Ugc2F5aW5nIHlvdSB3YW50IGl0IHRvIGJl
+IGV0Yy4uIGluc3RlYWQgb2YgZXRjLg0KDQpKdXN0IHdhbnQgdG8gY2xhcmlmeSBiZWZvcmUgSSBy
+ZW1ha2UgdGhpcyBwYXRjaC4NCg0KPiANCj4gW+KApl0NCj4gDQo+IFdpdGggdGhpcyBmaXhlZDoN
+Cj4gDQo+IEFja2VkLWJ5OiBQYXVsIE1lbnplbCA8cGF1bGVwYW50ZXJAdXNlcnMuc291cmNlZm9y
+Z2UubmV0Pg0KPiANCj4gDQo+IFRoYW5rcyBmb3IgaW1wcm92aW5nIHRoZSBkb2N1bWVudGF0aW9u
+LA0KPiANCj4gUGF1bA0K
 
-2010/8/31 Sylvain Par=E9 <sylvain.pare@gmail.com>
-
-> I tried to update automoc-native and kde4 but it is not better.
-> I know that Q_WS_WIN is only defined when Qt was build for windows. But h=
-ow
-> to fix this?
-> I am not very skilled, at least not enough to fix this..
-> I miss some things so more explanation/help will be very well received!
-> thx
-> Sylvain
->
->
-> 2010/8/30 Holger Freyther <zecke@selfish.org>
->
-> On 08/27/2010 08:39 PM, Sylvain Par=E9 wrote:
->>
->> > automoc-native itself does not build.
->> > (According to OE's log automoc-native is ~ 2 years old.)
->>
->>
->> Well, pick the latest version then, /usr/include/qt4 as include is looki=
-ng
->> bad, Q_WS_WIN is only defined when Qt was build for windows.
->>
->> So in summary...
->>        - automoc-native probably deserves an update
->>        - it should use the "native" version of Qt (like qmake, uic,
->> moc...)
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
 
