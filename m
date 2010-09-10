@@ -1,25 +1,26 @@
-Received: from vms173009pub.verizon.net ([206.46.173.9])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Ou8ps-0000XY-GI
+	(envelope-from <denis@denix.org>) id 1Ou8rJ-0000dU-P8
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 21:00:34 +0200
+	Fri, 10 Sep 2010 21:02:02 +0200
 Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173009.mailsrvcs.net
+	by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L8J00C97OQWOXMR@vms173009.mailsrvcs.net> for
+	2009)) with ESMTPA id <0L8J00H4AOTXB9VZ@vms173017.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Fri,
-	10 Sep 2010 13:59:26 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id D171914AF60; Fri,
-	10 Sep 2010 14:59:19 -0400 (EDT)
-Date: Fri, 10 Sep 2010 14:59:19 -0400
+	10 Sep 2010 14:01:10 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 84D4E14AF64; Fri,
+	10 Sep 2010 15:01:09 -0400 (EDT)
+Date: Fri, 10 Sep 2010 15:01:09 -0400
 From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <AANLkTimU_Rbj=Kex3Qs-EkZSOLUZmV+pY_0xzt-dZ+Mx@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100910185919.GH28148@denix.org>
-References: <1283879144-9127-1-git-send-email-chase.maupin@ti.com>
+Message-id: <20100910190109.GI28148@denix.org>
 MIME-version: 1.0
-In-reply-to: <1283879144-9127-1-git-send-email-chase.maupin@ti.com>
+References: <1283969035-1397-1-git-send-email-chase.maupin@ti.com>
+	<AANLkTimU_Rbj=Kex3Qs-EkZSOLUZmV+pY_0xzt-dZ+Mx@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.9
+X-SA-Exim-Connect-IP: 206.46.173.17
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -27,7 +28,7 @@ X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sourceipk: make extra files inclusion optional
+Subject: Re: [PATCHv2] common_use_cases: add description of SOC_FAMILY
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,82 +42,88 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 19:00:34 -0000
-Content-type: text/plain; charset=us-ascii
+X-List-Received-Date: Fri, 10 Sep 2010 19:02:03 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: QUOTED-PRINTABLE
 Content-disposition: inline
 
-On Tue, Sep 07, 2010 at 12:05:44PM -0500, Chase Maupin wrote:
-> * Make the inclusion of the README and recipe files optional
->   for source ipks.  For some packages the sources owner may not
->   want these additional files added to their sources.
-> 
-> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+On Thu, Sep 09, 2010 at 08:17:07AM +0200, Frans Meulenbroeks wrote:
+> 2010/9/8 Chase Maupin <chasemaupin03@gmail.com>:
+> > * Added a description of the SOC_FAMILY variable that
+> > =A0can be set in the machine configuration files.
+> >
+> > Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> > ---
+> > =A0docs/usermanual/chapters/common_use_cases.xml | =A0 24 +++++++=
++++++++++++++++++
+> > =A01 files changed, 24 insertions(+), 0 deletions(-)
+> >
+> > diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs=
+/usermanual/chapters/common_use_cases.xml
+> > index d86d0ca..ef81b95 100644
+> > --- a/docs/usermanual/chapters/common_use_cases.xml
+> > +++ b/docs/usermanual/chapters/common_use_cases.xml
+> > @@ -94,6 +94,30 @@ SRCDATE =3D "20061014"
+> > =A0 =A0 =A0 =A0 </listitem>
+> > =A0 =A0 =A0 </itemizedlist></para>
+> >
+> > + =A0 =A0<para>There are also some optional variables that can be=
+ defined:
+> > + =A0 =A0<itemizedlist>
+> > + =A0 =A0<listitem>
+> > + =A0 =A0 =A0 =A0 =A0<para><command>SOC_FAMILY</command> describe=
+s a family of processors
+> > + =A0 =A0 =A0 =A0 =A0 =A0that all share common features such as k=
+ernel versions,
+> > + =A0 =A0 =A0 =A0 =A0 =A0bootloaders, etc. =A0This is used to all=
+ow overrides for a whole
+> > + =A0 =A0 =A0 =A0 =A0 =A0set of devices rather than per machine o=
+verrides being used.
+> > + =A0 =A0 =A0 =A0 =A0 =A0The use of SOC_FAMILY as an override is =
+currently a distribution
+> > + =A0 =A0 =A0 =A0 =A0 =A0or local setting.
+> > + =A0 =A0 =A0 =A0 =A0</para>
+> > + =A0 =A0 =A0 =A0 =A0<para>
+> > + =A0 =A0 =A0 =A0 =A0 =A0NOTE: SOC_FAMILY is different than MACHI=
+NE_CLASS in that
+> > + =A0 =A0 =A0 =A0 =A0 =A0MACHINE_CLASS is intended to specify a g=
+rouping of devices
+> > + =A0 =A0 =A0 =A0 =A0 =A0that may have different processors but s=
+hare common features.
+> > + =A0 =A0 =A0 =A0 =A0 =A0For example all OMAP3 devices can be des=
+cribed using the SOC_FAMILY
+> > + =A0 =A0 =A0 =A0 =A0 =A0"omap3" and this value can be used in ov=
+errides to prevent
+> > + =A0 =A0 =A0 =A0 =A0 =A0requiring multiple machine specific over=
+rides. =A0MACHINE_CLASS
+> > + =A0 =A0 =A0 =A0 =A0 =A0might be used to describe a class of dev=
+ices such as a cell
+> > + =A0 =A0 =A0 =A0 =A0 =A0phone in which the processor may be diff=
+erent but the
+> > + =A0 =A0 =A0 =A0 =A0 =A0features such as touchscreen, GPS, modem=
+, etc are the same.
+> > + =A0 =A0 =A0 =A0 =A0</para>
+> > + =A0 =A0 =A0 =A0</listitem>
+> > + =A0 =A0</itemizedlist></para>
+> > +
+> > =A0 =A0 <para>Next the kernel recipe needs to be added if it does=
+n't already exist.
+> > =A0 =A0 </para>
+> > =A0 </section>
+> > --
+> > 1.7.0.4
+>=20
+> Thanks for writing this.
+> Seems like a decent description to me.
+>=20
+> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
-FYI, I pushed this patch last night, as it's a faily separate class and nobody 
-seems to use it as of yet.
+Acked-by: Denys Dmytriyenko <denis@denix.org>
 
--- 
+If there are no objections, I'd like to push it later today.
+
+--=20
 Denys
 
-
-> ---
->  classes/sourceipk.bbclass |   15 ++++++++++++---
->  1 files changed, 12 insertions(+), 3 deletions(-)
-> 
-> diff --git a/classes/sourceipk.bbclass b/classes/sourceipk.bbclass
-> index 4957e4a..182785b 100644
-> --- a/classes/sourceipk.bbclass
-> +++ b/classes/sourceipk.bbclass
-> @@ -14,6 +14,9 @@
->  #   - SRCIPK_PACKAGE_ARCH   = This variable allows specific recipies to
->  #                             specify an architecture for the sourcetree
->  #                             package is "all" is not appropriate
-> +#   - SRCIPK_INC_EXTRAFILES = When set to 1 this variable indicates that
-> +#                             the source ipk should contain extra files
-> +#                             such as the README file and recipe.
->  #
->  # The default installation directory for the sources is:
->  #   /usr/src/${PN}-src
-> @@ -47,6 +50,9 @@ SRCIPK_INSTALL_DIR ?= "/usr/src/${PN}-src"
->  # Default PACKAGE_ARCH for sources is "all"
->  SRCIPK_PACKAGE_ARCH ?= "all"
->  
-> +# Default SRCIPK_INCLUDE_EXTRAFILES is to include the extra files
-> +SRCIPK_INCLUDE_EXTRAFILES ?= "1"
-> +
->  # Create a README file that describes the contents of the source ipk
->  sourceipk_create_readme() {
->      readme="$1/README.${PN}-src"
-> @@ -91,7 +97,6 @@ sourceipk_do_create_srcipk() {
->              srcuri="OpenEmbedded"
->          fi
->          echo "Source: $srcuri" >> $control_file
-> -
->          #Write the control tarball
->          tar -C $tmp_dir/CONTROL --owner=0 --group=0 -czf $srcipk_dir/control.tar.gz .
->  
-> @@ -101,8 +106,12 @@ sourceipk_do_create_srcipk() {
->          # Copy sources for packaging
->          mkdir -p $tmp_dir/${SRCIPK_INSTALL_DIR}
->          cp -rLf ${S}/* $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> -        sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> -        cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> +
-> +        if [ ${SRCIPK_INCLUDE_EXTRAFILES} != "0" ]
-> +        then
-> +            sourceipk_create_readme $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> +            cp ${FILE} $tmp_dir/${SRCIPK_INSTALL_DIR}/
-> +        fi
->  
->          #Write the data tarball
->          tar -C $tmp_dir --owner=0 --group=0 -czf $srcipk_dir/data.tar.gz .
-> -- 
-> 1.7.0.4
-> 
-> 
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 
 
