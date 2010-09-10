@@ -1,39 +1,39 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OuAPk-0002a8-6m
+	(envelope-from <denis@denix.org>) id 1OuARs-0004Bk-QV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 22:41:41 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OuAOy-0002Yq-Fo from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 13:40:52 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 10 Sep 2010 13:40:52 -0700
-Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 10 Sep 2010 14:40:48 -0600
-Message-ID: <4C8A97C9.2080004@mentor.com>
-Date: Fri, 10 Sep 2010 13:40:41 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Fri, 10 Sep 2010 22:43:53 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.53.61])
+	by vms173005.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L8J0073ZTJVE92D@vms173005.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	10 Sep 2010 15:43:08 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 7390D14AF64; Fri,
+	10 Sep 2010 16:43:07 -0400 (EDT)
+Date: Fri, 10 Sep 2010 16:43:07 -0400
+From: Denys Dmytriyenko <denis@denix.org>
 To: openembedded-devel@lists.openembedded.org
-References: <1284065307-5766-1-git-send-email-eric@eukrea.com>
-In-Reply-To: <1284065307-5766-1-git-send-email-eric@eukrea.com>
-X-OriginalArrivalTime: 10 Sep 2010 20:40:48.0786 (UTC)
-	FILETIME=[73763720:01CB5128]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Message-id: <20100910204307.GP28148@denix.org>
+References: <20100903111210.GA17702@game.jcrosoft.org>
+	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
+	<AANLkTim57opnM=fn47pQ-GeNsNbSyydHd3TKSWhdD5z5@mail.gmail.com>
+	<AANLkTikyFRQskds_P9AH+=_km46KEf1cPm-Vq1+MhdhC@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310BFA4A2@dlee06.ent.ti.com>
+	<AANLkTik599XZfY1Abq+gdDqGSOOLnqHUiqL1VVK9Rh87@mail.gmail.com>
+	<20100910185711.GG28148@denix.org> <4C8A95E7.7070403@mentor.com>
+MIME-version: 1.0
+In-reply-to: <4C8A95E7.7070403@mentor.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.5
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] util-linux-ng: fix readprofile update-alternatives vs	busybox
+Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make	it global
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,93 +47,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 20:41:41 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 10 Sep 2010 20:43:53 -0000
+Content-type: text/plain; charset=us-ascii
+Content-disposition: inline
 
-Eric Bénard wrote:
-> * util-linux-ng installs readprofile in /sbin, busybox installs
-> it in /usr/sbin which tiggers the following log when configuring
-> the package :
-> Configuring util-linux-ng-readprofile.
-> update-alternatives: Error: cannot register alternative readprofile to
-> /sbin/readprofile since it is already registered to /usr/sbin/readprofile
-> Collected errors:
->  * pkg_run_script: postinst script returned status 1.
->  * opkg_configure: util-linux-ng-readprofile.postinst returned 1.
-> 
-> * the fix is to have util-linux-ng install readprofile in /usr/sbin
-> 
-> * this patch fix http://bugs.openembedded.org/show_bug.cgi?id=5474 as
-> suggested by Tom Rini
-> 
-> Signed-off-by: Eric Bénard <eric@eukrea.com>
+On Fri, Sep 10, 2010 at 01:32:39PM -0700, Tom Rini wrote:
+> Denys Dmytriyenko wrote:
+>> On Wed, Sep 08, 2010 at 07:58:39AM +0200, Frans Meulenbroeks wrote:
+>>> 2010/9/7 Maupin, Chase <chase.maupin@ti.com>:
+>>>
+>>>>> Forgot about this, but a variable should go with documentation.
+>>>>> This already has been raised with the orginal patch, but was ignored
+>>>>> by the submitters.
+>>>> Frans, Are you counting me as one of the original submitters?  I mainly 
+>>>> use the SOC_FAMILY, I didn't create it.  That being said, if you have a 
+>>>> recommended section of the usermanual that this should be documented in 
+>>>> I'll try to add something.
+>>> Hi Chase,
+>>> I see you indeed as the submitter. The commit carries your name and
+>>> there is no reference in the commit message of another author.
+>>>
+>>> Wrt the manual: actually I thought we had a section for this, but as
+>>> it stands i cannot find it. Guess I saw it somewhere else.
+>>> I'm not really sure where it would fit. I guess there are others who
+>>> have a better view on the manual and its structure.
+>> Frans,
+>> I guess then you haven't read the original discussion closely enough. 
+>> Chase only made a change to add existing SOC_FAMILY override into 
+>> COMPATIBLE_MACHINE variable... I keep repeating myself - SOC_FAMILY 
+>> feature is about a year old. It was introduced as part of a large merge 
+>> from Arago. Here is the original commit and some description:
+>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=b788499815bfc1974d4277c0a261b9a7c24aa816
+>
+> I suppose you could save Chase some time, Denys, and update the manual 
+> instead :)  But to me, it's perfectly reasonable for Frans to ask that when 
+> someone renames a not previously documented variable to go ahead and 
+> document it too (since they must have some knowledge of how it works, and 
+> some correct knowledge being written down is better than none).
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
+Thanks, Tom!
 
-> ---
->  recipes/util-linux-ng/util-linux-ng.inc |   15 +++++++++++----
->  1 files changed, 11 insertions(+), 4 deletions(-)
-> 
-> diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-> index cbdf68d..ca0790e 100644
-> --- a/recipes/util-linux-ng/util-linux-ng.inc
-> +++ b/recipes/util-linux-ng/util-linux-ng.inc
-> @@ -8,7 +8,7 @@ inherit autotools gettext
->  
->  DEFAULT_PREFERENCE = "-1"
->  
-> -INC_PR = "r27"
-> +INC_PR = "r28"
->  
->  # allows for a release candidate
->  RC ?= ""
-> @@ -51,7 +51,7 @@ FILES_util-linux-ng-losetup = "${base_sbindir}/losetup.${PN}"
->  FILES_util-linux-ng-mount = "${base_bindir}/mount.${PN} ${sysconfdir}/default/mountall"
->  FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
->  # Moved to ${base_sbindir} by do_install:
-> -FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
-> +FILES_util-linux-ng-readprofile = "${sbindir}/readprofile.${PN}"
->  FILES_util-linux-ng-fsck = "${base_sbindir}/fsck.${PN}"
->  FILES_util-linux-ng-blkid = "${base_sbindir}/blkid.${PN}"
->  FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
-> @@ -124,8 +124,9 @@ do_install () {
->  	mkdir -p ${D}${base_bindir}
->  
->          sbinprogs="agetty blockdev ctrlaltdel cfdisk"
-> -        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk readprofile fsck blkid vigr vipw"
-> +        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk fsck blkid vigr vipw"
->          usrbinprogs_a="chfn chsh hexdump last logger mesg newgrp renice wall setsid chrt"
-> +        usrsbinprogs_a="readprofile"
->          binprogs_a="dmesg kill more umount mount login reset"
->  
->          if [ "${base_sbindir}" != "${sbindir}" ]; then
-> @@ -152,6 +153,12 @@ do_install () {
->                  fi
->          done
->  
-> +        for p in $usrsbinprogs_a; do
-> +                if [ -f "${D}${sbindir}/$p" ]; then
-> +                        mv "${D}${sbindir}/$p" "${D}${sbindir}/$p.${PN}"
-> +                fi
-> +        done
-> +
->          for p in $binprogs_a; do
->                  if [ -f "${D}${base_bindir}/$p" ]; then
->                          mv "${D}${base_bindir}/$p" "${D}${base_bindir}/$p.${PN}"
-> @@ -271,7 +278,7 @@ pkg_prerm_util-linux-ng-swaponoff () {
->  }
->  
->  pkg_postinst_util-linux-ng-readprofile() {
-> -    update-alternatives --install ${base_sbindir}/readprofile readprofile readprofile.${PN} 100
-> +    update-alternatives --install ${sbindir}/readprofile readprofile readprofile.${PN} 100
->  }
->  
->  pkg_prerm_util-linux-ng-readprofile () {
+Yes, pushing Chase's patch for documentation update is on my TODO list for 
+later today - I'm giving people last chance to comment...
 
+I agree, updating documentation is very desirable, no objections here. I was 
+merely commenting on Frans' note here, giving some background:
+
+>>> Hi Chase,
+>>> I see you indeed as the submitter. The commit carries your name and
+>>> there is no reference in the commit message of another author.
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+Denys
 
 
