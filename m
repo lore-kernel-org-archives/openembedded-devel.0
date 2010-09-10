@@ -1,49 +1,43 @@
-Received: from devils.ext.ti.com ([198.47.26.153])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chase.maupin@ti.com>) id 1Ou83F-0001PF-7n
+	(envelope-from <chasemaupin03@gmail.com>) id 1Ou86J-0003kn-RV
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 20:10:19 +0200
-Received: from dlep36.itg.ti.com ([157.170.170.91])
-	by devils.ext.ti.com (8.13.7/8.13.7) with ESMTP id o8AI9W1M015219
-	(version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-SHA bits=256 verify=NO)
+	Fri, 10 Sep 2010 20:13:29 +0200
+Received: by yxg6 with SMTP id 6so812529yxg.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Sep 2010 13:09:32 -0500
-Received: from dlep26.itg.ti.com (localhost [127.0.0.1])
-	by dlep36.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8AI9VoH012101
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Sep 2010 13:09:32 -0500 (CDT)
-Received: from dlee74.ent.ti.com (localhost [127.0.0.1])
-	by dlep26.itg.ti.com (8.13.8/8.13.8) with ESMTP id o8AI9VxL012307
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Sep 2010 13:09:31 -0500 (CDT)
-Received: from dlee06.ent.ti.com ([157.170.170.11]) by dlee74.ent.ti.com
-	([157.170.170.8]) with mapi; Fri, 10 Sep 2010 13:09:31 -0500
-From: "Maupin, Chase" <chase.maupin@ti.com>
-To: "openembedded-devel@lists.openembedded.org"
-	<openembedded-devel@lists.openembedded.org>
-Date: Fri, 10 Sep 2010 13:09:30 -0500
-Thread-Topic: [oe] [PATCH] jpeg_8b: Allow using older versions of automake
-Thread-Index: ActREx3WPUlc8LR6Sbe2udl6kV0fAwAACOjg
-Message-ID: <131E5DFBE7373E4C8D813795A6AA7F080310BFAE9C@dlee06.ent.ti.com>
-References: <1282924252-22046-1-git-send-email-chase.maupin@ti.com>
-	<AANLkTik_1G5-zR7CXWnho4nfkFJAap4OkRp10iKphL2t@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310753C8F@dlee06.ent.ti.com>
-	<20100910180449.GD28148@denix.org>
-In-Reply-To: <20100910180449.GD28148@denix.org>
-Accept-Language: en-US
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-acceptlanguage: en-US
-MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 198.47.26.153
-X-SA-Exim-Mail-From: chase.maupin@ti.com
+	Fri, 10 Sep 2010 11:12:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=xtukqEZYccLp4y5nUcAJpKBL+IqfnP9qI9vp1toTrwU=;
+	b=NUU9/pChsYEf1iNNe3nGGUZEgwwvml8x0JJ6NxWSq+nkJL1Momp/GTLoDWDYz+fVrb
+	AdK84cmozZKo4Yl5PVxznxceIEz9G7Ci1KA/kArJd0GcPxKM7joS4+n+tlcRkxyp7WaJ
+	T2T3pu9fSfJXXWZJxavNZdHKV5sMRMR5xAPxU=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=tZyYK7QJrpGNGHDuEoNq+31DwAMndd7AePtvAWJRA/hNtGBZR+vcxe/r8Bo97SJljs
+	P178IDOFlbpKwBtcOts6ghO2R7o85wsRPgPTN3NN6oAXd5EYS/IIur+hBwNI1Mia8sbi
+	0mN0JkVW3MOD5l2G1CTyrkuY5vaa4haP5QVqA=
+Received: by 10.150.202.1 with SMTP id z1mr396015ybf.407.1284142359306;
+	Fri, 10 Sep 2010 11:12:39 -0700 (PDT)
+Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
+	by mx.google.com with ESMTPS id q21sm2915100ybk.11.2010.09.10.11.12.37
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 10 Sep 2010 11:12:38 -0700 (PDT)
+From: Chase Maupin <chasemaupin03@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+Date: Fri, 10 Sep 2010 13:02:20 -0500
+Message-Id: <1284141740-24059-1-git-send-email-chase.maupin@ti.com>
+X-Mailer: git-send-email 1.7.0.4
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: chasemaupin03@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] jpeg_8b: Allow using older versions of automake
+Subject: [PATCHv2] jpeg_8b: Allow using older versions of automake
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,65 +51,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 18:10:19 -0000
-Content-Language: en-US
-Content-Type: text/plain; charset="us-ascii"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Fri, 10 Sep 2010 18:13:29 -0000
 
-Enricos change is on my list.  I will resubmit this.
+From: Chase <chase@chase-laptop.(none)>
 
-Sincerely,
-Chase Maupin
-Software Applications
-Catalog DSP Products
-e-mail: chase.maupin@ti.com
-phone: (281) 274-3285
+* Added patch to allow using older versions of automake such
+  as 1.10.3 when building jpeg version 8b.
+* Only use the AM_SILENT_RULES if it is available.
 
-For support:
-Forums - http://community.ti.com/forums/
-Wiki - http://wiki.davincidsp.com/
+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+---
+ ...igure-make-jpeg-work-with-older-autotools.patch |   30 ++++++++++++++++++++
+ recipes/jpeg/jpeg_8b.bb                            |    7 +++-
+ 2 files changed, 35 insertions(+), 2 deletions(-)
+ create mode 100644 recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch
 
-> -----Original Message-----
-> From: openembedded-devel-bounces@lists.openembedded.org
-> [mailto:openembedded-devel-bounces@lists.openembedded.org] On Behalf Of
-> Denys Dmytriyenko
-> Sent: Friday, September 10, 2010 1:05 PM
-> To: openembedded-devel@lists.openembedded.org
-> Subject: Re: [oe] [PATCH] jpeg_8b: Allow using older versions of automake
->=20
-> On Mon, Aug 30, 2010 at 08:24:30AM -0500, Maupin, Chase wrote:
-> > Khem,
-> >
-> > I'd be happy to make the patch but in this case the resulting
-> differences in
-> > configure appear to be just changes to line numbers in the script
-> because my
-> > patch caused a new comment line to be inserted.  I'm not sure if this
-> patch
-> > to configure would add anything but clutter.  However, if you still wan=
-t
-> it
-> > I'll add it to the patch and resend.  The changes to configure would be
-> (and
-> > sorry for any outlook mangling):
->=20
-> Ping.
->=20
-> While the patch is not required, but it's nice to have. I'd vote to apply
-> the
-> original version w/o changes to configure script, but with change propose=
-d
-> by
-> Enrico.
->=20
-> Acked-by: Denys Dmytriyenko <denis@denix.org>
->=20
-> --
-> Denys
->=20
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+diff --git a/recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch b/recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch
+new file mode 100644
+index 0000000..dd6fd52
+--- /dev/null
++++ b/recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch
+@@ -0,0 +1,30 @@
++From e9e77ee999553f9b94de0288688a0bdc60b92e0f Mon Sep 17 00:00:00 2001
++From: Chase Maupin <chase.maupin@ti.com>
++Date: Tue, 17 Aug 2010 08:30:56 -0500
++Subject: [PATCH] configure: make jpeg work with older autotools
++
++* Only use the AM_SILENT_RULES variable if it is defined.  Older
++  versions of automake don't support this option.
++
++Signed-off-by: Chase Maupin <chase.maupin@ti.com>
++---
++ configure.ac |    3 ++-
++ 1 files changed, 2 insertions(+), 1 deletions(-)
++
++diff --git a/configure.ac b/configure.ac
++index 96da13b..9a58c51 100644
++--- a/configure.ac
+++++ b/configure.ac
++@@ -26,7 +26,8 @@ AM_INIT_AUTOMAKE([-Wall -Werror ansi2knr no-dist foreign])
++ # Make --enable-silent-rules the default.
++ # To get verbose build output you may configure
++ # with --disable-silent-rules or use "make V=1".
++-AM_SILENT_RULES([yes])
+++# only use if available
+++m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
++ 
++ # This is required when using the de-ANSI-fication feature.
++ AM_C_PROTOTYPES
++-- 
++1.7.0.4
++
+diff --git a/recipes/jpeg/jpeg_8b.bb b/recipes/jpeg/jpeg_8b.bb
+index 4251ca6..688dcd8 100644
+--- a/recipes/jpeg/jpeg_8b.bb
++++ b/recipes/jpeg/jpeg_8b.bb
+@@ -2,12 +2,15 @@ DESCRIPTION = "libjpeg is a library for handling the JPEG (JFIF) image format."
+ LICENSE = "jpeg"
+ SECTION = "libs"
+ PRIORITY = "required"
+-PR = "r0"
++PR = "r1"
+ 
+ # TODO: really needed?
+ RPROVIDES_${PN} = "jpeg"
+ 
+-SRC_URI = "http://www.ijg.org/files/jpegsrc.v${PV}.tar.gz"
++SRC_URI = "\
++    http://www.ijg.org/files/jpegsrc.v${PV}.tar.gz \
++    file://0001-configure-make-jpeg-work-with-older-autotools.patch \
++    "
+ S = "${WORKDIR}/jpeg-${PV}"
+ 
+ inherit autotools
+-- 
+1.7.0.4
+
 
 
