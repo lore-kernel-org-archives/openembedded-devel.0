@@ -1,32 +1,44 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OuAYE-0004Mo-Jj
+	(envelope-from <anarsoul@gmail.com>) id 1OuAdV-00054J-MT
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 22:50:28 +0200
-Received: (qmail 2115 invoked by uid 1003); 10 Sep 2010 16:50:44 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	10 Sep 2010 16:50:44 -0000
-Message-ID: <4C8A99E4.2080402@balister.org>
-Date: Fri, 10 Sep 2010 16:49:40 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
-MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <1284065307-5766-1-git-send-email-eric@eukrea.com>
-	<4C8A97C9.2080004@mentor.com>
-In-Reply-To: <4C8A97C9.2080004@mentor.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+	Fri, 10 Sep 2010 22:56:08 +0200
+Received: by eyb7 with SMTP id 7so2139137eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Sep 2010 13:55:11 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=LWIujBcZdFus77Ms9jSCDbwek3AITzLpvugR4TImuKk=;
+	b=O9C+OtNZ3TtyAHo4MdMdoXfLrEdmCmbE/m6tub2tQ8KeuErZgV82h3mzbR2xsJfZ0X
+	wEbJUJt9wowUOmbWen4VxwThC8ylPAFnlev81qjE6RxYy3aYVNvgQfsU94hU0OGE9bgw
+	bZaYqX9dj8ZqILtZ6hOmE6E5mVq8hZNxv/HYY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:subject:date:message-id:x-mailer;
+	b=XiaapVw/atNA/92VNast0aa5ORr5ZLGNUmasULP76fFHcJdrzYIbh469u55pYc6TM7
+	iy+TeMcsipGz8Zni25WZdbJDacdLdFRGFqgxV/FrSem9et8h4rQkRho1sWYWpogi6PzZ
+	NOj9gjovgmW8SRts7seQ2Gxn9OGdk/LQGieCs=
+Received: by 10.213.21.129 with SMTP id j1mr1010331ebb.7.1284152111837;
+	Fri, 10 Sep 2010 13:55:11 -0700 (PDT)
+Received: from localhost.localdomain ([80.249.95.150])
+	by mx.google.com with ESMTPS id z55sm4525469eeh.3.2010.09.10.13.55.10
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 10 Sep 2010 13:55:10 -0700 (PDT)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
+To: openembedded-devel@lists.openembedded.org,
+	anarsoul@gmail.com
+Date: Fri, 10 Sep 2010 23:54:12 +0300
+Message-Id: <1284152054-27447-1-git-send-email-anarsoul@gmail.com>
+X-Mailer: git-send-email 1.7.2.2
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] util-linux-ng: fix readprofile update-alternatives vs	busybox
+Subject: [PATCH 0/2] Update kernel for rx1950 machine
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,102 +52,10 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 20:50:28 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 10 Sep 2010 20:56:10 -0000
 
-On 09/10/2010 04:40 PM, Tom Rini wrote:
-> Eric Bénard wrote:
->> * util-linux-ng installs readprofile in /sbin, busybox installs
->> it in /usr/sbin which tiggers the following log when configuring
->> the package :
->> Configuring util-linux-ng-readprofile.
->> update-alternatives: Error: cannot register alternative readprofile to
->> /sbin/readprofile since it is already registered to /usr/sbin/readprofile
->> Collected errors:
->> * pkg_run_script: postinst script returned status 1.
->> * opkg_configure: util-linux-ng-readprofile.postinst returned 1.
->>
->> * the fix is to have util-linux-ng install readprofile in /usr/sbin
->>
->> * this patch fix http://bugs.openembedded.org/show_bug.cgi?id=5474 as
->> suggested by Tom Rini
->>
->> Signed-off-by: Eric Bénard <eric@eukrea.com>
->
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+This patch series adds rx1950-specific patches to linux-2.6.35
+and makes it default for this machine.
 
-Tested-by: Philip Balister <philip@balister.org>
-
->
->> ---
->> recipes/util-linux-ng/util-linux-ng.inc | 15 +++++++++++----
->> 1 files changed, 11 insertions(+), 4 deletions(-)
->>
->> diff --git a/recipes/util-linux-ng/util-linux-ng.inc
->> b/recipes/util-linux-ng/util-linux-ng.inc
->> index cbdf68d..ca0790e 100644
->> --- a/recipes/util-linux-ng/util-linux-ng.inc
->> +++ b/recipes/util-linux-ng/util-linux-ng.inc
->> @@ -8,7 +8,7 @@ inherit autotools gettext
->>
->> DEFAULT_PREFERENCE = "-1"
->>
->> -INC_PR = "r27"
->> +INC_PR = "r28"
->>
->> # allows for a release candidate
->> RC ?= ""
->> @@ -51,7 +51,7 @@ FILES_util-linux-ng-losetup =
->> "${base_sbindir}/losetup.${PN}"
->> FILES_util-linux-ng-mount = "${base_bindir}/mount.${PN}
->> ${sysconfdir}/default/mountall"
->> FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
->> # Moved to ${base_sbindir} by do_install:
->> -FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
->> +FILES_util-linux-ng-readprofile = "${sbindir}/readprofile.${PN}"
->> FILES_util-linux-ng-fsck = "${base_sbindir}/fsck.${PN}"
->> FILES_util-linux-ng-blkid = "${base_sbindir}/blkid.${PN}"
->> FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
->> @@ -124,8 +124,9 @@ do_install () {
->> mkdir -p ${D}${base_bindir}
->>
->> sbinprogs="agetty blockdev ctrlaltdel cfdisk"
->> - sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix
->> fsck.minix losetup swapon fdisk readprofile fsck blkid vigr vipw"
->> + sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix
->> fsck.minix losetup swapon fdisk fsck blkid vigr vipw"
->> usrbinprogs_a="chfn chsh hexdump last logger mesg newgrp renice wall
->> setsid chrt"
->> + usrsbinprogs_a="readprofile"
->> binprogs_a="dmesg kill more umount mount login reset"
->>
->> if [ "${base_sbindir}" != "${sbindir}" ]; then
->> @@ -152,6 +153,12 @@ do_install () {
->> fi
->> done
->>
->> + for p in $usrsbinprogs_a; do
->> + if [ -f "${D}${sbindir}/$p" ]; then
->> + mv "${D}${sbindir}/$p" "${D}${sbindir}/$p.${PN}"
->> + fi
->> + done
->> +
->> for p in $binprogs_a; do
->> if [ -f "${D}${base_bindir}/$p" ]; then
->> mv "${D}${base_bindir}/$p" "${D}${base_bindir}/$p.${PN}"
->> @@ -271,7 +278,7 @@ pkg_prerm_util-linux-ng-swaponoff () {
->> }
->>
->> pkg_postinst_util-linux-ng-readprofile() {
->> - update-alternatives --install ${base_sbindir}/readprofile
->> readprofile readprofile.${PN} 100
->> + update-alternatives --install ${sbindir}/readprofile readprofile
->> readprofile.${PN} 100
->> }
->>
->> pkg_prerm_util-linux-ng-readprofile () {
->
->
 
 
