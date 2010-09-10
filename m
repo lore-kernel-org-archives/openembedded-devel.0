@@ -1,43 +1,43 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OuAG2-0000fz-2Z
+	(envelope-from <raj.khem@gmail.com>) id 1OuAGL-0000hS-J6
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 22:31:41 +0200
-Received: by pxi11 with SMTP id 11so1185768pxi.6
+	Fri, 10 Sep 2010 22:31:58 +0200
+Received: by ywa8 with SMTP id 8so1392334ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Sep 2010 13:30:50 -0700 (PDT)
+	Fri, 10 Sep 2010 13:31:12 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=BHP8EV9SAPzQO0Ed5hhksHAe5+DqI9PXKn5hYusxOww=;
-	b=G3fgRjXfMSSyNtY83Xx7ACmER/Z2UNZgw7+lg6ClQuqqedo2KhV9CmrwKO1gm95GQO
-	28LZrcvkdzBWE17BffhSbhP4h+gR3XxcYI9rNTHkdnH3yJx1wqLaA8bsk9xQrmRq1yGh
-	TmHN2u/OzNW0se9GPkpx3bQhdOtD50GqtxhrA=
+	bh=yCnyRcAUSshGk7OA5f2fC7aHg8SA2/cvqlZqx+sK838=;
+	b=OnLukp4GTZIQvs1sT5R1R9DhirGOmjdghGnCWK8rSslfx1J7p+IOvmrrKIc7xABy9T
+	HKoe8TB9Myjxbqhl1ARqXdi1HFTq2ROfHJ4xVkEJ+F6m9b8MJhhhOSaKkyA1DESj5EIm
+	DsqPvdoEfM6nWdCd8nwzWBJYhiuN7xGfdRrtI=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=hJvbMhiU/Qpx8xc+pgHzk3Ih0Z/metdWwIIJbztCPF2nCRg3lsz/s4ETFzkC3MfsIp
-	iqRXbTRCYOgES1PE6zuGK9nXjmsgxa0eSCXzKTUJuMV3qyqLqPHra+ldlfNehA32Hk3v
-	weXnbgS9l8VH7NuFg6lDGD5qrFGnSENsv8+3M=
-Received: by 10.142.134.17 with SMTP id h17mr1208338wfd.306.1284150649485;
-	Fri, 10 Sep 2010 13:30:49 -0700 (PDT)
+	b=Pqz17vA+92yfxKyUYh0flMpqPK81u1oxrcM448v3TezZ7k5XPdIdzcRJwPZHBgnv0t
+	qmmW0QyaUnwKbMS40cknjSlEMaW7H4CYwZEAEuaQPeMlC9FpFDknB7fQi0Cvyd0Dcz6z
+	g8UCxaJVS2KOJyrDK6YLj0+RtgYy/JrssByRc=
+Received: by 10.90.80.2 with SMTP id d2mr1116062agb.44.1284150671603; Fri, 10
+	Sep 2010 13:31:11 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Fri, 10 Sep 2010 13:30:29 -0700 (PDT)
-In-Reply-To: <20100910192456.GL28148@denix.org>
+Received: by 10.231.205.134 with HTTP; Fri, 10 Sep 2010 13:30:51 -0700 (PDT)
+In-Reply-To: <20100910193625.GM28148@denix.org>
 References: <1284010137-15488-1-git-send-email-raj.khem@gmail.com>
 	<i6a71i$2tv$1@dough.gmane.org>
-	<AANLkTin-FbqWWLQE+ZJ9TA3zF70U=GBy5cbVm_DHqW5J@mail.gmail.com>
-	<20100910192456.GL28148@denix.org>
+	<AANLkTi=+R=7t_6Uh2GXPAgzV_ViPwK3v9dkTLajzFSVb@mail.gmail.com>
+	<20100910193625.GM28148@denix.org>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Fri, 10 Sep 2010 13:30:29 -0700
-Message-ID: <AANLkTinWegx5MQnsF0D4=7jNCgMQ2+xOkLqHLg7Nw=NJ@mail.gmail.com>
+Date: Fri, 10 Sep 2010 13:30:51 -0700
+Message-ID: <AANLkTimrOWAYky+mNWwxdxemh3hjGiSF+FhChq7Y8A=1@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Connect-IP: 209.85.213.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -55,15 +55,15 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 20:31:41 -0000
+X-List-Received-Date: Fri, 10 Sep 2010 20:31:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Fri, Sep 10, 2010 at 12:24 PM, Denys Dmytriyenko <denis@denix.org> wrote=
+On Fri, Sep 10, 2010 at 12:36 PM, Denys Dmytriyenko <denis@denix.org> wrote=
 :
-> On Thu, Sep 09, 2010 at 06:04:28AM -0700, Steve Sakoman wrote:
->> n Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wro=
-te:
+> On Thu, Sep 09, 2010 at 12:41:45PM -0700, Khem Raj wrote:
+>> On Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wr=
+ote:
 >> > -----BEGIN PGP SIGNED MESSAGE-----
 >> > Hash: SHA1
 >> >
@@ -74,34 +74,51 @@ te:
 >> > changes through, it can now be downloaded with wget without filling in=
  a
 >> > form.
+>> > Could you please amend this patch so that the recipes fetch it directl=
+y?
 >>
->> Koen: =C2=A0does the .07 release build against recent linux-omap kernels=
- or
->> is it still broken in the same way as the .06 version?
+>> hmm thats good. but I could not grok the direct link. Do you have it han=
+dy ?
 >
-> Steve, the .07 release is exactly the same as .06 from the code perspecti=
-ve,
-
-
-not really. texture-width.patch is not needed anymore for
-omap3-sgx-modules_1.4.14.2616.bb its already available in .07
-
-> the only change is in licensing.
+> Khem,
 >
+> Per this Wiki Getting Started Guide:
+>
+> http://processors.wiki.ti.com/index.php/OMAP35x_Graphics_SDK_Getting_Star=
+ted_Guide
+>
+> The 3.1.0.7 release is hosted here:
+>
+> http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk=
+/3_01_00_07/index_FDS.html
+>
+> Release notes are here:
+>
+> http://processors.wiki.ti.com/index.php/RN_3_01_00_07
+>
+> The main GSG still says registration/login is required, but version speci=
+fic
+> release notes say otherwise:
+>
+> Features in this release
+> [NEW] License change - from export control to TSPA (no registration requi=
+red)
+> [NEW] Corrected the core revision for omap3630 (from 121 to 125) in KM bu=
+ild
+>
+>
+> And the direct URL for the tarball would be:
+>
+> http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk=
+/3_01_00_07/exports/OMAP35x_Graphics_SDK_setuplinux_3_01_00_07.bin
+>
+
+thats what I was looking for thx.
+
 > --
 > Denys
 >
 >
->> > Could you please amend this patch so that the recipes fetch it directl=
-y?
->> >
->> >
->> > regards,
->> >
->> > Koen
->> >
->> >
->> >>
 >> >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 >> >> ---
 >> >> =C2=A0.../powervr-drivers/libgles-omap3_3.01.00.07.bb =C2=A0 =C2=A0| =
@@ -189,6 +206,11 @@ kernel/drivers/gpu/pvr
 >> > Openembedded-devel@lists.openembedded.org
 >> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >> >
+>>
+>>
+>>
+>> --
+>> -Khem
 >>
 >> _______________________________________________
 >> Openembedded-devel mailing list
