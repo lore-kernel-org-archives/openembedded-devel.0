@@ -1,30 +1,30 @@
 Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OuANm-000120-32
+	(envelope-from <Tom_Rini@mentor.com>) id 1OuAPk-0002a8-6m
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 22:39:38 +0200
+	Fri, 10 Sep 2010 22:41:41 +0200
 Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
 	by relay1.mentorg.com with esmtp 
-	id 1OuAN3-0002OL-Nc from Tom_Rini@mentor.com ;
-	Fri, 10 Sep 2010 13:38:53 -0700
+	id 1OuAOy-0002Yq-Fo from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Sep 2010 13:40:52 -0700
 Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
 	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Fri, 10 Sep 2010 13:38:53 -0700
+	SMTPSVC(6.0.3790.1830); Fri, 10 Sep 2010 13:40:52 -0700
 Received: from [172.30.80.172] ([172.30.80.172]) by na2-mail.mgc.mentorg.com
 	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Fri, 10 Sep 2010 14:38:52 -0600
-Message-ID: <4C8A9755.1060308@mentor.com>
-Date: Fri, 10 Sep 2010 13:38:45 -0700
+	Fri, 10 Sep 2010 14:40:48 -0600
+Message-ID: <4C8A97C9.2080004@mentor.com>
+Date: Fri, 10 Sep 2010 13:40:41 -0700
 From: Tom Rini <tom_rini@mentor.com>
 Organization: Mentor Graphics Corporation
 User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>	<1284024609.28520.1446.camel@mill.internal.reciva.com>	<AANLkTimLWtJhYn009OchBss+LJpNx9Pt+nDZ=GGyu=a7@mail.gmail.com>	<AANLkTimOLsxX_hf6rsOyOCJgFdBrkrL=2LsT9ToCfazv@mail.gmail.com>	<4C88EC2B.2090208@balister.org>
-	<20100910185004.GF28148@denix.org>
-In-Reply-To: <20100910185004.GF28148@denix.org>
-X-OriginalArrivalTime: 10 Sep 2010 20:38:52.0465 (UTC)
-	FILETIME=[2E210A10:01CB5128]
+References: <1284065307-5766-1-git-send-email-eric@eukrea.com>
+In-Reply-To: <1284065307-5766-1-git-send-email-eric@eukrea.com>
+X-OriginalArrivalTime: 10 Sep 2010 20:40:48.0786 (UTC)
+	FILETIME=[73763720:01CB5128]
 X-SA-Exim-Connect-IP: 192.94.38.131
 X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
@@ -33,8 +33,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: tsc@openembedded.org
-Subject: Re: [PATCH] base.bbclass: fix soc-family test
+Subject: Re: [PATCH] util-linux-ng: fix readprofile update-alternatives vs	busybox
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,57 +47,90 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 20:39:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 10 Sep 2010 20:41:41 -0000
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Denys Dmytriyenko wrote:
-> On Thu, Sep 09, 2010 at 10:16:11AM -0400, Philip Balister wrote:
->> On 09/09/2010 10:06 AM, Chris Larson wrote:
->>> On Thu, Sep 9, 2010 at 3:11 AM, Frans Meulenbroeks<
->>> fransmeulenbroeks@gmail.com>  wrote:
->>>
->>>> Signed-off-by: Chase Maupin<chase.maupin@ti.com>
->>>> Acked-by: Denys Dmytriyenko<denys@ti.com>
->>>> Acked-by: Koen Kooi<k-kooi@ti.com>
->>>> Signed-off-by: Koen Kooi<koen@openembedded.org>
->>>>
->>>> I would suggest modifying the commit policy disallowing these kind of
->>>> things, saying the two Ack's must be from two developers not
->>>> affiliated with the same company.
->>>>
->>> I'd agree with this quite strongly.  I'm generally pretty careful to let
->>> others review the changes from my coworkers, to avoid any bias.
+Eric Bénard wrote:
+> * util-linux-ng installs readprofile in /sbin, busybox installs
+> it in /usr/sbin which tiggers the following log when configuring
+> the package :
+> Configuring util-linux-ng-readprofile.
+> update-alternatives: Error: cannot register alternative readprofile to
+> /sbin/readprofile since it is already registered to /usr/sbin/readprofile
+> Collected errors:
+>  * pkg_run_script: postinst script returned status 1.
+>  * opkg_configure: util-linux-ng-readprofile.postinst returned 1.
 > 
-> Chris,
+> * the fix is to have util-linux-ng install readprofile in /usr/sbin
 > 
-> Not to point any fingers, but mishaps happen and numerous reverts would be a 
-> living proof of that in the repository... :) Nobody's perfect.
+> * this patch fix http://bugs.openembedded.org/show_bug.cgi?id=5474 as
+> suggested by Tom Rini
 > 
->> This would be a good topic for OEDEM.
->>
->> For the record, I am really happy to see the .com people actively 
->> participating in the the OE project. I am also glad that they are pushing 
->> stuff into .dev and not keeping it in private repositories. This is a very 
->> good thing.
-> 
-> As I just replied to Frans' post in this thread - as a company, we are trying 
-> to follow review procedures closely and give enough time for feedback on the 
-> patches. I personally would like to apologize for the misunderstanding and 
-> promise to do a better job in the future.
+> Signed-off-by: Eric Bénard <eric@eukrea.com>
 
-That it seems that you're doing Ack/SOB in-house first is a good thing, 
-I think.
+Signed-off-by: Tom Rini <tom_rini@mentor.com>
 
-> As an active OE e.V. member on the other hand, I'm all in favor of this 
-> modification to the commit policy, as long as there is time limit on review 
-> period and if there are no strong objections, it can be pushed even if only 
-> acked by the same company. Let's discuss it further and vote at OEDEM.
+> ---
+>  recipes/util-linux-ng/util-linux-ng.inc |   15 +++++++++++----
+>  1 files changed, 11 insertions(+), 4 deletions(-)
+> 
+> diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
+> index cbdf68d..ca0790e 100644
+> --- a/recipes/util-linux-ng/util-linux-ng.inc
+> +++ b/recipes/util-linux-ng/util-linux-ng.inc
+> @@ -8,7 +8,7 @@ inherit autotools gettext
+>  
+>  DEFAULT_PREFERENCE = "-1"
+>  
+> -INC_PR = "r27"
+> +INC_PR = "r28"
+>  
+>  # allows for a release candidate
+>  RC ?= ""
+> @@ -51,7 +51,7 @@ FILES_util-linux-ng-losetup = "${base_sbindir}/losetup.${PN}"
+>  FILES_util-linux-ng-mount = "${base_bindir}/mount.${PN} ${sysconfdir}/default/mountall"
+>  FILES_util-linux-ng-umount = "${base_bindir}/umount.${PN}"
+>  # Moved to ${base_sbindir} by do_install:
+> -FILES_util-linux-ng-readprofile = "${base_sbindir}/readprofile.${PN}"
+> +FILES_util-linux-ng-readprofile = "${sbindir}/readprofile.${PN}"
+>  FILES_util-linux-ng-fsck = "${base_sbindir}/fsck.${PN}"
+>  FILES_util-linux-ng-blkid = "${base_sbindir}/blkid.${PN}"
+>  FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
+> @@ -124,8 +124,9 @@ do_install () {
+>  	mkdir -p ${D}${base_bindir}
+>  
+>          sbinprogs="agetty blockdev ctrlaltdel cfdisk"
+> -        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk readprofile fsck blkid vigr vipw"
+> +        sbinprogs_a="pivot_root hwclock mkswap shutdown mkfs.minix fsck.minix losetup swapon fdisk fsck blkid vigr vipw"
+>          usrbinprogs_a="chfn chsh hexdump last logger mesg newgrp renice wall setsid chrt"
+> +        usrsbinprogs_a="readprofile"
+>          binprogs_a="dmesg kill more umount mount login reset"
+>  
+>          if [ "${base_sbindir}" != "${sbindir}" ]; then
+> @@ -152,6 +153,12 @@ do_install () {
+>                  fi
+>          done
+>  
+> +        for p in $usrsbinprogs_a; do
+> +                if [ -f "${D}${sbindir}/$p" ]; then
+> +                        mv "${D}${sbindir}/$p" "${D}${sbindir}/$p.${PN}"
+> +                fi
+> +        done
+> +
+>          for p in $binprogs_a; do
+>                  if [ -f "${D}${base_bindir}/$p" ]; then
+>                          mv "${D}${base_bindir}/$p" "${D}${base_bindir}/$p.${PN}"
+> @@ -271,7 +278,7 @@ pkg_prerm_util-linux-ng-swaponoff () {
+>  }
+>  
+>  pkg_postinst_util-linux-ng-readprofile() {
+> -    update-alternatives --install ${base_sbindir}/readprofile readprofile readprofile.${PN} 100
+> +    update-alternatives --install ${sbindir}/readprofile readprofile readprofile.${PN} 100
+>  }
+>  
+>  pkg_prerm_util-linux-ng-readprofile () {
 
-So long as there's exceptions for limited area of expertise places. 
-There's both things like packaged-staging where Chris and I and RP have 
-dealt with it the most, and then there's also TI recipes that's really 
-you guys.
 
 -- 
 Tom Rini
