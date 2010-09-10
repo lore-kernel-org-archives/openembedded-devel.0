@@ -1,27 +1,27 @@
-Received: from vms173019pub.verizon.net ([206.46.173.19])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Ou9ES-0000JY-Uj
+	(envelope-from <denis@denix.org>) id 1Ou9PP-0004nz-3y
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 21:25:58 +0200
+	Fri, 10 Sep 2010 21:37:16 +0200
 Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173019.mailsrvcs.net
+	by vms173017.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L8J00B2XPXKG1V7@vms173019.mailsrvcs.net> for
+	2009)) with ESMTPA id <0L8J00H5ZQGPB910@vms173017.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Fri,
-	10 Sep 2010 14:25:02 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 18F3E14AF64; Fri,
-	10 Sep 2010 15:24:56 -0400 (EDT)
-Date: Fri, 10 Sep 2010 15:24:56 -0400
+	10 Sep 2010 14:36:26 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id B4BB314AF64; Fri,
+	10 Sep 2010 15:36:25 -0400 (EDT)
+Date: Fri, 10 Sep 2010 15:36:25 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <AANLkTin-FbqWWLQE+ZJ9TA3zF70U=GBy5cbVm_DHqW5J@mail.gmail.com>
+In-reply-to: <AANLkTi=+R=7t_6Uh2GXPAgzV_ViPwK3v9dkTLajzFSVb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100910192456.GL28148@denix.org>
+Message-id: <20100910193625.GM28148@denix.org>
 MIME-version: 1.0
 References: <1284010137-15488-1-git-send-email-raj.khem@gmail.com>
 	<i6a71i$2tv$1@dough.gmane.org>
-	<AANLkTin-FbqWWLQE+ZJ9TA3zF70U=GBy5cbVm_DHqW5J@mail.gmail.com>
+	<AANLkTi=+R=7t_6Uh2GXPAgzV_ViPwK3v9dkTLajzFSVb@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.19
+X-SA-Exim-Connect-IP: 206.46.173.17
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -43,14 +43,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 19:25:58 -0000
+X-List-Received-Date: Fri, 10 Sep 2010 19:37:16 -0000
 Content-type: text/plain; charset=iso-8859-1
 Content-transfer-encoding: QUOTED-PRINTABLE
 Content-disposition: inline
 
-On Thu, Sep 09, 2010 at 06:04:28AM -0700, Steve Sakoman wrote:
-> n Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl=
-> wrote:
+On Thu, Sep 09, 2010 at 12:41:45PM -0700, Khem Raj wrote:
+> On Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.n=
+l> wrote:
 > > -----BEGIN PGP SIGNED MESSAGE-----
 > > Hash: SHA1
 > >
@@ -62,29 +62,49 @@ n
 > > changes through, it can now be downloaded with wget without filli=
 ng in a
 > > form.
+> > Could you please amend this patch so that the recipes fetch it di=
+rectly?
 >=20
-> Koen:  does the .07 release build against recent linux-omap kernels=
- or
-> is it still broken in the same way as the .06 version?
+> hmm thats good. but I could not grok the direct link. Do you have i=
+t handy ?
 
-Steve, the .07 release is exactly the same as .06 from the code persp=
-ective,=20
-the only change is in licensing.
+Khem,
+
+Per this Wiki Getting Started Guide:
+
+http://processors.wiki.ti.com/index.php/OMAP35x_Graphics_SDK_Getting_=
+Started_Guide
+
+The 3.1.0.7 release is hosted here:
+
+http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf=
+xsdk/3_01_00_07/index_FDS.html
+
+Release notes are here:
+
+http://processors.wiki.ti.com/index.php/RN_3_01_00_07
+
+The main GSG still says registration/login is required, but version s=
+pecific=20
+release notes say otherwise:
+
+Features in this release
+[NEW] License change - from export control to TSPA (no registration r=
+equired)
+[NEW] Corrected the core revision for omap3630 (from 121 to 125) in K=
+M build
+
+
+And the direct URL for the tarball would be:
+
+http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gf=
+xsdk/3_01_00_07/exports/OMAP35x_Graphics_SDK_setuplinux_3_01_00_07.bi=
+n
 
 --=20
 Denys
 
 
-> > Could you please amend this patch so that the recipes fetch it di=
-rectly?
-> >
-> >
-> > regards,
-> >
-> > Koen
-> >
-> >
-> >>
 > >> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 > >> ---
 > >> =A0.../powervr-drivers/libgles-omap3_3.01.00.07.bb =A0 =A0| =
@@ -173,6 +193,11 @@ ff45b44f8fcfd74d0f2559d8e"
 > > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-=
 devel
 > >
+>=20
+>=20
+>=20
+> --=20
+> -Khem
 >=20
 > _______________________________________________
 > Openembedded-devel mailing list
