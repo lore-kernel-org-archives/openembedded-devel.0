@@ -1,43 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from vms173017pub.verizon.net ([206.46.173.17])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <chasemaupin03@gmail.com>) id 1Ou86J-0003kn-RV
+	(envelope-from <denis@denix.org>) id 1Ou8U3-00086R-B9
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 20:13:29 +0200
-Received: by yxg6 with SMTP id 6so812529yxg.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Sep 2010 11:12:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=xtukqEZYccLp4y5nUcAJpKBL+IqfnP9qI9vp1toTrwU=;
-	b=NUU9/pChsYEf1iNNe3nGGUZEgwwvml8x0JJ6NxWSq+nkJL1Momp/GTLoDWDYz+fVrb
-	AdK84cmozZKo4Yl5PVxznxceIEz9G7Ci1KA/kArJd0GcPxKM7joS4+n+tlcRkxyp7WaJ
-	T2T3pu9fSfJXXWZJxavNZdHKV5sMRMR5xAPxU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=tZyYK7QJrpGNGHDuEoNq+31DwAMndd7AePtvAWJRA/hNtGBZR+vcxe/r8Bo97SJljs
-	P178IDOFlbpKwBtcOts6ghO2R7o85wsRPgPTN3NN6oAXd5EYS/IIur+hBwNI1Mia8sbi
-	0mN0JkVW3MOD5l2G1CTyrkuY5vaa4haP5QVqA=
-Received: by 10.150.202.1 with SMTP id z1mr396015ybf.407.1284142359306;
-	Fri, 10 Sep 2010 11:12:39 -0700 (PDT)
-Received: from localhost.localdomain (dragon.ti.com [192.94.94.33])
-	by mx.google.com with ESMTPS id q21sm2915100ybk.11.2010.09.10.11.12.37
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 10 Sep 2010 11:12:38 -0700 (PDT)
-From: Chase Maupin <chasemaupin03@gmail.com>
+	Fri, 10 Sep 2010 20:38:00 +0200
+Received: from gandalf.denix.org ([unknown] [71.251.53.61])
+	by vms173017.mailsrvcs.net
+	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
+	2009)) with ESMTPA id <0L8J0069SNQ2VJU6@vms173017.mailsrvcs.net> for
+	openembedded-devel@lists.openembedded.org; Fri,
+	10 Sep 2010 13:37:15 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 18C8D14AF60; Fri,
+	10 Sep 2010 14:37:14 -0400 (EDT)
+Date: Fri, 10 Sep 2010 14:37:14 -0400
+From: Denys Dmytriyenko <denis@denix.org>
+In-reply-to: <AANLkTikLhZ-vsO34S30T5RekoaKJpwyECmjyryY8d6wV@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Fri, 10 Sep 2010 13:02:20 -0500
-Message-Id: <1284141740-24059-1-git-send-email-chase.maupin@ti.com>
-X-Mailer: git-send-email 1.7.0.4
-X-SA-Exim-Connect-IP: 209.85.213.175
-X-SA-Exim-Mail-From: chasemaupin03@gmail.com
+Message-id: <20100910183714.GE28148@denix.org>
+MIME-version: 1.0
+References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
+	<1284024609.28520.1446.camel@mill.internal.reciva.com>
+	<AANLkTimLWtJhYn009OchBss+LJpNx9Pt+nDZ=GGyu=a7@mail.gmail.com>
+	<131E5DFBE7373E4C8D813795A6AA7F080310BFAA13@dlee06.ent.ti.com>
+	<AANLkTikLhZ-vsO34S30T5RekoaKJpwyECmjyryY8d6wV@mail.gmail.com>
+User-Agent: Mutt/1.5.16 (2007-06-09)
+X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCHv2] jpeg_8b: Allow using older versions of automake
+Subject: Re: [PATCH] base.bbclass: fix soc-family test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,81 +46,134 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 18:13:29 -0000
+X-List-Received-Date: Fri, 10 Sep 2010 18:38:00 -0000
+Content-type: text/plain; charset=iso-8859-1
+Content-transfer-encoding: QUOTED-PRINTABLE
+Content-disposition: inline
 
-From: Chase <chase@chase-laptop.(none)>
+On Thu, Sep 09, 2010 at 03:16:54PM +0200, Frans Meulenbroeks wrote:
+> 2010/9/9 Maupin, Chase <chase.maupin@ti.com>:
+>=20
+> >>
+> >> I'm not too sure on the usefulness of it either, but there is so=
+me
+> >> breakage so we should either revert the patch or fix it.
+> >>
+> >> Actually the SOC_FAMILY got pushed before the review was conclud=
+ed.
+> >> Technically it got the ack's but the discussion was still ongoin=
+g when
+> >> this was pushed.
+> >> What also makes it fishy is that all acks are from the same comp=
+any
+> >> (which is the same one as the person who submitted the patch):
+> >>
+> >> Signed-off-by: Chase Maupin <chase.maupin@ti.com>
+> >> Acked-by: Denys Dmytriyenko <denys@ti.com>
+> >> Acked-by: Koen Kooi <k-kooi@ti.com>
+> >> Signed-off-by: Koen Kooi <koen@openembedded.org>
+> >>
+> >> I would suggest modifying the commit policy disallowing these ki=
+nd of
+> >> things, saying the two Ack's must be from two developers not
+> >> affiliated with the same company.
+> >> (actually we might even want to take it further and saying that =
+global
+> >> changes that affect everyone would require ACK's from developers=
+ from
+> >> more than one distro).
+> >>
+> >> Question to the TSC: should the SOC_FAMILY patch be reverted and=
+ put
+> >> on hold until there is agreement whether or not we want this?
+> >
+> > Frans,
+> >
+> > As the person who submitted this change I'd like to ask that it n=
+ot be reverted. =A0I am using it currently so that when defining COMP=
+ATIBLE_MACHINE for recipes targeted at OMAP3 devices I do not have to=
+ keep a rolling list of all the various OMAP3 devices. =A0This can qu=
+ickly become:
+> >
+> > COMPATIBLE_MACHINE =3D "dm37x-evm|am37x-evm|omap3evm|am3517-evm|b=
+eagleboard|......"
+> >
+> > Instead by allowing SOC_FAMILY to be used as a COMPATIBLE_MACHINE=
+ this can be handled cleanly with:
+> >
+> > COMPATIBLE_MACHINE =3D "omap3"
+> >
+> > Please consider this use case. =A0I would much prefer if your fix=
+ was put into the base.bbclass than if this were removed.
+> >
+>=20
+> Chase,
+>=20
+> I understand your use case.
+> The major concern I see is the overlap with MACHINE_CLASS.
+> Anyway, I have no real objections against SOC_FAMILY.
+> The only observation is that it has been introduced a little bit
+> hastily without the community reaching consensus.
+>=20
+> Frans.
+>=20
+> PS: thanks for the ack that arrived while I was typing this
+> PPS: wrt COMPATIBLE_MACHINE: I think it is possible to use wildcard=
+s,
+> so *if* the machines with omap3 get that as a prefix it could also =
+be
+> used
+> (and yes: this is just an alternate option, and I see the con's of =
+it)
 
-* Added patch to allow using older versions of automake such
-  as 1.10.3 when building jpeg version 8b.
-* Only use the AM_SILENT_RULES if it is available.
+Frans,
 
-Signed-off-by: Chase Maupin <chase.maupin@ti.com>
----
- ...igure-make-jpeg-work-with-older-autotools.patch |   30 ++++++++++++++++++++
- recipes/jpeg/jpeg_8b.bb                            |    7 +++-
- 2 files changed, 35 insertions(+), 2 deletions(-)
- create mode 100644 recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch
+I'd like us to find a compromise and a solution that satisfies everyb=
+ody.=20
 
-diff --git a/recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch b/recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch
-new file mode 100644
-index 0000000..dd6fd52
---- /dev/null
-+++ b/recipes/jpeg/jpeg-8b/0001-configure-make-jpeg-work-with-older-autotools.patch
-@@ -0,0 +1,30 @@
-+From e9e77ee999553f9b94de0288688a0bdc60b92e0f Mon Sep 17 00:00:00 2001
-+From: Chase Maupin <chase.maupin@ti.com>
-+Date: Tue, 17 Aug 2010 08:30:56 -0500
-+Subject: [PATCH] configure: make jpeg work with older autotools
-+
-+* Only use the AM_SILENT_RULES variable if it is defined.  Older
-+  versions of automake don't support this option.
-+
-+Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-+---
-+ configure.ac |    3 ++-
-+ 1 files changed, 2 insertions(+), 1 deletions(-)
-+
-+diff --git a/configure.ac b/configure.ac
-+index 96da13b..9a58c51 100644
-+--- a/configure.ac
-++++ b/configure.ac
-+@@ -26,7 +26,8 @@ AM_INIT_AUTOMAKE([-Wall -Werror ansi2knr no-dist foreign])
-+ # Make --enable-silent-rules the default.
-+ # To get verbose build output you may configure
-+ # with --disable-silent-rules or use "make V=1".
-+-AM_SILENT_RULES([yes])
-++# only use if available
-++m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
-+ 
-+ # This is required when using the de-ANSI-fication feature.
-+ AM_C_PROTOTYPES
-+-- 
-+1.7.0.4
-+
-diff --git a/recipes/jpeg/jpeg_8b.bb b/recipes/jpeg/jpeg_8b.bb
-index 4251ca6..688dcd8 100644
---- a/recipes/jpeg/jpeg_8b.bb
-+++ b/recipes/jpeg/jpeg_8b.bb
-@@ -2,12 +2,15 @@ DESCRIPTION = "libjpeg is a library for handling the JPEG (JFIF) image format."
- LICENSE = "jpeg"
- SECTION = "libs"
- PRIORITY = "required"
--PR = "r0"
-+PR = "r1"
- 
- # TODO: really needed?
- RPROVIDES_${PN} = "jpeg"
- 
--SRC_URI = "http://www.ijg.org/files/jpegsrc.v${PV}.tar.gz"
-+SRC_URI = "\
-+    http://www.ijg.org/files/jpegsrc.v${PV}.tar.gz \
-+    file://0001-configure-make-jpeg-work-with-older-autotools.patch \
-+    "
- S = "${WORKDIR}/jpeg-${PV}"
- 
- inherit autotools
--- 
-1.7.0.4
+Unfortunately, the original discussion about SOC_FAMILY vs. MACHINE_C=
+LASS=20
+never came to any fruition - Graeme explained his motives behind MACH=
+INE_CLASS=20
+and said that it is now deprecated.
+
+It was also mentioned, while SOC_FAMILY is slightly newer than MACHIN=
+E_CLASS,=20
+the feature itself is over a year old and used quite extensively, alt=
+hough=20
+limited mainly to recipes/ti location...
+
+And if technically SOC_FAMILY may be similar to MACHINE_CLASS, logica=
+lly they=20
+try to solve grouping problem from different direction, which was als=
+o=20
+explained.
+
+After that the original discussion was stalled and there were no stro=
+ng=20
+opinions one way or another. Based on that, Chase's change was pushed=
+.
+
+I see and understand Phil's position - if that's strong enough, we ca=
+n=20
+re-consider.
+
+BTW, I was under impression, that the issue in COMPATIBLE_MACHINE was=
+ fixed=20
+soon after it was discovered. Sorry for not acknowledging your fix ea=
+rlier.
+
+Anyway, just wanted to let you know that we are not trying to undermi=
+ne=20
+anybody in the community and we, as a company, want to work close wit=
+h the=20
+community, and be a good citizen. Hopefully, this incident will not b=
+e=20
+considered as an indication of otherwise. Thank you for your understa=
+nding.
+
+--=20
+Denys
 
 
 
