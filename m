@@ -1,41 +1,45 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <robewil1@gmail.com>) id 1OtqTg-0006oA-VA
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Otx3I-0003FR-Es
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 01:24:27 +0200
-Received: by qyk31 with SMTP id 31so7052485qyk.6
+	Fri, 10 Sep 2010 08:25:37 +0200
+Received: by iwn2 with SMTP id 2so1910884iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 09 Sep 2010 16:23:38 -0700 (PDT)
+	Thu, 09 Sep 2010 23:24:54 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=zL+OnxsjyRZfbOYKMTvgInnIOKL1GdzTISu/qftvN+8=;
-	b=hWMXZdyLde8Ritlrcclg5wwEESzyxlz1/TegkzTRMaf+wI0hjmEudsfQx3r7Sj7vXA
-	h6jgK4izvdk9FKVA87hvHyIQkdsOtLp6EkGCcwKZDUpkcdyqSro7dz+H4x+51zZTt7tM
-	KhMVcVk++EkrCwkAtUQdSGzOtmyCFdQeA+H1E=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=sT1NX09ktoWpZFY1ePUGR5JH81cFX2HdfvhOsNyuLQE=;
+	b=MkH5ga7Qdr7oi9OzzGiX7NOqFXjTr/8UDBMu/uvF89BLocXbcLybbWiVU+Ooc6xlV2
+	vcJzQQH4HTkYVRK5ZNExPzre3YcGo+GKEJEWxJB6shSl7TRixSiCgTzGAJzI3e4UgAKT
+	x9ISQWLUr9JpbUX01zVqcNDzYuCcA/N35PfVA=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=dgYeRgDVv8Se1QbDms1N4CBtpU+33XgxAlDIUQfwDEA/tENYxC0BZLnE4tDnv75B3h
-	AfYRnhIbCuP+ukRdB4b8rXzHIXicMN6PIJhMOXATGPe2lo0R9U/qUAEfgGvLYVqEkCbp
-	MwJZTqXEPk2iYftSQIdlSoKJ+rWXcL+Zjxd2s=
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ICyTyPGk74AkuShfN27l+vOgb89+eNeLnxU73fP2bNH+fR/DaTUASqL9gPFAuKRz+W
+	bltzwMRWyeeXtG96lXlYEY+R4irwK/ZvTd38OZ7PquRV6ynT5lA/PPJ3FK+TPuFaG6r4
+	kW9NCmNivLDG4eFJxgFyTz189pFpSqba+pWTg=
 MIME-Version: 1.0
-Received: by 10.224.54.69 with SMTP id p5mr394064qag.123.1284074617691; Thu,
-	09 Sep 2010 16:23:37 -0700 (PDT)
-Received: by 10.229.18.12 with HTTP; Thu, 9 Sep 2010 16:23:37 -0700 (PDT)
-Date: Thu, 9 Sep 2010 19:23:37 -0400
-Message-ID: <AANLkTi=cSKF3AwffdKmZcLW=0eRji4U4Y_2cLFRYSh1S@mail.gmail.com>
-From: Bill Roberts <robewil1@gmail.com>
+Received: by 10.231.35.138 with SMTP id p10mr515448ibd.33.1284099894221; Thu,
+	09 Sep 2010 23:24:54 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Thu, 9 Sep 2010 23:24:54 -0700 (PDT)
+In-Reply-To: <20100909224326.GA3693@mi.fu-berlin.de>
+References: <E1OtmZA-0002LR-H4@melo.openembedded.org>
+	<20100909224326.GA3693@mi.fu-berlin.de>
+Date: Fri, 10 Sep 2010 08:24:54 +0200
+Message-ID: <AANLkTim-pUUN1=3HOZz4HdmwxDBt3yhi8kp=0p6eXHV-@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: robewil1@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: gettext-native build troubles
+Subject: Re: [oe-commits] Frans Meulenbroeks : pulseaudio: made 0.9. 21 compile for armv4 and armv5 too
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,57 +53,33 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 09 Sep 2010 23:24:27 -0000
+X-List-Received-Date: Fri, 10 Sep 2010 06:25:37 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Hello,
-I've been trying to make a build from the .dev branch, but I cannot seem to
-get past building gettext-native (version 0.18).  It seems to be a similar
-error to one from a past post, where libxml2 from the host was used, but
-libz from the staging.
+2010/9/10 Henning Heinold <heinold@inf.fu-berlin.de>:
+> On Thu, Sep 09, 2010 at 07:13:48PM +0000, git version control wrote:
+>> index a733038..138c0b6 100644
+>> --- a/recipes/pulseaudio/pulseaudio.inc
+>> +++ b/recipes/pulseaudio/pulseaudio.inc
+>> @@ -6,7 +6,7 @@ LICENSE =3D "LGPL"
+>> =A0DEPENDS =3D "bluez4 libatomics-ops liboil avahi libsamplerate0 libsnd=
+file1 libtool hal virtual/libx11"
+>> =A0# optional
+>> =A0DEPENDS +=3D "alsa-lib glib-2.0 dbus consolekit hal openssl"
+>> -INC_PR =3D "r10"
+>> +INC_PR =3D "r0"
+> Hm is that good changing the INC_PR down?
+>
 
-http://www.mail-archive.com/openembedded-devel@lists.openembedded.org/msg03981.html
+Aargh, good catch, I goofed.
+Actually the .21 recipe did not use INC_PR at all, so I thought it was
+safe to drop it.
+Seems I missed that the .15 recipe was using INC_PR.
+I've pushed a patch to set it back to 10
 
-However, it seems that the fix in that case is in the gettext recipe.  In
-the log it looked like the link was trying to use my host libxml2, and the
-libxml2-native package in OE, but I'm not really sure.
+Frans.
 
-I'm wondering if anyone could offer some advice for how to get around or fix
-this error.
-Thanks,
-Bill
+PS: we have some 889 .inc files and only 217 use INC_PR
 
--- a snippet from log.do_compile --
-
-i686-linux-libtool: link: gcc -std=gnu99
--isystem/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/include
- -O2 -g -Wl,-rpath-link
--Wl,/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/lib
-
--Wl,-rpath
--Wl,/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/lib
-
--Wl,-O1
--o .libs/msgcmp msgcmp-msgcmp.o msgcmp-msgl-fsearch.o
--L/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/lib
-
-./.libs/libgettextsrc.so
-/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/work/i686-linux/gettext-native-0.18-r2/gettext-0.18/gettext-tools/gnulib-lib/.libs/libgettextlib.so
-
-/usr/lib/libacl.so
-/usr/lib/libattr.so
-/usr/lib/libcroco-0.6.so
-/usr/lib/libxml2.so
-/usr/lib/libglib-2.0.so
-/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/lib/libxml2.so
-
--ldl
-/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/lib/libz.so
-
--lncurses -lc -lm -Wl,-rpath
--Wl,/home/bill/SoftwareDevel/projects/Webdt_embedded/OE_toolchain/angstrom-dev/sysroots/i686-linux/usr/lib
-
-/usr/lib/libxml2.so: undefined reference to `gzdirect@ZLIB_1.2.2.3'
-/usr/lib/libxml2.so: undefined reference to `gzopen64@ZLIB_1.2.3.3'
-collect2: ld returned 1 exit status
 
