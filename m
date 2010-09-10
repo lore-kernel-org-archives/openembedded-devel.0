@@ -1,34 +1,40 @@
-Received: from vms173017pub.verizon.net ([206.46.173.17])
+Received: from vms173005pub.verizon.net ([206.46.173.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <denis@denix.org>) id 1Ou8rJ-0000dU-P8
+	(envelope-from <denis@denix.org>) id 1Ou99R-0008VT-1H
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 21:02:02 +0200
+	Fri, 10 Sep 2010 21:20:46 +0200
 Received: from gandalf.denix.org ([unknown] [71.251.53.61])
-	by vms173017.mailsrvcs.net
+	by vms173005.mailsrvcs.net
 	(Sun Java(tm) System Messaging Server 7u2-7.02 32bit (built Apr 16
-	2009)) with ESMTPA id <0L8J00H4AOTXB9VZ@vms173017.mailsrvcs.net> for
+	2009)) with ESMTPA id <0L8J00JVKPOU5RZ4@vms173005.mailsrvcs.net> for
 	openembedded-devel@lists.openembedded.org; Fri,
-	10 Sep 2010 14:01:10 -0500 (CDT)
-Received: by gandalf.denix.org (Postfix, from userid 1000)	id 84D4E14AF64; Fri,
-	10 Sep 2010 15:01:09 -0400 (EDT)
-Date: Fri, 10 Sep 2010 15:01:09 -0400
+	10 Sep 2010 14:19:43 -0500 (CDT)
+Received: by gandalf.denix.org (Postfix, from userid 1000)	id 2433614AF64; Fri,
+	10 Sep 2010 15:19:42 -0400 (EDT)
+Date: Fri, 10 Sep 2010 15:19:42 -0400
 From: Denys Dmytriyenko <denis@denix.org>
-In-reply-to: <AANLkTimU_Rbj=Kex3Qs-EkZSOLUZmV+pY_0xzt-dZ+Mx@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Message-id: <20100910190109.GI28148@denix.org>
+Message-id: <20100910191942.GJ28148@denix.org>
+References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
+	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
+	<1284024609.28520.1446.camel@mill.internal.reciva.com>
+	<AANLkTimLWtJhYn009OchBss+LJpNx9Pt+nDZ=GGyu=a7@mail.gmail.com>
+	<AANLkTimOLsxX_hf6rsOyOCJgFdBrkrL=2LsT9ToCfazv@mail.gmail.com>
+	<4C88EC2B.2090208@balister.org> <20100910185004.GF28148@denix.org>
+	<AANLkTi=mk=GbouoAuh-roSwrKa0Mdt3P+CJN9fzL_gds@mail.gmail.com>
 MIME-version: 1.0
-References: <1283969035-1397-1-git-send-email-chase.maupin@ti.com>
-	<AANLkTimU_Rbj=Kex3Qs-EkZSOLUZmV+pY_0xzt-dZ+Mx@mail.gmail.com>
+In-reply-to: <AANLkTi=mk=GbouoAuh-roSwrKa0Mdt3P+CJN9fzL_gds@mail.gmail.com>
 User-Agent: Mutt/1.5.16 (2007-06-09)
-X-SA-Exim-Connect-IP: 206.46.173.17
+X-SA-Exim-Connect-IP: 206.46.173.5
 X-SA-Exim-Mail-From: denis@denix.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00
+	autolearn=unavailable version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCHv2] common_use_cases: add description of SOC_FAMILY
+Cc: tsc@openembedded.org
+Subject: Re: [PATCH] base.bbclass: fix soc-family test
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,88 +48,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 19:02:03 -0000
-Content-type: text/plain; charset=iso-8859-1
-Content-transfer-encoding: QUOTED-PRINTABLE
+X-List-Received-Date: Fri, 10 Sep 2010 19:20:46 -0000
+Content-type: text/plain; charset=us-ascii
 Content-disposition: inline
 
-On Thu, Sep 09, 2010 at 08:17:07AM +0200, Frans Meulenbroeks wrote:
-> 2010/9/8 Chase Maupin <chasemaupin03@gmail.com>:
-> > * Added a description of the SOC_FAMILY variable that
-> > =A0can be set in the machine configuration files.
+On Fri, Sep 10, 2010 at 11:55:13AM -0700, Chris Larson wrote:
+> On Fri, Sep 10, 2010 at 11:50 AM, Denys Dmytriyenko <denis@denix.org> wrote:
+> 
+> > >> I'd agree with this quite strongly.  I'm generally pretty careful to let
+> > >> others review the changes from my coworkers, to avoid any bias.
 > >
-> > Signed-off-by: Chase Maupin <chase.maupin@ti.com>
-> > ---
-> > =A0docs/usermanual/chapters/common_use_cases.xml | =A0 24 +++++++=
-+++++++++++++++++
-> > =A01 files changed, 24 insertions(+), 0 deletions(-)
-> >
-> > diff --git a/docs/usermanual/chapters/common_use_cases.xml b/docs=
-/usermanual/chapters/common_use_cases.xml
-> > index d86d0ca..ef81b95 100644
-> > --- a/docs/usermanual/chapters/common_use_cases.xml
-> > +++ b/docs/usermanual/chapters/common_use_cases.xml
-> > @@ -94,6 +94,30 @@ SRCDATE =3D "20061014"
-> > =A0 =A0 =A0 =A0 </listitem>
-> > =A0 =A0 =A0 </itemizedlist></para>
-> >
-> > + =A0 =A0<para>There are also some optional variables that can be=
- defined:
-> > + =A0 =A0<itemizedlist>
-> > + =A0 =A0<listitem>
-> > + =A0 =A0 =A0 =A0 =A0<para><command>SOC_FAMILY</command> describe=
-s a family of processors
-> > + =A0 =A0 =A0 =A0 =A0 =A0that all share common features such as k=
-ernel versions,
-> > + =A0 =A0 =A0 =A0 =A0 =A0bootloaders, etc. =A0This is used to all=
-ow overrides for a whole
-> > + =A0 =A0 =A0 =A0 =A0 =A0set of devices rather than per machine o=
-verrides being used.
-> > + =A0 =A0 =A0 =A0 =A0 =A0The use of SOC_FAMILY as an override is =
-currently a distribution
-> > + =A0 =A0 =A0 =A0 =A0 =A0or local setting.
-> > + =A0 =A0 =A0 =A0 =A0</para>
-> > + =A0 =A0 =A0 =A0 =A0<para>
-> > + =A0 =A0 =A0 =A0 =A0 =A0NOTE: SOC_FAMILY is different than MACHI=
-NE_CLASS in that
-> > + =A0 =A0 =A0 =A0 =A0 =A0MACHINE_CLASS is intended to specify a g=
-rouping of devices
-> > + =A0 =A0 =A0 =A0 =A0 =A0that may have different processors but s=
-hare common features.
-> > + =A0 =A0 =A0 =A0 =A0 =A0For example all OMAP3 devices can be des=
-cribed using the SOC_FAMILY
-> > + =A0 =A0 =A0 =A0 =A0 =A0"omap3" and this value can be used in ov=
-errides to prevent
-> > + =A0 =A0 =A0 =A0 =A0 =A0requiring multiple machine specific over=
-rides. =A0MACHINE_CLASS
-> > + =A0 =A0 =A0 =A0 =A0 =A0might be used to describe a class of dev=
-ices such as a cell
-> > + =A0 =A0 =A0 =A0 =A0 =A0phone in which the processor may be diff=
-erent but the
-> > + =A0 =A0 =A0 =A0 =A0 =A0features such as touchscreen, GPS, modem=
-, etc are the same.
-> > + =A0 =A0 =A0 =A0 =A0</para>
-> > + =A0 =A0 =A0 =A0</listitem>
-> > + =A0 =A0</itemizedlist></para>
-> > +
-> > =A0 =A0 <para>Next the kernel recipe needs to be added if it does=
-n't already exist.
-> > =A0 =A0 </para>
-> > =A0 </section>
-> > --
-> > 1.7.0.4
->=20
-> Thanks for writing this.
-> Seems like a decent description to me.
->=20
-> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+> > Not to point any fingers, but mishaps happen and numerous reverts would be
+> > a
+> > living proof of that in the repository... :) Nobody's perfect.
+> 
+> 
+> Mishaps have nothing to do with this, nor does being perfect, or reverts.
+>  You're missing the point entirely here.  The point is, if the only people
+> who acked a patch are from the same company as the person who wrote it, they
+> can't be considered to have been entirely unbiased in their review of it.
 
-Acked-by: Denys Dmytriyenko <denis@denix.org>
+Chris,
 
-If there are no objections, I'd like to push it later today.
+Didn't mean to offend you by that joke, sorry about that. And I didn't mean 
+you specifically, as we all had our share of revert...
 
---=20
+But in the second, important :) part of my message, which you chose to ignore 
+and remove from the reply, I did acknowledge the problem and agreed to the 
+proposed changes. But, as I also mentioned, there should be a failsafe 
+mechanism to eventually accept changes, if nobody cared to comment or 
+strongly object, after the review period is over.
+
+-- 
 Denys
-
 
 
