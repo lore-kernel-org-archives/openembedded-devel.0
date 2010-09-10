@@ -1,39 +1,43 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ou0VX-0003AO-Dt
-	for openembedded-devel@openembedded.org; Fri, 10 Sep 2010 12:07:00 +0200
-Received: by iwn2 with SMTP id 2so2071336iwn.6
-	for <openembedded-devel@openembedded.org>;
-	Fri, 10 Sep 2010 03:06:15 -0700 (PDT)
+	(envelope-from <anarsoul@gmail.com>) id 1Ou2g2-00035Y-Jf
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 10 Sep 2010 14:26:07 +0200
+Received: by eyb7 with SMTP id 7so1656628eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Sep 2010 05:25:15 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=Iqy+aFsi0o5E0z/nCX4eu0lcn8nwZyaP6aE1VX+TOCA=;
-	b=vLBPHNpxWGfKh6nM1jUzNQcqsvUcTWd6MKb43Vo4EPw24UQuE0yCydQQP+b+tTezX6
-	jtiy4Ij9JiSX7Sdu04xlWJirfOfFv2ass56Lk1Xjz/+XREf6TxFtGiZ4QTmwFpBK2arm
-	y9kPGKpht/RqpK9iRAyJFjTyspT9tqT+X9Wjo=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=B4WDaqEmqX/2pl8H0UfXu61v037b+4O7W2KFF0gsJwU=;
+	b=waX8V8H3CNCl/odz24ROCKGnkOOiFxdSU1GLUl423Xj6I92qGTaD8LdVjScmF2bsO5
+	WGMdggroj0tKw4ZDEkhhEIvEshjSCnSkToqR1EO3P5nUWeJAwyvUXSa2huetJftTNKN7
+	ryz/aH0mYbvacQDkXrY4l3BwsQoQXvXONUsJ4=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=Y6/UyGYLyFtjV5iZFHPCu6OciL1kXiehdcgc90KfbkNGi33rrN3EEEwgwPGD5we0xM
-	pwBxYV/YBdifr/AQadK2okQ6Y/31rMPgTUHmatbUwxqgDJr/Gl52K31Pcw62Cj6FIzhE
-	kOS+x3WjoS8Uu2csYYWmGFtlyJmXATs08VDC8=
-MIME-Version: 1.0
-Received: by 10.231.145.16 with SMTP id b16mr685655ibv.198.1284113175173; Fri,
-	10 Sep 2010 03:06:15 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Fri, 10 Sep 2010 03:06:15 -0700 (PDT)
-Date: Fri, 10 Sep 2010 12:06:15 +0200
-Message-ID: <AANLkTik72iTQE0+_vJZPhDCC-fVxQTgPvVrYO1Jxb6Ph@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=cQET+iXFv4laIYbpzLOQzc9qH0Bi56GiPQH+SvIfmS9Hatjhb6FdUuUTcAhUICqecV
+	KYwuouA9Xc6+Je7dDlBDiUjIxsaJeq74gxT7FVBbzSTkJQ5zCWttMpKbg18r4N1s2xec
+	woKqs0GQwTx0m9L+9rH6rl1mc8YadwACzUS2U=
+Received: by 10.14.119.2 with SMTP id m2mr271125eeh.43.1284121513359;
+	Fri, 10 Sep 2010 05:25:13 -0700 (PDT)
+Received: from localhost.localdomain ([86.57.155.118])
+	by mx.google.com with ESMTPS id a48sm3809956eei.13.2010.09.10.05.25.11
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 10 Sep 2010 05:25:12 -0700 (PDT)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Fri, 10 Sep 2010 15:24:16 +0300
+Message-Id: <1284121456-10573-1-git-send-email-anarsoul@gmail.com>
+X-Mailer: git-send-email 1.7.2.2
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: testing: linux-ixp4xx-2.6.27.8+svnr1090-r2 strip issue
+Subject: [PATCH] gettext-0.18: use included libcroco, not system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,76 +51,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 10:07:00 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 10 Sep 2010 12:26:07 -0000
 
-distro: slugos
-machine: nslu2be
-while building slugos-image:
+gettext-native uses system libcroco if it's available, and breaks
+compilation in this case.
 
-NOTE: package linux-ixp4xx-2.6.27.8+svnr1090-r2: task do_package: Started
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/bin2c''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/kconfig/conf''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/basic/fixdep''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/basic/docproc''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/genksyms/genksyms''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/mk_elfconfig''
-strip command failed
-ERROR: runstrip: ''armeb-linux-gnueabi-strip'
---remove-section=.comment --remove-section=.note
-'/home/hudson/jobs/FM_test/workspace/tmp/work/nslu2be-linux-gnueabi/linux-ixp4xx-2.6.27.8+svnr1090-r2/package/kernel/scripts/mod/modpost''
-strip command failed
+Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+---
+ recipes/gettext/gettext_0.18.bb |    1 +
+ 1 files changed, 1 insertions(+), 0 deletions(-)
 
-Rest of the build seems fine.
+diff --git a/recipes/gettext/gettext_0.18.bb b/recipes/gettext/gettext_0.18.bb
+index b295afb..992467e 100644
+--- a/recipes/gettext/gettext_0.18.bb
++++ b/recipes/gettext/gettext_0.18.bb
+@@ -31,6 +31,7 @@ EXTRA_OECONF += "--without-lispdir \
+ 		 --disable-openmp \
+ 		 --with-included-glib \
+ 		 --without-emacs \
++		 --with-included-libcroco \
+ 	        "
+ acpaths = '-I ${S}/gnulib-local/m4/ \
+ 	   -I ${S}/gettext-runtime/m4 \
+-- 
+1.7.2.2
 
-...
-NOTE: package slugos-image-1.0-r1: task do_rm_work_all: Succeeded
-NOTE: Tasks Summary: Attempted 1226 tasks of which 0 didn't need to be
-rerun and 0 failed.
-
-Frans.
-
-PS:
-If someone has an idea how to get rid of this:
-
-NOTE: the following files were installed but not shipped in any package:
-NOTE:   /lib/modules/2.6.27.8/modules.order
-NOTE:   /kernel/Makefile
-NOTE:   /kernel/.config
-NOTE:   /kernel/Module.symvers
-NOTE:   /kernel/kernel-ccsuffix
-NOTE:   /kernel/kernel-ldsuffix
-NOTE:   /kernel/zImage
-NOTE:   /kernel/System.map-2.6.27.8
-NOTE:   /kernel/kernel-abiversion
-NOTE:   /kernel/kernel-config
-NOTE:   /kernel/kernel-source
-NOTE:   /kernel/config-2.6.27.8
-NOTE:   /kernel/vmlinux
-NOTE:   /kernel/arch/arm/Makefile
-NOTE:   /kernel/arch/arm/Kconfig-nommu
-NOTE:   /kernel/arch/arm/Kconfig.debug
-NOTE:   /kernel/arch/arm/Kconfig
-NOTE:   /kernel/arch/arm/mach-mx3/pcm037.c
-...
-
-Apparently we install the whole source tree or so.
 
 
