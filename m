@@ -1,32 +1,43 @@
-Received: from mail-pv0-f175.google.com ([74.125.83.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sean@chumby.com>) id 1OuFBY-0007Tg-HU
-	for Openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 03:47:22 +0200
-Received: by pvg6 with SMTP id 6so1284685pvg.6
-	for <Openembedded-devel@lists.openembedded.org>;
-	Fri, 10 Sep 2010 18:46:35 -0700 (PDT)
-Received: by 10.114.137.15 with SMTP id k15mr1629496wad.225.1284169594408;
-	Fri, 10 Sep 2010 18:46:34 -0700 (PDT)
-Received: from [192.168.10.100] (cm28.eta34.maxonline.com.sg [116.88.34.28])
-	by mx.google.com with ESMTPS id k23sm5666943waf.17.2010.09.10.18.46.32
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Fri, 10 Sep 2010 18:46:33 -0700 (PDT)
-From: Sean Cross <sean@chumby.com>
-Date: Sat, 11 Sep 2010 09:46:30 +0800
-Message-Id: <D56B4474-3D63-40D5-8BB1-E1E0CECAF26D@chumby.com>
-To: Openembedded-devel@lists.openembedded.org
-Mime-Version: 1.0 (Apple Message framework v1081)
-X-Mailer: Apple Mail (2.1081)
-X-SA-Exim-Connect-IP: 74.125.83.175
-X-SA-Exim-Mail-From: sean@chumby.com
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OuK8n-0008KM-OZ for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 09:04:50 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OuK85-0001Ad-6v for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 09:04:05 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Sep 2010 09:04:05 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Sep 2010 09:04:05 +0200
+X-Injected-Via-Gmane: http://gmane.org/
+To: openembedded-devel@lists.openembedded.org
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sat, 11 Sep 2010 09:03:57 +0200
+Message-ID: <i6f9kt$1e3$1@dough.gmane.org>
+References: <1284010137-15488-1-git-send-email-raj.khem@gmail.com>	<i6a71i$2tv$1@dough.gmane.org>	<AANLkTin-FbqWWLQE+ZJ9TA3zF70U=GBy5cbVm_DHqW5J@mail.gmail.com>
+	<20100910192456.GL28148@denix.org>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <20100910192456.GL28148@denix.org>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] driftnet: fix recipe to work with a modern build system
+Subject: Re: [PATCH] libgles-omap3_3.01.00.07.bb: Add recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,60 +51,47 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Sep 2010 01:47:22 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sat, 11 Sep 2010 07:04:50 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-The driftnet recipe seems to be patching the Makefile to explicitly =
-specify a compiler called arm-linux-gcc, and to remove the dependency on =
-pkg-config.  I believe both of these are obsolete practices now.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Signed-off-by: Sean Cross <sean@chumby.com>
----
- recipes/driftnet/driftnet-0.1.6/arm.patch |   13 +------------
- 1 files changed, 1 insertions(+), 12 deletions(-)
+On 10-09-10 21:24, Denys Dmytriyenko wrote:
+> On Thu, Sep 09, 2010 at 06:04:28AM -0700, Steve Sakoman wrote:
+>> n Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
+>>> -----BEGIN PGP SIGNED MESSAGE-----
+>>> Hash: SHA1
+>>>
+>>> On 09-09-10 07:28, Khem Raj wrote:
+>>>> * Fix omap3-sgx-modules_1.4.14.2616.bb to use new SDK
+>>>
+>>> Khem, the .07 release was made to get the license and distribution
+>>> changes through, it can now be downloaded with wget without filling in a
+>>> form.
+>>
+>> Koen:  does the .07 release build against recent linux-omap kernels or
+>> is it still broken in the same way as the .06 version?
+> 
+> Steve, the .07 release is exactly the same as .06 from the code perspective, 
+> the only change is in licensing.
 
-diff --git a/recipes/driftnet/driftnet-0.1.6/arm.patch =
-b/recipes/driftnet/driftnet-0.1.6/arm.patch
-index 340a6cf..c5b7155 100644
---- a/recipes/driftnet/driftnet-0.1.6/arm.patch
-+++ b/recipes/driftnet/driftnet-0.1.6/arm.patch
-@@ -5,7 +5,7 @@
- =20
-  # Compiler to use.
- -#CC =3D gcc
--+CC =3D arm-linux-gcc
-++CC ?=3D arm-linux-gcc
- =20
-  # Basic compiler, linker flags; should not need any changes.
-  CFLAGS +=3D -g -Wall
-@@ -17,17 +17,6 @@
-  #LDFLAGS +=3D -L/path/to/libpcap.so
- =20
-  # Required on Linux to get BSDish definitions of the TCP/IP structs.
--@@ -31,8 +31,8 @@
--=20
-- # Optional C compiler and linker flags. Typical driftnet builds have =
-support
-- # for displaying captured images in an X window, and need the =
-following flags:
---CFLAGS  +=3D `gtk-config --cflags`
---LDLIBS  +=3D -ljpeg -lungif `gtk-config --libs`
--+CFLAGS  +=3D -I$(STAGING_INCDIR)/glib-2.0 -I$(STAGING_INCDIR)/gtk-2.0 =
--I$(STAGING_INCDIR)/../lib/gtk-2.0/include -I$(STAGING_INCDIR)/atk-1.0
--+LDLIBS  +=3D -ljpeg -lungif -lgtk-x11-2.0 -lgdk-x11-2.0 -rdynamic =
--lgmodule-2.0 -lglib-2.0 -ldl -lXext -lX11 -lm
--=20
-- # Alternatively, you can build a version of driftnet which can only be =
-used
-- # in `adjunct' mode as the back end for some other image-processing =
-program. To
- @@ -81,13 +81,13 @@
-  	( echo '.\" DO NOT EDIT THIS FILE-- edit driftnet.1.in instead' =
-; sed s/@@@VERSION@@@/$(VERSION)/ ) < driftnet.1.in > driftnet.1
- =20
---=20
-1.7.0.4
+We talked Prabu into applying the texture patch to make life easier for
+customers :) So the .07 release is the same as what OE previously built
+as .06.
+
+regards,
+
+Koen
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMiyndMkyGM64RGpERAiwuAKCO62rX++TzOwob/f9tuu/lklVkFACeI43p
+8iuOcwlUgOPHJ3IpdD3tNsU=
+=zqvs
+-----END PGP SIGNATURE-----
 
 
 
