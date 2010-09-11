@@ -1,42 +1,32 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from mail-pv0-f175.google.com ([74.125.83.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuEvD-0001wL-Rz for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 03:30:28 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuEuU-00007r-Gb for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 03:29:42 +0200
-Received: from s207-6-220-230.bc.hsia.telus.net ([207.6.220.230])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Sep 2010 03:29:42 +0200
-Received: from dfoley by s207-6-220-230.bc.hsia.telus.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Sep 2010 03:29:42 +0200
-X-Injected-Via-Gmane: http://gmane.org/
-To: openembedded-devel@lists.openembedded.org
-From: Dallas Foley <dfoley@techsol.ca>
-Date: Fri, 10 Sep 2010 18:29:30 -0700
-Message-ID: <4C8ADB7A.4000303@techsol.ca>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>	<i6629i$d5c$1@dough.gmane.org>	<201009081609.32135.pieterg@gmx.com>
-	<4C879EC5.10402@balister.org>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s207-6-220-230.bc.hsia.telus.net
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
-In-Reply-To: <4C879EC5.10402@balister.org>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+	(envelope-from <sean@chumby.com>) id 1OuFBY-0007Tg-HU
+	for Openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 03:47:22 +0200
+Received: by pvg6 with SMTP id 6so1284685pvg.6
+	for <Openembedded-devel@lists.openembedded.org>;
+	Fri, 10 Sep 2010 18:46:35 -0700 (PDT)
+Received: by 10.114.137.15 with SMTP id k15mr1629496wad.225.1284169594408;
+	Fri, 10 Sep 2010 18:46:34 -0700 (PDT)
+Received: from [192.168.10.100] (cm28.eta34.maxonline.com.sg [116.88.34.28])
+	by mx.google.com with ESMTPS id k23sm5666943waf.17.2010.09.10.18.46.32
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Fri, 10 Sep 2010 18:46:33 -0700 (PDT)
+From: Sean Cross <sean@chumby.com>
+Date: Sat, 11 Sep 2010 09:46:30 +0800
+Message-Id: <D56B4474-3D63-40D5-8BB1-E1E0CECAF26D@chumby.com>
+To: Openembedded-devel@lists.openembedded.org
+Mime-Version: 1.0 (Apple Message framework v1081)
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 74.125.83.175
+X-SA-Exim-Mail-From: sean@chumby.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Images no longer automatically include libstdc++6
+Subject: [PATCH] driftnet: fix recipe to work with a modern build system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,43 +40,60 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Sep 2010 01:30:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Sat, 11 Sep 2010 01:47:22 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Transfer-Encoding: quoted-printable
 
-On 10-09-08 07:33 AM, Philip Balister wrote:
-> On 09/08/2010 10:09 AM, pieterg wrote:
->> On Tuesday 07 September 2010 21:03:14 Koen Kooi wrote:
->>> On 07-09-10 18:18, Khem Raj wrote:
->>>> On Tue, Sep 7, 2010 at 5:52 AM, Koen Kooi<k.kooi@student.utwente.nl>
->> wrote:
->>>>> it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
->>>>> create a libstdc6++ package, but it does create a libstdc-dev package.
->>>>
->>>> I see thats plausible. I think its time to look into separating gcc
->>>> runtime from gcc on the lines of poky.
->>>
->>> I put back libgcc and libstdc++ for the time being:
->>>
->>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=241b8865f20
->>> b9e3c3beb334535e6cd8452cbf47d
->>>
->>> I have a feeling the others needs to put back as well (e.g. fortran),
->>> but this fixes the immediate problem.
->>
->> Not for me, after a clean build today packages are still missing libstdc++
->> in their deps (and as a result the images are still missing libstdc++).
->> So there must be more to it.
->
-> Does anyone have any idea what commit caused this breakage? It is causing a lot
-> of problems for people.
->
-> Philip
+The driftnet recipe seems to be patching the Makefile to explicitly =
+specify a compiler called arm-linux-gcc, and to remove the dependency on =
+pkg-config.  I believe both of these are obsolete practices now.
 
-With git bisect I get commit d2a283ad002660e46b2f8d40a8ddfabad457d8a4 that 
-causes libstdc++ to not get included.
+Signed-off-by: Sean Cross <sean@chumby.com>
+---
+ recipes/driftnet/driftnet-0.1.6/arm.patch |   13 +------------
+ 1 files changed, 1 insertions(+), 12 deletions(-)
 
-
+diff --git a/recipes/driftnet/driftnet-0.1.6/arm.patch =
+b/recipes/driftnet/driftnet-0.1.6/arm.patch
+index 340a6cf..c5b7155 100644
+--- a/recipes/driftnet/driftnet-0.1.6/arm.patch
++++ b/recipes/driftnet/driftnet-0.1.6/arm.patch
+@@ -5,7 +5,7 @@
+ =20
+  # Compiler to use.
+ -#CC =3D gcc
+-+CC =3D arm-linux-gcc
+++CC ?=3D arm-linux-gcc
+ =20
+  # Basic compiler, linker flags; should not need any changes.
+  CFLAGS +=3D -g -Wall
+@@ -17,17 +17,6 @@
+  #LDFLAGS +=3D -L/path/to/libpcap.so
+ =20
+  # Required on Linux to get BSDish definitions of the TCP/IP structs.
+-@@ -31,8 +31,8 @@
+-=20
+- # Optional C compiler and linker flags. Typical driftnet builds have =
+support
+- # for displaying captured images in an X window, and need the =
+following flags:
+--CFLAGS  +=3D `gtk-config --cflags`
+--LDLIBS  +=3D -ljpeg -lungif `gtk-config --libs`
+-+CFLAGS  +=3D -I$(STAGING_INCDIR)/glib-2.0 -I$(STAGING_INCDIR)/gtk-2.0 =
+-I$(STAGING_INCDIR)/../lib/gtk-2.0/include -I$(STAGING_INCDIR)/atk-1.0
+-+LDLIBS  +=3D -ljpeg -lungif -lgtk-x11-2.0 -lgdk-x11-2.0 -rdynamic =
+-lgmodule-2.0 -lglib-2.0 -ldl -lXext -lX11 -lm
+-=20
+- # Alternatively, you can build a version of driftnet which can only be =
+used
+- # in `adjunct' mode as the back end for some other image-processing =
+program. To
+ @@ -81,13 +81,13 @@
+  	( echo '.\" DO NOT EDIT THIS FILE-- edit driftnet.1.in instead' =
+; sed s/@@@VERSION@@@/$(VERSION)/ ) < driftnet.1.in > driftnet.1
+ =20
+--=20
+1.7.0.4
 
 
 
