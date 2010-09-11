@@ -1,39 +1,42 @@
-Received: from mail.reciva.com ([109.169.29.93] helo=crown.reciva.com)
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philb@gnu.org>) id 1OuBY8-0005ct-QI
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 23:54:25 +0200
-Received: from blundell.swaffham-prior.co.uk ([91.216.112.25]
-	helo=[192.168.114.10])
-	by crown.reciva.com with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <philb@gnu.org>) id 1OuBXR-0007cz-Uh
-	for openembedded-devel@lists.openembedded.org;
-	Fri, 10 Sep 2010 22:53:42 +0100
-From: Phil Blundell <philb@gnu.org>
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OuEvD-0001wL-Rz for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 03:30:28 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OuEuU-00007r-Gb for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 03:29:42 +0200
+Received: from s207-6-220-230.bc.hsia.telus.net ([207.6.220.230])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Sep 2010 03:29:42 +0200
+Received: from dfoley by s207-6-220-230.bc.hsia.telus.net with local (Gmexim
+	0.1 (Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 11 Sep 2010 03:29:42 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <131E5DFBE7373E4C8D813795A6AA7F080310BFAF59@dlee06.ent.ti.com>
-References: <1283453522-8408-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<AANLkTinC5biQ7FcBD86SUssEytzhjyiK5hEzdLdaM_6P@mail.gmail.com>
-	<1284024609.28520.1446.camel@mill.internal.reciva.com>
-	<AANLkTimLWtJhYn009OchBss+LJpNx9Pt+nDZ=GGyu=a7@mail.gmail.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310BFAA13@dlee06.ent.ti.com>
-	<AANLkTikLhZ-vsO34S30T5RekoaKJpwyECmjyryY8d6wV@mail.gmail.com>
-	<20100910183714.GE28148@denix.org>
-	<1284153610.4698.32.camel@lenovo.internal.reciva.com>
-	<131E5DFBE7373E4C8D813795A6AA7F080310BFAF59@dlee06.ent.ti.com>
-Date: Fri, 10 Sep 2010 23:53:57 +0100
-Message-ID: <1284159237.4698.65.camel@lenovo.internal.reciva.com>
+From: Dallas Foley <dfoley@techsol.ca>
+Date: Fri, 10 Sep 2010 18:29:30 -0700
+Message-ID: <4C8ADB7A.4000303@techsol.ca>
+References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>	<i6629i$d5c$1@dough.gmane.org>	<201009081609.32135.pieterg@gmx.com>
+	<4C879EC5.10402@balister.org>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.2 
-X-SA-Exim-Connect-IP: 109.169.29.93
-X-SA-Exim-Mail-From: philb@gnu.org
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s207-6-220-230.bc.hsia.telus.net
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.8) Gecko/20100802 Thunderbird/3.1.2
+In-Reply-To: <4C879EC5.10402@balister.org>
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.0 required=5.0 tests=AWL,BAYES_00,SPF_SOFTFAIL
-	autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] base.bbclass: fix soc-family test
+Subject: Re: Images no longer automatically include libstdc++6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,65 +50,42 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 10 Sep 2010 21:54:25 -0000
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Sat, 11 Sep 2010 01:30:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
 
-On Fri, 2010-09-10 at 15:27 -0500, Maupin, Chase wrote:
-> First thanks for the response.  There a quite a few recipes that use this or plan to use it.  Kernel recipes, several of the recipes in the "recipes/ti" directory.  I guess as a person who actually uses this I have a bias here.  I hope you can understand though that this is variable found usefulness as an override and that is why it was extended to also work for COMPATIBLE_MACHINE.
+On 10-09-08 07:33 AM, Philip Balister wrote:
+> On 09/08/2010 10:09 AM, pieterg wrote:
+>> On Tuesday 07 September 2010 21:03:14 Koen Kooi wrote:
+>>> On 07-09-10 18:18, Khem Raj wrote:
+>>>> On Tue, Sep 7, 2010 at 5:52 AM, Koen Kooi<k.kooi@student.utwente.nl>
+>> wrote:
+>>>>> it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
+>>>>> create a libstdc6++ package, but it does create a libstdc-dev package.
+>>>>
+>>>> I see thats plausible. I think its time to look into separating gcc
+>>>> runtime from gcc on the lines of poky.
+>>>
+>>> I put back libgcc and libstdc++ for the time being:
+>>>
+>>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=241b8865f20
+>>> b9e3c3beb334535e6cd8452cbf47d
+>>>
+>>> I have a feeling the others needs to put back as well (e.g. fortran),
+>>> but this fixes the immediate problem.
+>>
+>> Not for me, after a clean build today packages are still missing libstdc++
+>> in their deps (and as a result the images are still missing libstdc++).
+>> So there must be more to it.
+>
+> Does anyone have any idea what commit caused this breakage? It is causing a lot
+> of problems for people.
+>
+> Philip
 
-I certainly don't doubt that SOC_FAMILY is useful to you and that the
-code in base.bbclass serves a purpose.  There are three things, though,
-that I'm not yet entirely convinced about:
+With git bisect I get commit d2a283ad002660e46b2f8d40a8ddfabad457d8a4 that 
+causes libstdc++ to not get included.
 
-a) whether SOC_FAMILY is sufficiently useful to other (i.e. non-TI)
-folks to merit inclusion in base.bbclass, and is going to remain that
-way; and
-
-b) whether the high-level goals of SOC_FAMILY cannot be met in some more
-generic fashion; and
-
-c) if the answer to both (a) and (b) is yes, whether this functionality
-genuinely needs to be in base.bbclass and can't be implemented somewhere
-more specific.
-
-The main reason for my uneasiness about (a) is that, although it might
-appear that the concept of a "SoC family" is quite tightly defined
-today, at least within the TI universe, experience suggests that the
-boundaries of any given family tend to become a bit blurred over time.
-Soft cores and IP blocks have a habit of being reused in new designs
-which suddenly differ in some important way from the original parts for
-which they were created and, unless you have a very clear definition
-upfront for what constitutes the "family", you can suddenly end up with
-machines which appear to be half in and half out, or which want to be
-members of two families simultaneously.
-
-As far as (b) goes, I was mostly wondering whether you could do
-something with MACHINE_FEATURES.  I think I would be generally receptive
-to a patch which added a variable along the general lines of
-REQUIRED_MACHINE_FEATURES = "omap-core ti-rfbi ..." and which would
-cause SkipPackage to be raised if all the required things didn't appear
-in MACHINE_FEATURES at runtime.  Alternatively, I wonder whether you can
-do some more free-form grouping of machines within the
-COMPATIBLE_MACHINE syntax which doesn't involve introducing a new
-variable to base.bbclass.
-
-Finally, regarding (c), I think the question does still stand as to
-whether the recipes which have SOC_FAMILY dependencies couldn't just
-inherit some sort of ti-compatibility-check.bbclass which would perform
-the appropriate tests.  That would allow you to do whatever you wanted
-without needing to trouble base.bbclass, and you could bash it any way
-you liked without needing to get code review :-)
-
-The thing about OVERRIDES is another issue again.  Adding a new thing to
-the global OVERRIDES is definitely not to be done lightly: it introduces
-new namespace hazards (i.e. inadvertently triggering the override
-because your MACHINE or DISTRO happens to be named the same), and it
-also introduces an extra processing overhead in every parse operation.
-Again, I am not keen to see this happen unless it is obvious that the
-same thing can't be done better in another way.
-
-p.
 
 
 
