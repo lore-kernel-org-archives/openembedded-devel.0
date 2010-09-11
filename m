@@ -1,33 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuK8n-0008KM-OZ for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 09:04:50 +0200
+	id 1OuKDz-0008SN-C4 for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 09:10:12 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuK85-0001Ad-6v for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 09:04:05 +0200
+	id 1OuKDG-0002kd-5P for openembedded-devel@lists.openembedded.org;
+	Sat, 11 Sep 2010 09:09:26 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Sep 2010 09:04:05 +0200
+	Sat, 11 Sep 2010 09:09:26 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 11 Sep 2010 09:04:05 +0200
+	Sat, 11 Sep 2010 09:09:26 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sat, 11 Sep 2010 09:03:57 +0200
-Message-ID: <i6f9kt$1e3$1@dough.gmane.org>
-References: <1284010137-15488-1-git-send-email-raj.khem@gmail.com>	<i6a71i$2tv$1@dough.gmane.org>	<AANLkTin-FbqWWLQE+ZJ9TA3zF70U=GBy5cbVm_DHqW5J@mail.gmail.com>
-	<20100910192456.GL28148@denix.org>
+Date: Sat, 11 Sep 2010 09:09:18 +0200
+Message-ID: <i6f9uu$39o$1@dough.gmane.org>
+References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>	<i6629i$d5c$1@dough.gmane.org>	<201009081609.32135.pieterg@gmx.com>	<4C879EC5.10402@balister.org>
+	<4C8ADB7A.4000303@techsol.ca>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <20100910192456.GL28148@denix.org>
+In-Reply-To: <4C8ADB7A.4000303@techsol.ca>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -37,7 +37,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] libgles-omap3_3.01.00.07.bb: Add recipe
+Subject: Re: Images no longer automatically include libstdc++6
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,46 +51,76 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Sep 2010 07:04:50 -0000
+X-List-Received-Date: Sat, 11 Sep 2010 07:10:12 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 10-09-10 21:24, Denys Dmytriyenko wrote:
-> On Thu, Sep 09, 2010 at 06:04:28AM -0700, Steve Sakoman wrote:
->> n Thu, Sep 9, 2010 at 1:48 AM, Koen Kooi <k.kooi@student.utwente.nl> wrote:
->>> -----BEGIN PGP SIGNED MESSAGE-----
->>> Hash: SHA1
+On 11-09-10 03:29, Dallas Foley wrote:
+> On 10-09-08 07:33 AM, Philip Balister wrote:
+>> On 09/08/2010 10:09 AM, pieterg wrote:
+>>> On Tuesday 07 September 2010 21:03:14 Koen Kooi wrote:
+>>>> On 07-09-10 18:18, Khem Raj wrote:
+>>>>> On Tue, Sep 7, 2010 at 5:52 AM, Koen Kooi<k.kooi@student.utwente.nl>
+>>> wrote:
+>>>>>> it happens when you build 'gcc' after 'gcc-cross', gcc will doesn't
+>>>>>> create a libstdc6++ package, but it does create a libstdc-dev
+>>>>>> package.
+>>>>>
+>>>>> I see thats plausible. I think its time to look into separating gcc
+>>>>> runtime from gcc on the lines of poky.
+>>>>
+>>>> I put back libgcc and libstdc++ for the time being:
+>>>>
+>>>> http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=241b8865f20
+>>>>
+>>>> b9e3c3beb334535e6cd8452cbf47d
+>>>>
+>>>> I have a feeling the others needs to put back as well (e.g. fortran),
+>>>> but this fixes the immediate problem.
 >>>
->>> On 09-09-10 07:28, Khem Raj wrote:
->>>> * Fix omap3-sgx-modules_1.4.14.2616.bb to use new SDK
->>>
->>> Khem, the .07 release was made to get the license and distribution
->>> changes through, it can now be downloaded with wget without filling in a
->>> form.
+>>> Not for me, after a clean build today packages are still missing
+>>> libstdc++
+>>> in their deps (and as a result the images are still missing libstdc++).
+>>> So there must be more to it.
 >>
->> Koen:  does the .07 release build against recent linux-omap kernels or
->> is it still broken in the same way as the .06 version?
+>> Does anyone have any idea what commit caused this breakage? It is
+>> causing a lot
+>> of problems for people.
+>>
+>> Philip
 > 
-> Steve, the .07 release is exactly the same as .06 from the code perspective, 
-> the only change is in licensing.
+> With git bisect I get commit d2a283ad002660e46b2f8d40a8ddfabad457d8a4
+> that causes libstdc++ to not get included.
 
-We talked Prabu into applying the texture patch to make life easier for
-customers :) So the .07 release is the same as what OE previously built
-as .06.
+Yep, that's the one:
+
+./x86_64-linux/shlibs/libssp.ver
+./x86_64-linux/shlibs/libstdc++.ver
+./x86_64-linux/shlibs/libgfortran.list
+./x86_64-linux/shlibs/libssp.list
+./x86_64-linux/shlibs/libstdc++.list
+./x86_64-linux/shlibs/libgfortran.ver
+./x86_64-linux/shlibs/libgcc.list
+./x86_64-linux/shlibs/libgcc.ver
+
+For gcc we probably need to add the following to gcc.inc:
+
+SHLIBSDIR = "${STAGING_DIR}/${BASEPKG_HOST_SYS}/shlibs"
+
+That should put the shlibs back where they belong for gcc.
 
 regards,
 
 Koen
-
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMiyndMkyGM64RGpERAiwuAKCO62rX++TzOwob/f9tuu/lklVkFACeI43p
-8iuOcwlUgOPHJ3IpdD3tNsU=
-=zqvs
+iD8DBQFMiyseMkyGM64RGpERAmS7AKC2VvzfFIzXTYKmgkMm2CF8olPvGACfcM48
+XTf/BdxREFQe5KBQnVH/lbw=
+=vEE1
 -----END PGP SIGNATURE-----
 
 
