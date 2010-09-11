@@ -1,29 +1,31 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from smtp204.alice.it ([82.57.200.100])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OuUPP-0008Dw-HX for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 20:02:40 +0200
-Received: from g225137114.adsl.alicedsl.de ([92.225.137.114]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OuUOh-0006Dp-Hz for openembedded-devel@lists.openembedded.org;
-	Sat, 11 Sep 2010 18:01:55 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <GNUtoo@no-log.org>) id 1OuYbu-0000F3-Vn
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Sep 2010 00:31:56 +0200
+Received: from [192.168.1.178] (79.54.144.55) by smtp204.alice.it (8.5.124.08)
+	(authenticated as editempo)
+	id 4C88E33B00324437 for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Sep 2010 00:25:35 +0200
+From: Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>
 To: openembedded-devel@lists.openembedded.org
-Date: Sat, 11 Sep 2010 20:01:52 +0200
-Message-ID: <1284228112.14396.159.camel@mattotaupa>
+In-Reply-To: <AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
+References: <4C85058D.8070506@gmail.com>
+	<1283996027.3036.1.camel@gnutoo-laptop>
+	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
+Date: Sun, 12 Sep 2010 00:25:28 +0200
+Message-ID: <1284243928.2379.1.camel@gnutoo-laptop>
 Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-Mailer: Evolution 2.28.3 
+X-SA-Exim-Connect-IP: 82.57.200.100
+X-SA-Exim-Mail-From: GNUtoo@no-log.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: minimal-uclibc: freesmartphone/libfsobasics_git.bb: do_compile() failed: utilities.c:35:22: fatal error: execinfo.h: No such file or directory
+Subject: Re: Asterisk and termcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,183 +39,36 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 11 Sep 2010 18:02:40 -0000
-X-Groupsio-MsgNum: 23463
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-uDSNVvKqvAQ8JM0nT50y"
-
---=-uDSNVvKqvAQ8JM0nT50y
+X-List-Received-Date: Sat, 11 Sep 2010 22:31:56 -0000
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 7bit
 
-Dear OE folks,
-
-
-`do_compile()` of `freesmartphone/libfsobasics_git.bb` fails for me
-reliably since today. As with my other reported failure of gtk+ [1]
-nothing was changed regarding this recipe in the last days and it worked
-for me before. Even yesterday because I could build gtk+ which is
-supposed to happen after `libfsobasics_git.bb`. But several things get
-build in parallel so that statement could be wrong.
-
-Minimal compiles fine with EGLIBC and glibc.
-
-	$ find . -name execinfo.h
-
-did not return anything in my build directory.
-
-	$ more log.do_compile
-	NOTE: make
-	make  all-recursive
-	make[1]: Entering directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/w=
-ork/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6f=
-ea92168e88201be98dcceaef-r2.0/git/libfsobasics'
-	Making all in fsobasics
-	make[2]: Entering directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/w=
-ork/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6f=
-ea92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/bin/va=
-lac -C --basedir .. --vapidir ../vapi --pkg posix --pkg linux --pkg libnl-2=
-.0 --pkg glib-2.0 --pkg gio-2.0 --header fsobasics.h --library fsobasics-2.=
-0  asyncworker.vala inotifier.vala kobjectnotifier.vala libinitexit.vala lo=
-gger.vala netlinknotifier.vala netlinkutils.vala overlay.vala process.vala =
-smartkeyfile.vala syncasync.vala threading.vala types.vala utilities.vala
-	fsobasics/logger.vala:300.17-300.33: warning: unreachable code detected
-		              return "UNKNOWN";
-		              ^^^^^^^^^^^^^^^^^
-	fsobasics/smartkeyfile.vala:117.13-117.25: warning: unreachable code detec=
-ted
-		          return false;
-		          ^^^^^^^^^^^^^
-	Compilation succeeded - 2 warning(s)
-	touch fsobasics.vala.stamp
-	make  all-am
-	make[3]: Entering directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/w=
-ork/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6f=
-ea92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
-		CC     asyncworker.lo
-		CC     inotifier.lo
-	inotifier.c: In function 'fso_framework_inotifier_construct':
-	inotifier.c:173:2: warning: passing argument 4 of 'g_hash_table_new_full' =
-from incompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNoti=
-fy' but argument is of type 'void (*)(struct INotifyDelegateHolder *)'
-		CC     kobjectnotifier.lo
-	kobjectnotifier.c: In function 'fso_framework_base_kobject_notifier_constr=
-uct':
-	kobjectnotifier.c:182:2: warning: passing argument 4 of 'g_hash_table_new_=
-full' from incompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNoti=
-fy' but argument is of type 'void (*)(struct GList *)'
-	kobjectnotifier.c:183:2: warning: passing argument 4 of 'g_hash_table_new_=
-full' from incompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNoti=
-fy' but argument is of type 'void (*)(struct GList *)'
-	kobjectnotifier.c:184:2: warning: passing argument 4 of 'g_hash_table_new_=
-full' from incompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNoti=
-fy' but argument is of type 'void (*)(struct GList *)'
-	kobjectnotifier.c:188:52: warning: passing argument 2 of 'bind' from incom=
-patible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/sys/socket.h:115:12: note: expected 'const struct sockadd=
-r *' but argument is of type 'struct sockaddr_nl *'
-		CC     libinitexit.lo
-		CC     logger.lo
-		CC     netlinknotifier.lo
-	netlinknotifier.c: In function 'fso_framework_base_netlink_notifier_constr=
-uct':
-	netlinknotifier.c:206:2: warning: passing argument 4 of 'g_hash_table_new_=
-full' from incompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNoti=
-fy' but argument is of type 'void (*)(struct GList *)'
-	netlinknotifier.c: In function '_lambda0_':
-	netlinknotifier.c:260:162: warning: assignment discards qualifiers from po=
-inter target type
-	netlinknotifier.c: In function 'fso_framework_base_netlink_notifier_handle=
-NetlinkMessage':
-	netlinknotifier.c:296:15: warning: assignment makes pointer from integer w=
-ithout a cast
-	netlinknotifier.c: In function 'fso_framework_base_netlink_notifier_handle=
-Message':
-	netlinknotifier.c:344:56: warning: cast to pointer from integer of differe=
-nt size
-	netlinknotifier.c: In function '_fso_framework_base_netlink_notifier_addMa=
-tch':
-	netlinknotifier.c:366:56: warning: cast to pointer from integer of differe=
-nt size
-	netlinknotifier.c:372:41: warning: cast to pointer from integer of differe=
-nt size
-		CC     netlinkutils.lo
-		CC     overlay.lo
-		CC     process.lo
-		CC     smartkeyfile.lo
-		CC     syncasync.lo
-		CC     threading.lo
-	threading.c: In function 'fso_framework_threading_callDelegateOnMainThread=
-':
-	threading.c:451:4: warning: passing argument 4 of 'g_idle_add_full' from i=
-ncompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/gmain.h:291:10: note: expected 'GDestroyNot=
-ify' but argument is of type 'void (*)(struct Block3Data *)'
-	threading.c:455:4: warning: passing argument 4 of 'g_idle_add_full' from i=
-ncompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/gmain.h:291:10: note: expected 'GDestroyNot=
-ify' but argument is of type 'void (*)(struct Block3Data *)'
-	threading.c:458:4: warning: passing argument 4 of 'g_idle_add_full' from i=
-ncompatible pointer type
-	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-uclib=
-ceabi/usr/include/glib-2.0/glib/gmain.h:291:10: note: expected 'GDestroyNot=
-ify' but argument is of type 'void (*)(struct Block3Data *)'
-		CC     types.lo
-		CC     utilities.lo
-	utilities.c:35:22: fatal error: execinfo.h: No such file or directory
-	compilation terminated.
-	make[3]: *** [utilities.lo] Error 1
-	make[3]: Leaving directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/wo=
-rk/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6fe=
-a92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
-	make[2]: *** [all] Error 2
-	make[2]: Leaving directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/wo=
-rk/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6fe=
-a92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
-	make[1]: *** [all-recursive] Error 1
-	make[1]: Leaving directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/wo=
-rk/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6fe=
-a92168e88201be98dcceaef-r2.0/git/libfsobasics'
-	make: *** [all] Error 2
-	FATAL: oe_runmake failed
-	ERROR: Function do_compile failed
-
-Does anyone have a clue on how that can be fixed.
+On Thu, 2010-09-09 at 08:20 +0200, Frans Meulenbroeks wrote:
+> 2010/9/9 Denis 'GNUtoo' Carikli <GNUtoo@no-log.org>:
+> > On Mon, 2010-09-06 at 16:15 +0100, Arigead wrote:
+> >> was trying to build Asterisk for the OpenMoko Free runner and it failed
+> >> on a dependency on termcap so I tried to bitbake termcap first and that
+> >> failed. The termcap compile stage is working but it's when it tries to
+> >> install that the recipe seems to fail but I'm new to this.
+> >>
+> >> I'm off to read the openembedded documentation again but in the mean
+> >> time if anybody can give me a hit that would be great.
+> > We can't help you if you don't post some logs or console output.
+> > Copy-pasting the part where it fails, if it's small, could be enough for
+> > a start.
+> > Denis.
+> >
+> >
+> Denis, the message from Arigead is 3 days old and has already been dealt with.
+> There is a patch for asterisk from Eric that makes it build fine for me.
+> 
+> Frans.
+I saw that later, sorry
+I'm dealing with tons of mails because I kept the number of mails
+growing during the hollidays.
+Sorry.
+Denis.
 
 
-Thanks,
-
-Paul
 
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-September/=
-024097.html
-
---=-uDSNVvKqvAQ8JM0nT50y
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyLxBAACgkQPX1aK2wOHVgU5QCePDNS6reytlpYOqh/+7MtMcLN
-+KwAn042cb7+Kb9ogBJuhVem43Y4nK65
-=Zc0v
------END PGP SIGNATURE-----
-
---=-uDSNVvKqvAQ8JM0nT50y--
