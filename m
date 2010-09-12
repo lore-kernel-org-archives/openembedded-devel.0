@@ -1,46 +1,29 @@
-Received: from lo.gmane.org ([80.91.229.12])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ouic0-0006B4-Nr for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Sep 2010 11:12:39 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuibF-0007op-Ox for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Sep 2010 11:11:49 +0200
-Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Sep 2010 11:11:49 +0200
-Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
-	(Debian)) id 1AlnuQ-0007hv-00
+	(envelope-from <holger+oe@freyther.de>) id 1Ouiog-00087g-Kd
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Sep 2010 11:25:43 +0200
+Received: from [192.168.42.31] (unknown [92.116.249.73])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 288311B10C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Sep 2010 11:11:49 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+	Sun, 12 Sep 2010 09:26:48 +0000 (UTC)
+Message-ID: <4C8C9C66.7030006@freyther.de>
+Date: Sun, 12 Sep 2010 17:24:54 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.7) Gecko/20100720 Fedora/3.1.1-1.fc13 Lightning/1.0b2
+	Thunderbird/3.1.1
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Sun, 12 Sep 2010 11:11:36 +0200
-Message-ID: <i6i5g8$ums$1@dough.gmane.org>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>	<i6629i$d5c$1@dough.gmane.org>
-	<201009081609.32135.pieterg@gmx.com>	<4C879EC5.10402@balister.org>
-	<4C8ADB7A.4000303@techsol.ca>	<i6f9uu$39o$1@dough.gmane.org>
-	<i6fc40$90f$1@dough.gmane.org>
-	<AANLkTimZ1Vzyj0+wT1amdtrxjXkVy=fNbKzCWNG_LrOW@mail.gmail.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
-User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
-	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <AANLkTimZ1Vzyj0+wT1amdtrxjXkVy=fNbKzCWNG_LrOW@mail.gmail.com>
-X-Enigmail-Version: 1.0.1
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patch to fix libstdc++ problem, was Re: Images no longer automatically include libstdc++6
+Subject: [PATCH] sanity.bbclass: Check for the presennce of libc.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,51 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2010 09:12:39 -0000
+X-List-Received-Date: Sun, 12 Sep 2010 09:25:43 -0000
+X-Groupsio-MsgNum: 23469
+Content-Type: multipart/mixed; boundary="------------030106080502040802050206"
+
+--------------030106080502040802050206
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA1
 
-On 12-09-10 10:34, Frans Meulenbroeks wrote:
-> 2010/9/11 Koen Kooi <k.kooi@student.utwente.nl>:
->> -----BEGIN PGP SIGNED MESSAGE-----
->> Hash: SHA1
->>
->> Can people ack or nack the following please:
->>
->>
->> diff --git a/recipes/gcc/gcc-package-cross.inc
->> b/recipes/gcc/gcc-package-cross.inc
->> index 0c4ea2d..59e7dde 100644
->> - --- a/recipes/gcc/gcc-package-cross.inc
->> +++ b/recipes/gcc/gcc-package-cross.inc
->> @@ -2,6 +2,8 @@ PACKAGE_STRIP ?= ""
->>  OLD_PACKAGE_STRIP := "${PACKAGE_STRIP}"
->>  PACKAGE_STRIP = "no"
->>
->> +SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
->> +
->>  PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran"
->>
->>  # Called from within gcc-cross, so libdir is set wrong
->>
->>
-> Haven't had time to test this yet, but I feel at least a PR bump is
-> missing (or perhaps a set of PR bumps)
+The insmod.static binary links statically and requires the libc.a
+to be present. On Fedora glibc-static is not installed by default
+when installing development headers. Warn the user that he needs
+to have that installed.
 
-Since it would require a PR bump for everything that is built with gcc,
-I'm going to say:
-
-That's what DISTRO_PR is for, which is up to distro maintainers to bump.
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.5 (Darwin)
-
-iD8DBQFMjJlIMkyGM64RGpERAoBRAJ93j8dDURHApz8ieOElzKQJCQfOEgCfX/kz
-x3qbuoq+k391UOukjTiEy1o=
-=2ueT
------END PGP SIGNATURE-----
+Signed-off-by: Holger Hans Peter Freyther <zecke@selfish.org>
+---
+ classes/sanity.bbclass |   12 ++++++++++++
+ 1 files changed, 12 insertions(+), 0 deletions(-)
 
 
 
+--------------030106080502040802050206
+Content-Type: text/x-patch;
+ name="0001-sanity.bbclass-Check-for-the-presennce-of-libc.a.patch"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: attachment;
+ filename*0="0001-sanity.bbclass-Check-for-the-presennce-of-libc.a.patch"
+
+diff --git a/classes/sanity.bbclass b/classes/sanity.bbclass
+index 575530a..7f99251 100644
+--- a/classes/sanity.bbclass
++++ b/classes/sanity.bbclass
+@@ -99,6 +99,18 @@ def check_sanity(e):
+ 		missing = missing.rstrip(',')
+ 		messages = messages + "Please install following missing utilities: %s\n" % missing
+ 
++	# Libs that need to be present. E.g. libc.a for insmod.static
++	required_libs = "libc.a"
++	missing = ""
++	for lib in required_libs.split():
++		if not os.path.exists("/lib/%s" % lib) and not os.path.exists("/usr/lib/%s" % lib):
++			missing = "%s, %s" % (missing, lib)
++
++	if missing != "":
++		missing = missing.rstrip(',')
++		messages = "%sPlease install the following libraries: %s\n" % (messages, missing)
++
++
+ 	try:
+ 	    if os.path.basename(os.readlink('/bin/sh')) == 'dash':
+ 		    messages = messages + "Using dash as /bin/sh causes various subtle build problems, please use bash instead.\n"
+
+
+--------------030106080502040802050206--
