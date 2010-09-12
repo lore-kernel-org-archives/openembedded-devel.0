@@ -1,49 +1,30 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from sencha.khimov.ru ([89.223.109.22])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1Ouo9N-000627-Tt
+	(envelope-from <roman@khimov.ru>) id 1Our2b-00077k-1W
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Sep 2010 17:07:27 +0200
-Received: by wye20 with SMTP id 20so5219556wye.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Sep 2010 08:06:36 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=QiN4F3Cv96gyv8TyFG9gAWEqv3S9vCnHdK37O1m1xcI=;
-	b=V+kJusrH51qZu+uHOEJrqIKVra4e1DEJaIDD9yGqMFIoTsaKtzPRq6mRNutBN1DS/s
-	V3Wgqpzn6HKTdOkp8ypzDURaJn7QI4j1tay2/M589ZGQS0qGGGdIZiDV4NiAoI3JhnIy
-	jeFf9y7WNeYT1gDOVh3RJcD9VG2ipGOcpMXyw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=LhM/RBde864OyshzRHaG38PQZPQLX8jX5Srt+sKNqB8UJiKjglQ7itJU1qZGsuY8XR
-	OtKPlGlc+z0k7dciov/ArPnOtITHhyf3q7JKMfbAewKb/PSOlzYKD0U7IHiaAeaPk5LL
-	mCU5ElnmFiZ5uNpqlRTCTh4Vgxp9U4r7QQ94o=
-Received: by 10.216.67.6 with SMTP id i6mr1561165wed.44.1284303996149; Sun, 12
-	Sep 2010 08:06:36 -0700 (PDT)
-MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.168 with HTTP; Sun, 12 Sep 2010 08:06:16 -0700 (PDT)
-In-Reply-To: <4C8CEB0D.1070206@freyther.de>
-References: <4C8CA2DC.40707@freyther.de>
-	<AANLkTi=EALsQWTorEsz19dyJFX-AnStXdaHYJUy4iZXn@mail.gmail.com>
-	<4C8CEB0D.1070206@freyther.de>
-From: Chris Larson <clarson@kergoth.com>
-Date: Sun, 12 Sep 2010 08:06:16 -0700
-X-Google-Sender-Auth: 33aVrj3YaRT7VKIl1hCycGTTnck
-Message-ID: <AANLkTi=7P_2nYWD5LSohKBF0ZHA7hR=Y5ekSmOgTqkng@mail.gmail.com>
+	Sun, 12 Sep 2010 20:12:39 +0200
+Received: from [93.100.16.104] (helo=mate.localnet)
+	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Our1r-0006kf-NH
+	for openembedded-devel@lists.openembedded.org;
+	Sun, 12 Sep 2010 22:11:52 +0400
+From: Roman I Khimov <roman@khimov.ru>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Date: Sun, 12 Sep 2010 22:11:46 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <AANLkTinU39HjKWb9=VMiSa=R2YA_9BxPDctiW1ire48C@mail.gmail.com>
+In-Reply-To: <AANLkTinU39HjKWb9=VMiSa=R2YA_9BxPDctiW1ire48C@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201009122211.50670.roman@khimov.ru>
+X-SA-Exim-Connect-IP: 89.223.109.22
+X-SA-Exim-Mail-From: roman@khimov.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: [PATCH] insane.bbclass: Enable the insane.bbclass for everyone in a warning mode
+Subject: Re: Perl modules I can not get to build, libdbd-sqlite-perl libversion-perl
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,38 +38,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2010 15:07:28 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Sun, 12 Sep 2010 18:12:39 -0000
+X-Groupsio-MsgNum: 23492
+Content-Type: multipart/signed; boundary="nextPart3297275.HIMYv9kjlV";
+	protocol="application/pgp-signature"; micalg=pgp-sha1
+Content-Transfer-Encoding: 7bit
 
-On Sun, Sep 12, 2010 at 8:00 AM, Holger Freyther
-<holger+oe@freyther.de<holger%2Boe@freyther.de>
-> wrote:
+--nextPart3297275.HIMYv9kjlV
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
 
-> On 09/12/2010 08:32 PM, Frans Meulenbroeks wrote:
-> > 2010/9/12 Holger Freyther <holger+oe@freyther.de<holger%2Boe@freyther.de>
-> >:
->
-> >> Signed-off-by: Holger Hans Peter Freyther <zecke@selfish.org>
-> >
-> > I am not really in favour of this.
->
-> This is an outstanding item from the TSC, I am not sure how to proceed from
-> here, as we will go in circles.
->
-> I am happy as long as Angstrom is using this option, as this way I will not
-> have a unzip package with the wrong binaries ever again.
-> <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>
->
+=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
+=D0=A7=D0=B5=D1=82=D0=B2=D0=B5=D1=80=D0=B3 02 =D1=81=D0=B5=D0=BD=D1=82=D1=
+=8F=D0=B1=D1=80=D1=8F 2010 23:48:36 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 J. L. =
+=D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
+> libversion-perl:
+> ......
+> "-I/home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr=
+/l
+> ib/perl/5.10.1/CORE" vutil.c
+>=20
+> | In file included from vutil.c:9:
+> | vutil.h:5: error: conflicting types for 'Perl_upg_version'
+> | /home/vdubhack/overo-oe/tmp/sysroots/armv7a-angstrom-linux-gnueabi/usr/=
+li
+> |b/perl/5.10.1/CORE/proto.h:2295:
+>=20
+> error: previous declaration of 'Perl_upg_version' was here
 
-I think we should reorganize insane.bbclass and split up its functionality,
-either into multiple classes or configurable via variables, as others have
-suggested in this thread.  If that's done, we can enable the core by
-default, but leave the bits that require additional dependencies as
-optional.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+Please, try libversion-perl 0.80, that should work with Perl 5.10.1.
 
+=2D-=20
+ http://roman.khimov.ru
+mailto: roman@khimov.ru
+gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
+
+--nextPart3297275.HIMYv9kjlV
+Content-Type: application/pgp-signature; name=signature.asc 
+Content-Description: This is a digitally signed message part.
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v2.0.12 (GNU/Linux)
+
+iEYEABECAAYFAkyNF+YACgkQXJ70z+XgVcPiBwCfdZSj3e7KHMPlRW2gTh4fGS/5
+pH0AoKe3hy8vu/zay0ZkM4vPM2gM+5Aq
+=XM90
+-----END PGP SIGNATURE-----
+
+--nextPart3297275.HIMYv9kjlV--
