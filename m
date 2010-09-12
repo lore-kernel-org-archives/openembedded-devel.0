@@ -1,51 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oum0m-0000Ux-Va
+	(envelope-from <philip@balister.org>) id 1Oum3H-0000bw-AN
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Sep 2010 14:50:26 +0200
-Received: by iwn2 with SMTP id 2so4133984iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Sep 2010 05:49:38 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=S25p0Lx083D2Kxo5PC3Upe0be4FQX137PN7xzN5rKp0=;
-	b=LTXUoilAJEN20lV6+aciVOs05vaQw/aurJEa1ru+mqkyu5lOsICaV3gjI7UrtDjlNB
-	Db8jYgJKilxViwEklZ3ISxsmdvm0pCMxRgn9i3+28tidzVZQBLCYvlxm9v2gqcLO8SQ2
-	SNB387K2pdf/6eOlfvfGEKv+okRqil104CAZ0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=j/1IQlC3GFdEf9Cz6qwc9AuN0gxzxXevc5JhuVRE3/RWzX7ZhajGQy5fUO1SPGtHVo
-	wTlIhEBHbOhy/RhcIQUNCk6DIwm4G/YhowmIfXZDk2IommDoXYK1qNXL10EHEIzCaQ9w
-	JxDqs2yc4NhIDTffHnniJBc+wUex8xAjO5QmA=
+	Sun, 12 Sep 2010 14:53:00 +0200
+Received: (qmail 19644 invoked by uid 1003); 12 Sep 2010 12:52:13 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	12 Sep 2010 12:52:13 -0000
+Message-ID: <4C8CCCFC.1070409@balister.org>
+Date: Sun, 12 Sep 2010 08:52:12 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.182.196 with SMTP id cd4mr4264169ibb.191.1284295778693;
-	Sun, 12 Sep 2010 05:49:38 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Sun, 12 Sep 2010 05:49:38 -0700 (PDT)
-In-Reply-To: <4C8CC749.5070306@balister.org>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
-	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>
-	<i6629i$d5c$1@dough.gmane.org> <201009081609.32135.pieterg@gmx.com>
-	<4C879EC5.10402@balister.org> <4C8ADB7A.4000303@techsol.ca>
-	<i6f9uu$39o$1@dough.gmane.org> <i6fc40$90f$1@dough.gmane.org>
-	<AANLkTimZ1Vzyj0+wT1amdtrxjXkVy=fNbKzCWNG_LrOW@mail.gmail.com>
-	<i6i5g8$ums$1@dough.gmane.org>
-	<AANLkTinELVSoGrq1km6dFpXGF524h328t+TBM4p32inz@mail.gmail.com>
-	<4C8CC749.5070306@balister.org>
-Date: Sun, 12 Sep 2010 14:49:38 +0200
-Message-ID: <AANLkTikqWixYAegBhiVamN2GpG_jMZCpRH=a-9NunbF7@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C8C9C66.7030006@freyther.de>	<1284288866.4698.81.camel@lenovo.internal.reciva.com>
+	<1284287817.18010.7488.camel@rex>
+In-Reply-To: <1284287817.18010.7488.camel@rex>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patch to fix libstdc++ problem, was Re: Images no longer automatically include libstdc++6
+Subject: Re: [PATCH] sanity.bbclass: Check for the presennce of libc.a
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,36 +40,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2010 12:50:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 12 Sep 2010 12:53:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/9/12 Philip Balister <philip@balister.org>:
-
-> If the DISTRO is not maintained, maybe it should be cleaned up and left
-> around to confuse people who think it should work well.
+On 09/12/2010 06:36 AM, Richard Purdie wrote:
+> On Sun, 2010-09-12 at 11:54 +0100, Phil Blundell wrote:
+>> On Sun, 2010-09-12 at 17:24 +0800, Holger Freyther wrote:
+>>> The insmod.static binary links statically and requires the libc.a
+>>> to be present. On Fedora glibc-static is not installed by default
+>>> when installing development headers. Warn the user that he needs
+>>> to have that installed.
+>>
+>> Why are we building insmod.static for native anyway?  That seems a bit
+>> silly.
 >
+> It is. FWIW, Poky now patches the modutils-cross recipe so it only
+> builds the dynamically linked version to resolve exactly this issue.
 
-Philip,
+I'd rather just have insane check for glibc-static and not have an extra 
+patch we need to carry around. I know everytime I install OE on a Fedora 
+based machine, I spend a few minutes remembering why modutils-native 
+does not build.
 
-I hope you wanted to say "...cleaned up and NOT left around..."
-Otherwise it does not really make sense to me.
+Having a reminder to install glibc-static if needed would really help 
+the new user experience for people using Fedora. I'd like to see 
+Holger's change go in.
 
-BTW: I already tried to identify distro maintainers and unmaintained
-distros. See [1]
-I still feel it is a good plan to either remove unmaintaned distros,
-or move them (and the files that are specific to those distros) to an
-unmaintained directory.
-However it was even impossible to create consensus to remove files in
-distro/include that were not used by any distro (and most likely not
-maintained either) See [2]
+Philip
 
-[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/022698.html
-[2] http://thread.gmane.org/gmane.comp.handhelds.openembedded/35427/focus=35946
 
-Frans.
-
-PS: and if anyone would need it, it would still be availalble in git
-as well as in the stable/2009 branch. I can also imagine that we
-create a tag before actually cleaning up.
+>
+> Cheers,
+>
+> Richard
+>
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
