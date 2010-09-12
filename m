@@ -1,48 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OulQF-0008QA-GS
+	(envelope-from <philip@balister.org>) id 1Oulfl-0007Cv-MH
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 12 Sep 2010 14:12:40 +0200
-Received: by iwn2 with SMTP id 2so4109667iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 12 Sep 2010 05:11:55 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=kPRa7Vu8sPgvM08PbB46LfAs1VKxXBjIzTknd5Ey1rk=;
-	b=L7n5RSEdmJJ+myFGpxUz3nAqLfIJjpeSVcoL2vKWO9G6CmY4/EJRer3FhZXd1Bbxa6
-	MOAqh6kwheezbZUFpwIXyMDlsVQHgY/0OAK7eIe9QuT+U2NN1jvEntpvPm4V/RNOwdAz
-	WXyOkW/yghNvKhQhGHkcjC+kiApgH0m+qRnY4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=UE0YjBYC/mmNq+ivVz4hZx4H0QYxfJPnYVRebKZTfO9sirYUrgW5Irz5npMgLk5VMW
-	83S0McYCFBrJEfFq4+uCpmWiYF0juGTS6jsY9UKaqwa64067XsDGfKwkH+iNwzrf9McL
-	SLXa97hET/83n1CGG8g16RI8Fvbfop8jdodg8=
+	Sun, 12 Sep 2010 14:28:42 +0200
+Received: (qmail 13725 invoked by uid 1003); 12 Sep 2010 12:27:54 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	12 Sep 2010 12:27:54 -0000
+Message-ID: <4C8CC749.5070306@balister.org>
+Date: Sun, 12 Sep 2010 08:27:53 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.152.146 with SMTP id g18mr4315390ibw.48.1284293515033;
-	Sun, 12 Sep 2010 05:11:55 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Sun, 12 Sep 2010 05:11:54 -0700 (PDT)
-In-Reply-To: <i6ielv$sld$1@dough.gmane.org>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>
-	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>
-	<i6629i$d5c$1@dough.gmane.org> <201009081609.32135.pieterg@gmx.com>
-	<4C879EC5.10402@balister.org> <4C8ADB7A.4000303@techsol.ca>
-	<i6f9uu$39o$1@dough.gmane.org> <i6fc40$90f$1@dough.gmane.org>
-	<AANLkTimZ1Vzyj0+wT1amdtrxjXkVy=fNbKzCWNG_LrOW@mail.gmail.com>
-	<i6i5g8$ums$1@dough.gmane.org>
-	<AANLkTinELVSoGrq1km6dFpXGF524h328t+TBM4p32inz@mail.gmail.com>
-	<i6ielv$sld$1@dough.gmane.org>
-Date: Sun, 12 Sep 2010 14:11:54 +0200
-Message-ID: <AANLkTimkAw+05s6-FkWuLTOvALgfGypgHCOz6bKBa8gA@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<AANLkTi=o8sM5eBxtMLbB3WVk4vQ8r5mL7g5SKSrK0h34@mail.gmail.com>	<i6629i$d5c$1@dough.gmane.org>
+	<201009081609.32135.pieterg@gmx.com>	<4C879EC5.10402@balister.org>
+	<4C8ADB7A.4000303@techsol.ca>	<i6f9uu$39o$1@dough.gmane.org>
+	<i6fc40$90f$1@dough.gmane.org>	<AANLkTimZ1Vzyj0+wT1amdtrxjXkVy=fNbKzCWNG_LrOW@mail.gmail.com>	<i6i5g8$ums$1@dough.gmane.org>
+	<AANLkTinELVSoGrq1km6dFpXGF524h328t+TBM4p32inz@mail.gmail.com>
+In-Reply-To: <AANLkTinELVSoGrq1km6dFpXGF524h328t+TBM4p32inz@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 Subject: Re: patch to fix libstdc++ problem, was Re: Images no longer automatically include libstdc++6
@@ -59,61 +43,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2010 12:12:40 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 12 Sep 2010 12:28:43 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/9/12 Koen Kooi <k.kooi@student.utwente.nl>:
-
-> On 12-09-10 13:27, Frans Meulenbroeks wrote:
-
-> It won't, since you need to rebuild everything that uses gcc. Bumping PR
-> for gcc-cross would just give people a false sense of security. I'm not
-> against bumping PR for gcc-cross, I'm just saying that it doesn't come
-> close to fixing the problem at hand, which is packages with missing
-> dependencies (libgcc for normal ones, libstdc++ for c++ ones,
-> libgfortran for fortran ones, etc).
-
-I know it does not fix anything, but it fixes most of it (because
-although there is a missing dep, if you install libstdc++/libgcc
-manually or install a package made after the fix is applied things
-still work.
->
->> Thinking of it let's see how many distro's actually use DISTRO_PR:
->> ../../conf/distro/angstrom-2008.1.conf:DISTRO_PR = ".6"
->> ../../conf/distro/kaeilos-2010.conf:DISTRO_PR = ".1"
->> ../../conf/distro/kaeilos.conf:DISTRO_PR = ".5"
->> ../../conf/distro/angstrom-2010.x.conf:DISTRO_PR = ".7"
->> ../../conf/distro/shr.conf:DISTRO_PR = ".5"
+On 09/12/2010 07:27 AM, Frans Meulenbroeks wrote:
+> 2010/9/12 Koen Kooi<k.kooi@student.utwente.nl>:
+>> -----BEGIN PGP SIGNED MESSAGE-----
+>> Hash: SHA1
 >>
->> So that is 5 out of the 32 recipes.
->> Even one of your own (angstrom-2008.1-legacy.conf) does ot use DISTRO_PR
+>> On 12-09-10 10:34, Frans Meulenbroeks wrote:
 >
-> Do you know how requires work in OE?
+>>> Haven't had time to test this yet, but I feel at least a PR bump is
+>>> missing (or perhaps a set of PR bumps)
+>>
+>> Since it would require a PR bump for everything that is built with gcc,
+>> I'm going to say:
+>>
+>> That's what DISTRO_PR is for, which is up to distro maintainers to bump.
+>
+> Still I feel PR or INC_PR bumps of the affected gcc recipes is
+> appropriate, if only to fix it for distro's that do not immediately
+> bump DISTRO_PR.
+> We have quite some distro's and not all are maintained equally well,
+> so I can imagine it'll take some time for them to bump
+> Actually some distro's seem orphaned, so for those it might never
+> happen and bumping the GCC PR's at least will give them the fix too.
 
-Yes.
-The grep above does not reveal these. There might be similar cases for
-some of the other 32-5-1 = 26 distro's.
-I just did not check.
+If the DISTRO is not maintained, maybe it should be cleaned up and left 
+around to confuse people who think it should work well.
 
-Anyway the above just illustrates again that it is is probably quite
-useful to clearly identify maintainers for all distro's and move the
-unmaintained one to a separate folder or so, so people using those at
-least are aware that they are using an unmaintained distro and as such
-are kind-a "on their own"
+Philip
 
-Frans
+
 >
-> conf/distro$ grep require angstrom-2008.1-legacy.conf
-> require conf/distro/angstrom-2008.1.conf
+> Thinking of it let's see how many distro's actually use DISTRO_PR:
+> ../../conf/distro/angstrom-2008.1.conf:DISTRO_PR = ".6"
+> ../../conf/distro/kaeilos-2010.conf:DISTRO_PR = ".1"
+> ../../conf/distro/kaeilos.conf:DISTRO_PR = ".5"
+> ../../conf/distro/angstrom-2010.x.conf:DISTRO_PR = ".7"
+> ../../conf/distro/shr.conf:DISTRO_PR = ".5"
 >
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.5 (Darwin)
+> So that is 5 out of the 32 recipes.
+> Even one of your own (angstrom-2008.1-legacy.conf) does ot use DISTRO_PR
 >
-> iD8DBQFMjL3+MkyGM64RGpERAsRvAJ43TZNi07Md1wcPxdz5T6KaYYl8AwCgvNLY
-> X+Hd1AJVQULZ0BDAiiU6X5A=
-> =hIhF
-> -----END PGP SIGNATURE-----
+> Very nice to keep the users of those 27 distro's in the cold!
+> Not.
 >
+> Frans.
 >
 > _______________________________________________
 > Openembedded-devel mailing list
