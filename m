@@ -1,31 +1,43 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-ew0-f47.google.com ([209.85.215.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OvG4c-0004b3-LA
+	(envelope-from <anarsoul@gmail.com>) id 1OvG8X-0002ey-U7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 22:56:24 +0200
-Received: (qmail 16529 invoked by uid 1003); 13 Sep 2010 20:55:34 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	13 Sep 2010 20:55:34 -0000
-Message-ID: <4C8E8FC5.4020507@balister.org>
-Date: Mon, 13 Sep 2010 16:55:33 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
-MIME-Version: 1.0
+	Mon, 13 Sep 2010 23:00:57 +0200
+Received: by ewy7 with SMTP id 7so2995873ewy.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Sep 2010 13:59:40 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=JADXVi5YtSRilEFXWbBpjIywxmXrKZXjcIr+UWjN1Ag=;
+	b=g4R1oRhvnTtXBmxVfPzRyxrfR0ou8YH6MBttvZfBXwfEDs3yUFCjftx2QLGtfS/ijE
+	eksMEyO8FKn/9DdwtKGhg6B7BVR/W6HIaOfJMGMA4xSWgvqAnH+MCx/rMaoL0C6rKCZq
+	JPl7sgXNUVTuukea2BtDgHLtYisnjfV48n7mk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=l2BQBs7VP8YaTZtcmoetETxCjibLu6y7hcgLaWS1CuX/P+k05nRyxkGyEDcHyY0TP3
+	GzhcU7t47+ps7+xmTWZlKiXK+1bfBz9TaGcA1Hd718oVi7TY7ayXAlZsUPC4Jdp3up/P
+	MwjM8er0Y9PukfmdzHi6iDQ3UM7lgOoSqVUz8=
+Received: by 10.14.119.8 with SMTP id m8mr3126441eeh.18.1284411580637;
+	Mon, 13 Sep 2010 13:59:40 -0700 (PDT)
+Received: from localhost.localdomain ([80.249.95.150])
+	by mx.google.com with ESMTPS id a48sm9858575eei.7.2010.09.13.13.59.38
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 13 Sep 2010 13:59:39 -0700 (PDT)
+From: Vasily Khoruzhick <anarsoul@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
-In-Reply-To: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Date: Mon, 13 Sep 2010 23:57:30 +0300
+Message-Id: <1284411450-20841-1-git-send-email-anarsoul@gmail.com>
+X-Mailer: git-send-email 1.7.2.2
+X-SA-Exim-Connect-IP: 209.85.215.47
+X-SA-Exim-Mail-From: anarsoul@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-09-13
+Subject: [PATCH v2] gettext-0.18: use included libcroco, not system
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,30 +51,39 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 20:56:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 Sep 2010 21:00:59 -0000
 
-On 09/13/2010 02:21 PM, Cliff Brake wrote:
-> last weeks testing cycle was a success.
->
-> http://wiki.openembedded.net/index.php/Testing#Testing_Log
->
-> Firefox is failing in some configurations if the same version of
-> firefox is installed on the host system -- it would be nice to get
-> this resolved this week.
->
-> testing-next branch has been updated and is ready for clean builds.
+gettext-native uses system libcroco if it's available, and breaks
+compilation in this case.
 
-ERROR: Task 1046 
-(virtual:native:/srv/oe-builds/testing/openembedded/recipes/qemu/qemu_0.12.5.bb, 
-do_compile) failed with exit code '1'
-ERROR: __init__() takes at most 3 arguments (4 given)
+Signed-off-by: Vasily Khoruzhick <anarsoul@gmail.com>
+---
+ recipes/gettext/gettext_0.18.bb |    3 ++-
+ 1 files changed, 2 insertions(+), 1 deletions(-)
 
-I see this building the testing branch on my F13 machine. Normally I 
-disable binary locales, but left them enabled for the testing build. 
-Anyone have any clue what is going on?
+diff --git a/recipes/gettext/gettext_0.18.bb b/recipes/gettext/gettext_0.18.bb
+index b295afb..5ad6459 100644
+--- a/recipes/gettext/gettext_0.18.bb
++++ b/recipes/gettext/gettext_0.18.bb
+@@ -2,7 +2,7 @@ DESCRIPTION = "The GNU internationalization library."
+ HOMEPAGE = "http://www.gnu.org/software/gettext/gettext.html"
+ SECTION = "libs"
+ LICENSE = "GPLv3"
+-PR = "r2"
++PR = "r3"
+ DEPENDS = "gettext-native virtual/libiconv ncurses expat"
+ DEPENDS_virtclass-native = "libxml2-native"
+ PROVIDES = "virtual/libintl"
+@@ -31,6 +31,7 @@ EXTRA_OECONF += "--without-lispdir \
+ 		 --disable-openmp \
+ 		 --with-included-glib \
+ 		 --without-emacs \
++		 --with-included-libcroco \
+ 	        "
+ acpaths = '-I ${S}/gnulib-local/m4/ \
+ 	   -I ${S}/gettext-runtime/m4 \
+-- 
+1.7.2.2
 
-Philip
 
 
