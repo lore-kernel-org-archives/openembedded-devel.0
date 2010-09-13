@@ -1,40 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvFWf-0004fE-GC
+	(envelope-from <raj.khem@gmail.com>) id 1OvFs7-00048y-FC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 22:21:22 +0200
-Received: by iwn2 with SMTP id 2so5441526iwn.6
+	Mon, 13 Sep 2010 22:43:29 +0200
+Received: by gya6 with SMTP id 6so2387055gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 13:20:31 -0700 (PDT)
+	Mon, 13 Sep 2010 13:42:39 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=tX3wDgldztput2KnstL9SltFlrPZ4J382lya0vXPtTc=;
-	b=iq5O5UO4nwx9X4ZrgH1/wFuPE97YCfSlc0/HFpTtgDmj6G2SlVINo9iwYKFWxitwmn
-	R/iY36cXFseRIzjpLKKZuqNwTTSRzVmbgXwqnj+bpmF/qNv6P77zDd26LZOL9KDnX7e3
-	8Va9IoM1aFCAjfuFr9zStAH+UlBeWmWrRroR8=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type;
+	bh=cIsnlLbn4CRv9rl2PcxFDXJzEiZh4Ze3BVHKJ91O/00=;
+	b=aQ6MRBMQVfZtQtVdcGwgbioJpRwhvRrQYACofcTWwP2Pu1EY13Avm9xGWtEpE4kzaa
+	7UFv5KKk1cfCqH1+JfBzQRDo0+cJ6CXJXvW6PlX9JtJ0MAtbi0PfrCCvehYpnVM4HTxR
+	6NLAymqaFGuO6DMGOeC5sR1byyd3nb3i68qTs=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type;
-	b=pIjxp6QN2vVCsdztNCYaYwYFk+oaag1SieWCc4f9vlFEESK8uw3Q2Qv2LXEqbKAREa
-	icq78864dL8i4V5vhO8voIH2K6Rlnr1DpHyHYCCbSr078OWv2tG+ogGOu5BEZYApFXmm
-	vqehS1mC0Fp4VbD2FuVgDL9SVw1LBnItryJDU=
+	b=W4S2JjC+ptVmM3rKbVda2D0JMPuxF9i1QRazt0mzIy9TAtBHa80jDRld9FVidZjMoz
+	iakj9ToBGi0tPuPCT3sIejbZa3F2asehhoSwe0H+yr0uQgzxaYDISJir8037M7zxUrhV
+	onJITFQzaIfrrFeAL+dFlKusSzM20xotTGgTg=
+Received: by 10.150.147.7 with SMTP id u7mr159230ybd.162.1284410559277; Mon,
+	13 Sep 2010 13:42:39 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.118.28 with SMTP id t28mr6131726ibq.131.1284409231319;
-	Mon, 13 Sep 2010 13:20:31 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 13:20:31 -0700 (PDT)
-In-Reply-To: <AANLkTim9n1JsDc+bmYN5g20kBtobi5Ti-60Joq1U_rQZ@mail.gmail.com>
+Received: by 10.231.205.134 with HTTP; Mon, 13 Sep 2010 13:42:18 -0700 (PDT)
+In-Reply-To: <AANLkTi=r1NxVPeRVSSP24YXJSRDxUBwvLQo4PH6_iRxj@mail.gmail.com>
 References: <AANLkTimXc3kLFR1m1uXM6OXZQn3idnbiDcEHPU0wpwEC@mail.gmail.com>
 	<AANLkTikd-_vDny=kJKeS+NVWeYyfxiE_yXdUE+t1ac48@mail.gmail.com>
 	<AANLkTi=s9gHBx_uPgiPGhu9b7D10JGytQaxyd-SZ+sfQ@mail.gmail.com>
 	<AANLkTinWXK-HZHOLv2b2ApdPQ+LW22bvwsOO5TGOc1kx@mail.gmail.com>
 	<AANLkTim9n1JsDc+bmYN5g20kBtobi5Ti-60Joq1U_rQZ@mail.gmail.com>
-Date: Mon, 13 Sep 2010 22:20:31 +0200
-Message-ID: <AANLkTi=r1NxVPeRVSSP24YXJSRDxUBwvLQo4PH6_iRxj@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	<AANLkTi=r1NxVPeRVSSP24YXJSRDxUBwvLQo4PH6_iRxj@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 13 Sep 2010 13:42:18 -0700
+Message-ID: <AANLkTimkhhnmDTWH3=Vx5hVN=Hpy5WXpnUX-E5QfRobb@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
@@ -55,18 +56,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 20:21:22 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 13 Sep 2010 20:43:29 -0000
+Content-Type: text/plain; charset=UTF-8
 
-As I don't really see progress on this, I am planning to take action
-in a few days.
-Since Khem expressed a preference to keep the files accessible, I'm
-planning not to remove the unneeded patches, but instead move the to
-the obsolete dir.
-(alternate could be to move them to a dir called unused in the recipe dir).
-Removal will be tested by verifying that bitbake -c patch remains
-working on all dirs where unused files are removed.
+On Mon, Sep 13, 2010 at 1:20 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> As I don't really see progress on this, I am planning to take action
+> in a few days.
+> Since Khem expressed a preference to keep the files accessible, I'm
+> planning not to remove the unneeded patches, but instead move the to
+> the obsolete dir.
+> (alternate could be to move them to a dir called unused in the recipe dir).
+> Removal will be tested by verifying that bitbake -c patch remains
+> working on all dirs where unused files are removed.
+>
 
-Frans.
+sometimes same names patches exist in different dirs and if you remove
+one then it will start picking the other one
+silently so make sure such cases are not there. In general I am wary
+of mass changes which could creep in some bugs like that
+Ideally I would suggest that you look at each and every change before its final.
+
+> Frans.
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+-- 
+-Khem
 
 
