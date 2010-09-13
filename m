@@ -1,42 +1,40 @@
-Received: from lo.gmane.org ([80.91.229.12])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuwQJ-0003tO-AV for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 01:57:28 +0200
-Received: from list by lo.gmane.org with local (Exim 4.69)
-	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1OuwPa-0001F7-PH for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 01:56:42 +0200
-Received: from d75-157-58-185.bchsia.telus.net ([75.157.58.185])
-	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
-	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 01:56:42 +0200
-Received: from dfoley by d75-157-58-185.bchsia.telus.net with local (Gmexim
-	0.1 (Debian)) id 1AlnuQ-0007hv-00
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 01:56:42 +0200
-X-Injected-Via-Gmane: http://gmane.org/
+Received: from 31.mail-out.ovh.net ([213.186.62.10])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <plagnioj@jcrosoft.com>) id 1Ouz4L-00029t-3w
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Sep 2010 04:46:57 +0200
+Received: (qmail 14421 invoked by uid 503); 13 Sep 2010 02:59:37 -0000
+Received: from b6.ovh.net (HELO mail21.ha.ovh.net) (213.186.33.56)
+	by 31.mail-out.ovh.net with SMTP; 13 Sep 2010 02:59:37 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Sep 2010 04:46:11 +0200
+Received: from ns32433.ovh.net (HELO localhost)
+	(plagnioj%jcrosoft.com@213.251.161.87)
+	by ns0.ovh.net with SMTP; 13 Sep 2010 04:46:10 +0200
+Date: Mon, 13 Sep 2010 04:45:12 +0200
+From: Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
 To: openembedded-devel@lists.openembedded.org
-From: dfoley <dfoley@telus.net>
-Date: Sun, 12 Sep 2010 16:56:34 -0700
-Message-ID: <4C8D68B2.20102@telus.net>
-References: <AANLkTimErvT=QwSRo25H-Bn2cjdao5x4XMbp_nz4Vc9_@mail.gmail.com>	<i6f9uu$39o$1@dough.gmane.org>
-	<i6fc40$90f$1@dough.gmane.org> <201009122308.59800.pieterg@gmx.com>
-Mime-Version: 1.0
-X-Complaints-To: usenet@dough.gmane.org
-X-Gmane-NNTP-Posting-Host: d75-157-58-185.bchsia.telus.net
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.1.12) Gecko/20100826 Thunderbird/3.0.7
-In-Reply-To: <201009122308.59800.pieterg@gmx.com>
-X-SA-Exim-Connect-IP: 80.91.229.12
-X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
+Message-ID: <20100913024512.GA11822@game.jcrosoft.org>
+References: <20100903111210.GA17702@game.jcrosoft.org>
+	<1283570085-11968-1-git-send-email-plagnioj@jcrosoft.com>
+	<i6i1v8$kif$1@dough.gmane.org>
+MIME-Version: 1.0
+In-Reply-To: <i6i1v8$kif$1@dough.gmane.org>
+X-PGP-Key: http://uboot.jcrosoft.org/plagnioj.asc
+X-PGP-key-fingerprint: 6309 2BBA 16C8 3A07 1772 CC24 DEFC FFA3 279C CE7C
+User-Agent: Mutt/1.5.20 (2009-06-14)
+X-Ovh-Tracer-Id: 10408381690008283977
+X-Ovh-Remote: 213.251.161.87 (ns32433.ovh.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 213.186.62.10
+X-SA-Exim-Mail-From: plagnioj@jcrosoft.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: patch to fix libstdc++ problem, was Re: Images no longer automatically include libstdc++6
+Subject: Re: [PATCH] rename SOC_FAMILY to TARGET_SOC_FAMILY and make it global
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,39 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 12 Sep 2010 23:57:28 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 13 Sep 2010 02:46:58 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-On 10-09-12 02:08 PM, pieterg wrote:
-> On Saturday 11 September 2010 09:46:08 Koen Kooi wrote:
->> Can people ack or nack the following please:
->>
->>
->> diff --git a/recipes/gcc/gcc-package-cross.inc
->> b/recipes/gcc/gcc-package-cross.inc
->> index 0c4ea2d..59e7dde 100644
->> --- a/recipes/gcc/gcc-package-cross.inc
->> +++ b/recipes/gcc/gcc-package-cross.inc
->> @@ -2,6 +2,8 @@ PACKAGE_STRIP ?= ""
->>   OLD_PACKAGE_STRIP := "${PACKAGE_STRIP}"
->>   PACKAGE_STRIP = "no"
->>
->> +SHLIBSDIR = "${STAGING_DIR_TARGET}/shlibs"
->> +
->>   PACKAGES = "libgcc libssp libstdc++ libg2c libgfortran"
->>
->>   # Called from within gcc-cross, so libdir is set wrong
->
-> Yes, that fixes it for me.
->
-> Rgds, Pieter
+On 10:11 Sun 12 Sep     , Koen Kooi wrote:
+> On 04-09-10 05:14, Jean-Christophe PLAGNIOL-VILLARD wrote:
+> > add global OVERRIDES ${TARGET_SOC_FAMILY} and ${TARGET_ARCH}_${TARGET_SOC_FAMILY}
+> 
+> NAK, introducing a new override that combines 2 existing overrides with
+> a '_', is not allowed. And it isn't needed as Chase has tried to point
+> out already
+except I do point case where it's really needed
+and I'm working on adding new soc to oe and I do need it
+> 
+> You're also changing the overrides order, which needs a lot more testing
+> and ACKs from the people using it.
+currently only TI package use it
+and here the idea is not to change the order but extend it
+> 
+> ANd furthermore you're renaming it to have more underscores (adding
+> 'TARGET_', while it was decided at OEDEM that using underscored should
+> be avoided, since it's out override seperator.
+so we need to rename all TARGET_ to TARGET-???
 
-ack
-
-
-
-
-
+Best Regards,
+J.
 
 
