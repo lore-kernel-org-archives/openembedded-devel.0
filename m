@@ -1,35 +1,39 @@
-Received: from office.altell.ru ([80.246.246.162])
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <khimov@altell.ru>) id 1Ov9OK-0002uT-5y
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 15:48:18 +0200
-Received: from keemun.localnet (unknown [192.168.1.169])
-	by mail.altell.local (Postfix) with ESMTPS id BB39A540C
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 17:47:26 +0400 (MSD)
-From: Roman I Khimov <khimov@altell.ru>
-Organization: Altell Ltd.
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Sep 2010 17:47:25 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <1283644814-27013-1-git-send-email-hvontres@gmail.com>
-	<201009131631.58835.khimov@altell.ru>
-	<AANLkTikFZv53zicF-sUF+WZJdk=WL=_pKQSc6NNBnx7C@mail.gmail.com>
-In-Reply-To: <AANLkTikFZv53zicF-sUF+WZJdk=WL=_pKQSc6NNBnx7C@mail.gmail.com>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ov9nI-0000Wz-F8
+	for openembedded-devel@openembedded.org; Mon, 13 Sep 2010 16:14:11 +0200
+Received: by pwj1 with SMTP id 1so1692601pwj.6
+	for <openembedded-devel@openembedded.org>;
+	Mon, 13 Sep 2010 07:13:16 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=fZXF3kCt2vMo3W8fLfPWOn2hremIS8mMbi0Vl2cC3n8=;
+	b=kUGjxLtY8bvlcT3AUc86p+OMqrbTvM7eh8twLXf4qE07MWnRawJ9MPdHuY2jMoGNPr
+	2m9YtHSDeJnmFwojXPrsFsfkbBgNjthjZJaO/6HVKTdl07yEP58gypdMLIqeziCI/XyA
+	ZUsRVrFP69SgOkT5H1H2Yz/vQeiAetr85aMDI=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=he46X3MNhfv/a8eW0WB6mZvc6nff62kSaw8Q77C7yKCd+R7spk1Xj5jgp38/hOWlEz
+	HkbskHPW2RlzMlf/jjDr+nakC/8C6CdpCjBAtnSRfwqsWBsoEuEk8cEVcbTpU0FCD9Oi
+	db+QOK/m/Gqkxm6d08s+DMMQC4JRrRXShc/Xk=
 MIME-Version: 1.0
-Message-Id: <201009131747.25914.khimov@altell.ru>
-X-Altell-MailScanner-ID: BB39A540C.70E48
-X-Altell-MailScanner: Found to be clean
-X-Altell-MailScanner-From: khimov@altell.ru
-X-SA-Exim-Connect-IP: 80.246.246.162
-X-SA-Exim-Mail-From: khimov@altell.ru
+Received: by 10.114.15.5 with SMTP id 5mr5553819wao.200.1284387192219; Mon, 13
+	Sep 2010 07:13:12 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 07:13:12 -0700 (PDT)
+Date: Mon, 13 Sep 2010 16:13:12 +0200
+Message-ID: <AANLkTikTMse1YUD3ERQsBbOdMYCGhsNd3+c1GH_SHSyg@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] dnsmasq: add version 2.55 from upstream
+Subject: how to override SRC_URI ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,39 +47,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 13:48:18 -0000
-Content-Type: Text/Plain;
-  charset="koi8-r"
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 13 Sep 2010 14:14:12 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-=F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB 13=
- =D3=C5=CE=D4=D1=C2=D2=D1 2010 17:02:59 =C1=D7=D4=CF=D2 Frans Meulenbroeks=
-=20
-=CE=C1=D0=C9=D3=C1=CC:
-> 2010/9/13 Roman I Khimov <khimov@altell.ru>:
-> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=CF=D3=CB=D2=C5=D3=C5=CE=D8=
-=C5 05 =D3=C5=CE=D4=D1=C2=D2=D1 2010 04:00:14 =C1=D7=D4=CF=D2 Henry von
-> > Tresckow
-> >
-> > =CE=C1=D0=C9=D3=C1=CC:
-> >> Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
-> >> ---
-> >>  recipes/dnsmasq/dnsmasq-dbus_2.55.bb |   13 +++++++++++++
-> >>  recipes/dnsmasq/dnsmasq_2.55.bb      |    4 ++++
-> >>  2 files changed, 17 insertions(+), 0 deletions(-)
-> >>  create mode 100644 recipes/dnsmasq/dnsmasq-dbus_2.55.bb
-> >>  create mode 100644 recipes/dnsmasq/dnsmasq_2.55.bb
-> >
-> > Acked-by: Roman I Khimov <khimov@altell.ru>
->=20
-> No problem with this version, but is it useful to keep versions like 2.52.
-> Please avoid version clutter!
+Hi,
 
-At least it doesn't hurt in this case IMO. Although 2.55 works fine here si=
-nce=20
-July (with technically exactly the same patch, somehow I've missed it when =
-was=20
-looking for things to push in OE) it has many various changes compared to=20
-2.52, maybe too many for someone.
+I was wondering how to override the SRC_URI in a recipe.
+
+linux-libc-headers_2.6.34.bb contains:
+
+SRC_URI = "${KERNELORG_MIRROR}/pub/linux/kernel/v2.6/linux-${PV}.tar.bz2 \
+          "
+SRC_URI_nios2 =
+"ftp://opensource.axon.nl/mirror/git_sopc.et.ntust.edu.tw.linux-2.6.git_a32ca88c4f3f3850c5c9789db2afab2530c6856d.tar.gz;name=nios2tarball
+\
+          "
+
+I am building for neek (which has nios2 as TARGET_ARCH).
+
+When I build this recipe I see that both tarballs are fetched (but I
+would like only to get the last one).
+What seems to be happening is that bb.fetch.init
+(lib/bb/fetch/__init_.py) is called twice and triggers FetchData for
+both URI's (but I had expected it to be called only once (for _nios2)
+as I did not use +=
+
+is my understanding correct?
+is this a bug in bitbake or am I abusing things?
+And is there perhaps a way to fix the recipe in a way that it does
+what it intends to do (use the 2nd uri for nios2 and the first one
+otherwise)
+
+Thanks alot!
+Frans
+
+PS: this is with bitbake from the todays git head (hash
+c07cc08f7fd503ac3013ccc43c79198c4c3b7b29)
 
 
