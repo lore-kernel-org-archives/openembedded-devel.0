@@ -1,39 +1,33 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Ov739-0004wR-Mh
+Received: from office.altell.ru ([80.246.246.162])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <khimov@altell.ru>) id 1Ov8Ia-0000hK-7j
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 13:18:19 +0200
-Received: (qmail 9631 invoked by uid 503); 13 Sep 2010 11:29:35 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 13 Sep 2010 11:29:35 -0000
-Received: (qmail 29473 invoked by uid 503); 13 Sep 2010 11:01:07 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 13 Sep 2010 11:01:07 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Sep 2010 13:17:30 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Sep 2010 13:17:29 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Mon, 13 Sep 2010 14:38:34 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id A318B46EC
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Sep 2010 16:31:59 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Sep 2010 13:17:24 +0200
-Message-Id: <1284376645-11610-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-In-Reply-To: <4C8E07CD.2000809@eukrea.com>
-References: <4C8E07CD.2000809@eukrea.com>
+Date: Mon, 13 Sep 2010 16:31:58 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1283644814-27013-1-git-send-email-hvontres@gmail.com>
+In-Reply-To: <1283644814-27013-1-git-send-email-hvontres@gmail.com>
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 597008427652918601
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+Message-Id: <201009131631.58835.khimov@altell.ru>
+X-Altell-MailScanner-ID: A318B46EC.2D1A5
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] util-linux-ng: reset rdepends on ncurses-tools
+Subject: Re: [PATCH] dnsmasq: add version 2.55 from upstream
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,89 +41,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 11:18:19 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Sep 2010 12:39:21 -0000
+Content-Type: Text/Plain;
+  charset="utf-8"
+Content-Transfer-Encoding: base64
 
-* reset is a script which is using tput provided by ncurses-tools
-  (which also provides reset) so util-linux-ng's reset command fails
-  if ncurses-tools is not installed on the target
-* this patch creates a utils-linux-ng-reset package with
-  RDEPENDS="ncurses-tools"
-
-Signed-off-by: Eric Bénard <eric@eukrea.com>
----
- recipes/util-linux-ng/util-linux-ng.inc |   17 +++++++++++++----
- 1 files changed, 13 insertions(+), 4 deletions(-)
-
-diff --git a/recipes/util-linux-ng/util-linux-ng.inc b/recipes/util-linux-ng/util-linux-ng.inc
-index a829b08..b5dd25b 100644
---- a/recipes/util-linux-ng/util-linux-ng.inc
-+++ b/recipes/util-linux-ng/util-linux-ng.inc
-@@ -8,7 +8,7 @@ inherit autotools gettext
- 
- DEFAULT_PREFERENCE = "-1"
- 
--INC_PR = "r29"
-+INC_PR = "r30"
- 
- # allows for a release candidate
- RC ?= ""
-@@ -19,7 +19,7 @@ SRC_URI_append_chinook-compat = " file://chinook_libtool.patch "
- 
- PACKAGES =+ "${PN}-fdisk ${PN}-cfdisk ${PN}-sfdisk ${PN}-swaponoff \
- 	     ${PN}-losetup ${PN}-umount ${PN}-mount ${PN}-readprofile \
--	     ${PN}-fsck ${PN}-blkid ${PN}-mountall"
-+	     ${PN}-fsck ${PN}-blkid ${PN}-mountall ${PN}-reset"
- 
- PACKAGES_virtclass-native = ""	     
- 
-@@ -55,12 +55,14 @@ FILES_util-linux-ng-readprofile = "${sbindir}/readprofile.${PN}"
- FILES_util-linux-ng-fsck = "${base_sbindir}/fsck.${PN}"
- FILES_util-linux-ng-blkid = "${base_sbindir}/blkid.${PN}"
- FILES_${PN}-mountall = "${sysconfdir}/default/mountall.${PN}"
-+FILES_${PN}-reset = "${bindir}/reset.${PN}"
- 
- RREPLACES_util-linux-ng-blkid = "e2fsprogs-blkid"
- RREPLACES_${PN}-mountall = "busybox-mountall"
- 
- RRECOMMENDS_${PN} = "${PN}-fdisk ${PN}-cfdisk ${PN}-sfdisk ${PN}-mount ${PN}-readprofile"
- RDEPENDS_${PN} = "${PN}-mountall ${PN}-umount ${PN}-swaponoff ${PN}-losetup ${PN}-fsck ${PN}-blkid"
-+RDEPENDS_${PN}-reset = "ncurses-tools"
- 
- RRECOMMENDS_${PN}_virtclass-native = ""
- RDEPENDS_${PN}_virtclass-native = ""
-@@ -214,7 +216,6 @@ pkg_postinst_${PN} () {
- 	update-alternatives --install ${base_bindir}/login login login.${PN} 100
- 	update-alternatives --install ${base_sbindir}/vipw vipw vipw.${PN} 100
- 	update-alternatives --install ${base_sbindir}/vigr vigr vigr.${PN} 100
--	update-alternatives --install ${bindir}/reset reset reset.${PN} 100
- 	update-alternatives --install ${bindir}/setsid setsid setsid.${PN} 100
- 	update-alternatives --install ${bindir}/chrt chrt chrt.${PN} 100
- 	
-@@ -230,11 +231,19 @@ pkg_prerm_${PN} () {
- 	test -x ${base_sbindir}/pivot_root.${PN} && \
- 	update-alternatives --remove pivot_root pivot_root.${PN}
- 
--	for i in dmesg kill more halt hwclock mkswap reboot shutdown sln mkfs.minix fsck.minix hexdump setsid chrt last logger mesg renice wall vipw vigr chfn newgrp chsh login reset; do
-+	for i in dmesg kill more halt hwclock mkswap reboot shutdown sln mkfs.minix fsck.minix hexdump setsid chrt last logger mesg renice wall vipw vigr chfn newgrp chsh login; do
- 		update-alternatives --remove $i $i.${PN}
- 	done
- }
- 
-+pkg_postinst_util-linux-ng-reset() {
-+	update-alternatives --install ${bindir}/reset reset reset.${PN} 100
-+}
-+
-+pkg_prerm_util-linux-ng-reset () {
-+	update-alternatives --remove reset reset.${PN}
-+}
-+
- pkg_postinst_util-linux-ng-fdisk () {
- 	update-alternatives --install ${base_sbindir}/fdisk fdisk fdisk.${PN} 100
- }
--- 
-1.6.3.3
-
+0JIg0YHQvtC+0LHRidC10L3QuNC4INC+0YIg0JLQvtGB0LrRgNC10YHQtdC90YzQtSAwNSDRgdC1
+0L3RgtGP0LHRgNGPIDIwMTAgMDQ6MDA6MTQg0LDQstGC0L7RgCBIZW5yeSB2b24gVHJlc2Nrb3cg
+CtC90LDQv9C40YHQsNC7Ogo+IFNpZ25lZC1vZmYtYnk6IEhlbnJ5IHZvbiBUcmVzY2tvdyA8aHZv
+bnRyZXNAZ21haWwuY29tPgo+IC0tLQo+ICByZWNpcGVzL2Ruc21hc3EvZG5zbWFzcS1kYnVzXzIu
+NTUuYmIgfCAgIDEzICsrKysrKysrKysrKysKPiAgcmVjaXBlcy9kbnNtYXNxL2Ruc21hc3FfMi41
+NS5iYiAgICAgIHwgICAgNCArKysrCj4gIDIgZmlsZXMgY2hhbmdlZCwgMTcgaW5zZXJ0aW9ucygr
+KSwgMCBkZWxldGlvbnMoLSkKPiAgY3JlYXRlIG1vZGUgMTAwNjQ0IHJlY2lwZXMvZG5zbWFzcS9k
+bnNtYXNxLWRidXNfMi41NS5iYgo+ICBjcmVhdGUgbW9kZSAxMDA2NDQgcmVjaXBlcy9kbnNtYXNx
+L2Ruc21hc3FfMi41NS5iYgoKQWNrZWQtYnk6IFJvbWFuIEkgS2hpbW92IDxraGltb3ZAYWx0ZWxs
+LnJ1Pgo=
 
 
