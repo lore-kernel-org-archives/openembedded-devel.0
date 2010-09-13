@@ -1,43 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from office.altell.ru ([80.246.246.162])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ov9qV-0003np-KL
+	(envelope-from <khimov@altell.ru>) id 1OvA1w-0007Ad-5V
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 16:17:30 +0200
-Received: by iwn2 with SMTP id 2so5245211iwn.6
+	Mon, 13 Sep 2010 16:29:26 +0200
+Received: from keemun.localnet (unknown [192.168.1.169])
+	by mail.altell.local (Postfix) with ESMTPS id 9FE7646EC
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 07:16:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=4Y3DBPu1QRaVQzfaE+XnBDNICFakrVpi/vCqBuR1KNA=;
-	b=E5MDmGJXN4EgmSXUa1BskfNNjrkvcnDLlaI4ePIvy+9uif3TsDnZA0qaliMdFutCIP
-	Uqw9mTND7pZA0f5L6liGxcLndB+pzfQelM3zhr9n1Rmmh3ymRYGXydtiGeeun1jSY2aH
-	ObQqLjFJaF05Y95NaR3vuQjkNU7A9Oa0w1Qqw=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=tLPgHt60blZmQVNmY4h+JqX/qmFGq8Cr8k/VVHT4fs+5bwolTKqN2wge15VLanokl7
-	GOHrLxL6yr386cgm68D+mLKNBJgF0mxMZ9Wyrz8tvLS/xuNKVWIwiVWlyXq9pezLnHOZ
-	lz3mbbgvpCMdaMBlF914uAKpObUMyaKWnOCZ4=
-MIME-Version: 1.0
-Received: by 10.231.11.130 with SMTP id t2mr6048651ibt.154.1284387397010; Mon,
-	13 Sep 2010 07:16:37 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 07:16:36 -0700 (PDT)
-In-Reply-To: <201009131747.25914.khimov@altell.ru>
-References: <1283644814-27013-1-git-send-email-hvontres@gmail.com>
-	<201009131631.58835.khimov@altell.ru>
-	<AANLkTikFZv53zicF-sUF+WZJdk=WL=_pKQSc6NNBnx7C@mail.gmail.com>
-	<201009131747.25914.khimov@altell.ru>
-Date: Mon, 13 Sep 2010 16:16:36 +0200
-Message-ID: <AANLkTikotQtqFp4M4FAO7w-YL3MaHbyPFGUBKztXKbUQ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 13 Sep 2010 18:28:06 +0400 (MSD)
+From: Roman I Khimov <khimov@altell.ru>
+Organization: Altell Ltd.
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 13 Sep 2010 18:28:05 +0400
+User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
+References: <1283644814-27013-1-git-send-email-hvontres@gmail.com>
+	<201009131747.25914.khimov@altell.ru>
+	<AANLkTikotQtqFp4M4FAO7w-YL3MaHbyPFGUBKztXKbUQ@mail.gmail.com>
+In-Reply-To: <AANLkTikotQtqFp4M4FAO7w-YL3MaHbyPFGUBKztXKbUQ@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201009131828.05861.khimov@altell.ru>
+X-Altell-MailScanner-ID: 9FE7646EC.136E7
+X-Altell-MailScanner: Found to be clean
+X-Altell-MailScanner-From: khimov@altell.ru
+X-SA-Exim-Connect-IP: 80.246.246.162
+X-SA-Exim-Mail-From: khimov@altell.ru
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
@@ -55,47 +43,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 14:17:30 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Mon, 13 Sep 2010 14:29:40 -0000
+X-List-Received-Date: Mon, 13 Sep 2010 14:29:40 -0000
+Content-Type: Text/Plain;
+  charset="koi8-r"
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/13 Roman I Khimov <khimov@altell.ru>:
-> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
-13 =D3=C5=CE=D4=D1=C2=D2=D1 2010 17:02:59 =C1=D7=D4=CF=D2 Frans Meulenbroek=
-s
-> =CE=C1=D0=C9=D3=C1=CC:
->> 2010/9/13 Roman I Khimov <khimov@altell.ru>:
->> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=CF=D3=CB=D2=C5=D3=C5=CE=D8=
-=C5 05 =D3=C5=CE=D4=D1=C2=D2=D1 2010 04:00:14 =C1=D7=D4=CF=D2 Henry von
->> > Tresckow
->> >
->> > =CE=C1=D0=C9=D3=C1=CC:
->> >> Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
->> >> ---
->> >> =9Arecipes/dnsmasq/dnsmasq-dbus_2.55.bb | =9A 13 +++++++++++++
->> >> =9Arecipes/dnsmasq/dnsmasq_2.55.bb =9A =9A =9A| =9A =9A4 ++++
->> >> =9A2 files changed, 17 insertions(+), 0 deletions(-)
->> >> =9Acreate mode 100644 recipes/dnsmasq/dnsmasq-dbus_2.55.bb
->> >> =9Acreate mode 100644 recipes/dnsmasq/dnsmasq_2.55.bb
->> >
->> > Acked-by: Roman I Khimov <khimov@altell.ru>
->>
->> No problem with this version, but is it useful to keep versions like 2.5=
-2.
->> Please avoid version clutter!
->
-> At least it doesn't hurt in this case IMO. Although 2.55 works fine here =
-since
-> July (with technically exactly the same patch, somehow I've missed it whe=
-n was
-> looking for things to push in OE) it has many various changes compared to
-> 2.52, maybe too many for someone.
+=F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB 13=
+ =D3=C5=CE=D4=D1=C2=D2=D1 2010 18:16:36 =C1=D7=D4=CF=D2 Frans Meulenbroeks=
+=20
+=CE=C1=D0=C9=D3=C1=CC:
+> 2010/9/13 Roman I Khimov <khimov@altell.ru>:
+> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=
+=CB 13 =D3=C5=CE=D4=D1=C2=D2=D1 2010 17:02:59 =C1=D7=D4=CF=D2 Frans
+> > Meulenbroeks
+> >
+> > =CE=C1=D0=C9=D3=C1=CC:
+> >> 2010/9/13 Roman I Khimov <khimov@altell.ru>:
+> >> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=CF=D3=CB=D2=C5=D3=C5=CE=
+=D8=C5 05 =D3=C5=CE=D4=D1=C2=D2=D1 2010 04:00:14 =C1=D7=D4=CF=D2 Henry von
+> >> > Tresckow
+> >> >
+> >> > =CE=C1=D0=C9=D3=C1=CC:
+> >> >> Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
+> >> >> ---
+> >> >>  recipes/dnsmasq/dnsmasq-dbus_2.55.bb |   13 +++++++++++++
+> >> >>  recipes/dnsmasq/dnsmasq_2.55.bb      |    4 ++++
+> >> >>  2 files changed, 17 insertions(+), 0 deletions(-)
+> >> >>  create mode 100644 recipes/dnsmasq/dnsmasq-dbus_2.55.bb
+> >> >>  create mode 100644 recipes/dnsmasq/dnsmasq_2.55.bb
+> >> >
+> >> > Acked-by: Roman I Khimov <khimov@altell.ru>
+> >>
+> >> No problem with this version, but is it useful to keep versions like
+> >> 2.52. Please avoid version clutter!
+> >
+> > At least it doesn't hurt in this case IMO. Although 2.55 works fine here
+> > since July (with technically exactly the same patch, somehow I've missed
+> > it when was looking for things to push in OE) it has many various chang=
+es
+> > compared to 2.52, maybe too many for someone.
+>=20
+> Well my main concern is that we have now 6 versions of this recipe,
+> and I think hardly anyone has an idea on the differences between
+> these.
 
-Well my main concern is that we have now 6 versions of this recipe,
-and I think hardly anyone has an idea on the differences between
-these.
-And are the older versions still maintained by someone?
-
-Frans.
+Probably we can drop versions prior to 2.52 because that have known securit=
+y=20
+issues and 2.52 is in the tree for quite some time. 2.52 doesn't hurt at al=
+l=20
+IMO, again.
 
 
