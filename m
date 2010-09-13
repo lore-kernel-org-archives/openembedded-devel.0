@@ -1,44 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OvFty-0006JR-Vz
+	(envelope-from <philip@balister.org>) id 1OvG4c-0004b3-LA
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 22:45:24 +0200
-Received: by iwn2 with SMTP id 2so5457279iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 13:44:37 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=1iILgZ53InHnroCK/7Zg8l/noPrQq+q2HUrJIvu5Y4Q=;
-	b=O2VR1GRe6EFSmI8lkA1SgDc+ptpb4dPdHdeZ4JCmwvUAi5Rt3xk1c9aODjM2B6DEIf
-	5JZ/ULrANf4jSgcBotDQDUs+WY2Z1Cam8k9ukxkVJMA8/gKrHjcyv1i1OfwV8teyeDEh
-	u8ZGdW1vaDRK+oc0n+o6NwbtsdLXVDVbA1AS0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=hIinf47GoM2tFMygDtaqCeWIMrCz2EENh4vQoOmccjO+rc2ecAYUc/2QY+2vNdP2FH
-	udeZeWPockqKXHi3G/uomY0fXgH//b5jIUTXdGNZTBVam9DLdeZIjIY/9AI5jft/FFjG
-	T0tWPiXE72bSbsLQolQcKmWx0MOwBkyTZPm1o=
-Received: by 10.231.19.3 with SMTP id y3mr6542548iba.156.1284410677166; Mon,
-	13 Sep 2010 13:44:37 -0700 (PDT)
+	Mon, 13 Sep 2010 22:56:24 +0200
+Received: (qmail 16529 invoked by uid 1003); 13 Sep 2010 20:55:34 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	13 Sep 2010 20:55:34 -0000
+Message-ID: <4C8E8FC5.4020507@balister.org>
+Date: Mon, 13 Sep 2010 16:55:33 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.8) Gecko/20100806 Fedora/3.1.2-1.fc13 Thunderbird/3.1.2
 MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Mon, 13 Sep 2010 13:44:17 -0700 (PDT)
-In-Reply-To: <1284404613.4133.103.camel@mattotaupa>
-References: <1284404613.4133.103.camel@mattotaupa>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 13 Sep 2010 13:44:17 -0700
-Message-ID: <AANLkTi=TNCakw39uSUHbVudgdJrxwaQPPZZHmpbO38zN@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+In-Reply-To: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] preferred-xorg-versions-X11R7.5-latest.inc: Use Pixman 0.18.4.
+Subject: Re: testing branch 2010-09-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,61 +39,30 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 20:45:24 -0000
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 13 Sep 2010 20:56:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-On Mon, Sep 13, 2010 at 12:03 PM, Paul Menzel
-<paulepanter@users.sourceforge.net> wrote:
-> Date: Mon, 13 Sep 2010 20:53:48 +0200
+On 09/13/2010 02:21 PM, Cliff Brake wrote:
+> last weeks testing cycle was a success.
 >
-> Cairo 1.10.0 was added in 1d4c650b1d8dac6adee3d3d4208b81bc9b67bd3d [1] an=
-d requires Pixman 0.18.4. This fixes at least the distribution Minimal whic=
-h does not set the version of cairo explicitly.
+> http://wiki.openembedded.net/index.php/Testing#Testing_Log
 >
+> Firefox is failing in some configurations if the same version of
+> firefox is installed on the host system -- it would be nice to get
+> this resolved this week.
 >
-> [1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1d4c6=
-50b1d8dac6adee3d3d4208b81bc9b67bd3d
-> [2] http://cgit.freedesktop.org/cairo/commit/?id=3D8127f1f5d52bb716dbd70e=
-fe096894f2a542f4a9
->
-> Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+> testing-next branch has been updated and is ready for clean builds.
 
-Acked-by: Khem Raj <raj.khem@gmail.com>
+ERROR: Task 1046 
+(virtual:native:/srv/oe-builds/testing/openembedded/recipes/qemu/qemu_0.12.5.bb, 
+do_compile) failed with exit code '1'
+ERROR: __init__() takes at most 3 arguments (4 given)
 
-> ---
-> =C2=A0.../preferred-xorg-versions-X11R7.5-latest.inc =C2=A0 =C2=A0 | =C2=
-=A0 =C2=A02 +-
-> =C2=A01 files changed, 1 insertions(+), 1 deletions(-)
->
-> diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.i=
-nc b/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-> index 3c9aac0..634265e 100644
-> --- a/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-> +++ b/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-> @@ -108,7 +108,7 @@ PREFERRED_VERSION_libxxf86misc ?=3D "1.0.2"
-> =C2=A0PREFERRED_VERSION_liblbxutil ?=3D "1.1.0"
-> =C2=A0PREFERRED_VERSION_liboldx ?=3D "1.0.1"
-> =C2=A0PREFERRED_VERSION_libxkbui ?=3D "1.0.2"
-> -PREFERRED_VERSION_pixman ?=3D "0.16.2"
-> +PREFERRED_VERSION_pixman ?=3D "0.18.4"
-> =C2=A0#proto
-> =C2=A0PREFERRED_VERSION_evieext ?=3D "1.1.0"
-> =C2=A0PREFERRED_VERSION_fontcacheproto ?=3D "0.1.3"
-> --
-> 1.7.1
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
->
+I see this building the testing branch on my F13 machine. Normally I 
+disable binary locales, but left them enabled for the testing build. 
+Anyone have any clue what is going on?
 
-
-
---=20
--Khem
+Philip
 
 
