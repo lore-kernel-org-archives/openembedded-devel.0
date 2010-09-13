@@ -1,49 +1,44 @@
-Received: from familie-heinold.de
-	([85.214.48.103] helo=mail.familie-heinold.de ident=postfix)
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <heinold@inf.fu-berlin.de>) id 1OvCfO-0003ZX-71
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvD1m-0006BI-HL
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 19:18:08 +0200
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id C7A061100211
+	Mon, 13 Sep 2010 19:41:15 +0200
+Received: by gya6 with SMTP id 6so2315069gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 19:17:20 +0200 (CEST)
-Received: from mail.familie-heinold.de (h873313.serverkompetenz.net
-	[127.0.0.1])
-	by mail.familie-heinold.de (Postfix) with ESMTP id B9E5D11000E1
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 19:17:19 +0200 (CEST)
-Received: from rhein.familie-heinold.de (g229044011.adsl.alicedsl.de
-	[92.229.44.11]) by mail.familie-heinold.de (Postfix) with ESMTPA
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 19:17:19 +0200 (CEST)
-Received: by rhein.familie-heinold.de (Postfix, from userid 1000)
-	id C97AF3C0D7; Mon, 13 Sep 2010 19:17:18 +0200 (CEST)
-Date: Mon, 13 Sep 2010 19:17:18 +0200
-From: Henning Heinold <heinold@inf.fu-berlin.de>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100913171718.GA6516@rhein.zuhause.netz>
-References: <4C85058D.8070506@gmail.com>
-	<1283996027.3036.1.camel@gnutoo-laptop>
-	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
-	<4C88E7C2.1030500@gmail.com> <4C88E9BC.9040603@eukrea.com>
-	<4C88EAF2.7010208@gmail.com> <4C88EC18.3020109@eukrea.com>
-	<4C8E4171.5080208@gmail.com>
-	<AANLkTi=RGhye15FnNKzuNHP2c41KXkdPS=qehLRXKyaE@mail.gmail.com>
+	Mon, 13 Sep 2010 10:40:26 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=gkpUihW2EcQfx58RSf9XaHGJ/64WaFY8CLfNqCsxiak=;
+	b=Wr51oGhB1aWxl7UVxDlIM6oH21esUC6Y3NhJyV42ACKWOq+A1DT3jcan+Vxhap2MDh
+	cnaDqwV7NzW3A/4choIqSC27CJZvfYaizC6tbBdua1kjRM4eqFIBMKA3tgTrHSAdul1D
+	ctt0UlLKKRTPV6nZWCh8daEGBN+INAXQj5PHQ=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=HvgIDzNN0dMVQrsbipCalV5+Sl3jjHVNy9/jwpTyBRch0qD81Q4qXQAR7VYM6PsEN9
+	hCZZ3lr9ruHOn8hdeZfElFJaicSouzp3uOv2ML8c6rFaixpYqaJblXCGYCkZvBgn3OJY
+	rwaQaouh+gcWibQ7Rje3tDGz0mFOT6/38Mh94=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=RGhye15FnNKzuNHP2c41KXkdPS=qehLRXKyaE@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-X-Virus-Scanned: ClamAV using ClamSMTP
-X-SA-Exim-Connect-IP: 85.214.48.103
-X-SA-Exim-Mail-From: heinold@inf.fu-berlin.de
+Received: by 10.151.103.12 with SMTP id f12mr600201ybm.386.1284399626523; Mon,
+	13 Sep 2010 10:40:26 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 10:39:56 -0700 (PDT)
+In-Reply-To: <1284397376-29968-1-git-send-email-tom_rini@mentor.com>
+References: <1284397376-29968-1-git-send-email-tom_rini@mentor.com>
+Date: Mon, 13 Sep 2010 19:39:56 +0200
+Message-ID: <AANLkTinZhG8PBu6KBBENEJzUsGUkfuqOyim1D229qtHY@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Asterisk and termcap
+Subject: Re: [PATCH] apr, apr-util: Remove 1.2.* versions
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -57,24 +52,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 17:18:10 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Mon, 13 Sep 2010 17:41:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 13, 2010 at 06:22:38PM +0200, Frans Meulenbroeks wrote:
-> Arigaed, thanks for your report!
-> 
-> Either we can create the dir in the recipe (in do_install) or maybe we
-> can configure it.
-> 
-> Eric, can you peek into that (and if not, can you push your patch so I
-> can pick this up.
+2010/9/13 Tom Rini <tom_rini@mentor.com>:
+> These don't patch and aren't pinned by anyone.
+>
+> Signed-off-by: Tom Rini <tom_rini@mentor.com>
+> ---
+> =A0recipes/apr/apr-util_1.2.12.bb | =A0 33 ------------------------------=
+---
+> =A0recipes/apr/apr-util_1.2.7.bb =A0| =A0 28 ----------------------------
+> =A0recipes/apr/apr_1.2.12.bb =A0 =A0 =A0| =A0 36 ------------------------=
+------------
+> =A0recipes/apr/apr_1.2.7.bb =A0 =A0 =A0 | =A0 33 ------------------------=
+---------
+> =A04 files changed, 0 insertions(+), 130 deletions(-)
+> =A0delete mode 100644 recipes/apr/apr-util_1.2.12.bb
+> =A0delete mode 100644 recipes/apr/apr-util_1.2.7.bb
+> =A0delete mode 100644 recipes/apr/apr_1.2.12.bb
+> =A0delete mode 100644 recipes/apr/apr_1.2.7.bb
+>
 
-Hi,
-
-consider /var/run as tmpfs so we need the directory creation inside the
-startup script.
-
-Bye Henning
+Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 
 
