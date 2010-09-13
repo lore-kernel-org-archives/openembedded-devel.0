@@ -1,37 +1,44 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OvEnM-0003Xp-No
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OvFEc-0002mB-74
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 21:34:29 +0200
-Received: (qmail 7074 invoked by uid 503); 13 Sep 2010 19:45:51 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 13 Sep 2010 19:45:51 -0000
-Received: (qmail 26402 invoked by uid 503); 13 Sep 2010 19:17:18 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 13 Sep 2010 19:17:18 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 13 Sep 2010 21:33:43 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 13 Sep 2010 21:33:41 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
+	Mon, 13 Sep 2010 22:02:40 +0200
+Received: by qwa26 with SMTP id 26so3291241qwa.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Sep 2010 13:01:50 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=t5tENlDBUxmBDiAcQOFbqDI11w1Wlz0xRZMDaMIYq4M=;
+	b=C6tHOOiN6owI6WWWxBracNetatJyI4zMEsC3zVvwW5IYN7SpfpJyrgnzSnBXzfNN9m
+	ULa1LYdcnxI207p1/on5VDOL94F2X/6akpaAiKZ3UUJy6yc5ey4S7gy4eBbGMK5cDyfZ
+	3dVgXbOhTPbDAfv8ULWEXHKClOabUyUQQK0Qs=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=phD9lNVhWPWUdl8Ykboqh23HTVEKQmWhyH2gXa4lOh/XNzIZOhcvGRyzrFpGZ6TukK
+	070q0NnVN+LjZotEoqpzqdDUyRnNtIbjcSToVL4AQEiPDslxnDGRdgH7mNuobGObl0i4
+	xW6zloz+DNliqZnGnP/Akojxyxsuwo2MAaTj8=
+Received: by 10.229.181.73 with SMTP id bx9mr3658240qcb.98.1284408109790;
+	Mon, 13 Sep 2010 13:01:49 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id t4sm6806979qcs.16.2010.09.13.13.01.48
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 13 Sep 2010 13:01:49 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Sep 2010 21:33:36 +0200
-Message-Id: <1284406416-3055-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
-MIME-Version: 1.0
-X-Ovh-Tracer-Id: 8977081433248542025
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+Date: Mon, 13 Sep 2010 13:01:43 -0700
+Message-Id: <1284408103-21857-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] busybox/mdev.conf: add net/tun
+Subject: [PATCH] eglibc: Do not specify ports multiple time to --enable-addons
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,31 +52,91 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 19:34:29 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 13 Sep 2010 20:02:40 -0000
 
-having tun in /dev/net/tun allows openvpn to run without any hack
-on the target
+* While building for mips64 I noticed a problem where eglibc
+  configure did not get the mips sub arch correct during configure
+  the reason was we had ports twice in configure commandline which
+  ran a ports configure twice and appended machines multiple times
+  to paths which then were wrong and it failed to select correct
+  ABI to compile eglibc
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
 ---
- recipes/busybox/files/mdev.conf |    2 ++
- 1 files changed, 2 insertions(+), 0 deletions(-)
+ recipes/eglibc/eglibc_2.10.bb |    2 +-
+ recipes/eglibc/eglibc_2.11.bb |    2 +-
+ recipes/eglibc/eglibc_2.12.bb |    2 +-
+ recipes/eglibc/eglibc_2.9.bb  |    2 +-
+ recipes/eglibc/eglibc_svn.bb  |    2 +-
+ 5 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/recipes/busybox/files/mdev.conf b/recipes/busybox/files/mdev.conf
-index 163ebfe..91068a9 100644
---- a/recipes/busybox/files/mdev.conf
-+++ b/recipes/busybox/files/mdev.conf
-@@ -31,3 +31,5 @@ timer 0:0 0660 =snd/
- event.* 0:0 0660 =input/ @/etc/mdev/find-touchscreen.sh
- mice 0:0 0660 =input/ 
- mouse.* 0:0 0660 =input/
-+
-+tun[0-9]* 0:0 0660 =net/
-\ No newline at end of file
+diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.bb
+index c2ed435..c10db7d 100644
+--- a/recipes/eglibc/eglibc_2.10.bb
++++ b/recipes/eglibc/eglibc_2.10.bb
+@@ -48,7 +48,7 @@ python __anonymous () {
+ EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
+                 --without-cvs --disable-profile --disable-debug --without-gd \
+                 --enable-clocale=gnu \
+-                --enable-add-ons=${GLIBC_ADDONS},ports \
++                --enable-add-ons=${GLIBC_ADDONS} \
+                 --with-headers=${STAGING_INCDIR} \
+                 --without-selinux \
+                 ${GLIBC_EXTRA_OECONF}"
+diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.bb
+index 5d9b8e2..bece90f 100644
+--- a/recipes/eglibc/eglibc_2.11.bb
++++ b/recipes/eglibc/eglibc_2.11.bb
+@@ -48,7 +48,7 @@ python __anonymous () {
+ EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
+                 --without-cvs --disable-profile --disable-debug --without-gd \
+                 --enable-clocale=gnu \
+-                --enable-add-ons=${GLIBC_ADDONS},ports \
++                --enable-add-ons=${GLIBC_ADDONS} \
+                 --with-headers=${STAGING_INCDIR} \
+                 --without-selinux \
+                 ${GLIBC_EXTRA_OECONF}"
+diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
+index c6b0131..0d08c56 100644
+--- a/recipes/eglibc/eglibc_2.12.bb
++++ b/recipes/eglibc/eglibc_2.12.bb
+@@ -48,7 +48,7 @@ python __anonymous () {
+ EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
+                 --without-cvs --disable-profile --disable-debug --without-gd \
+                 --enable-clocale=gnu \
+-                --enable-add-ons=${GLIBC_ADDONS},ports \
++                --enable-add-ons=${GLIBC_ADDONS} \
+                 --with-headers=${STAGING_INCDIR} \
+                 --without-selinux \
+                 ${GLIBC_EXTRA_OECONF}"
+diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
+index a7d9aed..f83861e 100644
+--- a/recipes/eglibc/eglibc_2.9.bb
++++ b/recipes/eglibc/eglibc_2.9.bb
+@@ -48,7 +48,7 @@ python __anonymous () {
+ EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
+                 --without-cvs --disable-profile --disable-debug --without-gd \
+                 --enable-clocale=gnu \
+-                --enable-add-ons=${GLIBC_ADDONS},ports \
++                --enable-add-ons=${GLIBC_ADDONS} \
+                 --with-headers=${STAGING_INCDIR} \
+                 --without-selinux \
+                 ${GLIBC_EXTRA_OECONF}"
+diff --git a/recipes/eglibc/eglibc_svn.bb b/recipes/eglibc/eglibc_svn.bb
+index 0621279..3b7fb84 100644
+--- a/recipes/eglibc/eglibc_svn.bb
++++ b/recipes/eglibc/eglibc_svn.bb
+@@ -46,7 +46,7 @@ python __anonymous () {
+ EXTRA_OECONF = "--enable-kernel=${OLDEST_KERNEL} \
+                 --without-cvs --disable-profile --disable-debug --without-gd \
+                 --enable-clocale=gnu \
+-                --enable-add-ons=${GLIBC_ADDONS},ports \
++                --enable-add-ons=${GLIBC_ADDONS} \
+                 --with-headers=${STAGING_INCDIR} \
+                 --without-selinux \
+                 ${GLIBC_EXTRA_OECONF}"
 -- 
-1.6.3.3
+1.7.1
 
 
 
