@@ -1,44 +1,34 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from hermes.mlbassoc.com ([64.234.241.98] helo=mail.chez-thomas.org)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvD1m-0006BI-HL
+	(envelope-from <gary@mlbassoc.com>) id 1OvD2K-0006Dt-RX
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 19:41:15 +0200
-Received: by gya6 with SMTP id 6so2315069gya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 10:40:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=gkpUihW2EcQfx58RSf9XaHGJ/64WaFY8CLfNqCsxiak=;
-	b=Wr51oGhB1aWxl7UVxDlIM6oH21esUC6Y3NhJyV42ACKWOq+A1DT3jcan+Vxhap2MDh
-	cnaDqwV7NzW3A/4choIqSC27CJZvfYaizC6tbBdua1kjRM4eqFIBMKA3tgTrHSAdul1D
-	ctt0UlLKKRTPV6nZWCh8daEGBN+INAXQj5PHQ=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=HvgIDzNN0dMVQrsbipCalV5+Sl3jjHVNy9/jwpTyBRch0qD81Q4qXQAR7VYM6PsEN9
-	hCZZ3lr9ruHOn8hdeZfElFJaicSouzp3uOv2ML8c6rFaixpYqaJblXCGYCkZvBgn3OJY
-	rwaQaouh+gcWibQ7Rje3tDGz0mFOT6/38Mh94=
+	Mon, 13 Sep 2010 19:41:51 +0200
+Received: by mail.chez-thomas.org (Postfix, from userid 999)
+	id DD8931660922; Mon, 13 Sep 2010 11:41:01 -0600 (MDT)
+Received: from hermes.chez-thomas.org (hermes_local [192.168.1.101])
+	by mail.chez-thomas.org (Postfix) with ESMTP id 5E66316608D0;
+	Mon, 13 Sep 2010 11:41:01 -0600 (MDT)
+Message-ID: <4C8E622D.1050902@mlbassoc.com>
+Date: Mon, 13 Sep 2010 11:41:01 -0600
+From: Gary Thomas <gary@mlbassoc.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.1.9) Gecko/20100430 Fedora/3.0.4-2.fc11 Thunderbird/3.0.4
 MIME-Version: 1.0
-Received: by 10.151.103.12 with SMTP id f12mr600201ybm.386.1284399626523; Mon,
-	13 Sep 2010 10:40:26 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 10:39:56 -0700 (PDT)
-In-Reply-To: <1284397376-29968-1-git-send-email-tom_rini@mentor.com>
-References: <1284397376-29968-1-git-send-email-tom_rini@mentor.com>
-Date: Mon, 13 Sep 2010 19:39:56 +0200
-Message-ID: <AANLkTinZhG8PBu6KBBENEJzUsGUkfuqOyim1D229qtHY@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C85058D.8070506@gmail.com>	<1283996027.3036.1.camel@gnutoo-laptop>	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>	<4C88E7C2.1030500@gmail.com>
+	<4C88E9BC.9040603@eukrea.com>	<4C88EAF2.7010208@gmail.com>
+	<4C88EC18.3020109@eukrea.com>	<4C8E4171.5080208@gmail.com>
+	<AANLkTi=RGhye15FnNKzuNHP2c41KXkdPS=qehLRXKyaE@mail.gmail.com>
+In-Reply-To: <AANLkTi=RGhye15FnNKzuNHP2c41KXkdPS=qehLRXKyaE@mail.gmail.com>
+X-SA-Exim-Connect-IP: 64.234.241.98
+X-SA-Exim-Mail-From: gary@mlbassoc.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] apr, apr-util: Remove 1.2.* versions
+Subject: Re: Asterisk and termcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,29 +42,70 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 17:41:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 13 Sep 2010 17:41:52 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/13 Tom Rini <tom_rini@mentor.com>:
-> These don't patch and aren't pinned by anyone.
+On 09/13/2010 10:22 AM, Frans Meulenbroeks wrote:
+> 2010/9/13 Arigead<captain.deadly@gmail.com>:
+>> Eric B=E9nard wrote:
+>>> Le 09/09/2010 16:10, Arigead a =E9crit :
+>>>> Sorry I'll have to get back to you on that one. I left my OpenMoko (=
+The
+>>>> Target) at home this morning so can't install the ipk :-(
+>>>>
+>>>> Actually thinking about it I'd not be too sure if Asterisk was ever
+>>>> running fine on a mobile phone. Simply wanted to play with it and se=
+e
+>>>> what it could do. There is an OpenMoko wiki page on messing with it =
+so
+>>>> thought I'd have a look.
+>>>>
+>>>> Anyhow I'll get back to you when I test it later today or tomorrow i=
+f
+>>>> that's any help.
+>>>>
+>>> thanks, before pushing it it would be great if you could test it runs
+>>> fine with the fix.
+>>>
+>>> Eric
+>>>
+>>>
+>> Asterisk builds and runs fine, but there is one minor problem. I don't
+>> think that it's to do with the recipe but Asterisk itself.
+>>
+>> Basically when I try to run asterisk its failing on:
+>>
+>> Unable to open pid file '/var/run/asterisk/asterisk.pid': No such file
+>> or directory
+>>
+>> Normally I'd expect the pid file to be saved directly into
+>> "/var/run/asterisk.pid" but asterisk seems to expect another directory=
+.
+>> If I create the directory /var/run/asterisk then all works fine.
+>>
+>> Like I say that's not a problem with the recipe, well I'm no expert bu=
+t
+>> /var is a temp directory so it gets created on boot, so there's no way=
+ a
+>> recipe should install there?
+>>
+>>
 >
-> Signed-off-by: Tom Rini <tom_rini@mentor.com>
-> ---
-> =A0recipes/apr/apr-util_1.2.12.bb | =A0 33 ------------------------------=
----
-> =A0recipes/apr/apr-util_1.2.7.bb =A0| =A0 28 ----------------------------
-> =A0recipes/apr/apr_1.2.12.bb =A0 =A0 =A0| =A0 36 ------------------------=
-------------
-> =A0recipes/apr/apr_1.2.7.bb =A0 =A0 =A0 | =A0 33 ------------------------=
----------
-> =A04 files changed, 0 insertions(+), 130 deletions(-)
-> =A0delete mode 100644 recipes/apr/apr-util_1.2.12.bb
-> =A0delete mode 100644 recipes/apr/apr-util_1.2.7.bb
-> =A0delete mode 100644 recipes/apr/apr_1.2.12.bb
-> =A0delete mode 100644 recipes/apr/apr_1.2.7.bb
+> Arigaed, thanks for your report!
 >
+> Either we can create the dir in the recipe (in do_install) or maybe we
+> can configure it.
+>
+> Eric, can you peek into that (and if not, can you push your patch so I
+> can pick this up.
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Shouldn't the init script populate-volatiles.sh be handling this?
+
+--=20
+------------------------------------------------------------
+Gary Thomas                 |  Consulting for the
+MLB Associates              |    Embedded world
+------------------------------------------------------------
 
 
