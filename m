@@ -1,29 +1,37 @@
-Received: from mail.gw90.de ([188.40.100.199])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OvEKD-00089T-5w for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 21:04:38 +0200
-Received: from f053042025.adsl.alicedsl.de ([78.53.42.25]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OvEJT-0003Vz-Ol for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 19:03:35 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OvEnM-0003Xp-No
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 13 Sep 2010 21:34:29 +0200
+Received: (qmail 7074 invoked by uid 503); 13 Sep 2010 19:45:51 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 13 Sep 2010 19:45:51 -0000
+Received: (qmail 26402 invoked by uid 503); 13 Sep 2010 19:17:18 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 13 Sep 2010 19:17:18 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 13 Sep 2010 21:33:43 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 13 Sep 2010 21:33:41 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Sep 2010 21:03:33 +0200
-Message-ID: <1284404613.4133.103.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+Date: Mon, 13 Sep 2010 21:33:36 +0200
+Message-Id: <1284406416-3055-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 8977081433248542025
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] preferred-xorg-versions-X11R7.5-latest.inc: Use Pixman 0.18.4.
+Subject: [PATCH] busybox/mdev.conf: add net/tun
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,61 +45,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 19:04:40 -0000
-X-Groupsio-MsgNum: 23529
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-/oAMe97BsU4HGaRbSgmd"
+X-List-Received-Date: Mon, 13 Sep 2010 19:34:29 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
---=-/oAMe97BsU4HGaRbSgmd
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+having tun in /dev/net/tun allows openvpn to run without any hack
+on the target
 
-Date: Mon, 13 Sep 2010 20:53:48 +0200
-
-Cairo 1.10.0 was added in 1d4c650b1d8dac6adee3d3d4208b81bc9b67bd3d [1] and =
-requires Pixman 0.18.4. This fixes at least the distribution Minimal which =
-does not set the version of cairo explicitly.
-
-
-[1] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3D1d4c650=
-b1d8dac6adee3d3d4208b81bc9b67bd3d
-[2] http://cgit.freedesktop.org/cairo/commit/?id=3D8127f1f5d52bb716dbd70efe=
-096894f2a542f4a9
-
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+Signed-off-by: Eric Bénard <eric@eukrea.com>
 ---
- .../preferred-xorg-versions-X11R7.5-latest.inc     |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/busybox/files/mdev.conf |    2 ++
+ 1 files changed, 2 insertions(+), 0 deletions(-)
 
-diff --git a/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc=
- b/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-index 3c9aac0..634265e 100644
---- a/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-+++ b/conf/distro/include/preferred-xorg-versions-X11R7.5-latest.inc
-@@ -108,7 +108,7 @@ PREFERRED_VERSION_libxxf86misc ?=3D "1.0.2"
- PREFERRED_VERSION_liblbxutil ?=3D "1.1.0"
- PREFERRED_VERSION_liboldx ?=3D "1.0.1"
- PREFERRED_VERSION_libxkbui ?=3D "1.0.2"
--PREFERRED_VERSION_pixman ?=3D "0.16.2"
-+PREFERRED_VERSION_pixman ?=3D "0.18.4"
- #proto
- PREFERRED_VERSION_evieext ?=3D "1.1.0"
- PREFERRED_VERSION_fontcacheproto ?=3D "0.1.3"
---=20
-1.7.1
+diff --git a/recipes/busybox/files/mdev.conf b/recipes/busybox/files/mdev.conf
+index 163ebfe..91068a9 100644
+--- a/recipes/busybox/files/mdev.conf
++++ b/recipes/busybox/files/mdev.conf
+@@ -31,3 +31,5 @@ timer 0:0 0660 =snd/
+ event.* 0:0 0660 =input/ @/etc/mdev/find-touchscreen.sh
+ mice 0:0 0660 =input/ 
+ mouse.* 0:0 0660 =input/
++
++tun[0-9]* 0:0 0660 =net/
+\ No newline at end of file
+-- 
+1.6.3.3
 
 
---=-/oAMe97BsU4HGaRbSgmd
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyOdYUACgkQPX1aK2wOHVimeQCeNecXax9WxRnTi2OjsRvFfI4l
-fzAAn0zWCsT2oF8RbA7NNxYW3eH+v+cI
-=oGHd
------END PGP SIGNATURE-----
-
---=-/oAMe97BsU4HGaRbSgmd--
