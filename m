@@ -1,39 +1,41 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvBlc-0007NK-5D
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvBoU-00051v-Bo
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 18:20:28 +0200
-Received: by gxk10 with SMTP id 10so1078726gxk.6
+	Mon, 13 Sep 2010 18:23:28 +0200
+Received: by pxi11 with SMTP id 11so2312624pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 09:19:40 -0700 (PDT)
+	Mon, 13 Sep 2010 09:22:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=QQFhANR1FQaofrty8jQHDS50wiuM+LSCFMFR2oYCWKw=;
-	b=FPAdUnQZJSmw7lmoacD+J1E6QjS3wPQWguX18BYO3H8gmLh+rQl4PoHpZ4LtInVWJ5
-	p+QQn2QYVplrMKA6B9y0VW0+md4lh1Xa+2Var0slVn1rr265uOr37V1U/Yso3H1sksXS
-	P2HOGozrRRC37VUpWPdcEUffj/LDE8l64NwSc=
+	bh=49zwlHcaTu85cIPjJuAXLgcBcvEVnrUGBCN7s7a0UXI=;
+	b=Ylq11Qm0npBr5DDvZRFC60Iw17yZPA630WPtW9M520eZQTISqSe0VObeyLFj71+BmV
+	H7rLn7EY6YxFqkh1buftg96pib7mtvErj+xwXX4DaTczUIKNpRL4PVvT0NeyUTPBriBs
+	/YYOIH3NQlY8dfdp1ma0NG3kdBmwp4pvWkjQ0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=si9rfP4pLvtSUkgOVotXqQyLS+fI3CNJjnjB1sl78Mm6JQt5csqwiL2MXWmah3dVoq
-	OP5S5KQW+sb9fHfqvpP4FNGLWLJSoZSLi1gm8b915cdO1hXNSm/+sP2x4n/F9b4IEbYg
-	xG5iLPlTLdoSxJztAM/GUwU/6zUag09dJXq6Y=
+	b=gYoaBmshUaeWY5OI+VdVgRGf2VXebc6JAgXKGWaOR/3gHXTY1AFYM2nx3toQPFMUOQ
+	hoy6hGhWMVlcXCbgkPdHATk19GbRh3nCnSdpQfiO4qtP/PGMz+ac7IaBkX88S4dEjYvz
+	b5Q0VcakefV9QrEZSoRMhBUk5wwHRwzJtMtcI=
 MIME-Version: 1.0
-Received: by 10.150.144.20 with SMTP id r20mr309604ybd.48.1284394780600; Mon,
-	13 Sep 2010 09:19:40 -0700 (PDT)
-Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 09:19:40 -0700 (PDT)
-In-Reply-To: <201009131828.05861.khimov@altell.ru>
-References: <1283644814-27013-1-git-send-email-hvontres@gmail.com>
-	<201009131747.25914.khimov@altell.ru>
-	<AANLkTikotQtqFp4M4FAO7w-YL3MaHbyPFGUBKztXKbUQ@mail.gmail.com>
-	<201009131828.05861.khimov@altell.ru>
-Date: Mon, 13 Sep 2010 18:19:40 +0200
-Message-ID: <AANLkTimZs1Our0mEetgXnYGPyhyQf8SQCXu2JE8vU6MZ@mail.gmail.com>
+Received: by 10.142.136.9 with SMTP id j9mr183318wfd.43.1284394958234; Mon, 13
+	Sep 2010 09:22:38 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 09:22:38 -0700 (PDT)
+In-Reply-To: <4C8E4171.5080208@gmail.com>
+References: <4C85058D.8070506@gmail.com>
+	<1283996027.3036.1.camel@gnutoo-laptop>
+	<AANLkTimz=Q1KsMrMUfwvSEueq1a3kEcgWFoVZDvFqzqK@mail.gmail.com>
+	<4C88E7C2.1030500@gmail.com> <4C88E9BC.9040603@eukrea.com>
+	<4C88EAF2.7010208@gmail.com> <4C88EC18.3020109@eukrea.com>
+	<4C8E4171.5080208@gmail.com>
+Date: Mon, 13 Sep 2010 18:22:38 +0200
+Message-ID: <AANLkTi=RGhye15FnNKzuNHP2c41KXkdPS=qehLRXKyaE@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Connect-IP: 209.85.212.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +43,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] dnsmasq: add version 2.55 from upstream
+Subject: Re: Asterisk and termcap
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,60 +57,54 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 16:20:28 -0000
-Content-Type: text/plain; charset=KOI8-R
+X-List-Received-Date: Mon, 13 Sep 2010 16:23:28 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/13 Roman I Khimov <khimov@altell.ru>:
-> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB =
-13 =D3=C5=CE=D4=D1=C2=D2=D1 2010 18:16:36 =C1=D7=D4=CF=D2 Frans Meulenbroek=
-s
-> =CE=C1=D0=C9=D3=C1=CC:
->> 2010/9/13 Roman I Khimov <khimov@altell.ru>:
->> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=
-=CB 13 =D3=C5=CE=D4=D1=C2=D2=D1 2010 17:02:59 =C1=D7=D4=CF=D2 Frans
->> > Meulenbroeks
->> >
->> > =CE=C1=D0=C9=D3=C1=CC:
->> >> 2010/9/13 Roman I Khimov <khimov@altell.ru>:
->> >> > =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F7=CF=D3=CB=D2=C5=D3=C5=CE=
-=D8=C5 05 =D3=C5=CE=D4=D1=C2=D2=D1 2010 04:00:14 =C1=D7=D4=CF=D2 Henry von
->> >> > Tresckow
->> >> >
->> >> > =CE=C1=D0=C9=D3=C1=CC:
->> >> >> Signed-off-by: Henry von Tresckow <hvontres@gmail.com>
->> >> >> ---
->> >> >> =9Arecipes/dnsmasq/dnsmasq-dbus_2.55.bb | =9A 13 +++++++++++++
->> >> >> =9Arecipes/dnsmasq/dnsmasq_2.55.bb =9A =9A =9A| =9A =9A4 ++++
->> >> >> =9A2 files changed, 17 insertions(+), 0 deletions(-)
->> >> >> =9Acreate mode 100644 recipes/dnsmasq/dnsmasq-dbus_2.55.bb
->> >> >> =9Acreate mode 100644 recipes/dnsmasq/dnsmasq_2.55.bb
->> >> >
->> >> > Acked-by: Roman I Khimov <khimov@altell.ru>
->> >>
->> >> No problem with this version, but is it useful to keep versions like
->> >> 2.52. Please avoid version clutter!
->> >
->> > At least it doesn't hurt in this case IMO. Although 2.55 works fine he=
-re
->> > since July (with technically exactly the same patch, somehow I've miss=
-ed
->> > it when was looking for things to push in OE) it has many various chan=
-ges
->> > compared to 2.52, maybe too many for someone.
+2010/9/13 Arigead <captain.deadly@gmail.com>:
+> Eric B=E9nard wrote:
+>> Le 09/09/2010 16:10, Arigead a =E9crit :
+>>> Sorry I'll have to get back to you on that one. I left my OpenMoko (The
+>>> Target) at home this morning so can't install the ipk :-(
+>>>
+>>> Actually thinking about it I'd not be too sure if Asterisk was ever
+>>> running fine on a mobile phone. Simply wanted to play with it and see
+>>> what it could do. There is an OpenMoko wiki page on messing with it so
+>>> thought I'd have a look.
+>>>
+>>> Anyhow I'll get back to you when I test it later today or tomorrow if
+>>> that's any help.
+>>>
+>> thanks, before pushing it it would be great if you could test it runs
+>> fine with the fix.
 >>
->> Well my main concern is that we have now 6 versions of this recipe,
->> and I think hardly anyone has an idea on the differences between
->> these.
+>> Eric
+>>
+>>
+> Asterisk builds and runs fine, but there is one minor problem. I don't
+> think that it's to do with the recipe but Asterisk itself.
 >
-> Probably we can drop versions prior to 2.52 because that have known secur=
-ity
-> issues and 2.52 is in the tree for quite some time. 2.52 doesn't hurt at =
-all
-> IMO, again.
+> Basically when I try to run asterisk its failing on:
+>
+> Unable to open pid file '/var/run/asterisk/asterisk.pid': No such file
+> or directory
+>
+> Normally I'd expect the pid file to be saved directly into
+> "/var/run/asterisk.pid" but asterisk seems to expect another directory.
+> If I create the directory /var/run/asterisk then all works fine.
+>
+> Like I say that's not a problem with the recipe, well I'm no expert but
+> /var is a temp directory so it gets created on boot, so there's no way a
+> recipe should install there?
+>
+>
 
-Seems an excellent plan to me, can you provide a patch?
+Arigaed, thanks for your report!
 
-Frans
+Either we can create the dir in the recipe (in do_install) or maybe we
+can configure it.
+
+Eric, can you peek into that (and if not, can you push your patch so I
+can pick this up.
 
 
