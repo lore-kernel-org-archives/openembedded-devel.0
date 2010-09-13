@@ -1,44 +1,47 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OvFGz-0002us-Ns
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvFWf-0004fE-GC
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 22:05:07 +0200
-Received: by pxi11 with SMTP id 11so2389454pxi.6
+	Mon, 13 Sep 2010 22:21:22 +0200
+Received: by iwn2 with SMTP id 2so5441526iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 13:04:17 -0700 (PDT)
+	Mon, 13 Sep 2010 13:20:31 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=j5ESmMHcXrQeHwNJBk66B1Tb9MpJdG7xBdl5gr3m3n0=;
-	b=Max+Grf2gGyFX16pD6DHRj4K9QjsGS7winjakZrh6tBt/ErCxvOFlgIiN//8NoMflg
-	TGUiUkQbBrOKM4qC6nsz6zpgpTOBGjbBprS0P8CRZ5uJPZcRJCXOh05UDlT1eLtua1i5
-	gEelNsPb9r4S59fJOKcAkTJcAbAr3YLKDb6j8=
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=tX3wDgldztput2KnstL9SltFlrPZ4J382lya0vXPtTc=;
+	b=iq5O5UO4nwx9X4ZrgH1/wFuPE97YCfSlc0/HFpTtgDmj6G2SlVINo9iwYKFWxitwmn
+	R/iY36cXFseRIzjpLKKZuqNwTTSRzVmbgXwqnj+bpmF/qNv6P77zDd26LZOL9KDnX7e3
+	8Va9IoM1aFCAjfuFr9zStAH+UlBeWmWrRroR8=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=cCfb3j10gTaWWI//OFKLGN5z6kIZ9MHEgz+BQdggRETRP3rgGfXafNkulxImZy3o6g
-	ZGfyk3sb8BYHirTX+ZeIpSKadYIPa32NNnEJ0oM145T1ZtNrVYlMgwHiBKHjbfAeEPuy
-	T8fjYQUa/xcm9x3nl9yps35e7AMnJ1++E5b/o=
-Received: by 10.142.230.8 with SMTP id c8mr412205wfh.313.1284408257610;
-	Mon, 13 Sep 2010 13:04:17 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id n36sm9143169wfa.4.2010.09.13.13.04.16
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Mon, 13 Sep 2010 13:04:17 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=pIjxp6QN2vVCsdztNCYaYwYFk+oaag1SieWCc4f9vlFEESK8uw3Q2Qv2LXEqbKAREa
+	icq78864dL8i4V5vhO8voIH2K6Rlnr1DpHyHYCCbSr078OWv2tG+ogGOu5BEZYApFXmm
+	vqehS1mC0Fp4VbD2FuVgDL9SVw1LBnItryJDU=
+MIME-Version: 1.0
+Received: by 10.231.118.28 with SMTP id t28mr6131726ibq.131.1284409231319;
+	Mon, 13 Sep 2010 13:20:31 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 13:20:31 -0700 (PDT)
+In-Reply-To: <AANLkTim9n1JsDc+bmYN5g20kBtobi5Ti-60Joq1U_rQZ@mail.gmail.com>
+References: <AANLkTimXc3kLFR1m1uXM6OXZQn3idnbiDcEHPU0wpwEC@mail.gmail.com>
+	<AANLkTikd-_vDny=kJKeS+NVWeYyfxiE_yXdUE+t1ac48@mail.gmail.com>
+	<AANLkTi=s9gHBx_uPgiPGhu9b7D10JGytQaxyd-SZ+sfQ@mail.gmail.com>
+	<AANLkTinWXK-HZHOLv2b2ApdPQ+LW22bvwsOO5TGOc1kx@mail.gmail.com>
+	<AANLkTim9n1JsDc+bmYN5g20kBtobi5Ti-60Joq1U_rQZ@mail.gmail.com>
+Date: Mon, 13 Sep 2010 22:20:31 +0200
+Message-ID: <AANLkTi=r1NxVPeRVSSP24YXJSRDxUBwvLQo4PH6_iRxj@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Sep 2010 13:04:13 -0700
-Message-Id: <1284408253-19465-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH v2] libgles-omap3_3.01.00.07.bb: Add recipe
+Subject: Re: script to remove orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,85 +55,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 20:05:07 -0000
+X-List-Received-Date: Mon, 13 Sep 2010 20:21:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-* Fix omap3-sgx-modules_1.4.14.2616.bb to use new SDK
+As I don't really see progress on this, I am planning to take action
+in a few days.
+Since Khem expressed a preference to keep the files accessible, I'm
+planning not to remove the unneeded patches, but instead move the to
+the obsolete dir.
+(alternate could be to move them to a dir called unused in the recipe dir).
+Removal will be tested by verifying that bitbake -c patch remains
+working on all dirs where unused files are removed.
 
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- recipes/powervr-drivers/libgles-omap3.inc          |    2 +-
- .../powervr-drivers/libgles-omap3_3.01.00.07.bb    |   19 +++++++++++++++++++
- .../omap3-sgx-modules_1.4.14.2616.bb               |    8 +++-----
- 3 files changed, 23 insertions(+), 6 deletions(-)
- create mode 100644 recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb
-
-diff --git a/recipes/powervr-drivers/libgles-omap3.inc b/recipes/powervr-drivers/libgles-omap3.inc
-index d183486..a3a280b 100644
---- a/recipes/powervr-drivers/libgles-omap3.inc
-+++ b/recipes/powervr-drivers/libgles-omap3.inc
-@@ -24,7 +24,7 @@ PROVIDES += "virtual/egl"
- # 
- # voila!
- 
--SRC_URI = "http://install.source.dir.local/OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin \
-+SRC_URI = "http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/${SGXPV}/exports/OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin \
- 		   file://cputype \
- 		   file://rc.pvr \
- 		   file://sample.desktop \
-diff --git a/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb b/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb
-new file mode 100644
-index 0000000..30a65b3
---- /dev/null
-+++ b/recipes/powervr-drivers/libgles-omap3_3.01.00.07.bb
-@@ -0,0 +1,19 @@
-+BINLOCATION = "${S}/gfx_rel_es3.x"
-+
-+ES2LOCATION = "${S}/gfx_rel_es2.x"
-+ES3LOCATION = "${S}/gfx_rel_es3.x"
-+ES5LOCATION = "${S}/gfx_rel_es5.x"
-+
-+require libgles-omap3.inc
-+
-+# download required binary distribution from:
-+# http://software-dl.ti.com/dsps/dsps_public_sw/sdo_sb/targetcontent/gfxsdk/latest/index_FDS.html
-+# see libgles-omap3.inc for detailed installation instructions
-+
-+SGXPV = "3_01_00_07"
-+IMGPV = "1.4.14.2616"
-+BINFILE := "OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin"
-+
-+SRC_URI[md5sum] = "b33a82d393ed0a6c26ad0d952542d762"
-+SRC_URI[sha256sum] = "6f1720c2a8c2ce84b0020e144c2d77b56106a1fff45b44f8fcfd74d0f2559d8e"
-+
-diff --git a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-index 0d2818b..fc98b7b 100644
---- a/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-+++ b/recipes/powervr-drivers/omap3-sgx-modules_1.4.14.2616.bb
-@@ -10,12 +10,11 @@ PR_append = "c"
- TI_BIN_UNPK_CMDS="Y: qY:workdir:Y"
- require ../ti/ti-eula-unpack.inc
- 
--SGXPV = "3_01_00_06"
-+SGXPV = "3_01_00_07"
- IMGPV = "1.4.14.2616"
- BINFILE := "OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin"
- 
- SRC_URI = "http://install.source.dir.local/OMAP35x_Graphics_SDK_setuplinux_${SGXPV}.bin \
--           file://texture-width.patch;striplevel=2 \
- "
- 
- S = "${WORKDIR}/OMAP35x_Graphics_SDK_${SGXPV}/GFX_Linux_KM"
-@@ -35,6 +34,5 @@ do_install() {
- 	   ${S}/services4/3rdparty/bufferclass_ti/bufferclass_ti.ko \
- 	   ${D}/lib/modules/${KERNEL_VERSION}/kernel/drivers/gpu/pvr
- }
--
--SRC_URI[md5sum] = "7aa37ca72f34011d353e72cc67f8aac1"
--SRC_URI[sha256sum] = "02276bc728699c36b0d2411c60f23030aa066ca6b8ed5adb7a40204563a227fb"
-+SRC_URI[md5sum] = "b33a82d393ed0a6c26ad0d952542d762"
-+SRC_URI[sha256sum] = "6f1720c2a8c2ce84b0020e144c2d77b56106a1fff45b44f8fcfd74d0f2559d8e"
--- 
-1.7.1
-
+Frans.
 
 
