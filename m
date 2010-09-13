@@ -1,35 +1,46 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OvCRf-0004kC-6v
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvCUi-0005fR-0e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 19:04:15 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OvCQt-00037R-3R from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 13 Sep 2010 10:03:07 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 13 Sep 2010 10:03:06 -0700
-Received: from localhost.localdomain ([172.30.80.178]) by
-	na2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 13 Sep 2010 11:03:05 -0600
-From: Tom Rini <tom_rini@mentor.com>
+	Mon, 13 Sep 2010 19:07:12 +0200
+Received: by iwn2 with SMTP id 2so5333840iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 13 Sep 2010 10:06:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=VZ5Z3sUFNHHT50+qEeJ4vRqB09ZDs78c5G6Jizw2iO0=;
+	b=daAPwrgCMCbVL1zUU1cdmAqZuHcjZomPu8lTB8b/CrtLHEzITnmRtF2Nxhbnz0N27o
+	N4gPsNelmZLF/RjOEc9sqtc0cx5ioVkZHrhoateWR87jjb6C7/pd1srBb17HVOx99qut
+	Gl/MCDMMvw9+Pxzb8TJkkmkF8ZTURXegIgynA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=avyiROuE9qCCG4S4k8AHqAnNxBJveG83EozlUvrTk4QEpDP0Dd6hohE6PdtBq8amlH
+	VZVkzP0UP42YFFgfWgjzx15Lkcz1865w0VnFkRkEBdQeQ62iLfkvDbqqSNccUuBD7+lk
+	s3KJzO4YBMQlWeADhPTD9/vt2SFE14IE2orf8=
+MIME-Version: 1.0
+Received: by 10.231.33.203 with SMTP id i11mr6111540ibd.8.1284397555009; Mon,
+	13 Sep 2010 10:05:55 -0700 (PDT)
+Received: by 10.231.208.17 with HTTP; Mon, 13 Sep 2010 10:05:53 -0700 (PDT)
+In-Reply-To: <AANLkTik5uYeMJ5uzFgUEGCjUsB+ApnHptsMOBBzHGMQ+@mail.gmail.com>
+References: <AANLkTimgF4zbXEyzYK-BQqtgiv2fk1rvgi3W4MdfQ5Wt@mail.gmail.com>
+	<201008312105.45051.roman@khimov.ru>
+	<AANLkTik5uYeMJ5uzFgUEGCjUsB+ApnHptsMOBBzHGMQ+@mail.gmail.com>
+Date: Mon, 13 Sep 2010 19:05:53 +0200
+Message-ID: <AANLkTin9DhwF5QWg+Cs8bFf43vaJ5F7N1kHGoOqnO+rz@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Mon, 13 Sep 2010 10:02:56 -0700
-Message-Id: <1284397376-29968-1-git-send-email-tom_rini@mentor.com>
-X-Mailer: git-send-email 1.6.3.3
-X-OriginalArrivalTime: 13 Sep 2010 17:03:05.0991 (UTC)
-	FILETIME=[88AB2170:01CB5365]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] apr, apr-util: Remove 1.2.* versions
+Subject: Re: branch namespace clutter
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,178 +54,44 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 13 Sep 2010 17:04:17 -0000
+X-List-Received-Date: Mon, 13 Sep 2010 17:07:22 -0000
+Content-Type: text/plain; charset=KOI8-R
+Content-Transfer-Encoding: quoted-printable
 
-These don't patch and aren't pinned by anyone.
+2010/9/13 Cliff Brake <cliff.brake@gmail.com>:
+> On Tue, Aug 31, 2010 at 1:05 PM, Roman I Khimov <roman@khimov.ru> wrote:
+>> =F7 =D3=CF=CF=C2=DD=C5=CE=C9=C9 =CF=D4 =F0=CF=CE=C5=C4=C5=CC=D8=CE=C9=CB=
+ 30 =C1=D7=C7=D5=D3=D4=C1 2010 19:56:52 =C1=D7=D4=CF=D2 Cliff Brake =CE=C1=
+=D0=C9=D3=C1=CC:
+>>> If there are any branches in the OE git repo that are no longer in
+>>> use, please let me know and I'll delete them. =9AOur branch namespace i=
+s
+>>> getting rather cluttered.
+>>>
+>>> http://cgit.openembedded.org/cgit.cgi/openembedded/refs/heads
+>>
+>> Please, drop "rik/perl-5.10", that one was merged long ago.
+>
+> Thanks, I think I have taken care of all the proposed deletions to date.
+>
+> Thanks,
+> Cliff
 
-Signed-off-by: Tom Rini <tom_rini@mentor.com>
----
- recipes/apr/apr-util_1.2.12.bb |   33 ---------------------------------
- recipes/apr/apr-util_1.2.7.bb  |   28 ----------------------------
- recipes/apr/apr_1.2.12.bb      |   36 ------------------------------------
- recipes/apr/apr_1.2.7.bb       |   33 ---------------------------------
- 4 files changed, 0 insertions(+), 130 deletions(-)
- delete mode 100644 recipes/apr/apr-util_1.2.12.bb
- delete mode 100644 recipes/apr/apr-util_1.2.7.bb
- delete mode 100644 recipes/apr/apr_1.2.12.bb
- delete mode 100644 recipes/apr/apr_1.2.7.bb
+These ones haven't had a push for 3-4 years.
+Guess they are obsolete or merged. Can the owner confirm?
 
-diff --git a/recipes/apr/apr-util_1.2.12.bb b/recipes/apr/apr-util_1.2.12.bb
-deleted file mode 100644
-index 18e4ad3..0000000
---- a/recipes/apr/apr-util_1.2.12.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) companion library"
--SECTION = "libs"
--DEPENDS = "apr expat gdbm"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r4"
--
--inherit autotools lib_package binconfig
--
--# apache mirrors?
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.gz \
--           file://configure_fixes.patch"
--
--EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS} --with-dbm=gdbm \
--		--with-gdbm=${STAGING_DIR_HOST}${layout_prefix} \
--		--without-sqlite2 \
--		--without-sqlite3 \
--		--with-expat=${STAGING_DIR_HOST}${layout_prefix}"
--
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--LIBTOOL = "${HOST_SYS}-libtool"
--EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
--
--do_configure_prepend() {
--	cp ${STAGING_DATADIR}/apr/apr_rules.mk ${S}/build/rules.mk
--	echo "AC_PROG_LIBTOOL" >> ${S}/configure.in
--	libtoolize --force
--}
--
--SRC_URI[md5sum] = "e292942e22edd21b68609086352212e4"
--SRC_URI[sha256sum] = "7d70ff17bec733bdb04a6653a8e9c15ab7d88429dac91a4ae58c1db5caaee07f"
-diff --git a/recipes/apr/apr-util_1.2.7.bb b/recipes/apr/apr-util_1.2.7.bb
-deleted file mode 100644
-index 282b55e..0000000
---- a/recipes/apr/apr-util_1.2.7.bb
-+++ /dev/null
-@@ -1,28 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) companion library"
--SECTION = "libs"
--DEPENDS = "apr expat gdbm"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r3"
--
--# apache mirrors?
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.gz \
--           file://configure_fixes.patch"
--
--EXTRA_OECONF = "--with-apr=${STAGING_BINDIR_CROSS} --with-dbm=gdbm \
--		--with-gdbm=${STAGING_DIR_HOST}${layout_prefix} \
--		--without-sqlite2 \
--		--without-sqlite3 \
--		--with-expat=${STAGING_DIR_HOST}${layout_prefix}"
--
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--do_configure_prepend () {
--	cp ${STAGING_DATADIR}/apr/apr_rules.mk ${S}/build/rules.mk
--}
--
--SRC_URI[md5sum] = "c3702668a640be1695956115857ec22e"
--SRC_URI[sha256sum] = "8cd84eb2031a91572e1be2975f4171730a9be72c4cd88718c4c40ac7dc4fd7d3"
-diff --git a/recipes/apr/apr_1.2.12.bb b/recipes/apr/apr_1.2.12.bb
-deleted file mode 100644
-index 775578a..0000000
---- a/recipes/apr/apr_1.2.12.bb
-+++ /dev/null
-@@ -1,36 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) library"
--SECTION = "libs"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r2"
--
--# apache mirrors?
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.bz2 \
--           file://configure_fixes.patch"
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--LIBTOOL = "${HOST_SYS}-libtool"
--EXTRA_OEMAKE = "'LIBTOOL=${LIBTOOL}'"
--
--do_configure_prepend() {
--	rm -f ${S}/build/libtool.m4
--}
--
--do_stage() {
--  autotools_stage_all
--  install -d ${STAGING_DATADIR}/apr
--  cp ${S}/build/apr_rules.mk ${STAGING_DATADIR}/apr/
--  sed -i s,apr_builddir=.*,apr_builddir=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  sed -i s,apr_builders=.*,apr_builders=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  sed -i s,LIBTOOL=.*,LIBTOOL=\$\(SHELL\)\ ${TARGET_PREFIX}libtool,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  sed -i s,\$\(apr_builders\),${STAGING_DATADIR}/apr/,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  cp ${S}/build/mkdir.sh ${STAGING_DATADIR}/apr/
--  cp ${S}/build/make_exports.awk ${STAGING_DATADIR}/apr/
--  cp ${S}/build/make_var_export.awk ${STAGING_DATADIR}/apr/
--}
--
--SRC_URI[md5sum] = "c5da94517e3918f0f2b2e0a05f56aa21"
--SRC_URI[sha256sum] = "db22b34c0bfcab8546632475c6de2c63990214fb8ae5e2ada565410a85e22134"
-diff --git a/recipes/apr/apr_1.2.7.bb b/recipes/apr/apr_1.2.7.bb
-deleted file mode 100644
-index cfb6e30..0000000
---- a/recipes/apr/apr_1.2.7.bb
-+++ /dev/null
-@@ -1,33 +0,0 @@
--DESCRIPTION = "Apache Portable Runtime (APR) library"
--SECTION = "libs"
--LICENSE = "Apache License, Version 2.0"
--
--PR = "r2"
--
--# apache mirrors?
--SRC_URI = "${APACHE_MIRROR}/apr/${P}.tar.bz2 \
--           file://configure_fixes.patch"
--
--inherit autotools lib_package binconfig
--
--OE_BINCONFIG_EXTRA_MANGLE = " -e 's:location=source:location=installed:'"
--
--do_configure() {
--  oe_runconf
--}
--
--do_stage() {
--  autotools_stage_all
--  install -d ${STAGING_DATADIR}/apr
--  cp ${S}/build/apr_rules.mk ${STAGING_DATADIR}/apr/
--  sed -i s,apr_builddir=.*,apr_builddir=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  sed -i s,apr_builders=.*,apr_builders=,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  sed -i s,LIBTOOL=.*,LIBTOOL=\$\(SHELL\)\ ${TARGET_PREFIX}libtool,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  sed -i s,\$\(apr_builders\),${STAGING_DATADIR}/apr/,g ${STAGING_DATADIR}/apr/apr_rules.mk
--  cp ${S}/build/mkdir.sh ${STAGING_DATADIR}/apr/
--  cp ${S}/build/make_exports.awk ${STAGING_DATADIR}/apr/
--  cp ${S}/build/make_var_export.awk ${STAGING_DATADIR}/apr/
--}
--
--SRC_URI[md5sum] = "e77887dbafc515c63feac84686bcb3bc"
--SRC_URI[sha256sum] = "384437f3c4eb7d53ad27fdadce6cbc295ef16653b7f7739a480d91c784082ec9"
--- 
-1.6.3.3
+org.openembedded.oetest	modules/chksum_checker/chksum.py: Generate a
+checksum.ini from already downlo...	Holger Freyther	3 years
+org.openembedded.oz354fam083	handhelds-pxa-2.6_2.6.15-hh1: add a patch
+to fix resume on h2200.	Matt Reimer	4 years
+org.openembedded.oz354x	linux-hotplug: Import patch from .dev by hrw.
+Thanks Bernardo	Matthias Hentges	4 years
+org.openembedded.packaged-staging	packaged-staging.bbclass: add some
+usage notes	Koen Kooi	4 years
 
+Also some seem from people that are gone (and some I have no idea who they =
+are).
+
+Frans
 
 
