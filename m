@@ -1,45 +1,48 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvOei-0005GQ-Sf
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvOgc-0005Sr-HT
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 08:06:19 +0200
-Received: by gwb10 with SMTP id 10so1259814gwb.6
+	Tue, 14 Sep 2010 08:08:13 +0200
+Received: by iwn2 with SMTP id 2so5863111iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 23:05:24 -0700 (PDT)
+	Mon, 13 Sep 2010 23:07:24 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:mime-version:received:received:in-reply-to
 	:references:date:message-id:subject:from:to:content-type
 	:content-transfer-encoding;
-	bh=aN3JsA86Usl9/6vDl3JGZ9yGBwBSJSpt4N/BWT/bmKk=;
-	b=iTHetvGYW/pyFmYqKiLIXpmFobTQ7XPhZwxxLRauP4KDUu0kA6FqavHvyjRIsEZ3kO
-	esRVfATNB7+TZHR0uNiFyFCu5O3PCCncK8o087x2mULO4Sp6WIxUWX0FmIb0Ukj91+L5
-	oKY+HLykuwW3PZEtWRJlltXy8TCPnr/23o9qM=
+	bh=H0/PEF379Cv/mRO/10PyNsztcmUDyOv3pDLZ37kIFQc=;
+	b=BqcEVg1bhlubPumAZL4r6Ckn7xwYdqopCiXnyO86aaQrTpz/Pqtp4FiE1qwwTvi3d+
+	cpEsXmso7ujGUeAteR0NwrmIMrit02B3g3V+n30X8+YkR4GI4PkbhG0pn5liLblaRJBl
+	KeRThefoh1bDQLf4fQ56dWab60KVpadN11rlQ=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
 	:content-type:content-transfer-encoding;
-	b=KRATZllQQA7MQBL6G4/REICC33HX4G1WOm7VssXP+UEC8AaC+PyW0hJtLH1IGB1OgG
-	Yls+Xil5Egc37yUUtd0zyKqvk6jM5TU8lu9Pfb07F2ooyug09gYXbpLuBi/0rgd+Sjtu
-	fulXXv81GFQ3S5rT0kQYFG1W0cCSBxqoM/pEE=
+	b=CA3z5RawdbFdzy+iGXUk0cdqyJxLSk//0VkLh8PN3VqomVxVNoKe1geTh/F+1h4BN6
+	w6MD5MVpeDoXZnzik9noLGBPUwpiT5oGS5qM4VrJHO7aPQtJaNjTb2YEKKsZUcXABYjj
+	toQUuQnZE+TmFU1v86v7OC606xHs3NZeKwaco=
 MIME-Version: 1.0
-Received: by 10.100.173.12 with SMTP id v12mr5523036ane.145.1284444322693;
-	Mon, 13 Sep 2010 23:05:22 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Mon, 13 Sep 2010 23:05:22 -0700 (PDT)
-In-Reply-To: <4C8EF6F1.8010804@gmail.com>
-References: <4C8EF6F1.8010804@gmail.com>
-Date: Tue, 14 Sep 2010 08:05:22 +0200
-Message-ID: <AANLkTikrEGPM56nueYJvr-0qiSvh4LpHyH+HYXgA9yFK@mail.gmail.com>
+Received: by 10.231.148.85 with SMTP id o21mr7491208ibv.26.1284444443948; Mon,
+	13 Sep 2010 23:07:23 -0700 (PDT)
+Received: by 10.231.205.204 with HTTP; Mon, 13 Sep 2010 23:07:23 -0700 (PDT)
+In-Reply-To: <AANLkTimgeqXcCwNkTsEV8rqYwiZGpKCANODxDtkN8q=p@mail.gmail.com>
+References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+	<4C8E8FC5.4020507@balister.org>
+	<AANLkTi=fJWrPssjGvPENzuHsXaPmCZTJRRGmzoJxyx9u@mail.gmail.com>
+	<4C8EBBC8.1060605@gmail.com>
+	<AANLkTimgeqXcCwNkTsEV8rqYwiZGpKCANODxDtkN8q=p@mail.gmail.com>
+Date: Tue, 14 Sep 2010 08:07:23 +0200
+Message-ID: <AANLkTi=6TfmGXPmeAF035U2BJNThfscBFyErAzyd5LYT@mail.gmail.com>
 From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org, 
-	=?ISO-8859-1?Q?=D8yvind_Repvik?= <repvik@foonas.org>
-X-SA-Exim-Connect-IP: 74.125.83.47
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] foonas-init: remove broken and unused recipe.
+Subject: Re: [Bitbake-dev] testing branch 2010-09-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,22 +56,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 06:06:21 -0000
+X-List-Received-Date: Tue, 14 Sep 2010 06:08:13 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/14 Graham Gower <graham.gower@gmail.com>:
-> This recipe has references to non existant files in its SRC_URI, I could =
-not
-> find them in the git logs either.
-> A grep -r foonas-init shows no in tree users.
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+2010/9/14 Chris Larson <clarson@kergoth.com>:
 
-I suggest to take this up with =D8yvind Repvik <repvik@foonas.org>
-He is listed as foonas maintainer.
-(although I must say that judging foonas.org it is quite likely this
-project is having a break).
+>
+> As Graham points out, this was an error in bitbake master, not in OE. =A0=
+Just
+> pushed the fix, sorry for the delay -- had some network issues that
+> prevented getting to the git server yesterday.
+
+Maybe in the testing page we should also indicate what version of
+bitbake is used to build (e.g. 1.8.18, 1.10, bitbake head, ...).
+I'll try to kick off my tests later today.
 
 Frans
 
