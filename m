@@ -1,32 +1,46 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1OvV4P-0008Qx-5f
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvV6W-0002Lq-Mg
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 14:57:12 +0200
-Received: (qmail 15461 invoked by uid 1003); 14 Sep 2010 12:56:20 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	14 Sep 2010 12:56:20 -0000
-Message-ID: <4C8F70F3.1080502@balister.org>
-Date: Tue, 14 Sep 2010 08:56:19 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.9) Gecko/20100907 Fedora/3.1.3-1.fc13 Thunderbird/3.1.3
+	Tue, 14 Sep 2010 14:59:21 +0200
+Received: by iwn2 with SMTP id 2so6130465iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 14 Sep 2010 05:58:33 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=RgOlDVrqUjVRcieJc5NGCz43a3IZqS1A0nWUDfD1Xj0=;
+	b=lzrEbp6U4kb0fN4tOyCkUHIfbV6bdopTa0V8LwqGPf8K0bW/NMnB5atuGNuUkYIH1Y
+	rR0S2r4RGpuMjpz1l1CLpwgi+15xnrWPTbzxy56338m5tBaPRJ+G4GmTKhCxWTaQF7En
+	26sJHxe2udmKb2NN1vCc3+IS+qaPxH+HaJ75w=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=LfZXYuVPJLptCHo3p9oKIw9UI3NRH0AXq530RE5HQRpNEK8EfHFciWnHVsQy6K13oH
+	UyXkO5AiiRHQurxcuCovv8NzV4nCJ1aNJOSjibORTtl7PnspNIDid1bIrmEkrxVAAHF2
+	wfGMVeR0KE4QcYQ+mn3vUF/5jZm1nMRRL8EUI=
 MIME-Version: 1.0
+Received: by 10.231.30.193 with SMTP id v1mr7898750ibc.87.1284469113614; Tue,
+	14 Sep 2010 05:58:33 -0700 (PDT)
+Received: by 10.231.205.204 with HTTP; Tue, 14 Sep 2010 05:58:33 -0700 (PDT)
+In-Reply-To: <AANLkTinEdzVgBru=Ui9-MNpaXFD=zGhN6Aek-BM6vAkM@mail.gmail.com>
+References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+	<4C8F5E55.9010906@balister.org> <4C8F6A6F.4090403@balister.org>
+	<AANLkTikNARJgBSC4m1u0tgjXfHh4VEga2=X9OZPBB1Et@mail.gmail.com>
+	<AANLkTinEdzVgBru=Ui9-MNpaXFD=zGhN6Aek-BM6vAkM@mail.gmail.com>
+Date: Tue, 14 Sep 2010 14:58:33 +0200
+Message-ID: <AANLkTikC0sdA01Rba0pCqh4EEXum5Yc5DnVEyuXF5g2W@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <1284049847-22660-1-git-send-email-fahad_usman@mentor.com>	<AANLkTinLc9Yns87CFTwX4Wk_Wj0k=g02F06e5Aj5HXup@mail.gmail.com>
-	<1284468588.11942.25.camel@pkl-fusman-ubuntu>
-In-Reply-To: <1284468588.11942.25.camel@pkl-fusman-ubuntu>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] omniorb_4.1.4: merged native and non-native recipes
+Subject: Re: testing branch 2010-09-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,60 +54,24 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 12:57:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 14 Sep 2010 12:59:22 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 09/14/2010 08:49 AM, Fahad wrote:
-> On Thu, 2010-09-09 at 19:20 +0200, Frans Meulenbroeks wrote:
->> 2010/9/9 Fahad Usman<fahad_usman@mentor.com>:
->>> +# The following comment is from the omniorb-native recipe which is now merged into this one...
->>> +# Ugly hack so libtool does not find native libs when building cross packages
->>> +# We really only build this package for omniidl anyway
->>> +do_install_virtclass-native_append() {
->>> +        rm -f  ${D}${libdir}/libomni*
->>
->> Can you verify if this is still needed ?
->> I suggest to do that by cleaning both recipes, then remove this hack,
->> then build omniidl-native followed by omniidl
->> If the last one builds fine, I'd say it is afe to leave tout this rm
->>
-> Hi Frans,
-> looks like omniidl recipes are not in git any more and i couldn't find
-> any other package that depends on omniorb or omniorb-native. So, it is
-> probably not needed and it should be safe to remove this hack. I will
-> submit the updated patch for this.
-
-Please do not push any changes to these recipes unless you have another 
-recipe that uses omniorb to test with. I can't test this until I am done 
-with my current project and that could be several weeks. There are 
-people doing out of tree work that uses this.
-
-Please, please do not chance breaking recipes you do not fully understand!
-
-Philip
-
-
+2010/9/14 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+> both slugos/slugos-image and minimal/console-image fail on cairo
 >
-> Fahad.
->>>
->>>
->>> _______________________________________________
->>> Openembedded-devel mailing list
->>> Openembedded-devel@lists.openembedded.org
->>> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+> checking whether cairo's image surface backend feature could be
+> enabled... no (requires pixman-1 >= 0.18.4
+> http://cairographics.org/releases/)
 >
+> Guess this fix resolves it.
+> I consider this testing version a fail.
 >
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> frans
+
+oops, misread the log, slugos is not that far so it might still work,
+will report on that later.
+
+FM
 
 
