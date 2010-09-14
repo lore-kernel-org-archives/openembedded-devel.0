@@ -1,44 +1,37 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OvXqO-00073f-QT
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1OvYmP-0006SA-SG
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 17:54:54 +0200
-Received: by iwn2 with SMTP id 2so6230505iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Sep 2010 08:54:02 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=DSyB1j67D8vEDsSlVvWWSudvkayhNEk8PC8UkPwzLAc=;
-	b=Wa/JJASlAvZLgwXS4BFwQRG6yuBcSCRjMLfO+x/fprZ+xmtOovTXeIFzhOMDmzvnME
-	7AV6EXvlnTfEhDeXk0+mYQueICNybwsnkripLswSTn2U9YUtERwdtpEOOEo5FX2JntiQ
-	oBhVcSn4Mc3VdqHuiylZVHkGbz98kpQHXYC58=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=vZ5sKHLbEpWvSxg00ete/rvMVDpWfYa/hiTnWPfFt7iZ+bumUyJdvuJXfflYz+9GGW
-	fK2NjMCHaTJlxd8nr1gBbu2JknOFRG9V478xLk2pBpyI+klgoZyaebsRaqyDRPTyXV51
-	twavMNXLetJ+yhCbd8FnXqWDKrYbe8iuhdxVA=
-Received: by 10.231.80.213 with SMTP id u21mr18364ibk.173.1284479642175; Tue,
-	14 Sep 2010 08:54:02 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Tue, 14 Sep 2010 08:53:42 -0700 (PDT)
-In-Reply-To: <4C8F5E55.9010906@balister.org>
-References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
-	<4C8F5E55.9010906@balister.org>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 14 Sep 2010 08:53:42 -0700
-Message-ID: <AANLkTinA6KZVSpcTJ6AaLaJ_sHD3hRU9zMWfV+ZivM-M@mail.gmail.com>
+	Tue, 14 Sep 2010 18:54:56 +0200
+Received: (qmail 30199 invoked by uid 503); 14 Sep 2010 17:06:13 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 14 Sep 2010 17:06:13 -0000
+Received: (qmail 32709 invoked by uid 503); 14 Sep 2010 16:37:26 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 14 Sep 2010 16:37:26 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 14 Sep 2010 18:53:56 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
+	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 14 Sep 2010 18:53:55 +0200
+From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+Date: Tue, 14 Sep 2010 18:53:46 +0200
+Message-Id: <1284483226-27527-1-git-send-email-eric@eukrea.com>
+X-Mailer: git-send-email 1.6.3.3
+MIME-Version: 1.0
+X-Ovh-Tracer-Id: 12151556221217713481
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-09-13
+Subject: [PATCH] task-qte-toolchain-target: add libqt-embeddedmultimedia4-dev
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,71 +45,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 15:54:54 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Tue, 14 Sep 2010 16:54:57 -0000
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
 
-On Tue, Sep 14, 2010 at 4:36 AM, Philip Balister <philip@balister.org> wrote:
-> On 09/13/2010 02:21 PM, Cliff Brake wrote:
->>
->> last weeks testing cycle was a success.
->>
->> http://wiki.openembedded.net/index.php/Testing#Testing_Log
->>
->> Firefox is failing in some configurations if the same version of
->> firefox is installed on the host system -- it would be nice to get
->> this resolved this week.
->>
->> testing-next branch has been updated and is ready for clean builds.
->
-> Next error on F13. Sorry I don't have time to debug these. I'm just trying
-> to get in the rhythm. I also need to report this to tinderbox. Not sure why
-> it is touching build machine files.
->
-> Philip
->
-> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
-> undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
-> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
-> undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
-> | collect2: ld returned 1 exit status
-> | make[1]: *** [qemu-system-mips] Error 1
-> | make: *** [subdir-mips-softmmu] Error 2
-> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
-> undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
-> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
-> undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
-> | collect2: ld returned 1 exit status
-> | make[1]: *** [qemu-system-mips64el] Error 1
-> | make: *** [subdir-mips64el-softmmu] Error 2
-> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
-> undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
-> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
-> undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
-> | collect2: ld returned 1 exit status
-> | make[1]: *** [qemu-system-mipsel] Error 1
-> | make: *** [subdir-mipsel-softmmu] Error 2
-> | FATAL: oe_runmake failed
-> NOTE: package qemu-native-0.12.5-r0: task do_compile: Failed
->
+Signed-off-by: Eric Bénard <eric@eukrea.com>
+---
+ recipes/tasks/task-qte-toolchain-target.bb |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
 
-there is a mismatch of libraries from gnutls package on your host. gnutls
-is taken from your host and its not linking with libgcrypt from your host
-or you might have two versions of libgcrypt on your host. Adding gnutls to
-DEPENDS might solve this provided the libgcrypt was picked from OE sysroot
-
-Make sure there is no double installations on your host and follow the trail
-of linker where its picking different libraries from.
-
-
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-
-
-
+diff --git a/recipes/tasks/task-qte-toolchain-target.bb b/recipes/tasks/task-qte-toolchain-target.bb
+index f72c788..919af92 100644
+--- a/recipes/tasks/task-qte-toolchain-target.bb
++++ b/recipes/tasks/task-qte-toolchain-target.bb
+@@ -2,11 +2,12 @@ DESCRIPTION = "Target packages for Qt Embedded SDK"
+ LICENSE = "MIT"
+ ALLOW_EMPTY = "1"
+ 
+-PR = "r2"
++PR = "r3"
+ 
+ RDEPENDS_${PN} += " \
+         task-sdk-bare \
+         qt4-embedded-mkspecs \
++        libqt-embeddedmultimedia4-dev \
+         libqt-embeddedphonon4-dev \
+         libqt-embedded3support4-dev \
+         libqt-embeddedassistantclient4-dev \
+@@ -32,4 +33,3 @@ RDEPENDS_${PN} += " \
+         libts-dev \
+         expat-dev \
+         "
+-
 -- 
--Khem
+1.6.3.3
+
 
 
