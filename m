@@ -1,51 +1,44 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OvJqy-0002kr-5e
+	(envelope-from <raj.khem@gmail.com>) id 1OvL6P-00052Q-Kq
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 02:58:33 +0200
-Received: by wye20 with SMTP id 20so6961457wye.6
+	Tue, 14 Sep 2010 04:18:34 +0200
+Received: by iwn2 with SMTP id 2so5717117iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 13 Sep 2010 17:57:44 -0700 (PDT)
+	Mon, 13 Sep 2010 19:17:47 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:cc:content-type;
-	bh=hfrdGHY1d6Z5Vr6S167bAlNYFwcqDhtYdRjFUBc3uA0=;
-	b=kYtIggP828UeMeYARae4XOKUJSyq2enaLIVYYiUyfh4QgbWMZP8VamTrcixRxBJmVS
-	hCG3nOkveCcMcL+Wa+BmJV3cFB5Nzj/dX4q4RHWWMIJ0kEnahGIYH3ZUAknXBpgRyC1Q
-	HT87CD2tJCM2FRn3hTiamT0UFrdFOXu2pXA4I=
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=Wlcf5KIvwXld7/VDrWcyPgbNnXKHgjFOZXkmNcO0reI=;
+	b=CvonBmx5a5BTuBtYtcecBCtjLfHxFrHR9PfaJ+ONoqVtS5buXm6+ZaL+ciysLomeVA
+	4i1QqwmIBuSCMWDmeeTRfkYXxxKFlmhgSBzqf+pn9wY8WEbL1BgE7hZxoSOR2qKvlFgV
+	+0OV3mg6CAIEcIQnsU1fvNifPOgmdoKcwbpto=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:cc:content-type;
-	b=aRYQ89icfVbczB7Y2eQZSCnuMxoqvvbXrxTuDhxVQD/fiJrDzFHlTJK68aFWt7R6nA
-	9hsgzyYB3bfbrh2FEtne3jweCOb4ljRHZOm13y3O47W4dnS2BgXZ8+gQ1opkLJxE9t66
-	uqvRb9G2IYLgDc039cUN2LHHb/Y4WkKu9QR2M=
-Received: by 10.216.188.20 with SMTP id z20mr3262883wem.51.1284425863122; Mon,
-	13 Sep 2010 17:57:43 -0700 (PDT)
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=d0qVt+Yu0NTKC1SaYRH36RdaN2Ub5zKzXYS2BR/5QyBOVM3PBAKY4aOXlDRDfx3GG0
+	Cbd9Wq4A4C1ZiIfEUDQqaaHkUpFah9RstrUTxNF2IsZ1OTnXRCXviycsc+H8xfv8IfKm
+	SkRJM3oZWewrlAYOkgfSvPSffkLtu5xMk3/DE=
+Received: by 10.231.157.212 with SMTP id c20mr7058034ibx.186.1284430666273;
+	Mon, 13 Sep 2010 19:17:46 -0700 (PDT)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.168 with HTTP; Mon, 13 Sep 2010 17:57:23 -0700 (PDT)
-In-Reply-To: <4C8EBBC8.1060605@gmail.com>
-References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
-	<4C8E8FC5.4020507@balister.org>
-	<AANLkTi=fJWrPssjGvPENzuHsXaPmCZTJRRGmzoJxyx9u@mail.gmail.com>
-	<4C8EBBC8.1060605@gmail.com>
-From: Chris Larson <clarson@kergoth.com>
-Date: Mon, 13 Sep 2010 17:57:23 -0700
-X-Google-Sender-Auth: cU6W-WP_8Pcc3orOtZ2TyVpUc74
-Message-ID: <AANLkTimgeqXcCwNkTsEV8rqYwiZGpKCANODxDtkN8q=p@mail.gmail.com>
-To: Graham Gower <graham.gower@gmail.com>
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: kergoth@gmail.com
+Received: by 10.231.205.134 with HTTP; Mon, 13 Sep 2010 19:17:26 -0700 (PDT)
+In-Reply-To: <AANLkTi=TtH=_PpjNDT9sm+P7aS=AWeeseBguU7WCQXMY@mail.gmail.com>
+References: <AANLkTi=TtH=_PpjNDT9sm+P7aS=AWeeseBguU7WCQXMY@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 13 Sep 2010 19:17:26 -0700
+Message-ID: <AANLkTinJgtuhQAnhEs1M9GS43BWkksFhCGkXqDCcsjsP@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Cc: bitbake-dev@lists.berlios.de, openembedded-devel@lists.openembedded.org
-Subject: Re: [Bitbake-dev] testing branch 2010-09-13
+Subject: Re: fftw question
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -59,77 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 00:58:33 -0000
+X-List-Received-Date: Tue, 14 Sep 2010 02:18:35 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 13, 2010 at 5:03 PM, Graham Gower <graham.gower@gmail.com>wrote:
-
-> On 09/14/2010 09:03 AM, Graham Gower wrote:
-> > On 14 September 2010 06:25, Philip Balister <philip@balister.org> wrote:
-> >> On 09/13/2010 02:21 PM, Cliff Brake wrote:
-> >>>
-> >>> last weeks testing cycle was a success.
-> >>>
-> >>> http://wiki.openembedded.net/index.php/Testing#Testing_Log
-> >>>
-> >>> Firefox is failing in some configurations if the same version of
-> >>> firefox is installed on the host system -- it would be nice to get
-> >>> this resolved this week.
-> >>>
-> >>> testing-next branch has been updated and is ready for clean builds.
-> >>
-> >> ERROR: Task 1046
-> >> (virtual:native:/srv/oe-builds/testing/openembedded/recipes/qemu/
-> qemu_0.12.5.bb,
-> >> do_compile) failed with exit code '1'
-> >> ERROR: __init__() takes at most 3 arguments (4 given)
-> >>
-> >> I see this building the testing branch on my F13 machine. Normally I
-> disable
-> >> binary locales, but left them enabled for the testing build. Anyone have
-> any
-> >> clue what is going on?
-> >>
-> >> Philip
-> >>
-> >> _______________________________________________
-> >> Openembedded-devel mailing list
-> >> Openembedded-devel@lists.openembedded.org
-> >> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
-> >>
-> >
-> > Its not quite the same, and I'm not quite at testing-next
-> > (b9bcb18a4435491bad5cd76ecf26a857b2f40800), but my bitbake -k world
-> > halted like this (bitbake is
-> > c07cc08f7fd503ac3013ccc43c79198c4c3b7b29):
-> >
-> > ERROR: p4-05.2:
-> > http://filehost.perforce.com/perforce/r05.2/bin.linuxmips/p4 cannot
-> > check archive integrity
-> > ERROR: Error executing python function in 'do_fetch'
-> > Traceback (most recent call last):
-> >   File "/home/grg/oe2/bitbake/lib/bb/utils.py", line 334, in better_exec
-> >     exec(code, _context, context)
-> >   File "do_fetch", line 4, in <module>
-> >   File "do_fetch", line 2, in do_fetch
-> >   File "/home/grg/oe2/bitbake/lib/bb/build.py", line 183, in exec_func
-> >     exec_func_python(func, d, runfile, logfile)
-> >   File "/home/grg/oe2/bitbake/lib/bb/build.py", line 234, in
-> exec_func_python
-> >     raise FuncFailed(func, d, logfile)
-> > TypeError: __init__() takes at most 3 arguments (4 given)
-> >
-> > ERROR: Printing the environment of the function
-> > ERROR: __init__() takes at most 3 arguments (4 given)
+On Mon, Sep 13, 2010 at 2:06 PM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> Hi,
+>
+> For mythtv I need fftw with threads enabled.
+> There is a configure option for this: --enable-threads
+>
+> Currently there are three variants of the recipe for different data types
+> fftw_3.2.2.bb =C2=A0fftwf_3.2.2.bb =C2=A0fftwl_3.2.2.bb
+>
+> What would be the preferred way to add this?
+> Just add =C2=A0--enable-threads to these recipes?
+> Or create three additional recipes that support threads?
 >
 
-As Graham points out, this was an error in bitbake master, not in OE.  Just
-pushed the fix, sorry for the delay -- had some network issues that
-prevented getting to the git server yesterday.
--- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+I dont see any issue if you enable threading support in them.
+
+> Frans
+>
+> PS: I could not identify the maintainer for this recipe. If there is
+> one, please voice your opinion (or make the patch)
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+--=20
+-Khem
+
 
