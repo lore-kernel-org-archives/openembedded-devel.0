@@ -1,44 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvQLS-0005Dn-U4
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 09:54:29 +0200
-Received: by iwn2 with SMTP id 2so5925485iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Sep 2010 00:53:40 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=u8l1qhPgM5LxWvYEFYg9Dp9S//k/btlp2NTn2uQ1crI=;
-	b=x1Qrw3NbcwgeJFyottMBvGDm4vl4ZCuAZOox6JlrNdAiB6IlEQgnVWdKYUwOUDnVZ0
-	TZs8WH2/sDuGv6ijSThIE6uTTb+xlZUf9vLaSQrQNHK6LKbzQYMdqmNPSE+jjSTZ+kCl
-	Rhh/xydBJMNpjxwBfz2bBdPw5S1FXqcGkMqrg=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=XtfSUWP6EZa0HompgYe/iUDGMX9mErPc35BPIsKbpEbDpV/D+OS/CZhrDgakzch0Pl
-	g/h9UQVVvee3XX3q8cMyVb6PQ+FSfo+sCmCT1OIH2PdItbR3Lri5oR7NFmXApsL3txO9
-	hZAgCpICvgckmIXAWUwuDf0hKVo2KnPVEJOhA=
-MIME-Version: 1.0
-Received: by 10.231.35.77 with SMTP id o13mr7415239ibd.92.1284450820574; Tue,
-	14 Sep 2010 00:53:40 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Tue, 14 Sep 2010 00:53:40 -0700 (PDT)
-In-Reply-To: <1284449149-31426-1-git-send-email-khimov@altell.ru>
-References: <AANLkTimZs1Our0mEetgXnYGPyhyQf8SQCXu2JE8vU6MZ@mail.gmail.com>
-	<1284449149-31426-1-git-send-email-khimov@altell.ru>
-Date: Tue, 14 Sep 2010 09:53:40 +0200
-Message-ID: <AANLkTik3MwbsLDB2nrUT2pe6poD0fa3M18=0hhkVcces@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OvQNt-0005N3-BI for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Sep 2010 09:56:59 +0200
+Received: from f053036152.adsl.alicedsl.de ([78.53.36.152]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OvQN9-0007a1-J9 for openembedded-devel@lists.openembedded.org;
+	Tue, 14 Sep 2010 07:56:11 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <AANLkTi=KwCAU5f6WWAqx+hQ+-XD8W_7tbFauK5O9Kv8d@mail.gmail.com>
+References: <AANLkTi=KwCAU5f6WWAqx+hQ+-XD8W_7tbFauK5O9Kv8d@mail.gmail.com>
+Date: Tue, 14 Sep 2010 09:56:09 +0200
+Message-ID: <1284450969.7160.8.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] dnsmasq: remove versions prior to 2.52
+Subject: Re: beagleboard-demo-image fails on gnome-games
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,18 +39,81 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 07:54:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 14 Sep 2010 07:56:59 -0000
+X-Groupsio-MsgNum: 23555
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-jRuoMMrw5JQsECJzfSky"
 
-2010/9/14 Roman I Khimov <khimov@altell.ru>:
-> These have known unpatched security issues, 2.52 is in the repo for quite some
-> time, anyone who cares should be using that already.
->
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+--=-jRuoMMrw5JQsECJzfSky
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-verified no one pins these or has a DEFAULT_PREFERENCE for any.
-This is not the case and as they have security issues:
-
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Dear Frans,
 
 
+Am Dienstag, den 14.09.2010, 09:09 +0200 schrieb Frans Meulenbroeks:
+
+[=E2=80=A6]
+
+> | xsltproc -o aisleriot-en_GB.omf --stringparam db2omf.basename
+> aisleriot --stringparam db2omf.format 'docbook' --stringparam
+> db2omf.dtd "-//OASIS//DTD DocBook XML V4.1.2//EN" --stringparam
+> db2omf.lang en_GB --stringparam db2omf.omf_dir "/usr/share/omf"
+> --stringparam db2omf.help_dir "/usr/share/gnome/help" --stringparam
+> db2omf.omf_in "/home/hudson/jobs/FM_test/workspace/tmp/work/armv7a-angstr=
+om-linux-gnueabi/gnome-games-2.30.0-r1/gnome-games-2.30.0/aisleriot/help/ai=
+sleriot.omf.in"
+>  `/home/hudson/jobs/FM_test/workspace/tmp/sysroots/i686-linux/usr/bin/pkg=
+-config
+> --variable db2omf gnome-doc-utils` en_GB/aisleriot.xml || { rm -f
+> "aisleriot-en_GB.omf"; exit 1; }
+> | warning: failed to load external entity
+> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
+> | cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
+> | warning: failed to load external entity
+> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
+> | cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
+> | warning: failed to load external entity
+> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
+> | cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
+
+[=E2=80=A6]
+
+(I would prefer it if line wrapping was turned off for pasted log or
+code sections.)
+
+I think I had the same problem with Evince [1] and Khem fixed it for me
+in b2c2771ddc0e5ddc307999a9a63c5bade88d5956 [2]. Did it ever build for
+you? I think most people do not notice since they have this installed on
+the build system and so the file is found.
+
+I did not sent this fixe upstream yet, since I am still unable to build
+Evince [3].
+
+
+Thanks,
+
+Paul
+
+
+[1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/022=
+957.html
+[2] http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3Db2c2771=
+ddc0e5ddc307999a9a63c5bade88d5956
+[3] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-August/023=
+029.html
+
+--=-jRuoMMrw5JQsECJzfSky
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyPKpMACgkQPX1aK2wOHVgUhgCcCj3xDKh4Juw6FSIEJl2zYQS7
+gSYAn2/OFIf3dEaRoBwxljg+0/BzmgOt
+=MXid
+-----END PGP SIGNATURE-----
+
+--=-jRuoMMrw5JQsECJzfSky--
