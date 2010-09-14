@@ -1,44 +1,40 @@
-Received: from mail-gw0-f47.google.com ([74.125.83.47])
+Received: from mail-qw0-f47.google.com ([209.85.216.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvUAT-0002Tg-4D
+	(envelope-from <andrea.adami@gmail.com>) id 1OvUSR-0007N8-UJ
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 13:59:25 +0200
-Received: by gwb10 with SMTP id 10so1324653gwb.6
+	Tue, 14 Sep 2010 14:19:58 +0200
+Received: by qwa26 with SMTP id 26so3765144qwa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Sep 2010 04:58:28 -0700 (PDT)
+	Tue, 14 Sep 2010 05:17:07 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=HqWp4xS9iCvpPpWK+02a+zlMLjQmDnCFOkRX0zfnlsk=;
-	b=PzsC8DHJ0xFS9J+xSRWcg6rXxaILMYSi3y8WMxHQRXytXZpzWjG5AS304GJCi0JOO8
-	3ldq+yUpLYme3jU7W+mqFD6Y7h/VSL6xQWvi5g75Le4dcdxLDIv+JwXAQgs/r6ZnXBRv
-	p2T3g9lIg9Mi8Mrya34U+u8gNX8N+LfKFLbv4=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=m6YYz6IXdds0lvmxAn426C2vKU5tc6xEZzphf9nSeKk=;
+	b=RBXU5R9+DLpzDiAFHmsftyQfpj0TdJSTXcdqkoQ9bw2VYW6RLjnsE64W74IlMLcl8Q
+	oQtpAD60RYiw1XuoaQC+eUua6DCvvZCcN5N6kDoSqcH+wHxOhz8N4BeKH8VRD+XMpuE9
+	ohhaaesS56M65gVbq+4+uwxiTCu/MtiKoqP38=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=PeW6GEmfjGm3XuRmOJ5J/DXqivoolqog6gVQ4cmeKedStEXc4tdB59DP7WK0gn6mf3
-	m/Se1Hzr0ZUeUNYwSFtSfqgO0kQxl8ZIQqxXKVve4bAPW8l3+WKAwMBsFLBTAJdXwe2u
-	jSP3JEvWiNb9Ejf9R3UPbAG2vZkX58CGI5jdY=
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=lEKaSoU/1cW8iwhdn5/MfLQ1EtYhIRtH0asIcHqQXBM/H5ldeYihQSZ6ktkoWGtscJ
+	0/G9hUTL+fbzOr1/0qqAHBpXsqmc7tRa7NnkFvtYfCD+jxMAhgAWA8IhkVQC3Noq2bBL
+	NMvRqdZL4YyP7tAdG9l5ZSpmAuY69fBAKuWJE=
 MIME-Version: 1.0
-Received: by 10.100.153.15 with SMTP id a15mr963690ane.179.1284465507950; Tue,
-	14 Sep 2010 04:58:27 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Tue, 14 Sep 2010 04:58:27 -0700 (PDT)
-In-Reply-To: <4C8F5E55.9010906@balister.org>
-References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
-	<4C8F5E55.9010906@balister.org>
-Date: Tue, 14 Sep 2010 13:58:27 +0200
-Message-ID: <AANLkTimRL_CpmXPfXi5HShYpMD4H5-=LyHhbnJZZF0A_@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.229.192.21 with SMTP id do21mr4373677qcb.57.1284466627363;
+	Tue, 14 Sep 2010 05:17:07 -0700 (PDT)
+Received: by 10.229.71.78 with HTTP; Tue, 14 Sep 2010 05:17:07 -0700 (PDT)
+Date: Tue, 14 Sep 2010 14:17:07 +0200
+Message-ID: <AANLkTi=dxxtk=ajzU2a4ZrGZU0DMqgB-+RmrNabJYycH@mail.gmail.com>
+From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.83.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.216.47
+X-SA-Exim-Mail-From: andrea.adami@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: testing branch 2010-09-13
+Subject: klcc-cross packaging issues
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,15 +48,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 11:59:28 -0000
+X-List-Received-Date: Tue, 14 Sep 2010 12:20:44 -0000
+X-List-Received-Date: Tue, 14 Sep 2010 12:20:44 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-I had a problem with gnome-games and docbook for beagleboard-demo-image.
-See http://thread.gmane.org/gmane.comp.handhelds.openembedded/36932
+Hi,
 
-I didn't add this result to the wiki, since, as far as I am concerned,
-this test was only a one-shot.
+I'm getting lost with this klibc recipe mixing buildhost and target...
 
-Frans
+I'd appreciate some advices about proper packaging for klcc-cross
+(split from klibc recipe).
+
+In order to remove the legacy do_stage from the recipe it sorted out
+the perl-crosscompiler-wrapper (klcc) cannot be installed by the same
+klibc recipe which packages target stuff.
+
+So, klcc has now its own -cross recipe and is installed as
+${D}${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}klcc but somehow is not
+packaged (NOTE: the following files were installed but not shipped in
+any package: TMPDIR/sysroots/i686-linux/usr/armv5te/bin/arm-angstrom-linux-gnueabi-klcc)
+
+The issue raises now: the klcc-cross ipk is not created because it's
+empty (nothing to install for target here).
+Though, the staging-klcc-cross ipk seems sane, being that it contains
+the crosscompiler and a correct fixme path.
+
+Anyway, all's fine until here, one can build e.g. kexec-tools-klibc
+from scratch or from packaged-staging and the build will succeed..
+
+Still, the NOTE suggests there is a packaging issue.
+So, what to do with this 'dummy' ipk? Recipes needing to build against
+klibc are inheriting klibc.bbclass which adds dependency on klcc-cross
+(which DEPENDS on klibc).
+
+
+Thanks in advance
+
+Andrea
+
+
+P.S. Second doubt, somehow unrelated, is the presence of
+${base_bindir}/klcc in the klibc recipe. Should this file be removed
+in e.g. do_install_append? Is this intended to do builds on target
+(not cross?)
 
 
