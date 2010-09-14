@@ -1,40 +1,32 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OvUSR-0007N8-UJ
+	(envelope-from <philip@balister.org>) id 1OvUdc-00044g-QA
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 14:19:58 +0200
-Received: by qwa26 with SMTP id 26so3765144qwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Sep 2010 05:17:07 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type;
-	bh=m6YYz6IXdds0lvmxAn426C2vKU5tc6xEZzphf9nSeKk=;
-	b=RBXU5R9+DLpzDiAFHmsftyQfpj0TdJSTXcdqkoQ9bw2VYW6RLjnsE64W74IlMLcl8Q
-	oQtpAD60RYiw1XuoaQC+eUua6DCvvZCcN5N6kDoSqcH+wHxOhz8N4BeKH8VRD+XMpuE9
-	ohhaaesS56M65gVbq+4+uwxiTCu/MtiKoqP38=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type;
-	b=lEKaSoU/1cW8iwhdn5/MfLQ1EtYhIRtH0asIcHqQXBM/H5ldeYihQSZ6ktkoWGtscJ
-	0/G9hUTL+fbzOr1/0qqAHBpXsqmc7tRa7NnkFvtYfCD+jxMAhgAWA8IhkVQC3Noq2bBL
-	NMvRqdZL4YyP7tAdG9l5ZSpmAuY69fBAKuWJE=
+	Tue, 14 Sep 2010 14:29:36 +0200
+Received: (qmail 24553 invoked by uid 1003); 14 Sep 2010 12:28:33 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	14 Sep 2010 12:28:33 -0000
+Message-ID: <4C8F6A6F.4090403@balister.org>
+Date: Tue, 14 Sep 2010 08:28:31 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100907 Fedora/3.1.3-1.fc13 Thunderbird/3.1.3
 MIME-Version: 1.0
-Received: by 10.229.192.21 with SMTP id do21mr4373677qcb.57.1284466627363;
-	Tue, 14 Sep 2010 05:17:07 -0700 (PDT)
-Received: by 10.229.71.78 with HTTP; Tue, 14 Sep 2010 05:17:07 -0700 (PDT)
-Date: Tue, 14 Sep 2010 14:17:07 +0200
-Message-ID: <AANLkTi=dxxtk=ajzU2a4ZrGZU0DMqgB-+RmrNabJYycH@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+	<4C8F5E55.9010906@balister.org>
+In-Reply-To: <4C8F5E55.9010906@balister.org>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: klcc-cross packaging issues
+Subject: Re: testing branch 2010-09-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,48 +40,65 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 12:20:44 -0000
-X-List-Received-Date: Tue, 14 Sep 2010 12:20:44 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 14 Sep 2010 12:29:40 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+On 09/14/2010 07:36 AM, Philip Balister wrote:
+> On 09/13/2010 02:21 PM, Cliff Brake wrote:
+>> last weeks testing cycle was a success.
+>>
+>> http://wiki.openembedded.net/index.php/Testing#Testing_Log
+>>
+>> Firefox is failing in some configurations if the same version of
+>> firefox is installed on the host system -- it would be nice to get
+>> this resolved this week.
+>>
+>> testing-next branch has been updated and is ready for clean builds.
+>
+> Next error on F13. Sorry I don't have time to debug these. I'm just
+> trying to get in the rhythm. I also need to report this to tinderbox.
+> Not sure why it is touching build machine files.
 
-I'm getting lost with this klibc recipe mixing buildhost and target...
+Here is the full log:
 
-I'd appreciate some advices about proper packaging for klcc-cross
-(split from klibc recipe).
+http://tinderbox.openembedded.net/public/logs/task/7786641.txt
 
-In order to remove the legacy do_stage from the recipe it sorted out
-the perl-crosscompiler-wrapper (klcc) cannot be installed by the same
-klibc recipe which packages target stuff.
+Hopefully a QEMU guru can look it over.
 
-So, klcc has now its own -cross recipe and is installed as
-${D}${TOOLCHAIN_PATH}/bin/${TARGET_PREFIX}klcc but somehow is not
-packaged (NOTE: the following files were installed but not shipped in
-any package: TMPDIR/sysroots/i686-linux/usr/armv5te/bin/arm-angstrom-linux-gnueabi-klcc)
+Philip
 
-The issue raises now: the klcc-cross ipk is not created because it's
-empty (nothing to install for target here).
-Though, the staging-klcc-cross ipk seems sane, being that it contains
-the crosscompiler and a correct fixme path.
-
-Anyway, all's fine until here, one can build e.g. kexec-tools-klibc
-from scratch or from packaged-staging and the build will succeed..
-
-Still, the NOTE suggests there is a packaging issue.
-So, what to do with this 'dummy' ipk? Recipes needing to build against
-klibc are inheriting klibc.bbclass which adds dependency on klcc-cross
-(which DEPENDS on klibc).
-
-
-Thanks in advance
-
-Andrea
-
-
-P.S. Second doubt, somehow unrelated, is the presence of
-${base_bindir}/klcc in the klibc recipe. Should this file be removed
-in e.g. do_install_append? Is this intended to do builds on target
-(not cross?)
+>
+> Philip
+>
+> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
+> undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
+> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
+> undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
+> | collect2: ld returned 1 exit status
+> | make[1]: *** [qemu-system-mips] Error 1
+> | make: *** [subdir-mips-softmmu] Error 2
+> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
+> undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
+> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
+> undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
+> | collect2: ld returned 1 exit status
+> | make[1]: *** [qemu-system-mips64el] Error 1
+> | make: *** [subdir-mips64el-softmmu] Error 2
+> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
+> undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
+> | /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so:
+> undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
+> | collect2: ld returned 1 exit status
+> | make[1]: *** [qemu-system-mipsel] Error 1
+> | make: *** [subdir-mipsel-softmmu] Error 2
+> | FATAL: oe_runmake failed
+> NOTE: package qemu-native-0.12.5-r0: task do_compile: Failed
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
