@@ -1,45 +1,31 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvQn1-0003SP-NB
+	(envelope-from <philip@balister.org>) id 1OvTpa-0004KY-6t
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 14 Sep 2010 10:22:56 +0200
-Received: by iwn2 with SMTP id 2so5944724iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Sep 2010 01:22:09 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=/JP3JcXpq8lqZbbaDqwmbjjfiHe8mmxmQ0GcK/S0VyU=;
-	b=LdeLTAMUb4hGhRr30kaZIs66lL2Bqblbeg5X+PK/L6D4qFKO+60ERh5FepCsBx+8oi
-	cyE9divsY7bDhukIlewa3WtvmyMsUcTp4axqBfa5S94pwM5xhup2wJmN5ilnXKA2mcxo
-	/8KSBg3AVsxovd2Q1+ID53OyxPgmizQt+7wdU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=Q7k+prQwov32BQe2nEjh3x81SMa0i9Yy0vBkcvWsb096CgXe1vWDw6+SUnbahleQx8
-	P4gOwZa/oBQH7kB2LGcRYp+oMl+ggPe3gmtcTEBjDBlJa7ZmagH5QLmNnUcqPb660M2a
-	7zHyOtztwsOwaJME8Hy/EuWl71JjRQIV3qFN8=
+	Tue, 14 Sep 2010 13:37:48 +0200
+Received: (qmail 30590 invoked by uid 1003); 14 Sep 2010 11:36:55 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	14 Sep 2010 11:36:55 -0000
+Message-ID: <4C8F5E55.9010906@balister.org>
+Date: Tue, 14 Sep 2010 07:36:53 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100907 Fedora/3.1.3-1.fc13 Thunderbird/3.1.3
 MIME-Version: 1.0
-Received: by 10.231.33.131 with SMTP id h3mr7348348ibd.148.1284452526629; Tue,
-	14 Sep 2010 01:22:06 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Tue, 14 Sep 2010 01:22:06 -0700 (PDT)
-In-Reply-To: <1284450969.7160.8.camel@mattotaupa>
-References: <AANLkTi=KwCAU5f6WWAqx+hQ+-XD8W_7tbFauK5O9Kv8d@mail.gmail.com>
-	<1284450969.7160.8.camel@mattotaupa>
-Date: Tue, 14 Sep 2010 10:22:06 +0200
-Message-ID: <AANLkTinTPpGBVX5_ntXyUUH_0gz4AfzskzSpTq1vfChd@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+In-Reply-To: <AANLkTi=6fss18KJvTBYf3oV1MXkgJwT7cqTRz4rK+aTx@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: beagleboard-demo-image fails on gnome-games
+Subject: Re: testing branch 2010-09-13
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,58 +39,49 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 14 Sep 2010 08:22:57 -0000
-Content-Type: text/plain; charset=windows-1252
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 14 Sep 2010 11:37:48 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-2010/9/14 Paul Menzel <paulepanter@users.sourceforge.net>:
-> Dear Frans,
+On 09/13/2010 02:21 PM, Cliff Brake wrote:
+> last weeks testing cycle was a success.
 >
+> http://wiki.openembedded.net/index.php/Testing#Testing_Log
 >
-> Am Dienstag, den 14.09.2010, 09:09 +0200 schrieb Frans Meulenbroeks:
+> Firefox is failing in some configurations if the same version of
+> firefox is installed on the host system -- it would be nice to get
+> this resolved this week.
 >
-> [=85]
->
->> | xsltproc -o aisleriot-en_GB.omf --stringparam db2omf.basename
->> aisleriot --stringparam db2omf.format 'docbook' --stringparam
->> db2omf.dtd "-//OASIS//DTD DocBook XML V4.1.2//EN" --stringparam
->> db2omf.lang en_GB --stringparam db2omf.omf_dir "/usr/share/omf"
->> --stringparam db2omf.help_dir "/usr/share/gnome/help" --stringparam
->> db2omf.omf_in "/home/hudson/jobs/FM_test/workspace/tmp/work/armv7a-angst=
-rom-linux-gnueabi/gnome-games-2.30.0-r1/gnome-games-2.30.0/aisleriot/help/a=
-isleriot.omf.in"
->> =A0`/home/hudson/jobs/FM_test/workspace/tmp/sysroots/i686-linux/usr/bin/=
-pkg-config
->> --variable db2omf gnome-doc-utils` en_GB/aisleriot.xml || { rm -f
->> "aisleriot-en_GB.omf"; exit 1; }
->> | warning: failed to load external entity
->> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
->> | cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
->> | warning: failed to load external entity
->> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
->> | cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
->> | warning: failed to load external entity
->> "/usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl"
->> | cannot parse /usr/share/xml/gnome/xslt/docbook/omf/db2omf.xsl
->
-> [=85]
->
-> (I would prefer it if line wrapping was turned off for pasted log or
-> code sections.)
+> testing-next branch has been updated and is ready for clean builds.
 
-If you can tell me how to do that with gmail (using the web interface)
+Next error on F13. Sorry I don't have time to debug these. I'm just 
+trying to get in the rhythm. I also need to report this to tinderbox. 
+Not sure why it is touching build machine files.
 
->
-> I think I had the same problem with Evince [1] and Khem fixed it for me
-> in b2c2771ddc0e5ddc307999a9a63c5bade88d5956 [2]. Did it ever build for
-> you? I think most people do not notice since they have this installed on
-> the build system and so the file is found.
+Philip
 
-It might be that something similar to that patch is needed here.
-I think it did build for me in the past on another system which
-probably had the docbook stuff installed locally.
-I was test-driving our new build server when I noticed this.
-
-Frans
+| /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so: 
+undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
+| /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so: 
+undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
+| collect2: ld returned 1 exit status
+| make[1]: *** [qemu-system-mips] Error 1
+| make: *** [subdir-mips-softmmu] Error 2
+| /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so: 
+undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
+| /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so: 
+undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
+| collect2: ld returned 1 exit status
+| make[1]: *** [qemu-system-mips64el] Error 1
+| make: *** [subdir-mips64el-softmmu] Error 2
+| /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so: 
+undefined reference to `gcry_cipher_setkey@GCRYPT_1.2'
+| /usr/lib/gcc/x86_64-redhat-linux/4.4.4/../../../../lib64/libgnutls.so: 
+undefined reference to `gcry_cipher_setiv@GCRYPT_1.2'
+| collect2: ld returned 1 exit status
+| make[1]: *** [qemu-system-mipsel] Error 1
+| make: *** [subdir-mipsel-softmmu] Error 2
+| FATAL: oe_runmake failed
+NOTE: package qemu-native-0.12.5-r0: task do_compile: Failed
 
 
