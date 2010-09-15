@@ -1,34 +1,34 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OvwBr-0000hS-EF
+	(envelope-from <raj.khem@gmail.com>) id 1OvwCj-0000kx-Mx
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 19:54:41 +0200
-Received: by iwn2 with SMTP id 2so303509iwn.6
+	Wed, 15 Sep 2010 19:55:35 +0200
+Received: by iwn2 with SMTP id 2so303940iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 10:53:48 -0700 (PDT)
+	Wed, 15 Sep 2010 10:54:43 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=NzF+b6kC4OdSJKsW2IRPsSeIbwnlsWaf6y9H9jtUzAE=;
-	b=q0PaYuek+oV1XeEQI029P9cip3McSKvWJods4qCIVFc4ZhKRIKhKJW6FiZc8Y8vX2V
-	t9yXEPtMUJB/K8SA+CEnRWBy535x2ZUvwxZLJJFlJAHsoSPFeQtmAQwqQ18vsvJHO3zU
-	JRBISchC9RnebWJpEXmjhi9vIvAzue6zO91j0=
+	bh=MGhu7J5r513CMxNrHTTr06tni7BCmG/M9cVugoh3tpU=;
+	b=UEHR6kVPuu95wdXTu/2ET293+JH/08Cp7sknlQI+9zF555H5iCTHeYsxq852RMiuIn
+	2WR2T2DQtK9PcHKZlQqaINlS3iI/7eFZJOnvJ8cEa60yhSm6B5hglGIcNhlV+3NqG8GQ
+	faOuw8oHmv0dbInelnkBwdP5SC2sjkK7vb3Zc=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=B2F7u6Dc+nUhRbqYzIVh96BbYka6jE0c+yEyhATr2r3UvFiMvXsZ5zI73PSmicVz3x
-	IRRV+YD6jOPmadt0psQGOLB1JKLxRFINvvCOYqn7l//g+n2uZo+BZWWWoLOSVQS3XN+H
-	Z/N2JnYVPxtSIksObIP6iWiv5O9yIj+upAGGM=
-Received: by 10.231.17.11 with SMTP id q11mr1909357iba.63.1284573228243; Wed,
-	15 Sep 2010 10:53:48 -0700 (PDT)
+	b=UgVD2bgunx2tBDLDL5F4EZ2NL8XhEpF+NUExaj+1Sb+dbr34pjAENYA/19coihg6WE
+	jq18yN29RUooHbRGr4HGbb18fpw2p8Up9b2lA/W3ai7dRqOcbPkSOWHJGoZI6OVu9GI9
+	grD+FT+w1AdAZrxIaQU6ww1bK4Cy/how251ys=
+Received: by 10.231.33.203 with SMTP id i11mr1899785ibd.8.1284573283414; Wed,
+	15 Sep 2010 10:54:43 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Wed, 15 Sep 2010 10:53:21 -0700 (PDT)
-In-Reply-To: <AANLkTima-2dyRZXqV-mzaeUM0wgk7ptnEjXjO0VPSZnk@mail.gmail.com>
-References: <AANLkTima-2dyRZXqV-mzaeUM0wgk7ptnEjXjO0VPSZnk@mail.gmail.com>
+Received: by 10.231.205.134 with HTTP; Wed, 15 Sep 2010 10:54:23 -0700 (PDT)
+In-Reply-To: <AANLkTikv=KA8R9FLpwyig+W9K-dAaSSN0Fw36dRQz7Rs@mail.gmail.com>
+References: <AANLkTikv=KA8R9FLpwyig+W9K-dAaSSN0Fw36dRQz7Rs@mail.gmail.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 15 Sep 2010 10:53:21 -0700
-Message-ID: <AANLkTikTFE-0hTBuz3WgDOTZjBJ4yCMeAVsjJAJ=_tsR@mail.gmail.com>
+Date: Wed, 15 Sep 2010 10:54:23 -0700
+Message-ID: <AANLkTikaNwhtOdmJr1UdD-XwiWPK6BiONnbF2kr_hfRJ@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -38,7 +38,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] sh: provide patch of __set_fpscr prototype
+Subject: Re: [PATCH] sh: provide patch of __set_fpscr in libc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,183 +52,151 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 17:54:41 -0000
+X-List-Received-Date: Wed, 15 Sep 2010 17:55:35 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
 Nobuhiro-san
 
-Patches look ok. Could you revise the patches and add increment PR for
-the recipes you modified and also please rebase them
+Same as you previous patch.
+ revise the patch and add increment PR for the recipes you modified
+and also rebase it
 on latest master.
 
 Thanks
+
 -Khem
 
-On Tue, Sep 14, 2010 at 12:42 AM, Nobuhiro Iwamatsu
+On Tue, Sep 14, 2010 at 12:46 AM, Nobuhiro Iwamatsu
 <nobuhiro.iwamatsu.yj@renesas.com> wrote:
-> When we compile a program that used _FPU_SETCW in sh4 in C++,
-> become the error.
-> his provides a patch revising this problem.
+> This provides a patch maintaining __fpscr_values in libc.
+> This patch is taken in in Debian and codesourcery.
+>
+> This patch is necessary to have compatibility in these and openemdedded.
 >
 > Signed-off-by: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
 > ---
 > =C2=A0recipes/eglibc/eglibc_2.10.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
 > =C2=A0recipes/eglibc/eglibc_2.11.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
 > =C2=A0recipes/eglibc/eglibc_2.12.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
-=C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 | =C2=A0 =C2=A01 +
 > =C2=A0recipes/eglibc/eglibc_2.9.bb =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
-=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A05 ++-
-> =C2=A0recipes/eglibc/files/sh4_set_fpscr.patch =C2=A0 =C2=A0 =C2=A0| =C2=
-=A0 23 +++++++++++++++++++
-> =C2=A0recipes/eglibc/files/sh4_set_fpscr_2.12.patch | =C2=A0 29 +++++++++=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 =C2=A01 +
+> =C2=A0recipes/eglibc/files/sh4_local-fpscr_values.patch | =C2=A0 32 +++++=
 ++++++++++++++++
-> =C2=A06 files changed, 58 insertions(+), 2 deletions(-)
-> =C2=A0create mode 100644 recipes/eglibc/files/sh4_set_fpscr.patch
-> =C2=A0create mode 100644 recipes/eglibc/files/sh4_set_fpscr_2.12.patch
+> =C2=A05 files changed, 36 insertions(+), 0 deletions(-)
+> =C2=A0create mode 100644 recipes/eglibc/files/sh4_local-fpscr_values.patc=
+h
 >
 > diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.b=
 b
-> index c2ed435..1f7ec02 100644
+> index 1f7ec02..0b457e1 100644
 > --- a/recipes/eglibc/eglibc_2.10.bb
 > +++ b/recipes/eglibc/eglibc_2.10.bb
-> @@ -12,6 +12,7 @@ SRC_URI =3D
+> @@ -13,6 +13,7 @@ SRC_URI =3D
 > "svn://svn.eglibc.org/branches;module=3D${EGLIBC_BRANCH};proto=3Dsvn \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://armv4t-interworking.patch=
- \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://IO-acquire-lock-fix.patch=
  \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://shorten-build-commands.pa=
 tch \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_set_fpscr.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://sh4_set_fpscr.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_local-fpscr_values.patch =
+\
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://etc/ld.so.conf \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://generate-supported.mk"
 > =C2=A0S =3D "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 > diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.b=
 b
-> index 5d9b8e2..c65bf22 100644
+> index c65bf22..1950d88 100644
 > --- a/recipes/eglibc/eglibc_2.11.bb
 > +++ b/recipes/eglibc/eglibc_2.11.bb
-> @@ -12,6 +12,7 @@ SRC_URI =3D
+> @@ -13,6 +13,7 @@ SRC_URI =3D
 > "svn://svn.eglibc.org/branches;module=3D${EGLIBC_BRANCH};proto=3Dsvn \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://eglibc-svn-arm-lowlevello=
-ck-include-tls.patch \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://IO-acquire-lock-fix.patch=
  \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://shorten-build-commands.pa=
 tch \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_set_fpscr.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://sh4_set_fpscr.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_local-fpscr_values.patch =
+\
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://etc/ld.so.conf \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://generate-supported.mk"
 > =C2=A0S =3D "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 > diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.b=
 b
-> index c6b0131..8dbcde0 100644
+> index 8dbcde0..a76d630 100644
 > --- a/recipes/eglibc/eglibc_2.12.bb
 > +++ b/recipes/eglibc/eglibc_2.12.bb
-> @@ -12,6 +12,7 @@ SRC_URI =3D
+> @@ -13,6 +13,7 @@ SRC_URI =3D
 > "svn://svn.eglibc.org/branches;module=3D${EGLIBC_BRANCH};proto=3Dsvn \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://eglibc-svn-arm-lowlevello=
-ck-include-tls.patch \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://IO-acquire-lock-fix.patch=
  \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://shorten-build-commands.pa=
 tch \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_set_fpscr_2.12.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://sh4_set_fpscr_2.12.patch =
+\
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_local-fpscr_values.patch =
+\
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://etc/ld.so.conf \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://generate-supported.mk"
 > =C2=A0S =3D "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 > diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
-> index a7d9aed..5df7eb8 100644
+> index 5df7eb8..3c0d1e1 100644
 > --- a/recipes/eglibc/eglibc_2.9.bb
 > +++ b/recipes/eglibc/eglibc_2.9.bb
-> @@ -9,9 +9,10 @@ SRCREV=3D"10153"
-> =C2=A0EGLIBC_BRANCH=3D"eglibc-2_9"
-> =C2=A0SRC_URI =3D "svn://svn.eglibc.org/branches;module=3D${EGLIBC_BRANCH=
-};proto=3Dsvn \
-> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://eglibc-svn-arm-lowlevello=
-ck-include-tls.patch \
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://armv4t-interworking.patch \
-> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://IO-acquire-lock-fix.patch \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://armv4t-interworking.patch \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://IO-acquire-lock-fix.patch \
+> @@ -13,6 +13,7 @@ SRC_URI =3D
+> "svn://svn.eglibc.org/branches;module=3D${EGLIBC_BRANCH};proto=3Dsvn \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://IO-acquire-lock-fix.patch=
+ \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://shorten-build-commands.pa=
 tch \
-> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_set_fpscr.patch \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://sh4_set_fpscr.patch \
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 file://sh4_local-fpscr_values.patch =
+\
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://etc/ld.so.conf \
 > =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0file://generate-supported.mk"
 > =C2=A0S =3D "${WORKDIR}/${EGLIBC_BRANCH}/libc"
-> diff --git a/recipes/eglibc/files/sh4_set_fpscr.patch
-> b/recipes/eglibc/files/sh4_set_fpscr.patch
+> diff --git a/recipes/eglibc/files/sh4_local-fpscr_values.patch
+> b/recipes/eglibc/files/sh4_local-fpscr_values.patch
 > new file mode 100644
-> index 0000000..f3fd5c1
+> index 0000000..1685f6f
 > --- /dev/null
-> +++ b/recipes/eglibc/files/sh4_set_fpscr.patch
-> @@ -0,0 +1,23 @@
-> +# http://sourceware.org/ml/libc-alpha/2009-12/msg00009.html
-> +# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D565369
+> +++ b/recipes/eglibc/files/sh4_local-fpscr_values.patch
+> @@ -0,0 +1,32 @@
 > +---
-> + sysdeps/sh/sh4/fpu/fpu_control.h | =C2=A0 =C2=A08 ++++++++
-> + 1 file changed, 8 insertions(+)
+> + sysdeps/unix/sysv/linux/sh/Versions | =C2=A0 =C2=A01 +
+> + sysdeps/unix/sysv/linux/sh/sysdep.S | =C2=A0 11 +++++++++++
+> + 2 files changed, 12 insertions(+)
 > +
-> +--- a/sysdeps/sh/sh4/fpu/fpu_control.h
-> ++++ b/sysdeps/sh/sh4/fpu/fpu_control.h
-> +@@ -45,6 +45,14 @@
-> + #define _FPU_GETCW(cw) __asm__ ("sts fpscr,%0" : "=3Dr" (cw))
+> +--- a/sysdeps/unix/sysv/linux/sh/Versions
+> ++++ b/sysdeps/unix/sysv/linux/sh/Versions
+> +@@ -2,6 +2,7 @@
+> + =C2=A0 GLIBC_2.2 {
+> + =C2=A0 =C2=A0 # functions used in other libraries
+> + =C2=A0 =C2=A0 __xstat64; __fxstat64; __lxstat64;
+> ++ =C2=A0 =C2=A0__fpscr_values;
 > +
-> + #if defined __GNUC__
-> ++/* Allow the use in C++ code. =C2=A0*/
-> ++#ifdef __cplusplus
-> ++extern "C" {
-> ++#endif
-> ++extern void __set_fpscr (unsigned long);
-> ++#ifdef __cplusplus
-> ++}
-> ++#endif =C2=A0/* C++ */
-> + #define _FPU_SETCW(cw) __set_fpscr ((cw))
-> + #else
-> + #define _FPU_SETCW(cw) __asm__ ("lds %0,fpscr" : : "r" (cw))
-> diff --git a/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
-> b/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
-> new file mode 100644
-> index 0000000..19cccc0
-> --- /dev/null
-> +++ b/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
-> @@ -0,0 +1,29 @@
-> +diff --git a/sysdeps/sh/sh4/fpu/fpu_control.h
-> b/sysdeps/sh/sh4/fpu/fpu_control.h
-> +index d1be46d..3ea37d3 100644
-> +--- a/sysdeps/sh/sh4/fpu/fpu_control.h
-> ++++ b/sysdeps/sh/sh4/fpu/fpu_control.h
-> +@@ -1,5 +1,5 @@
-> + /* FPU control word definitions. =C2=A0SH version.
-> +- =C2=A0 Copyright (C) 1999, 2000, 2009 Free Software Foundation, Inc.
-> ++ =C2=A0 Copyright (C) 1999, 2000, 2009, 2010 Free Software Foundation, =
-Inc.
-> + =C2=A0 =C2=A0This file is part of the GNU C Library.
+> + =C2=A0 =C2=A0 # a*
+> + =C2=A0 =C2=A0 alphasort64;
+> +--- a/sysdeps/unix/sysv/linux/sh/sysdep.S
+> ++++ b/sysdeps/unix/sysv/linux/sh/sysdep.S
+> +@@ -32,3 +32,14 @@
 > +
-> + =C2=A0 =C2=A0The GNU C Library is free software; you can redistribute i=
-t and/or
-> +@@ -46,7 +46,14 @@ typedef unsigned int fpu_control_t;
-> +
-> + #if defined __GNUC__
-> + /* GCC provides this function. =C2=A0*/
-> ++/* Allow the use in C++ code. =C2=A0*/
-> ++#ifdef __cplusplus
-> ++extern "C" {
-> ++#endif
-> + extern void __set_fpscr (unsigned long);
-> ++#ifdef __cplusplus
-> ++}
-> ++#endif =C2=A0/* C++ */
-> + #define _FPU_SETCW(cw) __set_fpscr ((cw))
-> + #else
-> + #define _FPU_SETCW(cw) __asm__ ("lds %0,fpscr" : : "r" (cw))
-> +--
-> +1.7.1
-> +
+> + #define __syscall_error __syscall_error_1
+> + #include <sysdeps/unix/sh/sysdep.S>
+> ++
+> ++ =C2=A0 =C2=A0 =C2=A0 .data
+> ++ =C2=A0 =C2=A0 =C2=A0 .align 3
+> ++ =C2=A0 =C2=A0 =C2=A0 .globl ___fpscr_values
+> ++ =C2=A0 =C2=A0 =C2=A0 .type ___fpscr_values, @object
+> ++ =C2=A0 =C2=A0 =C2=A0 .size ___fpscr_values, 8
+> ++___fpscr_values:
+> ++ =C2=A0 =C2=A0 =C2=A0 .long 0
+> ++ =C2=A0 =C2=A0 =C2=A0 .long 0x80000
+> ++weak_alias (___fpscr_values, __fpscr_values)
+> ++
 > --
 > 1.7.1
 >
