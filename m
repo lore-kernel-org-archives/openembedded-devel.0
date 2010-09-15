@@ -1,47 +1,31 @@
-Received: from mail-ww0-f43.google.com ([74.125.82.43])
+Received: from mail.kernelconcepts.de ([212.60.202.196])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <kergoth@gmail.com>) id 1OvvDw-0004c7-22
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1OvvIR-0005jN-QI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 18:52:44 +0200
-Received: by wwi14 with SMTP id 14so466540wwi.24
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 09:51:54 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:sender:received
-	:in-reply-to:references:from:date:x-google-sender-auth:message-id
-	:subject:to:content-type;
-	bh=Jk7BXjdMRaTING65QFns4e5Ld6BFd5N9r0Dhe+GikYk=;
-	b=IGj2nMKefJ62Cq4T9Kz1KvYFOYpNDamjJU48Aj+ULhwI4YLxbbTWcT4qd7ZtnA5YE6
-	poBKl9JR+SIhll5dLItnBqkMiExPozLsQcajULqhZCfAPtP1+m3CMt75+2rg22U9iz19
-	4zRE2p9QUZWJXG08SVQNFUkOZZRFDiSzcI8VU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:sender:in-reply-to:references:from:date
-	:x-google-sender-auth:message-id:subject:to:content-type;
-	b=gmxBn5cLUtBfAUWO6Hc5FAdKhCqtsoRPjD/sk2yJtZ1CEhVnbwvM75KfXikKNuqnfu
-	K7V1R8y/smkFCXQc07iT6yzFF7ugyEO2BzNYlGdGeSDuCOhtxyrxQWXm/V7riObHB2+W
-	XcQfrUDtWaEt8GdgJB1z682ncHu6BnWxRIDSs=
-Received: by 10.227.155.3 with SMTP id q3mr1568805wbw.130.1284569514778; Wed,
-	15 Sep 2010 09:51:54 -0700 (PDT)
+	Wed, 15 Sep 2010 18:57:24 +0200
+Received: from [192.168.2.131] by mail.kernelconcepts.de with esmtpsa
+	(TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32) (Exim 4.69)
+	(envelope-from <florian.boor@kernelconcepts.de>) id 1OvvR5-0001xr-ON
+	for openembedded-devel@lists.openembedded.org;
+	Wed, 15 Sep 2010 19:06:19 +0200
+Message-ID: <4C90FAC3.6000602@kernelconcepts.de>
+Date: Wed, 15 Sep 2010 18:56:35 +0200
+From: Florian Boor <florian.boor@kernelconcepts.de>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Sender: kergoth@gmail.com
-Received: by 10.216.237.168 with HTTP; Wed, 15 Sep 2010 09:51:34 -0700 (PDT)
-In-Reply-To: <1284567574.3890.36.camel@mattotaupa>
-References: <1284567574.3890.36.camel@mattotaupa>
-From: Chris Larson <clarson@kergoth.com>
-Date: Wed, 15 Sep 2010 09:51:34 -0700
-X-Google-Sender-Auth: QpecVpIZ2k67UbYGmPQPfh5h3Zw
-Message-ID: <AANLkTinH0UTOuT6uSk+UL1aF9=C7f-4BqHMwydE0qcHS@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.43
-X-SA-Exim-Mail-From: kergoth@gmail.com
+References: <1284124065.18010.3970.camel@rex>
+In-Reply-To: <1284124065.18010.3970.camel@rex>
+X-Enigmail-Version: 0.95.7
+X-SA-Exim-Connect-IP: 212.60.202.196
+X-SA-Exim-Mail-From: florian.boor@kernelconcepts.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: Re: Automatically utilize of `mercurial-native`?
+Subject: Re: OEDEM 2010 - Confirmed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,29 +39,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 16:52:44 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Wed, 15 Sep 2010 16:57:24 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-On Wed, Sep 15, 2010 at 9:19 AM, Paul Menzel <
-paulepanter@users.sourceforge.net> wrote:
+Hi all!
 
-> Dear OE folks,
->
->
-> Eric added a mercurial-native recipe in 41ee3c [1] to eliminate the
-> necessity to have Mercurial installed on the build host.
->
-> Is there a way to build this when Mercurial is not installed on the
-> build host? Or do I have to build it manually?
->
->    bitbake mercurial-native
+Richard Purdie schrieb:
+> I'd like to announce an OE Developers Meeting in Cambridge, UK on
+> October 29th and 30th. This is the two days after ELC-E so people can
+> combine it with thee conference if appropriate. The Venue is still to be
+> determined but we have some sponsorship from Intel to find somewhere. 
 
+That's great news... looking forward to it.
 
-See http://patchwork.openembedded.org/patch/2886/
+> Members and non-members of the OE e.V. are welcome. It is likely that an
+> e.V. general assembly will be held during OEDEM but that is for the e.V.
+> board to decide and announce.
+
+We will do this.
+
+I think I should emphasize that all people who would like to support the OE
+project are invited (not only developers even if this is the focus).
+
+Greetings
+
+Florian
+
 -- 
-Christopher Larson
-clarson at kergoth dot com
-Founder - BitBake, OpenEmbedded, OpenZaurus
-Maintainer - Tslib
-Senior Software Engineer, Mentor Graphics
+The dream of yesterday                  Florian Boor
+is the hope of today                    Tel: +49 271-771091-15
+and the reality of tomorrow.            Fax: +49 271-771091-19
+[Robert Hutchings Goddard, 1904]        florian.boor@kernelconcepts.de
+                                        http://www.kernelconcepts.de/en
+
 
