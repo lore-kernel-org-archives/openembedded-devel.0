@@ -1,37 +1,37 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-gw0-f47.google.com ([74.125.83.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OvwQr-00005A-7c
+	(envelope-from <raj.khem@gmail.com>) id 1OvwTj-0003As-Fg
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 20:10:09 +0200
-Received: by gxk10 with SMTP id 10so164911gxk.6
+	Wed, 15 Sep 2010 20:13:12 +0200
+Received: by gwb10 with SMTP id 10so164203gwb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 11:09:19 -0700 (PDT)
+	Wed, 15 Sep 2010 11:12:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=RXoR9DCT7hO2itunEjjPsOH4OkgSmebdZhvDP2PN4fA=;
-	b=mqPe+JZKLih6YO/BQQ0oE4/266JCdNHjGhGDfQmZZCqvi5pRZ6qfvevPWL+dGUedfL
-	K+WptRgBIqX+xPNuE3pwre0ECuSgvijBbkTqq99zaP75P6uXjRjdLd2SV1jUZQIoprob
-	JbZtl8UnllVapohxDvbtdJyAaYmASOPpJxcTU=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=f2JqN7TGcXYJ0G7I9eenjV13eVL3POFUKDfbDgYflVQ=;
+	b=mBPAU0/VYlmMgK0c2vw2IN4Lp0D6O2mqZ3G+KSkrqf9VbDxmyO5kCUsAi66VPAnOoG
+	RpXMD5puqcqBRF41w4N6OvvHSorZ2cm3XWL/KTzm7rds5tmUA/CQfRQyS/mueV8OkfCI
+	5DqVoklVC5THB+8tF1NE8XzEUdgVuCfZGBuEM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=v5UcH99WSVxvOKOFAGsitxjxCS5hFPnePgTblxE0xtZ3iF/G4GJvCVRPNtFrD25oob
-	C+p7GOtu3/Y4Mfj1QsTjN5ERnC5hcX2wOV/gjTRtZgsE6oSlvuaKitC7xctxyKeUFllt
-	umECfKVHr11burvBUdzd9N3Hivd+Ld2NgeXR8=
-Received: by 10.151.133.6 with SMTP id k6mr2220999ybn.402.1284574158448; Wed,
-	15 Sep 2010 11:09:18 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=V3A9F+PB+NQOwT46HY/xEJdBuZaTxL28WVG0qJxDqoGBt3T3uqgkomzCojVwbgHOEY
+	ibsO9q0nTCYXTGDJxqAg+RmIAg1DIWBWwCFoZwIO3YdKB69aTOq28iIEH/lmXySgeU1H
+	5/WqrKNzqU0CisVTDJgW6qel8xRvdWc8m/hcQ=
+Received: by 10.150.200.9 with SMTP id x9mr2274739ybf.66.1284574336104; Wed,
+	15 Sep 2010 11:12:16 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.205.134 with HTTP; Wed, 15 Sep 2010 11:08:58 -0700 (PDT)
-In-Reply-To: <4C90B5E6.1070402@balister.org>
-References: <4C90130C.3040303@gmail.com>
-	<AANLkTi=ZF3uT1Y6=yy_+wAizh64KYv0nRjq9BoFZN6E2@mail.gmail.com>
-	<4C90B5E6.1070402@balister.org>
+Received: by 10.231.205.134 with HTTP; Wed, 15 Sep 2010 11:11:45 -0700 (PDT)
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4F28@deimsg40.de.net.world>
+References: <12925243.239881284555095548.JavaMail.defaultUser@defaultHost>
+	<0B51A1E7C61D114DAE6FC10B0FD0ABA5019B4F28@deimsg40.de.net.world>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 15 Sep 2010 11:08:58 -0700
-Message-ID: <AANLkTim9Tt1rqMPkz2YFYEr296_XNwT7GMfBCBLCmV5f@mail.gmail.com>
+Date: Wed, 15 Sep 2010 11:11:45 -0700
+Message-ID: <AANLkTinOUv5541b=mS8At=3igF5s6R=jkCrayt+W42Na@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
+X-SA-Exim-Connect-IP: 74.125.83.47
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -39,7 +39,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] p4: remove broken and 4 years old recipes.
+Subject: Re: net-snmp trouble
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,39 +53,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 18:10:09 -0000
+X-List-Received-Date: Wed, 15 Sep 2010 18:13:12 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 15, 2010 at 5:02 AM, Philip Balister <philip@balister.org> wrote:
-> On 09/15/2010 02:32 AM, Frans Meulenbroeks wrote:
->>
->> 2010/9/15 Graham Gower<graham.gower@gmail.com>:
->>>
->>> Recipes are broken for all architectures except one (probably arm)
->>> because the files in the SRC_URI depend on TARGET_ARCH and the md5/sha256
->>> are presumably valid only for one of these.
->>>
->>> Anyone wanting perforce should submit new recipes for new perforce
->>> versions.
->>>
->>> Signed-off-by: Graham Gower<graham.gower@gmail.com>
->>
->> Agree with the reasoning of Graham, so:
->>
->> Acked-by: Frans Meulenbroeks<fransmeulenbroeks@gmail.com>
->>
->> Actually I am not too keen on having recipes that just "install" an
->> externally downloaded binary blob
->> (and functionally speaking this does not seem to be something for an
->> embedded system either)
+On Wed, Sep 15, 2010 at 6:19 AM, Hauser, Wolfgang (external)
+<Wolfgang.Hauser.external@eads.com> wrote:
+> Hello,
 >
-> I will have a need for a recipe to install binary blobs (fpga bin files)
-> into a file system at some point. So this class recipes are needed.
+>>IMAGE_INSTALL +=3D "\
+>> =C2=A0 =C2=A0 =C2=A0 openssh =C2=A0 =C2=A0 =C2=A0 =C2=A0 \
+>>nano =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \
+>> =C2=A0 =C2=A0 =C2=A0 file =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\
+>> =C2=A0 =C2=A0 =C2=A0 strace =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\
+>> =C2=A0 =C2=A0 =C2=A0 apache2 =C2=A0 =C2=A0 =C2=A0 =C2=A0 \
+>> =C2=A0 =C2=A0 =C2=A0 modphp =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\
+>> =C2=A0 =C2=A0 =C2=A0 parted =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0\
+>> =C2=A0 =C2=A0 =C2=A0 net-snmp =C2=A0 =C2=A0 =C2=A0 =C2=A0\
+>> =C2=A0 =C2=A0 =C2=A0 "
 >
+> simply use packages
+>
+> net-snmp-client
+> net-snmp-mib
+>
+> for a client installation
+>
+> net-snmp-server
+> net-snmp-mib
+>
+> for a server installation
+>
+> The net-snmp recipe do not provide a net-snmp package, it provides the
+> seen subpackages which may be installed.
 
-do you need these m4 recipes ?
 
-> Philip
+its the difference between recipe name and package names. Recipes
+could generate packages with same or different names and it could
+generate
+multiple packages from one recipe.
+
+>
+> Regards
+>
+> Wolfgang
 >
 > _______________________________________________
 > Openembedded-devel mailing list
@@ -95,7 +106,7 @@ do you need these m4 recipes ?
 
 
 
--- 
+--=20
 -Khem
 
 
