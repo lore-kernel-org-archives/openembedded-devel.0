@@ -1,32 +1,41 @@
-Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <philip@balister.org>) id 1Ovwbv-0000Ul-C2
+	(envelope-from <coolaj86@gmail.com>) id 1Ovwna-0000ki-Ft
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 20:21:38 +0200
-Received: (qmail 20890 invoked by uid 1003); 15 Sep 2010 18:20:45 -0000
-Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
-	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
-	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
-	15 Sep 2010 18:20:44 -0000
-Message-ID: <4C910E7B.8030601@balister.org>
-Date: Wed, 15 Sep 2010 14:20:43 -0400
-From: Philip Balister <philip@balister.org>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.2.9) Gecko/20100907 Fedora/3.1.3-1.fc13 Thunderbird/3.1.3
+	Wed, 15 Sep 2010 20:33:38 +0200
+Received: by eyb7 with SMTP id 7so321036eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Wed, 15 Sep 2010 11:32:51 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:from:date
+	:message-id:subject:to:content-type;
+	bh=XZxPY6HzjvcDQdiGVdAHrqlBpM7BOhn8zM9FIvP6uoY=;
+	b=k8Y4sUFedIFd9SN6J3Uf/Ex+80fK80Gr4GZamufnl01tKZs71eyk0LLlKOVIydJ0nG
+	Kwpm5uXdIMRLWAfgzCADht9EQcDmPvBW0OLccQ+2x/qIv6KaRaIWrsXwKtdL8R1tbYY3
+	p0d0Hd7wbHWxDCsf+yxIZv/ZflJ/RC80y0cv8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:from:date:message-id:subject:to:content-type;
+	b=YyG4K1OBQocxSiUryOUlUTM9WeAqqKyuluqeTF6uW0T5vBX087H7jtkuBDWwV/aegq
+	gvLXvPhy23vvMOxq/hMapBuPWHPlUqmM20OsSQbptqnAeFbvriEA8cOm8yXVT9UlDxAh
+	mDxwth9xLORlhOr/ALnyER90t9io/5n5qo2t4=
+Received: by 10.223.104.199 with SMTP id q7mr944858fao.6.1284575571162; Wed,
+	15 Sep 2010 11:32:51 -0700 (PDT)
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
-References: <4C90130C.3040303@gmail.com>	<AANLkTi=ZF3uT1Y6=yy_+wAizh64KYv0nRjq9BoFZN6E2@mail.gmail.com>	<4C90B5E6.1070402@balister.org>
-	<AANLkTim9Tt1rqMPkz2YFYEr296_XNwT7GMfBCBLCmV5f@mail.gmail.com>
-In-Reply-To: <AANLkTim9Tt1rqMPkz2YFYEr296_XNwT7GMfBCBLCmV5f@mail.gmail.com>
-X-SA-Exim-Connect-IP: 216.168.135.169
-X-SA-Exim-Mail-From: philip@balister.org
+Received: by 10.223.121.5 with HTTP; Wed, 15 Sep 2010 11:32:31 -0700 (PDT)
+From: AJ ONeal <coolaj86@gmail.com>
+Date: Wed, 15 Sep 2010 12:32:31 -0600
+Message-ID: <AANLkTi=vSWgp8MpCRDOhE=3x_d2WPgvKsc4Qy9Y5j7O1@mail.gmail.com>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: coolaj86@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] p4: remove broken and 4 years old recipes.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: vimrc and vim defaults
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,55 +49,14 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 18:21:38 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Wed, 15 Sep 2010 18:33:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On 09/15/2010 02:08 PM, Khem Raj wrote:
-> On Wed, Sep 15, 2010 at 5:02 AM, Philip Balister<philip@balister.org>  wrote:
->> On 09/15/2010 02:32 AM, Frans Meulenbroeks wrote:
->>>
->>> 2010/9/15 Graham Gower<graham.gower@gmail.com>:
->>>>
->>>> Recipes are broken for all architectures except one (probably arm)
->>>> because the files in the SRC_URI depend on TARGET_ARCH and the md5/sha256
->>>> are presumably valid only for one of these.
->>>>
->>>> Anyone wanting perforce should submit new recipes for new perforce
->>>> versions.
->>>>
->>>> Signed-off-by: Graham Gower<graham.gower@gmail.com>
->>>
->>> Agree with the reasoning of Graham, so:
->>>
->>> Acked-by: Frans Meulenbroeks<fransmeulenbroeks@gmail.com>
->>>
->>> Actually I am not too keen on having recipes that just "install" an
->>> externally downloaded binary blob
->>> (and functionally speaking this does not seem to be something for an
->>> embedded system either)
->>
->> I will have a need for a recipe to install binary blobs (fpga bin files)
->> into a file system at some point. So this class recipes are needed.
->>
->
-> do you need these m4 recipes ?
+Why does vimrc go in /usr/share/vim/vimrc rather than /etc/vimrc like on
+other distros?
 
-My comments where of a general nature, not about the specific case.
+Would it be a sin to include some "reasonable defaults" so that it's
+actually the vim that people expect rather than vi?
 
-Philip
-
-
->
->> Philip
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
->
->
->
-
+AJ ONeal
 
