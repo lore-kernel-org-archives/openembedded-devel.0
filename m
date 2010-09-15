@@ -1,43 +1,31 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
+Received: from smtp5-g21.free.fr ([212.27.42.5])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OvzOs-0003Ui-U7
+	(envelope-from <ydirson@free.fr>) id 1OvzPA-0003WW-LP
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 23:20:20 +0200
-Received: by qwa26 with SMTP id 26so191208qwa.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 14:19:16 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=f+oUYbZ+VQwvW/JiVlkWdDEdzr5Dva2vLD36rGmqURM=;
-	b=ctTZx1weCrv0IYStVgLPev6TDroiNrIsYx8WneVCWQFm5OWsIYiu8uyKVV6ZO+RPkJ
-	XjAt7GsjqdQxweLFjPkxATw8NL/rEUlPukJ53KYrU7pxUfvebhrOSI1AR1bQClwqQzZt
-	1qex7x7fXI1GuBeWxtGAVLKKtd3FCwwSWJHOY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=pNlCIt6P/DiFdg08vJrBmxv3giq1jjN2rIP8yjGPQVO6022ov+mwcx9X8tB4vKFVPr
-	RX0D62ZVQAaNb9IQY/5aalL/F/RhCEKOqy9hfJNvM2OzM3j+K72+RaOZvdAdPuaaqZkA
-	U8TSa/ChDFgtqLF2W08QUGr898mUynfblbGYI=
-MIME-Version: 1.0
-Received: by 10.229.11.32 with SMTP id r32mr1298352qcr.242.1284585544432; Wed,
-	15 Sep 2010 14:19:04 -0700 (PDT)
-Received: by 10.229.71.78 with HTTP; Wed, 15 Sep 2010 14:19:04 -0700 (PDT)
-In-Reply-To: <201009152053.55754.pieterg@gmx.com>
-References: <201009152053.55754.pieterg@gmx.com>
-Date: Wed, 15 Sep 2010 23:19:04 +0200
-Message-ID: <AANLkTiniT0yN9D3x=ksGJRBRkdmKX1pVM8964BaTTZot@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Wed, 15 Sep 2010 23:20:37 +0200
+Received: from home.lan (unknown [81.57.214.146])
+	by smtp5-g21.free.fr (Postfix) with ESMTP id AA3CBD480EE;
+	Wed, 15 Sep 2010 23:19:45 +0200 (CEST)
+Received: from yann by home.lan with local (Exim 4.72)
+	(envelope-from <ydirson@free.fr>)
+	id 1OvzWG-0007yz-3p; Wed, 15 Sep 2010 23:27:56 +0200
+From: Yann Dirson <ydirson@altern.org>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Wed, 15 Sep 2010 23:27:46 +0200
+Message-Id: <1284586068-30655-1-git-send-email-ydirson@altern.org>
+X-Mailer: git-send-email 1.7.2.3
+In-Reply-To: <20100803225018.GG4752@home.lan>
+References: <20100803225018.GG4752@home.lan>
+X-SA-Exim-Connect-IP: 212.27.42.5
+X-SA-Exim-Mail-From: ydirson@free.fr
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: using klibc shared objects
+Cc: Yann Dirson <ydirson@altern.org>
+Subject: [PATCH v2 1/3] git: replace remaining broken hardlinks with symlinks.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,54 +39,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 21:20:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Sep 2010 21:20:37 -0000
 
-On Wed, Sep 15, 2010 at 8:53 PM, pieterg <pieterg@gmx.com> wrote:
-> I have an initramfs image which contains a few klibc utils, and a custom
-> executable (which displays a progress bar).
-> I'm not using klibc-static, because the total size of all static klibc utils
-> and the custom binary is much larger than klibc.so plus dynamically linked
-> binaries.
+Signed-off-by: Yann Dirson <ydirson@altern.org>
+---
+ recipes/git/git_1.7.0.2.bb |    8 ++++++--
+ 1 files changed, 6 insertions(+), 2 deletions(-)
 
-This can happen, it all depends on how many binaries.
+diff --git a/recipes/git/git_1.7.0.2.bb b/recipes/git/git_1.7.0.2.bb
+index be7a526..0ca44b5 100644
+--- a/recipes/git/git_1.7.0.2.bb
++++ b/recipes/git/git_1.7.0.2.bb
+@@ -14,14 +14,18 @@ RDEPENDS_${PN} = "perl perl-module-file-path cpio findutils sed"
+ # Dropbear ssh needs a wrapper script, so install openssh-ssh to make it work out of the box
+ RRECOMMENDS_${PN} = "openssh-ssh"
+ 
+-PR = "r7"
++PR = "r8"
+ 
+ do_install_append() {
+ 	# Fix broken hardlinks
+ 	for gitprog in git-receive-pack git-upload-archive ; do
+-		rm ${D}${bindir}/$gitprog 
++		rm ${D}${bindir}/$gitprog
+ 		ln -sf ${bindir}/git ${D}${bindir}/$gitprog
+ 	done
++	for gitprog in git-cvsserver git-shell git-upload-pack ; do
++		rm ${D}${libexecdir}/git-core/$gitprog
++		ln -sf ${bindir}/$gitprog ${D}${libexecdir}/git-core/$gitprog
++	done
+ 	rm ${D}${libexecdir}/git-core/git && ln -sf ${bindir}/git ${D}${libexecdir}/git-core/git
+ }
+ 
+-- 
+1.7.2.3
 
->
-> However, with one of the recent klibc recipe rewrites, the klibc package now
-> contains ~5.3MB of header files. These end up in my initramfs image, making
-> it quite big.
->
-> What would be the best solution (if I don't want to switch to static
-> linking)? Should we perhaps move the header files to klibc-dev?
->
-> Rgds, Pieter
-
-In the first version there was an error about this.
-Pls retry and pull klibc_1.5.20-r1 which has been fixed (it seems).
-
-Regards
-
-Andrea
-...
-RDEPENDS_klibc:..
-PKG_klibc: klibc
-FILES_klibc: /lib/klibc-*.so
-
-...
-RRECOMMENDS_klibc-dev: klibc-dev
-PKG_klibc-dev: klibc-dev
-ALLOW_EMPTY_klibc-dev: 1
-FILES_klibc-dev: /lib/klibc.so                    /lib/klibc/lib/*
-      /lib/klibc/include/*                    /bin/klcc
-
-
-
-
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
 
 
