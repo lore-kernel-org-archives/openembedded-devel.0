@@ -1,43 +1,33 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OvlYG-0008SU-NY
+	(envelope-from <sledz@dresearch.de>) id 1Ovpm6-0003or-1w
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 08:33:06 +0200
-Received: by iwn2 with SMTP id 2so6837804iwn.6
+	Wed, 15 Sep 2010 13:03:39 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id C742F491278
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 14 Sep 2010 23:32:17 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=KuXF8s0PurBSTGW+gQw7pwlsBteWqrqf1tjxVng3jdg=;
-	b=KGyybrKhUpV4KFhTywoqOyyDEZlIyDjsjXqgJPi3hNKx18fvvkKSw/C6bTw6em2y9G
-	6gbccIVetkd6p2muOTftMmVCe4kO1ekjLEfFDoi0UaT8Wr/cVBXM6s0cwQabqLP/uBEm
-	AD8e9lTM7rG8DFo69uwim6agzFgHcwM/cMrzY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=t5NtO/QNYA1yDAMFw6Pcv++FlKmlmuMycJvOruxIBAIX83XLK677WXy9uLOGI/39zq
-	cjUKiANOGVwsWkAb55k3OGFNpsDL6jkQfg0wIRThvlgvftpjuVK0FL4zEtuwxVGYGB2D
-	MRmv0tqqvOqab/R3KDBWNnGQux+YNBoBLeHs0=
+	Wed, 15 Sep 2010 13:02:50 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Wed, 15 Sep 2010 13:02:50 +0200
+Message-ID: <4C90A7E1.4030401@dresearch.de>
+Date: Wed, 15 Sep 2010 13:02:57 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100825 Lightning/1.0b2 Thunderbird/3.1.3
 MIME-Version: 1.0
-Received: by 10.231.182.196 with SMTP id cd4mr1080815ibb.191.1284532335832;
-	Tue, 14 Sep 2010 23:32:15 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Tue, 14 Sep 2010 23:32:15 -0700 (PDT)
-In-Reply-To: <4C90130C.3040303@gmail.com>
-References: <4C90130C.3040303@gmail.com>
-Date: Wed, 15 Sep 2010 08:32:15 +0200
-Message-ID: <AANLkTi=ZF3uT1Y6=yy_+wAizh64KYv0nRjq9BoFZN6E2@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+X-OriginalArrivalTime: 15 Sep 2010 11:02:50.0845 (UTC)
+	FILETIME=[89DD18D0:01CB54C5]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] p4: remove broken and 4 years old recipes.
+Subject: fatal: The remote end hung up unexpectedly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,27 +41,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 06:33:08 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Sep 2010 11:03:39 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/9/15 Graham Gower <graham.gower@gmail.com>:
-> Recipes are broken for all architectures except one (probably arm)
-> because the files in the SRC_URI depend on TARGET_ARCH and the md5/sha256
-> are presumably valid only for one of these.
->
-> Anyone wanting perforce should submit new recipes for new perforce versions.
->
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Can't push my changes today. :(
 
-Agree with the reasoning of Graham, so:
+> git push -v upstream
+Pushing to git://git.openembedded.net/openembedded
+fatal: The remote end hung up unexpectedly
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Steffen
 
-Actually I am not too keen on having recipes that just "install" an
-externally downloaded binary blob
-(and functionally speaking this does not seem to be something for an
-embedded system either)
-
-FM
 
 
