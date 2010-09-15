@@ -1,43 +1,44 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ovz55-0007mm-Av
+	(envelope-from <raj.khem@gmail.com>) id 1OvzOh-0003Uh-JX
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 22:59:53 +0200
-Received: by gxk10 with SMTP id 10so221944gxk.6
+	Wed, 15 Sep 2010 23:20:08 +0200
+Received: by pxi11 with SMTP id 11so199252pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 13:58:54 -0700 (PDT)
+	Wed, 15 Sep 2010 14:19:17 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=Wad8iMDJOWffc6FhwfR3hDf5FV3cugQmTSnk4x2qxoc=;
-	b=jBsrHfeYB82+yZ7SZs6iHWTlduKjCMtmO1xeBsDOG/sCf1D0/DAqr4z9kMnUmJ0qZB
-	475jJbKDJthhq/Ti64nQd9UnkHWWRBE6mFeM06tEqLtwb196uS1nGjA+1ONSc6Hq1Na4
-	Umq9sN7aaaHv4Oyy/lkWDIl7NqJ5DX8B4b/ak=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=AHuL6xbSidlUxYnow7xhKctQljIiS1vvFrOmph7DHzw=;
+	b=LQzw0OIDgWuPG5VRl3LpOAhaviscHakPu/uk8jMVFAu+nJPbwXDJLNkEdd0i/lJqcM
+	Fczhi44lzQY1wl6mo04CrUW9ZsLsdGoauRWv4amoPQYIjrwhe7w2sJHRsIe1CWYdT9GR
+	thv0YA7rDxnQl7j/901EIMUAyNv/IufdRKcjM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=L3LQP8iveVPkUsIzb1YnAJ3ZzGNRMV9B84+PLKVc6yLiDerPX/JuXGd9GEa3a9ynjy
-	v+EBB8lBZetepvS6TlUHaP0+XA4RdZf5iDatUXndROPCTLhBiTz8di8O9fsFeAb0vCDR
-	SHs6FyQwfmAh17JwHdnNUmd5k3HNT0LiPBZcI=
-MIME-Version: 1.0
-Received: by 10.100.196.9 with SMTP id t9mr2436799anf.109.1284584333879; Wed,
-	15 Sep 2010 13:58:53 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Wed, 15 Sep 2010 13:58:53 -0700 (PDT)
-In-Reply-To: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
-References: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
-Date: Wed, 15 Sep 2010 22:58:53 +0200
-Message-ID: <AANLkTi=-fU5zDiXu0P7Rj=nz0m985qd2hJDcdCJ3s+Bu@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=r8uPV3Bq2Wo995BalYiyl7pJ5T8683hXmdVN2tpYR0Dcoyo1B5BBjem9TacSNXBGoo
+	qSqHtw6gggQj5kOjuV/5GpTu5iP6hDyy0jCrGFfyiuzMzZULQ05NtngO2F1hjlREWS4t
+	/MyrBcS4iciZv+FRlSUyQJPjdv/RVBdkUoaSE=
+Received: by 10.114.24.3 with SMTP id 3mr2524670wax.31.1284585557246;
+	Wed, 15 Sep 2010 14:19:17 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id c24sm3051377wam.7.2010.09.15.14.19.15
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Wed, 15 Sep 2010 14:19:16 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Wed, 15 Sep 2010 14:19:08 -0700
+Message-Id: <1284585548-32430-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: melo git outage
+Subject: [PATCH] openmoko2.bbclass: Fix openmoko_two_get_license and openmoko_two_get_subdir
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,24 +52,48 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 20:59:53 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Wed, 15 Sep 2010 21:20:08 -0000
 
-2010/9/15 Tom King <ka6sox@gmail.com>:
-> In approximately 1hr 21:30UTC I need to rsync the server to create a backup
-> and perform an upgrade to the melo server so that we can add some additional
-> functionality.
->
-> I suspect that the rsync and upgrad will take approx 2-3hrs (to fix things
-> that break)
->
-> Thanks,
->
-> ka6sox
-> (for the oe infrastructure team)
->
-Thanks for the notice and thanks for the good work!
+Usually openmoko inheriting recipes have SECTION like openmoko/libs
+etc then the code works well but for packages e.g. -dev -dbg same
+section is not true and the functions fail
 
-Frans.
+File "openmoko2.bbclass", line 2, in openmoko_two_get_subdir
+ValueError: need more than 1 value to unpack
+
+This patch makes sure to split the string only if SECTION contains '/'
+
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ classes/openmoko2.bbclass |   10 ++++++++--
+ 1 files changed, 8 insertions(+), 2 deletions(-)
+
+diff --git a/classes/openmoko2.bbclass b/classes/openmoko2.bbclass
+index 1dfef64..25dea82 100644
+--- a/classes/openmoko2.bbclass
++++ b/classes/openmoko2.bbclass
+@@ -5,11 +5,17 @@ OPENMOKO_RELEASE ?= "OM-2007.2"
+ OPENMOKO_MIRROR ?= "svn://svn.openmoko.org/trunk"
+ 
+ def openmoko_two_get_license(d):
+-    openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
++    if bb.data.getVar('SECTION', d, 1).find("/") != -1:
++    	openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
++    else:
++        section = bb.data.getVar('SECTION', d, 1)	
+     return "LGPL GPL".split()[section != "libs"]
+ 
+ def openmoko_two_get_subdir(d):
+-    openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
++    if bb.data.getVar('SECTION', d, 1).find("/") != -1:
++        openmoko, section = bb.data.getVar('SECTION', d, 1).split("/")
++    else:
++        section = bb.data.getVar('SECTION', d, 1)
+     if section == 'base': return ""
+     elif section == 'libs': return "libraries"
+     elif section in 'apps tools pim'.split(): return "applications"
+-- 
+1.7.1
+
 
 
