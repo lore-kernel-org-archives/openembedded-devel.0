@@ -1,40 +1,31 @@
-Received: from smtp-4.concepts.nl ([213.197.30.111])
+Received: from mail.geekisp.com ([216.168.135.169] helo=starfish.geekisp.com)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1Ovx8M-0001Ap-QY
+	(envelope-from <philip@balister.org>) id 1OvxCR-0003D9-RM
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 20:55:07 +0200
-Received: from c3404277.ftth.concepts.nl ([195.64.66.119]
-	helo=mx1.grimmerink.nl) by smtp-4.concepts.nl with esmtp (Exim 4.69)
-	(envelope-from <pieterg@gmx.com>) id 1Ovx7Z-000504-FA
-	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 20:54:17 +0200
-Received: from [10.9.0.12] (unknown [10.9.0.12])
-	(using TLSv1 with cipher DHE-RSA-AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mx1.grimmerink.nl (Postfix) with ESMTPSA id C60F86A08D
-	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 20:54:12 +0200 (CEST)
-From: pieterg <pieterg@gmx.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Wed, 15 Sep 2010 20:53:55 +0200
-User-Agent: KMail/1.9.9
+	Wed, 15 Sep 2010 20:59:25 +0200
+Received: (qmail 2254 invoked by uid 1003); 15 Sep 2010 18:58:29 -0000
+Received: from pool-96-240-180-126.ronkva.east.verizon.net (HELO
+	?192.168.1.167?) (philip@opensdr.com@96.240.180.126)
+	by mail.geekisp.com with (DHE-RSA-AES256-SHA encrypted) SMTP;
+	15 Sep 2010 18:58:29 -0000
+Message-ID: <4C911753.9080601@balister.org>
+Date: Wed, 15 Sep 2010 14:58:27 -0400
+From: Philip Balister <philip@balister.org>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.2.9) Gecko/20100907 Fedora/3.1.3-1.fc13 Thunderbird/3.1.3
 MIME-Version: 1.0
-Message-Id: <201009152053.55754.pieterg@gmx.com>
-X-Concepts-MailScanner-Information: Please contact abuse@concepts.nl for more
-	information
-X-Concepts-MailScanner-ID: 1Ovx7Z-000504-FA
-X-Concepts-MailScanner: Found to be clean
-X-Concepts-MailScanner-SpamCheck: 
-X-Concepts-MailScanner-From: pieterg@gmx.com
-X-SA-Exim-Connect-IP: 213.197.30.111
-X-SA-Exim-Mail-From: pieterg@gmx.com
+To: openembedded-devel@lists.openembedded.org
+References: <AANLkTi=vSWgp8MpCRDOhE=3x_d2WPgvKsc4Qy9Y5j7O1@mail.gmail.com>
+In-Reply-To: <AANLkTi=vSWgp8MpCRDOhE=3x_d2WPgvKsc4Qy9Y5j7O1@mail.gmail.com>
+X-SA-Exim-Connect-IP: 216.168.135.169
+X-SA-Exim-Mail-From: philip@balister.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
-	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: using klibc shared objects
+Subject: Re: vimrc and vim defaults
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,25 +39,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 18:55:07 -0000
-Content-Type: text/plain;
-  charset="us-ascii"
+X-List-Received-Date: Wed, 15 Sep 2010 18:59:36 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-I have an initramfs image which contains a few klibc utils, and a custom 
-executable (which displays a progress bar).
-I'm not using klibc-static, because the total size of all static klibc utils 
-and the custom binary is much larger than klibc.so plus dynamically linked 
-binaries.
+On 09/15/2010 02:32 PM, AJ ONeal wrote:
+> Why does vimrc go in /usr/share/vim/vimrc rather than /etc/vimrc like on
+> other distros?
 
-However, with one of the recent klibc recipe rewrites, the klibc package now 
-contains ~5.3MB of header files. These end up in my initramfs image, making 
-it quite big.
+This explains why vim has been driving me nuts.
 
-What would be the best solution (if I don't want to switch to static 
-linking)? Should we perhaps move the header files to klibc-dev?
+> Would it be a sin to include some "reasonable defaults" so that it's
+> actually the vim that people expect rather than vi?
 
-Rgds, Pieter
+This would be great. I'd love to look at any patches you have.
+
+Philip
 
 
