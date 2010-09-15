@@ -1,41 +1,41 @@
-Received: from mail-ew0-f47.google.com ([209.85.215.47])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <coolaj86@gmail.com>) id 1OvyOV-0004iZ-Od
+	(envelope-from <ka6sox@gmail.com>) id 1Ovyf5-0008DM-6W
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 15 Sep 2010 22:15:52 +0200
-Received: by ewy7 with SMTP id 7so378849ewy.6
+	Wed, 15 Sep 2010 22:33:00 +0200
+Received: by gya6 with SMTP id 6so213256gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 13:15:04 -0700 (PDT)
+	Wed, 15 Sep 2010 13:32:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:from:date
-	:message-id:subject:to:content-type;
-	bh=QEthOmU0NVWdqoIo5o+y2EPwoiEnST79x7qP9R4EYcw=;
-	b=Vv0pGMIc37xyD9YlBHaQF5h88eb8V7vImZd992vzv2c9LPyF+6l4IgjPIp3b2HRU9N
-	L0BQ+J3X4yV4xWfHqlNVjDRK0ara5t+Fw8RmgT3nmvQvNvL4kNYPrTh3HYDh1n55z3LJ
-	32KsT8cXNjph7KYtz4Nq3ior+k4lm8GxcQ5rI=
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=EW205D2/PSgw+8xBXF+McGHAy8ePPSMkiAbYZMqi9Xg=;
+	b=tXA7CDax0gTJ0mMbcIbUrzTpa+6MD+doIg/iLL6TxmnCX0c2VwdfxnUvxC7Q82sGTd
+	wpX7lubrL5g7G3OlsbIRKgZqFPU/2/Uyyc+SDd2Z8n57lMr3njmGElqlQhHiK5ovgu+3
+	dabHLE0shPckyPvb5AOTtxr+0+aApL9kINGYM=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:from:date:message-id:subject:to:content-type;
-	b=M6M0BjP4NRH6uyMvuzf7f8SnB/gEXIZ/jcw7vRuDHQroVGZQSEq/bRDvH46WWLqb1r
-	ZPSZb1ezNSaznPb4F9a0tTxUFIAGHFqN20HA1Z6dFGK0MYy1YLOFyhLOibU87548PS7k
-	hhUB0JujFmhDaTtUAtgFhvcklQApMgL87lHbs=
-Received: by 10.223.123.14 with SMTP id n14mr897140far.106.1284581702249; Wed,
-	15 Sep 2010 13:15:02 -0700 (PDT)
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=MnxJz52RLLIoFvqc7yV2osDTQ1E5GkhA++5BX4RUXD+GXqdhzciZGLvbFzoUeG1pMo
+	G+yCOD5CYlhyy6PPDw5Hlv0B/g2Jrt//A+z65GNSX1kVx1GRl2udiFo+98d8PFztfeIJ
+	1q2hPhx6BRfoCFUNnUgd4Hg15bhf8mL9ssoIA=
 MIME-Version: 1.0
-Received: by 10.223.121.5 with HTTP; Wed, 15 Sep 2010 13:14:42 -0700 (PDT)
-From: AJ ONeal <coolaj86@gmail.com>
-Date: Wed, 15 Sep 2010 14:14:42 -0600
-Message-ID: <AANLkTikhFQU3OGHQXW7JpgzDP_CLofDNjdwfByQyptbZ@mail.gmail.com>
-To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-X-SA-Exim-Connect-IP: 209.85.215.47
-X-SA-Exim-Mail-From: coolaj86@gmail.com
+Received: by 10.151.82.6 with SMTP id j6mr2826758ybl.73.1284582728831; Wed, 15
+	Sep 2010 13:32:08 -0700 (PDT)
+Received: by 10.231.208.1 with HTTP; Wed, 15 Sep 2010 13:32:08 -0700 (PDT)
+Date: Wed, 15 Sep 2010 13:32:08 -0700
+Message-ID: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
+From: Tom King <ka6sox@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.175
+X-SA-Exim-Mail-From: ka6sox@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
 	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
 X-Content-Filtered-By: Mailman/MimeDel 2.1.11
-Subject: upstart: unsatisfied recommendation for libupstart0
+Subject: melo git outage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,15 +49,18 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 15 Sep 2010 20:15:52 -0000
+X-List-Received-Date: Wed, 15 Sep 2010 20:33:00 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-opkg install upstart upstart-sysvcompat
+In approximately 1hr 21:30UTC I need to rsync the server to create a backup
+and perform an upgrade to the melo server so that we can add some additional
+functionality.
 
-unsatisfied recommendation for libupstart0
+I suspect that the rsync and upgrad will take approx 2-3hrs (to fix things
+that break)
 
-Does anyone know what libupstart0 is? This message will be one of only three
-on google that even mention it.
+Thanks,
 
-AJ ONeal
+ka6sox
+(for the oe infrastructure team)
 
