@@ -1,29 +1,30 @@
 Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <vjensen@gmx.de>) id 1Ow6qN-00070S-JV
+	(envelope-from <vjensen@gmx.de>) id 1Ow70d-0007BI-7f
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 07:17:18 +0200
-Received: from compute2.internal (compute2.nyi.mail.srv.osa [10.202.2.42])
-	by gateway1.messagingengine.com (Postfix) with ESMTP id 18F034A5
+	Thu, 16 Sep 2010 07:27:48 +0200
+Received: from compute3.internal (compute3.nyi.mail.srv.osa [10.202.2.43])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id C3345243
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Sep 2010 01:09:36 -0400 (EDT)
-Received: from frontend2.messagingengine.com ([10.202.2.161])
-	by compute2.internal (MEProxy); Thu, 16 Sep 2010 01:09:36 -0400
+	Thu, 16 Sep 2010 01:26:58 -0400 (EDT)
+Received: from frontend1.messagingengine.com ([10.202.2.160])
+	by compute3.internal (MEProxy); Thu, 16 Sep 2010 01:26:58 -0400
 DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
 	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
-	s=smtpout; bh=G/GxKPecP46hkK4ivtnTVJjLDzk=;
-	b=YrvBVUMa18sL3WcOiJhFStrwKRLCx1F9IbUWF+6GGkArhdBii6gJUN7icHn+QzY7nv5UFyCAGHWjRdfpuDHQ0DNr5ivk5hAdya/r3U6O/7H7txSBWCgTdyltZ5ODGAp1Lz6DQWnNyXUbKtmLEBIRctC3rJGK3iy9A0C2Y8w40Tw=
-X-Sasl-enc: b3CbisiWQI7JF9G7GtVa1ivyfjFW71xnDewyDJy3hV2g 1284613775
+	s=smtpout; bh=E/JRibit7FsjCwf/+j8Feqe6cYY=;
+	b=CwhrQ6GQ820yotO/2I3CNPNObW2xBClz9lfihgEvrDMym4sosoVjM+2wHqmd16tsSAy1CJfShW3zaeQ6b3JQ8VgJv1DTyBZxjUueSm5CHRN34qdoUUtmJz+r4cCWJrVM6oWfqb/TVWiZjmywHTPjgIZAg+hhs/Z2eVTf1knInDc=
+X-Sasl-enc: ZGTBb2XlcgHQk1aYooz011uX1M5tQXaaCE/MbfxHXXwm 1284614818
 Received: from [192.168.1.34] (hnvr-4d07871e.pool.mediaWays.net [77.7.135.30])
-	by mail.messagingengine.com (Postfix) with ESMTPSA id 85F2A5E3113
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 4055A407A01
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Sep 2010 01:09:35 -0400 (EDT)
-Date: Thu, 16 Sep 2010 07:11:17 +0200 (CEST)
+	Thu, 16 Sep 2010 01:26:58 -0400 (EDT)
+Date: Thu, 16 Sep 2010 07:28:40 +0200 (CEST)
 From: Vitus Jensen <vjensen@gmx.de>
 To: openembedded-devel <openembedded-devel@lists.openembedded.org>
-In-Reply-To: <AANLkTinWDmigJDsU-vJqwujb9hXu7p7j4QpY=nYQq3rh@mail.gmail.com>
-Message-ID: <alpine.LNX.2.00.1009160658000.29127@asterix.crazy-teaparty.dyndns.org>
+In-Reply-To: <alpine.LNX.2.00.1009160658000.29127@asterix.crazy-teaparty.dyndns.org>
+Message-ID: <alpine.LNX.2.00.1009160726030.29127@asterix.crazy-teaparty.dyndns.org>
 References: <AANLkTinWDmigJDsU-vJqwujb9hXu7p7j4QpY=nYQq3rh@mail.gmail.com>
+	<alpine.LNX.2.00.1009160658000.29127@asterix.crazy-teaparty.dyndns.org>
 User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
 Jabber-ID: vitus_jensen@gmx.de
 X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
@@ -52,50 +53,61 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 05:17:18 -0000
+X-List-Received-Date: Thu, 16 Sep 2010 05:27:48 -0000
 Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On Wed, 15 Sep 2010, AJ ONeal wrote:
+On Thu, 16 Sep 2010, Vitus Jensen wrote:
 
-> I don't know very much about this - only what I've seen discussed on the
-> mailing list.
-
-And you probably searched recipes/ before writing your own?  This is my 
-main source of informationen.
-
-> I've created a template and given my just-submitted recipe as an example.
+> On Wed, 15 Sep 2010, AJ ONeal wrote:
 >
-> If you know bitbake and OE policies, please share the wealth:
-> http://wiki.openembedded.net/index.php/How_to_create_a_bitbake_recipe_for_dummies
+>>  I don't know very much about this - only what I've seen discussed on the
+>>  mailing list.
+>
+> And you probably searched recipes/ before writing your own?  This is my main 
+> source of informationen.
+>
+>>  I've created a template and given my just-submitted recipe as an example.
+>>
+>>  If you know bitbake and OE policies, please share the wealth:
+>>  http://wiki.openembedded.net/index.php/How_to_create_a_bitbake_recipe_for_dummies
+>
+> I don't think you should not use method overrides in the example (the wiki 
+> list those overrides as things to avoid), just use the simpliest form of a 
+> recipe there and refer to the OE usermanual from that page for additional 
+> features, that URL: 
+> http://docs.openembedded.org/usermanual/usermanual.html#chapter_recipes
+>
+> =====
+> DESCRIPTION = ""
+> HOMEPAGE = ""
+> LICENSE = ""
+> DEPENDS = ""
+> PR = "r0"  # Package Revision, update this whenever you change the recipe.
+>
+> SRC_URI = " http://server/${PN}-${PV}.tar.bz2 \
+> 	 file://fix-crosscompile.patch \
+> 	 "
+> SRC_URI[md5sum] = ""
+> SRC_URI[sha256sum] = ""
+> =====
+>
+> More isn't needed (some may argue about PR) and writing more may actually 
+> harm.
 
-I don't think you should not use method overrides in the example (the wiki 
-list those overrides as things to avoid), just use the simpliest form of a 
-recipe there and refer to the OE usermanual from that page for additional 
-features, that URL: 
-http://docs.openembedded.org/usermanual/usermanual.html#chapter_recipes
+Sorry, there was an important line missing:
 
-=====
-DESCRIPTION = ""
-HOMEPAGE = ""
-LICENSE = ""
-DEPENDS = ""
-PR = "r0"  # Package Revision, update this whenever you change the recipe.
+inherit cmake
+-or-
+inherit autotools
+-or-
+inherit your-build-system
 
-SRC_URI = " http://server/${PN}-${PV}.tar.bz2 \
- 	file://fix-crosscompile.patch \
- 	"
-SRC_URI[md5sum] = ""
-SRC_URI[sha256sum] = ""
-=====
-
-More isn't needed (some may argue about PR) and writing more may actually 
-harm.
-
-Best regards,
-    Vitus
+Vitus
 
 -- 
-Vitus Jensen, Hannover, Germany, Universe (current)
-pgp public key available from keyservers
+/"\
+\ / ascii ribbon campaign - Vitus Jensen
+  X  www.asciiribbon.org - Hannover,Earth,Milky Way,Universe (current)
+/ \
 
 
