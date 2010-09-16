@@ -1,31 +1,35 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ow9L9-0005MW-54 for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 09:57:07 +0200
-Received: from f053044210.adsl.alicedsl.de ([78.53.44.210]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1Ow9KN-00005k-3s for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 07:56:19 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <sledz@dresearch.de>) id 1Ow9qc-0006xY-Tp
+	for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 10:29:39 +0200
+Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
+	[192.168.32.16])
+	by mail.dresearch.de (Postfix) with ESMTP id F21D4491286;
+	Thu, 16 Sep 2010 10:28:50 +0200 (CEST)
+Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
+	Microsoft SMTPSVC(6.0.3790.4675); Thu, 16 Sep 2010 10:28:50 +0200
+Message-ID: <4C91D544.7070702@dresearch.de>
+Date: Thu, 16 Sep 2010 10:28:52 +0200
+From: Steffen Sledz <sledz@dresearch.de>
+User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
+	rv:1.9.2.9) Gecko/20100825 Lightning/1.0b2 Thunderbird/3.1.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1284615893-18010-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
-References: <1284615893-18010-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
-Date: Thu, 16 Sep 2010 09:56:16 +0200
-Message-ID: <1284623776.3825.5.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
+In-Reply-To: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
+X-OriginalArrivalTime: 16 Sep 2010 08:28:50.0865 (UTC)
+	FILETIME=[30D1CA10:01CB5579]
+X-SA-Exim-Connect-IP: 87.193.137.100
+X-SA-Exim-Mail-From: sledz@dresearch.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] eglibc: Update recipe for all version
+Cc: Tom King <ka6sox@gmail.com>
+Subject: Re: melo git outage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -39,58 +43,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 07:57:08 -0000
-X-Groupsio-MsgNum: 23642
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-H/aPDq5W5Mk6DX5LsNI6"
-
---=-H/aPDq5W5Mk6DX5LsNI6
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Thu, 16 Sep 2010 08:29:39 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 16.09.2010, 14:44 +0900 schrieb Nobuhiro Iwamatsu:
-> * Included sh4_set_fpscr.patch and sh4_set_fpscr_2.12.patch.
->   These patch provides patch of __set_fpscr prototype.
-> * Included sh4_local-fpscr_values.patch.
->   This provides a patch maintaining __fpscr_values in libc.
->   This is taken in in Debian and codesourcery already.
->   This patch is necessary to have compatibility in these and openemdedded=
-.
+Am 15.09.2010 22:32, schrieb Tom King:
+> In approximately 1hr 21:30UTC I need to rsync the server to create a ba=
+ckup
+> and perform an upgrade to the melo server so that we can add some addit=
+ional
+> functionality.
 >=20
-> Signed-off-by: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-> ---
+> I suspect that the rsync and upgrad will take approx 2-3hrs (to fix thi=
+ngs
+> that break)
 
-[=E2=80=A6]
+No yet back again. :(
 
->  create mode 100644 recipes/eglibc/files/sh4_local-fpscr_values.patch
->  create mode 100644 recipes/eglibc/files/sh4_set_fpscr.patch
->  create mode 100644 recipes/eglibc/files/sh4_set_fpscr_2.12.patch
+> git pull
+git.openembedded.net[0: 140.211.169.165]: errno=3DConnection refused
+fatal: unable to connect a socket (Connection refused)
 
-Could you please add more information to the patch headers [1]. Like,
-were do they come from, links to more information why they are needed
-and possibly upstream tickets or commits.
+Steffen
 
-[=E2=80=A6]
+--=20
+Steffen Sledz
+DResearch Digital Media Systems GmbH
+Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
+Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
+Fax: +49 (30) 515932299 http://www.DResearch.DE
+Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
+Amtsgericht Berlin Charlottenburg; HRB 54412;
+Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
 
 
-Thanks,
 
-Paul
-
-
-[1] http://wiki.openembedded.net/index.php/Push_patches_upstream
-
---=-H/aPDq5W5Mk6DX5LsNI6
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyRzZoACgkQPX1aK2wOHVjDcACdH8Fx7iFcSLauHvheGs1RXmwk
-4HUAniPQz76KbsUsPTf+pIFfeevZrX9q
-=gOpr
------END PGP SIGNATURE-----
-
---=-H/aPDq5W5Mk6DX5LsNI6--
