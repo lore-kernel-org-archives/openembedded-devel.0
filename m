@@ -1,22 +1,22 @@
 Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OwH5s-0004Um-GG for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 18:13:56 +0200
+	id 1OwHCx-0003MC-0p for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 18:21:11 +0200
 Received: from f053044210.adsl.alicedsl.de ([78.53.44.210]
 	helo=[192.168.178.21])
 	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
 	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OwH56-0006KZ-0o for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 16:13:04 +0000
+	id 1OwHCA-00070O-Tu for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 16:20:23 +0000
 From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <AANLkTi=m8Sg5JtcczZaohgrgmN+y5EbQRYzn6eYoPUVj@mail.gmail.com>
-References: <1284615893-18010-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
-	<1284623776.3825.5.camel@mattotaupa>
-	<AANLkTi=m8Sg5JtcczZaohgrgmN+y5EbQRYzn6eYoPUVj@mail.gmail.com>
-Date: Thu, 16 Sep 2010 18:13:00 +0200
-Message-ID: <1284653580.3747.13.camel@mattotaupa>
+In-Reply-To: <AANLkTi=VC0YNXYb4JfOtXrsyq_FWkXbxeg_aOXLYUnfZ@mail.gmail.com>
+References: <4C90A7E1.4030401@dresearch.de> <4C91EF7C.7080209@dresearch.de>
+	<1284633626.3825.52.camel@mattotaupa>
+	<AANLkTi=VC0YNXYb4JfOtXrsyq_FWkXbxeg_aOXLYUnfZ@mail.gmail.com>
+Date: Thu, 16 Sep 2010 18:20:21 +0200
+Message-ID: <1284654021.3747.15.camel@mattotaupa>
 Mime-Version: 1.0
 X-Mailer: Evolution 2.30.3 
 X-SA-Exim-Connect-IP: 188.40.100.199
@@ -27,7 +27,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] eglibc: Update recipe for all version
+Subject: Re: fatal: The remote end hung up unexpectedly
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,45 +41,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 16:13:58 -0000
-X-Groupsio-MsgNum: 23653
+X-List-Received-Date: Thu, 16 Sep 2010 16:21:11 -0000
+X-Groupsio-MsgNum: 23654
 Content-Type: multipart/signed; micalg="pgp-sha1";
 	protocol="application/pgp-signature";
-	boundary="=-KmLwDzn6oIgIyCNCQDRL"
+	boundary="=-BXrg0m1ErNJ3BeD7mhgF"
 
---=-KmLwDzn6oIgIyCNCQDRL
+--=-BXrg0m1ErNJ3BeD7mhgF
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Am Donnerstag, den 16.09.2010, 07:31 -0700 schrieb Khem Raj:
-> On Thu, Sep 16, 2010 at 12:56 AM, Paul Menzel
-> <paulepanter@users.sourceforge.net> wrote:
-> > Could you please add more information to the patch headers [1]. Like,
-> > were do they come from, links to more information why they are needed
-> > and possibly upstream tickets or commits.
->
-> its already there in the patch headers.
+Am Donnerstag, den 16.09.2010, 14:12 +0200 schrieb Frans Meulenbroeks:
+> 2010/9/16 Paul Menzel <paulepanter@users.sourceforge.net>:
+> > Am Donnerstag, den 16.09.2010, 12:20 +0200 schrieb Steffen Sledz:
+> >> Am 15.09.2010 13:02, schrieb Steffen Sledz:
+> >> > Can't push my changes today. :(
+> >> >
+> >> >> git push -v upstream
+> >> > Pushing to git://git.openembedded.net/openembedded
+> >> > fatal: The remote end hung up unexpectedly
+> >>
+> >> Sorry, my mistake. Local configuration error.
+> >>
+> >> git://git.openembedded.net/openembedded vs. git@git.openembedded.org:o=
+penembedded
+> >
+> > I do not have commit access so I have to use
+> >
+> >    git://git.openembedded.net/openembedded
+> >
+> > which is failing for me.
+>=20
+> For ro you can also try the repo.or.cz mirror (especially if you are in E=
+U)
 
-Just for `sh4_set_fpscr.patch` and not for the other two
-
-        sh4_set_fpscr_2.12.patch
-        sh4_local-fpscr_values.patch
-
-as far as I can see.
-
-And looking at [1] from `sh4_set_fpscr.patch` this patch looks like a
-subset than the one in the Debian BTS [2]. So if this has been applied
-upstream yet I would prefer a link to the commit.
-
-I am sorry to bother you with this. But this is my perspective, a guy
-who is not involved with this library a lot. But when I am facing a
-problem with the library and try to get an overview it will take me more
-time than needed to get around everything because the documentation is
-lacking. So please tell me what I am missing. ;-)
-
-(The commit summary could also be improved to =C2=BBapply fpscr patches=C2=
-=AB or
-something similar.)
+It looks like it is not up to date [1]. There are commits missing from
+the =E2=80=9Cmaster=E2=80=9D repository. I guess it has the same problems a=
+s I do.
 
 
 Thanks,
@@ -87,19 +85,18 @@ Thanks,
 Paul
 
 
-[1] http://sourceware.org/ml/libc-alpha/2009-12/msg00009.html
-[2] http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=3D565369
+[1] http://repo.or.cz/w/openembedded.git
 
---=-KmLwDzn6oIgIyCNCQDRL
+--=-BXrg0m1ErNJ3BeD7mhgF
 Content-Type: application/pgp-signature; name="signature.asc"
 Content-Description: This is a digitally signed message part
 
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iEYEABECAAYFAkySQgIACgkQPX1aK2wOHVh2/wCdG4inIacW/AQP6yFjjKE/nE1i
-ZVYAoIBl+solPYyKkYXGLyxTvDew78A2
-=V1JA
+iEYEABECAAYFAkySQ8UACgkQPX1aK2wOHVhHpwCgjZ0TLzc9kvobNbMVtYc0XDm8
+r/oAn2fl1ri0cjKn9YCoQEMXTr0oYbhJ
+=9mI+
 -----END PGP SIGNATURE-----
 
---=-KmLwDzn6oIgIyCNCQDRL--
+--=-BXrg0m1ErNJ3BeD7mhgF--
