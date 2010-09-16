@@ -1,45 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OwDLM-0006CT-5V
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 14:13:36 +0200
-Received: by iwn2 with SMTP id 2so1028923iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OwEbQ-0004cT-O1 for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 15:34:18 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OwEad-0005gj-9C for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 15:33:27 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Sep 2010 15:33:27 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Sep 2010 05:12:47 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RFXRRzyL5h9iT5PNUN23Ktb2io9RKRKlVXWzjQjTOI4=;
-	b=RK3kBdCkzCfdRUMBUzUcX2opIzH+KoU3rUowwXGSFZfFYLuyKcdpEkoty/XYmJf6Jh
-	Y7R/AdNPHIDtWxKV3Vcp19Y4M9OHclzbBH3ibBCZQREAmxww3QiY3AWiIjeOVRtlF9eM
-	fw5kkrptX1Z1VhVSjsyrjoJ2ESYqteM6t0Ne0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=pz8/njSFSz1gOtpllEu+8sLiupOFVfMw47+DyERKe6kpg4pECFxzaSdz155yDsEnMZ
-	xpUWDYdJ/d+IO3cqRTT4O+Nb66OoDxF+/jbuw46qQpmKQcL6KdI/BvemA2MucqFD6Epk
-	bnNblvQ00JRKBFYRiPjUbcayrwMQHVS9q0/ts=
-MIME-Version: 1.0
-Received: by 10.231.157.207 with SMTP id c15mr3363770ibx.143.1284639167178;
-	Thu, 16 Sep 2010 05:12:47 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Thu, 16 Sep 2010 05:12:47 -0700 (PDT)
-In-Reply-To: <1284633626.3825.52.camel@mattotaupa>
-References: <4C90A7E1.4030401@dresearch.de> <4C91EF7C.7080209@dresearch.de>
-	<1284633626.3825.52.camel@mattotaupa>
-Date: Thu, 16 Sep 2010 14:12:47 +0200
-Message-ID: <AANLkTi=VC0YNXYb4JfOtXrsyq_FWkXbxeg_aOXLYUnfZ@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 16 Sep 2010 15:33:27 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 16 Sep 2010 15:33:12 +0200
+Message-ID: <i6t6ao$bm2$1@dough.gmane.org>
+References: <4C9206AB.8030905@dresearch.de>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <4C9206AB.8030905@dresearch.de>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: fatal: The remote end hung up unexpectedly
+Subject: Re: device-kit: udisks vs. devicekit-disks
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,33 +50,40 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 12:13:37 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Sep 2010 13:34:18 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/9/16 Paul Menzel <paulepanter@users.sourceforge.net>:
-> Am Donnerstag, den 16.09.2010, 12:20 +0200 schrieb Steffen Sledz:
->> Am 15.09.2010 13:02, schrieb Steffen Sledz:
->> > Can't push my changes today. :(
->> >
->> >> git push -v upstream
->> > Pushing to git://git.openembedded.net/openembedded
->> > fatal: The remote end hung up unexpectedly
->>
->> Sorry, my mistake. Local configuration error.
->>
->> git://git.openembedded.net/openembedded vs. git@git.openembedded.org:ope=
-nembedded
->
-> I do not have commit access so I have to use
->
-> =A0 =A0git://git.openembedded.net/openembedded
->
-> which is failing for me.
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-For ro you can also try the repo.or.cz mirror (especially if you are in EU)
+On 16-09-10 13:59, Steffen Sledz wrote:
+> Hi DeviceKit maintainers,
+> 
+> if i'm right udisks <http://cgit.freedesktop.org/udisks/> replaces devicekit-disks. Correct?
 
-Frans
+The answer is "sort of", sadly. Not all software can deal with the
+udisks interface yet, so the best way is to work backward from the
+requirements of apps/libs using *disks.
+
+regards,
+
+Koen
+
+> Does anybody has tried/planned to bring udisks to OE?
+> 
+> I could try to do this for myself, but i see some challenges i fear i cannot master (e.g. How is the integration of udisks into the devicekit world? How is the relation between devicekit-disks and udisks recipes?).
+> 
+> Steffen
+> 
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMkhyYMkyGM64RGpERAk03AJ4/Irbce/GDgFfH7MmgnsZ7h96H5QCfRFjU
+u2/m5qzkRK91hXyOYgMsi7s=
+=5pUq
+-----END PGP SIGNATURE-----
+
 
 
