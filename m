@@ -1,30 +1,30 @@
 Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <iwamatsu@nigauri.org>) id 1Ow2sR-0004ZN-Gd
+	(envelope-from <iwamatsu@nigauri.org>) id 1Ow2sY-0004w2-IU
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 03:03:18 +0200
-Received: by pzk37 with SMTP id 37so229009pzk.6
+	Thu, 16 Sep 2010 03:03:20 +0200
+Received: by pzk37 with SMTP id 37so229023pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 18:02:13 -0700 (PDT)
-Received: by 10.142.247.21 with SMTP id u21mr2104831wfh.348.1284598933121;
-	Wed, 15 Sep 2010 18:02:13 -0700 (PDT)
+	Wed, 15 Sep 2010 18:02:20 -0700 (PDT)
+Received: by 10.142.127.16 with SMTP id z16mr2200976wfc.3.1284598940294; Wed,
+	15 Sep 2010 18:02:20 -0700 (PDT)
 MIME-Version: 1.0
 Sender: iwamatsu@nigauri.org
-Received: by 10.142.188.10 with HTTP; Wed, 15 Sep 2010 18:01:53 -0700 (PDT)
+Received: by 10.142.188.10 with HTTP; Wed, 15 Sep 2010 18:02:00 -0700 (PDT)
 From: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
-Date: Thu, 16 Sep 2010 10:01:53 +0900
-X-Google-Sender-Auth: EdxQndLrn5XfUdqWvFtLF_Peiu8
-Message-ID: <AANLkTindv19CnnhD_L80Q+RUoQBUDTu_3YXVvxu0MK4p@mail.gmail.com>
+Date: Thu, 16 Sep 2010 10:02:00 +0900
+X-Google-Sender-Auth: TO7nIVBf3e3EBHYACNTJ3Yacoa4
+Message-ID: <AANLkTi=oYvz=GBa_1uSF4Vpuzv+50K=f+XiPVi7rGnp6@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.210.47
 X-SA-Exim-Mail-From: iwamatsu@nigauri.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 1/2 v2] sh: provide patch of __set_fpscr prototype
+Subject: [PATCH 2/2 v2] sh: provide patch of __set_fpscr in libc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -38,202 +38,164 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 01:03:19 -0000
+X-List-Received-Date: Thu, 16 Sep 2010 01:03:20 -0000
 Content-Type: text/plain; charset=ISO-8859-1
 
-When we compile a program that used _FPU_SETCW in sh4 in C++,
-become the error.
-his provides a patch revising this problem.
+This provides a patch maintaining __fpscr_values in libc.
+This is taken in in Debian and codesourcery.
+
+This patch is necessary to have compatibility in these and openemdedded.
 
 Signed-off-by: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
 ---
- recipes/eglibc/eglibc_2.10.bb                 |    3 +-
- recipes/eglibc/eglibc_2.11.bb                 |    3 +-
- recipes/eglibc/eglibc_2.12.bb                 |    3 +-
- recipes/eglibc/eglibc_2.9.bb                  |    7 +++--
- recipes/eglibc/eglibc_svn.bb                  |    5 ++-
- recipes/eglibc/files/sh4_set_fpscr.patch      |   23 +++++++++++++++++++
- recipes/eglibc/files/sh4_set_fpscr_2.12.patch |   29 +++++++++++++++++++++++++
- 7 files changed, 65 insertions(+), 8 deletions(-)
- create mode 100644 recipes/eglibc/files/sh4_set_fpscr.patch
- create mode 100644 recipes/eglibc/files/sh4_set_fpscr_2.12.patch
+ recipes/eglibc/eglibc_2.10.bb                     |    3 +-
+ recipes/eglibc/eglibc_2.11.bb                     |    3 +-
+ recipes/eglibc/eglibc_2.12.bb                     |    3 +-
+ recipes/eglibc/eglibc_2.9.bb                      |    3 +-
+ recipes/eglibc/eglibc_svn.bb                      |    1 +
+ recipes/eglibc/files/sh4_local-fpscr_values.patch |   32 +++++++++++++++++++++
+ 6 files changed, 41 insertions(+), 4 deletions(-)
+ create mode 100644 recipes/eglibc/files/sh4_local-fpscr_values.patch
 
 diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.bb
-index c10db7d..94835b6 100644
+index 94835b6..6ac4fda 100644
 --- a/recipes/eglibc/eglibc_2.10.bb
 +++ b/recipes/eglibc/eglibc_2.10.bb
 @@ -3,7 +3,7 @@ require eglibc.inc
  DEPENDS += "gperf-native"
  FILESPATHPKG =. "eglibc-svn:"
  PV = "2.10"
--PR = "${INC_PR}.9"
-+PR = "${INC_PR}.10"
+-PR = "${INC_PR}.10"
++PR = "${INC_PR}.11"
  PR_append = "+svnr${SRCPV}"
  SRCREV="10152"
  EGLIBC_BRANCH="eglibc-2_10"
-@@ -12,6 +12,7 @@ SRC_URI =
+@@ -13,6 +13,7 @@ SRC_URI =
 "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-            file://armv4t-interworking.patch \
             file://IO-acquire-lock-fix.patch \
             file://shorten-build-commands.patch \
-+           file://sh4_set_fpscr.patch \
+            file://sh4_set_fpscr.patch \
++           file://sh4_local-fpscr_values.patch \
             file://etc/ld.so.conf \
             file://generate-supported.mk"
  S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.bb
-index bece90f..dafc301 100644
+index dafc301..d96b658 100644
 --- a/recipes/eglibc/eglibc_2.11.bb
 +++ b/recipes/eglibc/eglibc_2.11.bb
 @@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
  DEPENDS += "gperf-native"
  FILESPATHPKG =. "eglibc-svn:"
  PV = "2.11"
--PR = "${INC_PR}.6"
-+PR = "${INC_PR}.7"
+-PR = "${INC_PR}.7"
++PR = "${INC_PR}.8"
  PR_append = "+svnr${SRCPV}"
  SRCREV="10690"
  EGLIBC_BRANCH="eglibc-2_11"
-@@ -12,6 +12,7 @@ SRC_URI =
+@@ -13,6 +13,7 @@ SRC_URI =
 "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
             file://IO-acquire-lock-fix.patch \
             file://shorten-build-commands.patch \
-+           file://sh4_set_fpscr.patch \
+            file://sh4_set_fpscr.patch \
++           file://sh4_local-fpscr_values.patch \
             file://etc/ld.so.conf \
             file://generate-supported.mk"
  S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
-index 0d08c56..e0a0ebe 100644
+index e0a0ebe..c6acea2 100644
 --- a/recipes/eglibc/eglibc_2.12.bb
 +++ b/recipes/eglibc/eglibc_2.12.bb
 @@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
  DEPENDS += "gperf-native"
  FILESPATHPKG =. "eglibc-svn:"
  PV = "2.12"
--PR = "${INC_PR}.3"
-+PR = "${INC_PR}.4"
+-PR = "${INC_PR}.4"
++PR = "${INC_PR}.5"
  PR_append = "+svnr${SRCPV}"
  SRCREV="11306"
  EGLIBC_BRANCH="eglibc-2_12"
-@@ -12,6 +12,7 @@ SRC_URI =
+@@ -13,6 +13,7 @@ SRC_URI =
 "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
             file://IO-acquire-lock-fix.patch \
             file://shorten-build-commands.patch \
-+           file://sh4_set_fpscr_2.12.patch \
+            file://sh4_set_fpscr_2.12.patch \
++           file://sh4_local-fpscr_values.patch \
             file://etc/ld.so.conf \
             file://generate-supported.mk"
  S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
-index f83861e..39ee76d 100644
+index 39ee76d..cd2b5e6 100644
 --- a/recipes/eglibc/eglibc_2.9.bb
 +++ b/recipes/eglibc/eglibc_2.9.bb
-@@ -3,15 +3,16 @@ require eglibc.inc
+@@ -3,7 +3,7 @@ require eglibc.inc
  DEPENDS += "gperf-native"
  FILESPATHPKG =. "eglibc-svn:"
  PV = "2.9"
--PR = "${INC_PR}.9"
-+PR = "${INC_PR}.10"
+-PR = "${INC_PR}.10"
++PR = "${INC_PR}.11"
  PR_append = "+svnr${SRCPV}"
  SRCREV="10153"
  EGLIBC_BRANCH="eglibc-2_9"
- SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
-            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
--	   file://armv4t-interworking.patch \
--	   file://IO-acquire-lock-fix.patch \
-+           file://armv4t-interworking.patch \
-+           file://IO-acquire-lock-fix.patch \
+@@ -13,6 +13,7 @@ SRC_URI =
+"svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://IO-acquire-lock-fix.patch \
             file://shorten-build-commands.patch \
-+           file://sh4_set_fpscr.patch \
+            file://sh4_set_fpscr.patch \
++           file://sh4_local-fpscr_values.patch \
             file://etc/ld.so.conf \
             file://generate-supported.mk"
  S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
 diff --git a/recipes/eglibc/eglibc_svn.bb b/recipes/eglibc/eglibc_svn.bb
-index 3b7fb84..a37c3ed 100644
+index a37c3ed..32679a0 100644
 --- a/recipes/eglibc/eglibc_svn.bb
 +++ b/recipes/eglibc/eglibc_svn.bb
-@@ -5,11 +5,12 @@ SRCREV = "11461"
- DEFAULT_PREFERENCE = "-1"
- FILESPATHPKG =. "eglibc-svn:"
- PV = "2.12+svnr${SRCPV}"
--PR = "${INC_PR}.0"
-+PR = "${INC_PR}.1"
- EGLIBC_BRANCH="trunk"
- SRC_URI = "svn://svn.eglibc.org;module=${EGLIBC_BRANCH} \
+@@ -11,6 +11,7 @@ SRC_URI = "svn://svn.eglibc.org;module=${EGLIBC_BRANCH} \
             file://eglibc-svn-arm-lowlevellock-include-tls.patch \
--	   file://IO-acquire-lock-fix.patch \
-+           file://IO-acquire-lock-fix.patch \
-+           file://sh4_set_fpscr_2.12.patch \
+            file://IO-acquire-lock-fix.patch \
+            file://sh4_set_fpscr_2.12.patch \
++           file://sh4_local-fpscr_values.patch \
             file://etc/ld.so.conf \
             file://generate-supported.mk"
  S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
-diff --git a/recipes/eglibc/files/sh4_set_fpscr.patch
-b/recipes/eglibc/files/sh4_set_fpscr.patch
+diff --git a/recipes/eglibc/files/sh4_local-fpscr_values.patch
+b/recipes/eglibc/files/sh4_local-fpscr_values.patch
 new file mode 100644
-index 0000000..f3fd5c1
+index 0000000..1685f6f
 --- /dev/null
-+++ b/recipes/eglibc/files/sh4_set_fpscr.patch
-@@ -0,0 +1,23 @@
-+# http://sourceware.org/ml/libc-alpha/2009-12/msg00009.html
-+# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565369
++++ b/recipes/eglibc/files/sh4_local-fpscr_values.patch
+@@ -0,0 +1,32 @@
 +---
-+ sysdeps/sh/sh4/fpu/fpu_control.h |    8 ++++++++
-+ 1 file changed, 8 insertions(+)
++ sysdeps/unix/sysv/linux/sh/Versions |    1 +
++ sysdeps/unix/sysv/linux/sh/sysdep.S |   11 +++++++++++
++ 2 files changed, 12 insertions(+)
 +
-+--- a/sysdeps/sh/sh4/fpu/fpu_control.h
-++++ b/sysdeps/sh/sh4/fpu/fpu_control.h
-+@@ -45,6 +45,14 @@
-+ #define _FPU_GETCW(cw) __asm__ ("sts fpscr,%0" : "=r" (cw))
++--- a/sysdeps/unix/sysv/linux/sh/Versions
+++++ b/sysdeps/unix/sysv/linux/sh/Versions
++@@ -2,6 +2,7 @@
++   GLIBC_2.2 {
++     # functions used in other libraries
++     __xstat64; __fxstat64; __lxstat64;
+++    __fpscr_values;
 +
-+ #if defined __GNUC__
-++/* Allow the use in C++ code.  */
-++#ifdef __cplusplus
-++extern "C" {
-++#endif
-++extern void __set_fpscr (unsigned long);
-++#ifdef __cplusplus
-++}
-++#endif  /* C++ */
-+ #define _FPU_SETCW(cw) __set_fpscr ((cw))
-+ #else
-+ #define _FPU_SETCW(cw) __asm__ ("lds %0,fpscr" : : "r" (cw))
-diff --git a/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
-b/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
-new file mode 100644
-index 0000000..19cccc0
---- /dev/null
-+++ b/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
-@@ -0,0 +1,29 @@
-+diff --git a/sysdeps/sh/sh4/fpu/fpu_control.h
-b/sysdeps/sh/sh4/fpu/fpu_control.h
-+index d1be46d..3ea37d3 100644
-+--- a/sysdeps/sh/sh4/fpu/fpu_control.h
-++++ b/sysdeps/sh/sh4/fpu/fpu_control.h
-+@@ -1,5 +1,5 @@
-+ /* FPU control word definitions.  SH version.
-+-   Copyright (C) 1999, 2000, 2009 Free Software Foundation, Inc.
-++   Copyright (C) 1999, 2000, 2009, 2010 Free Software Foundation, Inc.
-+    This file is part of the GNU C Library.
++     # a*
++     alphasort64;
++--- a/sysdeps/unix/sysv/linux/sh/sysdep.S
+++++ b/sysdeps/unix/sysv/linux/sh/sysdep.S
++@@ -32,3 +32,14 @@
 +
-+    The GNU C Library is free software; you can redistribute it and/or
-+@@ -46,7 +46,14 @@ typedef unsigned int fpu_control_t;
-+
-+ #if defined __GNUC__
-+ /* GCC provides this function.  */
-++/* Allow the use in C++ code.  */
-++#ifdef __cplusplus
-++extern "C" {
-++#endif
-+ extern void __set_fpscr (unsigned long);
-++#ifdef __cplusplus
-++}
-++#endif  /* C++ */
-+ #define _FPU_SETCW(cw) __set_fpscr ((cw))
-+ #else
-+ #define _FPU_SETCW(cw) __asm__ ("lds %0,fpscr" : : "r" (cw))
-+--
-+1.7.1
-+
++ #define __syscall_error __syscall_error_1
++ #include <sysdeps/unix/sh/sysdep.S>
+++
+++       .data
+++       .align 3
+++       .globl ___fpscr_values
+++       .type ___fpscr_values, @object
+++       .size ___fpscr_values, 8
+++___fpscr_values:
+++       .long 0
+++       .long 0x80000
+++weak_alias (___fpscr_values, __fpscr_values)
+++
 -- 
 1.7.1
 
