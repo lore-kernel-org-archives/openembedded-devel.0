@@ -1,34 +1,43 @@
-Received: from proxy.dresearch.de ([87.193.137.100] helo=mail.dresearch.de)
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <sledz@dresearch.de>) id 1Ow9qc-0006xY-Tp
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OwACp-000255-4u
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 10:29:39 +0200
-Received: from exchange.intern.dresearch.de (owa.xfer-intern.dresearch.de
-	[192.168.32.16])
-	by mail.dresearch.de (Postfix) with ESMTP id F21D4491286;
-	Thu, 16 Sep 2010 10:28:50 +0200 (CEST)
-Received: from [127.0.0.1] ([10.32.10.2]) by exchange.intern.dresearch.de with
-	Microsoft SMTPSVC(6.0.3790.4675); Thu, 16 Sep 2010 10:28:50 +0200
-Message-ID: <4C91D544.7070702@dresearch.de>
-Date: Thu, 16 Sep 2010 10:28:52 +0200
-From: Steffen Sledz <sledz@dresearch.de>
-User-Agent: Mozilla/5.0 (Windows; U; Windows NT 5.1; de;
-	rv:1.9.2.9) Gecko/20100825 Lightning/1.0b2 Thunderbird/3.1.3
+	Thu, 16 Sep 2010 10:52:40 +0200
+Received: by iwn2 with SMTP id 2so890283iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Sep 2010 01:51:46 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=2L1CmmLl/viRzFVKfltmc7AK6h+UQx0sWOE1x1CXLSg=;
+	b=DVoKiVgu10r9PtL9i8olis7REdvwTnXQtond5yfM9pLPwXxw/xlWnZI1ABlsu5EmpI
+	j38KZaDjNEFZn8ajhmjP42lpgngNQCxV6T2UY1/aHHgnZPIY2jV3NkFgjzh9NWnbAiAo
+	UWF1AgnqMijqAaanPOECgvbu1yep/C2mtX/ic=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=bg8+/0eon+K91fQKyreOYl2Q3I7KsilX5upZodr2mSAWV897AwAOQ9QIytjcvmPF8m
+	tZv6TbqnhAu4H0d47NVAmtjxbsVgx1teIMPTzhthK91aKYaOjfPl/qtu3k5aT5ki2lcR
+	2evAf5QtkaFb079Vbbv5oGlYO/Iwru+mJg5TU=
 MIME-Version: 1.0
-To: openembedded-devel@lists.openembedded.org
+Received: by 10.231.32.135 with SMTP id c7mr3218721ibd.3.1284627106333; Thu,
+	16 Sep 2010 01:51:46 -0700 (PDT)
+Received: by 10.231.205.204 with HTTP; Thu, 16 Sep 2010 01:51:46 -0700 (PDT)
+In-Reply-To: <4C91D544.7070702@dresearch.de>
 References: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
-In-Reply-To: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
-X-OriginalArrivalTime: 16 Sep 2010 08:28:50.0865 (UTC)
-	FILETIME=[30D1CA10:01CB5579]
-X-SA-Exim-Connect-IP: 87.193.137.100
-X-SA-Exim-Mail-From: sledz@dresearch.de
+	<4C91D544.7070702@dresearch.de>
+Date: Thu, 16 Sep 2010 10:51:46 +0200
+Message-ID: <AANLkTinQbPD21+gAvEoBEn3KaPUvz3cK4u9+LjkL1JqC@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Cc: Tom King <ka6sox@gmail.com>
 Subject: Re: melo git outage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
@@ -43,38 +52,41 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 08:29:39 -0000
+X-List-Received-Date: Thu, 16 Sep 2010 08:52:40 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
 
-Am 15.09.2010 22:32, schrieb Tom King:
-> In approximately 1hr 21:30UTC I need to rsync the server to create a ba=
-ckup
-> and perform an upgrade to the melo server so that we can add some addit=
-ional
-> functionality.
->=20
-> I suspect that the rsync and upgrad will take approx 2-3hrs (to fix thi=
-ngs
-> that break)
+2010/9/16 Steffen Sledz <sledz@dresearch.de>:
+> Am 15.09.2010 22:32, schrieb Tom King:
+>> In approximately 1hr 21:30UTC I need to rsync the server to create a backup
+>> and perform an upgrade to the melo server so that we can add some additional
+>> functionality.
+>>
+>> I suspect that the rsync and upgrad will take approx 2-3hrs (to fix things
+>> that break)
+>
+> No yet back again. :(
+>
+>> git pull
+> git.openembedded.net[0: 140.211.169.165]: errno=Connection refused
+> fatal: unable to connect a socket (Connection refused)
+>
+> Steffen
 
-No yet back again. :(
+Here it works:
 
-> git pull
-git.openembedded.net[0: 140.211.169.165]: errno=3DConnection refused
-fatal: unable to connect a socket (Connection refused)
+frans@frans-desktop:~/workspace/openembedded.git$ git pull
+remote: Counting objects: 9, done.
+remote: Compressing objects: 100% (5/5), done.
+remote: Total 5 (delta 3), reused 0 (delta 0)
+Unpacking objects: 100% (5/5), done.
+From git.openembedded.org:openembedded
+   23e6589..6aa0766  master     -> origin/master
+   23e6589..6aa0766  org.openembedded.dev -> origin/org.openembedded.dev
+Updating 23e6589..6aa0766
+Fast-forward
+ recipes/nodejs/nodejs_0.2.1.bb |   23 ++++++++++++++---------
+ 1 files changed, 14 insertions(+), 9 deletions(-)
 
-Steffen
-
---=20
-Steffen Sledz
-DResearch Digital Media Systems GmbH
-Otto-Schmirgal-Str.3, D-10319 Berlin, Germany
-Tel: +49 (30) 515932237 mailto:sledz@DResearch.DE
-Fax: +49 (30) 515932299 http://www.DResearch.DE
-Gesch=E4ftsf=FChrer: Dr. Michael Weber, Werner M=F6gle;
-Amtsgericht Berlin Charlottenburg; HRB 54412;
-Ust.-IDNr. DE169013825; WEEE Reg.-Nr. DE 85995642
-
+Frans
 
 
