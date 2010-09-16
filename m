@@ -1,46 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Ow7tG-000408-8w
-	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 08:24:24 +0200
-Received: by iwn2 with SMTP id 2so791229iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ow8XA-000812-1C for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 09:05:30 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Ow8WI-0004Nh-BC for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 09:04:34 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Sep 2010 09:04:34 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 23:23:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=RHONEh5i9wAJdQzygokaeFy74LAmpMZatgYRHrwUAjw=;
-	b=ncEU5MLAmUkbxoFZjNlPrDGQiYROah6+peinz87mcLeF25vGuo7aC+1NyKWYNN+7yE
-	6j8/gnb/W0I3OuNtaWgU6SkcfZKXXbHF9yCfos0f/3S7Kv+AbIgBeWGbq1uah4UcUC/Z
-	qouczvlPd19CS8UYbPEFOzm1xdJ49XSzbCC4E=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=EgS7olun3YMn9ff12mQAgBcjEe7MIzr1bOOmmer5wQPHvNUqp2w8SJH5VKXt/fqDTq
-	+CwfZCpQCIf677CDu/h5OGfSsYjsJybRqMTLLAm6paujQ2Pu69xAPq3JKEjjOm9dWwmD
-	lC6dQXOslxgMyyzU5RmK/6ar/H6smEV/FdEaE=
-MIME-Version: 1.0
-Received: by 10.231.184.156 with SMTP id ck28mr2549527ibb.168.1284618205848;
-	Wed, 15 Sep 2010 23:23:25 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Wed, 15 Sep 2010 23:23:25 -0700 (PDT)
-In-Reply-To: <alpine.LNX.2.00.1009160726030.29127@asterix.crazy-teaparty.dyndns.org>
-References: <AANLkTinWDmigJDsU-vJqwujb9hXu7p7j4QpY=nYQq3rh@mail.gmail.com>
-	<alpine.LNX.2.00.1009160658000.29127@asterix.crazy-teaparty.dyndns.org>
-	<alpine.LNX.2.00.1009160726030.29127@asterix.crazy-teaparty.dyndns.org>
-Date: Thu, 16 Sep 2010 08:23:25 +0200
-Message-ID: <AANLkTimdGptzPQi9+84HcP6Gm3theF1HCy6nJ6vPWJAC@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Thu, 16 Sep 2010 09:04:34 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Thu, 16 Sep 2010 09:04:24 +0200
+Message-ID: <i6sfho$qq$1@dough.gmane.org>
+References: <1284570332-6484-1-git-send-email-coolaj86@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <1284570332-6484-1-git-send-email-coolaj86@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: Howto create a bitbake recipe
+Subject: Re: [PATCH] nodejs: replaced v0.2.0 with v0.2.1
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,71 +50,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 06:24:24 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Sep 2010 07:05:33 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-2010/9/16 Vitus Jensen <vjensen@gmx.de>:
-> On Thu, 16 Sep 2010, Vitus Jensen wrote:
->
->> On Wed, 15 Sep 2010, AJ ONeal wrote:
->>
->>> =A0I don't know very much about this - only what I've seen discussed on=
- the
->>> =A0mailing list.
->>
->> And you probably searched recipes/ before writing your own? =A0This is m=
-y
->> main source of informationen.
->>
->>> =A0I've created a template and given my just-submitted recipe as an
->>> example.
->>>
->>> =A0If you know bitbake and OE policies, please share the wealth:
->>>
->>> =A0http://wiki.openembedded.net/index.php/How_to_create_a_bitbake_recip=
-e_for_dummies
->>
->> I don't think you should not use method overrides in the example (the wi=
-ki
->> list those overrides as things to avoid), just use the simpliest form of=
- a
->> recipe there and refer to the OE usermanual from that page for additiona=
-l
->> features, that URL:
->> http://docs.openembedded.org/usermanual/usermanual.html#chapter_recipes
->>
->> =3D=3D=3D=3D=3D
->> DESCRIPTION =3D ""
->> HOMEPAGE =3D ""
->> LICENSE =3D ""
->> DEPENDS =3D ""
->> PR =3D "r0" =A0# Package Revision, update this whenever you change the r=
-ecipe.
->>
->> SRC_URI =3D " http://server/${PN}-${PV}.tar.bz2 \
->> =A0 =A0 =A0 =A0 file://fix-crosscompile.patch \
->> =A0 =A0 =A0 =A0 "
->> SRC_URI[md5sum] =3D ""
->> SRC_URI[sha256sum] =3D ""
->> =3D=3D=3D=3D=3D
->>
->> More isn't needed (some may argue about PR) and writing more may actuall=
-y
->> harm.
->
-> Sorry, there was an important line missing:
->
-> inherit cmake
-> -or-
-> inherit autotools
-> -or-
-> inherit your-build-system
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-or provide your own do_compile, do_install if it is not
-cmake/autotools/qmake/whatever
+On 15-09-10 19:05, AJ ONeal wrote:
+> From: AJ ONeal <coolaj86+fastr@gmail.com>
 
-FM
+> -do_install () {
+> -  DESTDIR=${D} oe_runmake install
+> -}
+
+> +do_install () {
+> +  #oe_runmake install # doesn't install to correct location
+> +
+> +  # This works
+> +  install -d ${D}${bindir}/
+> +  install -m 0755 ${S}/build/default/node ${D}${bindir}/
+> +  install -m 0755 ${S}/bin/node-waf ${D}${bindir}/
+> +  install -m 0755 ${S}/bin/node-repl ${D}${bindir}/
+
+
+NAK, you replace a working do_install with a broken one
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMkcF3MkyGM64RGpERAgjTAJ9JLIiRPpck9q1q8c1j4isu+6dr1gCcDEYo
+n0HcgkrWAzxxsqAQCQ8girw=
+=NPbD
+-----END PGP SIGNATURE-----
+
 
 
