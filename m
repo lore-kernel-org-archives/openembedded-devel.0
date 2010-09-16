@@ -1,32 +1,33 @@
 Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ow8XA-000812-1C for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 09:05:30 +0200
+	id 1Ow8cQ-0001MD-DM for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 09:10:55 +0200
 Received: from list by lo.gmane.org with local (Exim 4.69)
 	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
-	id 1Ow8WI-0004Nh-BC for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 09:04:34 +0200
+	id 1Ow8bb-0007BA-Q4 for openembedded-devel@lists.openembedded.org;
+	Thu, 16 Sep 2010 09:10:03 +0200
 Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
 	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
 	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Sep 2010 09:04:34 +0200
+	Thu, 16 Sep 2010 09:10:03 +0200
 Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
 	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Thu, 16 Sep 2010 09:04:34 +0200
+	Thu, 16 Sep 2010 09:10:03 +0200
 X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
 From: Koen Kooi <k.kooi@student.utwente.nl>
-Date: Thu, 16 Sep 2010 09:04:24 +0200
-Message-ID: <i6sfho$qq$1@dough.gmane.org>
+Date: Thu, 16 Sep 2010 09:06:23 +0200
+Message-ID: <i6sflf$qq$3@dough.gmane.org>
 References: <1284570332-6484-1-git-send-email-coolaj86@gmail.com>
+	<AANLkTimiUfDtop++PS6YhwtYh3b_e7pMpEN7GuE2LLYc@mail.gmail.com>
 Mime-Version: 1.0
 X-Complaints-To: usenet@dough.gmane.org
 X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
 User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
 	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
-In-Reply-To: <1284570332-6484-1-git-send-email-coolaj86@gmail.com>
+In-Reply-To: <AANLkTimiUfDtop++PS6YhwtYh3b_e7pMpEN7GuE2LLYc@mail.gmail.com>
 X-Enigmail-Version: 1.0.1
 X-SA-Exim-Connect-IP: 80.91.229.12
 X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
@@ -50,37 +51,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 07:05:33 -0000
+X-List-Received-Date: Thu, 16 Sep 2010 07:10:55 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
 
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-On 15-09-10 19:05, AJ ONeal wrote:
-> From: AJ ONeal <coolaj86+fastr@gmail.com>
+On 15-09-10 19:55, Cliff Brake wrote:
+> On Wed, Sep 15, 2010 at 1:05 PM, AJ ONeal <coolaj86@gmail.com> wrote:
+>> From: AJ ONeal <coolaj86+fastr@gmail.com>
+>>
+>> * now includes node-waf and node-repl
+>> * updated pathname in libev-cross-cc and libev-cross-cc
+>> * removed patch which is no longer necessary (applied upstream)
+> 
+> Pushed, thanks!
 
-> -do_install () {
-> -  DESTDIR=${D} oe_runmake install
-> -}
-
-> +do_install () {
-> +  #oe_runmake install # doesn't install to correct location
-> +
-> +  # This works
-> +  install -d ${D}${bindir}/
-> +  install -m 0755 ${S}/build/default/node ${D}${bindir}/
-> +  install -m 0755 ${S}/bin/node-waf ${D}${bindir}/
-> +  install -m 0755 ${S}/bin/node-repl ${D}${bindir}/
-
-
-NAK, you replace a working do_install with a broken one
+Could please pay more attention next time? This introduces 2 big
+regressions that were previously fixed by:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=3967caeb51d7427980e06fd8b6e23c8fdc75e791
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.5 (Darwin)
 
-iD8DBQFMkcF3MkyGM64RGpERAgjTAJ9JLIiRPpck9q1q8c1j4isu+6dr1gCcDEYo
-n0HcgkrWAzxxsqAQCQ8girw=
-=NPbD
+iD8DBQFMkcHvMkyGM64RGpERAsElAJ9SOUdmISqP43r50YImwV8z248j1ACfcrha
+kRAib6gnBmPQ5b1NBCPygTs=
+=b0Gq
 -----END PGP SIGNATURE-----
 
 
