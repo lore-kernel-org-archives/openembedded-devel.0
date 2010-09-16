@@ -1,44 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from out2.smtp.messagingengine.com ([66.111.4.26])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Ow6MQ-00069n-Fm
+	(envelope-from <vjensen@gmx.de>) id 1Ow6qN-00070S-JV
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 06:46:15 +0200
-Received: by iwn2 with SMTP id 2so732843iwn.6
+	Thu, 16 Sep 2010 07:17:18 +0200
+Received: from compute2.internal (compute2.nyi.mail.srv.osa [10.202.2.42])
+	by gateway1.messagingengine.com (Postfix) with ESMTP id 18F034A5
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 21:45:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=9BAwhEZU5KOFe41F1NBI9kwyHbYga2RZAzGtn382CqE=;
-	b=wI+5M6Pc/2NcW61A/f8BNJzAZdogy0lpYEiG0KQDC9WrHKR/rGkLpT6jQUr775Ub/I
-	T+bv7G7S1WSnUkwUqoPnlAZOCWBFMqhaoj0DqbfgcOlcE3LydQRmYqeAd5mvkw0guduU
-	QyrKfQNgAPT5t83RO7n0CYNP6dq0D35FEKkeI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=FAL0m8lfhz4Tse5xL/+8jDbfN72eXot1SfSrDw5R5K+w+EjMYFMovBTjpvFUN7Ybj0
-	iFu21qsXekZXJzhIgbs9W7PoUXNEvFx9j1CgZ4ReujWV5aocZr4CdhcZFaXEQVHYmBUf
-	LJNexZ8B4Ii3wuMJa19qRFH/2O98+ne+9Pu4s=
+	Thu, 16 Sep 2010 01:09:36 -0400 (EDT)
+Received: from frontend2.messagingengine.com ([10.202.2.161])
+	by compute2.internal (MEProxy); Thu, 16 Sep 2010 01:09:36 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; d=messagingengine.com;
+	h=date:from:to:subject:in-reply-to:message-id:references:mime-version:content-type;
+	s=smtpout; bh=G/GxKPecP46hkK4ivtnTVJjLDzk=;
+	b=YrvBVUMa18sL3WcOiJhFStrwKRLCx1F9IbUWF+6GGkArhdBii6gJUN7icHn+QzY7nv5UFyCAGHWjRdfpuDHQ0DNr5ivk5hAdya/r3U6O/7H7txSBWCgTdyltZ5ODGAp1Lz6DQWnNyXUbKtmLEBIRctC3rJGK3iy9A0C2Y8w40Tw=
+X-Sasl-enc: b3CbisiWQI7JF9G7GtVa1ivyfjFW71xnDewyDJy3hV2g 1284613775
+Received: from [192.168.1.34] (hnvr-4d07871e.pool.mediaWays.net [77.7.135.30])
+	by mail.messagingengine.com (Postfix) with ESMTPSA id 85F2A5E3113
+	for <openembedded-devel@lists.openembedded.org>;
+	Thu, 16 Sep 2010 01:09:35 -0400 (EDT)
+Date: Thu, 16 Sep 2010 07:11:17 +0200 (CEST)
+From: Vitus Jensen <vjensen@gmx.de>
+To: openembedded-devel <openembedded-devel@lists.openembedded.org>
+In-Reply-To: <AANLkTinWDmigJDsU-vJqwujb9hXu7p7j4QpY=nYQq3rh@mail.gmail.com>
+Message-ID: <alpine.LNX.2.00.1009160658000.29127@asterix.crazy-teaparty.dyndns.org>
+References: <AANLkTinWDmigJDsU-vJqwujb9hXu7p7j4QpY=nYQq3rh@mail.gmail.com>
+User-Agent: Alpine 2.00 (LNX 1167 2008-08-23)
+Jabber-ID: vitus_jensen@gmx.de
+X-Accepted-File-Formats: ASCII rtf ps pdf - *NO* MS Office files please
+X-Message-Flag: Worried about bugs & viruses? Switch to Mac/Unix/PC Pine! Info
+	@ www.ii.com
 MIME-Version: 1.0
-Received: by 10.231.169.203 with SMTP id a11mr659037ibz.99.1284612325112; Wed,
-	15 Sep 2010 21:45:25 -0700 (PDT)
-Received: by 10.231.161.1 with HTTP; Wed, 15 Sep 2010 21:45:25 -0700 (PDT)
-In-Reply-To: <4C919DB6.4010603@gmail.com>
-References: <4C919DB6.4010603@gmail.com>
-Date: Thu, 16 Sep 2010 14:15:25 +0930
-Message-ID: <AANLkTin8H_Y4LSA82sDGDL7sqFHFhuR7KJJGHK7Tp-26@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 66.111.4.26
+X-SA-Exim-Mail-From: vjensen@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,
+	RCVD_IN_DNSWL_LOW,SPF_FAIL autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 2/2] zziplib_0.13.59.bb: add new recipe.
+Subject: Re: Howto create a bitbake recipe
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,22 +52,50 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 04:46:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Thu, 16 Sep 2010 05:17:18 -0000
+Content-Type: TEXT/PLAIN; charset=US-ASCII; format=flowed
 
-On 16 September 2010 14:01, Graham Gower <graham.gower@gmail.com> wrote:
-> Signed-off-by: Graham Gower <graham.gower@gmail.com>
-> ---
-> =A0recipes/zziplib/zziplib-0.13.59/makefile.am.patch | =A0140 +++++++++++=
-++++++++++
-> =A0recipes/zziplib/zziplib_0.13.59.bb =A0 =A0 =A0 =A0 =A0 =A0 =A0 =A0| =
-=A0 29 +++++
-> =A02 files changed, 169 insertions(+), 0 deletions(-)
-> =A0create mode 100644 recipes/zziplib/zziplib-0.13.59/makefile.am.patch
-> =A0create mode 100644 recipes/zziplib/zziplib_0.13.59.bb
+On Wed, 15 Sep 2010, AJ ONeal wrote:
 
-Please disregard this patch, I did something stupid. Will resubmit
-once i fix it.
+> I don't know very much about this - only what I've seen discussed on the
+> mailing list.
+
+And you probably searched recipes/ before writing your own?  This is my 
+main source of informationen.
+
+> I've created a template and given my just-submitted recipe as an example.
+>
+> If you know bitbake and OE policies, please share the wealth:
+> http://wiki.openembedded.net/index.php/How_to_create_a_bitbake_recipe_for_dummies
+
+I don't think you should not use method overrides in the example (the wiki 
+list those overrides as things to avoid), just use the simpliest form of a 
+recipe there and refer to the OE usermanual from that page for additional 
+features, that URL: 
+http://docs.openembedded.org/usermanual/usermanual.html#chapter_recipes
+
+=====
+DESCRIPTION = ""
+HOMEPAGE = ""
+LICENSE = ""
+DEPENDS = ""
+PR = "r0"  # Package Revision, update this whenever you change the recipe.
+
+SRC_URI = " http://server/${PN}-${PV}.tar.bz2 \
+ 	file://fix-crosscompile.patch \
+ 	"
+SRC_URI[md5sum] = ""
+SRC_URI[sha256sum] = ""
+=====
+
+More isn't needed (some may argue about PR) and writing more may actually 
+harm.
+
+Best regards,
+    Vitus
+
+-- 
+Vitus Jensen, Hannover, Germany, Universe (current)
+pgp public key available from keyservers
 
 
