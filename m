@@ -1,50 +1,33 @@
-Received: from mail-pw0-f47.google.com ([209.85.160.47])
+Received: from mail-pz0-f47.google.com ([209.85.210.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Ow71r-0007GQ-Ic
+	(envelope-from <iwamatsu@nigauri.org>) id 1Ow7EC-0007Rk-QE
 	for openembedded-devel@lists.openembedded.org;
-	Thu, 16 Sep 2010 07:29:05 +0200
-Received: by pwj1 with SMTP id 1so349185pwj.6
+	Thu, 16 Sep 2010 07:41:54 +0200
+Received: by pzk37 with SMTP id 37so267687pzk.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 15 Sep 2010 22:28:12 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:message-id:date:from
-	:user-agent:mime-version:to:subject:references:in-reply-to
-	:content-type:content-transfer-encoding;
-	bh=8/86fi/jBbeXjLXbxntQxmxlYbDbtKy0ZcLgxCUqNAU=;
-	b=Aj0FHcekuNIpuoGxuldC5JScDYpvQXKOHh2J7/3lrgOm0Y/motbcY+YV1dc60WMwTW
-	GdCWlNMFt7M+5h83H1vfGUwsOVT7s2Yv0mboWj1x9oWuA0zUA/G2Miuw3NzlhqpnVNgC
-	bf9/lenNYF3F0XcfhttYIy9bDhIY+xaUTgXFU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=message-id:date:from:user-agent:mime-version:to:subject:references
-	:in-reply-to:content-type:content-transfer-encoding;
-	b=USNuHx9eUaqiopHiJ29K9RFjWjHUoyV2Z2Ihv3gRI1mVd7twPv0yWB2IPVXS1cWcIY
-	UDdo+GdDnc7kPahvduaPP8s3s9+G0XBb30MRM6xbpzR6bqkPUaA0yeNV/+Ji6rggl6on
-	xaFRzWlOQ41JVBDhRvmb+490RQnRaC8rzjtfo=
-Received: by 10.142.249.19 with SMTP id w19mr431989wfh.189.1284614892580;
-	Wed, 15 Sep 2010 22:28:12 -0700 (PDT)
-Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
-	by mx.google.com with ESMTPS id q23sm2587491wfc.6.2010.09.15.22.28.10
+	Wed, 15 Sep 2010 22:40:58 -0700 (PDT)
+Received: by 10.142.221.19 with SMTP id t19mr2399389wfg.59.1284615657917;
+	Wed, 15 Sep 2010 22:40:57 -0700 (PDT)
+Received: from localhost.localdomain (49.14.32.202.bf.2iij.net [202.32.14.49])
+	by mx.google.com with ESMTPS id
+	n35sm2595902wfa.15.2010.09.15.22.40.57
 	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 15 Sep 2010 22:28:11 -0700 (PDT)
-Message-ID: <4C91AAE7.70203@gmail.com>
-Date: Thu, 16 Sep 2010 14:58:07 +0930
-From: Graham Gower <graham.gower@gmail.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
-	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
-MIME-Version: 1.0
+	Wed, 15 Sep 2010 22:40:57 -0700 (PDT)
+Sender: Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+From: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
 To: openembedded-devel@lists.openembedded.org
-References: <4C919DB6.4010603@gmail.com>
-	<AANLkTin8H_Y4LSA82sDGDL7sqFHFhuR7KJJGHK7Tp-26@mail.gmail.com>
-In-Reply-To: <AANLkTin8H_Y4LSA82sDGDL7sqFHFhuR7KJJGHK7Tp-26@mail.gmail.com>
-X-SA-Exim-Connect-IP: 209.85.160.47
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+Date: Thu, 16 Sep 2010 14:44:53 +0900
+Message-Id: <1284615893-18010-1-git-send-email-nobuhiro.iwamatsu.yj@renesas.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.210.47
+X-SA-Exim-Mail-From: iwamatsu@nigauri.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH 2/2 v2] zziplib_0.13.59.bb: add new recipe.
+Subject: [PATCH] eglibc: Update recipe for all version
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -58,90 +41,245 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Thu, 16 Sep 2010 05:29:05 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Thu, 16 Sep 2010 05:41:55 -0000
 
+* Included sh4_set_fpscr.patch and sh4_set_fpscr_2.12.patch.
+  These patch provides patch of __set_fpscr prototype.
+* Included sh4_local-fpscr_values.patch.
+  This provides a patch maintaining __fpscr_values in libc.
+  This is taken in in Debian and codesourcery already.
+  This patch is necessary to have compatibility in these and openemdedded.
 
-Signed-off-by: Graham Gower <graham.gower@gmail.com>
+Signed-off-by: Nobuhiro Iwamatsu <nobuhiro.iwamatsu.yj@renesas.com>
 ---
- recipes/zziplib/zziplib-0.13.59/configure.ac.patch |   29 ++++++++++++++++++++
- recipes/zziplib/zziplib_0.13.59.bb                 |   27 ++++++++++++++++++
- 2 files changed, 56 insertions(+), 0 deletions(-)
- create mode 100644 recipes/zziplib/zziplib-0.13.59/configure.ac.patch
- create mode 100644 recipes/zziplib/zziplib_0.13.59.bb
+ recipes/eglibc/eglibc_2.10.bb                     |    4 ++-
+ recipes/eglibc/eglibc_2.11.bb                     |    4 ++-
+ recipes/eglibc/eglibc_2.12.bb                     |    4 ++-
+ recipes/eglibc/eglibc_2.9.bb                      |    8 +++--
+ recipes/eglibc/eglibc_svn.bb                      |    6 ++-
+ recipes/eglibc/files/sh4_local-fpscr_values.patch |   32 +++++++++++++++++++++
+ recipes/eglibc/files/sh4_set_fpscr.patch          |   23 +++++++++++++++
+ recipes/eglibc/files/sh4_set_fpscr_2.12.patch     |   29 +++++++++++++++++++
+ 8 files changed, 102 insertions(+), 8 deletions(-)
+ create mode 100644 recipes/eglibc/files/sh4_local-fpscr_values.patch
+ create mode 100644 recipes/eglibc/files/sh4_set_fpscr.patch
+ create mode 100644 recipes/eglibc/files/sh4_set_fpscr_2.12.patch
 
-diff --git a/recipes/zziplib/zziplib-0.13.59/configure.ac.patch b/recipes/zziplib/zziplib-0.13.59/configure.ac.patch
+diff --git a/recipes/eglibc/eglibc_2.10.bb b/recipes/eglibc/eglibc_2.10.bb
+index c10db7d..eba3e36 100644
+--- a/recipes/eglibc/eglibc_2.10.bb
++++ b/recipes/eglibc/eglibc_2.10.bb
+@@ -3,7 +3,7 @@ require eglibc.inc
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.10"
+-PR = "${INC_PR}.9"
++PR = "${INC_PR}.10"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10152"
+ EGLIBC_BRANCH="eglibc-2_10"
+@@ -12,6 +12,8 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://armv4t-interworking.patch \
+            file://IO-acquire-lock-fix.patch \
+            file://shorten-build-commands.patch \
++           file://sh4_set_fpscr.patch \
++           file://sh4_local-fpscr_values.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/eglibc_2.11.bb b/recipes/eglibc/eglibc_2.11.bb
+index bece90f..b56a8ce 100644
+--- a/recipes/eglibc/eglibc_2.11.bb
++++ b/recipes/eglibc/eglibc_2.11.bb
+@@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.11"
+-PR = "${INC_PR}.6"
++PR = "${INC_PR}.7"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10690"
+ EGLIBC_BRANCH="eglibc-2_11"
+@@ -12,6 +12,8 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+            file://IO-acquire-lock-fix.patch \
+            file://shorten-build-commands.patch \
++           file://sh4_set_fpscr.patch \
++           file://sh4_local-fpscr_values.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/eglibc_2.12.bb b/recipes/eglibc/eglibc_2.12.bb
+index 0d08c56..fce0bdd 100644
+--- a/recipes/eglibc/eglibc_2.12.bb
++++ b/recipes/eglibc/eglibc_2.12.bb
+@@ -4,7 +4,7 @@ DEFAULT_PREFERENCE = "-1"
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.12"
+-PR = "${INC_PR}.3"
++PR = "${INC_PR}.4"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="11306"
+ EGLIBC_BRANCH="eglibc-2_12"
+@@ -12,6 +12,8 @@ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+            file://IO-acquire-lock-fix.patch \
+            file://shorten-build-commands.patch \
++           file://sh4_set_fpscr_2.12.patch \
++           file://sh4_local-fpscr_values.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/eglibc_2.9.bb b/recipes/eglibc/eglibc_2.9.bb
+index f83861e..fff4fc9 100644
+--- a/recipes/eglibc/eglibc_2.9.bb
++++ b/recipes/eglibc/eglibc_2.9.bb
+@@ -3,15 +3,17 @@ require eglibc.inc
+ DEPENDS += "gperf-native"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.9"
+-PR = "${INC_PR}.9"
++PR = "${INC_PR}.10"
+ PR_append = "+svnr${SRCPV}"
+ SRCREV="10153"
+ EGLIBC_BRANCH="eglibc-2_9"
+ SRC_URI = "svn://svn.eglibc.org/branches;module=${EGLIBC_BRANCH};proto=svn \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+-	   file://armv4t-interworking.patch \
+-	   file://IO-acquire-lock-fix.patch \
++           file://armv4t-interworking.patch \
++           file://IO-acquire-lock-fix.patch \
+            file://shorten-build-commands.patch \
++           file://sh4_set_fpscr.patch \
++           file://sh4_local-fpscr_values.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/eglibc_svn.bb b/recipes/eglibc/eglibc_svn.bb
+index 3b7fb84..32679a0 100644
+--- a/recipes/eglibc/eglibc_svn.bb
++++ b/recipes/eglibc/eglibc_svn.bb
+@@ -5,11 +5,13 @@ SRCREV = "11461"
+ DEFAULT_PREFERENCE = "-1"
+ FILESPATHPKG =. "eglibc-svn:"
+ PV = "2.12+svnr${SRCPV}"
+-PR = "${INC_PR}.0"
++PR = "${INC_PR}.1"
+ EGLIBC_BRANCH="trunk"
+ SRC_URI = "svn://svn.eglibc.org;module=${EGLIBC_BRANCH} \
+            file://eglibc-svn-arm-lowlevellock-include-tls.patch \
+-	   file://IO-acquire-lock-fix.patch \
++           file://IO-acquire-lock-fix.patch \
++           file://sh4_set_fpscr_2.12.patch \
++           file://sh4_local-fpscr_values.patch \
+            file://etc/ld.so.conf \
+            file://generate-supported.mk"
+ S = "${WORKDIR}/${EGLIBC_BRANCH}/libc"
+diff --git a/recipes/eglibc/files/sh4_local-fpscr_values.patch b/recipes/eglibc/files/sh4_local-fpscr_values.patch
 new file mode 100644
-index 0000000..9d72296
+index 0000000..1685f6f
 --- /dev/null
-+++ b/recipes/zziplib/zziplib-0.13.59/configure.ac.patch
++++ b/recipes/eglibc/files/sh4_local-fpscr_values.patch
+@@ -0,0 +1,32 @@
++---
++ sysdeps/unix/sysv/linux/sh/Versions |    1 +
++ sysdeps/unix/sysv/linux/sh/sysdep.S |   11 +++++++++++
++ 2 files changed, 12 insertions(+)
++
++--- a/sysdeps/unix/sysv/linux/sh/Versions
+++++ b/sysdeps/unix/sysv/linux/sh/Versions
++@@ -2,6 +2,7 @@
++   GLIBC_2.2 {
++     # functions used in other libraries
++     __xstat64; __fxstat64; __lxstat64;
+++    __fpscr_values;
++ 
++     # a*
++     alphasort64;
++--- a/sysdeps/unix/sysv/linux/sh/sysdep.S
+++++ b/sysdeps/unix/sysv/linux/sh/sysdep.S
++@@ -32,3 +32,14 @@
++ 
++ #define __syscall_error __syscall_error_1
++ #include <sysdeps/unix/sh/sysdep.S>
+++
+++       .data
+++       .align 3
+++       .globl ___fpscr_values
+++       .type ___fpscr_values, @object
+++       .size ___fpscr_values, 8
+++___fpscr_values:
+++       .long 0
+++       .long 0x80000
+++weak_alias (___fpscr_values, __fpscr_values)
+++
+diff --git a/recipes/eglibc/files/sh4_set_fpscr.patch b/recipes/eglibc/files/sh4_set_fpscr.patch
+new file mode 100644
+index 0000000..f3fd5c1
+--- /dev/null
++++ b/recipes/eglibc/files/sh4_set_fpscr.patch
+@@ -0,0 +1,23 @@
++# http://sourceware.org/ml/libc-alpha/2009-12/msg00009.html
++# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=565369
++---
++ sysdeps/sh/sh4/fpu/fpu_control.h |    8 ++++++++
++ 1 file changed, 8 insertions(+)
++
++--- a/sysdeps/sh/sh4/fpu/fpu_control.h
+++++ b/sysdeps/sh/sh4/fpu/fpu_control.h
++@@ -45,6 +45,14 @@
++ #define _FPU_GETCW(cw) __asm__ ("sts fpscr,%0" : "=r" (cw))
++ 
++ #if defined __GNUC__
+++/* Allow the use in C++ code.  */
+++#ifdef __cplusplus
+++extern "C" {
+++#endif
+++extern void __set_fpscr (unsigned long);
+++#ifdef __cplusplus
+++}
+++#endif  /* C++ */
++ #define _FPU_SETCW(cw) __set_fpscr ((cw))
++ #else
++ #define _FPU_SETCW(cw) __asm__ ("lds %0,fpscr" : : "r" (cw))
+diff --git a/recipes/eglibc/files/sh4_set_fpscr_2.12.patch b/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
+new file mode 100644
+index 0000000..19cccc0
+--- /dev/null
++++ b/recipes/eglibc/files/sh4_set_fpscr_2.12.patch
 @@ -0,0 +1,29 @@
-+--- zziplib-0.13.59/configure.ac-orig	2010-09-16 14:34:38.000000000 +0930
-++++ zziplib-0.13.59/configure.ac	2010-09-16 14:36:35.000000000 +0930
-+@@ -1,13 +1,11 @@
-+-AC_INIT([zziplib.spec])
-+ AC_PREREQ(2.61)
-+-AC_COPYRIGHT([Guido Draheim <guido@gmx.de> for ZZipLib.SF.net])
-++AC_INIT([zziplib], [0.13.59], [Guido Draheim <guido@gmx.de>])
-++AC_CANONICAL_TARGET
-++AM_INIT_AUTOMAKE([foreign 1.9 dist-bzip2])
-++AC_CONFIG_SRCDIR([zzip/zip.c])
-+ AC_REVISION($Revision: 1.15 $)
-+-AC_CONFIG_AUX_DIR([uses])
-+ AC_CONFIG_MACRO_DIR([m4])
-+ # =======================================================================
-+-AC_CANONICAL_SYSTEM
-+-dnl AM_ENABLE_MULTILIB([Makefile],[$host])
-+-AX_ENABLE_BUILDDIR_UNAME
-+ AC_SET_DEFAULT_PATHS_SYSTEM
-+ # -----------------------------------------------------------------------
-+ AC_ARG_ENABLE([thread-safe],
-+@@ -62,8 +60,6 @@
-+ AC_SUBST(ZLIB_INCL)
-+ AC_SUBST(ZLIB_LDIR)
-+ # -----------------------------------------------------------------------
-+-AX_SPEC_DEFAULTS
-+-AM_INIT_AUTOMAKE($PACKAGE,$VERSION)
-+ dnl test ".$CFLAGS" = "." && CFLAGS=""
-+ AC_PROG_CC
-+ dnl test ".$CFLAGS" = "." && test "$GCC" = "yes" && CFLAGS="-O3"
-diff --git a/recipes/zziplib/zziplib_0.13.59.bb b/recipes/zziplib/zziplib_0.13.59.bb
-new file mode 100644
-index 0000000..eac671c
---- /dev/null
-+++ b/recipes/zziplib/zziplib_0.13.59.bb
-@@ -0,0 +1,27 @@
-+DESCRIPTION = "Support library for dealing with zip files"
-+SECTION = "libs"
-+PRIORITY = "optional"
-+LICENSE = "LGPL MPL"
-+DEPENDS = "zlib python-native"
++diff --git a/sysdeps/sh/sh4/fpu/fpu_control.h b/sysdeps/sh/sh4/fpu/fpu_control.h
++index d1be46d..3ea37d3 100644
++--- a/sysdeps/sh/sh4/fpu/fpu_control.h
+++++ b/sysdeps/sh/sh4/fpu/fpu_control.h
++@@ -1,5 +1,5 @@
++ /* FPU control word definitions.  SH version.
++-   Copyright (C) 1999, 2000, 2009 Free Software Foundation, Inc.
+++   Copyright (C) 1999, 2000, 2009, 2010 Free Software Foundation, Inc.
++    This file is part of the GNU C Library.
++ 
++    The GNU C Library is free software; you can redistribute it and/or
++@@ -46,7 +46,14 @@ typedef unsigned int fpu_control_t;
++ 
++ #if defined __GNUC__
++ /* GCC provides this function.  */
+++/* Allow the use in C++ code.  */  
+++#ifdef __cplusplus
+++extern "C" {
+++#endif
++ extern void __set_fpscr (unsigned long);
+++#ifdef __cplusplus
+++}
+++#endif  /* C++ */
++ #define _FPU_SETCW(cw) __set_fpscr ((cw))
++ #else
++ #define _FPU_SETCW(cw) __asm__ ("lds %0,fpscr" : : "r" (cw))
++-- 
++1.7.1
 +
-+PR = "r0"
-+
-+SRC_URI[md5sum] = "14b5a6fc229afe9916d48358479568d3"
-+SRC_URI[sha256sum] = "cbc90cef60ee498319258e464895f990bb2e6e08f245264d77e44b309c8c218f"
-+
-+SRC_URI = "${SOURCEFORGE_MIRROR}/zziplib/zziplib-${PV}.tar.bz2 \
-+		file://configure.ac.patch"
-+
-+inherit autotools pkgconfig
-+
-+EXTRA_OECONF += "--srcdir=${S}"
-+BBCLASSEXTEND = "native"
-+
-+do_compile_append() {
-+	# Fix QA Issue with staging.
-+	for i in ${S}/*/*.pc ; do
-+		if [ ! -z "${STAGING_DIR_TARGET}" ]; then
-+			sed -i -e s:${STAGING_DIR_TARGET}::g $i
-+		fi
-+	done
-+}
 -- 
 1.7.1
-
 
 
 
