@@ -1,42 +1,32 @@
-Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <dp@xora.org.uk>) id 1OwYp7-0002lg-PZ
+	(envelope-from <Fahad_Usman@mentor.com>) id 1OwaUC-0008Le-RX
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Sep 2010 13:09:54 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 2BE8FA5585
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Sep 2010 12:08:55 +0100 (BST)
-X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
-Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
-	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
-	port 10024) with ESMTP id 36IQT2sjWe39
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Sep 2010 12:08:53 +0100 (BST)
-Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
-	[188.220.34.37])
-	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1B99BA5576
-	for <openembedded-devel@lists.openembedded.org>;
-	Fri, 17 Sep 2010 12:08:50 +0100 (BST)
-Message-ID: <4C934C38.5050608@xora.org.uk>
-Date: Fri, 17 Sep 2010 12:08:40 +0100
-From: Graeme Gregory <dp@xora.org.uk>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100908 Lightning/1.0b2 Thunderbird/3.1.3
-MIME-Version: 1.0
+	Fri, 17 Sep 2010 14:56:18 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1OwaTM-0005Wc-B4 from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Sep 2010 05:55:24 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 17 Sep 2010 14:55:13 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-References: <AANLkTimF0DyLTfajYY0zWdnLDRuE8_00iufG4V5dRY12@mail.gmail.com>
-	<AANLkTi=+EyFf3VbmfaeEk0LfhKgvWW30soUA71HRarpu@mail.gmail.com>
-In-Reply-To: <AANLkTi=+EyFf3VbmfaeEk0LfhKgvWW30soUA71HRarpu@mail.gmail.com>
-X-SA-Exim-Connect-IP: 80.68.91.202
-X-SA-Exim-Mail-From: dp@xora.org.uk
+Date: Fri, 17 Sep 2010 17:54:37 +0500
+Message-Id: <1284728077-32131-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 17 Sep 2010 12:55:13.0944 (UTC)
+	FILETIME=[91E3D980:01CB5667]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: removal of alsa-scenario_git.bb ?
+Subject: [PATCH] classpath-tools-native.bb: Converted to new style staging
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,38 +40,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Sep 2010 11:09:55 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Fri, 17 Sep 2010 12:56:18 -0000
 
- On 17/09/10 09:36, Frans Meulenbroeks wrote:
-> 2010/9/17 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
->> Hi all,
->>
->> Yesterday I bumped upon alsa-scenario_git.bb.
->> This one had a DP of -1 and does not fetch.
->>
->> At first I thought a bad SRCREV but when trying to clone the git I
->> also got a failure:
->>
->> frans@frans-desktop:/tmp$ git clone git://slimlogic.co.uk/alsa-scenario
->> Initialized empty Git repository in /tmp/alsa-scenario/.git/
->> fatal: The remote end hung up unexpectedly
->>
->> If this persists should we remove the recipe?
->> I also could not identify any user.
->>
->> I'm especially interested in the views of Graeme on this as he added the recipe.
->>
->> Frans
->>
-> Meanwhile it has been brought to my attention that this is probably an
-> outage in the git server. I'll keep an eye on it. 
-Just to confirm that recipe is maintained by Slimlogic employees and is
-used a lot. Im just waiting to hear back why that git repo is not
-currently served.
+* Converted do_stage to do_install.
+* Added NATIVE_INSTALL_WORKS = "1"
+* Added PR = "r1"
 
-Graeme
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/classpath/classpath-tools-native.bb |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/recipes/classpath/classpath-tools-native.bb b/recipes/classpath/classpath-tools-native.bb
+index 7adf702..52566be 100644
+--- a/recipes/classpath/classpath-tools-native.bb
++++ b/recipes/classpath/classpath-tools-native.bb
+@@ -5,9 +5,12 @@
+ DESCRIPTION = "Provides working jar, javah etc. from the GNU Classpath project"
+ 
+ DEPENDS = "virtual/java-native classpath-native"
++PR = "r1"
+ 
+ inherit native
+ 
+-do_stage() {
+-	:
++do_install() {
++        :
+ }
++
++NATIVE_INSTALL_WORKS = "1"
+-- 
+1.6.3.3
 
 
 
