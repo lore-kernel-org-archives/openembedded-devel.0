@@ -1,42 +1,34 @@
-Received: from mail-gx0-f175.google.com ([209.85.161.175])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OwWRL-0003nw-3M
-	for openembedded-devel@openembedded.org; Fri, 17 Sep 2010 10:37:04 +0200
-Received: by gxk10 with SMTP id 10so715994gxk.6
-	for <openembedded-devel@openembedded.org>;
-	Fri, 17 Sep 2010 01:36:11 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=b9F0/SO43BPAEZMZ7eoRvXJHwG4M30+35T8cLHJC/nM=;
-	b=oKBYkQiytLn7pb9xSKmzdB0SoCnpKzQ0OsdXMBEntOy3sBkn3Cw57PXAH4veM3eae4
-	BBIMaXJ1BfDZvUf7U/mQv6p3liXL9m/Wynltdtr9udb8AjhNf6ViDcZTtfB+wgC4oMz5
-	5ngFf5AF1aTr0gj6hLMeo2FSvxQgpX2r/XFO4=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=xi8G1NN5B2LoqWIhZjgwd6WwgVkBcxi9rlFVa8S+6Y0/NIsUImN78J2tdnfAhioGRZ
-	0GndhjNcvziHFpPfgzz9F3sOrHqPe8kDZdEcCI1BT8N4pI/79qVEkpYR4jO/vycfNFC8
-	a5eHzYgH5PGx8h6Wwf/VS2PXSThkBF4haFMqc=
-MIME-Version: 1.0
-Received: by 10.100.202.15 with SMTP id z15mr5102869anf.217.1284712571334;
-	Fri, 17 Sep 2010 01:36:11 -0700 (PDT)
-Received: by 10.231.205.204 with HTTP; Fri, 17 Sep 2010 01:36:11 -0700 (PDT)
-In-Reply-To: <AANLkTimF0DyLTfajYY0zWdnLDRuE8_00iufG4V5dRY12@mail.gmail.com>
-References: <AANLkTimF0DyLTfajYY0zWdnLDRuE8_00iufG4V5dRY12@mail.gmail.com>
-Date: Fri, 17 Sep 2010 10:36:11 +0200
-Message-ID: <AANLkTi=+EyFf3VbmfaeEk0LfhKgvWW30soUA71HRarpu@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OwWZt-0006io-Ar for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Sep 2010 10:45:53 +0200
+Received: from f053032065.adsl.alicedsl.de ([78.53.32.65]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OwWZ6-0007G7-5u for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Sep 2010 08:45:04 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+In-Reply-To: <AANLkTinb2TrxJtgb5T6eQXOM6obNmBq-moJBfeCm_1-j@mail.gmail.com>
+References: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
+	<4C91D544.7070702@dresearch.de>
+	<AANLkTinQbPD21+gAvEoBEn3KaPUvz3cK4u9+LjkL1JqC@mail.gmail.com>
+	<AANLkTinb2TrxJtgb5T6eQXOM6obNmBq-moJBfeCm_1-j@mail.gmail.com>
+Date: Fri, 17 Sep 2010 10:45:02 +0200
+Message-ID: <1284713102.3861.3.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: removal of alsa-scenario_git.bb ?
+Subject: Re: melo git outage
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -50,32 +42,46 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Sep 2010 08:37:04 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Fri, 17 Sep 2010 08:45:53 -0000
+X-Groupsio-MsgNum: 23666
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-tbz05eN8MUcgBawhdHsY"
 
-2010/9/17 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
-> Hi all,
->
-> Yesterday I bumped upon alsa-scenario_git.bb.
-> This one had a DP of -1 and does not fetch.
->
-> At first I thought a bad SRCREV but when trying to clone the git I
-> also got a failure:
->
-> frans@frans-desktop:/tmp$ git clone git://slimlogic.co.uk/alsa-scenario
-> Initialized empty Git repository in /tmp/alsa-scenario/.git/
-> fatal: The remote end hung up unexpectedly
->
-> If this persists should we remove the recipe?
-> I also could not identify any user.
->
-> I'm especially interested in the views of Graeme on this as he added the recipe.
->
-> Frans
->
-Meanwhile it has been brought to my attention that this is probably an
-outage in the git server. I'll keep an eye on it.
+--=-tbz05eN8MUcgBawhdHsY
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-Frans
+Am Donnerstag, den 16.09.2010, 20:56 -0700 schrieb Steve Sakoman:
+
+[=E2=80=A6]
+
+> Unfortunately for many others it is still broken:
+>=20
+> steve@www:~/openembedded$ git pull
+> git.openembedded.org[0: 140.211.169.165]: errno=3DConnection refused
+> fatal: unable to connect a socket (Connection refused)
+
+It looks like the Git Daemon is not running (?), since SSH access is
+working.
+
+> Is anyone working on this?
 
 
+Thanks,
+
+Paul
+
+--=-tbz05eN8MUcgBawhdHsY
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyTKocACgkQPX1aK2wOHVh7cACfZGsiwxvew9v9Cxe18uDAp0sd
+3VsAnibNLUYNHk1wge8cc13mICsfP5v5
+=5aYy
+-----END PGP SIGNATURE-----
+
+--=-tbz05eN8MUcgBawhdHsY--
