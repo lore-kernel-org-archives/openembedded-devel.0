@@ -1,41 +1,40 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OwbRr-0000BB-D9
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1Owck9-00060I-Qa
 	for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Sep 2010 15:57:56 +0200
-Received: (qmail 9683 invoked by uid 503); 17 Sep 2010 14:09:50 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 17 Sep 2010 14:09:49 -0000
-Received: (qmail 20438 invoked by uid 503); 17 Sep 2010 13:40:18 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 17 Sep 2010 13:40:17 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 17 Sep 2010 15:57:05 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 17 Sep 2010 15:57:03 +0200
-Message-ID: <4C9373AE.3070302@eukrea.com>
-Date: Fri, 17 Sep 2010 15:57:02 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
+	Fri, 17 Sep 2010 17:20:55 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OwcjJ-0006Gg-D3 from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Sep 2010 08:20:01 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Fri, 17 Sep 2010 08:20:01 -0700
+Received: from [172.30.80.181] ([172.30.80.181]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Fri, 17 Sep 2010 09:19:59 -0600
+Message-ID: <4C938713.2000201@mentor.com>
+Date: Fri, 17 Sep 2010 08:19:47 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <1284493173-27463-1-git-send-email-eric@eukrea.com>
-	<4C8FE671.9030205@mentor.com>
-In-Reply-To: <4C8FE671.9030205@mentor.com>
-X-Ovh-Tracer-Id: 8335881435337764169
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+References: <AANLkTimXc3kLFR1m1uXM6OXZQn3idnbiDcEHPU0wpwEC@mail.gmail.com>	<AANLkTikd-_vDny=kJKeS+NVWeYyfxiE_yXdUE+t1ac48@mail.gmail.com>	<AANLkTi=s9gHBx_uPgiPGhu9b7D10JGytQaxyd-SZ+sfQ@mail.gmail.com>	<AANLkTinWXK-HZHOLv2b2ApdPQ+LW22bvwsOO5TGOc1kx@mail.gmail.com>	<AANLkTim9n1JsDc+bmYN5g20kBtobi5Ti-60Joq1U_rQZ@mail.gmail.com>	<AANLkTi=r1NxVPeRVSSP24YXJSRDxUBwvLQo4PH6_iRxj@mail.gmail.com>	<AANLkTimkhhnmDTWH3=Vx5hVN=Hpy5WXpnUX-E5QfRobb@mail.gmail.com>	<4C8E9653.2020601@balister.org>	<AANLkTiko_vEXjjW+SUrvb=V+R-Vu0p3AvN7hcdD+Ghjg@mail.gmail.com>	<4C928DF9.2050405@mentor.com>
+	<AANLkTimqMudTsuLKDyQKUBen7H4ZUoOCAxKDXVL7Utcp@mail.gmail.com>
+In-Reply-To: <AANLkTimqMudTsuLKDyQKUBen7H4ZUoOCAxKDXVL7Utcp@mail.gmail.com>
+X-OriginalArrivalTime: 17 Sep 2010 15:19:59.0900 (UTC)
+	FILETIME=[CB1F8DC0:01CB567B]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] python-native: configure unicode to ucs4
+Subject: Re: script to remove orphaned files
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,38 +48,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Sep 2010 13:57:56 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Fri, 17 Sep 2010 15:20:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Hi,
+Frans Meulenbroeks wrote:
+> 2010/9/16 Tom Rini <tom_rini@mentor.com>:
+>> Frans Meulenbroeks wrote:
+>>
+>>> The patches I just pushed are tested using bitbake -c patch for all
+>>> recipes as far as possible).
+>>> (in the recipes I pushed I could not test alsa-scenario_git.bb as it
+>>> didn't fetch for me and alsa-driver_0.9.6-hh4c.bb as it was for h3600
+>>> and h3900 only),
+>> Not to stop the work here, but is there a reason you couldn't do
+>> MACHINE=h3600 bitbake -c patch -b
+>> openembedded/recipes/alsa/alsa-driver_0.9.6-hh4c.bb ?  Yes, the initial
+>> parsing sucks but I think it's important for things like this to go out and
+>> find the case where a given recipe is supposed to work and make sure it
+>> still works.  "It didn't fetch" is a legitimate stopper (and I think
+>> candidate for moving to nonworking) of testing something.
+> 
+> I'll try the MACHINE = thingie tonight or tomorrow. Actually
 
-Le 14/09/2010 23:17, Tom Rini a écrit :
-> Eric Bénard wrote:
->> * while trying to run gdb from an SDK created by OE, I got the following
->> errors: /usr/local/angstrom/arm/bin/arm-angstrom-linux-gnueabi-gdb:
->> undefined symbol:
->> PyUnicodeUCS2_FromEncodedObject
->>
->> * the reason is that the workstation (ubuntu 10.04 or 9.01)'s Python
->> is compiled using ucs4
->> and the python-native used to create arm-angstrom-linux-gnueabi-gdb is
->> using ucs2, the
->> problem is detailed here :
->> http://docs.python.org/faq/extending#when-importing-module-x-why-do-i-get-undefined-symbol-pyunicodeucs2
->>
->>
->> * configuring python-native with ucs=4 solves this problem.
->>
->> Signed-off-by: Eric Bénard <eric@eukrea.com>
->
-> Can you test this out on some form of Red Hat? Thanks!
->
-generated SDK tested on Fedora Core 10 : it works.
+OK.  Note that doing it on the commandline means having it in 
+BB_ENV_EXTRAWHITE.  Otherwise it's just short-hand for editing your 
+local.conf :)  Thanks!
 
-As discussed on IRC, I RedHat is compiling it's python wuth ucs=4 at 
-least since RedHat 7 from what I saw in the SRPMS.
-
-Eric
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
