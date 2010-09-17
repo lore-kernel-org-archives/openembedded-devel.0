@@ -1,35 +1,42 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from www.xora.org.uk ([80.68.91.202] helo=xora.vm.bytemark.co.uk)
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OwWs7-0003Ux-TD for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Sep 2010 11:04:44 +0200
-Received: from f053032065.adsl.alicedsl.de ([78.53.32.65]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OwWrK-0007Ys-U5 for openembedded-devel@lists.openembedded.org;
-	Fri, 17 Sep 2010 09:03:55 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <dp@xora.org.uk>) id 1OwYp7-0002lg-PZ
+	for openembedded-devel@lists.openembedded.org;
+	Fri, 17 Sep 2010 13:09:54 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTP id 2BE8FA5585
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Sep 2010 12:08:55 +0100 (BST)
+X-Virus-Scanned: Debian amavisd-new at xora.vm.bytemark.co.uk
+Received: from xora.vm.bytemark.co.uk ([127.0.0.1])
+	by localhost (xora.vm.bytemark.co.uk [127.0.0.1]) (amavisd-new,
+	port 10024) with ESMTP id 36IQT2sjWe39
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Sep 2010 12:08:53 +0100 (BST)
+Received: from [192.168.1.119] (188-220-34-37.zone11.bethere.co.uk
+	[188.220.34.37])
+	by xora.vm.bytemark.co.uk (Postfix) with ESMTPSA id 1B99BA5576
+	for <openembedded-devel@lists.openembedded.org>;
+	Fri, 17 Sep 2010 12:08:50 +0100 (BST)
+Message-ID: <4C934C38.5050608@xora.org.uk>
+Date: Fri, 17 Sep 2010 12:08:40 +0100
+From: Graeme Gregory <dp@xora.org.uk>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100908 Lightning/1.0b2 Thunderbird/3.1.3
+MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-In-Reply-To: <1284713102.3861.3.camel@mattotaupa>
-References: <AANLkTikYsro5b_6S9NKSyPWC0DMMr9A9zKyL0qXF53Zs@mail.gmail.com>
-	<4C91D544.7070702@dresearch.de>
-	<AANLkTinQbPD21+gAvEoBEn3KaPUvz3cK4u9+LjkL1JqC@mail.gmail.com>
-	<AANLkTinb2TrxJtgb5T6eQXOM6obNmBq-moJBfeCm_1-j@mail.gmail.com>
-	<1284713102.3861.3.camel@mattotaupa>
-Date: Fri, 17 Sep 2010 11:03:53 +0200
-Message-ID: <1284714233.3861.4.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+References: <AANLkTimF0DyLTfajYY0zWdnLDRuE8_00iufG4V5dRY12@mail.gmail.com>
+	<AANLkTi=+EyFf3VbmfaeEk0LfhKgvWW30soUA71HRarpu@mail.gmail.com>
+In-Reply-To: <AANLkTi=+EyFf3VbmfaeEk0LfhKgvWW30soUA71HRarpu@mail.gmail.com>
+X-SA-Exim-Connect-IP: 80.68.91.202
+X-SA-Exim-Mail-From: dp@xora.org.uk
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [solved/over] melo git outage
+Subject: Re: removal of alsa-scenario_git.bb ?
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -43,51 +50,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Fri, 17 Sep 2010 09:04:44 -0000
-X-Groupsio-MsgNum: 23667
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-t0pDo8AvHTJmfl61Rh1m"
+X-List-Received-Date: Fri, 17 Sep 2010 11:09:55 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
---=-t0pDo8AvHTJmfl61Rh1m
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+ On 17/09/10 09:36, Frans Meulenbroeks wrote:
+> 2010/9/17 Frans Meulenbroeks <fransmeulenbroeks@gmail.com>:
+>> Hi all,
+>>
+>> Yesterday I bumped upon alsa-scenario_git.bb.
+>> This one had a DP of -1 and does not fetch.
+>>
+>> At first I thought a bad SRCREV but when trying to clone the git I
+>> also got a failure:
+>>
+>> frans@frans-desktop:/tmp$ git clone git://slimlogic.co.uk/alsa-scenario
+>> Initialized empty Git repository in /tmp/alsa-scenario/.git/
+>> fatal: The remote end hung up unexpectedly
+>>
+>> If this persists should we remove the recipe?
+>> I also could not identify any user.
+>>
+>> I'm especially interested in the views of Graeme on this as he added the recipe.
+>>
+>> Frans
+>>
+> Meanwhile it has been brought to my attention that this is probably an
+> outage in the git server. I'll keep an eye on it. 
+Just to confirm that recipe is maintained by Slimlogic employees and is
+used a lot. Im just waiting to hear back why that git repo is not
+currently served.
 
-Am Freitag, den 17.09.2010, 10:45 +0200 schrieb Paul Menzel:
-> Am Donnerstag, den 16.09.2010, 20:56 -0700 schrieb Steve Sakoman:
->=20
-> [=E2=80=A6]
->=20
-> > Unfortunately for many others it is still broken:
-> >=20
-> > steve@www:~/openembedded$ git pull
-> > git.openembedded.org[0: 140.211.169.165]: errno=3DConnection refused
-> > fatal: unable to connect a socket (Connection refused)
->=20
-> It looks like the Git Daemon is not running (?), since SSH access is
-> working.
->=20
-> > Is anyone working on this?
-
-It is working for me now!
-
-Thank you to everyone having been involved in getting this done!
+Graeme
 
 
-Thanks,
 
-Paul
-
---=-t0pDo8AvHTJmfl61Rh1m
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyTLvkACgkQPX1aK2wOHVgMfACeMFntUEK4twxOMjv5mUmGVZgm
-7UwAn1+mG3kfn9SQc7mjMMGJBiv6uOd5
-=DjNa
------END PGP SIGNATURE-----
-
---=-t0pDo8AvHTJmfl61Rh1m--
