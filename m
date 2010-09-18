@@ -1,29 +1,39 @@
-Received: from gandharva.secretlabs.de ([78.46.147.237])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <holger+oe@freyther.de>) id 1Owui9-0008MB-P6
-	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Sep 2010 12:32:07 +0200
-Received: from [192.168.42.95] (mobile-out.siminn.is [212.30.211.225])
-	by gandharva.secretlabs.de (Postfix) with ESMTPA id 75A371B10C05
-	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Sep 2010 10:33:30 +0000 (UTC)
-Message-ID: <4C9494EC.4070309@freyther.de>
-Date: Sat, 18 Sep 2010 18:31:08 +0800
-From: Holger Freyther <holger+oe@freyther.de>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
-	rv:1.9.2.9) Gecko/20100908 Fedora/3.1.3-1.fc14 Lightning/1.0b2
-	Thunderbird/3.1.3
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Owvbu-00005P-RP
+	for openembedded-devel@openembedded.org; Sat, 18 Sep 2010 13:29:41 +0200
+Received: by iwn2 with SMTP id 2so2733168iwn.6
+	for <openembedded-devel@openembedded.org>;
+	Sat, 18 Sep 2010 04:28:47 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=qSF0gapq3tCOHIeP7eqpIJOR4xz3C2yakdV7+5mIpuk=;
+	b=JGq9E8rfWEKC9dfED4+fL1VtnRksYmrNqstfngdrhp/ZSGx0N/3GWVd200W6KzBr4i
+	Y8kwHXyyLsa7iQblZu1pl+pmQgDkDUaPrGMqz0Xixh9sSN4hs/kL+HA/eVVPhQCKhx2U
+	E5Ff2QV6Aysatu5TJ2mS7byJFuAX4uPENm1MM=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=PVC+at9Lc4gZYSRD8pgVckyN8L1Fm/aTxaBdnqD+U/ShsFgrGSuAAhYKJYJpd70hIP
+	2y9oaV7+kFeDss5o9mpwFDeSMMAwYdUqQ69R+h5Mekar3s5EquGNVIeb/ea0WvirFESE
+	u96V1SawUTeGH73hCTFTAw8S8qUob4kt4XLIc=
 MIME-Version: 1.0
+Received: by 10.231.148.195 with SMTP id q3mr6684392ibv.199.1284809327232;
+	Sat, 18 Sep 2010 04:28:47 -0700 (PDT)
+Received: by 10.231.205.204 with HTTP; Sat, 18 Sep 2010 04:28:47 -0700 (PDT)
+Date: Sat, 18 Sep 2010 13:28:47 +0200
+Message-ID: <AANLkTinBaSVr_fd0TXnTjFk1LcJ2nGm9hgHGzkVg7riX@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 78.46.147.237
-X-SA-Exim-Mail-From: holger+oe@freyther.de
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-0.0 required=5.0 tests=BAYES_00,
-	RCVD_IN_BL_SPAMCOP_NET,RCVD_IN_SORBS_WEB autolearn=no version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Question regarding the staging layout
+Subject: svn://svn.om.vptt.ch issue
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,20 +47,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Sep 2010 10:32:07 -0000
+X-List-Received-Date: Sat, 18 Sep 2010 11:29:41 -0000
 Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: 7bit
 
-Hi all,
+Not sure if this is permanent but the following 5 recipes did not fetch for me:
 
-I am seeing a lot of messages like:
+/home/frans/oe/openembedded/recipes/e17/bubble-keyboard_svn.bb
+/home/frans/oe/openembedded/recipes/e17/essential-dialer_svn.bb
+/home/frans/oe/openembedded/recipes/e17/gridpad_svn.bb
+/home/frans/oe/openembedded/recipes/e17/intuition_svn.bb
+/home/frans/oe/openembedded/recipes/efl1/libefso_svn.bb
 
-/home/ich/build/arm/xscale/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
-warning: libc.so, needed by
-/home/ich/build/arm/xscale/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/lib/libgcc_s.so,
-not found (try using -rpath or -rpath-link)
+These all fetch from svn.om.vptt.ch
 
+Anyone any idea on this?
 
-is that to be expected?
+Frans
 
 
