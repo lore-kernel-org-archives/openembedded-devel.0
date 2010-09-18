@@ -1,33 +1,46 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OwwdJ-0004n1-T1
+Received: from mail-qy0-f175.google.com ([209.85.216.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <leon.woestenberg@gmail.com>) id 1Owxoi-0000hi-Tp
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Sep 2010 14:35:10 +0200
-Received: (qmail invoked by alias); 18 Sep 2010 12:34:17 -0000
-Received: from p50884064.dip.t-dialin.net (EHLO [192.168.142.128])
-	[80.136.64.100]
-	by mail.gmx.net (mp037) with SMTP; 18 Sep 2010 14:34:17 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/a9Rs//HbaTaxsRbQVBe1Cnp+yBMxzWJu6beaR2e
-	oNcGcn/5anpuKX
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Sat, 18 Sep 2010 14:33:06 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <1284810428-19013-1-git-send-email-fransmeulenbroeks@gmail.com>
-In-Reply-To: <1284810428-19013-1-git-send-email-fransmeulenbroeks@gmail.com>
+	Sat, 18 Sep 2010 15:51:01 +0200
+Received: by qyk31 with SMTP id 31so1780598qyk.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Sat, 18 Sep 2010 06:50:08 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=20TfUrGuZaVHI/vuUJH86DhBcTHOS/27feFPKc9+tyY=;
+	b=kDCJCw5Xuh0SUe5sq4EDXCay1yIPVjQSRzH5sUFRo8JEyX/6IDdEzMm89HflV3Hwr1
+	fsVvyLA9Jmc/gcyC1XxlguLYmTwTGjJXC/0icdQz1MOqdFEjp5L1b+cMpbMbTRN/S1pT
+	DMiOnMfOwDXhH/cq4PDOsOJ8uH9dcNrC9aNsY=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=ErbKb0D1RTinGffi3nDeLi7W8PYLWA2piRMboaPLvTq63yDPlk+7v0eHNqF1gU6Cqr
+	p3pQGCpPbRzDwjcqXrzS3qo7CGRMwbnjnkeVTvlfNi9QxnnJec5jkGziyBaIGh9pnnxk
+	njgNK8Xp7NWXvd3vJbHqYapQ91t1bE8T/fic8=
 MIME-Version: 1.0
-Message-Id: <201009181433.06608.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+Received: by 10.229.213.80 with SMTP id gv16mr4432909qcb.134.1284817808072;
+	Sat, 18 Sep 2010 06:50:08 -0700 (PDT)
+Received: by 10.229.215.207 with HTTP; Sat, 18 Sep 2010 06:50:08 -0700 (PDT)
+In-Reply-To: <20100918115345.GC11041@excalibur.local>
+References: <1284124065.18010.3970.camel@rex>
+	<4C90FAC3.6000602@kernelconcepts.de>
+	<AANLkTikXozzcc0BU1rcZQ+fXrN_f+o4eee6EyNw+yBj1@mail.gmail.com>
+	<20100918115345.GC11041@excalibur.local>
+Date: Sat, 18 Sep 2010 15:50:08 +0200
+Message-ID: <AANLkTimEZJpJBXJMzqy9J0G3yA_zZqBBJx+ePPc6ozMo@mail.gmail.com>
+From: Leon Woestenberg <leon.woestenberg@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.216.175
+X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] clutter: moved COMPATIBLE_MACHINE to clutter-common.inc
+Subject: Re: OEDEM 2010 - Confirmed
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -41,24 +54,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Sep 2010 12:35:10 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
-Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
+X-List-Received-Date: Sat, 18 Sep 2010 13:51:01 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Saturday 18 September 2010 01:47:08 pm Frans Meulenbroeks wrote:
-> moved COMPATIBLE_MACHINE from clutter.inc to clutter-common.inc
-> the other recipes all DEPEND on clutter but do not have a COMPATIBLE_MACHINE
-> defined, but of course do not work for other machines.
-> This patch moves COMPATIBLE_MACHINE to clutter-common.inc which is
-> included by all other inc file and so it applies to all
-Is there any fallout expected by removing COMPATIBLE_MACHINE? 
+Hello,
 
-All machines not having an explicit DEPENDS / EXTRA_OECONF get virtual/libgl (mesa) as depends and --with-flavour=glx as defaults which should build for all (?).
+On Sat, Sep 18, 2010 at 1:53 PM, Stefan Schmidt
+<stefan@datenfreihafen.org> wrote:
+>
+> It was announced to the members mailing list in time. And Leon found it there
+> after this mail. Just to make sure other people are not confused about this. It
+> is also noted on the Agenda for OEDEM 2010:
+> http://wiki.openembedded.net/index.php/Oedem/2010#Friday
+>
 
-If there is no damage caused by removing COMPATIBLE_MACHINE there is no need to enter (new) machines here in the future..
+Indeed, thanks. In that thread I asked for it to be added to the news
+items of the wiki.
 
-Andreas
+For people with -EINFOOVERLOAD :-)
+
+Regards,
+-- 
+Leon
 
 
