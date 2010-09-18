@@ -1,46 +1,31 @@
-Received: from mail-qy0-f175.google.com ([209.85.216.175])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <leon.woestenberg@gmail.com>) id 1Owxoi-0000hi-Tp
+	(envelope-from <holger+oe@freyther.de>) id 1OwzUL-000370-LQ
 	for openembedded-devel@lists.openembedded.org;
-	Sat, 18 Sep 2010 15:51:01 +0200
-Received: by qyk31 with SMTP id 31so1780598qyk.6
+	Sat, 18 Sep 2010 17:38:07 +0200
+Received: from [172.16.252.114] (siminn-int-gw.on-waves.com [157.157.59.158])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 411541B10C05
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Sep 2010 06:50:08 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=20TfUrGuZaVHI/vuUJH86DhBcTHOS/27feFPKc9+tyY=;
-	b=kDCJCw5Xuh0SUe5sq4EDXCay1yIPVjQSRzH5sUFRo8JEyX/6IDdEzMm89HflV3Hwr1
-	fsVvyLA9Jmc/gcyC1XxlguLYmTwTGjJXC/0icdQz1MOqdFEjp5L1b+cMpbMbTRN/S1pT
-	DMiOnMfOwDXhH/cq4PDOsOJ8uH9dcNrC9aNsY=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=ErbKb0D1RTinGffi3nDeLi7W8PYLWA2piRMboaPLvTq63yDPlk+7v0eHNqF1gU6Cqr
-	p3pQGCpPbRzDwjcqXrzS3qo7CGRMwbnjnkeVTvlfNi9QxnnJec5jkGziyBaIGh9pnnxk
-	njgNK8Xp7NWXvd3vJbHqYapQ91t1bE8T/fic8=
+	Sat, 18 Sep 2010 15:39:35 +0000 (UTC)
+Message-ID: <4C94DCA8.10405@freyther.de>
+Date: Sat, 18 Sep 2010 23:37:12 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100908 Fedora/3.1.3-1.fc14 Lightning/1.0b2
+	Thunderbird/3.1.3
 MIME-Version: 1.0
-Received: by 10.229.213.80 with SMTP id gv16mr4432909qcb.134.1284817808072;
-	Sat, 18 Sep 2010 06:50:08 -0700 (PDT)
-Received: by 10.229.215.207 with HTTP; Sat, 18 Sep 2010 06:50:08 -0700 (PDT)
-In-Reply-To: <20100918115345.GC11041@excalibur.local>
-References: <1284124065.18010.3970.camel@rex>
-	<4C90FAC3.6000602@kernelconcepts.de>
-	<AANLkTikXozzcc0BU1rcZQ+fXrN_f+o4eee6EyNw+yBj1@mail.gmail.com>
-	<20100918115345.GC11041@excalibur.local>
-Date: Sat, 18 Sep 2010 15:50:08 +0200
-Message-ID: <AANLkTimEZJpJBXJMzqy9J0G3yA_zZqBBJx+ePPc6ozMo@mail.gmail.com>
-From: Leon Woestenberg <leon.woestenberg@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.175
-X-SA-Exim-Mail-From: leon.woestenberg@gmail.com
+References: <4C9301E6.8010901@gmail.com>
+In-Reply-To: <4C9301E6.8010901@gmail.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-1.7 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: OEDEM 2010 - Confirmed
+Subject: Re: [PATCH] xkbd_0.8.15.bb: Fix geometry flag to accept negative offsets.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,27 +39,12 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sat, 18 Sep 2010 13:51:01 -0000
+X-List-Received-Date: Sat, 18 Sep 2010 15:38:07 -0000
 Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-Hello,
+On 09/17/2010 01:51 PM, Graham Gower wrote:
 
-On Sat, Sep 18, 2010 at 1:53 PM, Stefan Schmidt
-<stefan@datenfreihafen.org> wrote:
->
-> It was announced to the members mailing list in time. And Leon found it there
-> after this mail. Just to make sure other people are not confused about this. It
-> is also noted on the Agenda for OEDEM 2010:
-> http://wiki.openembedded.net/index.php/Oedem/2010#Friday
->
-
-Indeed, thanks. In that thread I asked for it to be added to the news
-items of the wiki.
-
-For people with -EINFOOVERLOAD :-)
-
-Regards,
--- 
-Leon
+Where is this patch coming from? is it upstream?
 
 
