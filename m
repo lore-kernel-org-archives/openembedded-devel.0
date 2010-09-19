@@ -1,45 +1,44 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OxRAE-0006de-Mf
+	(envelope-from <pirobk@gmail.com>) id 1OxRwQ-0001JX-5Z
 	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Sep 2010 23:11:11 +0200
-Received: by iwn2 with SMTP id 2so3755989iwn.6
+	Mon, 20 Sep 2010 00:00:58 +0200
+Received: by fxm17 with SMTP id 17so409250fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Sun, 19 Sep 2010 14:10:18 -0700 (PDT)
+	Sun, 19 Sep 2010 15:00:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=kZW3VFzwndqYDRTz0bkl5XF/GBdcKgStshY7zlLDSO0=;
-	b=X1tL9N+0l1YEAcx0qZh0QDwOkUpagP0d7A1Xh/Z5yLsKcAMTD6tafz7T5T5Qv2T7Q2
-	+n2Sq0o+tOgowasX9m+GozOLIgqa+PMsRRHgy2o+j2K1JycfQry2be334ugp5pLQ3OJJ
-	0w8gx+0W6wz/FEj0JLGqq4E99OfJaDz1k0CKs=
+	h=domainkey-signature:received:received:from:to:subject:date
+	:message-id:x-mailer;
+	bh=WBBVznhdDhKEwIHZBu9Xwr60BsCnGdzKycrkaATo87Y=;
+	b=f7NM34upvm4COPYLPW6aZ9b7nqTiGV0B1tv1NvFARd8uXbezhlpJssWoTKFCheL5lV
+	h4iWPUVu65wOTfszj0PVvRMLA5uyNirO6PYXi9tXW4yybe2ekO3nUnQIvj76lwJap3jk
+	3tlf6FIPgkcQVGhaynqyQfxM580mD4oXk3f2s=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=UQQ6YXxd97Y9vBwfkMo+XWq/HgA24wX0A+d0t4QxeXLiJfBiBvBAvv3qeuh7GF0pRR
-	bMvvZHLrPv/7X30Hzvb/FXsyeoSvFH5WZ/EmAvfh8klV6xtnTF5w7gIFyVDH2u4VruR9
-	UMWzT9lQFVTcFzPfixIBgJn1SUlC7//+9mic4=
-MIME-Version: 1.0
-Received: by 10.231.191.6 with SMTP id dk6mr9119438ibb.51.1284930618076; Sun,
-	19 Sep 2010 14:10:18 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Sun, 19 Sep 2010 14:10:18 -0700 (PDT)
-In-Reply-To: <4C967589.9080501@eukrea.com>
-References: <1284921702-22995-1-git-send-email-fransmeulenbroeks@gmail.com>
-	<4C967589.9080501@eukrea.com>
-Date: Sun, 19 Sep 2010 23:10:18 +0200
-Message-ID: <AANLkTimL2QKeoF545-Vk_f-Kch76dN5A3frF7mhMV0Cy@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	h=from:to:subject:date:message-id:x-mailer;
+	b=jI+yesN4dg2hX3mpUFyoNvsHQpUzE1dVwm14SzpvEBxal4dUEbXt2LP3sgbEyaoQ5U
+	+Nk+fC8SRG9zgdWCvw7sveEnoWFJvTcN6nuabuQ9QhHelCz8vX4lnbCzCldfm+pky9hM
+	c7gdHi/wuIi9R1INt2/wQPUh09yx+R+pbcijQ=
+Received: by 10.223.113.2 with SMTP id y2mr3822052fap.49.1284933604118;
+	Sun, 19 Sep 2010 15:00:04 -0700 (PDT)
+Received: from localhost.localdomain (g226082064.adsl.alicedsl.de
+	[92.226.82.64])
+	by mx.google.com with ESMTPS id r10sm2622510faq.5.2010.09.19.15.00.02
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Sun, 19 Sep 2010 15:00:03 -0700 (PDT)
+From: =?UTF-8?q?Bj=C3=B6rn=20Krombholz?= <pirobk@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Sun, 19 Sep 2010 23:59:52 +0200
+Message-Id: <1284933592-4558-1-git-send-email-pirobk@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: pirobk@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] python: remove python-dev from python-modules
+Subject: [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,35 +52,38 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Sep 2010 21:11:11 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Sun, 19 Sep 2010 22:00:59 -0000
 
-2010/9/19 Eric B=E9nard <eric@eukrea.com>:
-> Hi Frans,
->
-> Le 19/09/2010 20:41, Frans Meulenbroeks a =E9crit :
->>
->> python-modules has python-dv in it sdependencies.
->> I'm not a python wiz, but I feel that is no good as it drags in a lot of
->> dev
->> packages. Note too sure if thre should be a depends on python though.
->>
-> please see this patch serie which waits for an ack (PR will be increased
-> after) :
->
-> http://patchwork.openembedded.org/patch/2917/
-> http://patchwork.openembedded.org/patch/2919/
-> http://patchwork.openembedded.org/patch/2918/
->
-> Eric
+* qt4e.bbclass did add a dependency on qt4-embedded for recipes
+  providing qt4-embedded. This breaks building of qt4-embedded-gles
+  in 2 ways:
 
-Hi Eric,
+  1. PREFERRED_PROVIDER_qt4-embedded = qt4-embedded-gles
+     adds a circular dependency.
 
-Your patch seems to address the same issue.
-Actually saw it before but didn't realize I was facing the same
-problem (and didn't know enough from it to ack it)
+  2. bitbake qt4-embedded-gles
+     first builds and installs qt4-embedded to sysroots/ and then
+     fails to link the qt4-embedded-gles build against the libs in
+     sysroots which don't provide the gl specific symbols
 
-Frans
+* The fix avoids adding the dependency for package names _beginning_
+  with 'qt4-embedded' (as it is done in the x11 version).
+---
+ classes/qt4e.bbclass |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/classes/qt4e.bbclass b/classes/qt4e.bbclass
+index f72e06b..303b79b 100644
+--- a/classes/qt4e.bbclass
++++ b/classes/qt4e.bbclass
+@@ -1,4 +1,4 @@
+-DEPENDS_prepend = "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d, 1) == 'qt4-embedded')]}"
++DEPENDS_prepend = "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d, 1)[:12] == 'qt4-embedded')]}"
+ inherit qmake2
+ 
+ QT_DIR_NAME = "qtopia"
+-- 
+1.7.1
+
 
 
