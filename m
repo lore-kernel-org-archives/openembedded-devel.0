@@ -1,44 +1,42 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from lo.gmane.org ([80.91.229.12])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1Ox8Ru-0004cj-R1
-	for openembedded-devel@lists.openembedded.org;
-	Sun, 19 Sep 2010 03:12:13 +0200
-Received: by iwn2 with SMTP id 2so3179070iwn.6
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OxG8e-0003Dx-RI for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Sep 2010 11:24:49 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1OxG7k-0004Xx-Hf for openembedded-devel@lists.openembedded.org;
+	Sun, 19 Sep 2010 11:23:52 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Sun, 19 Sep 2010 11:23:52 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
 	for <openembedded-devel@lists.openembedded.org>;
-	Sat, 18 Sep 2010 18:11:19 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=0UENxvGVcmfOe+yHg/P3M1JlTsFRNmFp0bTFKanYaOY=;
-	b=PhHU3WWreXiP3Q7EIlyVSdbplGRsFkci9NT1UimzKs2E20ZegwDmluQtvd2Dga+2lS
-	3TKlkNdWTyOkAIzN7DIYdjDjIlsPc13x92IYrArGJVmnVJJ8P6pwZtzUvVcZjucPtBuJ
-	hsrwSzELpGStBEyP/wWg+g/xczifW3jwJ8RI0=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=YJbwdCch4kSlC57mIfQj00n6zA8l0Q1pEFftvdfE5VPE7XmCCOo1imc/yfEnmqSIDK
-	hdKfNJaihR2z9D5p0UBHTn1U1hi7UXQXbRDms0E8FKJIJxAmrFJNHk4y2AnHATsKRayq
-	hC5JpVuidJVjYeoNja+vBG1iNoMwjHyHsmudg=
-MIME-Version: 1.0
-Received: by 10.231.171.3 with SMTP id f3mr7741144ibz.145.1284858679192; Sat,
-	18 Sep 2010 18:11:19 -0700 (PDT)
-Received: by 10.231.161.1 with HTTP; Sat, 18 Sep 2010 18:11:19 -0700 (PDT)
-In-Reply-To: <4C94DCA8.10405@freyther.de>
-References: <4C9301E6.8010901@gmail.com>
-	<4C94DCA8.10405@freyther.de>
-Date: Sun, 19 Sep 2010 10:41:19 +0930
-Message-ID: <AANLkTinZo7zFZOXhivEmt7j=-Gm2J29FaOCfS5SzOo2G@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+	Sun, 19 Sep 2010 11:23:52 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Sun, 19 Sep 2010 11:23:41 +0200
+Message-ID: <i74kqu$skg$1@dough.gmane.org>
+References: <1284810428-19013-1-git-send-email-fransmeulenbroeks@gmail.com>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <1284810428-19013-1-git-send-email-fransmeulenbroeks@gmail.com>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] xkbd_0.8.15.bb: Fix geometry flag to accept negative offsets.
+Subject: Re: [PATCH] clutter: moved COMPATIBLE_MACHINE to clutter-common.inc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,19 +50,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Sun, 19 Sep 2010 01:12:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Sun, 19 Sep 2010 09:24:49 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
 
-On 19 September 2010 01:07, Holger Freyther <holger+oe@freyther.de> wrote:
-> On 09/17/2010 01:51 PM, Graham Gower wrote:
->
-> Where is this patch coming from? is it upstream?
->
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-It comes from http://bugs.gentoo.org/214353 - as found in the patch header.
+On 18-09-10 13:47, Frans Meulenbroeks wrote:
+> moved COMPATIBLE_MACHINE from clutter.inc to clutter-common.inc
+> the other recipes all DEPEND on clutter but do not have a COMPATIBLE_MACHINE
+> defined, but of course do not work for other machines.
+> This patch moves COMPATIBLE_MACHINE to clutter-common.inc which is
+> included by all other inc file and so it applies to all
 
--Graham
+NAK! Only clutter itself has the need for COMPATIBLE_MACHINE (actually,
+only virtual/egl needs it, clutter can drop COMPATIBLE_MACHINE), gst,
+gtk and box2d are generic libraries that do NOT need it.
 
-PS: What upstream?
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMldadMkyGM64RGpERAjaQAJ9c42kNNJT3/LejEwE1UTIdKCM/XACfakfn
+kHA+my7GTnWyY8XLTls7YfQ=
+=EN77
+-----END PGP SIGNATURE-----
+
 
 
