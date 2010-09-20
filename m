@@ -1,44 +1,34 @@
-Received: from mail-qw0-f47.google.com ([209.85.216.47])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <andrea.adami@gmail.com>) id 1OxgFJ-0000dT-84
+Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <schnitzeltony@gmx.de>) id 1OxgKK-0000o9-S6
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 15:17:26 +0200
-Received: by qwb8 with SMTP id 8so4932qwb.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 06:17:21 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=Wz0h8ap0OyzNoxZMyUXnk3aNNM5pWJLJcEBzrfni5Os=;
-	b=cz7fQfMsprD6rguWgYQcoKG0h0eiD4NYQhpMYRRPg4k/NLpQ0pG9dMHifXCYEF4cvB
-	doHEpoo39c7s1SLRGYaDyPRU6VccbeAis6C8bVqR5b3tLXwROkWcqsy5rF1+VZSPGwpu
-	pgTDeXuwZ8pYSsejyXS7HE35sa1wRG2gSYocc=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=rWBiAIAiUEyoF2P+nmQjORjwu5U3qS3ydp6Vc4nCBeXj+eND9eVtjeJImMl46VG0vD
-	jkqVj0B3NagzsC6qBaD0u96saFxl7afAAbuOGDpVu6tW8bSfNNcMyVsGFzWC5xWrzNk5
-	5UHirvP8mz872esuSqrDFaF6E/8ER6YeMNNxY=
-MIME-Version: 1.0
-Received: by 10.224.82.203 with SMTP id c11mr5734761qal.299.1284988218472;
-	Mon, 20 Sep 2010 06:10:18 -0700 (PDT)
-Received: by 10.229.36.65 with HTTP; Mon, 20 Sep 2010 06:10:18 -0700 (PDT)
-In-Reply-To: <EC89DF03-EE97-4A6D-8E4D-6E9ED9372176@mac.com>
-References: <EC89DF03-EE97-4A6D-8E4D-6E9ED9372176@mac.com>
-Date: Mon, 20 Sep 2010 15:10:18 +0200
-Message-ID: <AANLkTinWOr6+U6DgWZSErrBKj1=Y-DsOJXrdyA=PA-oA@mail.gmail.com>
-From: Andrea Adami <andrea.adami@gmail.com>
+	Mon, 20 Sep 2010 15:22:37 +0200
+Received: (qmail invoked by alias); 20 Sep 2010 13:22:31 -0000
+Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
+	by mail.gmx.net (mp059) with SMTP; 20 Sep 2010 15:22:31 +0200
+X-Authenticated: #62780362
+X-Provags-ID: V01U2FsdGVkX1/WO1lIIvzWY2buSoF9Bhp/Tj076i9B4tOr5JWfYU
+	Gr6cYDLOI95Jxc
+From: Andreas Mueller <schnitzeltony@gmx.de>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.216.47
-X-SA-Exim-Mail-From: andrea.adami@gmail.com
+Date: Mon, 20 Sep 2010 15:21:09 +0200
+User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
+References: <201009191753.42404.schnitzeltony@gmx.de>
+	<201009201042.49657.schnitzeltony@gmx.de>
+	<AANLkTindG1S3Z=WY2CVsqd0hco4qjfo-6XviHAb8N5r3@mail.gmail.com>
+In-Reply-To: <AANLkTindG1S3Z=WY2CVsqd0hco4qjfo-6XviHAb8N5r3@mail.gmail.com>
+MIME-Version: 1.0
+Message-Id: <201009201521.09520.schnitzeltony@gmx.de>
+X-Y-GMX-Trusted: 0
+X-SA-Exim-Connect-IP: 213.165.64.23
+X-SA-Exim-Mail-From: schnitzeltony@gmx.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: How to specify a specific linux kernel recipe or provider
+Subject: git-send-email setup (former [PATCH] clutter: remove COMPATIBLE_MACHINE)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,49 +42,21 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 13:17:26 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 20 Sep 2010 13:22:38 -0000
+Content-Type: text/plain;
+  charset="iso-8859-1"
+Content-Transfer-Encoding: 7bit
+Content-Disposition: inline
 
-On Mon, Sep 20, 2010 at 1:41 PM, Elvis Dowson <elvis.dowson@mac.com> wrote:
-> Hi,
-> =A0 =A0 =A0 I'm using the overo-oe repo, and when I build omap3-console-i=
-mage, it builds the linux-omap3-2.6.32.bb recipe, located in my user.collec=
-tion folder.
->
-> Now suppose I want to experiment with a new kernel recipe, and create a n=
-ew one called linux-android-rowboat-eclair-2.6.32.bb.
->
-> What should I do to make the omap3-console-image recipe build using the l=
-inux-android-rowboat-eclair-2.6.32.bb recipe, instead of the linux-omap3-2.=
-6.32.bb?
->
+On Monday 20 September 2010 10:55:17 am Frans Meulenbroeks wrote:
+> use alpine or set up a gmail account (note that you can still use your
+> real email for Submitted-by)
+For those with similar trouble:
 
-No idea about the specifics of overo-oe-repo but in general kernel
-'provider'  is chosen by
+I updated git (had version 1.5.xx shipped by Fedora 8 - which did not know authenticating servers ) and added some additional packages (perl-Email-MIME-* / perl-AUTHEN-SASL). 
 
-PREFERRED_PROVIDER_virtual/kernel =3D "linux-xyz"
+Now I can send patches by git-send-email :-)
 
-while the version can be pinned in some machine.conf  like
-
-PREFERRED_VERSION_linux-xyz =3D "2.6.28.4"
-
-If not pinned, bitbake will evaluate the DEFAULT_PREFERENCE in the
-linux-xyz recipes.
-
-Regards
-
-Andrea
-
-> Best regards,
->
-> Elvis Dowson
->
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Andreas
 
 
