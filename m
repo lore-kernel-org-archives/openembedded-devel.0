@@ -1,44 +1,44 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from mail-fx0-f47.google.com ([209.85.161.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oxmbg-0006v1-62
+	(envelope-from <raj.khem@gmail.com>) id 1Oxmv2-00014n-4B
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 22:04:56 +0200
-Received: by ywa8 with SMTP id 8so1587024ywa.6
+	Mon, 20 Sep 2010 22:24:56 +0200
+Received: by fxm17 with SMTP id 17so1087407fxm.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 13:04:52 -0700 (PDT)
+	Mon, 20 Sep 2010 13:24:53 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=TiVB3QVOxYPyfP8idAE9KVICgiecLQA/9H2VnX99nMM=;
-	b=heU2vvAp+4sBvRyHKhyVym0S8xHtRI0VrQbnJhDcUj+Xsm6IKcYjn1JN/qK6JIS7Hc
-	GabH/cIxCzbTx5HTHsp2QWjlHfmz1DUVTXNTf+ldbx8bmMUXKkyNqgX7qjXent/mHFtU
-	kcTXOug3kpmWVVHTfsIPAVZiTiSuxWSdJdHbo=
+	bh=AiasIOIwnweMaVZEsCMxjUhiov8cxPei3DN468mjmHw=;
+	b=oQvRYIrIhU60g4BfzRCahg3qfaQ/OHGNySCQ3jIwMOeIt1iReW0yiEhJuBprL5BNM5
+	MNfs7fnhEkOV9NFUR3nWfns491SgeJxpZ9e1tu+vGayd9Y7FcyMdSZxkC3SSBSyWhZYG
+	dGvcqSMRbrHC1VVqIShSJogwhosJ7ThfM7iIw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=e8/FKyOveT9fAcVJNU67XCBPdsFLW1dP6XH0huh68uFbSZy2pJC9h1M6jn+C894C1E
-	evtum6RxcTO72t6JxNRXI+RgmyK1IQCMjxzDrh24qYjNbwkVP3EE5P7PV/df3u+DP+37
-	9DO7vbt9vmcsscLkyMsnmnLn0UxmKFzFNpT9o=
+	b=o8IhoNzpVxL4OOwoC/lcd89KeK8Ki5yN7NHVfhNQBon4In8BHJwDNHOWuz6a2eKQRv
+	nIjYX2BIVntoKQEdTy4FijKyNyID89PYAcIqTjSj57FL75obx5cRKs87n6WyyuqNcb0T
+	IoXM/6Pb/ghJihBMtNIvYJVCXHpkAaBeiNoe8=
+Received: by 10.103.214.16 with SMTP id r16mr502351muq.129.1285014293089; Mon,
+	20 Sep 2010 13:24:53 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.150.216.2 with SMTP id o2mr9635340ybg.420.1285013091670; Mon,
-	20 Sep 2010 13:04:51 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 20 Sep 2010 13:04:51 -0700 (PDT)
-In-Reply-To: <1285009075-19687-1-git-send-email-khimov@altell.ru>
-References: <1285009075-19687-1-git-send-email-khimov@altell.ru>
-Date: Mon, 20 Sep 2010 22:04:51 +0200
-Message-ID: <AANLkTikS7gM7rpt_45rLF=uT4-hezt1Bwa3hATPxufgN@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Received: by 10.103.107.20 with HTTP; Mon, 20 Sep 2010 13:24:33 -0700 (PDT)
+In-Reply-To: <4C97AC2B.1040205@cbnco.com>
+References: <4C97AC2B.1040205@cbnco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 Sep 2010 13:24:33 -0700
+Message-ID: <AANLkTikd-8b1oMbyVus7372HT7u9KON0rx_nZM9fn-8A@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+X-SA-Exim-Connect-IP: 209.85.161.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
 X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] bzip2: update 1.0.5 to 1.0.6
+Subject: Re: [RFC] base.bbclass: add make-native to default dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,16 +52,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 20:04:56 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 20 Sep 2010 20:24:56 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/20 Roman I Khimov <khimov@altell.ru>:
-> =A0* fixes CVE-2010-0405
+On Mon, Sep 20, 2010 at 11:47 AM, Michael Smith <msmith@cbnco.com> wrote:
+> In case the build system is running some ancient make, we can just as eas=
+ily
+> build our own make (3.82) to get predictable behaviour. Does something li=
+ke
+> this make sense?
+
+although it does but make 3.82 is not usable out of box yet.
+so people might find surprises. 3.81 would be ok.
+
 >
-> Signed-off-by: Roman I Khimov <khimov@altell.ru>
+> diff --git a/classes/base.bbclass b/classes/base.bbclass
+> index b19eb32..5c6d41d 100644
+> --- a/classes/base.bbclass
+> +++ b/classes/base.bbclass
+> @@ -71,7 +71,7 @@ def base_deps(d):
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', =
+d):
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0if (bb.data.getVar=
+('HOST_SYS', d, 1) !=3D
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.d=
+ata.getVar('BUILD_SYS', d, 1)):
+> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 deps +=3D " virtual/${TARGET_PREFIX}gcc virtual/libc "
+> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 deps +=3D " make-native virtual/${TARGET_PREFIX}gcc
+> virtual/libc "
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0elif bb.data.inher=
+its_class('native', d) and \
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0bb.data.getVar('PN', d, True) not in =
+\
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=
+=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0("linux-libc-headers-native", "quilt-=
+native",
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+
+--=20
+-Khem
 
 
