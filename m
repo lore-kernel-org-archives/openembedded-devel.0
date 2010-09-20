@@ -1,37 +1,48 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1OxpJu-0004QI-6P
+Received: from mail-pw0-f47.google.com ([209.85.160.47])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <graham.gower@gmail.com>) id 1Oxq24-0002Y1-Hd
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 00:58:46 +0200
-Received: (qmail 30235 invoked by uid 503); 20 Sep 2010 23:11:59 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 20 Sep 2010 23:11:59 -0000
-Received: (qmail 16600 invoked by uid 503); 20 Sep 2010 22:41:35 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 20 Sep 2010 22:41:35 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Sep 2010 00:58:42 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO
-	localhost.localdomain) (ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 21 Sep 2010 00:58:41 +0200
-From: =?utf-8?q?Eric=20B=C3=A9nard?= <eric@eukrea.com>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Sep 2010 00:58:08 +0200
-Message-Id: <1285023488-32159-1-git-send-email-eric@eukrea.com>
-X-Mailer: git-send-email 1.6.3.3
+	Tue, 21 Sep 2010 01:44:39 +0200
+Received: by pwj1 with SMTP id 1so1507437pwj.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Sep 2010 16:44:20 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:message-id:date:from
+	:user-agent:mime-version:to:subject:content-type
+	:content-transfer-encoding;
+	bh=UcKzjH74wwbM565caPntIuu/OVPsS3wZDTiJUEfUE9M=;
+	b=u0Pp5k/ebFho57LP6c1L+oLUHH1TsP5AlDtFnT+9IaJz5zAfuVOHDL+3Ie4o+q0jSY
+	qXFQ/XbIjjvXRz6GAsEuidzd1l5SlZuRakwXAdcR2czkkx1XBjP0JcK1UyMNN5cKfVNx
+	lKF9MpHPKhQnbO/N4mseuYVQxe9UQtNV3zbL0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=message-id:date:from:user-agent:mime-version:to:subject
+	:content-type:content-transfer-encoding;
+	b=FeZZWxRAVWVlbK1VFVs+O9JOT/2QRazOEJb/+JOsp51UAdEGogI+aAEsQDF++mE2mt
+	C5STmF3JDi199i+ZtaFu60hM1XC8VDd+TRG6HKYSaTOX8QIn8c6aoFjdHzURG7rLfzju
+	kt+8WBA4CPrB6qaDQdXeODWLoAwgr32AnjZu8=
+Received: by 10.142.239.21 with SMTP id m21mr8315191wfh.290.1285026259992;
+	Mon, 20 Sep 2010 16:44:19 -0700 (PDT)
+Received: from [10.0.0.5] (eth7090.sa.adsl.internode.on.net [150.101.58.177])
+	by mx.google.com with ESMTPS id
+	i20sm9252801wff.17.2010.09.20.16.44.17
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 20 Sep 2010 16:44:18 -0700 (PDT)
+Message-ID: <4C97F1CD.4070804@gmail.com>
+Date: Tue, 21 Sep 2010 09:14:13 +0930
+From: Graham Gower <graham.gower@gmail.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux x86_64; en-US;
+	rv:1.9.1.12) Gecko/20100909 Thunderbird/3.0.7
 MIME-Version: 1.0
-X-Ovh-Tracer-Id: 16654592898463870281
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.160.47
+X-SA-Exim-Mail-From: graham.gower@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] utils.bbclass: fix is_machine_specific
+Subject: [PATCH] opkg: disable GPLv3 code.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,39 +56,43 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 22:58:46 -0000
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Mon, 20 Sep 2010 23:44:41 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: 7bit
 
-* base.bbclass can set a package's PACKAGE_ARCH to MACHINE_ARCH if
-it finds file:// in the SRC_URI and the corresponding file is machine
-specific (recipes/foo/foo-1.0/<some machine>/)
-* but is_machine_specific actually fails to detect these files as
-urldata.path is used instead of urldata.localpath thus preventing the
-comparison of the file's path with machinepaths
-* tested with bitbake HEAD & 1.8.18, with OE's tree alone and OE's tree
-plus an overlay.
+The sha256 code is GPLv3 licensed. This was not obvious and the license clause
+in opkg recipes was not updated when the sha256 code was added.
 
-Signed-off-by: Eric Bénard <eric@eukrea.com>
+All other files in opkg remain licensed GPLv2 (or later).
+
+Signed-off-by: Graham Gower <graham.gower@gmail.com>
 ---
- classes/utils.bbclass |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+ recipes/opkg/opkg.inc |    5 +++--
+ 1 files changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/classes/utils.bbclass b/classes/utils.bbclass
-index 0a7a045..1c636be 100644
---- a/classes/utils.bbclass
-+++ b/classes/utils.bbclass
-@@ -54,7 +54,7 @@ def is_machine_specific(d):
-     urldatadict = bb.fetch.init(d.getVar("SRC_URI", True).split(), d, True)
-     for urldata in (urldata for urldata in urldatadict.itervalues()
-                     if urldata.type == "file"):
--        if any(urldata.path.startswith(mp + "/") for mp in machinepaths):
-+        if any(urldata.localpath.startswith(mp + "/") for mp in machinepaths):
-             return True
+diff --git a/recipes/opkg/opkg.inc b/recipes/opkg/opkg.inc
+index 3f94506..ae1622a 100644
+--- a/recipes/opkg/opkg.inc
++++ b/recipes/opkg/opkg.inc
+@@ -4,7 +4,7 @@ SECTION = "base"
+ LICENSE = "GPLv2"
+ SRCREV = ${OPKG_SRCREV}
+ PV = "0.1.8+svnr${SRCPV}"
+-INC_PR = "r1"
++INC_PR = "r2"
  
- def subprocess_setup():
+ SRC_URI = "svn://opkg.googlecode.com/svn;module=trunk;proto=http \
+ 	   file://configure \
+@@ -22,4 +22,5 @@ do_install_prepend() {
+ EXTRA_OECONF += " --disable-gpg \ 
+                   --disable-openssl \ 
+                   --disable-ssl-curl \
+-                  --disable-curl"
++                  --disable-curl \
++                  --disable-sha256"
 -- 
-1.6.3.3
+1.7.1
+
 
 
 
