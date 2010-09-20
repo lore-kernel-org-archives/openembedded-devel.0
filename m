@@ -1,40 +1,44 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-yx0-f175.google.com ([209.85.213.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1Oxnjy-0002eD-KE
+	(envelope-from <raj.khem@gmail.com>) id 1OxntF-0004nu-KV
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 23:17:36 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1Oxnju-00019y-RM from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 14:17:30 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 20 Sep 2010 14:17:30 -0700
-Received: from [172.30.80.197] ([172.30.80.197]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 20 Sep 2010 15:17:28 -0600
-Message-ID: <4C97CF65.7010409@mentor.com>
-Date: Mon, 20 Sep 2010 14:17:25 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
-MIME-Version: 1.0
+	Mon, 20 Sep 2010 23:27:11 +0200
+Received: by yxg6 with SMTP id 6so1613819yxg.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Sep 2010 14:27:02 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=kcyWNcJdj0yNTkG/A4ky7m7OZ17+VxrPl48kRq6VeO4=;
+	b=ZNQ/iOR184nE05S60glfdFT/L7tNFFZgHQEW1P9mGqfIII6R0yEv5N1DsQeUKK8PNh
+	gILwa7AXRrOwbK5yPwazoNZNYgRTNDIUuYHVlNJ131s4ZOMN4ifmJ5fP1RaAyx5aq0ql
+	PSpPbH8JjhKmqj2CEe8cwrTuUjKtylZNH8bG8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=qbOgUGRzL1RE6ITz4QMSKfGqQ6g1LiFt01Uu0fHIPRnax/YVg388/5wDKD7mzE9qFc
+	ckIleWLWmPqIFpF0Z1vJDKlen0p+Nnjvu0dgWpXFogrCR6BpW1LW2EJ4ji/7ZHpwpPLw
+	OrBA+Fo0FlzVbFVGhHmk8+yxHUaDtR443MMBs=
+Received: by 10.90.83.9 with SMTP id g9mr6015571agb.15.1285018014858;
+	Mon, 20 Sep 2010 14:26:54 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id h8sm8208035ibk.21.2010.09.20.14.26.53
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Mon, 20 Sep 2010 14:26:54 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <E1OxTYC-0004Sl-3k@melo.openembedded.org>	<4C97723F.7010401@mentor.com>	<AANLkTimSpV1UQgFg5-PgvhwhmGj-NZ-QMg-wOkLtzZtw@mail.gmail.com>
-	<AANLkTiktTQbys+N_qKijzDf6EASk1kDTO-F5u2=Hy9xh@mail.gmail.com>
-In-Reply-To: <AANLkTiktTQbys+N_qKijzDf6EASk1kDTO-F5u2=Hy9xh@mail.gmail.com>
-X-OriginalArrivalTime: 20 Sep 2010 21:17:29.0127 (UTC)
-	FILETIME=[3B191B70:01CB5909]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+Date: Mon, 20 Sep 2010 14:26:48 -0700
+Message-Id: <1285018008-2519-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Khem Raj : iphone: Exclude from world.
+Subject: [PATCH] gcc-cross: Link libmpfr, libgmp, libmpc and libelf statically into gcc
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -48,46 +52,173 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 21:17:36 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Sep 2010 21:27:11 -0000
 
-Frans Meulenbroeks wrote:
-> 2010/9/20 Khem Raj <raj.khem@gmail.com>:
->> On Mon, Sep 20, 2010 at 7:39 AM, Tom Rini <tom_rini@mentor.com> wrote:
->>> git version control wrote:
->>>> Module: openembedded.git
->>>> Branch: master
->>>> Commit: 0319f8878547c6e8a78373cfc86a85cea60450ae
->>>> URL:
->>>>  http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=0319f8878547c6e8a78373cfc86a85cea60450ae
->>>>
->>>> Author: Khem Raj <raj.khem@gmail.com>
->>>> Date:   Sun Sep 19 16:38:38 2010 -0700
->>>>
->>>> iphone: Exclude from world.
->>>>
->>>> apple-csu overwrites the C startup files and nothing works after that
->>>> we can not select them with normal linux toolchain being staged and
->>>> used
->>>>
->>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>> Shouldn't this be a COMPATIBLE_something case?  You'd want this for world if
->>> that was what you were targeting... no?
->> yes. Actually its a distro iphone-compat that can be used to
->> differentiate. but then will COMPATIBLE_<distro> work ?
->>
-> 
-> Hm. I'm inclined to say that it is not distro specific (unless you see
-> iphone as a distro).
-> I can imagine different distro's running on iphone (ok maybe not *that* likely).
-> For me iphone is a machine.
+* Generate static version of these libraries
 
-I bet the iphone distro conf really only works with the iphone machine 
-conf, so COMPATIBLE_MACHINE is probably fine :)
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ recipes/gcc/gcc-configure-cross.inc |    7 +++++++
+ recipes/gmp/gmp.inc                 |    7 +++++++
+ recipes/gmp/gmp_4.2.4.bb            |   14 +++++++-------
+ recipes/gmp/gmp_5.0.1.bb            |    5 +----
+ recipes/libelf/libelf_0.8.13.bb     |    2 ++
+ recipes/libmpc/libmpc_0.8.1.bb      |    4 +++-
+ recipes/libmpc/libmpc_0.8.2.bb      |    2 ++
+ recipes/mpfr/mpfr_3.0.0.bb          |    2 ++
+ recipes/mpfr/mpfr_svn.bb            |    2 ++
+ 9 files changed, 33 insertions(+), 12 deletions(-)
 
+diff --git a/recipes/gcc/gcc-configure-cross.inc b/recipes/gcc/gcc-configure-cross.inc
+index c3c2b66..7041fcf 100644
+--- a/recipes/gcc/gcc-configure-cross.inc
++++ b/recipes/gcc/gcc-configure-cross.inc
+@@ -17,6 +17,13 @@ do_configure_prepend () {
+ 	export OBJCOPY_FOR_TARGET="${TARGET_SYS}-objcopy"
+ 	export STRIP_FOR_TARGET="${TARGET_SYS}-strip"
+ 	export CC_FOR_TARGET="${CCACHE} ${TARGET_SYS}-gcc ${TARGET_CC_ARCH}"
++	# Make sure we use GMP/MPFR statically
++	sed -i 's/^\(HOST_GMPLIBS =\) \(.*\)$/\1 -Wl,-Bstatic \2 -Wl,-Bdynamic/' ${S}/Makefile.tpl
++	sed -i 's/^\(HOST_GMPLIBS =\) \(.*\)$/\1 -Wl,-Bstatic \2 -Wl,-Bdynamic/' ${S}/Makefile.in
++	sed -i 's/^\(HOST_PPLLIBS =\) \(.*\)$/\1 -Wl,-Bstatic \2 -Wl,-Bdynamic/' ${S}/Makefile.tpl
++	sed -i 's/^\(HOST_PPLLIBS =\) \(.*\)$/\1 -Wl,-Bstatic \2 -Wl,-Bdynamic/' ${S}/Makefile.in
++	sed -i 's/^\(HOST_LIBELFLIBS =\) \(.*\)$/\1 -Wl,-Bstatic \2 -Wl,-Bdynamic/' ${S}/Makefile.tpl
++	sed -i 's/^\(HOST_LIBELFLIBS =\) \(.*\)$/\1 -Wl,-Bstatic \2 -Wl,-Bdynamic/' ${S}/Makefile.in
+ }
+ 
+ LIBGCCS_VAR = "-lgcc_s"
+diff --git a/recipes/gmp/gmp.inc b/recipes/gmp/gmp.inc
+index 55209f3..522189d 100644
+--- a/recipes/gmp/gmp.inc
++++ b/recipes/gmp/gmp.inc
+@@ -2,6 +2,7 @@ SECTION = "libs"
+ DESCRIPTION = "GNU multiprecision arithmetic library"
+ HOMEPAGE = "http://www.swox.com/gmp/"
+ LICENSE = "GPL LGPL"
++INC_PR = "r1"
+ 
+ SRC_URI = "${GNU_MIRROR}/gmp/gmp-${PV}.tar.bz2;name=gmp \
+ 	   file://configure.patch \
+@@ -11,5 +12,11 @@ inherit autotools
+ 
+ ARM_INSTRUCTION_SET = "arm"
+ 
++
++EXTRA_OECONF_append_virtclass-native = " --enable-static"
++
++BBCLASSEXTEND = "native nativesdk"
++NATIVE_INSTALL_WORKS = "1"
++
+ acpaths = ""
+ 
+diff --git a/recipes/gmp/gmp_4.2.4.bb b/recipes/gmp/gmp_4.2.4.bb
+index af05875..6eb1ecb 100644
+--- a/recipes/gmp/gmp_4.2.4.bb
++++ b/recipes/gmp/gmp_4.2.4.bb
+@@ -1,13 +1,13 @@
+-INC_PR = "r0"
++require gmp.inc
++
++SRC_URI += "file://sh4-asmfix.patch \
++            file://use-includedir.patch \
++            file://dont_use_mips_h_constraint.patch \
++           "
++
+ PR = "${INC_PR}.5"
+ 
+-SRC_URI_append += "file://sh4-asmfix.patch \
+-                   file://use-includedir.patch \
+-                   file://dont_use_mips_h_constraint.patch \
+-		  "
+-require gmp.inc
+ LICENSE = "GPLv3 LGPLv3"
+-BBCLASSEXTEND = "nativesdk"
+ 
+ SRC_URI[gmp.md5sum] = "fc1e3b3a2a5038d4d74138d0b9cf8dbe"
+ SRC_URI[gmp.sha256sum] = "5420b0e558a69a53b36f2b2c70a69f547e075d98366a585fc80cbbcce1efe368"
+diff --git a/recipes/gmp/gmp_5.0.1.bb b/recipes/gmp/gmp_5.0.1.bb
+index 0b117b1..95cb771 100644
+--- a/recipes/gmp/gmp_5.0.1.bb
++++ b/recipes/gmp/gmp_5.0.1.bb
+@@ -1,8 +1,5 @@
+-INC_PR = "r0"
++require gmp.inc
+ PR = "${INC_PR}.1"
+ SRC_URI[gmp.md5sum] = "6bac6df75c192a13419dfd71d19240a7"
+ SRC_URI[gmp.sha256sum] = "a2a610f01fd3298dc08c87bf30498c2402590e1bcb227fc40b15ee6d280939fb"
+-require gmp.inc
+ LICENSE = "GPLv3 LGPLv3"
+-NATIVE_INSTALL_WORKS = "1"
+-BBCLASSEXTEND = "native nativesdk"
+diff --git a/recipes/libelf/libelf_0.8.13.bb b/recipes/libelf/libelf_0.8.13.bb
+index 27fee38..ea19b35 100644
+--- a/recipes/libelf/libelf_0.8.13.bb
++++ b/recipes/libelf/libelf_0.8.13.bb
+@@ -12,6 +12,8 @@ PARALLEL_MAKE = ""
+ 
+ TARGET_CC_ARCH += "${LDFLAGS}"
+ 
++EXTRA_OECONF_append_virtclass-native = " --enable-static"
++
+ do_configure_prepend () {
+ 	if test ! -e acinclude.m4; then
+ 		cp aclocal.m4 acinclude.m4
+diff --git a/recipes/libmpc/libmpc_0.8.1.bb b/recipes/libmpc/libmpc_0.8.1.bb
+index f79321c..ed7e5bb 100644
+--- a/recipes/libmpc/libmpc_0.8.1.bb
++++ b/recipes/libmpc/libmpc_0.8.1.bb
+@@ -4,9 +4,11 @@ DEPENDS = "gmp mpfr"
+ S = "${WORKDIR}/mpc-${PV}"
+ NATIVE_INSTALL_WORKS = "1"
+ BBCLASSEXTEND = "native"
+-PR = "1"
++PR = "r2"
+ 
+ SRC_URI = "http://www.multiprecision.org/mpc/download/mpc-${PV}.tar.gz"
+ 
++EXTRA_OECONF_append_virtclass-native = " --enable-static"
++
+ SRC_URI[md5sum] = "5b34aa804d514cc295414a963aedb6bf"
+ SRC_URI[sha256sum] = "e664603757251fd8a352848276497a4c79b7f8b21fd8aedd5cc0598a38fee3e4"
+diff --git a/recipes/libmpc/libmpc_0.8.2.bb b/recipes/libmpc/libmpc_0.8.2.bb
+index 1d383fa..18a161a 100644
+--- a/recipes/libmpc/libmpc_0.8.2.bb
++++ b/recipes/libmpc/libmpc_0.8.2.bb
+@@ -4,8 +4,10 @@ DEPENDS = "gmp mpfr"
+ S = "${WORKDIR}/mpc-${PV}"
+ NATIVE_INSTALL_WORKS = "1"
+ BBCLASSEXTEND = "native"
++PR = "r1"
+ 
+ SRC_URI = "http://www.multiprecision.org/mpc/download/mpc-${PV}.tar.gz"
+ 
++EXTRA_OECONF_append_virtclass-native = " --enable-static"
+ SRC_URI[md5sum] = "e98267ebd5648a39f881d66797122fb6"
+ SRC_URI[sha256sum] = "ae79f8d41d8a86456b68607e9ca398d00f8b7342d1d83bcf4428178ac45380c7"
+diff --git a/recipes/mpfr/mpfr_3.0.0.bb b/recipes/mpfr/mpfr_3.0.0.bb
+index 97f4970..0dacb1e 100644
+--- a/recipes/mpfr/mpfr_3.0.0.bb
++++ b/recipes/mpfr/mpfr_3.0.0.bb
+@@ -11,5 +11,7 @@ SRC_URI = "http://www.mpfr.org/mpfr-${PV}/mpfr-${PV}.tar.bz2 \
+ # fix build in thumb mode for armv4t
+ SRC_URI_append_thumb = " file://long-long-thumb.patch"
+ 
++EXTRA_OECONF_append_virtclass-native = " --enable-static"
++
+ SRC_URI[md5sum] = "f45bac3584922c8004a10060ab1a8f9f"
+ SRC_URI[sha256sum] = "8f4e5f9c53536cb798a30455ac429b1f9fc75a0f8af32d6e0ac31ebf1024821f"
+diff --git a/recipes/mpfr/mpfr_svn.bb b/recipes/mpfr/mpfr_svn.bb
+index c1695b4..da58b37 100644
+--- a/recipes/mpfr/mpfr_svn.bb
++++ b/recipes/mpfr/mpfr_svn.bb
+@@ -6,3 +6,5 @@ PR = "${INC_PR}.0"
+ 
+ SRC_URI = "svn://scm.gforge.inria.fr/svn/mpfr;module=trunk"
+ S = "${WORKDIR}/trunk"
++
++EXTRA_OECONF_append_virtclass-native = " --enable-static"
 -- 
-Tom Rini
-Mentor Graphics Corporation
+1.7.1
+
 
 
