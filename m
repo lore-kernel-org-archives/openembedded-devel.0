@@ -1,39 +1,40 @@
-Received: from relay1.mentorg.com ([192.94.38.131])
+Received: from mail-ey0-f175.google.com ([209.85.215.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Tom_Rini@mentor.com>) id 1OxhXP-00062v-1e
+	(envelope-from <cliff.brake@gmail.com>) id 1OxhuY-0001Jt-V2
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 16:40:14 +0200
-Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
-	by relay1.mentorg.com with esmtp 
-	id 1OxhXG-0001DZ-Ue from Tom_Rini@mentor.com 
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 07:40:02 -0700
-Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
-	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
-	SMTPSVC(6.0.3790.1830); Mon, 20 Sep 2010 07:40:02 -0700
-Received: from [172.30.80.197] ([172.30.80.197]) by na2-mail.mgc.mentorg.com
-	with Microsoft SMTPSVC(6.0.3790.3959); 
-	Mon, 20 Sep 2010 08:40:01 -0600
-Message-ID: <4C97723F.7010401@mentor.com>
-Date: Mon, 20 Sep 2010 07:39:59 -0700
-From: Tom Rini <tom_rini@mentor.com>
-Organization: Mentor Graphics Corporation
-User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
+	Mon, 20 Sep 2010 17:04:07 +0200
+Received: by eyb7 with SMTP id 7so1683086eyb.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Mon, 20 Sep 2010 08:04:05 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=48EgcptacpudG2tk7UhoaP+0ycjb4/vBAjs0nif1YXo=;
+	b=j6ij9tFW9Lmy+6I6KYFc5JQ0MqcJvrzLHcnF7cqLZ5p92J3X07ODcYNyRQoXnx7e6D
+	c7MvwL1wvR5Awt9ksI04ezh0lU1nRWt8F3WIHZJlnDvKE/+qJAdDFfX0ylDOARgoJhpw
+	NmNWYqDBmYfzAXJ1F/Xm22kL4L0RMvq9sh0Mk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=pLUcpyqdzV+MqKK7Cc8b0oI7DCNGxJ3tEtJFU/88nZ9lPxS8zNvSJShTwGn/ZPCO5f
+	UtoijPuXejNDXEhh94ste3tL21NcNJ69facMRoOcfDlRPe9vFesolHwrdGNL9NdIXcDD
+	RodEjZsdjn+wnAUVYtFcD8bPzPJhKXsf+PBFM=
 MIME-Version: 1.0
+Received: by 10.216.17.130 with SMTP id j2mr4469917wej.47.1284995044854; Mon,
+	20 Sep 2010 08:04:04 -0700 (PDT)
+Received: by 10.216.72.212 with HTTP; Mon, 20 Sep 2010 08:04:04 -0700 (PDT)
+Date: Mon, 20 Sep 2010 11:04:04 -0400
+Message-ID: <AANLkTinCaVa9jTmv4ysnbszv0-nyn3nwqYrQKAr2hLWE@mail.gmail.com>
+From: Cliff Brake <cliff.brake@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-References: <E1OxTYC-0004Sl-3k@melo.openembedded.org>
-In-Reply-To: <E1OxTYC-0004Sl-3k@melo.openembedded.org>
-X-OriginalArrivalTime: 20 Sep 2010 14:40:01.0955 (UTC)
-	FILETIME=[B5136F30:01CB58D1]
-X-SA-Exim-Connect-IP: 192.94.38.131
-X-SA-Exim-Mail-From: Tom_Rini@mentor.com
+X-SA-Exim-Connect-IP: 209.85.215.175
+X-SA-Exim-Mail-From: cliff.brake@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.4 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Khem Raj : iphone: Exclude from world.
+Subject: testing branch 2010-09-20
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,32 +48,31 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 14:40:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Mon, 20 Sep 2010 15:04:07 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-git version control wrote:
-> Module: openembedded.git
-> Branch: master
-> Commit: 0319f8878547c6e8a78373cfc86a85cea60450ae
-> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=0319f8878547c6e8a78373cfc86a85cea60450ae
-> 
-> Author: Khem Raj <raj.khem@gmail.com>
-> Date:   Sun Sep 19 16:38:38 2010 -0700
-> 
-> iphone: Exclude from world.
-> 
-> apple-csu overwrites the C startup files and nothing works after that
-> we can not select them with normal linux toolchain being staged and
-> used
-> 
-> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+testing-next has been updated to latest master and is ready for clean
+builds.  Seems like we had a number of issues last week, so I will
+likely not move the testing branch forward unless others think we
+should.
 
-Shouldn't this be a COMPATIBLE_something case?  You'd want this for 
-world if that was what you were targeting... no?
+http://cgit.openembedded.org/cgit.cgi/openembedded/tag/?id=testing_2010-09-13
+
+Note, we had a bogus commit in the testing-next branch, so I did a
+forced update.  If you already have a testing-next branch locally, you
+might do the following to get in sync.
+
+git fetch
+git checkout testing-next
+git reset --hard origin/testing-next
+
+http://wiki.openembedded.net/index.php/Testing
+
+Thanks,
+Cliff
 
 -- 
-Tom Rini
-Mentor Graphics Corporation
+=================
+http://bec-systems.com
 
 
