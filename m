@@ -1,48 +1,30 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OxnyO-0004wh-Vx
-	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 23:32:29 +0200
-Received: by fxm17 with SMTP id 17so1141781fxm.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 14:32:26 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type
-	:content-transfer-encoding;
-	bh=3q0gS/uDhmwt0akOE5EsTTmzMMhVFyHsqFX1kXcWvuk=;
-	b=oDdT/f++8dzL9qHJs5UWy7kJ0Bn5yoN8kdmOMX3vs+tkcIsgWVDYzvvJ/e65BU6IPe
-	deNiAftskSmCoaqGKNaPrdwpJoSSKfiNUwEPkb7dUxT8PXcz19Qz5UJPQDbv/q3mFfxf
-	0yq5/LbuiRlkhRyNpS1lGm99R7qtPe7yCMWeA=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type:content-transfer-encoding;
-	b=weuVSW1FAHY3fCiAJxXIejeP6cIcuIlMdLJex7P2JhCdiUs/EdFXYn4D1KIL5nWqYR
-	XvE4U1Zh3NUgFbzyjALjyObMmHu6Q+RgP7puQofWJ4EZwZRy2XBxauZYzzdoIWeDbVZt
-	B2dTDwvMbNdKAdd+hIyXvE+Sj70bq58741qIc=
-Received: by 10.102.228.12 with SMTP id a12mr593584muh.41.1285018346075; Mon,
-	20 Sep 2010 14:32:26 -0700 (PDT)
-MIME-Version: 1.0
-Received: by 10.103.107.20 with HTTP; Mon, 20 Sep 2010 14:32:06 -0700 (PDT)
-In-Reply-To: <4C97CF65.7010409@mentor.com>
-References: <E1OxTYC-0004Sl-3k@melo.openembedded.org>
-	<4C97723F.7010401@mentor.com>
-	<AANLkTimSpV1UQgFg5-PgvhwhmGj-NZ-QMg-wOkLtzZtw@mail.gmail.com>
-	<AANLkTiktTQbys+N_qKijzDf6EASk1kDTO-F5u2=Hy9xh@mail.gmail.com>
-	<4C97CF65.7010409@mentor.com>
-From: Khem Raj <raj.khem@gmail.com>
-Date: Mon, 20 Sep 2010 14:32:06 -0700
-Message-ID: <AANLkTimwC0eECkS0Ocs_b=ak0_pt+dkt0G2QRPPwn-fA@mail.gmail.com>
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OxogJ-0008Qw-EP for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 00:17:52 +0200
+Received: from g225138219.adsl.alicedsl.de ([92.225.138.219]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OxogI-0006PG-5E; Mon, 20 Sep 2010 22:17:50 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+In-Reply-To: <1284228112.14396.159.camel@mattotaupa>
+References: <1284228112.14396.159.camel@mattotaupa>
+Date: Tue, 21 Sep 2010 00:17:48 +0200
+Message-ID: <1285021068.2453.80.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [oe-commits] Khem Raj : iphone: Exclude from world.
+Subject: Re: minimal-uclibc: freesmartphone/libfsobasics_git.bb: do_compile() failed: utilities.c:35:22: fatal error: execinfo.h: No such file or directory
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -56,73 +38,200 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 21:32:29 -0000
-Content-Type: text/plain; charset=UTF-8
+X-List-Received-Date: Mon, 20 Sep 2010 22:17:52 -0000
+X-Groupsio-MsgNum: 23742
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-Qfqo9vCik81EM1QgB9oH"
+
+--=-Qfqo9vCik81EM1QgB9oH
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Mon, Sep 20, 2010 at 2:17 PM, Tom Rini <tom_rini@mentor.com> wrote:
-> Frans Meulenbroeks wrote:
->>
->> 2010/9/20 Khem Raj <raj.khem@gmail.com>:
->>>
->>> On Mon, Sep 20, 2010 at 7:39 AM, Tom Rini <tom_rini@mentor.com> wrote:
->>>>
->>>> git version control wrote:
->>>>>
->>>>> Module: openembedded.git
->>>>> Branch: master
->>>>> Commit: 0319f8878547c6e8a78373cfc86a85cea60450ae
->>>>> URL:
->>>>>
->>>>> =C2=A0http://gitweb.openembedded.net/?p=3Dopenembedded.git&a=3Dcommit=
-;h=3D0319f8878547c6e8a78373cfc86a85cea60450ae
->>>>>
->>>>> Author: Khem Raj <raj.khem@gmail.com>
->>>>> Date: =C2=A0 Sun Sep 19 16:38:38 2010 -0700
->>>>>
->>>>> iphone: Exclude from world.
->>>>>
->>>>> apple-csu overwrites the C startup files and nothing works after that
->>>>> we can not select them with normal linux toolchain being staged and
->>>>> used
->>>>>
->>>>> Signed-off-by: Khem Raj <raj.khem@gmail.com>
->>>>
->>>> Shouldn't this be a COMPATIBLE_something case? =C2=A0You'd want this f=
-or
->>>> world if
->>>> that was what you were targeting... no?
->>>
->>> yes. Actually its a distro iphone-compat that can be used to
->>> differentiate. but then will COMPATIBLE_<distro> work ?
->>>
->>
->> Hm. I'm inclined to say that it is not distro specific (unless you see
->> iphone as a distro).
->> I can imagine different distro's running on iphone (ok maybe not *that*
->> likely).
->> For me iphone is a machine.
->
-> I bet the iphone distro conf really only works with the iphone machine co=
-nf,
-> so COMPATIBLE_MACHINE is probably fine :)
+Am Samstag, den 11.09.2010, 20:01 +0200 schrieb Paul Menzel:
 
-yes thats right. I will do something on these lines.
+[=E2=80=A6]
 
->
-> --
-> Tom Rini
-> Mentor Graphics Corporation
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+> `do_compile()` of `freesmartphone/libfsobasics_git.bb` fails for me
+> reliably since today. As with my other reported failure of gtk+ [1]
+> nothing was changed regarding this recipe in the last days and it worked
+> for me before. Even yesterday because I could build gtk+ which is
+> supposed to happen after `libfsobasics_git.bb`. But several things get
+> build in parallel so that statement could be wrong.
+>=20
+> Minimal compiles fine with EGLIBC and glibc.
+>=20
+> 	$ find . -name execinfo.h
+>=20
+> did not return anything in my build directory.
+>=20
+> 	$ more log.do_compile
+> 	NOTE: make
+> 	make  all-recursive
+> 	make[1]: Entering directory `/oe/build-minimal-uclibc/minimal-uclibc-dev=
+/work/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c=
+6fea92168e88201be98dcceaef-r2.0/git/libfsobasics'
+> 	Making all in fsobasics
+> 	make[2]: Entering directory `/oe/build-minimal-uclibc/minimal-uclibc-dev=
+/work/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c=
+6fea92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/i686-linux/usr/bin/=
+valac -C --basedir .. --vapidir ../vapi --pkg posix --pkg linux --pkg libnl=
+-2.0 --pkg glib-2.0 --pkg gio-2.0 --header fsobasics.h --library fsobasics-=
+2.0  asyncworker.vala inotifier.vala kobjectnotifier.vala libinitexit.vala =
+logger.vala netlinknotifier.vala netlinkutils.vala overlay.vala process.val=
+a smartkeyfile.vala syncasync.vala threading.vala types.vala utilities.vala
+> 	fsobasics/logger.vala:300.17-300.33: warning: unreachable code detected
+> 		              return "UNKNOWN";
+> 		              ^^^^^^^^^^^^^^^^^
+> 	fsobasics/smartkeyfile.vala:117.13-117.25: warning: unreachable code det=
+ected
+> 		          return false;
+> 		          ^^^^^^^^^^^^^
+> 	Compilation succeeded - 2 warning(s)
+> 	touch fsobasics.vala.stamp
+> 	make  all-am
+> 	make[3]: Entering directory `/oe/build-minimal-uclibc/minimal-uclibc-dev=
+/work/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c=
+6fea92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
+> 		CC     asyncworker.lo
+> 		CC     inotifier.lo
+> 	inotifier.c: In function 'fso_framework_inotifier_construct':
+> 	inotifier.c:173:2: warning: passing argument 4 of 'g_hash_table_new_full=
+' from incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNo=
+tify' but argument is of type 'void (*)(struct INotifyDelegateHolder *)'
+> 		CC     kobjectnotifier.lo
+> 	kobjectnotifier.c: In function 'fso_framework_base_kobject_notifier_cons=
+truct':
+> 	kobjectnotifier.c:182:2: warning: passing argument 4 of 'g_hash_table_ne=
+w_full' from incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNo=
+tify' but argument is of type 'void (*)(struct GList *)'
+> 	kobjectnotifier.c:183:2: warning: passing argument 4 of 'g_hash_table_ne=
+w_full' from incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNo=
+tify' but argument is of type 'void (*)(struct GList *)'
+> 	kobjectnotifier.c:184:2: warning: passing argument 4 of 'g_hash_table_ne=
+w_full' from incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNo=
+tify' but argument is of type 'void (*)(struct GList *)'
+> 	kobjectnotifier.c:188:52: warning: passing argument 2 of 'bind' from inc=
+ompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/sys/socket.h:115:12: note: expected 'const struct socka=
+ddr *' but argument is of type 'struct sockaddr_nl *'
+> 		CC     libinitexit.lo
+> 		CC     logger.lo
+> 		CC     netlinknotifier.lo
+> 	netlinknotifier.c: In function 'fso_framework_base_netlink_notifier_cons=
+truct':
+> 	netlinknotifier.c:206:2: warning: passing argument 4 of 'g_hash_table_ne=
+w_full' from incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/ghash.h:62:13: note: expected 'GDestroyNo=
+tify' but argument is of type 'void (*)(struct GList *)'
+> 	netlinknotifier.c: In function '_lambda0_':
+> 	netlinknotifier.c:260:162: warning: assignment discards qualifiers from =
+pointer target type
+> 	netlinknotifier.c: In function 'fso_framework_base_netlink_notifier_hand=
+leNetlinkMessage':
+> 	netlinknotifier.c:296:15: warning: assignment makes pointer from integer=
+ without a cast
+> 	netlinknotifier.c: In function 'fso_framework_base_netlink_notifier_hand=
+leMessage':
+> 	netlinknotifier.c:344:56: warning: cast to pointer from integer of diffe=
+rent size
+> 	netlinknotifier.c: In function '_fso_framework_base_netlink_notifier_add=
+Match':
+> 	netlinknotifier.c:366:56: warning: cast to pointer from integer of diffe=
+rent size
+> 	netlinknotifier.c:372:41: warning: cast to pointer from integer of diffe=
+rent size
+> 		CC     netlinkutils.lo
+> 		CC     overlay.lo
+> 		CC     process.lo
+> 		CC     smartkeyfile.lo
+> 		CC     syncasync.lo
+> 		CC     threading.lo
+> 	threading.c: In function 'fso_framework_threading_callDelegateOnMainThre=
+ad':
+> 	threading.c:451:4: warning: passing argument 4 of 'g_idle_add_full' from=
+ incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/gmain.h:291:10: note: expected 'GDestroyN=
+otify' but argument is of type 'void (*)(struct Block3Data *)'
+> 	threading.c:455:4: warning: passing argument 4 of 'g_idle_add_full' from=
+ incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/gmain.h:291:10: note: expected 'GDestroyN=
+otify' but argument is of type 'void (*)(struct Block3Data *)'
+> 	threading.c:458:4: warning: passing argument 4 of 'g_idle_add_full' from=
+ incompatible pointer type
+> 	/oe/build-minimal-uclibc/minimal-uclibc-dev/sysroots/armv7a-oe-linux-ucl=
+ibceabi/usr/include/glib-2.0/glib/gmain.h:291:10: note: expected 'GDestroyN=
+otify' but argument is of type 'void (*)(struct Block3Data *)'
+> 		CC     types.lo
+> 		CC     utilities.lo
+> 	utilities.c:35:22: fatal error: execinfo.h: No such file or directory
+> 	compilation terminated.
+> 	make[3]: *** [utilities.lo] Error 1
+> 	make[3]: Leaving directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/=
+work/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6=
+fea92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
+> 	make[2]: *** [all] Error 2
+> 	make[2]: Leaving directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/=
+work/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6=
+fea92168e88201be98dcceaef-r2.0/git/libfsobasics/fsobasics'
+> 	make[1]: *** [all-recursive] Error 1
+> 	make[1]: Leaving directory `/oe/build-minimal-uclibc/minimal-uclibc-dev/=
+work/armv7a-oe-linux-uclibceabi/libfsobasics-1_0.9.10+gitr0+b163e36f9c960c6=
+fea92168e88201be98dcceaef-r2.0/git/libfsobasics'
+> 	make: *** [all] Error 2
+> 	FATAL: oe_runmake failed
+> 	ERROR: Function do_compile failed
+>=20
+> Does anyone have a clue on how that can be fixed.
+
+`execinfo.h` is not available in uClibc and is a =E2=80=9CGNUism=E2=80=9D [=
+2]. The
+dependency in in `linux.vapi` [3] and got included in [4].
+
+Unfortunately I do not know how to exclude that. I guess Autotools
+should check if `execinfo.h` is available and only use it if it is. But
+I do not know how to do that. Michael, are those libraries intended to
+be used with uClibc?
+
+If this is too much work, how can I exclude this recipe from
+console-image for minimal-uclibc?
 
 
+Thanks,
 
---=20
--Khem
+Paul
 
 
+> [1] http://lists.linuxtogo.org/pipermail/openembedded-devel/2010-Septembe=
+r/024097.html
+[2] https://bugs.gentoo.org/show_bug.cgi?id=3D146693#c2
+[3] http://git.freesmartphone.org/?p=3Dcornucopia.git;a=3Dblob;f=3Dlibfsoba=
+sics/vapi/linux.vapi
+[4] http://mail.gnome.org/archives/commits-list/2009-November/msg02423.html
+
+--=-Qfqo9vCik81EM1QgB9oH
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
+
+iEYEABECAAYFAkyX3YYACgkQPX1aK2wOHVhHBACfQyWcl/RMh3KzrnU/sR9QA1Hx
+QkgAmwVRjvu2B4ho8mGdTPKuTS5YJ0gr
+=pgLT
+-----END PGP SIGNATURE-----
+
+--=-Qfqo9vCik81EM1QgB9oH--
