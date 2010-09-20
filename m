@@ -1,46 +1,38 @@
-Received: from mail-gy0-f175.google.com ([209.85.160.175])
+Received: from asmtpout030.mac.com ([17.148.16.105])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OxcAW-0007EA-UM
+	(envelope-from <elvis.dowson@mac.com>) id 1Oxekv-0005r4-6f
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 10:56:13 +0200
-Received: by gya6 with SMTP id 6so1386233gya.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 01:55:18 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=FGsbgiEJaIcVFL/tLiDHkjvPqCHsF6rgtn0U8Hbecmw=;
-	b=h73md+0IlOd0CUbvEZTB356JhhT535KdSI4t5OnLFBJhS6TIzO8r8OYBtQeuWJAihU
-	PYMrsaQHp5MHNSKPRtZh79ImFZqE6yZAa356ui8rURVLypgTZ++NAfPXn/qvaYLq4CeD
-	sxURWoNPZNsrJ7iP6UX3nI6Fla10kz21apSIU=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=vozpvOECx4pO5nPr6m7oR9buN+sB7DqKhC+zUYosUjUpTQCMCS9Ze2NApy7PLZ7M8s
-	8ndVRGmKB6+KtzVClK+5HtKDiofPAUw3zlK6hgRjpyINAhL0/Z/MQ6x+1yJnHAxyv0fl
-	87txt8hOt5DY2kC1WkZ1bX8EgtP1WC2JEuktY=
-MIME-Version: 1.0
-Received: by 10.100.31.13 with SMTP id e13mr9042617ane.13.1284972918027; Mon,
-	20 Sep 2010 01:55:18 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 20 Sep 2010 01:55:17 -0700 (PDT)
-In-Reply-To: <201009201042.49657.schnitzeltony@gmx.de>
-References: <201009191753.42404.schnitzeltony@gmx.de>
-	<201009191818.10882.schnitzeltony@gmx.de>
-	<i772rs$2tp$1@dough.gmane.org>
-	<201009201042.49657.schnitzeltony@gmx.de>
-Date: Mon, 20 Sep 2010 10:55:17 +0200
-Message-ID: <AANLkTindG1S3Z=WY2CVsqd0hco4qjfo-6XviHAb8N5r3@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
-To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.160.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+	Mon, 20 Sep 2010 13:41:58 +0200
+MIME-version: 1.0
+Received: from [192.168.1.100] ([87.201.169.232])
+	by asmtp030.mac.com (Sun Java(tm) System Messaging Server 6.3-8.01
+	(built Dec
+	16 2008; 32bit)) with ESMTPSA id <0L910071QN5JIS80@asmtp030.mac.com> for
+	openembedded-devel@lists.openembedded.org; Mon,
+	20 Sep 2010 04:41:47 -0700 (PDT)
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+	ipscore=0 phishscore=0 bulkscore=0 adultscore=0 classifier=spam
+	adjust=0
+	reason=mlx engine=6.0.2-1004200000 definitions=main-1009200038
+X-Proofpoint-Virus-Version: vendor=fsecure
+	engine=2.50.10432:5.0.10011,1.0.148,0.0.0000
+	definitions=2010-09-20_06:2010-09-20, 2010-09-20,
+	1970-01-01 signatures=0
+From: Elvis Dowson <elvis.dowson@mac.com>
+Date: Mon, 20 Sep 2010 15:41:37 +0400
+Message-id: <EC89DF03-EE97-4A6D-8E4D-6E9ED9372176@mac.com>
+To: OpenEmbedded Developer Mailing List
+	<openembedded-devel@lists.openembedded.org>
+X-Mailer: Apple Mail (2.1081)
+X-SA-Exim-Connect-IP: 17.148.16.105
+X-SA-Exim-Mail-From: elvis.dowson@mac.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.9 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] clutter: remove COMPATIBLE_MACHINE
+Subject: How to specify a specific linux kernel recipe or provider
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -54,30 +46,20 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 08:56:13 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 20 Sep 2010 11:41:58 -0000
+Content-transfer-encoding: 7BIT
+Content-type: text/plain; charset=us-ascii
 
-2010/9/20 Andreas Mueller <schnitzeltony@gmx.de>:
-> On Monday 20 September 2010 09:35:24 am Koen Kooi wrote:
->> On 19-09-10 18:18, Andreas Mueller wrote:
->> > On Sunday 19 September 2010 06:11:39 pm Koen Kooi wrote:
->> >> That needs slightly, more, namely falling back to mesa for unknown
->> >> machines. I can have a look at that tomorrow if you wish.
->> > Yes please because I thought the fallback is already available with
->> >
->> > DEPENDS = ".. virtual/libgl"
->>
->> The last time I tried it it didn't work, time to try it again :)
->
-> Meanwhile I am trying to setup something which does not create patches with line breaks ( makes me sick & yes I saw
-> http://wiki.openembedded.net/index.php/How_to_submit_a_patch_for_dummies but my provider wants autentication & I have
-> not yet managed to get this working for git-send-email - maybe my git is too old... )
->
-> Let me know mesa fallback result..
+Hi,
+       I'm using the overo-oe repo, and when I build omap3-console-image, it builds the linux-omap3-2.6.32.bb recipe, located in my user.collection folder. 
 
-use alpine or set up a gmail account (note that you can still use your
-real email for Submitted-by)
+Now suppose I want to experiment with a new kernel recipe, and create a new one called linux-android-rowboat-eclair-2.6.32.bb. 
 
-Frans
+What should I do to make the omap3-console-image recipe build using the linux-android-rowboat-eclair-2.6.32.bb recipe, instead of the linux-omap3-2.6.32.bb? 
+
+Best regards,
+
+Elvis Dowson
+
 
 
