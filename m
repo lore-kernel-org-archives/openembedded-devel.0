@@ -1,47 +1,32 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from relay1.mentorg.com ([192.94.38.131])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1OxbJ2-0004c5-QH
+	(envelope-from <Fahad_Usman@mentor.com>) id 1Oxbfw-0000Rm-9c
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 10:00:57 +0200
-Received: by mail-iw0-f175.google.com with SMTP id 2so4150389iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 01:00:04 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=JWJNz7d+A2eC2C6WWZH3ulIzGW6jsFudMKR3kgubtkc=;
-	b=Vm/bJCQC1oXsGRrT1kPI9FObGybBd21ksxxHxCCY8P0bGxbb31+Dz7Wqmb0GqKF9fS
-	a6gwAlJoad+ETdxVurr6AhJiGz/hOLWT1ReCBcmBVhfxdmB1ZS55Fp8LrUK3cICCcw6p
-	kpi7V1XgKmc1Iiq/mUMcKzLZA+GKFiTQE5H0A=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=XxZjOQX6CF7g1fWqulS+6QWMSjo874KW7kPIW20YuK2Utveh3rUSwV8Ke//Zo1bzzN
-	yWjZEcaJnhWYtcN4N4qTX1GwcMm0RczzmcVbQ6Vs6L53NuNjHm8y6wktM/8UPS9vwrxU
-	q056lzdfFdVICeqtRXMOiZlrXIAvpKsvZaPmA=
-MIME-Version: 1.0
-Received: by 10.231.170.13 with SMTP id b13mr10024352ibz.62.1284969604530;
-	Mon, 20 Sep 2010 01:00:04 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Mon, 20 Sep 2010 01:00:04 -0700 (PDT)
-In-Reply-To: <1284048433-20991-3-git-send-email-eric@eukrea.com>
-References: <AANLkTi=KDR=mtuVUiQE-5_-FL4oR+meQssfeUgz6bBLq@mail.gmail.com>
-	<1284048433-20991-1-git-send-email-eric@eukrea.com>
-	<1284048433-20991-2-git-send-email-eric@eukrea.com>
-	<1284048433-20991-3-git-send-email-eric@eukrea.com>
-Date: Mon, 20 Sep 2010 10:00:04 +0200
-Message-ID: <AANLkTi=NcRgW-5LFV+VO_AkBQGJgKaNbeN2bcwkrznDR@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+	Mon, 20 Sep 2010 10:24:39 +0200
+Received: from nat-dem.mentorg.com ([139.181.124.2]
+	helo=eu2-mail.mgc.mentorg.com) by relay1.mentorg.com with esmtp 
+	id 1Oxbf2-0002Go-2L from Fahad_Usman@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Sep 2010 01:23:40 -0700
+Received: from localhost.localdomain ([137.202.157.210]) by
+	eu2-mail.mgc.mentorg.com with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 20 Sep 2010 10:22:31 +0200
+From: Fahad Usman <fahad_usman@mentor.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+Date: Mon, 20 Sep 2010 13:22:23 +0500
+Message-Id: <1284970943-9765-1-git-send-email-fahad_usman@mentor.com>
+X-Mailer: git-send-email 1.6.3.3
+X-OriginalArrivalTime: 20 Sep 2010 08:22:31.0415 (UTC)
+	FILETIME=[F84D5070:01CB589C]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Fahad_Usman@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.3 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 3/3] python_2.6.5: tune python-distutils
+Subject: [PATCH] nkf_2.07.bb: merged native and non-native recipes
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,16 +40,62 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 08:00:57 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Mon, 20 Sep 2010 08:24:39 -0000
 
-2010/9/9 Eric B=E9nard <eric@eukrea.com>:
-> removing config/libpython2.6.a and distutils/command/win*
-> as suggested by cdricjulien.
->
-> Signed-off-by: Eric B=E9nard <eric@eukrea.com>
+* removed the nkf-native_2.07.bb file
+* added NATIVE_INSTALL_WORKS = "1"
+* added BBCLASSEXTEND = "native"
+* bumped PR
 
-Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+Signed-off-by: Fahad Usman <fahad_usman@mentor.com>
+---
+ recipes/nkf/nkf-native_2.07.bb |   14 --------------
+ recipes/nkf/nkf_2.07.bb        |    7 ++++++-
+ 2 files changed, 6 insertions(+), 15 deletions(-)
+
+diff --git a/recipes/nkf/nkf-native_2.07.bb b/recipes/nkf/nkf-native_2.07.bb
+deleted file mode 100644
+index b9782ae..0000000
+--- a/recipes/nkf/nkf-native_2.07.bb
++++ /dev/null
+@@ -1,14 +0,0 @@
+-require nkf_${PV}.bb
+-inherit native
+-
+-do_stage() {
+-    install -m 0755 nkf ${STAGING_BINDIR}
+-}
+-
+-do_install() {
+-	:
+-}
+-
+-
+-SRC_URI[md5sum] = "af11dcd3fe71d67831c020e3bfd5073b"
+-SRC_URI[sha256sum] = "71d2ba992df209a00bb1dca45e3336729dc16e51b71526bd20f897cc6127a275"
+diff --git a/recipes/nkf/nkf_2.07.bb b/recipes/nkf/nkf_2.07.bb
+index ef6e23d..20ee2b2 100644
+--- a/recipes/nkf/nkf_2.07.bb
++++ b/recipes/nkf/nkf_2.07.bb
+@@ -1,6 +1,6 @@
+ DESCRIPTION = "Network Kanji Code Conversion Filter"
+ LICENSE = "GPL"
+-PR = "r1"
++PR = "r2"
+ 
+ SRC_URI = "http://ftp.debian.org/debian/pool/main/n/nkf/nkf_${PV}.orig.tar.gz"
+ S = "${WORKDIR}/nkf207"
+@@ -16,3 +16,8 @@ do_install() {
+ SRC_URI[md5sum] = "af11dcd3fe71d67831c020e3bfd5073b"
+ SRC_URI[sha256sum] = "71d2ba992df209a00bb1dca45e3336729dc16e51b71526bd20f897cc6127a275"
+ TARGET_CC_ARCH += "${LDFLAGS}"
++
++BBCLASSEXTEND = "native"
++ 
++NATIVE_INSTALL_WORKS = "1"
++
+-- 
+1.6.3.3
+
 
 
