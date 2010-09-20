@@ -1,45 +1,45 @@
-Received: from mail-fx0-f47.google.com ([209.85.161.47])
+Received: from mail-yw0-f47.google.com ([209.85.213.47])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <pirobk@gmail.com>) id 1Oxkuj-0000Mr-7U
+	(envelope-from <raj.khem@gmail.com>) id 1Oxl2C-0006jE-S7
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 20:16:29 +0200
-Received: by fxm17 with SMTP id 17so967031fxm.6
+	Mon, 20 Sep 2010 20:24:27 +0200
+Received: by ywa8 with SMTP id 8so1552235ywa.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 11:16:26 -0700 (PDT)
+	Mon, 20 Sep 2010 11:24:09 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=CEwzCFMakkF4XXeunYERGERZkc8405RuK7hNiGa7AiQ=;
-	b=x/h/z7nmYDRrqjgR+1hOQeHM9fMa/QKAQJNED4Atgy/zxkuM+bHsJ3n7IltfUSj6wd
-	99o4ptvsLUXdEsbKAgSklUmjrsKul+eHBETOo9KkjMjoC9qRfh8HUMsfvUqDvrnt9xUl
-	IIIh9HW9vsOzwL48fSwnFmSM+v5DjMBAexsdc=
+	bh=X/jJmuXjW4RgfXMeQaBYr5mwdnYHvLg/9nYw25fYCX0=;
+	b=joOADLxPLPIZP0652L1Es58J17wMtdHIV/FoesIQS8VVvROsuz43EKLXeCAfMWYh4j
+	ZkUz9TbpGUfFjySzsQBCK7xSygGYodTnwhD24oxqcVyj26U4edOrYePdxdiM898QBPXE
+	4d2lKJrTHqOrKnS4VsWXBPcwxizgDmRphnW8A=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=OtFpUaJfjm/CkMTgbiQ+H6qPzHBYF5rhoa1DE2+kGOdz68NrcVIE+AlkIPJIi+EiB5
-	E2xCJQydUTXdj/hNOdIAFmzZlINFF2WDIWomWlp9EtCA+AbnRIj/HqvK15KWkIxMMKP4
-	akc22sewOAbCJ9KR8P6KrM2c1TEJsjUWs8d/A=
+	b=OZgf6NMZEiUY/apt51FtGtynaKXUa5lidX6k8wVnk3iswzauvaGaemRDhM8YQ8zRK7
+	TEuhO2haZ8IWj/W0W0l0ZO0jwh5Gr22zMWi+SkcaEJBubDf5XQ7+glgCehl1KeUgKSgK
+	qqZYgzaz2GHBy46pcplPYzHjKQfZPlhcjqJ10=
+Received: by 10.90.114.18 with SMTP id m18mr5860947agc.13.1285007049155; Mon,
+	20 Sep 2010 11:24:09 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.102.228.7 with SMTP id a7mr570596muh.12.1285006586399; Mon, 20
-	Sep 2010 11:16:26 -0700 (PDT)
-Received: by 10.220.180.65 with HTTP; Mon, 20 Sep 2010 11:16:26 -0700 (PDT)
-In-Reply-To: <4C9693E5.3040504@freyther.de>
-References: <1284933592-4558-1-git-send-email-pirobk@gmail.com>
-	<4C9693E5.3040504@freyther.de>
-Date: Mon, 20 Sep 2010 20:16:26 +0200
-Message-ID: <AANLkTim+VwnZH-yiNOPkQ-ZvbGLmjXpEz8U-WJOoPzt7@mail.gmail.com>
-From: =?ISO-8859-1?Q?Bj=F6rn_Krombholz?= <pirobk@gmail.com>
+Received: by 10.231.200.194 with HTTP; Mon, 20 Sep 2010 11:23:49 -0700 (PDT)
+In-Reply-To: <AANLkTi=jXnzu2VyQSDvZHraw1sE-dZ3wZjnsS_-fJbRT@mail.gmail.com>
+References: <4C970C21.7020305@gmail.com>
+	<AANLkTi=jXnzu2VyQSDvZHraw1sE-dZ3wZjnsS_-fJbRT@mail.gmail.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Mon, 20 Sep 2010 11:23:49 -0700
+Message-ID: <AANLkTimUAfH6XWewVUgw-wvNgCkpAsjxx4cYeixc5p-J@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.161.47
-X-SA-Exim-Mail-From: pirobk@gmail.com
+X-SA-Exim-Connect-IP: 209.85.213.47
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_PASS
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
+Subject: Re: [PATCH] tapioca, farsight: move to obsolete. These recipes are old and unbuildable.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,24 +53,34 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 18:16:29 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Mon, 20 Sep 2010 18:24:28 -0000
+X-List-Received-Date: Mon, 20 Sep 2010 18:24:28 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-2010/9/20 Holger Freyther <holger+oe@freyther.de>
-> On 09/20/2010 05:59 AM, Bj=F6rn Krombholz wrote:
-> > @@ -1,4 +1,4 @@
-> > -DEPENDS_prepend =3D "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d,=
- 1) =3D=3D 'qt4-embedded')]}"
-> > +DEPENDS_prepend =3D "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d,=
- 1)[:12] =3D=3D 'qt4-embedded')]}"
-> > =A0inherit qmake2
+On Mon, Sep 20, 2010 at 12:38 AM, Frans Meulenbroeks
+<fransmeulenbroeks@gmail.com> wrote:
+> 2010/9/20 Graham Gower <graham.gower@gmail.com>:
+>> =C2=A0* gst-plugins-farsight uses all 6gb of my memory in do_configure.
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0Its 4 years old and has been obsoleted upstre=
+am.
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0http://farsight.freedesktop.org/releases/obso=
+lete/gst-plugins-farsight/OBSOLETE
+>> =C2=A0* farsight has moved on to version 2, of which there is an in tree=
+ recipe.
+>> =C2=A0* tapioca depends on the obsolete versions and development stalled=
+ years ago.
+>>
+>> Signed-off-by: Graham Gower <graham.gower@gmail.com>
 >
-> use startsWith and avoid the extra array allocation?
+> Confirmed that it is obsolete.
+> development of farsight moved to farsight2 in 2008.
+>
+> Acked-by: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
+>
 
-Array slicing just provides a new mapping onto the original array and
-doesn't copy any data.
+ah that answers why my build was bailing out.
 
-I chose this syntax to make it consistent with qt4x11.bbclass
+Acked-by: Khem Raj <raj.khem@gmail.com>
 
 
