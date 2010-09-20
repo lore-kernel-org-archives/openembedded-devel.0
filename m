@@ -1,34 +1,39 @@
-Received: from mailout-de.gmx.net ([213.165.64.23] helo=mail.gmx.net)
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <schnitzeltony@gmx.de>) id 1OxgKK-0000o9-S6
+Received: from relay1.mentorg.com ([192.94.38.131])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <Tom_Rini@mentor.com>) id 1OxhXP-00062v-1e
 	for openembedded-devel@lists.openembedded.org;
-	Mon, 20 Sep 2010 15:22:37 +0200
-Received: (qmail invoked by alias); 20 Sep 2010 13:22:31 -0000
-Received: from mail2.zera.de (EHLO [192.168.142.128]) [62.225.102.139]
-	by mail.gmx.net (mp059) with SMTP; 20 Sep 2010 15:22:31 +0200
-X-Authenticated: #62780362
-X-Provags-ID: V01U2FsdGVkX1/WO1lIIvzWY2buSoF9Bhp/Tj076i9B4tOr5JWfYU
-	Gr6cYDLOI95Jxc
-From: Andreas Mueller <schnitzeltony@gmx.de>
-To: openembedded-devel@lists.openembedded.org
-Date: Mon, 20 Sep 2010 15:21:09 +0200
-User-Agent: KMail/1.9.6 (enterprise 0.20071012.724442)
-References: <201009191753.42404.schnitzeltony@gmx.de>
-	<201009201042.49657.schnitzeltony@gmx.de>
-	<AANLkTindG1S3Z=WY2CVsqd0hco4qjfo-6XviHAb8N5r3@mail.gmail.com>
-In-Reply-To: <AANLkTindG1S3Z=WY2CVsqd0hco4qjfo-6XviHAb8N5r3@mail.gmail.com>
+	Mon, 20 Sep 2010 16:40:14 +0200
+Received: from svr-orw-exc-08.mgc.mentorg.com ([147.34.98.97])
+	by relay1.mentorg.com with esmtp 
+	id 1OxhXG-0001DZ-Ue from Tom_Rini@mentor.com 
+	for openembedded-devel@lists.openembedded.org;
+	Mon, 20 Sep 2010 07:40:02 -0700
+Received: from na2-mail.mgc.mentorg.com ([134.86.114.213]) by
+	SVR-ORW-EXC-08.mgc.mentorg.com with Microsoft
+	SMTPSVC(6.0.3790.1830); Mon, 20 Sep 2010 07:40:02 -0700
+Received: from [172.30.80.197] ([172.30.80.197]) by na2-mail.mgc.mentorg.com
+	with Microsoft SMTPSVC(6.0.3790.3959); 
+	Mon, 20 Sep 2010 08:40:01 -0600
+Message-ID: <4C97723F.7010401@mentor.com>
+Date: Mon, 20 Sep 2010 07:39:59 -0700
+From: Tom Rini <tom_rini@mentor.com>
+Organization: Mentor Graphics Corporation
+User-Agent: Thunderbird 2.0.0.24 (X11/20100411)
 MIME-Version: 1.0
-Message-Id: <201009201521.09520.schnitzeltony@gmx.de>
-X-Y-GMX-Trusted: 0
-X-SA-Exim-Connect-IP: 213.165.64.23
-X-SA-Exim-Mail-From: schnitzeltony@gmx.de
+To: openembedded-devel@lists.openembedded.org
+References: <E1OxTYC-0004Sl-3k@melo.openembedded.org>
+In-Reply-To: <E1OxTYC-0004Sl-3k@melo.openembedded.org>
+X-OriginalArrivalTime: 20 Sep 2010 14:40:01.0955 (UTC)
+	FILETIME=[B5136F30:01CB58D1]
+X-SA-Exim-Connect-IP: 192.94.38.131
+X-SA-Exim-Mail-From: Tom_Rini@mentor.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: git-send-email setup (former [PATCH] clutter: remove COMPATIBLE_MACHINE)
+Subject: Re: [oe-commits] Khem Raj : iphone: Exclude from world.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -42,21 +47,32 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Mon, 20 Sep 2010 13:22:38 -0000
-Content-Type: text/plain;
-  charset="iso-8859-1"
+X-List-Received-Date: Mon, 20 Sep 2010 14:40:14 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
 Content-Transfer-Encoding: 7bit
-Content-Disposition: inline
 
-On Monday 20 September 2010 10:55:17 am Frans Meulenbroeks wrote:
-> use alpine or set up a gmail account (note that you can still use your
-> real email for Submitted-by)
-For those with similar trouble:
+git version control wrote:
+> Module: openembedded.git
+> Branch: master
+> Commit: 0319f8878547c6e8a78373cfc86a85cea60450ae
+> URL:    http://gitweb.openembedded.net/?p=openembedded.git&a=commit;h=0319f8878547c6e8a78373cfc86a85cea60450ae
+> 
+> Author: Khem Raj <raj.khem@gmail.com>
+> Date:   Sun Sep 19 16:38:38 2010 -0700
+> 
+> iphone: Exclude from world.
+> 
+> apple-csu overwrites the C startup files and nothing works after that
+> we can not select them with normal linux toolchain being staged and
+> used
+> 
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
 
-I updated git (had version 1.5.xx shipped by Fedora 8 - which did not know authenticating servers ) and added some additional packages (perl-Email-MIME-* / perl-AUTHEN-SASL). 
+Shouldn't this be a COMPATIBLE_something case?  You'd want this for 
+world if that was what you were targeting... no?
 
-Now I can send patches by git-send-email :-)
-
-Andreas
+-- 
+Tom Rini
+Mentor Graphics Corporation
 
 
