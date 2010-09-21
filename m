@@ -1,39 +1,32 @@
-Received: from smtp.cbnco.com ([207.164.182.72])
+Received: from gandharva.secretlabs.de ([78.46.147.237])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <msmith@cbnco.com>) id 1Oy5fE-0006X4-7F
+	(envelope-from <holger+oe@freyther.de>) id 1Oy6el-0007YX-4o
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 18:25:58 +0200
-Received: from localhost (localhost [127.0.0.1])
-	by smtp.cbnco.com (Postfix) with ESMTP id 423248A3C35
+	Tue, 21 Sep 2010 19:29:28 +0200
+Received: from [192.168.42.217] (unknown [92.117.88.188])
+	by gandharva.secretlabs.de (Postfix) with ESMTPA id 46FC81B10C06
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 12:25:42 -0400 (EDT)
-Received: from smtp.cbnco.com ([127.0.0.1])
-	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
-	with ESMTP id 16148-06 for <openembedded-devel@lists.openembedded.org>; 
-	Tue, 21 Sep 2010 12:25:42 -0400 (EDT)
-Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
-	by smtp.cbnco.com (Postfix) with ESMTPSA id 14BE36D7E29
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 12:25:42 -0400 (EDT)
-Message-ID: <4C98DC85.30607@cbnco.com>
-Date: Tue, 21 Sep 2010 12:25:41 -0400
-From: Michael Smith <msmith@cbnco.com>
-User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
+	Tue, 21 Sep 2010 17:31:51 +0000 (UTC)
+Message-ID: <4C98EB61.6070000@freyther.de>
+Date: Wed, 22 Sep 2010 01:29:05 +0800
+From: Holger Freyther <holger+oe@freyther.de>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; en-US;
+	rv:1.9.2.9) Gecko/20100908 Fedora/3.1.3-1.fc14 Lightning/1.0b2
+	Thunderbird/3.1.3
 MIME-Version: 1.0
 To: openembedded-devel@lists.openembedded.org
-References: <4C97AC2B.1040205@cbnco.com>	<AANLkTikd-8b1oMbyVus7372HT7u9KON0rx_nZM9fn-8A@mail.gmail.com>	<4C98B9F0.2010005@cbnco.com>
-	<AANLkTi=iNNGRSbRnv-ZrL7BJXv6w115hqNugogHv-w7Y@mail.gmail.com>
-In-Reply-To: <AANLkTi=iNNGRSbRnv-ZrL7BJXv6w115hqNugogHv-w7Y@mail.gmail.com>
-X-Virus-Scanned: amavisd-new at cbnco.com
-X-SA-Exim-Connect-IP: 207.164.182.72
-X-SA-Exim-Mail-From: msmith@cbnco.com
+References: <1284933592-4558-1-git-send-email-pirobk@gmail.com>	<4C9693E5.3040504@freyther.de>
+	<AANLkTim+VwnZH-yiNOPkQ-ZvbGLmjXpEz8U-WJOoPzt7@mail.gmail.com>
+In-Reply-To: <AANLkTim+VwnZH-yiNOPkQ-ZvbGLmjXpEz8U-WJOoPzt7@mail.gmail.com>
+X-SA-Exim-Connect-IP: 78.46.147.237
+X-SA-Exim-Mail-From: holger+oe@freyther.de
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
-	SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [RFC] base.bbclass: add make-native to default dependencies
+Subject: Re: [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,48 +40,23 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 16:25:58 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Sep 2010 17:29:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1
+Content-Transfer-Encoding: quoted-printable
 
-Khem Raj wrote:
-> On Tue, Sep 21, 2010 at 6:58 AM, Michael Smith <msmith@cbnco.com> wrote:
->> Khem Raj wrote:
->>
->>> although it does but make 3.82 is not usable out of box yet.
->>> so people might find surprises. 3.81 would be ok.
-> 
-> I hit eglibc there may be more.
+On 09/21/2010 02:16 AM, Bj=F6rn Krombholz wrote:
 
-Hmm, OK. The patch below wouldn't affect eglibc's dependencies, so we'd 
-still have to change eglibc.inc and eglibc-initial.inc to depend on 
-make-native, or people with make 3.82 on their host system will be 
-unable to build eglibc.
+>> use startsWith and avoid the extra array allocation?
+>=20
+> Array slicing just provides a new mapping onto the original array and
+> doesn't copy any data.
+>=20
+> I chose this syntax to make it consistent with qt4x11.bbclass
 
-Or, apply a patch to every version of eglibc to fix the build with make 
-3.82.
-
-Which do you prefer? I can only really test glibc 2.9, but adding 
-make-native to the DEPENDS in glibc.inc/glibc-initial.inc should work 
-about the same as doing it in eglibc.
-
-Mike
-
->>>> diff --git a/classes/base.bbclass b/classes/base.bbclass
->>>> index b19eb32..5c6d41d 100644
->>>> --- a/classes/base.bbclass
->>>> +++ b/classes/base.bbclass
->>>> @@ -71,7 +71,7 @@ def base_deps(d):
->>>>       if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d):
->>>>               if (bb.data.getVar('HOST_SYS', d, 1) !=
->>>>                   bb.data.getVar('BUILD_SYS', d, 1)):
->>>> -                       deps += " virtual/${TARGET_PREFIX}gcc
->>>> virtual/libc "
->>>> +                       deps += " make-native virtual/${TARGET_PREFIX}gcc
->>>> virtual/libc "
->>>>               elif bb.data.inherits_class('native', d) and \
->>>>                               bb.data.getVar('PN', d, True) not in \
->>>>                               ("linux-libc-headers-native",
->>>> "quilt-native",
+Well, it creates a new object, and you need to count things by hand (even=
+ if
+humans have hands they tend to fail on that). Using the starts with funct=
+ion
+is safer and avoid creating extra objects. :)
 
 
