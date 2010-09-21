@@ -1,47 +1,41 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
-	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oy1NW-0001h8-W9
+Received: from 68.mail-out.ovh.net ([91.121.185.69])
+	by linuxtogo.org with smtp (Exim 4.69)
+	(envelope-from <eric@eukrea.com>) id 1Oy1wG-0008LW-5Q
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 13:51:19 +0200
-Received: by iwn2 with SMTP id 2so5226538iwn.6
-	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 04:51:13 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	bh=s8BW4GHK23HyRN8ysMZRtMi3oL64vUgU/RPBFGquDgY=;
-	b=JVVyADZaPZAy/MxphZIHHWr6wMDg9Z9jxQLhKlAem+aYjOlt9B1Ad5RlVxX3RG691T
-	CeOZSlOmVAwzFJ0Jc/0zt+wMxQae186r2VlbXnZvWGXgmJZYBx4i6SbXWrSszg7/zBHm
-	Z/mWQ/a8t2u0tDjE0gcjDvrFms9ESQSuivPi8=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type:content-transfer-encoding;
-	b=ggn0gPEX6teo7ycxV0nhvwVaBlpaNv+V8IskQPdIPCmtlWlB8s+kLnZy8xMoC1pTgy
-	k20QFtxpMNgyE4v5pWauH5Q8m75beHCf6pTf/h92MwLzl0AKwdwGbJQ7HuskWSw3K8hA
-	v00ng5vbMlBvvliA917EqH1Oomxfmbm5ujXyo=
+	Tue, 21 Sep 2010 14:27:13 +0200
+Received: (qmail 28638 invoked by uid 503); 21 Sep 2010 12:40:32 -0000
+Received: from 30.mail-out.ovh.net (213.186.62.213)
+	by 68.mail-out.ovh.net with SMTP; 21 Sep 2010 12:40:32 -0000
+Received: (qmail 9949 invoked by uid 503); 21 Sep 2010 12:09:59 -0000
+Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
+	by 30.mail-out.ovh.net with SMTP; 21 Sep 2010 12:09:59 -0000
+Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
+	by b0.ovh.net with SMTP; 21 Sep 2010 14:27:09 +0200
+Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
+	(ebenard%eukrea.com@82.240.38.71)
+	by ns0.ovh.net with SMTP; 21 Sep 2010 14:27:07 +0200
+Message-ID: <4C98A49B.1060504@eukrea.com>
+Date: Tue, 21 Sep 2010 14:27:07 +0200
+From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
+User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
+	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
 MIME-Version: 1.0
-Received: by 10.231.190.75 with SMTP id dh11mr11690176ibb.189.1285069872314;
-	Tue, 21 Sep 2010 04:51:12 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 21 Sep 2010 04:51:12 -0700 (PDT)
-In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74218@deimsg40.de.net.world>
-References: <1284933592-4558-1-git-send-email-pirobk@gmail.com>
-	<4C9693E5.3040504@freyther.de>
-	<AANLkTim+VwnZH-yiNOPkQ-ZvbGLmjXpEz8U-WJOoPzt7@mail.gmail.com>
-	<0B51A1E7C61D114DAE6FC10B0FD0ABA501A74218@deimsg40.de.net.world>
-Date: Tue, 21 Sep 2010 13:51:12 +0200
-Message-ID: <AANLkTikvmhwy8w3=a5TcoRJBP2TLem_OQP4oB4_hnxDU@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <1283523286-30999-1-git-send-email-michael.lippautz@gmail.com>
+	<1283523286-30999-2-git-send-email-michael.lippautz@gmail.com>
+In-Reply-To: <1283523286-30999-2-git-send-email-michael.lippautz@gmail.com>
+X-Ovh-Tracer-Id: 11861074044027514185
+X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
+X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
+X-SA-Exim-Connect-IP: 91.121.185.69
+X-SA-Exim-Mail-From: eric@eukrea.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
+Subject: Re: [PATCH 1/2] x-load/igep0020.conf: Unbreak x-load for igep0020 machine.
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,55 +49,17 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 11:51:20 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Tue, 21 Sep 2010 12:27:15 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 8bit
 
-2010/9/21 Hauser, Wolfgang (external) <Wolfgang.Hauser.external@cassidian.c=
-om>:
-> Is it possible to apply this patch soon ? I need the gles version of qt4-=
-embedded. At the time I workaround this problem by a modified qt4-embedded =
-recipe.
+Le 03/09/2010 16:14, Michael Lippautz a écrit :
+> * x-load is needed since e2b9225af36b2979b255634f79ceecea482601a7
+>
+> Signed-off-by: Michael Lippautz<michael.lippautz@gmail.com>
 
-Can't judge the details of your patch (and can't push from here anyway).
-What I normally do in those cases is keep the patched recipe in an
-overlay (and discard it when the patch is applied).
+Acked-by: Eric Bénard <eric@eukrea.com>
 
-Frans
->
-> -----Urspr=FCngliche Nachricht-----
-> Von: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
-ed-devel-bounces@lists.openembedded.org] Im Auftrag von Bj=F6rn Krombholz
-> Gesendet: Montag, 20. September 2010 20:16
-> An: openembedded-devel@lists.openembedded.org
-> Betreff: Re: [oe] [PATCH] qt4-embedded: avoid circular dependencies for r=
-eciped providing qt4-embedded
->
-> 2010/9/20 Holger Freyther <holger+oe@freyther.de>
->> On 09/20/2010 05:59 AM, Bj=F6rn Krombholz wrote:
->> > @@ -1,4 +1,4 @@
->> > -DEPENDS_prepend =3D "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d=
-, 1) =3D=3D 'qt4-embedded')]}"
->> > +DEPENDS_prepend =3D "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d=
-, 1)[:12] =3D=3D 'qt4-embedded')]}"
->> > =A0inherit qmake2
->>
->> use startsWith and avoid the extra array allocation?
->
-> Array slicing just provides a new mapping onto the original array and
-> doesn't copy any data.
->
-> I chose this syntax to make it consistent with qt4x11.bbclass
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
-> _______________________________________________
-> Openembedded-devel mailing list
-> Openembedded-devel@lists.openembedded.org
-> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->
+Eric
 
 
