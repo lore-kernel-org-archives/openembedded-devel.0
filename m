@@ -1,32 +1,45 @@
-Received: from sencha.khimov.ru ([89.223.109.22])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <roman@khimov.ru>) id 1Oy7yE-00018C-P6
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1Oy88K-0005iI-2u
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 20:53:39 +0200
-Received: from [93.100.16.104] (helo=mate.localnet)
-	by sencha.khimov.ru with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <roman@khimov.ru>) id 1Oy7y8-0007wU-7c
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 22:53:36 +0400
-From: Roman I Khimov <roman@khimov.ru>
-To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Sep 2010 22:53:27 +0400
-User-Agent: KMail/1.12.4 (Linux/2.6.31.12-0.2-desktop; KDE/4.3.5; x86_64; ; )
-References: <4C72C920.7080709@tycoelectronics.com>
-	<AANLkTi=kCVt_+xBF+r400Nm6AXuApGk1ceuHVEim=K1c@mail.gmail.com>
-	<20100921174726.GA5750@lundinova.se>
-In-Reply-To: <20100921174726.GA5750@lundinova.se>
+	Tue, 21 Sep 2010 21:04:04 +0200
+Received: by wwi14 with SMTP id 14so6968171wwi.24
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 12:04:00 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type;
+	bh=CHi2tqcR1K5oe6C763Mb9xGJROK3VGkk2hLW8zpuC5A=;
+	b=VR2OaIAwlVm1lnZaqk/a8JN5ASkGPkqKshEY12ae+NTC0oKfJweAiosYmWQsKDPO5q
+	rN73uDhNrByzSSPZQU0fRtZ2qwE/lyfHf53AmtsbD65gGJTF3410tUJXosqiNBI161Bl
+	9cWnewtMIUpRpP0pFnQt1UcmkPzVf94MDs9R0=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type;
+	b=Lp5gBSTnSorRPmUeJoOtIxW8S8ZfvGazK3B7p0jizxEIT1K8Cwofr/8sogz67U4jT+
+	AA7mypSUlvye0QXGaEEx7ervaJ8Opw+Qt64xI7Wodb9doLAnYZ3Y7T0YEh0ZZxnN2Dsn
+	qgANGu4df8T2no654awBf3tWlxCi/2IAp/TzQ=
 MIME-Version: 1.0
-Message-Id: <201009212253.30968.roman@khimov.ru>
-X-SA-Exim-Connect-IP: 89.223.109.22
-X-SA-Exim-Mail-From: roman@khimov.ru
+Received: by 10.216.0.76 with SMTP id 54mr9661613wea.49.1285095840165; Tue, 21
+	Sep 2010 12:04:00 -0700 (PDT)
+Received: by 10.216.202.35 with HTTP; Tue, 21 Sep 2010 12:04:00 -0700 (PDT)
+In-Reply-To: <20100921184841.GC11562@denix.org>
+References: <AANLkTinWU3xoXzvcF7J6ExWjuh+gB9O6U2uChdTi77Bj@mail.gmail.com>
+	<20100921184841.GC11562@denix.org>
+Date: Tue, 21 Sep 2010 15:04:00 -0400
+Message-ID: <AANLkTikC7PF2mPRgOEeFcWuGtCQkJAqt0e_WWvgF2w0M@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: george.huntingtoniii@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: several recipes give a link error: libc.so, needed by libgcc_s.so, not found
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: trying to use external-toolchain-csl with angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -40,60 +53,120 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 18:53:39 -0000
-X-Groupsio-MsgNum: 23806
-Content-Type: multipart/signed; boundary="nextPart1579596.ieXhvrQi6N";
-	protocol="application/pgp-signature"; micalg=pgp-sha1
-Content-Transfer-Encoding: 7bit
+X-List-Received-Date: Tue, 21 Sep 2010 19:04:04 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
---nextPart1579596.ieXhvrQi6N
-Content-Type: Text/Plain;
-  charset="utf-8"
-Content-Transfer-Encoding: quoted-printable
+If I just have the TARGET_VENDOR = "-none", but not the TARGET_SYS =
+"arm-none-linux-gnueabi",
+then I get an error from external-toolchain-csl.bb telling me it couldn't
+stat /opt/arm/arm-2009q3/arm-angstrom-linux-gnueabi/libc/lib/*
 
-=D0=92 =D1=81=D0=BE=D0=BE=D0=B1=D1=89=D0=B5=D0=BD=D0=B8=D0=B8 =D0=BE=D1=82 =
-=D0=92=D1=82=D0=BE=D1=80=D0=BD=D0=B8=D0=BA 21 =D1=81=D0=B5=D0=BD=D1=82=D1=
-=8F=D0=B1=D1=80=D1=8F 2010 21:47:26 =D0=B0=D0=B2=D1=82=D0=BE=D1=80 Johan Ho=
-vold =D0=BD=D0=B0=D0=BF=D0=B8=D1=81=D0=B0=D0=BB:
-> On Mon, Aug 23, 2010 at 10:58:07PM +0200, Frans Meulenbroeks wrote:
-> > libc.so contains:
-> > frans@linux-suse:~/oe/tmp_angstrom/sysroots> cat
-> > ./armv7a-angstrom-linux-gnueabi/usr/lib/libc.so
-> > /* GNU ld script
-> >    Use the shared library, but some functions are only in
-> >    the static library, so try that secondarily.  */
-> > OUTPUT_FORMAT(elf32-littlearm)
-> > GROUP ( /lib/libc.so.6 /usr/lib/libc_nonshared.a  AS_NEEDED (
-> > /lib/ld-linux.so.3 ) )
+does that mean that the (external-toolchain-csl.bb) recipe should change to
+use ${TOOLCHAIN_SYSPATH} instead of ${TOOLCHAIN_PATH}/${TARGET_SYS}
+?
+
+
+On Tue, Sep 21, 2010 at 2:48 PM, Denys Dmytriyenko <denis@denix.org> wrote:
+
+> On Tue, Sep 21, 2010 at 02:27:23PM -0400, George C. Huntington, III wrote:
+> > I had to set TARGET_SYS = "arm-none-linux-gnueabi" in my local.conf to
+> get
+> > the toolchain to be used, but now it appears that the gmp configure
+> script
+> > doesn't like getting passed "--target=arm-none-linux-gnueabi"  am I just
+> > configuring things wrong?
+>
+> Hi,
+>
+> I see that you copied most of toolchain setup in your local.conf from
+> arago.
+> But, in reality, you don't need all that. I haven't tried external
+> toolchain
+> with Agstrom lately, but you should only need to setup these 4 variables:
+>
+> TOOLCHAIN_PATH = "/opt/arm/arm-2009q3"
+> TARGET_VENDOR = "-none"
+> TOOLCHAIN_TYPE = "external"
+> TOOLCHAIN_BRAND = "csl"
+>
+> You may also need PATH_prepend like in your example below, if you don't set
+> your system PATH accordingly before using OE. Everything else should be
+> taken
+> care by the framework automatically.
+>
+> --
+> Denys
+>
+>
+> > here is my local.conf:
 > >
-> > No idea if these should be paths in sysroots (I'm not a dynamic linking
-> > expert).
->=20
-> Any progress on this issue?
->=20
-> Meanwhile, adding "-L${STAGING_DIR_TARGET}${base_libdir}" (and perhaps
-> also a rpath-link directive) to TARGET_LDFLAGS in conf/bitbake.conf
-> could serve as a work-around.
+> > DISTRO = "angstrom-2008.1"
+> >
+> > DL_DIR = "${OEDIR}/downloads"
+> >
+> > BBFILES := "${OEDIR}/openembedded/recipes/*/*.bb
+> > ${OEDIR}/openembedded.custom/recipes/*/*.bb"
+> > BBFILE_COLLECTIONS = "upstream custom"
+> > BBFILE_PATTERN_upstream = "^${OEDIR}/openembedded/recipes/"
+> > BBFILE_PATTERN_custom = "^${OEDIR}/openembedded.custom/recipes"
+> > BBFILE_PRIORITY_upstream = "5"
+> > BBFILE_PRIORITY_custom = "10"
+> >
+> > IMAGE_FSTYPES = "jffs2 tar cpio.gz"
+> >
+> > BBINCLUDELOGS = "yes"
+> >
+> > CVS_TARBALL_STASH = ""
+> > ANGSTROM_FEED_CONFIGS = ""
+> > #DEBIAN_MIRROR = "ftp://ftp.us.debian.org/debian/pool"
+> >
+> > #ENABLE_BINARY_LOCALE_GENERATION = "0"
+> >
+> > PREFERRED_VERSION_mono = "2.4.2.3"
+> > PREFERRED_VERSION_mono-mcs-intermediate = "2.4.2.3"
+> > PREFERRED_VERSION_mono-native = "2.4.2.3"
+> >
+> > #PREFERRED_VERSION_directfb = "1.4.1"
+> >
+> > #PREFERRED_VERSION_mono = "svn"
+> > #PREFERRED_VERSION_mono-mcs-intermediate = "svn"
+> > #PREFERRED_VERSION_mono-native = "svn"
+> >
+> > # Black magic to automatically set SDK_PATH out of PATH - don't touch
+> this!
+> > # Works with pretty much any external toolchain, like CS Lite or MV Pro 5
+> > # Handles cross-toolchain vs. native toolchain
+> > # SDK_PATH can be overwritten externally by META_SDK_PATH, e.g. for SDK
+> > TOOLCHAIN_PATH = "/opt/arm/arm-2009q3"
+> > TOOLCHAIN_SYSPATH = "${TOOLCHAIN_PATH}/arm-none-linux-gnueabi"
+> > #~ PATH_prepend = "${TOOLCHAIN_PATH}/bin"
+> > SDK_PATH = "${@[bb.data.getVar('TOOLCHAIN_PATH', d, 1),
+> > bb.data.getVar('META_SDK_PATH', d,
+> 1)][bool(bb.data.getVar('META_SDK_PATH',
+> > d, 1))]}"
+> > # Set the necessary variables to use binary CodeSourcery Lite
+> > TARGET_VENDOR = "-none"
+> > TARGET_SYS = "arm-none-linux-gnueabi"
+> > TARGET_CPPFLAGS_append = " -I${SDK_PATH}/${TARGET_SYS}/libc/usr/include "
+> > TARGET_LDFLAGS_prepend = " -L${SDK_PATH}/${TARGET_SYS}/libc/lib
+> > -Wl,-rpath-link,${SDK_PATH}/${TARGET_SYS}/libc/lib "
+> > TOOLCHAIN_TYPE = "external"
+> > TOOLCHAIN_BRAND = "csl"
+> >
+> >
+> > # add the following to site.conf if you want to go
+> > # faster, use less space, etc
+> > #PARALLEL_MAKE = "-j 5"
+> > #BB_NUMBER_THREADS = "4"
+> > #INHERIT += "rm_work"
+> > _______________________________________________
+> > Openembedded-devel mailing list
+> > Openembedded-devel@lists.openembedded.org
+> > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
-I have
-http://sourceware.org/bugzilla/show_bug.cgi?id=3D10340
-applied locally to binutils, and it works.
-
-=2D-=20
- http://roman.khimov.ru
-mailto: roman@khimov.ru
-gpg --keyserver hkp://subkeys.pgp.net --recv-keys 0xE5E055C3
-
---nextPart1579596.ieXhvrQi6N
-Content-Type: application/pgp-signature; name=signature.asc 
-Content-Description: This is a digitally signed message part.
-
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v2.0.12 (GNU/Linux)
-
-iEYEABECAAYFAkyY/yoACgkQXJ70z+XgVcNYmQCfYQGXgIwT+SUlQFyoWnpdxL67
-MO4AoMueOF18HupRwYQ3ot8imNrR0sr9
-=YMAJ
------END PGP SIGNATURE-----
-
---nextPart1579596.ieXhvrQi6N--
