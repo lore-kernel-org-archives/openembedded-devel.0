@@ -1,36 +1,41 @@
-Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
-	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <johan.hovold@lundinova.se>) id 1Oy7Ig-0000mf-Nl
+Received: from mail-wy0-f175.google.com ([74.125.82.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <george.huntingtoniii@gmail.com>) id 1Oy7Yt-0000zA-Q2
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 20:12:00 +0200
-Received: from pi (unknown [10.240.22.2])
-	(using TLSv1 with cipher AES256-SHA (256/256 bits))
-	(No client certificate requested)
-	by mailhost.lundinova.se (Postfix) with ESMTP id 5B1D1B94006
+	Tue, 21 Sep 2010 20:27:29 +0200
+Received: by wyb34 with SMTP id 34so4102247wyb.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 19:47:26 +0200 (CEST)
-Received: from johan by pi with local (Exim 4.72) (envelope-from <johan@pi>)
-	id 1Oy6wA-0003hO-1a for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 19:47:26 +0200
-Date: Tue, 21 Sep 2010 19:47:26 +0200
-From: Johan Hovold <johan.hovold@lundinova.se>
-To: openembedded-devel@lists.openembedded.org
-Message-ID: <20100921174726.GA5750@lundinova.se>
-References: <4C72C920.7080709@tycoelectronics.com>
-	<AANLkTi=kCVt_+xBF+r400Nm6AXuApGk1ceuHVEim=K1c@mail.gmail.com>
+	Tue, 21 Sep 2010 11:27:24 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:date:message-id
+	:subject:from:to:content-type;
+	bh=1sBd8AuOYhMYHApLKN08WoTBQFXQJ63rIsqV/w5sytU=;
+	b=jpxYiWqqCLOwisodbiUXPoPn94vUMIZCdhGMY0XvMw8K6fn064Ec7rKlby/wRec6mX
+	ORLmHYoAO3cvgnLDCIRH8HkzTj3VyG3ltKZmBWQutXejwZLNpKvPyyMzd8watEVZjSgV
+	X/HIX3/E2EQMogz98VGdQT+YgBPXafMiHu5Uk=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:date:message-id:subject:from:to:content-type;
+	b=D77kr4nbrMIDmYzl1LzxXh5HjJOHShu8LWJ5ZuukkzOv1l67TXKrJ1ikP8SBGRrrQY
+	2Dhya+VSey9+l4BkXcD9W+oo9xV29C6yj0fs2J1VpY158LrVnM45Zg2oDoggnQILtF2b
+	nFjh8bGH/XYejzMAuOYuT2f1saZtzfWTjWiNg=
 MIME-Version: 1.0
-In-Reply-To: <AANLkTi=kCVt_+xBF+r400Nm6AXuApGk1ceuHVEim=K1c@mail.gmail.com>
-User-Agent: Mutt/1.5.20 (2009-06-14)
-Sender: <johan.hovold@lundinova.se>
-X-SA-Exim-Connect-IP: 92.33.14.100
-X-SA-Exim-Mail-From: johan.hovold@lundinova.se
+Received: by 10.216.155.206 with SMTP id j56mr9544359wek.67.1285093643891;
+	Tue, 21 Sep 2010 11:27:23 -0700 (PDT)
+Received: by 10.216.202.35 with HTTP; Tue, 21 Sep 2010 11:27:23 -0700 (PDT)
+Date: Tue, 21 Sep 2010 14:27:23 -0400
+Message-ID: <AANLkTinWU3xoXzvcF7J6ExWjuh+gB9O6U2uChdTi77Bj@mail.gmail.com>
+From: "George C. Huntington, III" <george.huntingtoniii@gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 74.125.82.175
+X-SA-Exim-Mail-From: george.huntingtoniii@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: several recipes give a link error: libc.so, needed by libgcc_s.so, not found
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: trying to use external-toolchain-csl with angstrom
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -44,51 +49,72 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 18:12:13 -0000
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
+X-List-Received-Date: Tue, 21 Sep 2010 18:27:29 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 
-On Mon, Aug 23, 2010 at 10:58:07PM +0200, Frans Meulenbroeks wrote:
-> 2010/8/23 Jay Snyder <jay.snyder@tycoelectronics.com>:
-> > I am getting the following warning (I assume it is a warning, because they
-> > all seem to produce working executables) for several recipes (rxvt-unicode
-> > shown):
-> >
-> > ./rxvt-unicode-7.9-r1/temp/log.do_compile.9530:44:/home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/bin/ld:
-> > warning: libc.so, needed by
-> > /home/oe/build-2010-07-29/tmp/sysroots/x86_64-linux/usr/lib/gcc/i686-angstrom-linux/4.3.3/../../../../i686-angstrom-linux/lib/libgcc_s.so,
-> > not found (try using -rpath or -rpath-link)
-[...]
-> > There is a file, libc.so in the
-> > /home/oe/build-2010-07-29/tmp/sysroots/i686-angstrom-linux/usr/lib path,
-> > which IS in an -Wl,rpath= argument being passed to gcc (or g++) (and
-> > subsequently to the linker).
-> >
-> > This problem didn't occur on a git-pull from December 4, 2009, but does on a
-> > July 29,2010 pull.
-> >
-> I have seen the same message for libusb both with gcc 4.4.4 and 4.3.3
-> Note that libc.so is in usr/lib while the lib.so.6 file is in lib.
-> No idea if that is relevant.
-> 
-> libc.so contains:
-> frans@linux-suse:~/oe/tmp_angstrom/sysroots> cat
-> ./armv7a-angstrom-linux-gnueabi/usr/lib/libc.so
-> /* GNU ld script
->    Use the shared library, but some functions are only in
->    the static library, so try that secondarily.  */
-> OUTPUT_FORMAT(elf32-littlearm)
-> GROUP ( /lib/libc.so.6 /usr/lib/libc_nonshared.a  AS_NEEDED (
-> /lib/ld-linux.so.3 ) )
-> 
-> No idea if these should be paths in sysroots (I'm not a dynamic linking expert).
+I had to set TARGET_SYS = "arm-none-linux-gnueabi" in my local.conf to get
+the toolchain to be used, but now it appears that the gmp configure script
+doesn't like getting passed "--target=arm-none-linux-gnueabi"  am I just
+configuring things wrong?
 
-Any progress on this issue?
 
-Meanwhile, adding "-L${STAGING_DIR_TARGET}${base_libdir}" (and perhaps
-also a rpath-link directive) to TARGET_LDFLAGS in conf/bitbake.conf
-could serve as a work-around.
+here is my local.conf:
 
-/Johan
+DISTRO = "angstrom-2008.1"
 
+DL_DIR = "${OEDIR}/downloads"
+
+BBFILES := "${OEDIR}/openembedded/recipes/*/*.bb
+${OEDIR}/openembedded.custom/recipes/*/*.bb"
+BBFILE_COLLECTIONS = "upstream custom"
+BBFILE_PATTERN_upstream = "^${OEDIR}/openembedded/recipes/"
+BBFILE_PATTERN_custom = "^${OEDIR}/openembedded.custom/recipes"
+BBFILE_PRIORITY_upstream = "5"
+BBFILE_PRIORITY_custom = "10"
+
+IMAGE_FSTYPES = "jffs2 tar cpio.gz"
+
+BBINCLUDELOGS = "yes"
+
+CVS_TARBALL_STASH = ""
+ANGSTROM_FEED_CONFIGS = ""
+#DEBIAN_MIRROR = "ftp://ftp.us.debian.org/debian/pool"
+
+#ENABLE_BINARY_LOCALE_GENERATION = "0"
+
+PREFERRED_VERSION_mono = "2.4.2.3"
+PREFERRED_VERSION_mono-mcs-intermediate = "2.4.2.3"
+PREFERRED_VERSION_mono-native = "2.4.2.3"
+
+#PREFERRED_VERSION_directfb = "1.4.1"
+
+#PREFERRED_VERSION_mono = "svn"
+#PREFERRED_VERSION_mono-mcs-intermediate = "svn"
+#PREFERRED_VERSION_mono-native = "svn"
+
+# Black magic to automatically set SDK_PATH out of PATH - don't touch this!
+# Works with pretty much any external toolchain, like CS Lite or MV Pro 5
+# Handles cross-toolchain vs. native toolchain
+# SDK_PATH can be overwritten externally by META_SDK_PATH, e.g. for SDK
+TOOLCHAIN_PATH = "/opt/arm/arm-2009q3"
+TOOLCHAIN_SYSPATH = "${TOOLCHAIN_PATH}/arm-none-linux-gnueabi"
+#~ PATH_prepend = "${TOOLCHAIN_PATH}/bin"
+SDK_PATH = "${@[bb.data.getVar('TOOLCHAIN_PATH', d, 1),
+bb.data.getVar('META_SDK_PATH', d, 1)][bool(bb.data.getVar('META_SDK_PATH',
+d, 1))]}"
+# Set the necessary variables to use binary CodeSourcery Lite
+TARGET_VENDOR = "-none"
+TARGET_SYS = "arm-none-linux-gnueabi"
+TARGET_CPPFLAGS_append = " -I${SDK_PATH}/${TARGET_SYS}/libc/usr/include "
+TARGET_LDFLAGS_prepend = " -L${SDK_PATH}/${TARGET_SYS}/libc/lib
+-Wl,-rpath-link,${SDK_PATH}/${TARGET_SYS}/libc/lib "
+TOOLCHAIN_TYPE = "external"
+TOOLCHAIN_BRAND = "csl"
+
+
+# add the following to site.conf if you want to go
+# faster, use less space, etc
+#PARALLEL_MAKE = "-j 5"
+#BB_NUMBER_THREADS = "4"
+#INHERIT += "rm_work"
 
