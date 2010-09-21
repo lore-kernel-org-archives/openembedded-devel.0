@@ -1,39 +1,38 @@
-Received: from mail-yx0-f175.google.com ([209.85.213.175])
+Received: from mail-gy0-f175.google.com ([209.85.160.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1Oy53X-0000Zj-HE
+	(envelope-from <raj.khem@gmail.com>) id 1Oy54d-0002zU-9L
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 17:46:57 +0200
-Received: by yxg6 with SMTP id 6so1858176yxg.6
+	Tue, 21 Sep 2010 17:48:05 +0200
+Received: by gya6 with SMTP id 6so1863010gya.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 08:46:48 -0700 (PDT)
+	Tue, 21 Sep 2010 08:47:58 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
-	:references:from:date:message-id:subject:to:content-type;
-	bh=zB38XNUvDPsAGoOHf83pac0FMsN+LJxV/NUX1GM5k98=;
-	b=afx+7avQtuFNrL6DA3SBcSmiQ6sS6ODYLj03DCvgvSwes7bZy8SBD+8JpShZE3F908
-	WDXGDBBqPerwz/BLqp6lk4s6RQrJZr9PYn/F+YyqeZUX2/TetSZ0gcPPeieJ2zaXiobk
-	cZjb47J+eLP5NaYuLCGoXlZR3ajCxa8mkqaUw=
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=B7lJzILwjAP7jqcDSsUydJl1JGlfdng3hIO5DCGUgpU=;
+	b=MvSoCWuhGNEnk/t5qq3gWYaDjeoCpaZ5EqLRoFdlihXZLtKe5sy3bmEQTIMrwk9xhR
+	NsAHfxmn+hYvnqIhCgkN5GaBsdzEcX/zn7THozg4zH/hRG7N8YnxLuVyC9yYxMJ9bYrB
+	sfzTMFMcuBstaD77v2WoZ64z4j3u7Ruy2L55o=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
-	:content-type;
-	b=w9nxayVGa3zGqB9BKPOyjVoT0kLpU7Xq0EV9N8bdKrK3ZUxLvNUp/kzfTD7XvoQnLF
-	mC10x/0bttmHY1J5WL2BujRACdk8AnJuAayf9psQrwcl8DYbvipp+gGqiKAKyXYTqcVs
-	paH5SnahnbNj4gbd4PMnCgdjuPWVP5o0JT4ao=
-Received: by 10.101.153.33 with SMTP id f33mr11358313ano.92.1285084006556;
-	Tue, 21 Sep 2010 08:46:46 -0700 (PDT)
+	:content-type:content-transfer-encoding;
+	b=GI5J/8pnzbEel3Je+XITXsUxWb1q4Xhive2HA5Zyt1UgjmMdV20utZuu2Nu4ZnVceI
+	/CTf8maw9pbXJ/ckuMXcf3R7UXu1nd50w4SgbKgs9bqHZGh6CtKvaVKiqe2stHdH/3fP
+	rRMSE88t/TaydSRAzZ/Rfl16ak3G5uHlAGt9Q=
+Received: by 10.90.103.12 with SMTP id a12mr6093331agc.62.1285084065407; Tue,
+	21 Sep 2010 08:47:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.200.194 with HTTP; Tue, 21 Sep 2010 08:46:26 -0700 (PDT)
-In-Reply-To: <20100921073508.GA5506@thinky>
-References: <1284228112.14396.159.camel@mattotaupa>
-	<1285021068.2453.80.camel@mattotaupa>
-	<20100921051747.GA3989@thinky>
-	<AANLkTim6_S3DW_U5V3P0HkFTcAsSWqbu3T5q2UWPajKE@mail.gmail.com>
-	<20100921073508.GA5506@thinky>
+Received: by 10.231.200.194 with HTTP; Tue, 21 Sep 2010 08:47:25 -0700 (PDT)
+In-Reply-To: <4C98B9F0.2010005@cbnco.com>
+References: <4C97AC2B.1040205@cbnco.com>
+	<AANLkTikd-8b1oMbyVus7372HT7u9KON0rx_nZM9fn-8A@mail.gmail.com>
+	<4C98B9F0.2010005@cbnco.com>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Tue, 21 Sep 2010 08:46:26 -0700
-Message-ID: <AANLkTi=0fURjDKfXb62JuiBNF8wh8sLMi6REfeMROnjB@mail.gmail.com>
+Date: Tue, 21 Sep 2010 08:47:25 -0700
+Message-ID: <AANLkTi=iNNGRSbRnv-ZrL7BJXv6w115hqNugogHv-w7Y@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.175
+X-SA-Exim-Connect-IP: 209.85.160.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
@@ -41,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: minimal-uclibc: freesmartphone/libfsobasics_git.bb: do_compile() failed: utilities.c:35:22: fatal error: execinfo.h: No such file or directory
+Subject: Re: [RFC] base.bbclass: add make-native to default dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -55,55 +54,58 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 15:46:57 -0000
+X-List-Received-Date: Tue, 21 Sep 2010 15:48:05 -0000
 Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On Tue, Sep 21, 2010 at 12:35 AM, Frederik Sdun
-<frederik.sdun@googlemail.com> wrote:
-> * Khem Raj <raj.khem@gmail.com> [21.09.2010 07:43]:
->> On Mon, Sep 20, 2010 at 10:17 PM, Frederik Sdun
->> <frederik.sdun@googlemail.com> wrote:
->> > * Paul Menzel <paulepanter@users.sourceforge.net> [21.09.2010 00:18]:
->> > Hi,
->> >
->> > fso is quit untested with none GNU libcs and we partly depend on it. I
->> > wrote a short patch which add a --enable-no-gnuism switch for configure,
->> > but want to talk to Michael, before commiting it. Could you test it and
->> > report more gnuism in our code? And is possible to get a backtrace with
->> > uClibc which is not gnuism, but available in all none-GNU
->> > implementations?
->>
->> instead you could use the defines like __UCLIBC__ which are there when
->> using uclibc.
->>
-> This is only available when compiling the C code. In the stage of
-> compiling vala code it's not available.
-
-I see, adding builtin defines to vala compiler can also help.
-
-> --
-> IRC: playya @ Freenode, Gimpnet
-> xmpp: playya@draugr.de
-> identi.ca: playya
+On Tue, Sep 21, 2010 at 6:58 AM, Michael Smith <msmith@cbnco.com> wrote:
+> Khem Raj wrote:
 >
-> -----BEGIN PGP SIGNATURE-----
-> Version: GnuPG v1.4.10 (GNU/Linux)
+>> although it does but make 3.82 is not usable out of box yet.
+>> so people might find surprises. 3.81 would be ok.
 >
-> iEYEARECAAYFAkyYYCwACgkQvbwBzXsbjyqPvACfaz9IB5VoEOryse0Ny1azfqC3
-> ahEAn1UvFeSUj+s9KXdG7opBUqeiNyGv
-> =fQ+e
-> -----END PGP SIGNATURE-----
+
+I hit eglibc there may be more.
+
+> I could add a DEFAULT_PREFERENCE =3D "-1" to the 3.82 recipe and mention =
+the
+> packages that don't build with it in a comment. Do you remember which
+> packages fail to build with 3.82?
+>
+>>> diff --git a/classes/base.bbclass b/classes/base.bbclass
+>>> index b19eb32..5c6d41d 100644
+>>> --- a/classes/base.bbclass
+>>> +++ b/classes/base.bbclass
+>>> @@ -71,7 +71,7 @@ def base_deps(d):
+>>> =C2=A0 =C2=A0 =C2=A0 if not bb.data.getVar('INHIBIT_DEFAULT_DEPS', d):
+>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 if (bb.data.getVar('HO=
+ST_SYS', d, 1) !=3D
+>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bb.data.=
+getVar('BUILD_SYS', d, 1)):
+>>> - =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 deps +=3D " virtual/${TARGET_PREFIX}gcc
+>>> virtual/libc "
+>>> + =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0=
+ =C2=A0 deps +=3D " make-native virtual/${TARGET_PREFIX}gcc
+>>> virtual/libc "
+>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 elif bb.data.inherits_=
+class('native', d) and \
+>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 bb.data.getVar('PN', d, True) not in \
+>>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 =
+=C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0 ("linux-libc-headers-native",
+>>> "quilt-native",
+>
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
 >
->
 
 
 
--- 
+--=20
 -Khem
 
 
