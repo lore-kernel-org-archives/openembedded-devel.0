@@ -1,39 +1,47 @@
-Received: from web30303.mail.mud.yahoo.com ([209.191.69.65])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <dcraw101@yahoo.com>) id 1OyAue-0007iZ-9z
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <raj.khem@gmail.com>) id 1OyCMI-0000Lw-FI
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 00:02:11 +0200
-Received: (qmail 17094 invoked by uid 60001); 21 Sep 2010 21:55:11 -0000
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s1024;
-	t=1285106111; bh=yWj4Hs4BAUwGgoqgk08nTEPpf10QuQBa1fEHIRwcV2I=;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	b=JbQ60NFeZAQMgT/Hidm/e37dhbn5DadZqnsFk3MU9w2gCAMMcPiWdm3VEo6zDwXft28mS+EkSSOUKe1+QAgka4TP0M1D3BllbRh85bF7CsxTv1OJ7gNvLUwM01MeslMjSieU1RS3dLp11LS9xt6K5ywcv6T7rHws19goz3FZ/sA=
-DomainKey-Signature: a=rsa-sha1; q=dns; c=nofws; s=s1024; d=yahoo.com;
-	h=Message-ID:X-YMail-OSG:Received:X-Mailer:Date:From:Subject:To:MIME-Version:Content-Type:Content-Transfer-Encoding;
-	b=Fo6G20oKgp5+kZIk147wuLEVSQpXcXH8X2dAfcslodlBQS3AcheizHCwUIucNPwlJ1F9HAAWIeVRtFqnoDaRdQZ0a9tWyfss2xXW6u8qZdrd2HZj6KsVuY1R7moZoya26J874rxmqtYV6wzEYH9cXxkQD+/oNlBlk3ppmseV5nI=;
-Message-ID: <243538.53234.qm@web30303.mail.mud.yahoo.com>
-X-YMail-OSG: efsv364VM1m8.YDKQ9kLMu7nsJA_LzZBT1XkGf8koOs6jEr
-	9WpA15v7ANGeGGUXF8fuORz3BE_FD1zatRKqa226smDGIUxwo8ztARYn6LkK
-	hnLR2kfuNfiSC4_h_RDUdov9_NLcxImb7ZUrdHjQ.aF2eCn1UqunY4.9x23Z
-	vbqH2rNyzxAe0M7yg7uHF25mCHsCtytlrDTdIGTBinwbFjlr.Z_2dY2AXio6
-	.CR_GZeDHnaHGCUgfhsSARXSI_nLBgMvqenJHkYkdRzXmyWHv8gI.jGlRZ..
-	v9.IcrIwZ6192CAj4OH.s2fDJ93NC5cr8XKhgzQm5yyX.J7.6fU1byA--
-Received: from [174.18.94.114] by web30303.mail.mud.yahoo.com via HTTP;
-	Tue, 21 Sep 2010 14:55:11 PDT
-X-Mailer: YahooMailRC/497 YahooMailWebService/0.8.105.279950
-Date: Tue, 21 Sep 2010 14:55:11 -0700 (PDT)
-From: Doug Crawford <dcraw101@yahoo.com>
-To: openembedded-devel@lists.openembedded.org
+	Wed, 22 Sep 2010 01:34:48 +0200
+Received: by iwn2 with SMTP id 2so5674001iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 16:34:43 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:received:mime-version:received:in-reply-to
+	:references:from:date:message-id:subject:to:content-type
+	:content-transfer-encoding;
+	bh=pHud+tXa+mBZ3/L6tb3dmFmb0LfTlhjY7nJ1M5eoDn0=;
+	b=LJDOzaOg0ymELdzIb8QNdtzwgnHHY9QDGqYLGP0qAQ91YhD4A4wTmhQQi5qAURpNjL
+	BCXQfb0ezZfEThZHtx60HdY1lnoazEpHMRjjznX38rMAGhJqVrjKf2atOji6mPGgabfn
+	fPS+KCG90KAMu80IQICIs+4IBuXEWbwfQfKwA=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
+	:content-type:content-transfer-encoding;
+	b=ur/5QWZhDviwVDAgM/WhUzjB1F5Z/+DUIXlC+WDPA2e/iTBPn7DM4g+ksWZsyhttpc
+	ddZWI8o1EnDDDlNELjwseHOdhrp1g/Y8JlG4yjT/0q5Lb5Cx8e4yp5xRKTi1BljQvgPr
+	hS9zm9oyyJd6OU/QVBoctBl9jUOVgp/W2tZRU=
+Received: by 10.231.155.206 with SMTP id t14mr12826629ibw.34.1285112083138;
+	Tue, 21 Sep 2010 16:34:43 -0700 (PDT)
 MIME-Version: 1.0
-X-SA-Exim-Connect-IP: 209.191.69.65
-X-SA-Exim-Mail-From: dcraw101@yahoo.com
+Received: by 10.231.200.194 with HTTP; Tue, 21 Sep 2010 16:34:23 -0700 (PDT)
+In-Reply-To: <4C991B82.3090803@cbnco.com>
+References: <4C97AC2B.1040205@cbnco.com>
+	<AANLkTikd-8b1oMbyVus7372HT7u9KON0rx_nZM9fn-8A@mail.gmail.com>
+	<4C98B9F0.2010005@cbnco.com> <4C98EC64.3040203@freyther.de>
+	<4C991B82.3090803@cbnco.com>
+From: Khem Raj <raj.khem@gmail.com>
+Date: Tue, 21 Sep 2010 16:34:23 -0700
+Message-ID: <AANLkTimSLnwKB0XchkPk56QpGDa0ELDoo7X_6OqD5w02@mail.gmail.com>
+To: openembedded-devel@lists.openembedded.org
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: qt4-embedded-gles only build runtime libraries
+Subject: Re: [RFC] base.bbclass: add make-native to default dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -47,15 +55,52 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 22:02:11 -0000
-Content-Type: text/plain; charset=iso-8859-1
+X-List-Received-Date: Tue, 21 Sep 2010 23:34:48 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-If I include qt4-embedded-gles in my IMAGE_INSTALL then bitbake builds all =
-of =0Aqt4: runtime libs, demos, and development tools.=A0 How can I specify=
- that I only =0Awant to build the qt runtime libs or just specific runtime =
-libs and not build =0Athe demos, documentation, or dev tools?=A0 I still wa=
-nt to use the =0Aqt4-embedded-gles recipe to include the opengl symbols in =
-the gui libraries.=0A=0AThanks,=0ADoug=0A=0A=0A      
+On Tue, Sep 21, 2010 at 1:54 PM, Michael Smith <msmith@cbnco.com> wrote:
+> Holger Freyther wrote:
+>>
+>> On 09/21/2010 09:58 PM, Michael Smith wrote:
+>>>
+>>> I could add a DEFAULT_PREFERENCE =3D "-1" to the 3.82 recipe and mentio=
+n
+>>> the
+>>> packages that don't build with it in a comment. Do you remember which
+>>> packages
+>>> fail to build with 3.82?
+>>
+>> well, busybox, glibc, gst* have failed and were fixed. In general I have
+>> hit:
+>>
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0- mixing 'rule %rule:', newer GNU make refuse=
+s to match that
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0 =C2=A0(busybox, glibc)
+>> =C2=A0 =C2=A0 =C2=A0 =C2=A0- spaces vs. tab. e.g. using 8 spaces instead=
+ of a tab (gst)
+>
+> Maybe it'd be easier to fix the affected packages, then. Would you be
+> opposed to make-native being a default dep? The next testing cycle would
+> probably spot any remaining fallout from 3.82.
+>
+
+make is a core component. We have enough fallout to fix
+which is not make related. this will add to it. and make
+3.82 native recipe is there. I am just not ready to make
+it default yet.
+
+> Mike
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+
+
+
+--=20
+-Khem
 
 
