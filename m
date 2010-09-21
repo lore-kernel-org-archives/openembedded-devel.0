@@ -1,37 +1,29 @@
-Received: from mail-dotnet1.eads.net ([80.156.45.103])
+Received: from mail.gw90.de ([188.40.100.199])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <Wolfgang.Hauser.external@cassidian.com>)
-	id 1Oxzrv-00040f-LE for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 12:14:36 +0200
-Received: from unknown (HELO de-gate1.mailhub.intra.corp) ([53.154.243.33])
-	by mail-dotnet1.eads.net with ESMTP; 21 Sep 2010 11:59:23 +0200
-Received: from gateinet1.mail.ds.corp ([149.207.23.241]) by
-	de-gate1.mailhub.intra.corp with Microsoft SMTPSVC(5.0.2195.6713); 
-	Tue, 21 Sep 2010 12:13:16 +0200
-Received: from deimsg40.de.net.world ([53.141.233.80]) by
-	gateinet1.mail.ds.corp with Microsoft SMTPSVC(6.0.3790.4675); 
-	Tue, 21 Sep 2010 12:13:16 +0200
-X-MimeOLE: Produced By Microsoft Exchange V6.5
-MIME-Version: 1.0
-Date: Tue, 21 Sep 2010 12:13:15 +0200
-Message-ID: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74234@deimsg40.de.net.world>
-X-MS-Has-Attach: 
-X-MS-TNEF-Correlator: 
-Thread-Topic: How to add special directories and files to a native package ? 
-thread-index: ActZdZqsswsNS51rQ+O9Q5LyEAczzA==
-From: "Hauser, Wolfgang (external)" <Wolfgang.Hauser.external@cassidian.com>
-To: <openembedded-devel@lists.openembedded.org>
-X-OriginalArrivalTime: 21 Sep 2010 10:13:17.0088 (UTC)
-	FILETIME=[9BD84A00:01CB5975]
-X-SA-Exim-Connect-IP: 80.156.45.103
-X-SA-Exim-Mail-From: Wolfgang.Hauser.external@cassidian.com
+	(envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OxztL-00046R-BM for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 12:16:03 +0200
+Received: from f053044049.adsl.alicedsl.de ([78.53.44.49]
+	helo=[192.168.178.21])
+	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
+	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
+	id 1OxztI-0001nP-VI for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 10:16:01 +0000
+From: Paul Menzel <paulepanter@users.sourceforge.net>
+To: openembedded-devel@lists.openembedded.org
+Date: Tue, 21 Sep 2010 12:15:59 +0200
+Message-ID: <1285064159.23605.1.camel@mattotaupa>
+Mime-Version: 1.0
+X-Mailer: Evolution 2.30.3 
+X-SA-Exim-Connect-IP: 188.40.100.199
+X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: How to add special directories and files to a native package ?
+Subject: [PATCH] docs/usermanual: s/are be copied/are copied/
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -45,36 +37,57 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 10:14:36 -0000
-Content-class: urn:content-classes:message
-Content-Type: text/plain;
-	charset="us-ascii"
+X-List-Received-Date: Tue, 21 Sep 2010 10:16:03 -0000
+X-Groupsio-MsgNum: 23764
+Content-Type: multipart/signed; micalg="pgp-sha1";
+	protocol="application/pgp-signature";
+	boundary="=-0oCJ3QhVqd+oCsCaQQUQ"
+
+--=-0oCJ3QhVqd+oCsCaQQUQ
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-Hello,
+Date: Tue, 21 Sep 2010 12:13:25 +0200
 
-I have to place some files into a special path in a native package /
-staging.
+Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
+---
+I am no native speaker, so please correct me if =C2=BBare being copied=C2=
+=AB should be used.
+---
+ docs/usermanual/reference/var_src_uri.xml |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
 
-I tried to add these directories by
+diff --git a/docs/usermanual/reference/var_src_uri.xml b/docs/usermanual/re=
+ference/var_src_uri.xml
+index 9563256..c4f30a2 100644
+--- a/docs/usermanual/reference/var_src_uri.xml
++++ b/docs/usermanual/reference/var_src_uri.xml
+@@ -229,7 +229,7 @@ SRC_URI[sha256sum] =3D &quot;36bdb85c97b39ac604bc58cb78=
+57ee08295242c78a12848ef8a31
+     <para>The following example shows the specification of a patch
+     file:<screen>file://ospfd-no-opaque-lsa-fix.patch</screen></para>
+=20
+-    <para>Patch files are be copied to the patches subdirectory of the sou=
+rce
++    <para>Patch files are copied to the patches subdirectory of the source
+     directory, <command>${S}/patches</command>, and then applied from the
+     source directory. The patches are searched for along the path specifie=
+d
+     via the file path variable, <command>${FILESPATH},</command> and if no=
+t
+--=20
+1.7.1
 
-FILES_${PN} =3D " \
-  /usr/local/xxx/bin \
-  /usr/local/xxx/lib \
-  /usr/local/xxx/scripts \
-"
+--=-0oCJ3QhVqd+oCsCaQQUQ
+Content-Type: application/pgp-signature; name="signature.asc"
+Content-Description: This is a digitally signed message part
 
-in my xxx-native recipe, but this won't work for the native staging, the
-directories do not appear in the syssroots/i386-linux path where I
-expected they will go to. (same, if I use BBCLASSEXTEND)
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-Where I have to add my special directories and files to get it into the
-native staging path ?
+iEYEABECAAYFAkyYhdQACgkQPX1aK2wOHVi0qQCeKWvgBsY+3dAcAOvLhOGbZjEZ
+hMgAn2zMvOH8dc2cpP/Qk61PX4J3H23e
+=w4Ne
+-----END PGP SIGNATURE-----
 
-Background, I can't install the application into the standard linux
-path, there are some conflicts,
-
-Regards
-Wolfgang Hauser
-
-
+--=-0oCJ3QhVqd+oCsCaQQUQ--
