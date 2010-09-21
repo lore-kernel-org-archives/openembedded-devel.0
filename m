@@ -1,41 +1,43 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Oy1wG-0008LW-5Q
-	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 14:27:13 +0200
-Received: (qmail 28638 invoked by uid 503); 21 Sep 2010 12:40:32 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 21 Sep 2010 12:40:32 -0000
-Received: (qmail 9949 invoked by uid 503); 21 Sep 2010 12:09:59 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 21 Sep 2010 12:09:59 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Sep 2010 14:27:09 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 21 Sep 2010 14:27:07 +0200
-Message-ID: <4C98A49B.1060504@eukrea.com>
-Date: Tue, 21 Sep 2010 14:27:07 +0200
-From: =?ISO-8859-1?Q?Eric_B=E9nard?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
-MIME-Version: 1.0
+Received: from lo.gmane.org ([80.91.229.12])
+	by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oy2gk-0003sS-TW for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 15:15:20 +0200
+Received: from list by lo.gmane.org with local (Exim 4.69)
+	(envelope-from <gcho-openembedded-devel@m.gmane.org>)
+	id 1Oy2gf-0000Je-3o for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 15:15:09 +0200
+Received: from s55917625.adsl.wanadoo.nl ([85.145.118.37])
+	by main.gmane.org with esmtp (Gmexim 0.1 (Debian))
+	id 1AlnuQ-0007hv-00 for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 15:15:09 +0200
+Received: from k.kooi by s55917625.adsl.wanadoo.nl with local (Gmexim 0.1
+	(Debian)) id 1AlnuQ-0007hv-00
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 15:15:09 +0200
+X-Injected-Via-Gmane: http://gmane.org/
 To: openembedded-devel@lists.openembedded.org
-References: <1283523286-30999-1-git-send-email-michael.lippautz@gmail.com>
-	<1283523286-30999-2-git-send-email-michael.lippautz@gmail.com>
-In-Reply-To: <1283523286-30999-2-git-send-email-michael.lippautz@gmail.com>
-X-Ovh-Tracer-Id: 11861074044027514185
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+From: Koen Kooi <k.kooi@student.utwente.nl>
+Date: Tue, 21 Sep 2010 15:14:59 +0200
+Message-ID: <i7ab4j$ubk$1@dough.gmane.org>
+References: <1284933592-4558-1-git-send-email-pirobk@gmail.com><4C9693E5.3040504@freyther.de>	<AANLkTim+VwnZH-yiNOPkQ-ZvbGLmjXpEz8U-WJOoPzt7@mail.gmail.com>
+	<0B51A1E7C61D114DAE6FC10B0FD0ABA501A74218@deimsg40.de.net.world>
+Mime-Version: 1.0
+X-Complaints-To: usenet@dough.gmane.org
+X-Gmane-NNTP-Posting-Host: s55917625.adsl.wanadoo.nl
+User-Agent: Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US;
+	rv:1.9.1.11) Gecko/20100729 Shredder/3.0.7pre
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74218@deimsg40.de.net.world>
+X-Enigmail-Version: 1.0.1
+X-SA-Exim-Connect-IP: 80.91.229.12
+X-SA-Exim-Mail-From: gcho-openembedded-devel@m.gmane.org
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 1/2] x-load/igep0020.conf: Unbreak x-load for igep0020 machine.
+Subject: Re: [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,17 +51,51 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 12:27:15 -0000
-Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+X-List-Received-Date: Tue, 21 Sep 2010 13:15:21 -0000
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-Le 03/09/2010 16:14, Michael Lippautz a écrit :
-> * x-load is needed since e2b9225af36b2979b255634f79ceecea482601a7
->
-> Signed-off-by: Michael Lippautz<michael.lippautz@gmail.com>
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
 
-Acked-by: Eric Bénard <eric@eukrea.com>
+It was applied yesterday already:
+http://cgit.openembedded.org/cgit.cgi/openembedded/commit/?id=224e98468078e9267b0b4c2d72bfb0eb3b2863ec
 
-Eric
+On 21-09-10 11:18, Hauser, Wolfgang (external) wrote:
+> Is it possible to apply this patch soon ? I need the gles version of qt4-embedded. At the time I workaround this problem by a modified qt4-embedded recipe.
+>    
+> -----UrsprÃ¼ngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedded-devel-bounces@lists.openembedded.org] Im Auftrag von BjÃ¶rn Krombholz
+> Gesendet: Montag, 20. September 2010 20:16
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
+> 
+> 2010/9/20 Holger Freyther <holger+oe@freyther.de>
+>> On 09/20/2010 05:59 AM, BjÃ¶rn Krombholz wrote:
+>>> @@ -1,4 +1,4 @@
+>>> -DEPENDS_prepend = "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d, 1) == 'qt4-embedded')]}"
+>>> +DEPENDS_prepend = "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d, 1)[:12] == 'qt4-embedded')]}"
+>>>  inherit qmake2
+>>
+>> use startsWith and avoid the extra array allocation?
+> 
+> Array slicing just provides a new mapping onto the original array and
+> doesn't copy any data.
+> 
+> I chose this syntax to make it consistent with qt4x11.bbclass
+> 
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.5 (Darwin)
+
+iD8DBQFMmK/SMkyGM64RGpERAt+6AJ90NQAJvd/iJCE7hr35N54LvvzVAQCfVkqr
+ePDrcvS2KaENyo6CzPgnd9I=
+=uqo0
+-----END PGP SIGNATURE-----
+
 
 
