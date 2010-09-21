@@ -1,45 +1,39 @@
-Received: from mail-yw0-f47.google.com ([209.85.213.47])
+Received: from smtp.cbnco.com ([207.164.182.72])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oy9ki-000483-G4
+	(envelope-from <msmith@cbnco.com>) id 1Oy9rB-0006cv-SP
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 22:47:49 +0200
-Received: by ywa8 with SMTP id 8so1967174ywa.6
+	Tue, 21 Sep 2010 22:54:30 +0200
+Received: from localhost (localhost [127.0.0.1])
+	by smtp.cbnco.com (Postfix) with ESMTP id 29605745ECF
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 13:47:44 -0700 (PDT)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=AQJjMv489XDirJ7Qr2B72dTkehzB3uBrevfbOtXfQ9E=;
-	b=QVNjlcVAK5OkZMzyyx4kS2ZDZGGlex+reCp+O/1tsI9bOBYgXsHRZDm727LpHp1zds
-	CuVzdJMf5ibYsCfPqHa4FMjIDkpi0zKqEApNI/RYESM0+zx6P1yNx0dQzZJrgaaKTMld
-	d1lN2SKx890x6rTGUVFA+obAN3iFAL/NgPKcI=
-DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=H8eVSs9GLLWHWQJzsrSYVVatZ+orpn2hoglte495roYlrlmVupZl1usKiji9s1JovW
-	3YxyoFwUivqqpWI2dd1lsNl7RObwLfprzy6v3tgaebxOh91bbz9NWJeF65NE05EBTqk2
-	LPDOmzQ8zob4kEd83oAAObGA4BJhjSFrBX7UA=
+	Tue, 21 Sep 2010 16:54:27 -0400 (EDT)
+Received: from smtp.cbnco.com ([127.0.0.1])
+	by localhost (mail.cbnco.com [127.0.0.1]) (amavisd-new, port 10024)
+	with ESMTP id 10955-03 for <openembedded-devel@lists.openembedded.org>; 
+	Tue, 21 Sep 2010 16:54:27 -0400 (EDT)
+Received: from [172.20.22.83] (auriga-dmzgw.cbnco.com [207.164.182.65])
+	by smtp.cbnco.com (Postfix) with ESMTPSA id DF1F2745D6E
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 16:54:26 -0400 (EDT)
+Message-ID: <4C991B82.3090803@cbnco.com>
+Date: Tue, 21 Sep 2010 16:54:26 -0400
+From: Michael Smith <msmith@cbnco.com>
+User-Agent: Thunderbird 2.0.0.24 (X11/20100228)
 MIME-Version: 1.0
-Received: by 10.151.100.12 with SMTP id c12mr11524871ybm.384.1285102063946;
-	Tue, 21 Sep 2010 13:47:43 -0700 (PDT)
-Received: by 10.231.32.10 with HTTP; Tue, 21 Sep 2010 13:47:43 -0700 (PDT)
-In-Reply-To: <AANLkTinxRAz245hPk4tGx_Q51+kN440pUFpBTYZC53jG@mail.gmail.com>
-References: <AANLkTimJj=8JDVsumZDSzNrpWcf6t1t4FA5WrGgWofDX@mail.gmail.com>
-	<20100921195156.GF11562@denix.org>
-	<AANLkTinxRAz245hPk4tGx_Q51+kN440pUFpBTYZC53jG@mail.gmail.com>
-Date: Tue, 21 Sep 2010 22:47:43 +0200
-Message-ID: <AANLkTinkXLi3_nwbT02XOyjZ=N2xEGhS7wbQJgc7NPGW@mail.gmail.com>
-From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.213.47
-X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
+References: <4C97AC2B.1040205@cbnco.com>	<AANLkTikd-8b1oMbyVus7372HT7u9KON0rx_nZM9fn-8A@mail.gmail.com>	<4C98B9F0.2010005@cbnco.com>
+	<4C98EC64.3040203@freyther.de>
+In-Reply-To: <4C98EC64.3040203@freyther.de>
+X-Virus-Scanned: amavisd-new at cbnco.com
+X-SA-Exim-Connect-IP: 207.164.182.72
+X-SA-Exim-Mail-From: msmith@cbnco.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,SPF_HELO_PASS,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: SRC_URI_arch override. error?
+Subject: Re: [RFC] base.bbclass: add make-native to default dependencies
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,16 +47,26 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 20:47:49 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Sep 2010 20:54:30 -0000
+Content-Type: text/plain; charset=ISO-8859-1; format=flowed
+Content-Transfer-Encoding: 7bit
 
-Denys, I still have the issue.
-As explained in the original thread the problem is the bb.fetch.init call.
+Holger Freyther wrote:
+> On 09/21/2010 09:58 PM, Michael Smith wrote:
+>> I could add a DEFAULT_PREFERENCE = "-1" to the 3.82 recipe and mention the
+>> packages that don't build with it in a comment. Do you remember which packages
+>> fail to build with 3.82?
+> 
+> well, busybox, glibc, gst* have failed and were fixed. In general I have hit:
+> 
+> 	- mixing 'rule %rule:', newer GNU make refuses to match that
+>           (busybox, glibc)
+> 	- spaces vs. tab. e.g. using 8 spaces instead of a tab (gst)
 
-Chris, appreciate it if you could look into it.
-Don't have time to test a change right away though as I will be afk
-for the next few days.
+Maybe it'd be easier to fix the affected packages, then. Would you be 
+opposed to make-native being a default dep? The next testing cycle would 
+probably spot any remaining fallout from 3.82.
 
-Enjoy! Frans
+Mike
 
 
