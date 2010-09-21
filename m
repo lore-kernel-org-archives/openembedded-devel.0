@@ -1,29 +1,47 @@
-Received: from mail.gw90.de ([188.40.100.199])
+Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OxztL-00046R-BM for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 12:16:03 +0200
-Received: from f053044049.adsl.alicedsl.de ([78.53.44.49]
-	helo=[192.168.178.21])
-	by mail.gw90.de with esmtpsa (TLS1.0:DHE_RSA_AES_256_CBC_SHA1:32)
-	(Exim 4.69) (envelope-from <paulepanter@users.sourceforge.net>)
-	id 1OxztI-0001nP-VI for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 10:16:01 +0000
-From: Paul Menzel <paulepanter@users.sourceforge.net>
+	(envelope-from <fransmeulenbroeks@gmail.com>) id 1Oy1NW-0001h8-W9
+	for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 13:51:19 +0200
+Received: by iwn2 with SMTP id 2so5226538iwn.6
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 04:51:13 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
+	h=domainkey-signature:mime-version:received:received:in-reply-to
+	:references:date:message-id:subject:from:to:content-type
+	:content-transfer-encoding;
+	bh=s8BW4GHK23HyRN8ysMZRtMi3oL64vUgU/RPBFGquDgY=;
+	b=JVVyADZaPZAy/MxphZIHHWr6wMDg9Z9jxQLhKlAem+aYjOlt9B1Ad5RlVxX3RG691T
+	CeOZSlOmVAwzFJ0Jc/0zt+wMxQae186r2VlbXnZvWGXgmJZYBx4i6SbXWrSszg7/zBHm
+	Z/mWQ/a8t2u0tDjE0gcjDvrFms9ESQSuivPi8=
+DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
+	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
+	:content-type:content-transfer-encoding;
+	b=ggn0gPEX6teo7ycxV0nhvwVaBlpaNv+V8IskQPdIPCmtlWlB8s+kLnZy8xMoC1pTgy
+	k20QFtxpMNgyE4v5pWauH5Q8m75beHCf6pTf/h92MwLzl0AKwdwGbJQ7HuskWSw3K8hA
+	v00ng5vbMlBvvliA917EqH1Oomxfmbm5ujXyo=
+MIME-Version: 1.0
+Received: by 10.231.190.75 with SMTP id dh11mr11690176ibb.189.1285069872314;
+	Tue, 21 Sep 2010 04:51:12 -0700 (PDT)
+Received: by 10.231.32.10 with HTTP; Tue, 21 Sep 2010 04:51:12 -0700 (PDT)
+In-Reply-To: <0B51A1E7C61D114DAE6FC10B0FD0ABA501A74218@deimsg40.de.net.world>
+References: <1284933592-4558-1-git-send-email-pirobk@gmail.com>
+	<4C9693E5.3040504@freyther.de>
+	<AANLkTim+VwnZH-yiNOPkQ-ZvbGLmjXpEz8U-WJOoPzt7@mail.gmail.com>
+	<0B51A1E7C61D114DAE6FC10B0FD0ABA501A74218@deimsg40.de.net.world>
+Date: Tue, 21 Sep 2010 13:51:12 +0200
+Message-ID: <AANLkTikvmhwy8w3=a5TcoRJBP2TLem_OQP4oB4_hnxDU@mail.gmail.com>
+From: Frans Meulenbroeks <fransmeulenbroeks@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Tue, 21 Sep 2010 12:15:59 +0200
-Message-ID: <1285064159.23605.1.camel@mattotaupa>
-Mime-Version: 1.0
-X-Mailer: Evolution 2.30.3 
-X-SA-Exim-Connect-IP: 188.40.100.199
-X-SA-Exim-Mail-From: paulepanter@users.sourceforge.net
+X-SA-Exim-Connect-IP: 209.85.214.175
+X-SA-Exim-Mail-From: fransmeulenbroeks@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
-	version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] docs/usermanual: s/are be copied/are copied/
+Subject: Re: [PATCH] qt4-embedded: avoid circular dependencies for reciped providing qt4-embedded
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -37,57 +55,55 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 10:16:03 -0000
-X-Groupsio-MsgNum: 23764
-Content-Type: multipart/signed; micalg="pgp-sha1";
-	protocol="application/pgp-signature";
-	boundary="=-0oCJ3QhVqd+oCsCaQQUQ"
-
---=-0oCJ3QhVqd+oCsCaQQUQ
-Content-Type: text/plain; charset="UTF-8"
+X-List-Received-Date: Tue, 21 Sep 2010 11:51:20 -0000
+Content-Type: text/plain; charset=ISO-8859-1
 Content-Transfer-Encoding: quoted-printable
 
-Date: Tue, 21 Sep 2010 12:13:25 +0200
+2010/9/21 Hauser, Wolfgang (external) <Wolfgang.Hauser.external@cassidian.c=
+om>:
+> Is it possible to apply this patch soon ? I need the gles version of qt4-=
+embedded. At the time I workaround this problem by a modified qt4-embedded =
+recipe.
 
-Signed-off-by: Paul Menzel <paulepanter@users.sourceforge.net>
----
-I am no native speaker, so please correct me if =C2=BBare being copied=C2=
-=AB should be used.
----
- docs/usermanual/reference/var_src_uri.xml |    2 +-
- 1 files changed, 1 insertions(+), 1 deletions(-)
+Can't judge the details of your patch (and can't push from here anyway).
+What I normally do in those cases is keep the patched recipe in an
+overlay (and discard it when the patch is applied).
 
-diff --git a/docs/usermanual/reference/var_src_uri.xml b/docs/usermanual/re=
-ference/var_src_uri.xml
-index 9563256..c4f30a2 100644
---- a/docs/usermanual/reference/var_src_uri.xml
-+++ b/docs/usermanual/reference/var_src_uri.xml
-@@ -229,7 +229,7 @@ SRC_URI[sha256sum] =3D &quot;36bdb85c97b39ac604bc58cb78=
-57ee08295242c78a12848ef8a31
-     <para>The following example shows the specification of a patch
-     file:<screen>file://ospfd-no-opaque-lsa-fix.patch</screen></para>
-=20
--    <para>Patch files are be copied to the patches subdirectory of the sou=
-rce
-+    <para>Patch files are copied to the patches subdirectory of the source
-     directory, <command>${S}/patches</command>, and then applied from the
-     source directory. The patches are searched for along the path specifie=
-d
-     via the file path variable, <command>${FILESPATH},</command> and if no=
-t
---=20
-1.7.1
+Frans
+>
+> -----Urspr=FCngliche Nachricht-----
+> Von: openembedded-devel-bounces@lists.openembedded.org [mailto:openembedd=
+ed-devel-bounces@lists.openembedded.org] Im Auftrag von Bj=F6rn Krombholz
+> Gesendet: Montag, 20. September 2010 20:16
+> An: openembedded-devel@lists.openembedded.org
+> Betreff: Re: [oe] [PATCH] qt4-embedded: avoid circular dependencies for r=
+eciped providing qt4-embedded
+>
+> 2010/9/20 Holger Freyther <holger+oe@freyther.de>
+>> On 09/20/2010 05:59 AM, Bj=F6rn Krombholz wrote:
+>> > @@ -1,4 +1,4 @@
+>> > -DEPENDS_prepend =3D "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d=
+, 1) =3D=3D 'qt4-embedded')]}"
+>> > +DEPENDS_prepend =3D "${@["qt4-embedded ", ""][(bb.data.getVar('PN', d=
+, 1)[:12] =3D=3D 'qt4-embedded')]}"
+>> > =A0inherit qmake2
+>>
+>> use startsWith and avoid the extra array allocation?
+>
+> Array slicing just provides a new mapping onto the original array and
+> doesn't copy any data.
+>
+> I chose this syntax to make it consistent with qt4x11.bbclass
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
+> _______________________________________________
+> Openembedded-devel mailing list
+> Openembedded-devel@lists.openembedded.org
+> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 
---=-0oCJ3QhVqd+oCsCaQQUQ
-Content-Type: application/pgp-signature; name="signature.asc"
-Content-Description: This is a digitally signed message part
 
------BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.10 (GNU/Linux)
-
-iEYEABECAAYFAkyYhdQACgkQPX1aK2wOHVi0qQCeKWvgBsY+3dAcAOvLhOGbZjEZ
-hMgAn2zMvOH8dc2cpP/Qk61PX4J3H23e
-=w4Ne
------END PGP SIGNATURE-----
-
---=-0oCJ3QhVqd+oCsCaQQUQ--
