@@ -1,43 +1,47 @@
-Received: from mail-iw0-f175.google.com ([209.85.214.175])
+Received: from mail-ww0-f41.google.com ([74.125.82.41])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <graham.gower@gmail.com>) id 1OxqNI-0000IB-Vu
+	(envelope-from <kergoth@gmail.com>) id 1OxsxO-0001Ta-G4
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 02:06:21 +0200
-Received: by iwn2 with SMTP id 2so4741541iwn.6
+	Tue, 21 Sep 2010 04:51:54 +0200
+Received: by wwi17 with SMTP id 17so840138wwi.0
 	for <openembedded-devel@lists.openembedded.org>;
-	Mon, 20 Sep 2010 17:06:19 -0700 (PDT)
+	Mon, 20 Sep 2010 19:51:38 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:in-reply-to
-	:references:date:message-id:subject:from:to:content-type;
-	bh=VUvqeM3fsz9o7a90wGa6EDpObrmOazUAzufQ16an1tU=;
-	b=WEPdVIM7XujeI/wrzVwEaxKmBkyADqVahZfYsITgQ0MA52jneVsFLWovcXMb9Mxwfu
-	+prctRyFImAdHs/A9cOwiyy21oVFxi7DkqIa5zyBmM/hUddiN31IO30u7t6JIk9k3WPr
-	Ajdg2C7p2xGSQ057B+TpT5G0S21fwk/SdUrBc=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=kn4UHftaqIsBB1DjPmL9ssJVCiYJf+FMVb8mqXvYUsc=;
+	b=qajNtT0gdOdLhIVyE15po8SFRCJfl9CqRSIpYPrzpqffw4PxnWvZO9WIwfH3YmDNr6
+	OHNM3NKrkgKPeB8U2W5j2EcziuUQcvyzeF//eL6aXfLwqhBJvGzD8v9ZemNpb6VVNKj0
+	4a50nWG6gITqxgAzYmzh5TGuAEfwu9Jqa/vu0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:in-reply-to:references:date:message-id:subject:from:to
-	:content-type;
-	b=v8gaNOaC7Wp5G6tlW46Whu4Iz6Wz1/Eo9G/0OaE0x2us+Jj/3bb9eGsbXAWY//sgWC
-	sQxLSvcmFU9/ijuQN09o8+tX3K7WwpDyRK0uWer1icDOHkBZB7EC9vQ0HaCefWNe9dYn
-	dRJDgGLVGV6LWnsXWraw12uKVltO6xUeTc9sc=
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=wC0yAVa7JJFL6260bwSsCym+zuD2laglGzNwZXYd4GK2PI1CFzLlr0CskGiFGRkXPz
+	PLwCfQ+x55Tllc3gfIREQc+hNWSIkvzbwmuAmBJ/OpyoXqwiBVQruaQYq/jwanNbkfZ8
+	qaEGWBBH67Vi4URSc/HllyCJWrJ6fNAXgwGes=
+Received: by 10.216.74.75 with SMTP id w53mr8563741wed.86.1285037497922; Mon,
+	20 Sep 2010 19:51:37 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.176.73 with SMTP id bd9mr6064179ibb.134.1285027579184;
-	Mon, 20 Sep 2010 17:06:19 -0700 (PDT)
-Received: by 10.231.161.1 with HTTP; Mon, 20 Sep 2010 17:06:19 -0700 (PDT)
-In-Reply-To: <4C97F1CD.4070804@gmail.com>
-References: <4C97F1CD.4070804@gmail.com>
-Date: Tue, 21 Sep 2010 09:36:19 +0930
-Message-ID: <AANLkTi=8nUfXETp6GKHn124smQGbT0+rNc18n2ddbW4V@mail.gmail.com>
-From: Graham Gower <graham.gower@gmail.com>
+Sender: kergoth@gmail.com
+Received: by 10.216.237.168 with HTTP; Mon, 20 Sep 2010 19:51:17 -0700 (PDT)
+In-Reply-To: <1285023488-32159-1-git-send-email-eric@eukrea.com>
+References: <1285023488-32159-1-git-send-email-eric@eukrea.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Mon, 20 Sep 2010 19:51:17 -0700
+X-Google-Sender-Auth: 6HnztRZ3si3mwlIdT_xIhYVOFnU
+Message-ID: <AANLkTikgg0KVLGxTzqgE0vY5vKY2sy8cR9j0sgPH01B+@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 209.85.214.175
-X-SA-Exim-Mail-From: graham.gower@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.41
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.5 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] opkg: disable GPLv3 code.
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] utils.bbclass: fix is_machine_specific
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -51,19 +55,29 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 00:06:21 -0000
-Content-Type: text/plain; charset=ISO-8859-1
+X-List-Received-Date: Tue, 21 Sep 2010 02:51:54 -0000
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
 
-On 21 September 2010 09:14, Graham Gower <graham.gower@gmail.com> wrote:
-> The sha256 code is GPLv3 licensed. This was not obvious and the license clause
-> in opkg recipes was not updated when the sha256 code was added.
+On Mon, Sep 20, 2010 at 3:58 PM, Eric B=C3=A9nard <eric@eukrea.com> wrote:
+
+> * base.bbclass can set a package's PACKAGE_ARCH to MACHINE_ARCH if
+> it finds file:// in the SRC_URI and the corresponding file is machine
+> specific (recipes/foo/foo-1.0/<some machine>/)
+> * but is_machine_specific actually fails to detect these files as
+> urldata.path is used instead of urldata.localpath thus preventing the
+> comparison of the file's path with machinepaths
+> * tested with bitbake HEAD & 1.8.18, with OE's tree alone and OE's tree
+> plus an overlay.
 >
-> All other files in opkg remain licensed GPLv2 (or later).
+> Signed-off-by: Eric B=C3=A9nard <eric@eukrea.com>
+>
 
-I forgot to mention that sha256 checksums for packages are currently
-not used in OE, thus disabling this feature should not present
-problems.
-
--Graham
-
+Acked-by: Chris Larson <clarson@kergoth.com>
+--=20
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
