@@ -1,41 +1,35 @@
-Received: from 68.mail-out.ovh.net ([91.121.185.69])
-	by linuxtogo.org with smtp (Exim 4.69)
-	(envelope-from <eric@eukrea.com>) id 1Oy6qK-0004j5-C0
+Received: from static-92-33-14-100.sme.bredbandsbolaget.se ([92.33.14.100]
+	helo=mailhost.lundinova.se) by linuxtogo.org with esmtp (Exim 4.69)
+	(envelope-from <johan.hovold@lundinova.se>) id 1Oy6zI-00050A-Fs
 	for openembedded-devel@lists.openembedded.org;
-	Tue, 21 Sep 2010 19:41:25 +0200
-Received: (qmail 23328 invoked by uid 503); 21 Sep 2010 17:54:46 -0000
-Received: from 30.mail-out.ovh.net (213.186.62.213)
-	by 68.mail-out.ovh.net with SMTP; 21 Sep 2010 17:54:46 -0000
-Received: (qmail 10736 invoked by uid 503); 21 Sep 2010 17:24:10 -0000
-Received: from b9.ovh.net (HELO mail431.ha.ovh.net) (213.186.33.59)
-	by 30.mail-out.ovh.net with SMTP; 21 Sep 2010 17:24:10 -0000
-Received: from b0.ovh.net (HELO queueout) (213.186.33.50)
-	by b0.ovh.net with SMTP; 21 Sep 2010 19:41:22 +0200
-Received: from pac33-2-82-240-38-71.fbx.proxad.net (HELO ?192.168.1.15?)
-	(ebenard%eukrea.com@82.240.38.71)
-	by ns0.ovh.net with SMTP; 21 Sep 2010 19:41:21 +0200
-Message-ID: <4C98EE40.50205@eukrea.com>
-Date: Tue, 21 Sep 2010 19:41:20 +0200
-From: =?UTF-8?B?RXJpYyBCw6luYXJk?= <eric@eukrea.com>
-User-Agent: Mozilla/5.0 (X11; U; Linux i686; fr;
-	rv:1.9.2.9) Gecko/20100915 Thunderbird/3.1.4
-MIME-Version: 1.0
+	Tue, 21 Sep 2010 19:50:42 +0200
+Received: from pi (unknown [10.240.22.2])
+	(using TLSv1 with cipher AES256-SHA (256/256 bits))
+	(No client certificate requested)
+	by mailhost.lundinova.se (Postfix) with ESMTP id 7F417B94007
+	for <openembedded-devel@lists.openembedded.org>;
+	Tue, 21 Sep 2010 19:50:36 +0200 (CEST)
+Received: from johan by pi with local (Exim 4.72) (envelope-from <johan@pi>)
+	id 1Oy6zE-0003hn-D8 for openembedded-devel@lists.openembedded.org;
+	Tue, 21 Sep 2010 19:50:36 +0200
+Date: Tue, 21 Sep 2010 19:50:36 +0200
+From: Johan Hovold <johan.hovold@lundinova.se>
 To: openembedded-devel@lists.openembedded.org
-References: <1285077403-21171-1-git-send-email-eric@eukrea.com>	<1285077403-21171-2-git-send-email-eric@eukrea.com>	<1285077403-21171-3-git-send-email-eric@eukrea.com>	<1285077403-21171-4-git-send-email-eric@eukrea.com>	<1285077403-21171-5-git-send-email-eric@eukrea.com>
-	<4C98ED51.8040707@freyther.de>
-In-Reply-To: <4C98ED51.8040707@freyther.de>
-X-Ovh-Tracer-Id: 17168003255976242505
-X-Ovh-Remote: 82.240.38.71 (pac33-2-82-240-38-71.fbx.proxad.net)
-X-Ovh-Local: 213.186.33.20 (ns0.ovh.net)
-X-SA-Exim-Connect-IP: 91.121.185.69
-X-SA-Exim-Mail-From: eric@eukrea.com
+Message-ID: <20100921175036.GB5750@lundinova.se>
+References: <4C9494EC.4070309@freyther.de>
+MIME-Version: 1.0
+In-Reply-To: <4C9494EC.4070309@freyther.de>
+User-Agent: Mutt/1.5.20 (2009-06-14)
+Sender: <johan.hovold@lundinova.se>
+X-SA-Exim-Connect-IP: 92.33.14.100
+X-SA-Exim-Mail-From: johan.hovold@lundinova.se
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00 autolearn=ham
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00 autolearn=ham
 	version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH 5/7] gdb-cross-sdk: add RDEPENDS
+Subject: Re: Question regarding the staging layout
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,34 +43,27 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Tue, 21 Sep 2010 17:41:25 -0000
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+X-List-Received-Date: Tue, 21 Sep 2010 17:50:42 -0000
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
 
-Le 21/09/2010 19:37, Holger Freyther a écrit :
-> On 09/21/2010 09:56 PM, Eric Bénard wrote:
->> * actually we get :
->> ./arm-angstrom-linux-gnueabi-gdb: error while loading shared libraries:
->> libtinfo.so.5: cannot open shared object file: No such file or directory
->> * adding these RDEPENDS will install ncurses-sdk and zlib-sdk into the SDK
->>
->> Signed-off-by: Eric Bénard<eric@eukrea.com>
->
-> Is shlib stuff supposed to work for the -sdk packages? E.g. should something
-> autodetect and install these libraries? The answer somehow feels like, yes it
-> should.
->
-actually this seems to fail.
->
->>
->>   DEPENDS = "ncurses-sdk zlib-sdk flex-native"
->> +RDEPENDS = "ncurses-sdk zlib-sdk"
->> \ No newline at end of file
->
-> this will also install the -dev packages?
->
-I don't understand, do you need the -dev packages for gdb-cross is the SDK ?
+On Sat, Sep 18, 2010 at 06:31:08PM +0800, Holger Freyther wrote:
+> I am seeing a lot of messages like:
+> 
+> /home/ich/build/arm/xscale/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/bin/ld:
+> warning: libc.so, needed by
+> /home/ich/build/arm/xscale/tmp/sysroots/i686-linux/usr/armv5te/lib/gcc/arm-angstrom-linux-gnueabi/4.3.3/../../../../arm-angstrom-linux-gnueabi/lib/libgcc_s.so,
+> not found (try using -rpath or -rpath-link)
+> 
+> 
+> is that to be expected?
 
-Eric
+Same issue here.
+
+See the thread "[oe] several recipes give a link error: libc.so, needed
+by libgcc_s.so, not found" from Mon, 23 Aug 2010 for some discussion on
+this matter.
+
+/Johan
 
 
