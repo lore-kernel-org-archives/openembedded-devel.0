@@ -1,35 +1,36 @@
 Received: from mail-iw0-f175.google.com ([209.85.214.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OyQcm-0003R6-Uz
+	(envelope-from <raj.khem@gmail.com>) id 1OyQgl-0007bU-Fa
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 16:48:49 +0200
-Received: by iwn2 with SMTP id 2so597265iwn.6
+	Wed, 22 Sep 2010 16:52:55 +0200
+Received: by iwn2 with SMTP id 2so599272iwn.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Sep 2010 07:48:41 -0700 (PDT)
+	Wed, 22 Sep 2010 07:52:48 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
 	h=domainkey-signature:received:mime-version:received:in-reply-to
 	:references:from:date:message-id:subject:to:content-type
 	:content-transfer-encoding;
-	bh=rqYGWR2fhFnqD0ptPXQCTSnqTx1wZF2iOBkc3q8SYjM=;
-	b=AvoLOTejB2N6z5ahQcy82i/zGwWhKomWevNhtWzncBCzoVv0fjEIYq4rPIFWsvh8CF
-	zMaX02fcVypA2oxIi2qjI2YKkFwU2X39cxw7aM1EniFJNmv6KHK8dLMotFa2yvHnhGUh
-	zQ4bjGkuflVBPmPbR/Bx35RAB4+H8kKhzHsMY=
+	bh=H1nsAWdCl+AeFDJB7qU08iKwRgxI5+/ibz4VQ9GE1wc=;
+	b=kp6TZ+4WeSyKCW8aad09H9RYln2dG7d7N9r6wZvBwNVDCG0lW0T4IH55eq7gMFMt3U
+	uR+WRhE/sn2V4GOjFwXYakyYZPmc917/p66vzeCzLGjaSrX7Z4Zr/TFWh8Jc28ZhzU9w
+	faNScbebZkQKgzhxjITTctt6HhGPYYc9y5pz0=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
 	h=mime-version:in-reply-to:references:from:date:message-id:subject:to
 	:content-type:content-transfer-encoding;
-	b=v9tQpY/ejGupgi4BqfH65j6Y7figykWbaCr680aBzH5YvVdCjcpApajEB2tVuoktXj
-	HFI/ojXqOOcSu47uW9566+y8+NMOsFpK+r5KVKdYR11enCn5zuuTCAqVpS4gO5fG6jX3
-	AT0zOgoq4wfK4XvfVMlmFffjsV/yItxqcTGs4=
-Received: by 10.231.146.135 with SMTP id h7mr222959ibv.149.1285166920455; Wed,
-	22 Sep 2010 07:48:40 -0700 (PDT)
+	b=khiV8G69LlS/kgqoiSdv7E49rsfGJe/M1bHFVKbuO6yd3IP5O4plABM9uI1B37c5B8
+	8AzK/loMwUGtItkgN0Plsd/w5a1/hYMs1y8O2io4i1QQ5cJ51PG9yu80+ohL08KKVWU2
+	FcWxnTtUSQyceOhYscCmElntYD0Z/ykd2J3iA=
+Received: by 10.231.31.129 with SMTP id y1mr289933ibc.45.1285167165671; Wed,
+	22 Sep 2010 07:52:45 -0700 (PDT)
 MIME-Version: 1.0
-Received: by 10.231.200.194 with HTTP; Wed, 22 Sep 2010 07:48:19 -0700 (PDT)
-In-Reply-To: <AANLkTi=bZiZt_Da57qAF3KjHR=jZ3JHQFfO2nVGnL5LX@mail.gmail.com>
-References: <4C995108.5070108@gmail.com>
-	<AANLkTi=bZiZt_Da57qAF3KjHR=jZ3JHQFfO2nVGnL5LX@mail.gmail.com>
+Received: by 10.231.200.194 with HTTP; Wed, 22 Sep 2010 07:52:25 -0700 (PDT)
+In-Reply-To: <1285146702.4175.20.camel@mattotaupa>
+References: <1284228112.14396.159.camel@mattotaupa>
+	<1285021068.2453.80.camel@mattotaupa>
+	<20100921051747.GA3989@thinky> <1285146702.4175.20.camel@mattotaupa>
 From: Khem Raj <raj.khem@gmail.com>
-Date: Wed, 22 Sep 2010 07:48:19 -0700
-Message-ID: <AANLkTinCPAO6J+QUMa-4jm-_wX+wks293YmwH-GVaP8Z@mail.gmail.com>
+Date: Wed, 22 Sep 2010 07:52:25 -0700
+Message-ID: <AANLkTim=AW3H5hCwwE7-ZT9yHquF4NEnc_Ko=xhPqjWm@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
 X-SA-Exim-Connect-IP: 209.85.214.175
 X-SA-Exim-Mail-From: raj.khem@gmail.com
@@ -39,7 +40,7 @@ X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
 	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: Re: [PATCH] pivotinit_1.0.0.bb: Mark as COMPATIBLE_MACHINE=spitz.
+Subject: Re: minimal-uclibc: freesmartphone/libfsobasics_git.bb: do_compile() failed: utilities.c:35:25: error: sys/eventfd.h: No such file or directory (was: utilities.c:35:22: fatal error: execinfo.h: No such file or directory)
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -53,69 +54,130 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 14:48:54 -0000
+X-List-Received-Date: Wed, 22 Sep 2010 14:52:58 -0000
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: quoted-printable
 
-On Wed, Sep 22, 2010 at 1:27 AM, Andrea Adami <andrea.adami@gmail.com> wrot=
-e:
-> On Wed, Sep 22, 2010 at 2:42 AM, Graham Gower <graham.gower@gmail.com> wr=
-ote:
->> From 909e5617f2534b505c6940b9e409a1ce3cdae1e9 Mon Sep 17 00:00:00 2001
->> From: Graham Gower <graham.gower@gmail.com>
->> Date: Wed, 22 Sep 2010 09:47:53 +0930
->> Subject: [PATCH 3/5] pivotinit_1.0.0.bb: Mark as COMPATIBLE_MACHINE=3Dsp=
-itz.
->>
->>
->> Signed-off-by: Graham Gower <graham.gower@gmail.com>
->> ---
->> =C2=A0recipes/pivotinit/pivotinit_1.0.0.bb | =C2=A0 =C2=A01 +
->> =C2=A01 files changed, 1 insertions(+), 0 deletions(-)
->>
->> diff --git a/recipes/pivotinit/pivotinit_1.0.0.bb b/recipes/pivotinit/pi=
-votinit_1.0.0.bb
->> index 912cfeb..8b40db2 100644
->> --- a/recipes/pivotinit/pivotinit_1.0.0.bb
->> +++ b/recipes/pivotinit/pivotinit_1.0.0.bb
->> @@ -4,6 +4,7 @@ PRIORITY =3D "required"
->> =C2=A0LICENSE =3D "MIT"
->> =C2=A0PR =3D "r0"
->>
->> +COMPATIBLE_MACHINE =3D "(spitz)"
->> =C2=A0SRC_URI =3D "file://init"
->>
->> =C2=A0do_install () {
->> --
->> 1.7.1
->>
->>
->> _______________________________________________
->> Openembedded-devel mailing list
->> Openembedded-devel@lists.openembedded.org
->> http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
->>
+On Wed, Sep 22, 2010 at 2:11 AM, Paul Menzel
+<paulepanter@users.sourceforge.net> wrote:
+> Dear Frederik,
 >
-> Hm...'pivot-init' is specific to old initrd.
 >
-> Nowadays we are using modern initramfs so pivot-root doesn't apply:
-> initramfs is rootfs: you can neither pivot_root, nor unmount it (see
-> kernel/Documentation/filesystems/ramfs-rootfs-initramfs.txt).
+> Am Dienstag, den 21.09.2010, 07:17 +0200 schrieb Frederik Sdun:
 >
-> I suspect this recipe has been obsoleted, I'll grep and see (AltBoot
-> was using this iirc).
+> [=E2=80=A6]
+>
+>> fso is quit untested with none GNU libcs and we partly depend on it. I
+>> wrote a short patch which add a --enable-no-gnuism switch for configure,
+>> but want to talk to Michael, before commiting it. Could you test it and
+>> report more gnuism in our code?
+>
+> thank you for your patch. It partly reduced the problem. It now chokes
+> on `eventfd.h`. Unfortunately I do not know anything about if there are
+> any non glibc equivalents.
+>
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0[=E2=80=A6]
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| kobjectnotifier.c:188: warning: passing argu=
+ment 2 of 'bind' from incompatible pointer type
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| /oe/build-minimal-uclibc/minimal-uclibc-dev/=
+sysroots/armv7a-oe-linux-uclibceabi/usr/include/sys/socket.h:115: note: exp=
+ected 'const struct sockaddr *' but argument is of type 'struct sockaddr_nl=
+ *'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 libinitexit.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 logger.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 netlinknotifier.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c: In function 'fso_framewor=
+k_base_netlink_notifier_construct':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c:206: warning: passing argu=
+ment 4 of 'g_hash_table_new_full' from incompatible pointer type
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| /oe/build-minimal-uclibc/minimal-uclibc-dev/=
+sysroots/armv7a-oe-linux-uclibceabi/usr/include/glib-2.0/glib/ghash.h:62: n=
+ote: expected 'GDestroyNotify' but argument is of type 'void (*)(struct GLi=
+st *)'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c: In function '_lambda0_':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c:260: warning: assignment d=
+iscards qualifiers from pointer target type
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c: In function 'fso_framewor=
+k_base_netlink_notifier_handleNetlinkMessage':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c:296: warning: assignment m=
+akes pointer from integer without a cast
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c: In function 'fso_framewor=
+k_base_netlink_notifier_handleMessage':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c:344: warning: cast to poin=
+ter from integer of different size
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c: In function '_fso_framewo=
+rk_base_netlink_notifier_addMatch':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c:366: warning: cast to poin=
+ter from integer of different size
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| netlinknotifier.c:372: warning: cast to poin=
+ter from integer of different size
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 netlinkutils.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 overlay.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 process.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 smartkeyfile.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 syncasync.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 threading.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| threading.c: In function 'fso_framework_thre=
+ading_callDelegateOnMainThread':
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| threading.c:451: warning: passing argument 4=
+ of 'g_idle_add_full' from incompatible pointer type
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| /oe/build-minimal-uclibc/minimal-uclibc-dev/=
+sysroots/armv7a-oe-linux-uclibceabi/usr/include/glib-2.0/glib/gmain.h:291: =
+note: expected 'GDestroyNotify' but argument is of type 'void (*)(struct Bl=
+ock3Data *)'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| threading.c:455: warning: passing argument 4=
+ of 'g_idle_add_full' from incompatible pointer type
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| /oe/build-minimal-uclibc/minimal-uclibc-dev/=
+sysroots/armv7a-oe-linux-uclibceabi/usr/include/glib-2.0/glib/gmain.h:291: =
+note: expected 'GDestroyNotify' but argument is of type 'void (*)(struct Bl=
+ock3Data *)'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| threading.c:458: warning: passing argument 4=
+ of 'g_idle_add_full' from incompatible pointer type
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| /oe/build-minimal-uclibc/minimal-uclibc-dev/=
+sysroots/armv7a-oe-linux-uclibceabi/usr/include/glib-2.0/glib/gmain.h:291: =
+note: expected 'GDestroyNotify' but argument is of type 'void (*)(struct Bl=
+ock3Data *)'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 types.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| =C2=A0 CC =C2=A0 =C2=A0 utilities.lo
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| utilities.c:35:25: error: sys/eventfd.h: No =
+such file or directory
 
-OK if thats the case then you can move it to obsolete dir.
 
+eventfd is unimplemented in uclibc.
+
+
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make[3]: *** [utilities.lo] Error 1
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make[3]: Leaving directory `/oe/build-minima=
+l-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/libfsobasics-1_=
+0.9.10+gitr0+2f8221fea7c667d2ee46ff6b8dace2d53b8860cc-r2.0/git/libfsobasics=
+/fsobasics'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make[2]: *** [all] Error 2
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make[2]: Leaving directory `/oe/build-minima=
+l-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/libfsobasics-1_=
+0.9.10+gitr0+2f8221fea7c667d2ee46ff6b8dace2d53b8860cc-r2.0/git/libfsobasics=
+/fsobasics'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make[1]: *** [all-recursive] Error 1
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make[1]: Leaving directory `/oe/build-minima=
+l-uclibc/minimal-uclibc-dev/work/armv7a-oe-linux-uclibceabi/libfsobasics-1_=
+0.9.10+gitr0+2f8221fea7c667d2ee46ff6b8dace2d53b8860cc-r2.0/git/libfsobasics=
+'
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| make: *** [all] Error 2
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| FATAL: oe_runmake failed
+> =C2=A0 =C2=A0 =C2=A0 =C2=A0| ERROR: Function do_compile failed
 >
-> Regards
+> I am attaching the patch file to include your patch into OE easily for te=
+sting.
 >
-> Andrea
+>
+> Thanks,
+>
+> Paul
 >
 > _______________________________________________
 > Openembedded-devel mailing list
 > Openembedded-devel@lists.openembedded.org
 > http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel
+>
 >
 
 
