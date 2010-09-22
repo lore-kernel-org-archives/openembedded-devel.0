@@ -1,41 +1,44 @@
-Received: from mail-wy0-f175.google.com ([74.125.82.175])
+Received: from mail-px0-f175.google.com ([209.85.212.175])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <cliff.brake@gmail.com>) id 1OyEmh-0005L6-V7
+	(envelope-from <raj.khem@gmail.com>) id 1OyIaN-0000Nj-6Y
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 04:10:13 +0200
-Received: by wyb34 with SMTP id 34so64146wyb.6
+	Wed, 22 Sep 2010 08:13:45 +0200
+Received: by pxi11 with SMTP id 11so45664pxi.6
 	for <openembedded-devel@lists.openembedded.org>;
-	Tue, 21 Sep 2010 19:10:07 -0700 (PDT)
+	Tue, 21 Sep 2010 23:13:33 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:mime-version:received:received:date:message-id
-	:subject:from:to:content-type:content-transfer-encoding;
-	bh=CIWyt4c3VmU/bjUQF+ARYDEBnpaqER/0QpRBdrRkhFU=;
-	b=AOw2UKdSeWggvKUKANWxaYICTchwJ4ZQ2gEbW34C+xsO6zh5MK3+kgEXoxo8SE0d6h
-	ve9ZRH2iEuCyr462n/12taC787wD2DsQcXoplRP/XMjaFrLMIWywjGEa0a+atbRfo2BZ
-	Y2LEfWea7QKRXbYZ1elCHra+BgckDXtCAb0ZU=
+	h=domainkey-signature:received:received:from:to:cc:subject:date
+	:message-id:x-mailer;
+	bh=SrRTb6iWtsoPZOZW0EgZA29Hw4J1dzLPagYSmDxDY14=;
+	b=r6JrGAZMeGxJ7zhWYURrqF1aANfLSOQ12s0tT1lfWB9S+B9kQS0mMcChKjhj8ht6aZ
+	G0do10rPYVk/oQfQguJM7aPBei40A10qs1O9F8rdEAgR9V70m3m0BHDQXqwpyyUhOjMp
+	uPUF3vhqeqbvkco5FKCiheYp0tCMGCFFPlJys=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=mime-version:date:message-id:subject:from:to:content-type
-	:content-transfer-encoding;
-	b=VzoRuG5TR06cymUtuD5HYQXGKJxooY2hZVwtdvc/zk1XwRAdMZvBq3b/s1fIPiOL8o
-	5DxwjvslEZnR2Z8UylEp2Q7BiQ775WdWSAuoQHYGhfD6srEdQDIdCcS3z4/5wnLDzcbn
-	Vf9KbUIzHQudHAuV8RMbWRhZnilE4xZQLunxw=
-MIME-Version: 1.0
-Received: by 10.216.232.90 with SMTP id m68mr9990232weq.10.1285121407265; Tue,
-	21 Sep 2010 19:10:07 -0700 (PDT)
-Received: by 10.216.72.212 with HTTP; Tue, 21 Sep 2010 19:10:07 -0700 (PDT)
-Date: Tue, 21 Sep 2010 22:10:07 -0400
-Message-ID: <AANLkTikH4EvCZ5YWMSJFpwXwKhnTWsF5T+mhL=+jb=sk@mail.gmail.com>
-From: Cliff Brake <cliff.brake@gmail.com>
+	h=from:to:cc:subject:date:message-id:x-mailer;
+	b=Wm4XJ8eAoiwXMlk3k6Uj0E1NS9wTlHBZK2r+ajji/9t5TiROHaAH/Ro+IEXjLfw0YV
+	y/yNV2h9dEXUxDev/XtiBfMcjpWhzPAgSqsARMdHYATlruKiJOkIIbMl4wKHr7KyV+IE
+	o2iunc6rjHnJgNZ8V1eVIG/MlNmOWuSdiBOGQ=
+Received: by 10.114.130.5 with SMTP id c5mr13057072wad.125.1285136013263;
+	Tue, 21 Sep 2010 23:13:33 -0700 (PDT)
+Received: from localhost.localdomain
+	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
+	by mx.google.com with ESMTPS id d39sm16939119wam.16.2010.09.21.23.13.31
+	(version=TLSv1/SSLv3 cipher=RC4-MD5);
+	Tue, 21 Sep 2010 23:13:32 -0700 (PDT)
+From: Khem Raj <raj.khem@gmail.com>
 To: openembedded-devel@lists.openembedded.org
-X-SA-Exim-Connect-IP: 74.125.82.175
-X-SA-Exim-Mail-From: cliff.brake@gmail.com
+Date: Tue, 21 Sep 2010 23:13:29 -0700
+Message-Id: <1285136009-15979-1-git-send-email-raj.khem@gmail.com>
+X-Mailer: git-send-email 1.7.1
+X-SA-Exim-Connect-IP: 209.85.212.175
+X-SA-Exim-Mail-From: raj.khem@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,
-	NORMAL_HTTP_TO_IP,SPF_PASS autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
+	autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: OE weekly changelog for 2010-09-13 to 2010-09-20
+Subject: [PATCH] binutils_2.20.1.bb: Add patch to fix ld sysroot
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -49,222 +52,82 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 02:10:14 -0000
-Content-Type: text/plain; charset=ISO-8859-1
-Content-Transfer-Encoding: quoted-printable
+X-List-Received-Date: Wed, 22 Sep 2010 06:13:45 -0000
 
-OE weekly changelog for org.openembedded.dev, 2010-09-13 to 2010-09-20
+Fixes the issue seen on builds where libc.so is not being found
 
-AJ ONeal (1):
-  nodejs: replaced v0.2.0 with v0.2.1
+Signed-off-by: Khem Raj <raj.khem@gmail.com>
+---
+ .../binutils-2.19.1-ld-sysroot.patch               |   36 ++++++++++++++++++++
+ recipes/binutils/binutils_2.20.1.bb                |    3 +-
+ 2 files changed, 38 insertions(+), 1 deletions(-)
+ create mode 100644 recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch
 
-Andreas Mueller (1):
-  xfwm4: depends libwnck
+diff --git a/recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch b/recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch
+new file mode 100644
+index 0000000..b252196
+--- /dev/null
++++ b/recipes/binutils/binutils-2.20.1/binutils-2.19.1-ld-sysroot.patch
+@@ -0,0 +1,36 @@
++http://sourceware.org/bugzilla/show_bug.cgi?id=10340
++
++Signed-off-by: Sven Rebhan <odinshorse@googlemail.com>
++
++Always try to prepend the sysroot prefix to absolute filenames first.
++
++--- a/ld/ldfile.c	2009-06-14 12:46:19.000000000 +0200
+++++ b/ld/ldfile.c.new	2009-06-14 12:46:04.000000000 +0200
++@@ -308,18 +308,24 @@
++      directory first.  */
++   if (! entry->is_archive)
++     {
++-      if (entry->sysrooted && IS_ABSOLUTE_PATH (entry->filename))
+++      /* For absolute pathnames, try to always open the file in the
+++	 sysroot first. If this fails, try to open the file at the
+++	 given location. */
+++      entry->sysrooted = is_sysrooted_pathname(entry->filename, FALSE);
+++      if (IS_ABSOLUTE_PATH (entry->filename) && ld_sysroot && ! entry->sysrooted)
++ 	{
++ 	  char *name = concat (ld_sysroot, entry->filename,
++ 			       (const char *) NULL);
++ 	  if (ldfile_try_open_bfd (name, entry))
++ 	    {
++ 	      entry->filename = name;
+++	      entry->sysrooted = TRUE;
++ 	      return TRUE;
++ 	    }
++ 	  free (name);
++ 	}
++-      else if (ldfile_try_open_bfd (entry->filename, entry))
+++
+++      if (ldfile_try_open_bfd (entry->filename, entry))
++ 	{
++ 	  entry->sysrooted = IS_ABSOLUTE_PATH (entry->filename)
++ 	    && is_sysrooted_pathname (entry->filename, TRUE);
++
+diff --git a/recipes/binutils/binutils_2.20.1.bb b/recipes/binutils/binutils_2.20.1.bb
+index d75dbb2..c2a5dab 100644
+--- a/recipes/binutils/binutils_2.20.1.bb
++++ b/recipes/binutils/binutils_2.20.1.bb
+@@ -1,7 +1,7 @@
+ require binutils.inc
+ LICENSE = "GPLv3"
+ 
+-PR = "${INC_PR}.1"
++PR = "${INC_PR}.2"
+ 
+ #COMPATIBLE_TARGET_SYS = "."
+ 
+@@ -15,6 +15,7 @@ SRC_URI = "\
+      file://binutils-uclibc-gas-needs-libm.patch \
+      file://binutils-x86_64_i386_biarch.patch \
+      file://libtool-update.patch \
++     file://binutils-2.19.1-ld-sysroot.patch \
+      "
+ 
+ SRC_URI_append_nios2 =" \
+-- 
+1.7.1
 
-Bj=F6rn Krombholz (1):
-  qt4-embedded: avoid circular dependencies for reciped providing
-qt4-embedded
-
-Brijesh Singh (1):
-  ti-codec-engine_2.26.00.08: add new codec engine version.
-
-Denis 'GNUtoo' Carikli (2):
-  supertux 0.1.3: depend on libmikmod(fix not-starting issue)
-  wesnoth: add inc factorized 1.8.4 version, with normal and wvga
-versions
-
-Eric BENARD (3):
-  busybox/mdev.conf: add net/tun
-  task-qte-toolchain-target: add libqt-embeddedmultimedia4-dev
-  python-native: configure unicode to ucs4
-
-Eric B=E9nard (4):
-  generate-manifest-2.6.py: tune python-modules' RDEPENDS
-  python-2.6-manifest.inc: regenerate the file
-  python_2.6.5: tune python-distutils
-  python: increase PR
-
-Fahad Usman (1):
-  nkf_2.07.bb: fixed build error (QA Issue with nkf: No GNU_HASH in the elf=
- bi
-
-Florian Boor (4):
-  gpe-conf: add 0.2.9
-  babbage.conf: Add framebuffer video driver to XSERVER
-  xserver-xorg-conf: Add xorg.conf for i.MX51 Babbage
-  babbage.conf: Add touchscreen support for the default display
-
-Frans Meulenbroeks (48):
-  fftw: added --enable-threads to the 3.2.2 recipes
-  removal.txt: removed Maemo proposal
-  zd1211 : moved unused files to obsolete dir
-  abiword : moved unused files to obsolete dir
-  alsa : moved unused files to obsolete dir
-  apt : moved unused files to obsolete dir
-  atd : moved unused files to obsolete dir
-  autoconf : moved unused files to obsolete dir
-  clean-recipe: added (script to move unused patches to obsolete)
-  MAINTAINERS" added lib*perl
-  MAINTAINERS: added small change to test git push and CIA
-  libversion-perl_0.6701.bb: gave default preference of -1
-  e17 : moved unused files to obsolete dir
-  e2fsprogs : moved unused files to obsolete dir
-  efl1 : moved unused files to obsolete dir
-  enchant : moved unused files to obsolete dir
-  erlang : moved unused files to obsolete dir
-  esmtp : moved unused files to obsolete dir
-  evince : moved unused files to obsolete dir
-  libversion-perl: updated to 0.82
-  python-tlslite_0.3.8.bb: replaced SRC_URI with gentoo one
-  mythplugins: fixed netvison packaging, fixed depends
-  mythtv: fixed packaging, included .inc file
-  libdbd-sqlite-perl: updated to 1.31; fixed depends
-  libdbix-simple-perl_1.32.bb: DEPENDS_${PN} -> DEPENDS
-  yaffs2-utils: make it patch and compile again
-  yaffs2-utils: removed unused patch file yaffs2-unioob.patch
-  yaffs2-utils: renamed files dir to yaffs2-utils
-  yaffs2-utils: remove inc file
-  icedtea : moved unused files to obsolete dir
-  ifupdown : moved unused files to obsolete dir
-  initscripts : moved unused files to obsolete dir
-  ipkg : moved unused files to obsolete dir
-  iputils : moved unused files to obsolete dir
-  iscsi-target : moved unused files to obsolete dir
-  openprotium: fixed unpack
-  initscripts-slugos_1.0.bb: improved FILESPATHPKG
-  fbreader : moved unused files to obsolete dir
-  ffalarms : moved unused files to obsolete dir
-  ffmpeg : moved unused files to obsolete dir
-  flite : moved unused files to obsolete dir
-  fontconfig : moved unused files to obsolete dir
-  freenx : moved unused files to obsolete dir
-  freesmartphone : moved unused files to obsolete dir
-  frodo : moved unused files to obsolete dir
-  ftpd-topfield : moved unused files to obsolete dir
-  python-tlslite_0.3.8.bb: bump PR
-  task-nas-server: added tgt
-
-Graham Gower (4):
-  foonas-init: remove broken and unused recipe.
-  zziplib: remove 3 years old recipe with no in tree users.
-  zziplib_0.13.59.bb: add new recipe.
-  xkbd_0.8.15.bb: Fix geometry flag to accept negative offsets.
-
-Henry von Tresckow (1):
-  dnsmasq: add version 2.55 from upstream
-
-Holger Hans Peter Freyther (3):
-  usermanual: Remove the prebuilt toolchain documentation.
-  busybox: Apply a paych for make3.82 and the Makefile
-  gst-plugins-base_0.10.29: Fix the gtk-doc Makefiles for make 3.82
-
-Khem Raj (16):
-  freesmartphone/msmcomm.inc: Bump SRCREV
-  cpuburn-neon.bb: Only build for arm hosts
-  cpuburn_1.4.bb: Set COMPATIBLE_HOST to x86 and x86_64 only.
-  dspgw-utils_3.3.1.bb,soundtracker-gtk2_0.6.7.bb: Add missing checksums
-  eglibc: Do not specify ports multiple time to --enable-addons
-  libgles-omap3_3.01.00.07.bb: Add recipe
-  startup-notification_0.9.bb: Remove evas from DEPENDS
-  linux-efikamx_git+2.6.31.14.bb: Set default preference to -1
-  msmcomm.inc: Fix SRCREV
-  libsdl-qpe_1.2.9.bb: Add patch to not include asm/page.h
-  libjingle-tapioca_0.3.10.bb: Fix compilation and install issues.
-  openmoko2.bbclass, openmoko-base.bbclass: Fix openmoko_two_get_license an=
-d o
-  gtkhtml2, libxosd_svn.bb: Move the recipe to fetch from git instead of ob=
-sol
-  phalanx_22.bb: Rename the tar file to whats fetchable today
-  iphone: Exclude from world.
-  fam_2.7.0.bb: Fix compilation with gcc4
-
-Klaus Kurzmann (2):
-  watchdog_5.6.bb: add config for the nokia900 machine
-  xserver-common: patch to add a section for nokia900 to xserver-common
-
-Koen Kooi (7):
-  libdecodeqr: add 0.9.4+git
-  angstrom 2008: switch to cairo 1.10
-  nodejs 0.2.1: fix regressions introduced by 0.2.0 -> 0.2.1 upgrade
-  duke3d: update SRCREV, fix QA errors in .desktop
-  ruby 1.8.7: update to p302 to fix CVE-2010-0541
-  angstrom-x11-base-depends: switch default to xorg
-  angstrom-x11-base-depends: fix typo
-
-Leon Woestenberg (1):
-  preferred-xorg-versions-X11R7.5-latest.inc: Move to pixman 0.18.4
-
-Lukas M=E4rdian (1):
-  elementary-theme-gry: bump SRCREV and PR This bump brings back the entry =
-cur
-
-Michael Kurz (2):
-  db{4,5}.inc: fix QA: non -dev contains .so
-  db_{4.3.29, 5.0.21}.bb: increase PR to force a rebuild.
-
-Nobuhiro Iwamatsu (1):
-  eglibc: Update recipe for all version
-
-Philip Balister (3):
-  python-cheetah : Add DEPENDS on python.
-  task-sdk-gnuradio-native : Match OE packaging guidelines. Add packages.
-  python-docutils : Add DEPENDS on python.
-
-Roger Monk (3):
-  ti-codec-engine: Add initial recipe for latest ce 2.26.00.08
-  linux-omap-psp: Add latest pending kernel patches
-  angstrom-codec-engine-versions: Update latest versions
-
-Roman I Khimov (1):
-  dnsmasq: remove versions prior to 2.52
-
-Sean Cross (1):
-  driftnet: fix recipe to work with a modern build system
-
-Sebastian Krzyszkowiak (1):
-  cornucopia: bump SRCREV for proximity sensor support on N900
-
-Simon Busch (4):
-  tslib_git.bb: bump SRCREV
-  netbase: add interface file for palmpre machine and bump PR
-  linux-palmpre: enable uinput support in defconfig
-  fsogsmd: set PACKAGE_ARCH_palmpre =3D "${MACHINE_ARCH}"
-
-Tom Rini (6):
-  apr, apr-util: Remove 1.2.* versions
-  p2020ds: Pull in tune-ppce500v2.conf
-  mpc8544ds: Add this machine
-  angstrom-eglibc.inc: Update SPE check
-  kernel.bbclass: Fix INITRAMFS_IMAGE logic
-  cmake-native: Disable ncurses
-
-Vasily Khoruzhick (1):
-  gettext-0.18: use included libcroco instead of one provided by build syst=
-em
-
-sledz (1):
-  linux-2.6.24: build additional wlan modules for hipox machine
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-OE weekly changelog for holger/staging-branch, 2010-09-13 to 2010-09-20
-
-
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
-=3D=3D=3D
-Bugs fixed:
-bug_id resolution        short_desc
-5430 FIXED       bitbake of bootstrap-image
-
-Bugs opened:
-bug_id resolution        short_desc
-
-
---=20
-=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
-http://bec-systems.com
 
 
