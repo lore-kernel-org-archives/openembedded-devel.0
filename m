@@ -1,44 +1,47 @@
-Received: from mail-px0-f175.google.com ([209.85.212.175])
+Received: from mail-ww0-f43.google.com ([74.125.82.43])
 	by linuxtogo.org with esmtp (Exim 4.69)
-	(envelope-from <raj.khem@gmail.com>) id 1OyWSK-0000rY-GP
+	(envelope-from <kergoth@gmail.com>) id 1OyX4A-0005Vk-1d
 	for openembedded-devel@lists.openembedded.org;
-	Wed, 22 Sep 2010 23:02:22 +0200
-Received: by pxi11 with SMTP id 11so276604pxi.6
+	Wed, 22 Sep 2010 23:43:16 +0200
+Received: by wwb17 with SMTP id 17so360773wwb.24
 	for <openembedded-devel@lists.openembedded.org>;
-	Wed, 22 Sep 2010 14:02:14 -0700 (PDT)
+	Wed, 22 Sep 2010 14:37:04 -0700 (PDT)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=gmail.com; s=gamma;
-	h=domainkey-signature:received:received:from:to:cc:subject:date
-	:message-id:x-mailer;
-	bh=oKB3L0VNBv/O52tovjOkaeFK/RF6bQ65Cd6Ws5FkXYU=;
-	b=G5Xu9oTi3Qek28EYOHzNdKfA3g9DTkiLHfvBQj4Tn7B0gaEGFo1UQrZ0AJx1z7wIpb
-	Cruukr3Bxun+iMDIfm7HATQZxOg6tsYQhsnxQiM7qNH0uUHmGOymw4CPPp702MBnylNH
-	bNTQnNM2xoQyPGvULSyYnl0KnPmXr4BId1LVc=
+	h=domainkey-signature:received:mime-version:sender:received
+	:in-reply-to:references:from:date:x-google-sender-auth:message-id
+	:subject:to:content-type;
+	bh=giWzaIL1NIWovxLforrd4DsDP59UCvstkui+ZxOOAsQ=;
+	b=Pudf9FZNCxRg3EOjOb1C3jDflQyfpl1m+FGxn6s/FNQWw4V7afpZ9AKXORZs8rIprO
+	KdV3D8nksQfB25Y8alY8c4fCfzgcW5nds44nvKdtjpkuzAFIquL4gAh9TbfQnR3V5L0W
+	9hTLaLe3saWY5Hd6GhqDo+7Z6R2S8fmEVqBSw=
 DomainKey-Signature: a=rsa-sha1; c=nofws; d=gmail.com; s=gamma;
-	h=from:to:cc:subject:date:message-id:x-mailer;
-	b=C1XbcxWrIED5tqdW27Br0LiNzxX3rpwjrqzZYX9T/izDjBtKpuT+S9SXklyqT189y/
-	D7U1CVo3vjXp5ECCZ6NISjRu2jzE6P8AUWJ2pO2mn7CQlnBsv2+dpExXxaw/GZCzpqIe
-	6FA1Y7NquPDH7wOLqzRakf1rzbqfnXnjYsH0E=
-Received: by 10.114.107.18 with SMTP id f18mr867849wac.29.1285189333890;
-	Wed, 22 Sep 2010 14:02:13 -0700 (PDT)
-Received: from localhost.localdomain
-	(99-57-141-118.lightspeed.sntcca.sbcglobal.net [99.57.141.118])
-	by mx.google.com with ESMTPS id c24sm18257483wam.7.2010.09.22.14.02.12
-	(version=TLSv1/SSLv3 cipher=RC4-MD5);
-	Wed, 22 Sep 2010 14:02:13 -0700 (PDT)
-From: Khem Raj <raj.khem@gmail.com>
+	h=mime-version:sender:in-reply-to:references:from:date
+	:x-google-sender-auth:message-id:subject:to:content-type;
+	b=wpebO9gB5cWI+4wnG1Vr5FePUbDYZHec4c9lNhoLJnF8kxEf20bKkFwvxjsGgCwR1T
+	z0SHXJFoH1CiS7JTviCZBnndCoAPsikUJJz1YTplQdtmtEbfV+VtqlGrPxd21uGLfWTa
+	n8BbO2NaQz6oJUh3joXFxtUyEPjAj1s8sNV3E=
+Received: by 10.216.12.8 with SMTP id 8mr7465633wey.107.1285191424558; Wed, 22
+	Sep 2010 14:37:04 -0700 (PDT)
+MIME-Version: 1.0
+Sender: kergoth@gmail.com
+Received: by 10.216.237.169 with HTTP; Wed, 22 Sep 2010 14:36:44 -0700 (PDT)
+In-Reply-To: <1285189329-32344-1-git-send-email-raj.khem@gmail.com>
+References: <1285189329-32344-1-git-send-email-raj.khem@gmail.com>
+From: Chris Larson <clarson@kergoth.com>
+Date: Wed, 22 Sep 2010 14:36:44 -0700
+X-Google-Sender-Auth: Vc2V25odvo8JOQdjjeLQnN0T5JA
+Message-ID: <AANLkTikRBF+0hY2ZLT7d1DZe4FF4UE+9aVopECrpROqr@mail.gmail.com>
 To: openembedded-devel@lists.openembedded.org
-Date: Wed, 22 Sep 2010 14:02:09 -0700
-Message-Id: <1285189329-32344-1-git-send-email-raj.khem@gmail.com>
-X-Mailer: git-send-email 1.7.1
-X-SA-Exim-Connect-IP: 209.85.212.175
-X-SA-Exim-Mail-From: raj.khem@gmail.com
+X-SA-Exim-Connect-IP: 74.125.82.43
+X-SA-Exim-Mail-From: kergoth@gmail.com
 X-Spam-Checker-Version: SpamAssassin 3.2.5 (2008-06-10) on discovery
 X-Spam-Level: 
-X-Spam-Status: No, score=-2.6 required=5.0 tests=AWL,BAYES_00,SPF_PASS
-	autolearn=ham version=3.2.5
+X-Spam-Status: No, score=-2.6 required=5.0 tests=BAYES_00,HTML_MESSAGE,
+	SPF_PASS autolearn=ham version=3.2.5
 X-SA-Exim-Version: 4.2.1 (built Wed, 25 Jun 2008 17:20:07 +0000)
 X-SA-Exim-Scanned: Yes (on linuxtogo.org)
-Subject: [PATCH] oe/patch.py: Remove series file during Clean()
+X-Content-Filtered-By: Mailman/MimeDel 2.1.11
+Subject: Re: [PATCH] oe/patch.py: Remove series file during Clean()
 X-BeenThere: openembedded-devel@lists.openembedded.org
 X-Mailman-Version: 2.1.11
 Precedence: list
@@ -52,42 +55,35 @@ List-Post: <mailto:openembedded-devel@lists.openembedded.org>
 List-Help: <mailto:openembedded-devel-request@lists.openembedded.org?subject=help>
 List-Subscribe: <http://lists.linuxtogo.org/cgi-bin/mailman/listinfo/openembedded-devel>,
 	<mailto:openembedded-devel-request@lists.openembedded.org?subject=subscribe>
-X-List-Received-Date: Wed, 22 Sep 2010 21:02:22 -0000
+X-List-Received-Date: Wed, 22 Sep 2010 21:43:16 -0000
+Content-Type: text/plain; charset=UTF-8
 
-Currently if there is a failed do_patch the series files get appended
-so if there were two patches
+On Wed, Sep 22, 2010 at 2:02 PM, Khem Raj <raj.khem@gmail.com> wrote:
 
-a.patch
-b.patch
-and b.patch failed during next run it would append a.patch again
-a.patch
-b.patch
-a.patch
+> Currently if there is a failed do_patch the series files get appended
+> so if there were two patches
+>
+> a.patch
+> b.patch
+> and b.patch failed during next run it would append a.patch again
+> a.patch
+> b.patch
+> a.patch
+>
+> and this would keep growing.
+>
+> We can remove series file in Clean() because we populate it in Import()
+> anyway
+>
+> Signed-off-by: Khem Raj <raj.khem@gmail.com>
+>
 
-and this would keep growing.
 
-We can remove series file in Clean() because we populate it in Import()
-anyway
-
-Signed-off-by: Khem Raj <raj.khem@gmail.com>
----
- lib/oe/patch.py |    1 +
- 1 files changed, 1 insertions(+), 0 deletions(-)
-
-diff --git a/lib/oe/patch.py b/lib/oe/patch.py
-index d7f4ccb..05abccf 100644
---- a/lib/oe/patch.py
-+++ b/lib/oe/patch.py
-@@ -192,6 +192,7 @@ class QuiltTree(PatchSet):
-     def Clean(self):
-         try:
-             self._runcmd(["pop", "-a", "-f"])
-+            oe.path.remove(os.path.join(self.dir, "patches","series"))
-         except Exception:
-             pass
-         self.initialized = True
+Acked-by: Chris Larson <chris_larson@mentor.com>
 -- 
-1.7.1
-
-
+Christopher Larson
+clarson at kergoth dot com
+Founder - BitBake, OpenEmbedded, OpenZaurus
+Maintainer - Tslib
+Senior Software Engineer, Mentor Graphics
 
